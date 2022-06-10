@@ -56,6 +56,10 @@ Para visualizar a aplicação, abra [http://localhost:3000](http://localhost:300
 
 ## Enviado suas mudanças
 
+### 🚨 **Importante**
+
+**Antes de enviar suas mudanças, certifique-se de que você fez um merge da branch `development` para a branch `feature/nome-da-feature`. Caso não tenha feito, o commit será revertido.**
+
 * Para adicionar suas mudanças, faça uma Pull Request para a `development` e peça para alguém validar suas mudanças e fazer o merge.
 * Depois de validado, faça outra Pull Request de `development` para `staging` e peça para alguém validar suas mudanças e fazer o merge.
 * Depois de validado, faça outra Pull Request de `staging` para `master` e faça o merge.
