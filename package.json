@@ -1,0 +1,85 @@
+{
+  "name": "template-chakra",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@chakra-ui/react": "^2.2.1",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "axios": "^0.27.2",
+    "classnames": "^2.3.1",
+    "formik": "^2.2.9",
+    "framer-motion": "^6.3.11",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-helmet": "^6.1.0",
+    "react-hot-toast": "^2.2.0",
+    "react-icons": "^4.4.0",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "serve": "^13.0.2",
+    "typescript": "^4.7.3",
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
+  },
+  "scripts": {
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "dev": "react-scripts start",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "format": "prettier --write **/*.{js,ts,tsx}",
+    "format:check": "prettier --check src/",
+    "commit": "cz",
+    "release": "semantic-release --no-ci",
+    "prepare": "husky install"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@alxui/eslint-config": "^1.0.3",
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-conventional": "^17.0.2",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^14.2.0",
+    "@types/jest": "^28.1.1",
+    "@types/node": "^17.0.41",
+    "@types/react": "^18.0.12",
+    "@types/react-dom": "^18.0.5",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "^8.17.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.1",
+    "semantic-release": "^19.0.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": "eslint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run lint-staged"
+    }
+  }
+}
