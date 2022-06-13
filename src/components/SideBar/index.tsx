@@ -37,7 +37,7 @@ export default function Sidebar({ children }: { children: ReactNode }) {
         onOpen={onOpen}
         name="Alexander"
         cargo="Cargo"
-        profileImage="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+        profileImage=""
       />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {children}
