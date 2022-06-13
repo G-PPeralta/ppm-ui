@@ -2,6 +2,9 @@
   "name": "template-chakra",
   "version": "1.0.1",
   "private": true,
+  "engines": {
+    "node": "14"
+  },
   "dependencies": {
     "@chakra-ui/react": "^2.2.1",
     "@emotion/react": "^11",
