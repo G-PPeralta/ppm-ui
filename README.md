@@ -63,3 +63,16 @@ Para visualizar a aplicação, abra [http://localhost:3000](http://localhost:300
 * Para adicionar suas mudanças, faça uma Pull Request para a `development` e peça para alguém validar suas mudanças e fazer o merge.
 * Depois de validado, faça outra Pull Request de `development` para `staging` e peça para alguém validar suas mudanças e fazer o merge.
 * Depois de validado, faça outra Pull Request de `staging` para `master` e faça o merge.
+
+## Exemplos de PR
+
+- Pull Request de `feature/nome-da-feature` para `development`
+  * `[FEAT] to [DEV] - (descrição)`
+
+- Pull Request de `development` para `staging`:
+  * `[DEV] to [STG] - (descrição)`
+
+- Pull Request de `staging` para `master`:
+  * `[STG] to [PRD] - (descrição)`
+
+**🚨 Qualquer PR que não siga o padrão acima será rejeitado.**
