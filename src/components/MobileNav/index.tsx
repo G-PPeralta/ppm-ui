@@ -18,6 +18,7 @@ import {
   Image,
 } from '@chakra-ui/react';
 import logoImage from 'assets/logo.png';
+import Avvvatars from 'avvvatars-react';
 
 interface MobileProps extends FlexProps {
   onOpen: () => void;
@@ -25,6 +26,9 @@ interface MobileProps extends FlexProps {
   cargo?: string;
   profileImage?: string;
 }
+
+const linkPhoto =
+  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80';
 
 export function MobileNav({
   onOpen,
@@ -71,13 +75,11 @@ export function MobileNav({
               _focus={{ boxShadow: 'none' }}
             >
               <HStack>
-                <Avatar
-                  size={'sm'}
-                  src={
-                    profileImage ||
-                    'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png'
-                  }
-                />
+                {linkPhoto ? (
+                  <Avatar size={'sm'} src={profileImage || linkPhoto} />
+                ) : (
+                  <Avvvatars value={'Nome do Perfil'} size={32} />
+                )}
                 <VStack
                   display={{ base: 'none', md: 'flex' }}
                   alignItems="flex-start"
