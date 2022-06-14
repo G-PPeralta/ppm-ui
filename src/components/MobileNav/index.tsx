@@ -1,4 +1,5 @@
 import { FiMenu, FiChevronDown } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 import {
   IconButton,
@@ -20,6 +21,8 @@ import {
 import logoImage from 'assets/logo.png';
 import Avvvatars from 'avvvatars-react';
 
+import { useAuth } from 'hooks/useAuth';
+
 interface MobileProps extends FlexProps {
   onOpen: () => void;
   name?: string;
@@ -37,6 +40,9 @@ export function MobileNav({
   profileImage,
   ...rest
 }: MobileProps) {
+  const navigate = useNavigate();
+  const { signOut } = useAuth();
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -101,10 +107,21 @@ export function MobileNav({
               borderColor={useColorModeValue('gray.200', 'gray.700')}
             >
               <MenuItem>Perfil</MenuItem>
-              <MenuItem>Configurações</MenuItem>
-              <MenuItem>Pagamentos</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  navigate('/settings');
+                }}
+              >
+                Configurações
+              </MenuItem>
               <MenuDivider />
-              <MenuItem>Sair</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  signOut();
+                }}
+              >
+                Sair
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>
