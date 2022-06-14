@@ -4,7 +4,7 @@
 
 
 
-name: Complete workflow
+name: Heroku Deploy Build
 
 
 
@@ -79,7 +79,7 @@ jobs:
 
     - name: Deploy application
 
-      if: ${{ github.ref == 'refs/heads/development' || github.ref == 'refs/heads/development' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/master' }}
+      if: ${{ github.ref == 'refs/heads/development' }}
 
       uses: akhileshns/heroku-deploy@v3.12.12
 
