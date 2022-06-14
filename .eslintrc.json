@@ -5,7 +5,7 @@
   },
   "extends": ["@alxui/eslint-config/react"],
   "rules": {
-    // ADICIONE SUAS REGRAS AQUI
+    "no-console": "warn"
   },
   "settings": {
     "import/extensions": [".ts", ".tsx"],
