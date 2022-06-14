@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/iksolution/origem-ppm-ui/compare/v1.2.0...v1.3.0) (2022-06-14)
+
+
+### Features
+
+* update favicon ([04be5ec](https://github.com/iksolution/origem-ppm-ui/commit/04be5ecfaac128853d1a41c330622558b6541b40))
+
 # [1.2.0](https://github.com/iksolution/origem-ppm-ui/compare/v1.1.0...v1.2.0) (2022-06-13)
 
 
