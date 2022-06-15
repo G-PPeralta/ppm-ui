@@ -1,10 +1,10 @@
 import Sidebar from 'components/SideBar';
 
-export function Favoritos() {
+export function Reports() {
   return (
     <>
       <Sidebar>
-        <h1>Favoritos</h1>
+        <h1>Reports</h1>
       </Sidebar>
     </>
   );
