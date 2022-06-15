@@ -1,19 +1,26 @@
 import { Routes, Route } from 'react-router-dom';
 
-import { Admin } from 'pages/Admin';
-import { Favoritos } from 'pages/Favoritos';
+import { Home } from 'pages/Home';
+import { Infographics } from 'pages/Infographics';
 import { NotFound } from 'pages/NotFound';
+import { Permissions } from 'pages/Permissions';
+import { Profile } from 'pages/Profile';
+import { ProjectsRegistration } from 'pages/ProjectsRegistration';
+import { Reports } from 'pages/Reports';
+import { Settings } from 'pages/Settings';
+import { ShareRegister } from 'pages/ShareRegister';
 
 export function PrivateRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Admin />} />
-      <Route path="/projects-registration" element={<Favoritos />} />
-      <Route path="/share-register" element={<Favoritos />} />
-      <Route path="/reports" element={<Favoritos />} />
-      <Route path="/infographics" element={<Favoritos />} />
-      <Route path="/permissions" element={<Favoritos />} />
-      <Route path="/settings" element={<Favoritos />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/projects-registration" element={<ProjectsRegistration />} />
+      <Route path="/share-register" element={<ShareRegister />} />
+      <Route path="/reports" element={<Reports />} />
+      <Route path="/infographics" element={<Infographics />} />
+      <Route path="/permissions" element={<Permissions />} />
+      <Route path="/settings" element={<Settings />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
