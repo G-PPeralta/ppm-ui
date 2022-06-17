@@ -12,6 +12,8 @@ import logoImage from 'assets/logo.png';
 
 import { NavItem } from 'components/NavItem';
 
+import { useAuth } from 'hooks/useAuth';
+
 import { LinkItems } from './items';
 
 interface SidebarProps extends BoxProps {
@@ -20,6 +22,16 @@ interface SidebarProps extends BoxProps {
 
 export function SidebarContent({ onClose, ...rest }: SidebarProps) {
   const navigate = useNavigate();
+  const { user } = useAuth();
+
+  function verifyPermissionAdmin(linkName: string) {
+    if (linkName === 'Alterar Permissões' && user?.cargo !== 'Admin') {
+      return true;
+    }
+
+    return false;
+  }
+
   return (
     <Box
       transition="3s ease"
@@ -36,15 +48,19 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem
-          key={link.name}
-          icon={link.icon}
-          onClick={() => {
-            navigate(link.link || '/');
-          }}
-        >
-          {link.name}
-        </NavItem>
+        <>
+          {verifyPermissionAdmin(link.name) ? null : (
+            <NavItem
+              key={link.name}
+              icon={link.icon}
+              onClick={() => {
+                navigate(link.link || '/');
+              }}
+            >
+              {link.name}
+            </NavItem>
+          )}
+        </>
       ))}
     </Box>
   );
