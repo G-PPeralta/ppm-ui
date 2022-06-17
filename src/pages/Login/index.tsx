@@ -69,6 +69,7 @@ export function Login() {
                   <FormControl>
                     <FormLabel htmlFor="email">Email</FormLabel>
                     <Input
+                      isRequired
                       id="email"
                       type="email"
                       name="email"
@@ -93,6 +94,7 @@ export function Login() {
                       </Button>
                     </FormLabel>
                     <Input
+                      isRequired
                       id="password"
                       type="password"
                       name="password"
@@ -103,6 +105,9 @@ export function Login() {
                 </Stack>
                 <Stack spacing="6">
                   <Button
+                    disabled={
+                      !loginForm.values.email || !loginForm.values.password
+                    }
                     type="submit"
                     background="origem.300"
                     variant="primary"
