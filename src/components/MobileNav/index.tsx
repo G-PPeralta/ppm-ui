@@ -106,7 +106,13 @@ export function MobileNav({
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}
             >
-              <MenuItem>Perfil</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  navigate('/profile');
+                }}
+              >
+                Perfil
+              </MenuItem>
               <MenuItem
                 onClick={() => {
                   navigate('/settings');
