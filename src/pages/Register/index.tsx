@@ -1,3 +1,5 @@
+import PasswordChecklist from 'react-password-checklist';
+
 import {
   Box,
   Button,
@@ -69,7 +71,8 @@ export function Register() {
                   <FormControl>
                     <FormLabel htmlFor="name">Nome</FormLabel>
                     <Input
-                      isInvalid={!!registerForm.errors.name}
+                      isRequired
+                      placeholder="Nome completo"
                       id="name"
                       type="name"
                       name="name"
@@ -82,20 +85,21 @@ export function Register() {
                     )}
                   </FormControl>
                   <FormControl>
-                    <FormLabel htmlFor="telefone">Telefone</FormLabel>
+                    <FormLabel htmlFor="telephone">Telefone</FormLabel>
                     <Input
-                      isInvalid={!!registerForm.errors.telefone}
-                      id="telefone"
+                      isRequired
+                      placeholder="(00)00000-0000"
+                      id="telephone"
                       type="text"
-                      name="telefone"
+                      name="telephone"
                       maxLength={15}
-                      value={formatCellphone(registerForm.values.telefone)}
+                      value={formatCellphone(registerForm.values.telephone)}
                       onChange={registerForm.handleChange}
                       w={useBreakpointValue({ base: '100%', md: '95%' })}
                     />
-                    {registerForm.errors.telefone &&
-                      registerForm.touched.telefone && (
-                        <TextError>{registerForm.errors.telefone}</TextError>
+                    {registerForm.errors.telephone &&
+                      registerForm.touched.telephone && (
+                        <TextError>{registerForm.errors.telephone}</TextError>
                       )}
                   </FormControl>
                 </Flex>
@@ -110,7 +114,8 @@ export function Register() {
                   <FormControl>
                     <FormLabel htmlFor="name">Email</FormLabel>
                     <Input
-                      isInvalid={!!registerForm.errors.email}
+                      isRequired
+                      placeholder="email@email.com"
                       id="email"
                       type="email"
                       name="email"
@@ -126,7 +131,8 @@ export function Register() {
                   <FormControl>
                     <FormLabel htmlFor="area">Área</FormLabel>
                     <Input
-                      isInvalid={!!registerForm.errors.area}
+                      isRequired
+                      placeholder="Área de atuação"
                       id="area"
                       type="area"
                       name="area"
@@ -150,7 +156,8 @@ export function Register() {
                   <FormControl>
                     <FormLabel htmlFor="password">Senha</FormLabel>
                     <Input
-                      isInvalid={!!registerForm.errors.password}
+                      isRequired
+                      placeholder="********"
                       id="password"
                       type="password"
                       name="password"
@@ -162,13 +169,38 @@ export function Register() {
                       registerForm.touched.password && (
                         <TextError>{registerForm.errors.password}</TextError>
                       )}
+                    {registerForm.values.password && (
+                      <PasswordChecklist
+                        rules={[
+                          'minLength',
+                          'specialChar',
+                          'number',
+                          'capital',
+                          'match',
+                        ]}
+                        minLength={5}
+                        value={registerForm.values.password}
+                        valueAgain={registerForm.values.confirmPassword}
+                        messages={{
+                          minLength: 'A senha deve ter no mínimo 8 caracteres',
+                          specialChar:
+                            'A senha deve ter pelo menos um caracter especial',
+                          number: 'A senha deve ter pelo menos um número',
+                          capital:
+                            'A senha deve ter pelo menos uma letra maiúscula',
+                          match: 'As senhas não conferem',
+                        }}
+                        iconSize={12}
+                      />
+                    )}
                   </FormControl>
                   <FormControl>
                     <FormLabel htmlFor="confirmPassword">
                       Confirme sua senha
                     </FormLabel>
                     <Input
-                      isInvalid={!!registerForm.errors.confirmPassword}
+                      isRequired
+                      placeholder="********"
                       id="confirmPassword"
                       type="password"
                       name="confirmPassword"
@@ -188,6 +220,7 @@ export function Register() {
 
               <Stack spacing="6">
                 <Button
+                  disabled={!registerForm.isValid}
                   type="submit"
                   background="origem.300"
                   variant="primary"
