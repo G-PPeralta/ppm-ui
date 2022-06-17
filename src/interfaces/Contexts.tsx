@@ -2,7 +2,7 @@ export interface UserContextProps {
   id?: string;
   nome?: string;
   email?: string;
-  telefone?: string;
+  telephone?: string;
   cargo?: string;
 }
 
