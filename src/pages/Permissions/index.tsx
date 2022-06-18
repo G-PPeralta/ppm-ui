@@ -8,8 +8,7 @@ import {
   Select,
   Stack,
   useBreakpointValue,
-  // eslint-disable-next-line prettier/prettier
-  useColorModeValue
+  useColorModeValue,
 } from '@chakra-ui/react';
 
 import Dropzone from 'components/Dropzone';
