@@ -15,6 +15,7 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { Ring } from '@uiball/loaders';
 import logo from 'assets/logo.png';
 
 import { Layout } from 'components/Layout';
@@ -23,7 +24,7 @@ import { useLogin } from 'hooks/useLogin';
 
 export function Login() {
   const navigate = useNavigate();
-  const { loginForm } = useLogin();
+  const { loginForm, loading } = useLogin();
 
   return (
     <Flex
@@ -117,7 +118,11 @@ export function Login() {
                       transition: 'all 0.4s',
                     }}
                   >
-                    Entrar
+                    {loading ? (
+                      <Ring speed={2} lineWeight={5} color="white" size={24} />
+                    ) : (
+                      'Entrar'
+                    )}
                   </Button>
                 </Stack>
               </Stack>
