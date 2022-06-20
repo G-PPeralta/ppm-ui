@@ -3,7 +3,8 @@ export interface UserContextProps {
   nome?: string;
   email?: string;
   telephone?: string;
-  cargo?: string;
+  perfil?: string;
+  avatar?: string;
 }
 
 export interface AuthContextProps {
