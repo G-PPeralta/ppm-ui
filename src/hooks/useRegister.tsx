@@ -6,6 +6,8 @@ import { registerSchema } from 'validations/Register';
 
 import { useToast } from 'contexts/Toast';
 
+import { postRegister } from 'services/post/Register';
+
 export function useRegister() {
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -22,15 +24,30 @@ export function useRegister() {
     },
     validationSchema: registerSchema,
     onSubmit: async (values) => {
+      const newValues = {
+        nome: values.name,
+        email: values.email,
+        telefone: values.telephone,
+        area_atuacao: values.area,
+        senha: values.password,
+      };
+
       setLoading(true);
-      if (values) {
-        console.log(values);
-        toast.success('Cadastro realizado com sucesso!');
-        setLoading(false);
-        navigate('/');
-      } else {
-        console.log('Não tem valores');
+      try {
+        const { status } = await postRegister(newValues);
+
+        if (status === 200 || status === 201) {
+          toast.success('Usuário cadastrado com sucesso', {
+            id: 'toast-principal',
+          });
+          navigate('/');
+        }
+      } catch (error) {
+        toast.error(`Erro ao cadastrar usuário`, {
+          id: 'toast-principal',
+        });
       }
+
       setLoading(false);
     },
   });
