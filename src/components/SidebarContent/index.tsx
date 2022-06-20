@@ -25,7 +25,7 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
   const { user } = useAuth();
 
   function verifyPermissionAdmin(linkName: string) {
-    if (linkName === 'Alterar Permissões' && user?.cargo !== 'Admin') {
+    if (linkName === 'Alterar Permissões' && user?.perfil !== 'ADMIN') {
       return true;
     }
 
