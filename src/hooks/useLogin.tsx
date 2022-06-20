@@ -27,8 +27,6 @@ export function useLogin() {
       }
       setLoading(true);
 
-      console.log(values);
-
       await signIn(values.email, values.password);
 
       setLoading(false);
