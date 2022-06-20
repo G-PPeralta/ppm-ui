@@ -59,6 +59,7 @@ export function Permissions() {
                         type="name"
                         name="name"
                         onChange={permissionsForm.handleChange}
+                        value={permissionsForm.values.name}
                       />
                     </FormControl>
                   </Stack>
@@ -83,11 +84,20 @@ export function Permissions() {
                     <Select
                       id="access"
                       placeholder="Selecione o nível de acesso"
+                      name="accessLevel"
+                      value={permissionsForm.values.accessLevel}
+                      onChange={permissionsForm.handleChange}
                     >
                       <option>Administrador</option>
                       <option>Intervenções</option>
                       <option>Projetos</option>
                     </Select>
+                    {permissionsForm.errors.accessLevel &&
+                      permissionsForm.touched.accessLevel && (
+                        <TextError>
+                          {permissionsForm.errors.accessLevel}
+                        </TextError>
+                      )}
                   </FormControl>
                   <FormControl>
                     <FormLabel htmlFor="telephone">Telefone</FormLabel>
@@ -123,6 +133,7 @@ export function Permissions() {
                       type="name"
                       name="name"
                       onChange={permissionsForm.handleChange}
+                      value={permissionsForm.values.area}
                     />
                   </FormControl>
                 </Stack>
