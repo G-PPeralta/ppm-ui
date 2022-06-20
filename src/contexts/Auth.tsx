@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { AuthContextProps, UserContextProps } from 'interfaces/Contexts';
 
+import { postLogin } from 'services/post/Login';
+
 import { useToast } from './Toast';
 
 export const AuthContext = createContext<AuthContextProps>(
@@ -12,7 +14,7 @@ export const AuthContext = createContext<AuthContextProps>(
 export const AuthProvider = ({ children }: any) => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const [user, setUser] = useState<UserContextProps>();
+  const [user, setUser] = useState<UserContextProps>({});
 
   function isSigned() {
     const storagedUser = sessionStorage.getItem('@Origem:user');
@@ -25,42 +27,21 @@ export const AuthProvider = ({ children }: any) => {
     return false;
   }
 
-  async function signIn(username: string, password: string): Promise<void> {
+  async function signIn(email: string, password: string): Promise<void> {
     const newValues = {
-      username,
+      email,
       password,
     };
 
     try {
-      toast.loading('Autenticando...', {
-        id: 'toast-principal',
-      });
+      const { data, status } = await postLogin(newValues);
 
-      if (newValues) {
-        // sessionStorage.setItem('@Origem:user', JSON.stringify(newValues));
-        sessionStorage.setItem(
-          '@Origem:token',
-          '083589ed-969b-427b-967a-97c5e82657bb' || '',
-        );
-        sessionStorage.setItem(
-          '@Origem:refresh',
-          '75227e3d-4087-449e-bfc0-a52b7138ed49' || '',
-        );
+      if (status === 200 || status === 201) {
+        sessionStorage.setItem('@Origem:user', JSON.stringify(data.user));
+        sessionStorage.setItem('@Origem:token', data.access_token || '');
+        sessionStorage.setItem('@Origem:refresh', data.refresh_token || '');
 
-        const newUser = {
-          id: '0001',
-          nome: 'João',
-          email: 'joao.01@gmail.com',
-          telefone: '11999999999',
-          cargo: 'Admin',
-        };
-
-        setUser(newUser);
-        sessionStorage.setItem('@Origem:user', JSON.stringify(newUser));
-
-        toast.success('Login realizado com sucesso', {
-          id: 'toast-principal',
-        });
+        setUser(data.user as {});
 
         navigate('/');
       } else {
@@ -79,7 +60,7 @@ export const AuthProvider = ({ children }: any) => {
     sessionStorage.removeItem('@Origem:user');
     sessionStorage.removeItem('@Origem:token');
     sessionStorage.removeItem('@Origem:refresh');
-    setUser(undefined);
+    setUser({});
     navigate('/');
   }
 
