@@ -5,7 +5,8 @@
   },
   "extends": ["@alxui/eslint-config/react"],
   "rules": {
-    "no-console": "warn"
+    "no-console": "warn",
+    "react-hooks/exhaustive-deps": "off"
   },
   "settings": {
     "import/extensions": [".ts", ".tsx"],
