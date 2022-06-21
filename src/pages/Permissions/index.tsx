@@ -144,6 +144,8 @@ export function Permissions() {
                   justify="center"
                 >
                   <Dropzone
+                    avatar={permissionsForm.values.avatar}
+                    nome={permissionsForm.values.name}
                     onFileUploaded={(file) => {
                       convertImageToBase64(file).then((base64) => {
                         permissionsForm.setFieldValue('avatar', base64);

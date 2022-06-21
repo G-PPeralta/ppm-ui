@@ -6,13 +6,14 @@ import { Flex, Image } from '@chakra-ui/react';
 import Avvvatars from 'avvvatars-react';
 import { DropzoneProps } from 'interfaces/Components';
 
-import { useAuth } from 'hooks/useAuth';
-
 import styles from './Dropzone.module.scss';
 
-const Dropzone: React.FC<DropzoneProps> = ({ onFileUploaded }) => {
+const Dropzone: React.FC<DropzoneProps> = ({
+  onFileUploaded,
+  avatar,
+  nome,
+}) => {
   const [selectedFileUrl, setSelectedFileUrl] = useState('');
-  const { user } = useAuth();
 
   const onDrop = useCallback(
     (acceptedFiles: any[]) => {
@@ -65,14 +66,10 @@ const Dropzone: React.FC<DropzoneProps> = ({ onFileUploaded }) => {
       ) : (
         <div className={styles.profile}>
           <p>
-            {user?.avatar ? (
-              <Image
-                src={user?.avatar}
-                alt="Perfil"
-                className={styles.preview}
-              />
+            {avatar ? (
+              <Image src={avatar} alt="Perfil" className={styles.preview} />
             ) : (
-              <Avvvatars value={user?.nome || ''} size={160} />
+              <Avvvatars value={nome || ''} size={160} />
             )}
           </p>
           <Flex
