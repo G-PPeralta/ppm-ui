@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import {
   Box,
   CloseButton,
@@ -7,6 +5,7 @@ import {
   useColorModeValue,
   BoxProps,
   Image,
+  Text,
 } from '@chakra-ui/react';
 import logoImage from 'assets/logo.png';
 
@@ -21,7 +20,6 @@ interface SidebarProps extends BoxProps {
 }
 
 export function SidebarContent({ onClose, ...rest }: SidebarProps) {
-  const navigate = useNavigate();
   const { user } = useAuth();
 
   function verifyPermissionAdmin(linkName: string) {
@@ -50,14 +48,20 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
       {LinkItems.map((link) => (
         <>
           {verifyPermissionAdmin(link.name) ? null : (
-            <NavItem
-              key={link.name}
-              icon={link.icon}
-              onClick={() => {
-                navigate(link.link || '/');
-              }}
-            >
-              {link.name}
+            <NavItem key={link.name} icon={link.icon} link={link.link || '/'}>
+              <Text
+                _hover={{
+                  bg: 'origem.400',
+                  color: 'white',
+                }}
+                color={
+                  window.location.pathname === link.link
+                    ? 'origem.500'
+                    : 'black.500'
+                }
+              >
+                {link.name}
+              </Text>
             </NavItem>
           )}
         </>
