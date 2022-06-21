@@ -5,6 +5,8 @@ import { ToastProvider } from 'contexts/Toast';
 
 import { MainRoutes } from './routes';
 
+import './App.css';
+
 export function App() {
   return (
     <ToastProvider>
