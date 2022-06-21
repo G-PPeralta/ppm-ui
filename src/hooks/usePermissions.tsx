@@ -35,7 +35,7 @@ export function usePermissions() {
         telefone: values.telephone,
         email: values.email,
         area_atuacao: values.area,
-        perfil: 'USER',
+        role_id: 2,
         avatar: values.avatar,
       };
 
@@ -63,6 +63,7 @@ export function usePermissions() {
         permissionsForm.setFieldValue('telephone', data?.telefone);
         permissionsForm.setFieldValue('email', data?.email);
         permissionsForm.setFieldValue('area', data?.area_atuacao);
+        permissionsForm.setFieldValue('avatar', data?.avatar);
       }
 
       setLoading(false);
