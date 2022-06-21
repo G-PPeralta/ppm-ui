@@ -3,7 +3,6 @@ import {
   FiHome,
   FiTrendingUp,
   FiEdit2,
-  FiSettings,
   FiBarChart,
   FiUsers,
   FiFile,
@@ -21,5 +20,4 @@ export const LinkItems: Array<LinkItemProps> = [
   { name: 'Relatórios', icon: FiFile, link: '/reports' },
   { name: 'Infográficos', icon: FiBarChart, link: '/infographics' },
   { name: 'Alterar Permissões', icon: FiUsers, link: '/permissions' },
-  { name: 'Configurações', icon: FiSettings, link: '/settings' },
 ];
