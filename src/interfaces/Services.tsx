@@ -27,3 +27,34 @@ export interface RegisterProps {
   perfil?: string;
   telefone: string;
 }
+
+export interface ResponseRoles {
+  id: number;
+  role: string;
+  nome_role: string;
+}
+
+export interface ResponseAvatar {
+  avatar: string;
+}
+
+export interface ResponsePermissions {
+  id: number;
+  nome: string;
+  email: string;
+  telefone: string;
+  area_atuacao: string;
+  avatar: string;
+  role_id: number;
+  nome_role: string;
+}
+
+export interface ResponseUserPending {
+  id: number;
+  nome: string;
+  email: string;
+  telefone: string;
+  area_atuacao: string;
+  avatar: string;
+  nome_role: string;
+}

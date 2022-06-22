@@ -19,14 +19,14 @@ export function PermissionsList() {
         ) : (
           <Grid templateColumns="repeat(2, 1fr)" gap={6}>
             {userPending &&
-              userPending?.map((pending: any) => (
+              userPending?.map((pending) => (
                 <CardProfile
                   key={pending.id}
                   name={pending.nome}
                   avatar={pending.avatar}
                   email={pending.email}
                   telephone={pending.telefone}
-                  perfil={pending.perfil}
+                  perfil={pending.nome_role}
                   id={pending.id}
                 />
               ))}
