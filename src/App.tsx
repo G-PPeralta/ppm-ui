@@ -1,14 +1,19 @@
 import { BrowserRouter } from 'react-router-dom';
 
-import { ToastProvider } from 'context/Toast';
+import { AuthProvider } from 'contexts/Auth';
+import { ToastProvider } from 'contexts/Toast';
 
 import { MainRoutes } from './routes';
+
+import './App.css';
 
 export function App() {
   return (
     <ToastProvider>
       <BrowserRouter>
-        <MainRoutes />
+        <AuthProvider>
+          <MainRoutes />
+        </AuthProvider>
       </BrowserRouter>
     </ToastProvider>
   );
