@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -10,12 +11,12 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { Ring } from '@uiball/loaders';
+import Avvvatars from 'avvvatars-react';
 
-import Dropzone from 'components/Dropzone';
 import Sidebar from 'components/SideBar';
 import { TextError } from 'components/TextError';
 
-import { convertImageToBase64 } from 'utils/convertBase64';
 import formatCellphone from 'utils/formatCellphone';
 
 import { usePermissions } from 'hooks/usePermissions';
@@ -23,11 +24,16 @@ import { usePermissions } from 'hooks/usePermissions';
 const wd = window.innerWidth;
 
 export function Permissions() {
-  const { permissionsForm } = usePermissions();
+  const { permissionsForm, roles, loading } = usePermissions();
 
   return (
     <>
       <Sidebar>
+        {loading && (
+          <Flex display={'flex'} align={'center'} justify={'center'} h={'90vh'}>
+            <Ring speed={2} lineWeight={5} color="blue" size={64} />
+          </Flex>
+        )}
         <Stack spacing="8">
           <Box
             py={{ base: '0', sm: '16' }}
@@ -88,9 +94,11 @@ export function Permissions() {
                       value={permissionsForm.values.accessLevel}
                       onChange={permissionsForm.handleChange}
                     >
-                      <option>Administrador</option>
-                      <option>Intervenções</option>
-                      <option>Projetos</option>
+                      {roles?.map((role) => (
+                        <option key={role?.id} value={role?.id}>
+                          {role?.nome_role}
+                        </option>
+                      ))}
                     </Select>
                     {permissionsForm.errors.accessLevel &&
                       permissionsForm.touched.accessLevel && (
@@ -143,14 +151,9 @@ export function Permissions() {
                   align="center"
                   justify="center"
                 >
-                  <Dropzone
-                    avatar={permissionsForm.values.avatar}
-                    nome={permissionsForm.values.name}
-                    onFileUploaded={(file) => {
-                      convertImageToBase64(file).then((base64) => {
-                        permissionsForm.setFieldValue('avatar', base64);
-                      });
-                    }}
+                  <Avvvatars
+                    value={permissionsForm.values.name || ''}
+                    size={160}
                   />
                 </Stack>
               </Box>
