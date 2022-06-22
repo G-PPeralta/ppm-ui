@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -10,24 +11,31 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { Ring } from '@uiball/loaders';
+import Avvvatars from 'avvvatars-react';
 
-import Dropzone from 'components/Dropzone';
 import Sidebar from 'components/SideBar';
 import { TextError } from 'components/TextError';
 
-import { convertImageToBase64 } from 'utils/convertBase64';
 import formatCellphone from 'utils/formatCellphone';
 
+import { usePermissions } from 'hooks/usePermissions';
 import { useProfile } from 'hooks/useProfile';
 
 const wd = window.innerWidth;
 
 export function Profile() {
-  const { profileForm } = useProfile();
+  const { profileForm, loading } = useProfile();
+  const { roles } = usePermissions();
 
   return (
     <>
       <Sidebar>
+        {loading && (
+          <Flex display={'flex'} align={'center'} justify={'center'} h={'90vh'}>
+            <Ring speed={2} lineWeight={5} color="blue" size={64} />
+          </Flex>
+        )}
         <Stack spacing="8">
           <Box
             py={{ base: '0', sm: '16' }}
@@ -89,9 +97,11 @@ export function Profile() {
                       onChange={profileForm.handleChange}
                       disabled
                     >
-                      <option>Administrador</option>
-                      <option>Intervenções</option>
-                      <option>Projetos</option>
+                      {roles?.map((role) => (
+                        <option key={role?.id} value={role?.id}>
+                          {role?.nome_role}
+                        </option>
+                      ))}
                     </Select>
                     {profileForm.errors.accessLevel &&
                       profileForm.touched.accessLevel && (
@@ -140,15 +150,7 @@ export function Profile() {
                   align="center"
                   justify="center"
                 >
-                  <Dropzone
-                    avatar={profileForm.values.avatar}
-                    nome={profileForm.values.name}
-                    onFileUploaded={(file) => {
-                      convertImageToBase64(file).then((base64) => {
-                        profileForm.setFieldValue('avatar', base64);
-                      });
-                    }}
-                  />
+                  <Avvvatars value={profileForm.values.name || ''} size={160} />
                 </Stack>
               </Box>
               <Stack spacing="6" mt="6">

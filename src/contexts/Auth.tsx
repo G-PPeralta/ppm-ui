@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { AuthContextProps, UserContextProps } from 'interfaces/Contexts';
 
+import { getUserPending } from 'services/get/User';
 import { postLogin } from 'services/post/Login';
 
 import { useToast } from './Toast';
@@ -37,11 +38,20 @@ export const AuthProvider = ({ children }: any) => {
       const { data, status } = await postLogin(newValues);
 
       if (status === 200 || status === 201) {
-        sessionStorage.setItem('@Origem:user', JSON.stringify(data.user));
         sessionStorage.setItem('@Origem:token', data.access_token || '');
         sessionStorage.setItem('@Origem:refresh', data.refresh_token || '');
 
-        setUser(data.user as {});
+        if (!data.user) return;
+
+        const { data: dataUser, status } = await getUserPending(
+          String(data?.user?.id),
+        );
+
+        if (status === 200) {
+          sessionStorage.setItem('@Origem:user', JSON.stringify(dataUser[0]));
+        }
+
+        setUser(dataUser[0] as {});
 
         navigate('/');
       } else {
@@ -78,6 +88,7 @@ export const AuthProvider = ({ children }: any) => {
     <AuthContext.Provider
       value={{
         user,
+        setUser,
         signed: isSigned(),
         signIn,
         signOut,

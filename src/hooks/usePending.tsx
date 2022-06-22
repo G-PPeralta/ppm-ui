@@ -1,20 +1,32 @@
 import { useEffect, useState } from 'react';
 
+import { ResponseUserPending } from 'interfaces/Services';
+
+import { useToast } from 'contexts/Toast';
+
 import { getPending } from 'services/get/Pending';
 
 export function usePending() {
-  const [userPending, setUserPending] = useState([]);
+  const { toast } = useToast();
+  const [userPending, setUserPending] = useState<ResponseUserPending[]>([]);
   const [loading, setLoading] = useState(false);
 
   async function findAllPending() {
-    setLoading(true);
-    const { data, status } = await getPending();
+    try {
+      setLoading(true);
+      const { data, status } = await getPending();
 
-    if (status === 200) {
-      setUserPending(data);
+      if (status === 200) {
+        setUserPending(data);
+      }
+
+      setLoading(false);
+    } catch (error) {
+      toast.error('Erro ao carregar usuários', {
+        id: 'toast-principal',
+      });
+      setLoading(false);
     }
-
-    setLoading(false);
   }
 
   useEffect(() => {

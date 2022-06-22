@@ -40,8 +40,8 @@ export default function Sidebar({ children }: { children: ReactNode }) {
       <MobileNav
         onOpen={onOpen}
         name={user?.nome}
-        perfil={user?.perfil}
-        profileImage=""
+        perfil={user?.nome_role}
+        profileImage={user?.avatar}
       />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {children}

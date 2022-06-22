@@ -70,7 +70,7 @@ export function MobileNav({
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>
-        <Flex alignItems={'center'}>
+        <Flex alignItems={'center'} zIndex={999}>
           <Menu>
             <MenuButton
               py={2}
