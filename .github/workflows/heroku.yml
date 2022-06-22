@@ -14,22 +14,7 @@ on:
 
     branches:
 
-      - master
-
-      - staging
-
       - development
-
-  pull_request:
-
-    branches:
-
-      - master
-
-      - staging
-
-      - development
-
 
 jobs:
 

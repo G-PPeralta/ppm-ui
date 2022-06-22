@@ -16,8 +16,6 @@ export function usePassword() {
     onSubmit: async (values) => {
       setLoading(true);
 
-      console.log(values);
-
       setLoading(false);
     },
   });
