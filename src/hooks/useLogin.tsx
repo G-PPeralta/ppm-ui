@@ -25,11 +25,15 @@ export function useLogin() {
         });
         return;
       }
-      setLoading(true);
+      try {
+        setLoading(true);
 
-      await signIn(values.email, values.password);
+        await signIn(values.email, values.password);
 
-      setLoading(false);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
     },
   });
 
