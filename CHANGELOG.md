@@ -1,3 +1,27 @@
+# [1.6.0](https://github.com/iksolution/origem-ppm-ui/compare/v1.5.0...v1.6.0) (2022-06-22)
+
+
+### Bug Fixes
+
+* add role name ([c438b8b](https://github.com/iksolution/origem-ppm-ui/commit/c438b8b257ec2deb51d09086f3ebe15b35ab6ae9))
+* any to string ([6edc595](https://github.com/iksolution/origem-ppm-ui/commit/6edc5957a2af273804b01655e3de1be089093a49))
+* hover avatar ([771912c](https://github.com/iksolution/origem-ppm-ui/commit/771912c6fd403dda84a25d57b1355cb6383972ce))
+* loading login ([86e40d0](https://github.com/iksolution/origem-ppm-ui/commit/86e40d0972e3d8de51c3b7f2f8b148a0125353b1))
+* max size file avatar ([99030e2](https://github.com/iksolution/origem-ppm-ui/commit/99030e278a6f41ef4860d30f8291ad28cef0545f))
+* result response types ([89421de](https://github.com/iksolution/origem-ppm-ui/commit/89421de9526853f799a13b8f6d1c9e49729ab369))
+* role and avatar sidebar ([bb6adc2](https://github.com/iksolution/origem-ppm-ui/commit/bb6adc21db133b69b08671aa43fd7c62427e3abf))
+* role id ([4a720f7](https://github.com/iksolution/origem-ppm-ui/commit/4a720f7959d5f3b2f25fdd0ee6cb0eaf33f5564d))
+* styles width card profile ([1556b6f](https://github.com/iksolution/origem-ppm-ui/commit/1556b6f68c56f8c115198656324eda2ceef8c0c4))
+* validations trycatch ([1522f05](https://github.com/iksolution/origem-ppm-ui/commit/1522f0555780411bf4fa56076992d714dc0721df))
+* z-index menu ([fa7b0c5](https://github.com/iksolution/origem-ppm-ui/commit/fa7b0c52421075809e23e342c23fdf256b251e87))
+
+
+### Features
+
+* add new interfaces ([98a80a7](https://github.com/iksolution/origem-ppm-ui/commit/98a80a7d97dea05f73fd350f827ad380b700b6d2))
+* add new services get roles ([d929204](https://github.com/iksolution/origem-ppm-ui/commit/d929204eb45dc49e444564d9340507434a5063cd))
+* add roles map and loading ([93d2d21](https://github.com/iksolution/origem-ppm-ui/commit/93d2d21a380bf85bae5b6b5ecccc21f94e506e5e))
+
 # [1.5.0](https://github.com/iksolution/origem-ppm-ui/compare/v1.4.0...v1.5.0) (2022-06-22)
 
 
