@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/iksolution/origem-ppm-ui/compare/v1.4.0...v1.5.0) (2022-06-22)
+
+
+### Features
+
+* add profile page ([762ae9c](https://github.com/iksolution/origem-ppm-ui/commit/762ae9c4da1d0a22ab360e9f01020c6450861a7d))
+
 # [1.4.0](https://github.com/iksolution/origem-ppm-ui/compare/v1.3.0...v1.4.0) (2022-06-22)
 
 
