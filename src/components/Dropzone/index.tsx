@@ -8,10 +8,11 @@ import { DropzoneProps } from 'interfaces/Components';
 
 import styles from './Dropzone.module.scss';
 
-const linkPhoto =
-  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80';
-
-const Dropzone: React.FC<DropzoneProps> = ({ onFileUploaded }) => {
+const Dropzone: React.FC<DropzoneProps> = ({
+  onFileUploaded,
+  avatar,
+  nome,
+}) => {
   const [selectedFileUrl, setSelectedFileUrl] = useState('');
 
   const onDrop = useCallback(
@@ -31,6 +32,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ onFileUploaded }) => {
       'image/*': [],
     },
     maxFiles: 1,
+    maxSize: 5000000,
   });
 
   return (
@@ -46,17 +48,28 @@ const Dropzone: React.FC<DropzoneProps> = ({ onFileUploaded }) => {
               className={styles.preview}
             />
           </p>
-          <div className={styles.upload}>
-            <FiCamera />
-          </div>
+          <Flex
+            align="center"
+            justifyContent="center"
+            bg="origem.100"
+            w="10"
+            h="10"
+            zIndex={1}
+            position="absolute"
+            borderRadius={10}
+            marginLeft="125"
+            cursor="pointer"
+          >
+            <FiCamera color="#FFF" />
+          </Flex>
         </div>
       ) : (
         <div className={styles.profile}>
           <p>
-            {linkPhoto ? (
-              <Image src={linkPhoto} alt="Perfil" className={styles.preview} />
+            {avatar ? (
+              <Image src={avatar} alt="Perfil" className={styles.preview} />
             ) : (
-              <Avvvatars value={'Nome do Perfil' || ''} size={160} />
+              <Avvvatars value={nome || ''} size={160} />
             )}
           </p>
           <Flex

@@ -11,7 +11,11 @@ import {
 import { MobileNav } from 'components/MobileNav';
 import { SidebarContent } from 'components/SidebarContent';
 
+import { useAuth } from 'hooks/useAuth';
+
 export default function Sidebar({ children }: { children: ReactNode }) {
+  const { user } = useAuth();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
@@ -35,8 +39,8 @@ export default function Sidebar({ children }: { children: ReactNode }) {
       {/* mobilenav */}
       <MobileNav
         onOpen={onOpen}
-        name="Alexander"
-        cargo="Cargo"
+        name={user?.nome}
+        perfil={user?.perfil}
         profileImage=""
       />
       <Box ml={{ base: 0, md: 60 }} p="4">

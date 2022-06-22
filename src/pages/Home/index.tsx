@@ -1,67 +1,95 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControl,
-  FormLabel,
-  Heading,
-  HStack,
-  Input,
-  Stack,
-  Text,
-  useBreakpointValue,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { GanttComponent, Inject, Edit } from '@syncfusion/ej2-react-gantt';
 
-import { Layout } from 'components/Layout';
+import Sidebar from 'components/SideBar';
 
 export function Home() {
+  const GanttData = [
+    {
+      TaskID: 1,
+      TaskName: 'Project Initiation',
+      StartDate: new Date('04/02/2019'),
+      EndDate: new Date('04/21/2019'),
+      subtasks: [
+        {
+          TaskID: 2,
+          TaskName: 'Identify Site location',
+          StartDate: new Date('04/02/2019'),
+          Duration: 4,
+          Progress: 50,
+        },
+        {
+          TaskID: 3,
+          TaskName: 'Perform Soil test',
+          StartDate: new Date('04/02/2019'),
+          Duration: 4,
+          Progress: 50,
+          Predecessor: '2FS',
+        },
+        {
+          TaskID: 4,
+          TaskName: 'Soil test approval',
+          StartDate: new Date('04/02/2019'),
+          Duration: 4,
+          Progress: 50,
+        },
+      ],
+    },
+    {
+      TaskID: 5,
+      TaskName: 'Project Estimation',
+      StartDate: new Date('04/02/2019'),
+      EndDate: new Date('04/21/2019'),
+      subtasks: [
+        {
+          TaskID: 6,
+          TaskName: 'Develop floor plan for estimation',
+          StartDate: new Date('04/04/2019'),
+          Duration: 3,
+          Progress: 50,
+        },
+        {
+          TaskID: 7,
+          TaskName: 'List materials',
+          StartDate: new Date('04/04/2019'),
+          Duration: 3,
+          Progress: 50,
+        },
+        {
+          TaskID: 8,
+          TaskName: 'Estimation approval',
+          StartDate: new Date('04/04/2019'),
+          Duration: 3,
+          Progress: 50,
+          Predecessor: '7SS',
+        },
+      ],
+    },
+  ];
+
   return (
-    <Layout>
-      <Stack spacing="8">
-        <Stack spacing="6">
-          <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
-            <Heading size={useBreakpointValue({ base: 'xs', md: 'sm' })}>
-              Log in to your account
-            </Heading>
-            <HStack spacing="1" justify="center">
-              <Text color="muted">Don't have an account?</Text>
-              <Button variant="link" color="origem.500">
-                Sign up
-              </Button>
-            </HStack>
-          </Stack>
-        </Stack>
-        <Box
-          py={{ base: '0', sm: '8' }}
-          px={{ base: '4', sm: '10' }}
-          bg={useBreakpointValue({ base: 'transparent', sm: 'bg-surface' })}
-          boxShadow={{ base: 'none', sm: useColorModeValue('md', 'md-dark') }}
-          borderRadius={{ base: 'none', sm: 'xl' }}
+    <>
+      <Sidebar>
+        <GanttComponent
+          id="gantt-control"
+          dataSource={GanttData}
+          taskFields={{
+            id: 'TaskID',
+            name: 'TaskName',
+            startDate: 'StartDate',
+            endDate: 'EndDate',
+            duration: 'Duration',
+            progress: 'Progress',
+            dependency: 'Predecessor',
+            child: 'subtasks',
+          }}
+          editSettings={{
+            allowTaskbarEditing: true,
+          }}
+          height={'100vh'}
         >
-          <Stack spacing="6">
-            <Stack spacing="5">
-              <FormControl>
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <Input id="email" type="email" />
-              </FormControl>
-            </Stack>
-            <HStack justify="space-between">
-              <Checkbox colorScheme="origem" defaultChecked>
-                Remember me
-              </Checkbox>
-              <Button variant="link" color="origem.500" size="sm">
-                Forgot password?
-              </Button>
-            </HStack>
-            <Stack spacing="6">
-              <Button background="origem.300" variant="primary">
-                Sign in
-              </Button>
-            </Stack>
-          </Stack>
-        </Box>
-      </Stack>
-    </Layout>
+          <Inject services={[Edit]} />
+        </GanttComponent>
+      </Sidebar>
+    </>
   );
 }

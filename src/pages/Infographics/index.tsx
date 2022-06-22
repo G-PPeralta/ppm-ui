@@ -1,10 +1,10 @@
 import Sidebar from 'components/SideBar';
 
-export function Admin() {
+export function Infographics() {
   return (
     <>
       <Sidebar>
-        <h1>hello</h1>
+        <h1>Infographics</h1>
       </Sidebar>
     </>
   );

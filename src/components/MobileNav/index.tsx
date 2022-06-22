@@ -1,4 +1,5 @@
 import { FiMenu, FiChevronDown } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 import {
   IconButton,
@@ -20,23 +21,25 @@ import {
 import logoImage from 'assets/logo.png';
 import Avvvatars from 'avvvatars-react';
 
+import { useAuth } from 'hooks/useAuth';
+
 interface MobileProps extends FlexProps {
   onOpen: () => void;
   name?: string;
-  cargo?: string;
+  perfil?: string;
   profileImage?: string;
 }
-
-const linkPhoto =
-  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80';
 
 export function MobileNav({
   onOpen,
   name,
-  cargo,
+  perfil,
   profileImage,
   ...rest
 }: MobileProps) {
+  const navigate = useNavigate();
+  const { signOut, user } = useAuth();
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -75,10 +78,10 @@ export function MobileNav({
               _focus={{ boxShadow: 'none' }}
             >
               <HStack>
-                {linkPhoto ? (
-                  <Avatar size={'sm'} src={profileImage || linkPhoto} />
+                {user?.avatar ? (
+                  <Avatar size={'sm'} src={profileImage || user?.avatar} />
                 ) : (
-                  <Avvvatars value={'Nome do Perfil'} size={32} />
+                  <Avvvatars value={user?.nome || ''} size={32} />
                 )}
                 <VStack
                   display={{ base: 'none', md: 'flex' }}
@@ -88,7 +91,7 @@ export function MobileNav({
                 >
                   <Text fontSize="sm">{name || 'Nome Perfil'}</Text>
                   <Text fontSize="xs" color="gray.600">
-                    {cargo || 'Cargo'}
+                    {perfil || 'Cargo'}
                   </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
@@ -100,11 +103,28 @@ export function MobileNav({
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}
             >
-              <MenuItem>Perfil</MenuItem>
-              <MenuItem>Configurações</MenuItem>
-              <MenuItem>Pagamentos</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  navigate('/profile');
+                }}
+              >
+                Perfil
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  navigate('/settings');
+                }}
+              >
+                Configurações
+              </MenuItem>
               <MenuDivider />
-              <MenuItem>Sair</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  signOut();
+                }}
+              >
+                Sair
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>

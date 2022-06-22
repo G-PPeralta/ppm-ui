@@ -1,11 +1,11 @@
 import { createContext, useContext } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
-type IToastProps = {
+interface ToastProps {
   toast: any;
-};
+}
 
-const ToastContext = createContext<IToastProps>({} as IToastProps);
+const ToastContext = createContext<ToastProps>({} as ToastProps);
 
 export const ToastProvider = ({ children }: any) => (
   <ToastContext.Provider value={{ toast }}>
