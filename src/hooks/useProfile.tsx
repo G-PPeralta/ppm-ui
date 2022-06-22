@@ -27,7 +27,6 @@ export function useProfile() {
       email: '',
       area: '',
       accessLevel: '',
-      avatar: '',
     },
     validationSchema: updateProfileSchema,
     onSubmit: async (values) => {
@@ -38,7 +37,6 @@ export function useProfile() {
         email: values.email,
         area_atuacao: values.area,
         role_id: values.accessLevel,
-        avatar: values.avatar,
       };
 
       try {
