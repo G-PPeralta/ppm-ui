@@ -69,7 +69,9 @@ const Dropzone: React.FC<DropzoneProps> = ({
             {avatar ? (
               <Image src={avatar} alt="Perfil" className={styles.preview} />
             ) : (
-              <Avvvatars value={nome || ''} size={160} />
+              <div>
+                <Avvvatars value={nome || ''} size={160} />
+              </div>
             )}
           </p>
           <Flex
