@@ -1,3 +1,17 @@
+## [1.6.2](https://github.com/iksolution/origem-ppm-ui/compare/v1.6.1...v1.6.2) (2022-06-23)
+
+
+### Bug Fixes
+
+* update number ([077c81e](https://github.com/iksolution/origem-ppm-ui/commit/077c81e838bad97f7db5bef1a2a6d78634863547))
+
+## [1.6.1](https://github.com/iksolution/origem-ppm-ui/compare/v1.6.0...v1.6.1) (2022-06-22)
+
+
+### Bug Fixes
+
+* avatar post ([78d4042](https://github.com/iksolution/origem-ppm-ui/commit/78d40424280de6de726f01353faeb1080e4f14fe))
+
 # [1.6.0](https://github.com/iksolution/origem-ppm-ui/compare/v1.5.0...v1.6.0) (2022-06-22)
 
 
