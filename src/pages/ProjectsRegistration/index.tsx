@@ -24,51 +24,58 @@ import { useProjects } from 'hooks/useProjects';
 export function ProjectsRegistration() {
   const { projectsForm, loading } = useProjects();
   const { roles } = usePermissions();
+  const wd = window.innerWidth;
   return (
     <>
       <Sidebar>
-        <Flex
+        {/*  <Flex
           w={useBreakpointValue({ base: '100%', md: 'auto' })}
           h="100vh"
           align="center"
           justify="center"
           bg={useBreakpointValue({ base: 'white', sm: '#EDF2F7' })}
-        >
-          <Stack spacing="8">
-            <Box
-              py={{ base: '0', sm: '16' }}
-              px={{ base: '4', sm: '10' }}
-              w={useBreakpointValue({
-                base: '20rem',
-                sm: '35rem',
-                md: '60rem',
-              })}
-              bg={useBreakpointValue({ base: 'transparent', sm: 'white' })}
-              boxShadow={{
-                base: 'none',
-                sm: useColorModeValue('md', 'md-dark'),
-              }}
-              borderRadius={{ base: 'none', sm: 'xl' }}
-            >
-              <Stack spacing="6">
-                <Stack spacing={{ base: '2', md: '3' }} align="center">
-                  <Image
-                    src={logo}
-                    display="flex"
-                    align="center"
-                    w={56}
-                    justifyContent="center"
-                  />
-                  <HStack spacing="1" justify="center" />
-                </Stack>
+        > */}
+        {loading && (
+          <Flex display={'flex'} align={'center'} justify={'center'} h={'90vh'}>
+            <Ring speed={2} lineWeight={5} color="blue" size={64} />
+          </Flex>
+        )}
+        <Stack spacing="8">
+          <Box
+            py={{ base: '0', sm: '16' }}
+            px={{ base: '4', sm: '10' }}
+            w={useBreakpointValue({
+              base: '20rem',
+              sm: '35rem',
+              md: '60rem',
+            })}
+            bg={useBreakpointValue({ base: 'transparent', sm: 'white' })}
+            boxShadow={{
+              base: 'none',
+              sm: useColorModeValue('md', 'md-dark'),
+            }}
+            borderRadius={{ base: 'none', sm: 'xl' }}
+          >
+            <Stack spacing="6">
+              <Stack spacing={{ base: '2', md: '3' }} align="center">
+                <Image
+                  src={logo}
+                  display="flex"
+                  align="center"
+                  w={56}
+                  justifyContent="center"
+                />
+                <HStack spacing="1" justify="center" />
               </Stack>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  projectsForm.handleSubmit(e);
-                }}
-              >
-                <Stack spacing="6">
+            </Stack>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                projectsForm.handleSubmit(e);
+              }}
+            >
+              <Box display={wd > 100 ? 'flex' : ''}>
+                <Stack spacing="6" w="100%">
                   <Stack spacing="5">
                     <FormControl>
                       <FormLabel htmlFor="name">PROJETO</FormLabel>
@@ -294,10 +301,11 @@ export function ProjectsRegistration() {
                     </Button>
                   </Stack>
                 </Stack>
-              </form>
-            </Box>
-          </Stack>
-        </Flex>
+              </Box>
+            </form>
+          </Box>
+        </Stack>
+        {/* </Flex> */}
       </Sidebar>
     </>
   );
