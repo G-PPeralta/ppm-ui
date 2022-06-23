@@ -37,7 +37,7 @@ export function usePermissions() {
         telefone: values.telephone,
         email: values.email,
         area_atuacao: values.area,
-        role_id: values.accessLevel,
+        role_id: Number(values.accessLevel),
       };
 
       try {
