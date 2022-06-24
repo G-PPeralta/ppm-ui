@@ -28,10 +28,10 @@ export const AuthProvider = ({ children }: any) => {
     return false;
   }
 
-  async function signIn(email: string, password: string): Promise<void> {
+  async function signIn(email: string, senha: string): Promise<void> {
     const newValues = {
       email,
-      password,
+      senha,
     };
 
     try {
