@@ -28,13 +28,6 @@ export function ProjectsRegistration() {
   return (
     <>
       <Sidebar>
-        {/*  <Flex
-          w={useBreakpointValue({ base: '100%', md: 'auto' })}
-          h="100vh"
-          align="center"
-          justify="center"
-          bg={useBreakpointValue({ base: 'white', sm: '#EDF2F7' })}
-        > */}
         {loading && (
           <Flex display={'flex'} align={'center'} justify={'center'} h={'90vh'}>
             <Ring speed={2} lineWeight={5} color="blue" size={64} />
