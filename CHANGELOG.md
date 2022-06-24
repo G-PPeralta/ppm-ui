@@ -1,3 +1,19 @@
+# [1.7.0](https://github.com/iksolution/origem-ppm-ui/compare/v1.6.2...v1.7.0) (2022-06-24)
+
+
+### Bug Fixes
+
+* create page projects registration ([5ca24b0](https://github.com/iksolution/origem-ppm-ui/commit/5ca24b049d089897384cb5f09d12b0efc5b1a4d2))
+* create page projects registration ([f3faddd](https://github.com/iksolution/origem-ppm-ui/commit/f3faddd8bbb0cd1033e139202afbcb5ba5a857bb))
+* create page projects registration ([271cd78](https://github.com/iksolution/origem-ppm-ui/commit/271cd78dddbce11ef1972c15f73f970d3754350a))
+* login password to senha ([1f145e5](https://github.com/iksolution/origem-ppm-ui/commit/1f145e56be0dafc0629ac52426e46cf6ea69550a))
+
+
+### Features
+
+* alert and types input ([9bfc1ae](https://github.com/iksolution/origem-ppm-ui/commit/9bfc1ae3ebc49074a2323fb546336764c5aa6d73))
+* create page projects registration ([1c99212](https://github.com/iksolution/origem-ppm-ui/commit/1c992126fa83d16536db5e2357c296e731616a91))
+
 ## [1.6.2](https://github.com/iksolution/origem-ppm-ui/compare/v1.6.1...v1.6.2) (2022-06-23)
 
 
