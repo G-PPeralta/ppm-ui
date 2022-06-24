@@ -98,8 +98,8 @@ export function Login() {
                       isRequired
                       id="password"
                       type="password"
-                      name="password"
-                      value={loginForm.values.password}
+                      name="senha"
+                      value={loginForm.values.senha}
                       onChange={loginForm.handleChange}
                     />
                   </FormControl>
@@ -107,7 +107,7 @@ export function Login() {
                 <Stack spacing="6">
                   <Button
                     disabled={
-                      !loginForm.values.email || !loginForm.values.password
+                      !loginForm.values.email || !loginForm.values.senha
                     }
                     type="submit"
                     background="origem.300"

@@ -20,7 +20,9 @@ export function useProjects() {
     validationSchema: projectRegisterSchema,
     onSubmit: async (values) => {
       setLoading(true);
-      console.log(values);
+
+      alert(JSON.stringify(values, null, 2));
+
       setLoading(false);
     },
   });
