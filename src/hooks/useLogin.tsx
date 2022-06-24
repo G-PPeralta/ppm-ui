@@ -15,11 +15,11 @@ export function useLogin() {
   const loginForm = useFormik({
     initialValues: {
       email: '',
-      password: '',
+      senha: '',
     },
     validationSchema: loginSchema,
     onSubmit: async (values) => {
-      if (values.email === '' || values.password === '') {
+      if (values.email === '' || values.senha === '') {
         toast.error('Preencha todos os campos', {
           id: 'toast-principal',
         });
@@ -28,7 +28,7 @@ export function useLogin() {
       try {
         setLoading(true);
 
-        await signIn(values.email, values.password);
+        await signIn(values.email, values.senha);
 
         setLoading(false);
       } catch (error) {
