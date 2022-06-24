@@ -1,6 +1,6 @@
 export interface LoginProps {
   email: string;
-  password: string;
+  senha: string;
 }
 
 export interface User {

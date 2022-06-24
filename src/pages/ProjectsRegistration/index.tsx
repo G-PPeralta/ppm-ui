@@ -18,13 +18,12 @@ import logo from 'assets/logo.png';
 import Sidebar from 'components/SideBar';
 import { TextError } from 'components/TextError';
 
-import { usePermissions } from 'hooks/usePermissions';
 import { useProjects } from 'hooks/useProjects';
 
 export function ProjectsRegistration() {
   const { projectsForm, loading } = useProjects();
-  const { roles } = usePermissions();
   const wd = window.innerWidth;
+
   return (
     <>
       <Sidebar>
@@ -142,13 +141,13 @@ export function ProjectsRegistration() {
                           name="departament"
                           value={projectsForm.values.departament}
                           onChange={projectsForm.handleChange}
-                          disabled
                         >
-                          {roles?.map((role) => (
-                            <option key={role?.id} value={role?.id}>
-                              {role?.nome_role}
-                            </option>
-                          ))}
+                          <option value="Projetos">Projetos</option>
+                          <option value="Administrativo">Administrativo</option>
+                          <option value="Financeiro">Financeiro</option>
+                          <option value="RH">RH</option>
+                          <option value="TI">TI</option>
+                          <option value="Outros">Outros</option>
                         </Select>
                         {projectsForm.errors.departament &&
                           projectsForm.touched.departament && (
@@ -217,7 +216,7 @@ export function ProjectsRegistration() {
                           isRequired
                           placeholder="dd/mm/aaaa"
                           id="start"
-                          type="text"
+                          type="date"
                           name="start"
                           value={projectsForm.values.start}
                           onChange={projectsForm.handleChange}
@@ -234,7 +233,7 @@ export function ProjectsRegistration() {
                           isRequired
                           placeholder="dd/mm/aaaa"
                           id="end"
-                          type="end"
+                          type="date"
                           name="end"
                           value={projectsForm.values.end}
                           onChange={projectsForm.handleChange}
@@ -255,13 +254,10 @@ export function ProjectsRegistration() {
                       name="priority"
                       value={projectsForm.values.priority}
                       onChange={projectsForm.handleChange}
-                      disabled
                     >
-                      {roles?.map((role) => (
-                        <option key={role?.id} value={role?.id}>
-                          {role?.nome_role}
-                        </option>
-                      ))}
+                      <option value="Alta">Alta</option>
+                      <option value="Média">Média</option>
+                      <option value="Baixa">Baixa</option>
                     </Select>
                     {projectsForm.errors.priority &&
                       projectsForm.touched.priority && (
