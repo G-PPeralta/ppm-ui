@@ -36,8 +36,8 @@ export default function CardProfile({
       <Stack
         borderWidth="1px"
         borderRadius="lg"
-        w={{ sm: '100%' }}
-        height={{ sm: '476px', md: '15rem' }}
+        w={{ sm: '250px', md: '100%' }}
+        height={{ sm: '356px', md: '15rem' }}
         direction={{ base: 'column', md: 'row' }}
         bg={useColorModeValue('white', 'gray.900')}
         boxShadow={'2xl'}
