@@ -29,13 +29,13 @@ export function ActivitiesRegistration() {
             <Ring speed={2} lineWeight={5} color="blue" size={64} />
           </Flex>
         )}
-        <Flex
-          w={useBreakpointValue({ base: '100%', md: 'auto' })}
-          align="center"
-          justify="center"
-          bg={useBreakpointValue({ base: 'white', sm: '#EDF2F7' })}
-        >
-          <Stack spacing="8">
+        <Stack spacing="8">
+          <Flex
+            w={useBreakpointValue({ base: '100%', md: 'auto' })}
+            align="center"
+            justify="center"
+            bg={useBreakpointValue({ base: 'white', sm: '#EDF2F7' })}
+          >
             <Box
               py={{ base: '0', sm: '16' }}
               px={{ base: '4', sm: '10' }}
@@ -43,6 +43,7 @@ export function ActivitiesRegistration() {
                 base: '20rem',
                 sm: '35rem',
                 md: '60rem',
+                lg: '80rem',
               })}
               bg={useBreakpointValue({ base: 'transparent', sm: 'white' })}
               boxShadow={{
@@ -51,7 +52,7 @@ export function ActivitiesRegistration() {
               }}
               borderRadius={{ base: 'none', sm: 'xl' }}
             >
-              <Heading as="h3" size="lg" mb="6">
+              <Heading as="h3" size="md" mb="6">
                 Cadastro de Ações
               </Heading>
               <form
@@ -446,8 +447,8 @@ export function ActivitiesRegistration() {
                 </Stack>
               </form>
             </Box>
-          </Stack>
-        </Flex>
+          </Flex>
+        </Stack>
       </Sidebar>
     </>
   );

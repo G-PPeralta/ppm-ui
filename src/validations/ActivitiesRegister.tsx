@@ -8,7 +8,7 @@ export const activitiesRegisterSchema = yup.object({
   c: yup.string().required('O campo C é obrigatório'),
   spt: yup.string().required('O campo SPT é obrigatório'),
   pit: yup.string().required('O campo Poço é obrigatória'),
-  id: yup.number().required('O ID é obrigatório'),
+  id: yup.string().required('O ID é obrigatório'),
   task: yup.string().required('O campo Tarefa é obrigatório'),
   order: yup.string().required('O campo Ordem é obrigatório'),
   directSuccessors: yup
