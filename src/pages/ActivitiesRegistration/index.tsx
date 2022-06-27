@@ -9,7 +9,6 @@ import {
   Select,
   useBreakpointValue,
   useColorModeValue,
-  Heading,
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
@@ -52,9 +51,6 @@ export function ActivitiesRegistration() {
               }}
               borderRadius={{ base: 'none', sm: 'xl' }}
             >
-              <Heading as="h3" size="md" mb="6">
-                Cadastro de Ações
-              </Heading>
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
