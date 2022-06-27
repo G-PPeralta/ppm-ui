@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import {
   Box,
   CloseButton,
@@ -42,7 +44,9 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
       {...rest}
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Image src={logoImage} alt="Logo Origem Energias" />
+        <Link to="/">
+          <Image src={logoImage} alt="Logo Origem Energias" />
+        </Link>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
