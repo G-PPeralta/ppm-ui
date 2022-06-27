@@ -47,7 +47,7 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
       </Flex>
       {LinkItems.map((link) => (
         <>
-          {verifyPermissionAdmin(link.name) ? null : (
+          {!verifyPermissionAdmin(link.name) && (
             <NavItem key={link.name} icon={link.icon} link={link.link || '/'}>
               <Text
                 _hover={{
