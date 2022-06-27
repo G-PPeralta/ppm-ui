@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/iksolution/origem-ppm-ui/compare/v1.7.0...v1.7.1) (2022-06-27)
+
+
+### Bug Fixes
+
+* remove logo page project registration ([5e038bb](https://github.com/iksolution/origem-ppm-ui/commit/5e038bb9aa7a28728bbe868689c893d2dbb486dc))
+
 # [1.7.0](https://github.com/iksolution/origem-ppm-ui/compare/v1.6.2...v1.7.0) (2022-06-24)
 
 
