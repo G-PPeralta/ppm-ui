@@ -1,5 +1,5 @@
 import { FiMenu, FiChevronDown } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import {
   IconButton,
@@ -17,6 +17,7 @@ import {
   MenuItem,
   MenuList,
   Image,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import logoImage from 'assets/logo.png';
 import Avvvatars from 'avvvatars-react';
@@ -66,7 +67,15 @@ export function MobileNav({
         fontFamily="monospace"
         fontWeight="bold"
       >
-        <Image src={logoImage} alt="Logo Origem Energias" />
+        <Link to="/">
+          <Image
+            w={useBreakpointValue({
+              base: '10rem',
+            })}
+            src={logoImage}
+            alt="Logo Origem Energias"
+          />
+        </Link>
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>

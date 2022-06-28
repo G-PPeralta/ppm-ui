@@ -96,7 +96,9 @@ export function usePermissions() {
       }
     }
 
-    findIdPermission(idUser as string);
+    if (idUser !== '0') {
+      findIdPermission(idUser as string);
+    }
   }, [idUser]);
 
   return {
