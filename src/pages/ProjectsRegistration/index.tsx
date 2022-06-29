@@ -131,16 +131,27 @@ export function ProjectsRegistration() {
                           <FormLabel htmlFor="classification">
                             CLASSIFICAÇÃO
                           </FormLabel>
-                          <Input
-                            isRequired
-                            placeholder="Geração de ROIC"
-                            id="classificacaoId"
-                            type="text"
+                          <Select
+                            id="classification"
                             name="classification"
                             value={projectsForm.values.classification}
                             onChange={projectsForm.handleChange}
                             w={useBreakpointValue({ base: '100%', md: '95%' })}
-                          />
+                          >
+                            <option value="geracaoDeROIC">
+                              Geração de ROIC
+                            </option>
+                            <option value="regulatorio">Regulatório</option>
+                            <option value="reservatorio">Reservatório</option>
+                            <option value="segurançaOperacional">
+                              Segurança Operacional
+                            </option>
+                            <option value="manutençãoEmergencial">
+                              Manutenção Emergencial
+                            </option>
+                            <option value="contingencia">Contingência</option>
+                            <option value="melhoria">Melhoria</option>
+                          </Select>
                           {projectsForm.errors.classification &&
                             projectsForm.touched.classification && (
                               <TextError>
@@ -152,7 +163,6 @@ export function ProjectsRegistration() {
                           <FormLabel htmlFor="requester">SOLICITANTE</FormLabel>
                           <Select
                             id="solicitanteId"
-                            placeholder="Ex.: Operação"
                             name="requester"
                             value={projectsForm.values.requester}
                             onChange={projectsForm.handleChange}
@@ -204,7 +214,6 @@ export function ProjectsRegistration() {
                           <FormLabel htmlFor="pole">POLO</FormLabel>
                           <Select
                             id="poloId"
-                            placeholder="Ex.: Tucano Sul"
                             name="pole"
                             value={projectsForm.values.requester}
                             onChange={projectsForm.handleChange}
@@ -274,13 +283,15 @@ export function ProjectsRegistration() {
                             id="dataInicioReal"
                             type="date"
                             name="startReal"
-                            value={projectsForm.values.start}
+                            value={projectsForm.values.startReal}
                             onChange={projectsForm.handleChange}
                             w={useBreakpointValue({ base: '100%', md: '95%' })}
                           />
-                          {projectsForm.errors.start &&
-                            projectsForm.touched.start && (
-                              <TextError>{projectsForm.errors.start}</TextError>
+                          {projectsForm.errors.startReal &&
+                            projectsForm.touched.startReal && (
+                              <TextError>
+                                {projectsForm.errors.startReal}
+                              </TextError>
                             )}
                         </FormControl>
                         <FormControl>
@@ -290,16 +301,16 @@ export function ProjectsRegistration() {
                             placeholder="dd/mm/aaaa"
                             id="dataFimReal"
                             type="date"
-                            name="end"
-                            value={projectsForm.values.end}
+                            name="endReal"
+                            value={projectsForm.values.endReal}
                             onChange={projectsForm.handleChange}
                             w={useBreakpointValue({ base: '100%', md: '100%' })}
                           />
-                          {projectsForm.errors.end &&
-                            projectsForm.touched.end && (
+                          {projectsForm.errors.endReal &&
+                            projectsForm.touched.endReal && (
                               <TextError>
                                 {' '}
-                                {projectsForm.errors.start}
+                                {projectsForm.errors.endReal}
                               </TextError>
                             )}
                         </FormControl>
@@ -315,7 +326,6 @@ export function ProjectsRegistration() {
                         <FormLabel htmlFor="priority">PRIORIDADE</FormLabel>
                         <Select
                           id="prioridadeId"
-                          placeholder="Ex.: Alta"
                           name="priority"
                           value={projectsForm.values.priority}
                           onChange={projectsForm.handleChange}
@@ -337,7 +347,6 @@ export function ProjectsRegistration() {
                         <FormLabel htmlFor="complexity">COMPLEXIDADE</FormLabel>
                         <Select
                           id="complexidadeId"
-                          placeholder="Ex.: Alta"
                           name="complexity"
                           value={projectsForm.values.complexity}
                           onChange={projectsForm.handleChange}
@@ -366,7 +375,6 @@ export function ProjectsRegistration() {
                         <FormLabel htmlFor="place">LOCAL</FormLabel>
                         <Select
                           id="localId"
-                          placeholder="Ex.: Poços"
                           name="place"
                           value={projectsForm.values.place}
                           onChange={projectsForm.handleChange}
@@ -393,7 +401,6 @@ export function ProjectsRegistration() {
                         <FormLabel htmlFor="division">DIVISÃO</FormLabel>
                         <Select
                           id="divisaoId"
-                          placeholder="Ex.: Processamento de Gás"
                           name="division"
                           value={projectsForm.values.complexity}
                           onChange={projectsForm.handleChange}
@@ -418,7 +425,6 @@ export function ProjectsRegistration() {
                         <FormLabel htmlFor="status">STATUS</FormLabel>
                         <Select
                           id="statusId"
-                          placeholder="Ex.: Iniciado"
                           name="status"
                           value={projectsForm.values.complexity}
                           onChange={projectsForm.handleChange}
@@ -441,17 +447,19 @@ export function ProjectsRegistration() {
                       })}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="demand">GATE</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Ex.: Gate 2"
-                          id="gateId"
-                          type="gate"
+                        <FormLabel htmlFor="gate">GATE</FormLabel>
+                        <Select
+                          id="gate"
                           name="gate"
-                          value={projectsForm.values.gate}
+                          value={projectsForm.values.complexity}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '95%' })}
-                        />
+                        >
+                          <option value={`C&M`}>{`C&M`}</option>
+                          <option value="concluido">Concluído</option>
+                          <option value="gate1">Gate 1</option>
+                          <option value="gate2">Gate 2</option>
+                        </Select>
                         {projectsForm.errors.gate &&
                           projectsForm.touched.gate && (
                             <TextError>{projectsForm.errors.gate}</TextError>
@@ -460,16 +468,17 @@ export function ProjectsRegistration() {
 
                       <FormControl>
                         <FormLabel htmlFor="typeProject">TIPO</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Ex.: Projeto"
-                          id="tipoProjetoId"
-                          type="typeProject"
+                        <Select
+                          id="typeProject"
                           name="typeProject"
-                          value={projectsForm.values.gate}
+                          value={projectsForm.values.complexity}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
-                        />
+                        >
+                          <option value="projeto1">Projeto 1</option>
+                          <option value="projeto2">Projeto 2</option>
+                          <option value="projeto3">Projeto 3</option>
+                        </Select>
                         {projectsForm.errors.typeProject &&
                           projectsForm.touched.typeProject && (
                             <TextError>
@@ -486,16 +495,16 @@ export function ProjectsRegistration() {
                     >
                       <FormControl>
                         <FormLabel htmlFor="demand">DEMANDA</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Ex.: Projeto"
-                          id="demandaId"
-                          type="demand"
+                        <Select
+                          id="demand"
                           name="demand"
-                          value={projectsForm.values.demand}
+                          value={projectsForm.values.complexity}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
-                        />
+                        >
+                          <option value="origem">Origem</option>
+                          <option value="azulGoiaba">Azul-Goiaba</option>
+                        </Select>
                         {projectsForm.errors.demand &&
                           projectsForm.touched.demand && (
                             <TextError>{projectsForm.errors.demand}</TextError>
