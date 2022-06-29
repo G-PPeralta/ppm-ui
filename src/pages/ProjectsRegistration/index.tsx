@@ -451,7 +451,7 @@ export function ProjectsRegistration() {
                         <Select
                           id="gate"
                           name="gate"
-                          value={projectsForm.values.complexity}
+                          value={projectsForm.values.gate}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '95%' })}
                         >
@@ -469,9 +469,9 @@ export function ProjectsRegistration() {
                       <FormControl>
                         <FormLabel htmlFor="typeProject">TIPO</FormLabel>
                         <Select
-                          id="typeProject"
+                          id="tipoProjetoId"
                           name="typeProject"
-                          value={projectsForm.values.complexity}
+                          value={projectsForm.values.typeProject}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         >
@@ -498,7 +498,7 @@ export function ProjectsRegistration() {
                         <Select
                           id="demand"
                           name="demand"
-                          value={projectsForm.values.complexity}
+                          value={projectsForm.values.demand}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         >
