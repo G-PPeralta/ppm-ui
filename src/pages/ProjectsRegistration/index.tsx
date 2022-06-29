@@ -215,17 +215,15 @@ export function ProjectsRegistration() {
                           <Select
                             id="poloId"
                             name="pole"
-                            value={projectsForm.values.requester}
+                            value={projectsForm.values.pole}
                             onChange={projectsForm.handleChange}
                           >
                             <option value="Tucano Sul">Tucano Sul</option>
                             <option value="Alagoas">Alagoas</option>
                           </Select>
-                          {projectsForm.errors.requester &&
-                            projectsForm.touched.requester && (
-                              <TextError>
-                                {projectsForm.errors.requester}
-                              </TextError>
+                          {projectsForm.errors.pole &&
+                            projectsForm.touched.pole && (
+                              <TextError>{projectsForm.errors.pole}</TextError>
                             )}
                         </FormControl>
                       </Flex>
@@ -402,7 +400,7 @@ export function ProjectsRegistration() {
                         <Select
                           id="divisaoId"
                           name="division"
-                          value={projectsForm.values.complexity}
+                          value={projectsForm.values.division}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '95%' })}
                         >
@@ -426,7 +424,7 @@ export function ProjectsRegistration() {
                         <Select
                           id="statusId"
                           name="status"
-                          value={projectsForm.values.complexity}
+                          value={projectsForm.values.status}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         >
