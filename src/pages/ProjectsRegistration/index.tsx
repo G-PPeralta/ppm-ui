@@ -9,6 +9,8 @@ import {
   Stack,
   useBreakpointValue,
   useColorModeValue,
+  InputGroup,
+  InputLeftElement,
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
@@ -16,6 +18,8 @@ import Sidebar from 'components/SideBar';
 import { TextError } from 'components/TextError';
 
 import { useProjects } from 'hooks/useProjects';
+
+import { postProject } from 'services/post/ProjectRegister';
 
 export function ProjectsRegistration() {
   const { projectsForm, loading } = useProjects();
@@ -110,16 +114,28 @@ export function ProjectsRegistration() {
                           <FormLabel htmlFor="budget">
                             VALOR TOTAL PREVISTO
                           </FormLabel>
-                          <Input
-                            isRequired
-                            placeholder="Ex.: R$ 10.000,00"
-                            id="valorTotalPrevisto"
-                            type="text"
-                            name="budget"
-                            value={projectsForm.values.budget}
-                            onChange={projectsForm.handleChange}
-                            w={useBreakpointValue({ base: '100%', md: '95%' })}
-                          />
+                          <InputGroup>
+                            <InputLeftElement
+                              pointerEvents="none"
+                              color="gray.300"
+                              fontSize="1.2em"
+                            >
+                              R$
+                            </InputLeftElement>
+                            <Input
+                              isRequired
+                              placeholder="10.000,00"
+                              id="valorTotalPrevisto"
+                              type="text"
+                              name="budget"
+                              value={projectsForm.values.budget}
+                              onChange={projectsForm.handleChange}
+                              w={useBreakpointValue({
+                                base: '100%',
+                                md: '95%',
+                              })}
+                            />
+                          </InputGroup>
                           {projectsForm.errors.budget &&
                             projectsForm.touched.budget && (
                               <TextError>
@@ -547,6 +563,7 @@ export function ProjectsRegistration() {
                           background: 'origem.500',
                           transition: 'all 0.4s',
                         }}
+                        onClick={() => postProject}
                       >
                         {loading ? (
                           <Ring
