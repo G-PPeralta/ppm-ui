@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 
+import { ActivitiesRegistration } from 'pages/ActivitiesRegistration';
 import { Home } from 'pages/Home';
 import { Infographics } from 'pages/Infographics';
 import { NotFound } from 'pages/NotFound';
@@ -16,6 +17,10 @@ export function PrivateRoutes() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/projects-registration" element={<ProjectsRegistration />} />
+      <Route
+        path="/activities-registration"
+        element={<ActivitiesRegistration />}
+      />
       <Route path="/share-register" element={<ShareRegister />} />
       <Route path="/reports" element={<Reports />} />
       <Route path="/infographics" element={<Infographics />} />
