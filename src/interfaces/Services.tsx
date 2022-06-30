@@ -58,3 +58,26 @@ export interface ResponseUserPending {
   avatar: string;
   nome_role: string;
 }
+
+export interface RegisterProjectProps {
+  name: string;
+  description: string;
+  budget: number;
+  classification: string;
+  requester: string;
+  justification: string;
+  pole: string;
+  start: string;
+  end: string;
+  startReal: string;
+  endReal: string;
+  priority: string;
+  complexity: string;
+  place: string;
+  division: string;
+  status: string;
+  gate: string;
+  typeProject: string;
+  demand: string;
+  comments: string;
+}
