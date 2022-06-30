@@ -17,6 +17,8 @@ import { TextError } from 'components/TextError';
 
 import { useProjects } from 'hooks/useProjects';
 
+import { postProject } from 'services/post/ProjectRegister';
+
 export function ProjectsRegistration() {
   const { projectsForm, loading } = useProjects();
   const wd = window.innerWidth;
@@ -547,6 +549,7 @@ export function ProjectsRegistration() {
                           background: 'origem.500',
                           transition: 'all 0.4s',
                         }}
+                        onClick={() => postProject}
                       >
                         {loading ? (
                           <Ring
