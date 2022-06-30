@@ -1,3 +1,27 @@
+# [1.8.0](https://github.com/iksolution/origem-ppm-ui/compare/v1.7.1...v1.8.0) (2022-06-30)
+
+
+### Bug Fixes
+
+* adjust activities registration page responsiveness ([7080dd8](https://github.com/iksolution/origem-ppm-ui/commit/7080dd8e3d0c7b2af441cc30e56a5ffe1468b536))
+* adjust projects fields ([400cd1f](https://github.com/iksolution/origem-ppm-ui/commit/400cd1feae724baad1d29609216b5453d13d27f0))
+* adjusts value of gate, tipo and demanda fields ([8267760](https://github.com/iksolution/origem-ppm-ui/commit/826776077c07f6c42fe76039ae1e9c922e9b5d06))
+* adjusts value of pole and division fields ([8c5eaaf](https://github.com/iksolution/origem-ppm-ui/commit/8c5eaaf3913e4cac65dc3a03885a02d40f6bc63e))
+* create page projects registration add new camps ([cc0c5e2](https://github.com/iksolution/origem-ppm-ui/commit/cc0c5e2d7d6007c644dedf2fb4baacf1634ef0dd))
+* iduser zero ([00533ba](https://github.com/iksolution/origem-ppm-ui/commit/00533ba22c1f3ce47807a2f9f76af14e393cb592))
+* input currency ([6d31f2c](https://github.com/iksolution/origem-ppm-ui/commit/6d31f2c4d1c6813c2e56b879ed14e77df9a1c1a1))
+* remove heading page activities registration ([9c8ddbd](https://github.com/iksolution/origem-ppm-ui/commit/9c8ddbd6e5b8b050b4b3d9d096c9f6450f6cf551))
+* responsive pages ([b90ec3c](https://github.com/iksolution/origem-ppm-ui/commit/b90ec3c237b92ec287b2d8c5f0d96ac0e08bb653))
+* sidebar permission admin ([935a3c0](https://github.com/iksolution/origem-ppm-ui/commit/935a3c02c64c4ce9c499083aa33b389b3966ed70))
+* **style:** size card profile ([915483a](https://github.com/iksolution/origem-ppm-ui/commit/915483a9c51e0d13b2478f91d7686ee558acb4a0))
+
+
+### Features
+
+* add activities registration page. width is not working well yet ([3cda807](https://github.com/iksolution/origem-ppm-ui/commit/3cda80775041f3b61fcfa1bd61aa3f3067e03c2c))
+* add click logo return homepage ([7f41b6b](https://github.com/iksolution/origem-ppm-ui/commit/7f41b6b49ef0e9404a271dbea473948e50070863))
+* prepare to post project register ([8449e57](https://github.com/iksolution/origem-ppm-ui/commit/8449e57009a57a98102fe024d294bf363ff46f6c))
+
 ## [1.7.1](https://github.com/iksolution/origem-ppm-ui/compare/v1.7.0...v1.7.1) (2022-06-27)
 
 
