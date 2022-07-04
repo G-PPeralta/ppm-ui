@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/iksolution/origem-ppm-ui/compare/v1.8.0...v1.8.1) (2022-07-04)
+
+
+### Bug Fixes
+
+* update eslint config ([f8d5f2e](https://github.com/iksolution/origem-ppm-ui/commit/f8d5f2e8b22d9339a281daca3c1b6d460114f032))
+
 # [1.8.0](https://github.com/iksolution/origem-ppm-ui/compare/v1.7.1...v1.8.0) (2022-06-30)
 
 
