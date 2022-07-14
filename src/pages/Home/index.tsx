@@ -9,7 +9,7 @@ export function Home() {
       Item: '1',
       TaskName: 'Projeto 1',
       StartDate: new Date('07/11/2022'),
-      // EndDate: new Date('07/11/2023'),
+      EndDate: new Date('07/11/2023'),
       subtasks: [
         {
           TaskID: 2,
@@ -17,7 +17,7 @@ export function Home() {
           TaskName: 'Ação 1',
           StartDate: new Date('07/11/2022'),
           Duration: 4,
-          Progress: 0.7,
+          Progress: 70,
         },
         {
           TaskID: 3,
@@ -25,7 +25,7 @@ export function Home() {
           TaskName: 'Ação 2',
           StartDate: new Date('07/11/2022'),
           Duration: 4,
-          Progress: 0.5,
+          Progress: 50,
           Predecessor: `${2}FS`,
         },
         {
@@ -34,7 +34,7 @@ export function Home() {
           TaskName: 'Ação 3',
           StartDate: new Date('07/11/2022'),
           Duration: 4,
-          Progress: 0.5,
+          Progress: 50,
           Predecessor: `${3}FS`,
         },
       ],
@@ -52,7 +52,7 @@ export function Home() {
           TaskName: 'Ação 1',
           StartDate: new Date('07/11/2022'),
           Duration: 3,
-          Progress: 0.5,
+          Progress: 50,
           Predecessor: `${4}FS`,
         },
         {
@@ -61,7 +61,7 @@ export function Home() {
           TaskName: 'Ação 2',
           StartDate: new Date('07/11/2022'),
           Duration: 3,
-          Progress: 0.5,
+          Progress: 50,
           Predecessor: `${6}FS`,
         },
         {
@@ -70,13 +70,12 @@ export function Home() {
           TaskName: 'Ação 3',
           StartDate: new Date('07/11/2022'),
           Duration: 3,
-          Progress: 0.5,
+          Progress: 50,
           Predecessor: `${7}FS`,
         },
       ],
     },
   ];
-
   return (
     <>
       <Sidebar>
@@ -94,7 +93,7 @@ export function Home() {
             child: 'subtasks',
           }}
           editSettings={{
-            allowTaskbarEditing: true,
+            allowTaskbarEditing: false,
             allowEditing: true,
           }}
           height={'100vh'}
@@ -134,16 +133,15 @@ export function Home() {
             },
             {
               field: 'Progress',
-              headerText: 'Progresso',
+              headerText: 'Progresso (%)',
               headerTextAlign: 'Center',
               textAlign: 'Center',
-              format: 'p',
+              format: 'n',
             },
             {
               field: 'Predecessor',
               headerText: 'Predecessor',
               headerTextAlign: 'Center',
-
               textAlign: 'Center',
             },
           ]}
