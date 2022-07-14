@@ -11,21 +11,21 @@ import {
 } from '@syncfusion/ej2-react-charts';
 
 function getMonthNumber(monthNumber: Number) {
-  // const months = [
-  //   'Jan',
-  //   'Fev',
-  //   'Mar',
-  //   'Abr',
-  //   'Mai',
-  //   'Jun',
-  //   'Jul',
-  //   'Ago',
-  //   'Set',
-  //   'Out',
-  //   'Nov',
-  //   'Dez',
-  // ];
-  // return months[monthNumber - 1];
+  const months = [
+    'Jan',
+    'Fev',
+    'Mar',
+    'Abr',
+    'Mai',
+    'Jun',
+    'Jul',
+    'Ago',
+    'Set',
+    'Out',
+    'Nov',
+    'Dez',
+  ];
+  return months[Number(monthNumber) - 1];
 }
 
 function getMonthNames(dataInicio: String, qtdMeses: Number) {
@@ -88,36 +88,42 @@ function SCurveChart() {
   };
 
   return (
-    <ChartComponent
-      palettes={palette}
-      primaryXAxis={{
-        valueType: 'Category',
-        title: 'Mês',
-      }}
-      primaryYAxis={{ title: 'Porcentagem', labelFormat: '{value}%' }}
-      legendSettings={{ visible: true }}
-      tooltip={{ enable: true }}
-    >
-      <Inject services={[LineSeries, Category, Legend, DataLabel, Tooltip]} />
-      <SeriesCollectionDirective>
-        <SeriesDirective
-          type="Line"
-          dataSource={previsto}
-          xName="month"
-          yName="budget"
-          name="Previsto"
-          marker={markerPattern}
-        />
-        <SeriesDirective
-          type="Line"
-          dataSource={atual}
-          xName="month"
-          yName="spent"
-          name="Realizado"
-          marker={markerPattern}
-        />
-      </SeriesCollectionDirective>
-    </ChartComponent>
+    <>
+      <div>
+        <ChartComponent
+          palettes={palette}
+          primaryXAxis={{
+            valueType: 'Category',
+            title: 'Mês',
+          }}
+          primaryYAxis={{ title: 'Porcentagem', labelFormat: '{value}%' }}
+          legendSettings={{ visible: true }}
+          tooltip={{ enable: true }}
+        >
+          <Inject
+            services={[LineSeries, Category, Legend, DataLabel, Tooltip]}
+          />
+          <SeriesCollectionDirective>
+            <SeriesDirective
+              type="Line"
+              dataSource={previsto}
+              xName="month"
+              yName="budget"
+              name="Previsto"
+              marker={markerPattern}
+            />
+            <SeriesDirective
+              type="Line"
+              dataSource={atual}
+              xName="month"
+              yName="spent"
+              name="Realizado"
+              marker={markerPattern}
+            />
+          </SeriesCollectionDirective>
+        </ChartComponent>
+      </div>
+    </>
   );
 }
 
