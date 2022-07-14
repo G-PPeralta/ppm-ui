@@ -3004,6 +3004,20 @@
     "@syncfusion/ej2-lists" "~20.2.38"
     "@syncfusion/ej2-popups" "~20.2.38"
 
+"@syncfusion/ej2-charts@20.2.38":
+  version "20.2.38"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-charts/-/ej2-charts-20.2.38.tgz#44f9eb0443c7c42330b2d04feab71b3775de15da"
+  integrity sha512-LOn+7kMxG3qLlAUoJBWaDk6G6IMSR6SZSSZvpkXqcSFfNxCL4+56wUDojlYNRAP39+CfR2ChD07Bua3RA37TIg==
+  dependencies:
+    "@syncfusion/ej2-base" "~20.2.38"
+    "@syncfusion/ej2-calendars" "~20.2.38"
+    "@syncfusion/ej2-compression" "~20.2.38"
+    "@syncfusion/ej2-data" "~20.2.38"
+    "@syncfusion/ej2-file-utils" "~20.2.38"
+    "@syncfusion/ej2-navigations" "~20.2.38"
+    "@syncfusion/ej2-pdf-export" "~20.2.38"
+    "@syncfusion/ej2-svg-base" "~20.2.38"
+
 "@syncfusion/ej2-compression@~20.2.38":
   version "20.2.38"
   resolved "https://registry.yarnpkg.com/@syncfusion/ej2-compression/-/ej2-compression-20.2.38.tgz#5870d2df0ff7a92207c7a2598eb6d0b541bc9bd4"
@@ -3163,6 +3177,15 @@
   dependencies:
     "@syncfusion/ej2-base" "~20.2.38"
 
+"@syncfusion/ej2-react-charts@^20.2.38":
+  version "20.2.38"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-react-charts/-/ej2-react-charts-20.2.38.tgz#7b594002b2f98703fdb669aa926b41ae257f9b5d"
+  integrity sha512-M9EFoLSbfjG/+B/6Z9otzFPFtnT51N2pwaKvcCXsab1dLRyGek+HvO3ir2uIXJrcoxAWC1Gls98Om5rOMG4FJw==
+  dependencies:
+    "@syncfusion/ej2-base" "~20.2.38"
+    "@syncfusion/ej2-charts" "20.2.38"
+    "@syncfusion/ej2-react-base" "~20.2.38"
+
 "@syncfusion/ej2-react-gantt@^20.2.38":
   version "20.2.38"
   resolved "https://registry.yarnpkg.com/@syncfusion/ej2-react-gantt/-/ej2-react-gantt-20.2.38.tgz#6a98d3b3b9d6690bc52a5907be7103192e6a7401"
@@ -3192,6 +3215,13 @@
   dependencies:
     "@syncfusion/ej2-base" "~20.2.38"
     "@syncfusion/ej2-popups" "~20.2.38"
+
+"@syncfusion/ej2-svg-base@~20.2.38":
+  version "20.2.38"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-svg-base/-/ej2-svg-base-20.2.38.tgz#7e2f42aa571526d888a16145c8da62bc3067b44e"
+  integrity sha512-7KPzynTGNlM1wjA2kqk6NaRRscnxDfRtkG2vwJJMTFm9RaHwgYu26xHz6sXh0qZZ8vo8wtEm5wwmeXIOiENj9Q==
+  dependencies:
+    "@syncfusion/ej2-base" "~20.2.38"
 
 "@syncfusion/ej2-treegrid@~20.2.38":
   version "20.2.38"

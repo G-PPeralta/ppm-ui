@@ -10,6 +10,7 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@syncfusion/ej2-base": "^20.2.38",
+    "@syncfusion/ej2-react-charts": "^20.2.38",
     "@syncfusion/ej2-react-gantt": "^20.2.38",
     "@uiball/loaders": "^1.2.6",
     "avvvatars-react": "^0.4.2",
