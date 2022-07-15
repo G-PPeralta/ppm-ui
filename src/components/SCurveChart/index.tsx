@@ -80,7 +80,7 @@ function SCurveChart() {
     // { month: 'Mai/2023', spent: 95 },
   ];
 
-  const palette = ['#F94144', '#F9C74F'];
+  const palette = ['#616161', '#3F51B5'];
   const markerPattern = {
     dataLabel: { visible: true },
     visible: true,
@@ -102,6 +102,7 @@ function SCurveChart() {
             primaryYAxis={{ title: 'Porcentagem', labelFormat: '{value}%' }}
             legendSettings={{ visible: true }}
             tooltip={{ enable: true }}
+            title="Curva S"
           >
             <Inject
               services={[LineSeries, Category, Legend, DataLabel, Tooltip]}
