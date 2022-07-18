@@ -1,7 +1,17 @@
 import { GanttComponent, Inject, Edit } from '@syncfusion/ej2-react-gantt';
 
+// import { getGanttData } from 'services/get/Gantt';
+
+// async function ganttData() {
+//   const ganttData = await getGanttData();
+//   return ganttData;
+// }
+
 export function Gantt() {
-  const GanttData = [
+  // const ganttDataFormatted = await getGanttData();
+
+  // console.log(ganttDataFormatted);
+  const ganttData = [
     {
       TaskID: 1,
       Item: '1',
@@ -78,7 +88,7 @@ export function Gantt() {
     <>
       <GanttComponent
         id="gantt-control"
-        dataSource={GanttData}
+        dataSource={ganttData}
         taskFields={{
           id: 'TaskID',
           name: 'TaskName',
