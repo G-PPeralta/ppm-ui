@@ -8,10 +8,36 @@ import { getGanttData } from 'services/get/Gantt';
 export function Gantt() {
   const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);
   const [loading, setLoading] = useState(true);
+  const [gantt, setGantt] = useState<any>();
+
+  function ganttFormatter(gantt: any) {
+    const _gantt = gantt.macroatividades;
+    const newGantt = _gantt.map((macro: any) => ({
+      TaskID: macro.macroatividade_id,
+      Item: macro?.macroatividade_item,
+      TaskName: macro?.macroatividade_nome,
+      StartDate: macro?.data_inicio,
+      Duration: macro?.duracao,
+      Progress: Number(macro?.progresso) || null,
+      subtasks: macro.micro?.map((micro: any) => ({
+        TaskID: micro?.microatividade_id,
+        Item: micro?.item,
+        TaskName: micro?.nome_atividade,
+        StartDate: micro?.data_inicio,
+        Duration: micro?.duracao,
+        Progress: Number(micro?.progresso) || null,
+      })),
+    }));
+    setGantt(newGantt);
+  }
 
   async function handleSetGanttData() {
     const reqGanttData = await getGanttData();
-    setGanttData(reqGanttData.data);
+    if (!reqGanttData) return;
+    const _gantt: IGantt = reqGanttData.data;
+    setGanttData(_gantt);
+    ganttFormatter(_gantt);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -20,10 +46,25 @@ export function Gantt() {
 
   useEffect(() => {
     console.log(ganttData);
-    setLoading(false);
   }, [ganttData]);
 
-  // const ganttData = [
+  // const ganttDataLocal = ganttData.macroatividades?.map((gantt) => ({
+  //   TaskId: gantt.macroatividade_id,
+  //   Item: gantt.macroatividade_item,
+  //   TaskName: gantt.macroatividade_nome,
+  //   subtasks: gantt.micro?.map((micro) => ({
+  //     TaskID: micro.microatividade_id,
+  //     Item: micro.item,
+  //     TaskName: micro.nome_atividade,
+  //     StartDate: micro.data_inicio,
+  //     Duration: micro.duracao,
+  //     Progress: micro.progresso,
+  //   })),
+  // }));
+
+  // console.log(ganttDataLocal);
+
+  // const ganttDataLocal = [
   //   {
   //     TaskID: 1,
   //     Item: '1',
@@ -56,42 +97,17 @@ export function Gantt() {
   //         Predecessor: `${3}FS`,
   //       },
   //     ],
+  //     StartDate: null,
+  //     Duration: null,
   //   },
   //   {
-  //     TaskID: 5,
-  //     Item: '2',
-  //     TaskName: 'Projeto 2',
+  //     TaskID: 8,
+  //     Item: '2.3',
+  //     TaskName: 'Ação 3',
   //     StartDate: new Date('07/11/2022'),
-  //     EndDate: new Date('07/11/2023'),
-  //     subtasks: [
-  //       {
-  //         TaskID: 6,
-  //         Item: '2.1',
-  //         TaskName: 'Ação 1',
-  //         StartDate: new Date('07/11/2022'),
-  //         Duration: 3,
-  //         Progress: 50,
-  //         Predecessor: `${4}FS`,
-  //       },
-  //       {
-  //         TaskID: 7,
-  //         Item: '2.2',
-  //         TaskName: 'Ação 2',
-  //         StartDate: new Date('07/11/2022'),
-  //         Duration: 3,
-  //         Progress: 50,
-  //         Predecessor: `${6}FS`,
-  //       },
-  //       {
-  //         TaskID: 8,
-  //         Item: '2.3',
-  //         TaskName: 'Ação 3',
-  //         StartDate: new Date('07/11/2022'),
-  //         Duration: 3,
-  //         Progress: 50,
-  //         Predecessor: `${7}FS`,
-  //       },
-  //     ],
+  //     Duration: 3,
+  //     Progress: 80,
+  //     Predecessor: `${7}FS`,
   //   },
   // ];
   return (
@@ -99,20 +115,7 @@ export function Gantt() {
       {!loading && (
         <GanttComponent
           id="gantt-control"
-          dataSource={ganttData.macroatividades.map((macroatividade) => ({
-            TaskID: macroatividade.macroatividade_id,
-            Item: macroatividade.macroatividade_item,
-            TaskName: macroatividade.macroatividade_nome,
-            subtasks: macroatividade.micro.map((microatividade) => ({
-              id: microatividade.macroatividade_id,
-              item: microatividade.item,
-              name: microatividade.nome_projeto,
-              startDate: microatividade.data_inicio,
-              endDate: microatividade.data_fim,
-              duration: microatividade.duracao,
-              progress: Number(microatividade.progresso),
-            })),
-          }))}
+          dataSource={gantt}
           taskFields={{
             id: 'TaskID',
             name: 'TaskName',
@@ -142,54 +145,54 @@ export function Gantt() {
             allowEditing: true,
           }}
           height={'100vh'}
-          // columns={[
-          //   { field: 'Item', type: 'string' },
-          //   {
-          //     field: 'TaskID',
-          //     headerText: 'ID',
-          //     visible: true,
-          //   },
-          //   {
-          //     field: 'TaskName',
-          //     headerText: 'Ação/Projeto',
-          //     headerTextAlign: 'Center',
-          //     textAlign: 'Center',
-          //     type: 'string',
-          //   },
-          //   {
-          //     field: 'StartDate',
-          //     headerText: 'Data Início',
-          //     headerTextAlign: 'Center',
-          //     textAlign: 'Center',
-          //     format: 'dd/MM/yyyy',
-          //   },
-          //   {
-          //     field: 'EndDate',
-          //     headerText: 'Data Fim',
-          //     headerTextAlign: 'Center',
-          //     textAlign: 'Center',
-          //     format: 'dd/MM/yyyy',
-          //   },
-          //   {
-          //     field: 'Duration',
-          //     headerText: 'Duração',
-          //     headerTextAlign: 'Center',
-          //     textAlign: 'Center',
-          //   },
-          //   {
-          //     field: 'Progress',
-          //     headerText: 'Progresso (%)',
-          //     headerTextAlign: 'Center',
-          //     textAlign: 'Center',
-          //     format: 'n',
-          //   },
-          //   {
-          //     field: 'Predecessor',
-          //     headerText: 'Predecessor',
-          //     headerTextAlign: 'Center',
-          //     textAlign: 'Center',
-          //   },
-          // ]}
+          columns={[
+            { field: 'Item', type: 'string' },
+            {
+              field: 'TaskID',
+              headerText: 'ID',
+              visible: false,
+            },
+            {
+              field: 'TaskName',
+              headerText: 'Ação/Projeto',
+              headerTextAlign: 'Center',
+              textAlign: 'Center',
+              type: 'string',
+            },
+            {
+              field: 'StartDate',
+              headerText: 'Data Início',
+              headerTextAlign: 'Center',
+              textAlign: 'Center',
+              format: 'dd/MM/yyyy',
+            },
+            {
+              field: 'EndDate',
+              headerText: 'Data Fim',
+              headerTextAlign: 'Center',
+              textAlign: 'Center',
+              format: 'dd/MM/yyyy',
+            },
+            {
+              field: 'Duration',
+              headerText: 'Duração',
+              headerTextAlign: 'Center',
+              textAlign: 'Center',
+            },
+            {
+              field: 'Progress',
+              headerText: 'Progresso (%)',
+              headerTextAlign: 'Center',
+              textAlign: 'Center',
+              format: 'n',
+            },
+            {
+              field: 'Predecessor',
+              headerText: 'Predecessor',
+              headerTextAlign: 'Center',
+              textAlign: 'Center',
+            },
+          ]}
         >
           <Inject services={[Edit]} />
         </GanttComponent>
