@@ -95,3 +95,24 @@ export interface GanttPayload {
   duracao: number;
   progresso: number;
 }
+
+// interface Acao {
+//   id: number;
+//   item: string; // (macroID + '.' + itemID)
+//   nome: string;
+//   data_inicio: Date;
+//   duration: number;
+//   progress: number;
+// }
+
+export interface CreateGanttDto {
+  macroatividade_id: number;
+  macroatividade_item: string; // macroId.toString()
+  macroatividade_nome: string;
+  micro: GanttPayload[];
+}
+
+export interface IGantt {
+  nomeProjeto: string;
+  macroatividades: CreateGanttDto[];
+}
