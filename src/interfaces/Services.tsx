@@ -96,23 +96,31 @@ export interface GanttPayload {
   progresso: number;
 }
 
-// interface Acao {
-//   id: number;
-//   item: string; // (macroID + '.' + itemID)
-//   nome: string;
-//   data_inicio: Date;
-//   duration: number;
-//   progress: number;
-// }
-
-export interface CreateGanttDto {
+export interface GanttProps {
+  TaskID: number;
+  Item: string;
+  TaskName: string;
+  StartDate?: string;
+  Duration?: number;
+  Progress?: number;
+  subtasks?: GanttProps[];
+}
+export interface GanttMacroDto {
   macroatividade_id: number;
-  macroatividade_item: string; // macroId.toString()
+  macroatividade_item: string;
   macroatividade_nome: string;
-  micro: GanttPayload[];
+  duracao?: number;
+  progresso?: number;
+  data_inicio?: string;
+  data_fim?: string;
+  item?: string;
+  microatividade_id?: number;
+  nome_atividade?: string;
+  nome_projeto?: string;
+  micro?: GanttMacroDto[];
 }
 
 export interface IGantt {
   nomeProjeto: string;
-  macroatividades: CreateGanttDto[];
+  macroatividades: GanttMacroDto[];
 }

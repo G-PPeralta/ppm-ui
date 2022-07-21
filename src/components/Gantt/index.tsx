@@ -1,33 +1,57 @@
 import { useEffect, useState } from 'react';
 
 import { GanttComponent, Inject, Edit } from '@syncfusion/ej2-react-gantt';
-import { IGantt } from 'interfaces/Services';
+import { IGantt, GanttProps } from 'interfaces/Services';
 
 import { getGanttData } from 'services/get/Gantt';
 
 export function Gantt() {
   const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);
   const [loading, setLoading] = useState(true);
-  const [gantt, setGantt] = useState<any>();
+  const [gantt, setGantt] = useState<GanttProps[]>();
 
-  function ganttFormatter(gantt: any) {
+  function ganttFormatter(gantt: IGantt) {
+    if (!gantt) return;
+
     const _gantt = gantt.macroatividades;
-    const newGantt = _gantt.map((macro: any) => ({
-      TaskID: macro.macroatividade_id,
-      Item: macro?.macroatividade_item,
-      TaskName: macro?.macroatividade_nome,
-      StartDate: macro?.data_inicio,
-      Duration: macro?.duracao,
-      Progress: Number(macro?.progresso) || null,
-      subtasks: macro.micro?.map((micro: any) => ({
-        TaskID: micro?.microatividade_id,
-        Item: micro?.item,
-        TaskName: micro?.nome_atividade,
-        StartDate: micro?.data_inicio,
-        Duration: micro?.duracao,
-        Progress: Number(micro?.progresso) || null,
-      })),
-    }));
+    const newGantt = _gantt.map(
+      ({
+        macroatividade_id,
+        macroatividade_nome,
+        macroatividade_item,
+        data_inicio,
+        duracao,
+        micro,
+        progresso,
+      }) => ({
+        TaskID: macroatividade_id,
+        Item: macroatividade_item,
+        TaskName: macroatividade_nome,
+        StartDate: data_inicio,
+        Duration: duracao,
+        Progress: progresso,
+        subtasks: micro?.map(
+          ({
+            macroatividade_id,
+            macroatividade_item,
+            macroatividade_nome,
+            data_inicio,
+            item,
+            nome_atividade,
+            microatividade_id,
+            progresso,
+            duracao,
+          }) => ({
+            TaskID: microatividade_id || 0,
+            TaskName: nome_atividade || '',
+            Item: item || '',
+            Duration: duracao,
+            Progress: progresso,
+            StartDate: data_inicio,
+          }),
+        ),
+      }),
+    );
     setGantt(newGantt);
   }
 
