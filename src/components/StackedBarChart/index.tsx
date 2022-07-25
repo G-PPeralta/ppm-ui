@@ -87,7 +87,7 @@ export default function StackedBarChart() {
     foreseenPercentage += (totalBudget / monthsAmount / totalBudget) * 100;
     return {
       month: mes,
-      Previsto: foreseenPercentage,
+      monthlyForecast: foreseenPercentage,
     };
   });
 
@@ -95,7 +95,7 @@ export default function StackedBarChart() {
     accomplishedPercentage += Number(Math.round((Math.random() * 100) / 10));
     return {
       month: mes,
-      Realizado: accomplishedPercentage,
+      monthlyAchieved: accomplishedPercentage,
     };
   });
 
@@ -105,12 +105,12 @@ export default function StackedBarChart() {
   }));
 
   const dataPercentage = data.map((item) => {
-    const total = item.Previsto;
-    const realizado = Math.floor(Math.random() * total);
-    const restante = Number((total - realizado).toFixed(2));
-    const porcentagemRealizado = Number(((realizado / total) * 100).toFixed(2));
-    const porcentagemRestante = Number(((restante / total) * 100).toFixed(2));
-    return { porcentagemRealizado, porcentagemRestante };
+    const total = item.monthlyForecast;
+    const accomplished = Math.floor(Math.random() * total);
+    const remaining = Number((total - accomplished).toFixed(2));
+    const Realizado = Number(((accomplished / total) * 100).toFixed(2));
+    const Previsto = Number(((remaining / total) * 100).toFixed(2));
+    return { Realizado, Previsto };
   });
 
   const dataFinal = data.map((item, index) => ({
@@ -138,7 +138,7 @@ export default function StackedBarChart() {
         <Tooltip />
         <Legend />
         <Bar
-          dataKey="porcentagemRealizado"
+          dataKey="Realizado"
           stackId="a"
           fill="#2E69FD"
           legendType="circle"
@@ -146,7 +146,7 @@ export default function StackedBarChart() {
           animationDuration={1300}
         />
         <Bar
-          dataKey="porcentagemRestante"
+          dataKey="Previsto"
           stackId="a"
           fill="#93E01B"
           legendType="circle"
