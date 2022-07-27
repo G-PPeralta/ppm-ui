@@ -107,7 +107,7 @@ export default function NaoPrevistoComponent() {
                   display="flex"
                   w={'100%'}
                   justifyContent="space-between"
-                  align="center"
+                  // align="center"
                 >
                   <Box>
                     <Text
@@ -149,7 +149,7 @@ export default function NaoPrevistoComponent() {
                   display="flex"
                   w={'100%'}
                   justifyContent="space-between"
-                  align="center"
+                  // align="center"
                 >
                   <Box mt={8}>
                     <PercentPieChart size={60} upDown={true} data={grafData3} />
