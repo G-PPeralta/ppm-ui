@@ -88,7 +88,12 @@ export function RegisterResponsibleModal() {
                       id="responsibleId"
                       name="responsible"
                       value={projectsForm.values.modalType}
-                      onChange={projectsForm.handleChange}
+                      onChange={() => {
+                        projectsForm.setFieldValue(
+                          'modalType',
+                          projectsForm.values.modalType[index],
+                        );
+                      }}
                       width="95%"
                     >
                       <option value="1">Tipo A</option>
@@ -152,7 +157,7 @@ export function RegisterResponsibleModal() {
                   transition: 'all 0.4s',
                 }}
               >
-                Fechar
+                Salvar
               </Button>
             </ModalFooter>
           </ModalContent>
