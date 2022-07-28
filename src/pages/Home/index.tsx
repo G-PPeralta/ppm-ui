@@ -9,7 +9,6 @@ import Projetos from './components/Projetos';
 import Realizado from './components/Realizado';
 import TotalOrcamentos from './components/TotalOrcamentos';
 import TotalProjetos from './components/TotalProjetos';
-
 export function Home() {
   return (
     <>

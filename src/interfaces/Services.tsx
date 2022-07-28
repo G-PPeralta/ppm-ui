@@ -81,3 +81,46 @@ export interface RegisterProjectProps {
   demand: string;
   comments: string;
 }
+
+export interface GanttPayload {
+  nome_projeto: string;
+  data_inicio: Date;
+  data_fim: Date;
+  microatividade_id: number;
+  nome_atividade: string;
+  item: string;
+  macroatividade_id: number;
+  macroatividade_nome: string;
+  macroatividade_item: number;
+  duracao: number;
+  progresso: number;
+}
+
+export interface GanttProps {
+  TaskID: number;
+  Item: string;
+  TaskName: string;
+  StartDate?: string;
+  Duration?: number;
+  Progress?: number;
+  subtasks?: GanttProps[];
+}
+export interface GanttMacroDto {
+  macroatividade_id: number;
+  macroatividade_item: string;
+  macroatividade_nome: string;
+  duracao?: number;
+  progresso?: number;
+  data_inicio?: string;
+  data_fim?: string;
+  item?: string;
+  microatividade_id?: number;
+  nome_atividade?: string;
+  nome_projeto?: string;
+  micro?: GanttMacroDto[];
+}
+
+export interface IGantt {
+  nomeProjeto: string;
+  macroatividades: GanttMacroDto[];
+}
