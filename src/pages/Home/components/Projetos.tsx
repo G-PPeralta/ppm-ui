@@ -117,7 +117,9 @@ export default function NaoPrevistoComponent() {
                             w={5}
                             h={5}
                             bg={'#F4DD06'}
-                            align="center"
+                            display={'flex'}
+                            flexDirection="column"
+                            alignItems={'center'}
                             pt={'2px'}
                             sx={{ borderRadius: '100%' }}
                           >
@@ -129,7 +131,9 @@ export default function NaoPrevistoComponent() {
                             w={5}
                             h={5}
                             bg={'#93E01B'}
-                            align="center"
+                            display={'flex'}
+                            flexDirection="column"
+                            alignItems={'center'}
                             pt={'2px'}
                             sx={{ borderRadius: '100%' }}
                           >
@@ -143,7 +147,9 @@ export default function NaoPrevistoComponent() {
                             w={5}
                             h={5}
                             bg={'#F94144'}
-                            align="center"
+                            display={'flex'}
+                            flexDirection="column"
+                            alignItems={'center'}
                             pt={'2px'}
                             sx={{ borderRadius: '100%' }}
                           >
@@ -155,7 +161,9 @@ export default function NaoPrevistoComponent() {
                             w={5}
                             h={5}
                             bg={'#2E69FD'}
-                            align="center"
+                            display={'flex'}
+                            flexDirection="column"
+                            alignItems={'center'}
                             pt={'2px'}
                             sx={{ borderRadius: '100%' }}
                           >

@@ -52,7 +52,7 @@ export default function NaoPrevistoComponent() {
           }}
           borderRadius={{ base: 'none', sm: 'xl' }}
         >
-          <Box align={'center'}>
+          <Box display={'flex'} flexDirection="column" alignItems={'center'}>
             <Text
               mb={1}
               sx={{ fontSize: 18, fontWeight: '600', alignSelf: 'center' }}
@@ -63,10 +63,12 @@ export default function NaoPrevistoComponent() {
             <Box mt={2}>
               <Box display={'flex'} w={315} justifyContent="space-between">
                 <Box
+                  display={'flex'}
+                  flexDirection="column"
+                  alignItems={'center'}
                   w={120}
                   bg={'#F4DD06'}
                   py={1}
-                  align={'center'}
                   justifyContent={'center'}
                 >
                   <Text
@@ -74,14 +76,16 @@ export default function NaoPrevistoComponent() {
                     sx={{ fontSize: 16, fontWeight: '600' }}
                     color="#ffffff"
                   >
-                    {'C&M'}
+                    C&M
                   </Text>
                 </Box>
                 <Box
+                  display={'flex'}
+                  flexDirection="column"
+                  alignItems={'center'}
                   w={120}
                   bg={'#93E01B'}
                   py={1}
-                  align={'center'}
                   justifyContent={'center'}
                 >
                   <Text
@@ -133,10 +137,12 @@ export default function NaoPrevistoComponent() {
             <Box mb={1}>
               <Box display={'flex'} w={315} justifyContent="space-between">
                 <Box
+                  display={'flex'}
+                  flexDirection="column"
+                  alignItems={'center'}
                   w={120}
                   bg={'#F94144'}
                   py={1}
-                  align={'center'}
                   justifyContent={'center'}
                 >
                   <Text
@@ -148,10 +154,12 @@ export default function NaoPrevistoComponent() {
                   </Text>
                 </Box>
                 <Box
+                  display={'flex'}
+                  flexDirection="column"
+                  alignItems={'center'}
                   w={120}
                   bg={'#2E69FD'}
                   py={1}
-                  align={'center'}
                   justifyContent={'center'}
                 >
                   <Text
