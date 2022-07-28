@@ -33,6 +33,8 @@ export function useProjects() {
       typeProject: '',
       demand: '',
       comments: '',
+      modalResponsible: [],
+      modalType: [],
     },
     validationSchema: projectRegisterSchema,
     onSubmit: async (values) => {
