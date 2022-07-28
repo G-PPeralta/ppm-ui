@@ -21,6 +21,8 @@ import { useProjects } from 'hooks/useProjects';
 
 import { postProject } from 'services/post/ProjectRegister';
 
+import { RegisterResponsibleModal } from './Components/RegisterResponsibleModal';
+
 export function ProjectsRegistration() {
   const { projectsForm, loading } = useProjects();
   const wd = window.innerWidth;
@@ -65,6 +67,7 @@ export function ProjectsRegistration() {
                 <Box display={wd > 100 ? 'flex' : ''}>
                   <Stack spacing="6" w="100%">
                     <Stack spacing="5">
+                      <RegisterResponsibleModal />
                       <FormControl>
                         <FormLabel htmlFor="name">PROJETO</FormLabel>
                         <Input
@@ -102,6 +105,59 @@ export function ProjectsRegistration() {
                             </TextError>
                           )}
                       </FormControl>
+
+                      {/* <Flex
+                        flexDirection={useBreakpointValue({
+                          base: 'column',
+                          md: 'row',
+                        })}
+                      >
+                        <FormControl>
+                          <FormLabel htmlFor="responsible">
+                            RESPONSÁVEL
+                          </FormLabel>
+                          <Select
+                            id="responsibleId"
+                            name="responsible"
+                            value={projectsForm.values.responsible}
+                            onChange={projectsForm.handleChange}
+                            w={useBreakpointValue({ base: '100%', md: '95%' })}
+                          >
+                            <option value="1">Alan</option>
+                            <option value="2">Gabriel</option>
+                            <option value="3">Eduardo</option>
+                          </Select>
+                          {projectsForm.errors.responsible &&
+                            projectsForm.touched.responsible && (
+                              <TextError>
+                                {projectsForm.errors.responsible}
+                              </TextError>
+                            )}
+                        </FormControl>
+
+                        <FormControl>
+                          <FormLabel htmlFor="coordinator">
+                            COORDENADOR
+                          </FormLabel>
+                          <Select
+                            id="coordinatorId"
+                            name="coordinator"
+                            value={projectsForm.values.coordinator}
+                            onChange={projectsForm.handleChange}
+                            w={useBreakpointValue({ base: '100%', md: '100%' })}
+                          >
+                            <option value="1">Alan</option>
+                            <option value="2">Gabriel</option>
+                            <option value="3">Eduardo</option>
+                          </Select>
+                          {projectsForm.errors.coordinator &&
+                            projectsForm.touched.coordinator && (
+                              <TextError>
+                                {projectsForm.errors.coordinator}
+                              </TextError>
+                            )}
+                        </FormControl>
+                      </Flex> */}
                     </Stack>
                     <Stack spacing="5">
                       <Flex
@@ -394,16 +450,16 @@ export function ProjectsRegistration() {
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '95%' })}
                         >
-                          <option value="Alta">Panelas e ETC Catu</option>
-                          <option value="Média">EGNA Conceição</option>
-                          <option value="Baixa">Poços</option>
-                          <option value="Baixa">Pilar</option>
-                          <option value="Baixa">EPFU</option>
-                          <option value="Baixa">Paru</option>
-                          <option value="Baixa">EPPIR</option>
-                          <option value="Baixa">P16</option>
-                          <option value="Baixa">Estação Coletora Anambé</option>
-                          <option value="Baixa">UPGN Pilar e ECPIR</option>
+                          <option value="1">EGNA Conceição</option>
+                          <option value="2">EPFU</option>
+                          <option value="3">EPPIR</option>
+                          <option value="4">Estação Coletora Anambé</option>
+                          <option value="5">P16</option>
+                          <option value="6">Panelas e ETC Catu</option>
+                          <option value="7">Paru</option>
+                          <option value="8">Pilar</option>
+                          <option value="9">Poços</option>
+                          <option value="10">UPGN Pilar e ECPIR</option>
                         </Select>
                         {projectsForm.errors.place &&
                           projectsForm.touched.place && (
