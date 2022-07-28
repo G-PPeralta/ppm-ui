@@ -1,5 +1,4 @@
 import { Box } from '@chakra-ui/react';
-
 import Sidebar from 'components/SideBar';
 
 import AreasDemandadas from './components/AreasDemandadas';

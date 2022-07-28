@@ -1,4 +1,5 @@
 import { IconType } from 'react-icons';
+import { BsBarChartSteps } from 'react-icons/bs';
 import {
   FiHome,
   FiTrendingUp,
@@ -24,4 +25,5 @@ export const LinkItems: Array<LinkItemProps> = [
   { name: 'Relatórios', icon: FiFile, link: '/reports' },
   { name: 'Infográficos', icon: FiBarChart, link: '/infographics' },
   { name: 'Alterar Permissões', icon: FiUsers, link: '/permissions' },
+  { name: 'Gantt', icon: BsBarChartSteps, link: '/gantt' },
 ];
