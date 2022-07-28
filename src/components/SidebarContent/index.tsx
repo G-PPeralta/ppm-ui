@@ -49,8 +49,8 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
         </Link>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link) => (
-        <>
+      {LinkItems.map((link, index) => (
+        <div key={index}>
           {!verifyPermissionAdmin(link.name) && (
             <NavItem key={link.name} icon={link.icon} link={link.link || '/'}>
               <Text
@@ -68,7 +68,7 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
               </Text>
             </NavItem>
           )}
-        </>
+        </div>
       ))}
     </Box>
   );
