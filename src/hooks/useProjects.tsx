@@ -33,7 +33,7 @@ export function useProjects() {
       typeProject: '',
       demand: '',
       comments: '',
-      modalResponsible: [],
+      modalResponsible: '',
       modalType: [],
     },
     validationSchema: projectRegisterSchema,
@@ -59,6 +59,8 @@ export function useProjects() {
         typeProject: values.typeProject,
         demand: values.demand,
         comments: values.comments,
+        modalResponsible: values.modalResponsible,
+        modalType: values.modalType,
       };
 
       setLoading(true);

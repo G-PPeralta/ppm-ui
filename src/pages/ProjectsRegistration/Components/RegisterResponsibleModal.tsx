@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 
 import {
@@ -26,6 +26,11 @@ import { useProjects } from 'hooks/useProjects';
 
 export function RegisterResponsibleModal() {
   const [numberOfResponsibles, setNumberOfResponsibles] = useState([1]);
+  const { projectsForm } = useProjects();
+
+  useEffect(() => {
+    console.log(projectsForm.values.modalResponsible);
+  }, [projectsForm.values]);
 
   function addResponsible() {
     setNumberOfResponsibles([
@@ -33,7 +38,6 @@ export function RegisterResponsibleModal() {
       numberOfResponsibles.length + 1,
     ]);
   }
-  const { projectsForm } = useProjects();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -71,7 +75,7 @@ export function RegisterResponsibleModal() {
                       id="name"
                       type="text"
                       name="name"
-                      value={projectsForm.values.modalResponsible[index]}
+                      value={projectsForm.values.modalResponsible}
                       onChange={projectsForm.handleChange}
                       width="95%"
                     />

@@ -35,7 +35,7 @@ export function useProfile() {
         nome: values.name,
         telefone: values.telephone,
         email: values.email,
-        area_atuacao: values.area,
+        areaAtuacao: values.area,
         role_id: values.accessLevel,
       };
 
@@ -71,7 +71,7 @@ export function useProfile() {
           profileForm.setFieldValue('name', data[0]?.nome);
           profileForm.setFieldValue('telephone', data[0]?.telefone);
           profileForm.setFieldValue('email', data[0]?.email);
-          profileForm.setFieldValue('area', data[0]?.area_atuacao);
+          profileForm.setFieldValue('area', data[0]?.areaAtuacao);
           profileForm.setFieldValue('accessLevel', data[0]?.role_id);
         }
 
