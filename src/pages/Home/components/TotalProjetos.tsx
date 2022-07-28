@@ -128,7 +128,13 @@ export default function TotalProjetosComponent() {
               </Text>
             </Box>
             <Box ml={5}>
-              <StackedBarChart />
+              <StackedBarChart
+                showY={false}
+                sizeW={280}
+                sizeH={240}
+                numberBars={4}
+                barW={25}
+              />
             </Box>
             <Box ml={5} sx={{ width: 190 }}>
               <Text
