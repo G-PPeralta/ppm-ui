@@ -29,7 +29,7 @@ export function RegisterResponsibleModal() {
   const { projectsForm } = useProjects();
 
   useEffect(() => {
-    console.log(projectsForm.values.modalResponsible);
+    // console.log(projectsForm.values.modalResponsible);
   }, [projectsForm.values]);
 
   function addResponsible() {
