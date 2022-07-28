@@ -75,7 +75,7 @@ export function RegisterResponsibleModal() {
                       id="name"
                       type="text"
                       name="name"
-                      value={projectsForm.values.modalResponsible}
+                      value={projectsForm.values.modalResponsible[index]}
                       onChange={projectsForm.handleChange}
                       width="95%"
                     />
