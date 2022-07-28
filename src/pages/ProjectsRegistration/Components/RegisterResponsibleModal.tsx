@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 
 import {
@@ -26,6 +26,11 @@ import { useProjects } from 'hooks/useProjects';
 
 export function RegisterResponsibleModal() {
   const [numberOfResponsibles, setNumberOfResponsibles] = useState([1]);
+  const { projectsForm } = useProjects();
+
+  useEffect(() => {
+    // console.log(projectsForm.values.modalResponsible);
+  }, [projectsForm.values]);
 
   function addResponsible() {
     setNumberOfResponsibles([
@@ -33,7 +38,6 @@ export function RegisterResponsibleModal() {
       numberOfResponsibles.length + 1,
     ]);
   }
-  const { projectsForm } = useProjects();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -105,22 +109,6 @@ export function RegisterResponsibleModal() {
                         <TextError>{projectsForm.errors.modalType}</TextError>
                       )}
                   </FormControl>
-                  <IconButton
-                    aria-label="Plus sign"
-                    icon={<BsPlusLg />}
-                    // onClick={onOpen}
-                    background="origem.300"
-                    variant="primary"
-                    color="white"
-                    mr={2}
-                    mb={1}
-                    isRound={true}
-                    size="sm"
-                    _hover={{
-                      background: 'origem.500',
-                      transition: 'all 0.4s',
-                    }}
-                  />
                 </Flex>
               ))}
               <Flex

@@ -5,7 +5,7 @@ export interface LoginProps {
 
 export interface User {
   id: number;
-  area_atuacao: string;
+  areaAtuacao: string;
   email: string;
   nome: string;
   perfil: string;
@@ -21,7 +21,7 @@ export interface ResponseLogin {
 
 export interface RegisterProps {
   id?: number;
-  area_atuacao: string;
+  areaAtuacao: string;
   email: string;
   nome: string;
   perfil?: string;
@@ -43,7 +43,7 @@ export interface ResponsePermissions {
   nome: string;
   email: string;
   telefone: string;
-  area_atuacao: string;
+  areaAtuacao: string;
   avatar: string;
   role_id: number;
   nome_role: string;
@@ -54,7 +54,7 @@ export interface ResponseUserPending {
   nome: string;
   email: string;
   telefone: string;
-  area_atuacao: string;
+  areaAtuacao: string;
   avatar: string;
   nome_role: string;
 }

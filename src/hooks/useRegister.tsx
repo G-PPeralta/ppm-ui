@@ -28,7 +28,7 @@ export function useRegister() {
         nome: values.name,
         email: values.email,
         telefone: values.telephone,
-        area_atuacao: values.area,
+        areaAtuacao: values.area,
         senha: values.password,
       };
 
