@@ -8,9 +8,9 @@ import {
 } from '@chakra-ui/react';
 
 import PercentPieChart from 'components/PercentPieChart';
-// import StackedBarChart from 'components/StackedBarChart';
+import StackedBarChart from 'components/StackedBarChart';
 
-export default function NaoPrevistoComponent() {
+export default function AreasDemandadasComponent() {
   const grafData1 = [
     {
       name: 'Undone',
@@ -91,15 +91,14 @@ export default function NaoPrevistoComponent() {
               Áreas Demandadas
             </Text>
             <Box display={'flex'} w={'100%'} justifyContent="space-between">
-              <Box>
-                {/* <StackedBarChart /> */}
-                <Text
-                  mb={1}
-                  sx={{ fontSize: 14, fontWeight: '600', alignSelf: 'center' }}
-                  color="#0f0"
-                >
-                  StackedBarChart
-                </Text>
+              <Box ml={-4} pt={6}>
+                <StackedBarChart
+                  showY={false}
+                  sizeW={180}
+                  sizeH={180}
+                  numberBars={3}
+                  barW={20}
+                />
               </Box>
               <Box w={150}>
                 <Box
@@ -107,7 +106,7 @@ export default function NaoPrevistoComponent() {
                   display="flex"
                   w={'100%'}
                   justifyContent="space-between"
-                  // align="center"
+                  align="center"
                 >
                   <Box>
                     <Text
@@ -149,7 +148,7 @@ export default function NaoPrevistoComponent() {
                   display="flex"
                   w={'100%'}
                   justifyContent="space-between"
-                  // align="center"
+                  align="center"
                 >
                   <Box mt={8}>
                     <PercentPieChart size={60} upDown={true} data={grafData3} />

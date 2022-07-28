@@ -7,31 +7,31 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-// import PieChart from 'components/PieChart';
+import PieChart from 'components/PieChart';
 
 export default function NaoPrevistoComponent() {
-  // const grafData = [
-  //   {
-  //     name: 'Engenharia',
-  //     value: 30,
-  //     color: '#93E01B',
-  //   },
-  //   {
-  //     name: 'C&M',
-  //     value: 30,
-  //     color: '#F4DD06',
-  //   },
-  //   {
-  //     name: 'Suprimentos',
-  //     value: 20,
-  //     color: '#F94144',
-  //   },
-  //   {
-  //     name: 'Pré-projeto',
-  //     value: 20,
-  //     color: '#2E69FD',
-  //   },
-  // ];
+  const grafData = [
+    {
+      name: 'Engenharia',
+      value: 30,
+      color: '#93E01B',
+    },
+    {
+      name: 'C&M',
+      value: 30,
+      color: '#F4DD06',
+    },
+    {
+      name: 'Suprimentos',
+      value: 20,
+      color: '#F94144',
+    },
+    {
+      name: 'Pré-projeto',
+      value: 20,
+      color: '#2E69FD',
+    },
+  ];
 
   return (
     <Stack spacing="8">
@@ -52,9 +52,7 @@ export default function NaoPrevistoComponent() {
           }}
           borderRadius={{ base: 'none', sm: 'xl' }}
         >
-          <Box
-          // align={'center'}
-          >
+          <Box align={'center'}>
             <Text
               mb={1}
               sx={{ fontSize: 18, fontWeight: '600', alignSelf: 'center' }}
@@ -68,7 +66,7 @@ export default function NaoPrevistoComponent() {
                   w={120}
                   bg={'#F4DD06'}
                   py={1}
-                  // align={'center'}
+                  align={'center'}
                   justifyContent={'center'}
                 >
                   <Text
@@ -83,7 +81,7 @@ export default function NaoPrevistoComponent() {
                   w={120}
                   bg={'#93E01B'}
                   py={1}
-                  // align={'center'}
+                  align={'center'}
                   justifyContent={'center'}
                 >
                   <Text
@@ -117,7 +115,7 @@ export default function NaoPrevistoComponent() {
                   18%
                 </Text>
               </Box>
-              {/* <PieChart size={80} data={grafData} /> */}
+              <PieChart size={80} data={grafData} />
               <Box
                 h={20}
                 justifyContent={'space-between'}
@@ -138,7 +136,7 @@ export default function NaoPrevistoComponent() {
                   w={120}
                   bg={'#F94144'}
                   py={1}
-                  // align={'center'}
+                  align={'center'}
                   justifyContent={'center'}
                 >
                   <Text
@@ -153,7 +151,7 @@ export default function NaoPrevistoComponent() {
                   w={120}
                   bg={'#2E69FD'}
                   py={1}
-                  // align={'center'}
+                  align={'center'}
                   justifyContent={'center'}
                 >
                   <Text

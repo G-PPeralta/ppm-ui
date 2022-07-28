@@ -5,10 +5,12 @@ import Sidebar from 'components/SideBar';
 import AreasDemandadas from './components/AreasDemandadas';
 import FaseProjetos from './components/FaseProjetos';
 import NaoPrevisto from './components/NaoPrevisto';
+import PrevistoxRealizado from './components/PrevistoxRealizado';
 import Projetos from './components/Projetos';
 import Realizado from './components/Realizado';
 import TotalOrcamentos from './components/TotalOrcamentos';
 import TotalProjetos from './components/TotalProjetos';
+
 export function Home() {
   return (
     <>
@@ -35,6 +37,9 @@ export function Home() {
           <Box ml={5}>
             <AreasDemandadas />
           </Box>
+        </Box>
+        <Box mt={5}>
+          <PrevistoxRealizado />
         </Box>
       </Sidebar>
     </>

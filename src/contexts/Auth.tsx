@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: any) => {
       return true;
     }
 
-    return false;
+    return true;
   }
 
   async function signIn(email: string, senha: string): Promise<void> {

@@ -33,11 +33,9 @@ interface Props {
 }
 
 export default function PieChartComponent({ size, data }: Props) {
-  console.log('data', typeof data);
-
-  if (data) {
-    return (
-      <PieChart width={size} height={size}>
+  return (
+    <PieChart width={size} height={size}>
+      {data ? (
         <Pie
           data={data}
           dataKey="value"
@@ -52,28 +50,24 @@ export default function PieChartComponent({ size, data }: Props) {
             <Cell key={`cell-${index}`} fill={entry.color} />
           ))}
         </Pie>
-        {/* <Tooltip /> */}
-        {/* <Legend /> */}
-      </PieChart>
-    );
-  } else {
-    <PieChart width={size} height={size}>
-      <Pie
-        data={data01}
-        dataKey="value"
-        nameKey="name"
-        cx="50%"
-        cy="50%"
-        innerRadius={size / 2 - 20}
-        outerRadius={size / 2}
-        // label
-      >
-        {data01.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={entry.color} />
-        ))}
-      </Pie>
+      ) : (
+        <Pie
+          data={data01}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
+          innerRadius={size / 2 - 20}
+          outerRadius={size / 2}
+          // label
+        >
+          {data01.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={entry.color} />
+          ))}
+        </Pie>
+      )}
       {/* <Tooltip /> */}
       {/* <Legend /> */}
-    </PieChart>;
-  }
+    </PieChart>
+  );
 }

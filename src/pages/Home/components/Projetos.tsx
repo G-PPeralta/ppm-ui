@@ -117,7 +117,7 @@ export default function NaoPrevistoComponent() {
                             w={5}
                             h={5}
                             bg={'#F4DD06'}
-                            // align="center"
+                            align="center"
                             pt={'2px'}
                             sx={{ borderRadius: '100%' }}
                           >
@@ -129,7 +129,7 @@ export default function NaoPrevistoComponent() {
                             w={5}
                             h={5}
                             bg={'#93E01B'}
-                            // align="center"
+                            align="center"
                             pt={'2px'}
                             sx={{ borderRadius: '100%' }}
                           >
@@ -143,7 +143,7 @@ export default function NaoPrevistoComponent() {
                             w={5}
                             h={5}
                             bg={'#F94144'}
-                            // align="center"
+                            align="center"
                             pt={'2px'}
                             sx={{ borderRadius: '100%' }}
                           >
@@ -155,7 +155,7 @@ export default function NaoPrevistoComponent() {
                             w={5}
                             h={5}
                             bg={'#2E69FD'}
-                            // align="center"
+                            align="center"
                             pt={'2px'}
                             sx={{ borderRadius: '100%' }}
                           >
