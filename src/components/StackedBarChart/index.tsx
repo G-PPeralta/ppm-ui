@@ -271,8 +271,6 @@ export default function StackedBarChart() {
     ...dataPercentage[index],
   }));
 
-  console.log(dataFinal);
-
   return (
     <ResponsiveContainer width={280} height={240}>
       <BarChart data={dataFinal} className={style.chart}>
