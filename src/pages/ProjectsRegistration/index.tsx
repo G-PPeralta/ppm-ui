@@ -128,7 +128,7 @@ export function ProjectsRegistration() {
   //   console.log(projectsForm.values);
   // }, [projectsForm.values]);
 
-  console.log(demandaState);
+  // console.log(demandaState);
 
   return (
     <>
@@ -319,7 +319,7 @@ export function ProjectsRegistration() {
                             {classificacaoState.map((classificacao) => (
                               <option
                                 key={classificacao.id}
-                                value={classificacao.classificacao}
+                                value={classificacao.id}
                               >
                                 {classificacao.classificacao}
                               </option>
@@ -352,7 +352,7 @@ export function ProjectsRegistration() {
                             {solicitanteState.map((solicitante) => (
                               <option
                                 key={solicitante.id}
-                                value={solicitante.solicitante}
+                                value={solicitante.id}
                               >
                                 {solicitante.solicitante}
                               </option>
@@ -402,7 +402,7 @@ export function ProjectsRegistration() {
                             onChange={projectsForm.handleChange}
                           >
                             {poloState.map((polo) => (
-                              <option key={polo.id} value={polo.polo}>
+                              <option key={polo.id} value={polo.id}>
                                 {polo.polo}
                               </option>
                             ))}
@@ -522,10 +522,7 @@ export function ProjectsRegistration() {
                           w={useBreakpointValue({ base: '100%', md: '95%' })}
                         >
                           {prioridadeState.map((prioridade) => (
-                            <option
-                              key={prioridade.id}
-                              value={prioridade.prioridade}
-                            >
+                            <option key={prioridade.id} value={prioridade.id}>
                               {prioridade.prioridade}
                             </option>
                           ))}
@@ -552,7 +549,7 @@ export function ProjectsRegistration() {
                           {complexidadeState.map((complexidade) => (
                             <option
                               key={complexidade.id}
-                              value={complexidade.complexidade}
+                              value={complexidade.id}
                             >
                               {complexidade.complexidade}
                             </option>
@@ -583,7 +580,7 @@ export function ProjectsRegistration() {
                           w={useBreakpointValue({ base: '100%', md: '95%' })}
                         >
                           {localProjetoState.map((local) => (
-                            <option key={local.id} value={local.local}>
+                            <option key={local.id} value={local.id}>
                               {local.local}
                             </option>
                           ))}
@@ -604,7 +601,7 @@ export function ProjectsRegistration() {
                           w={useBreakpointValue({ base: '100%', md: '95%' })}
                         >
                           {divisaoState.map((divisao) => (
-                            <option key={divisao.id} value={divisao.divisao}>
+                            <option key={divisao.id} value={divisao.id}>
                               {divisao.divisao}
                             </option>
                           ))}
@@ -626,7 +623,7 @@ export function ProjectsRegistration() {
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         >
                           {statusProjetoState.map((status) => (
-                            <option key={status.id} value={status.status}>
+                            <option key={status.id} value={status.id}>
                               {status.status}
                             </option>
                           ))}
@@ -655,7 +652,7 @@ export function ProjectsRegistration() {
                           w={useBreakpointValue({ base: '100%', md: '95%' })}
                         >
                           {gateState.map((gate) => (
-                            <option key={gate.id} value={gate.gate}>
+                            <option key={gate.id} value={gate.id}>
                               {gate.gate}
                             </option>
                           ))}
@@ -676,7 +673,7 @@ export function ProjectsRegistration() {
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         >
                           {tipoProjetoState.map((tipo) => (
-                            <option key={tipo.id} value={tipo.tipo}>
+                            <option key={tipo.id} value={tipo.id}>
                               {tipo.tipo}
                             </option>
                           ))}
@@ -705,7 +702,7 @@ export function ProjectsRegistration() {
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         >
                           {demandaState.map((demanda) => (
-                            <option key={demanda.id} value={demanda.demanda}>
+                            <option key={demanda.id} value={demanda.id}>
                               {demanda.demanda}
                             </option>
                           ))}

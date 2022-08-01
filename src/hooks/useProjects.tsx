@@ -10,6 +10,14 @@ import { postProject } from 'services/post/ProjectRegister';
 export function useProjects() {
   const { toast } = useToast();
 
+  function retrieveLocalStoragedItems(key: string) {
+    const storagedItem = localStorage.getItem(key);
+    if (storagedItem) {
+      return JSON.parse(storagedItem);
+    }
+    return '';
+  }
+
   const [loading, setLoading] = useState(false);
   const projectsForm = useFormik({
     initialValues: {
@@ -17,21 +25,21 @@ export function useProjects() {
       descricao: '',
       justificativa: '',
       valorTotalPrevisto: 0,
-      classificacaoId: '',
-      solicitanteId: '',
-      poloId: '',
+      classificacaoId: 0,
+      solicitanteId: 0,
+      poloId: 0,
       dataInicio: '',
       dataFim: '',
       dataInicioReal: '',
       dataFimReal: '',
-      prioridadeId: '',
-      complexidadeId: '',
-      localId: '',
-      divisaoId: '',
-      statusId: '',
-      gateId: '',
-      tipoProjetoId: '',
-      demandaId: '',
+      prioridadeId: 0,
+      complexidadeId: 0,
+      localId: 0,
+      divisaoId: 0,
+      statusId: 0,
+      gateId: 0,
+      tipoProjetoId: 0,
+      demandaId: 0,
       comentarios: '',
       nomeResponsavel: '',
       tipoResponsavel: '',
@@ -42,25 +50,28 @@ export function useProjects() {
         nomeProjeto: values.nomeProjeto,
         descricao: values.descricao,
         valorTotalPrevisto: Number(values.valorTotalPrevisto),
-        classificacaoId: values.classificacaoId,
-        solicitanteId: values.solicitanteId,
+        classificacaoId: Number(values.classificacaoId),
+        solicitanteId: Number(values.solicitanteId),
         justificativa: values.justificativa,
-        poloId: values.poloId,
+        poloId: Number(values.poloId),
         dataInicio: values.dataInicio,
         dataFim: values.dataFim,
         dataInicioReal: values.dataInicioReal,
         dataFimReal: values.dataFimReal,
-        prioridadeId: values.prioridadeId,
-        complexidadeId: values.complexidadeId,
-        localId: values.localId,
-        divisaoId: values.divisaoId,
-        statusId: values.statusId,
-        gateId: values.gateId,
-        tipoProjetoId: values.tipoProjetoId,
-        demandaId: values.demandaId,
+        prioridadeId: Number(values.prioridadeId),
+        complexidadeId: Number(values.complexidadeId),
+        localId: Number(values.localId),
+        divisaoId: Number(values.divisaoId),
+        statusId: Number(values.statusId),
+        gateId: Number(values.statusId),
+        tipoProjetoId: Number(values.tipoProjetoId),
+        demandaId: Number(values.demandaId),
         comentarios: values.comentarios,
-        nomeResponsavel: values.nomeResponsavel,
-        tipoResponsavel: values.tipoResponsavel,
+        nomeResponsavel:
+          retrieveLocalStoragedItems('responsaveis').nomeResponsavel,
+        tipoResponsavel: Number(
+          retrieveLocalStoragedItems('responsaveis').tipoResponsavel,
+        ),
       };
 
       setLoading(true);

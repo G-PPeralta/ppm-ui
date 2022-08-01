@@ -36,7 +36,7 @@ export function RegisterResponsibleModal() {
   const { projectsForm } = useProjects();
 
   useEffect(() => {
-    console.log(projectsForm.values);
+    // console.log(projectsForm.values);
   }, [projectsForm.values]);
 
   function addResponsible() {
@@ -121,7 +121,9 @@ export function RegisterResponsibleModal() {
                         width="95%"
                       >
                         {tipoResponsavel.map((tipo) => (
-                          <option key={tipo.id}>{tipo.tipo_responsavel}</option>
+                          <option key={tipo.id} value={tipo.id}>
+                            {tipo.tipo_responsavel}
+                          </option>
                         ))}
                       </Select>
                     )}
@@ -162,7 +164,16 @@ export function RegisterResponsibleModal() {
                 background="origem.300"
                 variant="primary"
                 color="white"
-                onClick={() => nossoOnClose()}
+                onClick={() => {
+                  localStorage.setItem(
+                    'responsaveis',
+                    JSON.stringify({
+                      nomeResponsavel: projectsForm.values.nomeResponsavel,
+                      tipoResponsavel: projectsForm.values.tipoResponsavel,
+                    }),
+                  );
+                  nossoOnClose();
+                }}
                 _hover={{
                   background: 'origem.500',
                   transition: 'all 0.4s',

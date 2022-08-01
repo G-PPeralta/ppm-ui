@@ -63,25 +63,25 @@ export interface RegisterProjectProps {
   nomeProjeto: string;
   descricao: string;
   valorTotalPrevisto: number;
-  classificacaoId: string;
-  solicitanteId: string;
+  classificacaoId: number;
+  solicitanteId: number;
   justificativa: string;
-  poloId: string;
+  poloId: number;
   dataInicio: string;
   dataFim: string;
   dataInicioReal: string;
   dataFimReal: string;
-  prioridadeId: string;
-  complexidadeId: string;
-  localId: string;
-  divisaoId: string;
-  statusId: string;
-  gateId: string;
-  tipoProjetoId: string;
-  demandaId: string;
+  prioridadeId: number;
+  complexidadeId: number;
+  localId: number;
+  divisaoId: number;
+  statusId: number;
+  gateId: number;
+  tipoProjetoId: number;
+  demandaId: number;
   comentarios: string;
   nomeResponsavel: string;
-  tipoResponsavel: string;
+  tipoResponsavel: number;
 }
 
 export interface GanttPayload {
