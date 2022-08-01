@@ -191,3 +191,9 @@ export interface TipoProjeto {
   tipo: string;
   deletado: boolean;
 }
+
+export interface Demanda {
+  id: number;
+  demanda: string;
+  deletado: boolean;
+}

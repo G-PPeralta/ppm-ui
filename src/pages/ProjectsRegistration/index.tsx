@@ -26,6 +26,7 @@ import {
   StatusProjeto,
   Gate,
   TipoProjeto,
+  Demanda,
 } from 'interfaces/Services';
 
 import Sidebar from 'components/SideBar';
@@ -36,6 +37,7 @@ import { useProjects } from 'hooks/useProjects';
 import {
   getClassificacao,
   getComplexidade,
+  getDemanda,
   getDivisao,
   getGate,
   getLocalProjeto,
@@ -78,6 +80,8 @@ export function ProjectsRegistration() {
     [] as TipoProjeto[],
   );
 
+  const [demandaState, setDemandaState] = useState<Demanda[]>([] as Demanda[]);
+
   async function handleGetProjetos() {
     const reqGetClassificacao = await getClassificacao();
     const reqGetPolo = await getPolo();
@@ -89,6 +93,7 @@ export function ProjectsRegistration() {
     const reqGetStatusProjeto = await getStatusProjeto();
     const reqGetGate = await getGate();
     const reqGetTipoProjeto = await getTipoProjeto();
+    const reqGetDemanda = await getDemanda();
 
     const dataReqClassificacao: Classificacao[] = reqGetClassificacao.data;
     const dataReqPolo: Polo[] = reqGetPolo.data;
@@ -99,7 +104,8 @@ export function ProjectsRegistration() {
     const dataReqDivisao: Divisao[] = reqGetDivisao.data;
     const dataReqStatusProjeto: StatusProjeto[] = reqGetStatusProjeto.data;
     const dataReqGate: Gate[] = reqGetGate.data;
-    const dataReqGetTipoProjeto: TipoProjeto[] = reqGetTipoProjeto.data;
+    const dataReqTipoProjeto: TipoProjeto[] = reqGetTipoProjeto.data;
+    const dataReqDemanda: Demanda[] = reqGetDemanda.data;
 
     setClassificacaoState(dataReqClassificacao);
     setPoloState(dataReqPolo);
@@ -110,7 +116,8 @@ export function ProjectsRegistration() {
     setDivisaoState(dataReqDivisao);
     setStatusProjetoState(dataReqStatusProjeto);
     setGateState(dataReqGate);
-    setTipoProjetoState(dataReqGetTipoProjeto);
+    setTipoProjetoState(dataReqTipoProjeto);
+    setDemandaState(dataReqDemanda);
   }
 
   useEffect(() => {
@@ -121,7 +128,7 @@ export function ProjectsRegistration() {
   //   console.log(projectsForm.values);
   // }, [projectsForm.values]);
 
-  console.log(tipoProjetoState);
+  console.log(demandaState);
 
   return (
     <>
@@ -697,8 +704,11 @@ export function ProjectsRegistration() {
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         >
-                          <option value="origem">Origem</option>
-                          <option value="azulGoiaba">Azul-Goiaba</option>
+                          {demandaState.map((demanda) => (
+                            <option key={demanda.id} value={demanda.demanda}>
+                              {demanda.demanda}
+                            </option>
+                          ))}
                         </Select>
                         {projectsForm.errors.demandaId &&
                           projectsForm.touched.demandaId && (

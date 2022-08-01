@@ -142,3 +142,16 @@ export async function getTipoProjeto(): Promise<{
 
   return { data, status };
 }
+
+export async function getDemanda(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get('/demanda', {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
+    },
+  });
+
+  return { data, status };
+}
