@@ -21,6 +21,7 @@ import {
   Solicitante,
   Prioridade,
   Complexidade,
+  LocalProjeto,
 } from 'interfaces/Services';
 
 import Sidebar from 'components/SideBar';
@@ -31,6 +32,7 @@ import { useProjects } from 'hooks/useProjects';
 import {
   getClassificacao,
   getComplexidade,
+  getLocalProjeto,
   getPolo,
   getPrioridade,
   getSolicitante,
@@ -58,24 +60,31 @@ export function ProjectsRegistration() {
     [] as Complexidade[],
   );
 
+  const [localProjetoState, setLocalProjetoState] = useState<LocalProjeto[]>(
+    [] as LocalProjeto[],
+  );
+
   async function handleGetProjetos() {
     const reqGetClassificacao = await getClassificacao();
     const reqGetPolo = await getPolo();
     const reqGetSolicitante = await getSolicitante();
     const reqGetPrioridade = await getPrioridade();
     const reqGetComplexidade = await getComplexidade();
+    const reqGetLocalProjeto = await getLocalProjeto();
 
     const dataReqClassificacao: Classificacao[] = reqGetClassificacao.data;
     const dataReqPolo: Polo[] = reqGetPolo.data;
     const dataReqSolicitante: Solicitante[] = reqGetSolicitante.data;
     const dataReqPrioridade: Prioridade[] = reqGetPrioridade.data;
     const dataReqComplexidade: Complexidade[] = reqGetComplexidade.data;
+    const dataReqLocalProjeto: LocalProjeto[] = reqGetLocalProjeto.data;
 
     setClassificacaoState(dataReqClassificacao);
     setPoloState(dataReqPolo);
     setSolicitanteState(dataReqSolicitante);
     setPrioridadeState(dataReqPrioridade);
     setComplexidadeState(dataReqComplexidade);
+    setLocalProjetoState(dataReqLocalProjeto);
 
     setLoadingProjetos(false);
   }
@@ -84,8 +93,12 @@ export function ProjectsRegistration() {
     handleGetProjetos();
   }, []);
 
+  useEffect(() => {
+    console.log(projectsForm.values);
+  }, [projectsForm.values]);
+
   console.log(loadingProjetos);
-  console.log(complexidadeState);
+  console.log(localProjetoState);
 
   return (
     <>

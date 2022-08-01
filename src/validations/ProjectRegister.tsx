@@ -31,6 +31,6 @@ export const projectRegisterSchema = yup.object({
   tipoProjetoId: yup.string(),
   demandaId: yup.string(),
   comentarios: yup.string().required(''),
-  nomeResponsavel: yup.string(),
-  tipoResponsavel: yup.string(),
+  // nomeResponsavel: yup.string(),
+  // tipoResponsavel: yup.string(),
 });

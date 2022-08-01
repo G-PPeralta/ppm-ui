@@ -161,3 +161,9 @@ export interface Complexidade {
   complexidade: string;
   deletado: boolean;
 }
+
+export interface LocalProjeto {
+  id: number;
+  local: string;
+  deletado: boolean;
+}

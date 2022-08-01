@@ -16,7 +16,6 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useDisclosure,
   IconButton,
 } from '@chakra-ui/react';
 import { TipoResponsavel } from 'interfaces/Services';
@@ -33,11 +32,11 @@ export function RegisterResponsibleModal() {
     [] as TipoResponsavel[],
   );
   const [loading, setLoading] = useState(true);
+  const [isOpen2, setIsOpen2] = useState(false);
   const { projectsForm } = useProjects();
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
-    console.log(projectsForm.values.nomeResponsavel);
+    console.log(projectsForm.values);
   }, [projectsForm.values]);
 
   function addResponsible() {
@@ -45,6 +44,10 @@ export function RegisterResponsibleModal() {
       ...numberOfResponsibles,
       numberOfResponsibles.length + 1,
     ]);
+  }
+
+  async function nossoOnClose() {
+    setIsOpen2(false);
   }
 
   async function handleGetTipoResponsavel() {
@@ -67,7 +70,7 @@ export function RegisterResponsibleModal() {
         <IconButton
           aria-label="Plus sign"
           icon={<BsPlusLg />}
-          onClick={onOpen}
+          onClick={() => setIsOpen2(true)}
           background="origem.300"
           variant="primary"
           color="white"
@@ -80,7 +83,7 @@ export function RegisterResponsibleModal() {
           }}
         />
         <h2>CADASTRAR RESPONSÁVEL </h2>
-        <Modal isOpen={isOpen} onClose={onClose} size="4xl">
+        <Modal isOpen={isOpen2} onClose={() => nossoOnClose()} size="4xl">
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>CADASTRAR RESPONSÁVEL</ModalHeader>
@@ -159,7 +162,7 @@ export function RegisterResponsibleModal() {
                 background="origem.300"
                 variant="primary"
                 color="white"
-                onClick={onClose}
+                onClick={() => nossoOnClose()}
                 _hover={{
                   background: 'origem.500',
                   transition: 'all 0.4s',
