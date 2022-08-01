@@ -149,3 +149,9 @@ export interface Solicitante {
   solicitante: string;
   deletado: boolean;
 }
+
+export interface Prioridade {
+  id: number;
+  prioridade: string;
+  deletado: boolean;
+}

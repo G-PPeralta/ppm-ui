@@ -15,7 +15,12 @@ import {
   InputLeftElement,
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
-import { Classificacao, Polo, Solicitante } from 'interfaces/Services';
+import {
+  Classificacao,
+  Polo,
+  Solicitante,
+  Prioridade,
+} from 'interfaces/Services';
 
 import Sidebar from 'components/SideBar';
 import { TextError } from 'components/TextError';
@@ -25,6 +30,7 @@ import { useProjects } from 'hooks/useProjects';
 import {
   getClassificacao,
   getPolo,
+  getPrioridade,
   getSolicitante,
 } from 'services/get/Projetos';
 import { postProject } from 'services/post/ProjectRegister';
@@ -34,8 +40,8 @@ import { RegisterResponsibleModal } from './Components/RegisterResponsibleModal'
 export function ProjectsRegistration() {
   const wd = window.innerWidth;
   const { projectsForm, loading } = useProjects();
-
   const [loadingProjetos, setLoadingProjetos] = useState(true);
+
   const [classificacaoState, setClassificacaoState] = useState<Classificacao[]>(
     [] as Classificacao[],
   );
@@ -43,21 +49,25 @@ export function ProjectsRegistration() {
   const [solicitanteState, setSolicitanteState] = useState<Solicitante[]>(
     [] as Solicitante[],
   );
+  const [prioridadeState, setPrioridadeState] = useState<Prioridade[]>(
+    [] as Prioridade[],
+  );
 
   async function handleGetProjetos() {
     const reqGetClassificacao = await getClassificacao();
     const reqGetPolo = await getPolo();
     const reqGetSolicitante = await getSolicitante();
+    const reqGetPrioridade = await getPrioridade();
 
     const dataReqClassificacao: Classificacao[] = reqGetClassificacao.data;
     const dataReqPolo: Polo[] = reqGetPolo.data;
     const dataReqSolicitante: Solicitante[] = reqGetSolicitante.data;
-    if (!dataReqClassificacao) {
-      return null;
-    }
+    const dataReqPrioridade: Prioridade[] = reqGetPrioridade.data;
+
     setClassificacaoState(dataReqClassificacao);
     setPoloState(dataReqPolo);
     setSolicitanteState(dataReqSolicitante);
+    setPrioridadeState(dataReqPrioridade);
 
     setLoadingProjetos(false);
   }
@@ -67,7 +77,7 @@ export function ProjectsRegistration() {
   }, []);
 
   console.log(loadingProjetos);
-  console.log(solicitanteState);
+  console.log(prioridadeState);
 
   return (
     <>
@@ -460,9 +470,14 @@ export function ProjectsRegistration() {
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '95%' })}
                         >
-                          <option value="Alta">Alta</option>
-                          <option value="Média">Média</option>
-                          <option value="Baixa">Baixa</option>
+                          {prioridadeState.map((prioridade) => (
+                            <option
+                              key={prioridade.id}
+                              value={prioridade.prioridade}
+                            >
+                              {prioridade.prioridade}
+                            </option>
+                          ))}
                         </Select>
                         {projectsForm.errors.prioridadeId &&
                           projectsForm.touched.prioridadeId && (
