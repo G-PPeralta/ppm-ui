@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import {
   Box,
   Button,
@@ -13,19 +15,42 @@ import {
   InputLeftElement,
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
+import { Classificacao } from 'interfaces/Services';
 
 import Sidebar from 'components/SideBar';
 import { TextError } from 'components/TextError';
 
 import { useProjects } from 'hooks/useProjects';
 
+import { getClassificacao } from 'services/get/Projetos';
 import { postProject } from 'services/post/ProjectRegister';
 
 import { RegisterResponsibleModal } from './Components/RegisterResponsibleModal';
 
 export function ProjectsRegistration() {
-  const { projectsForm, loading } = useProjects();
   const wd = window.innerWidth;
+  const { projectsForm, loading } = useProjects();
+  const [loadingProjetos, setLoadingProjetos] = useState(true);
+  const [classificacaoState, setClassificacaoState] = useState<Classificacao[]>(
+    [] as Classificacao[],
+  );
+
+  async function handleGetProjetos() {
+    const { data } = await getClassificacao();
+    const dataReqClassificacao: Classificacao[] = data;
+    if (!dataReqClassificacao) {
+      return null;
+    }
+    setClassificacaoState(dataReqClassificacao);
+    setLoadingProjetos(false);
+  }
+
+  useEffect(() => {
+    handleGetProjetos();
+  }, []);
+
+  console.log(loadingProjetos);
+  console.log(classificacaoState);
 
   return (
     <>
@@ -68,40 +93,43 @@ export function ProjectsRegistration() {
                   <Stack spacing="6" w="100%">
                     <Stack spacing="5">
                       <RegisterResponsibleModal />
+
                       <FormControl>
-                        <FormLabel htmlFor="name">PROJETO</FormLabel>
+                        <FormLabel htmlFor="nomeProjeto">PROJETO</FormLabel>
                         <Input
                           isRequired
                           placeholder="Nome do projeto"
-                          id="name"
+                          id="nomeProjeto"
                           type="text"
-                          name="name"
-                          value={projectsForm.values.name}
+                          name="nomeProjeto"
+                          value={projectsForm.values.nomeProjeto}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         />
-                        {projectsForm.errors.name &&
-                          projectsForm.touched.name && (
-                            <TextError>{projectsForm.errors.name}</TextError>
+                        {projectsForm.errors.nomeProjeto &&
+                          projectsForm.touched.nomeProjeto && (
+                            <TextError>
+                              {projectsForm.errors.nomeProjeto}
+                            </TextError>
                           )}
                       </FormControl>
                       <FormControl>
-                        <FormLabel htmlFor="description">DESCRIÇÃO</FormLabel>
+                        <FormLabel htmlFor="descricao">DESCRIÇÃO</FormLabel>
                         <Input
                           isRequired
                           placeholder="Aquisição e instalação"
-                          id="description"
+                          id="descricao"
                           type="text"
-                          name="description"
+                          name="descricao"
                           maxLength={15}
-                          value={projectsForm.values.description}
+                          value={projectsForm.values.descricao}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         />
-                        {projectsForm.errors.description &&
-                          projectsForm.touched.description && (
+                        {projectsForm.errors.descricao &&
+                          projectsForm.touched.descricao && (
                             <TextError>
-                              {projectsForm.errors.description}
+                              {projectsForm.errors.descricao}
                             </TextError>
                           )}
                       </FormControl>
@@ -167,7 +195,7 @@ export function ProjectsRegistration() {
                         })}
                       >
                         <FormControl>
-                          <FormLabel htmlFor="budget">
+                          <FormLabel htmlFor="valorTotalPrevisto">
                             VALOR TOTAL PREVISTO
                           </FormLabel>
                           <InputGroup>
@@ -183,8 +211,8 @@ export function ProjectsRegistration() {
                               placeholder="10.000,00"
                               id="valorTotalPrevisto"
                               type="text"
-                              name="budget"
-                              value={projectsForm.values.budget}
+                              name="valorTotalPrevisto"
+                              value={projectsForm.values.valorTotalPrevisto}
                               onChange={projectsForm.handleChange}
                               w={useBreakpointValue({
                                 base: '100%',
@@ -192,51 +220,48 @@ export function ProjectsRegistration() {
                               })}
                             />
                           </InputGroup>
-                          {projectsForm.errors.budget &&
-                            projectsForm.touched.budget && (
+                          {projectsForm.errors.valorTotalPrevisto &&
+                            projectsForm.touched.valorTotalPrevisto && (
                               <TextError>
-                                {projectsForm.errors.budget}
+                                {projectsForm.errors.valorTotalPrevisto}
                               </TextError>
                             )}
                         </FormControl>
                         <FormControl>
-                          <FormLabel htmlFor="classification">
+                          <FormLabel htmlFor="classificacaoId">
                             CLASSIFICAÇÃO
                           </FormLabel>
                           <Select
-                            id="classification"
-                            name="classification"
-                            value={projectsForm.values.classification}
+                            id="classificacaoId"
+                            name="classificacaoId"
+                            value={projectsForm.values.classificacaoId}
                             onChange={projectsForm.handleChange}
                             w={useBreakpointValue({ base: '100%', md: '95%' })}
                           >
-                            <option value="geracaoDeROIC">
-                              Geração de ROIC
-                            </option>
-                            <option value="regulatorio">Regulatório</option>
-                            <option value="reservatorio">Reservatório</option>
-                            <option value="segurançaOperacional">
-                              Segurança Operacional
-                            </option>
-                            <option value="manutençãoEmergencial">
-                              Manutenção Emergencial
-                            </option>
-                            <option value="contingencia">Contingência</option>
-                            <option value="melhoria">Melhoria</option>
+                            {classificacaoState.map((classificacao) => (
+                              <option
+                                key={classificacao.id}
+                                value={classificacao.classificacao}
+                              >
+                                {classificacao.classificacao}
+                              </option>
+                            ))}
                           </Select>
-                          {projectsForm.errors.classification &&
-                            projectsForm.touched.classification && (
+                          {projectsForm.errors.classificacaoId &&
+                            projectsForm.touched.classificacaoId && (
                               <TextError>
-                                {projectsForm.errors.classification}
+                                {projectsForm.errors.classificacaoId}
                               </TextError>
                             )}
                         </FormControl>
                         <FormControl>
-                          <FormLabel htmlFor="requester">SOLICITANTE</FormLabel>
+                          <FormLabel htmlFor="solicitanteId">
+                            SOLICITANTE
+                          </FormLabel>
                           <Select
                             id="solicitanteId"
-                            name="requester"
-                            value={projectsForm.values.requester}
+                            name="solicitanteId"
+                            value={projectsForm.values.solicitanteId}
                             onChange={projectsForm.handleChange}
                           >
                             <option value="Operacao">Operação</option>
@@ -247,10 +272,10 @@ export function ProjectsRegistration() {
                               Controle de Produção
                             </option>
                           </Select>
-                          {projectsForm.errors.requester &&
-                            projectsForm.touched.requester && (
+                          {projectsForm.errors.solicitanteId &&
+                            projectsForm.touched.solicitanteId && (
                               <TextError>
-                                {projectsForm.errors.requester}
+                                {projectsForm.errors.solicitanteId}
                               </TextError>
                             )}
                         </FormControl>
@@ -262,40 +287,42 @@ export function ProjectsRegistration() {
                         })}
                       >
                         <FormControl>
-                          <FormLabel htmlFor="justification">
+                          <FormLabel htmlFor="justificativa">
                             JUSTIFICATIVA
                           </FormLabel>
                           <Input
                             isRequired
                             placeholder="Ex.: Sistema necessário para medição e entrega de gás."
-                            id="justification"
-                            type="justification"
-                            name="justification"
-                            value={projectsForm.values.justification}
+                            id="justificativa"
+                            type="justificativa"
+                            name="justificativa"
+                            value={projectsForm.values.justificativa}
                             onChange={projectsForm.handleChange}
                             w={useBreakpointValue({ base: '100%', md: '95%' })}
                           />
-                          {projectsForm.errors.justification &&
-                            projectsForm.touched.justification && (
+                          {projectsForm.errors.justificativa &&
+                            projectsForm.touched.justificativa && (
                               <TextError>
-                                {projectsForm.errors.justification}
+                                {projectsForm.errors.justificativa}
                               </TextError>
                             )}
                         </FormControl>
                         <FormControl>
-                          <FormLabel htmlFor="pole">POLO</FormLabel>
+                          <FormLabel htmlFor="poloId">POLO</FormLabel>
                           <Select
                             id="poloId"
-                            name="pole"
-                            value={projectsForm.values.pole}
+                            name="poloId"
+                            value={projectsForm.values.poloId}
                             onChange={projectsForm.handleChange}
                           >
                             <option value="Tucano Sul">Tucano Sul</option>
                             <option value="Alagoas">Alagoas</option>
                           </Select>
-                          {projectsForm.errors.pole &&
-                            projectsForm.touched.pole && (
-                              <TextError>{projectsForm.errors.pole}</TextError>
+                          {projectsForm.errors.poloId &&
+                            projectsForm.touched.poloId && (
+                              <TextError>
+                                {projectsForm.errors.poloId}
+                              </TextError>
                             )}
                         </FormControl>
                       </Flex>
@@ -308,79 +335,83 @@ export function ProjectsRegistration() {
                         })}
                       >
                         <FormControl>
-                          <FormLabel htmlFor="start">INÍCIO</FormLabel>
+                          <FormLabel htmlFor="dataInicio">INÍCIO</FormLabel>
                           <Input
                             isRequired
                             placeholder="dd/mm/aaaa"
-                            id="start"
+                            id="dataInicio"
                             type="date"
-                            name="start"
-                            value={projectsForm.values.start}
+                            name="dataInicio"
+                            value={projectsForm.values.dataInicio}
                             onChange={projectsForm.handleChange}
                             w={useBreakpointValue({ base: '100%', md: '95%' })}
                           />
-                          {projectsForm.errors.start &&
-                            projectsForm.touched.start && (
-                              <TextError>{projectsForm.errors.start}</TextError>
+                          {projectsForm.errors.dataInicio &&
+                            projectsForm.touched.dataInicio && (
+                              <TextError>
+                                {projectsForm.errors.dataInicio}
+                              </TextError>
                             )}
                         </FormControl>
                         <FormControl>
-                          <FormLabel htmlFor="end">FIM</FormLabel>
+                          <FormLabel htmlFor="dataFim">FIM</FormLabel>
                           <Input
                             isRequired
                             placeholder="dd/mm/aaaa"
-                            id="end"
+                            id="dataFim"
                             type="date"
-                            name="end"
-                            value={projectsForm.values.end}
+                            name="dataFim"
+                            value={projectsForm.values.dataFim}
                             onChange={projectsForm.handleChange}
                             w={useBreakpointValue({ base: '100%', md: '90%' })}
                           />
-                          {projectsForm.errors.end &&
-                            projectsForm.touched.end && (
+                          {projectsForm.errors.dataFim &&
+                            projectsForm.touched.dataFim && (
                               <TextError>
                                 {' '}
-                                {projectsForm.errors.start}
+                                {projectsForm.errors.dataFim}
                               </TextError>
                             )}
                         </FormControl>
 
                         <FormControl>
-                          <FormLabel htmlFor="startReal">INÍCIO REAL</FormLabel>
+                          <FormLabel htmlFor="dataInicioReal">
+                            INÍCIO REAL
+                          </FormLabel>
                           <Input
                             isRequired
                             placeholder="dd/mm/aaaa"
                             id="dataInicioReal"
                             type="date"
-                            name="startReal"
-                            value={projectsForm.values.startReal}
+                            name="dataInicioReal"
+                            value={projectsForm.values.dataInicioReal}
                             onChange={projectsForm.handleChange}
                             w={useBreakpointValue({ base: '100%', md: '95%' })}
                           />
-                          {projectsForm.errors.startReal &&
-                            projectsForm.touched.startReal && (
+                          {projectsForm.errors.dataInicioReal &&
+                            projectsForm.touched.dataInicioReal && (
                               <TextError>
-                                {projectsForm.errors.startReal}
+                                {projectsForm.errors.dataInicioReal}
                               </TextError>
                             )}
                         </FormControl>
                         <FormControl>
-                          <FormLabel htmlFor="endReal">FIM REAL</FormLabel>
+                          <FormLabel htmlFor="dataFimReal">FIM REAL</FormLabel>
                           <Input
                             isRequired
                             placeholder="dd/mm/aaaa"
                             id="dataFimReal"
                             type="date"
-                            name="endReal"
-                            value={projectsForm.values.endReal}
+                            name="dataFimReal"
+                            value={projectsForm.values.dataFimReal}
                             onChange={projectsForm.handleChange}
                             w={useBreakpointValue({ base: '100%', md: '100%' })}
                           />
-                          {projectsForm.errors.endReal &&
-                            projectsForm.touched.endReal && (
+                          {projectsForm.errors.dataFimReal &&
+                            projectsForm.touched.dataFimReal && (
                               <TextError>
                                 {' '}
-                                {projectsForm.errors.endReal}
+                                {projectsForm.errors.dataFimReal}
                               </TextError>
                             )}
                         </FormControl>
@@ -393,11 +424,11 @@ export function ProjectsRegistration() {
                       })}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="priority">PRIORIDADE</FormLabel>
+                        <FormLabel htmlFor="prioridadeId">PRIORIDADE</FormLabel>
                         <Select
                           id="prioridadeId"
-                          name="priority"
-                          value={projectsForm.values.priority}
+                          name="prioridadeId"
+                          value={projectsForm.values.prioridadeId}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '95%' })}
                         >
@@ -405,20 +436,22 @@ export function ProjectsRegistration() {
                           <option value="Média">Média</option>
                           <option value="Baixa">Baixa</option>
                         </Select>
-                        {projectsForm.errors.priority &&
-                          projectsForm.touched.priority && (
+                        {projectsForm.errors.prioridadeId &&
+                          projectsForm.touched.prioridadeId && (
                             <TextError>
-                              {projectsForm.errors.priority}
+                              {projectsForm.errors.prioridadeId}
                             </TextError>
                           )}
                       </FormControl>
 
                       <FormControl>
-                        <FormLabel htmlFor="complexity">COMPLEXIDADE</FormLabel>
+                        <FormLabel htmlFor="complexidadeId">
+                          COMPLEXIDADE
+                        </FormLabel>
                         <Select
                           id="complexidadeId"
-                          name="complexity"
-                          value={projectsForm.values.complexity}
+                          name="complexidadeId"
+                          value={projectsForm.values.complexidadeId}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         >
@@ -426,10 +459,10 @@ export function ProjectsRegistration() {
                           <option value="Média">Média</option>
                           <option value="Baixa">Baixa</option>
                         </Select>
-                        {projectsForm.errors.complexity &&
-                          projectsForm.touched.complexity && (
+                        {projectsForm.errors.complexidadeId &&
+                          projectsForm.touched.complexidadeId && (
                             <TextError>
-                              {projectsForm.errors.complexity}
+                              {projectsForm.errors.complexidadeId}
                             </TextError>
                           )}
                       </FormControl>
@@ -442,11 +475,11 @@ export function ProjectsRegistration() {
                       })}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="place">LOCAL</FormLabel>
+                        <FormLabel htmlFor="localId">LOCAL</FormLabel>
                         <Select
                           id="localId"
-                          name="place"
-                          value={projectsForm.values.place}
+                          name="localId"
+                          value={projectsForm.values.localId}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '95%' })}
                         >
@@ -461,18 +494,18 @@ export function ProjectsRegistration() {
                           <option value="9">Poços</option>
                           <option value="10">UPGN Pilar e ECPIR</option>
                         </Select>
-                        {projectsForm.errors.place &&
-                          projectsForm.touched.place && (
-                            <TextError>{projectsForm.errors.place}</TextError>
+                        {projectsForm.errors.localId &&
+                          projectsForm.touched.localId && (
+                            <TextError>{projectsForm.errors.localId}</TextError>
                           )}
                       </FormControl>
 
                       <FormControl>
-                        <FormLabel htmlFor="division">DIVISÃO</FormLabel>
+                        <FormLabel htmlFor="divisaoId">DIVISÃO</FormLabel>
                         <Select
                           id="divisaoId"
-                          name="division"
-                          value={projectsForm.values.division}
+                          name="divisaoId"
+                          value={projectsForm.values.divisaoId}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '95%' })}
                         >
@@ -484,19 +517,19 @@ export function ProjectsRegistration() {
                             Comercialização & Energia
                           </option>
                         </Select>
-                        {projectsForm.errors.division &&
-                          projectsForm.touched.division && (
+                        {projectsForm.errors.divisaoId &&
+                          projectsForm.touched.divisaoId && (
                             <TextError>
-                              {projectsForm.errors.division}
+                              {projectsForm.errors.divisaoId}
                             </TextError>
                           )}
                       </FormControl>
                       <FormControl>
-                        <FormLabel htmlFor="status">STATUS</FormLabel>
+                        <FormLabel htmlFor="statusId">STATUS</FormLabel>
                         <Select
                           id="statusId"
-                          name="status"
-                          value={projectsForm.values.status}
+                          name="statusId"
+                          value={projectsForm.values.statusId}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         >
@@ -504,9 +537,11 @@ export function ProjectsRegistration() {
                           <option value="Não iniciado">Não iniciado</option>
                           <option value="Concluido">Concluído</option>
                         </Select>
-                        {projectsForm.errors.status &&
-                          projectsForm.touched.status && (
-                            <TextError>{projectsForm.errors.status}</TextError>
+                        {projectsForm.errors.statusId &&
+                          projectsForm.touched.statusId && (
+                            <TextError>
+                              {projectsForm.errors.statusId}
+                            </TextError>
                           )}
                       </FormControl>
                     </Flex>
@@ -517,11 +552,11 @@ export function ProjectsRegistration() {
                       })}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="gate">GATE</FormLabel>
+                        <FormLabel htmlFor="gateId">GATE</FormLabel>
                         <Select
-                          id="gate"
-                          name="gate"
-                          value={projectsForm.values.gate}
+                          id="gateId"
+                          name="gateId"
+                          value={projectsForm.values.gateId}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '95%' })}
                         >
@@ -530,18 +565,18 @@ export function ProjectsRegistration() {
                           <option value="gate1">Gate 1</option>
                           <option value="gate2">Gate 2</option>
                         </Select>
-                        {projectsForm.errors.gate &&
-                          projectsForm.touched.gate && (
-                            <TextError>{projectsForm.errors.gate}</TextError>
+                        {projectsForm.errors.gateId &&
+                          projectsForm.touched.gateId && (
+                            <TextError>{projectsForm.errors.gateId}</TextError>
                           )}
                       </FormControl>
 
                       <FormControl>
-                        <FormLabel htmlFor="typeProject">TIPO</FormLabel>
+                        <FormLabel htmlFor="tipoProjetoId">TIPO</FormLabel>
                         <Select
                           id="tipoProjetoId"
-                          name="typeProject"
-                          value={projectsForm.values.typeProject}
+                          name="tipoProjetoId"
+                          value={projectsForm.values.tipoProjetoId}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         >
@@ -549,10 +584,10 @@ export function ProjectsRegistration() {
                           <option value="projeto2">Projeto 2</option>
                           <option value="projeto3">Projeto 3</option>
                         </Select>
-                        {projectsForm.errors.typeProject &&
-                          projectsForm.touched.typeProject && (
+                        {projectsForm.errors.tipoProjetoId &&
+                          projectsForm.touched.tipoProjetoId && (
                             <TextError>
-                              {projectsForm.errors.typeProject}
+                              {projectsForm.errors.tipoProjetoId}
                             </TextError>
                           )}
                       </FormControl>
@@ -564,20 +599,22 @@ export function ProjectsRegistration() {
                       })}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="demand">DEMANDA</FormLabel>
+                        <FormLabel htmlFor="demandaId">DEMANDA</FormLabel>
                         <Select
-                          id="demand"
-                          name="demand"
-                          value={projectsForm.values.demand}
+                          id="demandaId"
+                          name="demandaId"
+                          value={projectsForm.values.demandaId}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         >
                           <option value="origem">Origem</option>
                           <option value="azulGoiaba">Azul-Goiaba</option>
                         </Select>
-                        {projectsForm.errors.demand &&
-                          projectsForm.touched.demand && (
-                            <TextError>{projectsForm.errors.demand}</TextError>
+                        {projectsForm.errors.demandaId &&
+                          projectsForm.touched.demandaId && (
+                            <TextError>
+                              {projectsForm.errors.demandaId}
+                            </TextError>
                           )}
                       </FormControl>
                     </Flex>
@@ -588,21 +625,21 @@ export function ProjectsRegistration() {
                       })}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="comments">COMENTÁRIOS</FormLabel>
+                        <FormLabel htmlFor="comentarios">COMENTÁRIOS</FormLabel>
                         <Input
                           isRequired
                           placeholder=""
-                          id="demandaId"
-                          type="comments"
-                          name="comments"
-                          value={projectsForm.values.comments}
+                          id="comentarios"
+                          type="comentarios"
+                          name="comentarios"
+                          value={projectsForm.values.comentarios}
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         />
-                        {projectsForm.errors.comments &&
-                          projectsForm.touched.comments && (
+                        {projectsForm.errors.comentarios &&
+                          projectsForm.touched.comentarios && (
                             <TextError>
-                              {projectsForm.errors.comments}
+                              {projectsForm.errors.comentarios}
                             </TextError>
                           )}
                       </FormControl>

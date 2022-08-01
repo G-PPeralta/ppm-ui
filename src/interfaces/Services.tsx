@@ -60,26 +60,28 @@ export interface ResponseUserPending {
 }
 
 export interface RegisterProjectProps {
-  name: string;
-  description: string;
-  budget: number;
-  classification: string;
-  requester: string;
-  justification: string;
-  pole: string;
-  start: string;
-  end: string;
-  startReal: string;
-  endReal: string;
-  priority: string;
-  complexity: string;
-  place: string;
-  division: string;
-  status: string;
-  gate: string;
-  typeProject: string;
-  demand: string;
-  comments: string;
+  nomeProjeto: string;
+  descricao: string;
+  valorTotalPrevisto: number;
+  classificacaoId: string;
+  solicitanteId: string;
+  justificativa: string;
+  poloId: string;
+  dataInicio: string;
+  dataFim: string;
+  dataInicioReal: string;
+  dataFimReal: string;
+  prioridadeId: string;
+  complexidadeId: string;
+  localId: string;
+  divisaoId: string;
+  statusId: string;
+  gateId: string;
+  tipoProjetoId: string;
+  demandaId: string;
+  comentarios: string;
+  nomeResponsavel: string;
+  tipoResponsavel: string;
 }
 
 export interface GanttPayload {
@@ -123,4 +125,15 @@ export interface GanttMacroDto {
 export interface IGantt {
   nomeProjeto: string;
   macroatividades: GanttMacroDto[];
+}
+
+export interface TipoResponsavel {
+  id: number;
+  tipo_responsavel: string;
+}
+
+export interface Classificacao {
+  id: number;
+  classificacao: string;
+  deletado: boolean;
 }

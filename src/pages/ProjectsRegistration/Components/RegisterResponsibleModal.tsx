@@ -19,17 +19,25 @@ import {
   useDisclosure,
   IconButton,
 } from '@chakra-ui/react';
+import { TipoResponsavel } from 'interfaces/Services';
 
 import { TextError } from 'components/TextError';
 
 import { useProjects } from 'hooks/useProjects';
 
+import { getTipoResponsavel } from 'services/get/Projetos';
+
 export function RegisterResponsibleModal() {
   const [numberOfResponsibles, setNumberOfResponsibles] = useState([1]);
+  const [tipoResponsavel, setTipoResponsavel] = useState<TipoResponsavel[]>(
+    [] as TipoResponsavel[],
+  );
+  const [loading, setLoading] = useState(true);
   const { projectsForm } = useProjects();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
-    // console.log(projectsForm.values.modalResponsible);
+    console.log(projectsForm.values.nomeResponsavel);
   }, [projectsForm.values]);
 
   function addResponsible() {
@@ -38,7 +46,20 @@ export function RegisterResponsibleModal() {
       numberOfResponsibles.length + 1,
     ]);
   }
-  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  async function handleGetTipoResponsavel() {
+    const { data } = await getTipoResponsavel();
+    const dataReqTipoResponsavel: TipoResponsavel[] = data;
+    if (!dataReqTipoResponsavel) {
+      return null;
+    }
+    setTipoResponsavel(dataReqTipoResponsavel);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    handleGetTipoResponsavel();
+  }, []);
 
   return (
     <>
@@ -65,48 +86,47 @@ export function RegisterResponsibleModal() {
             <ModalHeader>CADASTRAR RESPONSÁVEL</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              {numberOfResponsibles.map((responsible, index) => (
+              {numberOfResponsibles.map((responsible) => (
                 <Flex align="end" mb={3} key={responsible}>
                   <FormControl>
-                    <FormLabel htmlFor="name">NOME</FormLabel>
+                    <FormLabel htmlFor="nomeResponsavel">NOME</FormLabel>
                     <Input
                       isRequired
                       placeholder="Nome do responsável"
-                      id="name"
+                      id="nomeResponsavel"
                       type="text"
-                      name="name"
-                      value={projectsForm.values.modalResponsible[index]}
+                      name="nomeResponsavel"
+                      value={projectsForm.values.nomeResponsavel}
                       onChange={projectsForm.handleChange}
                       width="95%"
                     />
-                    {projectsForm.errors.modalResponsible &&
-                      projectsForm.touched.modalResponsible && (
+                    {projectsForm.errors.nomeResponsavel &&
+                      projectsForm.touched.nomeResponsavel && (
                         <TextError>
-                          {projectsForm.errors.modalResponsible}
+                          {projectsForm.errors.nomeResponsavel}
                         </TextError>
                       )}
                   </FormControl>
                   <FormControl>
-                    <FormLabel htmlFor="responsible">TIPO</FormLabel>
-                    <Select
-                      id="responsibleId"
-                      name="responsible"
-                      value={projectsForm.values.modalType}
-                      onChange={() => {
-                        projectsForm.setFieldValue(
-                          'modalType',
-                          projectsForm.values.modalType[index],
-                        );
-                      }}
-                      width="95%"
-                    >
-                      <option value="1">Tipo A</option>
-                      <option value="2">Tipo B</option>
-                      <option value="3">Tipo C</option>
-                    </Select>
-                    {projectsForm.errors.modalType &&
-                      projectsForm.touched.modalType && (
-                        <TextError>{projectsForm.errors.modalType}</TextError>
+                    <FormLabel htmlFor="tipoResponsavel">TIPO</FormLabel>
+                    {!loading && (
+                      <Select
+                        id="tipoResponsavel"
+                        name="tipoResponsavel"
+                        value={projectsForm.values.tipoResponsavel}
+                        onChange={projectsForm.handleChange}
+                        width="95%"
+                      >
+                        {tipoResponsavel.map((tipo) => (
+                          <option key={tipo.id}>{tipo.tipo_responsavel}</option>
+                        ))}
+                      </Select>
+                    )}
+                    {projectsForm.errors.tipoResponsavel &&
+                      projectsForm.touched.tipoResponsavel && (
+                        <TextError>
+                          {projectsForm.errors.tipoResponsavel}
+                        </TextError>
                       )}
                   </FormControl>
                 </Flex>
