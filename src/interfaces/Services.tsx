@@ -137,3 +137,9 @@ export interface Classificacao {
   classificacao: string;
   deletado: boolean;
 }
+
+export interface Polo {
+  id: number;
+  polo: string;
+  deletado: boolean;
+}

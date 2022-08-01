@@ -15,14 +15,14 @@ import {
   InputLeftElement,
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
-import { Classificacao } from 'interfaces/Services';
+import { Classificacao, Polo } from 'interfaces/Services';
 
 import Sidebar from 'components/SideBar';
 import { TextError } from 'components/TextError';
 
 import { useProjects } from 'hooks/useProjects';
 
-import { getClassificacao } from 'services/get/Projetos';
+import { getClassificacao, getPolo } from 'services/get/Projetos';
 import { postProject } from 'services/post/ProjectRegister';
 
 import { RegisterResponsibleModal } from './Components/RegisterResponsibleModal';
@@ -34,14 +34,18 @@ export function ProjectsRegistration() {
   const [classificacaoState, setClassificacaoState] = useState<Classificacao[]>(
     [] as Classificacao[],
   );
+  const [poloState, setPoloState] = useState<Polo[]>([] as Polo[]);
 
   async function handleGetProjetos() {
-    const { data } = await getClassificacao();
-    const dataReqClassificacao: Classificacao[] = data;
+    const reqGetClassificacao = await getClassificacao();
+    const reqGetPolo = await getPolo();
+    const dataReqClassificacao: Classificacao[] = reqGetClassificacao.data;
+    const dataReqPolo: Polo[] = reqGetPolo.data;
     if (!dataReqClassificacao) {
       return null;
     }
     setClassificacaoState(dataReqClassificacao);
+    setPoloState(dataReqPolo);
     setLoadingProjetos(false);
   }
 
@@ -50,7 +54,7 @@ export function ProjectsRegistration() {
   }, []);
 
   console.log(loadingProjetos);
-  console.log(classificacaoState);
+  console.log(poloState);
 
   return (
     <>
@@ -315,8 +319,11 @@ export function ProjectsRegistration() {
                             value={projectsForm.values.poloId}
                             onChange={projectsForm.handleChange}
                           >
-                            <option value="Tucano Sul">Tucano Sul</option>
-                            <option value="Alagoas">Alagoas</option>
+                            {poloState.map((polo) => (
+                              <option key={polo.id} value={polo.polo}>
+                                {polo.polo}
+                              </option>
+                            ))}
                           </Select>
                           {projectsForm.errors.poloId &&
                             projectsForm.touched.poloId && (
