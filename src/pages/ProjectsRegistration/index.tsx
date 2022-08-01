@@ -22,6 +22,7 @@ import {
   Prioridade,
   Complexidade,
   LocalProjeto,
+  Divisao,
 } from 'interfaces/Services';
 
 import Sidebar from 'components/SideBar';
@@ -32,6 +33,7 @@ import { useProjects } from 'hooks/useProjects';
 import {
   getClassificacao,
   getComplexidade,
+  getDivisao,
   getLocalProjeto,
   getPolo,
   getPrioridade,
@@ -44,7 +46,6 @@ import { RegisterResponsibleModal } from './Components/RegisterResponsibleModal'
 export function ProjectsRegistration() {
   const wd = window.innerWidth;
   const { projectsForm, loading } = useProjects();
-  const [loadingProjetos, setLoadingProjetos] = useState(true);
 
   const [classificacaoState, setClassificacaoState] = useState<Classificacao[]>(
     [] as Classificacao[],
@@ -59,10 +60,10 @@ export function ProjectsRegistration() {
   const [complexidadeState, setComplexidadeState] = useState<Complexidade[]>(
     [] as Complexidade[],
   );
-
   const [localProjetoState, setLocalProjetoState] = useState<LocalProjeto[]>(
     [] as LocalProjeto[],
   );
+  const [divisaoState, setDivisaoState] = useState<Divisao[]>([] as Divisao[]);
 
   async function handleGetProjetos() {
     const reqGetClassificacao = await getClassificacao();
@@ -71,6 +72,7 @@ export function ProjectsRegistration() {
     const reqGetPrioridade = await getPrioridade();
     const reqGetComplexidade = await getComplexidade();
     const reqGetLocalProjeto = await getLocalProjeto();
+    const reqGetDivisao = await getDivisao();
 
     const dataReqClassificacao: Classificacao[] = reqGetClassificacao.data;
     const dataReqPolo: Polo[] = reqGetPolo.data;
@@ -78,6 +80,7 @@ export function ProjectsRegistration() {
     const dataReqPrioridade: Prioridade[] = reqGetPrioridade.data;
     const dataReqComplexidade: Complexidade[] = reqGetComplexidade.data;
     const dataReqLocalProjeto: LocalProjeto[] = reqGetLocalProjeto.data;
+    const dataReqDivisao: Divisao[] = reqGetDivisao.data;
 
     setClassificacaoState(dataReqClassificacao);
     setPoloState(dataReqPolo);
@@ -85,20 +88,18 @@ export function ProjectsRegistration() {
     setPrioridadeState(dataReqPrioridade);
     setComplexidadeState(dataReqComplexidade);
     setLocalProjetoState(dataReqLocalProjeto);
-
-    setLoadingProjetos(false);
+    setDivisaoState(dataReqDivisao);
   }
 
   useEffect(() => {
     handleGetProjetos();
   }, []);
 
-  useEffect(() => {
-    console.log(projectsForm.values);
-  }, [projectsForm.values]);
+  // useEffect(() => {
+  //   console.log(projectsForm.values);
+  // }, [projectsForm.values]);
 
-  console.log(loadingProjetos);
-  console.log(localProjetoState);
+  console.log(divisaoState);
 
   return (
     <>
@@ -573,13 +574,11 @@ export function ProjectsRegistration() {
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '95%' })}
                         >
-                          <option value="Processamento_de_Gas">
-                            Processamento de Gás
-                          </option>
-                          <option value="E&P">E&P</option>
-                          <option value="Comercializacao_energia">
-                            Comercialização & Energia
-                          </option>
+                          {divisaoState.map((divisao) => (
+                            <option key={divisao.id} value={divisao.divisao}>
+                              {divisao.divisao}
+                            </option>
+                          ))}
                         </Select>
                         {projectsForm.errors.divisaoId &&
                           projectsForm.touched.divisaoId && (

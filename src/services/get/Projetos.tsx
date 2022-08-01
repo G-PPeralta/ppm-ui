@@ -91,6 +91,19 @@ export async function getLocalProjeto(): Promise<{
   return { data, status };
 }
 
+export async function getDivisao(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get('/divisao', {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
+    },
+  });
+
+  return { data, status };
+}
+
 export async function getStatusProjeto(): Promise<{
   data: any;
   status: number;

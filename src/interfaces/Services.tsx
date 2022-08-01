@@ -167,3 +167,9 @@ export interface LocalProjeto {
   local: string;
   deletado: boolean;
 }
+
+export interface Divisao {
+  id: number;
+  divisao: string;
+  deletado: boolean;
+}
