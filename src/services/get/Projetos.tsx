@@ -117,6 +117,19 @@ export async function getStatusProjeto(): Promise<{
   return { data, status };
 }
 
+export async function getGate(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get('/gate', {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
+    },
+  });
+
+  return { data, status };
+}
+
 export async function getTipoProjeto(): Promise<{
   data: any;
   status: number;

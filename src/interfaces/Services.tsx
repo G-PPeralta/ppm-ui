@@ -173,3 +173,15 @@ export interface Divisao {
   divisao: string;
   deletado: boolean;
 }
+
+export interface StatusProjeto {
+  id: number;
+  status: string;
+  deletado: boolean;
+}
+
+export interface Gate {
+  id: number;
+  gate: string;
+  deletado: boolean;
+}

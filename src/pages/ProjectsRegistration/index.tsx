@@ -23,6 +23,8 @@ import {
   Complexidade,
   LocalProjeto,
   Divisao,
+  StatusProjeto,
+  Gate,
 } from 'interfaces/Services';
 
 import Sidebar from 'components/SideBar';
@@ -34,10 +36,12 @@ import {
   getClassificacao,
   getComplexidade,
   getDivisao,
+  getGate,
   getLocalProjeto,
   getPolo,
   getPrioridade,
   getSolicitante,
+  getStatusProjeto,
 } from 'services/get/Projetos';
 import { postProject } from 'services/post/ProjectRegister';
 
@@ -64,6 +68,10 @@ export function ProjectsRegistration() {
     [] as LocalProjeto[],
   );
   const [divisaoState, setDivisaoState] = useState<Divisao[]>([] as Divisao[]);
+  const [statusProjetoState, setStatusProjetoState] = useState<StatusProjeto[]>(
+    [] as StatusProjeto[],
+  );
+  const [gateState, setGateState] = useState<Gate[]>([] as Gate[]);
 
   async function handleGetProjetos() {
     const reqGetClassificacao = await getClassificacao();
@@ -73,6 +81,8 @@ export function ProjectsRegistration() {
     const reqGetComplexidade = await getComplexidade();
     const reqGetLocalProjeto = await getLocalProjeto();
     const reqGetDivisao = await getDivisao();
+    const reqGetStatusProjeto = await getStatusProjeto();
+    const reqGetGate = await getGate();
 
     const dataReqClassificacao: Classificacao[] = reqGetClassificacao.data;
     const dataReqPolo: Polo[] = reqGetPolo.data;
@@ -81,6 +91,8 @@ export function ProjectsRegistration() {
     const dataReqComplexidade: Complexidade[] = reqGetComplexidade.data;
     const dataReqLocalProjeto: LocalProjeto[] = reqGetLocalProjeto.data;
     const dataReqDivisao: Divisao[] = reqGetDivisao.data;
+    const dataReqStatusProjeto: StatusProjeto[] = reqGetStatusProjeto.data;
+    const dataReqGate: Gate[] = reqGetGate.data;
 
     setClassificacaoState(dataReqClassificacao);
     setPoloState(dataReqPolo);
@@ -89,6 +101,8 @@ export function ProjectsRegistration() {
     setComplexidadeState(dataReqComplexidade);
     setLocalProjetoState(dataReqLocalProjeto);
     setDivisaoState(dataReqDivisao);
+    setStatusProjetoState(dataReqStatusProjeto);
+    setGateState(dataReqGate);
   }
 
   useEffect(() => {
@@ -99,7 +113,7 @@ export function ProjectsRegistration() {
   //   console.log(projectsForm.values);
   // }, [projectsForm.values]);
 
-  console.log(divisaoState);
+  console.log(gateState);
 
   return (
     <>
@@ -596,9 +610,11 @@ export function ProjectsRegistration() {
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         >
-                          <option value="Iniciado">Iniciado</option>
-                          <option value="Não iniciado">Não iniciado</option>
-                          <option value="Concluido">Concluído</option>
+                          {statusProjetoState.map((status) => (
+                            <option key={status.id} value={status.status}>
+                              {status.status}
+                            </option>
+                          ))}
                         </Select>
                         {projectsForm.errors.statusId &&
                           projectsForm.touched.statusId && (
@@ -623,10 +639,11 @@ export function ProjectsRegistration() {
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '95%' })}
                         >
-                          <option value={`C&M`}>{`C&M`}</option>
-                          <option value="concluido">Concluído</option>
-                          <option value="gate1">Gate 1</option>
-                          <option value="gate2">Gate 2</option>
+                          {gateState.map((gate) => (
+                            <option key={gate.id} value={gate.gate}>
+                              {gate.gate}
+                            </option>
+                          ))}
                         </Select>
                         {projectsForm.errors.gateId &&
                           projectsForm.touched.gateId && (
