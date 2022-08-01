@@ -20,6 +20,7 @@ import {
   Polo,
   Solicitante,
   Prioridade,
+  Complexidade,
 } from 'interfaces/Services';
 
 import Sidebar from 'components/SideBar';
@@ -29,6 +30,7 @@ import { useProjects } from 'hooks/useProjects';
 
 import {
   getClassificacao,
+  getComplexidade,
   getPolo,
   getPrioridade,
   getSolicitante,
@@ -52,22 +54,28 @@ export function ProjectsRegistration() {
   const [prioridadeState, setPrioridadeState] = useState<Prioridade[]>(
     [] as Prioridade[],
   );
+  const [complexidadeState, setComplexidadeState] = useState<Complexidade[]>(
+    [] as Complexidade[],
+  );
 
   async function handleGetProjetos() {
     const reqGetClassificacao = await getClassificacao();
     const reqGetPolo = await getPolo();
     const reqGetSolicitante = await getSolicitante();
     const reqGetPrioridade = await getPrioridade();
+    const reqGetComplexidade = await getComplexidade();
 
     const dataReqClassificacao: Classificacao[] = reqGetClassificacao.data;
     const dataReqPolo: Polo[] = reqGetPolo.data;
     const dataReqSolicitante: Solicitante[] = reqGetSolicitante.data;
     const dataReqPrioridade: Prioridade[] = reqGetPrioridade.data;
+    const dataReqComplexidade: Complexidade[] = reqGetComplexidade.data;
 
     setClassificacaoState(dataReqClassificacao);
     setPoloState(dataReqPolo);
     setSolicitanteState(dataReqSolicitante);
     setPrioridadeState(dataReqPrioridade);
+    setComplexidadeState(dataReqComplexidade);
 
     setLoadingProjetos(false);
   }
@@ -77,7 +85,7 @@ export function ProjectsRegistration() {
   }, []);
 
   console.log(loadingProjetos);
-  console.log(prioridadeState);
+  console.log(complexidadeState);
 
   return (
     <>
@@ -498,9 +506,14 @@ export function ProjectsRegistration() {
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         >
-                          <option value="Alta">Alta</option>
-                          <option value="Média">Média</option>
-                          <option value="Baixa">Baixa</option>
+                          {complexidadeState.map((complexidade) => (
+                            <option
+                              key={complexidade.id}
+                              value={complexidade.complexidade}
+                            >
+                              {complexidade.complexidade}
+                            </option>
+                          ))}
                         </Select>
                         {projectsForm.errors.complexidadeId &&
                           projectsForm.touched.complexidadeId && (

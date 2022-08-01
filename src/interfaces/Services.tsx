@@ -155,3 +155,9 @@ export interface Prioridade {
   prioridade: string;
   deletado: boolean;
 }
+
+export interface Complexidade {
+  id: number;
+  complexidade: string;
+  deletado: boolean;
+}
