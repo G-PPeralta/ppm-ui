@@ -552,16 +552,11 @@ export function ProjectsRegistration() {
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '95%' })}
                         >
-                          <option value="1">EGNA Conceição</option>
-                          <option value="2">EPFU</option>
-                          <option value="3">EPPIR</option>
-                          <option value="4">Estação Coletora Anambé</option>
-                          <option value="5">P16</option>
-                          <option value="6">Panelas e ETC Catu</option>
-                          <option value="7">Paru</option>
-                          <option value="8">Pilar</option>
-                          <option value="9">Poços</option>
-                          <option value="10">UPGN Pilar e ECPIR</option>
+                          {localProjetoState.map((local) => (
+                            <option key={local.id} value={local.local}>
+                              {local.local}
+                            </option>
+                          ))}
                         </Select>
                         {projectsForm.errors.localId &&
                           projectsForm.touched.localId && (
