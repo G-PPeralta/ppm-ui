@@ -185,3 +185,9 @@ export interface Gate {
   gate: string;
   deletado: boolean;
 }
+
+export interface TipoProjeto {
+  id: number;
+  tipo: string;
+  deletado: boolean;
+}

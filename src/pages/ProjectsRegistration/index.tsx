@@ -25,6 +25,7 @@ import {
   Divisao,
   StatusProjeto,
   Gate,
+  TipoProjeto,
 } from 'interfaces/Services';
 
 import Sidebar from 'components/SideBar';
@@ -42,6 +43,7 @@ import {
   getPrioridade,
   getSolicitante,
   getStatusProjeto,
+  getTipoProjeto,
 } from 'services/get/Projetos';
 import { postProject } from 'services/post/ProjectRegister';
 
@@ -72,6 +74,9 @@ export function ProjectsRegistration() {
     [] as StatusProjeto[],
   );
   const [gateState, setGateState] = useState<Gate[]>([] as Gate[]);
+  const [tipoProjetoState, setTipoProjetoState] = useState<TipoProjeto[]>(
+    [] as TipoProjeto[],
+  );
 
   async function handleGetProjetos() {
     const reqGetClassificacao = await getClassificacao();
@@ -83,6 +88,7 @@ export function ProjectsRegistration() {
     const reqGetDivisao = await getDivisao();
     const reqGetStatusProjeto = await getStatusProjeto();
     const reqGetGate = await getGate();
+    const reqGetTipoProjeto = await getTipoProjeto();
 
     const dataReqClassificacao: Classificacao[] = reqGetClassificacao.data;
     const dataReqPolo: Polo[] = reqGetPolo.data;
@@ -93,6 +99,7 @@ export function ProjectsRegistration() {
     const dataReqDivisao: Divisao[] = reqGetDivisao.data;
     const dataReqStatusProjeto: StatusProjeto[] = reqGetStatusProjeto.data;
     const dataReqGate: Gate[] = reqGetGate.data;
+    const dataReqGetTipoProjeto: TipoProjeto[] = reqGetTipoProjeto.data;
 
     setClassificacaoState(dataReqClassificacao);
     setPoloState(dataReqPolo);
@@ -103,6 +110,7 @@ export function ProjectsRegistration() {
     setDivisaoState(dataReqDivisao);
     setStatusProjetoState(dataReqStatusProjeto);
     setGateState(dataReqGate);
+    setTipoProjetoState(dataReqGetTipoProjeto);
   }
 
   useEffect(() => {
@@ -113,7 +121,7 @@ export function ProjectsRegistration() {
   //   console.log(projectsForm.values);
   // }, [projectsForm.values]);
 
-  console.log(gateState);
+  console.log(tipoProjetoState);
 
   return (
     <>
@@ -660,9 +668,11 @@ export function ProjectsRegistration() {
                           onChange={projectsForm.handleChange}
                           w={useBreakpointValue({ base: '100%', md: '100%' })}
                         >
-                          <option value="projeto1">Projeto 1</option>
-                          <option value="projeto2">Projeto 2</option>
-                          <option value="projeto3">Projeto 3</option>
+                          {tipoProjetoState.map((tipo) => (
+                            <option key={tipo.id} value={tipo.tipo}>
+                              {tipo.tipo}
+                            </option>
+                          ))}
                         </Select>
                         {projectsForm.errors.tipoProjetoId &&
                           projectsForm.touched.tipoProjetoId && (
