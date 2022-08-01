@@ -106,12 +106,15 @@ export default function AreasDemandadasComponent() {
                   display="flex"
                   w={'100%'}
                   justifyContent="space-between"
-                  align="center"
                 >
-                  <Box>
+                  <Box
+                    w={150}
+                    display={'flex'}
+                    flexDirection="column"
+                    alignItems={'center'}
+                  >
                     <Text
                       mb={2}
-                      w={'75px'}
                       sx={{
                         fontSize: 14,
                         fontWeight: '600',
@@ -127,10 +130,14 @@ export default function AreasDemandadasComponent() {
                       data={grafData1}
                     />
                   </Box>
-                  <Box>
+                  <Box
+                    w={150}
+                    display={'flex'}
+                    flexDirection="column"
+                    alignItems={'center'}
+                  >
                     <Text
                       mb={2}
-                      w={'75px'}
                       sx={{
                         fontSize: 14,
                         fontWeight: '600',
@@ -144,17 +151,21 @@ export default function AreasDemandadasComponent() {
                   </Box>
                 </Box>
                 <Box
+                  mt={8}
                   mb={1}
                   display="flex"
                   w={'100%'}
                   justifyContent="space-between"
-                  align="center"
                 >
-                  <Box mt={8}>
+                  <Box
+                    w={150}
+                    display={'flex'}
+                    flexDirection="column"
+                    alignItems={'center'}
+                  >
                     <PercentPieChart size={60} upDown={true} data={grafData3} />
                     <Text
                       mt={2}
-                      w={'75px'}
                       sx={{
                         fontSize: 14,
                         fontWeight: '600',
@@ -165,11 +176,15 @@ export default function AreasDemandadasComponent() {
                       Operação
                     </Text>
                   </Box>
-                  <Box mt={8}>
+                  <Box
+                    w={150}
+                    display={'flex'}
+                    flexDirection="column"
+                    alignItems={'center'}
+                  >
                     <PercentPieChart size={60} upDown={true} data={grafData4} />
                     <Text
                       mt={2}
-                      w={'75px'}
                       sx={{
                         fontSize: 14,
                         fontWeight: '600',
