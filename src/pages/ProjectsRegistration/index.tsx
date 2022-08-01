@@ -15,14 +15,18 @@ import {
   InputLeftElement,
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
-import { Classificacao, Polo } from 'interfaces/Services';
+import { Classificacao, Polo, Solicitante } from 'interfaces/Services';
 
 import Sidebar from 'components/SideBar';
 import { TextError } from 'components/TextError';
 
 import { useProjects } from 'hooks/useProjects';
 
-import { getClassificacao, getPolo } from 'services/get/Projetos';
+import {
+  getClassificacao,
+  getPolo,
+  getSolicitante,
+} from 'services/get/Projetos';
 import { postProject } from 'services/post/ProjectRegister';
 
 import { RegisterResponsibleModal } from './Components/RegisterResponsibleModal';
@@ -30,22 +34,31 @@ import { RegisterResponsibleModal } from './Components/RegisterResponsibleModal'
 export function ProjectsRegistration() {
   const wd = window.innerWidth;
   const { projectsForm, loading } = useProjects();
+
   const [loadingProjetos, setLoadingProjetos] = useState(true);
   const [classificacaoState, setClassificacaoState] = useState<Classificacao[]>(
     [] as Classificacao[],
   );
   const [poloState, setPoloState] = useState<Polo[]>([] as Polo[]);
+  const [solicitanteState, setSolicitanteState] = useState<Solicitante[]>(
+    [] as Solicitante[],
+  );
 
   async function handleGetProjetos() {
     const reqGetClassificacao = await getClassificacao();
     const reqGetPolo = await getPolo();
+    const reqGetSolicitante = await getSolicitante();
+
     const dataReqClassificacao: Classificacao[] = reqGetClassificacao.data;
     const dataReqPolo: Polo[] = reqGetPolo.data;
+    const dataReqSolicitante: Solicitante[] = reqGetSolicitante.data;
     if (!dataReqClassificacao) {
       return null;
     }
     setClassificacaoState(dataReqClassificacao);
     setPoloState(dataReqPolo);
+    setSolicitanteState(dataReqSolicitante);
+
     setLoadingProjetos(false);
   }
 
@@ -54,7 +67,7 @@ export function ProjectsRegistration() {
   }, []);
 
   console.log(loadingProjetos);
-  console.log(poloState);
+  console.log(solicitanteState);
 
   return (
     <>
@@ -268,13 +281,21 @@ export function ProjectsRegistration() {
                             value={projectsForm.values.solicitanteId}
                             onChange={projectsForm.handleChange}
                           >
-                            <option value="Operacao">Operação</option>
+                            {/* <option value="Operacao">Operação</option>
                             <option value="SMS">SMS</option>
                             <option value="Reservatorio">Reservatório</option>
                             <option value="UTE">UTE</option>
                             <option value="Controle_de_producao">
                               Controle de Produção
-                            </option>
+                            </option> */}
+                            {solicitanteState.map((solicitante) => (
+                              <option
+                                key={solicitante.id}
+                                value={solicitante.solicitante}
+                              >
+                                {solicitante.solicitante}
+                              </option>
+                            ))}
                           </Select>
                           {projectsForm.errors.solicitanteId &&
                             projectsForm.touched.solicitanteId && (

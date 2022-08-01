@@ -143,3 +143,9 @@ export interface Polo {
   polo: string;
   deletado: boolean;
 }
+
+export interface Solicitante {
+  id: number;
+  solicitante: string;
+  deletado: boolean;
+}

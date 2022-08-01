@@ -38,3 +38,16 @@ export async function getPolo(): Promise<{
 
   return { data, status };
 }
+
+export async function getSolicitante(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get('/solicitante', {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
+    },
+  });
+
+  return { data, status };
+}
