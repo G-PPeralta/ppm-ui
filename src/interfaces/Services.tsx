@@ -59,6 +59,11 @@ export interface ResponseUserPending {
   nome_role: string;
 }
 
+export interface ResponsavelProjeto {
+  nomeResponsavel: string;
+  tipoResponsavel: number;
+}
+
 export interface RegisterProjectProps {
   nomeProjeto: string;
   descricao: string;
@@ -80,8 +85,7 @@ export interface RegisterProjectProps {
   tipoProjetoId: number;
   demandaId: number;
   comentarios: string;
-  nomeResponsavel: string;
-  tipoResponsavel: number;
+  responsavel: ResponsavelProjeto[];
 }
 
 export interface GanttPayload {

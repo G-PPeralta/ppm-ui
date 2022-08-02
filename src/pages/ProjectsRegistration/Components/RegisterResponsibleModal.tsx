@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 
 import {
@@ -26,7 +26,12 @@ import { TextError } from 'components/TextError';
 import { getTipoResponsavel } from 'services/get/Projetos';
 
 export function RegisterResponsibleModal(projectsForm: any) {
-  const [numberOfResponsibles, setNumberOfResponsibles] = useState([1]);
+  const [numeroDeResponsaveis, setNumeroDeResponsaveis] = useState([
+    {
+      nomeResponsavel: '',
+      tipoResponsavel: 1,
+    },
+  ]);
   const [tipoResponsavel, setTipoResponsavel] = useState<TipoResponsavel[]>(
     [] as TipoResponsavel[],
   );
@@ -34,10 +39,32 @@ export function RegisterResponsibleModal(projectsForm: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   function addResponsible() {
-    setNumberOfResponsibles([
-      ...numberOfResponsibles,
-      numberOfResponsibles.length + 1,
+    setNumeroDeResponsaveis([
+      ...numeroDeResponsaveis,
+      {
+        nomeResponsavel: '',
+        tipoResponsavel: 1,
+      },
     ]);
+  }
+
+  function handleChange(event: any, index: number): void {
+    setNumeroDeResponsaveis([
+      ...numeroDeResponsaveis.slice(0, index),
+      {
+        ...numeroDeResponsaveis[index],
+        [event.target.name]: event.target.value,
+      },
+      ...numeroDeResponsaveis.slice(index + 1),
+    ]);
+  }
+
+  function saveResponsible() {
+    projectsForm.projectsForm.setFieldValue(
+      'responsavel',
+      numeroDeResponsaveis.filter((item) => item.nomeResponsavel !== ''),
+    );
+    onClose();
   }
 
   async function handleGetTipoResponsavel() {
@@ -79,24 +106,24 @@ export function RegisterResponsibleModal(projectsForm: any) {
             <ModalHeader>CADASTRAR RESPONSÁVEL</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              {numberOfResponsibles.map((responsible) => (
-                <Flex align="end" mb={3} key={responsible}>
+              {numeroDeResponsaveis.map((responsavel: any, index: number) => (
+                <Flex align="end" mb={3} key={index}>
                   <FormControl>
                     <FormLabel htmlFor="nomeResponsavel">NOME</FormLabel>
                     <Input
                       isRequired
                       placeholder="Nome do responsável"
-                      id="nomeResponsavel"
                       type="text"
+                      id="nomeResponsavel"
                       name="nomeResponsavel"
-                      value={projectsForm.projectsForm.values.nomeResponsavel}
-                      onChange={projectsForm.projectsForm.handleChange}
+                      value={responsavel.nomeResponsavel}
+                      onChange={(event) => handleChange(event, index)}
                       width="95%"
                     />
-                    {projectsForm.projectsForm.errors.nomeResponsavel &&
-                      projectsForm.projectsForm.touched.nomeResponsavel && (
+                    {projectsForm.projectsForm.errors.responsavel &&
+                      projectsForm.projectsForm.touched.responsavel && (
                         <TextError>
-                          {projectsForm.projectsForm.errors.nomeResponsavel}
+                          {projectsForm.projectsForm.errors.responsavel}
                         </TextError>
                       )}
                   </FormControl>
@@ -106,8 +133,8 @@ export function RegisterResponsibleModal(projectsForm: any) {
                       <Select
                         id="tipoResponsavel"
                         name="tipoResponsavel"
-                        value={projectsForm.projectsForm.values.tipoResponsavel}
-                        onChange={projectsForm.projectsForm.handleChange}
+                        value={responsavel.tipoResponsavel}
+                        onChange={(event) => handleChange(event, index)}
                         width="95%"
                       >
                         {tipoResponsavel.map((tipo) => (
@@ -154,7 +181,7 @@ export function RegisterResponsibleModal(projectsForm: any) {
                 background="origem.300"
                 variant="primary"
                 color="white"
-                onClick={onClose}
+                onClick={() => saveResponsible()}
                 _hover={{
                   background: 'origem.500',
                   transition: 'all 0.4s',
