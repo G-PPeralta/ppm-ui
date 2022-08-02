@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import {
   FormControl,
   FormLabel,
@@ -12,9 +10,9 @@ import {
 import { TextError } from 'components/TextError';
 
 function FormNomeProjeto(projectsForm: any) {
-  useEffect(() => {
-    console.log(projectsForm.projectsForm.values);
-  }, [projectsForm]);
+  // useEffect(() => {
+  //   console.log(projectsForm.projectsForm);
+  // }, [projectsForm]);
   return (
     <FormControl>
       <FormLabel htmlFor="nomeProjeto">PROJETO</FormLabel>

@@ -40,6 +40,8 @@ export function ProjectsRegistration() {
   const wd = window.innerWidth;
   const { projectsForm, loading } = useProjects();
 
+  console.log(projectsForm.values);
+
   return (
     <>
       <Sidebar>
@@ -80,7 +82,7 @@ export function ProjectsRegistration() {
                 <Box display={wd > 100 ? 'flex' : ''}>
                   <Stack spacing="6" w="100%">
                     <Stack spacing="5">
-                      <RegisterResponsibleModal />
+                      <RegisterResponsibleModal projectsForm={projectsForm} />
                       <FormNomeProjeto projectsForm={projectsForm} />
                       <FormDescricao projectsForm={projectsForm} />
                     </Stack>

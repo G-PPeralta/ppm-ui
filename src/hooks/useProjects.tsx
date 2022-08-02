@@ -10,14 +10,6 @@ import { postProject } from 'services/post/ProjectRegister';
 export function useProjects() {
   const { toast } = useToast();
 
-  function retrieveLocalStoragedItems(key: string) {
-    const storagedItem = localStorage.getItem(key);
-    if (storagedItem) {
-      return JSON.parse(storagedItem);
-    }
-    return '';
-  }
-
   const [loading, setLoading] = useState(false);
   const projectsForm = useFormik({
     initialValues: {
@@ -67,11 +59,8 @@ export function useProjects() {
         tipoProjetoId: Number(values.tipoProjetoId),
         demandaId: Number(values.demandaId),
         comentarios: values.comentarios,
-        nomeResponsavel:
-          retrieveLocalStoragedItems('responsaveis').nomeResponsavel,
-        tipoResponsavel: Number(
-          retrieveLocalStoragedItems('responsaveis').tipoResponsavel,
-        ),
+        nomeResponsavel: values.nomeResponsavel,
+        tipoResponsavel: Number(values.tipoResponsavel),
       };
 
       setLoading(true);

@@ -17,37 +17,27 @@ import {
   ModalBody,
   ModalCloseButton,
   IconButton,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { TipoResponsavel } from 'interfaces/Services';
 
 import { TextError } from 'components/TextError';
 
-import { useProjects } from 'hooks/useProjects';
-
 import { getTipoResponsavel } from 'services/get/Projetos';
 
-export function RegisterResponsibleModal() {
+export function RegisterResponsibleModal(projectsForm: any) {
   const [numberOfResponsibles, setNumberOfResponsibles] = useState([1]);
   const [tipoResponsavel, setTipoResponsavel] = useState<TipoResponsavel[]>(
     [] as TipoResponsavel[],
   );
   const [loading, setLoading] = useState(true);
-  const [isOpen2, setIsOpen2] = useState(false);
-  const { projectsForm } = useProjects();
-
-  useEffect(() => {
-    // console.log(projectsForm.values);
-  }, [projectsForm.values]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   function addResponsible() {
     setNumberOfResponsibles([
       ...numberOfResponsibles,
       numberOfResponsibles.length + 1,
     ]);
-  }
-
-  async function nossoOnClose() {
-    setIsOpen2(false);
   }
 
   async function handleGetTipoResponsavel() {
@@ -70,7 +60,7 @@ export function RegisterResponsibleModal() {
         <IconButton
           aria-label="Plus sign"
           icon={<BsPlusLg />}
-          onClick={() => setIsOpen2(true)}
+          onClick={onOpen}
           background="origem.300"
           variant="primary"
           color="white"
@@ -83,7 +73,7 @@ export function RegisterResponsibleModal() {
           }}
         />
         <h2>CADASTRAR RESPONSÁVEL </h2>
-        <Modal isOpen={isOpen2} onClose={() => nossoOnClose()} size="4xl">
+        <Modal isOpen={isOpen} onClose={onClose} size="4xl">
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>CADASTRAR RESPONSÁVEL</ModalHeader>
@@ -99,14 +89,14 @@ export function RegisterResponsibleModal() {
                       id="nomeResponsavel"
                       type="text"
                       name="nomeResponsavel"
-                      value={projectsForm.values.nomeResponsavel}
-                      onChange={projectsForm.handleChange}
+                      value={projectsForm.projectsForm.values.nomeResponsavel}
+                      onChange={projectsForm.projectsForm.handleChange}
                       width="95%"
                     />
-                    {projectsForm.errors.nomeResponsavel &&
-                      projectsForm.touched.nomeResponsavel && (
+                    {projectsForm.projectsForm.errors.nomeResponsavel &&
+                      projectsForm.projectsForm.touched.nomeResponsavel && (
                         <TextError>
-                          {projectsForm.errors.nomeResponsavel}
+                          {projectsForm.projectsForm.errors.nomeResponsavel}
                         </TextError>
                       )}
                   </FormControl>
@@ -116,8 +106,8 @@ export function RegisterResponsibleModal() {
                       <Select
                         id="tipoResponsavel"
                         name="tipoResponsavel"
-                        value={projectsForm.values.tipoResponsavel}
-                        onChange={projectsForm.handleChange}
+                        value={projectsForm.projectsForm.values.tipoResponsavel}
+                        onChange={projectsForm.projectsForm.handleChange}
                         width="95%"
                       >
                         {tipoResponsavel.map((tipo) => (
@@ -127,10 +117,10 @@ export function RegisterResponsibleModal() {
                         ))}
                       </Select>
                     )}
-                    {projectsForm.errors.tipoResponsavel &&
-                      projectsForm.touched.tipoResponsavel && (
+                    {projectsForm.projectsForm.errors.tipoResponsavel &&
+                      projectsForm.projectsForm.touched.tipoResponsavel && (
                         <TextError>
-                          {projectsForm.errors.tipoResponsavel}
+                          {projectsForm.projectsForm.errors.tipoResponsavel}
                         </TextError>
                       )}
                   </FormControl>
@@ -164,16 +154,7 @@ export function RegisterResponsibleModal() {
                 background="origem.300"
                 variant="primary"
                 color="white"
-                onClick={() => {
-                  localStorage.setItem(
-                    'responsaveis',
-                    JSON.stringify({
-                      nomeResponsavel: projectsForm.values.nomeResponsavel,
-                      tipoResponsavel: projectsForm.values.tipoResponsavel,
-                    }),
-                  );
-                  nossoOnClose();
-                }}
+                onClick={onClose}
                 _hover={{
                   background: 'origem.500',
                   transition: 'all 0.4s',
