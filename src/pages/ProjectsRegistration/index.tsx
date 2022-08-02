@@ -1,134 +1,44 @@
-import { useEffect, useState } from 'react';
-
 import {
   Box,
   Button,
   Flex,
-  FormControl,
-  FormLabel,
-  Select,
-  Input,
   Stack,
   useBreakpointValue,
   useColorModeValue,
-  InputGroup,
-  InputLeftElement,
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
-import {
-  Classificacao,
-  Polo,
-  Solicitante,
-  Prioridade,
-  Complexidade,
-  LocalProjeto,
-  Divisao,
-  StatusProjeto,
-  Gate,
-  TipoProjeto,
-  Demanda,
-} from 'interfaces/Services';
 
 import Sidebar from 'components/SideBar';
-import { TextError } from 'components/TextError';
 
 import { useProjects } from 'hooks/useProjects';
 
-import {
-  getClassificacao,
-  getComplexidade,
-  getDemanda,
-  getDivisao,
-  getGate,
-  getLocalProjeto,
-  getPolo,
-  getPrioridade,
-  getSolicitante,
-  getStatusProjeto,
-  getTipoProjeto,
-} from 'services/get/Projetos';
 import { postProject } from 'services/post/ProjectRegister';
 
+import FormClassificacao from './Components/FormClassificacao';
+import FormComentarios from './Components/FormComentarios';
+import FormComplexidade from './Components/FormComplexidade';
+import FormDataFim from './Components/FormDataFim';
+import FormDataFimReal from './Components/FormDataFimReal';
+import FormDataInicio from './Components/FormDataInicio';
+import FormDemanda from './Components/FormDemanda';
+import FormDescricao from './Components/FormDescricao';
+import FormDivisao from './Components/FormDivisao';
+import FormGate from './Components/FormGate';
+import FormDataInicioReal from './Components/FormInicioReal';
+import FormJustificativa from './Components/FormJustificativa';
+import FormLocal from './Components/FormLocal';
+import FormNomeProjeto from './Components/FormNomeProjeto';
+import FormPolo from './Components/FormPolo';
+import FormPrioridade from './Components/FormPrioridade';
+import FormSolicitante from './Components/FormSolicitante';
+import FormStatusProjeto from './Components/FormStatusProjeto';
+import FormTipoProjeto from './Components/FormTipoProjeto';
+import FormValorTotalPrevisto from './Components/FormValorTotalPrevisto';
 import { RegisterResponsibleModal } from './Components/RegisterResponsibleModal';
 
 export function ProjectsRegistration() {
   const wd = window.innerWidth;
   const { projectsForm, loading } = useProjects();
-
-  const [classificacaoState, setClassificacaoState] = useState<Classificacao[]>(
-    [] as Classificacao[],
-  );
-  const [poloState, setPoloState] = useState<Polo[]>([] as Polo[]);
-  const [solicitanteState, setSolicitanteState] = useState<Solicitante[]>(
-    [] as Solicitante[],
-  );
-  const [prioridadeState, setPrioridadeState] = useState<Prioridade[]>(
-    [] as Prioridade[],
-  );
-  const [complexidadeState, setComplexidadeState] = useState<Complexidade[]>(
-    [] as Complexidade[],
-  );
-  const [localProjetoState, setLocalProjetoState] = useState<LocalProjeto[]>(
-    [] as LocalProjeto[],
-  );
-  const [divisaoState, setDivisaoState] = useState<Divisao[]>([] as Divisao[]);
-  const [statusProjetoState, setStatusProjetoState] = useState<StatusProjeto[]>(
-    [] as StatusProjeto[],
-  );
-  const [gateState, setGateState] = useState<Gate[]>([] as Gate[]);
-  const [tipoProjetoState, setTipoProjetoState] = useState<TipoProjeto[]>(
-    [] as TipoProjeto[],
-  );
-
-  const [demandaState, setDemandaState] = useState<Demanda[]>([] as Demanda[]);
-
-  async function handleGetProjetos() {
-    const reqGetClassificacao = await getClassificacao();
-    const reqGetPolo = await getPolo();
-    const reqGetSolicitante = await getSolicitante();
-    const reqGetPrioridade = await getPrioridade();
-    const reqGetComplexidade = await getComplexidade();
-    const reqGetLocalProjeto = await getLocalProjeto();
-    const reqGetDivisao = await getDivisao();
-    const reqGetStatusProjeto = await getStatusProjeto();
-    const reqGetGate = await getGate();
-    const reqGetTipoProjeto = await getTipoProjeto();
-    const reqGetDemanda = await getDemanda();
-
-    const dataReqClassificacao: Classificacao[] = reqGetClassificacao.data;
-    const dataReqPolo: Polo[] = reqGetPolo.data;
-    const dataReqSolicitante: Solicitante[] = reqGetSolicitante.data;
-    const dataReqPrioridade: Prioridade[] = reqGetPrioridade.data;
-    const dataReqComplexidade: Complexidade[] = reqGetComplexidade.data;
-    const dataReqLocalProjeto: LocalProjeto[] = reqGetLocalProjeto.data;
-    const dataReqDivisao: Divisao[] = reqGetDivisao.data;
-    const dataReqStatusProjeto: StatusProjeto[] = reqGetStatusProjeto.data;
-    const dataReqGate: Gate[] = reqGetGate.data;
-    const dataReqTipoProjeto: TipoProjeto[] = reqGetTipoProjeto.data;
-    const dataReqDemanda: Demanda[] = reqGetDemanda.data;
-
-    setClassificacaoState(dataReqClassificacao);
-    setPoloState(dataReqPolo);
-    setSolicitanteState(dataReqSolicitante);
-    setPrioridadeState(dataReqPrioridade);
-    setComplexidadeState(dataReqComplexidade);
-    setLocalProjetoState(dataReqLocalProjeto);
-    setDivisaoState(dataReqDivisao);
-    setStatusProjetoState(dataReqStatusProjeto);
-    setGateState(dataReqGate);
-    setTipoProjetoState(dataReqTipoProjeto);
-    setDemandaState(dataReqDemanda);
-  }
-
-  useEffect(() => {
-    handleGetProjetos();
-  }, []);
-
-  // useEffect(() => {
-  //   console.log(projectsForm.values);
-  // }, [projectsForm.values]);
-
-  // console.log(demandaState);
 
   return (
     <>
@@ -171,99 +81,8 @@ export function ProjectsRegistration() {
                   <Stack spacing="6" w="100%">
                     <Stack spacing="5">
                       <RegisterResponsibleModal />
-
-                      <FormControl>
-                        <FormLabel htmlFor="nomeProjeto">PROJETO</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Nome do projeto"
-                          id="nomeProjeto"
-                          type="text"
-                          name="nomeProjeto"
-                          value={projectsForm.values.nomeProjeto}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
-                        />
-                        {projectsForm.errors.nomeProjeto &&
-                          projectsForm.touched.nomeProjeto && (
-                            <TextError>
-                              {projectsForm.errors.nomeProjeto}
-                            </TextError>
-                          )}
-                      </FormControl>
-                      <FormControl>
-                        <FormLabel htmlFor="descricao">DESCRIÇÃO</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Aquisição e instalação"
-                          id="descricao"
-                          type="text"
-                          name="descricao"
-                          maxLength={15}
-                          value={projectsForm.values.descricao}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
-                        />
-                        {projectsForm.errors.descricao &&
-                          projectsForm.touched.descricao && (
-                            <TextError>
-                              {projectsForm.errors.descricao}
-                            </TextError>
-                          )}
-                      </FormControl>
-
-                      {/* <Flex
-                        flexDirection={useBreakpointValue({
-                          base: 'column',
-                          md: 'row',
-                        })}
-                      >
-                        <FormControl>
-                          <FormLabel htmlFor="responsible">
-                            RESPONSÁVEL
-                          </FormLabel>
-                          <Select
-                            id="responsibleId"
-                            name="responsible"
-                            value={projectsForm.values.responsible}
-                            onChange={projectsForm.handleChange}
-                            w={useBreakpointValue({ base: '100%', md: '95%' })}
-                          >
-                            <option value="1">Alan</option>
-                            <option value="2">Gabriel</option>
-                            <option value="3">Eduardo</option>
-                          </Select>
-                          {projectsForm.errors.responsible &&
-                            projectsForm.touched.responsible && (
-                              <TextError>
-                                {projectsForm.errors.responsible}
-                              </TextError>
-                            )}
-                        </FormControl>
-
-                        <FormControl>
-                          <FormLabel htmlFor="coordinator">
-                            COORDENADOR
-                          </FormLabel>
-                          <Select
-                            id="coordinatorId"
-                            name="coordinator"
-                            value={projectsForm.values.coordinator}
-                            onChange={projectsForm.handleChange}
-                            w={useBreakpointValue({ base: '100%', md: '100%' })}
-                          >
-                            <option value="1">Alan</option>
-                            <option value="2">Gabriel</option>
-                            <option value="3">Eduardo</option>
-                          </Select>
-                          {projectsForm.errors.coordinator &&
-                            projectsForm.touched.coordinator && (
-                              <TextError>
-                                {projectsForm.errors.coordinator}
-                              </TextError>
-                            )}
-                        </FormControl>
-                      </Flex> */}
+                      <FormNomeProjeto projectsForm={projectsForm} />
+                      <FormDescricao projectsForm={projectsForm} />
                     </Stack>
                     <Stack spacing="5">
                       <Flex
@@ -272,99 +91,9 @@ export function ProjectsRegistration() {
                           md: 'row',
                         })}
                       >
-                        <FormControl>
-                          <FormLabel htmlFor="valorTotalPrevisto">
-                            VALOR TOTAL PREVISTO
-                          </FormLabel>
-                          <InputGroup>
-                            <InputLeftElement
-                              pointerEvents="none"
-                              color="gray.300"
-                              fontSize="1.2em"
-                            >
-                              R$
-                            </InputLeftElement>
-                            <Input
-                              isRequired
-                              placeholder="10.000,00"
-                              id="valorTotalPrevisto"
-                              type="text"
-                              name="valorTotalPrevisto"
-                              value={projectsForm.values.valorTotalPrevisto}
-                              onChange={projectsForm.handleChange}
-                              w={useBreakpointValue({
-                                base: '100%',
-                                md: '95%',
-                              })}
-                            />
-                          </InputGroup>
-                          {projectsForm.errors.valorTotalPrevisto &&
-                            projectsForm.touched.valorTotalPrevisto && (
-                              <TextError>
-                                {projectsForm.errors.valorTotalPrevisto}
-                              </TextError>
-                            )}
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel htmlFor="classificacaoId">
-                            CLASSIFICAÇÃO
-                          </FormLabel>
-                          <Select
-                            id="classificacaoId"
-                            name="classificacaoId"
-                            value={projectsForm.values.classificacaoId}
-                            onChange={projectsForm.handleChange}
-                            w={useBreakpointValue({ base: '100%', md: '95%' })}
-                          >
-                            {classificacaoState.map((classificacao) => (
-                              <option
-                                key={classificacao.id}
-                                value={classificacao.id}
-                              >
-                                {classificacao.classificacao}
-                              </option>
-                            ))}
-                          </Select>
-                          {projectsForm.errors.classificacaoId &&
-                            projectsForm.touched.classificacaoId && (
-                              <TextError>
-                                {projectsForm.errors.classificacaoId}
-                              </TextError>
-                            )}
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel htmlFor="solicitanteId">
-                            SOLICITANTE
-                          </FormLabel>
-                          <Select
-                            id="solicitanteId"
-                            name="solicitanteId"
-                            value={projectsForm.values.solicitanteId}
-                            onChange={projectsForm.handleChange}
-                          >
-                            {/* <option value="Operacao">Operação</option>
-                            <option value="SMS">SMS</option>
-                            <option value="Reservatorio">Reservatório</option>
-                            <option value="UTE">UTE</option>
-                            <option value="Controle_de_producao">
-                              Controle de Produção
-                            </option> */}
-                            {solicitanteState.map((solicitante) => (
-                              <option
-                                key={solicitante.id}
-                                value={solicitante.id}
-                              >
-                                {solicitante.solicitante}
-                              </option>
-                            ))}
-                          </Select>
-                          {projectsForm.errors.solicitanteId &&
-                            projectsForm.touched.solicitanteId && (
-                              <TextError>
-                                {projectsForm.errors.solicitanteId}
-                              </TextError>
-                            )}
-                        </FormControl>
+                        <FormValorTotalPrevisto projectsForm={projectsForm} />
+                        <FormClassificacao projectsForm={projectsForm} />
+                        <FormSolicitante projectsForm={projectsForm} />
                       </Flex>
                       <Flex
                         flexDirection={useBreakpointValue({
@@ -372,48 +101,8 @@ export function ProjectsRegistration() {
                           md: 'row',
                         })}
                       >
-                        <FormControl>
-                          <FormLabel htmlFor="justificativa">
-                            JUSTIFICATIVA
-                          </FormLabel>
-                          <Input
-                            isRequired
-                            placeholder="Ex.: Sistema necessário para medição e entrega de gás."
-                            id="justificativa"
-                            type="justificativa"
-                            name="justificativa"
-                            value={projectsForm.values.justificativa}
-                            onChange={projectsForm.handleChange}
-                            w={useBreakpointValue({ base: '100%', md: '95%' })}
-                          />
-                          {projectsForm.errors.justificativa &&
-                            projectsForm.touched.justificativa && (
-                              <TextError>
-                                {projectsForm.errors.justificativa}
-                              </TextError>
-                            )}
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel htmlFor="poloId">POLO</FormLabel>
-                          <Select
-                            id="poloId"
-                            name="poloId"
-                            value={projectsForm.values.poloId}
-                            onChange={projectsForm.handleChange}
-                          >
-                            {poloState.map((polo) => (
-                              <option key={polo.id} value={polo.id}>
-                                {polo.polo}
-                              </option>
-                            ))}
-                          </Select>
-                          {projectsForm.errors.poloId &&
-                            projectsForm.touched.poloId && (
-                              <TextError>
-                                {projectsForm.errors.poloId}
-                              </TextError>
-                            )}
-                        </FormControl>
+                        <FormJustificativa projectsForm={projectsForm} />
+                        <FormPolo projectsForm={projectsForm} />
                       </Flex>
                     </Stack>
                     <Stack spacing="5">
@@ -423,87 +112,10 @@ export function ProjectsRegistration() {
                           md: 'row',
                         })}
                       >
-                        <FormControl>
-                          <FormLabel htmlFor="dataInicio">INÍCIO</FormLabel>
-                          <Input
-                            isRequired
-                            placeholder="dd/mm/aaaa"
-                            id="dataInicio"
-                            type="date"
-                            name="dataInicio"
-                            value={projectsForm.values.dataInicio}
-                            onChange={projectsForm.handleChange}
-                            w={useBreakpointValue({ base: '100%', md: '95%' })}
-                          />
-                          {projectsForm.errors.dataInicio &&
-                            projectsForm.touched.dataInicio && (
-                              <TextError>
-                                {projectsForm.errors.dataInicio}
-                              </TextError>
-                            )}
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel htmlFor="dataFim">FIM</FormLabel>
-                          <Input
-                            isRequired
-                            placeholder="dd/mm/aaaa"
-                            id="dataFim"
-                            type="date"
-                            name="dataFim"
-                            value={projectsForm.values.dataFim}
-                            onChange={projectsForm.handleChange}
-                            w={useBreakpointValue({ base: '100%', md: '90%' })}
-                          />
-                          {projectsForm.errors.dataFim &&
-                            projectsForm.touched.dataFim && (
-                              <TextError>
-                                {' '}
-                                {projectsForm.errors.dataFim}
-                              </TextError>
-                            )}
-                        </FormControl>
-
-                        <FormControl>
-                          <FormLabel htmlFor="dataInicioReal">
-                            INÍCIO REAL
-                          </FormLabel>
-                          <Input
-                            isRequired
-                            placeholder="dd/mm/aaaa"
-                            id="dataInicioReal"
-                            type="date"
-                            name="dataInicioReal"
-                            value={projectsForm.values.dataInicioReal}
-                            onChange={projectsForm.handleChange}
-                            w={useBreakpointValue({ base: '100%', md: '95%' })}
-                          />
-                          {projectsForm.errors.dataInicioReal &&
-                            projectsForm.touched.dataInicioReal && (
-                              <TextError>
-                                {projectsForm.errors.dataInicioReal}
-                              </TextError>
-                            )}
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel htmlFor="dataFimReal">FIM REAL</FormLabel>
-                          <Input
-                            isRequired
-                            placeholder="dd/mm/aaaa"
-                            id="dataFimReal"
-                            type="date"
-                            name="dataFimReal"
-                            value={projectsForm.values.dataFimReal}
-                            onChange={projectsForm.handleChange}
-                            w={useBreakpointValue({ base: '100%', md: '100%' })}
-                          />
-                          {projectsForm.errors.dataFimReal &&
-                            projectsForm.touched.dataFimReal && (
-                              <TextError>
-                                {' '}
-                                {projectsForm.errors.dataFimReal}
-                              </TextError>
-                            )}
-                        </FormControl>
+                        <FormDataInicio projectsForm={projectsForm} />
+                        <FormDataFim projectsForm={projectsForm} />
+                        <FormDataInicioReal projectsForm={projectsForm} />
+                        <FormDataFimReal projectsForm={projectsForm} />
                       </Flex>
                     </Stack>
                     <Flex
@@ -512,56 +124,8 @@ export function ProjectsRegistration() {
                         md: 'row',
                       })}
                     >
-                      <FormControl>
-                        <FormLabel htmlFor="prioridadeId">PRIORIDADE</FormLabel>
-                        <Select
-                          id="prioridadeId"
-                          name="prioridadeId"
-                          value={projectsForm.values.prioridadeId}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '95%' })}
-                        >
-                          {prioridadeState.map((prioridade) => (
-                            <option key={prioridade.id} value={prioridade.id}>
-                              {prioridade.prioridade}
-                            </option>
-                          ))}
-                        </Select>
-                        {projectsForm.errors.prioridadeId &&
-                          projectsForm.touched.prioridadeId && (
-                            <TextError>
-                              {projectsForm.errors.prioridadeId}
-                            </TextError>
-                          )}
-                      </FormControl>
-
-                      <FormControl>
-                        <FormLabel htmlFor="complexidadeId">
-                          COMPLEXIDADE
-                        </FormLabel>
-                        <Select
-                          id="complexidadeId"
-                          name="complexidadeId"
-                          value={projectsForm.values.complexidadeId}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
-                        >
-                          {complexidadeState.map((complexidade) => (
-                            <option
-                              key={complexidade.id}
-                              value={complexidade.id}
-                            >
-                              {complexidade.complexidade}
-                            </option>
-                          ))}
-                        </Select>
-                        {projectsForm.errors.complexidadeId &&
-                          projectsForm.touched.complexidadeId && (
-                            <TextError>
-                              {projectsForm.errors.complexidadeId}
-                            </TextError>
-                          )}
-                      </FormControl>
+                      <FormPrioridade projectsForm={projectsForm} />
+                      <FormComplexidade projectsForm={projectsForm} />
                     </Flex>
 
                     <Flex
@@ -570,71 +134,9 @@ export function ProjectsRegistration() {
                         md: 'row',
                       })}
                     >
-                      <FormControl>
-                        <FormLabel htmlFor="localId">LOCAL</FormLabel>
-                        <Select
-                          id="localId"
-                          name="localId"
-                          value={projectsForm.values.localId}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '95%' })}
-                        >
-                          {localProjetoState.map((local) => (
-                            <option key={local.id} value={local.id}>
-                              {local.local}
-                            </option>
-                          ))}
-                        </Select>
-                        {projectsForm.errors.localId &&
-                          projectsForm.touched.localId && (
-                            <TextError>{projectsForm.errors.localId}</TextError>
-                          )}
-                      </FormControl>
-
-                      <FormControl>
-                        <FormLabel htmlFor="divisaoId">DIVISÃO</FormLabel>
-                        <Select
-                          id="divisaoId"
-                          name="divisaoId"
-                          value={projectsForm.values.divisaoId}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '95%' })}
-                        >
-                          {divisaoState.map((divisao) => (
-                            <option key={divisao.id} value={divisao.id}>
-                              {divisao.divisao}
-                            </option>
-                          ))}
-                        </Select>
-                        {projectsForm.errors.divisaoId &&
-                          projectsForm.touched.divisaoId && (
-                            <TextError>
-                              {projectsForm.errors.divisaoId}
-                            </TextError>
-                          )}
-                      </FormControl>
-                      <FormControl>
-                        <FormLabel htmlFor="statusId">STATUS</FormLabel>
-                        <Select
-                          id="statusId"
-                          name="statusId"
-                          value={projectsForm.values.statusId}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
-                        >
-                          {statusProjetoState.map((status) => (
-                            <option key={status.id} value={status.id}>
-                              {status.status}
-                            </option>
-                          ))}
-                        </Select>
-                        {projectsForm.errors.statusId &&
-                          projectsForm.touched.statusId && (
-                            <TextError>
-                              {projectsForm.errors.statusId}
-                            </TextError>
-                          )}
-                      </FormControl>
+                      <FormLocal projectsForm={projectsForm} />
+                      <FormDivisao projectsForm={projectsForm} />
+                      <FormStatusProjeto projectsForm={projectsForm} />
                     </Flex>
                     <Flex
                       flexDirection={useBreakpointValue({
@@ -642,49 +144,8 @@ export function ProjectsRegistration() {
                         md: 'row',
                       })}
                     >
-                      <FormControl>
-                        <FormLabel htmlFor="gateId">GATE</FormLabel>
-                        <Select
-                          id="gateId"
-                          name="gateId"
-                          value={projectsForm.values.gateId}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '95%' })}
-                        >
-                          {gateState.map((gate) => (
-                            <option key={gate.id} value={gate.id}>
-                              {gate.gate}
-                            </option>
-                          ))}
-                        </Select>
-                        {projectsForm.errors.gateId &&
-                          projectsForm.touched.gateId && (
-                            <TextError>{projectsForm.errors.gateId}</TextError>
-                          )}
-                      </FormControl>
-
-                      <FormControl>
-                        <FormLabel htmlFor="tipoProjetoId">TIPO</FormLabel>
-                        <Select
-                          id="tipoProjetoId"
-                          name="tipoProjetoId"
-                          value={projectsForm.values.tipoProjetoId}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
-                        >
-                          {tipoProjetoState.map((tipo) => (
-                            <option key={tipo.id} value={tipo.id}>
-                              {tipo.tipo}
-                            </option>
-                          ))}
-                        </Select>
-                        {projectsForm.errors.tipoProjetoId &&
-                          projectsForm.touched.tipoProjetoId && (
-                            <TextError>
-                              {projectsForm.errors.tipoProjetoId}
-                            </TextError>
-                          )}
-                      </FormControl>
+                      <FormGate projectsForm={projectsForm} />
+                      <FormTipoProjeto projectsForm={projectsForm} />
                     </Flex>
                     <Flex
                       flexDirection={useBreakpointValue({
@@ -692,28 +153,7 @@ export function ProjectsRegistration() {
                         md: 'row',
                       })}
                     >
-                      <FormControl>
-                        <FormLabel htmlFor="demandaId">DEMANDA</FormLabel>
-                        <Select
-                          id="demandaId"
-                          name="demandaId"
-                          value={projectsForm.values.demandaId}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
-                        >
-                          {demandaState.map((demanda) => (
-                            <option key={demanda.id} value={demanda.id}>
-                              {demanda.demanda}
-                            </option>
-                          ))}
-                        </Select>
-                        {projectsForm.errors.demandaId &&
-                          projectsForm.touched.demandaId && (
-                            <TextError>
-                              {projectsForm.errors.demandaId}
-                            </TextError>
-                          )}
-                      </FormControl>
+                      <FormDemanda projectsForm={projectsForm} />
                     </Flex>
                     <Flex
                       flexDirection={useBreakpointValue({
@@ -721,25 +161,7 @@ export function ProjectsRegistration() {
                         md: 'row',
                       })}
                     >
-                      <FormControl>
-                        <FormLabel htmlFor="comentarios">COMENTÁRIOS</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder=""
-                          id="comentarios"
-                          type="comentarios"
-                          name="comentarios"
-                          value={projectsForm.values.comentarios}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
-                        />
-                        {projectsForm.errors.comentarios &&
-                          projectsForm.touched.comentarios && (
-                            <TextError>
-                              {projectsForm.errors.comentarios}
-                            </TextError>
-                          )}
-                      </FormControl>
+                      <FormComentarios projectsForm={projectsForm} />
                     </Flex>
 
                     <Stack spacing="6">
