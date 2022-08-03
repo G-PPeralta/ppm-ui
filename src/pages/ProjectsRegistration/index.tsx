@@ -165,8 +165,9 @@ export function ProjectsRegistration() {
                       <FormComentarios projectsForm={projectsForm} />
                     </Flex>
 
-                    <Stack spacing="6">
+                    <Stack>
                       <Button
+                        mt={4}
                         disabled={!projectsForm.isValid}
                         type="submit"
                         background="origem.300"
