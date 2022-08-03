@@ -67,20 +67,20 @@ export default function NaoPrevistoComponent() {
         w={useBreakpointValue({ base: '100%', md: 'fit-content' })}
         align="center"
         justify="center"
-        bg={useBreakpointValue({ base: 'white', sm: '#EDF2F7' })}
+        bg={useBreakpointValue({ base: '#EDF2F7', sm: '#EDF2F7' })}
       >
         <Box
           py={{ base: '0', sm: '4' }}
           px={{ base: '0', sm: '4' }}
           w="fit-content"
-          bg={useBreakpointValue({ base: 'transparent', sm: 'white' })}
+          bg={useBreakpointValue({ base: 'white', sm: 'white' })}
           boxShadow={{
             base: 'none',
             sm: useColorModeValue('md', 'md-dark'),
           }}
           borderRadius={{ base: 'none', sm: 'xl' }}
         >
-          <Box w={480}>
+          <Box w={{ base: 360, lg: 480 }}>
             <Text
               mb={1}
               sx={{ fontSize: 18, fontWeight: '600', alignSelf: 'center' }}

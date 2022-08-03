@@ -1,4 +1,4 @@
-import { Box, Flex, useBreakpointValue, VStack } from '@chakra-ui/react';
+import { Box, Flex, VStack } from '@chakra-ui/react';
 
 import Sidebar from 'components/SideBar';
 
@@ -11,52 +11,93 @@ import Realizado from './components/Realizado';
 import TotalOrcamentos from './components/TotalOrcamentos';
 import TotalProjetos from './components/TotalProjetos';
 
+const windowWidth = window.innerWidth;
+
 export function Home() {
   return (
     <>
       <Sidebar>
         <Flex
-          w={useBreakpointValue({
-            base: 'auto',
-            md: '80%',
-            lg: '60%',
-            xl: '40%',
-          })}
+          w={'auto'}
           display={'flex'}
           wrap={'wrap'}
           align="flex-start"
           justify="center"
           direction="column"
         >
-          <VStack align="flex-start">
-            <Box display={'flex'} flexShrink={0} flexWrap={'wrap'}>
+          {windowWidth > 900 ? (
+            <VStack align="flex-start">
+              <Box display={'flex'} flexShrink={0} flexWrap={'wrap'}>
+                <TotalProjetos />
+                <Box
+                  ml={5}
+                  sx={{ height: 'auto' }}
+                  display="flex"
+                  flexDirection={'column'}
+                  justifyContent="space-evenly"
+                >
+                  <TotalOrcamentos />
+                  <Realizado />
+                  <NaoPrevisto />
+                </Box>
+              </Box>
+
+              <Box mt={5} sx={{ display: 'flex' }}>
+                <Projetos />
+                <Box ml={5}>
+                  <FaseProjetos />
+                </Box>
+                <Box ml={5}>
+                  <AreasDemandadas />
+                </Box>
+              </Box>
+              <Box mt={5}>
+                <PrevistoxRealizado />
+              </Box>
+            </VStack>
+          ) : (
+            <VStack align="flex-start" w={'100%'}>
               <TotalProjetos />
               <Box
-                ml={5}
-                sx={{ height: 'auto' }}
-                display="flex"
-                flexDirection={'column'}
-                justifyContent="space-evenly"
+                mt={2}
+                display={'flex'}
+                flexDirection={'row'}
+                flexShrink={0}
+                flexWrap={'wrap'}
               >
-                <TotalOrcamentos />
-                <Realizado />
-                <NaoPrevisto />
-              </Box>
-            </Box>
-
-            <Box mt={5} sx={{ display: 'flex' }}>
-              <Projetos />
-              <Box ml={5}>
+                <Box
+                  // h={280}
+                  mr={2}
+                  display="flex"
+                  flexDirection={'column'}
+                  justifyContent="space-evenly"
+                >
+                  <TotalOrcamentos />
+                  <Realizado />
+                  <NaoPrevisto />
+                </Box>
                 <FaseProjetos />
               </Box>
-              <Box ml={5}>
-                <AreasDemandadas />
+
+              <Box mt={5} display="flex" flexDirection={'column'}>
+                <Box
+                  mt={2}
+                  display={'flex'}
+                  flexDirection={'row'}
+                  flexShrink={0}
+                  flexWrap={'wrap'}
+                >
+                  <Projetos />
+                  <Box ml={2}>
+                    <AreasDemandadas />
+                  </Box>
+                </Box>
               </Box>
-            </Box>
-            <Box mt={5}>
-              <PrevistoxRealizado />
-            </Box>
-          </VStack>
+              <Box mt={5}>
+                <PrevistoxRealizado />
+              </Box>
+            </VStack>
+          )}
         </Flex>
       </Sidebar>
     </>

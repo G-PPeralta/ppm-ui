@@ -44,7 +44,7 @@ export function MobileNav({
   return (
     <Flex
       ml={{ base: 0, md: 0, lg: 0 }}
-      px={{ base: 4, md: 0, lg: 0 }}
+      px={{ base: 4, md: 4, lg: 4 }}
       height="20"
       alignItems="center"
       bg={useColorModeValue('white', 'gray.900')}
