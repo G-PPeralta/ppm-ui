@@ -100,8 +100,8 @@ export default function NaoPrevistoComponent() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data.map((d) => (
-                    <Tr mt={1}>
+                  {data.map((d, index) => (
+                    <Tr mt={1} key={index}>
                       <Th color="gray.400" sx={{ fontSize: 11 }}>
                         ID
                       </Th>
