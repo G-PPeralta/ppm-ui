@@ -13,12 +13,18 @@ import { SidebarContent } from 'components/SidebarContent';
 
 import { useAuth } from 'hooks/useAuth';
 
+import styles from './Sidebar.module.scss';
+
 export default function Sidebar({ children }: { children: ReactNode }) {
   const { user } = useAuth();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
+    <Box
+      minH="100vh"
+      bg={useColorModeValue('gray.100', 'gray.900')}
+      className={styles.sidebar}
+    >
       <SidebarContent
         onClose={() => onClose}
         display={{ base: 'none', md: 'block' }}

@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 import {
   Box,
   Flex,
@@ -9,7 +11,47 @@ import {
 
 import StackedBarChart from 'components/StackedBarChart';
 
+import { getTotalProjetos } from 'services/get/Dashboard';
+
 export default function TotalProjetosComponent() {
+  const [total, setTotal] = useState(1);
+  const [iniciados, setIniciados] = useState(0);
+  const [finalizados, setFinalizados] = useState(0);
+  const [cancelados, setCancelados] = useState(0);
+  const [holds, setHolds] = useState(0);
+  const [prioridadeAlta, setPrioridadeAlta] = useState(0);
+  const [prioridadeMedia, setPrioridadeMedia] = useState(0);
+  const [prioridadeBaixa, setPrioridadeBaixa] = useState(0);
+  const [complexidadeAlta, setComplexidadeAlta] = useState(0);
+  const [complexidadeMedia, setComplexidadeMedia] = useState(0);
+  const [complexidadeBaixa, setComplexidadeBaixa] = useState(0);
+
+  async function handleGetTipoResponsavel() {
+    const { data } = await getTotalProjetos();
+    console.log('data', data);
+    setTotal(data.totalProjetos);
+    // setIniciados(data.projetosPorStatus[1].qtd);
+    setIniciados(
+      data.projetosPorStatus[1].qtd +
+        data.projetosPorStatus[2].qtd +
+        data.projetosPorStatus[3].qtd,
+    );
+    setFinalizados(data.projetosPorStatus[5].qtd);
+    setCancelados(data.projetosPorStatus[4].qtd);
+    // setHolds(data.projetosPorStatus[6].qtd);
+    setHolds(data.projetosPorStatus[6].qtd + data.projetosPorStatus[0].qtd);
+    setPrioridadeAlta(data.prioridades.alta);
+    setPrioridadeMedia(data.prioridades.media);
+    setPrioridadeBaixa(data.prioridades.baixa);
+    setComplexidadeAlta(data.complexidades.alta);
+    setComplexidadeMedia(data.complexidades.media);
+    setComplexidadeBaixa(data.complexidades.baixa);
+  }
+
+  useEffect(() => {
+    handleGetTipoResponsavel();
+  }, []);
+
   return (
     <Stack spacing="8">
       <Flex
@@ -52,7 +94,7 @@ export default function TotalProjetosComponent() {
                 }}
                 color="#ffffff"
               >
-                312 Projetos
+                {total} Projetos
               </Text>
             </Box>
             <Box>
@@ -63,7 +105,7 @@ export default function TotalProjetosComponent() {
                 sx={{ fontSize: 16, width: '200px', borderRadius: '2px' }}
                 color="#ffffff"
               >
-                72 Projetos Iniciandos
+                {iniciados} Projetos Iniciados
               </Text>
               <Text
                 p={1.5}
@@ -72,7 +114,7 @@ export default function TotalProjetosComponent() {
                 sx={{ fontSize: 16, width: '200px', borderRadius: '2px' }}
                 color="#ffffff"
               >
-                120 Projetos Finalizados
+                {finalizados} Projetos Finalizados
               </Text>
               <Text
                 p={1.5}
@@ -81,7 +123,7 @@ export default function TotalProjetosComponent() {
                 sx={{ fontSize: 16, width: '200px', borderRadius: '2px' }}
                 color="#ffffff"
               >
-                60 Projetos Cancelados
+                {cancelados} Projetos Cancelados
               </Text>
               <Text
                 p={1.5}
@@ -90,7 +132,7 @@ export default function TotalProjetosComponent() {
                 sx={{ fontSize: 16, width: '200px', borderRadius: '2px' }}
                 color="#ffffff"
               >
-                60 Projetos Holds
+                {holds} Projetos Holds
               </Text>
             </Box>
             <Box>
@@ -100,7 +142,7 @@ export default function TotalProjetosComponent() {
                 sx={{ fontSize: 16, fontWeight: '600' }}
                 color="#93E01B"
               >
-                18%
+                {Math.round((iniciados / total) * 100)}%
               </Text>
               <Text
                 p={1.5}
@@ -108,7 +150,7 @@ export default function TotalProjetosComponent() {
                 sx={{ fontSize: 16, fontWeight: '600' }}
                 color="#0239C3"
               >
-                32%
+                {Math.round((finalizados / total) * 100)}%
               </Text>
               <Text
                 p={1.5}
@@ -116,7 +158,7 @@ export default function TotalProjetosComponent() {
                 sx={{ fontSize: 16, fontWeight: '600' }}
                 color="#F94144"
               >
-                60%
+                {Math.round((cancelados / total) * 100)}%
               </Text>
               <Text
                 p={1.5}
@@ -124,7 +166,7 @@ export default function TotalProjetosComponent() {
                 sx={{ fontSize: 16, fontWeight: '600' }}
                 color="#F4DD06"
               >
-                60%
+                {Math.round((holds / total) * 100)}%
               </Text>
             </Box>
             <Box ml={5}>
@@ -164,7 +206,7 @@ export default function TotalProjetosComponent() {
                   sx={{ fontSize: 16, fontWeight: '600', alignSelf: 'center' }}
                   color="#1FBE55"
                 >
-                  7
+                  {prioridadeAlta}
                 </Text>
               </Box>
               <Box
@@ -186,7 +228,7 @@ export default function TotalProjetosComponent() {
                   sx={{ fontSize: 16, fontWeight: '600', alignSelf: 'center' }}
                   color="#F4DD06"
                 >
-                  7
+                  {prioridadeMedia}
                 </Text>
               </Box>
               <Box
@@ -208,7 +250,7 @@ export default function TotalProjetosComponent() {
                   sx={{ fontSize: 16, fontWeight: '600', alignSelf: 'center' }}
                   color="#F94144"
                 >
-                  7
+                  {prioridadeBaixa}
                 </Text>
               </Box>
               <Text
@@ -239,7 +281,7 @@ export default function TotalProjetosComponent() {
                   sx={{ fontSize: 16, fontWeight: '600', alignSelf: 'center' }}
                   color="#1FBE55"
                 >
-                  7
+                  {complexidadeAlta}
                 </Text>
               </Box>
               <Box
@@ -261,7 +303,7 @@ export default function TotalProjetosComponent() {
                   sx={{ fontSize: 16, fontWeight: '600', alignSelf: 'center' }}
                   color="#F4DD06"
                 >
-                  7
+                  {complexidadeMedia}
                 </Text>
               </Box>
               <Box
@@ -283,7 +325,7 @@ export default function TotalProjetosComponent() {
                   sx={{ fontSize: 16, fontWeight: '600', alignSelf: 'center' }}
                   color="#F94144"
                 >
-                  7
+                  {complexidadeBaixa}
                 </Text>
               </Box>
             </Box>

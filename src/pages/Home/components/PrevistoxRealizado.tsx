@@ -10,6 +10,8 @@ import {
 import PieChart from 'components/PieChart';
 import StackedBarChart from 'components/StackedBarChart';
 
+import styles from './Styles/PrevistoxRealizado.module.scss';
+
 export default function PrevistoxRealizadoComponent() {
   const grafData = [
     {
@@ -25,7 +27,7 @@ export default function PrevistoxRealizadoComponent() {
   ];
 
   return (
-    <Stack spacing="8">
+    <Stack spacing="8" className={styles.previstoxrealizado}>
       <Flex
         w={useBreakpointValue({ base: '100%', md: 'fit-content' })}
         align="center"
