@@ -22,6 +22,7 @@ import FormDataFimReal from './Components/FormDataFimReal';
 import FormDataInicio from './Components/FormDataInicio';
 import FormDemanda from './Components/FormDemanda';
 import FormDescricao from './Components/FormDescricao';
+import FormDisabledResponsavel from './Components/FormDisabledResponsavel';
 import FormDivisao from './Components/FormDivisao';
 import FormGate from './Components/FormGate';
 import FormDataInicioReal from './Components/FormInicioReal';
@@ -39,9 +40,6 @@ import { RegisterResponsibleModal } from './Components/RegisterResponsibleModal'
 export function ProjectsRegistration() {
   const wd = window.innerWidth;
   const { projectsForm, loading } = useProjects();
-
-  console.log(projectsForm.values);
-
   return (
     <>
       <Sidebar>
@@ -83,6 +81,7 @@ export function ProjectsRegistration() {
                   <Stack spacing="6" w="100%">
                     <Stack spacing="5">
                       <RegisterResponsibleModal projectsForm={projectsForm} />
+                      <FormDisabledResponsavel projectsForm={projectsForm} />
                       <FormNomeProjeto projectsForm={projectsForm} />
                       <FormDescricao projectsForm={projectsForm} />
                     </Stack>

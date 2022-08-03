@@ -171,7 +171,7 @@ export function RegisterResponsibleModal(projectsForm: any) {
                     transition: 'all 0.4s',
                   }}
                 >
-                  Adicionar Outro Responsável
+                  ADICIONAR OUTRA PESSOA RESPONSÁVEL
                 </Button>
               </Flex>
             </ModalBody>
@@ -187,7 +187,7 @@ export function RegisterResponsibleModal(projectsForm: any) {
                   transition: 'all 0.4s',
                 }}
               >
-                Salvar
+                SALVAR
               </Button>
             </ModalFooter>
           </ModalContent>
