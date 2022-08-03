@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 
 import {
@@ -16,29 +16,70 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useDisclosure,
   IconButton,
+  useDisclosure,
 } from '@chakra-ui/react';
+import { TipoResponsavel } from 'interfaces/Services';
 
 import { TextError } from 'components/TextError';
 
-import { useProjects } from 'hooks/useProjects';
+import { getTipoResponsavel } from 'services/get/Projetos';
 
-export function RegisterResponsibleModal() {
-  const [numberOfResponsibles, setNumberOfResponsibles] = useState([1]);
-  const { projectsForm } = useProjects();
-
-  useEffect(() => {
-    // console.log(projectsForm.values.modalResponsible);
-  }, [projectsForm.values]);
+export function RegisterResponsibleModal(projectsForm: any) {
+  const [numeroDeResponsaveis, setNumeroDeResponsaveis] = useState([
+    {
+      nomeResponsavel: '',
+      tipoResponsavel: 1,
+    },
+  ]);
+  const [tipoResponsavel, setTipoResponsavel] = useState<TipoResponsavel[]>(
+    [] as TipoResponsavel[],
+  );
+  const [loading, setLoading] = useState(true);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   function addResponsible() {
-    setNumberOfResponsibles([
-      ...numberOfResponsibles,
-      numberOfResponsibles.length + 1,
+    setNumeroDeResponsaveis([
+      ...numeroDeResponsaveis,
+      {
+        nomeResponsavel: '',
+        tipoResponsavel: 1,
+      },
     ]);
   }
-  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  function handleChange(event: any, index: number): void {
+    setNumeroDeResponsaveis([
+      ...numeroDeResponsaveis.slice(0, index),
+      {
+        ...numeroDeResponsaveis[index],
+        [event.target.name]: event.target.value,
+      },
+      ...numeroDeResponsaveis.slice(index + 1),
+    ]);
+  }
+
+  function saveResponsible() {
+    projectsForm.projectsForm.setFieldValue(
+      'responsavel',
+      numeroDeResponsaveis.filter((item) => item.nomeResponsavel !== ''),
+    );
+    onClose();
+  }
+
+  async function handleGetTipoResponsavel() {
+    const { data } = await getTipoResponsavel();
+    const dataReqTipoResponsavel: TipoResponsavel[] = data;
+    if (!dataReqTipoResponsavel) {
+      return null;
+    }
+    setTipoResponsavel(dataReqTipoResponsavel);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    handleGetTipoResponsavel();
+  }, []);
 
   return (
     <>
@@ -65,48 +106,49 @@ export function RegisterResponsibleModal() {
             <ModalHeader>CADASTRAR RESPONSÁVEL</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              {numberOfResponsibles.map((responsible, index) => (
-                <Flex align="end" mb={3} key={responsible}>
+              {numeroDeResponsaveis.map((responsavel: any, index: number) => (
+                <Flex align="end" mb={3} key={index}>
                   <FormControl>
-                    <FormLabel htmlFor="name">NOME</FormLabel>
+                    <FormLabel htmlFor="nomeResponsavel">NOME</FormLabel>
                     <Input
                       isRequired
                       placeholder="Nome do responsável"
-                      id="name"
                       type="text"
-                      name="name"
-                      value={projectsForm.values.modalResponsible[index]}
-                      onChange={projectsForm.handleChange}
+                      id="nomeResponsavel"
+                      name="nomeResponsavel"
+                      value={responsavel.nomeResponsavel}
+                      onChange={(event) => handleChange(event, index)}
                       width="95%"
                     />
-                    {projectsForm.errors.modalResponsible &&
-                      projectsForm.touched.modalResponsible && (
+                    {projectsForm.projectsForm.errors.responsavel &&
+                      projectsForm.projectsForm.touched.responsavel && (
                         <TextError>
-                          {projectsForm.errors.modalResponsible}
+                          {projectsForm.projectsForm.errors.responsavel}
                         </TextError>
                       )}
                   </FormControl>
                   <FormControl>
-                    <FormLabel htmlFor="responsible">TIPO</FormLabel>
-                    <Select
-                      id="responsibleId"
-                      name="responsible"
-                      value={projectsForm.values.modalType}
-                      onChange={() => {
-                        projectsForm.setFieldValue(
-                          'modalType',
-                          projectsForm.values.modalType[index],
-                        );
-                      }}
-                      width="95%"
-                    >
-                      <option value="1">Tipo A</option>
-                      <option value="2">Tipo B</option>
-                      <option value="3">Tipo C</option>
-                    </Select>
-                    {projectsForm.errors.modalType &&
-                      projectsForm.touched.modalType && (
-                        <TextError>{projectsForm.errors.modalType}</TextError>
+                    <FormLabel htmlFor="tipoResponsavel">TIPO</FormLabel>
+                    {!loading && (
+                      <Select
+                        id="tipoResponsavel"
+                        name="tipoResponsavel"
+                        value={responsavel.tipoResponsavel}
+                        onChange={(event) => handleChange(event, index)}
+                        width="95%"
+                      >
+                        {tipoResponsavel.map((tipo) => (
+                          <option key={tipo.id} value={tipo.id}>
+                            {tipo.tipo_responsavel}
+                          </option>
+                        ))}
+                      </Select>
+                    )}
+                    {projectsForm.projectsForm.errors.tipoResponsavel &&
+                      projectsForm.projectsForm.touched.tipoResponsavel && (
+                        <TextError>
+                          {projectsForm.projectsForm.errors.tipoResponsavel}
+                        </TextError>
                       )}
                   </FormControl>
                 </Flex>
@@ -129,7 +171,7 @@ export function RegisterResponsibleModal() {
                     transition: 'all 0.4s',
                   }}
                 >
-                  Adicionar Outro Responsável
+                  ADICIONAR OUTRA PESSOA RESPONSÁVEL
                 </Button>
               </Flex>
             </ModalBody>
@@ -139,13 +181,13 @@ export function RegisterResponsibleModal() {
                 background="origem.300"
                 variant="primary"
                 color="white"
-                onClick={onClose}
+                onClick={() => saveResponsible()}
                 _hover={{
                   background: 'origem.500',
                   transition: 'all 0.4s',
                 }}
               >
-                Salvar
+                SALVAR
               </Button>
             </ModalFooter>
           </ModalContent>

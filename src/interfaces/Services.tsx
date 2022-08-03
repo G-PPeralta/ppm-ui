@@ -59,27 +59,33 @@ export interface ResponseUserPending {
   nome_role: string;
 }
 
+export interface ResponsavelProjeto {
+  nomeResponsavel: string;
+  tipoResponsavel: number;
+}
+
 export interface RegisterProjectProps {
-  name: string;
-  description: string;
-  budget: number;
-  classification: string;
-  requester: string;
-  justification: string;
-  pole: string;
-  start: string;
-  end: string;
-  startReal: string;
-  endReal: string;
-  priority: string;
-  complexity: string;
-  place: string;
-  division: string;
-  status: string;
-  gate: string;
-  typeProject: string;
-  demand: string;
-  comments: string;
+  nomeProjeto: string;
+  descricao: string;
+  valorTotalPrevisto: number;
+  classificacaoId: number;
+  solicitanteId: number;
+  justificativa: string;
+  poloId: number;
+  dataInicio: string;
+  dataFim: string;
+  dataInicioReal: string;
+  dataFimReal: string;
+  prioridadeId: number;
+  complexidadeId: number;
+  localId: number;
+  divisaoId: number;
+  statusId: number;
+  gateId: number;
+  tipoProjetoId: number;
+  demandaId: number;
+  comentarios: string;
+  responsavel: ResponsavelProjeto[];
 }
 
 export interface GanttPayload {
@@ -123,4 +129,75 @@ export interface GanttMacroDto {
 export interface IGantt {
   nomeProjeto: string;
   macroatividades: GanttMacroDto[];
+}
+
+export interface TipoResponsavel {
+  id: number;
+  tipo_responsavel: string;
+}
+
+export interface Classificacao {
+  id: number;
+  classificacao: string;
+  deletado: boolean;
+}
+
+export interface Polo {
+  id: number;
+  polo: string;
+  deletado: boolean;
+}
+
+export interface Solicitante {
+  id: number;
+  solicitante: string;
+  deletado: boolean;
+}
+
+export interface Prioridade {
+  id: number;
+  prioridade: string;
+  deletado: boolean;
+}
+
+export interface Complexidade {
+  id: number;
+  complexidade: string;
+  deletado: boolean;
+}
+
+export interface LocalProjeto {
+  id: number;
+  local: string;
+  deletado: boolean;
+}
+
+export interface Divisao {
+  id: number;
+  divisao: string;
+  deletado: boolean;
+}
+
+export interface StatusProjeto {
+  id: number;
+  status: string;
+  deletado: boolean;
+}
+
+export interface Gate {
+  id: number;
+  gate: string;
+  deletado: boolean;
+}
+
+export interface TipoProjeto {
+  id: number;
+  tipo: string;
+  deletado: boolean;
+}
+
+export interface Demanda {
+  id: number;
+  demanda: string;
+  deletado: boolean;
 }
