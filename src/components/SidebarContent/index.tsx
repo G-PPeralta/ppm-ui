@@ -38,7 +38,7 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
       bg={useColorModeValue('white', 'gray.900')}
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
-      w={{ base: 'full', md: 60 }}
+      w={{ base: 'full', md: 'full', lg: 60 }}
       pos="fixed"
       h="full"
       {...rest}
@@ -47,7 +47,10 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
         <Link to="/">
           <Image src={logoImage} alt="Logo Origem Energias" />
         </Link>
-        <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
+        <CloseButton
+          display={{ base: 'flex', md: 'flex', lg: 'none' }}
+          onClick={onClose}
+        />
       </Flex>
       {LinkItems.map((link, index) => (
         <div key={index}>

@@ -15,7 +15,7 @@ interface LinkItemProps {
   link?: string;
 }
 export const LinkItems: Array<LinkItemProps> = [
-  { name: 'Inicio', icon: FiHome, link: '/' },
+  { name: 'Dashboard', icon: FiHome, link: '/' },
   { name: 'Cadastro Projetos', icon: FiEdit2, link: '/projects-registration' },
   {
     name: 'Cadastro de Ações',

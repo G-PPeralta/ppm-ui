@@ -40,7 +40,7 @@ export function ProjectsRegistration() {
   const wd = window.innerWidth;
   const { projectsForm, loading } = useProjects();
 
-  console.log(projectsForm.values);
+  // console.log(projectsForm.values);
 
   return (
     <>

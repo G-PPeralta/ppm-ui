@@ -27,7 +27,7 @@ export default function Sidebar({ children }: { children: ReactNode }) {
     >
       <SidebarContent
         onClose={() => onClose}
-        display={{ base: 'none', md: 'block' }}
+        display={{ base: 'none', md: 'none', lg: 'block' }}
       />
       <Drawer
         autoFocus={false}
@@ -49,7 +49,7 @@ export default function Sidebar({ children }: { children: ReactNode }) {
         perfil={user?.nome_role}
         profileImage={user?.avatar}
       />
-      <Box ml={{ base: 0, md: 60 }} p="4">
+      <Box ml={{ base: 0, md: 0, lg: 60 }} p="4">
         {children}
       </Box>
     </Box>

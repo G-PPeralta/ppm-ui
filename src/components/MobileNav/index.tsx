@@ -43,18 +43,24 @@ export function MobileNav({
 
   return (
     <Flex
-      ml={{ base: 0, md: 60 }}
-      px={{ base: 4, md: 4 }}
+      ml={{ base: 0, md: 0, lg: 0 }}
+      px={{ base: 4, md: 0, lg: 0 }}
       height="20"
       alignItems="center"
       bg={useColorModeValue('white', 'gray.900')}
       borderBottomWidth="1px"
       borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
-      justifyContent={{ base: 'space-between', md: 'flex-end' }}
+      justifyContent={{
+        base: 'space-between',
+        md: 'space-between',
+        lg: 'flex-end',
+        xl: 'flex-end',
+      }}
       {...rest}
     >
       <IconButton
-        display={{ base: 'flex', md: 'none' }}
+        display={{ base: 'flex', md: 'flex', lg: 'none' }}
+        ml={{ base: 0, md: 4, lg: 0 }}
         onClick={onOpen}
         variant="outline"
         aria-label="open menu"
