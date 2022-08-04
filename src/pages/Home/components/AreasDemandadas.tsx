@@ -19,8 +19,6 @@ export default function AreasDemandadasComponent() {
   const [areasDemandadas, setAreasDemandadas] = useState<AreasDemandadas[]>(
     [] as AreasDemandadas[],
   );
-  // const [loading, setLoading] = useState(true);
-
   async function handleGetAreasDemandadas() {
     const reqGet = await getAreasDemandadas();
 
@@ -31,11 +29,10 @@ export default function AreasDemandadasComponent() {
 
   useEffect(() => {
     handleGetAreasDemandadas();
-    // setLoading(false);
   }, []);
 
   useEffect(() => {
-    console.log(areasDemandadas);
+    // console.log(areasDemandadas);
   }, [areasDemandadas]);
 
   const grafData1 = [

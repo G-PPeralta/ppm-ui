@@ -1,3 +1,4 @@
+import { StackedBarChartProps } from 'interfaces/Components';
 import {
   BarChart,
   Bar,
@@ -8,38 +9,6 @@ import {
 } from 'recharts';
 
 import style from './StackedBarChart.module.scss';
-
-// const total = 2500;
-// const realizado = 1500;
-// const restante = total - realizado;
-
-// const total2 = 4000;
-// const realizado2 = 1500;
-// const restante2 = total2 - realizado2;
-
-// const data = [
-//   {
-//     name: 'Jan/2022',
-//     Previsto: (realizado / total) * 100,
-//     Realizado: (restante / total) * 100,
-//     Total: 100,
-//   },
-//   {
-//     name: 'Fev/2022',
-//     Previsto: (realizado2 / total2) * 100,
-//     Realizado: (restante2 / total2) * 100,
-//   },
-//   {
-//     name: 'Mar/2022',
-//     Previsto: 25,
-//     Realizado: 75,
-//   },
-//   {
-//     name: 'Abr/2022',
-//     Previsto: 25,
-//     Realizado: 75,
-//   },
-// ];
 
 function getMonthNumber(monthNumber: Number) {
   const months = [
@@ -72,23 +41,15 @@ function getMonthNames(startDate: String, monthsAmount: Number) {
   return months;
 }
 
-interface Props {
-  sizeW: number;
-  sizeH: number;
-  numberBars: number;
-  barW: number;
-  showY: boolean;
-}
-
 export default function StackedBarChart({
   sizeW,
   sizeH,
   numberBars,
   barW,
   showY,
-}: Props) {
-  const totalBudget = 50000;
-  const startDate = '01/10/2022';
+}: StackedBarChartProps) {
+  const totalBudget = 269273328.18;
+  const startDate = '01/01/2022';
   const monthsAmount = numberBars;
 
   const arrayOfMonthsNames = getMonthNames(startDate, monthsAmount);

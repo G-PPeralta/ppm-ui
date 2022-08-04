@@ -28,7 +28,7 @@ export default function TotalProjetosComponent() {
 
   async function handleGetTipoResponsavel() {
     const { data } = await getTotalProjetos();
-    console.log(data);
+    // console.log(data);
     setTotal(data.totalProjetos);
     // setIniciados(data.projetosPorStatus[1].qtd);
     setIniciados(

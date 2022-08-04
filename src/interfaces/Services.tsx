@@ -211,14 +211,7 @@ export interface AreasDemandadas {
   solicitante: string;
 }
 
-export interface ProjetosComplexidade {
-  alta: number;
-  media: number;
-  baixa: number;
-  nula: number;
-}
-
-export interface ProjetosPrioridade {
+export interface ComplexidadesPrioridades {
   alta: number;
   media: number;
   baixa: number;
@@ -232,8 +225,8 @@ export interface ProjetosPorStatus {
 }
 
 export interface TotalDeProjetos {
-  complexidades: ProjetosComplexidade;
-  prioridades: ProjetosPrioridade;
+  complexidades: ComplexidadesPrioridades;
+  prioridades: ComplexidadesPrioridades;
   projetosPorStatus: ProjetosPorStatus[];
   totalProjetos: number;
 }
