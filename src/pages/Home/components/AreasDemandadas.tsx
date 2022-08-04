@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import {
   Box,
   Flex,
@@ -6,11 +8,36 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { AreasDemandadas } from 'interfaces/Services';
 
 import PercentPieChart from 'components/PercentPieChart';
 import StackedBarChart from 'components/StackedBarChart';
 
+import { getAreasDemandadas } from 'services/get/Dashboard';
+
 export default function AreasDemandadasComponent() {
+  const [areasDemandadas, setAreasDemandadas] = useState<AreasDemandadas[]>(
+    [] as AreasDemandadas[],
+  );
+  // const [loading, setLoading] = useState(true);
+
+  async function handleGetAreasDemandadas() {
+    const reqGet = await getAreasDemandadas();
+
+    const dataReq: AreasDemandadas[] = reqGet.data;
+
+    setAreasDemandadas(dataReq);
+  }
+
+  useEffect(() => {
+    handleGetAreasDemandadas();
+    // setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    console.log(areasDemandadas);
+  }, [areasDemandadas]);
+
   const grafData1 = [
     {
       name: 'Undone',

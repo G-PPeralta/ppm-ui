@@ -205,3 +205,35 @@ export interface Demanda {
 export interface TotalOrcamento {
   totalOrcamento: number;
 }
+
+export interface AreasDemandadas {
+  qtd: number;
+  solicitante: string;
+}
+
+export interface ProjetosComplexidade {
+  alta: number;
+  media: number;
+  baixa: number;
+  nula: number;
+}
+
+export interface ProjetosPrioridade {
+  alta: number;
+  media: number;
+  baixa: number;
+  nula: number;
+}
+
+export interface ProjetosPorStatus {
+  id: number;
+  status: string;
+  qtd: number;
+}
+
+export interface TotalDeProjetos {
+  complexidades: ProjetosComplexidade;
+  prioridades: ProjetosPrioridade;
+  projetosPorStatus: ProjetosPorStatus[];
+  totalProjetos: number;
+}
