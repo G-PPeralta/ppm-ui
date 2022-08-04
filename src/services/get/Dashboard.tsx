@@ -38,3 +38,16 @@ export async function getAreasDemandadas(): Promise<{
 
   return { data, status };
 }
+
+export async function getProjetosInfo(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get('/dashboard/projetos-info', {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
+    },
+  });
+
+  return { data, status };
+}

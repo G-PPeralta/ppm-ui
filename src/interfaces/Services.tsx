@@ -230,3 +230,11 @@ export interface TotalDeProjetos {
   projetosPorStatus: ProjetosPorStatus[];
   totalProjetos: number;
 }
+
+export interface ProjetosInfo {
+  id: number;
+  nomeProjeto: string;
+  valorTotalPrevisto: number;
+  cpi?: any;
+  spi?: any;
+}
