@@ -52,6 +52,8 @@ export default function TotalProjetosComponent() {
     handleGetTipoResponsavel();
   }, []);
 
+  const windowWidth = window.innerWidth;
+  const isFlexContainer = windowWidth < 900 ? 'flex' : 'inline';
   return (
     <Stack spacing="8">
       <Flex
@@ -70,6 +72,7 @@ export default function TotalProjetosComponent() {
             sm: useColorModeValue('md', 'md-dark'),
           }}
           borderRadius={{ base: 'none', sm: 'xl' }}
+          display={isFlexContainer}
         >
           <Text
             sx={{ fontSize: 24, fontWeight: '600', alignSelf: 'center' }}
