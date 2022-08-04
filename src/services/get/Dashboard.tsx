@@ -12,3 +12,29 @@ export async function getTotalProjetos(): Promise<{
 
   return { data, status };
 }
+
+export async function getOrcamentoTotal(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get('/dashboard/orcamento-total', {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
+    },
+  });
+
+  return { data, status };
+}
+
+export async function getAreasDemandadas(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get('/dashboard/areas-demandadas', {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
+    },
+  });
+
+  return { data, status };
+}

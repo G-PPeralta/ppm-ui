@@ -201,3 +201,7 @@ export interface Demanda {
   demanda: string;
   deletado: boolean;
 }
+
+export interface TotalOrcamento {
+  totalOrcamento: number;
+}
