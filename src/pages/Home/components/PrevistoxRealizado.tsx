@@ -10,6 +10,8 @@ import {
 import PieChart from 'components/PieChart';
 import StackedBarChart from 'components/StackedBarChart';
 
+import styles from './Styles/PrevistoxRealizado.module.scss';
+
 export default function PrevistoxRealizadoComponent() {
   const grafData = [
     {
@@ -25,25 +27,30 @@ export default function PrevistoxRealizadoComponent() {
   ];
 
   return (
-    <Stack spacing="8">
+    <Stack spacing="8" className={styles.previstoxrealizado}>
       <Flex
+        mr={{ base: 500, sm: 0 }}
         w={useBreakpointValue({ base: '100%', md: 'fit-content' })}
         align="center"
         justify="center"
-        bg={useBreakpointValue({ base: 'white', sm: '#EDF2F7' })}
+        bg={useBreakpointValue({ base: '#EDF2F7', sm: '#EDF2F7' })}
       >
         <Box
           py={{ base: '0', sm: '4' }}
           px={{ base: '0', sm: '4' }}
           w="fit-content"
-          bg={useBreakpointValue({ base: 'transparent', sm: 'white' })}
+          bg={useBreakpointValue({ base: 'white', sm: 'white' })}
           boxShadow={{
             base: 'none',
             sm: useColorModeValue('md', 'md-dark'),
           }}
           borderRadius={{ base: 'none', sm: 'xl' }}
         >
-          <Box w={1200} h={230}>
+          <Box
+            overflowX={{ base: 'scroll', lg: 'hidden' }}
+            w={{ base: 700, lg: 1200 }}
+            h={260}
+          >
             <Text
               mb={1}
               sx={{ fontSize: 18, fontWeight: '600' }}
@@ -51,8 +58,8 @@ export default function PrevistoxRealizadoComponent() {
             >
               Previsto x Realizado
             </Text>
-            <Box display={'flex'} w={'100%'} justifyContent="space-between">
-              <Box mt={2}>
+            <Box display={'flex'} justifyContent="space-between" mt={2}>
+              <Box display={{ base: 'none', lg: 'flex' }}>
                 <StackedBarChart
                   showY={true}
                   sizeW={1000}
@@ -124,6 +131,15 @@ export default function PrevistoxRealizadoComponent() {
                   </Box>
                   <PieChart size={80} data={grafData} />
                 </Box>
+              </Box>
+              <Box display={{ base: 'flex', lg: 'none' }}>
+                <StackedBarChart
+                  showY={true}
+                  sizeW={1000}
+                  sizeH={200}
+                  numberBars={12}
+                  barW={25}
+                />
               </Box>
             </Box>
           </Box>

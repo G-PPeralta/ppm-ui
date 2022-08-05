@@ -201,3 +201,40 @@ export interface Demanda {
   demanda: string;
   deletado: boolean;
 }
+
+export interface TotalOrcamento {
+  totalOrcamento: number;
+}
+
+export interface AreasDemandadas {
+  qtd: number;
+  solicitante: string;
+}
+
+export interface ComplexidadesPrioridades {
+  alta: number;
+  media: number;
+  baixa: number;
+  nula: number;
+}
+
+export interface ProjetosPorStatus {
+  id: number;
+  status: string;
+  qtd: number;
+}
+
+export interface TotalDeProjetos {
+  complexidades: ComplexidadesPrioridades;
+  prioridades: ComplexidadesPrioridades;
+  projetosPorStatus: ProjetosPorStatus[];
+  totalProjetos: number;
+}
+
+export interface ProjetosInfo {
+  id: number;
+  nomeProjeto: string;
+  valorTotalPrevisto: number;
+  cpi?: any;
+  spi?: any;
+}

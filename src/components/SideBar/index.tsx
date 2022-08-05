@@ -13,15 +13,21 @@ import { SidebarContent } from 'components/SidebarContent';
 
 import { useAuth } from 'hooks/useAuth';
 
+import styles from './Sidebar.module.scss';
+
 export default function Sidebar({ children }: { children: ReactNode }) {
   const { user } = useAuth();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
+    <Box
+      minH="100vh"
+      bg={useColorModeValue('gray.100', 'gray.900')}
+      className={styles.sidebar}
+    >
       <SidebarContent
         onClose={() => onClose}
-        display={{ base: 'none', md: 'block' }}
+        display={{ base: 'none', md: 'none', lg: 'block' }}
       />
       <Drawer
         autoFocus={false}
@@ -43,7 +49,7 @@ export default function Sidebar({ children }: { children: ReactNode }) {
         perfil={user?.nome_role}
         profileImage={user?.avatar}
       />
-      <Box ml={{ base: 0, md: 60 }} p="4">
+      <Box ml={{ base: 0, md: 0, lg: 60 }} p="4">
         {children}
       </Box>
     </Box>

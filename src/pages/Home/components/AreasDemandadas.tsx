@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import {
   Box,
   Flex,
@@ -6,11 +8,33 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { AreasDemandadas } from 'interfaces/Services';
 
 import PercentPieChart from 'components/PercentPieChart';
 import StackedBarChart from 'components/StackedBarChart';
 
+import { getAreasDemandadas } from 'services/get/Dashboard';
+
 export default function AreasDemandadasComponent() {
+  const [areasDemandadas, setAreasDemandadas] = useState<AreasDemandadas[]>(
+    [] as AreasDemandadas[],
+  );
+  async function handleGetAreasDemandadas() {
+    const reqGet = await getAreasDemandadas();
+
+    const dataReq: AreasDemandadas[] = reqGet.data;
+
+    setAreasDemandadas(dataReq);
+  }
+
+  useEffect(() => {
+    handleGetAreasDemandadas();
+  }, []);
+
+  useEffect(() => {
+    // console.log(areasDemandadas);
+  }, [areasDemandadas]);
+
   const grafData1 = [
     {
       name: 'Undone',
@@ -69,13 +93,13 @@ export default function AreasDemandadasComponent() {
         w={useBreakpointValue({ base: '100%', md: 'fit-content' })}
         align="center"
         justify="center"
-        bg={useBreakpointValue({ base: 'white', sm: '#EDF2F7' })}
+        bg={useBreakpointValue({ base: '#EDF2F7', sm: '#EDF2F7' })}
       >
         <Box
           py={{ base: '0', sm: '4' }}
           px={{ base: '0', sm: '4' }}
           w="fit-content"
-          bg={useBreakpointValue({ base: 'transparent', sm: 'white' })}
+          bg={useBreakpointValue({ base: 'white', sm: 'white' })}
           boxShadow={{
             base: 'none',
             sm: useColorModeValue('md', 'md-dark'),
