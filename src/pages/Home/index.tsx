@@ -3,6 +3,7 @@ import { Box, Flex, VStack } from '@chakra-ui/react';
 import Sidebar from 'components/SideBar';
 
 import AreasDemandadas from './components/AreasDemandadas';
+import BotoesSelecionarPolo from './components/BotoesSelecionarPolo';
 import FaseProjetos from './components/FaseProjetos';
 import NaoPrevisto from './components/NaoPrevisto';
 import PrevistoxRealizado from './components/PrevistoxRealizado';
@@ -17,6 +18,7 @@ export function Home() {
   return (
     <>
       <Sidebar>
+        <BotoesSelecionarPolo />
         <Flex
           w={'auto'}
           display={'flex'}
@@ -56,13 +58,13 @@ export function Home() {
               </Box>
             </VStack>
           ) : (
-            <VStack align="flex-start" w={'100%'}>
+            <VStack align="space-between" w={'-webkit-fit-content'}>
               <TotalProjetos />
               <Box
                 mt={2}
                 display={'flex'}
                 flexDirection={'row'}
-                flexShrink={0}
+                flexShrink={1}
                 flexWrap={'wrap'}
               >
                 <Box
