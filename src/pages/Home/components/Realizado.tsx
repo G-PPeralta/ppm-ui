@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import {
   Box,
   Flex,
@@ -6,8 +8,29 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { TotalOrcamento } from 'interfaces/Services';
+
+import { getOrcamentoTotal } from 'services/get/Dashboard';
 
 export default function RealizadoComponent() {
+  const [totalOrcamento, setTotalOrcamento] = useState<TotalOrcamento[]>(
+    [] as TotalOrcamento[],
+  );
+  const [loading, setLoading] = useState(true);
+
+  async function handleGetTotalOrcamento() {
+    const reqGet = await getOrcamentoTotal();
+
+    setTotalOrcamento(reqGet.data[0].total);
+  }
+
+  useEffect(() => {
+    handleGetTotalOrcamento();
+    setLoading(false);
+  }, []);
+
+  const valorFormatado = totalOrcamento.toLocaleString();
+
   return (
     <Stack spacing="8">
       <Flex
@@ -53,7 +76,7 @@ export default function RealizadoComponent() {
                   sx={{ fontSize: 18, fontWeight: '600', alignSelf: 'center' }}
                   color="#000000"
                 >
-                  100.000.000
+                  {!loading && valorFormatado}
                 </Text>
               </Box>
             </Box>
