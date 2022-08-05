@@ -10,8 +10,6 @@ import {
 import PieChart from 'components/PieChart';
 import StackedBarChart from 'components/StackedBarChart';
 
-import styles from './Styles/PrevistoxRealizado.module.scss';
-
 export default function PrevistoxRealizadoComponent() {
   const grafData = [
     {
@@ -26,8 +24,76 @@ export default function PrevistoxRealizadoComponent() {
     },
   ];
 
+  const dataMock = [
+    {
+      month: 'Jan/22',
+      Previsto: 90,
+      Realizado: 10,
+    },
+    {
+      month: 'Fev/22',
+      Previsto: 80,
+      Realizado: 20,
+    },
+    {
+      month: 'Mar/22',
+      Previsto: 70,
+      Realizado: 30,
+    },
+    {
+      month: 'Abr/22',
+      Previsto: 60,
+      Realizado: 40,
+    },
+    {
+      month: 'Mai/22',
+      Previsto: 50,
+      Realizado: 50,
+    },
+    {
+      month: 'Jun/22',
+      Previsto: 40,
+      Realizado: 60,
+    },
+    {
+      month: 'Jul/22',
+      Previsto: 30,
+      Realizado: 70,
+    },
+    {
+      month: 'Ago/22',
+      Previsto: 20,
+      Realizado: 80,
+    },
+    {
+      month: 'Set/22',
+      Previsto: 90,
+      Realizado: 10,
+    },
+    {
+      month: 'Out/22',
+      Previsto: 90,
+      Realizado: 10,
+    },
+    {
+      month: 'Nov/22',
+      Previsto: 90,
+      Realizado: 10,
+    },
+    {
+      month: 'Dez/22',
+      Previsto: 90,
+      Realizado: 10,
+    },
+  ];
+
+  const dataEntries = [
+    { name: 'Previsto', color: '#93E01B' },
+    { name: 'Realizado', color: '#2E69FD' },
+  ];
+
   return (
-    <Stack spacing="8" className={styles.previstoxrealizado}>
+    <Stack spacing="8">
       <Flex
         mr={{ base: 500, sm: 0 }}
         w={useBreakpointValue({ base: '100%', md: 'fit-content' })}
@@ -64,7 +130,8 @@ export default function PrevistoxRealizadoComponent() {
                   showY={true}
                   sizeW={1000}
                   sizeH={200}
-                  numberBars={12}
+                  data={dataMock}
+                  dataEntries={dataEntries}
                   barW={25}
                 />
               </Box>
@@ -137,7 +204,8 @@ export default function PrevistoxRealizadoComponent() {
                   showY={true}
                   sizeW={1000}
                   sizeH={200}
-                  numberBars={12}
+                  data={dataMock}
+                  dataEntries={dataEntries}
                   barW={25}
                 />
               </Box>

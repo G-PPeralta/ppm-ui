@@ -87,6 +87,44 @@ export default function AreasDemandadasComponent() {
     },
   ];
 
+  const dataMock = [
+    {
+      month: 'Jan/22',
+      SMS: 70,
+      Regulatório: 10,
+      Operação: 10,
+      Outros: 10,
+    },
+    {
+      month: 'Fev/22',
+      SMS: 10,
+      Regulatório: 70,
+      Operação: 10,
+      Outros: 10,
+    },
+    {
+      month: 'Mar/22',
+      SMS: 10,
+      Regulatório: 10,
+      Operação: 70,
+      Outros: 10,
+    },
+    {
+      month: 'Abr/22',
+      SMS: 10,
+      Regulatório: 10,
+      Operação: 10,
+      Outros: 70,
+    },
+  ];
+
+  const dataEntries = [
+    { name: 'SMS', color: '#2E69FD' },
+    { name: 'Regulatório', color: '#93E01B' },
+    { name: 'Operação', color: '#F94144' },
+    { name: 'Outros', color: '#F4DD06' },
+  ];
+
   return (
     <Stack spacing="8">
       <Flex
@@ -120,7 +158,8 @@ export default function AreasDemandadasComponent() {
                   showY={false}
                   sizeW={180}
                   sizeH={180}
-                  numberBars={3}
+                  data={dataMock}
+                  dataEntries={dataEntries}
                   barW={20}
                 />
               </Box>
