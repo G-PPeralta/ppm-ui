@@ -17,33 +17,19 @@ import { useProjects } from 'hooks/useProjects';
 
 import { postProject } from 'services/post/ProjectRegister';
 
-import { AdicionarCoordenadorModal } from './Components/AdicionarCoordenadorModal';
-import { AdicionarResponsavelModal } from './Components/AdicionarResponsavelModal';
-import FormClassificacao from './Components/FormClassificacao';
-import FormComentarios from './Components/FormComentarios';
-import FormComplexidade from './Components/FormComplexidade';
-import FormDataFim from './Components/FormDataFim';
-import FormDataFimReal from './Components/FormDataFimReal';
-import FormDataInicio from './Components/FormDataInicio';
-// import FormDemanda from './Components/FormDemanda';
-import FormDescricao from './Components/FormDescricao';
-import FormDisabledCoordenador from './Components/FormDisabledCoordenador';
-import FormDisabledResponsavel from './Components/FormDisabledResponsavel';
-import FormDivisao from './Components/FormDivisao';
-import FormElementoPep from './Components/FormElementoPep';
-import FormGate from './Components/FormGate';
-import FormDataInicioReal from './Components/FormInicioReal';
-import FormJustificativa from './Components/FormJustificativa';
-import FormLocal from './Components/FormLocal';
-import FormNomeProjeto from './Components/FormNomeProjeto';
+import FormCNPJ from './Components/FormCNPJ';
+import FormEmail from './Components/FormEmail';
+import FormInvoice from './Components/FormInvoice';
+import FormNomeFornecedor from './Components/FormNomeFornecedor';
+import FormNumeroContrato from './Components/FormNumeroContrato';
+import FormOutrasInformacoes from './Components/FormOutrasInformacoes';
 import FormPolo from './Components/FormPolo';
-import FormPrioridade from './Components/FormPrioridade';
-import FormSolicitante from './Components/FormSolicitante';
-import FormStatusProjeto from './Components/FormStatusProjeto';
-import FormTipoProjeto from './Components/FormTipoProjeto';
-import FormValorTotalPrevisto from './Components/FormValorTotalPrevisto';
+import FormRepresentantePontoFocal from './Components/FormRepresentantePontoFocal';
+import FormServicos from './Components/FormServicos';
+import FormStatusFornecedor from './Components/FormStatusFornecedor';
+import FormTelefone from './Components/FormTelefone';
 
-export function ProjectsRegistration() {
+export function ProvidersRegistration() {
   const wd = window.innerWidth;
   const { projectsForm, loading } = useProjects();
   return (
@@ -78,7 +64,7 @@ export function ProjectsRegistration() {
               borderRadius={{ base: 'none', sm: 'xl' }}
             >
               <Heading as="h3" size="md" mb={5}>
-                Cadastrar Projeto
+                Cadastrar Fornecedor
               </Heading>
               <form
                 onSubmit={(e) => {
@@ -95,30 +81,9 @@ export function ProjectsRegistration() {
                           md: 'row',
                         })}
                       >
-                        <AdicionarResponsavelModal
-                          projectsForm={projectsForm}
-                        />
-                        <AdicionarCoordenadorModal
-                          projectsForm={projectsForm}
-                        />
-                      </Flex>
-                    </Stack>
-                    <Stack spacing="5">
-                      <FormDisabledResponsavel projectsForm={projectsForm} />
-                      <FormDisabledCoordenador projectsForm={projectsForm} />
-                    </Stack>
-                    <Stack spacing="5">
-                      <Flex
-                        flexDirection={useBreakpointValue({
-                          base: 'column',
-                          md: 'row',
-                        })}
-                      >
                         <FormPolo projectsForm={projectsForm} />
-                        <FormLocal projectsForm={projectsForm} />
-                        <FormSolicitante projectsForm={projectsForm} />
-                        <FormPrioridade projectsForm={projectsForm} />
-                        <FormStatusProjeto projectsForm={projectsForm} />
+                        <FormServicos projectsForm={projectsForm} />
+                        <FormStatusFornecedor projectsForm={projectsForm} />
                       </Flex>
                     </Stack>
                     <Stack spacing="5">
@@ -128,8 +93,8 @@ export function ProjectsRegistration() {
                           md: 'row',
                         })}
                       >
-                        <FormNomeProjeto projectsForm={projectsForm} />
-                        <FormElementoPep projectsForm={projectsForm} />
+                        <FormNomeFornecedor projectsForm={projectsForm} />
+                        <FormNumeroContrato projectsForm={projectsForm} />
                       </Flex>
                     </Stack>
                     <Stack spacing="5">
@@ -139,10 +104,22 @@ export function ProjectsRegistration() {
                           md: 'row',
                         })}
                       >
-                        <FormDataInicio projectsForm={projectsForm} />
-                        <FormDataFim projectsForm={projectsForm} />
-                        <FormDataInicioReal projectsForm={projectsForm} />
-                        <FormDataFimReal projectsForm={projectsForm} />
+                        <FormRepresentantePontoFocal
+                          projectsForm={projectsForm}
+                        />
+                        <FormEmail projectsForm={projectsForm} />
+                        <FormTelefone projectsForm={projectsForm} />
+                      </Flex>
+                    </Stack>
+                    <Stack spacing="5">
+                      <Flex
+                        flexDirection={useBreakpointValue({
+                          base: 'column',
+                          md: 'row',
+                        })}
+                      >
+                        <FormInvoice projectsForm={projectsForm} />
+                        <FormCNPJ projectsForm={projectsForm} />
                       </Flex>
                     </Stack>
 
@@ -153,51 +130,10 @@ export function ProjectsRegistration() {
                           md: 'row',
                         })}
                       >
-                        <FormValorTotalPrevisto projectsForm={projectsForm} />
-                        <FormValorTotalPrevisto projectsForm={projectsForm} />
-                        <FormComplexidade projectsForm={projectsForm} />
-                      </Flex>
-                      <Flex
-                        flexDirection={useBreakpointValue({
-                          base: 'column',
-                          md: 'row',
-                        })}
-                      >
-                        <FormDivisao projectsForm={projectsForm} />
-                        <FormClassificacao projectsForm={projectsForm} />
-                        <FormTipoProjeto projectsForm={projectsForm} />
-                        <FormGate projectsForm={projectsForm} />
-                      </Flex>
-                    </Stack>
-                    <Stack spacing="5">
-                      <Flex
-                        flexDirection={useBreakpointValue({
-                          base: 'column',
-                          md: 'row',
-                        })}
-                      >
-                        <FormDescricao projectsForm={projectsForm} />
-                        <FormJustificativa projectsForm={projectsForm} />
+                        <FormOutrasInformacoes projectsForm={projectsForm} />
                       </Flex>
                     </Stack>
 
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
-                      })}
-                    >
-                      <FormComentarios projectsForm={projectsForm} />
-                    </Flex>
-
-                    {/* <Flex
-                      flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
-                      })}
-                    >
-                      <FormDemanda projectsForm={projectsForm} />
-                    </Flex> */}
                     <Stack>
                       <Button
                         mt={4}
@@ -221,7 +157,7 @@ export function ProjectsRegistration() {
                             size={24}
                           />
                         ) : (
-                          'CADASTRAR PROJETO'
+                          'CADASTRAR FORNECEDOR'
                         )}
                       </Button>
                     </Stack>
