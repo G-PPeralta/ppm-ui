@@ -28,7 +28,7 @@ import { TextError } from 'components/TextError';
 import { getTipoResponsavel } from 'services/get/Projetos';
 
 export function AdicionarCoordenadorModal(projectsForm: any) {
-  const [numeroDeResponsaveis, setNumeroDeResponsaveis] = useState([
+  const [numeroDeCoordenadores, setNumeroDeCoordenadores] = useState([
     {
       nomeResponsavel: '',
       tipoResponsavel: 1,
@@ -40,9 +40,9 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
   const [loading, setLoading] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  function addResponsible() {
-    setNumeroDeResponsaveis([
-      ...numeroDeResponsaveis,
+  function addCoordenador() {
+    setNumeroDeCoordenadores([
+      ...numeroDeCoordenadores,
       {
         nomeResponsavel: '',
         tipoResponsavel: 1,
@@ -51,20 +51,20 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
   }
 
   function handleChange(event: any, index: number): void {
-    setNumeroDeResponsaveis([
-      ...numeroDeResponsaveis.slice(0, index),
+    setNumeroDeCoordenadores([
+      ...numeroDeCoordenadores.slice(0, index),
       {
-        ...numeroDeResponsaveis[index],
+        ...numeroDeCoordenadores[index],
         [event.target.name]: event.target.value,
       },
-      ...numeroDeResponsaveis.slice(index + 1),
+      ...numeroDeCoordenadores.slice(index + 1),
     ]);
   }
 
   function saveResponsible() {
     projectsForm.projectsForm.setFieldValue(
       'responsavel',
-      numeroDeResponsaveis.filter((item) => item.nomeResponsavel !== ''),
+      numeroDeCoordenadores.filter((item) => item.nomeResponsavel !== ''),
     );
     onClose();
   }
@@ -125,16 +125,16 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
           <ModalHeader>ADICIONAR COORDENADOR</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {numeroDeResponsaveis.map((responsavel: any, index: number) => (
+            {numeroDeCoordenadores.map((responsavel: any, index: number) => (
               <Flex align="end" mb={3} key={index}>
                 <FormControl>
-                  <FormLabel htmlFor="nomeResponsavel">NOME</FormLabel>
+                  <FormLabel htmlFor="nomeCoordenador">NOME</FormLabel>
                   <Input
                     isRequired
-                    placeholder="Nome do responsável"
+                    placeholder="Nome do coordenador"
                     type="text"
-                    id="nomeResponsavel"
-                    name="nomeResponsavel"
+                    id="nomeCoordenador"
+                    name="nomeCoordenador"
                     value={responsavel.nomeResponsavel}
                     onChange={(event) => handleChange(event, index)}
                     width="95%"
@@ -147,11 +147,11 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
                     )}
                 </FormControl>
                 <FormControl>
-                  <FormLabel htmlFor="tipoResponsavel">TIPO</FormLabel>
+                  <FormLabel htmlFor="tipoCoordenador">TIPO</FormLabel>
                   {!loading && (
                     <Select
-                      id="tipoResponsavel"
-                      name="tipoResponsavel"
+                      id="tipoCoordenador"
+                      name="tipoCoordenador"
                       value={responsavel.tipoResponsavel}
                       onChange={(event) => handleChange(event, index)}
                       width="95%"
@@ -179,7 +179,7 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
               })}
             >
               <Button
-                onClick={addResponsible}
+                onClick={addCoordenador}
                 background="origem.300"
                 variant="primary"
                 color="white"
@@ -190,7 +190,7 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
                   transition: 'all 0.4s',
                 }}
               >
-                ADICIONAR OUTRA PESSOA RESPONSÁVEL
+                ADICIONAR OUTRA PESSOA COORDENADORA
               </Button>
             </Flex>
           </ModalBody>
