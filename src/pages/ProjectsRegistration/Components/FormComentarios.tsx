@@ -1,7 +1,7 @@
 import {
   FormControl,
   FormLabel,
-  Input,
+  Textarea,
   useBreakpointValue,
 } from '@chakra-ui/react';
 
@@ -11,11 +11,10 @@ function FormComentarios(projectsForm: any) {
   return (
     <FormControl>
       <FormLabel htmlFor="comentarios">COMENTÁRIOS</FormLabel>
-      <Input
+      <Textarea
         isRequired
-        placeholder=""
+        placeholder="Adicione comentários sobre o projeto"
         id="comentarios"
-        type="comentarios"
         name="comentarios"
         value={projectsForm.projectsForm.values.comentarios}
         onChange={projectsForm.projectsForm.handleChange}

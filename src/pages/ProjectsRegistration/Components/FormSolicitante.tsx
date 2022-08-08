@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import { FormControl, FormLabel, Select } from '@chakra-ui/react';
+import {
+  FormControl,
+  FormLabel,
+  Select,
+  useBreakpointValue,
+} from '@chakra-ui/react';
 import { Solicitante } from 'interfaces/Services';
 
 import { TextError } from 'components/TextError';
@@ -32,6 +37,7 @@ function FormSolicitante(projectsForm: any) {
         name="solicitanteId"
         value={projectsForm.projectsForm.values.solicitanteId}
         onChange={projectsForm.projectsForm.handleChange}
+        w={useBreakpointValue({ base: '100%', md: '95%' })}
       >
         {solicitanteState.map((solicitante) => (
           <option key={solicitante.id} value={solicitante.id}>

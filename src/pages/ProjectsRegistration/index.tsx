@@ -1,3 +1,5 @@
+import { BsPlusLg } from 'react-icons/bs';
+
 import {
   Box,
   Button,
@@ -14,16 +16,19 @@ import { useProjects } from 'hooks/useProjects';
 
 import { postProject } from 'services/post/ProjectRegister';
 
+import { AdicionarCoordenadorModal } from './Components/AdicionarCoordenadorModal';
+import { AdicionarResponsavelModal } from './Components/AdicionarResponsavelModal';
 import FormClassificacao from './Components/FormClassificacao';
 import FormComentarios from './Components/FormComentarios';
 import FormComplexidade from './Components/FormComplexidade';
 import FormDataFim from './Components/FormDataFim';
 import FormDataFimReal from './Components/FormDataFimReal';
 import FormDataInicio from './Components/FormDataInicio';
-import FormDemanda from './Components/FormDemanda';
+// import FormDemanda from './Components/FormDemanda';
 import FormDescricao from './Components/FormDescricao';
 import FormDisabledResponsavel from './Components/FormDisabledResponsavel';
 import FormDivisao from './Components/FormDivisao';
+import FormElementoPep from './Components/FormElementoPep';
 import FormGate from './Components/FormGate';
 import FormDataInicioReal from './Components/FormInicioReal';
 import FormJustificativa from './Components/FormJustificativa';
@@ -35,7 +40,6 @@ import FormSolicitante from './Components/FormSolicitante';
 import FormStatusProjeto from './Components/FormStatusProjeto';
 import FormTipoProjeto from './Components/FormTipoProjeto';
 import FormValorTotalPrevisto from './Components/FormValorTotalPrevisto';
-import { RegisterResponsibleModal } from './Components/RegisterResponsibleModal';
 
 export function ProjectsRegistration() {
   const wd = window.innerWidth;
@@ -56,7 +60,7 @@ export function ProjectsRegistration() {
             bg={useBreakpointValue({ base: 'white', sm: '#EDF2F7' })}
           >
             <Box
-              py={{ base: '0', sm: '16' }}
+              py={{ base: '0', sm: '10' }}
               px={{ base: '4', sm: '10' }}
               w={useBreakpointValue({
                 base: '20rem',
@@ -80,10 +84,22 @@ export function ProjectsRegistration() {
                 <Box display={wd > 100 ? 'flex' : ''}>
                   <Stack spacing="6" w="100%">
                     <Stack spacing="5">
-                      <RegisterResponsibleModal projectsForm={projectsForm} />
+                      <Flex
+                        flexDirection={useBreakpointValue({
+                          base: 'column',
+                          md: 'row',
+                        })}
+                      >
+                        <AdicionarResponsavelModal
+                          projectsForm={projectsForm}
+                        />
+                        <AdicionarCoordenadorModal
+                          projectsForm={projectsForm}
+                        />
+                      </Flex>
+                    </Stack>
+                    <Stack spacing="5">
                       <FormDisabledResponsavel projectsForm={projectsForm} />
-                      <FormNomeProjeto projectsForm={projectsForm} />
-                      <FormDescricao projectsForm={projectsForm} />
                     </Stack>
                     <Stack spacing="5">
                       <Flex
@@ -92,18 +108,22 @@ export function ProjectsRegistration() {
                           md: 'row',
                         })}
                       >
-                        <FormValorTotalPrevisto projectsForm={projectsForm} />
-                        <FormClassificacao projectsForm={projectsForm} />
+                        <FormPolo projectsForm={projectsForm} />
+                        <FormLocal projectsForm={projectsForm} />
                         <FormSolicitante projectsForm={projectsForm} />
+                        <FormPrioridade projectsForm={projectsForm} />
+                        <FormStatusProjeto projectsForm={projectsForm} />
                       </Flex>
+                    </Stack>
+                    <Stack spacing="5">
                       <Flex
                         flexDirection={useBreakpointValue({
                           base: 'column',
                           md: 'row',
                         })}
                       >
-                        <FormJustificativa projectsForm={projectsForm} />
-                        <FormPolo projectsForm={projectsForm} />
+                        <FormNomeProjeto projectsForm={projectsForm} />
+                        <FormElementoPep projectsForm={projectsForm} />
                       </Flex>
                     </Stack>
                     <Stack spacing="5">
@@ -119,43 +139,42 @@ export function ProjectsRegistration() {
                         <FormDataFimReal projectsForm={projectsForm} />
                       </Flex>
                     </Stack>
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
-                      })}
-                    >
-                      <FormPrioridade projectsForm={projectsForm} />
-                      <FormComplexidade projectsForm={projectsForm} />
-                    </Flex>
 
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
-                      })}
-                    >
-                      <FormLocal projectsForm={projectsForm} />
-                      <FormDivisao projectsForm={projectsForm} />
-                      <FormStatusProjeto projectsForm={projectsForm} />
-                    </Flex>
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
-                      })}
-                    >
-                      <FormGate projectsForm={projectsForm} />
-                      <FormTipoProjeto projectsForm={projectsForm} />
-                    </Flex>
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
-                      })}
-                    >
-                      <FormDemanda projectsForm={projectsForm} />
-                    </Flex>
+                    <Stack spacing="5">
+                      <Flex
+                        flexDirection={useBreakpointValue({
+                          base: 'column',
+                          md: 'row',
+                        })}
+                      >
+                        <FormValorTotalPrevisto projectsForm={projectsForm} />
+                        <FormValorTotalPrevisto projectsForm={projectsForm} />
+                        <FormComplexidade projectsForm={projectsForm} />
+                      </Flex>
+                      <Flex
+                        flexDirection={useBreakpointValue({
+                          base: 'column',
+                          md: 'row',
+                        })}
+                      >
+                        <FormDivisao projectsForm={projectsForm} />
+                        <FormClassificacao projectsForm={projectsForm} />
+                        <FormTipoProjeto projectsForm={projectsForm} />
+                        <FormGate projectsForm={projectsForm} />
+                      </Flex>
+                    </Stack>
+                    <Stack spacing="5">
+                      <Flex
+                        flexDirection={useBreakpointValue({
+                          base: 'column',
+                          md: 'row',
+                        })}
+                      >
+                        <FormDescricao projectsForm={projectsForm} />
+                        <FormJustificativa projectsForm={projectsForm} />
+                      </Flex>
+                    </Stack>
+
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: 'column',
@@ -165,6 +184,14 @@ export function ProjectsRegistration() {
                       <FormComentarios projectsForm={projectsForm} />
                     </Flex>
 
+                    {/* <Flex
+                      flexDirection={useBreakpointValue({
+                        base: 'column',
+                        md: 'row',
+                      })}
+                    >
+                      <FormDemanda projectsForm={projectsForm} />
+                    </Flex> */}
                     <Stack>
                       <Button
                         mt={4}
@@ -178,6 +205,7 @@ export function ProjectsRegistration() {
                           transition: 'all 0.4s',
                         }}
                         onClick={() => postProject}
+                        leftIcon={<BsPlusLg />}
                       >
                         {loading ? (
                           <Ring
@@ -187,7 +215,7 @@ export function ProjectsRegistration() {
                             size={24}
                           />
                         ) : (
-                          'Cadastrar'
+                          'CADASTRAR PROJETO'
                         )}
                       </Button>
                     </Stack>

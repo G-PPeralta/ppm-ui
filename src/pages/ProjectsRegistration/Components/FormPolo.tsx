@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import { FormControl, FormLabel, Select } from '@chakra-ui/react';
+import {
+  FormControl,
+  FormLabel,
+  Select,
+  useBreakpointValue,
+} from '@chakra-ui/react';
 import { Polo } from 'interfaces/Services';
 
 import { TextError } from 'components/TextError';
@@ -30,6 +35,7 @@ function FormPolo(projectsForm: any) {
         name="poloId"
         value={projectsForm.projectsForm.values.poloId}
         onChange={projectsForm.projectsForm.handleChange}
+        w={useBreakpointValue({ base: '100%', md: '95%' })}
       >
         {poloState.map((polo) => (
           <option key={polo.id} value={polo.id}>

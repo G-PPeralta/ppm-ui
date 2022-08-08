@@ -12,7 +12,7 @@ import { TextError } from 'components/TextError';
 function FormValorTotalPrevisto(projectsForm: any) {
   return (
     <FormControl>
-      <FormLabel htmlFor="valorTotalPrevisto">VALOR TOTAL PREVISTO</FormLabel>
+      <FormLabel htmlFor="valorTotalPrevisto">CAPEX PREVISTO</FormLabel>
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"

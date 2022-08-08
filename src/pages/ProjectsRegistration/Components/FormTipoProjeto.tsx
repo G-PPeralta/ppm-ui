@@ -37,7 +37,7 @@ function FormTipoProjeto(projectsForm: any) {
         name="tipoProjetoId"
         value={projectsForm.projectsForm.values.tipoProjetoId}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: '100%', md: '100%' })}
+        w={useBreakpointValue({ base: '100%', md: '95%' })}
       >
         {tipoProjetoState.map((tipo) => (
           <option key={tipo.id} value={tipo.id}>

@@ -1,7 +1,7 @@
 import {
   FormControl,
   FormLabel,
-  Input,
+  Textarea,
   useBreakpointValue,
 } from '@chakra-ui/react';
 
@@ -11,15 +11,14 @@ function FormJustificativa(projectsForm: any) {
   return (
     <FormControl>
       <FormLabel htmlFor="justificativa">JUSTIFICATIVA</FormLabel>
-      <Input
+      <Textarea
         isRequired
         placeholder="Sistema necessário para medição e entrega de gás."
         id="justificativa"
-        type="justificativa"
         name="justificativa"
         value={projectsForm.projectsForm.values.justificativa}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: '100%', md: '95%' })}
+        w={useBreakpointValue({ base: '100%', md: '100%' })}
       />
       {projectsForm.projectsForm.errors.justificativa &&
         projectsForm.projectsForm.touched.justificativa && (
