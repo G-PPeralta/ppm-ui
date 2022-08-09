@@ -34,9 +34,9 @@ function FormPolo(projectsForm: any) {
       deletado: false,
     };
 
-    const testeComOutro: Polo[] = [...dataReq, outro];
+    const polosComOutrosAoFinalArray: Polo[] = [...dataReq, outro];
 
-    setPoloState(testeComOutro);
+    setPoloState(polosComOutrosAoFinalArray);
     setLoading(false);
   }
 
@@ -95,13 +95,13 @@ function FormPolo(projectsForm: any) {
               <Flex alignItems={'center'}>
                 <Input
                   isRequired
-                  placeholder="Novo Polo"
-                  id="nomeProjeto"
+                  placeholder="Adicione o polo"
+                  id="addPolo"
                   type="text"
-                  name="nomeProjeto"
+                  name="addPolo"
                   value={novoPolo}
                   onChange={(e) => setNovoPolo(e.target.value)}
-                  w={'90%'}
+                  mr={2}
                 />
                 <IconButton
                   aria-label="Plus sign"
