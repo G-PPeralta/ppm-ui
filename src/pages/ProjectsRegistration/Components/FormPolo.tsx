@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 
 import {
+  Box,
   Flex,
   FormControl,
   FormLabel,
@@ -9,11 +10,13 @@ import {
   Input,
   Select,
 } from '@chakra-ui/react';
+import { Ring } from '@uiball/loaders';
 import { Polo } from 'interfaces/Services';
 
 import { TextError } from 'components/TextError';
 
 import { getPolo } from 'services/get/Projetos';
+import { postNovoPolo } from 'services/post/AdicionarOpcaoSelect';
 
 function FormPolo(projectsForm: any) {
   const [poloState, setPoloState] = useState<Polo[]>([] as Polo[]);
@@ -26,7 +29,7 @@ function FormPolo(projectsForm: any) {
     const dataReq: Polo[] = reqGet.data;
 
     const outro: Polo = {
-      id: dataReq.length + 1,
+      id: dataReq.length + 2,
       polo: 'Outro',
       deletado: false,
     };
@@ -39,18 +42,35 @@ function FormPolo(projectsForm: any) {
 
   function handleNovoPolo() {
     if (novoPolo !== '') {
-      const novo: Polo = {
+      const novoPoloAdicionado: Polo = {
         id: poloState.length + 1,
         polo: novoPolo,
         deletado: false,
       };
 
-      const testeComNovo: Polo[] = [novo, ...poloState];
+      const polosSemOpcaoOutros = poloState.filter(
+        (polo: Polo) => polo.polo !== 'Outro',
+      );
 
-      setPoloState(testeComNovo);
+      const poloComNovaOpcao: Polo[] = [
+        ...polosSemOpcaoOutros,
+        novoPoloAdicionado,
+      ];
+
+      const outro: Polo = {
+        id: poloComNovaOpcao.length + 2,
+        polo: 'Outro',
+        deletado: false,
+      };
+
+      const novoPoloState = [...poloComNovaOpcao, outro];
+
+      setPoloState(novoPoloState);
       setNovoPolo('');
 
-      projectsForm.projectsForm.values.poloId = novo.id;
+      projectsForm.projectsForm.values.poloId = novoPoloAdicionado.id;
+
+      postNovoPolo(novoPoloAdicionado);
     }
   }
 
@@ -58,10 +78,14 @@ function FormPolo(projectsForm: any) {
     handleGetProjetos();
   }, []);
 
+  // console.log(poloState);
+
   return (
     <FormControl>
       {loading ? (
-        <div>Carregando...</div>
+        <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
+          <Ring speed={2} lineWeight={5} color="blue" size={24} />
+        </Box>
       ) : (
         <>
           <FormLabel htmlFor="poloId">POLO</FormLabel>
