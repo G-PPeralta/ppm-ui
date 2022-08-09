@@ -69,7 +69,7 @@ export function Gantt() {
   }, []);
 
   useEffect(() => {
-    // console.log(ganttData);
+    console.log(ganttData);
   }, [ganttData]);
 
   // const ganttDataLocal = ganttData.macroatividades?.map((gantt) => ({
