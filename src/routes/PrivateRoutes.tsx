@@ -9,6 +9,7 @@ import { Permissions } from 'pages/Permissions';
 import { PermissionsList } from 'pages/PermissionsList';
 import { Profile } from 'pages/Profile';
 import { ProjectsRegistration } from 'pages/ProjectsRegistration';
+import { ProvidersRegistration } from 'pages/ProvidersRegistration';
 import { Reports } from 'pages/Reports';
 import { Settings } from 'pages/Settings';
 import { ShareRegister } from 'pages/ShareRegister';
@@ -18,6 +19,10 @@ export function PrivateRoutes() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/projects-registration" element={<ProjectsRegistration />} />
+      <Route
+        path="/providers-registration"
+        element={<ProvidersRegistration />}
+      />
       <Route
         path="/activities-registration"
         element={<ActivitiesRegistration />}

@@ -7,15 +7,15 @@ import {
 
 import { TextError } from 'components/TextError';
 
-function FormComentarios(projectsForm: any) {
+function FormOutrasInformacoes(projectsForm: any) {
   return (
     <FormControl>
-      <FormLabel htmlFor="comentarios">COMENTÁRIOS</FormLabel>
+      <FormLabel htmlFor="outrasInformacoes">OUTRAS INFORMAÇÕES</FormLabel>
       <Textarea
         isRequired
-        placeholder="Adicione comentários sobre o projeto"
-        id="comentarios"
-        name="comentarios"
+        placeholder="Adicione outras informações sobre o fornecedor"
+        id="outrasInformacoes"
+        name="outrasInformacoes"
         value={projectsForm.projectsForm.values.comentarios}
         onChange={projectsForm.projectsForm.handleChange}
         w={useBreakpointValue({ base: '100%', md: '100%' })}
@@ -28,4 +28,4 @@ function FormComentarios(projectsForm: any) {
   );
 }
 
-export default FormComentarios;
+export default FormOutrasInformacoes;

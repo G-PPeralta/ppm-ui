@@ -18,6 +18,11 @@ export const LinkItems: Array<LinkItemProps> = [
   { name: 'Dashboard', icon: FiHome, link: '/' },
   { name: 'Gantt', icon: BsBarChartSteps, link: '/gantt' },
   { name: 'Cadastro Projetos', icon: FiEdit2, link: '/projects-registration' },
+  {
+    name: 'Cadastro Fornecedores',
+    icon: FiEdit2,
+    link: '/providers-registration',
+  },
   // {
   //   name: 'Cadastro de Ações',
   //   icon: FiTrendingUp,

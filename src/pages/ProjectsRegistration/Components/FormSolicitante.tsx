@@ -1,23 +1,79 @@
 import { useEffect, useState } from 'react';
+import { BsPlusLg } from 'react-icons/bs';
 
-import { FormControl, FormLabel, Select } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  FormControl,
+  FormLabel,
+  IconButton,
+  Input,
+  Select,
+} from '@chakra-ui/react';
+import { Ring } from '@uiball/loaders';
 import { Solicitante } from 'interfaces/Services';
 
 import { TextError } from 'components/TextError';
 
 import { getSolicitante } from 'services/get/Projetos';
+import { postNovoSolicitante } from 'services/post/AdicionarOpcaoSelect';
 
 function FormSolicitante(projectsForm: any) {
   const [solicitanteState, setSolicitanteState] = useState<Solicitante[]>(
     [] as Solicitante[],
   );
+  const [loading, setLoading] = useState(true);
+  const [novoSolicitante, setNovoSolicitante] = useState('');
 
   async function handleGetProjetos() {
     const reqGet = await getSolicitante();
 
     const dataReq: Solicitante[] = reqGet.data;
 
-    setSolicitanteState(dataReq);
+    const outro: Solicitante = {
+      id: dataReq.length + 2,
+      solicitante: 'Outro',
+      deletado: false,
+    };
+
+    const polosComOutrosAoFinalArray: Solicitante[] = [...dataReq, outro];
+
+    setSolicitanteState(polosComOutrosAoFinalArray);
+    setLoading(false);
+  }
+
+  function handleNovoSolicitante() {
+    if (novoSolicitante !== '') {
+      const novoSolicitanteAdicionado: Solicitante = {
+        id: solicitanteState.length + 1,
+        solicitante: novoSolicitante,
+        deletado: false,
+      };
+
+      const solicitanteSemOpcaoOutros = solicitanteState.filter(
+        (solicitante: Solicitante) => solicitante.solicitante !== 'Outro',
+      );
+
+      const solicitanteComNovaOpcao: Solicitante[] = [
+        ...solicitanteSemOpcaoOutros,
+        novoSolicitanteAdicionado,
+      ];
+
+      const outro: Solicitante = {
+        id: solicitanteComNovaOpcao.length + 2,
+        solicitante: 'Outro',
+        deletado: false,
+      };
+
+      const novoSolicitanteState = [...solicitanteComNovaOpcao, outro];
+
+      setSolicitanteState(novoSolicitanteState);
+      setNovoSolicitante('');
+
+      projectsForm.projectsForm.values.poloId = novoSolicitanteAdicionado.id;
+
+      postNovoSolicitante(novoSolicitanteAdicionado);
+    }
   }
 
   useEffect(() => {
@@ -26,19 +82,58 @@ function FormSolicitante(projectsForm: any) {
 
   return (
     <FormControl>
-      <FormLabel htmlFor="solicitanteId">SOLICITANTE</FormLabel>
-      <Select
-        id="solicitanteId"
-        name="solicitanteId"
-        value={projectsForm.projectsForm.values.solicitanteId}
-        onChange={projectsForm.projectsForm.handleChange}
-      >
-        {solicitanteState.map((solicitante) => (
-          <option key={solicitante.id} value={solicitante.id}>
-            {solicitante.solicitante}
-          </option>
-        ))}
-      </Select>
+      {loading ? (
+        <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
+          <Ring speed={2} lineWeight={5} color="blue" size={24} />
+        </Box>
+      ) : (
+        <>
+          <FormLabel htmlFor="solicitanteId">SOLICITANTE</FormLabel>
+          {Number(projectsForm.projectsForm.values.solicitanteId) ===
+          solicitanteState[solicitanteState.length - 1].id ? (
+            <>
+              <Flex alignItems={'center'}>
+                <Input
+                  isRequired
+                  placeholder="Adicione o solicitante"
+                  id="addSolicitante"
+                  type="text"
+                  name="addSolicitante"
+                  value={novoSolicitante}
+                  onChange={(e) => setNovoSolicitante(e.target.value)}
+                  mr={2}
+                />
+                <IconButton
+                  aria-label="Plus sign"
+                  icon={<BsPlusLg />}
+                  background="origem.300"
+                  variant="secondary"
+                  color="white"
+                  mr={2}
+                  isRound={true}
+                  size="sm"
+                  onClick={handleNovoSolicitante}
+                />
+              </Flex>
+            </>
+          ) : (
+            <Select
+              id="solicitanteId"
+              name="solicitanteId"
+              value={projectsForm.projectsForm.values.solicitanteId}
+              onChange={projectsForm.projectsForm.handleChange}
+              w={'95%'}
+            >
+              {solicitanteState.map((solicitante) => (
+                <option key={solicitante.id} value={solicitante.id}>
+                  {solicitante.solicitante}
+                </option>
+              ))}
+            </Select>
+          )}
+        </>
+      )}
+
       {projectsForm.projectsForm.errors.solicitanteId &&
         projectsForm.projectsForm.touched.solicitanteId && (
           <TextError>

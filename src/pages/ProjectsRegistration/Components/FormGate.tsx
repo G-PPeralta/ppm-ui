@@ -35,7 +35,7 @@ function FormGate(projectsForm: any) {
         name="gateId"
         value={projectsForm.projectsForm.values.gateId}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: '100%', md: '95%' })}
+        w={useBreakpointValue({ base: '100%', md: '100%' })}
       >
         {gateState.map((gate) => (
           <option key={gate.id} value={gate.id}>

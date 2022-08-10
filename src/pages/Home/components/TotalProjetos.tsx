@@ -19,6 +19,9 @@ export default function TotalProjetosComponent() {
   const [finalizados, setFinalizados] = useState(0);
   const [cancelados, setCancelados] = useState(0);
   const [holds, setHolds] = useState(0);
+  const [naoIniciado, setNaoIniciado] = useState(0);
+  const [reprogramado, setReprogramado] = useState(0);
+  const [preAprovacao, setPreAprovacao] = useState(0);
   const [prioridadeAlta, setPrioridadeAlta] = useState(0);
   const [prioridadeMedia, setPrioridadeMedia] = useState(0);
   const [prioridadeBaixa, setPrioridadeBaixa] = useState(0);
@@ -30,16 +33,19 @@ export default function TotalProjetosComponent() {
     const { data } = await getTotalProjetos();
     // console.log(data);
     setTotal(data.totalProjetos);
-    // setIniciados(data.projetosPorStatus[1].qtd);
-    setIniciados(
-      data.projetosPorStatus[1].qtd +
-        data.projetosPorStatus[2].qtd +
-        data.projetosPorStatus[3].qtd,
-    );
+    setIniciados(data.projetosPorStatus[1].qtd);
+    // setIniciados(
+    //   data.projetosPorStatus[1].qtd +
+    //     data.projetosPorStatus[2].qtd +
+    //     data.projetosPorStatus[3].qtd,
+    // );
+    setNaoIniciado(data.projetosPorStatus[0].qtd);
+    setReprogramado(data.projetosPorStatus[2].qtd);
+    setPreAprovacao(data.projetosPorStatus[3].qtd);
     setFinalizados(data.projetosPorStatus[5].qtd);
     setCancelados(data.projetosPorStatus[4].qtd);
-    // setHolds(data.projetosPorStatus[6].qtd);
-    setHolds(data.projetosPorStatus[6].qtd + data.projetosPorStatus[0].qtd);
+    setHolds(data.projetosPorStatus[6].qtd);
+    // setHolds(data.projetosPorStatus[6].qtd + data.projetosPorStatus[0].qtd);
     setPrioridadeAlta(data.prioridades.alta);
     setPrioridadeMedia(data.prioridades.media);
     setPrioridadeBaixa(data.prioridades.baixa);
@@ -51,6 +57,59 @@ export default function TotalProjetosComponent() {
   useEffect(() => {
     handleGetTipoResponsavel();
   }, []);
+
+  const dataMock = [
+    {
+      month: 'Jan/22',
+      Iniciados: 10,
+      Finalizados: 10,
+      Cancelados: 10,
+      Holds: 10,
+      Não_Iniciados: 10,
+      Reprogramados: 10,
+      Pré_Aprovação: 40,
+    },
+    {
+      month: 'Fev/22',
+      Iniciados: 10,
+      Finalizados: 10,
+      Cancelados: 10,
+      Holds: 40,
+      Não_Iniciados: 10,
+      Reprogramados: 10,
+      Pré_Aprovação: 10,
+    },
+    {
+      month: 'Mar/22',
+      Iniciados: 10,
+      Finalizados: 10,
+      Cancelados: 10,
+      Holds: 10,
+      Não_Iniciados: 10,
+      Reprogramados: 40,
+      Pré_Aprovação: 10,
+    },
+    {
+      month: 'Abr/22',
+      Iniciados: 10,
+      Finalizados: 10,
+      Cancelados: 10,
+      Holds: 10,
+      Não_Iniciados: 40,
+      Reprogramados: 10,
+      Pré_Aprovação: 10,
+    },
+  ];
+
+  const dataEntries = [
+    { name: 'Iniciados', color: '#93E01B' },
+    { name: 'Finalizados', color: '#2E69FD' },
+    { name: 'Cancelados', color: '#F94144' },
+    { name: 'Holds', color: '#F4DD06' },
+    { name: 'Não_Iniciados', color: '#aaaaaa' },
+    { name: 'Reprogramados', color: '#ffa70f' },
+    { name: 'Pré_Aprovação', color: '#c50ffc' },
+  ];
 
   const windowWidth = window.innerWidth;
   const isFlexContainer = windowWidth < 900 ? 'flex' : 'inline';
@@ -89,10 +148,10 @@ export default function TotalProjetosComponent() {
               <Box
                 pl={1}
                 pt={5}
-                mt={3}
+                mt={2}
                 mr={2}
                 bg={'#0047BB'}
-                sx={{ width: '36px', height: '180px', borderRadius: '2px' }}
+                sx={{ width: '36px', height: '245px', borderRadius: '2px' }}
               >
                 <Text
                   sx={{
@@ -107,74 +166,125 @@ export default function TotalProjetosComponent() {
               </Box>
               <Box>
                 <Text
-                  p={1.5}
-                  mt={3}
+                  p={0.5}
+                  mt={2}
                   bg={'#93E01B'}
-                  sx={{ fontSize: 16, width: '200px', borderRadius: '2px' }}
+                  sx={{ fontSize: 14, width: '200px', borderRadius: '2px' }}
                   color="#ffffff"
                 >
                   {iniciados} Projetos Iniciados
                 </Text>
                 <Text
-                  p={1.5}
-                  mt={3}
+                  p={0.5}
+                  mt={2}
                   bg={'#2E69FD'}
-                  sx={{ fontSize: 16, width: '200px', borderRadius: '2px' }}
+                  sx={{ fontSize: 14, width: '200px', borderRadius: '2px' }}
                   color="#ffffff"
                 >
                   {finalizados} Projetos Finalizados
                 </Text>
                 <Text
-                  p={1.5}
-                  mt={3}
+                  p={0.5}
+                  mt={2}
                   bg={'#F94144'}
-                  sx={{ fontSize: 16, width: '200px', borderRadius: '2px' }}
+                  sx={{ fontSize: 14, width: '200px', borderRadius: '2px' }}
                   color="#ffffff"
                 >
                   {cancelados} Projetos Cancelados
                 </Text>
                 <Text
-                  p={1.5}
-                  mt={3}
+                  p={0.5}
+                  mt={2}
                   bg={'#F4DD06'}
-                  sx={{ fontSize: 16, width: '200px', borderRadius: '2px' }}
+                  sx={{ fontSize: 14, width: '200px', borderRadius: '2px' }}
                   color="#ffffff"
                 >
                   {holds} Projetos Holds
                 </Text>
+                <Text
+                  p={0.5}
+                  mt={2}
+                  bg={'#aaaaaa'}
+                  sx={{ fontSize: 14, width: '200px', borderRadius: '2px' }}
+                  color="#ffffff"
+                >
+                  {naoIniciado} Projetos Não Iniciados
+                </Text>
+                <Text
+                  p={0.5}
+                  mt={2}
+                  bg={'#ffa70f'}
+                  sx={{ fontSize: 14, width: '200px', borderRadius: '2px' }}
+                  color="#ffffff"
+                >
+                  {reprogramado} Projetos Reprogramados
+                </Text>
+                <Text
+                  p={0.5}
+                  mt={2}
+                  bg={'#c50ffc'}
+                  sx={{ fontSize: 14, width: '200px', borderRadius: '2px' }}
+                  color="#ffffff"
+                >
+                  {preAprovacao} Projetos Pré Aprovação Diretor
+                </Text>
               </Box>
               <Box>
                 <Text
-                  p={1.5}
-                  mt={3}
-                  sx={{ fontSize: 16, fontWeight: '600' }}
+                  p={0.5}
+                  mt={2}
+                  sx={{ fontSize: 14, fontWeight: '600' }}
                   color="#93E01B"
                 >
                   {Math.round((iniciados / total) * 100)}%
                 </Text>
                 <Text
-                  p={1.5}
-                  mt={3}
-                  sx={{ fontSize: 16, fontWeight: '600' }}
+                  p={0.5}
+                  mt={2}
+                  sx={{ fontSize: 14, fontWeight: '600' }}
                   color="#0239C3"
                 >
                   {Math.round((finalizados / total) * 100)}%
                 </Text>
                 <Text
-                  p={1.5}
-                  mt={3}
-                  sx={{ fontSize: 16, fontWeight: '600' }}
+                  p={0.5}
+                  mt={2}
+                  sx={{ fontSize: 14, fontWeight: '600' }}
                   color="#F94144"
                 >
                   {Math.round((cancelados / total) * 100)}%
                 </Text>
                 <Text
-                  p={1.5}
-                  mt={3}
-                  sx={{ fontSize: 16, fontWeight: '600' }}
+                  p={0.5}
+                  mt={2}
+                  sx={{ fontSize: 14, fontWeight: '600' }}
                   color="#F4DD06"
                 >
                   {Math.round((holds / total) * 100)}%
+                </Text>
+                <Text
+                  p={0.5}
+                  mt={2}
+                  sx={{ fontSize: 14, fontWeight: '600' }}
+                  color="#aaaaaa"
+                >
+                  {Math.round((naoIniciado / total) * 100)}%
+                </Text>
+                <Text
+                  p={0.5}
+                  mt={2}
+                  sx={{ fontSize: 14, fontWeight: '600' }}
+                  color="#ffa70f"
+                >
+                  {Math.round((reprogramado / total) * 100)}%
+                </Text>
+                <Text
+                  p={0.5}
+                  mt={2}
+                  sx={{ fontSize: 14, fontWeight: '600' }}
+                  color="#c50ffc"
+                >
+                  {Math.round((preAprovacao / total) * 100)}%
                 </Text>
               </Box>
               <Box ml={5}>
@@ -182,7 +292,8 @@ export default function TotalProjetosComponent() {
                   showY={false}
                   sizeW={280}
                   sizeH={240}
-                  numberBars={4}
+                  data={dataMock}
+                  dataEntries={dataEntries}
                   barW={25}
                 />
               </Box>

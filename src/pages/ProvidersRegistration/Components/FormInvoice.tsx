@@ -4,24 +4,19 @@ import {
   Input,
   useBreakpointValue,
 } from '@chakra-ui/react';
-// import { FormikProps } from 'formik';
-// import { RegisterProjectProps } from 'interfaces/Services';
 
 import { TextError } from 'components/TextError';
 
-function FormNomeProjeto(projectsForm: any) {
-  // useEffect(() => {
-  //   console.log(projectsForm.projectsForm);
-  // }, [projectsForm]);
+function FormInvoice(projectsForm: any) {
   return (
     <FormControl>
-      <FormLabel htmlFor="nomeProjeto">PROJETO</FormLabel>
+      <FormLabel htmlFor="numeroInvoice">INVOICE</FormLabel>
       <Input
         isRequired
-        placeholder="Nome do projeto"
-        id="nomeProjeto"
+        placeholder="Número do invoice"
+        id="numeroInvoice"
         type="text"
-        name="nomeProjeto"
+        name="numeroInvoice"
         value={projectsForm.projectsForm.values.nomeProjeto}
         onChange={projectsForm.projectsForm.handleChange}
         w={useBreakpointValue({ base: '100%', md: '95%' })}
@@ -34,4 +29,4 @@ function FormNomeProjeto(projectsForm: any) {
   );
 }
 
-export default FormNomeProjeto;
+export default FormInvoice;

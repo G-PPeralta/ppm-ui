@@ -4,27 +4,22 @@ import {
   Input,
   useBreakpointValue,
 } from '@chakra-ui/react';
-// import { FormikProps } from 'formik';
-// import { RegisterProjectProps } from 'interfaces/Services';
 
 import { TextError } from 'components/TextError';
 
-function FormNomeProjeto(projectsForm: any) {
-  // useEffect(() => {
-  //   console.log(projectsForm.projectsForm);
-  // }, [projectsForm]);
+function FormCNPJ(projectsForm: any) {
   return (
     <FormControl>
-      <FormLabel htmlFor="nomeProjeto">PROJETO</FormLabel>
+      <FormLabel htmlFor="cnpj">CNPJ</FormLabel>
       <Input
         isRequired
-        placeholder="Nome do projeto"
-        id="nomeProjeto"
+        placeholder="00.000.000/0000-00"
+        id="cnpj"
         type="text"
-        name="nomeProjeto"
+        name="cnpj"
         value={projectsForm.projectsForm.values.nomeProjeto}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: '100%', md: '95%' })}
+        w={useBreakpointValue({ base: '100%', md: '100%' })}
       />
       {projectsForm.projectsForm.errors.nomeProjeto &&
         projectsForm.projectsForm.touched.nomeProjeto && (
@@ -34,4 +29,4 @@ function FormNomeProjeto(projectsForm: any) {
   );
 }
 
-export default FormNomeProjeto;
+export default FormCNPJ;

@@ -4,18 +4,13 @@ import {
   Input,
   useBreakpointValue,
 } from '@chakra-ui/react';
-// import { FormikProps } from 'formik';
-// import { RegisterProjectProps } from 'interfaces/Services';
 
 import { TextError } from 'components/TextError';
 
-function FormNomeProjeto(projectsForm: any) {
-  // useEffect(() => {
-  //   console.log(projectsForm.projectsForm);
-  // }, [projectsForm]);
+function FormNomeFornecedor(projectsForm: any) {
   return (
     <FormControl>
-      <FormLabel htmlFor="nomeProjeto">PROJETO</FormLabel>
+      <FormLabel htmlFor="nomeProjeto">NOME DO FORNECEDOR</FormLabel>
       <Input
         isRequired
         placeholder="Nome do projeto"
@@ -34,4 +29,4 @@ function FormNomeProjeto(projectsForm: any) {
   );
 }
 
-export default FormNomeProjeto;
+export default FormNomeFornecedor;
