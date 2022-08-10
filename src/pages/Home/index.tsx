@@ -1,94 +1,106 @@
-import { GanttComponent, Inject, Edit } from '@syncfusion/ej2-react-gantt';
+import { Box, Flex, VStack } from '@chakra-ui/react';
 
 import Sidebar from 'components/SideBar';
 
-export function Home() {
-  const GanttData = [
-    {
-      TaskID: 1,
-      TaskName: 'Project Initiation',
-      StartDate: new Date('04/02/2019'),
-      EndDate: new Date('04/21/2019'),
-      subtasks: [
-        {
-          TaskID: 2,
-          TaskName: 'Identify Site location',
-          StartDate: new Date('04/02/2019'),
-          Duration: 4,
-          Progress: 50,
-        },
-        {
-          TaskID: 3,
-          TaskName: 'Perform Soil test',
-          StartDate: new Date('04/02/2019'),
-          Duration: 4,
-          Progress: 50,
-          Predecessor: '2FS',
-        },
-        {
-          TaskID: 4,
-          TaskName: 'Soil test approval',
-          StartDate: new Date('04/02/2019'),
-          Duration: 4,
-          Progress: 50,
-        },
-      ],
-    },
-    {
-      TaskID: 5,
-      TaskName: 'Project Estimation',
-      StartDate: new Date('04/02/2019'),
-      EndDate: new Date('04/21/2019'),
-      subtasks: [
-        {
-          TaskID: 6,
-          TaskName: 'Develop floor plan for estimation',
-          StartDate: new Date('04/04/2019'),
-          Duration: 3,
-          Progress: 50,
-        },
-        {
-          TaskID: 7,
-          TaskName: 'List materials',
-          StartDate: new Date('04/04/2019'),
-          Duration: 3,
-          Progress: 50,
-        },
-        {
-          TaskID: 8,
-          TaskName: 'Estimation approval',
-          StartDate: new Date('04/04/2019'),
-          Duration: 3,
-          Progress: 50,
-          Predecessor: '7SS',
-        },
-      ],
-    },
-  ];
+import AreasDemandadas from './components/AreasDemandadas';
+import BotoesSelecionarPolo from './components/BotoesSelecionarPolo';
+import FaseProjetos from './components/FaseProjetos';
+import NaoPrevisto from './components/NaoPrevisto';
+import PrevistoxRealizado from './components/PrevistoxRealizado';
+import Projetos from './components/Projetos';
+import Realizado from './components/Realizado';
+import TotalOrcamentos from './components/TotalOrcamentos';
+import TotalProjetos from './components/TotalProjetos';
 
+const windowWidth = window.innerWidth;
+
+export function Home() {
   return (
     <>
       <Sidebar>
-        <GanttComponent
-          id="gantt-control"
-          dataSource={GanttData}
-          taskFields={{
-            id: 'TaskID',
-            name: 'TaskName',
-            startDate: 'StartDate',
-            endDate: 'EndDate',
-            duration: 'Duration',
-            progress: 'Progress',
-            dependency: 'Predecessor',
-            child: 'subtasks',
-          }}
-          editSettings={{
-            allowTaskbarEditing: true,
-          }}
-          height={'100vh'}
+        <BotoesSelecionarPolo />
+        <Flex
+          w={'auto'}
+          display={'flex'}
+          wrap={'wrap'}
+          align="flex-start"
+          justify="center"
+          direction="column"
         >
-          <Inject services={[Edit]} />
-        </GanttComponent>
+          {windowWidth > 900 ? (
+            <VStack align="flex-start">
+              <Box display={'flex'} flexShrink={0} flexWrap={'wrap'}>
+                <TotalProjetos />
+                <Box
+                  ml={5}
+                  sx={{ height: 'auto' }}
+                  display="flex"
+                  flexDirection={'column'}
+                  justifyContent="space-evenly"
+                >
+                  <TotalOrcamentos />
+                  <Realizado />
+                  <NaoPrevisto />
+                </Box>
+              </Box>
+
+              <Box mt={5} sx={{ display: 'flex' }}>
+                <Projetos />
+                <Box ml={5}>
+                  <FaseProjetos />
+                </Box>
+                <Box ml={5}>
+                  <AreasDemandadas />
+                </Box>
+              </Box>
+              <Box mt={5}>
+                <PrevistoxRealizado />
+              </Box>
+            </VStack>
+          ) : (
+            <VStack align="space-between" w={'-webkit-fit-content'}>
+              <TotalProjetos />
+              <Box
+                mt={2}
+                display={'flex'}
+                flexDirection={'row'}
+                flexShrink={1}
+                flexWrap={'wrap'}
+              >
+                <Box
+                  // h={280}
+                  mr={2}
+                  display="flex"
+                  flexDirection={'column'}
+                  justifyContent="space-evenly"
+                >
+                  <TotalOrcamentos />
+                  <Realizado />
+                  <NaoPrevisto />
+                </Box>
+                <FaseProjetos />
+              </Box>
+
+              <Box mt={5} display="flex" flexDirection={'column'}>
+                <Box
+                  mt={2}
+                  display={'flex'}
+                  flexDirection={'row'}
+                  flexShrink={0}
+                  flexWrap={'wrap'}
+                >
+                  <Projetos />
+                  <Box ml={2}>
+                    <AreasDemandadas />
+                  </Box>
+                </Box>
+              </Box>
+              <Box mt={5}>
+                <PrevistoxRealizado />
+              </Box>
+            </VStack>
+          )}
+        </Flex>
       </Sidebar>
     </>
   );

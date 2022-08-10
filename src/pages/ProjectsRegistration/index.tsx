@@ -1,30 +1,52 @@
+import { BsPlusLg } from 'react-icons/bs';
+
 import {
   Box,
   Button,
   Flex,
-  FormControl,
-  FormLabel,
-  Select,
-  Input,
+  Heading,
   Stack,
+  Text,
   useBreakpointValue,
   useColorModeValue,
-  InputGroup,
-  InputLeftElement,
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
 import Sidebar from 'components/SideBar';
-import { TextError } from 'components/TextError';
 
 import { useProjects } from 'hooks/useProjects';
 
 import { postProject } from 'services/post/ProjectRegister';
 
-export function ProjectsRegistration() {
-  const { projectsForm, loading } = useProjects();
-  const wd = window.innerWidth;
+import { AdicionarCoordenadorModal } from './Components/AdicionarCoordenadorModal';
+import { AdicionarResponsavelModal } from './Components/AdicionarResponsavelModal';
+import FormClassificacao from './Components/FormClassificacao';
+import FormComentarios from './Components/FormComentarios';
+import FormComplexidade from './Components/FormComplexidade';
+import FormDataFim from './Components/FormDataFim';
+import FormDataFimReal from './Components/FormDataFimReal';
+import FormDataInicio from './Components/FormDataInicio';
+// import FormDemanda from './Components/FormDemanda';
+import FormDescricao from './Components/FormDescricao';
+import FormDisabledCoordenador from './Components/FormDisabledCoordenador';
+import FormDisabledResponsavel from './Components/FormDisabledResponsavel';
+import FormDivisao from './Components/FormDivisao';
+import FormElementoPep from './Components/FormElementoPep';
+import FormGate from './Components/FormGate';
+import FormDataInicioReal from './Components/FormInicioReal';
+import FormJustificativa from './Components/FormJustificativa';
+import FormLocal from './Components/FormLocal';
+import FormNomeProjeto from './Components/FormNomeProjeto';
+import FormPolo from './Components/FormPolo';
+import FormPrioridade from './Components/FormPrioridade';
+import FormSolicitante from './Components/FormSolicitante';
+import FormStatusProjeto from './Components/FormStatusProjeto';
+import FormTipoProjeto from './Components/FormTipoProjeto';
+import FormValorTotalPrevisto from './Components/FormValorTotalPrevisto';
 
+export function ProjectsRegistration() {
+  const wd = window.innerWidth;
+  const { projectsForm, loading } = useProjects();
   return (
     <>
       <Sidebar>
@@ -41,7 +63,7 @@ export function ProjectsRegistration() {
             bg={useBreakpointValue({ base: 'white', sm: '#EDF2F7' })}
           >
             <Box
-              py={{ base: '0', sm: '16' }}
+              py={{ base: '0', sm: '10' }}
               px={{ base: '4', sm: '10' }}
               w={useBreakpointValue({
                 base: '20rem',
@@ -56,6 +78,9 @@ export function ProjectsRegistration() {
               }}
               borderRadius={{ base: 'none', sm: 'xl' }}
             >
+              <Heading as="h3" size="md" mb={5}>
+                Cadastrar Projeto
+              </Heading>
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -65,43 +90,23 @@ export function ProjectsRegistration() {
                 <Box display={wd > 100 ? 'flex' : ''}>
                   <Stack spacing="6" w="100%">
                     <Stack spacing="5">
-                      <FormControl>
-                        <FormLabel htmlFor="name">PROJETO</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Nome do projeto"
-                          id="name"
-                          type="text"
-                          name="name"
-                          value={projectsForm.values.name}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
+                      <Flex
+                        flexDirection={useBreakpointValue({
+                          base: 'column',
+                          md: 'row',
+                        })}
+                      >
+                        <AdicionarResponsavelModal
+                          projectsForm={projectsForm}
                         />
-                        {projectsForm.errors.name &&
-                          projectsForm.touched.name && (
-                            <TextError>{projectsForm.errors.name}</TextError>
-                          )}
-                      </FormControl>
-                      <FormControl>
-                        <FormLabel htmlFor="description">DESCRIÇÃO</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Aquisição e instalação"
-                          id="description"
-                          type="text"
-                          name="description"
-                          maxLength={15}
-                          value={projectsForm.values.description}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
+                        <AdicionarCoordenadorModal
+                          projectsForm={projectsForm}
                         />
-                        {projectsForm.errors.description &&
-                          projectsForm.touched.description && (
-                            <TextError>
-                              {projectsForm.errors.description}
-                            </TextError>
-                          )}
-                      </FormControl>
+                      </Flex>
+                    </Stack>
+                    <Stack spacing="5">
+                      <FormDisabledResponsavel projectsForm={projectsForm} />
+                      <FormDisabledCoordenador projectsForm={projectsForm} />
                     </Stack>
                     <Stack spacing="5">
                       <Flex
@@ -110,138 +115,11 @@ export function ProjectsRegistration() {
                           md: 'row',
                         })}
                       >
-                        <FormControl>
-                          <FormLabel htmlFor="budget">
-                            VALOR TOTAL PREVISTO
-                          </FormLabel>
-                          <InputGroup>
-                            <InputLeftElement
-                              pointerEvents="none"
-                              color="gray.300"
-                              fontSize="1.2em"
-                            >
-                              R$
-                            </InputLeftElement>
-                            <Input
-                              isRequired
-                              placeholder="10.000,00"
-                              id="valorTotalPrevisto"
-                              type="text"
-                              name="budget"
-                              value={projectsForm.values.budget}
-                              onChange={projectsForm.handleChange}
-                              w={useBreakpointValue({
-                                base: '100%',
-                                md: '95%',
-                              })}
-                            />
-                          </InputGroup>
-                          {projectsForm.errors.budget &&
-                            projectsForm.touched.budget && (
-                              <TextError>
-                                {projectsForm.errors.budget}
-                              </TextError>
-                            )}
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel htmlFor="classification">
-                            CLASSIFICAÇÃO
-                          </FormLabel>
-                          <Select
-                            id="classification"
-                            name="classification"
-                            value={projectsForm.values.classification}
-                            onChange={projectsForm.handleChange}
-                            w={useBreakpointValue({ base: '100%', md: '95%' })}
-                          >
-                            <option value="geracaoDeROIC">
-                              Geração de ROIC
-                            </option>
-                            <option value="regulatorio">Regulatório</option>
-                            <option value="reservatorio">Reservatório</option>
-                            <option value="segurançaOperacional">
-                              Segurança Operacional
-                            </option>
-                            <option value="manutençãoEmergencial">
-                              Manutenção Emergencial
-                            </option>
-                            <option value="contingencia">Contingência</option>
-                            <option value="melhoria">Melhoria</option>
-                          </Select>
-                          {projectsForm.errors.classification &&
-                            projectsForm.touched.classification && (
-                              <TextError>
-                                {projectsForm.errors.classification}
-                              </TextError>
-                            )}
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel htmlFor="requester">SOLICITANTE</FormLabel>
-                          <Select
-                            id="solicitanteId"
-                            name="requester"
-                            value={projectsForm.values.requester}
-                            onChange={projectsForm.handleChange}
-                          >
-                            <option value="Operacao">Operação</option>
-                            <option value="SMS">SMS</option>
-                            <option value="Reservatorio">Reservatório</option>
-                            <option value="UTE">UTE</option>
-                            <option value="Controle_de_producao">
-                              Controle de Produção
-                            </option>
-                          </Select>
-                          {projectsForm.errors.requester &&
-                            projectsForm.touched.requester && (
-                              <TextError>
-                                {projectsForm.errors.requester}
-                              </TextError>
-                            )}
-                        </FormControl>
-                      </Flex>
-                      <Flex
-                        flexDirection={useBreakpointValue({
-                          base: 'column',
-                          md: 'row',
-                        })}
-                      >
-                        <FormControl>
-                          <FormLabel htmlFor="justification">
-                            JUSTIFICATIVA
-                          </FormLabel>
-                          <Input
-                            isRequired
-                            placeholder="Ex.: Sistema necessário para medição e entrega de gás."
-                            id="justification"
-                            type="justification"
-                            name="justification"
-                            value={projectsForm.values.justification}
-                            onChange={projectsForm.handleChange}
-                            w={useBreakpointValue({ base: '100%', md: '95%' })}
-                          />
-                          {projectsForm.errors.justification &&
-                            projectsForm.touched.justification && (
-                              <TextError>
-                                {projectsForm.errors.justification}
-                              </TextError>
-                            )}
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel htmlFor="pole">POLO</FormLabel>
-                          <Select
-                            id="poloId"
-                            name="pole"
-                            value={projectsForm.values.pole}
-                            onChange={projectsForm.handleChange}
-                          >
-                            <option value="Tucano Sul">Tucano Sul</option>
-                            <option value="Alagoas">Alagoas</option>
-                          </Select>
-                          {projectsForm.errors.pole &&
-                            projectsForm.touched.pole && (
-                              <TextError>{projectsForm.errors.pole}</TextError>
-                            )}
-                        </FormControl>
+                        <FormPolo projectsForm={projectsForm} />
+                        <FormLocal projectsForm={projectsForm} />
+                        <FormSolicitante projectsForm={projectsForm} />
+                        <FormPrioridade projectsForm={projectsForm} />
+                        <FormStatusProjeto projectsForm={projectsForm} />
                       </Flex>
                     </Stack>
                     <Stack spacing="5">
@@ -251,309 +129,79 @@ export function ProjectsRegistration() {
                           md: 'row',
                         })}
                       >
-                        <FormControl>
-                          <FormLabel htmlFor="start">INÍCIO</FormLabel>
-                          <Input
-                            isRequired
-                            placeholder="dd/mm/aaaa"
-                            id="start"
-                            type="date"
-                            name="start"
-                            value={projectsForm.values.start}
-                            onChange={projectsForm.handleChange}
-                            w={useBreakpointValue({ base: '100%', md: '95%' })}
-                          />
-                          {projectsForm.errors.start &&
-                            projectsForm.touched.start && (
-                              <TextError>{projectsForm.errors.start}</TextError>
-                            )}
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel htmlFor="end">FIM</FormLabel>
-                          <Input
-                            isRequired
-                            placeholder="dd/mm/aaaa"
-                            id="end"
-                            type="date"
-                            name="end"
-                            value={projectsForm.values.end}
-                            onChange={projectsForm.handleChange}
-                            w={useBreakpointValue({ base: '100%', md: '90%' })}
-                          />
-                          {projectsForm.errors.end &&
-                            projectsForm.touched.end && (
-                              <TextError>
-                                {' '}
-                                {projectsForm.errors.start}
-                              </TextError>
-                            )}
-                        </FormControl>
-
-                        <FormControl>
-                          <FormLabel htmlFor="startReal">INÍCIO REAL</FormLabel>
-                          <Input
-                            isRequired
-                            placeholder="dd/mm/aaaa"
-                            id="dataInicioReal"
-                            type="date"
-                            name="startReal"
-                            value={projectsForm.values.startReal}
-                            onChange={projectsForm.handleChange}
-                            w={useBreakpointValue({ base: '100%', md: '95%' })}
-                          />
-                          {projectsForm.errors.startReal &&
-                            projectsForm.touched.startReal && (
-                              <TextError>
-                                {projectsForm.errors.startReal}
-                              </TextError>
-                            )}
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel htmlFor="endReal">FIM REAL</FormLabel>
-                          <Input
-                            isRequired
-                            placeholder="dd/mm/aaaa"
-                            id="dataFimReal"
-                            type="date"
-                            name="endReal"
-                            value={projectsForm.values.endReal}
-                            onChange={projectsForm.handleChange}
-                            w={useBreakpointValue({ base: '100%', md: '100%' })}
-                          />
-                          {projectsForm.errors.endReal &&
-                            projectsForm.touched.endReal && (
-                              <TextError>
-                                {' '}
-                                {projectsForm.errors.endReal}
-                              </TextError>
-                            )}
-                        </FormControl>
+                        <FormNomeProjeto projectsForm={projectsForm} />
+                        <FormElementoPep projectsForm={projectsForm} />
                       </Flex>
                     </Stack>
+                    <Stack spacing="5">
+                      <Flex
+                        flexDirection={useBreakpointValue({
+                          base: 'column',
+                          md: 'row',
+                        })}
+                      >
+                        <FormDataInicio projectsForm={projectsForm} />
+                        <FormDataFim projectsForm={projectsForm} />
+                        <FormDataInicioReal projectsForm={projectsForm} />
+                        <FormDataFimReal projectsForm={projectsForm} />
+                      </Flex>
+                    </Stack>
+
+                    <Stack spacing="5">
+                      <Flex
+                        flexDirection={useBreakpointValue({
+                          base: 'column',
+                          md: 'row',
+                        })}
+                      >
+                        <FormValorTotalPrevisto projectsForm={projectsForm} />
+                        <FormValorTotalPrevisto projectsForm={projectsForm} />
+                        <FormComplexidade projectsForm={projectsForm} />
+                      </Flex>
+                      <Flex
+                        flexDirection={useBreakpointValue({
+                          base: 'column',
+                          md: 'row',
+                        })}
+                      >
+                        <FormDivisao projectsForm={projectsForm} />
+                        <FormClassificacao projectsForm={projectsForm} />
+                        <FormTipoProjeto projectsForm={projectsForm} />
+                        <FormGate projectsForm={projectsForm} />
+                      </Flex>
+                    </Stack>
+                    <Stack spacing="5">
+                      <Flex
+                        flexDirection={useBreakpointValue({
+                          base: 'column',
+                          md: 'row',
+                        })}
+                      >
+                        <FormDescricao projectsForm={projectsForm} />
+                        <FormJustificativa projectsForm={projectsForm} />
+                      </Flex>
+                    </Stack>
+
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: 'column',
                         md: 'row',
                       })}
                     >
-                      <FormControl>
-                        <FormLabel htmlFor="priority">PRIORIDADE</FormLabel>
-                        <Select
-                          id="prioridadeId"
-                          name="priority"
-                          value={projectsForm.values.priority}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '95%' })}
-                        >
-                          <option value="Alta">Alta</option>
-                          <option value="Média">Média</option>
-                          <option value="Baixa">Baixa</option>
-                        </Select>
-                        {projectsForm.errors.priority &&
-                          projectsForm.touched.priority && (
-                            <TextError>
-                              {projectsForm.errors.priority}
-                            </TextError>
-                          )}
-                      </FormControl>
-
-                      <FormControl>
-                        <FormLabel htmlFor="complexity">COMPLEXIDADE</FormLabel>
-                        <Select
-                          id="complexidadeId"
-                          name="complexity"
-                          value={projectsForm.values.complexity}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
-                        >
-                          <option value="Alta">Alta</option>
-                          <option value="Média">Média</option>
-                          <option value="Baixa">Baixa</option>
-                        </Select>
-                        {projectsForm.errors.complexity &&
-                          projectsForm.touched.complexity && (
-                            <TextError>
-                              {projectsForm.errors.complexity}
-                            </TextError>
-                          )}
-                      </FormControl>
+                      <FormComentarios projectsForm={projectsForm} />
                     </Flex>
 
-                    <Flex
+                    {/* <Flex
                       flexDirection={useBreakpointValue({
                         base: 'column',
                         md: 'row',
                       })}
                     >
-                      <FormControl>
-                        <FormLabel htmlFor="place">LOCAL</FormLabel>
-                        <Select
-                          id="localId"
-                          name="place"
-                          value={projectsForm.values.place}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '95%' })}
-                        >
-                          <option value="Alta">Panelas e ETC Catu</option>
-                          <option value="Média">EGNA Conceição</option>
-                          <option value="Baixa">Poços</option>
-                          <option value="Baixa">Pilar</option>
-                          <option value="Baixa">EPFU</option>
-                          <option value="Baixa">Paru</option>
-                          <option value="Baixa">EPPIR</option>
-                          <option value="Baixa">P16</option>
-                          <option value="Baixa">Estação Coletora Anambé</option>
-                          <option value="Baixa">UPGN Pilar e ECPIR</option>
-                        </Select>
-                        {projectsForm.errors.place &&
-                          projectsForm.touched.place && (
-                            <TextError>{projectsForm.errors.place}</TextError>
-                          )}
-                      </FormControl>
-
-                      <FormControl>
-                        <FormLabel htmlFor="division">DIVISÃO</FormLabel>
-                        <Select
-                          id="divisaoId"
-                          name="division"
-                          value={projectsForm.values.division}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '95%' })}
-                        >
-                          <option value="Processamento_de_Gas">
-                            Processamento de Gás
-                          </option>
-                          <option value="E&P">E&P</option>
-                          <option value="Comercializacao_energia">
-                            Comercialização & Energia
-                          </option>
-                        </Select>
-                        {projectsForm.errors.division &&
-                          projectsForm.touched.division && (
-                            <TextError>
-                              {projectsForm.errors.division}
-                            </TextError>
-                          )}
-                      </FormControl>
-                      <FormControl>
-                        <FormLabel htmlFor="status">STATUS</FormLabel>
-                        <Select
-                          id="statusId"
-                          name="status"
-                          value={projectsForm.values.status}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
-                        >
-                          <option value="Iniciado">Iniciado</option>
-                          <option value="Não iniciado">Não iniciado</option>
-                          <option value="Concluido">Concluído</option>
-                        </Select>
-                        {projectsForm.errors.status &&
-                          projectsForm.touched.status && (
-                            <TextError>{projectsForm.errors.status}</TextError>
-                          )}
-                      </FormControl>
-                    </Flex>
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
-                      })}
-                    >
-                      <FormControl>
-                        <FormLabel htmlFor="gate">GATE</FormLabel>
-                        <Select
-                          id="gate"
-                          name="gate"
-                          value={projectsForm.values.gate}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '95%' })}
-                        >
-                          <option value={`C&M`}>{`C&M`}</option>
-                          <option value="concluido">Concluído</option>
-                          <option value="gate1">Gate 1</option>
-                          <option value="gate2">Gate 2</option>
-                        </Select>
-                        {projectsForm.errors.gate &&
-                          projectsForm.touched.gate && (
-                            <TextError>{projectsForm.errors.gate}</TextError>
-                          )}
-                      </FormControl>
-
-                      <FormControl>
-                        <FormLabel htmlFor="typeProject">TIPO</FormLabel>
-                        <Select
-                          id="tipoProjetoId"
-                          name="typeProject"
-                          value={projectsForm.values.typeProject}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
-                        >
-                          <option value="projeto1">Projeto 1</option>
-                          <option value="projeto2">Projeto 2</option>
-                          <option value="projeto3">Projeto 3</option>
-                        </Select>
-                        {projectsForm.errors.typeProject &&
-                          projectsForm.touched.typeProject && (
-                            <TextError>
-                              {projectsForm.errors.typeProject}
-                            </TextError>
-                          )}
-                      </FormControl>
-                    </Flex>
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
-                      })}
-                    >
-                      <FormControl>
-                        <FormLabel htmlFor="demand">DEMANDA</FormLabel>
-                        <Select
-                          id="demand"
-                          name="demand"
-                          value={projectsForm.values.demand}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
-                        >
-                          <option value="origem">Origem</option>
-                          <option value="azulGoiaba">Azul-Goiaba</option>
-                        </Select>
-                        {projectsForm.errors.demand &&
-                          projectsForm.touched.demand && (
-                            <TextError>{projectsForm.errors.demand}</TextError>
-                          )}
-                      </FormControl>
-                    </Flex>
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
-                      })}
-                    >
-                      <FormControl>
-                        <FormLabel htmlFor="comments">COMENTÁRIOS</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder=""
-                          id="demandaId"
-                          type="comments"
-                          name="comments"
-                          value={projectsForm.values.comments}
-                          onChange={projectsForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
-                        />
-                        {projectsForm.errors.comments &&
-                          projectsForm.touched.comments && (
-                            <TextError>
-                              {projectsForm.errors.comments}
-                            </TextError>
-                          )}
-                      </FormControl>
-                    </Flex>
-
-                    <Stack spacing="6">
+                      <FormDemanda projectsForm={projectsForm} />
+                    </Flex> */}
+                    <Stack>
                       <Button
+                        mt={4}
                         disabled={!projectsForm.isValid}
                         type="submit"
                         background="origem.300"
@@ -573,7 +221,10 @@ export function ProjectsRegistration() {
                             size={24}
                           />
                         ) : (
-                          'Cadastrar'
+                          <>
+                            <BsPlusLg />
+                            <Text ml={2}>CADASTRAR PROJETO</Text>
+                          </>
                         )}
                       </Button>
                     </Stack>

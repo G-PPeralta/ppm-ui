@@ -36,7 +36,7 @@ export function usePermissions() {
         nome: values.name,
         telefone: values.telephone,
         email: values.email,
-        area_atuacao: values.area,
+        areaAtuacao: values.area,
         role_id: Number(values.accessLevel),
       };
 
@@ -85,7 +85,7 @@ export function usePermissions() {
           permissionsForm.setFieldValue('name', data[0]?.nome);
           permissionsForm.setFieldValue('telephone', data[0]?.telefone);
           permissionsForm.setFieldValue('email', data[0]?.email);
-          permissionsForm.setFieldValue('area', data[0]?.area_atuacao);
+          permissionsForm.setFieldValue('area', data[0]?.areaAtuacao);
           permissionsForm.setFieldValue('accessLevel', data[0]?.role_id);
         }
 
