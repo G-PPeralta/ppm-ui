@@ -6,7 +6,7 @@ import { IGantt, GanttProps } from 'interfaces/Services';
 import { getGanttData } from 'services/get/Gantt';
 
 export function Gantt() {
-  const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);
+  // const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);
   const [loading, setLoading] = useState(true);
   const [gantt, setGantt] = useState<GanttProps[]>();
 
@@ -59,18 +59,21 @@ export function Gantt() {
     const reqGanttData = await getGanttData();
     if (!reqGanttData) return;
     const _gantt: IGantt = reqGanttData.data;
-    setGanttData(_gantt);
+    // setGanttData(_gantt);
     ganttFormatter(_gantt);
-    setLoading(false);
   }
+
+  useEffect(() => {
+    setLoading(false);
+  }, [gantt]);
 
   useEffect(() => {
     handleSetGanttData();
   }, []);
 
-  useEffect(() => {
-    console.log(ganttData);
-  }, [ganttData]);
+  // useEffect(() => {
+  //   console.log(ganttData);
+  // }, [ganttData]);
 
   // const ganttDataLocal = ganttData.macroatividades?.map((gantt) => ({
   //   TaskId: gantt.macroatividade_id,
