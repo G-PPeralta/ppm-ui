@@ -6,6 +6,7 @@ import {
   Flex,
   Heading,
   Stack,
+  Text,
   useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react';
@@ -211,7 +212,6 @@ export function ProjectsRegistration() {
                           transition: 'all 0.4s',
                         }}
                         onClick={() => postProject}
-                        leftIcon={<BsPlusLg />}
                       >
                         {loading ? (
                           <Ring
@@ -221,7 +221,10 @@ export function ProjectsRegistration() {
                             size={24}
                           />
                         ) : (
-                          'CADASTRAR PROJETO'
+                          <>
+                            <BsPlusLg />
+                            <Text ml={2}>CADASTRAR PROJETO</Text>
+                          </>
                         )}
                       </Button>
                     </Stack>
