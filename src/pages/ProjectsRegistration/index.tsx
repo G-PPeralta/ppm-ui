@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 
 import {
@@ -46,7 +47,16 @@ import FormValorTotalPrevisto from './Components/FormValorTotalPrevisto';
 
 export function ProjectsRegistration() {
   const wd = window.innerWidth;
-  const { projectsForm, loading } = useProjects();
+  const { projectsForm } = useProjects();
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  }, []);
+
   return (
     <>
       <Sidebar>
