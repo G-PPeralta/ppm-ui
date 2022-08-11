@@ -3,6 +3,7 @@ import {
   LocalProjeto,
   Solicitante,
   StatusProjeto,
+  Divisao,
 } from 'interfaces/Services';
 
 import { api } from 'services/api';
@@ -30,5 +31,12 @@ export async function postNovoStatusProjeto(
   payload: StatusProjeto,
 ): Promise<{ status: number }> {
   const { status } = await api.post('/status-projeto', payload);
+  return { status };
+}
+
+export async function postNovaDivisao(
+  payload: Divisao,
+): Promise<{ status: number }> {
+  const { status } = await api.post('/divisao', payload);
   return { status };
 }
