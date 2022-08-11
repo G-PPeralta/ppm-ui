@@ -54,7 +54,7 @@ export function ProjectsRegistration() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 2000);
   }, []);
 
   return (
