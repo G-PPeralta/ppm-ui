@@ -4,6 +4,7 @@ import {
   Solicitante,
   StatusProjeto,
   Divisao,
+  Classificacao,
 } from 'interfaces/Services';
 
 import { api } from 'services/api';
@@ -38,5 +39,12 @@ export async function postNovaDivisao(
   payload: Divisao,
 ): Promise<{ status: number }> {
   const { status } = await api.post('/divisao', payload);
+  return { status };
+}
+
+export async function postNovaClassificacao(
+  payload: Classificacao,
+): Promise<{ status: number }> {
+  const { status } = await api.post('/classificacao', payload);
   return { status };
 }
