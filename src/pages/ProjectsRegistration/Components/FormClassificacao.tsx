@@ -69,7 +69,7 @@ function FormClassificacao(projectsForm: any) {
       setClassificacaoState(novoState);
       setNovaOpcao('');
 
-      projectsForm.projectsForm.values.statusId = novoAdicionado.id;
+      projectsForm.projectsForm.values.tipoProjetoId = novoAdicionado.id;
 
       postNovaClassificacao(novoAdicionado);
     }

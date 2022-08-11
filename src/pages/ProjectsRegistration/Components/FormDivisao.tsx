@@ -66,7 +66,7 @@ function FormDivisao(projectsForm: any) {
       setDivisaoState(novoState);
       setNovaOpcao('');
 
-      projectsForm.projectsForm.values.statusId = novoAdicionado.id;
+      projectsForm.projectsForm.values.divisaoId = novoAdicionado.id;
 
       postNovaDivisao(novoAdicionado);
     }

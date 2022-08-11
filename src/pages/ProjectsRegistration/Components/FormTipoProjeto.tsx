@@ -68,7 +68,7 @@ function FormTipoProjeto(projectsForm: any) {
       setTipoProjetoState(novoState);
       setNovaOpcao('');
 
-      projectsForm.projectsForm.values.statusId = novoAdicionado.id;
+      projectsForm.projectsForm.values.tipoProjetoId = novoAdicionado.id;
 
       postNovoTipoProjeto(novoAdicionado);
     }

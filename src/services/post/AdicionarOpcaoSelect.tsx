@@ -6,6 +6,7 @@ import {
   Divisao,
   Classificacao,
   TipoProjeto,
+  Gate,
 } from 'interfaces/Services';
 
 import { api } from 'services/api';
@@ -54,5 +55,10 @@ export async function postNovoTipoProjeto(
   payload: TipoProjeto,
 ): Promise<{ status: number }> {
   const { status } = await api.post('/tipo-projeto', payload);
+  return { status };
+}
+
+export async function postNovoGate(payload: Gate): Promise<{ status: number }> {
+  const { status } = await api.post('/gate', payload);
   return { status };
 }
