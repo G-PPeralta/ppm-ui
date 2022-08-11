@@ -29,6 +29,6 @@ export async function postNovoSolicitante(
 export async function postNovoStatusProjeto(
   payload: StatusProjeto,
 ): Promise<{ status: number }> {
-  const { status } = await api.post('/status', payload);
+  const { status } = await api.post('/status-projeto', payload);
   return { status };
 }

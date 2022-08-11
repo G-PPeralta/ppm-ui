@@ -22,15 +22,6 @@ function FormStatusProjeto(projectsForm: any) {
   const [statusProjetoState, setStatusProjetoState] = useState<StatusProjeto[]>(
     [] as StatusProjeto[],
   );
-
-  // async function handleGetProjetos() {
-  //   const reqGet = await getStatusProjeto();
-
-  //   const dataReq: StatusProjeto[] = reqGet.data;
-
-  //   setStatusProjetoState(dataReq);
-  // }
-
   const [loading, setLoading] = useState(true);
   const [novaOpcao, setNovaOpcao] = useState('');
 
@@ -76,7 +67,7 @@ function FormStatusProjeto(projectsForm: any) {
       setStatusProjetoState(novoState);
       setNovaOpcao('');
 
-      projectsForm.projectsForm.values.poloId = novoAdicionado.id;
+      projectsForm.projectsForm.values.statusId = novoAdicionado.id;
 
       postNovoStatusProjeto(novoAdicionado);
     }
@@ -88,28 +79,13 @@ function FormStatusProjeto(projectsForm: any) {
 
   return (
     <FormControl>
-      {/* <FormLabel htmlFor="statusId">STATUS</FormLabel>
-      <Select
-        id="statusId"
-        name="statusId"
-        value={projectsForm.projectsForm.values.statusId}
-        onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: '100%', md: '100%' })}
-      >
-        {statusProjetoState.map((status) => (
-          <option key={status.id} value={status.id}>
-            {status.status}
-          </option>
-        ))}
-      </Select>
-       */}
       {loading ? (
         <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
           <Ring speed={2} lineWeight={5} color="blue" size={24} />
         </Box>
       ) : (
         <>
-          <FormLabel htmlFor="statusId">POLO</FormLabel>
+          <FormLabel htmlFor="statusId">STATUS</FormLabel>
           {Number(projectsForm.projectsForm.values.statusId) ===
           statusProjetoState[statusProjetoState.length - 1].id ? (
             <>
