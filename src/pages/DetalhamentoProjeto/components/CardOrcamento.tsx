@@ -7,7 +7,17 @@ import { Box, Flex, Heading, Text, useBreakpointValue } from '@chakra-ui/react';
 function CardOrcamento() {
   return (
     <>
-      <Box backgroundColor={'white'} p={5} borderRadius={5}>
+      <Box
+        backgroundColor={'white'}
+        p={5}
+        borderRadius={5}
+        w={useBreakpointValue({
+          base: '100%',
+          sm: 'sm',
+          md: 'md',
+          lg: 'lg',
+        })}
+      >
         <Box mb={5}>
           <Box display={'flex'} alignItems={'center'}>
             <Heading as="h4" size="lg" color={'origem.300'}>
@@ -27,11 +37,7 @@ function CardOrcamento() {
           </Box>
         </Box>
 
-        <Flex
-          grow={1}
-          direction={'column'}
-          w={useBreakpointValue({ base: 'sm', sm: 'sm' })}
-        >
+        <Flex grow={1} direction={'column'}>
           <Flex justify={'space-between'}>
             <Flex alignItems={'center'} mb={3}>
               <Box>

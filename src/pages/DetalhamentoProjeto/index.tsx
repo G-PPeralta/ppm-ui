@@ -1,16 +1,21 @@
-import * as React from 'react';
-
 import { Flex } from '@chakra-ui/react';
 
 import Sidebar from 'components/SideBar';
 
+import CardInfoProjeto from './components/CardInfoProjeto';
 import CardOrcamento from './components/CardOrcamento';
 
 function DetalhamentoProjeto() {
   return (
     <>
       <Sidebar>
-        <Flex>
+        <Flex
+          w={'100%'}
+          justifyContent={'space-between'}
+          direction={'row'}
+          wrap={'wrap'}
+        >
+          <CardInfoProjeto />
           <CardOrcamento />
         </Flex>
       </Sidebar>
