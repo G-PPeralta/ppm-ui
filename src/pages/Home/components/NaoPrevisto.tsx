@@ -41,7 +41,7 @@ export default function NaoPrevistoComponent() {
               >
                 Não Previsto
               </Text>
-              <Box sx={{ display: 'flex' }}>
+              <Box display={'flex'}>
                 <Text
                   sx={{ fontSize: 12, fontWeight: '600', alignSelf: 'center' }}
                   color="#000000"
@@ -51,7 +51,7 @@ export default function NaoPrevistoComponent() {
                 <Text
                   ml={2}
                   sx={{ fontSize: 18, fontWeight: '600', alignSelf: 'center' }}
-                  color="#F94144"
+                  color="#059502"
                 >
                   10.000.000
                 </Text>
