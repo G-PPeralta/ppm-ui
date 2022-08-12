@@ -23,7 +23,7 @@ function CardInfoProjeto() {
           </Heading>
         </Box>
 
-        <Flex justify-content={'space-between'}>
+        <Flex justifyContent={'space-between'}>
           <Box>
             <Flex>
               <Box display={'flex'}>
