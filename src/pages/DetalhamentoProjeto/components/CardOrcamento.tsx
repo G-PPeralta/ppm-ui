@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import { IoIosWallet } from 'react-icons/io';
 
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text, useBreakpointValue } from '@chakra-ui/react';
 
 function CardOrcamento() {
   return (
@@ -27,9 +27,13 @@ function CardOrcamento() {
           </Box>
         </Box>
 
-        <Flex grow={1} direction={'column'}>
-          <Flex>
-            <Flex alignItems={'center'} justify={'space-between'} mb={3} mr={6}>
+        <Flex
+          grow={1}
+          direction={'column'}
+          w={useBreakpointValue({ base: 'sm', sm: 'sm' })}
+        >
+          <Flex justify={'space-between'}>
+            <Flex alignItems={'center'} mb={3}>
               <Box>
                 <Box display={'flex'} alignItems={'center'}>
                   <Text fontSize={16} fontWeight={600}>
@@ -61,7 +65,7 @@ function CardOrcamento() {
               </Box>
             </Flex>
 
-            <Flex alignItems={'center'} justify={'space-between'} mb={3}>
+            <Flex alignItems={'center'} mb={3}>
               <Box display={'flex'} alignItems={'center'}>
                 <Text color={'#00B53D'} fontSize={20}>
                   <BsCheckCircleFill />
@@ -81,8 +85,8 @@ function CardOrcamento() {
             </Flex>
           </Flex>
 
-          <Flex>
-            <Flex alignItems={'center'} justify={'space-between'} mr={6}>
+          <Flex justify={'space-between'}>
+            <Flex alignItems={'center'}>
               <Box>
                 <Box display={'flex'} alignItems={'center'}>
                   <Text fontSize={16} fontWeight={600}>
@@ -113,7 +117,7 @@ function CardOrcamento() {
                 </Text>
               </Box>
             </Flex>
-            <Flex alignItems={'center'} justify={'space-between'}>
+            <Flex alignItems={'center'}>
               <Box>
                 <Box display={'flex'} alignItems={'center'}>
                   <Text fontSize={16} fontWeight={600}>
