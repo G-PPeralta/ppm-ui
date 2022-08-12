@@ -27,7 +27,9 @@ function FormDivisao(projectsForm: any) {
   async function handleGetProjetos() {
     const reqGet = await getDivisao();
 
-    const dataReq: Divisao[] = reqGet.data;
+    const dataReq: Divisao[] = reqGet.data.sort((a: Divisao, b: Divisao) =>
+      a.divisao.localeCompare(b.divisao),
+    );
 
     const outro: Divisao = {
       id: dataReq.length + 2,
