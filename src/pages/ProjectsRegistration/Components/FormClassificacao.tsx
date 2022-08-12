@@ -29,7 +29,10 @@ function FormClassificacao(projectsForm: any) {
   async function handleGetProjetos() {
     const reqGet = await getClassificacao();
 
-    const dataReq: Classificacao[] = reqGet.data;
+    const dataReq: Classificacao[] = reqGet.data.sort(
+      (a: Classificacao, b: Classificacao) =>
+        a.classificacao.localeCompare(b.classificacao),
+    );
 
     const outro: Classificacao = {
       id: dataReq.length + 2,
