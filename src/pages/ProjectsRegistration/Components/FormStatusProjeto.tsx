@@ -28,7 +28,9 @@ function FormStatusProjeto(projectsForm: any) {
   async function handleGetProjetos() {
     const reqGet = await getStatusProjeto();
 
-    const dataReq: StatusProjeto[] = reqGet.data;
+    const dataReq: StatusProjeto[] = reqGet.data.sort(
+      (a: StatusProjeto, b: StatusProjeto) => a.status.localeCompare(b.status),
+    );
 
     const outro: StatusProjeto = {
       id: dataReq.length + 2,
