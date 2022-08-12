@@ -26,7 +26,9 @@ function FormGate(projectsForm: any) {
   async function handleGetProjetos() {
     const reqGet = await getGate();
 
-    const dataReq: Gate[] = reqGet.data;
+    const dataReq: Gate[] = reqGet.data.sort((a: Gate, b: Gate) =>
+      a.gate.localeCompare(b.gate),
+    );
 
     const outro: Gate = {
       id: dataReq.length + 2,
