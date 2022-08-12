@@ -37,4 +37,5 @@ export const projectRegisterSchema = yup.object({
       tipoResponsavel: yup.number().required(),
     }),
   ),
+  elementoPep: yup.string().required(),
 });

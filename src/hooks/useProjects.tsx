@@ -39,6 +39,7 @@ export function useProjects() {
           tipoResponsavel: 1,
         },
       ],
+      elementoPep: '',
     },
     validationSchema: projectRegisterSchema,
     onSubmit: async (values) => {
@@ -64,6 +65,7 @@ export function useProjects() {
         demandaId: Number(values.demandaId),
         comentarios: values.comentarios,
         responsavel: values.responsavel,
+        elementoPep: values.elementoPep,
       };
 
       setLoading(true);
