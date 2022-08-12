@@ -29,7 +29,9 @@ function FormTipoProjeto(projectsForm: any) {
   async function handleGetProjetos() {
     const reqGet = await getTipoProjeto();
 
-    const dataReq: TipoProjeto[] = reqGet.data;
+    const dataReq: TipoProjeto[] = reqGet.data.sort(
+      (a: TipoProjeto, b: TipoProjeto) => a.tipo.localeCompare(b.tipo),
+    );
 
     const outro: TipoProjeto = {
       id: dataReq.length + 2,
