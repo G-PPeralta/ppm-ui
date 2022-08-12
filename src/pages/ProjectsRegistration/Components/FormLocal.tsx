@@ -28,8 +28,8 @@ function FormLocal(projectsForm: any) {
   async function handleGetProjetos() {
     const reqGet = await getLocalProjeto();
 
-    const dataReq: LocalProjeto[] = reqGet.data.sort((a: any, b: any) =>
-      a.local.localeCompare(b.local),
+    const dataReq: LocalProjeto[] = reqGet.data.sort(
+      (a: LocalProjeto, b: LocalProjeto) => a.local.localeCompare(b.local),
     );
 
     const outro: LocalProjeto = {
