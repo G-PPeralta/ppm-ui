@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, Heading } from '@chakra-ui/react';
 import {
   CartesianGrid,
   LineChart,
@@ -7,6 +7,7 @@ import {
   Tooltip,
   Legend,
   Line,
+  ResponsiveContainer,
 } from 'recharts';
 
 function getNumeroMes(numeroDoMes: Number) {
@@ -53,46 +54,78 @@ function GraficoCurvaS() {
   const previsto = totalNomeMeses.map((mes) => {
     porcentagem += (totalBudget / qtdeMeses / totalBudget) * 100;
     return {
-      month: mes,
-      budget: porcentagem,
+      mes,
+      'Capex Previsto': porcentagem,
     };
   });
 
-  // const atual = [
-  //   { month: 'Out/2022', spent: 6 },
-  //   { month: 'Nov/2022', spent: 30 },
-  //   { month: 'Dez/2022', spent: 35 },
-  //   { month: 'Jan/2023', spent: 40 },
-  //   { month: 'Fev/2023', spent: 55 },
-  //   // { month: 'Mar/2023', spent: 82 },
-  //   // { month: 'Abr/2023', spent: 90 },
-  //   // { month: 'Mai/2023', spent: 95 },
-  // ];
+  const atual = [
+    { mes: 'Out/2022', 'Capex Realizado': 6 },
+    { mes: 'Nov/2022', 'Capex Realizado': 30 },
+    { mes: 'Dez/2022', 'Capex Realizado': 35 },
+    { mes: 'Jan/2023', 'Capex Realizado': 40 },
+    { mes: 'Fev/2023', 'Capex Realizado': 55 },
+    // { mes: 'Mar/2023', spent: 82 },
+    // { mes: 'Abr/2023', spent: 90 },
+    // { mes: 'Mai/2023', spent: 95 },
+  ];
+
+  const data = previsto.map((mes) => {
+    const mesAtual = atual.find((mesAtual) => mesAtual.mes === mes.mes);
+    return {
+      ...mes,
+      ...mesAtual,
+    };
+  });
+
+  console.log(data);
 
   return (
     <>
       <Flex
         backgroundColor={'white'}
-        p={4}
-        alignItems={'center'}
-        justify={'center'}
         borderRadius={4}
         mt={4}
+        direction={'column'}
+        p={5}
       >
-        <LineChart
-          width={730}
-          height={250}
-          data={previsto}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="month" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="pv" stroke="#8884d8" />
-          <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-        </LineChart>
+        <Flex alignItems={'center'}>
+          <Heading as="h4" size="md" ml={2}>
+            Curva S
+          </Heading>
+        </Flex>
+
+        <Flex px={4} pt={4} alignItems={'center'} justify={'center'}>
+          <ResponsiveContainer
+            width={'100%'}
+            height={'80%'}
+            minWidth={400}
+            minHeight={300}
+          >
+            <LineChart
+              data={data}
+              // margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="mes" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line
+                type="monotone"
+                dataKey="Capex Realizado"
+                stroke="#2E69FD"
+                strokeWidth={4}
+              />
+              <Line
+                type="monotone"
+                dataKey="Capex Previsto"
+                stroke="#93E01B"
+                strokeWidth={4}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </Flex>
       </Flex>
     </>
   );
