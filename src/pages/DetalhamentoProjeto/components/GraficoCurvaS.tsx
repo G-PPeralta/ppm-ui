@@ -78,8 +78,6 @@ function GraficoCurvaS() {
     };
   });
 
-  console.log(data);
-
   return (
     <>
       <Flex
@@ -99,13 +97,10 @@ function GraficoCurvaS() {
           <ResponsiveContainer
             width={'100%'}
             height={'80%'}
-            minWidth={400}
-            minHeight={300}
+            minWidth={250}
+            minHeight={200}
           >
-            <LineChart
-              data={data}
-              // margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-            >
+            <LineChart data={data}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="mes" />
               <YAxis />
