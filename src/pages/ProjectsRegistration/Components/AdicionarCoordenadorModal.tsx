@@ -59,7 +59,10 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
       'nomeCoordenador',
       numeroDeCoordenadores.filter((item) => item.nomeCoordenador !== ''),
     );
-    postCoordenador(numeroDeCoordenadores);
+    const coordenadores = {
+      coordenadores: numeroDeCoordenadores,
+    };
+    postCoordenador(coordenadores);
     onClose();
   }
 

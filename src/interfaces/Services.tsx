@@ -250,3 +250,7 @@ export interface Responsaveis {
 export interface RegistroCoordenador {
   nomeCoordenador: string;
 }
+
+export interface Coordenadores {
+  coordenadores: RegistroCoordenador[];
+}
