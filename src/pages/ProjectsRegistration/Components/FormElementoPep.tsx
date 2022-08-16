@@ -17,13 +17,13 @@ function FormElementoPep(projectsForm: any) {
         id="elementoPep"
         type="text"
         name="elementoPep"
-        value={projectsForm.projectsForm.values.nomeProjeto}
+        value={projectsForm.projectsForm.values.elementoPep}
         onChange={projectsForm.projectsForm.handleChange}
         w={useBreakpointValue({ base: '100%', md: '100%' })}
       />
-      {projectsForm.projectsForm.errors.nomeProjeto &&
-        projectsForm.projectsForm.touched.nomeProjeto && (
-          <TextError>{projectsForm.projectsForm.errors.nomeProjeto}</TextError>
+      {projectsForm.projectsForm.errors.elementoPep &&
+        projectsForm.projectsForm.touched.elementoPep && (
+          <TextError>{projectsForm.projectsForm.errors.elementoPep}</TextError>
         )}
     </FormControl>
   );
