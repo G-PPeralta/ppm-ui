@@ -45,6 +45,7 @@ export function useProjects() {
       ],
       responsavelId: [0],
       coordenadorId: [0],
+      elementoPep: '',
     },
     validationSchema: projectRegisterSchema,
     onSubmit: async (values) => {
@@ -71,6 +72,8 @@ export function useProjects() {
         comentarios: values.comentarios,
         responsavelId: values.responsavelId,
         coordenadorId: values.responsavelId,
+        responsavel: values.responsavel,
+        elementoPep: values.elementoPep,
       };
 
       setLoading(true);

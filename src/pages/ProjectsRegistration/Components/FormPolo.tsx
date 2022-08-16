@@ -26,7 +26,9 @@ function FormPolo(projectsForm: any) {
   async function handleGetProjetos() {
     const reqGet = await getPolo();
 
-    const dataReq: Polo[] = reqGet.data;
+    const dataReq: Polo[] = reqGet.data.sort((a: Polo, b: Polo) =>
+      a.polo.localeCompare(b.polo),
+    );
 
     const outro: Polo = {
       id: dataReq.length + 2,

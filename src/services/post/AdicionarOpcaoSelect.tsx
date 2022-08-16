@@ -1,4 +1,13 @@
-import { Polo, LocalProjeto, Solicitante } from 'interfaces/Services';
+import {
+  Polo,
+  LocalProjeto,
+  Solicitante,
+  StatusProjeto,
+  Divisao,
+  Classificacao,
+  TipoProjeto,
+  Gate,
+} from 'interfaces/Services';
 
 import { api } from 'services/api';
 
@@ -18,5 +27,38 @@ export async function postNovoSolicitante(
   payload: Solicitante,
 ): Promise<{ status: number }> {
   const { status } = await api.post('/solicitante', payload);
+  return { status };
+}
+
+export async function postNovoStatusProjeto(
+  payload: StatusProjeto,
+): Promise<{ status: number }> {
+  const { status } = await api.post('/status-projeto', payload);
+  return { status };
+}
+
+export async function postNovaDivisao(
+  payload: Divisao,
+): Promise<{ status: number }> {
+  const { status } = await api.post('/divisao', payload);
+  return { status };
+}
+
+export async function postNovaClassificacao(
+  payload: Classificacao,
+): Promise<{ status: number }> {
+  const { status } = await api.post('/classificacao', payload);
+  return { status };
+}
+
+export async function postNovoTipoProjeto(
+  payload: TipoProjeto,
+): Promise<{ status: number }> {
+  const { status } = await api.post('/tipo-projeto', payload);
+  return { status };
+}
+
+export async function postNovoGate(payload: Gate): Promise<{ status: number }> {
+  const { status } = await api.post('/gate', payload);
   return { status };
 }
