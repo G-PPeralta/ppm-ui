@@ -33,12 +33,18 @@ export function useProjects() {
       tipoProjetoId: 0,
       demandaId: 0,
       comentarios: '',
-      responsavel: [
+      responsaveis: [
         {
           nomeResponsavel: '',
-          tipoResponsavel: 1,
         },
       ],
+      nomeCoordenador: [
+        {
+          nomeCoordenador: '',
+        },
+      ],
+      responsavelId: [0],
+      coordenadorId: [0],
       elementoPep: '',
     },
     validationSchema: projectRegisterSchema,
@@ -64,7 +70,8 @@ export function useProjects() {
         tipoProjetoId: Number(values.tipoProjetoId),
         demandaId: Number(values.demandaId),
         comentarios: values.comentarios,
-        responsavel: values.responsavel,
+        responsavelId: values.responsavelId,
+        coordenadorId: values.responsavelId,
         elementoPep: values.elementoPep,
       };
 

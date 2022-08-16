@@ -12,21 +12,21 @@ function FormDisabledCoordenador(projectsForm: any) {
   return (
     <>
       {!loading &&
-        projectsForm.projectsForm.values.responsavel.map(
+        projectsForm.projectsForm.values.nomeCoordenador.map(
           (_responsavel: string, index: number) => (
             <Box key={index}>
-              <FormLabel htmlFor={`responsavel${index}`}>
+              <FormLabel htmlFor={`coordenador${index}`}>
                 COORDENADOR {index + 1}
               </FormLabel>
               <Input
                 disabled
                 placeholder=""
-                id={`responsavel${index}`}
-                type={`responsavel${index}`}
-                name={`responsavel${index}`}
+                id={`coordenador${index}`}
+                type={`coordenador${index}`}
+                name={`coordenador${index}`}
                 value={
-                  projectsForm.projectsForm.values.responsavel[index]
-                    .nomeResponsavel
+                  projectsForm.projectsForm.values.nomeCoordenador[index]
+                    .nomeCoordenador
                 }
                 w={'100%'}
               />
