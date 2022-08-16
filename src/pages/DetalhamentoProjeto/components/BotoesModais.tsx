@@ -7,7 +7,14 @@ import BotaoListadeTarefas from './BotaoListaDeTarefas';
 function BotoesModais() {
   return (
     <>
-      <Flex backgroundColor={'white'} borderRadius={6} direction={'column'}>
+      <Flex
+        backgroundColor={'white'}
+        borderRadius={6}
+        direction={'column'}
+        grow={1}
+        shrink={1}
+        basis={'180px'}
+      >
         <BotaoDescricaoEJustificativa />
         <BotaoListadeTarefas />
         <BotaoLicoesAprendidas />

@@ -2,21 +2,19 @@ import * as React from 'react';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import { IoIosWallet } from 'react-icons/io';
 
-import { Box, Flex, Heading, Text, useBreakpointValue } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
 function CardOrcamento() {
   return (
     <>
-      <Box
+      <Flex
         backgroundColor={'white'}
         p={5}
         borderRadius={5}
-        w={useBreakpointValue({
-          base: '100%',
-          sm: 'sm',
-          md: 'md',
-          lg: 'lg',
-        })}
+        direction={'column'}
+        grow={1}
+        shrink={1}
+        basis={'360px'}
       >
         <Box mb={5}>
           <Box display={'flex'} alignItems={'center'}>
@@ -62,7 +60,8 @@ function CardOrcamento() {
                 alignItems="center"
                 bg={'#059502'}
                 ml={4}
-                height={'100%'}
+                height={'48px'}
+                width={'48px'}
                 borderRadius={2}
               >
                 <Text p={1} color="#ffffff" fontSize={20} fontWeight={'600'}>
@@ -115,7 +114,8 @@ function CardOrcamento() {
                 alignItems="center"
                 bg={'#2E69FD'}
                 ml={4}
-                height={'100%'}
+                height={'48px'}
+                width={'48px'}
                 borderRadius={2}
               >
                 <Text p={1} color="#ffffff" fontSize={20} fontWeight={'600'}>
@@ -146,7 +146,8 @@ function CardOrcamento() {
                 alignItems="center"
                 bg={'#CC0000'}
                 ml={4}
-                height={'100%'}
+                height={'48px'}
+                width={'48px'}
                 borderRadius={2}
               >
                 <Text p={1} color="#ffffff" fontSize={20} fontWeight={'600'}>
@@ -156,7 +157,7 @@ function CardOrcamento() {
             </Flex>
           </Flex>
         </Flex>
-      </Box>
+      </Flex>
     </>
   );
 }

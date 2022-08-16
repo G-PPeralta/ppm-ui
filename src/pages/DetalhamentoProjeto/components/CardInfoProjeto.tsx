@@ -1,21 +1,19 @@
 import { FaWarehouse } from 'react-icons/fa';
 import { FiMapPin } from 'react-icons/fi';
 
-import { Box, Flex, Heading, Text, useBreakpointValue } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
 function CardInfoProjeto() {
   return (
     <>
-      <Box
+      <Flex
         backgroundColor={'white'}
         p={5}
         borderRadius={5}
-        w={useBreakpointValue({
-          base: 'xlg',
-          sm: 'sm',
-          md: 'md',
-          lg: 'lg',
-        })}
+        direction={'column'}
+        grow={1}
+        shrink={1}
+        basis={'360px'}
       >
         <Box mb={4}>
           <Heading as="h4" size="md">
@@ -163,7 +161,7 @@ function CardInfoProjeto() {
             </Flex>
           </Box>
         </Flex>
-      </Box>
+      </Flex>
     </>
   );
 }

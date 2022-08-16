@@ -88,12 +88,12 @@ function GraficoCurvaS() {
         p={5}
       >
         <Flex alignItems={'center'}>
-          <Heading as="h4" size="md" ml={2}>
+          <Heading as="h4" size="md">
             Curva S
           </Heading>
         </Flex>
 
-        <Flex px={4} pt={4} alignItems={'center'} justify={'center'}>
+        <Flex pr={4} pt={4} alignItems={'center'} justify={'center'}>
           <ResponsiveContainer
             width={'100%'}
             height={'80%'}
