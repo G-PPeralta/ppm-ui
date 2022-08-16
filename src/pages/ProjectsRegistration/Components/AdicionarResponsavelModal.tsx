@@ -62,6 +62,7 @@ export function AdicionarResponsavelModal(projectsForm: any) {
       responsaveis: numeroDeResponsaveis,
     };
     postResponsavel(responsaveis);
+    onClose();
   }
 
   return (
