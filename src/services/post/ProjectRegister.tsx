@@ -1,7 +1,7 @@
 import {
   RegisterProjectProps,
   RegistroCoordenador,
-  RegistroResponsavel,
+  Responsaveis,
 } from 'interfaces/Services';
 
 import { api } from 'services/api';
@@ -14,7 +14,7 @@ export async function postProject(
 }
 
 export async function postResponsavel(
-  payload: RegistroResponsavel[],
+  payload: Responsaveis,
 ): Promise<{ status: number }> {
   const { status } = await api.post('/responsavel', payload);
   return { status };

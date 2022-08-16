@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 
 import {
@@ -55,16 +55,14 @@ export function AdicionarResponsavelModal(projectsForm: any) {
 
   function saveResponsible() {
     projectsForm.projectsForm.setFieldValue(
-      'nomeResponsavel',
+      'responsaveis',
       numeroDeResponsaveis.filter((item) => item.nomeResponsavel !== ''),
     );
-    postResponsavel(numeroDeResponsaveis);
-    onClose();
+    const responsaveis = {
+      responsaveis: numeroDeResponsaveis,
+    };
+    postResponsavel(responsaveis);
   }
-
-  useEffect(() => {
-    console.log(numeroDeResponsaveis);
-  }, [numeroDeResponsaveis]);
 
   return (
     <Flex>

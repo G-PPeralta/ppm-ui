@@ -33,7 +33,7 @@ export function useProjects() {
       tipoProjetoId: 0,
       demandaId: 0,
       comentarios: '',
-      nomeResponsavel: [
+      responsaveis: [
         {
           nomeResponsavel: '',
         },

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 
 import {
@@ -62,10 +62,6 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
     postCoordenador(numeroDeCoordenadores);
     onClose();
   }
-
-  useEffect(() => {
-    console.log(numeroDeCoordenadores);
-  }, [numeroDeCoordenadores]);
 
   return (
     <Flex>

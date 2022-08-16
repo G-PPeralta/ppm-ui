@@ -244,6 +244,9 @@ export interface RegistroResponsavel {
   nomeResponsavel: string;
 }
 
+export interface Responsaveis {
+  responsaveis: RegistroResponsavel[];
+}
 export interface RegistroCoordenador {
   nomeCoordenador: string;
 }
