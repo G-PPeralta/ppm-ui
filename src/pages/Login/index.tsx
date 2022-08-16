@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom';
+/* eslint-disable prettier/prettier */
+import { useNavigate } from "react-router-dom";
 
 import {
   Box,
@@ -14,13 +15,17 @@ import {
   Text,
   useBreakpointValue,
   useColorModeValue,
-} from '@chakra-ui/react';
-import { Ring } from '@uiball/loaders';
-import logo from 'assets/logo.png';
+} from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
+import logo from "assets/logo.png";
 
-import { Layout } from 'components/Layout';
+import { Layout } from "components/Layout";
 
-import { useLogin } from 'hooks/useLogin';
+import { verifyEmail } from "utils/verifyEmail";
+
+import { useLogin } from "hooks/useLogin";
+
+
 
 export function Login() {
   const navigate = useNavigate();
@@ -28,23 +33,23 @@ export function Login() {
 
   return (
     <Flex
-      w={useBreakpointValue({ base: '100%', md: 'auto' })}
+      w={useBreakpointValue({ base: "100%", md: "auto" })}
       h="100vh"
       align="center"
       justify="center"
-      bg={useBreakpointValue({ base: 'white', sm: '#EDF2F7' })}
+      bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
     >
       <Layout>
         <Stack spacing="8">
           <Box
-            py={{ base: '0', sm: '16' }}
-            px={{ base: '4', sm: '10' }}
-            bg={useBreakpointValue({ base: 'transparent', sm: 'white' })}
-            boxShadow={{ base: 'none', sm: useColorModeValue('md', 'md-dark') }}
-            borderRadius={{ base: 'none', sm: 'xl' }}
+            py={{ base: "0", sm: "16" }}
+            px={{ base: "4", sm: "10" }}
+            bg={useBreakpointValue({ base: "transparent", sm: "white" })}
+            boxShadow={{ base: "none", sm: useColorModeValue("md", "md-dark") }}
+            borderRadius={{ base: "none", sm: "xl" }}
           >
             <Stack spacing="6">
-              <Stack spacing={{ base: '2', md: '3' }} align="center">
+              <Stack spacing={{ base: "2", md: "3" }} align="center">
                 <Image
                   src={logo}
                   display="flex"
@@ -107,21 +112,21 @@ export function Login() {
                 <Stack spacing="6">
                   <Button
                     disabled={
-                      !loginForm.values.email || !loginForm.values.senha
+                      !loginForm.values.email || !loginForm.values.senha || !verifyEmail(loginForm.values.email)
                     }
                     type="submit"
                     background="origem.300"
                     variant="primary"
                     color="white"
                     _hover={{
-                      background: 'origem.500',
-                      transition: 'all 0.4s',
+                      background: "origem.500",
+                      transition: "all 0.4s",
                     }}
                   >
                     {loading ? (
                       <Ring speed={2} lineWeight={5} color="white" size={24} />
                     ) : (
-                      'Entrar'
+                      "Entrar"
                     )}
                   </Button>
                 </Stack>
@@ -129,12 +134,12 @@ export function Login() {
             </form>
             <Stack spacing="10" marginTop={70} align="center">
               <Text color="gray.400">
-                Não tem conta?{' '}
+                Não tem conta?{" "}
                 <Button
                   variant="link"
                   color="origem.400"
                   size="sm"
-                  onClick={() => navigate('/register')}
+                  onClick={() => navigate("/register")}
                 >
                   Cadastre-se
                 </Button>
