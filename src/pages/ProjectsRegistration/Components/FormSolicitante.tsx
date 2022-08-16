@@ -28,7 +28,10 @@ function FormSolicitante(projectsForm: any) {
   async function handleGetProjetos() {
     const reqGet = await getSolicitante();
 
-    const dataReq: Solicitante[] = reqGet.data;
+    const dataReq: Solicitante[] = reqGet.data.sort(
+      (a: Solicitante, b: Solicitante) =>
+        a.solicitante.localeCompare(b.solicitante),
+    );
 
     const outro: Solicitante = {
       id: dataReq.length + 2,

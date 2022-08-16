@@ -20,7 +20,10 @@ function FormComplexidade(projectsForm: any) {
   async function handleGetProjetos() {
     const reqGet = await getComplexidade();
 
-    const dataReq: Complexidade[] = reqGet.data;
+    const dataReq: Complexidade[] = reqGet.data.sort(
+      (a: Complexidade, b: Complexidade) =>
+        a.complexidade.localeCompare(b.complexidade),
+    );
 
     setComplexidadeState(dataReq);
   }

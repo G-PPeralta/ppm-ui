@@ -20,7 +20,10 @@ function FormPrioridade(projectsForm: any) {
   async function handleGetProjetos() {
     const reqGet = await getPrioridade();
 
-    const dataReq: Prioridade[] = reqGet.data;
+    const dataReq: Prioridade[] = reqGet.data.sort(
+      (a: Prioridade, b: Prioridade) =>
+        a.prioridade.localeCompare(b.prioridade),
+    );
 
     setPrioridadeState(dataReq);
   }
