@@ -85,7 +85,8 @@ export interface RegisterProjectProps {
   tipoProjetoId: number;
   demandaId: number;
   comentarios: string;
-  responsavel: ResponsavelProjeto[];
+  responsavelId: number[];
+  coordenadorId: number[];
 }
 
 export interface GanttPayload {
@@ -237,4 +238,12 @@ export interface ProjetosInfo {
   valorTotalPrevisto: number;
   cpi?: any;
   spi?: any;
+}
+
+export interface RegistroResponsavel {
+  nomeResponsavel: string;
+}
+
+export interface RegistroCoordenador {
+  nomeCoordenador: string;
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 
 import {
@@ -6,7 +6,6 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Select,
   Input,
   useBreakpointValue,
   Modal,
@@ -21,31 +20,25 @@ import {
   Box,
   Text,
 } from '@chakra-ui/react';
-import { TipoResponsavel } from 'interfaces/Services';
 
 import { TextError } from 'components/TextError';
 
-import { getTipoResponsavel } from 'services/get/Projetos';
+import { postCoordenador } from 'services/post/ProjectRegister';
 
 export function AdicionarCoordenadorModal(projectsForm: any) {
   const [numeroDeCoordenadores, setNumeroDeCoordenadores] = useState([
     {
-      nomeResponsavel: '',
-      tipoResponsavel: 1,
+      nomeCoordenador: '',
     },
   ]);
-  const [tipoResponsavel, setTipoResponsavel] = useState<TipoResponsavel[]>(
-    [] as TipoResponsavel[],
-  );
-  const [loading, setLoading] = useState(true);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   function addCoordenador() {
     setNumeroDeCoordenadores([
       ...numeroDeCoordenadores,
       {
-        nomeResponsavel: '',
-        tipoResponsavel: 1,
+        nomeCoordenador: '',
       },
     ]);
   }
@@ -63,25 +56,16 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
 
   function saveResponsible() {
     projectsForm.projectsForm.setFieldValue(
-      'responsavel',
-      numeroDeCoordenadores.filter((item) => item.nomeResponsavel !== ''),
+      'nomeCoordenador',
+      numeroDeCoordenadores.filter((item) => item.nomeCoordenador !== ''),
     );
+    postCoordenador(numeroDeCoordenadores);
     onClose();
   }
 
-  async function handleGetTipoResponsavel() {
-    const { data } = await getTipoResponsavel();
-    const dataReqTipoResponsavel: TipoResponsavel[] = data;
-    if (!dataReqTipoResponsavel) {
-      return null;
-    }
-    setTipoResponsavel(dataReqTipoResponsavel);
-    setLoading(false);
-  }
-
   useEffect(() => {
-    handleGetTipoResponsavel();
-  }, []);
+    console.log(numeroDeCoordenadores);
+  }, [numeroDeCoordenadores]);
 
   return (
     <Flex>
@@ -125,7 +109,7 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
           <ModalHeader>ADICIONAR COORDENADOR</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {numeroDeCoordenadores.map((responsavel: any, index: number) => (
+            {numeroDeCoordenadores.map((coordenador: any, index: number) => (
               <Flex align="end" mb={3} key={index}>
                 <FormControl>
                   <FormLabel htmlFor="nomeCoordenador">NOME</FormLabel>
@@ -135,38 +119,14 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
                     type="text"
                     id="nomeCoordenador"
                     name="nomeCoordenador"
-                    value={responsavel.nomeResponsavel}
+                    value={coordenador.nomeCoordenador}
                     onChange={(event) => handleChange(event, index)}
-                    width="95%"
+                    width="100%"
                   />
                   {projectsForm.projectsForm.errors.responsavel &&
                     projectsForm.projectsForm.touched.responsavel && (
                       <TextError>
                         {projectsForm.projectsForm.errors.responsavel}
-                      </TextError>
-                    )}
-                </FormControl>
-                <FormControl>
-                  <FormLabel htmlFor="tipoCoordenador">TIPO</FormLabel>
-                  {!loading && (
-                    <Select
-                      id="tipoCoordenador"
-                      name="tipoCoordenador"
-                      value={responsavel.tipoResponsavel}
-                      onChange={(event) => handleChange(event, index)}
-                      width="95%"
-                    >
-                      {tipoResponsavel.map((tipo) => (
-                        <option key={tipo.id} value={tipo.id}>
-                          {tipo.tipo_responsavel}
-                        </option>
-                      ))}
-                    </Select>
-                  )}
-                  {projectsForm.projectsForm.errors.tipoResponsavel &&
-                    projectsForm.projectsForm.touched.tipoResponsavel && (
-                      <TextError>
-                        {projectsForm.projectsForm.errors.tipoResponsavel}
                       </TextError>
                     )}
                 </FormControl>

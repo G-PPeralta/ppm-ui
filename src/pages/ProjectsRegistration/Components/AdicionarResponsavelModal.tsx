@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 
 import {
@@ -6,7 +6,6 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Select,
   Input,
   useBreakpointValue,
   Modal,
@@ -21,23 +20,17 @@ import {
   Box,
   Text,
 } from '@chakra-ui/react';
-import { TipoResponsavel } from 'interfaces/Services';
 
 import { TextError } from 'components/TextError';
 
-import { getTipoResponsavel } from 'services/get/Projetos';
+import { postResponsavel } from 'services/post/ProjectRegister';
 
 export function AdicionarResponsavelModal(projectsForm: any) {
   const [numeroDeResponsaveis, setNumeroDeResponsaveis] = useState([
     {
       nomeResponsavel: '',
-      tipoResponsavel: 1,
     },
   ]);
-  const [tipoResponsavel, setTipoResponsavel] = useState<TipoResponsavel[]>(
-    [] as TipoResponsavel[],
-  );
-  const [loading, setLoading] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   function addResponsible() {
@@ -45,7 +38,6 @@ export function AdicionarResponsavelModal(projectsForm: any) {
       ...numeroDeResponsaveis,
       {
         nomeResponsavel: '',
-        tipoResponsavel: 1,
       },
     ]);
   }
@@ -63,25 +55,16 @@ export function AdicionarResponsavelModal(projectsForm: any) {
 
   function saveResponsible() {
     projectsForm.projectsForm.setFieldValue(
-      'responsavel',
+      'nomeResponsavel',
       numeroDeResponsaveis.filter((item) => item.nomeResponsavel !== ''),
     );
+    postResponsavel(numeroDeResponsaveis);
     onClose();
   }
 
-  async function handleGetTipoResponsavel() {
-    const { data } = await getTipoResponsavel();
-    const dataReqTipoResponsavel: TipoResponsavel[] = data;
-    if (!dataReqTipoResponsavel) {
-      return null;
-    }
-    setTipoResponsavel(dataReqTipoResponsavel);
-    setLoading(false);
-  }
-
   useEffect(() => {
-    handleGetTipoResponsavel();
-  }, []);
+    console.log(numeroDeResponsaveis);
+  }, [numeroDeResponsaveis]);
 
   return (
     <Flex>
@@ -138,36 +121,12 @@ export function AdicionarResponsavelModal(projectsForm: any) {
                     name="nomeResponsavel"
                     value={responsavel.nomeResponsavel}
                     onChange={(event) => handleChange(event, index)}
-                    width="95%"
+                    width="100%"
                   />
                   {projectsForm.projectsForm.errors.responsavel &&
                     projectsForm.projectsForm.touched.responsavel && (
                       <TextError>
                         {projectsForm.projectsForm.errors.responsavel}
-                      </TextError>
-                    )}
-                </FormControl>
-                <FormControl>
-                  <FormLabel htmlFor="tipoResponsavel">TIPO</FormLabel>
-                  {!loading && (
-                    <Select
-                      id="tipoResponsavel"
-                      name="tipoResponsavel"
-                      value={responsavel.tipoResponsavel}
-                      onChange={(event) => handleChange(event, index)}
-                      width="95%"
-                    >
-                      {tipoResponsavel.map((tipo) => (
-                        <option key={tipo.id} value={tipo.id}>
-                          {tipo.tipo_responsavel}
-                        </option>
-                      ))}
-                    </Select>
-                  )}
-                  {projectsForm.projectsForm.errors.tipoResponsavel &&
-                    projectsForm.projectsForm.touched.tipoResponsavel && (
-                      <TextError>
-                        {projectsForm.projectsForm.errors.tipoResponsavel}
                       </TextError>
                     )}
                 </FormControl>

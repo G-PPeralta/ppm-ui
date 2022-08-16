@@ -12,7 +12,7 @@ function FormDisabledResponsavel(projectsForm: any) {
   return (
     <>
       {!loading &&
-        projectsForm.projectsForm.values.responsavel.map(
+        projectsForm.projectsForm.values.nomeResponsavel.map(
           (_responsavel: string, index: number) => (
             <Box key={index}>
               <FormLabel htmlFor={`responsavel${index}`}>
@@ -25,7 +25,7 @@ function FormDisabledResponsavel(projectsForm: any) {
                 type={`responsavel${index}`}
                 name={`responsavel${index}`}
                 value={
-                  projectsForm.projectsForm.values.responsavel[index]
+                  projectsForm.projectsForm.values.nomeResponsavel[index]
                     .nomeResponsavel
                 }
                 w={'100%'}
