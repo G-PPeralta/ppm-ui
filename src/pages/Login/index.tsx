@@ -81,6 +81,7 @@ export function Login() {
                       name="email"
                       value={loginForm.values.email}
                       onChange={loginForm.handleChange}
+                      maxLength={150}
                     />
                     <FormErrorMessage>
                       {loginForm.errors.email}
@@ -106,6 +107,7 @@ export function Login() {
                       name="senha"
                       value={loginForm.values.senha}
                       onChange={loginForm.handleChange}
+                      maxLength={255}
                     />
                   </FormControl>
                 </Stack>
