@@ -38,9 +38,9 @@ export function useProjects() {
           nomeResponsavel: '',
         },
       ],
-      nomeCoordenador: [
+      coordenadores: [
         {
-          nomeCoordenador: '',
+          coordenadorNome: '',
         },
       ],
       responsavelId: [0],
