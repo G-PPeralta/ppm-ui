@@ -72,7 +72,6 @@ export function useProjects() {
         comentarios: values.comentarios,
         responsavelId: values.responsavelId,
         coordenadorId: values.responsavelId,
-        responsavel: values.responsavel,
         elementoPep: values.elementoPep,
       };
 
