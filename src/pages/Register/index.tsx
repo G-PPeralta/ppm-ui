@@ -79,6 +79,7 @@ export function Register() {
                       value={registerForm.values.name}
                       onChange={registerForm.handleChange}
                       w={useBreakpointValue({ base: '95%', md: '95%' })}
+                      maxLength={100}
                     />
                     {registerForm.errors.name && registerForm.touched.name && (
                       <TextError>{registerForm.errors.name}</TextError>
@@ -92,7 +93,7 @@ export function Register() {
                       id="telephone"
                       type="text"
                       name="telephone"
-                      maxLength={15}
+                      maxLength={14}
                       value={formatCellphone(registerForm.values.telephone)}
                       onChange={registerForm.handleChange}
                       w={useBreakpointValue({ base: '100%', md: '95%' })}
@@ -122,6 +123,7 @@ export function Register() {
                       value={registerForm.values.email}
                       onChange={registerForm.handleChange}
                       w={useBreakpointValue({ base: '95%', md: '95%' })}
+                      maxLength={150}
                     />
                     {registerForm.errors.email &&
                       registerForm.touched.email && (
@@ -139,6 +141,7 @@ export function Register() {
                       value={registerForm.values.area}
                       onChange={registerForm.handleChange}
                       w={useBreakpointValue({ base: '100%', md: '95%' })}
+                      maxLength={150}
                     />
                     {registerForm.errors.area && registerForm.touched.area && (
                       <TextError>{registerForm.errors.area}</TextError>
@@ -164,6 +167,7 @@ export function Register() {
                       value={registerForm.values.password}
                       onChange={registerForm.handleChange}
                       w={useBreakpointValue({ base: '95%', md: '95%' })}
+                      maxLength={150}
                     />
                     {registerForm.errors.password &&
                       registerForm.touched.password && (
@@ -207,6 +211,7 @@ export function Register() {
                       value={registerForm.values.confirmPassword}
                       onChange={registerForm.handleChange}
                       w={useBreakpointValue({ base: '100%', md: '95%' })}
+                      maxLength={150}
                     />
                     {registerForm.errors.confirmPassword &&
                       registerForm.touched.confirmPassword && (
