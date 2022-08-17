@@ -9,13 +9,11 @@ function FormDisabledCoordenador(projectsForm: any) {
     setLoading(false);
   }, []);
 
-  console.log(projectsForm.projectsForm.values.coordenadores);
-
   return (
     <>
       {!loading &&
         projectsForm.projectsForm.values.coordenadores.map(
-          (_responsavel: string, index: number) => (
+          (_coordenador: string, index: number) => (
             <Box key={index}>
               <FormLabel htmlFor={`coordenador${index}`}>
                 COORDENADOR {index + 1}

@@ -56,7 +56,7 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
 
   function saveResponsible() {
     projectsForm.projectsForm.setFieldValue(
-      'coordenadorNome',
+      'coordenadores',
       numeroDeCoordenadores.filter((item) => item.coordenadorNome !== ''),
     );
     const coordenadores = {
