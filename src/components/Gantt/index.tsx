@@ -64,7 +64,9 @@ export function Gantt() {
   }
 
   useEffect(() => {
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   }, [gantt]);
 
   useEffect(() => {
