@@ -76,7 +76,10 @@ export function Register() {
                       id="name"
                       type="name"
                       name="name"
-                      value={registerForm.values.name}
+                      value={registerForm.values.name.replace(
+                        /[\u0021-\u0040\u005b-\u005d\u005f\u007b-\u007d\u007f-\u00bf]/g,
+                        '',
+                      )}
                       onChange={registerForm.handleChange}
                       w={useBreakpointValue({ base: '95%', md: '95%' })}
                       maxLength={100}
@@ -120,7 +123,12 @@ export function Register() {
                       id="email"
                       type="email"
                       name="email"
-                      value={registerForm.values.email}
+                      value={registerForm.values.email
+                        .replace(
+                          /[\u0021-\u002d\u002f\u003a-\u003f\u005b-\u0060\u007b-\u00b6\u00b8-\u00ff]/g,
+                          '',
+                        )
+                        .toLowerCase()}
                       onChange={registerForm.handleChange}
                       w={useBreakpointValue({ base: '95%', md: '95%' })}
                       maxLength={150}
@@ -138,7 +146,10 @@ export function Register() {
                       id="area"
                       type="area"
                       name="area"
-                      value={registerForm.values.area}
+                      value={registerForm.values.area.replace(
+                        /[\u0021-\u0040\u005b-\u005d\u005f\u007b-\u007d\u007f-\u00bf]/g,
+                        '',
+                      )}
                       onChange={registerForm.handleChange}
                       w={useBreakpointValue({ base: '100%', md: '95%' })}
                       maxLength={150}
