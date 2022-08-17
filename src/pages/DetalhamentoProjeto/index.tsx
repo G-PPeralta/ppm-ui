@@ -64,6 +64,7 @@ function DetalhamentoProjeto() {
               mb={4}
               grow={1}
               shrink={1}
+              gap={4}
             >
               <CardInfoProjeto infoProjeto={infoProjeto} />
               <CardOrcamento />

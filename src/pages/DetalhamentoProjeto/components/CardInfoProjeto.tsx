@@ -9,7 +9,7 @@ type infoProjetoProps = {
 };
 
 function CardInfoProjeto({ infoProjeto }: infoProjetoProps) {
-  console.log(infoProjeto);
+  const innerWidth = window.innerWidth;
   return (
     <>
       <Flex
@@ -27,7 +27,10 @@ function CardInfoProjeto({ infoProjeto }: infoProjetoProps) {
           </Heading>
         </Box>
 
-        <Flex justifyContent={'space-between'}>
+        <Flex
+          justifyContent={'space-between'}
+          direction={innerWidth > 520 ? 'row' : 'column'}
+        >
           <Box>
             <Flex>
               <Box display={'flex'}>
@@ -111,8 +114,8 @@ function CardInfoProjeto({ infoProjeto }: infoProjetoProps) {
           <Box
             display={'flex'}
             flexDirection={'column'}
-            alignItems={'flex-end'}
-            justifyContent={'end'}
+            alignItems={innerWidth > 520 ? 'flex-end' : 'flex-start'}
+            justifyContent={innerWidth > 520 ? 'end' : 'start'}
           >
             <Flex alignItems={'center'}>
               <Text fontWeight={'600'} fontSize={14}>
