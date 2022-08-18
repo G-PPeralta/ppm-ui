@@ -19,19 +19,26 @@ type Props = {
 export function RegisterProjectType({ onOpen, isOpen, onClose }: Props) {
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
-
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} size={'lg'}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+        <ModalContent width={'xl'} height={500}>
+          <ModalHeader
+            backgroundColor={'#2E69FD'}
+            borderTopRadius={3}
+            display={'flex'}
+            justifyContent={'center'}
+            color={'white'}
+            fontSize={'1em'}
+          >
+            Cadastrar projeto tipo
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <p>Nome </p>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button colorScheme="blue" mr={3} onClick={onClose} color={'white'}>
               Close
             </Button>
             <Button variant="ghost">Secondary Action</Button>
