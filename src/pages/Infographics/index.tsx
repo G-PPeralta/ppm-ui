@@ -11,9 +11,15 @@ import {
 
 import Sidebar from 'components/SideBar';
 
+import { InterrogacaoModal } from './Components/InterrogacaoModal';
 import { RegisterProjectType } from './Components/RegisterProjectType';
 import SelectExibir from './Components/SelectExibir';
 import SelectFiltros from './Components/SelectFiltros';
+import StatusAtrasado from './Components/StatusAtrasado';
+import StatusConcluido from './Components/StatusConcluido';
+import StatusEmAndamento from './Components/StatusEmAndamento';
+import StatusNaoAplicavel from './Components/StatusNaoAplicavel';
+import StatusNaoIniciado from './Components/StatusNaoIniciado';
 export function Infographics() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
   return (
@@ -55,6 +61,14 @@ export function Infographics() {
                   <SelectExibir />
                   <SelectFiltros />
                 </Flex>
+              </Flex>
+              <Flex gap={6} justify={'end'}>
+                <StatusNaoAplicavel />
+                <StatusNaoIniciado />
+                <StatusConcluido />
+                <StatusEmAndamento />
+                <StatusAtrasado />
+                <InterrogacaoModal />
               </Flex>
             </Box>
           </Flex>
