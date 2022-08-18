@@ -20,6 +20,8 @@ import logo from 'assets/logo.png';
 
 import { Layout } from 'components/Layout';
 
+import { verifyEmail } from 'utils/verifyEmail';
+
 import { useLogin } from 'hooks/useLogin';
 
 export function Login() {
@@ -76,6 +78,7 @@ export function Login() {
                       name="email"
                       value={loginForm.values.email}
                       onChange={loginForm.handleChange}
+                      maxLength={150}
                     />
                     <FormErrorMessage>
                       {loginForm.errors.email}
@@ -101,13 +104,16 @@ export function Login() {
                       name="senha"
                       value={loginForm.values.senha}
                       onChange={loginForm.handleChange}
+                      maxLength={255}
                     />
                   </FormControl>
                 </Stack>
                 <Stack spacing="6">
                   <Button
                     disabled={
-                      !loginForm.values.email || !loginForm.values.senha
+                      !loginForm.values.email ||
+                      !loginForm.values.senha ||
+                      !verifyEmail(loginForm.values.email)
                     }
                     type="submit"
                     background="origem.300"
