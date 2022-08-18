@@ -11,12 +11,11 @@ import {
 } from '@chakra-ui/react';
 
 type Props = {
-  onOpen: any;
   onClose: any;
   isOpen: boolean;
 };
 
-export function RegisterProjectType({ onOpen, isOpen, onClose }: Props) {
+export function RegisterProjectType({ isOpen, onClose }: Props) {
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} size={'lg'}>
