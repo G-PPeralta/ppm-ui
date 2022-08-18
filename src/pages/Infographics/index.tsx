@@ -73,7 +73,7 @@ export function Infographics() {
                 <StatusAtrasado />
                 <InterrogacaoModal />
               </Flex>
-              <Flex direction={'row'} gap={10} justify={'center'}>
+              <Flex direction={'row'} gap={10} justify={'center'} wrap={'wrap'}>
                 {arrayOfColumns.map((_column) => (
                   <ColumnSPT />
                 ))}
