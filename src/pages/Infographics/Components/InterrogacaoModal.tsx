@@ -25,7 +25,7 @@ export function InterrogacaoModal() {
         variant="secondary"
         color="black"
         isRound={true}
-        size="md"
+        size="sm"
         onClick={onOpen}
         _hover={{
           transition: 'all 0.4s',
