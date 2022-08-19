@@ -1,4 +1,3 @@
-// import React from "react";
 import { AiFillPlusCircle } from 'react-icons/ai';
 import { MdEdit } from 'react-icons/md';
 
@@ -61,7 +60,7 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
             </Box>
             <Box>
               <Text color="#D6D4D4" fontSize="12px">
-                Nome
+                NOME
               </Text>
               <Input
                 size="md"
