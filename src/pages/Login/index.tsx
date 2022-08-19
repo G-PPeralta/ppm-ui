@@ -76,7 +76,12 @@ export function Login() {
                       id="email"
                       type="email"
                       name="email"
-                      value={loginForm.values.email}
+                      value={loginForm.values.email
+                        .replace(
+                          /[\u0021-\u002d\u002f\u003a-\u003f\u005b-\u0060\u007b-\u00b6\u00b8-\u00ff]/g,
+                          '',
+                        )
+                        .toLowerCase()}
                       onChange={loginForm.handleChange}
                       maxLength={150}
                     />
