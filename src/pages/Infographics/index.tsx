@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+// eslint-disable-next-line prettier/prettier
 import { useState } from 'react';
 
 import {
@@ -12,11 +13,20 @@ import {
 
 import Sidebar from 'components/SideBar';
 
+import ColumnSPT from './Components/ColumnSPT';
+import { InterrogacaoModal } from './Components/InterrogacaoModal';
 import { RegisterProjectType } from './Components/RegisterProjectType';
 import SelectExibir from './Components/SelectExibir';
 import SelectFiltros from './Components/SelectFiltros';
+import StatusAtrasado from './Components/StatusAtrasado';
+import StatusConcluido from './Components/StatusConcluido';
+import StatusEmAndamento from './Components/StatusEmAndamento';
+import StatusNaoAplicavel from './Components/StatusNaoAplicavel';
+import StatusNaoIniciado from './Components/StatusNaoIniciado';
 export function Infographics() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
+  const arrayOfColumns = [0, 1, 2, 3, 4];
+
   return (
     <>
       <Sidebar>
@@ -33,8 +43,8 @@ export function Infographics() {
             bg={useBreakpointValue({ base: 'white', sm: '#EDF2F7' })}
           >
             <Box
-              py={{ base: '0', sm: '6' }}
-              px={{ base: '3', sm: '6' }}
+              py={{ base: '0', sm: '8' }}
+              px={{ base: '4', sm: '8' }}
               w={useBreakpointValue({
                 base: '20rem',
                 sm: '35rem',
@@ -56,6 +66,19 @@ export function Infographics() {
                   <SelectExibir />
                   <SelectFiltros />
                 </Flex>
+              </Flex>
+              <Flex gap={6} justify={'end'} mb={6}>
+                <StatusNaoAplicavel />
+                <StatusNaoIniciado />
+                <StatusConcluido />
+                <StatusEmAndamento />
+                <StatusAtrasado />
+                <InterrogacaoModal />
+              </Flex>
+              <Flex direction={'row'} gap={10} justify={'center'} wrap={'wrap'}>
+                {arrayOfColumns.map((_column) => (
+                  <ColumnSPT />
+                ))}
               </Flex>
             </Box>
           </Flex>
