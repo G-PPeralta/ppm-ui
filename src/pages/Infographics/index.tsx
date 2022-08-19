@@ -12,6 +12,7 @@ import {
 import Sidebar from 'components/SideBar';
 
 import ColumnSPT from './Components/ColumnSPT';
+import ExibirModal from './Components/ExibirModal';
 import FiltrosModal from './Components/FiltrosModal';
 import { RegisterProjectType } from './Components/RegisterProjectType';
 import StatusAtrasado from './Components/StatusAtrasado';
@@ -59,6 +60,7 @@ export function Infographics() {
                   Acompanhamento de poços
                 </Heading>
                 <Flex gap={4}>
+                  <ExibirModal />
                   <FiltrosModal />
                 </Flex>
               </Flex>
