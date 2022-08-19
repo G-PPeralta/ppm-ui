@@ -4,7 +4,7 @@ import {
   FiHome,
   // FiTrendingUp,
   FiEdit2,
-  // FiBarChart,
+  FiBarChart,
   // FiUsers,
   FiFile,
 } from 'react-icons/fi';
@@ -29,7 +29,7 @@ export const LinkItems: Array<LinkItemProps> = [
   //   link: '/activities-registration',
   // },
   { name: 'Relatórios', icon: FiFile, link: '/reports' },
-  // { name: 'Infográficos', icon: FiBarChart, link: '/infographics' },
+  { name: 'Infográficos', icon: FiBarChart, link: '/infographics' },
   // { name: 'Alterar Permissões', icon: FiUsers, link: '/permissions' },
   { name: 'Detalhamento Projeto', icon: FiFile, link: '/detalhamento-projeto' },
 ];
