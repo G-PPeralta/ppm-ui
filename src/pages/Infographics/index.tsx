@@ -12,9 +12,9 @@ import {
 import Sidebar from 'components/SideBar';
 
 import ColumnSPT from './Components/ColumnSPT';
+import ExibirModal from './Components/ExibirModal';
+import FiltrosModal from './Components/FiltrosModal';
 import { RegisterProjectType } from './Components/RegisterProjectType';
-import SelectExibir from './Components/SelectExibir';
-import SelectFiltros from './Components/SelectFiltros';
 import StatusAtrasado from './Components/StatusAtrasado';
 import StatusConcluido from './Components/StatusConcluido';
 import StatusEmAndamento from './Components/StatusEmAndamento';
@@ -60,8 +60,8 @@ export function Infographics() {
                   Acompanhamento de poços
                 </Heading>
                 <Flex gap={4}>
-                  <SelectExibir />
-                  <SelectFiltros />
+                  <ExibirModal />
+                  <FiltrosModal />
                 </Flex>
               </Flex>
               <Flex gap={6} justify={'end'} mb={6}>
