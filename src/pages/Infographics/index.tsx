@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-// eslint-disable-next-line prettier/prettier
 import { useState } from 'react';
 
 import {
@@ -14,7 +12,6 @@ import {
 import Sidebar from 'components/SideBar';
 
 import ColumnSPT from './Components/ColumnSPT';
-import { InterrogacaoModal } from './Components/InterrogacaoModal';
 import { RegisterProjectType } from './Components/RegisterProjectType';
 import SelectExibir from './Components/SelectExibir';
 import SelectFiltros from './Components/SelectFiltros';
@@ -73,7 +70,6 @@ export function Infographics() {
                 <StatusConcluido />
                 <StatusEmAndamento />
                 <StatusAtrasado />
-                <InterrogacaoModal />
               </Flex>
               <Flex direction={'row'} gap={10} justify={'center'} wrap={'wrap'}>
                 {arrayOfColumns.map((_column) => (
