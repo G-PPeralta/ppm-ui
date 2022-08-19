@@ -31,5 +31,5 @@ export const LinkItems: Array<LinkItemProps> = [
   { name: 'Relatórios', icon: FiFile, link: '/reports' },
   { name: 'Infográficos', icon: FiBarChart, link: '/infographics' },
   // { name: 'Alterar Permissões', icon: FiUsers, link: '/permissions' },
-  { name: 'Detalhamento Projeto', icon: FiFile, link: '/detalhamento-projeto' },
+  { name: 'Detalhamento Projeto', icon: FiFile, link: '/detalhamento/191' },
 ];

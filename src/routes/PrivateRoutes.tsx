@@ -36,7 +36,7 @@ export function PrivateRoutes() {
       <Route path="/settings" element={<Settings />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/gantt" element={<GanttPage />} />
-      <Route path="/detalhamento-projeto" element={<DetalhamentoProjeto />} />
+      <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
