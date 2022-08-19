@@ -79,7 +79,7 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
           >
             Atividades
           </Text>
-          <Flex gap={2} marginBottom={4}>
+          <Flex gap={2} marginBottom={4} justifyContent="space-between">
             <Box>
               <Text color="#D6D4D4" fontSize="12px">
                 ID
@@ -162,7 +162,7 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
               </button>
             </Box>
           </Flex>
-          <Flex gap={2} marginBottom={2}>
+          <Flex gap={2} marginBottom={2} justifyContent="space-between">
             <Box>
               <Text color="#D6D4D4" fontSize="12px">
                 ID
