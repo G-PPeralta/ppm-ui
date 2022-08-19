@@ -86,6 +86,8 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
                   width="150%"
                   placeholder="Campanha"
                   _placeholder={{ color: '#D6D4D4' }}
+                  id="projectName"
+                  name="projectName"
                   value={registerForm.values.projectName}
                   onChange={registerForm.handleChange}
                 />
@@ -110,6 +112,8 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
                   color="#D6D4D4"
                   placeholder="CIP02"
                   _placeholder={{ color: '#D6D4D4', fontSize: '12px' }}
+                  id="activityId"
+                  name="activityId"
                   value={registerForm.values.activityId}
                   onChange={registerForm.handleChange}
                 />
@@ -124,6 +128,8 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
                   color="#D6D4D4"
                   fontSize="12px"
                   width={'6.4em'}
+                  id="activityBase"
+                  name="activityBase"
                   value={registerForm.values.activityBase}
                   onChange={registerForm.handleChange}
                 >
@@ -142,6 +148,8 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
                   color="#D6D4D4"
                   fontSize="12px"
                   width={60}
+                  id="activityTask"
+                  name="activityTask"
                   value={registerForm.values.activityTask}
                   onChange={registerForm.handleChange}
                 >
@@ -160,6 +168,8 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
                   color="#D6D4D4"
                   fontSize="12px"
                   width={60}
+                  id="activityPrecedent"
+                  name="activityPrecedent"
                   value={registerForm.values.activityPrecedent}
                   onChange={registerForm.handleChange}
                 >
@@ -178,6 +188,8 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
                   color="#D6D4D4"
                   fontSize="12px"
                   width={'6.4em'}
+                  id="activityDays"
+                  name="activityDays"
                   value={registerForm.values.activityDays}
                   onChange={registerForm.handleChange}
                 >
