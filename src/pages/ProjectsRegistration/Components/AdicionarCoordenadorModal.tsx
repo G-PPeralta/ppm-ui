@@ -28,7 +28,7 @@ import { postCoordenador } from 'services/post/ProjectRegister';
 export function AdicionarCoordenadorModal(projectsForm: any) {
   const [numeroDeCoordenadores, setNumeroDeCoordenadores] = useState([
     {
-      nomeCoordenador: '',
+      coordenadorNome: '',
     },
   ]);
 
@@ -38,7 +38,7 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
     setNumeroDeCoordenadores([
       ...numeroDeCoordenadores,
       {
-        nomeCoordenador: '',
+        coordenadorNome: '',
       },
     ]);
   }
@@ -56,10 +56,13 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
 
   function saveResponsible() {
     projectsForm.projectsForm.setFieldValue(
-      'nomeCoordenador',
-      numeroDeCoordenadores.filter((item) => item.nomeCoordenador !== ''),
+      'coordenadores',
+      numeroDeCoordenadores.filter((item) => item.coordenadorNome !== ''),
     );
-    postCoordenador(numeroDeCoordenadores);
+    const coordenadores = {
+      coordenadores: numeroDeCoordenadores,
+    };
+    postCoordenador(coordenadores);
     onClose();
   }
 
@@ -108,21 +111,21 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
             {numeroDeCoordenadores.map((coordenador: any, index: number) => (
               <Flex align="end" mb={3} key={index}>
                 <FormControl>
-                  <FormLabel htmlFor="nomeCoordenador">NOME</FormLabel>
+                  <FormLabel htmlFor="coordenadorNome">NOME</FormLabel>
                   <Input
                     isRequired
                     placeholder="Nome do coordenador"
                     type="text"
-                    id="nomeCoordenador"
-                    name="nomeCoordenador"
-                    value={coordenador.nomeCoordenador}
+                    id="coordenadorNome"
+                    name="coordenadorNome"
+                    value={coordenador.coordenadorNome}
                     onChange={(event) => handleChange(event, index)}
                     width="100%"
                   />
-                  {projectsForm.projectsForm.errors.responsavel &&
-                    projectsForm.projectsForm.touched.responsavel && (
+                  {projectsForm.projectsForm.errors.coordenadores &&
+                    projectsForm.projectsForm.touched.coordenadores && (
                       <TextError>
-                        {projectsForm.projectsForm.errors.responsavel}
+                        {projectsForm.projectsForm.errors.coordenadores}
                       </TextError>
                     )}
                 </FormControl>
