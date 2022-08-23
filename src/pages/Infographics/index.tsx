@@ -15,14 +15,34 @@ import ColumnSPT from './Components/ColumnSPT';
 import ExibirModal from './Components/ExibirModal';
 import FiltrosModal from './Components/FiltrosModal';
 import { RegisterProjectType } from './Components/RegisterProjectType';
-import StatusAtrasado from './Components/StatusAtrasado';
-import StatusConcluido from './Components/StatusConcluido';
-import StatusEmAndamento from './Components/StatusEmAndamento';
-import StatusNaoAplicavel from './Components/StatusNaoAplicavel';
-import StatusNaoIniciado from './Components/StatusNaoIniciado';
+import StatusProjeto from './Components/StatusProjeto';
+
 export function Infographics() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const arrayOfColumns = [0, 1, 2, 3, 4];
+
+  const statusProjeto = [
+    {
+      status: 'Não Aplicável',
+      color: '#F4DD06',
+    },
+    {
+      status: 'Não Iniciado',
+      color: '#FFB400',
+    },
+    {
+      status: 'Concluído',
+      color: '#059502',
+    },
+    {
+      status: 'Em Andamento',
+      color: '#0047BB',
+    },
+    {
+      status: 'Atrasado',
+      color: '#F40606',
+    },
+  ];
 
   return (
     <>
@@ -65,11 +85,13 @@ export function Infographics() {
                 </Flex>
               </Flex>
               <Flex gap={6} justify={'end'} mb={6}>
-                <StatusNaoAplicavel />
-                <StatusNaoIniciado />
-                <StatusConcluido />
-                <StatusEmAndamento />
-                <StatusAtrasado />
+                {statusProjeto.map((status, index) => (
+                  <StatusProjeto
+                    key={index}
+                    status={status.status}
+                    color={status.color}
+                  />
+                ))}
               </Flex>
               <Flex direction={'row'} gap={10} justify={'center'} wrap={'wrap'}>
                 {arrayOfColumns.map((_column) => (
