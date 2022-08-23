@@ -42,10 +42,17 @@ export function useRegister() {
           });
           navigate('/');
         }
-      } catch (error) {
-        toast.error(`Erro ao cadastrar usuário`, {
-          id: 'toast-principal',
-        });
+      } catch (error: any) {
+        const errorMessage = error.response.data.message;
+        if (errorMessage === 'Email already exists') {
+          toast.error(`E-mail já utilizado por outro usuário`, {
+            id: 'toast-principal',
+          });
+        } else {
+          toast.error(`Erro ao cadastrar usuário`, {
+            id: 'toast-principal',
+          });
+        }
       }
 
       setLoading(false);

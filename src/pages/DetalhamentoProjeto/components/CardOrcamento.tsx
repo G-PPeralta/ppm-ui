@@ -35,8 +35,11 @@ function CardOrcamento() {
           </Box>
         </Box>
 
-        <Flex grow={1} direction={'column'}>
-          <Flex justify={'space-between'}>
+        <Flex direction={'column'}>
+          <Flex
+            justify={'space-between'}
+            direction={innerWidth > 520 ? 'row' : 'column-reverse'}
+          >
             <Flex alignItems={'center'} mb={3}>
               <Box>
                 <Box display={'flex'} alignItems={'center'}>
@@ -90,7 +93,10 @@ function CardOrcamento() {
             </Flex>
           </Flex>
 
-          <Flex justify={'space-between'}>
+          <Flex
+            justify={'space-between'}
+            direction={innerWidth > 520 ? 'row' : 'column'}
+          >
             <Flex alignItems={'center'}>
               <Box>
                 <Box display={'flex'} alignItems={'center'}>

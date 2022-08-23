@@ -2,7 +2,11 @@ import * as yup from 'yup';
 
 export const registerSchema = yup.object({
   name: yup.string().required('O nome é obrigatório'),
-  telephone: yup.string().required('O telefone é obrigatório'),
+  telephone: yup
+    .string()
+    .min(14)
+    .required('O telefone é obrigatório')
+    .typeError('Celular precisa de 9 dígitos'),
   email: yup.string().email('Email inválido').required('Campo obrigatório'),
   area: yup.string().required('O área é obrigatória'),
   password: yup

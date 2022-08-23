@@ -12,8 +12,8 @@ function FormDisabledCoordenador(projectsForm: any) {
   return (
     <>
       {!loading &&
-        projectsForm.projectsForm.values.nomeCoordenador.map(
-          (_responsavel: string, index: number) => (
+        projectsForm.projectsForm.values.coordenadores.map(
+          (_coordenador: string, index: number) => (
             <Box key={index}>
               <FormLabel htmlFor={`coordenador${index}`}>
                 COORDENADOR {index + 1}
@@ -25,8 +25,8 @@ function FormDisabledCoordenador(projectsForm: any) {
                 type={`coordenador${index}`}
                 name={`coordenador${index}`}
                 value={
-                  projectsForm.projectsForm.values.nomeCoordenador[index]
-                    .nomeCoordenador
+                  projectsForm.projectsForm.values.coordenadores[index]
+                    .coordenadorNome
                 }
                 w={'100%'}
               />

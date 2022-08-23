@@ -2,8 +2,14 @@ import { FaWarehouse } from 'react-icons/fa';
 import { FiMapPin } from 'react-icons/fi';
 
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { ICardInfoProjeto } from 'interfaces/DetalhamentoProjetos';
 
-function CardInfoProjeto() {
+type infoProjetoProps = {
+  infoProjeto: ICardInfoProjeto;
+};
+
+function CardInfoProjeto({ infoProjeto }: infoProjetoProps) {
+  const innerWidth = window.innerWidth;
   return (
     <>
       <Flex
@@ -17,17 +23,20 @@ function CardInfoProjeto() {
       >
         <Box mb={4}>
           <Heading as="h4" size="md">
-            Adequação Panelas e ETC Catu
+            {infoProjeto.nome_projeto}
           </Heading>
         </Box>
 
-        <Flex justifyContent={'space-between'}>
+        <Flex
+          justifyContent={'space-between'}
+          direction={innerWidth > 520 ? 'row' : 'column'}
+        >
           <Box>
             <Flex>
               <Box display={'flex'}>
                 <Text fontWeight={'600'}>Nº:</Text>
                 <Text ml={2} color={'origem.500'} fontWeight={'600'}>
-                  0001
+                  {infoProjeto.numero}
                 </Text>
               </Box>
             </Flex>
@@ -39,7 +48,7 @@ function CardInfoProjeto() {
                 Polo:
               </Text>
               <Text ml={2} color={'origem.500'} fontWeight={'600'}>
-                Tucano Sul
+                {infoProjeto.polo}
               </Text>
             </Flex>
 
@@ -51,7 +60,7 @@ function CardInfoProjeto() {
                 Local:
               </Text>
               <Text ml={2} color={'origem.500'} fontWeight={'600'}>
-                EDGA Conceição
+                {infoProjeto.local}
               </Text>
             </Flex>
 
@@ -65,7 +74,9 @@ function CardInfoProjeto() {
                 fontWeight={'600'}
                 fontSize={14}
               >
-                Eduardo
+                {infoProjeto.coordenador_nome === null
+                  ? 'Nome do Coordenador'
+                  : infoProjeto.coordenador_nome}
               </Text>
             </Flex>
 
@@ -79,7 +90,9 @@ function CardInfoProjeto() {
                 fontWeight={'600'}
                 fontSize={14}
               >
-                Eduardo
+                {infoProjeto.nome_responsavel === null
+                  ? 'Nome do Responsável'
+                  : infoProjeto.nome_responsavel}
               </Text>
             </Flex>
 
@@ -93,7 +106,7 @@ function CardInfoProjeto() {
                 fontWeight={'600'}
                 fontSize={14}
               >
-                Processos
+                {infoProjeto.demanda}
               </Text>
             </Flex>
           </Box>
@@ -101,8 +114,8 @@ function CardInfoProjeto() {
           <Box
             display={'flex'}
             flexDirection={'column'}
-            alignItems={'flex-end'}
-            justifyContent={'end'}
+            alignItems={innerWidth > 520 ? 'flex-end' : 'flex-start'}
+            justifyContent={innerWidth > 520 ? 'end' : 'start'}
           >
             <Flex alignItems={'center'}>
               <Text fontWeight={'600'} fontSize={14}>
@@ -114,7 +127,9 @@ function CardInfoProjeto() {
                 fontWeight={'600'}
                 fontSize={14}
               >
-                01/01/2022
+                {infoProjeto.data_inicio === null
+                  ? '01/01/1900'
+                  : infoProjeto.data_inicio}
               </Text>
             </Flex>
 
@@ -128,7 +143,9 @@ function CardInfoProjeto() {
                 fontWeight={'600'}
                 fontSize={14}
               >
-                31/12/2022
+                {infoProjeto.data_fim === null
+                  ? '31/12/1900'
+                  : infoProjeto.data_fim}
               </Text>
             </Flex>
 

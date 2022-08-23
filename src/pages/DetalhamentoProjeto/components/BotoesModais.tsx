@@ -13,7 +13,7 @@ function BotoesModais() {
         direction={'column'}
         grow={1}
         shrink={1}
-        basis={'180px'}
+        basis={'100px'}
       >
         <BotaoDescricaoEJustificativa />
         <BotaoListadeTarefas />

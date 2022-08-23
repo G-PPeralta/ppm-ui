@@ -1,6 +1,6 @@
 import {
+  Coordenadores,
   RegisterProjectProps,
-  RegistroCoordenador,
   Responsaveis,
 } from 'interfaces/Services';
 
@@ -21,7 +21,7 @@ export async function postResponsavel(
 }
 
 export async function postCoordenador(
-  payload: RegistroCoordenador[],
+  payload: Coordenadores,
 ): Promise<{ status: number }> {
   const { status } = await api.post('/coordenador', payload);
   return { status };

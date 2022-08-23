@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 function formatCellphone(valor: string) {
-  if (!valor) return;
+  if (!valor || valor === '(') return;
   valor = valor.replace(/\D/g, '');
   valor = valor.replace(/^(\d)/, '($1');
   valor = valor.replace(/(.{3})(\d)/, '$1)$2');
