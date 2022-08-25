@@ -1,11 +1,24 @@
 import { Flex, Heading, Text } from '@chakra-ui/react';
 
-function CardPIR() {
+type Card = {
+  nome: string;
+  data: string;
+  porcentagem: string;
+};
+
+type Props = {
+  card: Card;
+  index: number;
+};
+
+function CardPIR({ card, index }: Props) {
+  console.log(index);
+
   return (
     <Flex direction={'row'} gap={4}>
       <Flex align={'center'} justify={'center'}>
-        <Heading as="h3" size="md" textAlign={'center'}>
-          Atual
+        <Heading as="h3" size="md" textAlign={'center'} width={'50px'}>
+          {index === 0 ? 'Atual' : `${index + 1}º`}
         </Heading>
       </Flex>
       <Flex
@@ -13,18 +26,18 @@ function CardPIR() {
         align={'center'}
         justify={'center'}
         backgroundColor={'#0047BB'}
-        px={6}
+        px={4}
         py={2}
         borderRadius={4}
       >
         <Text fontSize={'lg'} color={'white'} fontWeight={'bold'}>
-          PIR 001
+          {card.nome}
         </Text>
         <Text fontSize={'md'} color={'white'} fontWeight={'semi-bold'}>
-          12/04/2022
+          {card.data}
         </Text>
         <Text fontSize={'md'} color={'white'} fontWeight={'semi-bold'}>
-          50%
+          {card.porcentagem}
         </Text>
       </Flex>
     </Flex>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import {
   Box,
+  Button,
   Flex,
   Heading,
   Stack,
@@ -19,7 +20,6 @@ import StatusProjeto from './Components/StatusProjeto';
 
 export function Infographics() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
-  const arrayOfColumns = [0, 1, 2, 3, 4];
 
   const statusProjeto = [
     {
@@ -44,6 +44,27 @@ export function Infographics() {
     },
   ];
 
+  const infoColunas = [
+    {
+      nome: 'SPT - 112',
+    },
+    {
+      nome: 'SPT - 30',
+    },
+    {
+      nome: 'SPT - 131',
+    },
+    {
+      nome: 'SPT - 108',
+    },
+    {
+      nome: 'SPT - 061',
+    },
+    {
+      nome: 'SC-XX',
+    },
+  ];
+
   return (
     <>
       <Sidebar>
@@ -61,7 +82,7 @@ export function Infographics() {
           >
             <Box
               py={{ base: '0', sm: '8' }}
-              px={{ base: '4', sm: '8' }}
+              px={{ base: '4', sm: '6' }}
               w={useBreakpointValue({
                 base: '20rem',
                 sm: '35rem',
@@ -84,18 +105,70 @@ export function Infographics() {
                   <FiltrosModal />
                 </Flex>
               </Flex>
-              <Flex gap={6} justify={'end'} mb={6}>
-                {statusProjeto.map((status, index) => (
-                  <StatusProjeto
-                    key={index}
-                    status={status.status}
-                    color={status.color}
-                  />
-                ))}
+              <Flex justify={'space-between'} gap={6}>
+                <Flex gap={2}>
+                  <Button
+                    variant="outline"
+                    border={'2px solid'}
+                    borderColor={'origem.500'}
+                    textColor={'origem.500'}
+                    _hover={{
+                      borderColor: 'origem.600',
+                      backgroundColor: 'origem.500',
+                      textColor: 'white',
+                      transition: 'all 0.4s',
+                    }}
+                  >
+                    Sonda
+                  </Button>
+                  <Button
+                    variant="outline"
+                    border={'2px solid'}
+                    borderColor={'origem.500'}
+                    textColor={'origem.500'}
+                    _hover={{
+                      borderColor: 'origem.600',
+                      backgroundColor: 'origem.500',
+                      textColor: 'white',
+                      transition: 'all 0.4s',
+                    }}
+                  >
+                    Projeto
+                  </Button>
+                  <Button
+                    variant="outline"
+                    border={'2px solid'}
+                    borderColor={'origem.500'}
+                    textColor={'origem.500'}
+                    _hover={{
+                      borderColor: 'origem.600',
+                      backgroundColor: 'origem.500',
+                      textColor: 'white',
+                      transition: 'all 0.4s',
+                    }}
+                  >
+                    Atividade
+                  </Button>
+                </Flex>
+                <Flex
+                  gap={4}
+                  justify={'center'}
+                  height={'40px'}
+                  align={'center'}
+                  mb={2}
+                >
+                  {statusProjeto.map((status, index) => (
+                    <StatusProjeto
+                      key={index}
+                      status={status.status}
+                      color={status.color}
+                    />
+                  ))}
+                </Flex>
               </Flex>
               <Flex direction={'row'} gap={10} justify={'center'} wrap={'wrap'}>
-                {arrayOfColumns.map((_column) => (
-                  <ColumnSPT />
+                {infoColunas.map((column) => (
+                  <ColumnSPT column={column} />
                 ))}
               </Flex>
             </Box>
