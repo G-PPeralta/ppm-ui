@@ -60,9 +60,9 @@ export function Infographics() {
     {
       nome: 'SPT - 061',
     },
-    {
-      nome: 'SC-XX',
-    },
+    // {
+    //   nome: 'SC-XX',
+    // },
   ];
 
   return (

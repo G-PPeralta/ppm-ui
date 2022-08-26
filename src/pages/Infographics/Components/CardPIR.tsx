@@ -12,8 +12,6 @@ type Props = {
 };
 
 function CardPIR({ card, index }: Props) {
-  console.log(index);
-
   return (
     <Flex direction={'row'} gap={4}>
       <Flex align={'center'} justify={'center'}>

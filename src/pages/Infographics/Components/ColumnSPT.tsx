@@ -15,53 +15,53 @@ function ColumnSPT({ column }: Props) {
     {
       nome: 'PIR 001',
       data: '12/04/2022',
-      porcentagem: '50%',
+      porcentagem: `${Math.floor(Math.random() * 100)}%`,
     },
     {
       nome: 'PIR 002',
       data: '12/04/2022',
-      porcentagem: '50%',
+      porcentagem: `${Math.floor(Math.random() * 100)}%`,
     },
     {
       nome: 'PIR 003',
       data: '12/04/2022',
-      porcentagem: '50%',
+      porcentagem: `${Math.floor(Math.random() * 100)}%`,
     },
     {
       nome: 'PIR 004',
       data: '12/04/2022',
-      porcentagem: '50%',
+      porcentagem: `${Math.floor(Math.random() * 100)}%`,
     },
     {
       nome: 'PIR 005',
       data: '12/04/2022',
-      porcentagem: '50%',
+      porcentagem: `${Math.floor(Math.random() * 100)}%`,
     },
     {
       nome: 'PIR 006',
       data: '12/04/2022',
-      porcentagem: '50%',
+      porcentagem: `${Math.floor(Math.random() * 100)}%`,
     },
     {
       nome: 'PIR 007',
       data: '12/04/2022',
-      porcentagem: '50%',
+      porcentagem: `${Math.floor(Math.random() * 100)}%`,
     },
     {
       nome: 'PIR 008',
       data: '12/04/2022',
-      porcentagem: '50%',
+      porcentagem: `${Math.floor(Math.random() * 100)}%`,
     },
     {
       nome: 'PIR 009',
       data: '12/04/2022',
-      porcentagem: '50%',
+      porcentagem: `${Math.floor(Math.random() * 100)}%`,
     },
   ];
 
   return (
     <Flex direction={'column'} align={'center'} justify={'center'}>
-      <Text fontSize={'2xl'} fontWeight={'bold'} mb={6}>
+      <Text fontSize={'2xl'} fontWeight={'bold'} mb={6} mt={3}>
         {column.nome}
       </Text>
       <Flex direction={'column'} gap={10}>
