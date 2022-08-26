@@ -16,7 +16,7 @@ interface LinkItemProps {
 }
 export const LinkItems: Array<LinkItemProps> = [
   { name: 'Dashboard', icon: FiHome, link: '/' },
-  { name: 'Gantt', icon: BsBarChartSteps, link: '/gantt' },
+  // { name: 'Gantt', icon: BsBarChartSteps, link: '/gantt' },
   { name: 'Cadastro Projetos', icon: FiEdit2, link: '/projects-registration' },
   {
     name: 'Cadastro Fornecedores',
@@ -31,5 +31,9 @@ export const LinkItems: Array<LinkItemProps> = [
   { name: 'Relatórios', icon: FiFile, link: '/reports' },
   { name: 'Infográficos', icon: FiBarChart, link: '/infographics' },
   // { name: 'Alterar Permissões', icon: FiUsers, link: '/permissions' },
-  { name: 'Detalhamento Projeto', icon: FiFile, link: '/detalhamento/191' },
+  {
+    name: 'Detalhamento Projeto',
+    icon: BsBarChartSteps,
+    link: '/detalhamento/191',
+  },
 ];
