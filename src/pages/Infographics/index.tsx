@@ -84,10 +84,10 @@ export function Infographics() {
               py={{ base: '0', sm: '8' }}
               px={{ base: '4', sm: '6' }}
               w={useBreakpointValue({
-                base: '20rem',
-                sm: '35rem',
-                md: '60rem',
-                lg: '80rem',
+                base: '100%',
+                sm: '100%',
+                md: '100%',
+                lg: '100%',
               })}
               bg={useBreakpointValue({ base: 'transparent', sm: 'white' })}
               boxShadow={{
@@ -105,7 +105,7 @@ export function Infographics() {
                   <FiltrosModal />
                 </Flex>
               </Flex>
-              <Flex justify={'space-between'} gap={6}>
+              <Flex justify={'space-between'} gap={6} wrap={'wrap'} mb={4}>
                 <Flex gap={2}>
                   <Button
                     variant="outline"
@@ -150,13 +150,7 @@ export function Infographics() {
                     Atividade
                   </Button>
                 </Flex>
-                <Flex
-                  gap={4}
-                  justify={'center'}
-                  height={'40px'}
-                  align={'center'}
-                  mb={2}
-                >
+                <Flex gap={4} wrap={'wrap'}>
                   {statusProjeto.map((status, index) => (
                     <StatusProjeto
                       key={index}
