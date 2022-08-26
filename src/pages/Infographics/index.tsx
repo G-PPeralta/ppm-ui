@@ -160,10 +160,18 @@ export function Infographics() {
                   ))}
                 </Flex>
               </Flex>
-              <Flex direction={'row'} gap={10} justify={'center'} wrap={'wrap'}>
-                {infoColunas.map((column) => (
-                  <ColumnSPT column={column} />
-                ))}
+              <Flex align={'center'} justify={'center'}>
+                <Box
+                  overflowX={{ base: 'scroll' }}
+                  display={'flex'}
+                  flexDirection={'row'}
+                  gap={10}
+                  py={4}
+                >
+                  {infoColunas.map((column) => (
+                    <ColumnSPT column={column} />
+                  ))}
+                </Box>
               </Flex>
             </Box>
           </Flex>

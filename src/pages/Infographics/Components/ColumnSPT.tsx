@@ -52,11 +52,11 @@ function ColumnSPT({ column }: Props) {
       data: '12/04/2022',
       porcentagem: `${Math.floor(Math.random() * 100)}%`,
     },
-    {
-      nome: 'PIR 009',
-      data: '12/04/2022',
-      porcentagem: `${Math.floor(Math.random() * 100)}%`,
-    },
+    // {
+    //   nome: 'PIR 009',
+    //   data: '12/04/2022',
+    //   porcentagem: `${Math.floor(Math.random() * 100)}%`,
+    // },
   ];
 
   return (
