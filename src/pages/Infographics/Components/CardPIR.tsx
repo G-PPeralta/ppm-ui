@@ -27,6 +27,11 @@ function CardPIR({ card, index }: Props) {
         px={4}
         py={2}
         borderRadius={4}
+        _hover={{
+          backgroundColor: '#EB3323',
+          transition: 'all 0.4s',
+          cursor: 'pointer',
+        }}
       >
         <Text fontSize={'lg'} color={'white'} fontWeight={'bold'}>
           {card.nome}

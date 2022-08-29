@@ -4,28 +4,25 @@ import { BsPlusLg } from 'react-icons/bs';
 import {
   Box,
   Flex,
-  // Button,
   Popover,
   PopoverArrow,
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
-  // PopoverFooter,
-  // PopoverHeader,
   PopoverTrigger,
   Portal,
   Text,
   IconButton,
-  // useDisclosure,
 } from '@chakra-ui/react';
 
+import { RegisterNewTask } from './RegisterNewTask';
 import { RegisterProjectType } from './RegisterProjectType';
+import RegistrarNovaIntervencao from './RegistrarNovaIntervencao';
 
 function BotaoCadastrar() {
-  // const { atividadeIsOpen, atividadeOnOpen, atividadeOnClose } =
-  //   useDisclosure();
-  // const { intervencaoIsOpen, intervencaoOnOpen, intervencaoOnClose } =
-  //   useDisclosure();
+  const [atividadeModalIsVisible, setAtividadeModalIsVisible] = useState(false);
+  const [intervencaoModalIsVisible, setIntervencaoModalIsVisible] =
+    useState(false);
   const [projetoModalIsVisible, setProjetoModalIsVisible] = useState(false);
 
   return (
@@ -46,6 +43,8 @@ function BotaoCadastrar() {
             justify={'center'}
             _hover={{
               cursor: 'pointer',
+              backgroundColor: 'grey.100',
+              transition: 'all 0.4s',
             }}
           >
             <IconButton
@@ -70,27 +69,46 @@ function BotaoCadastrar() {
             border={'none'}
           >
             <PopoverArrow backgroundColor="origem.400" />
-            {/* <PopoverHeader>Header</PopoverHeader> */}
             <PopoverCloseButton />
             <PopoverBody>
               <>
-                <Text fontSize={'xl'} fontWeight={'600'}>
-                  Atividade
-                </Text>
-                <Text
-                  fontSize={'xl'}
-                  fontWeight={'600'}
-                  _hover={{
-                    cursor: 'pointer',
-                    transition: 'all 0.4s',
-                  }}
-                  // onClick={intervencaoOnOpen}
-                >
-                  Intervenção
-                </Text>
                 <Box>
                   <Text
-                    fontSize={'xl'}
+                    fontSize={'lg'}
+                    fontWeight={'600'}
+                    _hover={{
+                      cursor: 'pointer',
+                      transition: 'all 0.4s',
+                    }}
+                    onClick={() => setAtividadeModalIsVisible(true)}
+                  >
+                    Atividade
+                  </Text>
+                  <RegisterNewTask
+                    isOpen={atividadeModalIsVisible}
+                    onClose={() => setAtividadeModalIsVisible(false)}
+                  />
+                </Box>
+                <Box>
+                  <Text
+                    fontSize={'lg'}
+                    fontWeight={'600'}
+                    _hover={{
+                      cursor: 'pointer',
+                      transition: 'all 0.4s',
+                    }}
+                    onClick={() => setIntervencaoModalIsVisible(true)}
+                  >
+                    Intervenção
+                  </Text>
+                  <RegistrarNovaIntervencao
+                    isOpen={intervencaoModalIsVisible}
+                    onClose={() => setIntervencaoModalIsVisible(false)}
+                  />
+                </Box>
+                <Box>
+                  <Text
+                    fontSize={'lg'}
                     fontWeight={'600'}
                     _hover={{
                       cursor: 'pointer',
