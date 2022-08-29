@@ -12,6 +12,7 @@ import {
 
 import Sidebar from 'components/SideBar';
 
+import BotaoCadastrar from './Components/BotaoCadastrar';
 import ColumnSPT from './Components/ColumnSPT';
 import ExibirModal from './Components/ExibirModal';
 import FiltrosModal from './Components/FiltrosModal';
@@ -60,9 +61,9 @@ export function Infographics() {
     {
       nome: 'SPT - 061',
     },
-    // {
-    //   nome: 'SC-XX',
-    // },
+    {
+      nome: 'SC-XX',
+    },
   ];
 
   return (
@@ -169,7 +170,15 @@ export function Infographics() {
                   py={4}
                 >
                   {infoColunas.map((column) => (
-                    <ColumnSPT column={column} />
+                    <Flex
+                      direction={'column'}
+                      gap={4}
+                      align={'center'}
+                      justify={'center'}
+                    >
+                      <ColumnSPT column={column} />
+                      <BotaoCadastrar />
+                    </Flex>
                   ))}
                 </Box>
               </Flex>
