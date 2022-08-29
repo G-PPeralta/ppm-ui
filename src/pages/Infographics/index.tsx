@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 
 import {
   Box,
@@ -16,11 +16,11 @@ import BotaoCadastrar from './Components/BotaoCadastrar';
 import ColumnSPT from './Components/ColumnSPT';
 import ExibirModal from './Components/ExibirModal';
 import FiltrosModal from './Components/FiltrosModal';
-import { RegisterProjectType } from './Components/RegisterProjectType';
+// import { RegisterProjectType } from './Components/RegisterProjectType';
 import StatusProjeto from './Components/StatusProjeto';
 
 export function Infographics() {
-  const [modalIsVisible, setModalIsVisible] = useState(false);
+  // const [modalIsVisible, setModalIsVisible] = useState(false);
 
   const statusProjeto = [
     {
@@ -69,11 +69,11 @@ export function Infographics() {
   return (
     <>
       <Sidebar>
-        <button onClick={() => setModalIsVisible(true)}>Modal</button>
+        {/* <button onClick={() => setModalIsVisible(true)}>Modal</button>
         <RegisterProjectType
           isOpen={modalIsVisible}
           onClose={() => setModalIsVisible(false)}
-        />
+        /> */}
         <Stack spacing="8">
           <Flex
             w={useBreakpointValue({ base: '100%', md: 'auto' })}
@@ -169,8 +169,9 @@ export function Infographics() {
                   gap={10}
                   py={4}
                 >
-                  {infoColunas.map((column) => (
+                  {infoColunas.map((column, index) => (
                     <Flex
+                      key={index}
                       direction={'column'}
                       gap={4}
                       align={'center'}

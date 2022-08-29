@@ -66,7 +66,7 @@ function ColumnSPT({ column }: Props) {
       </Text>
       <Flex direction={'column'} gap={10} align={'center'} justify={'center'}>
         {infoCards.map((card, index) => (
-          <CardPIR card={card} index={index} />
+          <CardPIR card={card} index={index} key={index} />
         ))}
       </Flex>
     </Flex>

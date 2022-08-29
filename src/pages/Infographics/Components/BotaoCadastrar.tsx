@@ -26,7 +26,7 @@ function BotaoCadastrar() {
   //   useDisclosure();
   // const { intervencaoIsOpen, intervencaoOnOpen, intervencaoOnClose } =
   //   useDisclosure();
-  const [modalIsVisible, setModalIsVisible] = useState(false);
+  const [projetoModalIsVisible, setProjetoModalIsVisible] = useState(false);
 
   return (
     <>
@@ -96,13 +96,13 @@ function BotaoCadastrar() {
                       cursor: 'pointer',
                       transition: 'all 0.4s',
                     }}
-                    onClick={() => setModalIsVisible(true)}
+                    onClick={() => setProjetoModalIsVisible(true)}
                   >
                     Projeto
                   </Text>
                   <RegisterProjectType
-                    isOpen={modalIsVisible}
-                    onClose={() => setModalIsVisible(false)}
+                    isOpen={projetoModalIsVisible}
+                    onClose={() => setProjetoModalIsVisible(false)}
                   />
                 </Box>
               </>

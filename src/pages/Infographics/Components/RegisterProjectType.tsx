@@ -30,7 +30,7 @@ type Props = {
 export function RegisterProjectType({ isOpen, onClose }: Props) {
   const { registerForm, loading } = useRegisterProjectType();
 
-  console.log(registerForm.isValid);
+  // console.log(registerForm.isValid);
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={'6xl'}>
       <ModalOverlay className={styles.overlay} />
