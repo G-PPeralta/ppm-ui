@@ -12,10 +12,11 @@ import {
 
 import Sidebar from 'components/SideBar';
 
-import BotaoCadastrar from './Components/BotaoCadastrar';
+// import BotaoCadastrar from './Components/BotaoCadastrar';
 import ColumnSPT from './Components/ColumnSPT';
 import ExibirModal from './Components/ExibirModal';
 import FiltrosModal from './Components/FiltrosModal';
+import ModalBotaoCadastrar from './Components/ModalBotaoCadastrar';
 // import { RegisterProjectType } from './Components/RegisterProjectType';
 import StatusProjeto from './Components/StatusProjeto';
 
@@ -178,7 +179,11 @@ export function Infographics() {
                       justify={'center'}
                     >
                       <ColumnSPT column={column} />
+                      {/*
                       <BotaoCadastrar />
+                      SISTEMA DE POPOVER FOI DESCONTINUADO. DEIXEI COMENTADO ATÉ SER CONFIRMADO ESSA INFORMAÇÃO
+                      */}
+                      <ModalBotaoCadastrar />
                     </Flex>
                   ))}
                 </Box>
