@@ -13,8 +13,16 @@ import {
   ModalFooter,
   useDisclosure,
   Button,
+  FormControl,
+  FormLabel,
+  Select,
+  Input,
+  Stack,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
+
+import { TextError } from 'components/TextError';
 
 import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
 
@@ -64,7 +72,7 @@ function ModalBotaoCadastrar() {
           Cadastrar
         </Text>
       </Flex>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -84,7 +92,71 @@ function ModalBotaoCadastrar() {
               intervencaoForm.handleSubmit(e);
             }}
           >
-            <ModalBody></ModalBody>
+            <ModalBody mt={3}>
+              <FormControl>
+                <Stack>
+                  <Flex
+                    flexDirection={useBreakpointValue({
+                      base: 'column',
+                      md: 'row',
+                    })}
+                    gap={5}
+                  >
+                    <FormControl>
+                      <FormLabel>Poço</FormLabel>
+                      <Select placeholder="Select option">
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                      </Select>
+                    </FormControl>
+
+                    <FormControl>
+                      <FormLabel>Campo</FormLabel>
+                      <Select placeholder="Select option">
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                      </Select>
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel>Sonda</FormLabel>
+                      <Select placeholder="Select option">
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                      </Select>
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel>Sequência</FormLabel>
+                      <Select placeholder="Select option">
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                      </Select>
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel htmlFor="dataInicio">INÍCIO</FormLabel>
+                      <Input
+                        isRequired
+                        placeholder="dd/mm/aaaa"
+                        id="dataInicio"
+                        type="date"
+                        name="dataInicio"
+                        value={intervencaoForm.values.inicioPrevisto}
+                        onChange={intervencaoForm.handleChange}
+                      />
+                      {intervencaoForm.errors.inicioPrevisto &&
+                        intervencaoForm.touched.inicioPrevisto && (
+                          <TextError>
+                            {intervencaoForm.errors.inicioPrevisto}
+                          </TextError>
+                        )}
+                    </FormControl>
+                  </Flex>
+                </Stack>
+              </FormControl>
+            </ModalBody>
 
             <ModalFooter>
               <Flex gap={2} align={'center'} justify={'center'}>
