@@ -1,5 +1,7 @@
 // import { useState } from 'react';
 
+import { useEffect, useState } from 'react';
+
 import {
   Box,
   Button,
@@ -12,6 +14,8 @@ import {
 
 import Sidebar from 'components/SideBar';
 
+import { getInfoCampanha } from 'services/get/Infograficos';
+
 // import BotaoCadastrar from './Components/BotaoCadastrar';
 import ColumnSPT from './Components/ColumnSPT';
 import ExibirModal from './Components/ExibirModal';
@@ -22,6 +26,29 @@ import StatusProjeto from './Components/StatusProjeto';
 
 export function Infographics() {
   // const [modalIsVisible, setModalIsVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [campanhas, setCampanhas] = useState();
+
+  const handleGetCampanha = async () => {
+    const response = await getInfoCampanha();
+    setCampanhas(response.data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    handleGetCampanha();
+  }, []);
+
+  const dataInicio = '2022-08-25';
+  const dataFim = '2022-08-31';
+  const diferencaMilisegundos =
+    Number(new Date(dataFim)) - Number(new Date(dataInicio));
+  const diferencaDias = diferencaMilisegundos / (1000 * 60 * 60 * 24);
+
+  console.log('Quantidade dias:', diferencaDias);
+
+  console.log(loading);
+  console.log(campanhas);
 
   const statusProjeto = [
     {
