@@ -27,7 +27,7 @@ import StatusProjeto from './Components/StatusProjeto';
 export function Infographics() {
   // const [modalIsVisible, setModalIsVisible] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [campanhas, setCampanhas] = useState();
+  const [campanhas, setCampanhas] = useState([]);
 
   const handleGetCampanha = async () => {
     const response = await getInfoCampanha();
@@ -39,16 +39,8 @@ export function Infographics() {
     handleGetCampanha();
   }, []);
 
-  const dataInicio = '2022-08-25';
-  const dataFim = '2022-08-31';
-  const diferencaMilisegundos =
-    Number(new Date(dataFim)) - Number(new Date(dataInicio));
-  const diferencaDias = diferencaMilisegundos / (1000 * 60 * 60 * 24);
-
-  console.log('Quantidade dias:', diferencaDias);
-
   console.log(loading);
-  console.log(campanhas);
+  // console.log(campanhas);
 
   const statusProjeto = [
     {
@@ -73,26 +65,26 @@ export function Infographics() {
     },
   ];
 
-  const infoColunas = [
-    {
-      nome: 'SPT - 112',
-    },
-    {
-      nome: 'SPT - 30',
-    },
-    {
-      nome: 'SPT - 131',
-    },
-    {
-      nome: 'SPT - 108',
-    },
-    {
-      nome: 'SPT - 061',
-    },
-    {
-      nome: 'SC-XX',
-    },
-  ];
+  // const infoColunas = [
+  //   {
+  //     nome: 'SPT - 112',
+  //   },
+  //   {
+  //     nome: 'SPT - 30',
+  //   },
+  //   {
+  //     nome: 'SPT - 131',
+  //   },
+  //   {
+  //     nome: 'SPT - 108',
+  //   },
+  //   {
+  //     nome: 'SPT - 061',
+  //   },
+  //   {
+  //     nome: 'SC-XX',
+  //   },
+  // ];
 
   return (
     <>
@@ -197,7 +189,7 @@ export function Infographics() {
                   gap={10}
                   py={4}
                 >
-                  {infoColunas.map((column, index) => (
+                  {campanhas.map((column, index) => (
                     <Flex
                       key={index}
                       direction={'column'}

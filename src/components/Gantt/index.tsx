@@ -57,6 +57,7 @@ export function Gantt() {
 
   async function handleSetGanttData() {
     const reqGanttData = await getGanttData();
+    console.log(reqGanttData);
     if (!reqGanttData) return;
     const _gantt: IGantt = reqGanttData.data;
     // setGanttData(_gantt);

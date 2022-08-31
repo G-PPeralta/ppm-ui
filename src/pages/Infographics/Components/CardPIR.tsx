@@ -1,17 +1,29 @@
 import { Flex, Heading, Text } from '@chakra-ui/react';
 
-type Card = {
-  nome: string;
-  data: string;
-  porcentagem: string;
+import { formatDate } from 'utils/formatDate';
+
+type Poco = {
+  poco: string;
+  inicio_planejado: string;
 };
 
 type Props = {
-  card: Card;
+  poco: Poco;
   index: number;
 };
 
-function CardPIR({ card, index }: Props) {
+function CardPIR({ poco, index }: Props) {
+  // console.log('CARD', poco);
+  const dataInicioFormatada = formatDate(new Date(poco.inicio_planejado));
+
+  // const dataInicio = '2022-08-25';
+  // const dataFim = '2022-08-31';
+  // const diferencaMilisegundos =
+  //   Number(new Date(dataFim)) - Number(new Date(dataInicio));
+  // const diferencaDias = diferencaMilisegundos / (1000 * 60 * 60 * 24);
+
+  // console.log('Quantidade dias:', diferencaDias);
+
   return (
     <Flex direction={'row'} gap={4}>
       <Flex align={'center'} justify={'center'}>
@@ -34,14 +46,14 @@ function CardPIR({ card, index }: Props) {
         }}
       >
         <Text fontSize={'lg'} color={'white'} fontWeight={'bold'}>
-          {card.nome}
+          {poco.poco}
         </Text>
         <Text fontSize={'md'} color={'white'} fontWeight={'semi-bold'}>
-          {card.data}
+          {dataInicioFormatada}
         </Text>
-        <Text fontSize={'md'} color={'white'} fontWeight={'semi-bold'}>
+        {/* <Text fontSize={'md'} color={'white'} fontWeight={'semi-bold'}>
           {card.porcentagem}
-        </Text>
+        </Text> */}
       </Flex>
     </Flex>
   );
