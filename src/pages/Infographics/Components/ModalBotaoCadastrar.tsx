@@ -19,6 +19,7 @@ import {
   Input,
   Stack,
   useBreakpointValue,
+  Textarea,
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
@@ -72,7 +73,7 @@ function ModalBotaoCadastrar() {
           Cadastrar
         </Text>
       </Flex>
-      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -94,72 +95,137 @@ function ModalBotaoCadastrar() {
           >
             <ModalBody mt={3}>
               <FormControl>
-                <Stack>
-                  <Flex
-                    flexDirection={useBreakpointValue({
-                      base: 'column',
-                      md: 'row',
-                    })}
-                    gap={5}
-                  >
-                    <FormControl>
-                      <FormLabel>Poço</FormLabel>
-                      <Select placeholder="Select option">
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                      </Select>
-                    </FormControl>
+                <Flex direction={'column'} gap={4}>
+                  <Stack>
+                    <Flex
+                      flexDirection={useBreakpointValue({
+                        base: 'column',
+                        md: 'row',
+                      })}
+                      gap={5}
+                    >
+                      <FormControl>
+                        <FormLabel>Poço</FormLabel>
+                        <Select
+                          id="poco"
+                          name="poco"
+                          placeholder="Selecione"
+                          value={intervencaoForm.values.poco}
+                          onChange={intervencaoForm.handleChange}
+                        >
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
+                      </FormControl>
 
+                      <FormControl>
+                        <FormLabel>Campo</FormLabel>
+                        <Select
+                          id="campo"
+                          name="campo"
+                          placeholder="Selecione"
+                          value={intervencaoForm.values.campo}
+                          onChange={intervencaoForm.handleChange}
+                        >
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
+                      </FormControl>
+
+                      <FormControl>
+                        <FormLabel>Sonda</FormLabel>
+                        <Select
+                          id="sonda"
+                          name="sonda"
+                          placeholder="Selecione"
+                          value={intervencaoForm.values.sonda}
+                          onChange={intervencaoForm.handleChange}
+                        >
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
+                      </FormControl>
+
+                      <FormControl>
+                        <FormLabel>Sequência</FormLabel>
+                        <Select
+                          id="sequencia"
+                          name="sequencia"
+                          placeholder="Selecione"
+                          value={intervencaoForm.values.sequencia}
+                          onChange={intervencaoForm.handleChange}
+                        >
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
+                      </FormControl>
+
+                      <FormControl>
+                        <FormLabel htmlFor="inicioPrevisto">Início</FormLabel>
+                        <Input
+                          isRequired
+                          placeholder="dd/mm/aaaa"
+                          id="inicioPrevisto"
+                          type="date"
+                          name="inicioPrevisto"
+                          value={intervencaoForm.values.inicioPrevisto}
+                          onChange={intervencaoForm.handleChange}
+                        />
+                        {intervencaoForm.errors.inicioPrevisto &&
+                          intervencaoForm.touched.inicioPrevisto && (
+                            <TextError>
+                              {intervencaoForm.errors.inicioPrevisto}
+                            </TextError>
+                          )}
+                      </FormControl>
+                    </Flex>
+                  </Stack>
+                  <Stack>
                     <FormControl>
-                      <FormLabel>Campo</FormLabel>
-                      <Select placeholder="Select option">
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                      </Select>
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>Sonda</FormLabel>
-                      <Select placeholder="Select option">
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                      </Select>
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>Sequência</FormLabel>
-                      <Select placeholder="Select option">
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                      </Select>
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel htmlFor="dataInicio">INÍCIO</FormLabel>
-                      <Input
-                        isRequired
-                        placeholder="dd/mm/aaaa"
-                        id="dataInicio"
-                        type="date"
-                        name="dataInicio"
-                        value={intervencaoForm.values.inicioPrevisto}
+                      <FormLabel>Projeto</FormLabel>
+                      <Select
+                        id="projeto"
+                        name="projeto"
+                        placeholder="Selecione"
+                        value={intervencaoForm.values.projeto}
                         onChange={intervencaoForm.handleChange}
+                      >
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                      </Select>
+                    </FormControl>
+                  </Stack>
+                  <Stack>
+                    <FormControl>
+                      <FormLabel htmlFor="observacoes">Observações</FormLabel>
+                      <Textarea
+                        isRequired
+                        placeholder="Adicione observações sobre a intervenção"
+                        id="observacoes"
+                        name="observacoes"
+                        value={intervencaoForm.values.observacoes}
+                        onChange={intervencaoForm.handleChange}
+                        w={useBreakpointValue({ base: '100%', md: '100%' })}
                       />
-                      {intervencaoForm.errors.inicioPrevisto &&
-                        intervencaoForm.touched.inicioPrevisto && (
+                      {intervencaoForm.errors.observacoes &&
+                        intervencaoForm.touched.observacoes && (
                           <TextError>
-                            {intervencaoForm.errors.inicioPrevisto}
+                            {intervencaoForm.errors.observacoes}
                           </TextError>
                         )}
                     </FormControl>
-                  </Flex>
-                </Stack>
+                  </Stack>
+                </Flex>
               </FormControl>
             </ModalBody>
 
-            <ModalFooter>
-              <Flex gap={2} align={'center'} justify={'center'}>
+            <ModalFooter justifyContent={'center'}>
+              <Flex gap={2}>
                 <Button
                   variant="ghost"
                   color="red"
