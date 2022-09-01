@@ -5,6 +5,8 @@ import { registerProjectTypeSchema } from 'validations/RegisterProjectType';
 
 import { useToast } from 'contexts/Toast';
 
+import { postProjetoTipo } from 'services/post/CadastroProjetoTipo';
+
 export function useCadastroProjetoTipo() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -35,10 +37,19 @@ export function useCadastroProjetoTipo() {
 
       setLoading(true);
 
-      console.log(newValues);
-      toast.succes('Tipo de projeto cadastrado com sucesso', {
-        id: 'toast-principal',
-      });
+      try {
+        const { status } = await postProjetoTipo(newValues);
+
+        if (status === 200 || status === 201) {
+          toast.success('Projeto Tipo cadastrado com sucesso!', {
+            id: 'toast-principal',
+          });
+        }
+      } catch (error) {
+        toast.error('Erro ao cadastrar intervenção!', {
+          id: 'toast-principal',
+        });
+      }
     },
   });
 
