@@ -16,17 +16,16 @@ import {
   useBreakpointValue,
   Input,
   Select,
-  Textarea,
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
 import { TextError } from 'components/TextError';
 
-import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
+import { useCadastroAtividade } from 'hooks/useCadastroAtividade';
 
-function ModalCadastrarProjetoTipo() {
+function ModalCadastroAtividade() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroProjetoTipo();
+  const { registerForm, loading } = useCadastroAtividade();
 
   const handleCadastrar = () => {
     registerForm.handleSubmit();
@@ -48,7 +47,7 @@ function ModalCadastrarProjetoTipo() {
         }}
         onClick={onOpen}
       >
-        Projeto
+        Atividade
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
@@ -61,7 +60,7 @@ function ModalCadastrarProjetoTipo() {
             color={'white'}
             fontSize={'1em'}
           >
-            Cadastrar Projeto Tipo
+            Cadastrar Atividade
           </ModalHeader>
           <ModalCloseButton color={'white'} />
           <form
@@ -103,24 +102,23 @@ function ModalCadastrarProjetoTipo() {
                         <FormLabel>NOME</FormLabel>
                         <Input
                           isRequired
-                          placeholder="Nome da Campanha"
-                          id="nomeProjeto"
+                          placeholder="Digite o nome da atividade"
+                          id="nomeAtividade"
                           type="text"
-                          name="nomeProjeto"
-                          value={registerForm.values.nomeProjeto}
+                          name="nomeAtividade"
+                          value={registerForm.values.nomeAtividade}
                           onChange={registerForm.handleChange}
                         />
-                        {registerForm.errors.nomeProjeto &&
-                          registerForm.touched.nomeProjeto && (
+                        {registerForm.errors.nomeAtividade &&
+                          registerForm.touched.nomeAtividade && (
                             <TextError>
-                              {registerForm.errors.nomeProjeto}
+                              {registerForm.errors.nomeAtividade}
                             </TextError>
                           )}
                       </FormControl>
                     </Flex>
-                  </Stack>
-                  <Stack>
-                    <FormLabel>ATIVIDADE</FormLabel>
+
+                    <FormLabel>RESPONSÁVEL</FormLabel>
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: 'column',
@@ -129,31 +127,12 @@ function ModalCadastrarProjetoTipo() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="atividadeId">ID</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Digite um id"
-                          id="atividadeId"
-                          type="text"
-                          name="atividadeId"
-                          value={registerForm.values.atividadeId}
-                          onChange={registerForm.handleChange}
-                        />
-                        {registerForm.errors.atividadeId &&
-                          registerForm.touched.atividadeId && (
-                            <TextError>
-                              {registerForm.errors.atividadeId}
-                            </TextError>
-                          )}
-                      </FormControl>
-
-                      <FormControl>
-                        <FormLabel>BASE</FormLabel>
+                        <FormLabel htmlFor="responsavel">NOME</FormLabel>
                         <Select
-                          id="atividadeBase"
-                          name="atividadeBase"
+                          id="responsavel"
+                          name="responsavel"
                           placeholder="Selecione"
-                          value={registerForm.values.atividadeBase}
+                          value={registerForm.values.responsavel}
                           onChange={registerForm.handleChange}
                         >
                           <option value="option1">Option 1</option>
@@ -163,75 +142,18 @@ function ModalCadastrarProjetoTipo() {
                       </FormControl>
 
                       <FormControl>
-                        <FormLabel>TAREFA</FormLabel>
+                        <FormLabel htmlFor="area">ÁREA</FormLabel>
                         <Select
-                          id="atividadeTarefa"
-                          name="atividadeTarefa"
+                          id="area"
+                          name="area"
                           placeholder="Selecione"
-                          value={registerForm.values.atividadeTarefa}
+                          value={registerForm.values.area}
                           onChange={registerForm.handleChange}
                         >
                           <option value="option1">Option 1</option>
                           <option value="option2">Option 2</option>
                           <option value="option3">Option 3</option>
                         </Select>
-                      </FormControl>
-
-                      <FormControl>
-                        <FormLabel>PRECEDENTES</FormLabel>
-                        <Select
-                          id="atividadePrecedente"
-                          name="atividadePrecedente"
-                          placeholder="Selecione"
-                          value={registerForm.values.atividadePrecedente}
-                          onChange={registerForm.handleChange}
-                        >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </Select>
-                      </FormControl>
-
-                      <FormControl>
-                        <FormLabel>DIAS</FormLabel>
-                        <Select
-                          id="atividadeDias"
-                          name="atividadeDias"
-                          placeholder="Selecione"
-                          value={registerForm.values.atividadeDias}
-                          onChange={registerForm.handleChange}
-                        >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </Select>
-                      </FormControl>
-                    </Flex>
-                  </Stack>
-                  <Stack>
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
-                      })}
-                      gap={5}
-                    >
-                      <FormControl>
-                        <FormLabel htmlFor="comentarios">COMENTÁRIOS</FormLabel>
-                        <Textarea
-                          isRequired
-                          placeholder="Adicione comentários sobre o projeto"
-                          id="comentarios"
-                          name="comentarios"
-                          value={registerForm.values.comentarios}
-                          onChange={registerForm.handleChange}
-                        />
-                        {registerForm.errors.comentarios &&
-                          registerForm.touched.comentarios && (
-                            <TextError>
-                              {registerForm.errors.comentarios}
-                            </TextError>
-                          )}
                       </FormControl>
                     </Flex>
                   </Stack>
@@ -281,4 +203,4 @@ function ModalCadastrarProjetoTipo() {
   );
 }
 
-export default ModalCadastrarProjetoTipo;
+export default ModalCadastroAtividade;
