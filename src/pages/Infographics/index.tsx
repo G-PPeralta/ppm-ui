@@ -13,6 +13,7 @@ import ExibirModal from './Components/ExibirModal';
 import FiltrosModal from './Components/FiltrosModal';
 import ModalBotaoCadastrar from './Components/ModalBotaoCadastrar';
 // import { RegisterProjectType } from './Components/RegisterProjectType';
+import ModalCadastrarProjetoTipo from './Components/ModalCadastrarProjetoTipo';
 import StatusProjeto from './Components/StatusProjeto';
 
 export function Infographics() {
@@ -96,20 +97,7 @@ export function Infographics() {
                     >
                       Sonda
                     </Button>
-                    <Button
-                      variant="outline"
-                      border={'2px solid'}
-                      borderColor={'origem.500'}
-                      textColor={'origem.500'}
-                      _hover={{
-                        borderColor: 'origem.600',
-                        backgroundColor: 'origem.500',
-                        textColor: 'white',
-                        transition: 'all 0.4s',
-                      }}
-                    >
-                      Projeto
-                    </Button>
+                    <ModalCadastrarProjetoTipo />
                     <Button
                       variant="outline"
                       border={'2px solid'}

@@ -5,32 +5,32 @@ import { registerProjectTypeSchema } from 'validations/RegisterProjectType';
 
 import { useToast } from 'contexts/Toast';
 
-export function useRegisterProjectType() {
+export function useCadastroProjetoTipo() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
   const registerForm = useFormik({
     initialValues: {
-      nameId: '',
-      projectName: '',
-      activityId: '',
-      activityBase: '',
-      activityTask: '',
-      activityPrecedent: '',
-      activityDays: '',
-      comments: '',
+      nomeId: '',
+      nomeProjeto: '',
+      atividadeId: '',
+      atividadeBase: '',
+      atividadeTarefa: '',
+      atividadePrecedente: '',
+      atividadeDias: '',
+      comentarios: '',
     },
     validationSchema: registerProjectTypeSchema,
     onSubmit: async (values) => {
       const newValues = {
-        nameId: values.nameId,
-        projectName: values.projectName,
-        activityId: values.activityId,
-        activityBase: values.activityBase,
-        activityTask: values.activityTask,
-        activityPrecedent: values.activityPrecedent,
-        activityDays: values.activityDays,
-        comments: values.comments,
+        nomeId: values.nomeId,
+        nomeProjeto: values.nomeProjeto,
+        atividadeId: values.atividadeId,
+        atividadeBase: values.atividadeBase,
+        atividadeTarefa: values.atividadeTarefa,
+        atividadePrecedente: values.atividadePrecedente,
+        atividadeDias: values.atividadeDias,
+        comentarios: values.comentarios,
       };
 
       setLoading(true);

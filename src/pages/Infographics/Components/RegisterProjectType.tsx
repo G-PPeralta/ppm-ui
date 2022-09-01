@@ -19,7 +19,7 @@ import {
   Center,
 } from '@chakra-ui/react';
 
-import { useRegisterProjectType } from '../../../hooks/useRegisterProjectType';
+// import { useRegisterProjectType } from '../../../hooks/useRegisterProjectType';
 import styles from './RegisterProjectType.module.scss';
 
 type Props = {
@@ -28,7 +28,7 @@ type Props = {
 };
 
 export function RegisterProjectType({ isOpen, onClose }: Props) {
-  const { registerForm, loading } = useRegisterProjectType();
+  // const { registerForm, loading } = useRegisterProjectType();
 
   // console.log(registerForm.isValid);
   return (
@@ -58,7 +58,7 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              registerForm.handleSubmit(e);
+              // registerForm.handleSubmit(e);
             }}
           >
             <Flex gap={2} marginBottom={5}>
@@ -73,8 +73,8 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
                   color="#D6D4D4"
                   id="nameId"
                   name="nameId"
-                  value={registerForm.values.nameId}
-                  onChange={registerForm.handleChange}
+                  // value={registerForm.values.nameId}
+                  // onChange={registerForm.handleChange}
                 />
               </Box>
               <Box>
@@ -88,8 +88,8 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
                   _placeholder={{ color: '#D6D4D4' }}
                   id="projectName"
                   name="projectName"
-                  value={registerForm.values.projectName}
-                  onChange={registerForm.handleChange}
+                  // value={registerForm.values.projectName}
+                  // onChange={registerForm.handleChange}
                 />
               </Box>
             </Flex>
@@ -114,8 +114,8 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
                   _placeholder={{ color: '#D6D4D4', fontSize: '12px' }}
                   id="activityId"
                   name="activityId"
-                  value={registerForm.values.activityId}
-                  onChange={registerForm.handleChange}
+                  // value={registerForm.values.activityId}
+                  // onChange={registerForm.handleChange}
                 />
               </Box>
               <Box>
@@ -130,8 +130,8 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
                   width={'6.4em'}
                   id="activityBase"
                   name="activityBase"
-                  value={registerForm.values.activityBase}
-                  onChange={registerForm.handleChange}
+                  // value={registerForm.values.activityBase}
+                  // onChange={registerForm.handleChange}
                 >
                   <option value="option1">Option 1</option>
                   <option value="option2">Option 2</option>
@@ -150,8 +150,8 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
                   width={60}
                   id="activityTask"
                   name="activityTask"
-                  value={registerForm.values.activityTask}
-                  onChange={registerForm.handleChange}
+                  // value={registerForm.values.activityTask}
+                  // onChange={registerForm.handleChange}
                 >
                   <option value="option1">Option 1</option>
                   <option value="option2">Option 2</option>
@@ -170,8 +170,8 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
                   width={60}
                   id="activityPrecedent"
                   name="activityPrecedent"
-                  value={registerForm.values.activityPrecedent}
-                  onChange={registerForm.handleChange}
+                  // value={registerForm.values.activityPrecedent}
+                  // onChange={registerForm.handleChange}
                 >
                   <option value="option1">Option 1</option>
                   <option value="option2">Option 2</option>
@@ -190,8 +190,8 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
                   width={'6.4em'}
                   id="activityDays"
                   name="activityDays"
-                  value={registerForm.values.activityDays}
-                  onChange={registerForm.handleChange}
+                  // value={registerForm.values.activityDays}
+                  // onChange={registerForm.handleChange}
                 >
                   <option value="option1">Option 1</option>
                   <option value="option2">Option 2</option>
@@ -315,9 +315,9 @@ export function RegisterProjectType({ isOpen, onClose }: Props) {
               mr={3}
               type="submit"
               color="white"
-              disabled={!registerForm.isValid}
+              // disabled={!registerForm.isValid}
             >
-              {loading ? 'Carregando' : 'Concluir cadastro'}
+              {/* {loading ? 'Carregando' : 'Concluir cadastro'} */}
             </Button>
           </Center>
         </ModalFooter>
