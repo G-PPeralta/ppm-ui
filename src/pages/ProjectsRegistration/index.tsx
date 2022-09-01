@@ -165,7 +165,7 @@ export function ProjectsRegistration() {
                         })}
                       >
                         <FormValorTotalPrevisto projectsForm={projectsForm} />
-                        <FormValorTotalPrevisto projectsForm={projectsForm} />
+                        {/* <FormValorTotalPrevisto projectsForm={projectsForm} /> */}
                         <FormComplexidade projectsForm={projectsForm} />
                       </Flex>
                       <Flex
