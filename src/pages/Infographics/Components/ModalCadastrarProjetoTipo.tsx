@@ -71,7 +71,6 @@ function ModalCadastrarProjetoTipo() {
               <FormControl>
                 <Flex direction={'column'} gap={4}>
                   <Stack>
-                    <FormLabel>NOME</FormLabel>
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: 'column',
@@ -80,27 +79,10 @@ function ModalCadastrarProjetoTipo() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="nomeId">ID</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Digite um id"
-                          id="nomeId"
-                          type="text"
-                          name="nomeId"
-                          value={registerForm.values.nomeId}
-                          onChange={registerForm.handleChange}
-                        />
-                        {registerForm.errors.nomeId &&
-                          registerForm.touched.nomeId && (
-                            <TextError>{registerForm.errors.nomeId}</TextError>
-                          )}
-                      </FormControl>
-
-                      <FormControl>
                         <FormLabel>NOME</FormLabel>
                         <Input
                           isRequired
-                          placeholder="Nome da Campanha"
+                          placeholder="Nome do Tipo de Intervenção"
                           id="nomeProjeto"
                           type="text"
                           name="nomeProjeto"
@@ -125,25 +107,6 @@ function ModalCadastrarProjetoTipo() {
                       })}
                       gap={5}
                     >
-                      <FormControl>
-                        <FormLabel htmlFor="atividadeId">ID</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Digite um id"
-                          id="atividadeId"
-                          type="text"
-                          name="atividadeId"
-                          value={registerForm.values.atividadeId}
-                          onChange={registerForm.handleChange}
-                        />
-                        {registerForm.errors.atividadeId &&
-                          registerForm.touched.atividadeId && (
-                            <TextError>
-                              {registerForm.errors.atividadeId}
-                            </TextError>
-                          )}
-                      </FormControl>
-
                       <FormControl>
                         <FormLabel>BASE</FormLabel>
                         <Select

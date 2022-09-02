@@ -13,7 +13,6 @@ export function useCadastroAtividade() {
 
   const registerForm = useFormik({
     initialValues: {
-      nomeId: '',
       nomeAtividade: '',
       responsavel: '',
       area: '',
@@ -31,7 +30,6 @@ export function useCadastroAtividade() {
     validationSchema: cadastroAtividadeSchema,
     onSubmit: async (values) => {
       const newValues = {
-        nomeId: values.nomeId,
         nomeAtividade: values.nomeAtividade,
         responsavel: values.responsavel,
         area: values.area,

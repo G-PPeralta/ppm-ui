@@ -71,7 +71,6 @@ function ModalCadastroAtividade() {
               <FormControl>
                 <Flex direction={'column'} gap={4}>
                   <Stack>
-                    <FormLabel>NOME</FormLabel>
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: 'column',
@@ -79,23 +78,6 @@ function ModalCadastroAtividade() {
                       })}
                       gap={5}
                     >
-                      <FormControl>
-                        <FormLabel htmlFor="nomeId">ID</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Digite um id"
-                          id="nomeId"
-                          type="text"
-                          name="nomeId"
-                          value={registerForm.values.nomeId}
-                          onChange={registerForm.handleChange}
-                        />
-                        {registerForm.errors.nomeId &&
-                          registerForm.touched.nomeId && (
-                            <TextError>{registerForm.errors.nomeId}</TextError>
-                          )}
-                      </FormControl>
-
                       <FormControl>
                         <FormLabel>NOME</FormLabel>
                         <Input
@@ -163,21 +145,6 @@ function ModalCadastroAtividade() {
                       })}
                       gap={5}
                     >
-                      <FormControl>
-                        <FormLabel htmlFor="precedente[0].id">ID</FormLabel>
-                        <Select
-                          id="precedente[0].id"
-                          name="precedente[0].id"
-                          placeholder="Selecione"
-                          value={registerForm.values.precedente[0].id}
-                          onChange={registerForm.handleChange}
-                        >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </Select>
-                      </FormControl>
-
                       <FormControl>
                         <FormLabel htmlFor="precedente[0].tarefa">
                           TAREFA
