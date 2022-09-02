@@ -16,6 +16,7 @@ import {
   useBreakpointValue,
   Input,
   Select,
+  Textarea,
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
@@ -154,6 +155,123 @@ function ModalCadastroAtividade() {
                           <option value="option2">Option 2</option>
                           <option value="option3">Option 3</option>
                         </Select>
+                      </FormControl>
+                    </Flex>
+
+                    <FormLabel>PRECEDENTES</FormLabel>
+                    <Flex
+                      flexDirection={useBreakpointValue({
+                        base: 'column',
+                        md: 'row',
+                      })}
+                      gap={5}
+                    >
+                      <FormControl>
+                        <FormLabel htmlFor="precedente[0].id">ID</FormLabel>
+                        <Select
+                          id="precedente[0].id"
+                          name="precedente[0].id"
+                          placeholder="Selecione"
+                          value={registerForm.values.precedente[0].id}
+                          onChange={registerForm.handleChange}
+                        >
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
+                      </FormControl>
+
+                      <FormControl>
+                        <FormLabel htmlFor="precedente[0].tarefa">
+                          TAREFA
+                        </FormLabel>
+                        <Select
+                          id="precedente[0].tarefa"
+                          name="precedente[0].tarefa"
+                          placeholder="Selecione"
+                          value={registerForm.values.precedente[0].tarefa}
+                          onChange={registerForm.handleChange}
+                        >
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
+                      </FormControl>
+
+                      <FormControl>
+                        <FormLabel htmlFor="precedente[0].tipo">TIPO</FormLabel>
+                        <Select
+                          id="precedente[0].tipo"
+                          name="precedente[0].tipo"
+                          placeholder="Selecione"
+                          value={registerForm.values.precedente[0].tipo}
+                          onChange={registerForm.handleChange}
+                        >
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
+                      </FormControl>
+
+                      <FormControl>
+                        <FormLabel>DIAS</FormLabel>
+                        <Input
+                          isRequired
+                          placeholder="Digite o nome da atividade"
+                          id="precedente[0].dias"
+                          type="number"
+                          name="precedente[0].dias"
+                          value={registerForm.values.precedente[0].dias}
+                          onChange={registerForm.handleChange}
+                        />
+                        {/* {registerForm.errors.precedente[0].dias &&
+                          registerForm.touched.precedente[0].dias && (
+                            <TextError>
+                              {registerForm.errors.precedente[0].dias}
+                            </TextError>
+                          )} */}
+                      </FormControl>
+
+                      <FormControl>
+                        <FormLabel htmlFor="precedente[0].restricao">
+                          RESTRIÇÃO
+                        </FormLabel>
+                        <Select
+                          id="precedente[0].restricao"
+                          name="precedente[0].restricao"
+                          placeholder="Selecione"
+                          value={registerForm.values.precedente[0].restricao}
+                          onChange={registerForm.handleChange}
+                        >
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
+                      </FormControl>
+                    </Flex>
+                    <Flex
+                      flexDirection={useBreakpointValue({
+                        base: 'column',
+                        md: 'row',
+                      })}
+                      gap={5}
+                    >
+                      <FormControl>
+                        <FormLabel htmlFor="comentarios">COMENTÁRIOS</FormLabel>
+                        <Textarea
+                          isRequired
+                          placeholder="Adicione comentários sobre a atividade"
+                          id="comentarios"
+                          name="comentarios"
+                          value={registerForm.values.comentarios}
+                          onChange={registerForm.handleChange}
+                        />
+                        {registerForm.errors.comentarios &&
+                          registerForm.touched.comentarios && (
+                            <TextError>
+                              {registerForm.errors.comentarios}
+                            </TextError>
+                          )}
                       </FormControl>
                     </Flex>
                   </Stack>

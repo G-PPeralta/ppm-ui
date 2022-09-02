@@ -48,11 +48,13 @@ export function useCadastroAtividade() {
           toast.success('Atividade cadastrada com sucesso!', {
             id: 'toast-principal',
           });
+          setLoading(false);
         }
       } catch (error) {
-        toast.error('Erro ao cadastrar intervenção!', {
+        toast.error('Erro ao cadastrar atividade!', {
           id: 'toast-principal',
         });
+        setLoading(false);
       }
     },
   });
