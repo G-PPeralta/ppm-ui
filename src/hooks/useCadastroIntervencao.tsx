@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 import { useFormik } from 'formik';
-import { formCadastroIntervencao } from 'validations/CadastroIntervencao';
+import { cadastroIntervencaoSchema } from 'validations/ModaisCadastrosInfografico';
 
 import { useToast } from 'contexts/Toast';
 
-import { postIntervencao } from 'services/post/CadastroIntervencao';
+import { postCadastroIntervencao } from 'services/post/CadastroModaisInfograficos';
 
 export function useCadastroIntervencao() {
   const { toast } = useToast();
@@ -21,7 +21,7 @@ export function useCadastroIntervencao() {
       projeto: '',
       observacoes: '',
     },
-    validationSchema: formCadastroIntervencao,
+    validationSchema: cadastroIntervencaoSchema,
     onSubmit: async (values) => {
       const newValues = {
         poco: values.poco,
@@ -36,7 +36,7 @@ export function useCadastroIntervencao() {
       setLoading(true);
 
       try {
-        const { status } = await postIntervencao(newValues);
+        const { status } = await postCadastroIntervencao(newValues);
 
         if (status === 200 || status === 201) {
           toast.success('Intervenção cadastrada com sucesso!', {

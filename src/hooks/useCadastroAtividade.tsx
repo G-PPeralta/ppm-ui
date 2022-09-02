@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 import { useFormik } from 'formik';
-import { cadastroAtividadeSchema } from 'validations/CadastroAtividade';
+import { cadastroAtividadeSchema } from 'validations/ModaisCadastrosInfografico';
 
 import { useToast } from 'contexts/Toast';
 
-import { postCadastroAtividade } from 'services/post/CadastroAtividade';
+import { postCadastroAtividade } from 'services/post/CadastroModaisInfograficos';
 
 export function useCadastroAtividade() {
   const { toast } = useToast();

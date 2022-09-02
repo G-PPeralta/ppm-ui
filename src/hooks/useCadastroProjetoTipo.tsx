@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 import { useFormik } from 'formik';
-import { registerProjectTypeSchema } from 'validations/RegisterProjectType';
+import { cadastroProjetoTipoSchema } from 'validations/ModaisCadastrosInfografico';
 
 import { useToast } from 'contexts/Toast';
 
-import { postProjetoTipo } from 'services/post/CadastroProjetoTipo';
+import { postProjetoTipo } from 'services/post/CadastroModaisInfograficos';
 
 export function useCadastroProjetoTipo() {
   const { toast } = useToast();
@@ -22,7 +22,7 @@ export function useCadastroProjetoTipo() {
       atividadeDias: '',
       comentarios: '',
     },
-    validationSchema: registerProjectTypeSchema,
+    validationSchema: cadastroProjetoTipoSchema,
     onSubmit: async (values) => {
       const newValues = {
         nomeId: values.nomeId,

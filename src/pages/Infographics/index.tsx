@@ -1,24 +1,23 @@
 import { useEffect, useState } from 'react';
 
-import { Box, Button, Flex, Heading, Stack } from '@chakra-ui/react';
+import { Box, Flex, Heading, Stack } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
 import Sidebar from 'components/SideBar';
 
 import { getInfoCampanha } from 'services/get/Infograficos';
 
-// import BotaoCadastrar from './Components/BotaoCadastrar';
 import ColumnSPT from './Components/ColumnSPT';
 import ExibirModal from './Components/ExibirModal';
 import FiltrosModal from './Components/FiltrosModal';
 import ModalBotaoCadastrar from './Components/ModalBotaoCadastrar';
-// import { RegisterProjectType } from './Components/RegisterProjectType';
 import ModalCadastrarProjetoTipo from './Components/ModalCadastrarProjetoTipo';
+import ModalCadastrarSonda from './Components/ModalCadastrarSonda';
+import ModalCadastrarTarefa from './Components/ModalCadastrarTarefa';
 import ModalCadastroAtividade from './Components/ModalCadastroAtividade';
 import StatusProjeto from './Components/StatusProjeto';
 
 export function Infographics() {
-  // const [modalIsVisible, setModalIsVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [campanhas, setCampanhas] = useState([]);
 
@@ -58,11 +57,6 @@ export function Infographics() {
   return (
     <>
       <Sidebar>
-        {/* <button onClick={() => setModalIsVisible(true)}>Modal</button>
-        <RegisterProjectType
-          isOpen={modalIsVisible}
-          onClose={() => setModalIsVisible(false)}
-        /> */}
         {!loading ? (
           <Stack spacing="8">
             <Flex w={'auto'} align="center" justify="center" bg={'#EDF2F7'}>
@@ -84,22 +78,10 @@ export function Infographics() {
                 </Flex>
                 <Flex justify={'space-between'} gap={6} wrap={'wrap'} mb={4}>
                   <Flex gap={2}>
-                    <Button
-                      variant="outline"
-                      border={'2px solid'}
-                      borderColor={'origem.500'}
-                      textColor={'origem.500'}
-                      _hover={{
-                        borderColor: 'origem.600',
-                        backgroundColor: 'origem.500',
-                        textColor: 'white',
-                        transition: 'all 0.4s',
-                      }}
-                    >
-                      Sonda
-                    </Button>
+                    <ModalCadastrarSonda />
                     <ModalCadastrarProjetoTipo />
                     <ModalCadastroAtividade />
+                    <ModalCadastrarTarefa />
                   </Flex>
                   <Flex gap={4} wrap={'wrap'}>
                     {statusProjeto.map((status, index) => (
