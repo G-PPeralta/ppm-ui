@@ -44,11 +44,13 @@ export function useCadastroProjetoTipo() {
           toast.success('Projeto Tipo cadastrado com sucesso!', {
             id: 'toast-principal',
           });
+          setLoading(false);
         }
       } catch (error) {
         toast.error('Erro ao cadastrar intervenção!', {
           id: 'toast-principal',
         });
+        setLoading(false);
       }
     },
   });

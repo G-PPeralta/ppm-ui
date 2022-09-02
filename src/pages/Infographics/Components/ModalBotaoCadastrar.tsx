@@ -27,14 +27,12 @@ import { TextError } from 'components/TextError';
 
 import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
 
-import { postIntervencao } from 'services/post/CadastroIntervencao';
-
 function ModalBotaoCadastrar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { intervencaoForm, loading } = useCadastroIntervencao();
 
   const handleCadastrar = () => {
-    postIntervencao(intervencaoForm.values);
+    intervencaoForm.handleSubmit();
     onClose();
   };
 
