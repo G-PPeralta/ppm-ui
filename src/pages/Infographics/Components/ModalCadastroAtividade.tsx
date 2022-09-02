@@ -22,16 +22,13 @@ import { Ring } from '@uiball/loaders';
 
 import { TextError } from 'components/TextError';
 
+import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
+
 import { useCadastroAtividade } from 'hooks/useCadastroAtividade';
 
 function ModalCadastroAtividade() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroAtividade();
-
-  const handleCadastrar = () => {
-    registerForm.handleSubmit();
-    onClose();
-  };
 
   return (
     <>
@@ -284,7 +281,7 @@ function ModalCadastroAtividade() {
                 <Button
                   variant="ghost"
                   color="red"
-                  onClick={() => onClose()}
+                  onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: 'red.500',
                     transition: 'all 0.4s',
@@ -298,7 +295,7 @@ function ModalCadastroAtividade() {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar()}
+                  onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
                     background: 'origem.500',
                     transition: 'all 0.4s',

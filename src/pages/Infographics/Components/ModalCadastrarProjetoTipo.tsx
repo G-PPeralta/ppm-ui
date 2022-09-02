@@ -22,16 +22,13 @@ import { Ring } from '@uiball/loaders';
 
 import { TextError } from 'components/TextError';
 
+import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
+
 import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
 
 function ModalCadastrarProjetoTipo() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroProjetoTipo();
-
-  const handleCadastrar = () => {
-    registerForm.handleSubmit();
-    onClose();
-  };
 
   return (
     <>
@@ -244,7 +241,7 @@ function ModalCadastrarProjetoTipo() {
                 <Button
                   variant="ghost"
                   color="red"
-                  onClick={() => onClose()}
+                  onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: 'red.500',
                     transition: 'all 0.4s',
@@ -258,7 +255,7 @@ function ModalCadastrarProjetoTipo() {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar()}
+                  onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
                     background: 'origem.500',
                     transition: 'all 0.4s',
