@@ -154,7 +154,7 @@ function ModalCadastroAtividade() {
                           id="precedente[0].tarefa"
                           name="precedente[0].tarefa"
                           placeholder="Selecione"
-                          value={registerForm.values.precedente[0].tarefa}
+                          value={registerForm.values.precedente[0].atividade}
                           onChange={registerForm.handleChange}
                         >
                           <option value="option1">Option 1</option>

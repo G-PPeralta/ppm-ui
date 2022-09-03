@@ -35,10 +35,11 @@ export function useCadastroAtividade() {
       nomeAtividade: '',
       responsavel: '',
       area: '',
+      tarefa: '',
       precedente: [
         {
-          id: '',
-          tarefa: '',
+          ordem: 1,
+          atividade: '',
           tipo: '',
           dias: 0,
           restricao: '',
@@ -49,11 +50,13 @@ export function useCadastroAtividade() {
     validationSchema: cadastroAtividadeSchema,
     onSubmit: async (values) => {
       const newValues = {
-        nomeAtividade: values.nomeAtividade,
-        responsavel: values.responsavel,
-        area: values.area,
-        precedente: values.precedente,
-        comentarios: values.comentarios,
+        nome: values.nomeAtividade,
+        prioridade: false,
+        responsavelId: parseInt(values.responsavel),
+        areaAtuacaoId: parseInt(values.area),
+        // atividadesPrecedentes: values.precedente,
+        obs: values.comentarios,
+        tarefaId: 50, // Precisa colocar o campo de tarefa
       };
 
       setLoading(true);

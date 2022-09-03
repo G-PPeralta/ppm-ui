@@ -26,16 +26,19 @@ export interface CadastroIntervencao {
 }
 
 interface Precedente {
-  tarefa: string;
+  ordem: number;
+  atividaeId: number | null;
   tipo: string;
   dias: number;
   restricao: string;
 }
 
 export interface CadastroAtividade {
-  nomeAtividade: string;
-  responsavel: string;
-  area: string;
-  precedente: Precedente[];
-  comentarios: string;
+  nome: string;
+  prioridade: boolean;
+  obs: string;
+  responsavelId: number;
+  tarefaId: number;
+  areaAtuacaoId: number;
+  atividadesPrecedentes?: Precedente[];
 }
