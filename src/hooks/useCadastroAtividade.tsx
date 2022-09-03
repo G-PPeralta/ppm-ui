@@ -1,15 +1,25 @@
 import { useState } from 'react';
 
 import { useFormik } from 'formik';
+import { RegistroResponsavel } from 'interfaces/Services';
 import { cadastroAtividadeSchema } from 'validations/ModaisCadastrosInfografico';
 
 import { useToast } from 'contexts/Toast';
 
+import { getResponsavelList } from 'services/get/Infograficos';
 import { postCadastroAtividade } from 'services/post/CadastroModaisInfograficos';
 
 export function useCadastroAtividade() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [ListaResponsavel, setListaResponsavel] = useState<
+    RegistroResponsavel[]
+  >([]);
+
+  const carregarListaResponsavel = async () => {
+    const { data } = await getResponsavelList();
+    setListaResponsavel(data);
+  };
 
   const registerForm = useFormik({
     initialValues: {
@@ -57,8 +67,11 @@ export function useCadastroAtividade() {
     },
   });
 
+  carregarListaResponsavel();
+
   return {
     registerForm,
     loading,
+    ListaResponsavel,
   };
 }

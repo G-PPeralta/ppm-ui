@@ -241,7 +241,8 @@ export interface ProjetosInfo {
 }
 
 export interface RegistroResponsavel {
-  nomeResponsavel: string;
+  id?: number;
+  nome: string;
 }
 
 export interface Responsaveis {
