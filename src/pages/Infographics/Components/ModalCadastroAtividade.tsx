@@ -28,7 +28,8 @@ import { useCadastroAtividade } from 'hooks/useCadastroAtividade';
 
 function ModalCadastroAtividade() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, ListaResponsavel } = useCadastroAtividade();
+  const { registerForm, loading, ListaResponsavel, listaArea } =
+    useCadastroAtividade();
 
   return (
     <>
@@ -130,9 +131,9 @@ function ModalCadastroAtividade() {
                           value={registerForm.values.area}
                           onChange={registerForm.handleChange}
                         >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
+                          {listaArea.map((data) => (
+                            <option value={data.id}>{data.tipo}</option>
+                          ))}
                         </Select>
                       </FormControl>
                     </Flex>

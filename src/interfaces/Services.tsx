@@ -255,3 +255,9 @@ export interface RegistroCoordenador {
 export interface Coordenadores {
   coordenadores: RegistroCoordenador[];
 }
+
+export interface AreaAtuacao {
+  id?: number;
+  tipo: string;
+  deletado: boolean;
+}

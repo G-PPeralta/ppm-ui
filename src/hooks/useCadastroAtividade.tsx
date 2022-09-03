@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useFormik } from 'formik';
-import { RegistroResponsavel } from 'interfaces/Services';
+import { AreaAtuacao, RegistroResponsavel } from 'interfaces/Services';
 import { cadastroAtividadeSchema } from 'validations/ModaisCadastrosInfografico';
 
 import { useToast } from 'contexts/Toast';
 
-import { getResponsavelList } from 'services/get/Infograficos';
+import {
+  getAreaAtuacaoList,
+  getResponsavelList,
+} from 'services/get/Infograficos';
 import { postCadastroAtividade } from 'services/post/CadastroModaisInfograficos';
 
 export function useCadastroAtividade() {
@@ -15,10 +18,16 @@ export function useCadastroAtividade() {
   const [ListaResponsavel, setListaResponsavel] = useState<
     RegistroResponsavel[]
   >([]);
+  const [listaArea, setListaArea] = useState<AreaAtuacao[]>([]);
 
   const carregarListaResponsavel = async () => {
     const { data } = await getResponsavelList();
     setListaResponsavel(data);
+  };
+
+  const carregarAreaAtuacao = async () => {
+    const { data } = await getAreaAtuacaoList();
+    setListaArea(data);
   };
 
   const registerForm = useFormik({
@@ -67,11 +76,15 @@ export function useCadastroAtividade() {
     },
   });
 
-  carregarListaResponsavel();
+  useEffect(() => {
+    carregarListaResponsavel();
+    carregarAreaAtuacao();
+  }, []);
 
   return {
     registerForm,
     loading,
     ListaResponsavel,
+    listaArea,
   };
 }
