@@ -28,8 +28,13 @@ import { useCadastroAtividade } from 'hooks/useCadastroAtividade';
 
 function ModalCadastroAtividade() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, ListaResponsavel, listaArea } =
-    useCadastroAtividade();
+  const {
+    registerForm,
+    loading,
+    ListaResponsavel,
+    listaArea,
+    listaAtividades,
+  } = useCadastroAtividade();
 
   return (
     <>
@@ -147,19 +152,19 @@ function ModalCadastroAtividade() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="precedente[0].tarefa">
-                          TAREFA
+                        <FormLabel htmlFor="precedente[0].atividade">
+                          ATIVIDADE
                         </FormLabel>
                         <Select
-                          id="precedente[0].tarefa"
-                          name="precedente[0].tarefa"
+                          id="precedente[0].atividade"
+                          name="precedente[0].atividade"
                           placeholder="Selecione"
                           value={registerForm.values.precedente[0].atividade}
                           onChange={registerForm.handleChange}
                         >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
+                          {listaAtividades.map((data) => (
+                            <option value={data.id}>{data.nome}</option>
+                          ))}
                         </Select>
                       </FormControl>
 

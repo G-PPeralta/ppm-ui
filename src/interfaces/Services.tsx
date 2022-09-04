@@ -261,3 +261,8 @@ export interface AreaAtuacao {
   tipo: string;
   deletado: boolean;
 }
+
+export interface AtividadeLista {
+  id: number;
+  nome: string;
+}

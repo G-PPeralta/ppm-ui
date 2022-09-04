@@ -1,4 +1,8 @@
-import { AreaAtuacao, RegistroResponsavel } from 'interfaces/Services';
+import {
+  AreaAtuacao,
+  AtividadeLista,
+  RegistroResponsavel,
+} from 'interfaces/Services';
 
 import { api } from 'services/api';
 
@@ -33,6 +37,19 @@ export async function getAreaAtuacaoList(): Promise<{
   status: number;
 }> {
   const { data, status } = await api.get(`/area-atuacao`, {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
+    },
+  });
+
+  return { data, status };
+}
+
+export async function getAtividadesList(): Promise<{
+  data: AtividadeLista[];
+  status: number;
+}> {
+  const { data, status } = await api.get(`/atividades-intervencoes`, {
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
     },
