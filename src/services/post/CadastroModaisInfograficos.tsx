@@ -11,7 +11,7 @@ import { api } from 'services/api';
 export async function postCadastroTarefa(
   payload: CadastroTarefa,
 ): Promise<{ status: number }> {
-  const { status } = await api.post('/', payload);
+  const { status } = await api.post('/tarefa', payload);
   return { status };
 }
 

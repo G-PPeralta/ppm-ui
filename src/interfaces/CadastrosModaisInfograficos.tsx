@@ -3,7 +3,7 @@ export interface CadastroSonda {
 }
 
 export interface CadastroTarefa {
-  nomeTarefa: string;
+  tarefa: string;
 }
 
 export interface CadastroProjetoTipo {

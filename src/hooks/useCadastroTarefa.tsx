@@ -18,7 +18,7 @@ export function useCadastroTarefa() {
     validationSchema: cadastroTarefaSchema,
     onSubmit: async (values) => {
       const newValues = {
-        nomeTarefa: values.nomeTarefa,
+        tarefa: values.nomeTarefa,
       };
 
       setLoading(true);
