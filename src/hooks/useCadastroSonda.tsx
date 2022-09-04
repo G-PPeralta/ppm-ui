@@ -18,7 +18,7 @@ export function useCadastroSonda() {
     validationSchema: cadastroSondaSchema,
     onSubmit: async (values) => {
       const newValues = {
-        nomeSpt: values.nomeSpt,
+        nome: values.nomeSpt,
       };
 
       setLoading(true);

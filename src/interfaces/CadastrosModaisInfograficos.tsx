@@ -1,5 +1,5 @@
 export interface CadastroSonda {
-  nomeSpt: string;
+  nome: string;
 }
 
 export interface CadastroTarefa {

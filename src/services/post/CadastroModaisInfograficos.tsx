@@ -18,7 +18,7 @@ export async function postCadastroTarefa(
 export async function postCadastroSonda(
   payload: CadastroSonda,
 ): Promise<{ status: number }> {
-  const { status } = await api.post('/', payload);
+  const { status } = await api.post('/sonda', payload);
   return { status };
 }
 
