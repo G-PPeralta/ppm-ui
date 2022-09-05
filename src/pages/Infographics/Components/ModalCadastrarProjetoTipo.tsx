@@ -19,6 +19,7 @@ import {
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
+import ListDnD from 'components/ListDnD';
 import { TextError } from 'components/TextError';
 
 import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
@@ -48,7 +49,7 @@ function ModalCadastrarProjetoTipo() {
       >
         Projeto
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -109,6 +110,8 @@ function ModalCadastrarProjetoTipo() {
                       />
                     ),
                   )}
+
+                  <ListDnD />
 
                   <Stack>
                     <Flex
