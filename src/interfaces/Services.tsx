@@ -241,7 +241,8 @@ export interface ProjetosInfo {
 }
 
 export interface RegistroResponsavel {
-  nomeResponsavel: string;
+  id?: number;
+  nome: string;
 }
 
 export interface Responsaveis {
@@ -253,4 +254,15 @@ export interface RegistroCoordenador {
 
 export interface Coordenadores {
   coordenadores: RegistroCoordenador[];
+}
+
+export interface AreaAtuacao {
+  id?: number;
+  tipo: string;
+  deletado: boolean;
+}
+
+export interface AtividadeLista {
+  id: number;
+  nome: string;
 }

@@ -1,3 +1,7 @@
 {
-  "conventionalCommits.scopes": ["wip"]
+  "conventionalCommits.scopes": ["wip"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": ["javascript"]
 }

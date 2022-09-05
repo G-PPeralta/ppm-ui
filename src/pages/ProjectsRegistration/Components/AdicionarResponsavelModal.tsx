@@ -28,7 +28,7 @@ import { postResponsavel } from 'services/post/ProjectRegister';
 export function AdicionarResponsavelModal(projectsForm: any) {
   const [numeroDeResponsaveis, setNumeroDeResponsaveis] = useState([
     {
-      nomeResponsavel: '',
+      nome: '',
     },
   ]);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -37,7 +37,7 @@ export function AdicionarResponsavelModal(projectsForm: any) {
     setNumeroDeResponsaveis([
       ...numeroDeResponsaveis,
       {
-        nomeResponsavel: '',
+        nome: '',
       },
     ]);
   }
@@ -56,7 +56,7 @@ export function AdicionarResponsavelModal(projectsForm: any) {
   function saveResponsible() {
     projectsForm.projectsForm.setFieldValue(
       'responsaveis',
-      numeroDeResponsaveis.filter((item) => item.nomeResponsavel !== ''),
+      numeroDeResponsaveis.filter((item) => item.nome !== ''),
     );
     const responsaveis = {
       responsaveis: numeroDeResponsaveis,
@@ -111,14 +111,14 @@ export function AdicionarResponsavelModal(projectsForm: any) {
             {numeroDeResponsaveis.map((responsavel: any, index: number) => (
               <Flex align="end" mb={3} key={index}>
                 <FormControl>
-                  <FormLabel htmlFor="nomeResponsavel">NOME</FormLabel>
+                  <FormLabel htmlFor="nome">NOME</FormLabel>
                   <Input
                     isRequired
                     placeholder="Nome do responsável"
                     type="text"
-                    id="nomeResponsavel"
-                    name="nomeResponsavel"
-                    value={responsavel.nomeResponsavel}
+                    id="nome"
+                    name="nome"
+                    value={responsavel.nome}
                     onChange={(event) => handleChange(event, index)}
                     width="100%"
                   />
