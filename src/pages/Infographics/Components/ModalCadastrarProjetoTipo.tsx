@@ -15,7 +15,6 @@ import {
   Stack,
   useBreakpointValue,
   Input,
-  Select,
   Textarea,
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
@@ -25,6 +24,8 @@ import { TextError } from 'components/TextError';
 import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
 
 import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
+
+import InputsNovaAtividade from './InputsNovaAtividade';
 
 function ModalCadastrarProjetoTipo() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -98,76 +99,13 @@ function ModalCadastrarProjetoTipo() {
                       </FormControl>
                     </Flex>
                   </Stack>
-                  <Stack>
-                    <FormLabel>ATIVIDADE</FormLabel>
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
-                      })}
-                      gap={5}
-                    >
-                      <FormControl>
-                        <FormLabel>BASE</FormLabel>
-                        <Select
-                          id="atividadeBase"
-                          name="atividadeBase"
-                          placeholder="Selecione"
-                          value={registerForm.values.atividadeBase}
-                          onChange={registerForm.handleChange}
-                        >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </Select>
-                      </FormControl>
 
-                      <FormControl>
-                        <FormLabel>TAREFA</FormLabel>
-                        <Select
-                          id="atividadeTarefa"
-                          name="atividadeTarefa"
-                          placeholder="Selecione"
-                          value={registerForm.values.atividadeTarefa}
-                          onChange={registerForm.handleChange}
-                        >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </Select>
-                      </FormControl>
+                  {registerForm.values.atividades.map(
+                    (_atividade: any, index: number) => (
+                      <InputsNovaAtividade key={index} index={index} />
+                    ),
+                  )}
 
-                      <FormControl>
-                        <FormLabel>PRECEDENTES</FormLabel>
-                        <Select
-                          id="atividadePrecedente"
-                          name="atividadePrecedente"
-                          placeholder="Selecione"
-                          value={registerForm.values.atividadePrecedente}
-                          onChange={registerForm.handleChange}
-                        >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </Select>
-                      </FormControl>
-
-                      <FormControl>
-                        <FormLabel>DIAS</FormLabel>
-                        <Select
-                          id="atividadeDias"
-                          name="atividadeDias"
-                          placeholder="Selecione"
-                          value={registerForm.values.atividadeDias}
-                          onChange={registerForm.handleChange}
-                        >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </Select>
-                      </FormControl>
-                    </Flex>
-                  </Stack>
                   <Stack>
                     <Flex
                       flexDirection={useBreakpointValue({

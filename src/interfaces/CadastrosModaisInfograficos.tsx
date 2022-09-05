@@ -6,12 +6,16 @@ export interface CadastroTarefa {
   tarefa: string;
 }
 
+export interface AtividadesProjetoTipo {
+  base: string;
+  tarefa: string;
+  precedente: string;
+  dias: number;
+}
+
 export interface CadastroProjetoTipo {
   nomeProjeto: string;
-  atividadeBase: string;
-  atividadeTarefa: string;
-  atividadePrecedente: string;
-  atividadeDias: string;
+  atividades: AtividadesProjetoTipo[];
   comentarios: string;
 }
 
