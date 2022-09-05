@@ -26,8 +26,6 @@ import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
 
 import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
 
-import InputsNovaAtividade from './InputsNovaAtividade';
-
 function ModalCadastrarProjetoTipo() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroProjetoTipo();
@@ -49,7 +47,7 @@ function ModalCadastrarProjetoTipo() {
       >
         Projeto
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -100,16 +98,6 @@ function ModalCadastrarProjetoTipo() {
                       </FormControl>
                     </Flex>
                   </Stack>
-
-                  {registerForm.values.atividades.map(
-                    (atividade: any, index: number) => (
-                      <InputsNovaAtividade
-                        key={index}
-                        index={index}
-                        atividade={atividade}
-                      />
-                    ),
-                  )}
 
                   <ListDnD />
 

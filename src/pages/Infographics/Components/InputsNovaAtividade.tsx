@@ -15,7 +15,7 @@ function InputsNovaAtividade({ index }: any) {
   const { registerForm } = useCadastroProjetoTipo();
 
   useEffect(() => {
-    console.log(registerForm.values.atividades[index]);
+    // console.log(registerForm.values.atividades[index]);
   }, []);
 
   const handleChange = (event: any) => {
@@ -23,7 +23,7 @@ function InputsNovaAtividade({ index }: any) {
     const list: any = [...registerForm.values.atividades];
     list[index][name] = value;
     registerForm.setFieldValue(`atividades.${name}`, list);
-    console.log('Teste');
+    // console.log('Teste');
   };
 
   return (

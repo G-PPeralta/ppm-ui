@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import {
   DragDropContext,
   Droppable,
@@ -8,7 +8,7 @@ import {
 import { FiEdit, FiTrash } from 'react-icons/fi';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
-import { Box, Text, Select } from '@chakra-ui/react';
+import { Box, Text, Select, FormControl, Flex } from '@chakra-ui/react';
 
 interface Props {
   index: number;
@@ -24,12 +24,16 @@ const reorder = (list: any, startIndex: any, endIndex: any) => {
 };
 
 export default function ListDnD() {
-  const [list, setList] = React.useState<any>([]);
-  const [render, setRender] = React.useState<any>([]);
-  const [id, setId] = React.useState<any>('listID');
+  const [list, setList] = useState<any>([]);
+  const [render, setRender] = useState<any>([]);
+  const [id, setId] = useState<any>('listID');
 
-  React.useEffect(() => {
-    setList([{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]);
+  useEffect(() => {
+    setList([
+      {
+        id: 1,
+      },
+    ]);
     const now = Date.now();
     const newId = id + '-' + now.toLocaleString();
     // console.log('newId', newId);
@@ -78,105 +82,121 @@ export default function ListDnD() {
             flexWrap="wrap"
             flexDirection="row"
             alignItems="center"
-            justifyContent="space-between"
+            justifyContent="center"
             w="100%"
             bg={'#f5f5f5'}
-            p={3}
-            borderRadius="50px"
+            px={5}
+            py={2}
+            borderRadius={'60px'}
             mb={2}
           >
-            <GiHamburgerMenu color="#2E69FD" size={16} />
-            <Text sx={{ fontSize: 16, fontWeight: '600' }}>{item.id}</Text>
-            <Box w={'112px'}>
-              <Text sx={{ fontSize: 12, fontWeight: '600', color: '#d6d4d4' }}>
-                BASE
-              </Text>
-              <Select
-                bg={'#fff'}
-                id="base"
-                name="base"
-                // value={projectsForm.projectsForm.values.complexidadeId}
-                // onChange={projectsForm.projectsForm.handleChange}
-                w={'112px'}
+            <Flex flexDirection={'row'} gap={4}>
+              <Flex align={'center'} justify={'center'} gap={3}>
+                <GiHamburgerMenu color="#2E69FD" size={16} />
+                <Text sx={{ fontSize: 16, fontWeight: '600' }}>{item.id}</Text>
+              </Flex>
+              <FormControl>
+                <Text
+                  sx={{ fontSize: 12, fontWeight: '600', color: '#d6d4d4' }}
+                >
+                  BASE
+                </Text>
+                <Select
+                  id="atividades[0].base"
+                  name="atividades[0].base"
+                  placeholder="Selecione"
+                  bg={'#fff'}
+                  // value={registerForm.values.atividades[index].base}
+                  // onChange={(event) => handleChange(event)}
+                >
+                  <option value="option1">Option 1</option>
+                  <option value="option2">Option 2</option>
+                  <option value="option3">Option 3</option>
+                </Select>
+              </FormControl>
+              <FormControl>
+                <Text
+                  sx={{ fontSize: 12, fontWeight: '600', color: '#d6d4d4' }}
+                >
+                  TAREFA
+                </Text>
+                <Select
+                  id="tarefa"
+                  name="tarefa"
+                  placeholder="Selecione"
+                  bg={'#fff'}
+                  // value={registerForm.values.atividades[index].tarefa}
+                  // onChange={registerForm.handleChange}
+                >
+                  <option value="option1">Option 1</option>
+                  <option value="option2">Option 2</option>
+                  <option value="option3">Option 3</option>
+                </Select>
+              </FormControl>
+              <FormControl>
+                <Text
+                  sx={{ fontSize: 12, fontWeight: '600', color: '#d6d4d4' }}
+                >
+                  PRECEDENTES
+                </Text>
+                <Select
+                  id="precedente"
+                  name="precedente"
+                  placeholder="Selecione"
+                  bg={'#fff'}
+                  // value={registerForm.values.atividades[index].precedente}
+                  // onChange={registerForm.handleChange}
+                >
+                  <option value="option1">Option 1</option>
+                  <option value="option2">Option 2</option>
+                  <option value="option3">Option 3</option>
+                </Select>
+              </FormControl>
+
+              <FormControl>
+                <Text
+                  sx={{ fontSize: 12, fontWeight: '600', color: '#d6d4d4' }}
+                >
+                  DIAS
+                </Text>
+                <Select
+                  id="dias"
+                  name="dias"
+                  placeholder="Selecione"
+                  bg={'#fff'}
+                  // value={registerForm.values.atividades[index].dias}
+                  // onChange={registerForm.handleChange}
+                >
+                  <option value="option1">Option 1</option>
+                  <option value="option2">Option 2</option>
+                  <option value="option3">Option 3</option>
+                </Select>
+              </FormControl>
+              <Flex
+                p={1}
+                align={'center'}
+                justify={'center'}
+                _hover={{ cursor: 'pointer' }}
               >
-                {/* {complexidadeState.map((complexidade) => (
-            <option key={complexidade.id} value={complexidade.id}>
-              {complexidade.complexidade}
-            </option>
-          ))} */}
-              </Select>
-            </Box>
-            <Box w={'204px'}>
-              <Text sx={{ fontSize: 12, fontWeight: '600', color: '#d6d4d4' }}>
-                TAREFA
-              </Text>
-              <Select
-                bg={'#fff'}
-                id="tarefa"
-                name="tarefa"
-                // value={projectsForm.projectsForm.values.complexidadeId}
-                // onChange={projectsForm.projectsForm.handleChange}
-                w={'204px'}
+                <FiEdit
+                  onClick={() => enableEdit(index)}
+                  color="#2E69FD"
+                  size={16}
+                />
+              </Flex>
+              <Flex
+                p={1}
+                align={'center'}
+                justify={'center'}
+                _hover={{ cursor: 'pointer' }}
               >
-                {/* {complexidadeState.map((complexidade) => (
-            <option key={complexidade.id} value={complexidade.id}>
-              {complexidade.complexidade}
-            </option>
-          ))} */}
-              </Select>
-            </Box>
-            <Box w={'204px'}>
-              <Text sx={{ fontSize: 12, fontWeight: '600', color: '#d6d4d4' }}>
-                PRECEDENTES
-              </Text>
-              <Select
-                bg={'#fff'}
-                id="precedentes"
-                name="precedentes"
-                // value={projectsForm.projectsForm.values.complexidadeId}
-                // onChange={projectsForm.projectsForm.handleChange}
-                w={'204px'}
-              >
-                {/* {complexidadeState.map((complexidade) => (
-            <option key={complexidade.id} value={complexidade.id}>
-              {complexidade.complexidade}
-            </option>
-          ))} */}
-              </Select>
-            </Box>
-            <Box w={'112px'}>
-              <Text sx={{ fontSize: 12, fontWeight: '600', color: '#d6d4d4' }}>
-                Dias
-              </Text>
-              <Select
-                bg={'#fff'}
-                id="dias"
-                name="dias"
-                // value={projectsForm.projectsForm.values.complexidadeId}
-                // onChange={projectsForm.projectsForm.handleChange}
-                w={'112px'}
-              >
-                {/* {complexidadeState.map((complexidade) => (
-            <option key={complexidade.id} value={complexidade.id}>
-              {complexidade.complexidade}
-            </option>
-          ))} */}
-              </Select>
-            </Box>
-            <Box p={1} _hover={{ cursor: 'pointer' }}>
-              <FiEdit
-                onClick={() => enableEdit(index)}
-                color="#2E69FD"
-                size={16}
-              />
-            </Box>
-            <Box p={1} _hover={{ cursor: 'pointer' }}>
-              <FiTrash
-                onClick={() => remove(index)}
-                color="#F94144"
-                size={16}
-              />
-            </Box>
+                <FiTrash
+                  onClick={() => remove(index)}
+                  color="#F94144"
+                  size={16}
+                />
+              </Flex>
+            </Flex>
           </Box>
         </div>
       )}
