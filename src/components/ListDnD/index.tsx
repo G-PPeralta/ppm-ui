@@ -5,10 +5,18 @@ import {
   Draggable,
   DroppableProvided,
 } from 'react-beautiful-dnd';
-import { FiEdit, FiTrash } from 'react-icons/fi';
+import { FiEdit, FiPlus, FiTrash } from 'react-icons/fi';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
-import { Box, Text, Select, FormControl, Flex } from '@chakra-ui/react';
+import {
+  Box,
+  Text,
+  Select,
+  FormControl,
+  Flex,
+  IconButton,
+  FormLabel,
+} from '@chakra-ui/react';
 
 interface Props {
   index: number;
@@ -32,6 +40,9 @@ export default function ListDnD() {
     setList([
       {
         id: 1,
+      },
+      {
+        id: 2,
       },
     ]);
     const now = Date.now();
@@ -61,6 +72,13 @@ export default function ListDnD() {
   const remove = (index: number) => {
     const newList = list;
     newList.splice(index, 1);
+    setList(newList);
+    setRender(!render);
+  };
+
+  const add = () => {
+    const newList = list;
+    newList.push({ id: list.length + 1 });
     setList(newList);
     setRender(!render);
   };
@@ -118,11 +136,11 @@ export default function ListDnD() {
                 <Text
                   sx={{ fontSize: 12, fontWeight: '600', color: '#d6d4d4' }}
                 >
-                  TAREFA
+                  ATIVIDADE
                 </Text>
                 <Select
-                  id="tarefa"
-                  name="tarefa"
+                  id="atividade"
+                  name="atividade"
                   placeholder="Selecione"
                   bg={'#fff'}
                   // value={registerForm.values.atividades[index].tarefa}
@@ -205,6 +223,7 @@ export default function ListDnD() {
 
   return (
     <>
+      <FormLabel mb={0}>ATIVIDADES</FormLabel>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId={id}>
           {(provided: DroppableProvided) => (
@@ -217,6 +236,34 @@ export default function ListDnD() {
           )}
         </Droppable>
       </DragDropContext>
+      <Flex
+        w="100%"
+        border={'2px'}
+        borderStyle={'dashed'}
+        borderRadius={'50px'}
+        borderColor={'#D6D4D4'}
+        align={'center'}
+        justify={'center'}
+        p={2}
+        _hover={{
+          cursor: 'pointer',
+          borderColor: '#D6D4D4',
+        }}
+        onClick={() => add()}
+      >
+        <IconButton
+          icon={<FiPlus />}
+          aria-label={'Plus sign icon'}
+          isRound={true}
+          color={'white'}
+          backgroundColor={'#D6D4D4'}
+          size={'sm'}
+          _hover={{
+            backgroundColor: 'origem.500',
+          }}
+          transition={'all 0.4s'}
+        />
+      </Flex>
     </>
   );
 }
