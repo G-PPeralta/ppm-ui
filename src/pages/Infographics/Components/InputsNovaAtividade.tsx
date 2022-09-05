@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import {
   Flex,
   FormControl,
@@ -12,6 +14,18 @@ import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
 function InputsNovaAtividade({ index }: any) {
   const { registerForm } = useCadastroProjetoTipo();
 
+  useEffect(() => {
+    console.log(registerForm.values.atividades[index]);
+  }, []);
+
+  const handleChange = (event: any) => {
+    const { name, value } = event.target;
+    const list: any = [...registerForm.values.atividades];
+    list[index][name] = value;
+    registerForm.setFieldValue(`atividades.${name}`, list);
+    console.log('Teste');
+  };
+
   return (
     <Stack>
       <FormLabel>ATIVIDADE</FormLabel>
@@ -23,13 +37,13 @@ function InputsNovaAtividade({ index }: any) {
         gap={5}
       >
         <FormControl>
-          <FormLabel>BASE</FormLabel>
+          <FormLabel htmlFor="atividades[0].base">BASE</FormLabel>
           <Select
-            id={registerForm.values.atividades[index].base}
-            name={registerForm.values.atividades[index].base}
+            id="atividades[0].base"
+            name="atividades[0].base"
             placeholder="Selecione"
             value={registerForm.values.atividades[index].base}
-            onChange={registerForm.handleChange}
+            onChange={(event) => handleChange(event)}
           >
             <option value="option1">Option 1</option>
             <option value="option2">Option 2</option>

@@ -121,8 +121,10 @@ function ModalCadastroAtividade() {
                           value={registerForm.values.responsavel}
                           onChange={registerForm.handleChange}
                         >
-                          {ListaResponsavel.map((data) => (
-                            <option value={data.id}>{data.nome}</option>
+                          {ListaResponsavel.map((data, index) => (
+                            <option value={data.id} key={index}>
+                              {data.nome}
+                            </option>
                           ))}
                         </Select>
                       </FormControl>
@@ -136,8 +138,10 @@ function ModalCadastroAtividade() {
                           value={registerForm.values.area}
                           onChange={registerForm.handleChange}
                         >
-                          {listaArea.map((data) => (
-                            <option value={data.id}>{data.tipo}</option>
+                          {listaArea.map((data, index) => (
+                            <option value={data.id} key={index}>
+                              {data.tipo}
+                            </option>
                           ))}
                         </Select>
                       </FormControl>
@@ -162,8 +166,10 @@ function ModalCadastroAtividade() {
                           value={registerForm.values.precedente[0].atividade}
                           onChange={registerForm.handleChange}
                         >
-                          {listaAtividades.map((data) => (
-                            <option value={data.id}>{data.nome}</option>
+                          {listaAtividades.map((data, index) => (
+                            <option value={data.id} key={index}>
+                              {data.nome}
+                            </option>
                           ))}
                         </Select>
                       </FormControl>

@@ -101,8 +101,12 @@ function ModalCadastrarProjetoTipo() {
                   </Stack>
 
                   {registerForm.values.atividades.map(
-                    (_atividade: any, index: number) => (
-                      <InputsNovaAtividade key={index} index={index} />
+                    (atividade: any, index: number) => (
+                      <InputsNovaAtividade
+                        key={index}
+                        index={index}
+                        atividade={atividade}
+                      />
                     ),
                   )}
 
