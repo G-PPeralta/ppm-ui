@@ -47,7 +47,7 @@ function ModalCadastrarProjetoTipo() {
       >
         Projeto
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
