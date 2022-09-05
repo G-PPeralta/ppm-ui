@@ -1,4 +1,5 @@
 import { Gantt } from 'components/Gantt';
+import ListDnD from 'components/ListDnD';
 import SCurveChart from 'components/SCurveChart';
 import Sidebar from 'components/SideBar';
 
@@ -8,6 +9,7 @@ export function GanttPage() {
       <Sidebar>
         <Gantt />
         <SCurveChart />
+        <ListDnD />
       </Sidebar>
     </>
   );
