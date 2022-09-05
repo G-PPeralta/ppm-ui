@@ -5,7 +5,7 @@ import {
   Draggable,
   DroppableProvided,
 } from 'react-beautiful-dnd';
-import { FiEdit, FiPlus, FiTrash } from 'react-icons/fi';
+import { FiPlus, FiTrash } from 'react-icons/fi';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
 import {
@@ -83,9 +83,9 @@ export default function ListDnD() {
     setRender(!render);
   };
 
-  const enableEdit = (index: number) => {
-    setRender(!render);
-  };
+  // const enableEdit = (index: number) => {
+  //   setRender(!render);
+  // };
 
   const ListItem = ({ item, index }: Props) => (
     <Draggable draggableId={`list${index}`} index={index}>
@@ -190,7 +190,7 @@ export default function ListDnD() {
                   <option value="option3">Option 3</option>
                 </Select>
               </FormControl>
-              <Flex
+              {/* <Flex
                 p={1}
                 align={'center'}
                 justify={'center'}
@@ -201,7 +201,7 @@ export default function ListDnD() {
                   color="#2E69FD"
                   size={16}
                 />
-              </Flex>
+              </Flex> */}
               <Flex
                 p={1}
                 align={'center'}
