@@ -7,7 +7,6 @@ export interface CadastroTarefa {
 }
 
 export interface AtividadesProjetoTipo {
-  id: number;
   base: string;
   tarefa: string;
   precedente: string;

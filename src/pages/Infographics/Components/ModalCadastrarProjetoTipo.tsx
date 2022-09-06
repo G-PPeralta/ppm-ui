@@ -99,7 +99,7 @@ function ModalCadastrarProjetoTipo() {
                     </Flex>
                   </Stack>
 
-                  <ListDnD atividades={registerForm.values.atividades} />
+                  <ListDnD />
 
                   <Stack>
                     <Flex
