@@ -16,6 +16,7 @@ export function useCadastroProjetoTipo() {
       nomeProjeto: '',
       atividades: [
         {
+          id: 1,
           base: '',
           tarefa: '',
           precedente: '',
