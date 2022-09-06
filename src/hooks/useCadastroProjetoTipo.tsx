@@ -44,7 +44,7 @@ export function useCadastroProjetoTipo() {
           setLoading(false);
         }
       } catch (error) {
-        toast.error('Erro ao cadastrar intervenção!', {
+        toast.error('Erro ao cadastrar Projeto Tipo!', {
           id: 'toast-principal',
         });
         setLoading(false);
