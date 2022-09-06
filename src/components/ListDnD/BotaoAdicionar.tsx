@@ -2,7 +2,7 @@ import { FiPlus } from 'react-icons/fi';
 
 import { Flex, IconButton } from '@chakra-ui/react';
 
-function BotaoSalvar({ add }: any) {
+function BotaoAdicionar({ add }: any) {
   return (
     <Flex
       w="100%"
@@ -35,4 +35,4 @@ function BotaoSalvar({ add }: any) {
   );
 }
 
-export default BotaoSalvar;
+export default BotaoAdicionar;

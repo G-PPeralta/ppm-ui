@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 
 import AtividadesDraggable from './AtividadesDraggable';
-import BotaoSalvar from './BotaoSalvar';
+import BotaoAdicionar from './BotaoAdicionar';
 
 // interface Props {
 //   index: number;
@@ -31,10 +31,12 @@ const reorder = (list: any, startIndex: any, endIndex: any) => {
   return result;
 };
 
-export default function ListDnD() {
+export default function ListDnD({ atividades }: any) {
   const [list, setList] = useState<any>([]);
   const [render, setRender] = useState<any>([]);
   const [id, setId] = useState<any>('listID');
+
+  console.log(atividades);
 
   useEffect(() => {
     setList([
@@ -231,7 +233,7 @@ export default function ListDnD() {
               {/* {list.map((item: any, index: any) => (
                 <ListItem item={item} index={index} key={`list${index}`} />
               ))} */}
-              {list.map((item: any, index: any) => (
+              {atividades.map((item: any, index: any) => (
                 <AtividadesDraggable
                   item={item}
                   index={index}
@@ -244,7 +246,7 @@ export default function ListDnD() {
           )}
         </Droppable>
       </DragDropContext>
-      <BotaoSalvar add={add} />
+      <BotaoAdicionar add={add} />
     </>
   );
 }

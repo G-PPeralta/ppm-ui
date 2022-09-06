@@ -4,6 +4,8 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 
 import { Box, Flex, FormControl, Input, Select, Text } from '@chakra-ui/react';
 
+import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
+
 interface Props {
   index: number;
   item: any;
@@ -11,6 +13,17 @@ interface Props {
 }
 
 function AtividadesDraggable({ item, index, remove }: Props) {
+  const { registerForm } = useCadastroProjetoTipo();
+
+  console.log('Teste', registerForm.values.atividades[index]);
+
+  const handleChange = (event: any) => {
+    registerForm.setFieldValue(
+      `atividades[${index}].${event.target.name}`,
+      event.target.value,
+    );
+  };
+
   return (
     <Draggable draggableId={`list${index}`} index={index}>
       {(provided) => (
@@ -40,12 +53,12 @@ function AtividadesDraggable({ item, index, remove }: Props) {
               <FormControl>
                 <Text sx={{ fontSize: 12, fontWeight: '600' }}>BASE</Text>
                 <Select
-                  id="atividades[0].base"
-                  name="atividades[0].base"
+                  id={'base'}
+                  name={'base'}
                   placeholder="Selecione"
                   bg={'#fff'}
-                  // value={registerForm.values.atividades[index].base}
-                  // onChange={(event) => handleChange(event)}
+                  value={registerForm.values.atividades[index].base}
+                  onChange={(event) => handleChange(event)}
                 >
                   <option value="option1">Option 1</option>
                   <option value="option2">Option 2</option>
@@ -55,12 +68,12 @@ function AtividadesDraggable({ item, index, remove }: Props) {
               <FormControl>
                 <Text sx={{ fontSize: 12, fontWeight: '600' }}>ATIVIDADE</Text>
                 <Select
-                  id="atividade"
-                  name="atividade"
+                  id="tarefa"
+                  name="tarefa"
                   placeholder="Selecione"
                   bg={'#fff'}
-                  // value={registerForm.values.atividades[index].tarefa}
-                  // onChange={registerForm.handleChange}
+                  value={registerForm.values.atividades[index].tarefa}
+                  onChange={(event) => handleChange(event)}
                 >
                   <option value="option1">Option 1</option>
                   <option value="option2">Option 2</option>
@@ -76,8 +89,8 @@ function AtividadesDraggable({ item, index, remove }: Props) {
                   name="precedente"
                   placeholder="Selecione"
                   bg={'#fff'}
-                  // value={registerForm.values.atividades[index].precedente}
-                  // onChange={registerForm.handleChange}
+                  value={registerForm.values.atividades[index].precedente}
+                  onChange={(event) => handleChange(event)}
                 >
                   <option value="option1">Option 1</option>
                   <option value="option2">Option 2</option>
@@ -91,6 +104,10 @@ function AtividadesDraggable({ item, index, remove }: Props) {
                   placeholder="Digite o número de dias"
                   type={'number'}
                   bg={'#fff'}
+                  id="dias"
+                  name="dias"
+                  value={registerForm.values.atividades[index].dias}
+                  onChange={(event) => handleChange(event)}
                 />
               </FormControl>
               {/* <Flex
