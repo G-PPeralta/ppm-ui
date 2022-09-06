@@ -20,6 +20,7 @@ import {
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
+import ListDnD from 'components/ListDnD';
 import { TextError } from 'components/TextError';
 
 import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
@@ -33,7 +34,7 @@ function ModalCadastroAtividade() {
     loading,
     ListaResponsavel,
     listaArea,
-    listaAtividades,
+    // listaAtividades,
   } = useCadastroAtividade();
 
   return (
@@ -148,6 +149,9 @@ function ModalCadastroAtividade() {
                     </Flex>
 
                     <FormLabel>PRECEDENTES</FormLabel>
+
+                    <ListDnD atividades={registerForm.values.precedente} />
+
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: 'column',
@@ -155,7 +159,7 @@ function ModalCadastroAtividade() {
                       })}
                       gap={5}
                     >
-                      <FormControl>
+                      {/* <FormControl>
                         <FormLabel htmlFor="precedente[0].atividade">
                           ATIVIDADE
                         </FormLabel>
@@ -172,9 +176,9 @@ function ModalCadastroAtividade() {
                             </option>
                           ))}
                         </Select>
-                      </FormControl>
+                      </FormControl> */}
 
-                      <FormControl>
+                      {/* <FormControl>
                         <FormLabel htmlFor="precedente[0].tipo">TIPO</FormLabel>
                         <Select
                           id="precedente[0].tipo"
@@ -187,9 +191,9 @@ function ModalCadastroAtividade() {
                           <option value="option2">Option 2</option>
                           <option value="option3">Option 3</option>
                         </Select>
-                      </FormControl>
+                      </FormControl> */}
 
-                      <FormControl>
+                      {/* <FormControl>
                         <FormLabel>DIAS</FormLabel>
                         <Input
                           isRequired
@@ -200,15 +204,9 @@ function ModalCadastroAtividade() {
                           value={registerForm.values.precedente[0].dias}
                           onChange={registerForm.handleChange}
                         />
-                        {/* {registerForm.errors.precedente[0].dias &&
-                          registerForm.touched.precedente[0].dias && (
-                            <TextError>
-                              {registerForm.errors.precedente[0].dias}
-                            </TextError>
-                          )} */}
-                      </FormControl>
+                      </FormControl> */}
 
-                      <FormControl>
+                      {/* <FormControl>
                         <FormLabel htmlFor="precedente[0].restricao">
                           RESTRIÇÃO
                         </FormLabel>
@@ -223,7 +221,7 @@ function ModalCadastroAtividade() {
                           <option value="option2">Option 2</option>
                           <option value="option3">Option 3</option>
                         </Select>
-                      </FormControl>
+                      </FormControl> */}
                     </Flex>
                     <Flex
                       flexDirection={useBreakpointValue({
