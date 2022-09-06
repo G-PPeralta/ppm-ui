@@ -82,6 +82,7 @@ export default function ListDnD({ atividades }: any) {
                   index={index}
                   key={`list${index}`}
                   remove={remove}
+                  list={list}
                 />
               ))}
               {provided.placeholder}

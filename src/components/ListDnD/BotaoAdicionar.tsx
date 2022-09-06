@@ -2,7 +2,11 @@ import { FiPlus } from 'react-icons/fi';
 
 import { Flex, IconButton } from '@chakra-ui/react';
 
-function BotaoAdicionar({ add }: any) {
+interface Props {
+  add: any;
+}
+
+function BotaoAdicionar({ add }: Props) {
   return (
     <Flex
       w="100%"

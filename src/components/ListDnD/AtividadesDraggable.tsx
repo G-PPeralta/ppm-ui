@@ -4,17 +4,29 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 
 import { Box, Flex, FormControl, Input, Select, Text } from '@chakra-ui/react';
 
+import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
+
 interface Props {
   index: number;
   item: any;
   remove: any;
   handleChangeProp: any;
+  list: any;
 }
 
-function AtividadesDraggable({ item, index, remove, handleChangeProp }: Props) {
+function AtividadesDraggable({
+  item,
+  index,
+  remove,
+  handleChangeProp,
+  list,
+}: Props) {
+  const { registerForm } = useCadastroProjetoTipo();
+
   const handleChange = (event: any, chave: any) => {
     item[chave] = event.target.value;
     handleChangeProp(index, chave, event.target.value);
+    registerForm.setFieldValue('atividades', list);
   };
 
   return (
