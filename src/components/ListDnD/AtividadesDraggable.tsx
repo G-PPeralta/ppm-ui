@@ -12,15 +12,6 @@ interface Props {
 }
 
 function AtividadesDraggable({ item, index, remove, handleChangeProp }: Props) {
-  // console.log('Item', index, registerForm.values.atividades);
-
-  // const handleChange = (event: any) => {
-  //   registerForm.setFieldValue(
-  //     `atividades[${index}].${event.target.name}`,
-  //     event.target.value,
-  //   );
-  // };
-
   const handleChange = (event: any, chave: any) => {
     item[chave] = event.target.value;
     handleChangeProp(index, chave, event.target.value);
@@ -50,7 +41,9 @@ function AtividadesDraggable({ item, index, remove, handleChangeProp }: Props) {
             <Flex flexDirection={'row'} gap={4}>
               <Flex align={'center'} justify={'center'} gap={3}>
                 <GiHamburgerMenu color="#2E69FD" size={16} />
-                <Text sx={{ fontSize: 16, fontWeight: '600' }}>{item.id}</Text>
+                <Text sx={{ fontSize: 16, fontWeight: '600' }}>
+                  {index + 1}
+                </Text>
               </Flex>
               <FormControl>
                 <Text sx={{ fontSize: 12, fontWeight: '600' }}>BASE</Text>
