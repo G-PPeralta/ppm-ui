@@ -36,23 +36,6 @@ export default function ListDnD({ atividades }: any) {
   const [render, setRender] = useState<any>([]);
   const [id, setId] = useState<any>('listID');
 
-  console.log(atividades);
-
-  useEffect(() => {
-    setList([
-      {
-        id: 1,
-      },
-      {
-        id: 2,
-      },
-    ]);
-    const now = Date.now();
-    const newId = id + '-' + now.toLocaleString();
-    // console.log('newId', newId);
-    setId(newId);
-  }, []);
-
   function onDragEnd(result: any) {
     if (!result.destination) {
       return;
@@ -78,9 +61,23 @@ export default function ListDnD({ atividades }: any) {
     setRender(!render);
   };
 
+  // const add = () => {
+  //   registerForm.values.atividades[registerForm.values.atividades.length] = {
+  //     base: '',
+  //     tarefa: '',
+  //     precedente: '',
+  //     dias: 0,
+  //   };
+  //   console.log(
+  //     'registerForm.values.atividades',
+  //     registerForm.values.atividades,
+  //   );
+  //   setRender(!render);
+  // };
+
   const add = () => {
     const newList = list;
-    newList.push({ id: list.length + 1 });
+    newList.push({ base: '', tarefa: '', precedente: '', dias: 0 });
     setList(newList);
     setRender(!render);
   };
@@ -223,6 +220,24 @@ export default function ListDnD({ atividades }: any) {
   //   </Draggable>
   // );
 
+  const handleChangeProp = (index: any, chave: any, value: any) => {
+    const newList = list;
+    newList[index][chave] = value;
+    console.log('newList', newList);
+    setList(newList);
+    setRender(!render);
+  };
+
+  useEffect(() => {
+    setList(atividades);
+    const now = Date.now();
+    const newId = id + '-' + now.toLocaleString();
+    // console.log('newId', newId);
+    setId(newId);
+  }, []);
+
+  console.log('list', list);
+
   return (
     <>
       <FormLabel mb={0}>ATIVIDADES</FormLabel>
@@ -233,8 +248,9 @@ export default function ListDnD({ atividades }: any) {
               {/* {list.map((item: any, index: any) => (
                 <ListItem item={item} index={index} key={`list${index}`} />
               ))} */}
-              {atividades.map((item: any, index: any) => (
+              {list.map((item: any, index: any) => (
                 <AtividadesDraggable
+                  handleChangeProp={handleChangeProp}
                   item={item}
                   index={index}
                   key={`list${index}`}
