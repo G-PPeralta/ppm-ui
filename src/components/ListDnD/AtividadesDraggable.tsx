@@ -6,6 +6,8 @@ import { Box, Flex, FormControl, Input, Select, Text } from '@chakra-ui/react';
 
 import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
 
+import PopOverPrecedentes from './PopOverPrecedentes';
+
 interface Props {
   index: number;
   item: any;
@@ -57,21 +59,7 @@ function AtividadesDraggable({
                   {index + 1}
                 </Text>
               </Flex>
-              <FormControl>
-                <Text sx={{ fontSize: 12, fontWeight: '600' }}>BASE</Text>
-                <Select
-                  id={'base'}
-                  name={'base'}
-                  placeholder="Selecione"
-                  bg={'#fff'}
-                  value={item.base}
-                  onChange={(event) => handleChange(event, 'base')}
-                >
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
-                </Select>
-              </FormControl>
+
               <FormControl>
                 <Text sx={{ fontSize: 12, fontWeight: '600' }}>ATIVIDADE</Text>
                 <Select
@@ -81,23 +69,6 @@ function AtividadesDraggable({
                   bg={'#fff'}
                   value={item.tarefa}
                   onChange={(event) => handleChange(event, 'tarefa')}
-                >
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
-                </Select>
-              </FormControl>
-              <FormControl>
-                <Text sx={{ fontSize: 12, fontWeight: '600' }}>
-                  PRECEDENTES
-                </Text>
-                <Select
-                  id="precedente"
-                  name="precedente"
-                  placeholder="Selecione"
-                  bg={'#fff'}
-                  value={item.precedente}
-                  onChange={(event) => handleChange(event, 'precedente')}
                 >
                   <option value="option1">Option 1</option>
                   <option value="option2">Option 2</option>
@@ -115,8 +86,17 @@ function AtividadesDraggable({
                   name="dias"
                   value={item.dias}
                   onChange={(event) => handleChange(event, 'dias')}
+                  isDisabled
                 />
               </FormControl>
+
+              <Flex direction={'column'}>
+                <Text sx={{ fontSize: 12, fontWeight: '600' }}>
+                  PRECEDENTES
+                </Text>
+                <PopOverPrecedentes />
+              </Flex>
+
               {/* <Flex
                 p={1}
                 align={'center'}
@@ -129,6 +109,7 @@ function AtividadesDraggable({
                   size={16}
                 />
               </Flex> */}
+
               <Flex
                 p={1}
                 align={'center'}
