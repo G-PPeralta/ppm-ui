@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { FiTrash } from 'react-icons/fi';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -29,6 +30,28 @@ function AtividadesDraggable({
     item[chave] = event.target.value;
     handleChangeProp(index, chave, event.target.value);
     registerForm.setFieldValue('atividades', list);
+  };
+
+  const [mockAtividades, setMockAtividades] = useState([
+    { id: 1, nome: 'Atividade 1', checked: false },
+    { id: 2, nome: 'Atividade 2', checked: false },
+    { id: 3, nome: 'Atividade 3', checked: false },
+    { id: 4, nome: 'Atividade 4', checked: false },
+    { id: 5, nome: 'Atividade 5', checked: false },
+    { id: 6, nome: 'Atividade 6', checked: false },
+    { id: 7, nome: 'Atividade 7', checked: false },
+    { id: 8, nome: 'Atividade 8', checked: false },
+    { id: 9, nome: 'Atividade 9', checked: false },
+    { id: 10, nome: 'Atividade 10', checked: false },
+  ]);
+  const [render, setRender] = useState(false);
+
+  const handlePopover = (index: number, value: boolean) => {
+    console.log('value', value);
+    const newList = mockAtividades;
+    newList[index].checked = value;
+    setMockAtividades(newList);
+    setRender(!render);
   };
 
   return (
@@ -94,7 +117,10 @@ function AtividadesDraggable({
                 <Text sx={{ fontSize: 12, fontWeight: '600' }}>
                   PRECEDENTES
                 </Text>
-                <PopOverPrecedentes />
+                <PopOverPrecedentes
+                  handlePopover={handlePopover}
+                  atividades={mockAtividades}
+                />
               </Flex>
 
               {/* <Flex

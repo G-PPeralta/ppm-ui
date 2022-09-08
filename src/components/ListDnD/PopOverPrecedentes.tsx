@@ -13,7 +13,7 @@ import {
   Stack,
 } from '@chakra-ui/react';
 
-function PopOverPrecedentes() {
+function PopOverPrecedentes({ handlePopover, atividades }: any) {
   return (
     <FormControl>
       <Popover isLazy>
@@ -37,17 +37,21 @@ function PopOverPrecedentes() {
           <PopoverArrow />
           <PopoverCloseButton />
           <PopoverBody>
-            <CheckboxGroup>
+            <CheckboxGroup
+              colorScheme="green"
+              defaultValue={['naruto', 'kakashi']}
+            >
               <Stack spacing={[1, 3]} direction={'column'}>
-                <Checkbox value="Atividade1">Atividade 1</Checkbox>
-                <Checkbox value="Atividade2">Atividade 2</Checkbox>
-                <Checkbox value="Atividade3">Atividade 3</Checkbox>
-                <Checkbox value="Atividade4">Atividade 4</Checkbox>
-                <Checkbox value="Atividade5">Atividade 5</Checkbox>
-                <Checkbox value="Atividade6">Atividade 6</Checkbox>
-                <Checkbox value="Atividade7">Atividade 7</Checkbox>
-                <Checkbox value="Atividade8">Atividade 8</Checkbox>
-                <Checkbox value="Atividade9">Atividade 9</Checkbox>
+                {atividades.map((atividade: any, index: any) => (
+                  <Checkbox
+                    isChecked={atividade.checked}
+                    onChange={(event) =>
+                      handlePopover(index, !atividade.checked)
+                    }
+                  >
+                    {atividade.nome}
+                  </Checkbox>
+                ))}
               </Stack>
             </CheckboxGroup>
           </PopoverBody>
