@@ -13,23 +13,31 @@ export function useCadastroIntervencao() {
 
   const intervencaoForm = useFormik({
     initialValues: {
+      intervencao: '',
       poco: '',
-      campo: '',
       sonda: '',
-      sequencia: '',
       inicioPrevisto: '',
+      fimPrevisto: '',
       projeto: '',
+      atividades: [
+        {
+          ordem: 1,
+          atividade: '',
+          responsavel: '',
+        },
+      ],
       observacoes: '',
     },
     validationSchema: cadastroIntervencaoSchema,
     onSubmit: async (values) => {
       const newValues = {
+        intervencao: values.intervencao,
         poco: values.poco,
-        campo: values.campo,
         sonda: values.sonda,
-        sequencia: values.sequencia,
         inicioPrevisto: values.inicioPrevisto,
+        fimPrevisto: values.fimPrevisto,
         projeto: values.projeto,
+        atividades: values.atividades,
         observacoes: values.observacoes,
       };
 

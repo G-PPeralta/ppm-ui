@@ -23,6 +23,8 @@ import {
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
+import ListDnD from 'pages/Infographics/Components/ListIntervencao';
+
 import { TextError } from 'components/TextError';
 
 import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
@@ -100,7 +102,34 @@ function ModalBotaoCadastrar() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel>Poço</FormLabel>
+                        <FormLabel>NOME</FormLabel>
+                        <Input
+                          isRequired
+                          placeholder="Nome da Intervenção"
+                          id="intervencao"
+                          type="text"
+                          name="intervencao"
+                          value={intervencaoForm.values.intervencao}
+                          onChange={intervencaoForm.handleChange}
+                        />
+                        {intervencaoForm.errors.intervencao &&
+                          intervencaoForm.touched.intervencao && (
+                            <TextError>
+                              {intervencaoForm.errors.intervencao}
+                            </TextError>
+                          )}
+                      </FormControl>
+                    </Flex>
+
+                    <Flex
+                      flexDirection={useBreakpointValue({
+                        base: 'column',
+                        md: 'row',
+                      })}
+                      gap={5}
+                    >
+                      <FormControl>
+                        <FormLabel>POÇO</FormLabel>
                         <Select
                           id="poco"
                           name="poco"
@@ -113,24 +142,8 @@ function ModalBotaoCadastrar() {
                           <option value="option3">Option 3</option>
                         </Select>
                       </FormControl>
-
                       <FormControl>
-                        <FormLabel>Campo</FormLabel>
-                        <Select
-                          id="campo"
-                          name="campo"
-                          placeholder="Selecione"
-                          value={intervencaoForm.values.campo}
-                          onChange={intervencaoForm.handleChange}
-                        >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </Select>
-                      </FormControl>
-
-                      <FormControl>
-                        <FormLabel>Sonda</FormLabel>
+                        <FormLabel>SONDA</FormLabel>
                         <Select
                           id="sonda"
                           name="sonda"
@@ -143,24 +156,17 @@ function ModalBotaoCadastrar() {
                           <option value="option3">Option 3</option>
                         </Select>
                       </FormControl>
+                    </Flex>
 
+                    <Flex
+                      flexDirection={useBreakpointValue({
+                        base: 'column',
+                        md: 'row',
+                      })}
+                      gap={5}
+                    >
                       <FormControl>
-                        <FormLabel>Sequência</FormLabel>
-                        <Select
-                          id="sequencia"
-                          name="sequencia"
-                          placeholder="Selecione"
-                          value={intervencaoForm.values.sequencia}
-                          onChange={intervencaoForm.handleChange}
-                        >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </Select>
-                      </FormControl>
-
-                      <FormControl>
-                        <FormLabel htmlFor="inicioPrevisto">Início</FormLabel>
+                        <FormLabel htmlFor="inicioPrevisto">INÍCIO</FormLabel>
                         <Input
                           isRequired
                           placeholder="dd/mm/aaaa"
@@ -174,6 +180,24 @@ function ModalBotaoCadastrar() {
                           intervencaoForm.touched.inicioPrevisto && (
                             <TextError>
                               {intervencaoForm.errors.inicioPrevisto}
+                            </TextError>
+                          )}
+                      </FormControl>
+                      <FormControl>
+                        <FormLabel htmlFor="fimPrevisto">FIM</FormLabel>
+                        <Input
+                          isRequired
+                          placeholder="dd/mm/aaaa"
+                          id="fimPrevisto"
+                          type="date"
+                          name="fimPrevisto"
+                          value={intervencaoForm.values.fimPrevisto}
+                          onChange={intervencaoForm.handleChange}
+                        />
+                        {intervencaoForm.errors.fimPrevisto &&
+                          intervencaoForm.touched.fimPrevisto && (
+                            <TextError>
+                              {intervencaoForm.errors.fimPrevisto}
                             </TextError>
                           )}
                       </FormControl>
@@ -195,6 +219,9 @@ function ModalBotaoCadastrar() {
                       </Select>
                     </FormControl>
                   </Stack>
+
+                  <ListDnD atividades={intervencaoForm.values.atividades} />
+
                   <Stack>
                     <FormControl>
                       <FormLabel htmlFor="observacoes">Observações</FormLabel>

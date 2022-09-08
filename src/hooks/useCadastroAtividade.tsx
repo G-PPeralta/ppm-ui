@@ -25,6 +25,7 @@ export function useCadastroAtividade() {
   >([]);
   const [listaArea, setListaArea] = useState<AreaAtuacao[]>([]);
   const [listaAtividades, setListaAtividades] = useState<AtividadeLista[]>([]);
+  const [listaTarefa, setListaTarefa] = useState<AreaAtuacao[]>([]);
 
   const carregarListaResponsavel = async () => {
     const { data } = await getResponsavelList();
@@ -41,21 +42,16 @@ export function useCadastroAtividade() {
     setListaAtividades(data);
   };
 
+  const carregarListaTarefa = async () => {
+    const { data } = await getAreaAtuacaoList();
+    setListaTarefa(data);
+  };
+
   const registerForm = useFormik({
     initialValues: {
       nomeAtividade: '',
-      responsavel: '',
+      dias: 0,
       area: '',
-      tarefa: '',
-      precedente: [
-        {
-          ordem: 1,
-          atividade: '',
-          tipo: '',
-          dias: 0,
-          restricao: '',
-        },
-      ],
       comentarios: '',
     },
     validationSchema: cadastroAtividadeSchema,
@@ -63,9 +59,8 @@ export function useCadastroAtividade() {
       const newValues = {
         nome: values.nomeAtividade,
         prioridade: false,
-        responsavelId: parseInt(values.responsavel),
+        atividadeId: parseInt(values.nomeAtividade),
         areaAtuacaoId: parseInt(values.area),
-        // atividadesPrecedentes: values.precedente,
         obs: values.comentarios,
         tarefaId: 50, // Precisa colocar o campo de tarefa
       };
@@ -94,12 +89,14 @@ export function useCadastroAtividade() {
     carregarListaResponsavel();
     carregarAreaAtuacao();
     carregarListaAtividade();
+    carregarListaTarefa();
   }, []);
 
   return {
     registerForm,
     loading,
     ListaResponsavel,
+    listaTarefa,
     listaArea,
     listaAtividades,
   };

@@ -19,30 +19,28 @@ export interface CadastroProjetoTipo {
   comentarios: string;
 }
 
-export interface CadastroIntervencao {
-  poco: string;
-  campo: string;
-  sonda: string;
-  sequencia: string;
-  inicioPrevisto: string;
-  projeto: string;
-  observacoes: string;
+interface Atividades {
+  ordem: number;
+  atividade: string;
+  responsavel: string;
 }
 
-interface Precedente {
-  ordem: number;
-  atividaeId: number | null;
-  tipo: string;
-  dias: number;
-  restricao: string;
+export interface CadastroIntervencao {
+  intervencao: string;
+  poco: string;
+  sonda: string;
+  inicioPrevisto: string;
+  fimPrevisto: string;
+  projeto: string;
+  atividades: Atividades[];
+  observacoes: string;
 }
 
 export interface CadastroAtividade {
   nome: string;
   prioridade: boolean;
   obs: string;
-  responsavelId: number;
+  atividadeId: number;
   tarefaId: number;
   areaAtuacaoId: number;
-  atividadesPrecedentes?: Precedente[];
 }

@@ -20,7 +20,6 @@ import {
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
-import ListDnD from 'components/ListDnD';
 import { TextError } from 'components/TextError';
 
 import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
@@ -32,8 +31,9 @@ function ModalCadastroAtividade() {
   const {
     registerForm,
     loading,
-    ListaResponsavel,
+    // ListaResponsavel,
     listaArea,
+    listaTarefa,
     // listaAtividades,
   } = useCadastroAtividade();
 
@@ -86,26 +86,25 @@ function ModalCadastroAtividade() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel>NOME</FormLabel>
-                        <Input
+                        <FormLabel htmlFor="area">NOME</FormLabel>
+                        <Select
                           isRequired
-                          placeholder="Digite o nome da atividade"
+                          placeholder="Selecione uma tarefa"
                           id="nomeAtividade"
-                          type="text"
                           name="nomeAtividade"
                           value={registerForm.values.nomeAtividade}
                           onChange={registerForm.handleChange}
-                        />
-                        {registerForm.errors.nomeAtividade &&
-                          registerForm.touched.nomeAtividade && (
-                            <TextError>
-                              {registerForm.errors.nomeAtividade}
-                            </TextError>
-                          )}
+                        >
+                          {listaTarefa.map((data, index) => (
+                            // {listaArea.map((data, index) => (
+                            <option value={data.id} key={index}>
+                              {data.tipo}
+                            </option>
+                          ))}
+                        </Select>
                       </FormControl>
                     </Flex>
 
-                    <FormLabel>RESPONSÁVEL</FormLabel>
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: 'column',
@@ -114,22 +113,30 @@ function ModalCadastroAtividade() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="responsavel">NOME</FormLabel>
-                        <Select
-                          id="responsavel"
-                          name="responsavel"
-                          placeholder="Selecione"
-                          value={registerForm.values.responsavel}
+                        <FormLabel>QUANTIDADE DE DIAS</FormLabel>
+                        <Input
+                          isRequired
+                          placeholder="Digite o número de dias"
+                          id="dias"
+                          type="number"
+                          name="dias"
+                          value={registerForm.values.dias}
                           onChange={registerForm.handleChange}
-                        >
-                          {ListaResponsavel.map((data, index) => (
-                            <option value={data.id} key={index}>
-                              {data.nome}
-                            </option>
-                          ))}
-                        </Select>
+                        />
+                        {registerForm.errors.dias &&
+                          registerForm.touched.dias && (
+                            <TextError>{registerForm.errors.dias}</TextError>
+                          )}
                       </FormControl>
+                    </Flex>
 
+                    <Flex
+                      flexDirection={useBreakpointValue({
+                        base: 'column',
+                        md: 'row',
+                      })}
+                      gap={5}
+                    >
                       <FormControl>
                         <FormLabel htmlFor="area">ÁREA</FormLabel>
                         <Select
@@ -147,10 +154,6 @@ function ModalCadastroAtividade() {
                         </Select>
                       </FormControl>
                     </Flex>
-
-                    <FormLabel>PRECEDENTES</FormLabel>
-
-                    <ListDnD atividades={registerForm.values.precedente} />
 
                     <Flex
                       flexDirection={useBreakpointValue({
