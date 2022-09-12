@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { ActivitiesRegistration } from 'pages/ActivitiesRegistration';
+import { ActivitiesSchedule } from 'pages/ActivitiesSchedule';
 import DetalhamentoProjeto from 'pages/DetalhamentoProjeto';
 import { GanttPage } from 'pages/Gantt';
 import { Home } from 'pages/Home';
@@ -37,6 +38,7 @@ export function PrivateRoutes() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/gantt" element={<GanttPage />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
+      <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

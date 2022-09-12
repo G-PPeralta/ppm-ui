@@ -15,20 +15,18 @@ import {
   Stack,
   useBreakpointValue,
   Input,
-  Textarea,
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
-import ListDnD from 'components/ListDnD';
 import { TextError } from 'components/TextError';
 
 import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
 
-import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
+import { useCadastroTarefa } from 'hooks/useCadastroTarefa';
 
-function ModalCadastrarProjetoTipo() {
+function ModalCadastrarTarefa() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroProjetoTipo();
+  const { registerForm, loading } = useCadastroTarefa();
 
   return (
     <>
@@ -45,9 +43,9 @@ function ModalCadastrarProjetoTipo() {
         }}
         onClick={onOpen}
       >
-        Projeto
+        Tarefa
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -58,7 +56,7 @@ function ModalCadastrarProjetoTipo() {
             color={'white'}
             fontSize={'1em'}
           >
-            Cadastrar Projeto Tipo
+            Cadastrar Tarefa
           </ModalHeader>
           <ModalCloseButton color={'white'} />
           <form
@@ -82,47 +80,17 @@ function ModalCadastrarProjetoTipo() {
                         <FormLabel>NOME</FormLabel>
                         <Input
                           isRequired
-                          placeholder="Nome do Tipo de Intervenção"
-                          id="nomeProjeto"
+                          placeholder="Nome da Tarefa"
+                          id="nomeTarefa"
                           type="text"
-                          name="nomeProjeto"
-                          value={registerForm.values.nomeProjeto}
+                          name="nomeTarefa"
+                          value={registerForm.values.nomeTarefa}
                           onChange={registerForm.handleChange}
                         />
-                        {registerForm.errors.nomeProjeto &&
-                          registerForm.touched.nomeProjeto && (
+                        {registerForm.errors.nomeTarefa &&
+                          registerForm.touched.nomeTarefa && (
                             <TextError>
-                              {registerForm.errors.nomeProjeto}
-                            </TextError>
-                          )}
-                      </FormControl>
-                    </Flex>
-                  </Stack>
-
-                  <ListDnD atividades={registerForm.values.atividades} />
-
-                  <Stack>
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
-                      })}
-                      gap={5}
-                    >
-                      <FormControl>
-                        <FormLabel htmlFor="comentarios">COMENTÁRIOS</FormLabel>
-                        <Textarea
-                          isRequired
-                          placeholder="Adicione comentários sobre o projeto"
-                          id="comentarios"
-                          name="comentarios"
-                          value={registerForm.values.comentarios}
-                          onChange={registerForm.handleChange}
-                        />
-                        {registerForm.errors.comentarios &&
-                          registerForm.touched.comentarios && (
-                            <TextError>
-                              {registerForm.errors.comentarios}
+                              {registerForm.errors.nomeTarefa}
                             </TextError>
                           )}
                       </FormControl>
@@ -174,4 +142,4 @@ function ModalCadastrarProjetoTipo() {
   );
 }
 
-export default ModalCadastrarProjetoTipo;
+export default ModalCadastrarTarefa;

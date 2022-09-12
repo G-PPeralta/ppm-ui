@@ -5,6 +5,7 @@ import {
   // FiTrendingUp,
   FiEdit2,
   FiBarChart,
+  FiActivity,
   // FiUsers,
   FiFile,
 } from 'react-icons/fi';
@@ -31,6 +32,11 @@ export const LinkItems: Array<LinkItemProps> = [
   { name: 'Relatórios', icon: FiFile, link: '/reports' },
   { name: 'Infográficos', icon: FiBarChart, link: '/infographics' },
   // { name: 'Alterar Permissões', icon: FiUsers, link: '/permissions' },
+  {
+    name: 'Cronograma de atividades',
+    icon: FiActivity,
+    link: '/atividade/:id',
+  },
   {
     name: 'Detalhamento Projeto',
     icon: BsBarChartSteps,

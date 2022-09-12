@@ -1,37 +1,23 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { Box, Flex, Heading, Stack } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
 import Sidebar from 'components/SideBar';
 
-import { getInfoCampanha } from 'services/get/Infograficos';
+import { Atividade } from 'services/get/ActivitiesSchedule';
 
-import ColumnSPT from './Components/ColumnSPT';
+import CardACT from './Components/CardACT';
 import ExibirModal from './Components/ExibirModal';
 import FiltrosModal from './Components/FiltrosModal';
-import ModalBotaoCadastrar from './Components/ModalBotaoCadastrar';
-import ModalCadastrarProjetoTipo from './Components/ModalCadastrarProjetoTipo';
-import ModalCadastrarSonda from './Components/ModalCadastrarSonda';
-import ModalCadastrarTarefa from './Components/ModalCadastrarTarefa';
 import ModalCadastroAtividade from './Components/ModalCadastroAtividade';
 import StatusProjeto from './Components/StatusProjeto';
 
-export function Infographics() {
+export function ActivitiesSchedule() {
   const [loading, setLoading] = useState(true);
-  const [campanhas, setCampanhas] = useState([]);
-  // console.log(campanhas);
-  const navigate = useNavigate();
-
-  const handleGetCampanha = async () => {
-    const response = await getInfoCampanha();
-    setCampanhas(response.data);
-    setLoading(false);
-  };
 
   useEffect(() => {
-    handleGetCampanha();
+    setLoading(false);
   }, []);
 
   const statusProjeto = [
@@ -72,7 +58,7 @@ export function Infographics() {
               >
                 <Flex justify={'space-between'} mb={5}>
                   <Heading as="h3" size="md" mb={3}>
-                    Acompanhamento de poços
+                    Acompanhamento de atividades
                   </Heading>
                   <Flex gap={4}>
                     <ExibirModal />
@@ -81,10 +67,7 @@ export function Infographics() {
                 </Flex>
                 <Flex justify={'space-between'} gap={6} wrap={'wrap'} mb={4}>
                   <Flex gap={2}>
-                    <ModalCadastrarSonda />
-                    <ModalCadastrarProjetoTipo />
                     <ModalCadastroAtividade />
-                    <ModalCadastrarTarefa />
                   </Flex>
                   <Flex gap={4} wrap={'wrap'}>
                     {statusProjeto.map((status, index) => (
@@ -96,30 +79,17 @@ export function Infographics() {
                     ))}
                   </Flex>
                 </Flex>
-                <Flex align={'center'} justify={'center'}>
-                  <Box
-                    overflowX={{ base: 'scroll' }}
-                    display={'flex'}
-                    flexDirection={'row'}
-                    gap={10}
-                    py={4}
-                  >
-                    {campanhas.map((column, index) => (
-                      <Flex
-                        key={index}
-                        direction={'column'}
-                        gap={4}
-                        align={'center'}
-                        justify={'center'}
-                        onClick={() => {
-                          navigate('/atividade/:id');
-                        }}
-                      >
-                        <ColumnSPT column={column} />
-                        <ModalBotaoCadastrar />
-                      </Flex>
-                    ))}
-                  </Box>
+                <Flex direction={'row'} gap={4} py={4} wrap={'wrap'}>
+                  {Atividade.map((atividade, index) => (
+                    <Flex
+                      key={index}
+                      direction={'column'}
+                      align={'center'}
+                      justify={'center'}
+                    >
+                      <CardACT atividade={atividade} />
+                    </Flex>
+                  ))}
                 </Flex>
               </Box>
             </Flex>

@@ -13,25 +13,22 @@ export function useCadastroProjetoTipo() {
 
   const registerForm = useFormik({
     initialValues: {
-      nomeId: '',
       nomeProjeto: '',
-      atividadeId: '',
-      atividadeBase: '',
-      atividadeTarefa: '',
-      atividadePrecedente: '',
-      atividadeDias: '',
+      atividades: [
+        {
+          base: '',
+          tarefa: '',
+          precedente: '',
+          dias: 0,
+        },
+      ],
       comentarios: '',
     },
     validationSchema: cadastroProjetoTipoSchema,
     onSubmit: async (values) => {
       const newValues = {
-        nomeId: values.nomeId,
         nomeProjeto: values.nomeProjeto,
-        atividadeId: values.atividadeId,
-        atividadeBase: values.atividadeBase,
-        atividadeTarefa: values.atividadeTarefa,
-        atividadePrecedente: values.atividadePrecedente,
-        atividadeDias: values.atividadeDias,
+        atividades: values.atividades,
         comentarios: values.comentarios,
       };
 
@@ -47,7 +44,7 @@ export function useCadastroProjetoTipo() {
           setLoading(false);
         }
       } catch (error) {
-        toast.error('Erro ao cadastrar intervenção!', {
+        toast.error('Erro ao cadastrar Projeto Tipo!', {
           id: 'toast-principal',
         });
         setLoading(false);
