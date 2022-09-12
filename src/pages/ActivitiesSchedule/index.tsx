@@ -79,20 +79,17 @@ export function ActivitiesSchedule() {
                     ))}
                   </Flex>
                 </Flex>
-                <Flex align={'center'} justify={'center'}>
-                  <Box display={'flex'} flexDirection={'row'} gap={5} py={4}>
-                    {Atividade.map((atividade, index) => (
-                      <Flex
-                        key={index}
-                        direction={'column'}
-                        gap={4}
-                        align={'center'}
-                        justify={'center'}
-                      >
-                        <CardACT atividade={atividade} />
-                      </Flex>
-                    ))}
-                  </Box>
+                <Flex direction={'row'} gap={4} py={4} wrap={'wrap'}>
+                  {Atividade.map((atividade, index) => (
+                    <Flex
+                      key={index}
+                      direction={'column'}
+                      align={'center'}
+                      justify={'center'}
+                    >
+                      <CardACT atividade={atividade} />
+                    </Flex>
+                  ))}
                 </Flex>
               </Box>
             </Flex>
