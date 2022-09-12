@@ -44,3 +44,7 @@ export interface CadastroAtividade {
   tarefaId: number;
   areaAtuacaoId: number;
 }
+
+export interface CadastroPoco {
+  nomePoco: string;
+}

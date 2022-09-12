@@ -4,6 +4,7 @@ import {
   CadastroProjetoTipo,
   CadastroIntervencao,
   CadastroAtividade,
+  CadastroPoco,
 } from 'interfaces/CadastrosModaisInfograficos';
 
 import { api } from 'services/api';
@@ -40,5 +41,12 @@ export async function postProjetoTipo(
   payload: CadastroProjetoTipo,
 ): Promise<{ status: number }> {
   const { status } = await api.post('/', payload);
+  return { status };
+}
+
+export async function postCadastroPoco(
+  payload: CadastroPoco,
+): Promise<{ status: number }> {
+  const { status } = await api.post('/xxxxx', payload);
   return { status };
 }

@@ -47,7 +47,6 @@ function AtividadesDraggable({
   const [render, setRender] = useState(false);
 
   const handlePopover = (index: number, value: boolean) => {
-    console.log('value', value);
     const newList = mockAtividades;
     newList[index].checked = value;
     setMockAtividades(newList);

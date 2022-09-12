@@ -44,6 +44,7 @@ function PopOverPrecedentes({ handlePopover, atividades }: any) {
               <Stack spacing={[1, 3]} direction={'column'}>
                 {atividades.map((atividade: any, index: any) => (
                   <Checkbox
+                    key={index}
                     isChecked={atividade.checked}
                     onChange={(event) =>
                       handlePopover(index, !atividade.checked)
