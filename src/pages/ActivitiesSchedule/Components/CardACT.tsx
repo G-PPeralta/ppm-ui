@@ -54,9 +54,3 @@ function CardACT({ atividade }: Props) {
 }
 
 export default CardACT;
-
-// Remover barra de rolagem ok
-// Fonte da data e porcentagem ok
-// Quebrar linha
-// Tamanho do card diferencia em função do tamanho do texto
-// Finalizar

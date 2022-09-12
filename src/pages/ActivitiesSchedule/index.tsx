@@ -103,10 +103,3 @@ export function ActivitiesSchedule() {
     </>
   );
 }
-
-// Brainstorm
-// Rota provisória simulando o futuro id ok
-// Esqueleto da tela, para posterior inserção da api -quase
-// Mock das atividades ok
-// Receber um id do backend para ser possível uma rota com direcionamento indiviaual para cada poço
-// Além dessa rota individual, cada uma delas levará à uma tela específica com as atividades inerentes ao poço sendo necessário uma lógica que através do id, traga as atividades daquele poço selecionado
