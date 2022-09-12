@@ -11,8 +11,6 @@ type Props = {
 };
 
 function CardACT({ atividade }: Props) {
-  // console.log('atividade', atividade);
-
   return (
     <Flex
       direction={'column'}
@@ -23,11 +21,6 @@ function CardACT({ atividade }: Props) {
       py={2}
       borderRadius={4}
       w={'100%'}
-      // _hover={{
-      //   backgroundColor: '#EB3323',
-      //   transition: 'all 0.4s',
-      //   cursor: 'pointer',
-      // }}
     >
       <Flex direction={'column'}>
         <Text
@@ -36,7 +29,6 @@ function CardACT({ atividade }: Props) {
           fontSize={'lg'}
           color={'white'}
           fontWeight={'bold'}
-          // flexBasis={'basis'}
         >
           {atividade.atividade}
         </Text>
@@ -46,7 +38,6 @@ function CardACT({ atividade }: Props) {
         fontSize={'sm'}
         color={'white'}
         fontWeight={'normal'}
-        // flexGrow={'grow'}
       >
         {atividade.data}
       </Text>
@@ -55,7 +46,6 @@ function CardACT({ atividade }: Props) {
         fontSize={'sm'}
         color={'white'}
         fontWeight={'normal'}
-        // flexGrow={'grow'}
       >
         {atividade.porcentagemFeita}
       </Text>
