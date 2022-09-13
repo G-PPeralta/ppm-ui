@@ -40,12 +40,10 @@ export interface CadastroIntervencao {
 }
 
 export interface CadastroAtividade {
-  nome: string;
-  prioridade: boolean;
   obs: string;
-  atividadeId: number;
   tarefaId: number;
   areaAtuacaoId: number;
+  dias: number;
 }
 
 export interface CadastroPoco {

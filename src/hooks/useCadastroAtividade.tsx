@@ -59,12 +59,10 @@ export function useCadastroAtividade() {
     validationSchema: cadastroAtividadeSchema,
     onSubmit: async (values) => {
       const newValues = {
-        nome: values.nomeAtividade,
-        prioridade: false,
-        atividadeId: parseInt(values.nomeAtividade),
+        tarefaId: parseInt(values.nomeAtividade),
         areaAtuacaoId: parseInt(values.area),
         obs: values.comentarios,
-        tarefaId: 50, // Precisa colocar o campo de tarefa
+        dias: values.dias,
       };
 
       setLoading(true);
