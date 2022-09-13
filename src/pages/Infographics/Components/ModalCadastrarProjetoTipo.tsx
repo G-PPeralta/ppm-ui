@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import {
   Flex,
   Text,
@@ -29,9 +31,32 @@ import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
 function ModalCadastrarProjetoTipo() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroProjetoTipo();
+  const [atividadesList, setAtividadesList] = useState([]);
+
+  const handleParent = (newList: any) => {
+    setAtividadesList(newList);
+  };
 
   const handleSubmit = () => {
-    console.log(registerForm.values.atividades);
+    const payload = atividadesList;
+
+    const payloadFiltrado: any[] = [];
+
+    payload.forEach((pay: any) => {
+      const precedentesArray: any[] = [];
+      for (let i = 0; i < pay.precedentes.length; i += 1) {
+        if (pay.precedentes[i].checked) {
+          precedentesArray.push(pay.precedentes[i].id);
+        }
+      }
+      const newPay = pay;
+      newPay.precedentes = precedentesArray;
+      payloadFiltrado.push(newPay);
+    });
+
+    registerForm.setFieldValue('atividades', payloadFiltrado);
+
+    registerForm.handleSubmit();
   };
 
   return (
@@ -103,7 +128,10 @@ function ModalCadastrarProjetoTipo() {
                     </Flex>
                   </Stack>
 
-                  <ListDnD atividades={registerForm.values.atividades} />
+                  <ListDnD
+                    atividades={registerForm.values.atividades}
+                    handleParent={handleParent}
+                  />
 
                   <Stack>
                     <Flex

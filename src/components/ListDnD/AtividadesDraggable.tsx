@@ -74,12 +74,12 @@ function AtividadesDraggable({
               <FormControl>
                 <Text sx={{ fontSize: 12, fontWeight: '600' }}>ATIVIDADE</Text>
                 <Select
-                  id="tarefa"
-                  name="tarefa"
+                  id="atividade"
+                  name="atividade"
                   placeholder="Selecione"
                   bg={'#fff'}
-                  value={item.tarefa}
-                  onChange={(event) => handleChange(event, 'tarefa')}
+                  value={item.atividade}
+                  onChange={(event) => handleChange(event, 'atividade')}
                 >
                   <option value="option1">Option 1</option>
                   <option value="option2">Option 2</option>

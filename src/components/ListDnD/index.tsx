@@ -18,7 +18,7 @@ const reorder = (list: any, startIndex: any, endIndex: any) => {
   return result;
 };
 
-export default function ListDnD({ atividades }: any) {
+export default function ListDnD({ atividades, handleParent }: any) {
   const [list, setList] = useState<any>([]);
   const [render, setRender] = useState<any>([]);
   const [id, setId] = useState<any>('listID');
@@ -75,6 +75,7 @@ export default function ListDnD({ atividades }: any) {
     newList[index][chave] = value;
     setList(newList);
     setRender(!render);
+    handleParent(newList);
   };
 
   useEffect(() => {
