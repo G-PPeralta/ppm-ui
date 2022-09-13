@@ -90,8 +90,6 @@ export default function ListDnD({ atividades }: any) {
     setId(newId);
   }, []);
 
-  console.log('List', list);
-
   return (
     <>
       <FormLabel mb={0}>ATIVIDADES</FormLabel>
