@@ -57,6 +57,7 @@ function ModalCadastrarProjetoTipo() {
     registerForm.setFieldValue('atividades', payloadFiltrado);
 
     registerForm.handleSubmit();
+    onClose();
   };
 
   return (
