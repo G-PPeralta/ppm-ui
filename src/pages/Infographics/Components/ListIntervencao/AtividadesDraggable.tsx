@@ -39,70 +39,63 @@ function AtividadesDraggable({
         >
           <Box
             display="flex"
-            flexWrap="wrap"
             flexDirection="row"
             alignItems="center"
             justifyContent="center"
-            ml="12.5%"
-            w="75%"
+            w="100%"
             bg={'#f5f5f5'}
             px={5}
             py={2}
             borderRadius={'60px'}
             mb={2}
+            gap={4}
           >
-            <Flex flexDirection={'row'} gap={4}>
-              <Flex align={'center'} justify={'center'} gap={3}>
-                <GiHamburgerMenu color="#2E69FD" size={16} />
-                <Text sx={{ fontSize: 16, fontWeight: '600' }}>
-                  {index + 1}
-                </Text>
-              </Flex>
-              <FormControl>
-                <Text sx={{ fontSize: 12, fontWeight: '600' }}>ATIVIDADE</Text>
-                <Select
-                  id="atividade"
-                  name="atividade"
-                  placeholder="Selecione"
-                  bg={'#fff'}
-                  value={item.atividade}
-                  onChange={(event) => handleChange(event, 'atividade')}
-                >
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
-                </Select>
-              </FormControl>
-              <FormControl>
-                <Text sx={{ fontSize: 12, fontWeight: '600' }}>
-                  RESPONSÁVEL
-                </Text>
-                <Select
-                  disabled={true}
-                  id="responsavel"
-                  name="responsavel"
-                  placeholder="Selecione"
-                  bg={'#fff'}
-                  value={item.responsavel}
-                  onChange={(event) => handleChange(event, 'responsavel')}
-                >
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
-                </Select>
-              </FormControl>
-              <Flex
-                p={1}
-                align={'center'}
-                justify={'center'}
-                _hover={{ cursor: 'pointer' }}
+            <Flex align={'center'} justify={'center'} gap={3}>
+              <GiHamburgerMenu color="#2E69FD" size={16} />
+              <Text sx={{ fontSize: 16, fontWeight: '600' }}>{index + 1}</Text>
+            </Flex>
+            <FormControl>
+              <Text sx={{ fontSize: 12, fontWeight: '600' }}>ATIVIDADE</Text>
+              <Select
+                id="atividade"
+                name="atividade"
+                placeholder="Selecione"
+                bg={'#fff'}
+                value={item.atividade}
+                onChange={(event) => handleChange(event, 'atividade')}
               >
-                <FiTrash
-                  onClick={() => remove(index)}
-                  color="#F94144"
-                  size={16}
-                />
-              </Flex>
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+              </Select>
+            </FormControl>
+            <FormControl>
+              <Text sx={{ fontSize: 12, fontWeight: '600' }}>RESPONSÁVEL</Text>
+              <Select
+                disabled={true}
+                id="responsavel"
+                name="responsavel"
+                placeholder="Selecione"
+                bg={'#fff'}
+                value={item.responsavel}
+                onChange={(event) => handleChange(event, 'responsavel')}
+              >
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+              </Select>
+            </FormControl>
+            <Flex
+              p={1}
+              align={'center'}
+              justify={'center'}
+              _hover={{ cursor: 'pointer' }}
+            >
+              <FiTrash
+                onClick={() => remove(index)}
+                color="#F94144"
+                size={16}
+              />
             </Flex>
           </Box>
         </div>

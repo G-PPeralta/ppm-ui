@@ -81,17 +81,15 @@ function ModalCadastroPoco() {
                         <Input
                           isRequired
                           placeholder="Nome do Poço"
-                          id="nomePoco"
+                          id="poco"
                           type="text"
-                          name="nomePoco"
-                          value={registerForm.values.nomePoco}
+                          name="poco"
+                          value={registerForm.values.poco}
                           onChange={registerForm.handleChange}
                         />
-                        {registerForm.errors.nomePoco &&
-                          registerForm.touched.nomePoco && (
-                            <TextError>
-                              {registerForm.errors.nomePoco}
-                            </TextError>
+                        {registerForm.errors.poco &&
+                          registerForm.touched.poco && (
+                            <TextError>{registerForm.errors.poco}</TextError>
                           )}
                       </FormControl>
                     </Flex>

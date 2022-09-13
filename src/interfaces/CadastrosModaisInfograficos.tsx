@@ -46,5 +46,5 @@ export interface CadastroAtividade {
 }
 
 export interface CadastroPoco {
-  nomePoco: string;
+  poco: string;
 }

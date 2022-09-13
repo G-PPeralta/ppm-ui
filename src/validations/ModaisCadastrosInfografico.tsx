@@ -44,3 +44,7 @@ export const cadastroProjetoTipoSchema = yup.object({
   ),
   comentarios: yup.string().required(),
 });
+
+export const cadastroPocoSchema = yup.object({
+  poco: yup.string().required('O nome do poço é obrigatório!'),
+});
