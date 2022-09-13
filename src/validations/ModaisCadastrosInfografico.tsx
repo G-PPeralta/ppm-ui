@@ -37,7 +37,12 @@ export const cadastroProjetoTipoSchema = yup.object({
   atividades: yup.array().of(
     yup.object({
       atividade: yup.string().required(),
-      precedentes: yup.array().of(yup.string()),
+      precedentes: yup.array().of(
+        yup.object({
+          id: yup.string(),
+          nomeAtividade: yup.string(),
+        }),
+      ),
     }),
   ),
   comentarios: yup.string().required(),

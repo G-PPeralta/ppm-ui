@@ -49,7 +49,15 @@ export default function ListDnD({ atividades }: any) {
 
   const add = () => {
     const newList = list;
-    newList.push({ base: '', tarefa: '', precedente: '', dias: 0 });
+    newList.push({
+      atividade: '',
+      precedentes: [
+        {
+          id: 0,
+          nomeAtividade: '',
+        },
+      ],
+    });
     setList(newList);
     setRender(!render);
   };

@@ -101,7 +101,7 @@ function AtividadesDraggable({
               <FormControl>
                 <Text sx={{ fontSize: 12, fontWeight: '600' }}>DIAS</Text>
                 <Input
-                  placeholder="Digite o número de dias"
+                  placeholder="0"
                   type={'number'}
                   bg={'#fff'}
                   id="dias"

@@ -6,9 +6,14 @@ export interface CadastroTarefa {
   tarefa: string;
 }
 
+export interface Precedentes {
+  id: number;
+  nomeAtividade: string;
+}
+
 export interface AtividadesProjetoTipo {
   atividade: string;
-  precedentes: string[];
+  precedentes: Precedentes[];
 }
 
 export interface CadastroProjetoTipo {
