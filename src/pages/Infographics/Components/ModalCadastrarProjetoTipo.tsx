@@ -31,7 +31,7 @@ function ModalCadastrarProjetoTipo() {
   const { registerForm, loading } = useCadastroProjetoTipo();
 
   const handleSubmit = () => {
-    console.log(registerForm.values);
+    console.log(registerForm.values.atividades);
   };
 
   return (

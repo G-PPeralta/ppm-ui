@@ -23,7 +23,7 @@ export default function ListDnD({ atividades }: any) {
   const [render, setRender] = useState<any>([]);
   const [id, setId] = useState<any>('listID');
 
-  const mockAtividades = useState([
+  const mockAtividades = [
     { id: 1, nome: 'Atividade 1', checked: false },
     { id: 2, nome: 'Atividade 2', checked: false },
     { id: 3, nome: 'Atividade 3', checked: false },
@@ -34,7 +34,7 @@ export default function ListDnD({ atividades }: any) {
     { id: 8, nome: 'Atividade 8', checked: false },
     { id: 9, nome: 'Atividade 9', checked: false },
     { id: 10, nome: 'Atividade 10', checked: false },
-  ]);
+  ];
 
   function onDragEnd(result: any) {
     if (!result.destination) {
@@ -64,12 +64,7 @@ export default function ListDnD({ atividades }: any) {
     const newList = list;
     newList.push({
       atividade: '',
-      precedentes: [
-        {
-          id: 0,
-          nomeAtividade: '',
-        },
-      ],
+      precedentes: mockAtividades,
     });
     setList(newList);
     setRender(!render);
@@ -84,17 +79,18 @@ export default function ListDnD({ atividades }: any) {
 
   useEffect(() => {
     const newAtividades: any[] = [];
-    atividades.map((atividade: any) => {
-      atividade.atividades = mockAtividades;
-      newAtividades.push(atividade);
+    atividades.map((act: any) => {
+      act.precedentes = mockAtividades;
+      newAtividades.push(act);
       return {};
     });
     setList(newAtividades);
     const now = Date.now();
     const newId = id + '-' + now.toLocaleString();
     setId(newId);
-    console.log('newId', newId);
   }, []);
+
+  console.log('List', list);
 
   return (
     <>

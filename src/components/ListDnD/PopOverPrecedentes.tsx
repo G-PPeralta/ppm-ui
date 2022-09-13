@@ -37,10 +37,7 @@ function PopOverPrecedentes({ handlePopover, atividades }: any) {
           <PopoverArrow />
           <PopoverCloseButton />
           <PopoverBody>
-            <CheckboxGroup
-              colorScheme="blue"
-              defaultValue={['naruto', 'kakashi']}
-            >
+            <CheckboxGroup colorScheme="blue">
               <Stack spacing={[1, 3]} direction={'column'}>
                 {atividades.map((atividade: any, index: any) => (
                   <Checkbox

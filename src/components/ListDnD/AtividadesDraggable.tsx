@@ -35,9 +35,9 @@ function AtividadesDraggable({
   const [render, setRender] = useState(false);
 
   const handlePopover = (indexIn: number, value: boolean) => {
-    const newList = item.atividades;
+    const newList = item.precedentes;
     newList[indexIn].checked = value;
-    handleChangeProp(index, 'atividades', newList);
+    handleChangeProp(index, 'precedentes', newList);
     // setMockAtividades(newList);
     setRender(!render);
   };
@@ -107,7 +107,7 @@ function AtividadesDraggable({
                 </Text>
                 <PopOverPrecedentes
                   handlePopover={handlePopover}
-                  atividades={item.atividades}
+                  atividades={item.precedentes}
                 />
               </Flex>
 

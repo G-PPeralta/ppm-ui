@@ -54,9 +54,6 @@ export function Infographics() {
       color: '#F40606',
     },
   ];
-
-  console.log(campanhas);
-
   return (
     <>
       <Sidebar>
