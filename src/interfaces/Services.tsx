@@ -266,3 +266,8 @@ export interface AtividadeLista {
   id: number;
   nome: string;
 }
+
+export interface Tarefa {
+  id: number;
+  tarefa: string;
+}

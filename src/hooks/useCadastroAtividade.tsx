@@ -5,6 +5,7 @@ import {
   AreaAtuacao,
   AtividadeLista,
   RegistroResponsavel,
+  Tarefa,
 } from 'interfaces/Services';
 import { cadastroAtividadeSchema } from 'validations/ModaisCadastrosInfografico';
 
@@ -14,6 +15,7 @@ import {
   getAreaAtuacaoList,
   getAtividadesList,
   getResponsavelList,
+  getTarefaList,
 } from 'services/get/Infograficos';
 import { postCadastroAtividade } from 'services/post/CadastroModaisInfograficos';
 
@@ -25,7 +27,7 @@ export function useCadastroAtividade() {
   >([]);
   const [listaArea, setListaArea] = useState<AreaAtuacao[]>([]);
   const [listaAtividades, setListaAtividades] = useState<AtividadeLista[]>([]);
-  const [listaTarefa, setListaTarefa] = useState<AreaAtuacao[]>([]);
+  const [listaTarefa, setListaTarefa] = useState<Tarefa[]>([]);
 
   const carregarListaResponsavel = async () => {
     const { data } = await getResponsavelList();
@@ -43,7 +45,7 @@ export function useCadastroAtividade() {
   };
 
   const carregarListaTarefa = async () => {
-    const { data } = await getAreaAtuacaoList();
+    const { data } = await getTarefaList();
     setListaTarefa(data);
   };
 

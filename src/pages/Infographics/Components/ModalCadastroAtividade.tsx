@@ -98,7 +98,7 @@ function ModalCadastroAtividade() {
                           {listaTarefa.map((data, index) => (
                             // {listaArea.map((data, index) => (
                             <option value={data.id} key={index}>
-                              {data.tipo}
+                              {data.tarefa}
                             </option>
                           ))}
                         </Select>

@@ -2,9 +2,10 @@ import {
   AreaAtuacao,
   AtividadeLista,
   RegistroResponsavel,
+  Tarefa,
 } from 'interfaces/Services';
 
-import { api } from 'services/api';
+import { api, token } from 'services/api';
 
 export async function getInfoCampanha(): Promise<{
   data: any;
@@ -36,11 +37,7 @@ export async function getAreaAtuacaoList(): Promise<{
   data: AreaAtuacao[];
   status: number;
 }> {
-  const { data, status } = await api.get(`/area-atuacao`, {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
-    },
-  });
+  const { data, status } = await api.get(`/area-atuacao`, token());
 
   return { data, status };
 }
@@ -49,11 +46,16 @@ export async function getAtividadesList(): Promise<{
   data: AtividadeLista[];
   status: number;
 }> {
-  const { data, status } = await api.get(`/atividades-intervencoes`, {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
-    },
-  });
+  const { data, status } = await api.get(`/atividades-intervencoes`, token());
+
+  return { data, status };
+}
+
+export async function getTarefaList(): Promise<{
+  data: Tarefa[];
+  status: number;
+}> {
+  const { data, status } = await api.get(`/tarefa`, token());
 
   return { data, status };
 }

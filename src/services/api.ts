@@ -6,8 +6,8 @@ export const api = axios.create({
   baseURL: urlAPI,
 });
 
-export const token = {
+export const token = () => ({
   headers: {
     Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
   },
-};
+});
