@@ -8,6 +8,7 @@ import Sidebar from 'components/SideBar';
 
 import { getInfoCampanha } from 'services/get/Infograficos';
 
+import { statusProjeto } from '../../utils/validateDate';
 import ColumnSPT from './Components/ColumnSPT';
 import ExibirModal from './Components/ExibirModal';
 import FiltrosModal from './Components/FiltrosModal';
@@ -34,28 +35,21 @@ export function Infographics() {
     handleGetCampanha();
   }, []);
 
-  const statusProjeto = [
-    {
-      status: 'Não Aplicável',
-      color: '#F4DD06',
-    },
-    {
-      status: 'Não Iniciado',
-      color: '#FFB400',
-    },
-    {
-      status: 'Concluído',
-      color: '#059502',
-    },
-    {
-      status: 'Em Andamento',
-      color: '#0047BB',
-    },
-    {
-      status: 'Atrasado',
-      color: '#F40606',
-    },
-  ];
+  // const projectStatus = (date) => {
+  //   const dateTime = new Date();
+  //   const formatDate =
+  //     dateTime.getUTCFullYear() +
+  //     '/' +
+  //     (dateTime.getMonth() + 1) +
+  //     '/' +
+  //     dateTime.getUTCDate();
+  //   if (formatDate > date) return statusProjeto.status;
+  // };
+
+  // Se a data prevista pra término < data de hoje = atrasado
+  // Se a data prevista pra término > data de hoje = em andamento
+
+  // console.log(validateDate('2022-10-20T12:01:04.753Z'));
 
   return (
     <>
