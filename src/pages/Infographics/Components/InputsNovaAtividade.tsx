@@ -42,7 +42,7 @@ function InputsNovaAtividade({ index }: any) {
             id="atividades[0].base"
             name="atividades[0].base"
             placeholder="Selecione"
-            value={registerForm.values.atividades[index].base}
+            // value={registerForm.values.atividades[index].base}
             onChange={(event) => handleChange(event)}
           >
             <option value="option1">Option 1</option>
@@ -57,7 +57,7 @@ function InputsNovaAtividade({ index }: any) {
             id="tarefa"
             name="tarefa"
             placeholder="Selecione"
-            value={registerForm.values.atividades[index].tarefa}
+            // value={registerForm.values.atividades[index].tarefa}
             onChange={registerForm.handleChange}
           >
             <option value="option1">Option 1</option>
@@ -72,7 +72,7 @@ function InputsNovaAtividade({ index }: any) {
             id="precedente"
             name="precedente"
             placeholder="Selecione"
-            value={registerForm.values.atividades[index].precedente}
+            // value={registerForm.values.atividades[index].precedente}
             onChange={registerForm.handleChange}
           >
             <option value="option1">Option 1</option>
@@ -87,7 +87,7 @@ function InputsNovaAtividade({ index }: any) {
             id="dias"
             name="dias"
             placeholder="Selecione"
-            value={registerForm.values.atividades[index].dias}
+            // value={registerForm.values.atividades[index].dias}
             onChange={registerForm.handleChange}
           >
             <option value="option1">Option 1</option>

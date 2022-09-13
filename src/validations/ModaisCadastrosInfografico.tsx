@@ -36,10 +36,8 @@ export const cadastroProjetoTipoSchema = yup.object({
   nomeProjeto: yup.string().required('O nome do projeto é obrigatório!'),
   atividades: yup.array().of(
     yup.object({
-      base: yup.string().required(),
-      tarefa: yup.string().required(),
-      precedente: yup.string().required(),
-      dias: yup.number().required(),
+      atividade: yup.string().required(),
+      precedentes: yup.array().of(yup.string()),
     }),
   ),
   comentarios: yup.string().required(),

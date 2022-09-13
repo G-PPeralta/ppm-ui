@@ -22,13 +22,17 @@ import { Ring } from '@uiball/loaders';
 import ListDnD from 'components/ListDnD';
 import { TextError } from 'components/TextError';
 
-import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
+import { handleCancelar } from 'utils/handleCadastro';
 
 import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
 
 function ModalCadastrarProjetoTipo() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroProjetoTipo();
+
+  const handleSubmit = () => {
+    console.log(registerForm.values);
+  };
 
   return (
     <>
@@ -151,7 +155,7 @@ function ModalCadastrarProjetoTipo() {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={handleSubmit}
                   _hover={{
                     background: 'origem.500',
                     transition: 'all 0.4s',

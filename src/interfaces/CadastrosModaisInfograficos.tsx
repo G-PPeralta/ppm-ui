@@ -7,10 +7,8 @@ export interface CadastroTarefa {
 }
 
 export interface AtividadesProjetoTipo {
-  base: string;
-  tarefa: string;
-  precedente: string;
-  dias: number;
+  atividade: string;
+  precedentes: string[];
 }
 
 export interface CadastroProjetoTipo {
