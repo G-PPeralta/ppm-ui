@@ -264,7 +264,7 @@ export interface AreaAtuacao {
 
 export interface AtividadeLista {
   id: number;
-  nome: string;
+  tarefa: string;
 }
 
 export interface Tarefa {

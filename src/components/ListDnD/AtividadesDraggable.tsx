@@ -24,7 +24,7 @@ function AtividadesDraggable({
   handleChangeProp,
   list,
 }: Props) {
-  const { registerForm } = useCadastroProjetoTipo();
+  const { registerForm, listaAtividades } = useCadastroProjetoTipo();
 
   const handleChange = (event: any, chave: any) => {
     item[chave] = event.target.value;
@@ -81,9 +81,12 @@ function AtividadesDraggable({
                   value={item.atividade}
                   onChange={(event) => handleChange(event, 'atividade')}
                 >
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
+                  {listaAtividades.map((data, index) => (
+                    // {listaArea.map((data, index) => (
+                    <option value={data.id} key={index}>
+                      {data.tarefa}
+                    </option>
+                  ))}
                 </Select>
               </FormControl>
 
