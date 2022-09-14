@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import { useFormik } from 'formik';
 // import { cadastroProjetoTipoSchema } from 'validations/ModaisCadastrosInfografico';
-
 import { AtividadeLista } from 'interfaces/Services';
 
 import { useToast } from 'contexts/Toast';
