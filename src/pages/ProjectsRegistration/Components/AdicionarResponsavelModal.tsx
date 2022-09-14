@@ -21,47 +21,21 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import { TextError } from 'components/TextError';
+// import { TextError } from 'components/TextError';
 
 import { postResponsavel } from 'services/post/ProjectRegister';
 
 export function AdicionarResponsavelModal(projectsForm: any) {
-  const [numeroDeResponsaveis, setNumeroDeResponsaveis] = useState([
-    {
-      nome: '',
-    },
-  ]);
+  const [responsavel, setResponsavel] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  function addResponsible() {
-    setNumeroDeResponsaveis([
-      ...numeroDeResponsaveis,
-      {
-        nome: '',
-      },
-    ]);
-  }
-
-  function handleChange(event: any, index: number): void {
-    setNumeroDeResponsaveis([
-      ...numeroDeResponsaveis.slice(0, index),
-      {
-        ...numeroDeResponsaveis[index],
-        [event.target.name]: event.target.value,
-      },
-      ...numeroDeResponsaveis.slice(index + 1),
-    ]);
+  function handleChange(event: any): void {
+    setResponsavel(event.target.value);
   }
 
   function saveResponsible() {
-    projectsForm.projectsForm.setFieldValue(
-      'responsaveis',
-      numeroDeResponsaveis.filter((item) => item.nome !== ''),
-    );
-    const responsaveis = {
-      responsaveis: numeroDeResponsaveis,
-    };
-    postResponsavel(responsaveis);
+    projectsForm.projectsForm.setFieldValue('responsavel', responsavel);
+    postResponsavel(projectsForm.projectsForm.values.responsavel);
     onClose();
   }
 
@@ -108,50 +82,33 @@ export function AdicionarResponsavelModal(projectsForm: any) {
           <ModalHeader>ADICIONAR RESPONSÁVEL</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {numeroDeResponsaveis.map((responsavel: any, index: number) => (
-              <Flex align="end" mb={3} key={index}>
-                <FormControl>
-                  <FormLabel htmlFor="nome">NOME</FormLabel>
-                  <Input
-                    isRequired
-                    placeholder="Nome do responsável"
-                    type="text"
-                    id="nome"
-                    name="nome"
-                    value={responsavel.nome}
-                    onChange={(event) => handleChange(event, index)}
-                    width="100%"
-                  />
-                  {projectsForm.projectsForm.errors.responsavel &&
-                    projectsForm.projectsForm.touched.responsavel && (
-                      <TextError>
-                        {projectsForm.projectsForm.errors.responsavel}
-                      </TextError>
-                    )}
-                </FormControl>
-              </Flex>
-            ))}
+            <Flex align="end" mb={3}>
+              <FormControl>
+                <FormLabel htmlFor="nome">NOME</FormLabel>
+                <Input
+                  isRequired
+                  placeholder="Nome do responsável"
+                  type="text"
+                  id="nome"
+                  name="nome"
+                  value={responsavel}
+                  onChange={(event) => handleChange(event)}
+                  width="100%"
+                />
+                {/* {projectsForm.projectsForm.errors.responsavel &&
+                  projectsForm.projectsForm.touched.responsavel && (
+                    <TextError>
+                      {projectsForm.projectsForm.errors.responsavel}
+                    </TextError>
+                  )} */}
+              </FormControl>
+            </Flex>
             <Flex
               flexDirection={useBreakpointValue({
                 base: 'column',
                 md: 'row',
               })}
-            >
-              <Button
-                onClick={addResponsible}
-                background="origem.300"
-                variant="primary"
-                color="white"
-                mb={1}
-                size="sm"
-                _hover={{
-                  background: 'origem.500',
-                  transition: 'all 0.4s',
-                }}
-              >
-                ADICIONAR OUTRA PESSOA RESPONSÁVEL
-              </Button>
-            </Flex>
+            ></Flex>
           </ModalBody>
 
           <ModalFooter>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useFormik } from 'formik';
-import { projectRegisterSchema } from 'validations/ProjectRegister';
+// import { projectRegisterSchema } from 'validations/ProjectRegister';
 
 import { useToast } from 'contexts/Toast';
 
@@ -33,21 +33,13 @@ export function useProjects() {
       tipoProjetoId: 0,
       demandaId: 0,
       comentarios: '',
-      responsaveis: [
-        {
-          nomeResponsavel: '',
-        },
-      ],
-      coordenadores: [
-        {
-          coordenadorNome: '',
-        },
-      ],
-      responsavelId: [0],
-      coordenadorId: [0],
+      responsavel: '',
+      coordenador: '',
+      responsavelId: 0,
+      coordenadorId: 0,
       elementoPep: '',
     },
-    validationSchema: projectRegisterSchema,
+    // validationSchema: projectRegisterSchema,
     onSubmit: async (values) => {
       const newValues = {
         nomeProjeto: values.nomeProjeto,
