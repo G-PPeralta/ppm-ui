@@ -5,6 +5,7 @@ import {
   AreaAtuacao,
   AtividadeLista,
   RegistroResponsavel,
+  Tarefa,
 } from 'interfaces/Services';
 import { cadastroAtividadeSchema } from 'validations/ModaisCadastrosInfografico';
 
@@ -14,6 +15,7 @@ import {
   getAreaAtuacaoList,
   getAtividadesList,
   getResponsavelList,
+  getTarefaList,
 } from 'services/get/Infograficos';
 import { postCadastroAtividade } from 'services/post/CadastroModaisInfograficos';
 
@@ -25,6 +27,7 @@ export function useCadastroAtividade() {
   >([]);
   const [listaArea, setListaArea] = useState<AreaAtuacao[]>([]);
   const [listaAtividades, setListaAtividades] = useState<AtividadeLista[]>([]);
+  const [listaTarefa, setListaTarefa] = useState<Tarefa[]>([]);
 
   const carregarListaResponsavel = async () => {
     const { data } = await getResponsavelList();
@@ -41,33 +44,25 @@ export function useCadastroAtividade() {
     setListaAtividades(data);
   };
 
+  const carregarListaTarefa = async () => {
+    const { data } = await getTarefaList();
+    setListaTarefa(data);
+  };
+
   const registerForm = useFormik({
     initialValues: {
       nomeAtividade: '',
-      responsavel: '',
+      dias: 0,
       area: '',
-      tarefa: '',
-      precedente: [
-        {
-          ordem: 1,
-          atividade: '',
-          tipo: '',
-          dias: 0,
-          restricao: '',
-        },
-      ],
       comentarios: '',
     },
     validationSchema: cadastroAtividadeSchema,
     onSubmit: async (values) => {
       const newValues = {
-        nome: values.nomeAtividade,
-        prioridade: false,
-        responsavelId: parseInt(values.responsavel),
+        tarefaId: parseInt(values.nomeAtividade),
         areaAtuacaoId: parseInt(values.area),
-        // atividadesPrecedentes: values.precedente,
         obs: values.comentarios,
-        tarefaId: 50, // Precisa colocar o campo de tarefa
+        dias: values.dias,
       };
 
       setLoading(true);
@@ -94,12 +89,14 @@ export function useCadastroAtividade() {
     carregarListaResponsavel();
     carregarAreaAtuacao();
     carregarListaAtividade();
+    carregarListaTarefa();
   }, []);
 
   return {
     registerForm,
     loading,
     ListaResponsavel,
+    listaTarefa,
     listaArea,
     listaAtividades,
   };

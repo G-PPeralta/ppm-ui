@@ -18,23 +18,10 @@ const reorder = (list: any, startIndex: any, endIndex: any) => {
   return result;
 };
 
-export default function ListDnD({ atividades, handleParent }: any) {
+export default function ListDnD({ atividades }: any) {
   const [list, setList] = useState<any>([]);
   const [render, setRender] = useState<any>([]);
   const [id, setId] = useState<any>('listID');
-
-  const mockAtividades = [
-    { id: 1, nome: 'Atividade 1', checked: false },
-    { id: 2, nome: 'Atividade 2', checked: false },
-    { id: 3, nome: 'Atividade 3', checked: false },
-    { id: 4, nome: 'Atividade 4', checked: false },
-    { id: 5, nome: 'Atividade 5', checked: false },
-    { id: 6, nome: 'Atividade 6', checked: false },
-    { id: 7, nome: 'Atividade 7', checked: false },
-    { id: 8, nome: 'Atividade 8', checked: false },
-    { id: 9, nome: 'Atividade 9', checked: false },
-    { id: 10, nome: 'Atividade 10', checked: false },
-  ];
 
   function onDragEnd(result: any) {
     if (!result.destination) {
@@ -62,10 +49,7 @@ export default function ListDnD({ atividades, handleParent }: any) {
 
   const add = () => {
     const newList = list;
-    newList.push({
-      atividade: '',
-      precedentes: mockAtividades,
-    });
+    newList.push({ base: '', tarefa: '', precedente: '', dias: 0 });
     setList(newList);
     setRender(!render);
   };
@@ -75,17 +59,10 @@ export default function ListDnD({ atividades, handleParent }: any) {
     newList[index][chave] = value;
     setList(newList);
     setRender(!render);
-    handleParent(newList);
   };
 
   useEffect(() => {
-    const newAtividades: any[] = [];
-    atividades.map((act: any) => {
-      act.precedentes = mockAtividades;
-      newAtividades.push(act);
-      return {};
-    });
-    setList(newAtividades);
+    setList(atividades);
     const now = Date.now();
     const newId = id + '-' + now.toLocaleString();
     setId(newId);

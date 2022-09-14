@@ -16,6 +16,7 @@ import ModalCadastrarProjetoTipo from './Components/ModalCadastrarProjetoTipo';
 import ModalCadastrarSonda from './Components/ModalCadastrarSonda';
 import ModalCadastrarTarefa from './Components/ModalCadastrarTarefa';
 import ModalCadastroAtividade from './Components/ModalCadastroAtividade';
+import ModalCadastroPoco from './Components/ModalCadastroPoco';
 import StatusProjeto from './Components/StatusProjeto';
 
 export function Infographics() {
@@ -56,7 +57,6 @@ export function Infographics() {
       color: '#F40606',
     },
   ];
-
   return (
     <>
       <Sidebar>
@@ -85,6 +85,7 @@ export function Infographics() {
                     <ModalCadastrarProjetoTipo />
                     <ModalCadastroAtividade />
                     <ModalCadastrarTarefa />
+                    <ModalCadastroPoco />
                   </Flex>
                   <Flex gap={4} wrap={'wrap'}>
                     {statusProjeto.map((status, index) => (

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { FiTrash } from 'react-icons/fi';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -5,6 +6,8 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { Box, Flex, FormControl, Input, Select, Text } from '@chakra-ui/react';
 
 import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
+
+import PopOverPrecedentes from './PopOverPrecedentes';
 
 interface Props {
   index: number;
@@ -21,12 +24,22 @@ function AtividadesDraggable({
   handleChangeProp,
   list,
 }: Props) {
-  const { registerForm } = useCadastroProjetoTipo();
+  const { registerForm, listaAtividades } = useCadastroProjetoTipo();
 
   const handleChange = (event: any, chave: any) => {
     item[chave] = event.target.value;
     handleChangeProp(index, chave, event.target.value);
     registerForm.setFieldValue('atividades', list);
+  };
+
+  const [render, setRender] = useState(false);
+
+  const handlePopover = (indexIn: number, value: boolean) => {
+    const newList = item.precedentes;
+    newList[indexIn].checked = value;
+    handleChangeProp(index, 'precedentes', newList);
+    // setMockAtividades(newList);
+    setRender(!render);
   };
 
   return (
@@ -57,66 +70,50 @@ function AtividadesDraggable({
                   {index + 1}
                 </Text>
               </Flex>
-              <FormControl>
-                <Text sx={{ fontSize: 12, fontWeight: '600' }}>BASE</Text>
-                <Select
-                  id={'base'}
-                  name={'base'}
-                  placeholder="Selecione"
-                  bg={'#fff'}
-                  value={item.base}
-                  onChange={(event) => handleChange(event, 'base')}
-                >
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
-                </Select>
-              </FormControl>
+
               <FormControl>
                 <Text sx={{ fontSize: 12, fontWeight: '600' }}>ATIVIDADE</Text>
                 <Select
-                  id="tarefa"
-                  name="tarefa"
+                  id="atividade"
+                  name="atividade"
                   placeholder="Selecione"
                   bg={'#fff'}
-                  value={item.tarefa}
-                  onChange={(event) => handleChange(event, 'tarefa')}
+                  value={item.atividade}
+                  onChange={(event) => handleChange(event, 'atividade')}
                 >
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
-                </Select>
-              </FormControl>
-              <FormControl>
-                <Text sx={{ fontSize: 12, fontWeight: '600' }}>
-                  PRECEDENTES
-                </Text>
-                <Select
-                  id="precedente"
-                  name="precedente"
-                  placeholder="Selecione"
-                  bg={'#fff'}
-                  value={item.precedente}
-                  onChange={(event) => handleChange(event, 'precedente')}
-                >
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
+                  {listaAtividades.map((data, index) => (
+                    // {listaArea.map((data, index) => (
+                    <option value={data.id} key={index}>
+                      {data.tarefa}
+                    </option>
+                  ))}
                 </Select>
               </FormControl>
 
               <FormControl>
                 <Text sx={{ fontSize: 12, fontWeight: '600' }}>DIAS</Text>
                 <Input
-                  placeholder="Digite o número de dias"
+                  placeholder="0"
                   type={'number'}
                   bg={'#fff'}
                   id="dias"
                   name="dias"
                   value={item.dias}
                   onChange={(event) => handleChange(event, 'dias')}
+                  isDisabled
                 />
               </FormControl>
+
+              <Flex direction={'column'}>
+                <Text sx={{ fontSize: 12, fontWeight: '600' }}>
+                  PRECEDENTES
+                </Text>
+                <PopOverPrecedentes
+                  handlePopover={handlePopover}
+                  atividades={item.precedentes}
+                />
+              </Flex>
+
               {/* <Flex
                 p={1}
                 align={'center'}
@@ -129,6 +126,7 @@ function AtividadesDraggable({
                   size={16}
                 />
               </Flex> */}
+
               <Flex
                 p={1}
                 align={'center'}

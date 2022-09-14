@@ -14,9 +14,9 @@ const root = ReactDOM.createRoot(container);
 registerLicense(`${process.env.REACT_APP_SYNCFUSION_KEY}`);
 
 root.render(
-  <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <App />
-    </ChakraProvider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <ChakraProvider theme={theme}>
+    <App />
+  </ChakraProvider>,
+  // </React.StrictMode>,
 );

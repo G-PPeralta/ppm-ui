@@ -9,27 +9,26 @@ export const cadastroSondaSchema = yup.object({
 });
 
 export const cadastroIntervencaoSchema = yup.object({
+  intervencao: yup.string().required('Nome é obrigatório'),
   poco: yup.string().required('Poco é obrigatório'),
-  campo: yup.string().required('Campo é obrigatório'),
   sonda: yup.string().required('Sonda é obrigatória'),
-  sequencia: yup.string().required('Sequência é obrigatória'),
   inicioPrevisto: yup.string().required('Início previsto é obrigatório'),
+  fimPrevisto: yup.string().required('Fim previsto é obrigatório'),
   projeto: yup.string().required('Projeto é obrigatório'),
-  observacoes: yup.string().required('Observações é obrigatório'),
+  atividades: yup.array().of(
+    yup.object({
+      ordem: yup.number(),
+      atividade: yup.string().required('Atividade é obrigatório'),
+      responsável: yup.string(),
+    }),
+  ),
+  observacoes: yup.string(),
 });
 
 export const cadastroAtividadeSchema = yup.object({
   nomeAtividade: yup.string().required('O nome da atividade é obrigatório!'),
-  responsavel: yup.string().required('O responsável é obrigatório!'),
+  dias: yup.number().required('A quantidade de dias é obrigatória'),
   area: yup.string().required('A área é obrigatória!'),
-  precedente: yup.array().of(
-    yup.object({
-      tarefa: yup.string().required('A tarefa é obrigatória!'),
-      tipo: yup.string().required('O tipo é obrigatório!'),
-      dias: yup.number().required('O número de dias é obrigatório!'),
-      restricao: yup.string().required('A restrição é obrigatória!'),
-    }),
-  ),
   comentarios: yup.string(),
 });
 
@@ -37,11 +36,18 @@ export const cadastroProjetoTipoSchema = yup.object({
   nomeProjeto: yup.string().required('O nome do projeto é obrigatório!'),
   atividades: yup.array().of(
     yup.object({
-      base: yup.string().required(),
-      tarefa: yup.string().required(),
-      precedente: yup.string().required(),
-      dias: yup.number().required(),
+      atividade: yup.string().required(),
+      precedentes: yup.array().of(
+        yup.object({
+          id: yup.string(),
+          nomeAtividade: yup.string(),
+        }),
+      ),
     }),
   ),
   comentarios: yup.string().required(),
+});
+
+export const cadastroPocoSchema = yup.object({
+  poco: yup.string().required('O nome do poço é obrigatório!'),
 });

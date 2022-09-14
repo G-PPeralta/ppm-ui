@@ -1,30 +1,42 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useFormik } from 'formik';
-import { cadastroProjetoTipoSchema } from 'validations/ModaisCadastrosInfografico';
+// import { cadastroProjetoTipoSchema } from 'validations/ModaisCadastrosInfografico';
+
+import { AtividadeLista } from 'interfaces/Services';
 
 import { useToast } from 'contexts/Toast';
 
+import { getAtividadesList } from 'services/get/Infograficos';
 import { postProjetoTipo } from 'services/post/CadastroModaisInfograficos';
 
 export function useCadastroProjetoTipo() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [listaAtividades, setListaAtividades] = useState<AtividadeLista[]>([]);
+
+  const carregarListaAtividade = async () => {
+    const { data } = await getAtividadesList();
+    setListaAtividades(data);
+  };
 
   const registerForm = useFormik({
     initialValues: {
       nomeProjeto: '',
       atividades: [
         {
-          base: '',
-          tarefa: '',
-          precedente: '',
-          dias: 0,
+          atividade: '',
+          precedentes: [
+            {
+              id: 0,
+              nomeAtividade: '',
+            },
+          ],
         },
       ],
       comentarios: '',
     },
-    validationSchema: cadastroProjetoTipoSchema,
+    // validationSchema: cadastroProjetoTipoSchema,
     onSubmit: async (values) => {
       const newValues = {
         nomeProjeto: values.nomeProjeto,
@@ -52,8 +64,13 @@ export function useCadastroProjetoTipo() {
     },
   });
 
+  useEffect(() => {
+    carregarListaAtividade();
+  }, []);
+
   return {
     registerForm,
     loading,
+    listaAtividades,
   };
 }

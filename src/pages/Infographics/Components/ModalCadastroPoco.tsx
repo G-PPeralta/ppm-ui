@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import {
   Flex,
   Text,
@@ -17,48 +15,18 @@ import {
   Stack,
   useBreakpointValue,
   Input,
-  Textarea,
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
-import ListDnD from 'components/ListDnD';
 import { TextError } from 'components/TextError';
 
-import { handleCancelar } from 'utils/handleCadastro';
+import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
 
-import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
+import { useCadastroPoco } from 'hooks/useCadastroPoco';
 
-function ModalCadastrarProjetoTipo() {
+function ModalCadastroPoco() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroProjetoTipo();
-  const [atividadesList, setAtividadesList] = useState([]);
-
-  const handleParent = (newList: any) => {
-    setAtividadesList(newList);
-  };
-
-  const handleSubmit = () => {
-    const payload = atividadesList;
-
-    const payloadFiltrado: any[] = [];
-
-    payload.forEach((pay: any) => {
-      const precedentesArray: any[] = [];
-      for (let i = 0; i < pay.precedentes.length; i += 1) {
-        if (pay.precedentes[i].checked) {
-          precedentesArray.push(pay.precedentes[i].id);
-        }
-      }
-      const newPay = pay;
-      newPay.precedentes = precedentesArray;
-      payloadFiltrado.push(newPay);
-    });
-
-    registerForm.setFieldValue('atividades', payloadFiltrado);
-
-    registerForm.handleSubmit();
-    onClose();
-  };
+  const { registerForm, loading } = useCadastroPoco();
 
   return (
     <>
@@ -75,9 +43,9 @@ function ModalCadastrarProjetoTipo() {
         }}
         onClick={onOpen}
       >
-        Projeto
+        Poço
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -88,7 +56,7 @@ function ModalCadastrarProjetoTipo() {
             color={'white'}
             fontSize={'1em'}
           >
-            Cadastrar Projeto Tipo
+            Cadastrar Poço
           </ModalHeader>
           <ModalCloseButton color={'white'} />
           <form
@@ -112,51 +80,16 @@ function ModalCadastrarProjetoTipo() {
                         <FormLabel>NOME</FormLabel>
                         <Input
                           isRequired
-                          placeholder="Nome do Tipo de Intervenção"
-                          id="nomeProjeto"
+                          placeholder="Nome do Poço"
+                          id="poco"
                           type="text"
-                          name="nomeProjeto"
-                          value={registerForm.values.nomeProjeto}
+                          name="poco"
+                          value={registerForm.values.poco}
                           onChange={registerForm.handleChange}
                         />
-                        {registerForm.errors.nomeProjeto &&
-                          registerForm.touched.nomeProjeto && (
-                            <TextError>
-                              {registerForm.errors.nomeProjeto}
-                            </TextError>
-                          )}
-                      </FormControl>
-                    </Flex>
-                  </Stack>
-
-                  <ListDnD
-                    atividades={registerForm.values.atividades}
-                    handleParent={handleParent}
-                  />
-
-                  <Stack>
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
-                      })}
-                      gap={5}
-                    >
-                      <FormControl>
-                        <FormLabel htmlFor="comentarios">COMENTÁRIOS</FormLabel>
-                        <Textarea
-                          isRequired
-                          placeholder="Adicione comentários sobre o projeto"
-                          id="comentarios"
-                          name="comentarios"
-                          value={registerForm.values.comentarios}
-                          onChange={registerForm.handleChange}
-                        />
-                        {registerForm.errors.comentarios &&
-                          registerForm.touched.comentarios && (
-                            <TextError>
-                              {registerForm.errors.comentarios}
-                            </TextError>
+                        {registerForm.errors.poco &&
+                          registerForm.touched.poco && (
+                            <TextError>{registerForm.errors.poco}</TextError>
                           )}
                       </FormControl>
                     </Flex>
@@ -184,7 +117,7 @@ function ModalCadastrarProjetoTipo() {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={handleSubmit}
+                  onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
                     background: 'origem.500',
                     transition: 'all 0.4s',
@@ -207,4 +140,4 @@ function ModalCadastrarProjetoTipo() {
   );
 }
 
-export default ModalCadastrarProjetoTipo;
+export default ModalCadastroPoco;
