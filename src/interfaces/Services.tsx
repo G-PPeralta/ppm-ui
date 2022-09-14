@@ -245,15 +245,16 @@ export interface RegistroResponsavel {
   nome: string;
 }
 
-export interface Responsaveis {
-  responsaveis: RegistroResponsavel[];
+export interface Responsavel {
+  nome: string;
 }
+
 export interface RegistroCoordenador {
   coordenadorNome: string;
 }
 
-export interface Coordenadores {
-  coordenadores: RegistroCoordenador[];
+export interface Coordenador {
+  coordenadorNome: string;
 }
 
 export interface AreaAtuacao {

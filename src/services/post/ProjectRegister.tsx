@@ -1,7 +1,7 @@
 import {
-  Coordenadores,
+  Coordenador,
   RegisterProjectProps,
-  Responsaveis,
+  Responsavel,
 } from 'interfaces/Services';
 
 import { api } from 'services/api';
@@ -14,14 +14,14 @@ export async function postProject(
 }
 
 export async function postResponsavel(
-  payload: Responsaveis,
+  payload: Responsavel,
 ): Promise<{ status: number }> {
   const { status } = await api.post('/responsavel', payload);
   return { status };
 }
 
 export async function postCoordenador(
-  payload: Coordenadores,
+  payload: Coordenador,
 ): Promise<{ status: number }> {
   const { status } = await api.post('/coordenador', payload);
   return { status };

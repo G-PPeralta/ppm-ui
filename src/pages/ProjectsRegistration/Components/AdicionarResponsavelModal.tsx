@@ -35,7 +35,7 @@ export function AdicionarResponsavelModal(projectsForm: any) {
 
   function saveResponsible() {
     projectsForm.projectsForm.setFieldValue('responsavel', responsavel);
-    postResponsavel(projectsForm.projectsForm.values.responsavel);
+    postResponsavel({ nome: responsavel });
     onClose();
   }
 
