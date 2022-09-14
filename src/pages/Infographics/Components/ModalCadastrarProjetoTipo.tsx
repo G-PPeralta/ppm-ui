@@ -21,7 +21,8 @@ import {
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
-import ListDnD from 'components/ListDnD';
+import ListDnD from 'pages/Infographics/Components/ListaAtividades';
+
 import { TextError } from 'components/TextError';
 
 import { handleCancelar } from 'utils/handleCadastro';

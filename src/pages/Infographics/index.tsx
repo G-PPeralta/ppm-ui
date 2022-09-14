@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { Box, Flex, Heading, Stack } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
@@ -23,7 +22,6 @@ export function Infographics() {
   const [loading, setLoading] = useState(true);
   const [campanhas, setCampanhas] = useState([]);
   // console.log(campanhas);
-  const navigate = useNavigate();
 
   const handleGetCampanha = async () => {
     const response = await getInfoCampanha();
@@ -112,9 +110,6 @@ export function Infographics() {
                         gap={4}
                         align={'center'}
                         justify={'center'}
-                        onClick={() => {
-                          navigate('/atividade/:id');
-                        }}
                       >
                         <ColumnSPT column={column} />
                         <ModalBotaoCadastrar />

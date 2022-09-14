@@ -20,7 +20,7 @@ import {
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
-import ListDnD from 'components/ListDnD';
+// import ListDnD from 'components/ListDnD';
 import { TextError } from 'components/TextError';
 
 import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
@@ -119,7 +119,7 @@ function ModalCadastroAtividade() {
                           id="responsavel"
                           name="responsavel"
                           placeholder="Selecione"
-                          value={registerForm.values.responsavel}
+                          // value={registerForm.values.responsavel}
                           onChange={registerForm.handleChange}
                         >
                           {ListaResponsavel.map((data, index) => (
@@ -150,7 +150,7 @@ function ModalCadastroAtividade() {
 
                     <FormLabel>PRECEDENTES</FormLabel>
 
-                    <ListDnD atividades={registerForm.values.precedente} />
+                    {/* <ListDnD atividades={registerForm.values.precedente} /> */}
 
                     <Flex
                       flexDirection={useBreakpointValue({

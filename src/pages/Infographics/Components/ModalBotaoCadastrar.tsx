@@ -23,7 +23,7 @@ import {
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
-import ListDnD from 'pages/Infographics/Components/ListIntervencao';
+import ListDnD from 'pages/Infographics/Components/ListaIntervencao';
 
 import { TextError } from 'components/TextError';
 
