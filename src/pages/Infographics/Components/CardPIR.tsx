@@ -1,6 +1,7 @@
 import { Flex, Heading, Text } from '@chakra-ui/react';
 
 import { formatDate } from 'utils/formatDate';
+import { validateDate } from 'utils/validateDate';
 
 type Poco = {
   poco: string;
@@ -35,13 +36,11 @@ function CardPIR({ poco, index }: Props) {
         direction={'column'}
         align={'center'}
         justify={'center'}
-        backgroundColor={'#0047BB'}
+        backgroundColor={validateDate(poco.inicio_planejado)}
         px={4}
         py={2}
         borderRadius={4}
         _hover={{
-          backgroundColor: '#EB3323',
-          transition: 'all 0.4s',
           cursor: 'pointer',
         }}
       >
