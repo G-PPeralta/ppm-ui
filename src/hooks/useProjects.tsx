@@ -60,7 +60,7 @@ export function useProjects() {
         statusId: Number(values.statusId),
         gateId: Number(values.statusId),
         tipoProjetoId: Number(values.tipoProjetoId),
-        demandaId: Number(values.demandaId),
+        // demandaId: Number(values.demandaId),
         comentarios: values.comentarios,
         responsavel_id: values.responsavel_id,
         coordenador_id: values.coordenador_id,

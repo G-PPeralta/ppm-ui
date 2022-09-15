@@ -83,7 +83,7 @@ export interface RegisterProjectProps {
   statusId: number;
   gateId: number;
   tipoProjetoId: number;
-  demandaId: number;
+  // demandaId: number;
   comentarios: string;
   responsavel_id: number;
   coordenador_id: number;
@@ -249,11 +249,22 @@ export interface Responsavel {
   nome: string;
 }
 
+export interface ResponsavelRetorno {
+  id: number;
+  nome: string;
+}
+
 export interface RegistroCoordenador {
+  id?: number;
   coordenadorNome: string;
 }
 
 export interface Coordenador {
+  coordenadorNome: string;
+}
+
+export interface CoordenadorRetorno {
+  id_coordenador: number;
   coordenadorNome: string;
 }
 

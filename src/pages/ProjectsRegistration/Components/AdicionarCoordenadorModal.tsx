@@ -34,9 +34,17 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
     setCoordenador(event.target.value);
   }
 
-  function saveResponsible() {
-    projectsForm.projectsForm.setFieldValue('coordenador', coordenador);
-    postCoordenador({ coordenadorNome: coordenador });
+  async function saveResponsible() {
+    const { data } = await postCoordenador({ coordenadorNome: coordenador });
+
+    projectsForm.projectsForm.setFieldValue(
+      'coordenador_id',
+      data.id_coordenador,
+    );
+    projectsForm.projectsForm.setFieldValue(
+      'coordenador',
+      data.coordenadorNome,
+    );
     onClose();
   }
 
