@@ -85,8 +85,8 @@ export interface RegisterProjectProps {
   tipoProjetoId: number;
   demandaId: number;
   comentarios: string;
-  responsavelId: number;
-  coordenadorId: number;
+  responsavel_id: number;
+  coordenador_id: number;
 }
 
 export interface GanttPayload {

@@ -35,8 +35,8 @@ export function useProjects() {
       comentarios: '',
       responsavel: '',
       coordenador: '',
-      responsavelId: 0,
-      coordenadorId: 0,
+      responsavel_id: 0,
+      coordenador_id: 0,
       elementoPep: '',
     },
     // validationSchema: projectRegisterSchema,
@@ -62,8 +62,8 @@ export function useProjects() {
         tipoProjetoId: Number(values.tipoProjetoId),
         demandaId: Number(values.demandaId),
         comentarios: values.comentarios,
-        responsavelId: values.responsavelId,
-        coordenadorId: values.responsavelId,
+        responsavel_id: values.responsavel_id,
+        coordenador_id: values.coordenador_id,
         elementoPep: values.elementoPep,
       };
 

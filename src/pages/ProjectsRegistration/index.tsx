@@ -29,7 +29,7 @@ import FormDataFimReal from './Components/FormDataFimReal';
 import FormDataInicio from './Components/FormDataInicio';
 // import FormDemanda from './Components/FormDemanda';
 import FormDescricao from './Components/FormDescricao';
-// import FormDisabledCoordenador from './Components/FormDisabledCoordenador';
+import FormDisabledCoordenador from './Components/FormDisabledCoordenador';
 import FormDisabledResponsavel from './Components/FormDisabledResponsavel';
 import FormDivisao from './Components/FormDivisao';
 import FormElementoPep from './Components/FormElementoPep';
@@ -116,7 +116,7 @@ export function ProjectsRegistration() {
                     </Stack>
                     <Stack spacing="5">
                       <FormDisabledResponsavel projectsForm={projectsForm} />
-                      {/* <FormDisabledCoordenador projectsForm={projectsForm} /> */}
+                      <FormDisabledCoordenador projectsForm={projectsForm} />
                     </Stack>
                     <Stack spacing="5">
                       <Flex
