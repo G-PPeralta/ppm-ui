@@ -7,6 +7,8 @@ import {
 
 import { FormLabel } from '@chakra-ui/react';
 
+import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
+
 import AtividadesDraggable from './AtividadesDraggable';
 import BotaoAdicionar from './BotaoAdicionar';
 
@@ -22,19 +24,26 @@ export default function ListDnD({ atividades, handleParent }: any) {
   const [list, setList] = useState<any>([]);
   const [render, setRender] = useState<any>([]);
   const [id, setId] = useState<any>('listID');
+  const { listaAtividades } = useCadastroProjetoTipo();
 
-  const mockAtividades = [
-    { id: 1, nome: 'Atividade 1', checked: false },
-    { id: 2, nome: 'Atividade 2', checked: false },
-    { id: 3, nome: 'Atividade 3', checked: false },
-    { id: 4, nome: 'Atividade 4', checked: false },
-    { id: 5, nome: 'Atividade 5', checked: false },
-    { id: 6, nome: 'Atividade 6', checked: false },
-    { id: 7, nome: 'Atividade 7', checked: false },
-    { id: 8, nome: 'Atividade 8', checked: false },
-    { id: 9, nome: 'Atividade 9', checked: false },
-    { id: 10, nome: 'Atividade 10', checked: false },
-  ];
+  // const mockAtividades = [
+  //   { id: 1, nome: 'Atividade 1', checked: false },
+  //   { id: 2, nome: 'Atividade 2', checked: false },
+  //   { id: 3, nome: 'Atividade 3', checked: false },
+  //   { id: 4, nome: 'Atividade 4', checked: false },
+  //   { id: 5, nome: 'Atividade 5', checked: false },
+  //   { id: 6, nome: 'Atividade 6', checked: false },
+  //   { id: 7, nome: 'Atividade 7', checked: false },
+  //   { id: 8, nome: 'Atividade 8', checked: false },
+  //   { id: 9, nome: 'Atividade 9', checked: false },
+  //   { id: 10, nome: 'Atividade 10', checked: false },
+  // ];
+
+  const mockAtividades = listaAtividades.map((atividade) => ({
+    id: atividade.id,
+    nome: atividade.tarefa,
+    checked: false,
+  }));
 
   function onDragEnd(result: any) {
     if (!result.destination) {
