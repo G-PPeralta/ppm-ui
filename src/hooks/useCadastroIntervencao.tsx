@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useFormik } from 'formik';
+import { ListaPoco, ListaSonda } from 'interfaces/CadastrosModaisInfograficos';
 import { cadastroIntervencaoSchema } from 'validations/ModaisCadastrosInfografico';
 
 import { useToast } from 'contexts/Toast';
@@ -11,17 +12,17 @@ import { postCadastroIntervencao } from 'services/post/CadastroModaisInfografico
 export function useCadastroIntervencao() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [listaSondas, setListaSondas] = useState<any[]>([]);
-  const [listaPocos, setListaPocos] = useState<any[]>([]);
+  const [listaSondas, setListaSondas] = useState<ListaSonda[]>([]);
+  const [listaPocos, setListaPocos] = useState<ListaPoco[]>([]);
 
   const reqGet = async () => {
     const sondas = await getSondas();
     const pocos = await getPocos();
-    const sondasSorted = sondas.data.sort((a: any, b: any) =>
+    const sondasSorted = sondas.data.sort((a: ListaSonda, b: ListaSonda) =>
       a.nome.localeCompare(b.nome),
     );
 
-    const pocosSorted = pocos.data.sort((a: any, b: any) =>
+    const pocosSorted = pocos.data.sort((a: ListaPoco, b: ListaPoco) =>
       a.poco.localeCompare(b.poco),
     );
     setListaSondas(sondasSorted);
@@ -31,10 +32,10 @@ export function useCadastroIntervencao() {
   const intervencaoForm = useFormik({
     initialValues: {
       nome: '',
-      poco: '',
-      sonda: '',
+      pocoId: 0,
+      sondaId: 0,
+      projetoId: 0,
       inicioPrevisto: '',
-      projeto: '',
       atividades: [
         {
           ordem: 1,
@@ -42,18 +43,18 @@ export function useCadastroIntervencao() {
           responsavel: '',
         },
       ],
-      observacoes: '',
+      comentarios: '',
     },
     validationSchema: cadastroIntervencaoSchema,
     onSubmit: async (values) => {
       const newValues = {
         nome: values.nome,
-        poco: values.poco,
-        sonda: values.sonda,
+        pocoId: values.pocoId,
+        sondaId: values.sondaId,
+        projetoId: values.projetoId,
         inicioPrevisto: values.inicioPrevisto,
-        projeto: values.projeto,
         atividades: values.atividades,
-        observacoes: values.observacoes,
+        comentarios: values.comentarios,
       };
 
       setLoading(true);

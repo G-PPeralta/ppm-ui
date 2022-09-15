@@ -31,12 +31,12 @@ import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
 
 import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
 
+import SelectFiltragemPocos from './SelectFiltragemPocos';
+import SelectFiltragemSondas from './SelectFiltragemSonda';
+
 function ModalBotaoCadastrar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { intervencaoForm, loading, listaSondas, listaPocos } =
-    useCadastroIntervencao();
-
-  console.log(listaPocos);
+  const { intervencaoForm, loading } = useCadastroIntervencao();
 
   console.log(intervencaoForm.values);
 
@@ -131,38 +131,10 @@ function ModalBotaoCadastrar() {
                       })}
                       gap={5}
                     >
-                      <FormControl>
-                        <FormLabel>POÇO</FormLabel>
-                        <Select
-                          id="poco"
-                          name="poco"
-                          placeholder="Selecione"
-                          value={intervencaoForm.values.poco}
-                          onChange={intervencaoForm.handleChange}
-                        >
-                          {listaPocos.map((poco, index) => (
-                            <option key={index} value={poco.poco}>
-                              {poco.nome}
-                            </option>
-                          ))}
-                        </Select>
-                      </FormControl>
-                      <FormControl>
-                        <FormLabel>SONDA</FormLabel>
-                        <Select
-                          id="sonda"
-                          name="sonda"
-                          placeholder="Selecione"
-                          value={intervencaoForm.values.sonda}
-                          onChange={intervencaoForm.handleChange}
-                        >
-                          {listaSondas.map((sonda, index) => (
-                            <option key={index} value={sonda.nome}>
-                              {sonda.nome}
-                            </option>
-                          ))}
-                        </Select>
-                      </FormControl>
+                      <SelectFiltragemPocos intervencaoForm={intervencaoForm} />
+                      <SelectFiltragemSondas
+                        intervencaoForm={intervencaoForm}
+                      />
                     </Flex>
 
                     <Stack>
@@ -172,7 +144,7 @@ function ModalBotaoCadastrar() {
                           id="projeto"
                           name="projeto"
                           placeholder="Selecione"
-                          value={intervencaoForm.values.projeto}
+                          value={intervencaoForm.values.projetoId}
                           onChange={intervencaoForm.handleChange}
                         >
                           <option value="option1">Option 1</option>
@@ -225,20 +197,20 @@ function ModalBotaoCadastrar() {
 
                   <Stack>
                     <FormControl>
-                      <FormLabel htmlFor="observacoes">Observações</FormLabel>
+                      <FormLabel htmlFor="comentarios">Observações</FormLabel>
                       <Textarea
                         isRequired
                         placeholder="Adicione observações sobre a intervenção"
-                        id="observacoes"
-                        name="observacoes"
-                        value={intervencaoForm.values.observacoes}
+                        id="comentarios"
+                        name="comentarios"
+                        value={intervencaoForm.values.comentarios}
                         onChange={intervencaoForm.handleChange}
                         w={useBreakpointValue({ base: '100%', md: '100%' })}
                       />
-                      {intervencaoForm.errors.observacoes &&
-                        intervencaoForm.touched.observacoes && (
+                      {intervencaoForm.errors.comentarios &&
+                        intervencaoForm.touched.comentarios && (
                           <TextError>
-                            {intervencaoForm.errors.observacoes}
+                            {intervencaoForm.errors.comentarios}
                           </TextError>
                         )}
                     </FormControl>

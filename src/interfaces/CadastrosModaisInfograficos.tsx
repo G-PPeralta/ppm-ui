@@ -25,12 +25,12 @@ interface Atividades {
 
 export interface CadastroIntervencao {
   nome: string;
-  poco: string;
-  sonda: string;
+  pocoId: number;
+  sondaId: number;
+  projetoId: number;
   inicioPrevisto: string;
-  projeto: string;
   atividades: Atividades[];
-  observacoes: string;
+  comentarios: string;
 }
 
 export interface CadastroAtividade {
@@ -42,4 +42,14 @@ export interface CadastroAtividade {
 
 export interface CadastroPoco {
   poco: string;
+}
+
+export interface ListaPoco {
+  id: number;
+  poco: string;
+}
+
+export interface ListaSonda {
+  id: number;
+  nome: string;
 }
