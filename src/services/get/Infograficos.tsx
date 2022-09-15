@@ -20,6 +20,18 @@ export async function getInfoCampanha(): Promise<{
   return { data, status };
 }
 
+export async function getInfoProjetos(): Promise<{
+  data: any;
+}> {
+  const { data } = await api.get(`/dashboard/projetos-info`, {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
+    },
+  });
+
+  return { data };
+}
+
 export async function getResponsavelList(): Promise<{
   data: RegistroResponsavel[];
   status: number;
