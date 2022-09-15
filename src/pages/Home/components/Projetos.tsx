@@ -64,7 +64,7 @@ export default function NaoPrevistoComponent() {
   return (
     <Stack spacing="8">
       <Flex
-        w={useBreakpointValue({ base: '100%', md: 'fit-content' })}
+        w={'100%'}
         align="center"
         justify="center"
         bg={useBreakpointValue({ base: '#EDF2F7', sm: '#EDF2F7' })}
@@ -72,7 +72,7 @@ export default function NaoPrevistoComponent() {
         <Box
           py={{ base: '0', sm: '4' }}
           px={{ base: '0', sm: '4' }}
-          w="fit-content"
+          w={'100%'}
           bg={useBreakpointValue({ base: 'white', sm: 'white' })}
           boxShadow={{
             base: 'none',
@@ -80,7 +80,7 @@ export default function NaoPrevistoComponent() {
           }}
           borderRadius={{ base: 'none', sm: 'xl' }}
         >
-          <Box w={{ base: 360, lg: 480 }}>
+          <Box w={'100%'} minWidth={480}>
             <Text
               mb={1}
               sx={{ fontSize: 18, fontWeight: '600', alignSelf: 'center' }}
@@ -88,7 +88,7 @@ export default function NaoPrevistoComponent() {
             >
               Projetos
             </Text>
-            <TableContainer overflowY={'scroll'} height={200}>
+            <TableContainer overflowY={'scroll'} height={260}>
               <Table size="sm">
                 <Thead>
                   <Tr>

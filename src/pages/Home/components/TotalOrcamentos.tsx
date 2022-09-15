@@ -27,18 +27,23 @@ export default function TotalOrcamentosComponent() {
 
   return (
     <Stack spacing="8">
-      <Flex w={'fit-content'} align="center" justify="center" bg={'#EDF2F7'}>
+      <Flex w={'100%'} align="center" justify="center" bg={'#EDF2F7'}>
         <Box
           py={'4'}
           px={'4'}
-          w="fit-content"
+          w={'100%'}
           bg={'white'}
           boxShadow={useColorModeValue('md', 'md-dark')}
           borderRadius={'xl'}
         >
-          <Box w={300} sx={{ display: 'flex' }} justifyContent="space-between">
+          <Box
+            w={'100%'}
+            sx={{ display: 'flex' }}
+            justifyContent="space-between"
+          >
             <Box>
               <Text
+                w={'200px'}
                 mb={1}
                 sx={{ fontSize: 16, fontWeight: '600', alignSelf: 'center' }}
                 color="#000000"

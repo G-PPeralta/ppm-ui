@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { Box, Flex, Heading, Stack } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
@@ -8,15 +9,20 @@ import Sidebar from 'components/SideBar';
 import { Atividade } from 'services/get/ActivitiesSchedule';
 
 import CardACT from './Components/CardACT';
-import ExibirModal from './Components/ExibirModal';
-import FiltrosModal from './Components/FiltrosModal';
+// import ExibirModal from './Components/ExibirModal';
+// import FiltrosModal from './Components/FiltrosModal';
+import ModalAtividade from './Components/ModalAtividade';
 import ModalCadastroAtividade from './Components/ModalCadastroAtividade';
 import StatusProjeto from './Components/StatusProjeto';
 
 export function ActivitiesSchedule() {
+  const { id } = useParams();
   const [loading, setLoading] = useState(true);
+  const [openId, setOpenId] = useState('');
 
   useEffect(() => {
+    console.log('scheadule', id);
+    console.log('Atividade', Atividade);
     setLoading(false);
   }, []);
 
@@ -43,6 +49,11 @@ export function ActivitiesSchedule() {
     },
   ];
 
+  const openDetails = (atividade: any) => {
+    console.log('atividade', atividade);
+    setOpenId(atividade);
+  };
+
   return (
     <>
       <Sidebar>
@@ -60,10 +71,10 @@ export function ActivitiesSchedule() {
                   <Heading as="h3" size="md" mb={3}>
                     Acompanhamento de atividades
                   </Heading>
-                  <Flex gap={4}>
+                  {/* <Flex gap={4}>
                     <ExibirModal />
                     <FiltrosModal />
-                  </Flex>
+                  </Flex> */}
                 </Flex>
                 <Flex justify={'space-between'} gap={6} wrap={'wrap'} mb={4}>
                   <Flex gap={2}>
@@ -86,11 +97,20 @@ export function ActivitiesSchedule() {
                       direction={'column'}
                       align={'center'}
                       justify={'center'}
+                      onClick={() => openDetails(atividade)}
+                      _hover={{ cursor: 'pointer' }}
                     >
                       <CardACT atividade={atividade} />
                     </Flex>
                   ))}
                 </Flex>
+                {openId ? (
+                  <ModalAtividade
+                    id={id}
+                    atividade={openId}
+                    onClose={() => setOpenId('')}
+                  />
+                ) : undefined}
               </Box>
             </Flex>
           </Stack>

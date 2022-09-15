@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import { Flex, Heading, Text } from '@chakra-ui/react';
 
 import { formatDate } from 'utils/formatDate';
@@ -14,6 +16,7 @@ type Props = {
 };
 
 function CardPIR({ poco, index }: Props) {
+  const navigate = useNavigate();
   // console.log('CARD', poco);
   const dataInicioFormatada = formatDate(new Date(poco.inicio_planejado));
 
@@ -25,8 +28,12 @@ function CardPIR({ poco, index }: Props) {
 
   // console.log('Quantidade dias:', diferencaDias);
 
+  const transfer = () => {
+    navigate(`/atividade/${poco.poco}`);
+  };
+
   return (
-    <Flex direction={'row'} gap={4}>
+    <Flex direction={'row'} gap={4} onClick={() => transfer()}>
       <Flex align={'center'} justify={'center'}>
         <Heading as="h3" size="md" textAlign={'center'} width={'50px'}>
           {index === 0 ? 'Atual' : `${index + 1}º`}
