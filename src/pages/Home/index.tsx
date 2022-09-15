@@ -30,8 +30,6 @@ function useWindowSize() {
 export function Home() {
   const [width] = useWindowSize();
 
-  console.log('width', width);
-
   return (
     <>
       <Sidebar>
