@@ -24,11 +24,10 @@ interface Atividades {
 }
 
 export interface CadastroIntervencao {
-  intervencao: string;
+  nome: string;
   poco: string;
   sonda: string;
   inicioPrevisto: string;
-  fimPrevisto: string;
   projeto: string;
   atividades: Atividades[];
   observacoes: string;

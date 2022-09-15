@@ -5,29 +5,35 @@ import { cadastroIntervencaoSchema } from 'validations/ModaisCadastrosInfografic
 
 import { useToast } from 'contexts/Toast';
 
-import { getSondas } from 'services/get/CadastroModaisInfograficos';
+import { getSondas, getPocos } from 'services/get/CadastroModaisInfograficos';
 import { postCadastroIntervencao } from 'services/post/CadastroModaisInfograficos';
 
 export function useCadastroIntervencao() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [listaSondas, setListaSondas] = useState<any[]>([]);
+  const [listaPocos, setListaPocos] = useState<any[]>([]);
 
-  const reqGetSondas = async () => {
-    const { data } = await getSondas();
-    const dataSorted = data.sort((a: any, b: any) =>
+  const reqGet = async () => {
+    const sondas = await getSondas();
+    const pocos = await getPocos();
+    const sondasSorted = sondas.data.sort((a: any, b: any) =>
       a.nome.localeCompare(b.nome),
     );
-    setListaSondas(dataSorted);
+
+    const pocosSorted = pocos.data.sort((a: any, b: any) =>
+      a.poco.localeCompare(b.poco),
+    );
+    setListaSondas(sondasSorted);
+    setListaPocos(pocosSorted);
   };
 
   const intervencaoForm = useFormik({
     initialValues: {
-      intervencao: '',
+      nome: '',
       poco: '',
       sonda: '',
       inicioPrevisto: '',
-      fimPrevisto: '',
       projeto: '',
       atividades: [
         {
@@ -41,11 +47,10 @@ export function useCadastroIntervencao() {
     validationSchema: cadastroIntervencaoSchema,
     onSubmit: async (values) => {
       const newValues = {
-        intervencao: values.intervencao,
+        nome: values.nome,
         poco: values.poco,
         sonda: values.sonda,
         inicioPrevisto: values.inicioPrevisto,
-        fimPrevisto: values.fimPrevisto,
         projeto: values.projeto,
         atividades: values.atividades,
         observacoes: values.observacoes,
@@ -72,12 +77,13 @@ export function useCadastroIntervencao() {
   });
 
   useEffect(() => {
-    reqGetSondas();
+    reqGet();
   }, []);
 
   return {
     intervencaoForm,
     loading,
     listaSondas,
+    listaPocos,
   };
 }

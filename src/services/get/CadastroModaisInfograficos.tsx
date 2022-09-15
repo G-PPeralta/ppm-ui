@@ -8,3 +8,12 @@ export async function getSondas(): Promise<{
 
   return { data, status };
 }
+
+export async function getPocos(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get('/poco', token());
+
+  return { data, status };
+}

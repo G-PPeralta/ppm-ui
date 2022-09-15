@@ -33,7 +33,12 @@ import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
 
 function ModalBotaoCadastrar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { intervencaoForm, loading, listaSondas } = useCadastroIntervencao();
+  const { intervencaoForm, loading, listaSondas, listaPocos } =
+    useCadastroIntervencao();
+
+  console.log(listaPocos);
+
+  console.log(intervencaoForm.values);
 
   return (
     <>
@@ -106,17 +111,15 @@ function ModalBotaoCadastrar() {
                         <Input
                           isRequired
                           placeholder="Nome da Intervenção"
-                          id="intervencao"
+                          id="nome"
                           type="text"
-                          name="intervencao"
-                          value={intervencaoForm.values.intervencao}
+                          name="nome"
+                          value={intervencaoForm.values.nome}
                           onChange={intervencaoForm.handleChange}
                         />
-                        {intervencaoForm.errors.intervencao &&
-                          intervencaoForm.touched.intervencao && (
-                            <TextError>
-                              {intervencaoForm.errors.intervencao}
-                            </TextError>
+                        {intervencaoForm.errors.nome &&
+                          intervencaoForm.touched.nome && (
+                            <TextError>{intervencaoForm.errors.nome}</TextError>
                           )}
                       </FormControl>
                     </Flex>
@@ -137,9 +140,11 @@ function ModalBotaoCadastrar() {
                           value={intervencaoForm.values.poco}
                           onChange={intervencaoForm.handleChange}
                         >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
+                          {listaPocos.map((poco, index) => (
+                            <option key={index} value={poco.poco}>
+                              {poco.nome}
+                            </option>
+                          ))}
                         </Select>
                       </FormControl>
                       <FormControl>
@@ -159,6 +164,23 @@ function ModalBotaoCadastrar() {
                         </Select>
                       </FormControl>
                     </Flex>
+
+                    <Stack>
+                      <FormControl>
+                        <FormLabel>Projeto</FormLabel>
+                        <Select
+                          id="projeto"
+                          name="projeto"
+                          placeholder="Selecione"
+                          value={intervencaoForm.values.projeto}
+                          onChange={intervencaoForm.handleChange}
+                        >
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
+                      </FormControl>
+                    </Stack>
 
                     <Flex
                       flexDirection={useBreakpointValue({
@@ -188,39 +210,15 @@ function ModalBotaoCadastrar() {
                       <FormControl>
                         <FormLabel htmlFor="fimPrevisto">FIM</FormLabel>
                         <Input
-                          isRequired
                           placeholder="dd/mm/aaaa"
                           id="fimPrevisto"
                           type="date"
                           name="fimPrevisto"
-                          value={intervencaoForm.values.fimPrevisto}
-                          onChange={intervencaoForm.handleChange}
+                          value={'dd/mm/aaaa'}
                           isDisabled
                         />
-                        {intervencaoForm.errors.fimPrevisto &&
-                          intervencaoForm.touched.fimPrevisto && (
-                            <TextError>
-                              {intervencaoForm.errors.fimPrevisto}
-                            </TextError>
-                          )}
                       </FormControl>
                     </Flex>
-                  </Stack>
-                  <Stack>
-                    <FormControl>
-                      <FormLabel>Projeto</FormLabel>
-                      <Select
-                        id="projeto"
-                        name="projeto"
-                        placeholder="Selecione"
-                        value={intervencaoForm.values.projeto}
-                        onChange={intervencaoForm.handleChange}
-                      >
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                      </Select>
-                    </FormControl>
                   </Stack>
 
                   <ListDnD atividades={intervencaoForm.values.atividades} />
