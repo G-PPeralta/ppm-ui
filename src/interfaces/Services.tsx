@@ -87,6 +87,7 @@ export interface RegisterProjectProps {
   comentarios: string;
   responsavel_id: number;
   coordenador_id: number;
+  elemento_pep: string;
 }
 
 export interface GanttPayload {

@@ -37,7 +37,7 @@ export function useProjects() {
       coordenador: '',
       responsavel_id: 0,
       coordenador_id: 0,
-      elementoPep: '',
+      elemento_pep: '',
     },
     // validationSchema: projectRegisterSchema,
     onSubmit: async (values) => {
@@ -64,7 +64,7 @@ export function useProjects() {
         comentarios: values.comentarios,
         responsavel_id: values.responsavel_id,
         coordenador_id: values.coordenador_id,
-        elementoPep: values.elementoPep,
+        elemento_pep: values.elemento_pep,
       };
 
       setLoading(true);
