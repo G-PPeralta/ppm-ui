@@ -58,10 +58,7 @@ function ModalCadastrarProjetoTipo() {
 
       payloadFiltrado.push(newPay);
     });
-    console.log('JSON', JSON.stringify(payloadFiltrado));
     registerForm.setFieldValue('atividades', payloadFiltrado);
-
-    console.log('Payload', registerForm.values);
 
     registerForm.handleSubmit();
     onClose();

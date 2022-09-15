@@ -1,15 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useFormik } from 'formik';
 import { cadastroIntervencaoSchema } from 'validations/ModaisCadastrosInfografico';
 
 import { useToast } from 'contexts/Toast';
 
+import { getSondas } from 'services/get/CadastroModaisInfograficos';
 import { postCadastroIntervencao } from 'services/post/CadastroModaisInfograficos';
 
 export function useCadastroIntervencao() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [listaSondas, setListaSondas] = useState<any[]>([]);
+
+  const reqGetSondas = async () => {
+    const { data } = await getSondas();
+    const dataSorted = data.sort((a: any, b: any) =>
+      a.nome.localeCompare(b.nome),
+    );
+    setListaSondas(dataSorted);
+  };
 
   const intervencaoForm = useFormik({
     initialValues: {
@@ -61,8 +71,13 @@ export function useCadastroIntervencao() {
     },
   });
 
+  useEffect(() => {
+    reqGetSondas();
+  }, []);
+
   return {
     intervencaoForm,
     loading,
+    listaSondas,
   };
 }

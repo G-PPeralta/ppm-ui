@@ -33,7 +33,7 @@ import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
 
 function ModalBotaoCadastrar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { intervencaoForm, loading } = useCadastroIntervencao();
+  const { intervencaoForm, loading, listaSondas } = useCadastroIntervencao();
 
   return (
     <>
@@ -151,9 +151,11 @@ function ModalBotaoCadastrar() {
                           value={intervencaoForm.values.sonda}
                           onChange={intervencaoForm.handleChange}
                         >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
+                          {listaSondas.map((sonda, index) => (
+                            <option key={index} value={sonda.nome}>
+                              {sonda.nome}
+                            </option>
+                          ))}
                         </Select>
                       </FormControl>
                     </Flex>
@@ -193,6 +195,7 @@ function ModalBotaoCadastrar() {
                           name="fimPrevisto"
                           value={intervencaoForm.values.fimPrevisto}
                           onChange={intervencaoForm.handleChange}
+                          isDisabled
                         />
                         {intervencaoForm.errors.fimPrevisto &&
                           intervencaoForm.touched.fimPrevisto && (
