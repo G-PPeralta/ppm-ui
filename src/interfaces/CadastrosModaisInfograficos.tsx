@@ -6,18 +6,13 @@ export interface CadastroTarefa {
   tarefa: string;
 }
 
-export interface Precedentes {
-  id: number;
-  nomeAtividade: string;
-}
-
 export interface AtividadesProjetoTipo {
-  atividade: string;
-  precedentes: Precedentes[];
+  atividadeId: number;
+  precedentes: number[];
 }
 
 export interface CadastroProjetoTipo {
-  nomeProjeto: string;
+  nome: string;
   atividades: AtividadesProjetoTipo[];
   comentarios: string;
 }

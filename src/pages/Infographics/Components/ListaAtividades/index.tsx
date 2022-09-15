@@ -72,7 +72,7 @@ export default function ListDnD({ atividades, handleParent }: any) {
   const add = () => {
     const newList = list;
     newList.push({
-      atividade: '',
+      atividadeId: 0,
       precedentes: mockAtividades,
     });
     setList(newList);
@@ -100,6 +100,7 @@ export default function ListDnD({ atividades, handleParent }: any) {
     setId(newId);
   }, []);
 
+  console.log('list', list);
   return (
     <>
       <FormLabel mb={0}>ATIVIDADES</FormLabel>

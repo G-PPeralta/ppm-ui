@@ -114,17 +114,15 @@ function ModalCadastrarProjetoTipo() {
                         <Input
                           isRequired
                           placeholder="Nome do Tipo de Intervenção"
-                          id="nomeProjeto"
+                          id="nome"
                           type="text"
-                          name="nomeProjeto"
-                          value={registerForm.values.nomeProjeto}
+                          name="nome"
+                          value={registerForm.values.nome}
                           onChange={registerForm.handleChange}
                         />
-                        {registerForm.errors.nomeProjeto &&
-                          registerForm.touched.nomeProjeto && (
-                            <TextError>
-                              {registerForm.errors.nomeProjeto}
-                            </TextError>
+                        {registerForm.errors.nome &&
+                          registerForm.touched.nome && (
+                            <TextError>{registerForm.errors.nome}</TextError>
                           )}
                       </FormControl>
                     </Flex>
