@@ -16,7 +16,8 @@ export function useCadastroProjetoTipo() {
 
   const carregarListaAtividade = async () => {
     const { data } = await getAtividadesList();
-    setListaAtividades(data);
+    const dataSorted = data.sort((a, b) => a.tarefa.localeCompare(b.tarefa));
+    setListaAtividades(dataSorted);
   };
 
   const registerForm = useFormik({

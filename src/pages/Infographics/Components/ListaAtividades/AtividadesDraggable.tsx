@@ -82,7 +82,6 @@ function AtividadesDraggable({
                   onChange={(event) => handleChange(event, 'atividade')}
                 >
                   {listaAtividades.map((data, index) => (
-                    // {listaArea.map((data, index) => (
                     <option value={data.id} key={index}>
                       {data.tarefa}
                     </option>
