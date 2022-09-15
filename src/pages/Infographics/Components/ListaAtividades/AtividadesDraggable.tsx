@@ -38,12 +38,11 @@ function AtividadesDraggable({
     const newList = item.precedentes;
     newList[indexIn].checked = value;
     handleChangeProp(index, 'precedentes', newList);
-    // setMockAtividades(newList);
     setRender(!render);
   };
 
   console.log('listaAtividades', listaAtividades);
-  console.log('item', listaAtividades);
+  console.log('item', item);
 
   return (
     <Draggable draggableId={`list${index}`} index={index}>
@@ -100,7 +99,11 @@ function AtividadesDraggable({
                   bg={'#fff'}
                   id="dias"
                   name="dias"
-                  value={item.dias}
+                  value={
+                    listaAtividades.filter(
+                      (atividade) => atividade.id === item.atividadeId,
+                    )[0]?.dias
+                  }
                   isDisabled
                 />
               </FormControl>

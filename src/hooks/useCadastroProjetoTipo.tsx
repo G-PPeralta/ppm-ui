@@ -17,9 +17,15 @@ export function useCadastroProjetoTipo() {
   const carregarListaAtividade = async () => {
     const { data } = await getAtividadesList();
     const dataSorted = data.sort((a, b) => a.tarefa.localeCompare(b.tarefa));
-    console.log(dataSorted);
+    // console.log('dataSorted', dataSorted);
     setListaAtividades(dataSorted);
   };
+
+  const listaAtividadesPrecedentes = listaAtividades.map((atividade) => ({
+    id: atividade.id,
+    nome: atividade.tarefa,
+    checked: false,
+  }));
 
   const registerForm = useFormik({
     initialValues: {
@@ -68,5 +74,6 @@ export function useCadastroProjetoTipo() {
     registerForm,
     loading,
     listaAtividades,
+    listaAtividadesPrecedentes,
   };
 }

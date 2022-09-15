@@ -21,7 +21,7 @@ import {
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
-import ListDnD from 'pages/Infographics/Components/ListaAtividades';
+import ListaAtividades from 'pages/Infographics/Components/ListaAtividades';
 
 import { TextError } from 'components/TextError';
 
@@ -60,6 +60,8 @@ function ModalCadastrarProjetoTipo() {
     registerForm.handleSubmit();
     onClose();
   };
+
+  console.log('registerForm.values', registerForm.values);
 
   return (
     <>
@@ -128,7 +130,7 @@ function ModalCadastrarProjetoTipo() {
                     </Flex>
                   </Stack>
 
-                  <ListDnD
+                  <ListaAtividades
                     atividades={registerForm.values.atividades}
                     handleParent={handleParent}
                   />
