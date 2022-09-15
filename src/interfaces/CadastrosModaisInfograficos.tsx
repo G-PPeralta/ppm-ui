@@ -53,3 +53,21 @@ export interface ListaSonda {
   id: number;
   nome: string;
 }
+
+export interface AtividadeIntervencao {
+  areaAtuacaoId: number;
+  dias: number;
+  id: number;
+  obs: string;
+  tarefaId: number;
+}
+
+export interface AtividadeListaProjetoTipo {
+  atividade: AtividadeIntervencao;
+}
+
+export interface ListaProjetoTipo {
+  id: number;
+  nome: string;
+  atividades: AtividadeListaProjetoTipo[];
+}

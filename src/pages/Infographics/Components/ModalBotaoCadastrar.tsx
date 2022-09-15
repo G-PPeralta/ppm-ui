@@ -15,7 +15,6 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Select,
   Input,
   Stack,
   useBreakpointValue,
@@ -32,13 +31,14 @@ import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
 import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
 
 import SelectFiltragemPocos from './SelectFiltragemPocos';
+import SelectFiltragemProjetos from './SelectFiltragemProjetos';
 import SelectFiltragemSondas from './SelectFiltragemSonda';
 
 function ModalBotaoCadastrar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { intervencaoForm, loading } = useCadastroIntervencao();
 
-  console.log(intervencaoForm.values);
+  // console.log(intervencaoForm.values);
 
   return (
     <>
@@ -138,20 +138,9 @@ function ModalBotaoCadastrar() {
                     </Flex>
 
                     <Stack>
-                      <FormControl>
-                        <FormLabel>Projeto</FormLabel>
-                        <Select
-                          id="projeto"
-                          name="projeto"
-                          placeholder="Selecione"
-                          value={intervencaoForm.values.projetoId}
-                          onChange={intervencaoForm.handleChange}
-                        >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </Select>
-                      </FormControl>
+                      <SelectFiltragemProjetos
+                        intervencaoForm={intervencaoForm}
+                      />
                     </Stack>
 
                     <Flex

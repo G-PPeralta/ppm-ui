@@ -17,3 +17,12 @@ export async function getPocos(): Promise<{
 
   return { data, status };
 }
+
+export async function getProjetosTipo(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get('/projeto-intervencao', token());
+
+  return { data, status };
+}

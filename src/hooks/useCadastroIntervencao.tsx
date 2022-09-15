@@ -1,12 +1,20 @@
 import { useEffect, useState } from 'react';
 
 import { useFormik } from 'formik';
-import { ListaPoco, ListaSonda } from 'interfaces/CadastrosModaisInfograficos';
+import {
+  ListaPoco,
+  ListaProjetoTipo,
+  ListaSonda,
+} from 'interfaces/CadastrosModaisInfograficos';
 import { cadastroIntervencaoSchema } from 'validations/ModaisCadastrosInfografico';
 
 import { useToast } from 'contexts/Toast';
 
-import { getSondas, getPocos } from 'services/get/CadastroModaisInfograficos';
+import {
+  getSondas,
+  getPocos,
+  getProjetosTipo,
+} from 'services/get/CadastroModaisInfograficos';
 import { postCadastroIntervencao } from 'services/post/CadastroModaisInfograficos';
 
 export function useCadastroIntervencao() {
@@ -14,19 +22,29 @@ export function useCadastroIntervencao() {
   const [loading, setLoading] = useState(false);
   const [listaSondas, setListaSondas] = useState<ListaSonda[]>([]);
   const [listaPocos, setListaPocos] = useState<ListaPoco[]>([]);
+  const [listaProjetosTipo, setListaProjetosTipo] = useState<
+    ListaProjetoTipo[]
+  >([]);
 
   const reqGet = async () => {
     const sondas = await getSondas();
     const pocos = await getPocos();
+    const projetosTipo = await getProjetosTipo();
+
     const sondasSorted = sondas.data.sort((a: ListaSonda, b: ListaSonda) =>
       a.nome.localeCompare(b.nome),
     );
-
     const pocosSorted = pocos.data.sort((a: ListaPoco, b: ListaPoco) =>
       a.poco.localeCompare(b.poco),
     );
+    const projetosTipoSorted = projetosTipo.data.sort(
+      (a: ListaProjetoTipo, b: ListaProjetoTipo) =>
+        a.nome.localeCompare(b.nome),
+    );
+
     setListaSondas(sondasSorted);
     setListaPocos(pocosSorted);
+    setListaProjetosTipo(projetosTipoSorted);
   };
 
   const intervencaoForm = useFormik({
@@ -86,5 +104,6 @@ export function useCadastroIntervencao() {
     loading,
     listaSondas,
     listaPocos,
+    listaProjetosTipo,
   };
 }
