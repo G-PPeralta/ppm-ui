@@ -42,8 +42,10 @@ function ModalCadastrarProjetoTipo() {
     const payload = atividadesList;
 
     const payloadFiltrado: any[] = [];
+    let ordem = 0;
 
     payload.forEach((pay: any) => {
+      ordem += 1;
       const precedentesArray: any[] = [];
       for (let i = 0; i < pay.precedentes.length; i += 1) {
         if (pay.precedentes[i].checked) {
@@ -52,16 +54,18 @@ function ModalCadastrarProjetoTipo() {
       }
       const newPay = pay;
       newPay.precedentes = precedentesArray;
+      newPay.ordem = ordem;
+
       payloadFiltrado.push(newPay);
     });
-
+    console.log('JSON', JSON.stringify(payloadFiltrado));
     registerForm.setFieldValue('atividades', payloadFiltrado);
+
+    console.log('Payload', registerForm.values);
 
     registerForm.handleSubmit();
     onClose();
   };
-
-  console.log('registerForm.values', registerForm.values);
 
   return (
     <>

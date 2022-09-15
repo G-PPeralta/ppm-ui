@@ -41,9 +41,6 @@ function AtividadesDraggable({
     setRender(!render);
   };
 
-  console.log('listaAtividades', listaAtividades);
-  console.log('item', item);
-
   return (
     <Draggable draggableId={`list${index}`} index={index}>
       {(provided) => (
