@@ -20,7 +20,17 @@ const reorder = (list: any, startIndex: any, endIndex: any) => {
   return result;
 };
 
-export default function ListDnD({ atividades, intervencaoForm }: any) {
+interface Props {
+  intervencaoForm: any;
+  setQtdeDias: Function;
+  qtdeDias: number;
+}
+
+export default function ListDnD({
+  intervencaoForm,
+  setQtdeDias,
+  qtdeDias,
+}: Props) {
   const [list, setList] = useState<any>([]);
   const [render, setRender] = useState<any>([]);
   const [id, setId] = useState<any>('listID');
@@ -73,7 +83,7 @@ export default function ListDnD({ atividades, intervencaoForm }: any) {
   };
 
   useEffect(() => {
-    setList(atividades);
+    setList(intervencaoForm.values.atividades);
     const now = Date.now();
     const newId = id + '-' + now.toLocaleString();
     setId(newId);
@@ -85,8 +95,14 @@ export default function ListDnD({ atividades, intervencaoForm }: any) {
         (projeto: any) => projeto.id === intervencaoForm.values.projetoId,
       );
 
+      const duracaoProjeto = projeto?.atividades.reduce(
+        (acc: any, cur: any) => acc + Number(cur.atividade.dias),
+        0,
+      );
+
       if (projeto) {
         setList(projeto.atividades);
+        setQtdeDias(duracaoProjeto);
         setRender(projeto.atividades);
       }
     }

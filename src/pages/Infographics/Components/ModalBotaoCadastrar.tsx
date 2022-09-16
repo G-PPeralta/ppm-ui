@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 
 import {
@@ -26,6 +27,7 @@ import ListDnD from 'pages/Infographics/Components/ListaIntervencao';
 
 import { TextError } from 'components/TextError';
 
+import { formatDate } from 'utils/formatDate';
 import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
 
 import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
@@ -37,8 +39,18 @@ import SelectFiltragemSondas from './SelectFiltragemSonda';
 function ModalBotaoCadastrar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { intervencaoForm, loading } = useCadastroIntervencao();
+  const [qtdeDias, setQtdeDias] = useState<any>(0);
+  const [dataFinal, setDataFinal] = useState<any>('');
 
   // console.log(intervencaoForm.values);
+
+  useEffect(() => {
+    if (intervencaoForm.values.inicioPrevisto) {
+      const data = new Date(intervencaoForm.values.inicioPrevisto);
+      const dataFinal = new Date(data.setDate(data.getDate() + qtdeDias));
+      setDataFinal(formatDate(dataFinal));
+    }
+  }, [intervencaoForm.values.projetoId]);
 
   return (
     <>
@@ -151,7 +163,9 @@ function ModalBotaoCadastrar() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="inicioPrevisto">INÍCIO</FormLabel>
+                        <FormLabel htmlFor="inicioPrevisto">
+                          INÍCIO PREVISTO
+                        </FormLabel>
                         <Input
                           isRequired
                           placeholder="dd/mm/aaaa"
@@ -169,13 +183,15 @@ function ModalBotaoCadastrar() {
                           )}
                       </FormControl>
                       <FormControl>
-                        <FormLabel htmlFor="fimPrevisto">FIM</FormLabel>
+                        <FormLabel htmlFor="fimPrevisto">
+                          FIM PREVISTO
+                        </FormLabel>
                         <Input
                           placeholder="dd/mm/aaaa"
                           id="fimPrevisto"
-                          type="date"
+                          type="text"
                           name="fimPrevisto"
-                          value={'dd/mm/aaaa'}
+                          value={dataFinal}
                           isDisabled
                         />
                       </FormControl>
@@ -183,13 +199,14 @@ function ModalBotaoCadastrar() {
                   </Stack>
 
                   <ListDnD
-                    atividades={intervencaoForm.values.atividades}
                     intervencaoForm={intervencaoForm}
+                    qtdeDias={qtdeDias}
+                    setQtdeDias={setQtdeDias}
                   />
 
                   <Stack>
                     <FormControl>
-                      <FormLabel htmlFor="comentarios">Observações</FormLabel>
+                      <FormLabel htmlFor="comentarios">OBSERVAÇÕES</FormLabel>
                       <Textarea
                         isRequired
                         placeholder="Adicione observações sobre a intervenção"
