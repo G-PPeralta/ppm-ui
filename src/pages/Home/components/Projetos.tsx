@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { AiOutlineCaretUp } from 'react-icons/ai';
 
 import {
@@ -15,51 +16,65 @@ import {
   Tbody,
 } from '@chakra-ui/react';
 
+import { getInfoProjetos } from 'services/get/Infograficos';
+
 export default function NaoPrevistoComponent() {
-  const data = [
-    {
-      id: 1,
-      name: 'Nome do Projeto',
-      orcament: '1.000.000',
-      cpi: 'yellow',
-      spi: 'red',
-    },
-    {
-      id: 2,
-      name: 'Nome do Projeto',
-      orcament: '1.000.000',
-      cpi: 'green',
-      spi: 'red',
-    },
-    {
-      id: 3,
-      name: 'Nome do Projeto',
-      orcament: '1.000.000',
-      cpi: 'yellow',
-      spi: 'blue',
-    },
-    {
-      id: 4,
-      name: 'Nome do Projeto',
-      orcament: '1.000.000',
-      cpi: 'yellow',
-      spi: 'red',
-    },
-    {
-      id: 5,
-      name: 'Nome do Projeto',
-      orcament: '1.000.000',
-      cpi: 'yellow',
-      spi: 'red',
-    },
-    {
-      id: 6,
-      name: 'Nome do Projeto',
-      orcament: '1.000.000',
-      cpi: 'yellow',
-      spi: 'red',
-    },
-  ];
+  const [projetos, setProjetos] = useState<any[]>([]);
+  const [trut, setTrue] = useState(false);
+  const handleGetProjetos = async () => {
+    const response = await getInfoProjetos();
+    setProjetos(response.data);
+  };
+
+  useEffect(() => {
+    handleGetProjetos();
+  }, []);
+
+  // console.log(projetos);
+
+  const data = {
+    id: 1,
+    name: 'Nome do Projeto',
+    orcament: '1.000.000',
+    cpi: 'yellow',
+    spi: 'red',
+  };
+  //   {
+  //     id: 2,
+  //     name: 'Nome do Projeto',
+  //     orcament: '1.000.000',
+  //     cpi: 'green',
+  //     spi: 'red',
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'Nome do Projeto',
+  //     orcament: '1.000.000',
+  //     cpi: 'yellow',
+  //     spi: 'blue',
+  //   },
+  //   {
+  //     id: 4,
+  //     name: 'Nome do Projeto',
+  //     orcament: '1.000.000',
+  //     cpi: 'yellow',
+  //     spi: 'red',
+  //   },
+  //   {
+  //     id: 5,
+  //     name: 'Nome do Projeto',
+  //     orcament: '1.000.000',
+  //     cpi: 'yellow',
+  //     spi: 'red',
+  //   },
+  //   {
+  //     id: 6,
+  //     name: 'Nome do Projeto',
+  //     orcament: '1.000.000',
+  //     cpi: 'yellow',
+  //     spi: 'red',
+  //   },
+  // ];
 
   return (
     <Stack spacing="8">
@@ -99,24 +114,50 @@ export default function NaoPrevistoComponent() {
                     <Th>SPI</Th>
                   </Tr>
                 </Thead>
-                <Tbody>
-                  {data.map((d, index) => (
+                <Tbody
+                  style={{
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
+                >
+                  {projetos.map((projeto, index) => (
                     <Tr mt={1} key={index}>
                       <Th color="gray.400" sx={{ fontSize: 11 }}>
-                        ID
+                        {projeto.id}
                       </Th>
-                      <Th color={'#628EFD'} sx={{ fontSize: 11 }}>
-                        {d.name}
+                      <Th
+                        color={'#628EFD'}
+                        sx={{ fontSize: 11 }}
+                        onMouseOver={(event) => {
+                          // console.log(projeto.nomeProjeto);
+
+                          setTrue(true);
+                          return projeto.nomeProjeto;
+                        }}
+                        onMouseOut={() => {
+                          setTrue(false);
+                        }}
+                      >
+                        {trut === false ? (
+                          <Text>
+                            {projeto.nomeProjeto.substr(0, 18) + '...'}
+                          </Text>
+                        ) : (
+                          ''
+                        )}
+                        {trut ? <Text> {projeto.nomeProjeto}</Text> : ''}
                       </Th>
+                      {/* {trut ? <Text> {projeto.nomeProjeto}</Text> : ''} */}
                       <Th color="gray.400" sx={{ fontSize: 11 }}>
-                        {d.orcament}
+                        {projeto.valorTotalPrevisto}
                       </Th>
                       <Th>
-                        {d.cpi == 'yellow' ? (
+                        {data.cpi == 'yellow' ? (
                           <Box
                             w={5}
                             h={5}
-                            bg={'#F4DD06'}
+                            bg={'#9FA2B4'}
                             display={'flex'}
                             flexDirection="column"
                             alignItems={'center'}
@@ -126,7 +167,24 @@ export default function NaoPrevistoComponent() {
                             <AiOutlineCaretUp color="#ffffff" size={14} />
                           </Box>
                         ) : undefined}
-                        {d.cpi == 'green' ? (
+                      </Th>
+                      <Th>
+                        {data.spi == 'red' ? (
+                          <Box
+                            w={5}
+                            h={5}
+                            bg={'#9FA2B4'}
+                            display={'flex'}
+                            flexDirection="column"
+                            alignItems={'center'}
+                            pt={'2px'}
+                            sx={{ borderRadius: '100%' }}
+                          >
+                            <AiOutlineCaretUp color="#ffffff" size={14} />
+                          </Box>
+                        ) : undefined}
+                      </Th>
+                      {/* {d.cpi == 'green' ? (
                           <Box
                             w={5}
                             h={5}
@@ -139,10 +197,9 @@ export default function NaoPrevistoComponent() {
                           >
                             <AiOutlineCaretUp color="#ffffff" size={14} />
                           </Box>
-                        ) : undefined}
-                      </Th>
-                      <Th>
-                        {d.spi == 'red' ? (
+                        ) : undefined} */}
+                      {/* <Th> */}
+                      {/* {d.spi == 'red' ? (
                           <Box
                             w={5}
                             h={5}
@@ -155,8 +212,8 @@ export default function NaoPrevistoComponent() {
                           >
                             <AiOutlineCaretUp color="#ffffff" size={14} />
                           </Box>
-                        ) : undefined}
-                        {d.spi == 'blue' ? (
+                        ) : undefined} */}
+                      {/* {d.spi == 'blue' ? (
                           <Box
                             w={5}
                             h={5}
@@ -169,8 +226,8 @@ export default function NaoPrevistoComponent() {
                           >
                             <AiOutlineCaretUp color="#ffffff" size={14} />
                           </Box>
-                        ) : undefined}
-                      </Th>
+                        ) : undefined} */}
+                      {/* </Th> */}
                     </Tr>
                   ))}
                 </Tbody>

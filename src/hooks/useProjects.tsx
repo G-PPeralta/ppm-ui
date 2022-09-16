@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useFormik } from 'formik';
-import { projectRegisterSchema } from 'validations/ProjectRegister';
+// import { projectRegisterSchema } from 'validations/ProjectRegister';
 
 import { useToast } from 'contexts/Toast';
 
@@ -33,21 +33,13 @@ export function useProjects() {
       tipoProjetoId: 0,
       demandaId: 0,
       comentarios: '',
-      responsaveis: [
-        {
-          nomeResponsavel: '',
-        },
-      ],
-      coordenadores: [
-        {
-          coordenadorNome: '',
-        },
-      ],
-      responsavelId: [0],
-      coordenadorId: [0],
-      elementoPep: '',
+      responsavel: '',
+      coordenador: '',
+      responsavel_id: 0,
+      coordenador_id: 0,
+      elemento_pep: '',
     },
-    validationSchema: projectRegisterSchema,
+    // validationSchema: projectRegisterSchema,
     onSubmit: async (values) => {
       const newValues = {
         nomeProjeto: values.nomeProjeto,
@@ -68,11 +60,11 @@ export function useProjects() {
         statusId: Number(values.statusId),
         gateId: Number(values.statusId),
         tipoProjetoId: Number(values.tipoProjetoId),
-        demandaId: Number(values.demandaId),
+        // demandaId: Number(values.demandaId),
         comentarios: values.comentarios,
-        responsavelId: values.responsavelId,
-        coordenadorId: values.responsavelId,
-        elementoPep: values.elementoPep,
+        responsavel_id: values.responsavel_id,
+        coordenador_id: values.coordenador_id,
+        elemento_pep: values.elemento_pep,
       };
 
       setLoading(true);

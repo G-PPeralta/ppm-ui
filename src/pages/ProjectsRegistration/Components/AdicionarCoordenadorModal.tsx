@@ -21,48 +21,30 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import { TextError } from 'components/TextError';
+// import { TextError } from 'components/TextError';
 
 import { postCoordenador } from 'services/post/ProjectRegister';
 
 export function AdicionarCoordenadorModal(projectsForm: any) {
-  const [numeroDeCoordenadores, setNumeroDeCoordenadores] = useState([
-    {
-      coordenadorNome: '',
-    },
-  ]);
+  const [coordenador, setCoordenador] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  function addCoordenador() {
-    setNumeroDeCoordenadores([
-      ...numeroDeCoordenadores,
-      {
-        coordenadorNome: '',
-      },
-    ]);
+  function handleChange(event: any): void {
+    setCoordenador(event.target.value);
   }
 
-  function handleChange(event: any, index: number): void {
-    setNumeroDeCoordenadores([
-      ...numeroDeCoordenadores.slice(0, index),
-      {
-        ...numeroDeCoordenadores[index],
-        [event.target.name]: event.target.value,
-      },
-      ...numeroDeCoordenadores.slice(index + 1),
-    ]);
-  }
+  async function saveResponsible() {
+    const { data } = await postCoordenador({ coordenadorNome: coordenador });
 
-  function saveResponsible() {
     projectsForm.projectsForm.setFieldValue(
-      'coordenadores',
-      numeroDeCoordenadores.filter((item) => item.coordenadorNome !== ''),
+      'coordenador_id',
+      data.id_coordenador,
     );
-    const coordenadores = {
-      coordenadores: numeroDeCoordenadores,
-    };
-    postCoordenador(coordenadores);
+    projectsForm.projectsForm.setFieldValue(
+      'coordenador',
+      data.coordenadorNome,
+    );
     onClose();
   }
 
@@ -108,49 +90,26 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
           <ModalHeader>ADICIONAR COORDENADOR</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {numeroDeCoordenadores.map((coordenador: any, index: number) => (
-              <Flex align="end" mb={3} key={index}>
-                <FormControl>
-                  <FormLabel htmlFor="coordenadorNome">NOME</FormLabel>
-                  <Input
-                    isRequired
-                    placeholder="Nome do coordenador"
-                    type="text"
-                    id="coordenadorNome"
-                    name="coordenadorNome"
-                    value={coordenador.coordenadorNome}
-                    onChange={(event) => handleChange(event, index)}
-                    width="100%"
-                  />
-                  {projectsForm.projectsForm.errors.coordenadores &&
+            <Flex align="end" mb={3}>
+              <FormControl>
+                <FormLabel htmlFor="coordenadorNome">NOME</FormLabel>
+                <Input
+                  isRequired
+                  placeholder="Nome do coordenador"
+                  type="text"
+                  id="coordenadorNome"
+                  name="coordenadorNome"
+                  value={coordenador}
+                  onChange={(event) => handleChange(event)}
+                  width="100%"
+                />
+                {/* {projectsForm.projectsForm.errors.coordenadores &&
                     projectsForm.projectsForm.touched.coordenadores && (
                       <TextError>
                         {projectsForm.projectsForm.errors.coordenadores}
                       </TextError>
-                    )}
-                </FormControl>
-              </Flex>
-            ))}
-            <Flex
-              flexDirection={useBreakpointValue({
-                base: 'column',
-                md: 'row',
-              })}
-            >
-              <Button
-                onClick={addCoordenador}
-                background="origem.300"
-                variant="primary"
-                color="white"
-                mb={1}
-                size="sm"
-                _hover={{
-                  background: 'origem.500',
-                  transition: 'all 0.4s',
-                }}
-              >
-                ADICIONAR OUTRA PESSOA COORDENADORA
-              </Button>
+                    )} */}
+              </FormControl>
             </Flex>
           </ModalBody>
 
