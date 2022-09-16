@@ -22,7 +22,6 @@ import StatusProjeto from './Components/StatusProjeto';
 export function Infographics() {
   const [loading, setLoading] = useState(true);
   const [campanhas, setCampanhas] = useState([]);
-  // console.log(campanhas);
 
   const handleGetCampanha = async () => {
     const response = await getInfoCampanha();
@@ -33,22 +32,6 @@ export function Infographics() {
   useEffect(() => {
     handleGetCampanha();
   }, []);
-
-  // const projectStatus = (date) => {
-  //   const dateTime = new Date();
-  //   const formatDate =
-  //     dateTime.getUTCFullYear() +
-  //     '/' +
-  //     (dateTime.getMonth() + 1) +
-  //     '/' +
-  //     dateTime.getUTCDate();
-  //   if (formatDate > date) return statusProjeto.status;
-  // };
-
-  // Se a data prevista pra término < data de hoje = atrasado
-  // Se a data prevista pra término > data de hoje = em andamento
-
-  // console.log(validateDate('2022-10-20T12:01:04.753Z'));
 
   return (
     <>

@@ -1,24 +1,66 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useFormik } from 'formik';
-import { cadastroIntervencaoSchema } from 'validations/ModaisCadastrosInfografico';
+import {
+  ListaPoco,
+  ListaProjetoTipo,
+  ListaSonda,
+} from 'interfaces/CadastrosModaisInfograficos';
+// import { cadastroIntervencaoSchema } from 'validations/ModaisCadastrosInfografico';
 
 import { useToast } from 'contexts/Toast';
 
+import {
+  getSondas,
+  getPocos,
+  getProjetosTipo,
+  getResponsaveis,
+} from 'services/get/CadastroModaisInfograficos';
 import { postCadastroIntervencao } from 'services/post/CadastroModaisInfograficos';
 
 export function useCadastroIntervencao() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [listaSondas, setListaSondas] = useState<ListaSonda[]>([]);
+  const [listaPocos, setListaPocos] = useState<ListaPoco[]>([]);
+  const [listaProjetosTipo, setListaProjetosTipo] = useState<
+    ListaProjetoTipo[]
+  >([]);
+  const [listaResponsaveis, setListaResponsaveis] = useState<any[]>([]);
+
+  const reqGet = async () => {
+    const sondas = await getSondas();
+    const pocos = await getPocos();
+    const projetosTipo = await getProjetosTipo();
+    const responsaveis = await getResponsaveis();
+
+    const sondasSorted = sondas.data.sort((a: ListaSonda, b: ListaSonda) =>
+      a.nome.localeCompare(b.nome),
+    );
+    const pocosSorted = pocos.data.sort((a: ListaPoco, b: ListaPoco) =>
+      a.poco.localeCompare(b.poco),
+    );
+    const projetosTipoSorted = projetosTipo.data.sort(
+      (a: ListaProjetoTipo, b: ListaProjetoTipo) =>
+        a.nome.localeCompare(b.nome),
+    );
+    const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
+      a.nome.localeCompare(b.nome),
+    );
+
+    setListaSondas(sondasSorted);
+    setListaPocos(pocosSorted);
+    setListaProjetosTipo(projetosTipoSorted);
+    setListaResponsaveis(responsaveisSorted);
+  };
 
   const intervencaoForm = useFormik({
     initialValues: {
-      intervencao: '',
-      poco: '',
-      sonda: '',
+      nome: '',
+      pocoId: 0,
+      sondaId: 0,
+      projetoId: 0,
       inicioPrevisto: '',
-      fimPrevisto: '',
-      projeto: '',
       atividades: [
         {
           ordem: 1,
@@ -26,19 +68,18 @@ export function useCadastroIntervencao() {
           responsavel: '',
         },
       ],
-      observacoes: '',
+      comentarios: '',
     },
-    validationSchema: cadastroIntervencaoSchema,
+    // validationSchema: cadastroIntervencaoSchema,
     onSubmit: async (values) => {
       const newValues = {
-        intervencao: values.intervencao,
-        poco: values.poco,
-        sonda: values.sonda,
+        nome: values.nome,
+        pocoId: values.pocoId,
+        sondaId: values.sondaId,
+        projetoId: values.projetoId,
         inicioPrevisto: values.inicioPrevisto,
-        fimPrevisto: values.fimPrevisto,
-        projeto: values.projeto,
         atividades: values.atividades,
-        observacoes: values.observacoes,
+        comentarios: values.comentarios,
       };
 
       setLoading(true);
@@ -61,8 +102,16 @@ export function useCadastroIntervencao() {
     },
   });
 
+  useEffect(() => {
+    reqGet();
+  }, []);
+
   return {
     intervencaoForm,
     loading,
+    listaSondas,
+    listaPocos,
+    listaProjetosTipo,
+    listaResponsaveis,
   };
 }

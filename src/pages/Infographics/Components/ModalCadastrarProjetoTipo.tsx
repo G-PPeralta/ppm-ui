@@ -21,7 +21,7 @@ import {
 } from '@chakra-ui/react';
 import { Ring } from '@uiball/loaders';
 
-import ListDnD from 'pages/Infographics/Components/ListaAtividades';
+import ListaAtividades from 'pages/Infographics/Components/ListaAtividades';
 
 import { TextError } from 'components/TextError';
 
@@ -42,8 +42,10 @@ function ModalCadastrarProjetoTipo() {
     const payload = atividadesList;
 
     const payloadFiltrado: any[] = [];
+    let ordem = 0;
 
     payload.forEach((pay: any) => {
+      ordem += 1;
       const precedentesArray: any[] = [];
       for (let i = 0; i < pay.precedentes.length; i += 1) {
         if (pay.precedentes[i].checked) {
@@ -52,9 +54,10 @@ function ModalCadastrarProjetoTipo() {
       }
       const newPay = pay;
       newPay.precedentes = precedentesArray;
+      newPay.ordem = ordem;
+
       payloadFiltrado.push(newPay);
     });
-
     registerForm.setFieldValue('atividades', payloadFiltrado);
 
     registerForm.handleSubmit();
@@ -114,23 +117,21 @@ function ModalCadastrarProjetoTipo() {
                         <Input
                           isRequired
                           placeholder="Nome do Tipo de Intervenção"
-                          id="nomeProjeto"
+                          id="nome"
                           type="text"
-                          name="nomeProjeto"
-                          value={registerForm.values.nomeProjeto}
+                          name="nome"
+                          value={registerForm.values.nome}
                           onChange={registerForm.handleChange}
                         />
-                        {registerForm.errors.nomeProjeto &&
-                          registerForm.touched.nomeProjeto && (
-                            <TextError>
-                              {registerForm.errors.nomeProjeto}
-                            </TextError>
+                        {registerForm.errors.nome &&
+                          registerForm.touched.nome && (
+                            <TextError>{registerForm.errors.nome}</TextError>
                           )}
                       </FormControl>
                     </Flex>
                   </Stack>
 
-                  <ListDnD
+                  <ListaAtividades
                     atividades={registerForm.values.atividades}
                     handleParent={handleParent}
                   />

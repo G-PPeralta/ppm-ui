@@ -278,6 +278,7 @@ export interface AreaAtuacao {
 export interface AtividadeLista {
   id: number;
   tarefa: string;
+  dias?: number;
 }
 
 export interface Tarefa {

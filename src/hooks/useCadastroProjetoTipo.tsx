@@ -16,21 +16,24 @@ export function useCadastroProjetoTipo() {
 
   const carregarListaAtividade = async () => {
     const { data } = await getAtividadesList();
-    setListaAtividades(data);
+    const dataSorted = data.sort((a, b) => a.tarefa.localeCompare(b.tarefa));
+    // console.log('dataSorted', dataSorted);
+    setListaAtividades(dataSorted);
   };
+
+  const listaAtividadesPrecedentes = listaAtividades.map((atividade) => ({
+    id: atividade.id,
+    nome: atividade.tarefa,
+    checked: false,
+  }));
 
   const registerForm = useFormik({
     initialValues: {
-      nomeProjeto: '',
+      nome: '',
       atividades: [
         {
-          atividade: '',
-          precedentes: [
-            {
-              id: 0,
-              nomeAtividade: '',
-            },
-          ],
+          atividadeId: 0,
+          precedentes: [0],
         },
       ],
       comentarios: '',
@@ -38,7 +41,7 @@ export function useCadastroProjetoTipo() {
     // validationSchema: cadastroProjetoTipoSchema,
     onSubmit: async (values) => {
       const newValues = {
-        nomeProjeto: values.nomeProjeto,
+        nome: values.nome,
         atividades: values.atividades,
         comentarios: values.comentarios,
       };
@@ -71,5 +74,6 @@ export function useCadastroProjetoTipo() {
     registerForm,
     loading,
     listaAtividades,
+    listaAtividadesPrecedentes,
   };
 }

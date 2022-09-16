@@ -43,9 +43,7 @@ function PopOverPrecedentes({ handlePopover, atividades }: any) {
                   <Checkbox
                     key={index}
                     isChecked={atividade.checked}
-                    onChange={(event) =>
-                      handlePopover(index, !atividade.checked)
-                    }
+                    onChange={() => handlePopover(index, !atividade.checked)}
                   >
                     {atividade.nome}
                   </Checkbox>

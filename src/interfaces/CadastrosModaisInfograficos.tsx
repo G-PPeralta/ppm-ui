@@ -6,18 +6,13 @@ export interface CadastroTarefa {
   tarefa: string;
 }
 
-export interface Precedentes {
-  id: number;
-  nomeAtividade: string;
-}
-
 export interface AtividadesProjetoTipo {
-  atividade: string;
-  precedentes: Precedentes[];
+  atividadeId: number;
+  precedentes: number[];
 }
 
 export interface CadastroProjetoTipo {
-  nomeProjeto: string;
+  nome: string;
   atividades: AtividadesProjetoTipo[];
   comentarios: string;
 }
@@ -29,14 +24,13 @@ interface Atividades {
 }
 
 export interface CadastroIntervencao {
-  intervencao: string;
-  poco: string;
-  sonda: string;
+  nome: string;
+  pocoId: number;
+  sondaId: number;
+  projetoId: number;
   inicioPrevisto: string;
-  fimPrevisto: string;
-  projeto: string;
   atividades: Atividades[];
-  observacoes: string;
+  comentarios: string;
 }
 
 export interface CadastroAtividade {
@@ -48,4 +42,32 @@ export interface CadastroAtividade {
 
 export interface CadastroPoco {
   poco: string;
+}
+
+export interface ListaPoco {
+  id: number;
+  poco: string;
+}
+
+export interface ListaSonda {
+  id: number;
+  nome: string;
+}
+
+export interface AtividadeIntervencao {
+  areaAtuacaoId: number;
+  dias: number;
+  id: number;
+  obs: string;
+  tarefaId: number;
+}
+
+export interface AtividadeListaProjetoTipo {
+  atividade: AtividadeIntervencao;
+}
+
+export interface ListaProjetoTipo {
+  id: number;
+  nome: string;
+  atividades: AtividadeListaProjetoTipo[];
 }

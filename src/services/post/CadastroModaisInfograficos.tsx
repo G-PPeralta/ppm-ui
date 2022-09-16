@@ -44,13 +44,13 @@ export async function postCadastroAtividade(
 export async function postProjetoTipo(
   payload: CadastroProjetoTipo,
 ): Promise<{ status: number }> {
-  const { status } = await api.post('/', payload);
+  const { status } = await api.post('/projeto-intervencao', payload, token());
   return { status };
 }
 
 export async function postCadastroPoco(
   payload: CadastroPoco,
 ): Promise<{ status: number }> {
-  const { status } = await api.post('/poco', payload);
+  const { status } = await api.post('/poco', payload, token());
   return { status };
 }

@@ -27,8 +27,8 @@ function AtividadesDraggable({
   const { registerForm, listaAtividades } = useCadastroProjetoTipo();
 
   const handleChange = (event: any, chave: any) => {
-    item[chave] = event.target.value;
-    handleChangeProp(index, chave, event.target.value);
+    item[chave] = Number(event.target.value);
+    handleChangeProp(index, chave, Number(event.target.value));
     registerForm.setFieldValue('atividades', list);
   };
 
@@ -38,7 +38,6 @@ function AtividadesDraggable({
     const newList = item.precedentes;
     newList[indexIn].checked = value;
     handleChangeProp(index, 'precedentes', newList);
-    // setMockAtividades(newList);
     setRender(!render);
   };
 
@@ -74,15 +73,14 @@ function AtividadesDraggable({
               <FormControl>
                 <Text sx={{ fontSize: 12, fontWeight: '600' }}>ATIVIDADE</Text>
                 <Select
-                  id="atividade"
-                  name="atividade"
+                  id="atividadeId"
+                  name="atividadeId"
                   placeholder="Selecione"
                   bg={'#fff'}
                   value={item.atividade}
-                  onChange={(event) => handleChange(event, 'atividade')}
+                  onChange={(event) => handleChange(event, 'atividadeId')}
                 >
                   {listaAtividades.map((data, index) => (
-                    // {listaArea.map((data, index) => (
                     <option value={data.id} key={index}>
                       {data.tarefa}
                     </option>
@@ -98,8 +96,11 @@ function AtividadesDraggable({
                   bg={'#fff'}
                   id="dias"
                   name="dias"
-                  value={item.dias}
-                  onChange={(event) => handleChange(event, 'dias')}
+                  value={
+                    listaAtividades.filter(
+                      (atividade) => atividade.id === item.atividadeId,
+                    )[0]?.dias
+                  }
                   isDisabled
                 />
               </FormControl>

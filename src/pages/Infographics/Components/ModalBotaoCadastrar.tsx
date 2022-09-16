@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 
 import {
@@ -15,7 +16,6 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Select,
   Input,
   Stack,
   useBreakpointValue,
@@ -27,13 +27,30 @@ import ListDnD from 'pages/Infographics/Components/ListaIntervencao';
 
 import { TextError } from 'components/TextError';
 
+import { formatDate } from 'utils/formatDate';
 import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
 
 import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
 
+import SelectFiltragemPocos from './SelectFiltragemPocos';
+import SelectFiltragemProjetos from './SelectFiltragemProjetos';
+import SelectFiltragemSondas from './SelectFiltragemSonda';
+
 function ModalBotaoCadastrar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { intervencaoForm, loading } = useCadastroIntervencao();
+  const [qtdeDias, setQtdeDias] = useState<any>(0);
+  const [dataFinal, setDataFinal] = useState<any>('');
+
+  // console.log(intervencaoForm.values);
+
+  useEffect(() => {
+    if (intervencaoForm.values.inicioPrevisto) {
+      const data = new Date(intervencaoForm.values.inicioPrevisto);
+      const dataFinal = new Date(data.setDate(data.getDate() + qtdeDias));
+      setDataFinal(formatDate(dataFinal));
+    }
+  }, [intervencaoForm.values.projetoId]);
 
   return (
     <>
@@ -106,17 +123,15 @@ function ModalBotaoCadastrar() {
                         <Input
                           isRequired
                           placeholder="Nome da Intervenção"
-                          id="intervencao"
+                          id="nome"
                           type="text"
-                          name="intervencao"
-                          value={intervencaoForm.values.intervencao}
+                          name="nome"
+                          value={intervencaoForm.values.nome}
                           onChange={intervencaoForm.handleChange}
                         />
-                        {intervencaoForm.errors.intervencao &&
-                          intervencaoForm.touched.intervencao && (
-                            <TextError>
-                              {intervencaoForm.errors.intervencao}
-                            </TextError>
+                        {intervencaoForm.errors.nome &&
+                          intervencaoForm.touched.nome && (
+                            <TextError>{intervencaoForm.errors.nome}</TextError>
                           )}
                       </FormControl>
                     </Flex>
@@ -128,35 +143,17 @@ function ModalBotaoCadastrar() {
                       })}
                       gap={5}
                     >
-                      <FormControl>
-                        <FormLabel>POÇO</FormLabel>
-                        <Select
-                          id="poco"
-                          name="poco"
-                          placeholder="Selecione"
-                          value={intervencaoForm.values.poco}
-                          onChange={intervencaoForm.handleChange}
-                        >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </Select>
-                      </FormControl>
-                      <FormControl>
-                        <FormLabel>SONDA</FormLabel>
-                        <Select
-                          id="sonda"
-                          name="sonda"
-                          placeholder="Selecione"
-                          value={intervencaoForm.values.sonda}
-                          onChange={intervencaoForm.handleChange}
-                        >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </Select>
-                      </FormControl>
+                      <SelectFiltragemPocos intervencaoForm={intervencaoForm} />
+                      <SelectFiltragemSondas
+                        intervencaoForm={intervencaoForm}
+                      />
                     </Flex>
+
+                    <Stack>
+                      <SelectFiltragemProjetos
+                        intervencaoForm={intervencaoForm}
+                      />
+                    </Stack>
 
                     <Flex
                       flexDirection={useBreakpointValue({
@@ -166,7 +163,9 @@ function ModalBotaoCadastrar() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="inicioPrevisto">INÍCIO</FormLabel>
+                        <FormLabel htmlFor="inicioPrevisto">
+                          INÍCIO PREVISTO
+                        </FormLabel>
                         <Input
                           isRequired
                           placeholder="dd/mm/aaaa"
@@ -184,60 +183,43 @@ function ModalBotaoCadastrar() {
                           )}
                       </FormControl>
                       <FormControl>
-                        <FormLabel htmlFor="fimPrevisto">FIM</FormLabel>
+                        <FormLabel htmlFor="fimPrevisto">
+                          FIM PREVISTO
+                        </FormLabel>
                         <Input
-                          isRequired
                           placeholder="dd/mm/aaaa"
                           id="fimPrevisto"
-                          type="date"
+                          type="text"
                           name="fimPrevisto"
-                          value={intervencaoForm.values.fimPrevisto}
-                          onChange={intervencaoForm.handleChange}
+                          value={dataFinal}
+                          isDisabled
                         />
-                        {intervencaoForm.errors.fimPrevisto &&
-                          intervencaoForm.touched.fimPrevisto && (
-                            <TextError>
-                              {intervencaoForm.errors.fimPrevisto}
-                            </TextError>
-                          )}
                       </FormControl>
                     </Flex>
                   </Stack>
-                  <Stack>
-                    <FormControl>
-                      <FormLabel>Projeto</FormLabel>
-                      <Select
-                        id="projeto"
-                        name="projeto"
-                        placeholder="Selecione"
-                        value={intervencaoForm.values.projeto}
-                        onChange={intervencaoForm.handleChange}
-                      >
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                      </Select>
-                    </FormControl>
-                  </Stack>
 
-                  <ListDnD atividades={intervencaoForm.values.atividades} />
+                  <ListDnD
+                    intervencaoForm={intervencaoForm}
+                    qtdeDias={qtdeDias}
+                    setQtdeDias={setQtdeDias}
+                  />
 
                   <Stack>
                     <FormControl>
-                      <FormLabel htmlFor="observacoes">Observações</FormLabel>
+                      <FormLabel htmlFor="comentarios">OBSERVAÇÕES</FormLabel>
                       <Textarea
                         isRequired
                         placeholder="Adicione observações sobre a intervenção"
-                        id="observacoes"
-                        name="observacoes"
-                        value={intervencaoForm.values.observacoes}
+                        id="comentarios"
+                        name="comentarios"
+                        value={intervencaoForm.values.comentarios}
                         onChange={intervencaoForm.handleChange}
                         w={useBreakpointValue({ base: '100%', md: '100%' })}
                       />
-                      {intervencaoForm.errors.observacoes &&
-                        intervencaoForm.touched.observacoes && (
+                      {intervencaoForm.errors.comentarios &&
+                        intervencaoForm.touched.comentarios && (
                           <TextError>
-                            {intervencaoForm.errors.observacoes}
+                            {intervencaoForm.errors.comentarios}
                           </TextError>
                         )}
                     </FormControl>

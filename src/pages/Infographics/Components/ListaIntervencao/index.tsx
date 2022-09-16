@@ -7,8 +7,10 @@ import {
 
 import { FormLabel } from '@chakra-ui/react';
 
+import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
+
 import AtividadesDraggable from './AtividadesDraggable';
-import BotaoAdicionar from './BotaoAdicionar';
+// import BotaoAdicionar from './BotaoAdicionar';
 
 const reorder = (list: any, startIndex: any, endIndex: any) => {
   const result = Array.from(list);
@@ -18,10 +20,21 @@ const reorder = (list: any, startIndex: any, endIndex: any) => {
   return result;
 };
 
-export default function ListDnD({ atividades }: any) {
+interface Props {
+  intervencaoForm: any;
+  setQtdeDias: Function;
+  qtdeDias: number;
+}
+
+export default function ListDnD({
+  intervencaoForm,
+  setQtdeDias,
+  qtdeDias,
+}: Props) {
   const [list, setList] = useState<any>([]);
   const [render, setRender] = useState<any>([]);
   const [id, setId] = useState<any>('listID');
+  const { listaProjetosTipo } = useCadastroIntervencao();
 
   function onDragEnd(result: any) {
     if (!result.destination) {
@@ -47,12 +60,20 @@ export default function ListDnD({ atividades }: any) {
     setRender(!render);
   };
 
-  const add = () => {
-    const newList = list;
-    newList.push({ base: '', tarefa: '', precedente: '', dias: 0 });
-    setList(newList);
-    setRender(!render);
-  };
+  // const add = () => {
+  //   const newList = list;
+  //   newList.push({
+  //     atividade: {
+  //       areaAtuacaoId: 0,
+  //       dias: 0,
+  //       id: 0,
+  //       obs: '',
+  //       tarefaId: 0,
+  //     },
+  //   });
+  //   setList(newList);
+  //   setRender(!render);
+  // };
 
   const handleChangeProp = (index: any, chave: any, value: any) => {
     const newList = list;
@@ -62,11 +83,30 @@ export default function ListDnD({ atividades }: any) {
   };
 
   useEffect(() => {
-    setList(atividades);
+    setList(intervencaoForm.values.atividades);
     const now = Date.now();
     const newId = id + '-' + now.toLocaleString();
     setId(newId);
   }, []);
+
+  useEffect(() => {
+    if (intervencaoForm.values.projetoId) {
+      const projeto = listaProjetosTipo.find(
+        (projeto: any) => projeto.id === intervencaoForm.values.projetoId,
+      );
+
+      const duracaoProjeto = projeto?.atividades.reduce(
+        (acc: any, cur: any) => acc + Number(cur.atividade.dias),
+        0,
+      );
+
+      if (projeto) {
+        setList(projeto.atividades);
+        setQtdeDias(duracaoProjeto);
+        setRender(projeto.atividades);
+      }
+    }
+  }, [intervencaoForm.values.projetoId]);
 
   return (
     <>
@@ -90,7 +130,7 @@ export default function ListDnD({ atividades }: any) {
           )}
         </Droppable>
       </DragDropContext>
-      <BotaoAdicionar add={add} />
+      {/* <BotaoAdicionar add={add} /> */}
     </>
   );
 }
