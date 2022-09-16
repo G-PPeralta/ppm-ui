@@ -21,8 +21,8 @@ export function ActivitiesSchedule() {
   const [openId, setOpenId] = useState('');
 
   useEffect(() => {
-    console.log('scheadule', id);
-    console.log('Atividade', Atividade);
+    // console.log('scheadule', id);
+    // console.log('Atividade', Atividade);
     setLoading(false);
   }, []);
 
@@ -50,7 +50,7 @@ export function ActivitiesSchedule() {
   ];
 
   const openDetails = (atividade: any) => {
-    console.log('atividade', atividade);
+    // console.log('atividade', atividade);
     setOpenId(atividade);
   };
 

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { FaChevronRight } from 'react-icons/fa';
 
 import {
@@ -31,9 +31,9 @@ import { useCadastroAtividade } from 'hooks/useCadastroAtividade';
 function ModalAtividade({ onClose, atividade, id }: any) {
   const { registerForm, loading } = useCadastroAtividade();
 
-  useEffect(() => {
-    console.log('ModalAtividade', atividade);
-  }, []);
+  // useEffect(() => {
+  //   console.log('ModalAtividade', atividade);
+  // }, []);
 
   return (
     <>

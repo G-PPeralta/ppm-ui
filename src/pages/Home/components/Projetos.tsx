@@ -23,7 +23,7 @@ export default function NaoPrevistoComponent() {
   // const [trut, setTrue] = useState(false);
   const handleGetProjetos = async () => {
     const response = await getInfoProjetos();
-    console.log('reponse', response.data);
+    // console.log('reponse', response.data);
     setProjetos(response.data);
   };
 
