@@ -14,6 +14,7 @@ import {
   getSondas,
   getPocos,
   getProjetosTipo,
+  getResponsaveis,
 } from 'services/get/CadastroModaisInfograficos';
 import { postCadastroIntervencao } from 'services/post/CadastroModaisInfograficos';
 
@@ -25,11 +26,13 @@ export function useCadastroIntervencao() {
   const [listaProjetosTipo, setListaProjetosTipo] = useState<
     ListaProjetoTipo[]
   >([]);
+  const [listaResponsaveis, setListaResponsaveis] = useState<any[]>([]);
 
   const reqGet = async () => {
     const sondas = await getSondas();
     const pocos = await getPocos();
     const projetosTipo = await getProjetosTipo();
+    const responsaveis = await getResponsaveis();
 
     const sondasSorted = sondas.data.sort((a: ListaSonda, b: ListaSonda) =>
       a.nome.localeCompare(b.nome),
@@ -41,10 +44,14 @@ export function useCadastroIntervencao() {
       (a: ListaProjetoTipo, b: ListaProjetoTipo) =>
         a.nome.localeCompare(b.nome),
     );
+    const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
+      a.nome.localeCompare(b.nome),
+    );
 
     setListaSondas(sondasSorted);
     setListaPocos(pocosSorted);
     setListaProjetosTipo(projetosTipoSorted);
+    setListaResponsaveis(responsaveisSorted);
   };
 
   const intervencaoForm = useFormik({
@@ -105,5 +112,6 @@ export function useCadastroIntervencao() {
     listaSondas,
     listaPocos,
     listaProjetosTipo,
+    listaResponsaveis,
   };
 }

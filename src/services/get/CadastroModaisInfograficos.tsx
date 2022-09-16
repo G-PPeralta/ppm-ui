@@ -26,3 +26,12 @@ export async function getProjetosTipo(): Promise<{
 
   return { data, status };
 }
+
+export async function getResponsaveis(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get('/responsavel', token());
+
+  return { data, status };
+}

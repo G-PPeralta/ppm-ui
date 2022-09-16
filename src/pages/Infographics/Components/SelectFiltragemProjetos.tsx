@@ -19,8 +19,6 @@ function SelectFiltragemProjetos({ intervencaoForm }: any) {
     intervencaoForm.setFieldValue(name, event.value);
   };
 
-  console.log(intervencaoForm.values);
-
   return (
     <>
       <FormControl>

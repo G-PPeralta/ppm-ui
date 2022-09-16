@@ -4,6 +4,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 
 import { Box, Flex, FormControl, Select, Text } from '@chakra-ui/react';
 
+import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
 import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
 
 interface Props {
@@ -22,12 +23,16 @@ function AtividadesDraggable({
   list,
 }: Props) {
   const { registerForm } = useCadastroProjetoTipo();
+  const { listaResponsaveis } = useCadastroIntervencao();
 
   const handleChange = (event: any, chave: any) => {
     item[chave] = event.target.value;
     handleChangeProp(index, chave, event.target.value);
     registerForm.setFieldValue('atividades', list);
   };
+
+  // console.log('list', list);
+  // console.log('list', listaResponsaveis);
 
   return (
     <Draggable draggableId={`list${index}`} index={index}>
@@ -64,9 +69,11 @@ function AtividadesDraggable({
                 value={item.atividade}
                 onChange={(event) => handleChange(event, 'atividade')}
               >
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                {list.map(({ atividade }: any) => (
+                  <option key={atividade.id} value={atividade.id}>
+                    {atividade.obs}
+                  </option>
+                ))}
               </Select>
             </FormControl>
             <FormControl>
@@ -79,9 +86,11 @@ function AtividadesDraggable({
                 value={item.responsavel}
                 onChange={(event) => handleChange(event, 'responsavel')}
               >
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                {listaResponsaveis.map((responsavel: any) => (
+                  <option key={responsavel.id} value={responsavel.id}>
+                    {responsavel.nome}
+                  </option>
+                ))}
               </Select>
             </FormControl>
             <Flex

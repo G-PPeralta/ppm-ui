@@ -10,7 +10,7 @@ import { FormLabel } from '@chakra-ui/react';
 import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
 
 import AtividadesDraggable from './AtividadesDraggable';
-import BotaoAdicionar from './BotaoAdicionar';
+// import BotaoAdicionar from './BotaoAdicionar';
 
 const reorder = (list: any, startIndex: any, endIndex: any) => {
   const result = Array.from(list);
@@ -25,9 +25,6 @@ export default function ListDnD({ atividades, intervencaoForm }: any) {
   const [render, setRender] = useState<any>([]);
   const [id, setId] = useState<any>('listID');
   const { listaProjetosTipo } = useCadastroIntervencao();
-
-  console.log('Lista Projetos', listaProjetosTipo);
-  console.log('ProjetoId', intervencaoForm.values.projetoId);
 
   function onDragEnd(result: any) {
     if (!result.destination) {
@@ -53,12 +50,20 @@ export default function ListDnD({ atividades, intervencaoForm }: any) {
     setRender(!render);
   };
 
-  const add = () => {
-    const newList = list;
-    newList.push({ base: '', tarefa: '', precedente: '', dias: 0 });
-    setList(newList);
-    setRender(!render);
-  };
+  // const add = () => {
+  //   const newList = list;
+  //   newList.push({
+  //     atividade: {
+  //       areaAtuacaoId: 0,
+  //       dias: 0,
+  //       id: 0,
+  //       obs: '',
+  //       tarefaId: 0,
+  //     },
+  //   });
+  //   setList(newList);
+  //   setRender(!render);
+  // };
 
   const handleChangeProp = (index: any, chave: any, value: any) => {
     const newList = list;
@@ -109,7 +114,7 @@ export default function ListDnD({ atividades, intervencaoForm }: any) {
           )}
         </Droppable>
       </DragDropContext>
-      <BotaoAdicionar add={add} />
+      {/* <BotaoAdicionar add={add} /> */}
     </>
   );
 }
