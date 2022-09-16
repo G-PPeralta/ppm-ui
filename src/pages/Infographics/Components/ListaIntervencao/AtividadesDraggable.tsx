@@ -26,21 +26,12 @@ function AtividadesDraggable({
   const { listaResponsaveis } = useCadastroIntervencao();
 
   const handleChange = (event: any, chave: any) => {
-    // console.log('event', event.target.value);
-    // console.log('item', item);
-    // console.log('chave', chave);
-    // console.log(
-    //   'intervencaoForm',
-    //   intervencaoForm.values.atividades[index].responsavel,
-    // );
     item[chave] = event.target.value;
     handleChangeProp(index, chave, event.target.value);
     const arrayFinalAtividades = intervencaoForm.values.atividades;
     arrayFinalAtividades[index].responsavel = Number(event.target.value);
     intervencaoForm.setFieldValue('atividades', arrayFinalAtividades);
   };
-
-  console.log(intervencaoForm.values);
 
   return (
     <Draggable draggableId={`list${index}`} index={index}>

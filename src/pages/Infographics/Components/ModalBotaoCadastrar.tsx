@@ -48,7 +48,9 @@ function ModalBotaoCadastrar() {
     if (intervencaoForm.values.inicioPlanejado) {
       const data = new Date(intervencaoForm.values.inicioPlanejado);
       const dataFinal = new Date(data.setDate(data.getDate() + qtdeDias));
-      setDataFinal(formatDate(dataFinal));
+      const dataFormatada = formatDate(dataFinal);
+      setDataFinal(dataFormatada);
+      intervencaoForm.setFieldValue('fimPlanejado', dataFormatada);
     }
   }, [intervencaoForm.values.tipoProjetoId]);
 
