@@ -40,9 +40,19 @@ function ModalBotaoCadastrar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { intervencaoForm, loading } = useCadastroIntervencao();
   const [qtdeDias, setQtdeDias] = useState<any>(0);
-  const [dataFinal, setDataFinal] = useState<any>(formatDate(new Date()));
+  const [dataFinal, setDataFinal] = useState<any>('dd/mm/aaaa');
 
-  // console.log(intervencaoForm.values);
+  const handleCadastrarIntervencao = () => {
+    setDataFinal('dd/mm/aaaa');
+    intervencaoForm.resetForm();
+    handleCadastrar(intervencaoForm, onClose);
+  };
+
+  const handleCancelarIntervencao = () => {
+    setDataFinal('dd/mm/aaaa');
+    intervencaoForm.resetForm();
+    handleCancelar(intervencaoForm, onClose);
+  };
 
   useEffect(() => {
     if (intervencaoForm.values.inicioPlanejado) {
@@ -236,7 +246,7 @@ function ModalBotaoCadastrar() {
                 <Button
                   variant="ghost"
                   color="red"
-                  onClick={() => handleCancelar(intervencaoForm, onClose)}
+                  onClick={() => handleCancelarIntervencao()}
                   _hover={{
                     background: 'red.500',
                     transition: 'all 0.4s',
@@ -250,7 +260,7 @@ function ModalBotaoCadastrar() {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(intervencaoForm, onClose)}
+                  onClick={() => handleCadastrarIntervencao()}
                   _hover={{
                     background: 'origem.500',
                     transition: 'all 0.4s',
