@@ -26,11 +26,12 @@ interface Atividades {
 export interface CadastroIntervencao {
   nome: string;
   pocoId: number;
-  sondaId: number;
-  projetoId: number;
-  inicioPrevisto: string;
+  sptId: number;
+  tipoProjetoId: number;
+  inicioPlanejado: string;
+  fimPlanejado: string;
   atividades: Atividades[];
-  comentarios: string;
+  observacoes: string;
 }
 
 export interface CadastroAtividade {

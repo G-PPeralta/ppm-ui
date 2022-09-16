@@ -22,8 +22,8 @@ function SelectFiltragemPocos({ intervencaoForm }: any) {
       <FormControl>
         <FormLabel>POÇO</FormLabel>
         <Select
-          id="poco"
-          name="poco"
+          id="pocoId"
+          name="pocoId"
           placeholder="Selecione"
           onChange={(event, name) => handleChange(event, name)}
           options={options}

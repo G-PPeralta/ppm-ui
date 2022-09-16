@@ -53,12 +53,12 @@ export default function ListDnD({
     setList(newList);
   }
 
-  const remove = (index: number) => {
-    const newList = list;
-    newList.splice(index, 1);
-    setList(newList);
-    setRender(!render);
-  };
+  // const remove = (index: number) => {
+  //   const newList = list;
+  //   newList.splice(index, 1);
+  //   setList(newList);
+  //   setRender(!render);
+  // };
 
   // const add = () => {
   //   const newList = list;
@@ -90,9 +90,9 @@ export default function ListDnD({
   }, []);
 
   useEffect(() => {
-    if (intervencaoForm.values.projetoId) {
+    if (intervencaoForm.values.tipoProjetoId) {
       const projeto = listaProjetosTipo.find(
-        (projeto: any) => projeto.id === intervencaoForm.values.projetoId,
+        (projeto: any) => projeto.id === intervencaoForm.values.tipoProjetoId,
       );
 
       const duracaoProjeto = projeto?.atividades.reduce(
@@ -106,7 +106,9 @@ export default function ListDnD({
         setRender(projeto.atividades);
       }
     }
-  }, [intervencaoForm.values.projetoId]);
+  }, [intervencaoForm.values.tipoProjetoId]);
+
+  // console.log(intervencaoForm.values);
 
   return (
     <>
@@ -121,7 +123,7 @@ export default function ListDnD({
                   item={item}
                   index={index}
                   key={`list${index}`}
-                  remove={remove}
+                  // remove={remove}
                   list={list}
                 />
               ))}

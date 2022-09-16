@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Select from 'react-select';
 
 import { FormControl, FormLabel } from '@chakra-ui/react';
@@ -19,13 +20,32 @@ function SelectFiltragemProjetos({ intervencaoForm }: any) {
     intervencaoForm.setFieldValue(name, event.value);
   };
 
+  useEffect(() => {
+    if (intervencaoForm.values.tipoProjetoId) {
+      const projeto = listaProjetosTipo.find(
+        (projeto: any) => projeto.id === intervencaoForm.values.tipoProjetoId,
+      );
+
+      let contador = 0;
+
+      if (projeto) {
+        const listaAtividades = projeto.atividades.map((projeto: any) => ({
+          ordem: (contador += 1),
+          atividade: projeto.atividade.obs,
+          responsavel: '',
+        }));
+        intervencaoForm.setFieldValue('atividades', listaAtividades);
+      }
+    }
+  }, [intervencaoForm.values.tipoProjetoId]);
+
   return (
     <>
       <FormControl>
         <FormLabel>PROJETO TIPO</FormLabel>
         <Select
-          id="projetoId"
-          name="projetoId"
+          id="tipoProjetoId"
+          name="tipoProjetoId"
           placeholder="Selecione"
           onChange={(event, name) => handleChange(event, name)}
           options={options}

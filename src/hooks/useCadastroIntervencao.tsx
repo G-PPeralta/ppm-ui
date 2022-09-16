@@ -58,9 +58,10 @@ export function useCadastroIntervencao() {
     initialValues: {
       nome: '',
       pocoId: 0,
-      sondaId: 0,
-      projetoId: 0,
-      inicioPrevisto: '',
+      sptId: 0,
+      tipoProjetoId: 0,
+      inicioPlanejado: '',
+      fimPlanejado: '',
       atividades: [
         {
           ordem: 1,
@@ -68,18 +69,19 @@ export function useCadastroIntervencao() {
           responsavel: '',
         },
       ],
-      comentarios: '',
+      observacoes: '',
     },
     // validationSchema: cadastroIntervencaoSchema,
     onSubmit: async (values) => {
       const newValues = {
         nome: values.nome,
         pocoId: values.pocoId,
-        sondaId: values.sondaId,
-        projetoId: values.projetoId,
-        inicioPrevisto: values.inicioPrevisto,
+        sptId: values.sptId,
+        tipoProjetoId: values.tipoProjetoId,
+        inicioPlanejado: values.inicioPlanejado,
+        fimPlanejado: values.fimPlanejado,
         atividades: values.atividades,
-        comentarios: values.comentarios,
+        observacoes: values.observacoes,
       };
 
       setLoading(true);

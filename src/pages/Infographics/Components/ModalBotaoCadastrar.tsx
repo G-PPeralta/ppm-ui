@@ -45,12 +45,12 @@ function ModalBotaoCadastrar() {
   // console.log(intervencaoForm.values);
 
   useEffect(() => {
-    if (intervencaoForm.values.inicioPrevisto) {
-      const data = new Date(intervencaoForm.values.inicioPrevisto);
+    if (intervencaoForm.values.inicioPlanejado) {
+      const data = new Date(intervencaoForm.values.inicioPlanejado);
       const dataFinal = new Date(data.setDate(data.getDate() + qtdeDias));
       setDataFinal(formatDate(dataFinal));
     }
-  }, [intervencaoForm.values.projetoId]);
+  }, [intervencaoForm.values.tipoProjetoId]);
 
   return (
     <>
@@ -157,22 +157,22 @@ function ModalBotaoCadastrar() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="inicioPrevisto">
+                        <FormLabel htmlFor="inicioPlanejado">
                           INÍCIO PREVISTO
                         </FormLabel>
                         <Input
                           isRequired
                           placeholder="dd/mm/aaaa"
-                          id="inicioPrevisto"
+                          id="inicioPlanejado"
                           type="date"
-                          name="inicioPrevisto"
-                          value={intervencaoForm.values.inicioPrevisto}
+                          name="inicioPlanejado"
+                          value={intervencaoForm.values.inicioPlanejado}
                           onChange={intervencaoForm.handleChange}
                         />
-                        {intervencaoForm.errors.inicioPrevisto &&
-                          intervencaoForm.touched.inicioPrevisto && (
+                        {intervencaoForm.errors.inicioPlanejado &&
+                          intervencaoForm.touched.inicioPlanejado && (
                             <TextError>
-                              {intervencaoForm.errors.inicioPrevisto}
+                              {intervencaoForm.errors.inicioPlanejado}
                             </TextError>
                           )}
                       </FormControl>
@@ -206,20 +206,20 @@ function ModalBotaoCadastrar() {
 
                   <Stack>
                     <FormControl>
-                      <FormLabel htmlFor="comentarios">OBSERVAÇÕES</FormLabel>
+                      <FormLabel htmlFor="observacoes">OBSERVAÇÕES</FormLabel>
                       <Textarea
                         isRequired
                         placeholder="Adicione observações sobre a intervenção"
-                        id="comentarios"
-                        name="comentarios"
-                        value={intervencaoForm.values.comentarios}
+                        id="observacoes"
+                        name="observacoes"
+                        value={intervencaoForm.values.observacoes}
                         onChange={intervencaoForm.handleChange}
                         w={useBreakpointValue({ base: '100%', md: '100%' })}
                       />
-                      {intervencaoForm.errors.comentarios &&
-                        intervencaoForm.touched.comentarios && (
+                      {intervencaoForm.errors.observacoes &&
+                        intervencaoForm.touched.observacoes && (
                           <TextError>
-                            {intervencaoForm.errors.comentarios}
+                            {intervencaoForm.errors.observacoes}
                           </TextError>
                         )}
                     </FormControl>

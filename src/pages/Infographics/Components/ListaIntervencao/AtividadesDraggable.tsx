@@ -1,16 +1,15 @@
 import { Draggable } from 'react-beautiful-dnd';
-import { FiTrash } from 'react-icons/fi';
+// import { FiTrash } from 'react-icons/fi';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
 import { Box, Flex, FormControl, Select, Text } from '@chakra-ui/react';
 
 import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
-import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
 
 interface Props {
   index: number;
   item: any;
-  remove: any;
+  // remove: any;
   handleChangeProp: any;
   list: any;
 }
@@ -18,21 +17,17 @@ interface Props {
 function AtividadesDraggable({
   item,
   index,
-  remove,
+  // remove,
   handleChangeProp,
   list,
 }: Props) {
-  const { registerForm } = useCadastroProjetoTipo();
-  const { listaResponsaveis } = useCadastroIntervencao();
+  const { listaResponsaveis, intervencaoForm } = useCadastroIntervencao();
 
   const handleChange = (event: any, chave: any) => {
     item[chave] = event.target.value;
     handleChangeProp(index, chave, event.target.value);
-    registerForm.setFieldValue('atividades', list);
+    intervencaoForm.setFieldValue(`atividades.${chave}`, list);
   };
-
-  // console.log('list', list);
-  // console.log('list', listaResponsaveis);
 
   return (
     <Draggable draggableId={`list${index}`} index={index}>
@@ -66,8 +61,9 @@ function AtividadesDraggable({
                 name="atividade"
                 placeholder="Selecione"
                 bg={'#fff'}
-                value={item.atividade}
+                value={item.atividade.id}
                 onChange={(event) => handleChange(event, 'atividade')}
+                isDisabled
               >
                 {list.map(({ atividade }: any) => (
                   <option key={atividade.id} value={atividade.id}>
@@ -99,11 +95,11 @@ function AtividadesDraggable({
               justify={'center'}
               _hover={{ cursor: 'pointer' }}
             >
-              <FiTrash
+              {/* <FiTrash
                 onClick={() => remove(index)}
                 color="#F94144"
                 size={16}
-              />
+              /> */}
             </Flex>
           </Box>
         </div>
