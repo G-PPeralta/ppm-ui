@@ -149,12 +149,6 @@ function ModalBotaoCadastrar() {
                       />
                     </Flex>
 
-                    <Stack>
-                      <SelectFiltragemProjetos
-                        intervencaoForm={intervencaoForm}
-                      />
-                    </Stack>
-
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: 'column',
@@ -196,6 +190,12 @@ function ModalBotaoCadastrar() {
                         />
                       </FormControl>
                     </Flex>
+                  </Stack>
+
+                  <Stack>
+                    <SelectFiltragemProjetos
+                      intervencaoForm={intervencaoForm}
+                    />
                   </Stack>
 
                   <ListDnD
