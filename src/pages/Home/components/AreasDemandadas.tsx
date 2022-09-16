@@ -128,7 +128,8 @@ export default function AreasDemandadasComponent() {
   return (
     <Stack spacing="8">
       <Flex
-        w={useBreakpointValue({ base: '100%', md: 'fit-content' })}
+        w={'100%'}
+        height={'322px'}
         align="center"
         justify="center"
         bg={useBreakpointValue({ base: '#EDF2F7', sm: '#EDF2F7' })}
@@ -136,13 +137,16 @@ export default function AreasDemandadasComponent() {
         <Box
           py={{ base: '0', sm: '4' }}
           px={{ base: '0', sm: '4' }}
-          w="fit-content"
+          w={'100%'}
+          height={'322px'}
           bg={useBreakpointValue({ base: 'white', sm: 'white' })}
           boxShadow={{
             base: 'none',
             sm: useColorModeValue('md', 'md-dark'),
           }}
           borderRadius={{ base: 'none', sm: 'xl' }}
+          display={'flex'}
+          justifyContent={'center'}
         >
           <Box w={300} h={230}>
             <Text

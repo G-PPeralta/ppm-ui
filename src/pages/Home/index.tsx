@@ -1,4 +1,6 @@
-import { Box, Flex, VStack } from '@chakra-ui/react';
+import React, { useLayoutEffect, useState } from 'react';
+
+import { Box, Flex } from '@chakra-ui/react';
 
 import Sidebar from 'components/SideBar';
 
@@ -12,9 +14,22 @@ import Realizado from './components/Realizado';
 import TotalOrcamentos from './components/TotalOrcamentos';
 import TotalProjetos from './components/TotalProjetos';
 
-const windowWidth = window.innerWidth;
+function useWindowSize() {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+  return size;
+}
 
 export function Home() {
+  const [width] = useWindowSize();
+
   return (
     <>
       <Sidebar>
@@ -24,82 +39,37 @@ export function Home() {
           display={'flex'}
           wrap={'wrap'}
           align="flex-start"
+          direction="row"
           justify="center"
-          direction="column"
         >
-          {windowWidth > 900 ? (
-            <VStack align="flex-start">
-              <Box display={'flex'} flexShrink={0} flexWrap={'wrap'}>
-                <TotalProjetos />
-                <Box
-                  ml={5}
-                  sx={{ height: 'auto' }}
-                  display="flex"
-                  flexDirection={'column'}
-                  justifyContent="space-evenly"
-                >
-                  <TotalOrcamentos />
-                  <Realizado />
-                  <NaoPrevisto />
-                </Box>
-              </Box>
+          <Box flex={1} m={1}>
+            <TotalProjetos />
+          </Box>
 
-              <Box mt={5} sx={{ display: 'flex' }}>
-                <Projetos />
-                <Box ml={5}>
-                  <FaseProjetos />
-                </Box>
-                <Box ml={5}>
-                  <AreasDemandadas />
-                </Box>
-              </Box>
-              <Box mt={5}>
-                <PrevistoxRealizado />
-              </Box>
-            </VStack>
-          ) : (
-            <VStack align="space-between" w={'-webkit-fit-content'}>
-              <TotalProjetos />
-              <Box
-                mt={2}
-                display={'flex'}
-                flexDirection={'row'}
-                flexShrink={1}
-                flexWrap={'wrap'}
-              >
-                <Box
-                  // h={280}
-                  mr={2}
-                  display="flex"
-                  flexDirection={'column'}
-                  justifyContent="space-evenly"
-                >
-                  <TotalOrcamentos />
-                  <Realizado />
-                  <NaoPrevisto />
-                </Box>
-                <FaseProjetos />
-              </Box>
-
-              <Box mt={5} display="flex" flexDirection={'column'}>
-                <Box
-                  mt={2}
-                  display={'flex'}
-                  flexDirection={'row'}
-                  flexShrink={0}
-                  flexWrap={'wrap'}
-                >
-                  <Projetos />
-                  <Box ml={2}>
-                    <AreasDemandadas />
-                  </Box>
-                </Box>
-              </Box>
-              <Box mt={5}>
-                <PrevistoxRealizado />
-              </Box>
-            </VStack>
-          )}
+          <Box
+            m={1}
+            flex={width > 1100 ? 0 : 1}
+            sx={{ height: 340 }}
+            display="flex"
+            flexDirection={'column'}
+            justifyContent="space-evenly"
+          >
+            <TotalOrcamentos />
+            <Realizado />
+            <NaoPrevisto />
+          </Box>
+          <Box flex={4} m={1}>
+            <Projetos />
+          </Box>
+          <Box flex={1} m={1}>
+            <FaseProjetos />
+          </Box>
+          <Box flex={1} m={1}>
+            <AreasDemandadas />
+          </Box>
+          <Box flex={1} m={1}>
+            <PrevistoxRealizado />
+          </Box>
         </Flex>
       </Sidebar>
     </>
