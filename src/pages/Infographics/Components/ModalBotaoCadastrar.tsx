@@ -40,7 +40,7 @@ function ModalBotaoCadastrar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { intervencaoForm, loading } = useCadastroIntervencao();
   const [qtdeDias, setQtdeDias] = useState<any>(0);
-  const [dataFinal, setDataFinal] = useState<any>('');
+  const [dataFinal, setDataFinal] = useState<any>(formatDate(new Date()));
 
   // console.log(intervencaoForm.values);
 
@@ -52,7 +52,7 @@ function ModalBotaoCadastrar() {
       setDataFinal(dataFormatada);
       intervencaoForm.setFieldValue('fimPlanejado', dataFormatada);
     }
-  }, [intervencaoForm.values.tipoProjetoId]);
+  }, [intervencaoForm.values.tipoProjetoId, qtdeDias]);
 
   return (
     <>
