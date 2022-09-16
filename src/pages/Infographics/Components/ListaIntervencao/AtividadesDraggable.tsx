@@ -12,6 +12,7 @@ interface Props {
   // remove: any;
   handleChangeProp: any;
   list: any;
+  intervencaoForm: any;
 }
 
 function AtividadesDraggable({
@@ -20,14 +21,26 @@ function AtividadesDraggable({
   // remove,
   handleChangeProp,
   list,
+  intervencaoForm,
 }: Props) {
-  const { listaResponsaveis, intervencaoForm } = useCadastroIntervencao();
+  const { listaResponsaveis } = useCadastroIntervencao();
 
   const handleChange = (event: any, chave: any) => {
+    // console.log('event', event.target.value);
+    // console.log('item', item);
+    // console.log('chave', chave);
+    // console.log(
+    //   'intervencaoForm',
+    //   intervencaoForm.values.atividades[index].responsavel,
+    // );
     item[chave] = event.target.value;
     handleChangeProp(index, chave, event.target.value);
-    intervencaoForm.setFieldValue(`atividades.${chave}`, list);
+    const arrayFinalAtividades = intervencaoForm.values.atividades;
+    arrayFinalAtividades[index].responsavel = Number(event.target.value);
+    intervencaoForm.setFieldValue('atividades', arrayFinalAtividades);
   };
+
+  console.log(intervencaoForm.values);
 
   return (
     <Draggable draggableId={`list${index}`} index={index}>
@@ -62,7 +75,6 @@ function AtividadesDraggable({
                 placeholder="Selecione"
                 bg={'#fff'}
                 value={item.atividade.id}
-                onChange={(event) => handleChange(event, 'atividade')}
                 isDisabled
               >
                 {list.map(({ atividade }: any) => (

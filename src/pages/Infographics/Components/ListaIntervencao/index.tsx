@@ -125,6 +125,7 @@ export default function ListDnD({
                   key={`list${index}`}
                   // remove={remove}
                   list={list}
+                  intervencaoForm={intervencaoForm}
                 />
               ))}
               {provided.placeholder}
