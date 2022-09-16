@@ -83,10 +83,11 @@ export interface RegisterProjectProps {
   statusId: number;
   gateId: number;
   tipoProjetoId: number;
-  demandaId: number;
+  // demandaId: number;
   comentarios: string;
-  responsavelId: number[];
-  coordenadorId: number[];
+  responsavel_id: number;
+  coordenador_id: number;
+  elemento_pep: string;
 }
 
 export interface GanttPayload {
@@ -245,15 +246,27 @@ export interface RegistroResponsavel {
   nome: string;
 }
 
-export interface Responsaveis {
-  responsaveis: RegistroResponsavel[];
+export interface Responsavel {
+  nome: string;
 }
+
+export interface ResponsavelRetorno {
+  id: number;
+  nome: string;
+}
+
 export interface RegistroCoordenador {
+  id?: number;
   coordenadorNome: string;
 }
 
-export interface Coordenadores {
-  coordenadores: RegistroCoordenador[];
+export interface Coordenador {
+  coordenadorNome: string;
+}
+
+export interface CoordenadorRetorno {
+  id_coordenador: number;
+  coordenadorNome: string;
 }
 
 export interface AreaAtuacao {

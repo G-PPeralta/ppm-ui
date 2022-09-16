@@ -15,7 +15,7 @@ export default function TotalOrcamentosComponent() {
   async function handleGetTotalOrcamento() {
     const reqGet = await getOrcamentoTotal();
 
-    setTotalOrcamento(reqGet.data[1].total);
+    setTotalOrcamento(reqGet.data[0].total);
   }
 
   useEffect(() => {

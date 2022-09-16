@@ -11,28 +11,20 @@ function FormDisabledResponsavel(projectsForm: any) {
 
   return (
     <>
-      {!loading &&
-        projectsForm.projectsForm.values.responsaveis.map(
-          (_responsavel: string, index: number) => (
-            <Box key={index}>
-              <FormLabel htmlFor={`responsavel${index}`}>
-                RESPONSÁVEL {index + 1}
-              </FormLabel>
-              <Input
-                disabled
-                placeholder=""
-                id={`responsavel${index}`}
-                type={`responsavel${index}`}
-                name={`responsavel${index}`}
-                value={
-                  projectsForm.projectsForm.values.responsaveis[index]
-                    .nomeResponsavel
-                }
-                w={'100%'}
-              />
-            </Box>
-          ),
-        )}
+      {!loading && (
+        <Box>
+          <FormLabel htmlFor={'responsavel'}>RESPONSÁVEL</FormLabel>
+          <Input
+            disabled
+            placeholder=""
+            id={'responsavel'}
+            type={'responsavel'}
+            name={'responsavel'}
+            value={projectsForm.projectsForm.values.responsavel}
+            w={'100%'}
+          />
+        </Box>
+      )}
     </>
   );
 }

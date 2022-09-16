@@ -11,28 +11,20 @@ function FormDisabledCoordenador(projectsForm: any) {
 
   return (
     <>
-      {!loading &&
-        projectsForm.projectsForm.values.coordenadores.map(
-          (_coordenador: string, index: number) => (
-            <Box key={index}>
-              <FormLabel htmlFor={`coordenador${index}`}>
-                COORDENADOR {index + 1}
-              </FormLabel>
-              <Input
-                disabled
-                placeholder=""
-                id={`coordenador${index}`}
-                type={`coordenador${index}`}
-                name={`coordenador${index}`}
-                value={
-                  projectsForm.projectsForm.values.coordenadores[index]
-                    .coordenadorNome
-                }
-                w={'100%'}
-              />
-            </Box>
-          ),
-        )}
+      {!loading && (
+        <Box>
+          <FormLabel htmlFor={'coordenador'}>COORDENADOR</FormLabel>
+          <Input
+            disabled
+            placeholder=""
+            id={'coordenador'}
+            type={'coordenador'}
+            name={'coordenador'}
+            value={projectsForm.projectsForm.values.coordenador}
+            w={'100%'}
+          />
+        </Box>
+      )}
     </>
   );
 }
