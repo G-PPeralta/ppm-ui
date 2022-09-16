@@ -20,9 +20,10 @@ import { getInfoProjetos } from 'services/get/Infograficos';
 
 export default function NaoPrevistoComponent() {
   const [projetos, setProjetos] = useState<any[]>([]);
-  const [trut, setTrue] = useState(false);
+  // const [trut, setTrue] = useState(false);
   const handleGetProjetos = async () => {
     const response = await getInfoProjetos();
+    console.log('reponse', response.data);
     setProjetos(response.data);
   };
 
@@ -129,24 +130,17 @@ export default function NaoPrevistoComponent() {
                       <Th
                         color={'#628EFD'}
                         sx={{ fontSize: 11 }}
-                        onMouseOver={(event) => {
-                          // console.log(projeto.nomeProjeto);
+                        // onMouseOver={(event) => {
+                        //   // console.log(projeto.nomeProjeto);
 
-                          setTrue(true);
-                          return projeto.nomeProjeto;
-                        }}
-                        onMouseOut={() => {
-                          setTrue(false);
-                        }}
+                        //   setTrue(true);
+                        //   return projeto.nome;
+                        // }}
+                        // onMouseOut={() => {
+                        //   setTrue(false);
+                        // }}
                       >
-                        {trut === false ? (
-                          <Text>
-                            {projeto.nomeProjeto.substr(0, 18) + '...'}
-                          </Text>
-                        ) : (
-                          ''
-                        )}
-                        {trut ? <Text> {projeto.nomeProjeto}</Text> : ''}
+                        <Text>{projeto.nome?.substr(0, 18) + '...'}</Text>
                       </Th>
                       {/* {trut ? <Text> {projeto.nomeProjeto}</Text> : ''} */}
                       <Th color="gray.400" sx={{ fontSize: 11 }}>
