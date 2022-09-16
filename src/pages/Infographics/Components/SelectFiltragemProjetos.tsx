@@ -13,9 +13,13 @@ function SelectFiltragemProjetos({ intervencaoForm }: any) {
     label: projeto.nome,
   }));
 
-  const handleChange = ({ value }: any, { name }: any) => {
-    intervencaoForm.setFieldValue(name, value);
+  const handleChange = (event: any, { name }: any) => {
+    // event.value = id do projeto
+    // event.label = nome do projeto
+    intervencaoForm.setFieldValue(name, event.value);
   };
+
+  console.log(intervencaoForm.values);
 
   return (
     <>

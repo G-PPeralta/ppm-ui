@@ -182,7 +182,10 @@ function ModalBotaoCadastrar() {
                     </Flex>
                   </Stack>
 
-                  <ListDnD atividades={intervencaoForm.values.atividades} />
+                  <ListDnD
+                    atividades={intervencaoForm.values.atividades}
+                    intervencaoForm={intervencaoForm}
+                  />
 
                   <Stack>
                     <FormControl>

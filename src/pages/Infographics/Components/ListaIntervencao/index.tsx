@@ -7,6 +7,8 @@ import {
 
 import { FormLabel } from '@chakra-ui/react';
 
+import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
+
 import AtividadesDraggable from './AtividadesDraggable';
 import BotaoAdicionar from './BotaoAdicionar';
 
@@ -18,10 +20,14 @@ const reorder = (list: any, startIndex: any, endIndex: any) => {
   return result;
 };
 
-export default function ListDnD({ atividades }: any) {
+export default function ListDnD({ atividades, intervencaoForm }: any) {
   const [list, setList] = useState<any>([]);
   const [render, setRender] = useState<any>([]);
   const [id, setId] = useState<any>('listID');
+  const { listaProjetosTipo } = useCadastroIntervencao();
+
+  console.log('Lista Projetos', listaProjetosTipo);
+  console.log('ProjetoId', intervencaoForm.values.projetoId);
 
   function onDragEnd(result: any) {
     if (!result.destination) {
@@ -67,6 +73,19 @@ export default function ListDnD({ atividades }: any) {
     const newId = id + '-' + now.toLocaleString();
     setId(newId);
   }, []);
+
+  useEffect(() => {
+    if (intervencaoForm.values.projetoId) {
+      const projeto = listaProjetosTipo.find(
+        (projeto: any) => projeto.id === intervencaoForm.values.projetoId,
+      );
+
+      if (projeto) {
+        setList(projeto.atividades);
+        setRender(projeto.atividades);
+      }
+    }
+  }, [intervencaoForm.values.projetoId]);
 
   return (
     <>

@@ -6,7 +6,7 @@ import {
   ListaProjetoTipo,
   ListaSonda,
 } from 'interfaces/CadastrosModaisInfograficos';
-import { cadastroIntervencaoSchema } from 'validations/ModaisCadastrosInfografico';
+// import { cadastroIntervencaoSchema } from 'validations/ModaisCadastrosInfografico';
 
 import { useToast } from 'contexts/Toast';
 
@@ -63,7 +63,7 @@ export function useCadastroIntervencao() {
       ],
       comentarios: '',
     },
-    validationSchema: cadastroIntervencaoSchema,
+    // validationSchema: cadastroIntervencaoSchema,
     onSubmit: async (values) => {
       const newValues = {
         nome: values.nome,
