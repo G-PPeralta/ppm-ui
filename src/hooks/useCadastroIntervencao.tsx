@@ -66,7 +66,7 @@ export function useCadastroIntervencao() {
         {
           ordem: 1,
           atividade: '',
-          responsavel: '',
+          responsavel: 0,
         },
       ],
       observacoes: '',

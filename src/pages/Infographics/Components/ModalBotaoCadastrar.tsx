@@ -9,7 +9,7 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
+  // ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
@@ -43,9 +43,8 @@ function ModalBotaoCadastrar() {
   const [dataFinal, setDataFinal] = useState<any>('dd/mm/aaaa');
 
   const handleCadastrarIntervencao = () => {
-    setDataFinal('dd/mm/aaaa');
-    intervencaoForm.resetForm();
     handleCadastrar(intervencaoForm, onClose);
+    setDataFinal('dd/mm/aaaa');
   };
 
   const handleCancelarIntervencao = () => {
@@ -64,6 +63,8 @@ function ModalBotaoCadastrar() {
       intervencaoForm.setFieldValue('fimPlanejado', dataFormatadaYMD);
     }
   }, [intervencaoForm.values.tipoProjetoId, qtdeDias]);
+
+  console.log(intervencaoForm.values);
 
   return (
     <>
@@ -113,7 +114,7 @@ function ModalBotaoCadastrar() {
           >
             Cadastrar Nova Intervenção/Perfuração
           </ModalHeader>
-          <ModalCloseButton color={'white'} />
+          {/* <ModalCloseButton color={'white'} /> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();

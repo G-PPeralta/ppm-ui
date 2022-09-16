@@ -20,7 +20,7 @@ export interface CadastroProjetoTipo {
 interface Atividades {
   ordem: number;
   atividade: string;
-  responsavel: string;
+  responsavel: number;
 }
 
 export interface CadastroIntervencao {
