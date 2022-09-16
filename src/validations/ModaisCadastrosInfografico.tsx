@@ -9,19 +9,22 @@ export const cadastroSondaSchema = yup.object({
 });
 
 export const cadastroIntervencaoSchema = yup.object({
-  intervencao: yup.string().required('Nome é obrigatório'),
-  poco: yup.string().required('Poco é obrigatório'),
-  sonda: yup.string().required('Sonda é obrigatória'),
-  inicioPrevisto: yup.string().required('Início previsto é obrigatório'),
-  fimPrevisto: yup.string().required('Fim previsto é obrigatório'),
-  projeto: yup.string().required('Projeto é obrigatório'),
-  atividades: yup.array().of(
-    yup.object({
-      ordem: yup.number(),
-      atividade: yup.string().required('Atividade é obrigatório'),
-      responsável: yup.string(),
-    }),
-  ),
+  nome: yup.string().required('O Nome da Intervenção é obrigatório'),
+  pocoId: yup.number().required('Poco é obrigatório'),
+  sptId: yup.number().required('Sonda é obrigatória'),
+  tipoProjetoId: yup.number().required('Projeto é obrigatório'),
+  inicioPlanejado: yup.string().required('Início previsto é obrigatório'),
+  fimPlanejado: yup.string(),
+  atividades: yup
+    .array()
+    .of(
+      yup.object({
+        ordem: yup.number(),
+        atividade: yup.string(),
+        responsavel: yup.string().required(),
+      }),
+    )
+    .required('Atividades são obrigatórias'),
   observacoes: yup.string(),
 });
 
