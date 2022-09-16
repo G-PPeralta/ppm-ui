@@ -27,7 +27,7 @@ import ListDnD from 'pages/Infographics/Components/ListaIntervencao';
 
 import { TextError } from 'components/TextError';
 
-import { formatDate } from 'utils/formatDate';
+import { formatDate, formatDateToYMD } from 'utils/formatDate';
 import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
 
 import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
@@ -49,8 +49,9 @@ function ModalBotaoCadastrar() {
       const data = new Date(intervencaoForm.values.inicioPlanejado);
       const dataFinal = new Date(data.setDate(data.getDate() + qtdeDias));
       const dataFormatada = formatDate(dataFinal);
+      const dataFormatadaYMD = formatDateToYMD(dataFinal);
       setDataFinal(dataFormatada);
-      intervencaoForm.setFieldValue('fimPlanejado', dataFormatada);
+      intervencaoForm.setFieldValue('fimPlanejado', dataFormatadaYMD);
     }
   }, [intervencaoForm.values.tipoProjetoId, qtdeDias]);
 
