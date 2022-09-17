@@ -64,8 +64,6 @@ function ModalBotaoCadastrar() {
     }
   }, [intervencaoForm.values.tipoProjetoId, qtdeDias]);
 
-  console.log(intervencaoForm.values);
-
   return (
     <>
       <Flex
