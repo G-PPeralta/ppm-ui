@@ -62,7 +62,11 @@ function ModalBotaoCadastrar() {
       setDataFinal(dataFormatada);
       intervencaoForm.setFieldValue('fimPlanejado', dataFormatadaYMD);
     }
-  }, [intervencaoForm.values.tipoProjetoId, qtdeDias]);
+  }, [
+    intervencaoForm.values.tipoProjetoId,
+    qtdeDias,
+    intervencaoForm.values.inicioPlanejado,
+  ]);
 
   return (
     <>
@@ -161,6 +165,12 @@ function ModalBotaoCadastrar() {
                       />
                     </Flex>
 
+                    <Stack>
+                      <SelectFiltragemProjetos
+                        intervencaoForm={intervencaoForm}
+                      />
+                    </Stack>
+
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: 'column',
@@ -202,12 +212,6 @@ function ModalBotaoCadastrar() {
                         />
                       </FormControl>
                     </Flex>
-                  </Stack>
-
-                  <Stack>
-                    <SelectFiltragemProjetos
-                      intervencaoForm={intervencaoForm}
-                    />
                   </Stack>
 
                   <ListDnD
