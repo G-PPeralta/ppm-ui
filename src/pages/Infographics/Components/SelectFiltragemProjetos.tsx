@@ -31,7 +31,7 @@ function SelectFiltragemProjetos({ intervencaoForm }: any) {
       if (projeto) {
         const listaAtividades = projeto.atividades.map((projeto: any) => ({
           ordem: (contador += 1),
-          atividade: projeto.atividade.obs,
+          atividadeId: projeto.atividade.id,
           responsavel: '',
         }));
         intervencaoForm.setFieldValue('atividades', listaAtividades);
