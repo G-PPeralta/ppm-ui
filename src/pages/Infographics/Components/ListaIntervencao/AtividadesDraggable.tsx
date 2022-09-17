@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 // import { FiTrash } from 'react-icons/fi';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -24,6 +25,8 @@ function AtividadesDraggable({
   intervencaoForm,
 }: Props) {
   const { listaResponsaveis } = useCadastroIntervencao();
+
+  const id = useId();
 
   const handleChange = (event: any, chave: any) => {
     item[chave] = event.target.value;
@@ -68,8 +71,8 @@ function AtividadesDraggable({
                 value={item.atividade.id}
                 isDisabled
               >
-                {list.map(({ atividade }: any) => (
-                  <option key={atividade.id} value={atividade.id}>
+                {list.map(({ atividade }: any, index: number) => (
+                  <option key={`${id}-${index}`} value={atividade.id}>
                     {atividade.obs}
                   </option>
                 ))}
