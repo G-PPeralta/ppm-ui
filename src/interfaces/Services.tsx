@@ -284,3 +284,11 @@ export interface Tarefa {
   id: number;
   tarefa: string;
 }
+
+export interface Fornecedor {
+  fornecedor: string;
+  orcamento: number;
+  realizado: number;
+  responsavel: string;
+  descricao: string;
+}
