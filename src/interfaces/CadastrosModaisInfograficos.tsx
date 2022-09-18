@@ -102,9 +102,11 @@ export interface NovaSonda extends User {
 }
 
 export interface NovaAtividade extends User {
-  nome: string;
-  status: number;
-  dataInicio: string;
-  dataFim: string;
-  observacoes: string;
+  id_pai: number; // sempre enviar 0
+  nom_atividade: string; // enviar nome da atividade
+  pct_real: number; // porcentagem realizada
+  dat_ini_plan: string; // data inicio planejada
+  dat_fim_plan: string; // data fim planejada
+  dsc_comentario: string; // enviar comentario
+  id_campanha: number; // enviar id da campanha
 }

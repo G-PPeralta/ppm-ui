@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import {
   Flex,
   Text,
@@ -23,9 +25,13 @@ import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
-function Teste() {
+function ModalCadastroAtividade({ id }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroAtividade();
+
+  useEffect(() => {
+    registerForm.setFieldValue("id_campanha", Number(id));
+  }, []);
 
   return (
     <>
@@ -76,15 +82,15 @@ function Teste() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="nome">NOME</FormLabel>
+                        <FormLabel htmlFor="nom_atividade">NOME</FormLabel>
                         <Input
                           isRequired
                           placeholder="Digite o nome da atividade"
-                          id="nome"
+                          id="nom_atividade"
                           type="text"
-                          name="nome"
+                          name="nom_atividade"
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
-                          value={registerForm.values.nome}
+                          value={registerForm.values.nom_atividade}
                           onChange={registerForm.handleChange}
                         />
                       </FormControl>
@@ -100,40 +106,42 @@ function Teste() {
 
                     <Flex justify={"space-between"} gap={5}>
                       <Flex direction={"column"} grow={1}>
-                        <FormLabel htmlFor="dataInicio">DATA INÍCIO</FormLabel>
+                        <FormLabel htmlFor="dat_ini_plan">
+                          DATA INÍCIO
+                        </FormLabel>
                         <Input
                           isRequired
                           placeholder="Selecione a data e a hora"
-                          id="dataInicio"
+                          id="dat_ini_plan"
                           type="datetime-local"
-                          name="dataInicio"
+                          name="dat_ini_plan"
                           w={"100%"}
-                          value={registerForm.values.dataInicio}
+                          value={registerForm.values.dat_ini_plan}
                           onChange={registerForm.handleChange}
                         />
                       </Flex>
                       <Flex direction={"column"} grow={1}>
-                        <FormLabel htmlFor="dataFim">DATA FIM</FormLabel>
+                        <FormLabel htmlFor="dat_fim_plan">DATA FIM</FormLabel>
                         <Input
                           isRequired
                           placeholder="Selecione a data e a hora"
-                          id="dataFim"
+                          id="dat_fim_plan"
                           type="datetime-local"
-                          name="dataFim"
+                          name="dat_fim_plan"
                           w={"100%"}
-                          value={registerForm.values.dataFim}
+                          value={registerForm.values.dat_fim_plan}
                           onChange={registerForm.handleChange}
                         />
                       </Flex>
                       <FormControl>
-                        <FormLabel htmlFor="status">STATUS</FormLabel>
+                        <FormLabel htmlFor="pct_real">STATUS</FormLabel>
                         <Input
                           placeholder="0%"
-                          id="status"
+                          id="pct_real"
                           type="number"
-                          name="status"
+                          name="pct_real"
                           w={"100%"}
-                          value={registerForm.values.status}
+                          value={registerForm.values.pct_real}
                           onChange={registerForm.handleChange}
                         />
                       </FormControl>
@@ -154,12 +162,14 @@ function Teste() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="observacoes">OBSERVAÇÕES</FormLabel>
+                        <FormLabel htmlFor="dsc_comentario">
+                          OBSERVAÇÕES
+                        </FormLabel>
                         <Textarea
                           placeholder="Adicione comentários sobre a atividade"
-                          id="observacoes"
-                          name="observacoes"
-                          value={registerForm.values.observacoes}
+                          id="dsc_comentario"
+                          name="dsc_comentario"
+                          value={registerForm.values.dsc_comentario}
                           onChange={registerForm.handleChange}
                         />
                       </FormControl>
@@ -211,4 +221,4 @@ function Teste() {
   );
 }
 
-export default Teste;
+export default ModalCadastroAtividade;

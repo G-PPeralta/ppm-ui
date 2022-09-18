@@ -5,16 +5,16 @@ import { Flex, Heading, Text } from "@chakra-ui/react";
 import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
 
-type Poco = {
-  poco: string;
-  inicioplanejado: string;
-  pct_plan: number;
-  comp_pct: number;
-  pct_real: number;
-};
+// type Poco = {
+//   poco: string;
+//   inicioplanejado: string;
+//   pct_plan: number;
+//   comp_pct: number;
+//   pct_real: number;
+// };
 
 type Props = {
-  poco: Poco;
+  poco: any;
   index: number;
 };
 
@@ -32,7 +32,7 @@ function CardPIR({ poco, index }: Props) {
   // console.log('Quantidade dias:', diferencaDias);
 
   const transfer = () => {
-    navigate(`/atividade/${poco.poco}`);
+    navigate(`/atividade/${poco.id_campanha}`);
   };
 
   return (

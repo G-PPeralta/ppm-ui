@@ -72,7 +72,7 @@ export function ActivitiesSchedule() {
                 </Flex>
                 <Flex justify={"space-between"} gap={6} wrap={"wrap"} mb={4}>
                   <Flex gap={2}>
-                    <ModalCadastroAtividade />
+                    <ModalCadastroAtividade id={id} />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (

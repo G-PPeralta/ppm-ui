@@ -67,9 +67,9 @@ export const cadastroNovaIntervencaoSchema = yup.object({
 });
 
 export const cadastroNovaAtividadeSchema = yup.object({
-  nome: yup.string().required("Poço é obrigatório"),
-  status: yup.number().required("Sonda é obrigatória"),
-  dataInicio: yup.string().required("A data e hora de início é obrigatória"),
-  dataFim: yup.string().required("A data e hora de fim é obrigatória"),
-  observacoes: yup.string(),
+  nom_atividade: yup.string().required("Poço é obrigatório"),
+  pct_real: yup.number().required("Sonda é obrigatória"),
+  dat_ini_plan: yup.string().required("A data e hora de início é obrigatória"),
+  dat_fim_plan: yup.string().required("A data e hora de fim é obrigatória"),
+  dsc_comentario: yup.string(),
 });
