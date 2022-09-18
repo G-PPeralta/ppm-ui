@@ -75,6 +75,10 @@ export async function postNovaIntervencao(
 export async function postNovaAtividade(
   payload: NovaAtividade
 ): Promise<{ status: number }> {
-  const { status } = await api.post("/campanha/atividade", payload, token());
+  const { status } = await api.post(
+    "/campanha/filho/atividade",
+    payload,
+    token()
+  );
   return { status };
 }
