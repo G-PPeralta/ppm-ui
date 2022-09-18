@@ -13,11 +13,14 @@ import { useToast } from "contexts/Toast";
 import { getSondas, getPocos } from "services/get/CadastroModaisInfograficos";
 import { postNovaIntervencao } from "services/post/CadastroModaisInfograficos";
 
+import { useAuth } from "./useAuth";
+
 export function useCadastroIntervencao() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [listaSondas, setListaSondas] = useState<ListaSonda[]>([]);
   const [listaPocos, setListaPocos] = useState<ListaPoco[]>([]);
+  const { user } = useAuth();
 
   const reqGet = async () => {
     const sondas = await getSondas();
@@ -38,6 +41,7 @@ export function useCadastroIntervencao() {
     pocoId: 0,
     sondaId: 0,
     comentarios: "",
+    nom_usu_create: user?.nome,
   };
 
   const intervencaoForm = useFormik({
@@ -48,6 +52,7 @@ export function useCadastroIntervencao() {
         pocoId: values.pocoId,
         sondaId: values.sondaId,
         comentarios: values.comentarios,
+        nom_usu_create: user?.nome,
       };
 
       setLoading(true);

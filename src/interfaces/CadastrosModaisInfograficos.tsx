@@ -83,4 +83,10 @@ export interface NovaIntervencao {
   sondaId: number;
   pocoId: number;
   comentarios: string;
+  nom_usu_create: string | undefined;
+}
+
+export interface NovoPoco {
+  nom_usu_create: string | undefined;
+  poco: string;
 }
