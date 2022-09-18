@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { FiPlusCircle, FiSearch } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { Column } from "react-table";
 
 import {
   Box,
@@ -25,17 +24,7 @@ import { useProjects } from "hooks/useProjects";
 import "./projects.css";
 import ProjectTable from "./projectTable";
 
-interface Projeto {
-  id: number;
-  nome: string;
-  valorTotalPrevisto: string;
-  prioridade: string;
-  complexidade: string;
-  responsavel: string;
-  coordenador: string;
-}
-
-const columnsProject: Column<Projeto>[] = [
+const columnsProject: any[] = [
   {
     Header: "Nome",
     accessor: "nome",

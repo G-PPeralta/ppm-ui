@@ -1,4 +1,4 @@
-import { Column } from "react-table";
+import { Link } from "react-router-dom";
 
 import {
   Table,
@@ -25,7 +25,7 @@ interface Projeto {
 
 interface TableProps {
   data: Projeto[];
-  columns: Column<Projeto>[];
+  columns: any[];
 }
 
 const ProjectTable = (props: TableProps) => {
@@ -51,15 +51,17 @@ const ProjectTable = (props: TableProps) => {
               return (
                 <Tr mt={1} key={index}>
                   <Td color={"#628EFD"} sx={{ fontSize: 12 }}>
-                    <Text>
-                      {dados.nome.length > 28 ? (
-                        <Tooltip label={dados.nome} aria-label="">
-                          {dados.nome.substring(0, 25).toUpperCase() + "..."}
-                        </Tooltip>
-                      ) : (
-                        dados.nome.toUpperCase()
-                      )}
-                    </Text>
+                    <Link to={`/detalhamento/${dados.id}`}>
+                      <Text>
+                        {dados.nome.length > 28 ? (
+                          <Tooltip label={dados.nome} aria-label="">
+                            {dados.nome.substring(0, 25).toUpperCase() + "..."}
+                          </Tooltip>
+                        ) : (
+                          dados.nome.toUpperCase()
+                        )}
+                      </Text>
+                    </Link>
                   </Td>
                   <Td color="gray.700" sx={{ fontSize: 12 }}>
                     <Text>
