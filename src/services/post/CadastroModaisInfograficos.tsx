@@ -7,6 +7,7 @@ import {
   NovaIntervencao,
   NovoPoco,
   NovaSonda,
+  NovaAtividade,
 } from "interfaces/CadastrosModaisInfograficos";
 
 import { api, token } from "services/api";
@@ -68,5 +69,12 @@ export async function postNovaIntervencao(
   payload: NovaIntervencao
 ): Promise<{ status: number }> {
   const { status } = await api.post("/campanha/filho", payload, token());
+  return { status };
+}
+
+export async function postNovaAtividade(
+  payload: NovaAtividade
+): Promise<{ status: number }> {
+  const { status } = await api.post("/?????????????", payload, token());
   return { status };
 }

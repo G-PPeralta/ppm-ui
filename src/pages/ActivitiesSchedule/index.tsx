@@ -9,8 +9,6 @@ import Sidebar from "components/SideBar";
 import { Atividade } from "services/get/ActivitiesSchedule";
 
 import CardACT from "./Components/CardACT";
-// import ExibirModal from './Components/ExibirModal';
-// import FiltrosModal from './Components/FiltrosModal';
 import ModalAtividade from "./Components/ModalAtividade";
 import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
 import StatusProjeto from "./Components/StatusProjeto";
@@ -71,10 +69,6 @@ export function ActivitiesSchedule() {
                   <Heading as="h3" size="md" mb={3}>
                     Acompanhamento de atividades
                   </Heading>
-                  {/* <Flex gap={4}>
-                    <ExibirModal />
-                    <FiltrosModal />
-                  </Flex> */}
                 </Flex>
                 <Flex justify={"space-between"} gap={6} wrap={"wrap"} mb={4}>
                   <Flex gap={2}>

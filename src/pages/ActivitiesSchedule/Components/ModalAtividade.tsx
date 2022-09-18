@@ -22,7 +22,7 @@ import {
 import { Ring } from "@uiball/loaders";
 
 // import ListDnD from 'components/ListDnD';
-import { TextError } from "components/TextError";
+// import { TextError } from "components/TextError";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
@@ -222,13 +222,13 @@ function ModalAtividade({ onClose, atividade, id }: any) {
                       placeholder="Adicione comentários sobre a atividade"
                       id="comentarios"
                       name="comentarios"
-                      value={registerForm.values.comentarios}
+                      // value={registerForm.values.comentarios}
                       onChange={registerForm.handleChange}
                     />
-                    {registerForm.errors.comentarios &&
+                    {/* {registerForm.errors.comentarios &&
                       registerForm.touched.comentarios && (
                         <TextError>{registerForm.errors.comentarios}</TextError>
-                      )}
+                      )} */}
                   </FormControl>
                 </Flex>
               </FormControl>
