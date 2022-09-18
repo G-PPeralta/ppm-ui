@@ -5,94 +5,94 @@ import {
   Text,
   useBreakpointValue,
   useColorModeValue,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import PieChart from 'components/PieChart';
+import PieChart from "components/PieChart";
 
 export default function NaoPrevistoComponent() {
   const grafData = [
     {
-      name: 'Engenharia',
+      name: "Engenharia",
       value: 30,
-      color: '#93E01B',
+      color: "#93E01B",
     },
     {
-      name: 'C&M',
+      name: "C&M",
       value: 30,
-      color: '#F4DD06',
+      color: "#F4DD06",
     },
     {
-      name: 'Suprimentos',
+      name: "Suprimentos",
       value: 20,
-      color: '#F94144',
+      color: "#F94144",
     },
     {
-      name: 'Pré-projeto',
+      name: "Pré-projeto",
       value: 20,
-      color: '#2E69FD',
+      color: "#2E69FD",
     },
   ];
 
   return (
     <Stack spacing="8">
       <Flex
-        w={'100%'}
-        height={'322px'}
+        w={"100%"}
+        height={"322px"}
         align="center"
         justify="center"
-        bg={useBreakpointValue({ base: '#EDF2F7', sm: '#EDF2F7' })}
+        bg={useBreakpointValue({ base: "#EDF2F7", sm: "#EDF2F7" })}
       >
         <Box
-          py={{ base: '0', sm: '4' }}
-          px={{ base: '0', sm: '4' }}
-          w={'100%'}
-          height={'322px'}
-          bg={useBreakpointValue({ base: 'white', sm: 'white' })}
+          py={{ base: "0", sm: "4" }}
+          px={{ base: "0", sm: "4" }}
+          w={"100%"}
+          height={"322px"}
+          bg={useBreakpointValue({ base: "white", sm: "white" })}
           boxShadow={{
-            base: 'none',
-            sm: useColorModeValue('md', 'md-dark'),
+            base: "none",
+            sm: useColorModeValue("md", "md-dark"),
           }}
-          borderRadius={{ base: 'none', sm: 'xl' }}
+          borderRadius={{ base: "none", sm: "xl" }}
         >
-          <Box display={'flex'} flexDirection="column" alignItems={'center'}>
+          <Box display={"flex"} flexDirection="column" alignItems={"center"}>
             <Text
               mb={1}
-              sx={{ fontSize: 18, fontWeight: '600', alignSelf: 'center' }}
+              sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
               Fase dos Projetos
             </Text>
             <Box mt={2}>
-              <Box display={'flex'} w={315} justifyContent="space-between">
+              <Box display={"flex"} w={315} justifyContent="space-between">
                 <Box
-                  display={'flex'}
+                  display={"flex"}
                   flexDirection="column"
-                  alignItems={'center'}
+                  alignItems={"center"}
                   w={120}
-                  bg={'#F4DD06'}
+                  bg={"#F4DD06"}
                   py={1}
-                  justifyContent={'center'}
+                  justifyContent={"center"}
                 >
                   <Text
                     mb={1}
-                    sx={{ fontSize: 16, fontWeight: '600' }}
+                    sx={{ fontSize: 16, fontWeight: "600" }}
                     color="#ffffff"
                   >
                     C&M
                   </Text>
                 </Box>
                 <Box
-                  display={'flex'}
+                  display={"flex"}
                   flexDirection="column"
-                  alignItems={'center'}
+                  alignItems={"center"}
                   w={120}
-                  bg={'#93E01B'}
+                  bg={"#93E01B"}
                   py={1}
-                  justifyContent={'center'}
+                  justifyContent={"center"}
                 >
                   <Text
                     mb={1}
-                    sx={{ fontSize: 16, fontWeight: '600' }}
+                    sx={{ fontSize: 16, fontWeight: "600" }}
                     color="#ffffff"
                   >
                     Engenharia
@@ -104,69 +104,69 @@ export default function NaoPrevistoComponent() {
               mt={5}
               mb={5}
               w={315}
-              alignItems={'center'}
-              justifyContent={'center'}
-              display={'flex'}
+              alignItems={"center"}
+              justifyContent={"center"}
+              display={"flex"}
             >
               <Box
                 h={20}
-                justifyContent={'space-between'}
-                display={'flex'}
-                flexDirection={'column'}
+                justifyContent={"space-between"}
+                display={"flex"}
+                flexDirection={"column"}
               >
-                <Text sx={{ fontSize: 16, fontWeight: '600' }} color="#F4DD06">
+                <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#F4DD06">
                   32%
                 </Text>
-                <Text sx={{ fontSize: 16, fontWeight: '600' }} color="#F94144">
+                <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#F94144">
                   18%
                 </Text>
               </Box>
               <PieChart size={80} data={grafData} />
               <Box
                 h={20}
-                justifyContent={'space-between'}
-                display={'flex'}
-                flexDirection={'column'}
+                justifyContent={"space-between"}
+                display={"flex"}
+                flexDirection={"column"}
               >
-                <Text sx={{ fontSize: 16, fontWeight: '600' }} color="#93E01B">
+                <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#93E01B">
                   32%
                 </Text>
-                <Text sx={{ fontSize: 16, fontWeight: '600' }} color="#2E69FD">
+                <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#2E69FD">
                   18%
                 </Text>
               </Box>
             </Box>
             <Box mb={1}>
-              <Box display={'flex'} w={315} justifyContent="space-between">
+              <Box display={"flex"} w={315} justifyContent="space-between">
                 <Box
-                  display={'flex'}
+                  display={"flex"}
                   flexDirection="column"
-                  alignItems={'center'}
+                  alignItems={"center"}
                   w={120}
-                  bg={'#F94144'}
+                  bg={"#F94144"}
                   py={1}
-                  justifyContent={'center'}
+                  justifyContent={"center"}
                 >
                   <Text
                     mb={1}
-                    sx={{ fontSize: 16, fontWeight: '600' }}
+                    sx={{ fontSize: 16, fontWeight: "600" }}
                     color="#ffffff"
                   >
                     Suprimentos
                   </Text>
                 </Box>
                 <Box
-                  display={'flex'}
+                  display={"flex"}
                   flexDirection="column"
-                  alignItems={'center'}
+                  alignItems={"center"}
                   w={120}
-                  bg={'#2E69FD'}
+                  bg={"#2E69FD"}
                   py={1}
-                  justifyContent={'center'}
+                  justifyContent={"center"}
                 >
                   <Text
                     mb={1}
-                    sx={{ fontSize: 16, fontWeight: '600' }}
+                    sx={{ fontSize: 16, fontWeight: "600" }}
                     color="#ffffff"
                   >
                     Pré-projeto

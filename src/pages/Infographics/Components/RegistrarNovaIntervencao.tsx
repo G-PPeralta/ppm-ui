@@ -6,9 +6,9 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import styles from './RegisterProjectType.module.scss';
+import styles from "./RegisterProjectType.module.scss";
 
 type Props = {
   isOpen: boolean;
@@ -17,20 +17,20 @@ type Props = {
 
 function RegistrarNovaIntervencao({ isOpen, onClose }: Props) {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size={'6xl'}>
+    <Modal isOpen={isOpen} onClose={onClose} size={"6xl"}>
       <ModalOverlay className={styles.overlay} />
       <ModalContent width="80%" borderRadius={8} marginTop={3}>
         <ModalHeader
-          backgroundColor={'#2E69FD'}
+          backgroundColor={"#2E69FD"}
           borderTopRadius={7}
-          display={'flex'}
-          justifyContent={'center'}
-          color={'white'}
-          fontSize={'1em'}
+          display={"flex"}
+          justifyContent={"center"}
+          color={"white"}
+          fontSize={"1em"}
         >
           Cadastrar Nova Intervenção/Perfuração
         </ModalHeader>
-        <ModalCloseButton color={'white'} />
+        <ModalCloseButton color={"white"} />
         <ModalBody></ModalBody>
 
         <ModalFooter>

@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
-import Select from 'react-select';
+import { useEffect } from "react";
+import Select from "react-select";
 
-import { FormControl, FormLabel } from '@chakra-ui/react';
-import { ListaSonda } from 'interfaces/CadastrosModaisInfograficos';
+import { FormControl, FormLabel } from "@chakra-ui/react";
+import { ListaSonda } from "interfaces/CadastrosModaisInfograficos";
 
-import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
+import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 function SelectFiltragemProjetos({ intervencaoForm }: any) {
   const { listaProjetosTipo } = useCadastroIntervencao();
@@ -23,7 +23,7 @@ function SelectFiltragemProjetos({ intervencaoForm }: any) {
   useEffect(() => {
     if (intervencaoForm.values.tipoProjetoId) {
       const projeto = listaProjetosTipo.find(
-        (projeto: any) => projeto.id === intervencaoForm.values.tipoProjetoId,
+        (projeto: any) => projeto.id === intervencaoForm.values.tipoProjetoId
       );
 
       let contador = 0;
@@ -32,9 +32,9 @@ function SelectFiltragemProjetos({ intervencaoForm }: any) {
         const listaAtividades = projeto.atividades.map((projeto: any) => ({
           ordem: (contador += 1),
           atividadeId: projeto.atividade.id,
-          responsavel: '',
+          responsavel: "",
         }));
-        intervencaoForm.setFieldValue('atividades', listaAtividades);
+        intervencaoForm.setFieldValue("atividades", listaAtividades);
       }
     }
   }, [intervencaoForm.values.tipoProjetoId]);

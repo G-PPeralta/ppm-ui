@@ -1,5 +1,5 @@
-import { AiFillPlusCircle } from 'react-icons/ai';
-import { MdEdit } from 'react-icons/md';
+import { AiFillPlusCircle } from "react-icons/ai";
+import { MdEdit } from "react-icons/md";
 
 import {
   Modal,
@@ -18,9 +18,9 @@ import {
   Select,
   Textarea,
   Center,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import styles from './RegisterProjectType.module.scss';
+import styles from "./RegisterProjectType.module.scss";
 
 type Props = {
   isOpen: boolean;
@@ -29,20 +29,20 @@ type Props = {
 
 export function RegisterNewTask({ isOpen, onClose }: Props) {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size={'6xl'}>
+    <Modal isOpen={isOpen} onClose={onClose} size={"6xl"}>
       <ModalOverlay className={styles.overlay} />
       <ModalContent width="80%" borderRadius={8} marginTop={3}>
         <ModalHeader
-          backgroundColor={'#2E69FD'}
+          backgroundColor={"#2E69FD"}
           borderTopRadius={7}
-          display={'flex'}
-          justifyContent={'center'}
-          color={'white'}
-          fontSize={'1em'}
+          display={"flex"}
+          justifyContent={"center"}
+          color={"white"}
+          fontSize={"1em"}
         >
           Cadastrar nova atividade
         </ModalHeader>
-        <ModalCloseButton color={'white'} />
+        <ModalCloseButton color={"white"} />
         <ModalBody>
           <Text
             fontWeight="500"
@@ -67,7 +67,7 @@ export function RegisterNewTask({ isOpen, onClose }: Props) {
                 size="md"
                 width="150%"
                 placeholder="Campanha"
-                _placeholder={{ color: '#D6D4D4' }}
+                _placeholder={{ color: "#D6D4D4" }}
               />
             </Box>
           </Flex>
@@ -176,10 +176,10 @@ export function RegisterNewTask({ isOpen, onClose }: Props) {
               </Text>
               <Input
                 size="md"
-                width={'5em'}
+                width={"5em"}
                 color="#D6D4D4"
                 placeholder="CIP02"
-                _placeholder={{ color: '#D6D4D4', fontSize: '12px' }}
+                _placeholder={{ color: "#D6D4D4", fontSize: "12px" }}
               />
             </Box>
             <Box>
@@ -223,7 +223,7 @@ export function RegisterNewTask({ isOpen, onClose }: Props) {
                 placeholder="Selecione"
                 color="#D6D4D4"
                 fontSize="12px"
-                width={'6.4em'}
+                width={"6.4em"}
               >
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
@@ -254,10 +254,10 @@ export function RegisterNewTask({ isOpen, onClose }: Props) {
               </Text>
               <Input
                 size="md"
-                width={'5em'}
+                width={"5em"}
                 color="#D6D4D4"
                 placeholder="CIP02"
-                _placeholder={{ color: '#D6D4D4', fontSize: '12px' }}
+                _placeholder={{ color: "#D6D4D4", fontSize: "12px" }}
               />
             </Box>
             <Box>
@@ -269,7 +269,7 @@ export function RegisterNewTask({ isOpen, onClose }: Props) {
                 placeholder="Selecione"
                 color="#D6D4D4"
                 fontSize="12px"
-                width={'6.4em'}
+                width={"6.4em"}
               >
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
@@ -317,7 +317,7 @@ export function RegisterNewTask({ isOpen, onClose }: Props) {
                 placeholder="Selecione"
                 color="#D6D4D4"
                 fontSize="12px"
-                width={'6.4em'}
+                width={"6.4em"}
               >
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
@@ -355,7 +355,7 @@ export function RegisterNewTask({ isOpen, onClose }: Props) {
               colorScheme="blue"
               backgroundColor="#0047BB"
               mr={3}
-              onClick={() => console.log('submeteu')}
+              onClick={() => console.log("submeteu")}
               color="white"
             >
               Concluir cadastro

@@ -5,6 +5,12 @@
   },
   "extends": ["@ialexanderbrito/eslint-config/react"],
   "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     "no-console": "warn",
     "react-hooks/exhaustive-deps": "off"
   },

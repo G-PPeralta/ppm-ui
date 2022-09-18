@@ -1,8 +1,8 @@
-import { FaWarehouse } from 'react-icons/fa';
-import { FiMapPin } from 'react-icons/fi';
+import { FaWarehouse } from "react-icons/fa";
+import { FiMapPin } from "react-icons/fi";
 
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
-import { ICardInfoProjeto } from 'interfaces/DetalhamentoProjetos';
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { ICardInfoProjeto } from "interfaces/DetalhamentoProjetos";
 
 type infoProjetoProps = {
   infoProjeto: ICardInfoProjeto;
@@ -13,13 +13,13 @@ function CardInfoProjeto({ infoProjeto }: infoProjetoProps) {
   return (
     <>
       <Flex
-        backgroundColor={'white'}
+        backgroundColor={"white"}
         p={5}
         borderRadius={5}
-        direction={'column'}
+        direction={"column"}
         grow={1}
         shrink={1}
-        basis={'360px'}
+        basis={"360px"}
       >
         <Box mb={4}>
           <Heading as="h4" size="md">
@@ -28,82 +28,82 @@ function CardInfoProjeto({ infoProjeto }: infoProjetoProps) {
         </Box>
 
         <Flex
-          justifyContent={'space-between'}
-          direction={innerWidth > 520 ? 'row' : 'column'}
+          justifyContent={"space-between"}
+          direction={innerWidth > 520 ? "row" : "column"}
         >
           <Box>
             <Flex>
-              <Box display={'flex'}>
-                <Text fontWeight={'600'}>Nº:</Text>
-                <Text ml={2} color={'origem.500'} fontWeight={'600'}>
+              <Box display={"flex"}>
+                <Text fontWeight={"600"}>Nº:</Text>
+                <Text ml={2} color={"origem.500"} fontWeight={"600"}>
                   {infoProjeto.numero}
                 </Text>
               </Box>
             </Flex>
-            <Flex alignItems={'center'}>
-              <Text fontWeight={'600'} color={'origem.500'}>
+            <Flex alignItems={"center"}>
+              <Text fontWeight={"600"} color={"origem.500"}>
                 <FiMapPin />
               </Text>
-              <Text ml={1} fontWeight={'600'}>
+              <Text ml={1} fontWeight={"600"}>
                 Polo:
               </Text>
-              <Text ml={2} color={'origem.500'} fontWeight={'600'}>
+              <Text ml={2} color={"origem.500"} fontWeight={"600"}>
                 {infoProjeto.polo}
               </Text>
             </Flex>
 
-            <Flex alignItems={'center'}>
-              <Text fontWeight={'600'} color={'origem.500'}>
+            <Flex alignItems={"center"}>
+              <Text fontWeight={"600"} color={"origem.500"}>
                 <FaWarehouse />
               </Text>
-              <Text ml={1} fontWeight={'600'}>
+              <Text ml={1} fontWeight={"600"}>
                 Local:
               </Text>
-              <Text ml={2} color={'origem.500'} fontWeight={'600'}>
+              <Text ml={2} color={"origem.500"} fontWeight={"600"}>
                 {infoProjeto.local}
               </Text>
             </Flex>
 
-            <Flex alignItems={'center'}>
-              <Text fontWeight={'600'} fontSize={14}>
+            <Flex alignItems={"center"}>
+              <Text fontWeight={"600"} fontSize={14}>
                 Coordenador:
               </Text>
               <Text
                 ml={2}
-                color={'origem.500'}
-                fontWeight={'600'}
+                color={"origem.500"}
+                fontWeight={"600"}
                 fontSize={14}
               >
                 {infoProjeto.coordenador_nome === null
-                  ? 'Nome do Coordenador'
+                  ? "Nome do Coordenador"
                   : infoProjeto.coordenador_nome}
               </Text>
             </Flex>
 
-            <Flex alignItems={'center'}>
-              <Text fontWeight={'600'} fontSize={14}>
+            <Flex alignItems={"center"}>
+              <Text fontWeight={"600"} fontSize={14}>
                 Responsável:
               </Text>
               <Text
                 ml={2}
-                color={'origem.500'}
-                fontWeight={'600'}
+                color={"origem.500"}
+                fontWeight={"600"}
                 fontSize={14}
               >
                 {infoProjeto.nome_responsavel === null
-                  ? 'Nome do Responsável'
+                  ? "Nome do Responsável"
                   : infoProjeto.nome_responsavel}
               </Text>
             </Flex>
 
-            <Flex alignItems={'center'}>
-              <Text fontWeight={'600'} fontSize={14}>
+            <Flex alignItems={"center"}>
+              <Text fontWeight={"600"} fontSize={14}>
                 Área Demandada:
               </Text>
               <Text
                 ml={2}
-                color={'origem.500'}
-                fontWeight={'600'}
+                color={"origem.500"}
+                fontWeight={"600"}
                 fontSize={14}
               >
                 {infoProjeto.demanda}
@@ -112,65 +112,65 @@ function CardInfoProjeto({ infoProjeto }: infoProjetoProps) {
           </Box>
 
           <Box
-            display={'flex'}
-            flexDirection={'column'}
-            alignItems={innerWidth > 520 ? 'flex-end' : 'flex-start'}
-            justifyContent={innerWidth > 520 ? 'end' : 'start'}
+            display={"flex"}
+            flexDirection={"column"}
+            alignItems={innerWidth > 520 ? "flex-end" : "flex-start"}
+            justifyContent={innerWidth > 520 ? "end" : "start"}
           >
-            <Flex alignItems={'center'}>
-              <Text fontWeight={'600'} fontSize={14}>
+            <Flex alignItems={"center"}>
+              <Text fontWeight={"600"} fontSize={14}>
                 Início:
               </Text>
               <Text
                 ml={2}
-                color={'origem.500'}
-                fontWeight={'600'}
+                color={"origem.500"}
+                fontWeight={"600"}
                 fontSize={14}
               >
                 {infoProjeto.data_inicio === null
-                  ? '01/01/1900'
+                  ? "01/01/1900"
                   : infoProjeto.data_inicio}
               </Text>
             </Flex>
 
-            <Flex alignItems={'center'}>
-              <Text fontWeight={'600'} fontSize={14}>
+            <Flex alignItems={"center"}>
+              <Text fontWeight={"600"} fontSize={14}>
                 Término:
               </Text>
               <Text
                 ml={2}
-                color={'origem.500'}
-                fontWeight={'600'}
+                color={"origem.500"}
+                fontWeight={"600"}
                 fontSize={14}
               >
                 {infoProjeto.data_fim === null
-                  ? '31/12/1900'
+                  ? "31/12/1900"
                   : infoProjeto.data_fim}
               </Text>
             </Flex>
 
-            <Flex alignItems={'center'}>
-              <Text fontWeight={'600'} fontSize={14}>
+            <Flex alignItems={"center"}>
+              <Text fontWeight={"600"} fontSize={14}>
                 Atraso:
               </Text>
               <Text
                 ml={2}
-                color={'origem.500'}
-                fontWeight={'600'}
+                color={"origem.500"}
+                fontWeight={"600"}
                 fontSize={14}
               >
                 5 dias
               </Text>
             </Flex>
 
-            <Flex alignItems={'center'}>
-              <Text fontWeight={'600'} fontSize={14}>
+            <Flex alignItems={"center"}>
+              <Text fontWeight={"600"} fontSize={14}>
                 Atualização:
               </Text>
               <Text
                 ml={2}
-                color={'origem.500'}
-                fontWeight={'600'}
+                color={"origem.500"}
+                fontWeight={"600"}
                 fontSize={14}
               >
                 12/08/2022

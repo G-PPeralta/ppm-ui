@@ -1,15 +1,15 @@
-import { UserContextProps } from 'interfaces/Contexts';
-import { RegisterProps } from 'interfaces/Services';
+import { UserContextProps } from "interfaces/Contexts";
+import { RegisterProps } from "interfaces/Services";
 
-import { api } from 'services/api';
+import { api } from "services/api";
 
 export async function putProfile(
   id: string,
-  payload: RegisterProps,
+  payload: RegisterProps
 ): Promise<{ data: UserContextProps; status: number }> {
   const { data, status } = await api.put(`/user/${id}`, payload, {
     headers: {
-      Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },
   });
 

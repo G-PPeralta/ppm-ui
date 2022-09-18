@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { useFormik } from 'formik';
-import { cadastroPocoSchema } from 'validations/ModaisCadastrosInfografico';
+import { useFormik } from "formik";
+import { cadastroPocoSchema } from "validations/ModaisCadastrosInfografico";
 
-import { useToast } from 'contexts/Toast';
+import { useToast } from "contexts/Toast";
 
-import { postCadastroPoco } from 'services/post/CadastroModaisInfograficos';
+import { postCadastroPoco } from "services/post/CadastroModaisInfograficos";
 
 export function useCadastroPoco() {
   const { toast } = useToast();
@@ -13,7 +13,7 @@ export function useCadastroPoco() {
 
   const registerForm = useFormik({
     initialValues: {
-      poco: '',
+      poco: "",
     },
     validationSchema: cadastroPocoSchema,
     onSubmit: async (values) => {
@@ -28,13 +28,13 @@ export function useCadastroPoco() {
 
         if (status === 200 || status === 201) {
           toast.success(`Poço ${values.poco} cadastrado com sucesso!`, {
-            id: 'toast-principal',
+            id: "toast-principal",
           });
           setLoading(false);
         }
       } catch (error) {
         toast.error(`Erro ao cadastrar poço ${values.poco}!`, {
-          id: 'toast-principal',
+          id: "toast-principal",
         });
         setLoading(false);
       }

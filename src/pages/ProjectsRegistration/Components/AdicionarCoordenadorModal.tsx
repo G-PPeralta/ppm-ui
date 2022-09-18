@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { BsPlusLg } from 'react-icons/bs';
+import { useState } from "react";
+import { BsPlusLg } from "react-icons/bs";
 
 import {
   Button,
@@ -19,14 +19,14 @@ import {
   useDisclosure,
   Box,
   Text,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 // import { TextError } from 'components/TextError';
 
-import { postCoordenador } from 'services/post/ProjectRegister';
+import { postCoordenador } from "services/post/ProjectRegister";
 
 export function AdicionarCoordenadorModal(projectsForm: any) {
-  const [coordenador, setCoordenador] = useState('');
+  const [coordenador, setCoordenador] = useState("");
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -38,12 +38,12 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
     const { data } = await postCoordenador({ coordenadorNome: coordenador });
 
     projectsForm.projectsForm.setFieldValue(
-      'coordenador_id',
-      data.id_coordenador,
+      "coordenador_id",
+      data.id_coordenador
     );
     projectsForm.projectsForm.setFieldValue(
-      'coordenador',
-      data.coordenadorNome,
+      "coordenador",
+      data.coordenadorNome
     );
     onClose();
   }
@@ -51,19 +51,19 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
   return (
     <Flex>
       <Box
-        display={'flex'}
-        alignItems={'center'}
+        display={"flex"}
+        alignItems={"center"}
         border="2px"
         padding={2}
         borderRadius={6}
-        borderColor={'origem.300'}
+        borderColor={"origem.300"}
         onClick={onOpen}
         _hover={{
-          background: '#f5f5f5',
-          transition: 'all 0.4s',
-          color: 'origem.300',
-          cursor: 'pointer',
-          borderColor: 'origem.500',
+          background: "#f5f5f5",
+          transition: "all 0.4s",
+          color: "origem.300",
+          cursor: "pointer",
+          borderColor: "origem.500",
         }}
       >
         <IconButton
@@ -77,9 +77,9 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
           size="sm"
         />
         <Text
-          fontSize={useBreakpointValue({ base: 'sm', md: 'sm' })}
-          fontWeight={'bold'}
-          color={'origem.500'}
+          fontSize={useBreakpointValue({ base: "sm", md: "sm" })}
+          fontWeight={"bold"}
+          color={"origem.500"}
         >
           ADICIONAR COORDENADOR
         </Text>
@@ -120,8 +120,8 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
               color="white"
               onClick={() => saveResponsible()}
               _hover={{
-                background: 'origem.500',
-                transition: 'all 0.4s',
+                background: "origem.500",
+                transition: "all 0.4s",
               }}
             >
               SALVAR

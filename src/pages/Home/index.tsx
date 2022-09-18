@@ -1,18 +1,18 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from "react";
 
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex } from "@chakra-ui/react";
 
-import Sidebar from 'components/SideBar';
+import Sidebar from "components/SideBar";
 
-import AreasDemandadas from './components/AreasDemandadas';
-import BotoesSelecionarPolo from './components/BotoesSelecionarPolo';
-import FaseProjetos from './components/FaseProjetos';
-import NaoPrevisto from './components/NaoPrevisto';
-import PrevistoxRealizado from './components/PrevistoxRealizado';
-import Projetos from './components/Projetos';
-import Realizado from './components/Realizado';
-import TotalOrcamentos from './components/TotalOrcamentos';
-import TotalProjetos from './components/TotalProjetos';
+import AreasDemandadas from "./components/AreasDemandadas";
+import BotoesSelecionarPolo from "./components/BotoesSelecionarPolo";
+import FaseProjetos from "./components/FaseProjetos";
+import NaoPrevisto from "./components/NaoPrevisto";
+import PrevistoxRealizado from "./components/PrevistoxRealizado";
+import Projetos from "./components/Projetos";
+import Realizado from "./components/Realizado";
+import TotalOrcamentos from "./components/TotalOrcamentos";
+import TotalProjetos from "./components/TotalProjetos";
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -20,9 +20,9 @@ function useWindowSize() {
     function updateSize() {
       setSize([window.innerWidth, window.innerHeight]);
     }
-    window.addEventListener('resize', updateSize);
+    window.addEventListener("resize", updateSize);
     updateSize();
-    return () => window.removeEventListener('resize', updateSize);
+    return () => window.removeEventListener("resize", updateSize);
   }, []);
   return size;
 }
@@ -35,9 +35,9 @@ export function Home() {
       <Sidebar>
         <BotoesSelecionarPolo />
         <Flex
-          w={'auto'}
-          display={'flex'}
-          wrap={'wrap'}
+          w={"auto"}
+          display={"flex"}
+          wrap={"wrap"}
           align="flex-start"
           direction="row"
           justify="center"
@@ -51,7 +51,7 @@ export function Home() {
             flex={width > 1100 ? 0 : 1}
             sx={{ height: 340 }}
             display="flex"
-            flexDirection={'column'}
+            flexDirection={"column"}
             justifyContent="space-evenly"
           >
             <TotalOrcamentos />

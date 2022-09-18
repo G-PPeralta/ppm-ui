@@ -1,28 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 import {
   FormControl,
   FormLabel,
   Select,
   useBreakpointValue,
-} from '@chakra-ui/react';
-import { Prioridade } from 'interfaces/Services';
+} from "@chakra-ui/react";
+import { Prioridade } from "interfaces/Services";
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
-import { getPrioridade } from 'services/get/Projetos';
+import { getPrioridade } from "services/get/Projetos";
 
 function FormPrioridade(projectsForm: any) {
   const [prioridadeState, setPrioridadeState] = useState<Prioridade[]>(
-    [] as Prioridade[],
+    [] as Prioridade[]
   );
 
   async function handleGetProjetos() {
     const reqGet = await getPrioridade();
 
     const dataReq: Prioridade[] = reqGet.data.sort(
-      (a: Prioridade, b: Prioridade) =>
-        a.prioridade.localeCompare(b.prioridade),
+      (a: Prioridade, b: Prioridade) => a.prioridade.localeCompare(b.prioridade)
     );
 
     setPrioridadeState(dataReq);
@@ -40,7 +39,7 @@ function FormPrioridade(projectsForm: any) {
         name="prioridadeId"
         value={projectsForm.projectsForm.values.prioridadeId}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: '100%', md: '95%' })}
+        w={useBreakpointValue({ base: "100%", md: "95%" })}
       >
         {prioridadeState.map((prioridade) => (
           <option key={prioridade.id} value={prioridade.id}>

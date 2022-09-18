@@ -15,14 +15,14 @@ import {
   Stack,
   useBreakpointValue,
   Input,
-} from '@chakra-ui/react';
-import { Ring } from '@uiball/loaders';
+} from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
-import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
+import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroTarefa } from 'hooks/useCadastroTarefa';
+import { useCadastroTarefa } from "hooks/useCadastroTarefa";
 
 function ModalCadastrarTarefa() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,14 +32,14 @@ function ModalCadastrarTarefa() {
     <>
       <Button
         variant="outline"
-        border={'2px solid'}
-        borderColor={'origem.500'}
-        textColor={'origem.500'}
+        border={"2px solid"}
+        borderColor={"origem.500"}
+        textColor={"origem.500"}
         _hover={{
-          borderColor: 'origem.600',
-          backgroundColor: 'origem.500',
-          textColor: 'white',
-          transition: 'all 0.4s',
+          borderColor: "origem.600",
+          backgroundColor: "origem.500",
+          textColor: "white",
+          transition: "all 0.4s",
         }}
         onClick={onOpen}
       >
@@ -49,16 +49,16 @@ function ModalCadastrarTarefa() {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
-            backgroundColor={'#2E69FD'}
+            backgroundColor={"#2E69FD"}
             borderTopRadius={7}
-            display={'flex'}
-            justifyContent={'center'}
-            color={'white'}
-            fontSize={'1em'}
+            display={"flex"}
+            justifyContent={"center"}
+            color={"white"}
+            fontSize={"1em"}
           >
             Cadastrar Tarefa
           </ModalHeader>
-          <ModalCloseButton color={'white'} />
+          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -67,12 +67,12 @@ function ModalCadastrarTarefa() {
           >
             <ModalBody mt={3}>
               <FormControl>
-                <Flex direction={'column'} gap={4}>
+                <Flex direction={"column"} gap={4}>
                   <Stack>
                     <Flex
                       flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
+                        base: "column",
+                        md: "row",
                       })}
                       gap={5}
                     >
@@ -100,16 +100,16 @@ function ModalCadastrarTarefa() {
               </FormControl>
             </ModalBody>
 
-            <ModalFooter justifyContent={'center'}>
+            <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
                 <Button
                   variant="ghost"
                   color="red"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
-                    background: 'red.500',
-                    transition: 'all 0.4s',
-                    color: 'white',
+                    background: "red.500",
+                    transition: "all 0.4s",
+                    color: "white",
                   }}
                 >
                   Cancelar
@@ -121,8 +121,8 @@ function ModalCadastrarTarefa() {
                   color="white"
                   onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
-                    background: 'origem.500',
-                    transition: 'all 0.4s',
+                    background: "origem.500",
+                    transition: "all 0.4s",
                   }}
                 >
                   {loading ? (

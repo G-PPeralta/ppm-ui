@@ -1,10 +1,10 @@
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable } from "react-beautiful-dnd";
 // import { FiTrash } from 'react-icons/fi';
-import { GiHamburgerMenu } from 'react-icons/gi';
+import { GiHamburgerMenu } from "react-icons/gi";
 
-import { Box, Flex, FormControl, Select, Text } from '@chakra-ui/react';
+import { Box, Flex, FormControl, Select, Text } from "@chakra-ui/react";
 
-import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
+import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 interface Props {
   index: number;
@@ -30,7 +30,7 @@ function AtividadesDraggable({
     handleChangeProp(index, chave, event.target.value);
     const arrayFinalAtividades = intervencaoForm.values.atividades;
     arrayFinalAtividades[index].responsavel = Number(event.target.value);
-    intervencaoForm.setFieldValue('atividades', arrayFinalAtividades);
+    intervencaoForm.setFieldValue("atividades", arrayFinalAtividades);
   };
 
   return (
@@ -47,24 +47,24 @@ function AtividadesDraggable({
             alignItems="center"
             justifyContent="center"
             w="100%"
-            bg={'#f5f5f5'}
+            bg={"#f5f5f5"}
             px={5}
             py={2}
-            borderRadius={'60px'}
+            borderRadius={"60px"}
             mb={2}
             gap={4}
           >
-            <Flex align={'center'} justify={'center'} gap={3}>
+            <Flex align={"center"} justify={"center"} gap={3}>
               <GiHamburgerMenu color="#2E69FD" size={16} />
-              <Text sx={{ fontSize: 16, fontWeight: '600' }}>{index + 1}</Text>
+              <Text sx={{ fontSize: 16, fontWeight: "600" }}>{index + 1}</Text>
             </Flex>
             <FormControl>
-              <Text sx={{ fontSize: 12, fontWeight: '600' }}>ATIVIDADE</Text>
+              <Text sx={{ fontSize: 12, fontWeight: "600" }}>ATIVIDADE</Text>
               <Select
                 id="atividade"
                 name="atividade"
                 placeholder="Selecione"
-                bg={'#fff'}
+                bg={"#fff"}
                 value={item.atividade.id}
                 isDisabled
               >
@@ -76,14 +76,14 @@ function AtividadesDraggable({
               </Select>
             </FormControl>
             <FormControl>
-              <Text sx={{ fontSize: 12, fontWeight: '600' }}>RESPONSÁVEL</Text>
+              <Text sx={{ fontSize: 12, fontWeight: "600" }}>RESPONSÁVEL</Text>
               <Select
                 id="responsavel"
                 name="responsavel"
                 placeholder="Selecione"
-                bg={'#fff'}
+                bg={"#fff"}
                 value={item.responsavel}
-                onChange={(event) => handleChange(event, 'responsavel')}
+                onChange={(event) => handleChange(event, "responsavel")}
               >
                 {listaResponsaveis.map((responsavel: any) => (
                   <option key={responsavel.id} value={responsavel.id}>
@@ -94,9 +94,9 @@ function AtividadesDraggable({
             </FormControl>
             <Flex
               p={1}
-              align={'center'}
-              justify={'center'}
-              _hover={{ cursor: 'pointer' }}
+              align={"center"}
+              justify={"center"}
+              _hover={{ cursor: "pointer" }}
             >
               {/* <FiTrash
                 onClick={() => remove(index)}
