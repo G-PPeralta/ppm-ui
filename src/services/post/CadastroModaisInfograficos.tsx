@@ -1,12 +1,12 @@
 import {
   CadastroTarefa,
-  CadastroSonda,
   CadastroProjetoTipo,
   CadastroIntervencao,
   CadastroAtividade,
   NovaCampanha,
   NovaIntervencao,
   NovoPoco,
+  NovaSonda,
 } from "interfaces/CadastrosModaisInfograficos";
 
 import { api, token } from "services/api";
@@ -18,8 +18,8 @@ export async function postCadastroTarefa(
   return { status };
 }
 
-export async function postCadastroSonda(
-  payload: CadastroSonda
+export async function postNovaSonda(
+  payload: NovaSonda
 ): Promise<{ status: number }> {
   const { status } = await api.post("/sonda", payload, token());
   return { status };

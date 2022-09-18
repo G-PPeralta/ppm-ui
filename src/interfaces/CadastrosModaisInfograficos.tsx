@@ -1,3 +1,7 @@
+interface User {
+  nom_usu_create: string | undefined;
+}
+
 export interface CadastroSonda {
   nome: string;
 }
@@ -79,14 +83,16 @@ export interface NovaCampanha {
   nom_usu_create: string | undefined;
 }
 
-export interface NovaIntervencao {
+export interface NovaIntervencao extends User {
   sondaId: number;
   pocoId: number;
   comentarios: string;
-  nom_usu_create: string | undefined;
 }
 
-export interface NovoPoco {
-  nom_usu_create: string | undefined;
+export interface NovoPoco extends User {
   poco: string;
+}
+
+export interface NovaSonda extends User {
+  sonda: string;
 }

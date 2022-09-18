@@ -5,7 +5,7 @@ export const cadastroTarefaSchema = yup.object({
 });
 
 export const cadastroSondaSchema = yup.object({
-  nomeSpt: yup.string().required("O nome da sonda é obrigatório!"),
+  sonda: yup.string().required("O nome da sonda é obrigatório!"),
 });
 
 export const cadastroIntervencaoSchema = yup.object({
