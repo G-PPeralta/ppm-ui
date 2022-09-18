@@ -1,9 +1,9 @@
-import Select from 'react-select';
+import Select from "react-select";
 
-import { FormControl, FormLabel } from '@chakra-ui/react';
-import { ListaPoco } from 'interfaces/CadastrosModaisInfograficos';
+import { FormControl, FormLabel } from "@chakra-ui/react";
+import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
 
-import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
+import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 function SelectFiltragemPocos({ intervencaoForm }: any) {
   const { listaPocos } = useCadastroIntervencao();

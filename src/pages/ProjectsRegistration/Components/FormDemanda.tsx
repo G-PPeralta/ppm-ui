@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 import {
   FormControl,
   FormLabel,
   Select,
   useBreakpointValue,
-} from '@chakra-ui/react';
-import { Demanda } from 'interfaces/Services';
+} from "@chakra-ui/react";
+import { Demanda } from "interfaces/Services";
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
-import { getDemanda } from 'services/get/Projetos';
+import { getDemanda } from "services/get/Projetos";
 
 function FormDemanda(projectsForm: any) {
   const [demandaState, setDemandaState] = useState<Demanda[]>([] as Demanda[]);
@@ -35,7 +35,7 @@ function FormDemanda(projectsForm: any) {
         name="demandaId"
         value={projectsForm.projectsForm.values.demandaId}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: '100%', md: '100%' })}
+        w={useBreakpointValue({ base: "100%", md: "100%" })}
       >
         {demandaState.map((demanda) => (
           <option key={demanda.id} value={demanda.id}>

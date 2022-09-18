@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { BsPlusLg } from 'react-icons/bs';
+import { useEffect, useState } from "react";
+import { BsPlusLg } from "react-icons/bs";
 
 import {
   Box,
@@ -9,33 +9,33 @@ import {
   IconButton,
   Input,
   Select,
-} from '@chakra-ui/react';
-import { Ring } from '@uiball/loaders';
-import { Solicitante } from 'interfaces/Services';
+} from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
+import { Solicitante } from "interfaces/Services";
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
-import { getSolicitante } from 'services/get/Projetos';
-import { postNovoSolicitante } from 'services/post/AdicionarOpcaoSelect';
+import { getSolicitante } from "services/get/Projetos";
+import { postNovoSolicitante } from "services/post/AdicionarOpcaoSelect";
 
 function FormSolicitante(projectsForm: any) {
   const [solicitanteState, setSolicitanteState] = useState<Solicitante[]>(
-    [] as Solicitante[],
+    [] as Solicitante[]
   );
   const [loading, setLoading] = useState(true);
-  const [novoSolicitante, setNovoSolicitante] = useState('');
+  const [novoSolicitante, setNovoSolicitante] = useState("");
 
   async function handleGetProjetos() {
     const reqGet = await getSolicitante();
 
     const dataReq: Solicitante[] = reqGet.data.sort(
       (a: Solicitante, b: Solicitante) =>
-        a.solicitante.localeCompare(b.solicitante),
+        a.solicitante.localeCompare(b.solicitante)
     );
 
     const outro: Solicitante = {
       id: dataReq.length + 2,
-      solicitante: 'Outro',
+      solicitante: "Outro",
       deletado: false,
     };
 
@@ -46,7 +46,7 @@ function FormSolicitante(projectsForm: any) {
   }
 
   function handleNovoSolicitante() {
-    if (novoSolicitante !== '') {
+    if (novoSolicitante !== "") {
       const novoSolicitanteAdicionado: Solicitante = {
         id: solicitanteState.length + 1,
         solicitante: novoSolicitante,
@@ -54,7 +54,7 @@ function FormSolicitante(projectsForm: any) {
       };
 
       const solicitanteSemOpcaoOutros = solicitanteState.filter(
-        (solicitante: Solicitante) => solicitante.solicitante !== 'Outro',
+        (solicitante: Solicitante) => solicitante.solicitante !== "Outro"
       );
 
       const solicitanteComNovaOpcao: Solicitante[] = [
@@ -64,14 +64,14 @@ function FormSolicitante(projectsForm: any) {
 
       const outro: Solicitante = {
         id: solicitanteComNovaOpcao.length + 2,
-        solicitante: 'Outro',
+        solicitante: "Outro",
         deletado: false,
       };
 
       const novoSolicitanteState = [...solicitanteComNovaOpcao, outro];
 
       setSolicitanteState(novoSolicitanteState);
-      setNovoSolicitante('');
+      setNovoSolicitante("");
 
       projectsForm.projectsForm.values.poloId = novoSolicitanteAdicionado.id;
 
@@ -86,7 +86,7 @@ function FormSolicitante(projectsForm: any) {
   return (
     <FormControl>
       {loading ? (
-        <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
+        <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
           <Ring speed={2} lineWeight={5} color="blue" size={24} />
         </Box>
       ) : (
@@ -95,7 +95,7 @@ function FormSolicitante(projectsForm: any) {
           {Number(projectsForm.projectsForm.values.solicitanteId) ===
           solicitanteState[solicitanteState.length - 1].id ? (
             <>
-              <Flex alignItems={'center'}>
+              <Flex alignItems={"center"}>
                 <Input
                   isRequired
                   placeholder="Adicione o solicitante"
@@ -125,7 +125,7 @@ function FormSolicitante(projectsForm: any) {
               name="solicitanteId"
               value={projectsForm.projectsForm.values.solicitanteId}
               onChange={projectsForm.projectsForm.handleChange}
-              w={'95%'}
+              w={"95%"}
             >
               {solicitanteState.map((solicitante) => (
                 <option key={solicitante.id} value={solicitante.id}>

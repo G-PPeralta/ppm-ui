@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 import {
   Box,
@@ -7,17 +7,17 @@ import {
   Text,
   useBreakpointValue,
   useColorModeValue,
-} from '@chakra-ui/react';
-import { AreasDemandadas } from 'interfaces/Services';
+} from "@chakra-ui/react";
+import { AreasDemandadas } from "interfaces/Services";
 
-import PercentPieChart from 'components/PercentPieChart';
-import StackedBarChart from 'components/StackedBarChart';
+import PercentPieChart from "components/PercentPieChart";
+import StackedBarChart from "components/StackedBarChart";
 
-import { getAreasDemandadas } from 'services/get/Dashboard';
+import { getAreasDemandadas } from "services/get/Dashboard";
 
 export default function AreasDemandadasComponent() {
   const [areasDemandadas, setAreasDemandadas] = useState<AreasDemandadas[]>(
-    [] as AreasDemandadas[],
+    [] as AreasDemandadas[]
   );
   async function handleGetAreasDemandadas() {
     const reqGet = await getAreasDemandadas();
@@ -37,80 +37,80 @@ export default function AreasDemandadasComponent() {
 
   const grafData1 = [
     {
-      name: 'Undone',
+      name: "Undone",
       value: 70,
-      color: '#A8C1FF',
+      color: "#A8C1FF",
     },
     {
-      name: 'Done',
+      name: "Done",
       value: 30,
-      color: '#2E69FD',
+      color: "#2E69FD",
     },
   ];
 
   const grafData2 = [
     {
-      name: 'Undone',
+      name: "Undone",
       value: 70,
-      color: '#9fed9f',
+      color: "#9fed9f",
     },
     {
-      name: 'Done',
+      name: "Done",
       value: 30,
-      color: '#428542',
+      color: "#428542",
     },
   ];
 
   const grafData3 = [
     {
-      name: 'Undone',
+      name: "Undone",
       value: 70,
-      color: '#FFB1B1',
+      color: "#FFB1B1",
     },
     {
-      name: 'Done',
+      name: "Done",
       value: 30,
-      color: '#F94144',
+      color: "#F94144",
     },
   ];
 
   const grafData4 = [
     {
-      name: 'Undone',
+      name: "Undone",
       value: 70,
-      color: '#FFF8BC',
+      color: "#FFF8BC",
     },
     {
-      name: 'Done',
+      name: "Done",
       value: 30,
-      color: '#F8E854',
+      color: "#F8E854",
     },
   ];
 
   const dataMock = [
     {
-      month: 'Jan/22',
+      month: "Jan/22",
       SMS: 70,
       Regulatório: 10,
       Operação: 10,
       Outros: 10,
     },
     {
-      month: 'Fev/22',
+      month: "Fev/22",
       SMS: 10,
       Regulatório: 70,
       Operação: 10,
       Outros: 10,
     },
     {
-      month: 'Mar/22',
+      month: "Mar/22",
       SMS: 10,
       Regulatório: 10,
       Operação: 70,
       Outros: 10,
     },
     {
-      month: 'Abr/22',
+      month: "Abr/22",
       SMS: 10,
       Regulatório: 10,
       Operação: 10,
@@ -119,44 +119,44 @@ export default function AreasDemandadasComponent() {
   ];
 
   const dataEntries = [
-    { name: 'SMS', color: '#2E69FD' },
-    { name: 'Regulatório', color: '#93E01B' },
-    { name: 'Operação', color: '#F94144' },
-    { name: 'Outros', color: '#F4DD06' },
+    { name: "SMS", color: "#2E69FD" },
+    { name: "Regulatório", color: "#93E01B" },
+    { name: "Operação", color: "#F94144" },
+    { name: "Outros", color: "#F4DD06" },
   ];
 
   return (
     <Stack spacing="8">
       <Flex
-        w={'100%'}
-        height={'322px'}
+        w={"100%"}
+        height={"322px"}
         align="center"
         justify="center"
-        bg={useBreakpointValue({ base: '#EDF2F7', sm: '#EDF2F7' })}
+        bg={useBreakpointValue({ base: "#EDF2F7", sm: "#EDF2F7" })}
       >
         <Box
-          py={{ base: '0', sm: '4' }}
-          px={{ base: '0', sm: '4' }}
-          w={'100%'}
-          height={'322px'}
-          bg={useBreakpointValue({ base: 'white', sm: 'white' })}
+          py={{ base: "0", sm: "4" }}
+          px={{ base: "0", sm: "4" }}
+          w={"100%"}
+          height={"322px"}
+          bg={useBreakpointValue({ base: "white", sm: "white" })}
           boxShadow={{
-            base: 'none',
-            sm: useColorModeValue('md', 'md-dark'),
+            base: "none",
+            sm: useColorModeValue("md", "md-dark"),
           }}
-          borderRadius={{ base: 'none', sm: 'xl' }}
-          display={'flex'}
-          justifyContent={'center'}
+          borderRadius={{ base: "none", sm: "xl" }}
+          display={"flex"}
+          justifyContent={"center"}
         >
           <Box w={300} h={230}>
             <Text
               mb={1}
-              sx={{ fontSize: 18, fontWeight: '600', alignSelf: 'center' }}
+              sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
               Áreas Demandadas
             </Text>
-            <Box display={'flex'} w={'100%'} justifyContent="space-between">
+            <Box display={"flex"} w={"100%"} justifyContent="space-between">
               <Box ml={-4} pt={6}>
                 <StackedBarChart
                   showY={false}
@@ -171,21 +171,21 @@ export default function AreasDemandadasComponent() {
                 <Box
                   mb={1}
                   display="flex"
-                  w={'100%'}
+                  w={"100%"}
                   justifyContent="space-between"
                 >
                   <Box
                     w={150}
-                    display={'flex'}
+                    display={"flex"}
                     flexDirection="column"
-                    alignItems={'center'}
+                    alignItems={"center"}
                   >
                     <Text
                       mb={2}
                       sx={{
                         fontSize: 14,
-                        fontWeight: '600',
-                        alignSelf: 'center',
+                        fontWeight: "600",
+                        alignSelf: "center",
                       }}
                       color="#2E69FD"
                     >
@@ -199,16 +199,16 @@ export default function AreasDemandadasComponent() {
                   </Box>
                   <Box
                     w={150}
-                    display={'flex'}
+                    display={"flex"}
                     flexDirection="column"
-                    alignItems={'center'}
+                    alignItems={"center"}
                   >
                     <Text
                       mb={2}
                       sx={{
                         fontSize: 14,
-                        fontWeight: '600',
-                        alignSelf: 'center',
+                        fontWeight: "600",
+                        alignSelf: "center",
                       }}
                       color="#93E01B"
                     >
@@ -221,22 +221,22 @@ export default function AreasDemandadasComponent() {
                   mt={8}
                   mb={1}
                   display="flex"
-                  w={'100%'}
+                  w={"100%"}
                   justifyContent="space-between"
                 >
                   <Box
                     w={150}
-                    display={'flex'}
+                    display={"flex"}
                     flexDirection="column"
-                    alignItems={'center'}
+                    alignItems={"center"}
                   >
                     <PercentPieChart size={60} upDown={true} data={grafData3} />
                     <Text
                       mt={2}
                       sx={{
                         fontSize: 14,
-                        fontWeight: '600',
-                        alignSelf: 'center',
+                        fontWeight: "600",
+                        alignSelf: "center",
                       }}
                       color="#F94144"
                     >
@@ -245,17 +245,17 @@ export default function AreasDemandadasComponent() {
                   </Box>
                   <Box
                     w={150}
-                    display={'flex'}
+                    display={"flex"}
                     flexDirection="column"
-                    alignItems={'center'}
+                    alignItems={"center"}
                   >
                     <PercentPieChart size={60} upDown={true} data={grafData4} />
                     <Text
                       mt={2}
                       sx={{
                         fontSize: 14,
-                        fontWeight: '600',
-                        alignSelf: 'center',
+                        fontWeight: "600",
+                        alignSelf: "center",
                       }}
                       color="#F4DD06"
                     >

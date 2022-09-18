@@ -3,9 +3,9 @@ import {
   FormLabel,
   Input,
   useBreakpointValue,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
 function FormEmail(projectsForm: any) {
   return (
@@ -19,7 +19,7 @@ function FormEmail(projectsForm: any) {
         name="email"
         value={projectsForm.projectsForm.values.nomeProjeto}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: '100%', md: '95%' })}
+        w={useBreakpointValue({ base: "100%", md: "95%" })}
       />
       {projectsForm.projectsForm.errors.nomeProjeto &&
         projectsForm.projectsForm.touched.nomeProjeto && (

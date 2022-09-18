@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { useFormik } from 'formik';
-import { registerSchema } from 'validations/Register';
+import { useFormik } from "formik";
+import { registerSchema } from "validations/Register";
 
-import { useToast } from 'contexts/Toast';
+import { useToast } from "contexts/Toast";
 
-import { postRegister } from 'services/post/Register';
+import { postRegister } from "services/post/Register";
 
 export function useRegister() {
   const navigate = useNavigate();
@@ -15,12 +15,12 @@ export function useRegister() {
 
   const registerForm = useFormik({
     initialValues: {
-      name: '',
-      telephone: '',
-      email: '',
-      area: '',
-      password: '',
-      confirmPassword: '',
+      name: "",
+      telephone: "",
+      email: "",
+      area: "",
+      password: "",
+      confirmPassword: "",
     },
     validationSchema: registerSchema,
     onSubmit: async (values) => {
@@ -37,20 +37,20 @@ export function useRegister() {
         const { status } = await postRegister(newValues);
 
         if (status === 200 || status === 201) {
-          toast.success('Usuário cadastrado com sucesso', {
-            id: 'toast-principal',
+          toast.success("Usuário cadastrado com sucesso", {
+            id: "toast-principal",
           });
-          navigate('/');
+          navigate("/");
         }
       } catch (error: any) {
         const errorMessage = error.response.data.message;
-        if (errorMessage === 'Email already exists') {
+        if (errorMessage === "Email already exists") {
           toast.error(`E-mail já utilizado por outro usuário`, {
-            id: 'toast-principal',
+            id: "toast-principal",
           });
         } else {
           toast.error(`Erro ao cadastrar usuário`, {
-            id: 'toast-principal',
+            id: "toast-principal",
           });
         }
       }

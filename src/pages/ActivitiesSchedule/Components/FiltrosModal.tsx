@@ -1,4 +1,4 @@
-import { IoMdArrowDropdown } from 'react-icons/io';
+import { IoMdArrowDropdown } from "react-icons/io";
 
 import {
   Button,
@@ -17,7 +17,7 @@ import {
   Box,
   Input,
   useBreakpointValue,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 function FiltrosModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,23 +32,23 @@ function FiltrosModal() {
       >
         Filtrar
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size={'2xl'}>
+      <Modal isOpen={isOpen} onClose={onClose} size={"2xl"}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
-            backgroundColor={'#2E69FD'}
+            backgroundColor={"#2E69FD"}
             borderTopRadius={7}
-            display={'flex'}
-            justifyContent={'center'}
-            color={'white'}
-            fontSize={'1em'}
+            display={"flex"}
+            justifyContent={"center"}
+            color={"white"}
+            fontSize={"1em"}
           >
             Filtros
           </ModalHeader>
-          <ModalCloseButton color={'white'} />
+          <ModalCloseButton color={"white"} />
           <ModalBody mt={4}>
             <FormControl>
-              <Flex direction={'column'} gap={5}>
+              <Flex direction={"column"} gap={5}>
                 <Box>
                   <FormLabel htmlFor="area">Área</FormLabel>
                   <Select variant="unstyled">
@@ -85,8 +85,8 @@ function FiltrosModal() {
                   </Select>
                 </Box>
 
-                <Flex justify={'space-between'} gap={5}>
-                  <Flex direction={'column'} grow={1}>
+                <Flex justify={"space-between"} gap={5}>
+                  <Flex direction={"column"} grow={1}>
                     <FormLabel htmlFor="dataInicio">Data Inicio</FormLabel>
                     <Input
                       isRequired
@@ -94,11 +94,11 @@ function FiltrosModal() {
                       id="dataInicio"
                       type="date"
                       name="dataInicio"
-                      w={useBreakpointValue({ base: '100%', md: '100%' })}
+                      w={useBreakpointValue({ base: "100%", md: "100%" })}
                     />
                   </Flex>
 
-                  <Flex direction={'column'} grow={1}>
+                  <Flex direction={"column"} grow={1}>
                     <FormLabel htmlFor="dataFim">Data Fim</FormLabel>
                     <Input
                       isRequired
@@ -106,7 +106,7 @@ function FiltrosModal() {
                       id="dataFim"
                       type="date"
                       name="dataFim"
-                      w={useBreakpointValue({ base: '100%', md: '100%' })}
+                      w={useBreakpointValue({ base: "100%", md: "100%" })}
                     />
                   </Flex>
                 </Flex>
@@ -131,16 +131,16 @@ function FiltrosModal() {
               </Flex>
             </FormControl>
           </ModalBody>
-          <ModalFooter display={'flex'} justifyContent={'center'}>
+          <ModalFooter display={"flex"} justifyContent={"center"}>
             <Flex gap={2}>
               <Button
                 variant="ghost"
                 color="red"
                 onClick={() => onClose()}
                 _hover={{
-                  background: 'red.500',
-                  transition: 'all 0.4s',
-                  color: 'white',
+                  background: "red.500",
+                  transition: "all 0.4s",
+                  color: "white",
                 }}
               >
                 Remover Filtros
@@ -151,8 +151,8 @@ function FiltrosModal() {
                 color="white"
                 onClick={() => onClose()}
                 _hover={{
-                  background: 'origem.500',
-                  transition: 'all 0.4s',
+                  background: "origem.500",
+                  transition: "all 0.4s",
                 }}
               >
                 Filtrar

@@ -1,4 +1,4 @@
-import { api } from 'services/api';
+import { api } from "services/api";
 
 export async function getInfoProjetos(id: string): Promise<{
   data: any;
@@ -6,7 +6,7 @@ export async function getInfoProjetos(id: string): Promise<{
 }> {
   const { data, status } = await api.get(`/detalhamento/${id}`, {
     headers: {
-      Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },
   });
 

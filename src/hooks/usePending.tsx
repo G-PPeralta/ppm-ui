@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { ResponseUserPending } from 'interfaces/Services';
+import { ResponseUserPending } from "interfaces/Services";
 
-import { useToast } from 'contexts/Toast';
+import { useToast } from "contexts/Toast";
 
-import { getPending } from 'services/get/Pending';
+import { getPending } from "services/get/Pending";
 
 export function usePending() {
   const { toast } = useToast();
@@ -22,8 +22,8 @@ export function usePending() {
 
       setLoading(false);
     } catch (error) {
-      toast.error('Erro ao carregar usuários', {
-        id: 'toast-principal',
+      toast.error("Erro ao carregar usuários", {
+        id: "toast-principal",
       });
       setLoading(false);
     }

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { BsPlusLg } from 'react-icons/bs';
+import { useState } from "react";
+import { BsPlusLg } from "react-icons/bs";
 
 import {
   Button,
@@ -19,14 +19,14 @@ import {
   useDisclosure,
   Box,
   Text,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 // import { TextError } from 'components/TextError';
 
-import { postResponsavel } from 'services/post/ProjectRegister';
+import { postResponsavel } from "services/post/ProjectRegister";
 
 export function AdicionarResponsavelModal(projectsForm: any) {
-  const [responsavel, setResponsavel] = useState('');
+  const [responsavel, setResponsavel] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   function handleChange(event: any): void {
@@ -36,27 +36,27 @@ export function AdicionarResponsavelModal(projectsForm: any) {
   async function saveResponsible() {
     const { data } = await postResponsavel({ nome: responsavel });
 
-    projectsForm.projectsForm.setFieldValue('responsavel_id', data.id);
-    projectsForm.projectsForm.setFieldValue('responsavel', data.nome);
+    projectsForm.projectsForm.setFieldValue("responsavel_id", data.id);
+    projectsForm.projectsForm.setFieldValue("responsavel", data.nome);
     onClose();
   }
 
   return (
     <Flex>
       <Box
-        display={'flex'}
-        alignItems={'center'}
+        display={"flex"}
+        alignItems={"center"}
         border="2px"
         padding={2}
         borderRadius={6}
-        borderColor={'origem.300'}
+        borderColor={"origem.300"}
         onClick={onOpen}
         _hover={{
-          background: '#f5f5f5',
-          transition: 'all 0.4s',
-          color: 'origem.300',
-          cursor: 'pointer',
-          borderColor: 'origem.500',
+          background: "#f5f5f5",
+          transition: "all 0.4s",
+          color: "origem.300",
+          cursor: "pointer",
+          borderColor: "origem.500",
         }}
         marginRight={3}
       >
@@ -71,9 +71,9 @@ export function AdicionarResponsavelModal(projectsForm: any) {
           size="sm"
         />
         <Text
-          fontSize={useBreakpointValue({ base: 'sm', md: 'sm' })}
-          fontWeight={'bold'}
-          color={'origem.500'}
+          fontSize={useBreakpointValue({ base: "sm", md: "sm" })}
+          fontWeight={"bold"}
+          color={"origem.500"}
         >
           ADICIONAR RESPONSÁVEL
         </Text>
@@ -107,8 +107,8 @@ export function AdicionarResponsavelModal(projectsForm: any) {
             </Flex>
             <Flex
               flexDirection={useBreakpointValue({
-                base: 'column',
-                md: 'row',
+                base: "column",
+                md: "row",
               })}
             ></Flex>
           </ModalBody>
@@ -120,8 +120,8 @@ export function AdicionarResponsavelModal(projectsForm: any) {
               color="white"
               onClick={() => saveResponsible()}
               _hover={{
-                background: 'origem.500',
-                transition: 'all 0.4s',
+                background: "origem.500",
+                transition: "all 0.4s",
               }}
             >
               SALVAR
