@@ -9,10 +9,7 @@
 }
 
 
-.table-container {
-  width: 998px;
-  height: 300px;
-  overflow-x: scroll !important;
-  overflow-y: scroll;
+.table-fix {
+  width: 980px;
   position: relative;
 }

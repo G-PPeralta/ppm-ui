@@ -12,19 +12,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 import "./projects.css";
-
-interface Projeto {
-  id: number;
-  nome: string;
-  valorTotalPrevisto: string;
-  prioridade: string;
-  complexidade: string;
-  responsavel: string;
-  coordenador: string;
-}
+import { Project } from "models/Project.model";
 
 interface TableProps {
-  data: Projeto[];
+  data: Project[];
   columns: any[];
 }
 

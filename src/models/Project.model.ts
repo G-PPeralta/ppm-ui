@@ -1,7 +1,7 @@
 export interface Project {
   id: number;
   nome: string;
-  valorTotalPrevisto: string;
+  valorTotalPrevisto: number;
   prioridade: string;
   complexidade: string;
   responsavel: string;

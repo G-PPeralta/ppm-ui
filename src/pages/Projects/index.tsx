@@ -22,34 +22,8 @@ import Sidebar from "components/SideBar";
 import { useProjects } from "hooks/useProjects";
 
 import "./projects.css";
-import ProjectTable from "./projectTable";
-
-const columnsProject: any[] = [
-  {
-    Header: "Nome",
-    accessor: "nome",
-  },
-  {
-    Header: "Total Previsto",
-    accessor: "valorTotalPrevisto",
-  },
-  {
-    Header: "Prioridade",
-    accessor: "prioridade",
-  },
-  {
-    Header: "Complexidade",
-    accessor: "complexidade",
-  },
-  {
-    Header: "Responsavel",
-    accessor: "responsavel",
-  },
-  {
-    Header: "Coordenador",
-    accessor: "coordenador",
-  },
-];
+// import ProjectTable from "./projectTable";
+import { TabelaProjetos } from "./components/TabelaProjetos";
 
 export function Projects() {
   const { projectsForm, loading, getAllProjects } = useProjects();
@@ -183,16 +157,15 @@ export function Projects() {
                       </Flex>
                     </Stack>
 
-                    <div className="table-container">
-                      {projetosFilter && (
-                        <>
-                          <ProjectTable
+                    {projetosFilter && (
+                      <>
+                        {/* <ProjectTable
                             data={projetosFilter}
                             columns={columnsProject}
-                          />
-                        </>
-                      )}
-                    </div>
+                          /> */}
+                        <TabelaProjetos data={projetosFilter} />
+                      </>
+                    )}
                   </Stack>
                 </Box>
               </form>
