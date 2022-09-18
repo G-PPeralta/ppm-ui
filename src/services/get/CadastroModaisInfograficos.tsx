@@ -4,7 +4,7 @@ export async function getSondas(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/sonda", token());
+  const { data, status } = await api.get("/campanha", token());
 
   return { data, status };
 }

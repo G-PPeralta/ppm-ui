@@ -10,7 +10,8 @@ import { cadastroNovaIntervencaoSchema } from "validations/ModaisCadastrosInfogr
 
 import { useToast } from "contexts/Toast";
 
-import { getSondas, getPocos } from "services/get/CadastroModaisInfograficos";
+import { getPocos } from "services/get/CadastroModaisInfograficos";
+import { getInfoCampanha } from "services/get/Infograficos";
 import { postNovaIntervencao } from "services/post/CadastroModaisInfograficos";
 
 import { useAuth } from "./useAuth";
@@ -23,11 +24,16 @@ export function useCadastroIntervencao() {
   const { user } = useAuth();
 
   const reqGet = async () => {
-    const sondas = await getSondas();
+    const campanha = await getInfoCampanha();
     const pocos = await getPocos();
 
-    const sondasSorted = sondas.data.sort((a: ListaSonda, b: ListaSonda) =>
-      a.nome.localeCompare(b.nome)
+    const arraySondas = campanha.data.map(({ sonda, id_campanha }: any) => ({
+      sonda,
+      id_campanha,
+    }));
+
+    const sondasSorted = arraySondas.sort((a: any, b: any) =>
+      a.sonda.localeCompare(b.sonda)
     );
     const pocosSorted = pocos.data.sort((a: ListaPoco, b: ListaPoco) =>
       a.poco.localeCompare(b.poco)
