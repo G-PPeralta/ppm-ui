@@ -61,7 +61,7 @@ export const cadastroNovaCampanhaSchema = yup.object({
 });
 
 export const cadastroNovaIntervencaoSchema = yup.object({
-  pocoId: yup.number().required("Poço é obrigatório"),
-  sondaId: yup.number().required("Sonda é obrigatória"),
-  comentarios: yup.string(),
+  nom_atividade: yup.string().required("Poço é obrigatório"),
+  id_campanha: yup.number().required("Sonda é obrigatória"),
+  dsc_comentario: yup.string(),
 });

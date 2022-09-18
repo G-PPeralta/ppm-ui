@@ -103,20 +103,22 @@ function ModalIntervencao() {
 
                     <Stack>
                       <FormControl>
-                        <FormLabel htmlFor="comentarios">COMENTÁRIOS</FormLabel>
+                        <FormLabel htmlFor="dsc_comentario">
+                          COMENTÁRIOS
+                        </FormLabel>
                         <Textarea
                           isRequired
                           placeholder="Adicione comentários sobre a intervenção"
-                          id="comentarios"
-                          name="comentarios"
-                          value={intervencaoForm.values.comentarios}
+                          id="dsc_comentario"
+                          name="dsc_comentario"
+                          value={intervencaoForm.values.dsc_comentario}
                           onChange={intervencaoForm.handleChange}
                           w={"100%"}
                         />
-                        {intervencaoForm.errors.comentarios &&
-                          intervencaoForm.touched.comentarios && (
+                        {intervencaoForm.errors.dsc_comentario &&
+                          intervencaoForm.touched.dsc_comentario && (
                             <TextError>
-                              {intervencaoForm.errors.comentarios}
+                              {intervencaoForm.errors.dsc_comentario}
                             </TextError>
                           )}
                       </FormControl>

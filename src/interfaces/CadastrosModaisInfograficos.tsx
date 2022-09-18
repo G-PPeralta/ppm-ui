@@ -1,5 +1,5 @@
 interface User {
-  nom_usu_create: string | undefined;
+  nom_usu_create: string | undefined; // enviar o nome do usuário logado
 }
 
 export interface CadastroSonda {
@@ -84,9 +84,13 @@ export interface NovaCampanha {
 }
 
 export interface NovaIntervencao extends User {
-  sondaId: number;
-  pocoId: number;
-  comentarios: string;
+  id_campanha: number; // enviar id da sonda
+  nom_atividade: string; // enviar nome do poço
+  dsc_comentario: string; // enviar comentario
+  id_pai: number; // sempre enviar 0
+  pct_real: number; // sempre enviar 0
+  dat_ini_plan: null; // sempre enviar null
+  dat_fim_plan: null; // sempre enviar null
 }
 
 export interface NovoPoco extends User {

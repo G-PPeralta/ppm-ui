@@ -38,10 +38,14 @@ export function useCadastroIntervencao() {
   };
 
   const initialValues: NovaIntervencao = {
-    pocoId: 0,
-    sondaId: 0,
-    comentarios: "",
-    nom_usu_create: user?.nome,
+    id_pai: 0, // sempre enviar 0
+    pct_real: 0, // sempre enviar 0
+    dat_ini_plan: null, // sempre enviar null
+    dat_fim_plan: null, // sempre enviar null
+    id_campanha: 0, // enviar id da sonda
+    nom_atividade: "", // enviar nome do poço
+    dsc_comentario: "", // enviar comentario
+    nom_usu_create: user?.nome, // enviar o nome do usuário logado
   };
 
   const intervencaoForm = useFormik({
@@ -49,9 +53,13 @@ export function useCadastroIntervencao() {
     validationSchema: cadastroNovaIntervencaoSchema,
     onSubmit: async (values) => {
       const newValues: NovaIntervencao = {
-        pocoId: values.pocoId,
-        sondaId: values.sondaId,
-        comentarios: values.comentarios,
+        id_pai: 0,
+        pct_real: 0,
+        dat_ini_plan: null,
+        dat_fim_plan: null,
+        id_campanha: values.id_campanha,
+        nom_atividade: values.nom_atividade,
+        dsc_comentario: values.dsc_comentario,
         nom_usu_create: user?.nome,
       };
 
