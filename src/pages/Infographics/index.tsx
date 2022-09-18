@@ -12,14 +12,11 @@ import ColumnSPT from "./Components/ColumnSPT";
 import ExibirModal from "./Components/ExibirModal";
 import FiltrosModal from "./Components/FiltrosModal";
 import ModalBotaoCadastrar from "./Components/ModalBotaoCadastrar";
-import ModalCadastrarProjetoTipo from "./Components/ModalCadastrarProjetoTipo";
 import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
-// import ModalCadastrarTarefa from "./Components/ModalCadastrarTarefa";
-// import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
 import ModalCadastroPoco from "./Components/ModalCadastroPoco";
+import ModalNovaCampanha from "./Components/ModalNovaCampanha";
 import StatusProjeto from "./Components/StatusProjeto";
 
-import "./infographics.css";
 export function Infographics() {
   const [loading, setLoading] = useState(true);
   const [campanhas, setCampanhas] = useState([]);
@@ -64,10 +61,8 @@ export function Infographics() {
                   mb={4}
                 >
                   <Flex gap={2}>
-                    <ModalCadastrarProjetoTipo />
+                    <ModalNovaCampanha />
                     <ModalCadastrarSonda />
-                    {/* <ModalCadastroAtividade /> */}
-                    {/* <ModalCadastrarTarefa /> */}
                     <ModalCadastroPoco />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
@@ -91,12 +86,11 @@ export function Infographics() {
                     {campanhas &&
                       campanhas.map((column, index) => (
                         <Flex
-                          className="box-pocos"
                           key={index}
                           direction={"column"}
                           gap={4}
                           align={"center"}
-                          justify={"center"}
+                          justify={"space-between"}
                         >
                           <ColumnSPT column={column} />
                           <ModalBotaoCadastrar />

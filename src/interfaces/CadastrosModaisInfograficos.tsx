@@ -72,3 +72,8 @@ export interface ListaProjetoTipo {
   nome: string;
   atividades: AtividadeListaProjetoTipo[];
 }
+
+export interface NovaCampanha {
+  nome: string;
+  comentarios: string;
+}
