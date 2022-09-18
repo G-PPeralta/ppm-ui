@@ -4,10 +4,10 @@ import Select from "react-select";
 import { FormControl, FormLabel } from "@chakra-ui/react";
 import { ListaSonda } from "interfaces/CadastrosModaisInfograficos";
 
-import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
+import { useCadastroIntervencaoOLD } from "hooks/useCadastroIntervencaoOLD";
 
 function SelectFiltragemProjetos({ intervencaoForm }: any) {
-  const { listaProjetosTipo } = useCadastroIntervencao();
+  const { listaProjetosTipo } = useCadastroIntervencaoOLD();
 
   const options = listaProjetosTipo.map((projeto: ListaSonda) => ({
     value: projeto.id,

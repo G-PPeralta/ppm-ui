@@ -2,38 +2,26 @@ import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
 import {
-  CadastroIntervencao,
   ListaPoco,
-  ListaProjetoTipo,
   ListaSonda,
+  NovaIntervencao,
 } from "interfaces/CadastrosModaisInfograficos";
-import { cadastroIntervencaoSchema } from "validations/ModaisCadastrosInfografico";
+import { cadastroNovaIntervencaoSchema } from "validations/ModaisCadastrosInfografico";
 
 import { useToast } from "contexts/Toast";
 
-import {
-  getSondas,
-  getPocos,
-  getProjetosTipo,
-  getResponsaveis,
-} from "services/get/CadastroModaisInfograficos";
-import { postCadastroIntervencao } from "services/post/CadastroModaisInfograficos";
+import { getSondas, getPocos } from "services/get/CadastroModaisInfograficos";
+import { postNovaIntervencao } from "services/post/CadastroModaisInfograficos";
 
 export function useCadastroIntervencao() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [listaSondas, setListaSondas] = useState<ListaSonda[]>([]);
   const [listaPocos, setListaPocos] = useState<ListaPoco[]>([]);
-  const [listaProjetosTipo, setListaProjetosTipo] = useState<
-    ListaProjetoTipo[]
-  >([]);
-  const [listaResponsaveis, setListaResponsaveis] = useState<any[]>([]);
 
   const reqGet = async () => {
     const sondas = await getSondas();
     const pocos = await getPocos();
-    const projetosTipo = await getProjetosTipo();
-    const responsaveis = await getResponsaveis();
 
     const sondasSorted = sondas.data.sort((a: ListaSonda, b: ListaSonda) =>
       a.nome.localeCompare(b.nome)
@@ -41,53 +29,31 @@ export function useCadastroIntervencao() {
     const pocosSorted = pocos.data.sort((a: ListaPoco, b: ListaPoco) =>
       a.poco.localeCompare(b.poco)
     );
-    const projetosTipoSorted = projetosTipo.data.sort(
-      (a: ListaProjetoTipo, b: ListaProjetoTipo) => a.nome.localeCompare(b.nome)
-    );
-    const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
-      a.nome.localeCompare(b.nome)
-    );
 
     setListaSondas(sondasSorted);
     setListaPocos(pocosSorted);
-    setListaProjetosTipo(projetosTipoSorted);
-    setListaResponsaveis(responsaveisSorted);
+  };
+
+  const initialValues: NovaIntervencao = {
+    pocoId: 0,
+    sondaId: 0,
+    comentarios: "",
   };
 
   const intervencaoForm = useFormik({
-    initialValues: {
-      nome: "",
-      pocoId: 0,
-      sptId: 0,
-      tipoProjetoId: 0,
-      inicioPlanejado: "",
-      fimPlanejado: "",
-      atividades: [
-        {
-          ordem: 1,
-          atividade: "",
-          responsavel: 0,
-        },
-      ],
-      observacoes: "",
-    },
-    validationSchema: cadastroIntervencaoSchema,
+    initialValues,
+    validationSchema: cadastroNovaIntervencaoSchema,
     onSubmit: async (values) => {
-      const newValues: CadastroIntervencao = {
-        nome: values.nome,
+      const newValues: NovaIntervencao = {
         pocoId: values.pocoId,
-        sptId: values.sptId,
-        tipoProjetoId: values.tipoProjetoId,
-        inicioPlanejado: values.inicioPlanejado,
-        fimPlanejado: values.fimPlanejado,
-        atividades: values.atividades,
-        observacoes: values.observacoes,
+        sondaId: values.sondaId,
+        comentarios: values.comentarios,
       };
 
       setLoading(true);
 
       try {
-        const { status } = await postCadastroIntervencao(newValues);
+        const { status } = await postNovaIntervencao(newValues);
 
         if (status === 200 || status === 201) {
           toast.success("Intervenção cadastrada com sucesso!", {
@@ -105,15 +71,20 @@ export function useCadastroIntervencao() {
   });
 
   useEffect(() => {
+    setLoading(true);
     reqGet();
   }, []);
+
+  useEffect(() => {
+    if (listaSondas.length > 0 && listaPocos.length > 0) {
+      setLoading(false);
+    }
+  }, [listaSondas, listaPocos]);
 
   return {
     intervencaoForm,
     loading,
     listaSondas,
     listaPocos,
-    listaProjetosTipo,
-    listaResponsaveis,
   };
 }

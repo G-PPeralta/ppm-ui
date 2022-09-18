@@ -5,7 +5,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { Box, Flex, FormControl, Select, Text } from "@chakra-ui/react";
 
-import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
+import { useCadastroIntervencaoOLD } from "hooks/useCadastroIntervencaoOLD";
 
 interface Props {
   index: number;
@@ -24,7 +24,7 @@ function AtividadesDraggable({
   list,
   intervencaoForm,
 }: Props) {
-  const { listaResponsaveis } = useCadastroIntervencao();
+  const { listaResponsaveis } = useCadastroIntervencaoOLD();
 
   const id = useId();
 

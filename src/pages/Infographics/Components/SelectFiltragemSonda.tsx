@@ -22,8 +22,8 @@ function SelectFiltragemSondas({ intervencaoForm }: any) {
       <FormControl>
         <FormLabel>SONDA</FormLabel>
         <Select
-          id="sptId"
-          name="sptId"
+          id="sondaId"
+          name="sondaId"
           placeholder="Selecione"
           onChange={(event, name) => handleChange(event, name)}
           options={options}

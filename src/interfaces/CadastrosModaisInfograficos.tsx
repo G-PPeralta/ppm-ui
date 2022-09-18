@@ -74,6 +74,13 @@ export interface ListaProjetoTipo {
 }
 
 export interface NovaCampanha {
-  nome: string;
+  nom_campanha: string;
+  dsc_comentario: string;
+  nom_usu_create: string | undefined;
+}
+
+export interface NovaIntervencao {
+  sondaId: number;
+  pocoId: number;
   comentarios: string;
 }

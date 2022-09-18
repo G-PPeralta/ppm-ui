@@ -11,9 +11,9 @@ import { statusProjeto } from "../../utils/validateDate";
 import ColumnSPT from "./Components/ColumnSPT";
 import ExibirModal from "./Components/ExibirModal";
 import FiltrosModal from "./Components/FiltrosModal";
-import ModalBotaoCadastrar from "./Components/ModalBotaoCadastrar";
 import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
 import ModalCadastroPoco from "./Components/ModalCadastroPoco";
+import ModalIntervencao from "./Components/ModalIntervencao";
 import ModalNovaCampanha from "./Components/ModalNovaCampanha";
 import StatusProjeto from "./Components/StatusProjeto";
 
@@ -93,7 +93,7 @@ export function Infographics() {
                           justify={"space-between"}
                         >
                           <ColumnSPT column={column} />
-                          <ModalBotaoCadastrar />
+                          <ModalIntervencao />
                         </Flex>
                       ))}
                   </Box>

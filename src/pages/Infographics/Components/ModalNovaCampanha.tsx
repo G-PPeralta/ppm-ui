@@ -6,7 +6,7 @@ import {
   Input,
   Modal,
   ModalBody,
-  ModalCloseButton,
+  // ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -59,7 +59,7 @@ function ModalNovaCampanha() {
           >
             Cadastrar Nova Campanha
           </ModalHeader>
-          <ModalCloseButton color={"white"} />
+          {/* <ModalCloseButton color={"white"} /> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -82,15 +82,17 @@ function ModalNovaCampanha() {
                         <Input
                           isRequired
                           placeholder="Nome da campanha"
-                          id="nome"
+                          id="nom_campanha"
                           type="text"
-                          name="nome"
-                          value={registerForm.values.nome}
+                          name="nom_campanha"
+                          value={registerForm.values.nom_campanha}
                           onChange={registerForm.handleChange}
                         />
-                        {registerForm.errors.nome &&
-                          registerForm.touched.nome && (
-                            <TextError>{registerForm.errors.nome}</TextError>
+                        {registerForm.errors.nom_campanha &&
+                          registerForm.touched.nom_campanha && (
+                            <TextError>
+                              {registerForm.errors.nom_campanha}
+                            </TextError>
                           )}
                       </FormControl>
                     </Flex>
@@ -105,19 +107,21 @@ function ModalNovaCampanha() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="comentarios">COMENTÁRIOS</FormLabel>
+                        <FormLabel htmlFor="dsc_comentario">
+                          COMENTÁRIOS
+                        </FormLabel>
                         <Textarea
                           isRequired
                           placeholder="Adicione comentários sobre a campanha"
-                          id="comentarios"
-                          name="comentarios"
-                          value={registerForm.values.comentarios}
+                          id="dsc_comentario"
+                          name="dsc_comentario"
+                          value={registerForm.values.dsc_comentario}
                           onChange={registerForm.handleChange}
                         />
-                        {registerForm.errors.comentarios &&
-                          registerForm.touched.comentarios && (
+                        {registerForm.errors.dsc_comentario &&
+                          registerForm.touched.dsc_comentario && (
                             <TextError>
-                              {registerForm.errors.comentarios}
+                              {registerForm.errors.dsc_comentario}
                             </TextError>
                           )}
                       </FormControl>

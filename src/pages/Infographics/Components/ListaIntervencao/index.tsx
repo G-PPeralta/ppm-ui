@@ -7,7 +7,7 @@ import {
 
 import { FormLabel } from "@chakra-ui/react";
 
-import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
+import { useCadastroIntervencaoOLD } from "hooks/useCadastroIntervencaoOLD";
 
 import AtividadesDraggable from "./AtividadesDraggable";
 // import BotaoAdicionar from './BotaoAdicionar';
@@ -34,7 +34,7 @@ export default function ListDnD({
   const [list, setList] = useState<any>([]);
   const [render, setRender] = useState<any>([]);
   const [id, setId] = useState<any>("listID");
-  const { listaProjetosTipo } = useCadastroIntervencao();
+  const { listaProjetosTipo } = useCadastroIntervencaoOLD();
 
   function onDragEnd(result: any) {
     if (!result.destination) {

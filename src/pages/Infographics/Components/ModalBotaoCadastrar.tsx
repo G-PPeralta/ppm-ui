@@ -30,15 +30,15 @@ import { TextError } from "components/TextError";
 import { formatDate, formatDateToYMD } from "utils/formatDate";
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
+import { useCadastroIntervencaoOLD } from "hooks/useCadastroIntervencaoOLD";
 
-import SelectFiltragemPocos from "./SelectFiltragemPocos";
+// import SelectFiltragemPocos from "./SelectFiltragemPocos";
 import SelectFiltragemProjetos from "./SelectFiltragemProjetos";
-import SelectFiltragemSondas from "./SelectFiltragemSonda";
+// import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
 function ModalBotaoCadastrar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { intervencaoForm, loading } = useCadastroIntervencao();
+  const { intervencaoForm, loading } = useCadastroIntervencaoOLD();
   const [qtdeDias, setQtdeDias] = useState<any>(0);
   const [dataFinal, setDataFinal] = useState<any>("dd/mm/aaaa");
 
@@ -159,10 +159,10 @@ function ModalBotaoCadastrar() {
                       })}
                       gap={5}
                     >
-                      <SelectFiltragemPocos intervencaoForm={intervencaoForm} />
+                      {/* <SelectFiltragemPocos intervencaoForm={intervencaoForm} />
                       <SelectFiltragemSondas
                         intervencaoForm={intervencaoForm}
-                      />
+                      /> */}
                     </Flex>
 
                     <Stack>
