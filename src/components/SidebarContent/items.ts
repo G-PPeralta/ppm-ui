@@ -8,6 +8,7 @@ import {
   // FiActivity,
   // FiUsers,
   FiFile,
+  FiGrid,
 } from "react-icons/fi";
 
 interface LinkItemProps {
@@ -42,4 +43,9 @@ export const LinkItems: Array<LinkItemProps> = [
     icon: BsBarChartSteps,
     link: "/detalhamento/191",
   },
+  {
+    name: "Projetos",
+    icon: FiGrid,
+    link: "/projects/",
+  }
 ];
