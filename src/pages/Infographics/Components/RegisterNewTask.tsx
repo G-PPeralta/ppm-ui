@@ -355,7 +355,6 @@ export function RegisterNewTask({ isOpen, onClose }: Props) {
               colorScheme="blue"
               backgroundColor="#0047BB"
               mr={3}
-              onClick={() => console.log("submeteu")}
               color="white"
             >
               Concluir cadastro

@@ -19,6 +19,7 @@ import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
 import ModalCadastroPoco from "./Components/ModalCadastroPoco";
 import StatusProjeto from "./Components/StatusProjeto";
 
+import "./infographics.css";
 export function Infographics() {
   const [loading, setLoading] = useState(true);
   const [campanhas, setCampanhas] = useState([]);
@@ -26,7 +27,6 @@ export function Infographics() {
   const handleGetCampanha = async () => {
     const response = await getInfoCampanha();
     setCampanhas(response.data);
-    console.log(response.data);
     setLoading(false);
   };
 
@@ -56,7 +56,13 @@ export function Infographics() {
                     <FiltrosModal />
                   </Flex>
                 </Flex>
-                <Flex justify={"space-between"} gap={6} wrap={"wrap"} mb={4}>
+                <Flex
+                  direction={"column"}
+                  justify={"space-between"}
+                  gap={6}
+                  wrap={"wrap"}
+                  mb={4}
+                >
                   <Flex gap={2}>
                     <ModalCadastrarProjetoTipo />
                     <ModalCadastrarSonda />
