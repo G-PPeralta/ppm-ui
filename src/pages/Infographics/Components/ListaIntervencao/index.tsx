@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   DragDropContext,
   Droppable,
   DroppableProvided,
-} from 'react-beautiful-dnd';
+} from "react-beautiful-dnd";
 
-import { FormLabel } from '@chakra-ui/react';
+import { FormLabel } from "@chakra-ui/react";
 
-import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
+import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
-import AtividadesDraggable from './AtividadesDraggable';
+import AtividadesDraggable from "./AtividadesDraggable";
 // import BotaoAdicionar from './BotaoAdicionar';
 
 const reorder = (list: any, startIndex: any, endIndex: any) => {
@@ -33,7 +33,7 @@ export default function ListDnD({
 }: Props) {
   const [list, setList] = useState<any>([]);
   const [render, setRender] = useState<any>([]);
-  const [id, setId] = useState<any>('listID');
+  const [id, setId] = useState<any>("listID");
   const { listaProjetosTipo } = useCadastroIntervencao();
 
   function onDragEnd(result: any) {
@@ -48,7 +48,7 @@ export default function ListDnD({
     const newList = reorder(
       list,
       result.source.index,
-      result.destination.index,
+      result.destination.index
     );
     setList(newList);
   }
@@ -85,19 +85,19 @@ export default function ListDnD({
   useEffect(() => {
     setList(intervencaoForm.values.atividades);
     const now = Date.now();
-    const newId = id + '-' + now.toLocaleString();
+    const newId = id + "-" + now.toLocaleString();
     setId(newId);
   }, []);
 
   useEffect(() => {
     if (intervencaoForm.values.projetoId) {
       const projeto = listaProjetosTipo.find(
-        (projeto: any) => projeto.id === intervencaoForm.values.projetoId,
+        (projeto: any) => projeto.id === intervencaoForm.values.projetoId
       );
 
       const duracaoProjeto = projeto?.atividades.reduce(
         (acc: any, cur: any) => acc + Number(cur.atividade.dias),
-        0,
+        0
       );
 
       if (projeto) {

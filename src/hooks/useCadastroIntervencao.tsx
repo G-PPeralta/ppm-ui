@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 import {
   ListaPoco,
   ListaProjetoTipo,
   ListaSonda,
-} from 'interfaces/CadastrosModaisInfograficos';
+} from "interfaces/CadastrosModaisInfograficos";
 // import { cadastroIntervencaoSchema } from 'validations/ModaisCadastrosInfografico';
 
-import { useToast } from 'contexts/Toast';
+import { useToast } from "contexts/Toast";
 
 import {
   getSondas,
   getPocos,
   getProjetosTipo,
   getResponsaveis,
-} from 'services/get/CadastroModaisInfograficos';
-import { postCadastroIntervencao } from 'services/post/CadastroModaisInfograficos';
+} from "services/get/CadastroModaisInfograficos";
+import { postCadastroIntervencao } from "services/post/CadastroModaisInfograficos";
 
 export function useCadastroIntervencao() {
   const { toast } = useToast();
@@ -35,17 +35,16 @@ export function useCadastroIntervencao() {
     const responsaveis = await getResponsaveis();
 
     const sondasSorted = sondas.data.sort((a: ListaSonda, b: ListaSonda) =>
-      a.nome.localeCompare(b.nome),
+      a.nome.localeCompare(b.nome)
     );
     const pocosSorted = pocos.data.sort((a: ListaPoco, b: ListaPoco) =>
-      a.poco.localeCompare(b.poco),
+      a.poco.localeCompare(b.poco)
     );
     const projetosTipoSorted = projetosTipo.data.sort(
-      (a: ListaProjetoTipo, b: ListaProjetoTipo) =>
-        a.nome.localeCompare(b.nome),
+      (a: ListaProjetoTipo, b: ListaProjetoTipo) => a.nome.localeCompare(b.nome)
     );
     const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
-      a.nome.localeCompare(b.nome),
+      a.nome.localeCompare(b.nome)
     );
 
     setListaSondas(sondasSorted);
@@ -56,19 +55,19 @@ export function useCadastroIntervencao() {
 
   const intervencaoForm = useFormik({
     initialValues: {
-      nome: '',
+      nome: "",
       pocoId: 0,
       sondaId: 0,
       projetoId: 0,
-      inicioPrevisto: '',
+      inicioPrevisto: "",
       atividades: [
         {
           ordem: 1,
-          atividade: '',
-          responsavel: '',
+          atividade: "",
+          responsavel: "",
         },
       ],
-      comentarios: '',
+      comentarios: "",
     },
     // validationSchema: cadastroIntervencaoSchema,
     onSubmit: async (values) => {
@@ -88,14 +87,14 @@ export function useCadastroIntervencao() {
         const { status } = await postCadastroIntervencao(newValues);
 
         if (status === 200 || status === 201) {
-          toast.success('Intervenção cadastrada com sucesso!', {
-            id: 'toast-principal',
+          toast.success("Intervenção cadastrada com sucesso!", {
+            id: "toast-principal",
           });
           setLoading(false);
         }
       } catch (error) {
-        toast.error('Erro ao cadastrar intervenção!', {
-          id: 'toast-principal',
+        toast.error("Erro ao cadastrar intervenção!", {
+          id: "toast-principal",
         });
         setLoading(false);
       }

@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   DragDropContext,
   Droppable,
   DroppableProvided,
-} from 'react-beautiful-dnd';
+} from "react-beautiful-dnd";
 
-import { FormLabel } from '@chakra-ui/react';
+import { FormLabel } from "@chakra-ui/react";
 
-import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
+import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
 
-import AtividadesDraggable from './AtividadesDraggable';
-import BotaoAdicionar from './BotaoAdicionar';
+import AtividadesDraggable from "./AtividadesDraggable";
+import BotaoAdicionar from "./BotaoAdicionar";
 
 const reorder = (list: any, startIndex: any, endIndex: any) => {
   const result = Array.from(list);
@@ -23,7 +23,7 @@ const reorder = (list: any, startIndex: any, endIndex: any) => {
 export default function ListaAtividades({ atividades, handleParent }: any) {
   const [list, setList] = useState<any>([]);
   const [render, setRender] = useState<any>([]);
-  const [id, setId] = useState<any>('listID');
+  const [id, setId] = useState<any>("listID");
   const { listaAtividadesPrecedentes } = useCadastroProjetoTipo();
 
   function onDragEnd(result: any) {
@@ -38,7 +38,7 @@ export default function ListaAtividades({ atividades, handleParent }: any) {
     const newList = reorder(
       list,
       result.source.index,
-      result.destination.index,
+      result.destination.index
     );
     setList(newList);
   }
@@ -77,7 +77,7 @@ export default function ListaAtividades({ atividades, handleParent }: any) {
     });
     setList(newAtividades);
     const now = Date.now();
-    const newId = id + '-' + now.toLocaleString();
+    const newId = id + "-" + now.toLocaleString();
     setId(newId);
   }, []);
 

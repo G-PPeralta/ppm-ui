@@ -3,11 +3,11 @@ import {
   FormLabel,
   Input,
   useBreakpointValue,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 // import { FormikProps } from 'formik';
 // import { RegisterProjectProps } from 'interfaces/Services';
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
 function FormNomeProjeto(projectsForm: any) {
   // useEffect(() => {
@@ -24,7 +24,7 @@ function FormNomeProjeto(projectsForm: any) {
         name="nomeProjeto"
         value={projectsForm.projectsForm.values.nomeProjeto}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: '100%', md: '95%' })}
+        w={useBreakpointValue({ base: "100%", md: "95%" })}
       />
       {projectsForm.projectsForm.errors.nomeProjeto &&
         projectsForm.projectsForm.touched.nomeProjeto && (

@@ -1,5 +1,5 @@
-import { createContext, useContext } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import { createContext, useContext } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 interface ToastProps {
   toast: any;

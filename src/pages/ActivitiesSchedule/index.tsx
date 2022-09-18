@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-import { Box, Flex, Heading, Stack } from '@chakra-ui/react';
-import { Ring } from '@uiball/loaders';
+import { Box, Flex, Heading, Stack } from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
 
-import Sidebar from 'components/SideBar';
+import Sidebar from "components/SideBar";
 
-import { Atividade } from 'services/get/ActivitiesSchedule';
+import { Atividade } from "services/get/ActivitiesSchedule";
 
-import CardACT from './Components/CardACT';
+import CardACT from "./Components/CardACT";
 // import ExibirModal from './Components/ExibirModal';
 // import FiltrosModal from './Components/FiltrosModal';
-import ModalAtividade from './Components/ModalAtividade';
-import ModalCadastroAtividade from './Components/ModalCadastroAtividade';
-import StatusProjeto from './Components/StatusProjeto';
+import ModalAtividade from "./Components/ModalAtividade";
+import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
+import StatusProjeto from "./Components/StatusProjeto";
 
 export function ActivitiesSchedule() {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
-  const [openId, setOpenId] = useState('');
+  const [openId, setOpenId] = useState("");
 
   useEffect(() => {
     // console.log('scheadule', id);
@@ -28,24 +28,24 @@ export function ActivitiesSchedule() {
 
   const statusProjeto = [
     {
-      status: 'Não Aplicável',
-      color: '#F4DD06',
+      status: "Não Aplicável",
+      color: "#F4DD06",
     },
     {
-      status: 'Não Iniciado',
-      color: '#FFB400',
+      status: "Não Iniciado",
+      color: "#FFB400",
     },
     {
-      status: 'Concluído',
-      color: '#059502',
+      status: "Concluído",
+      color: "#059502",
     },
     {
-      status: 'Em Andamento',
-      color: '#0047BB',
+      status: "Em Andamento",
+      color: "#0047BB",
     },
     {
-      status: 'Atrasado',
-      color: '#F40606',
+      status: "Atrasado",
+      color: "#F40606",
     },
   ];
 
@@ -59,15 +59,15 @@ export function ActivitiesSchedule() {
       <Sidebar>
         {!loading ? (
           <Stack spacing="8">
-            <Flex w={'auto'} align="center" justify="center" bg={'#EDF2F7'}>
+            <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
               <Box
-                py={{ base: '0', sm: '8' }}
-                px={{ base: '4', sm: '6' }}
-                w={'100%'}
-                bg={'white'}
-                borderRadius={{ base: 'none', sm: 'xl' }}
+                py={{ base: "0", sm: "8" }}
+                px={{ base: "4", sm: "6" }}
+                w={"100%"}
+                bg={"white"}
+                borderRadius={{ base: "none", sm: "xl" }}
               >
-                <Flex justify={'space-between'} mb={5}>
+                <Flex justify={"space-between"} mb={5}>
                   <Heading as="h3" size="md" mb={3}>
                     Acompanhamento de atividades
                   </Heading>
@@ -76,11 +76,11 @@ export function ActivitiesSchedule() {
                     <FiltrosModal />
                   </Flex> */}
                 </Flex>
-                <Flex justify={'space-between'} gap={6} wrap={'wrap'} mb={4}>
+                <Flex justify={"space-between"} gap={6} wrap={"wrap"} mb={4}>
                   <Flex gap={2}>
                     <ModalCadastroAtividade />
                   </Flex>
-                  <Flex gap={4} wrap={'wrap'}>
+                  <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (
                       <StatusProjeto
                         key={index}
@@ -90,15 +90,15 @@ export function ActivitiesSchedule() {
                     ))}
                   </Flex>
                 </Flex>
-                <Flex direction={'row'} gap={4} py={4} wrap={'wrap'}>
+                <Flex direction={"row"} gap={4} py={4} wrap={"wrap"}>
                   {Atividade.map((atividade, index) => (
                     <Flex
                       key={index}
-                      direction={'column'}
-                      align={'center'}
-                      justify={'center'}
+                      direction={"column"}
+                      align={"center"}
+                      justify={"center"}
                       onClick={() => openDetails(atividade)}
-                      _hover={{ cursor: 'pointer' }}
+                      _hover={{ cursor: "pointer" }}
                     >
                       <CardACT atividade={atividade} />
                     </Flex>
@@ -108,14 +108,14 @@ export function ActivitiesSchedule() {
                   <ModalAtividade
                     id={id}
                     atividade={openId}
-                    onClose={() => setOpenId('')}
+                    onClose={() => setOpenId("")}
                   />
                 ) : undefined}
               </Box>
             </Flex>
           </Stack>
         ) : (
-          <Flex display={'flex'} align={'center'} justify={'center'} h={'90vh'}>
+          <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
             <Ring speed={2} lineWeight={5} color="blue" size={64} />
           </Flex>
         )}

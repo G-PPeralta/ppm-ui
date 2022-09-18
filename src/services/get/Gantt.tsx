@@ -1,14 +1,14 @@
 // import { GanttPayload } from 'interfaces/Services';
 
-import { api } from 'services/api';
+import { api } from "services/api";
 
 export async function getGanttData(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get('/gantt', {
+  const { data, status } = await api.get("/gantt", {
     headers: {
-      Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },
   });
 

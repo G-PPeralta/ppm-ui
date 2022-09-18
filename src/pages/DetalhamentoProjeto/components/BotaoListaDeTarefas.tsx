@@ -8,7 +8,7 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 function BotaoListadeTarefas() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -16,17 +16,17 @@ function BotaoListadeTarefas() {
     <>
       <Button
         onClick={onOpen}
-        background={'white'}
-        color={'origem.300'}
+        background={"white"}
+        color={"origem.300"}
         _hover={{
-          background: 'origem.500',
-          color: 'white',
-          transition: 'all 0.4s',
+          background: "origem.500",
+          color: "white",
+          transition: "all 0.4s",
         }}
         px={6}
         py={10}
-        borderTopRadius={'0px'}
-        borderBottomRadius={'0px'}
+        borderTopRadius={"0px"}
+        borderBottomRadius={"0px"}
       >
         Lista de Tarefas
       </Button>

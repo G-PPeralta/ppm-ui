@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
 import {
   Box,
@@ -6,14 +6,14 @@ import {
   Drawer,
   DrawerContent,
   useDisclosure,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import { MobileNav } from 'components/MobileNav';
-import { SidebarContent } from 'components/SidebarContent';
+import { MobileNav } from "components/MobileNav";
+import { SidebarContent } from "components/SidebarContent";
 
-import { useAuth } from 'hooks/useAuth';
+import { useAuth } from "hooks/useAuth";
 
-import styles from './Sidebar.module.scss';
+import styles from "./Sidebar.module.scss";
 
 export default function Sidebar({ children }: { children: ReactNode }) {
   const { user } = useAuth();
@@ -22,12 +22,12 @@ export default function Sidebar({ children }: { children: ReactNode }) {
   return (
     <Box
       minH="100vh"
-      bg={useColorModeValue('gray.100', 'gray.900')}
+      bg={useColorModeValue("gray.100", "gray.900")}
       className={styles.sidebar}
     >
       <SidebarContent
         onClose={() => onClose}
-        display={{ base: 'none', md: 'none', lg: 'block' }}
+        display={{ base: "none", md: "none", lg: "block" }}
       />
       <Drawer
         autoFocus={false}

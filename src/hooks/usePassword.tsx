@@ -1,16 +1,16 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { useFormik } from 'formik';
-import { newPasswordSchema } from 'validations/NewPassword';
+import { useFormik } from "formik";
+import { newPasswordSchema } from "validations/NewPassword";
 
 export function usePassword() {
   const [loading, setLoading] = useState(false);
 
   const newPasswordForm = useFormik({
     initialValues: {
-      password: '',
-      newPassword: '',
-      confirmNewPassword: '',
+      password: "",
+      newPassword: "",
+      confirmNewPassword: "",
     },
     validationSchema: newPasswordSchema,
     onSubmit: async (values) => {

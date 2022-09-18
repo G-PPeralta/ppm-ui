@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { useFormik } from 'formik';
-import { cadastroTarefaSchema } from 'validations/ModaisCadastrosInfografico';
+import { useFormik } from "formik";
+import { cadastroTarefaSchema } from "validations/ModaisCadastrosInfografico";
 
-import { useToast } from 'contexts/Toast';
+import { useToast } from "contexts/Toast";
 
-import { postCadastroTarefa } from 'services/post/CadastroModaisInfograficos';
+import { postCadastroTarefa } from "services/post/CadastroModaisInfograficos";
 
 export function useCadastroTarefa() {
   const { toast } = useToast();
@@ -13,7 +13,7 @@ export function useCadastroTarefa() {
 
   const registerForm = useFormik({
     initialValues: {
-      nomeTarefa: '',
+      nomeTarefa: "",
     },
     validationSchema: cadastroTarefaSchema,
     onSubmit: async (values) => {
@@ -28,13 +28,13 @@ export function useCadastroTarefa() {
 
         if (status === 200 || status === 201) {
           toast.success(`Tarefa ${values.nomeTarefa} cadastrada com sucesso!`, {
-            id: 'toast-principal',
+            id: "toast-principal",
           });
           setLoading(false);
         }
       } catch (error) {
         toast.error(`Erro ao cadastrar tarefa ${values.nomeTarefa}!`, {
-          id: 'toast-principal',
+          id: "toast-principal",
         });
         setLoading(false);
       }

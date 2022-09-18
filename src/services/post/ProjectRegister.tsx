@@ -4,27 +4,27 @@ import {
   RegisterProjectProps,
   Responsavel,
   ResponsavelRetorno,
-} from 'interfaces/Services';
+} from "interfaces/Services";
 
-import { api } from 'services/api';
+import { api } from "services/api";
 
 export async function postProject(
-  payload: RegisterProjectProps,
+  payload: RegisterProjectProps
 ): Promise<{ status: number }> {
-  const { status } = await api.post('/projetos/registro', payload);
+  const { status } = await api.post("/projetos/registro", payload);
   return { status };
 }
 
 export async function postResponsavel(
-  payload: Responsavel,
+  payload: Responsavel
 ): Promise<{ data: ResponsavelRetorno; status: number }> {
-  const { data, status } = await api.post('/responsavel', payload);
+  const { data, status } = await api.post("/responsavel", payload);
   return { data, status };
 }
 
 export async function postCoordenador(
-  payload: Coordenador,
+  payload: Coordenador
 ): Promise<{ data: CoordenadorRetorno; status: number }> {
-  const { data, status } = await api.post('/coordenador', payload);
+  const { data, status } = await api.post("/coordenador", payload);
   return { data, status };
 }

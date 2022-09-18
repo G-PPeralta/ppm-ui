@@ -1,0 +1,18 @@
+.toBottom {
+  display: flex;
+  align-items: flex-end;
+}
+
+.fullWidth {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+
+.table-container {
+  width: 998px;
+  height: 300px;
+  overflow-x: scroll !important;
+  overflow-y: scroll;
+  position: relative;
+}

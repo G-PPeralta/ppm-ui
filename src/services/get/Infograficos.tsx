@@ -3,9 +3,9 @@ import {
   AtividadeLista,
   RegistroResponsavel,
   Tarefa,
-} from 'interfaces/Services';
+} from "interfaces/Services";
 
-import { api, token } from 'services/api';
+import { api, token } from "services/api";
 
 export async function getInfoCampanha(): Promise<{
   data: any;
@@ -21,7 +21,7 @@ export async function getInfoProjetos(): Promise<{
 }> {
   const { data } = await api.get(`/dashboard/projetos-info`, {
     headers: {
-      Authorization: `Bearer ${sessionStorage.getItem('@Origem:token')}`,
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },
   });
 

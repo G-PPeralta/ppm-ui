@@ -9,13 +9,13 @@ import {
   Select,
   useBreakpointValue,
   useColorModeValue,
-} from '@chakra-ui/react';
-import { Ring } from '@uiball/loaders';
+} from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
 
-import Sidebar from 'components/SideBar';
-import { TextError } from 'components/TextError';
+import Sidebar from "components/SideBar";
+import { TextError } from "components/TextError";
 
-import { useActivities } from 'hooks/useActivities';
+import { useActivities } from "hooks/useActivities";
 
 export function ActivitiesRegistration() {
   const { activitiesForm, loading } = useActivities();
@@ -24,32 +24,32 @@ export function ActivitiesRegistration() {
     <>
       <Sidebar>
         {loading && (
-          <Flex display={'flex'} align={'center'} justify={'center'} h={'90vh'}>
+          <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
             <Ring speed={2} lineWeight={5} color="blue" size={64} />
           </Flex>
         )}
         <Stack spacing="8">
           <Flex
-            w={useBreakpointValue({ base: '100%', md: 'auto' })}
+            w={useBreakpointValue({ base: "100%", md: "auto" })}
             align="center"
             justify="center"
-            bg={useBreakpointValue({ base: 'white', sm: '#EDF2F7' })}
+            bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
           >
             <Box
-              py={{ base: '0', sm: '16' }}
-              px={{ base: '4', sm: '10' }}
+              py={{ base: "0", sm: "16" }}
+              px={{ base: "4", sm: "10" }}
               w={useBreakpointValue({
-                base: '20rem',
-                sm: '35rem',
-                md: '60rem',
-                lg: '80rem',
+                base: "20rem",
+                sm: "35rem",
+                md: "60rem",
+                lg: "80rem",
               })}
-              bg={useBreakpointValue({ base: 'transparent', sm: 'white' })}
+              bg={useBreakpointValue({ base: "transparent", sm: "white" })}
               boxShadow={{
-                base: 'none',
-                sm: useColorModeValue('md', 'md-dark'),
+                base: "none",
+                sm: useColorModeValue("md", "md-dark"),
               }}
-              borderRadius={{ base: 'none', sm: 'xl' }}
+              borderRadius={{ base: "none", sm: "xl" }}
             >
               <form
                 onSubmit={(e) => {
@@ -61,8 +61,8 @@ export function ActivitiesRegistration() {
                   <Stack spacing="5">
                     <Flex
                       flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
+                        base: "column",
+                        md: "row",
                       })}
                     >
                       <FormControl>
@@ -90,8 +90,8 @@ export function ActivitiesRegistration() {
                   <Stack spacing="5">
                     <Flex
                       flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
+                        base: "column",
+                        md: "row",
                       })}
                     >
                       <FormControl>
@@ -104,7 +104,7 @@ export function ActivitiesRegistration() {
                           name="responsible"
                           value={activitiesForm.values.responsible}
                           onChange={activitiesForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
+                          w={useBreakpointValue({ base: "100%", md: "100%" })}
                         />
                         {activitiesForm.errors.responsible &&
                           activitiesForm.touched.responsible && (
@@ -118,8 +118,8 @@ export function ActivitiesRegistration() {
                   <Stack spacing="5">
                     <Flex
                       flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
+                        base: "column",
+                        md: "row",
                       })}
                     >
                       <FormControl>
@@ -132,7 +132,7 @@ export function ActivitiesRegistration() {
                           name="c"
                           value={activitiesForm.values.c}
                           onChange={activitiesForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '95%' })}
+                          w={useBreakpointValue({ base: "100%", md: "95%" })}
                         />
                         {activitiesForm.errors.c &&
                           activitiesForm.touched.c && (
@@ -149,7 +149,7 @@ export function ActivitiesRegistration() {
                           name="spt"
                           value={activitiesForm.values.spt}
                           onChange={activitiesForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
+                          w={useBreakpointValue({ base: "100%", md: "100%" })}
                         />
                         {activitiesForm.errors.spt &&
                           activitiesForm.touched.spt && (
@@ -161,8 +161,8 @@ export function ActivitiesRegistration() {
                   <Stack spacing="5">
                     <Flex
                       flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
+                        base: "column",
+                        md: "row",
                       })}
                     >
                       <FormControl>
@@ -172,7 +172,7 @@ export function ActivitiesRegistration() {
                           name="pit"
                           value={activitiesForm.values.pit}
                           onChange={activitiesForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '95%' })}
+                          w={useBreakpointValue({ base: "100%", md: "95%" })}
                         >
                           <option value="pit1">Poço 1</option>
                           <option value="pit2">Poço 2</option>
@@ -193,7 +193,7 @@ export function ActivitiesRegistration() {
                           name="id"
                           value={activitiesForm.values.id}
                           onChange={activitiesForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
+                          w={useBreakpointValue({ base: "100%", md: "100%" })}
                         >
                           <option value="id1">ACD123-C</option>
                           <option value="id2">GAS983-T</option>
@@ -212,8 +212,8 @@ export function ActivitiesRegistration() {
                   <Stack spacing="5">
                     <Flex
                       flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
+                        base: "column",
+                        md: "row",
                       })}
                     >
                       <FormControl>
@@ -223,7 +223,7 @@ export function ActivitiesRegistration() {
                           name="task"
                           value={activitiesForm.values.task}
                           onChange={activitiesForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '95%' })}
+                          w={useBreakpointValue({ base: "100%", md: "95%" })}
                         >
                           <option value="task1">Tarefa 1</option>
                           <option value="task2">Tarefa 2</option>
@@ -247,7 +247,7 @@ export function ActivitiesRegistration() {
                           name="order"
                           value={activitiesForm.values.order}
                           onChange={activitiesForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
+                          w={useBreakpointValue({ base: "100%", md: "100%" })}
                         />
                         {activitiesForm.errors.order &&
                           activitiesForm.touched.order && (
@@ -259,8 +259,8 @@ export function ActivitiesRegistration() {
                   <Stack spacing="5">
                     <Flex
                       flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
+                        base: "column",
+                        md: "row",
                       })}
                     >
                       <FormControl>
@@ -275,7 +275,7 @@ export function ActivitiesRegistration() {
                           name="directSuccessors"
                           value={activitiesForm.values.directSuccessors}
                           onChange={activitiesForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
+                          w={useBreakpointValue({ base: "100%", md: "100%" })}
                         />
                         {activitiesForm.errors.directSuccessors &&
                           activitiesForm.touched.directSuccessors && (
@@ -289,8 +289,8 @@ export function ActivitiesRegistration() {
                   <Stack spacing="5">
                     <Flex
                       flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
+                        base: "column",
+                        md: "row",
                       })}
                     >
                       <FormControl>
@@ -305,7 +305,7 @@ export function ActivitiesRegistration() {
                           name="directPrecedents"
                           value={activitiesForm.values.directPrecedents}
                           onChange={activitiesForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
+                          w={useBreakpointValue({ base: "100%", md: "100%" })}
                         />
                         {activitiesForm.errors.directPrecedents &&
                           activitiesForm.touched.directPrecedents && (
@@ -319,8 +319,8 @@ export function ActivitiesRegistration() {
                   <Stack spacing="5">
                     <Flex
                       flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
+                        base: "column",
+                        md: "row",
                       })}
                     >
                       <FormControl>
@@ -333,7 +333,7 @@ export function ActivitiesRegistration() {
                           name="phase"
                           value={activitiesForm.values.phase}
                           onChange={activitiesForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
+                          w={useBreakpointValue({ base: "100%", md: "100%" })}
                         />
                         {activitiesForm.errors.phase &&
                           activitiesForm.touched.phase && (
@@ -345,8 +345,8 @@ export function ActivitiesRegistration() {
                   <Stack spacing="5">
                     <Flex
                       flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
+                        base: "column",
+                        md: "row",
                       })}
                     >
                       <FormControl>
@@ -361,7 +361,7 @@ export function ActivitiesRegistration() {
                           name="plannedDuration"
                           value={activitiesForm.values.plannedDuration}
                           onChange={activitiesForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
+                          w={useBreakpointValue({ base: "100%", md: "100%" })}
                         />
                         {activitiesForm.errors.plannedDuration &&
                           activitiesForm.touched.plannedDuration && (
@@ -375,8 +375,8 @@ export function ActivitiesRegistration() {
                   <Stack spacing="5">
                     <Flex
                       flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
+                        base: "column",
+                        md: "row",
                       })}
                     >
                       <FormControl>
@@ -389,7 +389,7 @@ export function ActivitiesRegistration() {
                           name="start"
                           value={activitiesForm.values.start}
                           onChange={activitiesForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '95%' })}
+                          w={useBreakpointValue({ base: "100%", md: "95%" })}
                         />
                         {activitiesForm.errors.start &&
                           activitiesForm.touched.start && (
@@ -406,7 +406,7 @@ export function ActivitiesRegistration() {
                           name="end"
                           value={activitiesForm.values.end}
                           onChange={activitiesForm.handleChange}
-                          w={useBreakpointValue({ base: '100%', md: '100%' })}
+                          w={useBreakpointValue({ base: "100%", md: "100%" })}
                         />
                         {activitiesForm.errors.end &&
                           activitiesForm.touched.end && (
@@ -423,8 +423,8 @@ export function ActivitiesRegistration() {
                       variant="primary"
                       color="white"
                       _hover={{
-                        background: 'origem.500',
-                        transition: 'all 0.4s',
+                        background: "origem.500",
+                        transition: "all 0.4s",
                       }}
                       mt="6"
                     >
@@ -436,7 +436,7 @@ export function ActivitiesRegistration() {
                           size={24}
                         />
                       ) : (
-                        'Cadastrar'
+                        "Cadastrar"
                       )}
                     </Button>
                   </Stack>

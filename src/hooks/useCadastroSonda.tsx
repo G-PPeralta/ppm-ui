@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { useFormik } from 'formik';
-import { cadastroSondaSchema } from 'validations/ModaisCadastrosInfografico';
+import { useFormik } from "formik";
+import { cadastroSondaSchema } from "validations/ModaisCadastrosInfografico";
 
-import { useToast } from 'contexts/Toast';
+import { useToast } from "contexts/Toast";
 
-import { postCadastroSonda } from 'services/post/CadastroModaisInfograficos';
+import { postCadastroSonda } from "services/post/CadastroModaisInfograficos";
 
 export function useCadastroSonda() {
   const { toast } = useToast();
@@ -13,7 +13,7 @@ export function useCadastroSonda() {
 
   const registerForm = useFormik({
     initialValues: {
-      nomeSpt: '',
+      nomeSpt: "",
     },
     validationSchema: cadastroSondaSchema,
     onSubmit: async (values) => {
@@ -28,13 +28,13 @@ export function useCadastroSonda() {
 
         if (status === 200 || status === 201) {
           toast.success(`Sonda ${values.nomeSpt} cadastrada com sucesso!`, {
-            id: 'toast-principal',
+            id: "toast-principal",
           });
           setLoading(false);
         }
       } catch (error) {
         toast.error(`Erro ao cadastrar sonda ${values.nomeSpt}!`, {
-          id: 'toast-principal',
+          id: "toast-principal",
         });
         setLoading(false);
       }

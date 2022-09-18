@@ -1,4 +1,4 @@
-import { BsFillQuestionCircleFill } from 'react-icons/bs';
+import { BsFillQuestionCircleFill } from "react-icons/bs";
 
 import {
   Button,
@@ -12,7 +12,7 @@ import {
   ModalCloseButton,
   IconButton,
   useDisclosure,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 export function InterrogacaoModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,10 +28,10 @@ export function InterrogacaoModal() {
         size="sm"
         onClick={onOpen}
         _hover={{
-          transition: 'all 0.4s',
-          color: 'origem.500',
-          cursor: 'pointer',
-          borderColor: 'origem.500',
+          transition: "all 0.4s",
+          color: "origem.500",
+          cursor: "pointer",
+          borderColor: "origem.500",
         }}
       />
       <Modal isOpen={isOpen} onClose={onClose} size="4xl">
@@ -48,8 +48,8 @@ export function InterrogacaoModal() {
               color="white"
               onClick={onClose}
               _hover={{
-                background: 'origem.500',
-                transition: 'all 0.4s',
+                background: "origem.500",
+                transition: "all 0.4s",
               }}
             >
               FECHAR

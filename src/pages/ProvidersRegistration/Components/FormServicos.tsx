@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 import {
   FormControl,
   FormLabel,
   Select,
   useBreakpointValue,
-} from '@chakra-ui/react';
-import { Polo } from 'interfaces/Services';
+} from "@chakra-ui/react";
+import { Polo } from "interfaces/Services";
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
-import { getPolo } from 'services/get/Projetos';
+import { getPolo } from "services/get/Projetos";
 
 function FormServicos(projectsForm: any) {
   const [poloState, setPoloState] = useState<Polo[]>([] as Polo[]);
@@ -35,7 +35,7 @@ function FormServicos(projectsForm: any) {
         name="poloId"
         value={projectsForm.projectsForm.values.poloId}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: '100%', md: '95%' })}
+        w={useBreakpointValue({ base: "100%", md: "95%" })}
       >
         {poloState.map((polo) => (
           <option key={polo.id} value={polo.id}>

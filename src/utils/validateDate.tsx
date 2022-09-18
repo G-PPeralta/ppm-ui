@@ -1,23 +1,23 @@
 export const statusProjeto = [
   {
-    status: 'Não Aplicável',
-    color: '#F4DD06',
+    status: "Não Aplicável",
+    color: "#F4DD06",
   },
   {
-    status: 'Não Iniciado',
-    color: '#FFB400',
+    status: "Não Iniciado",
+    color: "#FFB400",
   },
   {
-    status: 'Concluído',
-    color: '#059502',
+    status: "Concluído",
+    color: "#059502",
   },
   {
-    status: 'Em Andamento',
-    color: '#0047BB',
+    status: "Em Andamento",
+    color: "#0047BB",
   },
   {
-    status: 'Atrasado',
-    color: '#F40606',
+    status: "Atrasado",
+    color: "#F40606",
   },
 ];
 
@@ -30,11 +30,11 @@ export function validateDate(date: any) {
   // console.log('initialDate', initialDate);
 
   if (dateTime < initialDate) {
-    return statusProjeto['1'].color;
+    return statusProjeto["1"].color;
   }
   if (dateTime > initialDate) {
-    return statusProjeto['3'].color;
+    return statusProjeto["3"].color;
   } else {
-    return statusProjeto['0'].color;
+    return statusProjeto["0"].color;
   }
 }

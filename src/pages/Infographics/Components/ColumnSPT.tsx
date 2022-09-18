@@ -1,6 +1,6 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Text } from "@chakra-ui/react";
 
-import CardPIR from './CardPIR';
+import CardPIR from "./CardPIR";
 
 type Poco = {
   poco: string;
@@ -18,11 +18,11 @@ type Props = {
 
 function ColumnSPT({ column }: Props) {
   return (
-    <Flex direction={'column'} align={'center'} justify={'center'}>
-      <Text fontSize={'2xl'} fontWeight={'bold'} mb={6} mt={3}>
+    <Flex direction={"column"} align={"center"} justify={"center"}>
+      <Text fontSize={"2xl"} fontWeight={"bold"} mb={6} mt={3}>
         {column.sonda}
       </Text>
-      <Flex direction={'column'} gap={10} align={'center'} justify={'center'}>
+      <Flex direction={"column"} gap={10} align={"center"} justify={"center"}>
         {column.pocos.map((poco, index) => (
           <CardPIR poco={poco} index={index} key={index} />
         ))}

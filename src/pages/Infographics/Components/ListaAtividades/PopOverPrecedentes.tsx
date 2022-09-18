@@ -11,7 +11,7 @@ import {
   PopoverHeader,
   PopoverTrigger,
   Stack,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 function PopOverPrecedentes({ handlePopover, atividades }: any) {
   return (
@@ -19,12 +19,12 @@ function PopOverPrecedentes({ handlePopover, atividades }: any) {
       <Popover isLazy>
         <PopoverTrigger>
           <Button
-            backgroundColor={'white'}
-            fontWeight={'400'}
+            backgroundColor={"white"}
+            fontWeight={"400"}
             _hover={{
-              backgroundColor: 'origem.500',
-              color: 'white',
-              transition: 'all 0.4s',
+              backgroundColor: "origem.500",
+              color: "white",
+              transition: "all 0.4s",
             }}
           >
             Selecionar
@@ -38,7 +38,7 @@ function PopOverPrecedentes({ handlePopover, atividades }: any) {
           <PopoverCloseButton />
           <PopoverBody>
             <CheckboxGroup colorScheme="blue">
-              <Stack spacing={[1, 3]} direction={'column'}>
+              <Stack spacing={[1, 3]} direction={"column"}>
                 {atividades.map((atividade: any, index: any) => (
                   <Checkbox
                     key={index}

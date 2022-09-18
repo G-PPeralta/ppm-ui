@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 // import { cadastroProjetoTipoSchema } from 'validations/ModaisCadastrosInfografico';
-import { AtividadeLista } from 'interfaces/Services';
+import { AtividadeLista } from "interfaces/Services";
 
-import { useToast } from 'contexts/Toast';
+import { useToast } from "contexts/Toast";
 
-import { getAtividadesList } from 'services/get/Infograficos';
-import { postProjetoTipo } from 'services/post/CadastroModaisInfograficos';
+import { getAtividadesList } from "services/get/Infograficos";
+import { postProjetoTipo } from "services/post/CadastroModaisInfograficos";
 
 export function useCadastroProjetoTipo() {
   const { toast } = useToast();
@@ -29,14 +29,14 @@ export function useCadastroProjetoTipo() {
 
   const registerForm = useFormik({
     initialValues: {
-      nome: '',
+      nome: "",
       atividades: [
         {
           atividadeId: 0,
           precedentes: [0],
         },
       ],
-      comentarios: '',
+      comentarios: "",
     },
     // validationSchema: cadastroProjetoTipoSchema,
     onSubmit: async (values) => {
@@ -52,14 +52,14 @@ export function useCadastroProjetoTipo() {
         const { status } = await postProjetoTipo(newValues);
 
         if (status === 200 || status === 201) {
-          toast.success('Projeto Tipo cadastrado com sucesso!', {
-            id: 'toast-principal',
+          toast.success("Projeto Tipo cadastrado com sucesso!", {
+            id: "toast-principal",
           });
           setLoading(false);
         }
       } catch (error) {
-        toast.error('Erro ao cadastrar Projeto Tipo!', {
-          id: 'toast-principal',
+        toast.error("Erro ao cadastrar Projeto Tipo!", {
+          id: "toast-principal",
         });
         setLoading(false);
       }

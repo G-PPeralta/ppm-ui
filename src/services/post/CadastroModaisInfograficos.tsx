@@ -5,52 +5,52 @@ import {
   CadastroIntervencao,
   CadastroAtividade,
   CadastroPoco,
-} from 'interfaces/CadastrosModaisInfograficos';
+} from "interfaces/CadastrosModaisInfograficos";
 
-import { api, token } from 'services/api';
+import { api, token } from "services/api";
 
 export async function postCadastroTarefa(
-  payload: CadastroTarefa,
+  payload: CadastroTarefa
 ): Promise<{ status: number }> {
-  const { status } = await api.post('/tarefa', payload, token());
+  const { status } = await api.post("/tarefa", payload, token());
   return { status };
 }
 
 export async function postCadastroSonda(
-  payload: CadastroSonda,
+  payload: CadastroSonda
 ): Promise<{ status: number }> {
-  const { status } = await api.post('/sonda', payload, token());
+  const { status } = await api.post("/sonda", payload, token());
   return { status };
 }
 
 export async function postCadastroIntervencao(
-  payload: CadastroIntervencao,
+  payload: CadastroIntervencao
 ): Promise<{ status: number }> {
-  const { status } = await api.post('/intervencoes', payload, token());
+  const { status } = await api.post("/intervencoes", payload, token());
   return { status };
 }
 
 export async function postCadastroAtividade(
-  payload: CadastroAtividade,
+  payload: CadastroAtividade
 ): Promise<{ status: number }> {
   const { status } = await api.post(
-    '/atividades-intervencoes',
+    "/atividades-intervencoes",
     payload,
-    token(),
+    token()
   );
   return { status };
 }
 
 export async function postProjetoTipo(
-  payload: CadastroProjetoTipo,
+  payload: CadastroProjetoTipo
 ): Promise<{ status: number }> {
-  const { status } = await api.post('/projeto-intervencao', payload, token());
+  const { status } = await api.post("/projeto-intervencao", payload, token());
   return { status };
 }
 
 export async function postCadastroPoco(
-  payload: CadastroPoco,
+  payload: CadastroPoco
 ): Promise<{ status: number }> {
-  const { status } = await api.post('/poco', payload, token());
+  const { status } = await api.post("/poco", payload, token());
   return { status };
 }

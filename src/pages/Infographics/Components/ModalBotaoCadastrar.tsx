@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { BsPlusLg } from 'react-icons/bs';
+import { useEffect, useState } from "react";
+import { BsPlusLg } from "react-icons/bs";
 
 import {
   Flex,
@@ -20,27 +20,27 @@ import {
   Stack,
   useBreakpointValue,
   Textarea,
-} from '@chakra-ui/react';
-import { Ring } from '@uiball/loaders';
+} from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
 
-import ListDnD from 'pages/Infographics/Components/ListaIntervencao';
+import ListDnD from "pages/Infographics/Components/ListaIntervencao";
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
-import { formatDate } from 'utils/formatDate';
-import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
+import { formatDate } from "utils/formatDate";
+import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
+import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
-import SelectFiltragemPocos from './SelectFiltragemPocos';
-import SelectFiltragemProjetos from './SelectFiltragemProjetos';
-import SelectFiltragemSondas from './SelectFiltragemSonda';
+import SelectFiltragemPocos from "./SelectFiltragemPocos";
+import SelectFiltragemProjetos from "./SelectFiltragemProjetos";
+import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
 function ModalBotaoCadastrar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { intervencaoForm, loading } = useCadastroIntervencao();
   const [qtdeDias, setQtdeDias] = useState<any>(0);
-  const [dataFinal, setDataFinal] = useState<any>('');
+  const [dataFinal, setDataFinal] = useState<any>("");
 
   // console.log(intervencaoForm.values);
 
@@ -58,18 +58,18 @@ function ModalBotaoCadastrar() {
         mt={2}
         py={3}
         w="75%"
-        border={'2px'}
-        borderStyle={'dashed'}
-        borderColor={'origem.500'}
-        borderRadius={'3xl'}
-        direction={'column'}
+        border={"2px"}
+        borderStyle={"dashed"}
+        borderColor={"origem.500"}
+        borderRadius={"3xl"}
+        direction={"column"}
         gap={4}
-        align={'center'}
-        justify={'center'}
+        align={"center"}
+        justify={"center"}
         _hover={{
-          cursor: 'pointer',
-          backgroundColor: 'grey.100',
-          transition: 'all 0.4s',
+          cursor: "pointer",
+          backgroundColor: "grey.100",
+          transition: "all 0.4s",
         }}
         onClick={onOpen}
       >
@@ -83,7 +83,7 @@ function ModalBotaoCadastrar() {
           size="lg"
         />
 
-        <Text color={'origem.500'} fontWeight={600}>
+        <Text color={"origem.500"} fontWeight={600}>
           Cadastrar
         </Text>
       </Flex>
@@ -91,16 +91,16 @@ function ModalBotaoCadastrar() {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
-            backgroundColor={'#2E69FD'}
+            backgroundColor={"#2E69FD"}
             borderTopRadius={7}
-            display={'flex'}
-            justifyContent={'center'}
-            color={'white'}
-            fontSize={'1em'}
+            display={"flex"}
+            justifyContent={"center"}
+            color={"white"}
+            fontSize={"1em"}
           >
             Cadastrar Nova Intervenção/Perfuração
           </ModalHeader>
-          <ModalCloseButton color={'white'} />
+          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -109,12 +109,12 @@ function ModalBotaoCadastrar() {
           >
             <ModalBody mt={3}>
               <FormControl>
-                <Flex direction={'column'} gap={4}>
+                <Flex direction={"column"} gap={4}>
                   <Stack>
                     <Flex
                       flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
+                        base: "column",
+                        md: "row",
                       })}
                       gap={5}
                     >
@@ -138,8 +138,8 @@ function ModalBotaoCadastrar() {
 
                     <Flex
                       flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
+                        base: "column",
+                        md: "row",
                       })}
                       gap={5}
                     >
@@ -157,8 +157,8 @@ function ModalBotaoCadastrar() {
 
                     <Flex
                       flexDirection={useBreakpointValue({
-                        base: 'column',
-                        md: 'row',
+                        base: "column",
+                        md: "row",
                       })}
                       gap={5}
                     >
@@ -214,7 +214,7 @@ function ModalBotaoCadastrar() {
                         name="comentarios"
                         value={intervencaoForm.values.comentarios}
                         onChange={intervencaoForm.handleChange}
-                        w={useBreakpointValue({ base: '100%', md: '100%' })}
+                        w={useBreakpointValue({ base: "100%", md: "100%" })}
                       />
                       {intervencaoForm.errors.comentarios &&
                         intervencaoForm.touched.comentarios && (
@@ -228,16 +228,16 @@ function ModalBotaoCadastrar() {
               </FormControl>
             </ModalBody>
 
-            <ModalFooter justifyContent={'center'}>
+            <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
                 <Button
                   variant="ghost"
                   color="red"
                   onClick={() => handleCancelar(intervencaoForm, onClose)}
                   _hover={{
-                    background: 'red.500',
-                    transition: 'all 0.4s',
-                    color: 'white',
+                    background: "red.500",
+                    transition: "all 0.4s",
+                    color: "white",
                   }}
                 >
                   Cancelar
@@ -249,8 +249,8 @@ function ModalBotaoCadastrar() {
                   color="white"
                   onClick={() => handleCadastrar(intervencaoForm, onClose)}
                   _hover={{
-                    background: 'origem.500',
-                    transition: 'all 0.4s',
+                    background: "origem.500",
+                    transition: "all 0.4s",
                   }}
                 >
                   {loading ? (

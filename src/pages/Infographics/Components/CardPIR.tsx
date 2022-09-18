@@ -1,9 +1,9 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import { Flex, Heading, Text } from '@chakra-ui/react';
+import { Flex, Heading, Text } from "@chakra-ui/react";
 
-import { formatDate } from 'utils/formatDate';
-import { validateDate } from 'utils/validateDate';
+import { formatDate } from "utils/formatDate";
+import { validateDate } from "utils/validateDate";
 
 type Poco = {
   poco: string;
@@ -33,28 +33,28 @@ function CardPIR({ poco, index }: Props) {
   };
 
   return (
-    <Flex direction={'row'} gap={4} onClick={() => transfer()}>
-      <Flex align={'center'} justify={'center'}>
-        <Heading as="h3" size="md" textAlign={'center'} width={'50px'}>
-          {index === 0 ? 'Atual' : `${index + 1}º`}
+    <Flex direction={"row"} gap={4} onClick={() => transfer()}>
+      <Flex align={"center"} justify={"center"}>
+        <Heading as="h3" size="md" textAlign={"center"} width={"50px"}>
+          {index === 0 ? "Atual" : `${index + 1}º`}
         </Heading>
       </Flex>
       <Flex
-        direction={'column'}
-        align={'center'}
-        justify={'center'}
+        direction={"column"}
+        align={"center"}
+        justify={"center"}
         backgroundColor={validateDate(poco.inicio_planejado)}
         px={4}
         py={2}
         borderRadius={4}
         _hover={{
-          cursor: 'pointer',
+          cursor: "pointer",
         }}
       >
-        <Text fontSize={'lg'} color={'white'} fontWeight={'bold'}>
+        <Text fontSize={"lg"} color={"white"} fontWeight={"bold"}>
           {poco.poco}
         </Text>
-        <Text fontSize={'md'} color={'white'} fontWeight={'semi-bold'}>
+        <Text fontSize={"md"} color={"white"} fontWeight={"semi-bold"}>
           {dataInicioFormatada}
         </Text>
         {/* <Text fontSize={'md'} color={'white'} fontWeight={'semi-bold'}>
