@@ -93,7 +93,7 @@ export interface NovaIntervencao extends User {
   dat_fim_plan: null; // sempre enviar null
 }
 
-export interface NovoPoco extends User {
+export interface NovoPoco {
   poco: string;
 }
 
