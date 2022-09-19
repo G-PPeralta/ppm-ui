@@ -24,23 +24,18 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 import InputPorcentagem from "./InputPorcentagem";
 
-function ModalCadastroAtividade({ id }: any) {
+function ModalCadastroAtividade({ id, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroAtividade();
   const { state }: any = useLocation();
   const [startDate, setStartDate] = useState<any>(new Date());
   const [endDate, setEndDate] = useState<any>(new Date());
-
-  useEffect(() => {
-    registerForm.setFieldValue("id_pai", Number(id));
-    registerForm.setFieldValue("id_campanha", Number(state.poco.id_campanha));
-  }, []);
 
   const handleStartDate = (date: any) => {
     setStartDate(date);
@@ -53,10 +48,21 @@ function ModalCadastroAtividade({ id }: any) {
   };
 
   const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
-    <Button onClick={onClick} ref={ref} variant="outline">
-      {value === "" ? "dd/mm/yyyy" : value}
+    <Button
+      onClick={onClick}
+      ref={ref}
+      variant="outline"
+      px={10}
+      minW={"220px"}
+    >
+      {value === "" ? "Selecione a data" : value}
     </Button>
   ));
+
+  useEffect(() => {
+    registerForm.setFieldValue("id_pai", Number(id));
+    registerForm.setFieldValue("id_campanha", Number(state.poco.id_campanha));
+  }, []);
 
   return (
     <>
@@ -131,66 +137,32 @@ function ModalCadastroAtividade({ id }: any) {
 
                     <Flex justify={"space-between"} gap={5}>
                       <Flex direction={"column"} grow={1}>
-                        {/* <FormLabel htmlFor="dat_ini_plan">
-                          DATA INÍCIO
-                        </FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Selecione a data e a hora"
-                          id="dat_ini_plan"
-                          type="datetime-local"
-                          name="dat_ini_plan"
-                          w={"100%"}
-                          value={registerForm.values.dat_ini_plan}
-                          onChange={registerForm.handleChange}
-                        /> */}
                         <FormLabel htmlFor="dat_ini_plan">
                           DATA INÍCIO
                         </FormLabel>
                         <DatePicker
-                          // selected={registerForm.values.dat_ini_plan}
                           selected={startDate}
                           onChange={(date) => handleStartDate(date)}
-                          dateFormat="dd/MM/yyyy"
+                          locale="pt-BR"
                           showTimeSelect
-                          placeholderText="A data foi limpa!"
+                          dateFormat="dd/MM/yyyy, hh:mm"
                           customInput={<ExampleCustomInput />}
+                          isClearable
                         />
                       </Flex>
                       <Flex direction={"column"} grow={1}>
-                        {/* <FormLabel htmlFor="dat_fim_plan">DATA FIM</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Selecione a data e a hora"
-                          id="dat_fim_plan"
-                          type="datetime-local"
-                          name="dat_fim_plan"
-                          w={"100%"}
-                          value={registerForm.values.dat_fim_plan}
-                          onChange={registerForm.handleChange}
-                        /> */}
                         <FormLabel htmlFor="dat_fim_plan">DATA FIM</FormLabel>
                         <DatePicker
-                          // selected={registerForm.values.dat_ini_plan}
                           selected={endDate}
                           onChange={(date) => handleEndDate(date)}
-                          dateFormat="dd/MM/yyyy"
+                          dateFormat="dd/MM/yyyy, hh:mm"
                           showTimeSelect
-                          placeholderText="A data foi limpa!"
                           customInput={<ExampleCustomInput />}
+                          isClearable
+                          locale="pt-BR"
                         />
                       </Flex>
                       <FormControl>
-                        {/* <FormLabel htmlFor="pct_real">STATUS</FormLabel>
-                          <Input
-                          id="pct_real"
-                          type="number"
-                          name="pct_real"
-                          w={"100%"}
-                          value={registerForm.values.pct_real}
-                          onChange={registerForm.handleChange}
-                          max={3}
-                        /> */}
                         <InputPorcentagem registerForm={registerForm} />
                       </FormControl>
                     </Flex>
@@ -246,7 +218,9 @@ function ModalCadastroAtividade({ id }: any) {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() =>
+                    handleCadastrarRefresh(registerForm, onClose, setRefresh)
+                  }
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",

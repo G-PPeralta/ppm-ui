@@ -18,6 +18,7 @@ export function ActivitiesSchedule() {
   const [loading, setLoading] = useState(true);
   const [openId, setOpenId] = useState("");
   const [atividades, setAtividades] = useState<any[]>([]);
+  const [refresh, setRefresh] = useState(false);
 
   const requestHandler = async () => {
     const response = await getAtividadesCampanha(id);
@@ -30,6 +31,10 @@ export function ActivitiesSchedule() {
     requestHandler();
     setLoading(false);
   }, []);
+
+  useEffect(() => {
+    requestHandler();
+  }, [refresh]);
 
   const statusProjeto = [
     {
@@ -79,7 +84,7 @@ export function ActivitiesSchedule() {
                 </Flex>
                 <Flex justify={"space-between"} gap={6} wrap={"wrap"} mb={4}>
                   <Flex gap={2}>
-                    <ModalCadastroAtividade id={id} />
+                    <ModalCadastroAtividade id={id} setRefresh={setRefresh} />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (
