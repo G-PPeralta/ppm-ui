@@ -9,8 +9,9 @@ import Sidebar from "components/SideBar";
 import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
 import CardACT from "./Components/CardACT";
-import ModalAtividade from "./Components/ModalAtividade";
+// import ModalAtividade from "./Components/ModalAtividade";
 import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
+import ModalEditarAtividade from "./Components/ModalEditarAtividade";
 import StatusProjeto from "./Components/StatusProjeto";
 
 export function ActivitiesSchedule() {
@@ -111,10 +112,17 @@ export function ActivitiesSchedule() {
                   ))}
                 </Flex>
                 {openId ? (
-                  <ModalAtividade
+                  // <ModalAtividade
+                  //   id={id}
+                  //   atividade={openId}
+                  //   onClose={() => setOpenId("")}
+                  // />
+                  <ModalEditarAtividade
                     id={id}
                     atividade={openId}
                     onClose={() => setOpenId("")}
+                    setRefresh={setRefresh}
+                    refresh={refresh}
                   />
                 ) : undefined}
               </Box>

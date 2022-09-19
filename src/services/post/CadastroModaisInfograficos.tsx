@@ -82,3 +82,14 @@ export async function postNovaAtividade(
   );
   return { status };
 }
+
+export async function postEditarAtividadeStatus(
+  campanhaId: number,
+  atividadeStatus: number
+): Promise<{ status: number }> {
+  const { status } = await api.patch(
+    `/campanha/${campanhaId}/pct_real/${atividadeStatus}`,
+    token()
+  );
+  return { status };
+}
