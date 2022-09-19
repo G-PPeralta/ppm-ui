@@ -1,27 +1,38 @@
 import { Flex, Text } from "@chakra-ui/react";
 
 import { formatDate } from "utils/formatDate";
+import { validateDate } from "utils/validateDate";
 
-type Atividade = {
-  atividade: string;
-  data: string;
-  porcentagemFeita: string;
-};
+// AJUSTAR TIPAGEM
 
-type Props = {
-  atividade: Atividade;
-};
+// type Atividade = {
+//   atividade: string;
+//   data: string;
+//   porcentagemFeita: string;
+// };
 
-function CardACT({ atividade }: Props) {
-  const dataInicioFormatada = formatDate(new Date(atividade.data));
+// type Props = {
+//   atividade: Atividade;
+// };
+
+// AJUSTAR TIPAGEM
+function CardACT({ atividade }: any) {
+  const dataFinalFormatada = formatDate(new Date(atividade.finalplanejado));
   // console.log(validateDate(dataInicioFormatada));
+
+  console.log(atividade);
 
   return (
     <Flex
       direction={"column"}
       align={"right"}
       justify={"right"}
-      backgroundColor="#FF80D0"
+      // backgroundColor="#FF80D0"
+      backgroundColor={validateDate(
+        atividade.pct_plan,
+        atividade.comp_pct,
+        atividade.pct_real
+      )}
       px={4}
       py={2}
       borderRadius={4}
@@ -44,7 +55,7 @@ function CardACT({ atividade }: Props) {
         color={"white"}
         fontWeight={"normal"}
       >
-        {dataInicioFormatada}
+        {dataFinalFormatada}
       </Text>
       <Text
         align={"center"}
@@ -52,7 +63,15 @@ function CardACT({ atividade }: Props) {
         color={"white"}
         fontWeight={"normal"}
       >
-        {atividade.porcentagemFeita}
+        {`Planejado: ${atividade.pct_plan} %`}
+      </Text>
+      <Text
+        align={"center"}
+        fontSize={"sm"}
+        color={"white"}
+        fontWeight={"normal"}
+      >
+        {`Realizado: ${atividade.pct_real} %`}
       </Text>
     </Flex>
   );
