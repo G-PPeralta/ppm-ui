@@ -121,6 +121,7 @@ function FormDivisao(projectsForm: any) {
               value={projectsForm.projectsForm.values.divisaoId}
               onChange={projectsForm.projectsForm.handleChange}
               w={'95%'}
+              placeholder="Selecione"
             >
               {divisaoState.map((divisao) => (
                 <option key={divisao.id} value={divisao.id}>

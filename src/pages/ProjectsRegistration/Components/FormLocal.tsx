@@ -125,6 +125,7 @@ function FormLocal(projectsForm: any) {
               value={projectsForm.projectsForm.values.localId}
               onChange={projectsForm.projectsForm.handleChange}
               w={'95%'}
+              placeholder="Selecione"
             >
               {localProjetoState.map((local) => (
                 <option key={local.id} value={local.id}>

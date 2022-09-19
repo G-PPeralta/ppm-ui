@@ -41,6 +41,7 @@ function FormPrioridade(projectsForm: any) {
         value={projectsForm.projectsForm.values.prioridadeId}
         onChange={projectsForm.projectsForm.handleChange}
         w={useBreakpointValue({ base: '100%', md: '95%' })}
+        placeholder="Selecione"
       >
         {prioridadeState.map((prioridade) => (
           <option key={prioridade.id} value={prioridade.id}>

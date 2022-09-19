@@ -125,6 +125,7 @@ function FormPolo(projectsForm: any) {
               value={projectsForm.projectsForm.values.poloId}
               onChange={projectsForm.projectsForm.handleChange}
               w={'95%'}
+              placeholder="Selecione"
             >
               {poloState.map((polo) => (
                 <option key={polo.id} value={polo.id}>

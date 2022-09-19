@@ -120,6 +120,7 @@ function FormGate(projectsForm: any) {
               value={projectsForm.projectsForm.values.gateId}
               onChange={projectsForm.projectsForm.handleChange}
               w={'95%'}
+              placeholder="Selecione"
             >
               {gateState.map((gate) => (
                 <option key={gate.id} value={gate.id}>

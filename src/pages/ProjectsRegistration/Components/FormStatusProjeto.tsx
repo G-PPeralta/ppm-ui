@@ -122,6 +122,7 @@ function FormStatusProjeto(projectsForm: any) {
               value={projectsForm.projectsForm.values.statusId}
               onChange={projectsForm.projectsForm.handleChange}
               w={'95%'}
+              placeholder="Selecione"
             >
               {statusProjetoState.map((status) => (
                 <option key={status.id} value={status.id}>

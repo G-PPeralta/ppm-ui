@@ -41,6 +41,7 @@ function FormComplexidade(projectsForm: any) {
         value={projectsForm.projectsForm.values.complexidadeId}
         onChange={projectsForm.projectsForm.handleChange}
         w={useBreakpointValue({ base: '100%', md: '100%' })}
+        placeholder="Selecione"
       >
         {complexidadeState.map((complexidade) => (
           <option key={complexidade.id} value={complexidade.id}>
