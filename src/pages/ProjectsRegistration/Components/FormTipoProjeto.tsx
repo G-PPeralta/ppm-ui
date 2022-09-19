@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { BsPlusLg } from 'react-icons/bs';
+import { useEffect, useState } from "react";
+import { BsPlusLg } from "react-icons/bs";
 
 import {
   Box,
@@ -9,33 +9,33 @@ import {
   IconButton,
   Input,
   Select,
-} from '@chakra-ui/react';
-import { Ring } from '@uiball/loaders';
-import { TipoProjeto } from 'interfaces/Services';
+} from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
+import { TipoProjeto } from "interfaces/Services";
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
-import { getTipoProjeto } from 'services/get/Projetos';
-import { postNovoTipoProjeto } from 'services/post/AdicionarOpcaoSelect';
+import { getTipoProjeto } from "services/get/Projetos";
+import { postNovoTipoProjeto } from "services/post/AdicionarOpcaoSelect";
 
 function FormTipoProjeto(projectsForm: any) {
   const [tipoProjetoState, setTipoProjetoState] = useState<TipoProjeto[]>(
-    [] as TipoProjeto[],
+    [] as TipoProjeto[]
   );
 
   const [loading, setLoading] = useState(true);
-  const [novaOpcao, setNovaOpcao] = useState('');
+  const [novaOpcao, setNovaOpcao] = useState("");
 
   async function handleGetProjetos() {
     const reqGet = await getTipoProjeto();
 
     const dataReq: TipoProjeto[] = reqGet.data.sort(
-      (a: TipoProjeto, b: TipoProjeto) => a.tipo.localeCompare(b.tipo),
+      (a: TipoProjeto, b: TipoProjeto) => a.tipo.localeCompare(b.tipo)
     );
 
     const outro: TipoProjeto = {
       id: dataReq.length + 2,
-      tipo: 'Outro',
+      tipo: "Outro",
       deletado: false,
     };
 
@@ -46,7 +46,7 @@ function FormTipoProjeto(projectsForm: any) {
   }
 
   function handleNovo() {
-    if (novaOpcao !== '') {
+    if (novaOpcao !== "") {
       const novoAdicionado: TipoProjeto = {
         id: tipoProjetoState.length + 1,
         tipo: novaOpcao,
@@ -54,21 +54,21 @@ function FormTipoProjeto(projectsForm: any) {
       };
 
       const semOpcaoOutros = tipoProjetoState.filter(
-        (tipo: TipoProjeto) => tipo.tipo !== 'Outro',
+        (tipo: TipoProjeto) => tipo.tipo !== "Outro"
       );
 
       const comNovaOpcao: TipoProjeto[] = [...semOpcaoOutros, novoAdicionado];
 
       const outro: TipoProjeto = {
         id: comNovaOpcao.length + 2,
-        tipo: 'Outro',
+        tipo: "Outro",
         deletado: false,
       };
 
       const novoState = [...comNovaOpcao, outro];
 
       setTipoProjetoState(novoState);
-      setNovaOpcao('');
+      setNovaOpcao("");
 
       projectsForm.projectsForm.values.tipoProjetoId = novoAdicionado.id;
 
@@ -83,7 +83,7 @@ function FormTipoProjeto(projectsForm: any) {
   return (
     <FormControl>
       {loading ? (
-        <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
+        <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
           <Ring speed={2} lineWeight={5} color="blue" size={24} />
         </Box>
       ) : (
@@ -92,7 +92,7 @@ function FormTipoProjeto(projectsForm: any) {
           {Number(projectsForm.projectsForm.values.tipoProjetoId) ===
           tipoProjetoState[tipoProjetoState.length - 1].id ? (
             <>
-              <Flex alignItems={'center'}>
+              <Flex alignItems={"center"}>
                 <Input
                   isRequired
                   placeholder="Adicione o tipo"
@@ -122,7 +122,7 @@ function FormTipoProjeto(projectsForm: any) {
               name="tipoProjetoId"
               value={projectsForm.projectsForm.values.tipoProjetoId}
               onChange={projectsForm.projectsForm.handleChange}
-              w={'95%'}
+              w={"95%"}
               placeholder="Selecione"
             >
               {tipoProjetoState.map((tipo) => (

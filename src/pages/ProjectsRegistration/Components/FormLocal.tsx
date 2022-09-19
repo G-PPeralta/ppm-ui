@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { BsPlusLg } from 'react-icons/bs';
+import { useEffect, useState } from "react";
+import { BsPlusLg } from "react-icons/bs";
 
 import {
   Box,
@@ -9,32 +9,32 @@ import {
   IconButton,
   Input,
   Select,
-} from '@chakra-ui/react';
-import { Ring } from '@uiball/loaders';
-import { LocalProjeto } from 'interfaces/Services';
+} from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
+import { LocalProjeto } from "interfaces/Services";
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
-import { getLocalProjeto } from 'services/get/Projetos';
-import { postNovoLocalProjeto } from 'services/post/AdicionarOpcaoSelect';
+import { getLocalProjeto } from "services/get/Projetos";
+import { postNovoLocalProjeto } from "services/post/AdicionarOpcaoSelect";
 
 function FormLocal(projectsForm: any) {
   const [localProjetoState, setLocalProjetoState] = useState<LocalProjeto[]>(
-    [] as LocalProjeto[],
+    [] as LocalProjeto[]
   );
   const [loading, setLoading] = useState(true);
-  const [novoLocalProjeto, setLocalProjeto] = useState('');
+  const [novoLocalProjeto, setLocalProjeto] = useState("");
 
   async function handleGetProjetos() {
     const reqGet = await getLocalProjeto();
 
     const dataReq: LocalProjeto[] = reqGet.data.sort(
-      (a: LocalProjeto, b: LocalProjeto) => a.local.localeCompare(b.local),
+      (a: LocalProjeto, b: LocalProjeto) => a.local.localeCompare(b.local)
     );
 
     const outro: LocalProjeto = {
       id: dataReq.length + 2,
-      local: 'Outro',
+      local: "Outro",
       deletado: false,
     };
 
@@ -45,7 +45,7 @@ function FormLocal(projectsForm: any) {
   }
 
   function handleNovoPolo() {
-    if (novoLocalProjeto !== '') {
+    if (novoLocalProjeto !== "") {
       const novoPoloAdicionado: LocalProjeto = {
         id: localProjetoState.length + 1,
         local: novoLocalProjeto,
@@ -53,7 +53,7 @@ function FormLocal(projectsForm: any) {
       };
 
       const polosSemOpcaoOutros = localProjetoState.filter(
-        (local: LocalProjeto) => local.local !== 'Outro',
+        (local: LocalProjeto) => local.local !== "Outro"
       );
 
       const poloComNovaOpcao: LocalProjeto[] = [
@@ -63,14 +63,14 @@ function FormLocal(projectsForm: any) {
 
       const outro: LocalProjeto = {
         id: poloComNovaOpcao.length + 2,
-        local: 'Outro',
+        local: "Outro",
         deletado: false,
       };
 
       const novoPoloState = [...poloComNovaOpcao, outro];
 
       setLocalProjetoState(novoPoloState);
-      setLocalProjeto('');
+      setLocalProjeto("");
 
       projectsForm.projectsForm.values.poloId = novoPoloAdicionado.id;
 
@@ -85,7 +85,7 @@ function FormLocal(projectsForm: any) {
   return (
     <FormControl>
       {loading ? (
-        <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
+        <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
           <Ring speed={2} lineWeight={5} color="blue" size={24} />
         </Box>
       ) : (
@@ -94,7 +94,7 @@ function FormLocal(projectsForm: any) {
           {Number(projectsForm.projectsForm.values.localId) ===
           localProjetoState[localProjetoState.length - 1].id ? (
             <>
-              <Flex alignItems={'center'}>
+              <Flex alignItems={"center"}>
                 <Input
                   isRequired
                   placeholder="Adicione o local"
@@ -124,7 +124,7 @@ function FormLocal(projectsForm: any) {
               name="localId"
               value={projectsForm.projectsForm.values.localId}
               onChange={projectsForm.projectsForm.handleChange}
-              w={'95%'}
+              w={"95%"}
               placeholder="Selecione"
             >
               {localProjetoState.map((local) => (

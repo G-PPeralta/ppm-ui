@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { BsPlusLg } from 'react-icons/bs';
+import { useEffect, useState } from "react";
+import { BsPlusLg } from "react-icons/bs";
 
 import {
   Box,
@@ -9,32 +9,32 @@ import {
   IconButton,
   Input,
   Select,
-} from '@chakra-ui/react';
-import { Ring } from '@uiball/loaders';
-import { StatusProjeto } from 'interfaces/Services';
+} from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
+import { StatusProjeto } from "interfaces/Services";
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
-import { getStatusProjeto } from 'services/get/Projetos';
-import { postNovoStatusProjeto } from 'services/post/AdicionarOpcaoSelect';
+import { getStatusProjeto } from "services/get/Projetos";
+import { postNovoStatusProjeto } from "services/post/AdicionarOpcaoSelect";
 
 function FormStatusProjeto(projectsForm: any) {
   const [statusProjetoState, setStatusProjetoState] = useState<StatusProjeto[]>(
-    [] as StatusProjeto[],
+    [] as StatusProjeto[]
   );
   const [loading, setLoading] = useState(true);
-  const [novaOpcao, setNovaOpcao] = useState('');
+  const [novaOpcao, setNovaOpcao] = useState("");
 
   async function handleGetProjetos() {
     const reqGet = await getStatusProjeto();
 
     const dataReq: StatusProjeto[] = reqGet.data.sort(
-      (a: StatusProjeto, b: StatusProjeto) => a.status.localeCompare(b.status),
+      (a: StatusProjeto, b: StatusProjeto) => a.status.localeCompare(b.status)
     );
 
     const outro: StatusProjeto = {
       id: dataReq.length + 2,
-      status: 'Outro',
+      status: "Outro",
       deletado: false,
     };
 
@@ -45,7 +45,7 @@ function FormStatusProjeto(projectsForm: any) {
   }
 
   function handleNovo() {
-    if (novaOpcao !== '') {
+    if (novaOpcao !== "") {
       const novoAdicionado: StatusProjeto = {
         id: statusProjetoState.length + 1,
         status: novaOpcao,
@@ -53,21 +53,21 @@ function FormStatusProjeto(projectsForm: any) {
       };
 
       const semOpcaoOutros = statusProjetoState.filter(
-        (status: StatusProjeto) => status.status !== 'Outro',
+        (status: StatusProjeto) => status.status !== "Outro"
       );
 
       const comNovaOpcao: StatusProjeto[] = [...semOpcaoOutros, novoAdicionado];
 
       const outro: StatusProjeto = {
         id: comNovaOpcao.length + 2,
-        status: 'Outro',
+        status: "Outro",
         deletado: false,
       };
 
       const novoState = [...comNovaOpcao, outro];
 
       setStatusProjetoState(novoState);
-      setNovaOpcao('');
+      setNovaOpcao("");
 
       projectsForm.projectsForm.values.statusId = novoAdicionado.id;
 
@@ -82,7 +82,7 @@ function FormStatusProjeto(projectsForm: any) {
   return (
     <FormControl>
       {loading ? (
-        <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
+        <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
           <Ring speed={2} lineWeight={5} color="blue" size={24} />
         </Box>
       ) : (
@@ -91,7 +91,7 @@ function FormStatusProjeto(projectsForm: any) {
           {Number(projectsForm.projectsForm.values.statusId) ===
           statusProjetoState[statusProjetoState.length - 1].id ? (
             <>
-              <Flex alignItems={'center'}>
+              <Flex alignItems={"center"}>
                 <Input
                   isRequired
                   placeholder="Adicione o status"
@@ -121,7 +121,7 @@ function FormStatusProjeto(projectsForm: any) {
               name="statusId"
               value={projectsForm.projectsForm.values.statusId}
               onChange={projectsForm.projectsForm.handleChange}
-              w={'95%'}
+              w={"95%"}
               placeholder="Selecione"
             >
               {statusProjetoState.map((status) => (

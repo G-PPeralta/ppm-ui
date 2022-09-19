@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { BsPlusLg } from 'react-icons/bs';
+import { useEffect, useState } from "react";
+import { BsPlusLg } from "react-icons/bs";
 
 import {
   Box,
@@ -9,34 +9,34 @@ import {
   IconButton,
   Input,
   Select,
-} from '@chakra-ui/react';
-import { Ring } from '@uiball/loaders';
-import { Classificacao } from 'interfaces/Services';
+} from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
+import { Classificacao } from "interfaces/Services";
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
-import { getClassificacao } from 'services/get/Projetos';
-import { postNovaClassificacao } from 'services/post/AdicionarOpcaoSelect';
+import { getClassificacao } from "services/get/Projetos";
+import { postNovaClassificacao } from "services/post/AdicionarOpcaoSelect";
 
 function FormClassificacao(projectsForm: any) {
   const [classificacaoState, setClassificacaoState] = useState<Classificacao[]>(
-    [] as Classificacao[],
+    [] as Classificacao[]
   );
 
   const [loading, setLoading] = useState(true);
-  const [novaOpcao, setNovaOpcao] = useState('');
+  const [novaOpcao, setNovaOpcao] = useState("");
 
   async function handleGetProjetos() {
     const reqGet = await getClassificacao();
 
     const dataReq: Classificacao[] = reqGet.data.sort(
       (a: Classificacao, b: Classificacao) =>
-        a.classificacao.localeCompare(b.classificacao),
+        a.classificacao.localeCompare(b.classificacao)
     );
 
     const outro: Classificacao = {
       id: dataReq.length + 2,
-      classificacao: 'Outro',
+      classificacao: "Outro",
       deletado: false,
     };
 
@@ -47,7 +47,7 @@ function FormClassificacao(projectsForm: any) {
   }
 
   function handleNovo() {
-    if (novaOpcao !== '') {
+    if (novaOpcao !== "") {
       const novoAdicionado: Classificacao = {
         id: classificacaoState.length + 1,
         classificacao: novaOpcao,
@@ -56,21 +56,21 @@ function FormClassificacao(projectsForm: any) {
 
       const semOpcaoOutros = classificacaoState.filter(
         (classificacao: Classificacao) =>
-          classificacao.classificacao !== 'Outro',
+          classificacao.classificacao !== "Outro"
       );
 
       const comNovaOpcao: Classificacao[] = [...semOpcaoOutros, novoAdicionado];
 
       const outro: Classificacao = {
         id: comNovaOpcao.length + 2,
-        classificacao: 'Outro',
+        classificacao: "Outro",
         deletado: false,
       };
 
       const novoState = [...comNovaOpcao, outro];
 
       setClassificacaoState(novoState);
-      setNovaOpcao('');
+      setNovaOpcao("");
 
       projectsForm.projectsForm.values.tipoProjetoId = novoAdicionado.id;
 
@@ -85,7 +85,7 @@ function FormClassificacao(projectsForm: any) {
   return (
     <FormControl>
       {loading ? (
-        <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
+        <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
           <Ring speed={2} lineWeight={5} color="blue" size={24} />
         </Box>
       ) : (
@@ -94,7 +94,7 @@ function FormClassificacao(projectsForm: any) {
           {Number(projectsForm.projectsForm.values.classificacaoId) ===
           classificacaoState[classificacaoState.length - 1].id ? (
             <>
-              <Flex alignItems={'center'}>
+              <Flex alignItems={"center"}>
                 <Input
                   isRequired
                   placeholder="Adicione o classificacao"
@@ -124,7 +124,7 @@ function FormClassificacao(projectsForm: any) {
               name="classificacaoId"
               value={projectsForm.projectsForm.values.classificacaoId}
               onChange={projectsForm.projectsForm.handleChange}
-              w={'95%'}
+              w={"95%"}
               placeholder="Selecione"
             >
               {classificacaoState.map((classificacao) => (
