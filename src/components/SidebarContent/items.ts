@@ -8,6 +8,7 @@ import {
   // FiActivity,
   // FiUsers,
   FiFile,
+  FiFilePlus,
 } from "react-icons/fi";
 
 interface LinkItemProps {
@@ -41,5 +42,10 @@ export const LinkItems: Array<LinkItemProps> = [
     name: "Detalhamento Projeto",
     icon: BsBarChartSteps,
     link: "/detalhamento/191",
+  },
+  {
+    name: "Carregar Plailha",
+    icon: FiFilePlus,
+    link: "/upload",
   },
 ];
