@@ -48,7 +48,9 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
   };
 
   const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => {
-    console.log("value", value);
+    useEffect(() => {
+      // console.log("value", value);
+    }, []);
 
     return (
       <Button
