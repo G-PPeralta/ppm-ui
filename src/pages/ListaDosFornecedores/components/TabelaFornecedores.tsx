@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
 import { AiFillEdit } from 'react-icons/ai';
-// import { FaTrash } from 'react-icons/fa';
 
 import {
   Table,
@@ -15,24 +13,17 @@ import {
 } from '@chakra-ui/react';
 import { Fornecedor } from 'interfaces/Services';
 
-import { getFornecedor } from 'services/get/Fornecedor';
+type TabelaFornecedoresProps = {
+  fornecedores: Fornecedor[];
+  onEdit: (fornecedor: Fornecedor) => void;
+};
 
-// import { EditaValorModal } from '.components/TabelaFornecedores';
-
-export function TabelaFornecedores({ onEdit }: any) {
-  const [fornecedores, setFornecedores] = useState<Fornecedor[]>([]);
-
-  const handleGetFornecedores = async () => {
-    const response = await getFornecedor();
-    setFornecedores(response.data);
-  };
-
-  useEffect(() => {
-    handleGetFornecedores();
-  }, []);
-
+export function TabelaFornecedores({
+  fornecedores,
+  onEdit,
+}: TabelaFornecedoresProps) {
   const tableData = fornecedores.map((fornecedor) => (
-    <Tr key={fornecedor.fornecedor}>
+    <Tr key={fornecedor.id}>
       <Td isNumeric>{fornecedor.id}</Td>
       <Td>{fornecedor.fornecedor}</Td>
       <Td>{fornecedor.orcamento.toLocaleString('pt-br')}</Td>

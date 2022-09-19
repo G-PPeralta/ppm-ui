@@ -1,5 +1,4 @@
-// import { useState } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 
 import {
@@ -21,16 +20,21 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-// import { TextError } from 'components/TextError';
+import { Fornecedor } from '../index';
 
-// import { putFornecedor } from 'services/update/Fornecedor';
+type EditarFornecedorModalProps = {
+  isOpen: boolean;
+  fornecedor: Fornecedor;
+  onClose: () => void;
+  onUpdate: (fornecedor: Fornecedor) => void;
+};
 
 export function EditarFornecedorModal({
   isOpen,
+  fornecedor,
   onClose,
   onUpdate,
-  fornecedor,
-}: any) {
+}: EditarFornecedorModalProps) {
   const [nome, setNome] = useState(fornecedor?.fornecedor);
   const [orcamento, setOrcamento] = useState(
     fornecedor ? fornecedor.orcamento : 0,
@@ -64,6 +68,20 @@ export function EditarFornecedorModal({
   function handleChangeDescricao(event: any): void {
     setDescricao(event.target.value);
   }
+
+  useEffect(() => {
+    setNome(fornecedor.fornecedor);
+    setOrcamento(fornecedor.orcamento);
+    setRealizado(fornecedor.realizado);
+    setResponsavel(fornecedor.responsavel);
+    setDescricao(fornecedor.descricao);
+  }, [
+    fornecedor.fornecedor,
+    fornecedor.orcamento,
+    fornecedor.realizado,
+    fornecedor.responsavel,
+    fornecedor.descricao,
+  ]);
 
   return (
     <Flex>
@@ -114,7 +132,6 @@ export function EditarFornecedorModal({
                 type="text"
                 id="fornecedorNome"
                 name="fornecedorNome"
-                defaultValue={fornecedor.fornecedor}
                 value={nome}
                 onChange={(event) => handleChangeNome(event)}
                 width="100%"
@@ -128,7 +145,6 @@ export function EditarFornecedorModal({
                 type="text"
                 id="orçamento"
                 name="orçamento"
-                defaultValue={fornecedor.orcamento}
                 value={orcamento}
                 onChange={(event) => handleChangeOrcamento(event)}
                 width="100%"
@@ -142,7 +158,6 @@ export function EditarFornecedorModal({
                 type="text"
                 id="realizado"
                 name="realizado"
-                defaultValue={fornecedor.realizado}
                 value={realizado}
                 onChange={(event) => handleChangeRealizado(event)}
                 width="100%"
@@ -156,7 +171,6 @@ export function EditarFornecedorModal({
                 type="text"
                 id="responsável"
                 name="responsável"
-                defaultValue={fornecedor.responsavel}
                 value={responsavel}
                 onChange={(event) => handleChangeResponsavel(event)}
                 width="100%"
@@ -170,7 +184,6 @@ export function EditarFornecedorModal({
                 type="text"
                 id="descrição"
                 name="descrição"
-                defaultValue={fornecedor.descricao}
                 value={descricao}
                 onChange={(event) => handleChangeDescricao(event)}
                 width="100%"
@@ -183,7 +196,16 @@ export function EditarFornecedorModal({
               background="origem.300"
               variant="primary"
               color="white"
-              onClick={() => onUpdate(fornecedor)}
+              onClick={() =>
+                onUpdate({
+                  id: fornecedor.id,
+                  fornecedor: nome,
+                  orcamento,
+                  realizado,
+                  responsavel,
+                  descricao,
+                })
+              }
               _hover={{
                 background: 'origem.500',
                 transition: 'all 0.4s',

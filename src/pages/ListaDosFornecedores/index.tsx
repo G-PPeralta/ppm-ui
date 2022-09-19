@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AiOutlineSearch, AiFillPlusCircle } from 'react-icons/ai';
 // import { BsPlusLg } from 'react-icons/bs';
 import { FaGreaterThan } from 'react-icons/fa';
@@ -23,14 +23,15 @@ import {
 
 import Sidebar from 'components/SideBar';
 
-import { useFornecedores } from 'hooks/useFornecedores';
+// import { useFornecedores } from 'hooks/useFornecedores';
 
+import { getFornecedor } from 'services/get/Fornecedor';
 import { putFornecedor } from 'services/update/Fornecedor';
 
 import { EditarFornecedorModal } from './components/EditarFornecedorModal';
 import { TabelaFornecedores } from './components/TabelaFornecedores';
 
-interface Fornecedor {
+export interface Fornecedor {
   id: number;
   fornecedor: string;
   orcamento: number;
@@ -41,9 +42,9 @@ interface Fornecedor {
 
 export function Fornecedores() {
   const navigate = useNavigate();
-  const { fornecedoresForm } = useFornecedores();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [editFornecedor, setEditFornecedor] = useState({} as Fornecedor);
+  const [fornecedores, setFornecedores] = useState<Fornecedor[]>([]);
 
   function handleEditFornecedor(fornecedor: Fornecedor) {
     setEditFornecedor(fornecedor);
@@ -51,10 +52,22 @@ export function Fornecedores() {
   }
 
   function handleUpdateFornecedor(fornecedor: Fornecedor) {
-    putFornecedor(fornecedor.id, editFornecedor);
-    // setEditFornecedor(undefined);
+    // Atualiza o fornecedor na lista
+    setFornecedores(
+      fornecedores.map((f) => (f.id === fornecedor.id ? fornecedor : f)),
+    );
+    putFornecedor(fornecedor.id, fornecedor); // API
     onClose();
   }
+
+  const handleGetFornecedores = async () => {
+    const response = await getFornecedor();
+    setFornecedores(response.data as Fornecedor[]);
+  };
+
+  useEffect(() => {
+    handleGetFornecedores();
+  }, []);
 
   return (
     <Sidebar>
@@ -229,13 +242,16 @@ export function Fornecedores() {
               </Stack>
 
               {/*  Componentes aqui */}
-              <TabelaFornecedores onEdit={handleEditFornecedor} />
+              <TabelaFornecedores
+                fornecedores={fornecedores}
+                onEdit={handleEditFornecedor}
+              />
               <EditarFornecedorModal
-                fornecedoresForm={fornecedoresForm}
                 isOpen={isOpen}
                 onClose={onClose}
                 fornecedor={editFornecedor}
                 onUpdate={handleUpdateFornecedor}
+                // setEditFornecedor={setEditFornecedor}
               />
               <Stack spacing="6" alignItems={'center'}></Stack>
             </Box>{' '}
