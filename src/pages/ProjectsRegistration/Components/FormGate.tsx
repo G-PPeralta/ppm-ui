@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { BsPlusLg } from "react-icons/bs";
+import { useEffect, useState } from 'react';
+import { BsPlusLg } from 'react-icons/bs';
 
 import {
   Box,
@@ -9,30 +9,30 @@ import {
   IconButton,
   Input,
   Select,
-} from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
-import { Gate } from "interfaces/Services";
+} from '@chakra-ui/react';
+import { Ring } from '@uiball/loaders';
+import { Gate } from 'interfaces/Services';
 
-import { TextError } from "components/TextError";
+import { TextError } from 'components/TextError';
 
-import { getGate } from "services/get/Projetos";
-import { postNovoGate } from "services/post/AdicionarOpcaoSelect";
+import { getGate } from 'services/get/Projetos';
+import { postNovoGate } from 'services/post/AdicionarOpcaoSelect';
 
 function FormGate(projectsForm: any) {
   const [gateState, setGateState] = useState<Gate[]>([] as Gate[]);
   const [loading, setLoading] = useState(true);
-  const [novaOpcao, setNovaOpcao] = useState("");
+  const [novaOpcao, setNovaOpcao] = useState('');
 
   async function handleGetProjetos() {
     const reqGet = await getGate();
 
     const dataReq: Gate[] = reqGet.data.sort((a: Gate, b: Gate) =>
-      a.gate.localeCompare(b.gate)
+      a.gate.localeCompare(b.gate),
     );
 
     const outro: Gate = {
       id: dataReq.length + 2,
-      gate: "Outro",
+      gate: 'Outro',
       deletado: false,
     };
 
@@ -43,7 +43,7 @@ function FormGate(projectsForm: any) {
   }
 
   function handleNovo() {
-    if (novaOpcao !== "") {
+    if (novaOpcao !== '') {
       const novoAdicionado: Gate = {
         id: gateState.length + 1,
         gate: novaOpcao,
@@ -51,21 +51,21 @@ function FormGate(projectsForm: any) {
       };
 
       const semOpcaoOutros = gateState.filter(
-        (gate: Gate) => gate.gate !== "Outro"
+        (gate: Gate) => gate.gate !== 'Outro',
       );
 
       const comNovaOpcao: Gate[] = [...semOpcaoOutros, novoAdicionado];
 
       const outro: Gate = {
         id: comNovaOpcao.length + 2,
-        gate: "Outro",
+        gate: 'Outro',
         deletado: false,
       };
 
       const novoState = [...comNovaOpcao, outro];
 
       setGateState(novoState);
-      setNovaOpcao("");
+      setNovaOpcao('');
 
       projectsForm.projectsForm.values.gateId = novoAdicionado.id;
 
@@ -80,7 +80,7 @@ function FormGate(projectsForm: any) {
   return (
     <FormControl>
       {loading ? (
-        <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
+        <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
           <Ring speed={2} lineWeight={5} color="blue" size={24} />
         </Box>
       ) : (
@@ -89,7 +89,7 @@ function FormGate(projectsForm: any) {
           {Number(projectsForm.projectsForm.values.gateId) ===
           gateState[gateState.length - 1].id ? (
             <>
-              <Flex alignItems={"center"}>
+              <Flex alignItems={'center'}>
                 <Input
                   isRequired
                   placeholder="Adicione o gate"
@@ -119,7 +119,8 @@ function FormGate(projectsForm: any) {
               name="gateId"
               value={projectsForm.projectsForm.values.gateId}
               onChange={projectsForm.projectsForm.handleChange}
-              w={"95%"}
+              w={'95%'}
+              placeholder="Selecione"
             >
               {gateState.map((gate) => (
                 <option key={gate.id} value={gate.id}>

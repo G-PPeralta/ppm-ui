@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { BsPlusLg } from "react-icons/bs";
+import { useEffect, useState } from 'react';
+import { BsPlusLg } from 'react-icons/bs';
 
 import {
   Box,
@@ -9,31 +9,31 @@ import {
   IconButton,
   Input,
   Select,
-} from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
-import { Divisao } from "interfaces/Services";
+} from '@chakra-ui/react';
+import { Ring } from '@uiball/loaders';
+import { Divisao } from 'interfaces/Services';
 
-import { TextError } from "components/TextError";
+import { TextError } from 'components/TextError';
 
-import { getDivisao } from "services/get/Projetos";
-import { postNovaDivisao } from "services/post/AdicionarOpcaoSelect";
+import { getDivisao } from 'services/get/Projetos';
+import { postNovaDivisao } from 'services/post/AdicionarOpcaoSelect';
 
 function FormDivisao(projectsForm: any) {
   const [divisaoState, setDivisaoState] = useState<Divisao[]>([] as Divisao[]);
 
   const [loading, setLoading] = useState(true);
-  const [novaOpcao, setNovaOpcao] = useState("");
+  const [novaOpcao, setNovaOpcao] = useState('');
 
   async function handleGetProjetos() {
     const reqGet = await getDivisao();
 
     const dataReq: Divisao[] = reqGet.data.sort((a: Divisao, b: Divisao) =>
-      a.divisao.localeCompare(b.divisao)
+      a.divisao.localeCompare(b.divisao),
     );
 
     const outro: Divisao = {
       id: dataReq.length + 2,
-      divisao: "Outro",
+      divisao: 'Outro',
       deletado: false,
     };
 
@@ -44,7 +44,7 @@ function FormDivisao(projectsForm: any) {
   }
 
   function handleNovo() {
-    if (novaOpcao !== "") {
+    if (novaOpcao !== '') {
       const novoAdicionado: Divisao = {
         id: divisaoState.length + 1,
         divisao: novaOpcao,
@@ -52,21 +52,21 @@ function FormDivisao(projectsForm: any) {
       };
 
       const semOpcaoOutros = divisaoState.filter(
-        (divisao: Divisao) => divisao.divisao !== "Outro"
+        (divisao: Divisao) => divisao.divisao !== 'Outro',
       );
 
       const comNovaOpcao: Divisao[] = [...semOpcaoOutros, novoAdicionado];
 
       const outro: Divisao = {
         id: comNovaOpcao.length + 2,
-        divisao: "Outro",
+        divisao: 'Outro',
         deletado: false,
       };
 
       const novoState = [...comNovaOpcao, outro];
 
       setDivisaoState(novoState);
-      setNovaOpcao("");
+      setNovaOpcao('');
 
       projectsForm.projectsForm.values.divisaoId = novoAdicionado.id;
 
@@ -81,7 +81,7 @@ function FormDivisao(projectsForm: any) {
   return (
     <FormControl>
       {loading ? (
-        <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
+        <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
           <Ring speed={2} lineWeight={5} color="blue" size={24} />
         </Box>
       ) : (
@@ -90,7 +90,7 @@ function FormDivisao(projectsForm: any) {
           {Number(projectsForm.projectsForm.values.divisaoId) ===
           divisaoState[divisaoState.length - 1].id ? (
             <>
-              <Flex alignItems={"center"}>
+              <Flex alignItems={'center'}>
                 <Input
                   isRequired
                   placeholder="Adicione a divisão"
@@ -120,7 +120,8 @@ function FormDivisao(projectsForm: any) {
               name="divisaoId"
               value={projectsForm.projectsForm.values.divisaoId}
               onChange={projectsForm.projectsForm.handleChange}
-              w={"95%"}
+              w={'95%'}
+              placeholder="Selecione"
             >
               {divisaoState.map((divisao) => (
                 <option key={divisao.id} value={divisao.id}>
