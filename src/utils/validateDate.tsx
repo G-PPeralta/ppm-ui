@@ -23,8 +23,8 @@ export const statusProjeto = [
 
 export function validateDate(
   pct_plan: number, // porcentagem planejada
-  comp_pct: number, // porcentagem completa?
-  pct_real: number // porcentagem realizada?
+  comp_pct: number, // comparação porcentagens
+  pct_real: number // porcentagem realizada
 ) {
   switch (true) {
     case pct_plan === 0 && comp_pct === 0:

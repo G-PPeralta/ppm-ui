@@ -6,7 +6,7 @@ import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
 
-import { Atividade } from "services/get/ActivitiesSchedule";
+import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
 import CardACT from "./Components/CardACT";
 import ModalAtividade from "./Components/ModalAtividade";
@@ -17,10 +17,17 @@ export function ActivitiesSchedule() {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [openId, setOpenId] = useState("");
+  const [atividades, setAtividades] = useState<any[]>([]);
+
+  const requestHandler = async () => {
+    const response = await getAtividadesCampanha(id);
+    setAtividades(response.data);
+  };
 
   useEffect(() => {
     // console.log('scheadule', id);
     // console.log('Atividade', Atividade);
+    requestHandler();
     setLoading(false);
   }, []);
 
@@ -85,7 +92,7 @@ export function ActivitiesSchedule() {
                   </Flex>
                 </Flex>
                 <Flex direction={"row"} gap={4} py={4} wrap={"wrap"}>
-                  {Atividade.map((atividade, index) => (
+                  {atividades.map((atividade, index) => (
                     <Flex
                       key={index}
                       direction={"column"}

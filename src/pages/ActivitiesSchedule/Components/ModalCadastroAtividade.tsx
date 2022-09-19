@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 import {
   Flex,
@@ -28,9 +29,11 @@ import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 function ModalCadastroAtividade({ id }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroAtividade();
+  const { state }: any = useLocation();
 
   useEffect(() => {
-    registerForm.setFieldValue("id_campanha", Number(id));
+    registerForm.setFieldValue("id_pai", Number(id));
+    registerForm.setFieldValue("id_campanha", Number(state.poco.id_campanha));
   }, []);
 
   return (

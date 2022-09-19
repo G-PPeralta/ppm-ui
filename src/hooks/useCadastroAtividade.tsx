@@ -16,7 +16,7 @@ export function useCadastroAtividade() {
   const { user } = useAuth();
 
   const initialValues: NovaAtividade = {
-    id_pai: 0, // sempre enviar 0
+    id_pai: 0, // enviar o id da poco (pai)
     nom_atividade: "", // enviar nome da atividade
     pct_real: 0, // porcentagem realizada
     dat_ini_plan: "", // data inicio planejada
@@ -37,8 +37,8 @@ export function useCadastroAtividade() {
         dat_fim_plan: values.dat_fim_plan,
         dsc_comentario: values.dsc_comentario,
         id_campanha: values.id_campanha,
+        id_pai: values.id_pai,
         nom_usu_create: user?.nome,
-        id_pai: 0,
       };
 
       setLoading(true);
