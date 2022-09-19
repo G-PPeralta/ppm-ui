@@ -87,16 +87,7 @@ export async function getAtividadesCampanha(id: string | undefined): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get(`/campanha/atividades/${id}`, token());
-
-  return { data, status };
-}
-
-export async function getAtividadesPrecedentes(id: number | string): Promise<{
-  data: any;
-  status: number;
-}> {
-  const { data, status } = await api.get(`/campanha/?????????/${id}`, token());
+  const { data, status } = await api.get(`/campanha/${id}`, token());
 
   return { data, status };
 }

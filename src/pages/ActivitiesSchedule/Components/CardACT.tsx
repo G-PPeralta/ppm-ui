@@ -20,8 +20,6 @@ function CardACT({ atividade }: any) {
   const dataFinalFormatada = formatDate(new Date(atividade.finalplanejado));
   // console.log(validateDate(dataInicioFormatada));
 
-  console.log(atividade);
-
   return (
     <Flex
       direction={"column"}

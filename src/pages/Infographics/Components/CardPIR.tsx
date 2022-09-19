@@ -32,7 +32,7 @@ function CardPIR({ poco, index }: Props) {
   // console.log('Quantidade dias:', diferencaDias);
 
   const transfer = () => {
-    navigate(`/atividade/${poco.id_campanha}`, {
+    navigate(`/atividade/${poco.id_poco}`, {
       state: {
         poco,
       },

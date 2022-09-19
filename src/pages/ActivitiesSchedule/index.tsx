@@ -31,8 +31,6 @@ export function ActivitiesSchedule() {
     setLoading(false);
   }, []);
 
-  console.log("atividades", atividades);
-
   const statusProjeto = [
     {
       status: "Não Implementado",
