@@ -70,6 +70,16 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
     registerForm.setFieldValue("id_campanha", Number(state.poco.id_campanha));
   }, []);
 
+  useEffect(() => {
+    if (
+      registerForm.values.id_pai === 0 &&
+      registerForm.values.id_campanha === 0
+    ) {
+      registerForm.setFieldValue("id_pai", Number(id));
+      registerForm.setFieldValue("id_campanha", Number(state.poco.id_campanha));
+    }
+  }, [registerForm.values]);
+
   return (
     <>
       <Button
