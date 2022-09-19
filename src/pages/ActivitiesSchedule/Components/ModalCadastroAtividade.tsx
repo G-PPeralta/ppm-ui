@@ -1,5 +1,7 @@
-import { useEffect } from "react";
+import { forwardRef, useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
 import { useLocation } from "react-router-dom";
+import "react-datepicker/dist/react-datepicker.css";
 
 import {
   Flex,
@@ -30,11 +32,29 @@ function ModalCadastroAtividade({ id }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroAtividade();
   const { state }: any = useLocation();
+  const [startDate, setStartDate] = useState<any>(new Date());
+  const [endDate, setEndDate] = useState<any>(new Date());
 
   useEffect(() => {
     registerForm.setFieldValue("id_pai", Number(id));
     registerForm.setFieldValue("id_campanha", Number(state.poco.id_campanha));
   }, []);
+
+  const handleStartDate = (date: any) => {
+    setStartDate(date);
+    registerForm.setFieldValue("dat_ini_plan", date);
+  };
+
+  const handleEndDate = (date: any) => {
+    setEndDate(date);
+    registerForm.setFieldValue("dat_fim_plan", date);
+  };
+
+  const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
+    <Button onClick={onClick} ref={ref} variant="outline">
+      {value === "" ? "dd/mm/yyyy" : value}
+    </Button>
+  ));
 
   return (
     <>
@@ -109,7 +129,7 @@ function ModalCadastroAtividade({ id }: any) {
 
                     <Flex justify={"space-between"} gap={5}>
                       <Flex direction={"column"} grow={1}>
-                        <FormLabel htmlFor="dat_ini_plan">
+                        {/* <FormLabel htmlFor="dat_ini_plan">
                           DATA INÍCIO
                         </FormLabel>
                         <Input
@@ -121,10 +141,22 @@ function ModalCadastroAtividade({ id }: any) {
                           w={"100%"}
                           value={registerForm.values.dat_ini_plan}
                           onChange={registerForm.handleChange}
+                        /> */}
+                        <FormLabel htmlFor="dat_ini_plan">
+                          DATA INÍCIO
+                        </FormLabel>
+                        <DatePicker
+                          // selected={registerForm.values.dat_ini_plan}
+                          selected={startDate}
+                          onChange={(date) => handleStartDate(date)}
+                          dateFormat="dd/MM/yyyy"
+                          showTimeSelect
+                          placeholderText="A data foi limpa!"
+                          customInput={<ExampleCustomInput />}
                         />
                       </Flex>
                       <Flex direction={"column"} grow={1}>
-                        <FormLabel htmlFor="dat_fim_plan">DATA FIM</FormLabel>
+                        {/* <FormLabel htmlFor="dat_fim_plan">DATA FIM</FormLabel>
                         <Input
                           isRequired
                           placeholder="Selecione a data e a hora"
@@ -134,6 +166,16 @@ function ModalCadastroAtividade({ id }: any) {
                           w={"100%"}
                           value={registerForm.values.dat_fim_plan}
                           onChange={registerForm.handleChange}
+                        /> */}
+                        <FormLabel htmlFor="dat_fim_plan">DATA FIM</FormLabel>
+                        <DatePicker
+                          // selected={registerForm.values.dat_ini_plan}
+                          selected={endDate}
+                          onChange={(date) => handleEndDate(date)}
+                          dateFormat="dd/MM/yyyy"
+                          showTimeSelect
+                          placeholderText="A data foi limpa!"
+                          customInput={<ExampleCustomInput />}
                         />
                       </Flex>
                       <FormControl>
