@@ -3,11 +3,15 @@ import { Flex, Text } from "@chakra-ui/react";
 import CardPIR from "./CardPIR";
 
 type Poco = {
-  poco: string;
-  inicioplanejado: string;
-  pct_plan: number;
   comp_pct: number;
-  pct_real: number;
+  finalPlanejado: any;
+  id_campanha: number;
+  id_poco: number;
+  inicioplanejado: any;
+  pct_plan: any;
+  pct_real: any;
+  poco: string;
+  sonda: string;
 };
 
 type Column = {

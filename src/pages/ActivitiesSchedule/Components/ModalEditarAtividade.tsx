@@ -51,7 +51,6 @@ function ModalEditarAtividade({
     setCampanhaId(atividade.id_poco);
     setObs(atividade.sonda);
     setAtividadeStatus(Number(atividade.pct_real));
-    console.log("atividade", atividade, campanhaId);
   }, []);
 
   const send = async () => {

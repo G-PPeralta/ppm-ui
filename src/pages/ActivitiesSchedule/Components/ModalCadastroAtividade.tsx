@@ -30,7 +30,7 @@ import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 import InputPorcentagem from "./InputPorcentagem";
 
-function ModalCadastroAtividade({ id, setRefresh }: any) {
+function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroAtividade();
   const { state }: any = useLocation();
@@ -47,17 +47,21 @@ function ModalCadastroAtividade({ id, setRefresh }: any) {
     registerForm.setFieldValue("dat_fim_plan", date);
   };
 
-  const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
-    <Button
-      onClick={onClick}
-      ref={ref}
-      variant="outline"
-      px={10}
-      minW={"220px"}
-    >
-      {value === "" ? "Selecione a data" : value}
-    </Button>
-  ));
+  const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => {
+    console.log("value", value);
+
+    return (
+      <Button
+        onClick={onClick}
+        ref={ref}
+        variant="outline"
+        px={10}
+        minW={"220px"}
+      >
+        {value === "" ? "Selecione a data" : value}
+      </Button>
+    );
+  });
 
   useEffect(() => {
     registerForm.setFieldValue("id_pai", Number(id));
@@ -219,7 +223,12 @@ function ModalCadastroAtividade({ id, setRefresh }: any) {
                   variant="primary"
                   color="white"
                   onClick={() =>
-                    handleCadastrarRefresh(registerForm, onClose, setRefresh)
+                    handleCadastrarRefresh(
+                      registerForm,
+                      onClose,
+                      setRefresh,
+                      refresh
+                    )
                   }
                   _hover={{
                     background: "origem.500",

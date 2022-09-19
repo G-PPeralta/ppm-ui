@@ -12,10 +12,11 @@ export const handleCancelar = (form: any, onClose: Function) => {
 export const handleCadastrarRefresh = async (
   form: any,
   onClose: Function,
-  setRefresh: Function
+  setRefresh: Function,
+  refresh: boolean
 ) => {
   await form.submitForm();
-  setRefresh((refresh: Boolean) => !refresh);
+  setRefresh(!refresh);
   await onClose();
   await form.resetForm();
 };
