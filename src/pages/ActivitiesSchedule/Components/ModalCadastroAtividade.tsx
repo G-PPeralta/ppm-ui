@@ -1,5 +1,7 @@
-import { useEffect } from "react";
+import { forwardRef, useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
 import { useLocation } from "react-router-dom";
+import "react-datepicker/dist/react-datepicker.css";
 
 import {
   Flex,
@@ -22,14 +24,40 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
-function ModalCadastroAtividade({ id }: any) {
+import InputPorcentagem from "./InputPorcentagem";
+
+function ModalCadastroAtividade({ id, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroAtividade();
   const { state }: any = useLocation();
+  const [startDate, setStartDate] = useState<any>(new Date());
+  const [endDate, setEndDate] = useState<any>(new Date());
+
+  const handleStartDate = (date: any) => {
+    setStartDate(date);
+    registerForm.setFieldValue("dat_ini_plan", date);
+  };
+
+  const handleEndDate = (date: any) => {
+    setEndDate(date);
+    registerForm.setFieldValue("dat_fim_plan", date);
+  };
+
+  const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
+    <Button
+      onClick={onClick}
+      ref={ref}
+      variant="outline"
+      px={10}
+      minW={"220px"}
+    >
+      {value === "" ? "Selecione a data" : value}
+    </Button>
+  ));
 
   useEffect(() => {
     registerForm.setFieldValue("id_pai", Number(id));
@@ -112,41 +140,30 @@ function ModalCadastroAtividade({ id }: any) {
                         <FormLabel htmlFor="dat_ini_plan">
                           DATA INÍCIO
                         </FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Selecione a data e a hora"
-                          id="dat_ini_plan"
-                          type="datetime-local"
-                          name="dat_ini_plan"
-                          w={"100%"}
-                          value={registerForm.values.dat_ini_plan}
-                          onChange={registerForm.handleChange}
+                        <DatePicker
+                          selected={startDate}
+                          onChange={(date) => handleStartDate(date)}
+                          locale="pt-BR"
+                          showTimeSelect
+                          dateFormat="dd/MM/yyyy, hh:mm"
+                          customInput={<ExampleCustomInput />}
+                          isClearable
                         />
                       </Flex>
                       <Flex direction={"column"} grow={1}>
                         <FormLabel htmlFor="dat_fim_plan">DATA FIM</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Selecione a data e a hora"
-                          id="dat_fim_plan"
-                          type="datetime-local"
-                          name="dat_fim_plan"
-                          w={"100%"}
-                          value={registerForm.values.dat_fim_plan}
-                          onChange={registerForm.handleChange}
+                        <DatePicker
+                          selected={endDate}
+                          onChange={(date) => handleEndDate(date)}
+                          dateFormat="dd/MM/yyyy, hh:mm"
+                          showTimeSelect
+                          customInput={<ExampleCustomInput />}
+                          isClearable
+                          locale="pt-BR"
                         />
                       </Flex>
                       <FormControl>
-                        <FormLabel htmlFor="pct_real">STATUS</FormLabel>
-                        <Input
-                          placeholder="0%"
-                          id="pct_real"
-                          type="number"
-                          name="pct_real"
-                          w={"100%"}
-                          value={registerForm.values.pct_real}
-                          onChange={registerForm.handleChange}
-                        />
+                        <InputPorcentagem registerForm={registerForm} />
                       </FormControl>
                     </Flex>
 
@@ -201,7 +218,9 @@ function ModalCadastroAtividade({ id }: any) {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() =>
+                    handleCadastrarRefresh(registerForm, onClose, setRefresh)
+                  }
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",

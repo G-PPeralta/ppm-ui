@@ -9,8 +9,9 @@ import Sidebar from "components/SideBar";
 import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
 import CardACT from "./Components/CardACT";
-import ModalAtividade from "./Components/ModalAtividade";
+// import ModalAtividade from "./Components/ModalAtividade";
 import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
+import ModalEditarAtividade from "./Components/ModalEditarAtividade";
 import StatusProjeto from "./Components/StatusProjeto";
 
 export function ActivitiesSchedule() {
@@ -18,6 +19,7 @@ export function ActivitiesSchedule() {
   const [loading, setLoading] = useState(true);
   const [openId, setOpenId] = useState("");
   const [atividades, setAtividades] = useState<any[]>([]);
+  const [refresh, setRefresh] = useState(false);
 
   const requestHandler = async () => {
     const response = await getAtividadesCampanha(id);
@@ -30,6 +32,10 @@ export function ActivitiesSchedule() {
     requestHandler();
     setLoading(false);
   }, []);
+
+  useEffect(() => {
+    requestHandler();
+  }, [refresh]);
 
   const statusProjeto = [
     {
@@ -79,7 +85,7 @@ export function ActivitiesSchedule() {
                 </Flex>
                 <Flex justify={"space-between"} gap={6} wrap={"wrap"} mb={4}>
                   <Flex gap={2}>
-                    <ModalCadastroAtividade id={id} />
+                    <ModalCadastroAtividade id={id} setRefresh={setRefresh} />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (
@@ -106,10 +112,17 @@ export function ActivitiesSchedule() {
                   ))}
                 </Flex>
                 {openId ? (
-                  <ModalAtividade
+                  // <ModalAtividade
+                  //   id={id}
+                  //   atividade={openId}
+                  //   onClose={() => setOpenId("")}
+                  // />
+                  <ModalEditarAtividade
                     id={id}
                     atividade={openId}
                     onClose={() => setOpenId("")}
+                    setRefresh={setRefresh}
+                    refresh={refresh}
                   />
                 ) : undefined}
               </Box>
