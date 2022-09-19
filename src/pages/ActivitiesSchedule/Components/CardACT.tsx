@@ -29,9 +29,9 @@ function CardACT({ atividade }: Props) {
       align={"right"}
       justify={"right"}
       backgroundColor={validateDate(
-        atividade.pct_plan,
-        atividade.comp_pct,
-        atividade.pct_real
+        Number(atividade.pct_plan),
+        Number(atividade.comp_pct),
+        Number(atividade.pct_real)
       )}
       px={4}
       py={2}
