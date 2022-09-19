@@ -28,6 +28,8 @@ import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
+import InputPorcentagem from "./InputPorcentagem";
+
 function ModalCadastroAtividade({ id }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroAtividade();
@@ -179,16 +181,17 @@ function ModalCadastroAtividade({ id }: any) {
                         />
                       </Flex>
                       <FormControl>
-                        <FormLabel htmlFor="pct_real">STATUS</FormLabel>
-                        <Input
-                          placeholder="0%"
+                        {/* <FormLabel htmlFor="pct_real">STATUS</FormLabel>
+                          <Input
                           id="pct_real"
                           type="number"
                           name="pct_real"
                           w={"100%"}
                           value={registerForm.values.pct_real}
                           onChange={registerForm.handleChange}
-                        />
+                          max={3}
+                        /> */}
+                        <InputPorcentagem registerForm={registerForm} />
                       </FormControl>
                     </Flex>
 
