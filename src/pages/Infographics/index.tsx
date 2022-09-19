@@ -11,7 +11,6 @@ import { statusProjeto } from "../../utils/validateDate";
 import ColumnSPT from "./Components/ColumnSPT";
 import ExibirModal from "./Components/ExibirModal";
 import FiltrosModal from "./Components/FiltrosModal";
-// import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
 import ModalCadastroPoco from "./Components/ModalCadastroPoco";
 import ModalIntervencao from "./Components/ModalIntervencao";
 import ModalNovaCampanha from "./Components/ModalNovaCampanha";
@@ -62,7 +61,6 @@ export function Infographics() {
                 >
                   <Flex gap={2}>
                     <ModalNovaCampanha />
-                    {/* <ModalCadastrarSonda /> */}
                     <ModalCadastroPoco />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
