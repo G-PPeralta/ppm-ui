@@ -22,17 +22,20 @@ export const statusProjeto = [
 ];
 
 export function validateDate(
-  pct_plan: number,
-  comp_pct: number,
-  pct_real: number
+  pct_plan: number, // porcentagem planejada
+  comp_pct: number, // porcentagem completa?
+  pct_real: number // porcentagem realizada?
 ) {
-  if (pct_plan === 0 && comp_pct === 0) {
-    return statusProjeto["1"].color;
-  } else if (comp_pct === 0 || comp_pct < pct_plan) {
-    return statusProjeto["4"].color;
-  } else if (comp_pct === 1) {
-    return statusProjeto["3"].color;
-  } else if (pct_real >= 100) {
-    return statusProjeto["2"].color;
+  switch (true) {
+    case pct_plan === 0 && comp_pct === 0:
+      return statusProjeto[1].color;
+    case pct_real === 100:
+      return statusProjeto[2].color;
+    case comp_pct === 1:
+      return statusProjeto[3].color;
+    case comp_pct < pct_plan:
+      return statusProjeto[4].color;
+    default:
+      return statusProjeto[0].color;
   }
 }
