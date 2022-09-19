@@ -19,7 +19,7 @@ import { getFornecedor } from 'services/get/Fornecedor';
 
 // import { EditaValorModal } from '.components/TabelaFornecedores';
 
-export function TabelaFornecedores() {
+export function TabelaFornecedores({ onEdit }: any) {
   const [fornecedores, setFornecedores] = useState<Fornecedor[]>([]);
 
   const handleGetFornecedores = async () => {
@@ -32,7 +32,7 @@ export function TabelaFornecedores() {
   }, []);
 
   const tableData = fornecedores.map((fornecedor) => (
-    <Tr>
+    <Tr key={fornecedor.fornecedor}>
       <Td isNumeric>{fornecedor.id}</Td>
       <Td>{fornecedor.fornecedor}</Td>
       <Td>{fornecedor.orcamento.toLocaleString('pt-br')}</Td>
@@ -49,6 +49,7 @@ export function TabelaFornecedores() {
           mr={2}
           isRound={true}
           size="sm"
+          onClick={() => onEdit(fornecedor)}
         />
         {/* <IconButton
           aria-label="Plus sign"

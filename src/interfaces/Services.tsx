@@ -286,7 +286,7 @@ export interface Tarefa {
 }
 
 export interface Fornecedor {
-  id: number;
+  id?: number;
   fornecedor: string;
   orcamento: number;
   realizado: number;

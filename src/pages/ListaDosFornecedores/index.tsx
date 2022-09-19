@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { AiOutlineSearch, AiFillPlusCircle } from 'react-icons/ai';
 // import { BsPlusLg } from 'react-icons/bs';
 import { FaGreaterThan } from 'react-icons/fa';
@@ -17,14 +18,44 @@ import {
   Input,
   FormControl,
   Select,
+  useDisclosure,
 } from '@chakra-ui/react';
 
 import Sidebar from 'components/SideBar';
 
+import { useFornecedores } from 'hooks/useFornecedores';
+
+import { putFornecedor } from 'services/update/Fornecedor';
+
+import { EditarFornecedorModal } from './components/EditarFornecedorModal';
 import { TabelaFornecedores } from './components/TabelaFornecedores';
+
+interface Fornecedor {
+  id: number;
+  fornecedor: string;
+  orcamento: number;
+  realizado: number;
+  responsavel: string;
+  descricao: string;
+}
 
 export function Fornecedores() {
   const navigate = useNavigate();
+  const { fornecedoresForm } = useFornecedores();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [editFornecedor, setEditFornecedor] = useState({} as Fornecedor);
+
+  function handleEditFornecedor(fornecedor: Fornecedor) {
+    setEditFornecedor(fornecedor);
+    onOpen();
+  }
+
+  function handleUpdateFornecedor(fornecedor: Fornecedor) {
+    putFornecedor(fornecedor.id, editFornecedor);
+    // setEditFornecedor(undefined);
+    onClose();
+  }
+
   return (
     <Sidebar>
       <Flex
@@ -198,7 +229,14 @@ export function Fornecedores() {
               </Stack>
 
               {/*  Componentes aqui */}
-              <TabelaFornecedores />
+              <TabelaFornecedores onEdit={handleEditFornecedor} />
+              <EditarFornecedorModal
+                fornecedoresForm={fornecedoresForm}
+                isOpen={isOpen}
+                onClose={onClose}
+                fornecedor={editFornecedor}
+                onUpdate={handleUpdateFornecedor}
+              />
               <Stack spacing="6" alignItems={'center'}></Stack>
             </Box>{' '}
           </Flex>
