@@ -1,7 +1,6 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Text } from "@chakra-ui/react";
 
-import { formatDate } from 'utils/formatDate';
-import { validateDate } from 'utils/validateDate';
+import { formatDate } from "utils/formatDate";
 
 type Atividade = {
   atividade: string;
@@ -19,39 +18,39 @@ function CardACT({ atividade }: Props) {
 
   return (
     <Flex
-      direction={'column'}
-      align={'right'}
-      justify={'right'}
-      backgroundColor={validateDate(dataInicioFormatada)}
+      direction={"column"}
+      align={"right"}
+      justify={"right"}
+      backgroundColor="#FF80D0"
       px={4}
       py={2}
       borderRadius={4}
-      w={'100%'}
+      w={"100%"}
     >
-      <Flex direction={'column'}>
+      <Flex direction={"column"}>
         <Text
-          display={'flex'}
-          align={'center'}
-          fontSize={'lg'}
-          color={'white'}
-          fontWeight={'bold'}
+          display={"flex"}
+          align={"center"}
+          fontSize={"lg"}
+          color={"white"}
+          fontWeight={"bold"}
         >
           {atividade.atividade}
         </Text>
       </Flex>
       <Text
-        align={'center'}
-        fontSize={'sm'}
-        color={'white'}
-        fontWeight={'normal'}
+        align={"center"}
+        fontSize={"sm"}
+        color={"white"}
+        fontWeight={"normal"}
       >
         {dataInicioFormatada}
       </Text>
       <Text
-        align={'center'}
-        fontSize={'sm'}
-        color={'white'}
-        fontWeight={'normal'}
+        align={"center"}
+        fontSize={"sm"}
+        color={"white"}
+        fontWeight={"normal"}
       >
         {atividade.porcentagemFeita}
       </Text>

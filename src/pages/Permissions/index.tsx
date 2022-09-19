@@ -10,16 +10,16 @@ import {
   Stack,
   useBreakpointValue,
   useColorModeValue,
-} from '@chakra-ui/react';
-import { Ring } from '@uiball/loaders';
-import Avvvatars from 'avvvatars-react';
+} from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
+import Avvvatars from "avvvatars-react";
 
-import Sidebar from 'components/SideBar';
-import { TextError } from 'components/TextError';
+import Sidebar from "components/SideBar";
+import { TextError } from "components/TextError";
 
-import formatCellphone from 'utils/formatCellphone';
+import formatCellphone from "utils/formatCellphone";
 
-import { usePermissions } from 'hooks/usePermissions';
+import { usePermissions } from "hooks/usePermissions";
 
 export function Permissions() {
   const { permissionsForm, roles, loading } = usePermissions();
@@ -28,33 +28,33 @@ export function Permissions() {
     <>
       <Sidebar>
         {loading && (
-          <Flex display={'flex'} align={'center'} justify={'center'} h={'90vh'}>
+          <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
             <Ring speed={2} lineWeight={5} color="blue" size={64} />
           </Flex>
         )}
 
         <Stack spacing="8">
           <Flex
-            w={useBreakpointValue({ base: '100%', md: 'auto' })}
+            w={useBreakpointValue({ base: "100%", md: "auto" })}
             align="center"
             justify="center"
-            bg={useBreakpointValue({ base: 'white', sm: '#EDF2F7' })}
+            bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
           >
             <Box
-              py={{ base: '0', sm: '16' }}
-              px={{ base: '4', sm: '10' }}
+              py={{ base: "0", sm: "16" }}
+              px={{ base: "4", sm: "10" }}
               w={useBreakpointValue({
-                base: '20rem',
-                sm: '35rem',
-                md: '60rem',
-                lg: '80rem',
+                base: "20rem",
+                sm: "35rem",
+                md: "60rem",
+                lg: "80rem",
               })}
-              bg={useBreakpointValue({ base: 'transparent', sm: 'white' })}
+              bg={useBreakpointValue({ base: "transparent", sm: "white" })}
               boxShadow={{
-                base: 'none',
-                sm: useColorModeValue('md', 'md-dark'),
+                base: "none",
+                sm: useColorModeValue("md", "md-dark"),
               }}
-              borderRadius={{ base: 'none', sm: 'xl' }}
+              borderRadius={{ base: "none", sm: "xl" }}
             >
               <form
                 onSubmit={(e) => {
@@ -64,13 +64,13 @@ export function Permissions() {
               >
                 <Box
                   display={useBreakpointValue({
-                    base: 'flex',
+                    base: "flex",
                   })}
                   flexDirection={useBreakpointValue({
-                    base: 'initial',
-                    sm: 'column-reverse',
-                    md: 'column-reverse',
-                    lg: 'initial',
+                    base: "initial",
+                    sm: "column-reverse",
+                    md: "column-reverse",
+                    lg: "initial",
                   })}
                 >
                   <Stack spacing="5" w="100%">
@@ -141,10 +141,10 @@ export function Permissions() {
                         name="telephone"
                         maxLength={15}
                         value={formatCellphone(
-                          permissionsForm.values.telephone,
+                          permissionsForm.values.telephone
                         )}
                         onChange={permissionsForm.handleChange}
-                        w={useBreakpointValue({ base: '100%', md: '100%' })}
+                        w={useBreakpointValue({ base: "100%", md: "100%" })}
                       />
                       {permissionsForm.errors.telephone &&
                         permissionsForm.touched.telephone && (
@@ -173,12 +173,12 @@ export function Permissions() {
                   </Stack>
                   <Stack
                     w="100%"
-                    display={'flex'}
+                    display={"flex"}
                     align="center"
                     justify="center"
                   >
                     <Avvvatars
-                      value={permissionsForm.values.name || ''}
+                      value={permissionsForm.values.name || ""}
                       size={160}
                     />
                   </Stack>
@@ -191,8 +191,8 @@ export function Permissions() {
                     variant="primary"
                     color="white"
                     _hover={{
-                      background: 'origem.500',
-                      transition: 'all 0.4s',
+                      background: "origem.500",
+                      transition: "all 0.4s",
                     }}
                   >
                     Salvar

@@ -1,15 +1,15 @@
-import Select from 'react-select';
+import Select from "react-select";
 
-import { FormControl, FormLabel } from '@chakra-ui/react';
-import { ListaPoco } from 'interfaces/CadastrosModaisInfograficos';
+import { FormControl, FormLabel } from "@chakra-ui/react";
+import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
 
-import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
+import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 function SelectFiltragemPocos({ intervencaoForm }: any) {
   const { listaPocos } = useCadastroIntervencao();
 
   const options = listaPocos.map((poco: ListaPoco) => ({
-    value: poco.id,
+    value: poco.poco,
     label: poco.poco,
   }));
 
@@ -22,8 +22,8 @@ function SelectFiltragemPocos({ intervencaoForm }: any) {
       <FormControl>
         <FormLabel>POÇO</FormLabel>
         <Select
-          id="poco"
-          name="poco"
+          id="nom_atividade"
+          name="nom_atividade"
           placeholder="Selecione"
           onChange={(event, name) => handleChange(event, name)}
           options={options}

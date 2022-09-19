@@ -1,5 +1,6 @@
 // import { useEffect } from 'react';
-import { FaChevronRight } from 'react-icons/fa';
+import { FaChevronRight } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 import {
   Flex,
@@ -18,18 +19,20 @@ import {
   Stack,
   useBreakpointValue,
   Textarea,
-} from '@chakra-ui/react';
-import { Ring } from '@uiball/loaders';
+} from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
 
 // import ListDnD from 'components/ListDnD';
-import { TextError } from 'components/TextError';
+// import { TextError } from "components/TextError";
 
-import { handleCadastrar, handleCancelar } from 'utils/handleCadastro';
+import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroAtividade } from 'hooks/useCadastroAtividade';
+import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 function ModalAtividade({ onClose, atividade, id }: any) {
   const { registerForm, loading } = useCadastroAtividade();
+  const { state }: any = useLocation();
+  const { poco } = state;
 
   // useEffect(() => {
   //   console.log('ModalAtividade', atividade);
@@ -41,16 +44,16 @@ function ModalAtividade({ onClose, atividade, id }: any) {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
-            backgroundColor={'#2E69FD'}
+            backgroundColor={"#2E69FD"}
             borderTopRadius={7}
-            display={'flex'}
-            justifyContent={'center'}
-            color={'white'}
-            fontSize={'1em'}
+            display={"flex"}
+            justifyContent={"center"}
+            color={"white"}
+            fontSize={"1em"}
           >
             Entrega programa conceitual - P3
           </ModalHeader>
-          <ModalCloseButton color={'white'} />
+          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -58,112 +61,110 @@ function ModalAtividade({ onClose, atividade, id }: any) {
             }}
           >
             <ModalBody mt={3}>
-              <Text sx={{ fontSize: 20, fontWeight: '500' }}>
-                {id.slice(0, 3) + ' ' + id.slice(3)}
-              </Text>
+              <Text sx={{ fontSize: 20, fontWeight: "500" }}>{poco.poco}</Text>
               <FormControl>
                 <Flex
-                  display={'flex'}
+                  display={"flex"}
                   flexDirection={useBreakpointValue({
-                    base: 'column',
-                    md: 'row',
+                    base: "column",
+                    md: "row",
                   })}
                   gap={4}
                 >
                   <Stack>
-                    <Flex flexDirection={'row'} gap={5}>
+                    <Flex flexDirection={"row"} gap={5}>
                       <Text
-                        w={'150px'}
+                        w={"150px"}
                         sx={{
                           fontSize: 16,
-                          fontWeight: '400',
-                          color: '#777777',
+                          fontWeight: "400",
+                          color: "#777777",
                         }}
                       >
                         Resposável
                       </Text>
-                      <Text sx={{ fontSize: 16, fontWeight: '700' }}>
+                      <Text sx={{ fontSize: 16, fontWeight: "700" }}>
                         João Costa
                       </Text>
                     </Flex>
-                    <Flex flexDirection={'row'} gap={5}>
+                    <Flex flexDirection={"row"} gap={5}>
                       <Text
-                        w={'150px'}
+                        w={"150px"}
                         sx={{
                           fontSize: 16,
-                          fontWeight: '400',
-                          color: '#777777',
+                          fontWeight: "400",
+                          color: "#777777",
                         }}
                       >
                         Precedentes
                       </Text>
-                      <Text sx={{ fontSize: 16, fontWeight: '700' }}>
+                      <Text sx={{ fontSize: 16, fontWeight: "700" }}>
                         x-y-z
                       </Text>
                     </Flex>
-                    <Flex flexDirection={'row'} gap={5}>
+                    <Flex flexDirection={"row"} gap={5}>
                       <Text
-                        w={'150px'}
+                        w={"150px"}
                         sx={{
                           fontSize: 16,
-                          fontWeight: '400',
-                          color: '#777777',
+                          fontWeight: "400",
+                          color: "#777777",
                         }}
                       >
                         Início planejado
                       </Text>
-                      <Text sx={{ fontSize: 16, fontWeight: '700' }}>
+                      <Text sx={{ fontSize: 16, fontWeight: "700" }}>
                         10/03/2022
                       </Text>
                     </Flex>
-                    <Flex flexDirection={'row'} gap={5}>
+                    <Flex flexDirection={"row"} gap={5}>
                       <Text
-                        w={'150px'}
+                        w={"150px"}
                         sx={{
                           fontSize: 16,
-                          fontWeight: '400',
-                          color: '#777777',
+                          fontWeight: "400",
+                          color: "#777777",
                         }}
                       >
                         Duração planejada
                       </Text>
-                      <Text sx={{ fontSize: 16, fontWeight: '700' }}>
+                      <Text sx={{ fontSize: 16, fontWeight: "700" }}>
                         10 dias
                       </Text>
                     </Flex>
-                    <Flex flexDirection={'row'} gap={5}>
+                    <Flex flexDirection={"row"} gap={5}>
                       <Text
-                        w={'150px'}
+                        w={"150px"}
                         sx={{
                           fontSize: 16,
-                          fontWeight: '400',
-                          color: '#777777',
+                          fontWeight: "400",
+                          color: "#777777",
                         }}
                       >
                         Duração prevista
                       </Text>
-                      <Text sx={{ fontSize: 16, fontWeight: '700' }}>
+                      <Text sx={{ fontSize: 16, fontWeight: "700" }}>
                         10 dias
                       </Text>
                     </Flex>
-                    <Flex flexDirection={'row'} gap={5}>
+                    <Flex flexDirection={"row"} gap={5}>
                       <Text
-                        w={'150px'}
+                        w={"150px"}
                         sx={{
                           fontSize: 16,
-                          fontWeight: '400',
-                          color: '#777777',
+                          fontWeight: "400",
+                          color: "#777777",
                         }}
                       >
                         Latência
                       </Text>
-                      <Text sx={{ fontSize: 16, fontWeight: '700' }}>
+                      <Text sx={{ fontSize: 16, fontWeight: "700" }}>
                         10 dias antes de CIP02
                       </Text>
                     </Flex>
                   </Stack>
                   <Stack>
-                    <Flex flexDirection={'row'} gap={5}>
+                    <Flex flexDirection={"row"} gap={5}>
                       <Button
                         disabled={!registerForm.isValid}
                         variant="outline"
@@ -174,7 +175,7 @@ function ModalAtividade({ onClose, atividade, id }: any) {
                           sx={{
                             marginRight: 2,
                             fontSize: 18,
-                            fontWeight: '600',
+                            fontWeight: "600",
                           }}
                         >
                           Gráficos de precedentes
@@ -182,13 +183,13 @@ function ModalAtividade({ onClose, atividade, id }: any) {
                         <FaChevronRight color="inherit" size={20} />
                       </Button>
                     </Flex>
-                    <Flex flexDirection={'row'} gap={5}>
+                    <Flex flexDirection={"row"} gap={5}>
                       <Text
-                        w={'100px'}
+                        w={"100px"}
                         sx={{
                           fontSize: 16,
-                          fontWeight: '400',
-                          color: '#777777',
+                          fontWeight: "400",
+                          color: "#777777",
                         }}
                       >
                         Status
@@ -197,8 +198,8 @@ function ModalAtividade({ onClose, atividade, id }: any) {
                         id="atividade"
                         name="atividade"
                         placeholder="Selecione"
-                        bg={'#fff'}
-                        value={'item.atividade'}
+                        bg={"#fff"}
+                        value={"item.atividade"}
                         // onChange={(event) => handleChange(event, 'atividade')}
                       >
                         <option value="option1">Option 1</option>
@@ -210,8 +211,8 @@ function ModalAtividade({ onClose, atividade, id }: any) {
                 </Flex>
                 <Flex
                   flexDirection={useBreakpointValue({
-                    base: 'column',
-                    md: 'row',
+                    base: "column",
+                    md: "row",
                   })}
                   gap={5}
                 >
@@ -222,28 +223,28 @@ function ModalAtividade({ onClose, atividade, id }: any) {
                       placeholder="Adicione comentários sobre a atividade"
                       id="comentarios"
                       name="comentarios"
-                      value={registerForm.values.comentarios}
+                      // value={registerForm.values.comentarios}
                       onChange={registerForm.handleChange}
                     />
-                    {registerForm.errors.comentarios &&
+                    {/* {registerForm.errors.comentarios &&
                       registerForm.touched.comentarios && (
                         <TextError>{registerForm.errors.comentarios}</TextError>
-                      )}
+                      )} */}
                   </FormControl>
                 </Flex>
               </FormControl>
             </ModalBody>
 
-            <ModalFooter justifyContent={'center'}>
+            <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
                 <Button
                   variant="ghost"
                   color="red"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
-                    background: 'red.500',
-                    transition: 'all 0.4s',
-                    color: 'white',
+                    background: "red.500",
+                    transition: "all 0.4s",
+                    color: "white",
                   }}
                 >
                   Cancelar
@@ -255,8 +256,8 @@ function ModalAtividade({ onClose, atividade, id }: any) {
                   color="white"
                   onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
-                    background: 'origem.500',
-                    transition: 'all 0.4s',
+                    background: "origem.500",
+                    transition: "all 0.4s",
                   }}
                 >
                   {loading ? (

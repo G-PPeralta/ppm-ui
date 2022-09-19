@@ -1,19 +1,19 @@
-import React, { useCallback, useState } from 'react';
-import { useDropzone } from 'react-dropzone';
-import { FiCamera } from 'react-icons/fi';
+import React, { useCallback, useState } from "react";
+import { useDropzone } from "react-dropzone";
+import { FiCamera } from "react-icons/fi";
 
-import { Flex, Image } from '@chakra-ui/react';
-import Avvvatars from 'avvvatars-react';
-import { DropzoneProps } from 'interfaces/Components';
+import { Flex, Image } from "@chakra-ui/react";
+import Avvvatars from "avvvatars-react";
+import { DropzoneProps } from "interfaces/Components";
 
-import styles from './Dropzone.module.scss';
+import styles from "./Dropzone.module.scss";
 
 const Dropzone: React.FC<DropzoneProps> = ({
   onFileUploaded,
   avatar,
   nome,
 }) => {
-  const [selectedFileUrl, setSelectedFileUrl] = useState('');
+  const [selectedFileUrl, setSelectedFileUrl] = useState("");
 
   const onDrop = useCallback(
     (acceptedFiles: any[]) => {
@@ -24,12 +24,12 @@ const Dropzone: React.FC<DropzoneProps> = ({
       setSelectedFileUrl(fileUrl);
       onFileUploaded(file);
     },
-    [onFileUploaded],
+    [onFileUploaded]
   );
   const { getRootProps, getInputProps, isDragReject } = useDropzone({
     onDrop,
     accept: {
-      'image/*': [],
+      "image/*": [],
     },
     maxFiles: 1,
     maxSize: 40000,
@@ -73,7 +73,7 @@ const Dropzone: React.FC<DropzoneProps> = ({
               <Image src={avatar} alt="Perfil" className={styles.preview} />
             ) : (
               <div>
-                <Avvvatars value={nome || ''} size={160} />
+                <Avvvatars value={nome || ""} size={160} />
               </div>
             )}
           </p>

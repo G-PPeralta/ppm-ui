@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { BsPlusLg } from 'react-icons/bs';
+import { useState } from "react";
+import { BsPlusLg } from "react-icons/bs";
 
 import {
   Box,
@@ -13,11 +13,11 @@ import {
   Portal,
   Text,
   IconButton,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import { RegisterNewTask } from './RegisterNewTask';
-import { RegisterProjectType } from './RegisterProjectType';
-import RegistrarNovaIntervencao from './RegistrarNovaIntervencao';
+import { RegisterNewTask } from "./RegisterNewTask";
+import { RegisterProjectType } from "./RegisterProjectType";
+import RegistrarNovaIntervencao from "./RegistrarNovaIntervencao";
 
 function BotaoCadastrar() {
   const [atividadeModalIsVisible, setAtividadeModalIsVisible] = useState(false);
@@ -33,18 +33,18 @@ function BotaoCadastrar() {
             mt={2}
             py={3}
             w="75%"
-            border={'2px'}
-            borderStyle={'dashed'}
-            borderColor={'origem.500'}
-            borderRadius={'3xl'}
-            direction={'column'}
+            border={"2px"}
+            borderStyle={"dashed"}
+            borderColor={"origem.500"}
+            borderRadius={"3xl"}
+            direction={"column"}
             gap={4}
-            align={'center'}
-            justify={'center'}
+            align={"center"}
+            justify={"center"}
             _hover={{
-              cursor: 'pointer',
-              backgroundColor: 'grey.100',
-              transition: 'all 0.4s',
+              cursor: "pointer",
+              backgroundColor: "grey.100",
+              transition: "all 0.4s",
             }}
           >
             <IconButton
@@ -57,7 +57,7 @@ function BotaoCadastrar() {
               size="lg"
             />
 
-            <Text color={'origem.500'} fontWeight={600}>
+            <Text color={"origem.500"} fontWeight={600}>
               Cadastrar
             </Text>
           </Flex>
@@ -65,8 +65,8 @@ function BotaoCadastrar() {
         <Portal>
           <PopoverContent
             backgroundColor="origem.400"
-            color={'white'}
-            border={'none'}
+            color={"white"}
+            border={"none"}
           >
             <PopoverArrow backgroundColor="origem.400" />
             <PopoverCloseButton />
@@ -74,11 +74,11 @@ function BotaoCadastrar() {
               <>
                 <Box>
                   <Text
-                    fontSize={'lg'}
-                    fontWeight={'600'}
+                    fontSize={"lg"}
+                    fontWeight={"600"}
                     _hover={{
-                      cursor: 'pointer',
-                      transition: 'all 0.4s',
+                      cursor: "pointer",
+                      transition: "all 0.4s",
                     }}
                     onClick={() => setAtividadeModalIsVisible(true)}
                   >
@@ -91,11 +91,11 @@ function BotaoCadastrar() {
                 </Box>
                 <Box>
                   <Text
-                    fontSize={'lg'}
-                    fontWeight={'600'}
+                    fontSize={"lg"}
+                    fontWeight={"600"}
                     _hover={{
-                      cursor: 'pointer',
-                      transition: 'all 0.4s',
+                      cursor: "pointer",
+                      transition: "all 0.4s",
                     }}
                     onClick={() => setIntervencaoModalIsVisible(true)}
                   >
@@ -108,11 +108,11 @@ function BotaoCadastrar() {
                 </Box>
                 <Box>
                   <Text
-                    fontSize={'lg'}
-                    fontWeight={'600'}
+                    fontSize={"lg"}
+                    fontWeight={"600"}
                     _hover={{
-                      cursor: 'pointer',
-                      transition: 'all 0.4s',
+                      cursor: "pointer",
+                      transition: "all 0.4s",
                     }}
                     onClick={() => setProjetoModalIsVisible(true)}
                   >

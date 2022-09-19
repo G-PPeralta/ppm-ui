@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from "@chakra-ui/react";
 
 type Props = {
   status: string;
@@ -7,12 +7,12 @@ type Props = {
 
 function StatusProjeto({ status, color }: Props) {
   return (
-    <Flex align={'center'}>
+    <Flex align={"center"}>
       <Box
         backgroundColor={color}
-        borderRadius={'50%'}
-        width={'10px'}
-        height={'10px'}
+        borderRadius={"50%"}
+        width={"10px"}
+        height={"10px"}
       />
       <Text ml={2}>{status}</Text>
     </Flex>

@@ -1,4 +1,4 @@
-import { StackedBarChartProps } from 'interfaces/Components';
+import { StackedBarChartProps } from "interfaces/Components";
 import {
   BarChart,
   Bar,
@@ -6,9 +6,9 @@ import {
   Tooltip,
   ResponsiveContainer,
   YAxis,
-} from 'recharts';
+} from "recharts";
 
-import style from './StackedBarChart.module.scss';
+import style from "./StackedBarChart.module.scss";
 
 export default function StackedBarChart({
   sizeW,

@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { AiOutlineCaretUp } from 'react-icons/ai';
+import { useState, useEffect } from "react";
+import { AiOutlineCaretUp } from "react-icons/ai";
 
 import {
   Box,
@@ -14,9 +14,9 @@ import {
   Tr,
   Th,
   Tbody,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import { getInfoProjetos } from 'services/get/Infograficos';
+import { getInfoProjetos } from "services/get/Infograficos";
 
 export default function NaoPrevistoComponent() {
   const [projetos, setProjetos] = useState<any[]>([]);
@@ -35,10 +35,10 @@ export default function NaoPrevistoComponent() {
 
   const data = {
     id: 1,
-    name: 'Nome do Projeto',
-    orcament: '1.000.000',
-    cpi: 'yellow',
-    spi: 'red',
+    name: "Nome do Projeto",
+    orcament: "1.000.000",
+    cpi: "yellow",
+    spi: "red",
   };
   //   {
   //     id: 2,
@@ -80,31 +80,31 @@ export default function NaoPrevistoComponent() {
   return (
     <Stack spacing="8">
       <Flex
-        w={'100%'}
+        w={"100%"}
         align="center"
         justify="center"
-        bg={useBreakpointValue({ base: '#EDF2F7', sm: '#EDF2F7' })}
+        bg={useBreakpointValue({ base: "#EDF2F7", sm: "#EDF2F7" })}
       >
         <Box
-          py={{ base: '0', sm: '4' }}
-          px={{ base: '0', sm: '4' }}
-          w={'100%'}
-          bg={useBreakpointValue({ base: 'white', sm: 'white' })}
+          py={{ base: "0", sm: "4" }}
+          px={{ base: "0", sm: "4" }}
+          w={"100%"}
+          bg={useBreakpointValue({ base: "white", sm: "white" })}
           boxShadow={{
-            base: 'none',
-            sm: useColorModeValue('md', 'md-dark'),
+            base: "none",
+            sm: useColorModeValue("md", "md-dark"),
           }}
-          borderRadius={{ base: 'none', sm: 'xl' }}
+          borderRadius={{ base: "none", sm: "xl" }}
         >
-          <Box w={'100%'} minWidth={480}>
+          <Box w={"100%"} minWidth={480}>
             <Text
               mb={1}
-              sx={{ fontSize: 18, fontWeight: '600', alignSelf: 'center' }}
+              sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
               Projetos
             </Text>
-            <TableContainer overflowY={'scroll'} height={260}>
+            <TableContainer overflowY={"scroll"} height={260}>
               <Table size="sm">
                 <Thead>
                   <Tr>
@@ -117,9 +117,9 @@ export default function NaoPrevistoComponent() {
                 </Thead>
                 <Tbody
                   style={{
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
                   }}
                 >
                   {projetos.map((projeto, index) => (
@@ -128,7 +128,7 @@ export default function NaoPrevistoComponent() {
                         {projeto.id}
                       </Th>
                       <Th
-                        color={'#628EFD'}
+                        color={"#628EFD"}
                         sx={{ fontSize: 11 }}
                         // onMouseOver={(event) => {
                         //   // console.log(projeto.nomeProjeto);
@@ -140,39 +140,39 @@ export default function NaoPrevistoComponent() {
                         //   setTrue(false);
                         // }}
                       >
-                        <Text>{projeto.nome?.substr(0, 18) + '...'}</Text>
+                        <Text>{projeto.nome?.substr(0, 18) + "..."}</Text>
                       </Th>
                       {/* {trut ? <Text> {projeto.nomeProjeto}</Text> : ''} */}
                       <Th color="gray.400" sx={{ fontSize: 11 }}>
                         {projeto.valorTotalPrevisto}
                       </Th>
                       <Th>
-                        {data.cpi == 'yellow' ? (
+                        {data.cpi == "yellow" ? (
                           <Box
                             w={5}
                             h={5}
-                            bg={'#9FA2B4'}
-                            display={'flex'}
+                            bg={"#9FA2B4"}
+                            display={"flex"}
                             flexDirection="column"
-                            alignItems={'center'}
-                            pt={'2px'}
-                            sx={{ borderRadius: '100%' }}
+                            alignItems={"center"}
+                            pt={"2px"}
+                            sx={{ borderRadius: "100%" }}
                           >
                             <AiOutlineCaretUp color="#ffffff" size={14} />
                           </Box>
                         ) : undefined}
                       </Th>
                       <Th>
-                        {data.spi == 'red' ? (
+                        {data.spi == "red" ? (
                           <Box
                             w={5}
                             h={5}
-                            bg={'#9FA2B4'}
-                            display={'flex'}
+                            bg={"#9FA2B4"}
+                            display={"flex"}
                             flexDirection="column"
-                            alignItems={'center'}
-                            pt={'2px'}
-                            sx={{ borderRadius: '100%' }}
+                            alignItems={"center"}
+                            pt={"2px"}
+                            sx={{ borderRadius: "100%" }}
                           >
                             <AiOutlineCaretUp color="#ffffff" size={14} />
                           </Box>

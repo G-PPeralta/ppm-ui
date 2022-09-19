@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 import {
   Box,
@@ -6,11 +6,11 @@ import {
   Text,
   useBreakpointValue,
   useColorModeValue,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import StackedBarChart from 'components/StackedBarChart';
+import StackedBarChart from "components/StackedBarChart";
 
-import { getTotalProjetos } from 'services/get/Dashboard';
+import { getTotalProjetos } from "services/get/Dashboard";
 
 export default function TotalProjetosComponent() {
   const [total, setTotal] = useState(1);
@@ -59,7 +59,7 @@ export default function TotalProjetosComponent() {
 
   const dataMock = [
     {
-      month: 'Jan/22',
+      month: "Jan/22",
       Iniciados: 10,
       Finalizados: 10,
       Cancelados: 10,
@@ -69,7 +69,7 @@ export default function TotalProjetosComponent() {
       Pré_Aprovação: 40,
     },
     {
-      month: 'Fev/22',
+      month: "Fev/22",
       Iniciados: 10,
       Finalizados: 10,
       Cancelados: 10,
@@ -79,7 +79,7 @@ export default function TotalProjetosComponent() {
       Pré_Aprovação: 10,
     },
     {
-      month: 'Mar/22',
+      month: "Mar/22",
       Iniciados: 10,
       Finalizados: 10,
       Cancelados: 10,
@@ -89,7 +89,7 @@ export default function TotalProjetosComponent() {
       Pré_Aprovação: 10,
     },
     {
-      month: 'Abr/22',
+      month: "Abr/22",
       Iniciados: 10,
       Finalizados: 10,
       Cancelados: 10,
@@ -101,42 +101,42 @@ export default function TotalProjetosComponent() {
   ];
 
   const dataEntries = [
-    { name: 'Iniciados', color: '#93E01B' },
-    { name: 'Finalizados', color: '#2E69FD' },
-    { name: 'Cancelados', color: '#F94144' },
-    { name: 'Holds', color: '#F4DD06' },
-    { name: 'Não_Iniciados', color: '#aaaaaa' },
-    { name: 'Reprogramados', color: '#ffa70f' },
-    { name: 'Pré_Aprovação', color: '#c50ffc' },
+    { name: "Iniciados", color: "#93E01B" },
+    { name: "Finalizados", color: "#2E69FD" },
+    { name: "Cancelados", color: "#F94144" },
+    { name: "Holds", color: "#F4DD06" },
+    { name: "Não_Iniciados", color: "#aaaaaa" },
+    { name: "Reprogramados", color: "#ffa70f" },
+    { name: "Pré_Aprovação", color: "#c50ffc" },
   ];
 
   return (
     <Flex
-      w={'100%'}
+      w={"100%"}
       align="center"
       justify="center"
-      bg={useBreakpointValue({ base: '#EDF2F7', sm: '#EDF2F7' })}
+      bg={useBreakpointValue({ base: "#EDF2F7", sm: "#EDF2F7" })}
     >
       <Box
-        py={{ base: '0', sm: '4' }}
-        px={{ base: '2', sm: '10' }}
-        w={'100%'}
-        bg={useBreakpointValue({ base: 'white', sm: 'white' })}
+        py={{ base: "0", sm: "4" }}
+        px={{ base: "2", sm: "10" }}
+        w={"100%"}
+        bg={useBreakpointValue({ base: "white", sm: "white" })}
         boxShadow={{
-          base: 'none',
-          sm: useColorModeValue('md', 'md-dark'),
+          base: "none",
+          sm: useColorModeValue("md", "md-dark"),
         }}
-        borderRadius={{ base: 'none', sm: 'xl' }}
-        display={'flex'}
-        flexDirection={'column'}
-        alignItems={'center'}
+        borderRadius={{ base: "none", sm: "xl" }}
+        display={"flex"}
+        flexDirection={"column"}
+        alignItems={"center"}
       >
         <Text
           sx={{
             fontSize: 24,
-            fontWeight: '600',
-            width: '100%',
-            textAlign: 'flex-start',
+            fontWeight: "600",
+            width: "100%",
+            textAlign: "flex-start",
           }}
           color="#000000"
         >
@@ -145,22 +145,22 @@ export default function TotalProjetosComponent() {
         <Box
           mt={2}
           display="flex"
-          flexDirection={{ base: 'column', lg: 'row' }}
+          flexDirection={{ base: "column", lg: "row" }}
         >
-          <Box display={'flex'}>
+          <Box display={"flex"}>
             <Box
               pl={1}
               pt={5}
               mt={2}
               mr={2}
-              bg={'#0047BB'}
-              sx={{ width: '36px', height: '245px', borderRadius: '2px' }}
+              bg={"#0047BB"}
+              sx={{ width: "36px", height: "245px", borderRadius: "2px" }}
             >
               <Text
                 sx={{
                   fontSize: 16,
-                  writingMode: 'vertical-rl',
-                  transform: 'scale(-1)',
+                  writingMode: "vertical-rl",
+                  transform: "scale(-1)",
                 }}
                 color="#ffffff"
               >
@@ -171,8 +171,8 @@ export default function TotalProjetosComponent() {
               <Text
                 p={0.5}
                 mt={2}
-                bg={'#93E01B'}
-                sx={{ fontSize: 14, width: '200px', borderRadius: '2px' }}
+                bg={"#93E01B"}
+                sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                 color="#ffffff"
               >
                 {iniciados} Projetos Iniciados
@@ -180,8 +180,8 @@ export default function TotalProjetosComponent() {
               <Text
                 p={0.5}
                 mt={2}
-                bg={'#2E69FD'}
-                sx={{ fontSize: 14, width: '200px', borderRadius: '2px' }}
+                bg={"#2E69FD"}
+                sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                 color="#ffffff"
               >
                 {finalizados} Projetos Finalizados
@@ -189,8 +189,8 @@ export default function TotalProjetosComponent() {
               <Text
                 p={0.5}
                 mt={2}
-                bg={'#F94144'}
-                sx={{ fontSize: 14, width: '200px', borderRadius: '2px' }}
+                bg={"#F94144"}
+                sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                 color="#ffffff"
               >
                 {cancelados} Projetos Cancelados
@@ -198,8 +198,8 @@ export default function TotalProjetosComponent() {
               <Text
                 p={0.5}
                 mt={2}
-                bg={'#F4DD06'}
-                sx={{ fontSize: 14, width: '200px', borderRadius: '2px' }}
+                bg={"#F4DD06"}
+                sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                 color="#ffffff"
               >
                 {holds} Projetos Holds
@@ -207,8 +207,8 @@ export default function TotalProjetosComponent() {
               <Text
                 p={0.5}
                 mt={2}
-                bg={'#aaaaaa'}
-                sx={{ fontSize: 14, width: '200px', borderRadius: '2px' }}
+                bg={"#aaaaaa"}
+                sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                 color="#ffffff"
               >
                 {naoIniciado} Projetos Não Iniciados
@@ -216,8 +216,8 @@ export default function TotalProjetosComponent() {
               <Text
                 p={0.5}
                 mt={2}
-                bg={'#ffa70f'}
-                sx={{ fontSize: 14, width: '200px', borderRadius: '2px' }}
+                bg={"#ffa70f"}
+                sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                 color="#ffffff"
               >
                 {reprogramado} Projetos Reprogramados
@@ -225,8 +225,8 @@ export default function TotalProjetosComponent() {
               <Text
                 p={0.5}
                 mt={2}
-                bg={'#c50ffc'}
-                sx={{ fontSize: 14, width: '200px', borderRadius: '2px' }}
+                bg={"#c50ffc"}
+                sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                 color="#ffffff"
               >
                 {preAprovacao} Projetos Pré Aprovação Diretor
@@ -236,7 +236,7 @@ export default function TotalProjetosComponent() {
               <Text
                 p={0.5}
                 mt={2}
-                sx={{ fontSize: 14, fontWeight: '600' }}
+                sx={{ fontSize: 14, fontWeight: "600" }}
                 color="#93E01B"
               >
                 {Math.round((iniciados / total) * 100)}%
@@ -244,7 +244,7 @@ export default function TotalProjetosComponent() {
               <Text
                 p={0.5}
                 mt={2}
-                sx={{ fontSize: 14, fontWeight: '600' }}
+                sx={{ fontSize: 14, fontWeight: "600" }}
                 color="#0239C3"
               >
                 {Math.round((finalizados / total) * 100)}%
@@ -252,7 +252,7 @@ export default function TotalProjetosComponent() {
               <Text
                 p={0.5}
                 mt={2}
-                sx={{ fontSize: 14, fontWeight: '600' }}
+                sx={{ fontSize: 14, fontWeight: "600" }}
                 color="#F94144"
               >
                 {Math.round((cancelados / total) * 100)}%
@@ -260,7 +260,7 @@ export default function TotalProjetosComponent() {
               <Text
                 p={0.5}
                 mt={2}
-                sx={{ fontSize: 14, fontWeight: '600' }}
+                sx={{ fontSize: 14, fontWeight: "600" }}
                 color="#F4DD06"
               >
                 {Math.round((holds / total) * 100)}%
@@ -268,7 +268,7 @@ export default function TotalProjetosComponent() {
               <Text
                 p={0.5}
                 mt={2}
-                sx={{ fontSize: 14, fontWeight: '600' }}
+                sx={{ fontSize: 14, fontWeight: "600" }}
                 color="#aaaaaa"
               >
                 {Math.round((naoIniciado / total) * 100)}%
@@ -276,7 +276,7 @@ export default function TotalProjetosComponent() {
               <Text
                 p={0.5}
                 mt={2}
-                sx={{ fontSize: 14, fontWeight: '600' }}
+                sx={{ fontSize: 14, fontWeight: "600" }}
                 color="#ffa70f"
               >
                 {Math.round((reprogramado / total) * 100)}%
@@ -284,7 +284,7 @@ export default function TotalProjetosComponent() {
               <Text
                 p={0.5}
                 mt={2}
-                sx={{ fontSize: 14, fontWeight: '600' }}
+                sx={{ fontSize: 14, fontWeight: "600" }}
                 color="#c50ffc"
               >
                 {Math.round((preAprovacao / total) * 100)}%
@@ -302,16 +302,16 @@ export default function TotalProjetosComponent() {
             </Box>
           </Box>
           <Box
-            display={'flex'}
-            flexDirection={{ base: 'row', lg: 'column' }}
-            w={'fit-content'}
-            justifyContent={'space-evenly'}
+            display={"flex"}
+            flexDirection={{ base: "row", lg: "column" }}
+            w={"fit-content"}
+            justifyContent={"space-evenly"}
           >
             <Box ml={5} sx={{ width: 190 }}>
               <Text
                 ml={5}
                 mb={4}
-                sx={{ fontSize: 16, fontWeight: '600', alignSelf: 'center' }}
+                sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
                 color="#000000"
               >
                 Projetos Prioridade
@@ -319,17 +319,17 @@ export default function TotalProjetosComponent() {
               <Box
                 mt={2}
                 sx={{
-                  display: 'flex',
-                  alignItens: 'center',
-                  justifyContent: 'space-between',
-                  width: '100%',
+                  display: "flex",
+                  alignItens: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
                 }}
               >
                 <Text
                   sx={{
                     fontSize: 16,
-                    fontWeight: '600',
-                    alignSelf: 'center',
+                    fontWeight: "600",
+                    alignSelf: "center",
                   }}
                   color="#9FA2B4"
                 >
@@ -338,8 +338,8 @@ export default function TotalProjetosComponent() {
                 <Text
                   sx={{
                     fontSize: 16,
-                    fontWeight: '600',
-                    alignSelf: 'center',
+                    fontWeight: "600",
+                    alignSelf: "center",
                   }}
                   color="#1FBE55"
                 >
@@ -349,17 +349,17 @@ export default function TotalProjetosComponent() {
               <Box
                 mt={2}
                 sx={{
-                  display: 'flex',
-                  alignItens: 'center',
-                  justifyContent: 'space-between',
-                  width: '100%',
+                  display: "flex",
+                  alignItens: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
                 }}
               >
                 <Text
                   sx={{
                     fontSize: 16,
-                    fontWeight: '600',
-                    alignSelf: 'center',
+                    fontWeight: "600",
+                    alignSelf: "center",
                   }}
                   color="#9FA2B4"
                 >
@@ -368,8 +368,8 @@ export default function TotalProjetosComponent() {
                 <Text
                   sx={{
                     fontSize: 16,
-                    fontWeight: '600',
-                    alignSelf: 'center',
+                    fontWeight: "600",
+                    alignSelf: "center",
                   }}
                   color="#F4DD06"
                 >
@@ -379,17 +379,17 @@ export default function TotalProjetosComponent() {
               <Box
                 mt={2}
                 sx={{
-                  display: 'flex',
-                  alignItens: 'center',
-                  justifyContent: 'space-between',
-                  width: '100%',
+                  display: "flex",
+                  alignItens: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
                 }}
               >
                 <Text
                   sx={{
                     fontSize: 16,
-                    fontWeight: '600',
-                    alignSelf: 'center',
+                    fontWeight: "600",
+                    alignSelf: "center",
                   }}
                   color="#9FA2B4"
                 >
@@ -398,8 +398,8 @@ export default function TotalProjetosComponent() {
                 <Text
                   sx={{
                     fontSize: 16,
-                    fontWeight: '600',
-                    alignSelf: 'center',
+                    fontWeight: "600",
+                    alignSelf: "center",
                   }}
                   color="#F94144"
                 >
@@ -412,7 +412,7 @@ export default function TotalProjetosComponent() {
                 ml={5}
                 mt={{ base: 0, lg: 4 }}
                 mb={{ base: 4, lg: 2 }}
-                sx={{ fontSize: 16, fontWeight: '600', alignSelf: 'center' }}
+                sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
                 color="#000000"
               >
                 Projetos Complexidade
@@ -420,17 +420,17 @@ export default function TotalProjetosComponent() {
               <Box
                 mt={2}
                 sx={{
-                  display: 'flex',
-                  alignItens: 'center',
-                  justifyContent: 'space-between',
-                  width: '100%',
+                  display: "flex",
+                  alignItens: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
                 }}
               >
                 <Text
                   sx={{
                     fontSize: 16,
-                    fontWeight: '600',
-                    alignSelf: 'center',
+                    fontWeight: "600",
+                    alignSelf: "center",
                   }}
                   color="#9FA2B4"
                 >
@@ -439,8 +439,8 @@ export default function TotalProjetosComponent() {
                 <Text
                   sx={{
                     fontSize: 16,
-                    fontWeight: '600',
-                    alignSelf: 'center',
+                    fontWeight: "600",
+                    alignSelf: "center",
                   }}
                   color="#1FBE55"
                 >
@@ -450,17 +450,17 @@ export default function TotalProjetosComponent() {
               <Box
                 mt={2}
                 sx={{
-                  display: 'flex',
-                  alignItens: 'center',
-                  justifyContent: 'space-between',
-                  width: '100%',
+                  display: "flex",
+                  alignItens: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
                 }}
               >
                 <Text
                   sx={{
                     fontSize: 16,
-                    fontWeight: '600',
-                    alignSelf: 'center',
+                    fontWeight: "600",
+                    alignSelf: "center",
                   }}
                   color="#9FA2B4"
                 >
@@ -469,8 +469,8 @@ export default function TotalProjetosComponent() {
                 <Text
                   sx={{
                     fontSize: 16,
-                    fontWeight: '600',
-                    alignSelf: 'center',
+                    fontWeight: "600",
+                    alignSelf: "center",
                   }}
                   color="#F4DD06"
                 >
@@ -480,17 +480,17 @@ export default function TotalProjetosComponent() {
               <Box
                 mt={2}
                 sx={{
-                  display: 'flex',
-                  alignItens: 'center',
-                  justifyContent: 'space-between',
-                  width: '100%',
+                  display: "flex",
+                  alignItens: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
                 }}
               >
                 <Text
                   sx={{
                     fontSize: 16,
-                    fontWeight: '600',
-                    alignSelf: 'center',
+                    fontWeight: "600",
+                    alignSelf: "center",
                   }}
                   color="#9FA2B4"
                 >
@@ -499,8 +499,8 @@ export default function TotalProjetosComponent() {
                 <Text
                   sx={{
                     fontSize: 16,
-                    fontWeight: '600',
-                    alignSelf: 'center',
+                    fontWeight: "600",
+                    alignSelf: "center",
                   }}
                   color="#F94144"
                 >

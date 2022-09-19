@@ -1,56 +1,84 @@
 import {
   CadastroTarefa,
-  CadastroSonda,
   CadastroProjetoTipo,
   CadastroIntervencao,
   CadastroAtividade,
-  CadastroPoco,
-} from 'interfaces/CadastrosModaisInfograficos';
+  NovaCampanha,
+  NovaIntervencao,
+  NovoPoco,
+  NovaSonda,
+  NovaAtividade,
+} from "interfaces/CadastrosModaisInfograficos";
 
-import { api, token } from 'services/api';
+import { api, token } from "services/api";
 
 export async function postCadastroTarefa(
-  payload: CadastroTarefa,
+  payload: CadastroTarefa
 ): Promise<{ status: number }> {
-  const { status } = await api.post('/tarefa', payload, token());
+  const { status } = await api.post("/tarefa", payload, token());
   return { status };
 }
 
-export async function postCadastroSonda(
-  payload: CadastroSonda,
+export async function postNovaSonda(
+  payload: NovaSonda
 ): Promise<{ status: number }> {
-  const { status } = await api.post('/sonda', payload, token());
+  const { status } = await api.post("/sonda", payload, token());
   return { status };
 }
 
 export async function postCadastroIntervencao(
-  payload: CadastroIntervencao,
+  payload: CadastroIntervencao
 ): Promise<{ status: number }> {
-  const { status } = await api.post('/intervencoes', payload, token());
+  const { status } = await api.post("/intervencoes", payload, token());
   return { status };
 }
 
 export async function postCadastroAtividade(
-  payload: CadastroAtividade,
+  payload: CadastroAtividade
 ): Promise<{ status: number }> {
   const { status } = await api.post(
-    '/atividades-intervencoes',
+    "/atividades-intervencoes",
     payload,
-    token(),
+    token()
   );
   return { status };
 }
 
 export async function postProjetoTipo(
-  payload: CadastroProjetoTipo,
+  payload: CadastroProjetoTipo
 ): Promise<{ status: number }> {
-  const { status } = await api.post('/projeto-intervencao', payload, token());
+  const { status } = await api.post("/projeto-intervencao", payload, token());
   return { status };
 }
 
-export async function postCadastroPoco(
-  payload: CadastroPoco,
+export async function postNovoPoco(
+  payload: NovoPoco
 ): Promise<{ status: number }> {
-  const { status } = await api.post('/poco', payload, token());
+  const { status } = await api.post("/poco", payload, token());
+  return { status };
+}
+
+export async function postNovaCampanha(
+  payload: NovaCampanha
+): Promise<{ status: number }> {
+  const { status } = await api.post("/campanha", payload, token());
+  return { status };
+}
+
+export async function postNovaIntervencao(
+  payload: NovaIntervencao
+): Promise<{ status: number }> {
+  const { status } = await api.post("/campanha/filho", payload, token());
+  return { status };
+}
+
+export async function postNovaAtividade(
+  payload: NovaAtividade
+): Promise<{ status: number }> {
+  const { status } = await api.post(
+    "/campanha/filho/atividade",
+    payload,
+    token()
+  );
   return { status };
 }

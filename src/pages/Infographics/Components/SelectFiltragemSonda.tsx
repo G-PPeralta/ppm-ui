@@ -1,16 +1,15 @@
-import Select from 'react-select';
+import Select from "react-select";
 
-import { FormControl, FormLabel } from '@chakra-ui/react';
-import { ListaSonda } from 'interfaces/CadastrosModaisInfograficos';
+import { FormControl, FormLabel } from "@chakra-ui/react";
 
-import { useCadastroIntervencao } from 'hooks/useCadastroIntervencao';
+import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 function SelectFiltragemSondas({ intervencaoForm }: any) {
   const { listaSondas } = useCadastroIntervencao();
 
-  const options = listaSondas.map((sonda: ListaSonda) => ({
-    value: sonda.id,
-    label: sonda.nome,
+  const options = listaSondas.map((sonda: any) => ({
+    value: sonda.id_campanha,
+    label: sonda.sonda,
   }));
 
   const handleChange = ({ value }: any, { name }: any) => {
@@ -22,8 +21,8 @@ function SelectFiltragemSondas({ intervencaoForm }: any) {
       <FormControl>
         <FormLabel>SONDA</FormLabel>
         <Select
-          id="sonda"
-          name="sonda"
+          id="id_campanha"
+          name="id_campanha"
           placeholder="Selecione"
           onChange={(event, name) => handleChange(event, name)}
           options={options}

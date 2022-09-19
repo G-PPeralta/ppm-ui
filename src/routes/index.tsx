@@ -1,7 +1,7 @@
-import { useAuth } from 'hooks/useAuth';
+import { useAuth } from "hooks/useAuth";
 
-import { PrivateRoutes } from './PrivateRoutes';
-import { PublicRoutes } from './PublicRoutes';
+import { PrivateRoutes } from "./PrivateRoutes";
+import { PublicRoutes } from "./PublicRoutes";
 
 export function MainRoutes() {
   const { signed } = useAuth();

@@ -5,9 +5,9 @@ import {
   useBreakpointValue,
   InputGroup,
   InputLeftElement,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
 function FormValorTotalPrevisto(projectsForm: any) {
   return (
@@ -30,8 +30,8 @@ function FormValorTotalPrevisto(projectsForm: any) {
           value={projectsForm.projectsForm.values.valorTotalPrevisto}
           onChange={projectsForm.projectsForm.handleChange}
           w={useBreakpointValue({
-            base: '100%',
-            md: '95%',
+            base: "100%",
+            md: "95%",
           })}
         />
       </InputGroup>

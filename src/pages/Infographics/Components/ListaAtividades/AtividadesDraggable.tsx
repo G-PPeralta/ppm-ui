@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import { Draggable } from 'react-beautiful-dnd';
-import { FiTrash } from 'react-icons/fi';
-import { GiHamburgerMenu } from 'react-icons/gi';
+import { useState } from "react";
+import { Draggable } from "react-beautiful-dnd";
+import { FiTrash } from "react-icons/fi";
+import { GiHamburgerMenu } from "react-icons/gi";
 
-import { Box, Flex, FormControl, Input, Select, Text } from '@chakra-ui/react';
+import { Box, Flex, FormControl, Input, Select, Text } from "@chakra-ui/react";
 
-import { useCadastroProjetoTipo } from 'hooks/useCadastroProjetoTipo';
+import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
 
-import PopOverPrecedentes from './PopOverPrecedentes';
+import PopOverPrecedentes from "./PopOverPrecedentes";
 
 interface Props {
   index: number;
@@ -29,7 +29,7 @@ function AtividadesDraggable({
   const handleChange = (event: any, chave: any) => {
     item[chave] = Number(event.target.value);
     handleChangeProp(index, chave, Number(event.target.value));
-    registerForm.setFieldValue('atividades', list);
+    registerForm.setFieldValue("atividades", list);
   };
 
   const [render, setRender] = useState(false);
@@ -37,7 +37,7 @@ function AtividadesDraggable({
   const handlePopover = (indexIn: number, value: boolean) => {
     const newList = item.precedentes;
     newList[indexIn].checked = value;
-    handleChangeProp(index, 'precedentes', newList);
+    handleChangeProp(index, "precedentes", newList);
     setRender(!render);
   };
 
@@ -56,29 +56,29 @@ function AtividadesDraggable({
             alignItems="center"
             justifyContent="center"
             w="100%"
-            bg={'#f5f5f5'}
+            bg={"#f5f5f5"}
             px={5}
             py={2}
-            borderRadius={'60px'}
+            borderRadius={"60px"}
             mb={2}
           >
-            <Flex flexDirection={'row'} gap={4}>
-              <Flex align={'center'} justify={'center'} gap={3}>
+            <Flex flexDirection={"row"} gap={4}>
+              <Flex align={"center"} justify={"center"} gap={3}>
                 <GiHamburgerMenu color="#2E69FD" size={16} />
-                <Text sx={{ fontSize: 16, fontWeight: '600' }}>
+                <Text sx={{ fontSize: 16, fontWeight: "600" }}>
                   {index + 1}
                 </Text>
               </Flex>
 
               <FormControl>
-                <Text sx={{ fontSize: 12, fontWeight: '600' }}>ATIVIDADE</Text>
+                <Text sx={{ fontSize: 12, fontWeight: "600" }}>ATIVIDADE</Text>
                 <Select
                   id="atividadeId"
                   name="atividadeId"
                   placeholder="Selecione"
-                  bg={'#fff'}
+                  bg={"#fff"}
                   value={item.atividade}
-                  onChange={(event) => handleChange(event, 'atividadeId')}
+                  onChange={(event) => handleChange(event, "atividadeId")}
                 >
                   {listaAtividades.map((data, index) => (
                     <option value={data.id} key={index}>
@@ -89,24 +89,24 @@ function AtividadesDraggable({
               </FormControl>
 
               <FormControl>
-                <Text sx={{ fontSize: 12, fontWeight: '600' }}>DIAS</Text>
+                <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
                 <Input
                   placeholder="0"
-                  type={'number'}
-                  bg={'#fff'}
+                  type={"number"}
+                  bg={"#fff"}
                   id="dias"
                   name="dias"
                   value={
                     listaAtividades.filter(
-                      (atividade) => atividade.id === item.atividadeId,
+                      (atividade) => atividade.id === item.atividadeId
                     )[0]?.dias
                   }
                   isDisabled
                 />
               </FormControl>
 
-              <Flex direction={'column'}>
-                <Text sx={{ fontSize: 12, fontWeight: '600' }}>
+              <Flex direction={"column"}>
+                <Text sx={{ fontSize: 12, fontWeight: "600" }}>
                   PRECEDENTES
                 </Text>
                 <PopOverPrecedentes
@@ -130,9 +130,9 @@ function AtividadesDraggable({
 
               <Flex
                 p={1}
-                align={'center'}
-                justify={'center'}
-                _hover={{ cursor: 'pointer' }}
+                align={"center"}
+                justify={"center"}
+                _hover={{ cursor: "pointer" }}
               >
                 <FiTrash
                   onClick={() => remove(index)}

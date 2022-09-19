@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { Box, Button, Flex } from '@chakra-ui/react';
+import { Box, Button, Flex } from "@chakra-ui/react";
 
 export default function BotoesSelecionarPolo() {
   const [selecionadoAlagoas, setSelecionadoAlagoas] = useState(true);
@@ -20,30 +20,30 @@ export default function BotoesSelecionarPolo() {
     <Flex mb={3}>
       <Box>
         <Button
-          background={selecionadoAlagoas ? 'origem.300' : 'white'}
-          color={selecionadoAlagoas ? 'white' : 'origem.300'}
+          background={selecionadoAlagoas ? "origem.300" : "white"}
+          color={selecionadoAlagoas ? "white" : "origem.300"}
           _hover={{
-            background: 'origem.500',
-            color: 'white',
-            transition: 'all 0.4s',
+            background: "origem.500",
+            color: "white",
+            transition: "all 0.4s",
           }}
           onClick={handleClick}
-          borderLeftRadius={'6px'}
+          borderLeftRadius={"6px"}
           borderRightRadius={0}
         >
           Alagoas
         </Button>
         <Button
-          background={selecionadoTucanoSul ? 'origem.300' : 'white'}
-          color={selecionadoTucanoSul ? 'white' : 'origem.300'}
+          background={selecionadoTucanoSul ? "origem.300" : "white"}
+          color={selecionadoTucanoSul ? "white" : "origem.300"}
           _hover={{
-            background: 'origem.500',
-            color: 'white',
-            transition: 'all 0.4s',
+            background: "origem.500",
+            color: "white",
+            transition: "all 0.4s",
           }}
           onClick={handleClick}
           borderLeftRadius={0}
-          borderRightRadius={'6px'}
+          borderRightRadius={"6px"}
         >
           Tucano Sul
         </Button>

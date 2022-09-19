@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { Box, FormLabel, Input } from '@chakra-ui/react';
+import { Box, FormLabel, Input } from "@chakra-ui/react";
 
 function FormDisabledCoordenador(projectsForm: any) {
   const [loading, setLoading] = useState(true);
@@ -13,15 +13,15 @@ function FormDisabledCoordenador(projectsForm: any) {
     <>
       {!loading && (
         <Box>
-          <FormLabel htmlFor={'coordenador'}>COORDENADOR</FormLabel>
+          <FormLabel htmlFor={"coordenador"}>COORDENADOR</FormLabel>
           <Input
             disabled
             placeholder=""
-            id={'coordenador'}
-            type={'coordenador'}
-            name={'coordenador'}
+            id={"coordenador"}
+            type={"coordenador"}
+            name={"coordenador"}
             value={projectsForm.projectsForm.values.coordenador}
-            w={'100%'}
+            w={"100%"}
           />
         </Box>
       )}

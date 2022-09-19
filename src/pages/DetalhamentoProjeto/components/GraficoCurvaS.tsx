@@ -1,4 +1,4 @@
-import { Flex, Heading } from '@chakra-ui/react';
+import { Flex, Heading } from "@chakra-ui/react";
 import {
   CartesianGrid,
   LineChart,
@@ -8,30 +8,30 @@ import {
   Legend,
   Line,
   ResponsiveContainer,
-} from 'recharts';
+} from "recharts";
 
 function getNumeroMes(numeroDoMes: Number) {
   const months = [
-    'Jan',
-    'Fev',
-    'Mar',
-    'Abr',
-    'Mai',
-    'Jun',
-    'Jul',
-    'Ago',
-    'Set',
-    'Out',
-    'Nov',
-    'Dez',
+    "Jan",
+    "Fev",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Set",
+    "Out",
+    "Nov",
+    "Dez",
   ];
   return months[Number(numeroDoMes) - 1];
 }
 
 function getNomesMeses(dataInicio: String, qtdMeses: Number) {
   const meses = [];
-  let anoAtual = Number(dataInicio.split('/')[2]);
-  let numeroMes = Number(dataInicio.split('/')[1]);
+  let anoAtual = Number(dataInicio.split("/")[2]);
+  let numeroMes = Number(dataInicio.split("/")[1]);
 
   for (let index = 0; index < qtdMeses; index++) {
     meses.push(`${getNumeroMes(numeroMes)}/${anoAtual}`);
@@ -43,7 +43,7 @@ function getNomesMeses(dataInicio: String, qtdMeses: Number) {
 
 function GraficoCurvaS() {
   const totalBudget = 50000;
-  const dataInicio = '01/10/2022';
+  const dataInicio = "01/10/2022";
   const qtdeMeses = 8;
 
   const totalNomeMeses = getNomesMeses(dataInicio, qtdeMeses);
@@ -55,16 +55,16 @@ function GraficoCurvaS() {
     porcentagem += (totalBudget / qtdeMeses / totalBudget) * 100;
     return {
       mes,
-      'Capex Previsto': porcentagem,
+      "Capex Previsto": porcentagem,
     };
   });
 
   const atual = [
-    { mes: 'Out/2022', 'Capex Realizado': 6 },
-    { mes: 'Nov/2022', 'Capex Realizado': 30 },
-    { mes: 'Dez/2022', 'Capex Realizado': 35 },
-    { mes: 'Jan/2023', 'Capex Realizado': 40 },
-    { mes: 'Fev/2023', 'Capex Realizado': 55 },
+    { mes: "Out/2022", "Capex Realizado": 6 },
+    { mes: "Nov/2022", "Capex Realizado": 30 },
+    { mes: "Dez/2022", "Capex Realizado": 35 },
+    { mes: "Jan/2023", "Capex Realizado": 40 },
+    { mes: "Fev/2023", "Capex Realizado": 55 },
     // { mes: 'Mar/2023', spent: 82 },
     // { mes: 'Abr/2023', spent: 90 },
     // { mes: 'Mai/2023', spent: 95 },
@@ -81,22 +81,22 @@ function GraficoCurvaS() {
   return (
     <>
       <Flex
-        backgroundColor={'white'}
+        backgroundColor={"white"}
         borderRadius={4}
         mt={4}
-        direction={'column'}
+        direction={"column"}
         p={5}
       >
-        <Flex alignItems={'center'}>
+        <Flex alignItems={"center"}>
           <Heading as="h4" size="md">
             Curva S
           </Heading>
         </Flex>
 
-        <Flex pr={4} pt={4} alignItems={'center'} justify={'center'}>
+        <Flex pr={4} pt={4} alignItems={"center"} justify={"center"}>
           <ResponsiveContainer
-            width={'100%'}
-            height={'80%'}
+            width={"100%"}
+            height={"80%"}
             minWidth={250}
             minHeight={200}
           >

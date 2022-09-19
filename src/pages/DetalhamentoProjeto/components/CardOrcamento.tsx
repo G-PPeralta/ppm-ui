@@ -1,31 +1,31 @@
-import * as React from 'react';
-import { BsCheckCircleFill } from 'react-icons/bs';
-import { IoIosWallet } from 'react-icons/io';
+import * as React from "react";
+import { BsCheckCircleFill } from "react-icons/bs";
+import { IoIosWallet } from "react-icons/io";
 
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 
 function CardOrcamento() {
   return (
     <>
       <Flex
-        backgroundColor={'white'}
+        backgroundColor={"white"}
         p={5}
         borderRadius={5}
-        direction={'column'}
+        direction={"column"}
         grow={1}
         shrink={1}
-        basis={'360px'}
+        basis={"360px"}
       >
         <Box mb={5}>
-          <Box display={'flex'} alignItems={'center'}>
-            <Heading as="h4" size="lg" color={'origem.300'}>
+          <Box display={"flex"} alignItems={"center"}>
+            <Heading as="h4" size="lg" color={"origem.300"}>
               <IoIosWallet />
             </Heading>
             <Heading as="h4" size="md" ml={2}>
               Orçamento
             </Heading>
           </Box>
-          <Box display={'flex'} alignItems={'center'}>
+          <Box display={"flex"} alignItems={"center"}>
             <Text fontSize={14} fontWeight={600}>
               R$
             </Text>
@@ -35,19 +35,19 @@ function CardOrcamento() {
           </Box>
         </Box>
 
-        <Flex direction={'column'}>
+        <Flex direction={"column"}>
           <Flex
-            justify={'space-between'}
-            direction={innerWidth > 520 ? 'row' : 'column-reverse'}
+            justify={"space-between"}
+            direction={innerWidth > 520 ? "row" : "column-reverse"}
           >
-            <Flex alignItems={'center'} mb={3}>
+            <Flex alignItems={"center"} mb={3}>
               <Box>
-                <Box display={'flex'} alignItems={'center'}>
+                <Box display={"flex"} alignItems={"center"}>
                   <Text fontSize={16} fontWeight={600}>
                     Remanescente
                   </Text>
                 </Box>
-                <Box display={'flex'} alignItems={'center'}>
+                <Box display={"flex"} alignItems={"center"}>
                   <Text fontSize={14} fontWeight={600}>
                     R$
                   </Text>
@@ -57,33 +57,33 @@ function CardOrcamento() {
                 </Box>
               </Box>
               <Box
-                display={'flex'}
-                justifyItems={'center'}
-                justifyContent={'center'}
+                display={"flex"}
+                justifyItems={"center"}
+                justifyContent={"center"}
                 alignItems="center"
-                bg={'#059502'}
+                bg={"#059502"}
                 ml={4}
-                height={'48px'}
-                width={'48px'}
+                height={"48px"}
+                width={"48px"}
                 borderRadius={2}
               >
-                <Text p={1} color="#ffffff" fontSize={20} fontWeight={'600'}>
+                <Text p={1} color="#ffffff" fontSize={20} fontWeight={"600"}>
                   50%
                 </Text>
               </Box>
             </Flex>
 
-            <Flex alignItems={'center'} mb={3}>
-              <Box display={'flex'} alignItems={'center'}>
-                <Text color={'#00B53D'} fontSize={20}>
+            <Flex alignItems={"center"} mb={3}>
+              <Box display={"flex"} alignItems={"center"}>
+                <Text color={"#00B53D"} fontSize={20}>
                   <BsCheckCircleFill />
                 </Text>
                 <Text ml={2} fontSize={16} fontWeight={600}>
                   CPI = 1
                 </Text>
               </Box>
-              <Box display={'flex'} alignItems={'center'} ml={4}>
-                <Text color={'#00B53D'} fontSize={20}>
+              <Box display={"flex"} alignItems={"center"} ml={4}>
+                <Text color={"#00B53D"} fontSize={20}>
                   <BsCheckCircleFill />
                 </Text>
                 <Text ml={2} fontSize={16} fontWeight={600}>
@@ -94,17 +94,17 @@ function CardOrcamento() {
           </Flex>
 
           <Flex
-            justify={'space-between'}
-            direction={innerWidth > 520 ? 'row' : 'column'}
+            justify={"space-between"}
+            direction={innerWidth > 520 ? "row" : "column"}
           >
-            <Flex alignItems={'center'}>
+            <Flex alignItems={"center"}>
               <Box>
-                <Box display={'flex'} alignItems={'center'}>
+                <Box display={"flex"} alignItems={"center"}>
                   <Text fontSize={16} fontWeight={600}>
                     Realizado
                   </Text>
                 </Box>
-                <Box display={'flex'} alignItems={'center'}>
+                <Box display={"flex"} alignItems={"center"}>
                   <Text fontSize={14} fontWeight={600}>
                     R$
                   </Text>
@@ -114,29 +114,29 @@ function CardOrcamento() {
                 </Box>
               </Box>
               <Box
-                display={'flex'}
-                justifyItems={'center'}
-                justifyContent={'center'}
+                display={"flex"}
+                justifyItems={"center"}
+                justifyContent={"center"}
                 alignItems="center"
-                bg={'#2E69FD'}
+                bg={"#2E69FD"}
                 ml={4}
-                height={'48px'}
-                width={'48px'}
+                height={"48px"}
+                width={"48px"}
                 borderRadius={2}
               >
-                <Text p={1} color="#ffffff" fontSize={20} fontWeight={'600'}>
+                <Text p={1} color="#ffffff" fontSize={20} fontWeight={"600"}>
                   50%
                 </Text>
               </Box>
             </Flex>
-            <Flex alignItems={'center'}>
+            <Flex alignItems={"center"}>
               <Box>
-                <Box display={'flex'} alignItems={'center'}>
+                <Box display={"flex"} alignItems={"center"}>
                   <Text fontSize={16} fontWeight={600}>
                     Não Previsto
                   </Text>
                 </Box>
-                <Box display={'flex'} alignItems={'center'}>
+                <Box display={"flex"} alignItems={"center"}>
                   <Text fontSize={14} fontWeight={600}>
                     R$
                   </Text>
@@ -146,17 +146,17 @@ function CardOrcamento() {
                 </Box>
               </Box>
               <Box
-                display={'flex'}
-                justifyItems={'center'}
-                justifyContent={'center'}
+                display={"flex"}
+                justifyItems={"center"}
+                justifyContent={"center"}
                 alignItems="center"
-                bg={'#CC0000'}
+                bg={"#CC0000"}
                 ml={4}
-                height={'48px'}
-                width={'48px'}
+                height={"48px"}
+                width={"48px"}
                 borderRadius={2}
               >
-                <Text p={1} color="#ffffff" fontSize={20} fontWeight={'600'}>
+                <Text p={1} color="#ffffff" fontSize={20} fontWeight={"600"}>
                   5%
                 </Text>
               </Box>
