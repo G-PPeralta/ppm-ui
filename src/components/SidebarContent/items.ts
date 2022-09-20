@@ -35,7 +35,7 @@ export const LinkItems: Array<LinkItemProps> = [
         link: "/desenvolvimento",
       },
       { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/desenvolvimento" },
-      { name: "Importar Dados", icon: BiData, link: "/desenvolvimento" },
+      { name: "Importar Dados", icon: BiData, link: "/upload" },
     ],
   },
 
