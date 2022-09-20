@@ -24,6 +24,7 @@ type Props = {
 };
 
 function ColumnSPT({ column }: Props) {
+  console.log("column", column.pocos);
   return (
     <Flex direction={"column"} align={"center"} justify={"center"}>
       <Text
@@ -36,9 +37,13 @@ function ColumnSPT({ column }: Props) {
         {column.sonda}
       </Text>
       <Flex direction={"column"} gap={10} align={"center"} justify={"center"}>
-        {column.pocos.map((poco, index) => (
-          <CardPIR poco={poco} index={index} key={index} />
-        ))}
+        {column.pocos.map((poco, index) => {
+          if (!poco.poco) {
+            return <></>;
+          } else {
+            return <CardPIR poco={poco} index={index} key={index} />;
+          }
+        })}
       </Flex>
     </Flex>
   );
