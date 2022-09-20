@@ -24,7 +24,6 @@ type Props = {
 };
 
 function ColumnSPT({ column }: Props) {
-  console.log("column", column.pocos);
   return (
     <Flex direction={"column"} align={"center"} justify={"center"}>
       <Text
