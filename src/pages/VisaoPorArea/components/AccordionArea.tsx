@@ -8,6 +8,9 @@ import {
   Text,
 } from "@chakra-ui/react";
 
+import AtividadesPorStatus from "./AtividadesPorStatus";
+import TotalAtividades from "./TotalAtividades";
+
 function AccordionArea() {
   return (
     <Accordion allowMultiple w={"100%"}>
@@ -32,24 +35,10 @@ function AccordionArea() {
                   Area 1
                 </Text>
               </Flex>
-              <Flex grow={30} align={"center"} justify={"center"}>
-                <Flex direction={"column"} align={"center"} justify={"center"}>
-                  <Text fontSize="md" fontWeight={500}>
-                    Atividades
-                  </Text>
-                  <Flex
-                    border={"3px"}
-                    borderStyle={"inherit"}
-                    borderColor={"origem.500"}
-                    borderRadius={"100%"}
-                    mt={2}
-                    p={3}
-                  >
-                    <Text fontSize="md" fontWeight={500}>
-                      347
-                    </Text>
-                  </Flex>
-                </Flex>
+              <Flex grow={30} align={"center"} justify={"space-around"}>
+                <Text fontWeight={600}>0%</Text>
+                <TotalAtividades />
+                <AtividadesPorStatus />
               </Flex>
             </Flex>
             <Flex grow={1}>
