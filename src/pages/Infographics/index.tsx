@@ -24,7 +24,6 @@ export function Infographics() {
 
   const handleGetCampanha = async () => {
     const response = await getInfoCampanha();
-    console.log("response", response.data);
     setCampanhas(response.data);
     setLoading(false);
   };

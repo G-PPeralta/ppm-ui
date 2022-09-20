@@ -21,6 +21,7 @@ import { Ring } from "@uiball/loaders";
 import { TextError } from "components/TextError";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroPoco } from "hooks/useCadastroPoco";
 
@@ -84,8 +85,11 @@ function ModalCadastroPoco() {
                           id="poco"
                           type="text"
                           name="poco"
-                          value={registerForm.values.poco}
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.poco
+                          )}
                           onChange={registerForm.handleChange}
+                          maxLength={10}
                         />
                         {registerForm.errors.poco &&
                           registerForm.touched.poco && (
