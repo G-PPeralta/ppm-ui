@@ -1,23 +1,23 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 // import { projectRegisterSchema } from 'validations/ProjectRegister';
 // import { Fornecedor } from 'interfaces/Services';
 
-import { useToast } from 'contexts/Toast';
+import { useToast } from "contexts/Toast";
 
-import { putFornecedor } from 'services/update/Fornecedor';
+import { putFornecedor } from "services/update/Fornecedor";
 
 export function useFornecedores() {
   const { toast } = useToast();
 
   const initialValues = {
     id: 0,
-    fornecedor: '',
+    fornecedor: "",
     orcamento: 0,
     realizado: 0,
-    responsavel: '',
-    descricao: '',
+    responsavel: "",
+    descricao: "",
   };
 
   const [loading, setLoading] = useState(false);
@@ -40,13 +40,13 @@ export function useFornecedores() {
         const { status } = await putFornecedor(values.id, newValues);
 
         if (status === 200 || status === 201) {
-          toast.success('Fornecedor atualizado com sucesso!', {
-            id: 'toast-principal',
+          toast.success("Fornecedor atualizado com sucesso!", {
+            id: "toast-principal",
           });
         }
       } catch (error) {
-        toast.error('Erro ao atualizar fornecedor!', {
-          id: 'toast-principal',
+        toast.error("Erro ao atualizar fornecedor!", {
+          id: "toast-principal",
         });
       }
 

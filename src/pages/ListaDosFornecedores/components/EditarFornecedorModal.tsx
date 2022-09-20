@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { BsPlusLg } from 'react-icons/bs';
+import { useEffect, useState } from "react";
+import { BsPlusLg } from "react-icons/bs";
 
 import {
   Button,
@@ -18,9 +18,9 @@ import {
   IconButton,
   Box,
   Text,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import { Fornecedor } from '../index';
+import { Fornecedor } from "../index";
 
 type EditarFornecedorModalProps = {
   isOpen: boolean;
@@ -37,16 +37,16 @@ export function EditarFornecedorModal({
 }: EditarFornecedorModalProps) {
   const [nome, setNome] = useState(fornecedor?.fornecedor);
   const [orcamento, setOrcamento] = useState(
-    fornecedor ? fornecedor.orcamento : 0,
+    fornecedor ? fornecedor.orcamento : 0
   );
   const [realizado, setRealizado] = useState(
-    fornecedor ? fornecedor.realizado : 0,
+    fornecedor ? fornecedor.realizado : 0
   );
   const [responsavel, setResponsavel] = useState(
-    fornecedor ? fornecedor.responsavel : '',
+    fornecedor ? fornecedor.responsavel : ""
   );
   const [descricao, setDescricao] = useState(
-    fornecedor ? fornecedor.descricao : '',
+    fornecedor ? fornecedor.descricao : ""
   );
 
   function handleChangeNome(event: any): void {
@@ -86,18 +86,18 @@ export function EditarFornecedorModal({
   return (
     <Flex>
       <Box
-        display={'flex'}
-        alignItems={'center'}
+        display={"flex"}
+        alignItems={"center"}
         border="2px"
         padding={2}
         borderRadius={6}
-        borderColor={'origem.300'}
+        borderColor={"origem.300"}
         _hover={{
-          background: '#f5f5f5',
-          transition: 'all 0.4s',
-          color: 'origem.300',
-          cursor: 'pointer',
-          borderColor: 'origem.500',
+          background: "#f5f5f5",
+          transition: "all 0.4s",
+          color: "origem.300",
+          cursor: "pointer",
+          borderColor: "origem.500",
         }}
       >
         <IconButton
@@ -111,9 +111,9 @@ export function EditarFornecedorModal({
           size="sm"
         />
         <Text
-          fontSize={useBreakpointValue({ base: 'sm', md: 'sm' })}
-          fontWeight={'bold'}
-          color={'origem.500'}
+          fontSize={useBreakpointValue({ base: "sm", md: "sm" })}
+          fontWeight={"bold"}
+          color={"origem.500"}
         >
           EDITAR FORNECEDOR
         </Text>
@@ -207,8 +207,8 @@ export function EditarFornecedorModal({
                 })
               }
               _hover={{
-                background: 'origem.500',
-                transition: 'all 0.4s',
+                background: "origem.500",
+                transition: "all 0.4s",
               }}
             >
               SALVAR

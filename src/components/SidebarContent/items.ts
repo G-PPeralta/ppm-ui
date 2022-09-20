@@ -8,6 +8,7 @@ import {
   FiActivity,
   // FiUsers,
   FiFile,
+  FiGrid,
 } from "react-icons/fi";
 
 interface LinkItemProps {
@@ -33,13 +34,18 @@ export const LinkItems: Array<LinkItemProps> = [
   { name: "Infográficos", icon: FiBarChart, link: "/infographics" },
   // { name: 'Alterar Permissões', icon: FiUsers, link: '/permissions' },
   {
-    name: 'Fornecedores',
+    name: "Fornecedores",
     icon: FiActivity,
-    link: '/fornecedores',
+    link: "/fornecedores",
   },
   {
     name: "Detalhamento Projeto",
     icon: BsBarChartSteps,
     link: "/detalhamento/191",
+  },
+  {
+    name: "Projetos",
+    icon: FiGrid,
+    link: "/projects/",
   },
 ];
