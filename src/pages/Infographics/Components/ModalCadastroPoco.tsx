@@ -78,7 +78,7 @@ function ModalCadastroPoco() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel>NOME</FormLabel>
+                        <FormLabel htmlFor="poco">NOME</FormLabel>
                         <Input
                           isRequired
                           placeholder="Nome do Poço"
@@ -91,10 +91,9 @@ function ModalCadastroPoco() {
                           onChange={registerForm.handleChange}
                           maxLength={10}
                         />
-                        {registerForm.errors.poco &&
-                          registerForm.touched.poco && (
-                            <TextError>{registerForm.errors.poco}</TextError>
-                          )}
+                        {registerForm.errors.poco && (
+                          <TextError>{registerForm.errors.poco}</TextError>
+                        )}
                       </FormControl>
                     </Flex>
                   </Stack>
@@ -117,7 +116,7 @@ function ModalCadastroPoco() {
                   Cancelar
                 </Button>
                 <Button
-                  disabled={!registerForm.isValid}
+                  disabled={!registerForm.isValid || !registerForm.values.poco}
                   background="origem.300"
                   variant="primary"
                   color="white"

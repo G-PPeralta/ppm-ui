@@ -1,7 +1,10 @@
 export const handleCadastrar = async (form: any, onClose: Function) => {
   await form.submitForm();
-  await onClose();
-  await form.resetForm();
+
+  if (form.isValid) {
+    await form.resetForm();
+    onClose();
+  }
 };
 
 export const handleCancelar = (form: any, onClose: Function) => {
@@ -17,16 +20,16 @@ export const handleCadastrarRefresh = async (
 ) => {
   await form.submitForm();
   setRefresh(!refresh);
-  await onClose();
-  await form.resetForm();
+  if (form.isValid) {
+    await form.resetForm();
+    onClose();
+  }
 };
 
 export const handleCancelarDatePicker = (
   form: any,
   onClose: Function,
-  // startDate: any,
   setStartDate: Function,
-  // endDate: any,
   setEndDate: Function
 ) => {
   setStartDate("");
