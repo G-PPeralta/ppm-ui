@@ -10,7 +10,7 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
+  // ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
@@ -24,18 +24,24 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
+import { RequiredField } from "components/RequiredField/RequiredField";
+
+import {
+  handleCadastrarRefresh,
+  handleCancelarDatePicker,
+} from "utils/handleCadastro";
+import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 import InputPorcentagem from "./InputPorcentagem";
 
-function ModalCadastroAtividade({ id, setRefresh }: any) {
+function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroAtividade();
   const { state }: any = useLocation();
-  const [startDate, setStartDate] = useState<any>(new Date());
-  const [endDate, setEndDate] = useState<any>(new Date());
+  const [startDate, setStartDate] = useState<any>("");
+  const [endDate, setEndDate] = useState<any>("");
 
   const handleStartDate = (date: any) => {
     setStartDate(date);
@@ -47,22 +53,38 @@ function ModalCadastroAtividade({ id, setRefresh }: any) {
     registerForm.setFieldValue("dat_fim_plan", date);
   };
 
-  const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
-    <Button
-      onClick={onClick}
-      ref={ref}
-      variant="outline"
-      px={10}
-      minW={"220px"}
-    >
-      {value === "" ? "Selecione a data" : value}
-    </Button>
-  ));
+  const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => {
+    useEffect(() => {
+      // console.log("value", value);
+    }, []);
+
+    return (
+      <Button
+        onClick={onClick}
+        ref={ref}
+        variant="outline"
+        px={10}
+        minW={"220px"}
+      >
+        {value === "" ? "Selecione a data" : value}
+      </Button>
+    );
+  });
 
   useEffect(() => {
     registerForm.setFieldValue("id_pai", Number(id));
     registerForm.setFieldValue("id_campanha", Number(state.poco.id_campanha));
   }, []);
+
+  useEffect(() => {
+    if (
+      registerForm.values.id_pai === 0 &&
+      registerForm.values.id_campanha === 0
+    ) {
+      registerForm.setFieldValue("id_pai", Number(id));
+      registerForm.setFieldValue("id_campanha", Number(state.poco.id_campanha));
+    }
+  }, [registerForm.values]);
 
   return (
     <>
@@ -94,7 +116,7 @@ function ModalCadastroAtividade({ id, setRefresh }: any) {
           >
             Cadastrar Atividade
           </ModalHeader>
-          <ModalCloseButton color={"white"} />
+          {/* <ModalCloseButton color={"white"} /> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -113,7 +135,10 @@ function ModalCadastroAtividade({ id, setRefresh }: any) {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="nom_atividade">NOME</FormLabel>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="nom_atividade">NOME</FormLabel>
+                        </Flex>
                         <Input
                           isRequired
                           placeholder="Digite o nome da atividade"
@@ -121,7 +146,9 @@ function ModalCadastroAtividade({ id, setRefresh }: any) {
                           type="text"
                           name="nom_atividade"
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
-                          value={registerForm.values.nom_atividade}
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.nom_atividade
+                          )}
                           onChange={registerForm.handleChange}
                         />
                       </FormControl>
@@ -137,9 +164,12 @@ function ModalCadastroAtividade({ id, setRefresh }: any) {
 
                     <Flex justify={"space-between"} gap={5}>
                       <Flex direction={"column"} grow={1}>
-                        <FormLabel htmlFor="dat_ini_plan">
-                          DATA INÍCIO
-                        </FormLabel>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="dat_ini_plan">
+                            DATA INÍCIO
+                          </FormLabel>
+                        </Flex>
                         <DatePicker
                           selected={startDate}
                           onChange={(date) => handleStartDate(date)}
@@ -147,18 +177,21 @@ function ModalCadastroAtividade({ id, setRefresh }: any) {
                           showTimeSelect
                           dateFormat="dd/MM/yyyy, hh:mm"
                           customInput={<ExampleCustomInput />}
-                          isClearable
+                          isClearable={startDate !== ""}
                         />
                       </Flex>
                       <Flex direction={"column"} grow={1}>
-                        <FormLabel htmlFor="dat_fim_plan">DATA FIM</FormLabel>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="dat_fim_plan">DATA FIM</FormLabel>
+                        </Flex>
                         <DatePicker
                           selected={endDate}
                           onChange={(date) => handleEndDate(date)}
                           dateFormat="dd/MM/yyyy, hh:mm"
                           showTimeSelect
                           customInput={<ExampleCustomInput />}
-                          isClearable
+                          isClearable={endDate !== ""}
                           locale="pt-BR"
                         />
                       </Flex>
@@ -204,7 +237,16 @@ function ModalCadastroAtividade({ id, setRefresh }: any) {
                 <Button
                   variant="ghost"
                   color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
+                  onClick={() =>
+                    handleCancelarDatePicker(
+                      registerForm,
+                      onClose,
+                      // startDate,
+                      setStartDate,
+                      // endDate,
+                      setEndDate
+                    )
+                  }
                   _hover={{
                     background: "red.500",
                     transition: "all 0.4s",
@@ -219,7 +261,12 @@ function ModalCadastroAtividade({ id, setRefresh }: any) {
                   variant="primary"
                   color="white"
                   onClick={() =>
-                    handleCadastrarRefresh(registerForm, onClose, setRefresh)
+                    handleCadastrarRefresh(
+                      registerForm,
+                      onClose,
+                      setRefresh,
+                      refresh
+                    )
                   }
                   _hover={{
                     background: "origem.500",

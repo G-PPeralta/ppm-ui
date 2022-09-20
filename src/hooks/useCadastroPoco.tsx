@@ -30,13 +30,13 @@ export function useCadastroPoco() {
         const { status } = await postNovoPoco(newValues);
 
         if (status === 200 || status === 201) {
-          toast.success(`Poço ${values.poco} cadastrado com sucesso!`, {
+          toast.success(`Poço cadastrado com sucesso!`, {
             id: "toast-principal",
           });
           setLoading(false);
         }
       } catch (error) {
-        toast.error(`Erro ao cadastrar poço ${values.poco}!`, {
+        toast.error(`Erro ao cadastrar poço!`, {
           id: "toast-principal",
         });
         setLoading(false);

@@ -5,7 +5,10 @@ export const cadastroTarefaSchema = yup.object({
 });
 
 export const cadastroSondaSchema = yup.object({
-  sonda: yup.string().required("O nome da sonda é obrigatório!"),
+  sonda: yup
+    .string()
+    .required("O nome da sonda é obrigatório!")
+    .min(3, "O nome da sonda deve ter ao menos 3 caracteres"),
 });
 
 export const cadastroIntervencaoSchema = yup.object({
@@ -52,17 +55,29 @@ export const cadastroProjetoTipoSchema = yup.object({
 });
 
 export const cadastroPocoSchema = yup.object({
-  poco: yup.string().required("O nome do poço é obrigatório!"),
+  poco: yup
+    .string()
+    .required("Campo obrigatório!")
+    .min(3, "O nome do poço deve ter ao menos 3 caracteres"),
 });
 
 export const cadastroNovaCampanhaSchema = yup.object({
-  nom_campanha: yup.string().required("O nome da campanha é obrigatório!"),
+  nom_campanha: yup
+    .string()
+    .min(3)
+    .required("O nome da campanha é obrigatório!"),
   dsc_comentario: yup.string(),
 });
 
 export const cadastroNovaIntervencaoSchema = yup.object({
-  nom_atividade: yup.string().required("Poço é obrigatório"),
-  id_campanha: yup.number().required("Sonda é obrigatória"),
+  nom_atividade: yup
+    .string()
+    .min(2, "Campo obrigatório")
+    .required("Poço é obrigatório"),
+  id_campanha: yup
+    .number()
+    .min(2, "Campo obrigatório")
+    .required("Sonda é obrigatória"),
   dsc_comentario: yup.string(),
 });
 
