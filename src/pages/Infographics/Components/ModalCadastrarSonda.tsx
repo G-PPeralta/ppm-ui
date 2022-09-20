@@ -21,6 +21,7 @@ import { Ring } from "@uiball/loaders";
 import { TextError } from "components/TextError";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroSonda } from "hooks/useCadastroSonda";
 
@@ -84,8 +85,11 @@ function ModalCadastrarSonda() {
                           id="sonda"
                           type="text"
                           name="sonda"
-                          value={registerForm.values.sonda}
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.sonda
+                          )}
                           onChange={registerForm.handleChange}
+                          maxLength={10}
                         />
                         {registerForm.errors.sonda &&
                           registerForm.touched.sonda && (
