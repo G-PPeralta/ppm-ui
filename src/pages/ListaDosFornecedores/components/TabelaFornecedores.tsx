@@ -11,7 +11,8 @@ import {
   Tr,
   IconButton,
 } from '@chakra-ui/react';
-import { Fornecedor } from 'interfaces/Services';
+
+import { Fornecedor } from '../index';
 
 type TabelaFornecedoresProps = {
   fornecedores: Fornecedor[];
