@@ -21,6 +21,7 @@ import {
   useBreakpointValue,
   Input,
   Textarea,
+  Select,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -198,6 +199,27 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
                       <FormControl>
                         <InputPorcentagem registerForm={registerForm} />
                       </FormControl>
+                    </Flex>
+                    <Flex justify={"space-between"} gap={5}>
+                      <Flex direction={"column"} grow={1}>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="area">ÁREA</FormLabel>
+                        </Flex>
+                        <Select>
+                          <option value="1">Valor 1</option>
+                          <option value="2">Valor 2</option>
+                          <option value="3">Valor 3</option>
+                        </Select>
+                      </Flex>
+                      <Flex direction={"column"} grow={1}>
+                        <FormLabel htmlFor="area">RECURSO</FormLabel>
+                        <Select>
+                          <option value="1">Valor 1</option>
+                          <option value="2">Valor 2</option>
+                          <option value="3">Valor 3</option>
+                        </Select>
+                      </Flex>
                     </Flex>
 
                     <Flex

@@ -11,6 +11,7 @@ import { statusProjeto } from "utils/validateDate";
 import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
 import StatusProjeto from "../../components/StatusProjeto";
+import BotaoVisaoPorArea from "./Components/BotaoVisaoPorArea";
 import CardACT from "./Components/CardACT";
 // import ModalAtividade from "./Components/ModalAtividade";
 import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
@@ -69,6 +70,7 @@ export function ActivitiesSchedule() {
                       setRefresh={setRefresh}
                       refresh={refresh}
                     />
+                    <BotaoVisaoPorArea />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (

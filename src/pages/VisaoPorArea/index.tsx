@@ -8,6 +8,7 @@ import StatusProjeto from "components/StatusProjeto";
 
 import { statusProjeto } from "utils/validateDate";
 
+import AccordionArea from "./components/AccordionArea";
 import BotaoVisaoGeral from "./components/BotaoVisaoGeral";
 
 function VisaoPorArea() {
@@ -36,9 +37,6 @@ function VisaoPorArea() {
                   <Heading as="h3" size="md" mb={3}>
                     Visão por área
                   </Heading>
-                  <Flex gap={4}>
-                    <BotaoVisaoGeral />
-                  </Flex>
                 </Flex>
                 <Flex
                   direction={"column"}
@@ -47,7 +45,9 @@ function VisaoPorArea() {
                   wrap={"wrap"}
                   mb={4}
                 >
-                  {/* <Flex gap={2}></Flex> */}
+                  <Flex gap={2}>
+                    <BotaoVisaoGeral />
+                  </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (
                       <StatusProjeto
@@ -58,15 +58,11 @@ function VisaoPorArea() {
                     ))}
                   </Flex>
                 </Flex>
-                {/* <Flex align={"center"} justify={"center"}>
-                  <Box
-                    overflowX={{ base: "scroll" }}
-                    display={"flex"}
-                    flexDirection={"row"}
-                    gap={10}
-                    py={4}
-                  ></Box>
-                </Flex> */}
+                <Flex align={"center"} justify={"center"} direction={"column"}>
+                  <AccordionArea />
+                  <AccordionArea />
+                  <AccordionArea />
+                </Flex>
               </Box>
             </Flex>
           </Stack>
