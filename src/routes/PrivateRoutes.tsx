@@ -17,6 +17,7 @@ import { ProvidersRegistration } from "pages/ProvidersRegistration";
 import { Reports } from "pages/Reports";
 import { Settings } from "pages/Settings";
 import { ShareRegister } from "pages/ShareRegister";
+import VisaoPorArea from "pages/VisaoPorArea";
 
 export function PrivateRoutes() {
   return (
@@ -43,6 +44,7 @@ export function PrivateRoutes() {
       <Route path="/fornecedores" element={<Fornecedores />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
       <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
+      <Route path="/atividade/visao-por-area" element={<VisaoPorArea />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

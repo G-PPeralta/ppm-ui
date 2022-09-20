@@ -10,11 +10,11 @@ import { statusProjeto } from "utils/validateDate";
 
 import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
+import StatusProjeto from "../../components/StatusProjeto";
 import CardACT from "./Components/CardACT";
 // import ModalAtividade from "./Components/ModalAtividade";
 import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
 import ModalEditarAtividade from "./Components/ModalEditarAtividade";
-import StatusProjeto from "./Components/StatusProjeto";
 
 export function ActivitiesSchedule() {
   const { id } = useParams();
