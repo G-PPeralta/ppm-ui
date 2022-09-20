@@ -24,7 +24,14 @@ import { useBudgets } from "hooks/useBudgets";
 import { TabelaBudgets } from "./Components/TabelaBudgets";
 
 export function Budgets() {
-  const { budgetFilter, loading, wd, projects } = useBudgets();
+  const {
+    budgetFilter,
+    loading,
+    wd,
+    projects,
+    handleProjectChange,
+    filterByProject,
+  } = useBudgets();
 
   return (
     <>
@@ -69,7 +76,10 @@ export function Budgets() {
                     >
                       <FormControl>
                         <FormLabel>Projeto</FormLabel>
-                        <Select placeholder="Select option">
+                        <Select
+                          placeholder="Select option"
+                          onChange={handleProjectChange}
+                        >
                           {projects &&
                             projects.map((d) => (
                               <option value={d.id}>{d.nome}</option>
@@ -87,7 +97,7 @@ export function Budgets() {
                             transition: "all 0.4s",
                           }}
                           rightIcon={<FiSearch />}
-                          // onClick={getProjectsPerPolo}
+                          onClick={filterByProject}
                         >
                           Filtrar
                         </Button>

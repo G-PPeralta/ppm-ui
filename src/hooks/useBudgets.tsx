@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 
 // import { useFormik } from "formik";
 // import { projectRegisterSchema } from "validations/ProjectRegister";
@@ -15,9 +15,10 @@ export function useBudgets() {
   // const { toast } = useToast();
 
   const [loading, setLoading] = useState(false);
-  const [budgets, setBudgets] = useState<Budget[]>();
-  const [projects, setProjects] = useState<Project[]>();
+  const [budgets, setBudgets] = useState<Budget[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [budgetFilter, setBudgetsFilter] = useState<Budget[]>();
+  const [projectSelected, setProjectSelected] = useState("");
 
   const wd = window.innerWidth;
 
@@ -32,23 +33,23 @@ export function useBudgets() {
     setProjects(data);
   };
 
-  const filterByProject = (text: string) => {
+  const filterByProject = () => {
     setLoading(true);
-    let filtered;
-    /* if (text && text.length > 3) {
-      filtered = projetos?.filter(
-        (x) => x.nome.toLowerCase().indexOf(text.toLowerCase()) > -1
-      );
-    } else {
-      filtered = projetos;
-    } */
-    if (budgets) {
-      return budgets;
-    }
+    const filtered = budgets.filter(
+      (b) => b.projeto.id.toString() === projectSelected
+    );
 
     if (filtered) {
       setBudgetsFilter([...filtered]);
     }
+
+    setLoading(false);
+  };
+
+  const handleProjectChange = (e: {
+    target: { value: SetStateAction<string> };
+  }) => {
+    setProjectSelected(e.target.value);
   };
 
   useEffect(() => {
@@ -62,5 +63,6 @@ export function useBudgets() {
     wd,
     filterByProject,
     projects,
+    handleProjectChange,
   };
 }

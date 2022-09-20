@@ -11,7 +11,10 @@ export async function getBudgets(): Promise<Budget[]> {
     {
       id: 1,
       item: "1",
-      projeto: "Lion d",
+      projeto: {
+        nome: "Olaf",
+        id: 1,
+      },
       planejado: 200,
       realizado: 500,
       gap: 25,
@@ -20,7 +23,10 @@ export async function getBudgets(): Promise<Budget[]> {
         {
           id: 4,
           item: "1.1",
-          projeto: "Olaf",
+          projeto: {
+            nome: "Olaf",
+            id: 1,
+          },
           planejado: 100,
           realizado: 300,
           gap: 50,
@@ -29,7 +35,10 @@ export async function getBudgets(): Promise<Budget[]> {
         {
           id: 5,
           item: "1.2",
-          projeto: "head hat",
+          projeto: {
+            nome: "Olaf",
+            id: 1,
+          },
           planejado: 100,
           realizado: 200,
           gap: 50,
@@ -40,7 +49,10 @@ export async function getBudgets(): Promise<Budget[]> {
     {
       id: 2,
       item: "2",
-      projeto: "Lala",
+      projeto: {
+        nome: "Head hat Lá",
+        id: 2,
+      },
       planejado: 200,
       realizado: 500,
       gap: 50,
@@ -49,7 +61,10 @@ export async function getBudgets(): Promise<Budget[]> {
     {
       id: 3,
       item: "3",
-      projeto: "Cogumelo",
+      projeto: {
+        nome: "Cogumelo",
+        id: 3,
+      },
       planejado: 200,
       realizado: 500,
       gap: 25,
