@@ -17,6 +17,7 @@ import ModalEditarAtividade from "./Components/ModalEditarAtividade";
 import StatusProjeto from "./Components/StatusProjeto";
 
 export function ActivitiesSchedule() {
+  // const navigate = useNavigate();
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [openId, setOpenId] = useState("");
@@ -69,6 +70,23 @@ export function ActivitiesSchedule() {
                       setRefresh={setRefresh}
                       refresh={refresh}
                     />
+                    {/* <Button
+                      variant="outline"
+                      border={"2px solid"}
+                      borderColor={"origem.500"}
+                      textColor={"origem.500"}
+                      _hover={{
+                        borderColor: "origem.600",
+                        backgroundColor: "origem.500",
+                        textColor: "white",
+                        transition: "all 0.4s",
+                      }}
+                      onClick={() => {
+                        navigate(`precedentes`);
+                      }}
+                    >
+                      Visão por precedentes
+                    </Button> */}
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (

@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
+import { ActivitiesPrecedents } from "pages/ActivitiesPrecedents";
 import { ActivitiesRegistration } from "pages/ActivitiesRegistration";
 import { ActivitiesSchedule } from "pages/ActivitiesSchedule";
 import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
@@ -43,6 +44,10 @@ export function PrivateRoutes() {
       <Route path="/fornecedores" element={<Fornecedores />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
       <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
+      <Route
+        path="/atividade/:id/precedentes"
+        element={<ActivitiesPrecedents />}
+      />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

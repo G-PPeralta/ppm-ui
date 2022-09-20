@@ -29,9 +29,13 @@ export const LinkItems: Array<LinkItemProps> = [
     children: [
       { name: "Dashboard", icon: FiHome, link: "/" },
       { name: "Projetos", icon: FaRegMoneyBillAlt, link: "/projects" },
-      { name: "Fornecedores", icon: FaRegMoneyBillAlt, link: "/" },
-      { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/" },
-      { name: "Importar Dados", icon: BiData, link: "/" },
+      {
+        name: "Fornecedores",
+        icon: FaRegMoneyBillAlt,
+        link: "/desenvolvimento",
+      },
+      { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/desenvolvimento" },
+      { name: "Importar Dados", icon: BiData, link: "/desenvolvimento" },
     ],
   },
 
@@ -47,9 +51,17 @@ export const LinkItems: Array<LinkItemProps> = [
     name: "Estatísticas",
     icon: AiOutlineBarChart,
     children: [
-      { name: "Estatísticas", icon: AiOutlineBarChart, link: "/" },
-      { name: "Gráficos Estatisticos", icon: AiOutlineBarChart, link: "/" },
-      { name: "Look Ahead", icon: AiOutlineBarChart, link: "/" },
+      {
+        name: "Estatísticas",
+        icon: AiOutlineBarChart,
+        link: "/desenvolvimento",
+      },
+      {
+        name: "Gráficos Estatisticos",
+        icon: AiOutlineBarChart,
+        link: "/desenvolvimento",
+      },
+      { name: "Look Ahead", icon: AiOutlineBarChart, link: "/desenvolvimento" },
       { name: "Relatórios", icon: FiFile, link: "/reports" },
     ],
   },
@@ -57,18 +69,22 @@ export const LinkItems: Array<LinkItemProps> = [
   {
     name: "Lixeira",
     icon: FiTrash2,
-    children: [{ name: "Lixeira", icon: FiTrash2, link: "/" }],
+    children: [{ name: "Lixeira", icon: FiTrash2, link: "/desenvolvimento" }],
   },
 
   {
     name: "Configurações",
     icon: FiSettings,
     children: [
-      { name: "Configurações", icon: FiSettings, link: "/" },
-      { name: "Usuários", icon: FiSettings, link: "/" },
-      { name: "Perfil", icon: FiSettings, link: "/" },
-      { name: "Gestão de Áreas", icon: FiSettings, link: "/" },
-      { name: "Configurar Prioridades", icon: FiSettings, link: "/" },
+      { name: "Configurações", icon: FiSettings, link: "/desenvolvimento" },
+      { name: "Usuários", icon: FiSettings, link: "/desenvolvimento" },
+      { name: "Perfil", icon: FiSettings, link: "/desenvolvimento" },
+      { name: "Gestão de Áreas", icon: FiSettings, link: "/desenvolvimento" },
+      {
+        name: "Configurar Prioridades",
+        icon: FiSettings,
+        link: "/desenvolvimento",
+      },
     ],
   },
 ];
