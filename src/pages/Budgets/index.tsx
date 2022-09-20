@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
 import {
@@ -6,6 +5,8 @@ import {
   Button,
   Flex,
   FormControl,
+  FormLabel,
+  Select,
   // FormLabel,
   // Input,
   // Select,
@@ -14,7 +15,6 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import { Budget } from "models/Budget.model";
 
 import Sidebar from "components/SideBar";
 
@@ -24,37 +24,7 @@ import { useBudgets } from "hooks/useBudgets";
 import { TabelaBudgets } from "./Components/TabelaBudgets";
 
 export function Budgets() {
-  const { /* projectsForm, */ loading, getAllBudgets } = useBudgets();
-
-  const [polo /* setPolo */] = useState("0");
-  //  const [ /* budgets,  setBudgets */ ] = useState<Budget[]>();
-  const [budgetFilter, setBudgetsFilter] = useState<Budget[]>();
-  const wd = window.innerWidth;
-
-  const gerarBudgetsList = async () => {
-    const data = await getAllBudgets(polo);
-    // setBudgets(data);
-    setBudgetsFilter(data);
-  };
-
-  useEffect(() => {
-    gerarBudgetsList();
-  }, []);
-
-  /* const filterProjects = (text: string) => {
-    let filtered;
-    if (text && text.length > 3) {
-      filtered = projetos?.filter(
-        (x) => x.nome.toLowerCase().indexOf(text.toLowerCase()) > -1
-      );
-    } else {
-      filtered = projetos;
-    }
-
-    if (filtered) {
-      setProjetosFilter([...filtered]);
-    }
-  }; */
+  const { budgetFilter, loading, wd, projects } = useBudgets();
 
   return (
     <>
@@ -97,6 +67,16 @@ export function Budgets() {
                         md: "row",
                       })}
                     >
+                      <FormControl>
+                        <FormLabel>Projeto</FormLabel>
+                        <Select placeholder="Select option">
+                          {projects &&
+                            projects.map((d) => (
+                              <option value={d.id}>{d.nome}</option>
+                            ))}
+                        </Select>
+                      </FormControl>
+
                       <FormControl className="toBottom">
                         <Button
                           color="white"
@@ -109,7 +89,7 @@ export function Budgets() {
                           rightIcon={<FiSearch />}
                           // onClick={getProjectsPerPolo}
                         >
-                          Buscar
+                          Filtrar
                         </Button>
                       </FormControl>
                     </Flex>

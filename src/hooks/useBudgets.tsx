@@ -1,103 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { useFormik } from "formik";
-import { projectRegisterSchema } from "validations/ProjectRegister";
+// import { useFormik } from "formik";
+// import { projectRegisterSchema } from "validations/ProjectRegister";
 
-import { useToast } from "contexts/Toast";
+// import { useToast } from "contexts/Toast";
+
+import { Budget } from "models/Budget.model";
+import { Project } from "models/Project.model";
 
 import { getBudgets } from "services/get/GetBudget";
+import { getProjects } from "services/get/GetProject";
 
 export function useBudgets() {
-  const { toast } = useToast();
+  // const { toast } = useToast();
 
   const [loading, setLoading] = useState(false);
+  const [budgets, setBudgets] = useState<Budget[]>();
+  const [projects, setProjects] = useState<Project[]>();
+  const [budgetFilter, setBudgetsFilter] = useState<Budget[]>();
 
-  const getAllBudgets = async (polo: string) => {
-    const data: any[] = await getBudgets();
-    return data;
+  const wd = window.innerWidth;
+
+  const gerarBudgetsList = async () => {
+    const data = await getBudgets();
+    setBudgets(data);
+    setBudgetsFilter(data);
   };
 
-  const BudgetsForm = useFormik({
-    initialValues: {
-      nomeProjeto: "",
-      descricao: "",
-      justificativa: "",
-      valorTotalPrevisto: 0,
-      classificacaoId: 0,
-      solicitanteId: 0,
-      poloId: 0,
-      dataInicio: "",
-      dataFim: "",
-      dataInicioReal: "",
-      dataFimReal: "",
-      prioridadeId: 0,
-      complexidadeId: 0,
-      localId: 0,
-      divisaoId: 0,
-      statusId: 0,
-      gateId: 0,
-      tipoProjetoId: 0,
-      demandaId: 0,
-      comentarios: "",
-      responsavel: "",
-      coordenador: "",
-      responsavel_id: 0,
-      coordenador_id: 0,
-      elemento_pep: "",
-    },
+  const gerarProjectList = async () => {
+    const data = await getProjects();
+    setProjects(data);
+  };
 
-    validationSchema: projectRegisterSchema,
-    onSubmit: async (values) => {
-      const newValues = {
-        nomeProjeto: values.nomeProjeto,
-        descricao: values.descricao,
-        valorTotalPrevisto: Number(values.valorTotalPrevisto),
-        classificacaoId: Number(values.classificacaoId),
-        solicitanteId: Number(values.solicitanteId),
-        justificativa: values.justificativa,
-        poloId: Number(values.poloId),
-        dataInicio: values.dataInicio,
-        dataFim: values.dataFim,
-        dataInicioReal: values.dataInicioReal,
-        dataFimReal: values.dataFimReal,
-        prioridadeId: Number(values.prioridadeId),
-        complexidadeId: Number(values.complexidadeId),
-        localId: Number(values.localId),
-        divisaoId: Number(values.divisaoId),
-        statusId: Number(values.statusId),
-        gateId: Number(values.statusId),
-        tipoProjetoId: Number(values.tipoProjetoId),
-        // demandaId: Number(values.demandaId),
-        comentarios: values.comentarios,
-        responsavel_id: values.responsavel_id,
-        coordenador_id: values.coordenador_id,
-        elemento_pep: values.elemento_pep,
-      };
+  const filterByProject = (text: string) => {
+    setLoading(true);
+    let filtered;
+    /* if (text && text.length > 3) {
+      filtered = projetos?.filter(
+        (x) => x.nome.toLowerCase().indexOf(text.toLowerCase()) > -1
+      );
+    } else {
+      filtered = projetos;
+    } */
+    if (budgets) {
+      return budgets;
+    }
 
-      setLoading(true);
-      console.log(newValues);
+    if (filtered) {
+      setBudgetsFilter([...filtered]);
+    }
+  };
 
-      try {
-        /* const { status } = await postProject(newValues);
-
-        if (status === 200 || status === 201) {
-          toast.success("Projeto cadastrado com sucesso!", {
-            id: "toast-principal",
-          });
-        } */
-      } catch (error) {
-        toast.error("Erro ao cadastrar projeto!", {
-          id: "toast-principal",
-        });
-      }
-
-      setLoading(false);
-    },
-  });
+  useEffect(() => {
+    gerarBudgetsList();
+    gerarProjectList();
+  }, []);
 
   return {
-    getAllBudgets,
-    BudgetsForm,
+    budgetFilter,
     loading,
+    wd,
+    filterByProject,
+    projects,
   };
 }
