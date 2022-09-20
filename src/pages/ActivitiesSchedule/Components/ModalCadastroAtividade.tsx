@@ -10,7 +10,7 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
+  // ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
@@ -24,7 +24,10 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
+import {
+  handleCadastrarRefresh,
+  handleCancelarDatePicker,
+} from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
@@ -35,8 +38,8 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroAtividade();
   const { state }: any = useLocation();
-  const [startDate, setStartDate] = useState<any>(new Date());
-  const [endDate, setEndDate] = useState<any>(new Date());
+  const [startDate, setStartDate] = useState<any>("");
+  const [endDate, setEndDate] = useState<any>("");
 
   const handleStartDate = (date: any) => {
     setStartDate(date);
@@ -111,7 +114,7 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
           >
             Cadastrar Atividade
           </ModalHeader>
-          <ModalCloseButton color={"white"} />
+          {/* <ModalCloseButton color={"white"} /> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -166,7 +169,7 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
                           showTimeSelect
                           dateFormat="dd/MM/yyyy, hh:mm"
                           customInput={<ExampleCustomInput />}
-                          isClearable
+                          isClearable={startDate !== ""}
                         />
                       </Flex>
                       <Flex direction={"column"} grow={1}>
@@ -177,7 +180,7 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
                           dateFormat="dd/MM/yyyy, hh:mm"
                           showTimeSelect
                           customInput={<ExampleCustomInput />}
-                          isClearable
+                          isClearable={endDate !== ""}
                           locale="pt-BR"
                         />
                       </Flex>
@@ -223,7 +226,16 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
                 <Button
                   variant="ghost"
                   color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
+                  onClick={() =>
+                    handleCancelarDatePicker(
+                      registerForm,
+                      onClose,
+                      // startDate,
+                      setStartDate,
+                      // endDate,
+                      setEndDate
+                    )
+                  }
                   _hover={{
                     background: "red.500",
                     transition: "all 0.4s",

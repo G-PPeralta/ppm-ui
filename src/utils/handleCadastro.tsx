@@ -20,3 +20,17 @@ export const handleCadastrarRefresh = async (
   await onClose();
   await form.resetForm();
 };
+
+export const handleCancelarDatePicker = (
+  form: any,
+  onClose: Function,
+  // startDate: any,
+  setStartDate: Function,
+  // endDate: any,
+  setEndDate: Function
+) => {
+  setStartDate("");
+  setEndDate("");
+  form.resetForm();
+  onClose();
+};
