@@ -8,6 +8,8 @@ import StatusProjeto from "components/StatusProjeto";
 
 import { statusProjeto } from "utils/validateDate";
 
+import BotaoVisaoGeral from "./components/BotaoVisaoGeral";
+
 function VisaoPorArea() {
   const [loading, setLoading] = useState(true);
 
@@ -34,7 +36,9 @@ function VisaoPorArea() {
                   <Heading as="h3" size="md" mb={3}>
                     Visão por área
                   </Heading>
-                  {/* <Flex gap={4}></Flex> */}
+                  <Flex gap={4}>
+                    <BotaoVisaoGeral />
+                  </Flex>
                 </Flex>
                 <Flex
                   direction={"column"}
