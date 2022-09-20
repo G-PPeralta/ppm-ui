@@ -6,6 +6,8 @@ import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
 
+import { statusProjeto } from "utils/validateDate";
+
 import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
 import CardACT from "./Components/CardACT";
@@ -37,29 +39,6 @@ export function ActivitiesSchedule() {
     requestHandler();
   }, [refresh]);
 
-  const statusProjeto = [
-    {
-      status: "Não Implementado",
-      color: "#F4DD06",
-    },
-    {
-      status: "Não Iniciado",
-      color: "#FFB400",
-    },
-    {
-      status: "Concluído",
-      color: "#059502",
-    },
-    {
-      status: "Em Andamento",
-      color: "#0047BB",
-    },
-    {
-      status: "Atrasado",
-      color: "#F40606",
-    },
-  ];
-
   const openDetails = (atividade: any) => {
     // console.log('atividade', atividade);
     setOpenId(atividade);
@@ -85,7 +64,11 @@ export function ActivitiesSchedule() {
                 </Flex>
                 <Flex justify={"space-between"} gap={6} wrap={"wrap"} mb={4}>
                   <Flex gap={2}>
-                    <ModalCadastroAtividade id={id} setRefresh={setRefresh} />
+                    <ModalCadastroAtividade
+                      id={id}
+                      setRefresh={setRefresh}
+                      refresh={refresh}
+                    />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (

@@ -18,9 +18,11 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
+import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroSonda } from "hooks/useCadastroSonda";
 
@@ -77,20 +79,25 @@ function ModalCadastrarSonda() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel>NOME</FormLabel>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="sonda">NOME</FormLabel>{" "}
+                        </Flex>
                         <Input
                           isRequired
                           placeholder="Nome da Sonda"
                           id="sonda"
                           type="text"
                           name="sonda"
-                          value={registerForm.values.sonda}
-                          onChange={registerForm.handleChange}
-                        />
-                        {registerForm.errors.sonda &&
-                          registerForm.touched.sonda && (
-                            <TextError>{registerForm.errors.sonda}</TextError>
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.sonda
                           )}
+                          onChange={registerForm.handleChange}
+                          maxLength={10}
+                        />
+                        {registerForm.errors.sonda && (
+                          <TextError>{registerForm.errors.sonda}</TextError>
+                        )}
                       </FormControl>
                     </Flex>
                   </Stack>
@@ -113,7 +120,7 @@ function ModalCadastrarSonda() {
                   Cancelar
                 </Button>
                 <Button
-                  disabled={!registerForm.isValid}
+                  disabled={!registerForm.isValid || !registerForm.values.sonda}
                   background="origem.300"
                   variant="primary"
                   color="white"

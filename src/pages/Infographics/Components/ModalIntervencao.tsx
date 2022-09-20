@@ -32,12 +32,17 @@ function ModalIntervencao() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { intervencaoForm, loading } = useCadastroIntervencao();
 
+  const isButtonDisabled =
+    !intervencaoForm.isValid ||
+    (!intervencaoForm.values.id_campanha &&
+      !intervencaoForm.values.nom_atividade);
+
   return (
     <>
       <Flex
         mt={2}
         py={3}
-        w="75%"
+        w="70%"
         border={"2px"}
         borderStyle={"dashed"}
         borderColor={"origem.500"}
@@ -60,11 +65,11 @@ function ModalIntervencao() {
           variant="secondary"
           color="white"
           isRound={true}
-          size="lg"
+          size="md"
         />
 
-        <Text color={"origem.500"} fontWeight={600}>
-          Cadastrar
+        <Text color={"origem.500"} fontWeight={600} textAlign={"center"}>
+          Cadastrar Intervenção
         </Text>
       </Flex>
       <Modal isOpen={isOpen} onClose={onClose} size="3xl">
@@ -96,7 +101,8 @@ function ModalIntervencao() {
                           intervencaoForm={intervencaoForm}
                         />
                         <SelectFiltragemSondas
-                          intervencaoForm={intervencaoForm}
+                          form={intervencaoForm}
+                          nomeChave={"id_campanha"}
                         />
                       </Flex>
                     </Stack>
@@ -115,12 +121,11 @@ function ModalIntervencao() {
                           onChange={intervencaoForm.handleChange}
                           w={"100%"}
                         />
-                        {intervencaoForm.errors.dsc_comentario &&
-                          intervencaoForm.touched.dsc_comentario && (
-                            <TextError>
-                              {intervencaoForm.errors.dsc_comentario}
-                            </TextError>
-                          )}
+                        {intervencaoForm.errors.dsc_comentario && (
+                          <TextError>
+                            {intervencaoForm.errors.dsc_comentario}
+                          </TextError>
+                        )}
                       </FormControl>
                     </Stack>
                   </Flex>
@@ -145,7 +150,7 @@ function ModalIntervencao() {
                   Cancelar
                 </Button>
                 <Button
-                  disabled={!intervencaoForm.isValid}
+                  disabled={!intervencaoForm.isValid || isButtonDisabled}
                   background="origem.300"
                   variant="primary"
                   color="white"

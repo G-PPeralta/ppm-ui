@@ -1,4 +1,5 @@
 import {
+  Flex,
   FormControl,
   FormLabel,
   NumberDecrementStepper,
@@ -7,6 +8,8 @@ import {
   NumberInputField,
   NumberInputStepper,
 } from "@chakra-ui/react";
+
+import { RequiredField } from "components/RequiredField/RequiredField";
 
 function InputPorcentagem({ registerForm }: any) {
   const format = (val: number) => val + "%";
@@ -18,7 +21,11 @@ function InputPorcentagem({ registerForm }: any) {
   return (
     <>
       <FormControl>
-        <FormLabel htmlFor="pct_real">STATUS</FormLabel>
+        <Flex gap={1}>
+          <RequiredField />
+          <FormLabel htmlFor="pct_real">STATUS</FormLabel>
+        </Flex>
+
         <NumberInput
           min={0}
           max={100}

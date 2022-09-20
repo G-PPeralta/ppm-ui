@@ -1,31 +1,48 @@
 import Select from "react-select";
 
-import { FormControl, FormLabel } from "@chakra-ui/react";
+import { Flex, FormControl, FormLabel } from "@chakra-ui/react";
+
+import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
-function SelectFiltragemSondas({ intervencaoForm }: any) {
+function SelectFiltragemSondas({ form, nomeChave }: any) {
   const { listaSondas } = useCadastroIntervencao();
 
-  const options = listaSondas.map((sonda: any) => ({
+  const idOptions = listaSondas.map((sonda: any) => ({
     value: sonda.id_campanha,
     label: sonda.sonda,
   }));
 
+  const nameOptions = listaSondas.map((sonda: any) => ({
+    value: sonda.sonda,
+    label: sonda.sonda,
+  }));
+
   const handleChange = ({ value }: any, { name }: any) => {
-    intervencaoForm.setFieldValue(name, value);
+    form.setFieldValue(name, value);
   };
 
   return (
     <>
       <FormControl>
-        <FormLabel>SONDA</FormLabel>
+        {nomeChave === "id_campanha" ? (
+          <Flex gap={1}>
+            <RequiredField />
+            <FormLabel>SONDA</FormLabel>
+          </Flex>
+        ) : (
+          <Flex gap={1}>
+            <RequiredField />
+            <FormLabel>NOME CAMPANHA/SONDA</FormLabel>
+          </Flex>
+        )}
         <Select
-          id="id_campanha"
-          name="id_campanha"
+          id={nomeChave}
+          name={nomeChave}
           placeholder="Selecione"
           onChange={(event, name) => handleChange(event, name)}
-          options={options}
+          options={nomeChave === "nom_campanha" ? nameOptions : idOptions}
           isSearchable
         />
       </FormControl>
