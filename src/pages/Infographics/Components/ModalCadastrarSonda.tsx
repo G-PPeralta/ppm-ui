@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
+import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
@@ -78,7 +79,10 @@ function ModalCadastrarSonda() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="sonda">NOME</FormLabel>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="sonda">NOME</FormLabel>{" "}
+                        </Flex>
                         <Input
                           isRequired
                           placeholder="Nome da Sonda"

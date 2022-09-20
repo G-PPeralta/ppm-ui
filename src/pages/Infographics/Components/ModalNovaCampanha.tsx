@@ -3,6 +3,7 @@ import {
   Flex,
   FormControl,
   FormLabel,
+  Input,
   // Input,
   Modal,
   ModalBody,
@@ -19,13 +20,14 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
+import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
 import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 
-import SelectFiltragemSondas from "./SelectFiltragemSonda";
+// import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
 function ModalNovaCampanha({ setRefresh, refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -80,7 +82,11 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                       gap={5}
                     >
                       <FormControl>
-                        {/* <Input
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="nom_campanha">NOME</FormLabel>
+                        </Flex>
+                        <Input
                           isRequired
                           placeholder="Nome da campanha"
                           id="nom_campanha"
@@ -94,11 +100,11 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                             <TextError>
                               {registerForm.errors.nom_campanha}
                             </TextError>
-                          )} */}
-                        <SelectFiltragemSondas
+                          )}
+                        {/* <SelectFiltragemSondas
                           form={registerForm}
                           nomeChave={"nom_campanha"}
-                        />
+                        /> */}
                       </FormControl>
                     </Flex>
                   </Stack>
