@@ -8,10 +8,16 @@ import {
   BoxProps,
   Image,
   Text,
+  Accordion,
+  AccordionButton,
+  AccordionItem,
+  AccordionPanel,
+  AccordionIcon,
 } from "@chakra-ui/react";
 import logoImage from "assets/logo.png";
 
 import { NavItem } from "components/NavItem";
+import { NavItemMain } from "components/NavItemMain";
 
 import { useAuth } from "hooks/useAuth";
 
@@ -52,27 +58,83 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
           onClick={onClose}
         />
       </Flex>
-      {LinkItems.map((link, index) => (
-        <div key={index}>
-          {!verifyPermissionAdmin(link.name) && (
-            <NavItem key={link.name} icon={link.icon} link={link.link || "/"}>
-              <Text
-                _hover={{
-                  bg: "origem.400",
-                  color: "white",
-                }}
-                color={
-                  window.location.pathname === link.link
-                    ? "origem.500"
-                    : "black.500"
-                }
-              >
-                {link.name}
-              </Text>
-            </NavItem>
-          )}
-        </div>
-      ))}
+      <Accordion allowMultiple>
+        {LinkItems.map((link, index) => (
+          <div key={index}>
+            {!verifyPermissionAdmin(link.name) && (
+              <AccordionItem>
+                <AccordionButton>
+                  <Flex
+                    w={"100%"}
+                    align={"center"}
+                    justifyContent={"space-between"}
+                  >
+                    <NavItemMain
+                      key={link.name}
+                      icon={link.icon}
+                      link={link.link || "/"}
+                      color={
+                        link.children.some(
+                          (e) => e.link == window.location.pathname
+                        )
+                          ? "origem.500"
+                          : "black.500"
+                      }
+                    >
+                      <Text
+                        color={
+                          link.children.some(
+                            (e) => e.link == window.location.pathname
+                          )
+                            ? "origem.500"
+                            : "black.500"
+                        }
+                      >
+                        {link.name}
+                      </Text>
+                    </NavItemMain>
+                    <AccordionIcon
+                      color={
+                        link.children.some(
+                          (e) => e.link == window.location.pathname
+                        )
+                          ? "origem.500"
+                          : "black.500"
+                      }
+                    />
+                  </Flex>
+                </AccordionButton>
+                <AccordionPanel>
+                  {link.children.map((link) => (
+                    <NavItem
+                      key={link.name}
+                      icon={link.icon}
+                      link={link.link || "/"}
+                    >
+                      <Text
+                        _groupHover={{
+                          color: "white",
+                        }}
+                        _hover={{
+                          bg: "origem.400",
+                          color: "white",
+                        }}
+                        color={
+                          window.location.pathname === link.link
+                            ? "origem.500"
+                            : "black.500"
+                        }
+                      >
+                        {link.name}
+                      </Text>
+                    </NavItem>
+                  ))}
+                </AccordionPanel>
+              </AccordionItem>
+            )}
+          </div>
+        ))}
+      </Accordion>
     </Box>
   );
 }
