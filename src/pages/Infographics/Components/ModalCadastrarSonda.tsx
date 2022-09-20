@@ -78,7 +78,7 @@ function ModalCadastrarSonda() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel>NOME</FormLabel>
+                        <FormLabel htmlFor="sonda">NOME</FormLabel>
                         <Input
                           isRequired
                           placeholder="Nome da Sonda"
@@ -91,10 +91,9 @@ function ModalCadastrarSonda() {
                           onChange={registerForm.handleChange}
                           maxLength={10}
                         />
-                        {registerForm.errors.sonda &&
-                          registerForm.touched.sonda && (
-                            <TextError>{registerForm.errors.sonda}</TextError>
-                          )}
+                        {registerForm.errors.sonda && (
+                          <TextError>{registerForm.errors.sonda}</TextError>
+                        )}
                       </FormControl>
                     </Flex>
                   </Stack>
@@ -117,7 +116,7 @@ function ModalCadastrarSonda() {
                   Cancelar
                 </Button>
                 <Button
-                  disabled={!registerForm.isValid}
+                  disabled={!registerForm.isValid || !registerForm.values.sonda}
                   background="origem.300"
                   variant="primary"
                   color="white"
