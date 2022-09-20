@@ -1,12 +1,15 @@
-import { IconType } from 'react-icons';
+import { IconType } from "react-icons";
+import { BsBarChartSteps } from "react-icons/bs";
 import {
   FiHome,
-  FiTrendingUp,
+  // FiTrendingUp,
   FiEdit2,
   FiBarChart,
-  FiUsers,
+  // FiActivity,
+  // FiUsers,
   FiFile,
-} from 'react-icons/fi';
+  FiGrid,
+} from "react-icons/fi";
 
 interface LinkItemProps {
   name: string;
@@ -14,14 +17,35 @@ interface LinkItemProps {
   link?: string;
 }
 export const LinkItems: Array<LinkItemProps> = [
-  { name: 'Inicio', icon: FiHome, link: '/' },
-  { name: 'Cadastro Projetos', icon: FiEdit2, link: '/projects-registration' },
+  { name: "Dashboard", icon: FiHome, link: "/" },
+  // { name: 'Gantt', icon: BsBarChartSteps, link: '/gantt' },
+  { name: "Cadastro Projetos", icon: FiEdit2, link: "/projects-registration" },
   {
-    name: 'Cadastro de Ações',
-    icon: FiTrendingUp,
-    link: '/activities-registration',
+    name: "Cadastro Fornecedores",
+    icon: FiEdit2,
+    link: "/providers-registration",
   },
-  { name: 'Relatórios', icon: FiFile, link: '/reports' },
-  { name: 'Infográficos', icon: FiBarChart, link: '/infographics' },
-  { name: 'Alterar Permissões', icon: FiUsers, link: '/permissions' },
+  // {
+  //   name: 'Cadastro de Ações',
+  //   icon: FiTrendingUp,
+  //   link: '/activities-registration',
+  // },
+  { name: "Relatórios", icon: FiFile, link: "/reports" },
+  { name: "Infográficos", icon: FiBarChart, link: "/infographics" },
+  // { name: 'Alterar Permissões', icon: FiUsers, link: '/permissions' },
+  // {
+  //   name: 'Cronograma de atividades',
+  //   icon: FiActivity,
+  //   link: '/atividade/:id',
+  // },
+  {
+    name: "Detalhamento Projeto",
+    icon: BsBarChartSteps,
+    link: "/detalhamento/191",
+  },
+  {
+    name: "Projetos",
+    icon: FiGrid,
+    link: "/projects/",
+  },
 ];

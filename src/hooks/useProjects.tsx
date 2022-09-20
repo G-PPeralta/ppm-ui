@@ -1,62 +1,78 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { useFormik } from 'formik';
-import { projectRegisterSchema } from 'validations/ProjectRegister';
+import { useFormik } from "formik";
+import { projectRegisterSchema } from "validations/ProjectRegister";
 
-import { useToast } from 'contexts/Toast';
+import { useToast } from "contexts/Toast";
 
-import { postProject } from 'services/post/ProjectRegister';
+import { postProject } from "services/post/ProjectRegister";
+import { getProjects } from "services/get/GetProject";
 
 export function useProjects() {
   const { toast } = useToast();
 
   const [loading, setLoading] = useState(false);
+
+  const getAllProjects = async (polo: string) => {
+    const data: any[] = await getProjects(polo);
+    return data;
+  };
+
   const projectsForm = useFormik({
     initialValues: {
-      name: '',
-      description: '',
-      budget: 0,
-      classification: '',
-      requester: '',
-      justification: '',
-      pole: '',
-      start: '',
-      end: '',
-      startReal: '',
-      endReal: '',
-      priority: '',
-      complexity: '',
-      place: '',
-      division: '',
-      status: '',
-      gate: '',
-      typeProject: '',
-      demand: '',
-      comments: '',
+      nomeProjeto: "",
+      descricao: "",
+      justificativa: "",
+      valorTotalPrevisto: 0,
+      classificacaoId: 0,
+      solicitanteId: 0,
+      poloId: 0,
+      dataInicio: "",
+      dataFim: "",
+      dataInicioReal: "",
+      dataFimReal: "",
+      prioridadeId: 0,
+      complexidadeId: 0,
+      localId: 0,
+      divisaoId: 0,
+      statusId: 0,
+      gateId: 0,
+      tipoProjetoId: 0,
+      demandaId: 0,
+      comentarios: "",
+      responsavel: "",
+      coordenador: "",
+      responsavel_id: 0,
+      coordenador_id: 0,
+      elemento_pep: "",
     },
+
     validationSchema: projectRegisterSchema,
     onSubmit: async (values) => {
       const newValues = {
-        name: values.name,
-        description: values.description,
-        budget: Number(values.budget),
-        classification: values.classification,
-        requester: values.requester,
-        justification: values.justification,
-        pole: values.pole,
-        start: values.start,
-        end: values.end,
-        startReal: values.startReal,
-        endReal: values.endReal,
-        priority: values.priority,
-        complexity: values.complexity,
-        place: values.place,
-        division: values.division,
-        status: values.status,
-        gate: values.gate,
-        typeProject: values.typeProject,
-        demand: values.demand,
-        comments: values.comments,
+        nomeProjeto: values.nomeProjeto,
+        descricao: values.descricao,
+        valorTotalPrevisto: Number(values.valorTotalPrevisto),
+        classificacaoId: Number(values.classificacaoId),
+        solicitanteId: Number(values.solicitanteId),
+        justificativa: values.justificativa,
+        poloId: Number(values.poloId),
+        dataInicio: values.dataInicio,
+        dataFim: values.dataFim,
+        dataInicioReal: values.dataInicioReal,
+        dataFimReal: values.dataFimReal,
+        prioridadeId: Number(values.prioridadeId),
+        complexidadeId: Number(values.complexidadeId),
+        localId: Number(values.localId),
+        divisaoId: Number(values.divisaoId),
+        statusId: Number(values.statusId),
+        gateId: Number(values.statusId),
+        tipoProjetoId: Number(values.tipoProjetoId),
+        // demandaId: Number(values.demandaId),
+        comentarios: values.comentarios,
+        responsavel_id: values.responsavel_id,
+        coordenador_id: values.coordenador_id,
+        elemento_pep: values.elemento_pep,
       };
 
       setLoading(true);
@@ -65,13 +81,13 @@ export function useProjects() {
         const { status } = await postProject(newValues);
 
         if (status === 200 || status === 201) {
-          toast.success('Projeto cadastrado com sucesso!', {
-            id: 'toast-principal',
+          toast.success("Projeto cadastrado com sucesso!", {
+            id: "toast-principal",
           });
         }
       } catch (error) {
-        toast.error('Erro ao cadastrar projeto!', {
-          id: 'toast-principal',
+        toast.error("Erro ao cadastrar projeto!", {
+          id: "toast-principal",
         });
       }
 
@@ -80,6 +96,7 @@ export function useProjects() {
   });
 
   return {
+    getAllProjects,
     projectsForm,
     loading,
   };

@@ -1,32 +1,41 @@
-import * as yup from 'yup';
+import * as yup from "yup";
 
 export const projectRegisterSchema = yup.object({
-  name: yup.string().required('O nome do projeto é obrigatório'),
-  description: yup.string().required('A descrição do projeto é obrigatória'),
-  budget: yup
+  nomeProjeto: yup.string().required("O nome do projeto é obrigatório"),
+  descricao: yup.string().required("A descrição do projeto é obrigatória"),
+  valorTotalPrevisto: yup
     .number()
-    .required('O campo de valor total previsto é obrigatório'),
-  classification: yup.string(),
-  requester: yup.string(),
-  justification: yup
+    .required("O campo de valor total previsto é obrigatório"),
+  classificacaoId: yup.string(),
+  solicitanteId: yup.string(),
+  justificativa: yup
     .string()
-    .required('O campo de justificativa é obrigatório'),
-  pole: yup.string(),
-  start: yup.date().required('A data de início do projeto é obrigatória'),
-  end: yup.date().required('A data de finalização do projeto é obrigatória'),
-  startReal: yup
+    .required("O campo de justificativa é obrigatório"),
+  poloId: yup.string(),
+  dataInicio: yup.date().required("A data de início do projeto é obrigatória"),
+  dataFim: yup
     .date()
-    .required('A data de início real do projeto é obrigatória'),
-  endReal: yup
+    .required("A data de finalização do projeto é obrigatória"),
+  dataInicioReal: yup
     .date()
-    .required('A data de finalização real do projeto é obrigatória'),
-  priority: yup.string(),
-  complexity: yup.string(),
-  place: yup.string(),
-  division: yup.string(),
-  status: yup.string(),
-  gate: yup.string(),
-  typeProject: yup.string(),
-  demand: yup.string(),
-  comments: yup.string().required(''),
+    .required("A data de início real do projeto é obrigatória"),
+  dataFimReal: yup
+    .date()
+    .required("A data de finalização real do projeto é obrigatória"),
+  prioridadeId: yup.string(),
+  complexidadeId: yup.string(),
+  localId: yup.string(),
+  divisaoId: yup.string(),
+  statusId: yup.string(),
+  gateId: yup.string(),
+  tipoProjetoId: yup.string(),
+  demandaId: yup.string(),
+  comentarios: yup.string().required(),
+  responsavel: yup.array().of(
+    yup.object({
+      nomeResponsavel: yup.string().required(),
+      tipoResponsavel: yup.number().required(),
+    })
+  ),
+  elementoPep: yup.string().required(),
 });

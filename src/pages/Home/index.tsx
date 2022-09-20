@@ -1,94 +1,76 @@
-import { GanttComponent, Inject, Edit } from '@syncfusion/ej2-react-gantt';
+import React, { useLayoutEffect, useState } from "react";
 
-import Sidebar from 'components/SideBar';
+import { Box, Flex } from "@chakra-ui/react";
+
+import Sidebar from "components/SideBar";
+
+import AreasDemandadas from "./components/AreasDemandadas";
+import BotoesSelecionarPolo from "./components/BotoesSelecionarPolo";
+import FaseProjetos from "./components/FaseProjetos";
+import NaoPrevisto from "./components/NaoPrevisto";
+import PrevistoxRealizado from "./components/PrevistoxRealizado";
+import Projetos from "./components/Projetos";
+import Realizado from "./components/Realizado";
+import TotalOrcamentos from "./components/TotalOrcamentos";
+import TotalProjetos from "./components/TotalProjetos";
+
+function useWindowSize() {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+  return size;
+}
 
 export function Home() {
-  const GanttData = [
-    {
-      TaskID: 1,
-      TaskName: 'Project Initiation',
-      StartDate: new Date('04/02/2019'),
-      EndDate: new Date('04/21/2019'),
-      subtasks: [
-        {
-          TaskID: 2,
-          TaskName: 'Identify Site location',
-          StartDate: new Date('04/02/2019'),
-          Duration: 4,
-          Progress: 50,
-        },
-        {
-          TaskID: 3,
-          TaskName: 'Perform Soil test',
-          StartDate: new Date('04/02/2019'),
-          Duration: 4,
-          Progress: 50,
-          Predecessor: '2FS',
-        },
-        {
-          TaskID: 4,
-          TaskName: 'Soil test approval',
-          StartDate: new Date('04/02/2019'),
-          Duration: 4,
-          Progress: 50,
-        },
-      ],
-    },
-    {
-      TaskID: 5,
-      TaskName: 'Project Estimation',
-      StartDate: new Date('04/02/2019'),
-      EndDate: new Date('04/21/2019'),
-      subtasks: [
-        {
-          TaskID: 6,
-          TaskName: 'Develop floor plan for estimation',
-          StartDate: new Date('04/04/2019'),
-          Duration: 3,
-          Progress: 50,
-        },
-        {
-          TaskID: 7,
-          TaskName: 'List materials',
-          StartDate: new Date('04/04/2019'),
-          Duration: 3,
-          Progress: 50,
-        },
-        {
-          TaskID: 8,
-          TaskName: 'Estimation approval',
-          StartDate: new Date('04/04/2019'),
-          Duration: 3,
-          Progress: 50,
-          Predecessor: '7SS',
-        },
-      ],
-    },
-  ];
+  const [width] = useWindowSize();
 
   return (
     <>
       <Sidebar>
-        <GanttComponent
-          id="gantt-control"
-          dataSource={GanttData}
-          taskFields={{
-            id: 'TaskID',
-            name: 'TaskName',
-            startDate: 'StartDate',
-            endDate: 'EndDate',
-            duration: 'Duration',
-            progress: 'Progress',
-            dependency: 'Predecessor',
-            child: 'subtasks',
-          }}
-          editSettings={{
-            allowTaskbarEditing: true,
-          }}
-          height={'100vh'}
+        <BotoesSelecionarPolo />
+        <Flex
+          w={"auto"}
+          display={"flex"}
+          wrap={"wrap"}
+          align="flex-start"
+          direction="row"
+          justify="center"
         >
-          <Inject services={[Edit]} />
-        </GanttComponent>
+          <Box flex={1} m={1}>
+            <TotalProjetos />
+          </Box>
+
+          <Box
+            m={1}
+            flex={width > 1100 ? 0 : 1}
+            sx={{ height: 340 }}
+            display="flex"
+            flexDirection={"column"}
+            justifyContent="space-evenly"
+          >
+            <TotalOrcamentos />
+            <Realizado />
+            <NaoPrevisto />
+          </Box>
+          <Box flex={4} m={1}>
+            <Projetos />
+          </Box>
+          <Box flex={1} m={1}>
+            <FaseProjetos />
+          </Box>
+          <Box flex={1} m={1}>
+            <AreasDemandadas />
+          </Box>
+          <Box flex={1} m={1}>
+            <PrevistoxRealizado />
+          </Box>
+        </Flex>
       </Sidebar>
     </>
   );

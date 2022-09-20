@@ -1,0 +1,40 @@
+.overlay {
+  backdrop-filter: blur(5px);
+}
+
+.editButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 2px solid #0047BB;
+  color: #0047BB;
+  width: 20px;
+  height: 20px;
+  transition: .4s;
+}
+
+.editButton:hover {
+  color: #2E69FD;
+  border: 2px solid #2E69FD;
+  border-radius: 50%;
+  opacity: .9;
+  transform: scale(1.1);
+}
+
+.dropzone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px dashed #D6D4D4;
+  border-radius:8px;
+
+  width: 100%;
+  height: 40px;
+  margin-bottom: 12px;
+
+  p {
+    color: #D6D4D4;
+  }
+}
