@@ -1,4 +1,4 @@
-import { AiFillEdit } from 'react-icons/ai';
+import { AiFillEdit } from "react-icons/ai";
 
 import {
   Table,
@@ -10,9 +10,9 @@ import {
   Thead,
   Tr,
   IconButton,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import { Fornecedor } from '../index';
+import { Fornecedor } from "../index";
 
 type TabelaFornecedoresProps = {
   fornecedores: Fornecedor[];
@@ -27,7 +27,7 @@ export function TabelaFornecedores({
     .map((forn) => forn.orcamento)
     .reduce(
       (acumulador: number, valorAtual: number) => acumulador + valorAtual,
-      0,
+      0
     );
   // console.log(fornecedores.map((forn) => forn.orcamento));
 
@@ -35,7 +35,7 @@ export function TabelaFornecedores({
     .map((forn) => forn.realizado)
     .reduce(
       (acumulador: number, valorAtual: number) => acumulador + valorAtual,
-      0,
+      0
     );
   // console.log(realSum);
 
@@ -43,8 +43,8 @@ export function TabelaFornecedores({
     <Tr key={fornecedor.id}>
       <Td isNumeric>{fornecedor.id}</Td>
       <Td>{fornecedor.fornecedor}</Td>
-      <Td>{fornecedor.orcamento.toLocaleString('pt-br')}</Td>
-      <Td>{fornecedor.realizado.toLocaleString('pt-br')}</Td>
+      <Td>{fornecedor.orcamento.toLocaleString("pt-br")}</Td>
+      <Td>{fornecedor.realizado.toLocaleString("pt-br")}</Td>
       <Td>{fornecedor.responsavel}</Td>
       <Td>{fornecedor.descricao}</Td>
       <Td>
@@ -94,8 +94,8 @@ export function TabelaFornecedores({
           <Tr background="origem.200" color="white">
             <Th>Total</Th>
             <Th></Th>
-            <Th>{orcSum.toLocaleString('pt-br')}</Th>
-            <Th>{realSum.toLocaleString('pt-br')}</Th>
+            <Th>{orcSum.toLocaleString("pt-br")}</Th>
+            <Th>{realSum.toLocaleString("pt-br")}</Th>
             <Th></Th>
             <Th></Th>
             <Th></Th>

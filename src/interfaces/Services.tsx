@@ -294,3 +294,10 @@ export interface Fornecedor {
   responsavel: string;
   descricao: string;
 }
+
+export interface LicoesAprendidas {
+  id?: number;
+  licoesAprendidas: string;
+  acoesRecomendacoes: string;
+  data: Date;
+}

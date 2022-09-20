@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { AiFillPlusCircle } from 'react-icons/ai';
+import { useEffect, useState } from "react";
+import { AiFillPlusCircle } from "react-icons/ai";
 // import { BsPlusLg } from 'react-icons/bs';
 // import { FaGreaterThan } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import {
   Box,
@@ -19,17 +19,17 @@ import {
   // FormControl,
   // Select,
   useDisclosure,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import Sidebar from 'components/SideBar';
+import Sidebar from "components/SideBar";
 
 // import { useFornecedores } from 'hooks/useFornecedores';
 
-import { getFornecedor } from 'services/get/Fornecedor';
-import { putFornecedor } from 'services/update/Fornecedor';
+import { getFornecedor } from "services/get/Fornecedor";
+import { putFornecedor } from "services/update/Fornecedor";
 
-import { EditarFornecedorModal } from './components/EditarFornecedorModal';
-import { TabelaFornecedores } from './components/TabelaFornecedores';
+import { EditarFornecedorModal } from "./components/EditarFornecedorModal";
+import { TabelaFornecedores } from "./components/TabelaFornecedores";
 
 export interface Fornecedor {
   id: number;
@@ -54,7 +54,7 @@ export function Fornecedores() {
   function handleUpdateFornecedor(fornecedor: Fornecedor) {
     // Atualiza o fornecedor na lista
     setFornecedores(
-      fornecedores.map((f) => (f.id === fornecedor.id ? fornecedor : f)),
+      fornecedores.map((f) => (f.id === fornecedor.id ? fornecedor : f))
     );
     putFornecedor(fornecedor.id, fornecedor); // API
     onClose();
@@ -74,33 +74,33 @@ export function Fornecedores() {
   return (
     <Sidebar>
       <Flex
-        w={'100%'}
+        w={"100%"}
         align="center"
         justify="center"
-        bg={useBreakpointValue({ base: 'white', sm: '#EDF2F7' })}
+        bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
       >
         <Stack spacing="8">
           <Flex>
             <Box
-              py={{ base: '0', sm: '16' }}
-              px={{ base: '4', sm: '10' }}
-              w={'100%'}
-              bg={useBreakpointValue({ base: 'transparent', sm: 'white' })}
+              py={{ base: "0", sm: "16" }}
+              px={{ base: "4", sm: "10" }}
+              w={"100%"}
+              bg={useBreakpointValue({ base: "transparent", sm: "white" })}
               boxShadow={{
-                base: 'none',
-                sm: useColorModeValue('md', 'md-dark'),
+                base: "none",
+                sm: useColorModeValue("md", "md-dark"),
               }}
-              borderRadius={{ base: 'none', sm: 'xl' }}
+              borderRadius={{ base: "none", sm: "xl" }}
             >
-              <Heading as="h3" size="md" mt={'-50px'} mb={'15px'}>
+              <Heading as="h3" size="md" mt={"-50px"} mb={"15px"}>
                 Fornecedores
               </Heading>
 
               <Stack spacing="0">
                 <Flex
                   flexDirection={useBreakpointValue({
-                    base: 'column',
-                    md: 'column',
+                    base: "column",
+                    md: "column",
                   })}
                   // border={'red solid 2px'}
                 >
@@ -114,12 +114,12 @@ export function Fornecedores() {
                       background="white"
                       variant="primary"
                       color="origem.500"
-                      border={'2px'}
-                      w={useBreakpointValue({ base: '100%', md: '21%' })}
+                      border={"2px"}
+                      w={useBreakpointValue({ base: "100%", md: "21%" })}
                       onClick={() => {
-                        navigate('/providers-registration');
+                        navigate("/providers-registration");
                       }}
-                      mb={'15px'}
+                      mb={"15px"}
                     >
                       Cadastrar Fornecedores
                       <Icon as={AiFillPlusCircle} fontSize="20px" ml={1} />
@@ -127,11 +127,11 @@ export function Fornecedores() {
                   </Flex>
                   <Flex
                     flexDirection={useBreakpointValue({
-                      base: 'column',
-                      md: 'row',
+                      base: "column",
+                      md: "row",
                     })}
                     // border={'green solid 4px'}
-                    justifyContent={'flex-start'}
+                    justifyContent={"flex-start"}
                   >
                     {/* <form
                       onSubmit={(e) => {
@@ -255,8 +255,8 @@ export function Fornecedores() {
                 onUpdate={handleUpdateFornecedor}
                 // setEditFornecedor={setEditFornecedor}
               />
-              <Stack spacing="6" alignItems={'center'}></Stack>
-            </Box>{' '}
+              <Stack spacing="6" alignItems={"center"}></Stack>
+            </Box>{" "}
           </Flex>
         </Stack>
       </Flex>

@@ -33,9 +33,9 @@ export const LinkItems: Array<LinkItemProps> = [
   { name: "Infográficos", icon: FiBarChart, link: "/infographics" },
   // { name: 'Alterar Permissões', icon: FiUsers, link: '/permissions' },
   {
-    name: 'Fornecedores',
+    name: "Fornecedores",
     icon: FiActivity,
-    link: '/fornecedores',
+    link: "/fornecedores",
   },
   {
     name: "Detalhamento Projeto",

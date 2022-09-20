@@ -1,8 +1,8 @@
 import { Flex } from "@chakra-ui/react";
 
 import BotaoDescricaoEJustificativa from "./BotaoDescricaoEJustificativa";
-import BotaoLicoesAprendidas from "./BotaoLicoesAprendidas";
 import BotaoListadeTarefas from "./BotaoListaDeTarefas";
+import BotaoLicoesAprendidas from "./LicoesAprendidas/LicoesAprendidasModal";
 
 function BotoesModais() {
   return (
