@@ -5,8 +5,8 @@ import { projectRegisterSchema } from "validations/ProjectRegister";
 
 import { useToast } from "contexts/Toast";
 
-import { postProject } from "services/post/ProjectRegister";
 import { getProjects } from "services/get/GetProject";
+import { postProject } from "services/post/ProjectRegister";
 
 export function useProjects() {
   const { toast } = useToast();
