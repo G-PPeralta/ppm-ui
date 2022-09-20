@@ -1,15 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 
+import { ActivitiesPrecedents } from "pages/ActivitiesPrecedents";
 import { ActivitiesRegistration } from "pages/ActivitiesRegistration";
 import { ActivitiesSchedule } from "pages/ActivitiesSchedule";
 import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
 import { GanttPage } from "pages/Gantt";
 import { Home } from "pages/Home";
 import { Infographics } from "pages/Infographics";
+import { Fornecedores } from "pages/ListaDosFornecedores";
 import { NotFound } from "pages/NotFound";
 import { Permissions } from "pages/Permissions";
 import { PermissionsList } from "pages/PermissionsList";
 import { Profile } from "pages/Profile";
+import { Projects } from "pages/Projects";
 import { ProjectsRegistration } from "pages/ProjectsRegistration";
 import { ProvidersRegistration } from "pages/ProvidersRegistration";
 import { Reports } from "pages/Reports";
@@ -38,9 +41,15 @@ export function PrivateRoutes() {
       <Route path="/settings" element={<Settings />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/upload" element={<UploadSheet />} />
+      <Route path="/projects" element={<Projects />} />
       <Route path="/gantt" element={<GanttPage />} />
+      <Route path="/fornecedores" element={<Fornecedores />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
       <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
+      <Route
+        path="/atividade/:id/precedentes"
+        element={<ActivitiesPrecedents />}
+      />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

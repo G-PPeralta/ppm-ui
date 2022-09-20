@@ -1,16 +1,23 @@
 import { useState } from "react";
 
 import { useFormik } from "formik";
-// import { projectRegisterSchema } from 'validations/ProjectRegister';
+import { projectRegisterSchema } from "validations/ProjectRegister";
 
 import { useToast } from "contexts/Toast";
 
+import { getProjects } from "services/get/GetProject";
 import { postProject } from "services/post/ProjectRegister";
 
 export function useProjects() {
   const { toast } = useToast();
 
   const [loading, setLoading] = useState(false);
+
+  const getAllProjects = async (polo: string) => {
+    const data: any[] = await getProjects(polo);
+    return data;
+  };
+
   const projectsForm = useFormik({
     initialValues: {
       nomeProjeto: "",
@@ -39,7 +46,8 @@ export function useProjects() {
       coordenador_id: 0,
       elemento_pep: "",
     },
-    // validationSchema: projectRegisterSchema,
+
+    validationSchema: projectRegisterSchema,
     onSubmit: async (values) => {
       const newValues = {
         nomeProjeto: values.nomeProjeto,
@@ -88,6 +96,7 @@ export function useProjects() {
   });
 
   return {
+    getAllProjects,
     projectsForm,
     loading,
   };

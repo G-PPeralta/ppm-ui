@@ -20,6 +20,7 @@ import StatusProjeto from "./Components/StatusProjeto";
 export function Infographics() {
   const [loading, setLoading] = useState(true);
   const [campanhas, setCampanhas] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   const handleGetCampanha = async () => {
     const response = await getInfoCampanha();
@@ -30,6 +31,10 @@ export function Infographics() {
   useEffect(() => {
     handleGetCampanha();
   }, []);
+
+  useEffect(() => {
+    handleGetCampanha();
+  }, [refresh]);
 
   return (
     <>
@@ -61,7 +66,10 @@ export function Infographics() {
                   mb={4}
                 >
                   <Flex gap={2}>
-                    <ModalNovaCampanha />
+                    <ModalNovaCampanha
+                      refresh={refresh}
+                      setRefresh={setRefresh}
+                    />
                     {/* <ModalCadastrarSonda /> */}
                     <ModalCadastroPoco />
                   </Flex>
