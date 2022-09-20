@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import { AiOutlineSearch, AiFillPlusCircle } from 'react-icons/ai';
+import { AiFillPlusCircle } from 'react-icons/ai';
 // import { BsPlusLg } from 'react-icons/bs';
-import { FaGreaterThan } from 'react-icons/fa';
+// import { FaGreaterThan } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 import {
   Box,
   Flex,
-  FormLabel,
+  // FormLabel,
   // HStack,
   Stack,
   useBreakpointValue,
@@ -15,9 +15,9 @@ import {
   Heading,
   Button,
   Icon,
-  Input,
-  FormControl,
-  Select,
+  // Input,
+  // FormControl,
+  // Select,
   useDisclosure,
 } from '@chakra-ui/react';
 
@@ -64,6 +64,8 @@ export function Fornecedores() {
     const response = await getFornecedor();
     setFornecedores(response.data as Fornecedor[]);
   };
+
+  console.log(fornecedores);
 
   useEffect(() => {
     handleGetFornecedores();
@@ -131,7 +133,7 @@ export function Fornecedores() {
                     // border={'green solid 4px'}
                     justifyContent={'flex-start'}
                   >
-                    <form
+                    {/* <form
                       onSubmit={(e) => {
                         e.preventDefault();
                       }}
@@ -214,8 +216,8 @@ export function Fornecedores() {
                           </Button>
                         </FormControl>
                       </Flex>
-                    </form>
-                    <Flex
+                    </form> */}
+                    {/* <Flex
                       // border={'gray solid 4px'}
                       justifyContent={'flex-end'}
                     >
@@ -236,7 +238,7 @@ export function Fornecedores() {
                           color="#0047BB"
                         />
                       </Button>
-                    </Flex>
+                    </Flex> */}
                   </Flex>
                 </Flex>
               </Stack>

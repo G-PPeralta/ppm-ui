@@ -16,13 +16,29 @@ import { Fornecedor } from '../index';
 
 type TabelaFornecedoresProps = {
   fornecedores: Fornecedor[];
-  onEdit: (fornecedor: Fornecedor) => void;
+  onEdit: (fornecedor: Fornecedor) => any;
 };
 
 export function TabelaFornecedores({
   fornecedores,
   onEdit,
 }: TabelaFornecedoresProps) {
+  const orcSum = fornecedores
+    .map((forn) => forn.orcamento)
+    .reduce(
+      (acumulador: number, valorAtual: number) => acumulador + valorAtual,
+      0,
+    );
+  // console.log(fornecedores.map((forn) => forn.orcamento));
+
+  const realSum = fornecedores
+    .map((forn) => forn.realizado)
+    .reduce(
+      (acumulador: number, valorAtual: number) => acumulador + valorAtual,
+      0,
+    );
+  // console.log(realSum);
+
   const tableData = fornecedores.map((fornecedor) => (
     <Tr key={fornecedor.id}>
       <Td isNumeric>{fornecedor.id}</Td>
@@ -78,8 +94,8 @@ export function TabelaFornecedores({
           <Tr background="origem.200" color="white">
             <Th>Total</Th>
             <Th></Th>
-            <Th>{(1000000.02).toLocaleString('pt-br')}</Th>
-            <Th>{(1000000.02).toLocaleString('pt-br')}</Th>
+            <Th>{orcSum.toLocaleString('pt-br')}</Th>
+            <Th>{realSum.toLocaleString('pt-br')}</Th>
             <Th></Th>
             <Th></Th>
             <Th></Th>
