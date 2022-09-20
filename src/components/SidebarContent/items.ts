@@ -48,4 +48,9 @@ export const LinkItems: Array<LinkItemProps> = [
     icon: FiGrid,
     link: "/projects/",
   },
+  {
+    name: "Orçamento",
+    icon: FiGrid,
+    link: "/budgets/",
+  },
 ];
