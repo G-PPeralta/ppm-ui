@@ -6,29 +6,40 @@ import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
 
-import { Atividade } from "services/get/ActivitiesSchedule";
+import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
 import CardACT from "./Components/CardACT";
-// import ExibirModal from './Components/ExibirModal';
-// import FiltrosModal from './Components/FiltrosModal';
-import ModalAtividade from "./Components/ModalAtividade";
+// import ModalAtividade from "./Components/ModalAtividade";
 import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
+import ModalEditarAtividade from "./Components/ModalEditarAtividade";
 import StatusProjeto from "./Components/StatusProjeto";
 
 export function ActivitiesSchedule() {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [openId, setOpenId] = useState("");
+  const [atividades, setAtividades] = useState<any[]>([]);
+  const [refresh, setRefresh] = useState(false);
+
+  const requestHandler = async () => {
+    const response = await getAtividadesCampanha(id);
+    setAtividades(response.data);
+  };
 
   useEffect(() => {
     // console.log('scheadule', id);
     // console.log('Atividade', Atividade);
+    requestHandler();
     setLoading(false);
   }, []);
 
+  useEffect(() => {
+    requestHandler();
+  }, [refresh]);
+
   const statusProjeto = [
     {
-      status: "Não Aplicável",
+      status: "Não Implementado",
       color: "#F4DD06",
     },
     {
@@ -71,14 +82,10 @@ export function ActivitiesSchedule() {
                   <Heading as="h3" size="md" mb={3}>
                     Acompanhamento de atividades
                   </Heading>
-                  {/* <Flex gap={4}>
-                    <ExibirModal />
-                    <FiltrosModal />
-                  </Flex> */}
                 </Flex>
                 <Flex justify={"space-between"} gap={6} wrap={"wrap"} mb={4}>
                   <Flex gap={2}>
-                    <ModalCadastroAtividade />
+                    <ModalCadastroAtividade id={id} setRefresh={setRefresh} />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (
@@ -91,7 +98,7 @@ export function ActivitiesSchedule() {
                   </Flex>
                 </Flex>
                 <Flex direction={"row"} gap={4} py={4} wrap={"wrap"}>
-                  {Atividade.map((atividade, index) => (
+                  {atividades.map((atividade, index) => (
                     <Flex
                       key={index}
                       direction={"column"}
@@ -105,10 +112,17 @@ export function ActivitiesSchedule() {
                   ))}
                 </Flex>
                 {openId ? (
-                  <ModalAtividade
+                  // <ModalAtividade
+                  //   id={id}
+                  //   atividade={openId}
+                  //   onClose={() => setOpenId("")}
+                  // />
+                  <ModalEditarAtividade
                     id={id}
                     atividade={openId}
                     onClose={() => setOpenId("")}
+                    setRefresh={setRefresh}
+                    refresh={refresh}
                   />
                 ) : undefined}
               </Box>

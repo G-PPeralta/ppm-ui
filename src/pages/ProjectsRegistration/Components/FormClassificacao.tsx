@@ -125,6 +125,7 @@ function FormClassificacao(projectsForm: any) {
               value={projectsForm.projectsForm.values.classificacaoId}
               onChange={projectsForm.projectsForm.handleChange}
               w={"95%"}
+              placeholder="Selecione"
             >
               {classificacaoState.map((classificacao) => (
                 <option key={classificacao.id} value={classificacao.id}>

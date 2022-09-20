@@ -5,13 +5,13 @@
   },
   "extends": ["@ialexanderbrito/eslint-config/react"],
   "rules": {
-  "prettier/prettier": [
-    "warn",
-    {
-      "endOfLine": "auto"
-    }
-  ],
-  "no-console": "warn",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "no-console": "warn",
     "react-hooks/exhaustive-deps": "off"
   },
   "settings": {

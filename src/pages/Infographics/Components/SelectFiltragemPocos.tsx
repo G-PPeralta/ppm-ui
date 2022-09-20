@@ -9,7 +9,7 @@ function SelectFiltragemPocos({ intervencaoForm }: any) {
   const { listaPocos } = useCadastroIntervencao();
 
   const options = listaPocos.map((poco: ListaPoco) => ({
-    value: poco.id,
+    value: poco.poco,
     label: poco.poco,
   }));
 
@@ -22,8 +22,8 @@ function SelectFiltragemPocos({ intervencaoForm }: any) {
       <FormControl>
         <FormLabel>POÇO</FormLabel>
         <Select
-          id="poco"
-          name="poco"
+          id="nom_atividade"
+          name="nom_atividade"
           placeholder="Selecione"
           onChange={(event, name) => handleChange(event, name)}
           options={options}

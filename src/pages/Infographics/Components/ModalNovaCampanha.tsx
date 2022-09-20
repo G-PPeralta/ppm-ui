@@ -1,20 +1,21 @@
 import {
-  Flex,
-  Text,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  // ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
   Button,
+  Flex,
   FormControl,
   FormLabel,
-  Stack,
-  useBreakpointValue,
   Input,
+  Modal,
+  ModalBody,
+  // ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Stack,
+  Text,
+  Textarea,
+  useBreakpointValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -22,11 +23,11 @@ import { TextError } from "components/TextError";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroPoco } from "hooks/useCadastroPoco";
+import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 
-function ModalCadastroPoco() {
+function ModalNovaCampanha() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroPoco();
+  const { registerForm, loading } = useCadastroCampanha();
 
   return (
     <>
@@ -43,9 +44,9 @@ function ModalCadastroPoco() {
         }}
         onClick={onOpen}
       >
-        Poço
+        Nova Campanha
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -56,7 +57,7 @@ function ModalCadastroPoco() {
             color={"white"}
             fontSize={"1em"}
           >
-            Cadastrar Poço
+            Cadastrar Nova Campanha
           </ModalHeader>
           {/* <ModalCloseButton color={"white"} /> */}
           <form
@@ -80,16 +81,48 @@ function ModalCadastroPoco() {
                         <FormLabel>NOME</FormLabel>
                         <Input
                           isRequired
-                          placeholder="Nome do Poço"
-                          id="poco"
+                          placeholder="Nome da campanha"
+                          id="nom_campanha"
                           type="text"
-                          name="poco"
-                          value={registerForm.values.poco}
+                          name="nom_campanha"
+                          value={registerForm.values.nom_campanha}
                           onChange={registerForm.handleChange}
                         />
-                        {registerForm.errors.poco &&
-                          registerForm.touched.poco && (
-                            <TextError>{registerForm.errors.poco}</TextError>
+                        {registerForm.errors.nom_campanha &&
+                          registerForm.touched.nom_campanha && (
+                            <TextError>
+                              {registerForm.errors.nom_campanha}
+                            </TextError>
+                          )}
+                      </FormControl>
+                    </Flex>
+                  </Stack>
+
+                  <Stack>
+                    <Flex
+                      flexDirection={useBreakpointValue({
+                        base: "column",
+                        md: "row",
+                      })}
+                      gap={5}
+                    >
+                      <FormControl>
+                        <FormLabel htmlFor="dsc_comentario">
+                          COMENTÁRIOS
+                        </FormLabel>
+                        <Textarea
+                          isRequired
+                          placeholder="Adicione comentários sobre a campanha"
+                          id="dsc_comentario"
+                          name="dsc_comentario"
+                          value={registerForm.values.dsc_comentario}
+                          onChange={registerForm.handleChange}
+                        />
+                        {registerForm.errors.dsc_comentario &&
+                          registerForm.touched.dsc_comentario && (
+                            <TextError>
+                              {registerForm.errors.dsc_comentario}
+                            </TextError>
                           )}
                       </FormControl>
                     </Flex>
@@ -140,4 +173,4 @@ function ModalCadastroPoco() {
   );
 }
 
-export default ModalCadastroPoco;
+export default ModalNovaCampanha;

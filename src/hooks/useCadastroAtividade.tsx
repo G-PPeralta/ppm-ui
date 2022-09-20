@@ -1,83 +1,62 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useFormik } from "formik";
-import {
-  AreaAtuacao,
-  AtividadeLista,
-  RegistroResponsavel,
-  Tarefa,
-} from "interfaces/Services";
-import { cadastroAtividadeSchema } from "validations/ModaisCadastrosInfografico";
+import { NovaAtividade } from "interfaces/CadastrosModaisInfograficos";
+import { cadastroNovaAtividadeSchema } from "validations/ModaisCadastrosInfografico";
 
 import { useToast } from "contexts/Toast";
 
-import {
-  getAreaAtuacaoList,
-  getAtividadesList,
-  getResponsavelList,
-  getTarefaList,
-} from "services/get/Infograficos";
-import { postCadastroAtividade } from "services/post/CadastroModaisInfograficos";
+import { postNovaAtividade } from "services/post/CadastroModaisInfograficos";
+
+import { useAuth } from "./useAuth";
 
 export function useCadastroAtividade() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [ListaResponsavel, setListaResponsavel] = useState<
-    RegistroResponsavel[]
-  >([]);
-  const [listaArea, setListaArea] = useState<AreaAtuacao[]>([]);
-  const [listaAtividades, setListaAtividades] = useState<AtividadeLista[]>([]);
-  const [listaTarefa, setListaTarefa] = useState<Tarefa[]>([]);
+  const { user } = useAuth();
 
-  const carregarListaResponsavel = async () => {
-    const { data } = await getResponsavelList();
-    setListaResponsavel(data);
-  };
-
-  const carregarAreaAtuacao = async () => {
-    const { data } = await getAreaAtuacaoList();
-    setListaArea(data);
-  };
-
-  const carregarListaAtividade = async () => {
-    const { data } = await getAtividadesList();
-    setListaAtividades(data);
-  };
-
-  const carregarListaTarefa = async () => {
-    const { data } = await getTarefaList();
-    setListaTarefa(data);
+  const initialValues: NovaAtividade = {
+    id_pai: 0, // enviar o id da poco (pai)
+    nom_atividade: "", // enviar nome da atividade
+    pct_real: 0, // porcentagem realizada
+    dat_ini_plan: "", // data inicio planejada
+    dat_fim_plan: "", // data fim planejada
+    dsc_comentario: "", // comentario
+    id_campanha: 0, // enviar id da campanha
+    nom_usu_create: user?.nome,
   };
 
   const registerForm = useFormik({
-    initialValues: {
-      nomeAtividade: "",
-      dias: 0,
-      area: "",
-      comentarios: "",
-    },
-    validationSchema: cadastroAtividadeSchema,
+    initialValues,
+    validationSchema: cadastroNovaAtividadeSchema,
     onSubmit: async (values) => {
-      const newValues = {
-        tarefaId: parseInt(values.nomeAtividade),
-        areaAtuacaoId: parseInt(values.area),
-        obs: values.comentarios,
-        dias: values.dias,
+      const newValues: NovaAtividade = {
+        nom_atividade: values.nom_atividade,
+        pct_real: values.pct_real,
+        dat_ini_plan: values.dat_ini_plan,
+        dat_fim_plan: values.dat_fim_plan,
+        dsc_comentario: values.dsc_comentario,
+        id_campanha: values.id_campanha,
+        id_pai: values.id_pai,
+        nom_usu_create: user?.nome,
       };
 
       setLoading(true);
 
       try {
-        const { status } = await postCadastroAtividade(newValues);
+        const { status } = await postNovaAtividade(newValues);
 
         if (status === 200 || status === 201) {
-          toast.success("Atividade cadastrada com sucesso!", {
-            id: "toast-principal",
-          });
+          toast.success(
+            `Atividade ${values.nom_atividade} cadastrada com sucesso!`,
+            {
+              id: "toast-principal",
+            }
+          );
           setLoading(false);
         }
       } catch (error) {
-        toast.error("Erro ao cadastrar atividade!", {
+        toast.error(`Erro ao cadastrar atividade ${values.nom_atividade}!`, {
           id: "toast-principal",
         });
         setLoading(false);
@@ -85,19 +64,8 @@ export function useCadastroAtividade() {
     },
   });
 
-  useEffect(() => {
-    carregarListaResponsavel();
-    carregarAreaAtuacao();
-    carregarListaAtividade();
-    carregarListaTarefa();
-  }, []);
-
   return {
     registerForm,
     loading,
-    ListaResponsavel,
-    listaTarefa,
-    listaArea,
-    listaAtividades,
   };
 }

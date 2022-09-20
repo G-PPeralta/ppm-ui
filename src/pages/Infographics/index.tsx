@@ -11,12 +11,9 @@ import { statusProjeto } from "../../utils/validateDate";
 import ColumnSPT from "./Components/ColumnSPT";
 import ExibirModal from "./Components/ExibirModal";
 import FiltrosModal from "./Components/FiltrosModal";
-import ModalBotaoCadastrar from "./Components/ModalBotaoCadastrar";
-import ModalCadastrarProjetoTipo from "./Components/ModalCadastrarProjetoTipo";
-import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
-import ModalCadastrarTarefa from "./Components/ModalCadastrarTarefa";
-import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
 import ModalCadastroPoco from "./Components/ModalCadastroPoco";
+import ModalIntervencao from "./Components/ModalIntervencao";
+import ModalNovaCampanha from "./Components/ModalNovaCampanha";
 import StatusProjeto from "./Components/StatusProjeto";
 
 export function Infographics() {
@@ -55,12 +52,15 @@ export function Infographics() {
                     <FiltrosModal />
                   </Flex>
                 </Flex>
-                <Flex justify={"space-between"} gap={6} wrap={"wrap"} mb={4}>
+                <Flex
+                  direction={"column"}
+                  justify={"space-between"}
+                  gap={6}
+                  wrap={"wrap"}
+                  mb={4}
+                >
                   <Flex gap={2}>
-                    <ModalCadastrarSonda />
-                    <ModalCadastrarProjetoTipo />
-                    <ModalCadastroAtividade />
-                    <ModalCadastrarTarefa />
+                    <ModalNovaCampanha />
                     <ModalCadastroPoco />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
@@ -81,18 +81,19 @@ export function Infographics() {
                     gap={10}
                     py={4}
                   >
-                    {campanhas.map((column, index) => (
-                      <Flex
-                        key={index}
-                        direction={"column"}
-                        gap={4}
-                        align={"center"}
-                        justify={"center"}
-                      >
-                        <ColumnSPT column={column} />
-                        <ModalBotaoCadastrar />
-                      </Flex>
-                    ))}
+                    {campanhas &&
+                      campanhas.map((column, index) => (
+                        <Flex
+                          key={index}
+                          direction={"column"}
+                          gap={4}
+                          align={"center"}
+                          justify={"space-between"}
+                        >
+                          <ColumnSPT column={column} />
+                          <ModalIntervencao />
+                        </Flex>
+                      ))}
                   </Box>
                 </Flex>
               </Box>

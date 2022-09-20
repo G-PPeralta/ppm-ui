@@ -4,7 +4,10 @@ import CardPIR from "./CardPIR";
 
 type Poco = {
   poco: string;
-  inicio_planejado: string;
+  inicioplanejado: string;
+  pct_plan: number;
+  comp_pct: number;
+  pct_real: number;
 };
 
 type Column = {

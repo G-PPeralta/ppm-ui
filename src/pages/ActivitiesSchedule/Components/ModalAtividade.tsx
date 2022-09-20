@@ -1,5 +1,6 @@
 // import { useEffect } from 'react';
 import { FaChevronRight } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 import {
   Flex,
@@ -22,7 +23,7 @@ import {
 import { Ring } from "@uiball/loaders";
 
 // import ListDnD from 'components/ListDnD';
-import { TextError } from "components/TextError";
+// import { TextError } from "components/TextError";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
@@ -30,6 +31,8 @@ import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 function ModalAtividade({ onClose, atividade, id }: any) {
   const { registerForm, loading } = useCadastroAtividade();
+  const { state }: any = useLocation();
+  const { poco } = state;
 
   // useEffect(() => {
   //   console.log('ModalAtividade', atividade);
@@ -58,9 +61,7 @@ function ModalAtividade({ onClose, atividade, id }: any) {
             }}
           >
             <ModalBody mt={3}>
-              <Text sx={{ fontSize: 20, fontWeight: "500" }}>
-                {id.slice(0, 3) + " " + id.slice(3)}
-              </Text>
+              <Text sx={{ fontSize: 20, fontWeight: "500" }}>{poco.poco}</Text>
               <FormControl>
                 <Flex
                   display={"flex"}
@@ -222,13 +223,13 @@ function ModalAtividade({ onClose, atividade, id }: any) {
                       placeholder="Adicione comentários sobre a atividade"
                       id="comentarios"
                       name="comentarios"
-                      value={registerForm.values.comentarios}
+                      // value={registerForm.values.comentarios}
                       onChange={registerForm.handleChange}
                     />
-                    {registerForm.errors.comentarios &&
+                    {/* {registerForm.errors.comentarios &&
                       registerForm.touched.comentarios && (
                         <TextError>{registerForm.errors.comentarios}</TextError>
-                      )}
+                      )} */}
                   </FormControl>
                 </Flex>
               </FormControl>

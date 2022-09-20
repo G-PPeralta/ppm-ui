@@ -5,7 +5,7 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
+  // ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
@@ -58,7 +58,7 @@ function ModalCadastrarSonda() {
           >
             Cadastrar Sonda
           </ModalHeader>
-          <ModalCloseButton color={"white"} />
+          {/* <ModalCloseButton color={"white"} /> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -81,15 +81,15 @@ function ModalCadastrarSonda() {
                         <Input
                           isRequired
                           placeholder="Nome da Sonda"
-                          id="nomeSpt"
+                          id="sonda"
                           type="text"
-                          name="nomeSpt"
-                          value={registerForm.values.nomeSpt}
+                          name="sonda"
+                          value={registerForm.values.sonda}
                           onChange={registerForm.handleChange}
                         />
-                        {registerForm.errors.nomeSpt &&
-                          registerForm.touched.nomeSpt && (
-                            <TextError>{registerForm.errors.nomeSpt}</TextError>
+                        {registerForm.errors.sonda &&
+                          registerForm.touched.sonda && (
+                            <TextError>{registerForm.errors.sonda}</TextError>
                           )}
                       </FormControl>
                     </Flex>
