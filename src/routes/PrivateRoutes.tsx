@@ -20,6 +20,7 @@ import { Reports } from "pages/Reports";
 import { Settings } from "pages/Settings";
 import { ShareRegister } from "pages/ShareRegister";
 import { UploadSheet } from "pages/UploadSheet";
+import { BudgetDetail } from "pages/BudgetDetail";
 
 export function PrivateRoutes() {
   return (
@@ -44,6 +45,7 @@ export function PrivateRoutes() {
       <Route path="/upload" element={<UploadSheet />} />
       <Route path="/projects" element={<Projects />} />
       <Route path="/budgets" element={<Budgets />} />
+      <Route path="/budget/detail/:id" element={<BudgetDetail />} />
       <Route path="/gantt" element={<GanttPage />} />
       <Route path="/fornecedores" element={<Fornecedores />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />

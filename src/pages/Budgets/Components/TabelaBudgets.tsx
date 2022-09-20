@@ -92,7 +92,7 @@ export function TabelaBudgets(props: TableProps) {
           {budget.item}
         </Td>
         <td>
-          <Link to={`/detalhamento/${budget.id}`}>
+          <Link to={`/budget/detail/${budget.id}`}>
             <Text color="blue">{budget.projeto.nome}</Text>
           </Link>
         </td>
@@ -108,7 +108,7 @@ export function TabelaBudgets(props: TableProps) {
           <Tr className={"hide item-" + key} key={d.id}>
             <Td>{d.item}</Td>
             <td>
-              <Link to={`/detalhamento/${d.id}`}>
+              <Link to={`/budget/detail/${d.id}`}>
                 <Text color="blue">{d.projeto.nome}</Text>
               </Link>
             </td>
