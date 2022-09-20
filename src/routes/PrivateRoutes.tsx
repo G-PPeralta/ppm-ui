@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { ActivitiesPrecedents } from "pages/ActivitiesPrecedents";
 import { ActivitiesRegistration } from "pages/ActivitiesRegistration";
 import { ActivitiesSchedule } from "pages/ActivitiesSchedule";
+import { Budgets } from "pages/Budgets";
 import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
 import { GanttPage } from "pages/Gantt";
 import { Home } from "pages/Home";
@@ -42,6 +43,7 @@ export function PrivateRoutes() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/upload" element={<UploadSheet />} />
       <Route path="/projects" element={<Projects />} />
+      <Route path="/budgets" element={<Budgets />} />
       <Route path="/gantt" element={<GanttPage />} />
       <Route path="/fornecedores" element={<Fornecedores />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
