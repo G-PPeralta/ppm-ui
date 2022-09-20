@@ -77,8 +77,8 @@ export const LinkItems: Array<LinkItemProps> = [
     icon: FiSettings,
     children: [
       { name: "Configurações", icon: FiSettings, link: "/desenvolvimento" },
-      { name: "Usuários", icon: FiSettings, link: "/desenvolvimento" },
-      { name: "Perfil", icon: FiSettings, link: "/desenvolvimento" },
+      { name: "Usuários", icon: FiSettings, link: "/profile" },
+      { name: "Perfil", icon: FiSettings, link: "/profile" },
       { name: "Gestão de Áreas", icon: FiSettings, link: "/desenvolvimento" },
       {
         name: "Configurar Prioridades",

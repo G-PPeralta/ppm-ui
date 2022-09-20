@@ -37,7 +37,7 @@ export function NavItem({ icon, children, link, ...rest }: NavItemProps) {
         {icon && (
           <Icon
             mr="4"
-            fontSize="16"
+            fontSize="14"
             _groupHover={{
               color: "white",
             }}

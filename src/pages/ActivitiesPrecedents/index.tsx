@@ -21,7 +21,6 @@ export function ActivitiesPrecedents() {
   const requestHandler = async () => {
     const response = await getAtividadesCampanha(id);
     setAtividades(response.data);
-    console.log("id", id);
   };
 
   useEffect(() => {

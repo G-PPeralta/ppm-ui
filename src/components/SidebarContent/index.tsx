@@ -112,6 +112,7 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
                       link={link.link || "/"}
                     >
                       <Text
+                        sx={{ fontSize: 12 }}
                         _groupHover={{
                           color: "white",
                         }}
