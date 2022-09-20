@@ -37,7 +37,7 @@ function ModalIntervencao() {
       <Flex
         mt={2}
         py={3}
-        w="75%"
+        w="70%"
         border={"2px"}
         borderStyle={"dashed"}
         borderColor={"origem.500"}
@@ -60,7 +60,7 @@ function ModalIntervencao() {
           variant="secondary"
           color="white"
           isRound={true}
-          size="lg"
+          size="md"
         />
 
         <Text color={"origem.500"} fontWeight={600}>

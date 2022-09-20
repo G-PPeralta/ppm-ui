@@ -21,11 +21,11 @@ import { Ring } from "@uiball/loaders";
 
 import { TextError } from "components/TextError";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 
-function ModalNovaCampanha() {
+function ModalNovaCampanha({ setRefresh, refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroCampanha();
 
@@ -150,7 +150,14 @@ function ModalNovaCampanha() {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() =>
+                    handleCadastrarRefresh(
+                      registerForm,
+                      onClose,
+                      setRefresh,
+                      refresh
+                    )
+                  }
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",
