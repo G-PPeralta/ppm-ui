@@ -1,20 +1,21 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
 
-import { ActivitiesRegistration } from "pages/ActivitiesRegistration";
-import { ActivitiesSchedule } from "pages/ActivitiesSchedule";
-import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
-import { GanttPage } from "pages/Gantt";
-import { Home } from "pages/Home";
-import { Infographics } from "pages/Infographics";
-import { NotFound } from "pages/NotFound";
-import { Permissions } from "pages/Permissions";
-import { PermissionsList } from "pages/PermissionsList";
-import { Profile } from "pages/Profile";
-import { ProjectsRegistration } from "pages/ProjectsRegistration";
-import { ProvidersRegistration } from "pages/ProvidersRegistration";
-import { Reports } from "pages/Reports";
-import { Settings } from "pages/Settings";
-import { ShareRegister } from "pages/ShareRegister";
+import { ActivitiesRegistration } from 'pages/ActivitiesRegistration';
+import { ActivitiesSchedule } from 'pages/ActivitiesSchedule';
+import DetalhamentoProjeto from 'pages/DetalhamentoProjeto';
+import { GanttPage } from 'pages/Gantt';
+import { Home } from 'pages/Home';
+import { Infographics } from 'pages/Infographics';
+import { Fornecedores } from 'pages/ListaDosFornecedores';
+import { NotFound } from 'pages/NotFound';
+import { Permissions } from 'pages/Permissions';
+import { PermissionsList } from 'pages/PermissionsList';
+import { Profile } from 'pages/Profile';
+import { ProjectsRegistration } from 'pages/ProjectsRegistration';
+import { ProvidersRegistration } from 'pages/ProvidersRegistration';
+import { Reports } from 'pages/Reports';
+import { Settings } from 'pages/Settings';
+import { ShareRegister } from 'pages/ShareRegister';
 
 export function PrivateRoutes() {
   return (
@@ -37,6 +38,7 @@ export function PrivateRoutes() {
       <Route path="/settings" element={<Settings />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/gantt" element={<GanttPage />} />
+      <Route path="/fornecedores" element={<Fornecedores />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
       <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
       <Route path="*" element={<NotFound />} />
