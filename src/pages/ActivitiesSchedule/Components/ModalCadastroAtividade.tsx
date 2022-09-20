@@ -24,6 +24,8 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
+import { RequiredField } from "components/RequiredField/RequiredField";
+
 import {
   handleCadastrarRefresh,
   handleCancelarDatePicker,
@@ -133,7 +135,10 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="nom_atividade">NOME</FormLabel>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="nom_atividade">NOME</FormLabel>
+                        </Flex>
                         <Input
                           isRequired
                           placeholder="Digite o nome da atividade"
@@ -159,9 +164,12 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
 
                     <Flex justify={"space-between"} gap={5}>
                       <Flex direction={"column"} grow={1}>
-                        <FormLabel htmlFor="dat_ini_plan">
-                          DATA INÍCIO
-                        </FormLabel>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="dat_ini_plan">
+                            DATA INÍCIO
+                          </FormLabel>
+                        </Flex>
                         <DatePicker
                           selected={startDate}
                           onChange={(date) => handleStartDate(date)}
@@ -173,7 +181,10 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
                         />
                       </Flex>
                       <Flex direction={"column"} grow={1}>
-                        <FormLabel htmlFor="dat_fim_plan">DATA FIM</FormLabel>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="dat_fim_plan">DATA FIM</FormLabel>
+                        </Flex>
                         <DatePicker
                           selected={endDate}
                           onChange={(date) => handleEndDate(date)}
