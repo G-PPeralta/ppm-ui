@@ -1,7 +1,10 @@
 import Select from "react-select";
 
-import { FormControl, FormLabel } from "@chakra-ui/react";
+import { Flex, FormControl, FormLabel } from "@chakra-ui/react";
 import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
+
+import { RequiredField } from "components/RequiredField/RequiredField";
+import { TextError } from "components/TextError";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
@@ -20,7 +23,10 @@ function SelectFiltragemPocos({ intervencaoForm }: any) {
   return (
     <>
       <FormControl>
-        <FormLabel>POÇO</FormLabel>
+        <Flex gap={1}>
+          <RequiredField />
+          <FormLabel>POÇO</FormLabel>
+        </Flex>
         <Select
           id="nom_atividade"
           name="nom_atividade"
@@ -29,6 +35,9 @@ function SelectFiltragemPocos({ intervencaoForm }: any) {
           options={options}
           isSearchable
         />
+        {intervencaoForm.errors.nom_atividade && (
+          <TextError>{intervencaoForm.errors.nom_atividade}</TextError>
+        )}
       </FormControl>
     </>
   );

@@ -70,8 +70,14 @@ export const cadastroNovaCampanhaSchema = yup.object({
 });
 
 export const cadastroNovaIntervencaoSchema = yup.object({
-  nom_atividade: yup.string().min(3).required("Poço é obrigatório"),
-  id_campanha: yup.number().min(3).required("Sonda é obrigatória"),
+  nom_atividade: yup
+    .string()
+    .min(2, "Campo obrigatório")
+    .required("Poço é obrigatório"),
+  id_campanha: yup
+    .number()
+    .min(2, "Campo obrigatório")
+    .required("Sonda é obrigatória"),
   dsc_comentario: yup.string(),
 });
 

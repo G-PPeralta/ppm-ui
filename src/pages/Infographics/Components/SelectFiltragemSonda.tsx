@@ -1,6 +1,8 @@
 import Select from "react-select";
 
-import { FormControl, FormLabel } from "@chakra-ui/react";
+import { Flex, FormControl, FormLabel } from "@chakra-ui/react";
+
+import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
@@ -25,9 +27,15 @@ function SelectFiltragemSondas({ form, nomeChave }: any) {
     <>
       <FormControl>
         {nomeChave === "id_campanha" ? (
-          <FormLabel>SONDA</FormLabel>
+          <Flex gap={1}>
+            <RequiredField />
+            <FormLabel>SONDA</FormLabel>
+          </Flex>
         ) : (
-          <FormLabel>NOME CAMPANHA/SONDA</FormLabel>
+          <Flex gap={1}>
+            <RequiredField />
+            <FormLabel>NOME CAMPANHA/SONDA</FormLabel>
+          </Flex>
         )}
         <Select
           id={nomeChave}
