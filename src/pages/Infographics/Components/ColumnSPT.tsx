@@ -26,7 +26,13 @@ type Props = {
 function ColumnSPT({ column }: Props) {
   return (
     <Flex direction={"column"} align={"center"} justify={"center"}>
-      <Text fontSize={"2xl"} fontWeight={"bold"} mb={6} mt={3}>
+      <Text
+        fontSize={"2xl"}
+        fontWeight={"bold"}
+        mb={6}
+        mt={3}
+        textAlign={"center"}
+      >
         {column.sonda}
       </Text>
       <Flex direction={"column"} gap={10} align={"center"} justify={"center"}>

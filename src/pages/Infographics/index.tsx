@@ -11,6 +11,7 @@ import { statusProjeto } from "../../utils/validateDate";
 import ColumnSPT from "./Components/ColumnSPT";
 import ExibirModal from "./Components/ExibirModal";
 import FiltrosModal from "./Components/FiltrosModal";
+import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
 import ModalCadastroPoco from "./Components/ModalCadastroPoco";
 import ModalIntervencao from "./Components/ModalIntervencao";
 import ModalNovaCampanha from "./Components/ModalNovaCampanha";
@@ -23,6 +24,7 @@ export function Infographics() {
 
   const handleGetCampanha = async () => {
     const response = await getInfoCampanha();
+    console.log("response", response.data);
     setCampanhas(response.data);
     setLoading(false);
   };
@@ -69,6 +71,7 @@ export function Infographics() {
                       refresh={refresh}
                       setRefresh={setRefresh}
                     />
+                    <ModalCadastrarSonda />
                     <ModalCadastroPoco />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>

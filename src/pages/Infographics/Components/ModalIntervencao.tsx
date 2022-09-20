@@ -63,8 +63,8 @@ function ModalIntervencao() {
           size="md"
         />
 
-        <Text color={"origem.500"} fontWeight={600}>
-          Cadastrar
+        <Text color={"origem.500"} fontWeight={600} textAlign={"center"}>
+          Cadastrar Intervenção
         </Text>
       </Flex>
       <Modal isOpen={isOpen} onClose={onClose} size="3xl">
@@ -96,7 +96,8 @@ function ModalIntervencao() {
                           intervencaoForm={intervencaoForm}
                         />
                         <SelectFiltragemSondas
-                          intervencaoForm={intervencaoForm}
+                          form={intervencaoForm}
+                          nomeChave={"id_campanha"}
                         />
                       </Flex>
                     </Stack>

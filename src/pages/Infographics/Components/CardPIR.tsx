@@ -64,12 +64,30 @@ function CardPIR({ poco, index }: Props) {
           <Text fontSize={"lg"} color={"white"} fontWeight={"bold"}>
             {poco.poco}
           </Text>
-          <Text fontSize={"md"} color={"white"} fontWeight={"semi-bold"}>
-            {dataInicioFormatada === "31/12/1969" ? "-" : dataInicioFormatada}
+          <Text
+            fontSize={"md"}
+            color={"white"}
+            fontWeight={"semi-bold"}
+            textAlign={"center"}
+          >
+            {dataInicioFormatada === "31/12/1969" ? "" : dataInicioFormatada}
           </Text>
-          {/* <Text fontSize={'md'} color={'white'} fontWeight={'semi-bold'}>
-          {card.porcentagem}
-        </Text> */}
+          <Text
+            fontSize={"md"}
+            color={"white"}
+            fontWeight={"semi-bold"}
+            textAlign={"center"}
+          >
+            {poco.pct_plan === null ? "" : `Planejado: ${poco.pct_plan}%`}
+          </Text>
+          <Text
+            fontSize={"md"}
+            color={"white"}
+            fontWeight={"semi-bold"}
+            textAlign={"center"}
+          >
+            {poco.pct_plan === null ? "" : `Realizado: ${poco.pct_real}%`}
+          </Text>
         </Flex>
       </Flex>
     </>
