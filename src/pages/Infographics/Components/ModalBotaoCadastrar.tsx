@@ -9,7 +9,7 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
+  // ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
@@ -27,30 +27,46 @@ import ListDnD from "pages/Infographics/Components/ListaIntervencao";
 
 import { TextError } from "components/TextError";
 
-import { formatDate } from "utils/formatDate";
+import { formatDate, formatDateToYMD } from "utils/formatDate";
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
+import { useCadastroIntervencaoOLD } from "hooks/useCadastroIntervencaoOLD";
 
-import SelectFiltragemPocos from "./SelectFiltragemPocos";
+// import SelectFiltragemPocos from "./SelectFiltragemPocos";
 import SelectFiltragemProjetos from "./SelectFiltragemProjetos";
-import SelectFiltragemSondas from "./SelectFiltragemSonda";
+// import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
 function ModalBotaoCadastrar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { intervencaoForm, loading } = useCadastroIntervencao();
+  const { intervencaoForm, loading } = useCadastroIntervencaoOLD();
   const [qtdeDias, setQtdeDias] = useState<any>(0);
-  const [dataFinal, setDataFinal] = useState<any>("");
+  const [dataFinal, setDataFinal] = useState<any>("dd/mm/aaaa");
 
-  // console.log(intervencaoForm.values);
+  const handleCadastrarIntervencao = () => {
+    handleCadastrar(intervencaoForm, onClose);
+    setDataFinal("dd/mm/aaaa");
+  };
+
+  const handleCancelarIntervencao = () => {
+    setDataFinal("dd/mm/aaaa");
+    intervencaoForm.resetForm();
+    handleCancelar(intervencaoForm, onClose);
+  };
 
   useEffect(() => {
-    if (intervencaoForm.values.inicioPrevisto) {
-      const data = new Date(intervencaoForm.values.inicioPrevisto);
+    if (intervencaoForm.values.inicioPlanejado) {
+      const data = new Date(intervencaoForm.values.inicioPlanejado);
       const dataFinal = new Date(data.setDate(data.getDate() + qtdeDias));
-      setDataFinal(formatDate(dataFinal));
+      const dataFormatada = formatDate(dataFinal);
+      const dataFormatadaYMD = formatDateToYMD(dataFinal);
+      setDataFinal(dataFormatada);
+      intervencaoForm.setFieldValue("fimPlanejado", dataFormatadaYMD);
     }
-  }, [intervencaoForm.values.projetoId]);
+  }, [
+    intervencaoForm.values.tipoProjetoId,
+    qtdeDias,
+    intervencaoForm.values.inicioPlanejado,
+  ]);
 
   return (
     <>
@@ -100,7 +116,7 @@ function ModalBotaoCadastrar() {
           >
             Cadastrar Nova Intervenção/Perfuração
           </ModalHeader>
-          <ModalCloseButton color={"white"} />
+          {/* <ModalCloseButton color={'white'} /> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -143,10 +159,10 @@ function ModalBotaoCadastrar() {
                       })}
                       gap={5}
                     >
-                      <SelectFiltragemPocos intervencaoForm={intervencaoForm} />
+                      {/* <SelectFiltragemPocos intervencaoForm={intervencaoForm} />
                       <SelectFiltragemSondas
                         intervencaoForm={intervencaoForm}
-                      />
+                      /> */}
                     </Flex>
 
                     <Stack>
@@ -163,22 +179,22 @@ function ModalBotaoCadastrar() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="inicioPrevisto">
+                        <FormLabel htmlFor="inicioPlanejado">
                           INÍCIO PREVISTO
                         </FormLabel>
                         <Input
                           isRequired
                           placeholder="dd/mm/aaaa"
-                          id="inicioPrevisto"
+                          id="inicioPlanejado"
                           type="date"
-                          name="inicioPrevisto"
-                          value={intervencaoForm.values.inicioPrevisto}
+                          name="inicioPlanejado"
+                          value={intervencaoForm.values.inicioPlanejado}
                           onChange={intervencaoForm.handleChange}
                         />
-                        {intervencaoForm.errors.inicioPrevisto &&
-                          intervencaoForm.touched.inicioPrevisto && (
+                        {intervencaoForm.errors.inicioPlanejado &&
+                          intervencaoForm.touched.inicioPlanejado && (
                             <TextError>
-                              {intervencaoForm.errors.inicioPrevisto}
+                              {intervencaoForm.errors.inicioPlanejado}
                             </TextError>
                           )}
                       </FormControl>
@@ -206,20 +222,20 @@ function ModalBotaoCadastrar() {
 
                   <Stack>
                     <FormControl>
-                      <FormLabel htmlFor="comentarios">OBSERVAÇÕES</FormLabel>
+                      <FormLabel htmlFor="observacoes">OBSERVAÇÕES</FormLabel>
                       <Textarea
                         isRequired
                         placeholder="Adicione observações sobre a intervenção"
-                        id="comentarios"
-                        name="comentarios"
-                        value={intervencaoForm.values.comentarios}
+                        id="observacoes"
+                        name="observacoes"
+                        value={intervencaoForm.values.observacoes}
                         onChange={intervencaoForm.handleChange}
                         w={useBreakpointValue({ base: "100%", md: "100%" })}
                       />
-                      {intervencaoForm.errors.comentarios &&
-                        intervencaoForm.touched.comentarios && (
+                      {intervencaoForm.errors.observacoes &&
+                        intervencaoForm.touched.observacoes && (
                           <TextError>
-                            {intervencaoForm.errors.comentarios}
+                            {intervencaoForm.errors.observacoes}
                           </TextError>
                         )}
                     </FormControl>
@@ -233,7 +249,7 @@ function ModalBotaoCadastrar() {
                 <Button
                   variant="ghost"
                   color="red"
-                  onClick={() => handleCancelar(intervencaoForm, onClose)}
+                  onClick={() => handleCancelarIntervencao()}
                   _hover={{
                     background: "red.500",
                     transition: "all 0.4s",
@@ -247,7 +263,7 @@ function ModalBotaoCadastrar() {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(intervencaoForm, onClose)}
+                  onClick={() => handleCadastrarIntervencao()}
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",

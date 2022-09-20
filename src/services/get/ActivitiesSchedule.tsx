@@ -1,3 +1,5 @@
+import { api, token } from "services/api";
+
 export const Atividade = [
   {
     atividade: "Atividade x, tamanho maior, teste",
@@ -80,3 +82,12 @@ export const Atividade = [
     porcentagemFeita: "50%",
   },
 ];
+
+export async function getAtividadesCampanha(id: string | undefined): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(`/campanha/${id}`, token());
+
+  return { data, status };
+}

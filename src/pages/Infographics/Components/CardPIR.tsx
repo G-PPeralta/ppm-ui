@@ -6,8 +6,15 @@ import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
 
 type Poco = {
+  comp_pct: number;
+  finalPlanejado: any;
+  id_campanha: number;
+  id_poco: number;
+  inicioplanejado: any;
+  pct_plan: any;
+  pct_real: any;
   poco: string;
-  inicio_planejado: string;
+  sonda: string;
 };
 
 type Props = {
@@ -17,51 +24,73 @@ type Props = {
 
 function CardPIR({ poco, index }: Props) {
   const navigate = useNavigate();
-  // console.log('CARD', poco);
-  const dataInicioFormatada = formatDate(new Date(poco.inicio_planejado));
-
-  // const dataInicio = '2022-08-25';
-  // const dataFim = '2022-08-31';
-  // const diferencaMilisegundos =
-  //   Number(new Date(dataFim)) - Number(new Date(dataInicio));
-  // const diferencaDias = diferencaMilisegundos / (1000 * 60 * 60 * 24);
-
-  // console.log('Quantidade dias:', diferencaDias);
+  const dataInicioFormatada = formatDate(new Date(poco.inicioplanejado));
 
   const transfer = () => {
-    navigate(`/atividade/${poco.poco}`);
+    navigate(`/atividade/${poco.id_poco}`, {
+      state: {
+        poco,
+      },
+    });
   };
 
   return (
-    <Flex direction={"row"} gap={4} onClick={() => transfer()}>
-      <Flex align={"center"} justify={"center"}>
-        <Heading as="h3" size="md" textAlign={"center"} width={"50px"}>
-          {index === 0 ? "Atual" : `${index + 1}º`}
-        </Heading>
+    <>
+      {/* A data 31/12/1969 é o valor de null no banco de dados.
+      Se o valor for exatamente esse, o componente não deverá ser renderizado. */}
+      <Flex direction={"row"} gap={4} onClick={() => transfer()}>
+        <Flex align={"center"} justify={"center"}>
+          <Heading as="h3" size="md" textAlign={"center"} width={"50px"}>
+            {index === 0 ? "Atual" : `${index + 1}º`}
+          </Heading>
+        </Flex>
+        <Flex
+          direction={"column"}
+          align={"center"}
+          justify={"center"}
+          backgroundColor={validateDate(
+            poco.pct_plan,
+            poco.comp_pct,
+            poco.pct_real
+          )}
+          px={4}
+          py={2}
+          borderRadius={4}
+          _hover={{
+            cursor: "pointer",
+          }}
+          w={"114px"}
+        >
+          <Text fontSize={"lg"} color={"white"} fontWeight={"bold"}>
+            {poco.poco}
+          </Text>
+          <Text
+            fontSize={"md"}
+            color={"white"}
+            fontWeight={"semi-bold"}
+            textAlign={"center"}
+          >
+            {dataInicioFormatada === "31/12/1969" ? "" : dataInicioFormatada}
+          </Text>
+          <Text
+            fontSize={"md"}
+            color={"white"}
+            fontWeight={"semi-bold"}
+            textAlign={"center"}
+          >
+            {poco.pct_plan === null ? "" : `Planejado: ${poco.pct_plan}%`}
+          </Text>
+          <Text
+            fontSize={"md"}
+            color={"white"}
+            fontWeight={"semi-bold"}
+            textAlign={"center"}
+          >
+            {poco.pct_plan === null ? "" : `Realizado: ${poco.pct_real}%`}
+          </Text>
+        </Flex>
       </Flex>
-      <Flex
-        direction={"column"}
-        align={"center"}
-        justify={"center"}
-        backgroundColor={validateDate(poco.inicio_planejado)}
-        px={4}
-        py={2}
-        borderRadius={4}
-        _hover={{
-          cursor: "pointer",
-        }}
-      >
-        <Text fontSize={"lg"} color={"white"} fontWeight={"bold"}>
-          {poco.poco}
-        </Text>
-        <Text fontSize={"md"} color={"white"} fontWeight={"semi-bold"}>
-          {dataInicioFormatada}
-        </Text>
-        {/* <Text fontSize={'md'} color={'white'} fontWeight={'semi-bold'}>
-          {card.porcentagem}
-        </Text> */}
-      </Flex>
-    </Flex>
+    </>
   );
 }
 

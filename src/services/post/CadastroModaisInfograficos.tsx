@@ -1,10 +1,13 @@
 import {
   CadastroTarefa,
-  CadastroSonda,
   CadastroProjetoTipo,
   CadastroIntervencao,
   CadastroAtividade,
-  CadastroPoco,
+  NovaCampanha,
+  NovaIntervencao,
+  NovoPoco,
+  NovaSonda,
+  NovaAtividade,
 } from "interfaces/CadastrosModaisInfograficos";
 
 import { api, token } from "services/api";
@@ -16,8 +19,8 @@ export async function postCadastroTarefa(
   return { status };
 }
 
-export async function postCadastroSonda(
-  payload: CadastroSonda
+export async function postNovaSonda(
+  payload: NovaSonda
 ): Promise<{ status: number }> {
   const { status } = await api.post("/sonda", payload, token());
   return { status };
@@ -48,9 +51,45 @@ export async function postProjetoTipo(
   return { status };
 }
 
-export async function postCadastroPoco(
-  payload: CadastroPoco
+export async function postNovoPoco(
+  payload: NovoPoco
 ): Promise<{ status: number }> {
   const { status } = await api.post("/poco", payload, token());
+  return { status };
+}
+
+export async function postNovaCampanha(
+  payload: NovaCampanha
+): Promise<{ status: number }> {
+  const { status } = await api.post("/campanha", payload, token());
+  return { status };
+}
+
+export async function postNovaIntervencao(
+  payload: NovaIntervencao
+): Promise<{ status: number }> {
+  const { status } = await api.post("/campanha/filho", payload, token());
+  return { status };
+}
+
+export async function postNovaAtividade(
+  payload: NovaAtividade
+): Promise<{ status: number }> {
+  const { status } = await api.post(
+    "/campanha/filho/atividade",
+    payload,
+    token()
+  );
+  return { status };
+}
+
+export async function postEditarAtividadeStatus(
+  campanhaId: number,
+  atividadeStatus: number
+): Promise<{ status: number }> {
+  const { status } = await api.patch(
+    `/campanha/${campanhaId}/pct_real/${atividadeStatus}`,
+    token()
+  );
   return { status };
 }

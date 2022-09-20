@@ -126,6 +126,7 @@ function FormSolicitante(projectsForm: any) {
               value={projectsForm.projectsForm.values.solicitanteId}
               onChange={projectsForm.projectsForm.handleChange}
               w={"95%"}
+              placeholder="Selecione"
             >
               {solicitanteState.map((solicitante) => (
                 <option key={solicitante.id} value={solicitante.id}>

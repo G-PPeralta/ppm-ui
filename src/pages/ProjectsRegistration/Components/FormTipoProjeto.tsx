@@ -123,6 +123,7 @@ function FormTipoProjeto(projectsForm: any) {
               value={projectsForm.projectsForm.values.tipoProjetoId}
               onChange={projectsForm.projectsForm.handleChange}
               w={"95%"}
+              placeholder="Selecione"
             >
               {tipoProjetoState.map((tipo) => (
                 <option key={tipo.id} value={tipo.id}>

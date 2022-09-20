@@ -7,6 +7,7 @@ import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
 import { GanttPage } from "pages/Gantt";
 import { Home } from "pages/Home";
 import { Infographics } from "pages/Infographics";
+import { Fornecedores } from "pages/ListaDosFornecedores";
 import { NotFound } from "pages/NotFound";
 import { Permissions } from "pages/Permissions";
 import { PermissionsList } from "pages/PermissionsList";
@@ -41,6 +42,7 @@ export function PrivateRoutes() {
       <Route path="/projects" element={<Projects />} />
       <Route path="/budgets" element={<Budgets />} />
       <Route path="/gantt" element={<GanttPage />} />
+      <Route path="/fornecedores" element={<Fornecedores />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
       <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
       <Route path="*" element={<NotFound />} />

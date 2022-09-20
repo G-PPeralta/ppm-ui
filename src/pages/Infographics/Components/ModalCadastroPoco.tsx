@@ -5,7 +5,7 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
+  // ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
@@ -18,9 +18,11 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
+import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroPoco } from "hooks/useCadastroPoco";
 
@@ -58,7 +60,7 @@ function ModalCadastroPoco() {
           >
             Cadastrar Poço
           </ModalHeader>
-          <ModalCloseButton color={"white"} />
+          {/* <ModalCloseButton color={"white"} /> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -77,20 +79,25 @@ function ModalCadastroPoco() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel>NOME</FormLabel>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="poco">NOME</FormLabel>
+                        </Flex>
                         <Input
                           isRequired
                           placeholder="Nome do Poço"
                           id="poco"
                           type="text"
                           name="poco"
-                          value={registerForm.values.poco}
-                          onChange={registerForm.handleChange}
-                        />
-                        {registerForm.errors.poco &&
-                          registerForm.touched.poco && (
-                            <TextError>{registerForm.errors.poco}</TextError>
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.poco
                           )}
+                          onChange={registerForm.handleChange}
+                          maxLength={10}
+                        />
+                        {registerForm.errors.poco && (
+                          <TextError>{registerForm.errors.poco}</TextError>
+                        )}
                       </FormControl>
                     </Flex>
                   </Stack>
@@ -113,7 +120,7 @@ function ModalCadastroPoco() {
                   Cancelar
                 </Button>
                 <Button
-                  disabled={!registerForm.isValid}
+                  disabled={!registerForm.isValid || !registerForm.values.poco}
                   background="origem.300"
                   variant="primary"
                   color="white"

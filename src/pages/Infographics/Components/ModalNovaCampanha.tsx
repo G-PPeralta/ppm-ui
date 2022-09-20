@@ -1,34 +1,37 @@
 import {
-  Flex,
-  Text,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  // ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
   Button,
+  Flex,
   FormControl,
   FormLabel,
-  Stack,
-  useBreakpointValue,
   Input,
+  // Input,
+  Modal,
+  ModalBody,
+  // ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Stack,
+  Text,
+  Textarea,
+  useBreakpointValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
-import { regexCaracteresEspeciais } from "utils/regex";
+import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroSonda } from "hooks/useCadastroSonda";
+import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 
-function ModalCadastrarSonda() {
+// import SelectFiltragemSondas from "./SelectFiltragemSonda";
+
+function ModalNovaCampanha({ setRefresh, refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroSonda();
+  const { registerForm, loading } = useCadastroCampanha();
 
   return (
     <>
@@ -45,9 +48,9 @@ function ModalCadastrarSonda() {
         }}
         onClick={onOpen}
       >
-        Sonda
+        Nova Campanha
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -58,7 +61,7 @@ function ModalCadastrarSonda() {
             color={"white"}
             fontSize={"1em"}
           >
-            Cadastrar Sonda
+            Cadastrar Nova Campanha
           </ModalHeader>
           {/* <ModalCloseButton color={"white"} /> */}
           <form
@@ -81,23 +84,57 @@ function ModalCadastrarSonda() {
                       <FormControl>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="sonda">NOME</FormLabel>{" "}
+                          <FormLabel htmlFor="nom_campanha">NOME</FormLabel>
                         </Flex>
                         <Input
                           isRequired
-                          placeholder="Nome da Sonda"
-                          id="sonda"
+                          placeholder="Nome da campanha"
+                          id="nom_campanha"
                           type="text"
-                          name="sonda"
-                          value={regexCaracteresEspeciais(
-                            registerForm.values.sonda
-                          )}
+                          name="nom_campanha"
+                          value={registerForm.values.nom_campanha}
                           onChange={registerForm.handleChange}
-                          maxLength={10}
                         />
-                        {registerForm.errors.sonda && (
-                          <TextError>{registerForm.errors.sonda}</TextError>
-                        )}
+                        {registerForm.errors.nom_campanha &&
+                          registerForm.touched.nom_campanha && (
+                            <TextError>
+                              {registerForm.errors.nom_campanha}
+                            </TextError>
+                          )}
+                        {/* <SelectFiltragemSondas
+                          form={registerForm}
+                          nomeChave={"nom_campanha"}
+                        /> */}
+                      </FormControl>
+                    </Flex>
+                  </Stack>
+
+                  <Stack>
+                    <Flex
+                      flexDirection={useBreakpointValue({
+                        base: "column",
+                        md: "row",
+                      })}
+                      gap={5}
+                    >
+                      <FormControl>
+                        <FormLabel htmlFor="dsc_comentario">
+                          COMENTÁRIOS
+                        </FormLabel>
+                        <Textarea
+                          isRequired
+                          placeholder="Adicione comentários sobre a campanha"
+                          id="dsc_comentario"
+                          name="dsc_comentario"
+                          value={registerForm.values.dsc_comentario}
+                          onChange={registerForm.handleChange}
+                        />
+                        {registerForm.errors.dsc_comentario &&
+                          registerForm.touched.dsc_comentario && (
+                            <TextError>
+                              {registerForm.errors.dsc_comentario}
+                            </TextError>
+                          )}
                       </FormControl>
                     </Flex>
                   </Stack>
@@ -120,11 +157,20 @@ function ModalCadastrarSonda() {
                   Cancelar
                 </Button>
                 <Button
-                  disabled={!registerForm.isValid || !registerForm.values.sonda}
+                  disabled={
+                    !registerForm.isValid || !registerForm.values.nom_campanha
+                  }
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() =>
+                    handleCadastrarRefresh(
+                      registerForm,
+                      onClose,
+                      setRefresh,
+                      refresh
+                    )
+                  }
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",
@@ -147,4 +193,4 @@ function ModalCadastrarSonda() {
   );
 }
 
-export default ModalCadastrarSonda;
+export default ModalNovaCampanha;

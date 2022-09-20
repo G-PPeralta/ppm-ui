@@ -79,7 +79,7 @@ function ModalCadastrarProjetoTipo() {
         }}
         onClick={onOpen}
       >
-        Projeto
+        Nova Campanha
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
