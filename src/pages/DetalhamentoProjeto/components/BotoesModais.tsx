@@ -2,9 +2,9 @@ import { Flex } from "@chakra-ui/react";
 
 import BotaoDescricaoEJustificativa from "./BotaoDescricaoEJustificativa";
 import BotaoListadeTarefas from "./BotaoListaDeTarefas";
-import BotaoLicoesAprendidas from "./LicoesAprendidas/LicoesAprendidasModal";
+import LicoesAprendidasModal from "./LicoesAprendidas/LicoesAprendidasModal";
 
-function BotoesModais() {
+function BotoesModais({ licoes }: any) {
   return (
     <>
       <Flex
@@ -17,7 +17,7 @@ function BotoesModais() {
       >
         <BotaoDescricaoEJustificativa />
         <BotaoListadeTarefas />
-        <BotaoLicoesAprendidas />
+        <LicoesAprendidasModal licoes={licoes} />
       </Flex>
     </>
   );

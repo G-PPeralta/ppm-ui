@@ -296,8 +296,11 @@ export interface Fornecedor {
 }
 
 export interface LicoesAprendidas {
-  id?: number;
-  licoesAprendidas: string;
-  acoesRecomendacoes: string;
-  data: Date;
+  id: number;
+  id_projeto: number;
+  id_categoria: number;
+  dat_usu_create: string;
+  txt_licao_aprendida: string;
+  txt_acao: string;
+  nom_usu_create: string;
 }

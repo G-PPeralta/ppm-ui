@@ -4,11 +4,13 @@ import { useParams } from "react-router-dom";
 import { Box, Flex } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { ICardInfoProjeto } from "interfaces/DetalhamentoProjetos";
+import { LicoesAprendidas } from "interfaces/Services";
 
 import { Gantt } from "components/Gantt";
 import Sidebar from "components/SideBar";
 
 import { getInfoProjetos } from "services/get/DetalhamentoProjetos";
+import { getLicoesAprendidas } from "services/get/LicoesAprendidas";
 
 import BotoesModais from "./components/BotoesModais";
 import CardInfoProjeto from "./components/CardInfoProjeto";
@@ -29,6 +31,7 @@ function DetalhamentoProjeto() {
     nome_responsavel: "",
     coordenador_nome: "",
   });
+  const [licoes, setLicoes] = useState([] as LicoesAprendidas[]);
 
   const handleGetInfoProjetos = async () => {
     if (id) {
@@ -38,9 +41,19 @@ function DetalhamentoProjeto() {
     }
   };
 
+  async function handleGetLicoes() {
+    if (id) {
+      const response = await getLicoesAprendidas(id);
+      setLicoes(response.data as LicoesAprendidas[]);
+    }
+  }
+
   useEffect(() => {
     handleGetInfoProjetos();
+    handleGetLicoes();
   }, []);
+
+  console.log(licoes);
 
   return (
     <>
@@ -68,7 +81,7 @@ function DetalhamentoProjeto() {
             >
               <CardInfoProjeto infoProjeto={infoProjeto} />
               <CardOrcamento />
-              <BotoesModais />
+              <BotoesModais licoes={licoes} />
             </Flex>
             <Gantt />
             <GraficoCurvaS />

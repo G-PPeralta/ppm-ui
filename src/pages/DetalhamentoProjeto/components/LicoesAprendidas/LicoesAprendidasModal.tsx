@@ -11,22 +11,17 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
+import { LicoesAprendidas } from "interfaces/Services";
 
 import EditarLicoesAprendidasModal from "./EditarLicoesAprendidasModal";
 import TabelaLicoesAprendidas from "./TabelaLicoesAprendidas";
 
-export interface Licao {
-  id: number;
-  licoesAprendidas: string;
-  acoesRecomendacoes: string;
-}
-
-function LicoesAprendidasModal() {
+function LicoesAprendidasModal({ licoes }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [editLicao, setEditLicao] = useState({} as Licao);
+  const [editLicao, setEditLicao] = useState({} as LicoesAprendidas);
   const [openModalEdit, setOpenModalEdit] = useState(false);
 
-  function handleEditLicao(licao: Licao): void {
+  function handleEditLicao(licao: LicoesAprendidas): void {
     setEditLicao(licao);
     setOpenModalEdit(true);
   }
@@ -56,7 +51,7 @@ function LicoesAprendidasModal() {
           <ModalHeader>Lições Aprendidas</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <TabelaLicoesAprendidas onEdit={handleEditLicao} />
+            <TabelaLicoesAprendidas onEdit={handleEditLicao} licoes={licoes} />
             {openModalEdit && (
               <EditarLicoesAprendidasModal
                 closeModal={() => setOpenModalEdit(false)}

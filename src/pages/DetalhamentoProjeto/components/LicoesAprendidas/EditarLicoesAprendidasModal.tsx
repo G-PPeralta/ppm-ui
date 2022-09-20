@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 
 import {
@@ -17,12 +18,26 @@ import {
   ModalFooter,
   Button,
 } from "@chakra-ui/react";
+import { LicoesAprendidas } from "interfaces/Services";
 
-// interface EditModalProps {
-//   closeModal: any;
-// }
+interface EditModalProps {
+  closeModal: any;
+  licao: LicoesAprendidas;
+}
 
-function EditarLicoesAprendidasModal({ closeModal, licao }: any) {
+function EditarLicoesAprendidasModal({ closeModal, licao }: EditModalProps) {
+  const [licaoAprendida, setLicaoAprendida] = useState(
+    licao?.txt_licao_aprendida
+  );
+  const [data, setData] = useState(licao && licao.dat_usu_create);
+  const [acao, setAcao] = useState(licao?.txt_acao);
+
+  useEffect(() => {
+    setLicaoAprendida(licao.txt_licao_aprendida);
+    setData(licao.dat_usu_create);
+    setAcao(licao.txt_acao);
+  }, [licao.txt_licao_aprendida, licao.dat_usu_create, licao.txt_acao]);
+
   return (
     <Flex>
       <Box
@@ -73,17 +88,8 @@ function EditarLicoesAprendidasModal({ closeModal, licao }: any) {
                 id="licaoAprendida"
                 name="licaoAprendida"
                 width="100%"
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel htmlFor="acao">AÇÃO OU RECOMENDAÇÃO</FormLabel>
-              <Input
-                isRequired
-                placeholder="Ação ou recomendação"
-                type="text"
-                id="acao"
-                name="acao"
-                width="100%"
+                value={licaoAprendida}
+                onChange={(event) => setLicaoAprendida(event.target.value)}
               />
             </FormControl>
             <FormControl>
@@ -95,6 +101,21 @@ function EditarLicoesAprendidasModal({ closeModal, licao }: any) {
                 id="data"
                 name="data"
                 width="100%"
+                value={data}
+                onChange={(event) => setData(event.target.value)}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="acao">AÇÃO OU RECOMENDAÇÃO</FormLabel>
+              <Input
+                isRequired
+                placeholder="Ação ou recomendação"
+                type="text"
+                id="acao"
+                name="acao"
+                width="100%"
+                value={acao}
+                onChange={(event) => setAcao(event.target.value)}
               />
             </FormControl>
           </ModalBody>

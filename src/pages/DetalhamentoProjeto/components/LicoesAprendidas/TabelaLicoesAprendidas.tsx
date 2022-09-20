@@ -11,42 +11,20 @@ import {
   IconButton,
   Td,
 } from "@chakra-ui/react";
-
-import { Licao } from "./LicoesAprendidasModal";
-
-const mockLessons = [
-  {
-    id: 1,
-    licoesAprendidas: "Lição 1",
-    acoesRecomendacoes: "Ação de teste",
-  },
-  {
-    id: 2,
-    licoesAprendidas: "Lição 2",
-    acoesRecomendacoes: "Ação de teste",
-  },
-  {
-    id: 3,
-    licoesAprendidas: "Lição 3",
-    acoesRecomendacoes: "Ação de teste",
-  },
-  {
-    id: 4,
-    licoesAprendidas: "Lição 4",
-    acoesRecomendacoes: "Ação de teste",
-  },
-];
+import { LicoesAprendidas } from "interfaces/Services";
 
 interface EditProps {
-  onEdit: (licao: Licao) => void;
+  onEdit: (licao: LicoesAprendidas) => void;
+  licoes: LicoesAprendidas[];
 }
 
-function TabelaLicoesAprendidas({ onEdit }: EditProps) {
-  const tableData = mockLessons.map((lessons) => (
-    <Tr key={lessons.id}>
+function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
+  const tableData = licoes.map((lessons) => (
+    <Tr key={lessons.id_projeto}>
       <Td isNumeric>{lessons.id}</Td>
-      <Td>{lessons.licoesAprendidas}</Td>
-      <Td>{lessons.acoesRecomendacoes}</Td>
+      <Td>{lessons.txt_licao_aprendida}</Td>
+      <Td>{lessons.txt_acao}</Td>
+      <Td>{new Date(lessons.dat_usu_create).toLocaleString("pt-BR")}</Td>
       <Td>
         <IconButton
           aria-label="Plus sign"
@@ -83,7 +61,7 @@ function TabelaLicoesAprendidas({ onEdit }: EditProps) {
             <Th>ID</Th>
             <Th>Lições Aprendidas</Th>
             <Th>Ações e Recomendações</Th>
-            <Th>Ações</Th>
+            <Th>Data</Th>
           </Tr>
         </Thead>
         <Tbody>{tableData}</Tbody>
