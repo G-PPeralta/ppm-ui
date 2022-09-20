@@ -25,6 +25,7 @@ import {
 import { Ring } from "@uiball/loaders";
 
 import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
+import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
@@ -137,7 +138,9 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
                           type="text"
                           name="nom_atividade"
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
-                          value={registerForm.values.nom_atividade}
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.nom_atividade
+                          )}
                           onChange={registerForm.handleChange}
                         />
                       </FormControl>
