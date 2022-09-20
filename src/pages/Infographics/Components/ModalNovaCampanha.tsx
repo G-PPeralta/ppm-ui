@@ -151,7 +151,9 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                   Cancelar
                 </Button>
                 <Button
-                  disabled={!registerForm.isValid}
+                  disabled={
+                    !registerForm.isValid || !registerForm.values.nom_campanha
+                  }
                   background="origem.300"
                   variant="primary"
                   color="white"
