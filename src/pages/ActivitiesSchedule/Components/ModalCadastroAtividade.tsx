@@ -35,6 +35,8 @@ import { regexCaracteresEspeciais } from "utils/regex";
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 import InputPorcentagem from "./InputPorcentagem";
+import SelectFiltragemAreas from "./SelectFiltragemAreas";
+// import SelectFiltragemAreas from "./SelectFiltragemAreas";
 
 function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -198,6 +200,26 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
                       <FormControl>
                         <InputPorcentagem registerForm={registerForm} />
                       </FormControl>
+                    </Flex>
+                    <Flex justify={"space-between"} gap={5}>
+                      <Flex direction={"column"} grow={1}>
+                        <SelectFiltragemAreas registerForm={registerForm} />
+                      </Flex>
+                      <Flex direction={"column"} grow={1}>
+                        <FormLabel htmlFor="nom_recurso">RECURSO</FormLabel>
+                        <Input
+                          isRequired
+                          placeholder="Digite o nome do recurso"
+                          id="nom_recurso"
+                          type="text"
+                          name="nom_recurso"
+                          w={useBreakpointValue({ base: "100%", md: "100%" })}
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.nom_recurso
+                          )}
+                          onChange={registerForm.handleChange}
+                        />
+                      </Flex>
                     </Flex>
 
                     <Flex

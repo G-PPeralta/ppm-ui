@@ -10,11 +10,12 @@ import { statusProjeto } from "utils/validateDate";
 
 import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
+import StatusProjeto from "../../components/StatusProjeto";
+import BotaoVisaoPorArea from "./Components/BotaoVisaoPorArea";
 import CardACT from "./Components/CardACT";
 // import ModalAtividade from "./Components/ModalAtividade";
 import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
 import ModalEditarAtividade from "./Components/ModalEditarAtividade";
-import StatusProjeto from "./Components/StatusProjeto";
 
 export function ActivitiesSchedule() {
   const navigate = useNavigate();
@@ -92,6 +93,7 @@ export function ActivitiesSchedule() {
                     >
                       Visão por precedentes
                     </Button>
+                    <BotaoVisaoPorArea />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (

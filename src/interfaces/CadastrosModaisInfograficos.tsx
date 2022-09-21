@@ -109,4 +109,6 @@ export interface NovaAtividade extends User {
   dat_fim_plan: string; // data fim planejada
   dsc_comentario: string; // enviar comentario
   id_campanha: number; // enviar id da campanha
+  id_area: number; // enviar id da area de atuação
+  nom_recurso: string; // enviar nome do recurso
 }

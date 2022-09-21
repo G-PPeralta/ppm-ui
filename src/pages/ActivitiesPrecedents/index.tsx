@@ -6,6 +6,7 @@ import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
+import StatusProjeto from "components/StatusProjeto";
 
 import { statusProjeto } from "utils/validateDate";
 
@@ -14,7 +15,6 @@ import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 import CardACT from "../ActivitiesSchedule/Components/CardACT";
 import ModalCadastroAtividade from "../ActivitiesSchedule/Components/ModalCadastroAtividade";
 import ModalEditarAtividade from "../ActivitiesSchedule/Components/ModalEditarAtividade";
-import StatusProjeto from "../ActivitiesSchedule/Components/StatusProjeto";
 import ExibirModal from "./components/ExibirModal";
 import FiltrosModal from "./components/FiltrosModal";
 

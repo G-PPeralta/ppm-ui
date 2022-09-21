@@ -4,6 +4,7 @@ import { Box, Flex, Heading, Stack } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
+import StatusProjeto from "components/StatusProjeto";
 
 import { getInfoCampanha } from "services/get/Infograficos";
 
@@ -15,7 +16,6 @@ import FiltrosModal from "./Components/FiltrosModal";
 import ModalCadastroPoco from "./Components/ModalCadastroPoco";
 import ModalIntervencao from "./Components/ModalIntervencao";
 import ModalNovaCampanha from "./Components/ModalNovaCampanha";
-import StatusProjeto from "./Components/StatusProjeto";
 
 export function Infographics() {
   const [loading, setLoading] = useState(true);

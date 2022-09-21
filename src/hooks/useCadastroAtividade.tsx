@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
 import { NovaAtividade } from "interfaces/CadastrosModaisInfograficos";
@@ -6,6 +6,7 @@ import { cadastroNovaAtividadeSchema } from "validations/ModaisCadastrosInfograf
 
 import { useToast } from "contexts/Toast";
 
+import { getArea } from "services/get/CadastroModaisInfograficos";
 import { postNovaAtividade } from "services/post/CadastroModaisInfograficos";
 
 import { useAuth } from "./useAuth";
@@ -14,6 +15,22 @@ export function useCadastroAtividade() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
+  const [listaAreas, setListaAreas] = useState<any>([]);
+
+  const reqGet = async () => {
+    const areas = await getArea();
+
+    const arrayAreas = areas.data.map(({ id, nom_area }: any) => ({
+      id,
+      nom_area,
+    }));
+
+    const areasSorted = arrayAreas.sort((a: any, b: any) =>
+      a.nom_area.localeCompare(b.nom_area)
+    );
+
+    setListaAreas(areasSorted);
+  };
 
   const initialValues: NovaAtividade = {
     id_pai: 0, // enviar o id da poco (pai)
@@ -24,6 +41,8 @@ export function useCadastroAtividade() {
     dsc_comentario: "", // comentario
     id_campanha: 0, // enviar id da campanha
     nom_usu_create: user?.nome,
+    id_area: 0, // enviar id da area de atuação
+    nom_recurso: "", // enviar nome do recurso
   };
 
   const registerForm = useFormik({
@@ -38,6 +57,8 @@ export function useCadastroAtividade() {
         dsc_comentario: values.dsc_comentario,
         id_campanha: values.id_campanha,
         id_pai: values.id_pai,
+        id_area: values.id_area,
+        nom_recurso: values.nom_recurso,
         nom_usu_create: user?.nome,
       };
 
@@ -64,8 +85,20 @@ export function useCadastroAtividade() {
     },
   });
 
+  useEffect(() => {
+    setLoading(true);
+    reqGet();
+  }, []);
+
+  useEffect(() => {
+    if (listaAreas.length > 0) {
+      setLoading(false);
+    }
+  }, [listaAreas]);
+
   return {
     registerForm,
     loading,
+    listaAreas,
   };
 }
