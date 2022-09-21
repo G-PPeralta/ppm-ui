@@ -1,8 +1,10 @@
 import {
   Box,
   Flex,
+  Heading,
   Stack,
   useBreakpointValue,
+  Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 
@@ -43,8 +45,10 @@ export function BudgetDetail() {
               }}
               borderRadius={{ base: "none", sm: "xl" }}
             >
-              <h1>Spt 123 </h1>
-              <h2>PIR 62</h2>
+              <Heading as="h2" noOfLines={1}>
+                Spt 123
+              </Heading>
+              <Text>PIR 62</Text>
 
               <BudgetDetailTable data={budgetFilter} />
               <TotalTable data={budgetFilter} />

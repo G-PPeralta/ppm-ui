@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiPlusCircle, FiSearch } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
@@ -54,6 +54,9 @@ export function Projects() {
     }
   };
 
+  useEffect(() => {
+    getProjectsPerPolo();
+  }, []);
   return (
     <>
       <Sidebar>
