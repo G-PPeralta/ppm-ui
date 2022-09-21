@@ -62,6 +62,7 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
             <Th>Lições Aprendidas</Th>
             <Th>Ações e Recomendações</Th>
             <Th>Data</Th>
+            <Th>Ações</Th>
           </Tr>
         </Thead>
         <Tbody>{tableData}</Tbody>

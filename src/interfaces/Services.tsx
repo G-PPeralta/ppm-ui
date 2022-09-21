@@ -340,4 +340,7 @@ export interface LicoesAprendidasPayload {
   dat_usu_create?: string;
   txt_licao_aprendida: string;
   txt_acao: string;
+
+  nom_usu_create: string;
+  id_categoria: null;
 }

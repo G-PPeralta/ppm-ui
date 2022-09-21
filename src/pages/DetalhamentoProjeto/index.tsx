@@ -53,8 +53,6 @@ function DetalhamentoProjeto() {
     handleGetLicoes();
   }, []);
 
-  console.log(licoes);
-
   return (
     <>
       <Sidebar>
@@ -81,7 +79,7 @@ function DetalhamentoProjeto() {
             >
               <CardInfoProjeto infoProjeto={infoProjeto} />
               <CardOrcamento />
-              <BotoesModais licoes={licoes} />
+              <BotoesModais licoes={licoes} setLicoes={setLicoes} />
             </Flex>
             <Gantt />
             <GraficoCurvaS />

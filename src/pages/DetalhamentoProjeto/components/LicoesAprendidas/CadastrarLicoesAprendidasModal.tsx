@@ -25,15 +25,15 @@ import { postLicaoAprendida } from "services/post/AdicionarLicaoAprendida";
 function CadastrarLicoesAprendidasModal({ closeModal, onCloseModal }: any) {
   const { id } = useParams();
   const [licaoAprendida, setLicaoAprendida] = useState("");
-  const [data, setData] = useState("");
   const [acao, setAcao] = useState("");
 
   async function handleSubmitLicao() {
     const payload = {
       id_projeto: Number(id),
-      // dat_usu_create: data,
       txt_licao_aprendida: licaoAprendida,
       txt_acao: acao,
+      id_categoria: null,
+      nom_usu_create: "teste",
     };
     postLicaoAprendida(payload);
     onCloseModal();
@@ -91,19 +91,6 @@ function CadastrarLicoesAprendidasModal({ closeModal, onCloseModal }: any) {
                 width="100%"
                 value={licaoAprendida}
                 onChange={(event) => setLicaoAprendida(event.target.value)}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel htmlFor="data">DATA</FormLabel>
-              <Input
-                isRequired
-                placeholder="dd/mm/aaaa"
-                type="text"
-                id="data"
-                name="data"
-                width="100%"
-                value={data}
-                onChange={(event) => setData(event.target.value)}
               />
             </FormControl>
             <FormControl>

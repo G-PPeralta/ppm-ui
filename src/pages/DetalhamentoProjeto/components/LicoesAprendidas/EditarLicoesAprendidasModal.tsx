@@ -20,23 +20,45 @@ import {
 } from "@chakra-ui/react";
 import { LicoesAprendidas } from "interfaces/Services";
 
+import { useAuth } from "hooks/useAuth";
+
 interface EditModalProps {
   closeModal: any;
   licao: LicoesAprendidas;
+  handleUpdateLicoes: any;
 }
 
-function EditarLicoesAprendidasModal({ closeModal, licao }: EditModalProps) {
+function EditarLicoesAprendidasModal({
+  closeModal,
+  licao,
+  handleUpdateLicoes,
+}: EditModalProps) {
+  const { user } = useAuth();
+  const [idLicao, setIdLicao] = useState(licao?.id);
   const [licaoAprendida, setLicaoAprendida] = useState(
     licao?.txt_licao_aprendida
   );
-  const [data, setData] = useState(licao && licao.dat_usu_create);
   const [acao, setAcao] = useState(licao?.txt_acao);
 
   useEffect(() => {
     setLicaoAprendida(licao.txt_licao_aprendida);
-    setData(licao.dat_usu_create);
     setAcao(licao.txt_acao);
-  }, [licao.txt_licao_aprendida, licao.dat_usu_create, licao.txt_acao]);
+    setIdLicao(licao.id);
+  }, [
+    licao.txt_licao_aprendida,
+    licao.dat_usu_create,
+    licao.txt_acao,
+    licao.id,
+  ]);
+
+  const camposParaEditar = ["txt_licao_aprendida", "txt_acao"];
+
+  console.log(idLicao);
+
+  const updatepayload = (campo: string) => {
+    if (campo === "txt_licao_aprendida") return licaoAprendida;
+    if (campo === "txt_acao") return acao;
+  };
 
   return (
     <Flex>
@@ -92,7 +114,7 @@ function EditarLicoesAprendidasModal({ closeModal, licao }: EditModalProps) {
                 onChange={(event) => setLicaoAprendida(event.target.value)}
               />
             </FormControl>
-            <FormControl>
+            {/* <FormControl>
               <FormLabel htmlFor="data">DATA</FormLabel>
               <Input
                 isRequired
@@ -104,7 +126,7 @@ function EditarLicoesAprendidasModal({ closeModal, licao }: EditModalProps) {
                 value={data}
                 onChange={(event) => setData(event.target.value)}
               />
-            </FormControl>
+            </FormControl> */}
             <FormControl>
               <FormLabel htmlFor="acao">AÇÃO OU RECOMENDAÇÃO</FormLabel>
               <Input
@@ -128,6 +150,16 @@ function EditarLicoesAprendidasModal({ closeModal, licao }: EditModalProps) {
               _hover={{
                 background: "origem.500",
                 transition: "all 0.4s",
+              }}
+              onClick={() => {
+                camposParaEditar.forEach((lic) =>
+                  handleUpdateLicoes(
+                    idLicao,
+                    lic,
+                    updatepayload(lic),
+                    user?.nome
+                  )
+                );
               }}
             >
               CONFIRMADO

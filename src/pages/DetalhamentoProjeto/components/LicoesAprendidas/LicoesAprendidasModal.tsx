@@ -17,11 +17,13 @@ import {
 } from "@chakra-ui/react";
 import { LicoesAprendidas } from "interfaces/Services";
 
+import { patchLicaoAprendida } from "services/update/LicoesAprendidas";
+
 import CadastrarLicoesAprendidasModal from "./CadastrarLicoesAprendidasModal";
 import EditarLicoesAprendidasModal from "./EditarLicoesAprendidasModal";
 import TabelaLicoesAprendidas from "./TabelaLicoesAprendidas";
 
-function LicoesAprendidasModal({ licoes }: any) {
+function LicoesAprendidasModal({ licoes, setLicoes }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [editLicao, setEditLicao] = useState({} as LicoesAprendidas);
   const [openModalEdit, setOpenModalEdit] = useState(false);
@@ -30,6 +32,11 @@ function LicoesAprendidasModal({ licoes }: any) {
   function handleEditLicao(licao: LicoesAprendidas): void {
     setEditLicao(licao);
     setOpenModalEdit(true);
+  }
+
+  function handleUpdateLicoes(licao: any, campo: any, payload: any, user: any) {
+    setLicoes(licoes.map((l: any) => (l.id == licao.id ? licao : l)));
+    patchLicaoAprendida(licao, campo, payload, user);
   }
 
   return (
@@ -82,6 +89,7 @@ function LicoesAprendidasModal({ licoes }: any) {
               <EditarLicoesAprendidasModal
                 closeModal={() => setOpenModalEdit(false)}
                 licao={editLicao}
+                handleUpdateLicoes={handleUpdateLicoes}
               />
             )}
 
