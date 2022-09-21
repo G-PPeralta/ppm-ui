@@ -12,10 +12,11 @@ import { getAtividadesAreaMock } from "services/get/AtividadesArea";
 
 import AccordionArea from "./components/AccordionArea";
 import BotaoVisaoGeral from "./components/BotaoVisaoGeral";
+import { Area } from "./interfaces";
 
 function VisaoPorArea() {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState<any[]>([] as Area[]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -63,7 +64,7 @@ function VisaoPorArea() {
                   </Flex>
                 </Flex>
                 <Flex align={"center"} justify={"center"} direction={"column"}>
-                  {data.map((area: any, index: number) => (
+                  {data.map((area: Area, index: number) => (
                     <AccordionArea key={index} area={area} />
                   ))}
                 </Flex>

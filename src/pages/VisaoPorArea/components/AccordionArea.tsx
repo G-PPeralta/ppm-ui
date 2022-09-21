@@ -8,10 +8,16 @@ import {
   Text,
 } from "@chakra-ui/react";
 
+import CardACT from "pages/ActivitiesSchedule/Components/CardACT";
+
+import { Area, Atividade } from "../interfaces";
 import AtividadesPorStatus from "./AtividadesPorStatus";
 import TotalAtividades from "./TotalAtividades";
+interface Props {
+  area: Area;
+}
 
-function AccordionArea({ area }: any) {
+function AccordionArea({ area }: Props) {
   return (
     <Accordion allowMultiple w={"100%"}>
       <AccordionItem>
@@ -48,10 +54,21 @@ function AccordionArea({ area }: any) {
         </AccordionButton>
 
         <AccordionPanel pb={4}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+          <Flex
+            direction={"row"}
+            align={"center"}
+            justify={"center"}
+            gap={5}
+            p={5}
+            w={"100%"}
+            wrap={"wrap"}
+          >
+            {area.atividades.map((atividade: Atividade, index: number) => (
+              <Flex key={index}>
+                <CardACT atividade={atividade} />
+              </Flex>
+            ))}
+          </Flex>
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
