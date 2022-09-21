@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
+import { useParams } from "react-router-dom";
 
 import {
   Flex,
@@ -18,25 +19,25 @@ import {
   ModalFooter,
   Button,
 } from "@chakra-ui/react";
-import { LicoesAprendidas } from "interfaces/Services";
 
-interface EditModalProps {
-  closeModal: any;
-  licao: LicoesAprendidas;
-}
+import { postLicaoAprendida } from "services/post/AdicionarLicaoAprendida";
 
-function EditarLicoesAprendidasModal({ closeModal, licao }: EditModalProps) {
-  const [licaoAprendida, setLicaoAprendida] = useState(
-    licao?.txt_licao_aprendida
-  );
-  const [data, setData] = useState(licao && licao.dat_usu_create);
-  const [acao, setAcao] = useState(licao?.txt_acao);
+function CadastrarLicoesAprendidasModal({ closeModal, onCloseModal }: any) {
+  const { id } = useParams();
+  const [licaoAprendida, setLicaoAprendida] = useState("");
+  const [data, setData] = useState("");
+  const [acao, setAcao] = useState("");
 
-  useEffect(() => {
-    setLicaoAprendida(licao.txt_licao_aprendida);
-    setData(licao.dat_usu_create);
-    setAcao(licao.txt_acao);
-  }, [licao.txt_licao_aprendida, licao.dat_usu_create, licao.txt_acao]);
+  async function handleSubmitLicao() {
+    const payload = {
+      id_projeto: Number(id),
+      dat_usu_create: data,
+      txt_licao_aprendida: licaoAprendida,
+      txt_acao: acao,
+    };
+    postLicaoAprendida(payload);
+    onCloseModal();
+  }
 
   return (
     <Flex>
@@ -80,7 +81,7 @@ function EditarLicoesAprendidasModal({ closeModal, licao }: EditModalProps) {
           <ModalCloseButton />
           <ModalBody>
             <FormControl>
-              <FormLabel htmlFor="fornecedorNome">Lição Aprendida</FormLabel>
+              <FormLabel htmlFor="fornecedorNome">LIÇÃO APRENDIDA</FormLabel>
               <Input
                 isRequired
                 placeholder="Lição aprendida"
@@ -130,7 +131,19 @@ function EditarLicoesAprendidasModal({ closeModal, licao }: EditModalProps) {
                 transition: "all 0.4s",
               }}
             >
-              CONFIRMADO
+              CANCELAR
+            </Button>
+            <Button
+              background="origem.300"
+              variant="primary"
+              color="white"
+              _hover={{
+                background: "origem.500",
+                transition: "all 0.4s",
+              }}
+              onClick={handleSubmitLicao}
+            >
+              CONFIRMAR
             </Button>
           </ModalFooter>
         </ModalContent>
@@ -139,4 +152,4 @@ function EditarLicoesAprendidasModal({ closeModal, licao }: EditModalProps) {
   );
 }
 
-export default EditarLicoesAprendidasModal;
+export default CadastrarLicoesAprendidasModal;

@@ -304,3 +304,10 @@ export interface LicoesAprendidas {
   txt_acao: string;
   nom_usu_create: string;
 }
+
+export interface LicoesAprendidasPayload {
+  id_projeto: number;
+  dat_usu_create: string;
+  txt_licao_aprendida: string;
+  txt_acao: string;
+}
