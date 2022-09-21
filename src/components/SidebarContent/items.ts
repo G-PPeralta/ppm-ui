@@ -54,7 +54,7 @@ export const LinkItems: Array<LinkItemProps> = [
       {
         name: "Estatísticas",
         icon: AiOutlineBarChart,
-        link: "/desenvolvimento",
+        link: "/estatisticas",
       },
       {
         name: "Gráficos Estatisticos",
