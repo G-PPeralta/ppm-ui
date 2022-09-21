@@ -1,4 +1,19 @@
+import { ProjetosList } from "interfaces/Services";
+
 import { api } from "services/api";
+
+export async function getProjetos(): Promise<{
+  data: ProjetosList[];
+  status: number;
+}> {
+  const { data, status } = await api.get("/projetos/listagem", {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
+    },
+  });
+
+  return { data, status };
+}
 
 export async function getTipoResponsavel(): Promise<{
   data: any;

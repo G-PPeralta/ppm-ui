@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { AiFillEdit } from "react-icons/ai";
+import { FiSearch } from "react-icons/fi";
 
 import {
   Tr,
@@ -17,26 +18,38 @@ import {
   Stack,
   useBreakpointValue,
   useColorModeValue,
+  Button,
+  FormControl,
+  FormLabel,
+  Select,
 } from "@chakra-ui/react";
 
 import Sidebar from "components/SideBar";
 
 import { getAllLicoesAprendidas } from "services/get/LicoesAprendidas";
+import { getProjetos } from "services/get/Projetos";
 
-import { LicoesAprendidas } from "../../interfaces/Services";
+import { LicoesAprendidas, ProjetosList } from "../../interfaces/Services";
 
 export function LicoesAprendidasProjetos() {
   const [licoesAprendidas, setLicoesAprendidas] = useState(
     [] as LicoesAprendidas[]
   );
+  const [projetos, setProjetos] = useState([] as ProjetosList[]);
 
   async function handleGetLicoesAprendidas() {
     const payload = await getAllLicoesAprendidas();
     setLicoesAprendidas(payload.data);
   }
 
+  async function handleGetProjetos() {
+    const payload = await getProjetos();
+    setProjetos(payload.data);
+  }
+
   useEffect(() => {
     handleGetLicoesAprendidas();
+    handleGetProjetos();
   }, []);
 
   const tableData = licoesAprendidas.map((lessons) => (
@@ -86,23 +99,51 @@ export function LicoesAprendidasProjetos() {
                 Lições Aprendidas
               </Heading>
 
+              <Flex>
+                <FormControl>
+                  <FormLabel htmlFor="pole">PROJETO</FormLabel>
+                  <Select
+                    id="poloId"
+                    name="pole"
+                    // onChange={(e) => setPolo(e.target.value)}
+                    width={300}
+                  >
+                    <option value="0">Todos</option>
+                    {projetos &&
+                      projetos.map((project) => (
+                        <option key={project.id}>{project.nomeProjeto}</option>
+                      ))}
+                  </Select>
+                </FormControl>
+                <FormControl className="toBottom">
+                  <Button
+                    color="white"
+                    background="origem.300"
+                    variant="primary"
+                    _hover={{
+                      background: "origem.500",
+                      transition: "all 0.4s",
+                    }}
+                    rightIcon={<FiSearch />}
+                    // onClick={getProjectsPerPolo}
+                  >
+                    Buscar
+                  </Button>
+                </FormControl>
+              </Flex>
+
               <Stack spacing="0">
                 <Flex
                   flexDirection={useBreakpointValue({
                     base: "column",
                     md: "column",
                   })}
-                  // border={'red solid 2px'}
                 >
-                  <Flex
-                  // border={'purple solid 3px'}
-                  ></Flex>
                   <Flex
                     flexDirection={useBreakpointValue({
                       base: "column",
                       md: "row",
                     })}
-                    // border={'green solid 4px'}
                     justifyContent={"flex-start"}
                   ></Flex>
                 </Flex>
