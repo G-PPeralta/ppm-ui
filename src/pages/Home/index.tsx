@@ -5,7 +5,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import Sidebar from "components/SideBar";
 
 import AreasDemandadas from "./components/AreasDemandadas";
-import BotoesSelecionarPolo from "./components/BotoesSelecionarPolo";
+// import BotoesSelecionarPolo from "./components/BotoesSelecionarPolo";
 import FaseProjetos from "./components/FaseProjetos";
 import NaoPrevisto from "./components/NaoPrevisto";
 import PrevistoxRealizado from "./components/PrevistoxRealizado";
@@ -33,7 +33,7 @@ export function Home() {
   return (
     <>
       <Sidebar>
-        <BotoesSelecionarPolo />
+        {/* <BotoesSelecionarPolo /> */}
         <Flex
           w={"auto"}
           display={"flex"}
