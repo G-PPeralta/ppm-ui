@@ -1,12 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Button } from "@chakra-ui/react";
 
-interface Props {
-  id: string | undefined;
-}
-
-function BotaoVisaoPorArea({ id }: Props) {
+function BotaoVisaoPorArea() {
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const handleClick = () => {

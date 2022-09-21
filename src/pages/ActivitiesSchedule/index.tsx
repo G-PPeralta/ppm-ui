@@ -70,7 +70,7 @@ export function ActivitiesSchedule() {
                       setRefresh={setRefresh}
                       refresh={refresh}
                     />
-                    <BotaoVisaoPorArea id={id} />
+                    <BotaoVisaoPorArea />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (
