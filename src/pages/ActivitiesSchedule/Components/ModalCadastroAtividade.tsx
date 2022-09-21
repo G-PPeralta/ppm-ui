@@ -21,7 +21,6 @@ import {
   useBreakpointValue,
   Input,
   Textarea,
-  Select,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -36,6 +35,8 @@ import { regexCaracteresEspeciais } from "utils/regex";
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 import InputPorcentagem from "./InputPorcentagem";
+import SelectFiltragemAreas from "./SelectFiltragemAreas";
+// import SelectFiltragemAreas from "./SelectFiltragemAreas";
 
 function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -202,23 +203,22 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
                     </Flex>
                     <Flex justify={"space-between"} gap={5}>
                       <Flex direction={"column"} grow={1}>
-                        <Flex gap={1}>
-                          <RequiredField />
-                          <FormLabel htmlFor="area">ÁREA</FormLabel>
-                        </Flex>
-                        <Select>
-                          <option value="1">Valor 1</option>
-                          <option value="2">Valor 2</option>
-                          <option value="3">Valor 3</option>
-                        </Select>
+                        <SelectFiltragemAreas registerForm={registerForm} />
                       </Flex>
                       <Flex direction={"column"} grow={1}>
-                        <FormLabel htmlFor="area">RECURSO</FormLabel>
-                        <Select>
-                          <option value="1">Valor 1</option>
-                          <option value="2">Valor 2</option>
-                          <option value="3">Valor 3</option>
-                        </Select>
+                        <FormLabel htmlFor="recurso">RECURSO</FormLabel>
+                        <Input
+                          isRequired
+                          placeholder="Digite o nome do recurso"
+                          // id="nom_atividade"
+                          type="text"
+                          // name="nom_atividade"
+                          w={useBreakpointValue({ base: "100%", md: "100%" })}
+                          // value={regexCaracteresEspeciais(
+                          //   registerForm.values.nom_atividade
+                          // )}
+                          // onChange={registerForm.handleChange}
+                        />
                       </Flex>
                     </Flex>
 

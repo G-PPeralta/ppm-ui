@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
 import { NovaAtividade } from "interfaces/CadastrosModaisInfograficos";
@@ -6,6 +6,7 @@ import { cadastroNovaAtividadeSchema } from "validations/ModaisCadastrosInfograf
 
 import { useToast } from "contexts/Toast";
 
+import { getArea } from "services/get/CadastroModaisInfograficos";
 import { postNovaAtividade } from "services/post/CadastroModaisInfograficos";
 
 import { useAuth } from "./useAuth";
@@ -14,6 +15,22 @@ export function useCadastroAtividade() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
+  const [listaAreas, setListaAreas] = useState<any>([]);
+
+  const reqGet = async () => {
+    const areas = await getArea();
+
+    const arrayAreas = areas.data.map(({ id, nom_area }: any) => ({
+      id,
+      nom_area,
+    }));
+
+    const areasSorted = arrayAreas.sort((a: any, b: any) =>
+      a.nom_area.localeCompare(b.nom_area)
+    );
+
+    setListaAreas(areasSorted);
+  };
 
   const initialValues: NovaAtividade = {
     id_pai: 0, // enviar o id da poco (pai)
@@ -64,8 +81,20 @@ export function useCadastroAtividade() {
     },
   });
 
+  useEffect(() => {
+    setLoading(true);
+    reqGet();
+  }, []);
+
+  useEffect(() => {
+    if (listaAreas.length > 0) {
+      setLoading(false);
+    }
+  }, [listaAreas]);
+
   return {
     registerForm,
     loading,
+    listaAreas,
   };
 }
