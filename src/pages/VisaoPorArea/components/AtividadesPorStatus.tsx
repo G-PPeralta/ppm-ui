@@ -1,6 +1,8 @@
 import { Flex, Text } from "@chakra-ui/react";
 
 function AtividadesPorStatus({ status }: any) {
+  const innerWidth = window.innerWidth;
+
   const statusComCor = status.map((item: any) => {
     switch (item.status) {
       case "Não Iniciado":
@@ -24,7 +26,7 @@ function AtividadesPorStatus({ status }: any) {
           align={"center"}
           justify={"center"}
           direction={"column"}
-          w={"40px"}
+          w={innerWidth >= 425 ? "40px" : "25px"}
         >
           <Flex
             backgroundColor={status.cor}

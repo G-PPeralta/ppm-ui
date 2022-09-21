@@ -6,6 +6,7 @@ import {
   AccordionPanel,
   Flex,
   Text,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 
 import CardACT from "pages/ActivitiesSchedule/Components/CardACT";
@@ -26,22 +27,38 @@ function AccordionArea({ area }: Props) {
             w={"100%"}
             justify={"space-between"}
             align={"center"}
-            h={"120px"}
+            h={useBreakpointValue({ base: "auto", sm: "auto", md: "120px" })}
           >
-            <Flex basis={"100%"} h={"100%"}>
+            <Flex basis={"100%"} h={"100%"} py={4}>
               <Flex
                 borderRight={"1px"}
                 borderColor={"#E2E8F0"}
-                grow={1}
+                w={"100px"}
                 align={"center"}
                 justify={"center"}
-                h={"100%"}
+                h={"auto"}
               >
                 <Text fontSize="lg" mr={5} fontWeight={600}>
                   {area.area}
                 </Text>
               </Flex>
-              <Flex grow={30} align={"center"} justify={"space-around"}>
+              <Flex
+                grow={30}
+                align={"center"}
+                justify={"space-around"}
+                direction={useBreakpointValue({
+                  base: "column",
+                  md: "row",
+                })}
+                py={useBreakpointValue({
+                  base: 5,
+                  md: 0,
+                })}
+                gap={useBreakpointValue({
+                  base: 5,
+                  md: 0,
+                })}
+              >
                 <Text fontWeight={600}>{`${area.pctTotalConcluido}%`}</Text>
                 <TotalAtividades totalAtividades={area.totalAtividades} />
                 <AtividadesPorStatus status={area.status} />
