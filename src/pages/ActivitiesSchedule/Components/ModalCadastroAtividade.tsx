@@ -206,18 +206,18 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
                         <SelectFiltragemAreas registerForm={registerForm} />
                       </Flex>
                       <Flex direction={"column"} grow={1}>
-                        <FormLabel htmlFor="recurso">RECURSO</FormLabel>
+                        <FormLabel htmlFor="nom_recurso">RECURSO</FormLabel>
                         <Input
                           isRequired
                           placeholder="Digite o nome do recurso"
-                          // id="nom_atividade"
+                          id="nom_recurso"
                           type="text"
-                          // name="nom_atividade"
+                          name="nom_recurso"
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
-                          // value={regexCaracteresEspeciais(
-                          //   registerForm.values.nom_atividade
-                          // )}
-                          // onChange={registerForm.handleChange}
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.nom_recurso
+                          )}
+                          onChange={registerForm.handleChange}
                         />
                       </Flex>
                     </Flex>

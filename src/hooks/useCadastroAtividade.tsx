@@ -41,6 +41,8 @@ export function useCadastroAtividade() {
     dsc_comentario: "", // comentario
     id_campanha: 0, // enviar id da campanha
     nom_usu_create: user?.nome,
+    id_area: 0, // enviar id da area de atuação
+    nom_recurso: "", // enviar nome do recurso
   };
 
   const registerForm = useFormik({
@@ -55,6 +57,8 @@ export function useCadastroAtividade() {
         dsc_comentario: values.dsc_comentario,
         id_campanha: values.id_campanha,
         id_pai: values.id_pai,
+        id_area: values.id_area,
+        nom_recurso: values.nom_recurso,
         nom_usu_create: user?.nome,
       };
 

@@ -43,13 +43,8 @@ function VisaoPorArea() {
                     Visão por área
                   </Heading>
                 </Flex>
-                <Flex
-                  direction={"column"}
-                  justify={"space-between"}
-                  gap={6}
-                  wrap={"wrap"}
-                  mb={4}
-                >
+
+                <Flex justify={"space-between"} gap={6} wrap={"wrap"} mb={4}>
                   <Flex gap={2}>
                     <BotaoVisaoGeral />
                   </Flex>
@@ -63,6 +58,7 @@ function VisaoPorArea() {
                     ))}
                   </Flex>
                 </Flex>
+
                 <Flex align={"center"} justify={"center"} direction={"column"}>
                   {data.map((area: Area, index: number) => (
                     <AccordionArea key={index} area={area} />

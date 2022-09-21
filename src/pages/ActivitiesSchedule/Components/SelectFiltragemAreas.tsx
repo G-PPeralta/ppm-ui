@@ -28,8 +28,8 @@ function SelectFiltragemAreas({ registerForm }: any) {
           <FormLabel>ÁREA</FormLabel>
         </Flex>
         <Select
-          id="nom_area"
-          name="nom_area"
+          id="id_area"
+          name="id_area"
           placeholder="Selecione"
           onChange={(event, name) => handleChange(event, name)}
           options={options}
