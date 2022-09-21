@@ -8,7 +8,10 @@ import {
 
 import Sidebar from "components/SideBar";
 
-import { ExpansiveTable } from "./components/ExpansiveTable";
+import { useBudgetDetail } from "hooks/useBudgetDetail";
+
+import { BudgetDetailTable } from "./components/BudgetDetailTable";
+import { TotalTable } from "./components/TotalTable";
 
 // const OBJETO = [
 //   {
@@ -27,6 +30,8 @@ import { ExpansiveTable } from "./components/ExpansiveTable";
 // ];
 
 export function BudgetDetail() {
+  const { budgetFilter } = useBudgetDetail();
+
   return (
     <div>
       <Sidebar>
@@ -53,7 +58,8 @@ export function BudgetDetail() {
               }}
               borderRadius={{ base: "none", sm: "xl" }}
             >
-              <ExpansiveTable />
+              <BudgetDetailTable data={budgetFilter} />
+              <TotalTable data={budgetFilter} />
             </Box>
           </Flex>
         </Stack>

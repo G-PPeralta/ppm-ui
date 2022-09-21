@@ -91,39 +91,37 @@ export function TabelaBudgets(props: TableProps) {
           )}
           {budget.item}
         </Td>
-        <td>
+        <Td>
           <Link to={`/budget/detail/${budget.id}`}>
             <Text color="blue">{budget.projeto.nome}</Text>
           </Link>
-        </td>
+        </Td>
         <Td>{budget.planejado}</Td>
-        <td>{budget.realizado}</td>
-        <td>{budget.gap}</td>
-        <td>{budget.descricao}</td>
-        <Td></Td>
+        <Td>{budget.realizado}</Td>
+        <Td align="center">{budget.gap}%</Td>
+        <Td>{budget.descricao}</Td>
       </Tr>
 
       {budget.filhos &&
         budget.filhos.map((d) => (
           <Tr className={"hide item-" + key} key={d.id}>
             <Td>{d.item}</Td>
-            <td>
+            <Td>
               <Link to={`/budget/detail/${d.id}`}>
                 <Text color="blue">{d.projeto.nome}</Text>
               </Link>
-            </td>
+            </Td>
             <Td>{d.planejado}</Td>
-            <td>{d.realizado}</td>
-            <td>{d.gap}</td>
-            <td>{d.descricao}</td>
-            <Td></Td>
+            <Td>{d.realizado}</Td>
+            <Td align="center">{d.gap}%</Td>
+            <Td>{d.descricao}</Td>
           </Tr>
         ))}
     </>
   ));
 
   return (
-    <div className="table-fix">
+    <>
       <TableContainer mt={4} mb={3} ml={1}>
         <Table variant="unstyled">
           <Thead>
@@ -176,6 +174,6 @@ export function TabelaBudgets(props: TableProps) {
           />
         </Flex>
       </Flex>
-    </div>
+    </>
   );
 }

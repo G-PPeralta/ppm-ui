@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { ActivitiesPrecedents } from "pages/ActivitiesPrecedents";
 import { ActivitiesRegistration } from "pages/ActivitiesRegistration";
 import { ActivitiesSchedule } from "pages/ActivitiesSchedule";
+import { BudgetDetail } from "pages/BudgetDetail";
 import { Budgets } from "pages/Budgets";
 import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
 import { GanttPage } from "pages/Gantt";
@@ -20,7 +21,6 @@ import { Reports } from "pages/Reports";
 import { Settings } from "pages/Settings";
 import { ShareRegister } from "pages/ShareRegister";
 import { UploadSheet } from "pages/UploadSheet";
-import { BudgetDetail } from "pages/BudgetDetail";
 
 export function PrivateRoutes() {
   return (
