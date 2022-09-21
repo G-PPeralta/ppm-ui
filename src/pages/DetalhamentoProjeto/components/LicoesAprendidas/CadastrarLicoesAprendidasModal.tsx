@@ -31,7 +31,7 @@ function CadastrarLicoesAprendidasModal({ closeModal, onCloseModal }: any) {
   async function handleSubmitLicao() {
     const payload = {
       id_projeto: Number(id),
-      dat_usu_create: data,
+      // dat_usu_create: data,
       txt_licao_aprendida: licaoAprendida,
       txt_acao: acao,
     };

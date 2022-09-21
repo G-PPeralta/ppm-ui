@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { LicoesAprendidas } from "interfaces/Services";
 
-import CadastrarLicoesAprendidasModal from "./CadastrarLicoesAprendidas";
+import CadastrarLicoesAprendidasModal from "./CadastrarLicoesAprendidasModal";
 import EditarLicoesAprendidasModal from "./EditarLicoesAprendidasModal";
 import TabelaLicoesAprendidas from "./TabelaLicoesAprendidas";
 
@@ -88,7 +88,7 @@ function LicoesAprendidasModal({ licoes }: any) {
             {openModalRegister && (
               <CadastrarLicoesAprendidasModal
                 closeModal={() => setOpenModalRegister(false)}
-                onCloseModal={() => setOpenModalRegister(true)}
+                onCloseModal={() => setOpenModalRegister(false)}
               />
             )}
           </ModalBody>

@@ -307,7 +307,7 @@ export interface LicoesAprendidas {
 
 export interface LicoesAprendidasPayload {
   id_projeto: number;
-  dat_usu_create: string;
+  dat_usu_create?: string;
   txt_licao_aprendida: string;
   txt_acao: string;
 }

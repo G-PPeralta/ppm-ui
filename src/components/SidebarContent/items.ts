@@ -38,6 +38,11 @@ export const LinkItems: Array<LinkItemProps> = [
     link: "/fornecedores",
   },
   {
+    name: "Lições Aprendidas",
+    icon: FiActivity,
+    link: "/licoesAprendidas",
+  },
+  {
     name: "Detalhamento Projeto",
     icon: BsBarChartSteps,
     link: "/detalhamento/191",
