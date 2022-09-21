@@ -2,11 +2,15 @@ import { useNavigate } from "react-router-dom";
 
 import { Button } from "@chakra-ui/react";
 
-function BotaoVisaoPorArea() {
+interface Props {
+  id: string | undefined;
+}
+
+function BotaoVisaoPorArea({ id }: Props) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/atividade/visao-por-area", { replace: true });
+    navigate(`/atividade/${id}/visao-por-area`);
   };
 
   return (

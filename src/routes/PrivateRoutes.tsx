@@ -44,7 +44,7 @@ export function PrivateRoutes() {
       <Route path="/fornecedores" element={<Fornecedores />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
       <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
-      <Route path="/atividade/visao-por-area" element={<VisaoPorArea />} />
+      <Route path="/atividade/:id/visao-por-area" element={<VisaoPorArea />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
