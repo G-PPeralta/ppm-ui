@@ -41,7 +41,7 @@ export function Budgets() {
             <Ring speed={2} lineWeight={5} color="blue" size={64} />
           </Flex>
         )}
-        <Stack spacing="10">
+        <Stack spacing="8">
           <Flex
             w={useBreakpointValue({ base: "100%", md: "auto" })}
             align="center"

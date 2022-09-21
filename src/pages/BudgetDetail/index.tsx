@@ -13,22 +13,7 @@ import { useBudgetDetail } from "hooks/useBudgetDetail";
 import { BudgetDetailTable } from "./components/BudgetDetailTable";
 import { TotalTable } from "./components/TotalTable";
 
-// const OBJETO = [
-//   {
-//     atividade: "Sonda Worker",
-//     data: "14/08/2022",
-//     BRT: "1",
-//     servicos: {
-//       id: "1",
-//       nome: "Mobilização/Desmobilização",
-//       fornecedor: "-",
-//       total: 1,
-//       previsto: 1,
-//       realizado: 1,
-//     },
-//   },
-// ];
-
+import "./budgetDetail.css";
 export function BudgetDetail() {
   const { budgetFilter } = useBudgetDetail();
 
@@ -58,6 +43,9 @@ export function BudgetDetail() {
               }}
               borderRadius={{ base: "none", sm: "xl" }}
             >
+              <h1>Spt 123 </h1>
+              <h2>PIR 62</h2>
+
               <BudgetDetailTable data={budgetFilter} />
               <TotalTable data={budgetFilter} />
             </Box>

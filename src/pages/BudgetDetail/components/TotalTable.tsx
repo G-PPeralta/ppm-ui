@@ -10,6 +10,7 @@ import {
   IconButton,
   Tbody,
   Text,
+  Tfoot,
 } from "@chakra-ui/react";
 import { BudgetDetail } from "models/Budget.model";
 
@@ -21,7 +22,7 @@ export function TotalTable(props: { data: BudgetDetail[] }) {
           <Thead>
             <Tr backgroundColor={"blue"} color="white">
               <Th color="white">Item</Th>
-              <Th color="white" maxWidth="1.5">
+              <Th align="right" color="white" maxWidth="1.5">
                 <Text className={"noprint"}>
                   Imprimir
                   <IconButton
@@ -90,6 +91,16 @@ export function TotalTable(props: { data: BudgetDetail[] }) {
               <Td>-</Td>
             </Tr>
           </Tbody>
+          <Tfoot>
+            <Tr backgroundColor={"blue"} color="white">
+              <Th colSpan={2} color="white" borderBottomLeftRadius={"10px"}>
+                Total
+              </Th>
+              <Th color="white" borderBottomRightRadius={"10px"}>
+                -
+              </Th>
+            </Tr>
+          </Tfoot>
         </Table>
       </TableContainer>
     </>
