@@ -44,6 +44,11 @@ export function TabelaBudgets(props: TableProps) {
   const totalRegs = data.length;
   const maxPage = Math.ceil(totalRegs / rowsPerPage);
 
+  const brl = Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+
   const paginate = (pag: number) => {
     setPagAtual(pag);
 
@@ -96,8 +101,8 @@ export function TabelaBudgets(props: TableProps) {
             <Text color="blue">{budget.projeto.nome}</Text>
           </Link>
         </Td>
-        <Td>{budget.planejado}</Td>
-        <Td>{budget.realizado}</Td>
+        <Td>{brl.format(budget.planejado)}</Td>
+        <Td>{brl.format(budget.realizado)}</Td>
         <Td align="center">{budget.gap}%</Td>
         <Td>{budget.descricao}</Td>
       </Tr>
@@ -111,8 +116,8 @@ export function TabelaBudgets(props: TableProps) {
                 <Text color="blue">{d.projeto.nome}</Text>
               </Link>
             </Td>
-            <Td>{d.planejado}</Td>
-            <Td>{d.realizado}</Td>
+            <Td>{brl.format(d.planejado)}</Td>
+            <Td>{brl.format(d.realizado)}</Td>
             <Td align="center">{d.gap}%</Td>
             <Td>{d.descricao}</Td>
           </Tr>
@@ -139,8 +144,8 @@ export function TabelaBudgets(props: TableProps) {
             <Tr background="origem.200" color="white">
               <Th>Total</Th>
               <Th>{total} Projetos</Th>
-              <Th>{planejado}</Th>
-              <Th>{realizado}</Th>
+              <Th>{brl.format(planejado)}</Th>
+              <Th>{brl.format(realizado)}</Th>
               <Th></Th>
               <Th></Th>
             </Tr>
