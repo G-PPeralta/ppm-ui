@@ -20,7 +20,7 @@ interface Props {
 
 function AccordionArea({ area }: Props) {
   return (
-    <Accordion allowMultiple w={"100%"}>
+    <Accordion allowMultiple w={"100%"} m={0}>
       <AccordionItem>
         <AccordionButton py={0}>
           <Flex

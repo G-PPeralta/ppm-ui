@@ -23,6 +23,7 @@ export function NavItem({ icon, children, link, ...rest }: NavItemProps) {
       <Flex
         align="center"
         p="4"
+        pl="10"
         mx="4"
         borderRadius="lg"
         role="group"
@@ -36,7 +37,7 @@ export function NavItem({ icon, children, link, ...rest }: NavItemProps) {
         {icon && (
           <Icon
             mr="4"
-            fontSize="16"
+            fontSize="14"
             _groupHover={{
               color: "white",
             }}

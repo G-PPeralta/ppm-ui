@@ -1,7 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 
+import { ActivitiesPrecedents } from "pages/ActivitiesPrecedents";
 import { ActivitiesRegistration } from "pages/ActivitiesRegistration";
 import { ActivitiesSchedule } from "pages/ActivitiesSchedule";
+import { BudgetDetail } from "pages/BudgetDetail";
+import { Budgets } from "pages/Budgets";
 import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
 import { GanttPage } from "pages/Gantt";
 import { Home } from "pages/Home";
@@ -17,6 +20,7 @@ import { ProvidersRegistration } from "pages/ProvidersRegistration";
 import { Reports } from "pages/Reports";
 import { Settings } from "pages/Settings";
 import { ShareRegister } from "pages/ShareRegister";
+import { UploadSheet } from "pages/UploadSheet";
 import VisaoPorArea from "pages/VisaoPorArea";
 
 export function PrivateRoutes() {
@@ -39,11 +43,18 @@ export function PrivateRoutes() {
       <Route path="permissions/:id" element={<Permissions />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/upload" element={<UploadSheet />} />
       <Route path="/projects" element={<Projects />} />
+      <Route path="/budgets" element={<Budgets />} />
+      <Route path="/budget/detail/:id" element={<BudgetDetail />} />
       <Route path="/gantt" element={<GanttPage />} />
       <Route path="/fornecedores" element={<Fornecedores />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
       <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
+      <Route
+        path="/atividade/:id/precedentes"
+        element={<ActivitiesPrecedents />}
+      />
       <Route path="/atividade/:id/visao-por-area" element={<VisaoPorArea />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
