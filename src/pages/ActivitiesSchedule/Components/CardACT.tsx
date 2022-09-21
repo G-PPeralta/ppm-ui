@@ -25,6 +25,7 @@ function CardACT({ atividade }: Props) {
 
   return (
     <Flex
+      zIndex={1000}
       direction={"column"}
       align={"right"}
       justify={"right"}
