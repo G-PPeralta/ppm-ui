@@ -1,8 +1,8 @@
-import { ReactNode } from 'react';
-import { IconType } from 'react-icons';
-import { useNavigate } from 'react-router-dom';
+import { ReactNode } from "react";
+import { IconType } from "react-icons";
+import { useNavigate } from "react-router-dom";
 
-import { Flex, Icon, Link, FlexProps } from '@chakra-ui/react';
+import { Flex, Icon, Link, FlexProps } from "@chakra-ui/react";
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
@@ -14,8 +14,8 @@ export function NavItem({ icon, children, link, ...rest }: NavItemProps) {
 
   return (
     <Link
-      style={{ textDecoration: 'none' }}
-      _focus={{ boxShadow: 'none' }}
+      style={{ textDecoration: "none" }}
+      _focus={{ boxShadow: "none" }}
       onClick={() => {
         navigate(link);
       }}
@@ -23,28 +23,29 @@ export function NavItem({ icon, children, link, ...rest }: NavItemProps) {
       <Flex
         align="center"
         p="4"
+        pl="10"
         mx="4"
         borderRadius="lg"
         role="group"
         cursor="pointer"
         _hover={{
-          bg: 'origem.400',
-          color: 'white',
+          bg: "origem.400",
+          color: "white",
         }}
         {...rest}
       >
         {icon && (
           <Icon
             mr="4"
-            fontSize="16"
+            fontSize="14"
             _groupHover={{
-              color: 'white',
+              color: "white",
             }}
             _activeLink={{
-              color: 'white',
+              color: "white",
             }}
             color={
-              window.location.pathname === link ? 'origem.500' : 'black.500'
+              window.location.pathname === link ? "origem.500" : "black.500"
             }
             as={icon}
           />

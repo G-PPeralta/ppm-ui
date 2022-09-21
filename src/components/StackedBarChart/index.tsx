@@ -1,4 +1,4 @@
-import { StackedBarChartProps } from 'interfaces/Components';
+import { StackedBarChartProps } from "interfaces/Components";
 import {
   BarChart,
   Bar,
@@ -6,9 +6,9 @@ import {
   Tooltip,
   ResponsiveContainer,
   YAxis,
-} from 'recharts';
+} from "recharts";
 
-import style from './StackedBarChart.module.scss';
+import style from "./StackedBarChart.module.scss";
 
 export default function StackedBarChart({
   sizeW,
@@ -24,8 +24,9 @@ export default function StackedBarChart({
         <XAxis dataKey="month" fontSize={10} />
         {showY ? <YAxis dataKey="Previsto" /> : undefined}
         <Tooltip />
-        {dataEntries.map((dataEntry) => (
+        {dataEntries.map((dataEntry, index) => (
           <Bar
+            key={index}
             dataKey={dataEntry.name}
             stackId="a"
             fill={dataEntry.color}

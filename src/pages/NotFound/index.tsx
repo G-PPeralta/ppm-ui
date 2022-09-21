@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import { Box, Heading, Text, Button, Flex } from '@chakra-ui/react';
+import { Box, Heading, Text, Button, Flex } from "@chakra-ui/react";
 
 export function NotFound() {
   const navigate = useNavigate();
@@ -14,14 +14,14 @@ export function NotFound() {
           bgGradient="linear(to-r, origem.400, origem.600)"
           backgroundClip="text"
         >
-          404
+          Em Desenvolvimento
         </Heading>
         <Text fontSize="18px" mt={3} mb={2}>
-          Esta página no existe
+          Esta página está em desenvolvimento
         </Text>
-        <Text color={'gray.500'} mb={6}>
+        {/* <Text color={"gray.500"} mb={6}>
           Por favor, verifique a URL e tente novamente.
-        </Text>
+        </Text> */}
 
         <Button
           colorScheme="origem"
@@ -29,7 +29,7 @@ export function NotFound() {
           color="white"
           variant="solid"
           onClick={() => {
-            navigate('/');
+            navigate("/");
           }}
         >
           Voltar para o início

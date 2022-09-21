@@ -1,11 +1,11 @@
-import { RegisterProps, ResponseLogin } from 'interfaces/Services';
+import { RegisterProps, ResponseLogin } from "interfaces/Services";
 
-import { api } from 'services/api';
+import { api } from "services/api";
 
 export async function postRegister(
-  payload: RegisterProps,
+  payload: RegisterProps
 ): Promise<{ data: ResponseLogin; status: number }> {
-  const { data, status } = await api.post('/user', payload);
+  const { data, status } = await api.post("/user", payload);
 
   return { data, status };
 }

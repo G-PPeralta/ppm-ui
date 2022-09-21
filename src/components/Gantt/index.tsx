@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { GanttComponent, Inject, Edit } from '@syncfusion/ej2-react-gantt';
-import { IGantt, GanttProps } from 'interfaces/Services';
+import { GanttComponent, Inject, Edit } from "@syncfusion/ej2-react-gantt";
+import { IGantt, GanttProps } from "interfaces/Services";
 
-import { getGanttData } from 'services/get/Gantt';
+import { getGanttData } from "services/get/Gantt";
 
 export function Gantt() {
   // const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);
@@ -43,14 +43,14 @@ export function Gantt() {
             duracao,
           }) => ({
             TaskID: microatividade_id || 0,
-            TaskName: nome_atividade || '',
-            Item: item || '',
+            TaskName: nome_atividade || "",
+            Item: item || "",
             Duration: duracao,
             Progress: progresso,
             StartDate: data_inicio,
-          }),
+          })
         ),
-      }),
+      })
     );
     setGantt(newGantt);
   }
@@ -64,7 +64,9 @@ export function Gantt() {
   }
 
   useEffect(() => {
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
   }, [gantt]);
 
   useEffect(() => {
@@ -144,14 +146,14 @@ export function Gantt() {
           id="gantt-control"
           dataSource={gantt}
           taskFields={{
-            id: 'TaskID',
-            name: 'TaskName',
-            startDate: 'StartDate',
-            endDate: 'EndDate',
-            duration: 'Duration',
-            progress: 'Progress',
-            dependency: 'Predecessor',
-            child: 'subtasks',
+            id: "TaskID",
+            name: "TaskName",
+            startDate: "StartDate",
+            endDate: "EndDate",
+            duration: "Duration",
+            progress: "Progress",
+            dependency: "Predecessor",
+            child: "subtasks",
           }}
           // taskFields={ganttData.macroatividades.map((macroatividade) => ({
           //   id: macroatividade.macroatividade_id,
@@ -171,53 +173,53 @@ export function Gantt() {
             allowTaskbarEditing: false,
             allowEditing: true,
           }}
-          height={'100vh'}
+          height={"100vh"}
           columns={[
-            { field: 'Item', type: 'string' },
+            { field: "Item", type: "string" },
             {
-              field: 'TaskID',
-              headerText: 'ID',
+              field: "TaskID",
+              headerText: "ID",
               visible: false,
             },
             {
-              field: 'TaskName',
-              headerText: 'Ação/Projeto',
-              headerTextAlign: 'Center',
-              textAlign: 'Center',
-              type: 'string',
+              field: "TaskName",
+              headerText: "Ação/Projeto",
+              headerTextAlign: "Center",
+              textAlign: "Center",
+              type: "string",
             },
             {
-              field: 'StartDate',
-              headerText: 'Data Início',
-              headerTextAlign: 'Center',
-              textAlign: 'Center',
-              format: 'dd/MM/yyyy',
+              field: "StartDate",
+              headerText: "Data Início",
+              headerTextAlign: "Center",
+              textAlign: "Center",
+              format: "dd/MM/yyyy",
             },
             {
-              field: 'EndDate',
-              headerText: 'Data Fim',
-              headerTextAlign: 'Center',
-              textAlign: 'Center',
-              format: 'dd/MM/yyyy',
+              field: "EndDate",
+              headerText: "Data Fim",
+              headerTextAlign: "Center",
+              textAlign: "Center",
+              format: "dd/MM/yyyy",
             },
             {
-              field: 'Duration',
-              headerText: 'Duração',
-              headerTextAlign: 'Center',
-              textAlign: 'Center',
+              field: "Duration",
+              headerText: "Duração",
+              headerTextAlign: "Center",
+              textAlign: "Center",
             },
             {
-              field: 'Progress',
-              headerText: 'Progresso (%)',
-              headerTextAlign: 'Center',
-              textAlign: 'Center',
-              format: 'n',
+              field: "Progress",
+              headerText: "Progresso (%)",
+              headerTextAlign: "Center",
+              textAlign: "Center",
+              format: "n",
             },
             {
-              field: 'Predecessor',
-              headerText: 'Predecessor',
-              headerTextAlign: 'Center',
-              textAlign: 'Center',
+              field: "Predecessor",
+              headerText: "Predecessor",
+              headerTextAlign: "Center",
+              textAlign: "Center",
             },
           ]}
         >

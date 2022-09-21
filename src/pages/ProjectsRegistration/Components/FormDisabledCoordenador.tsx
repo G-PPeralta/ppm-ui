@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { Box, FormLabel, Input } from '@chakra-ui/react';
+import { Box, FormLabel, Input } from "@chakra-ui/react";
 
 function FormDisabledCoordenador(projectsForm: any) {
   const [loading, setLoading] = useState(true);
@@ -11,28 +11,20 @@ function FormDisabledCoordenador(projectsForm: any) {
 
   return (
     <>
-      {!loading &&
-        projectsForm.projectsForm.values.responsavel.map(
-          (_responsavel: string, index: number) => (
-            <Box key={index}>
-              <FormLabel htmlFor={`responsavel${index}`}>
-                COORDENADOR {index + 1}
-              </FormLabel>
-              <Input
-                disabled
-                placeholder=""
-                id={`responsavel${index}`}
-                type={`responsavel${index}`}
-                name={`responsavel${index}`}
-                value={
-                  projectsForm.projectsForm.values.responsavel[index]
-                    .nomeResponsavel
-                }
-                w={'100%'}
-              />
-            </Box>
-          ),
-        )}
+      {!loading && (
+        <Box>
+          <FormLabel htmlFor={"coordenador"}>COORDENADOR</FormLabel>
+          <Input
+            disabled
+            placeholder=""
+            id={"coordenador"}
+            type={"coordenador"}
+            name={"coordenador"}
+            value={projectsForm.projectsForm.values.coordenador}
+            w={"100%"}
+          />
+        </Box>
+      )}
     </>
   );
 }

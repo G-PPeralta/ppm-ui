@@ -3,27 +3,27 @@ import {
   FormLabel,
   Input,
   useBreakpointValue,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
 function FormElementoPep(projectsForm: any) {
   return (
     <FormControl>
-      <FormLabel htmlFor="elementoPep">ELEMENTO PEP</FormLabel>
+      <FormLabel htmlFor="elemento_pep">ELEMENTO PEP</FormLabel>
       <Input
         isRequired
         placeholder="Elemento PEP"
-        id="elementoPep"
+        id="elemento_pep"
         type="text"
-        name="elementoPep"
-        value={projectsForm.projectsForm.values.nomeProjeto}
+        name="elemento_pep"
+        value={projectsForm.projectsForm.values.elemento_pep}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: '100%', md: '100%' })}
+        w={useBreakpointValue({ base: "100%", md: "100%" })}
       />
-      {projectsForm.projectsForm.errors.nomeProjeto &&
-        projectsForm.projectsForm.touched.nomeProjeto && (
-          <TextError>{projectsForm.projectsForm.errors.nomeProjeto}</TextError>
+      {projectsForm.projectsForm.errors.elemento_pep &&
+        projectsForm.projectsForm.touched.elemento_pep && (
+          <TextError>{projectsForm.projectsForm.errors.elemento_pep}</TextError>
         )}
     </FormControl>
   );

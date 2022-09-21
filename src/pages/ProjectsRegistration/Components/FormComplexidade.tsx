@@ -1,26 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 import {
   FormControl,
   FormLabel,
   Select,
   useBreakpointValue,
-} from '@chakra-ui/react';
-import { Complexidade } from 'interfaces/Services';
+} from "@chakra-ui/react";
+import { Complexidade } from "interfaces/Services";
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
-import { getComplexidade } from 'services/get/Projetos';
+import { getComplexidade } from "services/get/Projetos";
 
 function FormComplexidade(projectsForm: any) {
   const [complexidadeState, setComplexidadeState] = useState<Complexidade[]>(
-    [] as Complexidade[],
+    [] as Complexidade[]
   );
 
   async function handleGetProjetos() {
     const reqGet = await getComplexidade();
 
-    const dataReq: Complexidade[] = reqGet.data;
+    const dataReq: Complexidade[] = reqGet.data.sort(
+      (a: Complexidade, b: Complexidade) =>
+        a.complexidade.localeCompare(b.complexidade)
+    );
 
     setComplexidadeState(dataReq);
   }
@@ -37,7 +40,8 @@ function FormComplexidade(projectsForm: any) {
         name="complexidadeId"
         value={projectsForm.projectsForm.values.complexidadeId}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: '100%', md: '100%' })}
+        w={useBreakpointValue({ base: "100%", md: "100%" })}
+        placeholder="Selecione"
       >
         {complexidadeState.map((complexidade) => (
           <option key={complexidade.id} value={complexidade.id}>

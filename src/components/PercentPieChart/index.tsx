@@ -1,7 +1,7 @@
-import { AiOutlineCaretUp, AiOutlineCaretDown } from 'react-icons/ai';
+import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
 
-import { Box, Text } from '@chakra-ui/react';
-import { PieChart, Pie, Cell } from 'recharts';
+import { Box, Text } from "@chakra-ui/react";
+import { PieChart, Pie, Cell } from "recharts";
 
 interface Props {
   size: number;
@@ -41,8 +41,8 @@ export default function PieChartComponent({ size, upDown, data }: Props) {
         w={size / 5}
         h={size / 5}
         alignItems="center"
-        display={'flex'}
-        sx={{ position: 'absolute' }}
+        display={"flex"}
+        sx={{ position: "absolute" }}
         justifyContent="center"
       >
         {upDown ? (

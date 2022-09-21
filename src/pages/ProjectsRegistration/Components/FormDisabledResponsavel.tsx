@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { Box, FormLabel, Input } from '@chakra-ui/react';
+import { Box, FormLabel, Input } from "@chakra-ui/react";
 
 function FormDisabledResponsavel(projectsForm: any) {
   const [loading, setLoading] = useState(true);
@@ -11,28 +11,20 @@ function FormDisabledResponsavel(projectsForm: any) {
 
   return (
     <>
-      {!loading &&
-        projectsForm.projectsForm.values.responsavel.map(
-          (_responsavel: string, index: number) => (
-            <Box key={index}>
-              <FormLabel htmlFor={`responsavel${index}`}>
-                RESPONSÁVEL {index + 1}
-              </FormLabel>
-              <Input
-                disabled
-                placeholder=""
-                id={`responsavel${index}`}
-                type={`responsavel${index}`}
-                name={`responsavel${index}`}
-                value={
-                  projectsForm.projectsForm.values.responsavel[index]
-                    .nomeResponsavel
-                }
-                w={'100%'}
-              />
-            </Box>
-          ),
-        )}
+      {!loading && (
+        <Box>
+          <FormLabel htmlFor={"responsavel"}>RESPONSÁVEL</FormLabel>
+          <Input
+            disabled
+            placeholder=""
+            id={"responsavel"}
+            type={"responsavel"}
+            name={"responsavel"}
+            value={projectsForm.projectsForm.values.responsavel}
+            w={"100%"}
+          />
+        </Box>
+      )}
     </>
   );
 }

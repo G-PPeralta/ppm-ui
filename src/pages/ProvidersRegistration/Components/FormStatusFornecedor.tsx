@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 import {
   FormControl,
   FormLabel,
   Select,
   useBreakpointValue,
-} from '@chakra-ui/react';
-import { StatusProjeto } from 'interfaces/Services';
+} from "@chakra-ui/react";
+import { StatusProjeto } from "interfaces/Services";
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
-import { getStatusProjeto } from 'services/get/Projetos';
+import { getStatusProjeto } from "services/get/Projetos";
 
 function FormStatusFornecedor(projectsForm: any) {
   const [statusFornecedorState, setStatusFornecedorState] = useState<
@@ -37,7 +37,7 @@ function FormStatusFornecedor(projectsForm: any) {
         name="statusId"
         value={projectsForm.projectsForm.values.statusId}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: '100%', md: '100%' })}
+        w={useBreakpointValue({ base: "100%", md: "100%" })}
       >
         {statusFornecedorState.map((status) => (
           <option key={status.id} value={status.id}>

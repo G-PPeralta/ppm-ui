@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 import {
   Box,
@@ -7,21 +7,21 @@ import {
   Text,
   useBreakpointValue,
   useColorModeValue,
-} from '@chakra-ui/react';
-import { TotalOrcamento } from 'interfaces/Services';
+} from "@chakra-ui/react";
+import { TotalOrcamento } from "interfaces/Services";
 
-import { getOrcamentoTotal } from 'services/get/Dashboard';
+import { getOrcamentoTotal } from "services/get/Dashboard";
 
 export default function RealizadoComponent() {
   const [totalOrcamento, setTotalOrcamento] = useState<TotalOrcamento[]>(
-    [] as TotalOrcamento[],
+    [] as TotalOrcamento[]
   );
   const [loading, setLoading] = useState(true);
 
   async function handleGetTotalOrcamento() {
     const reqGet = await getOrcamentoTotal();
 
-    setTotalOrcamento(reqGet.data[0].total);
+    setTotalOrcamento(reqGet.data[1].total);
   }
 
   useEffect(() => {
@@ -34,46 +34,46 @@ export default function RealizadoComponent() {
   return (
     <Stack spacing="8">
       <Flex
-        w={useBreakpointValue({ base: '100%', md: 'fit-content' })}
+        w={"100%"}
         align="center"
         justify="center"
-        bg={useBreakpointValue({ base: 'white', sm: '#EDF2F7' })}
+        bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
       >
         <Box
-          py={{ base: '0', sm: '4' }}
-          px={{ base: '0', sm: '4' }}
-          w="fit-content"
-          bg={useBreakpointValue({ base: 'transparent', sm: 'white' })}
+          py={{ base: "0", sm: "4" }}
+          px={{ base: "0", sm: "4" }}
+          w={"100%"}
+          bg={useBreakpointValue({ base: "transparent", sm: "white" })}
           boxShadow={{
-            base: 'none',
-            sm: useColorModeValue('md', 'md-dark'),
+            base: "none",
+            sm: useColorModeValue("md", "md-dark"),
           }}
-          borderRadius={{ base: 'none', sm: 'xl' }}
+          borderRadius={{ base: "none", sm: "xl" }}
         >
           <Box
-            w={300}
-            sx={{ display: 'flex' }}
+            w={"100%"}
+            sx={{ display: "flex" }}
             justifyContent="space-between"
             alignItems="center"
           >
             <Box>
               <Text
                 mb={1}
-                sx={{ fontSize: 16, fontWeight: '600', alignSelf: 'center' }}
+                sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
                 color="#000000"
               >
                 Realizado
               </Text>
-              <Box sx={{ display: 'flex' }}>
+              <Box sx={{ display: "flex" }}>
                 <Text
-                  sx={{ fontSize: 12, fontWeight: '600', alignSelf: 'center' }}
+                  sx={{ fontSize: 12, fontWeight: "600", alignSelf: "center" }}
                   color="#000000"
                 >
                   R$
                 </Text>
                 <Text
                   ml={2}
-                  sx={{ fontSize: 18, fontWeight: '600', alignSelf: 'center' }}
+                  sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
                   color="#000000"
                 >
                   {!loading && valorFormatado}
@@ -83,12 +83,12 @@ export default function RealizadoComponent() {
             <Box
               justifyContent="center"
               alignItems="center"
-              bg={'#2E69FD'}
-              sx={{ height: '100%', alignItems: 'center', borderRadius: '2px' }}
+              bg={"#2E69FD"}
+              sx={{ height: "100%", alignItems: "center", borderRadius: "2px" }}
             >
               <Text
                 p={1}
-                sx={{ fontSize: 22, fontWeight: '600', alignSelf: 'center' }}
+                sx={{ fontSize: 22, fontWeight: "600", alignSelf: "center" }}
                 color="#ffffff"
               >
                 50%

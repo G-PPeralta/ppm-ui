@@ -3,9 +3,9 @@ import {
   FormLabel,
   Textarea,
   useBreakpointValue,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import { TextError } from 'components/TextError';
+import { TextError } from "components/TextError";
 
 function FormDescricao(projectsForm: any) {
   return (
@@ -19,7 +19,7 @@ function FormDescricao(projectsForm: any) {
         maxLength={15}
         value={projectsForm.projectsForm.values.descricao}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: '100%', md: '95%' })}
+        w={useBreakpointValue({ base: "100%", md: "95%" })}
       />
       {projectsForm.projectsForm.errors.descricao &&
         projectsForm.projectsForm.touched.descricao && (
