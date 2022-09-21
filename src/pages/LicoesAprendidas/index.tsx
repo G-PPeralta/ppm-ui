@@ -35,11 +35,16 @@ export function LicoesAprendidasProjetos() {
   const [licoesAprendidas, setLicoesAprendidas] = useState(
     [] as LicoesAprendidas[]
   );
+  const [filteredLicoesAprendidas, setFilteredLicoesAprendidas] = useState(
+    [] as LicoesAprendidas[]
+  );
   const [projetos, setProjetos] = useState([] as ProjetosList[]);
+  const [projetoId, setProjetoId] = useState("");
 
   async function handleGetLicoesAprendidas() {
     const payload = await getAllLicoesAprendidas();
     setLicoesAprendidas(payload.data);
+    setFilteredLicoesAprendidas(payload.data);
   }
 
   async function handleGetProjetos() {
@@ -52,7 +57,7 @@ export function LicoesAprendidasProjetos() {
     handleGetProjetos();
   }, []);
 
-  const tableData = licoesAprendidas.map((lessons) => (
+  const tableData = filteredLicoesAprendidas.map((lessons) => (
     <Tr key={lessons.id_projeto}>
       <Td isNumeric>{lessons.id}</Td>
       <Td>{lessons.txt_licao_aprendida}</Td>
@@ -73,6 +78,13 @@ export function LicoesAprendidasProjetos() {
       </Td>
     </Tr>
   ));
+
+  const filterByProject = () => {
+    const filtered = licoesAprendidas.filter(
+      (b) => b.id_projeto.toString() === projetoId
+    );
+    setFilteredLicoesAprendidas([...filtered]);
+  };
 
   return (
     <Sidebar>
@@ -101,17 +113,19 @@ export function LicoesAprendidasProjetos() {
 
               <Flex>
                 <FormControl>
-                  <FormLabel htmlFor="pole">PROJETO</FormLabel>
+                  <FormLabel htmlFor="projeto">PROJETO</FormLabel>
                   <Select
-                    id="poloId"
-                    name="pole"
-                    // onChange={(e) => setPolo(e.target.value)}
+                    id="projeto"
+                    name="projeto"
+                    onChange={(e) => setProjetoId(e.target.value)}
                     width={300}
                   >
                     <option value="0">Todos</option>
                     {projetos &&
                       projetos.map((project) => (
-                        <option key={project.id}>{project.nomeProjeto}</option>
+                        <option value={project.id} key={project.id}>
+                          {project.nomeProjeto}
+                        </option>
                       ))}
                   </Select>
                 </FormControl>
@@ -125,7 +139,7 @@ export function LicoesAprendidasProjetos() {
                       transition: "all 0.4s",
                     }}
                     rightIcon={<FiSearch />}
-                    // onClick={getProjectsPerPolo}
+                    onClick={filterByProject}
                   >
                     Buscar
                   </Button>
