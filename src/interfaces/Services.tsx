@@ -294,3 +294,18 @@ export interface Fornecedor {
   responsavel: string;
   descricao: string;
 }
+
+export interface Opcao {
+  id?: number;
+  nom_opcao: string;
+  opcao_id: number;
+}
+
+export interface ProjetosRanking {
+  Benefício: Opcao[];
+  Regulatório: Opcao[];
+  Operação: Opcao[];
+  Prioridade: Opcao[];
+  Complexidade: Opcao[];
+  "Estratégia para o Negócio": Opcao[];
+}

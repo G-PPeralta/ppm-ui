@@ -65,7 +65,7 @@ export function Fornecedores() {
     setFornecedores(response.data as Fornecedor[]);
   };
 
-  console.log(fornecedores);
+  // console.log(fornecedores);
 
   useEffect(() => {
     handleGetFornecedores();

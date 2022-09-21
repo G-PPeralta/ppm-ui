@@ -22,6 +22,10 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { Project } from "models/Project.model";
+
+import ModalCadastrarPriorizacao from "./ModalCadastrarPriorizaçao";
+import ModalDeletarProjeto from "./ModalDeletarProjeto";
+
 import "../projects.css";
 
 interface TableProps {
@@ -38,6 +42,12 @@ export function TabelaProjetos(props: TableProps) {
     style: "currency",
     currency: "BRL",
   });
+  // const { isOpen, onOpen, onClose } = useDisclosure();
+
+  // function handlehanking(fornecedor: Fornecedor) {
+  //   setEditFornecedor(fornecedor);
+  //   onOpen();
+  // }
 
   const total = data.reduce(
     (accumulator, object) => accumulator + +object.valorTotalPrevisto,
@@ -84,10 +94,10 @@ export function TabelaProjetos(props: TableProps) {
           <Text>
             {projeto.nome.length > 28 ? (
               <Tooltip label={projeto.nome} aria-label="">
-                {projeto.nome.substring(0, 25).toUpperCase() + "..."}
+                {projeto.nome.substring(0, 25) + "..."}
               </Tooltip>
             ) : (
-              projeto.nome.toUpperCase()
+              projeto.nome
             )}
           </Text>
         </Link>
@@ -98,29 +108,10 @@ export function TabelaProjetos(props: TableProps) {
       <Td>{projeto.prioridade}</Td>
       <Td>{projeto.complexidade}</Td>
       <Td>{projeto.responsavel}</Td>
+      <Td></Td>
       <Td>
-        {/* <IconButton
-          aria-label="Plus sign"
-          icon={<AiFillEdit />}
-          background="white"
-          variant="secondary"
-          color="#2D2926"
-          mr={2}
-          isRound={true}
-          size="sm"
-        /> */}
-        {/* <IconButton
-          aria-label="Plus sign"
-          icon={<FaTrash />}
-          background="white"
-          variant="secondary"
-          color="#F94144"
-          mr={2}
-          isRound={true}
-          size="sm"
-        /> */}
-
-        {/* <EditaValorModal /> */}
+        <ModalCadastrarPriorizacao />
+        <ModalDeletarProjeto />
       </Td>
     </Tr>
   ));
@@ -137,6 +128,7 @@ export function TabelaProjetos(props: TableProps) {
               <Th>Complexidade</Th>
               <Th>Responsavel</Th>
               <Th>Coordenador</Th>
+              <Th>Ações</Th>
             </Tr>
           </Thead>
           <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
