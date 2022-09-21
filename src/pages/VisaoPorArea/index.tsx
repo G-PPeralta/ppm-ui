@@ -8,16 +8,20 @@ import StatusProjeto from "components/StatusProjeto";
 
 import { statusProjeto } from "utils/validateDate";
 
+import { getAtividadesAreaMock } from "services/get/AtividadesArea";
+
 import AccordionArea from "./components/AccordionArea";
 import BotaoVisaoGeral from "./components/BotaoVisaoGeral";
 
 function VisaoPorArea() {
   const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<any>([]);
 
   useEffect(() => {
     setTimeout(() => {
+      setData(getAtividadesAreaMock);
       setLoading(false);
-    }, 2000);
+    }, 1000);
   }, []);
 
   return (
@@ -59,9 +63,9 @@ function VisaoPorArea() {
                   </Flex>
                 </Flex>
                 <Flex align={"center"} justify={"center"} direction={"column"}>
-                  <AccordionArea />
-                  <AccordionArea />
-                  <AccordionArea />
+                  {data.map((area: any, index: number) => (
+                    <AccordionArea key={index} area={area} />
+                  ))}
                 </Flex>
               </Box>
             </Flex>

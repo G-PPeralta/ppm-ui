@@ -11,7 +11,7 @@ import {
 import AtividadesPorStatus from "./AtividadesPorStatus";
 import TotalAtividades from "./TotalAtividades";
 
-function AccordionArea() {
+function AccordionArea({ area }: any) {
   return (
     <Accordion allowMultiple w={"100%"}>
       <AccordionItem>
@@ -32,13 +32,13 @@ function AccordionArea() {
                 h={"100%"}
               >
                 <Text fontSize="lg" mr={5} fontWeight={600}>
-                  Area 1
+                  {area.area}
                 </Text>
               </Flex>
               <Flex grow={30} align={"center"} justify={"space-around"}>
-                <Text fontWeight={600}>0%</Text>
-                <TotalAtividades />
-                <AtividadesPorStatus />
+                <Text fontWeight={600}>{`${area.pctTotalConcluido}%`}</Text>
+                <TotalAtividades totalAtividades={area.totalAtividades} />
+                <AtividadesPorStatus status={area.status} />
               </Flex>
             </Flex>
             <Flex grow={1}>

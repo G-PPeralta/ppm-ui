@@ -1,37 +1,24 @@
 import { Flex, Text } from "@chakra-ui/react";
 
-function AtividadesPorStatus() {
-  const statusAtividades = [
-    {
-      status: "Não aplicável",
-      color: "#F4DD06",
-      value: 3,
-    },
-    {
-      status: "Não iniciado",
-      color: "#FFB400",
-      value: 10,
-    },
-    {
-      status: "Concluído",
-      color: "#059502",
-      value: 78,
-    },
-    {
-      status: "Em andamento",
-      color: "#0047BB",
-      value: 27,
-    },
-    {
-      status: "Atrasado",
-      color: "#F40606",
-      value: 1,
-    },
-  ];
+function AtividadesPorStatus({ status }: any) {
+  const statusComCor = status.map((item: any) => {
+    switch (item.status) {
+      case "Não Iniciado":
+        return { ...item, cor: "#FFB400" };
+      case "Concluído":
+        return { ...item, cor: "#059502" };
+      case "Em Andamento":
+        return { ...item, cor: "#0047BB" };
+      case "Atrasado":
+        return { ...item, cor: "#F40606" };
+      default:
+        return { ...item, cor: "#F4DD06" };
+    }
+  });
 
   return (
     <Flex>
-      {statusAtividades.map((status, index) => (
+      {statusComCor.map((status: any, index: number) => (
         <Flex
           key={index}
           align={"center"}
@@ -40,14 +27,14 @@ function AtividadesPorStatus() {
           w={"40px"}
         >
           <Flex
-            backgroundColor={status.color}
+            backgroundColor={status.cor}
             borderRadius={"50%"}
             width={"10px"}
             height={"10px"}
             mb={2}
           />
           <Text textAlign={"center"} fontWeight={600}>
-            {status.value}
+            {status.qtde}
           </Text>
         </Flex>
       ))}
