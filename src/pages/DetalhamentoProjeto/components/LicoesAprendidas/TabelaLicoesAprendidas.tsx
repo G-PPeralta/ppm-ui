@@ -19,25 +19,31 @@ interface EditProps {
 }
 
 function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
-  const tableData = licoes.map((lessons) => (
-    <Tr key={lessons.id_projeto}>
-      <Td isNumeric>{lessons.id}</Td>
-      <Td>{lessons.txt_licao_aprendida}</Td>
-      <Td>{lessons.txt_acao}</Td>
-      <Td>{new Date(lessons.dat_usu_create).toLocaleString("pt-BR")}</Td>
-      <Td>
-        <IconButton
-          aria-label="Plus sign"
-          icon={<AiFillEdit />}
-          background="white"
-          variant="secondary"
-          color="#2D2926"
-          mr={2}
-          isRound={true}
-          size="sm"
-          onClick={() => onEdit(lessons)}
-        />
-        {/* <IconButton
+  const tableData = licoes
+    .sort((a, b) => a.id - b.id)
+    .map((lessons) => (
+      <Tr key={lessons.id_projeto}>
+        <Td isNumeric>{lessons.id}</Td>
+        <Td>{lessons.txt_licao_aprendida}</Td>
+        <Td>{lessons.txt_acao}</Td>
+        <Td>
+          {new Date(lessons.dat_usu_create)
+            .toLocaleString("pt-BR")
+            .substring(0, 10)}
+        </Td>
+        <Td>
+          <IconButton
+            aria-label="Plus sign"
+            icon={<AiFillEdit />}
+            background="white"
+            variant="secondary"
+            color="#2D2926"
+            mr={2}
+            isRound={true}
+            size="sm"
+            onClick={() => onEdit(lessons)}
+          />
+          {/* <IconButton
           aria-label="Plus sign"
           icon={<FaTrash />}
           background="white"
@@ -48,10 +54,10 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
           size="sm"
         /> */}
 
-        {/* <EditaValorModal /> */}
-      </Td>
-    </Tr>
-  ));
+          {/* <EditaValorModal /> */}
+        </Td>
+      </Tr>
+    ));
 
   return (
     <TableContainer mt={4} mb={3} ml={1}>

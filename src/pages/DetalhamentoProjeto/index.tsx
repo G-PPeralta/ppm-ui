@@ -51,7 +51,7 @@ function DetalhamentoProjeto() {
   useEffect(() => {
     handleGetInfoProjetos();
     handleGetLicoes();
-  }, []);
+  }, [licoes]);
 
   return (
     <>

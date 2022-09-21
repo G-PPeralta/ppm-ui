@@ -17,6 +17,7 @@ import {
   Input,
   ModalFooter,
   Button,
+  Textarea,
 } from "@chakra-ui/react";
 import { LicoesAprendidas } from "interfaces/Services";
 
@@ -52,8 +53,6 @@ function EditarLicoesAprendidasModal({
   ]);
 
   const camposParaEditar = ["txt_licao_aprendida", "txt_acao"];
-
-  console.log(idLicao);
 
   const updatepayload = (campo: string) => {
     if (campo === "txt_licao_aprendida") return licaoAprendida;
@@ -95,24 +94,28 @@ function EditarLicoesAprendidasModal({
           EDITAR FORNECEDOR
         </Text> */}
       </Box>
-      <Modal isOpen={true} onClose={closeModal} size="4xl">
+      <Modal isOpen={true} onClose={closeModal} size={"4xl"}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>LIÇÃO APRENDIDA</ModalHeader>
+          <ModalHeader>EDITAR LIÇÕES APRENDIDA</ModalHeader>
+
           <ModalCloseButton />
+
           <ModalBody>
             <FormControl>
-              <FormLabel htmlFor="fornecedorNome">Lição Aprendida</FormLabel>
-              <Input
-                isRequired
-                placeholder="Lição aprendida"
-                type="text"
-                id="licaoAprendida"
-                name="licaoAprendida"
-                width="100%"
-                value={licaoAprendida}
-                onChange={(event) => setLicaoAprendida(event.target.value)}
-              />
+              <Flex direction={"column"}>
+                <FormLabel htmlFor="fornecedorNome">Lição Aprendida</FormLabel>
+                <Input
+                  isRequired
+                  placeholder="Lição aprendida"
+                  type="text"
+                  id="licaoAprendida"
+                  name="licaoAprendida"
+                  width="100%"
+                  value={licaoAprendida}
+                  onChange={(event) => setLicaoAprendida(event.target.value)}
+                />
+              </Flex>
             </FormControl>
             {/* <FormControl>
               <FormLabel htmlFor="data">DATA</FormLabel>
@@ -128,42 +131,58 @@ function EditarLicoesAprendidasModal({
               />
             </FormControl> */}
             <FormControl>
-              <FormLabel htmlFor="acao">AÇÃO OU RECOMENDAÇÃO</FormLabel>
-              <Input
-                isRequired
-                placeholder="Ação ou recomendação"
-                type="text"
-                id="acao"
-                name="acao"
-                width="100%"
-                value={acao}
-                onChange={(event) => setAcao(event.target.value)}
-              />
+              <Flex direction={"column"}>
+                <FormLabel htmlFor="acao">AÇÃO OU RECOMENDAÇÃO</FormLabel>
+                <Textarea
+                  isRequired
+                  placeholder="Ação ou recomendação"
+                  // type="text"
+                  id="acao"
+                  name="acao"
+                  width="100%"
+                  value={acao}
+                  onChange={(event) => setAcao(event.target.value)}
+                />
+              </Flex>
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
-            <Button
-              background="origem.300"
-              variant="primary"
-              color="white"
-              _hover={{
-                background: "origem.500",
-                transition: "all 0.4s",
-              }}
-              onClick={() => {
-                camposParaEditar.forEach((lic) =>
-                  handleUpdateLicoes(
-                    idLicao,
-                    lic,
-                    updatepayload(lic),
-                    user?.nome
-                  )
-                );
-              }}
-            >
-              CONFIRMADO
-            </Button>
+            <Flex direction={"row"}>
+              <Button
+                background="origem.300"
+                variant="primary"
+                color="white"
+                _hover={{
+                  background: "origem.500",
+                  transition: "all 0.4s",
+                }}
+                onClick={closeModal}
+              >
+                CANCELAR
+              </Button>
+              <Button
+                background="origem.300"
+                variant="primary"
+                color="white"
+                _hover={{
+                  background: "origem.500",
+                  transition: "all 0.4s",
+                }}
+                onClick={() => {
+                  camposParaEditar.forEach((lic) =>
+                    handleUpdateLicoes(
+                      idLicao,
+                      lic,
+                      updatepayload(lic),
+                      user?.nome
+                    )
+                  );
+                }}
+              >
+                CONFIRMAR
+              </Button>
+            </Flex>
           </ModalFooter>
         </ModalContent>
       </Modal>

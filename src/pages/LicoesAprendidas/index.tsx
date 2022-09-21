@@ -57,27 +57,33 @@ export function LicoesAprendidasProjetos() {
     handleGetProjetos();
   }, []);
 
-  const tableData = filteredLicoesAprendidas.map((lessons) => (
-    <Tr key={lessons.id_projeto}>
-      <Td isNumeric>{lessons.id}</Td>
-      <Td>{lessons.txt_licao_aprendida}</Td>
-      <Td>{lessons.txt_acao}</Td>
-      <Td>{new Date(lessons.dat_usu_create).toLocaleString("pt-BR")}</Td>
-      <Td>
-        <IconButton
-          aria-label="Plus sign"
-          icon={<AiFillEdit />}
-          background="white"
-          variant="secondary"
-          color="#2D2926"
-          mr={2}
-          isRound={true}
-          size="sm"
-          // onClick={() => onEdit(lessons)}
-        />
-      </Td>
-    </Tr>
-  ));
+  const tableData = filteredLicoesAprendidas
+    .sort((a, b) => a.id - b.id)
+    .map((lessons) => (
+      <Tr key={lessons.id_projeto}>
+        <Td isNumeric>{lessons.id}</Td>
+        <Td>{lessons.txt_licao_aprendida}</Td>
+        <Td>{lessons.txt_acao}</Td>
+        <Td>
+          {new Date(lessons.dat_usu_create)
+            .toLocaleString("pt-BR")
+            .substring(0, 10)}
+        </Td>
+        <Td>
+          <IconButton
+            aria-label="Plus sign"
+            icon={<AiFillEdit />}
+            background="white"
+            variant="secondary"
+            color="#2D2926"
+            mr={2}
+            isRound={true}
+            size="sm"
+            // onClick={() => onEdit(lessons)}
+          />
+        </Td>
+      </Tr>
+    ));
 
   const filterByProject = () => {
     const filtered = licoesAprendidas.filter(
