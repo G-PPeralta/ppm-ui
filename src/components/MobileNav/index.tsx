@@ -65,6 +65,7 @@ export function MobileNav({
         variant="outline"
         aria-label="open menu"
         icon={<FiMenu />}
+        className={"noprint"}
       />
 
       <Text
@@ -84,7 +85,7 @@ export function MobileNav({
         </Link>
       </Text>
 
-      <HStack spacing={{ base: "0", md: "6" }}>
+      <HStack className={"noprint"} spacing={{ base: "0", md: "6" }}>
         <Flex alignItems={"center"} zIndex={999}>
           <Menu>
             <MenuButton
