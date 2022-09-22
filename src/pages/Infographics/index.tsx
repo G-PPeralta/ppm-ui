@@ -13,6 +13,7 @@ import ColumnSPT from "./Components/ColumnSPT";
 import ExibirModal from "./Components/ExibirModal";
 import FiltrosModal from "./Components/FiltrosModal";
 // import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
+import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
 import ModalCadastroPoco from "./Components/ModalCadastroPoco";
 import ModalIntervencao from "./Components/ModalIntervencao";
 import ModalNovaCampanha from "./Components/ModalNovaCampanha";
@@ -72,6 +73,7 @@ export function Infographics() {
                     />
                     {/* <ModalCadastrarSonda /> */}
                     <ModalCadastroPoco />
+                    <ModalCadastroAtividade />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (

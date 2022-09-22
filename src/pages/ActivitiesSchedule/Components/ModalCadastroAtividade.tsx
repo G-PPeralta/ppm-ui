@@ -10,7 +10,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  // ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
@@ -36,7 +35,6 @@ import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 import InputPorcentagem from "./InputPorcentagem";
 import SelectFiltragemAreas from "./SelectFiltragemAreas";
-// import SelectFiltragemAreas from "./SelectFiltragemAreas";
 
 function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -118,7 +116,6 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
           >
             Cadastrar Atividade
           </ModalHeader>
-          {/* <ModalCloseButton color={"white"} /> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -263,9 +260,7 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
                     handleCancelarDatePicker(
                       registerForm,
                       onClose,
-                      // startDate,
                       setStartDate,
-                      // endDate,
                       setEndDate
                     )
                   }

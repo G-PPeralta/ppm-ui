@@ -15,27 +15,28 @@ import {
   Stack,
   useBreakpointValue,
   Input,
-  Select,
-  Textarea,
+  // Textarea,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-import { TextError } from "components/TextError";
+// import { TextError } from "components/TextError";
+
+import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividadeOLD";
 
+import DateTimePicker from "./DateTimePicker";
+import SelectFiltragemArea from "./SelectFiltragemArea";
+import SelectFiltragemResponsavel from "./SelectFiltragemResponsavel";
+
 function ModalCadastroAtividade() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    registerForm,
-    loading,
-    // ListaResponsavel,
-    listaArea,
-    listaTarefa,
-    // listaAtividades,
-  } = useCadastroAtividade();
+  const { registerForm, loading } = useCadastroAtividade();
+
+  console.log("registerForm", registerForm.values);
 
   return (
     <>
@@ -85,24 +86,44 @@ function ModalCadastroAtividade() {
                       })}
                       gap={5}
                     >
-                      <FormControl>
-                        <FormLabel htmlFor="area">NOME</FormLabel>
-                        <Select
-                          isRequired
-                          placeholder="Selecione uma tarefa"
-                          id="nomeAtividade"
-                          name="nomeAtividade"
-                          value={registerForm.values.nomeAtividade}
-                          onChange={registerForm.handleChange}
-                        >
-                          {listaTarefa.map((data, index) => (
-                            // {listaArea.map((data, index) => (
-                            <option value={data.id} key={index}>
-                              {data.tarefa}
-                            </option>
-                          ))}
-                        </Select>
-                      </FormControl>
+                      <Flex flex={1}>
+                        <FormControl>
+                          <Flex gap={1}>
+                            <RequiredField />
+                            <FormLabel htmlFor="id_origem">ID</FormLabel>
+                          </Flex>
+                          <Input
+                            isRequired
+                            placeholder="Digite o ID"
+                            id="id_origem"
+                            type="number"
+                            name="id_origem"
+                            w={useBreakpointValue({ base: "100%", md: "100%" })}
+                            value={registerForm.values.id_origem}
+                            onChange={registerForm.handleChange}
+                          />
+                        </FormControl>
+                      </Flex>
+                      <Flex flex={6}>
+                        <FormControl>
+                          <Flex gap={1}>
+                            <RequiredField />
+                            <FormLabel htmlFor="nom_atividade">NOME</FormLabel>
+                          </Flex>
+                          <Input
+                            isRequired
+                            placeholder="Digite o nome da atividade"
+                            id="nom_atividade"
+                            type="text"
+                            name="nom_atividade"
+                            w={useBreakpointValue({ base: "100%", md: "100%" })}
+                            value={regexCaracteresEspeciais(
+                              registerForm.values.nom_atividade
+                            )}
+                            onChange={registerForm.handleChange}
+                          />
+                        </FormControl>
+                      </Flex>
                     </Flex>
 
                     <Flex
@@ -112,121 +133,77 @@ function ModalCadastroAtividade() {
                       })}
                       gap={5}
                     >
-                      <FormControl>
-                        <FormLabel>QUANTIDADE DE DIAS</FormLabel>
+                      <Flex flex={2}>
+                        <SelectFiltragemResponsavel
+                          registerForm={registerForm}
+                        />
+                      </Flex>
+                      <Flex flex={1}>
+                        <SelectFiltragemArea registerForm={registerForm} />
+                      </Flex>
+                    </Flex>
+
+                    <Flex
+                      flexDirection={useBreakpointValue({
+                        base: "column",
+                        md: "row",
+                      })}
+                      gap={5}
+                    >
+                      <Flex flex={1} gap={5}>
+                        <DateTimePicker registerForm={registerForm} />
+
+                        <DateTimePicker registerForm={registerForm} />
+                      </Flex>
+                    </Flex>
+                    {/* <Flex direction={"column"} grow={1}>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="dat_fim_plan">DATA FIM</FormLabel>
+                        </Flex>
+                        <DatePicker
+                          selected={endDate}
+                          onChange={(date) => handleEndDate(date)}
+                          dateFormat="dd/MM/yyyy, hh:mm"
+                          showTimeSelect
+                          customInput={<ExampleCustomInput />}
+                          isClearable={endDate !== ""}
+                          locale="pt-BR"
+                        />
+                      </Flex> */}
+                    {/* <FormControl>
+                        <InputPorcentagem registerForm={registerForm} />
+                      </FormControl> */}
+
+                    {/* <Flex justify={"space-between"} gap={5}>
+                      <Flex direction={"column"} grow={1}>
+                        <SelectFiltragemAreas registerForm={registerForm} />
+                      </Flex>
+                      <Flex direction={"column"} grow={1}>
+                        <FormLabel htmlFor="nom_recurso">RECURSO</FormLabel>
                         <Input
                           isRequired
-                          placeholder="Digite o número de dias"
-                          id="dias"
-                          type="number"
-                          name="dias"
-                          value={registerForm.values.dias}
-                          onChange={registerForm.handleChange}
-                        />
-                        {registerForm.errors.dias &&
-                          registerForm.touched.dias && (
-                            <TextError>{registerForm.errors.dias}</TextError>
+                          placeholder="Digite o nome do recurso"
+                          id="nom_recurso"
+                          type="text"
+                          name="nom_recurso"
+                          w={useBreakpointValue({ base: "100%", md: "100%" })}
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.nom_recurso
                           )}
-                      </FormControl>
-                    </Flex>
-
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: "column",
-                        md: "row",
-                      })}
-                      gap={5}
-                    >
-                      <FormControl>
-                        <FormLabel htmlFor="area">ÁREA</FormLabel>
-                        <Select
-                          id="area"
-                          name="area"
-                          placeholder="Selecione"
-                          value={registerForm.values.area}
-                          onChange={registerForm.handleChange}
-                        >
-                          {listaArea.map((data, index) => (
-                            <option value={data.id} key={index}>
-                              {data.tipo}
-                            </option>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </Flex>
-
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: "column",
-                        md: "row",
-                      })}
-                      gap={5}
-                    >
-                      {/* <FormControl>
-                        <FormLabel htmlFor="precedente[0].atividade">
-                          ATIVIDADE
-                        </FormLabel>
-                        <Select
-                          id="precedente[0].atividade"
-                          name="precedente[0].atividade"
-                          placeholder="Selecione"
-                          value={registerForm.values.precedente[0].atividade}
-                          onChange={registerForm.handleChange}
-                        >
-                          {listaAtividades.map((data, index) => (
-                            <option value={data.id} key={index}>
-                              {data.nome}
-                            </option>
-                          ))}
-                        </Select>
-                      </FormControl> */}
-
-                      {/* <FormControl>
-                        <FormLabel htmlFor="precedente[0].tipo">TIPO</FormLabel>
-                        <Select
-                          id="precedente[0].tipo"
-                          name="precedente[0].tipo"
-                          placeholder="Selecione"
-                          value={registerForm.values.precedente[0].tipo}
-                          onChange={registerForm.handleChange}
-                        >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </Select>
-                      </FormControl> */}
-
-                      {/* <FormControl>
-                        <FormLabel>DIAS</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Digite o nome da atividade"
-                          id="precedente[0].dias"
-                          type="number"
-                          name="precedente[0].dias"
-                          value={registerForm.values.precedente[0].dias}
                           onChange={registerForm.handleChange}
                         />
-                      </FormControl> */}
+                      </Flex>
+                    </Flex> */}
 
-                      {/* <FormControl>
-                        <FormLabel htmlFor="precedente[0].restricao">
-                          RESTRIÇÃO
-                        </FormLabel>
-                        <Select
-                          id="precedente[0].restricao"
-                          name="precedente[0].restricao"
-                          placeholder="Selecione"
-                          value={registerForm.values.precedente[0].restricao}
-                          onChange={registerForm.handleChange}
-                        >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </Select>
-                      </FormControl> */}
-                    </Flex>
-                    <Flex
+                    {/* <Flex
+                      flexDirection={useBreakpointValue({
+                        base: "column",
+                        md: "row",
+                      })}
+                      gap={5}
+                    ></Flex> */}
+                    {/* <Flex
                       flexDirection={useBreakpointValue({
                         base: "column",
                         md: "row",
@@ -234,23 +211,18 @@ function ModalCadastroAtividade() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="comentarios">COMENTÁRIOS</FormLabel>
+                        <FormLabel htmlFor="dsc_comentario">
+                          OBSERVAÇÕES
+                        </FormLabel>
                         <Textarea
-                          isRequired
                           placeholder="Adicione comentários sobre a atividade"
-                          id="comentarios"
-                          name="comentarios"
-                          value={registerForm.values.comentarios}
+                          id="dsc_comentario"
+                          name="dsc_comentario"
+                          value={registerForm.values.dsc_comentario}
                           onChange={registerForm.handleChange}
                         />
-                        {registerForm.errors.comentarios &&
-                          registerForm.touched.comentarios && (
-                            <TextError>
-                              {registerForm.errors.comentarios}
-                            </TextError>
-                          )}
                       </FormControl>
-                    </Flex>
+                    </Flex> */}
                   </Stack>
                 </Flex>
               </FormControl>

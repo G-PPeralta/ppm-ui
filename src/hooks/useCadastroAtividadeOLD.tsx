@@ -2,67 +2,89 @@ import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
 import {
+  Responsavel,
   AreaAtuacao,
-  AtividadeLista,
-  RegistroResponsavel,
-  Tarefa,
-} from "interfaces/Services";
+} from "interfaces/CadastrosModaisInfograficos";
 import { cadastroAtividadeSchema } from "validations/ModaisCadastrosInfografico";
 
 import { useToast } from "contexts/Toast";
 
+import { getArea } from "services/get/CadastroModaisInfograficos";
 import {
   getAreaAtuacaoList,
-  getAtividadesList,
   getResponsavelList,
-  getTarefaList,
 } from "services/get/Infograficos";
 import { postCadastroAtividade } from "services/post/CadastroModaisInfograficos";
 
+import { useAuth } from "./useAuth";
+
 export function useCadastroAtividade() {
+  const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [ListaResponsavel, setListaResponsavel] = useState<
-    RegistroResponsavel[]
-  >([]);
-  const [listaArea, setListaArea] = useState<AreaAtuacao[]>([]);
-  const [listaAtividades, setListaAtividades] = useState<AtividadeLista[]>([]);
-  const [listaTarefa, setListaTarefa] = useState<Tarefa[]>([]);
 
-  const carregarListaResponsavel = async () => {
-    const { data } = await getResponsavelList();
-    setListaResponsavel(data);
+  const [listaArea, setListaArea] = useState<any[]>([]);
+  const [listaAreaAtuacao, setListaAreaAtuacao] = useState<AreaAtuacao[]>([]);
+  const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
+  // const [listaAtividades, setListaAtividades] = useState<AtividadeLista[]>([]);
+  // const [listaTarefa, setListaTarefa] = useState<Tarefa[]>([]);
+
+  const reqGet = async () => {
+    const areas = await getArea();
+    const areaAtuacao = await getAreaAtuacaoList();
+    const responsaveis = await getResponsavelList();
+
+    const arrayAreas = areas.data.map(({ id, nom_area }: any) => ({
+      id,
+      nom_area,
+    }));
+    const areasSorted = arrayAreas.sort((a: any, b: any) =>
+      a.nom_area.localeCompare(b.nom_area)
+    );
+
+    const areasAtuacaoSorted = areaAtuacao.data.sort((a: any, b: any) =>
+      a.tipo.localeCompare(b.tipo)
+    );
+
+    const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
+      a.nome.localeCompare(b.nome)
+    );
+
+    setListaArea(areasSorted);
+    setListaAreaAtuacao(areasAtuacaoSorted);
+    setListaResponsaveis(responsaveisSorted);
   };
 
-  const carregarAreaAtuacao = async () => {
-    const { data } = await getAreaAtuacaoList();
-    setListaArea(data);
-  };
-
-  const carregarListaAtividade = async () => {
-    const { data } = await getAtividadesList();
-    setListaAtividades(data);
-  };
-
-  const carregarListaTarefa = async () => {
-    const { data } = await getTarefaList();
-    setListaTarefa(data);
+  const initialValues = {
+    nom_usu_create: user?.nome,
+    id_origem: 0,
+    nom_atividade: "",
+    responsavelId: 0,
+    area_atuacao: "",
+    nao_iniciar_antes_de: {
+      data: "",
+      checked: false,
+    },
+    nao_terminar_depois_de: {
+      data: "",
+      checked: false,
+    },
+    o_mais_breve_possivel: false,
   };
 
   const registerForm = useFormik({
-    initialValues: {
-      nomeAtividade: "",
-      dias: 0,
-      area: "",
-      comentarios: "",
-    },
+    initialValues,
     validationSchema: cadastroAtividadeSchema,
     onSubmit: async (values) => {
       const newValues = {
-        tarefaId: parseInt(values.nomeAtividade),
-        areaAtuacaoId: parseInt(values.area),
-        obs: values.comentarios,
-        dias: values.dias,
+        nom_usu_create: user?.nome,
+        id_origem: values.id_origem,
+        nom_atividade: values.nom_atividade,
+        responsavelId: values.responsavelId,
+        area_atuacao: values.area_atuacao,
+        nao_iniciar_antes_de: values.nao_iniciar_antes_de,
+        nao_terminar_depois_de: values.nao_terminar_depois_de,
+        o_mais_breve_possivel: values.o_mais_breve_possivel,
       };
 
       setLoading(true);
@@ -86,18 +108,14 @@ export function useCadastroAtividade() {
   });
 
   useEffect(() => {
-    carregarListaResponsavel();
-    carregarAreaAtuacao();
-    carregarListaAtividade();
-    carregarListaTarefa();
+    reqGet();
   }, []);
 
   return {
     registerForm,
     loading,
-    ListaResponsavel,
-    listaTarefa,
     listaArea,
-    listaAtividades,
+    listaAreaAtuacao,
+    listaResponsaveis,
   };
 }
