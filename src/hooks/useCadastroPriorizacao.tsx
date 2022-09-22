@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
 import { useFormik } from "formik";
-// import { cadastroNovaPriorizacaoSchema } from "validations/ProjectRankings";
+import { cadastroNovaPriorizacaoSchema } from "validations/ModalCadastroRanking";
 
 import { useToast } from "contexts/Toast";
 
 import { getProjetosRanking } from "services/get/Projetos-Ranking";
-import { postNovaSonda } from "services/post/CadastroModaisInfograficos";
+import { postProject } from "services/post/ProjectRegister";
 
 import { useAuth } from "./useAuth";
 
@@ -23,7 +23,7 @@ export function useCadastroPriorizacao() {
 
   const reqGet = async () => {
     const priorizacao = await getProjetosRanking();
-    console.log("dados prior", priorizacao);
+    // console.log("dados prior", priorizacao);
 
     const beneficiosSorted = priorizacao.data.Benefício.sort((a: any, b: any) =>
       a.nom_opcao.localeCompare(b.nom_opcao)
@@ -59,41 +59,83 @@ export function useCadastroPriorizacao() {
 
   const initialValues: any = {
     id_projeto: 0,
-    id_ranking: 0,
-    opcao_id: 0,
+    beneficio: {
+      opcao_id: "",
+      id_ranking: 0,
+    },
+    regulatorio: {
+      opcao_id: "",
+      id_ranking: 0,
+    },
+    operacao: {
+      opcao_id: "",
+      id_ranking: 0,
+    },
+    prioridade: {
+      opcao_id: "",
+      id_ranking: 0,
+    },
+    complexidade: {
+      opcao_id: "",
+      id_ranking: 0,
+    },
+    estrategia: {
+      opcao_id: "",
+      id_ranking: 0,
+    },
     dsc_comentario: null,
     nom_usu_create: user?.nome,
   };
 
   const registerForm = useFormik({
     initialValues,
-    // validationSchema: cadastroNovaPriorizacaoSchema,
+    validationSchema: cadastroNovaPriorizacaoSchema,
     onSubmit: async (values) => {
-      console.log(values);
+      // console.log(values);
 
       const newValues: any = {
         id_projeto: values.id_projeto,
-        id_ranking: values.id_ranking,
-        opcao_id: values.opcao_id,
+        beneficio: {
+          opcao_id: values.opcao_id,
+          id_ranking: values.id_ranking,
+        },
+        regulatorio: {
+          opcao_id: values.opcao_id,
+          id_ranking: values.id_ranking,
+        },
+        operacao: {
+          opcao_id: values.opcao_id,
+          id_ranking: values.id_ranking,
+        },
+        prioridade: {
+          opcao_id: values.opcao_id,
+          id_ranking: values.id_ranking,
+        },
+        complexidade: {
+          opcao_id: values.opcao_id,
+          id_ranking: values.id_ranking,
+        },
+        estrategia: {
+          opcao_id: values.opcao_id,
+          id_ranking: values.id_ranking,
+        },
         dsc_comentario: null,
         nom_usu_create: user?.nome,
       };
 
-      console.log("beneeee", newValues.opcao_id);
-
       setLoading(true);
 
       try {
-        const { status } = await postNovaSonda(newValues);
+        const { status } = await postProject(newValues);
 
         if (status === 200 || status === 201) {
-          toast.success(`Sonda ${values.sonda} cadastrada com sucesso!`, {
+          toast.success(`Priorização cadastrada com sucesso!`, {
             id: "toast-principal",
           });
           setLoading(false);
         }
       } catch (error) {
-        toast.error(`Erro ao cadastrar sonda ${values.sonda}!`, {
+        toast.error(`Erro ao cadastrar a priorização!`, {
           id: "toast-principal",
         });
         setLoading(false);

@@ -34,7 +34,7 @@ function ModalDeletarProjeto(projeto: id) {
   const { registerForm, loading } = useCadastroPriorizacao();
 
   // Pra pegar o id do projeto e depois ser possível deletar
-  console.log(projeto.projeto);
+  // console.log(projeto.projeto);
 
   return (
     <>

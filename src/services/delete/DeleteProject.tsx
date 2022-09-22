@@ -2,7 +2,7 @@ import { ProjetosRanking } from "interfaces/Services";
 
 import { api } from "services/api";
 
-export async function putFornecedor(
+export async function deleteProject(
   id: number,
   payload: ProjetosRanking
 ): Promise<{ data: any; status: number }> {

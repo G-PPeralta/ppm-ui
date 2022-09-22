@@ -312,8 +312,30 @@ export interface ProjetosRanking {
 
 export interface ProjetosRankingPayload {
   id_projeto: number;
-  id_ranking: number;
-  opcao_id: number;
+  beneficio: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  regulatorio: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  operacao: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  prioridade: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  complexidade: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  estrategia: {
+    opcao_id: string;
+    id_ranking: number;
+  };
   dsc_comentario: string;
   nom_usu_create: string;
 }

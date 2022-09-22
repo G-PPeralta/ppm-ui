@@ -1,7 +1,10 @@
 export const handleCadastrar = async (form: any, onClose: Function) => {
   await form.submitForm();
-  await onClose();
-  await form.resetForm();
+
+  if (form.isValid) {
+    await form.resetForm();
+    onClose();
+  }
 };
 
 export const handleCancelar = (form: any, onClose: Function) => {

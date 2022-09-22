@@ -40,7 +40,7 @@ export function TabelaProjetos(props: TableProps) {
   const [to, setTo] = useState<number>(5);
   const brl = Intl.NumberFormat("pt-BR");
 
-  console.log("dados tabela-projeto", data);
+  // console.log("dados tabela-projeto", data);
 
   const total = data.reduce(
     (accumulator, object) => accumulator + +object.valorTotalPrevisto,

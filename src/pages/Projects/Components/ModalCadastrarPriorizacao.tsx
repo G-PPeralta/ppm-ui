@@ -46,15 +46,43 @@ function ModalCadastrarPriorizacao(projeto: id) {
     listaRegulatorio,
   } = useCadastroPriorizacao();
 
-  useEffect(() => {
-    registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
-    // registerForm.setFieldValue("id_ranking", Number(listaBeneficios.map((idRa)) => idRa.id));
-  }, []);
+  // console.log("registerform", registerForm.values);
+  // console.log("isvalid", registerForm.isValid);
 
-  console.log("lista", listaBeneficios);
+  // useEffect(() => {
+  //   registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
+  // }, []);
 
   // Pegar id do projeto
-  console.log("id-cadastrar", projeto.projeto);
+  // console.log("id-cadastrar", projeto.projeto);
+
+  useEffect(() => {
+    registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
+    registerForm.setFieldValue(
+      "beneficio.id_ranking",
+      Number(listaBeneficios[0]?.id)
+    );
+    registerForm.setFieldValue(
+      "regulatorio.id_ranking",
+      Number(listaRegulatorio[0]?.id)
+    );
+    registerForm.setFieldValue(
+      "operacap.id_ranking",
+      Number(listaOperacao[0]?.id)
+    );
+    registerForm.setFieldValue(
+      "prioridade.id_ranking",
+      Number(listaPrioridade[0]?.id)
+    );
+    registerForm.setFieldValue(
+      "complexidade.id_ranking",
+      Number(listaComplexidade[0]?.id)
+    );
+    registerForm.setFieldValue(
+      "estrategia.id_ranking",
+      Number(listaEstrategia[0]?.id)
+    );
+  }, [registerForm.values]);
 
   return (
     <>
@@ -103,7 +131,7 @@ function ModalCadastrarPriorizacao(projeto: id) {
                     >
                       <FormControl>
                         <FormLabel
-                          htmlFor="beneficio"
+                          htmlFor="beneficio.opcao_id"
                           fontSize={"12px"}
                           mb={"1px"}
                         >
@@ -112,10 +140,10 @@ function ModalCadastrarPriorizacao(projeto: id) {
                         <Select
                           isRequired
                           placeholder="Selecione"
-                          id="opcao_id"
-                          name="opcao_id"
-                          // value={registerForm.values.beneficio}
-                          // onChange={registerForm.handleChange}
+                          id="beneficio.opcao_id"
+                          name="beneficio.opcao_id"
+                          value={registerForm.values.beneficio.opcao_id}
+                          onChange={registerForm.handleChange}
                         >
                           {/* {registerForm.errors.beneficio &&
                             registerForm.touched.beneficio && (
@@ -124,7 +152,7 @@ function ModalCadastrarPriorizacao(projeto: id) {
                               </TextError>
                             )} */}
                           {listaBeneficios.map((bene: any, index: any) => (
-                            <option value={bene.opcao_id} key={index}>
+                            <option value={+bene.opcao_id} key={index}>
                               {bene.nom_opcao}
                             </option>
                           ))}
@@ -141,15 +169,19 @@ function ModalCadastrarPriorizacao(projeto: id) {
                       mt={"10px"}
                     >
                       <FormControl>
-                        <FormLabel fontSize={"12px"} mb={"1px"}>
+                        <FormLabel
+                          htmlFor="regulatorio.opcao_id"
+                          fontSize={"12px"}
+                          mb={"1px"}
+                        >
                           REGULATÓRIO
                         </FormLabel>
                         <Select
                           isRequired
                           placeholder="Selecione"
-                          id="regulatorio"
-                          name="regulatorio"
-                          value={registerForm.values.regulatorio}
+                          id="regulatorio.opcao_id"
+                          name="regulatorio.opcao_id"
+                          value={registerForm.values.regulatorio.opcao_id}
                           onChange={registerForm.handleChange}
                         >
                           {/* {registerForm.errors.nom_campanha &&
@@ -159,7 +191,9 @@ function ModalCadastrarPriorizacao(projeto: id) {
                             </TextError>
                           )} */}
                           {listaRegulatorio.map((reg: any, index: any) => (
-                            <option key={index}>{reg.nom_opcao}</option>
+                            <option value={Number(reg.opcao_id)} key={index}>
+                              {reg.nom_opcao}
+                            </option>
                           ))}
                         </Select>
                       </FormControl>
@@ -174,15 +208,19 @@ function ModalCadastrarPriorizacao(projeto: id) {
                       mb={"10px"}
                     >
                       <FormControl>
-                        <FormLabel fontSize={"12px"} mb={"1px"}>
+                        <FormLabel
+                          htmlFor="operacao.opcao_id"
+                          fontSize={"12px"}
+                          mb={"1px"}
+                        >
                           OPERAÇÃO
                         </FormLabel>
                         <Select
                           isRequired
                           placeholder="Selecione"
-                          id="op_priori"
-                          name="op_priori"
-                          value={registerForm.values.operacao}
+                          id="operacao.opcao_id"
+                          name="operacao.opcao_id"
+                          value={registerForm.values.operacao.opcao_id}
                           onChange={registerForm.handleChange}
                         >
                           {/* {registerForm.errors.op_priori &&
@@ -192,7 +230,9 @@ function ModalCadastrarPriorizacao(projeto: id) {
                               </TextError>
                             )} */}
                           {listaOperacao.map((op: any, index: any) => (
-                            <option key={index}>{op.nom_opcao}</option>
+                            <option value={Number(op.opcao_id)} key={index}>
+                              {op.nom_opcao}
+                            </option>
                           ))}
                         </Select>
                       </FormControl>
@@ -206,15 +246,19 @@ function ModalCadastrarPriorizacao(projeto: id) {
                       mb={"10px"}
                     >
                       <FormControl>
-                        <FormLabel fontSize={"12px"} mb={"1px"}>
+                        <FormLabel
+                          htmlFor="prioridade.opcao_id"
+                          fontSize={"12px"}
+                          mb={"1px"}
+                        >
                           PRIORIDADE
                         </FormLabel>
                         <Select
                           isRequired
                           placeholder="Selecione"
-                          id="prioridade_priori"
-                          name="prioridade_priori"
-                          value={registerForm.values.prioridade}
+                          id="prioridade.opcao_id"
+                          name="prioridade.opcao_id"
+                          value={registerForm.values.prioridade.opcao_id}
                           onChange={registerForm.handleChange}
                         >
                           {/* {registerForm.errors.prioridade_priori &&
@@ -224,7 +268,9 @@ function ModalCadastrarPriorizacao(projeto: id) {
                             </TextError>
                           )} */}
                           {listaPrioridade.map((prior: any, index: any) => (
-                            <option key={index}>{prior.nom_opcao}</option>
+                            <option value={Number(prior.opcao_id)} key={index}>
+                              {prior.nom_opcao}
+                            </option>
                           ))}
                         </Select>
                       </FormControl>
@@ -238,15 +284,19 @@ function ModalCadastrarPriorizacao(projeto: id) {
                       mb={"10px"}
                     >
                       <FormControl>
-                        <FormLabel fontSize={"12px"} mb={"1px"}>
+                        <FormLabel
+                          htmlFor="complexidade.opcao_id"
+                          fontSize={"12px"}
+                          mb={"1px"}
+                        >
                           COMPLEXIDADE
                         </FormLabel>
                         <Select
                           isRequired
                           placeholder="Selecione"
-                          id="complex_priori"
-                          name="complex_priori"
-                          value={registerForm.values.complexidade}
+                          id="complexidade.opcao_id"
+                          name="complexidade.opcao_id"
+                          value={registerForm.values.complexidade.opcao_id}
                           onChange={registerForm.handleChange}
                         >
                           {/* {registerForm.errors.complex_priori &&
@@ -255,8 +305,10 @@ function ModalCadastrarPriorizacao(projeto: id) {
                               {registerForm.errors.complex_priori}
                             </TextError>
                           )} */}
-                          {listaComplexidade.map((prior: any, index: any) => (
-                            <option key={index}>{prior.nom_opcao}</option>
+                          {listaComplexidade.map((compl: any, index: any) => (
+                            <option value={Number(compl.opcao_id)} key={index}>
+                              {compl.nom_opcao}
+                            </option>
                           ))}
                         </Select>
                       </FormControl>
@@ -270,25 +322,31 @@ function ModalCadastrarPriorizacao(projeto: id) {
                       mb={"10px"}
                     >
                       <FormControl>
-                        <FormLabel fontSize={"12px"} mb={"1px"}>
+                        <FormLabel
+                          htmlFor="estrategia.opcao_id"
+                          fontSize={"12px"}
+                          mb={"1px"}
+                        >
                           ESTRATÉGIA PARA NEGÓCIO
                         </FormLabel>
                         <Select
                           isRequired
                           placeholder="Selecione"
-                          id="est_neg_priori"
-                          name="est_neg_priori"
-                          value={registerForm.values.estrategia}
+                          id="estrategia.opcao_id"
+                          name="estrategia.opcao_id"
+                          value={registerForm.values.estrategia.opcao_id}
                           onChange={registerForm.handleChange}
                         >
                           {/* {registerForm.errors.est_neg_priori &&
-                          registerForm.touched.est_neg_priori && (
+                          (
                             <TextError>
                               {registerForm.errors.nom_campanha}
                             </TextError>
                           )} */}
-                          {listaEstrategia.map((prior: any, index: any) => (
-                            <option key={index}>{prior.nom_opcao}</option>
+                          {listaEstrategia.map((est: any, index: any) => (
+                            <option value={Number(est.opcao_id)} key={index}>
+                              {est.nom_opcao}
+                            </option>
                           ))}
                         </Select>
                       </FormControl>
