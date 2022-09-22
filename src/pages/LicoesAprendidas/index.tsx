@@ -59,8 +59,8 @@ export function LicoesAprendidasProjetos() {
 
   const tableData = filteredLicoesAprendidas
     .sort((a, b) => a.id - b.id)
-    .map((lessons) => (
-      <Tr key={lessons.id_projeto}>
+    .map((lessons, index) => (
+      <Tr key={index}>
         <Td isNumeric>{lessons.id}</Td>
         <Td>{lessons.txt_licao_aprendida}</Td>
         <Td>{lessons.txt_acao}</Td>
@@ -86,6 +86,9 @@ export function LicoesAprendidasProjetos() {
     ));
 
   const filterByProject = () => {
+    if (projetoId == "0") {
+      return setFilteredLicoesAprendidas(licoesAprendidas);
+    }
     const filtered = licoesAprendidas.filter(
       (b) => b.id_projeto.toString() === projetoId
     );
@@ -126,10 +129,10 @@ export function LicoesAprendidasProjetos() {
                     onChange={(e) => setProjetoId(e.target.value)}
                     width={300}
                   >
-                    <option value="0">Todos</option>
+                    <option value={0}>Todos</option>
                     {projetos &&
-                      projetos.map((project) => (
-                        <option value={project.id} key={project.id}>
+                      projetos.map((project, index) => (
+                        <option value={project.id} key={index}>
                           {project.nomeProjeto}
                         </option>
                       ))}
