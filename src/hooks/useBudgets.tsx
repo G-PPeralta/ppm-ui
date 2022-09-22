@@ -39,8 +39,10 @@ export function useBudgets() {
       (b) => b.projeto.id.toString() === projectSelected
     );
 
-    if (filtered) {
+    if (projectSelected) {
       setBudgetsFilter([...filtered]);
+    } else {
+      setBudgetsFilter([...budgets]);
     }
 
     setLoading(false);
