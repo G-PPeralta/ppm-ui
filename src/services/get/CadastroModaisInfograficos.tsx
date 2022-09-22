@@ -35,3 +35,12 @@ export async function getResponsaveis(): Promise<{
 
   return { data, status };
 }
+
+export async function getArea(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/areas", token());
+
+  return { data, status };
+}
