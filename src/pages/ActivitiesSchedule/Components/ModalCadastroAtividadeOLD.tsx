@@ -25,7 +25,7 @@ import { Ring } from "@uiball/loaders";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroAtividade } from "hooks/useCadastroAtividadeOLD";
+import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 function ModalCadastroAtividade() {
   const { isOpen, onOpen, onClose } = useDisclosure();

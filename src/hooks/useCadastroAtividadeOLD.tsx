@@ -1,105 +1,83 @@
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
-import {
-  Responsavel,
-  AreaAtuacao,
-} from "interfaces/CadastrosModaisInfograficos";
-import { cadastroAtividadeSchema } from "validations/ModaisCadastrosInfografico";
+import { NovaAtividade } from "interfaces/CadastrosModaisInfograficos";
+import { cadastroNovaAtividadeSchema } from "validations/ModaisCadastrosInfografico";
 
 import { useToast } from "contexts/Toast";
 
 import { getArea } from "services/get/CadastroModaisInfograficos";
-import {
-  getAreaAtuacaoList,
-  getResponsavelList,
-} from "services/get/Infograficos";
-import { postCadastroAtividade } from "services/post/CadastroModaisInfograficos";
+import { postNovaAtividade } from "services/post/CadastroModaisInfograficos";
 
 import { useAuth } from "./useAuth";
 
 export function useCadastroAtividade() {
-  const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-
-  const [listaArea, setListaArea] = useState<any[]>([]);
-  const [listaAreaAtuacao, setListaAreaAtuacao] = useState<AreaAtuacao[]>([]);
-  const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
-  // const [listaAtividades, setListaAtividades] = useState<AtividadeLista[]>([]);
-  // const [listaTarefa, setListaTarefa] = useState<Tarefa[]>([]);
+  const { user } = useAuth();
+  const [listaAreas, setListaAreas] = useState<any>([]);
 
   const reqGet = async () => {
     const areas = await getArea();
-    const areaAtuacao = await getAreaAtuacaoList();
-    const responsaveis = await getResponsavelList();
 
     const arrayAreas = areas.data.map(({ id, nom_area }: any) => ({
       id,
       nom_area,
     }));
+
     const areasSorted = arrayAreas.sort((a: any, b: any) =>
       a.nom_area.localeCompare(b.nom_area)
     );
 
-    const areasAtuacaoSorted = areaAtuacao.data.sort((a: any, b: any) =>
-      a.tipo.localeCompare(b.tipo)
-    );
-
-    const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
-      a.nome.localeCompare(b.nome)
-    );
-
-    setListaArea(areasSorted);
-    setListaAreaAtuacao(areasAtuacaoSorted);
-    setListaResponsaveis(responsaveisSorted);
+    setListaAreas(areasSorted);
   };
 
-  const initialValues = {
+  const initialValues: NovaAtividade = {
+    id_pai: 0, // enviar o id da poco (pai)
+    nom_atividade: "", // enviar nome da atividade
+    pct_real: 0, // porcentagem realizada
+    dat_ini_plan: "", // data inicio planejada
+    dat_fim_plan: "", // data fim planejada
+    dsc_comentario: "", // comentario
+    id_campanha: 0, // enviar id da campanha
     nom_usu_create: user?.nome,
-    id_origem: 0,
-    nom_atividade: "",
-    responsavelId: 0,
-    area_atuacao: "",
-    nao_iniciar_antes_de: {
-      data: "",
-      checked: false,
-    },
-    nao_terminar_depois_de: {
-      data: "",
-      checked: false,
-    },
-    o_mais_breve_possivel: false,
+    id_area: 0, // enviar id da area de atuação
+    nom_recurso: "", // enviar nome do recurso
   };
 
   const registerForm = useFormik({
     initialValues,
-    validationSchema: cadastroAtividadeSchema,
+    validationSchema: cadastroNovaAtividadeSchema,
     onSubmit: async (values) => {
-      const newValues = {
-        nom_usu_create: user?.nome,
-        id_origem: values.id_origem,
+      const newValues: NovaAtividade = {
         nom_atividade: values.nom_atividade,
-        responsavelId: values.responsavelId,
-        area_atuacao: values.area_atuacao,
-        nao_iniciar_antes_de: values.nao_iniciar_antes_de,
-        nao_terminar_depois_de: values.nao_terminar_depois_de,
-        o_mais_breve_possivel: values.o_mais_breve_possivel,
+        pct_real: values.pct_real,
+        dat_ini_plan: values.dat_ini_plan,
+        dat_fim_plan: values.dat_fim_plan,
+        dsc_comentario: values.dsc_comentario,
+        id_campanha: values.id_campanha,
+        id_pai: values.id_pai,
+        id_area: values.id_area,
+        nom_recurso: values.nom_recurso,
+        nom_usu_create: user?.nome,
       };
 
       setLoading(true);
 
       try {
-        const { status } = await postCadastroAtividade(newValues);
+        const { status } = await postNovaAtividade(newValues);
 
         if (status === 200 || status === 201) {
-          toast.success("Atividade cadastrada com sucesso!", {
-            id: "toast-principal",
-          });
+          toast.success(
+            `Atividade ${values.nom_atividade} cadastrada com sucesso!`,
+            {
+              id: "toast-principal",
+            }
+          );
           setLoading(false);
         }
       } catch (error) {
-        toast.error("Erro ao cadastrar atividade!", {
+        toast.error(`Erro ao cadastrar atividade ${values.nom_atividade}!`, {
           id: "toast-principal",
         });
         setLoading(false);
@@ -108,14 +86,19 @@ export function useCadastroAtividade() {
   });
 
   useEffect(() => {
+    setLoading(true);
     reqGet();
   }, []);
+
+  useEffect(() => {
+    if (listaAreas.length > 0) {
+      setLoading(false);
+    }
+  }, [listaAreas]);
 
   return {
     registerForm,
     loading,
-    listaArea,
-    listaAreaAtuacao,
-    listaResponsaveis,
+    listaAreas,
   };
 }

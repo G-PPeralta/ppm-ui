@@ -26,7 +26,7 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
 
-import { useCadastroAtividade } from "hooks/useCadastroAtividadeOLD";
+import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 import Restricoes from "./Restricoes";
 import SelectFiltragemArea from "./SelectFiltragemArea";

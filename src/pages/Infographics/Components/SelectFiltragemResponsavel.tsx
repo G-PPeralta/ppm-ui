@@ -6,7 +6,7 @@ import { Responsavel } from "interfaces/CadastrosModaisInfograficos";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
-import { useCadastroAtividade } from "hooks/useCadastroAtividadeOLD";
+import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 function SelectFiltragemResponsavel({ registerForm }: any) {
   const { listaResponsaveis } = useCadastroAtividade();

@@ -31,7 +31,7 @@ import {
 } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
 
-import { useCadastroAtividade } from "hooks/useCadastroAtividade";
+import { useCadastroAtividade } from "hooks/useCadastroAtividadeOLD";
 
 import InputPorcentagem from "./InputPorcentagem";
 import SelectFiltragemAreas from "./SelectFiltragemAreas";
