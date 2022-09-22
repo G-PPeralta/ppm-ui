@@ -61,15 +61,47 @@ export function LicoesAprendidasProjetos() {
     .sort((a, b) => a.id - b.id)
     .map((lessons, index) => (
       <Tr key={index}>
-        <Td isNumeric>{lessons.id}</Td>
-        <Td>{lessons.txt_licao_aprendida}</Td>
-        <Td>{lessons.txt_acao}</Td>
-        <Td>
+        <Td
+          isNumeric
+          style={{
+            borderBottom: "0.5px solid #A7A7A7",
+            borderRight: "0.5px solid #A7A7A7",
+          }}
+        >
+          {lessons.id}
+        </Td>
+        <Td
+          style={{
+            borderBottom: "0.5px solid #A7A7A7",
+            borderRight: "0.5px solid #A7A7A7",
+          }}
+        >
+          {lessons.txt_licao_aprendida}
+        </Td>
+        <Td
+          style={{
+            borderBottom: "0.5px solid #A7A7A7",
+            borderRight: "0.5px solid #A7A7A7",
+          }}
+        >
+          {lessons.txt_acao}
+        </Td>
+        <Td
+          style={{
+            borderBottom: "0.5px solid #A7A7A7",
+            borderRight: "0.5px solid #A7A7A7",
+          }}
+        >
           {new Date(lessons.dat_usu_create)
             .toLocaleString("pt-BR")
             .substring(0, 10)}
         </Td>
-        <Td>
+        <Td
+          style={{
+            borderBottom: "0.5px solid #A7A7A7",
+            borderRight: "0.5px solid #A7A7A7",
+          }}
+        >
           <IconButton
             aria-label="Plus sign"
             icon={<AiFillEdit />}
@@ -173,7 +205,10 @@ export function LicoesAprendidasProjetos() {
               </Stack>
 
               <TableContainer mt={4} mb={3} ml={1}>
-                <Table variant="unstyled">
+                <Table
+                  variant="unstyled"
+                  style={{ border: "0.5px solid #A7A7A7" }}
+                >
                   <Thead>
                     <Tr background="origem.500" color="white">
                       <Th>ID</Th>
@@ -186,11 +221,42 @@ export function LicoesAprendidasProjetos() {
                   <Tbody>{tableData}</Tbody>
                   <Tfoot>
                     <Tr background="origem.200" color="white">
-                      <Th>Total</Th>
-                      <Th></Th>
-                      <Th></Th>
-                      <Th></Th>
-                      <Th></Th>
+                      <Th
+                        style={{
+                          borderBottom: "0.5px solid #A7A7A7",
+                          borderRight: "0.5px solid #A7A7A7",
+                        }}
+                      >
+                        Total
+                      </Th>
+                      <Th
+                        style={{
+                          borderBottom: "0.5px solid #A7A7A7",
+                          borderRight: "0.5px solid #A7A7A7",
+                        }}
+                      >
+                        {tableData.length} Lições
+                      </Th>
+                      <Th
+                        style={{
+                          borderBottom: "0.5px solid #A7A7A7",
+                          borderRight: "0.5px solid #A7A7A7",
+                        }}
+                      >
+                        {tableData.length} Lições
+                      </Th>
+                      <Th
+                        style={{
+                          borderBottom: "0.5px solid #A7A7A7",
+                          borderRight: "0.5px solid #A7A7A7",
+                        }}
+                      ></Th>
+                      <Th
+                        style={{
+                          borderBottom: "0.5px solid #A7A7A7",
+                          borderRight: "0.5px solid #A7A7A7",
+                        }}
+                      ></Th>
                     </Tr>
                   </Tfoot>
                 </Table>
