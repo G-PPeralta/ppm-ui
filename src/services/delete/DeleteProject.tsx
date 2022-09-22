@@ -6,7 +6,7 @@ export async function putFornecedor(
   id: number,
   payload: ProjetosRanking
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.delete(`/projetos-ranking/${id}`, payload);
+  const { data, status } = await api.delete(`/projetos-ranking/${id}`);
 
   return { data, status };
 }

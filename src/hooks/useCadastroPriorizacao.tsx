@@ -60,7 +60,7 @@ export function useCadastroPriorizacao() {
   const initialValues: any = {
     id_projeto: 0,
     id_ranking: 0,
-    id_opcao: 0,
+    opcao_id: 0,
     dsc_comentario: null,
     nom_usu_create: user?.nome,
   };
@@ -74,13 +74,12 @@ export function useCadastroPriorizacao() {
       const newValues: any = {
         id_projeto: values.id_projeto,
         id_ranking: values.id_ranking,
-        id_opcao: values.id_opcao,
+        opcao_id: values.opcao_id,
         dsc_comentario: null,
         nom_usu_create: user?.nome,
       };
 
-      console.log("bene", newValues.id_projeto);
-      console.log("regulatorio", newValues.regulatorio);
+      console.log("beneeee", newValues.opcao_id);
 
       setLoading(true);
 

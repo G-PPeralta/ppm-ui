@@ -44,7 +44,7 @@ function ModalDeletarProjeto(projeto: id) {
         backgroundColor={"white"}
         aria-label="Plus sign"
       >
-        <FaTrash />
+        <FaTrash size={"13px"} />
       </IconButton>
       <Modal isOpen={isOpen} onClose={onClose} size="sm">
         <ModalOverlay />

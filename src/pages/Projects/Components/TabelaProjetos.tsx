@@ -38,10 +38,7 @@ export function TabelaProjetos(props: TableProps) {
   // const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
-  const brl = Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
+  const brl = Intl.NumberFormat("pt-BR");
 
   console.log("dados tabela-projeto", data);
 
@@ -131,6 +128,7 @@ export function TabelaProjetos(props: TableProps) {
           <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
           <Tfoot>
             <Tr background="origem.200" color="white">
+              <Th></Th>
               <Th>Total</Th>
               <Th>{brl.format(total)}</Th>
               <Th></Th>

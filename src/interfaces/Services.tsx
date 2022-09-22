@@ -313,7 +313,7 @@ export interface ProjetosRanking {
 export interface ProjetosRankingPayload {
   id_projeto: number;
   id_ranking: number;
-  id_opcao: number;
+  opcao_id: number;
   dsc_comentario: string;
   nom_usu_create: string;
 }

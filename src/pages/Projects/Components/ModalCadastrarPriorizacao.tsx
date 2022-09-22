@@ -48,7 +48,10 @@ function ModalCadastrarPriorizacao(projeto: id) {
 
   useEffect(() => {
     registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
+    // registerForm.setFieldValue("id_ranking", Number(listaBeneficios.map((idRa)) => idRa.id));
   }, []);
+
+  console.log("lista", listaBeneficios);
 
   // Pegar id do projeto
   console.log("id-cadastrar", projeto.projeto);
@@ -109,10 +112,10 @@ function ModalCadastrarPriorizacao(projeto: id) {
                         <Select
                           isRequired
                           placeholder="Selecione"
-                          id="beneficio"
-                          name="beneficio"
-                          value={registerForm.values.beneficio}
-                          onChange={registerForm.handleChange}
+                          id="opcao_id"
+                          name="opcao_id"
+                          // value={registerForm.values.beneficio}
+                          // onChange={registerForm.handleChange}
                         >
                           {/* {registerForm.errors.beneficio &&
                             registerForm.touched.beneficio && (
@@ -121,7 +124,9 @@ function ModalCadastrarPriorizacao(projeto: id) {
                               </TextError>
                             )} */}
                           {listaBeneficios.map((bene: any, index: any) => (
-                            <option key={index}>{bene.nom_opcao}</option>
+                            <option value={bene.opcao_id} key={index}>
+                              {bene.nom_opcao}
+                            </option>
                           ))}
                         </Select>
                       </FormControl>
