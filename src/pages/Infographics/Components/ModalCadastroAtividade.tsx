@@ -15,11 +15,8 @@ import {
   Stack,
   useBreakpointValue,
   Input,
-  // Textarea,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-
-// import { TextError } from "components/TextError";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
@@ -151,73 +148,6 @@ function ModalCadastroAtividade() {
                       <FormLabel mt={2}>RESTRIÇÕES</FormLabel>
                       <Restricoes registerForm={registerForm} />
                     </Flex>
-                    {/* <Flex direction={"column"} grow={1}>
-                        <Flex gap={1}>
-                          <RequiredField />
-                          <FormLabel htmlFor="dat_fim_plan">DATA FIM</FormLabel>
-                        </Flex>
-                        <DatePicker
-                          selected={endDate}
-                          onChange={(date) => handleEndDate(date)}
-                          dateFormat="dd/MM/yyyy, hh:mm"
-                          showTimeSelect
-                          customInput={<ExampleCustomInput />}
-                          isClearable={endDate !== ""}
-                          locale="pt-BR"
-                        />
-                      </Flex> */}
-                    {/* <FormControl>
-                        <InputPorcentagem registerForm={registerForm} />
-                      </FormControl> */}
-
-                    {/* <Flex justify={"space-between"} gap={5}>
-                      <Flex direction={"column"} grow={1}>
-                        <SelectFiltragemAreas registerForm={registerForm} />
-                      </Flex>
-                      <Flex direction={"column"} grow={1}>
-                        <FormLabel htmlFor="nom_recurso">RECURSO</FormLabel>
-                        <Input
-                          isRequired
-                          placeholder="Digite o nome do recurso"
-                          id="nom_recurso"
-                          type="text"
-                          name="nom_recurso"
-                          w={useBreakpointValue({ base: "100%", md: "100%" })}
-                          value={regexCaracteresEspeciais(
-                            registerForm.values.nom_recurso
-                          )}
-                          onChange={registerForm.handleChange}
-                        />
-                      </Flex>
-                    </Flex> */}
-
-                    {/* <Flex
-                      flexDirection={useBreakpointValue({
-                        base: "column",
-                        md: "row",
-                      })}
-                      gap={5}
-                    ></Flex> */}
-                    {/* <Flex
-                      flexDirection={useBreakpointValue({
-                        base: "column",
-                        md: "row",
-                      })}
-                      gap={5}
-                    >
-                      <FormControl>
-                        <FormLabel htmlFor="dsc_comentario">
-                          OBSERVAÇÕES
-                        </FormLabel>
-                        <Textarea
-                          placeholder="Adicione comentários sobre a atividade"
-                          id="dsc_comentario"
-                          name="dsc_comentario"
-                          value={registerForm.values.dsc_comentario}
-                          onChange={registerForm.handleChange}
-                        />
-                      </FormControl>
-                    </Flex> */}
                   </Stack>
                 </Flex>
               </FormControl>

@@ -64,8 +64,6 @@ function Restricoes({ registerForm }: any) {
     }
   );
 
-  console.log("registerForm", registerForm.values);
-
   return (
     <Flex direction={"column"} gap={3}>
       <Flex gap={5}>
