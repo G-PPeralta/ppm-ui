@@ -49,6 +49,10 @@ function ModalDeletarProjeto(projeto: id) {
         color={"#F94144"}
         backgroundColor={"white"}
         aria-label="Plus sign"
+        _hover={{
+          backgroundColor: "#F94144",
+          color: "white",
+        }}
       >
         <FaTrash size={"13px"} />
       </IconButton>
@@ -83,7 +87,7 @@ function ModalDeletarProjeto(projeto: id) {
                       </Text>
                     </Flex>
                     <Flex>
-                      <Text fontSize={"14px"} mb={"1px"} color={" #010101"}>
+                      <Text fontSize={"16px"} mb={"1px"} color={" #010101"}>
                         Tem certeza que deseja mover este Projeto para a
                         Lixeira?
                       </Text>

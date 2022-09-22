@@ -2,10 +2,12 @@ import * as yup from "yup";
 
 export const cadastroNovaPriorizacaoSchema = yup.object({
   id_projeto: yup.number(),
-  beneficio: yup.object({
-    opcao_id: yup.string().required(),
-    id_ranking: yup.number().required(),
-  }),
+  beneficio: yup
+    .object({
+      opcao_id: yup.string().required(),
+      id_ranking: yup.number().required(),
+    })
+    .required("Selecione uma opção"),
   regulatorio: yup.object({
     opcao_id: yup.string().required(),
     id_ranking: yup.number().required(),

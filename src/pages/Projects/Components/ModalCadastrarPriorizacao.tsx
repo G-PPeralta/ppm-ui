@@ -148,7 +148,7 @@ function ModalCadastrarPriorizacao(projeto: id) {
                         >
                           {/* {registerForm.errors.beneficio && (
                             <TextError>
-                              {registerForm.errors.beneficio.opcao_id}
+                              {registerForm.errors.beneficio}
                             </TextError>
                           )} */}
                           {listaBeneficios.map((bene: any, index: any) => (
