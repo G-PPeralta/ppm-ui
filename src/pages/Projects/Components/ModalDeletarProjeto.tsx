@@ -24,7 +24,11 @@ import { Ring } from "@uiball/loaders";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
+// import { useAuth } from "hooks/useAuth";
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
+
+// import { deleteProject } from "services/delete/DeleteProject";
+
 type id = {
   projeto: number;
 };
@@ -32,6 +36,8 @@ type id = {
 function ModalDeletarProjeto(projeto: id) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroPriorizacao();
+  // const { user } = useAuth();
+  // const idUser = user?.nome;
 
   // Pra pegar o id do projeto e depois ser possível deletar
   // console.log(projeto.projeto);
@@ -102,7 +108,6 @@ function ModalDeletarProjeto(projeto: id) {
                   Cancelar
                 </Button>
                 <Button
-                  disabled={!registerForm.isValid}
                   background="origem.300"
                   variant="primary"
                   color="white"

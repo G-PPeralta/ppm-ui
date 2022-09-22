@@ -146,12 +146,11 @@ function ModalCadastrarPriorizacao(projeto: id) {
                           value={registerForm.values.beneficio.opcao_id}
                           onChange={registerForm.handleChange}
                         >
-                          {/* {registerForm.errors.beneficio &&
-                            registerForm.touched.beneficio && (
-                              <TextError>
-                                {registerForm.errors.beneficio}
-                              </TextError>
-                            )} */}
+                          {/* {registerForm.errors.beneficio && (
+                            <TextError>
+                              {registerForm.errors.beneficio.opcao_id}
+                            </TextError>
+                          )} */}
                           {listaBeneficios.map((bene: any, index: any) => (
                             <option value={+bene.opcao_id} key={index}>
                               {bene.nom_opcao}

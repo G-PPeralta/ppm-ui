@@ -1,5 +1,3 @@
-// import { ProjetosRankingPayload } from "interfaces/Services";
-
 import { api } from "services/api";
 
 export async function postProject(payload: any): Promise<{ status: number }> {

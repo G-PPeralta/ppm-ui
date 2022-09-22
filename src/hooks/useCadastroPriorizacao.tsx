@@ -83,7 +83,7 @@ export function useCadastroPriorizacao() {
       opcao_id: "",
       id_ranking: 0,
     },
-    dsc_comentario: null,
+    dsc_comentario: "",
     nom_usu_create: user?.nome,
   };
 
@@ -99,7 +99,7 @@ export function useCadastroPriorizacao() {
         prioridade: values.prioridade,
         complexidade: values.complexidade,
         estrategia: values.estrategia,
-        dsc_comentario: null,
+        dsc_comentario: "",
         nom_usu_create: user?.nome,
       };
 
@@ -118,6 +118,7 @@ export function useCadastroPriorizacao() {
         toast.error(`Erro ao cadastrar a priorização!`, {
           id: "toast-principal",
         });
+
         setLoading(false);
       }
     },

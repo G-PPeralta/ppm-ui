@@ -1,12 +1,16 @@
-import { ProjetosRanking } from "interfaces/Services";
+// import { ProjetosRankingPayload } from "interfaces/Services";
 
 import { api } from "services/api";
 
 export async function deleteProject(
-  id: number,
-  payload: ProjetosRanking
+  id_projeto: number,
+  id_usu_create: number,
+  payload: any
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.delete(`/projetos-ranking/${id}`);
+  const { data, status } = await api.delete(
+    `/projetos-ranking/${id_projeto}/${id_usu_create}`,
+    payload
+  );
 
   return { data, status };
 }
