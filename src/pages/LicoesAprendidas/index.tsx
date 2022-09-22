@@ -22,16 +22,20 @@ import {
   FormControl,
   FormLabel,
   Select,
+  useDisclosure,
 } from "@chakra-ui/react";
 
 import Sidebar from "components/SideBar";
 
 import { getAllLicoesAprendidas } from "services/get/LicoesAprendidas";
 import { getProjetos } from "services/get/Projetos";
+import { patchLicaoAprendida } from "services/update/LicoesAprendidas";
 
 import { LicoesAprendidas, ProjetosList } from "../../interfaces/Services";
+import EditModal from "./EditModal";
 
 export function LicoesAprendidasProjetos() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [licoesAprendidas, setLicoesAprendidas] = useState(
     [] as LicoesAprendidas[]
   );
@@ -40,6 +44,8 @@ export function LicoesAprendidasProjetos() {
   );
   const [projetos, setProjetos] = useState([] as ProjetosList[]);
   const [projetoId, setProjetoId] = useState("");
+
+  const [editLicao, setEditLicao] = useState({} as LicoesAprendidas);
 
   async function handleGetLicoesAprendidas() {
     const payload = await getAllLicoesAprendidas();
@@ -56,6 +62,26 @@ export function LicoesAprendidasProjetos() {
     handleGetLicoesAprendidas();
     handleGetProjetos();
   }, []);
+
+  async function handleUpdateLicoes(
+    licao: any,
+    campo: any,
+    payload: any,
+    user: any
+  ) {
+    try {
+      await patchLicaoAprendida(licao, campo, payload, user);
+      setLicoesAprendidas(
+        licoesAprendidas.map((lic) =>
+          lic.id == editLicao.id ? editLicao : lic
+        )
+      );
+      await handleGetLicoesAprendidas();
+      onClose();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const tableData = filteredLicoesAprendidas
     .sort((a, b) => a.id - b.id)
@@ -110,8 +136,11 @@ export function LicoesAprendidasProjetos() {
             color="#2D2926"
             mr={2}
             isRound={true}
-            size="sm"
-            // onClick={() => onEdit(lessons)}
+            size="md"
+            onClick={() => {
+              setEditLicao(lessons);
+              onOpen();
+            }}
           />
         </Td>
       </Tr>
@@ -166,6 +195,7 @@ export function LicoesAprendidasProjetos() {
                       name="projeto"
                       onChange={(e) => setProjetoId(e.target.value)}
                       width={300}
+                      // value={projetoId}
                     >
                       <option value={0}>Todos</option>
                       {projetos &&
@@ -280,6 +310,15 @@ export function LicoesAprendidasProjetos() {
             </Box>{" "}
           </Flex>
         </Stack>
+
+        {isOpen && (
+          <EditModal
+            closeModal={onClose}
+            licao={editLicao}
+            isOpen={isOpen}
+            handleUpdateLicoes={handleUpdateLicoes}
+          />
+        )}
       </Flex>
     </Sidebar>
   );
