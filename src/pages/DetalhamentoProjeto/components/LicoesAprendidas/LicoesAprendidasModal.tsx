@@ -74,19 +74,17 @@ function LicoesAprendidasModal({
 
   function handleFilter(categoriaId: string, data: string) {
     let filtered = licoes;
-    console.log("PRIMEIRO CONSOLE", filtered);
     if (categoriaId) {
       filtered = licoes.filter((lic: any) => lic.id_categoria == categoriaId);
-      console.log("SEGUNDO CONSOLE", filtered, categoriaId);
+
       return setFilteredTable(filtered);
     }
     if (data) {
       filtered = licoes.filter((lic: any) => lic.dat_usu_create.includes(data));
-      console.log("TERCEIRO CONSOLE", filtered);
+
       return setFilteredTable(filtered);
     }
     setFilteredTable(licoes);
-    console.log("ÚLTIMO", filtered, licoes);
   }
 
   return (
