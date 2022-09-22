@@ -28,15 +28,13 @@ import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividadeOLD";
 
-import DateTimePicker from "./DateTimePicker";
+import Restricoes from "./Restricoes";
 import SelectFiltragemArea from "./SelectFiltragemArea";
 import SelectFiltragemResponsavel from "./SelectFiltragemResponsavel";
 
 function ModalCadastroAtividade() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroAtividade();
-
-  console.log("registerForm", registerForm.values);
 
   return (
     <>
@@ -55,7 +53,7 @@ function ModalCadastroAtividade() {
       >
         Atividade
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -146,15 +144,12 @@ function ModalCadastroAtividade() {
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: "column",
-                        md: "row",
+                        md: "column",
                       })}
-                      gap={5}
+                      gap={2}
                     >
-                      <Flex flex={1} gap={5}>
-                        <DateTimePicker registerForm={registerForm} />
-
-                        <DateTimePicker registerForm={registerForm} />
-                      </Flex>
+                      <FormLabel mt={2}>RESTRIÇÕES</FormLabel>
+                      <Restricoes registerForm={registerForm} />
                     </Flex>
                     {/* <Flex direction={"column"} grow={1}>
                         <Flex gap={1}>

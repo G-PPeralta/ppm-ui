@@ -4,7 +4,7 @@ import { Flex, FormControl, FormLabel } from "@chakra-ui/react";
 import { AreaAtuacao } from "interfaces/CadastrosModaisInfograficos";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
-import { TextError } from "components/TextError";
+// import { TextError } from "components/TextError";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividadeOLD";
 
@@ -34,9 +34,10 @@ function SelectFiltragemArea({ registerForm }: any) {
           options={options}
           isSearchable
         />
-        {registerForm.errors.area_atuacao && (
-          <TextError>{registerForm.errors.area_atuacao}</TextError>
-        )}
+        {/* {registerForm.errors.area_atuacao &&
+          registerForm.touched.area_atuacao && (
+            <TextError>{registerForm.errors.area_atuacao}</TextError>
+          )} */}
       </FormControl>
     </>
   );
