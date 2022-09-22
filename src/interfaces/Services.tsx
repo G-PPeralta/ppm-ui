@@ -28,6 +28,14 @@ export interface RegisterProps {
   telefone: string;
 }
 
+export interface ResetPasswordProps {
+  email: string;
+}
+
+export interface ResponseResetPassword {
+  message: string;
+}
+
 export interface ResponseRoles {
   id: number;
   role: string;
