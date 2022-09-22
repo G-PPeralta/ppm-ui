@@ -23,7 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { Project } from "models/Project.model";
 
-import ModalCadastrarPriorizacao from "./ModalCadastrarPriorizaçao";
+import ModalCadastrarPriorizacao from "./ModalCadastrarPriorizacao";
 import ModalDeletarProjeto from "./ModalDeletarProjeto";
 
 import "../projects.css";
@@ -42,12 +42,8 @@ export function TabelaProjetos(props: TableProps) {
     style: "currency",
     currency: "BRL",
   });
-  // const { isOpen, onOpen, onClose } = useDisclosure();
 
-  // function handlehanking(fornecedor: Fornecedor) {
-  //   setEditFornecedor(fornecedor);
-  //   onOpen();
-  // }
+  console.log("dados tabela-projeto", data);
 
   const total = data.reduce(
     (accumulator, object) => accumulator + +object.valorTotalPrevisto,
@@ -88,10 +84,10 @@ export function TabelaProjetos(props: TableProps) {
 
   const tableData = data.slice(from, to).map((projeto, key) => (
     <Tr key={key}>
-      {/* <Td isNumeric>{projeto.id}</Td> */}
+      <Td isNumeric>{projeto.id}</Td>
       <Td>
         <Link to={`/detalhamento/${projeto.id}`}>
-          <Text>
+          <Text color={"#0047BB"}>
             {projeto.nome.length > 28 ? (
               <Tooltip label={projeto.nome} aria-label="">
                 {projeto.nome.substring(0, 25) + "..."}
@@ -110,8 +106,8 @@ export function TabelaProjetos(props: TableProps) {
       <Td>{projeto.responsavel}</Td>
       <Td></Td>
       <Td>
-        <ModalCadastrarPriorizacao />
-        <ModalDeletarProjeto />
+        <ModalCadastrarPriorizacao projeto={projeto.id} />
+        <ModalDeletarProjeto projeto={projeto.id} />
       </Td>
     </Tr>
   ));
@@ -122,6 +118,7 @@ export function TabelaProjetos(props: TableProps) {
         <Table variant="unstyled">
           <Thead>
             <Tr background="origem.500" color="white">
+              <Th>ID</Th>
               <Th width="50">Nome</Th>
               <Th>Total Previsto</Th>
               <Th>Prioridade</Th>

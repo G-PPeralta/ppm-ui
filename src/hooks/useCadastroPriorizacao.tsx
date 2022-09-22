@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { useFormik } from "formik";
-import { cadastroNovaPriorizacaoSchema } from "validations/ProjectRankings";
+// import { cadastroNovaPriorizacaoSchema } from "validations/ProjectRankings";
 
 import { useToast } from "contexts/Toast";
 
@@ -23,6 +23,7 @@ export function useCadastroPriorizacao() {
 
   const reqGet = async () => {
     const priorizacao = await getProjetosRanking();
+    console.log("dados prior", priorizacao);
 
     const beneficiosSorted = priorizacao.data.Benefício.sort((a: any, b: any) =>
       a.nom_opcao.localeCompare(b.nom_opcao)
@@ -57,28 +58,29 @@ export function useCadastroPriorizacao() {
   };
 
   const initialValues: any = {
-    beneficio: "",
-    regulatorio: "",
-    operacao: "",
-    prioridade: "",
-    complexidade: "",
-    estrategia: "",
+    id_projeto: 0,
+    id_ranking: 0,
+    id_opcao: 0,
+    dsc_comentario: null,
     nom_usu_create: user?.nome,
   };
 
   const registerForm = useFormik({
     initialValues,
-    validationSchema: cadastroNovaPriorizacaoSchema,
+    // validationSchema: cadastroNovaPriorizacaoSchema,
     onSubmit: async (values) => {
+      console.log(values);
+
       const newValues: any = {
-        beneficio: values.beneficio,
-        regulatorio: values.regulatorio,
-        operacao: values.operacao,
-        prioridade: values.prioridade,
-        complexidade: values.complexidade,
-        estrategia: values.estrategia,
+        id_projeto: values.id_projeto,
+        id_ranking: values.id_ranking,
+        id_opcao: values.id_opcao,
+        dsc_comentario: null,
         nom_usu_create: user?.nome,
       };
+
+      console.log("bene", newValues.id_projeto);
+      console.log("regulatorio", newValues.regulatorio);
 
       setLoading(true);
 
@@ -122,3 +124,9 @@ export function useCadastroPriorizacao() {
     listaRegulatorio,
   };
 }
+// Como pegar os valores
+// id_projeto: number; -- item que foi clicado na tela (o botão de ação)
+//   id_ranking: number; -- beneficio por exemxplo, complexidade, etc
+//   id_opcao: number; -- opção dentro do ranking
+//   dsc_comentario: string; -- comentario
+//   nom_usu_create: string; -- pegar nome do usuario

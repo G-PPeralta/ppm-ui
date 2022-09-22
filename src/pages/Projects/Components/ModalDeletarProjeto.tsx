@@ -25,10 +25,16 @@ import { Ring } from "@uiball/loaders";
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
+type id = {
+  projeto: number;
+};
 
-function ModalDeletarProjeto() {
+function ModalDeletarProjeto(projeto: id) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroPriorizacao();
+
+  // Pra pegar o id do projeto e depois ser possível deletar
+  console.log(projeto.projeto);
 
   return (
     <>
