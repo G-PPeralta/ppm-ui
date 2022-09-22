@@ -344,3 +344,8 @@ export interface LicoesAprendidasPayload {
   nom_usu_create: string;
   id_categoria: null;
 }
+
+export interface Categorias {
+  id: number;
+  nom_categoria: string;
+}

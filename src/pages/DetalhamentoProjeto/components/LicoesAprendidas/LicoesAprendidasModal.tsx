@@ -29,20 +29,64 @@ import CadastrarLicoesAprendidasModal from "./CadastrarLicoesAprendidasModal";
 import EditarLicoesAprendidasModal from "./EditarLicoesAprendidasModal";
 import TabelaLicoesAprendidas from "./TabelaLicoesAprendidas";
 
-function LicoesAprendidasModal({ licoes, setLicoes }: any) {
+function LicoesAprendidasModal({
+  licoes,
+  setLicoes,
+  categorias,
+  callBack,
+}: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [editLicao, setEditLicao] = useState({} as LicoesAprendidas);
   const [openModalEdit, setOpenModalEdit] = useState(false);
   const [openModalRegister, setOpenModalRegister] = useState(false);
+  const [categoriaId, setCategoriaId] = useState("");
+  const [data, setData] = useState("");
+  const [filteredTable, setFilteredTable] = useState(licoes);
 
   function handleEditLicao(licao: LicoesAprendidas): void {
     setEditLicao(licao);
     setOpenModalEdit(true);
   }
 
-  function handleUpdateLicoes(licao: any, campo: any, payload: any, user: any) {
-    patchLicaoAprendida(licao, campo, payload, user);
-    setOpenModalEdit(false);
+  async function handleUpdateLicoes(
+    licao: any,
+    campo: any,
+    payload: any,
+    user: any
+  ) {
+    try {
+      await patchLicaoAprendida(licao, campo, payload, user);
+      callBack();
+      setOpenModalEdit(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // console.log(data);
+  // console.log(licoes);
+  // console.log(
+  //   licoes.filter(
+  //     (lic: any) =>
+  //       lic.id_categoria == categoriaId || lic.dat_usu_create.includes(data)
+  //   )
+  // );
+
+  function handleFilter(categoriaId: string, data: string) {
+    let filtered = licoes;
+    console.log("PRIMEIRO CONSOLE", filtered);
+    if (categoriaId) {
+      filtered = licoes.filter((lic: any) => lic.id_categoria == categoriaId);
+      console.log("SEGUNDO CONSOLE", filtered, categoriaId);
+      return setFilteredTable(filtered);
+    }
+    if (data) {
+      filtered = licoes.filter((lic: any) => lic.dat_usu_create.includes(data));
+      console.log("TERCEIRO CONSOLE", filtered);
+      return setFilteredTable(filtered);
+    }
+    setFilteredTable(licoes);
+    console.log("ÚLTIMO", filtered, licoes);
   }
 
   return (
@@ -100,8 +144,17 @@ function LicoesAprendidasModal({ licoes, setLicoes }: any) {
                 >
                   <FormControl>
                     <FormLabel htmlFor="categoria">CATEGORIA</FormLabel>
-                    <Select id="categoria" name="categoria">
-                      <option value="0">Selecione</option>
+                    <Select
+                      id="categoria"
+                      name="categoria"
+                      onChange={(e) => setCategoriaId(e.target.value)}
+                    >
+                      <option value="">Selecione</option>
+                      {categorias.map((cat: any, index: number) => (
+                        <option value={cat.id} key={index}>
+                          {cat.nom_categoria}
+                        </option>
+                      ))}
                     </Select>
                   </FormControl>
                 </Flex>
@@ -118,6 +171,8 @@ function LicoesAprendidasModal({ licoes, setLicoes }: any) {
                       id="dataFim"
                       type="date"
                       name="dataFim"
+                      value={data}
+                      onChange={(event) => setData(event.target.value)}
                       // value={projectsForm.projectsForm.values.dataFim}
                       // onChange={projectsForm.projectsForm.handleChange}
                     />
@@ -138,7 +193,10 @@ function LicoesAprendidasModal({ licoes, setLicoes }: any) {
                     // border={"2px"}
                     // h={useBreakpointValue({ base: "100%", md: "120%" })}
                     // float={"right"}
-                    // onClick={() => setOpenModalRegister(true)}
+                    onClick={() => {
+                      handleFilter(categoriaId, data);
+                      setCategoriaId("");
+                    }}
                     _hover={{
                       background: "origem.300",
                       transition: "all 0.4s",
@@ -173,7 +231,10 @@ function LicoesAprendidasModal({ licoes, setLicoes }: any) {
 
           <ModalCloseButton />
           <ModalBody>
-            <TabelaLicoesAprendidas onEdit={handleEditLicao} licoes={licoes} />
+            <TabelaLicoesAprendidas
+              onEdit={handleEditLicao}
+              licoes={filteredTable}
+            />
             {openModalEdit && (
               <EditarLicoesAprendidasModal
                 closeModal={() => setOpenModalEdit(false)}

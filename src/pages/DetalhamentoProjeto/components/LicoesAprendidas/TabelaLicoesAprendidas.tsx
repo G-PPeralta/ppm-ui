@@ -21,44 +21,44 @@ interface EditProps {
 function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
   const tableData = licoes
     .sort((a, b) => a.id - b.id)
-    .map((lessons) => (
-      <Tr key={lessons.id_projeto}>
+    .map((lessons, index) => (
+      <Tr key={index}>
         <Td
           isNumeric
           style={{
-            borderBottom: "1px solid #A7A7A7",
-            borderRight: "1px solid #A7A7A7",
+            borderBottom: "0.5px solid #A7A7A7",
+            borderRight: "0.5px solid #A7A7A7",
           }}
         >
           {lessons.id}
         </Td>
         <Td
           style={{
-            borderBottom: "1px solid #A7A7A7",
-            borderRight: "1px solid #A7A7A7",
+            borderBottom: "0.5px solid #A7A7A7",
+            borderRight: "0.5px solid #A7A7A7",
           }}
         >
           {lessons.txt_licao_aprendida}
         </Td>
         <Td
           style={{
-            borderBottom: "1px solid #A7A7A7",
-            borderRight: "1px solid #A7A7A7",
+            borderBottom: "0.5px solid #A7A7A7",
+            borderRight: "0.5px solid #A7A7A7",
           }}
         >
           {lessons.txt_acao}
         </Td>
         <Td
           style={{
-            borderBottom: "1px solid #A7A7A7",
-            borderRight: "1px solid #A7A7A7",
+            borderBottom: "0.5px solid #A7A7A7",
+            borderRight: "0.5px solid #A7A7A7",
           }}
         >
           {new Date(lessons.dat_usu_create)
             .toLocaleString("pt-BR")
             .substring(0, 10)}
         </Td>
-        <Td style={{ borderBottom: "1px solid #A7A7A7" }}>
+        <Td style={{ borderBottom: "0.5px solid #A7A7A7" }}>
           <IconButton
             aria-label="Plus sign"
             icon={<AiFillEdit />}
@@ -88,7 +88,7 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
 
   return (
     <TableContainer mt={4} mb={3} ml={1}>
-      <Table variant="unstyled" style={{ border: "1px solid #A7A7A7" }}>
+      <Table variant="unstyled" style={{ border: "0.5px solid #A7A7A7" }}>
         <Thead>
           <Tr background="origem.500" color="white">
             <Th>ID</Th>
