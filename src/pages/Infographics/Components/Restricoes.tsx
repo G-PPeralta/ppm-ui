@@ -1,7 +1,13 @@
 import { forwardRef, useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 
-import { Button, Checkbox, Flex, Stack } from "@chakra-ui/react";
+import {
+  Button,
+  Checkbox,
+  Flex,
+  Stack,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 
 function Restricoes({ registerForm }: any) {
   const [naoIniciarData, setNaoIniciarData] = useState<any>("");
@@ -28,8 +34,8 @@ function Restricoes({ registerForm }: any) {
           onClick={onClick}
           ref={ref}
           variant="outline"
-          px={10}
-          minW={"220px"}
+          px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
+          minW={useBreakpointValue({ base: "180px", sm: "180px", md: "220px" })}
           disabled={!registerForm.values.nao_iniciar_antes_de.checked}
         >
           {value === "" ? "Selecione a data" : value}
@@ -48,9 +54,8 @@ function Restricoes({ registerForm }: any) {
         <Button
           onClick={onClick}
           ref={ref}
-          variant="outline"
-          px={10}
-          minW={"220px"}
+          px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
+          minW={useBreakpointValue({ base: "180px", sm: "180px", md: "220px" })}
           disabled={!registerForm.values.nao_terminar_depois_de.checked}
         >
           {value === "" ? "Selecione a data" : value}
@@ -67,11 +72,12 @@ function Restricoes({ registerForm }: any) {
         <Stack spacing={5} direction="row">
           <Checkbox
             w={"100%"}
-            h={"40px"}
+            // h={"40px"}
             name="nao_iniciar_antes_de.checked"
             onChange={registerForm.handleChange}
             value={registerForm.values.nao_iniciar_antes_de.checked}
             mr={7}
+            size={useBreakpointValue({ base: "sm", sm: "sm", md: "md" })}
           >
             Não iniciar antes de
           </Checkbox>
@@ -94,10 +100,11 @@ function Restricoes({ registerForm }: any) {
         <Stack spacing={5} direction="row">
           <Checkbox
             w={"100%"}
-            h={"40px"}
+            // h={"40px"}
             name="nao_terminar_depois_de.checked"
             onChange={registerForm.handleChange}
             value={registerForm.values.nao_terminar_depois_de.checked}
+            size={useBreakpointValue({ base: "sm", sm: "sm", md: "md" })}
           >
             Não terminar depois de
           </Checkbox>
@@ -114,13 +121,14 @@ function Restricoes({ registerForm }: any) {
           />
         </Flex>
       </Flex>
-      <Stack spacing={5} direction="row">
+      <Stack spacing={5} direction="row" mt={2}>
         <Checkbox
-          w={"45%"}
-          h={"40px"}
+          w={"100%"}
+          // h={"40px"}
           name="o_mais_breve_possivel"
           onChange={registerForm.handleChange}
           value={registerForm.values.o_mais_breve_possivel}
+          size={useBreakpointValue({ base: "sm", sm: "sm", md: "md" })}
         >
           O mais breve possível
         </Checkbox>
