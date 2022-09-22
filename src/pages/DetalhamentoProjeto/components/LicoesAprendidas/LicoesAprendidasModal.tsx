@@ -23,6 +23,8 @@ import {
 } from "@chakra-ui/react";
 import { LicoesAprendidas } from "interfaces/Services";
 
+import { useToast } from "contexts/Toast";
+
 import { patchLicaoAprendida } from "services/update/LicoesAprendidas";
 
 import CadastrarLicoesAprendidasModal from "./CadastrarLicoesAprendidasModal";
@@ -36,12 +38,13 @@ function LicoesAprendidasModal({
   callBack,
 }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { toast } = useToast();
   const [editLicao, setEditLicao] = useState({} as LicoesAprendidas);
   const [openModalEdit, setOpenModalEdit] = useState(false);
   const [openModalRegister, setOpenModalRegister] = useState(false);
   const [categoriaId, setCategoriaId] = useState("");
   const [data, setData] = useState("");
-  const [filteredTable, setFilteredTable] = useState(licoes);
+  const [filteredTable, setFilteredTable] = useState([]);
 
   function handleEditLicao(licao: LicoesAprendidas): void {
     setEditLicao(licao);
@@ -57,6 +60,7 @@ function LicoesAprendidasModal({
     try {
       await patchLicaoAprendida(licao, campo, payload, user);
       callBack();
+      setFilteredTable([]);
       setOpenModalEdit(false);
     } catch (error) {
       console.log(error);
@@ -73,15 +77,22 @@ function LicoesAprendidasModal({
   // );
 
   function handleFilter(categoriaId: string, data: string) {
-    let filtered = licoes;
     if (categoriaId) {
-      filtered = licoes.filter((lic: any) => lic.id_categoria == categoriaId);
-
+      const filtered = licoes.filter(
+        (lic: any) => lic.id_categoria == categoriaId
+      );
+      filtered.length == 0 &&
+        toast.error(
+          "Nenhum dado encontrado com o presente filtro de categoria"
+        );
       return setFilteredTable(filtered);
     }
     if (data) {
-      filtered = licoes.filter((lic: any) => lic.dat_usu_create.includes(data));
-
+      const filtered = licoes.filter((lic: any) =>
+        lic.dat_usu_create.includes(data)
+      );
+      filtered.length == 0 &&
+        toast.error("Nenhum dado encontrado com o presente filtro de data");
       return setFilteredTable(filtered);
     }
     setFilteredTable(licoes);
@@ -162,19 +173,20 @@ function LicoesAprendidasModal({
                   flex={1}
                 >
                   <FormControl>
-                    <FormLabel htmlFor="dataFim">DATA</FormLabel>
+                    <FormLabel htmlFor="data">DATA</FormLabel>
                     <Input
-                      isRequired
-                      placeholder="dd/mm/aaaa"
-                      id="dataFim"
+                      // placeholder="dd/mm/aaaa"
+                      id="data"
                       type="date"
-                      name="dataFim"
-                      value={data}
+                      name="data"
+                      // value={data}
                       onChange={(event) => setData(event.target.value)}
-                      // value={projectsForm.projectsForm.values.dataFim}
-                      // onChange={projectsForm.projectsForm.handleChange}
                     />
                   </FormControl>
+                  {/* <input
+                    type="date"
+                    onChange={(event) => setData(event.target.value)}
+                  /> */}
                 </Flex>
 
                 <Flex
@@ -231,7 +243,7 @@ function LicoesAprendidasModal({
           <ModalBody>
             <TabelaLicoesAprendidas
               onEdit={handleEditLicao}
-              licoes={filteredTable}
+              licoes={filteredTable.length > 0 ? filteredTable : licoes}
             />
             {openModalEdit && (
               <EditarLicoesAprendidasModal
@@ -245,6 +257,7 @@ function LicoesAprendidasModal({
               <CadastrarLicoesAprendidasModal
                 closeModal={() => setOpenModalRegister(false)}
                 onCloseModal={() => setOpenModalRegister(false)}
+                callBack={callBack}
               />
             )}
           </ModalBody>

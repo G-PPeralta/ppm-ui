@@ -23,7 +23,11 @@ import {
 
 import { postLicaoAprendida } from "services/post/AdicionarLicaoAprendida";
 
-function CadastrarLicoesAprendidasModal({ closeModal, onCloseModal }: any) {
+function CadastrarLicoesAprendidasModal({
+  closeModal,
+  onCloseModal,
+  callBack,
+}: any) {
   const { id } = useParams();
   const [licaoAprendida, setLicaoAprendida] = useState("");
   const [acao, setAcao] = useState("");
@@ -36,7 +40,8 @@ function CadastrarLicoesAprendidasModal({ closeModal, onCloseModal }: any) {
       id_categoria: null,
       nom_usu_create: "teste",
     };
-    postLicaoAprendida(payload);
+    await postLicaoAprendida(payload);
+    callBack();
     onCloseModal();
   }
 
