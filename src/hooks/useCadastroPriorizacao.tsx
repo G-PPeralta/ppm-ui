@@ -6,7 +6,7 @@ import { cadastroNovaPriorizacaoSchema } from "validations/ModalCadastroRanking"
 import { useToast } from "contexts/Toast";
 
 import { getProjetosRanking } from "services/get/Projetos-Ranking";
-import { postProject } from "services/post/ProjectRegister";
+import { postProject } from "services/post/Priorizacao";
 
 import { useAuth } from "./useAuth";
 
@@ -91,34 +91,14 @@ export function useCadastroPriorizacao() {
     initialValues,
     validationSchema: cadastroNovaPriorizacaoSchema,
     onSubmit: async (values) => {
-      // console.log(values);
-
       const newValues: any = {
         id_projeto: values.id_projeto,
-        beneficio: {
-          opcao_id: values.opcao_id,
-          id_ranking: values.id_ranking,
-        },
-        regulatorio: {
-          opcao_id: values.opcao_id,
-          id_ranking: values.id_ranking,
-        },
-        operacao: {
-          opcao_id: values.opcao_id,
-          id_ranking: values.id_ranking,
-        },
-        prioridade: {
-          opcao_id: values.opcao_id,
-          id_ranking: values.id_ranking,
-        },
-        complexidade: {
-          opcao_id: values.opcao_id,
-          id_ranking: values.id_ranking,
-        },
-        estrategia: {
-          opcao_id: values.opcao_id,
-          id_ranking: values.id_ranking,
-        },
+        beneficio: values.beneficio,
+        regulatorio: values.regulatorio,
+        operacao: values.operacao,
+        prioridade: values.prioridade,
+        complexidade: values.complexidade,
+        estrategia: values.estrategia,
         dsc_comentario: null,
         nom_usu_create: user?.nome,
       };

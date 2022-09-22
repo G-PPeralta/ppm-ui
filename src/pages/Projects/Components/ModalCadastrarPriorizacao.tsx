@@ -47,6 +47,7 @@ function ModalCadastrarPriorizacao(projeto: id) {
   } = useCadastroPriorizacao();
 
   // console.log("registerform", registerForm.values);
+
   // console.log("isvalid", registerForm.isValid);
 
   // useEffect(() => {
@@ -67,7 +68,7 @@ function ModalCadastrarPriorizacao(projeto: id) {
       Number(listaRegulatorio[0]?.id)
     );
     registerForm.setFieldValue(
-      "operacap.id_ranking",
+      "operacao.id_ranking",
       Number(listaOperacao[0]?.id)
     );
     registerForm.setFieldValue(
