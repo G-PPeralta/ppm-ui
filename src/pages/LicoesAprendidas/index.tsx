@@ -148,43 +148,58 @@ export function LicoesAprendidasProjetos() {
               }}
               borderRadius={{ base: "none", sm: "xl" }}
             >
-              <Heading as="h3" size="md" mt={"-50px"} mb={"15px"}>
+              <Heading as="h3" size="md" mt={"-50px"} mb={"25px"}>
                 Lições Aprendidas
               </Heading>
 
               <Flex>
-                <FormControl>
-                  <FormLabel htmlFor="projeto">PROJETO</FormLabel>
-                  <Select
-                    id="projeto"
-                    name="projeto"
-                    onChange={(e) => setProjetoId(e.target.value)}
-                    width={300}
-                  >
-                    <option value={0}>Todos</option>
-                    {projetos &&
-                      projetos.map((project, index) => (
-                        <option value={project.id} key={index}>
-                          {project.nomeProjeto}
-                        </option>
-                      ))}
-                  </Select>
-                </FormControl>
-                <FormControl className="toBottom">
+                <FormControl
+                  // style={{ border: "1px solid blue" }}
+                  display="flex"
+                  flexDir={"row"}
+                  justifyContent={"flex-start"}
+                >
+                  <Flex flexDir={"column"}>
+                    <FormLabel htmlFor="projeto">PROJETO</FormLabel>
+                    <Select
+                      id="projeto"
+                      name="projeto"
+                      onChange={(e) => setProjetoId(e.target.value)}
+                      width={300}
+                    >
+                      <option value={0}>Todos</option>
+                      {projetos &&
+                        projetos.map((project, index) => (
+                          <option value={project.id} key={index}>
+                            {project.nomeProjeto}
+                          </option>
+                        ))}
+                    </Select>
+                  </Flex>
+
                   <Button
-                    color="white"
-                    background="origem.300"
-                    variant="primary"
+                    type="button"
+                    background="white"
+                    variant="outline"
+                    color="origem.500"
+                    borderColor="origem.500"
                     _hover={{
-                      background: "origem.500",
+                      background: "origem.300",
                       transition: "all 0.4s",
+                      color: "white",
                     }}
                     rightIcon={<FiSearch />}
                     onClick={filterByProject}
+                    alignSelf={"end"}
+                    marginLeft={"5"}
                   >
                     Buscar
                   </Button>
                 </FormControl>
+                {/* <FormControl
+                  className="toBottom"
+                  style={{ border: "4px solid green" }}
+                ></FormControl> */}
               </Flex>
 
               <Stack spacing="0">
