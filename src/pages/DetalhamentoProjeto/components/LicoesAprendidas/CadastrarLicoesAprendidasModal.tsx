@@ -7,6 +7,7 @@ import {
   Box,
   IconButton,
   // useBreakpointValue,
+  Textarea,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -74,14 +75,30 @@ function CadastrarLicoesAprendidasModal({ closeModal, onCloseModal }: any) {
           EDITAR FORNECEDOR
         </Text> */}
       </Box>
-      <Modal isOpen={true} onClose={closeModal} size="4xl">
+      <Modal isOpen={true} onClose={closeModal} size="xl">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>LIÇÃO APRENDIDA</ModalHeader>
+          <ModalHeader
+            backgroundColor={"#2E69FD"}
+            borderTopRadius={7}
+            display={"flex"}
+            justifyContent={"center"}
+            color={"white"}
+            fontSize={"1em"}
+          >
+            Lição Aprendida
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <FormControl>
-              <FormLabel htmlFor="fornecedorNome">LIÇÃO APRENDIDA</FormLabel>
+            <FormControl marginBottom={4} padding={1}>
+              <FormLabel
+                htmlFor="fornecedorNome"
+                color="#D6D4D4"
+                fontSize="sm"
+                fontWeight="500"
+              >
+                LIÇÃO APRENDIDA
+              </FormLabel>
               <Input
                 isRequired
                 placeholder="Lição aprendida"
@@ -94,11 +111,17 @@ function CadastrarLicoesAprendidasModal({ closeModal, onCloseModal }: any) {
               />
             </FormControl>
             <FormControl>
-              <FormLabel htmlFor="acao">AÇÃO OU RECOMENDAÇÃO</FormLabel>
-              <Input
+              <FormLabel
+                htmlFor="acao"
+                color="#D6D4D4"
+                fontSize="sm"
+                fontWeight="500"
+              >
+                AÇÃO OU RECOMENDAÇÃO
+              </FormLabel>
+              <Textarea
                 isRequired
                 placeholder="Ação ou recomendação"
-                type="text"
                 id="acao"
                 name="acao"
                 width="100%"
@@ -108,30 +131,33 @@ function CadastrarLicoesAprendidasModal({ closeModal, onCloseModal }: any) {
             </FormControl>
           </ModalBody>
 
-          <ModalFooter>
-            <Button
-              background="origem.300"
-              variant="primary"
-              color="white"
-              _hover={{
-                background: "origem.500",
-                transition: "all 0.4s",
-              }}
-            >
-              CANCELAR
-            </Button>
-            <Button
-              background="origem.300"
-              variant="primary"
-              color="white"
-              _hover={{
-                background: "origem.500",
-                transition: "all 0.4s",
-              }}
-              onClick={handleSubmitLicao}
-            >
-              CONFIRMAR
-            </Button>
+          <ModalFooter justifyContent={"center"}>
+            <Flex gap={2}>
+              <Button
+                variant="primary"
+                color="red"
+                _hover={{
+                  background: "red.500",
+                  transition: "all 0.4s",
+                  color: "white",
+                }}
+                onClick={closeModal}
+              >
+                Cancelar
+              </Button>
+              <Button
+                background="origem.300"
+                variant="primary"
+                color="white"
+                _hover={{
+                  background: "origem.500",
+                  transition: "all 0.4s",
+                }}
+                onClick={handleSubmitLicao}
+              >
+                Confirmar
+              </Button>
+            </Flex>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -94,17 +94,33 @@ function EditarLicoesAprendidasModal({
           EDITAR FORNECEDOR
         </Text> */}
       </Box>
-      <Modal isOpen={true} onClose={closeModal} size={"4xl"}>
+      <Modal isOpen={true} onClose={closeModal} size={"xl"}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>EDITAR LIÇÕES APRENDIDA</ModalHeader>
+          <ModalHeader
+            backgroundColor={"#2E69FD"}
+            borderTopRadius={7}
+            display={"flex"}
+            justifyContent={"center"}
+            color={"white"}
+            fontSize={"1em"}
+          >
+            Editar Lições Aprendidas
+          </ModalHeader>
 
           <ModalCloseButton />
 
           <ModalBody>
-            <FormControl>
+            <FormControl marginBottom={4} padding={1}>
               <Flex direction={"column"}>
-                <FormLabel htmlFor="fornecedorNome">Lição Aprendida</FormLabel>
+                <FormLabel
+                  htmlFor="fornecedorNome"
+                  color="#D6D4D4"
+                  fontSize="sm"
+                  fontWeight="500"
+                >
+                  LIÇÃO APRENDIDA
+                </FormLabel>
                 <Input
                   isRequired
                   placeholder="Lição aprendida"
@@ -130,9 +146,16 @@ function EditarLicoesAprendidasModal({
                 onChange={(event) => setData(event.target.value)}
               />
             </FormControl> */}
-            <FormControl>
+            <FormControl padding={1}>
               <Flex direction={"column"}>
-                <FormLabel htmlFor="acao">AÇÃO OU RECOMENDAÇÃO</FormLabel>
+                <FormLabel
+                  htmlFor="acao"
+                  color="#D6D4D4"
+                  fontSize="sm"
+                  fontWeight="500"
+                >
+                  AÇÃO OU RECOMENDAÇÃO
+                </FormLabel>
                 <Textarea
                   isRequired
                   placeholder="Ação ou recomendação"
@@ -147,19 +170,20 @@ function EditarLicoesAprendidasModal({
             </FormControl>
           </ModalBody>
 
-          <ModalFooter>
-            <Flex direction={"row"}>
+          <ModalFooter justifyContent={"center"}>
+            <Flex gap={2}>
               <Button
-                background="origem.300"
+                // background="origem.300"
                 variant="primary"
-                color="white"
+                color="red"
                 _hover={{
-                  background: "origem.500",
+                  background: "red.500",
                   transition: "all 0.4s",
+                  color: "white",
                 }}
                 onClick={closeModal}
               >
-                CANCELAR
+                Cancelar
               </Button>
               <Button
                 background="origem.300"
@@ -180,7 +204,7 @@ function EditarLicoesAprendidasModal({
                   );
                 }}
               >
-                CONFIRMAR
+                Confirmar
               </Button>
             </Flex>
           </ModalFooter>
