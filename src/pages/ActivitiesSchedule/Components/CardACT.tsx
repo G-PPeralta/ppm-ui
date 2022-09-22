@@ -25,6 +25,7 @@ function CardACT({ atividade }: Props) {
 
   return (
     <Flex
+      zIndex={1000}
       direction={"column"}
       align={"right"}
       justify={"right"}
@@ -63,7 +64,7 @@ function CardACT({ atividade }: Props) {
         color={"white"}
         fontWeight={"normal"}
       >
-        {`Planejado: ${atividade.pct_plan} %`}
+        {`Planejado: ${atividade.pct_plan}%`}
       </Text>
       <Text
         align={"center"}
@@ -71,7 +72,7 @@ function CardACT({ atividade }: Props) {
         color={"white"}
         fontWeight={"normal"}
       >
-        {`Realizado: ${atividade.pct_real} %`}
+        {`Realizado: ${atividade.pct_real}%`}
       </Text>
     </Flex>
   );

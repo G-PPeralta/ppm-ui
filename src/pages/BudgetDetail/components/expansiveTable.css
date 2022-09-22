@@ -6,3 +6,11 @@
 .colapse {
   display: inherit;
 }
+
+
+
+@media  print {
+  tr{
+    display: table-row !important;
+  }
+}

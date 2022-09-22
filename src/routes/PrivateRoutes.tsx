@@ -22,6 +22,7 @@ import { Settings } from "pages/Settings";
 import { ShareRegister } from "pages/ShareRegister";
 import { Statistics } from "pages/Statistics";
 import { UploadSheet } from "pages/UploadSheet";
+import VisaoPorArea from "pages/VisaoPorArea";
 
 export function PrivateRoutes() {
   return (
@@ -56,6 +57,7 @@ export function PrivateRoutes() {
         element={<ActivitiesPrecedents />}
       />
       <Route path="/estatisticas/" element={<Statistics />} />
+      <Route path="/atividade/:id/visao-por-area" element={<VisaoPorArea />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -13,3 +13,16 @@ export interface Budget {
   descricao: string;
   filhos?: Budget[];
 }
+
+export interface BudgetDetail {
+  id: number;
+  data?: string;
+  brt: string;
+  servico: string;
+  fornecedor?: string;
+  total: number;
+  previsto: number;
+  realizado: number;
+  gap?: number;
+  filhos?: BudgetDetail[];
+}

@@ -1,32 +1,24 @@
 import {
   Box,
   Flex,
+  Heading,
   Stack,
   useBreakpointValue,
+  Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 
 import Sidebar from "components/SideBar";
 
-import { ExpansiveTable } from "./components/ExpansiveTable";
+import { useBudgetDetail } from "hooks/useBudgetDetail";
 
-// const OBJETO = [
-//   {
-//     atividade: "Sonda Worker",
-//     data: "14/08/2022",
-//     BRT: "1",
-//     servicos: {
-//       id: "1",
-//       nome: "Mobilização/Desmobilização",
-//       fornecedor: "-",
-//       total: 1,
-//       previsto: 1,
-//       realizado: 1,
-//     },
-//   },
-// ];
+import { BudgetDetailTable } from "./components/BudgetDetailTable";
+import { TotalTable } from "./components/TotalTable";
 
+import "./budgetDetail.css";
 export function BudgetDetail() {
+  const { budgetFilter } = useBudgetDetail();
+
   return (
     <div>
       <Sidebar>
@@ -53,7 +45,13 @@ export function BudgetDetail() {
               }}
               borderRadius={{ base: "none", sm: "xl" }}
             >
-              <ExpansiveTable />
+              <Heading as="h2" noOfLines={1}>
+                Spt 123
+              </Heading>
+              <Text>PIR 62</Text>
+
+              <BudgetDetailTable data={budgetFilter} />
+              <TotalTable data={budgetFilter} />
             </Box>
           </Flex>
         </Stack>
