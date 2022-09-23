@@ -33,6 +33,8 @@ function ModalCadastroIntervencao() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaPocos } = useCadastroIntervencao();
 
+  const innerWidth = window.innerWidth;
+
   const isButtonDisabled =
     !registerForm.isValid ||
     (!registerForm.values.id_campanha && !registerForm.values.nom_atividade);
@@ -113,7 +115,10 @@ function ModalCadastroIntervencao() {
                 <FormControl>
                   <Flex direction={"column"} gap={4}>
                     <Stack>
-                      <Flex flexDirection={"row"} gap={5}>
+                      <Flex
+                        direction={innerWidth >= 460 ? "row" : "column"}
+                        gap={5}
+                      >
                         <SelectFiltragemSondas
                           form={registerForm}
                           nomeChave={"sonda_id"}
