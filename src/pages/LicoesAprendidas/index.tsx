@@ -261,7 +261,7 @@ export function LicoesAprendidasProjetos() {
                       <Th>Lições Aprendidas</Th>
                       <Th>Ações e Recomendações</Th>
                       <Th>Data</Th>
-                      <Th>Validar</Th>
+                      <Th>Ações</Th>
                     </Tr>
                   </Thead>
                   <Tbody>{tableData}</Tbody>
