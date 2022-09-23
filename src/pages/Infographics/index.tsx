@@ -20,9 +20,9 @@ import ExibirModal from "./Components/ExibirModal";
 import FiltrosModal from "./Components/FiltrosModal";
 import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
 import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
+import ModalCadastroIntervencao from "./Components/ModalCadastroIntervencao";
 import ModalCadastroPoco from "./Components/ModalCadastroPoco";
 import ModalCadastroProjetoTipo from "./Components/ModalCadastroProjetoTipo";
-import ModalIntervencao from "./Components/ModalIntervencao";
 import ModalNovaCampanha from "./Components/ModalNovaCampanha";
 
 export function Infographics() {
@@ -113,7 +113,7 @@ export function Infographics() {
                           justify={"space-between"}
                         >
                           <ColumnSPT column={column} />
-                          <ModalIntervencao />
+                          <ModalCadastroIntervencao />
                         </Flex>
                       ))}
                   </Box>
