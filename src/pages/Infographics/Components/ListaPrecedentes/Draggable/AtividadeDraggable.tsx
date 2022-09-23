@@ -1,48 +1,71 @@
-import { useState } from "react";
+// import { useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import { Box, Flex, FormControl, Input, Select, Text } from "@chakra-ui/react";
+import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
 
-import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipoOLD";
+// import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipoOLD";
 
-import PopOverPrecedentes from "./PopOverPrecedentes";
+// import PopOverPrecedentes from "../../ListaAtividades/PopOverPrecedentes";
 
-interface Props {
-  index: number;
-  item: any;
-  remove: any;
-  handleChangeProp: any;
-  list: any;
-}
+// interface Props {
+//   index: number;
+//   atividade: any;
+//   remove: any;
+//   handleChangeProp: any;
+//   list: any;
+// }
 
 function AtividadesDraggable({
-  item,
+  atividade,
   index,
-  remove,
-  handleChangeProp,
-  list,
-}: Props) {
-  const { registerForm, listaAtividades } = useCadastroProjetoTipo();
+  registerForm,
+}: // handleChangeProp,
+// list,
+any) {
+  // const { registerForm, listaAtividades } = useCadastroProjetoTipo();
 
-  const handleChange = (event: any, chave: any) => {
-    item[chave] = Number(event.target.value);
-    handleChangeProp(index, chave, Number(event.target.value));
-    registerForm.setFieldValue("atividades", list);
+  // const handleChange = (event: any, chave: any) => {
+  //   atividade[chave] = Number(event.target.value);
+  //   handleChangeProp(index, chave, Number(event.target.value));
+  //   registerForm.setFieldValue("atividades", list);
+  // };
+
+  // const [render, setRender] = useState(false);
+
+  // const handlePopover = (indexIn: number, value: boolean) => {
+  //   const newList = atividade.precedentes;
+  //   newList[indexIn].checked = value;
+  //   handleChangeProp(index, "precedentes", newList);
+  //   setRender(!render);
+  // };
+
+  // const remove = (index: number) => {
+  //   const newList = list;
+  //   newList.splice(index, 1);
+  //   setList(newList);
+  //   setRender(!render);
+  // };
+
+  const id = useId();
+  const [draggableId, setDraggableId] = useState<any>(id);
+
+  const remove = (index: number) => {
+    const newList = registerForm.values.atividades;
+    newList.splice(index, 1);
+    registerForm.setFieldValue("atividades", newList);
   };
 
-  const [render, setRender] = useState(false);
-
-  const handlePopover = (indexIn: number, value: boolean) => {
-    const newList = item.precedentes;
-    newList[indexIn].checked = value;
-    handleChangeProp(index, "precedentes", newList);
-    setRender(!render);
-  };
+  useEffect(() => {
+    const now = Date.now();
+    const newId = draggableId + "-" + now.toLocaleString();
+    setDraggableId(newId);
+  }, []);
 
   return (
-    <Draggable draggableId={`list${index}`} index={index}>
+    <Draggable draggableId={draggableId} index={index}>
       {(provided) => (
         <div
           ref={provided.innerRef}
@@ -65,19 +88,17 @@ function AtividadesDraggable({
             <Flex flexDirection={"row"} gap={4}>
               <Flex align={"center"} justify={"center"} gap={3}>
                 <GiHamburgerMenu color="#2E69FD" size={16} />
-                <Text sx={{ fontSize: 16, fontWeight: "600" }}>
-                  {index + 1}
-                </Text>
+                <Text sx={{ fontSize: 16, fontWeight: "600" }}>{1}</Text>
               </Flex>
 
               <FormControl>
                 <Text sx={{ fontSize: 12, fontWeight: "600" }}>ATIVIDADE</Text>
-                <Select
+                {/* <Select
                   id="atividadeId"
                   name="atividadeId"
                   placeholder="Selecione"
                   bg={"#fff"}
-                  value={item.atividade}
+                  value={atividade.atividade}
                   onChange={(event) => handleChange(event, "atividadeId")}
                 >
                   {listaAtividades.map((data, index) => (
@@ -85,7 +106,7 @@ function AtividadesDraggable({
                       {data.tarefa}
                     </option>
                   ))}
-                </Select>
+                </Select> */}
               </FormControl>
 
               <FormControl>
@@ -96,11 +117,11 @@ function AtividadesDraggable({
                   bg={"#fff"}
                   id="dias"
                   name="dias"
-                  value={
-                    listaAtividades.filter(
-                      (atividade) => atividade.id === item.atividadeId
-                    )[0]?.dias
-                  }
+                  // value={
+                  //   listaAtividades.filter(
+                  //     (atv) => atv.id === atividade.atividadeId
+                  //   )[0]?.dias
+                  // }
                   isDisabled
                 />
               </FormControl>
@@ -109,10 +130,10 @@ function AtividadesDraggable({
                 <Text sx={{ fontSize: 12, fontWeight: "600" }}>
                   PRECEDENTES
                 </Text>
-                <PopOverPrecedentes
+                {/* <PopOverPrecedentes
                   handlePopover={handlePopover}
-                  atividades={item.precedentes}
-                />
+                  atividades={atividade.precedentes}
+                /> */}
               </Flex>
 
               {/* <Flex

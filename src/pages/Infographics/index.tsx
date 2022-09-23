@@ -18,9 +18,10 @@ import { statusProjeto } from "../../utils/validateDate";
 import ColumnSPT from "./Components/ColumnSPT";
 import ExibirModal from "./Components/ExibirModal";
 import FiltrosModal from "./Components/FiltrosModal";
-// import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
+import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
 import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
 import ModalCadastroPoco from "./Components/ModalCadastroPoco";
+import ModalCadastroProjetoTipo from "./Components/ModalCadastroProjetoTipo";
 import ModalIntervencao from "./Components/ModalIntervencao";
 import ModalNovaCampanha from "./Components/ModalNovaCampanha";
 
@@ -79,9 +80,10 @@ export function Infographics() {
                       refresh={refresh}
                       setRefresh={setRefresh}
                     />
-                    {/* <ModalCadastrarSonda /> */}
+                    <ModalCadastrarSonda />
                     <ModalCadastroPoco />
                     <ModalCadastroAtividade />
+                    <ModalCadastroProjetoTipo />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (

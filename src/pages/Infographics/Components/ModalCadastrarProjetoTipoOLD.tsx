@@ -27,7 +27,7 @@ import { TextError } from "components/TextError";
 
 import { handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
+import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipoOLD";
 
 function ModalCadastrarProjetoTipo() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -79,7 +79,7 @@ function ModalCadastrarProjetoTipo() {
         }}
         onClick={onOpen}
       >
-        Nova Campanha
+        Projeto
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />

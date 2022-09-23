@@ -10,13 +10,22 @@ export interface CadastroTarefa {
   tarefa: string;
 }
 
-export interface AtividadesProjetoTipo {
-  atividadeId: number;
-  precedentes: number[];
+export interface PrecedentesCadastroProjetoTipo {
+  id: number;
+  nome: string;
+  checked: boolean;
 }
 
-export interface CadastroProjetoTipo {
-  nome: string;
+export interface AtividadesProjetoTipo {
+  atividade_id_origem: number;
+  area_id: number;
+  tarefa_id: number;
+  qtde_dias: number;
+  precedentes: PrecedentesCadastroProjetoTipo[];
+}
+
+export interface CadastroProjetoTipo extends User {
+  nom_projeto_tipo: string;
   atividades: AtividadesProjetoTipo[];
   comentarios: string;
 }

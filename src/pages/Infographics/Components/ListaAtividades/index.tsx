@@ -7,7 +7,7 @@ import {
 
 import { FormLabel } from "@chakra-ui/react";
 
-import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
+import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipoOLD";
 
 import AtividadesDraggable from "./AtividadesDraggable";
 import BotaoAdicionar from "./BotaoAdicionar";
