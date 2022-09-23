@@ -23,14 +23,24 @@ export default function ListaPrecedentes({
   // console.log("registerForm", registerForm.values.atividades);
 
   const reorder = (registerForm: any, startIndex: any, endIndex: any) => {
-    const teste = (registerForm: any) => {
+    const listaReordenada = (registerForm: any) => {
+      // Pega a lista de atividades diretamente do Formik
+      // e faz uma atribuição em uma variável para garantir
+      // imutabilidade do estado original
       const list = registerForm.values.atividades;
 
+      // Seleciona item que está sendo arrastado e o remove
+      // da lista
       const [removed] = list.splice(startIndex, 1);
+
+      // Recoloca item que está sendo arrastado e o insere
+      // no array com base nos index
       list.splice(endIndex, 0, removed);
+
+      // Retorna lista atualizada
       return list;
     };
-    registerForm.setFieldValue("atividades", teste(registerForm));
+    registerForm.setFieldValue("atividades", listaReordenada(registerForm));
   };
 
   const onDragEnd = (result: any) => {
@@ -67,19 +77,6 @@ export default function ListaPrecedentes({
   //   // handleParent(newList);
   // };
 
-  // useEffect(() => {
-  //   const newAtividades: any[] = [];
-  //   registerForm.values.atividades.map((atividade: any) => {
-  //     atividade.precedentes = listaAtividadesPrecedentes;
-  //     newAtividades.push(atividade);
-  //     return {};
-  //   });
-  //   setList(newAtividades);
-  //   const now = Date.now();
-  //   const newId = droppableId + "-" + now.toLocaleString();
-  //   setDroppableId(newId);
-  // }, []);
-
   useEffect(() => {
     // Para gerar um id aletaório para o droppable
     const now = Date.now();
@@ -114,16 +111,6 @@ export default function ListaPrecedentes({
                   />
                 )
               )}
-              {/* {list.map((item: any, index: any) => (
-                <AtividadesDraggable
-                  handleChangeProp={handleChangeProp}
-                  item={item}
-                  index={index}
-                  key={`list${index}`}
-                  remove={remove}
-                  list={list}
-                />
-              ))} */}
               {provided.placeholder}
             </div>
           )}
