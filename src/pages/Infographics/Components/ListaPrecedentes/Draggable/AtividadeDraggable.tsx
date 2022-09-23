@@ -6,12 +6,9 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
 
+import PopOverPrecedentes from "./PopOverPrecedentes";
 import SelectFiltragemArea from "./SelectFiltragemArea";
 import SelectFiltragemTarefa from "./SelectFiltragemTarefa";
-
-// import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipoOLD";
-
-// import PopOverPrecedentes from "../../ListaAtividades/PopOverPrecedentes";
 
 // interface Props {
 //   index: number;
@@ -21,36 +18,7 @@ import SelectFiltragemTarefa from "./SelectFiltragemTarefa";
 //   list: any;
 // }
 
-function AtividadesDraggable({
-  index,
-  registerForm,
-}: // handleChangeProp,
-// list,
-any) {
-  // const { registerForm, listaAtividades } = useCadastroProjetoTipo();
-
-  // const handleChange = (event: any, chave: any) => {
-  //   atividade[chave] = Number(event.target.value);
-  //   handleChangeProp(index, chave, Number(event.target.value));
-  //   registerForm.setFieldValue("atividades", list);
-  // };
-
-  // const [render, setRender] = useState(false);
-
-  // const handlePopover = (indexIn: number, value: boolean) => {
-  //   const newList = atividade.precedentes;
-  //   newList[indexIn].checked = value;
-  //   handleChangeProp(index, "precedentes", newList);
-  //   setRender(!render);
-  // };
-
-  // const remove = (index: number) => {
-  //   const newList = list;
-  //   newList.splice(index, 1);
-  //   setList(newList);
-  //   setRender(!render);
-  // };
-
+function AtividadesDraggable({ index, registerForm }: any) {
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
 
@@ -66,7 +34,7 @@ any) {
     setDraggableId(newId);
   }, []);
 
-  console.log("registerForm", registerForm.values);
+  // console.log("registerForm", registerForm.values);
 
   return (
     <Draggable draggableId={draggableId} index={index}>
@@ -153,10 +121,7 @@ any) {
                 <Text sx={{ fontSize: 12, fontWeight: "600" }}>
                   PRECEDENTES
                 </Text>
-                {/* <PopOverPrecedentes
-                  handlePopover={handlePopover}
-                  atividades={atividade.precedentes}
-                /> */}
+                <PopOverPrecedentes registerForm={registerForm} index={index} />
               </Flex>
 
               {/* <Flex

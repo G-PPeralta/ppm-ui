@@ -13,7 +13,16 @@ import {
   Stack,
 } from "@chakra-ui/react";
 
-function PopOverPrecedentes({ handlePopover, atividades }: any) {
+function PopOverPrecedentes({ registerForm, index }: any) {
+  const handlePopoverPrecedentes = (
+    indexPrecedente: number,
+    precedenteIsChecked: boolean
+  ) => {
+    const newList = registerForm.values.atividades[index].precedentes;
+    newList[indexPrecedente].checked = precedenteIsChecked;
+    registerForm.setFieldValue(`atividades[${index}].precedentes`, newList);
+  };
+
   return (
     <FormControl>
       <Popover isLazy>
@@ -39,15 +48,19 @@ function PopOverPrecedentes({ handlePopover, atividades }: any) {
           <PopoverBody>
             <CheckboxGroup colorScheme="blue">
               <Stack spacing={[1, 3]} direction={"column"}>
-                {atividades.map((atividade: any, index: any) => (
-                  <Checkbox
-                    key={index}
-                    isChecked={atividade.checked}
-                    onChange={() => handlePopover(index, !atividade.checked)}
-                  >
-                    {atividade.nome}
-                  </Checkbox>
-                ))}
+                {registerForm.values.atividades[index].precedentes.map(
+                  (atividade: any, index: any) => (
+                    <Checkbox
+                      key={index}
+                      isChecked={atividade.checked}
+                      onChange={() =>
+                        handlePopoverPrecedentes(index, !atividade.checked)
+                      }
+                    >
+                      {atividade.nome}
+                    </Checkbox>
+                  )
+                )}
               </Stack>
             </CheckboxGroup>
           </PopoverBody>
