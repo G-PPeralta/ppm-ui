@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { AiFillEdit } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 
@@ -79,7 +80,7 @@ export function LicoesAprendidasProjetos() {
       await handleGetLicoesAprendidas();
       onClose();
     } catch (error) {
-      console.log(error);
+      toast.error("Erro na requisição");
     }
   }
 
