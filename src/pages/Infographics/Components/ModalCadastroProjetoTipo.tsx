@@ -25,7 +25,7 @@ import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
 
-import ListaPrecedentes from "./ListaPrecedentes";
+import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
 
 function ModalCadastroProjetoTipo() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -103,7 +103,7 @@ function ModalCadastroProjetoTipo() {
                     </Flex>
                   </Stack>
 
-                  <ListaPrecedentes
+                  <AtividadesDragAndDrop
                     registerForm={registerForm}
                     listaAtividadesPrecedentes={listaAtividadesPrecedentes}
                   />

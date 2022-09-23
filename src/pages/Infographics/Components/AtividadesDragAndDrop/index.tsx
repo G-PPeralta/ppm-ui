@@ -14,7 +14,7 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 import BotaoAdicionar from "./BotaoAdicionar";
 import AtividadesDraggable from "./Draggable/AtividadeDraggable";
 
-export default function ListaPrecedentes({
+export default function AtividadesDragAndDrop({
   registerForm,
   listaAtividadesPrecedentes,
 }: any) {
