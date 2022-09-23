@@ -17,6 +17,8 @@ import { ProvidersRegistration } from "pages/ProvidersRegistration";
 import { Reports } from "pages/Reports";
 import { Settings } from "pages/Settings";
 import { ShareRegister } from "pages/ShareRegister";
+import { Lookahead } from "pages/Lookahead";
+import { LookaheadDetalhe } from "pages/Lookahead/Detalhe";
 
 export function PrivateRoutes() {
   return (
@@ -43,6 +45,8 @@ export function PrivateRoutes() {
       <Route path="/fornecedores" element={<Fornecedores />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
       <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
+      <Route path="/lookahead" element={<Lookahead />} />
+      <Route path="/lookahead-detalhe/:id" element={<LookaheadDetalhe />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
