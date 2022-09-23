@@ -85,7 +85,7 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
       {detail.filhos &&
         detail.filhos.map((filho) => (
           <Tr className={"hide item-" + key} key={filho.id}>
-            <Td></Td>
+            {/* <Td></Td> */}
             <Td>{filho.brt}</Td>
             <Td>{filho.servico}</Td>
             <Td>{filho.fornecedor}</Td>
@@ -103,7 +103,7 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
         <Table variant="unstyled">
           <Thead>
             <Tr backgroundColor={"blue"} color="white">
-              <Th colSpan={6} borderTopLeftRadius="10px">
+              <Th colSpan={4} borderTopLeftRadius="10px">
                 Atividade
               </Th>
               <Th borderTopRightRadius={"10px"} colSpan={2}>
