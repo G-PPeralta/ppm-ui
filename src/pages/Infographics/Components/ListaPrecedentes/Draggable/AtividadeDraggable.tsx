@@ -5,26 +5,27 @@ import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
+import { FormikProps } from "formik";
 
 import PopOverPrecedentes from "./PopOverPrecedentes";
 import SelectFiltragemArea from "./SelectFiltragemArea";
 import SelectFiltragemTarefa from "./SelectFiltragemTarefa";
 
-// interface Props {
-//   index: number;
-//   atividade: any;
-//   remove: any;
-//   handleChangeProp: any;
-//   list: any;
-// }
+interface Props {
+  registerForm: FormikProps<any>;
+  index: number;
+}
 
-function AtividadesDraggable({ index, registerForm }: any) {
+function AtividadesDraggable({ index, registerForm }: Props) {
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
 
   const remove = (index: number) => {
+    // Pega a lista de atividades diretamente do Formik
     const newList = registerForm.values.atividades;
+    // Remove item da lista
     newList.splice(index, 1);
+    // Atualiza lista no Formik
     registerForm.setFieldValue("atividades", newList);
   };
 
@@ -33,8 +34,6 @@ function AtividadesDraggable({ index, registerForm }: any) {
     const newId = draggableId + "-" + now.toLocaleString();
     setDraggableId(newId);
   }, []);
-
-  // console.log("registerForm", registerForm.values);
 
   return (
     <Draggable draggableId={draggableId} index={index}>

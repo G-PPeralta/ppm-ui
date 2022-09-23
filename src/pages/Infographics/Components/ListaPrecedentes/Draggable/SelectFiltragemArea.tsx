@@ -7,7 +7,12 @@ import { Area } from "interfaces/CadastrosModaisInfograficos";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
-function SelectFiltragemArea({ registerForm, index }: any) {
+interface Props {
+  registerForm: any;
+  index: number;
+}
+
+function SelectFiltragemArea({ registerForm, index }: Props) {
   const { listaArea } = useCadastroAtividade();
 
   const options = listaArea.map((area: Area) => ({

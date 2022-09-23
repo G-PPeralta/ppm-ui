@@ -12,14 +12,26 @@ import {
   PopoverTrigger,
   Stack,
 } from "@chakra-ui/react";
+import { FormikProps } from "formik";
+import { PrecedentesCadastroProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
-function PopOverPrecedentes({ registerForm, index }: any) {
+interface Props {
+  registerForm: FormikProps<any>; // Dentro do props temos a tipagem: FormikState<CadastroProjetoTipo>;
+  index: number;
+}
+
+function PopOverPrecedentes({ registerForm, index }: Props) {
   const handlePopoverPrecedentes = (
     indexPrecedente: number,
     precedenteIsChecked: boolean
   ) => {
+    // Pega a lista de atividades diretamente do Formik
     const newList = registerForm.values.atividades[index].precedentes;
+
+    // Verifica se o precedente está marcado ou não
     newList[indexPrecedente].checked = precedenteIsChecked;
+
+    // Atualiza lista no Formik
     registerForm.setFieldValue(`atividades[${index}].precedentes`, newList);
   };
 
@@ -49,7 +61,10 @@ function PopOverPrecedentes({ registerForm, index }: any) {
             <CheckboxGroup colorScheme="blue">
               <Stack spacing={[1, 3]} direction={"column"}>
                 {registerForm.values.atividades[index].precedentes.map(
-                  (atividade: any, index: any) => (
+                  (
+                    atividade: PrecedentesCadastroProjetoTipo,
+                    index: number
+                  ) => (
                     <Checkbox
                       key={index}
                       isChecked={atividade.checked}

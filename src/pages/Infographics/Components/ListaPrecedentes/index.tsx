@@ -6,6 +6,8 @@ import {
 } from "react-beautiful-dnd";
 
 import { Flex, FormLabel } from "@chakra-ui/react";
+import { FormikProps } from "formik";
+import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
@@ -18,12 +20,16 @@ export default function ListaPrecedentes({
 }: any) {
   const id = useId();
   const [render, setRender] = useState<any>([]);
-  const [droppableId, setDroppableId] = useState<any>(id);
+  const [droppableId, setDroppableId] = useState<string>(id);
 
   // console.log("registerForm", registerForm.values.atividades);
 
-  const reorder = (registerForm: any, startIndex: any, endIndex: any) => {
-    const listaReordenada = (registerForm: any) => {
+  const reorder = (
+    registerForm: FormikProps<any>,
+    startIndex: number,
+    endIndex: number
+  ) => {
+    const listaReordenada = (registerForm: FormikProps<any>) => {
       // Pega a lista de atividades diretamente do Formik
       // e faz uma atribuição em uma variável para garantir
       // imutabilidade do estado original
@@ -44,18 +50,23 @@ export default function ListaPrecedentes({
   };
 
   const onDragEnd = (result: any) => {
+    // Se o item não foi arrastado para outro lugar, não faz nada
     if (!result.destination) {
       return;
     }
 
+    // Se o item foi arrastado para outro o mesmo lugar, não faz nada
     if (result.destination.index === result.source.index) {
       return;
     }
 
+    // Se o item foi arrastado para outro lugar, chama a função
+    // de reordenar a lista
     reorder(registerForm, result.source.index, result.destination.index);
   };
 
   const add = () => {
+    // Cria um novo item na lista de atividades com os valores padrões
     registerForm.setFieldValue("atividades", [
       ...registerForm.values.atividades,
       {
@@ -68,14 +79,6 @@ export default function ListaPrecedentes({
     ]);
     setRender(!render);
   };
-
-  // const handleChangeProp = (index: any, chave: any, value: any) => {
-  //   const newList = list;
-  //   newList[index][chave] = value;
-  //   setList(newList);
-  //   setRender(!render);
-  //   // handleParent(newList);
-  // };
 
   useEffect(() => {
     // Para gerar um id aletaório para o droppable
@@ -102,7 +105,7 @@ export default function ListaPrecedentes({
           {(provided: DroppableProvided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
               {registerForm.values.atividades.map(
-                (_atividade: any, index: any) => (
+                (_atividade: AtividadesProjetoTipo, index: number) => (
                   <AtividadesDraggable
                     key={index}
                     registerForm={registerForm}
