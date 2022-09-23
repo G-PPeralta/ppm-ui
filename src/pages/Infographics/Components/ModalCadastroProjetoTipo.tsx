@@ -5,7 +5,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
@@ -97,7 +96,6 @@ function ModalCadastroProjetoTipo() {
           >
             Cadastrar Projeto Tipo
           </ModalHeader>
-          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               e.preventDefault();
