@@ -5,7 +5,6 @@ import {
   FiChevronsLeft,
   FiChevronsRight,
 } from "react-icons/fi";
-import { MdModeEdit } from "react-icons/md";
 
 import {
   IconButton,
@@ -20,14 +19,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-// import ModalCadastrarPriorizacao from "./ModalCadastrarPriorizacao";
-// import { DataEditing } from "@syncfusion/ej2-react-charts";
-
 import { getPriorizacoes } from "services/get/Priorizacoes";
 
 import ModalDeletarPriorizacao from "./ModalDeletarPriorizacao";
-
-// import "../projects.css";
+import ModalEditarBeneficio from "./ModalEditarBeneficio";
 
 export function TabelaPriorizacao() {
   const [pagAtual, setPagAtual] = useState(1);
@@ -84,15 +79,7 @@ export function TabelaPriorizacao() {
       <Td width={"600px"}>{prio.nom_ranking}</Td>
       <Td textAlign={"center"}>3</Td>
       <Td textAlign={"center"}>
-        <IconButton
-          variant="outline"
-          aria-label="open menu"
-          color={"origem.500"}
-          backgroundColor={"white"}
-          border={"none"}
-          textAlign={"center"}
-          icon={<MdModeEdit />}
-        />
+        <ModalEditarBeneficio />
         <ModalDeletarPriorizacao />
       </Td>
     </Tr>

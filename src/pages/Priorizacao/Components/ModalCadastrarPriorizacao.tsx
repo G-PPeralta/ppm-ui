@@ -140,7 +140,6 @@ function ModalCadastrarPriorizacao() {
                               color: "origem.500",
                             }}
                             fontSize={"20px"}
-                            mb={"8px"}
                           >
                             <IoIosArrowBack /> Priorização
                           </Button>

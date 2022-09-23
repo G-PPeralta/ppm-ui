@@ -129,9 +129,7 @@ function ModalLixeira() {
                             transition: "all 0.4s",
                           }}
                         >
-                          <>
-                            <Text>Restaurar</Text>
-                          </>
+                          <Text>Restaurar</Text>
                         </Button>
                       </Flex>
                     </Flex>

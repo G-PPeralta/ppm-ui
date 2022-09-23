@@ -14,3 +14,16 @@ export async function getPriorizacoes(): Promise<{
 
   return { data, status };
 }
+
+export async function getOpcoesRankings(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/rankings-opcoes", {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
+    },
+  });
+
+  return { data, status };
+}

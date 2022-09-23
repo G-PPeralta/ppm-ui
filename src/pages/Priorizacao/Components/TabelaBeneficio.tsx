@@ -5,7 +5,6 @@ import {
   FiChevronsLeft,
   FiChevronsRight,
 } from "react-icons/fi";
-import { MdModeEdit } from "react-icons/md";
 
 import {
   IconButton,
@@ -20,16 +19,12 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-// import ModalCadastrarPriorizacao from "./ModalCadastrarPriorizacao";
-// import { DataEditing } from "@syncfusion/ej2-react-charts";
-
 import { getPriorizacoes } from "services/get/Priorizacoes";
 
-import ModalDeletarPriorizacao from "./ModalDeletarPriorizacao";
+import ModalDeletarBeneficio from "./ModalDeletarBeneficio";
+import ModalEditarBeneficio from "./ModalEditarBeneficio";
 
-// import "../projects.css";
-
-export function TabelaPriorizacao() {
+export function TabelaBeneficio() {
   const [pagAtual, setPagAtual] = useState(1);
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
@@ -84,16 +79,8 @@ export function TabelaPriorizacao() {
       <Td width={"600px"}>{prio.nom_ranking}</Td>
       <Td textAlign={"center"}>3</Td>
       <Td textAlign={"center"}>
-        <IconButton
-          variant="outline"
-          aria-label="open menu"
-          color={"origem.500"}
-          backgroundColor={"white"}
-          border={"none"}
-          textAlign={"center"}
-          icon={<MdModeEdit />}
-        />
-        <ModalDeletarPriorizacao />
+        <ModalEditarBeneficio />
+        <ModalDeletarBeneficio />
       </Td>
     </Tr>
   ));
@@ -106,8 +93,8 @@ export function TabelaPriorizacao() {
             <Thead>
               <Tr background="origem.500" color="white">
                 <Th>ID</Th>
-                <Th>Priorizações</Th>
-                <Th textAlign={"center"}>Atividades</Th>
+                <Th>Benefícios</Th>
+                <Th textAlign={"center"}>Notas</Th>
                 <Th textAlign={"center"}>Ações</Th>
               </Tr>
             </Thead>
