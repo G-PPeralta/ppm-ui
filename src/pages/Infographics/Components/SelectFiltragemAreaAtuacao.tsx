@@ -8,7 +8,7 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
-function SelectFiltragemArea({ registerForm }: any) {
+function SelectFiltragemAreaAtuacao({ registerForm }: any) {
   const { listaAreaAtuacao } = useCadastroAtividade();
   const options = listaAreaAtuacao.map((area: AreaAtuacao) => ({
     value: area.id,
@@ -43,4 +43,4 @@ function SelectFiltragemArea({ registerForm }: any) {
   );
 }
 
-export default SelectFiltragemArea;
+export default SelectFiltragemAreaAtuacao;

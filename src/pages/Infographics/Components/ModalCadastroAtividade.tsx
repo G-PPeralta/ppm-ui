@@ -26,7 +26,7 @@ import { regexCaracteresEspeciais } from "utils/regex";
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 import Restricoes from "./Restricoes";
-import SelectFiltragemArea from "./SelectFiltragemArea";
+import SelectFiltragemAreaAtuacao from "./SelectFiltragemAreaAtuacao";
 import SelectFiltragemResponsavel from "./SelectFiltragemResponsavel";
 
 function ModalCadastroAtividade() {
@@ -134,7 +134,9 @@ function ModalCadastroAtividade() {
                         />
                       </Flex>
                       <Flex flex={1}>
-                        <SelectFiltragemArea registerForm={registerForm} />
+                        <SelectFiltragemAreaAtuacao
+                          registerForm={registerForm}
+                        />
                       </Flex>
                     </Flex>
 

@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import {
   Responsavel,
   AreaAtuacao,
+  Area,
 } from "interfaces/CadastrosModaisInfograficos";
 import { cadastroAtividadeSchema } from "validations/ModaisCadastrosInfografico";
 
@@ -23,7 +24,7 @@ export function useCadastroAtividade() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
-  const [listaArea, setListaArea] = useState<any[]>([]);
+  const [listaArea, setListaArea] = useState<Area[]>([]);
   const [listaAreaAtuacao, setListaAreaAtuacao] = useState<AreaAtuacao[]>([]);
   const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
   // const [listaAtividades, setListaAtividades] = useState<AtividadeLista[]>([]);

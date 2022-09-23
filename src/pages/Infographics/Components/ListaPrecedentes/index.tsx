@@ -9,8 +9,8 @@ import { Flex, FormLabel } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
+import BotaoAdicionar from "./BotaoAdicionar";
 import AtividadesDraggable from "./Draggable/AtividadeDraggable";
-import BotaoAdicionar from "./Draggable/BotaoAdicionar";
 
 export default function ListaPrecedentes({
   registerForm,
@@ -102,11 +102,10 @@ export default function ListaPrecedentes({
           {(provided: DroppableProvided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
               {registerForm.values.atividades.map(
-                (atividade: any, index: any) => (
+                (_atividade: any, index: any) => (
                   <AtividadesDraggable
                     key={index}
                     registerForm={registerForm}
-                    atividade={atividade}
                     index={index}
                   />
                 )

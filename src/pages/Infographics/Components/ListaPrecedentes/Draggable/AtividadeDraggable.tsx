@@ -6,6 +6,9 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
 
+import SelectFiltragemArea from "./SelectFiltragemArea";
+import SelectFiltragemTarefa from "./SelectFiltragemTarefa";
+
 // import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipoOLD";
 
 // import PopOverPrecedentes from "../../ListaAtividades/PopOverPrecedentes";
@@ -19,7 +22,6 @@ import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
 // }
 
 function AtividadesDraggable({
-  atividade,
   index,
   registerForm,
 }: // handleChangeProp,
@@ -64,6 +66,8 @@ any) {
     setDraggableId(newId);
   }, []);
 
+  console.log("registerForm", registerForm.values);
+
   return (
     <Draggable draggableId={draggableId} index={index}>
       {(provided) => (
@@ -88,25 +92,43 @@ any) {
             <Flex flexDirection={"row"} gap={4}>
               <Flex align={"center"} justify={"center"} gap={3}>
                 <GiHamburgerMenu color="#2E69FD" size={16} />
-                <Text sx={{ fontSize: 16, fontWeight: "600" }}>{1}</Text>
+                <Text sx={{ fontSize: 16, fontWeight: "600" }}>
+                  {index + 1}
+                </Text>
               </Flex>
 
               <FormControl>
-                <Text sx={{ fontSize: 12, fontWeight: "600" }}>ATIVIDADE</Text>
-                {/* <Select
-                  id="atividadeId"
-                  name="atividadeId"
-                  placeholder="Selecione"
+                <Text sx={{ fontSize: 12, fontWeight: "600" }}>ID</Text>
+                <Input
+                  placeholder="0"
+                  type={"number"}
                   bg={"#fff"}
-                  value={atividade.atividade}
-                  onChange={(event) => handleChange(event, "atividadeId")}
-                >
-                  {listaAtividades.map((data, index) => (
-                    <option value={data.id} key={index}>
-                      {data.tarefa}
-                    </option>
-                  ))}
-                </Select> */}
+                  id={`atividades[${index}].atividade_id_origem`}
+                  name={`atividades[${index}].atividade_id_origem`}
+                  value={
+                    registerForm.values.atividades[index].atividade_id_origem
+                  }
+                  onChange={(event) => {
+                    registerForm.setFieldValue(
+                      `atividades[${index}].atividade_id_origem`,
+                      Number(event.target.value)
+                    );
+                  }}
+                />
+              </FormControl>
+
+              <FormControl>
+                <SelectFiltragemArea
+                  registerForm={registerForm}
+                  index={index}
+                />
+              </FormControl>
+
+              <FormControl>
+                <SelectFiltragemTarefa
+                  registerForm={registerForm}
+                  index={index}
+                />
               </FormControl>
 
               <FormControl>
@@ -115,14 +137,15 @@ any) {
                   placeholder="0"
                   type={"number"}
                   bg={"#fff"}
-                  id="dias"
-                  name="dias"
-                  // value={
-                  //   listaAtividades.filter(
-                  //     (atv) => atv.id === atividade.atividadeId
-                  //   )[0]?.dias
-                  // }
-                  isDisabled
+                  id={`atividades[${index}].dias`}
+                  name={`atividades[${index}].dias`}
+                  value={registerForm.values.atividades[index].dias}
+                  onChange={(event) => {
+                    registerForm.setFieldValue(
+                      `atividades[${index}].dias`,
+                      Number(event.target.value)
+                    );
+                  }}
                 />
               </FormControl>
 

@@ -142,3 +142,8 @@ export interface AreaAtuacao {
   tipo: string;
   deletado: boolean;
 }
+
+export interface Area {
+  id: number;
+  nom_area: string;
+}
