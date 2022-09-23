@@ -299,12 +299,6 @@ export interface CoordenadorRetorno {
   coordenadorNome: string;
 }
 
-export interface AreaAtuacao {
-  id?: number;
-  tipo: string;
-  deletado: boolean;
-}
-
 export interface AtividadeLista {
   id: number;
   tarefa: string;
