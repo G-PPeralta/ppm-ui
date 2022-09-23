@@ -3,12 +3,16 @@ import { FiMapPin } from "react-icons/fi";
 
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { ICardInfoProjeto } from "interfaces/DetalhamentoProjetos";
+import { ProjetoProgresso } from "interfaces/Services";
+
+import { PercentagePieChartProjetoInfo } from "components/PercentagePieChartProjetoInfo";
 
 type infoProjetoProps = {
   infoProjeto: ICardInfoProjeto;
+  progresso: ProjetoProgresso[];
 };
 
-function CardInfoProjeto({ infoProjeto }: infoProjetoProps) {
+function CardInfoProjeto({ infoProjeto, progresso }: infoProjetoProps) {
   const innerWidth = window.innerWidth;
   return (
     <>
@@ -21,6 +25,8 @@ function CardInfoProjeto({ infoProjeto }: infoProjetoProps) {
         shrink={1}
         basis={"360px"}
       >
+        {progresso && <PercentagePieChartProjetoInfo data={progresso} />}
+
         <Box mb={4}>
           <Heading as="h4" size="md">
             {infoProjeto.nome_projeto}
