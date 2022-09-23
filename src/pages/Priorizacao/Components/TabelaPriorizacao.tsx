@@ -97,7 +97,6 @@ export function TabelaPriorizacao() {
       </Td>
     </Tr>
   ));
-  console.log(tableData);
 
   return (
     <div>

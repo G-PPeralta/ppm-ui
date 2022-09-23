@@ -1,11 +1,7 @@
-import { FaGreaterThan } from "react-icons/fa";
-
 import {
   Box,
-  Button,
   Flex,
   FormControl,
-  Icon,
   Stack,
   Text,
   useBreakpointValue,
@@ -16,6 +12,7 @@ import {
 import Sidebar from "components/SideBar";
 
 import ModalCadastrarPriorizacao from "./Components/ModalCadastrarPriorizacao";
+import ModalLixeira from "./Components/ModalLixeira";
 import { TabelaPriorizacao } from "./Components/TabelaPriorizacao";
 
 export function Priorizacao() {
@@ -66,21 +63,7 @@ export function Priorizacao() {
                       </FormControl>
                     </Flex>
                     <Flex alignItems={"flex-end"}>
-                      <Button
-                        background="transparent"
-                        color="#0047BB"
-                        float={"right"}
-                        fontSize="17px"
-                      >
-                        Lixeira
-                        <Icon
-                          as={FaGreaterThan}
-                          fontSize="13px"
-                          fontWeight={"none"}
-                          ml={1}
-                          color="#0047BB"
-                        />
-                      </Button>
+                      <ModalLixeira />
                     </Flex>
                   </Flex>
 
