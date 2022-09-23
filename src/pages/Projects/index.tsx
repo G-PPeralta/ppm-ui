@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiPlusCircle, FiSearch } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
@@ -23,7 +23,7 @@ import { useProjects } from "hooks/useProjects";
 
 import "./projects.css";
 // import ProjectTable from "./projectTable";
-import { TabelaProjetos } from "./components/TabelaProjetos";
+import { TabelaProjetos } from "./Components/TabelaProjetos";
 
 export function Projects() {
   const { projectsForm, loading, getAllProjects } = useProjects();
@@ -54,6 +54,9 @@ export function Projects() {
     }
   };
 
+  useEffect(() => {
+    getProjectsPerPolo();
+  }, []);
   return (
     <>
       <Sidebar>

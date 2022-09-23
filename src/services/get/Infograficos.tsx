@@ -1,14 +1,13 @@
 import {
   AreaAtuacao,
-  AtividadeLista,
-  RegistroResponsavel,
-  Tarefa,
-} from "interfaces/Services";
+  Responsavel,
+} from "interfaces/CadastrosModaisInfograficos";
+import { AtividadeLista, Tarefa } from "interfaces/Services";
 
 import { api, token } from "services/api";
 
 export async function getInfoCampanha(): Promise<{
-  data: any;
+  data: any[];
   status: number;
 }> {
   const { data, status } = await api.get(`/campanha`, token());
@@ -29,7 +28,7 @@ export async function getInfoProjetos(): Promise<{
 }
 
 export async function getResponsavelList(): Promise<{
-  data: RegistroResponsavel[];
+  data: Responsavel[];
   status: number;
 }> {
   const { data, status } = await api.get(`/responsavel`, token());

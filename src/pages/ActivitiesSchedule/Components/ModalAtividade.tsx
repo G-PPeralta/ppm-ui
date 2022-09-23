@@ -27,7 +27,7 @@ import { Ring } from "@uiball/loaders";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroAtividade } from "hooks/useCadastroAtividade";
+import { useCadastroAtividade } from "hooks/useCadastroAtividadeOLD";
 
 function ModalAtividade({ onClose, atividade, id }: any) {
   const { registerForm, loading } = useCadastroAtividade();

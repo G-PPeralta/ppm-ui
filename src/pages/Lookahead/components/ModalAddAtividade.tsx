@@ -190,7 +190,6 @@ export function ModalAddAtividade({ id, setRefresh, refresh }: any) {
                           placeholder="Adicione comentários sobre a atividade"
                           id="dsc_comentario"
                           name="dsc_comentario"
-                          value={registerForm.values.dsc_comentario}
                           onChange={registerForm.handleChange}
                         />
                       </FormControl>

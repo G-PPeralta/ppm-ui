@@ -28,7 +28,7 @@ import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 import SelectFiltragemPocos from "./SelectFiltragemPocos";
 import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
-function ModalIntervencao() {
+function ModalCadastroIntervencao() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { intervencaoForm, loading } = useCadastroIntervencao();
 
@@ -177,4 +177,4 @@ function ModalIntervencao() {
   );
 }
 
-export default ModalIntervencao;
+export default ModalCadastroIntervencao;

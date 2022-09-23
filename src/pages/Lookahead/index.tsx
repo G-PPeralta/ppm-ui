@@ -96,9 +96,7 @@ export function Lookahead() {
     getProjects();
   }, []);
 
-  const setPolo = (value: string) => {
-    console.log(value);
-  };
+  const setPolo = (value: string) => {};
   return (
     <div>
       <Sidebar>
