@@ -8,7 +8,7 @@ import {
 import { api, token } from "services/api";
 
 export async function getInfoCampanha(): Promise<{
-  data: any;
+  data: any[];
   status: number;
 }> {
   const { data, status } = await api.get(`/campanha`, token());

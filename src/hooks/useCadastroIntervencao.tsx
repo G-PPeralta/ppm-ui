@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import {
   ListaPoco,
-  ListaSonda,
   NovaIntervencao,
 } from "interfaces/CadastrosModaisInfograficos";
 import { cadastroNovaIntervencaoSchema } from "validations/ModaisCadastrosInfografico";
@@ -19,7 +18,7 @@ import { useAuth } from "./useAuth";
 export function useCadastroIntervencao() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [listaSondas, setListaSondas] = useState<ListaSonda[]>([]);
+  const [listaSondas, setListaSondas] = useState<any[]>([]);
   const [listaPocos, setListaPocos] = useState<ListaPoco[]>([]);
   const { user } = useAuth();
 

@@ -19,7 +19,7 @@ import ModalNovaCampanha from "./Components/ModalNovaCampanha";
 
 export function Infographics() {
   const [loading, setLoading] = useState(true);
-  const [campanhas, setCampanhas] = useState([]);
+  const [campanhas, setCampanhas] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
 
   const handleGetCampanha = async () => {
