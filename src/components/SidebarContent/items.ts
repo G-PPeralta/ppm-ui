@@ -45,7 +45,7 @@ export const LinkItems: Array<LinkItemProps> = [
 
   { name: "Estatísticas", icon: AiOutlineBarChart, link: "/" },
   { name: "Gráficos Estatisticos", icon: AiOutlineBarChart, link: "/" },
-  { name: "Look Ahead", icon: AiOutlineBarChart, link: "/" },
+  { name: "Look Ahead", icon: AiOutlineBarChart, link: "/lookahead" },
   { name: "Relatórios", icon: FiFile, link: "/reports" },
   // { name: 'Alterar Permissões', icon: FiUsers, link: '/permissions' },
 

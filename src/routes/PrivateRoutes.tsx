@@ -7,6 +7,8 @@ import { GanttPage } from "pages/Gantt";
 import { Home } from "pages/Home";
 import { Infographics } from "pages/Infographics";
 import { Fornecedores } from "pages/ListaDosFornecedores";
+import { Lookahead } from "pages/Lookahead";
+import { LookaheadDetalhe } from "pages/Lookahead/Detalhe";
 import { NotFound } from "pages/NotFound";
 import { Permissions } from "pages/Permissions";
 import { PermissionsList } from "pages/PermissionsList";
@@ -43,6 +45,8 @@ export function PrivateRoutes() {
       <Route path="/fornecedores" element={<Fornecedores />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
       <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
+      <Route path="/lookahead" element={<Lookahead />} />
+      <Route path="/lookahead-detalhe/:id" element={<LookaheadDetalhe />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
