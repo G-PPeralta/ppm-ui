@@ -8,7 +8,7 @@ import { TextError } from "components/TextError";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
-function SelectFiltragemPocos({ registerForm }: any) {
+function SelectFiltragemCampo({ registerForm }: any) {
   const { listaPocos } = useCadastroIntervencao();
 
   const options = listaPocos.map((poco: ListaPoco) => ({
@@ -25,22 +25,22 @@ function SelectFiltragemPocos({ registerForm }: any) {
       <FormControl>
         <Flex gap={1}>
           <RequiredField />
-          <FormLabel>POÇO</FormLabel>
+          <FormLabel>CAMPO</FormLabel>
         </Flex>
         <Select
-          id="poco_id"
-          name="poco_id"
+          id="campo_id"
+          name="campo_id"
           placeholder="Selecione"
           onChange={(event, name) => handleChange(event, name)}
           options={options}
           isSearchable
         />
-        {registerForm.errors.poco_id && (
-          <TextError>{registerForm.errors.poco_id}</TextError>
+        {registerForm.errors.campo_id && (
+          <TextError>{registerForm.errors.campo_id}</TextError>
         )}
       </FormControl>
     </>
   );
 }
 
-export default SelectFiltragemPocos;
+export default SelectFiltragemCampo;

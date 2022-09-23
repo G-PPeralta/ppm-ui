@@ -34,7 +34,7 @@ function SelectFiltragemSondas({ form, nomeChave }: any) {
         ) : (
           <Flex gap={1}>
             <RequiredField />
-            <FormLabel>NOME CAMPANHA/SONDA</FormLabel>
+            <FormLabel>SONDA</FormLabel>
           </Flex>
         )}
         <Select
