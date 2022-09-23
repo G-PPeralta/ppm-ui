@@ -68,8 +68,8 @@ any) {
       ...registerForm.values.atividades,
       {
         area_id: 0,
-        responsavel_id: 0,
         tarefa_id: 0,
+        responsavel_id: 0,
         qtde_dias: 0,
       },
     ]);
