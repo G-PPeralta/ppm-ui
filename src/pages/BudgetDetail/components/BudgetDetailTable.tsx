@@ -70,7 +70,7 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
   const tableData = data.map((detail, key) => (
     <>
       <Tr backgroundColor={color} key={detail.id} color="white">
-        <Td>{detail.data}</Td>
+        {/* <Td>{detail.data}</Td> */}
         <Td>{detail.brt}</Td>
         <Td onClick={() => toggleAcordion(key)}>
           <Flex alignItems={"center"} justifyContent="space-between">
@@ -120,7 +120,7 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
               </Th>
             </Tr>
             <Tr backgroundColor={"blue"} color="white">
-              <Th>Data</Th>
+              {/* <Th>Data</Th> */}
               <Th>BRT</Th>
               <Th>Serviço/Compra</Th>
               <Th>Fornecedor</Th>
