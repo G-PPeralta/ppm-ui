@@ -32,7 +32,7 @@ import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
-function ModalCadastrarPriorizacao() {
+function ModalEditarBeneficio() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     registerForm,
@@ -111,7 +111,7 @@ function ModalCadastrarPriorizacao() {
             color={"white"}
             fontSize={"1em"}
           >
-            Configuração
+            Priorização Benefício
           </ModalHeader>
           {/* <ModalCloseButton color={"white"} /> */}
           <form
@@ -146,7 +146,7 @@ function ModalCadastrarPriorizacao() {
                           </Button>
                         </Text>
                       </Flex>
-                      <Flex direction={"column"}>
+                      <Flex direction={"row"}>
                         <Flex
                           flexDirection={useBreakpointValue({
                             base: "column",
@@ -160,15 +160,14 @@ function ModalCadastrarPriorizacao() {
                               htmlFor="regulatorio.opcao_id"
                               fontSize={"12px"}
                               mb={"1px"}
+                              w={"350px"}
                               ml={"3px"}
                             >
-                              NOME DA PRIORIZAÇÃO
+                              NOME
                             </FormLabel>
                             <Input
                               ml={"3px"}
-                              w={"400px"}
                               isRequired
-                              placeholder="Nome"
                               id="beneficio.opcao_id"
                               name="beneficio.opcao_id"
                               value={registerForm.values.beneficio.opcao_id}
@@ -184,16 +183,16 @@ function ModalCadastrarPriorizacao() {
                           })}
                           gap={5}
                           mt={"10px"}
+                          ml={"15px"}
                         >
                           <FormControl>
                             <FormLabel
                               htmlFor="regulatorio.opcao_id"
                               fontSize={"12px"}
                               mb={"1px"}
-                              w={"550px"}
-                              mt={"5px"}
+                              w={"140px"}
                             >
-                              PERFIS COM ACESSO
+                              NOTA
                             </FormLabel>
                             <Select
                               id="pit"
@@ -264,4 +263,4 @@ function ModalCadastrarPriorizacao() {
   );
 }
 
-export default ModalCadastrarPriorizacao;
+export default ModalEditarBeneficio;

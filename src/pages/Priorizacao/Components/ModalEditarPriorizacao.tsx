@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { FaGreaterThan } from "react-icons/fa";
 
 import {
@@ -15,12 +16,26 @@ import {
 
 import Sidebar from "components/SideBar";
 
-import ModalCadastrarPriorizacao from "./Components/ModalCadastrarPriorizacao";
-import { TabelaPriorizacao } from "./Components/TabelaPriorizacao";
+import { getProjetosRanking } from "services/get/Projetos-Ranking";
 
-export function Priorizacao() {
+import ModalCadastrarPriorizacaoBeneficio from "./ModalCadastrarPriorizacaoBeneficio";
+import { TabelaPriorizacao } from "./TabelaPriorizacao";
+
+export function ModalEditarPriorizacao() {
   const wd = window.innerWidth;
+  const [data, setData] = useState<{}>({});
+  // const [loading, setLoading] = useState(false);
 
+  const getData = async () => {
+    const priorizacao = await getProjetosRanking();
+    setData(priorizacao);
+  };
+
+  console.log(data);
+
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <>
       <Sidebar>
@@ -62,7 +77,7 @@ export function Priorizacao() {
                     </Flex>
                     <Flex>
                       <FormControl className="toBottom">
-                        <ModalCadastrarPriorizacao />
+                        <ModalCadastrarPriorizacaoBeneficio />
                       </FormControl>
                     </Flex>
                     <Flex alignItems={"flex-end"}>
