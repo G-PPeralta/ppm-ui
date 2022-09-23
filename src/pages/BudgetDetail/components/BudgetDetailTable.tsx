@@ -78,7 +78,6 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
           </Flex>
         </Td>
         <Td></Td>
-        <Td>{brl.format(detail.total)}</Td>
         <Td>{brl.format(detail.previsto)}</Td>
         <Td>{brl.format(detail.realizado)}</Td>
         <Td></Td>
@@ -90,7 +89,6 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
             <Td>{filho.brt}</Td>
             <Td>{filho.servico}</Td>
             <Td>{filho.fornecedor}</Td>
-            <Td>{brl.format(filho.total)}</Td>
             <Td>{brl.format(filho.previsto)}</Td>
             <Td>{brl.format(filho.realizado)}</Td>
             <Td align="center">{filho.gap}%</Td>
@@ -126,7 +124,6 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
               <Th>BRT</Th>
               <Th>Serviço/Compra</Th>
               <Th>Fornecedor</Th>
-              <Th>R$ Total</Th>
               <Th>R$ Previsto</Th>
               <Th>R$ Realizado</Th>
               <Th>% Gap</Th>
