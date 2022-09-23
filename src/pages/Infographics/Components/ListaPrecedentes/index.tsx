@@ -22,8 +22,6 @@ export default function ListaPrecedentes({
   const [render, setRender] = useState<any>([]);
   const [droppableId, setDroppableId] = useState<string>(id);
 
-  // console.log("registerForm", registerForm.values.atividades);
-
   const reorder = (
     registerForm: FormikProps<any>,
     startIndex: number,
@@ -70,7 +68,7 @@ export default function ListaPrecedentes({
     registerForm.setFieldValue("atividades", [
       ...registerForm.values.atividades,
       {
-        atividade_id_origem: 0,
+        atividade_id_origem: "",
         area_id: 0,
         tarefa_id: 0,
         qtde_dias: 0,

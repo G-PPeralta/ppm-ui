@@ -27,44 +27,12 @@ import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
 
 import ListaPrecedentes from "./ListaPrecedentes";
 
-// import ListaPrecedentes from "./ListaPrecedentes";
-
 function ModalCadastroProjetoTipo() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaAtividadesPrecedentes } =
     useCadastroProjetoTipo();
 
-  // const [atividadesList, setAtividadesList] = useState([]);
-
-  // const handleParent = (newList: any) => {
-  //   setAtividadesList(newList);
-  // };
-
-  // const handleSubmit = () => {
-  //   const payload = atividadesList;
-
-  //   const payloadFiltrado: any[] = [];
-  //   let ordem = 0;
-
-  //   payload.forEach((pay: any) => {
-  //     ordem += 1;
-  //     const precedentesArray: any[] = [];
-  //     for (let i = 0; i < pay.precedentes.length; i += 1) {
-  //       if (pay.precedentes[i].checked) {
-  //         precedentesArray.push(pay.precedentes[i].id);
-  //       }
-  //     }
-  //     const newPay = pay;
-  //     newPay.precedentes = precedentesArray;
-  //     newPay.ordem = ordem;
-
-  //     payloadFiltrado.push(newPay);
-  //   });
-  //   registerForm.setFieldValue("atividades", payloadFiltrado);
-
-  //   registerForm.handleSubmit();
-  //   onClose();
-  // };
+  console.log("registerForm", registerForm.values);
 
   return (
     <>
@@ -118,7 +86,6 @@ function ModalCadastroProjetoTipo() {
                           <RequiredField />
                           <FormLabel htmlFor="nom_projeto_tipo">NOME</FormLabel>
                         </Flex>
-
                         <Input
                           isRequired
                           placeholder="Nome do Tipo de Projeto"
@@ -128,11 +95,12 @@ function ModalCadastroProjetoTipo() {
                           value={registerForm.values.nom_projeto_tipo}
                           onChange={registerForm.handleChange}
                         />
-                        {registerForm.errors.nom_projeto_tipo && (
-                          <TextError>
-                            {registerForm.errors.nom_projeto_tipo}
-                          </TextError>
-                        )}
+                        {registerForm.errors.nom_projeto_tipo &&
+                          registerForm.touched.nom_projeto_tipo && (
+                            <TextError>
+                              {registerForm.errors.nom_projeto_tipo}
+                            </TextError>
+                          )}
                       </FormControl>
                     </Flex>
                   </Stack>
@@ -151,7 +119,12 @@ function ModalCadastroProjetoTipo() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="comentarios">COMENTÁRIOS</FormLabel>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="comentarios">
+                            COMENTÁRIOS
+                          </FormLabel>
+                        </Flex>
                         <Textarea
                           isRequired
                           placeholder="Adicione comentários sobre o projeto"
@@ -160,11 +133,12 @@ function ModalCadastroProjetoTipo() {
                           value={registerForm.values.comentarios}
                           onChange={registerForm.handleChange}
                         />
-                        {registerForm.errors.comentarios && (
-                          <TextError>
-                            {registerForm.errors.comentarios}
-                          </TextError>
-                        )}
+                        {registerForm.errors.comentarios &&
+                          registerForm.touched.comentarios && (
+                            <TextError>
+                              {registerForm.errors.comentarios}
+                            </TextError>
+                          )}
                       </FormControl>
                     </Flex>
                   </Stack>

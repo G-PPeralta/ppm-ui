@@ -17,7 +17,7 @@ export interface PrecedentesCadastroProjetoTipo {
 }
 
 export interface AtividadesProjetoTipo {
-  atividade_id_origem: number;
+  atividade_id_origem: string;
   area_id: number;
   tarefa_id: number;
   qtde_dias: number;

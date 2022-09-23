@@ -48,19 +48,23 @@ export const cadastroAtividadeSchema = yup.object({
 });
 
 export const cadastroProjetoTipoSchema = yup.object({
-  nomeProjeto: yup.string().required("O nome do projeto é obrigatório!"),
+  nom_projeto_tipo: yup.string().required("O nome do projeto é obrigatório!"),
   atividades: yup.array().of(
     yup.object({
-      atividade: yup.string().required(),
+      atividade_id_origem: yup.string().required(),
+      area_id: yup.number().required().min(1),
+      tarefa_id: yup.number().required().min(1),
+      qtde_dias: yup.number().required(),
       precedentes: yup.array().of(
         yup.object({
-          id: yup.string(),
-          nomeAtividade: yup.string(),
+          id: yup.number(),
+          nome: yup.string(),
+          checked: yup.boolean(),
         })
       ),
     })
   ),
-  comentarios: yup.string().required(),
+  comentarios: yup.string().required("Adicione algum comentário!"),
 });
 
 export const cadastroPocoSchema = yup.object({

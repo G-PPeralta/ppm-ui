@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
-// import { cadastroProjetoTipoSchema } from 'validations/ModaisCadastrosInfografico';
 import { AtividadeLista } from "interfaces/Services";
+import { cadastroProjetoTipoSchema } from "validations/ModaisCadastrosInfografico";
 
 import { useToast } from "contexts/Toast";
 
@@ -35,7 +35,7 @@ export function useCadastroProjetoTipo() {
     nom_projeto_tipo: "",
     atividades: [
       {
-        atividade_id_origem: 0,
+        atividade_id_origem: "",
         area_id: 0,
         tarefa_id: 0,
         qtde_dias: 0,
@@ -53,7 +53,7 @@ export function useCadastroProjetoTipo() {
 
   const registerForm = useFormik({
     initialValues,
-    // validationSchema: cadastroProjetoTipoSchema,
+    validationSchema: cadastroProjetoTipoSchema,
     onSubmit: async (values) => {
       const newValues = {
         nom_usu_create: user?.nome,

@@ -76,8 +76,8 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                 <FormControl>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>ID</Text>
                   <Input
-                    placeholder="0"
-                    type={"number"}
+                    placeholder="Ex.: CIP02"
+                    type="text"
                     bg={"#fff"}
                     id={`atividades[${index}].atividade_id_origem`}
                     name={`atividades[${index}].atividade_id_origem`}
@@ -87,7 +87,7 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     onChange={(event) => {
                       registerForm.setFieldValue(
                         `atividades[${index}].atividade_id_origem`,
-                        Number(event.target.value)
+                        event.target.value
                       );
                     }}
                   />
