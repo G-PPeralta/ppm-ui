@@ -1,19 +1,19 @@
 import Select from "react-select";
 
 import { Flex, FormControl, FormLabel } from "@chakra-ui/react";
-// import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
+import { Responsavel } from "interfaces/CadastrosModaisInfograficos";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
-import { useCadastroAtividade } from "hooks/useCadastroAtividadeOLD";
+import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
-function SelectFiltragemAreas({ registerForm }: any) {
-  const { listaAreas } = useCadastroAtividade();
+function SelectFiltragemResponsavel({ registerForm }: any) {
+  const { listaResponsaveis } = useCadastroAtividade();
 
-  const options = listaAreas.map((area: any) => ({
-    value: area.id,
-    label: area.nom_area,
+  const options = listaResponsaveis.map((responsavel: Responsavel) => ({
+    value: responsavel.id,
+    label: responsavel.nome,
   }));
 
   const handleChange = ({ value }: any, { name }: any) => {
@@ -25,22 +25,22 @@ function SelectFiltragemAreas({ registerForm }: any) {
       <FormControl>
         <Flex gap={1}>
           <RequiredField />
-          <FormLabel>ÁREA</FormLabel>
+          <FormLabel htmlFor="responsavelId">RESPONSAVEL</FormLabel>
         </Flex>
         <Select
-          id="id_area"
-          name="id_area"
+          id="responsavelId"
+          name="responsavel"
           placeholder="Selecione"
           onChange={(event, name) => handleChange(event, name)}
           options={options}
           isSearchable
         />
-        {registerForm.errors.nom_area && (
-          <TextError>{registerForm.errors.nom_area}</TextError>
+        {registerForm.errors.responsavel && (
+          <TextError>{registerForm.errors.responsavel}</TextError>
         )}
       </FormControl>
     </>
   );
 }
 
-export default SelectFiltragemAreas;
+export default SelectFiltragemResponsavel;
