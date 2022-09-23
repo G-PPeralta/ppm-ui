@@ -324,7 +324,6 @@ export interface Fornecedor {
   responsavel: string;
   descricao: string;
 }
-//
 
 export interface LicoesAprendidas {
   id: number;
@@ -341,12 +340,54 @@ export interface LicoesAprendidasPayload {
   dat_usu_create?: string;
   txt_licao_aprendida: string;
   txt_acao: string;
-
-  nom_usu_create: string;
-  id_categoria: null;
 }
 
 export interface Categorias {
   id: number;
   nom_categoria: string;
+}
+
+export interface Opcao {
+  id?: number;
+  nom_opcao: string;
+  opcao_id: number;
+}
+
+export interface ProjetosRanking {
+  Benefício: Opcao[];
+  Regulatório: Opcao[];
+  Operação: Opcao[];
+  Prioridade: Opcao[];
+  Complexidade: Opcao[];
+  "Estratégia para o Negócio": Opcao[];
+}
+
+export interface ProjetosRankingPayload {
+  id_projeto: number;
+  beneficio: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  regulatorio: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  operacao: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  prioridade: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  complexidade: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  estrategia: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  dsc_comentario: string;
+  nom_usu_create: string;
 }
