@@ -3,40 +3,43 @@ import { Flex, Text } from "@chakra-ui/react";
 import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
 
-// AJUSTAR TIPAGEM
+type Atividade = {
+  atividade: string;
+  comp_pct: number;
+  finalplanejado: any;
+  id_poco: number;
+  inicioplanejado: any;
+  pct_plan: number;
+  pct_real: number;
+  qtddias: number;
+  sonda: string;
+};
 
-// type Atividade = {
-//   atividade: string;
-//   data: string;
-//   porcentagemFeita: string;
-// };
+type Props = {
+  atividade: Atividade;
+};
 
-// type Props = {
-//   atividade: Atividade;
-// };
-
-// AJUSTAR TIPAGEM
-function CardACT({ atividade }: any) {
+function CardACT({ atividade }: Props) {
   const dataFinalFormatada = formatDate(new Date(atividade.finalplanejado));
   // console.log(validateDate(dataInicioFormatada));
 
   return (
     <Flex
+      zIndex={1000}
       direction={"column"}
       align={"right"}
       justify={"right"}
-      // backgroundColor="#FF80D0"
       backgroundColor={validateDate(
-        atividade.pct_plan,
-        atividade.comp_pct,
-        atividade.pct_real
+        Number(atividade.pct_plan),
+        Number(atividade.comp_pct),
+        Number(atividade.pct_real)
       )}
       px={4}
       py={2}
       borderRadius={4}
       w={"100%"}
     >
-      <Flex direction={"column"}>
+      <Flex direction={"column"} align={"center"}>
         <Text
           display={"flex"}
           align={"center"}
@@ -61,7 +64,7 @@ function CardACT({ atividade }: any) {
         color={"white"}
         fontWeight={"normal"}
       >
-        {`Planejado: ${atividade.pct_plan} %`}
+        {`Planejado: ${atividade.pct_plan}%`}
       </Text>
       <Text
         align={"center"}
@@ -69,7 +72,7 @@ function CardACT({ atividade }: any) {
         color={"white"}
         fontWeight={"normal"}
       >
-        {`Realizado: ${atividade.pct_real} %`}
+        {`Realizado: ${atividade.pct_real}%`}
       </Text>
     </Flex>
   );

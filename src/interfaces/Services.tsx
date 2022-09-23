@@ -324,6 +324,7 @@ export interface Fornecedor {
   responsavel: string;
   descricao: string;
 }
+//
 
 export interface LicoesAprendidas {
   id: number;

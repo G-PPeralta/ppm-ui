@@ -4,6 +4,7 @@ import {
   FormControl,
   FormLabel,
   Input,
+  // Input,
   Modal,
   ModalBody,
   // ModalCloseButton,
@@ -19,13 +20,16 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
+import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 
-function ModalNovaCampanha() {
+// import SelectFiltragemSondas from "./SelectFiltragemSonda";
+
+function ModalNovaCampanha({ setRefresh, refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroCampanha();
 
@@ -78,7 +82,10 @@ function ModalNovaCampanha() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel>NOME</FormLabel>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="nom_campanha">NOME</FormLabel>
+                        </Flex>
                         <Input
                           isRequired
                           placeholder="Nome da campanha"
@@ -94,6 +101,10 @@ function ModalNovaCampanha() {
                               {registerForm.errors.nom_campanha}
                             </TextError>
                           )}
+                        {/* <SelectFiltragemSondas
+                          form={registerForm}
+                          nomeChave={"nom_campanha"}
+                        /> */}
                       </FormControl>
                     </Flex>
                   </Stack>
@@ -146,11 +157,20 @@ function ModalNovaCampanha() {
                   Cancelar
                 </Button>
                 <Button
-                  disabled={!registerForm.isValid}
+                  disabled={
+                    !registerForm.isValid || !registerForm.values.nom_campanha
+                  }
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() =>
+                    handleCadastrarRefresh(
+                      registerForm,
+                      onClose,
+                      setRefresh,
+                      refresh
+                    )
+                  }
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",

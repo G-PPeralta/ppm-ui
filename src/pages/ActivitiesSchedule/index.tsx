@@ -1,21 +1,27 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-import { Box, Flex, Heading, Stack } from "@chakra-ui/react";
+import { Box, Flex, Heading, Stack, Button } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
 
+import { statusProjeto } from "utils/validateDate";
+
 import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
+import StatusProjeto from "../../components/StatusProjeto";
+import BotaoVisaoPorArea from "./Components/BotaoVisaoPorArea";
 import CardACT from "./Components/CardACT";
 // import ModalAtividade from "./Components/ModalAtividade";
 import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
 import ModalEditarAtividade from "./Components/ModalEditarAtividade";
-import StatusProjeto from "./Components/StatusProjeto";
 
 export function ActivitiesSchedule() {
+  const navigate = useNavigate();
+  const { state }: any = useLocation();
   const { id } = useParams();
+  const [poco, setPoco] = useState(true);
   const [loading, setLoading] = useState(true);
   const [openId, setOpenId] = useState("");
   const [atividades, setAtividades] = useState<any[]>([]);
@@ -27,8 +33,7 @@ export function ActivitiesSchedule() {
   };
 
   useEffect(() => {
-    // console.log('scheadule', id);
-    // console.log('Atividade', Atividade);
+    setPoco(state.poco);
     requestHandler();
     setLoading(false);
   }, []);
@@ -36,29 +41,6 @@ export function ActivitiesSchedule() {
   useEffect(() => {
     requestHandler();
   }, [refresh]);
-
-  const statusProjeto = [
-    {
-      status: "Não Implementado",
-      color: "#F4DD06",
-    },
-    {
-      status: "Não Iniciado",
-      color: "#FFB400",
-    },
-    {
-      status: "Concluído",
-      color: "#059502",
-    },
-    {
-      status: "Em Andamento",
-      color: "#0047BB",
-    },
-    {
-      status: "Atrasado",
-      color: "#F40606",
-    },
-  ];
 
   const openDetails = (atividade: any) => {
     // console.log('atividade', atividade);
@@ -85,7 +67,33 @@ export function ActivitiesSchedule() {
                 </Flex>
                 <Flex justify={"space-between"} gap={6} wrap={"wrap"} mb={4}>
                   <Flex gap={2}>
-                    <ModalCadastroAtividade id={id} setRefresh={setRefresh} />
+                    <ModalCadastroAtividade
+                      id={id}
+                      setRefresh={setRefresh}
+                      refresh={refresh}
+                    />
+                    <Button
+                      variant="outline"
+                      border={"2px solid"}
+                      borderColor={"origem.500"}
+                      textColor={"origem.500"}
+                      _hover={{
+                        borderColor: "origem.600",
+                        backgroundColor: "origem.500",
+                        textColor: "white",
+                        transition: "all 0.4s",
+                      }}
+                      onClick={() => {
+                        navigate(`precedentes`, {
+                          state: {
+                            poco,
+                          },
+                        });
+                      }}
+                    >
+                      Visão por precedentes
+                    </Button>
+                    <BotaoVisaoPorArea />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (

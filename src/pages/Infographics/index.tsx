@@ -4,6 +4,7 @@ import { Box, Flex, Heading, Stack } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
+import StatusProjeto from "components/StatusProjeto";
 
 import { getInfoCampanha } from "services/get/Infograficos";
 
@@ -11,14 +12,15 @@ import { statusProjeto } from "../../utils/validateDate";
 import ColumnSPT from "./Components/ColumnSPT";
 import ExibirModal from "./Components/ExibirModal";
 import FiltrosModal from "./Components/FiltrosModal";
+// import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
 import ModalCadastroPoco from "./Components/ModalCadastroPoco";
 import ModalIntervencao from "./Components/ModalIntervencao";
 import ModalNovaCampanha from "./Components/ModalNovaCampanha";
-import StatusProjeto from "./Components/StatusProjeto";
 
 export function Infographics() {
   const [loading, setLoading] = useState(true);
   const [campanhas, setCampanhas] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   const handleGetCampanha = async () => {
     const response = await getInfoCampanha();
@@ -29,6 +31,10 @@ export function Infographics() {
   useEffect(() => {
     handleGetCampanha();
   }, []);
+
+  useEffect(() => {
+    handleGetCampanha();
+  }, [refresh]);
 
   return (
     <>
@@ -60,7 +66,11 @@ export function Infographics() {
                   mb={4}
                 >
                   <Flex gap={2}>
-                    <ModalNovaCampanha />
+                    <ModalNovaCampanha
+                      refresh={refresh}
+                      setRefresh={setRefresh}
+                    />
+                    {/* <ModalCadastrarSonda /> */}
                     <ModalCadastroPoco />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
