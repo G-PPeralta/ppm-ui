@@ -1,14 +1,14 @@
 import { IconType } from "react-icons";
 import { AiOutlineBarChart } from "react-icons/ai";
 import { BiData } from "react-icons/bi";
-// import { BsBarChartSteps } from "react-icons/bs";
+import { BsBarChartSteps } from "react-icons/bs";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import {
   FiHome,
   // FiTrendingUp,
   // FiEdit2,
   FiBarChart,
-  // FiActivity,
+  FiActivity,
   // FiUsers,
   FiFile,
   // FiGrid,
@@ -36,6 +36,21 @@ export const LinkItems: Array<LinkItemProps> = [
       },
       { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/budgets" },
       { name: "Importar Dados", icon: BiData, link: "/upload" },
+      {
+        name: "Fornecedores",
+        icon: FiActivity,
+        link: "/fornecedores",
+      },
+      {
+        name: "Lições Aprendidas",
+        icon: FiActivity,
+        link: "/licoesAprendidas",
+      },
+      {
+        name: "Detalhamento Projeto",
+        icon: BsBarChartSteps,
+        link: "/detalhamento/191",
+      },
     ],
   },
 
