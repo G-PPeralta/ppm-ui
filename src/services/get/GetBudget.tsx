@@ -13,7 +13,7 @@ export async function getBudgets(): Promise<Budget[]> {
       item: "1",
       projeto: {
         nome: "Olaf",
-        id: 369,
+        id: 31,
       },
       planejado: 200,
       realizado: 500,
@@ -25,7 +25,7 @@ export async function getBudgets(): Promise<Budget[]> {
           item: "1.1",
           projeto: {
             nome: "Olaf",
-            id: 369,
+            id: 31,
           },
           planejado: 100,
           realizado: 300,
@@ -37,7 +37,7 @@ export async function getBudgets(): Promise<Budget[]> {
           item: "1.2",
           projeto: {
             nome: "Olaf",
-            id: 369,
+            id: 31,
           },
           planejado: 100,
           realizado: 200,
