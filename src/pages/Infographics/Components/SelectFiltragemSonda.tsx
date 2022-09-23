@@ -6,7 +6,7 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
-function SelectFiltragemSondas({ form, nomeChave }: any) {
+function SelectFiltragemSondas({ form, nomeChave, nomeLabel }: any) {
   const { listaSondas } = useCadastroIntervencao();
 
   const idOptions = listaSondas.map((sonda: any) => ({
@@ -26,7 +26,7 @@ function SelectFiltragemSondas({ form, nomeChave }: any) {
   return (
     <>
       <FormControl>
-        {nomeChave === "id_campanha" ? (
+        {nomeLabel === "SONDA" ? (
           <Flex gap={1}>
             <RequiredField />
             <FormLabel>SONDA</FormLabel>
@@ -34,7 +34,7 @@ function SelectFiltragemSondas({ form, nomeChave }: any) {
         ) : (
           <Flex gap={1}>
             <RequiredField />
-            <FormLabel>SONDA</FormLabel>
+            <FormLabel>NOME</FormLabel>
           </Flex>
         )}
         <Select
