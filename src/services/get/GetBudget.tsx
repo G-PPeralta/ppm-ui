@@ -1,13 +1,13 @@
 import { Budget, BudgetDetail } from "models/Budget.model";
 
-// import { api, token } from "services/api";
+import { api, token } from "services/api";
 
 export async function getBudgets(): Promise<Budget[]> {
-  // const uri = "";
+  const uri = "/budgets";
 
-  // const { data } = await api.get<Budget[]>(uri, token());
+  const { data } = await api.get<Budget[]>(uri, token());
 
-  const data = [
+  /* const data = [
     {
       id: 1,
       item: "1",
@@ -70,7 +70,7 @@ export async function getBudgets(): Promise<Budget[]> {
       gap: 25,
       descricao: "adfa  7s8f4sagfdaadfafddf",
     },
-  ];
+  ]; */
   return data;
 }
 
