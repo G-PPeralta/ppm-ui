@@ -17,6 +17,8 @@ interface Props {
 }
 
 function AtividadesDraggable({ index, registerForm }: Props) {
+  const innerwidth = window.innerWidth;
+
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
 
@@ -64,63 +66,74 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                 </Text>
               </Flex>
 
-              <FormControl>
-                <Text sx={{ fontSize: 12, fontWeight: "600" }}>ID</Text>
-                <Input
-                  placeholder="0"
-                  type={"number"}
-                  bg={"#fff"}
-                  id={`atividades[${index}].atividade_id_origem`}
-                  name={`atividades[${index}].atividade_id_origem`}
-                  value={
-                    registerForm.values.atividades[index].atividade_id_origem
-                  }
-                  onChange={(event) => {
-                    registerForm.setFieldValue(
-                      `atividades[${index}].atividade_id_origem`,
-                      Number(event.target.value)
-                    );
-                  }}
-                />
-              </FormControl>
+              <Flex
+                gap={4}
+                direction={innerwidth >= 640 ? "row" : "column"}
+                align={"center"}
+                justify={"center"}
+                py={innerwidth >= 640 ? 0 : 4}
+              >
+                <FormControl>
+                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>ID</Text>
+                  <Input
+                    placeholder="0"
+                    type={"number"}
+                    bg={"#fff"}
+                    id={`atividades[${index}].atividade_id_origem`}
+                    name={`atividades[${index}].atividade_id_origem`}
+                    value={
+                      registerForm.values.atividades[index].atividade_id_origem
+                    }
+                    onChange={(event) => {
+                      registerForm.setFieldValue(
+                        `atividades[${index}].atividade_id_origem`,
+                        Number(event.target.value)
+                      );
+                    }}
+                  />
+                </FormControl>
 
-              <FormControl>
-                <SelectFiltragemArea
-                  registerForm={registerForm}
-                  index={index}
-                />
-              </FormControl>
+                <FormControl>
+                  <SelectFiltragemArea
+                    registerForm={registerForm}
+                    index={index}
+                  />
+                </FormControl>
 
-              <FormControl>
-                <SelectFiltragemTarefa
-                  registerForm={registerForm}
-                  index={index}
-                />
-              </FormControl>
+                <FormControl>
+                  <SelectFiltragemTarefa
+                    registerForm={registerForm}
+                    index={index}
+                  />
+                </FormControl>
 
-              <FormControl>
-                <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
-                <Input
-                  placeholder="0"
-                  type={"number"}
-                  bg={"#fff"}
-                  id={`atividades[${index}].dias`}
-                  name={`atividades[${index}].dias`}
-                  value={registerForm.values.atividades[index].dias}
-                  onChange={(event) => {
-                    registerForm.setFieldValue(
-                      `atividades[${index}].dias`,
-                      Number(event.target.value)
-                    );
-                  }}
-                />
-              </FormControl>
+                <FormControl>
+                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
+                  <Input
+                    placeholder="0"
+                    type={"number"}
+                    bg={"#fff"}
+                    id={`atividades[${index}].dias`}
+                    name={`atividades[${index}].dias`}
+                    value={registerForm.values.atividades[index].dias}
+                    onChange={(event) => {
+                      registerForm.setFieldValue(
+                        `atividades[${index}].dias`,
+                        Number(event.target.value)
+                      );
+                    }}
+                  />
+                </FormControl>
 
-              <Flex direction={"column"}>
-                <Text sx={{ fontSize: 12, fontWeight: "600" }}>
-                  PRECEDENTES
-                </Text>
-                <PopOverPrecedentes registerForm={registerForm} index={index} />
+                <Flex direction={"column"}>
+                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>
+                    PRECEDENTES
+                  </Text>
+                  <PopOverPrecedentes
+                    registerForm={registerForm}
+                    index={index}
+                  />
+                </Flex>
               </Flex>
 
               {/* <Flex
