@@ -36,8 +36,8 @@ export function TabelaBeneficio(idRanking: TableProps) {
   const rowsPerPage = 5;
   const [data, setData] = useState<any[]>([]);
   // const [loading, setLoading] = useState(false);
-  console.log("id bene", idRanking.idRanking);
-  console.log("nome bene", idRanking.nomeRanking);
+  // console.log("id bene", idRanking.idRanking);
+  // console.log("nome bene", idRanking.nomeRanking);
 
   const rankingId = idRanking.idRanking;
   const rankingNome = idRanking.nomeRanking;

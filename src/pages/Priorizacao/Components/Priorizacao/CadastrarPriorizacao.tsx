@@ -1,8 +1,4 @@
-import { useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
-// import { IoIosPodium } from "react-icons/io";
-
-// import { Link } from "react-router-dom";
 
 import {
   Button,
@@ -11,14 +7,12 @@ import {
   FormLabel,
   Modal,
   ModalBody,
-  // ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
   Stack,
   Text,
-  // Textarea,
   useBreakpointValue,
   useDisclosure,
   Input,
@@ -30,59 +24,13 @@ import { Ring } from "@uiball/loaders";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
+import { useCadastroNovaPriorizacao } from "hooks/useCadastrarNovaPriorizacao";
 
 function ModalCadastrarPriorizacao() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    registerForm,
-    loading,
-    listaBeneficios,
-    listaOperacao,
-    listaEstrategia,
-    listaComplexidade,
-    listaPrioridade,
-    listaRegulatorio,
-  } = useCadastroPriorizacao();
+  const { registerForm, loading } = useCadastroNovaPriorizacao();
 
-  // console.log("registerform", registerForm.values);
-
-  // console.log("isvalid", registerForm.isValid);
-
-  // useEffect(() => {
-  //   registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
-  // }, []);
-
-  // Pegar id do projeto
-  // console.log("id-cadastrar", projeto.projeto);
-
-  useEffect(() => {
-    // registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
-    registerForm.setFieldValue(
-      "beneficio.id_ranking",
-      Number(listaBeneficios[0]?.id)
-    );
-    registerForm.setFieldValue(
-      "regulatorio.id_ranking",
-      Number(listaRegulatorio[0]?.id)
-    );
-    registerForm.setFieldValue(
-      "operacao.id_ranking",
-      Number(listaOperacao[0]?.id)
-    );
-    registerForm.setFieldValue(
-      "prioridade.id_ranking",
-      Number(listaPrioridade[0]?.id)
-    );
-    registerForm.setFieldValue(
-      "complexidade.id_ranking",
-      Number(listaComplexidade[0]?.id)
-    );
-    registerForm.setFieldValue(
-      "estrategia.id_ranking",
-      Number(listaEstrategia[0]?.id)
-    );
-  }, [registerForm.values]);
+  console.log(registerForm);
 
   return (
     <>
@@ -156,7 +104,7 @@ function ModalCadastrarPriorizacao() {
                         >
                           <FormControl>
                             <FormLabel
-                              htmlFor="regulatorio.opcao_id"
+                              htmlFor="rankingName"
                               fontSize={"12px"}
                               mb={"1px"}
                               ml={"3px"}
@@ -168,9 +116,9 @@ function ModalCadastrarPriorizacao() {
                               w={"400px"}
                               isRequired
                               placeholder="Nome"
-                              id="beneficio.opcao_id"
-                              name="beneficio.opcao_id"
-                              value={registerForm.values.beneficio.opcao_id}
+                              id="rankingName"
+                              name="rankingName"
+                              value={registerForm.values.rankingName}
                               onChange={registerForm.handleChange}
                             />
                           </FormControl>

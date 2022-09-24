@@ -30,3 +30,8 @@ export const cadastroNovaPriorizacaoSchema = yup.object({
   }),
   nom_usu_create: yup.string(),
 });
+
+export const cadastroNovaPriorizacao = yup.object({
+  rankingName: yup.string().required(),
+  nom_usu_create: yup.string(),
+});

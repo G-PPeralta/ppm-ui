@@ -25,8 +25,8 @@ import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
-import ModalCadastrarBeneficio from "../Beneficio/CadastrarBeneficio";
 import EditarPriorizacao from "../Priorizacao/EditarPriorizacao";
+import ModalCadastrarBeneficio from "./CadastrarBeneficio";
 import { TabelaBeneficio } from "./TabelaBeneficio";
 
 interface TableProps {
@@ -37,8 +37,8 @@ interface TableProps {
 function ModalBeneficio(nomeRanking: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm } = useCadastroPriorizacao();
-  console.log(nomeRanking.nomeRanking);
-  console.log(nomeRanking.idRanking);
+  // console.log(nomeRanking.nomeRanking);
+  // console.log(nomeRanking.idRanking);
 
   return (
     <>

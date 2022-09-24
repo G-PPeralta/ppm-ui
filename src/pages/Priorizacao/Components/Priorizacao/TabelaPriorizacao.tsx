@@ -21,7 +21,7 @@ import {
 
 import { getPriorizacoes } from "services/get/Priorizacoes";
 
-import ModalBeneficio from "../Beneficio/ModalBeneficio";
+import ModalBeneficio from "../ModaisDinamicosPriorizacao/ModalBeneficio";
 import ModalDeletarPriorizacao from "./DeletarPriorizacao";
 
 export function TabelaPriorizacao() {
@@ -37,7 +37,7 @@ export function TabelaPriorizacao() {
     setData(priorizacao.data);
   };
 
-  console.log("data", data);
+  // console.log("data", data);
 
   useEffect(() => {
     getData();
