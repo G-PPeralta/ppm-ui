@@ -11,8 +11,8 @@ import {
 
 import Sidebar from "components/SideBar";
 
-import ModalCadastrarPriorizacao from "./Components/Priorizacao/CadastrarPriorizacao";
 import ModalLixeira from "./Components/ModalLixeira";
+import ModalCadastrarPriorizacao from "./Components/Priorizacao/CadastrarPriorizacao";
 import { TabelaPriorizacao } from "./Components/Priorizacao/TabelaPriorizacao";
 
 export function Priorizacao() {

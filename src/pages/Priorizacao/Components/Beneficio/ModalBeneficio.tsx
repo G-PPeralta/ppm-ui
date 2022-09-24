@@ -29,9 +29,16 @@ import ModalCadastrarBeneficio from "../Beneficio/CadastrarBeneficio";
 import EditarPriorizacao from "../Priorizacao/EditarPriorizacao";
 import { TabelaBeneficio } from "./TabelaBeneficio";
 
-function ModalBeneficio() {
+interface TableProps {
+  nomeRanking: string;
+  idRanking: any;
+}
+
+function ModalBeneficio(nomeRanking: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm } = useCadastroPriorizacao();
+  console.log(nomeRanking.nomeRanking);
+  console.log(nomeRanking.idRanking);
 
   return (
     <>
@@ -56,7 +63,7 @@ function ModalBeneficio() {
             color={"white"}
             fontSize={"1em"}
           >
-            Priorização Benefício
+            {`Priorização ${nomeRanking.nomeRanking}`}
           </ModalHeader>
           {/* <ModalCloseButton color={"white"} /> */}
           <form
@@ -118,7 +125,10 @@ function ModalBeneficio() {
                           </Button>
                         </Flex>
                       </Flex>
-                      <TabelaBeneficio />
+                      <TabelaBeneficio
+                        idRanking={nomeRanking.idRanking}
+                        nomeRanking={nomeRanking.nomeRanking}
+                      />
                     </Flex>
                   </Stack>
                 </Flex>

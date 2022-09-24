@@ -37,7 +37,7 @@ export function TabelaPriorizacao() {
     setData(priorizacao.data);
   };
 
-  // console.log("data", data);
+  console.log("data", data);
 
   useEffect(() => {
     getData();
@@ -79,7 +79,7 @@ export function TabelaPriorizacao() {
       <Td width={"600px"}>{prio.nom_ranking}</Td>
       <Td textAlign={"center"}>3</Td>
       <Td textAlign={"center"}>
-        <ModalBeneficio />
+        <ModalBeneficio nomeRanking={prio.nom_ranking} idRanking={prio.id} />
         <ModalDeletarPriorizacao />
       </Td>
     </Tr>

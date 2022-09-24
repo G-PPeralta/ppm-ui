@@ -24,20 +24,30 @@ import { getOpcoesRankings } from "services/get/Priorizacoes";
 import ModalDeletarBeneficio from "./DeletarBeneficio";
 import ModalEditarBeneficio from "./EditarBeneficio";
 
-export function TabelaBeneficio() {
+interface TableProps {
+  idRanking: any;
+  nomeRanking: any;
+}
+
+export function TabelaBeneficio(idRanking: TableProps) {
   const [pagAtual, setPagAtual] = useState(1);
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
   const rowsPerPage = 5;
   const [data, setData] = useState<any[]>([]);
   // const [loading, setLoading] = useState(false);
+  console.log("id bene", idRanking.idRanking);
+  console.log("nome bene", idRanking.nomeRanking);
+
+  const rankingId = idRanking.idRanking;
+  const rankingNome = idRanking.nomeRanking;
 
   const getData = async () => {
-    const priorizacao = await getOpcoesRankings(1);
+    const priorizacao = await getOpcoesRankings(rankingId);
     setData(priorizacao.data);
   };
 
-  console.log("data", data);
+  // console.log("data", data);
 
   useEffect(() => {
     getData();
@@ -74,7 +84,7 @@ export function TabelaBeneficio() {
   };
 
   const sortData = data.sort((a: any, b: any) => a.id - b.id);
-  console.log("sortData", sortData);
+  // console.log("sortData", sortData);
 
   const tableData = sortData.slice(from, to).map((bene) => (
     <Tr key={bene.id}>
@@ -96,7 +106,7 @@ export function TabelaBeneficio() {
             <Thead>
               <Tr background="origem.500" color="white">
                 <Th>ID</Th>
-                <Th>Benefícios</Th>
+                <Th>{rankingNome}</Th>
                 <Th textAlign={"center"}>Notas</Th>
                 <Th textAlign={"center"}>Ações</Th>
               </Tr>
