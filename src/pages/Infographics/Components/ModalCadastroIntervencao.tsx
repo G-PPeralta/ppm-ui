@@ -54,7 +54,7 @@ function ModalCadastroIntervencao() {
     label: poco.poco,
   }));
 
-  console.log("registerForm", registerForm.values);
+  // console.log("registerForm", registerForm.values);
 
   return (
     <>

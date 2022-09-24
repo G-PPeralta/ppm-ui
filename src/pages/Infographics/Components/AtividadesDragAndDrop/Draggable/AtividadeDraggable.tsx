@@ -4,12 +4,15 @@ import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
+import { Box, Flex, FormControl, Input, Select, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
+import { Area } from "interfaces/CadastrosModaisInfograficos";
+
+import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 import PopOverPrecedentes from "./PopOverPrecedentes";
-import SelectFiltragemArea from "./SelectFiltragemArea";
-import SelectFiltragemTarefa from "./SelectFiltragemTarefa";
+// import SelectFiltragemArea from "./SelectFiltragemArea";
+// import SelectFiltragemTarefa from "./SelectFiltragemTarefa";
 
 interface Props {
   registerForm: FormikProps<any>;
@@ -21,6 +24,7 @@ function AtividadesDraggable({ index, registerForm }: Props) {
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
+  const { listaArea } = useCadastroAtividade();
 
   const remove = (index: number) => {
     // Pega a lista de atividades diretamente do Formik
@@ -36,6 +40,8 @@ function AtividadesDraggable({ index, registerForm }: Props) {
     const newId = draggableId + "-" + now.toLocaleString();
     setDraggableId(newId);
   }, []);
+
+  console.log("registerForm", registerForm.values);
 
   return (
     <Draggable draggableId={draggableId} index={index}>
@@ -94,17 +100,43 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                 </FormControl>
 
                 <FormControl>
-                  <SelectFiltragemArea
+                  {/* <SelectFiltragemArea
                     registerForm={registerForm}
                     index={index}
-                  />
+                  /> */}
+                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>ÁREA</Text>
+                  <Select
+                    placeholder="Selecione"
+                    bg={"#fff"}
+                    id={`atividades[${index}].area_id`}
+                    name={`atividades[${index}].area_id`}
+                    value={registerForm.values.atividades[index].area_id}
+                    onChange={registerForm.handleChange}
+                  >
+                    {listaArea.map((area: Area) => (
+                      <option value={area.id}>{area.nom_area}</option>
+                    ))}
+                  </Select>
                 </FormControl>
 
                 <FormControl>
-                  <SelectFiltragemTarefa
+                  {/* <SelectFiltragemTarefa
                     registerForm={registerForm}
                     index={index}
-                  />
+                  /> */}
+                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>TAREFA</Text>
+                  <Select
+                    placeholder="Selecione"
+                    bg={"#fff"}
+                    id={`atividades[${index}].tarefa_id`}
+                    name={`atividades[${index}].tarefa_id`}
+                    value={registerForm.values.atividades[index].tarefa_id}
+                    onChange={registerForm.handleChange}
+                  >
+                    {listaArea.map((area: Area) => (
+                      <option value={area.id}>{area.nom_area}</option>
+                    ))}
+                  </Select>
                 </FormControl>
 
                 <FormControl>
