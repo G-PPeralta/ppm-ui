@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 
-import { Box, Flex, Heading, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Stack,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
+import StatusProjeto from "components/StatusProjeto";
 
 import { getInfoCampanha } from "services/get/Infograficos";
 
@@ -11,16 +18,19 @@ import { statusProjeto } from "../../utils/validateDate";
 import ColumnSPT from "./Components/ColumnSPT";
 import ExibirModal from "./Components/ExibirModal";
 import FiltrosModal from "./Components/FiltrosModal";
-// import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
+import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
+import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
+import ModalCadastroIntervencao from "./Components/ModalCadastroIntervencao";
 import ModalCadastroPoco from "./Components/ModalCadastroPoco";
-import ModalIntervencao from "./Components/ModalIntervencao";
+import ModalCadastroProjetoTipo from "./Components/ModalCadastroProjetoTipo";
 import ModalNovaCampanha from "./Components/ModalNovaCampanha";
-import StatusProjeto from "./Components/StatusProjeto";
 
 export function Infographics() {
   const [loading, setLoading] = useState(true);
-  const [campanhas, setCampanhas] = useState([]);
+  const [campanhas, setCampanhas] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
+
+  const innerWidth = useBreakpointValue({ base: 0, md: 1, lg: 2, xl: 3 });
 
   const handleGetCampanha = async () => {
     const response = await getInfoCampanha();
@@ -43,14 +53,14 @@ export function Infographics() {
           <Stack spacing="8">
             <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
               <Box
-                py={{ base: "0", sm: "8" }}
-                px={{ base: "4", sm: "6" }}
+                py={{ base: "6", sm: "8" }}
+                px={{ base: "6", sm: "8" }}
                 w={"100%"}
                 bg={"white"}
-                borderRadius={{ base: "none", sm: "xl" }}
+                borderRadius={{ base: "xl", sm: "xl" }}
               >
-                <Flex justify={"space-between"} mb={5}>
-                  <Heading as="h3" size="md" mb={3}>
+                <Flex justify={"space-between"} mb={5} wrap={"wrap"}>
+                  <Heading as="h3" size="md" mb={3} mt={innerWidth}>
                     Acompanhamento de poços
                   </Heading>
                   <Flex gap={4}>
@@ -65,13 +75,15 @@ export function Infographics() {
                   wrap={"wrap"}
                   mb={4}
                 >
-                  <Flex gap={2}>
+                  <Flex gap={2} wrap={"wrap"}>
                     <ModalNovaCampanha
                       refresh={refresh}
                       setRefresh={setRefresh}
                     />
-                    {/* <ModalCadastrarSonda /> */}
+                    <ModalCadastrarSonda />
                     <ModalCadastroPoco />
+                    <ModalCadastroAtividade />
+                    <ModalCadastroProjetoTipo />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (
@@ -101,7 +113,7 @@ export function Infographics() {
                           justify={"space-between"}
                         >
                           <ColumnSPT column={column} />
-                          <ModalIntervencao />
+                          <ModalCadastroIntervencao />
                         </Flex>
                       ))}
                   </Box>

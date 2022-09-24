@@ -8,7 +8,7 @@ import { TextError } from "components/TextError";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
-function SelectFiltragemPocos({ intervencaoForm }: any) {
+function SelectFiltragemPocos({ registerForm }: any) {
   const { listaPocos } = useCadastroIntervencao();
 
   const options = listaPocos.map((poco: ListaPoco) => ({
@@ -17,7 +17,7 @@ function SelectFiltragemPocos({ intervencaoForm }: any) {
   }));
 
   const handleChange = ({ value }: any, { name }: any) => {
-    intervencaoForm.setFieldValue(name, value);
+    registerForm.setFieldValue(name, value);
   };
 
   return (
@@ -28,15 +28,15 @@ function SelectFiltragemPocos({ intervencaoForm }: any) {
           <FormLabel>POÇO</FormLabel>
         </Flex>
         <Select
-          id="nom_atividade"
-          name="nom_atividade"
+          id="poco_id"
+          name="poco_id"
           placeholder="Selecione"
           onChange={(event, name) => handleChange(event, name)}
           options={options}
           isSearchable
         />
-        {intervencaoForm.errors.nom_atividade && (
-          <TextError>{intervencaoForm.errors.nom_atividade}</TextError>
+        {registerForm.errors.poco_id && (
+          <TextError>{registerForm.errors.poco_id}</TextError>
         )}
       </FormControl>
     </>
