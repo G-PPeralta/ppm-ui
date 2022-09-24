@@ -25,10 +25,11 @@ import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
-import ModalCadastrarBeneficio from "./ModalCadastrarBeneficio";
+import ModalCadastrarBeneficio from "../Beneficio/CadastrarBeneficio";
+import EditarPriorizacao from "../Priorizacao/EditarPriorizacao";
 import { TabelaBeneficio } from "./TabelaBeneficio";
 
-function ModalEditarBeneficio() {
+function ModalBeneficio() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm } = useCadastroPriorizacao();
 
@@ -70,50 +71,41 @@ function ModalEditarBeneficio() {
                   <Stack gap={2}>
                     <Flex direction={"column"}>
                       <Flex>
-                        <Text>
-                          <Button
-                            aria-label=""
-                            backgroundColor={"white"}
-                            color={"black"}
-                            onClick={() =>
-                              handleCancelar(registerForm, onClose)
-                            }
-                            _hover={{
-                              background: "white",
-                              transition: "all 0.4s",
-                              color: "origem.500",
-                            }}
-                            fontSize={"20px"}
-                            mb={"8px"}
-                          >
-                            <IoIosArrowBack /> Priorização
-                          </Button>
-                        </Text>
-                        <Flex>
-                          <ModalCadastrarBeneficio />
+                        <Flex align={"flex-start"}>
+                          <Text>
+                            <Button
+                              aria-label=""
+                              backgroundColor={"white"}
+                              color={"black"}
+                              onClick={() =>
+                                handleCancelar(registerForm, onClose)
+                              }
+                              _hover={{
+                                background: "white",
+                                transition: "all 0.4s",
+                                color: "origem.500",
+                              }}
+                              fontSize={"20px"}
+                              mb={5}
+                            >
+                              <IoIosArrowBack /> Priorização
+                            </Button>
+                          </Text>
                         </Flex>
-                        <Flex>
-                          <Button
-                            // disabled={!registerForm.isValid}
-                            background="white"
-                            variant="primary"
-                            border={"#0047BB solid 1px"}
-                            color="origem.500"
-                            _hover={{
-                              background: "origem.500",
-                              color: "white",
-                              transition: "all 0.4s",
-                            }}
-                          >
-                            <Text>Configuração</Text>
-                          </Button>
+                        <Flex ml={"180px"}>
+                          <Flex mt={"18px"}>
+                            <ModalCadastrarBeneficio />
+                          </Flex>
+                          <Flex mt={"18px"}>
+                            <EditarPriorizacao />
+                          </Flex>
                         </Flex>
-                        <Flex>
+                        <Flex align={"flex-end"} ml={"30px"}>
                           <Button
                             background="transparent"
                             color="#0047BB"
                             float={"right"}
-                            fontSize="17px"
+                            fontSize="18px"
                           >
                             Lixeira
                             <Icon
@@ -139,4 +131,4 @@ function ModalEditarBeneficio() {
   );
 }
 
-export default ModalEditarBeneficio;
+export default ModalBeneficio;

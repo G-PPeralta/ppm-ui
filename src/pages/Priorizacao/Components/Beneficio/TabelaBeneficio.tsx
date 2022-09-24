@@ -19,10 +19,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import { getPriorizacoes } from "services/get/Priorizacoes";
+import { getOpcoesRankings } from "services/get/Priorizacoes";
 
-import ModalDeletarBeneficio from "./ModalDeletarBeneficio";
-import ModalEditarBeneficio from "./ModalEditarBeneficio";
+import ModalDeletarBeneficio from "./DeletarBeneficio";
+import ModalEditarBeneficio from "./EditarBeneficio";
 
 export function TabelaBeneficio() {
   const [pagAtual, setPagAtual] = useState(1);
@@ -33,7 +33,7 @@ export function TabelaBeneficio() {
   // const [loading, setLoading] = useState(false);
 
   const getData = async () => {
-    const priorizacao = await getPriorizacoes();
+    const priorizacao = await getOpcoesRankings(1);
     setData(priorizacao.data);
   };
 
@@ -73,10 +73,13 @@ export function TabelaBeneficio() {
     paginate(_pag);
   };
 
-  const tableData = data.slice(from, to).map((prio) => (
-    <Tr key={prio.id}>
-      <Td>{prio.id}</Td>
-      <Td width={"600px"}>{prio.nom_ranking}</Td>
+  const sortData = data.sort((a: any, b: any) => a.id - b.id);
+  console.log("sortData", sortData);
+
+  const tableData = sortData.slice(from, to).map((bene) => (
+    <Tr key={bene.id}>
+      <Td>{bene.id}</Td>
+      <Td width={"600px"}>{bene.nom_opcao}</Td>
       <Td textAlign={"center"}>3</Td>
       <Td textAlign={"center"}>
         <ModalEditarBeneficio />
@@ -88,7 +91,7 @@ export function TabelaBeneficio() {
   return (
     <div>
       <Flex direction={"column"}>
-        <TableContainer mt={4} mb={3} ml={1}>
+        <TableContainer mt={6} mb={1}>
           <Table variant="unstyled">
             <Thead>
               <Tr background="origem.500" color="white">

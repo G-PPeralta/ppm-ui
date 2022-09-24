@@ -11,9 +11,9 @@ import {
 
 import Sidebar from "components/SideBar";
 
-import ModalCadastrarPriorizacao from "./Components/ModalCadastrarPriorizacao";
+import ModalCadastrarPriorizacao from "./Components/Priorizacao/CadastrarPriorizacao";
 import ModalLixeira from "./Components/ModalLixeira";
-import { TabelaPriorizacao } from "./Components/TabelaPriorizacao";
+import { TabelaPriorizacao } from "./Components/Priorizacao/TabelaPriorizacao";
 
 export function Priorizacao() {
   const wd = window.innerWidth;

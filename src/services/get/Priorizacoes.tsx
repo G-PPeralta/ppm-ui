@@ -15,11 +15,11 @@ export async function getPriorizacoes(): Promise<{
   return { data, status };
 }
 
-export async function getOpcoesRankings(): Promise<{
+export async function getOpcoesRankings(id: number): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/rankings-opcoes", {
+  const { data, status } = await api.get(`/rankings-opcoes/${id}`, {
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },
