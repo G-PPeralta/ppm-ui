@@ -83,15 +83,19 @@ export const cadastroNovaCampanhaSchema = yup.object({
 });
 
 export const cadastroNovaIntervencaoSchema = yup.object({
-  nom_atividade: yup
-    .string()
-    .min(2, "Campo obrigatório")
-    .required("Poço é obrigatório"),
-  id_campanha: yup
-    .number()
-    .min(2, "Campo obrigatório")
-    .required("Sonda é obrigatória"),
-  dsc_comentario: yup.string(),
+  sonda_id: yup.number().required().min(1),
+  poco_id: yup.number().required().min(1),
+  projeto_tipo_id: yup.number().required().min(1),
+  dat_ini_prev: yup.string().required(),
+  atividades: yup.array().of(
+    yup.object({
+      area_id: yup.number().required().min(1),
+      tarefa_id: yup.number().required().min(1),
+      responsavel_id: yup.number().required().min(1),
+      qtde_dias: yup.number().required().min(1),
+    })
+  ),
+  comentarios: yup.string().required("Adicione algum comentário!"),
 });
 
 export const cadastroNovaAtividadeSchema = yup.object({
@@ -99,5 +103,5 @@ export const cadastroNovaAtividadeSchema = yup.object({
   pct_real: yup.number().required("Sonda é obrigatória"),
   dat_ini_plan: yup.string().required("A data e hora de início é obrigatória"),
   dat_fim_plan: yup.string().required("A data e hora de fim é obrigatória"),
-  dsc_comentario: yup.string(),
+  dsc_comentario: yup.string().required("O comentário é obrigatório"),
 });

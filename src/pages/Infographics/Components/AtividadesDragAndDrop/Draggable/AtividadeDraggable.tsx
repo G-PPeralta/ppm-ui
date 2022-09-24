@@ -6,7 +6,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { Box, Flex, FormControl, Input, Select, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
-import { Area } from "interfaces/CadastrosModaisInfograficos";
+import { AreaAtuacao } from "interfaces/CadastrosModaisInfograficos";
 
 import { regexCaracteresEspeciais } from "utils/regex";
 
@@ -26,7 +26,7 @@ function AtividadesDraggable({ index, registerForm }: Props) {
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
-  const { listaArea } = useCadastroAtividade();
+  const { listaAreaAtuacao } = useCadastroAtividade();
 
   const remove = (index: number) => {
     // Pega a lista de atividades diretamente do Formik
@@ -114,8 +114,8 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     value={registerForm.values.atividades[index].area_id}
                     onChange={registerForm.handleChange}
                   >
-                    {listaArea.map((area: Area) => (
-                      <option value={area.id}>{area.nom_area}</option>
+                    {listaAreaAtuacao.map((area: AreaAtuacao) => (
+                      <option value={area.id}>{area.tipo}</option>
                     ))}
                   </Select>
                 </FormControl>
@@ -134,8 +134,8 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     value={registerForm.values.atividades[index].tarefa_id}
                     onChange={registerForm.handleChange}
                   >
-                    {listaArea.map((area: Area) => (
-                      <option value={area.id}>{area.nom_area}</option>
+                    {listaAreaAtuacao.map((area: AreaAtuacao) => (
+                      <option value={area.id}>{area.tipo}</option>
                     ))}
                   </Select>
                 </FormControl>

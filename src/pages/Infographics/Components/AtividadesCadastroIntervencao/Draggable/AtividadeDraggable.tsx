@@ -3,7 +3,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import { Box, Flex, FormControl, Input, Select, Text } from "@chakra-ui/react";
+import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 import {
   AreaAtuacao,
@@ -12,8 +12,7 @@ import {
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
-// import SelectFiltragem from "../../SelectFiltragem";
-
+import SelectFiltragem from "../../SelectFiltragem";
 interface Props {
   registerForm: FormikProps<any>;
   index: number;
@@ -35,22 +34,55 @@ function AtividadesDraggable({ index, registerForm }: Props) {
     registerForm.setFieldValue("atividades", newList);
   };
 
-  // const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
-  //   value: poco.id,
-  //   label: poco.tipo,
-  // }));
+  const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
+    value: poco.id,
+    label: poco.tipo,
+  }));
 
-  // const optionsTarefa = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
-  //   value: poco.id,
-  //   label: poco.tipo,
-  // }));
+  const optionsTarefa = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
+    value: poco.id,
+    label: poco.tipo,
+  }));
 
-  // const optionsResponsaveis = listaResponsaveis.map(
-  //   (responsavel: Responsavel) => ({
-  //     value: responsavel.nome,
-  //     label: responsavel.nome,
-  //   })
-  // );
+  const optionsResponsaveis = listaResponsaveis.map(
+    (responsavel: Responsavel) => ({
+      value: responsavel.nome,
+      label: responsavel.nome,
+    })
+  );
+
+  const getAreaValue = (options: any, i: number) => {
+    const index = options
+      .map(({ value }: any) => value)
+      .indexOf(registerForm?.values?.atividades?.[i].area_id);
+
+    return {
+      value: options?.[index]?.value,
+      label: options?.[index]?.label,
+    };
+  };
+
+  const getTarefaValue = (options: any, i: number) => {
+    const index = options
+      .map(({ value }: any) => value)
+      .indexOf(registerForm?.values?.atividades?.[i].tarefa_id);
+
+    return {
+      value: options?.[index]?.value,
+      label: options?.[index]?.label,
+    };
+  };
+
+  const getResponsavelValue = (options: any, i: number) => {
+    const index = options
+      .map(({ value }: any) => value)
+      .indexOf(registerForm?.values?.atividades?.[i].responsavel_id);
+
+    return {
+      value: options?.[index]?.value,
+      label: options?.[index]?.label,
+    };
+  };
 
   useEffect(() => {
     const now = Date.now();
@@ -102,12 +134,13 @@ function AtividadesDraggable({ index, registerForm }: Props) {
               >
                 <FormControl>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>ÁREA</Text>
-                  {/* <SelectFiltragem
+                  <SelectFiltragem
                     registerForm={registerForm}
                     propName={`atividades[${index}].area_id`}
                     options={optionsAreaAtuacao}
-                  /> */}
-                  <Select
+                    value={getAreaValue(optionsAreaAtuacao, index)}
+                  />
+                  {/* <Select
                     name={`atividades[${index}].area_id`}
                     placeholder="Selecione"
                     onChange={registerForm.handleChange}
@@ -117,16 +150,17 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     {listaAreaAtuacao.map((area: AreaAtuacao) => (
                       <option value={area.id}>{area.tipo}</option>
                     ))}
-                  </Select>
+                  </Select> */}
                 </FormControl>
                 <FormControl>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>TAREFA</Text>
-                  {/* <SelectFiltragem
+                  <SelectFiltragem
                     registerForm={registerForm}
                     propName={`atividades[${index}].tarefa_id`}
                     options={optionsTarefa}
-                  /> */}
-                  <Select
+                    value={getTarefaValue(optionsTarefa, index)}
+                  />
+                  {/* <Select
                     name={`atividades[${index}].tarefa_id`}
                     placeholder="Selecione"
                     onChange={registerForm.handleChange}
@@ -136,18 +170,19 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     {listaResponsaveis.map((responsavel: Responsavel) => (
                       <option value={responsavel.id}>{responsavel.nome}</option>
                     ))}
-                  </Select>
+                  </Select> */}
                 </FormControl>
                 <FormControl>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>
                     RESPONSÁVEL
                   </Text>
-                  {/* <SelectFiltragem
+                  <SelectFiltragem
                     registerForm={registerForm}
                     propName={`atividades[${index}].responsavel_id`}
                     options={optionsResponsaveis}
-                  /> */}
-                  <Select
+                    value={getResponsavelValue(optionsResponsaveis, index)}
+                  />
+                  {/* <Select
                     name={`atividades[${index}].responsavel_id`}
                     placeholder="Selecione"
                     onChange={registerForm.handleChange}
@@ -157,7 +192,7 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     {listaResponsaveis.map((responsavel: Responsavel) => (
                       <option value={responsavel.id}>{responsavel.nome}</option>
                     ))}
-                  </Select>
+                  </Select> */}
                 </FormControl>
                 <FormControl>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>

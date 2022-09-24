@@ -5,7 +5,13 @@ import { Flex, FormControl, FormLabel } from "@chakra-ui/react";
 import { RequiredField } from "components/RequiredField/RequiredField";
 // import { TextError } from "components/TextError";
 
-function SelectFiltragem({ registerForm, nomeSelect, propName, options }: any) {
+function SelectFiltragem({
+  registerForm,
+  nomeSelect,
+  propName,
+  options,
+  value,
+}: any) {
   const handleChange = ({ value }: any, { name }: any) => {
     registerForm.setFieldValue(name, value);
   };
@@ -25,6 +31,8 @@ function SelectFiltragem({ registerForm, nomeSelect, propName, options }: any) {
           placeholder="Selecione"
           onChange={(event, name) => handleChange(event, name)}
           options={options}
+          defaultValue={"Selecione"}
+          value={value}
           isSearchable
         />
         {/* {`registerForm.errors.${propName}` && (

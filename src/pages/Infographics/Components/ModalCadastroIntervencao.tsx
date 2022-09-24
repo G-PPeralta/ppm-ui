@@ -20,6 +20,8 @@ import {
 import { Ring } from "@uiball/loaders";
 import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
 
+import { RequiredField } from "components/RequiredField/RequiredField";
+
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
@@ -35,10 +37,6 @@ function ModalCadastroIntervencao() {
 
   const innerWidth = window.innerWidth;
 
-  // const isButtonDisabled =
-  //   !registerForm.isValid ||
-  //   (!registerForm.values.id_campanha && !registerForm.values.nom_atividade);
-
   const optionsPocos = listaPocos.map((poco: ListaPoco) => ({
     value: poco.id,
     label: poco.poco,
@@ -53,8 +51,6 @@ function ModalCadastroIntervencao() {
     value: poco.id,
     label: poco.poco,
   }));
-
-  // console.log("registerForm", registerForm.values);
 
   return (
     <>
@@ -156,7 +152,12 @@ function ModalCadastroIntervencao() {
 
                     <Stack>
                       <FormControl>
-                        <FormLabel htmlFor="comentarios">COMENTÁRIOS</FormLabel>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="comentarios">
+                            COMENTÁRIOS
+                          </FormLabel>
+                        </Flex>
                         <Textarea
                           isRequired
                           placeholder="Adicione comentários sobre a intervenção"
@@ -189,7 +190,7 @@ function ModalCadastroIntervencao() {
                   Cancelar
                 </Button>
                 <Button
-                  // disabled={!registerForm.isValid || isButtonDisabled}
+                  disabled={!registerForm.isValid}
                   background="origem.300"
                   variant="primary"
                   color="white"

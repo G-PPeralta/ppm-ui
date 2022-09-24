@@ -7,7 +7,7 @@ import {
   Responsavel,
   // NovaIntervencao,
 } from "interfaces/CadastrosModaisInfograficos";
-// import { cadastroNovaIntervencaoSchema } from "validations/ModaisCadastrosInfografico";
+import { cadastroNovaIntervencaoSchema } from "validations/ModaisCadastrosInfografico";
 
 import { useToast } from "contexts/Toast";
 
@@ -78,7 +78,7 @@ export function useCadastroIntervencao() {
 
   const registerForm = useFormik({
     initialValues,
-    // validationSchema: cadastroNovaIntervencaoSchema,
+    validationSchema: cadastroNovaIntervencaoSchema,
     onSubmit: async (values) => {
       const newValues: any = {
         nom_usu_create: user?.nome,
