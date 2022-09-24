@@ -190,7 +190,7 @@ function ModalCadastroIntervencao() {
                   Cancelar
                 </Button>
                 <Button
-                  disabled={!registerForm.isValid}
+                  disabled={!registerForm.isValid || !registerForm.dirty}
                   background="origem.300"
                   variant="primary"
                   color="white"

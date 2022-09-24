@@ -83,19 +83,19 @@ export const cadastroNovaCampanhaSchema = yup.object({
 });
 
 export const cadastroNovaIntervencaoSchema = yup.object({
-  sonda_id: yup.number().required().min(1),
-  poco_id: yup.number().required().min(1),
-  projeto_tipo_id: yup.number().required().min(1),
+  sonda_id: yup.number().required(),
+  poco_id: yup.number().required(),
+  projeto_tipo_id: yup.number().required(),
   dat_ini_prev: yup.string().required(),
+  comentarios: yup.string().required(),
   atividades: yup.array().of(
     yup.object({
-      area_id: yup.number().required().min(1),
-      tarefa_id: yup.number().required().min(1),
-      responsavel_id: yup.number().required().min(1),
-      qtde_dias: yup.number().required().min(1),
+      area_id: yup.number().required(),
+      tarefa_id: yup.number().required(),
+      responsavel_id: yup.number().required(),
+      qtde_dias: yup.number().required(),
     })
   ),
-  comentarios: yup.string().required("Adicione algum comentário!").min(1),
 });
 
 export const cadastroNovaAtividadeSchema = yup.object({
