@@ -3,7 +3,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
+import { Box, Flex, FormControl, Input, Select, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 import {
   AreaAtuacao,
@@ -12,7 +12,7 @@ import {
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
-import SelectFiltragem from "../../SelectFiltragem";
+// import SelectFiltragem from "../../SelectFiltragem";
 
 interface Props {
   registerForm: FormikProps<any>;
@@ -35,22 +35,22 @@ function AtividadesDraggable({ index, registerForm }: Props) {
     registerForm.setFieldValue("atividades", newList);
   };
 
-  const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
-    value: poco.id,
-    label: poco.tipo,
-  }));
+  // const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
+  //   value: poco.id,
+  //   label: poco.tipo,
+  // }));
 
-  const optionsTarefa = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
-    value: poco.id,
-    label: poco.tipo,
-  }));
+  // const optionsTarefa = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
+  //   value: poco.id,
+  //   label: poco.tipo,
+  // }));
 
-  const optionsResponsaveis = listaResponsaveis.map(
-    (responsavel: Responsavel) => ({
-      value: responsavel.id,
-      label: responsavel.nome,
-    })
-  );
+  // const optionsResponsaveis = listaResponsaveis.map(
+  //   (responsavel: Responsavel) => ({
+  //     value: responsavel.nome,
+  //     label: responsavel.nome,
+  //   })
+  // );
 
   useEffect(() => {
     const now = Date.now();
@@ -102,29 +102,62 @@ function AtividadesDraggable({ index, registerForm }: Props) {
               >
                 <FormControl>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>ÁREA</Text>
-                  <SelectFiltragem
+                  {/* <SelectFiltragem
                     registerForm={registerForm}
                     propName={`atividades[${index}].area_id`}
                     options={optionsAreaAtuacao}
-                  />
+                  /> */}
+                  <Select
+                    name={`atividades[${index}].area_id`}
+                    placeholder="Selecione"
+                    onChange={registerForm.handleChange}
+                    value={registerForm.values.atividades[index].area_id}
+                    backgroundColor={"#fff"}
+                  >
+                    {listaAreaAtuacao.map((area: AreaAtuacao) => (
+                      <option value={area.id}>{area.tipo}</option>
+                    ))}
+                  </Select>
                 </FormControl>
                 <FormControl>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>TAREFA</Text>
-                  <SelectFiltragem
+                  {/* <SelectFiltragem
                     registerForm={registerForm}
                     propName={`atividades[${index}].tarefa_id`}
                     options={optionsTarefa}
-                  />
+                  /> */}
+                  <Select
+                    name={`atividades[${index}].tarefa_id`}
+                    placeholder="Selecione"
+                    onChange={registerForm.handleChange}
+                    value={registerForm.values.atividades[index].tarefa_id}
+                    backgroundColor={"#fff"}
+                  >
+                    {listaResponsaveis.map((responsavel: Responsavel) => (
+                      <option value={responsavel.id}>{responsavel.nome}</option>
+                    ))}
+                  </Select>
                 </FormControl>
                 <FormControl>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>
                     RESPONSÁVEL
                   </Text>
-                  <SelectFiltragem
+                  {/* <SelectFiltragem
                     registerForm={registerForm}
                     propName={`atividades[${index}].responsavel_id`}
                     options={optionsResponsaveis}
-                  />
+                  /> */}
+                  <Select
+                    name={`atividades[${index}].responsavel_id`}
+                    placeholder="Selecione"
+                    onChange={registerForm.handleChange}
+                    value={registerForm.values.atividades[index].responsavel_id}
+                    backgroundColor={"#fff"}
+                  >
+                    {listaResponsaveis.map((responsavel: Responsavel) => (
+                      <option value={responsavel.id}>{responsavel.nome}</option>
+                    ))}
+                  </Select>
                 </FormControl>
                 <FormControl>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
