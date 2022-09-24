@@ -154,7 +154,6 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                         Number(event.target.value)
                       );
                     }}
-                    maxLength={10}
                   />
                 </FormControl>
 
