@@ -4,7 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import { Box, Flex, FormControl, Input, Select, Text } from "@chakra-ui/react";
+import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 import { AreaAtuacao } from "interfaces/CadastrosModaisInfograficos";
 
@@ -12,6 +12,7 @@ import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
+import SelectFiltragem from "../../SelectFiltragem";
 import PopOverPrecedentes from "./PopOverPrecedentes";
 // import SelectFiltragemArea from "./SelectFiltragemArea";
 // import SelectFiltragemTarefa from "./SelectFiltragemTarefa";
@@ -35,6 +36,38 @@ function AtividadesDraggable({ index, registerForm }: Props) {
     newList.splice(index, 1);
     // Atualiza lista no Formik
     registerForm.setFieldValue("atividades", newList);
+  };
+
+  const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
+    value: poco.id,
+    label: poco.tipo,
+  }));
+
+  const optionsTarefa = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
+    value: poco.id,
+    label: poco.tipo,
+  }));
+
+  const getAreaValue = (options: any, i: number) => {
+    const index = options
+      .map(({ value }: any) => value)
+      .indexOf(registerForm?.values?.atividades?.[i].area_id);
+
+    return {
+      value: options?.[index]?.value,
+      label: options?.[index]?.label,
+    };
+  };
+
+  const getTarefaValue = (options: any, i: number) => {
+    const index = options
+      .map(({ value }: any) => value)
+      .indexOf(registerForm?.values?.atividades?.[i].tarefa_id);
+
+    return {
+      value: options?.[index]?.value,
+      label: options?.[index]?.label,
+    };
   };
 
   useEffect(() => {
@@ -106,7 +139,13 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     index={index}
                   /> */}
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>ÁREA</Text>
-                  <Select
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    propName={`atividades[${index}].area_id`}
+                    options={optionsAreaAtuacao}
+                    value={getAreaValue(optionsAreaAtuacao, index)}
+                  />
+                  {/* <Select
                     placeholder="Selecione"
                     bg={"#fff"}
                     id={`atividades[${index}].area_id`}
@@ -117,7 +156,7 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     {listaAreaAtuacao.map((area: AreaAtuacao) => (
                       <option value={area.id}>{area.tipo}</option>
                     ))}
-                  </Select>
+                  </Select> */}
                 </FormControl>
 
                 <FormControl>
@@ -126,7 +165,13 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     index={index}
                   /> */}
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>TAREFA</Text>
-                  <Select
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    propName={`atividades[${index}].tarefa_id`}
+                    options={optionsTarefa}
+                    value={getTarefaValue(optionsAreaAtuacao, index)}
+                  />
+                  {/* <Select
                     placeholder="Selecione"
                     bg={"#fff"}
                     id={`atividades[${index}].tarefa_id`}
@@ -137,7 +182,7 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     {listaAreaAtuacao.map((area: AreaAtuacao) => (
                       <option value={area.id}>{area.tipo}</option>
                     ))}
-                  </Select>
+                  </Select> */}
                 </FormControl>
 
                 <FormControl>
