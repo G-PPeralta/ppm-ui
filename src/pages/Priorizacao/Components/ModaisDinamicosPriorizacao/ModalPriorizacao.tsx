@@ -101,10 +101,14 @@ function ModalBeneficio(nomeRanking: TableProps) {
                         </Flex>
                         <Flex ml={"180px"}>
                           <Flex mt={"18px"}>
-                            <ModalCadastrarBeneficio />
+                            <ModalCadastrarBeneficio
+                              nomeRanking={nomeRanking.nomeRanking}
+                            />
                           </Flex>
                           <Flex mt={"18px"}>
-                            <EditarPriorizacao />
+                            <EditarPriorizacao
+                              nomeRanking={nomeRanking.nomeRanking}
+                            />
                           </Flex>
                         </Flex>
                         <Flex align={"flex-end"} ml={"30px"}>

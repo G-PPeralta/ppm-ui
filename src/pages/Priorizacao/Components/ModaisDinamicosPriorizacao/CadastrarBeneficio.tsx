@@ -24,11 +24,20 @@ import { Ring } from "@uiball/loaders";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
+import { useCadastroNovaOpcao } from "hooks/useCadastrarNovaOpcaoPrioridade";
 
-function ModalCadastrarBeneficio() {
+interface TableProps {
+  nomeRanking: string;
+}
+
+function ModalCadastrarBeneficio(nomeRanking: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroPriorizacao();
+  const { registerForm, loading } = useCadastroNovaOpcao(nomeRanking);
+
+  console.log(nomeRanking.nomeRanking);
+  console.log("registerForm bene", registerForm.values.rankingName.nomeRanking);
+
+  const rankingNome = nomeRanking.nomeRanking;
 
   return (
     <>
@@ -57,7 +66,7 @@ function ModalCadastrarBeneficio() {
             color={"white"}
             fontSize={"1em"}
           >
-            Priorização Benefício
+            {`Priorização ${rankingNome}`}
           </ModalHeader>
           <form
             onSubmit={(e) => {
@@ -87,7 +96,7 @@ function ModalCadastrarBeneficio() {
                             fontSize={"20px"}
                             mb={"8px"}
                           >
-                            <IoIosArrowBack /> Priorização Benefício
+                            <IoIosArrowBack /> {`Priorização ${rankingNome}`}
                           </Button>
                         </Text>
                       </Flex>
@@ -115,7 +124,7 @@ function ModalCadastrarBeneficio() {
                               isRequired
                               id="beneficio.opcao_id"
                               name="beneficio.opcao_id"
-                              value={registerForm.values.beneficio.opcao_id}
+                              // value={rankingNome}
                               onChange={registerForm.handleChange}
                             />
                           </FormControl>

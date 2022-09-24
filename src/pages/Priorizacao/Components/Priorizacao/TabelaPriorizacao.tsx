@@ -21,7 +21,7 @@ import {
 
 import { getPriorizacoes } from "services/get/Priorizacoes";
 
-import ModalBeneficio from "../ModaisDinamicosPriorizacao/ModalBeneficio";
+import ModalBeneficio from "../ModaisDinamicosPriorizacao/ModalPriorizacao";
 import ModalDeletarPriorizacao from "./DeletarPriorizacao";
 
 export function TabelaPriorizacao() {

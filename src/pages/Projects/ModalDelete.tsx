@@ -31,7 +31,7 @@ import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 
 import { getProjetosRanking } from "services/get/Projetos-Ranking";
 
-function ModalCadastrarPriorizacao() {
+function ModaDeletarPriorizacao() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroCampanha();
   const [priorizacao, setPriorizacao] = useState<any>([]);
@@ -356,4 +356,4 @@ function ModalCadastrarPriorizacao() {
   );
 }
 
-export default ModalCadastrarPriorizacao;
+export default ModaDeletarPriorizacao;
