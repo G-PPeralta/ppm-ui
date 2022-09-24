@@ -95,7 +95,7 @@ export const cadastroNovaIntervencaoSchema = yup.object({
       qtde_dias: yup.number().required().min(1),
     })
   ),
-  comentarios: yup.string().required("Adicione algum comentário!"),
+  comentarios: yup.string().required("Adicione algum comentário!").min(1),
 });
 
 export const cadastroNovaAtividadeSchema = yup.object({

@@ -51,32 +51,10 @@ function AtividadesDraggable({ index, registerForm }: Props) {
     })
   );
 
-  const getAreaValue = (options: any, i: number) => {
+  const getValue = (options: any, i: number, chave: string) => {
     const index = options
       .map(({ value }: any) => value)
-      .indexOf(registerForm?.values?.atividades?.[i].area_id);
-
-    return {
-      value: options?.[index]?.value,
-      label: options?.[index]?.label,
-    };
-  };
-
-  const getTarefaValue = (options: any, i: number) => {
-    const index = options
-      .map(({ value }: any) => value)
-      .indexOf(registerForm?.values?.atividades?.[i].tarefa_id);
-
-    return {
-      value: options?.[index]?.value,
-      label: options?.[index]?.label,
-    };
-  };
-
-  const getResponsavelValue = (options: any, i: number) => {
-    const index = options
-      .map(({ value }: any) => value)
-      .indexOf(registerForm?.values?.atividades?.[i].responsavel_id);
+      .indexOf(registerForm?.values?.atividades?.[i][chave]);
 
     return {
       value: options?.[index]?.value,
@@ -138,19 +116,8 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     registerForm={registerForm}
                     propName={`atividades[${index}].area_id`}
                     options={optionsAreaAtuacao}
-                    value={getAreaValue(optionsAreaAtuacao, index)}
+                    value={getValue(optionsAreaAtuacao, index, "area_id")}
                   />
-                  {/* <Select
-                    name={`atividades[${index}].area_id`}
-                    placeholder="Selecione"
-                    onChange={registerForm.handleChange}
-                    value={registerForm.values.atividades[index].area_id}
-                    backgroundColor={"#fff"}
-                  >
-                    {listaAreaAtuacao.map((area: AreaAtuacao) => (
-                      <option value={area.id}>{area.tipo}</option>
-                    ))}
-                  </Select> */}
                 </FormControl>
                 <FormControl>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>TAREFA</Text>
@@ -158,19 +125,8 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     registerForm={registerForm}
                     propName={`atividades[${index}].tarefa_id`}
                     options={optionsTarefa}
-                    value={getTarefaValue(optionsTarefa, index)}
+                    value={getValue(optionsTarefa, index, "tarefa_id")}
                   />
-                  {/* <Select
-                    name={`atividades[${index}].tarefa_id`}
-                    placeholder="Selecione"
-                    onChange={registerForm.handleChange}
-                    value={registerForm.values.atividades[index].tarefa_id}
-                    backgroundColor={"#fff"}
-                  >
-                    {listaResponsaveis.map((responsavel: Responsavel) => (
-                      <option value={responsavel.id}>{responsavel.nome}</option>
-                    ))}
-                  </Select> */}
                 </FormControl>
                 <FormControl>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>
@@ -180,19 +136,12 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     registerForm={registerForm}
                     propName={`atividades[${index}].responsavel_id`}
                     options={optionsResponsaveis}
-                    value={getResponsavelValue(optionsResponsaveis, index)}
+                    value={getValue(
+                      optionsResponsaveis,
+                      index,
+                      "responsavel_id"
+                    )}
                   />
-                  {/* <Select
-                    name={`atividades[${index}].responsavel_id`}
-                    placeholder="Selecione"
-                    onChange={registerForm.handleChange}
-                    value={registerForm.values.atividades[index].responsavel_id}
-                    backgroundColor={"#fff"}
-                  >
-                    {listaResponsaveis.map((responsavel: Responsavel) => (
-                      <option value={responsavel.id}>{responsavel.nome}</option>
-                    ))}
-                  </Select> */}
                 </FormControl>
                 <FormControl>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
@@ -212,20 +161,6 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                   />
                 </FormControl>
               </Flex>
-
-              {/* <Flex
-                p={1}
-                align={'center'}
-                justify={'center'}
-                _hover={{ cursor: 'pointer' }}
-              >
-                <FiEdit
-                  onClick={() => enableEdit(index)}
-                  color="#2E69FD"
-                  size={16}
-                />
-              </Flex> */}
-
               <Flex
                 p={1}
                 align={"center"}

@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { useEffect, useId, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";
@@ -14,8 +13,6 @@ import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 import SelectFiltragem from "../../SelectFiltragem";
 import PopOverPrecedentes from "./PopOverPrecedentes";
-// import SelectFiltragemArea from "./SelectFiltragemArea";
-// import SelectFiltragemTarefa from "./SelectFiltragemTarefa";
 
 interface Props {
   registerForm: FormikProps<any>;
@@ -48,21 +45,10 @@ function AtividadesDraggable({ index, registerForm }: Props) {
     label: poco.tipo,
   }));
 
-  const getAreaValue = (options: any, i: number) => {
+  const getValue = (options: any, i: number, chave: string) => {
     const index = options
       .map(({ value }: any) => value)
-      .indexOf(registerForm?.values?.atividades?.[i].area_id);
-
-    return {
-      value: options?.[index]?.value,
-      label: options?.[index]?.label,
-    };
-  };
-
-  const getTarefaValue = (options: any, i: number) => {
-    const index = options
-      .map(({ value }: any) => value)
-      .indexOf(registerForm?.values?.atividades?.[i].tarefa_id);
+      .indexOf(registerForm?.values?.atividades?.[i][chave]);
 
     return {
       value: options?.[index]?.value,
@@ -134,55 +120,23 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                 </FormControl>
 
                 <FormControl>
-                  {/* <SelectFiltragemArea
-                    registerForm={registerForm}
-                    index={index}
-                  /> */}
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>ÁREA</Text>
                   <SelectFiltragem
                     registerForm={registerForm}
                     propName={`atividades[${index}].area_id`}
                     options={optionsAreaAtuacao}
-                    value={getAreaValue(optionsAreaAtuacao, index)}
+                    value={getValue(optionsAreaAtuacao, index, "area_id")}
                   />
-                  {/* <Select
-                    placeholder="Selecione"
-                    bg={"#fff"}
-                    id={`atividades[${index}].area_id`}
-                    name={`atividades[${index}].area_id`}
-                    value={registerForm.values.atividades[index].area_id}
-                    onChange={registerForm.handleChange}
-                  >
-                    {listaAreaAtuacao.map((area: AreaAtuacao) => (
-                      <option value={area.id}>{area.tipo}</option>
-                    ))}
-                  </Select> */}
                 </FormControl>
 
                 <FormControl>
-                  {/* <SelectFiltragemTarefa
-                    registerForm={registerForm}
-                    index={index}
-                  /> */}
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>TAREFA</Text>
                   <SelectFiltragem
                     registerForm={registerForm}
                     propName={`atividades[${index}].tarefa_id`}
                     options={optionsTarefa}
-                    value={getTarefaValue(optionsAreaAtuacao, index)}
+                    value={getValue(optionsAreaAtuacao, index, "tarefa_id")}
                   />
-                  {/* <Select
-                    placeholder="Selecione"
-                    bg={"#fff"}
-                    id={`atividades[${index}].tarefa_id`}
-                    name={`atividades[${index}].tarefa_id`}
-                    value={registerForm.values.atividades[index].tarefa_id}
-                    onChange={registerForm.handleChange}
-                  >
-                    {listaAreaAtuacao.map((area: AreaAtuacao) => (
-                      <option value={area.id}>{area.tipo}</option>
-                    ))}
-                  </Select> */}
                 </FormControl>
 
                 <FormControl>
@@ -214,20 +168,6 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                   />
                 </Flex>
               </Flex>
-
-              {/* <Flex
-                p={1}
-                align={'center'}
-                justify={'center'}
-                _hover={{ cursor: 'pointer' }}
-              >
-                <FiEdit
-                  onClick={() => enableEdit(index)}
-                  color="#2E69FD"
-                  size={16}
-                />
-              </Flex> */}
-
               <Flex
                 p={1}
                 align={"center"}
