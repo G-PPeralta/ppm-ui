@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { AiFillEdit, AiOutlineSearch } from "react-icons/ai";
 
 import {
@@ -26,6 +27,8 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
+
+import CadastrarTarefasModal from "./CadastroTarefaModal";
 
 const taskList = [
   {
@@ -56,6 +59,9 @@ const taskList = [
 
 function BotaoListadeTarefas() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [tarefaFilter, setTarefaFilter] = useState("");
+
   const tableData = taskList.map((task, index) => (
     <Tr key={index}>
       <Td
@@ -179,10 +185,12 @@ function BotaoListadeTarefas() {
                   <FormControl>
                     <FormLabel htmlFor="categoria">TAREFA</FormLabel>
                     <Input
+                      placeholder="Nome da tarefa"
                       type="text"
                       id="tarefa"
                       name="tarefa"
-                      // onChange={(e) => setCategoriaId(e.target.value)}
+                      value={tarefaFilter}
+                      onChange={(e) => setTarefaFilter(e.target.value)}
                     />
                   </FormControl>
                 </Flex>
@@ -244,7 +252,7 @@ function BotaoListadeTarefas() {
                     // border={"2px"}
                     // h={useBreakpointValue({ base: "100%", md: "120%" })}
                     // float={"right"}
-                    // onClick={() => setOpenModalRegister(true)}
+                    onClick={() => setIsModalOpen(true)}
                     _hover={{
                       background: "origem.300",
                       transition: "all 0.4s",
@@ -289,6 +297,13 @@ function BotaoListadeTarefas() {
               </Table>
             </TableContainer>
           </ModalBody>
+
+          {isModalOpen && (
+            <CadastrarTarefasModal
+              isModalOpen={setIsModalOpen}
+              closeModal={() => setIsModalOpen(false)}
+            />
+          )}
 
           {/* <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onClose}>
