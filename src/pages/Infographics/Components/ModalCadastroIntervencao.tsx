@@ -18,24 +18,39 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
+import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
 
-import { TextError } from "components/TextError";
+import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
-import SelectFiltragemPocos from "./SelectFiltragemPocos";
+import AtividadesCadastroIntervencao from "./AtividadesCadastroIntervencao";
+import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
+import SelectFiltragem from "./SelectFiltragem";
 import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
 function ModalCadastroIntervencao() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { intervencaoForm, loading } = useCadastroIntervencao();
+  const { registerForm, loading, listaPocos } = useCadastroIntervencao();
 
-  const isButtonDisabled =
-    !intervencaoForm.isValid ||
-    (!intervencaoForm.values.id_campanha &&
-      !intervencaoForm.values.nom_atividade);
+  const innerWidth = window.innerWidth;
+
+  const optionsPocos = listaPocos.map((poco: ListaPoco) => ({
+    value: poco.id,
+    label: poco.poco,
+  }));
+
+  const optionsCampo = listaPocos.map((poco: ListaPoco) => ({
+    value: poco.id,
+    label: poco.poco,
+  }));
+
+  const optionsProjetoTipo = listaPocos.map((poco: ListaPoco) => ({
+    value: poco.id,
+    label: poco.poco,
+  }));
 
   return (
     <>
@@ -72,7 +87,7 @@ function ModalCadastroIntervencao() {
           Cadastrar Intervenção
         </Text>
       </Flex>
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -88,7 +103,7 @@ function ModalCadastroIntervencao() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              intervencaoForm.handleSubmit(e);
+              registerForm.handleSubmit(e);
             }}
           >
             <ModalBody mt={3}>
@@ -96,36 +111,61 @@ function ModalCadastroIntervencao() {
                 <FormControl>
                   <Flex direction={"column"} gap={4}>
                     <Stack>
-                      <Flex flexDirection={"row"} gap={5}>
-                        <SelectFiltragemPocos
-                          intervencaoForm={intervencaoForm}
-                        />
+                      <Flex
+                        direction={innerWidth >= 460 ? "row" : "column"}
+                        gap={5}
+                      >
                         <SelectFiltragemSondas
-                          form={intervencaoForm}
-                          nomeChave={"id_campanha"}
+                          form={registerForm}
+                          nomeChave={"sonda_id"}
                         />
+                        <SelectFiltragem
+                          registerForm={registerForm}
+                          nomeSelect={"POÇO"}
+                          propName={"poco_id"}
+                          options={optionsPocos}
+                        />
+                        <SelectFiltragem
+                          registerForm={registerForm}
+                          nomeSelect={"CAMPO"}
+                          propName={"campo_id"}
+                          options={optionsCampo}
+                        />
+                        <DateTimePickerDataInicio registerForm={registerForm} />
                       </Flex>
                     </Stack>
 
                     <Stack>
+                      <Flex flexDirection={"row"} gap={4}>
+                        <SelectFiltragem
+                          registerForm={registerForm}
+                          nomeSelect={"PROJETO"}
+                          propName={"projeto_tipo_id"}
+                          options={optionsProjetoTipo}
+                        />
+                      </Flex>
+                    </Stack>
+
+                    <AtividadesCadastroIntervencao
+                      registerForm={registerForm}
+                    />
+
+                    <Stack>
                       <FormControl>
-                        <FormLabel htmlFor="dsc_comentario">
-                          COMENTÁRIOS
-                        </FormLabel>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="comentarios">
+                            COMENTÁRIOS
+                          </FormLabel>
+                        </Flex>
                         <Textarea
                           isRequired
                           placeholder="Adicione comentários sobre a intervenção"
-                          id="dsc_comentario"
-                          name="dsc_comentario"
-                          value={intervencaoForm.values.dsc_comentario}
-                          onChange={intervencaoForm.handleChange}
-                          w={"100%"}
+                          id="comentarios"
+                          name="comentarios"
+                          value={registerForm.values.comentarios}
+                          onChange={registerForm.handleChange}
                         />
-                        {intervencaoForm.errors.dsc_comentario && (
-                          <TextError>
-                            {intervencaoForm.errors.dsc_comentario}
-                          </TextError>
-                        )}
                       </FormControl>
                     </Stack>
                   </Flex>
@@ -140,7 +180,7 @@ function ModalCadastroIntervencao() {
                 <Button
                   variant="ghost"
                   color="red"
-                  onClick={() => handleCancelar(intervencaoForm, onClose)}
+                  onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: "red.500",
                     transition: "all 0.4s",
@@ -150,11 +190,11 @@ function ModalCadastroIntervencao() {
                   Cancelar
                 </Button>
                 <Button
-                  disabled={!intervencaoForm.isValid || isButtonDisabled}
+                  disabled={!registerForm.isValid || !registerForm.dirty}
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(intervencaoForm, onClose)}
+                  onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",
