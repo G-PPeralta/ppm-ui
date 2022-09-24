@@ -8,6 +8,8 @@ import { Box, Flex, FormControl, Input, Select, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 import { Area } from "interfaces/CadastrosModaisInfograficos";
 
+import { regexCaracteresEspeciais } from "utils/regex";
+
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 import PopOverPrecedentes from "./PopOverPrecedentes";
@@ -40,8 +42,6 @@ function AtividadesDraggable({ index, registerForm }: Props) {
     const newId = draggableId + "-" + now.toLocaleString();
     setDraggableId(newId);
   }, []);
-
-  console.log("registerForm", registerForm.values);
 
   return (
     <Draggable draggableId={draggableId} index={index}>
@@ -87,15 +87,16 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     bg={"#fff"}
                     id={`atividades[${index}].atividade_id_origem`}
                     name={`atividades[${index}].atividade_id_origem`}
-                    value={
+                    value={regexCaracteresEspeciais(
                       registerForm.values.atividades[index].atividade_id_origem
-                    }
+                    )}
                     onChange={(event) => {
                       registerForm.setFieldValue(
                         `atividades[${index}].atividade_id_origem`,
                         event.target.value
                       );
                     }}
+                    maxLength={10}
                   />
                 </FormControl>
 
@@ -154,6 +155,7 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                         Number(event.target.value)
                       );
                     }}
+                    maxLength={10}
                   />
                 </FormControl>
 

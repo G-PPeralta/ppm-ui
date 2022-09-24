@@ -35,9 +35,9 @@ function ModalCadastroIntervencao() {
 
   const innerWidth = window.innerWidth;
 
-  const isButtonDisabled =
-    !registerForm.isValid ||
-    (!registerForm.values.id_campanha && !registerForm.values.nom_atividade);
+  // const isButtonDisabled =
+  //   !registerForm.isValid ||
+  //   (!registerForm.values.id_campanha && !registerForm.values.nom_atividade);
 
   const optionsPocos = listaPocos.map((poco: ListaPoco) => ({
     value: poco.id,
@@ -189,7 +189,7 @@ function ModalCadastroIntervencao() {
                   Cancelar
                 </Button>
                 <Button
-                  disabled={!registerForm.isValid || isButtonDisabled}
+                  // disabled={!registerForm.isValid || isButtonDisabled}
                   background="origem.300"
                   variant="primary"
                   color="white"
