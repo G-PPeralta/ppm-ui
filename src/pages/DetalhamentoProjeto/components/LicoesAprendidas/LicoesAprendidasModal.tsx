@@ -239,7 +239,7 @@ function LicoesAprendidasModal({
             </FormControl>
           </Stack>
 
-          <ModalCloseButton />
+          <ModalCloseButton color={"white"} />
           <ModalBody>
             <TabelaLicoesAprendidas
               onEdit={handleEditLicao}

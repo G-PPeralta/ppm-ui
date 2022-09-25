@@ -56,7 +56,7 @@ function BotaoDescricaoEJustificativa() {
           >
             Justificativa e Descrição
           </ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton color={"white"} />
           <ModalBody>
             <FormControl marginBottom={4} padding={1}>
               <Flex direction={"column"}>

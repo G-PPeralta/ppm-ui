@@ -29,6 +29,7 @@ import {
 } from "@chakra-ui/react";
 
 import CadastrarTarefasModal from "./CadastroTarefaModal";
+import EditarTarefaModal from "./EditarTarefaModal";
 
 const taskList = [
   {
@@ -60,6 +61,7 @@ const taskList = [
 function BotaoListadeTarefas() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [tarefaFilter, setTarefaFilter] = useState("");
 
   const tableData = taskList.map((task, index) => (
@@ -123,7 +125,7 @@ function BotaoListadeTarefas() {
           mr={2}
           isRound={true}
           size="sm"
-          // onClick={() => onEdit(lessons)}
+          onClick={() => setIsEditModalOpen(true)}
         />
       </Td>
     </Tr>
@@ -148,7 +150,7 @@ function BotaoListadeTarefas() {
         Lista de Tarefas
       </Button>
 
-      <Modal size={"1x2"} isOpen={isOpen} onClose={onClose}>
+      <Modal size={"5xl"} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -266,7 +268,7 @@ function BotaoListadeTarefas() {
             </FormControl>
           </Stack>
 
-          <ModalCloseButton />
+          <ModalCloseButton color={"white"} />
           <ModalBody>
             <TableContainer mt={4} mb={3} ml={1}>
               <Table
@@ -302,6 +304,13 @@ function BotaoListadeTarefas() {
             <CadastrarTarefasModal
               isModalOpen={setIsModalOpen}
               closeModal={() => setIsModalOpen(false)}
+            />
+          )}
+
+          {isEditModalOpen && (
+            <EditarTarefaModal
+              isModalOpen={setIsEditModalOpen}
+              closeModal={() => setIsEditModalOpen(false)}
             />
           )}
 

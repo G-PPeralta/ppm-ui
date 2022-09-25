@@ -72,7 +72,7 @@ function CadastroTarefasModal({ isModalOpen, closeModal }: any) {
           >
             Cadastrar Tarefa
           </ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton color={"white"} />
           <ModalBody>
             <FormControl
               marginBottom={4}
