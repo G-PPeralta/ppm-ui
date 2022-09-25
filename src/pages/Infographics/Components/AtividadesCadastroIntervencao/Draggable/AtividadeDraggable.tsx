@@ -46,7 +46,7 @@ function AtividadesDraggable({ index, registerForm }: Props) {
 
   const optionsResponsaveis = listaResponsaveis.map(
     (responsavel: Responsavel) => ({
-      value: responsavel.nome,
+      value: responsavel.id,
       label: responsavel.nome,
     })
   );
