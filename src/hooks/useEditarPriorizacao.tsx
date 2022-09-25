@@ -9,7 +9,7 @@ import { postProject } from "services/post/Priorizacao";
 
 import { useAuth } from "./useAuth";
 
-export function useCadastroNovaOpcao(opcaoAtual: any) {
+export function useEdicaoPriorizacao(opcaoAtual: any) {
   const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ export function useCadastroNovaOpcao(opcaoAtual: any) {
     validationSchema: cadastroNovaPriorizacao,
     onSubmit: async (values) => {
       const newValues: any = {
-        rankingName: values.rank_name,
+        rankingName: values.rankingName,
         nom_usu_create: user?.nome,
       };
 

@@ -24,7 +24,8 @@ import { Ring } from "@uiball/loaders";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroNovaOpcao } from "hooks/useCadastrarNovaOpcaoPrioridade";
+// import { useCadastroNovaOpcao } from "hooks/useCadastrarNovaPriorizacaoo";
+import { useEdicaoPriorizacao } from "hooks/useEditarPriorizacao";
 
 interface TableProps {
   nomeRanking: string;
@@ -32,7 +33,7 @@ interface TableProps {
 
 function ModalCadastrarBeneficio(nomeRanking: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroNovaOpcao(nomeRanking);
+  const { registerForm, loading } = useEdicaoPriorizacao(nomeRanking);
 
   console.log(nomeRanking.nomeRanking);
   console.log("registerForm bene", registerForm.values.rankingName.nomeRanking);

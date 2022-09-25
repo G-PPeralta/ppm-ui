@@ -26,7 +26,8 @@ import { Ring } from "@uiball/loaders";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroNovaPriorizacao } from "hooks/useCadastrarNovaPriorizacao";
+// import { useCadastroNovaPriorizacao } from "hooks/useCadastrarNovaPriorizacao";
+import { useEdicaoPriorizacao } from "hooks/useEditarPriorizacao";
 
 interface TableProps {
   nomeRanking: string;
@@ -34,12 +35,12 @@ interface TableProps {
 
 function EditarPriorizacao(nomeRanking: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroNovaPriorizacao();
+  const { registerForm, loading } = useEdicaoPriorizacao(
+    nomeRanking.nomeRanking
+  );
 
-  console.log("registerform", registerForm.values);
-  console.log("nomeRanking", nomeRanking);
-
-  const rankingNome = nomeRanking.nomeRanking;
+  // console.log("registerform", registerForm.values);
+  // console.log("nomeRanking", nomeRanking);
 
   return (
     <>
@@ -114,7 +115,7 @@ function EditarPriorizacao(nomeRanking: TableProps) {
                         >
                           <FormControl>
                             <FormLabel
-                              htmlFor="regulatorio.opcao_id"
+                              htmlFor="rankingName"
                               fontSize={"12px"}
                               mb={"1px"}
                               ml={"3px"}
@@ -126,9 +127,9 @@ function EditarPriorizacao(nomeRanking: TableProps) {
                               w={"400px"}
                               isRequired
                               placeholder="Nome"
-                              id="beneficio.opcao_id"
-                              name="beneficio.opcao_id"
-                              value={rankingNome}
+                              id="rankingName"
+                              name="rankingName"
+                              value={registerForm.values.rankingName}
                               onChange={registerForm.handleChange}
                             />
                           </FormControl>
