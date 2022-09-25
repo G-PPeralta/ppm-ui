@@ -30,6 +30,7 @@ export function TabelaPriorizacao() {
   const [to, setTo] = useState<number>(5);
   const rowsPerPage = 5;
   const [data, setData] = useState<any[]>([]);
+
   // const [loading, setLoading] = useState(false);
 
   const getData = async () => {

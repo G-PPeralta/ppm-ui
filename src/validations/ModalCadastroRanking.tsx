@@ -48,3 +48,10 @@ export const cadastroNovaOpcaoPriorizacao = yup.object({
   rankingGrade: yup.string(),
   nom_usu_create: yup.string(),
 });
+
+export const updateNovaPriorizacao = yup.object({
+  rankingName: yup.string().required(),
+  idRanking: yup.number().required(),
+  idOpcao: yup.number().required(),
+  nom_usu_create: yup.string(),
+});

@@ -34,7 +34,7 @@ interface TableProps {
   idRanking: any;
 }
 
-function ModalBeneficio(infosRankings: TableProps) {
+function ModalPriorizacao(infosRankings: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm } = useCadastroPriorizacao();
   // console.log(nomeRanking.nomeRanking);
@@ -109,6 +109,7 @@ function ModalBeneficio(infosRankings: TableProps) {
                           <Flex mt={"18px"}>
                             <EditarPriorizacao
                               nomeRanking={infosRankings.nomeRanking}
+                              idRanking={infosRankings.idRanking}
                             />
                           </Flex>
                         </Flex>
@@ -146,4 +147,4 @@ function ModalBeneficio(infosRankings: TableProps) {
   );
 }
 
-export default ModalBeneficio;
+export default ModalPriorizacao;

@@ -86,13 +86,17 @@ export function TabelaOpcoesPriorizacao(idRanking: TableProps) {
   const sortData = data.sort((a: any, b: any) => a.id - b.id);
   // console.log("sortData", sortData);
 
-  const tableData = sortData.slice(from, to).map((bene) => (
-    <Tr key={bene.id}>
-      <Td>{bene.id}</Td>
-      <Td width={"600px"}>{bene.nom_opcao}</Td>
+  const tableData = sortData.slice(from, to).map((op) => (
+    <Tr key={op.id}>
+      <Td>{op.id}</Td>
+      <Td width={"600px"}>{op.nom_opcao}</Td>
       <Td textAlign={"center"}>3</Td>
       <Td textAlign={"center"}>
-        <ModalEditarOpcaoPriorizacao />
+        <ModalEditarOpcaoPriorizacao
+          opcaoId={op.id}
+          opcaoName={op.nom_opcao}
+          idRanking={idRanking}
+        />
         <ModalDeletarOpcaoPriorizacao />
       </Td>
     </Tr>

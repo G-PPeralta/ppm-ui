@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { MdModeEdit } from "react-icons/md";
 
@@ -26,11 +27,26 @@ import { Ring } from "@uiball/loaders";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
+import { useEdicaoOpcaoPriorizacao } from "hooks/useEditarOpcaoPriorizacao";
 
-function ModalEditarOpcaoPriorizacao() {
+interface TableProps {
+  opcaoId: number;
+  opcaoName: string;
+  idRanking: any;
+}
+
+function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroPriorizacao();
+  const { registerForm, loading } = useEdicaoOpcaoPriorizacao(
+    infosOption.opcaoName
+  );
+
+  console.log(registerForm.values);
+
+  useEffect(() => {
+    registerForm.setFieldValue("idOpcao", infosOption.opcaoId);
+    registerForm.setFieldValue("idRanking", infosOption.idRanking.idRanking);
+  }, []);
 
   return (
     <>
@@ -100,7 +116,7 @@ function ModalEditarOpcaoPriorizacao() {
                         >
                           <FormControl>
                             <FormLabel
-                              htmlFor="regulatorio.opcao_id"
+                              htmlFor="rankingOpcao"
                               fontSize={"12px"}
                               mb={"1px"}
                               w={"350px"}
@@ -111,9 +127,9 @@ function ModalEditarOpcaoPriorizacao() {
                             <Input
                               ml={"3px"}
                               isRequired
-                              id="beneficio.opcao_id"
-                              name="beneficio.opcao_id"
-                              value={registerForm.values.beneficio.opcao_id}
+                              id="rankingOpcao"
+                              name="rankingOpcao"
+                              value={registerForm.values.rankingOpcao}
                               onChange={registerForm.handleChange}
                             />
                           </FormControl>

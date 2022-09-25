@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 
 import {
@@ -31,16 +32,21 @@ import { useEdicaoPriorizacao } from "hooks/useEditarPriorizacao";
 
 interface TableProps {
   nomeRanking: string;
+  idRanking: number;
 }
 
-function EditarPriorizacao(nomeRanking: TableProps) {
+function EditarPriorizacao(infosRanking: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useEdicaoPriorizacao(
-    nomeRanking.nomeRanking
+    infosRanking.nomeRanking
   );
 
   // console.log("registerform", registerForm.values);
-  // console.log("nomeRanking", nomeRanking);
+  // console.log("nomeRanking", infosRanking.nomeRanking);
+
+  useEffect(() => {
+    registerForm.setFieldValue("idRanking", infosRanking.idRanking);
+  }, []);
 
   return (
     <>
