@@ -22,7 +22,7 @@ export async function getProjetosTipo(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/projeto-intervencao", token());
+  const { data, status } = await api.get("/campanha-projeto-tipo", token());
 
   return { data, status };
 }

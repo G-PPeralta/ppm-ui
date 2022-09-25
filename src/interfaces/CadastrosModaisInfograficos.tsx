@@ -153,3 +153,8 @@ export interface ListaCampo {
   campo: string;
   poloId: number;
 }
+
+export interface ProjetoTipo {
+  id: number;
+  nom_projeto_tipo: string;
+}

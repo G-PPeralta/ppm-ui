@@ -5,6 +5,7 @@ import {
   AreaAtuacao,
   ListaCampo,
   ListaPoco,
+  ProjetoTipo,
   Responsavel,
   // NovaIntervencao,
 } from "interfaces/CadastrosModaisInfograficos";
@@ -15,6 +16,7 @@ import { useToast } from "contexts/Toast";
 import {
   getCampo,
   getPocos,
+  getProjetosTipo,
   getResponsaveis,
 } from "services/get/CadastroModaisInfograficos";
 import { getAreaAtuacaoList, getInfoCampanha } from "services/get/Infograficos";
@@ -31,6 +33,7 @@ export function useCadastroIntervencao() {
   const [listaAreaAtuacao, setListaAreaAtuacao] = useState<AreaAtuacao[]>([]);
   const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
   const [listaCampos, setListaCampo] = useState<ListaCampo[]>([]);
+  const [listaProjetosTipo, setListaProjetosTipo] = useState<ProjetoTipo[]>([]);
 
   const reqGet = async () => {
     const campanha = await getInfoCampanha();
@@ -38,9 +41,10 @@ export function useCadastroIntervencao() {
     const areaAtuacao = await getAreaAtuacaoList();
     const responsaveis = await getResponsaveis();
     const campos = await getCampo();
+    const projetosTipo = await getProjetosTipo();
 
     // eslint-disable-next-line no-console
-    console.log("campanha", campanha.data);
+    console.log("projeto tipo", projetosTipo.data);
 
     const arraySondas = campanha.data.map(({ sonda, id_campanha }: any) => ({
       sonda,
@@ -63,11 +67,17 @@ export function useCadastroIntervencao() {
       a.campo.localeCompare(b.campo)
     );
 
+    const projetosTipoSorted = projetosTipo.data.sort(
+      (a: ProjetoTipo, b: ProjetoTipo) =>
+        a.nom_projeto_tipo.localeCompare(b.nom_projeto_tipo)
+    );
+
     setListaSondas(sondasSorted);
     setListaPocos(pocosSorted);
     setListaAreaAtuacao(areasAtuacaoSorted);
     setListaResponsaveis(responsaveisSorted);
     setListaCampo(camposSorted);
+    setListaProjetosTipo(projetosTipoSorted);
   };
 
   const initialValues: any = {
@@ -142,5 +152,6 @@ export function useCadastroIntervencao() {
     listaAreaAtuacao,
     listaResponsaveis,
     listaCampos,
+    listaProjetosTipo,
   };
 }
