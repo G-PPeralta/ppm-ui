@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { useFormik } from "formik";
-import { updateNovaPriorizacao } from "validations/ModalCadastroRanking";
+import { updateNovaOpcaoDePriorizacao } from "validations/ModalCadastroRanking";
 
 import { useToast } from "contexts/Toast";
 
@@ -9,7 +9,7 @@ import { updateOptionRanking } from "services/post/Priorizacao";
 
 import { useAuth } from "./useAuth";
 
-export function useEdicaoOpcaoPriorizacao(opcAtual: any) {
+export function useEdicaoOpcaoPriorizacao(opcAtual: any, initialGra: number) {
   const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -18,17 +18,19 @@ export function useEdicaoOpcaoPriorizacao(opcAtual: any) {
     rankingOpcao: opcAtual,
     idRanking: 0,
     idOpcao: 0,
+    gradeOpcao: initialGra,
     nom_usu_create: user?.nome,
   };
 
   const registerForm = useFormik({
     initialValues,
-    validationSchema: updateNovaPriorizacao,
+    validationSchema: updateNovaOpcaoDePriorizacao,
     onSubmit: async (values) => {
       const newValues: any = {
         rankingOpcao: values.rankingOpcao,
         idRanking: values.idRanking,
         idOpcao: values.idOpcao,
+        gradeOpcao: values.gradeOpcao,
         nom_usu_create: user?.nome,
       };
 

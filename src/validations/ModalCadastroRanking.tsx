@@ -55,3 +55,11 @@ export const updateNovaPriorizacao = yup.object({
   idOpcao: yup.number().required(),
   nom_usu_create: yup.string(),
 });
+
+export const updateNovaOpcaoDePriorizacao = yup.object({
+  rankingOpcao: yup.string().required(),
+  idRanking: yup.number().required(),
+  idOpcao: yup.string(),
+  gradeOpcao: yup.string().required(),
+  nom_usu_create: yup.string(),
+});

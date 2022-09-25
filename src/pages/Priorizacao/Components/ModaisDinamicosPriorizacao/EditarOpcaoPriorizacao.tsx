@@ -33,12 +33,15 @@ interface TableProps {
   opcaoId: number;
   opcaoName: string;
   idRanking: any;
+  nameRanking: string;
+  initialGrade: number;
 }
 
 function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useEdicaoOpcaoPriorizacao(
-    infosOption.opcaoName
+    infosOption.opcaoName,
+    infosOption.initialGrade
   );
 
   console.log(registerForm.values);
@@ -71,7 +74,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
             color={"white"}
             fontSize={"1em"}
           >
-            Priorização Benefício
+            {`Priorização ${infosOption.nameRanking}`}
           </ModalHeader>
           <form
             onSubmit={(e) => {
@@ -101,7 +104,8 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                             fontSize={"20px"}
                             mb={"8px"}
                           >
-                            <IoIosArrowBack /> Priorização Benefício
+                            <IoIosArrowBack />{" "}
+                            {`Priorização ${infosOption.nameRanking}`}
                           </Button>
                         </Text>
                       </Flex>
@@ -146,7 +150,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                         >
                           <FormControl>
                             <FormLabel
-                              htmlFor="regulatorio.opcao_id"
+                              htmlFor="gradeOpcao"
                               fontSize={"12px"}
                               mb={"1px"}
                               w={"140px"}
@@ -154,22 +158,22 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                               NOTA
                             </FormLabel>
                             <Select
-                              id="pit"
-                              name="pit"
+                              id="gradeOpcao"
+                              name="gradeOpcao"
                               placeholder="Selecione"
-                              // value={activitiesForm.values.pit}
-                              // onChange={activitiesForm.handleChange}
+                              value={Number(registerForm.values.gradeOpcao)}
+                              onChange={registerForm.handleChange}
                               w={useBreakpointValue({
                                 base: "100%",
                                 md: "95%",
                               })}
                             >
-                              <option value="not1">1</option>
-                              <option value="not2">2</option>
-                              <option value="not3">3</option>
-                              <option value="not4">4</option>
-                              <option value="not5">5</option>
-                              <option value="not6">6</option>
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                              <option>6</option>
                             </Select>
                           </FormControl>
                         </Flex>

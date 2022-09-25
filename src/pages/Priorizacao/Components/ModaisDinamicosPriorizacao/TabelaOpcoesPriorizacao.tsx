@@ -96,6 +96,8 @@ export function TabelaOpcoesPriorizacao(idRanking: TableProps) {
           opcaoId={op.id}
           opcaoName={op.nom_opcao}
           idRanking={idRanking}
+          nameRanking={rankingNome}
+          initialGrade={3}
         />
         <ModalDeletarOpcaoPriorizacao />
       </Td>
