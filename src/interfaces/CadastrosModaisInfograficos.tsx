@@ -50,17 +50,17 @@ export interface CadastroIntervencao {
 export interface CadastroAtividade extends User {
   id_origem: number;
   nom_atividade: string;
-  responsavelId: number;
+  responsavel_id: number;
   area_atuacao: string;
   nao_iniciar_antes_de: {
     data: string;
-    checked: Boolean;
+    checked: Boolean | null;
   };
   nao_terminar_depois_de: {
     data: string;
-    checked: Boolean;
+    checked: Boolean | null;
   };
-  o_mais_breve_possivel: Boolean;
+  o_mais_breve_possivel: Boolean | null;
 }
 
 export interface CadastroPoco {
@@ -157,4 +157,17 @@ export interface ListaCampo {
 export interface ProjetoTipo {
   id: number;
   nom_projeto_tipo: string;
+}
+
+export interface Tarefas {
+  id: number;
+  id_origem: number;
+  nom_atividade: string;
+  responsavel_id: number;
+  area_atuacao: number;
+  nao_iniciar_antes_de: null;
+  nao_terminar_depois_de: null;
+  o_mais_breve_possivel: Boolean;
+  nom_usuario_create: string | null;
+  dat_usuario_create: string | null;
 }

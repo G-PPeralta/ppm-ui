@@ -9,9 +9,6 @@ import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 function SelectFiltragemSondas({ form, nomeChave, nomeLabel }: any) {
   const { listaSondas } = useCadastroCampanha();
 
-  // eslint-disable-next-line no-console
-  console.log("listaSondas", listaSondas);
-
   const idOptions = listaSondas.map((sonda: any) => ({
     value: sonda.id,
     label: sonda.nom_sonda,

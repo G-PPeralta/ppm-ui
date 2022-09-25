@@ -63,8 +63,6 @@ function ModalCadastroIntervencao() {
   );
 
   const reqGetAtividadesByProjetoTipoId = async (id: number) => {
-    // eslint-disable-next-line no-console
-    console.log("id", id);
     if (id === 0) {
       registerForm.setFieldValue("atividades", [
         {
@@ -76,8 +74,7 @@ function ModalCadastroIntervencao() {
       ]);
     } else {
       const atividades = await getAtividadasByProjetosTipoId(id);
-      // eslint-disable-next-line no-console
-      console.log("atividades", atividades.data["Projeto Tipo Gerencia"]);
+
       const atividadesFormatadas = atividades.data["Projeto Tipo Gerencia"].map(
         (atividade: any) => ({
           area_id: atividade.id_area,
@@ -93,9 +90,6 @@ function ModalCadastroIntervencao() {
   useEffect(() => {
     reqGetAtividadesByProjetoTipoId(registerForm.values.projeto_tipo_id);
   }, [registerForm.values.projeto_tipo_id]);
-
-  // eslint-disable-next-line no-console
-  console.log("registerForm", registerForm.values);
 
   return (
     <>

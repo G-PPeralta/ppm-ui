@@ -34,7 +34,7 @@ export const cadastroIntervencaoSchema = yup.object({
 export const cadastroAtividadeSchema = yup.object({
   id_origem: yup.number().required("O ID é obrigatório!"),
   nom_atividade: yup.string().required("O nome da atividade é obrigatório!"),
-  responsavelId: yup.number().required("O responsável é obrigatório!"),
+  responsavel_id: yup.number().required("O responsável é obrigatório!"),
   area_atuacao: yup.string().required("A área de atuação é obrigatória!"),
   nao_iniciar_antes_de: yup.object({
     data: yup.string(),

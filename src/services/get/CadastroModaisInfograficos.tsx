@@ -74,3 +74,12 @@ export async function getSonda(): Promise<{
 
   return { data, status };
 }
+
+export async function getTarefas(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/nova-atividade/tarefas", token());
+
+  return { data, status };
+}

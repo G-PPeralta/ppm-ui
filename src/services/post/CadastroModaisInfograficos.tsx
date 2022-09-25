@@ -36,11 +36,7 @@ export async function postCadastroIntervencao(
 export async function postCadastroAtividade(
   payload: CadastroAtividade
 ): Promise<{ status: number }> {
-  const { status } = await api.post(
-    "/atividades-intervencoes",
-    payload,
-    token()
-  );
+  const { status } = await api.post("/nova-atividade", payload, token());
   return { status };
 }
 

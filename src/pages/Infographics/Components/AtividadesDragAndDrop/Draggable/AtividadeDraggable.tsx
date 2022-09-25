@@ -5,11 +5,12 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
-import { AreaAtuacao } from "interfaces/CadastrosModaisInfograficos";
+import { AreaAtuacao, Tarefas } from "interfaces/CadastrosModaisInfograficos";
 
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
+import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
 
 import SelectFiltragem from "../../SelectFiltragem";
 import PopOverPrecedentes from "./PopOverPrecedentes";
@@ -25,6 +26,7 @@ function AtividadesDraggable({ index, registerForm }: Props) {
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
   const { listaAreaAtuacao } = useCadastroAtividade();
+  const { listaTarefas } = useCadastroProjetoTipo();
 
   const remove = (index: number) => {
     // Pega a lista de atividades diretamente do Formik
@@ -40,9 +42,9 @@ function AtividadesDraggable({ index, registerForm }: Props) {
     label: poco.tipo,
   }));
 
-  const optionsTarefa = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
-    value: poco.id,
-    label: poco.tipo,
+  const optionsTarefa = listaTarefas.map((tarefa: Tarefas) => ({
+    value: tarefa.id,
+    label: tarefa.nom_atividade,
   }));
 
   const getValue = (options: any, i: number, chave: string) => {
@@ -135,7 +137,7 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     registerForm={registerForm}
                     propName={`atividades[${index}].tarefa_id`}
                     options={optionsTarefa}
-                    value={getValue(optionsAreaAtuacao, index, "tarefa_id")}
+                    value={getValue(optionsTarefa, index, "tarefa_id")}
                   />
                 </FormControl>
 

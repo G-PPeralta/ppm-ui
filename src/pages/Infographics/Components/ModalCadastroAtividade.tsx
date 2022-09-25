@@ -32,6 +32,9 @@ function ModalCadastroAtividade() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroAtividade();
 
+  // eslint-disable-next-line no-console
+  console.log("registerForm", registerForm.values);
+
   return (
     <>
       <Button
