@@ -45,96 +45,11 @@ export async function getArea(): Promise<{
   return { data, status };
 }
 
-export const cadastroProjetoTipoPayload = [
-  {
-    nomeUsuarioCreate: "Eduardo Muchak",
-    nome: "Projeto Tipo 1",
-    observacoes: "Observações do Projeto Tipo 1",
-    atividades: [
-      {
-        id: 1,
-        area: "Área 1",
-        tarefa: "Tarefa 1",
-        dias: 10,
-        precedentes: [
-          {
-            id: 1,
-            nome: "Tarefa 1",
-          },
-          {
-            id: 2,
-            nome: "Tarefa 2",
-          },
-          {
-            id: 3,
-            nome: "Tarefa 3",
-          },
-        ],
-      },
-    ],
-  },
-];
+export async function getCampo(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/campos", token());
 
-export const cadastroAtividadePayload = [
-  {
-    nomeUsuarioCreate: "Eduardo Muchak",
-    idOrigem: "CIP01",
-    nome: "Atividade 1",
-    responsavel: {
-      nome: "Eduardo Bortolotti",
-      area: "Gestão",
-    },
-    restricao: {
-      naoIniciarAntesDe: false,
-      dataInicio: "2021-01-01",
-      naoTerminarDepoisDe: false,
-      dataFim: "2021-01-31",
-      oMaisBrevePossivel: true,
-    },
-    precedentes: [
-      {
-        id: 1,
-        area: "Área 1",
-        tarefa: "Tarefa 1",
-        dias: 10,
-      },
-    ],
-    observacoes: "Observações da Atividade 1",
-  },
-];
-
-export const cadastroNovaIntervencaoPayload = [
-  {
-    nomeUsuarioCreate: "Eduardo Muchak",
-    pocoId: 1,
-    campoId: 1,
-    sondaId: 1,
-    dataInicioPrevista: "2021-01-01",
-    projetoTipo: {
-      id: 1,
-      nome: "Projeto Tipo 1",
-    },
-    observacoes: "Observações da Intervenção 1",
-    atividades: [
-      {
-        area: "Área 1",
-        tarefa: "Tarefa 1",
-        dias: 10,
-        responsavel: {
-          id: 1,
-          nome: "Eduardo Bortolotti",
-        },
-        precedentes: [
-          {
-            id: 1,
-            nome: "Tarefa 1",
-          },
-          {
-            id: 2,
-            nome: "Tarefa 2",
-          },
-        ],
-      },
-    ],
-  },
-];
+  return { data, status };
+}

@@ -147,3 +147,9 @@ export interface Area {
   id: number;
   nom_area: string;
 }
+
+export interface ListaCampo {
+  id: number;
+  campo: string;
+  poloId: number;
+}

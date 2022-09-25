@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import {
   AreaAtuacao,
+  ListaCampo,
   ListaPoco,
   Responsavel,
   // NovaIntervencao,
@@ -12,6 +13,7 @@ import { cadastroNovaIntervencaoSchema } from "validations/ModaisCadastrosInfogr
 import { useToast } from "contexts/Toast";
 
 import {
+  getCampo,
   getPocos,
   getResponsaveis,
 } from "services/get/CadastroModaisInfograficos";
@@ -28,12 +30,17 @@ export function useCadastroIntervencao() {
   const [listaPocos, setListaPocos] = useState<ListaPoco[]>([]);
   const [listaAreaAtuacao, setListaAreaAtuacao] = useState<AreaAtuacao[]>([]);
   const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
+  const [listaCampos, setListaCampo] = useState<ListaCampo[]>([]);
 
   const reqGet = async () => {
     const campanha = await getInfoCampanha();
     const pocos = await getPocos();
     const areaAtuacao = await getAreaAtuacaoList();
     const responsaveis = await getResponsaveis();
+    const campos = await getCampo();
+
+    // eslint-disable-next-line no-console
+    console.log("campanha", campanha.data);
 
     const arraySondas = campanha.data.map(({ sonda, id_campanha }: any) => ({
       sonda,
@@ -52,10 +59,15 @@ export function useCadastroIntervencao() {
       a.nome.localeCompare(b.nome)
     );
 
+    const camposSorted = campos.data.sort((a: ListaCampo, b: ListaCampo) =>
+      a.campo.localeCompare(b.campo)
+    );
+
     setListaSondas(sondasSorted);
     setListaPocos(pocosSorted);
     setListaAreaAtuacao(areasAtuacaoSorted);
     setListaResponsaveis(responsaveisSorted);
+    setListaCampo(camposSorted);
   };
 
   const initialValues: any = {
@@ -76,7 +88,7 @@ export function useCadastroIntervencao() {
     comentarios: "",
   };
 
-  const registerForm = useFormik({
+  const registerForm: any = useFormik({
     initialValues,
     validationSchema: cadastroNovaIntervencaoSchema,
     onSubmit: async (values) => {
@@ -129,5 +141,6 @@ export function useCadastroIntervencao() {
     listaPocos,
     listaAreaAtuacao,
     listaResponsaveis,
+    listaCampos,
   };
 }

@@ -18,7 +18,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
+import { ListaCampo, ListaPoco } from "interfaces/CadastrosModaisInfograficos";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
@@ -33,7 +33,8 @@ import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
 function ModalCadastroIntervencao() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaPocos } = useCadastroIntervencao();
+  const { registerForm, loading, listaPocos, listaCampos } =
+    useCadastroIntervencao();
 
   const innerWidth = window.innerWidth;
 
@@ -42,9 +43,9 @@ function ModalCadastroIntervencao() {
     label: poco.poco,
   }));
 
-  const optionsCampo = listaPocos.map((poco: ListaPoco) => ({
-    value: poco.id,
-    label: poco.poco,
+  const optionsCampo = listaCampos.map((campo: ListaCampo) => ({
+    value: campo.id,
+    label: campo.campo,
   }));
 
   const optionsProjetoTipo = listaPocos.map((poco: ListaPoco) => ({
