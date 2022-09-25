@@ -65,3 +65,12 @@ export async function getAtividadasByProjetosTipoId(id: number): Promise<{
 
   return { data, status };
 }
+
+export async function getSonda(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/sonda", token());
+
+  return { data, status };
+}

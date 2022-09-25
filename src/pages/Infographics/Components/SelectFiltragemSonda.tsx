@@ -4,19 +4,22 @@ import { Flex, FormControl, FormLabel } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
+import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 
 function SelectFiltragemSondas({ form, nomeChave, nomeLabel }: any) {
-  const { listaSondas } = useCadastroIntervencao();
+  const { listaSondas } = useCadastroCampanha();
+
+  // eslint-disable-next-line no-console
+  console.log("listaSondas", listaSondas);
 
   const idOptions = listaSondas.map((sonda: any) => ({
-    value: sonda.id_campanha,
-    label: sonda.sonda,
+    value: sonda.id,
+    label: sonda.nom_sonda,
   }));
 
   const nameOptions = listaSondas.map((sonda: any) => ({
-    value: sonda.sonda,
-    label: sonda.sonda,
+    value: sonda.nom_sonda,
+    label: sonda.nom_sonda,
   }));
 
   const handleChange = ({ value }: any, { name }: any) => {
