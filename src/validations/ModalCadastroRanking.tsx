@@ -31,7 +31,19 @@ export const cadastroNovaPriorizacaoSchema = yup.object({
   nom_usu_create: yup.string(),
 });
 
-export const cadastroNovaPriorizacao = yup.object({
+export const updatePriorizacao = yup.object({
   rankingName: yup.string().required(),
+  idRanking: yup.number().required(),
+  nom_usu_create: yup.string(),
+});
+
+export const createPriorizacao = yup.object({
+  rankingName: yup.string().required(),
+  nom_usu_create: yup.string(),
+});
+
+export const cadastroNovaOpcaoPriorizacao = yup.object({
+  rankingOpcao: yup.string().required(),
+  rankingId: yup.number().required(),
   nom_usu_create: yup.string(),
 });

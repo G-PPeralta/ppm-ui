@@ -24,13 +24,13 @@ import { Ring } from "@uiball/loaders";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroNovaPriorizacao } from "hooks/useCadastrarNovaPriorizacaoo";
+import { useCadastroNovaPriorizacao } from "hooks/useCadastrarNovaPriorizacao";
 
 function ModalCadastrarPriorizacao() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroNovaPriorizacao();
 
-  // console.log(registerForm);
+  // console.log(registerForm.values.rankingName);
 
   return (
     <>

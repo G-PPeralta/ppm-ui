@@ -1,46 +1,52 @@
 import { useState } from "react";
 
 import { useFormik } from "formik";
-import { cadastroNovaPriorizacao } from "validations/ModalCadastroRanking";
+import { cadastroNovaOpcaoPriorizacao } from "validations/ModalCadastroRanking";
 
 import { useToast } from "contexts/Toast";
 
-import { postProject } from "services/post/Priorizacao";
+import { postOptionRanking } from "services/post/Priorizacao";
 
 import { useAuth } from "./useAuth";
 
-export function useCadastroNovaPriorizacao() {
+export function useCadastroNovaOpcaoPriorizacao() {
   const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
   const initialValues: any = {
-    rankingName: "",
+    rankingOpcao: "",
+    rankingId: 0,
     nom_usu_create: user?.nome,
   };
 
   const registerForm = useFormik({
     initialValues,
-    validationSchema: cadastroNovaPriorizacao,
+    validationSchema: cadastroNovaOpcaoPriorizacao,
     onSubmit: async (values) => {
       const newValues: any = {
-        rankingName: values.rank_name,
+        rankingOpcao: values.rank_opcao_name,
+        rankingId: values.rank_opcao_id,
         nom_usu_create: user?.nome,
       };
 
       setLoading(true);
 
       try {
-        const { status } = await postProject(newValues);
+        // rota post opção ranking - opção priorização
+        const { status } = await postOptionRanking(
+          newValues,
+          newValues.rankingId
+        );
 
         if (status === 200 || status === 201) {
-          toast.success(`Priorização cadastrada com sucesso!`, {
+          toast.success(`Opção cadastrada com sucesso!`, {
             id: "toast-principal",
           });
           setLoading(false);
         }
       } catch (error) {
-        toast.error(`Erro ao cadastrar a priorização!`, {
+        toast.error(`Erro ao cadastrar a opção!`, {
           id: "toast-principal",
         });
 

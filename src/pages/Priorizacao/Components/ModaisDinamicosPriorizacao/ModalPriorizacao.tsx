@@ -26,7 +26,7 @@ import { handleCancelar } from "utils/handleCadastro";
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
 import EditarPriorizacao from "../Priorizacao/EditarPriorizacao";
-import ModalCadastrarBeneficio from "./CadastrarBeneficio";
+import ModalCadastrarOpcaoPriorizacao from "./CadastrarOpcaoPriorizacao";
 import { TabelaBeneficio } from "./TabelaBeneficio";
 
 interface TableProps {
@@ -34,7 +34,7 @@ interface TableProps {
   idRanking: any;
 }
 
-function ModalBeneficio(nomeRanking: TableProps) {
+function ModalBeneficio(infosRankings: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm } = useCadastroPriorizacao();
   // console.log(nomeRanking.nomeRanking);
@@ -63,7 +63,7 @@ function ModalBeneficio(nomeRanking: TableProps) {
             color={"white"}
             fontSize={"1em"}
           >
-            {`Priorização ${nomeRanking.nomeRanking}`}
+            {`Priorização ${infosRankings.nomeRanking}`}
           </ModalHeader>
           {/* <ModalCloseButton color={"white"} /> */}
           <form
@@ -101,13 +101,14 @@ function ModalBeneficio(nomeRanking: TableProps) {
                         </Flex>
                         <Flex ml={"180px"}>
                           <Flex mt={"18px"}>
-                            <ModalCadastrarBeneficio
-                              nomeRanking={nomeRanking.nomeRanking}
+                            <ModalCadastrarOpcaoPriorizacao
+                              nomeRanking={infosRankings.nomeRanking}
+                              idRanking={infosRankings.idRanking}
                             />
                           </Flex>
                           <Flex mt={"18px"}>
                             <EditarPriorizacao
-                              nomeRanking={nomeRanking.nomeRanking}
+                              nomeRanking={infosRankings.nomeRanking}
                             />
                           </Flex>
                         </Flex>
@@ -130,8 +131,8 @@ function ModalBeneficio(nomeRanking: TableProps) {
                         </Flex>
                       </Flex>
                       <TabelaBeneficio
-                        idRanking={nomeRanking.idRanking}
-                        nomeRanking={nomeRanking.nomeRanking}
+                        idRanking={infosRankings.idRanking}
+                        nomeRanking={infosRankings.nomeRanking}
                       />
                     </Flex>
                   </Stack>

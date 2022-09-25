@@ -21,7 +21,7 @@ import {
 
 import { getPriorizacoes } from "services/get/Priorizacoes";
 
-import ModalBeneficio from "../ModaisDinamicosPriorizacao/ModalPriorizacao";
+import ModalPriorizacao from "../ModaisDinamicosPriorizacao/ModalPriorizacao";
 import ModalDeletarPriorizacao from "./DeletarPriorizacao";
 
 export function TabelaPriorizacao() {
@@ -79,7 +79,7 @@ export function TabelaPriorizacao() {
       <Td width={"600px"}>{prio.nom_ranking}</Td>
       <Td textAlign={"center"}>3</Td>
       <Td textAlign={"center"}>
-        <ModalBeneficio nomeRanking={prio.nom_ranking} idRanking={prio.id} />
+        <ModalPriorizacao nomeRanking={prio.nom_ranking} idRanking={prio.id} />
         <ModalDeletarPriorizacao />
       </Td>
     </Tr>

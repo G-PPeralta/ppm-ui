@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 
 import {
@@ -25,20 +26,26 @@ import { Ring } from "@uiball/loaders";
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 // import { useCadastroNovaOpcao } from "hooks/useCadastrarNovaPriorizacaoo";
-import { useEdicaoPriorizacao } from "hooks/useEditarPriorizacao";
+import { useCadastroNovaOpcaoPriorizacao } from "hooks/useCadastrarOpcaoPriorizacao";
 
 interface TableProps {
   nomeRanking: string;
+  idRanking: any;
 }
 
-function ModalCadastrarBeneficio(nomeRanking: TableProps) {
+function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useEdicaoPriorizacao(nomeRanking);
+  const { registerForm, loading } = useCadastroNovaOpcaoPriorizacao();
 
-  console.log(nomeRanking.nomeRanking);
-  console.log("registerForm bene", registerForm.values.rankingName.nomeRanking);
+  // console.log(nomeRanking.nomeRanking);
+  // console.log("register opção-prio", registerForm.values.rankingOpcao);
+  // console.log(infosRankings.idRanking);
 
-  const rankingNome = nomeRanking.nomeRanking;
+  useEffect(() => {
+    registerForm.setFieldValue("rankingId", Number("1"));
+  }, []);
+
+  const rankingNome = infosRankings.nomeRanking;
 
   return (
     <>
@@ -112,7 +119,7 @@ function ModalCadastrarBeneficio(nomeRanking: TableProps) {
                         >
                           <FormControl>
                             <FormLabel
-                              htmlFor="regulatorio.opcao_id"
+                              htmlFor="rankingOpcao"
                               fontSize={"12px"}
                               mb={"1px"}
                               w={"350px"}
@@ -123,9 +130,9 @@ function ModalCadastrarBeneficio(nomeRanking: TableProps) {
                             <Input
                               ml={"3px"}
                               isRequired
-                              id="beneficio.opcao_id"
-                              name="beneficio.opcao_id"
-                              // value={rankingNome}
+                              id="rankingOpcao"
+                              name="rankingOpcao"
+                              value={registerForm.values.rankingOpcao}
                               onChange={registerForm.handleChange}
                             />
                           </FormControl>
@@ -218,4 +225,4 @@ function ModalCadastrarBeneficio(nomeRanking: TableProps) {
   );
 }
 
-export default ModalCadastrarBeneficio;
+export default ModalCadastrarOpcaoPriorizacao;
