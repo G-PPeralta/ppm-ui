@@ -43,9 +43,6 @@ export function useCadastroIntervencao() {
     const campos = await getCampo();
     const projetosTipo = await getProjetosTipo();
 
-    // eslint-disable-next-line no-console
-    console.log("projeto tipo", projetosTipo.data);
-
     const arraySondas = campanha.data.map(({ sonda, id_campanha }: any) => ({
       sonda,
       id_campanha,

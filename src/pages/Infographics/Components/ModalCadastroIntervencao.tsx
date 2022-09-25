@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BsPlusLg } from "react-icons/bs";
 
 import {
@@ -30,6 +31,8 @@ import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
+import { getAtividadasByProjetosTipoId } from "services/get/CadastroModaisInfograficos";
+
 import AtividadesCadastroIntervencao from "./AtividadesCadastroIntervencao";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
 import SelectFiltragem from "./SelectFiltragem";
@@ -58,6 +61,41 @@ function ModalCadastroIntervencao() {
       label: projetoTipo.nom_projeto_tipo,
     })
   );
+
+  const reqGetAtividadesByProjetoTipoId = async (id: number) => {
+    // eslint-disable-next-line no-console
+    console.log("id", id);
+    if (id === 0) {
+      registerForm.setFieldValue("atividades", [
+        {
+          area_id: 0,
+          tarefa_id: 0,
+          responsavel_id: 0,
+          qtde_dias: 0,
+        },
+      ]);
+    } else {
+      const atividades = await getAtividadasByProjetosTipoId(id);
+      // eslint-disable-next-line no-console
+      console.log("atividades", atividades.data["Projeto Tipo Gerencia"]);
+      const atividadesFormatadas = atividades.data["Projeto Tipo Gerencia"].map(
+        (atividade: any) => ({
+          area_id: atividade.id_area,
+          tarefa_id: atividade.id_tarefa,
+          responsavel_id: 0,
+          qtde_dias: atividade.qtde_dias,
+        })
+      );
+      registerForm.setFieldValue("atividades", atividadesFormatadas);
+    }
+  };
+
+  useEffect(() => {
+    reqGetAtividadesByProjetoTipoId(registerForm.values.projeto_tipo_id);
+  }, [registerForm.values.projeto_tipo_id]);
+
+  // eslint-disable-next-line no-console
+  console.log("registerForm", registerForm.values);
 
   return (
     <>
