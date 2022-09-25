@@ -21,15 +21,15 @@ import {
 
 import { getOpcoesRankings } from "services/get/Priorizacoes";
 
-import ModalDeletarBeneficio from "./DeletarBeneficio";
-import ModalEditarBeneficio from "./EditarBeneficio";
+import ModalDeletarOpcaoPriorizacao from "./DeletarOpcaoPriorizacao";
+import ModalEditarOpcaoPriorizacao from "./EditarOpcaoPriorizacao";
 
 interface TableProps {
   idRanking: any;
   nomeRanking: any;
 }
 
-export function TabelaBeneficio(idRanking: TableProps) {
+export function TabelaOpcoesPriorizacao(idRanking: TableProps) {
   const [pagAtual, setPagAtual] = useState(1);
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
@@ -92,8 +92,8 @@ export function TabelaBeneficio(idRanking: TableProps) {
       <Td width={"600px"}>{bene.nom_opcao}</Td>
       <Td textAlign={"center"}>3</Td>
       <Td textAlign={"center"}>
-        <ModalEditarBeneficio />
-        <ModalDeletarBeneficio />
+        <ModalEditarOpcaoPriorizacao />
+        <ModalDeletarOpcaoPriorizacao />
       </Td>
     </Tr>
   ));

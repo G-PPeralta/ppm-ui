@@ -28,7 +28,7 @@ import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
-function ModalEditarBeneficio() {
+function ModalEditarOpcaoPriorizacao() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroPriorizacao();
 
@@ -206,4 +206,4 @@ function ModalEditarBeneficio() {
   );
 }
 
-export default ModalEditarBeneficio;
+export default ModalEditarOpcaoPriorizacao;

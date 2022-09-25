@@ -17,6 +17,7 @@ export function useCadastroNovaOpcaoPriorizacao() {
   const initialValues: any = {
     rankingOpcao: "",
     rankingId: 0,
+    rankingGrade: "",
     nom_usu_create: user?.nome,
   };
 
@@ -27,6 +28,7 @@ export function useCadastroNovaOpcaoPriorizacao() {
       const newValues: any = {
         rankingOpcao: values.rank_opcao_name,
         rankingId: values.rank_opcao_id,
+        rankingGrade: values.rank_opcao_grade,
         nom_usu_create: user?.nome,
       };
 

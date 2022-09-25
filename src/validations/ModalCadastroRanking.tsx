@@ -43,7 +43,8 @@ export const createPriorizacao = yup.object({
 });
 
 export const cadastroNovaOpcaoPriorizacao = yup.object({
-  rankingOpcao: yup.string().required(),
+  rankingOpcao: yup.string(),
   rankingId: yup.number().required(),
+  rankingGrade: yup.string(),
   nom_usu_create: yup.string(),
 });

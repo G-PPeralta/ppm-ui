@@ -29,7 +29,7 @@ import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
 // import { deleteProject } from "services/delete/DeleteProject";
 
-function ModalDeletarBeneficio() {
+function ModalDeletarOpcaoPriorizacao() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroPriorizacao();
   // const { user } = useAuth();
@@ -139,4 +139,4 @@ function ModalDeletarBeneficio() {
   );
 }
 
-export default ModalDeletarBeneficio;
+export default ModalDeletarOpcaoPriorizacao;

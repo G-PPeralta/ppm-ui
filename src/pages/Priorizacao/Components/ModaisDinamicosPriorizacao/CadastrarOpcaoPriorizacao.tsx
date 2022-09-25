@@ -39,10 +39,11 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
 
   // console.log(nomeRanking.nomeRanking);
   // console.log("register opção-prio", registerForm.values.rankingOpcao);
-  // console.log(infosRankings.idRanking);
+  // console.log("idRanking", infosRankings.idRanking);
+  // console.log("gradeOpcao rank", registerForm.values.rankingGrade);
 
   useEffect(() => {
-    registerForm.setFieldValue("rankingId", Number("1"));
+    registerForm.setFieldValue("rank_opcao_id", infosRankings.idRanking);
   }, []);
 
   const rankingNome = infosRankings.nomeRanking;
@@ -119,7 +120,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                         >
                           <FormControl>
                             <FormLabel
-                              htmlFor="rankingOpcao"
+                              htmlFor="rank_opcao_name"
                               fontSize={"12px"}
                               mb={"1px"}
                               w={"350px"}
@@ -129,10 +130,9 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                             </FormLabel>
                             <Input
                               ml={"3px"}
-                              isRequired
-                              id="rankingOpcao"
-                              name="rankingOpcao"
-                              value={registerForm.values.rankingOpcao}
+                              id="rank_opcao_name"
+                              name="rank_opcao_name"
+                              value={registerForm.values.rank_opcao_name}
                               onChange={registerForm.handleChange}
                             />
                           </FormControl>
@@ -149,7 +149,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                         >
                           <FormControl>
                             <FormLabel
-                              htmlFor="regulatorio.opcao_id"
+                              htmlFor="rank_opcao_grade"
                               fontSize={"12px"}
                               mb={"1px"}
                               w={"140px"}
@@ -157,22 +157,22 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               NOTA
                             </FormLabel>
                             <Select
-                              id="pit"
-                              name="pit"
+                              id="rank_opcao_grade"
+                              name="rank_opcao_grade"
                               placeholder="Selecione"
-                              // value={activitiesForm.values.pit}
-                              // onChange={activitiesForm.handleChange}
+                              value={registerForm.values.rank_opcao_grade}
+                              onChange={registerForm.handleChange}
                               w={useBreakpointValue({
                                 base: "100%",
                                 md: "95%",
                               })}
                             >
-                              <option value="not1">1</option>
-                              <option value="not2">2</option>
-                              <option value="not3">3</option>
-                              <option value="not4">4</option>
-                              <option value="not5">5</option>
-                              <option value="not6">6</option>
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                              <option>6</option>
                             </Select>
                           </FormControl>
                         </Flex>

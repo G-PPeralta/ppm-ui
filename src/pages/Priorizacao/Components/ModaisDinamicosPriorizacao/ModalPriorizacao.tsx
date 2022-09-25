@@ -27,7 +27,7 @@ import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
 import EditarPriorizacao from "../Priorizacao/EditarPriorizacao";
 import ModalCadastrarOpcaoPriorizacao from "./CadastrarOpcaoPriorizacao";
-import { TabelaBeneficio } from "./TabelaBeneficio";
+import { TabelaOpcoesPriorizacao } from "./TabelaOpcoesPriorizacao";
 
 interface TableProps {
   nomeRanking: string;
@@ -130,7 +130,7 @@ function ModalBeneficio(infosRankings: TableProps) {
                           </Button>
                         </Flex>
                       </Flex>
-                      <TabelaBeneficio
+                      <TabelaOpcoesPriorizacao
                         idRanking={infosRankings.idRanking}
                         nomeRanking={infosRankings.nomeRanking}
                       />
