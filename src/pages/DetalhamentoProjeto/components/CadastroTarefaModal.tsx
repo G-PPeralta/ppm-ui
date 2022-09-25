@@ -18,6 +18,7 @@ import {
   Input,
   ModalFooter,
   Button,
+  Select,
   // useDisclosure,
 } from "@chakra-ui/react";
 
@@ -73,25 +74,68 @@ function CadastroTarefasModal({ isModalOpen, closeModal }: any) {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <FormControl marginBottom={4} padding={1}>
+            <FormControl
+              marginBottom={4}
+              padding={1}
+              display={"flex"}
+              justifyContent={"space-between"}
+              gap={3}
+            >
+              <Flex flexDir={"column"} flexGrow={4}>
+                <FormLabel
+                  htmlFor="nomeTarefa"
+                  color="#D6D4D4"
+                  fontSize="sm"
+                  fontWeight="500"
+                >
+                  NOME DA TAREFA
+                </FormLabel>
+                <Input
+                  isRequired
+                  placeholder="Nome tarefa"
+                  color="#D6D4D4"
+                  type="text"
+                  id="nomeTarefa"
+                  name="nomeTarefa"
+                  width="100%"
+                />
+              </Flex>
+              <Flex flexDir={"column"} flexGrow={1}>
+                <FormLabel
+                  color="#D6D4D4"
+                  htmlFor="data"
+                  fontSize="sm"
+                  fontWeight="500"
+                >
+                  DATA
+                </FormLabel>
+                <Input
+                  // placeholder="dd/mm/aaaa"
+                  color="#D6D4D4"
+                  id="data"
+                  type="date"
+                  name="data"
+                  // value={data}
+                  // onChange={(event) => setData(event.target.value)}
+                />
+              </Flex>
+            </FormControl>
+            <FormControl padding={1} marginBottom={4} width={"204px"}>
               <FormLabel
-                htmlFor="nomeTarefa"
+                htmlFor="atividadeRel"
                 color="#D6D4D4"
                 fontSize="sm"
                 fontWeight="500"
               >
-                NOME DA TAREFA
+                ATIVIDADE RELACIONADA
               </FormLabel>
-              <Input
-                isRequired
-                placeholder="Nome tarefa"
-                type="text"
-                id="nomeTarefa"
-                name="nomeTarefa"
-                width="100%"
-              />
+              <Select id="atividadeRel" name="atividadeRel" color="#D6D4D4">
+                <option value="">Selecione</option>
+                <option value="">Atividade 1</option>
+                <option value="">Atividade 2</option>
+              </Select>
             </FormControl>
-            <FormControl>
+            <FormControl padding={1}>
               <FormLabel
                 htmlFor="acao"
                 color="#D6D4D4"
@@ -101,6 +145,7 @@ function CadastroTarefasModal({ isModalOpen, closeModal }: any) {
                 DESCRIÇÃO DA TAREFA
               </FormLabel>
               <Textarea
+                color="#D6D4D4"
                 isRequired
                 placeholder="Descrição da tarefa"
                 id="descrição"
@@ -135,7 +180,7 @@ function CadastroTarefasModal({ isModalOpen, closeModal }: any) {
                   transition: "all 0.4s",
                 }}
               >
-                Confirmar
+                Adicionar
               </Button>
             </Flex>
           </ModalFooter>
