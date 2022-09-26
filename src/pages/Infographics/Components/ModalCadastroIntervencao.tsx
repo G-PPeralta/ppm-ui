@@ -38,7 +38,7 @@ import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
 import SelectFiltragem from "./SelectFiltragem";
 // import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
-function ModalCadastroIntervencao({ idCampanha }: any) {
+function ModalCadastroIntervencao({ idCampanha, data }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     registerForm,
@@ -163,10 +163,6 @@ function ModalCadastroIntervencao({ idCampanha }: any) {
                         direction={innerWidth >= 460 ? "row" : "column"}
                         gap={5}
                       >
-                        {/* <SelectFiltragemSondas
-                          form={registerForm}
-                          nomeChave={"sonda_id"}
-                        /> */}
                         <SelectFiltragem
                           registerForm={registerForm}
                           nomeSelect={"SONDA"}
@@ -186,7 +182,10 @@ function ModalCadastroIntervencao({ idCampanha }: any) {
                           propName={"campo_id"}
                           options={optionsCampo}
                         />
-                        <DateTimePickerDataInicio registerForm={registerForm} />
+                        <DateTimePickerDataInicio
+                          registerForm={registerForm}
+                          data={data}
+                        />
                       </Flex>
                     </Stack>
 

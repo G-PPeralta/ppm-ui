@@ -83,3 +83,12 @@ export async function getTarefas(): Promise<{
 
   return { data, status };
 }
+
+export async function getAtividadesDataMais15(id: number): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(`/campanha/find/datas/${id}`, token());
+
+  return { data, status };
+}

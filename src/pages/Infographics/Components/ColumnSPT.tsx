@@ -5,7 +5,7 @@ import ModalCadastroIntervencao from "./ModalCadastroIntervencao";
 
 type Poco = {
   comp_pct: number;
-  finalPlanejado: any;
+  finalplanejado: any;
   id_campanha: number;
   id_poco: number;
   inicioplanejado: any;
@@ -46,7 +46,10 @@ function ColumnSPT({ column }: Props) {
           }
         })}
       </Flex>
-      <ModalCadastroIntervencao idCampanha={column.id_campanha} />
+      <ModalCadastroIntervencao
+        data={column.pocos[column.pocos.length - 1].finalplanejado}
+        idCampanha={column.id_campanha}
+      />
     </Flex>
   );
 }
