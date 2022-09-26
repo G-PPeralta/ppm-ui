@@ -175,12 +175,14 @@ function ModalCadastroIntervencao({ idCampanha, data }: any) {
                           nomeSelect={"POÇO"}
                           propName={"poco_id"}
                           options={optionsPocos}
+                          required={true}
                         />
                         <SelectFiltragem
                           registerForm={registerForm}
                           nomeSelect={"CAMPO"}
                           propName={"campo_id"}
                           options={optionsCampo}
+                          required={true}
                         />
                         <DateTimePickerDataInicio
                           registerForm={registerForm}
@@ -196,6 +198,7 @@ function ModalCadastroIntervencao({ idCampanha, data }: any) {
                           nomeSelect={"PROJETO"}
                           propName={"projeto_tipo_id"}
                           options={optionsProjetoTipo}
+                          required={true}
                         />
                       </Flex>
                     </Stack>
