@@ -29,11 +29,11 @@ export const LinkItems: Array<LinkItemProps> = [
     children: [
       { name: "Dashboard", icon: FiHome, link: "/" },
       { name: "Projetos", icon: FaRegMoneyBillAlt, link: "/projects" },
-      {
-        name: "Fornecedores",
-        icon: FaRegMoneyBillAlt,
-        link: "/desenvolvimento",
-      },
+      // {
+      //   name: "Fornecedores",
+      //   icon: FaRegMoneyBillAlt,
+      //   link: "/desenvolvimento",
+      // },
       { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/budgets" },
       { name: "Importar Dados", icon: BiData, link: "/upload" },
       {
