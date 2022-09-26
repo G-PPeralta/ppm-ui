@@ -30,7 +30,7 @@ function ModalCadastrarPriorizacao() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroNovaPriorizacao();
 
-  // console.log(registerForm.values.rankingName);
+  // console.log(registerForm.values);
 
   return (
     <>

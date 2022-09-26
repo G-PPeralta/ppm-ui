@@ -38,8 +38,10 @@ export const updatePriorizacao = yup.object({
 });
 
 export const createPriorizacao = yup.object({
-  rankingName: yup.string().required(),
+  nom_ranking: yup.string(),
   nom_usu_create: yup.string(),
+  id_area_responsavel: yup.number(),
+  num_peso: yup.number(),
 });
 
 export const cadastroNovaOpcaoPriorizacao = yup.object({

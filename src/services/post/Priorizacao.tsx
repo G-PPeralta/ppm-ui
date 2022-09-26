@@ -14,7 +14,7 @@ export async function updateRanking(
 }
 
 export async function createRanking(payload: any): Promise<{ status: number }> {
-  const { status } = await api.post("/ranking", payload);
+  const { status } = await api.post("/rankings", payload);
   return { status };
 }
 
