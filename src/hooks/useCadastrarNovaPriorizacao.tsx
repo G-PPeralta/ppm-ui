@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { useFormik } from "formik";
-import { createPriorizacao } from "validations/ModalCadastroRanking";
+import { createPriorizacao } from "validations/ModaisRanking";
 
 import { useToast } from "contexts/Toast";
 

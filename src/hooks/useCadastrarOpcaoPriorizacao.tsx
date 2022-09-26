@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { useFormik } from "formik";
-import { cadastroNovaOpcaoPriorizacao } from "validations/ModalCadastroRanking";
+import { cadastroNovaOpcaoPriorizacao } from "validations/ModaisRanking";
 
 import { useToast } from "contexts/Toast";
 
@@ -15,9 +15,9 @@ export function useCadastroNovaOpcaoPriorizacao() {
   const [loading, setLoading] = useState(false);
 
   const initialValues: any = {
-    rankingOpcao: "",
+    rank_opcao_name: "",
     rankingId: 0,
-    rankingGrade: "",
+    rank_opcao_grade: "",
     nom_usu_create: user?.nome,
   };
 
@@ -26,9 +26,9 @@ export function useCadastroNovaOpcaoPriorizacao() {
     validationSchema: cadastroNovaOpcaoPriorizacao,
     onSubmit: async (values) => {
       const newValues: any = {
-        rankingOpcao: values.rank_opcao_name,
+        rank_opcao_name: values.rank_opcao_name,
         rankingId: values.rank_opcao_id,
-        rankingGrade: values.rank_opcao_grade,
+        rank_opcao_grade: values.rank_opcao_grade,
         nom_usu_create: user?.nome,
       };
 

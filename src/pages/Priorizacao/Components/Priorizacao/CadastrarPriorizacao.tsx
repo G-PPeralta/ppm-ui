@@ -127,6 +127,11 @@ function ModalCadastrarPriorizacao() {
                               value={registerForm.values.nom_ranking}
                               onChange={registerForm.handleChange}
                             />
+                            {/* {registerForm.errors.nom_ranking && (
+                              <TextError>
+                                {registerForm.errors.nom_ranking}
+                              </TextError> */}
+                            {/* )} */}
                           </FormControl>
                         </Flex>
 

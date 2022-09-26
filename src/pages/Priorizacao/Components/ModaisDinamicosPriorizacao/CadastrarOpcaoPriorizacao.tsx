@@ -25,7 +25,6 @@ import { Ring } from "@uiball/loaders";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-// import { useCadastroNovaOpcao } from "hooks/useCadastrarNovaPriorizacaoo";
 import { useCadastroNovaOpcaoPriorizacao } from "hooks/useCadastrarOpcaoPriorizacao";
 
 interface TableProps {
@@ -37,10 +36,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroNovaOpcaoPriorizacao();
 
-  // console.log(nomeRanking.nomeRanking);
-  // console.log("register opção-prio", registerForm.values.rankingOpcao);
-  // console.log("idRanking", infosRankings.idRanking);
-  // console.log("gradeOpcao rank", registerForm.values.rankingGrade);
+  // console.log("register opção", registerForm.values);
 
   useEffect(() => {
     registerForm.setFieldValue("rank_opcao_id", infosRankings.idRanking);
@@ -135,6 +131,11 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               value={registerForm.values.rank_opcao_name}
                               onChange={registerForm.handleChange}
                             />
+                            {/* {registerForm.errors.rank_opcao_name && (
+                              <TextError>
+                                {registerForm.errors.rank_opcao_name}
+                              </TextError>
+                            )} */}
                           </FormControl>
                         </Flex>
 
@@ -174,6 +175,11 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               <option>5</option>
                               <option>6</option>
                             </Select>
+                            {/* {registerForm.errors.rank_opcao_grade && (
+                              <TextError>
+                                {registerForm.errors.rank_opcao_grade}
+                              </TextError>
+                            )} */}
                           </FormControl>
                         </Flex>
                       </Flex>
