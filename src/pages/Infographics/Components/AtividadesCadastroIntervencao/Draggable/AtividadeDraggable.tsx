@@ -5,16 +5,14 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
-import { AreaAtuacao, Tarefas } from "interfaces/CadastrosModaisInfograficos";
+import {
+  AreaAtuacao,
+  Responsavel,
+} from "interfaces/CadastrosModaisInfograficos";
 
-import { regexCaracteresEspeciais } from "utils/regex";
-
-import { useCadastroAtividade } from "hooks/useCadastroAtividade";
-import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
+import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 import SelectFiltragem from "../../SelectFiltragem";
-import PopOverPrecedentes from "./PopOverPrecedentes";
-
 interface Props {
   registerForm: FormikProps<any>;
   index: number;
@@ -22,11 +20,11 @@ interface Props {
 
 function AtividadesDraggable({ index, registerForm }: Props) {
   const innerwidth = window.innerWidth;
+  const { listaAreaAtuacao, listaResponsaveis, listaTarefas } =
+    useCadastroIntervencao();
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
-  const { listaAreaAtuacao } = useCadastroAtividade();
-  const { listaTarefas } = useCadastroProjetoTipo();
 
   const remove = (index: number) => {
     // Pega a lista de atividades diretamente do Formik
@@ -42,10 +40,17 @@ function AtividadesDraggable({ index, registerForm }: Props) {
     label: poco.tipo,
   }));
 
-  const optionsTarefa = listaTarefas.map((tarefa: Tarefas) => ({
+  const optionsTarefa = listaTarefas.map((tarefa: any) => ({
     value: tarefa.id,
     label: tarefa.nom_atividade,
   }));
+
+  const optionsResponsaveis = listaResponsaveis.map(
+    (responsavel: Responsavel) => ({
+      value: responsavel.id,
+      label: responsavel.nome,
+    })
+  );
 
   const getValue = (options: any, i: number, chave: string) => {
     const index = options
@@ -85,7 +90,12 @@ function AtividadesDraggable({ index, registerForm }: Props) {
             borderRadius={"60px"}
             mb={2}
           >
-            <Flex flexDirection={"row"} gap={4}>
+            <Flex
+              flexDirection={"row"}
+              gap={4}
+              flex={1}
+              justify={"space-between"}
+            >
               <Flex align={"center"} justify={"center"} gap={3}>
                 <GiHamburgerMenu color="#2E69FD" size={16} />
                 <Text sx={{ fontSize: 16, fontWeight: "600" }}>
@@ -99,28 +109,8 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                 align={"center"}
                 justify={"center"}
                 py={innerwidth >= 640 ? 0 : 4}
+                flex={1}
               >
-                <FormControl>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>ID</Text>
-                  <Input
-                    placeholder="Ex.: CIP02"
-                    type="text"
-                    bg={"#fff"}
-                    id={`atividades[${index}].atividade_id_origem`}
-                    name={`atividades[${index}].atividade_id_origem`}
-                    value={regexCaracteresEspeciais(
-                      registerForm.values.atividades[index].atividade_id_origem
-                    )}
-                    onChange={(event) => {
-                      registerForm.setFieldValue(
-                        `atividades[${index}].atividade_id_origem`,
-                        event.target.value
-                      );
-                    }}
-                    maxLength={10}
-                  />
-                </FormControl>
-
                 <FormControl>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>ÁREA</Text>
                   <SelectFiltragem
@@ -130,7 +120,6 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     value={getValue(optionsAreaAtuacao, index, "area_id")}
                   />
                 </FormControl>
-
                 <FormControl>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>TAREFA</Text>
                   <SelectFiltragem
@@ -140,7 +129,21 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     value={getValue(optionsTarefa, index, "tarefa_id")}
                   />
                 </FormControl>
-
+                <FormControl>
+                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>
+                    RESPONSÁVEL
+                  </Text>
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    propName={`atividades[${index}].responsavel_id`}
+                    options={optionsResponsaveis}
+                    value={getValue(
+                      optionsResponsaveis,
+                      index,
+                      "responsavel_id"
+                    )}
+                  />
+                </FormControl>
                 <FormControl>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
                   <Input
@@ -158,16 +161,6 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     }}
                   />
                 </FormControl>
-
-                <Flex direction={"column"}>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>
-                    PRECEDENTES
-                  </Text>
-                  <PopOverPrecedentes
-                    registerForm={registerForm}
-                    index={index}
-                  />
-                </Flex>
               </Flex>
               <Flex
                 p={1}

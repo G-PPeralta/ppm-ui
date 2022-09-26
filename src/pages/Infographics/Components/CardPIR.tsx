@@ -5,29 +5,29 @@ import { Flex, Heading, Text } from "@chakra-ui/react";
 import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
 
-type Poco = {
-  comp_pct: number;
-  finalPlanejado: any;
-  id_campanha: number;
-  id_poco: number;
-  inicioplanejado: any;
-  pct_plan: any;
-  pct_real: any;
-  poco: string;
-  sonda: string;
-};
+// type Poco = {
+//   comp_pct: number;
+//   finalPlanejado: any;
+//   id_campanha: number;
+//   id_poco: number;
+//   inicioplanejado: any;
+//   pct_plan: any;
+//   pct_real: any;
+//   poco: string;
+//   sonda: string;
+// };
 
-type Props = {
-  poco: Poco;
-  index: number;
-};
+// type Props = {
+//   poco: Poco;
+//   index: number;
+// };
 
-function CardPIR({ poco, index }: Props) {
+function CardPIR({ poco, index }: any) {
   const navigate = useNavigate();
   const dataInicioFormatada = formatDate(new Date(poco.inicioplanejado));
 
   const transfer = () => {
-    navigate(`/atividade/${poco.id_poco}`, {
+    navigate(`/atividade/${poco.id}`, {
       state: {
         poco,
       },
