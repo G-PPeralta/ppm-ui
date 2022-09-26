@@ -52,7 +52,7 @@ function ColumnSPT({ column }: Props) {
         >
           {column.pocos.map((poco, index) => {
             if (!poco.poco) {
-              return <></>;
+              return <div key={index}></div>;
             } else {
               return <CardPIR poco={poco} index={index} key={index} />;
             }
