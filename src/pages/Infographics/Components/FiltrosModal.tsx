@@ -5,7 +5,6 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Select,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -14,13 +13,49 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
-  Box,
   Input,
   useBreakpointValue,
 } from "@chakra-ui/react";
 
+import { useFiltragemCampanha } from "hooks/useFiltragemCampanha";
+
+import SelectFiltragem from "./SelectFiltragem";
+
 function FiltrosModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    registerForm,
+    listaAreaAtuacao,
+    listaPocos,
+    listaTarefas,
+    listaResponsaveis,
+    listaSondas,
+  } = useFiltragemCampanha();
+
+  const areaAtuacaoOptions = listaAreaAtuacao.map((area) => ({
+    value: area.id,
+    label: area.tipo,
+  }));
+
+  const pocoOptions = listaPocos.map((poco) => ({
+    value: poco.id,
+    label: poco.poco,
+  }));
+
+  const tarefaOptions = listaTarefas.map((tarefa) => ({
+    value: tarefa.id,
+    label: tarefa.nom_atividade,
+  }));
+
+  const responsavelOptions = listaResponsaveis.map((responsavel) => ({
+    value: responsavel.id,
+    label: responsavel.nome,
+  }));
+
+  const sondaOptions = listaSondas.map((sonda) => ({
+    value: sonda.id_campanha,
+    label: sonda.sonda,
+  }));
 
   return (
     <>
@@ -49,85 +84,88 @@ function FiltrosModal() {
           <ModalBody mt={4}>
             <FormControl>
               <Flex direction={"column"} gap={5}>
-                <Box>
-                  <FormLabel htmlFor="area">Área</FormLabel>
-                  <Select variant="unstyled">
-                    <option value="1">Valor 1</option>
-                    <option value="2">Valor 2</option>
-                    <option value="3">Valor 3</option>
-                  </Select>
-                </Box>
+                <SelectFiltragem
+                  registerForm={registerForm}
+                  nomeSelect={"Área"}
+                  propName={"area_atuacao_id"}
+                  options={areaAtuacaoOptions}
+                  required={false}
+                />
 
-                <Box>
-                  <FormLabel htmlFor="poco">Poço</FormLabel>
-                  <Select variant="unstyled">
-                    <option value="1">Valor 1</option>
-                    <option value="2">Valor 2</option>
-                    <option value="3">Valor 3</option>
-                  </Select>
-                </Box>
+                <SelectFiltragem
+                  registerForm={registerForm}
+                  nomeSelect={"Poço"}
+                  propName={"poco_id"}
+                  options={pocoOptions}
+                  required={false}
+                />
 
-                <Box>
-                  <FormLabel htmlFor="atividade">Atividade</FormLabel>
-                  <Select variant="unstyled">
-                    <option value="1">Valor 1</option>
-                    <option value="2">Valor 2</option>
-                    <option value="3">Valor 3</option>
-                  </Select>
-                </Box>
+                <SelectFiltragem
+                  registerForm={registerForm}
+                  nomeSelect={"Atividade"}
+                  propName={"atividade_id"}
+                  options={tarefaOptions}
+                  required={false}
+                />
 
-                <Box>
-                  <FormLabel htmlFor="responsavel">Responsável</FormLabel>
-                  <Select variant="unstyled">
-                    <option value="1">Valor 1</option>
-                    <option value="2">Valor 2</option>
-                    <option value="3">Valor 3</option>
-                  </Select>
-                </Box>
+                <SelectFiltragem
+                  registerForm={registerForm}
+                  nomeSelect={"Responsável"}
+                  propName={"responsavel_id"}
+                  options={responsavelOptions}
+                  required={false}
+                />
 
                 <Flex justify={"space-between"} gap={5}>
                   <Flex direction={"column"} grow={1}>
-                    <FormLabel htmlFor="dataInicio">Data Inicio</FormLabel>
+                    <FormLabel htmlFor="data_inicio">Data Inicio</FormLabel>
                     <Input
                       isRequired
                       placeholder="dd/mm/aaaa"
-                      id="dataInicio"
+                      id="data_inicio"
                       type="date"
-                      name="dataInicio"
+                      name="data_inicio"
                       w={useBreakpointValue({ base: "100%", md: "100%" })}
+                      onChange={(e) => {
+                        registerForm.setFieldValue(
+                          "data_inicio",
+                          e.target.value
+                        );
+                      }}
                     />
                   </Flex>
 
                   <Flex direction={"column"} grow={1}>
-                    <FormLabel htmlFor="dataFim">Data Fim</FormLabel>
+                    <FormLabel htmlFor="data_fim">Data Fim</FormLabel>
                     <Input
                       isRequired
                       placeholder="dd/mm/aaaa"
-                      id="dataFim"
+                      id="data_fim"
                       type="date"
-                      name="dataFim"
+                      name="data_fim"
                       w={useBreakpointValue({ base: "100%", md: "100%" })}
+                      onChange={(e) => {
+                        registerForm.setFieldValue("data_fim", e.target.value);
+                      }}
                     />
                   </Flex>
                 </Flex>
 
-                <Box>
-                  <FormLabel htmlFor="sonda">Sonda</FormLabel>
-                  <Select variant="unstyled">
-                    <option value="1">Valor 1</option>
-                    <option value="2">Valor 2</option>
-                    <option value="3">Valor 3</option>
-                  </Select>
-                </Box>
+                <SelectFiltragem
+                  registerForm={registerForm}
+                  nomeSelect={"Sonda"}
+                  propName={"sonda_id"}
+                  options={sondaOptions}
+                  required={false}
+                />
 
-                <Box>
-                  <FormLabel htmlFor="status">Status</FormLabel>
-                  <Select variant="unstyled">
-                    <option value="1">Valor 1</option>
-                    <option value="2">Valor 2</option>
-                    <option value="3">Valor 3</option>
-                  </Select>
-                </Box>
+                <SelectFiltragem
+                  registerForm={registerForm}
+                  nomeSelect={"Status"}
+                  propName={"status"}
+                  options={sondaOptions}
+                  required={false}
+                />
               </Flex>
             </FormControl>
           </ModalBody>

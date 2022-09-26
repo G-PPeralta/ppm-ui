@@ -12,6 +12,7 @@ function SelectFiltragem({
   options,
   value,
   idCampanha,
+  required,
 }: any) {
   const handleChange = ({ value }: any, { name }: any) => {
     registerForm.setFieldValue(name, value);
@@ -27,7 +28,7 @@ function SelectFiltragem({
       <FormControl>
         {nomeSelect && (
           <Flex gap={1}>
-            <RequiredField />
+            {required && <RequiredField />}
             <FormLabel>{nomeSelect}</FormLabel>
           </Flex>
         )}
