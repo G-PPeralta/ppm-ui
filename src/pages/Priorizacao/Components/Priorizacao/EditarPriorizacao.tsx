@@ -8,14 +8,12 @@ import {
   FormLabel,
   Modal,
   ModalBody,
-  // ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
   Stack,
   Text,
-  // Textarea,
   useBreakpointValue,
   useDisclosure,
   Input,
@@ -23,11 +21,8 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-// import { TextError } from "components/TextError";
-
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-// import { useCadastroNovaPriorizacao } from "hooks/useCadastrarNovaPriorizacao";
 import { useEdicaoPriorizacao } from "hooks/useEditarPriorizacao";
 
 interface TableProps {
@@ -51,7 +46,6 @@ function EditarPriorizacao(infosRanking: TableProps) {
   return (
     <>
       <Button
-        // disabled={!registerForm.isValid}
         onClick={onOpen}
         background="white"
         variant="primary"
@@ -151,7 +145,7 @@ function EditarPriorizacao(infosRanking: TableProps) {
                         >
                           <FormControl>
                             <FormLabel
-                              htmlFor="regulatorio.opcao_id"
+                              htmlFor="acesso"
                               fontSize={"12px"}
                               mb={"1px"}
                               w={"550px"}
@@ -160,22 +154,22 @@ function EditarPriorizacao(infosRanking: TableProps) {
                               PERFIS COM ACESSO
                             </FormLabel>
                             <Select
-                              id="pit"
-                              name="pit"
+                              id="acesso"
+                              name="acesso"
                               placeholder="Selecione"
-                              // value={activitiesForm.values.pit}
-                              // onChange={activitiesForm.handleChange}
+                              value={registerForm.values.acesso}
+                              onChange={registerForm.handleChange}
                               w={useBreakpointValue({
                                 base: "100%",
                                 md: "95%",
                               })}
                             >
-                              <option value="not1">1</option>
-                              <option value="not2">2</option>
-                              <option value="not3">3</option>
-                              <option value="not4">4</option>
-                              <option value="not5">5</option>
-                              <option value="not6">6</option>
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                              <option>6</option>
                             </Select>
                           </FormControl>
                         </Flex>

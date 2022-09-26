@@ -23,8 +23,6 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-// import { TextError } from "components/TextError";
-
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useEdicaoOpcaoPriorizacao } from "hooks/useEditarOpcaoPriorizacao";
@@ -44,7 +42,8 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
     infosOption.initialGrade
   );
 
-  // console.log(registerForm.values);
+  // console.log("registerForm", registerForm.values);
+  // console.log("infosOption", infosOption);
 
   useEffect(() => {
     registerForm.setFieldValue("idOpcao", infosOption.opcaoId);
@@ -199,7 +198,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                   Cancelar
                 </Button>
                 <Button
-                  // disabled={!registerForm.isValid}
+                  disabled={!registerForm.isValid}
                   background="origem.300"
                   variant="primary"
                   color="white"

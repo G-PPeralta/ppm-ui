@@ -18,6 +18,7 @@ export function useEdicaoPriorizacao(priorAtual: any) {
     rankingName: priorAtual,
     idRanking: 0,
     nom_usu_create: user?.nome,
+    acesso: "",
   };
 
   const registerForm = useFormik({
@@ -28,6 +29,7 @@ export function useEdicaoPriorizacao(priorAtual: any) {
         rankingName: values.rankingName,
         idRanking: values.idRanking,
         nom_usu_create: user?.nome,
+        acesso: values.acesso,
       };
 
       setLoading(true);
