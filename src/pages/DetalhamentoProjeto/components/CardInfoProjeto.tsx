@@ -13,6 +13,18 @@ type infoProjetoProps = {
 };
 
 function CardInfoProjeto({ infoProjeto, progresso }: infoProjetoProps) {
+  const chartsProps = [
+    {
+      name: "Undone",
+      value: 100 - Number(progresso[0].fn_cron_calc_pct_real.substring(0, 2)),
+      color: "#dddddd",
+    },
+    {
+      name: "Done",
+      value: Number(progresso[0].fn_cron_calc_pct_real.substring(0, 2)),
+      color: "#00B53D",
+    },
+  ];
   const innerWidth = window.innerWidth;
   return (
     <>
@@ -25,10 +37,15 @@ function CardInfoProjeto({ infoProjeto, progresso }: infoProjetoProps) {
         shrink={1}
         basis={"360px"}
       >
-        {progresso && <PercentagePieChartProjetoInfo data={progresso} />}
-
-        <Box mb={4}>
-          <Heading as="h4" size="md">
+        <Box
+          mb={4}
+          display={"flex"}
+          flexDirection={"row"}
+          alignItems={"center"}
+          // justifyContent={"center"}
+        >
+          {progresso && <PercentagePieChartProjetoInfo data={chartsProps} />}
+          <Heading as="h4" size="md" ml={3}>
             {infoProjeto.nome_projeto}
           </Heading>
         </Box>
