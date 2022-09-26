@@ -1,6 +1,7 @@
 import { Flex, Text } from "@chakra-ui/react";
 
 import CardPIR from "./CardPIR";
+import ModalCadastroIntervencao from "./ModalCadastroIntervencao";
 
 type Poco = {
   comp_pct: number;
@@ -17,6 +18,7 @@ type Poco = {
 type Column = {
   sonda: string;
   pocos: Poco[];
+  id_campanha: number;
 };
 
 type Props = {
@@ -44,6 +46,7 @@ function ColumnSPT({ column }: Props) {
           }
         })}
       </Flex>
+      <ModalCadastroIntervencao idCampanha={column.id_campanha} />
     </Flex>
   );
 }

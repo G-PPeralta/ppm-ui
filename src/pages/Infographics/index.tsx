@@ -20,7 +20,7 @@ import ExibirModal from "./Components/ExibirModal";
 import FiltrosModal from "./Components/FiltrosModal";
 import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
 import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
-import ModalCadastroIntervencao from "./Components/ModalCadastroIntervencao";
+// import ModalCadastroIntervencao from "./Components/ModalCadastroIntervencao";
 import ModalCadastroPoco from "./Components/ModalCadastroPoco";
 import ModalCadastroProjetoTipo from "./Components/ModalCadastroProjetoTipo";
 import ModalNovaCampanha from "./Components/ModalNovaCampanha";
@@ -109,11 +109,11 @@ export function Infographics() {
                           key={index}
                           direction={"column"}
                           gap={4}
-                          align={"center"}
+                          align={"end"}
                           justify={"space-between"}
                         >
                           <ColumnSPT column={column} />
-                          <ModalCadastroIntervencao />
+                          {/* <ModalCadastroIntervencao /> */}
                         </Flex>
                       ))}
                   </Box>
