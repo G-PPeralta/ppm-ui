@@ -116,7 +116,7 @@ export interface NovoPoco {
 }
 
 export interface NovaSonda extends User {
-  sonda: string;
+  nome: string;
 }
 
 export interface NovaAtividade extends User {
