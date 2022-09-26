@@ -43,7 +43,13 @@ function ColumnSPT({ column }: Props) {
         justify={"space-between"}
         flex={1}
       >
-        <Flex direction={"column"} gap={10} align={"center"} justify={"center"}>
+        <Flex
+          direction={"column"}
+          gap={10}
+          align={"center"}
+          justify={"center"}
+          mb={4}
+        >
           {column.pocos.map((poco, index) => {
             if (!poco.poco) {
               return <></>;
