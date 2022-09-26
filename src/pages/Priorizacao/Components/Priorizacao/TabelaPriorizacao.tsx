@@ -89,7 +89,7 @@ export function TabelaPriorizacao() {
   return (
     <div>
       <Flex direction={"column"}>
-        <TableContainer mt={4} mb={3} ml={1}>
+        <TableContainer mt={4} mb={4}>
           <Table variant="unstyled">
             <Thead>
               <Tr background="origem.500" color="white">

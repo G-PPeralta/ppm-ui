@@ -56,7 +56,6 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
           background: "origem.300",
           transition: "all 0.4s",
         }}
-        mr={"18px"}
       >
         Cadastrar
       </Button>
