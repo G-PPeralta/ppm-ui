@@ -147,12 +147,12 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     placeholder="0"
                     type={"number"}
                     bg={"#fff"}
-                    id={`atividades[${index}].dias`}
-                    name={`atividades[${index}].dias`}
-                    value={registerForm.values.atividades[index].dias}
+                    id={`atividades[${index}].qtde_dias`}
+                    name={`atividades[${index}].qtde_dias`}
+                    value={registerForm.values.atividades[index].qtde_dias}
                     onChange={(event) => {
                       registerForm.setFieldValue(
-                        `atividades[${index}].dias`,
+                        `atividades[${index}].qtde_dias`,
                         Number(event.target.value)
                       );
                     }}
