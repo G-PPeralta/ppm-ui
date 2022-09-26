@@ -45,7 +45,7 @@ function CardInfoProjeto({ infoProjeto, progresso }: infoProjetoProps) {
           // justifyContent={"center"}
         >
           {progresso && <PercentagePieChartProjetoInfo data={chartsProps} />}
-          <Heading as="h4" size="md" ml={3}>
+          <Heading as="h4" size="md" ml={4}>
             {infoProjeto.nome_projeto}
           </Heading>
         </Box>

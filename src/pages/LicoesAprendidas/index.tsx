@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AiFillEdit } from "react-icons/ai";
-import { FiSearch } from "react-icons/fi";
+import {
+  FiChevronLeft,
+  FiChevronRight,
+  FiChevronsLeft,
+  FiChevronsRight,
+  FiSearch,
+} from "react-icons/fi";
 
 import {
   Tr,
   Td,
   IconButton,
+  Text,
   Table,
   TableContainer,
   Tbody,
@@ -48,6 +55,10 @@ export function LicoesAprendidasProjetos() {
 
   const [editLicao, setEditLicao] = useState({} as LicoesAprendidas);
 
+  const [pagAtual, setPagAtual] = useState(1);
+  const [from, setFrom] = useState<number>(0);
+  const [to, setTo] = useState<number>(8);
+
   async function handleGetLicoesAprendidas() {
     const payload = await getAllLicoesAprendidas();
     setLicoesAprendidas(payload.data);
@@ -86,6 +97,7 @@ export function LicoesAprendidasProjetos() {
 
   const tableData = filteredLicoesAprendidas
     .sort((a, b) => a.id - b.id)
+    .slice(from, to)
     .map((lessons, index) => (
       <Tr key={index}>
         <Td
@@ -155,6 +167,37 @@ export function LicoesAprendidasProjetos() {
       (b) => b.id_projeto.toString() === projetoId
     );
     setFilteredLicoesAprendidas([...filtered]);
+  };
+
+  const rowsPerPage = 8;
+  const totalRegs = filteredLicoesAprendidas.length;
+  const maxPage = Math.ceil(totalRegs / rowsPerPage);
+
+  const paginate = (pag: number) => {
+    setPagAtual(pag);
+
+    const x = (pag - 1) * rowsPerPage;
+    const y = (pag - 1) * rowsPerPage + rowsPerPage;
+    setFrom(x);
+    setTo(y);
+  };
+
+  const advance = () => {
+    if (pagAtual == maxPage) {
+      return;
+    }
+
+    const _pag = pagAtual + 1;
+
+    paginate(_pag);
+  };
+
+  const back = () => {
+    if (pagAtual == 1) {
+      return;
+    }
+    const _pag = pagAtual - 1;
+    paginate(_pag);
   };
 
   return (
@@ -307,6 +350,36 @@ export function LicoesAprendidasProjetos() {
                   </Tfoot>
                 </Table>
               </TableContainer>
+              <Flex justifyContent={"center"}>
+                <Flex
+                  width={"300px"}
+                  alignItems={"center"}
+                  justifyContent={"space-between"}
+                >
+                  <IconButton
+                    aria-label=""
+                    icon={<FiChevronsLeft />}
+                    onClick={() => paginate(1)}
+                  />
+                  <IconButton
+                    aria-label=""
+                    icon={<FiChevronLeft onClick={back} />}
+                  />
+
+                  <Text>Página atual: {pagAtual}</Text>
+
+                  <IconButton
+                    aria-label=""
+                    icon={<FiChevronRight />}
+                    onClick={advance}
+                  />
+                  <IconButton
+                    aria-label=""
+                    icon={<FiChevronsRight />}
+                    onClick={() => paginate(maxPage)}
+                  />
+                </Flex>
+              </Flex>
               <Stack spacing="6" alignItems={"center"}></Stack>
             </Box>{" "}
           </Flex>
