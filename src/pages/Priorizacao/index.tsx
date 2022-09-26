@@ -16,7 +16,7 @@ import ModalCadastrarPriorizacao from "./Components/Priorizacao/CadastrarPrioriz
 import { TabelaPriorizacao } from "./Components/Priorizacao/TabelaPriorizacao";
 
 export function Priorizacao() {
-  const wd = window.innerWidth;
+  // const wd = window.innerWidth;
 
   return (
     <>
@@ -44,34 +44,35 @@ export function Priorizacao() {
               }}
               borderRadius={{ base: "none", sm: "xl" }}
             >
-              <Box display={wd > 100 ? "flex" : ""}>
-                <Stack spacing="5">
-                  <Flex flexDirection={"row"} alignItems={"flex-start"}>
-                    <Flex>
-                      <Text
-                        fontWeight={"700"}
-                        fontSize={"22px"}
-                        color={"#2D2926"}
-                        mr={"650px"}
-                      >
-                        Priorização
-                      </Text>
-                    </Flex>
-                    <Flex>
-                      <FormControl className="toBottom">
-                        <ModalCadastrarPriorizacao />
-                      </FormControl>
-                    </Flex>
-                    <Flex alignItems={"flex-end"}>
-                      <ModalLixeira />
-                    </Flex>
+              <Stack spacing="5">
+                <Flex
+                  flexDirection={"row"}
+                  alignItems={"flex-end"}
+                  justify={"space-between"}
+                >
+                  <Flex>
+                    <Text
+                      fontWeight={"700"}
+                      fontSize={"22px"}
+                      color={"#2D2926"}
+                      mr={"650px"}
+                    >
+                      Priorização
+                    </Text>
                   </Flex>
-
-                  <>
-                    <TabelaPriorizacao />
-                  </>
-                </Stack>
-              </Box>
+                  <Flex>
+                    <FormControl className="toBottom">
+                      <ModalCadastrarPriorizacao />
+                    </FormControl>
+                  </Flex>
+                  <Flex alignItems={"flex-end"}>
+                    <ModalLixeira />
+                  </Flex>
+                </Flex>
+                <>
+                  <TabelaPriorizacao />
+                </>
+              </Stack>
             </Box>
           </Flex>
         </Stack>

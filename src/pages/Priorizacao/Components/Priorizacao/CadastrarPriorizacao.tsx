@@ -44,7 +44,6 @@ function ModalCadastrarPriorizacao() {
           background: "origem.300",
           transition: "all 0.4s",
         }}
-        mr={"18px"}
       >
         Cadastrar
       </Button>

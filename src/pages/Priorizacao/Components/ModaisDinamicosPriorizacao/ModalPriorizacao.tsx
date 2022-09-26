@@ -52,7 +52,7 @@ function ModalPriorizacao(infosRankings: TableProps) {
         textAlign={"center"}
         icon={<MdModeEdit />}
       />
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -77,8 +77,8 @@ function ModalPriorizacao(infosRankings: TableProps) {
                 <Flex gap={4}>
                   <Stack gap={2}>
                     <Flex direction={"column"}>
-                      <Flex>
-                        <Flex align={"flex-start"}>
+                      <Flex align={"flex-end"} justify={"space-between"}>
+                        <Flex>
                           <Text>
                             <Button
                               aria-label=""
@@ -93,27 +93,24 @@ function ModalPriorizacao(infosRankings: TableProps) {
                                 color: "origem.500",
                               }}
                               fontSize={"20px"}
-                              mb={5}
                             >
                               <IoIosArrowBack /> Priorização
                             </Button>
                           </Text>
                         </Flex>
-                        <Flex ml={"180px"}>
-                          <Flex mt={"18px"}>
+                        <Flex gap="18px">
+                          <Flex>
                             <ModalCadastrarOpcaoPriorizacao
                               nomeRanking={infosRankings.nomeRanking}
                               idRanking={infosRankings.idRanking}
                             />
                           </Flex>
-                          <Flex mt={"18px"}>
+                          <Flex>
                             <EditarPriorizacao
                               nomeRanking={infosRankings.nomeRanking}
                               idRanking={infosRankings.idRanking}
                             />
                           </Flex>
-                        </Flex>
-                        <Flex align={"flex-end"} ml={"30px"}>
                           <Button
                             background="transparent"
                             color="#0047BB"
