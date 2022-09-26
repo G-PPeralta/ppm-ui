@@ -27,7 +27,7 @@ type Props = {
 
 function ColumnSPT({ column }: Props) {
   return (
-    <Flex direction={"column"} align={"center"} justify={"center"}>
+    <Flex direction={"column"} align={"center"} justify={"start"} flex={1}>
       <Text
         fontSize={"2xl"}
         fontWeight={"bold"}
@@ -37,19 +37,26 @@ function ColumnSPT({ column }: Props) {
       >
         {column.sonda}
       </Text>
-      <Flex direction={"column"} gap={10} align={"center"} justify={"center"}>
-        {column.pocos.map((poco, index) => {
-          if (!poco.poco) {
-            return <></>;
-          } else {
-            return <CardPIR poco={poco} index={index} key={index} />;
-          }
-        })}
+      <Flex
+        direction={"column"}
+        align={"end"}
+        justify={"space-between"}
+        flex={1}
+      >
+        <Flex direction={"column"} gap={10} align={"center"} justify={"center"}>
+          {column.pocos.map((poco, index) => {
+            if (!poco.poco) {
+              return <></>;
+            } else {
+              return <CardPIR poco={poco} index={index} key={index} />;
+            }
+          })}
+        </Flex>
+        <ModalCadastroIntervencao
+          data={column.pocos[column.pocos.length - 1].finalplanejado}
+          idCampanha={column.id_campanha}
+        />
       </Flex>
-      <ModalCadastroIntervencao
-        data={column.pocos[column.pocos.length - 1].finalplanejado}
-        idCampanha={column.id_campanha}
-      />
     </Flex>
   );
 }
