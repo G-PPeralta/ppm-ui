@@ -11,9 +11,15 @@ function SelectFiltragem({
   propName,
   options,
   value,
+  idCampanha,
 }: any) {
   const handleChange = ({ value }: any, { name }: any) => {
     registerForm.setFieldValue(name, value);
+  };
+
+  const getNomeCampanha = (idCampanha: number) => {
+    const campanha = options.find((option: any) => option.value === idCampanha);
+    return campanha.label;
   };
 
   return (
@@ -28,12 +34,13 @@ function SelectFiltragem({
         <Select
           id={propName}
           name={propName}
-          placeholder="Selecione"
+          placeholder={idCampanha ? getNomeCampanha(idCampanha) : "Selecione"}
           onChange={(event, name) => handleChange(event, name)}
           options={options}
           defaultValue={"Selecione"}
           value={value}
           isSearchable
+          isDisabled={!!idCampanha}
         />
         {/* {`registerForm.errors.${propName}` && (
           <TextError>{`registerForm.errors.${propName}`}</TextError>
