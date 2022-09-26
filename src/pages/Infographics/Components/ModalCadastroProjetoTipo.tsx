@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import {
   Flex,
   Text,
@@ -7,7 +5,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
@@ -21,48 +18,22 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-import ListaAtividades from "pages/Infographics/Components/ListaAtividades";
-
+import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
-import { handleCancelar } from "utils/handleCadastro";
+import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
 
-function ModalCadastrarProjetoTipo() {
+import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
+
+function ModalCadastroProjetoTipo() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroProjetoTipo();
-  const [atividadesList, setAtividadesList] = useState([]);
+  const { registerForm, loading, listaAtividadesPrecedentes } =
+    useCadastroProjetoTipo();
 
-  const handleParent = (newList: any) => {
-    setAtividadesList(newList);
-  };
-
-  const handleSubmit = () => {
-    const payload = atividadesList;
-
-    const payloadFiltrado: any[] = [];
-    let ordem = 0;
-
-    payload.forEach((pay: any) => {
-      ordem += 1;
-      const precedentesArray: any[] = [];
-      for (let i = 0; i < pay.precedentes.length; i += 1) {
-        if (pay.precedentes[i].checked) {
-          precedentesArray.push(pay.precedentes[i].id);
-        }
-      }
-      const newPay = pay;
-      newPay.precedentes = precedentesArray;
-      newPay.ordem = ordem;
-
-      payloadFiltrado.push(newPay);
-    });
-    registerForm.setFieldValue("atividades", payloadFiltrado);
-
-    registerForm.handleSubmit();
-    onClose();
-  };
+  // console.log("registerForm", registerForm.values);
 
   return (
     <>
@@ -79,9 +50,9 @@ function ModalCadastrarProjetoTipo() {
         }}
         onClick={onOpen}
       >
-        Nova Campanha
+        Projeto
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -94,7 +65,6 @@ function ModalCadastrarProjetoTipo() {
           >
             Cadastrar Projeto Tipo
           </ModalHeader>
-          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -113,27 +83,35 @@ function ModalCadastrarProjetoTipo() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel>NOME</FormLabel>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="nom_projeto_tipo">NOME</FormLabel>
+                        </Flex>
                         <Input
                           isRequired
-                          placeholder="Nome do Tipo de Intervenção"
-                          id="nome"
+                          placeholder="Nome do Tipo de Projeto"
+                          id="nom_projeto_tipo"
                           type="text"
-                          name="nome"
-                          value={registerForm.values.nome}
+                          name="nom_projeto_tipo"
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.nom_projeto_tipo
+                          )}
                           onChange={registerForm.handleChange}
+                          maxLength={100}
                         />
-                        {registerForm.errors.nome &&
-                          registerForm.touched.nome && (
-                            <TextError>{registerForm.errors.nome}</TextError>
+                        {registerForm.errors.nom_projeto_tipo &&
+                          registerForm.touched.nom_projeto_tipo && (
+                            <TextError>
+                              {registerForm.errors.nom_projeto_tipo}
+                            </TextError>
                           )}
                       </FormControl>
                     </Flex>
                   </Stack>
 
-                  <ListaAtividades
-                    atividades={registerForm.values.atividades}
-                    handleParent={handleParent}
+                  <AtividadesDragAndDrop
+                    registerForm={registerForm}
+                    listaAtividadesPrecedentes={listaAtividadesPrecedentes}
                   />
 
                   <Stack>
@@ -145,13 +123,20 @@ function ModalCadastrarProjetoTipo() {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="comentarios">COMENTÁRIOS</FormLabel>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="comentarios">
+                            COMENTÁRIOS
+                          </FormLabel>
+                        </Flex>
                         <Textarea
                           isRequired
                           placeholder="Adicione comentários sobre o projeto"
                           id="comentarios"
                           name="comentarios"
-                          value={registerForm.values.comentarios}
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.comentarios
+                          )}
                           onChange={registerForm.handleChange}
                         />
                         {registerForm.errors.comentarios &&
@@ -186,7 +171,7 @@ function ModalCadastrarProjetoTipo() {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={handleSubmit}
+                  onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",
@@ -209,4 +194,4 @@ function ModalCadastrarProjetoTipo() {
   );
 }
 
-export default ModalCadastrarProjetoTipo;
+export default ModalCadastroProjetoTipo;

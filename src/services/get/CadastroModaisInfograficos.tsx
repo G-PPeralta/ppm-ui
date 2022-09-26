@@ -18,15 +18,6 @@ export async function getPocos(): Promise<{
   return { data, status };
 }
 
-export async function getProjetosTipo(): Promise<{
-  data: any;
-  status: number;
-}> {
-  const { data, status } = await api.get("/projeto-intervencao", token());
-
-  return { data, status };
-}
-
 export async function getResponsaveis(): Promise<{
   data: any;
   status: number;
@@ -41,6 +32,63 @@ export async function getArea(): Promise<{
   status: number;
 }> {
   const { data, status } = await api.get("/areas", token());
+
+  return { data, status };
+}
+
+export async function getCampo(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/campos", token());
+
+  return { data, status };
+}
+
+export async function getProjetosTipo(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/campanha-projeto-tipo", token());
+
+  return { data, status };
+}
+
+export async function getAtividadasByProjetosTipoId(id: number): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(
+    `/campanha-projeto-tipo/${id}`,
+    token()
+  );
+
+  return { data, status };
+}
+
+export async function getSonda(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/sonda", token());
+
+  return { data, status };
+}
+
+export async function getTarefas(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/nova-atividade/tarefas", token());
+
+  return { data, status };
+}
+
+export async function getAtividadesDataMais15(id: number): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(`/campanha/find/datas/${id}`, token());
 
   return { data, status };
 }

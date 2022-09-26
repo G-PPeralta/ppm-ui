@@ -6,7 +6,7 @@ import { Flex, FormControl, FormLabel } from "@chakra-ui/react";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
-import { useCadastroAtividade } from "hooks/useCadastroAtividade";
+import { useCadastroAtividade } from "hooks/useCadastroAtividadeOLD";
 
 function SelectFiltragemAreas({ registerForm }: any) {
   const { listaAreas } = useCadastroAtividade();

@@ -63,7 +63,13 @@ function LicoesAprendidasModal({
       setFilteredTable([]);
       setOpenModalEdit(false);
     } catch (error) {
-      console.log(error);
+      toast({
+        title: "An error occurred.",
+        description: error,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   }
 

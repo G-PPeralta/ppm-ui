@@ -59,6 +59,7 @@ export const LinkItems: Array<LinkItemProps> = [
     icon: FiBarChart,
     children: [
       { name: "Infográficos", icon: FiBarChart, link: "/infographics" },
+      { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/budgets" },
     ],
   },
 

@@ -34,7 +34,7 @@ import { getProjetosRanking } from "services/get/Projetos-Ranking";
 function ModalCadastrarPriorizacao() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroCampanha();
-  const [priorizacao, setPriorizacao] = useState<any>([]);
+  const [/* priorizacao, */ setPriorizacao] = useState<any>([]);
 
   const handlePriorizacao = async () => {
     const dataPriorizacao = await getProjetosRanking();
@@ -50,8 +50,6 @@ function ModalCadastrarPriorizacao() {
   //   priorizacao.data.Benefício.map((x: any) => x.nom_opcao)
   // );
   // console.log(priorizacao.data.Benefício.map((x: any) => x.nom_opcao));
-
-  console.log(priorizacao);
 
   return (
     <>

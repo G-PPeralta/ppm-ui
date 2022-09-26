@@ -1,19 +1,19 @@
 import Select from "react-select";
 
 import { Flex, FormControl, FormLabel } from "@chakra-ui/react";
-import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
+import { Responsavel } from "interfaces/CadastrosModaisInfograficos";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
-import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
+import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
-function SelectFiltragemPocos({ registerForm }: any) {
-  const { listaPocos } = useCadastroIntervencao();
+function SelectFiltragemResponsavel({ registerForm }: any) {
+  const { listaResponsaveis } = useCadastroAtividade();
 
-  const options = listaPocos.map((poco: ListaPoco) => ({
-    value: poco.poco,
-    label: poco.poco,
+  const options = listaResponsaveis.map((responsavel: Responsavel) => ({
+    value: responsavel.id,
+    label: responsavel.nome,
   }));
 
   const handleChange = ({ value }: any, { name }: any) => {
@@ -25,22 +25,22 @@ function SelectFiltragemPocos({ registerForm }: any) {
       <FormControl>
         <Flex gap={1}>
           <RequiredField />
-          <FormLabel>POÇO</FormLabel>
+          <FormLabel htmlFor="responsavel_id">RESPONSAVEL</FormLabel>
         </Flex>
         <Select
-          id="poco_id"
-          name="poco_id"
+          id="responsavel_id"
+          name="responsavel_id"
           placeholder="Selecione"
           onChange={(event, name) => handleChange(event, name)}
           options={options}
           isSearchable
         />
-        {registerForm.errors.poco_id && (
-          <TextError>{registerForm.errors.poco_id}</TextError>
+        {registerForm.errors.responsavel && (
+          <TextError>{registerForm.errors.responsavel}</TextError>
         )}
       </FormControl>
     </>
   );
 }
 
-export default SelectFiltragemPocos;
+export default SelectFiltragemResponsavel;

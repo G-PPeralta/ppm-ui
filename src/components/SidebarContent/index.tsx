@@ -48,6 +48,7 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
       pos="fixed"
       h="full"
       {...rest}
+      overflowX="auto"
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Link to="/">
@@ -58,11 +59,11 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
           onClick={onClose}
         />
       </Flex>
-      <Accordion allowMultiple>
+      <Accordion allowMultiple border={"none"}>
         {LinkItems.map((link, index) => (
           <div key={index}>
             {!verifyPermissionAdmin(link.name) && (
-              <AccordionItem>
+              <AccordionItem border={"none"}>
                 <AccordionButton>
                   <Flex
                     w={"100%"}
