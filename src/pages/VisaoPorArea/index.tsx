@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 
-import { Box, Flex, Heading, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Stack,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
@@ -18,6 +24,8 @@ function VisaoPorArea() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any[]>([] as Area[]);
 
+  const innerWidth = useBreakpointValue({ base: 0, md: 1, lg: 2, xl: 3 });
+
   useEffect(() => {
     setTimeout(() => {
       setData(getAtividadesAreaMock);
@@ -32,20 +40,26 @@ function VisaoPorArea() {
           <Stack spacing="8">
             <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
               <Box
-                py={{ base: "0", sm: "8" }}
-                px={{ base: "4", sm: "6" }}
+                py={{ base: "6", sm: "8" }}
+                px={{ base: "6", sm: "8" }}
                 w={"100%"}
                 bg={"white"}
-                borderRadius={{ base: "none", sm: "xl" }}
+                borderRadius={{ base: "xl", sm: "xl" }}
               >
-                <Flex justify={"space-between"} mb={5}>
-                  <Heading as="h3" size="md" mb={3}>
-                    Visão por área
+                <Flex justify={"space-between"} mb={5} wrap={"wrap"}>
+                  <Heading as="h3" size="md" mb={3} mt={innerWidth}>
+                    Visão por Área
                   </Heading>
                 </Flex>
 
-                <Flex justify={"space-between"} gap={6} wrap={"wrap"} mb={4}>
-                  <Flex gap={2}>
+                <Flex
+                  direction={"column"}
+                  justify={"space-between"}
+                  gap={6}
+                  wrap={"wrap"}
+                  mb={4}
+                >
+                  <Flex gap={2} wrap={"wrap"}>
                     <BotaoVisaoGeral />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
