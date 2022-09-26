@@ -42,8 +42,8 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
     infosOption.initialGrade
   );
 
-  // console.log("registerForm", registerForm.values);
-  // console.log("infosOption", infosOption);
+  console.log("registerForm", registerForm.values);
+  console.log("infosOption", infosOption);
 
   useEffect(() => {
     registerForm.setFieldValue("idOpcao", infosOption.opcaoId);
@@ -149,7 +149,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                         >
                           <FormControl>
                             <FormLabel
-                              htmlFor="gradeOpcao"
+                              htmlFor="num_nota"
                               fontSize={"12px"}
                               mb={"1px"}
                               w={"140px"}
@@ -157,10 +157,10 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                               NOTA
                             </FormLabel>
                             <Select
-                              id="gradeOpcao"
-                              name="gradeOpcao"
+                              id="num_nota"
+                              name="num_nota"
                               placeholder="Selecione"
-                              value={Number(registerForm.values.gradeOpcao)}
+                              value={Number(registerForm.values.num_nota)}
                               onChange={registerForm.handleChange}
                               w={useBreakpointValue({
                                 base: "100%",

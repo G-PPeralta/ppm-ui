@@ -39,7 +39,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
   // console.log("register opção", registerForm.values);
 
   useEffect(() => {
-    registerForm.setFieldValue("rank_opcao_id", infosRankings.idRanking);
+    registerForm.setFieldValue("id_ranking", infosRankings.idRanking);
   }, []);
 
   const rankingNome = infosRankings.nomeRanking;
@@ -115,7 +115,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                         >
                           <FormControl>
                             <FormLabel
-                              htmlFor="rank_opcao_name"
+                              htmlFor="nom_opcao"
                               fontSize={"12px"}
                               mb={"1px"}
                               w={"350px"}
@@ -125,9 +125,9 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                             </FormLabel>
                             <Input
                               ml={"3px"}
-                              id="rank_opcao_name"
-                              name="rank_opcao_name"
-                              value={registerForm.values.rank_opcao_name}
+                              id="nom_opcao"
+                              name="nom_opcao"
+                              value={registerForm.values.nom_opcao}
                               onChange={registerForm.handleChange}
                             />
                             {/* {registerForm.errors.rank_opcao_name && (
@@ -149,7 +149,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                         >
                           <FormControl>
                             <FormLabel
-                              htmlFor="rank_opcao_grade"
+                              htmlFor="num_nota"
                               fontSize={"12px"}
                               mb={"1px"}
                               w={"140px"}
@@ -157,17 +157,17 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               NOTA
                             </FormLabel>
                             <Select
-                              id="rank_opcao_grade"
-                              name="rank_opcao_grade"
+                              id="num_nota"
+                              name="num_nota"
                               placeholder="Selecione"
-                              value={registerForm.values.rank_opcao_grade}
+                              value={registerForm.values.num_nota}
                               onChange={registerForm.handleChange}
                               w={useBreakpointValue({
                                 base: "100%",
                                 md: "95%",
                               })}
                             >
-                              <option>1</option>
+                              <option value={1}>1</option>
                               <option>2</option>
                               <option>3</option>
                               <option>4</option>

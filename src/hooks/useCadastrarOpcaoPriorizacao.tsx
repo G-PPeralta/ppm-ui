@@ -15,9 +15,9 @@ export function useCadastroNovaOpcaoPriorizacao() {
   const [loading, setLoading] = useState(false);
 
   const initialValues: any = {
-    rank_opcao_name: "",
-    rankingId: 0,
-    rank_opcao_grade: "",
+    nom_opcao: "",
+    id_ranking: 0,
+    num_nota: 0,
     nom_usu_create: user?.nome,
   };
 
@@ -26,9 +26,9 @@ export function useCadastroNovaOpcaoPriorizacao() {
     validationSchema: cadastroNovaOpcaoPriorizacao,
     onSubmit: async (values) => {
       const newValues: any = {
-        rank_opcao_name: values.rank_opcao_name,
-        rankingId: values.rank_opcao_id,
-        rank_opcao_grade: values.rank_opcao_grade,
+        nom_opcao: values.nom_opcao,
+        id_ranking: values.id_ranking,
+        num_nota: values.num_nota,
         nom_usu_create: user?.nome,
       };
 
@@ -36,10 +36,7 @@ export function useCadastroNovaOpcaoPriorizacao() {
 
       try {
         // rota post opção ranking - opção priorização
-        const { status } = await postOptionRanking(
-          newValues,
-          newValues.rankingId
-        );
+        const { status } = await postOptionRanking(newValues);
 
         if (status === 200 || status === 201) {
           toast.success(`Opção cadastrada com sucesso!`, {

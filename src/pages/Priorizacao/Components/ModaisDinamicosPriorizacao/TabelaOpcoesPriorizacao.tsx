@@ -90,14 +90,14 @@ export function TabelaOpcoesPriorizacao(idRanking: TableProps) {
     <Tr key={op.id}>
       <Td>{op.id}</Td>
       <Td width={"600px"}>{op.nom_opcao}</Td>
-      <Td textAlign={"center"}>3</Td>
+      <Td textAlign={"center"}>{op.num_nota}</Td>
       <Td textAlign={"center"}>
         <ModalEditarOpcaoPriorizacao
           opcaoId={op.id}
           opcaoName={op.nom_opcao}
           idRanking={idRanking}
           nameRanking={rankingNome}
-          initialGrade={3}
+          initialGrade={op.num_nota}
         />
         <ModalDeletarOpcaoPriorizacao />
       </Td>

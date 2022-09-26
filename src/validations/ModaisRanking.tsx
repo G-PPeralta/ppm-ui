@@ -46,9 +46,9 @@ export const createPriorizacao = yup.object({
 });
 
 export const cadastroNovaOpcaoPriorizacao = yup.object({
-  rank_opcao_name: yup.string().required("O campo nome é obrigatório"),
-  rankingId: yup.number().required(),
-  rankingGrade: yup.string(),
+  nom_opcao: yup.string().required("O campo nome é obrigatório"),
+  id_ranking: yup.number().required(),
+  num_nota: yup.number(),
   nom_usu_create: yup.string(),
 });
 
@@ -63,6 +63,6 @@ export const updateNovaOpcaoDePriorizacao = yup.object({
   rankingOpcao: yup.string().required(),
   idRanking: yup.number().required(),
   idOpcao: yup.string(),
-  gradeOpcao: yup.string().required(),
+  num_nota: yup.string().required(),
   nom_usu_create: yup.string(),
 });

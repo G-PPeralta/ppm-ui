@@ -18,7 +18,7 @@ export function useEdicaoOpcaoPriorizacao(opcAtual: any, initialGra: number) {
     rankingOpcao: opcAtual,
     idRanking: 0,
     idOpcao: 0,
-    gradeOpcao: initialGra,
+    num_nota: initialGra,
     nom_usu_create: user?.nome,
   };
 
@@ -30,7 +30,7 @@ export function useEdicaoOpcaoPriorizacao(opcAtual: any, initialGra: number) {
         rankingOpcao: values.rankingOpcao,
         idRanking: values.idRanking,
         idOpcao: values.idOpcao,
-        gradeOpcao: values.gradeOpcao,
+        num_nota: values.num_nota,
         nom_usu_create: user?.nome,
       };
 
@@ -39,8 +39,10 @@ export function useEdicaoOpcaoPriorizacao(opcAtual: any, initialGra: number) {
       try {
         // Rota update - opção ranking
         const { status } = await updateOptionRanking(
-          newValues,
-          newValues.idRanking
+          // newValues,
+          newValues.idOpcao,
+          newValues.rankingOpcao,
+          newValues.nom_usu_create
         );
 
         if (status === 200 || status === 201) {
