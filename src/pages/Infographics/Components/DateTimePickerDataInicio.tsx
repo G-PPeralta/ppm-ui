@@ -10,10 +10,15 @@ function DateTimePickerDataInicio({ registerForm, data }: any) {
   const [dataMin, setDataMin] = useState<any>("");
 
   useEffect(() => {
-    const newDate = new Date(data);
-    newDate.setDate(newDate.getDate() + 15);
-    setDataInicio(newDate);
-    setDataMin(newDate);
+    if (data) {
+      const newDate = new Date(data);
+      newDate.setDate(newDate.getDate() + 15);
+      setDataInicio(newDate);
+      setDataMin(newDate);
+    } else {
+      const newDate = new Date();
+      setDataMin(newDate);
+    }
   }, []);
 
   const handleIniciarDate = (date: any) => {
