@@ -26,10 +26,9 @@ export function useCadastroNovaPriorizacao() {
     validationSchema: createPriorizacao,
     onSubmit: async (values) => {
       const newValues: any = {
-        // Por algum motivo não considera o initialValues para resp e peso, tendo que atrelar aqui
-        id_area_responsavel: 1,
-        nom_ranking: values.rankingName,
-        num_peso: 1,
+        id_area_responsavel: values.id_area_responsavel,
+        nom_ranking: values.nom_ranking,
+        num_peso: values.num_peso,
         nom_usu_create: user?.nome,
       };
 

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 
 import {
@@ -31,6 +32,11 @@ function ModalCadastrarPriorizacao() {
   const { registerForm, loading } = useCadastroNovaPriorizacao();
 
   // console.log(registerForm.values);
+
+  useEffect(() => {
+    registerForm.setFieldValue("id_area_responsavel", 1);
+    registerForm.setFieldValue("num_peso", 1);
+  }, []);
 
   return (
     <>
@@ -104,7 +110,7 @@ function ModalCadastrarPriorizacao() {
                         >
                           <FormControl>
                             <FormLabel
-                              htmlFor="rankingName"
+                              htmlFor="nom_ranking"
                               fontSize={"12px"}
                               mb={"1px"}
                               ml={"3px"}
@@ -116,9 +122,9 @@ function ModalCadastrarPriorizacao() {
                               w={"400px"}
                               isRequired
                               placeholder="Nome"
-                              id="rankingName"
-                              name="rankingName"
-                              value={registerForm.values.rankingName}
+                              id="nom_ranking"
+                              name="nom_ranking"
+                              value={registerForm.values.nom_ranking}
                               onChange={registerForm.handleChange}
                             />
                           </FormControl>
