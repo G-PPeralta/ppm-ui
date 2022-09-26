@@ -3,7 +3,7 @@ import { FiPlus } from "react-icons/fi";
 import { Flex, IconButton } from "@chakra-ui/react";
 
 interface Props {
-  add: any;
+  add: Function;
 }
 
 function BotaoAdicionar({ add }: Props) {

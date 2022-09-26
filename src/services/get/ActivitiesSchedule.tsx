@@ -87,7 +87,7 @@ export async function getAtividadesCampanha(id: string | undefined): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get(`/campanha/${id}`, token());
+  const { data, status } = await api.get(`/campanha/find/${id}`, token());
 
   return { data, status };
 }

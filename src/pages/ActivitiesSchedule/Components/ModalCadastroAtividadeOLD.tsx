@@ -14,26 +14,26 @@ import {
   FormLabel,
   Stack,
   useBreakpointValue,
-  Input,
-  Select,
-  Textarea,
+  // Input,
+  // Select,
+  // Textarea,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 // import ListDnD from 'components/ListDnD';
-import { TextError } from "components/TextError";
+// import { TextError } from "components/TextError";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroAtividade } from "hooks/useCadastroAtividadeOLD";
+import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 function ModalCadastroAtividade() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     registerForm,
     loading,
-    ListaResponsavel,
-    listaArea,
+    // ListaResponsavel,
+    // listaArea,
     // listaAtividades,
   } = useCadastroAtividade();
 
@@ -85,7 +85,7 @@ function ModalCadastroAtividade() {
                       })}
                       gap={5}
                     >
-                      <FormControl>
+                      {/* <FormControl>
                         <FormLabel>NOME</FormLabel>
                         <Input
                           isRequired
@@ -102,7 +102,7 @@ function ModalCadastroAtividade() {
                               {registerForm.errors.nomeAtividade}
                             </TextError>
                           )}
-                      </FormControl>
+                      </FormControl> */}
                     </Flex>
 
                     <FormLabel>RESPONSÁVEL</FormLabel>
@@ -113,7 +113,7 @@ function ModalCadastroAtividade() {
                       })}
                       gap={5}
                     >
-                      <FormControl>
+                      {/* <FormControl>
                         <FormLabel htmlFor="responsavel">NOME</FormLabel>
                         <Select
                           id="responsavel"
@@ -128,9 +128,9 @@ function ModalCadastroAtividade() {
                             </option>
                           ))}
                         </Select>
-                      </FormControl>
+                      </FormControl> */}
 
-                      <FormControl>
+                      {/* <FormControl>
                         <FormLabel htmlFor="area">ÁREA</FormLabel>
                         <Select
                           id="area"
@@ -145,7 +145,7 @@ function ModalCadastroAtividade() {
                             </option>
                           ))}
                         </Select>
-                      </FormControl>
+                      </FormControl> */}
                     </Flex>
 
                     <FormLabel>PRECEDENTES</FormLabel>
@@ -230,7 +230,7 @@ function ModalCadastroAtividade() {
                       })}
                       gap={5}
                     >
-                      <FormControl>
+                      {/* <FormControl>
                         <FormLabel htmlFor="comentarios">COMENTÁRIOS</FormLabel>
                         <Textarea
                           isRequired
@@ -246,7 +246,7 @@ function ModalCadastroAtividade() {
                               {registerForm.errors.comentarios}
                             </TextError>
                           )}
-                      </FormControl>
+                      </FormControl> */}
                     </Flex>
                   </Stack>
                 </Flex>

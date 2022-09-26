@@ -23,7 +23,7 @@ import { useProjects } from "hooks/useProjects";
 
 import "./projects.css";
 // import ProjectTable from "./projectTable";
-import { TabelaProjetos } from "./components/TabelaProjetos";
+import { TabelaProjetos } from "./Components/TabelaProjetos";
 
 export function Projects() {
   const { projectsForm, loading, getAllProjects } = useProjects();

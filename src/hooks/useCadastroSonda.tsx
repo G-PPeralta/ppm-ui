@@ -16,7 +16,7 @@ export function useCadastroSonda() {
   const { user } = useAuth();
 
   const initialValues: NovaSonda = {
-    sonda: "",
+    nome: "",
     nom_usu_create: user?.nome,
   };
 
@@ -25,7 +25,7 @@ export function useCadastroSonda() {
     validationSchema: cadastroSondaSchema,
     onSubmit: async (values) => {
       const newValues: NovaSonda = {
-        sonda: values.sonda,
+        nome: values.nome,
         nom_usu_create: user?.nome,
       };
 
@@ -35,13 +35,13 @@ export function useCadastroSonda() {
         const { status } = await postNovaSonda(newValues);
 
         if (status === 200 || status === 201) {
-          toast.success(`Sonda ${values.sonda} cadastrada com sucesso!`, {
+          toast.success(`Sonda ${values.nome} cadastrada com sucesso!`, {
             id: "toast-principal",
           });
           setLoading(false);
         }
       } catch (error) {
-        toast.error(`Erro ao cadastrar sonda ${values.sonda}!`, {
+        toast.error(`Erro ao cadastrar sonda ${values.nome}!`, {
           id: "toast-principal",
         });
         setLoading(false);

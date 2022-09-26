@@ -70,7 +70,7 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
   const tableData = data.map((detail, key) => (
     <>
       <Tr backgroundColor={color} key={detail.id} color="white">
-        <Td>{detail.data}</Td>
+        {/* <Td>{detail.data}</Td> */}
         <Td>{detail.brt}</Td>
         <Td onClick={() => toggleAcordion(key)}>
           <Flex alignItems={"center"} justifyContent="space-between">
@@ -78,7 +78,6 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
           </Flex>
         </Td>
         <Td></Td>
-        <Td>{brl.format(detail.total)}</Td>
         <Td>{brl.format(detail.previsto)}</Td>
         <Td>{brl.format(detail.realizado)}</Td>
         <Td></Td>
@@ -86,11 +85,10 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
       {detail.filhos &&
         detail.filhos.map((filho) => (
           <Tr className={"hide item-" + key} key={filho.id}>
-            <Td></Td>
+            {/* <Td></Td> */}
             <Td>{filho.brt}</Td>
             <Td>{filho.servico}</Td>
             <Td>{filho.fornecedor}</Td>
-            <Td>{brl.format(filho.total)}</Td>
             <Td>{brl.format(filho.previsto)}</Td>
             <Td>{brl.format(filho.realizado)}</Td>
             <Td align="center">{filho.gap}%</Td>
@@ -105,7 +103,7 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
         <Table variant="unstyled">
           <Thead>
             <Tr backgroundColor={"blue"} color="white">
-              <Th colSpan={6} borderTopLeftRadius="10px">
+              <Th colSpan={4} borderTopLeftRadius="10px">
                 Atividade
               </Th>
               <Th borderTopRightRadius={"10px"} colSpan={2}>
@@ -122,11 +120,10 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
               </Th>
             </Tr>
             <Tr backgroundColor={"blue"} color="white">
-              <Th>Data</Th>
+              {/* <Th>Data</Th> */}
               <Th>BRT</Th>
               <Th>Serviço/Compra</Th>
               <Th>Fornecedor</Th>
-              <Th>R$ Total</Th>
               <Th>R$ Previsto</Th>
               <Th>R$ Realizado</Th>
               <Th>% Gap</Th>
