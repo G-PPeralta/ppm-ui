@@ -36,12 +36,18 @@ import { getAtividadasByProjetosTipoId } from "services/get/CadastroModaisInfogr
 import AtividadesCadastroIntervencao from "./AtividadesCadastroIntervencao";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
 import SelectFiltragem from "./SelectFiltragem";
-import SelectFiltragemSondas from "./SelectFiltragemSonda";
+// import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
 function ModalCadastroIntervencao() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaPocos, listaCampos, listaProjetosTipo } =
-    useCadastroIntervencao();
+  const {
+    registerForm,
+    loading,
+    listaPocos,
+    listaCampos,
+    listaProjetosTipo,
+    listaSondaCampanha,
+  } = useCadastroIntervencao();
 
   const innerWidth = window.innerWidth;
 
@@ -62,6 +68,11 @@ function ModalCadastroIntervencao() {
     })
   );
 
+  const optionsSondaCampanha = listaSondaCampanha.map((sondaCampanha: any) => ({
+    value: sondaCampanha.id,
+    label: sondaCampanha.nom_campanha,
+  }));
+
   const reqGetAtividadesByProjetoTipoId = async (id: number) => {
     if (id === 0) {
       registerForm.setFieldValue("atividades", [
@@ -75,14 +86,12 @@ function ModalCadastroIntervencao() {
     } else {
       const atividades = await getAtividadasByProjetosTipoId(id);
 
-      const atividadesFormatadas = atividades.data["Projeto Tipo Gerencia"].map(
-        (atividade: any) => ({
-          area_id: atividade.id_area,
-          tarefa_id: atividade.id_tarefa,
-          responsavel_id: 0,
-          qtde_dias: atividade.qtde_dias,
-        })
-      );
+      const atividadesFormatadas = atividades.data.map((atividade: any) => ({
+        area_id: atividade.id_area,
+        tarefa_id: atividade.id_tarefa,
+        responsavel_id: atividade.responsavel_id,
+        qtde_dias: atividade.qtde_dias,
+      }));
       registerForm.setFieldValue("atividades", atividadesFormatadas);
     }
   };
@@ -154,9 +163,15 @@ function ModalCadastroIntervencao() {
                         direction={innerWidth >= 460 ? "row" : "column"}
                         gap={5}
                       >
-                        <SelectFiltragemSondas
+                        {/* <SelectFiltragemSondas
                           form={registerForm}
                           nomeChave={"sonda_id"}
+                        /> */}
+                        <SelectFiltragem
+                          registerForm={registerForm}
+                          nomeSelect={"SONDA"}
+                          propName={"id_campanha"}
+                          options={optionsSondaCampanha}
                         />
                         <SelectFiltragem
                           registerForm={registerForm}
