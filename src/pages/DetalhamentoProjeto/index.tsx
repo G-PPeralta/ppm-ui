@@ -4,13 +4,20 @@ import { useParams } from "react-router-dom";
 import { Box, Flex } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { ICardInfoProjeto } from "interfaces/DetalhamentoProjetos";
-import { Categorias, LicoesAprendidas } from "interfaces/Services";
+import {
+  Categorias,
+  LicoesAprendidas,
+  ProjetoProgresso,
+} from "interfaces/Services";
 
 import { Gantt } from "components/Gantt";
 import Sidebar from "components/SideBar";
 
 import { getCategorias } from "services/get/Categorias";
-import { getInfoProjetos } from "services/get/DetalhamentoProjetos";
+import {
+  getInfoProjetos,
+  getProgressoProjeto,
+} from "services/get/DetalhamentoProjetos";
 import { getLicoesAprendidas } from "services/get/LicoesAprendidas";
 
 import BotoesModais from "./components/BotoesModais";
@@ -34,6 +41,7 @@ function DetalhamentoProjeto() {
   });
   const [licoes, setLicoes] = useState([] as LicoesAprendidas[]);
   const [categorias, setCategorias] = useState([] as Categorias[]);
+  const [progresso, setProgresso] = useState([] as ProjetoProgresso[]);
 
   const handleGetInfoProjetos = async () => {
     if (id) {
@@ -55,10 +63,16 @@ function DetalhamentoProjeto() {
     setCategorias(response.data);
   }
 
+  async function handleGetProgresso() {
+    const response = await getProgressoProjeto();
+    setProgresso(response.data);
+  }
+
   useEffect(() => {
     handleGetInfoProjetos();
     handleGetLicoes();
     handleGetCategorias();
+    handleGetProgresso();
 
     return () =>
       setInfoProjeto({
@@ -75,7 +89,7 @@ function DetalhamentoProjeto() {
     // handleGetLicoes();
   }, []);
 
-  // console.log(categorias);
+  // console.log(progresso[0].fn_cron_calc_pct_real);
 
   return (
     <>
@@ -101,7 +115,10 @@ function DetalhamentoProjeto() {
               shrink={1}
               gap={4}
             >
-              <CardInfoProjeto infoProjeto={infoProjeto} />
+              <CardInfoProjeto
+                infoProjeto={infoProjeto}
+                progresso={progresso}
+              />
               <CardOrcamento />
               <BotoesModais
                 licoes={licoes}
