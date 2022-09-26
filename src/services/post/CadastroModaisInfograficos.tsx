@@ -36,18 +36,14 @@ export async function postCadastroIntervencao(
 export async function postCadastroAtividade(
   payload: CadastroAtividade
 ): Promise<{ status: number }> {
-  const { status } = await api.post(
-    "/atividades-intervencoes",
-    payload,
-    token()
-  );
+  const { status } = await api.post("/nova-atividade", payload, token());
   return { status };
 }
 
 export async function postProjetoTipo(
   payload: CadastroProjetoTipo
 ): Promise<{ status: number }> {
-  const { status } = await api.post("/projeto-intervencao", payload, token());
+  const { status } = await api.post("/campanha-projeto-tipo", payload, token());
   return { status };
 }
 

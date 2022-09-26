@@ -3,8 +3,11 @@ import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import {
   AreaAtuacao,
+  ListaCampo,
   ListaPoco,
+  ProjetoTipo,
   Responsavel,
+  Tarefas,
   // NovaIntervencao,
 } from "interfaces/CadastrosModaisInfograficos";
 import { cadastroNovaIntervencaoSchema } from "validations/ModaisCadastrosInfografico";
@@ -12,10 +15,17 @@ import { cadastroNovaIntervencaoSchema } from "validations/ModaisCadastrosInfogr
 import { useToast } from "contexts/Toast";
 
 import {
+  getCampo,
   getPocos,
+  getProjetosTipo,
   getResponsaveis,
+  getTarefas,
 } from "services/get/CadastroModaisInfograficos";
-import { getAreaAtuacaoList, getInfoCampanha } from "services/get/Infograficos";
+import {
+  getAreaAtuacaoList,
+  getInfoCampanha,
+  getSondaCampanha,
+} from "services/get/Infograficos";
 import { postNovaIntervencao } from "services/post/CadastroModaisInfograficos";
 
 import { useAuth } from "./useAuth";
@@ -28,12 +38,20 @@ export function useCadastroIntervencao() {
   const [listaPocos, setListaPocos] = useState<ListaPoco[]>([]);
   const [listaAreaAtuacao, setListaAreaAtuacao] = useState<AreaAtuacao[]>([]);
   const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
+  const [listaCampos, setListaCampo] = useState<ListaCampo[]>([]);
+  const [listaProjetosTipo, setListaProjetosTipo] = useState<ProjetoTipo[]>([]);
+  const [listaSondaCampanha, setListaSondaCampanha] = useState<any[]>([]);
+  const [listaTarefas, setListaTarefas] = useState<Tarefas[]>([]);
 
   const reqGet = async () => {
     const campanha = await getInfoCampanha();
     const pocos = await getPocos();
     const areaAtuacao = await getAreaAtuacaoList();
     const responsaveis = await getResponsaveis();
+    const campos = await getCampo();
+    const projetosTipo = await getProjetosTipo();
+    const sondaCampanha = await getSondaCampanha();
+    const tarefas = await getTarefas();
 
     const arraySondas = campanha.data.map(({ sonda, id_campanha }: any) => ({
       sonda,
@@ -51,18 +69,35 @@ export function useCadastroIntervencao() {
     const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
       a.nome.localeCompare(b.nome)
     );
+    const camposSorted = campos.data.sort((a: ListaCampo, b: ListaCampo) =>
+      a.campo.localeCompare(b.campo)
+    );
+    const projetosTipoSorted = projetosTipo.data.sort(
+      (a: ProjetoTipo, b: ProjetoTipo) =>
+        a.nom_projeto_tipo.localeCompare(b.nom_projeto_tipo)
+    );
+    const sondaCampanhaSorted = sondaCampanha.data.sort((a: any, b: any) =>
+      a.nom_campanha.localeCompare(b.nom_campanha)
+    );
+    const tarefasSorted = tarefas.data.sort((a: Tarefas, b: Tarefas) =>
+      a.nom_atividade.localeCompare(b.nom_atividade)
+    );
 
     setListaSondas(sondasSorted);
     setListaPocos(pocosSorted);
     setListaAreaAtuacao(areasAtuacaoSorted);
     setListaResponsaveis(responsaveisSorted);
+    setListaCampo(camposSorted);
+    setListaProjetosTipo(projetosTipoSorted);
+    setListaSondaCampanha(sondaCampanhaSorted);
+    setListaTarefas(tarefasSorted);
   };
 
   const initialValues: any = {
     nom_usu_create: user?.nome,
     poco_id: 0,
     campo_id: 0,
-    sonda_id: 0,
+    id_campanha: 0,
     dat_ini_prev: "",
     projeto_tipo_id: 0,
     atividades: [
@@ -76,7 +111,7 @@ export function useCadastroIntervencao() {
     comentarios: "",
   };
 
-  const registerForm = useFormik({
+  const registerForm: any = useFormik({
     initialValues,
     validationSchema: cadastroNovaIntervencaoSchema,
     onSubmit: async (values) => {
@@ -84,7 +119,7 @@ export function useCadastroIntervencao() {
         nom_usu_create: user?.nome,
         poco_id: values.poco_id,
         campo_id: values.campo_id,
-        sonda_id: values.sonda_id,
+        id_campanha: values.id_campanha,
         dat_ini_prev: values.dat_ini_prev,
         projeto_tipo_id: values.projeto_tipo_id,
         atividades: values.atividades,
@@ -129,5 +164,9 @@ export function useCadastroIntervencao() {
     listaPocos,
     listaAreaAtuacao,
     listaResponsaveis,
+    listaCampos,
+    listaProjetosTipo,
+    listaSondaCampanha,
+    listaTarefas,
   };
 }

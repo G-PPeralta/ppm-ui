@@ -48,7 +48,7 @@ function ModalEditarAtividade({
   const [obs, setObs] = useState("");
 
   useEffect(() => {
-    setCampanhaId(atividade.id_poco);
+    setCampanhaId(atividade.id_filho);
     setObs(atividade.sonda);
     setAtividadeStatus(Number(atividade.pct_real));
   }, []);

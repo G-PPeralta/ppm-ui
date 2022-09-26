@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BsPlusLg } from "react-icons/bs";
 
 import {
@@ -18,7 +19,11 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
+import {
+  ListaCampo,
+  ListaPoco,
+  ProjetoTipo,
+} from "interfaces/CadastrosModaisInfograficos";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
@@ -26,14 +31,23 @@ import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
+import { getAtividadasByProjetosTipoId } from "services/get/CadastroModaisInfograficos";
+
 import AtividadesCadastroIntervencao from "./AtividadesCadastroIntervencao";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
 import SelectFiltragem from "./SelectFiltragem";
-import SelectFiltragemSondas from "./SelectFiltragemSonda";
+// import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
 function ModalCadastroIntervencao() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaPocos } = useCadastroIntervencao();
+  const {
+    registerForm,
+    loading,
+    listaPocos,
+    listaCampos,
+    listaProjetosTipo,
+    listaSondaCampanha,
+  } = useCadastroIntervencao();
 
   const innerWidth = window.innerWidth;
 
@@ -42,15 +56,49 @@ function ModalCadastroIntervencao() {
     label: poco.poco,
   }));
 
-  const optionsCampo = listaPocos.map((poco: ListaPoco) => ({
-    value: poco.id,
-    label: poco.poco,
+  const optionsCampo = listaCampos.map((campo: ListaCampo) => ({
+    value: campo.id,
+    label: campo.campo,
   }));
 
-  const optionsProjetoTipo = listaPocos.map((poco: ListaPoco) => ({
-    value: poco.id,
-    label: poco.poco,
+  const optionsProjetoTipo = listaProjetosTipo.map(
+    (projetoTipo: ProjetoTipo) => ({
+      value: projetoTipo.id,
+      label: projetoTipo.nom_projeto_tipo,
+    })
+  );
+
+  const optionsSondaCampanha = listaSondaCampanha.map((sondaCampanha: any) => ({
+    value: sondaCampanha.id,
+    label: sondaCampanha.nom_campanha,
   }));
+
+  const reqGetAtividadesByProjetoTipoId = async (id: number) => {
+    if (id === 0) {
+      registerForm.setFieldValue("atividades", [
+        {
+          area_id: 0,
+          tarefa_id: 0,
+          responsavel_id: 0,
+          qtde_dias: 0,
+        },
+      ]);
+    } else {
+      const atividades = await getAtividadasByProjetosTipoId(id);
+
+      const atividadesFormatadas = atividades.data.map((atividade: any) => ({
+        area_id: atividade.id_area,
+        tarefa_id: atividade.id_tarefa,
+        responsavel_id: atividade.responsavel_id,
+        qtde_dias: atividade.qtde_dias,
+      }));
+      registerForm.setFieldValue("atividades", atividadesFormatadas);
+    }
+  };
+
+  useEffect(() => {
+    reqGetAtividadesByProjetoTipoId(registerForm.values.projeto_tipo_id);
+  }, [registerForm.values.projeto_tipo_id]);
 
   return (
     <>
@@ -115,9 +163,15 @@ function ModalCadastroIntervencao() {
                         direction={innerWidth >= 460 ? "row" : "column"}
                         gap={5}
                       >
-                        <SelectFiltragemSondas
+                        {/* <SelectFiltragemSondas
                           form={registerForm}
                           nomeChave={"sonda_id"}
+                        /> */}
+                        <SelectFiltragem
+                          registerForm={registerForm}
+                          nomeSelect={"SONDA"}
+                          propName={"id_campanha"}
+                          options={optionsSondaCampanha}
                         />
                         <SelectFiltragem
                           registerForm={registerForm}
