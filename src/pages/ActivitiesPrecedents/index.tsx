@@ -293,13 +293,14 @@ export function ActivitiesPrecedents() {
                   strokeWidth={1}
                 >
                   <Flex py={4} wrap={"wrap"}>
-                    {payload.map((area, indexArea) => (
+                    {payload.map((area, index) => (
                       <Flex
                         width={"100%"}
                         borderTop={"1px solid"}
                         borderBottom={"1px solid"}
                         borderColor={"#A7A7A7"}
                         direction={"row"}
+                        key={index}
                       >
                         <Box
                           py={4}
