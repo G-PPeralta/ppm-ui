@@ -138,6 +138,7 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                             registerForm.values.comentarios
                           )}
                           onChange={registerForm.handleChange}
+                          maxLength={255}
                         />
                         {registerForm.errors.comentarios &&
                           registerForm.touched.comentarios && (

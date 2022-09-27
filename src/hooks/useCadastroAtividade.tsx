@@ -58,7 +58,7 @@ export function useCadastroAtividade() {
 
   const initialValues = {
     nom_usu_create: user?.nome,
-    id_origem: 0,
+    id_origem: "",
     nom_atividade: "",
     responsavel_id: 0,
     area_atuacao: "",
