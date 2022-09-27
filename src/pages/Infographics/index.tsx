@@ -12,6 +12,7 @@ import { Ring } from "@uiball/loaders";
 import Sidebar from "components/SideBar";
 import StatusProjeto from "components/StatusProjeto";
 
+// import { campanhasMock, filtrarIntervencoes } from "services/get/Campanhas";
 import { getInfoCampanha } from "services/get/Infograficos";
 
 import { statusProjeto } from "../../utils/validateDate";
@@ -28,22 +29,41 @@ export function Infographics() {
   const [loading, setLoading] = useState(true);
   const [campanhas, setCampanhas] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
+  const [filtrado, setFiltrado] = useState(false);
 
   const innerWidth = useBreakpointValue({ base: 0, md: 1, lg: 2, xl: 3 });
 
-  const handleGet = async () => {
+  const handleGetAll = async () => {
+    const campanhas = await getInfoCampanha();
+    setCampanhas(campanhas.data);
+    setLoading(false);
+  };
+
+  const handleGetFiltrado = async () => {
     const campanhas = await getInfoCampanha();
     setCampanhas(campanhas.data);
     setLoading(false);
   };
 
   useEffect(() => {
-    handleGet();
+    if (filtrado) {
+      handleGetFiltrado();
+    } else {
+      handleGetAll();
+    }
   }, []);
 
   useEffect(() => {
-    handleGet();
+    if (filtrado) {
+      handleGetFiltrado();
+      // console.log("filtrado");
+    } else {
+      handleGetAll();
+      // console.log("não filtrado");
+    }
   }, [refresh]);
+
+  // console.log(filtrarIntervencoes(campanhasMock, "PIR-999"));
 
   return (
     <>
@@ -64,7 +84,11 @@ export function Infographics() {
                   </Heading>
                   <Flex gap={4}>
                     <ExibirModal />
-                    <FiltrosModal />
+                    <FiltrosModal
+                      refresh={refresh}
+                      setRefresh={setRefresh}
+                      setFiltrado={setFiltrado}
+                    />
                   </Flex>
                 </Flex>
                 <Flex

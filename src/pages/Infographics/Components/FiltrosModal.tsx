@@ -7,7 +7,6 @@ import {
   FormLabel,
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -21,7 +20,13 @@ import { useFiltragemCampanha } from "hooks/useFiltragemCampanha";
 
 import SelectFiltragem from "./SelectFiltragem";
 
-function FiltrosModal() {
+type Props = {
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  setFiltrado: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function FiltrosModal({ setFiltrado, refresh, setRefresh }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     registerForm,
@@ -57,13 +62,32 @@ function FiltrosModal() {
     label: sonda.sonda,
   }));
 
+  const handleFiltrarCampanhas = () => {
+    setFiltrado(true);
+    setRefresh(!refresh);
+    onClose();
+  };
+
+  const handleRemoverFiltro = async () => {
+    await registerForm.resetForm();
+    setFiltrado(false);
+    setRefresh(!refresh);
+    onClose();
+  };
+
   return (
     <>
       <Button
-        onClick={onOpen}
         rightIcon={<IoMdArrowDropdown />}
-        colorScheme="blue"
-        variant="ghost"
+        textColor={"origem.500"}
+        backgroundColor={"transparent"}
+        _hover={{
+          borderColor: "origem.600",
+          backgroundColor: "origem.500",
+          textColor: "white",
+          transition: "all 0.4s",
+        }}
+        onClick={onOpen}
       >
         Filtrar
       </Button>
@@ -80,7 +104,6 @@ function FiltrosModal() {
           >
             Filtros
           </ModalHeader>
-          <ModalCloseButton color={"white"} />
           <ModalBody mt={4}>
             <FormControl>
               <Flex direction={"column"} gap={5}>
@@ -174,7 +197,7 @@ function FiltrosModal() {
               <Button
                 variant="ghost"
                 color="red"
-                onClick={() => onClose()}
+                onClick={() => handleRemoverFiltro()}
                 _hover={{
                   background: "red.500",
                   transition: "all 0.4s",
@@ -187,7 +210,7 @@ function FiltrosModal() {
                 background="origem.300"
                 variant="primary"
                 color="white"
-                onClick={() => onClose()}
+                onClick={() => handleFiltrarCampanhas()}
                 _hover={{
                   background: "origem.500",
                   transition: "all 0.4s",
