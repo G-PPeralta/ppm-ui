@@ -1,8 +1,5 @@
 import { FaGreaterThan } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
-// import { IoIosPodium } from "react-icons/io";
-
-// import { Link } from "react-router-dom";
 
 import {
   Button,
@@ -10,7 +7,6 @@ import {
   FormControl,
   Modal,
   ModalBody,
-  // ModalCloseButton,
   ModalContent,
   ModalHeader,
   ModalOverlay,
@@ -19,10 +15,8 @@ import {
   // Textarea,
   useDisclosure,
   Icon,
+  Box,
 } from "@chakra-ui/react";
-// import { Ring } from "@uiball/loaders";
-
-// import { TextError } from "components/TextError";
 
 import { handleCancelar } from "utils/handleCadastro";
 
@@ -31,17 +25,6 @@ import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 function ModalLixeira() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm } = useCadastroPriorizacao();
-
-  // console.log("registerform", registerForm.values);
-
-  // console.log("isvalid", registerForm.isValid);
-
-  // useEffect(() => {
-  //   registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
-  // }, []);
-
-  // Pegar id do projeto
-  // console.log("id-cadastrar", projeto.projeto);
 
   return (
     <>
@@ -116,22 +99,65 @@ function ModalLixeira() {
                       >
                         <Text>Itens Excluídos</Text>
                       </Flex>
-                      <Flex direction={"column"}>
-                        <Button
-                          disabled={!registerForm.isValid}
-                          background="white"
-                          variant="primary"
-                          border={"#0047BB solid 1px"}
-                          color="origem.500"
-                          _hover={{
-                            background: "origem.500",
-                            color: "white",
-                            transition: "all 0.4s",
-                          }}
-                        >
-                          <Text>Restaurar</Text>
-                        </Button>
-                      </Flex>
+
+                      <Box
+                        border={"solid #9FA2B4 0.5px"}
+                        w="530px"
+                        borderRadius={"10px"}
+                        p={4}
+                      >
+                        <Flex flex={"flex-start"} justify={"space-between"}>
+                          <Flex flex={"flex-end"}>
+                            <Text color={"black"}>Itens excluídos aqui</Text>
+                          </Flex>
+                          <Flex direction={"row"} flex={"flex-end"}>
+                            <Button
+                              disabled={!registerForm.isValid}
+                              background="white"
+                              variant="primary"
+                              border={"#0047BB solid 1px"}
+                              color="origem.500"
+                              _hover={{
+                                background: "origem.500",
+                                color: "white",
+                                transition: "all 0.4s",
+                              }}
+                            >
+                              <Text>Restaurar</Text>
+                            </Button>
+                          </Flex>
+                        </Flex>
+                      </Box>
+
+                      <Box
+                        border={"solid #9FA2B4 0.5px"}
+                        w="530px"
+                        borderRadius={"10px"}
+                        p={4}
+                        mt={"15px"}
+                      >
+                        <Flex flex={"flex-start"} justify={"space-between"}>
+                          <Flex flex={"flex-end"}>
+                            <Text color={"black"}>Itens excluídos aqui</Text>
+                          </Flex>
+                          <Flex direction={"row"} flex={"flex-end"}>
+                            <Button
+                              disabled={!registerForm.isValid}
+                              background="white"
+                              variant="primary"
+                              border={"#0047BB solid 1px"}
+                              color="origem.500"
+                              _hover={{
+                                background: "origem.500",
+                                color: "white",
+                                transition: "all 0.4s",
+                              }}
+                            >
+                              <Text>Restaurar</Text>
+                            </Button>
+                          </Flex>
+                        </Flex>
+                      </Box>
                     </Flex>
                   </Stack>
                 </Flex>
