@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 
 import {
@@ -31,7 +31,10 @@ import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
-import { getAtividadasByProjetosTipoId } from "services/get/CadastroModaisInfograficos";
+import {
+  getAtividadasByProjetosTipoId,
+  getProjetosTipo,
+} from "services/get/CadastroModaisInfograficos";
 
 import AtividadesCadastroIntervencao from "./AtividadesCadastroIntervencao";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
@@ -45,14 +48,10 @@ function ModalCadastroIntervencao({
   setRefresh,
 }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    registerForm,
-    loading,
-    listaPocos,
-    listaCampos,
-    listaProjetosTipo,
-    listaSondaCampanha,
-  } = useCadastroIntervencao();
+  const { registerForm, loading, listaPocos, listaCampos, listaSondaCampanha } =
+    useCadastroIntervencao();
+
+  const [listaProjetos, setListaProjetos] = useState<any>([]);
 
   const innerWidth = window.innerWidth;
 
@@ -66,12 +65,10 @@ function ModalCadastroIntervencao({
     label: campo.campo,
   }));
 
-  const optionsProjetoTipo = listaProjetosTipo.map(
-    (projetoTipo: ProjetoTipo) => ({
-      value: projetoTipo.id,
-      label: projetoTipo.nom_projeto_tipo,
-    })
-  );
+  const optionsProjetoTipo = listaProjetos.map((projetoTipo: ProjetoTipo) => ({
+    value: projetoTipo.id,
+    label: projetoTipo.nom_projeto_tipo,
+  }));
 
   const optionsSondaCampanha = listaSondaCampanha.map((sondaCampanha: any) => ({
     value: sondaCampanha.id,
@@ -101,18 +98,37 @@ function ModalCadastroIntervencao({
     }
   };
 
+  const handleGet = async () => {
+    const projetos = await getProjetosTipo();
+    const projetosTipoSorted = projetos.data.sort(
+      (a: ProjetoTipo, b: ProjetoTipo) =>
+        a.nom_projeto_tipo.localeCompare(b.nom_projeto_tipo)
+    );
+    setListaProjetos(projetosTipoSorted);
+  };
+
+  const handleClick = async () => {
+    const projetos = await getProjetosTipo();
+    const projetosTipoSorted = projetos.data.sort(
+      (a: ProjetoTipo, b: ProjetoTipo) =>
+        a.nom_projeto_tipo.localeCompare(b.nom_projeto_tipo)
+    );
+    setListaProjetos(projetosTipoSorted);
+    onOpen();
+  };
+
   useEffect(() => {
+    handleGet();
     registerForm.setFieldValue("id_campanha", idCampanha);
     const newDate = new Date(data);
     newDate.setDate(newDate.getDate() + 15);
     registerForm.setFieldValue("dat_ini_prev", newDate);
+    setRefresh(!refresh);
   }, []);
 
   useEffect(() => {
     reqGetAtividadesByProjetoTipoId(registerForm.values.projeto_tipo_id);
   }, [registerForm.values.projeto_tipo_id]);
-
-  console.log("registerForm", registerForm.values);
 
   return (
     <>
@@ -133,7 +149,7 @@ function ModalCadastroIntervencao({
           backgroundColor: "grey.100",
           transition: "all 0.4s",
         }}
-        onClick={onOpen}
+        onClick={() => handleClick()}
       >
         <IconButton
           aria-label="Plus sign"
