@@ -72,44 +72,53 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: "column",
-                        md: "row",
+                        md: "column",
                       })}
                       gap={5}
                     >
-                      <FormControl>
-                        <Flex gap={1}>
-                          <RequiredField />
-                          <FormLabel htmlFor="previsto">Valor</FormLabel>{" "}
-                        </Flex>
-                        <Input
-                          isRequired
-                          placeholder="Valor Previsto"
-                          id="previsto"
-                          type="text"
-                          name="previsto"
-                          value={regexCaracteresEspeciais(
-                            registerForm.values.previsto
+                      <Flex
+                        flexDirection={useBreakpointValue({
+                          base: "row",
+                          md: "row",
+                        })}
+                        gap={5}
+                      >
+                        <FormControl>
+                          <Flex gap={1}>
+                            <RequiredField />
+                            <FormLabel htmlFor="previsto">Valor</FormLabel>{" "}
+                          </Flex>
+                          <Input
+                            isRequired
+                            placeholder="Valor Previsto"
+                            id="previsto"
+                            type="text"
+                            name="previsto"
+                            value={regexCaracteresEspeciais(
+                              registerForm.values.previsto
+                            )}
+                            onChange={registerForm.handleChange}
+                            maxLength={10}
+                          />
+                          {registerForm.errors.previsto && (
+                            <TextError>
+                              {registerForm.errors.previsto}
+                            </TextError>
                           )}
-                          onChange={registerForm.handleChange}
-                          maxLength={10}
-                        />
-                        {registerForm.errors.previsto && (
-                          <TextError>{registerForm.errors.previsto}</TextError>
-                        )}
-                      </FormControl>
+                        </FormControl>
 
-                      <FormControl>
-                        <Flex gap={1}>
-                          <RequiredField />
-                          <FormLabel htmlFor="previsto">Data</FormLabel>{" "}
-                        </Flex>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="md"
-                          type="date"
-                        />
-                      </FormControl>
-
+                        <FormControl>
+                          <Flex gap={1}>
+                            <RequiredField />
+                            <FormLabel htmlFor="previsto">Data</FormLabel>{" "}
+                          </Flex>
+                          <Input
+                            placeholder="Select Date and Time"
+                            size="md"
+                            type="date"
+                          />
+                        </FormControl>
+                      </Flex>
                       <FormControl>
                         <Flex gap={1}>
                           <RequiredField />
@@ -121,27 +130,34 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                           <option value="option3">Option 3</option>
                         </Select>
                       </FormControl>
-
-                      <FormControl>
-                        <Flex gap={1}>
-                          <RequiredField />
-                          <FormLabel htmlFor="previsto">
-                            Classe de Serviço
-                          </FormLabel>
-                        </Flex>
-                        <Select placeholder="Select option">
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </Select>
-                      </FormControl>
-                      <FormControl>
-                        <Flex gap={1}>
-                          <RequiredField />
-                          <FormLabel htmlFor="previsto">Pedido</FormLabel>
-                        </Flex>
-                        <Input placeholder="Pedido" size="md" type="text" />
-                      </FormControl>
+                      <Flex
+                        flexDirection={useBreakpointValue({
+                          base: "row",
+                          md: "row",
+                        })}
+                        gap={5}
+                      >
+                        <FormControl>
+                          <Flex gap={1}>
+                            <RequiredField />
+                            <FormLabel htmlFor="previsto">
+                              Classe de Serviço
+                            </FormLabel>
+                          </Flex>
+                          <Select placeholder="Select option">
+                            <option value="option1">Option 1</option>
+                            <option value="option2">Option 2</option>
+                            <option value="option3">Option 3</option>
+                          </Select>
+                        </FormControl>
+                        <FormControl>
+                          <Flex gap={1}>
+                            <RequiredField />
+                            <FormLabel htmlFor="previsto">Pedido</FormLabel>
+                          </Flex>
+                          <Input placeholder="Pedido" size="md" type="text" />
+                        </FormControl>
+                      </Flex>
 
                       <FormControl>
                         <Flex gap={1}>
