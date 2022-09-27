@@ -54,6 +54,7 @@ function Restricoes({ registerForm }: any) {
         <Button
           onClick={onClick}
           ref={ref}
+          variant="outline"
           px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
           minW={useBreakpointValue({ base: "180px", sm: "180px", md: "220px" })}
           disabled={!registerForm.values.nao_terminar_depois_de.checked}
@@ -116,6 +117,7 @@ function Restricoes({ registerForm }: any) {
             dateFormat="dd/MM/yyyy, hh:mm"
             customInput={<TriggerDatePickerFinalizar />}
             isClearable={naoFinalizarData !== ""}
+            disabled={!registerForm.values.nao_terminar_depois_de.checked}
           />
         </Flex>
       </Flex>

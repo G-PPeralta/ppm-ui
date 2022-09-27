@@ -62,3 +62,12 @@ export async function getTarefaList(): Promise<{
 
   return { data, status };
 }
+
+export async function getSondaCampanha(): Promise<{
+  data: any[];
+  status: number;
+}> {
+  const { data, status } = await api.get(`/campanha/find`, token());
+
+  return { data, status };
+}

@@ -22,6 +22,7 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
 
@@ -31,6 +32,8 @@ function ModalCadastroProjetoTipo() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaAtividadesPrecedentes } =
     useCadastroProjetoTipo();
+
+  // console.log("registerForm", registerForm.values);
 
   return (
     <>
@@ -90,8 +93,11 @@ function ModalCadastroProjetoTipo() {
                           id="nom_projeto_tipo"
                           type="text"
                           name="nom_projeto_tipo"
-                          value={registerForm.values.nom_projeto_tipo}
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.nom_projeto_tipo
+                          )}
                           onChange={registerForm.handleChange}
+                          maxLength={100}
                         />
                         {registerForm.errors.nom_projeto_tipo &&
                           registerForm.touched.nom_projeto_tipo && (
@@ -128,7 +134,9 @@ function ModalCadastroProjetoTipo() {
                           placeholder="Adicione comentários sobre o projeto"
                           id="comentarios"
                           name="comentarios"
-                          value={registerForm.values.comentarios}
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.comentarios
+                          )}
                           onChange={registerForm.handleChange}
                         />
                         {registerForm.errors.comentarios &&

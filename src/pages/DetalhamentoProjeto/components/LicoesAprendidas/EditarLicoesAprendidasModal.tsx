@@ -108,7 +108,7 @@ function EditarLicoesAprendidasModal({
             Editar Lições Aprendidas
           </ModalHeader>
 
-          <ModalCloseButton />
+          <ModalCloseButton color={"white"} />
 
           <ModalBody>
             <FormControl marginBottom={4} padding={1}>

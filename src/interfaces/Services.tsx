@@ -385,3 +385,7 @@ export interface ProjetosRankingPayload {
   dsc_comentario: string;
   nom_usu_create: string;
 }
+
+export interface ProjetoProgresso {
+  fn_cron_calc_pct_real: string;
+}

@@ -4,19 +4,19 @@ import { Flex, FormControl, FormLabel } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
+import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 
-function SelectFiltragemSondas({ form, nomeChave }: any) {
-  const { listaSondas } = useCadastroIntervencao();
+function SelectFiltragemSondas({ form, nomeChave, nomeLabel }: any) {
+  const { listaSondas } = useCadastroCampanha();
 
   const idOptions = listaSondas.map((sonda: any) => ({
-    value: sonda.id_campanha,
-    label: sonda.sonda,
+    value: sonda.id,
+    label: sonda.nom_sonda,
   }));
 
   const nameOptions = listaSondas.map((sonda: any) => ({
-    value: sonda.sonda,
-    label: sonda.sonda,
+    value: sonda.nom_sonda,
+    label: sonda.nom_sonda,
   }));
 
   const handleChange = ({ value }: any, { name }: any) => {
@@ -26,7 +26,7 @@ function SelectFiltragemSondas({ form, nomeChave }: any) {
   return (
     <>
       <FormControl>
-        {nomeChave === "id_campanha" ? (
+        {nomeLabel === "SONDA" ? (
           <Flex gap={1}>
             <RequiredField />
             <FormLabel>SONDA</FormLabel>
@@ -34,7 +34,7 @@ function SelectFiltragemSondas({ form, nomeChave }: any) {
         ) : (
           <Flex gap={1}>
             <RequiredField />
-            <FormLabel>NOME CAMPANHA/SONDA</FormLabel>
+            <FormLabel>NOME</FormLabel>
           </Flex>
         )}
         <Select

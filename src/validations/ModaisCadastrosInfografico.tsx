@@ -5,7 +5,7 @@ export const cadastroTarefaSchema = yup.object({
 });
 
 export const cadastroSondaSchema = yup.object({
-  sonda: yup
+  nome: yup
     .string()
     .required("O nome da sonda é obrigatório!")
     .min(3, "O nome da sonda deve ter ao menos 3 caracteres"),
@@ -34,7 +34,7 @@ export const cadastroIntervencaoSchema = yup.object({
 export const cadastroAtividadeSchema = yup.object({
   id_origem: yup.number().required("O ID é obrigatório!"),
   nom_atividade: yup.string().required("O nome da atividade é obrigatório!"),
-  responsavelId: yup.number().required("O responsável é obrigatório!"),
+  responsavel_id: yup.number().required("O responsável é obrigatório!"),
   area_atuacao: yup.string().required("A área de atuação é obrigatória!"),
   nao_iniciar_antes_de: yup.object({
     data: yup.string(),
@@ -83,15 +83,19 @@ export const cadastroNovaCampanhaSchema = yup.object({
 });
 
 export const cadastroNovaIntervencaoSchema = yup.object({
-  nom_atividade: yup
-    .string()
-    .min(2, "Campo obrigatório")
-    .required("Poço é obrigatório"),
-  id_campanha: yup
-    .number()
-    .min(2, "Campo obrigatório")
-    .required("Sonda é obrigatória"),
-  dsc_comentario: yup.string(),
+  id_campanha: yup.number().required(),
+  poco_id: yup.number().required(),
+  projeto_tipo_id: yup.number().required(),
+  dat_ini_prev: yup.string().required(),
+  comentarios: yup.string().required(),
+  atividades: yup.array().of(
+    yup.object({
+      area_id: yup.number().required(),
+      tarefa_id: yup.number().required(),
+      responsavel_id: yup.number().required(),
+      qtde_dias: yup.number().required(),
+    })
+  ),
 });
 
 export const cadastroNovaAtividadeSchema = yup.object({
@@ -99,5 +103,5 @@ export const cadastroNovaAtividadeSchema = yup.object({
   pct_real: yup.number().required("Sonda é obrigatória"),
   dat_ini_plan: yup.string().required("A data e hora de início é obrigatória"),
   dat_fim_plan: yup.string().required("A data e hora de fim é obrigatória"),
-  dsc_comentario: yup.string(),
+  dsc_comentario: yup.string().required("O comentário é obrigatório"),
 });
