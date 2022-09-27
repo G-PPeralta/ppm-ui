@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FiPlusCircle, FiPrinter } from "react-icons/fi";
+import ReactToPrint from "react-to-print";
 
 import {
   FormControl,
@@ -35,9 +36,24 @@ const reports: ReportTypeProps[] = [
   { name: "Previsto x Realizado", value: "5" },
 ];
 
+function handleReportButton(report: string) {
+  return (
+    <>
+      {report == "1" && <PanoramaGeral />}
+      {report == "2" && <Pendencias />}
+      {report == "3" && <Indicadores />}
+      {report == "4" && <Evolucao />}
+      {report == "5" && <PrevistoXRealizado />}
+    </>
+  );
+}
+
 export function Reports() {
   const [report, setReport] = useState("0");
+
   let initialValue = "0";
+
+  const componentRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
@@ -57,13 +73,19 @@ export function Reports() {
               <Heading as="h3" size="md" mb={5}>
                 GERAR RELATÓRIO
               </Heading>
-              <Button
-                variant="ghost"
-                colorScheme="messenger"
-                rightIcon={<FiPrinter />}
-              >
-                Exportar
-              </Button>
+              <ReactToPrint
+                trigger={() => (
+                  <Button
+                    variant="ghost"
+                    colorScheme="messenger"
+                    rightIcon={<FiPrinter />}
+                    disabled={report == "0" || report == ""}
+                  >
+                    Exportar
+                  </Button>
+                )}
+                content={() => componentRef.current}
+              />
             </Flex>
             <Flex flexDirection="row" gap={"4"}>
               <FormControl>
@@ -103,13 +125,7 @@ export function Reports() {
                 </Button>
               </FormControl>
             </Flex>
-            <Flex>
-              {report == "1" && <PanoramaGeral></PanoramaGeral>}
-              {report == "2" && <Pendencias></Pendencias>}
-              {report == "3" && <Indicadores></Indicadores>}
-              {report == "4" && <Evolucao></Evolucao>}
-              {report == "5" && <PrevistoXRealizado></PrevistoXRealizado>}
-            </Flex>
+            <Flex ref={componentRef}>{handleReportButton(report)}</Flex>
           </Box>
         </Stack>
       </Sidebar>
