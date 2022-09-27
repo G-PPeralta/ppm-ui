@@ -15,7 +15,8 @@ import {
 import { BudgetDetail } from "models/Budget.model";
 
 import "./expansiveTable.css";
-import ModalCadastrarOrcamentoPrevisto from "./ModalCadastrarOrcamentoPrevisto";
+// import ModalCadastrarOrcamentoPrevisto from "./ModalCadastrarOrcamentoPrevisto";
+import CampoEditavel from "./CampoEditavel";
 import ModalGestaoDeCusto from "./ModalGestaoDeCusto";
 
 export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
@@ -94,8 +95,7 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
             <Td>{filho.fornecedor}</Td>
             <Td textAlign="center">
               <Flex alignItems={"center"} justifyContent="center">
-                {brl.format(filho.planejado)}{" "}
-                <ModalCadastrarOrcamentoPrevisto projeto={filho.projeto} />
+                <CampoEditavel filho={filho} />
               </Flex>
             </Td>
             <Td textAlign="center">
