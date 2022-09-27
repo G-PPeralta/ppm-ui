@@ -2,10 +2,8 @@ import { useState, useEffect } from "react";
 
 import {
   Box,
-  Button,
   Flex,
   FormControl,
-  FormLabel,
   Heading,
   Input,
   Stack,
@@ -15,7 +13,7 @@ import { StatisticsTableData } from "interfaces/Services";
 import Sidebar from "components/SideBar";
 
 // import { getStatisticsTasks } from "services/get/StatisticsTasks";
-
+import ModalNovoCronograma from "./components/ModalNovoCronograma";
 import { StatisticsTable } from "./components/StatisticsTable";
 import { atividades } from "./projeto";
 
@@ -94,7 +92,7 @@ function Statistics() {
               borderRadius={{ base: "none", sm: "xl" }}
             >
               <Heading as="h3" size="md" mb={5}>
-                Projetos
+                Operações
               </Heading>
               <Stack spacing="5">
                 <Flex
@@ -104,7 +102,6 @@ function Statistics() {
                 // })}
                 >
                   <FormControl>
-                    <FormLabel htmlFor="pole">Operacao</FormLabel>
                     <Input
                       isRequired
                       placeholder="Operacao"
@@ -115,23 +112,10 @@ function Statistics() {
                       width={300}
                     />
                   </FormControl>
-                  <FormControl className="toBottom">
-                    <Button
-                      variant="outline"
-                      border={"2px solid"}
-                      borderColor={"origem.500"}
-                      textColor={"origem.500"}
-                      _hover={{
-                        borderColor: "origem.600",
-                        backgroundColor: "origem.500",
-                        textColor: "white",
-                        transition: "all 0.4s",
-                      }}
-                      // onClick={onOpen}
-                    >
-                      Adicionar Cronograma
-                    </Button>
-                  </FormControl>
+                  <ModalNovoCronograma
+                  // refresh={refresh}
+                  // setRefresh={setRefresh}
+                  />
                 </Flex>
               </Stack>
               <Stack spacing="8">

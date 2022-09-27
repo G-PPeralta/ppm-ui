@@ -20,7 +20,6 @@ import {
   Flex,
   IconButton,
 } from "@chakra-ui/react";
-
 import "../statistics.css";
 import { StatisticsTableData } from "interfaces/Services";
 
