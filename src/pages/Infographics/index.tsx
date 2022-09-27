@@ -112,7 +112,11 @@ export function Infographics() {
                           align={"end"}
                           justify={"space-between"}
                         >
-                          <ColumnSPT column={column} />
+                          <ColumnSPT
+                            column={column}
+                            refresh={refresh}
+                            setRefresh={setRefresh}
+                          />
                           {/* <ModalCadastroIntervencao /> */}
                         </Flex>
                       ))}
