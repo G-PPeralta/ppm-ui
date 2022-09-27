@@ -1,7 +1,14 @@
+import { Flex } from "@chakra-ui/react";
+import { Gantt } from "components/Gantt";
+import GraficoCurvaS from "pages/DetalhamentoProjeto/components/GraficoCurvaS";
+
 export function PanoramaGeral() {
   return (
     <>
-      <h1>Pamorama Geral</h1>
+      <Flex direction={"column"} w={"100%"}>
+        <GraficoCurvaS />
+        <Gantt />
+      </Flex>
     </>
   );
 }
