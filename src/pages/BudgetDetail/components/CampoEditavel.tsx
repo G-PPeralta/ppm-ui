@@ -19,6 +19,10 @@ export default function CampoEditavel(props: { filho: BudgetDetail }) {
     currency: "BRL",
   });
 
+  const save = () => {
+    /** Here enter command to save */
+  };
+
   /* Here's a custom control */
   function EditableControls() {
     const {
@@ -58,6 +62,7 @@ export default function CampoEditavel(props: { filho: BudgetDetail }) {
       defaultValue={brl.format(props.filho.planejado)}
       // fontSize="2xl"
       isPreviewFocusable={false}
+      onSubmit={save}
     >
       <Flex>
         <EditablePreview />

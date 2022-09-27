@@ -1,4 +1,4 @@
-import { FiEdit } from "react-icons/fi";
+import { GrAddCircle } from "react-icons/gr";
 
 import {
   Flex,
@@ -41,7 +41,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
       <IconButton
         aria-label="Edit Realizado"
         variant={"outline"}
-        icon={<FiEdit />}
+        icon={<GrAddCircle />}
         onClick={onOpen}
       />
 
