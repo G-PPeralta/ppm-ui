@@ -23,9 +23,11 @@ type Column = {
 
 type Props = {
   column: Column;
+  setRefresh: Function;
+  refresh: boolean;
 };
 
-function ColumnSPT({ column }: Props) {
+function ColumnSPT({ column, setRefresh, refresh }: Props) {
   return (
     <Flex direction={"column"} align={"center"} justify={"start"} flex={1}>
       <Text
@@ -61,6 +63,8 @@ function ColumnSPT({ column }: Props) {
         <ModalCadastroIntervencao
           data={column.pocos[column.pocos.length - 1].finalplanejado}
           idCampanha={column.id_campanha}
+          refresh={refresh}
+          setRefresh={setRefresh}
         />
       </Flex>
     </Flex>

@@ -20,7 +20,6 @@ import ExibirModal from "./Components/ExibirModal";
 import FiltrosModal from "./Components/FiltrosModal";
 import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
 import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
-// import ModalCadastroIntervencao from "./Components/ModalCadastroIntervencao";
 import ModalCadastroPoco from "./Components/ModalCadastroPoco";
 import ModalCadastroProjetoTipo from "./Components/ModalCadastroProjetoTipo";
 import ModalNovaCampanha from "./Components/ModalNovaCampanha";
@@ -32,18 +31,18 @@ export function Infographics() {
 
   const innerWidth = useBreakpointValue({ base: 0, md: 1, lg: 2, xl: 3 });
 
-  const handleGetCampanha = async () => {
-    const response = await getInfoCampanha();
-    setCampanhas(response.data);
+  const handleGet = async () => {
+    const campanhas = await getInfoCampanha();
+    setCampanhas(campanhas.data);
     setLoading(false);
   };
 
   useEffect(() => {
-    handleGetCampanha();
+    handleGet();
   }, []);
 
   useEffect(() => {
-    handleGetCampanha();
+    handleGet();
   }, [refresh]);
 
   return (
@@ -83,7 +82,10 @@ export function Infographics() {
                     <ModalCadastrarSonda />
                     <ModalCadastroPoco />
                     <ModalCadastroAtividade />
-                    <ModalCadastroProjetoTipo />
+                    <ModalCadastroProjetoTipo
+                      refresh={refresh}
+                      setRefresh={setRefresh}
+                    />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (
@@ -112,7 +114,11 @@ export function Infographics() {
                           align={"end"}
                           justify={"space-between"}
                         >
-                          <ColumnSPT column={column} />
+                          <ColumnSPT
+                            column={column}
+                            refresh={refresh}
+                            setRefresh={setRefresh}
+                          />
                           {/* <ModalCadastroIntervencao /> */}
                         </Flex>
                       ))}
