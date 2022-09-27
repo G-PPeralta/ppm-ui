@@ -1,26 +1,26 @@
 export const statusProjeto = [
   {
-    id: 1,
+    id: 3,
     status: "Atrasado",
     color: "#BD0000",
   },
   {
-    id: 2,
+    id: 1,
     status: "Concluído",
     color: "#027200",
   },
   {
-    id: 3,
+    id: 2,
     status: "Em Andamento",
     color: "#0047BB",
   },
   {
-    id: 4,
+    id: 5,
     status: "Não Aplicável",
     color: "#C2561A",
   },
   {
-    id: 5,
+    id: 4,
     status: "Não Iniciado",
     color: "#585858",
   },
@@ -39,7 +39,7 @@ export function validateDate(
       return statusProjeto[2].color;
     case pct_real < pct_plan:
       return statusProjeto[0].color;
-    case pct_plan === 0:
+    case pct_plan === 0 && pct_real === 0:
       return statusProjeto[4].color;
     default:
       return statusProjeto[3].color;
