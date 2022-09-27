@@ -32,6 +32,7 @@ function ModalCadastrarPriorizacao() {
   const { registerForm, loading } = useCadastroNovaPriorizacao();
 
   // console.log(registerForm.values);
+  const perfis = ["Nível 0", "Nível 1", "Nível 2"];
 
   useEffect(() => {
     registerForm.setFieldValue("id_area_responsavel", 1);
@@ -163,12 +164,9 @@ function ModalCadastrarPriorizacao() {
                                 md: "95%",
                               })}
                             >
-                              <option value="not1">1</option>
-                              <option value="not2">2</option>
-                              <option value="not3">3</option>
-                              <option value="not4">4</option>
-                              <option value="not5">5</option>
-                              <option value="not6">6</option>
+                              {perfis.map((perfil: any, index: any) => (
+                                <option key={index}>{perfil}</option>
+                              ))}
                             </Select>
                           </FormControl>
                         </Flex>

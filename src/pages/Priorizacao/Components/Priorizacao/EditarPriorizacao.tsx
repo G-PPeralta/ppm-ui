@@ -36,6 +36,8 @@ function EditarPriorizacao(infosRanking: TableProps) {
     infosRanking.nomeRanking
   );
 
+  const perfis = ["Nível 0", "Nível 1", "Nível 2"];
+
   // console.log("registerform", registerForm.values);
   // console.log("nomeRanking", infosRanking.nomeRanking);
 
@@ -164,12 +166,9 @@ function EditarPriorizacao(infosRanking: TableProps) {
                                 md: "95%",
                               })}
                             >
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                              <option>6</option>
+                              {perfis.map((perfil: any, index: any) => (
+                                <option key={index}>{perfil}</option>
+                              ))}
                             </Select>
                           </FormControl>
                         </Flex>
