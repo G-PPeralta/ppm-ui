@@ -22,6 +22,7 @@ import { Reports } from "pages/Reports";
 import { Settings } from "pages/Settings";
 import { ShareRegister } from "pages/ShareRegister";
 import { Statistics } from "pages/Statistics";
+import { StatisticsGantt } from "pages/StatisticsGantt";
 import { UploadSheet } from "pages/UploadSheet";
 import VisaoPorArea from "pages/VisaoPorArea";
 
@@ -57,9 +58,10 @@ export function PrivateRoutes() {
         path="/atividade/:id/precedentes"
         element={<ActivitiesPrecedents />}
       />
-      <Route path="/estatisticas/" element={<Statistics />} />
       <Route path="/atividade/:id/visao-por-area" element={<VisaoPorArea />} />
       <Route path="/licoesAprendidas" element={<LicoesAprendidasProjetos />} />
+      <Route path="/estatisticas/" element={<Statistics />} />
+      <Route path="/estatisticas/cronograma" element={<StatisticsGantt />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

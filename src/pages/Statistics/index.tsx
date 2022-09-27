@@ -1,38 +1,148 @@
+import { useState, useEffect } from "react";
+
 import {
   Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
   Heading,
+  Input,
   Stack,
-  useBreakpointValue,
-  useColorModeValue,
 } from "@chakra-ui/react";
+import { StatisticsTableData } from "interfaces/Services";
 
-import { Gantt } from "components/Gantt";
 import Sidebar from "components/SideBar";
 
+// import { getStatisticsTasks } from "services/get/StatisticsTasks";
+
+import { StatisticsTable } from "./components/StatisticsTable";
+import { atividades } from "./projeto";
+
 function Statistics() {
-  const toolbarOptions = ["ZoomIn", "ZoomOut"];
+  // const [op, setOp] = useState("0");
+  const [loading, setLoading] = useState(true);
+  const [allData, setAllData] = useState<StatisticsTableData[]>([]);
+  const [filter, setFilter] = useState<StatisticsTableData[]>();
+
+  const convertReq = (payload: any): StatisticsTableData[] => {
+    const newData: StatisticsTableData[] = [];
+    payload.forEach((s: { id_sonda: number; sonda: string; pocos: any[] }) =>
+      s.pocos.forEach((p) => {
+        newData.push({
+          sonda: s.sonda,
+          id_sonda: s.id_sonda,
+          poco: p.poco,
+          id_poco: p.id_poco,
+          atividades: p.atividades,
+        });
+      })
+    );
+    return newData;
+  };
+
+  const handleGetAllData = async () => {
+    // const req = await getStatisticsTasks();
+    const data = atividades; // TODO set req to data
+    if (!data) return;
+    const newData = convertReq(data);
+    setAllData(newData);
+    setFilter(newData);
+  };
+
+  const filterData = (text: string) => {
+    let filtered;
+    if (text && text.length > 1) {
+      filtered = allData?.filter(
+        (x) => x.sonda.toLowerCase().indexOf(text.toLowerCase()) > -1
+      );
+    } else {
+      filtered = allData;
+    }
+
+    if (filtered) {
+      setFilter([...filtered]);
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
+  useEffect(() => {
+    handleGetAllData();
+  }, []);
+
   return (
     <>
-      <Sidebar>
-        <Stack spacing="8">
-          <Box
-            py={{ base: "0", sm: "10" }}
-            px={{ base: "4", sm: "10" }}
-            w={"100%"}
-            bg={useBreakpointValue({ base: "transparent", sm: "white" })}
-            boxShadow={{
-              base: "none",
-              sm: useColorModeValue("md", "md-dark"),
-            }}
-            borderRadius={{ base: "none", sm: "xl" }}
-          >
-            <Heading as="h3" size="md" mb={5}>
-              Estatísticas
-            </Heading>
-            <Gantt toolbarOptions={toolbarOptions} />
-          </Box>
-        </Stack>
-      </Sidebar>
+      {!loading && (
+        <Sidebar>
+          <Stack spacing="8">
+            <Box
+              py={{ base: "0", sm: "10" }}
+              px={{ base: "4", sm: "10" }}
+              w={"100%"}
+              bg={"white"}
+              // bg={useBreakpointValue({ base: "transparent", sm: "white" })}
+              boxShadow={{
+                base: "none",
+                sm: "md-dark",
+                // sm: useColorModeValue("md", "md-dark"),
+              }}
+              borderRadius={{ base: "none", sm: "xl" }}
+            >
+              <Heading as="h3" size="md" mb={5}>
+                Projetos
+              </Heading>
+              <Stack spacing="5">
+                <Flex
+                // flexDirection={useBreakpointValue({
+                //   base: "column",
+                //   md: "row",
+                // })}
+                >
+                  <FormControl>
+                    <FormLabel htmlFor="pole">Operacao</FormLabel>
+                    <Input
+                      isRequired
+                      placeholder="Operacao"
+                      id="name"
+                      type="text"
+                      name="name"
+                      onChange={(e) => filterData(e.target.value)}
+                      width={300}
+                    />
+                  </FormControl>
+                  <FormControl className="toBottom">
+                    <Button
+                      variant="outline"
+                      border={"2px solid"}
+                      borderColor={"origem.500"}
+                      textColor={"origem.500"}
+                      _hover={{
+                        borderColor: "origem.600",
+                        backgroundColor: "origem.500",
+                        textColor: "white",
+                        transition: "all 0.4s",
+                      }}
+                      // onClick={onOpen}
+                    >
+                      Adicionar Cronograma
+                    </Button>
+                  </FormControl>
+                </Flex>
+              </Stack>
+              <Stack spacing="8">
+                <Flex>
+                  {filter && <StatisticsTable data={filter}></StatisticsTable>}
+                </Flex>
+              </Stack>
+            </Box>
+          </Stack>
+        </Sidebar>
+      )}
     </>
   );
 }
