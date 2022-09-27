@@ -42,8 +42,8 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
     infosOption.initialGrade
   );
 
-  console.log("registerForm", registerForm.values);
-  console.log("infosOption", infosOption);
+  // console.log("registerForm", registerForm.values);
+  // console.log("infosOption", infosOption);
 
   useEffect(() => {
     registerForm.setFieldValue("idOpcao", infosOption.opcaoId);
@@ -167,6 +167,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                                 md: "95%",
                               })}
                             >
+                              <option>0</option>
                               <option>1</option>
                               <option>2</option>
                               <option>3</option>

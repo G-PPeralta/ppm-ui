@@ -5,7 +5,10 @@ import { updateNovaOpcaoDePriorizacao } from "validations/ModaisRanking";
 
 import { useToast } from "contexts/Toast";
 
-import { updateOptionRanking } from "services/post/Priorizacao";
+import {
+  updateOptionRanking,
+  updateOptionRankingNota,
+} from "services/post/Priorizacao";
 
 import { useAuth } from "./useAuth";
 
@@ -39,9 +42,14 @@ export function useEdicaoOpcaoPriorizacao(opcAtual: any, initialGra: number) {
       try {
         // Rota update - opção ranking
         const { status } = await updateOptionRanking(
-          // newValues,
           newValues.idOpcao,
           newValues.rankingOpcao,
+          newValues.nom_usu_create
+        );
+
+        await updateOptionRankingNota(
+          newValues.idOpcao,
+          newValues.num_nota,
           newValues.nom_usu_create
         );
 

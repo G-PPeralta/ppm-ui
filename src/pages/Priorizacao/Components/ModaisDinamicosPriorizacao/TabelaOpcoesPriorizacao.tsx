@@ -21,7 +21,7 @@ import {
 
 import { getOpcoesRankings } from "services/get/Priorizacoes";
 
-import ModalDeletarOpcaoPriorizacao from "./DeletarOpcaoPriorizacao";
+// import ModalDeletarOpcaoPriorizacao from "./DeletarOpcaoPriorizacao";
 import ModalEditarOpcaoPriorizacao from "./EditarOpcaoPriorizacao";
 
 interface TableProps {
@@ -99,7 +99,7 @@ export function TabelaOpcoesPriorizacao(idRanking: TableProps) {
           nameRanking={rankingNome}
           initialGrade={op.num_nota}
         />
-        <ModalDeletarOpcaoPriorizacao />
+        {/* <ModalDeletarOpcaoPriorizacao /> */}
       </Td>
     </Tr>
   ));

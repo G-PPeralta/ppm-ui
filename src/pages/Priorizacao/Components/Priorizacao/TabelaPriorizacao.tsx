@@ -22,7 +22,7 @@ import {
 import { getPriorizacoes } from "services/get/Priorizacoes";
 
 import ModalPriorizacao from "../ModaisDinamicosPriorizacao/ModalPriorizacao";
-import ModalDeletarPriorizacao from "./DeletarPriorizacao";
+// import ModalDeletarPriorizacao from "./DeletarPriorizacao";
 
 export function TabelaPriorizacao() {
   const [pagAtual, setPagAtual] = useState(1);
@@ -81,7 +81,7 @@ export function TabelaPriorizacao() {
       <Td textAlign={"center"}>3</Td>
       <Td textAlign={"center"}>
         <ModalPriorizacao nomeRanking={prio.nom_ranking} idRanking={prio.id} />
-        <ModalDeletarPriorizacao />
+        {/* <ModalDeletarPriorizacao /> */}
       </Td>
     </Tr>
   ));

@@ -29,6 +29,17 @@ export async function updateOptionRanking(
   return { status };
 }
 
+export async function updateOptionRankingNota(
+  id: number,
+  newValue: string,
+  userName: string
+): Promise<{ status: number }> {
+  const { status } = await api.patch(
+    `rankings-opcoes/${id}/num_nota/${newValue}/${userName}`
+  );
+  return { status };
+}
+
 export async function postOptionRanking(
   payload: any
 ): Promise<{ status: number }> {
