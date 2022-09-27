@@ -3,7 +3,6 @@ import Select from "react-select";
 import { Flex, FormControl, FormLabel } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
-// import { TextError } from "components/TextError";
 
 function SelectFiltragem({
   registerForm,
@@ -43,9 +42,6 @@ function SelectFiltragem({
           isSearchable
           isDisabled={!!idCampanha}
         />
-        {/* {`registerForm.errors.${propName}` && (
-          <TextError>{`registerForm.errors.${propName}`}</TextError>
-        )} */}
       </FormControl>
     </>
   );

@@ -12,8 +12,12 @@ import { Ring } from "@uiball/loaders";
 import Sidebar from "components/SideBar";
 import StatusProjeto from "components/StatusProjeto";
 
-// import { campanhasMock, filtrarIntervencoes } from "services/get/Campanhas";
-import { getInfoCampanha } from "services/get/Infograficos";
+import { useFiltragemCampanha } from "hooks/useFiltragemCampanha";
+
+import {
+  // getInfoCampanha,
+  postGetInfoCampanha,
+} from "services/get/Infograficos";
 
 import { statusProjeto } from "../../utils/validateDate";
 import ColumnSPT from "./Components/ColumnSPT";
@@ -29,41 +33,39 @@ export function Infographics() {
   const [loading, setLoading] = useState(true);
   const [campanhas, setCampanhas] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
-  const [filtrado, setFiltrado] = useState(false);
+  const {
+    registerForm,
+    listaAreaAtuacao,
+    listaPocos,
+    listaTarefas,
+    listaResponsaveis,
+    listaSondas,
+  } = useFiltragemCampanha();
+
+  const listas = {
+    registerForm,
+    listaAreaAtuacao,
+    listaPocos,
+    listaTarefas,
+    listaResponsaveis,
+    listaSondas,
+  };
 
   const innerWidth = useBreakpointValue({ base: 0, md: 1, lg: 2, xl: 3 });
 
   const handleGetAll = async () => {
-    const campanhas = await getInfoCampanha();
-    setCampanhas(campanhas.data);
-    setLoading(false);
-  };
-
-  const handleGetFiltrado = async () => {
-    const campanhas = await getInfoCampanha();
+    const campanhas = await postGetInfoCampanha(registerForm.values);
     setCampanhas(campanhas.data);
     setLoading(false);
   };
 
   useEffect(() => {
-    if (filtrado) {
-      handleGetFiltrado();
-    } else {
-      handleGetAll();
-    }
+    handleGetAll();
   }, []);
 
   useEffect(() => {
-    if (filtrado) {
-      handleGetFiltrado();
-      // console.log("filtrado");
-    } else {
-      handleGetAll();
-      // console.log("não filtrado");
-    }
+    handleGetAll();
   }, [refresh]);
-
-  // console.log(filtrarIntervencoes(campanhasMock, "PIR-999"));
 
   return (
     <>
@@ -87,7 +89,8 @@ export function Infographics() {
                     <FiltrosModal
                       refresh={refresh}
                       setRefresh={setRefresh}
-                      setFiltrado={setFiltrado}
+                      listas={listas}
+                      registerForm={registerForm}
                     />
                   </Flex>
                 </Flex>

@@ -6,14 +6,22 @@ import { AtividadeLista, Tarefa } from "interfaces/Services";
 
 import { api, token } from "services/api";
 
-export async function getInfoCampanha(): Promise<{
-  data: any[];
-  status: number;
-}> {
-  const { data, status } = await api.get(`/campanha`, token());
-
+export async function postGetInfoCampanha(
+  payload: any
+): Promise<{ data: any[]; status: number }> {
+  const { data, status } = await api.post("/campanha", payload);
   return { data, status };
 }
+
+// ROTA NÃO EXISTE MAIS. SUBSTITUIDA POR POR #POST EM /campanha
+// export async function getInfoCampanha(): Promise<{
+//   data: any[];
+//   status: number;
+// }> {
+//   const { data, status } = await api.get(`/campanha`, token());
+
+//   return { data, status };
+// }
 
 export async function getInfoProjetos(): Promise<{
   data: any;

@@ -23,7 +23,7 @@ import {
 } from "services/get/CadastroModaisInfograficos";
 import {
   getAreaAtuacaoList,
-  getInfoCampanha,
+  postGetInfoCampanha,
   getSondaCampanha,
 } from "services/get/Infograficos";
 import { postNovaIntervencao } from "services/post/CadastroModaisInfograficos";
@@ -43,8 +43,19 @@ export function useCadastroIntervencao() {
   const [listaSondaCampanha, setListaSondaCampanha] = useState<any[]>([]);
   const [listaTarefas, setListaTarefas] = useState<Tarefas[]>([]);
 
+  const getAllCampanha = {
+    area_atuacao_id: null,
+    poco_id: null,
+    atividade_id: null,
+    responsavel_id: null,
+    data_inicio: null,
+    data_fim: null,
+    sonda_id: null,
+    status: null,
+  };
+
   const reqGet = async () => {
-    const campanha = await getInfoCampanha();
+    const campanha = await postGetInfoCampanha(getAllCampanha);
     const pocos = await getPocos();
     const areaAtuacao = await getAreaAtuacaoList();
     const responsaveis = await getResponsaveis();

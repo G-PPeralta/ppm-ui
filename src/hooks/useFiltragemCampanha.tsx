@@ -10,8 +10,10 @@ import {
   getResponsaveis,
   getTarefas,
 } from "services/get/CadastroModaisInfograficos";
-import { getAreaAtuacaoList, getInfoCampanha } from "services/get/Infograficos";
-import { postNovaIntervencao } from "services/post/CadastroModaisInfograficos";
+import {
+  getAreaAtuacaoList,
+  postGetInfoCampanha,
+} from "services/get/Infograficos";
 
 export function useFiltragemCampanha() {
   const { toast } = useToast();
@@ -22,12 +24,23 @@ export function useFiltragemCampanha() {
   const [listaResponsaveis, setListaResponsaveis] = useState<any[]>([]);
   const [listaSondas, setListaSondas] = useState<any[]>([]);
 
+  const initialValues: any = {
+    area_atuacao_id: null,
+    poco_id: null,
+    atividade_id: null,
+    responsavel_id: null,
+    data_inicio: null,
+    data_fim: null,
+    sonda_id: null,
+    status: null,
+  };
+
   const reqGet = async () => {
     const areaAtuacao = await getAreaAtuacaoList();
     const pocos = await getPocos();
     const tarefas = await getTarefas();
     const responsaveis = await getResponsaveis();
-    const campanha = await getInfoCampanha();
+    const campanha = await postGetInfoCampanha(initialValues);
 
     const arraySondas = campanha.data.map(({ sonda, id_campanha }: any) => ({
       sonda,
@@ -57,17 +70,6 @@ export function useFiltragemCampanha() {
     setListaSondas(sondasSorted);
   };
 
-  const initialValues: any = {
-    area_atuacao_id: null,
-    poco_id: null,
-    atividade_id: null,
-    responsavel_id: null,
-    data_inicio: null,
-    data_fim: null,
-    sonda_id: null,
-    status: null,
-  };
-
   const registerForm: any = useFormik({
     initialValues,
     validationSchema: cadastroNovaIntervencaoSchema,
@@ -86,7 +88,7 @@ export function useFiltragemCampanha() {
       setLoading(true);
 
       try {
-        const { status } = await postNovaIntervencao(newValues);
+        const { status } = await postGetInfoCampanha(newValues);
 
         if (status === 200 || status === 201) {
           toast.success("Intervenção cadastrada com sucesso!", {
