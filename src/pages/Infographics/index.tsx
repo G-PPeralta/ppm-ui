@@ -12,7 +12,12 @@ import { Ring } from "@uiball/loaders";
 import Sidebar from "components/SideBar";
 import StatusProjeto from "components/StatusProjeto";
 
-import { getInfoCampanha } from "services/get/Infograficos";
+import { useFiltragemCampanha } from "hooks/useFiltragemCampanha";
+
+import {
+  // getInfoCampanha,
+  postGetInfoCampanha,
+} from "services/get/Infograficos";
 
 import { statusProjeto } from "../../utils/validateDate";
 import ColumnSPT from "./Components/ColumnSPT";
@@ -28,21 +33,38 @@ export function Infographics() {
   const [loading, setLoading] = useState(true);
   const [campanhas, setCampanhas] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
+  const {
+    registerForm,
+    listaAreaAtuacao,
+    listaPocos,
+    listaTarefas,
+    listaResponsaveis,
+    listaSondas,
+  } = useFiltragemCampanha();
+
+  const listas = {
+    registerForm,
+    listaAreaAtuacao,
+    listaPocos,
+    listaTarefas,
+    listaResponsaveis,
+    listaSondas,
+  };
 
   const innerWidth = useBreakpointValue({ base: 0, md: 1, lg: 2, xl: 3 });
 
-  const handleGet = async () => {
-    const campanhas = await getInfoCampanha();
+  const handleGetAll = async () => {
+    const campanhas = await postGetInfoCampanha(registerForm.values);
     setCampanhas(campanhas.data);
     setLoading(false);
   };
 
   useEffect(() => {
-    handleGet();
+    handleGetAll();
   }, []);
 
   useEffect(() => {
-    handleGet();
+    handleGetAll();
   }, [refresh]);
 
   return (
@@ -64,7 +86,12 @@ export function Infographics() {
                   </Heading>
                   <Flex gap={4}>
                     <ExibirModal />
-                    <FiltrosModal />
+                    <FiltrosModal
+                      refresh={refresh}
+                      setRefresh={setRefresh}
+                      listas={listas}
+                      registerForm={registerForm}
+                    />
                   </Flex>
                 </Flex>
                 <Flex
