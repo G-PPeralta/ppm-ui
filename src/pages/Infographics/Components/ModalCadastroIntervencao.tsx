@@ -252,6 +252,7 @@ function ModalCadastroIntervencao({
                           name="comentarios"
                           value={registerForm.values.comentarios}
                           onChange={registerForm.handleChange}
+                          maxLength={255}
                         />
                       </FormControl>
                     </Stack>

@@ -58,14 +58,14 @@ export function useFiltragemCampanha() {
   };
 
   const initialValues: any = {
-    area_atuacao_id: 0,
-    poco_id: 0,
-    atividade_id: 0,
-    responsavel_id: 0,
-    data_inicio: "",
-    data_fim: "",
-    sonda_id: 0,
-    status: "",
+    area_atuacao_id: null,
+    poco_id: null,
+    atividade_id: null,
+    responsavel_id: null,
+    data_inicio: null,
+    data_fim: null,
+    sonda_id: null,
+    status: null,
   };
 
   const registerForm: any = useFormik({

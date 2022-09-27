@@ -89,11 +89,14 @@ function ModalCadastroAtividade() {
                             isRequired
                             placeholder="Digite o ID"
                             id="id_origem"
-                            type="number"
+                            type="text"
                             name="id_origem"
                             w={useBreakpointValue({ base: "100%", md: "100%" })}
-                            value={registerForm.values.id_origem}
+                            value={regexCaracteresEspeciais(
+                              registerForm.values.id_origem
+                            )}
                             onChange={registerForm.handleChange}
+                            maxLength={10}
                           />
                         </FormControl>
                       </Flex>
@@ -114,6 +117,7 @@ function ModalCadastroAtividade() {
                               registerForm.values.nom_atividade
                             )}
                             onChange={registerForm.handleChange}
+                            maxLength={100}
                           />
                         </FormControl>
                       </Flex>

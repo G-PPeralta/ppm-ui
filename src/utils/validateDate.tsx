@@ -1,15 +1,15 @@
 export const statusProjeto = [
   {
     status: "Não Aplicável",
-    color: "#F4DD06",
+    color: "#C2561A",
   },
   {
     status: "Não Iniciado",
-    color: "#FFB400",
+    color: "#585858",
   },
   {
     status: "Concluído",
-    color: "#059502",
+    color: "#027200",
   },
   {
     status: "Em Andamento",
@@ -17,7 +17,7 @@ export const statusProjeto = [
   },
   {
     status: "Atrasado",
-    color: "#F40606",
+    color: "#BD0000",
   },
 ];
 
@@ -26,18 +26,6 @@ export function validateDate(
   comp_pct: number, // comparação porcentagens
   pct_real: number // porcentagem realizada
 ) {
-  // switch (true) {
-  //   case pct_plan === 0 && comp_pct === 0:
-  //     return statusProjeto[1].color;
-  //   case pct_real === 100:
-  //     return statusProjeto[2].color;
-  //   case comp_pct === 1:
-  //     return statusProjeto[3].color;
-  //   case comp_pct < pct_plan:
-  //     return statusProjeto[4].color;
-  //   default:
-  //     return statusProjeto[0].color;
-  // }
   switch (true) {
     case pct_real === 100 && comp_pct === 1:
       return statusProjeto[2].color;

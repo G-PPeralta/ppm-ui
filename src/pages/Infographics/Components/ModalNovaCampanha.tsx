@@ -105,6 +105,7 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                           name="dsc_comentario"
                           value={registerForm.values.dsc_comentario}
                           onChange={registerForm.handleChange}
+                          maxLength={255}
                         />
                         {registerForm.errors.dsc_comentario &&
                           registerForm.touched.dsc_comentario && (
