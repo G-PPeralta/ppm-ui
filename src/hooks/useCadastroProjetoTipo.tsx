@@ -1,24 +1,39 @@
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
-// import { cadastroProjetoTipoSchema } from 'validations/ModaisCadastrosInfografico';
+import { Tarefas } from "interfaces/CadastrosModaisInfograficos";
 import { AtividadeLista } from "interfaces/Services";
+import { cadastroProjetoTipoSchema } from "validations/ModaisCadastrosInfografico";
 
 import { useToast } from "contexts/Toast";
 
+import { getTarefas } from "services/get/CadastroModaisInfograficos";
 import { getAtividadesList } from "services/get/Infograficos";
 import { postProjetoTipo } from "services/post/CadastroModaisInfograficos";
 
+import { useAuth } from "./useAuth";
+
 export function useCadastroProjetoTipo() {
+  const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [listaAtividades, setListaAtividades] = useState<AtividadeLista[]>([]);
+  const [listaTarefas, setListaTarefas] = useState<Tarefas[]>([]);
 
-  const carregarListaAtividade = async () => {
-    const { data } = await getAtividadesList();
-    const dataSorted = data.sort((a, b) => a.tarefa.localeCompare(b.tarefa));
-    // console.log('dataSorted', dataSorted);
-    setListaAtividades(dataSorted);
+  const reqGet = async () => {
+    const atividades = await getAtividadesList();
+    const tarefas = await getTarefas();
+
+    const atividadesSorted = atividades.data.sort((a, b) =>
+      a.tarefa.localeCompare(b.tarefa)
+    );
+
+    const tarefasSorted = tarefas.data.sort((a: Tarefas, b: Tarefas) =>
+      a.nom_atividade.localeCompare(b.nom_atividade)
+    );
+
+    setListaAtividades(atividadesSorted);
+    setListaTarefas(tarefasSorted);
   };
 
   const listaAtividadesPrecedentes = listaAtividades.map((atividade) => ({
@@ -27,22 +42,44 @@ export function useCadastroProjetoTipo() {
     checked: false,
   }));
 
+  const initialValues = {
+    nom_usu_create: user?.nome,
+    nom_projeto_tipo: "",
+    atividades: [
+      {
+        atividade_id_origem: "",
+        area_id: 0,
+        tarefa_id: 0,
+        qtde_dias: 0,
+        precedentes: [
+          {
+            id: 0,
+            nome: "",
+            checked: false,
+          },
+        ],
+      },
+    ],
+    comentarios: "",
+  };
+
   const registerForm = useFormik({
-    initialValues: {
-      nome: "",
-      atividades: [
-        {
-          atividadeId: 0,
-          precedentes: [0],
-        },
-      ],
-      comentarios: "",
-    },
-    // validationSchema: cadastroProjetoTipoSchema,
+    initialValues,
+    validationSchema: cadastroProjetoTipoSchema,
     onSubmit: async (values) => {
       const newValues = {
-        nome: values.nome,
-        atividades: values.atividades,
+        nom_usu_create: user?.nome,
+        nom_projeto_tipo: values.nom_projeto_tipo,
+        atividades: values.atividades.map((atividade) => ({
+          atividade_id_origem: atividade.atividade_id_origem,
+          area_id: atividade.area_id,
+          tarefa_id: atividade.tarefa_id,
+          qtde_dias: atividade.qtde_dias,
+          precedentes: atividade.precedentes.filter(
+            (precedente) => precedente.checked
+          ),
+          // .map((precedente) => precedente.id),
+        })),
         comentarios: values.comentarios,
       };
 
@@ -67,13 +104,20 @@ export function useCadastroProjetoTipo() {
   });
 
   useEffect(() => {
-    carregarListaAtividade();
+    reqGet();
   }, []);
+
+  useEffect(() => {
+    if (listaTarefas.length > 0) {
+      setLoading(false);
+    }
+  }, [listaTarefas]);
 
   return {
     registerForm,
     loading,
     listaAtividades,
     listaAtividadesPrecedentes,
+    listaTarefas,
   };
 }

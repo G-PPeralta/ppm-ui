@@ -22,6 +22,10 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { Project } from "models/Project.model";
+
+import ModalCadastrarPriorizacao from "./ModalCadastrarPriorizacao";
+import ModalDeletarProjeto from "./ModalDeletarProjeto";
+
 import "../projects.css";
 
 interface TableProps {
@@ -34,10 +38,9 @@ export function TabelaProjetos(props: TableProps) {
   // const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
-  const brl = Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
+  const brl = Intl.NumberFormat("pt-BR");
+
+  // console.log("dados tabela-projeto", data);
 
   const total = data.reduce(
     (accumulator, object) => accumulator + +object.valorTotalPrevisto,
@@ -78,16 +81,16 @@ export function TabelaProjetos(props: TableProps) {
 
   const tableData = data.slice(from, to).map((projeto, key) => (
     <Tr key={key}>
-      {/* <Td isNumeric>{projeto.id}</Td> */}
+      <Td isNumeric>{projeto.id}</Td>
       <Td>
         <Link to={`/detalhamento/${projeto.id}`}>
-          <Text>
+          <Text color={"#0047BB"}>
             {projeto.nome.length > 28 ? (
               <Tooltip label={projeto.nome} aria-label="">
-                {projeto.nome.substring(0, 25).toUpperCase() + "..."}
+                {projeto.nome.substring(0, 25) + "..."}
               </Tooltip>
             ) : (
-              projeto.nome.toUpperCase()
+              projeto.nome
             )}
           </Text>
         </Link>
@@ -98,29 +101,10 @@ export function TabelaProjetos(props: TableProps) {
       <Td>{projeto.prioridade}</Td>
       <Td>{projeto.complexidade}</Td>
       <Td>{projeto.responsavel}</Td>
+      <Td></Td>
       <Td>
-        {/* <IconButton
-          aria-label="Plus sign"
-          icon={<AiFillEdit />}
-          background="white"
-          variant="secondary"
-          color="#2D2926"
-          mr={2}
-          isRound={true}
-          size="sm"
-        /> */}
-        {/* <IconButton
-          aria-label="Plus sign"
-          icon={<FaTrash />}
-          background="white"
-          variant="secondary"
-          color="#F94144"
-          mr={2}
-          isRound={true}
-          size="sm"
-        /> */}
-
-        {/* <EditaValorModal /> */}
+        <ModalCadastrarPriorizacao projeto={projeto.id} />
+        <ModalDeletarProjeto projeto={projeto.id} />
       </Td>
     </Tr>
   ));
@@ -131,17 +115,20 @@ export function TabelaProjetos(props: TableProps) {
         <Table variant="unstyled">
           <Thead>
             <Tr background="origem.500" color="white">
+              <Th>ID</Th>
               <Th width="50">Nome</Th>
               <Th>Total Previsto</Th>
               <Th>Prioridade</Th>
               <Th>Complexidade</Th>
               <Th>Responsavel</Th>
               <Th>Coordenador</Th>
+              <Th>Ações</Th>
             </Tr>
           </Thead>
           <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
           <Tfoot>
             <Tr background="origem.200" color="white">
+              <Th></Th>
               <Th>Total</Th>
               <Th>{brl.format(total)}</Th>
               <Th></Th>

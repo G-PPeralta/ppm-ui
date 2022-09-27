@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
 import { NovaCampanha } from "interfaces/CadastrosModaisInfograficos";
@@ -6,6 +6,7 @@ import { cadastroNovaCampanhaSchema } from "validations/ModaisCadastrosInfografi
 
 import { useToast } from "contexts/Toast";
 
+import { getSonda } from "services/get/CadastroModaisInfograficos";
 import { postNovaCampanha } from "services/post/CadastroModaisInfograficos";
 
 import { useAuth } from "./useAuth";
@@ -14,6 +15,17 @@ export function useCadastroCampanha() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
+  const [listaSondas, setListaSondas] = useState<any[]>([]);
+
+  const reqGet = async () => {
+    const sondas = await getSonda();
+
+    const sondasSorted = sondas.data.sort((a: any, b: any) =>
+      a.nom_sonda.localeCompare(b.nom_sonda)
+    );
+
+    setListaSondas(sondasSorted);
+  };
 
   const initialValues: NovaCampanha = {
     nom_campanha: "",
@@ -54,8 +66,20 @@ export function useCadastroCampanha() {
     },
   });
 
+  useEffect(() => {
+    setLoading(true);
+    reqGet();
+  }, []);
+
+  useEffect(() => {
+    if (listaSondas.length > 0) {
+      setLoading(false);
+    }
+  }, [listaSondas]);
+
   return {
     registerForm,
     loading,
+    listaSondas,
   };
 }

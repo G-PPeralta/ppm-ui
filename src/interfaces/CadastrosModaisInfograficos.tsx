@@ -10,13 +10,22 @@ export interface CadastroTarefa {
   tarefa: string;
 }
 
-export interface AtividadesProjetoTipo {
-  atividadeId: number;
-  precedentes: number[];
+export interface PrecedentesCadastroProjetoTipo {
+  id: number;
+  nome: string;
+  checked: boolean;
 }
 
-export interface CadastroProjetoTipo {
-  nome: string;
+export interface AtividadesProjetoTipo {
+  atividade_id_origem: string;
+  area_id: number;
+  tarefa_id: number;
+  qtde_dias: number;
+  precedentes: PrecedentesCadastroProjetoTipo[];
+}
+
+export interface CadastroProjetoTipo extends User {
+  nom_projeto_tipo: string;
   atividades: AtividadesProjetoTipo[];
   comentarios: string;
 }
@@ -38,11 +47,20 @@ export interface CadastroIntervencao {
   observacoes: string;
 }
 
-export interface CadastroAtividade {
-  obs: string;
-  tarefaId: number;
-  areaAtuacaoId: number;
-  dias: number;
+export interface CadastroAtividade extends User {
+  id_origem: number;
+  nom_atividade: string;
+  responsavel_id: number;
+  area_atuacao: string;
+  nao_iniciar_antes_de: {
+    data: string;
+    checked: Boolean | null;
+  };
+  nao_terminar_depois_de: {
+    data: string;
+    checked: Boolean | null;
+  };
+  o_mais_breve_possivel: Boolean | null;
 }
 
 export interface CadastroPoco {
@@ -98,7 +116,7 @@ export interface NovoPoco {
 }
 
 export interface NovaSonda extends User {
-  sonda: string;
+  nome: string;
 }
 
 export interface NovaAtividade extends User {
@@ -111,4 +129,45 @@ export interface NovaAtividade extends User {
   id_campanha: number; // enviar id da campanha
   id_area: number; // enviar id da area de atuação
   nom_recurso: string; // enviar nome do recurso
+}
+
+export interface Responsavel {
+  id: number;
+  nome: string;
+  area_atuacao: string;
+}
+
+export interface AreaAtuacao {
+  id?: number;
+  tipo: string;
+  deletado: boolean;
+}
+
+export interface Area {
+  id: number;
+  nom_area: string;
+}
+
+export interface ListaCampo {
+  id: number;
+  campo: string;
+  poloId: number;
+}
+
+export interface ProjetoTipo {
+  id: number;
+  nom_projeto_tipo: string;
+}
+
+export interface Tarefas {
+  id: number;
+  id_origem: number;
+  nom_atividade: string;
+  responsavel_id: number;
+  area_atuacao: number;
+  nao_iniciar_antes_de: null;
+  nao_terminar_depois_de: null;
+  o_mais_breve_possivel: Boolean;
+  nom_usuario_create: string | null;
+  dat_usuario_create: string | null;
 }

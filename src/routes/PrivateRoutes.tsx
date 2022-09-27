@@ -9,6 +9,7 @@ import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
 import { GanttPage } from "pages/Gantt";
 import { Home } from "pages/Home";
 import { Infographics } from "pages/Infographics";
+import { LicoesAprendidasProjetos } from "pages/LicoesAprendidas";
 import { Fornecedores } from "pages/ListaDosFornecedores";
 import { NotFound } from "pages/NotFound";
 import { Permissions } from "pages/Permissions";
@@ -58,6 +59,7 @@ export function PrivateRoutes() {
       />
       <Route path="/estatisticas/" element={<Statistics />} />
       <Route path="/atividade/:id/visao-por-area" element={<VisaoPorArea />} />
+      <Route path="/licoesAprendidas" element={<LicoesAprendidasProjetos />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

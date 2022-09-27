@@ -5,12 +5,17 @@ function padTo2Digits(num: number) {
   return num.toString().padStart(2, "0");
 }
 
-export function formatDate(date: Date) {
-  return [
-    padTo2Digits(date.getDate()),
-    padTo2Digits(date.getMonth() + 1),
-    date.getFullYear(),
-  ].join("/");
+export function formatDate(date: Date | null) {
+  if (date === null) {
+    return null;
+  } else {
+    const dateFormated = new Date(date);
+    return [
+      padTo2Digits(dateFormated.getDate()),
+      padTo2Digits(dateFormated.getMonth() + 1),
+      dateFormated.getFullYear(),
+    ].join("/");
+  }
 }
 
 // formata data para o formato yyyy-mm-dd
@@ -20,4 +25,22 @@ export function formatDateToYMD(date: Date) {
     padTo2Digits(date.getMonth() + 1),
     padTo2Digits(date.getDate()),
   ].join("-");
+}
+
+export function formatDateToddMMyyyyhhmm(date: Date | null) {
+  if (date === null) {
+    return null;
+  } else {
+    const dateFormated = new Date(date);
+    const data: any = [
+      padTo2Digits(dateFormated.getDate()),
+      padTo2Digits(dateFormated.getMonth() + 1),
+      dateFormated.getFullYear(),
+    ].join("/");
+    const time = [
+      padTo2Digits(dateFormated.getHours()),
+      padTo2Digits(dateFormated.getMinutes()),
+    ].join(":");
+    return data + ", " + time;
+  }
 }

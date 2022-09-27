@@ -5,18 +5,18 @@ import { SetStateAction, useEffect, useState } from "react";
 
 // import { useToast } from "contexts/Toast";
 
+import { ListaSonda } from "interfaces/CadastrosModaisInfograficos";
 import { Budget } from "models/Budget.model";
-import { Project } from "models/Project.model";
 
 import { getBudgets } from "services/get/GetBudget";
-import { getProjects } from "services/get/GetProject";
+import { getInfoCampanha } from "services/get/Infograficos";
 
 export function useBudgets() {
   // const { toast } = useToast();
 
   const [loading, setLoading] = useState(false);
   const [budgets, setBudgets] = useState<Budget[]>([]);
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<ListaSonda[]>([]);
   const [budgetFilter, setBudgetsFilter] = useState<Budget[]>();
   const [projectSelected, setProjectSelected] = useState("");
 
@@ -29,8 +29,12 @@ export function useBudgets() {
   };
 
   const gerarProjectList = async () => {
-    const data = await getProjects();
-    setProjects(data);
+    const { data } = await getInfoCampanha();
+    const campanhas = data.map((d) => ({
+      nome: d.sonda,
+      id: d.id_campanha,
+    }));
+    setProjects(campanhas);
   };
 
   const filterByProject = () => {
@@ -39,8 +43,10 @@ export function useBudgets() {
       (b) => b.projeto.id.toString() === projectSelected
     );
 
-    if (filtered) {
+    if (projectSelected) {
       setBudgetsFilter([...filtered]);
+    } else {
+      setBudgetsFilter([...budgets]);
     }
 
     setLoading(false);

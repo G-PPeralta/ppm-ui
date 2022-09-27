@@ -1,14 +1,14 @@
 import { IconType } from "react-icons";
 import { AiOutlineBarChart } from "react-icons/ai";
 import { BiData } from "react-icons/bi";
-// import { BsBarChartSteps } from "react-icons/bs";
+import { BsBarChartSteps } from "react-icons/bs";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import {
   FiHome,
   // FiTrendingUp,
   // FiEdit2,
   FiBarChart,
-  // FiActivity,
+  FiActivity,
   // FiUsers,
   FiFile,
   // FiGrid,
@@ -29,13 +29,28 @@ export const LinkItems: Array<LinkItemProps> = [
     children: [
       { name: "Dashboard", icon: FiHome, link: "/" },
       { name: "Projetos", icon: FaRegMoneyBillAlt, link: "/projects" },
-      {
-        name: "Fornecedores",
-        icon: FaRegMoneyBillAlt,
-        link: "/desenvolvimento",
-      },
+      // {
+      //   name: "Fornecedores",
+      //   icon: FaRegMoneyBillAlt,
+      //   link: "/desenvolvimento",
+      // },
       { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/budgets" },
       { name: "Importar Dados", icon: BiData, link: "/upload" },
+      {
+        name: "Fornecedores",
+        icon: FiActivity,
+        link: "/fornecedores",
+      },
+      {
+        name: "Lições Aprendidas",
+        icon: FiActivity,
+        link: "/licoesAprendidas",
+      },
+      {
+        name: "Detalhamento Projeto",
+        icon: BsBarChartSteps,
+        link: "/detalhamento/191",
+      },
     ],
   },
 
@@ -44,6 +59,7 @@ export const LinkItems: Array<LinkItemProps> = [
     icon: FiBarChart,
     children: [
       { name: "Infográficos", icon: FiBarChart, link: "/infographics" },
+      { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/budgets" },
     ],
   },
 

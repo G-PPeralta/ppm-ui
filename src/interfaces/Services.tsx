@@ -233,6 +233,36 @@ export interface TotalDeProjetos {
   totalProjetos: number;
 }
 
+export interface ProjetosList {
+  id: number;
+  nomeProjeto: string;
+  descricao?: string;
+  justificativa?: string;
+  valorTotalPrevisto?: number;
+  dataInicio: Date;
+  dataFim: Date;
+  poloId: number;
+  localId: number;
+  solicitanteId: number;
+  classificacaoId?: number;
+  divisaoId: number;
+  gateId?: number;
+  tipoProjetoId: number;
+  // demandaId?: number;
+  statusId: number;
+  prioridadeId: number;
+  complexidadeId: number;
+  dataInicioReal?: Date;
+  dataFimReal?: Date;
+  comentarios?: string;
+  deletado: boolean;
+  item: number;
+  // numero: number;
+  responsavel_id?: number;
+  coordenador_id?: number;
+  elemento_pep: string;
+}
+
 export interface ProjetosInfo {
   id: number;
   nomeProjeto: string;
@@ -269,12 +299,6 @@ export interface CoordenadorRetorno {
   coordenadorNome: string;
 }
 
-export interface AreaAtuacao {
-  id?: number;
-  tipo: string;
-  deletado: boolean;
-}
-
 export interface AtividadeLista {
   id: number;
   tarefa: string;
@@ -293,4 +317,75 @@ export interface Fornecedor {
   realizado: number;
   responsavel: string;
   descricao: string;
+}
+
+export interface LicoesAprendidas {
+  id: number;
+  id_projeto: number;
+  id_categoria: number;
+  dat_usu_create: string;
+  txt_licao_aprendida: string;
+  txt_acao: string;
+  nom_usu_create: string;
+}
+
+export interface LicoesAprendidasPayload {
+  id_projeto: number;
+  dat_usu_create?: string;
+  txt_licao_aprendida: string;
+  txt_acao: string;
+}
+
+export interface Categorias {
+  id: number;
+  nom_categoria: string;
+}
+
+export interface Opcao {
+  id?: number;
+  nom_opcao: string;
+  opcao_id: number;
+}
+
+export interface ProjetosRanking {
+  Benefício: Opcao[];
+  Regulatório: Opcao[];
+  Operação: Opcao[];
+  Prioridade: Opcao[];
+  Complexidade: Opcao[];
+  "Estratégia para o Negócio": Opcao[];
+}
+
+export interface ProjetosRankingPayload {
+  id_projeto: number;
+  beneficio: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  regulatorio: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  operacao: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  prioridade: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  complexidade: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  estrategia: {
+    opcao_id: string;
+    id_ranking: number;
+  };
+  dsc_comentario: string;
+  nom_usu_create: string;
+}
+
+export interface ProjetoProgresso {
+  fn_cron_calc_pct_real: string;
 }

@@ -4,11 +4,21 @@ import { useParams } from "react-router-dom";
 import { Box, Flex } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { ICardInfoProjeto } from "interfaces/DetalhamentoProjetos";
+import {
+  Categorias,
+  LicoesAprendidas,
+  ProjetoProgresso,
+} from "interfaces/Services";
 
 import { Gantt } from "components/Gantt";
 import Sidebar from "components/SideBar";
 
-import { getInfoProjetos } from "services/get/DetalhamentoProjetos";
+import { getCategorias } from "services/get/Categorias";
+import {
+  getInfoProjetos,
+  getProgressoProjeto,
+} from "services/get/DetalhamentoProjetos";
+import { getLicoesAprendidas } from "services/get/LicoesAprendidas";
 
 import BotoesModais from "./components/BotoesModais";
 import CardInfoProjeto from "./components/CardInfoProjeto";
@@ -29,6 +39,9 @@ function DetalhamentoProjeto() {
     nome_responsavel: "",
     coordenador_nome: "",
   });
+  const [licoes, setLicoes] = useState([] as LicoesAprendidas[]);
+  const [categorias, setCategorias] = useState([] as Categorias[]);
+  const [progresso, setProgresso] = useState([] as ProjetoProgresso[]);
 
   const handleGetInfoProjetos = async () => {
     if (id) {
@@ -38,9 +51,45 @@ function DetalhamentoProjeto() {
     }
   };
 
+  async function handleGetLicoes() {
+    if (id) {
+      const response = await getLicoesAprendidas(id);
+      setLicoes(response.data as LicoesAprendidas[]);
+    }
+  }
+
+  async function handleGetCategorias() {
+    const response = await getCategorias();
+    setCategorias(response.data);
+  }
+
+  async function handleGetProgresso() {
+    const response = await getProgressoProjeto();
+    setProgresso(response.data);
+  }
+
   useEffect(() => {
     handleGetInfoProjetos();
+    handleGetLicoes();
+    handleGetCategorias();
+    handleGetProgresso();
+
+    return () =>
+      setInfoProjeto({
+        nome_projeto: "",
+        data_inicio: null,
+        data_fim: null,
+        numero: 0,
+        polo: "",
+        local: "",
+        demanda: "",
+        nome_responsavel: "",
+        coordenador_nome: "",
+      });
+    // handleGetLicoes();
   }, []);
+
+  // console.log(progresso[0].fn_cron_calc_pct_real);
 
   return (
     <>
@@ -66,9 +115,17 @@ function DetalhamentoProjeto() {
               shrink={1}
               gap={4}
             >
-              <CardInfoProjeto infoProjeto={infoProjeto} />
+              <CardInfoProjeto
+                infoProjeto={infoProjeto}
+                progresso={progresso}
+              />
               <CardOrcamento />
-              <BotoesModais />
+              <BotoesModais
+                licoes={licoes}
+                setLicoes={setLicoes}
+                categorias={categorias}
+                callBack={handleGetLicoes}
+              />
             </Flex>
             <Gantt />
             <GraficoCurvaS />

@@ -1,10 +1,10 @@
 import { Flex } from "@chakra-ui/react";
 
 import BotaoDescricaoEJustificativa from "./BotaoDescricaoEJustificativa";
-import BotaoLicoesAprendidas from "./BotaoLicoesAprendidas";
-import BotaoListadeTarefas from "./BotaoListaDeTarefas";
+import LicoesAprendidasModal from "./LicoesAprendidas/LicoesAprendidasModal";
+import BotaoListadeTarefas from "./Tarefas/BotaoListaDeTarefas";
 
-function BotoesModais() {
+function BotoesModais({ licoes, setLicoes, categorias, callBack }: any) {
   return (
     <>
       <Flex
@@ -17,7 +17,12 @@ function BotoesModais() {
       >
         <BotaoDescricaoEJustificativa />
         <BotaoListadeTarefas />
-        <BotaoLicoesAprendidas />
+        <LicoesAprendidasModal
+          licoes={licoes}
+          setLicoes={setLicoes}
+          categorias={categorias}
+          callBack={callBack}
+        />
       </Flex>
     </>
   );
