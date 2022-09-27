@@ -1,15 +1,15 @@
 export const statusProjeto = [
   {
     status: "Não Aplicável",
-    color: "#F4DD06",
+    color: "#C2561A",
   },
   {
     status: "Não Iniciado",
-    color: "#FFB400",
+    color: "#585858",
   },
   {
     status: "Concluído",
-    color: "#059502",
+    color: "#027200",
   },
   {
     status: "Em Andamento",
@@ -17,7 +17,7 @@ export const statusProjeto = [
   },
   {
     status: "Atrasado",
-    color: "#F40606",
+    color: "#BD0000",
   },
 ];
 
