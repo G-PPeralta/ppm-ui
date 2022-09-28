@@ -9,6 +9,7 @@ import {
   Flex,
   // FormLabel,
   // HStack,
+  Text,
   Stack,
   useBreakpointValue,
   useColorModeValue,
@@ -112,14 +113,28 @@ export function Fornecedores() {
                       background="white"
                       variant="primary"
                       color="origem.500"
-                      border={"2px"}
+                      border="2px"
+                      padding={2}
+                      borderRadius={6}
                       w={useBreakpointValue({ base: "100%", md: "21%" })}
+                      _hover={{
+                        background: "#f5f5f5",
+                        transition: "all 0.4s",
+                        color: "origem.300",
+                        cursor: "pointer",
+                        borderColor: "origem.500",
+                      }}
                       onClick={() => {
                         navigate("/providers-registration");
                       }}
                       mb={"15px"}
                     >
-                      Cadastrar Fornecedores
+                      <Text
+                        fontSize={useBreakpointValue({ base: "sm", md: "sm" })}
+                        color={"origem.500"}
+                      >
+                        Cadastrar Fornecedores
+                      </Text>
                       <Icon as={AiFillPlusCircle} fontSize="20px" ml={1} />
                     </Button>
                   </Flex>
@@ -251,7 +266,6 @@ export function Fornecedores() {
                 onClose={onClose}
                 fornecedor={editFornecedor}
                 onUpdate={handleUpdateFornecedor}
-                // setEditFornecedor={setEditFornecedor}
               />
               <Stack spacing="6" alignItems={"center"}></Stack>
             </Box>{" "}

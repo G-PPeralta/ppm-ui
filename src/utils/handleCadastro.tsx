@@ -19,11 +19,13 @@ export const handleCadastrarRefresh = async (
   refresh: boolean
 ) => {
   await form.submitForm();
-  setRefresh(!refresh);
+
   if (form.isValid) {
     await form.resetForm();
+    setRefresh(!refresh);
     onClose();
   }
+  setRefresh(!refresh);
 };
 
 export const handleCancelarDatePicker = (

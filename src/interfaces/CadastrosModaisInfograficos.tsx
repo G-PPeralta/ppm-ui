@@ -48,7 +48,7 @@ export interface CadastroIntervencao {
 }
 
 export interface CadastroAtividade extends User {
-  id_origem: number;
+  id_origem: string;
   nom_atividade: string;
   responsavel_id: number;
   area_atuacao: string;

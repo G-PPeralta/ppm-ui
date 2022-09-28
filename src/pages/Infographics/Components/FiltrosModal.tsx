@@ -5,30 +5,113 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Select,
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
   useDisclosure,
-  Box,
   Input,
   useBreakpointValue,
 } from "@chakra-ui/react";
 
-function FiltrosModal() {
+// import { useFiltragemCampanha } from "hooks/useFiltragemCampanha";
+
+import { statusProjeto } from "utils/validateDate";
+
+import { postGetInfoCampanha } from "services/get/Infograficos";
+
+import SelectFiltragem from "./SelectFiltragem";
+
+type Props = {
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  listas: any;
+  registerForm: any;
+};
+
+function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const {
+    listaAreaAtuacao,
+    listaPocos,
+    listaTarefas,
+    listaResponsaveis,
+    listaSondas,
+  } = listas;
+
+  const areaAtuacaoOptions = listaAreaAtuacao.map((area: any) => ({
+    value: area.id,
+    label: area.tipo,
+  }));
+
+  const pocoOptions = listaPocos.map((poco: any) => ({
+    value: poco.id,
+    label: poco.poco,
+  }));
+
+  const tarefaOptions = listaTarefas.map((tarefa: any) => ({
+    value: tarefa.id,
+    label: tarefa.nom_atividade,
+  }));
+
+  const responsavelOptions = listaResponsaveis.map((responsavel: any) => ({
+    value: responsavel.id,
+    label: responsavel.nome,
+  }));
+
+  const sondaOptions = listaSondas.map((sonda: any) => ({
+    value: sonda.id_campanha,
+    label: sonda.sonda,
+  }));
+
+  const statusProjetosOptions = statusProjeto.map((status: any) => ({
+    value: status.id,
+    label: status.status,
+  }));
+
+  const postFiltros = async () => {
+    await postGetInfoCampanha(registerForm.values);
+  };
+
+  const handleFiltrarCampanhas = () => {
+    postFiltros();
+    setRefresh(!refresh);
+    onClose();
+  };
+
+  const handleRemoverFiltro = async () => {
+    await registerForm.resetForm();
+    postFiltros();
+    setRefresh(!refresh);
+    onClose();
+  };
+
+  const getValue = (options: any, index: number) => ({
+    value: options?.[index]?.value,
+    label: options?.[index]?.label,
+  });
+
+  const getValueByOptionId = (options: any, id: number) => {
+    const index = options.findIndex((option: any) => option.value === id);
+    return getValue(options, index);
+  };
 
   return (
     <>
       <Button
-        onClick={onOpen}
         rightIcon={<IoMdArrowDropdown />}
-        colorScheme="blue"
-        variant="ghost"
+        textColor={"origem.500"}
+        backgroundColor={"transparent"}
+        _hover={{
+          borderColor: "origem.600",
+          backgroundColor: "origem.500",
+          textColor: "white",
+          transition: "all 0.4s",
+        }}
+        onClick={onOpen}
       >
         Filtrar
       </Button>
@@ -45,89 +128,117 @@ function FiltrosModal() {
           >
             Filtros
           </ModalHeader>
-          <ModalCloseButton color={"white"} />
           <ModalBody mt={4}>
             <FormControl>
               <Flex direction={"column"} gap={5}>
-                <Box>
-                  <FormLabel htmlFor="area">Área</FormLabel>
-                  <Select variant="unstyled">
-                    <option value="1">Valor 1</option>
-                    <option value="2">Valor 2</option>
-                    <option value="3">Valor 3</option>
-                  </Select>
-                </Box>
+                <SelectFiltragem
+                  registerForm={registerForm}
+                  nomeSelect={"Área"}
+                  propName={"area_atuacao_id"}
+                  options={areaAtuacaoOptions}
+                  required={false}
+                  value={getValueByOptionId(
+                    areaAtuacaoOptions,
+                    registerForm.values.area_atuacao_id
+                  )}
+                />
 
-                <Box>
-                  <FormLabel htmlFor="poco">Poço</FormLabel>
-                  <Select variant="unstyled">
-                    <option value="1">Valor 1</option>
-                    <option value="2">Valor 2</option>
-                    <option value="3">Valor 3</option>
-                  </Select>
-                </Box>
+                <SelectFiltragem
+                  registerForm={registerForm}
+                  nomeSelect={"Poço"}
+                  propName={"poco_id"}
+                  options={pocoOptions}
+                  required={false}
+                  value={getValueByOptionId(
+                    pocoOptions,
+                    registerForm.values.poco_id
+                  )}
+                />
 
-                <Box>
-                  <FormLabel htmlFor="atividade">Atividade</FormLabel>
-                  <Select variant="unstyled">
-                    <option value="1">Valor 1</option>
-                    <option value="2">Valor 2</option>
-                    <option value="3">Valor 3</option>
-                  </Select>
-                </Box>
+                <SelectFiltragem
+                  registerForm={registerForm}
+                  nomeSelect={"Atividade"}
+                  propName={"atividade_id"}
+                  options={tarefaOptions}
+                  required={false}
+                  value={getValueByOptionId(
+                    tarefaOptions,
+                    registerForm.values.atividade_id
+                  )}
+                />
 
-                <Box>
-                  <FormLabel htmlFor="responsavel">Responsável</FormLabel>
-                  <Select variant="unstyled">
-                    <option value="1">Valor 1</option>
-                    <option value="2">Valor 2</option>
-                    <option value="3">Valor 3</option>
-                  </Select>
-                </Box>
+                <SelectFiltragem
+                  registerForm={registerForm}
+                  nomeSelect={"Responsável"}
+                  propName={"responsavel_id"}
+                  options={responsavelOptions}
+                  required={false}
+                  value={getValueByOptionId(
+                    responsavelOptions,
+                    registerForm.values.responsavel_id
+                  )}
+                />
 
                 <Flex justify={"space-between"} gap={5}>
                   <Flex direction={"column"} grow={1}>
-                    <FormLabel htmlFor="dataInicio">Data Inicio</FormLabel>
+                    <FormLabel htmlFor="data_inicio">Data Inicio</FormLabel>
                     <Input
                       isRequired
                       placeholder="dd/mm/aaaa"
-                      id="dataInicio"
+                      id="data_inicio"
                       type="date"
-                      name="dataInicio"
+                      name="data_inicio"
                       w={useBreakpointValue({ base: "100%", md: "100%" })}
+                      onChange={(e) => {
+                        registerForm.setFieldValue(
+                          "data_inicio",
+                          e.target.value
+                        );
+                      }}
+                      value={registerForm.values.data_inicio}
                     />
                   </Flex>
 
                   <Flex direction={"column"} grow={1}>
-                    <FormLabel htmlFor="dataFim">Data Fim</FormLabel>
+                    <FormLabel htmlFor="data_fim">Data Fim</FormLabel>
                     <Input
                       isRequired
                       placeholder="dd/mm/aaaa"
-                      id="dataFim"
+                      id="data_fim"
                       type="date"
-                      name="dataFim"
+                      name="data_fim"
                       w={useBreakpointValue({ base: "100%", md: "100%" })}
+                      onChange={(e) => {
+                        registerForm.setFieldValue("data_fim", e.target.value);
+                      }}
+                      value={registerForm.values.data_fim}
                     />
                   </Flex>
                 </Flex>
 
-                <Box>
-                  <FormLabel htmlFor="sonda">Sonda</FormLabel>
-                  <Select variant="unstyled">
-                    <option value="1">Valor 1</option>
-                    <option value="2">Valor 2</option>
-                    <option value="3">Valor 3</option>
-                  </Select>
-                </Box>
+                <SelectFiltragem
+                  registerForm={registerForm}
+                  nomeSelect={"Sonda"}
+                  propName={"sonda_id"}
+                  options={sondaOptions}
+                  required={false}
+                  value={getValueByOptionId(
+                    sondaOptions,
+                    registerForm.values.sonda_id
+                  )}
+                />
 
-                <Box>
-                  <FormLabel htmlFor="status">Status</FormLabel>
-                  <Select variant="unstyled">
-                    <option value="1">Valor 1</option>
-                    <option value="2">Valor 2</option>
-                    <option value="3">Valor 3</option>
-                  </Select>
-                </Box>
+                <SelectFiltragem
+                  registerForm={registerForm}
+                  nomeSelect={"Status"}
+                  propName={"status"}
+                  options={statusProjetosOptions}
+                  required={false}
+                  value={getValueByOptionId(
+                    statusProjetosOptions,
+                    registerForm.values.status
+                  )}
+                />
               </Flex>
             </FormControl>
           </ModalBody>
@@ -136,7 +247,7 @@ function FiltrosModal() {
               <Button
                 variant="ghost"
                 color="red"
-                onClick={() => onClose()}
+                onClick={() => handleRemoverFiltro()}
                 _hover={{
                   background: "red.500",
                   transition: "all 0.4s",
@@ -149,7 +260,7 @@ function FiltrosModal() {
                 background="origem.300"
                 variant="primary"
                 color="white"
-                onClick={() => onClose()}
+                onClick={() => handleFiltrarCampanhas()}
                 _hover={{
                   background: "origem.500",
                   transition: "all 0.4s",

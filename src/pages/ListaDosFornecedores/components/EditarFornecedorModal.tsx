@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BsPlusLg } from "react-icons/bs";
+// import { BsPlusLg } from "react-icons/bs";
 
 import {
   Button,
@@ -7,7 +7,7 @@ import {
   FormControl,
   FormLabel,
   Input,
-  useBreakpointValue,
+  // useBreakpointValue,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -15,9 +15,9 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  IconButton,
-  Box,
-  Text,
+  // IconButton,
+  // Box,
+  // Text,
 } from "@chakra-ui/react";
 
 import { Fornecedor } from "../index";
@@ -85,7 +85,7 @@ export function EditarFornecedorModal({
 
   return (
     <Flex>
-      <Box
+      {/* <Box
         display={"flex"}
         alignItems={"center"}
         border="2px"
@@ -117,7 +117,7 @@ export function EditarFornecedorModal({
         >
           EDITAR FORNECEDOR
         </Text>
-      </Box>
+      </Box> */}
       <Modal isOpen={isOpen} onClose={onClose} size="4xl">
         <ModalOverlay />
         <ModalContent>
@@ -196,7 +196,7 @@ export function EditarFornecedorModal({
               background="origem.300"
               variant="primary"
               color="white"
-              onClick={() =>
+              onClick={() => {
                 onUpdate({
                   id: fornecedor.id,
                   fornecedor: nome,
@@ -204,8 +204,8 @@ export function EditarFornecedorModal({
                   realizado,
                   responsavel,
                   descricao,
-                })
-              }
+                });
+              }}
               _hover={{
                 background: "origem.500",
                 transition: "all 0.4s",

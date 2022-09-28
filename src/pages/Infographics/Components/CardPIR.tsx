@@ -40,7 +40,7 @@ function CardPIR({ poco, index }: any) {
       Se o valor for exatamente esse, o componente não deverá ser renderizado. */}
       <Flex direction={"row"} gap={4} onClick={() => transfer()}>
         <Flex align={"center"} justify={"center"}>
-          <Heading as="h3" size="md" textAlign={"center"} width={"50px"}>
+          <Heading as="h3" size="md" textAlign={"center"} width={"60px"}>
             {index === 0 ? "Atual" : `${index + 1}º`}
           </Heading>
         </Flex>
@@ -49,9 +49,9 @@ function CardPIR({ poco, index }: any) {
           align={"center"}
           justify={"center"}
           backgroundColor={validateDate(
-            poco.pct_plan,
-            poco.comp_pct,
-            poco.pct_real
+            Number(poco.pct_plan),
+            Number(poco.comp_pct),
+            Number(poco.pct_real)
           )}
           px={4}
           py={2}
@@ -59,7 +59,7 @@ function CardPIR({ poco, index }: any) {
           _hover={{
             cursor: "pointer",
           }}
-          w={"114px"}
+          w={"150px"}
         >
           <Text fontSize={"lg"} color={"white"} fontWeight={"bold"}>
             {poco.poco}
