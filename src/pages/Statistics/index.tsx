@@ -27,12 +27,27 @@ function Statistics() {
     const newData: StatisticsTableData[] = [];
     payload.forEach((s: { id_sonda: number; sonda: string; pocos: any[] }) =>
       s.pocos.forEach((p) => {
+        const hrs_reais = p.atividades.map((e: any) => Number(e.hrs_reais));
+        const med =
+          hrs_reais.reduce((a: any, b: any) => a + b, 0) / hrs_reais.length;
+        const dp = Math.sqrt(
+          hrs_reais
+            .map((x: any) => Math.pow(x - med, 2))
+            .reduce((a: any, b: any) => a + b) / hrs_reais.length
+        );
+        // TODO use deve ser p/ cada atividade
+        const use = ["max", "min", "med", "dp"][Math.floor(Math.random() * 4)];
         newData.push({
           sonda: s.sonda,
           id_sonda: s.id_sonda,
           poco: p.poco,
           id_poco: p.id_poco,
           atividades: p.atividades,
+          max: Math.max(...hrs_reais),
+          min: Math.min(...hrs_reais),
+          med: Math.floor(med),
+          dp: Math.floor(dp),
+          use,
         });
       })
     );

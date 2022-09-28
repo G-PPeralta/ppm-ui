@@ -3,13 +3,13 @@ import { useLocation } from "react-router-dom";
 
 import {
   Box,
-  Button,
+  Text,
   Heading,
   Stack,
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { StatisticsGanttProps, StatisticsTableData } from "interfaces/Services";
+import { StatisticsGanttProps } from "interfaces/Services";
 
 import Sidebar from "components/SideBar";
 
@@ -19,35 +19,50 @@ function StatisticsGantt() {
   const { state }: any = useLocation();
   const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
   const toolbarOptions = ["ZoomIn", "ZoomOut"];
+  const [projeto, setProjeto] = useState({ sonda: "", poco: "" });
 
-  const formatToGanttData = (data: StatisticsTableData[]) => {
+  const formatToGanttData = (data: any) => {
     if (!data) return;
-    const newGantt = data.map((p: StatisticsTableData) => ({
-      TaskID: p.id_poco,
-      TaskName: p.poco,
-      // StartDate: "2022-12-11T03:00:00.000Z",
-      // EndDate: "2022-12-14T03:00:00.000Z",
-      // BaselineStartDate: "2022-12-11T03:00:00.000Z",
-      // BaselineEndDate: "2022-12-12T03:00:00.000Z",
-      // Duration: 0, // Number(p.hrs_reais),
-      // BaselineDuration: 8, // Number(p.hrs_totais),
-      // Progress: Math.random() * 100, // TODO: Math.floor(atividade.hrs_reais / atividade.hrs_totais)
-      subtasks: p.atividades?.map((t) => ({
-        // Item: item || "",
+    const newGantt = data.atividades?.map((t: any) => {
+      // TODO: setar qual valor (use) usado no duration
+      let duration;
+      if (
+        Number(t.pct_plan) === 1 ||
+        Number(t.hrs_reais) > Number(t.hrs_totais)
+      ) {
+        duration = Number(t.hrs_reais);
+      } else {
+        duration = Number(t.hrs_totais);
+      }
+      const { max, min, med, dp } = data;
+      let color;
+      if (duration < med - dp) color = "green";
+      else if (duration >= med - dp && duration < med + dp / 2)
+        color = "yellow";
+      else if (duration >= med + dp / 2 && duration < med + dp) color = "red";
+      else if (duration >= med + dp) color = "black";
+      return {
         TaskID: t.id_atividade,
         TaskName: t.nome_atividade,
         StartDate: t.inicio_real, // t.inicio_real,
         EndDate: t.fim_real, // t.,
-        BaselineStartDate: t.inicio_planejado
-          ? new Date(t.inicio_planejado)
-          : null,
+        BaselineStartDate: t.inicio_planejado,
         BaselineEndDate: t.fim_planejado,
-        Duration: Number(t.hrs_reais),
+        Duration: duration,
         BaselineDuration: Number(t.hrs_totais),
         Progress: Number(t.pct_plan) * 100,
-      })),
-    }));
+        max,
+        min,
+        med,
+        dp,
+        color,
+      };
+    });
     setGanttData(newGantt);
+    setProjeto({
+      sonda: data.sonda,
+      poco: data.poco,
+    });
   };
 
   useEffect(() => {
@@ -73,23 +88,9 @@ function StatisticsGantt() {
             borderRadius={{ base: "none", sm: "xl" }}
           >
             <Heading as="h3" size="md" mb={5}>
-              Projetos
+              {projeto.sonda}
             </Heading>
-            <Button
-              variant="outline"
-              border={"2px solid"}
-              borderColor={"origem.500"}
-              textColor={"origem.500"}
-              _hover={{
-                borderColor: "origem.600",
-                backgroundColor: "origem.500",
-                textColor: "white",
-                transition: "all 0.4s",
-              }}
-            >
-              Gerar Cronograma
-            </Button>
-
+            <Text>{projeto.poco}</Text>
             <Stack spacing="8">
               <Gantt toolbarOptions={toolbarOptions} data={ganttData} />
             </Stack>

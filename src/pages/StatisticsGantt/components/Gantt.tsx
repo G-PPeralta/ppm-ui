@@ -29,22 +29,22 @@ export function Gantt({ data, toolbarOptions }: ganttOptionsProps) {
   }, [data]);
 
   const queryTaskbarInfo = (args: any) => {
-    if (args.data.Progress === 0) {
+    if (args.data.taskData.color === "black") {
       // black (duração > média + desvio padrão)
       args.progressBarBgColor = "rgb(45, 41, 38)"; //     #2D2926
       args.taskbarBgColor = "rgb(115, 115, 115)"; // #737373 //
       args.taskbarBorderColor = "white";
-    } else if (args.data.Progress > 0 && args.data.Progress < 30) {
+    } else if (args.data.taskData.color === "red") {
       // red (duração >  média + DP/2)
       args.progressBarBgColor = "rgb(244, 6, 6)";
       args.taskbarBgColor = "rgb(255, 124, 124)";
       args.taskbarBorderColor = "white";
-    } else if (args.data.Progress >= 30 && args.data.Progress < 50) {
+    } else if (args.data.taskData.color === "yellow") {
       // yellow (duração >  média - DP)
       args.progressBarBgColor = "rgb(244, 221, 6)";
       args.taskbarBgColor = "rgb(255, 245, 154)";
       args.taskbarBorderColor = "white";
-    } else if (args.data.Progress >= 50) {
+    } else if (args.data.taskData.color === "green") {
       // green (duração < média - DP)
       args.progressBarBgColor = "rgb(5, 149, 2)";
       args.taskbarBgColor = "rgb(147, 224, 27)";

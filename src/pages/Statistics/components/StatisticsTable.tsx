@@ -70,11 +70,14 @@ export function StatisticsTable(props: { data: StatisticsTableData[] }) {
     <Tr key={key}>
       <Td>{projeto.sonda}</Td>
       <Td>
-        <Link to={`/estatisticas/cronograma`} state={{ data: [projeto] }}>
+        <Link to={`/estatisticas/cronograma`} state={{ data: projeto }}>
           <Text>{projeto.sonda}</Text>
         </Link>
       </Td>
-      <Td>{projeto.poco}</Td>
+      <Td>
+        {projeto.poco}
+        {projeto.max}
+      </Td>
       <Td>
         {/* <IconButton
           aria-label="Plus sign"

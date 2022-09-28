@@ -424,4 +424,9 @@ export interface StatisticsTableData {
   poco: string;
   id_poco: number;
   atividades: StatisticsTable[];
+  max?: number;
+  min?: number;
+  med?: number;
+  dp?: number;
+  use?: string;
 }
