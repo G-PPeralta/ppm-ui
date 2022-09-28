@@ -28,6 +28,7 @@ import GraficoCurvaS from "./components/GraficoCurvaS";
 function DetalhamentoProjeto() {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
+  const [loadingProgresso, setProgressoLoading] = useState(true);
   const [infoProjeto, setInfoProjeto] = useState<ICardInfoProjeto>({
     nome_projeto: "",
     data_inicio: null,
@@ -65,6 +66,7 @@ function DetalhamentoProjeto() {
 
   async function handleGetProgresso() {
     const response = await getProgressoProjeto();
+    setProgressoLoading(false);
     setProgresso(response.data);
   }
 
@@ -118,6 +120,7 @@ function DetalhamentoProjeto() {
               <CardInfoProjeto
                 infoProjeto={infoProjeto}
                 progresso={progresso}
+                loading={loadingProgresso}
               />
               <CardOrcamento />
               <BotoesModais

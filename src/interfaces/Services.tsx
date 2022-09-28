@@ -389,3 +389,21 @@ export interface ProjetosRankingPayload {
 export interface ProjetoProgresso {
   fn_cron_calc_pct_real: string;
 }
+
+export interface TarefaAtividade {
+  nome_tarefa: string;
+  data_tarefa: Date;
+  atividade_relacionada: number;
+  descricao: string;
+  nom_usu_create?: string;
+}
+
+export interface AtividadesProjeto {
+  id: number;
+  nomeAtividade: string;
+  tipoAtividade: string;
+  deletado: boolean;
+  macroatividadeId: number;
+  item: string;
+  temporario: boolean;
+}

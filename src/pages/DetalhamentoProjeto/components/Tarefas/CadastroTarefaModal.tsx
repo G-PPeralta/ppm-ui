@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 // import { useParams } from "react-router-dom";
 
@@ -21,9 +22,33 @@ import {
   Select,
   // useDisclosure,
 } from "@chakra-ui/react";
+import { AtividadesProjeto } from "interfaces/Services";
+
+import { useAuth } from "hooks/useAuth";
+
+import { getAtividadesProjeto } from "services/get/Atividades-Projeto";
+import { postTarefa } from "services/post/AdicionarTarefa";
 
 function CadastroTarefasModal({ isModalOpen, closeModal }: any) {
   // const { onClose } = useDisclosure();
+  const { user } = useAuth();
+  const [nome, setNome] = useState("");
+  const [data, setData] = useState("");
+  const [atividadeId, setAtividadeId] = useState(0);
+  const [descricao, setDescricao] = useState("");
+  const [atividadesProjeto, setAtividadesProjeto] = useState(
+    [] as AtividadesProjeto[]
+  );
+
+  async function fetchAtividadesProjeto() {
+    const { data } = await getAtividadesProjeto();
+    setAtividadesProjeto(data);
+  }
+
+  useEffect(() => {
+    fetchAtividadesProjeto();
+  }, []);
+
   return (
     <Flex>
       <Box
@@ -98,6 +123,8 @@ function CadastroTarefasModal({ isModalOpen, closeModal }: any) {
                   id="nomeTarefa"
                   name="nomeTarefa"
                   width="100%"
+                  value={nome}
+                  onChange={(event) => setNome(event.target.value)}
                 />
               </Flex>
               <Flex flexDir={"column"} flexGrow={1}>
@@ -115,8 +142,8 @@ function CadastroTarefasModal({ isModalOpen, closeModal }: any) {
                   id="data"
                   type="date"
                   name="data"
-                  // value={data}
-                  // onChange={(event) => setData(event.target.value)}
+                  value={data}
+                  onChange={(event) => setData(event.target.value)}
                 />
               </Flex>
             </FormControl>
@@ -129,10 +156,18 @@ function CadastroTarefasModal({ isModalOpen, closeModal }: any) {
               >
                 ATIVIDADE RELACIONADA
               </FormLabel>
-              <Select id="atividadeRel" name="atividadeRel" color="#D6D4D4">
+              <Select
+                id="atividadeRel"
+                name="atividadeRel"
+                color="#D6D4D4"
+                onChange={(event) => setAtividadeId(Number(event.target.value))}
+              >
                 <option value="">Selecione</option>
-                <option value="">Atividade 1</option>
-                <option value="">Atividade 2</option>
+                {atividadesProjeto.map((atividade, index) => (
+                  <option value={atividade.id} key={index}>
+                    {atividade.nomeAtividade}
+                  </option>
+                ))}
               </Select>
             </FormControl>
             <FormControl padding={1}>
@@ -151,8 +186,8 @@ function CadastroTarefasModal({ isModalOpen, closeModal }: any) {
                 id="descrição"
                 name="descrição"
                 width="100%"
-                // value={acao}
-                // onChange={(event) => setAcao(event.target.value)}
+                value={descricao}
+                onChange={(event) => setDescricao(event.target.value)}
               />
             </FormControl>
           </ModalBody>
@@ -178,6 +213,16 @@ function CadastroTarefasModal({ isModalOpen, closeModal }: any) {
                 _hover={{
                   background: "origem.500",
                   transition: "all 0.4s",
+                }}
+                onClick={async () => {
+                  await postTarefa({
+                    nome_tarefa: nome,
+                    data_tarefa: new Date(data),
+                    atividade_relacionada: atividadeId,
+                    descricao,
+                    nom_usu_create: user?.nome,
+                  });
+                  closeModal();
                 }}
               >
                 Adicionar
