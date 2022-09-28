@@ -17,7 +17,12 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 
-function ExibirModal() {
+type Props = {
+  exibirDataInicio: boolean;
+  setExibirDataInicio: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function ExibirModal({ exibirDataInicio, setExibirDataInicio }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -53,10 +58,19 @@ function ExibirModal() {
             <Flex>
               <Flex direction={"column"} grow={1} gap={2}>
                 <Text fontWeight={600}>Data</Text>
-                <RadioGroup defaultValue="1">
+                <RadioGroup
+                  defaultValue={exibirDataInicio ? "inicio" : "fim"}
+                  onChange={(value) => {
+                    if (value === "inicio") {
+                      setExibirDataInicio(true);
+                    } else {
+                      setExibirDataInicio(false);
+                    }
+                  }}
+                >
                   <Stack spacing={5} direction="row">
-                    <Radio value="1">Início</Radio>
-                    <Radio value="2">Fim</Radio>
+                    <Radio value={"inicio"}>Início</Radio>
+                    <Radio value={"fim"}>Fim</Radio>
                   </Stack>
                 </RadioGroup>
               </Flex>

@@ -33,6 +33,8 @@ export function Infographics() {
   const [loading, setLoading] = useState(true);
   const [campanhas, setCampanhas] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
+  const [exibirDataInicio, setExibirDataInicio] = useState(true);
+
   const {
     registerForm,
     listaAreaAtuacao,
@@ -85,7 +87,10 @@ export function Infographics() {
                     Acompanhamento de poços
                   </Heading>
                   <Flex gap={4}>
-                    <ExibirModal />
+                    <ExibirModal
+                      exibirDataInicio={exibirDataInicio}
+                      setExibirDataInicio={setExibirDataInicio}
+                    />
                     <FiltrosModal
                       refresh={refresh}
                       setRefresh={setRefresh}
@@ -145,6 +150,7 @@ export function Infographics() {
                             column={column}
                             refresh={refresh}
                             setRefresh={setRefresh}
+                            exibirDataInicio={exibirDataInicio}
                           />
                           {/* <ModalCadastroIntervencao /> */}
                         </Flex>

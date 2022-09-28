@@ -25,9 +25,10 @@ type Props = {
   column: Column;
   setRefresh: Function;
   refresh: boolean;
+  exibirDataInicio: boolean;
 };
 
-function ColumnSPT({ column, setRefresh, refresh }: Props) {
+function ColumnSPT({ column, setRefresh, refresh, exibirDataInicio }: Props) {
   return (
     <Flex direction={"column"} align={"center"} justify={"start"} flex={1}>
       <Text
@@ -56,7 +57,14 @@ function ColumnSPT({ column, setRefresh, refresh }: Props) {
             if (!poco.poco) {
               return <div key={index}></div>;
             } else {
-              return <CardPIR poco={poco} index={index} key={index} />;
+              return (
+                <CardPIR
+                  poco={poco}
+                  index={index}
+                  key={index}
+                  exibirDataInicio={exibirDataInicio}
+                />
+              );
             }
           })}
         </Flex>

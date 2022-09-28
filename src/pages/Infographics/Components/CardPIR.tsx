@@ -5,26 +5,29 @@ import { Flex, Heading, Text } from "@chakra-ui/react";
 import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
 
-// type Poco = {
-//   comp_pct: number;
-//   finalPlanejado: any;
-//   id_campanha: number;
-//   id_poco: number;
-//   inicioplanejado: any;
-//   pct_plan: any;
-//   pct_real: any;
-//   poco: string;
-//   sonda: string;
-// };
+type Poco = {
+  id?: number;
+  comp_pct: number;
+  finalplanejado: string;
+  id_campanha: number;
+  id_poco: number;
+  inicioplanejado: string;
+  pct_plan: number;
+  pct_real: number;
+  poco: string;
+  sonda: string;
+};
 
-// type Props = {
-//   poco: Poco;
-//   index: number;
-// };
+type Props = {
+  poco: Poco;
+  index: number;
+  exibirDataInicio: boolean;
+};
 
-function CardPIR({ poco, index }: any) {
+function CardPIR({ poco, index, exibirDataInicio }: Props) {
   const navigate = useNavigate();
   const dataInicioFormatada = formatDate(new Date(poco.inicioplanejado));
+  const dataFimFormatada = formatDate(new Date(poco.finalplanejado));
 
   const transfer = () => {
     navigate(`/atividade/${poco.id}`, {
@@ -70,7 +73,8 @@ function CardPIR({ poco, index }: any) {
             fontWeight={"semi-bold"}
             textAlign={"center"}
           >
-            {dataInicioFormatada === "31/12/1969" ? "" : dataInicioFormatada}
+            {/* {dataInicioFormatada === "31/12/1969" ? "" : dataInicioFormatada} */}
+            {exibirDataInicio ? dataInicioFormatada : dataFimFormatada}
           </Text>
           <Text
             fontSize={"md"}
