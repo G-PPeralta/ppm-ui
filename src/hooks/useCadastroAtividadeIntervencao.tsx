@@ -7,7 +7,7 @@ import {
   Area,
 } from "interfaces/CadastrosModaisInfograficos";
 import { AtividadeLista } from "interfaces/Services";
-import { cadastroAtividadeSchema } from "validations/ModaisCadastrosInfografico";
+import { cadastroAtividadeIntervencaoSchema } from "validations/ModaisCadastrosInfografico";
 
 import { useToast } from "contexts/Toast";
 
@@ -76,7 +76,6 @@ export function useCadastroAtividadeIntervencao() {
     nom_atividade: "",
     responsavel_id: 0,
     area_atuacao_id: 0,
-    data_ini_plan: "",
     nao_iniciar_antes_de: {
       data: "",
       checked: false,
@@ -96,7 +95,7 @@ export function useCadastroAtividadeIntervencao() {
 
   const registerForm: any = useFormik({
     initialValues,
-    validationSchema: cadastroAtividadeSchema,
+    validationSchema: cadastroAtividadeIntervencaoSchema,
     onSubmit: async (values) => {
       const newValues = {
         nom_usu_create: user?.nome,
@@ -104,7 +103,6 @@ export function useCadastroAtividadeIntervencao() {
         nom_atividade: values.nom_atividade,
         responsavel_id: values.responsavel_id,
         area_atuacao_id: values.area_atuacao_id,
-        data_ini_plan: values.data_ini_plan,
         nao_iniciar_antes_de: values.nao_iniciar_antes_de,
         nao_terminar_depois_de: values.nao_terminar_depois_de,
         o_mais_breve_possivel: values.o_mais_breve_possivel,
