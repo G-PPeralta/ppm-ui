@@ -9,14 +9,12 @@ import { Flex, FormLabel } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 // import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
-import { RequiredField } from "components/RequiredField/RequiredField";
-
 import BotaoAdicionar from "./BotaoAdicionar";
 import AtividadesDraggable from "./Draggable/AtividadeDraggable";
 
 export default function AtividadesDragAndDrop({
   registerForm,
-  listaAtividades,
+  atividades,
 }: any) {
   const id = useId();
   const [render, setRender] = useState<any>([]);
@@ -92,7 +90,6 @@ export default function AtividadesDragAndDrop({
   return (
     <>
       <Flex gap={1}>
-        <RequiredField />
         <FormLabel mb={0}>ATIVIDADES PRECEDENTES</FormLabel>
       </Flex>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -105,7 +102,7 @@ export default function AtividadesDragAndDrop({
                     key={index}
                     registerForm={registerForm}
                     index={index}
-                    listaAtividades={listaAtividades}
+                    atividades={atividades}
                   />
                 )
               )}

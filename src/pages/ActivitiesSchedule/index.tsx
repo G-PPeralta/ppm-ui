@@ -86,6 +86,7 @@ export function ActivitiesSchedule() {
                       id={id}
                       setRefresh={setRefresh}
                       refresh={refresh}
+                      atividades={atividades}
                     />
                     <Button
                       variant="outline"

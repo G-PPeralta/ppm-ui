@@ -34,21 +34,15 @@ interface Responsavel {
   nome: string;
 }
 
-// interface AreaAtuacao {
-//   id: number;
-//   tipo: string;
-//   deletado: boolean;
-// }
-
-function ModalCadastroAtividadeIntervencao({ id, setRefresh, refresh }: any) {
+function ModalCadastroAtividadeIntervencao({
+  id,
+  setRefresh,
+  refresh,
+  atividades,
+}: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    registerForm,
-    loading,
-    listaResponsaveis,
-    listaAreaAtuacao,
-    listaAtividades,
-  } = useCadastroAtividadeIntervencao();
+  const { registerForm, loading, listaResponsaveis, listaAreaAtuacao } =
+    useCadastroAtividadeIntervencao();
 
   const responsaveisOptions = listaResponsaveis.map(
     (responsavel: Responsavel) => ({
@@ -192,7 +186,7 @@ function ModalCadastroAtividadeIntervencao({ id, setRefresh, refresh }: any) {
                     </Flex>
                     <AtividadesDragAndDrop
                       registerForm={registerForm}
-                      listaAtividades={listaAtividades}
+                      atividades={atividades}
                     />
                   </Stack>
                 </Flex>

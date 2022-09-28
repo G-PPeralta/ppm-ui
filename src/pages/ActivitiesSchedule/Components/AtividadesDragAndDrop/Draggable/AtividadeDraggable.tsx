@@ -11,10 +11,10 @@ import SelectFiltragem from "components/SelectFiltragem";
 interface Props {
   registerForm: FormikProps<any>;
   index: number;
-  listaAtividades: any;
+  atividades: any;
 }
 
-function AtividadesDraggable({ index, registerForm, listaAtividades }: Props) {
+function AtividadesDraggable({ index, registerForm, atividades }: Props) {
   const innerwidth = window.innerWidth;
 
   const id = useId();
@@ -29,9 +29,9 @@ function AtividadesDraggable({ index, registerForm, listaAtividades }: Props) {
     registerForm.setFieldValue("precedentes", newList);
   };
 
-  const optionsAtividades = listaAtividades.map((atividade: any) => ({
-    value: atividade.id,
-    label: atividade.tarefa,
+  const optionsAtividades = atividades.map((atividade: any) => ({
+    value: atividade.id_atividade,
+    label: atividade.atividade,
   }));
 
   const getValue = (options: any, i: number, chave: string) => {
