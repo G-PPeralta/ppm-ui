@@ -3,7 +3,6 @@ import Select from "react-select";
 import { Flex, FormControl, FormLabel } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
-// import { TextError } from "components/TextError";
 
 function SelectFiltragem({
   registerForm,
@@ -12,6 +11,7 @@ function SelectFiltragem({
   options,
   value,
   idCampanha,
+  required,
 }: any) {
   const handleChange = ({ value }: any, { name }: any) => {
     registerForm.setFieldValue(name, value);
@@ -27,7 +27,7 @@ function SelectFiltragem({
       <FormControl>
         {nomeSelect && (
           <Flex gap={1}>
-            <RequiredField />
+            {required && <RequiredField />}
             <FormLabel>{nomeSelect}</FormLabel>
           </Flex>
         )}
@@ -42,9 +42,6 @@ function SelectFiltragem({
           isSearchable
           isDisabled={!!idCampanha}
         />
-        {/* {`registerForm.errors.${propName}` && (
-          <TextError>{`registerForm.errors.${propName}`}</TextError>
-        )} */}
       </FormControl>
     </>
   );

@@ -49,9 +49,9 @@ function CardPIR({ poco, index }: any) {
           align={"center"}
           justify={"center"}
           backgroundColor={validateDate(
-            poco.pct_plan,
-            poco.comp_pct,
-            poco.pct_real
+            Number(poco.pct_plan),
+            Number(poco.comp_pct),
+            Number(poco.pct_real)
           )}
           px={4}
           py={2}

@@ -5,7 +5,6 @@ import {
   Flex,
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -24,10 +23,16 @@ function ExibirModal() {
   return (
     <>
       <Button
-        onClick={onOpen}
         rightIcon={<IoMdArrowDropdown />}
-        colorScheme="blue"
-        variant="ghost"
+        textColor={"origem.500"}
+        backgroundColor={"transparent"}
+        _hover={{
+          borderColor: "origem.600",
+          backgroundColor: "origem.500",
+          textColor: "white",
+          transition: "all 0.4s",
+        }}
+        onClick={onOpen}
       >
         Exibir
       </Button>
@@ -44,7 +49,6 @@ function ExibirModal() {
           >
             Exibir
           </ModalHeader>
-          <ModalCloseButton color={"white"} />
           <ModalBody mt={4}>
             <Flex>
               <Flex direction={"column"} grow={1} gap={2}>

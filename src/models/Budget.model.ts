@@ -18,10 +18,9 @@ export interface BudgetDetail {
   id: number;
   data?: string;
   brt: string;
-  servico: string;
+  projeto: Projeto;
   fornecedor?: string;
-  total: number;
-  previsto: number;
+  planejado: number;
   realizado: number;
   gap?: number;
   filhos?: BudgetDetail[];

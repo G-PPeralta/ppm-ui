@@ -1,52 +1,50 @@
+import { FiEdit } from "react-icons/fi";
+
 import {
-  Button,
   Flex,
+  Text,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  // ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+  Button,
   FormControl,
   FormLabel,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   Stack,
-  Text,
-  Textarea,
   useBreakpointValue,
-  useDisclosure,
+  Input,
+  IconButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
+import { Projeto } from "models/Budget.model";
 
+import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
-import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
+import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { regexCaracteresEspeciais } from "utils/regex";
 
-import { useCadastroCampanha } from "hooks/useCadastroCampanha";
+import { useCadastroOrcamentoPrevisto } from "hooks/useCadastroOrcamentoPrevisto";
 
-import SelectFiltragemSondas from "./SelectFiltragemSonda";
-
-function ModalNovaCampanha({ setRefresh, refresh }: any) {
+function ModalCadastrarOrcamentoPrevisto(props: { projeto: Projeto }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroCampanha();
+  const { registerForm, loading } = useCadastroOrcamentoPrevisto();
+  const { /* id, */ nome } = props.projeto;
 
   return (
     <>
-      <Button
-        variant="outline"
-        border={"2px solid"}
-        borderColor={"origem.500"}
-        textColor={"origem.500"}
-        _hover={{
-          borderColor: "origem.600",
-          backgroundColor: "origem.500",
-          textColor: "white",
-          transition: "all 0.4s",
-        }}
+      <IconButton
+        aria-label="Edit Plannejado"
+        variant={"outline"}
+        icon={<FiEdit />}
         onClick={onOpen}
-      >
-        Nova Campanha
-      </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+      />
+
+      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -57,8 +55,9 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
             color={"white"}
             fontSize={"1em"}
           >
-            Cadastrar Nova Campanha
+            {nome}
           </ModalHeader>
+          {/* <ModalCloseButton color={"white"} /> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -77,42 +76,27 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                       gap={5}
                     >
                       <FormControl>
-                        <SelectFiltragemSondas
-                          form={registerForm}
-                          nomeChave={"nom_campanha"}
-                          nomeLabel={"NOME"}
-                        />
-                      </FormControl>
-                    </Flex>
-                  </Stack>
-
-                  <Stack>
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: "column",
-                        md: "row",
-                      })}
-                      gap={5}
-                    >
-                      <FormControl>
-                        <FormLabel htmlFor="dsc_comentario">
-                          COMENTÁRIOS
-                        </FormLabel>
-                        <Textarea
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <FormLabel htmlFor="previsto">
+                            Valor Previsto
+                          </FormLabel>{" "}
+                        </Flex>
+                        <Input
                           isRequired
-                          placeholder="Adicione comentários sobre a campanha"
-                          id="dsc_comentario"
-                          name="dsc_comentario"
-                          value={registerForm.values.dsc_comentario}
-                          onChange={registerForm.handleChange}
-                          maxLength={255}
-                        />
-                        {registerForm.errors.dsc_comentario &&
-                          registerForm.touched.dsc_comentario && (
-                            <TextError>
-                              {registerForm.errors.dsc_comentario}
-                            </TextError>
+                          placeholder="Valor Previsto"
+                          id="previsto"
+                          type="text"
+                          name="previsto"
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.previsto
                           )}
+                          onChange={registerForm.handleChange}
+                          maxLength={10}
+                        />
+                        {registerForm.errors.previsto && (
+                          <TextError>{registerForm.errors.previsto}</TextError>
+                        )}
                       </FormControl>
                     </Flex>
                   </Stack>
@@ -136,19 +120,12 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                 </Button>
                 <Button
                   disabled={
-                    !registerForm.isValid || !registerForm.values.nom_campanha
+                    !registerForm.isValid || !registerForm.values.previsto
                   }
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() =>
-                    handleCadastrarRefresh(
-                      registerForm,
-                      onClose,
-                      setRefresh,
-                      refresh
-                    )
-                  }
+                  onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",
@@ -171,4 +148,4 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
   );
 }
 
-export default ModalNovaCampanha;
+export default ModalCadastrarOrcamentoPrevisto;
