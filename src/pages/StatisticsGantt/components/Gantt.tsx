@@ -79,6 +79,7 @@ export function Gantt({ data, toolbarOptions }: ganttOptionsProps) {
           }}
           queryTaskbarInfo={queryTaskbarInfo}
           labelSettings={labelSettings}
+          includeWeekend={true}
           durationUnit={"Hour"}
           toolbar={toolbarOptions || []}
           editSettings={{
