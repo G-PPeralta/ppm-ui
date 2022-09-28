@@ -89,7 +89,7 @@ export function Reports() {
             </Flex>
             <Flex flexDirection="row" gap={"4"}>
               <FormControl>
-                <FormLabel htmlFor="report" color={"gray.300"}>
+                <FormLabel htmlFor="report" color={"gray.400"}>
                   TIPO DO RELATÓRIO
                 </FormLabel>
                 <Select
