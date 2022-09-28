@@ -58,9 +58,9 @@ export function useCadastroAtividade() {
 
   const initialValues = {
     nom_usu_create: user?.nome,
-    id_origem: 0,
+    id_origem: "",
     nom_atividade: "",
-    responsavelId: 0,
+    responsavel_id: 0,
     area_atuacao: "",
     nao_iniciar_antes_de: {
       data: "",
@@ -73,7 +73,7 @@ export function useCadastroAtividade() {
     o_mais_breve_possivel: false,
   };
 
-  const registerForm = useFormik({
+  const registerForm: any = useFormik({
     initialValues,
     validationSchema: cadastroAtividadeSchema,
     onSubmit: async (values) => {
@@ -81,7 +81,7 @@ export function useCadastroAtividade() {
         nom_usu_create: user?.nome,
         id_origem: values.id_origem,
         nom_atividade: values.nom_atividade,
-        responsavelId: values.responsavelId,
+        responsavel_id: values.responsavel_id,
         area_atuacao: values.area_atuacao,
         nao_iniciar_antes_de: values.nao_iniciar_antes_de,
         nao_terminar_depois_de: values.nao_terminar_depois_de,

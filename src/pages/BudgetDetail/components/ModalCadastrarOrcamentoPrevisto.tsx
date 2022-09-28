@@ -1,3 +1,5 @@
+import { FiEdit } from "react-icons/fi";
+
 import {
   Flex,
   Text,
@@ -15,8 +17,10 @@ import {
   Stack,
   useBreakpointValue,
   Input,
+  IconButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
+import { Projeto } from "models/Budget.model";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
@@ -24,29 +28,22 @@ import { TextError } from "components/TextError";
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
 
-import { useCadastroSonda } from "hooks/useCadastroSonda";
+import { useCadastroOrcamentoPrevisto } from "hooks/useCadastroOrcamentoPrevisto";
 
-function ModalCadastrarSonda() {
+function ModalCadastrarOrcamentoPrevisto(props: { projeto: Projeto }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroSonda();
+  const { registerForm, loading } = useCadastroOrcamentoPrevisto();
+  const { /* id, */ nome } = props.projeto;
 
   return (
     <>
-      <Button
-        variant="outline"
-        border={"2px solid"}
-        borderColor={"origem.500"}
-        textColor={"origem.500"}
-        _hover={{
-          borderColor: "origem.600",
-          backgroundColor: "origem.500",
-          textColor: "white",
-          transition: "all 0.4s",
-        }}
+      <IconButton
+        aria-label="Edit Plannejado"
+        variant={"outline"}
+        icon={<FiEdit />}
         onClick={onOpen}
-      >
-        Sonda
-      </Button>
+      />
+
       <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
         <ModalContent>
@@ -58,7 +55,7 @@ function ModalCadastrarSonda() {
             color={"white"}
             fontSize={"1em"}
           >
-            Cadastrar Sonda
+            {nome}
           </ModalHeader>
           {/* <ModalCloseButton color={"white"} /> */}
           <form
@@ -81,22 +78,24 @@ function ModalCadastrarSonda() {
                       <FormControl>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="nome">NOME</FormLabel>{" "}
+                          <FormLabel htmlFor="previsto">
+                            Valor Previsto
+                          </FormLabel>{" "}
                         </Flex>
                         <Input
                           isRequired
-                          placeholder="Nome da Sonda"
-                          id="nome"
+                          placeholder="Valor Previsto"
+                          id="previsto"
                           type="text"
-                          name="nome"
+                          name="previsto"
                           value={regexCaracteresEspeciais(
-                            registerForm.values.nome
+                            registerForm.values.previsto
                           )}
                           onChange={registerForm.handleChange}
                           maxLength={10}
                         />
-                        {registerForm.errors.nome && (
-                          <TextError>{registerForm.errors.nome}</TextError>
+                        {registerForm.errors.previsto && (
+                          <TextError>{registerForm.errors.previsto}</TextError>
                         )}
                       </FormControl>
                     </Flex>
@@ -120,7 +119,9 @@ function ModalCadastrarSonda() {
                   Cancelar
                 </Button>
                 <Button
-                  disabled={!registerForm.isValid || !registerForm.values.nome}
+                  disabled={
+                    !registerForm.isValid || !registerForm.values.previsto
+                  }
                   background="origem.300"
                   variant="primary"
                   color="white"
@@ -147,4 +148,4 @@ function ModalCadastrarSonda() {
   );
 }
 
-export default ModalCadastrarSonda;
+export default ModalCadastrarOrcamentoPrevisto;

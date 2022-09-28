@@ -5,29 +5,29 @@ import { Flex, Heading, Text } from "@chakra-ui/react";
 import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
 
-type Poco = {
-  comp_pct: number;
-  finalPlanejado: any;
-  id_campanha: number;
-  id_poco: number;
-  inicioplanejado: any;
-  pct_plan: any;
-  pct_real: any;
-  poco: string;
-  sonda: string;
-};
+// type Poco = {
+//   comp_pct: number;
+//   finalPlanejado: any;
+//   id_campanha: number;
+//   id_poco: number;
+//   inicioplanejado: any;
+//   pct_plan: any;
+//   pct_real: any;
+//   poco: string;
+//   sonda: string;
+// };
 
-type Props = {
-  poco: Poco;
-  index: number;
-};
+// type Props = {
+//   poco: Poco;
+//   index: number;
+// };
 
-function CardPIR({ poco, index }: Props) {
+function CardPIR({ poco, index }: any) {
   const navigate = useNavigate();
   const dataInicioFormatada = formatDate(new Date(poco.inicioplanejado));
 
   const transfer = () => {
-    navigate(`/atividade/${poco.id_poco}`, {
+    navigate(`/atividade/${poco.id}`, {
       state: {
         poco,
       },
@@ -40,7 +40,7 @@ function CardPIR({ poco, index }: Props) {
       Se o valor for exatamente esse, o componente não deverá ser renderizado. */}
       <Flex direction={"row"} gap={4} onClick={() => transfer()}>
         <Flex align={"center"} justify={"center"}>
-          <Heading as="h3" size="md" textAlign={"center"} width={"50px"}>
+          <Heading as="h3" size="md" textAlign={"center"} width={"60px"}>
             {index === 0 ? "Atual" : `${index + 1}º`}
           </Heading>
         </Flex>
@@ -49,9 +49,9 @@ function CardPIR({ poco, index }: Props) {
           align={"center"}
           justify={"center"}
           backgroundColor={validateDate(
-            poco.pct_plan,
-            poco.comp_pct,
-            poco.pct_real
+            Number(poco.pct_plan),
+            Number(poco.comp_pct),
+            Number(poco.pct_real)
           )}
           px={4}
           py={2}
@@ -59,7 +59,7 @@ function CardPIR({ poco, index }: Props) {
           _hover={{
             cursor: "pointer",
           }}
-          w={"114px"}
+          w={"150px"}
         >
           <Text fontSize={"lg"} color={"white"} fontWeight={"bold"}>
             {poco.poco}

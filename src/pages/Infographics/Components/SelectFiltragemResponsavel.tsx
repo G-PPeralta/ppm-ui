@@ -25,11 +25,11 @@ function SelectFiltragemResponsavel({ registerForm }: any) {
       <FormControl>
         <Flex gap={1}>
           <RequiredField />
-          <FormLabel htmlFor="responsavelId">RESPONSAVEL</FormLabel>
+          <FormLabel htmlFor="responsavel_id">RESPONSAVEL</FormLabel>
         </Flex>
         <Select
-          id="responsavelId"
-          name="responsavel"
+          id="responsavel_id"
+          name="responsavel_id"
           placeholder="Selecione"
           onChange={(event, name) => handleChange(event, name)}
           options={options}

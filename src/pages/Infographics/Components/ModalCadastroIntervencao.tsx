@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 
 import {
@@ -18,22 +19,39 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
+import {
+  ListaCampo,
+  ListaPoco,
+  ProjetoTipo,
+} from "interfaces/CadastrosModaisInfograficos";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
+
+import {
+  getAtividadasByProjetosTipoId,
+  getProjetosTipo,
+} from "services/get/CadastroModaisInfograficos";
 
 import AtividadesCadastroIntervencao from "./AtividadesCadastroIntervencao";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
 import SelectFiltragem from "./SelectFiltragem";
-import SelectFiltragemSondas from "./SelectFiltragemSonda";
+// import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
-function ModalCadastroIntervencao() {
+function ModalCadastroIntervencao({
+  idCampanha,
+  data,
+  refresh,
+  setRefresh,
+}: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaPocos } = useCadastroIntervencao();
+  const { registerForm, loading, listaPocos, listaCampos, listaSondaCampanha } =
+    useCadastroIntervencao();
+
+  const [listaProjetos, setListaProjetos] = useState<any>([]);
 
   const innerWidth = window.innerWidth;
 
@@ -42,22 +60,82 @@ function ModalCadastroIntervencao() {
     label: poco.poco,
   }));
 
-  const optionsCampo = listaPocos.map((poco: ListaPoco) => ({
-    value: poco.id,
-    label: poco.poco,
+  const optionsCampo = listaCampos.map((campo: ListaCampo) => ({
+    value: campo.id,
+    label: campo.campo,
   }));
 
-  const optionsProjetoTipo = listaPocos.map((poco: ListaPoco) => ({
-    value: poco.id,
-    label: poco.poco,
+  const optionsProjetoTipo = listaProjetos.map((projetoTipo: ProjetoTipo) => ({
+    value: projetoTipo.id,
+    label: projetoTipo.nom_projeto_tipo,
   }));
+
+  const optionsSondaCampanha = listaSondaCampanha.map((sondaCampanha: any) => ({
+    value: sondaCampanha.id,
+    label: sondaCampanha.nom_campanha,
+  }));
+
+  const reqGetAtividadesByProjetoTipoId = async (id: number) => {
+    if (id === 0) {
+      registerForm.setFieldValue("atividades", [
+        {
+          area_id: 0,
+          tarefa_id: 0,
+          responsavel_id: 0,
+          qtde_dias: 0,
+        },
+      ]);
+    } else {
+      const atividades = await getAtividadasByProjetosTipoId(id);
+
+      const atividadesFormatadas = atividades.data.map((atividade: any) => ({
+        area_id: atividade.id_area,
+        tarefa_id: atividade.id_tarefa,
+        responsavel_id: atividade.responsavel_id,
+        qtde_dias: atividade.qtde_dias,
+      }));
+      registerForm.setFieldValue("atividades", atividadesFormatadas);
+    }
+  };
+
+  const handleGet = async () => {
+    const projetos = await getProjetosTipo();
+    const projetosTipoSorted = projetos.data.sort(
+      (a: ProjetoTipo, b: ProjetoTipo) =>
+        a.nom_projeto_tipo.localeCompare(b.nom_projeto_tipo)
+    );
+    setListaProjetos(projetosTipoSorted);
+  };
+
+  const handleClick = async () => {
+    const projetos = await getProjetosTipo();
+    const projetosTipoSorted = projetos.data.sort(
+      (a: ProjetoTipo, b: ProjetoTipo) =>
+        a.nom_projeto_tipo.localeCompare(b.nom_projeto_tipo)
+    );
+    setListaProjetos(projetosTipoSorted);
+    onOpen();
+  };
+
+  useEffect(() => {
+    handleGet();
+    registerForm.setFieldValue("id_campanha", idCampanha);
+    const newDate = new Date(data);
+    newDate.setDate(newDate.getDate() + 15);
+    registerForm.setFieldValue("dat_ini_prev", newDate);
+    setRefresh(!refresh);
+  }, []);
+
+  useEffect(() => {
+    reqGetAtividadesByProjetoTipoId(registerForm.values.projeto_tipo_id);
+  }, [registerForm.values.projeto_tipo_id]);
 
   return (
     <>
       <Flex
         mt={2}
         py={3}
-        w="70%"
+        w="150px"
         border={"2px"}
         borderStyle={"dashed"}
         borderColor={"origem.500"}
@@ -71,7 +149,7 @@ function ModalCadastroIntervencao() {
           backgroundColor: "grey.100",
           transition: "all 0.4s",
         }}
-        onClick={onOpen}
+        onClick={() => handleClick()}
       >
         <IconButton
           aria-label="Plus sign"
@@ -115,23 +193,31 @@ function ModalCadastroIntervencao() {
                         direction={innerWidth >= 460 ? "row" : "column"}
                         gap={5}
                       >
-                        <SelectFiltragemSondas
-                          form={registerForm}
-                          nomeChave={"sonda_id"}
+                        <SelectFiltragem
+                          registerForm={registerForm}
+                          nomeSelect={"SONDA"}
+                          propName={"id_campanha"}
+                          options={optionsSondaCampanha}
+                          idCampanha={idCampanha}
                         />
                         <SelectFiltragem
                           registerForm={registerForm}
                           nomeSelect={"POÇO"}
                           propName={"poco_id"}
                           options={optionsPocos}
+                          required={true}
                         />
                         <SelectFiltragem
                           registerForm={registerForm}
                           nomeSelect={"CAMPO"}
                           propName={"campo_id"}
                           options={optionsCampo}
+                          required={true}
                         />
-                        <DateTimePickerDataInicio registerForm={registerForm} />
+                        <DateTimePickerDataInicio
+                          registerForm={registerForm}
+                          data={data}
+                        />
                       </Flex>
                     </Stack>
 
@@ -142,6 +228,7 @@ function ModalCadastroIntervencao() {
                           nomeSelect={"PROJETO"}
                           propName={"projeto_tipo_id"}
                           options={optionsProjetoTipo}
+                          required={true}
                         />
                       </Flex>
                     </Stack>
@@ -165,6 +252,7 @@ function ModalCadastroIntervencao() {
                           name="comentarios"
                           value={registerForm.values.comentarios}
                           onChange={registerForm.handleChange}
+                          maxLength={255}
                         />
                       </FormControl>
                     </Stack>
@@ -194,7 +282,14 @@ function ModalCadastroIntervencao() {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() =>
+                    handleCadastrarRefresh(
+                      registerForm,
+                      onClose,
+                      setRefresh,
+                      refresh
+                    )
+                  }
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",

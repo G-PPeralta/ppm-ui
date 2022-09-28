@@ -5,7 +5,7 @@ export const cadastroTarefaSchema = yup.object({
 });
 
 export const cadastroSondaSchema = yup.object({
-  sonda: yup
+  nome: yup
     .string()
     .required("O nome da sonda é obrigatório!")
     .min(3, "O nome da sonda deve ter ao menos 3 caracteres"),
@@ -32,9 +32,9 @@ export const cadastroIntervencaoSchema = yup.object({
 });
 
 export const cadastroAtividadeSchema = yup.object({
-  id_origem: yup.number().required("O ID é obrigatório!"),
+  id_origem: yup.string().required("O ID é obrigatório!"),
   nom_atividade: yup.string().required("O nome da atividade é obrigatório!"),
-  responsavelId: yup.number().required("O responsável é obrigatório!"),
+  responsavel_id: yup.number().required("O responsável é obrigatório!"),
   area_atuacao: yup.string().required("A área de atuação é obrigatória!"),
   nao_iniciar_antes_de: yup.object({
     data: yup.string(),
@@ -83,7 +83,7 @@ export const cadastroNovaCampanhaSchema = yup.object({
 });
 
 export const cadastroNovaIntervencaoSchema = yup.object({
-  sonda_id: yup.number().required(),
+  id_campanha: yup.number().required(),
   poco_id: yup.number().required(),
   projeto_tipo_id: yup.number().required(),
   dat_ini_prev: yup.string().required(),

@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 import {
   Flex,
@@ -19,32 +18,12 @@ import {
   Input,
   ModalFooter,
   Button,
+  Select,
+  // useDisclosure,
 } from "@chakra-ui/react";
 
-import { postLicaoAprendida } from "services/post/AdicionarLicaoAprendida";
-
-function CadastrarLicoesAprendidasModal({
-  closeModal,
-  onCloseModal,
-  callBack,
-}: any) {
-  const { id } = useParams();
-  const [licaoAprendida, setLicaoAprendida] = useState("");
-  const [acao, setAcao] = useState("");
-
-  async function handleSubmitLicao() {
-    const payload = {
-      id_projeto: Number(id),
-      txt_licao_aprendida: licaoAprendida,
-      txt_acao: acao,
-      id_categoria: null,
-      nom_usu_create: "teste",
-    };
-    await postLicaoAprendida(payload);
-    callBack();
-    onCloseModal();
-  }
-
+function EditarTarefaModal({ isModalOpen, closeModal }: any) {
+  // const { onClose } = useDisclosure();
   return (
     <Flex>
       <Box
@@ -80,7 +59,7 @@ function CadastrarLicoesAprendidasModal({
           EDITAR FORNECEDOR
         </Text> */}
       </Box>
-      <Modal isOpen={true} onClose={closeModal} size="xl">
+      <Modal isOpen={isModalOpen} onClose={closeModal} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -91,47 +70,89 @@ function CadastrarLicoesAprendidasModal({
             color={"white"}
             fontSize={"1em"}
           >
-            Lição Aprendida
+            Editar Tarefa
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <ModalBody>
-            <FormControl marginBottom={4} padding={1}>
+            <FormControl
+              marginBottom={4}
+              padding={1}
+              display={"flex"}
+              justifyContent={"space-between"}
+              gap={3}
+            >
+              <Flex flexDir={"column"} flexGrow={4}>
+                <FormLabel
+                  htmlFor="nomeTarefa"
+                  color="#D6D4D4"
+                  fontSize="sm"
+                  fontWeight="500"
+                >
+                  NOME DA TAREFA
+                </FormLabel>
+                <Input
+                  isRequired
+                  placeholder="Nome tarefa"
+                  color="#D6D4D4"
+                  type="text"
+                  id="nomeTarefa"
+                  name="nomeTarefa"
+                  width="100%"
+                />
+              </Flex>
+              <Flex flexDir={"column"} flexGrow={1}>
+                <FormLabel
+                  color="#D6D4D4"
+                  htmlFor="data"
+                  fontSize="sm"
+                  fontWeight="500"
+                >
+                  DATA
+                </FormLabel>
+                <Input
+                  // placeholder="dd/mm/aaaa"
+                  color="#D6D4D4"
+                  id="data"
+                  type="date"
+                  name="data"
+                  // value={data}
+                  // onChange={(event) => setData(event.target.value)}
+                />
+              </Flex>
+            </FormControl>
+            <FormControl padding={1} marginBottom={4} width={"204px"}>
               <FormLabel
-                htmlFor="fornecedorNome"
+                htmlFor="atividadeRel"
                 color="#D6D4D4"
                 fontSize="sm"
                 fontWeight="500"
               >
-                LIÇÃO APRENDIDA
+                ATIVIDADE RELACIONADA
               </FormLabel>
-              <Input
-                isRequired
-                placeholder="Lição aprendida"
-                type="text"
-                id="licaoAprendida"
-                name="licaoAprendida"
-                width="100%"
-                value={licaoAprendida}
-                onChange={(event) => setLicaoAprendida(event.target.value)}
-              />
+              <Select id="atividadeRel" name="atividadeRel" color="#D6D4D4">
+                <option value="">Selecione</option>
+                <option value="">Atividade 1</option>
+                <option value="">Atividade 2</option>
+              </Select>
             </FormControl>
-            <FormControl>
+            <FormControl padding={1}>
               <FormLabel
                 htmlFor="acao"
                 color="#D6D4D4"
                 fontSize="sm"
                 fontWeight="500"
               >
-                AÇÃO OU RECOMENDAÇÃO
+                DESCRIÇÃO DA TAREFA
               </FormLabel>
               <Textarea
+                color="#D6D4D4"
                 isRequired
-                placeholder="Ação ou recomendação"
-                id="acao"
-                name="acao"
+                placeholder="Descrição da tarefa"
+                id="descrição"
+                name="descrição"
                 width="100%"
-                value={acao}
-                onChange={(event) => setAcao(event.target.value)}
+                // value={acao}
+                // onChange={(event) => setAcao(event.target.value)}
               />
             </FormControl>
           </ModalBody>
@@ -158,9 +179,8 @@ function CadastrarLicoesAprendidasModal({
                   background: "origem.500",
                   transition: "all 0.4s",
                 }}
-                onClick={handleSubmitLicao}
               >
-                Confirmar
+                Adicionar
               </Button>
             </Flex>
           </ModalFooter>
@@ -170,4 +190,4 @@ function CadastrarLicoesAprendidasModal({
   );
 }
 
-export default CadastrarLicoesAprendidasModal;
+export default EditarTarefaModal;

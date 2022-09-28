@@ -20,7 +20,8 @@ interface Props {
 
 function AtividadesDraggable({ index, registerForm }: Props) {
   const innerwidth = window.innerWidth;
-  const { listaAreaAtuacao, listaResponsaveis } = useCadastroIntervencao();
+  const { listaAreaAtuacao, listaResponsaveis, listaTarefas } =
+    useCadastroIntervencao();
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
@@ -39,14 +40,14 @@ function AtividadesDraggable({ index, registerForm }: Props) {
     label: poco.tipo,
   }));
 
-  const optionsTarefa = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
-    value: poco.id,
-    label: poco.tipo,
+  const optionsTarefa = listaTarefas.map((tarefa: any) => ({
+    value: tarefa.id,
+    label: tarefa.nom_atividade,
   }));
 
   const optionsResponsaveis = listaResponsaveis.map(
     (responsavel: Responsavel) => ({
-      value: responsavel.nome,
+      value: responsavel.id,
       label: responsavel.nome,
     })
   );
