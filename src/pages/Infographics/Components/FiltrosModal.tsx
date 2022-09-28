@@ -82,10 +82,14 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
     onClose();
   };
 
-  const handleRemoverFiltro = async () => {
-    await registerForm.resetForm();
-    postFiltros();
-    setRefresh(!refresh);
+  // const handleRemoverFiltro = async () => {
+  //   await registerForm.resetForm();
+  //   postFiltros();
+  //   setRefresh(!refresh);
+  //   onClose();
+  // };
+
+  const handleCancelar = () => {
     onClose();
   };
 
@@ -247,9 +251,22 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
               <Button
                 variant="ghost"
                 color="red"
-                onClick={() => handleRemoverFiltro()}
+                onClick={() => handleCancelar()}
                 _hover={{
                   background: "red.500",
+                  transition: "all 0.4s",
+                  color: "white",
+                }}
+              >
+                Cancelar
+              </Button>
+              <Button
+                variant="outline"
+                border={"2px"}
+                color={"origem.500"}
+                onClick={() => registerForm.resetForm()}
+                _hover={{
+                  background: "origem.500",
                   transition: "all 0.4s",
                   color: "white",
                 }}
@@ -257,12 +274,12 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                 Remover Filtros
               </Button>
               <Button
-                background="origem.300"
+                background="origem.500"
                 variant="primary"
                 color="white"
                 onClick={() => handleFiltrarCampanhas()}
                 _hover={{
-                  background: "origem.500",
+                  background: "origem.600",
                   transition: "all 0.4s",
                 }}
               >
