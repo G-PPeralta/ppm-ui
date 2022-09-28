@@ -91,8 +91,13 @@ export async function postEditarAtividadeStatus(
 }
 
 export async function postCadastroAtividadeIntervencao(
+  id: number,
   payload: any
 ): Promise<{ status: number }> {
-  const { status } = await api.post("/nova-atividade/:id", payload, token());
+  const { status } = await api.post(
+    `/nova-atividade/intervencao/${id}`,
+    payload,
+    token()
+  );
   return { status };
 }

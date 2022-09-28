@@ -72,6 +72,7 @@ export function useCadastroAtividadeIntervencao() {
 
   const initialValues = {
     nom_usu_create: user?.nome,
+    id_intervencao: 0,
     id_origem: "",
     nom_atividade: "",
     responsavel_id: 0,
@@ -97,6 +98,7 @@ export function useCadastroAtividadeIntervencao() {
     initialValues,
     validationSchema: cadastroAtividadeIntervencaoSchema,
     onSubmit: async (values) => {
+      const id_intervencao = Number(values.id_intervencao);
       const newValues = {
         nom_usu_create: user?.nome,
         id_origem: values.id_origem,
@@ -112,7 +114,10 @@ export function useCadastroAtividadeIntervencao() {
       setLoading(true);
 
       try {
-        const { status } = await postCadastroAtividadeIntervencao(newValues);
+        const { status } = await postCadastroAtividadeIntervencao(
+          id_intervencao,
+          newValues
+        );
 
         if (status === 200 || status === 201) {
           toast.success("Atividade cadastrada com sucesso!", {

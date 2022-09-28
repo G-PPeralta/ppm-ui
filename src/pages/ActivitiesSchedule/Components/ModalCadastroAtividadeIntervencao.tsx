@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import {
   Flex,
   Text,
@@ -22,7 +24,7 @@ import Restricoes from "pages/Infographics/Components/Restricoes";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividadeIntervencao } from "hooks/useCadastroAtividadeIntervencao";
@@ -56,6 +58,10 @@ function ModalCadastroAtividadeIntervencao({
     label: area.tipo,
   }));
 
+  useEffect(() => {
+    registerForm.setFieldValue("id_intervencao", id);
+  }, []);
+
   return (
     <>
       <Button
@@ -71,7 +77,7 @@ function ModalCadastroAtividadeIntervencao({
         }}
         onClick={onOpen}
       >
-        Atividade
+        Nova Atividade
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
@@ -212,7 +218,14 @@ function ModalCadastroAtividadeIntervencao({
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() =>
+                    handleCadastrarRefresh(
+                      registerForm,
+                      onClose,
+                      setRefresh,
+                      refresh
+                    )
+                  }
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",
