@@ -89,3 +89,10 @@ export async function postEditarAtividadeStatus(
   );
   return { status };
 }
+
+export async function postCadastroAtividadeIntervencao(
+  payload: any
+): Promise<{ status: number }> {
+  const { status } = await api.post("/nova-atividade/:id", payload, token());
+  return { status };
+}

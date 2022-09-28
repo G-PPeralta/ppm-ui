@@ -21,7 +21,7 @@ import StatusProjeto from "../../components/StatusProjeto";
 import BotaoVisaoPorArea from "./Components/BotaoVisaoPorArea";
 import CardACT from "./Components/CardACT";
 // import ModalAtividade from "./Components/ModalAtividade";
-import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
+import ModalCadastroAtividadeIntervencao from "./Components/ModalCadastroAtividadeIntervencao";
 import ModalEditarAtividade from "./Components/ModalEditarAtividade";
 
 export function ActivitiesSchedule() {
@@ -82,7 +82,7 @@ export function ActivitiesSchedule() {
                   mb={4}
                 >
                   <Flex gap={2} wrap={"wrap"}>
-                    <ModalCadastroAtividade
+                    <ModalCadastroAtividadeIntervencao
                       id={id}
                       setRefresh={setRefresh}
                       refresh={refresh}

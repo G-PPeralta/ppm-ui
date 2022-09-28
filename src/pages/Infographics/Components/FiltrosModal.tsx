@@ -22,7 +22,7 @@ import { statusProjeto } from "utils/validateDate";
 
 import { postGetInfoCampanha } from "services/get/Infograficos";
 
-import SelectFiltragem from "./SelectFiltragem";
+import SelectFiltragem from "../../../components/SelectFiltragem";
 
 type Props = {
   refresh: boolean;

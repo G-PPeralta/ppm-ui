@@ -36,9 +36,9 @@ import {
   getProjetosTipo,
 } from "services/get/CadastroModaisInfograficos";
 
+import SelectFiltragem from "../../../components/SelectFiltragem";
 import AtividadesCadastroIntervencao from "./AtividadesCadastroIntervencao";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
-import SelectFiltragem from "./SelectFiltragem";
 // import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
 function ModalCadastroIntervencao({
