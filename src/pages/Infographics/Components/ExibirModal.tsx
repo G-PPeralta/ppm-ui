@@ -17,13 +17,30 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 
-type Props = {
+type OpcoesExibir = {
   exibirDataInicio: boolean;
   setExibirDataInicio: React.Dispatch<React.SetStateAction<boolean>>;
+  exibirPctPlan: boolean;
+  setExibirPctPlan: React.Dispatch<React.SetStateAction<boolean>>;
+  exibirPctReal: boolean;
+  setExibirPctReal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function ExibirModal({ exibirDataInicio, setExibirDataInicio }: Props) {
+type Props = {
+  opcoesExibir: OpcoesExibir;
+};
+
+function ExibirModal({ opcoesExibir }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const {
+    exibirDataInicio,
+    setExibirDataInicio,
+    exibirPctPlan,
+    setExibirPctPlan,
+    exibirPctReal,
+    setExibirPctReal,
+  } = opcoesExibir;
 
   return (
     <>
@@ -76,9 +93,31 @@ function ExibirModal({ exibirDataInicio, setExibirDataInicio }: Props) {
               </Flex>
               <Flex direction={"column"} grow={1} gap={2}>
                 <Text fontWeight={600}>Status</Text>
-                <Checkbox colorScheme="blue" defaultChecked>
-                  Checkbox
-                </Checkbox>
+                <Stack spacing={5} direction="row">
+                  <Checkbox
+                    w={"100%"}
+                    name={"pctPlan"}
+                    onChange={(e) => {
+                      setExibirPctPlan(e.target.checked);
+                    }}
+                    isChecked={exibirPctPlan}
+                  >
+                    Percentual Planejado
+                  </Checkbox>
+                </Stack>
+
+                <Stack spacing={5} direction="row">
+                  <Checkbox
+                    w={"100%"}
+                    name={"pctReal"}
+                    onChange={(e) => {
+                      setExibirPctReal(e.target.checked);
+                    }}
+                    isChecked={exibirPctReal}
+                  >
+                    Percentual Realizado
+                  </Checkbox>
+                </Stack>
               </Flex>
             </Flex>
           </ModalBody>

@@ -34,6 +34,17 @@ export function Infographics() {
   const [campanhas, setCampanhas] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
   const [exibirDataInicio, setExibirDataInicio] = useState(true);
+  const [exibirPctPlan, setExibirPctPlan] = useState(true);
+  const [exibirPctReal, setExibirPctReal] = useState(true);
+
+  const opcoesExibir = {
+    exibirDataInicio,
+    setExibirDataInicio,
+    exibirPctPlan,
+    setExibirPctPlan,
+    exibirPctReal,
+    setExibirPctReal,
+  };
 
   const {
     registerForm,
@@ -87,10 +98,7 @@ export function Infographics() {
                     Acompanhamento de poços
                   </Heading>
                   <Flex gap={4}>
-                    <ExibirModal
-                      exibirDataInicio={exibirDataInicio}
-                      setExibirDataInicio={setExibirDataInicio}
-                    />
+                    <ExibirModal opcoesExibir={opcoesExibir} />
                     <FiltrosModal
                       refresh={refresh}
                       setRefresh={setRefresh}
@@ -150,7 +158,7 @@ export function Infographics() {
                             column={column}
                             refresh={refresh}
                             setRefresh={setRefresh}
-                            exibirDataInicio={exibirDataInicio}
+                            opcoesExibir={opcoesExibir}
                           />
                           {/* <ModalCadastroIntervencao /> */}
                         </Flex>

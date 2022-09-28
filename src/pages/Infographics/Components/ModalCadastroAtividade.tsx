@@ -100,7 +100,7 @@ function ModalCadastroAtividade() {
                           />
                         </FormControl>
                       </Flex>
-                      <Flex flex={6}>
+                      <Flex flex={4}>
                         <FormControl>
                           <Flex gap={1}>
                             <RequiredField />

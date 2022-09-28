@@ -18,13 +18,24 @@ type Poco = {
   sonda: string;
 };
 
+type OpcoesExibir = {
+  exibirDataInicio: boolean;
+  setExibirDataInicio: React.Dispatch<React.SetStateAction<boolean>>;
+  exibirPctPlan: boolean;
+  setExibirPctPlan: React.Dispatch<React.SetStateAction<boolean>>;
+  exibirPctReal: boolean;
+  setExibirPctReal: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 type Props = {
   poco: Poco;
   index: number;
-  exibirDataInicio: boolean;
+  opcoesExibir: OpcoesExibir;
 };
 
-function CardPIR({ poco, index, exibirDataInicio }: Props) {
+function CardPIR({ poco, index, opcoesExibir }: Props) {
+  const { exibirDataInicio, exibirPctPlan, exibirPctReal } = opcoesExibir;
+
   const navigate = useNavigate();
   const dataInicioFormatada = formatDate(new Date(poco.inicioplanejado));
   const dataFimFormatada = formatDate(new Date(poco.finalplanejado));
@@ -82,7 +93,8 @@ function CardPIR({ poco, index, exibirDataInicio }: Props) {
             fontWeight={"semi-bold"}
             textAlign={"center"}
           >
-            {poco.pct_plan === null ? "" : `Planejado: ${poco.pct_plan}%`}
+            {/* {poco.pct_plan === null ? "" : `Planejado: ${poco.pct_plan}%`} */}
+            {exibirPctPlan ? `Planejado: ${poco.pct_plan}%` : ""}
           </Text>
           <Text
             fontSize={"md"}
@@ -90,7 +102,8 @@ function CardPIR({ poco, index, exibirDataInicio }: Props) {
             fontWeight={"semi-bold"}
             textAlign={"center"}
           >
-            {poco.pct_plan === null ? "" : `Realizado: ${poco.pct_real}%`}
+            {/* {poco.pct_plan === null ? "" : `Realizado: ${poco.pct_real}%`} */}
+            {exibirPctReal ? `Realizado: ${poco.pct_real}%` : ""}
           </Text>
         </Flex>
       </Flex>

@@ -21,14 +21,23 @@ type Column = {
   id_campanha: number;
 };
 
+type OpcoesExibir = {
+  exibirDataInicio: boolean;
+  setExibirDataInicio: React.Dispatch<React.SetStateAction<boolean>>;
+  exibirPctPlan: boolean;
+  setExibirPctPlan: React.Dispatch<React.SetStateAction<boolean>>;
+  exibirPctReal: boolean;
+  setExibirPctReal: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 type Props = {
   column: Column;
   setRefresh: Function;
   refresh: boolean;
-  exibirDataInicio: boolean;
+  opcoesExibir: OpcoesExibir;
 };
 
-function ColumnSPT({ column, setRefresh, refresh, exibirDataInicio }: Props) {
+function ColumnSPT({ column, setRefresh, refresh, opcoesExibir }: Props) {
   return (
     <Flex direction={"column"} align={"center"} justify={"start"} flex={1}>
       <Text
@@ -62,7 +71,7 @@ function ColumnSPT({ column, setRefresh, refresh, exibirDataInicio }: Props) {
                   poco={poco}
                   index={index}
                   key={index}
-                  exibirDataInicio={exibirDataInicio}
+                  opcoesExibir={opcoesExibir}
                 />
               );
             }
