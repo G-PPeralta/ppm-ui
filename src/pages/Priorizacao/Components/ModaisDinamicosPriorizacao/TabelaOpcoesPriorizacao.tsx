@@ -88,10 +88,39 @@ export function TabelaOpcoesPriorizacao(idRanking: TableProps) {
 
   const tableData = sortData.slice(from, to).map((op) => (
     <Tr key={op.id}>
-      <Td>{op.id}</Td>
-      <Td width={"600px"}>{op.nom_opcao}</Td>
-      <Td textAlign={"center"}>{op.num_nota}</Td>
-      <Td textAlign={"center"}>
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        {op.id}
+      </Td>
+      <Td
+        width={"600px"}
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        {op.nom_opcao}
+      </Td>
+      <Td
+        textAlign={"center"}
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        {op.num_nota}
+      </Td>
+      <Td
+        textAlign={"center"}
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
         <ModalEditarOpcaoPriorizacao
           opcaoId={op.id}
           opcaoName={op.nom_opcao}
@@ -111,10 +140,40 @@ export function TabelaOpcoesPriorizacao(idRanking: TableProps) {
           <Table variant="unstyled">
             <Thead>
               <Tr background="origem.500" color="white">
-                <Th>ID</Th>
-                <Th>{rankingNome}</Th>
-                <Th textAlign={"center"}>Notas</Th>
-                <Th textAlign={"center"}>Ações</Th>
+                <Th
+                  style={{
+                    borderBottom: "0.5px solid #A7A7A7",
+                    borderRight: "0.5px solid #A7A7A7",
+                  }}
+                >
+                  ID
+                </Th>
+                <Th
+                  style={{
+                    borderBottom: "0.5px solid #A7A7A7",
+                    borderRight: "0.5px solid #A7A7A7",
+                  }}
+                >
+                  {rankingNome}
+                </Th>
+                <Th
+                  textAlign={"center"}
+                  style={{
+                    borderBottom: "0.5px solid #A7A7A7",
+                    borderRight: "0.5px solid #A7A7A7",
+                  }}
+                >
+                  Notas
+                </Th>
+                <Th
+                  textAlign={"center"}
+                  style={{
+                    borderBottom: "0.5px solid #A7A7A7",
+                    borderRight: "0.5px solid #A7A7A7",
+                  }}
+                >
+                  Ações
+                </Th>
               </Tr>
             </Thead>
             <Tbody>{tableData}</Tbody>
