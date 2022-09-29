@@ -102,6 +102,7 @@ function ModalCadastroIntervencao({
         qtde_dias: atividade.qtde_dias,
         precedentes: atividade.precedentes,
       }));
+
       registerForm.setFieldValue("atividades", atividadesFormatadas);
     }
   };

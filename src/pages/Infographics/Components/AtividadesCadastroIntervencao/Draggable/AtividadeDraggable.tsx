@@ -3,7 +3,14 @@ import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  FormControl,
+  NumberInput,
+  NumberInputField,
+  Text,
+} from "@chakra-ui/react";
 import { FormikProps } from "formik";
 import {
   AreaAtuacao,
@@ -26,8 +33,6 @@ interface Props {
 
 function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const innerwidth = window.innerWidth;
-  // const { listaAreaAtuacao, listaResponsaveis, listaTarefas } =
-  //   useCadastroIntervencao();
 
   const { listaAreaAtuacao, listaResponsaveis, listaTarefas } = listas;
 
@@ -154,20 +159,22 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 </FormControl>
                 <FormControl>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
-                  <Input
-                    placeholder="0"
-                    type={"number"}
-                    bg={"#fff"}
+
+                  <NumberInput
+                    max={99999}
+                    min={0}
                     id={`atividades[${index}].qtde_dias`}
                     name={`atividades[${index}].qtde_dias`}
                     value={registerForm.values.atividades[index].qtde_dias}
-                    onChange={(event) => {
+                    onChange={(value) => {
                       registerForm.setFieldValue(
                         `atividades[${index}].qtde_dias`,
-                        Number(event.target.value)
+                        Number(value)
                       );
                     }}
-                  />
+                  >
+                    <NumberInputField bg={"#fff"} />
+                  </NumberInput>
                 </FormControl>
                 <Flex direction={"column"}>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>
