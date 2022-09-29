@@ -36,9 +36,9 @@ export function useCadastroProjetoTipo() {
     setListaTarefas(tarefasSorted);
   };
 
-  const listaAtividadesPrecedentes = listaAtividades.map((atividade) => ({
+  const listaAtividadesPrecedentes = listaTarefas.map((atividade) => ({
     id: atividade.id,
-    nome: atividade.tarefa,
+    nome: atividade.nom_atividade,
     checked: false,
   }));
 
