@@ -32,16 +32,16 @@ export function validateDate(
   pct_real: number // porcentagem realizada
 ) {
   switch (true) {
+    case pct_plan > pct_real:
+      return statusProjeto[3].color; // atrasado
     case pct_real === 100 && comp_pct === 1:
-      return statusProjeto[4].color;
+      return statusProjeto[4].color; // concluído
     case (pct_real > 0 && pct_real < 100 && comp_pct === 1) ||
       (pct_real > pct_plan && comp_pct === 1):
-      return statusProjeto[1].color;
-    case pct_real < pct_plan:
-      return statusProjeto[3].color;
+      return statusProjeto[1].color; // em andamento
     case pct_plan === 0 && pct_real === 0:
-      return statusProjeto[0].color;
+      return statusProjeto[0].color; // não iniciado
     default:
-      return statusProjeto[2].color;
+      return statusProjeto[2].color; // não aplicável
   }
 }

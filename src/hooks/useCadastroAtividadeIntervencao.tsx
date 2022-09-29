@@ -76,7 +76,7 @@ export function useCadastroAtividadeIntervencao() {
     id_origem: "",
     nom_atividade: "",
     responsavel_id: 0,
-    area_atuacao_id: 0,
+    area_atuacao: 0,
     nao_iniciar_antes_de: {
       data: "",
       checked: false,
@@ -104,7 +104,7 @@ export function useCadastroAtividadeIntervencao() {
         id_origem: values.id_origem,
         nom_atividade: values.nom_atividade,
         responsavel_id: values.responsavel_id,
-        area_atuacao_id: values.area_atuacao_id,
+        area_atuacao: values.area_atuacao,
         nao_iniciar_antes_de: values.nao_iniciar_antes_de,
         nao_terminar_depois_de: values.nao_terminar_depois_de,
         o_mais_breve_possivel: values.o_mais_breve_possivel,

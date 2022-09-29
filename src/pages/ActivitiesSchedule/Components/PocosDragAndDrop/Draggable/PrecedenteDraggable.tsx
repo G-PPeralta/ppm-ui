@@ -69,7 +69,7 @@ function PrecedenteDraggable({
             flexWrap="wrap"
             flexDirection="row"
             alignItems="center"
-            justifyContent="space-evenly"
+            justifyContent="center"
             w="100%"
             bg={"#f5f5f5"}
             px={5}
@@ -77,48 +77,60 @@ function PrecedenteDraggable({
             borderRadius={"60px"}
             mb={2}
           >
-            <Flex align={"center"} justify={"center"} gap={3}>
-              <GiHamburgerMenu color="#2E69FD" size={16} />
-              <Text sx={{ fontSize: 16, fontWeight: "600" }}>{index + 1}</Text>
-            </Flex>
-
             <Flex
+              flexDirection={"row"}
               gap={4}
-              direction={innerwidth >= 640 ? "row" : "column"}
-              align={"center"}
-              justify={"center"}
-              py={innerwidth >= 640 ? 0 : 4}
+              flex={1}
+              justify={"space-between"}
             >
-              <FormControl>
-                <SelectPrecedente
-                  listaPrecedentes={listaPrecedentes}
-                  handleChange={handleChange}
-                  options={options}
-                  value={getValue(options, index)}
-                />
-              </FormControl>
-            </Flex>
+              <Flex align={"center"} justify={"center"} gap={3}>
+                <GiHamburgerMenu color="#2E69FD" size={16} />
+                <Text sx={{ fontSize: 16, fontWeight: "600" }}>
+                  {index + 1}
+                </Text>
+              </Flex>
 
-            <Flex
-              gap={4}
-              direction={innerwidth >= 640 ? "row" : "column"}
-              align={"center"}
-              justify={"center"}
-              py={innerwidth >= 640 ? 0 : 4}
-            >
-              <FormControl flex={1}>
-                <Text sx={{ fontSize: 12, fontWeight: "600" }}>Dias</Text>
-                <Input
-                  isDisabled
-                  bg={"#fff"}
-                  placeholder="0"
-                  id="dias"
-                  type="number"
-                  name="dias"
-                  w={"100%"}
-                  value={precedentes[index].dias}
-                />
-              </FormControl>
+              <Flex
+                gap={4}
+                direction={innerwidth >= 640 ? "row" : "column"}
+                align={"center"}
+                justify={"center"}
+                py={innerwidth >= 640 ? 0 : 4}
+                flex={1}
+              >
+                <Flex direction={"column"} flex={3}>
+                  <SelectPrecedente
+                    listaPrecedentes={listaPrecedentes}
+                    handleChange={handleChange}
+                    options={options}
+                    value={getValue(options, index)}
+                  />
+                </Flex>
+                <Flex flex={1}>
+                  <Flex
+                    gap={4}
+                    direction={innerwidth >= 640 ? "row" : "column"}
+                    align={"center"}
+                    justify={"center"}
+                    py={innerwidth >= 640 ? 0 : 4}
+                    flex={1}
+                  >
+                    <FormControl>
+                      <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
+                      <Input
+                        isDisabled
+                        bg={"#fff"}
+                        placeholder="0"
+                        id="dias"
+                        type="number"
+                        name="dias"
+                        w={"100%"}
+                        value={precedentes[index].dias}
+                      />
+                    </FormControl>
+                  </Flex>
+                </Flex>
+              </Flex>
             </Flex>
 
             <Flex
