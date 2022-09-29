@@ -1,19 +1,19 @@
 import { GanttComponent, TaskFieldsModel } from "@syncfusion/ej2-react-gantt";
 
 export interface SubTaskGantt {
-  taskID: number;
-  taskName: string;
-  startDate: Date;
-  duration: number;
-  progress: number;
+  TaskID: number;
+  TaskName: string;
+  StartDate: Date;
+  Duration: number;
+  Progress: number;
   Predeceesor?: string;
 }
 
 export interface GanttData {
-  taskID: number;
-  taskName: string;
-  startDate: Date;
-  endDate: Date;
+  TaskID: number;
+  TaskName: string;
+  StartDate: Date;
+  EndDate: Date;
   subtasks: SubTaskGantt[];
 }
 
