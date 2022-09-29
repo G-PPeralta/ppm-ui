@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+// import toast from "react-hot-toast";
 import { AiFillEdit, AiOutlineSearch } from "react-icons/ai";
 
 import {
@@ -50,6 +51,12 @@ function BotaoListadeTarefas() {
     [] as AtividadesProjeto[]
   );
 
+  const [dataFilter, setDataFiltered] = useState("");
+
+  const [filteredData, setFilteredData] = useState(
+    [] as TarefaAtividadeComId[]
+  );
+
   const [render, setRender] = useState(false);
 
   async function fetchAtividadesProjeto() {
@@ -65,11 +72,30 @@ function BotaoListadeTarefas() {
   async function getTaskList() {
     const { data } = await getAtividadesTarefas();
     setTaskList(data);
+    setFilteredData(data);
   }
 
   function handleEditTarefa(tarefa: TarefaAtividade) {
     setEditTarefa(tarefa);
     setIsEditModalOpen(true);
+  }
+
+  function handleFilter(nome: string, data: string) {
+    if (nome) {
+      const filtered = taskList.filter((task: any) =>
+        task.nome_tarefa.includes(nome)
+      );
+      return setTaskList(filtered);
+    }
+    if (data) {
+      const filtered = taskList.filter((task: any) =>
+        task.data_tarefa.includes(data)
+      );
+      // filtered.length == 0 &&
+      //   toast.error("Nenhum dado encontrado com o presente filtro de data");
+      return setTaskList(filtered);
+    }
+    setTaskList(filteredData);
   }
 
   const tableData =
@@ -225,8 +251,8 @@ function BotaoListadeTarefas() {
                       id="data"
                       type="date"
                       name="data"
-                      // value={data}
-                      // onChange={(event) => setData(event.target.value)}
+                      // value={dataFilter}
+                      onChange={(event) => setDataFiltered(event.target.value)}
                     />
                   </FormControl>
                   {/* <input
@@ -253,6 +279,9 @@ function BotaoListadeTarefas() {
                     //   handleFilter(categoriaId, data);
                     //   setCategoriaId("");
                     // }}
+                    onClick={() => {
+                      handleFilter(tarefaFilter, dataFilter);
+                    }}
                     _hover={{
                       background: "origem.300",
                       transition: "all 0.4s",
@@ -285,7 +314,10 @@ function BotaoListadeTarefas() {
             </FormControl>
           </Stack>
 
-          <ModalCloseButton color={"white"} />
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => setTaskList(filteredData)}
+          />
           <ModalBody>
             <TableContainer mt={4} mb={3} ml={1}>
               <Table
