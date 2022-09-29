@@ -75,6 +75,18 @@ function ModalEditarAtividade({
     }
   }, []);
 
+  // const payload = {
+  //   nome,
+  //   responsavel,
+  //   area,
+  //   observacoes,
+  //   campanhaId,
+  //   atividadeStatus,
+  //   precedentes,
+  // };
+
+  // console.log("payload", payload);
+
   const send = async () => {
     try {
       const { status } = await postEditarAtividadeStatus(

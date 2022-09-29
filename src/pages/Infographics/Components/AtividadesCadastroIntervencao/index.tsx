@@ -18,6 +18,7 @@ import AtividadesDraggable from "./Draggable/AtividadeDraggable";
 
 export default function AtividadesCadastroIntervencao({
   registerForm,
+  listaAtividadesPrecedentes,
 }: // listaAtividadesPrecedentes,
 any) {
   const id = useId();
@@ -81,6 +82,7 @@ any) {
         tarefa_id: 0,
         responsavel_id: 0,
         qtde_dias: 0,
+        precedentes: listaAtividadesPrecedentes,
       },
     ]);
     setRender(!render);

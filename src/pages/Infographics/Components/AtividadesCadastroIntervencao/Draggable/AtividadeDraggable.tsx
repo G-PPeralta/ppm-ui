@@ -13,6 +13,7 @@ import {
 // import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
+import PopOverPrecedentes from "./PopOverPrecedentes";
 interface Props {
   registerForm: FormikProps<any>;
   index: number;
@@ -168,6 +169,15 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     }}
                   />
                 </FormControl>
+                <Flex direction={"column"}>
+                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>
+                    PRECEDENTES
+                  </Text>
+                  <PopOverPrecedentes
+                    registerForm={registerForm}
+                    index={index}
+                  />
+                </Flex>
               </Flex>
               <Flex
                 p={1}

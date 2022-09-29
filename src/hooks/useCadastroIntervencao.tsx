@@ -104,6 +104,12 @@ export function useCadastroIntervencao() {
     setListaTarefas(tarefasSorted);
   };
 
+  const listaAtividadesPrecedentes = listaTarefas.map((atividade) => ({
+    id: atividade.id,
+    nome: atividade.nom_atividade,
+    checked: false,
+  }));
+
   const initialValues: any = {
     nom_usu_create: user?.nome,
     poco_id: 0,
@@ -117,6 +123,13 @@ export function useCadastroIntervencao() {
         tarefa_id: 0,
         responsavel_id: 0,
         qtde_dias: 0,
+        precedentes: [
+          {
+            id: 0,
+            nome: "",
+            checked: false,
+          },
+        ],
       },
     ],
     comentarios: "",
@@ -179,5 +192,6 @@ export function useCadastroIntervencao() {
     listaProjetosTipo,
     listaSondaCampanha,
     listaTarefas,
+    listaAtividadesPrecedentes,
   };
 }
