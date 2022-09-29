@@ -113,7 +113,7 @@ export const cadastroAtividadeIntervencaoSchema = yup.object({
     .number()
     .required("O responsável é obrigatório!")
     .moreThan(1),
-  area_atuacao_id: yup
+  area_atuacao: yup
     .number()
     .required("A área de atuação é obrigatória!")
     .moreThan(1),

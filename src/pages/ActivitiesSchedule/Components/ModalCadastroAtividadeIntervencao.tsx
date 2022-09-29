@@ -62,6 +62,8 @@ function ModalCadastroAtividadeIntervencao({
     registerForm.setFieldValue("id_intervencao", id);
   }, []);
 
+  console.log("registerForm", registerForm.values);
+
   return (
     <>
       <Button
@@ -173,7 +175,7 @@ function ModalCadastroAtividadeIntervencao({
                         <SelectFiltragem
                           registerForm={registerForm}
                           nomeSelect={"Área"}
-                          propName={"area_atuacao_id"}
+                          propName={"area_atuacao"}
                           options={areaAtuacaoOptions}
                           required={true}
                         />
