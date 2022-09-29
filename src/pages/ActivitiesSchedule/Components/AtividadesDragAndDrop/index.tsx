@@ -7,30 +7,18 @@ import {
 
 import { Flex, FormLabel } from "@chakra-ui/react";
 import { FormikProps } from "formik";
-import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
-
-import { RequiredField } from "components/RequiredField/RequiredField";
-
-import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
+// import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
 import BotaoAdicionar from "./BotaoAdicionar";
 import AtividadesDraggable from "./Draggable/AtividadeDraggable";
 
-export default function AtividadesCadastroIntervencao({
+export default function AtividadesDragAndDrop({
   registerForm,
-}: // listaAtividadesPrecedentes,
-any) {
+  atividades,
+}: any) {
   const id = useId();
   const [render, setRender] = useState<any>([]);
   const [droppableId, setDroppableId] = useState<string>(id);
-  const { listaAreaAtuacao, listaResponsaveis, listaTarefas } =
-    useCadastroIntervencao();
-
-  const listas = {
-    listaAreaAtuacao,
-    listaResponsaveis,
-    listaTarefas,
-  };
 
   const reorder = (
     registerForm: FormikProps<any>,
@@ -41,7 +29,7 @@ any) {
       // Pega a lista de atividades diretamente do Formik
       // e faz uma atribuição em uma variável para garantir
       // imutabilidade do estado original
-      const list = registerForm.values.atividades;
+      const list = registerForm.values.precedentes;
 
       // Seleciona item que está sendo arrastado e o remove
       // da lista
@@ -54,7 +42,7 @@ any) {
       // Retorna lista atualizada
       return list;
     };
-    registerForm.setFieldValue("atividades", listaReordenada(registerForm));
+    registerForm.setFieldValue("precedentes", listaReordenada(registerForm));
   };
 
   const onDragEnd = (result: any) => {
@@ -74,16 +62,17 @@ any) {
   };
 
   const add = () => {
-    registerForm.setFieldValue("atividades", [
-      ...registerForm.values.atividades,
-      {
-        area_id: 0,
-        tarefa_id: 0,
-        responsavel_id: 0,
-        qtde_dias: 0,
-      },
-    ]);
-    setRender(!render);
+    // Cria um novo item na lista de atividades com os valores padrões
+    if (registerForm.values.precedentes.length < atividades.length) {
+      registerForm.setFieldValue("precedentes", [
+        ...registerForm.values.precedentes,
+        {
+          atividadePrecedenteId: 0,
+          dias: 0,
+        },
+      ]);
+      setRender(!render);
+    }
   };
 
   useEffect(() => {
@@ -91,25 +80,31 @@ any) {
     const now = Date.now();
     const newId = droppableId + "-" + now.toLocaleString();
     setDroppableId(newId);
+
+    // Para atualizar os valores das atividades precedentes
+    // do primeiro item da lista quando o modal é aberto
+    // registerForm.setFieldValue(
+    //   "atividades[0].precedentes",
+    //   listaAtividadesPrecedentes
+    // );
   }, []);
 
   return (
     <>
       <Flex gap={1}>
-        <RequiredField />
-        <FormLabel mb={0}>ATIVIDADES</FormLabel>
+        <FormLabel mb={0}>ATIVIDADES PRECEDENTES</FormLabel>
       </Flex>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId={droppableId}>
           {(provided: DroppableProvided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              {registerForm.values.atividades.map(
-                (_atividade: AtividadesProjetoTipo, index: number) => (
+              {registerForm.values.precedentes.map(
+                (_atividade: any, index: number) => (
                   <AtividadesDraggable
                     key={index}
                     registerForm={registerForm}
                     index={index}
-                    listas={listas}
+                    atividades={atividades}
                   />
                 )
               )}
@@ -118,7 +113,11 @@ any) {
           )}
         </Droppable>
       </DragDropContext>
-      <BotaoAdicionar add={add} />
+      <BotaoAdicionar
+        add={add}
+        registerForm={registerForm}
+        atividades={atividades}
+      />
     </>
   );
 }

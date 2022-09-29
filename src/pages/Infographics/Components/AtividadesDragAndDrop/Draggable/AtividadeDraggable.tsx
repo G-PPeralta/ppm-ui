@@ -12,7 +12,7 @@ import { regexCaracteresEspeciais } from "utils/regex";
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
 
-import SelectFiltragem from "../../SelectFiltragem";
+import SelectFiltragem from "../../../../../components/SelectFiltragem";
 import PopOverPrecedentes from "./PopOverPrecedentes";
 
 interface Props {
