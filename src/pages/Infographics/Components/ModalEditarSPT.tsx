@@ -23,29 +23,7 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 
 import PocosDragAndDrop from "./PocosDragAndDrop";
 
-type Poco = {
-  comp_pct: number;
-  finalPlanejado: any;
-  id_campanha: number;
-  id_poco: number;
-  inicioplanejado: any;
-  pct_plan: any;
-  pct_real: any;
-  poco: string;
-  sonda: string;
-};
-
-type Column = {
-  sonda: string;
-  id_campanha: number;
-  pocos: Poco[];
-};
-
-type Props = {
-  column: Column;
-};
-
-function ModalEditarSPT({ column }: Props) {
+function ModalEditarSPT({ column }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [nome, setNome] = useState(column.sonda);
   const [pocos, setPocos] = useState(column.pocos);

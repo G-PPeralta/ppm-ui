@@ -20,7 +20,6 @@ type Column = {
   sonda: string;
   id_campanha: number;
   pocos: Poco[];
-  id_campanha: number;
 };
 
 type Props = {

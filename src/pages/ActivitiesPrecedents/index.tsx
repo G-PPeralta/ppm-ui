@@ -271,12 +271,12 @@ export function ActivitiesPrecedents() {
                 </Flex>
                 <Flex justify={"space-between"} gap={1} wrap={"wrap"} mb={4}>
                   <Flex gap={2}>
+                    <BotaoVisaoGeral />
                     <ModalCadastroAtividade
                       id={id}
                       setRefresh={setRefresh}
                       refresh={refresh}
                     />
-                    <BotaoVisaoGeral />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (
