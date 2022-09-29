@@ -29,12 +29,12 @@ export const LinkItems: Array<LinkItemProps> = [
     children: [
       { name: "Dashboard", icon: FiHome, link: "/" },
       { name: "Projetos", icon: FaRegMoneyBillAlt, link: "/projects" },
-      {
-        name: "Fornecedores",
-        icon: FaRegMoneyBillAlt,
-        link: "/desenvolvimento",
-      },
-      { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/desenvolvimento" },
+      // {
+      //   name: "Fornecedores",
+      //   icon: FaRegMoneyBillAlt,
+      //   link: "/desenvolvimento",
+      // },
+      { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/budgets" },
       { name: "Importar Dados", icon: BiData, link: "/upload" },
       {
         name: "Fornecedores",
@@ -70,7 +70,7 @@ export const LinkItems: Array<LinkItemProps> = [
       {
         name: "Estatísticas",
         icon: AiOutlineBarChart,
-        link: "/desenvolvimento",
+        link: "/estatisticas",
       },
       {
         name: "Gráficos Estatisticos",

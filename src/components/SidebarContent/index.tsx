@@ -49,7 +49,6 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
       h="full"
       {...rest}
       overflowX="auto"
-      over
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Link to="/">

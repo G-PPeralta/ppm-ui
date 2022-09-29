@@ -77,25 +77,6 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                       gap={5}
                     >
                       <FormControl>
-                        {/* <Flex gap={1}>
-                          <RequiredField />
-                          <FormLabel htmlFor="nom_campanha">NOME</FormLabel>
-                        </Flex> */}
-                        {/* <Input
-                          isRequired
-                          placeholder="Nome da campanha"
-                          id="nom_campanha"
-                          type="text"
-                          name="nom_campanha"
-                          value={registerForm.values.nom_campanha}
-                          onChange={registerForm.handleChange}
-                        />
-                        {registerForm.errors.nom_campanha &&
-                          registerForm.touched.nom_campanha && (
-                            <TextError>
-                              {registerForm.errors.nom_campanha}
-                            </TextError>
-                          )} */}
                         <SelectFiltragemSondas
                           form={registerForm}
                           nomeChave={"nom_campanha"}
@@ -124,6 +105,7 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                           name="dsc_comentario"
                           value={registerForm.values.dsc_comentario}
                           onChange={registerForm.handleChange}
+                          maxLength={255}
                         />
                         {registerForm.errors.dsc_comentario &&
                           registerForm.touched.dsc_comentario && (

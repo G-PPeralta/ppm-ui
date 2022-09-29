@@ -1,23 +1,28 @@
 export const statusProjeto = [
   {
-    status: "Não Aplicável",
-    color: "#F4DD06",
-  },
-  {
+    id: 4,
     status: "Não Iniciado",
-    color: "#FFB400",
+    color: "#585858",
   },
   {
-    status: "Concluído",
-    color: "#059502",
-  },
-  {
+    id: 2,
     status: "Em Andamento",
     color: "#0047BB",
   },
   {
+    id: 5,
+    status: "Não Aplicável",
+    color: "#C2561A",
+  },
+  {
+    id: 3,
     status: "Atrasado",
-    color: "#F40606",
+    color: "#BD0000",
+  },
+  {
+    id: 1,
+    status: "Concluído",
+    color: "#027200",
   },
 ];
 
@@ -26,30 +31,17 @@ export function validateDate(
   comp_pct: number, // comparação porcentagens
   pct_real: number // porcentagem realizada
 ) {
-  // switch (true) {
-  //   case pct_plan === 0 && comp_pct === 0:
-  //     return statusProjeto[1].color;
-  //   case pct_real === 100:
-  //     return statusProjeto[2].color;
-  //   case comp_pct === 1:
-  //     return statusProjeto[3].color;
-  //   case comp_pct < pct_plan:
-  //     return statusProjeto[4].color;
-  //   default:
-  //     return statusProjeto[0].color;
-  // }
   switch (true) {
+    case pct_plan > pct_real:
+      return statusProjeto[3].color; // atrasado
     case pct_real === 100 && comp_pct === 1:
-      return statusProjeto[2].color;
-    case pct_real > 0 && pct_real < 100 && comp_pct === 1:
-      return statusProjeto[3].color;
-    case pct_real > pct_plan && comp_pct === 1:
-      return statusProjeto[3].color;
-    case pct_real < pct_plan:
-      return statusProjeto[4].color;
-    case pct_plan === 0:
-      return statusProjeto[1].color;
+      return statusProjeto[4].color; // concluído
+    case (pct_real > 0 && pct_real < 100 && comp_pct === 1) ||
+      (pct_real > pct_plan && comp_pct === 1):
+      return statusProjeto[1].color; // em andamento
+    case pct_plan === 0 && pct_real === 0:
+      return statusProjeto[0].color; // não iniciado
     default:
-      return statusProjeto[0].color;
+      return statusProjeto[2].color; // não aplicável
   }
 }

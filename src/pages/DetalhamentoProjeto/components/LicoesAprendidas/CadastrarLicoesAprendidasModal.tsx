@@ -93,7 +93,7 @@ function CadastrarLicoesAprendidasModal({
           >
             Lição Aprendida
           </ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton color={"white"} />
           <ModalBody>
             <FormControl marginBottom={4} padding={1}>
               <FormLabel

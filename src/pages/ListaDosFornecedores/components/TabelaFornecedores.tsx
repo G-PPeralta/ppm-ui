@@ -39,27 +39,78 @@ export function TabelaFornecedores({
     );
   // console.log(realSum);
 
-  const tableData = fornecedores.map((fornecedor) => (
-    <Tr key={fornecedor.id}>
-      <Td isNumeric>{fornecedor.id}</Td>
-      <Td>{fornecedor.fornecedor}</Td>
-      <Td>{fornecedor.orcamento.toLocaleString("pt-br")}</Td>
-      <Td>{fornecedor.realizado.toLocaleString("pt-br")}</Td>
-      <Td>{fornecedor.responsavel}</Td>
-      <Td>{fornecedor.descricao}</Td>
-      <Td>
-        <IconButton
-          aria-label="Plus sign"
-          icon={<AiFillEdit />}
-          background="white"
-          variant="secondary"
-          color="#2D2926"
-          mr={2}
-          isRound={true}
-          size="sm"
-          onClick={() => onEdit(fornecedor)}
-        />
-        {/* <IconButton
+  const tableData = fornecedores
+    .sort((a, b) => a.id - b.id)
+    .map((fornecedor, index) => (
+      <Tr key={index}>
+        <Td
+          isNumeric
+          style={{
+            borderBottom: "0.5px solid #A7A7A7",
+            borderRight: "0.5px solid #A7A7A7",
+            borderLeft: "0.5px solid #A7A7A7",
+          }}
+        >
+          {fornecedor.id}
+        </Td>
+        <Td
+          style={{
+            borderBottom: "0.5px solid #A7A7A7",
+            borderRight: "0.5px solid #A7A7A7",
+          }}
+        >
+          {fornecedor.fornecedor}
+        </Td>
+        <Td
+          style={{
+            borderBottom: "0.5px solid #A7A7A7",
+            borderRight: "0.5px solid #A7A7A7",
+          }}
+        >
+          {fornecedor.orcamento.toLocaleString("pt-br")}
+        </Td>
+        <Td
+          style={{
+            borderBottom: "0.5px solid #A7A7A7",
+            borderRight: "0.5px solid #A7A7A7",
+          }}
+        >
+          {fornecedor.realizado.toLocaleString("pt-br")}
+        </Td>
+        <Td
+          style={{
+            borderBottom: "0.5px solid #A7A7A7",
+            borderRight: "0.5px solid #A7A7A7",
+          }}
+        >
+          {fornecedor.responsavel}
+        </Td>
+        <Td
+          style={{
+            borderBottom: "0.5px solid #A7A7A7",
+            borderRight: "0.5px solid #A7A7A7",
+          }}
+        >
+          {fornecedor.descricao}
+        </Td>
+        <Td
+          style={{
+            borderBottom: "0.5px solid #A7A7A7",
+            borderRight: "0.5px solid #A7A7A7",
+          }}
+        >
+          <IconButton
+            aria-label="Plus sign"
+            icon={<AiFillEdit />}
+            background="white"
+            variant="secondary"
+            color="#2D2926"
+            mr={2}
+            isRound={true}
+            size="sm"
+            onClick={() => onEdit(fornecedor)}
+          />
+          {/* <IconButton
           aria-label="Plus sign"
           icon={<FaTrash />}
           background="white"
@@ -70,10 +121,10 @@ export function TabelaFornecedores({
           size="sm"
         /> */}
 
-        {/* <EditaValorModal /> */}
-      </Td>
-    </Tr>
-  ));
+          {/* <EditaValorModal /> */}
+        </Td>
+      </Tr>
+    ));
 
   return (
     <TableContainer mt={4} mb={3} ml={1}>
@@ -92,13 +143,54 @@ export function TabelaFornecedores({
         <Tbody>{tableData}</Tbody>
         <Tfoot>
           <Tr background="origem.200" color="white">
-            <Th>Total</Th>
-            <Th></Th>
-            <Th>{orcSum.toLocaleString("pt-br")}</Th>
-            <Th>{realSum.toLocaleString("pt-br")}</Th>
-            <Th></Th>
-            <Th></Th>
-            <Th></Th>
+            <Th
+              style={{
+                borderBottom: "0.5px solid #A7A7A7",
+                borderRight: "0.5px solid #A7A7A7",
+              }}
+            >
+              Total
+            </Th>
+            <Th
+              style={{
+                borderBottom: "0.5px solid #A7A7A7",
+                borderRight: "0.5px solid #A7A7A7",
+              }}
+            ></Th>
+            <Th
+              style={{
+                borderBottom: "0.5px solid #A7A7A7",
+                borderRight: "0.5px solid #A7A7A7",
+              }}
+            >
+              {orcSum.toLocaleString("pt-br")}
+            </Th>
+            <Th
+              style={{
+                borderBottom: "0.5px solid #A7A7A7",
+                borderRight: "0.5px solid #A7A7A7",
+              }}
+            >
+              {realSum.toLocaleString("pt-br")}
+            </Th>
+            <Th
+              style={{
+                borderBottom: "0.5px solid #A7A7A7",
+                borderRight: "0.5px solid #A7A7A7",
+              }}
+            ></Th>
+            <Th
+              style={{
+                borderBottom: "0.5px solid #A7A7A7",
+                borderRight: "0.5px solid #A7A7A7",
+              }}
+            ></Th>
+            <Th
+              style={{
+                borderBottom: "0.5px solid #A7A7A7",
+                borderRight: "0.5px solid #A7A7A7",
+              }}
+            ></Th>
           </Tr>
         </Tfoot>
       </Table>

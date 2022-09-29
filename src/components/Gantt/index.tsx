@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
 
-import { GanttComponent, Inject, Edit } from "@syncfusion/ej2-react-gantt";
+import {
+  GanttComponent,
+  Inject,
+  Edit,
+  Toolbar,
+} from "@syncfusion/ej2-react-gantt";
 import { IGantt, GanttProps } from "interfaces/Services";
 
 import { getGanttData } from "services/get/Gantt";
 
-export function Gantt() {
+type ganttOptionsProps = {
+  toolbarOptions?: string[];
+};
+export function Gantt({ toolbarOptions }: ganttOptionsProps) {
   // const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);
   const [loading, setLoading] = useState(true);
   const [gantt, setGantt] = useState<GanttProps[]>();
@@ -169,6 +177,7 @@ export function Gantt() {
           //     progress: microatividade.progresso,
           //   })),
           // }))}
+          toolbar={toolbarOptions || []}
           editSettings={{
             allowTaskbarEditing: false,
             allowEditing: true,
@@ -223,7 +232,7 @@ export function Gantt() {
             },
           ]}
         >
-          <Inject services={[Edit]} />
+          <Inject services={[Edit, Toolbar]} />
         </GanttComponent>
       )}
     </>

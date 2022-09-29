@@ -36,7 +36,7 @@ function CardACT({ atividade }: Props) {
       )}
       px={4}
       py={2}
-      borderRadius={4}
+      borderRadius={12}
       w={"100%"}
     >
       <Flex direction={"column"} align={"center"}>
