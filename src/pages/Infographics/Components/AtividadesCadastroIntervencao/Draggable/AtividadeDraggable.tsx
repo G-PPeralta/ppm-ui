@@ -10,18 +10,25 @@ import {
   Responsavel,
 } from "interfaces/CadastrosModaisInfograficos";
 
-import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
+// import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
 interface Props {
   registerForm: FormikProps<any>;
   index: number;
+  listas: {
+    listaAreaAtuacao: AreaAtuacao[];
+    listaResponsaveis: Responsavel[];
+    listaTarefas: any[];
+  };
 }
 
-function AtividadesDraggable({ index, registerForm }: Props) {
+function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const innerwidth = window.innerWidth;
-  const { listaAreaAtuacao, listaResponsaveis, listaTarefas } =
-    useCadastroIntervencao();
+  // const { listaAreaAtuacao, listaResponsaveis, listaTarefas } =
+  //   useCadastroIntervencao();
+
+  const { listaAreaAtuacao, listaResponsaveis, listaTarefas } = listas;
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);

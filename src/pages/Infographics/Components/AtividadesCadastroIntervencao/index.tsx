@@ -11,6 +11,8 @@ import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
+import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
+
 import BotaoAdicionar from "./BotaoAdicionar";
 import AtividadesDraggable from "./Draggable/AtividadeDraggable";
 
@@ -21,6 +23,14 @@ any) {
   const id = useId();
   const [render, setRender] = useState<any>([]);
   const [droppableId, setDroppableId] = useState<string>(id);
+  const { listaAreaAtuacao, listaResponsaveis, listaTarefas } =
+    useCadastroIntervencao();
+
+  const listas = {
+    listaAreaAtuacao,
+    listaResponsaveis,
+    listaTarefas,
+  };
 
   const reorder = (
     registerForm: FormikProps<any>,
@@ -99,6 +109,7 @@ any) {
                     key={index}
                     registerForm={registerForm}
                     index={index}
+                    listas={listas}
                   />
                 )
               )}
