@@ -32,12 +32,14 @@ interface CadastroTarefaProps {
   isModalOpen: any;
   closeModal: any;
   atividadesProjeto: AtividadesProjeto[];
+  newRender: any;
 }
 
 function CadastroTarefasModal({
   isModalOpen,
   closeModal,
   atividadesProjeto,
+  newRender,
 }: CadastroTarefaProps) {
   // const { onClose } = useDisclosure();
   const { user } = useAuth();
@@ -219,6 +221,7 @@ function CadastroTarefasModal({
                     descricao_tarefa: descricao,
                     nom_usu_create: user?.nome,
                   });
+                  newRender();
                   closeModal();
                 }}
               >

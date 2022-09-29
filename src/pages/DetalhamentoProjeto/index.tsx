@@ -91,8 +91,6 @@ function DetalhamentoProjeto() {
     // handleGetLicoes();
   }, []);
 
-  // console.log(progresso[0].fn_cron_calc_pct_real);
-
   return (
     <>
       <Sidebar>
