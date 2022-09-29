@@ -77,6 +77,7 @@ export function TabelaPriorizacao() {
   const tableData = data.slice(from, to).map((prio) => (
     <Tr key={prio.id}>
       <Td
+        width={"50px"}
         isNumeric
         style={{
           borderBottom: "0.5px solid #A7A7A7",
@@ -120,7 +121,13 @@ export function TabelaPriorizacao() {
     <div>
       <Flex direction={"column"}>
         <TableContainer mt={4} mb={4}>
-          <Table variant="unstyled">
+          <Table
+            variant="unstyled"
+            style={{
+              borderBottom: "0.5px solid #A7A7A7",
+              border: "0.5px solid #A7A7A7",
+            }}
+          >
             <Thead>
               <Tr background="origem.500" color="white">
                 <Th

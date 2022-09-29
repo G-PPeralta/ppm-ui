@@ -89,6 +89,7 @@ export function TabelaOpcoesPriorizacao(idRanking: TableProps) {
   const tableData = sortData.slice(from, to).map((op) => (
     <Tr key={op.id}>
       <Td
+        width={"10px"}
         style={{
           borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
@@ -97,7 +98,7 @@ export function TabelaOpcoesPriorizacao(idRanking: TableProps) {
         {op.id}
       </Td>
       <Td
-        width={"600px"}
+        width={"500px"}
         style={{
           borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
@@ -106,6 +107,7 @@ export function TabelaOpcoesPriorizacao(idRanking: TableProps) {
         {op.nom_opcao}
       </Td>
       <Td
+        width={"200px"}
         textAlign={"center"}
         style={{
           borderBottom: "0.5px solid #A7A7A7",
@@ -137,7 +139,13 @@ export function TabelaOpcoesPriorizacao(idRanking: TableProps) {
     <div>
       <Flex direction={"column"}>
         <TableContainer mt={6} mb={1}>
-          <Table variant="unstyled">
+          <Table
+            variant="unstyled"
+            style={{
+              borderBottom: "0.5px solid #A7A7A7",
+              border: "0.5px solid #A7A7A7",
+            }}
+          >
             <Thead>
               <Tr background="origem.500" color="white">
                 <Th

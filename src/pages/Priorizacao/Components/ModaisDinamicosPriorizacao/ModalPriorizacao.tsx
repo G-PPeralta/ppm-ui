@@ -1,4 +1,4 @@
-import { FaGreaterThan } from "react-icons/fa";
+// import { FaGreaterThan } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import { MdModeEdit } from "react-icons/md";
 
@@ -15,7 +15,7 @@ import {
   Text,
   useDisclosure,
   IconButton,
-  Icon,
+  // Icon,
 } from "@chakra-ui/react";
 // import { Ring } from "@uiball/loaders";
 
@@ -111,7 +111,7 @@ function ModalPriorizacao(infosRankings: TableProps) {
                               idRanking={infosRankings.idRanking}
                             />
                           </Flex>
-                          <Button
+                          {/* <Button
                             background="transparent"
                             color="#0047BB"
                             float={"right"}
@@ -125,7 +125,7 @@ function ModalPriorizacao(infosRankings: TableProps) {
                               ml={1}
                               color="#0047BB"
                             />
-                          </Button>
+                          </Button> */}
                         </Flex>
                       </Flex>
                       <TabelaOpcoesPriorizacao

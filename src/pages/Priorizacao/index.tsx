@@ -55,7 +55,6 @@ export function Priorizacao() {
                       fontWeight={"700"}
                       fontSize={"22px"}
                       color={"#2D2926"}
-                      mr={"650px"}
                     >
                       Priorização
                     </Text>
@@ -65,7 +64,7 @@ export function Priorizacao() {
                       <ModalCadastrarPriorizacao />
                     </FormControl>
                   </Flex>
-                  <Flex alignItems={"flex-end"}>{/* <ModalLixeira /> */}</Flex>
+                  {/* <Flex alignItems={"flex-end"}><ModalLixeira /></Flex> */}
                 </Flex>
                 <>
                   <TabelaPriorizacao />
