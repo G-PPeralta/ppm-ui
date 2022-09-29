@@ -18,6 +18,7 @@ export interface CurveSData {
   capexPrevisto: number;
   capexRealizado: number;
 }
+
 type Props = {
   data: CurveSData[];
 };
