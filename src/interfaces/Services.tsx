@@ -391,11 +391,13 @@ export interface ProjetoProgresso {
 }
 
 export interface TarefaAtividade {
+  id?: number;
   nome_tarefa: string;
   data_tarefa: Date;
   atividade_relacionada: number;
-  descricao: string;
+  descricao_tarefa: string;
   nom_usu_create?: string;
+  status?: number;
 }
 
 export interface AtividadesProjeto {

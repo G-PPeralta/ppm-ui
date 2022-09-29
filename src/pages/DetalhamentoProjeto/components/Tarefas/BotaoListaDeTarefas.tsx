@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiFillEdit, AiOutlineSearch } from "react-icons/ai";
 
 import {
@@ -27,44 +27,48 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
+import { AtividadesProjeto, TarefaAtividade } from "interfaces/Services";
+
+import { getAtividadesProjeto } from "services/get/Atividades-Projeto";
+import { getAtividadesTarefas } from "services/get/Tarefas";
 
 import CadastrarTarefasModal from "./CadastroTarefaModal";
 import EditarTarefaModal from "./EditarTarefaModal";
-
-const taskList = [
-  {
-    id: 1,
-    tarefa: "tarefa 1",
-    atividadeRel: "atividade1",
-    data: "24/09/2022",
-    descrição: "descrição 1",
-    status: "25%",
-  },
-  {
-    id: 2,
-    tarefa: "tarefa 2",
-    atividadeRel: "atividade2",
-    data: "24/09/2022",
-    descrição: "descrição 2",
-    status: "25%",
-  },
-  {
-    id: 3,
-    tarefa: "tarefa 3",
-    atividadeRel: "atividade3",
-    data: "24/09/2022",
-    descrição: "descrição 3",
-    status: "25%",
-  },
-];
 
 function BotaoListadeTarefas() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [tarefaFilter, setTarefaFilter] = useState("");
+  const [taskList, setTaskList] = useState([] as TarefaAtividade[]);
+  const [editTarefa, setEditTarefa] = useState({} as TarefaAtividade);
+  const [atividadesProjeto, setAtividadesProjeto] = useState(
+    [] as AtividadesProjeto[]
+  );
 
-  const tableData = taskList.map((task, index) => (
+  const [render, setRender] = useState(false);
+
+  async function fetchAtividadesProjeto() {
+    const { data } = await getAtividadesProjeto();
+    setAtividadesProjeto(data);
+  }
+
+  function formatDate(date: Date) {
+    const formated = date.toString().substring(0, 10).split("-");
+    return `${formated[2]}-${formated[1]}-${formated[0]}`;
+  }
+
+  async function getTaskList() {
+    const { data } = await getAtividadesTarefas();
+    setTaskList(data);
+  }
+
+  function handleEditTarefa(tarefa: TarefaAtividade) {
+    setEditTarefa(tarefa);
+    setIsEditModalOpen(true);
+  }
+
+  const tableData = taskList?.map((task, index) => (
     <Tr key={index}>
       <Td
         isNumeric
@@ -81,7 +85,7 @@ function BotaoListadeTarefas() {
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
-        {task.tarefa}
+        {task.nome_tarefa}
       </Td>
       <Td
         style={{
@@ -89,7 +93,7 @@ function BotaoListadeTarefas() {
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
-        {task.atividadeRel}
+        {task.atividade_relacionada}
       </Td>
       <Td
         style={{
@@ -97,7 +101,7 @@ function BotaoListadeTarefas() {
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
-        {task.data}
+        {formatDate(task.data_tarefa)}
       </Td>
       <Td
         style={{
@@ -105,7 +109,7 @@ function BotaoListadeTarefas() {
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
-        {task.descrição}
+        {task.descricao_tarefa}
       </Td>
       <Td
         style={{
@@ -113,7 +117,7 @@ function BotaoListadeTarefas() {
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
-        {task.status}
+        {!task.status ? "0%" : task.status}
       </Td>
       <Td style={{ borderBottom: "0.5px solid #A7A7A7" }}>
         <IconButton
@@ -125,11 +129,16 @@ function BotaoListadeTarefas() {
           mr={2}
           isRound={true}
           size="sm"
-          onClick={() => setIsEditModalOpen(true)}
+          onClick={() => handleEditTarefa(task)}
         />
       </Td>
     </Tr>
   ));
+
+  useEffect(() => {
+    getTaskList();
+    fetchAtividadesProjeto();
+  }, [render]);
 
   return (
     <>
@@ -185,7 +194,7 @@ function BotaoListadeTarefas() {
                   flex={1}
                 >
                   <FormControl>
-                    <FormLabel htmlFor="categoria">TAREFA</FormLabel>
+                    <FormLabel htmlFor="tarefa">TAREFA</FormLabel>
                     <Input
                       placeholder="Nome da tarefa"
                       type="text"
@@ -304,13 +313,17 @@ function BotaoListadeTarefas() {
             <CadastrarTarefasModal
               isModalOpen={setIsModalOpen}
               closeModal={() => setIsModalOpen(false)}
+              atividadesProjeto={atividadesProjeto}
             />
           )}
 
           {isEditModalOpen && (
             <EditarTarefaModal
               isModalOpen={setIsEditModalOpen}
+              editTarefa={editTarefa}
               closeModal={() => setIsEditModalOpen(false)}
+              atividadesProjeto={atividadesProjeto}
+              newRender={() => setRender(true)}
             />
           )}
 

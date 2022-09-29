@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 // import { useParams } from "react-router-dom";
 
@@ -26,28 +26,25 @@ import { AtividadesProjeto } from "interfaces/Services";
 
 import { useAuth } from "hooks/useAuth";
 
-import { getAtividadesProjeto } from "services/get/Atividades-Projeto";
 import { postTarefa } from "services/post/AdicionarTarefa";
 
-function CadastroTarefasModal({ isModalOpen, closeModal }: any) {
+interface CadastroTarefaProps {
+  isModalOpen: any;
+  closeModal: any;
+  atividadesProjeto: AtividadesProjeto[];
+}
+
+function CadastroTarefasModal({
+  isModalOpen,
+  closeModal,
+  atividadesProjeto,
+}: CadastroTarefaProps) {
   // const { onClose } = useDisclosure();
   const { user } = useAuth();
   const [nome, setNome] = useState("");
   const [data, setData] = useState("");
   const [atividadeId, setAtividadeId] = useState(0);
   const [descricao, setDescricao] = useState("");
-  const [atividadesProjeto, setAtividadesProjeto] = useState(
-    [] as AtividadesProjeto[]
-  );
-
-  async function fetchAtividadesProjeto() {
-    const { data } = await getAtividadesProjeto();
-    setAtividadesProjeto(data);
-  }
-
-  useEffect(() => {
-    fetchAtividadesProjeto();
-  }, []);
 
   return (
     <Flex>
@@ -219,7 +216,7 @@ function CadastroTarefasModal({ isModalOpen, closeModal }: any) {
                     nome_tarefa: nome,
                     data_tarefa: new Date(data),
                     atividade_relacionada: atividadeId,
-                    descricao,
+                    descricao_tarefa: descricao,
                     nom_usu_create: user?.nome,
                   });
                   closeModal();
