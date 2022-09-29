@@ -261,8 +261,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                 Cancelar
               </Button>
               <Button
-                variant="outline"
-                border={"2px"}
+                variant="ghost"
                 color={"origem.500"}
                 onClick={() => registerForm.resetForm()}
                 _hover={{
