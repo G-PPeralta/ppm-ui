@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import {
   Flex,
   Text,
@@ -17,20 +19,48 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-import { RequiredField } from "components/RequiredField/RequiredField";
+import Restricoes from "pages/Infographics/Components/Restricoes";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { RequiredField } from "components/RequiredField/RequiredField";
+import SelectFiltragem from "components/SelectFiltragem";
+
+import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
 
-import { useCadastroAtividade } from "hooks/useCadastroAtividade";
+import { useCadastroAtividadeIntervencao } from "hooks/useCadastroAtividadeIntervencao";
 
-import Restricoes from "./Restricoes";
-import SelectFiltragemAreaAtuacao from "./SelectFiltragemAreaAtuacao";
-import SelectFiltragemResponsavel from "./SelectFiltragemResponsavel";
+import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
 
-function ModalCadastroAtividade() {
+interface Responsavel {
+  id: number;
+  nome: string;
+}
+
+function ModalCadastroAtividadeIntervencao({
+  id,
+  setRefresh,
+  refresh,
+  atividades,
+}: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroAtividade();
+  const { registerForm, loading, listaResponsaveis, listaAreaAtuacao } =
+    useCadastroAtividadeIntervencao();
+
+  const responsaveisOptions = listaResponsaveis.map(
+    (responsavel: Responsavel) => ({
+      value: responsavel.id,
+      label: responsavel.nome,
+    })
+  );
+
+  const areaAtuacaoOptions = listaAreaAtuacao.map((area: any) => ({
+    value: area.id,
+    label: area.tipo,
+  }));
+
+  useEffect(() => {
+    registerForm.setFieldValue("id_intervencao", id);
+  }, []);
 
   return (
     <>
@@ -47,7 +77,7 @@ function ModalCadastroAtividade() {
         }}
         onClick={onOpen}
       >
-        Atividade
+        Nova Atividade
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
@@ -60,7 +90,7 @@ function ModalCadastroAtividade() {
             color={"white"}
             fontSize={"1em"}
           >
-            Cadastrar Atividade
+            Cadastrar Atividade de Intervenção
           </ModalHeader>
           <form
             onSubmit={(e) => {
@@ -131,13 +161,21 @@ function ModalCadastroAtividade() {
                       gap={5}
                     >
                       <Flex flex={2}>
-                        <SelectFiltragemResponsavel
+                        <SelectFiltragem
                           registerForm={registerForm}
+                          nomeSelect={"Responsável"}
+                          propName={"responsavel_id"}
+                          options={responsaveisOptions}
+                          required={true}
                         />
                       </Flex>
                       <Flex flex={1}>
-                        <SelectFiltragemAreaAtuacao
+                        <SelectFiltragem
                           registerForm={registerForm}
+                          nomeSelect={"Área"}
+                          propName={"area_atuacao_id"}
+                          options={areaAtuacaoOptions}
+                          required={true}
                         />
                       </Flex>
                     </Flex>
@@ -152,6 +190,10 @@ function ModalCadastroAtividade() {
                       <FormLabel mt={2}>RESTRIÇÕES</FormLabel>
                       <Restricoes registerForm={registerForm} />
                     </Flex>
+                    <AtividadesDragAndDrop
+                      registerForm={registerForm}
+                      atividades={atividades}
+                    />
                   </Stack>
                 </Flex>
               </FormControl>
@@ -176,7 +218,14 @@ function ModalCadastroAtividade() {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() =>
+                    handleCadastrarRefresh(
+                      registerForm,
+                      onClose,
+                      setRefresh,
+                      refresh
+                    )
+                  }
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",
@@ -199,4 +248,4 @@ function ModalCadastroAtividade() {
   );
 }
 
-export default ModalCadastroAtividade;
+export default ModalCadastroAtividadeIntervencao;

@@ -22,13 +22,23 @@ type Column = {
   pocos: Poco[];
 };
 
+type OpcoesExibir = {
+  exibirDataInicio: boolean;
+  setExibirDataInicio: React.Dispatch<React.SetStateAction<boolean>>;
+  exibirPctPlan: boolean;
+  setExibirPctPlan: React.Dispatch<React.SetStateAction<boolean>>;
+  exibirPctReal: boolean;
+  setExibirPctReal: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 type Props = {
   column: Column;
   setRefresh: Function;
   refresh: boolean;
+  opcoesExibir: OpcoesExibir;
 };
 
-function ColumnSPT({ column, setRefresh, refresh }: Props) {
+function ColumnSPT({ column, setRefresh, refresh, opcoesExibir }: Props) {
   return (
     <Flex direction={"column"} align={"center"} justify={"start"} flex={1}>
       <Flex mt={3} mb={6} alignItems={"center"}>
@@ -54,7 +64,14 @@ function ColumnSPT({ column, setRefresh, refresh }: Props) {
             if (!poco.poco) {
               return <div key={index}></div>;
             } else {
-              return <CardPIR poco={poco} index={index} key={index} />;
+              return (
+                <CardPIR
+                  poco={poco}
+                  index={index}
+                  key={index}
+                  opcoesExibir={opcoesExibir}
+                />
+              );
             }
           })}
         </Flex>

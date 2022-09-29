@@ -21,7 +21,7 @@ import StatusProjeto from "../../components/StatusProjeto";
 import BotaoVisaoPorArea from "./Components/BotaoVisaoPorArea";
 import CardACT from "./Components/CardACT";
 // import ModalAtividade from "./Components/ModalAtividade";
-import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
+import ModalCadastroAtividadeIntervencao from "./Components/ModalCadastroAtividadeIntervencao";
 import ModalEditarAtividade from "./Components/ModalEditarAtividade";
 
 export function ActivitiesSchedule() {
@@ -99,10 +99,11 @@ export function ActivitiesSchedule() {
                     >
                       Voltar
                     </Button>
-                    <ModalCadastroAtividade
+                    <ModalCadastroAtividadeIntervencao
                       id={id}
                       setRefresh={setRefresh}
                       refresh={refresh}
+                      atividades={atividades}
                     />
                     <Button
                       variant="outline"

@@ -13,7 +13,7 @@ import { statusProjeto } from "utils/validateDate";
 import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
 import CardACT from "../ActivitiesSchedule/Components/CardACT";
-import ModalCadastroAtividade from "../ActivitiesSchedule/Components/ModalCadastroAtividade";
+import ModalCadastroAtividade from "../ActivitiesSchedule/Components/ModalCadastroAtividadeOLD";
 import ModalEditarAtividade from "../ActivitiesSchedule/Components/ModalEditarAtividade";
 import BotaoVisaoGeral from "./components/BotaoVisaoGeral";
 import ExibirModal from "./components/ExibirModal";

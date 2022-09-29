@@ -36,9 +36,9 @@ import {
   getProjetosTipo,
 } from "services/get/CadastroModaisInfograficos";
 
+import SelectFiltragem from "../../../components/SelectFiltragem";
 import AtividadesCadastroIntervencao from "./AtividadesCadastroIntervencao";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
-import SelectFiltragem from "./SelectFiltragem";
 // import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
 function ModalCadastroIntervencao({
@@ -135,7 +135,7 @@ function ModalCadastroIntervencao({
       <Flex
         mt={2}
         py={3}
-        w="150px"
+        w="160px"
         border={"2px"}
         borderStyle={"dashed"}
         borderColor={"origem.500"}
