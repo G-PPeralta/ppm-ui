@@ -14,10 +14,7 @@ import StatusProjeto from "components/StatusProjeto";
 
 import { useFiltragemCampanha } from "hooks/useFiltragemCampanha";
 
-import {
-  // getInfoCampanha,
-  postGetInfoCampanha,
-} from "services/get/Infograficos";
+import { postGetInfoCampanha } from "services/get/Infograficos";
 
 import { statusProjeto } from "../../utils/validateDate";
 import ColumnSPT from "./Components/ColumnSPT";
@@ -138,15 +135,15 @@ export function Infographics() {
                   </Flex>
                 </Flex>
                 <Flex align={"center"} justify={"center"}>
-                  <Box
-                    overflowX={{ base: "scroll" }}
-                    display={"flex"}
-                    flexDirection={"row"}
-                    gap={10}
-                    py={4}
-                  >
-                    {campanhas &&
-                      campanhas.map((column, index) => (
+                  {campanhas.length !== 0 ? (
+                    <Box
+                      overflowX={{ base: "scroll" }}
+                      display={"flex"}
+                      flexDirection={"row"}
+                      gap={10}
+                      py={4}
+                    >
+                      {campanhas.map((column, index) => (
                         <Flex
                           key={index}
                           direction={"column"}
@@ -160,10 +157,16 @@ export function Infographics() {
                             setRefresh={setRefresh}
                             opcoesExibir={opcoesExibir}
                           />
-                          {/* <ModalCadastroIntervencao /> */}
                         </Flex>
                       ))}
-                  </Box>
+                    </Box>
+                  ) : (
+                    <Flex h={180} align={"center"} justify={"center"}>
+                      <Heading as="h4" size="md">
+                        Nenhuma campanha Cadastrada
+                      </Heading>
+                    </Flex>
+                  )}
                 </Flex>
               </Box>
             </Flex>
