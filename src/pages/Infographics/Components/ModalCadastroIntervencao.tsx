@@ -36,9 +36,9 @@ import {
   getProjetosTipo,
 } from "services/get/CadastroModaisInfograficos";
 
+import SelectFiltragem from "../../../components/SelectFiltragem";
 import AtividadesCadastroIntervencao from "./AtividadesCadastroIntervencao";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
-import SelectFiltragem from "./SelectFiltragem";
 // import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
 function ModalCadastroIntervencao({
@@ -48,8 +48,14 @@ function ModalCadastroIntervencao({
   setRefresh,
 }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaPocos, listaCampos, listaSondaCampanha } =
-    useCadastroIntervencao();
+  const {
+    registerForm,
+    loading,
+    listaPocos,
+    listaCampos,
+    listaSondaCampanha,
+    listaAtividadesPrecedentes,
+  } = useCadastroIntervencao();
 
   const [listaProjetos, setListaProjetos] = useState<any>([]);
 
@@ -83,6 +89,7 @@ function ModalCadastroIntervencao({
           tarefa_id: 0,
           responsavel_id: 0,
           qtde_dias: 0,
+          precedentes: listaAtividadesPrecedentes,
         },
       ]);
     } else {
@@ -93,6 +100,7 @@ function ModalCadastroIntervencao({
         tarefa_id: atividade.id_tarefa,
         responsavel_id: atividade.responsavel_id,
         qtde_dias: atividade.qtde_dias,
+        precedentes: atividade.precedentes,
       }));
       registerForm.setFieldValue("atividades", atividadesFormatadas);
     }
@@ -130,12 +138,14 @@ function ModalCadastroIntervencao({
     reqGetAtividadesByProjetoTipoId(registerForm.values.projeto_tipo_id);
   }, [registerForm.values.projeto_tipo_id]);
 
+  // console.log("registerForm", registerForm.values);
+
   return (
     <>
       <Flex
         mt={2}
         py={3}
-        w="150px"
+        w="160px"
         border={"2px"}
         borderStyle={"dashed"}
         borderColor={"origem.500"}
@@ -235,6 +245,7 @@ function ModalCadastroIntervencao({
 
                     <AtividadesCadastroIntervencao
                       registerForm={registerForm}
+                      listaAtividadesPrecedentes={listaAtividadesPrecedentes}
                     />
 
                     <Stack>

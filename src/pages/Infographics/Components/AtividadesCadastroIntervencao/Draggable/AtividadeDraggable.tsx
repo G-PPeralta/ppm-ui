@@ -10,18 +10,26 @@ import {
   Responsavel,
 } from "interfaces/CadastrosModaisInfograficos";
 
-import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
+// import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
-import SelectFiltragem from "../../SelectFiltragem";
+import SelectFiltragem from "../../../../../components/SelectFiltragem";
+import PopOverPrecedentes from "./PopOverPrecedentes";
 interface Props {
   registerForm: FormikProps<any>;
   index: number;
+  listas: {
+    listaAreaAtuacao: AreaAtuacao[];
+    listaResponsaveis: Responsavel[];
+    listaTarefas: any[];
+  };
 }
 
-function AtividadesDraggable({ index, registerForm }: Props) {
+function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const innerwidth = window.innerWidth;
-  const { listaAreaAtuacao, listaResponsaveis, listaTarefas } =
-    useCadastroIntervencao();
+  // const { listaAreaAtuacao, listaResponsaveis, listaTarefas } =
+  //   useCadastroIntervencao();
+
+  const { listaAreaAtuacao, listaResponsaveis, listaTarefas } = listas;
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
@@ -161,6 +169,15 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     }}
                   />
                 </FormControl>
+                <Flex direction={"column"}>
+                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>
+                    PRECEDENTES
+                  </Text>
+                  <PopOverPrecedentes
+                    registerForm={registerForm}
+                    index={index}
+                  />
+                </Flex>
               </Flex>
               <Flex
                 p={1}

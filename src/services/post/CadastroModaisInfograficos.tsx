@@ -57,7 +57,7 @@ export async function postNovoPoco(
 export async function postNovaCampanha(
   payload: NovaCampanha
 ): Promise<{ status: number }> {
-  const { status } = await api.post("/campanha", payload, token());
+  const { status } = await api.post("/campanha/pai", payload, token());
   return { status };
 }
 
@@ -85,6 +85,18 @@ export async function postEditarAtividadeStatus(
 ): Promise<{ status: number }> {
   const { status } = await api.patch(
     `/campanha/${campanhaId}/pct_real/${atividadeStatus}`,
+    token()
+  );
+  return { status };
+}
+
+export async function postCadastroAtividadeIntervencao(
+  id: number,
+  payload: any
+): Promise<{ status: number }> {
+  const { status } = await api.post(
+    `/nova-atividade/intervencao/${id}`,
+    payload,
     token()
   );
   return { status };

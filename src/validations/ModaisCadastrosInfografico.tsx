@@ -105,3 +105,31 @@ export const cadastroNovaAtividadeSchema = yup.object({
   dat_fim_plan: yup.string().required("A data e hora de fim é obrigatória"),
   dsc_comentario: yup.string().required("O comentário é obrigatório"),
 });
+
+export const cadastroAtividadeIntervencaoSchema = yup.object({
+  id_origem: yup.string().required("O ID é obrigatório!"),
+  nom_atividade: yup.string().required("O nome da atividade é obrigatório!"),
+  responsavel_id: yup
+    .number()
+    .required("O responsável é obrigatório!")
+    .moreThan(1),
+  area_atuacao: yup
+    .number()
+    .required("A área de atuação é obrigatória!")
+    .moreThan(1),
+  nao_iniciar_antes_de: yup.object({
+    data: yup.string(),
+    checked: yup.boolean(),
+  }),
+  nao_terminar_depois_de: yup.object({
+    data: yup.string(),
+    checked: yup.boolean(),
+  }),
+  o_mais_breve_possivel: yup.boolean(),
+  precedentes: yup.array().of(
+    yup.object({
+      atividadePrecedenteId: yup.number(),
+      dias: yup.number(),
+    })
+  ),
+});
