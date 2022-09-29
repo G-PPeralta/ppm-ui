@@ -78,7 +78,7 @@ export function TabelaPriorizacao() {
     <Tr key={prio.id}>
       <Td>{prio.id}</Td>
       <Td width={"600px"}>{prio.nom_ranking}</Td>
-      <Td textAlign={"center"}>3</Td>
+      <Td textAlign={"center"}>{prio.nome_area}</Td>
       <Td textAlign={"center"}>
         <ModalPriorizacao nomeRanking={prio.nom_ranking} idRanking={prio.id} />
         {/* <ModalDeletarPriorizacao /> */}
@@ -95,7 +95,7 @@ export function TabelaPriorizacao() {
               <Tr background="origem.500" color="white">
                 <Th>ID</Th>
                 <Th>Priorizações</Th>
-                <Th textAlign={"center"}>Atividades</Th>
+                <Th textAlign={"center"}>Área responsável</Th>
                 <Th textAlign={"center"}>Ações</Th>
               </Tr>
             </Thead>

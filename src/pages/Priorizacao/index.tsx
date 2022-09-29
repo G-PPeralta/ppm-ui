@@ -11,7 +11,7 @@ import {
 
 import Sidebar from "components/SideBar";
 
-import ModalLixeira from "./Components/ModalLixeira";
+// import ModalLixeira from "./Components/ModalLixeira";
 import ModalCadastrarPriorizacao from "./Components/Priorizacao/CadastrarPriorizacao";
 import { TabelaPriorizacao } from "./Components/Priorizacao/TabelaPriorizacao";
 
@@ -65,9 +65,7 @@ export function Priorizacao() {
                       <ModalCadastrarPriorizacao />
                     </FormControl>
                   </Flex>
-                  <Flex alignItems={"flex-end"}>
-                    <ModalLixeira />
-                  </Flex>
+                  <Flex alignItems={"flex-end"}>{/* <ModalLixeira /> */}</Flex>
                 </Flex>
                 <>
                   <TabelaPriorizacao />
