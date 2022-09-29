@@ -2,6 +2,7 @@ import { Flex, Text } from "@chakra-ui/react";
 
 import CardPIR from "./CardPIR";
 import ModalCadastroIntervencao from "./ModalCadastroIntervencao";
+import ModalEditarSPT from "./ModalEditarSPT";
 
 type Poco = {
   comp_pct: number;
@@ -17,8 +18,8 @@ type Poco = {
 
 type Column = {
   sonda: string;
-  pocos: Poco[];
   id_campanha: number;
+  pocos: Poco[];
 };
 
 type Props = {
@@ -30,15 +31,12 @@ type Props = {
 function ColumnSPT({ column, setRefresh, refresh }: Props) {
   return (
     <Flex direction={"column"} align={"center"} justify={"start"} flex={1}>
-      <Text
-        fontSize={"2xl"}
-        fontWeight={"bold"}
-        mb={6}
-        mt={3}
-        textAlign={"center"}
-      >
-        {column.sonda}
-      </Text>
+      <Flex mt={3} mb={6} alignItems={"center"}>
+        <Text fontSize={"2xl"} fontWeight={"bold"} textAlign={"center"}>
+          {column.sonda}
+        </Text>
+        <ModalEditarSPT column={column} />
+      </Flex>
       <Flex
         direction={"column"}
         align={"end"}
