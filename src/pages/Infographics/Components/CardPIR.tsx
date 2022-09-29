@@ -73,7 +73,7 @@ function CardPIR({ poco, index, opcoesExibir }: Props) {
           _hover={{
             cursor: "pointer",
           }}
-          w={"150px"}
+          w={"160px"}
         >
           <Text fontSize={"lg"} color={"white"} fontWeight={"bold"}>
             {poco.poco}
