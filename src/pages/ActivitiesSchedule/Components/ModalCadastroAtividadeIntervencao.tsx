@@ -59,10 +59,18 @@ function ModalCadastroAtividadeIntervencao({
   }));
 
   useEffect(() => {
-    registerForm.setFieldValue("id_intervencao", id);
+    if (id === 0) {
+      registerForm.setFieldValue("id_intervencao", id);
+    }
   }, []);
 
-  console.log("registerForm", registerForm.values);
+  useEffect(() => {
+    if (registerForm.values.id_intervencao === 0) {
+      registerForm.setFieldValue("id_intervencao", id);
+    }
+  }, [registerForm.values]);
+
+  // console.log("registerForm", registerForm.values);
 
   return (
     <>
