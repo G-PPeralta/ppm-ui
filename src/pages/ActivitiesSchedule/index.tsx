@@ -21,7 +21,7 @@ import StatusProjeto from "../../components/StatusProjeto";
 import BotaoVisaoPorArea from "./Components/BotaoVisaoPorArea";
 import CardACT from "./Components/CardACT";
 // import ModalAtividade from "./Components/ModalAtividade";
-import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
+import ModalCadastroAtividadeIntervencao from "./Components/ModalCadastroAtividadeIntervencao";
 import ModalEditarAtividade from "./Components/ModalEditarAtividade";
 
 export function ActivitiesSchedule() {
@@ -52,7 +52,7 @@ export function ActivitiesSchedule() {
   }, [refresh]);
 
   const openDetails = (atividade: any) => {
-    // console.log('atividade', atividade);
+    // console.log("atividade", atividade);
     setOpenId(atividade);
   };
 
@@ -82,10 +82,28 @@ export function ActivitiesSchedule() {
                   mb={4}
                 >
                   <Flex gap={2} wrap={"wrap"}>
-                    <ModalCadastroAtividade
+                    <Button
+                      variant="outline"
+                      border={"2px solid"}
+                      borderColor={"origem.500"}
+                      textColor={"origem.500"}
+                      _hover={{
+                        borderColor: "origem.600",
+                        backgroundColor: "origem.500",
+                        textColor: "white",
+                        transition: "all 0.4s",
+                      }}
+                      onClick={() => {
+                        navigate(`/infographics`);
+                      }}
+                    >
+                      Voltar
+                    </Button>
+                    <ModalCadastroAtividadeIntervencao
                       id={id}
                       setRefresh={setRefresh}
                       refresh={refresh}
+                      atividades={atividades}
                     />
                     <Button
                       variant="outline"
@@ -106,7 +124,7 @@ export function ActivitiesSchedule() {
                         });
                       }}
                     >
-                      Visão por precedentes
+                      Visão Por Precedentes
                     </Button>
                     <BotaoVisaoPorArea />
                   </Flex>
@@ -135,12 +153,8 @@ export function ActivitiesSchedule() {
                   ))}
                 </Flex>
                 {openId ? (
-                  // <ModalAtividade
-                  //   id={id}
-                  //   atividade={openId}
-                  //   onClose={() => setOpenId("")}
-                  // />
                   <ModalEditarAtividade
+                    listaPrecedentes={atividades}
                     id={id}
                     atividade={openId}
                     onClose={() => setOpenId("")}

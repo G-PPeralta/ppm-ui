@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 
 import {
@@ -27,27 +27,37 @@ import {
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
-import { getAtividadasByProjetosTipoId } from "services/get/CadastroModaisInfograficos";
+import {
+  getAtividadasByProjetosTipoId,
+  getProjetosTipo,
+} from "services/get/CadastroModaisInfograficos";
 
+import SelectFiltragem from "../../../components/SelectFiltragem";
 import AtividadesCadastroIntervencao from "./AtividadesCadastroIntervencao";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
-import SelectFiltragem from "./SelectFiltragem";
 // import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
-function ModalCadastroIntervencao({ idCampanha, data }: any) {
+function ModalCadastroIntervencao({
+  idCampanha,
+  data,
+  refresh,
+  setRefresh,
+}: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     registerForm,
     loading,
     listaPocos,
     listaCampos,
-    listaProjetosTipo,
     listaSondaCampanha,
+    listaAtividadesPrecedentes,
   } = useCadastroIntervencao();
+
+  const [listaProjetos, setListaProjetos] = useState<any>([]);
 
   const innerWidth = window.innerWidth;
 
@@ -61,12 +71,10 @@ function ModalCadastroIntervencao({ idCampanha, data }: any) {
     label: campo.campo,
   }));
 
-  const optionsProjetoTipo = listaProjetosTipo.map(
-    (projetoTipo: ProjetoTipo) => ({
-      value: projetoTipo.id,
-      label: projetoTipo.nom_projeto_tipo,
-    })
-  );
+  const optionsProjetoTipo = listaProjetos.map((projetoTipo: ProjetoTipo) => ({
+    value: projetoTipo.id,
+    label: projetoTipo.nom_projeto_tipo,
+  }));
 
   const optionsSondaCampanha = listaSondaCampanha.map((sondaCampanha: any) => ({
     value: sondaCampanha.id,
@@ -81,6 +89,7 @@ function ModalCadastroIntervencao({ idCampanha, data }: any) {
           tarefa_id: 0,
           responsavel_id: 0,
           qtde_dias: 0,
+          precedentes: listaAtividadesPrecedentes,
         },
       ]);
     } else {
@@ -91,21 +100,52 @@ function ModalCadastroIntervencao({ idCampanha, data }: any) {
         tarefa_id: atividade.id_tarefa,
         responsavel_id: atividade.responsavel_id,
         qtde_dias: atividade.qtde_dias,
+        precedentes: atividade.precedentes,
       }));
       registerForm.setFieldValue("atividades", atividadesFormatadas);
     }
   };
 
+  const handleGet = async () => {
+    const projetos = await getProjetosTipo();
+    const projetosTipoSorted = projetos.data.sort(
+      (a: ProjetoTipo, b: ProjetoTipo) =>
+        a.nom_projeto_tipo.localeCompare(b.nom_projeto_tipo)
+    );
+    setListaProjetos(projetosTipoSorted);
+  };
+
+  const handleClick = async () => {
+    const projetos = await getProjetosTipo();
+    const projetosTipoSorted = projetos.data.sort(
+      (a: ProjetoTipo, b: ProjetoTipo) =>
+        a.nom_projeto_tipo.localeCompare(b.nom_projeto_tipo)
+    );
+    setListaProjetos(projetosTipoSorted);
+    onOpen();
+  };
+
+  useEffect(() => {
+    handleGet();
+    registerForm.setFieldValue("id_campanha", idCampanha);
+    const newDate = new Date(data);
+    newDate.setDate(newDate.getDate() + 15);
+    registerForm.setFieldValue("dat_ini_prev", newDate);
+    setRefresh(!refresh);
+  }, []);
+
   useEffect(() => {
     reqGetAtividadesByProjetoTipoId(registerForm.values.projeto_tipo_id);
   }, [registerForm.values.projeto_tipo_id]);
+
+  // console.log("registerForm", registerForm.values);
 
   return (
     <>
       <Flex
         mt={2}
         py={3}
-        w="150px"
+        w="160px"
         border={"2px"}
         borderStyle={"dashed"}
         borderColor={"origem.500"}
@@ -119,7 +159,7 @@ function ModalCadastroIntervencao({ idCampanha, data }: any) {
           backgroundColor: "grey.100",
           transition: "all 0.4s",
         }}
-        onClick={onOpen}
+        onClick={() => handleClick()}
       >
         <IconButton
           aria-label="Plus sign"
@@ -175,12 +215,14 @@ function ModalCadastroIntervencao({ idCampanha, data }: any) {
                           nomeSelect={"POÇO"}
                           propName={"poco_id"}
                           options={optionsPocos}
+                          required={true}
                         />
                         <SelectFiltragem
                           registerForm={registerForm}
                           nomeSelect={"CAMPO"}
                           propName={"campo_id"}
                           options={optionsCampo}
+                          required={true}
                         />
                         <DateTimePickerDataInicio
                           registerForm={registerForm}
@@ -196,12 +238,14 @@ function ModalCadastroIntervencao({ idCampanha, data }: any) {
                           nomeSelect={"PROJETO"}
                           propName={"projeto_tipo_id"}
                           options={optionsProjetoTipo}
+                          required={true}
                         />
                       </Flex>
                     </Stack>
 
                     <AtividadesCadastroIntervencao
                       registerForm={registerForm}
+                      listaAtividadesPrecedentes={listaAtividadesPrecedentes}
                     />
 
                     <Stack>
@@ -219,6 +263,7 @@ function ModalCadastroIntervencao({ idCampanha, data }: any) {
                           name="comentarios"
                           value={registerForm.values.comentarios}
                           onChange={registerForm.handleChange}
+                          maxLength={255}
                         />
                       </FormControl>
                     </Stack>
@@ -248,7 +293,14 @@ function ModalCadastroIntervencao({ idCampanha, data }: any) {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() =>
+                    handleCadastrarRefresh(
+                      registerForm,
+                      onClose,
+                      setRefresh,
+                      refresh
+                    )
+                  }
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",

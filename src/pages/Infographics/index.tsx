@@ -12,7 +12,12 @@ import { Ring } from "@uiball/loaders";
 import Sidebar from "components/SideBar";
 import StatusProjeto from "components/StatusProjeto";
 
-import { getInfoCampanha } from "services/get/Infograficos";
+import { useFiltragemCampanha } from "hooks/useFiltragemCampanha";
+
+import {
+  // getInfoCampanha,
+  postGetInfoCampanha,
+} from "services/get/Infograficos";
 
 import { statusProjeto } from "../../utils/validateDate";
 import ColumnSPT from "./Components/ColumnSPT";
@@ -20,7 +25,6 @@ import ExibirModal from "./Components/ExibirModal";
 import FiltrosModal from "./Components/FiltrosModal";
 import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
 import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
-// import ModalCadastroIntervencao from "./Components/ModalCadastroIntervencao";
 import ModalCadastroPoco from "./Components/ModalCadastroPoco";
 import ModalCadastroProjetoTipo from "./Components/ModalCadastroProjetoTipo";
 import ModalNovaCampanha from "./Components/ModalNovaCampanha";
@@ -29,21 +33,51 @@ export function Infographics() {
   const [loading, setLoading] = useState(true);
   const [campanhas, setCampanhas] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
+  const [exibirDataInicio, setExibirDataInicio] = useState(true);
+  const [exibirPctPlan, setExibirPctPlan] = useState(true);
+  const [exibirPctReal, setExibirPctReal] = useState(true);
+
+  const opcoesExibir = {
+    exibirDataInicio,
+    setExibirDataInicio,
+    exibirPctPlan,
+    setExibirPctPlan,
+    exibirPctReal,
+    setExibirPctReal,
+  };
+
+  const {
+    registerForm,
+    listaAreaAtuacao,
+    listaPocos,
+    listaTarefas,
+    listaResponsaveis,
+    listaSondas,
+  } = useFiltragemCampanha();
+
+  const listas = {
+    registerForm,
+    listaAreaAtuacao,
+    listaPocos,
+    listaTarefas,
+    listaResponsaveis,
+    listaSondas,
+  };
 
   const innerWidth = useBreakpointValue({ base: 0, md: 1, lg: 2, xl: 3 });
 
-  const handleGetCampanha = async () => {
-    const response = await getInfoCampanha();
-    setCampanhas(response.data);
+  const handleGetAll = async () => {
+    const campanhas = await postGetInfoCampanha(registerForm.values);
+    setCampanhas(campanhas.data);
     setLoading(false);
   };
 
   useEffect(() => {
-    handleGetCampanha();
+    handleGetAll();
   }, []);
 
   useEffect(() => {
-    handleGetCampanha();
+    handleGetAll();
   }, [refresh]);
 
   return (
@@ -64,8 +98,13 @@ export function Infographics() {
                     Acompanhamento de poços
                   </Heading>
                   <Flex gap={4}>
-                    <ExibirModal />
-                    <FiltrosModal />
+                    <ExibirModal opcoesExibir={opcoesExibir} />
+                    <FiltrosModal
+                      refresh={refresh}
+                      setRefresh={setRefresh}
+                      listas={listas}
+                      registerForm={registerForm}
+                    />
                   </Flex>
                 </Flex>
                 <Flex
@@ -83,7 +122,10 @@ export function Infographics() {
                     <ModalCadastrarSonda />
                     <ModalCadastroPoco />
                     <ModalCadastroAtividade />
-                    <ModalCadastroProjetoTipo />
+                    <ModalCadastroProjetoTipo
+                      refresh={refresh}
+                      setRefresh={setRefresh}
+                    />
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (
@@ -112,7 +154,12 @@ export function Infographics() {
                           align={"end"}
                           justify={"space-between"}
                         >
-                          <ColumnSPT column={column} />
+                          <ColumnSPT
+                            column={column}
+                            refresh={refresh}
+                            setRefresh={setRefresh}
+                            opcoesExibir={opcoesExibir}
+                          />
                           {/* <ModalCadastroIntervencao /> */}
                         </Flex>
                       ))}
