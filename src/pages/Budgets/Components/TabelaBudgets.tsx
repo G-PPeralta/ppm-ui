@@ -22,7 +22,7 @@ import {
   IconButton,
   Icon,
 } from "@chakra-ui/react";
-import { Budget } from "models/Budget.model";
+import { Budget } from "interfaces/Budgets";
 import "../budgets.css";
 
 interface TableProps {
