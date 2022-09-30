@@ -33,8 +33,6 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
   const { registerForm, loading, listaAtividadesPrecedentes } =
     useCadastroProjetoTipo();
 
-  // console.log("registerForm", registerForm.values);
-
   return (
     <>
       <Button
