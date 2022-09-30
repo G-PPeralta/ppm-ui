@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { FiPlusCircle, FiPrinter } from "react-icons/fi";
+import { IoIosArrowBack } from "react-icons/io";
 import ReactToPrint from "react-to-print";
 
 import {
@@ -13,6 +14,7 @@ import {
   Button,
   Flex,
   Heading,
+  Link,
 } from "@chakra-ui/react";
 
 import Sidebar from "components/SideBar";
@@ -73,9 +75,14 @@ export function Reports() {
             borderRadius={{ base: "none", sm: "xl" }}
           >
             <Flex justify={"space-between"}>
-              <Heading as="h3" size="md" mb={5}>
-                GERAR RELATÓRIO
-              </Heading>
+              <Flex direction={"row"} alignItems={"center"} mb={5}>
+                <Link href="javascript:history.back()" padding={2}>
+                  <IoIosArrowBack size={"30px"} />
+                </Link>
+                <Heading as="h3" size="md">
+                  GERAR RELATÓRIO
+                </Heading>
+              </Flex>
               <ReactToPrint
                 trigger={() => (
                   <Button
