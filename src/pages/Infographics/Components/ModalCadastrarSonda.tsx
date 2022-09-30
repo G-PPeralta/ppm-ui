@@ -12,7 +12,6 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Stack,
   useBreakpointValue,
   Input,
 } from "@chakra-ui/react";
@@ -47,7 +46,7 @@ function ModalCadastrarSonda() {
       >
         Sonda
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="md">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -58,7 +57,7 @@ function ModalCadastrarSonda() {
             color={"white"}
             fontSize={"1em"}
           >
-            Cadastrar Sonda
+            Cadastrar SPT
           </ModalHeader>
           {/* <ModalCloseButton color={"white"} /> */}
           <form
@@ -70,37 +69,37 @@ function ModalCadastrarSonda() {
             <ModalBody mt={3}>
               <FormControl>
                 <Flex direction={"column"} gap={4}>
-                  <Stack>
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: "column",
-                        md: "row",
-                      })}
-                      gap={5}
-                    >
-                      <FormControl>
-                        <Flex gap={1}>
-                          <RequiredField />
-                          <FormLabel htmlFor="nome">NOME</FormLabel>{" "}
-                        </Flex>
-                        <Input
-                          isRequired
-                          placeholder="Nome da Sonda"
-                          id="nome"
-                          type="text"
-                          name="nome"
-                          value={regexCaracteresEspeciais(
-                            registerForm.values.nome
-                          )}
-                          onChange={registerForm.handleChange}
-                          maxLength={10}
-                        />
-                        {registerForm.errors.nome && (
-                          <TextError>{registerForm.errors.nome}</TextError>
+                  <Flex
+                    flexDirection={useBreakpointValue({
+                      base: "column",
+                      md: "row",
+                    })}
+                    gap={5}
+                    align={"center"}
+                    justify={"center"}
+                  >
+                    <FormControl w={"204px"}>
+                      <Flex gap={1}>
+                        <RequiredField />
+                        <FormLabel htmlFor="nome">NOME</FormLabel>
+                      </Flex>
+                      <Input
+                        isRequired
+                        placeholder="Nome da Sonda"
+                        id="nome"
+                        type="text"
+                        name="nome"
+                        value={regexCaracteresEspeciais(
+                          registerForm.values.nome
                         )}
-                      </FormControl>
-                    </Flex>
-                  </Stack>
+                        onChange={registerForm.handleChange}
+                        maxLength={10}
+                      />
+                      {registerForm.errors.nome && (
+                        <TextError>{registerForm.errors.nome}</TextError>
+                      )}
+                    </FormControl>
+                  </Flex>
                 </Flex>
               </FormControl>
             </ModalBody>
@@ -134,7 +133,7 @@ function ModalCadastrarSonda() {
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (
                     <>
-                      <Text>Concluir Cadastro</Text>
+                      <Text>Cadastrar</Text>
                     </>
                   )}
                 </Button>

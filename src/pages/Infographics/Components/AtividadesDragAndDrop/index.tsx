@@ -72,7 +72,20 @@ export default function AtividadesDragAndDrop({
         area_id: 0,
         tarefa_id: 0,
         qtde_dias: 0,
-        precedentes: listaAtividadesPrecedentes,
+        precedentes: listaAtividadesPrecedentes.filter((atividade: any) => {
+          for (
+            let index = 0;
+            index < registerForm.values.atividades.length;
+            index += 1
+          ) {
+            if (
+              atividade.id === registerForm.values.atividades[index].tarefa_id
+            ) {
+              return true;
+            }
+          }
+          return false;
+        }),
       },
     ]);
     setRender(!render);
@@ -88,9 +101,44 @@ export default function AtividadesDragAndDrop({
     // do primeiro item da lista quando o modal é aberto
     registerForm.setFieldValue(
       "atividades[0].precedentes",
-      listaAtividadesPrecedentes
+      listaAtividadesPrecedentes.filter((atividade: any) => {
+        for (
+          let index = 0;
+          index < registerForm.values.atividades.length;
+          index += 1
+        ) {
+          if (
+            atividade.id === registerForm.values.atividades[index].tarefa_id
+          ) {
+            return true;
+          }
+        }
+        return false;
+      })
     );
   }, []);
+
+  useEffect(() => {
+    registerForm.values.atividades.forEach((_atividade: any, index: number) => {
+      registerForm.setFieldValue(
+        `atividades[${index}].precedentes`,
+        listaAtividadesPrecedentes.filter((atividade: any) => {
+          for (
+            let index = 0;
+            index < registerForm.values.atividades.length;
+            index += 1
+          ) {
+            if (
+              atividade.id === registerForm.values.atividades[index].tarefa_id
+            ) {
+              return true;
+            }
+          }
+          return false;
+        })
+      );
+    });
+  }, [render]);
 
   return (
     <>
@@ -116,7 +164,7 @@ export default function AtividadesDragAndDrop({
           )}
         </Droppable>
       </DragDropContext>
-      <BotaoAdicionar add={add} />
+      <BotaoAdicionar add={add} registerForm={registerForm} />
     </>
   );
 }

@@ -22,6 +22,11 @@ function SelectFiltragem({
     return campanha.label;
   };
 
+  const defaultValue = {
+    value: undefined,
+    label: undefined,
+  };
+
   return (
     <>
       <FormControl>
@@ -38,7 +43,11 @@ function SelectFiltragem({
           onChange={(event, name) => handleChange(event, name)}
           options={options}
           defaultValue={"Selecione"}
-          value={value}
+          value={
+            JSON.stringify(value) === JSON.stringify(defaultValue)
+              ? "Selecione"
+              : value
+          }
           isSearchable
           isDisabled={!!idCampanha}
         />
