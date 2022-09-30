@@ -208,6 +208,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                         );
                       }}
                       value={registerForm.values.data_inicio}
+                      defaultValue={"dd/mm/aaaa"}
                     />
                   </Flex>
 
