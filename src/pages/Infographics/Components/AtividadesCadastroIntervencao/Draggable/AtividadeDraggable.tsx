@@ -6,7 +6,6 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import {
   Box,
   Flex,
-  FormControl,
   NumberInput,
   NumberInputField,
   Text,
@@ -16,8 +15,6 @@ import {
   AreaAtuacao,
   Responsavel,
 } from "interfaces/CadastrosModaisInfograficos";
-
-// import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
 import PopOverPrecedentes from "./PopOverPrecedentes";
@@ -124,7 +121,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 py={innerwidth >= 640 ? 0 : 4}
                 flex={1}
               >
-                <FormControl>
+                <Flex direction={"column"} flex={2}>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>ÁREA</Text>
                   <SelectFiltragem
                     registerForm={registerForm}
@@ -132,8 +129,9 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     options={optionsAreaAtuacao}
                     value={getValue(optionsAreaAtuacao, index, "area_id")}
                   />
-                </FormControl>
-                <FormControl>
+                </Flex>
+
+                <Flex direction={"column"} flex={2}>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>TAREFA</Text>
                   <SelectFiltragem
                     registerForm={registerForm}
@@ -141,8 +139,9 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     options={optionsTarefa}
                     value={getValue(optionsTarefa, index, "tarefa_id")}
                   />
-                </FormControl>
-                <FormControl>
+                </Flex>
+
+                <Flex direction={"column"} flex={2}>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>
                     RESPONSÁVEL
                   </Text>
@@ -156,10 +155,10 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                       "responsavel_id"
                     )}
                   />
-                </FormControl>
-                <FormControl>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
+                </Flex>
 
+                <Flex direction={"column"} flex={1}>
+                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
                   <NumberInput
                     max={99999}
                     min={0}
@@ -175,8 +174,8 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   >
                     <NumberInputField bg={"#fff"} />
                   </NumberInput>
-                </FormControl>
-                <Flex direction={"column"}>
+                </Flex>
+                <Flex direction={"column"} flex={1}>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>
                     PRECEDENTES
                   </Text>
