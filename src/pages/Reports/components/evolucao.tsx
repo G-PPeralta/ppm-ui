@@ -1,7 +1,15 @@
+import { Flex } from "@chakra-ui/react";
+
+import { curveSData, ganttData, taskFildsValues } from "./data";
+import GenericGantt from "./geericGantt";
+import GenericCurveS from "./genericCurveS";
 export function Evolucao() {
   return (
     <>
-      <h1>Evolução</h1>
+      <Flex direction={"column"} w={"100%"} gap={"2em"}>
+        <GenericCurveS data={curveSData} />
+        <GenericGantt data={ganttData} taskValues={taskFildsValues} />
+      </Flex>
     </>
   );
 }

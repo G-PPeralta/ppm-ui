@@ -23,7 +23,7 @@ type Props = {
   data: CurveSData[];
 };
 
-function CurvaS({ data }: Props) {
+function GenericCurveS({ data }: Props) {
   return (
     <>
       <Flex backgroundColor={"white"} mt={"2em"} direction={"column"}>
@@ -126,4 +126,4 @@ function CurvaS({ data }: Props) {
   );
 }
 
-export default CurvaS;
+export default GenericCurveS;

@@ -17,6 +17,7 @@ import {
 
 import Sidebar from "components/SideBar";
 
+import { Avanco } from "./components/avanco";
 import { Evolucao } from "./components/evolucao";
 import { Indicadores } from "./components/indicadores";
 import { PanoramaGeral } from "./components/panoramaGeral";
@@ -34,6 +35,7 @@ const reports: ReportTypeProps[] = [
   { name: "Indicadores", value: "3" },
   { name: "Evolução dos projetos", value: "4" },
   { name: "Previsto x Realizado", value: "5" },
+  { name: "Avanço Físico x Avanço Financeiro", value: "6" },
 ];
 
 function handleReportButton(report: string) {
@@ -44,6 +46,7 @@ function handleReportButton(report: string) {
       {report == "3" && <Indicadores />}
       {report == "4" && <Evolucao />}
       {report == "5" && <PrevistoXRealizado />}
+      {report == "6" && <Avanco />}
     </>
   );
 }

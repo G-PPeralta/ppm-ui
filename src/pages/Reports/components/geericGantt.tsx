@@ -19,20 +19,10 @@ export interface GanttData {
 
 type Props = {
   data: GanttData[];
+  taskValues: TaskFieldsModel;
 };
 
-function GenericGantt({ data }: Props) {
-  const taskValues: TaskFieldsModel = {
-    id: "taskID",
-    name: "taskName",
-    startDate: "startDate",
-    endDate: "endDate",
-    duration: "duration",
-    progress: "progress",
-    child: "subtasks",
-    dependency: "predeceesor",
-  };
-
+function GenericGantt({ data, taskValues }: Props) {
   return (
     <>
       <GanttComponent
