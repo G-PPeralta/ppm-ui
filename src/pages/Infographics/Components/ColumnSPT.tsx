@@ -37,7 +37,7 @@ function ColumnSPT({ column, setRefresh, refresh }: Props) {
       flex={1}
       minW={"296px"}
     >
-      <Flex mt={3} mb={6} alignItems={"center"} justify={"center"} w={"100%"}>
+      <Flex mt={3} mb={6} alignItems={"center"} justify={"end"} w="220px">
         <Text fontSize={"2xl"} fontWeight={"bold"} textAlign={"center"}>
           {column.sonda}
         </Text>
@@ -66,6 +66,7 @@ function ColumnSPT({ column, setRefresh, refresh }: Props) {
                   h={"179px"}
                 >
                   <Text
+                    ml={20}
                     fontSize="lg"
                     fontWeight={"semibold"}
                     textAlign={"center"}
