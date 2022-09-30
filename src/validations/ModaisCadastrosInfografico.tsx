@@ -8,7 +8,7 @@ export const cadastroSondaSchema = yup.object({
   nome: yup
     .string()
     .required("O nome da sonda é obrigatório!")
-    .min(3, "O nome da sonda deve ter ao menos 3 caracteres"),
+    .min(3, "O nome deve ter ao menos 3 caracteres!"),
 });
 
 export const cadastroIntervencaoSchema = yup.object({
@@ -71,7 +71,7 @@ export const cadastroPocoSchema = yup.object({
   poco: yup
     .string()
     .required("Campo obrigatório!")
-    .min(3, "O nome do poço deve ter ao menos 3 caracteres"),
+    .min(3, "O nome deve ter ao menos 3 caracteres!"),
 });
 
 export const cadastroNovaCampanhaSchema = yup.object({
