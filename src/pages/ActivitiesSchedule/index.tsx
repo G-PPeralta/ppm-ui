@@ -31,6 +31,7 @@ export function ActivitiesSchedule() {
   const [poco, setPoco] = useState(true);
   const [loading, setLoading] = useState(true);
   const [openId, setOpenId] = useState("");
+  const [openIndex, setOpenIndex] = useState("");
   const [atividades, setAtividades] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
 
@@ -51,9 +52,9 @@ export function ActivitiesSchedule() {
     requestHandler();
   }, [refresh]);
 
-  const openDetails = (atividade: any) => {
-    // console.log("atividade", atividade);
+  const openDetails = (atividade: any, index: any) => {
     setOpenId(atividade);
+    setOpenIndex(index);
   };
 
   return (
@@ -145,7 +146,7 @@ export function ActivitiesSchedule() {
                       direction={"column"}
                       align={"center"}
                       justify={"center"}
-                      onClick={() => openDetails(atividade)}
+                      onClick={() => openDetails(atividade, index)}
                       _hover={{ cursor: "pointer" }}
                     >
                       <CardACT atividade={atividade} />
@@ -156,6 +157,7 @@ export function ActivitiesSchedule() {
                   <ModalEditarAtividade
                     listaPrecedentes={atividades}
                     id={id}
+                    index={openIndex}
                     atividade={openId}
                     onClose={() => setOpenId("")}
                     setRefresh={setRefresh}
