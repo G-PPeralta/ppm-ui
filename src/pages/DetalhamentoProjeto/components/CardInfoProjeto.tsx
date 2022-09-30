@@ -10,18 +10,27 @@ import { PercentagePieChartProjetoInfo } from "components/PercentagePieChartProj
 type infoProjetoProps = {
   infoProjeto: ICardInfoProjeto;
   progresso: ProjetoProgresso[];
+  loading: boolean;
 };
 
-function CardInfoProjeto({ infoProjeto, progresso }: infoProjetoProps) {
+function CardInfoProjeto({
+  infoProjeto,
+  progresso,
+  loading,
+}: infoProjetoProps) {
   const chartsProps = [
     {
       name: "Undone",
-      value: 100 - Number(progresso[0].fn_cron_calc_pct_real.substring(0, 2)),
+      value: progresso
+        ? 100 - Number(progresso[0].fn_cron_calc_pct_real.substring(0, 2))
+        : 0,
       color: "#dddddd",
     },
     {
       name: "Done",
-      value: Number(progresso[0].fn_cron_calc_pct_real.substring(0, 2)),
+      value: progresso
+        ? Number(progresso[0].fn_cron_calc_pct_real.substring(0, 2))
+        : 0,
       color: "#00B53D",
     },
   ];
@@ -44,7 +53,11 @@ function CardInfoProjeto({ infoProjeto, progresso }: infoProjetoProps) {
           alignItems={"center"}
           // justifyContent={"center"}
         >
-          {progresso && <PercentagePieChartProjetoInfo data={chartsProps} />}
+          {progresso ? (
+            <PercentagePieChartProjetoInfo data={chartsProps} />
+          ) : (
+            <span>loading...</span>
+          )}
           <Heading as="h4" size="md" ml={4}>
             {infoProjeto.nome_projeto}
           </Heading>
