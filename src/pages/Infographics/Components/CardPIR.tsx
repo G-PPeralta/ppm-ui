@@ -61,95 +61,99 @@ function CardPIR({ poco, index }: Props) {
           _hover={{
             cursor: "pointer",
           }}
-          w={"220px"}
           gap={2}
+          minW={"220px"}
         >
-          <Text fontSize={"lg"} color={"white"} fontWeight={"bold"}>
-            {poco.poco}
-          </Text>
-          <Flex direction={"row"} justify={"space-between"} w={"100%"}>
-            <Text
-              fontSize={"md"}
-              color={"white"}
-              fontWeight={"bold"}
-              textAlign={"start"}
-              flex={1}
-            >
-              Data Início:
-            </Text>
-            <Text
-              fontSize={"md"}
-              color={"white"}
-              fontWeight={"semi-bold"}
-              textAlign={"end"}
-              ml={1}
-              flex={1}
-            >
-              {dataInicioFormatada}
+          <Flex>
+            <Text fontSize={"lg"} color={"white"} fontWeight={"bold"}>
+              {poco.poco}
             </Text>
           </Flex>
-          <Flex direction={"row"} justify={"space-between"} w={"100%"}>
-            <Text
-              fontSize={"md"}
-              color={"white"}
-              fontWeight={"bold"}
-              textAlign={"start"}
-              flex={1}
-            >
-              Data Fim:
-            </Text>
-            <Text
-              fontSize={"md"}
-              color={"white"}
-              fontWeight={"semi-bold"}
-              textAlign={"end"}
-              ml={1}
-              flex={1}
-            >
-              {dataFimFormatada}
-            </Text>
-          </Flex>
-          <Flex direction={"row"} justify={"space-between"} w={"100%"}>
-            <Text
-              fontSize={"md"}
-              color={"white"}
-              fontWeight={"bold"}
-              textAlign={"start"}
-              flex={1}
-            >
-              Planejado:
-            </Text>
-            <Text
-              fontSize={"md"}
-              color={"white"}
-              fontWeight={"semi-bold"}
-              textAlign={"end"}
-              ml={1}
-              flex={1}
-            >
-              {`${poco.pct_plan}%`}
-            </Text>
-          </Flex>
-          <Flex direction={"row"} justify={"space-between"} w={"100%"}>
-            <Text
-              fontSize={"md"}
-              color={"white"}
-              fontWeight={"bold"}
-              textAlign={"start"}
-              flex={1}
-            >
-              Realizado:
-            </Text>
-            <Text
-              fontSize={"md"}
-              color={"white"}
-              fontWeight={"semi-bold"}
-              textAlign={"end"}
-              ml={1}
-              flex={1}
-            >
-              {`${poco.pct_real}%`}
-            </Text>
+          <Flex direction={"column"} w={"100%"}>
+            <Flex direction={"row"} justify={"space-between"} w={"100%"}>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"bold"}
+                textAlign={"start"}
+                flex={1}
+              >
+                Data Início:
+              </Text>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"semi-bold"}
+                textAlign={"end"}
+                ml={1}
+                flex={1}
+              >
+                {dataInicioFormatada}
+              </Text>
+            </Flex>
+            <Flex direction={"row"} justify={"space-between"} w={"100%"}>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"bold"}
+                textAlign={"start"}
+                flex={1}
+              >
+                Data Fim:
+              </Text>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"semi-bold"}
+                textAlign={"end"}
+                ml={1}
+                flex={1}
+              >
+                {dataFimFormatada}
+              </Text>
+            </Flex>
+            <Flex direction={"row"} justify={"space-between"} w={"100%"}>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"bold"}
+                textAlign={"start"}
+                flex={1}
+              >
+                Planejado:
+              </Text>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"semi-bold"}
+                textAlign={"end"}
+                ml={1}
+                flex={1}
+              >
+                {`${poco.pct_plan}%`}
+              </Text>
+            </Flex>
+            <Flex direction={"row"} justify={"space-between"} w={"100%"}>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"bold"}
+                textAlign={"start"}
+                flex={1}
+              >
+                Realizado:
+              </Text>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"semi-bold"}
+                textAlign={"end"}
+                ml={1}
+                flex={1}
+              >
+                {`${poco.pct_real}%`}
+              </Text>
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
