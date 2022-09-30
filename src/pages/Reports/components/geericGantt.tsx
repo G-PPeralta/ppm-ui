@@ -1,19 +1,19 @@
 import { GanttComponent, TaskFieldsModel } from "@syncfusion/ej2-react-gantt";
 
 export interface SubTaskGantt {
-  TaskID: number;
-  TaskName: string;
-  StartDate: Date;
-  Duration: number;
-  Progress: number;
-  Predeceesor?: string;
+  taskID: number;
+  taskName: string;
+  startDate: Date;
+  duration: number;
+  progress: number;
+  predeceesor?: string;
 }
 
 export interface GanttData {
-  TaskID: number;
-  TaskName: string;
-  StartDate: Date;
-  EndDate: Date;
+  taskID: number;
+  taskName: string;
+  startDate: Date;
+  endDate: Date;
   subtasks: SubTaskGantt[];
 }
 
@@ -23,14 +23,14 @@ type Props = {
 
 function GenericGantt({ data }: Props) {
   const taskValues: TaskFieldsModel = {
-    id: "TaskID",
-    name: "TaskName",
-    startDate: "StartDate",
-    endDate: "EndDate",
-    duration: "Duration",
-    progress: "Progress",
+    id: "taskID",
+    name: "taskName",
+    startDate: "startDate",
+    endDate: "endDate",
+    duration: "duration",
+    progress: "progress",
     child: "subtasks",
-    dependency: "Predeceesor",
+    dependency: "predeceesor",
   };
 
   return (
