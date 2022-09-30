@@ -18,7 +18,7 @@ import { postGetInfoCampanha } from "services/get/Infograficos";
 
 import { statusProjeto } from "../../utils/validateDate";
 import ColumnSPT from "./Components/ColumnSPT";
-import ExibirModal from "./Components/ExibirModal";
+// import ExibirModal from "./Components/ExibirModal";
 import FiltrosModal from "./Components/FiltrosModal";
 import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
 import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
@@ -30,18 +30,6 @@ export function Infographics() {
   const [loading, setLoading] = useState(true);
   const [campanhas, setCampanhas] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
-  const [exibirDataInicio, setExibirDataInicio] = useState(true);
-  const [exibirPctPlan, setExibirPctPlan] = useState(true);
-  const [exibirPctReal, setExibirPctReal] = useState(true);
-
-  const opcoesExibir = {
-    exibirDataInicio,
-    setExibirDataInicio,
-    exibirPctPlan,
-    setExibirPctPlan,
-    exibirPctReal,
-    setExibirPctReal,
-  };
 
   const {
     registerForm,
@@ -95,7 +83,7 @@ export function Infographics() {
                     Acompanhamento de poços
                   </Heading>
                   <Flex gap={4}>
-                    <ExibirModal opcoesExibir={opcoesExibir} />
+                    {/* <ExibirModal opcoesExibir={opcoesExibir} /> */}
                     <FiltrosModal
                       refresh={refresh}
                       setRefresh={setRefresh}
@@ -155,7 +143,6 @@ export function Infographics() {
                             column={column}
                             refresh={refresh}
                             setRefresh={setRefresh}
-                            opcoesExibir={opcoesExibir}
                           />
                         </Flex>
                       ))}

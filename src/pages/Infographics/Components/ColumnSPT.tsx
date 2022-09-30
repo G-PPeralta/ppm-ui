@@ -22,23 +22,13 @@ type Column = {
   pocos: Poco[];
 };
 
-type OpcoesExibir = {
-  exibirDataInicio: boolean;
-  setExibirDataInicio: React.Dispatch<React.SetStateAction<boolean>>;
-  exibirPctPlan: boolean;
-  setExibirPctPlan: React.Dispatch<React.SetStateAction<boolean>>;
-  exibirPctReal: boolean;
-  setExibirPctReal: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
 type Props = {
   column: Column;
   setRefresh: Function;
   refresh: boolean;
-  opcoesExibir: OpcoesExibir;
 };
 
-function ColumnSPT({ column, setRefresh, refresh, opcoesExibir }: Props) {
+function ColumnSPT({ column, setRefresh, refresh }: Props) {
   return (
     <Flex direction={"column"} align={"center"} justify={"start"} flex={1}>
       <Flex mt={3} mb={6} alignItems={"center"}>
@@ -62,16 +52,24 @@ function ColumnSPT({ column, setRefresh, refresh, opcoesExibir }: Props) {
         >
           {column.pocos.map((poco, index) => {
             if (!poco.poco) {
-              return <div key={index}></div>;
-            } else {
               return (
-                <CardPIR
-                  poco={poco}
-                  index={index}
+                <Flex
                   key={index}
-                  opcoesExibir={opcoesExibir}
-                />
+                  justify={"center"}
+                  align={"center"}
+                  h={"179px"}
+                >
+                  <Text
+                    fontSize="lg"
+                    fontWeight={"semibold"}
+                    textAlign={"center"}
+                  >
+                    Não há intervenções cadastradas para essa campanha.
+                  </Text>
+                </Flex>
               );
+            } else {
+              return <CardPIR poco={poco} index={index} key={index} />;
             }
           })}
         </Flex>

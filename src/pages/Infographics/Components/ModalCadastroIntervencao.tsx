@@ -146,7 +146,7 @@ function ModalCadastroIntervencao({
       <Flex
         mt={2}
         py={3}
-        w="160px"
+        w="220px"
         border={"2px"}
         borderStyle={"dashed"}
         borderColor={"origem.500"}
