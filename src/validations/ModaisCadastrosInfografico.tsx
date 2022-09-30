@@ -8,7 +8,7 @@ export const cadastroSondaSchema = yup.object({
   nome: yup
     .string()
     .required("O nome da sonda é obrigatório!")
-    .min(3, "O nome da sonda deve ter ao menos 3 caracteres"),
+    .min(3, "O nome deve ter ao menos 3 caracteres!"),
 });
 
 export const cadastroIntervencaoSchema = yup.object({
@@ -32,7 +32,7 @@ export const cadastroIntervencaoSchema = yup.object({
 });
 
 export const cadastroAtividadeSchema = yup.object({
-  id_origem: yup.number().required("O ID é obrigatório!"),
+  id_origem: yup.string().required("O ID é obrigatório!"),
   nom_atividade: yup.string().required("O nome da atividade é obrigatório!"),
   responsavel_id: yup.number().required("O responsável é obrigatório!"),
   area_atuacao: yup.string().required("A área de atuação é obrigatória!"),
@@ -71,7 +71,7 @@ export const cadastroPocoSchema = yup.object({
   poco: yup
     .string()
     .required("Campo obrigatório!")
-    .min(3, "O nome do poço deve ter ao menos 3 caracteres"),
+    .min(3, "O nome deve ter ao menos 3 caracteres!"),
 });
 
 export const cadastroNovaCampanhaSchema = yup.object({
@@ -104,4 +104,32 @@ export const cadastroNovaAtividadeSchema = yup.object({
   dat_ini_plan: yup.string().required("A data e hora de início é obrigatória"),
   dat_fim_plan: yup.string().required("A data e hora de fim é obrigatória"),
   dsc_comentario: yup.string().required("O comentário é obrigatório"),
+});
+
+export const cadastroAtividadeIntervencaoSchema = yup.object({
+  id_origem: yup.string().required("O ID é obrigatório!"),
+  nom_atividade: yup.string().required("O nome da atividade é obrigatório!"),
+  responsavel_id: yup
+    .number()
+    .required("O responsável é obrigatório!")
+    .moreThan(1),
+  area_atuacao: yup
+    .number()
+    .required("A área de atuação é obrigatória!")
+    .moreThan(1),
+  nao_iniciar_antes_de: yup.object({
+    data: yup.string(),
+    checked: yup.boolean(),
+  }),
+  nao_terminar_depois_de: yup.object({
+    data: yup.string(),
+    checked: yup.boolean(),
+  }),
+  o_mais_breve_possivel: yup.boolean(),
+  precedentes: yup.array().of(
+    yup.object({
+      atividadePrecedenteId: yup.number(),
+      dias: yup.number(),
+    })
+  ),
 });

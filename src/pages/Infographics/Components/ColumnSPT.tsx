@@ -2,6 +2,7 @@ import { Flex, Text } from "@chakra-ui/react";
 
 import CardPIR from "./CardPIR";
 import ModalCadastroIntervencao from "./ModalCadastroIntervencao";
+import ModalEditarSPT from "./ModalEditarSPT";
 
 type Poco = {
   comp_pct: number;
@@ -17,26 +18,31 @@ type Poco = {
 
 type Column = {
   sonda: string;
-  pocos: Poco[];
   id_campanha: number;
+  pocos: Poco[];
 };
 
 type Props = {
   column: Column;
+  setRefresh: Function;
+  refresh: boolean;
 };
 
-function ColumnSPT({ column }: Props) {
+function ColumnSPT({ column, setRefresh, refresh }: Props) {
   return (
-    <Flex direction={"column"} align={"center"} justify={"start"} flex={1}>
-      <Text
-        fontSize={"2xl"}
-        fontWeight={"bold"}
-        mb={6}
-        mt={3}
-        textAlign={"center"}
-      >
-        {column.sonda}
-      </Text>
+    <Flex
+      direction={"column"}
+      align={"center"}
+      justify={"start"}
+      flex={1}
+      minW={"296px"}
+    >
+      <Flex mt={3} mb={6} alignItems={"center"} justify={"end"} w="220px">
+        <Text fontSize={"2xl"} fontWeight={"bold"} textAlign={"center"}>
+          {column.sonda}
+        </Text>
+        <ModalEditarSPT column={column} />
+      </Flex>
       <Flex
         direction={"column"}
         align={"end"}
@@ -52,7 +58,24 @@ function ColumnSPT({ column }: Props) {
         >
           {column.pocos.map((poco, index) => {
             if (!poco.poco) {
-              return <div key={index}></div>;
+              return (
+                <Flex
+                  key={index}
+                  justify={"center"}
+                  align={"center"}
+                  h={"179px"}
+                >
+                  <Text
+                    ml={20}
+                    fontSize="lg"
+                    fontWeight={"semibold"}
+                    textAlign={"center"}
+                    w={"220px"}
+                  >
+                    Não há intervenções cadastradas para essa campanha.
+                  </Text>
+                </Flex>
+              );
             } else {
               return <CardPIR poco={poco} index={index} key={index} />;
             }
@@ -61,6 +84,8 @@ function ColumnSPT({ column }: Props) {
         <ModalCadastroIntervencao
           data={column.pocos[column.pocos.length - 1].finalplanejado}
           idCampanha={column.id_campanha}
+          refresh={refresh}
+          setRefresh={setRefresh}
         />
       </Flex>
     </Flex>

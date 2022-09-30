@@ -21,19 +21,17 @@ import { Ring } from "@uiball/loaders";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
 
 import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
 
-function ModalCadastroProjetoTipo() {
+function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaAtividadesPrecedentes } =
     useCadastroProjetoTipo();
-
-  // console.log("registerForm", registerForm.values);
 
   return (
     <>
@@ -82,7 +80,7 @@ function ModalCadastroProjetoTipo() {
                       })}
                       gap={5}
                     >
-                      <FormControl>
+                      <Flex w={"50%"} direction={"column"}>
                         <Flex gap={1}>
                           <RequiredField />
                           <FormLabel htmlFor="nom_projeto_tipo">NOME</FormLabel>
@@ -105,7 +103,7 @@ function ModalCadastroProjetoTipo() {
                               {registerForm.errors.nom_projeto_tipo}
                             </TextError>
                           )}
-                      </FormControl>
+                      </Flex>
                     </Flex>
                   </Stack>
 
@@ -138,6 +136,7 @@ function ModalCadastroProjetoTipo() {
                             registerForm.values.comentarios
                           )}
                           onChange={registerForm.handleChange}
+                          maxLength={255}
                         />
                         {registerForm.errors.comentarios &&
                           registerForm.touched.comentarios && (
@@ -171,7 +170,14 @@ function ModalCadastroProjetoTipo() {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() =>
+                    handleCadastrarRefresh(
+                      registerForm,
+                      onClose,
+                      setRefresh,
+                      refresh
+                    )
+                  }
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",

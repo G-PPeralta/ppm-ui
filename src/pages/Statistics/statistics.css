@@ -1,0 +1,15 @@
+.toBottom {
+  display: flex;
+  align-items: flex-end;
+}
+
+.fullWidth {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+
+.table-fix {
+  width: 980px;
+  position: relative;
+}

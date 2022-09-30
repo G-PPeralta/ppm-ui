@@ -5,26 +5,28 @@ import { Flex, Heading, Text } from "@chakra-ui/react";
 import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
 
-// type Poco = {
-//   comp_pct: number;
-//   finalPlanejado: any;
-//   id_campanha: number;
-//   id_poco: number;
-//   inicioplanejado: any;
-//   pct_plan: any;
-//   pct_real: any;
-//   poco: string;
-//   sonda: string;
-// };
+type Poco = {
+  id?: number;
+  comp_pct: number;
+  finalplanejado: string;
+  id_campanha: number;
+  id_poco: number;
+  inicioplanejado: string;
+  pct_plan: number;
+  pct_real: number;
+  poco: string;
+  sonda: string;
+};
 
-// type Props = {
-//   poco: Poco;
-//   index: number;
-// };
+type Props = {
+  poco: Poco;
+  index: number;
+};
 
-function CardPIR({ poco, index }: any) {
+function CardPIR({ poco, index }: Props) {
   const navigate = useNavigate();
   const dataInicioFormatada = formatDate(new Date(poco.inicioplanejado));
+  const dataFimFormatada = formatDate(new Date(poco.finalplanejado));
 
   const transfer = () => {
     navigate(`/atividade/${poco.id}`, {
@@ -49,45 +51,110 @@ function CardPIR({ poco, index }: any) {
           align={"center"}
           justify={"center"}
           backgroundColor={validateDate(
-            poco.pct_plan,
-            poco.comp_pct,
-            poco.pct_real
+            Number(poco.pct_plan),
+            Number(poco.comp_pct),
+            Number(poco.pct_real)
           )}
-          px={4}
-          py={2}
-          borderRadius={4}
+          px={5}
+          py={3}
+          borderRadius={12}
           _hover={{
             cursor: "pointer",
           }}
-          w={"150px"}
+          gap={2}
+          minW={"220px"}
         >
-          <Text fontSize={"lg"} color={"white"} fontWeight={"bold"}>
-            {poco.poco}
-          </Text>
-          <Text
-            fontSize={"md"}
-            color={"white"}
-            fontWeight={"semi-bold"}
-            textAlign={"center"}
-          >
-            {dataInicioFormatada === "31/12/1969" ? "" : dataInicioFormatada}
-          </Text>
-          <Text
-            fontSize={"md"}
-            color={"white"}
-            fontWeight={"semi-bold"}
-            textAlign={"center"}
-          >
-            {poco.pct_plan === null ? "" : `Planejado: ${poco.pct_plan}%`}
-          </Text>
-          <Text
-            fontSize={"md"}
-            color={"white"}
-            fontWeight={"semi-bold"}
-            textAlign={"center"}
-          >
-            {poco.pct_plan === null ? "" : `Realizado: ${poco.pct_real}%`}
-          </Text>
+          <Flex>
+            <Text fontSize={"lg"} color={"white"} fontWeight={"bold"}>
+              {poco.poco}
+            </Text>
+          </Flex>
+          <Flex direction={"column"} w={"100%"}>
+            <Flex direction={"row"} justify={"space-between"} w={"100%"}>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"bold"}
+                textAlign={"start"}
+                flex={1}
+              >
+                Data Início:
+              </Text>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"semi-bold"}
+                textAlign={"end"}
+                ml={1}
+                flex={1}
+              >
+                {dataInicioFormatada}
+              </Text>
+            </Flex>
+            <Flex direction={"row"} justify={"space-between"} w={"100%"}>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"bold"}
+                textAlign={"start"}
+                flex={1}
+              >
+                Data Fim:
+              </Text>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"semi-bold"}
+                textAlign={"end"}
+                ml={1}
+                flex={1}
+              >
+                {dataFimFormatada}
+              </Text>
+            </Flex>
+            <Flex direction={"row"} justify={"space-between"} w={"100%"}>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"bold"}
+                textAlign={"start"}
+                flex={1}
+              >
+                Planejado:
+              </Text>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"semi-bold"}
+                textAlign={"end"}
+                ml={1}
+                flex={1}
+              >
+                {`${poco.pct_plan}%`}
+              </Text>
+            </Flex>
+            <Flex direction={"row"} justify={"space-between"} w={"100%"}>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"bold"}
+                textAlign={"start"}
+                flex={1}
+              >
+                Realizado:
+              </Text>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"semi-bold"}
+                textAlign={"end"}
+                ml={1}
+                flex={1}
+              >
+                {`${poco.pct_real}%`}
+              </Text>
+            </Flex>
+          </Flex>
         </Flex>
       </Flex>
     </>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 // import { useParams } from "react-router-dom";
 
@@ -21,9 +22,55 @@ import {
   Select,
   // useDisclosure,
 } from "@chakra-ui/react";
+import { format } from "date-fns";
+import { AtividadesProjeto, TarefaAtividade } from "interfaces/Services";
 
-function EditarTarefaModal({ isModalOpen, closeModal }: any) {
+import { useAuth } from "hooks/useAuth";
+
+import { patchTarefa } from "services/update/Tarefa";
+
+interface EditModalProps {
+  isModalOpen: any;
+  closeModal: any;
+  editTarefa: TarefaAtividade;
+  atividadesProjeto: AtividadesProjeto[];
+  newRender: any;
+}
+
+function EditarTarefaModal({
+  isModalOpen,
+  closeModal,
+  editTarefa,
+  atividadesProjeto,
+  newRender,
+}: EditModalProps) {
   // const { onClose } = useDisclosure();
+
+  const novaData = format(new Date(editTarefa?.data_tarefa), "yyyy-MM-dd");
+
+  const { user } = useAuth();
+  const [tarefaId] = useState(editTarefa?.id);
+  const [nome, setNome] = useState(editTarefa?.nome_tarefa);
+  const [data, setData] = useState(novaData);
+  const [atividadeId, setAtividadeId] = useState(
+    editTarefa?.atividade_relacionada
+  );
+  const [descricao, setDescricao] = useState(editTarefa?.descricao_tarefa);
+
+  const camposParaEditar = [
+    "nome_tarefa",
+    "data_tarefa",
+    "atividade_relacionada",
+    "descricao_tarefa",
+  ];
+
+  function updatePayload(campo: string) {
+    if (campo === "nome_tarefa") return nome;
+    if (campo === "data_tarefa") return data;
+    if (campo === "atividade_relacionada") return atividadeId;
+    if (campo === "descricao_tarefa") return descricao;
+  }
+
   return (
     <Flex>
       <Box
@@ -98,6 +145,8 @@ function EditarTarefaModal({ isModalOpen, closeModal }: any) {
                   id="nomeTarefa"
                   name="nomeTarefa"
                   width="100%"
+                  value={nome}
+                  onChange={(event) => setNome(event.target.value)}
                 />
               </Flex>
               <Flex flexDir={"column"} flexGrow={1}>
@@ -110,13 +159,12 @@ function EditarTarefaModal({ isModalOpen, closeModal }: any) {
                   DATA
                 </FormLabel>
                 <Input
-                  // placeholder="dd/mm/aaaa"
                   color="#D6D4D4"
                   id="data"
                   type="date"
                   name="data"
-                  // value={data}
-                  // onChange={(event) => setData(event.target.value)}
+                  value={data}
+                  onChange={(event) => setData(event.target.value)}
                 />
               </Flex>
             </FormControl>
@@ -129,10 +177,19 @@ function EditarTarefaModal({ isModalOpen, closeModal }: any) {
               >
                 ATIVIDADE RELACIONADA
               </FormLabel>
-              <Select id="atividadeRel" name="atividadeRel" color="#D6D4D4">
+              <Select
+                id="atividadeRel"
+                name="atividadeRel"
+                color="#D6D4D4"
+                value={atividadeId}
+                onChange={(event) => setAtividadeId(Number(event.target.value))}
+              >
                 <option value="">Selecione</option>
-                <option value="">Atividade 1</option>
-                <option value="">Atividade 2</option>
+                {atividadesProjeto.map((atividade, index) => (
+                  <option value={atividade.id} key={index}>
+                    {atividade.nomeAtividade}
+                  </option>
+                ))}
               </Select>
             </FormControl>
             <FormControl padding={1}>
@@ -151,8 +208,8 @@ function EditarTarefaModal({ isModalOpen, closeModal }: any) {
                 id="descrição"
                 name="descrição"
                 width="100%"
-                // value={acao}
-                // onChange={(event) => setAcao(event.target.value)}
+                value={descricao}
+                onChange={(event) => setDescricao(event.target.value)}
               />
             </FormControl>
           </ModalBody>
@@ -178,6 +235,18 @@ function EditarTarefaModal({ isModalOpen, closeModal }: any) {
                 _hover={{
                   background: "origem.500",
                   transition: "all 0.4s",
+                }}
+                onClick={() => {
+                  camposParaEditar.forEach((tarefa) =>
+                    patchTarefa(
+                      Number(tarefaId),
+                      tarefa,
+                      updatePayload(tarefa)?.toString() || "",
+                      user?.nome
+                    )
+                  );
+                  newRender();
+                  closeModal();
                 }}
               >
                 Adicionar

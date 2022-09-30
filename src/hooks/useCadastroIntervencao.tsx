@@ -23,7 +23,7 @@ import {
 } from "services/get/CadastroModaisInfograficos";
 import {
   getAreaAtuacaoList,
-  getInfoCampanha,
+  postGetInfoCampanha,
   getSondaCampanha,
 } from "services/get/Infograficos";
 import { postNovaIntervencao } from "services/post/CadastroModaisInfograficos";
@@ -43,8 +43,19 @@ export function useCadastroIntervencao() {
   const [listaSondaCampanha, setListaSondaCampanha] = useState<any[]>([]);
   const [listaTarefas, setListaTarefas] = useState<Tarefas[]>([]);
 
+  const getAllCampanha = {
+    area_atuacao_id: null,
+    poco_id: null,
+    atividade_id: null,
+    responsavel_id: null,
+    data_inicio: null,
+    data_fim: null,
+    sonda_id: null,
+    status: null,
+  };
+
   const reqGet = async () => {
-    const campanha = await getInfoCampanha();
+    const campanha = await postGetInfoCampanha(getAllCampanha);
     const pocos = await getPocos();
     const areaAtuacao = await getAreaAtuacaoList();
     const responsaveis = await getResponsaveis();
@@ -93,6 +104,12 @@ export function useCadastroIntervencao() {
     setListaTarefas(tarefasSorted);
   };
 
+  const listaAtividadesPrecedentes = listaTarefas.map((atividade) => ({
+    id: atividade.id,
+    nome: atividade.nom_atividade,
+    checked: false,
+  }));
+
   const initialValues: any = {
     nom_usu_create: user?.nome,
     poco_id: 0,
@@ -106,6 +123,13 @@ export function useCadastroIntervencao() {
         tarefa_id: 0,
         responsavel_id: 0,
         qtde_dias: 0,
+        precedentes: [
+          {
+            id: 0,
+            nome: "",
+            checked: false,
+          },
+        ],
       },
     ],
     comentarios: "",
@@ -168,5 +192,6 @@ export function useCadastroIntervencao() {
     listaProjetosTipo,
     listaSondaCampanha,
     listaTarefas,
+    listaAtividadesPrecedentes,
   };
 }

@@ -3,7 +3,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
+import { Box, Flex, Input, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 import { AreaAtuacao, Tarefas } from "interfaces/CadastrosModaisInfograficos";
 
@@ -12,7 +12,7 @@ import { regexCaracteresEspeciais } from "utils/regex";
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
 
-import SelectFiltragem from "../../SelectFiltragem";
+import SelectFiltragem from "../../../../../components/SelectFiltragem";
 import PopOverPrecedentes from "./PopOverPrecedentes";
 
 interface Props {
@@ -99,8 +99,9 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                 align={"center"}
                 justify={"center"}
                 py={innerwidth >= 640 ? 0 : 4}
+                flex={1}
               >
-                <FormControl>
+                <Flex direction={"column"} flex={2}>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>ID</Text>
                   <Input
                     placeholder="Ex.: CIP02"
@@ -119,9 +120,9 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     }}
                     maxLength={10}
                   />
-                </FormControl>
+                </Flex>
 
-                <FormControl>
+                <Flex direction={"column"} flex={2}>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>ÁREA</Text>
                   <SelectFiltragem
                     registerForm={registerForm}
@@ -129,9 +130,9 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     options={optionsAreaAtuacao}
                     value={getValue(optionsAreaAtuacao, index, "area_id")}
                   />
-                </FormControl>
+                </Flex>
 
-                <FormControl>
+                <Flex direction={"column"} flex={2}>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>TAREFA</Text>
                   <SelectFiltragem
                     registerForm={registerForm}
@@ -139,9 +140,9 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     options={optionsTarefa}
                     value={getValue(optionsTarefa, index, "tarefa_id")}
                   />
-                </FormControl>
+                </Flex>
 
-                <FormControl>
+                <Flex direction={"column"} flex={1}>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
                   <Input
                     placeholder="0"
@@ -157,9 +158,9 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                       );
                     }}
                   />
-                </FormControl>
+                </Flex>
 
-                <Flex direction={"column"}>
+                <Flex direction={"column"} flex={1}>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>
                     PRECEDENTES
                   </Text>

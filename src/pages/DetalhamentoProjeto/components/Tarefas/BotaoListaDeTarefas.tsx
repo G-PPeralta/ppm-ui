@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+// import toast from "react-hot-toast";
 import { AiFillEdit, AiOutlineSearch } from "react-icons/ai";
 
 import {
@@ -27,109 +28,151 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
+import {
+  AtividadesProjeto,
+  TarefaAtividade,
+  TarefaAtividadeComId,
+} from "interfaces/Services";
+
+import { getAtividadesProjeto } from "services/get/Atividades-Projeto";
+import { getAtividadesTarefas } from "services/get/Tarefas";
 
 import CadastrarTarefasModal from "./CadastroTarefaModal";
 import EditarTarefaModal from "./EditarTarefaModal";
-
-const taskList = [
-  {
-    id: 1,
-    tarefa: "tarefa 1",
-    atividadeRel: "atividade1",
-    data: "24/09/2022",
-    descrição: "descrição 1",
-    status: "25%",
-  },
-  {
-    id: 2,
-    tarefa: "tarefa 2",
-    atividadeRel: "atividade2",
-    data: "24/09/2022",
-    descrição: "descrição 2",
-    status: "25%",
-  },
-  {
-    id: 3,
-    tarefa: "tarefa 3",
-    atividadeRel: "atividade3",
-    data: "24/09/2022",
-    descrição: "descrição 3",
-    status: "25%",
-  },
-];
 
 function BotaoListadeTarefas() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [tarefaFilter, setTarefaFilter] = useState("");
+  const [taskList, setTaskList] = useState([] as TarefaAtividadeComId[]);
+  const [editTarefa, setEditTarefa] = useState({} as TarefaAtividade);
+  const [atividadesProjeto, setAtividadesProjeto] = useState(
+    [] as AtividadesProjeto[]
+  );
 
-  const tableData = taskList.map((task, index) => (
-    <Tr key={index}>
-      <Td
-        isNumeric
-        style={{
-          borderBottom: "0.5px solid #A7A7A7",
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {task.id}
-      </Td>
-      <Td
-        style={{
-          borderBottom: "0.5px solid #A7A7A7",
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {task.tarefa}
-      </Td>
-      <Td
-        style={{
-          borderBottom: "0.5px solid #A7A7A7",
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {task.atividadeRel}
-      </Td>
-      <Td
-        style={{
-          borderBottom: "0.5px solid #A7A7A7",
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {task.data}
-      </Td>
-      <Td
-        style={{
-          borderBottom: "0.5px solid #A7A7A7",
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {task.descrição}
-      </Td>
-      <Td
-        style={{
-          borderBottom: "0.5px solid #A7A7A7",
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {task.status}
-      </Td>
-      <Td style={{ borderBottom: "0.5px solid #A7A7A7" }}>
-        <IconButton
-          aria-label="Plus sign"
-          icon={<AiFillEdit />}
-          background="white"
-          variant="secondary"
-          color="#2D2926"
-          mr={2}
-          isRound={true}
-          size="sm"
-          onClick={() => setIsEditModalOpen(true)}
-        />
-      </Td>
-    </Tr>
-  ));
+  const [dataFilter, setDataFiltered] = useState("");
+
+  const [filteredData, setFilteredData] = useState(
+    [] as TarefaAtividadeComId[]
+  );
+
+  const [render, setRender] = useState(false);
+
+  async function fetchAtividadesProjeto() {
+    const { data } = await getAtividadesProjeto();
+    setAtividadesProjeto(data);
+  }
+
+  function formatDate(date: Date) {
+    const formated = date.toString().substring(0, 10).split("-");
+    return `${formated[2]}-${formated[1]}-${formated[0]}`;
+  }
+
+  async function getTaskList() {
+    const { data } = await getAtividadesTarefas();
+    setTaskList(data);
+    setFilteredData(data);
+  }
+
+  function handleEditTarefa(tarefa: TarefaAtividade) {
+    setEditTarefa(tarefa);
+    setIsEditModalOpen(true);
+  }
+
+  function handleFilter(nome: string, data: string) {
+    if (nome) {
+      const filtered = taskList.filter((task: any) =>
+        task.nome_tarefa.includes(nome)
+      );
+      return setTaskList(filtered);
+    }
+    if (data) {
+      const filtered = taskList.filter((task: any) =>
+        task.data_tarefa.includes(data)
+      );
+      // filtered.length == 0 &&
+      //   toast.error("Nenhum dado encontrado com o presente filtro de data");
+      return setTaskList(filtered);
+    }
+    setTaskList(filteredData);
+  }
+
+  const tableData =
+    taskList &&
+    taskList
+      .sort((a, b) => a.id - b.id)
+      .map((task, index) => (
+        <Tr key={index}>
+          <Td
+            isNumeric
+            style={{
+              borderBottom: "0.5px solid #A7A7A7",
+              borderRight: "0.5px solid #A7A7A7",
+            }}
+          >
+            {task.id}
+          </Td>
+          <Td
+            style={{
+              borderBottom: "0.5px solid #A7A7A7",
+              borderRight: "0.5px solid #A7A7A7",
+            }}
+          >
+            {task.nome_tarefa}
+          </Td>
+          <Td
+            style={{
+              borderBottom: "0.5px solid #A7A7A7",
+              borderRight: "0.5px solid #A7A7A7",
+            }}
+          >
+            {task.atividade_relacionada}
+          </Td>
+          <Td
+            style={{
+              borderBottom: "0.5px solid #A7A7A7",
+              borderRight: "0.5px solid #A7A7A7",
+            }}
+          >
+            {formatDate(task.data_tarefa)}
+          </Td>
+          <Td
+            style={{
+              borderBottom: "0.5px solid #A7A7A7",
+              borderRight: "0.5px solid #A7A7A7",
+            }}
+          >
+            {task.descricao_tarefa}
+          </Td>
+          <Td
+            style={{
+              borderBottom: "0.5px solid #A7A7A7",
+              borderRight: "0.5px solid #A7A7A7",
+            }}
+          >
+            {!task.status ? "0%" : task.status}
+          </Td>
+          <Td style={{ borderBottom: "0.5px solid #A7A7A7" }}>
+            <IconButton
+              aria-label="Plus sign"
+              icon={<AiFillEdit />}
+              background="white"
+              variant="secondary"
+              color="#2D2926"
+              mr={2}
+              isRound={true}
+              size="sm"
+              onClick={() => handleEditTarefa(task)}
+            />
+          </Td>
+        </Tr>
+      ));
+
+  useEffect(() => {
+    getTaskList();
+    fetchAtividadesProjeto();
+  }, [render]);
 
   return (
     <>
@@ -185,7 +228,7 @@ function BotaoListadeTarefas() {
                   flex={1}
                 >
                   <FormControl>
-                    <FormLabel htmlFor="categoria">TAREFA</FormLabel>
+                    <FormLabel htmlFor="tarefa">TAREFA</FormLabel>
                     <Input
                       placeholder="Nome da tarefa"
                       type="text"
@@ -208,8 +251,8 @@ function BotaoListadeTarefas() {
                       id="data"
                       type="date"
                       name="data"
-                      // value={data}
-                      // onChange={(event) => setData(event.target.value)}
+                      // value={dataFilter}
+                      onChange={(event) => setDataFiltered(event.target.value)}
                     />
                   </FormControl>
                   {/* <input
@@ -236,6 +279,9 @@ function BotaoListadeTarefas() {
                     //   handleFilter(categoriaId, data);
                     //   setCategoriaId("");
                     // }}
+                    onClick={() => {
+                      handleFilter(tarefaFilter, dataFilter);
+                    }}
                     _hover={{
                       background: "origem.300",
                       transition: "all 0.4s",
@@ -268,7 +314,10 @@ function BotaoListadeTarefas() {
             </FormControl>
           </Stack>
 
-          <ModalCloseButton color={"white"} />
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => setTaskList(filteredData)}
+          />
           <ModalBody>
             <TableContainer mt={4} mb={3} ml={1}>
               <Table
@@ -304,13 +353,18 @@ function BotaoListadeTarefas() {
             <CadastrarTarefasModal
               isModalOpen={setIsModalOpen}
               closeModal={() => setIsModalOpen(false)}
+              atividadesProjeto={atividadesProjeto}
+              newRender={() => setRender(!render)}
             />
           )}
 
           {isEditModalOpen && (
             <EditarTarefaModal
               isModalOpen={setIsEditModalOpen}
+              editTarefa={editTarefa}
               closeModal={() => setIsEditModalOpen(false)}
+              atividadesProjeto={atividadesProjeto}
+              newRender={() => setRender(!render)}
             />
           )}
 
