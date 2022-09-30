@@ -430,3 +430,33 @@ export interface StatisticsTableData {
   dp?: number;
   use?: string;
 }
+
+export interface TarefaAtividade {
+  id?: number;
+  nome_tarefa: string;
+  data_tarefa: Date;
+  atividade_relacionada: number;
+  descricao_tarefa: string;
+  nom_usu_create?: string;
+  status?: number;
+}
+
+export interface TarefaAtividadeComId {
+  id: number;
+  nome_tarefa: string;
+  data_tarefa: Date;
+  atividade_relacionada: number;
+  descricao_tarefa: string;
+  nom_usu_create?: string;
+  status?: number;
+}
+
+export interface AtividadesProjeto {
+  id: number;
+  nomeAtividade: string;
+  tipoAtividade: string;
+  deletado: boolean;
+  macroatividadeId: number;
+  item: string;
+  temporario: boolean;
+}
