@@ -1,4 +1,4 @@
-import { Budget, BudgetDetail } from "models/Budget.model";
+import { Budget, BudgetDetail } from "interfaces/Budgets";
 
 import { api, token } from "services/api";
 

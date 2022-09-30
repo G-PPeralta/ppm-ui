@@ -12,7 +12,7 @@ import {
   Text,
   Tfoot,
 } from "@chakra-ui/react";
-import { BudgetDetail } from "models/Budget.model";
+import { BudgetDetail } from "interfaces/Budgets";
 
 export function TotalTable(props: { data: BudgetDetail[] }) {
   return (

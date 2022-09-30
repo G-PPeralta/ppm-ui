@@ -5,8 +5,8 @@ import { SetStateAction, useEffect, useState } from "react";
 
 // import { useToast } from "contexts/Toast";
 
+import { Budget } from "interfaces/Budgets";
 import { ListaSonda } from "interfaces/CadastrosModaisInfograficos";
-import { Budget } from "models/Budget.model";
 
 import { getBudgets } from "services/get/GetBudget";
 import { getInfoCampanha } from "services/get/Infograficos";
