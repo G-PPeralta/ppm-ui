@@ -92,14 +92,14 @@ export function Infographics() {
                 flex={1}
               >
                 <Flex gap={2} wrap={"wrap"} flex={1}>
-                  <ModalNovaCampanha
-                    refresh={refresh}
-                    setRefresh={setRefresh}
-                  />
                   <ModalCadastrarSonda />
                   <ModalCadastroPoco />
                   <ModalCadastroAtividade />
                   <ModalCadastroProjetoTipo
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
+                  <ModalNovaCampanha
                     refresh={refresh}
                     setRefresh={setRefresh}
                   />
