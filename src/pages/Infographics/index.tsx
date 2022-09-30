@@ -122,6 +122,7 @@ export function Infographics() {
                     flexDirection={"row"}
                     gap={10}
                     py={2}
+                    flex={1}
                   >
                     {campanhas.map((column, index) => (
                       <Flex

@@ -63,6 +63,7 @@ function ColumnSPT({ column, setRefresh, refresh }: Props) {
                     fontSize="lg"
                     fontWeight={"semibold"}
                     textAlign={"center"}
+                    w={"220px"}
                   >
                     Não há intervenções cadastradas para essa campanha.
                   </Text>

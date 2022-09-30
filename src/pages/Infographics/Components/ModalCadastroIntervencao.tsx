@@ -161,6 +161,7 @@ function ModalCadastroIntervencao({
           transition: "all 0.4s",
         }}
         onClick={() => handleClick()}
+        mb={3}
       >
         <IconButton
           aria-label="Plus sign"
