@@ -31,7 +31,7 @@ type Props = {
 function ColumnSPT({ column, setRefresh, refresh }: Props) {
   return (
     <Flex direction={"column"} align={"center"} justify={"start"} flex={1}>
-      <Flex mt={3} mb={6} alignItems={"center"}>
+      <Flex mt={3} mb={6} ml={24} alignItems={"center"} justify={"end"}>
         <Text fontSize={"2xl"} fontWeight={"bold"} textAlign={"center"}>
           {column.sonda}
         </Text>
