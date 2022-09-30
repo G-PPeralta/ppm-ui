@@ -82,7 +82,7 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                       })}
                       gap={5}
                     >
-                      <FormControl>
+                      <Flex w={"50%"} direction={"column"}>
                         <Flex gap={1}>
                           <RequiredField />
                           <FormLabel htmlFor="nom_projeto_tipo">NOME</FormLabel>
@@ -105,7 +105,7 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                               {registerForm.errors.nom_projeto_tipo}
                             </TextError>
                           )}
-                      </FormControl>
+                      </Flex>
                     </Flex>
                   </Stack>
 

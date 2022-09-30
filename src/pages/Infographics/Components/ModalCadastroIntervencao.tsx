@@ -234,7 +234,7 @@ function ModalCadastroIntervencao({
                     </Stack>
 
                     <Stack>
-                      <Flex flexDirection={"row"} gap={4}>
+                      <Flex flexDirection={"row"} gap={4} w={"50%"}>
                         <SelectFiltragem
                           registerForm={registerForm}
                           nomeSelect={"PROJETO"}
