@@ -50,7 +50,6 @@ function BotaoAdicionar({ add, registerForm }: Props) {
         backgroundColor={isDisabled ? "#D6D4D4" : "origem.500"}
         size={"sm"}
         _hover={{
-          cursor: "pointer",
           backgroundColor: isDisabled ? "#D6D4D4" : "origem.600",
         }}
         transition={"all 0.4s"}
