@@ -120,7 +120,7 @@ any) {
           )}
         </Droppable>
       </DragDropContext>
-      <BotaoAdicionar add={add} />
+      <BotaoAdicionar add={add} registerForm={registerForm} />
     </>
   );
 }

@@ -119,10 +119,15 @@ export default function AtividadesDragAndDrop({
   }, []);
 
   useEffect(() => {
+    // Para atualizar os valores das atividades precedentes
     registerForm.values.atividades.forEach((_atividade: any, index: number) => {
+      // Para cada item da lista, atualiza os valores das atividades precedentes
       registerForm.setFieldValue(
         `atividades[${index}].precedentes`,
+        // Filtra as atividades precedentes com base nas atividades que já estão na lista
         listaAtividadesPrecedentes.filter((atividade: any) => {
+          // Para cada item da lista de atividades precedentes, verifica se o id da atividade
+          // precedente é igual ao id da atividade que está sendo adicionada na lista
           for (
             let index = 0;
             index < registerForm.values.atividades.length;
