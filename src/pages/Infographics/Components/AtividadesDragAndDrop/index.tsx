@@ -19,6 +19,14 @@ interface AtividadePrecedente {
   nome: string;
   checked: boolean;
 }
+
+interface Atividade {
+  atividade_id_origem: number;
+  area_id: number;
+  tarefa_id: number;
+  qtde_dias: number;
+  precedentes: AtividadePrecedente[];
+}
 interface Props {
   registerForm: FormikProps<any>;
   listaAtividadesPrecedentes: AtividadePrecedente[];
@@ -109,7 +117,7 @@ export default function AtividadesDragAndDrop({
     setDroppableId(newId);
 
     const precedentesFiltrados = listaAtividadesPrecedentes.filter(
-      (atividade: any) => {
+      (atividade: AtividadePrecedente) => {
         for (
           let index = 0;
           index < registerForm.values.atividades.length;
@@ -133,58 +141,64 @@ export default function AtividadesDragAndDrop({
     );
   }, []);
 
-  const listaAtividades = registerForm.values.atividades.map(
-    (atividade: any) => atividade
-  );
+  useEffect(() => {
+    const listaAtividades = registerForm.values.atividades.map(
+      (atividade: Atividade) => atividade
+    );
 
-  const listaPrecedentesChecked = listaAtividades.map((atividade: any) => {
-    const precedentes = atividade.precedentes.map((precedente: any) => {
-      if (precedente.checked) {
-        return precedente;
+    const listaPrecedentesChecked = listaAtividades.map(
+      (atividade: Atividade) => {
+        const precedentes = atividade.precedentes.map(
+          (precedente: AtividadePrecedente) => {
+            if (precedente.checked) {
+              return precedente;
+            }
+            return null;
+          }
+        );
+
+        return precedentes;
       }
-      return null;
-    });
+    );
 
-    return precedentes;
-  });
-
-  const precedentesFiltrados = listaAtividadesPrecedentes.filter(
-    (atividade: any) => {
-      for (let index = 0; index < listaAtividades.length; index += 1) {
-        if (atividade.id === listaAtividades[index].tarefa_id) {
-          return true;
-        }
-      }
-      return false;
-    }
-  );
-
-  const listaAtividadesAtualizada = listaAtividades.map(
-    (atividade: any, index: number) => {
-      const precedentes = precedentesFiltrados.map((precedente: any) => {
-        for (
-          let indexPrecedente = 0;
-          indexPrecedente < listaPrecedentesChecked[index].length;
-          indexPrecedente += 1
-        ) {
-          if (
-            listaPrecedentesChecked[index][indexPrecedente] &&
-            listaPrecedentesChecked[index][indexPrecedente].id === precedente.id
-          ) {
-            return listaPrecedentesChecked[index][indexPrecedente];
+    const precedentesFiltrados = listaAtividadesPrecedentes.filter(
+      (atividade: AtividadePrecedente) => {
+        for (let index = 0; index < listaAtividades.length; index += 1) {
+          if (atividade.id === listaAtividades[index].tarefa_id) {
+            return true;
           }
         }
-        return precedente;
-      });
+        return false;
+      }
+    );
 
-      return {
-        ...atividade,
-        precedentes,
-      };
-    }
-  );
+    const listaAtividadesAtualizada = listaAtividades.map(
+      (atividade: Atividade, index: number) => {
+        const precedentes = precedentesFiltrados.map(
+          (precedente: AtividadePrecedente) => {
+            for (
+              let indexPrecedente = 0;
+              indexPrecedente < listaPrecedentesChecked[index].length;
+              indexPrecedente += 1
+            ) {
+              if (
+                listaPrecedentesChecked[index][indexPrecedente] &&
+                listaPrecedentesChecked[index][indexPrecedente].id ===
+                  precedente.id
+              ) {
+                return listaPrecedentesChecked[index][indexPrecedente];
+              }
+            }
+            return precedente;
+          }
+        );
 
-  useEffect(() => {
+        return {
+          ...atividade,
+          precedentes,
+        };
+      }
+    );
     // Atualiza a lista de precedentes para todos os itens da lista de atividades
     registerForm.setFieldValue("atividades", listaAtividadesAtualizada);
   }, [render]);
