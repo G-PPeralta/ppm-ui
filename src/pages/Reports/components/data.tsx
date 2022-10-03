@@ -117,9 +117,10 @@ export const tableData: TableData = {
     "Realizado",
     "Responsável",
     "Fase do projeto",
+    "Status",
   ],
   rows: [
-    ["1", "Limpeza", "1000", "1000", "Yolanda", "Engenharia"],
-    ["2", "Perfuração", "1000", "1000", "Yolanda", "Engenharia"],
+    ["1", "Limpeza", "1000", "1000", "Yolanda", "Engenharia", "Concluído"],
+    ["2", "Perfuração", "1000", "1000", "Yolanda", "Engenharia", "Pendente"],
   ],
 };

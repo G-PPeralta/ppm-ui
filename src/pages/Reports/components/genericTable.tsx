@@ -20,6 +20,19 @@ type Props = {
 };
 
 export function GenericTable({ data, total }: Props) {
+  function chengeColorCel(value: string) {
+    switch (value) {
+      case "Concluído":
+        return "#059502";
+        break;
+      case "Pendente":
+        return "#F40606";
+        break;
+      default:
+        return "gray.800";
+    }
+  }
+
   return (
     <>
       <Flex direction={"column"}>
@@ -40,7 +53,7 @@ export function GenericTable({ data, total }: Props) {
                 data.rows.map((row) => (
                   <Tr>
                     {row.map((cel) => (
-                      <Td>{cel}</Td>
+                      <Td textColor={chengeColorCel(cel)}>{cel}</Td>
                     ))}
                   </Tr>
                 ))}
