@@ -28,6 +28,7 @@ function BotaoAzulOutline({
   return (
     <Button
       h={"56px"}
+      borderRadius={"10px"}
       disabled={!formikForm.isValid || !formikForm.dirty}
       background={"white"}
       border={"2px solid"}

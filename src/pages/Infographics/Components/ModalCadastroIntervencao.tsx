@@ -12,7 +12,7 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
-  Button,
+  // Button,
   FormControl,
   FormLabel,
   Stack,
@@ -26,9 +26,12 @@ import {
 } from "interfaces/CadastrosModaisInfograficos";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
+import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
+import BotaoVermelhoOutline from "components/BotaoVermelho/BotaoVermelhoOutline";
+import BotaoVermelhoPrimary from "components/BotaoVermelho/BotaoVermelhoPrimary";
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-import { handleCancelar } from "utils/handleCadastro";
+// import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
@@ -279,7 +282,7 @@ function ModalCadastroIntervencao({
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <Button
+                {/* <Button
                   variant="ghost"
                   color="red"
                   onClick={() => handleCancelar(registerForm, onClose)}
@@ -290,7 +293,22 @@ function ModalCadastroIntervencao({
                   }}
                 >
                   Cancelar
-                </Button>
+                </Button> */}
+                <BotaoVermelhoGhost
+                  text={"Cancelar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                />
+                <BotaoVermelhoOutline
+                  text={"Cancelar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                />
+                <BotaoVermelhoPrimary
+                  text={"Cancelar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                />
                 <BotaoAzulPrimary
                   text={"Concluir Cadastro"}
                   formikForm={registerForm}

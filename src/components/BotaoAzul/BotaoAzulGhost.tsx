@@ -28,6 +28,7 @@ function BotaoAzulGhost({
   return (
     <Button
       h={"56px"}
+      borderRadius={"10px"}
       disabled={!formikForm.isValid || !formikForm.dirty}
       background={"white"}
       color={"origem.500"}

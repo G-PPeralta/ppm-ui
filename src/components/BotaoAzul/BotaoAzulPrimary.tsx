@@ -28,6 +28,7 @@ function BotaoAzulPrimary({
   return (
     <Button
       h={"56px"}
+      borderRadius={"10px"}
       disabled={!formikForm.isValid || !formikForm.dirty}
       background={"origem.300"}
       variant="primary"
