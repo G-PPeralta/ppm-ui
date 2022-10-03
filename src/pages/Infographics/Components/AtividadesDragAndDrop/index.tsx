@@ -189,7 +189,7 @@ export default function AtividadesDragAndDrop({
                 return listaPrecedentesChecked[index][indexPrecedente];
               }
             }
-            return { ...precedente, precedente };
+            return { ...precedente };
           }
         );
 
