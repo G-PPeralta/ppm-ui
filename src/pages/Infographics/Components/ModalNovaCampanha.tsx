@@ -10,16 +10,14 @@ import {
   ModalHeader,
   ModalOverlay,
   Stack,
-  Text,
   Textarea,
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
 
+import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
+import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { TextError } from "components/TextError";
-
-import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 
@@ -121,7 +119,7 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
+              {/* <Flex gap={2}>
                 <Button
                   variant="ghost"
                   color="red"
@@ -162,6 +160,21 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                     </>
                   )}
                 </Button>
+              </Flex> */}
+              <Flex gap={2}>
+                <BotaoVermelhoGhost
+                  text={"Cancelar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                />
+                <BotaoAzulPrimary
+                  text={"Concluir Cadastro"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                  loading={loading}
+                />
               </Flex>
             </ModalFooter>
           </form>

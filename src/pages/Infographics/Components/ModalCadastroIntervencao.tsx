@@ -27,8 +27,6 @@ import {
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
-import BotaoVermelhoOutline from "components/BotaoVermelho/BotaoVermelhoOutline";
-import BotaoVermelhoPrimary from "components/BotaoVermelho/BotaoVermelhoPrimary";
 import { RequiredField } from "components/RequiredField/RequiredField";
 
 // import { handleCancelar } from "utils/handleCadastro";
@@ -282,29 +280,7 @@ function ModalCadastroIntervencao({
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                {/* <Button
-                  variant="ghost"
-                  color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
-                  _hover={{
-                    background: "red.500",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                >
-                  Cancelar
-                </Button> */}
                 <BotaoVermelhoGhost
-                  text={"Cancelar"}
-                  formikForm={registerForm}
-                  onClose={onClose}
-                />
-                <BotaoVermelhoOutline
-                  text={"Cancelar"}
-                  formikForm={registerForm}
-                  onClose={onClose}
-                />
-                <BotaoVermelhoPrimary
                   text={"Cancelar"}
                   formikForm={registerForm}
                   onClose={onClose}
@@ -317,32 +293,6 @@ function ModalCadastroIntervencao({
                   refresh={refresh}
                   loading={loading}
                 />
-                {/* <Button
-                  disabled={!registerForm.isValid || !registerForm.dirty}
-                  background="origem.300"
-                  variant="primary"
-                  color="white"
-                  onClick={() =>
-                    handleCadastrarRefresh(
-                      registerForm,
-                      onClose,
-                      setRefresh,
-                      refresh
-                    )
-                  }
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                  }}
-                >
-                  {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Concluir Cadastro</Text>
-                    </>
-                  )}
-                </Button> */}
               </Flex>
             </ModalFooter>
           </form>
