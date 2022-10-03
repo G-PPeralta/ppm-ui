@@ -21,7 +21,7 @@ import {
   postGetInfoCampanha,
   getSondaCampanha,
 } from "services/get/Infograficos";
-import { postNovaIntervencao } from "services/post/CadastroModaisInfograficos";
+import { postCadastroNovoCronograma } from "services/post/Estatistica";
 
 import { useAuth } from "./useAuth";
 
@@ -131,7 +131,7 @@ export function useCadastroCronograma() {
       setLoading(true);
 
       try {
-        const { status } = await postNovaIntervencao(newValues);
+        const { status } = await postCadastroNovoCronograma(newValues);
 
         if (status === 200 || status === 201) {
           toast.success("Cronograma cadastrado com sucesso!", {
