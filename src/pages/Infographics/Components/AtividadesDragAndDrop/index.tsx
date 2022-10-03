@@ -189,22 +189,16 @@ export default function AtividadesDragAndDrop({
                 return listaPrecedentesChecked[index][indexPrecedente];
               }
             }
-            return precedente;
+            return { ...precedente, precedente };
           }
         );
 
-        return {
-          ...atividade,
-          precedentes,
-        };
+        return { ...atividade, precedentes };
       }
     );
     // Atualiza a lista de precedentes para todos os itens da lista de atividades
     registerForm.setFieldValue("atividades", listaAtividadesAtualizada);
   }, [render]);
-
-  console.log("Atividades", registerForm.values.atividades);
-  console.log("ListaPrecedentes", listaAtividadesPrecedentes);
 
   return (
     <>
