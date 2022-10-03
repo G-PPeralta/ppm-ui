@@ -12,7 +12,7 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
-  Button,
+  // Button,
   FormControl,
   FormLabel,
   Stack,
@@ -25,9 +25,11 @@ import {
   ProjetoTipo,
 } from "interfaces/CadastrosModaisInfograficos";
 
+import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
+import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
+// import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
@@ -102,6 +104,7 @@ function ModalCadastroIntervencao({
         qtde_dias: atividade.qtde_dias,
         precedentes: atividade.precedentes,
       }));
+
       registerForm.setFieldValue("atividades", atividadesFormatadas);
     }
   };
@@ -145,7 +148,7 @@ function ModalCadastroIntervencao({
       <Flex
         mt={2}
         py={3}
-        w="160px"
+        w="220px"
         border={"2px"}
         borderStyle={"dashed"}
         borderColor={"origem.500"}
@@ -160,6 +163,7 @@ function ModalCadastroIntervencao({
           transition: "all 0.4s",
         }}
         onClick={() => handleClick()}
+        mb={3}
       >
         <IconButton
           aria-label="Plus sign"
@@ -175,7 +179,7 @@ function ModalCadastroIntervencao({
           Cadastrar Intervenção
         </Text>
       </Flex>
-      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="5xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -232,7 +236,7 @@ function ModalCadastroIntervencao({
                     </Stack>
 
                     <Stack>
-                      <Flex flexDirection={"row"} gap={4}>
+                      <Flex flexDirection={"row"} gap={4} w={"50%"}>
                         <SelectFiltragem
                           registerForm={registerForm}
                           nomeSelect={"PROJETO"}
@@ -276,44 +280,19 @@ function ModalCadastroIntervencao({
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <Button
-                  variant="ghost"
-                  color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
-                  _hover={{
-                    background: "red.500",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  disabled={!registerForm.isValid || !registerForm.dirty}
-                  background="origem.300"
-                  variant="primary"
-                  color="white"
-                  onClick={() =>
-                    handleCadastrarRefresh(
-                      registerForm,
-                      onClose,
-                      setRefresh,
-                      refresh
-                    )
-                  }
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                  }}
-                >
-                  {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Concluir Cadastro</Text>
-                    </>
-                  )}
-                </Button>
+                <BotaoVermelhoGhost
+                  text={"Cancelar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                />
+                <BotaoAzulPrimary
+                  text={"Concluir Cadastro"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                  loading={loading}
+                />
               </Flex>
             </ModalFooter>
           </form>
