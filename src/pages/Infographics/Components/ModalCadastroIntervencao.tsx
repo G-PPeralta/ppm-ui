@@ -102,6 +102,7 @@ function ModalCadastroIntervencao({
         qtde_dias: atividade.qtde_dias,
         precedentes: atividade.precedentes,
       }));
+
       registerForm.setFieldValue("atividades", atividadesFormatadas);
     }
   };
@@ -145,7 +146,7 @@ function ModalCadastroIntervencao({
       <Flex
         mt={2}
         py={3}
-        w="160px"
+        w="220px"
         border={"2px"}
         borderStyle={"dashed"}
         borderColor={"origem.500"}
@@ -160,6 +161,7 @@ function ModalCadastroIntervencao({
           transition: "all 0.4s",
         }}
         onClick={() => handleClick()}
+        mb={3}
       >
         <IconButton
           aria-label="Plus sign"
@@ -175,7 +177,7 @@ function ModalCadastroIntervencao({
           Cadastrar Intervenção
         </Text>
       </Flex>
-      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="5xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -232,7 +234,7 @@ function ModalCadastroIntervencao({
                     </Stack>
 
                     <Stack>
-                      <Flex flexDirection={"row"} gap={4}>
+                      <Flex flexDirection={"row"} gap={4} w={"50%"}>
                         <SelectFiltragem
                           registerForm={registerForm}
                           nomeSelect={"PROJETO"}

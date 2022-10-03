@@ -119,7 +119,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
       >
         Filtrar
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size={"2xl"}>
+      <Modal isOpen={isOpen} onClose={onClose} size={"md"}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -135,56 +135,64 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
           <ModalBody mt={4}>
             <FormControl>
               <Flex direction={"column"} gap={5}>
-                <SelectFiltragem
-                  registerForm={registerForm}
-                  nomeSelect={"Área"}
-                  propName={"area_atuacao_id"}
-                  options={areaAtuacaoOptions}
-                  required={false}
-                  value={getValueByOptionId(
-                    areaAtuacaoOptions,
-                    registerForm.values.area_atuacao_id
-                  )}
-                />
+                <Flex width={"47%"}>
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    nomeSelect={"Área"}
+                    propName={"area_atuacao_id"}
+                    options={areaAtuacaoOptions}
+                    required={false}
+                    value={getValueByOptionId(
+                      areaAtuacaoOptions,
+                      registerForm.values.area_atuacao_id
+                    )}
+                  />
+                </Flex>
 
-                <SelectFiltragem
-                  registerForm={registerForm}
-                  nomeSelect={"Poço"}
-                  propName={"poco_id"}
-                  options={pocoOptions}
-                  required={false}
-                  value={getValueByOptionId(
-                    pocoOptions,
-                    registerForm.values.poco_id
-                  )}
-                />
+                <Flex width={"47%"}>
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    nomeSelect={"Poço"}
+                    propName={"poco_id"}
+                    options={pocoOptions}
+                    required={false}
+                    value={getValueByOptionId(
+                      pocoOptions,
+                      registerForm.values.poco_id
+                    )}
+                  />
+                </Flex>
 
-                <SelectFiltragem
-                  registerForm={registerForm}
-                  nomeSelect={"Atividade"}
-                  propName={"atividade_id"}
-                  options={tarefaOptions}
-                  required={false}
-                  value={getValueByOptionId(
-                    tarefaOptions,
-                    registerForm.values.atividade_id
-                  )}
-                />
+                <Flex width={"47%"}>
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    nomeSelect={"Atividade"}
+                    propName={"atividade_id"}
+                    options={tarefaOptions}
+                    required={false}
+                    value={getValueByOptionId(
+                      tarefaOptions,
+                      registerForm.values.atividade_id
+                    )}
+                  />
+                </Flex>
 
-                <SelectFiltragem
-                  registerForm={registerForm}
-                  nomeSelect={"Responsável"}
-                  propName={"responsavel_id"}
-                  options={responsavelOptions}
-                  required={false}
-                  value={getValueByOptionId(
-                    responsavelOptions,
-                    registerForm.values.responsavel_id
-                  )}
-                />
+                <Flex width={"47%"}>
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    nomeSelect={"Responsável"}
+                    propName={"responsavel_id"}
+                    options={responsavelOptions}
+                    required={false}
+                    value={getValueByOptionId(
+                      responsavelOptions,
+                      registerForm.values.responsavel_id
+                    )}
+                  />
+                </Flex>
 
-                <Flex justify={"space-between"} gap={5}>
-                  <Flex direction={"column"} grow={1}>
+                <Flex justify={"space-between"} gap={5} flex={1}>
+                  <Flex direction={"column"} flex={1}>
                     <FormLabel htmlFor="data_inicio">Data Inicio</FormLabel>
                     <Input
                       isRequired
@@ -200,10 +208,11 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                         );
                       }}
                       value={registerForm.values.data_inicio}
+                      defaultValue={"dd/mm/aaaa"}
                     />
                   </Flex>
 
-                  <Flex direction={"column"} grow={1}>
+                  <Flex direction={"column"} flex={1}>
                     <FormLabel htmlFor="data_fim">Data Fim</FormLabel>
                     <Input
                       isRequired
@@ -220,29 +229,33 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                   </Flex>
                 </Flex>
 
-                <SelectFiltragem
-                  registerForm={registerForm}
-                  nomeSelect={"Sonda"}
-                  propName={"sonda_id"}
-                  options={sondaOptions}
-                  required={false}
-                  value={getValueByOptionId(
-                    sondaOptions,
-                    registerForm.values.sonda_id
-                  )}
-                />
+                <Flex width={"47%"}>
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    nomeSelect={"Sonda"}
+                    propName={"sonda_id"}
+                    options={sondaOptions}
+                    required={false}
+                    value={getValueByOptionId(
+                      sondaOptions,
+                      registerForm.values.sonda_id
+                    )}
+                  />
+                </Flex>
 
-                <SelectFiltragem
-                  registerForm={registerForm}
-                  nomeSelect={"Status"}
-                  propName={"status"}
-                  options={statusProjetosOptions}
-                  required={false}
-                  value={getValueByOptionId(
-                    statusProjetosOptions,
-                    registerForm.values.status
-                  )}
-                />
+                <Flex width={"47%"}>
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    nomeSelect={"Status"}
+                    propName={"status"}
+                    options={statusProjetosOptions}
+                    required={false}
+                    value={getValueByOptionId(
+                      statusProjetosOptions,
+                      registerForm.values.status
+                    )}
+                  />
+                </Flex>
               </Flex>
             </FormControl>
           </ModalBody>
@@ -261,8 +274,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                 Cancelar
               </Button>
               <Button
-                variant="outline"
-                border={"2px"}
+                variant="ghost"
                 color={"origem.500"}
                 onClick={() => registerForm.resetForm()}
                 _hover={{

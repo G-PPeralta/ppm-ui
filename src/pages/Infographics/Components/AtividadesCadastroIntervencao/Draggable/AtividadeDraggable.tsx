@@ -3,14 +3,18 @@ import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  NumberInput,
+  NumberInputField,
+  Text,
+} from "@chakra-ui/react";
 import { FormikProps } from "formik";
 import {
   AreaAtuacao,
   Responsavel,
 } from "interfaces/CadastrosModaisInfograficos";
-
-// import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
 import PopOverPrecedentes from "./PopOverPrecedentes";
@@ -26,8 +30,6 @@ interface Props {
 
 function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const innerwidth = window.innerWidth;
-  // const { listaAreaAtuacao, listaResponsaveis, listaTarefas } =
-  //   useCadastroIntervencao();
 
   const { listaAreaAtuacao, listaResponsaveis, listaTarefas } = listas;
 
@@ -119,7 +121,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 py={innerwidth >= 640 ? 0 : 4}
                 flex={1}
               >
-                <FormControl>
+                <Flex direction={"column"} flex={2}>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>ÁREA</Text>
                   <SelectFiltragem
                     registerForm={registerForm}
@@ -127,8 +129,9 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     options={optionsAreaAtuacao}
                     value={getValue(optionsAreaAtuacao, index, "area_id")}
                   />
-                </FormControl>
-                <FormControl>
+                </Flex>
+
+                <Flex direction={"column"} flex={2}>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>TAREFA</Text>
                   <SelectFiltragem
                     registerForm={registerForm}
@@ -136,8 +139,9 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     options={optionsTarefa}
                     value={getValue(optionsTarefa, index, "tarefa_id")}
                   />
-                </FormControl>
-                <FormControl>
+                </Flex>
+
+                <Flex direction={"column"} flex={2}>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>
                     RESPONSÁVEL
                   </Text>
@@ -151,25 +155,27 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                       "responsavel_id"
                     )}
                   />
-                </FormControl>
-                <FormControl>
+                </Flex>
+
+                <Flex direction={"column"} flex={1}>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
-                  <Input
-                    placeholder="0"
-                    type={"number"}
-                    bg={"#fff"}
+                  <NumberInput
+                    max={99999}
+                    min={0}
                     id={`atividades[${index}].qtde_dias`}
                     name={`atividades[${index}].qtde_dias`}
                     value={registerForm.values.atividades[index].qtde_dias}
-                    onChange={(event) => {
+                    onChange={(value) => {
                       registerForm.setFieldValue(
                         `atividades[${index}].qtde_dias`,
-                        Number(event.target.value)
+                        Number(value)
                       );
                     }}
-                  />
-                </FormControl>
-                <Flex direction={"column"}>
+                  >
+                    <NumberInputField bg={"#fff"} />
+                  </NumberInput>
+                </Flex>
+                <Flex direction={"column"} flex={1}>
                   <Text sx={{ fontSize: 12, fontWeight: "600" }}>
                     PRECEDENTES
                   </Text>

@@ -11,16 +11,23 @@ import {
   Input,
   useEditableControls,
 } from "@chakra-ui/react";
-import { BudgetDetail } from "models/Budget.model";
+import { BudgetDetail } from "interfaces/Budgets";
+
+import { postAatualizarValorPrevisto } from "services/post/Budget";
 
 export default function CampoEditavel(props: { filho: BudgetDetail }) {
   const brl = Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
   });
+  const { planejado, projeto } = props.filho;
 
-  const save = () => {
-    /** Here enter command to save */
+  const save = (valor: string) => {
+    const data = {
+      valor,
+      atividadeId: projeto.id,
+    };
+    postAatualizarValorPrevisto(data);
   };
 
   /* Here's a custom control */
@@ -59,7 +66,7 @@ export default function CampoEditavel(props: { filho: BudgetDetail }) {
   return (
     <Editable
       textAlign="center"
-      defaultValue={brl.format(props.filho.planejado)}
+      defaultValue={brl.format(planejado)}
       // fontSize="2xl"
       isPreviewFocusable={false}
       onSubmit={save}

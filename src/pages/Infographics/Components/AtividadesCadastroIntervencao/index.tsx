@@ -16,6 +16,20 @@ import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 import BotaoAdicionar from "./BotaoAdicionar";
 import AtividadesDraggable from "./Draggable/AtividadeDraggable";
 
+interface AtividadePrecedente {
+  id: number;
+  nome: string;
+  checked: boolean;
+}
+
+interface Atividade {
+  atividade_id_origem: number;
+  area_id: number;
+  tarefa_id: number;
+  qtde_dias: number;
+  precedentes: AtividadePrecedente[];
+}
+
 export default function AtividadesCadastroIntervencao({
   registerForm,
   listaAtividadesPrecedentes,
@@ -82,7 +96,20 @@ any) {
         tarefa_id: 0,
         responsavel_id: 0,
         qtde_dias: 0,
-        precedentes: listaAtividadesPrecedentes,
+        precedentes: listaAtividadesPrecedentes.filter((atividade: any) => {
+          for (
+            let index = 0;
+            index < registerForm.values.atividades.length;
+            index += 1
+          ) {
+            if (
+              atividade.id === registerForm.values.atividades[index].tarefa_id
+            ) {
+              return true;
+            }
+          }
+          return false;
+        }),
       },
     ]);
     setRender(!render);
@@ -93,7 +120,88 @@ any) {
     const now = Date.now();
     const newId = droppableId + "-" + now.toLocaleString();
     setDroppableId(newId);
+
+    const precedentesFiltrados = listaAtividadesPrecedentes.filter(
+      (atividade: AtividadePrecedente) => {
+        for (
+          let index = 0;
+          index < registerForm.values.atividades.length;
+          index += 1
+        ) {
+          if (
+            atividade.id === registerForm.values.atividades[index].tarefa_id
+          ) {
+            return true;
+          }
+        }
+        return false;
+      }
+    );
+
+    registerForm.setFieldValue(
+      "atividades[0].precedentes",
+      precedentesFiltrados
+    );
   }, []);
+
+  useEffect(() => {
+    const listaAtividades = registerForm.values.atividades.map(
+      (atividade: Atividade) => atividade
+    );
+
+    const listaPrecedentesChecked = listaAtividades.map(
+      (atividade: Atividade) => {
+        const precedentes = atividade.precedentes.map(
+          (precedente: AtividadePrecedente) => {
+            if (precedente.checked) {
+              return precedente;
+            }
+            return null;
+          }
+        );
+
+        return precedentes;
+      }
+    );
+
+    const precedentesFiltrados = listaAtividadesPrecedentes.filter(
+      (atividade: AtividadePrecedente) => {
+        for (let index = 0; index < listaAtividades.length; index += 1) {
+          if (atividade.id === listaAtividades[index].tarefa_id) {
+            return true;
+          }
+        }
+        return false;
+      }
+    );
+
+    const listaAtividadesAtualizada = listaAtividades.map(
+      (atividade: Atividade, index: number) => {
+        const precedentes = precedentesFiltrados.map(
+          (precedente: AtividadePrecedente) => {
+            for (
+              let indexPrecedente = 0;
+              indexPrecedente < listaPrecedentesChecked[index].length;
+              indexPrecedente += 1
+            ) {
+              if (
+                listaPrecedentesChecked[index][indexPrecedente] &&
+                listaPrecedentesChecked[index][indexPrecedente].id ===
+                  precedente.id
+              ) {
+                return listaPrecedentesChecked[index][indexPrecedente];
+              }
+            }
+            return { ...precedente };
+          }
+        );
+
+        return { ...atividade, precedentes };
+      }
+    );
+    // Atualiza a lista de precedentes para todos os itens da lista de atividades
+    registerForm.setFieldValue("atividades", listaAtividadesAtualizada);
+  }, [render]);
 
   return (
     <>
@@ -120,7 +228,7 @@ any) {
           )}
         </Droppable>
       </DragDropContext>
-      <BotaoAdicionar add={add} />
+      <BotaoAdicionar add={add} registerForm={registerForm} />
     </>
   );
 }

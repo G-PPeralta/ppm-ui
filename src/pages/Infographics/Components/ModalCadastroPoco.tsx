@@ -47,7 +47,7 @@ function ModalCadastroPoco() {
       >
         Poço
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="md">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -77,8 +77,10 @@ function ModalCadastroPoco() {
                         md: "row",
                       })}
                       gap={5}
+                      align={"center"}
+                      justify={"center"}
                     >
-                      <FormControl>
+                      <FormControl w={"204px"}>
                         <Flex gap={1}>
                           <RequiredField />
                           <FormLabel htmlFor="poco">NOME</FormLabel>
@@ -134,7 +136,7 @@ function ModalCadastroPoco() {
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (
                     <>
-                      <Text>Concluir Cadastro</Text>
+                      <Text>Cadastrar</Text>
                     </>
                   )}
                 </Button>
