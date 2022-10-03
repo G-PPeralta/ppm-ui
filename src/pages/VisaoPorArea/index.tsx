@@ -116,9 +116,7 @@ function VisaoPorArea() {
           ].qtde += 1;
         }
       });
-      console.log("newArea", areas[i], newArea);
       newData.push(newArea);
-      // console.log("newData", newData);
     }
     setData(newData);
   };
