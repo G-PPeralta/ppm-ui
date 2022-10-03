@@ -9,7 +9,7 @@ import { Flex, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
-import { RequiredField } from "components/RequiredField/RequiredField";
+// import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
@@ -23,18 +23,18 @@ interface AtividadePrecedente {
 }
 
 interface Atividade {
-  atividade_id_origem: number;
   area_id: number;
-  tarefa_id: number;
-  qtde_dias: number;
+  operacao_id: number;
+  responsavel_id: number;
+  data_inicio: number;
+  duracao: number;
   precedentes: AtividadePrecedente[];
 }
 
-export default function AtividadesCadastroIntervencao({
+export default function AtividadesCadastroCronograma({
   registerForm,
   listaAtividadesPrecedentes,
-}: // listaAtividadesPrecedentes,
-any) {
+}: any) {
   const id = useId();
   const [render, setRender] = useState<any>([]);
   const [droppableId, setDroppableId] = useState<string>(id);
@@ -93,9 +93,10 @@ any) {
       ...registerForm.values.atividades,
       {
         area_id: 0,
-        tarefa_id: 0,
+        operacao_id: 0,
         responsavel_id: 0,
-        qtde_dias: 0,
+        data_inicio: "",
+        duracao: 0,
         precedentes: listaAtividadesPrecedentes.filter((atividade: any) => {
           for (
             let index = 0;
@@ -103,7 +104,7 @@ any) {
             index += 1
           ) {
             if (
-              atividade.id === registerForm.values.atividades[index].tarefa_id
+              atividade.id === registerForm.values.atividades[index].operacao_id
             ) {
               return true;
             }
@@ -129,7 +130,7 @@ any) {
           index += 1
         ) {
           if (
-            atividade.id === registerForm.values.atividades[index].tarefa_id
+            atividade.id === registerForm.values.atividades[index].operacao_id
           ) {
             return true;
           }
@@ -167,7 +168,7 @@ any) {
     const precedentesFiltrados = listaAtividadesPrecedentes.filter(
       (atividade: AtividadePrecedente) => {
         for (let index = 0; index < listaAtividades.length; index += 1) {
-          if (atividade.id === listaAtividades[index].tarefa_id) {
+          if (atividade.id === listaAtividades[index].operacao_id) {
             return true;
           }
         }
@@ -206,7 +207,7 @@ any) {
   return (
     <>
       <Flex gap={1}>
-        <RequiredField />
+        {/* <RequiredField /> */}
         <Text fontWeight={"bold"}>Atividades</Text>
       </Flex>
       <DragDropContext onDragEnd={onDragEnd}>

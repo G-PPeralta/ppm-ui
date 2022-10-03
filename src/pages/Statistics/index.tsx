@@ -13,7 +13,9 @@ import { StatisticsTableData } from "interfaces/Services";
 import Sidebar from "components/SideBar";
 
 // import { getStatisticsTasks } from "services/get/StatisticsTasks";
-import ModalNovoCronograma from "./components/ModalNovoCronograma";
+import ModalCadastroCronograma from "./components/ModalCadastroCronograma";
+// import ModalNovoCronograma from "./components/ModalNovoCronograma";
+import ModalCadastroOperacao from "./components/ModalCadastroOperação";
 import { StatisticsTable } from "./components/StatisticsTable";
 import { atividades } from "./projeto";
 
@@ -22,6 +24,7 @@ function Statistics() {
   const [loading, setLoading] = useState(true);
   const [allData, setAllData] = useState<StatisticsTableData[]>([]);
   const [filter, setFilter] = useState<StatisticsTableData[]>();
+  const [refresh, setRefresh] = useState(false);
 
   const convertReq = (payload: any): StatisticsTableData[] => {
     const newData: StatisticsTableData[] = [];
@@ -109,30 +112,41 @@ function Statistics() {
               <Heading as="h3" size="md" mb={5}>
                 Operações
               </Heading>
-              <Stack spacing="5">
-                <Flex
-                // flexDirection={useBreakpointValue({
-                //   base: "column",
-                //   md: "row",
-                // })}
-                >
-                  <FormControl>
-                    <Input
-                      isRequired
-                      placeholder="Operacao"
-                      id="name"
-                      type="text"
-                      name="name"
-                      onChange={(e) => filterData(e.target.value)}
-                      width={300}
-                    />
-                  </FormControl>
-                  <ModalNovoCronograma
+
+              <Flex
+              // flexDirection={useBreakpointValue({
+              //   base: "column",
+              //   md: "row",
+              // })}
+              >
+                <FormControl>
+                  <Input
+                    isRequired
+                    placeholder="Operacao"
+                    id="name"
+                    type="text"
+                    name="name"
+                    onChange={(e) => filterData(e.target.value)}
+                    width={300}
+                  />
+                </FormControl>
+                {/* <ModalNovoCronograma
                   // refresh={refresh}
                   // setRefresh={setRefresh}
+                  /> */}
+                <Flex gap={2} flex={1}>
+                  <ModalCadastroOperacao
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
+
+                  <ModalCadastroCronograma
+                    refresh={refresh}
+                    setRefresh={setRefresh}
                   />
                 </Flex>
-              </Stack>
+              </Flex>
+
               <Stack spacing="8">
                 <Flex>
                   {filter && <StatisticsTable data={filter}></StatisticsTable>}

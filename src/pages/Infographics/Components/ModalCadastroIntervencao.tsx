@@ -12,9 +12,7 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
-  // Button,
   FormControl,
-  FormLabel,
   Stack,
   Textarea,
 } from "@chakra-ui/react";
@@ -29,8 +27,6 @@ import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-// import { handleCancelar } from "utils/handleCadastro";
-
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 import {
@@ -41,7 +37,6 @@ import {
 import SelectFiltragem from "../../../components/SelectFiltragem";
 import AtividadesCadastroIntervencao from "./AtividadesCadastroIntervencao";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
-// import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
 function ModalCadastroIntervencao({
   idCampanha,
@@ -203,6 +198,7 @@ function ModalCadastroIntervencao({
                 <FormControl>
                   <Flex direction={"column"} gap={4}>
                     <Stack>
+                      <Text fontWeight={"bold"}>Nome</Text>
                       <Flex
                         direction={innerWidth >= 460 ? "row" : "column"}
                         gap={5}
@@ -253,12 +249,17 @@ function ModalCadastroIntervencao({
                     />
 
                     <Stack>
+                      <Text fontWeight={"bold"}>Comentários</Text>
                       <FormControl>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="comentarios">
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
                             COMENTÁRIOS
-                          </FormLabel>
+                          </Text>
                         </Flex>
                         <Textarea
                           isRequired
