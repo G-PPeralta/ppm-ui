@@ -69,7 +69,6 @@ export function ProjectSummary({ data, table }: Props) {
           borderColor={"gray.200"}
           paddingY={4}
           paddingLeft={6}
-          alignItems={"center"}
         >
           <Flex
             w={"100%"}
