@@ -6,7 +6,7 @@ import {
   AreaAtuacao,
   Area,
 } from "interfaces/CadastrosModaisInfograficos";
-import { cadastroAtividadeSchema } from "validations/ModaisCadastrosInfografico";
+import { cadastroOperacaoSchema } from "validations/Estatisticas";
 
 import { useToast } from "contexts/Toast";
 
@@ -73,7 +73,7 @@ export function useCadastroOperacao() {
 
   const registerForm: any = useFormik({
     initialValues,
-    validationSchema: cadastroAtividadeSchema,
+    validationSchema: cadastroOperacaoSchema,
     onSubmit: async (values) => {
       const newValues = {
         nom_usu_create: user?.nome,
