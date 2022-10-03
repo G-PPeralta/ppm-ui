@@ -40,6 +40,15 @@ const reports: ReportTypeProps[] = [
   { name: "Avanço Físico x Avanço Financeiro", value: "6" },
 ];
 
+const projects: ReportTypeProps[] = [
+  { name: "Projeto 1", value: "1" },
+  { name: "Projeto 2", value: "2" },
+  { name: "Projeto 3", value: "3" },
+  { name: "Projeto 4", value: "4" },
+  { name: "Projeto 5", value: "5" },
+  { name: "Projeto 6", value: "6" },
+];
+
 function handleReportButton(report: string) {
   return (
     <>
@@ -119,6 +128,26 @@ export function Reports() {
                     ))}
                 </Select>
               </FormControl>
+              {report == "2" && (
+                <FormControl>
+                  <FormLabel htmlFor="report" color={"gray.400"}>
+                    TIPO DO RELATÓRIO
+                  </FormLabel>
+                  <Select
+                    id="poloId"
+                    name="pole"
+                    width={"100%"}
+                    placeholder="Selecione"
+                  >
+                    {projects &&
+                      projects.map((reportType) => (
+                        <option value={reportType.value}>
+                          {reportType.name}
+                        </option>
+                      ))}
+                  </Select>
+                </FormControl>
+              )}
               <FormControl className="toBottom">
                 <Button
                   color="white"
