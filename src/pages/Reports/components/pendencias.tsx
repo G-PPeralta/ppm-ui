@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 
-import { tableData } from "./data";
+import { tableData, summaryValues } from "./data";
 import { GenericTable } from "./genericTable";
 import { ProjectSummary } from "./summary";
 
@@ -8,7 +8,7 @@ export function Pendencias() {
   return (
     <>
       <Flex direction={"column"} w={"100%"} gap={"2em"}>
-        <ProjectSummary />
+        <ProjectSummary data={summaryValues} />
         <GenericTable data={tableData} />
       </Flex>
     </>

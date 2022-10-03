@@ -1,6 +1,7 @@
 import { TaskFieldsModel } from "@syncfusion/ej2-react-gantt";
 
 import { TableData } from "./genericTable";
+import { SummaryData } from "./summary";
 
 export const curveSData = [
   {
@@ -97,6 +98,15 @@ export const taskFildsValues: TaskFieldsModel = {
   progress: "progress",
   child: "subtasks",
   dependency: "predeceesor",
+};
+
+export const summaryValues: SummaryData = {
+  name: "Nome do Projeto",
+  responsible: "Yolanda Ferreira",
+  startDate: "25/07/2022",
+  endDate: "25/07/2022",
+  budget: 6576585,
+  realized: 4932438.75,
 };
 
 export const tableData: TableData = {

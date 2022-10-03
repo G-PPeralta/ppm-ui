@@ -23,7 +23,7 @@ import { Avanco } from "./components/avanco";
 import { Evolucao } from "./components/evolucao";
 import { Indicadores } from "./components/indicadores";
 import { PanoramaGeral } from "./components/panoramaGeral";
-import { Pendencias } from "./components/pendencias copy";
+import { Pendencias } from "./components/pendencias";
 import { PrevistoXRealizado } from "./components/previstoXRealizado";
 
 export interface ReportTypeProps {

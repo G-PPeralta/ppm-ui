@@ -1,8 +1,37 @@
 import { FaWallet } from "react-icons/fa";
 
-import { Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Cell, Pie, PieChart } from "recharts";
 
-export function ProjectSummary() {
+export interface SummaryData {
+  name: string;
+  responsible: string;
+  startDate: string;
+  endDate: string;
+  budget: number;
+  realized: number;
+}
+
+type Props = {
+  data: SummaryData;
+};
+
+export function ProjectSummary({ data }: Props) {
+  const pieData = [
+    {
+      name: "Undone",
+      value: 25,
+    },
+    {
+      name: "Done",
+      value: 75,
+    },
+  ];
+
+  function changeColor(percent: number) {
+    return percent > 50 ? "#00B53D" : "#F40606";
+  }
+
   return (
     <Flex
       w={"100%"}
@@ -11,22 +40,59 @@ export function ProjectSummary() {
       border={"1px"}
       borderColor={"gray.200"}
       marginTop={5}
-      padding={4}
+      paddingY={4}
+      paddingX={6}
       flexDirection={"row"}
       dir={"row"}
       alignItems={"center"}
       justifyContent={"space-between"}
     >
+      <Box display="flex" alignItems="center" justifyContent="center">
+        <PieChart width={60} height={60}>
+          <Pie
+            data={pieData}
+            dataKey="value"
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            innerRadius={25}
+            outerRadius={30}
+          >
+            {pieData.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={
+                  entry.name === "Done" ? changeColor(entry.value) : "#A7A7A7"
+                }
+              />
+            ))}
+          </Pie>
+        </PieChart>
+        <Box
+          alignItems="center"
+          display={"flex"}
+          sx={{ position: "absolute" }}
+          justifyContent="center"
+        >
+          {pieData.map((entry) =>
+            entry.name === "Done" ? (
+              <Text sx={{ fontSize: 15 }} color={changeColor(entry.value)}>
+                {entry.value}%
+              </Text>
+            ) : null
+          )}
+        </Box>
+      </Box>
       <Flex direction={"column"} w={"30%"}>
         <Heading as="h3" size="lg" fontWeight={"normal"} color={"gray.800"}>
-          Nome do Projeto
+          {data.name}
         </Heading>
         <Flex direction={"row"} gap={1}>
           <Text fontWeight={"semibold"} color={"gray.400"}>
             Responsável:
           </Text>
           <Text fontWeight={"semibold"} color={"origem.300"}>
-            Nome Aqui
+            {data.responsible}
           </Text>
         </Flex>
       </Flex>
@@ -35,7 +101,7 @@ export function ProjectSummary() {
           <Text fontWeight={"semibold"} color={"gray.400"}>
             Início Reaç
           </Text>
-          <Text> 25/07/2022 </Text>
+          <Text> {data.startDate} </Text>
         </Flex>
         <Heading color={"origem.300"} fontWeight={"normal"}>
           |
@@ -44,7 +110,7 @@ export function ProjectSummary() {
           <Text fontWeight={"semibold"} color={"gray.400"}>
             Fim Planejado
           </Text>
-          <Text> 25/07/2022 </Text>
+          <Text> {data.endDate} </Text>
         </Flex>
       </Flex>
       <Flex direction={"row"} w={"30%"}>
@@ -56,7 +122,7 @@ export function ProjectSummary() {
             </Heading>
           </Flex>
           <Heading size="md" color={"gray.600"}>
-            R$ 100.000.000{" "}
+            R$ {data.budget}
           </Heading>
         </Flex>
         <Flex direction={"column"} w={"50%"} alignItems={"center"}>
@@ -67,7 +133,7 @@ export function ProjectSummary() {
             </Heading>
           </Flex>
           <Heading size="md" color={"gray.600"}>
-            R$ 50.000.000{" "}
+            R$ {data.realized}
           </Heading>
         </Flex>
       </Flex>
@@ -84,7 +150,7 @@ export function ProjectSummary() {
           color={"white"}
           padding={2}
         >
-          50%
+          {((data.budget - (data.budget - data.realized)) / data.budget) * 100}%
         </Heading>
       </Flex>
     </Flex>
