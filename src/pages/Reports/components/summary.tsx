@@ -17,16 +17,27 @@ type Props = {
 };
 
 export function ProjectSummary({ data }: Props) {
-  const pieData = [
-    {
-      name: "Undone",
-      value: 25,
-    },
-    {
-      name: "Done",
-      value: 75,
-    },
-  ];
+  function createPieData(data: SummaryData) {
+    const pieData = [
+      {
+        name: "Undone",
+        value: calculatePercet(data).undone,
+      },
+      {
+        name: "Done",
+        value: calculatePercet(data).done,
+      },
+    ];
+    return pieData;
+  }
+
+  function calculatePercet(data: SummaryData) {
+    const percents = {
+      undone: ((data.budget - data.realized) / data.budget) * 100,
+      done: ((data.budget - (data.budget - data.realized)) / data.budget) * 100,
+    };
+    return percents;
+  }
 
   function changeColor(percent: number) {
     return percent > 50 ? "#00B53D" : "#F40606";
@@ -50,7 +61,7 @@ export function ProjectSummary({ data }: Props) {
       <Box display="flex" alignItems="center" justifyContent="center">
         <PieChart width={60} height={60}>
           <Pie
-            data={pieData}
+            data={createPieData(data)}
             dataKey="value"
             nameKey="name"
             cx="50%"
@@ -58,7 +69,7 @@ export function ProjectSummary({ data }: Props) {
             innerRadius={25}
             outerRadius={30}
           >
-            {pieData.map((entry, index) => (
+            {createPieData(data).map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
                 fill={
@@ -74,7 +85,7 @@ export function ProjectSummary({ data }: Props) {
           sx={{ position: "absolute" }}
           justifyContent="center"
         >
-          {pieData.map((entry) =>
+          {createPieData(data).map((entry) =>
             entry.name === "Done" ? (
               <Text sx={{ fontSize: 15 }} color={changeColor(entry.value)}>
                 {entry.value}%
@@ -150,7 +161,7 @@ export function ProjectSummary({ data }: Props) {
           color={"white"}
           padding={2}
         >
-          {((data.budget - (data.budget - data.realized)) / data.budget) * 100}%
+          {calculatePercet(data).done}%
         </Heading>
       </Flex>
     </Flex>
