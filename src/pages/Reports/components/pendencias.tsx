@@ -7,8 +7,8 @@ import { ProjectSummary } from "./summary";
 export function Pendencias() {
   return (
     <>
-      <Flex direction={"column"} w={"100%"} gap={"2em"}>
-        <ProjectSummary data={summaryValues} />
+      <Flex direction={"column"} w={"100%"} gap={"1.4em"} marginTop={"1.4em"}>
+        <ProjectSummary data={summaryValues} table={false} />
         <GenericTable data={tableData} />
       </Flex>
     </>
