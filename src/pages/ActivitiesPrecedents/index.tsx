@@ -10,6 +10,7 @@ import StatusProjeto from "components/StatusProjeto";
 
 import { statusProjeto } from "utils/validateDate";
 
+// import { getAtividadesPrecedents } from "services/get/ActivitiesPrecedents";
 import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
 import CardACT from "../ActivitiesSchedule/Components/CardACT";
@@ -36,6 +37,7 @@ export function ActivitiesPrecedents() {
   const requestHandler = async () => {
     const response = await getAtividadesCampanha(id);
     setAtividades(response.data);
+    // const payloadGet = await getAtividadesPrecedents();
   };
 
   useEffect(() => {
