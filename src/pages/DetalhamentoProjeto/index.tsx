@@ -118,7 +118,11 @@ function DetalhamentoProjeto() {
             >
               <CardInfoProjeto
                 infoProjeto={infoProjeto}
-                progresso={progresso}
+                progresso={
+                  !loadingProgresso
+                    ? progresso
+                    : [{ fn_cron_calc_pct_real: "00.003848750844" }]
+                }
                 loading={loadingProgresso}
               />
               <CardOrcamento />
