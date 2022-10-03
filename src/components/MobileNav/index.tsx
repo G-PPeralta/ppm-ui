@@ -47,11 +47,9 @@ export function MobileNav({
   useEffect(() => {
     const nav = window.location.href;
     const splited = nav.split("/");
-    console.log("splited", splited);
     if (splited[3] == "") {
       splited[3] = "Dashboad";
     }
-    console.log("splited", splited);
     const completeObject = splited.map((split, index) => {
       let newItem: string = translations[split as keyof typeof translations];
       if (newItem === undefined) {
@@ -59,7 +57,6 @@ export function MobileNav({
       }
       return newItem;
     });
-    console.log("completeObject", completeObject);
     setWay(completeObject);
   }, []);
 
@@ -93,7 +90,6 @@ export function MobileNav({
   //   navigate(route);
   // };
 
-  console.log("nav", window.location.href);
   return (
     <Flex
       ml={{ base: 0, md: 0, lg: 0 }}
