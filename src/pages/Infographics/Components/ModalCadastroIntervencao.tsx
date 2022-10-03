@@ -25,9 +25,10 @@ import {
   ProjetoTipo,
 } from "interfaces/CadastrosModaisInfograficos";
 
+import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
+import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
@@ -290,7 +291,15 @@ function ModalCadastroIntervencao({
                 >
                   Cancelar
                 </Button>
-                <Button
+                <BotaoAzulPrimary
+                  text={"Concluir Cadastro"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                  loading={loading}
+                />
+                {/* <Button
                   disabled={!registerForm.isValid || !registerForm.dirty}
                   background="origem.300"
                   variant="primary"
@@ -315,7 +324,7 @@ function ModalCadastroIntervencao({
                       <Text>Concluir Cadastro</Text>
                     </>
                   )}
-                </Button>
+                </Button> */}
               </Flex>
             </ModalFooter>
           </form>
