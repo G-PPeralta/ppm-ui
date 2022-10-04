@@ -58,8 +58,8 @@ export function ProjectSummary({ data, table }: Props) {
   }
 
   return (
-    <Accordion padding={0} margin={0} allowToggle>
-      <AccordionItem border={0}>
+    <Accordion padding={0} margin={0} allowToggle w={"100%"}>
+      <AccordionItem border={0} w={"100%"}>
         <Flex
           direction={"column"}
           w={"100%"}
@@ -193,6 +193,7 @@ export function ProjectSummary({ data, table }: Props) {
               alignItems={"center"}
               marginY={1}
               borderRadius={"sm"}
+              marginRight={6}
             >
               <Heading
                 as="h3"
@@ -212,13 +213,11 @@ export function ProjectSummary({ data, table }: Props) {
               </Flex>
             )}
           </Flex>
-          <AccordionPanel w={"100%"}>
-            {table == true && (
-              <Flex marginTop={5} w={"100%"}>
-                <GenericTable data={tableData} />
-              </Flex>
-            )}
-          </AccordionPanel>
+          {table == true && (
+            <AccordionPanel w={"100%"} marginTop={5}>
+              <GenericTable data={tableData} />
+            </AccordionPanel>
+          )}
         </Flex>
       </AccordionItem>
     </Accordion>
