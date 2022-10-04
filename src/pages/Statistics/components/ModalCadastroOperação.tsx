@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { AreaAtuacao } from "interfaces/CadastrosModaisInfograficos";
 
-import Restricoes from "pages/Infographics/Components/Restricoes";
+// import Restricoes from "pages/Infographics/Components/Restricoes";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
@@ -181,7 +181,7 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                     </Flex>
                   </Flex>
 
-                  <Flex
+                  {/* <Flex
                     flexDirection={useBreakpointValue({
                       base: "column",
                       md: "column",
@@ -190,7 +190,7 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                   >
                     <Text fontWeight={"bold"}>Restrições</Text>
                     <Restricoes registerForm={registerForm} />
-                  </Flex>
+                  </Flex> */}
                 </Stack>
               </Flex>
             </ModalBody>

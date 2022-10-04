@@ -15,6 +15,7 @@ import {
   AreaAtuacao,
   Responsavel,
 } from "interfaces/CadastrosModaisInfograficos";
+import { Operacao } from "interfaces/Estatisticas";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
@@ -27,14 +28,14 @@ interface Props {
   listas: {
     listaAreaAtuacao: AreaAtuacao[];
     listaResponsaveis: Responsavel[];
-    listaTarefas: any[];
+    listaOperacao: Operacao[];
   };
 }
 
 function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const innerwidth = window.innerWidth;
 
-  const { listaAreaAtuacao, listaResponsaveis, listaTarefas } = listas;
+  const { listaAreaAtuacao, listaResponsaveis, listaOperacao } = listas;
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
@@ -53,17 +54,17 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     label: poco.tipo,
   }));
 
-  const optionsTarefa = listaTarefas.map((tarefa: any) => ({
-    value: tarefa.id,
-    label: tarefa.nom_atividade,
-  }));
-
   const optionsResponsaveis = listaResponsaveis.map(
     (responsavel: Responsavel) => ({
       value: responsavel.id,
       label: responsavel.nome,
     })
   );
+
+  const optionsOperacao = listaOperacao.map((operacao: Operacao) => ({
+    value: operacao.id,
+    label: operacao.nom_operacao,
+  }));
 
   const getValue = (options: any, i: number, chave: string) => {
     const index = options
@@ -157,8 +158,8 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   <SelectFiltragem
                     registerForm={registerForm}
                     propName={`atividades[${index}].operacao_id`}
-                    options={optionsTarefa}
-                    value={getValue(optionsTarefa, index, "operacao_id")}
+                    options={optionsOperacao}
+                    value={getValue(optionsOperacao, index, "operacao_id")}
                   />
                 </Flex>
 

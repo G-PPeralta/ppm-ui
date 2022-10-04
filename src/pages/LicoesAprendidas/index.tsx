@@ -295,8 +295,8 @@ export function LicoesAprendidasProjetos() {
 
               <TableContainer mt={4} mb={3} ml={1}>
                 <Table
-                  variant="unstyled"
-                  style={{ border: "0.5px solid #A7A7A7" }}
+                  variant="striped"
+                  // style={{ border: "0.5px solid #A7A7A7" }}
                 >
                   <Thead>
                     <Tr background="origem.500" color="white">

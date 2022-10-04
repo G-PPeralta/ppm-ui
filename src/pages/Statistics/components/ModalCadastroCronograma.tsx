@@ -14,17 +14,20 @@ import {
   Textarea,
   Button,
   Text,
+  Input,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
+// import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { useCadastroCronograma } from "hooks/useCadastroCronograma";
 
 import SelectFiltragem from "../../../components/SelectFiltragem";
 import AtividadesCadastroCronograma from "./AtividadesCadastroCronograma";
+// import { TextError } from "components/TextError";
 
 function ModalCadastroCronograma({ refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,7 +35,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
     registerForm,
     loading,
     listaPocos,
-    listaSondaCampanha,
+    listaSondas,
     listaAtividadesPrecedentes,
   } = useCadastroCronograma();
 
@@ -43,9 +46,9 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
     label: poco.poco,
   }));
 
-  const optionsSondaCampanha = listaSondaCampanha.map((sondaCampanha: any) => ({
-    value: sondaCampanha.id,
-    label: sondaCampanha.nom_campanha,
+  const optionsSondas = listaSondas.map((sonda: any) => ({
+    value: sonda.id,
+    label: sonda.sonda,
   }));
 
   // const handleGet = async () => {
@@ -123,13 +126,13 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                       <Flex
                         direction={innerWidth >= 460 ? "row" : "column"}
                         gap={5}
-                        w={"50%"}
+                        w={"80%"}
                       >
                         <SelectFiltragem
                           registerForm={registerForm}
                           nomeSelect={"SONDA"}
                           propName={"sonda_id"}
-                          options={optionsSondaCampanha}
+                          options={optionsSondas}
                           required={true}
                         />
                         <SelectFiltragem
@@ -139,6 +142,33 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                           options={optionsPocos}
                           required={true}
                         />
+                        <FormControl>
+                          <Flex gap={1}>
+                            {/* <RequiredField /> */}
+                            <Text
+                              fontWeight={"bold"}
+                              fontSize={"12px"}
+                              color={"#949494"}
+                            >
+                              PROFUNDIDADE DA ZONA INTERVIDA MAIS
+                            </Text>
+                          </Flex>
+                          <Input
+                            // isRequired
+                            placeholder="Profundidade"
+                            id="profundidade"
+                            type="text"
+                            name="profundidade"
+                            // value={regexCaracteresEspeciais(
+                            //   registerForm.values.poco
+                            // )}
+                            onChange={registerForm.handleChange}
+                            maxLength={10}
+                          />
+                          {/* {registerForm.errors.poco && (
+                            <TextError>{registerForm.errors.poco}</TextError>
+                          )} */}
+                        </FormControl>
                       </Flex>
                     </Stack>
 

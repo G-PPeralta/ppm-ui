@@ -7,20 +7,21 @@ import {
   Responsavel,
   Tarefas,
 } from "interfaces/CadastrosModaisInfograficos";
+import { Operacao } from "interfaces/Estatisticas";
 import { cadastroNovoCronogramaSchema } from "validations/Estatisticas";
 
 import { useToast } from "contexts/Toast";
 
 import {
-  getPocos,
   getResponsaveis,
   getTarefas,
 } from "services/get/CadastroModaisInfograficos";
 import {
-  getAreaAtuacaoList,
-  postGetInfoCampanha,
-  getSondaCampanha,
-} from "services/get/Infograficos";
+  getOperacoes,
+  getPocosOperacoes,
+  getSondasOperacoes,
+} from "services/get/Estatisticas";
+import { getAreaAtuacaoList } from "services/get/Infograficos";
 import { postCadastroNovoCronograma } from "services/post/Estatistica";
 
 import { useAuth } from "./useAuth";
@@ -33,33 +34,18 @@ export function useCadastroCronograma() {
   const [listaPocos, setListaPocos] = useState<ListaPoco[]>([]);
   const [listaAreaAtuacao, setListaAreaAtuacao] = useState<AreaAtuacao[]>([]);
   const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
-  const [listaSondaCampanha, setListaSondaCampanha] = useState<any[]>([]);
   const [listaTarefas, setListaTarefas] = useState<Tarefas[]>([]);
-
-  const getAllCampanha = {
-    area_atuacao_id: null,
-    poco_id: null,
-    atividade_id: null,
-    responsavel_id: null,
-    data_inicio: null,
-    data_fim: null,
-    sonda_id: null,
-    status: null,
-  };
+  const [listaOperacao, setListaOperacao] = useState<Operacao[]>([]);
 
   const reqGet = async () => {
-    const campanha = await postGetInfoCampanha(getAllCampanha);
-    const pocos = await getPocos();
+    const sondas = await getSondasOperacoes();
+    const pocos = await getPocosOperacoes();
     const areaAtuacao = await getAreaAtuacaoList();
     const responsaveis = await getResponsaveis();
-    const sondaCampanha = await getSondaCampanha();
     const tarefas = await getTarefas();
+    const operacoes = await getOperacoes();
 
-    const arraySondas = campanha.data.map(({ sonda, id_campanha }: any) => ({
-      sonda,
-      id_campanha,
-    }));
-    const sondasSorted = arraySondas.sort((a: any, b: any) =>
+    const sondasSorted = sondas.data.sort((a: any, b: any) =>
       a.sonda.localeCompare(b.sonda)
     );
     const pocosSorted = pocos.data.sort((a: ListaPoco, b: ListaPoco) =>
@@ -71,25 +57,24 @@ export function useCadastroCronograma() {
     const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
       a.nome.localeCompare(b.nome)
     );
-
-    const sondaCampanhaSorted = sondaCampanha.data.sort((a: any, b: any) =>
-      a.nom_campanha.localeCompare(b.nom_campanha)
-    );
     const tarefasSorted = tarefas.data.sort((a: Tarefas, b: Tarefas) =>
       a.nom_atividade.localeCompare(b.nom_atividade)
     );
+    const operacoesSorted = operacoes.data.sort((a: any, b: any) =>
+      a.nom_operacao.localeCompare(b.nom_operacao)
+    );
 
-    setListaSondas(sondasSorted);
     setListaPocos(pocosSorted);
     setListaAreaAtuacao(areasAtuacaoSorted);
     setListaResponsaveis(responsaveisSorted);
-    setListaSondaCampanha(sondaCampanhaSorted);
     setListaTarefas(tarefasSorted);
+    setListaOperacao(operacoesSorted);
+    setListaSondas(sondasSorted);
   };
 
-  const listaAtividadesPrecedentes = listaTarefas.map((atividade) => ({
+  const listaAtividadesPrecedentes = listaOperacao.map((atividade) => ({
     id: atividade.id,
-    nome: atividade.nom_atividade,
+    nome: atividade.nom_operacao,
     checked: false,
   }));
 
@@ -166,8 +151,8 @@ export function useCadastroCronograma() {
     listaPocos,
     listaAreaAtuacao,
     listaResponsaveis,
-    listaSondaCampanha,
     listaTarefas,
     listaAtividadesPrecedentes,
+    listaOperacao,
   };
 }
