@@ -147,3 +147,12 @@ export async function getBudgetDetail(): Promise<BudgetDetail[]> {
 
   return data;
 }
+
+export async function getBudgetProjects(): Promise<
+  { nome: string; id: number }[]
+> {
+  const uri = "/budgets/projects";
+  const { data } = await api.get<{ nome: string; id: number }[]>(uri, token());
+
+  return data;
+}
