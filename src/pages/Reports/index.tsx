@@ -141,8 +141,8 @@ export function Reports() {
                 />
               )}
             </Flex>
-            <Flex flexDirection="row" gap={"4"}>
-              <FormControl>
+            <Flex flexDirection="row" gap={"4"} alignItems={"end"}>
+              <FormControl maxW={{ base: "100%", sm: "30%" }}>
                 <FormLabel htmlFor="report" color={"gray.400"}>
                   TIPO DO RELATÓRIO
                 </FormLabel>
@@ -164,7 +164,7 @@ export function Reports() {
                 </Select>
               </FormControl>
               {(report == "6" || report == "5" || report == "2") && (
-                <FormControl>
+                <FormControl maxW={{ base: "100%", sm: "30%" }}>
                   <FormLabel htmlFor="report" color={"gray.400"}>
                     PROJETO
                   </FormLabel>
@@ -183,7 +183,7 @@ export function Reports() {
                   </Select>
                 </FormControl>
               )}
-              <FormControl className="toBottom">
+              <FormControl className="toBottom" maxW={"fit-content"}>
                 <Button
                   color="white"
                   background="origem.300"
