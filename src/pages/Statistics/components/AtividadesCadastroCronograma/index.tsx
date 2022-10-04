@@ -5,11 +5,13 @@ import {
   DroppableProvided,
 } from "react-beautiful-dnd";
 
-import { Flex, FormLabel } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
-import { RequiredField } from "components/RequiredField/RequiredField";
+// import { RequiredField } from "components/RequiredField/RequiredField";
+
+import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 import BotaoAdicionar from "./BotaoAdicionar";
 import AtividadesDraggable from "./Draggable/AtividadeDraggable";
@@ -21,24 +23,29 @@ interface AtividadePrecedente {
 }
 
 interface Atividade {
-  atividade_id_origem: number;
   area_id: number;
-  tarefa_id: number;
-  qtde_dias: number;
+  operacao_id: number;
+  responsavel_id: number;
+  data_inicio: number;
+  duracao: number;
   precedentes: AtividadePrecedente[];
 }
-interface Props {
-  registerForm: FormikProps<any>;
-  listaAtividadesPrecedentes: AtividadePrecedente[];
-}
 
-export default function AtividadesDragAndDrop({
+export default function AtividadesCadastroCronograma({
   registerForm,
   listaAtividadesPrecedentes,
-}: Props) {
+}: any) {
   const id = useId();
   const [render, setRender] = useState<any>([]);
   const [droppableId, setDroppableId] = useState<string>(id);
+  const { listaAreaAtuacao, listaResponsaveis, listaTarefas } =
+    useCadastroIntervencao();
+
+  const listas = {
+    listaAreaAtuacao,
+    listaResponsaveis,
+    listaTarefas,
+  };
 
   const reorder = (
     registerForm: FormikProps<any>,
@@ -82,14 +89,14 @@ export default function AtividadesDragAndDrop({
   };
 
   const add = () => {
-    // Cria um novo item na lista de atividades com os valores padrões
     registerForm.setFieldValue("atividades", [
       ...registerForm.values.atividades,
       {
-        atividade_id_origem: "",
         area_id: 0,
-        tarefa_id: 0,
-        qtde_dias: 0,
+        operacao_id: 0,
+        responsavel_id: 0,
+        data_inicio: "",
+        duracao: 0,
         precedentes: listaAtividadesPrecedentes.filter((atividade: any) => {
           for (
             let index = 0;
@@ -97,7 +104,7 @@ export default function AtividadesDragAndDrop({
             index += 1
           ) {
             if (
-              atividade.id === registerForm.values.atividades[index].tarefa_id
+              atividade.id === registerForm.values.atividades[index].operacao_id
             ) {
               return true;
             }
@@ -106,7 +113,6 @@ export default function AtividadesDragAndDrop({
         }),
       },
     ]);
-
     setRender(!render);
   };
 
@@ -124,7 +130,7 @@ export default function AtividadesDragAndDrop({
           index += 1
         ) {
           if (
-            atividade.id === registerForm.values.atividades[index].tarefa_id
+            atividade.id === registerForm.values.atividades[index].operacao_id
           ) {
             return true;
           }
@@ -133,8 +139,6 @@ export default function AtividadesDragAndDrop({
       }
     );
 
-    // Para atualizar os valores das atividades precedentes
-    // do primeiro item da lista quando o modal é aberto
     registerForm.setFieldValue(
       "atividades[0].precedentes",
       precedentesFiltrados
@@ -164,7 +168,7 @@ export default function AtividadesDragAndDrop({
     const precedentesFiltrados = listaAtividadesPrecedentes.filter(
       (atividade: AtividadePrecedente) => {
         for (let index = 0; index < listaAtividades.length; index += 1) {
-          if (atividade.id === listaAtividades[index].tarefa_id) {
+          if (atividade.id === listaAtividades[index].operacao_id) {
             return true;
           }
         }
@@ -203,8 +207,8 @@ export default function AtividadesDragAndDrop({
   return (
     <>
       <Flex gap={1}>
-        <RequiredField />
-        <FormLabel mb={0}>ATIVIDADES</FormLabel>
+        {/* <RequiredField /> */}
+        <Text fontWeight={"bold"}>Atividades</Text>
       </Flex>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId={droppableId}>
@@ -216,6 +220,7 @@ export default function AtividadesDragAndDrop({
                     key={index}
                     registerForm={registerForm}
                     index={index}
+                    listas={listas}
                   />
                 )
               )}

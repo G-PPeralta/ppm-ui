@@ -12,9 +12,7 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
-  Button,
   FormControl,
-  FormLabel,
   Stack,
   Textarea,
 } from "@chakra-ui/react";
@@ -25,9 +23,9 @@ import {
   ProjetoTipo,
 } from "interfaces/CadastrosModaisInfograficos";
 
+import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
+import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
-
-import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
@@ -39,7 +37,6 @@ import {
 import SelectFiltragem from "../../../components/SelectFiltragem";
 import AtividadesCadastroIntervencao from "./AtividadesCadastroIntervencao";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
-// import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
 function ModalCadastroIntervencao({
   idCampanha,
@@ -201,6 +198,7 @@ function ModalCadastroIntervencao({
                 <FormControl>
                   <Flex direction={"column"} gap={4}>
                     <Stack>
+                      <Text fontWeight={"bold"}>Nome</Text>
                       <Flex
                         direction={innerWidth >= 460 ? "row" : "column"}
                         gap={5}
@@ -251,12 +249,17 @@ function ModalCadastroIntervencao({
                     />
 
                     <Stack>
+                      <Text fontWeight={"bold"}>Comentários</Text>
                       <FormControl>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="comentarios">
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
                             COMENTÁRIOS
-                          </FormLabel>
+                          </Text>
                         </Flex>
                         <Textarea
                           isRequired
@@ -278,44 +281,19 @@ function ModalCadastroIntervencao({
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <Button
-                  variant="ghost"
-                  color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
-                  _hover={{
-                    background: "red.500",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  disabled={!registerForm.isValid || !registerForm.dirty}
-                  background="origem.300"
-                  variant="primary"
-                  color="white"
-                  onClick={() =>
-                    handleCadastrarRefresh(
-                      registerForm,
-                      onClose,
-                      setRefresh,
-                      refresh
-                    )
-                  }
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                  }}
-                >
-                  {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Concluir Cadastro</Text>
-                    </>
-                  )}
-                </Button>
+                <BotaoVermelhoGhost
+                  text={"Cancelar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                />
+                <BotaoAzulPrimary
+                  text={"Concluir Cadastro"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                  loading={loading}
+                />
               </Flex>
             </ModalFooter>
           </form>

@@ -51,6 +51,7 @@ function ModalEditarAtividade({
   setRefresh,
   refresh,
   listaPrecedentes,
+  index,
 }: any) {
   const { toast } = useToast();
   const [campanhaId, setCampanhaId] = useState(0);
@@ -59,6 +60,8 @@ function ModalEditarAtividade({
   const [responsavel, setResponsavel] = useState("");
   const [area, setArea] = useState("");
   const [observacoes, setObservacoes] = useState("");
+  const [inicoPlanejado, setInicioPlanejado] = useState("");
+  const [fimPlanejado, setFimPlanejado] = useState("");
   const [inicoReal, setInicioReal] = useState("");
   const [fimReal, setFimReal] = useState("");
   const [precedentes, setPrecedentes] = useState<Precedente[]>([]);
@@ -73,19 +76,17 @@ function ModalEditarAtividade({
     if (atividade.precedentes) {
       setPrecedentes(atividade.precedentes);
     }
+    if (index == 0) {
+      setInicioPlanejado(new Date(atividade.inicioplanejado).toLocaleString());
+    } else {
+      const inicio = new Date(atividade.inicioplanejado);
+      inicio.setDate(inicio.getDate() + 1);
+      setInicioPlanejado(inicio.toLocaleString());
+    }
+    const fim = new Date(atividade.finalplanejado);
+    fim.setHours(fim.getHours() + 9);
+    setFimPlanejado(fim.toLocaleString());
   }, []);
-
-  // const payload = {
-  //   nome,
-  //   responsavel,
-  //   area,
-  //   observacoes,
-  //   campanhaId,
-  //   atividadeStatus,
-  //   precedentes,
-  // };
-
-  // console.log("payload", payload);
 
   const send = async () => {
     try {
@@ -204,9 +205,7 @@ function ModalEditarAtividade({
                         type="text"
                         name="dat_ini_plan"
                         w={useBreakpointValue({ base: "100%", md: "100%" })}
-                        value={new Date(
-                          atividade.inicioplanejado
-                        ).toLocaleString()}
+                        value={inicoPlanejado}
                       />
                     </Flex>
                     <Flex direction={"column"} grow={1}>
@@ -220,9 +219,7 @@ function ModalEditarAtividade({
                         type="text"
                         name="dat_ini_plan"
                         w={useBreakpointValue({ base: "100%", md: "100%" })}
-                        value={new Date(
-                          atividade.finalplanejado
-                        ).toLocaleString()}
+                        value={fimPlanejado}
                       />
                     </Flex>
                     <Flex direction={"column"} grow={1}>

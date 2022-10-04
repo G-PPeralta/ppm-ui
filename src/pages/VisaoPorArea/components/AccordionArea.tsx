@@ -59,7 +59,9 @@ function AccordionArea({ area }: Props) {
                   md: 0,
                 })}
               >
-                <Text fontWeight={600}>{`${area.pctTotalConcluido}%`}</Text>
+                <Text fontWeight={600}>{`${area.pctTotalConcluido.toFixed(
+                  2
+                )}%`}</Text>
                 <TotalAtividades totalAtividades={area.totalAtividades} />
                 <AtividadesPorStatus status={area.status} />
               </Flex>

@@ -29,7 +29,7 @@ function CardPIR({ poco, index }: Props) {
   const dataFimFormatada = formatDate(new Date(poco.finalplanejado));
 
   const transfer = () => {
-    navigate(`/atividade/${poco.id}`, {
+    navigate(`/infographics/atividade/${poco.id}`, {
       state: {
         poco,
       },

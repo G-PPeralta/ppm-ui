@@ -1,6 +1,6 @@
 import Select from "react-select";
 
-import { Flex, FormControl, FormLabel } from "@chakra-ui/react";
+import { Flex, FormControl, Text } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
@@ -33,7 +33,9 @@ function SelectFiltragem({
         {nomeSelect && (
           <Flex gap={1}>
             {required && <RequiredField />}
-            <FormLabel>{nomeSelect}</FormLabel>
+            <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
+              {nomeSelect}
+            </Text>
           </Flex>
         )}
         <Select

@@ -14,7 +14,12 @@ function BotaoAdicionar({ add, registerForm }: Props) {
 
   useEffect(() => {
     const isDisabled = registerForm.values.atividades.some(
-      (atividade: any) => atividade.tarefa_id <= 0
+      (atividade: any) =>
+        atividade.operacao_id <= 0 ||
+        atividade.area_id <= 0 ||
+        atividade.responsavel_id <= 0 ||
+        atividade.data_inicio === "" ||
+        atividade.duracao <= 0
     );
     setIsDisabled(isDisabled);
   }, [registerForm.values.atividades]);
