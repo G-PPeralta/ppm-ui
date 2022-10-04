@@ -1,6 +1,6 @@
 import { api, token } from "services/api";
 
-export async function getStatisticsTasks(): Promise<{
+export async function getOperacoesEstatisticas(): Promise<{
   data: any[];
   status: number;
 }> {

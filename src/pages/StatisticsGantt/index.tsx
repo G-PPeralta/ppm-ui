@@ -17,7 +17,7 @@ import Sidebar from "components/SideBar";
 
 import { useToast } from "contexts/Toast";
 
-// import { putStatisticsTasks } from "services/update/StatisticsTasks";
+import { patchOperacoesEstatisticas } from "services/update/OperacoesEstatisticas";
 
 import { Gantt } from "./components/Gantt";
 
@@ -47,8 +47,9 @@ function StatisticsGantt() {
       // } else {
       //   duration = Number(t.hrs_totais);
       // }
-      const tmp = real / total;
-      const progresso = tmp > 1 ? 100 : tmp * 100;
+      // const tmp = real / total;
+      // const progresso = tmp > 1 ? 100 : tmp * 100;
+
       const { max, min, med, dp } = data;
       let color;
       if (duration < med - dp) color = "green";
@@ -67,9 +68,9 @@ function StatisticsGantt() {
         EndDate: t.fim_real,
         BaselineStartDate: t.inicio_planejado,
         BaselineEndDate: t.fim_planejado,
-        Duration: duration,
+        Duration: Number(t.hrs_reais),
         BaselineDuration: Number(t.hrs_totais),
-        Progress: progresso,
+        Progress: Number(t.pct_real),
         max,
         min,
         med,
@@ -88,27 +89,33 @@ function StatisticsGantt() {
   const handleEdit = async (task: any) => {
     try {
       // TODO format
-      // const payload = {
-      //   sonda: task.sonda,
-      //   id_sonda: task.id_sonda,
-      //   id_poco: task.id_poco,
-      //   poco: task.poco,
-      //   id_atividade: task.TaskID,
-      //   nome_atividade: task.TaskName,
-      //   inicio_real: task.StartDate,
-      //   fim_real: task.EndDate,
-      //   inicio_planejado: task.BaselineStartDate,
-      //   fim_planejado: task.BaselineEndDate,
-      //   hrs_reais: task.Duration,
-      //   hrs_totais: task.BaselineDuration,
-      //   pct_plan: task.Progress,
-      //   nome_responsavel: "noe",
-      // };
-      // const { status } = await putStatisticsTasks(
-      //   payload.id_atividade,
-      //   payload
-      // );
-      const status = 200;
+      //     id
+      // inicio_planejado
+      // fim_planejado
+      // inicio_realizado
+      // fim_realizado
+      // pct_real
+      const payload = {
+        // sonda: task.sonda,
+        // id_sonda: task.id_sonda,
+        // id_poco: task.id_poco,
+        // poco: task.poco,
+        // nome_atividade: task.TaskName,
+        id: task.TaskID,
+        inicio_realizado: task.StartDate,
+        fim_realizado: task.EndDate,
+        inicio_planejado: task.BaselineStartDate,
+        fim_planejado: task.BaselineEndDate,
+        // hrs_reais: task.Duration,
+        // hrs_totais: task.BaselineDuration,
+        pct_real: task.Progress,
+        // nome_responsavel: "noe",
+      };
+      const { status } = await patchOperacoesEstatisticas(
+        // payload.id_atividade,
+        payload
+      );
+      // const status = 200;
       if (status === 200 || status === 201) {
         toast.success("Operação atualizada com sucesso!");
       }
