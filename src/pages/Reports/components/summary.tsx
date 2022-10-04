@@ -59,16 +59,19 @@ export function ProjectSummary({ data, table }: Props) {
 
   return (
     <Accordion padding={0} margin={0} allowToggle w={"100%"}>
-      <AccordionItem border={0} w={"100%"}>
+      <AccordionItem
+        border={0}
+        w={"100%"}
+        boxShadow={"md"}
+        borderRadius={"2xl"}
+      >
         <Flex
           direction={"column"}
           w={"100%"}
-          boxShadow={"md"}
-          borderRadius={"2xl"}
           border={"1px"}
+          borderRadius={"2xl"}
           borderColor={"gray.200"}
           paddingY={4}
-          paddingLeft={6}
         >
           <Flex
             w={"100%"}
@@ -77,7 +80,12 @@ export function ProjectSummary({ data, table }: Props) {
             alignItems={"center"}
             justifyContent={"space-between"}
           >
-            <Box display="flex" alignItems="center" justifyContent="center">
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              marginLeft={6}
+            >
               <PieChart width={60} height={60}>
                 <Pie
                   data={createPieData(data)}

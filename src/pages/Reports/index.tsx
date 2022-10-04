@@ -74,7 +74,8 @@ export function Reports() {
       <Sidebar>
         <Stack>
           <Box
-            py={{ base: "0", sm: "16" }}
+            paddingTop={{ base: "0", sm: "6" }}
+            paddingBottom={{ base: "0", sm: "10" }}
             px={{ base: "4", sm: "10" }}
             bg={useBreakpointValue({ base: "transparent", sm: "white" })}
             boxShadow={{
@@ -85,10 +86,14 @@ export function Reports() {
           >
             <Flex justify={"space-between"}>
               <Flex direction={"row"} alignItems={"center"} mb={5}>
-                <Link href="javascript:history.back()" padding={2}>
-                  <IoIosArrowBack size={"30px"} />
+                <Link
+                  href="javascript:history.back()"
+                  padding={2}
+                  paddingLeft={0}
+                >
+                  <IoIosArrowBack size={"38px"} />
                 </Link>
-                <Heading as="h3" size="md">
+                <Heading as="h3" size="lg">
                   GERAR RELATÓRIO
                 </Heading>
               </Flex>
@@ -98,7 +103,7 @@ export function Reports() {
                     variant="ghost"
                     colorScheme="messenger"
                     rightIcon={<FiPrinter />}
-                    disabled={report == "0" || report == ""}
+                    disabled={report == "0" || report == "" || report == "3"}
                   >
                     Exportar
                   </Button>
@@ -128,10 +133,10 @@ export function Reports() {
                     ))}
                 </Select>
               </FormControl>
-              {report == "2" && (
+              {(report == "6" || report == "5" || report == "2") && (
                 <FormControl>
                   <FormLabel htmlFor="report" color={"gray.400"}>
-                    TIPO DO RELATÓRIO
+                    PROJETO
                   </FormLabel>
                   <Select
                     id="poloId"

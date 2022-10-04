@@ -26,7 +26,12 @@ type Props = {
 function GenericCurveS({ data }: Props) {
   return (
     <>
-      <Flex backgroundColor={"white"} mt={"2em"} direction={"column"}>
+      <Flex
+        backgroundColor={"white"}
+        direction={"column"}
+        boxShadow={"md"}
+        borderRadius={"2xl"}
+      >
         <Flex
           alignItems={"center"}
           border={"1px"}
