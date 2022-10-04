@@ -224,7 +224,7 @@ export function LicoesAprendidasProjetos() {
             <Box
               py={{ base: "6", sm: "8" }}
               px={{ base: "6", sm: "8" }}
-              w={"1220px"}
+              w={"1080px"}
               bg={useBreakpointValue({ base: "transparent", sm: "white" })}
               boxShadow={{
                 base: "none",
@@ -298,10 +298,6 @@ export function LicoesAprendidasProjetos() {
                     Filtrar
                   </Button>
                 </FormControl>
-                {/* <FormControl
-                  className="toBottom"
-                  style={{ border: "4px solid green" }}
-                ></FormControl> */}
               </Flex>
 
               <Stack spacing="0">
