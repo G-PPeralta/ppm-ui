@@ -71,6 +71,13 @@ export function Gantt({ data, options }: ganttOptionsProps) {
     options?.handleEdit(args.data.taskData);
   };
 
+  const cellEdit = (args: any) => {
+    // console.log(">>> args.columnName ", args.columnName);
+    if (args.columnName in ["Duration", "TaskName", "TaskID"]) {
+      args.cancel = true;
+    }
+  };
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -117,6 +124,7 @@ export function Gantt({ data, options }: ganttOptionsProps) {
             position: "80%",
           }}
           endEdit={endEdit}
+          cellEdit={cellEdit}
           height={"100vh"}
           columns={[
             // {
