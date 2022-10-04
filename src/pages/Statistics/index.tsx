@@ -7,8 +7,10 @@ import { StatisticsTableData } from "interfaces/Services";
 
 import Sidebar from "components/SideBar";
 
+import ModalCadastrarSonda from "./components/ModalCadastrarSonda";
 import ModalCadastroCronograma from "./components/ModalCadastroCronograma";
 import ModalCadastroOperacao from "./components/ModalCadastroOperação";
+import ModalCadastroPoco from "./components/ModalCadastroPoco";
 import { StatisticsTable } from "./components/StatisticsTable";
 import { atividades } from "./projeto";
 
@@ -150,6 +152,8 @@ function Statistics() {
                 </Flex>
 
                 <Flex gap={2} flex={2} justify={"end"} align={"end"}>
+                  <ModalCadastrarSonda />
+                  <ModalCadastroPoco />
                   <ModalCadastroOperacao
                     refresh={refresh}
                     setRefresh={setRefresh}
