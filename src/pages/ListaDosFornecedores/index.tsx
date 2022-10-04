@@ -97,17 +97,17 @@ export function Fornecedores() {
         bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
       >
         <Stack spacing="8">
-          <Flex>
+          <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
             <Box
               py={{ base: "6", sm: "8" }}
               px={{ base: "6", sm: "8" }}
-              w={"1080px"}
+              w={"100%"}
               bg={useBreakpointValue({ base: "transparent", sm: "white" })}
               boxShadow={{
                 base: "none",
                 sm: useColorModeValue("md", "md-dark"),
               }}
-              borderRadius={{ base: "none", sm: "xl" }}
+              borderRadius={{ base: "xl", sm: "xl" }}
             >
               <Heading as="h3" size="md" mt={"-15px"} mb={"25px"}>
                 <Text color={"#010101"} fontSize={"24px"} fontWeight={"700"}>
@@ -121,6 +121,7 @@ export function Fornecedores() {
                     base: "column",
                     md: "column",
                   })}
+                  wrap={"wrap"}
                   // border={'red solid 2px'}
                 >
                   <Flex

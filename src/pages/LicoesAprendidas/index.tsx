@@ -220,11 +220,11 @@ export function LicoesAprendidasProjetos() {
         bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
       >
         <Stack spacing="8">
-          <Flex>
+          <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
             <Box
               py={{ base: "6", sm: "8" }}
               px={{ base: "6", sm: "8" }}
-              w={"1080px"}
+              w={"100%"}
               bg={useBreakpointValue({ base: "transparent", sm: "white" })}
               boxShadow={{
                 base: "none",
