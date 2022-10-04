@@ -1,4 +1,4 @@
-import { AiFillEdit } from "react-icons/ai";
+import { MdModeEdit } from "react-icons/md";
 
 import {
   TableContainer,
@@ -29,6 +29,9 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
             borderBottom: "0.5px solid #A7A7A7",
             borderRight: "0.5px solid #A7A7A7",
           }}
+          width="48px"
+          height={"56px"}
+          textAlign={"center"}
         >
           {lessons.id}
         </Td>
@@ -37,6 +40,8 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
             borderBottom: "0.5px solid #A7A7A7",
             borderRight: "0.5px solid #A7A7A7",
           }}
+          width="166px"
+          height={"56px"}
         >
           {lessons.txt_licao_aprendida}
         </Td>
@@ -45,30 +50,36 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
             borderBottom: "0.5px solid #A7A7A7",
             borderRight: "0.5px solid #A7A7A7",
           }}
+          width="112px"
+          height={"56px"}
         >
-          {lessons.txt_acao}
+          {new Date(lessons.dat_usu_create)
+            .toLocaleString("pt-BR")
+            .substring(0, 10)}
         </Td>
         <Td
           style={{
             borderBottom: "0.5px solid #A7A7A7",
             borderRight: "0.5px solid #A7A7A7",
           }}
+          width="248px"
+          height={"56px"}
         >
-          {new Date(lessons.dat_usu_create)
-            .toLocaleString("pt-BR")
-            .substring(0, 10)}
+          {lessons.txt_acao}
         </Td>
+
         <Td style={{ borderBottom: "0.5px solid #A7A7A7" }}>
           <IconButton
             aria-label="Plus sign"
-            icon={<AiFillEdit />}
+            icon={<MdModeEdit />}
             background="white"
             variant="secondary"
-            color="#2D2926"
+            color="#0047BB"
             mr={2}
             isRound={true}
-            size="sm"
             onClick={() => onEdit(lessons)}
+            width={"18px"}
+            height={"18px"}
           />
           {/* <IconButton
           aria-label="Plus sign"
@@ -91,11 +102,49 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
       <Table variant="unstyled" style={{ border: "0.5px solid #A7A7A7" }}>
         <Thead>
           <Tr background="origem.500" color="white">
-            <Th>ID</Th>
-            <Th>Lições Aprendidas</Th>
-            <Th>Ações e Recomendações</Th>
-            <Th>Data</Th>
-            <Th>Ações</Th>
+            <Th
+              style={{
+                borderBottom: "0.5px solid #A7A7A7",
+                borderRight: "0.5px solid #A7A7A7",
+              }}
+              width="36px"
+              height={"56px"}
+            >
+              ID
+            </Th>
+            <Th
+              style={{
+                borderBottom: "0.5px solid #A7A7A7",
+                borderRight: "0.5px solid #A7A7A7",
+              }}
+            >
+              Lições Aprendidas
+            </Th>
+            <Th
+              style={{
+                borderBottom: "0.5px solid #A7A7A7",
+                borderRight: "0.5px solid #A7A7A7",
+              }}
+              textAlign={"center"}
+            >
+              Data
+            </Th>
+            <Th
+              style={{
+                borderBottom: "0.5px solid #A7A7A7",
+                borderRight: "0.5px solid #A7A7A7",
+              }}
+            >
+              Ações e Recomendações
+            </Th>
+            <Th
+              style={{
+                borderBottom: "0.5px solid #A7A7A7",
+                borderRight: "0.5px solid #A7A7A7",
+              }}
+            >
+              Ações
+            </Th>
           </Tr>
         </Thead>
         <Tbody>{tableData}</Tbody>

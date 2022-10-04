@@ -18,6 +18,7 @@ import {
   ModalFooter,
   Button,
   Textarea,
+  Text,
 } from "@chakra-ui/react";
 import { LicoesAprendidas } from "interfaces/Services";
 
@@ -96,7 +97,7 @@ function EditModal({
           EDITAR FORNECEDOR
         </Text> */}
       </Box>
-      <Modal isOpen={isOpen} onClose={closeModal} size={"xl"}>
+      <Modal isOpen={isOpen} onClose={closeModal} size={"lg"}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -105,31 +106,40 @@ function EditModal({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
-            Editar Lições Aprendidas
+            Editar lições aprendidas
           </ModalHeader>
 
-          <ModalCloseButton />
+          <ModalCloseButton color={"white"} />
 
           <ModalBody>
             <FormControl marginBottom={4} padding={1}>
               <Flex direction={"column"}>
                 <FormLabel
                   htmlFor="fornecedorNome"
-                  color="#D6D4D4"
-                  fontSize="sm"
-                  fontWeight="500"
+                  color="#949494"
+                  fontSize="12px"
+                  fontWeight="700"
+                  mt={"6px"}
                 >
                   LIÇÃO APRENDIDA
                 </FormLabel>
                 <Input
+                  borderRadius={"8px"}
+                  border={"1px solid #A7A7A7"}
+                  mt={"-9px"}
+                  width={"328px"}
+                  height={"56px"}
+                  color="#949494"
+                  fontSize={"14px"}
+                  fontWeight={"400"}
                   isRequired
                   placeholder="Lição aprendida"
                   type="text"
                   id="licaoAprendida"
                   name="licaoAprendida"
-                  width="100%"
                   value={licaoAprendida}
                   onChange={(event) => setLicaoAprendida(event.target.value)}
                 />
@@ -152,19 +162,27 @@ function EditModal({
               <Flex direction={"column"}>
                 <FormLabel
                   htmlFor="acao"
-                  color="#D6D4D4"
-                  fontSize="sm"
-                  fontWeight="500"
+                  color="#949494"
+                  fontSize="12px"
+                  fontWeight="700"
+                  mt={"6px"}
                 >
                   AÇÃO OU RECOMENDAÇÃO
                 </FormLabel>
                 <Textarea
+                  borderRadius={"8px"}
+                  border={"1px solid #A7A7A7"}
+                  mt={"-9px"}
+                  width={"456px"}
+                  height={"121px"}
+                  color="#949494"
+                  fontSize={"14px"}
+                  fontWeight={"400"}
                   isRequired
                   placeholder="Ação ou recomendação"
                   // type="text"
                   id="acao"
                   name="acao"
-                  width="100%"
                   value={acao}
                   onChange={(event) => setAcao(event.target.value)}
                 />
@@ -177,22 +195,26 @@ function EditModal({
               <Button
                 // background="origem.300"
                 variant="primary"
-                color="red"
+                color="#F40606"
                 _hover={{
-                  background: "red.500",
+                  background: "#F40606",
                   transition: "all 0.4s",
                   color: "white",
                 }}
                 onClick={closeModal}
+                width={"208px"}
+                height={"56px"}
               >
-                Cancelar
+                <Text fontSize={"18px"} fontWeight={"700"}>
+                  Cancelar{" "}
+                </Text>
               </Button>
               <Button
-                background="origem.300"
+                background="#0047BB"
                 variant="primary"
                 color="white"
                 _hover={{
-                  background: "origem.500",
+                  background: "#0047BB",
                   transition: "all 0.4s",
                 }}
                 onClick={() => {
@@ -205,8 +227,12 @@ function EditModal({
                     )
                   );
                 }}
+                width={"208px"}
+                height={"56px"}
               >
-                Confirmar
+                <Text fontSize={"18px"} fontWeight={"700"}>
+                  Salvar{" "}
+                </Text>
               </Button>
             </Flex>
           </ModalFooter>
