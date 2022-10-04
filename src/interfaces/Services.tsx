@@ -208,9 +208,32 @@ export interface TotalOrcamento {
   totalOrcamento: number;
 }
 
+export interface TotalRealizado {
+  totalRealizado: number;
+}
+
+export interface TotalNaoPrevisto {
+  totalRealizado: number;
+}
+
 export interface AreasDemandadas {
   qtd: number;
   solicitante: string;
+}
+
+export interface InfoFinanceira {
+  planejado: number;
+  realizado: number;
+  naoPrevisto: number;
+  remanescente: number;
+  pctRealizado: number;
+  pctRemanescente: number;
+  pctNaoPrevisto: number;
+}
+
+export interface CpiSpi {
+  cpi: number;
+  spi: number;
 }
 
 export interface ComplexidadesPrioridades {
