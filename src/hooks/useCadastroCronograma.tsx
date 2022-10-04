@@ -7,6 +7,7 @@ import {
   Responsavel,
   Tarefas,
 } from "interfaces/CadastrosModaisInfograficos";
+import { Operacao } from "interfaces/Estatisticas";
 import { cadastroNovoCronogramaSchema } from "validations/Estatisticas";
 
 import { useToast } from "contexts/Toast";
@@ -16,6 +17,7 @@ import {
   getResponsaveis,
   getTarefas,
 } from "services/get/CadastroModaisInfograficos";
+import { getOperacoes } from "services/get/Estatisticas";
 import {
   getAreaAtuacaoList,
   postGetInfoCampanha,
@@ -35,6 +37,7 @@ export function useCadastroCronograma() {
   const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
   const [listaSondaCampanha, setListaSondaCampanha] = useState<any[]>([]);
   const [listaTarefas, setListaTarefas] = useState<Tarefas[]>([]);
+  const [listaOperacao, setListaOperacao] = useState<Operacao[]>([]);
 
   const getAllCampanha = {
     area_atuacao_id: null,
@@ -54,6 +57,7 @@ export function useCadastroCronograma() {
     const responsaveis = await getResponsaveis();
     const sondaCampanha = await getSondaCampanha();
     const tarefas = await getTarefas();
+    const operacoes = await getOperacoes();
 
     const arraySondas = campanha.data.map(({ sonda, id_campanha }: any) => ({
       sonda,
@@ -71,12 +75,14 @@ export function useCadastroCronograma() {
     const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
       a.nome.localeCompare(b.nome)
     );
-
     const sondaCampanhaSorted = sondaCampanha.data.sort((a: any, b: any) =>
       a.nom_campanha.localeCompare(b.nom_campanha)
     );
     const tarefasSorted = tarefas.data.sort((a: Tarefas, b: Tarefas) =>
       a.nom_atividade.localeCompare(b.nom_atividade)
+    );
+    const operacoesSorted = operacoes.data.sort((a: any, b: any) =>
+      a.nom_operacao.localeCompare(b.nom_operacao)
     );
 
     setListaSondas(sondasSorted);
@@ -85,6 +91,7 @@ export function useCadastroCronograma() {
     setListaResponsaveis(responsaveisSorted);
     setListaSondaCampanha(sondaCampanhaSorted);
     setListaTarefas(tarefasSorted);
+    setListaOperacao(operacoesSorted);
   };
 
   const listaAtividadesPrecedentes = listaTarefas.map((atividade) => ({
@@ -169,5 +176,6 @@ export function useCadastroCronograma() {
     listaSondaCampanha,
     listaTarefas,
     listaAtividadesPrecedentes,
+    listaOperacao,
   };
 }
