@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
 
+import { Flex } from "@chakra-ui/react";
 import {
   GanttComponent,
   Inject,
   Edit,
   Toolbar,
 } from "@syncfusion/ej2-react-gantt";
+import { Ring } from "@uiball/loaders";
 import { StatisticsGanttProps } from "interfaces/Services";
 
 type ganttOptionsProps = {
   data: StatisticsGanttProps[] | undefined; // TODO: tirar undefined
-  toolbarOptions?: string[];
+  options?: {
+    toolbarOptions?: string[];
+    showGantt?: boolean;
+    handleEdit: Function;
+  };
 };
 
-export function Gantt({ data, toolbarOptions }: ganttOptionsProps) {
+export function Gantt({ data, options }: ganttOptionsProps) {
   // const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);
   const [loading, setLoading] = useState(true);
   const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
@@ -56,12 +62,28 @@ export function Gantt({ data, toolbarOptions }: ganttOptionsProps) {
     // leftLabel: "TaskID",
     // taskLabel: "${Progress}%",
     // eslint-disable-next-line no-template-curly-in-string
-    rightLabel: "Task Name: ${TaskName}",
+    rightLabel: "${TaskName}",
   };
+
+  // const handleShowGantt = () => (options?.showGantt ? "Default" : "Grid");
+
+  const endEdit = (args: any) => {
+    options?.handleEdit(args.data.taskData);
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, [ganttData]);
+
+  useEffect(() => {
+    setGanttData(data);
+  }, [data]);
 
   return (
     <>
-      {!loading && (
+      {!loading ? (
         <GanttComponent
           id="gantt-control"
           dataSource={ganttData}
@@ -70,8 +92,8 @@ export function Gantt({ data, toolbarOptions }: ganttOptionsProps) {
             name: "TaskName",
             startDate: "StartDate",
             endDate: "EndDate",
-            // baselineStartDate: "BaselineStartDate",
-            // baselineEndDate: "BaselineEndDate",
+            baselineStartDate: "BaselineStartDate",
+            baselineEndDate: "BaselineEndDate",
             duration: "Duration",
             progress: "Progress",
             child: "subtasks",
@@ -80,11 +102,21 @@ export function Gantt({ data, toolbarOptions }: ganttOptionsProps) {
           queryTaskbarInfo={queryTaskbarInfo}
           labelSettings={labelSettings}
           includeWeekend={true}
+          renderBaseline={true}
+          baselineColor="red"
           durationUnit={"Hour"}
-          toolbar={toolbarOptions || []}
+          toolbar={options?.toolbarOptions || []}
           editSettings={{
+            allowEditing: true,
+            mode: "Auto",
             allowTaskbarEditing: false,
           }}
+          splitterSettings={{
+            // view: handleShowGantt(),
+            // columnIndex: 5,
+            position: "80%",
+          }}
+          endEdit={endEdit}
           height={"100vh"}
           columns={[
             // {
@@ -163,6 +195,10 @@ export function Gantt({ data, toolbarOptions }: ganttOptionsProps) {
         >
           <Inject services={[Edit, Toolbar]} />
         </GanttComponent>
+      ) : (
+        <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
+          <Ring speed={2} lineWeight={5} color="blue" size={64} />
+        </Flex>
       )}
     </>
   );
