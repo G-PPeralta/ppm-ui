@@ -30,7 +30,7 @@ export const LinkItems: Array<LinkItemProps> = [
       { name: "Dashboard", icon: FiHome, link: "/" },
       { name: "Projetos", icon: FaRegMoneyBillAlt, link: "/projects" },
       {
-        name: "Fornecedores",
+        name: "Desenvolvimento",
         icon: FaRegMoneyBillAlt,
         link: "/desenvolvimento",
       },

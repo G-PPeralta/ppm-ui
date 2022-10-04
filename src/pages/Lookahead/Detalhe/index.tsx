@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import {
@@ -15,6 +16,8 @@ import {
 import Sidebar from "components/SideBar";
 
 // import { FiPlusCircle, FiSearch } from "react-icons/fi";
+import { useLookahead } from "hooks/useLookahead";
+
 import { ModalAddAtividade } from "../components/ModalAddAtividade";
 import { TabelaAtividades } from "../components/TabelaAtividades";
 import { TabelaFerramentas } from "../components/TabelaFerramentas";
@@ -83,8 +86,55 @@ const LookaheadData = [
   },
 ];
 
+interface Weeks {
+  id: string;
+  value: string;
+}
+
 export function LookaheadDetalhe() {
   const { id } = useParams();
+  const { atividades } = useLookahead();
+  const [weeks, setWeeks] = useState<Weeks[]>();
+  const [semana, setSemana] = useState<string>();
+
+  function getWeeks() {
+    const dataBr = Intl.DateTimeFormat("pt-BR");
+    const today = new Date();
+    const first = today.getDate() - today.getDay() + 1;
+    const last = first + 6;
+
+    const monday = new Date(today.setDate(first));
+    const sunday = new Date(today.setDate(last));
+    const diaInicial = dataBr.format(monday);
+    const diaFinal = dataBr.format(sunday);
+    const x = [];
+    x.push({
+      id: diaInicial,
+      value: `${diaInicial} - ${diaFinal}`,
+    });
+
+    changeWeek(`${diaInicial} - ${diaFinal}`);
+    const monday2 = new Date(today.setDate(first + 8));
+    const sunday2 = new Date(today.setDate(last + 8));
+    const diaInicial2 = dataBr.format(monday2);
+    const diaFinal2 = dataBr.format(sunday2);
+
+    x.push({
+      id: diaInicial2,
+      value: `${diaInicial2} - ${diaFinal2}`,
+    });
+
+    setWeeks(x);
+  }
+
+  useEffect(() => {
+    getWeeks();
+  }, []);
+
+  function changeWeek(value: string) {
+    setSemana(value);
+  }
+
   return (
     <>
       <Sidebar>
@@ -132,42 +182,24 @@ export function LookaheadDetalhe() {
                         name="pole"
                         width={250}
                         marginRight="15px"
+                        onChange={(e) => changeWeek(e.target.value)}
                       >
-                        {/* {projetos &&
-                          projetos.map(function (proj, index) {
+                        {weeks &&
+                          weeks.map(function (x, i) {
                             return (
-                              <option value={proj.id} key={index}>
-                                {proj.id} - {proj.nome.substring(0, 12)}
+                              <option key={i} value={x.id}>
+                                {x.value}
                               </option>
                             );
-                          })} */}
-                        <option value="1">22/08/2022 - 28/08/2022</option>
-                        <option value="1">29/08/2022 - 04/09/2022</option>
-                        <option value="1">05/09/2022 - 11/09/2022</option>
-                        <option value="1">12/08/2022 - 18/09/2022</option>
+                          })}
                       </Select>
                     </FormControl>
-
-                    {/* <FormControl className="toBottom">
-                      <Button
-                        color="white"
-                        background="origem.300"
-                        variant="primary"
-                        _hover={{
-                          background: "origem.500",
-                          transition: "all 0.4s",
-                        }}
-                        rightIcon={<FiSearch />}
-                      >
-                        Buscar
-                      </Button>
-                    </FormControl> */}
                   </Flex>
                 </Flex>
 
                 <Flex direction="column">
-                  <TabelaAtividades />
-                  <TabelaFerramentas />
+                  <TabelaAtividades semana={semana} data={atividades} />
+                  <TabelaFerramentas semana={semana} />
                   <TabelaServicos />
                 </Flex>
               </Flex>
