@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FiPlusCircle, FiPrinter } from "react-icons/fi";
 import { IoIosArrowBack } from "react-icons/io";
 import ReactToPrint from "react-to-print";
@@ -65,6 +65,20 @@ function handleReportButton(report: string) {
 export function Reports() {
   const [report, setReport] = useState("0");
 
+  const [width, setWidth] = useState<number>(window.innerWidth);
+
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 768;
+
   let initialValue = "0";
 
   const componentRef = useRef<HTMLDivElement>(null);
@@ -74,42 +88,58 @@ export function Reports() {
       <Sidebar>
         <Stack>
           <Box
-            paddingTop={{ base: "0", sm: "6" }}
-            paddingBottom={{ base: "0", sm: "10" }}
+            paddingTop={{ base: "5", sm: "10" }}
+            paddingBottom={{ base: "5", sm: "10" }}
             px={{ base: "4", sm: "10" }}
-            bg={useBreakpointValue({ base: "transparent", sm: "white" })}
+            bg={useBreakpointValue({ base: "white", sm: "white" })}
             boxShadow={{
               base: "none",
               sm: useColorModeValue("md", "md-dark"),
             }}
             borderRadius={{ base: "none", sm: "xl" }}
           >
-            <Flex justify={"space-between"}>
-              <Flex direction={"row"} alignItems={"center"} mb={5}>
-                <Link
-                  href="javascript:history.back()"
-                  padding={2}
-                  paddingLeft={0}
-                >
-                  <IoIosArrowBack size={"38px"} />
+            <Flex justify={"space-between"} alignItems={"center"} mb={5}>
+              <Flex direction={"row"} alignItems={"center"}>
+                <Link href="javascript:history.back()">
+                  <IoIosArrowBack
+                    size={useBreakpointValue({ base: "20", sm: "38" })}
+                  />
                 </Link>
-                <Heading as="h3" size="lg">
+                <Heading
+                  as="h3"
+                  size={useBreakpointValue({ base: "md", sm: "lg" })}
+                >
                   GERAR RELATÓRIO
                 </Heading>
               </Flex>
-              <ReactToPrint
-                trigger={() => (
-                  <Button
-                    variant="ghost"
-                    colorScheme="messenger"
-                    rightIcon={<FiPrinter />}
-                    disabled={report == "0" || report == "" || report == "3"}
-                  >
-                    Exportar
-                  </Button>
-                )}
-                content={() => componentRef.current}
-              />
+              {isMobile ? (
+                <ReactToPrint
+                  trigger={() => (
+                    <Button
+                      variant="ghost"
+                      colorScheme="messenger"
+                      disabled={report == "0" || report == "" || report == "3"}
+                    >
+                      <FiPrinter />
+                    </Button>
+                  )}
+                  content={() => componentRef.current}
+                />
+              ) : (
+                <ReactToPrint
+                  trigger={() => (
+                    <Button
+                      variant="ghost"
+                      colorScheme="messenger"
+                      rightIcon={<FiPrinter />}
+                      disabled={report == "0" || report == "" || report == "3"}
+                    >
+                      Exportar
+                    </Button>
+                  )}
+                  content={() => componentRef.current}
+                />
+              )}
             </Flex>
             <Flex flexDirection="row" gap={"4"}>
               <FormControl>
