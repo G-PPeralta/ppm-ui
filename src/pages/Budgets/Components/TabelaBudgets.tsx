@@ -97,9 +97,7 @@ export function TabelaBudgets(props: TableProps) {
           {budget.item}
         </Td>
         <Td>
-          <Link to={`/budget/detail/${budget.id}`}>
-            <Text color="blue">{budget.projeto.nome}</Text>
-          </Link>
+          <Text>{budget.projeto.nome}</Text>
         </Td>
         <Td>{brl.format(budget.planejado)}</Td>
         <Td>{brl.format(budget.realizado)}</Td>

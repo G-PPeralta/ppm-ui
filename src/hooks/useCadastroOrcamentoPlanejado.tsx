@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
 import { BudgetReal } from "interfaces/Budgets";
+import { Fornecedor } from "interfaces/Services";
 import { cadastroValorPrevistoSchema } from "validations/ModalCadastroOrcamento";
 
 import { useToast } from "contexts/Toast";
 
+import { getFornecedor } from "services/get/Fornecedor";
 import { postAddValorRealizado } from "services/post/Budget";
 
 import { useAuth } from "./useAuth";
@@ -15,6 +17,12 @@ export function useCadastroOrcamentoPlanejado() {
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
   const [atividade, setAtividade] = useState<number>(0);
+  const [fornecedores, setFornecedores] = useState<Fornecedor[]>([]);
+
+  const listaFornecedores = async () => {
+    const { data } = await getFornecedor();
+    setFornecedores(data);
+  };
 
   const initialValues = {
     atividade,
@@ -61,9 +69,14 @@ export function useCadastroOrcamentoPlanejado() {
     },
   });
 
+  useEffect(() => {
+    listaFornecedores();
+  }, []);
+
   return {
     registerForm,
     loading,
     setAtividade,
+    fornecedores,
   };
 }
