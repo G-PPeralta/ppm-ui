@@ -48,7 +48,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
 
   const optionsSondas = listaSondas.map((sonda: any) => ({
     value: sonda.id,
-    label: sonda.sonda,
+    label: sonda.nom_sonda,
   }));
 
   // const handleGet = async () => {
@@ -126,7 +126,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                       <Flex
                         direction={innerWidth >= 460 ? "row" : "column"}
                         gap={5}
-                        w={"80%"}
+                        w={"100%"}
                       >
                         <SelectFiltragem
                           registerForm={registerForm}

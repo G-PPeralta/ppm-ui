@@ -9,10 +9,10 @@ import Sidebar from "components/SideBar";
 
 import { getStatisticsTasks } from "services/get/StatisticsTasks";
 
-import ModalCadastrarSonda from "./components/ModalCadastrarSonda";
+// import ModalCadastrarSonda from "./components/ModalCadastrarSonda";
 import ModalCadastroCronograma from "./components/ModalCadastroCronograma";
 import ModalCadastroOperacao from "./components/ModalCadastroOperação";
-import ModalCadastroPoco from "./components/ModalCadastroPoco";
+// import ModalCadastroPoco from "./components/ModalCadastroPoco";
 import { StatisticsTable } from "./components/StatisticsTable";
 
 function Statistics() {
@@ -152,8 +152,8 @@ function Statistics() {
                 </Flex>
 
                 <Flex gap={2} flex={2} justify={"end"} align={"end"}>
-                  <ModalCadastrarSonda />
-                  <ModalCadastroPoco />
+                  {/* <ModalCadastrarSonda /> */}
+                  {/* <ModalCadastroPoco /> */}
                   <ModalCadastroOperacao
                     refresh={refresh}
                     setRefresh={setRefresh}
