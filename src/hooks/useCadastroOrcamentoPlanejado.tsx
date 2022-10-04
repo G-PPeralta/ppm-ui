@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { BudgetReal } from "interfaces/Budgets";
 import { Fornecedor } from "interfaces/Services";
-import { cadastroValorPrevistoSchema } from "validations/ModalCadastroOrcamento";
+import { cadastroValorPlanejadoSchema } from "validations/ModalCadastroOrcamento";
 
 import { useToast } from "contexts/Toast";
 
@@ -25,8 +25,7 @@ export function useCadastroOrcamentoPlanejado() {
   };
 
   const initialValues = {
-    atividade,
-    gasto: "",
+    gasto: 0,
     data: "",
     fornecedor: "",
     servico: "",
@@ -37,10 +36,10 @@ export function useCadastroOrcamentoPlanejado() {
 
   const registerForm = useFormik({
     initialValues,
-    validationSchema: cadastroValorPrevistoSchema,
+    validationSchema: cadastroValorPlanejadoSchema,
     onSubmit: async (values) => {
       const newValues: BudgetReal = {
-        atividadeId: values.atividade,
+        atividadeId: atividade,
         valor: values.gasto,
         data: values.data,
         fornecedor: values.fornecedor,

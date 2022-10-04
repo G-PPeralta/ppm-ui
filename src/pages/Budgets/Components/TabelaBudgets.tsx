@@ -87,7 +87,7 @@ export function TabelaBudgets(props: TableProps) {
     <>
       <Tr key={budget.id}>
         <Td>
-          {budget.filhos && (
+          {budget.filhos?.length && (
             <Icon
               className="cursor"
               onClick={() => toggleAcordion(key)}
