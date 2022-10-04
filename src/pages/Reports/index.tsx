@@ -141,64 +141,129 @@ export function Reports() {
                 />
               )}
             </Flex>
-            <Flex flexDirection="row" gap={"4"} alignItems={"end"}>
-              <FormControl maxW={{ base: "100%", sm: "30%" }}>
-                <FormLabel htmlFor="report" color={"gray.400"}>
-                  TIPO DO RELATÓRIO
-                </FormLabel>
-                <Select
-                  id="poloId"
-                  name="pole"
-                  width={"100%"}
-                  placeholder="Selecione"
-                  onChange={(e) => {
-                    initialValue = e.target.value;
-                  }}
-                >
-                  {reports &&
-                    reports.map((reportType) => (
-                      <option value={reportType.value}>
-                        {reportType.name}
-                      </option>
-                    ))}
-                </Select>
-              </FormControl>
-              {(report == "6" || report == "5" || report == "2") && (
+
+            {isMobile ? (
+              <Flex flexDirection="column" gap={"2"} alignItems={"end"}>
+                <Flex direction={"row"} gap={"4"}>
+                  <FormControl maxW={{ base: "100%", sm: "30%" }}>
+                    <FormLabel htmlFor="report" color={"gray.400"}>
+                      TIPO DO RELATÓRIO
+                    </FormLabel>
+                    <Select
+                      id="poloId"
+                      name="pole"
+                      width={"100%"}
+                      placeholder="Selecione"
+                      onChange={(e) => {
+                        initialValue = e.target.value;
+                      }}
+                    >
+                      {reports &&
+                        reports.map((reportType) => (
+                          <option value={reportType.value}>
+                            {reportType.name}
+                          </option>
+                        ))}
+                    </Select>
+                  </FormControl>
+                  <FormControl className="toBottom" maxW={"fit-content"}>
+                    <Button
+                      color="white"
+                      background="origem.300"
+                      variant="primary"
+                      _hover={{
+                        background: "origem.500",
+                        transition: "all 0.4s",
+                      }}
+                      rightIcon={<FiPlusCircle />}
+                      onClick={() => setReport(initialValue)}
+                    >
+                      Gerar
+                    </Button>
+                  </FormControl>
+                </Flex>
+                {(report == "6" || report == "5" || report == "2") && (
+                  <FormControl maxW={{ base: "100%", sm: "30%" }}>
+                    <FormLabel htmlFor="report" color={"gray.400"}>
+                      PROJETO
+                    </FormLabel>
+                    <Select
+                      id="poloId"
+                      name="pole"
+                      width={"100%"}
+                      placeholder="Selecione"
+                    >
+                      {projects &&
+                        projects.map((reportType) => (
+                          <option value={reportType.value}>
+                            {reportType.name}
+                          </option>
+                        ))}
+                    </Select>
+                  </FormControl>
+                )}
+              </Flex>
+            ) : (
+              <Flex flexDirection="row" gap={"4"} alignItems={"end"}>
                 <FormControl maxW={{ base: "100%", sm: "30%" }}>
                   <FormLabel htmlFor="report" color={"gray.400"}>
-                    PROJETO
+                    TIPO DO RELATÓRIO
                   </FormLabel>
                   <Select
                     id="poloId"
                     name="pole"
                     width={"100%"}
                     placeholder="Selecione"
+                    onChange={(e) => {
+                      initialValue = e.target.value;
+                    }}
                   >
-                    {projects &&
-                      projects.map((reportType) => (
+                    {reports &&
+                      reports.map((reportType) => (
                         <option value={reportType.value}>
                           {reportType.name}
                         </option>
                       ))}
                   </Select>
                 </FormControl>
-              )}
-              <FormControl className="toBottom" maxW={"fit-content"}>
-                <Button
-                  color="white"
-                  background="origem.300"
-                  variant="primary"
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                  }}
-                  rightIcon={<FiPlusCircle />}
-                  onClick={() => setReport(initialValue)}
-                >
-                  Gerar
-                </Button>
-              </FormControl>
-            </Flex>
+                {(report == "6" || report == "5" || report == "2") && (
+                  <FormControl maxW={{ base: "100%", sm: "30%" }}>
+                    <FormLabel htmlFor="report" color={"gray.400"}>
+                      PROJETO
+                    </FormLabel>
+                    <Select
+                      id="poloId"
+                      name="pole"
+                      width={"100%"}
+                      placeholder="Selecione"
+                    >
+                      {projects &&
+                        projects.map((reportType) => (
+                          <option value={reportType.value}>
+                            {reportType.name}
+                          </option>
+                        ))}
+                    </Select>
+                  </FormControl>
+                )}
+                <FormControl className="toBottom" maxW={"fit-content"}>
+                  <Button
+                    color="white"
+                    background="origem.300"
+                    variant="primary"
+                    _hover={{
+                      background: "origem.500",
+                      transition: "all 0.4s",
+                    }}
+                    rightIcon={<FiPlusCircle />}
+                    onClick={() => setReport(initialValue)}
+                  >
+                    Gerar
+                  </Button>
+                </FormControl>
+              </Flex>
+            )}
+
             <Flex ref={componentRef}>{handleReportButton(report)}</Flex>
           </Box>
         </Stack>
