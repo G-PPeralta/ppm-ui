@@ -14,6 +14,7 @@ import { Fornecedores } from "pages/ListaDosFornecedores";
 import { NotFound } from "pages/NotFound";
 import { Permissions } from "pages/Permissions";
 import { PermissionsList } from "pages/PermissionsList";
+import { Priorizacao } from "pages/Priorizacao";
 import { Profile } from "pages/Profile";
 import { Projects } from "pages/Projects";
 import { ProjectsRegistration } from "pages/ProjectsRegistration";
@@ -68,6 +69,7 @@ export function PrivateRoutes() {
       <Route path="/licoesAprendidas" element={<LicoesAprendidasProjetos />} />
       <Route path="/estatisticas/" element={<Statistics />} />
       <Route path="/estatisticas/cronograma" element={<StatisticsGantt />} />
+      <Route path="/priorizacao" element={<Priorizacao />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

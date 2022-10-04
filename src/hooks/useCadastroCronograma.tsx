@@ -13,14 +13,12 @@ import { cadastroNovoCronogramaSchema } from "validations/Estatisticas";
 import { useToast } from "contexts/Toast";
 
 import {
+  getPocos,
   getResponsaveis,
+  getSonda,
   getTarefas,
 } from "services/get/CadastroModaisInfograficos";
-import {
-  getOperacoes,
-  getPocosOperacoes,
-  getSondasOperacoes,
-} from "services/get/Estatisticas";
+import { getOperacoes } from "services/get/Estatisticas";
 import { getAreaAtuacaoList } from "services/get/Infograficos";
 import { postCadastroNovoCronograma } from "services/post/Estatistica";
 
@@ -38,15 +36,15 @@ export function useCadastroCronograma() {
   const [listaOperacao, setListaOperacao] = useState<Operacao[]>([]);
 
   const reqGet = async () => {
-    const sondas = await getSondasOperacoes();
-    const pocos = await getPocosOperacoes();
+    const sondas = await getSonda();
+    const pocos = await getPocos();
     const areaAtuacao = await getAreaAtuacaoList();
     const responsaveis = await getResponsaveis();
     const tarefas = await getTarefas();
     const operacoes = await getOperacoes();
 
     const sondasSorted = sondas.data.sort((a: any, b: any) =>
-      a.sonda.localeCompare(b.sonda)
+      a.nom_sonda.localeCompare(b.nom_sonda)
     );
     const pocosSorted = pocos.data.sort((a: ListaPoco, b: ListaPoco) =>
       a.poco.localeCompare(b.poco)
