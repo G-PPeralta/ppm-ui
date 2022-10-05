@@ -57,9 +57,9 @@ function ModalCadastroIntervencao({
     listaAtividadesPrecedentes,
   } = useCadastroIntervencao();
 
-  console.log("listaServicosPocos", listaServicosPocos);
+  console.log("registerForm", registerForm.values);
 
-  const [erroDataIntervencao, setErroDataIntervencao] = useState(false);
+  // const [erroDataIntervencao, setErroDataIntervencao] = useState(false);
   const [listaProjetos, setListaProjetos] = useState<any>([]);
 
   const innerWidth = window.innerWidth;
@@ -134,9 +134,11 @@ function ModalCadastroIntervencao({
     const { cod_erro } = data;
 
     if (cod_erro === 0) {
-      setErroDataIntervencao(true);
+      registerForm.setFieldValue("erroDataIntervencao", true);
+      // setErroDataIntervencao(true);
     } else {
-      setErroDataIntervencao(false);
+      registerForm.setFieldValue("erroDataIntervencao", false);
+      // setErroDataIntervencao(false);
     }
   };
 
@@ -153,6 +155,13 @@ function ModalCadastroIntervencao({
     reqGetAtividadesByProjetoTipoId(registerForm.values.projeto_tipo_id);
     handleDataLimite();
   }, [registerForm.values.projeto_tipo_id]);
+
+  // useEffect(() => {
+  //   handleDataLimite();
+  // }, [
+  //   registerForm.values.projeto_tipo_id !== 0 &&
+  //     registerForm.values.poco_id !== 0,
+  // ]);
 
   return (
     <>
@@ -242,7 +251,7 @@ function ModalCadastroIntervencao({
                         />
                         <DateTimePickerDataInicio
                           registerForm={registerForm}
-                          data={data}
+                          // data={data}
                         />
                       </Flex>
                     </Stack>
@@ -259,7 +268,7 @@ function ModalCadastroIntervencao({
                       </Flex>
                     </Stack>
 
-                    {erroDataIntervencao && (
+                    {registerForm.values.erroDataIntervencao && (
                       <Alert colorScheme={"red"} variant={"solid"}>
                         <AlertIcon />
                         <AlertTitle>ATENÇÃO:</AlertTitle>

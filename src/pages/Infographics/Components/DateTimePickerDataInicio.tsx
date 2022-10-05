@@ -22,6 +22,7 @@ function DateTimePickerDataInicio({ registerForm, data }: any) {
   }, []);
 
   const handleIniciarDate = (date: any) => {
+    date.setHours(9, 0, 0, 0);
     setDataInicio(date);
     registerForm.setFieldValue("dat_ini_prev", date);
   };

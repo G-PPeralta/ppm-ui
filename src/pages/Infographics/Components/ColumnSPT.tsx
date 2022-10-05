@@ -32,15 +32,23 @@ type Props = {
   refresh: boolean;
 };
 
+type ServicoPoco = {
+  id: number;
+  nom_poco: string;
+  dat_ini_limite: string | null;
+};
+
 function ColumnSPT({ column, setRefresh, refresh }: Props) {
-  const [listaServicosPocos, setListaServicosPocos] = useState<any>([]);
+  const [listaServicosPocos, setListaServicosPocos] = useState<ServicoPoco[]>(
+    []
+  );
 
   const handleServicoPocos = async () => {
     const idNomeSonda = column.sonda.split(" - ")[0];
     const servicoPocos = await getServicoPocoId(idNomeSonda);
 
-    const servicoPocosSorted = servicoPocos.data.sort((a: any, b: any) =>
-      a.nom_poco.localeCompare(b.nom_poco)
+    const servicoPocosSorted = servicoPocos.data.sort(
+      (a: ServicoPoco, b: ServicoPoco) => a.nom_poco.localeCompare(b.nom_poco)
     );
 
     setListaServicosPocos(servicoPocosSorted);
@@ -50,18 +58,6 @@ function ColumnSPT({ column, setRefresh, refresh }: Props) {
     handleServicoPocos();
   }, []);
 
-  // const handleServicoPocos = async () => {
-  //   if (optionsSondaCampanha) {
-  //     const nomeSondaComId = optionsSondaCampanha.find(
-  //       (option: any) => option.value === idCampanha
-  //     );
-  //     if (nomeSondaComId) {
-  //       const idSonda = nomeSondaComId.label.split(" - ")[0];
-  //       const servicoPocos = await getServicoPocoId(idSonda);
-  //       setListaServicoPocos(servicoPocos.data);
-  //     }
-  //   }
-  // };
   return (
     <Flex
       direction={"column"}
