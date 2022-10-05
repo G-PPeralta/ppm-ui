@@ -53,8 +53,7 @@ export function Fornecedores() {
   const [editFornecedor, setEditFornecedor] = useState({} as Fornecedor);
   const [fornecedores, setFornecedores] = useState<Fornecedor[]>([]);
   const [projetos, setProjetos] = useState([] as ProjetosList[]);
-  const [projetoId, setProjetoId] = useState("");
-  console.log(projetoId);
+  // const [projetoId, setProjetoId] = useState("");
 
   function handleEditFornecedor(fornecedor: Fornecedor) {
     setEditFornecedor(fornecedor);
@@ -192,7 +191,7 @@ export function Fornecedores() {
                         placeholder="Selecione"
                         id="projeto"
                         name="projeto"
-                        onChange={(e) => setProjetoId(e.target.value)}
+                        // onChange={(e) => setProjetoId(e.target.value)}
                         width={"208px"}
                         height={"56px"}
                       >
@@ -228,7 +227,7 @@ export function Fornecedores() {
                           placeholder="Selecione"
                           id="projeto"
                           name="projeto"
-                          onChange={(e) => setProjetoId(e.target.value)}
+                          // onChange={(e) => setProjetoId(e.target.value)}
                           width={"208px"}
                           height={"56px"}
                         >
