@@ -21,7 +21,7 @@ import Sidebar from "components/SideBar";
 
 import { useProjects } from "hooks/useProjects";
 
-import { TabelaProjetos } from "./Components/TabelaProjetos";
+import { TabelaProjetos } from "./components/TabelaProjetos";
 import "./projects.css";
 
 export function Projects() {
