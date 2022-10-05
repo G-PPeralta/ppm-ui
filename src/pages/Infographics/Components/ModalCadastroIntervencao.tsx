@@ -190,7 +190,7 @@ function ModalCadastroIntervencao({
     handleDataLimite();
   }, [registerForm.values.projeto_tipo_id]);
 
-  console.log("registerForm", registerForm.values);
+  // console.log("registerForm", registerForm.values);
   // console.log("idCampanha", idCampanha);
   // console.log("optionsSondaCampanha", optionsSondaCampanha);
 
