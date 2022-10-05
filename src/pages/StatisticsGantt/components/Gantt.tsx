@@ -82,12 +82,12 @@ export function Gantt({ data, options }: ganttOptionsProps) {
     options?.handleEdit(args.data.taskData);
   };
 
-  // const cellEdit = (args: any) => {
-  //   // console.log(">>> args.columnName ", args.columnName);
-  //   if (args.columnName !== "Progress") {
-  //     args.cancel = true;
-  //   }
-  // };
+  const cellEdit = (args: any) => {
+    // console.log(">>> args.columnName ", args.columnName);
+    if (args.columnName !== "Progress") {
+      args.cancel = true;
+    }
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -114,7 +114,7 @@ export function Gantt({ data, options }: ganttOptionsProps) {
             baselineEndDate: "BaselineEndDate",
             duration: "Duration",
             progress: "Progress",
-            child: "subtasks",
+            // child: "subtasks",
             // parentID: "ParentId",
           }}
           queryTaskbarInfo={queryTaskbarInfo}
@@ -137,7 +137,7 @@ export function Gantt({ data, options }: ganttOptionsProps) {
             position: "80%",
           }}
           endEdit={endEdit}
-          // cellEdit={cellEdit}
+          cellEdit={cellEdit}
           height={"100vh"}
           columns={[
             // {
