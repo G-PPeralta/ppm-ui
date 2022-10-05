@@ -75,10 +75,7 @@ export const cadastroPocoSchema = yup.object({
 });
 
 export const cadastroNovaCampanhaSchema = yup.object({
-  nom_campanha: yup
-    .string()
-    .min(3)
-    .required("O nome da campanha é obrigatório!"),
+  id_projeto: yup.string().min(3).required("O nome da campanha é obrigatório!"),
   dsc_comentario: yup.string(),
 });
 

@@ -84,11 +84,26 @@ export async function getTarefas(): Promise<{
   return { data, status };
 }
 
-export async function getAtividadesDataMais15(id: number): Promise<{
+export async function getServicoSonda(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get(`/campanha/find/datas/${id}`, token());
+  const { data, status } = await api.get(
+    `/servicos-sonda-poco/sondas`,
+    token()
+  );
+
+  return { data, status };
+}
+
+export async function getServicoPocoId(id: any): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(
+    `servicos-sonda-poco/pocos/${id}`,
+    token()
+  );
 
   return { data, status };
 }

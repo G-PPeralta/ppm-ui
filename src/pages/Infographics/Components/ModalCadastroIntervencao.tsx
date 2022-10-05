@@ -19,7 +19,7 @@ import {
 import { Ring } from "@uiball/loaders";
 import {
   ListaCampo,
-  ListaPoco,
+  // ListaPoco,
   ProjetoTipo,
 } from "interfaces/CadastrosModaisInfograficos";
 
@@ -32,6 +32,7 @@ import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 import {
   getAtividadasByProjetosTipoId,
   getProjetosTipo,
+  getServicoPocoId,
 } from "services/get/CadastroModaisInfograficos";
 
 import SelectFiltragem from "../../../components/SelectFiltragem";
@@ -48,19 +49,26 @@ function ModalCadastroIntervencao({
   const {
     registerForm,
     loading,
-    listaPocos,
+    // listaPocos,
     listaCampos,
     listaSondaCampanha,
     listaAtividadesPrecedentes,
+    // listaServicoSonda,
   } = useCadastroIntervencao();
 
   const [listaProjetos, setListaProjetos] = useState<any>([]);
+  const [listaServicoPocos, setListaServicoPocos] = useState<any>([]);
 
   const innerWidth = window.innerWidth;
 
-  const optionsPocos = listaPocos.map((poco: ListaPoco) => ({
+  // const optionsPocos = listaPocos.map((poco: ListaPoco) => ({
+  //   value: poco.id,
+  //   label: poco.poco,
+  // }));
+
+  const optionsPocos = listaServicoPocos.map((poco: any) => ({
     value: poco.id,
-    label: poco.poco,
+    label: poco.nom_poco,
   }));
 
   const optionsCampo = listaCampos.map((campo: ListaCampo) => ({
@@ -77,6 +85,11 @@ function ModalCadastroIntervencao({
     value: sondaCampanha.id,
     label: sondaCampanha.nom_campanha,
   }));
+
+  // const optionsServicoSonda = listaServicoSonda.map((sonda: any) => ({
+  //   value: sonda.id,
+  //   label: sonda.nom_sonda,
+  // }));
 
   const reqGetAtividadesByProjetoTipoId = async (id: number) => {
     if (id === 0) {
@@ -123,12 +136,27 @@ function ModalCadastroIntervencao({
     onOpen();
   };
 
+  const handleServicoPocos = async () => {
+    if (optionsSondaCampanha) {
+      const nomeSondaComId = optionsSondaCampanha.find(
+        (option: any) => option.value === idCampanha
+      );
+      if (nomeSondaComId) {
+        const idSonda = nomeSondaComId.label.split(" - ")[0];
+        const servicoPocos = await getServicoPocoId(idSonda);
+
+        setListaServicoPocos(servicoPocos.data);
+      }
+    }
+  };
+
   useEffect(() => {
     handleGet();
     registerForm.setFieldValue("id_campanha", idCampanha);
     const newDate = new Date(data);
     newDate.setDate(newDate.getDate() + 15);
     registerForm.setFieldValue("dat_ini_prev", newDate);
+    handleServicoPocos();
     setRefresh(!refresh);
   }, []);
 
@@ -136,7 +164,9 @@ function ModalCadastroIntervencao({
     reqGetAtividadesByProjetoTipoId(registerForm.values.projeto_tipo_id);
   }, [registerForm.values.projeto_tipo_id]);
 
-  // console.log("registerForm", registerForm.values);
+  // console.log("idSonda", idSonda);
+  // console.log("idCampanha", idCampanha);
+  // console.log("optionsSondaCampanha", optionsSondaCampanha);
 
   return (
     <>
