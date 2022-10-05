@@ -27,7 +27,7 @@ import {
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
-import { RequiredField } from "components/RequiredField/RequiredField";
+// import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
@@ -57,7 +57,8 @@ function ModalCadastroIntervencao({
     listaAtividadesPrecedentes,
   } = useCadastroIntervencao();
 
-  console.log("registerForm", registerForm.values);
+  // console.log("idCampanha", idCampanha);
+  // console.log("registerForm", registerForm.values);
 
   // const [erroDataIntervencao, setErroDataIntervencao] = useState(false);
   const [listaProjetos, setListaProjetos] = useState<any>([]);
@@ -145,23 +146,35 @@ function ModalCadastroIntervencao({
   useEffect(() => {
     // handleGet();
     registerForm.setFieldValue("id_campanha", idCampanha);
-    const newDate = new Date(data);
-    newDate.setDate(newDate.getDate() + 15);
-    registerForm.setFieldValue("dat_ini_prev", newDate);
+    // const newDate = new Date(data);
+    // newDate.setDate(newDate.getDate() + 15);
+    // registerForm.setFieldValue("dat_ini_prev", newDate);
     setRefresh(!refresh);
   }, []);
 
   useEffect(() => {
+    if (registerForm.values.id_campanha !== idCampanha) {
+      registerForm.setFieldValue("id_campanha", idCampanha);
+    }
+  }, [registerForm.values]);
+
+  useEffect(() => {
     reqGetAtividadesByProjetoTipoId(registerForm.values.projeto_tipo_id);
-    handleDataLimite();
   }, [registerForm.values.projeto_tipo_id]);
 
-  // useEffect(() => {
-  //   handleDataLimite();
-  // }, [
-  //   registerForm.values.projeto_tipo_id !== 0 &&
-  //     registerForm.values.poco_id !== 0,
-  // ]);
+  useEffect(() => {
+    if (
+      registerForm.values.dat_ini_prev !== new Date(data) &&
+      registerForm.values.projeto_tipo_id !== 0 &&
+      registerForm.values.poco_id !== 0
+    ) {
+      handleDataLimite();
+    }
+  }, [
+    registerForm.values.dat_ini_prev,
+    registerForm.values.projeto_tipo_id,
+    registerForm.values.poco_id,
+  ]);
 
   return (
     <>
@@ -288,7 +301,7 @@ function ModalCadastroIntervencao({
                       <Text fontWeight={"bold"}>Comentários</Text>
                       <FormControl>
                         <Flex gap={1}>
-                          <RequiredField />
+                          {/* <RequiredField /> */}
                           <Text
                             fontWeight={"bold"}
                             fontSize={"12px"}

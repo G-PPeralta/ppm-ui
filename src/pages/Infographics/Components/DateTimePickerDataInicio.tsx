@@ -22,9 +22,11 @@ function DateTimePickerDataInicio({ registerForm, data }: any) {
   }, []);
 
   const handleIniciarDate = (date: any) => {
-    date.setHours(9, 0, 0, 0);
-    setDataInicio(date);
-    registerForm.setFieldValue("dat_ini_prev", date);
+    if (date) {
+      date.setHours(9, 0, 0, 0);
+      setDataInicio(date);
+      registerForm.setFieldValue("dat_ini_prev", date);
+    }
   };
 
   const TriggerDatePickerInicio = forwardRef(
@@ -57,7 +59,7 @@ function DateTimePickerDataInicio({ registerForm, data }: any) {
         showTimeSelect
         dateFormat="dd/MM/yyyy, hh:mm"
         customInput={<TriggerDatePickerInicio />}
-        isClearable={dataInicio !== ""}
+        // isClearable={dataInicio !== ""}
       />
     </Flex>
   );

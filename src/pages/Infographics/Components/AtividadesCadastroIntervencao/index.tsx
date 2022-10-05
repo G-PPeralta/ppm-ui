@@ -33,8 +33,7 @@ interface Atividade {
 export default function AtividadesCadastroIntervencao({
   registerForm,
   listaAtividadesPrecedentes,
-}: // listaAtividadesPrecedentes,
-any) {
+}: any) {
   const id = useId();
   const [render, setRender] = useState<any>([]);
   const [droppableId, setDroppableId] = useState<string>(id);
