@@ -66,12 +66,14 @@ function ModalCadastroAtividade({ setRefresh, refresh, atividades }: any) {
   return (
     <>
       <Button
-        variant="outline"
-        border={"2px solid"}
-        borderColor={"origem.500"}
-        textColor={"origem.500"}
+        h={"56px"}
+        mb={4}
+        borderRadius={"10px"}
+        background={"origem.300"}
+        variant="primary"
+        color="white"
         _hover={{
-          borderColor: "origem.600",
+          borderColor: "origem.500",
           backgroundColor: "origem.500",
           textColor: "white",
           transition: "all 0.4s",

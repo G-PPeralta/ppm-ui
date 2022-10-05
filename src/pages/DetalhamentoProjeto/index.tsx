@@ -24,6 +24,7 @@ import BotoesModais from "./components/BotoesModais";
 import CardInfoProjeto from "./components/CardInfoProjeto";
 import CardOrcamento from "./components/CardOrcamento";
 import GraficoCurvaS from "./components/GraficoCurvaS";
+import ModalCadastroAtividade from "./components/ModalCadastroAtividades";
 
 function DetalhamentoProjeto() {
   const { id } = useParams();
@@ -43,6 +44,8 @@ function DetalhamentoProjeto() {
   const [licoes, setLicoes] = useState([] as LicoesAprendidas[]);
   const [categorias, setCategorias] = useState([] as Categorias[]);
   const [progresso, setProgresso] = useState([] as ProjetoProgresso[]);
+
+  const [refresh, setRefresh] = useState(false);
 
   const handleGetInfoProjetos = async () => {
     if (id) {
@@ -133,6 +136,11 @@ function DetalhamentoProjeto() {
                 callBack={handleGetLicoes}
               />
             </Flex>
+            <ModalCadastroAtividade
+              setRefresh={setRefresh}
+              refresh={refresh}
+              // atividades={atividades}
+            />
             <Gantt />
             <GraficoCurvaS />
           </>
