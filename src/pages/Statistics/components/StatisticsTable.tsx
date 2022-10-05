@@ -132,7 +132,7 @@ export function StatisticsTable({ data }: Props) {
               <Th color="white">Total</Th>
               <Th color="white"></Th>
               <Th color="white"></Th>
-              <Th color="white"></Th>
+              {/* <Th color="white"></Th> */}
             </Tr>
           </Tfoot>
         </Table>
