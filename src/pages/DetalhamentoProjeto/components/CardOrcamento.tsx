@@ -106,7 +106,12 @@ function CardOrcamento() {
                 width={"48px"}
                 borderRadius={2}
               >
-                <Text p={1} color="#ffffff" fontSize={20} fontWeight={"600"}>
+                <Text
+                  p={1}
+                  color="#ffffff"
+                  fontSize={"16px"}
+                  fontWeight={"600"}
+                >
                   {(
                     ((Number(infoFinanceira[0]?.planejado) -
                       Number(infoFinanceira[0]?.realizado)) /
@@ -174,7 +179,12 @@ function CardOrcamento() {
                 width={"48px"}
                 borderRadius={2}
               >
-                <Text p={1} color="#ffffff" fontSize={20} fontWeight={"600"}>
+                <Text
+                  p={1}
+                  color="#ffffff"
+                  fontWeight={"600"}
+                  fontSize={"16px"}
+                >
                   {(
                     (Number(infoFinanceira[0]?.realizado) /
                       Number(infoFinanceira[0]?.planejado)) *
