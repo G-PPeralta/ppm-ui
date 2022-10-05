@@ -7,17 +7,17 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 
 function DateTimePickerDataInicio({ registerForm, data }: any) {
   const [dataInicio, setDataInicio] = useState<any>("");
-  const [dataMin, setDataMin] = useState<any>("");
+  // const [dataMin, setDataMin] = useState<any>("");
 
   useEffect(() => {
     if (data) {
       const newDate = new Date(data);
       newDate.setDate(newDate.getDate() + 15);
       setDataInicio(newDate);
-      setDataMin(newDate);
+      // setDataMin(newDate);
     } else {
-      const newDate = new Date();
-      setDataMin(newDate);
+      // const newDate = new Date();
+      // setDataMin(newDate);
     }
   }, []);
 
@@ -50,7 +50,7 @@ function DateTimePickerDataInicio({ registerForm, data }: any) {
       </Flex>
       <ReactDatePicker
         selected={dataInicio}
-        minDate={dataMin}
+        // minDate={dataMin}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
         showTimeSelect

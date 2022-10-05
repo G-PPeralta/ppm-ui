@@ -107,3 +107,19 @@ export async function getServicoPocoId(id: any): Promise<{
 
   return { data, status };
 }
+
+export async function getServicoDataIntervencaoId(
+  idProjetoTipo: any,
+  dataInicio: any,
+  dataLimitePoco: any
+): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(
+    `servicos-sonda-poco/${idProjetoTipo}/${dataInicio}/${dataLimitePoco}`,
+    token()
+  );
+
+  return { data, status };
+}

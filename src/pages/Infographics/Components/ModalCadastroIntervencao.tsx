@@ -32,6 +32,7 @@ import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 import {
   getAtividadasByProjetosTipoId,
   getProjetosTipo,
+  getServicoDataIntervencaoId,
   getServicoPocoId,
 } from "services/get/CadastroModaisInfograficos";
 
@@ -144,9 +145,28 @@ function ModalCadastroIntervencao({
       if (nomeSondaComId) {
         const idSonda = nomeSondaComId.label.split(" - ")[0];
         const servicoPocos = await getServicoPocoId(idSonda);
-
         setListaServicoPocos(servicoPocos.data);
       }
+    }
+  };
+
+  const handleDataLimite = async () => {
+    const pocoCompleto = listaServicoPocos.filter(
+      (poco: any) => poco.id === registerForm.values.poco_id
+    );
+
+    const { data } = await getServicoDataIntervencaoId(
+      registerForm.values.projeto_tipo_id,
+      new Date(registerForm.values.dat_ini_prev).toISOString(),
+      pocoCompleto[0].dat_ini_limite
+    );
+
+    const { cod_erro } = data;
+
+    if (cod_erro === 0) {
+      window.alert(
+        "ATENÇÃO: O planejamento configurado ultrapassa a data de início de execução do poço selecionado."
+      );
     }
   };
 
@@ -156,15 +176,21 @@ function ModalCadastroIntervencao({
     const newDate = new Date(data);
     newDate.setDate(newDate.getDate() + 15);
     registerForm.setFieldValue("dat_ini_prev", newDate);
-    handleServicoPocos();
     setRefresh(!refresh);
   }, []);
 
   useEffect(() => {
+    setTimeout(() => {
+      handleServicoPocos();
+    }, 1000);
+  }, [registerForm.values.id_campanha]);
+
+  useEffect(() => {
     reqGetAtividadesByProjetoTipoId(registerForm.values.projeto_tipo_id);
+    handleDataLimite();
   }, [registerForm.values.projeto_tipo_id]);
 
-  // console.log("idSonda", idSonda);
+  console.log("registerForm", registerForm.values);
   // console.log("idCampanha", idCampanha);
   // console.log("optionsSondaCampanha", optionsSondaCampanha);
 
