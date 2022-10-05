@@ -5,16 +5,17 @@ import { projectRegisterSchema } from "validations/ProjectRegister";
 
 import { useToast } from "contexts/Toast";
 
-import { getProjects } from "services/get/GetProject";
+import { getProjetos } from "services/get/GetProject";
 import { postProject } from "services/post/ProjectRegister";
+import { Projetos } from "interfaces/Projetos";
 
 export function useProjects() {
   const { toast } = useToast();
 
   const [loading, setLoading] = useState(false);
 
-  const getAllProjects = async (polo: string) => {
-    const data: any[] = await getProjects(polo);
+  const getProjetosDetalhados = async () => {
+    const data: Projetos[] = await getProjetos();
     return data;
   };
 
@@ -96,7 +97,7 @@ export function useProjects() {
   });
 
   return {
-    getAllProjects,
+    getProjetosDetalhados,
     projectsForm,
     loading,
   };
