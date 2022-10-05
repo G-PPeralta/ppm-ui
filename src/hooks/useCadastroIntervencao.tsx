@@ -19,6 +19,7 @@ import {
   getPocos,
   getProjetosTipo,
   getResponsaveis,
+  getServicoSonda,
   getTarefas,
 } from "services/get/CadastroModaisInfograficos";
 import {
@@ -42,6 +43,7 @@ export function useCadastroIntervencao() {
   const [listaProjetosTipo, setListaProjetosTipo] = useState<ProjetoTipo[]>([]);
   const [listaSondaCampanha, setListaSondaCampanha] = useState<any[]>([]);
   const [listaTarefas, setListaTarefas] = useState<Tarefas[]>([]);
+  const [listaServicoSonda, setListaServicoSonda] = useState<any[]>([]);
 
   const getAllCampanha = {
     area_atuacao_id: null,
@@ -63,6 +65,7 @@ export function useCadastroIntervencao() {
     const projetosTipo = await getProjetosTipo();
     const sondaCampanha = await getSondaCampanha();
     const tarefas = await getTarefas();
+    const servicoSondas = await getServicoSonda();
 
     const arraySondas = campanha.data.map(({ sonda, id_campanha }: any) => ({
       sonda,
@@ -93,6 +96,9 @@ export function useCadastroIntervencao() {
     const tarefasSorted = tarefas.data.sort((a: Tarefas, b: Tarefas) =>
       a.nom_atividade.localeCompare(b.nom_atividade)
     );
+    const servicoSondasSorted = servicoSondas.data.sort((a: any, b: any) =>
+      a.nom_sonda.localeCompare(b.nom_sonda)
+    );
 
     setListaSondas(sondasSorted);
     setListaPocos(pocosSorted);
@@ -102,6 +108,7 @@ export function useCadastroIntervencao() {
     setListaProjetosTipo(projetosTipoSorted);
     setListaSondaCampanha(sondaCampanhaSorted);
     setListaTarefas(tarefasSorted);
+    setListaServicoSonda(servicoSondasSorted);
   };
 
   const listaAtividadesPrecedentes = listaTarefas.map((atividade) => ({
@@ -193,5 +200,6 @@ export function useCadastroIntervencao() {
     listaSondaCampanha,
     listaTarefas,
     listaAtividadesPrecedentes,
+    listaServicoSonda,
   };
 }
