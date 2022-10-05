@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BsCheckCircleFill, BsFillXCircleFill } from "react-icons/bs";
 import {
   FiChevronLeft,
   FiChevronRight,
@@ -22,14 +23,12 @@ import {
   IconButton,
   Select,
 } from "@chakra-ui/react";
+import { Projetos } from "interfaces/Projetos";
 
 import ModalCadastrarPriorizacao from "./ModalCadastrarPriorizacao";
 import ModalDeletarProjeto from "./ModalDeletarProjeto";
 
 import "../projects.css";
-import { Projetos } from "interfaces/Projetos";
-
-import { BsCheckCircleFill, BsFillXCircleFill } from "react-icons/bs";
 
 interface TableProps {
   data: Projetos[];

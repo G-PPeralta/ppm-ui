@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { BsSearch } from "react-icons/bs";
+import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import {
@@ -13,18 +15,14 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
+import { Projetos } from "interfaces/Projetos";
 
 import Sidebar from "components/SideBar";
 
 import { useProjects } from "hooks/useProjects";
 
+import { TabelaProjetos } from "./Components/TabelaProjetos";
 import "./projects.css";
-import { TabelaProjetos } from "./components/TabelaProjetos";
-
-import { Projetos } from "interfaces/Projetos";
-
-import { BsSearch } from "react-icons/bs";
-import { FiPlus } from "react-icons/fi";
 
 export function Projects() {
   const { projectsForm, loading, getProjetosDetalhados } = useProjects();
