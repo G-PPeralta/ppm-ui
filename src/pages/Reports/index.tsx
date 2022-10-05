@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { FiPlusCircle, FiPrinter } from "react-icons/fi";
 import { IoIosArrowBack } from "react-icons/io";
 import ReactToPrint from "react-to-print";
@@ -65,23 +65,17 @@ function handleReportButton(report: string) {
 export function Reports() {
   const [report, setReport] = useState("0");
 
-  const [width, setWidth] = useState<number>(window.innerWidth);
-
-  function handleWindowSizeChange() {
-    setWidth(window.innerWidth);
-  }
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, []);
-
-  const isMobile = width <= 768;
-
   let initialValue = "0";
 
   const componentRef = useRef<HTMLDivElement>(null);
+
+  const width = useBreakpointValue({
+    base: "mobile",
+    sm: "mobile",
+    md: "mobile",
+    lg: "desktop",
+    xl: "desktop",
+  });
 
   return (
     <>
@@ -112,7 +106,7 @@ export function Reports() {
                   GERAR RELATÓRIO
                 </Heading>
               </Flex>
-              {isMobile ? (
+              {width === "mobile" ? (
                 <ReactToPrint
                   trigger={() => (
                     <Button
@@ -142,10 +136,10 @@ export function Reports() {
               )}
             </Flex>
 
-            {isMobile ? (
+            {width === "mobile" ? (
               <Flex flexDirection="column" gap={"2"} alignItems={"end"}>
                 <Flex direction={"row"} gap={"4"}>
-                  <FormControl maxW={{ base: "100%", sm: "30%" }}>
+                  <FormControl maxW={"100%"}>
                     <FormLabel htmlFor="report" color={"gray.400"}>
                       TIPO DO RELATÓRIO
                     </FormLabel>
@@ -183,7 +177,7 @@ export function Reports() {
                   </FormControl>
                 </Flex>
                 {(report == "6" || report == "5" || report == "2") && (
-                  <FormControl maxW={{ base: "100%", sm: "30%" }}>
+                  <FormControl maxW={"30%"}>
                     <FormLabel htmlFor="report" color={"gray.400"}>
                       PROJETO
                     </FormLabel>
