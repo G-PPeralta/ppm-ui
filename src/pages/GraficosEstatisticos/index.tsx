@@ -42,12 +42,18 @@ export function GráficosEstatisticos() {
         <ReactToPrint
           trigger={() => (
             <Button
+              width={"77px"}
+              height={"23px"}
               variant="ghost"
-              // colorScheme="messenger"
               fontSize={"18px"}
               fontWeight={"700"}
               color={"#0047BB"}
               rightIcon={<AiFillPrinter />}
+              _hover={{
+                background: "white",
+                color: "#0047BB",
+                transition: "all 0.4s",
+              }}
               disabled={report == "0" || report == ""}
             >
               Exportar
@@ -94,8 +100,8 @@ export function GráficosEstatisticos() {
               <Box
                 py={{ base: "0", sm: "16" }}
                 px={{ base: "4", sm: "10" }}
-                w="80rem"
-                h="38.5rem"
+                w="100%"
+                h="34em"
                 bg="white"
                 boxShadow={{
                   base: "none",
@@ -109,7 +115,7 @@ export function GráficosEstatisticos() {
                     // projectsForm.handleSubmit(e);
                   }}
                 >
-                  <Stack spacing="5">
+                  <Stack spacing="2">
                     <Flex flexDirection={"column"}>
                       <Flex justifyContent={"space-between"}>
                         <Flex align={"flex-end"}>
@@ -155,6 +161,9 @@ export function GráficosEstatisticos() {
                               GERAR GRÁFICO POR
                             </FormLabel>
                             <Select
+                              fontSize={"14px"}
+                              fontWeight={"400"}
+                              color={"#2D2926"}
                               mt={"-6px"}
                               id="gera-grafico"
                               name="gera-grafico"
@@ -186,6 +195,9 @@ export function GráficosEstatisticos() {
                               DE
                             </FormLabel>
                             <Input
+                              fontSize={"14px"}
+                              fontWeight={"400"}
+                              color={"#2D2926"}
                               mt={"-6px"}
                               id="de"
                               name="de"
@@ -208,6 +220,9 @@ export function GráficosEstatisticos() {
                               <Text>ATÉ</Text>
                             </FormLabel>
                             <Input
+                              fontSize={"14px"}
+                              fontWeight={"400"}
+                              color={"#2D2926"}
                               mt={"-6px"}
                               id="ate"
                               name="ate"
@@ -222,13 +237,14 @@ export function GráficosEstatisticos() {
                           <FormControl className="toBottom">
                             <Button
                               h={"56px"}
-                              background={"white"}
+                              w={"98px"}
+                              background={"#0047BB"}
                               border={"2.3px solid"}
-                              color={"#0047BB"}
+                              color={"white"}
                               variant="primary"
                               _hover={{
-                                background: "origem.500",
-                                color: "white",
+                                background: "white",
+                                color: "#0047BB",
                                 transition: "all 0.4s",
                               }}
                               rightIcon={<FiPlus />}

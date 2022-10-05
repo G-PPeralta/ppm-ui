@@ -209,8 +209,8 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
           bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
         >
           <Box
-            py={{ base: "6", sm: "6" }}
-            px={{ base: "6", sm: "6" }}
+            py={{ base: "6", sm: "8" }}
+            px={{ base: "6", sm: "10" }}
             w={"100%"}
             bg={useBreakpointValue({ base: "transparent", sm: "white" })}
             boxShadow={{
@@ -225,20 +225,21 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                 // projectsForm.handleSubmit(e);
               }}
             >
-              <Stack spacing="5">
+              <Stack spacing="3">
                 <Flex
                   flexDirection={useBreakpointValue({
                     base: "column",
                     md: "column",
                   })}
+                  gap={4}
                 >
                   <Flex justifyContent={"space-between"}>
                     <Flex align={"flex-end"}>
                       <FormControl mt={"-50px"}>
                         <FormLabel>
                           <Text
-                            mb={"24px"}
-                            fontSize={"20px"}
+                            mb={"1px"}
+                            fontSize={"24px"}
                             color={"#585858"}
                             fontWeight={"700"}
                             fontFamily={"Mulish"}
@@ -248,32 +249,32 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                         </FormLabel>
                       </FormControl>
                     </Flex>
-                    <Flex align={"flex-start"}>
-                      <Prop />
-                    </Flex>
+                    <Prop />
                   </Flex>
-
-                  <Flex direction={"row"} mb={"15px"} gap={4}>
+                  <Flex direction={"row"} mb={"10px"} gap={3}>
                     <Flex alignItems={"flex-end"}>
                       <FormControl>
                         <FormLabel
                           mt={"-20px"}
                           fontSize={"12px"}
-                          color={"#A7A7A7"}
+                          color={"#949494"}
+                          fontWeight={"700"}
                           htmlFor="gera-grafico"
                         >
                           GERAR GRÁFICO POR
                         </FormLabel>
                         <Input
-                          placeholder="Relatório de cada intervenção"
-                          // onChange={handleProjectChange}
                           mt={"-6px"}
                           id="gera-grafico"
                           name="gera-grafico"
                           width={"480px"}
                           height={"56px"}
                           borderRadius={"8px"}
-                          color={"#2D2926"}
+                          placeholder="Relatório de cada intervenção"
+                          _placeholder={{ color: "#2D2926" }}
+                          fontSize={"14px"}
+                          fontWeight={"700"}
+                          // onChange={handleProjectChange}
                         ></Input>
                       </FormControl>
                     </Flex>
@@ -282,7 +283,8 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                       <FormControl>
                         <FormLabel
                           fontSize={"12px"}
-                          color={"#A7A7A7"}
+                          color={"#949494"}
+                          fontWeight={"700"}
                           htmlFor="de"
                         >
                           DE
@@ -296,6 +298,9 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                           borderRadius={"8px"}
                           type={"date"}
                           mb={"-10px"}
+                          color={"#2D2926"}
+                          fontSize={"14px"}
+                          fontWeight={"700"}
                         />
                       </FormControl>
                     </Flex>
@@ -305,7 +310,8 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                         <FormLabel
                           alignItems={"flex-start"}
                           fontSize={"12px"}
-                          color={"#A7A7A7"}
+                          color={"#949494"}
+                          fontWeight={"700"}
                           htmlFor="ate"
                         >
                           ATÉ
@@ -318,16 +324,20 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                           height={"56px"}
                           borderRadius={"8px"}
                           type={"date"}
+                          color={"#2D2926"}
+                          fontSize={"14px"}
+                          fontWeight={"700"}
                         />
                       </FormControl>
                     </Flex>
                   </Flex>
-                  <Flex gap={4}>
+                  <Flex mt={"-10px"} gap={4} mb={"10px"}>
                     <Flex alignItems={"flex-end"}>
                       <FormControl>
                         <FormLabel
                           fontSize={"12px"}
-                          color={"#A7A7A7"}
+                          color={"#949494"}
+                          fontWeight={"700"}
                           htmlFor="sonda"
                         >
                           SONDA
@@ -341,6 +351,9 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                           width={"208px"}
                           height={"56px"}
                           borderRadius={"8px"}
+                          color={"#2D2926"}
+                          fontSize={"14px"}
+                          fontWeight={"700"}
                         >
                           {listaSondas.map((sonda) => (
                             <option>{sonda.nom_sonda}</option>
@@ -348,18 +361,17 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                         </Select>
                       </FormControl>
                     </Flex>
-
                     <Flex>
                       <FormControl className="toBottom">
                         <Button
                           h={"56px"}
-                          background={"white"}
+                          background={"#0047BB"}
                           border={"2.3px solid"}
-                          color={"#0047BB"}
+                          color={"white"}
                           variant="primary"
                           _hover={{
-                            background: "origem.500",
-                            color: "white",
+                            background: "white",
+                            color: "#0047BB",
                             transition: "all 0.4s",
                           }}
                           rightIcon={<FiPlus />}
@@ -371,6 +383,7 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                       </FormControl>
                     </Flex>
                   </Flex>
+
                   <Flex direction={"column"}>
                     <Flex mb={"-20px"}>
                       <Text

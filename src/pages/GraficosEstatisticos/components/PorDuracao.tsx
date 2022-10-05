@@ -119,7 +119,7 @@ export function GraficoPorDuracao({ Prop }: any) {
           <Ring speed={2} lineWeight={5} color="blue" size={64} />
         </Flex>
       )} */}
-      <Stack spacing="1">
+      <Stack spacing="8">
         <Flex
           w={"auto"}
           align="center"
@@ -156,8 +156,8 @@ export function GraficoPorDuracao({ Prop }: any) {
                       <FormControl mt={"-50px"}>
                         <FormLabel>
                           <Text
-                            mb={"24px"}
-                            fontSize={"20px"}
+                            mb={"1px"}
+                            fontSize={"24px"}
                             color={"#585858"}
                             fontWeight={"700"}
                             fontFamily={"Mulish"}
@@ -169,13 +169,14 @@ export function GraficoPorDuracao({ Prop }: any) {
                     </Flex>
                     <Prop />
                   </Flex>
-                  <Flex direction={"row"} mb={"10px"} gap={4}>
+                  <Flex direction={"row"} mb={"10px"} gap={3}>
                     <Flex alignItems={"flex-end"}>
                       <FormControl>
                         <FormLabel
                           mt={"-20px"}
                           fontSize={"12px"}
-                          color={"#A7A7A7"}
+                          color={"#949494"}
+                          fontWeight={"700"}
                           htmlFor="gera-grafico"
                         >
                           GERAR GRÁFICO POR
@@ -188,7 +189,9 @@ export function GraficoPorDuracao({ Prop }: any) {
                           height={"56px"}
                           borderRadius={"8px"}
                           placeholder="Histórico de durações"
-                          color={"#2D2926"}
+                          _placeholder={{ color: "#2D2926" }}
+                          fontSize={"14px"}
+                          fontWeight={"700"}
                           // onChange={handleProjectChange}
                         ></Input>
                       </FormControl>
@@ -198,7 +201,8 @@ export function GraficoPorDuracao({ Prop }: any) {
                       <FormControl>
                         <FormLabel
                           fontSize={"12px"}
-                          color={"#A7A7A7"}
+                          color={"#949494"}
+                          fontWeight={"700"}
                           htmlFor="de"
                         >
                           DE
@@ -212,6 +216,9 @@ export function GraficoPorDuracao({ Prop }: any) {
                           borderRadius={"8px"}
                           type={"date"}
                           mb={"-10px"}
+                          color={"#2D2926"}
+                          fontSize={"14px"}
+                          fontWeight={"700"}
                         />
                       </FormControl>
                     </Flex>
@@ -221,7 +228,8 @@ export function GraficoPorDuracao({ Prop }: any) {
                         <FormLabel
                           alignItems={"flex-start"}
                           fontSize={"12px"}
-                          color={"#A7A7A7"}
+                          color={"#949494"}
+                          fontWeight={"700"}
                           htmlFor="ate"
                         >
                           ATÉ
@@ -234,6 +242,9 @@ export function GraficoPorDuracao({ Prop }: any) {
                           height={"56px"}
                           borderRadius={"8px"}
                           type={"date"}
+                          color={"#2D2926"}
+                          fontSize={"14px"}
+                          fontWeight={"700"}
                         />
                       </FormControl>
                     </Flex>
@@ -243,7 +254,8 @@ export function GraficoPorDuracao({ Prop }: any) {
                       <FormControl>
                         <FormLabel
                           fontSize={"12px"}
-                          color={"#A7A7A7"}
+                          color={"#949494"}
+                          fontWeight={"700"}
                           htmlFor="sonda"
                         >
                           SONDA
@@ -257,6 +269,9 @@ export function GraficoPorDuracao({ Prop }: any) {
                           width={"208px"}
                           height={"56px"}
                           borderRadius={"8px"}
+                          color={"#2D2926"}
+                          fontSize={"14px"}
+                          fontWeight={"700"}
                         >
                           {listaSondas.map((sonda) => (
                             <option>{sonda.nom_sonda}</option>
@@ -269,7 +284,8 @@ export function GraficoPorDuracao({ Prop }: any) {
                       <FormControl>
                         <FormLabel
                           fontSize={"12px"}
-                          color={"#A7A7A7"}
+                          color={"#949494"}
+                          fontWeight={"700"}
                           htmlFor="campo"
                         >
                           CAMPO
@@ -283,6 +299,9 @@ export function GraficoPorDuracao({ Prop }: any) {
                           borderRadius={"8px"}
                           placeholder="Campo"
                           // onChange={handleProjectChange}
+                          color={"#2D2926"}
+                          fontSize={"14px"}
+                          fontWeight={"700"}
                         >
                           {campos.map((d) => (
                             <option>{d.campo}</option>
@@ -293,12 +312,14 @@ export function GraficoPorDuracao({ Prop }: any) {
 
                     <Flex alignItems={"flex-end"}>
                       <FormControl>
-                        <FormLabel
-                          fontSize={"12px"}
-                          color={"#A7A7A7"}
-                          htmlFor="base"
-                        >
-                          BASE DA ZONA INTERVIDA MAIS PROFUNDA
+                        <FormLabel htmlFor="base">
+                          <Text
+                            fontSize={"12px"}
+                            color={"#949494"}
+                            fontWeight={"700"}
+                          >
+                            BASE DA ZONA INTERVIDA MAIS PROFUNDA
+                          </Text>
                         </FormLabel>
                         <Input
                           placeholder="Base da zona intervida mais profunda"
@@ -308,8 +329,11 @@ export function GraficoPorDuracao({ Prop }: any) {
                           width={"328px"}
                           height={"56px"}
                           borderRadius={"8px"}
-                          color={"#2D2926"}
-                        ></Input>
+                          // color={"#2D2926"}
+                          fontSize={"14px"}
+                          fontWeight={"700"}
+                          _placeholder={{ color: "#2D2926" }}
+                        />
                       </FormControl>
                     </Flex>
                   </Flex>
@@ -319,7 +343,8 @@ export function GraficoPorDuracao({ Prop }: any) {
                       <FormControl>
                         <FormLabel
                           fontSize={"12px"}
-                          color={"#A7A7A7"}
+                          color={"#949494"}
+                          fontWeight={"700"}
                           htmlFor="outro"
                         >
                           OUTRO
@@ -332,6 +357,9 @@ export function GraficoPorDuracao({ Prop }: any) {
                           name="outro"
                           width={"120px"}
                           height={"56px"}
+                          color={"#2D2926"}
+                          fontSize={"14px"}
+                          fontWeight={"700"}
                           borderRadius={"8px"}
                         >
                           {durationHistory.map((d) => (
@@ -344,13 +372,13 @@ export function GraficoPorDuracao({ Prop }: any) {
                       <FormControl className="toBottom">
                         <Button
                           h={"56px"}
-                          background={"white"}
+                          background={"#0047BB"}
                           border={"2.3px solid"}
-                          color={"#0047BB"}
+                          color={"white"}
                           variant="primary"
                           _hover={{
-                            background: "origem.500",
-                            color: "white",
+                            background: "white",
+                            color: "#0047BB",
                             transition: "all 0.4s",
                           }}
                           rightIcon={<FiPlus />}
@@ -365,7 +393,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                   <Flex gap={1} direction={"column"}>
                     <Flex mb={"-18px"}>
                       <Text
-                        mt={"10px"}
+                        mt={"5px"}
                         fontSize={"24px"}
                         fontWeight={"700"}
                         color={"#2D2926"}
