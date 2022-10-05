@@ -1,13 +1,13 @@
 import { useState } from "react";
 
 import { useFormik } from "formik";
+import { Projetos } from "interfaces/Projetos";
 import { projectRegisterSchema } from "validations/ProjectRegister";
 
 import { useToast } from "contexts/Toast";
 
 import { getProjetos } from "services/get/GetProject";
 import { postProject } from "services/post/ProjectRegister";
-import { Projetos } from "interfaces/Projetos";
 
 export function useProjects() {
   const { toast } = useToast();

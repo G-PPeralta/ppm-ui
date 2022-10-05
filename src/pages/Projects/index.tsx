@@ -20,7 +20,9 @@ import { useProjects } from "hooks/useProjects";
 
 import "./projects.css";
 import { TabelaProjetos } from "./components/TabelaProjetos";
+
 import { Projetos } from "interfaces/Projetos";
+
 import { BsSearch } from "react-icons/bs";
 import { FiPlus } from "react-icons/fi";
 

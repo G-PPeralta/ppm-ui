@@ -28,6 +28,7 @@ import ModalDeletarProjeto from "./ModalDeletarProjeto";
 
 import "../projects.css";
 import { Projetos } from "interfaces/Projetos";
+
 import { BsCheckCircleFill, BsFillXCircleFill } from "react-icons/bs";
 
 interface TableProps {
