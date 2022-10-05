@@ -78,14 +78,12 @@ export function StatisticsTable({ data }: Props) {
             <Tr background={"origem.500"}>
               <Th color="white">Item</Th>
               <Th color="white">Intervenção</Th>
-              <Th color="white">Descrição</Th>
               <Th color="white">Ações</Th>
             </Tr>
           </Thead>
           <Tbody scrollBehavior={"smooth"}>
             {data.slice(from, to).map((projeto, key) => (
               <Tr key={key}>
-                <Td fontWeight={"semibold"}>{projeto.sonda}</Td>
                 <Td fontWeight={"semibold"}>
                   <Link
                     to={`/estatisticas/cronograma`}
@@ -95,8 +93,12 @@ export function StatisticsTable({ data }: Props) {
                   </Link>
                 </Td>
                 <Td fontWeight={"semibold"}>
-                  {projeto.poco}
-                  {projeto.max}
+                  <Link
+                    to={`/estatisticas/cronograma`}
+                    state={{ data: projeto }}
+                  >
+                    <Text>{projeto.poco}</Text>
+                  </Link>
                 </Td>
                 <Td fontWeight={"semibold"}>
                   {/* <IconButton
