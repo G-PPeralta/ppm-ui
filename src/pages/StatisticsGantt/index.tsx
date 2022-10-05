@@ -30,14 +30,12 @@ function StatisticsGantt() {
 
   const formatToGanttData = (data: any) => {
     if (!data) return;
-    const newGantt = data.atividades?.map((t: any) => {
-      const use = ["max", "min", "med", "dp"][Math.floor(Math.random() * 4)];
-
+    const newGantt = data.atividades?.map((t: any) =>
       // TODO: setar qual valor (use) usado no duration
       // const duration = data[use];
-      const real = Number(t.hrs_reais);
-      const total = Number(t.hrs_totais);
-      const duration = real > total ? real : total;
+      // const real = Number(t.hrs_reais);
+      // const total = Number(t.hrs_totais);
+      // const duration = real > total ? real : total;
       // console.log(">>>duration", duration);
       // if (
       //   Number(t.pct_plan) === 1 ||
@@ -50,14 +48,7 @@ function StatisticsGantt() {
       // const tmp = real / total;
       // const progresso = tmp > 1 ? 100 : tmp * 100;
 
-      const { max, min, med, dp } = data;
-      let color;
-      if (duration < med - dp) color = "green";
-      else if (duration >= med - dp && duration < med + dp / 2)
-        color = "yellow";
-      else if (duration >= med + dp / 2 && duration < med + dp) color = "red";
-      else if (duration >= med + dp) color = "black";
-      return {
+      ({
         sonda: data.sonda,
         id_sonda: data.id_sonda,
         poco: data.poco,
@@ -71,14 +62,12 @@ function StatisticsGantt() {
         Duration: Number(t.hrs_reais),
         BaselineDuration: Number(t.hrs_totais),
         Progress: Number(t.pct_real),
-        max,
-        min,
-        med,
-        dp,
-        use,
-        color,
-      };
-    });
+        max: Number(t.vlr_max),
+        min: Number(t.vlr_min),
+        med: Number(t.vlr_media),
+        dp: Number(t.vlr_dp),
+      })
+    );
     setGanttData(newGantt);
     setProjeto({
       sonda: data.sonda,
