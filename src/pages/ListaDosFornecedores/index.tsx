@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { AiFillPlusCircle } from "react-icons/ai";
 // import { BsPlusLg } from 'react-icons/bs';
 // import { FaGreaterThan } from 'react-icons/fa';
+import { BiPlus } from "react-icons/bi";
+import { FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -20,13 +21,18 @@ import {
   // FormControl,
   // Select,
   useDisclosure,
+  FormControl,
+  FormLabel,
+  Select,
 } from "@chakra-ui/react";
+import { ProjetosList } from "interfaces/Services";
 
 import Sidebar from "components/SideBar";
 
 // import { useFornecedores } from 'hooks/useFornecedores';
 
 import { getFornecedor } from "services/get/Fornecedor";
+import { getProjetos } from "services/get/Projetos";
 import { putFornecedor } from "services/update/Fornecedor";
 
 import { EditarFornecedorModal } from "./components/EditarFornecedorModal";
@@ -46,6 +52,9 @@ export function Fornecedores() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [editFornecedor, setEditFornecedor] = useState({} as Fornecedor);
   const [fornecedores, setFornecedores] = useState<Fornecedor[]>([]);
+  const [projetos, setProjetos] = useState([] as ProjetosList[]);
+  const [projetoId, setProjetoId] = useState("");
+  console.log(projetoId);
 
   function handleEditFornecedor(fornecedor: Fornecedor) {
     setEditFornecedor(fornecedor);
@@ -66,6 +75,15 @@ export function Fornecedores() {
     setFornecedores(response.data as Fornecedor[]);
   };
 
+  async function handleGetProjetos() {
+    const payload = await getProjetos();
+    setProjetos(payload.data);
+  }
+
+  useEffect(() => {
+    handleGetProjetos();
+  }, []);
+
   useEffect(() => {
     handleGetFornecedores();
   }, []);
@@ -79,20 +97,22 @@ export function Fornecedores() {
         bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
       >
         <Stack spacing="8">
-          <Flex>
+          <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
             <Box
-              py={{ base: "0", sm: "16" }}
-              px={{ base: "4", sm: "10" }}
+              py={{ base: "6", sm: "8" }}
+              px={{ base: "6", sm: "8" }}
               w={"100%"}
               bg={useBreakpointValue({ base: "transparent", sm: "white" })}
               boxShadow={{
                 base: "none",
                 sm: useColorModeValue("md", "md-dark"),
               }}
-              borderRadius={{ base: "none", sm: "xl" }}
+              borderRadius={{ base: "xl", sm: "xl" }}
             >
-              <Heading as="h3" size="md" mt={"-50px"} mb={"15px"}>
-                Fornecedores
+              <Heading as="h3" size="md" mt={"-15px"} mb={"25px"}>
+                <Text color={"#010101"} fontSize={"24px"} fontWeight={"700"}>
+                  Fornecedores
+                </Text>
               </Heading>
 
               <Stack spacing="0">
@@ -101,6 +121,7 @@ export function Fornecedores() {
                     base: "column",
                     md: "column",
                   })}
+                  wrap={"wrap"}
                   // border={'red solid 2px'}
                 >
                   <Flex
@@ -112,17 +133,18 @@ export function Fornecedores() {
                       type="button"
                       background="white"
                       variant="primary"
-                      color="origem.500"
-                      border="2px"
+                      color="#0047BB"
+                      border="2px #0047BB solid"
                       padding={2}
                       borderRadius={6}
-                      w={useBreakpointValue({ base: "100%", md: "21%" })}
+                      w={useBreakpointValue({ base: "100%", md: "251px" })}
+                      h={"56px"}
                       _hover={{
                         background: "#f5f5f5",
                         transition: "all 0.4s",
                         color: "origem.300",
                         cursor: "pointer",
-                        borderColor: "origem.500",
+                        borderColor: "#0047BB",
                       }}
                       onClick={() => {
                         navigate("/providers-registration");
@@ -130,13 +152,123 @@ export function Fornecedores() {
                       mb={"15px"}
                     >
                       <Text
-                        fontSize={useBreakpointValue({ base: "sm", md: "sm" })}
+                        fontSize={useBreakpointValue({
+                          base: "sm",
+                          md: "18px",
+                        })}
                         color={"origem.500"}
+                        fontWeight={"700"}
                       >
                         Cadastrar Fornecedores
                       </Text>
-                      <Icon as={AiFillPlusCircle} fontSize="20px" ml={1} />
+                      <Icon
+                        as={BiPlus}
+                        fontSize="18px"
+                        fontWeight={"700"}
+                        ml={1}
+                        color={"#0047BB"}
+                      />
                     </Button>
+                  </Flex>
+
+                  <Flex gap={2}>
+                    <FormControl>
+                      <FormLabel
+                        fontWeight={"700"}
+                        fontSize={"12px"}
+                        color={"#A7A7A7"}
+                        htmlFor="projeto"
+                      >
+                        <Text
+                          fontWeight={"700"}
+                          fontSize={"12px"}
+                          color={"#A7A7A7"}
+                        >
+                          PROJETO
+                        </Text>
+                      </FormLabel>
+                      <Select
+                        mt={"-9px"}
+                        placeholder="Selecione"
+                        id="projeto"
+                        name="projeto"
+                        onChange={(e) => setProjetoId(e.target.value)}
+                        width={"208px"}
+                        height={"56px"}
+                      >
+                        <option color={"#A7A7A7"} value={0}>
+                          Todos
+                        </option>
+                        {projetos &&
+                          projetos.map((project, index) => (
+                            <option value={project.id} key={index}>
+                              {project.nomeProjeto}
+                            </option>
+                          ))}
+                      </Select>
+                    </FormControl>
+                    <Flex ml={"7px"}>
+                      <FormControl>
+                        <FormLabel
+                          fontWeight={"700"}
+                          fontSize={"12px"}
+                          color={"#A7A7A7"}
+                          htmlFor="projeto"
+                        >
+                          <Text
+                            fontWeight={"700"}
+                            fontSize={"12px"}
+                            color={"#A7A7A7"}
+                          >
+                            POLO
+                          </Text>
+                        </FormLabel>
+                        <Select
+                          mt={"-9px"}
+                          placeholder="Selecione"
+                          id="projeto"
+                          name="projeto"
+                          onChange={(e) => setProjetoId(e.target.value)}
+                          width={"208px"}
+                          height={"56px"}
+                        >
+                          <option color={"#A7A7A7"} value={0}>
+                            Todos
+                          </option>
+                          {projetos &&
+                            projetos.map((project, index) => (
+                              <option value={project.id} key={index}>
+                                {project.nomeProjeto}
+                              </option>
+                            ))}
+                        </Select>
+                      </FormControl>
+                    </Flex>
+                    <Flex>
+                      <Button
+                        type="button"
+                        background="#0047BB"
+                        variant="outline"
+                        color="white"
+                        borderColor="#0047BB"
+                        _hover={{
+                          background: "white",
+                          transition: "all 0.4s",
+                          color: "#0047BB",
+                        }}
+                        rightIcon={<FiSearch />}
+                        // onClick={filterByProject}
+                        alignSelf={"end"}
+                        marginLeft={"5"}
+                        height={"56px"}
+                        width={"101px"}
+                        fontSize={"18px"}
+                        mr="460px"
+                        ml="10px"
+                      >
+                        Filtrar
+                      </Button>
+                    </Flex>
                   </Flex>
                   <Flex
                     flexDirection={useBreakpointValue({
@@ -145,6 +277,7 @@ export function Fornecedores() {
                     })}
                     // border={'green solid 4px'}
                     justifyContent={"flex-start"}
+                    mt={"5px"}
                   >
                     {/* <form
                       onSubmit={(e) => {
