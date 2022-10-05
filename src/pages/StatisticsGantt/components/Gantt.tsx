@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
 
+import { Flex } from "@chakra-ui/react";
 import {
   GanttComponent,
   Inject,
   Edit,
   Toolbar,
 } from "@syncfusion/ej2-react-gantt";
+import { Ring } from "@uiball/loaders";
 import { StatisticsGanttProps } from "interfaces/Services";
 
 type ganttOptionsProps = {
   data: StatisticsGanttProps[] | undefined; // TODO: tirar undefined
-  toolbarOptions?: string[];
+  options?: {
+    toolbarOptions?: string[];
+    showGantt?: boolean;
+    handleEdit: Function;
+  };
 };
 
-export function Gantt({ data, toolbarOptions }: ganttOptionsProps) {
+export function Gantt({ data, options }: ganttOptionsProps) {
   // const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);
   const [loading, setLoading] = useState(true);
   const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
@@ -29,22 +35,30 @@ export function Gantt({ data, toolbarOptions }: ganttOptionsProps) {
   }, [data]);
 
   const queryTaskbarInfo = (args: any) => {
-    if (args.data.taskData.color === "black") {
+    let color;
+    const { Duration, med, dp } = args.data.taskData;
+
+    if (Duration < med - dp) color = "green";
+    else if (Duration >= med - dp && Duration < med + dp / 2) color = "yellow";
+    else if (Duration >= med + dp / 2 && Duration < med + dp) color = "red";
+    else if (Duration >= med + dp) color = "black";
+
+    if (color === "black") {
       // black (duração > média + desvio padrão)
       args.progressBarBgColor = "rgb(45, 41, 38)"; //     #2D2926
       args.taskbarBgColor = "rgb(115, 115, 115)"; // #737373 //
       args.taskbarBorderColor = "white";
-    } else if (args.data.taskData.color === "red") {
+    } else if (color === "red") {
       // red (duração >  média + DP/2)
       args.progressBarBgColor = "rgb(244, 6, 6)";
       args.taskbarBgColor = "rgb(255, 124, 124)";
       args.taskbarBorderColor = "white";
-    } else if (args.data.taskData.color === "yellow") {
+    } else if (color === "yellow") {
       // yellow (duração >  média - DP)
       args.progressBarBgColor = "rgb(244, 221, 6)";
       args.taskbarBgColor = "rgb(255, 245, 154)";
       args.taskbarBorderColor = "white";
-    } else if (args.data.taskData.color === "green") {
+    } else if (color === "green") {
       // green (duração < média - DP)
       args.progressBarBgColor = "rgb(5, 149, 2)";
       args.taskbarBgColor = "rgb(147, 224, 27)";
@@ -56,12 +70,35 @@ export function Gantt({ data, toolbarOptions }: ganttOptionsProps) {
     // leftLabel: "TaskID",
     // taskLabel: "${Progress}%",
     // eslint-disable-next-line no-template-curly-in-string
-    rightLabel: "Task Name: ${TaskName}",
+    rightLabel: "${TaskName}",
   };
+
+  // const handleShowGantt = () => (options?.showGantt ? "Default" : "Grid");
+
+  const endEdit = (args: any) => {
+    options?.handleEdit(args.data.taskData);
+  };
+
+  const cellEdit = (args: any) => {
+    // console.log(">>> args.columnName ", args.columnName);
+    if (args.columnName !== "Progress") {
+      args.cancel = true;
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, [ganttData]);
+
+  useEffect(() => {
+    setGanttData(data);
+  }, [data]);
 
   return (
     <>
-      {!loading && (
+      {!loading ? (
         <GanttComponent
           id="gantt-control"
           dataSource={ganttData}
@@ -70,8 +107,8 @@ export function Gantt({ data, toolbarOptions }: ganttOptionsProps) {
             name: "TaskName",
             startDate: "StartDate",
             endDate: "EndDate",
-            // baselineStartDate: "BaselineStartDate",
-            // baselineEndDate: "BaselineEndDate",
+            baselineStartDate: "BaselineStartDate",
+            baselineEndDate: "BaselineEndDate",
             duration: "Duration",
             progress: "Progress",
             child: "subtasks",
@@ -80,11 +117,24 @@ export function Gantt({ data, toolbarOptions }: ganttOptionsProps) {
           queryTaskbarInfo={queryTaskbarInfo}
           labelSettings={labelSettings}
           includeWeekend={true}
+          renderBaseline={true}
+          baselineColor="red"
           durationUnit={"Hour"}
-          toolbar={toolbarOptions || []}
+          dayWorkingTime={[{ from: 0, to: 24 }]}
+          timezone="UTC"
+          toolbar={options?.toolbarOptions || []}
           editSettings={{
+            allowEditing: true,
+            mode: "Auto",
             allowTaskbarEditing: false,
           }}
+          splitterSettings={{
+            // view: handleShowGantt(),
+            // columnIndex: 5,
+            position: "80%",
+          }}
+          endEdit={endEdit}
+          cellEdit={cellEdit}
           height={"100vh"}
           columns={[
             // {
@@ -109,21 +159,23 @@ export function Gantt({ data, toolbarOptions }: ganttOptionsProps) {
               headerText: "Início real",
               headerTextAlign: "Center",
               textAlign: "Center",
-              format: "dd/MM/yyyy",
+              format: "dd/MM/yyyy HH:mm",
+              type: "date",
             },
             {
               field: "EndDate",
               headerText: "Fim real",
               headerTextAlign: "Center",
               textAlign: "Center",
-              format: "dd/MM/yyyy",
+              format: "dd/MM/yyyy HH:mm",
+              type: "date",
             },
             {
               field: "BaselineStartDate",
               headerText: "Início planejado",
               headerTextAlign: "Center",
               textAlign: "Center",
-              format: "dd/MM/yyyy",
+              format: "dd/MM/yyyy HH:mm",
               type: "date",
             },
             {
@@ -131,7 +183,7 @@ export function Gantt({ data, toolbarOptions }: ganttOptionsProps) {
               headerText: "Fim planejado",
               headerTextAlign: "Center",
               textAlign: "Center",
-              format: "dd/MM/yyyy",
+              format: "dd/MM/yyyy HH:mm",
               type: "date",
             },
             {
@@ -139,6 +191,7 @@ export function Gantt({ data, toolbarOptions }: ganttOptionsProps) {
               headerText: "Duração real",
               headerTextAlign: "Center",
               textAlign: "Center",
+              format: "n",
             },
             {
               field: "BaselineDuration",
@@ -163,6 +216,10 @@ export function Gantt({ data, toolbarOptions }: ganttOptionsProps) {
         >
           <Inject services={[Edit, Toolbar]} />
         </GanttComponent>
+      ) : (
+        <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
+          <Ring speed={2} lineWeight={5} color="blue" size={64} />
+        </Flex>
       )}
     </>
   );

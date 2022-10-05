@@ -1,6 +1,7 @@
+import { useState } from "react";
+
 import {
   Flex,
-  Text,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -16,17 +17,17 @@ import {
   useBreakpointValue,
   Input,
 } from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
 
+import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
+import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { TextError } from "components/TextError";
-
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroTarefa } from "hooks/useCadastroTarefa";
 
 function ModalCadastrarTarefa() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroTarefa();
+  const [refresh, setRefresh] = useState(false);
 
   return (
     <>
@@ -101,7 +102,7 @@ function ModalCadastrarTarefa() {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
+              {/* <Flex gap={2}>
                 <Button
                   variant="ghost"
                   color="red"
@@ -133,6 +134,21 @@ function ModalCadastrarTarefa() {
                     </>
                   )}
                 </Button>
+              </Flex> */}
+              <Flex gap={2}>
+                <BotaoVermelhoGhost
+                  text={"Cancelar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                />
+                <BotaoAzulPrimary
+                  text={"Concluir Cadastro"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                  loading={loading}
+                />
               </Flex>
             </ModalFooter>
           </form>

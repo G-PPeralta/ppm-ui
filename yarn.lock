@@ -11760,6 +11760,11 @@ react-clientside-effect@^1.2.6:
   dependencies:
     "@babel/runtime" "^7.12.13"
 
+react-currency-input-field@^3.6.5:
+  version "3.6.5"
+  resolved "https://registry.yarnpkg.com/react-currency-input-field/-/react-currency-input-field-3.6.5.tgz#67ed7005a2f1402cb70a23050f6b997e6d1452b6"
+  integrity sha512-tP62WFAhkVv0RGOQVGEPE3MfgciQ4gkiASlmLBDu6tdfMC3jFhIkLU1uqUy3glUvRHyT4avnX/YVVbbXKHLtnA==
+
 react-datepicker@^4.8.0:
   version "4.8.0"
   resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-4.8.0.tgz#11b8918d085a1ce4781eee4c8e4641b3cd592010"

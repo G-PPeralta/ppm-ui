@@ -1,6 +1,7 @@
+import { useState } from "react";
+
 import {
   Flex,
-  Text,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -15,11 +16,11 @@ import {
   useBreakpointValue,
   Input,
 } from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
 
+import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
+import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
@@ -31,6 +32,7 @@ import SelectFiltragemResponsavel from "./SelectFiltragemResponsavel";
 function ModalCadastroAtividade() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroAtividade();
+  const [refresh, setRefresh] = useState(false);
 
   return (
     <>
@@ -158,7 +160,7 @@ function ModalCadastroAtividade() {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
+              {/* <Flex gap={2}>
                 <Button
                   variant="ghost"
                   color="red"
@@ -190,6 +192,21 @@ function ModalCadastroAtividade() {
                     </>
                   )}
                 </Button>
+              </Flex> */}
+              <Flex gap={2}>
+                <BotaoVermelhoGhost
+                  text={"Cancelar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                />
+                <BotaoAzulPrimary
+                  text={"Concluir Cadastro"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                  loading={loading}
+                />
               </Flex>
             </ModalFooter>
           </form>

@@ -53,11 +53,7 @@ function CardInfoProjeto({
           alignItems={"center"}
           // justifyContent={"center"}
         >
-          {progresso ? (
-            <PercentagePieChartProjetoInfo data={chartsProps} />
-          ) : (
-            <span>loading...</span>
-          )}
+          {!loading && <PercentagePieChartProjetoInfo data={chartsProps} />}
           <Heading as="h4" size="md" ml={4}>
             {infoProjeto.nome_projeto}
           </Heading>

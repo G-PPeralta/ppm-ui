@@ -6,15 +6,15 @@ function AtividadesPorStatus({ status }: any) {
   const statusComCor = status.map((item: any) => {
     switch (item.status) {
       case "Não Iniciado":
-        return { ...item, cor: "#FFB400" };
-      case "Concluído":
-        return { ...item, cor: "#059502" };
+        return { ...item, cor: "#585858" };
       case "Em Andamento":
         return { ...item, cor: "#0047BB" };
+      case "Concluído":
+        return { ...item, cor: "#027200" };
       case "Atrasado":
-        return { ...item, cor: "#F40606" };
+        return { ...item, cor: "#BD0000" };
       default:
-        return { ...item, cor: "#F4DD06" };
+        return { ...item, cor: "#C2561A" };
     }
   });
 

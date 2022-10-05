@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 
-import { Button, Flex, FormLabel, useBreakpointValue } from "@chakra-ui/react";
+import { Button, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
@@ -44,7 +44,9 @@ function DateTimePickerDataInicio({ registerForm, data }: any) {
     <Flex direction={"column"}>
       <Flex gap={1}>
         <RequiredField />
-        <FormLabel>DATA INÍCIO</FormLabel>
+        <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
+          DATA INÍCIO
+        </Text>
       </Flex>
       <ReactDatePicker
         selected={dataInicio}

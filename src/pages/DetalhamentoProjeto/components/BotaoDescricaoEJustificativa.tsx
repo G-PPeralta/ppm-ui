@@ -13,6 +13,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -29,9 +30,9 @@ function BotaoDescricaoEJustificativa() {
       <Button
         onClick={onOpen}
         background={"white"}
-        color={"origem.300"}
+        color={"#0047BB"}
         _hover={{
-          background: "origem.500",
+          background: "#0047BB",
           color: "white",
           transition: "all 0.4s",
         }}
@@ -39,11 +40,14 @@ function BotaoDescricaoEJustificativa() {
         py={9}
         borderTopRadius={"6px"}
         borderBottomRadius={"0px"}
+        fontSize={"16px"}
+        fontWeight={"700"}
+        flexWrap={"wrap"}
       >
         Descrição e Justificativa
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} size={"lg"}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -52,7 +56,8 @@ function BotaoDescricaoEJustificativa() {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Justificativa e Descrição
           </ModalHeader>
@@ -60,20 +65,29 @@ function BotaoDescricaoEJustificativa() {
           <ModalBody>
             <FormControl marginBottom={4} padding={1}>
               <Flex direction={"column"}>
+                <Text fontSize={"14px"} fontWeight={"700"}>
+                  Justificativa
+                </Text>
                 <FormLabel
+                  mt={"6px"}
                   htmlFor="justificativa"
-                  color="#D6D4D4"
-                  fontSize="sm"
-                  fontWeight="500"
+                  color="#949494"
+                  fontSize="12px"
+                  fontWeight="700"
                 >
                   JUSTIFICATIVA
                 </FormLabel>
                 <Textarea
+                  mt={"-9px"}
+                  fontSize={"14px"}
+                  color={"#949494"}
+                  fontWeight={"400"}
                   isRequired
-                  placeholder="Justificativa"
+                  placeholder="Digite a justificativa"
                   id="justificativa"
                   name="justificativa"
-                  width="100%"
+                  width="456px"
+                  height={"121px"}
                   value={justificativa}
                   onChange={(event) => setJustificativa(event.target.value)}
                 />
@@ -94,44 +108,59 @@ function BotaoDescricaoEJustificativa() {
               </FormControl> */}
             <FormControl padding={1}>
               <Flex direction={"column"}>
+                <Text fontSize={"14px"} fontWeight={"700"}>
+                  Descrição
+                </Text>
                 <FormLabel
                   htmlFor="descricao"
-                  color="#D6D4D4"
-                  fontSize="sm"
-                  fontWeight="500"
+                  color="#949494"
+                  fontSize="12px"
+                  fontWeight="700"
+                  mt={"6px"}
                 >
                   DESCRIÇÃO
                 </FormLabel>
                 <Textarea
+                  mt={"-9px"}
+                  fontSize={"14px"}
+                  color={"#949494"}
+                  fontWeight={"400"}
                   isRequired
-                  placeholder="Descrição"
-                  // type="text"
+                  placeholder="Digite a descrição"
                   id="descricao"
                   name="descricao"
-                  width="100%"
+                  width="456px"
+                  height={"121px"}
                   value={descricao}
                   onChange={(event) => setDescricao(event.target.value)}
                 />
               </Flex>
             </FormControl>
           </ModalBody>
-          <ModalFooter justifyContent={"center"}>
-            <Flex gap={2}>
+          <ModalFooter
+            justifyContent={"center"}
+            alignContent={"center"}
+            alignItems={"center"}
+          >
+            <Flex gap={16} align={"center"}>
               <Button
                 // background="origem.300"
                 variant="primary"
-                color="red"
+                color="#F40606"
                 _hover={{
                   background: "red.500",
                   transition: "all 0.4s",
                   color: "white",
                 }}
                 onClick={onClose}
+                width={"76px"}
+                height={"20px"}
+                fontSize={"18px"}
+                fontWeight={"600"}
               >
                 Cancelar
               </Button>
               <Button
-                background="origem.300"
                 variant="primary"
                 color="white"
                 _hover={{
@@ -144,8 +173,11 @@ function BotaoDescricaoEJustificativa() {
                   setJustificativa("");
                   onClose();
                 }}
+                width={"206px"}
+                height={"55px"}
+                bg={"#0047BB"}
               >
-                Confirmar
+                Salvar
               </Button>
             </Flex>
           </ModalFooter>

@@ -5,7 +5,7 @@ import {
   DroppableProvided,
 } from "react-beautiful-dnd";
 
-import { Flex, FormLabel } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
@@ -207,7 +207,7 @@ any) {
     <>
       <Flex gap={1}>
         <RequiredField />
-        <FormLabel mb={0}>ATIVIDADES</FormLabel>
+        <Text fontWeight={"bold"}>Atividades</Text>
       </Flex>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId={droppableId}>
