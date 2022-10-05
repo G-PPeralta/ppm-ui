@@ -35,6 +35,12 @@ function CardInfoProjeto({
     },
   ];
   const innerWidth = window.innerWidth;
+
+  function formatDate(date: Date) {
+    const formated = date.toString().substring(0, 10).split("-");
+    return `${formated[2]}/${formated[1]}/${formated[0]}`;
+  }
+
   return (
     <>
       <Flex
@@ -161,7 +167,7 @@ function CardInfoProjeto({
               >
                 {infoProjeto.data_inicio === null
                   ? "01/01/1900"
-                  : infoProjeto.data_inicio}
+                  : formatDate(infoProjeto.data_inicio)}
               </Text>
             </Flex>
 
@@ -177,7 +183,7 @@ function CardInfoProjeto({
               >
                 {infoProjeto.data_fim === null
                   ? "31/12/1900"
-                  : infoProjeto.data_fim}
+                  : formatDate(infoProjeto.data_fim)}
               </Text>
             </Flex>
 
