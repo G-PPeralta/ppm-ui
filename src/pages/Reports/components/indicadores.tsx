@@ -53,7 +53,7 @@ export function Indicadores() {
             <RiCloseCircleFill color={"#F40606"} size={25} />
             <Heading
               as="h3"
-              size="lg"
+              size={{ base: "md", md: "lg" }}
               fontWeight={"semibold"}
               color={"gray.800"}
             >
@@ -61,7 +61,7 @@ export function Indicadores() {
             </Heading>
             <Heading
               as="h3"
-              size="lg"
+              size={{ base: "md", md: "lg" }}
               fontWeight={"semibold"}
               color={"#F40606"}
             >
@@ -88,7 +88,7 @@ export function Indicadores() {
             <AiFillCheckCircle color={"#059502"} />
             <Heading
               as="h3"
-              size="lg"
+              size={{ base: "md", md: "lg" }}
               fontWeight={"semibold"}
               color={"gray.800"}
             >
@@ -96,7 +96,7 @@ export function Indicadores() {
             </Heading>
             <Heading
               as="h3"
-              size="lg"
+              size={{ base: "md", md: "lg" }}
               fontWeight={"semibold"}
               color={"#059502"}
             >
