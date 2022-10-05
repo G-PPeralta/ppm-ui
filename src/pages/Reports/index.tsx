@@ -137,7 +137,7 @@ export function Reports() {
             </Flex>
 
             {width === "mobile" ? (
-              <Flex flexDirection="column" gap={"2"} alignItems={"end"}>
+              <Flex flexDirection="column" gap={"2"}>
                 <Flex direction={"row"} gap={"4"}>
                   <FormControl maxW={"100%"}>
                     <FormLabel htmlFor="report" color={"gray.400"}>
@@ -177,7 +177,7 @@ export function Reports() {
                   </FormControl>
                 </Flex>
                 {(report == "6" || report == "5" || report == "2") && (
-                  <FormControl maxW={"30%"}>
+                  <FormControl maxW={"100%"}>
                     <FormLabel htmlFor="report" color={"gray.400"}>
                       PROJETO
                     </FormLabel>
@@ -199,7 +199,7 @@ export function Reports() {
               </Flex>
             ) : (
               <Flex flexDirection="row" gap={"4"} alignItems={"end"}>
-                <FormControl maxW={{ base: "100%", sm: "30%" }}>
+                <FormControl maxW={"30%"}>
                   <FormLabel htmlFor="report" color={"gray.400"}>
                     TIPO DO RELATÓRIO
                   </FormLabel>
@@ -221,7 +221,7 @@ export function Reports() {
                   </Select>
                 </FormControl>
                 {(report == "6" || report == "5" || report == "2") && (
-                  <FormControl maxW={{ base: "100%", sm: "30%" }}>
+                  <FormControl maxW={"30%"}>
                     <FormLabel htmlFor="report" color={"gray.400"}>
                       PROJETO
                     </FormLabel>
