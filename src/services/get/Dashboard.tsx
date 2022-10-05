@@ -26,6 +26,32 @@ export async function getOrcamentoTotal(): Promise<{
   return { data, status };
 }
 
+export async function getTotalRealizado(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/dashboard/realizado", {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
+    },
+  });
+
+  return { data, status };
+}
+
+export async function getTotalNaoPrevisto(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/dashboard/nao-previsto", {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
+    },
+  });
+
+  return { data, status };
+}
+
 export async function getAreasDemandadas(): Promise<{
   data: any;
   status: number;
