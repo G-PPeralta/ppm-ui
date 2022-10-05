@@ -23,10 +23,12 @@ import { patchProjeto } from "services/update/Projeto";
 
 interface DescricaoEJustificativaProps {
   infoProjeto: ICardInfoProjeto;
+  setRender: () => void;
 }
 
 function BotaoDescricaoEJustificativa({
   infoProjeto,
+  setRender,
 }: DescricaoEJustificativaProps) {
   const { id } = useParams();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -181,6 +183,7 @@ function BotaoDescricaoEJustificativa({
                   await patchProjeto(Number(id), { descricao, justificativa });
                   setDescricao("");
                   setJustificativa("");
+                  setRender();
                   onClose();
                 }}
                 width={"206px"}

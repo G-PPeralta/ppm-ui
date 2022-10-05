@@ -15,19 +15,6 @@ export async function getProjetos(): Promise<{
   return { data, status };
 }
 
-export async function getProjeto(id: number): Promise<{
-  data: any;
-  status: number;
-}> {
-  const { data, status } = await api.get(`/projetos/${id}`, {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
-
-  return { data, status };
-}
-
 export async function getTipoResponsavel(): Promise<{
   data: any;
   status: number;

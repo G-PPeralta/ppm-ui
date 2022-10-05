@@ -10,6 +10,7 @@ function BotoesModais({
   categorias,
   callBack,
   infoProjeto,
+  setRender,
 }: any) {
   return (
     <>
@@ -21,7 +22,10 @@ function BotoesModais({
         shrink={1}
         basis={"100px"}
       >
-        <BotaoDescricaoEJustificativa infoProjeto={infoProjeto} />
+        <BotaoDescricaoEJustificativa
+          infoProjeto={infoProjeto}
+          setRender={setRender}
+        />
         <BotaoListadeTarefas />
         <LicoesAprendidasModal
           licoes={licoes}
