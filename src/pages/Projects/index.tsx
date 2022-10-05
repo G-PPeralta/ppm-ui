@@ -21,8 +21,8 @@ import Sidebar from "components/SideBar";
 
 import { useProjects } from "hooks/useProjects";
 
-import { TabelaProjetos } from "./components/TabelaProjetos";
 import "./projects.css";
+import { TabelaProjetos } from "./Components/TabelaProjetos";
 
 export function Projects() {
   const { projectsForm, loading, getProjetosDetalhados } = useProjects();
