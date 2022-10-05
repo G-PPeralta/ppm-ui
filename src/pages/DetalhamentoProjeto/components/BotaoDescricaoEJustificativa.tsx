@@ -17,14 +17,24 @@ import {
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
+import { ICardInfoProjeto } from "interfaces/DetalhamentoProjetos";
 
 import { patchProjeto } from "services/update/Projeto";
 
-function BotaoDescricaoEJustificativa() {
+interface DescricaoEJustificativaProps {
+  infoProjeto: ICardInfoProjeto;
+}
+
+function BotaoDescricaoEJustificativa({
+  infoProjeto,
+}: DescricaoEJustificativaProps) {
   const { id } = useParams();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [descricao, setDescricao] = useState("");
-  const [justificativa, setJustificativa] = useState("");
+  const [descricao, setDescricao] = useState(infoProjeto?.descricao);
+  const [justificativa, setJustificativa] = useState(
+    infoProjeto?.justificativa
+  );
+
   return (
     <>
       <Button

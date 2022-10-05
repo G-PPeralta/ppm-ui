@@ -8,4 +8,6 @@ export interface ICardInfoProjeto {
   demanda: string;
   nome_responsavel: string;
   coordenador_nome: string;
+  descricao: string;
+  justificativa: string;
 }
