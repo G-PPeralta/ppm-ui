@@ -35,6 +35,7 @@ export function Gantt({ data, options }: ganttOptionsProps) {
   }, [data]);
 
   const queryTaskbarInfo = (args: any) => {
+    // console.log(":::args.data.taskData", args.data.taskData);
     let color;
     const { Duration, med, dp } = args.data.taskData;
 
@@ -70,7 +71,9 @@ export function Gantt({ data, options }: ganttOptionsProps) {
     // leftLabel: "TaskID",
     // taskLabel: "${Progress}%",
     // eslint-disable-next-line no-template-curly-in-string
-    rightLabel: "${TaskName}",
+    rightLabel:
+      // eslint-disable-next-line no-template-curly-in-string
+      "Med: ${taskData.med}h - Min: ${taskData.min}h - Max: ${taskData.max}h - DP: ${taskData.dp}h",
   };
 
   // const handleShowGantt = () => (options?.showGantt ? "Default" : "Grid");
@@ -79,12 +82,12 @@ export function Gantt({ data, options }: ganttOptionsProps) {
     options?.handleEdit(args.data.taskData);
   };
 
-  const cellEdit = (args: any) => {
-    // console.log(">>> args.columnName ", args.columnName);
-    if (args.columnName !== "Progress") {
-      args.cancel = true;
-    }
-  };
+  // const cellEdit = (args: any) => {
+  //   // console.log(">>> args.columnName ", args.columnName);
+  //   if (args.columnName !== "Progress") {
+  //     args.cancel = true;
+  //   }
+  // };
 
   useEffect(() => {
     setTimeout(() => {
@@ -134,7 +137,7 @@ export function Gantt({ data, options }: ganttOptionsProps) {
             position: "80%",
           }}
           endEdit={endEdit}
-          cellEdit={cellEdit}
+          // cellEdit={cellEdit}
           height={"100vh"}
           columns={[
             // {
