@@ -7,7 +7,7 @@ function BotaoVisaoPorArea() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/atividade/${id}/visao-por-area`);
+    navigate(`/infographics/atividade/${id}/visao-por-area`);
   };
 
   return (

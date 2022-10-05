@@ -150,90 +150,120 @@ export function Gantt({ toolbarOptions }: ganttOptionsProps) {
   return (
     <>
       {!loading && (
-        <GanttComponent
-          id="gantt-control"
-          dataSource={gantt}
-          taskFields={{
-            id: "TaskID",
-            name: "TaskName",
-            startDate: "StartDate",
-            endDate: "EndDate",
-            duration: "Duration",
-            progress: "Progress",
-            dependency: "Predecessor",
-            child: "subtasks",
-          }}
-          // taskFields={ganttData.macroatividades.map((macroatividade) => ({
-          //   id: macroatividade.macroatividade_id,
-          //   item: macroatividade.macroatividade_item,
-          //   name: macroatividade.macroatividade_nome,
-          //   child: macroatividade.micro.map((microatividade) => ({
-          //     id: microatividade.macroatividade_id,
-          //     item: microatividade.item,
-          //     name: microatividade.nome_projeto,
-          //     startDate: microatividade.data_inicio,
-          //     endDate: microatividade.data_fim,
-          //     duration: microatividade.duracao,
-          //     progress: microatividade.progresso,
-          //   })),
-          // }))}
-          toolbar={toolbarOptions || []}
-          editSettings={{
-            allowTaskbarEditing: false,
-            allowEditing: true,
-          }}
-          height={"100vh"}
-          columns={[
-            { field: "Item", type: "string" },
-            {
-              field: "TaskID",
-              headerText: "ID",
-              visible: false,
-            },
-            {
-              field: "TaskName",
-              headerText: "Ação/Projeto",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              type: "string",
-            },
-            {
-              field: "StartDate",
-              headerText: "Data Início",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "dd/MM/yyyy",
-            },
-            {
-              field: "EndDate",
-              headerText: "Data Fim",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "dd/MM/yyyy",
-            },
-            {
-              field: "Duration",
-              headerText: "Duração",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-            },
-            {
-              field: "Progress",
-              headerText: "Progresso (%)",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "n",
-            },
-            {
-              field: "Predecessor",
-              headerText: "Predecessor",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-            },
-          ]}
-        >
-          <Inject services={[Edit, Toolbar]} />
-        </GanttComponent>
+        <>
+          <header
+            style={{
+              display: "flex",
+              borderBottom: "1px solid black",
+              background: "white",
+              height: "64px",
+              alignItems: "center",
+              borderRadius: "8px 8px 0px 0px",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "Mulish",
+                fontWeight: 700,
+                fontSize: "24px",
+                marginLeft: "15px",
+              }}
+            >
+              Gráfico Gantt
+            </p>
+          </header>
+          <GanttComponent
+            id="gantt-control"
+            dataSource={gantt}
+            taskFields={{
+              id: "TaskID",
+              name: "TaskName",
+              startDate: "StartDate",
+              endDate: "EndDate",
+              duration: "Duration",
+              progress: "Progress",
+              dependency: "Predecessor",
+              child: "subtasks",
+            }}
+            // taskFields={ganttData.macroatividades.map((macroatividade) => ({
+            //   id: macroatividade.macroatividade_id,
+            //   item: macroatividade.macroatividade_item,
+            //   name: macroatividade.macroatividade_nome,
+            //   child: macroatividade.micro.map((microatividade) => ({
+            //     id: microatividade.macroatividade_id,
+            //     item: microatividade.item,
+            //     name: microatividade.nome_projeto,
+            //     startDate: microatividade.data_inicio,
+            //     endDate: microatividade.data_fim,
+            //     duration: microatividade.duracao,
+            //     progress: microatividade.progresso,
+            //   })),
+            // }))}
+            toolbar={toolbarOptions || []}
+            editSettings={{
+              allowTaskbarEditing: false,
+              allowEditing: true,
+            }}
+            height={"100vh"}
+            columns={[
+              { field: "Item", type: "string" },
+              {
+                field: "TaskID",
+                headerText: "ID",
+                visible: false,
+              },
+              {
+                field: "TaskName",
+                headerText: "Ação/Projeto",
+                headerTextAlign: "Center",
+                textAlign: "Center",
+                type: "string",
+              },
+              {
+                field: "StartDate",
+                headerText: "Data Início",
+                headerTextAlign: "Center",
+                textAlign: "Center",
+                format: "dd/MM/yyyy",
+              },
+              {
+                field: "EndDate",
+                headerText: "Data Fim",
+                headerTextAlign: "Center",
+                textAlign: "Center",
+                format: "dd/MM/yyyy",
+              },
+              {
+                field: "Duration",
+                headerText: "Duração",
+                headerTextAlign: "Center",
+                textAlign: "Center",
+              },
+              {
+                field: "Progress",
+                headerText: "Progresso (%)",
+                headerTextAlign: "Center",
+                textAlign: "Center",
+                format: "n",
+              },
+              {
+                field: "Predecessor",
+                headerText: "Predecessor",
+                headerTextAlign: "Center",
+                textAlign: "Center",
+              },
+            ]}
+          >
+            {/* <footer
+              style={{
+                background: "white",
+                height: "2px",
+                borderRadius: "8px",
+              }}
+            ></footer> */}
+            <Inject services={[Edit, Toolbar]} />
+          </GanttComponent>
+        </>
       )}
     </>
   );

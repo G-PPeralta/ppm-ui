@@ -10,24 +10,28 @@ import {
   ModalHeader,
   ModalOverlay,
   Stack,
-  Text,
   Textarea,
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
 
+import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
+import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
+import SelectFiltragem from "components/SelectFiltragem";
 import { TextError } from "components/TextError";
-
-import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 
-import SelectFiltragemSondas from "./SelectFiltragemSonda";
+// import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
 function ModalNovaCampanha({ setRefresh, refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroCampanha();
+  const { registerForm, loading, listaServicosSondas } = useCadastroCampanha();
+
+  const optionsServicoSonda = listaServicosSondas.map((sonda: any) => ({
+    value: sonda.id,
+    label: sonda.nom_sonda,
+  }));
 
   return (
     <>
@@ -77,10 +81,17 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                       gap={5}
                     >
                       <FormControl>
-                        <SelectFiltragemSondas
+                        {/* <SelectFiltragemSondas
                           form={registerForm}
                           nomeChave={"nom_campanha"}
                           nomeLabel={"NOME"}
+                        /> */}
+                        <SelectFiltragem
+                          registerForm={registerForm}
+                          nomeSelect={"SONDA"}
+                          propName={"id_projeto"}
+                          options={optionsServicoSonda}
+                          // idCampanha={idCampanha}
                         />
                       </FormControl>
                     </Flex>
@@ -121,7 +132,7 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
+              {/* <Flex gap={2}>
                 <Button
                   variant="ghost"
                   color="red"
@@ -162,6 +173,21 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                     </>
                   )}
                 </Button>
+              </Flex> */}
+              <Flex gap={2}>
+                <BotaoVermelhoGhost
+                  text={"Cancelar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                />
+                <BotaoAzulPrimary
+                  text={"Concluir Cadastro"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                  loading={loading}
+                />
               </Flex>
             </ModalFooter>
           </form>

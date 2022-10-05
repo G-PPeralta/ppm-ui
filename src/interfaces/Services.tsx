@@ -208,9 +208,32 @@ export interface TotalOrcamento {
   totalOrcamento: number;
 }
 
+export interface TotalRealizado {
+  totalRealizado: number;
+}
+
+export interface TotalNaoPrevisto {
+  totalRealizado: number;
+}
+
 export interface AreasDemandadas {
   qtd: number;
   solicitante: string;
+}
+
+export interface InfoFinanceira {
+  planejado: number;
+  realizado: number;
+  naoPrevisto: number;
+  remanescente: number;
+  pctRealizado: number;
+  pctRemanescente: number;
+  pctNaoPrevisto: number;
+}
+
+export interface CpiSpi {
+  cpi: number;
+  spi: number;
 }
 
 export interface ComplexidadesPrioridades {
@@ -429,4 +452,34 @@ export interface StatisticsTableData {
   med?: number;
   dp?: number;
   use?: string;
+}
+
+export interface TarefaAtividade {
+  id?: number;
+  nome_tarefa: string;
+  data_tarefa: Date;
+  atividade_relacionada: number;
+  descricao_tarefa: string;
+  nom_usu_create?: string;
+  status?: number;
+}
+
+export interface TarefaAtividadeComId {
+  id: number;
+  nome_tarefa: string;
+  data_tarefa: Date;
+  atividade_relacionada: number;
+  descricao_tarefa: string;
+  nom_usu_create?: string;
+  status?: number;
+}
+
+export interface AtividadesProjeto {
+  id: number;
+  nomeAtividade: string;
+  tipoAtividade: string;
+  deletado: boolean;
+  macroatividadeId: number;
+  item: string;
+  temporario: boolean;
 }

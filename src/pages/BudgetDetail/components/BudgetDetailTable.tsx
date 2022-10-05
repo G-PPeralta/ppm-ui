@@ -1,5 +1,7 @@
 import { FiChevronDown, FiPrinter } from "react-icons/fi";
 
+import "./expansiveTable.css";
+// import ModalCadastrarOrcamentoPrevisto from "./ModalCadastrarOrcamentoPrevisto";
 import {
   Flex,
   IconButton,
@@ -12,10 +14,8 @@ import {
   Tr,
   Text,
 } from "@chakra-ui/react";
-import { BudgetDetail } from "models/Budget.model";
+import { BudgetDetail } from "interfaces/Budgets";
 
-import "./expansiveTable.css";
-// import ModalCadastrarOrcamentoPrevisto from "./ModalCadastrarOrcamentoPrevisto";
 import CampoEditavel from "./CampoEditavel";
 import ModalGestaoDeCusto from "./ModalGestaoDeCusto";
 

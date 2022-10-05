@@ -1,4 +1,4 @@
-import { Budget, BudgetDetail } from "models/Budget.model";
+import { Budget, BudgetDetail } from "interfaces/Budgets";
 
 import { api, token } from "services/api";
 
@@ -144,6 +144,15 @@ export async function getBudgetDetail(): Promise<BudgetDetail[]> {
     },
   ]; */
   const { data } = await api.get<BudgetDetail[]>(uri, token());
+
+  return data;
+}
+
+export async function getBudgetProjects(): Promise<
+  { nome: string; id: number }[]
+> {
+  const uri = "/budgets/projects";
+  const { data } = await api.get<{ nome: string; id: number }[]>(uri, token());
 
   return data;
 }

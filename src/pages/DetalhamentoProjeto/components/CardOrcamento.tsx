@@ -1,10 +1,46 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { IoIosWallet } from "react-icons/io";
+import { useParams } from "react-router-dom";
 
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { CpiSpi, InfoFinanceira } from "interfaces/Services";
+
+import {
+  getCPiSPi,
+  getInfoFinanceiro,
+} from "services/get/DetalhamentoProjetos";
 
 function CardOrcamento() {
+  const { id } = useParams();
+  const [cpiSpi, setCpiSpi] = useState([] as CpiSpi[]);
+  const [loading, setLoading] = useState(false);
+  const [infoFinanceira, setInfoFinanceira] = useState([] as InfoFinanceira[]);
+
+  async function handleGetCpiSpi() {
+    setLoading(true);
+    const reqGet = await getCPiSPi();
+    setCpiSpi(reqGet.data);
+    setLoading(false);
+  }
+
+  async function handleGetInfoFinanceira() {
+    if (id) {
+      const { data } = await getInfoFinanceiro(id);
+      setInfoFinanceira(data);
+    }
+  }
+
+  useEffect(() => {
+    handleGetCpiSpi();
+    handleGetInfoFinanceira();
+    setLoading(false);
+  }, []);
+
+  const naoPrevisto =
+    Number(infoFinanceira[0]?.realizado) - Number(infoFinanceira[0]?.planejado);
+
   return (
     <>
       <Flex
@@ -30,7 +66,7 @@ function CardOrcamento() {
               R$
             </Text>
             <Text fontSize={18} ml={2} fontWeight={600}>
-              100.000.000,00
+              {infoFinanceira[0]?.planejado.toLocaleString() + ",00"}
             </Text>
           </Box>
         </Box>
@@ -52,7 +88,10 @@ function CardOrcamento() {
                     R$
                   </Text>
                   <Text fontSize={16} ml={2} fontWeight={600}>
-                    50.000.000,00
+                    {(
+                      Number(infoFinanceira[0]?.planejado) -
+                      Number(infoFinanceira[0]?.realizado)
+                    ).toLocaleString() + ",00"}
                   </Text>
                 </Box>
               </Box>
@@ -67,8 +106,18 @@ function CardOrcamento() {
                 width={"48px"}
                 borderRadius={2}
               >
-                <Text p={1} color="#ffffff" fontSize={20} fontWeight={"600"}>
-                  50%
+                <Text
+                  p={1}
+                  color="#ffffff"
+                  fontSize={"16px"}
+                  fontWeight={"600"}
+                >
+                  {(
+                    ((Number(infoFinanceira[0]?.planejado) -
+                      Number(infoFinanceira[0]?.realizado)) /
+                      Number(infoFinanceira[0]?.planejado)) *
+                    100
+                  ).toLocaleString() + "%"}
                 </Text>
               </Box>
             </Flex>
@@ -79,7 +128,10 @@ function CardOrcamento() {
                   <BsCheckCircleFill />
                 </Text>
                 <Text ml={2} fontSize={16} fontWeight={600}>
-                  CPI = 1
+                  CPI ={" "}
+                  {!loading && id == "443"
+                    ? cpiSpi[0]?.cpi.toLocaleString()
+                    : 0}
                 </Text>
               </Box>
               <Box display={"flex"} alignItems={"center"} ml={4}>
@@ -87,7 +139,10 @@ function CardOrcamento() {
                   <BsCheckCircleFill />
                 </Text>
                 <Text ml={2} fontSize={16} fontWeight={600}>
-                  SPI = 1
+                  SPI ={" "}
+                  {!loading && id == "443"
+                    ? cpiSpi[0]?.spi.toLocaleString()
+                    : 0}
                 </Text>
               </Box>
             </Flex>
@@ -109,7 +164,7 @@ function CardOrcamento() {
                     R$
                   </Text>
                   <Text fontSize={16} ml={2} fontWeight={600}>
-                    50.000.000,00
+                    {infoFinanceira[0]?.realizado.toLocaleString() + ",00"}
                   </Text>
                 </Box>
               </Box>
@@ -124,8 +179,17 @@ function CardOrcamento() {
                 width={"48px"}
                 borderRadius={2}
               >
-                <Text p={1} color="#ffffff" fontSize={20} fontWeight={"600"}>
-                  50%
+                <Text
+                  p={1}
+                  color="#ffffff"
+                  fontWeight={"600"}
+                  fontSize={"16px"}
+                >
+                  {(
+                    (Number(infoFinanceira[0]?.realizado) /
+                      Number(infoFinanceira[0]?.planejado)) *
+                    100
+                  ).toLocaleString() + "%"}
                 </Text>
               </Box>
             </Flex>
@@ -141,7 +205,9 @@ function CardOrcamento() {
                     R$
                   </Text>
                   <Text fontSize={16} ml={2} fontWeight={600}>
-                    5.000.000,00
+                    {naoPrevisto > 0
+                      ? naoPrevisto.toLocaleString() + ",00"
+                      : "0,00"}
                   </Text>
                 </Box>
               </Box>
@@ -157,7 +223,12 @@ function CardOrcamento() {
                 borderRadius={2}
               >
                 <Text p={1} color="#ffffff" fontSize={20} fontWeight={"600"}>
-                  5%
+                  {naoPrevisto > 0
+                    ? (Number(naoPrevisto) /
+                        Number(infoFinanceira[0]?.planejado)) *
+                        100 +
+                      "%"
+                    : "0%"}
                 </Text>
               </Box>
             </Flex>

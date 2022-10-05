@@ -28,6 +28,7 @@ import GraficoCurvaS from "./components/GraficoCurvaS";
 function DetalhamentoProjeto() {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
+  const [loadingProgresso, setProgressoLoading] = useState(false);
   const [infoProjeto, setInfoProjeto] = useState<ICardInfoProjeto>({
     nome_projeto: "",
     data_inicio: null,
@@ -64,8 +65,10 @@ function DetalhamentoProjeto() {
   }
 
   async function handleGetProgresso() {
+    setProgressoLoading(true);
     const response = await getProgressoProjeto();
     setProgresso(response.data);
+    setProgressoLoading(false);
   }
 
   useEffect(() => {
@@ -88,8 +91,6 @@ function DetalhamentoProjeto() {
       });
     // handleGetLicoes();
   }, []);
-
-  // console.log(progresso[0].fn_cron_calc_pct_real);
 
   return (
     <>
@@ -117,7 +118,12 @@ function DetalhamentoProjeto() {
             >
               <CardInfoProjeto
                 infoProjeto={infoProjeto}
-                progresso={progresso}
+                progresso={
+                  !loadingProgresso
+                    ? progresso
+                    : [{ fn_cron_calc_pct_real: "00.003848750844" }]
+                }
+                loading={loadingProgresso}
               />
               <CardOrcamento />
               <BotoesModais

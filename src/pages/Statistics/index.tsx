@@ -1,53 +1,37 @@
 import { useState, useEffect } from "react";
+import { BsSearch } from "react-icons/bs";
 
-import {
-  Box,
-  Flex,
-  FormControl,
-  Heading,
-  Input,
-  Stack,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Input, Text } from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
 import { StatisticsTableData } from "interfaces/Services";
 
 import Sidebar from "components/SideBar";
 
-// import { getStatisticsTasks } from "services/get/StatisticsTasks";
-import ModalNovoCronograma from "./components/ModalNovoCronograma";
+import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
+
+// import ModalCadastrarSonda from "./components/ModalCadastrarSonda";
+import ModalCadastroCronograma from "./components/ModalCadastroCronograma";
+import ModalCadastroOperacao from "./components/ModalCadastroOperação";
+// import ModalCadastroPoco from "./components/ModalCadastroPoco";
 import { StatisticsTable } from "./components/StatisticsTable";
-import { atividades } from "./projeto";
 
 function Statistics() {
-  // const [op, setOp] = useState("0");
   const [loading, setLoading] = useState(true);
   const [allData, setAllData] = useState<StatisticsTableData[]>([]);
   const [filter, setFilter] = useState<StatisticsTableData[]>();
+  const [refresh, setRefresh] = useState(false);
+  const [search, setSearch] = useState("");
 
   const convertReq = (payload: any): StatisticsTableData[] => {
     const newData: StatisticsTableData[] = [];
     payload.forEach((s: { id_sonda: number; sonda: string; pocos: any[] }) =>
       s.pocos.forEach((p) => {
-        const hrs_reais = p.atividades.map((e: any) => Number(e.hrs_reais));
-        const med =
-          hrs_reais.reduce((a: any, b: any) => a + b, 0) / hrs_reais.length;
-        const dp = Math.sqrt(
-          hrs_reais
-            .map((x: any) => Math.pow(x - med, 2))
-            .reduce((a: any, b: any) => a + b) / hrs_reais.length
-        );
-        // TODO use deve ser p/ cada atividade
-        const use = ["max", "min", "med", "dp"][Math.floor(Math.random() * 4)];
         newData.push({
           sonda: s.sonda,
           id_sonda: s.id_sonda,
           poco: p.poco,
           id_poco: p.id_poco,
           atividades: p.atividades,
-          max: Math.max(...hrs_reais),
-          min: Math.min(...hrs_reais),
-          med: Math.floor(med),
-          dp: Math.floor(dp),
-          use,
         });
       })
     );
@@ -55,8 +39,7 @@ function Statistics() {
   };
 
   const handleGetAllData = async () => {
-    // const req = await getStatisticsTasks();
-    const data = atividades; // TODO set req to data
+    const { data } = await getOperacoesEstatisticas();
     if (!data) return;
     const newData = convertReq(data);
     setAllData(newData);
@@ -78,6 +61,10 @@ function Statistics() {
     }
   };
 
+  const handleClick = () => {
+    filterData(search);
+  };
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -90,58 +77,91 @@ function Statistics() {
 
   return (
     <>
-      {!loading && (
-        <Sidebar>
-          <Stack spacing="8">
+      <Sidebar>
+        {!loading ? (
+          <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
             <Box
-              py={{ base: "0", sm: "10" }}
-              px={{ base: "4", sm: "10" }}
+              py={{ base: "6", sm: "8" }}
+              px={{ base: "6", sm: "8" }}
               w={"100%"}
               bg={"white"}
-              // bg={useBreakpointValue({ base: "transparent", sm: "white" })}
-              boxShadow={{
-                base: "none",
-                sm: "md-dark",
-                // sm: useColorModeValue("md", "md-dark"),
-              }}
-              borderRadius={{ base: "none", sm: "xl" }}
+              borderRadius={{ base: "xl", sm: "xl" }}
             >
-              <Heading as="h3" size="md" mb={5}>
-                Operações
-              </Heading>
-              <Stack spacing="5">
-                <Flex
-                // flexDirection={useBreakpointValue({
-                //   base: "column",
-                //   md: "row",
-                // })}
-                >
-                  <FormControl>
+              <Flex justify={"space-between"} mb={5} wrap={"wrap"}>
+                <Heading as="h3" size="md">
+                  Projetos
+                </Heading>
+                <Heading as="h3" size="md" color={"origem.500"}>
+                  Lixeira
+                </Heading>
+              </Flex>
+
+              <Flex justify={"space-between"} wrap={"wrap"}>
+                <Flex direction={"row"} flex={1} align={"end"} gap={2}>
+                  <Flex direction={"column"}>
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      PROJETOS
+                    </Text>
                     <Input
+                      h={"56px"}
                       isRequired
-                      placeholder="Operacao"
+                      placeholder="Projeto"
                       id="name"
                       type="text"
                       name="name"
-                      onChange={(e) => filterData(e.target.value)}
-                      width={300}
+                      onChange={(e) => setSearch(e.target.value)}
                     />
-                  </FormControl>
-                  <ModalNovoCronograma
-                  // refresh={refresh}
-                  // setRefresh={setRefresh}
+                  </Flex>
+                  <Flex>
+                    <Button
+                      h={"56px"}
+                      borderRadius={"10px"}
+                      background={"origem.500"}
+                      variant="primary"
+                      color="white"
+                      onClick={() => handleClick()}
+                      _hover={{
+                        background: "origem.600",
+                        transition: "all 0.4s",
+                      }}
+                      rightIcon={<BsSearch />}
+                      fontWeight={"bold"}
+                    >
+                      Filtrar
+                    </Button>
+                  </Flex>
+                </Flex>
+
+                <Flex gap={2} flex={2} justify={"end"} align={"end"}>
+                  {/* <ModalCadastrarSonda /> */}
+                  {/* <ModalCadastroPoco /> */}
+                  <ModalCadastroOperacao
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
+
+                  <ModalCadastroCronograma
+                    refresh={refresh}
+                    setRefresh={setRefresh}
                   />
                 </Flex>
-              </Stack>
-              <Stack spacing="8">
-                <Flex>
-                  {filter && <StatisticsTable data={filter}></StatisticsTable>}
-                </Flex>
-              </Stack>
+              </Flex>
+
+              <Flex flex={1}>
+                {filter && <StatisticsTable data={filter} />}
+              </Flex>
             </Box>
-          </Stack>
-        </Sidebar>
-      )}
+          </Flex>
+        ) : (
+          <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
+            <Ring speed={2} lineWeight={5} color="blue" size={64} />
+          </Flex>
+        )}
+      </Sidebar>
     </>
   );
 }

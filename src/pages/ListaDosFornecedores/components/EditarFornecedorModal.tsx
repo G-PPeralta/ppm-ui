@@ -15,6 +15,8 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  Text,
+
   // IconButton,
   // Box,
   // Text,
@@ -118,67 +120,164 @@ export function EditarFornecedorModal({
           EDITAR FORNECEDOR
         </Text>
       </Box> */}
-      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="sm">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>EDITAR FORNECEDOR</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
+          <ModalHeader
+            backgroundColor={"#2E69FD"}
+            borderTopRadius={7}
+            display={"flex"}
+            justifyContent={"center"}
+            color={"white"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+          >
+            Editar Fornecedor
+          </ModalHeader>
+          <ModalCloseButton color={"white"} />
+          <ModalBody alignItems={"center"}>
+            <Flex flexDir={"row"} gap={4}>
+              <Flex>
+                <FormControl>
+                  <FormLabel htmlFor="fornecedorNome">
+                    <Text
+                      color="#949494"
+                      fontSize="12px"
+                      fontWeight="700"
+                      mt={"6px"}
+                    >
+                      NOME
+                    </Text>
+                  </FormLabel>
+                  <Input
+                    borderRadius={"8px"}
+                    border={"1px solid #A7A7A7"}
+                    mt={"-9px"}
+                    width={"158px"}
+                    height={"56px"}
+                    color="#949494"
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    isRequired
+                    placeholder="Nome do fornecedor"
+                    type="text"
+                    id="fornecedorNome"
+                    name="fornecedorNome"
+                    value={nome}
+                    onChange={(event) => handleChangeNome(event)}
+                  />
+                </FormControl>
+              </Flex>
+
+              <FormControl>
+                <FormLabel
+                  htmlFor="orçamento"
+                  color="#949494"
+                  fontSize="12px"
+                  fontWeight="700"
+                  mt={"6px"}
+                >
+                  ORÇAMENTO
+                </FormLabel>
+                <Input
+                  borderRadius={"8px"}
+                  border={"1px solid #A7A7A7"}
+                  mt={"-9px"}
+                  width={"158px"}
+                  height={"56px"}
+                  color="#949494"
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  isRequired
+                  placeholder="Orçamento"
+                  type="text"
+                  id="orçamento"
+                  name="orçamento"
+                  value={orcamento}
+                  onChange={(event) => handleChangeOrcamento(event)}
+                />
+              </FormControl>
+            </Flex>
+
+            <Flex flexDir={"row"} gap={4}>
+              <Flex>
+                <FormControl>
+                  <FormLabel
+                    htmlFor="orçamento"
+                    color="#949494"
+                    fontSize="12px"
+                    fontWeight="700"
+                    mt={"6px"}
+                  >
+                    REALIZADO
+                  </FormLabel>
+                  <Input
+                    borderRadius={"8px"}
+                    border={"1px solid #A7A7A7"}
+                    mt={"-9px"}
+                    width={"158px"}
+                    height={"56px"}
+                    color="#949494"
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    isRequired
+                    placeholder="Realizado"
+                    type="text"
+                    id="realizado"
+                    name="realizado"
+                    value={realizado}
+                    onChange={(event) => handleChangeRealizado(event)}
+                  />
+                </FormControl>
+              </Flex>
+              <FormControl>
+                <FormLabel
+                  color="#949494"
+                  fontSize="12px"
+                  fontWeight="700"
+                  mt={"6px"}
+                  htmlFor="orçamento"
+                >
+                  RESPONSÁVEL
+                </FormLabel>
+                <Input
+                  borderRadius={"8px"}
+                  border={"1px solid #A7A7A7"}
+                  mt={"-9px"}
+                  width={"158px"}
+                  height={"56px"}
+                  color="#949494"
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  isRequired
+                  placeholder="Responsável"
+                  type="text"
+                  id="responsável"
+                  name="responsável"
+                  value={responsavel}
+                  onChange={(event) => handleChangeResponsavel(event)}
+                />
+              </FormControl>
+            </Flex>
             <FormControl>
-              <FormLabel htmlFor="fornecedorNome">NOME</FormLabel>
+              <FormLabel
+                htmlFor="orçamento"
+                color="#949494"
+                fontSize="12px"
+                fontWeight="700"
+                mt={"6px"}
+              >
+                DESCRIÇÃO
+              </FormLabel>
               <Input
-                isRequired
-                placeholder="Nome do fornecedor"
-                type="text"
-                id="fornecedorNome"
-                name="fornecedorNome"
-                value={nome}
-                onChange={(event) => handleChangeNome(event)}
-                width="100%"
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel htmlFor="orçamento">ORÇAMENTO</FormLabel>
-              <Input
-                isRequired
-                placeholder="Orçamento"
-                type="text"
-                id="orçamento"
-                name="orçamento"
-                value={orcamento}
-                onChange={(event) => handleChangeOrcamento(event)}
-                width="100%"
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel htmlFor="orçamento">REALIZADO</FormLabel>
-              <Input
-                isRequired
-                placeholder="Realizado"
-                type="text"
-                id="realizado"
-                name="realizado"
-                value={realizado}
-                onChange={(event) => handleChangeRealizado(event)}
-                width="100%"
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel htmlFor="orçamento">RESPONSÁVEL</FormLabel>
-              <Input
-                isRequired
-                placeholder="Responsável"
-                type="text"
-                id="responsável"
-                name="responsável"
-                value={responsavel}
-                onChange={(event) => handleChangeResponsavel(event)}
-                width="100%"
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel htmlFor="orçamento">DESCRIÇÃO</FormLabel>
-              <Input
+                borderRadius={"8px"}
+                border={"1px solid #A7A7A7"}
+                mt={"-9px"}
+                width={"158px"}
+                height={"56px"}
+                color="#949494"
+                fontSize={"14px"}
+                fontWeight={"400"}
                 isRequired
                 placeholder="Descrição"
                 type="text"
@@ -186,14 +285,31 @@ export function EditarFornecedorModal({
                 name="descrição"
                 value={descricao}
                 onChange={(event) => handleChangeDescricao(event)}
-                width="100%"
               />
             </FormControl>
           </ModalBody>
 
-          <ModalFooter>
+          <ModalFooter justifyContent={"center"}>
             <Button
-              background="origem.300"
+              // background="origem.300"
+              variant="primary"
+              color="#F40606"
+              _hover={{
+                background: "#F40606",
+                transition: "all 0.4s",
+                color: "white",
+              }}
+              // onClick={closeModal}
+              width={"128px"}
+              height={"56px"}
+              onClick={() => onClose()}
+            >
+              <Text fontSize={"18px"} fontWeight={"700"}>
+                Cancelar{" "}
+              </Text>
+            </Button>
+            <Button
+              background="#0047BB"
               variant="primary"
               color="white"
               onClick={() => {
@@ -210,8 +326,12 @@ export function EditarFornecedorModal({
                 background: "origem.500",
                 transition: "all 0.4s",
               }}
+              width={"128px"}
+              height={"56px"}
             >
-              SALVAR
+              <Text fontSize={"18px"} fontWeight={"700"}>
+                Salvar{" "}
+              </Text>
             </Button>
           </ModalFooter>
         </ModalContent>

@@ -12,34 +12,33 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
-  Button,
   FormControl,
-  FormLabel,
   Stack,
   Textarea,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import {
   ListaCampo,
-  ListaPoco,
+  // ListaPoco,
   ProjetoTipo,
 } from "interfaces/CadastrosModaisInfograficos";
 
+import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
+import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
-
-import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 import {
   getAtividadasByProjetosTipoId,
   getProjetosTipo,
+  getServicoDataIntervencaoId,
+  getServicoPocoId,
 } from "services/get/CadastroModaisInfograficos";
 
 import SelectFiltragem from "../../../components/SelectFiltragem";
 import AtividadesCadastroIntervencao from "./AtividadesCadastroIntervencao";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
-// import SelectFiltragemSondas from "./SelectFiltragemSonda";
 
 function ModalCadastroIntervencao({
   idCampanha,
@@ -51,19 +50,26 @@ function ModalCadastroIntervencao({
   const {
     registerForm,
     loading,
-    listaPocos,
+    // listaPocos,
     listaCampos,
     listaSondaCampanha,
     listaAtividadesPrecedentes,
+    // listaServicoSonda,
   } = useCadastroIntervencao();
 
   const [listaProjetos, setListaProjetos] = useState<any>([]);
+  const [listaServicoPocos, setListaServicoPocos] = useState<any>([]);
 
   const innerWidth = window.innerWidth;
 
-  const optionsPocos = listaPocos.map((poco: ListaPoco) => ({
+  // const optionsPocos = listaPocos.map((poco: ListaPoco) => ({
+  //   value: poco.id,
+  //   label: poco.poco,
+  // }));
+
+  const optionsPocos = listaServicoPocos.map((poco: any) => ({
     value: poco.id,
-    label: poco.poco,
+    label: poco.nom_poco,
   }));
 
   const optionsCampo = listaCampos.map((campo: ListaCampo) => ({
@@ -80,6 +86,11 @@ function ModalCadastroIntervencao({
     value: sondaCampanha.id,
     label: sondaCampanha.nom_campanha,
   }));
+
+  // const optionsServicoSonda = listaServicoSonda.map((sonda: any) => ({
+  //   value: sonda.id,
+  //   label: sonda.nom_sonda,
+  // }));
 
   const reqGetAtividadesByProjetoTipoId = async (id: number) => {
     if (id === 0) {
@@ -102,6 +113,7 @@ function ModalCadastroIntervencao({
         qtde_dias: atividade.qtde_dias,
         precedentes: atividade.precedentes,
       }));
+
       registerForm.setFieldValue("atividades", atividadesFormatadas);
     }
   };
@@ -125,6 +137,39 @@ function ModalCadastroIntervencao({
     onOpen();
   };
 
+  const handleServicoPocos = async () => {
+    if (optionsSondaCampanha) {
+      const nomeSondaComId = optionsSondaCampanha.find(
+        (option: any) => option.value === idCampanha
+      );
+      if (nomeSondaComId) {
+        const idSonda = nomeSondaComId.label.split(" - ")[0];
+        const servicoPocos = await getServicoPocoId(idSonda);
+        setListaServicoPocos(servicoPocos.data);
+      }
+    }
+  };
+
+  const handleDataLimite = async () => {
+    const pocoCompleto = listaServicoPocos.filter(
+      (poco: any) => poco.id === registerForm.values.poco_id
+    );
+
+    const { data } = await getServicoDataIntervencaoId(
+      registerForm.values.projeto_tipo_id,
+      new Date(registerForm.values.dat_ini_prev).toISOString(),
+      pocoCompleto[0].dat_ini_limite
+    );
+
+    const { cod_erro } = data;
+
+    if (cod_erro === 0) {
+      window.alert(
+        "ATENÇÃO: O planejamento configurado ultrapassa a data de início de execução do poço selecionado."
+      );
+    }
+  };
+
   useEffect(() => {
     handleGet();
     registerForm.setFieldValue("id_campanha", idCampanha);
@@ -135,17 +180,26 @@ function ModalCadastroIntervencao({
   }, []);
 
   useEffect(() => {
+    setTimeout(() => {
+      handleServicoPocos();
+    }, 1000);
+  }, [registerForm.values.id_campanha]);
+
+  useEffect(() => {
     reqGetAtividadesByProjetoTipoId(registerForm.values.projeto_tipo_id);
+    handleDataLimite();
   }, [registerForm.values.projeto_tipo_id]);
 
   // console.log("registerForm", registerForm.values);
+  // console.log("idCampanha", idCampanha);
+  // console.log("optionsSondaCampanha", optionsSondaCampanha);
 
   return (
     <>
       <Flex
         mt={2}
         py={3}
-        w="160px"
+        w="220px"
         border={"2px"}
         borderStyle={"dashed"}
         borderColor={"origem.500"}
@@ -160,6 +214,7 @@ function ModalCadastroIntervencao({
           transition: "all 0.4s",
         }}
         onClick={() => handleClick()}
+        mb={3}
       >
         <IconButton
           aria-label="Plus sign"
@@ -175,7 +230,7 @@ function ModalCadastroIntervencao({
           Cadastrar Intervenção
         </Text>
       </Flex>
-      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="5xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -199,6 +254,7 @@ function ModalCadastroIntervencao({
                 <FormControl>
                   <Flex direction={"column"} gap={4}>
                     <Stack>
+                      <Text fontWeight={"bold"}>Nome</Text>
                       <Flex
                         direction={innerWidth >= 460 ? "row" : "column"}
                         gap={5}
@@ -232,7 +288,7 @@ function ModalCadastroIntervencao({
                     </Stack>
 
                     <Stack>
-                      <Flex flexDirection={"row"} gap={4}>
+                      <Flex flexDirection={"row"} gap={4} w={"50%"}>
                         <SelectFiltragem
                           registerForm={registerForm}
                           nomeSelect={"PROJETO"}
@@ -249,12 +305,17 @@ function ModalCadastroIntervencao({
                     />
 
                     <Stack>
+                      <Text fontWeight={"bold"}>Comentários</Text>
                       <FormControl>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="comentarios">
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
                             COMENTÁRIOS
-                          </FormLabel>
+                          </Text>
                         </Flex>
                         <Textarea
                           isRequired
@@ -276,44 +337,19 @@ function ModalCadastroIntervencao({
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <Button
-                  variant="ghost"
-                  color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
-                  _hover={{
-                    background: "red.500",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  disabled={!registerForm.isValid || !registerForm.dirty}
-                  background="origem.300"
-                  variant="primary"
-                  color="white"
-                  onClick={() =>
-                    handleCadastrarRefresh(
-                      registerForm,
-                      onClose,
-                      setRefresh,
-                      refresh
-                    )
-                  }
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                  }}
-                >
-                  {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Concluir Cadastro</Text>
-                    </>
-                  )}
-                </Button>
+                <BotaoVermelhoGhost
+                  text={"Cancelar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                />
+                <BotaoAzulPrimary
+                  text={"Concluir Cadastro"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                  loading={loading}
+                />
               </Flex>
             </ModalFooter>
           </form>

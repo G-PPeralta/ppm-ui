@@ -1,11 +1,11 @@
+import { useState } from "react";
+
 import {
   Flex,
-  Text,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  // ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
@@ -16,12 +16,12 @@ import {
   useBreakpointValue,
   Input,
 } from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
 
+import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
+import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroPoco } from "hooks/useCadastroPoco";
@@ -29,6 +29,7 @@ import { useCadastroPoco } from "hooks/useCadastroPoco";
 function ModalCadastroPoco() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroPoco();
+  const [refresh, setRefresh] = useState(false);
 
   return (
     <>
@@ -47,7 +48,7 @@ function ModalCadastroPoco() {
       >
         Poço
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="md">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -77,8 +78,10 @@ function ModalCadastroPoco() {
                         md: "row",
                       })}
                       gap={5}
+                      align={"center"}
+                      justify={"center"}
                     >
-                      <FormControl>
+                      <FormControl w={"275px"}>
                         <Flex gap={1}>
                           <RequiredField />
                           <FormLabel htmlFor="poco">NOME</FormLabel>
@@ -106,7 +109,7 @@ function ModalCadastroPoco() {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
+              {/* <Flex gap={2}>
                 <Button
                   variant="ghost"
                   color="red"
@@ -134,10 +137,25 @@ function ModalCadastroPoco() {
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (
                     <>
-                      <Text>Concluir Cadastro</Text>
+                      <Text>Cadastrar</Text>
                     </>
                   )}
                 </Button>
+              </Flex> */}
+              <Flex gap={2}>
+                <BotaoVermelhoGhost
+                  text={"Cancelar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                />
+                <BotaoAzulPrimary
+                  text={"Concluir Cadastro"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                  loading={loading}
+                />
               </Flex>
             </ModalFooter>
           </form>
