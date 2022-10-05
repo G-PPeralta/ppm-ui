@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 // import toast from "react-hot-toast";
-import { AiFillEdit, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch } from "react-icons/ai";
+import { MdModeEdit } from "react-icons/md";
 
 import {
   Button,
@@ -22,6 +23,7 @@ import {
   TableContainer,
   Tbody,
   Td,
+  Text,
   Th,
   Thead,
   Tr,
@@ -110,6 +112,9 @@ function BotaoListadeTarefas() {
               borderBottom: "0.5px solid #A7A7A7",
               borderRight: "0.5px solid #A7A7A7",
             }}
+            width="48px"
+            height={"56px"}
+            textAlign={"center"}
           >
             {task.id}
           </Td>
@@ -118,6 +123,8 @@ function BotaoListadeTarefas() {
               borderBottom: "0.5px solid #A7A7A7",
               borderRight: "0.5px solid #A7A7A7",
             }}
+            width="166px"
+            height={"56px"}
           >
             {task.nome_tarefa}
           </Td>
@@ -126,6 +133,8 @@ function BotaoListadeTarefas() {
               borderBottom: "0.5px solid #A7A7A7",
               borderRight: "0.5px solid #A7A7A7",
             }}
+            width="166px"
+            height={"56px"}
           >
             {task.atividade_relacionada}
           </Td>
@@ -134,6 +143,8 @@ function BotaoListadeTarefas() {
               borderBottom: "0.5px solid #A7A7A7",
               borderRight: "0.5px solid #A7A7A7",
             }}
+            width="112px"
+            height={"56px"}
           >
             {formatDate(task.data_tarefa)}
           </Td>
@@ -142,6 +153,8 @@ function BotaoListadeTarefas() {
               borderBottom: "0.5px solid #A7A7A7",
               borderRight: "0.5px solid #A7A7A7",
             }}
+            width="200px"
+            height={"56px"}
           >
             {task.descricao_tarefa}
           </Td>
@@ -150,20 +163,39 @@ function BotaoListadeTarefas() {
               borderBottom: "0.5px solid #A7A7A7",
               borderRight: "0.5px solid #A7A7A7",
             }}
+            width="96px"
+            height={"56px"}
+            color={"#059502"}
+            textAlign={"center"}
           >
             {!task.status ? "0%" : task.status}
-          </Td>
-          <Td style={{ borderBottom: "0.5px solid #A7A7A7" }}>
             <IconButton
               aria-label="Plus sign"
-              icon={<AiFillEdit />}
+              icon={<MdModeEdit />}
               background="white"
               variant="secondary"
-              color="#2D2926"
-              mr={2}
+              color="#0047BB"
               isRound={true}
-              size="sm"
+              // onClick={() => onEdit(lessons)}
+              width={"18px"}
+              height={"18px"}
+            />
+          </Td>
+          <Td
+            style={{ borderBottom: "0.5px solid #A7A7A7" }}
+            width="104px"
+            height={"56px"}
+          >
+            <IconButton
+              aria-label="Plus sign"
+              icon={<MdModeEdit />}
+              background="white"
+              variant="secondary"
+              color="#0047BB"
+              isRound={true}
               onClick={() => handleEditTarefa(task)}
+              width={"18px"}
+              height={"18px"}
             />
           </Td>
         </Tr>
@@ -179,9 +211,9 @@ function BotaoListadeTarefas() {
       <Button
         onClick={onOpen}
         background={"white"}
-        color={"origem.300"}
+        color={"#0047BB"}
         _hover={{
-          background: "origem.500",
+          background: "#0047BB",
           color: "white",
           transition: "all 0.4s",
         }}
@@ -189,11 +221,13 @@ function BotaoListadeTarefas() {
         py={10}
         borderTopRadius={"0px"}
         borderBottomRadius={"0px"}
+        fontSize={"16px"}
+        fontWeight={"700"}
       >
         Lista de Tarefas
       </Button>
 
-      <Modal size={"5xl"} isOpen={isOpen} onClose={onClose}>
+      <Modal size={"6xl"} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -202,7 +236,8 @@ function BotaoListadeTarefas() {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Lista de Tarefas
           </ModalHeader>
@@ -218,18 +253,31 @@ function BotaoListadeTarefas() {
                   base: "center",
                   md: "flex-end",
                 })}
-                px={4}
-                py={4}
-                gap={2}
+                px={7}
+                py={5}
+                gap={4}
+                display={"flex"}
+                justifyContent={"space-between"}
               >
-                <Flex
-                  display={"flex"}
-                  justifyContent={"space-between"}
-                  flex={1}
-                >
+                <Flex>
                   <FormControl>
-                    <FormLabel htmlFor="tarefa">TAREFA</FormLabel>
+                    <FormLabel htmlFor="tarefa">
+                      <Text
+                        color="#949494"
+                        fontSize="12px"
+                        fontWeight="700"
+                        mt={"6px"}
+                      >
+                        TAREFA
+                      </Text>
+                    </FormLabel>
                     <Input
+                      borderRadius={"8px"}
+                      border={"1px solid #A7A7A7"}
+                      mt={"-9px"}
+                      width={"328px"}
+                      height={"56px"}
+                      color="#949494"
                       placeholder="Nome da tarefa"
                       type="text"
                       id="tarefa"
@@ -245,9 +293,25 @@ function BotaoListadeTarefas() {
                   flex={0}
                 >
                   <FormControl>
-                    <FormLabel htmlFor="data">DATA</FormLabel>
+                    <FormLabel htmlFor="data">
+                      <Text
+                        color="#949494"
+                        fontSize="12px"
+                        fontWeight="700"
+                        mt={"6px"}
+                      >
+                        {" "}
+                        DATA
+                      </Text>
+                    </FormLabel>
                     <Input
                       // placeholder="dd/mm/aaaa"
+                      borderRadius={"8px"}
+                      border={"1px solid #A7A7A7"}
+                      mt={"-9px"}
+                      width={"120px"}
+                      height={"56px"}
+                      color="#949494"
                       id="data"
                       type="date"
                       name="data"
@@ -270,9 +334,9 @@ function BotaoListadeTarefas() {
                     type="button"
                     background="white"
                     variant="outline"
-                    color="origem.500"
-                    borderColor="origem.500"
-                    // border={"2px"}
+                    color="#0047BB"
+                    borderColor="#0047BB"
+                    border={"2px"}
                     // h={useBreakpointValue({ base: "100%", md: "120%" })}
                     // float={"right"}
                     // onClick={() => {
@@ -283,32 +347,52 @@ function BotaoListadeTarefas() {
                       handleFilter(tarefaFilter, dataFilter);
                     }}
                     _hover={{
-                      background: "origem.300",
+                      background: "#0047BB",
                       transition: "all 0.4s",
                       color: "white",
                     }}
+                    width={"100px"}
+                    height={"56px"}
+                    fontWeight={"700"}
+                    fontSize="18px"
                   >
                     Buscar
-                    <Icon as={AiOutlineSearch} fontSize="20px" ml={1} />
+                    <Icon
+                      fontWeight={"900"}
+                      as={AiOutlineSearch}
+                      fontSize="18px"
+                      ml={1}
+                      color={"#0047BB"}
+                    />
                   </Button>
-
-                  <Button
-                    type="button"
-                    background="origem.500"
-                    variant="primary"
-                    color="white"
-                    // border={"2px"}
-                    // h={useBreakpointValue({ base: "100%", md: "120%" })}
-                    // float={"right"}
-                    onClick={() => setIsModalOpen(true)}
-                    _hover={{
-                      background: "origem.300",
-                      transition: "all 0.4s",
-                      color: "white",
-                    }}
+                  <Flex
+                    display={"flex"}
+                    justifyContent={"space-between"}
+                    flex={2.5}
+                    ml={"15px"}
                   >
-                    Adicionar
-                  </Button>
+                    <Button
+                      type="button"
+                      background="origem.500"
+                      variant="primary"
+                      color="white"
+                      // border={"2px"}
+                      // h={useBreakpointValue({ base: "100%", md: "120%" })}
+                      // float={"right"}
+                      onClick={() => setIsModalOpen(true)}
+                      _hover={{
+                        background: "origem.300",
+                        transition: "all 0.4s",
+                        color: "white",
+                      }}
+                      width={"117px"}
+                      height={"56px"}
+                    >
+                      <Text fontWeight={"700"} fontSize="18px">
+                        Adicionar
+                      </Text>
+                    </Button>
+                  </Flex>
                 </Flex>
               </Flex>
             </FormControl>
@@ -326,13 +410,64 @@ function BotaoListadeTarefas() {
               >
                 <Thead>
                   <Tr background="origem.500" color="white">
-                    <Th>ID</Th>
-                    <Th>Lista de Tarefas</Th>
-                    <Th>Atividade relacionada</Th>
-                    <Th>Data</Th>
-                    <Th>Descrição</Th>
-                    <Th>Status</Th>
-                    <Th>Ações</Th>
+                    <Th
+                      style={{
+                        borderBottom: "0.5px solid #A7A7A7",
+                        borderRight: "0.5px solid #A7A7A7",
+                      }}
+                      width="36px"
+                      height={"56px"}
+                    >
+                      ID
+                    </Th>
+                    <Th
+                      style={{
+                        borderBottom: "0.5px solid #A7A7A7",
+                        borderRight: "0.5px solid #A7A7A7",
+                      }}
+                    >
+                      Lista de Tarefas
+                    </Th>
+                    <Th
+                      style={{
+                        borderBottom: "0.5px solid #A7A7A7",
+                        borderRight: "0.5px solid #A7A7A7",
+                      }}
+                    >
+                      Atividade relacionada
+                    </Th>
+                    <Th
+                      style={{
+                        borderBottom: "0.5px solid #A7A7A7",
+                        borderRight: "0.5px solid #A7A7A7",
+                      }}
+                    >
+                      Data
+                    </Th>
+                    <Th
+                      style={{
+                        borderBottom: "0.5px solid #A7A7A7",
+                        borderRight: "0.5px solid #A7A7A7",
+                      }}
+                    >
+                      Descrição
+                    </Th>
+                    <Th
+                      style={{
+                        borderBottom: "0.5px solid #A7A7A7",
+                        borderRight: "0.5px solid #A7A7A7",
+                      }}
+                    >
+                      Status
+                    </Th>
+                    <Th
+                      style={{
+                        borderBottom: "0.5px solid #A7A7A7",
+                        borderRight: "0.5px solid #A7A7A7",
+                      }}
+                    >
+                      Ações
+                    </Th>
                   </Tr>
                 </Thead>
                 <Tbody>{tableData}</Tbody>

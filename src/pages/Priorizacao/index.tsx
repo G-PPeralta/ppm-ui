@@ -17,7 +17,6 @@ import { TabelaPriorizacao } from "./Components/Priorizacao/TabelaPriorizacao";
 
 export function Priorizacao() {
   // const wd = window.innerWidth;
-
   return (
     <>
       <Sidebar>

@@ -8,28 +8,30 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { TotalOrcamento } from "interfaces/Services";
+import { TotalRealizado } from "interfaces/Services";
 
-import { getOrcamentoTotal } from "services/get/Dashboard";
+import { getTotalRealizado } from "services/get/Dashboard";
 
 export default function RealizadoComponent() {
-  const [totalOrcamento, setTotalOrcamento] = useState<TotalOrcamento[]>(
-    [] as TotalOrcamento[]
+  const [totalRealizado, setTotalRealizado] = useState<TotalRealizado[]>(
+    [] as TotalRealizado[]
   );
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  async function handleGetTotalOrcamento() {
-    const reqGet = await getOrcamentoTotal();
+  async function handleGetTotalRealizado() {
+    setLoading(true);
+    const reqGet = await getTotalRealizado();
 
-    setTotalOrcamento(reqGet.data[1].total);
+    setTotalRealizado(reqGet.data[0].totalRealizado);
+    setLoading(false);
   }
 
   useEffect(() => {
-    handleGetTotalOrcamento();
+    handleGetTotalRealizado();
     setLoading(false);
   }, []);
 
-  const valorFormatado = totalOrcamento.toLocaleString();
+  const valorFormatado = totalRealizado && totalRealizado.toLocaleString();
 
   return (
     <Stack spacing="8">

@@ -80,7 +80,7 @@ function CadastrarLicoesAprendidasModal({
           EDITAR FORNECEDOR
         </Text> */}
       </Box>
-      <Modal isOpen={true} onClose={closeModal} size="xl">
+      <Modal isOpen={true} onClose={closeModal} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -91,26 +91,33 @@ function CadastrarLicoesAprendidasModal({
             color={"white"}
             fontSize={"1em"}
           >
-            Lição Aprendida
+            Adicionar lições aprendidas
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <ModalBody>
-            <FormControl marginBottom={4} padding={1}>
+            <FormControl marginBottom={4}>
               <FormLabel
                 htmlFor="fornecedorNome"
-                color="#D6D4D4"
-                fontSize="sm"
-                fontWeight="500"
+                color="#949494"
+                fontSize="12px"
+                fontWeight="700"
+                mt={"6px"}
               >
                 LIÇÃO APRENDIDA
               </FormLabel>
               <Input
+                borderRadius={"8px"}
+                border={"1px solid #A7A7A7"}
+                mt={"-9px"}
+                width={"328px"}
+                height={"56px"}
+                color="#949494"
                 isRequired
                 placeholder="Lição aprendida"
                 type="text"
                 id="licaoAprendida"
                 name="licaoAprendida"
-                width="100%"
+                fontSize={"14px"}
                 value={licaoAprendida}
                 onChange={(event) => setLicaoAprendida(event.target.value)}
               />
@@ -118,18 +125,25 @@ function CadastrarLicoesAprendidasModal({
             <FormControl>
               <FormLabel
                 htmlFor="acao"
-                color="#D6D4D4"
-                fontSize="sm"
-                fontWeight="500"
+                color="#949494"
+                fontSize="12px"
+                fontWeight="700"
+                mt={"6px"}
               >
                 AÇÃO OU RECOMENDAÇÃO
               </FormLabel>
               <Textarea
+                borderRadius={"8px"}
+                border={"1px solid #A7A7A7"}
+                mt={"-9px"}
+                width={"456px"}
+                height={"56px"}
+                color="#949494"
                 isRequired
+                fontSize={"14px"}
                 placeholder="Ação ou recomendação"
                 id="acao"
                 name="acao"
-                width="100%"
                 value={acao}
                 onChange={(event) => setAcao(event.target.value)}
               />
@@ -140,24 +154,32 @@ function CadastrarLicoesAprendidasModal({
             <Flex gap={2}>
               <Button
                 variant="primary"
-                color="red"
+                color="#F40606"
                 _hover={{
                   background: "red.500",
                   transition: "all 0.4s",
                   color: "white",
                 }}
                 onClick={closeModal}
+                fontSize="18px"
+                fontWeight="700"
+                width={"208px"}
+                height={"56px"}
               >
                 Cancelar
               </Button>
               <Button
-                background="origem.300"
+                width={"208px"}
+                height={"56px"}
+                background="#0047BB"
                 variant="primary"
                 color="white"
                 _hover={{
                   background: "origem.500",
                   transition: "all 0.4s",
                 }}
+                fontSize="18px"
+                fontWeight="700"
                 onClick={handleSubmitLicao}
               >
                 Confirmar

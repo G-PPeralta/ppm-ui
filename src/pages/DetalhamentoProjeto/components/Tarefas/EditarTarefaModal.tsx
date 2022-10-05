@@ -24,6 +24,7 @@ import {
 } from "@chakra-ui/react";
 import { format } from "date-fns";
 import { AtividadesProjeto, TarefaAtividade } from "interfaces/Services";
+import { Text } from "recharts";
 
 import { useAuth } from "hooks/useAuth";
 
@@ -106,7 +107,7 @@ function EditarTarefaModal({
           EDITAR FORNECEDOR
         </Text> */}
       </Box>
-      <Modal isOpen={isModalOpen} onClose={closeModal} size="xl">
+      <Modal isOpen={isModalOpen} onClose={closeModal} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -115,14 +116,14 @@ function EditarTarefaModal({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
           >
             Editar Tarefa
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <ModalBody>
             <FormControl
-              marginBottom={4}
+              marginBottom={1}
               padding={1}
               display={"flex"}
               justifyContent={"space-between"}
@@ -131,35 +132,48 @@ function EditarTarefaModal({
               <Flex flexDir={"column"} flexGrow={4}>
                 <FormLabel
                   htmlFor="nomeTarefa"
-                  color="#D6D4D4"
-                  fontSize="sm"
-                  fontWeight="500"
+                  color="#949494"
+                  fontSize="12px"
+                  fontWeight="700"
+                  mt={"6px"}
                 >
-                  NOME DA TAREFA
+                  TAREFA
                 </FormLabel>
                 <Input
+                  fontSize={"14px"}
+                  borderRadius={"8px"}
+                  border={"1px solid #A7A7A7"}
+                  mt={"-9px"}
+                  width={"328px"}
+                  height={"56px"}
+                  color="#2D2926"
                   isRequired
                   placeholder="Nome tarefa"
-                  color="#D6D4D4"
                   type="text"
                   id="nomeTarefa"
                   name="nomeTarefa"
-                  width="100%"
                   value={nome}
                   onChange={(event) => setNome(event.target.value)}
                 />
               </Flex>
               <Flex flexDir={"column"} flexGrow={1}>
                 <FormLabel
-                  color="#D6D4D4"
                   htmlFor="data"
-                  fontSize="sm"
-                  fontWeight="500"
+                  color="#949494"
+                  fontSize="12px"
+                  fontWeight="700"
+                  mt={"6px"}
                 >
                   DATA
                 </FormLabel>
                 <Input
-                  color="#D6D4D4"
+                  borderRadius={"8px"}
+                  border={"1px solid #A7A7A7"}
+                  mt={"-9px"}
+                  width={"120px"}
+                  height={"56px"}
+                  fontSize={"14px"}
+                  color="#2D2926"
                   id="data"
                   type="date"
                   name="data"
@@ -168,19 +182,26 @@ function EditarTarefaModal({
                 />
               </Flex>
             </FormControl>
-            <FormControl padding={1} marginBottom={4} width={"204px"}>
+            <FormControl padding={1} marginBottom={1} width={"204px"}>
               <FormLabel
                 htmlFor="atividadeRel"
-                color="#D6D4D4"
-                fontSize="sm"
-                fontWeight="500"
+                color="#949494"
+                fontSize="12px"
+                fontWeight="700"
+                mt={"6px"}
               >
                 ATIVIDADE RELACIONADA
               </FormLabel>
               <Select
+                fontSize={"14px"}
+                borderRadius={"8px"}
+                border={"1px solid #A7A7A7"}
+                mt={"-9px"}
+                width={"208px"}
+                height={"56px"}
+                color="#2D2926"
                 id="atividadeRel"
                 name="atividadeRel"
-                color="#D6D4D4"
                 value={atividadeId}
                 onChange={(event) => setAtividadeId(Number(event.target.value))}
               >
@@ -195,19 +216,25 @@ function EditarTarefaModal({
             <FormControl padding={1}>
               <FormLabel
                 htmlFor="acao"
-                color="#D6D4D4"
-                fontSize="sm"
-                fontWeight="500"
+                color="#949494"
+                fontSize="12px"
+                fontWeight="700"
+                mt={"6px"}
               >
                 DESCRIÇÃO DA TAREFA
               </FormLabel>
               <Textarea
-                color="#D6D4D4"
+                fontSize={"14px"}
+                borderRadius={"8px"}
+                border={"1px solid #A7A7A7"}
+                mt={"-9px"}
+                width={"456px"}
+                height={"121px"}
+                color="#2D2926"
                 isRequired
                 placeholder="Descrição da tarefa"
                 id="descrição"
                 name="descrição"
-                width="100%"
                 value={descricao}
                 onChange={(event) => setDescricao(event.target.value)}
               />
@@ -218,22 +245,26 @@ function EditarTarefaModal({
             <Flex gap={2}>
               <Button
                 variant="primary"
-                color="red"
+                color="#F40606"
                 _hover={{
                   background: "red.500",
                   transition: "all 0.4s",
                   color: "white",
                 }}
                 onClick={closeModal}
+                width={"208px"}
+                height={"56px"}
               >
-                Cancelar
+                <Text fontWeight={"700"} fontSize="18px">
+                  Cancelar
+                </Text>
               </Button>
               <Button
-                background="origem.300"
+                background="#0047BB"
                 variant="primary"
                 color="white"
                 _hover={{
-                  background: "origem.500",
+                  background: "#0047BB",
                   transition: "all 0.4s",
                 }}
                 onClick={() => {
@@ -248,8 +279,12 @@ function EditarTarefaModal({
                   newRender();
                   closeModal();
                 }}
+                width={"208px"}
+                height={"56px"}
               >
-                Adicionar
+                <Text fontWeight={"700"} fontSize="18px">
+                  Adicionar
+                </Text>
               </Button>
             </Flex>
           </ModalFooter>

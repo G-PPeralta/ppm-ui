@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { AiFillEdit } from "react-icons/ai";
 import {
   FiChevronLeft,
   FiChevronRight,
@@ -8,6 +7,7 @@ import {
   FiChevronsRight,
   FiSearch,
 } from "react-icons/fi";
+import { MdModeEdit } from "react-icons/md";
 
 import {
   Tr,
@@ -99,13 +99,16 @@ export function LicoesAprendidasProjetos() {
     .sort((a, b) => a.id - b.id)
     .slice(from, to)
     .map((lessons, index) => (
-      <Tr key={index}>
+      <Tr key={index} alignSelf={"center"}>
         <Td
           isNumeric
           style={{
             borderBottom: "0.5px solid #A7A7A7",
             borderRight: "0.5px solid #A7A7A7",
           }}
+          width="48px"
+          height={"56px"}
+          textAlign={"center"}
         >
           {lessons.id}
         </Td>
@@ -114,6 +117,8 @@ export function LicoesAprendidasProjetos() {
             borderBottom: "0.5px solid #A7A7A7",
             borderRight: "0.5px solid #A7A7A7",
           }}
+          width="284px"
+          height={"36px"}
         >
           {lessons.txt_licao_aprendida}
         </Td>
@@ -130,6 +135,8 @@ export function LicoesAprendidasProjetos() {
             borderBottom: "0.5px solid #A7A7A7",
             borderRight: "0.5px solid #A7A7A7",
           }}
+          width="150px"
+          height={"36px"}
         >
           {new Date(lessons.dat_usu_create)
             .toLocaleString("pt-BR")
@@ -140,16 +147,20 @@ export function LicoesAprendidasProjetos() {
             borderBottom: "0.5px solid #A7A7A7",
             borderRight: "0.5px solid #A7A7A7",
           }}
+          width="96px"
+          height={"36px"}
         >
           <IconButton
             aria-label="Plus sign"
-            icon={<AiFillEdit />}
+            icon={<MdModeEdit />}
             background="white"
             variant="secondary"
-            color="#2D2926"
+            color="#0047BB"
             mr={2}
             isRound={true}
-            size="md"
+            // size="md"
+            width={"18px"}
+            height={"18px"}
             onClick={() => {
               setEditLicao(lessons);
               onOpen();
@@ -209,10 +220,10 @@ export function LicoesAprendidasProjetos() {
         bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
       >
         <Stack spacing="8">
-          <Flex>
+          <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
             <Box
-              py={{ base: "0", sm: "16" }}
-              px={{ base: "4", sm: "10" }}
+              py={{ base: "6", sm: "8" }}
+              px={{ base: "6", sm: "8" }}
               w={"100%"}
               bg={useBreakpointValue({ base: "transparent", sm: "white" })}
               boxShadow={{
@@ -220,9 +231,12 @@ export function LicoesAprendidasProjetos() {
                 sm: useColorModeValue("md", "md-dark"),
               }}
               borderRadius={{ base: "none", sm: "xl" }}
+              alignItems={"center"}
             >
-              <Heading as="h3" size="md" mt={"-50px"} mb={"25px"}>
-                Lições Aprendidas
+              <Heading as="h3" size="md" mt={"-15px"} mb={"25px"}>
+                <Text fontSize={"24px"} fontWeight={"700"}>
+                  Lições Aprendidas
+                </Text>
               </Heading>
 
               <Flex>
@@ -233,15 +247,26 @@ export function LicoesAprendidasProjetos() {
                   justifyContent={"flex-start"}
                 >
                   <Flex flexDir={"column"}>
-                    <FormLabel htmlFor="projeto">PROJETO</FormLabel>
+                    <FormLabel
+                      fontWeight={"700"}
+                      fontSize={"12px"}
+                      color={"#A7A7A7"}
+                      htmlFor="projeto"
+                    >
+                      PROJETO
+                    </FormLabel>
                     <Select
+                      mt={"-9px"}
+                      placeholder="Selecione"
                       id="projeto"
                       name="projeto"
                       onChange={(e) => setProjetoId(e.target.value)}
-                      width={300}
-                      // value={projetoId}
+                      width={"208px"}
+                      height={"56px"}
                     >
-                      <option value={0}>Todos</option>
+                      <option color={"#A7A7A7"} value={0}>
+                        Todos
+                      </option>
                       {projetos &&
                         projetos.map((project, index) => (
                           <option value={project.id} key={index}>
@@ -253,27 +278,26 @@ export function LicoesAprendidasProjetos() {
 
                   <Button
                     type="button"
-                    background="white"
+                    background="#0047BB"
                     variant="outline"
-                    color="origem.500"
-                    borderColor="origem.500"
+                    color="white"
+                    borderColor="#0047BB"
                     _hover={{
-                      background: "origem.300",
+                      background: "white",
                       transition: "all 0.4s",
-                      color: "white",
+                      color: "#0047BB",
                     }}
                     rightIcon={<FiSearch />}
                     onClick={filterByProject}
                     alignSelf={"end"}
                     marginLeft={"5"}
+                    height={"56px"}
+                    width={"101px"}
+                    fontSize={"18px"}
                   >
-                    Buscar
+                    Filtrar
                   </Button>
                 </FormControl>
-                {/* <FormControl
-                  className="toBottom"
-                  style={{ border: "4px solid green" }}
-                ></FormControl> */}
               </Flex>
 
               <Stack spacing="0">
@@ -299,17 +323,55 @@ export function LicoesAprendidasProjetos() {
                   // style={{ border: "0.5px solid #A7A7A7" }}
                 >
                   <Thead>
-                    <Tr background="origem.500" color="white">
-                      <Th>ID</Th>
-                      <Th>Lições Aprendidas</Th>
-                      <Th>Ações e Recomendações</Th>
-                      <Th>Data</Th>
-                      <Th>Ações</Th>
+                    <Tr background="#0047BB" color="white">
+                      <Th
+                        style={{
+                          borderBottom: "0.5px solid #A7A7A7",
+                          borderRight: "0.5px solid #A7A7A7",
+                        }}
+                        width="48px"
+                        height={"36px"}
+                        textAlign={"center"}
+                      >
+                        ID
+                      </Th>
+                      <Th
+                        style={{
+                          borderBottom: "0.5px solid #A7A7A7",
+                          borderRight: "0.5px solid #A7A7A7",
+                        }}
+                      >
+                        Lições Aprendidas
+                      </Th>
+                      <Th
+                        style={{
+                          borderBottom: "0.5px solid #A7A7A7",
+                          borderRight: "0.5px solid #A7A7A7",
+                        }}
+                      >
+                        Ações e Recomendações
+                      </Th>
+                      <Th
+                        style={{
+                          borderBottom: "0.5px solid #A7A7A7",
+                          borderRight: "0.5px solid #A7A7A7",
+                        }}
+                      >
+                        Data
+                      </Th>
+                      <Th
+                        style={{
+                          borderBottom: "0.5px solid #A7A7A7",
+                          borderRight: "0.5px solid #A7A7A7",
+                        }}
+                      >
+                        Ações
+                      </Th>
                     </Tr>
                   </Thead>
                   <Tbody>{tableData}</Tbody>
                   <Tfoot>
-                    <Tr background="origem.200" color="white">
+                    <Tr background="#0047BB" color="white">
                       <Th
                         style={{
                           borderBottom: "0.5px solid #A7A7A7",
