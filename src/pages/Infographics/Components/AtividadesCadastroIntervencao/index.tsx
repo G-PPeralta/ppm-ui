@@ -9,8 +9,6 @@ import { Flex, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
-import { RequiredField } from "components/RequiredField/RequiredField";
-
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 import BotaoAdicionar from "./BotaoAdicionar";
@@ -205,7 +203,6 @@ export default function AtividadesCadastroIntervencao({
   return (
     <>
       <Flex gap={1}>
-        <RequiredField />
         <Text fontWeight={"bold"}>Atividades</Text>
       </Flex>
       <DragDropContext onDragEnd={onDragEnd}>

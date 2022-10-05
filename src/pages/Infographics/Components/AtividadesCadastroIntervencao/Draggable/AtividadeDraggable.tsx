@@ -16,6 +16,8 @@ import {
   Responsavel,
 } from "interfaces/CadastrosModaisInfograficos";
 
+import { RequiredField } from "components/RequiredField/RequiredField";
+
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
 import PopOverPrecedentes from "./PopOverPrecedentes";
 interface Props {
@@ -122,7 +124,10 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 flex={1}
               >
                 <Flex direction={"column"} flex={2}>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>ÁREA</Text>
+                  <Flex gap={1}>
+                    <RequiredField />
+                    <Text sx={{ fontSize: 12, fontWeight: "600" }}>ÁREA</Text>
+                  </Flex>
                   <SelectFiltragem
                     registerForm={registerForm}
                     propName={`atividades[${index}].area_id`}
@@ -132,7 +137,10 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 </Flex>
 
                 <Flex direction={"column"} flex={2}>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>TAREFA</Text>
+                  <Flex gap={1}>
+                    <RequiredField />
+                    <Text sx={{ fontSize: 12, fontWeight: "600" }}>TAREFA</Text>
+                  </Flex>
                   <SelectFiltragem
                     registerForm={registerForm}
                     propName={`atividades[${index}].tarefa_id`}
@@ -142,9 +150,12 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 </Flex>
 
                 <Flex direction={"column"} flex={2}>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>
-                    RESPONSÁVEL
-                  </Text>
+                  <Flex gap={1}>
+                    <RequiredField />
+                    <Text sx={{ fontSize: 12, fontWeight: "600" }}>
+                      RESPONSÁVEL
+                    </Text>
+                  </Flex>
                   <SelectFiltragem
                     registerForm={registerForm}
                     propName={`atividades[${index}].responsavel_id`}
@@ -158,8 +169,12 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 </Flex>
 
                 <Flex direction={"column"} flex={1}>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
+                  <Flex gap={1}>
+                    <RequiredField />
+                    <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
+                  </Flex>
                   <NumberInput
+                    maxW={"128px"}
                     max={99999}
                     min={0}
                     id={`atividades[${index}].qtde_dias`}
