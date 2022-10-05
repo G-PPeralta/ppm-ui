@@ -37,6 +37,9 @@ function ModalEditarSPT({ column }: any) {
           transition: "all 0.4s",
         }}
         onClick={onOpen}
+        py={1}
+        px={1}
+        ml={1}
       >
         <BsThreeDotsVertical size={22} />
       </Button>

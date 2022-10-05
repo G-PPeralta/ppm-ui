@@ -18,30 +18,18 @@ type Poco = {
   sonda: string;
 };
 
-type OpcoesExibir = {
-  exibirDataInicio: boolean;
-  setExibirDataInicio: React.Dispatch<React.SetStateAction<boolean>>;
-  exibirPctPlan: boolean;
-  setExibirPctPlan: React.Dispatch<React.SetStateAction<boolean>>;
-  exibirPctReal: boolean;
-  setExibirPctReal: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
 type Props = {
   poco: Poco;
   index: number;
-  opcoesExibir: OpcoesExibir;
 };
 
-function CardPIR({ poco, index, opcoesExibir }: Props) {
-  const { exibirDataInicio, exibirPctPlan, exibirPctReal } = opcoesExibir;
-
+function CardPIR({ poco, index }: Props) {
   const navigate = useNavigate();
   const dataInicioFormatada = formatDate(new Date(poco.inicioplanejado));
   const dataFimFormatada = formatDate(new Date(poco.finalplanejado));
 
   const transfer = () => {
-    navigate(`/atividade/${poco.id}`, {
+    navigate(`/infographics/atividade/${poco.id}`, {
       state: {
         poco,
       },
@@ -67,44 +55,106 @@ function CardPIR({ poco, index, opcoesExibir }: Props) {
             Number(poco.comp_pct),
             Number(poco.pct_real)
           )}
-          px={4}
-          py={2}
+          px={5}
+          py={3}
           borderRadius={12}
           _hover={{
             cursor: "pointer",
           }}
-          w={"160px"}
+          gap={2}
+          minW={"220px"}
         >
-          <Text fontSize={"lg"} color={"white"} fontWeight={"bold"}>
-            {poco.poco}
-          </Text>
-          <Text
-            fontSize={"md"}
-            color={"white"}
-            fontWeight={"semi-bold"}
-            textAlign={"center"}
-          >
-            {/* {dataInicioFormatada === "31/12/1969" ? "" : dataInicioFormatada} */}
-            {exibirDataInicio ? dataInicioFormatada : dataFimFormatada}
-          </Text>
-          <Text
-            fontSize={"md"}
-            color={"white"}
-            fontWeight={"semi-bold"}
-            textAlign={"center"}
-          >
-            {/* {poco.pct_plan === null ? "" : `Planejado: ${poco.pct_plan}%`} */}
-            {exibirPctPlan ? `Planejado: ${poco.pct_plan}%` : ""}
-          </Text>
-          <Text
-            fontSize={"md"}
-            color={"white"}
-            fontWeight={"semi-bold"}
-            textAlign={"center"}
-          >
-            {/* {poco.pct_plan === null ? "" : `Realizado: ${poco.pct_real}%`} */}
-            {exibirPctReal ? `Realizado: ${poco.pct_real}%` : ""}
-          </Text>
+          <Flex>
+            <Text fontSize={"lg"} color={"white"} fontWeight={"bold"}>
+              {poco.poco}
+            </Text>
+          </Flex>
+          <Flex direction={"column"} w={"100%"}>
+            <Flex direction={"row"} justify={"space-between"} w={"100%"}>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"bold"}
+                textAlign={"start"}
+                flex={1}
+              >
+                Data Início:
+              </Text>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"semi-bold"}
+                textAlign={"end"}
+                ml={1}
+                flex={1}
+              >
+                {dataInicioFormatada}
+              </Text>
+            </Flex>
+            <Flex direction={"row"} justify={"space-between"} w={"100%"}>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"bold"}
+                textAlign={"start"}
+                flex={1}
+              >
+                Data Fim:
+              </Text>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"semi-bold"}
+                textAlign={"end"}
+                ml={1}
+                flex={1}
+              >
+                {dataFimFormatada}
+              </Text>
+            </Flex>
+            <Flex direction={"row"} justify={"space-between"} w={"100%"}>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"bold"}
+                textAlign={"start"}
+                flex={1}
+              >
+                Planejado:
+              </Text>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"semi-bold"}
+                textAlign={"end"}
+                ml={1}
+                flex={1}
+              >
+                {`${poco.pct_plan}%`}
+              </Text>
+            </Flex>
+            <Flex direction={"row"} justify={"space-between"} w={"100%"}>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"bold"}
+                textAlign={"start"}
+                flex={1}
+              >
+                Realizado:
+              </Text>
+              <Text
+                fontSize={"md"}
+                color={"white"}
+                fontWeight={"semi-bold"}
+                textAlign={"end"}
+                ml={1}
+                flex={1}
+              >
+                {`${poco.pct_real}%`}
+              </Text>
+            </Flex>
+          </Flex>
         </Flex>
       </Flex>
     </>

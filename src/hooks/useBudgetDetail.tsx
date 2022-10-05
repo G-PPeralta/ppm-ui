@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 // import { useToast } from "contexts/Toast";
 
-import { BudgetDetail } from "models/Budget.model";
+import { BudgetDetail } from "interfaces/Budgets";
 
 import { getBudgetDetail } from "services/get/GetBudget";
 

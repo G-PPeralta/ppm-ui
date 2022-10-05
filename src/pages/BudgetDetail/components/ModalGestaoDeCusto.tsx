@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { GrAddCircle } from "react-icons/gr";
 
 import {
@@ -22,19 +23,24 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import { Projeto } from "models/Budget.model";
+import { Projeto } from "interfaces/Budgets";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
-import { regexCaracteresEspeciais } from "utils/regex";
 
-import { useCadastroOrcamentoPrevisto } from "hooks/useCadastroOrcamentoPrevisto";
+import { useCadastroOrcamentoPlanejado } from "hooks/useCadastroOrcamentoPlanejado";
 
 function ModalGestaoDeCusto(props: { projeto: Projeto }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroOrcamentoPrevisto();
+  const { registerForm, loading, setAtividade } =
+    useCadastroOrcamentoPlanejado();
+  const { id } = props.projeto;
+
+  useEffect(() => {
+    setAtividade(id);
+  }, []);
 
   return (
     <>
@@ -86,45 +92,50 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                         <FormControl>
                           <Flex gap={1}>
                             <RequiredField />
-                            <FormLabel htmlFor="previsto">Valor</FormLabel>{" "}
+                            <FormLabel htmlFor="gasto">Valor</FormLabel>{" "}
                           </Flex>
                           <Input
                             isRequired
-                            placeholder="Valor Previsto"
-                            id="previsto"
-                            type="text"
-                            name="previsto"
-                            value={regexCaracteresEspeciais(
-                              registerForm.values.previsto
-                            )}
+                            placeholder="Valor Gasto"
+                            id="gasto"
+                            type="number"
+                            name="gasto"
+                            value={registerForm.values.gasto}
                             onChange={registerForm.handleChange}
-                            maxLength={10}
                           />
-                          {registerForm.errors.previsto && (
-                            <TextError>
-                              {registerForm.errors.previsto}
-                            </TextError>
+                          {registerForm.errors.gasto && (
+                            <TextError>{registerForm.errors.gasto}</TextError>
                           )}
                         </FormControl>
 
                         <FormControl>
                           <Flex gap={1}>
                             <RequiredField />
-                            <FormLabel htmlFor="previsto">Data</FormLabel>{" "}
+                            <FormLabel htmlFor="data">Data</FormLabel>{" "}
                           </Flex>
                           <Input
-                            placeholder="Select Date and Time"
+                            placeholder="Selecione a Data"
                             size="md"
                             type="date"
+                            id="data"
+                            name="data"
+                            value={registerForm.values.data}
+                            onChange={registerForm.handleChange}
                           />
                         </FormControl>
                       </Flex>
                       <FormControl>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="previsto">Fornecedor</FormLabel>
+                          <FormLabel htmlFor="fornecedor">Fornecedor</FormLabel>
                         </Flex>
-                        <Select placeholder="Select option">
+                        <Select
+                          placeholder="Escolha um Forncedor"
+                          id="fornecedor"
+                          name="fornecedor"
+                          value={registerForm.values.fornecedor}
+                          onChange={registerForm.handleChange}
+                        >
                           <option value="option1">Option 1</option>
                           <option value="option2">Option 2</option>
                           <option value="option3">Option 3</option>
@@ -140,11 +151,17 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                         <FormControl>
                           <Flex gap={1}>
                             <RequiredField />
-                            <FormLabel htmlFor="previsto">
+                            <FormLabel htmlFor="servico">
                               Classe de Serviço
                             </FormLabel>
                           </Flex>
-                          <Select placeholder="Select option">
+                          <Select
+                            placeholder="Escolha uma Classe"
+                            id="servico"
+                            name="servico"
+                            value={registerForm.values.servico}
+                            onChange={registerForm.handleChange}
+                          >
                             <option value="option1">Option 1</option>
                             <option value="option2">Option 2</option>
                             <option value="option3">Option 3</option>
@@ -153,20 +170,34 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                         <FormControl>
                           <Flex gap={1}>
                             <RequiredField />
-                            <FormLabel htmlFor="previsto">Pedido</FormLabel>
+                            <FormLabel htmlFor="pedido">Pedido</FormLabel>
                           </Flex>
-                          <Input placeholder="Pedido" size="md" type="text" />
+                          <Input
+                            placeholder="Pedido"
+                            id="pedido"
+                            name="pedido"
+                            value={registerForm.values.pedido}
+                            onChange={registerForm.handleChange}
+                            size="md"
+                            type="text"
+                          />
                         </FormControl>
                       </Flex>
 
                       <FormControl>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="previsto">
+                          <FormLabel htmlFor="pedido-obs">
                             Texto do Pedido
                           </FormLabel>
                         </Flex>
-                        <Textarea placeholder="Ação ou Recomendação" />
+                        <Textarea
+                          placeholder="Ação ou Recomendação"
+                          id="pedido-obs"
+                          name="pedido_obs"
+                          value={registerForm.values.pedido_obs}
+                          onChange={registerForm.handleChange}
+                        />
                       </FormControl>
                     </Flex>
                   </Stack>
@@ -189,9 +220,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                   Cancelar
                 </Button>
                 <Button
-                  disabled={
-                    !registerForm.isValid || !registerForm.values.previsto
-                  }
+                  disabled={!registerForm.isValid || !registerForm.dirty}
                   background="origem.300"
                   variant="primary"
                   color="white"

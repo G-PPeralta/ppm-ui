@@ -20,16 +20,19 @@ import {
   Tooltip,
   Flex,
   IconButton,
+  Select,
 } from "@chakra-ui/react";
-import { Project } from "models/Project.model";
 
 import ModalCadastrarPriorizacao from "./ModalCadastrarPriorizacao";
 import ModalDeletarProjeto from "./ModalDeletarProjeto";
 
 import "../projects.css";
+import { Projetos } from "interfaces/Projetos";
+
+import { BsCheckCircleFill, BsFillXCircleFill } from "react-icons/bs";
 
 interface TableProps {
-  data: Project[];
+  data: Projetos[];
 }
 
 export function TabelaProjetos(props: TableProps) {
@@ -42,8 +45,8 @@ export function TabelaProjetos(props: TableProps) {
 
   // console.log("dados tabela-projeto", data);
 
-  const total = data.reduce(
-    (accumulator, object) => accumulator + +object.valorTotalPrevisto,
+  const totalOrcado = data.reduce(
+    (accumulator, object) => accumulator + +object.vlr_orcado,
     0
   );
 
@@ -81,30 +84,48 @@ export function TabelaProjetos(props: TableProps) {
 
   const tableData = data.slice(from, to).map((projeto, key) => (
     <Tr key={key}>
-      <Td isNumeric>{projeto.id}</Td>
+      <Td isNumeric>{projeto.id_projeto}</Td>
       <Td>
-        <Link to={`/detalhamento/${projeto.id}`}>
+        <Link to={`/detalhamento/${projeto.id_projeto}`}>
           <Text color={"#0047BB"}>
-            {projeto.nome.length > 28 ? (
-              <Tooltip label={projeto.nome} aria-label="">
-                {projeto.nome.substring(0, 25) + "..."}
+            {projeto.nome_projeto.length > 28 ? (
+              <Tooltip label={projeto.nome_projeto} aria-label="">
+                {projeto.nome_projeto.substring(0, 25) + "..."}
               </Tooltip>
             ) : (
-              projeto.nome
+              projeto.nome_projeto
             )}
           </Text>
         </Link>
       </Td>
       <Td>
-        {projeto.valorTotalPrevisto && brl.format(projeto.valorTotalPrevisto)}
+        {+projeto.vlr_cpi >= 1 ? (
+          <BsCheckCircleFill color="#00B53D" fontSize={25} />
+        ) : (
+          <BsFillXCircleFill color="red" fontSize={25} />
+        )}
       </Td>
+      <Td>
+        {+projeto.vlr_spi >= 1 ? (
+          <BsCheckCircleFill color="#00B53D" fontSize={25} />
+        ) : (
+          <BsFillXCircleFill color="red" fontSize={25} />
+        )}
+      </Td>
+      <Td>{projeto.vlr_orcado && brl.format(projeto.vlr_orcado)}</Td>
+      <Td>{projeto.vlr_realizado && brl.format(projeto.vlr_realizado)}</Td>
+      <Td>{projeto.tcpi}</Td>
       <Td>{projeto.prioridade}</Td>
       <Td>{projeto.complexidade}</Td>
+      <Td>{projeto.polo}</Td>
+      <Td>{projeto.coordenador}</Td>
       <Td>{projeto.responsavel}</Td>
-      <Td></Td>
+      <Td>{projeto.data_inicio}</Td>
+      <Td>{projeto.data_fim}</Td>
+      <Td>{projeto.pct}</Td>
       <Td>
-        <ModalCadastrarPriorizacao projeto={projeto.id} />
-        <ModalDeletarProjeto projeto={projeto.id} />
+        <ModalCadastrarPriorizacao projeto={projeto.id_projeto} />
+        <ModalDeletarProjeto projeto={projeto.id_projeto} />
       </Td>
     </Tr>
   ));
@@ -116,21 +137,38 @@ export function TabelaProjetos(props: TableProps) {
           <Thead>
             <Tr background="origem.500" color="white">
               <Th>ID</Th>
-              <Th width="50">Nome</Th>
-              <Th>Total Previsto</Th>
+              <Th>Projeto</Th>
+              <Th>CPI</Th>
+              <Th>SPI</Th>
+              <Th>Orçamento</Th>
+              <Th>Realizado</Th>
+              <Th>TCPI</Th>
               <Th>Prioridade</Th>
               <Th>Complexidade</Th>
-              <Th>Responsavel</Th>
+              <Th>Polo</Th>
               <Th>Coordenador</Th>
+              <Th>Responsável</Th>
+              <Th>Data Início</Th>
+              <Th>Data de Término</Th>
+              <Th>%</Th>
               <Th>Ações</Th>
             </Tr>
           </Thead>
           <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
           <Tfoot>
             <Tr background="origem.200" color="white">
-              <Th></Th>
               <Th>Total</Th>
-              <Th>{brl.format(total)}</Th>
+              <Th>{data ? data.length : 0} Projetos</Th>
+              <Th></Th>
+              <Th></Th>
+              <Th>{brl.format(totalOrcado)}</Th>
+              <Th>{brl.format(totalOrcado)}</Th>
+              <Th></Th>
+              <Th></Th>
+              <Th></Th>
+              <Th></Th>
+              <Th></Th>
+              <Th></Th>
               <Th></Th>
               <Th></Th>
               <Th></Th>
@@ -140,26 +178,46 @@ export function TabelaProjetos(props: TableProps) {
         </Table>
       </TableContainer>
       <Flex justifyContent={"center"}>
-        <Flex
-          width={"300px"}
-          alignItems={"center"}
-          justifyContent={"space-between"}
-        >
+        <Flex alignItems={"center"} justifyContent={"space-between"}>
+          <Text>Per page</Text>
+          <Select width={100} marginLeft="10px" marginRight="15px">
+            <option value="10">10</option>
+            <option value="15">15</option>
+          </Select>
+
+          <Text>1 - 1 of {pagAtual}</Text>
+
           <IconButton
+            bgColor="#FFFF"
+            marginLeft="10px"
+            marginRight="5px"
             aria-label=""
             icon={<FiChevronsLeft />}
             onClick={() => paginate(1)}
           />
-          <IconButton aria-label="" icon={<FiChevronLeft onClick={back} />} />
-
-          <Text>Página atual: {pagAtual}</Text>
 
           <IconButton
+            bgColor="#FFFF"
+            marginLeft="5px"
+            marginRight="5px"
+            aria-label=""
+            icon={<FiChevronLeft onClick={back} />}
+          />
+
+          {/* <Text>Página atual: {pagAtual}</Text> */}
+
+          <IconButton
+            bgColor="#FFFF"
+            marginLeft="5px"
+            marginRight="5px"
             aria-label=""
             icon={<FiChevronRight />}
             onClick={advance}
           />
           <IconButton
+            bgColor="#FFFF"
+            marginLeft="5px"
+            marginRight="5px"
             aria-label=""
             icon={<FiChevronsRight />}
             onClick={() => paginate(maxPage)}

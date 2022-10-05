@@ -31,6 +31,7 @@ export function ActivitiesSchedule() {
   const [poco, setPoco] = useState(true);
   const [loading, setLoading] = useState(true);
   const [openId, setOpenId] = useState("");
+  const [openIndex, setOpenIndex] = useState("");
   const [atividades, setAtividades] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
 
@@ -51,9 +52,9 @@ export function ActivitiesSchedule() {
     requestHandler();
   }, [refresh]);
 
-  const openDetails = (atividade: any) => {
-    // console.log("atividade", atividade);
+  const openDetails = (atividade: any, index: any) => {
     setOpenId(atividade);
+    setOpenIndex(index);
   };
 
   return (
@@ -69,19 +70,19 @@ export function ActivitiesSchedule() {
                 bg={"white"}
                 borderRadius={{ base: "xl", sm: "xl" }}
               >
-                <Flex justify={"space-between"} mb={5} wrap={"wrap"}>
+                <Flex justify={"space-between"} mb={2} wrap={"wrap"}>
                   <Heading as="h3" size="md" mb={3} mt={innerWidth}>
-                    Acompanhamento de atividades
+                    Acompanhamento de Atividades
                   </Heading>
                 </Flex>
                 <Flex
                   direction={"column"}
                   justify={"space-between"}
-                  gap={6}
+                  gap={4}
                   wrap={"wrap"}
                   mb={4}
                 >
-                  <Flex gap={2} wrap={"wrap"}>
+                  <Flex gap={2} wrap={"wrap"} flex={1}>
                     <Button
                       variant="outline"
                       border={"2px solid"}
@@ -128,16 +129,17 @@ export function ActivitiesSchedule() {
                     </Button>
                     <BotaoVisaoPorArea />
                   </Flex>
-                  <Flex gap={4} wrap={"wrap"}>
-                    {statusProjeto.map((status, index) => (
-                      <StatusProjeto
-                        key={index}
-                        status={status.status}
-                        color={status.color}
-                      />
-                    ))}
-                  </Flex>
                 </Flex>
+                <Flex gap={4} wrap={"wrap"} flex={1} justify={"end"}>
+                  {statusProjeto.map((status, index) => (
+                    <StatusProjeto
+                      key={index}
+                      status={status.status}
+                      color={status.color}
+                    />
+                  ))}
+                </Flex>
+
                 <Flex direction={"row"} gap={4} py={4} wrap={"wrap"}>
                   {atividades.map((atividade, index) => (
                     <Flex
@@ -145,7 +147,7 @@ export function ActivitiesSchedule() {
                       direction={"column"}
                       align={"center"}
                       justify={"center"}
-                      onClick={() => openDetails(atividade)}
+                      onClick={() => openDetails(atividade, index)}
                       _hover={{ cursor: "pointer" }}
                     >
                       <CardACT atividade={atividade} />
@@ -156,6 +158,7 @@ export function ActivitiesSchedule() {
                   <ModalEditarAtividade
                     listaPrecedentes={atividades}
                     id={id}
+                    index={openIndex}
                     atividade={openId}
                     onClose={() => setOpenId("")}
                     setRefresh={setRefresh}

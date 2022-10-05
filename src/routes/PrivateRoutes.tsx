@@ -14,6 +14,7 @@ import { Fornecedores } from "pages/ListaDosFornecedores";
 import { NotFound } from "pages/NotFound";
 import { Permissions } from "pages/Permissions";
 import { PermissionsList } from "pages/PermissionsList";
+import { Priorizacao } from "pages/Priorizacao";
 import { Profile } from "pages/Profile";
 import { Projects } from "pages/Projects";
 import { ProjectsRegistration } from "pages/ProjectsRegistration";
@@ -53,15 +54,22 @@ export function PrivateRoutes() {
       <Route path="/gantt" element={<GanttPage />} />
       <Route path="/fornecedores" element={<Fornecedores />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
-      <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
       <Route
-        path="/atividade/:id/precedentes"
+        path="/infographics/atividade/:id"
+        element={<ActivitiesSchedule />}
+      />
+      <Route
+        path="/infographics/atividade/:id/precedentes"
         element={<ActivitiesPrecedents />}
       />
-      <Route path="/atividade/:id/visao-por-area" element={<VisaoPorArea />} />
+      <Route
+        path="/infographics/atividade/:id/visao-por-area"
+        element={<VisaoPorArea />}
+      />
       <Route path="/licoesAprendidas" element={<LicoesAprendidasProjetos />} />
       <Route path="/estatisticas/" element={<Statistics />} />
       <Route path="/estatisticas/cronograma" element={<StatisticsGantt />} />
+      <Route path="/priorizacao" element={<Priorizacao />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

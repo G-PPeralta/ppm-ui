@@ -1,6 +1,7 @@
+import { useState } from "react";
+
 import {
   Flex,
-  Text,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -12,16 +13,15 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Stack,
   useBreakpointValue,
   Input,
 } from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
 
+import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
+import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroSonda } from "hooks/useCadastroSonda";
@@ -29,6 +29,7 @@ import { useCadastroSonda } from "hooks/useCadastroSonda";
 function ModalCadastrarSonda() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroSonda();
+  const [refresh, setRefresh] = useState(false);
 
   return (
     <>
@@ -47,7 +48,7 @@ function ModalCadastrarSonda() {
       >
         Sonda
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="md">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -58,7 +59,7 @@ function ModalCadastrarSonda() {
             color={"white"}
             fontSize={"1em"}
           >
-            Cadastrar Sonda
+            Cadastrar SPT
           </ModalHeader>
           {/* <ModalCloseButton color={"white"} /> */}
           <form
@@ -70,43 +71,43 @@ function ModalCadastrarSonda() {
             <ModalBody mt={3}>
               <FormControl>
                 <Flex direction={"column"} gap={4}>
-                  <Stack>
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: "column",
-                        md: "row",
-                      })}
-                      gap={5}
-                    >
-                      <FormControl>
-                        <Flex gap={1}>
-                          <RequiredField />
-                          <FormLabel htmlFor="nome">NOME</FormLabel>{" "}
-                        </Flex>
-                        <Input
-                          isRequired
-                          placeholder="Nome da Sonda"
-                          id="nome"
-                          type="text"
-                          name="nome"
-                          value={regexCaracteresEspeciais(
-                            registerForm.values.nome
-                          )}
-                          onChange={registerForm.handleChange}
-                          maxLength={10}
-                        />
-                        {registerForm.errors.nome && (
-                          <TextError>{registerForm.errors.nome}</TextError>
+                  <Flex
+                    flexDirection={useBreakpointValue({
+                      base: "column",
+                      md: "row",
+                    })}
+                    gap={5}
+                    align={"center"}
+                    justify={"center"}
+                  >
+                    <FormControl w={"275px"}>
+                      <Flex gap={1}>
+                        <RequiredField />
+                        <FormLabel htmlFor="nome">NOME</FormLabel>
+                      </Flex>
+                      <Input
+                        isRequired
+                        placeholder="Nome da Sonda"
+                        id="nome"
+                        type="text"
+                        name="nome"
+                        value={regexCaracteresEspeciais(
+                          registerForm.values.nome
                         )}
-                      </FormControl>
-                    </Flex>
-                  </Stack>
+                        onChange={registerForm.handleChange}
+                        maxLength={10}
+                      />
+                      {registerForm.errors.nome && (
+                        <TextError>{registerForm.errors.nome}</TextError>
+                      )}
+                    </FormControl>
+                  </Flex>
                 </Flex>
               </FormControl>
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
+              {/* <Flex gap={2}>
                 <Button
                   variant="ghost"
                   color="red"
@@ -134,10 +135,25 @@ function ModalCadastrarSonda() {
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (
                     <>
-                      <Text>Concluir Cadastro</Text>
+                      <Text>Cadastrar</Text>
                     </>
                   )}
                 </Button>
+              </Flex> */}
+              <Flex gap={2}>
+                <BotaoVermelhoGhost
+                  text={"Cancelar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                />
+                <BotaoAzulPrimary
+                  text={"Concluir Cadastro"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                  loading={loading}
+                />
               </Flex>
             </ModalFooter>
           </form>

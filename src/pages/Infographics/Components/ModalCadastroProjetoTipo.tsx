@@ -1,6 +1,5 @@
 import {
   Flex,
-  Text,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -16,12 +15,12 @@ import {
   Input,
   Textarea,
 } from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
 
+import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
+import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
-import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
@@ -32,8 +31,6 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaAtividadesPrecedentes } =
     useCadastroProjetoTipo();
-
-  // console.log("registerForm", registerForm.values);
 
   return (
     <>
@@ -82,7 +79,7 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                       })}
                       gap={5}
                     >
-                      <FormControl>
+                      <Flex w={"50%"} direction={"column"}>
                         <Flex gap={1}>
                           <RequiredField />
                           <FormLabel htmlFor="nom_projeto_tipo">NOME</FormLabel>
@@ -105,7 +102,7 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                               {registerForm.errors.nom_projeto_tipo}
                             </TextError>
                           )}
-                      </FormControl>
+                      </Flex>
                     </Flex>
                   </Stack>
 
@@ -154,7 +151,7 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
+              {/* <Flex gap={2}>
                 <Button
                   variant="ghost"
                   color="red"
@@ -193,6 +190,21 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                     </>
                   )}
                 </Button>
+              </Flex> */}
+              <Flex gap={2}>
+                <BotaoVermelhoGhost
+                  text={"Cancelar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                />
+                <BotaoAzulPrimary
+                  text={"Concluir Cadastro"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                  loading={loading}
+                />
               </Flex>
             </ModalFooter>
           </form>
