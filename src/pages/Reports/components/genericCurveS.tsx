@@ -50,6 +50,7 @@ function GenericCurveS({ data }: Props) {
           borderColor={"gray.200"}
           borderBottomRadius={"2xl"}
           padding={"1em"}
+          paddingLeft={{ base: "0", md: "1em" }}
           direction={"column"}
         >
           <ResponsiveContainer
@@ -93,7 +94,11 @@ function GenericCurveS({ data }: Props) {
               />
             </LineChart>
           </ResponsiveContainer>
-          <Flex gap={"4em"}>
+          <Flex
+            gap={{ base: "1em", md: "4em" }}
+            direction={{ base: "column", md: "row" }}
+            padding={{ base: "1em", md: "0" }}
+          >
             <Flex direction={"column"}>
               <Heading as="h3" size="sm">
                 Cronograma
