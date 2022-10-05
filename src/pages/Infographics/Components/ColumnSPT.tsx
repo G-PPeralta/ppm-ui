@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react";
+
 import { Flex, Text } from "@chakra-ui/react";
+
+import { getServicoPocoId } from "services/get/CadastroModaisInfograficos";
 
 import CardPIR from "./CardPIR";
 import ModalCadastroIntervencao from "./ModalCadastroIntervencao";
@@ -29,6 +33,35 @@ type Props = {
 };
 
 function ColumnSPT({ column, setRefresh, refresh }: Props) {
+  const [listaServicosPocos, setListaServicosPocos] = useState<any>([]);
+
+  const handleServicoPocos = async () => {
+    const idNomeSonda = column.sonda.split(" - ")[0];
+    const servicoPocos = await getServicoPocoId(idNomeSonda);
+
+    const servicoPocosSorted = servicoPocos.data.sort((a: any, b: any) =>
+      a.nom_poco.localeCompare(b.nom_poco)
+    );
+
+    setListaServicosPocos(servicoPocosSorted);
+  };
+
+  useEffect(() => {
+    handleServicoPocos();
+  }, []);
+
+  // const handleServicoPocos = async () => {
+  //   if (optionsSondaCampanha) {
+  //     const nomeSondaComId = optionsSondaCampanha.find(
+  //       (option: any) => option.value === idCampanha
+  //     );
+  //     if (nomeSondaComId) {
+  //       const idSonda = nomeSondaComId.label.split(" - ")[0];
+  //       const servicoPocos = await getServicoPocoId(idSonda);
+  //       setListaServicoPocos(servicoPocos.data);
+  //     }
+  //   }
+  // };
   return (
     <Flex
       direction={"column"}
@@ -37,8 +70,8 @@ function ColumnSPT({ column, setRefresh, refresh }: Props) {
       flex={1}
       minW={"296px"}
     >
-      <Flex mt={3} mb={6} alignItems={"center"} justify={"end"} w="220px">
-        <Text fontSize={"2xl"} fontWeight={"bold"} textAlign={"center"}>
+      <Flex mt={3} mb={6} alignItems={"center"} justify={"end"} w="265px">
+        <Text fontSize={"xl"} fontWeight={"bold"} textAlign={"center"}>
           {column.sonda}
         </Text>
         <ModalEditarSPT column={column} />
@@ -86,6 +119,7 @@ function ColumnSPT({ column, setRefresh, refresh }: Props) {
           idCampanha={column.id_campanha}
           refresh={refresh}
           setRefresh={setRefresh}
+          listaServicosPocos={listaServicosPocos}
         />
       </Flex>
     </Flex>
