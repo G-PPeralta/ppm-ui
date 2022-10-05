@@ -32,7 +32,7 @@ export interface BudgetDetail {
 
 export interface BudgetReal {
   atividadeId: number;
-  valor: string;
+  valor: number;
   data: string;
   fornecedor: string;
   classeServico: string;

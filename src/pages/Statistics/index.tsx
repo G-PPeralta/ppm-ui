@@ -7,12 +7,13 @@ import { StatisticsTableData } from "interfaces/Services";
 
 import Sidebar from "components/SideBar";
 
-import ModalCadastrarSonda from "./components/ModalCadastrarSonda";
+import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
+
+// import ModalCadastrarSonda from "./components/ModalCadastrarSonda";
 import ModalCadastroCronograma from "./components/ModalCadastroCronograma";
 import ModalCadastroOperacao from "./components/ModalCadastroOperação";
-import ModalCadastroPoco from "./components/ModalCadastroPoco";
+// import ModalCadastroPoco from "./components/ModalCadastroPoco";
 import { StatisticsTable } from "./components/StatisticsTable";
-import { atividades } from "./projeto";
 
 function Statistics() {
   const [loading, setLoading] = useState(true);
@@ -53,8 +54,7 @@ function Statistics() {
   };
 
   const handleGetAllData = async () => {
-    // const req = await getStatisticsTasks();
-    const data = atividades; // TODO set req to data
+    const { data } = await getOperacoesEstatisticas();
     if (!data) return;
     const newData = convertReq(data);
     setAllData(newData);
@@ -152,8 +152,8 @@ function Statistics() {
                 </Flex>
 
                 <Flex gap={2} flex={2} justify={"end"} align={"end"}>
-                  <ModalCadastrarSonda />
-                  <ModalCadastroPoco />
+                  {/* <ModalCadastrarSonda /> */}
+                  {/* <ModalCadastroPoco /> */}
                   <ModalCadastroOperacao
                     refresh={refresh}
                     setRefresh={setRefresh}

@@ -1,11 +1,12 @@
 import { useState } from "react";
 
 import { useFormik } from "formik";
+import { Projetos } from "interfaces/Projetos";
 import { projectRegisterSchema } from "validations/ProjectRegister";
 
 import { useToast } from "contexts/Toast";
 
-import { getProjects } from "services/get/GetProject";
+import { getProjetos } from "services/get/GetProject";
 import { postProject } from "services/post/ProjectRegister";
 
 export function useProjects() {
@@ -13,8 +14,8 @@ export function useProjects() {
 
   const [loading, setLoading] = useState(false);
 
-  const getAllProjects = async (polo: string) => {
-    const data: any[] = await getProjects(polo);
+  const getProjetosDetalhados = async () => {
+    const data: Projetos[] = await getProjetos();
     return data;
   };
 
@@ -96,7 +97,7 @@ export function useProjects() {
   });
 
   return {
-    getAllProjects,
+    getProjetosDetalhados,
     projectsForm,
     loading,
   };
