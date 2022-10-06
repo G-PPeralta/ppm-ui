@@ -107,15 +107,16 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
     <>
       <Button
         rightIcon={<IoMdArrowDropdown />}
-        textColor={"origem.500"}
-        backgroundColor={"transparent"}
-        _hover={{
-          borderColor: "origem.600",
-          backgroundColor: "origem.500",
-          textColor: "white",
-          transition: "all 0.4s",
-        }}
+        h={"56px"}
+        borderRadius={"10px"}
+        background={"white"}
+        color={"origem.500"}
         onClick={onOpen}
+        _hover={{
+          background: "origem.500",
+          transition: "all 0.4s",
+          color: "white",
+        }}
       >
         Filtrar
       </Button>
