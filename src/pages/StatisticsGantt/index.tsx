@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { FiChevronLeft } from "react-icons/fi";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import {
   Box,
   Flex,
+  IconButton,
   Text,
   Heading,
-  Spacer,
   Stack,
   useBreakpointValue,
   useColorModeValue,
@@ -20,11 +21,14 @@ import { useToast } from "contexts/Toast";
 import { patchOperacoesEstatisticas } from "services/update/OperacoesEstatisticas";
 
 import { Gantt } from "./components/Gantt";
+import ModalEditarCronograma from "./components/ModalEditarCronograma";
 
 function StatisticsGantt() {
   const { state }: any = useLocation();
+  const navigate = useNavigate();
   const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
   const toolbarOptions = ["ZoomIn", "ZoomOut"];
+  const [refresh, setRefresh] = useState(false);
   const [projeto, setProjeto] = useState({ sonda: "", poco: "" });
   const { toast } = useToast();
 
@@ -123,6 +127,12 @@ function StatisticsGantt() {
   return (
     <>
       <Sidebar>
+        <IconButton
+          aria-label=""
+          icon={<FiChevronLeft />}
+          onClick={() => navigate(`/estatisticas`)}
+        />
+
         <Stack spacing="8">
           <Box
             py={{ base: "0", sm: "10" }}
@@ -136,15 +146,21 @@ function StatisticsGantt() {
             borderRadius={{ base: "none", sm: "xl" }}
           >
             <Stack>
-              <Flex>
-                <Box mb={5}>
+              <Flex mb={5} justify={"space-between"} wrap={"wrap"}>
+                <Box>
                   <Heading as="h3" size="md">
                     {projeto.sonda}
                   </Heading>
                   <Text>{projeto.poco}</Text>
                 </Box>
 
-                <Spacer />
+                <Flex gap={2} flex={2} justify={"end"} align={"end"}>
+                  <ModalEditarCronograma
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                    atual={state.data}
+                  />
+                </Flex>
               </Flex>
             </Stack>
             <Stack spacing="8">

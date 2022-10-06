@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 
 import { Flex } from "@chakra-ui/react";
 import {
+  Edit,
   GanttComponent,
   Inject,
-  Edit,
+  Selection,
   Toolbar,
 } from "@syncfusion/ej2-react-gantt";
 import { Ring } from "@uiball/loaders";
@@ -131,6 +132,12 @@ export function Gantt({ data, options }: ganttOptionsProps) {
             mode: "Auto",
             allowTaskbarEditing: false,
           }}
+          allowSelection={true}
+          selectionSettings={{
+            mode: "Cell",
+            type: "Single",
+            enableToggle: true,
+          }}
           splitterSettings={{
             // view: handleShowGantt(),
             // columnIndex: 5,
@@ -217,7 +224,7 @@ export function Gantt({ data, options }: ganttOptionsProps) {
             // },
           ]}
         >
-          <Inject services={[Edit, Toolbar]} />
+          <Inject services={[Edit, Selection, Toolbar]} />
         </GanttComponent>
       ) : (
         <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
