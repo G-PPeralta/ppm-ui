@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { Flex, Heading } from "@chakra-ui/react";
 import {
   GanttComponent,
   Inject,
@@ -10,6 +11,8 @@ import { IGantt, GanttProps } from "interfaces/Services";
 
 import { getGanttData } from "services/get/Gantt";
 
+import ModalCadastroAtividades from "../../pages/DetalhamentoProjeto/components/ModalCadastroAtividades";
+
 type ganttOptionsProps = {
   toolbarOptions?: string[];
 };
@@ -17,6 +20,7 @@ export function Gantt({ toolbarOptions }: ganttOptionsProps) {
   // const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);
   const [loading, setLoading] = useState(true);
   const [gantt, setGantt] = useState<GanttProps[]>();
+  const [refresh, setRefresh] = useState(false);
 
   function ganttFormatter(gantt: IGantt) {
     if (!gantt) return;
@@ -151,27 +155,26 @@ export function Gantt({ toolbarOptions }: ganttOptionsProps) {
     <>
       {!loading && (
         <>
-          <header
-            style={{
-              display: "flex",
-              borderBottom: "1px solid black",
-              background: "white",
-              height: "64px",
-              alignItems: "center",
-              borderRadius: "8px 8px 0px 0px",
-            }}
+          <Flex
+            backgroundColor={"white"}
+            borderTopRadius={"8px"}
+            borderBottomRadius={"0px"}
+            // borderBottom={"1px solid #F0F3F7"}
+            align={"center"}
+            pl={"20px"}
+            gap={5}
+            h={"100%"}
+            py={2}
           >
-            <p
-              style={{
-                fontFamily: "Mulish",
-                fontWeight: 700,
-                fontSize: "24px",
-                marginLeft: "15px",
-              }}
-            >
+            <Heading as="h4" size="md">
               Gráfico Gantt
-            </p>
-          </header>
+            </Heading>
+            <ModalCadastroAtividades
+              setRefresh={setRefresh}
+              refresh={refresh}
+              // atividades={atividades}
+            />
+          </Flex>
           <GanttComponent
             id="gantt-control"
             dataSource={gantt}

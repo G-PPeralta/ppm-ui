@@ -26,7 +26,6 @@ import BotoesModais from "./components/BotoesModais";
 import CardInfoProjeto from "./components/CardInfoProjeto";
 import CardOrcamento from "./components/CardOrcamento";
 // import GraficoCurvaS from "./components/GraficoCurvaS";
-import ModalCadastroAtividade from "./components/ModalCadastroAtividades";
 
 const curveSData = [
   {
@@ -73,8 +72,6 @@ function DetalhamentoProjeto() {
   const [categorias, setCategorias] = useState([] as Categorias[]);
   const [progresso, setProgresso] = useState([] as ProjetoProgresso[]);
   const [render, setRender] = useState(false);
-
-  const [refresh, setRefresh] = useState(false);
 
   const handleGetInfoProjetos = async () => {
     if (id) {
@@ -169,11 +166,7 @@ function DetalhamentoProjeto() {
                 setRender={() => setRender(true)}
               />
             </Flex>
-            <ModalCadastroAtividade
-              setRefresh={setRefresh}
-              refresh={refresh}
-              // atividades={atividades}
-            />
+
             <Gantt />
             <GenericCurveS data={curveSData} />
             {/* <GraficoCurvaS /> */}

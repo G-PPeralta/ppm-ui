@@ -32,7 +32,7 @@ interface Responsavel {
   nome: string;
 }
 
-function ModalCadastroAtividade({ setRefresh, refresh, atividades }: any) {
+function ModalCadastroAtividades({ setRefresh, refresh, atividades }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaResponsaveis, listaAreaAtuacao } =
     useCadastroAtividadeProjeto();
@@ -67,18 +67,15 @@ function ModalCadastroAtividade({ setRefresh, refresh, atividades }: any) {
     <>
       <Button
         h={"56px"}
-        mb={4}
         borderRadius={"10px"}
-        background={"origem.300"}
-        variant="primary"
-        color="white"
-        _hover={{
-          borderColor: "origem.500",
-          backgroundColor: "origem.500",
-          textColor: "white",
-          transition: "all 0.4s",
-        }}
+        background={"white"}
+        color={"origem.500"}
         onClick={onOpen}
+        _hover={{
+          background: "origem.500",
+          transition: "all 0.4s",
+          color: "white",
+        }}
       >
         Nova Atividade
       </Button>
@@ -258,4 +255,4 @@ function ModalCadastroAtividade({ setRefresh, refresh, atividades }: any) {
   );
 }
 
-export default ModalCadastroAtividade;
+export default ModalCadastroAtividades;
