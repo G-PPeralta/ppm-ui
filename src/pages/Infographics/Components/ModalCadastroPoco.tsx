@@ -11,10 +11,10 @@ import {
   useDisclosure,
   Button,
   FormControl,
-  FormLabel,
   Stack,
   useBreakpointValue,
   Input,
+  Text,
 } from "@chakra-ui/react";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
@@ -64,7 +64,6 @@ function ModalCadastroPoco() {
           >
             Cadastrar Poço
           </ModalHeader>
-          {/* <ModalCloseButton color={"white"} /> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -87,9 +86,16 @@ function ModalCadastroPoco() {
                       <FormControl w={"275px"}>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="poco">NOME</FormLabel>
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            POÇO
+                          </Text>
                         </Flex>
                         <Input
+                          h={"56px"}
                           isRequired
                           placeholder="Nome do Poço"
                           id="poco"

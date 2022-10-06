@@ -6,7 +6,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  // ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
@@ -64,7 +63,6 @@ function ModalCadastrarSonda() {
           >
             Cadastrar SPT
           </ModalHeader>
-          {/* <ModalCloseButton color={"white"} /> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -117,39 +115,6 @@ function ModalCadastrarSonda() {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              {/* <Flex gap={2}>
-                <Button
-                  variant="ghost"
-                  color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
-                  _hover={{
-                    background: "red.500",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  disabled={!registerForm.isValid || !registerForm.values.nome}
-                  background="origem.300"
-                  variant="primary"
-                  color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                  }}
-                >
-                  {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Cadastrar</Text>
-                    </>
-                  )}
-                </Button>
-              </Flex> */}
               <Flex gap={2}>
                 <BotaoVermelhoGhost
                   text={"Cancelar"}
