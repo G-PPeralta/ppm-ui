@@ -11,10 +11,10 @@ import {
   useDisclosure,
   Button,
   FormControl,
-  FormLabel,
   Stack,
   useBreakpointValue,
   Input,
+  Text,
 } from "@chakra-ui/react";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
@@ -34,16 +34,19 @@ function ModalCadastroPoco() {
   return (
     <>
       <Button
-        variant="outline"
+        h={"56px"}
+        borderRadius={"10px"}
+        background={"white"}
         border={"2px solid"}
-        borderColor={"origem.500"}
-        textColor={"origem.500"}
+        color={"origem.500"}
         _hover={{
-          borderColor: "origem.600",
-          backgroundColor: "origem.500",
-          textColor: "white",
+          border: "2px solid",
+          borderColor: "origem.500",
+          background: "origem.500",
           transition: "all 0.4s",
+          color: "white",
         }}
+        textColor={"origem.500"}
         onClick={onOpen}
       >
         Poço
@@ -61,7 +64,6 @@ function ModalCadastroPoco() {
           >
             Cadastrar Poço
           </ModalHeader>
-          {/* <ModalCloseButton color={"white"} /> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -84,9 +86,16 @@ function ModalCadastroPoco() {
                       <FormControl w={"275px"}>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="poco">NOME</FormLabel>
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            POÇO
+                          </Text>
                         </Flex>
                         <Input
+                          h={"56px"}
                           isRequired
                           placeholder="Nome do Poço"
                           id="poco"

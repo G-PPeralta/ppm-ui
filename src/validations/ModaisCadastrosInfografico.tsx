@@ -48,13 +48,16 @@ export const cadastroAtividadeSchema = yup.object({
 });
 
 export const cadastroProjetoTipoSchema = yup.object({
-  nom_projeto_tipo: yup.string().required("O nome do projeto é obrigatório!"),
+  nom_projeto_tipo: yup
+    .string()
+    .required("O nome do projeto é obrigatório!")
+    .min(3, "O nome deve ter ao menos 3 caracteres!"),
   atividades: yup.array().of(
     yup.object({
       atividade_id_origem: yup.string().required(),
-      area_id: yup.number().required().min(1),
-      tarefa_id: yup.number().required().min(1),
-      qtde_dias: yup.number().required(),
+      area_id: yup.number().required().moreThan(0),
+      tarefa_id: yup.number().required().moreThan(0),
+      qtde_dias: yup.number().required().moreThan(0),
       precedentes: yup.array().of(
         yup.object({
           id: yup.number(),
@@ -64,7 +67,7 @@ export const cadastroProjetoTipoSchema = yup.object({
       ),
     })
   ),
-  comentarios: yup.string().required("Adicione algum comentário!"),
+  comentarios: yup.string(),
 });
 
 export const cadastroPocoSchema = yup.object({
@@ -80,19 +83,20 @@ export const cadastroNovaCampanhaSchema = yup.object({
 });
 
 export const cadastroNovaIntervencaoSchema = yup.object({
-  id_campanha: yup.number().required(),
-  poco_id: yup.number().required(),
-  projeto_tipo_id: yup.number().required(),
+  id_campanha: yup.number().required().moreThan(0),
+  poco_id: yup.number().required().moreThan(0),
+  projeto_tipo_id: yup.number().required().moreThan(0),
   dat_ini_prev: yup.string().required(),
-  comentarios: yup.string().required(),
   atividades: yup.array().of(
     yup.object({
-      area_id: yup.number().required(),
-      tarefa_id: yup.number().required(),
-      responsavel_id: yup.number().required(),
-      qtde_dias: yup.number().required(),
+      area_id: yup.number().required().moreThan(0),
+      tarefa_id: yup.number().required().moreThan(0),
+      responsavel_id: yup.number().required().moreThan(0),
+      qtde_dias: yup.number().required().moreThan(0),
     })
   ),
+  comentarios: yup.string(),
+  erroDataIntervencao: yup.boolean().oneOf([false]),
 });
 
 export const cadastroNovaAtividadeSchema = yup.object({

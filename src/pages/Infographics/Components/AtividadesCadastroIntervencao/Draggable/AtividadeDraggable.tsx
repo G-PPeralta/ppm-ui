@@ -16,6 +16,8 @@ import {
   Responsavel,
 } from "interfaces/CadastrosModaisInfograficos";
 
+import { RequiredField } from "components/RequiredField/RequiredField";
+
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
 import PopOverPrecedentes from "./PopOverPrecedentes";
 interface Props {
@@ -96,7 +98,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
             w="100%"
             bg={"#f5f5f5"}
             px={5}
-            py={2}
+            py={4}
             borderRadius={"60px"}
             mb={2}
           >
@@ -122,9 +124,10 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 flex={1}
               >
                 <Flex direction={"column"} flex={2}>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>ÁREA</Text>
                   <SelectFiltragem
                     registerForm={registerForm}
+                    required={true}
+                    nomeSelect={"ÁREA"}
                     propName={`atividades[${index}].area_id`}
                     options={optionsAreaAtuacao}
                     value={getValue(optionsAreaAtuacao, index, "area_id")}
@@ -132,9 +135,10 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 </Flex>
 
                 <Flex direction={"column"} flex={2}>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>TAREFA</Text>
                   <SelectFiltragem
                     registerForm={registerForm}
+                    required={true}
+                    nomeSelect={"TAREFA"}
                     propName={`atividades[${index}].tarefa_id`}
                     options={optionsTarefa}
                     value={getValue(optionsTarefa, index, "tarefa_id")}
@@ -142,10 +146,9 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 </Flex>
 
                 <Flex direction={"column"} flex={2}>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>
-                    RESPONSÁVEL
-                  </Text>
                   <SelectFiltragem
+                    required={true}
+                    nomeSelect={"RESPONSÁVEL"}
                     registerForm={registerForm}
                     propName={`atividades[${index}].responsavel_id`}
                     options={optionsResponsaveis}
@@ -158,8 +161,18 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 </Flex>
 
                 <Flex direction={"column"} flex={1}>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
+                  <Flex gap={1}>
+                    <RequiredField />
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      DIAS
+                    </Text>
+                  </Flex>
                   <NumberInput
+                    maxW={"128px"}
                     max={99999}
                     min={0}
                     id={`atividades[${index}].qtde_dias`}
@@ -172,13 +185,19 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                       );
                     }}
                   >
-                    <NumberInputField bg={"#fff"} />
+                    <NumberInputField bg={"#fff"} h={"56px"} />
                   </NumberInput>
                 </Flex>
                 <Flex direction={"column"} flex={1}>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>
-                    PRECEDENTES
-                  </Text>
+                  <Flex gap={1}>
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      PRECEDENTES
+                    </Text>
+                  </Flex>
                   <PopOverPrecedentes
                     registerForm={registerForm}
                     index={index}

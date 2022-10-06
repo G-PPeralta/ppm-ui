@@ -135,7 +135,7 @@ export function MobileNav({
       </Text>
       <Flex w={"100%"} justifyContent={"center"} alignItems={"center"}>
         {way.map((item, index) => (
-          <>
+          <Box key={index}>
             {index > 2 ? (
               <>
                 <Button
@@ -153,7 +153,7 @@ export function MobileNav({
                 )}
               </>
             ) : undefined}
-          </>
+          </Box>
         ))}
       </Flex>
       <HStack className={"noprint"} spacing={{ base: "0", md: "6" }}>

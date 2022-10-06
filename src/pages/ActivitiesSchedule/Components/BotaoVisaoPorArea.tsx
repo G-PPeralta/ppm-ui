@@ -13,6 +13,8 @@ function BotaoVisaoPorArea() {
   return (
     <>
       <Button
+        h={"56px"}
+        borderRadius={"10px"}
         variant="outline"
         border={"2px solid"}
         borderColor={"origem.500"}
