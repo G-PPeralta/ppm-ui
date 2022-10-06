@@ -105,27 +105,27 @@ export function LicoesAprendidasProjetos() {
     .sort((a, b) => a.id - b.id)
     .slice(from, to)
     .map((lessons, index) => (
-      <Tr key={index} alignSelf={"center"}>
+      <Tr key={index}>
         <Td
           isNumeric
           style={{
             borderBottom: "0.5px solid #A7A7A7",
-            borderRight: "0.5px solid #A7A7A7",
+            border: "0.5px solid #A7A7A7",
           }}
           width="48px"
           height={"56px"}
           textAlign={"center"}
-          justifyItems={"center"}
         >
           {lessons.id}
         </Td>
+
         <Td
           style={{
             borderBottom: "0.5px solid #A7A7A7",
             borderRight: "0.5px solid #A7A7A7",
           }}
           width="284px"
-          height={"36px"}
+          height={"56px"}
         >
           {lessons.txt_licao_aprendida}
         </Td>
@@ -134,6 +134,8 @@ export function LicoesAprendidasProjetos() {
             borderBottom: "0.5px solid #A7A7A7",
             borderRight: "0.5px solid #A7A7A7",
           }}
+          width="506px"
+          height={"36px"}
         >
           {lessons.txt_acao}
         </Td>
@@ -155,7 +157,7 @@ export function LicoesAprendidasProjetos() {
             borderRight: "0.5px solid #A7A7A7",
           }}
           width="96px"
-          height={"36px"}
+          height={"56px"}
         >
           <IconButton
             aria-label="Plus sign"
@@ -163,7 +165,7 @@ export function LicoesAprendidasProjetos() {
             background="transparent"
             variant="secondary"
             color="#0047BB"
-            mr={2}
+            // mr={2}
             isRound={true}
             // size="md"
             width={"18px"}
@@ -264,62 +266,64 @@ export function LicoesAprendidasProjetos() {
                   />
                 </Flex>
               </Flex>
-              <Flex flexDir={"row"} justify={"space-between"} gap={2}>
-                <Flex align={"flex-end"}>
-                  <FormControl>
-                    <FormLabel
-                      fontWeight={"700"}
-                      fontSize={"12px"}
-                      color={"#A7A7A7"}
-                      htmlFor="projeto"
-                    >
-                      PROJETO
-                    </FormLabel>
-                    <Select
-                      mt={"-9px"}
-                      borderRadius={"8px"}
-                      placeholder="Selecione"
-                      id="projeto"
-                      name="projeto"
-                      onChange={(e) => setProjetoId(e.target.value)}
-                      width={"208px"}
+              <Flex flexDir={"row"} justify={"space-between"}>
+                <Flex align={"flex-end"} gap={3}>
+                  <Flex>
+                    <FormControl>
+                      <FormLabel
+                        fontWeight={"700"}
+                        fontSize={"12px"}
+                        color={"#A7A7A7"}
+                        htmlFor="projeto"
+                      >
+                        PROJETO
+                      </FormLabel>
+                      <Select
+                        mt={"-9px"}
+                        borderRadius={"8px"}
+                        placeholder="Selecione"
+                        id="projeto"
+                        name="projeto"
+                        onChange={(e) => setProjetoId(e.target.value)}
+                        width={"208px"}
+                        height={"56px"}
+                      >
+                        <option color={"#A7A7A7"} value={0}>
+                          Todos
+                        </option>
+                        {projetos &&
+                          projetos.map((project, index) => (
+                            <option value={project.id} key={index}>
+                              {project.nomeProjeto}
+                            </option>
+                          ))}
+                      </Select>
+                    </FormControl>
+                  </Flex>
+                  <Flex align={"flex-end"}>
+                    <Button
+                      type="button"
+                      background="#0047BB"
+                      variant="outline"
+                      color="white"
+                      borderColor="#0047BB"
+                      _hover={{
+                        background: "white",
+                        transition: "all 0.4s",
+                        color: "#0047BB",
+                      }}
+                      rightIcon={<FiSearch />}
+                      onClick={filterByProject}
+                      alignSelf={"end"}
+                      // marginLeft={"-332px"}
                       height={"56px"}
+                      width={"101px"}
+                      fontSize={"18px"}
+                      borderRadius={"8px"}
                     >
-                      <option color={"#A7A7A7"} value={0}>
-                        Todos
-                      </option>
-                      {projetos &&
-                        projetos.map((project, index) => (
-                          <option value={project.id} key={index}>
-                            {project.nomeProjeto}
-                          </option>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </Flex>
-                <Flex>
-                  <Button
-                    type="button"
-                    background="#0047BB"
-                    variant="outline"
-                    color="white"
-                    borderColor="#0047BB"
-                    _hover={{
-                      background: "white",
-                      transition: "all 0.4s",
-                      color: "#0047BB",
-                    }}
-                    rightIcon={<FiSearch />}
-                    onClick={filterByProject}
-                    alignSelf={"end"}
-                    marginLeft={"-262px"}
-                    height={"56px"}
-                    width={"101px"}
-                    fontSize={"18px"}
-                    borderRadius={"8px"}
-                  >
-                    Filtrar
-                  </Button>
+                      Filtrar
+                    </Button>
+                  </Flex>
                 </Flex>
 
                 <Flex align={"flex-start"} mt={"22px"}>
@@ -370,7 +374,7 @@ export function LicoesAprendidasProjetos() {
                       <Th
                         style={{
                           borderBottom: "0.5px solid #A7A7A7",
-                          borderRight: "0.5px solid #A7A7A7",
+                          border: "0.5px solid #A7A7A7",
                         }}
                         width="48px"
                         height={"36px"}
@@ -379,6 +383,7 @@ export function LicoesAprendidasProjetos() {
                       >
                         ID
                       </Th>
+
                       <Th
                         style={{
                           borderBottom: "0.5px solid #A7A7A7",
