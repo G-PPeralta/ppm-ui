@@ -84,6 +84,8 @@ export function ActivitiesSchedule() {
                 >
                   <Flex gap={2} wrap={"wrap"} flex={1}>
                     <Button
+                      h={"56px"}
+                      borderRadius={"10px"}
                       variant="outline"
                       border={"2px solid"}
                       borderColor={"origem.500"}
@@ -107,6 +109,8 @@ export function ActivitiesSchedule() {
                       atividades={atividades}
                     />
                     <Button
+                      h={"56px"}
+                      borderRadius={"10px"}
                       variant="outline"
                       border={"2px solid"}
                       borderColor={"origem.500"}
