@@ -26,6 +26,7 @@ import {
 import { Projetos } from "interfaces/Projetos";
 
 import { formatReal } from "utils/formatReal";
+
 import ModalCadastrarPriorizacao from "./ModalCadastrarPriorizacao";
 import ModalDeletarProjeto from "./ModalDeletarProjeto";
 
