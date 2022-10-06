@@ -191,7 +191,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                           placeholder="Histórico de durações"
                           _placeholder={{ color: "#2D2926" }}
                           fontSize={"14px"}
-                          fontWeight={"700"}
+                          fontWeight={"400"}
                           // onChange={handleProjectChange}
                         ></Input>
                       </FormControl>
@@ -218,7 +218,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                           mb={"-10px"}
                           color={"#2D2926"}
                           fontSize={"14px"}
-                          fontWeight={"700"}
+                          fontWeight={"400"}
                         />
                       </FormControl>
                     </Flex>
@@ -244,7 +244,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                           type={"date"}
                           color={"#2D2926"}
                           fontSize={"14px"}
-                          fontWeight={"700"}
+                          fontWeight={"400"}
                         />
                       </FormControl>
                     </Flex>
@@ -271,7 +271,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                           borderRadius={"8px"}
                           color={"#2D2926"}
                           fontSize={"14px"}
-                          fontWeight={"700"}
+                          fontWeight={"400"}
                         >
                           {listaSondas.map((sonda) => (
                             <option>{sonda.nom_sonda}</option>
@@ -301,7 +301,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                           // onChange={handleProjectChange}
                           color={"#2D2926"}
                           fontSize={"14px"}
-                          fontWeight={"700"}
+                          fontWeight={"400"}
                         >
                           {campos.map((d) => (
                             <option>{d.campo}</option>
@@ -331,7 +331,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                           borderRadius={"8px"}
                           // color={"#2D2926"}
                           fontSize={"14px"}
-                          fontWeight={"700"}
+                          fontWeight={"400"}
                           _placeholder={{ color: "#2D2926" }}
                         />
                       </FormControl>
@@ -350,7 +350,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                           OUTRO
                         </FormLabel>
                         <Select
-                          placeholder="x"
+                          placeholder="Selecione"
                           // onChange={handleProjectChange}
                           mt={"-6px"}
                           id="outro"
@@ -359,7 +359,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                           height={"56px"}
                           color={"#2D2926"}
                           fontSize={"14px"}
-                          fontWeight={"700"}
+                          fontWeight={"400"}
                           borderRadius={"8px"}
                         >
                           {durationHistory.map((d) => (
@@ -384,6 +384,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                           rightIcon={<FiPlus />}
                           fontSize={"18px"}
                           fontWeight={"700"}
+                          borderRadius={"8px"}
                         >
                           Gerar
                         </Button>

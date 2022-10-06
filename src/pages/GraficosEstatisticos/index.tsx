@@ -38,11 +38,11 @@ export function GráficosEstatisticos() {
 
   function Props() {
     return (
-      <Flex align={"flex-start"}>
+      <Flex>
         <ReactToPrint
           trigger={() => (
             <Button
-              width={"77px"}
+              // width={"77px"}
               height={"23px"}
               variant="ghost"
               fontSize={"18px"}
@@ -99,9 +99,9 @@ export function GráficosEstatisticos() {
             <Flex w={"auto"} align="center" justify="center" bg="#EDF2F7">
               <Box
                 py={{ base: "6", sm: "8" }}
-                px={{ base: "6", sm: "8" }}
+                px={{ base: "6", sm: "10" }}
                 w="100%"
-                minH={"90vh"}
+                minH={"83vh"}
                 bg="white"
                 boxShadow={{
                   base: "none",
@@ -124,7 +124,7 @@ export function GráficosEstatisticos() {
                               <Text
                                 mb={"24px"}
                                 fontSize={"24px"}
-                                color={"#2D2926"}
+                                color={"#585858"}
                                 fontWeight={"700"}
                                 fontFamily={"Mulish"}
                               >
@@ -163,11 +163,11 @@ export function GráficosEstatisticos() {
                             <Select
                               fontSize={"14px"}
                               fontWeight={"400"}
-                              color={"#2D2926"}
+                              _placeholder={{ color: "#2D2926" }}
                               mt={"-6px"}
                               id="gera-grafico"
                               name="gera-grafico"
-                              width={"480px"}
+                              // width={"480px"}
                               height={"56px"}
                               borderRadius={"8px"}
                               placeholder="Tipo de gráfico"
@@ -197,11 +197,11 @@ export function GráficosEstatisticos() {
                             <Input
                               fontSize={"14px"}
                               fontWeight={"400"}
-                              color={"#2D2926"}
+                              _placeholder={{ color: "#2D2926" }}
                               mt={"-6px"}
                               id="de"
                               name="de"
-                              width={"120px"}
+                              // width={"120px"}
                               height={"56px"}
                               borderRadius={"8px"}
                               type={"date"}
@@ -222,11 +222,11 @@ export function GráficosEstatisticos() {
                             <Input
                               fontSize={"14px"}
                               fontWeight={"400"}
-                              color={"#2D2926"}
+                              _placeholder={{ color: "#2D2926" }}
                               mt={"-6px"}
                               id="ate"
                               name="ate"
-                              width={"120px"}
+                              // width={"120px"}
                               height={"56px"}
                               borderRadius={"8px"}
                               type={"date"}
@@ -237,7 +237,7 @@ export function GráficosEstatisticos() {
                           <FormControl className="toBottom">
                             <Button
                               h={"56px"}
-                              w={"98px"}
+                              // w={"98px"}
                               background={"#0047BB"}
                               border={"2.3px solid"}
                               color={"white"}
