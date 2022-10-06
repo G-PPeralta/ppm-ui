@@ -235,6 +235,8 @@ function ModalCadastroAtividadeIntervencao({
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
                 <Button
+                  h={"56px"}
+                  borderRadius={"10px"}
                   variant="ghost"
                   color="red"
                   onClick={() => handleCancelar(registerForm, onClose)}
@@ -247,6 +249,8 @@ function ModalCadastroAtividadeIntervencao({
                   Cancelar
                 </Button>
                 <Button
+                  h={"56px"}
+                  borderRadius={"10px"}
                   disabled={!registerForm.isValid || !registerForm.dirty}
                   background="origem.300"
                   variant="primary"
