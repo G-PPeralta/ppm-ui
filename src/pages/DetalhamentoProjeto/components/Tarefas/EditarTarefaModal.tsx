@@ -170,7 +170,7 @@ function EditarTarefaModal({
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
-                  width={"120px"}
+                  width={"136px"}
                   height={"56px"}
                   fontSize={"14px"}
                   color="#2D2926"
@@ -182,36 +182,73 @@ function EditarTarefaModal({
                 />
               </Flex>
             </FormControl>
-            <FormControl padding={1} marginBottom={1} width={"204px"}>
-              <FormLabel
-                htmlFor="atividadeRel"
-                color="#949494"
-                fontSize="12px"
-                fontWeight="700"
-                mt={"6px"}
-              >
-                ATIVIDADE RELACIONADA
-              </FormLabel>
-              <Select
-                fontSize={"14px"}
-                borderRadius={"8px"}
-                border={"1px solid #A7A7A7"}
-                mt={"-9px"}
-                width={"208px"}
-                height={"56px"}
-                color="#2D2926"
-                id="atividadeRel"
-                name="atividadeRel"
-                value={atividadeId}
-                onChange={(event) => setAtividadeId(Number(event.target.value))}
-              >
-                <option value="">Selecione</option>
-                {atividadesProjeto.map((atividade, index) => (
-                  <option value={atividade.id} key={index}>
-                    {atividade.nomeAtividade}
-                  </option>
-                ))}
-              </Select>
+            <FormControl
+              padding={1}
+              marginBottom={1}
+              width={"204px"}
+              display="flex"
+              gap={4}
+            >
+              <Flex direction={"column"}>
+                <FormLabel
+                  htmlFor="atividadeRel"
+                  color="#949494"
+                  fontSize="12px"
+                  fontWeight="700"
+                  mt={"6px"}
+                >
+                  ATIVIDADE RELACIONADA
+                </FormLabel>
+                <Select
+                  fontSize={"14px"}
+                  borderRadius={"8px"}
+                  border={"1px solid #A7A7A7"}
+                  mt={"-9px"}
+                  width={"208px"}
+                  height={"56px"}
+                  color="#2D2926"
+                  id="atividadeRel"
+                  name="atividadeRel"
+                  // value={atividadeId}
+                  onChange={(event) =>
+                    setAtividadeId(Number(event.target.value))
+                  }
+                >
+                  <option value="">Selecione</option>
+                  {atividadesProjeto.map((atividade, index) => (
+                    <option value={atividade.id} key={index}>
+                      {atividade.nomeAtividade}
+                    </option>
+                  ))}
+                </Select>
+              </Flex>
+
+              <Flex direction={"column"}>
+                <FormLabel
+                  htmlFor="atividadeRel"
+                  color="#949494"
+                  fontSize="12px"
+                  fontWeight="700"
+                  mt={"6px"}
+                >
+                  RESPONSÁVEL
+                </FormLabel>
+                <Select
+                  fontSize={"14px"}
+                  borderRadius={"8px"}
+                  border={"1px solid #A7A7A7"}
+                  mt={"-9px"}
+                  width={"208px"}
+                  height={"56px"}
+                  color="#2D2926"
+                  id="atividadeRel"
+                  name="atividadeRel"
+                  // value={atividadeId}
+                  // onChange={(event) => setAtividadeId(Number(event.target.value))}
+                >
+                  <option value="">Selecione</option>
+                </Select>
+              </Flex>
             </FormControl>
             <FormControl padding={1}>
               <FormLabel
