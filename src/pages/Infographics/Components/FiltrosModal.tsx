@@ -4,7 +4,6 @@ import {
   Button,
   Flex,
   FormControl,
-  FormLabel,
   Modal,
   ModalBody,
   ModalContent,
@@ -14,9 +13,10 @@ import {
   useDisclosure,
   Input,
   useBreakpointValue,
+  Text,
 } from "@chakra-ui/react";
 
-// import { useFiltragemCampanha } from "hooks/useFiltragemCampanha";
+import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 
 import { statusProjeto } from "utils/validateDate";
 
@@ -89,10 +89,6 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
   //   onClose();
   // };
 
-  const handleCancelar = () => {
-    onClose();
-  };
-
   const getValue = (options: any, index: number) => ({
     value: options?.[index]?.value,
     label: options?.[index]?.label,
@@ -139,7 +135,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                 <Flex width={"47%"}>
                   <SelectFiltragem
                     registerForm={registerForm}
-                    nomeSelect={"Área"}
+                    nomeSelect={"ÁREA"}
                     propName={"area_atuacao_id"}
                     options={areaAtuacaoOptions}
                     required={false}
@@ -153,7 +149,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                 <Flex width={"47%"}>
                   <SelectFiltragem
                     registerForm={registerForm}
-                    nomeSelect={"Poço"}
+                    nomeSelect={"POÇO"}
                     propName={"poco_id"}
                     options={pocoOptions}
                     required={false}
@@ -167,7 +163,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                 <Flex width={"47%"}>
                   <SelectFiltragem
                     registerForm={registerForm}
-                    nomeSelect={"Atividade"}
+                    nomeSelect={"ATIVIDADE"}
                     propName={"atividade_id"}
                     options={tarefaOptions}
                     required={false}
@@ -181,7 +177,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                 <Flex width={"47%"}>
                   <SelectFiltragem
                     registerForm={registerForm}
-                    nomeSelect={"Responsável"}
+                    nomeSelect={"RESPONSÁVEL"}
                     propName={"responsavel_id"}
                     options={responsavelOptions}
                     required={false}
@@ -194,8 +190,15 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
 
                 <Flex justify={"space-between"} gap={5} flex={1}>
                   <Flex direction={"column"} flex={1}>
-                    <FormLabel htmlFor="data_inicio">Data Inicio</FormLabel>
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      DATA INÍCIO
+                    </Text>
                     <Input
+                      h={"56px"}
                       isRequired
                       placeholder="dd/mm/aaaa"
                       id="data_inicio"
@@ -214,8 +217,15 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                   </Flex>
 
                   <Flex direction={"column"} flex={1}>
-                    <FormLabel htmlFor="data_fim">Data Fim</FormLabel>
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      DATA FIM
+                    </Text>{" "}
                     <Input
+                      h={"56px"}
                       isRequired
                       placeholder="dd/mm/aaaa"
                       id="data_fim"
@@ -233,7 +243,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                 <Flex width={"47%"}>
                   <SelectFiltragem
                     registerForm={registerForm}
-                    nomeSelect={"Sonda"}
+                    nomeSelect={"SONDA"}
                     propName={"sonda_id"}
                     options={sondaOptions}
                     required={false}
@@ -247,7 +257,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                 <Flex width={"47%"}>
                   <SelectFiltragem
                     registerForm={registerForm}
-                    nomeSelect={"Status"}
+                    nomeSelect={"STATUS"}
                     propName={"status"}
                     options={statusProjetosOptions}
                     required={false}
@@ -262,19 +272,14 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
           </ModalBody>
           <ModalFooter display={"flex"} justifyContent={"center"}>
             <Flex gap={2}>
+              <BotaoVermelhoGhost
+                text={"Cancelar"}
+                formikForm={registerForm}
+                onClose={onClose}
+              />
               <Button
-                variant="ghost"
-                color="red"
-                onClick={() => handleCancelar()}
-                _hover={{
-                  background: "red.500",
-                  transition: "all 0.4s",
-                  color: "white",
-                }}
-              >
-                Cancelar
-              </Button>
-              <Button
+                h={"56px"}
+                borderRadius={"10px"}
                 variant="ghost"
                 color={"origem.500"}
                 onClick={() => registerForm.resetForm()}
@@ -287,6 +292,8 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                 Remover Filtros
               </Button>
               <Button
+                h={"56px"}
+                borderRadius={"10px"}
                 background="origem.500"
                 variant="primary"
                 color="white"
