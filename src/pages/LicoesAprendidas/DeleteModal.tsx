@@ -112,7 +112,7 @@ function DeleteModal() {
                     color: "white",
                   }}
                   height={"56px"}
-                  width={"185px"}
+                  width={"100px"}
                   fontSize={"18px"}
                   fontWeight={"600"}
                 >

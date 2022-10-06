@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import {
   FiChevronLeft,
@@ -9,7 +9,6 @@ import {
   FiSearch,
 } from "react-icons/fi";
 import { MdArrowForwardIos, MdModeEdit } from "react-icons/md";
-import ReactToPrint from "react-to-print";
 
 import {
   Tr,
@@ -69,8 +68,6 @@ export function LicoesAprendidasProjetos() {
     setFilteredLicoesAprendidas(payload.data);
   }
 
-  const componentRef = useRef<HTMLDivElement>(null);
-
   async function handleGetProjetos() {
     const payload = await getProjetos();
     setProjetos(payload.data);
@@ -80,6 +77,14 @@ export function LicoesAprendidasProjetos() {
     handleGetLicoesAprendidas();
     handleGetProjetos();
   }, []);
+
+  const handleClick = () => {
+    filterByProject();
+  };
+
+  const print = () => {
+    window.print();
+  };
 
   async function handleUpdateLicoes(
     licao: any,
@@ -250,20 +255,16 @@ export function LicoesAprendidasProjetos() {
                   </Text>
                 </Heading>
                 <Flex align={"flex-start"} fontWeight={"700"}>
-                  <ReactToPrint
-                    trigger={() => (
-                      <Button
-                        color={"#0239C3"}
-                        fontWeight={"700"}
-                        variant="ghost"
-                        colorScheme="messenger"
-                        rightIcon={<FiPrinter />}
-                      >
-                        Exportar
-                      </Button>
-                    )}
-                    content={() => componentRef.current}
-                  />
+                  <Button
+                    color={"#0239C3"}
+                    fontWeight={"700"}
+                    variant="ghost"
+                    colorScheme="messenger"
+                    rightIcon={<FiPrinter />}
+                    onClick={print}
+                  >
+                    Exportar
+                  </Button>
                 </Flex>
               </Flex>
               <Flex flexDir={"row"} justify={"space-between"}>
@@ -313,7 +314,7 @@ export function LicoesAprendidasProjetos() {
                         color: "#0047BB",
                       }}
                       rightIcon={<FiSearch />}
-                      onClick={filterByProject}
+                      onClick={handleClick}
                       alignSelf={"end"}
                       // marginLeft={"-332px"}
                       height={"56px"}
@@ -513,7 +514,6 @@ export function LicoesAprendidasProjetos() {
             handleUpdateLicoes={handleUpdateLicoes}
           />
         )}
-        <Flex ref={componentRef}></Flex>
       </Flex>
     </Sidebar>
   );
