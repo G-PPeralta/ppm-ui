@@ -12,9 +12,9 @@ import {
   useDisclosure,
   Button,
   FormControl,
-  FormLabel,
   useBreakpointValue,
   Input,
+  Text,
 } from "@chakra-ui/react";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
@@ -86,11 +86,18 @@ function ModalCadastrarSonda() {
                     <FormControl w={"275px"}>
                       <Flex gap={1}>
                         <RequiredField />
-                        <FormLabel htmlFor="nome">NOME</FormLabel>
+                        <Text
+                          fontWeight={"bold"}
+                          fontSize={"12px"}
+                          color={"#949494"}
+                        >
+                          SPT
+                        </Text>
                       </Flex>
                       <Input
+                        h={"56px"}
                         isRequired
-                        placeholder="Nome da Sonda"
+                        placeholder="Nome do SPT"
                         id="nome"
                         type="text"
                         name="nome"
