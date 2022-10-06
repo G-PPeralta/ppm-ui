@@ -39,10 +39,13 @@ function DetalhamentoProjeto() {
     demanda: "",
     nome_responsavel: "",
     coordenador_nome: "",
+    descricao: "",
+    justificativa: "",
   });
   const [licoes, setLicoes] = useState([] as LicoesAprendidas[]);
   const [categorias, setCategorias] = useState([] as Categorias[]);
   const [progresso, setProgresso] = useState([] as ProjetoProgresso[]);
+  const [render, setRender] = useState(false);
 
   const handleGetInfoProjetos = async () => {
     if (id) {
@@ -88,9 +91,11 @@ function DetalhamentoProjeto() {
         demanda: "",
         nome_responsavel: "",
         coordenador_nome: "",
+        descricao: "",
+        justificativa: "",
       });
     // handleGetLicoes();
-  }, []);
+  }, [render]);
 
   return (
     <>
@@ -131,6 +136,8 @@ function DetalhamentoProjeto() {
                 setLicoes={setLicoes}
                 categorias={categorias}
                 callBack={handleGetLicoes}
+                infoProjeto={infoProjeto}
+                setRender={() => setRender(true)}
               />
             </Flex>
             <Gantt />

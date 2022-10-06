@@ -4,7 +4,14 @@ import BotaoDescricaoEJustificativa from "./BotaoDescricaoEJustificativa";
 import LicoesAprendidasModal from "./LicoesAprendidas/LicoesAprendidasModal";
 import BotaoListadeTarefas from "./Tarefas/BotaoListaDeTarefas";
 
-function BotoesModais({ licoes, setLicoes, categorias, callBack }: any) {
+function BotoesModais({
+  licoes,
+  setLicoes,
+  categorias,
+  callBack,
+  infoProjeto,
+  setRender,
+}: any) {
   return (
     <>
       <Flex
@@ -15,7 +22,10 @@ function BotoesModais({ licoes, setLicoes, categorias, callBack }: any) {
         shrink={1}
         basis={"100px"}
       >
-        <BotaoDescricaoEJustificativa />
+        <BotaoDescricaoEJustificativa
+          infoProjeto={infoProjeto}
+          setRender={setRender}
+        />
         <BotaoListadeTarefas />
         <LicoesAprendidasModal
           licoes={licoes}

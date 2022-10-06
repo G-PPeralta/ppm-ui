@@ -68,7 +68,7 @@ function BotaoListadeTarefas() {
 
   function formatDate(date: Date) {
     const formated = date.toString().substring(0, 10).split("-");
-    return `${formated[2]}-${formated[1]}-${formated[0]}`;
+    return `${formated[2]}/${formated[1]}/${formated[0]}`;
   }
 
   async function getTaskList() {
