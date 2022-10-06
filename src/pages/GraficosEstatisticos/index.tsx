@@ -98,10 +98,10 @@ export function GráficosEstatisticos() {
           <Stack spacing="8">
             <Flex w={"auto"} align="center" justify="center" bg="#EDF2F7">
               <Box
-                py={{ base: "0", sm: "16" }}
-                px={{ base: "4", sm: "10" }}
+                py={{ base: "6", sm: "8" }}
+                px={{ base: "6", sm: "8" }}
                 w="100%"
-                h="34em"
+                minH={"90vh"}
                 bg="white"
                 boxShadow={{
                   base: "none",
@@ -273,9 +273,7 @@ export function GráficosEstatisticos() {
             </Flex>
           </Stack>
         )}
-        <Flex mt={"30px"} ref={componentRef}>
-          {handleReportButton(report)}
-        </Flex>
+        <Flex ref={componentRef}>{handleReportButton(report)}</Flex>
       </Sidebar>
     </>
   );
