@@ -163,6 +163,16 @@ function BotaoListadeTarefas() {
               borderBottom: "0.5px solid #A7A7A7",
               borderRight: "0.5px solid #A7A7A7",
             }}
+            width="200px"
+            height={"56px"}
+          >
+            Responsável
+          </Td>
+          <Td
+            style={{
+              borderBottom: "0.5px solid #A7A7A7",
+              borderRight: "0.5px solid #A7A7A7",
+            }}
             width="96px"
             height={"56px"}
             color={"#059502"}
@@ -451,6 +461,14 @@ function BotaoListadeTarefas() {
                       }}
                     >
                       Descrição
+                    </Th>
+                    <Th
+                      style={{
+                        borderBottom: "0.5px solid #A7A7A7",
+                        borderRight: "0.5px solid #A7A7A7",
+                      }}
+                    >
+                      Responsável
                     </Th>
                     <Th
                       style={{
