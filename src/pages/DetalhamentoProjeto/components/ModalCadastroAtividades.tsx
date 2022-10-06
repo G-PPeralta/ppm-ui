@@ -12,14 +12,13 @@ import {
   useBreakpointValue,
   Input,
 } from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
 
 import Restricoes from "pages/Infographics/Components/Restricoes";
 
+import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
+import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
-
-// import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { regexCaracteresEspeciais } from "utils/regex";
 
@@ -121,6 +120,7 @@ function ModalCadastroAtividades({ setRefresh, refresh, atividades }: any) {
                         </Text>
                       </Flex>
                       <Input
+                        h={"56px"}
                         isRequired
                         placeholder="Digite o ID"
                         id="id_origem"
@@ -149,6 +149,7 @@ function ModalCadastroAtividades({ setRefresh, refresh, atividades }: any) {
                         </Text>
                       </Flex>
                       <Input
+                        h={"56px"}
                         isRequired
                         placeholder="Digite o nome da atividade"
                         id="nom_atividade"
@@ -165,6 +166,19 @@ function ModalCadastroAtividades({ setRefresh, refresh, atividades }: any) {
                         maxLength={100}
                       />
                     </Flex>
+                  </Flex>
+                </Flex>
+
+                <Flex flex={1} direction={"column"}>
+                  <Text fontWeight={"bold"}>Relação</Text>
+                  <Flex gap={5} flex={1}>
+                    <SelectFiltragem
+                      registerForm={registerForm}
+                      nomeSelect={"RELAÇÃO"}
+                      propName={"relacao_id"}
+                      options={responsaveisOptions}
+                      required={true}
+                    />
                   </Flex>
                 </Flex>
 
@@ -208,44 +222,19 @@ function ModalCadastroAtividades({ setRefresh, refresh, atividades }: any) {
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <Button
-                  variant="ghost"
-                  color="red"
-                  // onClick={() => handleCancelar(registerForm, onClose)}
-                  _hover={{
-                    background: "red.500",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  // disabled={!registerForm.isValid || !registerForm.dirty}
-                  background="origem.300"
-                  variant="primary"
-                  color="white"
-                  // onClick={() =>
-                  //   handleCadastrarRefresh(
-                  //     registerForm,
-                  //     onClose,
-                  //     setRefresh,
-                  //     refresh
-                  //   )
-                  // }
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                  }}
-                >
-                  {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Concluir Cadastro</Text>
-                    </>
-                  )}
-                </Button>
+                <BotaoVermelhoGhost
+                  text="Cancelar"
+                  onClose={onClose}
+                  formikForm={registerForm}
+                />
+                <BotaoAzulPrimary
+                  text="Concluir Cadastro"
+                  onClose={onClose}
+                  formikForm={registerForm}
+                  refresh={refresh}
+                  setRefresh={setRefresh}
+                  loading={loading}
+                />
               </Flex>
             </ModalFooter>
           </form>

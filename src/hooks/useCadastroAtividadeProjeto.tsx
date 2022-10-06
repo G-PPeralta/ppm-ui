@@ -15,7 +15,7 @@ import {
   getAreaAtuacaoList,
   getResponsavelList,
 } from "services/get/Infograficos";
-import { postCadastroAtividade } from "services/post/CadastroModaisInfograficos";
+import { postCadastroAtividadeProjetos } from "services/post/CadastroModaisInfograficos";
 
 import { useAuth } from "./useAuth";
 
@@ -58,9 +58,11 @@ export function useCadastroAtividadeProjeto() {
 
   const initialValues = {
     nom_usu_create: user?.nome,
+    id_projeto: 0,
     id_origem: "",
     nom_atividade: "",
     responsavel_id: 0,
+    relacao_id: 0,
     area_atuacao: "",
     nao_iniciar_antes_de: {
       data: "",
@@ -71,7 +73,6 @@ export function useCadastroAtividadeProjeto() {
       checked: false,
     },
     o_mais_breve_possivel: false,
-    relacao: 0,
     precedentes: [
       {
         atividadePrecedenteId: 0,
@@ -86,19 +87,22 @@ export function useCadastroAtividadeProjeto() {
     onSubmit: async (values) => {
       const newValues = {
         nom_usu_create: user?.nome,
+        id_projeto: values.id_projeto,
         id_origem: values.id_origem,
         nom_atividade: values.nom_atividade,
         responsavel_id: values.responsavel_id,
+        relacao_id: values.relacao_id,
         area_atuacao: values.area_atuacao,
         nao_iniciar_antes_de: values.nao_iniciar_antes_de,
         nao_terminar_depois_de: values.nao_terminar_depois_de,
         o_mais_breve_possivel: values.o_mais_breve_possivel,
+        precedentes: values.precedentes,
       };
 
       setLoading(true);
 
       try {
-        const { status } = await postCadastroAtividade(newValues);
+        const { status } = await postCadastroAtividadeProjetos(newValues);
 
         if (status === 200 || status === 201) {
           toast.success("Atividade cadastrada com sucesso!", {

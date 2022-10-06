@@ -101,3 +101,10 @@ export async function postCadastroAtividadeIntervencao(
   );
   return { status };
 }
+
+export async function postCadastroAtividadeProjetos(
+  payload: any
+): Promise<{ status: number }> {
+  const { status } = await api.post("/??????????", payload, token());
+  return { status };
+}
