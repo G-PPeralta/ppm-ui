@@ -68,7 +68,7 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
             w="100%"
             bg={"#f5f5f5"}
             px={5}
-            py={2}
+            py={4}
             borderRadius={"60px"}
             mb={2}
           >
@@ -94,11 +94,9 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
                 flex={1}
               >
                 <Flex direction={"column"} flex={3}>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>
-                    ATIVIDADE
-                  </Text>
                   <SelectFiltragem
                     registerForm={registerForm}
+                    nomeSelect={"ATIVIDADE"}
                     propName={`precedentes[${index}].atividadePrecedenteId`}
                     options={optionsAtividades}
                     value={getValue(
@@ -110,8 +108,16 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
                 </Flex>
                 <Flex flex={1}>
                   <FormControl>
-                    <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      DIAS
+                    </Text>
                     <Input
+                      h={"56px"}
+                      maxW={"128px"}
                       placeholder="0"
                       type={"number"}
                       bg={"#fff"}
@@ -127,75 +133,6 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
                     />
                   </FormControl>
                 </Flex>
-
-                {/* <FormControl>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>ID</Text>
-                  <Input
-                    placeholder="Ex.: CIP02"
-                    type="text"
-                    bg={"#fff"}
-                    id={`atividades[${index}].atividade_id_origem`}
-                    name={`atividades[${index}].atividade_id_origem`}
-                    value={regexCaracteresEspeciais(
-                      registerForm.values.atividades[index].atividade_id_origem
-                    )}
-                    onChange={(event) => {
-                      registerForm.setFieldValue(
-                        `atividades[${index}].atividade_id_origem`,
-                        event.target.value
-                      );
-                    }}
-                    maxLength={10}
-                  />
-                </FormControl> */}
-
-                {/* <FormControl>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>ÁREA</Text>
-                  <SelectFiltragem
-                    registerForm={registerForm}
-                    propName={`atividades[${index}].area_id`}
-                    options={optionsAreaAtuacao}
-                    value={getValue(optionsAreaAtuacao, index, "area_id")}
-                  />
-                </FormControl> */}
-
-                {/* <FormControl>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>TAREFA</Text>
-                  <SelectFiltragem
-                    registerForm={registerForm}
-                    propName={`atividades[${index}].tarefa_id`}
-                    options={optionsTarefa}
-                    value={getValue(optionsTarefa, index, "tarefa_id")}
-                  />
-                </FormControl> */}
-
-                {/* <FormControl>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
-                  <Input
-                    placeholder="0"
-                    type={"number"}
-                    bg={"#fff"}
-                    id={`atividades[${index}].qtde_dias`}
-                    name={`atividades[${index}].qtde_dias`}
-                    value={registerForm.values.atividades[index].qtde_dias}
-                    onChange={(event) => {
-                      registerForm.setFieldValue(
-                        `atividades[${index}].qtde_dias`,
-                        Number(event.target.value)
-                      );
-                    }}
-                  />
-                </FormControl> */}
-
-                {/* <Flex direction={"column"}>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>
-                    PRECEDENTES
-                  </Text>
-                  <PopOverPrecedentes
-                    registerForm={registerForm}
-                    index={index}
-                  />
-                </Flex> */}
               </Flex>
               <Flex
                 p={1}

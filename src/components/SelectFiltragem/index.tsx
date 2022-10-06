@@ -27,6 +27,14 @@ function SelectFiltragem({
     label: undefined,
   };
 
+  const customStyles = {
+    control: (base: any) => ({
+      ...base,
+      height: 56,
+      minHeight: 56,
+    }),
+  };
+
   return (
     <>
       <FormControl>
@@ -39,6 +47,7 @@ function SelectFiltragem({
           </Flex>
         )}
         <Select
+          styles={customStyles}
           id={propName}
           name={propName}
           placeholder={idCampanha ? getNomeCampanha(idCampanha) : "Selecione"}

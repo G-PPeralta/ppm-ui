@@ -10,43 +10,51 @@ import {
   ModalFooter,
   useDisclosure,
   Button,
-  FormControl,
-  FormLabel,
-  Stack,
   useBreakpointValue,
   Input,
+  Text,
 } from "@chakra-ui/react";
+import { Responsavel } from "interfaces/CadastrosModaisInfograficos";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
+import SelectFiltragem from "components/SelectFiltragem";
 
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 import Restricoes from "./Restricoes";
-import SelectFiltragemAreaAtuacao from "./SelectFiltragemAreaAtuacao";
-import SelectFiltragemResponsavel from "./SelectFiltragemResponsavel";
 
 function ModalCadastroAtividade() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroAtividade();
+  const { registerForm, loading, listaResponsaveis } = useCadastroAtividade();
   const [refresh, setRefresh] = useState(false);
+
+  const optionsResponsaveis = listaResponsaveis.map(
+    (responsavel: Responsavel) => ({
+      value: responsavel.id,
+      label: responsavel.nome,
+    })
+  );
 
   return (
     <>
       <Button
-        variant="outline"
+        h={"56px"}
+        borderRadius={"10px"}
+        background={"white"}
         border={"2px solid"}
-        borderColor={"origem.500"}
-        textColor={"origem.500"}
+        color={"origem.500"}
         _hover={{
-          borderColor: "origem.600",
-          backgroundColor: "origem.500",
-          textColor: "white",
+          border: "2px solid",
+          borderColor: "origem.500",
+          background: "origem.500",
           transition: "all 0.4s",
+          color: "white",
         }}
+        textColor={"origem.500"}
         onClick={onOpen}
       >
         Atividade
@@ -71,128 +79,139 @@ function ModalCadastroAtividade() {
             }}
           >
             <ModalBody mt={3}>
-              <FormControl>
-                <Flex direction={"column"} gap={4}>
-                  <Stack>
+              <Flex direction={"column"} gap={4}>
+                <Flex
+                  flexDirection={useBreakpointValue({
+                    base: "column",
+                    md: "row",
+                  })}
+                  gap={5}
+                >
+                  <Flex flex={1} direction={"column"}>
+                    <Text fontWeight={"bold"}>Nome</Text>
                     <Flex
+                      gap={5}
+                      flex={1}
                       flexDirection={useBreakpointValue({
                         base: "column",
                         md: "row",
                       })}
-                      gap={5}
                     >
-                      <Flex flex={1}>
-                        <FormControl>
-                          <Flex gap={1}>
-                            <RequiredField />
-                            <FormLabel htmlFor="id_origem">ID</FormLabel>
-                          </Flex>
-                          <Input
-                            isRequired
-                            placeholder="Digite o ID"
-                            id="id_origem"
-                            type="text"
-                            name="id_origem"
-                            w={useBreakpointValue({ base: "100%", md: "100%" })}
-                            value={regexCaracteresEspeciais(
-                              registerForm.values.id_origem
-                            )}
-                            onChange={registerForm.handleChange}
-                            maxLength={10}
-                          />
-                        </FormControl>
-                      </Flex>
-                      <Flex flex={4}>
-                        <FormControl>
-                          <Flex gap={1}>
-                            <RequiredField />
-                            <FormLabel htmlFor="nom_atividade">NOME</FormLabel>
-                          </Flex>
-                          <Input
-                            isRequired
-                            placeholder="Digite o nome da atividade"
-                            id="nom_atividade"
-                            type="text"
-                            name="nom_atividade"
-                            w={useBreakpointValue({ base: "100%", md: "100%" })}
-                            value={regexCaracteresEspeciais(
-                              registerForm.values.nom_atividade
-                            )}
-                            onChange={registerForm.handleChange}
-                            maxLength={100}
-                          />
-                        </FormControl>
-                      </Flex>
-                    </Flex>
-
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: "column",
-                        md: "row",
-                      })}
-                      gap={5}
-                    >
-                      <Flex flex={2}>
-                        <SelectFiltragemResponsavel
-                          registerForm={registerForm}
+                      <Flex direction={"column"} flex={1}>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            ID
+                          </Text>
+                        </Flex>
+                        <Input
+                          h={"56px"}
+                          isRequired
+                          placeholder="Digite o ID"
+                          id="id_origem"
+                          type="text"
+                          name="id_origem"
+                          w={useBreakpointValue({
+                            base: "100%",
+                            md: "100%",
+                          })}
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.id_origem
+                          )}
+                          onChange={registerForm.handleChange}
+                          maxLength={10}
                         />
                       </Flex>
-                      <Flex flex={1}>
-                        <SelectFiltragemAreaAtuacao
-                          registerForm={registerForm}
+                      <Flex direction={"column"} flex={2}>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            NOME
+                          </Text>
+                        </Flex>
+                        <Input
+                          h={"56px"}
+                          isRequired
+                          placeholder="Digite o nome da atividade"
+                          id="nom_atividade"
+                          type="text"
+                          name="nom_atividade"
+                          w={useBreakpointValue({
+                            base: "100%",
+                            md: "100%",
+                          })}
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.nom_atividade
+                          )}
+                          onChange={registerForm.handleChange}
+                          maxLength={100}
                         />
                       </Flex>
                     </Flex>
-
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: "column",
-                        md: "column",
-                      })}
-                      gap={2}
-                    >
-                      <FormLabel mt={2}>RESTRIÇÕES</FormLabel>
-                      <Restricoes registerForm={registerForm} />
-                    </Flex>
-                  </Stack>
+                  </Flex>
                 </Flex>
-              </FormControl>
+
+                <Flex
+                  flexDirection={useBreakpointValue({
+                    base: "column",
+                    md: "row",
+                  })}
+                  gap={5}
+                >
+                  <Flex flex={1} direction={"column"}>
+                    <Text fontWeight={"bold"}>Responsável</Text>
+                    <Flex
+                      gap={5}
+                      flex={1}
+                      flexDirection={useBreakpointValue({
+                        base: "column",
+                        md: "row",
+                      })}
+                    >
+                      <Flex direction={"column"} flex={2}>
+                        <SelectFiltragem
+                          registerForm={registerForm}
+                          nomeSelect={"RESPONSÁVEL"}
+                          propName={"responsavel_id"}
+                          options={optionsResponsaveis}
+                          required={true}
+                        />
+                      </Flex>
+                      <Flex direction={"column"} flex={1}>
+                        <SelectFiltragem
+                          registerForm={registerForm}
+                          nomeSelect={"ÁREA"}
+                          propName={"area_atuacao"}
+                          options={optionsResponsaveis}
+                          required={true}
+                        />
+                      </Flex>
+                    </Flex>
+                  </Flex>
+                </Flex>
+
+                <Flex
+                  flexDirection={useBreakpointValue({
+                    base: "column",
+                    md: "column",
+                  })}
+                  gap={2}
+                >
+                  <Text fontWeight={"bold"}>Restrição</Text>
+                  <Restricoes registerForm={registerForm} />
+                </Flex>
+              </Flex>
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              {/* <Flex gap={2}>
-                <Button
-                  variant="ghost"
-                  color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
-                  _hover={{
-                    background: "red.500",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  disabled={!registerForm.isValid || !registerForm.dirty}
-                  background="origem.300"
-                  variant="primary"
-                  color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                  }}
-                >
-                  {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Concluir Cadastro</Text>
-                    </>
-                  )}
-                </Button>
-              </Flex> */}
               <Flex gap={2}>
                 <BotaoVermelhoGhost
                   text={"Cancelar"}

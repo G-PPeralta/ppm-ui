@@ -15,23 +15,26 @@ import {
   FormControl,
   Stack,
   Textarea,
+  Alert,
+  AlertIcon,
+  AlertTitle,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import {
   ListaCampo,
-  ListaPoco,
   ProjetoTipo,
 } from "interfaces/CadastrosModaisInfograficos";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
-import { RequiredField } from "components/RequiredField/RequiredField";
+// import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 import {
   getAtividadasByProjetosTipoId,
   getProjetosTipo,
+  getServicoDataIntervencaoId,
 } from "services/get/CadastroModaisInfograficos";
 
 import SelectFiltragem from "../../../components/SelectFiltragem";
@@ -43,24 +46,28 @@ function ModalCadastroIntervencao({
   data,
   refresh,
   setRefresh,
+  listaServicosPocos,
 }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     registerForm,
     loading,
-    listaPocos,
     listaCampos,
     listaSondaCampanha,
     listaAtividadesPrecedentes,
   } = useCadastroIntervencao();
 
+  // console.log("idCampanha", idCampanha);
+  // console.log("registerForm", registerForm.values);
+
+  // const [erroDataIntervencao, setErroDataIntervencao] = useState(false);
   const [listaProjetos, setListaProjetos] = useState<any>([]);
 
   const innerWidth = window.innerWidth;
 
-  const optionsPocos = listaPocos.map((poco: ListaPoco) => ({
+  const optionsPocos = listaServicosPocos.map((poco: any) => ({
     value: poco.id,
-    label: poco.poco,
+    label: poco.nom_poco,
   }));
 
   const optionsCampo = listaCampos.map((campo: ListaCampo) => ({
@@ -104,15 +111,6 @@ function ModalCadastroIntervencao({
     }
   };
 
-  const handleGet = async () => {
-    const projetos = await getProjetosTipo();
-    const projetosTipoSorted = projetos.data.sort(
-      (a: ProjetoTipo, b: ProjetoTipo) =>
-        a.nom_projeto_tipo.localeCompare(b.nom_projeto_tipo)
-    );
-    setListaProjetos(projetosTipoSorted);
-  };
-
   const handleClick = async () => {
     const projetos = await getProjetosTipo();
     const projetosTipoSorted = projetos.data.sort(
@@ -123,20 +121,60 @@ function ModalCadastroIntervencao({
     onOpen();
   };
 
+  const handleDataLimite = async () => {
+    const pocoCompleto = listaServicosPocos.filter(
+      (poco: any) => poco.id === registerForm.values.poco_id
+    );
+
+    const { data } = await getServicoDataIntervencaoId(
+      registerForm.values.projeto_tipo_id,
+      new Date(registerForm.values.dat_ini_prev).toISOString(),
+      pocoCompleto[0].dat_ini_limite
+    );
+
+    const { cod_erro } = data;
+
+    if (cod_erro === 0) {
+      registerForm.setFieldValue("erroDataIntervencao", true);
+      // setErroDataIntervencao(true);
+    } else {
+      registerForm.setFieldValue("erroDataIntervencao", false);
+      // setErroDataIntervencao(false);
+    }
+  };
+
   useEffect(() => {
-    handleGet();
+    // handleGet();
     registerForm.setFieldValue("id_campanha", idCampanha);
-    const newDate = new Date(data);
-    newDate.setDate(newDate.getDate() + 15);
-    registerForm.setFieldValue("dat_ini_prev", newDate);
+    // const newDate = new Date(data);
+    // newDate.setDate(newDate.getDate() + 15);
+    // registerForm.setFieldValue("dat_ini_prev", newDate);
     setRefresh(!refresh);
   }, []);
+
+  useEffect(() => {
+    if (registerForm.values.id_campanha !== idCampanha) {
+      registerForm.setFieldValue("id_campanha", idCampanha);
+    }
+  }, [registerForm.values]);
 
   useEffect(() => {
     reqGetAtividadesByProjetoTipoId(registerForm.values.projeto_tipo_id);
   }, [registerForm.values.projeto_tipo_id]);
 
-  // console.log("registerForm", registerForm.values);
+  useEffect(() => {
+    if (
+      registerForm.values.dat_ini_prev !== new Date(data) &&
+      registerForm.values.projeto_tipo_id !== 0 &&
+      registerForm.values.poco_id !== 0
+    ) {
+      handleDataLimite();
+    }
+  }, [
+    registerForm.values.dat_ini_prev,
+    registerForm.values.projeto_tipo_id,
+    registerForm.values.poco_id,
+  ]);
 
   return (
     <>
@@ -226,7 +264,7 @@ function ModalCadastroIntervencao({
                         />
                         <DateTimePickerDataInicio
                           registerForm={registerForm}
-                          data={data}
+                          // data={data}
                         />
                       </Flex>
                     </Stack>
@@ -243,6 +281,17 @@ function ModalCadastroIntervencao({
                       </Flex>
                     </Stack>
 
+                    {registerForm.values.erroDataIntervencao && (
+                      <Alert colorScheme={"red"} variant={"solid"}>
+                        <AlertIcon />
+                        <AlertTitle>ATENÇÃO:</AlertTitle>
+                        <Text>
+                          O planejamento configurado ultrapassa a data de início
+                          de execução do poço selecionado.
+                        </Text>
+                      </Alert>
+                    )}
+
                     <AtividadesCadastroIntervencao
                       registerForm={registerForm}
                       listaAtividadesPrecedentes={listaAtividadesPrecedentes}
@@ -252,7 +301,7 @@ function ModalCadastroIntervencao({
                       <Text fontWeight={"bold"}>Comentários</Text>
                       <FormControl>
                         <Flex gap={1}>
-                          <RequiredField />
+                          {/* <RequiredField /> */}
                           <Text
                             fontWeight={"bold"}
                             fontSize={"12px"}

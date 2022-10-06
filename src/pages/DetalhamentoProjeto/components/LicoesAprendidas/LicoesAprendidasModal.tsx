@@ -213,7 +213,7 @@ function LicoesAprendidasModal({
                         borderRadius={"8px"}
                         border={"1px solid #A7A7A7"}
                         mt={"-9px"}
-                        width={"120px"}
+                        width={"146px"}
                         height={"56px"}
                         color="#949494"
                         id="data"
@@ -278,7 +278,7 @@ function LicoesAprendidasModal({
                           transition: "all 0.4s",
                           color: "white",
                         }}
-                        width={"208px"}
+                        width={"200px"}
                         height={"56px"}
                       >
                         Adicionar

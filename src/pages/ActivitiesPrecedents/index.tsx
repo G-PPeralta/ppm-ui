@@ -13,11 +13,11 @@ import { statusProjeto } from "utils/validateDate";
 import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
 import CardACT from "../ActivitiesSchedule/Components/CardACT";
-import ModalCadastroAtividade from "../ActivitiesSchedule/Components/ModalCadastroAtividadeOLD";
+// import ModalCadastroAtividade from "../ActivitiesSchedule/Components/ModalCadastroAtividadeOLD";
 import ModalEditarAtividade from "../ActivitiesSchedule/Components/ModalEditarAtividade";
 import BotaoVisaoGeral from "./components/BotaoVisaoGeral";
-import ExibirModal from "./components/ExibirModal";
-import FiltrosModal from "./components/FiltrosModal";
+// import ExibirModal from "./components/ExibirModal";
+// import FiltrosModal from "./components/FiltrosModal";
 
 declare type AnchorPositionType =
   | "top"
@@ -293,19 +293,19 @@ export function ActivitiesPrecedents() {
                   <Heading as="h3" size="md" mb={3}>
                     {atividades[0] ? atividades[0].sonda : ""}
                   </Heading>
-                  <Flex gap={4}>
+                  {/* <Flex gap={4}>
                     <ExibirModal />
                     <FiltrosModal />
-                  </Flex>
+                  </Flex> */}
                 </Flex>
                 <Flex justify={"space-between"} gap={1} wrap={"wrap"} mb={4}>
                   <Flex gap={2}>
                     <BotaoVisaoGeral />
-                    <ModalCadastroAtividade
+                    {/* <ModalCadastroAtividade
                       id={id}
                       setRefresh={setRefresh}
                       refresh={refresh}
-                    />
+                    /> */}
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (

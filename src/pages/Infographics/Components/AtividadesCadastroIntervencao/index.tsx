@@ -9,8 +9,6 @@ import { Flex, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
-import { RequiredField } from "components/RequiredField/RequiredField";
-
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 import BotaoAdicionar from "./BotaoAdicionar";
@@ -33,8 +31,7 @@ interface Atividade {
 export default function AtividadesCadastroIntervencao({
   registerForm,
   listaAtividadesPrecedentes,
-}: // listaAtividadesPrecedentes,
-any) {
+}: any) {
   const id = useId();
   const [render, setRender] = useState<any>([]);
   const [droppableId, setDroppableId] = useState<string>(id);
@@ -206,7 +203,6 @@ any) {
   return (
     <>
       <Flex gap={1}>
-        <RequiredField />
         <Text fontWeight={"bold"}>Atividades</Text>
       </Flex>
       <DragDropContext onDragEnd={onDragEnd}>

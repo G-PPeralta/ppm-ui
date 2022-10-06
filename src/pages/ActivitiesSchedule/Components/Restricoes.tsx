@@ -31,6 +31,7 @@ function Restricoes({ registerForm }: any) {
 
       return (
         <Button
+          h={"56px"}
           onClick={onClick}
           ref={ref}
           variant="outline"
@@ -52,6 +53,7 @@ function Restricoes({ registerForm }: any) {
 
       return (
         <Button
+          h={"56px"}
           onClick={onClick}
           ref={ref}
           variant="outline"
@@ -67,7 +69,7 @@ function Restricoes({ registerForm }: any) {
 
   return (
     <Flex direction={"column"} gap={3}>
-      <Flex gap={5}>
+      <Flex gap={5} h={"56px"}>
         <Stack spacing={5} direction="row">
           <Checkbox
             w={"100%"}
@@ -95,7 +97,7 @@ function Restricoes({ registerForm }: any) {
           />
         </Flex>
       </Flex>
-      <Flex gap={5}>
+      <Flex gap={5} h={"56px"}>
         <Stack spacing={5} direction="row">
           <Checkbox
             w={"100%"}
@@ -121,18 +123,20 @@ function Restricoes({ registerForm }: any) {
           />
         </Flex>
       </Flex>
-      <Stack spacing={5} direction="row" mt={2}>
-        <Checkbox
-          w={"100%"}
-          // h={"40px"}
-          name="o_mais_breve_possivel"
-          onChange={registerForm.handleChange}
-          value={registerForm.values.o_mais_breve_possivel}
-          size={useBreakpointValue({ base: "sm", sm: "sm", md: "md" })}
-        >
-          O mais breve possível
-        </Checkbox>
-      </Stack>
+      <Flex h={"56px"}>
+        <Stack spacing={5} direction="row" mt={2}>
+          <Checkbox
+            w={"100%"}
+            // h={"40px"}
+            name="o_mais_breve_possivel"
+            onChange={registerForm.handleChange}
+            value={registerForm.values.o_mais_breve_possivel}
+            size={useBreakpointValue({ base: "sm", sm: "sm", md: "md" })}
+          >
+            O mais breve possível
+          </Checkbox>
+        </Stack>
+      </Flex>
     </Flex>
   );
 }

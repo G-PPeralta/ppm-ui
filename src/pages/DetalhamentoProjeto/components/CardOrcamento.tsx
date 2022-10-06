@@ -125,7 +125,11 @@ function CardOrcamento() {
             <Flex alignItems={"center"} mb={3}>
               <Box display={"flex"} alignItems={"center"}>
                 <Text color={"#00B53D"} fontSize={20}>
-                  <BsCheckCircleFill />
+                  {(id == "443" && cpiSpi && cpiSpi[0]?.cpi) < 1 ? (
+                    <BsCheckCircleFill color={"red"} />
+                  ) : (
+                    <BsCheckCircleFill />
+                  )}
                 </Text>
                 <Text ml={2} fontSize={16} fontWeight={600}>
                   CPI ={" "}
@@ -136,7 +140,11 @@ function CardOrcamento() {
               </Box>
               <Box display={"flex"} alignItems={"center"} ml={4}>
                 <Text color={"#00B53D"} fontSize={20}>
-                  <BsCheckCircleFill />
+                  {cpiSpi && cpiSpi[0]?.spi < 1 ? (
+                    <BsCheckCircleFill color={"red"} />
+                  ) : (
+                    <BsCheckCircleFill />
+                  )}
                 </Text>
                 <Text ml={2} fontSize={16} fontWeight={600}>
                   SPI ={" "}

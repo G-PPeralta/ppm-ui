@@ -97,7 +97,7 @@ export interface ListaProjetoTipo {
 }
 
 export interface NovaCampanha {
-  nom_campanha: string;
+  id_projeto: number;
   dsc_comentario: string;
   nom_usu_create: string | undefined;
 }
