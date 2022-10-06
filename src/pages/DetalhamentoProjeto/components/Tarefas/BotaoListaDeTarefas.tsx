@@ -68,7 +68,7 @@ function BotaoListadeTarefas() {
 
   function formatDate(date: Date) {
     const formated = date.toString().substring(0, 10).split("-");
-    return `${formated[2]}-${formated[1]}-${formated[0]}`;
+    return `${formated[2]}/${formated[1]}/${formated[0]}`;
   }
 
   async function getTaskList() {
@@ -157,6 +157,16 @@ function BotaoListadeTarefas() {
             height={"56px"}
           >
             {task.descricao_tarefa}
+          </Td>
+          <Td
+            style={{
+              borderBottom: "0.5px solid #A7A7A7",
+              borderRight: "0.5px solid #A7A7A7",
+            }}
+            width="200px"
+            height={"56px"}
+          >
+            Responsável
           </Td>
           <Td
             style={{
@@ -451,6 +461,14 @@ function BotaoListadeTarefas() {
                       }}
                     >
                       Descrição
+                    </Th>
+                    <Th
+                      style={{
+                        borderBottom: "0.5px solid #A7A7A7",
+                        borderRight: "0.5px solid #A7A7A7",
+                      }}
+                    >
+                      Responsável
                     </Th>
                     <Th
                       style={{

@@ -10,6 +10,8 @@ import {
   ProjetoProgresso,
 } from "interfaces/Services";
 
+import GenericCurveS from "pages/Reports/components/genericCurveS";
+
 import { Gantt } from "components/Gantt";
 import Sidebar from "components/SideBar";
 
@@ -23,7 +25,31 @@ import { getLicoesAprendidas } from "services/get/LicoesAprendidas";
 import BotoesModais from "./components/BotoesModais";
 import CardInfoProjeto from "./components/CardInfoProjeto";
 import CardOrcamento from "./components/CardOrcamento";
-import GraficoCurvaS from "./components/GraficoCurvaS";
+// import GraficoCurvaS from "./components/GraficoCurvaS";
+
+const curveSData = [
+  {
+    mes: "Nov/2022",
+    cronogramaPrevisto: 6,
+    cronogramaRealizado: 30,
+    capexPrevisto: 40,
+    capexRealizado: 50,
+  },
+  {
+    mes: "Dez/2021",
+    cronogramaPrevisto: 60,
+    cronogramaRealizado: 20,
+    capexPrevisto: 35,
+    capexRealizado: 50,
+  },
+  {
+    mes: "Nov/2022",
+    cronogramaPrevisto: 6,
+    cronogramaRealizado: 30,
+    capexPrevisto: 40,
+    capexRealizado: 50,
+  },
+];
 
 function DetalhamentoProjeto() {
   const { id } = useParams();
@@ -39,10 +65,13 @@ function DetalhamentoProjeto() {
     demanda: "",
     nome_responsavel: "",
     coordenador_nome: "",
+    descricao: "",
+    justificativa: "",
   });
   const [licoes, setLicoes] = useState([] as LicoesAprendidas[]);
   const [categorias, setCategorias] = useState([] as Categorias[]);
   const [progresso, setProgresso] = useState([] as ProjetoProgresso[]);
+  const [render, setRender] = useState(false);
 
   const handleGetInfoProjetos = async () => {
     if (id) {
@@ -88,9 +117,11 @@ function DetalhamentoProjeto() {
         demanda: "",
         nome_responsavel: "",
         coordenador_nome: "",
+        descricao: "",
+        justificativa: "",
       });
     // handleGetLicoes();
-  }, []);
+  }, [render]);
 
   return (
     <>
@@ -131,10 +162,13 @@ function DetalhamentoProjeto() {
                 setLicoes={setLicoes}
                 categorias={categorias}
                 callBack={handleGetLicoes}
+                infoProjeto={infoProjeto}
+                setRender={() => setRender(true)}
               />
             </Flex>
             <Gantt />
-            <GraficoCurvaS />
+            <GenericCurveS data={curveSData} />
+            {/* <GraficoCurvaS /> */}
           </>
         )}
       </Sidebar>

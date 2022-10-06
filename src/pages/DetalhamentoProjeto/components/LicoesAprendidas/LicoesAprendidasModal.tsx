@@ -84,16 +84,16 @@ function LicoesAprendidasModal({
   // );
 
   function handleFilter(categoriaId: string, data: string) {
-    if (categoriaId) {
-      const filtered = licoes.filter(
-        (lic: any) => lic.id_categoria == categoriaId
-      );
-      filtered.length == 0 &&
-        toast.error(
-          "Nenhum dado encontrado com o presente filtro de categoria"
-        );
-      return setFilteredTable(filtered);
-    }
+    // if (categoriaId) {
+    //   const filtered = licoes.filter(
+    //     (lic: any) => lic.id_categoria == categoriaId
+    //   );
+    //   filtered.length == 0 &&
+    //     toast.error(
+    //       "Nenhum dado encontrado com o presente filtro de categoria"
+    //     );
+    //   return setFilteredTable(filtered);
+    // }
     if (data) {
       const filtered = licoes.filter((lic: any) =>
         lic.dat_usu_create.includes(data)
@@ -213,7 +213,7 @@ function LicoesAprendidasModal({
                         borderRadius={"8px"}
                         border={"1px solid #A7A7A7"}
                         mt={"-9px"}
-                        width={"120px"}
+                        width={"146px"}
                         height={"56px"}
                         color="#949494"
                         id="data"
@@ -278,7 +278,7 @@ function LicoesAprendidasModal({
                           transition: "all 0.4s",
                           color: "white",
                         }}
-                        width={"208px"}
+                        width={"200px"}
                         height={"56px"}
                       >
                         Adicionar
