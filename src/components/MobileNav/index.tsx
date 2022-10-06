@@ -73,7 +73,8 @@ export function MobileNav({
     atividade: "Atividade",
     precedentes: "Visão por Precedentes",
     "visao-por-area": "Visão por Area",
-    estatisticas: "Estatisticas",
+    estatisticas: "Estatísticas",
+    cronograma: "Cronograma",
     reports: "Relatórios",
   };
 
