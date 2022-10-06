@@ -84,16 +84,16 @@ function LicoesAprendidasModal({
   // );
 
   function handleFilter(categoriaId: string, data: string) {
-    if (categoriaId) {
-      const filtered = licoes.filter(
-        (lic: any) => lic.id_categoria == categoriaId
-      );
-      filtered.length == 0 &&
-        toast.error(
-          "Nenhum dado encontrado com o presente filtro de categoria"
-        );
-      return setFilteredTable(filtered);
-    }
+    // if (categoriaId) {
+    //   const filtered = licoes.filter(
+    //     (lic: any) => lic.id_categoria == categoriaId
+    //   );
+    //   filtered.length == 0 &&
+    //     toast.error(
+    //       "Nenhum dado encontrado com o presente filtro de categoria"
+    //     );
+    //   return setFilteredTable(filtered);
+    // }
     if (data) {
       const filtered = licoes.filter((lic: any) =>
         lic.dat_usu_create.includes(data)
