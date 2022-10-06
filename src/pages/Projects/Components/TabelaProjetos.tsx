@@ -24,14 +24,13 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { Projetos } from "interfaces/Projetos";
-
+import { formatDate } from "utils/formatDate";
 import { formatReal } from "utils/formatReal";
 
 import ModalCadastrarPriorizacao from "./ModalCadastrarPriorizacao";
 import ModalDeletarProjeto from "./ModalDeletarProjeto";
 
 import "../projects.css";
-import { formatDate } from "utils/formatDate";
 
 interface TableProps {
   data: Projetos[];
