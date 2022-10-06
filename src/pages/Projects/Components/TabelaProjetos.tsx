@@ -25,10 +25,12 @@ import {
 } from "@chakra-ui/react";
 import { Projetos } from "interfaces/Projetos";
 
+import { formatReal } from "utils/formatReal";
 import ModalCadastrarPriorizacao from "./ModalCadastrarPriorizacao";
 import ModalDeletarProjeto from "./ModalDeletarProjeto";
 
 import "../projects.css";
+import { formatDate } from "utils/formatDate";
 
 interface TableProps {
   data: Projetos[];
@@ -40,12 +42,16 @@ export function TabelaProjetos(props: TableProps) {
   // const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
-  const brl = Intl.NumberFormat("pt-BR");
 
   // console.log("dados tabela-projeto", data);
 
   const totalOrcado = data.reduce(
     (accumulator, object) => accumulator + +object.vlr_orcado,
+    0
+  );
+
+  const totalRealizado = data.reduce(
+    (accumulator, object) => accumulator + +object.vlr_cr,
     0
   );
 
@@ -83,8 +89,21 @@ export function TabelaProjetos(props: TableProps) {
 
   const tableData = data.slice(from, to).map((projeto, key) => (
     <Tr key={key}>
-      <Td isNumeric>{projeto.id_projeto}</Td>
-      <Td>
+      <Td
+        isNumeric
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        {projeto.id_projeto}
+      </Td>
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
         <Link to={`/detalhamento/${projeto.id_projeto}`}>
           <Text color={"#0047BB"}>
             {projeto.nome_projeto.length > 28 ? (
@@ -97,32 +116,147 @@ export function TabelaProjetos(props: TableProps) {
           </Text>
         </Link>
       </Td>
-      <Td>
-        {+projeto.vlr_cpi >= 1 ? (
-          <BsCheckCircleFill color="#00B53D" fontSize={25} />
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        {projeto.vlr_cpi >= 1 ? (
+          <Flex alignItems={"center"}>
+            <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
+            <Text marginLeft="8px"> {` CPI = ${projeto.vlr_cpi}`}</Text>
+          </Flex>
         ) : (
-          <BsFillXCircleFill color="red" fontSize={25} />
+          <Flex alignItems={"center"}>
+            <BsFillXCircleFill color="red" fontSize={25} />{" "}
+            <Text marginLeft="8px">{` CPI = ${projeto.vlr_cpi}`}</Text>
+          </Flex>
         )}
       </Td>
-      <Td>
-        {+projeto.vlr_spi >= 1 ? (
-          <BsCheckCircleFill color="#00B53D" fontSize={25} />
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        {projeto.vlr_spi >= 1 ? (
+          <Flex alignItems={"center"}>
+            <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
+            <Text marginLeft="8px">{` SPI = ${projeto.vlr_spi}`}</Text>
+          </Flex>
         ) : (
-          <BsFillXCircleFill color="red" fontSize={25} />
+          <Flex alignItems={"center"}>
+            <BsFillXCircleFill color="red" fontSize={25} />{" "}
+            <Text marginLeft="8px">{` SPI = ${projeto.vlr_spi}`}</Text>
+          </Flex>
         )}
       </Td>
-      <Td>{projeto.vlr_orcado && brl.format(projeto.vlr_orcado)}</Td>
-      <Td>{projeto.vlr_realizado && brl.format(projeto.vlr_realizado)}</Td>
-      <Td>{projeto.tcpi}</Td>
-      <Td>{projeto.prioridade}</Td>
-      <Td>{projeto.complexidade}</Td>
-      <Td>{projeto.polo}</Td>
-      <Td>{projeto.coordenador}</Td>
-      <Td>{projeto.responsavel}</Td>
-      <Td>{projeto.data_inicio}</Td>
-      <Td>{projeto.data_fim}</Td>
-      <Td>{projeto.pct}</Td>
-      <Td>
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        {formatReal(projeto.vlr_orcado)}
+      </Td>
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        {formatReal(projeto.vlr_cr)}
+      </Td>
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >{`${(100 - (projeto.vlr_cr / projeto.vlr_orcado) * 100).toFixed(
+        2
+      )} %`}</Td>
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        {projeto.prioridade}
+      </Td>
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        {projeto.complexidade}
+      </Td>
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        {projeto.polo}
+      </Td>
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        {projeto.coordenador}
+      </Td>
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        {projeto.responsavel}
+      </Td>
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        {formatDate(new Date(projeto.data_inicio))}
+      </Td>
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        {formatDate(new Date(projeto.data_fim))}
+      </Td>
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >{`${((projeto.vlr_cr / projeto.vlr_orcado) * 100).toFixed(2)} %`}</Td>
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        <Tooltip
+          label={`${projeto.descricao + " " + projeto.justificativa}`}
+          aria-label="A tooltip"
+        >
+          {projeto.descricao.substring(0, 25)}
+        </Tooltip>
+      </Td>
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
         <ModalCadastrarPriorizacao projeto={projeto.id_projeto} />
         <ModalDeletarProjeto projeto={projeto.id_projeto} />
       </Td>
@@ -132,46 +266,273 @@ export function TabelaProjetos(props: TableProps) {
   return (
     <div className="table-fix">
       <TableContainer mt={4} mb={3} ml={1}>
-        <Table variant="unstyled">
+        <Table
+          variant="unstyled"
+          style={{
+            borderBottom: "0.5px solid #A7A7A7",
+            border: "0.5px solid #A7A7A7",
+          }}
+        >
           <Thead>
-            <Tr background="origem.500" color="white">
-              <Th>ID</Th>
-              <Th>Projeto</Th>
-              <Th>CPI</Th>
-              <Th>SPI</Th>
-              <Th>Orçamento</Th>
-              <Th>Realizado</Th>
-              <Th>TCPI</Th>
-              <Th>Prioridade</Th>
-              <Th>Complexidade</Th>
-              <Th>Polo</Th>
-              <Th>Coordenador</Th>
-              <Th>Responsável</Th>
-              <Th>Data Início</Th>
-              <Th>Data de Término</Th>
-              <Th>%</Th>
-              <Th>Ações</Th>
+            <Tr
+              background="origem.500"
+              color="white"
+              style={{
+                borderBottom: "0.5px solid #A7A7A7",
+                borderRight: "0.5px solid #A7A7A7",
+              }}
+            >
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                ID
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                Projeto
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                CPI
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                SPI
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                Orçamento
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                Realizado
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                TCPI
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                Prioridade
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                Complexidade
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                Polo
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                Coordenador
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                Responsável
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                Data Início
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                Data de Término
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                %
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                Descrições e Justificativas
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                Ações
+              </Th>
             </Tr>
           </Thead>
           <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
           <Tfoot>
             <Tr background="origem.200" color="white">
-              <Th>Total</Th>
-              <Th>{data ? data.length : 0} Projetos</Th>
-              <Th></Th>
-              <Th></Th>
-              <Th>{brl.format(totalOrcado)}</Th>
-              <Th>{brl.format(totalOrcado)}</Th>
-              <Th></Th>
-              <Th></Th>
-              <Th></Th>
-              <Th></Th>
-              <Th></Th>
-              <Th></Th>
-              <Th></Th>
-              <Th></Th>
-              <Th></Th>
-              <Th></Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                Total
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                {data ? data.length : 0} Projetos
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              ></Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              ></Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                {formatReal(totalOrcado)}
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              >
+                {formatReal(totalRealizado)}
+              </Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              ></Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              ></Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              ></Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              ></Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              ></Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              ></Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              ></Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              ></Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              ></Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              ></Th>
+              <Th
+                style={{
+                  borderBottom: "0.5px solid #A7A7A7",
+                  borderRight: "0.5px solid #A7A7A7",
+                }}
+              ></Th>
             </Tr>
           </Tfoot>
         </Table>
