@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import {
   Box,
   Flex,
@@ -8,30 +6,62 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { AreasDemandadasPorMes } from "interfaces/Services";
 
 import PercentPieChart from "components/PercentPieChart";
 import StackedBarChart from "components/StackedBarChart";
 
-import { getAreasDemandadas } from "services/get/Dashboard";
+export interface AreasDemandadasProps {
+  primeiro: {
+    sms: number;
+    regulatorio: number;
+    operacao: number;
+    outros: number;
+  };
+  segundo: {
+    sms: number;
+    regulatorio: number;
+    operacao: number;
+    outros: number;
+  };
+  terceiro: {
+    sms: number;
+    regulatorio: number;
+    operacao: number;
+    outros: number;
+  };
+  quarto: {
+    sms: number;
+    regulatorio: number;
+    operacao: number;
+    outros: number;
+  };
+  atual: {
+    sms: number;
+    regulatorio: number;
+    operacao: number;
+    outros: number;
+  };
+}
 
-export default function AreasDemandadasComponent() {
-  const [areasDemandadas, setAreasDemandadas] = useState<
-    AreasDemandadasPorMes[]
-  >([] as AreasDemandadasPorMes[]);
-  async function handleGetAreasDemandadas() {
-    const reqGet = await getAreasDemandadas();
-    const dataReq: AreasDemandadasPorMes[] = reqGet.data;
-    setAreasDemandadas(dataReq);
-  }
+export default function AreasDemandadasComponent(
+  AreasDemandadasPorMes: AreasDemandadasProps
+) {
+  // const [areasDemandadas, setAreasDemandadas] = useState<
+  //   AreasDemandadasPorMes[]
+  // >([] as AreasDemandadasPorMes[]);
+  // async function handleGetAreasDemandadas() {
+  //   const reqGet = await getAreasDemandadas();
+  //   const dataReq: AreasDemandadasPorMes[] = reqGet.data;
+  //   setAreasDemandadas(dataReq);
+  // }
 
-  useEffect(() => {
-    handleGetAreasDemandadas();
-  }, []);
+  // useEffect(() => {
+  //   handleGetAreasDemandadas();
+  // }, []);
 
-  useEffect(() => {
-    // console.log(areasDemandadas);
-  }, [areasDemandadas]);
+  // useEffect(() => {
+  //   // console.log(areasDemandadas);
+  // }, [areasDemandadas]);
 
   function getCurrentMonth() {
     const date = new Date();
@@ -95,11 +125,23 @@ export default function AreasDemandadasComponent() {
 
   function getPieValues(month?: number) {
     let data;
-    if (month) {
-      data = areasDemandadas.find((mes) => mes.mes === month);
-    } else {
-      data = areasDemandadas.find((mes) => mes.mes === getCurrentMonth());
+    switch (month) {
+      case 1:
+        data = AreasDemandadasPorMes.primeiro;
+        break;
+      case 2:
+        data = AreasDemandadasPorMes.segundo;
+        break;
+      case 3:
+        data = AreasDemandadasPorMes.terceiro;
+        break;
+      case 4:
+        data = AreasDemandadasPorMes.quarto;
+        break;
+      default:
+        data = AreasDemandadasPorMes.atual;
     }
+
     const sms = data?.sms;
     const regulatorio = data?.regulatorio;
     const operacao = data?.operacao;
@@ -123,7 +165,7 @@ export default function AreasDemandadasComponent() {
 
   function isUpDown(type: string) {
     const valuesCurrentMonth = getPieValues(getCurrentMonth());
-    const valuesLastMonth = getPieValues(getCurrentMonth() - 1);
+    const valuesLastMonth = getPieValues(4);
 
     switch (type) {
       case "sms":
@@ -149,9 +191,7 @@ export default function AreasDemandadasComponent() {
   }
 
   function createPieData() {
-    const data = areasDemandadas.find(
-      (AreasDemandadasPorMes) => AreasDemandadasPorMes.mes === getCurrentMonth()
-    );
+    const data = AreasDemandadasPorMes.atual;
 
     const sms = data.sms;
     const regulatorio = data.regulatorio;
@@ -218,31 +258,31 @@ export default function AreasDemandadasComponent() {
   const dataMock = [
     {
       month: formatMonth(getCurrentMonth() - 4),
-      SMS: getPieValues(getCurrentMonth() - 4).smsPercent,
-      Regulatório: getPieValues(getCurrentMonth() - 4).regulatorioPercent,
-      Operação: getPieValues(getCurrentMonth() - 4).operacaoPercent,
-      Outros: getPieValues(getCurrentMonth() - 4).outrosPercent,
+      SMS: getPieValues(1).smsPercent,
+      Regulatório: getPieValues(1).regulatorioPercent,
+      Operação: getPieValues(1).operacaoPercent,
+      Outros: getPieValues(1).outrosPercent,
     },
     {
       month: formatMonth(getCurrentMonth() - 3),
-      SMS: getPieValues(getCurrentMonth() - 3).smsPercent,
-      Regulatório: getPieValues(getCurrentMonth() - 3).regulatorioPercent,
-      Operação: getPieValues(getCurrentMonth() - 3).operacaoPercent,
-      Outros: getPieValues(getCurrentMonth() - 3).outrosPercent,
+      SMS: getPieValues(2).smsPercent,
+      Regulatório: getPieValues(2).regulatorioPercent,
+      Operação: getPieValues(2).operacaoPercent,
+      Outros: getPieValues(2).outrosPercent,
     },
     {
       month: formatMonth(getCurrentMonth() - 2),
-      SMS: getPieValues(getCurrentMonth() - 2).smsPercent,
-      Regulatório: getPieValues(getCurrentMonth() - 2).regulatorioPercent,
-      Operação: getPieValues(getCurrentMonth() - 2).operacaoPercent,
-      Outros: getPieValues(getCurrentMonth() - 2).outrosPercent,
+      SMS: getPieValues(3).smsPercent,
+      Regulatório: getPieValues(3).regulatorioPercent,
+      Operação: getPieValues(3).operacaoPercent,
+      Outros: getPieValues(3).outrosPercent,
     },
     {
       month: formatMonth(getCurrentMonth() - 1),
-      SMS: getPieValues(getCurrentMonth() - 1).smsPercent,
-      Regulatório: getPieValues(getCurrentMonth() - 1).regulatorioPercent,
-      Operação: getPieValues(getCurrentMonth() - 1).operacaoPercent,
-      Outros: getPieValues(getCurrentMonth() - 1).outrosPercent,
+      SMS: getPieValues(4).smsPercent,
+      Regulatório: getPieValues(4).regulatorioPercent,
+      Operação: getPieValues(4).operacaoPercent,
+      Outros: getPieValues(4).outrosPercent,
     },
   ];
 
