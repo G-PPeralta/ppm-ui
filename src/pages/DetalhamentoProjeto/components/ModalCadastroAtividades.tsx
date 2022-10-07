@@ -58,7 +58,7 @@ function ModalCadastroAtividades({
     listaResponsaveis,
     listaAreaAtuacao,
     listaAtividadesRelacao,
-  } = useCadastroAtividadeProjeto(idProjeto);
+  } = useCadastroAtividadeProjeto(refresh, idProjeto);
 
   const responsaveisOptions = listaResponsaveis.map(
     (responsavel: Responsavel) => ({
@@ -77,27 +77,11 @@ function ModalCadastroAtividades({
     label: atividade.valor,
   }));
 
-  // useEffect(() => {
-  //   if (id === 0) {
-  //     registerForm.setFieldValue("id_intervencao", id);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   if (registerForm.values.id_intervencao === 0) {
-  //     registerForm.setFieldValue("id_intervencao", id);
-  //   }
-  // }, [registerForm.values]);
-
   useEffect(() => {
     if (idProjeto) {
       registerForm.setFieldValue("id_projeto", idProjeto);
     }
   }, []);
-
-  console.log("registerForm", registerForm.values);
-  console.log("idProjeto", idProjeto);
-  console.log("listaAtividadesRelacao", listaAtividadesRelacao);
 
   return (
     <>

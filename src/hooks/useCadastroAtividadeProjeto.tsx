@@ -20,7 +20,10 @@ import { postCadastroAtividadeProjetos } from "services/post/Projetos";
 
 import { useAuth } from "./useAuth";
 
-export function useCadastroAtividadeProjeto(idProjeto?: number) {
+export function useCadastroAtividadeProjeto(
+  refresh: boolean,
+  idProjeto?: number
+) {
   const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -101,6 +104,8 @@ export function useCadastroAtividadeProjeto(idProjeto?: number) {
         responsavel_id: values.responsavel_id,
         relacao_id: values.relacao_id,
         area_atuacao: values.area_atuacao,
+        dat_inicio_plan: values.dat_inicio_plan,
+        duracao_plan: values.duracao_plan,
         nao_iniciar_antes_de: values.nao_iniciar_antes_de,
         nao_terminar_depois_de: values.nao_terminar_depois_de,
         o_mais_breve_possivel: values.o_mais_breve_possivel,
@@ -130,6 +135,12 @@ export function useCadastroAtividadeProjeto(idProjeto?: number) {
   useEffect(() => {
     reqGet();
   }, []);
+
+  useEffect(() => {
+    if (refresh) {
+      reqGet();
+    }
+  }, [refresh]);
 
   return {
     registerForm,
