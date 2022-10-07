@@ -216,9 +216,13 @@ export interface TotalNaoPrevisto {
   totalRealizado: number;
 }
 
-export interface AreasDemandadas {
+export interface AreasDemandadasPorMes {
+  mes: number;
   qtd: number;
-  solicitante: string;
+  sms: string;
+  regulatorio: string;
+  operacao: string;
+  outros: string;
 }
 
 export interface InfoFinanceira {
