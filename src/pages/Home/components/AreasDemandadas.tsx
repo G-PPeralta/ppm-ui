@@ -38,22 +38,78 @@ export default function AreasDemandadasComponent() {
     return date.getMonth() + 1;
   }
 
+  function formatMonth(month: number) {
+    let monthName: string;
+    let year: number;
+    const date = new Date();
+    const currentYear = date.getFullYear();
+    switch (month) {
+      case 1:
+        monthName = "jan";
+        break;
+      case 2:
+        monthName = "fev";
+        break;
+      case 3:
+        monthName = "mar";
+        break;
+      case 4:
+        monthName = "abr";
+        break;
+      case 5:
+        monthName = "mai";
+        break;
+      case 6:
+        monthName = "jun";
+        break;
+      case 7:
+        monthName = "jul";
+        break;
+      case 8:
+        monthName = "ago";
+        break;
+      case 9:
+        monthName = "set";
+        break;
+      case 10:
+        monthName = "out";
+        break;
+      case 11:
+        monthName = "nov";
+        break;
+      case 12:
+        monthName = "dez";
+        break;
+      default:
+        monthName = "?";
+    }
+
+    if (month > getCurrentMonth()) {
+      year = currentYear - 1;
+    } else {
+      year = currentYear;
+    }
+
+    return monthName + "/" + year;
+  }
+
   function getPieValues(month?: number) {
     let data;
     if (month) {
-      data = areasDemandadas.filter((mes) => mes.mes === month);
+      data = areasDemandadas.find((mes) => mes.mes === month);
     } else {
-      data = areasDemandadas.filter((mes) => mes.mes === getCurrentMonth());
+      data = areasDemandadas.find((mes) => mes.mes === getCurrentMonth());
     }
-    const total = data.map(
-      (mes) => mes.sms + mes.regulatorio + mes.operacao + mes.outros
-    );
+    const sms = data?.sms;
+    const regulatorio = data?.regulatorio;
+    const operacao = data?.operacao;
+    const outros = data?.outros;
+    const total: number = sms + regulatorio + operacao + outros;
 
-    const smsPercent = (+data.map((mes) => mes.sms) / +total) * 100;
-    const regulatorioPercent =
-      (+data.map((mes) => mes.regulatorio) / +total) * 100;
-    const operacaoPercent = (+data.map((mes) => mes.operacao) / +total) * 100;
-    const outrosPercent = (+data.map((mes) => mes.outros) / +total) * 100;
+    const smsPercent = (sms / total) * 100;
+    const regulatorioPercent = (regulatorio / total) * 100;
+    const operacaoPercent = (operacao / total) * 100;
+    const outrosPercent = (outros / total) * 100;
 
     const values = {
       smsPercent,
@@ -67,7 +123,7 @@ export default function AreasDemandadasComponent() {
 
   function isUpDown(type: string) {
     const valuesCurrentMonth = getPieValues(getCurrentMonth());
-    const valuesLastMonth = getPieValues(getCurrentMonth());
+    const valuesLastMonth = getPieValues(getCurrentMonth() - 1);
 
     switch (type) {
       case "sms":
@@ -93,25 +149,26 @@ export default function AreasDemandadasComponent() {
   }
 
   function createPieData() {
-    const data = areasDemandadas.filter((mes) => mes.mes === getCurrentMonth());
-    const total = data.map(
-      (mes) => mes.sms + mes.regulatorio + mes.operacao + mes.outros
+    const data = areasDemandadas.find(
+      (AreasDemandadasPorMes) => AreasDemandadasPorMes.mes === getCurrentMonth()
     );
-    const sms = data.map((mes) => mes.sms);
-    const regulatorio = data.map((mes) => mes.regulatorio);
-    const operacao = data.map((mes) => mes.operacao);
-    const outros = data.map((mes) => mes.outros);
+
+    const sms = data.sms;
+    const regulatorio = data.regulatorio;
+    const operacao = data.operacao;
+    const outros = data.outros;
+    const total: number = sms + regulatorio + operacao + outros;
 
     const dataTypes = {
       smsData: [
         {
           name: "Undone",
-          value: +total - +sms,
+          value: total - sms,
           color: "#A8C1FF",
         },
         {
           name: "Done",
-          value: +sms,
+          value: sms,
           color: "#2E69FD",
         },
       ],
@@ -119,12 +176,12 @@ export default function AreasDemandadasComponent() {
       regulatorioData: [
         {
           name: "Undone",
-          value: +total - +regulatorio,
+          value: total - regulatorio,
           color: "#9fed9f",
         },
         {
           name: "Done",
-          value: +regulatorio,
+          value: regulatorio,
           color: "#FFB1B1",
         },
       ],
@@ -132,12 +189,12 @@ export default function AreasDemandadasComponent() {
       operacaoData: [
         {
           name: "Undone",
-          value: +total - +operacao,
+          value: total - operacao,
           color: "#FFB1B1",
         },
         {
           name: "Done",
-          value: +operacao,
+          value: operacao,
           color: "#F94144",
         },
       ],
@@ -145,48 +202,47 @@ export default function AreasDemandadasComponent() {
       outrosData: [
         {
           name: "Undone",
-          value: +total - +outros,
+          value: total - outros,
           color: "#FFF8BC",
         },
         {
           name: "Done",
-          value: +outros,
+          value: outros,
           color: "#F8E854",
         },
       ],
     };
-
     return dataTypes;
   }
 
   const dataMock = [
     {
-      month: "Jan/22",
-      SMS: 70,
-      Regulatório: 10,
-      Operação: 10,
-      Outros: 10,
+      month: formatMonth(getCurrentMonth() - 4),
+      SMS: getPieValues(getCurrentMonth() - 4).smsPercent,
+      Regulatório: getPieValues(getCurrentMonth() - 4).regulatorioPercent,
+      Operação: getPieValues(getCurrentMonth() - 4).operacaoPercent,
+      Outros: getPieValues(getCurrentMonth() - 4).outrosPercent,
     },
     {
-      month: "Fev/22",
-      SMS: 10,
-      Regulatório: 70,
-      Operação: 10,
-      Outros: 10,
+      month: formatMonth(getCurrentMonth() - 3),
+      SMS: getPieValues(getCurrentMonth() - 3).smsPercent,
+      Regulatório: getPieValues(getCurrentMonth() - 3).regulatorioPercent,
+      Operação: getPieValues(getCurrentMonth() - 3).operacaoPercent,
+      Outros: getPieValues(getCurrentMonth() - 3).outrosPercent,
     },
     {
-      month: "Mar/22",
-      SMS: 10,
-      Regulatório: 10,
-      Operação: 70,
-      Outros: 10,
+      month: formatMonth(getCurrentMonth() - 2),
+      SMS: getPieValues(getCurrentMonth() - 2).smsPercent,
+      Regulatório: getPieValues(getCurrentMonth() - 2).regulatorioPercent,
+      Operação: getPieValues(getCurrentMonth() - 2).operacaoPercent,
+      Outros: getPieValues(getCurrentMonth() - 2).outrosPercent,
     },
     {
-      month: "Abr/22",
-      SMS: 10,
-      Regulatório: 10,
-      Operação: 10,
-      Outros: 70,
+      month: formatMonth(getCurrentMonth() - 1),
+      SMS: getPieValues(getCurrentMonth() - 1).smsPercent,
+      Regulatório: getPieValues(getCurrentMonth() - 1).regulatorioPercent,
+      Operação: getPieValues(getCurrentMonth() - 1).operacaoPercent,
+      Outros: getPieValues(getCurrentMonth() - 1).outrosPercent,
     },
   ];
 

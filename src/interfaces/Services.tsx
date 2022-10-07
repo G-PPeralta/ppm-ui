@@ -218,11 +218,10 @@ export interface TotalNaoPrevisto {
 
 export interface AreasDemandadasPorMes {
   mes: number;
-  qtd: number;
-  sms: string;
-  regulatorio: string;
-  operacao: string;
-  outros: string;
+  sms: number;
+  regulatorio: number;
+  operacao: number;
+  outros: number;
 }
 
 export interface InfoFinanceira {
