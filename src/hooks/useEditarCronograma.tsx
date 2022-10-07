@@ -24,7 +24,7 @@ import { getAreaAtuacaoList } from "services/get/Infograficos";
 
 import { useAuth } from "./useAuth";
 
-export function useEditarCronograma(atual?: any) {
+export function useEditarCronograma(atual: any) {
   const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -34,7 +34,51 @@ export function useEditarCronograma(atual?: any) {
   const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
   const [listaTarefas, setListaTarefas] = useState<Tarefas[]>([]);
   const [listaOperacao, setListaOperacao] = useState<Operacao[]>([]);
-  const [initialValues, setInitialValues] = useState<any>({});
+  // const initialValues = {
+  //   nom_usu_create: user?.nome,
+  //   sonda_id: 0,
+  //   poco_id: 0,
+  //   atividades: [
+  //     {
+  //       area_id: 0,
+  //       operacao_id: 0,
+  //       responsavel_id: 0,
+  //       data_inicio: "",
+  //       duracao: 0,
+  //       precedentes: [
+  //         {
+  //           id: 0,
+  //           nome: "",
+  //           checked: false,
+  //         },
+  //       ],
+  //     },
+  //   ],
+  //   comentarios: "",
+  // };
+  const _atual = {
+    nom_usu_create: user?.nome,
+    sonda_id: atual.id_sonda,
+    poco_id: atual.id_poco,
+    atividades: atual.atividades.map((t: any) => ({
+      area_id: 0,
+      area_nom: "nome area",
+      operacao_id: t.id_atividade,
+      nom_operacao: t.nome_atividade,
+      responsavel_id: 30, // TODO
+      responsavel_nom: "Ada Lovelace",
+      data_inicio: new Date(t.inicio_planejado),
+      duracao: t.hrs_totais,
+      precedentes: [
+        {
+          id: 0,
+          nome: "",
+          checked: false,
+        },
+      ],
+    })),
+    comentarios: "...",
+  };
 
   const reqGet = async () => {
     const sondas = await getSonda();
@@ -53,6 +97,7 @@ export function useEditarCronograma(atual?: any) {
     const areasAtuacaoSorted = areaAtuacao.data.sort((a: any, b: any) =>
       a.tipo.localeCompare(b.tipo)
     );
+
     const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
       a.nome.localeCompare(b.nome)
     );
@@ -77,50 +122,12 @@ export function useEditarCronograma(atual?: any) {
     checked: false,
   }));
 
-  const handleSetInitialValues = (atual: any) => {
-    setInitialValues({
-      nom_usu_create: user?.nome,
-      sonda_id: atual.id_sonda,
-      poco_id: atual.id_poco,
-      atividades: atual.atividades
-        ? atual.atividades.map((t: any) => ({
-            area_id: 0,
-            operacao_id: t.id_atividade,
-            responsavel_id: 0, // TODO
-            data_inicio: t.inicio_planejado,
-            duracao: t.hrs_totais,
-            precedentes: [
-              {
-                id: 0,
-                nome: "",
-                checked: false,
-              },
-            ],
-          }))
-        : [
-            {
-              area_id: 0,
-              operacao_id: 0,
-              responsavel_id: 0,
-              data_inicio: "",
-              duracao: 0,
-              precedentes: [
-                {
-                  id: 0,
-                  nome: "",
-                  checked: false,
-                },
-              ],
-            },
-          ],
-      comentarios: "",
-    });
-  };
-
+  console.log(">>>>>>useFormik");
   const registerForm: any = useFormik({
-    initialValues,
+    initialValues: _atual,
     validationSchema: cadastroNovoCronogramaSchema,
-    onSubmit: async (values) => {
+    // enableReinitialize: true,
+    onSubmit: async (values: any) => {
       const newValues: any = {
         nom_usu_create: user?.nome,
         sonda_id: values.sonda_id,
@@ -162,10 +169,14 @@ export function useEditarCronograma(atual?: any) {
     }
   }, [listaSondas, listaPocos]);
 
-  useEffect(() => {
-    console.log(">>>> atual 01: ", atual);
-    handleSetInitialValues(atual);
-  }, []);
+  // useEffect(() => {
+  //   console.log(">>>> useEditar");
+
+  //   const setInitialValues = async () => {
+  //     // if (atual) await registerForm.setValues(_atual);
+  //   };
+  //   setInitialValues();
+  // }, [atual]);
 
   return {
     registerForm,

@@ -11,46 +11,34 @@ import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
 // import { RequiredField } from "components/RequiredField/RequiredField";
 
-import { useCarregarListasModalCronograma } from "hooks/useCarregarListasModalCronograma";
+// import { useCarregarListasModalCronograma } from "hooks/useCarregarListasModalCronograma";
 
 import BotaoAdicionar from "./BotaoAdicionar";
 import AtividadesDraggable from "./Draggable/AtividadeDraggable";
 
-interface AtividadePrecedente {
-  id: number;
-  nome: string;
-  checked: boolean;
-}
+// interface AtividadePrecedente {
+//   id: number;
+//   nome: string;
+//   checked: boolean;
+// }
 
-interface Atividade {
-  area_id: number;
-  operacao_id: number;
-  responsavel_id: number;
-  data_inicio: number;
-  duracao: number;
-  precedentes: AtividadePrecedente[];
-}
+// interface Atividade {
+//   area_id: number;
+//   operacao_id: number;
+//   responsavel_id: number;
+//   data_inicio: number;
+//   duracao: number;
+//   precedentes: AtividadePrecedente[];
+// }
 
 export default function AtividadesCadastroCronograma({
   registerForm,
   listaAtividadesPrecedentes,
+  listas,
 }: any) {
   const id = useId();
   const [render, setRender] = useState<any>([]);
   const [droppableId, setDroppableId] = useState<string>(id);
-  const { listaAreaAtuacao, listaResponsaveis, listaOperacao } =
-    useCarregarListasModalCronograma();
-
-  const listas = {
-    listaAreaAtuacao,
-    listaResponsaveis,
-    listaOperacao,
-  };
-
-  console.log(
-    ">>>registerForm.values.atividades",
-    registerForm.values.atividades
-  );
 
   const reorder = (
     registerForm: FormikProps<any>,
@@ -127,86 +115,81 @@ export default function AtividadesCadastroCronograma({
     const newId = droppableId + "-" + now.toLocaleString();
     setDroppableId(newId);
 
-    const precedentesFiltrados = listaAtividadesPrecedentes.filter(
-      (atividade: AtividadePrecedente) => {
-        for (
-          let index = 0;
-          index < registerForm.values.atividades.length;
-          index += 1
-        ) {
-          if (
-            atividade.id === registerForm.values.atividades[index].operacao_id
-          ) {
-            return true;
-          }
-        }
-        return false;
-      }
-    );
+    // const precedentesFiltrados = listaAtividadesPrecedentes.filter(
+    //   (atividade: AtividadePrecedente) => {
+    //     for (
+    //       let index = 0;
+    //       index < registerForm.values.atividades.length;
+    //       index += 1
+    //     ) {
+    //       if (
+    //         atividade.id === registerForm.values.atividades[index].operacao_id
+    //       ) {
+    //         return true;
+    //       }
+    //     }
+    //     return false;
+    //   }
+    // );
 
-    registerForm.setFieldValue(
-      "atividades[0].precedentes",
-      precedentesFiltrados
-    );
+    // registerForm.setFieldValue(
+    //   "atividades[0].precedentes",
+    //   precedentesFiltrados
+    // );
   }, []);
 
   useEffect(() => {
-    const listaAtividades = registerForm.values.atividades.map(
-      (atividade: Atividade) => atividade
-    );
-
-    const listaPrecedentesChecked = listaAtividades.map(
-      (atividade: Atividade) => {
-        const precedentes = atividade.precedentes.map(
-          (precedente: AtividadePrecedente) => {
-            if (precedente.checked) {
-              return precedente;
-            }
-            return null;
-          }
-        );
-
-        return precedentes;
-      }
-    );
-
-    const precedentesFiltrados = listaAtividadesPrecedentes.filter(
-      (atividade: AtividadePrecedente) => {
-        for (let index = 0; index < listaAtividades.length; index += 1) {
-          if (atividade.id === listaAtividades[index].operacao_id) {
-            return true;
-          }
-        }
-        return false;
-      }
-    );
-
-    const listaAtividadesAtualizada = listaAtividades.map(
-      (atividade: Atividade, index: number) => {
-        const precedentes = precedentesFiltrados.map(
-          (precedente: AtividadePrecedente) => {
-            for (
-              let indexPrecedente = 0;
-              indexPrecedente < listaPrecedentesChecked[index].length;
-              indexPrecedente += 1
-            ) {
-              if (
-                listaPrecedentesChecked[index][indexPrecedente] &&
-                listaPrecedentesChecked[index][indexPrecedente].id ===
-                  precedente.id
-              ) {
-                return listaPrecedentesChecked[index][indexPrecedente];
-              }
-            }
-            return { ...precedente };
-          }
-        );
-
-        return { ...atividade, precedentes };
-      }
-    );
-    // Atualiza a lista de precedentes para todos os itens da lista de atividades
-    registerForm.setFieldValue("atividades", listaAtividadesAtualizada);
+    // const listaAtividades = registerForm.values.atividades.map(
+    //   (atividade: Atividade) => atividade
+    // );
+    // const listaPrecedentesChecked = listaAtividades.map(
+    //   (atividade: Atividade) => {
+    //     const precedentes = atividade.precedentes.map(
+    //       (precedente: AtividadePrecedente) => {
+    //         if (precedente.checked) {
+    //           return precedente;
+    //         }
+    //         return null;
+    //       }
+    //     );
+    //     return precedentes;
+    //   }
+    // );
+    // const precedentesFiltrados = listaAtividadesPrecedentes.filter(
+    //   (atividade: AtividadePrecedente) => {
+    //     for (let index = 0; index < listaAtividades.length; index += 1) {
+    //       if (atividade.id === listaAtividades[index].operacao_id) {
+    //         return true;
+    //       }
+    //     }
+    //     return false;
+    //   }
+    // );
+    // const listaAtividadesAtualizada = listaAtividades.map(
+    //   (atividade: Atividade, index: abel: atual.pocnumber) => {
+    //     const precedentes = precedentesFiltrados.map(
+    //       (precedente: AtividadePrecedente) => {
+    //         for (
+    //           let indexPrecedente = 0;
+    //           indexPrecedente < listaPrecedentesChecked[index].length;
+    //           indexPrecedente += 1
+    //         ) {
+    //           if (
+    //             listaPrecedentesChecked[index][indexPrecedente] &&
+    //             listaPrecedentesChecked[index][indexPrecedente].id ===
+    //               precedente.id
+    //           ) {
+    //             return listaPrecedentesChecked[index][indexPrecedente];
+    //           }
+    //         }
+    //         return { ...precedente };
+    //       }
+    //     );
+    //     return { ...atividade, precedentes };
+    //   }
+    // );
+    // // Atualiza a lista de precedentes para todos os itens da lista de atividades
+    // registerForm.setFieldValue("atividades", listaAtividadesAtualizada);
   }, [render]);
 
   return (
@@ -219,7 +202,7 @@ export default function AtividadesCadastroCronograma({
         <Droppable droppableId={droppableId}>
           {(provided: DroppableProvided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              {console.log(">>>>values", registerForm.values)}
+              {console.log(">>>>AtividadesDraggable map", registerForm.values)}
               {registerForm.values.atividades.map(
                 (_atividade: AtividadesProjetoTipo, index: number) => (
                   <AtividadesDraggable

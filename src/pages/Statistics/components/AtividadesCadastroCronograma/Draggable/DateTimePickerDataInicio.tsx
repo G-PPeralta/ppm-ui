@@ -22,6 +22,14 @@ function DateTimePickerDataInicio({ registerForm, data, index }: any) {
   }, []);
 
   const handleIniciarDate = (date: any) => {
+    console.log(">>>>date", date);
+    console.log(">>>>date", date);
+    console.log(">>>>date", date);
+    console.log(">>>>date", date);
+    console.log(">>>>date", date);
+    console.log(">>>>date", date);
+    console.log(">>>>date", date);
+
     setDataInicio(date);
     registerForm.setFieldValue(`atividades[${index}].data_inicio`, date);
   };

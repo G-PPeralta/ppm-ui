@@ -25,8 +25,8 @@ import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 
 import { useEditarCronograma } from "hooks/useEditarCronograma";
 
-import SelectFiltragem from "../../../components/SelectFiltragem";
-// import AtividadesCadastroCronograma from "./AtividadesCadastroCronograma";
+import AtividadesCadastroCronograma from "./AtividadesCadastroCronograma";
+import SelectOption from "./SelectOption";
 // import { TextError } from "components/TextError";
 
 function ModalEditarCronograma({ refresh, setRefresh, atual }: any) {
@@ -36,7 +36,10 @@ function ModalEditarCronograma({ refresh, setRefresh, atual }: any) {
     loading,
     listaPocos,
     listaSondas,
-    // listaAtividadesPrecedentes,
+    listaAtividadesPrecedentes,
+    listaAreaAtuacao,
+    listaResponsaveis,
+    listaOperacao,
   } = useEditarCronograma(atual);
 
   const innerWidth = window.innerWidth;
@@ -50,6 +53,12 @@ function ModalEditarCronograma({ refresh, setRefresh, atual }: any) {
     value: sonda.id,
     label: sonda.nom_sonda,
   }));
+
+  const listas = {
+    listaAreaAtuacao,
+    listaResponsaveis,
+    listaOperacao,
+  };
 
   // const handleGet = async () => {
   //   const projetos = await getProjetosTipo();
@@ -71,6 +80,7 @@ function ModalEditarCronograma({ refresh, setRefresh, atual }: any) {
   // };
 
   useEffect(() => {
+    // registerForm.setFieldValue("atividades", atual.atividades);
     // handleGet();
     // registerForm.setFieldValue("id_campanha", idCampanha);
     // const newDate = new Date(data);
@@ -109,7 +119,7 @@ function ModalEditarCronograma({ refresh, setRefresh, atual }: any) {
             color={"white"}
             fontSize={"1em"}
           >
-            Novo Cronograma
+            Editar Cronograma
           </ModalHeader>
           <form
             onSubmit={(e) => {
@@ -128,7 +138,8 @@ function ModalEditarCronograma({ refresh, setRefresh, atual }: any) {
                         gap={5}
                         w={"100%"}
                       >
-                        <SelectFiltragem
+                        <SelectOption
+                          disabled
                           registerForm={registerForm}
                           nomeSelect={"SONDA"}
                           propName={"sonda_id"}
@@ -136,7 +147,8 @@ function ModalEditarCronograma({ refresh, setRefresh, atual }: any) {
                           required={true}
                           value={{ value: atual.id_sonda, label: atual.sonda }}
                         />
-                        <SelectFiltragem
+                        <SelectOption
+                          disabled
                           registerForm={registerForm}
                           nomeSelect={"POÇO"}
                           propName={"poco_id"}
@@ -174,10 +186,11 @@ function ModalEditarCronograma({ refresh, setRefresh, atual }: any) {
                       </Flex>
                     </Stack>
 
-                    {/* <AtividadesCadastroCronograma
+                    <AtividadesCadastroCronograma
                       registerForm={registerForm}
                       listaAtividadesPrecedentes={listaAtividadesPrecedentes}
-                    /> */}
+                      listas={listas}
+                    />
 
                     <Stack>
                       <Text fontWeight={"bold"}>Comentários</Text>

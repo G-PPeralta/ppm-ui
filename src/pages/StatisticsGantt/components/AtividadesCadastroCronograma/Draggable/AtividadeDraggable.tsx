@@ -21,7 +21,7 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
-import PopOverPrecedentes from "./PopOverPrecedentes";
+// import PopOverPrecedentes from "./PopOverPrecedentes";
 interface Props {
   registerForm: FormikProps<any>;
   index: number;
@@ -49,9 +49,9 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     registerForm.setFieldValue("atividades", newList);
   };
 
-  const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
-    value: poco.id,
-    label: poco.tipo,
+  const optionsAreaAtuacao = listaAreaAtuacao.map((a: AreaAtuacao) => ({
+    value: a.id,
+    label: a.tipo,
   }));
 
   const optionsResponsaveis = listaResponsaveis.map(
@@ -66,10 +66,38 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     label: operacao.nom_operacao,
   }));
 
+  // console.log(
+  //   ">>>>>>>>>!Options",
+  //   !optionsAreaAtuacao
+  //     .map(({ value }) => value)
+  //     .indexOf(registerForm.values.atividades[index].area_id)
+  // );
+
+  // optionsAreaAtuacao.unshift({
+  //   value: registerForm.values.atividades[index].area_id,
+  //   label: registerForm.values.atividades[index].area_nom,
+  // });
+  // optionsOperacao.unshift({
+  //   value: registerForm.values.atividades[index].operacao_id,
+  //   label: registerForm.values.atividades[index].nom_operacao,
+  // });
+  // optionsResponsaveis.unshift({
+  //   value: registerForm.values.atividades[index].responsavel_id,
+  //   label: registerForm.values.atividades[index].responsavel_nom,
+  // });
+
   const getValue = (options: any, i: number, chave: string) => {
     const index = options
       .map(({ value }: any) => value)
       .indexOf(registerForm?.values?.atividades?.[i][chave]);
+
+    console.log(
+      `>>>>getValue:${i} ${index}`,
+      `atividades.[${i}].${chave}`,
+      options?.[index]?.value,
+      options?.[index]?.label,
+      registerForm?.values?.atividades?.[i][chave]
+    );
 
     return {
       value: options?.[index]?.value,
@@ -229,10 +257,10 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                       PRECEDENTES
                     </Text>
                   </Flex>
-                  <PopOverPrecedentes
+                  {/* <PopOverPrecedentes
                     registerForm={registerForm}
                     index={index}
-                  />
+                  /> */}
                 </Flex>
               </Flex>
               <Flex

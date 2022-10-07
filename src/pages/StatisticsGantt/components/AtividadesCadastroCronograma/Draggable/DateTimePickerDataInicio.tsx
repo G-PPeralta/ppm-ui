@@ -7,21 +7,12 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 
 function DateTimePickerDataInicio({ registerForm, data, index }: any) {
   const [dataInicio, setDataInicio] = useState<any>("");
-  const [dataMin, setDataMin] = useState<any>("");
+  // const [dataMin, setDataMin] = useState<any>("");
 
-  useEffect(() => {
-    if (data) {
-      const newDate = new Date(data);
-      newDate.setDate(newDate.getDate() + 15);
-      setDataInicio(newDate);
-      setDataMin(newDate);
-    } else {
-      const newDate = new Date();
-      setDataMin(newDate);
-    }
-  }, []);
-
-  const handleIniciarDate = (date: any) => {
+  const handleInitialDate = () => {
+    setDataInicio(registerForm?.values.atividades?.[index].data_inicio);
+  };
+  const handleChangeDate = (date: any) => {
     setDataInicio(date);
     registerForm.setFieldValue(`atividades[${index}].data_inicio`, date);
   };
@@ -43,6 +34,19 @@ function DateTimePickerDataInicio({ registerForm, data, index }: any) {
     )
   );
 
+  useEffect(() => {
+    handleInitialDate();
+    // if (data) {
+    //   const newDate = new Date(data);
+    //   newDate.setDate(newDate.getDate() + 15);
+    //   setDataInicio(newDate);
+    //   setDataMin(newDate);
+    // } else {
+    //   const newDate = new Date();
+    //   setDataMin(newDate);
+    // }
+  }, []);
+
   return (
     <Flex direction={"column"}>
       <Flex gap={1}>
@@ -53,8 +57,8 @@ function DateTimePickerDataInicio({ registerForm, data, index }: any) {
       </Flex>
       <ReactDatePicker
         selected={dataInicio}
-        minDate={dataMin}
-        onChange={(date) => handleIniciarDate(date)}
+        // minDate={dataMin}
+        onChange={(date) => handleChangeDate(date)}
         locale="pt-BR"
         showTimeSelect
         dateFormat="dd/MM/yyyy, hh:mm"
