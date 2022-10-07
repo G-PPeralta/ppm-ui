@@ -14,7 +14,8 @@ import {
   Textarea,
   Button,
   Text,
-  Input,
+  NumberInput,
+  NumberInputField,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
@@ -153,22 +154,22 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                               PROFUNDIDADE DA ZONA INTERVIDA MAIS
                             </Text>
                           </Flex>
-                          <Input
-                            // isRequired
-                            h={"56px"}
-                            placeholder="Profundidade"
-                            id="profundidade"
-                            type="text"
-                            name="profundidade"
-                            // value={regexCaracteresEspeciais(
-                            //   registerForm.values.poco
-                            // )}
-                            onChange={registerForm.handleChange}
-                            maxLength={10}
-                          />
-                          {/* {registerForm.errors.poco && (
-                            <TextError>{registerForm.errors.poco}</TextError>
-                          )} */}
+
+                          <NumberInput
+                            max={999999}
+                            min={0}
+                            id={`profundidade`}
+                            name={`profundidade`}
+                            value={registerForm.values.profundidade}
+                            onChange={(value) => {
+                              registerForm.setFieldValue(
+                                `profundidade`,
+                                Number(value)
+                              );
+                            }}
+                          >
+                            <NumberInputField bg={"#fff"} h={"56px"} />
+                          </NumberInput>
                         </FormControl>
                       </Flex>
                     </Stack>

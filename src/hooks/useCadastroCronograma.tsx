@@ -80,6 +80,7 @@ export function useCadastroCronograma() {
     nom_usu_create: user?.nome,
     sonda_id: 0,
     poco_id: 0,
+    profundidade: 0,
     atividades: [
       {
         area_id: 0,
@@ -107,6 +108,7 @@ export function useCadastroCronograma() {
         nom_usu_create: user?.nome,
         sonda_id: values.sonda_id,
         poco_id: values.poco_id,
+        profundidade: values.profundidade,
         atividades: values.atividades,
         comentarios: values.comentarios,
       };
