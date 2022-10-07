@@ -155,6 +155,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                           </Flex>
                           <Input
                             // isRequired
+                            h={"56px"}
                             placeholder="Profundidade"
                             id="profundidade"
                             type="text"

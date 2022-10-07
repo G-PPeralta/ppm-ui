@@ -13,6 +13,7 @@ function DateTimePickerDataInicio({ registerForm, data, index }: any) {
     if (data) {
       const newDate = new Date(data);
       newDate.setDate(newDate.getDate() + 15);
+      newDate.setHours(9, 0, 0, 0);
       setDataInicio(newDate);
       setDataMin(newDate);
     } else {
@@ -22,6 +23,7 @@ function DateTimePickerDataInicio({ registerForm, data, index }: any) {
   }, []);
 
   const handleIniciarDate = (date: any) => {
+    date.setHours(9, 0, 0, 0);
     setDataInicio(date);
     registerForm.setFieldValue(`atividades[${index}].data_inicio`, date);
   };
@@ -29,6 +31,7 @@ function DateTimePickerDataInicio({ registerForm, data, index }: any) {
   const TriggerDatePickerInicio = forwardRef(
     ({ value, onClick }: any, ref: any) => (
       <Button
+        h={"56px"}
         onClick={onClick}
         ref={ref}
         variant="outline"
