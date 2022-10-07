@@ -106,7 +106,7 @@ function ModalEditarCronograma({ refresh, setRefresh, atual }: any) {
         }}
         onClick={onOpen}
       >
-        Novo Cronograma
+        Editar Cronograma
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="7xl">
         <ModalOverlay />

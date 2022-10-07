@@ -127,12 +127,6 @@ function StatisticsGantt() {
   return (
     <>
       <Sidebar>
-        <IconButton
-          aria-label=""
-          icon={<FiChevronLeft />}
-          onClick={() => navigate(`/estatisticas`)}
-        />
-
         <Stack spacing="8">
           <Box
             py={{ base: "0", sm: "10" }}
@@ -147,6 +141,14 @@ function StatisticsGantt() {
           >
             <Stack>
               <Flex mb={5} justify={"space-between"} wrap={"wrap"}>
+                <IconButton
+                  aria-label="voltar"
+                  color={"black"}
+                  backgroundColor="transparent"
+                  size="lg"
+                  icon={<FiChevronLeft />}
+                  onClick={() => navigate(`/estatisticas`)}
+                />
                 <Box>
                   <Heading as="h3" size="md">
                     {projeto.sonda}
