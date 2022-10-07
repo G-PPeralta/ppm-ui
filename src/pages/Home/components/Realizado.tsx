@@ -8,14 +8,15 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { TotalRealizado } from "interfaces/Services";
+import { TotalOrcamento, TotalRealizado } from "interfaces/Services";
 
-import { getTotalRealizado } from "services/get/Dashboard";
+import { getOrcamentoTotal, getTotalRealizado } from "services/get/Dashboard";
 
 export default function RealizadoComponent() {
   const [totalRealizado, setTotalRealizado] = useState<TotalRealizado[]>(
     [] as TotalRealizado[]
   );
+  const [orcamento, setTotalOrcamento] = useState<TotalOrcamento[]>();
   const [loading, setLoading] = useState(false);
 
   async function handleGetTotalRealizado() {
@@ -26,12 +27,21 @@ export default function RealizadoComponent() {
     setLoading(false);
   }
 
+  async function handleGetTotalOrcamento() {
+    const reqGet = await getOrcamentoTotal();
+
+    setTotalOrcamento(reqGet.data[0].total);
+  }
+
   useEffect(() => {
+    handleGetTotalOrcamento();
     handleGetTotalRealizado();
     setLoading(false);
   }, []);
 
   const valorFormatado = totalRealizado && totalRealizado.toLocaleString();
+
+  console.log(totalRealizado);
 
   return (
     <Stack spacing="8">
@@ -93,7 +103,7 @@ export default function RealizadoComponent() {
                 sx={{ fontSize: 22, fontWeight: "600", alignSelf: "center" }}
                 color="#ffffff"
               >
-                50%
+                {(Number(totalRealizado) / Number(orcamento)) * 100}%
               </Text>
             </Box>
           </Box>

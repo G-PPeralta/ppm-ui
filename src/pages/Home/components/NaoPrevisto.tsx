@@ -8,15 +8,24 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { TotalNaoPrevisto } from "interfaces/Services";
+import { TotalNaoPrevisto, TotalOrcamento } from "interfaces/Services";
 
-import { getTotalNaoPrevisto } from "services/get/Dashboard";
+import { getOrcamentoTotal, getTotalNaoPrevisto } from "services/get/Dashboard";
 
 export default function NaoPrevistoComponent() {
   const [totalNaoPrevisto, setTotalNaoPrevisto] = useState<TotalNaoPrevisto[]>(
     [] as TotalNaoPrevisto[]
   );
+  const [totalOrcamento, setTotalOrcamento] = useState<TotalOrcamento[]>(
+    [] as TotalOrcamento[]
+  );
   const [loading, setLoading] = useState(false);
+
+  async function handleGetTotalOrcamento() {
+    const reqGet = await getOrcamentoTotal();
+
+    setTotalOrcamento(reqGet.data[0].total);
+  }
 
   async function handleGetTotalNaoPrevisto() {
     setLoading(true);
@@ -27,6 +36,7 @@ export default function NaoPrevistoComponent() {
   }
 
   useEffect(() => {
+    handleGetTotalOrcamento();
     handleGetTotalNaoPrevisto();
     setLoading(false);
   }, []);
@@ -92,7 +102,7 @@ export default function NaoPrevistoComponent() {
                 sx={{ fontSize: 20, fontWeight: "600", alignSelf: "center" }}
                 color="#ffffff"
               >
-                10%
+                {(Number(totalNaoPrevisto) / Number(totalOrcamento)) * 100}%
               </Text>
             </Box>
           </Box>
