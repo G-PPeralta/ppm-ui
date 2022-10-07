@@ -52,8 +52,13 @@ function ModalCadastroAtividades({
   idProjeto,
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaResponsaveis, listaAreaAtuacao } =
-    useCadastroAtividadeProjeto(idProjeto);
+  const {
+    registerForm,
+    loading,
+    listaResponsaveis,
+    listaAreaAtuacao,
+    listaAtividadesRelacao,
+  } = useCadastroAtividadeProjeto(idProjeto);
 
   const responsaveisOptions = listaResponsaveis.map(
     (responsavel: Responsavel) => ({
@@ -65,6 +70,11 @@ function ModalCadastroAtividades({
   const areaAtuacaoOptions = listaAreaAtuacao.map((area: any) => ({
     value: area.id,
     label: area.tipo,
+  }));
+
+  const relacoesOptions = listaAtividadesRelacao.map((atividade: any) => ({
+    value: atividade.id,
+    label: atividade.valor,
   }));
 
   // useEffect(() => {
@@ -87,6 +97,7 @@ function ModalCadastroAtividades({
 
   console.log("registerForm", registerForm.values);
   console.log("idProjeto", idProjeto);
+  console.log("listaAtividadesRelacao", listaAtividadesRelacao);
 
   return (
     <>
@@ -201,7 +212,7 @@ function ModalCadastroAtividades({
                     registerForm={registerForm}
                     nomeSelect={"RELAÇÃO"}
                     propName={"relacao_id"}
-                    options={responsaveisOptions}
+                    options={relacoesOptions}
                     required={false}
                   />
                 </Flex>
@@ -276,7 +287,7 @@ function ModalCadastroAtividades({
 
                 <AtividadesDragAndDrop
                   registerForm={registerForm}
-                  atividades={responsaveisOptions}
+                  atividades={relacoesOptions}
                 />
               </Flex>
             </ModalBody>
