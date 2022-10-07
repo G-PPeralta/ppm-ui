@@ -4,13 +4,17 @@ import {
   Button,
   Flex,
   FormControl,
+  // FormLabel,
   Modal,
   ModalBody,
+  // ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalOverlay,
   Stack,
   Text,
+  // Textarea,
+  // useBreakpointValue,
   useDisclosure,
   IconButton,
   ModalHeader,
@@ -22,11 +26,19 @@ import { Ring } from "@uiball/loaders";
 
 import { handleCancelar } from "utils/handleCadastro";
 
+// import { useAuth } from "hooks/useAuth";
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
-function ModalDeletarOpcaoPriorizacao() {
+// import { deleteProject } from "services/delete/DeleteProject";
+
+function DeleteModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroPriorizacao();
+  // const { user } = useAuth();
+  // const idUser = user?.nome;
+
+  // Pra pegar o id do projeto e depois ser possível deletar
+  // console.log(projeto.projeto);
 
   return (
     <>
@@ -37,15 +49,13 @@ function ModalDeletarOpcaoPriorizacao() {
         backgroundColor={"transparent"}
         aria-label="Plus sign"
         _hover={{
-          backgroundColor: "#F40606",
-          color: "white",
+          backgroundColor: "transparent",
+          color: "#F94144",
         }}
-        w={"14px"}
-        h={"18px"}
       >
         <FiTrash size={"13px"} />
       </IconButton>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton color={"white"} />
@@ -139,4 +149,4 @@ function ModalDeletarOpcaoPriorizacao() {
   );
 }
 
-export default ModalDeletarOpcaoPriorizacao;
+export default DeleteModal;

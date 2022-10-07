@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { AiFillPrinter } from "react-icons/ai";
 import {
   FiChevronLeft,
   FiChevronRight,
@@ -7,7 +8,7 @@ import {
   FiChevronsRight,
   FiSearch,
 } from "react-icons/fi";
-import { MdModeEdit } from "react-icons/md";
+import { MdArrowForwardIos, MdModeEdit } from "react-icons/md";
 
 import {
   Tr,
@@ -31,6 +32,7 @@ import {
   FormLabel,
   Select,
   useDisclosure,
+  Icon,
 } from "@chakra-ui/react";
 
 import Sidebar from "components/SideBar";
@@ -40,6 +42,7 @@ import { getProjetos } from "services/get/Projetos";
 import { patchLicaoAprendida } from "services/update/LicoesAprendidas";
 
 import { LicoesAprendidas, ProjetosList } from "../../interfaces/Services";
+import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
 
 export function LicoesAprendidasProjetos() {
@@ -75,6 +78,14 @@ export function LicoesAprendidasProjetos() {
     handleGetProjetos();
   }, []);
 
+  const handleClick = () => {
+    filterByProject();
+  };
+
+  const print = () => {
+    window.print();
+  };
+
   async function handleUpdateLicoes(
     licao: any,
     campo: any,
@@ -99,12 +110,12 @@ export function LicoesAprendidasProjetos() {
     .sort((a, b) => a.id - b.id)
     .slice(from, to)
     .map((lessons, index) => (
-      <Tr key={index} alignSelf={"center"}>
+      <Tr key={index}>
         <Td
-          isNumeric
+          // isNumeric
           style={{
             borderBottom: "0.5px solid #A7A7A7",
-            borderRight: "0.5px solid #A7A7A7",
+            border: "0.5px solid #A7A7A7",
           }}
           width="48px"
           height={"56px"}
@@ -112,13 +123,14 @@ export function LicoesAprendidasProjetos() {
         >
           {lessons.id}
         </Td>
+
         <Td
           style={{
             borderBottom: "0.5px solid #A7A7A7",
             borderRight: "0.5px solid #A7A7A7",
           }}
           width="284px"
-          height={"36px"}
+          height={"56px"}
         >
           {lessons.txt_licao_aprendida}
         </Td>
@@ -127,6 +139,8 @@ export function LicoesAprendidasProjetos() {
             borderBottom: "0.5px solid #A7A7A7",
             borderRight: "0.5px solid #A7A7A7",
           }}
+          width="506px"
+          height={"36px"}
         >
           {lessons.txt_acao}
         </Td>
@@ -148,15 +162,15 @@ export function LicoesAprendidasProjetos() {
             borderRight: "0.5px solid #A7A7A7",
           }}
           width="96px"
-          height={"36px"}
+          height={"56px"}
         >
           <IconButton
             aria-label="Plus sign"
             icon={<MdModeEdit />}
-            background="white"
+            background="transparent"
             variant="secondary"
             color="#0047BB"
-            mr={2}
+            // mr={2}
             isRound={true}
             // size="md"
             width={"18px"}
@@ -166,6 +180,7 @@ export function LicoesAprendidasProjetos() {
               onOpen();
             }}
           />
+          <DeleteModal />
         </Td>
       </Tr>
     ));
@@ -214,7 +229,7 @@ export function LicoesAprendidasProjetos() {
   return (
     <Sidebar>
       <Flex
-        w={"100%"}
+        // w={"100%"}
         align="center"
         justify="center"
         bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
@@ -233,71 +248,104 @@ export function LicoesAprendidasProjetos() {
               borderRadius={{ base: "none", sm: "xl" }}
               alignItems={"center"}
             >
-              <Heading as="h3" size="md" mt={"-15px"} mb={"25px"}>
-                <Text fontSize={"24px"} fontWeight={"700"}>
-                  Lições Aprendidas
-                </Text>
-              </Heading>
-
-              <Flex>
-                <FormControl
-                  // style={{ border: "1px solid blue" }}
-                  display="flex"
-                  flexDir={"row"}
-                  justifyContent={"flex-start"}
-                >
-                  <Flex flexDir={"column"}>
-                    <FormLabel
-                      fontWeight={"700"}
-                      fontSize={"12px"}
-                      color={"#A7A7A7"}
-                      htmlFor="projeto"
-                    >
-                      PROJETO
-                    </FormLabel>
-                    <Select
-                      mt={"-9px"}
-                      placeholder="Selecione"
-                      id="projeto"
-                      name="projeto"
-                      onChange={(e) => setProjetoId(e.target.value)}
-                      width={"208px"}
-                      height={"56px"}
-                    >
-                      <option color={"#A7A7A7"} value={0}>
-                        Todos
-                      </option>
-                      {projetos &&
-                        projetos.map((project, index) => (
-                          <option value={project.id} key={index}>
-                            {project.nomeProjeto}
-                          </option>
-                        ))}
-                    </Select>
-                  </Flex>
-
+              <Flex align={"flex-end"} justify={"space-between"}>
+                <Heading as="h3" size="md" mt={"-15px"} mb={"25px"}>
+                  <Text fontSize={"24px"} fontWeight={"700"}>
+                    Lições Aprendidas
+                  </Text>
+                </Heading>
+                <Flex align={"flex-start"} fontWeight={"700"}>
                   <Button
-                    type="button"
-                    background="#0047BB"
-                    variant="outline"
-                    color="white"
-                    borderColor="#0047BB"
-                    _hover={{
-                      background: "white",
-                      transition: "all 0.4s",
-                      color: "#0047BB",
-                    }}
-                    rightIcon={<FiSearch />}
-                    onClick={filterByProject}
-                    alignSelf={"end"}
-                    marginLeft={"5"}
-                    height={"56px"}
-                    width={"101px"}
-                    fontSize={"18px"}
+                    color={"#0239C3"}
+                    fontWeight={"700"}
+                    variant="ghost"
+                    colorScheme="messenger"
+                    rightIcon={<AiFillPrinter />}
+                    onClick={print}
                   >
-                    Filtrar
+                    Exportar
                   </Button>
-                </FormControl>
+                </Flex>
+              </Flex>
+              <Flex flexDir={"row"} justify={"space-between"}>
+                <Flex align={"flex-end"} gap={3}>
+                  <Flex>
+                    <FormControl>
+                      <FormLabel
+                        fontWeight={"700"}
+                        fontSize={"12px"}
+                        color={"#A7A7A7"}
+                        htmlFor="projeto"
+                      >
+                        PROJETO
+                      </FormLabel>
+                      <Select
+                        mt={"-9px"}
+                        borderRadius={"8px"}
+                        placeholder="Selecione"
+                        id="projeto"
+                        name="projeto"
+                        onChange={(e) => setProjetoId(e.target.value)}
+                        width={"208px"}
+                        height={"56px"}
+                      >
+                        <option color={"#A7A7A7"} value={0}>
+                          Todos
+                        </option>
+                        {projetos &&
+                          projetos.map((project, index) => (
+                            <option value={project.id} key={index}>
+                              {project.nomeProjeto}
+                            </option>
+                          ))}
+                      </Select>
+                    </FormControl>
+                  </Flex>
+                  <Flex align={"flex-end"}>
+                    <Button
+                      type="button"
+                      background="#0047BB"
+                      variant="outline"
+                      color="white"
+                      borderColor="#0047BB"
+                      _hover={{
+                        background: "white",
+                        transition: "all 0.4s",
+                        color: "#0047BB",
+                      }}
+                      rightIcon={<FiSearch />}
+                      onClick={handleClick}
+                      // alignSelf={"end"}
+                      // marginLeft={"-332px"}
+                      height={"56px"}
+                      width={"101px"}
+                      fontSize={"18px"}
+                      borderRadius={"8px"}
+                    >
+                      Filtrar
+                    </Button>
+                  </Flex>
+                </Flex>
+
+                <Flex align={"flex-start"} mt={"22px"}>
+                  <Button
+                    // onClick={onOpen}
+                    background="transparent"
+                    color="#0047BB"
+                    float={"right"}
+                    fontSize="17px"
+                    fontWeight={"700"}
+                  >
+                    Lixeira
+                    <Icon
+                      as={MdArrowForwardIos}
+                      fontSize="16px"
+                      fontWeight={"700"}
+                      ml={1}
+                      color="#0047BB"
+                    />
+                  </Button>
+                </Flex>
               </Flex>
 
               <Stack spacing="0">
@@ -327,19 +375,22 @@ export function LicoesAprendidasProjetos() {
                       <Th
                         style={{
                           borderBottom: "0.5px solid #A7A7A7",
-                          borderRight: "0.5px solid #A7A7A7",
+                          border: "0.5px solid #A7A7A7",
                         }}
                         width="48px"
                         height={"36px"}
                         textAlign={"center"}
+                        color={"white"}
                       >
                         ID
                       </Th>
+
                       <Th
                         style={{
                           borderBottom: "0.5px solid #A7A7A7",
                           borderRight: "0.5px solid #A7A7A7",
                         }}
+                        color={"white"}
                       >
                         Lições Aprendidas
                       </Th>
@@ -348,6 +399,7 @@ export function LicoesAprendidasProjetos() {
                           borderBottom: "0.5px solid #A7A7A7",
                           borderRight: "0.5px solid #A7A7A7",
                         }}
+                        color={"white"}
                       >
                         Ações e Recomendações
                       </Th>
@@ -356,6 +408,7 @@ export function LicoesAprendidasProjetos() {
                           borderBottom: "0.5px solid #A7A7A7",
                           borderRight: "0.5px solid #A7A7A7",
                         }}
+                        color={"white"}
                       >
                         Data
                       </Th>
@@ -364,6 +417,7 @@ export function LicoesAprendidasProjetos() {
                           borderBottom: "0.5px solid #A7A7A7",
                           borderRight: "0.5px solid #A7A7A7",
                         }}
+                        color={"white"}
                       >
                         Ações
                       </Th>
@@ -377,6 +431,7 @@ export function LicoesAprendidasProjetos() {
                           borderBottom: "0.5px solid #A7A7A7",
                           borderRight: "0.5px solid #A7A7A7",
                         }}
+                        color={"white"}
                       >
                         Total
                       </Th>
@@ -385,6 +440,7 @@ export function LicoesAprendidasProjetos() {
                           borderBottom: "0.5px solid #A7A7A7",
                           borderRight: "0.5px solid #A7A7A7",
                         }}
+                        color={"white"}
                       >
                         {tableData.length} Lições
                       </Th>
@@ -393,16 +449,19 @@ export function LicoesAprendidasProjetos() {
                           borderBottom: "0.5px solid #A7A7A7",
                           borderRight: "0.5px solid #A7A7A7",
                         }}
+                        color={"white"}
                       >
                         {tableData.length} Lições
                       </Th>
                       <Th
+                        color={"white"}
                         style={{
                           borderBottom: "0.5px solid #A7A7A7",
                           borderRight: "0.5px solid #A7A7A7",
                         }}
                       ></Th>
                       <Th
+                        color={"white"}
                         style={{
                           borderBottom: "0.5px solid #A7A7A7",
                           borderRight: "0.5px solid #A7A7A7",

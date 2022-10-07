@@ -1,6 +1,9 @@
-// import { FaGreaterThan } from "react-icons/fa";
-import { IoIosArrowBack } from "react-icons/io";
-import { MdModeEdit } from "react-icons/md";
+// import { IoIosArrowBack } from "react-icons/io";
+import {
+  MdArrowForwardIos,
+  MdOutlineArrowBackIosNew,
+  MdModeEdit,
+} from "react-icons/md";
 
 import {
   Button,
@@ -15,11 +18,9 @@ import {
   Text,
   useDisclosure,
   IconButton,
-  // Icon,
+  ModalCloseButton,
+  Icon,
 } from "@chakra-ui/react";
-// import { Ring } from "@uiball/loaders";
-
-// import { TextError } from "components/TextError";
 
 import { handleCancelar } from "utils/handleCadastro";
 
@@ -37,8 +38,6 @@ interface TableProps {
 function ModalPriorizacao(infosRankings: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm } = useCadastroPriorizacao();
-  // console.log(nomeRanking.nomeRanking);
-  // console.log(nomeRanking.idRanking);
 
   return (
     <>
@@ -47,9 +46,15 @@ function ModalPriorizacao(infosRankings: TableProps) {
         variant="outline"
         aria-label="open menu"
         color={"origem.500"}
-        backgroundColor={"white"}
+        backgroundColor={"transparent"}
         border={"none"}
         textAlign={"center"}
+        _hover={{
+          backgroundColor: "origem.500",
+          color: "white",
+        }}
+        w={"14px"}
+        h={"18px"}
         icon={<MdModeEdit />}
       />
       <Modal isOpen={isOpen} onClose={onClose} size="4xl">
@@ -57,15 +62,17 @@ function ModalPriorizacao(infosRankings: TableProps) {
         <ModalContent>
           <ModalHeader
             backgroundColor={"#2E69FD"}
-            borderTopRadius={7}
+            borderTopRadius={"8px"}
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            h={"48px"}
           >
             {`Priorização ${infosRankings.nomeRanking}`}
           </ModalHeader>
-          {/* <ModalCloseButton color={"white"} /> */}
+          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               // e.preventDefault();
@@ -78,12 +85,12 @@ function ModalPriorizacao(infosRankings: TableProps) {
                   <Stack gap={2}>
                     <Flex direction={"column"}>
                       <Flex align={"flex-end"} justify={"space-between"}>
-                        <Flex>
+                        <Flex alignSelf={"start"}>
                           <Text>
                             <Button
                               aria-label=""
                               backgroundColor={"white"}
-                              color={"black"}
+                              color={"#2D2926"}
                               onClick={() =>
                                 handleCancelar(registerForm, onClose)
                               }
@@ -92,26 +99,38 @@ function ModalPriorizacao(infosRankings: TableProps) {
                                 transition: "all 0.4s",
                                 color: "origem.500",
                               }}
-                              fontSize={"20px"}
+                              fontSize={"24px"}
+                              fontWeight={"700"}
                             >
-                              <IoIosArrowBack /> Priorização
+                              <Icon
+                                as={MdOutlineArrowBackIosNew}
+                                h={"30px"}
+                                w={"22px"}
+                                fontSize="13px"
+                                fontWeight={"none"}
+                                mr={2}
+                                color="#2D2926"
+                              />{" "}
+                              Priorização
                             </Button>
                           </Text>
                         </Flex>
-                        <Flex gap="18px">
-                          <Flex>
-                            <ModalCadastrarOpcaoPriorizacao
-                              nomeRanking={infosRankings.nomeRanking}
-                              idRanking={infosRankings.idRanking}
-                            />
+                        <Flex gap="50px">
+                          <Flex gap={4}>
+                            <Flex>
+                              <ModalCadastrarOpcaoPriorizacao
+                                nomeRanking={infosRankings.nomeRanking}
+                                idRanking={infosRankings.idRanking}
+                              />
+                            </Flex>
+                            <Flex>
+                              <EditarPriorizacao
+                                nomeRanking={infosRankings.nomeRanking}
+                                idRanking={infosRankings.idRanking}
+                              />
+                            </Flex>
                           </Flex>
-                          <Flex>
-                            <EditarPriorizacao
-                              nomeRanking={infosRankings.nomeRanking}
-                              idRanking={infosRankings.idRanking}
-                            />
-                          </Flex>
-                          {/* <Button
+                          <Button
                             background="transparent"
                             color="#0047BB"
                             float={"right"}
@@ -119,13 +138,13 @@ function ModalPriorizacao(infosRankings: TableProps) {
                           >
                             Lixeira
                             <Icon
-                              as={FaGreaterThan}
-                              fontSize="13px"
-                              fontWeight={"none"}
+                              as={MdArrowForwardIos}
+                              fontSize={"18px"}
+                              fontWeight={"700"}
                               ml={1}
                               color="#0047BB"
                             />
-                          </Button> */}
+                          </Button>
                         </Flex>
                       </Flex>
                       <TabelaOpcoesPriorizacao

@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { IoIosArrowBack } from "react-icons/io";
 
 import {
   Button,
@@ -14,7 +13,6 @@ import {
   ModalOverlay,
   Stack,
   Text,
-  useBreakpointValue,
   useDisclosure,
   Input,
   Select,
@@ -56,6 +54,11 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
           background: "origem.300",
           transition: "all 0.4s",
         }}
+        h={"56px"}
+        w={"105px"}
+        fontSize={"18px"}
+        fontWeight={"700"}
+        borderRadius={"8px"}
       >
         Cadastrar
       </Button>
@@ -64,11 +67,11 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
         <ModalContent>
           <ModalHeader
             backgroundColor={"#2E69FD"}
-            borderTopRadius={7}
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             {`Priorização ${rankingNome}`}
           </ModalHeader>
@@ -83,48 +86,27 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                 <Flex gap={4}>
                   <Stack gap={2}>
                     <Flex direction={"column"}>
-                      <Flex>
-                        <Text>
-                          <Button
-                            aria-label=""
-                            backgroundColor={"white"}
-                            color={"black"}
-                            onClick={() =>
-                              handleCancelar(registerForm, onClose)
-                            }
-                            _hover={{
-                              background: "white",
-                              transition: "all 0.4s",
-                              color: "origem.500",
-                            }}
-                            fontSize={"20px"}
-                            mb={"8px"}
-                          >
-                            <IoIosArrowBack /> {`Priorização ${rankingNome}`}
-                          </Button>
-                        </Text>
-                      </Flex>
-                      <Flex direction={"row"}>
-                        <Flex
-                          flexDirection={useBreakpointValue({
-                            base: "column",
-                            md: "row",
-                          })}
-                          gap={5}
-                          mt={"10px"}
-                        >
+                      <Flex direction={"column"} gap={3}>
+                        <Flex flexDirection="column">
                           <FormControl>
                             <FormLabel
                               htmlFor="nom_opcao"
                               fontSize={"12px"}
+                              fontWeight={"700"}
+                              color={"#949494"}
                               mb={"1px"}
-                              w={"350px"}
                               ml={"3px"}
                             >
                               NOME
                             </FormLabel>
                             <Input
+                              fontSize={"14px"}
+                              fontWeight={"400"}
+                              color={"#949494"}
                               ml={"3px"}
+                              w={"328px"}
+                              border={"1px solid #949494"}
+                              h={"56px"}
                               id="nom_opcao"
                               name="nom_opcao"
                               value={registerForm.values.nom_opcao}
@@ -138,21 +120,14 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                           </FormControl>
                         </Flex>
 
-                        <Flex
-                          flexDirection={useBreakpointValue({
-                            base: "column",
-                            md: "row",
-                          })}
-                          gap={5}
-                          mt={"10px"}
-                          ml={"15px"}
-                        >
+                        <Flex flexDirection="row" gap={5} mt={"10px"}>
                           <FormControl>
                             <FormLabel
                               htmlFor="num_nota"
                               fontSize={"12px"}
+                              fontWeight={"700"}
+                              color={"#949494"}
                               mb={"1px"}
-                              w={"140px"}
                             >
                               NOTA
                             </FormLabel>
@@ -160,14 +135,17 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               id="num_nota"
                               name="num_nota"
                               placeholder="Selecione"
+                              border={"1px solid #949494"}
+                              h={"56px"}
+                              w={"328px"}
+                              fontSize={"14px"}
+                              fontWeight={"400"}
+                              color={"#949494"}
                               value={registerForm.values.num_nota}
                               onChange={registerForm.handleChange}
-                              w={useBreakpointValue({
-                                base: "100%",
-                                md: "95%",
-                              })}
                             >
-                              <option value={1}>1</option>
+                              <option>0</option>
+                              <option>1</option>
                               <option>2</option>
                               <option>3</option>
                               <option>4</option>
@@ -199,6 +177,8 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                     transition: "all 0.4s",
                     color: "white",
                   }}
+                  w={"208px"}
+                  h={"56px"}
                 >
                   Cancelar
                 </Button>
@@ -212,6 +192,8 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                     background: "origem.500",
                     transition: "all 0.4s",
                   }}
+                  w={"208px"}
+                  h={"56px"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />

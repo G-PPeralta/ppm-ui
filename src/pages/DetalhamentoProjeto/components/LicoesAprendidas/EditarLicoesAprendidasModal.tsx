@@ -199,7 +199,7 @@ function EditarLicoesAprendidasModal({
                   color: "white",
                 }}
                 onClick={closeModal}
-                width={"208px"}
+                // width={"50px"}
                 height={"56px"}
               >
                 <Text fontSize={"18px"} fontWeight={"700"}>

@@ -74,6 +74,8 @@ export function MobileNav({
     "visao-por-area": "Visão por Area",
     estatisticas: "Estatisticas",
     reports: "Relatórios",
+    graficos: "Gráficos",
+    priorizacao: "Priorização",
   };
 
   // const goNavigate = async (index: number) => {

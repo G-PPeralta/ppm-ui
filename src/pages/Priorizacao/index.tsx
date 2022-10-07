@@ -7,35 +7,29 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-// import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
 
-// import ModalLixeira from "./Components/ModalLixeira";
+import ModalLixeira from "./Components/ModalLixeira";
 import ModalCadastrarPriorizacao from "./Components/Priorizacao/CadastrarPriorizacao";
 import { TabelaPriorizacao } from "./Components/Priorizacao/TabelaPriorizacao";
 
 export function Priorizacao() {
-  // const wd = window.innerWidth;
   return (
     <>
       <Sidebar>
         <Stack spacing="8">
           <Flex
-            w={useBreakpointValue({ base: "100%", md: "auto" })}
+            w="auto"
             align="center"
             justify="center"
             bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
           >
             <Box
-              py={{ base: "0", sm: "16" }}
-              px={{ base: "4", sm: "10" }}
-              w={useBreakpointValue({
-                base: "20rem",
-                sm: "35rem",
-                md: "60rem",
-                lg: "70rem",
-              })}
+              py={{ base: "6", sm: "8" }}
+              px={{ base: "6", sm: "8" }}
+              w="100%"
+              h="100vh"
               bg={useBreakpointValue({ base: "transparent", sm: "white" })}
               boxShadow={{
                 base: "none",
@@ -43,32 +37,27 @@ export function Priorizacao() {
               }}
               borderRadius={{ base: "none", sm: "xl" }}
             >
-              <Stack spacing="5">
-                <Flex
-                  flexDirection={"row"}
-                  alignItems={"flex-end"}
-                  justify={"space-between"}
-                >
-                  <Flex>
-                    <Text
-                      fontWeight={"700"}
-                      fontSize={"22px"}
-                      color={"#2D2926"}
-                    >
-                      Priorização
-                    </Text>
-                  </Flex>
-                  <Flex>
+              <Flex flexDirection={"row"} justify={"space-between"}>
+                <Flex>
+                  <Text fontWeight={"700"} fontSize={"24px"} color={"#2D2926"}>
+                    Priorização
+                  </Text>
+                </Flex>
+                <Flex gap={5}>
+                  <Flex alignItems={"flex-start"}>
                     <FormControl className="toBottom">
                       <ModalCadastrarPriorizacao />
                     </FormControl>
                   </Flex>
-                  {/* <Flex alignItems={"flex-end"}><ModalLixeira /></Flex> */}
+
+                  <Flex alignItems={"flex-start"} justifyContent={"center"}>
+                    <ModalLixeira />
+                  </Flex>
                 </Flex>
-                <>
-                  <TabelaPriorizacao />
-                </>
-              </Stack>
+              </Flex>
+              <>
+                <TabelaPriorizacao />
+              </>
             </Box>
           </Flex>
         </Stack>
