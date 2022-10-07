@@ -106,7 +106,7 @@ export interface GanttPayload {
 
 export interface GanttProps {
   TaskID: number;
-  Item: string;
+  Item?: string;
   TaskName: string;
   StartDate?: string;
   Duration?: number;
@@ -115,7 +115,7 @@ export interface GanttProps {
 }
 export interface GanttMacroDto {
   macroatividade_id: number;
-  macroatividade_item: string;
+  macroatividade_item?: string;
   macroatividade_nome: string;
   duracao?: number;
   progresso?: number;
