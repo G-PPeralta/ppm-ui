@@ -93,7 +93,7 @@ interface Weeks {
 
 export function LookaheadDetalhe() {
   const { id } = useParams();
-  const { atividades } = useLookahead();
+  const { atividades, ferramentas } = useLookahead();
   const [weeks, setWeeks] = useState<Weeks[]>();
   const [semana, setSemana] = useState<string>();
 
@@ -199,7 +199,7 @@ export function LookaheadDetalhe() {
 
                 <Flex direction="column">
                   <TabelaAtividades semana={semana} data={atividades} />
-                  <TabelaFerramentas semana={semana} />
+                  <TabelaFerramentas semana={semana} data={ferramentas} />
                   <TabelaServicos />
                 </Flex>
               </Flex>

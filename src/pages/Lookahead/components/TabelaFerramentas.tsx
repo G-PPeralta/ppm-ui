@@ -13,10 +13,11 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import { FerramentasAtividade } from "interfaces/lookahead";
 
 interface TableProps {
   semana?: string;
-  // data: FerramentasAtividade[];
+  data: FerramentasAtividade[];
 }
 
 class DiasSemana {
