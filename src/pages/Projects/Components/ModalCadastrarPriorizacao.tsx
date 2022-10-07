@@ -88,7 +88,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
       <IconButton
         onClick={onOpen}
         color={"origem.500"}
-        backgroundColor={"white"}
+        backgroundColor={"transparent"}
         aria-label="Plus sign"
         _hover={{
           backgroundColor: "origem.500",
