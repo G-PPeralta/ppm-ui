@@ -32,6 +32,13 @@ function SelectFiltragem({
       ...base,
       height: 56,
       minHeight: 56,
+      border: "1px solid #E2E8F0",
+    }),
+
+    menu: (base: any) => ({
+      ...base,
+      zIndex: 9999,
+      minWidth: "300px",
     }),
   };
 

@@ -47,7 +47,7 @@ function ModalDeletarProjeto(projeto: id) {
       <IconButton
         onClick={onOpen}
         color={"#F94144"}
-        backgroundColor={"white"}
+        backgroundColor={"transparent"}
         aria-label="Plus sign"
         _hover={{
           backgroundColor: "#F94144",
