@@ -5,6 +5,7 @@ import {
   FiChevronRight,
   FiChevronsLeft,
   FiChevronsRight,
+  FiPrinter,
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
@@ -22,6 +23,7 @@ import {
   IconButton,
   Select,
   Tooltip,
+  Button,
 } from "@chakra-ui/react";
 import { Projetos } from "interfaces/Projetos";
 
@@ -301,12 +303,33 @@ export function TabelaProjetos(props: TableProps) {
       <TableContainer mt={4} mb={3} ml={1}>
         <Table
           variant="unstyled"
+          size="sm"
           style={{
             borderBottom: "0.5px solid #A7A7A7",
             border: "0.5px solid #A7A7A7",
           }}
         >
           <Thead>
+            <Tr
+              backgroundColor={"#0239c3"}
+              color="white"
+              style={{
+                borderBottom: "0.5px solid #A7A7A7",
+              }}
+            >
+              <Th colSpan={15} borderTopLeftRadius="10px">
+                Projetos
+              </Th>
+              <Th borderTopRightRadius={"10px"} colSpan={2}>
+                <Button
+                  backgroundColor="#0239c3"
+                  rightIcon={<FiPrinter />}
+                  variant="solid"
+                >
+                  Imprimir
+                </Button>
+              </Th>
+            </Tr>
             <Tr
               background="origem.500"
               color="white"
