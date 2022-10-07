@@ -124,7 +124,7 @@ export function GráficosEstatisticos() {
                               <Text
                                 mb={"24px"}
                                 fontSize={"24px"}
-                                color={"#585858"}
+                                color={"#2D2926"}
                                 fontWeight={"700"}
                                 fontFamily={"Mulish"}
                               >

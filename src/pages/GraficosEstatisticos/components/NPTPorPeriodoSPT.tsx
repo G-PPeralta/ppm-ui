@@ -218,7 +218,7 @@ export function GraficoNPTPorPeriodoSPT({ Prop }: any) {
                           <Text
                             mb={"1px"}
                             fontSize={"24px"}
-                            color={"#585858"}
+                            color={"#2D2926"}
                             fontWeight={"700"}
                             fontFamily={"Mulish"}
                           >
