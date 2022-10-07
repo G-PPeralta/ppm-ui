@@ -166,7 +166,8 @@ function DetalhamentoProjeto() {
                 setRender={() => setRender(true)}
               />
             </Flex>
-            <Gantt />
+
+            <Gantt idProjeto={Number(id)} />
             <GenericCurveS data={curveSData} />
             {/* <GraficoCurvaS /> */}
           </>
