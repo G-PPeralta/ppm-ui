@@ -112,7 +112,7 @@ export function LicoesAprendidasProjetos() {
     .map((lessons, index) => (
       <Tr key={index}>
         <Td
-          isNumeric
+          // isNumeric
           style={{
             borderBottom: "0.5px solid #A7A7A7",
             border: "0.5px solid #A7A7A7",
@@ -315,7 +315,7 @@ export function LicoesAprendidasProjetos() {
                       }}
                       rightIcon={<FiSearch />}
                       onClick={handleClick}
-                      alignSelf={"end"}
+                      // alignSelf={"end"}
                       // marginLeft={"-332px"}
                       height={"56px"}
                       width={"101px"}
