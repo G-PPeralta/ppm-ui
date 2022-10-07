@@ -112,6 +112,21 @@ export function GraficoPorDuracao({ Prop }: any) {
 
   const componentRef = useRef<HTMLDivElement>(null);
 
+  // function useWindowSize() {
+  //   const [size, setSize] = useState([0, 0]);
+  //   useLayoutEffect(() => {
+  //     function updateSize() {
+  //       setSize([window.innerWidth, window.innerHeight]);
+  //     }
+  //     window.addEventListener("resize", updateSize);
+  //     updateSize();
+  //     return () => window.removeEventListener("resize", updateSize);
+  //   }, []);
+  //   return size;
+  // }
+
+  // const [width] = useWindowSize();
+
   return (
     <>
       {/* {loading && (
@@ -478,16 +493,24 @@ export function GraficoPorDuracao({ Prop }: any) {
                       </Text>
                     </Flex>
                   </Flex>
-                  <Flex ml={"-45px"} mt={"15px"}>
+                  {/* <Box
+                    overflowX={"scroll"}
+                    w={width * 0.7}
+                    h={260}
+                    display={"flex"}
+                    overflowY={"hidden"}
+                  > */}
+                  <Flex ml={"-25px"} mt={"15px"}>
                     <StackedBarChart
                       showY={true}
-                      sizeW={1050}
+                      sizeW={1030}
                       sizeH={352}
                       data={dataMock1}
                       dataEntries={dataEntries1}
                       barW={40}
                     />
                   </Flex>
+                  {/* </Box> */}
                 </Flex>
                 <Flex ref={componentRef} />
               </Stack>

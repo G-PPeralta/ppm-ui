@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 
 import {
@@ -194,6 +194,20 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
     reqGet();
   }, []);
 
+  function useWindowSize() {
+    const [size, setSize] = useState([0, 0]);
+    useLayoutEffect(() => {
+      function updateSize() {
+        setSize([window.innerWidth, window.innerHeight]);
+      }
+      window.addEventListener("resize", updateSize);
+      updateSize();
+      return () => window.removeEventListener("resize", updateSize);
+    }, []);
+    return size;
+  }
+
+  const [width] = useWindowSize();
   return (
     <>
       {/* {loading && (
@@ -273,7 +287,7 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                           placeholder="Relatório de cada intervenção"
                           _placeholder={{ color: "#2D2926" }}
                           fontSize={"14px"}
-                          fontWeight={"700"}
+                          fontWeight={"400"}
                           // onChange={handleProjectChange}
                         ></Input>
                       </FormControl>
@@ -300,7 +314,7 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                           mb={"-10px"}
                           color={"#2D2926"}
                           fontSize={"14px"}
-                          fontWeight={"700"}
+                          fontWeight={"400"}
                         />
                       </FormControl>
                     </Flex>
@@ -326,7 +340,7 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                           type={"date"}
                           color={"#2D2926"}
                           fontSize={"14px"}
-                          fontWeight={"700"}
+                          fontWeight={"400"}
                         />
                       </FormControl>
                     </Flex>
@@ -353,7 +367,7 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                           borderRadius={"8px"}
                           color={"#2D2926"}
                           fontSize={"14px"}
-                          fontWeight={"700"}
+                          fontWeight={"400"}
                         >
                           {listaSondas.map((sonda) => (
                             <option>{sonda.nom_sonda}</option>
@@ -424,16 +438,25 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                       ))}
                     </Flex>
                   </Flex>
-                  <Flex ml={"-45px"} mt={"50px"}>
-                    <StackedBarChart
-                      showY={true}
-                      sizeW={1050}
-                      sizeH={352}
-                      data={dataMock2}
-                      dataEntries={dataEntries2}
-                      barW={40}
-                    />
-                  </Flex>
+
+                  <Box
+                    overflowX={"scroll"}
+                    w={width * 0.7}
+                    h={260}
+                    display={"flex"}
+                    overflowY={"hidden"}
+                  >
+                    <Flex ml={"-25px"} mt={"50px"}>
+                      <StackedBarChart
+                        showY={true}
+                        sizeW={1050}
+                        sizeH={352}
+                        data={dataMock2}
+                        dataEntries={dataEntries2}
+                        barW={40}
+                      />
+                    </Flex>{" "}
+                  </Box>
                 </Flex>
               </Stack>
             </form>
