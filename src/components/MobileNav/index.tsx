@@ -47,10 +47,8 @@ export function MobileNav({
   useEffect(() => {
     const nav = window.location.href;
     const splited = nav.split("/");
+    if (splited[3] === "") splited[3] = "Dashboad";
     if (splited[splited.length - 1] === "") splited.pop();
-    if (splited[3] == "") {
-      splited[3] = "Dashboad";
-    }
     const completeObject = splited.map((split, index) => {
       let newItem: string = translations[split as keyof typeof translations];
       if (newItem === undefined) {
