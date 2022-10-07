@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { FiMenu, FiChevronDown, FiChevronRight } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -47,6 +47,7 @@ export function MobileNav({
   useEffect(() => {
     const nav = window.location.href;
     const splited = nav.split("/");
+    if (splited[splited.length - 1] === "") splited.pop();
     if (splited[3] == "") {
       splited[3] = "Dashboad";
     }
@@ -68,7 +69,7 @@ export function MobileNav({
     upload: "Importat Dados",
     fornecedores: "Fornecedores",
     licoesAprendidas: "Lições Aprendidas",
-    getalhamento: "Detalhamento de projetos",
+    detalhamento: "Detalhamento de projetos",
     infographics: "Infográficos",
     atividade: "Atividade",
     precedentes: "Visão por Precedentes",
@@ -135,7 +136,7 @@ export function MobileNav({
       </Text>
       <Flex w={"100%"} justifyContent={"center"} alignItems={"center"}>
         {way.map((item, index) => (
-          <Box key={index}>
+          <Fragment key={index}>
             {index > 2 ? (
               <>
                 <Button
@@ -153,7 +154,7 @@ export function MobileNav({
                 )}
               </>
             ) : undefined}
-          </Box>
+          </Fragment>
         ))}
       </Flex>
       <HStack className={"noprint"} spacing={{ base: "0", md: "6" }}>
