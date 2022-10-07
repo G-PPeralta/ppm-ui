@@ -1,40 +1,39 @@
 import { useEffect, useState } from "react";
-import { FiPlusCircle, FiSearch } from "react-icons/fi";
+import { BsSearch } from "react-icons/bs";
+import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import {
   Box,
   Button,
   Flex,
-  FormControl,
-  FormLabel,
   Input,
   Select,
   Stack,
+  Text,
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import { Project } from "models/Project.model";
+import { Projetos } from "interfaces/Projetos";
 
 import Sidebar from "components/SideBar";
 
 import { useProjects } from "hooks/useProjects";
 
 import "./projects.css";
-// import ProjectTable from "./projectTable";
 import { TabelaProjetos } from "./Components/TabelaProjetos";
 
 export function Projects() {
-  const { projectsForm, loading, getAllProjects } = useProjects();
+  const { projectsForm, loading, getProjetosDetalhados } = useProjects();
 
-  const [polo, setPolo] = useState("0");
-  const [projetos, setProjetos] = useState<Project[]>();
-  const [projetosFilter, setProjetosFilter] = useState<Project[]>();
+  const [, setPolo] = useState("0");
+  const [projetos, setProjetos] = useState<Projetos[]>();
+  const [projetosFilter, setProjetosFilter] = useState<Projetos[]>();
   const wd = window.innerWidth;
 
   const getProjectsPerPolo = async () => {
-    const data = await getAllProjects(polo);
+    const data = await getProjetosDetalhados();
     setProjetos(data);
     setProjetosFilter(data);
   };
@@ -43,7 +42,7 @@ export function Projects() {
     let filtered;
     if (text && text.length > 3) {
       filtered = projetos?.filter(
-        (x) => x.nome.toLowerCase().indexOf(text.toLowerCase()) > -1
+        (x) => x.nome_projeto.toLowerCase().indexOf(text.toLowerCase()) > -1
       );
     } else {
       filtered = projetos;
@@ -101,7 +100,7 @@ export function Projects() {
                       <Button
                         variant="outline"
                         colorScheme="messenger"
-                        rightIcon={<FiPlusCircle />}
+                        rightIcon={<FiPlus color="#0047BB" />}
                         width={200}
                       >
                         <Link to={"/projects-registration"}>
@@ -115,48 +114,71 @@ export function Projects() {
                           base: "column",
                           md: "row",
                         })}
+                        alignItems="flex-end"
                       >
-                        <FormControl>
-                          <FormLabel htmlFor="name">PROJETO</FormLabel>
+                        <Flex direction={"column"}>
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            PROJETOS
+                          </Text>
                           <Input
+                            h={"56px"}
+                            w={"328px"}
+                            marginRight="15px"
+                            fontWeight={"bold"}
+                            color={"#949494"}
                             isRequired
-                            placeholder="Nome do projeto"
+                            placeholder="Projeto"
                             id="name"
                             type="text"
                             name="name"
                             onChange={(e) => filterProjects(e.target.value)}
-                            width={300}
                           />
-                        </FormControl>
+                        </Flex>
+                        <Flex direction={"column"}>
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            POLO
+                          </Text>
 
-                        <FormControl>
-                          <FormLabel htmlFor="pole">POLO</FormLabel>
                           <Select
+                            h={"56px"}
+                            w={"200px"}
                             id="poloId"
+                            fontWeight={"bold"}
                             name="pole"
+                            color={"#949494"}
                             onChange={(e) => setPolo(e.target.value)}
                             width={300}
+                            marginRight="15px"
                           >
                             <option value="0">Todos</option>
                             <option value="1">Tucano Sul</option>
                             <option value="2">Alagoas</option>
                           </Select>
-                        </FormControl>
-                        <FormControl className="toBottom">
-                          <Button
-                            color="white"
-                            background="origem.300"
-                            variant="primary"
-                            _hover={{
-                              background: "origem.500",
-                              transition: "all 0.4s",
-                            }}
-                            rightIcon={<FiSearch />}
-                            onClick={getProjectsPerPolo}
-                          >
-                            Buscar
-                          </Button>
-                        </FormControl>
+                        </Flex>
+                        <Button
+                          h={"56px"}
+                          borderRadius={"10px"}
+                          background={"origem.500"}
+                          variant="primary"
+                          color="white"
+                          onClick={() => getProjectsPerPolo()}
+                          _hover={{
+                            background: "origem.600",
+                            transition: "all 0.4s",
+                          }}
+                          rightIcon={<BsSearch />}
+                          fontWeight={"bold"}
+                        >
+                          Filtrar
+                        </Button>
                       </Flex>
                     </Stack>
 

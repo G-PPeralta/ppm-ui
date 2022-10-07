@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
+import { Tarefas } from "interfaces/CadastrosModaisInfograficos";
 import { AtividadeLista } from "interfaces/Services";
 import { cadastroProjetoTipoSchema } from "validations/ModaisCadastrosInfografico";
 
 import { useToast } from "contexts/Toast";
 
+import { getTarefas } from "services/get/CadastroModaisInfograficos";
 import { getAtividadesList } from "services/get/Infograficos";
 import { postProjetoTipo } from "services/post/CadastroModaisInfograficos";
 
@@ -16,17 +18,27 @@ export function useCadastroProjetoTipo() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [listaAtividades, setListaAtividades] = useState<AtividadeLista[]>([]);
+  const [listaTarefas, setListaTarefas] = useState<Tarefas[]>([]);
 
-  const carregarListaAtividade = async () => {
-    const { data } = await getAtividadesList();
-    const dataSorted = data.sort((a, b) => a.tarefa.localeCompare(b.tarefa));
-    // console.log('dataSorted', dataSorted);
-    setListaAtividades(dataSorted);
+  const reqGet = async () => {
+    const atividades = await getAtividadesList();
+    const tarefas = await getTarefas();
+
+    const atividadesSorted = atividades.data.sort((a, b) =>
+      a.tarefa.localeCompare(b.tarefa)
+    );
+
+    const tarefasSorted = tarefas.data.sort((a: Tarefas, b: Tarefas) =>
+      a.nom_atividade.localeCompare(b.nom_atividade)
+    );
+
+    setListaAtividades(atividadesSorted);
+    setListaTarefas(tarefasSorted);
   };
 
-  const listaAtividadesPrecedentes = listaAtividades.map((atividade) => ({
+  const listaAtividadesPrecedentes = listaTarefas.map((atividade) => ({
     id: atividade.id,
-    nome: atividade.tarefa,
+    nome: atividade.nom_atividade,
     checked: false,
   }));
 
@@ -92,13 +104,20 @@ export function useCadastroProjetoTipo() {
   });
 
   useEffect(() => {
-    carregarListaAtividade();
+    reqGet();
   }, []);
+
+  useEffect(() => {
+    if (listaTarefas.length > 0) {
+      setLoading(false);
+    }
+  }, [listaTarefas]);
 
   return {
     registerForm,
     loading,
     listaAtividades,
     listaAtividadesPrecedentes,
+    listaTarefas,
   };
 }

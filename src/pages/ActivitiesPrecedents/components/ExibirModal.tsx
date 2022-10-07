@@ -40,7 +40,8 @@ function ExibirModal() {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Exibir
           </ModalHeader>

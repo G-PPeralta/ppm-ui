@@ -1,15 +1,21 @@
-// import { useState } from "react";
 import { useEffect, useId, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
+import { Box, Flex, Input, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
+import { AreaAtuacao, Tarefas } from "interfaces/CadastrosModaisInfograficos";
 
+import { RequiredField } from "components/RequiredField/RequiredField";
+
+import { regexCaracteresEspeciais } from "utils/regex";
+
+import { useCadastroAtividade } from "hooks/useCadastroAtividade";
+import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
+
+import SelectFiltragem from "../../../../../components/SelectFiltragem";
 import PopOverPrecedentes from "./PopOverPrecedentes";
-import SelectFiltragemArea from "./SelectFiltragemArea";
-import SelectFiltragemTarefa from "./SelectFiltragemTarefa";
 
 interface Props {
   registerForm: FormikProps<any>;
@@ -21,6 +27,8 @@ function AtividadesDraggable({ index, registerForm }: Props) {
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
+  const { listaAreaAtuacao } = useCadastroAtividade();
+  const { listaTarefas } = useCadastroProjetoTipo();
 
   const remove = (index: number) => {
     // Pega a lista de atividades diretamente do Formik
@@ -29,6 +37,27 @@ function AtividadesDraggable({ index, registerForm }: Props) {
     newList.splice(index, 1);
     // Atualiza lista no Formik
     registerForm.setFieldValue("atividades", newList);
+  };
+
+  const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
+    value: poco.id,
+    label: poco.tipo,
+  }));
+
+  const optionsTarefa = listaTarefas.map((tarefa: Tarefas) => ({
+    value: tarefa.id,
+    label: tarefa.nom_atividade,
+  }));
+
+  const getValue = (options: any, i: number, chave: string) => {
+    const index = options
+      .map(({ value }: any) => value)
+      .indexOf(registerForm?.values?.atividades?.[i][chave]);
+
+    return {
+      value: options?.[index]?.value,
+      label: options?.[index]?.label,
+    };
   };
 
   useEffect(() => {
@@ -50,15 +79,15 @@ function AtividadesDraggable({ index, registerForm }: Props) {
             flexWrap="wrap"
             flexDirection="row"
             alignItems="center"
-            justifyContent="center"
+            justifyContent="space-between"
             w="100%"
             bg={"#f5f5f5"}
             px={5}
-            py={2}
+            py={4}
             borderRadius={"60px"}
             mb={2}
           >
-            <Flex flexDirection={"row"} gap={4}>
+            <Flex flexDirection={"row"} gap={4} flex={1}>
               <Flex align={"center"} justify={"center"} gap={3}>
                 <GiHamburgerMenu color="#2E69FD" size={16} />
                 <Text sx={{ fontSize: 16, fontWeight: "600" }}>
@@ -72,83 +101,107 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                 align={"center"}
                 justify={"center"}
                 py={innerwidth >= 640 ? 0 : 4}
+                flex={1}
               >
-                <FormControl>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>ID</Text>
+                <Flex direction={"column"} flex={2}>
+                  <Flex gap={1}>
+                    <RequiredField />
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      ID
+                    </Text>
+                  </Flex>
                   <Input
+                    maxW={innerwidth >= 440 ? "auto" : "128px"}
+                    h={"56px"}
                     placeholder="Ex.: CIP02"
                     type="text"
                     bg={"#fff"}
                     id={`atividades[${index}].atividade_id_origem`}
                     name={`atividades[${index}].atividade_id_origem`}
-                    value={
+                    value={regexCaracteresEspeciais(
                       registerForm.values.atividades[index].atividade_id_origem
-                    }
+                    )}
                     onChange={(event) => {
                       registerForm.setFieldValue(
                         `atividades[${index}].atividade_id_origem`,
                         event.target.value
                       );
                     }}
+                    maxLength={10}
                   />
-                </FormControl>
+                </Flex>
 
-                <FormControl>
-                  <SelectFiltragemArea
+                <Flex direction={"column"} flex={2}>
+                  <SelectFiltragem
                     registerForm={registerForm}
-                    index={index}
+                    nomeSelect={"ÁREA"}
+                    required={true}
+                    propName={`atividades[${index}].area_id`}
+                    options={optionsAreaAtuacao}
+                    value={getValue(optionsAreaAtuacao, index, "area_id")}
                   />
-                </FormControl>
+                </Flex>
 
-                <FormControl>
-                  <SelectFiltragemTarefa
+                <Flex direction={"column"} flex={2}>
+                  <SelectFiltragem
                     registerForm={registerForm}
-                    index={index}
+                    nomeSelect={"TAREFA"}
+                    required={true}
+                    propName={`atividades[${index}].tarefa_id`}
+                    options={optionsTarefa}
+                    value={getValue(optionsTarefa, index, "tarefa_id")}
                   />
-                </FormControl>
+                </Flex>
 
-                <FormControl>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
+                <Flex direction={"column"} flex={1}>
+                  <Flex gap={1}>
+                    <RequiredField />
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      DIAS
+                    </Text>
+                  </Flex>
                   <Input
+                    h={"56px"}
+                    maxW={"128px"}
                     placeholder="0"
                     type={"number"}
                     bg={"#fff"}
-                    id={`atividades[${index}].dias`}
-                    name={`atividades[${index}].dias`}
-                    value={registerForm.values.atividades[index].dias}
+                    id={`atividades[${index}].qtde_dias`}
+                    name={`atividades[${index}].qtde_dias`}
+                    value={registerForm.values.atividades[index].qtde_dias}
                     onChange={(event) => {
                       registerForm.setFieldValue(
-                        `atividades[${index}].dias`,
+                        `atividades[${index}].qtde_dias`,
                         Number(event.target.value)
                       );
                     }}
                   />
-                </FormControl>
+                </Flex>
 
-                <Flex direction={"column"}>
-                  <Text sx={{ fontSize: 12, fontWeight: "600" }}>
-                    PRECEDENTES
-                  </Text>
+                <Flex direction={"column"} flex={1}>
+                  <Flex gap={1}>
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      PRECEDENTES
+                    </Text>
+                  </Flex>
                   <PopOverPrecedentes
                     registerForm={registerForm}
                     index={index}
                   />
                 </Flex>
               </Flex>
-
-              {/* <Flex
-                p={1}
-                align={'center'}
-                justify={'center'}
-                _hover={{ cursor: 'pointer' }}
-              >
-                <FiEdit
-                  onClick={() => enableEdit(index)}
-                  color="#2E69FD"
-                  size={16}
-                />
-              </Flex> */}
-
               <Flex
                 p={1}
                 align={"center"}

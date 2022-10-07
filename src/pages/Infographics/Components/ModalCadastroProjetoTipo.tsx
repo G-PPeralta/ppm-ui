@@ -1,6 +1,5 @@
 import {
   Flex,
-  Text,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -10,24 +9,25 @@ import {
   useDisclosure,
   Button,
   FormControl,
-  FormLabel,
   Stack,
   useBreakpointValue,
   Input,
   Textarea,
+  Text,
 } from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
 
+import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
+import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
 
 import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
 
-function ModalCadastroProjetoTipo() {
+function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaAtividadesPrecedentes } =
     useCadastroProjetoTipo();
@@ -35,16 +35,19 @@ function ModalCadastroProjetoTipo() {
   return (
     <>
       <Button
-        variant="outline"
+        h={"56px"}
+        borderRadius={"10px"}
+        background={"white"}
         border={"2px solid"}
-        borderColor={"origem.500"}
-        textColor={"origem.500"}
+        color={"origem.500"}
         _hover={{
-          borderColor: "origem.600",
-          backgroundColor: "origem.500",
-          textColor: "white",
+          border: "2px solid",
+          borderColor: "origem.500",
+          background: "origem.500",
           transition: "all 0.4s",
+          color: "white",
         }}
+        textColor={"origem.500"}
         onClick={onOpen}
       >
         Projeto
@@ -79,19 +82,36 @@ function ModalCadastroProjetoTipo() {
                       })}
                       gap={5}
                     >
-                      <FormControl>
+                      <Flex
+                        w={useBreakpointValue({
+                          base: "100%",
+                          md: "50%",
+                        })}
+                        direction={"column"}
+                      >
+                        <Text fontWeight={"bold"}>Nome</Text>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="nom_projeto_tipo">NOME</FormLabel>
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            NOME
+                          </Text>
                         </Flex>
                         <Input
+                          h={"56px"}
                           isRequired
                           placeholder="Nome do Tipo de Projeto"
                           id="nom_projeto_tipo"
                           type="text"
                           name="nom_projeto_tipo"
-                          value={registerForm.values.nom_projeto_tipo}
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.nom_projeto_tipo
+                          )}
                           onChange={registerForm.handleChange}
+                          maxLength={100}
                         />
                         {registerForm.errors.nom_projeto_tipo &&
                           registerForm.touched.nom_projeto_tipo && (
@@ -99,7 +119,7 @@ function ModalCadastroProjetoTipo() {
                               {registerForm.errors.nom_projeto_tipo}
                             </TextError>
                           )}
-                      </FormControl>
+                      </Flex>
                     </Flex>
                   </Stack>
 
@@ -117,19 +137,26 @@ function ModalCadastroProjetoTipo() {
                       gap={5}
                     >
                       <FormControl>
+                        <Text fontWeight={"bold"}>Comentários</Text>
                         <Flex gap={1}>
-                          <RequiredField />
-                          <FormLabel htmlFor="comentarios">
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
                             COMENTÁRIOS
-                          </FormLabel>
+                          </Text>
                         </Flex>
                         <Textarea
                           isRequired
                           placeholder="Adicione comentários sobre o projeto"
                           id="comentarios"
                           name="comentarios"
-                          value={registerForm.values.comentarios}
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.comentarios
+                          )}
                           onChange={registerForm.handleChange}
+                          maxLength={255}
                         />
                         {registerForm.errors.comentarios &&
                           registerForm.touched.comentarios && (
@@ -145,7 +172,7 @@ function ModalCadastroProjetoTipo() {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
+              {/* <Flex gap={2}>
                 <Button
                   variant="ghost"
                   color="red"
@@ -163,7 +190,14 @@ function ModalCadastroProjetoTipo() {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() =>
+                    handleCadastrarRefresh(
+                      registerForm,
+                      onClose,
+                      setRefresh,
+                      refresh
+                    )
+                  }
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",
@@ -177,6 +211,21 @@ function ModalCadastroProjetoTipo() {
                     </>
                   )}
                 </Button>
+              </Flex> */}
+              <Flex gap={2}>
+                <BotaoVermelhoGhost
+                  text={"Cancelar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                />
+                <BotaoAzulPrimary
+                  text={"Concluir Cadastro"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                  loading={loading}
+                />
               </Flex>
             </ModalFooter>
           </form>

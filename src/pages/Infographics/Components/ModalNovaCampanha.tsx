@@ -2,12 +2,8 @@ import {
   Button,
   Flex,
   FormControl,
-  FormLabel,
-  Input,
-  // Input,
   Modal,
   ModalBody,
-  // ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -18,12 +14,11 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
 
-import { RequiredField } from "components/RequiredField/RequiredField";
+import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
+import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
+import SelectFiltragem from "components/SelectFiltragem";
 import { TextError } from "components/TextError";
-
-import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 
@@ -31,21 +26,29 @@ import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 
 function ModalNovaCampanha({ setRefresh, refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroCampanha();
+  const { registerForm, loading, listaServicosSondas } = useCadastroCampanha();
+
+  const optionsServicoSonda = listaServicosSondas.map((sonda: any) => ({
+    value: sonda.id,
+    label: sonda.nom_sonda,
+  }));
 
   return (
     <>
       <Button
-        variant="outline"
+        h={"56px"}
+        borderRadius={"10px"}
+        background={"white"}
         border={"2px solid"}
-        borderColor={"origem.500"}
-        textColor={"origem.500"}
+        color={"origem.500"}
         _hover={{
-          borderColor: "origem.600",
-          backgroundColor: "origem.500",
-          textColor: "white",
+          border: "2px solid",
+          borderColor: "origem.500",
+          background: "origem.500",
           transition: "all 0.4s",
+          color: "white",
         }}
+        textColor={"origem.500"}
         onClick={onOpen}
       >
         Nova Campanha
@@ -63,7 +66,6 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
           >
             Cadastrar Nova Campanha
           </ModalHeader>
-          {/* <ModalCloseButton color={"white"} /> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -74,6 +76,7 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
               <FormControl>
                 <Flex direction={"column"} gap={4}>
                   <Stack>
+                    <Text fontWeight={"bold"}>Nome</Text>
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: "column",
@@ -82,29 +85,13 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                       gap={5}
                     >
                       <FormControl>
-                        <Flex gap={1}>
-                          <RequiredField />
-                          <FormLabel htmlFor="nom_campanha">NOME</FormLabel>
-                        </Flex>
-                        <Input
-                          isRequired
-                          placeholder="Nome da campanha"
-                          id="nom_campanha"
-                          type="text"
-                          name="nom_campanha"
-                          value={registerForm.values.nom_campanha}
-                          onChange={registerForm.handleChange}
+                        <SelectFiltragem
+                          registerForm={registerForm}
+                          nomeSelect={"SONDA"}
+                          propName={"id_projeto"}
+                          options={optionsServicoSonda}
+                          required={true}
                         />
-                        {registerForm.errors.nom_campanha &&
-                          registerForm.touched.nom_campanha && (
-                            <TextError>
-                              {registerForm.errors.nom_campanha}
-                            </TextError>
-                          )}
-                        {/* <SelectFiltragemSondas
-                          form={registerForm}
-                          nomeChave={"nom_campanha"}
-                        /> */}
                       </FormControl>
                     </Flex>
                   </Stack>
@@ -113,14 +100,21 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: "column",
-                        md: "row",
+                        md: "column",
                       })}
-                      gap={5}
+                      gap={2}
                     >
-                      <FormControl>
-                        <FormLabel htmlFor="dsc_comentario">
-                          COMENTÁRIOS
-                        </FormLabel>
+                      <Text fontWeight={"bold"}>Comentários</Text>
+                      <Flex direction={"column"}>
+                        <Flex gap={1}>
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            COMENTÁRIOS
+                          </Text>
+                        </Flex>
                         <Textarea
                           isRequired
                           placeholder="Adicione comentários sobre a campanha"
@@ -128,6 +122,7 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                           name="dsc_comentario"
                           value={registerForm.values.dsc_comentario}
                           onChange={registerForm.handleChange}
+                          maxLength={255}
                         />
                         {registerForm.errors.dsc_comentario &&
                           registerForm.touched.dsc_comentario && (
@@ -135,7 +130,7 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                               {registerForm.errors.dsc_comentario}
                             </TextError>
                           )}
-                      </FormControl>
+                      </Flex>
                     </Flex>
                   </Stack>
                 </Flex>
@@ -143,7 +138,7 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
+              {/* <Flex gap={2}>
                 <Button
                   variant="ghost"
                   color="red"
@@ -184,6 +179,21 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                     </>
                   )}
                 </Button>
+              </Flex> */}
+              <Flex gap={2}>
+                <BotaoVermelhoGhost
+                  text={"Cancelar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                />
+                <BotaoAzulPrimary
+                  text={"Concluir Cadastro"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                  loading={loading}
+                />
               </Flex>
             </ModalFooter>
           </form>

@@ -5,7 +5,6 @@ import {
   Flex,
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -18,16 +17,44 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 
-function ExibirModal() {
+type OpcoesExibir = {
+  exibirDataInicio: boolean;
+  setExibirDataInicio: React.Dispatch<React.SetStateAction<boolean>>;
+  exibirPctPlan: boolean;
+  setExibirPctPlan: React.Dispatch<React.SetStateAction<boolean>>;
+  exibirPctReal: boolean;
+  setExibirPctReal: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+type Props = {
+  opcoesExibir: OpcoesExibir;
+};
+
+function ExibirModal({ opcoesExibir }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const {
+    exibirDataInicio,
+    setExibirDataInicio,
+    exibirPctPlan,
+    setExibirPctPlan,
+    exibirPctReal,
+    setExibirPctReal,
+  } = opcoesExibir;
 
   return (
     <>
       <Button
-        onClick={onOpen}
         rightIcon={<IoMdArrowDropdown />}
-        colorScheme="blue"
-        variant="ghost"
+        textColor={"origem.500"}
+        backgroundColor={"transparent"}
+        _hover={{
+          borderColor: "origem.600",
+          backgroundColor: "origem.500",
+          textColor: "white",
+          transition: "all 0.4s",
+        }}
+        onClick={onOpen}
       >
         Exibir
       </Button>
@@ -44,23 +71,53 @@ function ExibirModal() {
           >
             Exibir
           </ModalHeader>
-          <ModalCloseButton color={"white"} />
           <ModalBody mt={4}>
             <Flex>
               <Flex direction={"column"} grow={1} gap={2}>
                 <Text fontWeight={600}>Data</Text>
-                <RadioGroup defaultValue="1">
+                <RadioGroup
+                  defaultValue={exibirDataInicio ? "inicio" : "fim"}
+                  onChange={(value) => {
+                    if (value === "inicio") {
+                      setExibirDataInicio(true);
+                    } else {
+                      setExibirDataInicio(false);
+                    }
+                  }}
+                >
                   <Stack spacing={5} direction="row">
-                    <Radio value="1">Início</Radio>
-                    <Radio value="2">Fim</Radio>
+                    <Radio value={"inicio"}>Início</Radio>
+                    <Radio value={"fim"}>Fim</Radio>
                   </Stack>
                 </RadioGroup>
               </Flex>
               <Flex direction={"column"} grow={1} gap={2}>
                 <Text fontWeight={600}>Status</Text>
-                <Checkbox colorScheme="blue" defaultChecked>
-                  Checkbox
-                </Checkbox>
+                <Stack spacing={5} direction="row">
+                  <Checkbox
+                    w={"100%"}
+                    name={"pctPlan"}
+                    onChange={(e) => {
+                      setExibirPctPlan(e.target.checked);
+                    }}
+                    isChecked={exibirPctPlan}
+                  >
+                    Percentual Planejado
+                  </Checkbox>
+                </Stack>
+
+                <Stack spacing={5} direction="row">
+                  <Checkbox
+                    w={"100%"}
+                    name={"pctReal"}
+                    onChange={(e) => {
+                      setExibirPctReal(e.target.checked);
+                    }}
+                    isChecked={exibirPctReal}
+                  >
+                    Percentual Realizado
+                  </Checkbox>
+                </Stack>
               </Flex>
             </Flex>
           </ModalBody>

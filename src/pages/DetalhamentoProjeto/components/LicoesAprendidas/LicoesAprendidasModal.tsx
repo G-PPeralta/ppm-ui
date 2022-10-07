@@ -16,8 +16,9 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
+  // Select,
   Stack,
+  Text,
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -82,17 +83,29 @@ function LicoesAprendidasModal({
   //   )
   // );
 
-  function handleFilter(categoriaId: string, data: string) {
-    if (categoriaId) {
+  function handleFilter(search: string, data: string) {
+    // if (categoriaId) {
+    //   const filtered = licoes.filter(
+    //     (lic: any) => lic.id_categoria == categoriaId
+    //   );
+    //   filtered.length == 0 &&
+    //     toast.error(
+    //       "Nenhum dado encontrado com o presente filtro de categoria"
+    //     );
+    //   return setFilteredTable(filtered);
+    // }
+
+    if (search) {
       const filtered = licoes.filter(
-        (lic: any) => lic.id_categoria == categoriaId
+        (lic: any) =>
+          lic.txt_licao_aprendida.includes(search) ||
+          lic.txt_acao.includes(search)
       );
       filtered.length == 0 &&
-        toast.error(
-          "Nenhum dado encontrado com o presente filtro de categoria"
-        );
+        toast.error("Nenhum dado encontrado com o presente filtro de data");
       return setFilteredTable(filtered);
     }
+
     if (data) {
       const filtered = licoes.filter((lic: any) =>
         lic.dat_usu_create.includes(data)
@@ -109,7 +122,7 @@ function LicoesAprendidasModal({
       <Button
         onClick={onOpen}
         background={"white"}
-        color={"origem.300"}
+        color={"#0047BB"}
         _hover={{
           background: "origem.500",
           color: "white",
@@ -119,11 +132,13 @@ function LicoesAprendidasModal({
         py={9}
         borderTopRadius={"0px"}
         borderBottomRadius={"6px"}
+        fontSize={"16px"}
+        fontWeight={"700"}
       >
         Lições Aprendidas
       </Button>
 
-      <Modal size={"4xl"} isOpen={isOpen} onClose={onClose}>
+      <Modal size={"3xl"} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -148,104 +163,146 @@ function LicoesAprendidasModal({
                   base: "center",
                   md: "flex-end",
                 })}
-                px={4}
-                py={4}
-                gap={2}
+                px={9}
+                py={2}
+                display={"flex"}
+                justifyContent={"space-between"}
               >
                 <Flex
                   display={"flex"}
                   justifyContent={"space-between"}
-                  flex={3}
+                  align={"flex-end"}
+                  gap={6}
                 >
-                  <FormControl>
-                    <FormLabel htmlFor="categoria">CATEGORIA</FormLabel>
-                    <Select
-                      id="categoria"
-                      name="categoria"
-                      onChange={(e) => setCategoriaId(e.target.value)}
-                    >
-                      <option value="">Selecione</option>
+                  <Flex>
+                    <FormControl>
+                      <FormLabel htmlFor="categoria">
+                        <Text
+                          color="#949494"
+                          fontSize="12px"
+                          fontWeight="700"
+                          mt={"6px"}
+                        >
+                          PESQUISAR
+                        </Text>
+                      </FormLabel>
+                      <Input
+                        borderRadius={"8px"}
+                        border={"1px solid #A7A7A7"}
+                        mt={"-9px"}
+                        width={"208px"}
+                        height={"56px"}
+                        color="#949494"
+                        id="categoria"
+                        name="categoria"
+                        placeholder="Digite"
+                        onChange={(e) => setCategoriaId(e.target.value)}
+                      >
+                        {/* <option value="">Selecione</option>
                       {categorias.map((cat: any, index: number) => (
                         <option value={cat.id} key={index}>
                           {cat.nom_categoria}
                         </option>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Flex>
-                <Flex
-                  display={"flex"}
-                  justifyContent={"space-between"}
-                  flex={1}
-                >
-                  <FormControl>
-                    <FormLabel htmlFor="data">DATA</FormLabel>
-                    <Input
-                      // placeholder="dd/mm/aaaa"
-                      id="data"
-                      type="date"
-                      name="data"
-                      // value={data}
-                      onChange={(event) => setData(event.target.value)}
-                    />
-                  </FormControl>
-                  {/* <input
+                      ))} */}
+                      </Input>
+                    </FormControl>
+                  </Flex>
+
+                  <Flex display={"flex"}>
+                    <FormControl>
+                      <FormLabel htmlFor="data">
+                        <Text
+                          color="#949494"
+                          fontSize="12px"
+                          fontWeight="700"
+                          mt={"6px"}
+                        >
+                          DATA
+                        </Text>
+                      </FormLabel>
+                      <Input
+                        // placeholder="dd/mm/aaaa"
+                        borderRadius={"8px"}
+                        border={"1px solid #A7A7A7"}
+                        mt={"-9px"}
+                        width={"146px"}
+                        height={"56px"}
+                        color="#949494"
+                        id="data"
+                        type="date"
+                        name="data"
+                        // value={data}
+                        onChange={(event) => setData(event.target.value)}
+                      />
+                    </FormControl>
+                    {/* <input
                     type="date"
                     onChange={(event) => setData(event.target.value)}
                   /> */}
-                </Flex>
+                  </Flex>
 
-                <Flex
-                  display={"flex"}
-                  justifyContent={"space-between"}
-                  flex={1.5}
-                >
-                  <Button
-                    type="button"
-                    background="white"
-                    variant="outline"
-                    color="origem.500"
-                    borderColor="origem.500"
-                    // border={"2px"}
-                    // h={useBreakpointValue({ base: "100%", md: "120%" })}
-                    // float={"right"}
-                    onClick={() => {
-                      handleFilter(categoriaId, data);
-                      setCategoriaId("");
-                    }}
-                    _hover={{
-                      background: "origem.300",
-                      transition: "all 0.4s",
-                      color: "white",
-                    }}
-                  >
-                    Buscar
-                    <Icon as={AiOutlineSearch} fontSize="20px" ml={1} />
-                  </Button>
-
-                  <Button
-                    type="button"
-                    background="origem.500"
-                    variant="primary"
-                    color="white"
-                    // border={"2px"}
-                    // h={useBreakpointValue({ base: "100%", md: "120%" })}
-                    // float={"right"}
-                    onClick={() => setOpenModalRegister(true)}
-                    _hover={{
-                      background: "origem.300",
-                      transition: "all 0.4s",
-                      color: "white",
-                    }}
-                  >
-                    Adicionar
-                  </Button>
+                  <Flex display={"flex"}>
+                    <Button
+                      mr={"25px"}
+                      borderRadius={"8px"}
+                      type="button"
+                      background="white"
+                      variant="outline"
+                      color="#0047BB"
+                      borderColor="#0047BB"
+                      border={"2px"}
+                      // h={useBreakpointValue({ base: "100%", md: "120%" })}
+                      // float={"right"}
+                      onClick={() => {
+                        handleFilter(categoriaId, data);
+                        setCategoriaId("");
+                      }}
+                      _hover={{
+                        background: "origem.300",
+                        transition: "all 0.4s",
+                        color: "white",
+                      }}
+                      width={"94px"}
+                      height={"56px"}
+                      fontWeight={"700"}
+                    >
+                      Filtrar
+                      <Icon
+                        as={AiOutlineSearch}
+                        fontSize="18px"
+                        fontWeight={"700"}
+                        ml={1}
+                      />
+                    </Button>
+                    <Flex display={"flex"}>
+                      <Button
+                        borderRadius={"8px"}
+                        type="button"
+                        background="origem.500"
+                        variant="primary"
+                        color="white"
+                        // border={"2px"}
+                        // h={useBreakpointValue({ base: "100%", md: "120%" })}
+                        // float={"right"}
+                        onClick={() => setOpenModalRegister(true)}
+                        _hover={{
+                          background: "origem.300",
+                          transition: "all 0.4s",
+                          color: "white",
+                        }}
+                        width={"200px"}
+                        height={"56px"}
+                      >
+                        Adicionar
+                      </Button>
+                    </Flex>
+                  </Flex>
                 </Flex>
               </Flex>
             </FormControl>
           </Stack>
 
-          <ModalCloseButton />
+          <ModalCloseButton color={"white"} />
           <ModalBody>
             <TabelaLicoesAprendidas
               onEdit={handleEditLicao}

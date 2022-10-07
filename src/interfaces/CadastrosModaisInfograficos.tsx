@@ -48,19 +48,20 @@ export interface CadastroIntervencao {
 }
 
 export interface CadastroAtividade extends User {
-  id_origem: number;
+  id_origem: string;
   nom_atividade: string;
-  responsavelId: number;
-  area_atuacao: string;
+  responsavel_id: number;
+  area_atuacao?: string | number;
+  area_atuacao_id?: number;
   nao_iniciar_antes_de: {
     data: string;
-    checked: Boolean;
+    checked: Boolean | null;
   };
   nao_terminar_depois_de: {
     data: string;
-    checked: Boolean;
+    checked: Boolean | null;
   };
-  o_mais_breve_possivel: Boolean;
+  o_mais_breve_possivel: Boolean | null;
 }
 
 export interface CadastroPoco {
@@ -96,7 +97,7 @@ export interface ListaProjetoTipo {
 }
 
 export interface NovaCampanha {
-  nom_campanha: string;
+  id_projeto: number;
   dsc_comentario: string;
   nom_usu_create: string | undefined;
 }
@@ -116,7 +117,7 @@ export interface NovoPoco {
 }
 
 export interface NovaSonda extends User {
-  sonda: string;
+  nome: string;
 }
 
 export interface NovaAtividade extends User {
@@ -146,4 +147,28 @@ export interface AreaAtuacao {
 export interface Area {
   id: number;
   nom_area: string;
+}
+
+export interface ListaCampo {
+  id: number;
+  campo: string;
+  poloId: number;
+}
+
+export interface ProjetoTipo {
+  id: number;
+  nom_projeto_tipo: string;
+}
+
+export interface Tarefas {
+  id: number;
+  id_origem: number;
+  nom_atividade: string;
+  responsavel_id: number;
+  area_atuacao: number;
+  nao_iniciar_antes_de: null;
+  nao_terminar_depois_de: null;
+  o_mais_breve_possivel: Boolean;
+  nom_usuario_create: string | null;
+  dat_usuario_create: string | null;
 }

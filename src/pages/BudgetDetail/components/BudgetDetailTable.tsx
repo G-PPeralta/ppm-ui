@@ -1,5 +1,7 @@
 import { FiChevronDown, FiPrinter } from "react-icons/fi";
 
+import "./expansiveTable.css";
+// import ModalCadastrarOrcamentoPrevisto from "./ModalCadastrarOrcamentoPrevisto";
 import {
   Flex,
   IconButton,
@@ -12,8 +14,10 @@ import {
   Tr,
   Text,
 } from "@chakra-ui/react";
-import { BudgetDetail } from "models/Budget.model";
-import "./expansiveTable.css";
+import { BudgetDetail } from "interfaces/Budgets";
+
+import CampoEditavel from "./CampoEditavel";
+import ModalGestaoDeCusto from "./ModalGestaoDeCusto";
 
 export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
   const { data } = props;
@@ -74,12 +78,12 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
         <Td>{detail.brt}</Td>
         <Td onClick={() => toggleAcordion(key)}>
           <Flex alignItems={"center"} justifyContent="space-between">
-            {detail.servico} <FiChevronDown size={"18px"} />{" "}
+            {detail.projeto.nome} <FiChevronDown size={"18px"} />{" "}
           </Flex>
         </Td>
         <Td></Td>
-        <Td>{brl.format(detail.previsto)}</Td>
-        <Td>{brl.format(detail.realizado)}</Td>
+        <Td align="center">{brl.format(detail.planejado)}</Td>
+        <Td align="center">{brl.format(detail.realizado)} </Td>
         <Td></Td>
       </Tr>
       {detail.filhos &&
@@ -87,10 +91,19 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
           <Tr className={"hide item-" + key} key={filho.id}>
             {/* <Td></Td> */}
             <Td>{filho.brt}</Td>
-            <Td>{filho.servico}</Td>
+            <Td>{filho.projeto.nome}</Td>
             <Td>{filho.fornecedor}</Td>
-            <Td>{brl.format(filho.previsto)}</Td>
-            <Td>{brl.format(filho.realizado)}</Td>
+            <Td textAlign="center">
+              <Flex alignItems={"center"} justifyContent="center">
+                <CampoEditavel filho={filho} />
+              </Flex>
+            </Td>
+            <Td textAlign="center">
+              <Flex alignItems={"center"} justifyContent="center">
+                {brl.format(filho.realizado)}{" "}
+                <ModalGestaoDeCusto projeto={filho.projeto} />
+              </Flex>
+            </Td>
             <Td align="center">{filho.gap}%</Td>
           </Tr>
         ))}

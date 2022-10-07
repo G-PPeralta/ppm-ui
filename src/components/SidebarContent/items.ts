@@ -15,6 +15,7 @@ import {
   FiTrash2,
   FiSettings,
 } from "react-icons/fi";
+import { MdPriorityHigh } from "react-icons/md";
 
 interface LinkItemProps {
   name: string;
@@ -29,11 +30,11 @@ export const LinkItems: Array<LinkItemProps> = [
     children: [
       { name: "Dashboard", icon: FiHome, link: "/" },
       { name: "Projetos", icon: FaRegMoneyBillAlt, link: "/projects" },
-      {
-        name: "Desenvolvimento",
-        icon: FaRegMoneyBillAlt,
-        link: "/desenvolvimento",
-      },
+      // {
+      //   name: "Fornecedores",
+      //   icon: FaRegMoneyBillAlt,
+      //   link: "/desenvolvimento",
+      // },
       { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/desenvolvimento" },
       { name: "Importar Dados", icon: BiData, link: "/upload" },
       {
@@ -51,6 +52,7 @@ export const LinkItems: Array<LinkItemProps> = [
         icon: BsBarChartSteps,
         link: "/detalhamento/191",
       },
+      { name: "Priorização", icon: MdPriorityHigh, link: "/priorizacao" },
     ],
   },
 
@@ -69,7 +71,7 @@ export const LinkItems: Array<LinkItemProps> = [
       {
         name: "Estatísticas",
         icon: AiOutlineBarChart,
-        link: "/desenvolvimento",
+        link: "/estatisticas",
       },
       {
         name: "Gráficos Estatisticos",

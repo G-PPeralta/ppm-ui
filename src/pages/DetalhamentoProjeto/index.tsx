@@ -4,23 +4,57 @@ import { useParams } from "react-router-dom";
 import { Box, Flex } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { ICardInfoProjeto } from "interfaces/DetalhamentoProjetos";
-import { Categorias, LicoesAprendidas } from "interfaces/Services";
+import {
+  Categorias,
+  LicoesAprendidas,
+  ProjetoProgresso,
+} from "interfaces/Services";
+
+import GenericCurveS from "pages/Reports/components/genericCurveS";
 
 import { Gantt } from "components/Gantt";
 import Sidebar from "components/SideBar";
 
 import { getCategorias } from "services/get/Categorias";
-import { getInfoProjetos } from "services/get/DetalhamentoProjetos";
+import {
+  getInfoProjetos,
+  getProgressoProjeto,
+} from "services/get/DetalhamentoProjetos";
 import { getLicoesAprendidas } from "services/get/LicoesAprendidas";
 
 import BotoesModais from "./components/BotoesModais";
 import CardInfoProjeto from "./components/CardInfoProjeto";
 import CardOrcamento from "./components/CardOrcamento";
-import GraficoCurvaS from "./components/GraficoCurvaS";
+// import GraficoCurvaS from "./components/GraficoCurvaS";
+
+const curveSData = [
+  {
+    mes: "Nov/2022",
+    cronogramaPrevisto: 6,
+    cronogramaRealizado: 30,
+    capexPrevisto: 40,
+    capexRealizado: 50,
+  },
+  {
+    mes: "Dez/2021",
+    cronogramaPrevisto: 60,
+    cronogramaRealizado: 20,
+    capexPrevisto: 35,
+    capexRealizado: 50,
+  },
+  {
+    mes: "Nov/2022",
+    cronogramaPrevisto: 6,
+    cronogramaRealizado: 30,
+    capexPrevisto: 40,
+    capexRealizado: 50,
+  },
+];
 
 function DetalhamentoProjeto() {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
+  const [loadingProgresso, setProgressoLoading] = useState(false);
   const [infoProjeto, setInfoProjeto] = useState<ICardInfoProjeto>({
     nome_projeto: "",
     data_inicio: null,
@@ -31,9 +65,13 @@ function DetalhamentoProjeto() {
     demanda: "",
     nome_responsavel: "",
     coordenador_nome: "",
+    descricao: "",
+    justificativa: "",
   });
   const [licoes, setLicoes] = useState([] as LicoesAprendidas[]);
   const [categorias, setCategorias] = useState([] as Categorias[]);
+  const [progresso, setProgresso] = useState([] as ProjetoProgresso[]);
+  const [render, setRender] = useState(false);
 
   const handleGetInfoProjetos = async () => {
     if (id) {
@@ -55,10 +93,18 @@ function DetalhamentoProjeto() {
     setCategorias(response.data);
   }
 
+  async function handleGetProgresso() {
+    setProgressoLoading(true);
+    const response = await getProgressoProjeto();
+    setProgresso(response.data);
+    setProgressoLoading(false);
+  }
+
   useEffect(() => {
     handleGetInfoProjetos();
     handleGetLicoes();
     handleGetCategorias();
+    handleGetProgresso();
 
     return () =>
       setInfoProjeto({
@@ -71,11 +117,11 @@ function DetalhamentoProjeto() {
         demanda: "",
         nome_responsavel: "",
         coordenador_nome: "",
+        descricao: "",
+        justificativa: "",
       });
     // handleGetLicoes();
-  }, []);
-
-  // console.log(categorias);
+  }, [render]);
 
   return (
     <>
@@ -101,17 +147,28 @@ function DetalhamentoProjeto() {
               shrink={1}
               gap={4}
             >
-              <CardInfoProjeto infoProjeto={infoProjeto} />
+              <CardInfoProjeto
+                infoProjeto={infoProjeto}
+                progresso={
+                  !loadingProgresso
+                    ? progresso
+                    : [{ fn_cron_calc_pct_real: "00.003848750844" }]
+                }
+                loading={loadingProgresso}
+              />
               <CardOrcamento />
               <BotoesModais
                 licoes={licoes}
                 setLicoes={setLicoes}
                 categorias={categorias}
                 callBack={handleGetLicoes}
+                infoProjeto={infoProjeto}
+                setRender={() => setRender(true)}
               />
             </Flex>
             <Gantt />
-            <GraficoCurvaS />
+            <GenericCurveS data={curveSData} />
+            {/* <GraficoCurvaS /> */}
           </>
         )}
       </Sidebar>

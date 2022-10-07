@@ -208,9 +208,32 @@ export interface TotalOrcamento {
   totalOrcamento: number;
 }
 
+export interface TotalRealizado {
+  totalRealizado: number;
+}
+
+export interface TotalNaoPrevisto {
+  totalRealizado: number;
+}
+
 export interface AreasDemandadas {
   qtd: number;
   solicitante: string;
+}
+
+export interface InfoFinanceira {
+  planejado: number;
+  realizado: number;
+  naoPrevisto: number;
+  remanescente: number;
+  pctRealizado: number;
+  pctRemanescente: number;
+  pctNaoPrevisto: number;
+}
+
+export interface CpiSpi {
+  cpi: number;
+  spi: number;
 }
 
 export interface ComplexidadesPrioridades {
@@ -384,4 +407,79 @@ export interface ProjetosRankingPayload {
   };
   dsc_comentario: string;
   nom_usu_create: string;
+}
+
+export interface ProjetoProgresso {
+  fn_cron_calc_pct_real: string;
+}
+
+export interface StatisticsGanttProps {
+  TaskID: number | undefined;
+  TaskName: string | undefined;
+  StartDate?: Date | string | null | undefined;
+  EndDate?: Date | string | null | undefined;
+  BaselineStartDate?: Date | string | null | undefined;
+  BaselineEndDate?: Date | string | null | undefined;
+  Duration?: number;
+  BaselineDuration?: number;
+  Progress?: number | null | undefined;
+  subtasks?: StatisticsGanttProps[];
+  // ParentID: number | null | undefined;
+}
+
+export interface StatisticsTable {
+  id_atividade: number;
+  nome_atividade: string;
+  custo?: string;
+  inicio_planejado?: string | null;
+  fim_planejado?: string | null;
+  hrs_totais?: string | null;
+  hrs_reais?: string | null;
+  inicio_real?: string | null;
+  fim_real?: string | null;
+  pct_plan?: string | null;
+  nome_responsavel?: string | null;
+}
+
+export interface StatisticsTableData {
+  sonda: string;
+  id_sonda: number;
+  poco: string;
+  id_poco: number;
+  atividades: StatisticsTable[];
+  max?: number;
+  min?: number;
+  med?: number;
+  dp?: number;
+  use?: string;
+}
+
+export interface TarefaAtividade {
+  id?: number;
+  nome_tarefa: string;
+  data_tarefa: Date;
+  atividade_relacionada: number;
+  descricao_tarefa: string;
+  nom_usu_create?: string;
+  status?: number;
+}
+
+export interface TarefaAtividadeComId {
+  id: number;
+  nome_tarefa: string;
+  data_tarefa: Date;
+  atividade_relacionada: number;
+  descricao_tarefa: string;
+  nom_usu_create?: string;
+  status?: number;
+}
+
+export interface AtividadesProjeto {
+  id: number;
+  nomeAtividade: string;
+  tipoAtividade: string;
+  deletado: boolean;
+  macroatividadeId: number;
+  item: string;
+  temporario: boolean;
 }

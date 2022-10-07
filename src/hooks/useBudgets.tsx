@@ -5,11 +5,10 @@ import { SetStateAction, useEffect, useState } from "react";
 
 // import { useToast } from "contexts/Toast";
 
+import { Budget } from "interfaces/Budgets";
 import { ListaSonda } from "interfaces/CadastrosModaisInfograficos";
-import { Budget } from "models/Budget.model";
 
-import { getBudgets } from "services/get/GetBudget";
-import { getInfoCampanha } from "services/get/Infograficos";
+import { getBudgetProjects, getBudgets } from "services/get/GetBudget";
 
 export function useBudgets() {
   // const { toast } = useToast();
@@ -29,12 +28,9 @@ export function useBudgets() {
   };
 
   const gerarProjectList = async () => {
-    const { data } = await getInfoCampanha();
-    const campanhas = data.map((d) => ({
-      nome: d.sonda,
-      id: d.id_campanha,
-    }));
-    setProjects(campanhas);
+    const data = await getBudgetProjects();
+
+    setProjects(data);
   };
 
   const filterByProject = () => {

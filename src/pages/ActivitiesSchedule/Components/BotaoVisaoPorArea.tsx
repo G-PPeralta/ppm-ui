@@ -7,12 +7,14 @@ function BotaoVisaoPorArea() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/atividade/${id}/visao-por-area`);
+    navigate(`/infographics/atividade/${id}/visao-por-area`);
   };
 
   return (
     <>
       <Button
+        h={"56px"}
+        borderRadius={"10px"}
         variant="outline"
         border={"2px solid"}
         borderColor={"origem.500"}

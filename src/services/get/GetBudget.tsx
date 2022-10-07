@@ -1,4 +1,4 @@
-import { Budget, BudgetDetail } from "models/Budget.model";
+import { Budget, BudgetDetail } from "interfaces/Budgets";
 
 import { api, token } from "services/api";
 
@@ -75,10 +75,11 @@ export async function getBudgets(): Promise<Budget[]> {
 }
 
 export async function getBudgetDetail(): Promise<BudgetDetail[]> {
-  const data = [
+  const uri = "/budgets/detail";
+
+  /* const data = [
     {
       id: 1,
-      data: "21/09/2022",
       brt: "1",
       servico: "Serviço 1",
       fornecedor: "-",
@@ -111,7 +112,6 @@ export async function getBudgetDetail(): Promise<BudgetDetail[]> {
     },
     {
       id: 2,
-      data: "22/09/2022",
       brt: "2",
       servico: "Serviço 2",
       fornecedor: "-",
@@ -142,7 +142,17 @@ export async function getBudgetDetail(): Promise<BudgetDetail[]> {
         },
       ],
     },
-  ];
+  ]; */
+  const { data } = await api.get<BudgetDetail[]>(uri, token());
+
+  return data;
+}
+
+export async function getBudgetProjects(): Promise<
+  { nome: string; id: number }[]
+> {
+  const uri = "/budgets/projects";
+  const { data } = await api.get<{ nome: string; id: number }[]>(uri, token());
 
   return data;
 }

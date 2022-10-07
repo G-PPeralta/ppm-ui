@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   Box,
   Flex,
@@ -6,8 +8,30 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { TotalNaoPrevisto } from "interfaces/Services";
+
+import { getTotalNaoPrevisto } from "services/get/Dashboard";
 
 export default function NaoPrevistoComponent() {
+  const [totalNaoPrevisto, setTotalNaoPrevisto] = useState<TotalNaoPrevisto[]>(
+    [] as TotalNaoPrevisto[]
+  );
+  const [loading, setLoading] = useState(false);
+
+  async function handleGetTotalNaoPrevisto() {
+    setLoading(true);
+    const reqGet = await getTotalNaoPrevisto();
+
+    setTotalNaoPrevisto(reqGet.data[0].totalNaoPrevisto);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    handleGetTotalNaoPrevisto();
+    setLoading(false);
+  }, []);
+
+  const valorFormatado = totalNaoPrevisto && totalNaoPrevisto.toLocaleString();
   return (
     <Stack spacing="8">
       <Flex
@@ -51,9 +75,9 @@ export default function NaoPrevistoComponent() {
                 <Text
                   ml={2}
                   sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
-                  color="#059502"
+                  color="#000000"
                 >
-                  10.000.000
+                  {!loading && valorFormatado}
                 </Text>
               </Box>
             </Box>

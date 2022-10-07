@@ -16,6 +16,7 @@ import { LookaheadDetalhe } from "pages/Lookahead/Detalhe";
 import { NotFound } from "pages/NotFound";
 import { Permissions } from "pages/Permissions";
 import { PermissionsList } from "pages/PermissionsList";
+import { Priorizacao } from "pages/Priorizacao";
 import { Profile } from "pages/Profile";
 import { Projects } from "pages/Projects";
 import { ProjectsRegistration } from "pages/ProjectsRegistration";
@@ -23,6 +24,8 @@ import { ProvidersRegistration } from "pages/ProvidersRegistration";
 import { Reports } from "pages/Reports";
 import { Settings } from "pages/Settings";
 import { ShareRegister } from "pages/ShareRegister";
+import { Statistics } from "pages/Statistics";
+import { StatisticsGantt } from "pages/StatisticsGantt";
 import { UploadSheet } from "pages/UploadSheet";
 import VisaoPorArea from "pages/VisaoPorArea";
 
@@ -57,11 +60,21 @@ export function PrivateRoutes() {
       <Route path="/lookahead" element={<Lookahead />} />
       <Route path="/lookahead-detalhe/:id" element={<LookaheadDetalhe />} />
       <Route
-        path="/atividade/:id/precedentes"
+        path="/infographics/atividade/:id"
+        element={<ActivitiesSchedule />}
+      />
+      <Route
+        path="/infographics/atividade/:id/precedentes"
         element={<ActivitiesPrecedents />}
       />
-      <Route path="/atividade/:id/visao-por-area" element={<VisaoPorArea />} />
+      <Route
+        path="/infographics/atividade/:id/visao-por-area"
+        element={<VisaoPorArea />}
+      />
       <Route path="/licoesAprendidas" element={<LicoesAprendidasProjetos />} />
+      <Route path="/estatisticas/" element={<Statistics />} />
+      <Route path="/estatisticas/cronograma" element={<StatisticsGantt />} />
+      <Route path="/priorizacao" element={<Priorizacao />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -1,3 +1,7 @@
+export interface BudgetPlan {
+  atividadeId: number;
+  valor: string;
+}
 export interface Projeto {
   id: number;
   nome: string;
@@ -18,11 +22,21 @@ export interface BudgetDetail {
   id: number;
   data?: string;
   brt: string;
-  servico: string;
+  projeto: Projeto;
   fornecedor?: string;
-  total: number;
-  previsto: number;
+  planejado: number;
   realizado: number;
   gap?: number;
   filhos?: BudgetDetail[];
+}
+
+export interface BudgetReal {
+  atividadeId: number;
+  valor: number;
+  data: string;
+  fornecedor: string;
+  classeServico: string;
+  pedido: number;
+  textPedido: string;
+  nom_usu_create?: string;
 }

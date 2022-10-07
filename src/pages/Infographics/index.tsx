@@ -1,26 +1,20 @@
 import { useEffect, useState } from "react";
 
-import {
-  Box,
-  Flex,
-  Heading,
-  Stack,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, useBreakpointValue } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
 import StatusProjeto from "components/StatusProjeto";
 
-import { getInfoCampanha } from "services/get/Infograficos";
+import { useFiltragemCampanha } from "hooks/useFiltragemCampanha";
+
+import { postGetInfoCampanha } from "services/get/Infograficos";
 
 import { statusProjeto } from "../../utils/validateDate";
 import ColumnSPT from "./Components/ColumnSPT";
-import ExibirModal from "./Components/ExibirModal";
 import FiltrosModal from "./Components/FiltrosModal";
 import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
 import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
-import ModalCadastroIntervencao from "./Components/ModalCadastroIntervencao";
 import ModalCadastroPoco from "./Components/ModalCadastroPoco";
 import ModalCadastroProjetoTipo from "./Components/ModalCadastroProjetoTipo";
 import ModalNovaCampanha from "./Components/ModalNovaCampanha";
@@ -30,97 +24,143 @@ export function Infographics() {
   const [campanhas, setCampanhas] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
 
+  const {
+    registerForm,
+    listaAreaAtuacao,
+    listaPocos,
+    listaTarefas,
+    listaResponsaveis,
+    listaSondas,
+  } = useFiltragemCampanha();
+
+  const listas = {
+    registerForm,
+    listaAreaAtuacao,
+    listaPocos,
+    listaTarefas,
+    listaResponsaveis,
+    listaSondas,
+  };
+
   const innerWidth = useBreakpointValue({ base: 0, md: 1, lg: 2, xl: 3 });
 
-  const handleGetCampanha = async () => {
-    const response = await getInfoCampanha();
-    setCampanhas(response.data);
+  const handleGetAll = async () => {
+    const campanhas = await postGetInfoCampanha(registerForm.values);
+    setCampanhas(campanhas.data);
     setLoading(false);
   };
 
   useEffect(() => {
-    handleGetCampanha();
+    handleGetAll();
   }, []);
 
   useEffect(() => {
-    handleGetCampanha();
+    handleGetAll();
   }, [refresh]);
 
   return (
     <>
       <Sidebar>
         {!loading ? (
-          <Stack spacing="8">
-            <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
-              <Box
-                py={{ base: "6", sm: "8" }}
-                px={{ base: "6", sm: "8" }}
-                w={"100%"}
-                bg={"white"}
-                borderRadius={{ base: "xl", sm: "xl" }}
+          <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
+            <Box
+              py={{ base: "6", sm: "6" }}
+              px={{ base: "6", sm: "8" }}
+              w={"100%"}
+              bg={"white"}
+              borderRadius={{ base: "xl", sm: "xl" }}
+            >
+              <Flex
+                justify={"space-between"}
+                mb={2}
+                wrap={"wrap"}
+                align={"center"}
               >
-                <Flex justify={"space-between"} mb={5} wrap={"wrap"}>
-                  <Heading as="h3" size="md" mb={3} mt={innerWidth}>
-                    Acompanhamento de poços
-                  </Heading>
-                  <Flex gap={4}>
-                    <ExibirModal />
-                    <FiltrosModal />
-                  </Flex>
-                </Flex>
-                <Flex
-                  direction={"column"}
-                  justify={"space-between"}
-                  gap={6}
-                  wrap={"wrap"}
-                  mb={4}
+                <Heading
+                  as="h3"
+                  size="md"
+                  mb={2}
+                  mt={innerWidth}
+                  textAlign={"center"}
                 >
-                  <Flex gap={2} wrap={"wrap"}>
-                    <ModalNovaCampanha
-                      refresh={refresh}
-                      setRefresh={setRefresh}
-                    />
-                    <ModalCadastrarSonda />
-                    <ModalCadastroPoco />
-                    <ModalCadastroAtividade />
-                    <ModalCadastroProjetoTipo />
-                  </Flex>
-                  <Flex gap={4} wrap={"wrap"}>
-                    {statusProjeto.map((status, index) => (
-                      <StatusProjeto
-                        key={index}
-                        status={status.status}
-                        color={status.color}
-                      />
-                    ))}
-                  </Flex>
+                  Acompanhamento de Poços
+                </Heading>
+                <Flex gap={4}>
+                  <FiltrosModal
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                    listas={listas}
+                    registerForm={registerForm}
+                  />
                 </Flex>
-                <Flex align={"center"} justify={"center"}>
+              </Flex>
+              <Flex
+                direction={"column"}
+                justify={"space-between"}
+                gap={4}
+                wrap={"wrap"}
+                mb={2}
+                flex={1}
+              >
+                <Flex gap={2} wrap={"wrap"} flex={1}>
+                  <ModalCadastrarSonda />
+                  <ModalCadastroPoco />
+                  <ModalCadastroAtividade />
+                  <ModalCadastroProjetoTipo
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
+                  <ModalNovaCampanha
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
+                </Flex>
+                <Flex gap={4} wrap={"wrap"} flex={1} justify={"end"}>
+                  {statusProjeto.map((status, index) => (
+                    <StatusProjeto
+                      key={index}
+                      status={status.status}
+                      color={status.color}
+                    />
+                  ))}
+                </Flex>
+              </Flex>
+              <Flex align={"center"} justify={"center"}>
+                {campanhas.length !== 0 ? (
                   <Box
                     overflowX={{ base: "scroll" }}
                     display={"flex"}
                     flexDirection={"row"}
                     gap={10}
-                    py={4}
+                    py={2}
+                    flex={1}
                   >
-                    {campanhas &&
-                      campanhas.map((column, index) => (
-                        <Flex
-                          key={index}
-                          direction={"column"}
-                          gap={4}
-                          align={"center"}
-                          justify={"space-between"}
-                        >
-                          <ColumnSPT column={column} />
-                          <ModalCadastroIntervencao />
-                        </Flex>
-                      ))}
+                    {campanhas.map((column, index) => (
+                      <Flex
+                        key={index}
+                        direction={"column"}
+                        gap={4}
+                        align={"end"}
+                        justify={"space-between"}
+                      >
+                        <ColumnSPT
+                          column={column}
+                          refresh={refresh}
+                          setRefresh={setRefresh}
+                        />
+                      </Flex>
+                    ))}
                   </Box>
-                </Flex>
-              </Box>
-            </Flex>
-          </Stack>
+                ) : (
+                  <Flex h={180} align={"center"} justify={"center"}>
+                    <Heading as="h4" size="md">
+                      Nenhuma campanha Cadastrada
+                    </Heading>
+                  </Flex>
+                )}
+              </Flex>
+            </Box>
+          </Flex>
         ) : (
           <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
             <Ring speed={2} lineWeight={5} color="blue" size={64} />

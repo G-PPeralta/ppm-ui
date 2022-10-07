@@ -3,13 +3,44 @@ import { FiMapPin } from "react-icons/fi";
 
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { ICardInfoProjeto } from "interfaces/DetalhamentoProjetos";
+import { ProjetoProgresso } from "interfaces/Services";
+
+import { PercentagePieChartProjetoInfo } from "components/PercentagePieChartProjetoInfo";
 
 type infoProjetoProps = {
   infoProjeto: ICardInfoProjeto;
+  progresso: ProjetoProgresso[];
+  loading: boolean;
 };
 
-function CardInfoProjeto({ infoProjeto }: infoProjetoProps) {
+function CardInfoProjeto({
+  infoProjeto,
+  progresso,
+  loading,
+}: infoProjetoProps) {
+  const chartsProps = [
+    {
+      name: "Undone",
+      value: progresso
+        ? 100 - Number(progresso[0].fn_cron_calc_pct_real.substring(0, 2))
+        : 0,
+      color: "#dddddd",
+    },
+    {
+      name: "Done",
+      value: progresso
+        ? Number(progresso[0].fn_cron_calc_pct_real.substring(0, 2))
+        : 0,
+      color: "#00B53D",
+    },
+  ];
   const innerWidth = window.innerWidth;
+
+  function formatDate(date: Date) {
+    const formated = date.toString().substring(0, 10).split("-");
+    return `${formated[2]}/${formated[1]}/${formated[0]}`;
+  }
+
   return (
     <>
       <Flex
@@ -21,8 +52,15 @@ function CardInfoProjeto({ infoProjeto }: infoProjetoProps) {
         shrink={1}
         basis={"360px"}
       >
-        <Box mb={4}>
-          <Heading as="h4" size="md">
+        <Box
+          mb={4}
+          display={"flex"}
+          flexDirection={"row"}
+          alignItems={"center"}
+          // justifyContent={"center"}
+        >
+          {!loading && <PercentagePieChartProjetoInfo data={chartsProps} />}
+          <Heading as="h4" size="md" ml={4}>
             {infoProjeto.nome_projeto}
           </Heading>
         </Box>
@@ -129,7 +167,7 @@ function CardInfoProjeto({ infoProjeto }: infoProjetoProps) {
               >
                 {infoProjeto.data_inicio === null
                   ? "01/01/1900"
-                  : infoProjeto.data_inicio}
+                  : formatDate(infoProjeto.data_inicio)}
               </Text>
             </Flex>
 
@@ -145,7 +183,7 @@ function CardInfoProjeto({ infoProjeto }: infoProjetoProps) {
               >
                 {infoProjeto.data_fim === null
                   ? "31/12/1900"
-                  : infoProjeto.data_fim}
+                  : formatDate(infoProjeto.data_fim)}
               </Text>
             </Flex>
 

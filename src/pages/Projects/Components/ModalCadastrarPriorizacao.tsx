@@ -29,11 +29,11 @@ import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
-type id = {
+type PropsType = {
   projeto: number;
 };
 
-function ModalCadastrarPriorizacao(projeto: id) {
+function ModalCadastrarPriorizacao(projeto: PropsType) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     registerForm,
@@ -44,25 +44,23 @@ function ModalCadastrarPriorizacao(projeto: id) {
     listaComplexidade,
     listaPrioridade,
     listaRegulatorio,
-  } = useCadastroPriorizacao();
-
-  // console.log("registerform", registerForm.values);
-
-  // console.log("isvalid", registerForm.isValid);
+    ranking,
+  } = useCadastroPriorizacao(projeto.projeto);
 
   // useEffect(() => {
   //   registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
   // }, []);
 
   // Pegar id do projeto
-  // console.log("id-cadastrar", projeto.projeto);
+
+  useEffect(() => {
+    const valorRanking = ranking && ranking?.length > 0 ? ranking[0].id : 0;
+    registerForm.setFieldValue("beneficio.opcao_id", valorRanking);
+  }, [ranking]);
 
   useEffect(() => {
     registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
-    registerForm.setFieldValue(
-      "beneficio.id_ranking",
-      Number(listaBeneficios[0]?.id)
-    );
+
     registerForm.setFieldValue(
       "regulatorio.id_ranking",
       Number(listaRegulatorio[0]?.id)

@@ -13,10 +13,11 @@ import { statusProjeto } from "utils/validateDate";
 import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
 import CardACT from "../ActivitiesSchedule/Components/CardACT";
-import ModalCadastroAtividade from "../ActivitiesSchedule/Components/ModalCadastroAtividade";
+// import ModalCadastroAtividade from "../ActivitiesSchedule/Components/ModalCadastroAtividadeOLD";
 import ModalEditarAtividade from "../ActivitiesSchedule/Components/ModalEditarAtividade";
-import ExibirModal from "./components/ExibirModal";
-import FiltrosModal from "./components/FiltrosModal";
+import BotaoVisaoGeral from "./components/BotaoVisaoGeral";
+// import ExibirModal from "./components/ExibirModal";
+// import FiltrosModal from "./components/FiltrosModal";
 
 declare type AnchorPositionType =
   | "top"
@@ -25,16 +26,46 @@ declare type AnchorPositionType =
   | "right"
   | "middle";
 
+declare type AreaCompetaType = {
+  area: string;
+  atividades: Array<any>;
+};
+
 export function ActivitiesPrecedents() {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [atividades, setAtividades] = useState<any[]>([]);
+  const [data, setData] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
   const [openId, setOpenId] = useState("");
 
   const requestHandler = async () => {
     const response = await getAtividadesCampanha(id);
+    const payload = response.data;
     setAtividades(response.data);
+    const areas: any[] = [];
+    payload.forEach((value: any, key: number) => {
+      if (!areas.includes(value.nom_area)) {
+        areas.push(value.nom_area);
+      }
+    });
+    const newData: any[] = [];
+    for (const i in areas) {
+      const newArea: AreaCompetaType = {
+        area: "",
+        atividades: [],
+      };
+      newArea.area = areas[i];
+      payload.forEach((value: any, key: number) => {
+        if (areas[i] === value.nom_area) {
+          const newArray = newArea.atividades;
+          newArray.push(value);
+          newArea.atividades = newArray;
+        }
+      });
+      newData.push(newArea);
+    }
+    setData(newData);
   };
 
   useEffect(() => {
@@ -47,7 +78,6 @@ export function ActivitiesPrecedents() {
   }, [refresh]);
 
   const openDetails = (atividade: any) => {
-    // console.log("atividade", atividade);
     setOpenId(atividade);
   };
 
@@ -263,18 +293,19 @@ export function ActivitiesPrecedents() {
                   <Heading as="h3" size="md" mb={3}>
                     {atividades[0] ? atividades[0].sonda : ""}
                   </Heading>
-                  <Flex gap={4}>
+                  {/* <Flex gap={4}>
                     <ExibirModal />
                     <FiltrosModal />
-                  </Flex>
+                  </Flex> */}
                 </Flex>
-                <Flex justify={"space-between"} gap={6} wrap={"wrap"} mb={4}>
+                <Flex justify={"space-between"} gap={1} wrap={"wrap"} mb={4}>
                   <Flex gap={2}>
-                    <ModalCadastroAtividade
+                    <BotaoVisaoGeral />
+                    {/* <ModalCadastroAtividade
                       id={id}
                       setRefresh={setRefresh}
                       refresh={refresh}
-                    />
+                    /> */}
                   </Flex>
                   <Flex gap={4} wrap={"wrap"}>
                     {statusProjeto.map((status, index) => (
@@ -287,24 +318,25 @@ export function ActivitiesPrecedents() {
                   </Flex>
                 </Flex>
                 <ArcherContainer
-                  startMarker={true}
-                  endMarker={false}
+                  startMarker={false}
+                  endMarker={true}
                   strokeColor="black"
                   strokeWidth={1}
                 >
                   <Flex py={4} wrap={"wrap"}>
-                    {payload.map((area, indexArea) => (
+                    {data.map((area, index) => (
                       <Flex
                         width={"100%"}
                         borderTop={"1px solid"}
                         borderBottom={"1px solid"}
                         borderColor={"#A7A7A7"}
                         direction={"row"}
+                        key={index}
                       >
                         <Box
                           py={4}
                           px={4}
-                          width={"150px"}
+                          width={"160px"}
                           borderRight={"1px solid"}
                           borderColor={"#A7A7A7"}
                         >
@@ -314,51 +346,44 @@ export function ActivitiesPrecedents() {
                         </Box>
                         <Box py={4} px={4}>
                           <Flex direction={"row"} gap={4} py={4} wrap={"wrap"}>
-                            {area.atividades.map((atividade, index) => (
-                              <ArcherElement
-                                id={atividade.atividadeId}
-                                // relations={[
-                                //   {
-                                //     targetId: "id1",
-                                //     targetAnchor: "bottom",
-                                //     sourceAnchor: "right",
-                                //     style: {
-                                //       strokeColor: "blue",
-                                //       strokeWidth: 1,
-                                //     },
-                                //   },
-                                // ]}
-                                relations={atividade.precedentesIds.map(
-                                  (precedente: any) => {
-                                    const item = {
-                                      targetId: String(precedente),
-                                      targetAnchor: getAreabyIdTarget(
-                                        precedente,
-                                        area.area,
-                                        index
-                                      ),
-                                      sourceAnchor: getAreabyIdSource(
-                                        precedente,
-                                        area.area,
-                                        index
-                                      ),
-                                    };
-                                    return item;
-                                  }
-                                )}
-                              >
-                                <Flex
-                                  key={index}
-                                  direction={"column"}
-                                  align={"center"}
-                                  justify={"center"}
-                                  onClick={() => openDetails(atividade)}
-                                  _hover={{ cursor: "pointer" }}
+                            {area.atividades.map(
+                              (atividade: any, index: number) => (
+                                <ArcherElement
+                                  id={String(atividade.id_atividade)}
+                                  relations={atividade.precedentesId.map(
+                                    (precedente: any) => {
+                                      const item = {
+                                        targetId: String(
+                                          precedente.precedente_id
+                                        ),
+                                        targetAnchor: getAreabyIdTarget(
+                                          String(precedente.precedente_id),
+                                          area.area,
+                                          index
+                                        ),
+                                        sourceAnchor: getAreabyIdSource(
+                                          String(precedente.precedente_id),
+                                          area.area,
+                                          index
+                                        ),
+                                      };
+                                      return item;
+                                    }
+                                  )}
                                 >
-                                  <CardACT atividade={atividade} />
-                                </Flex>
-                              </ArcherElement>
-                            ))}
+                                  <Flex
+                                    key={index}
+                                    direction={"column"}
+                                    align={"center"}
+                                    justify={"center"}
+                                    onClick={() => openDetails(atividade)}
+                                    _hover={{ cursor: "pointer" }}
+                                  >
+                                    <CardACT atividade={atividade} />
+                                  </Flex>
+                                </ArcherElement>
+                              )
+                            )}
                           </Flex>
                           {openId ? (
                             <ModalEditarAtividade
