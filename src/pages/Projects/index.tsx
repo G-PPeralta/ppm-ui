@@ -96,10 +96,19 @@ export function Projects() {
               >
                 <Flex gap={2} wrap={"wrap"} flex={1}>
                   <Button
-                    variant="outline"
-                    colorScheme="messenger"
-                    rightIcon={<FiPlus color="#0047BB" />}
-                    width={200}
+                    h={"56px"}
+                    borderRadius={"10px"}
+                    background={"white"}
+                    border={"2px solid"}
+                    color={"origem.500"}
+                    _hover={{
+                      border: "2px solid",
+                      borderColor: "origem.500",
+                      background: "origem.500",
+                      transition: "all 0.4s",
+                      color: "white",
+                    }}
+                    rightIcon={<FiPlus />}
                   >
                     <Link to={"/projects-registration"}>Cadastrar Projeto</Link>
                   </Button>

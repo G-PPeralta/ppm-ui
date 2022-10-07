@@ -270,7 +270,7 @@ export function TabelaProjetos(props: TableProps) {
           <Text>{projeto.descricao + " " + projeto.justificativa}</Text>
         )}
       </Td>
-      <Td>
+      <Td textAlign={"center"}>
         <ModalCadastrarPriorizacao projeto={projeto.id} />
         <ModalDeletarProjeto projeto={projeto.id} />
       </Td>
@@ -303,6 +303,7 @@ export function TabelaProjetos(props: TableProps) {
             </Tr>
             <Tr background="origem.500">
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -310,6 +311,7 @@ export function TabelaProjetos(props: TableProps) {
                 ID
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -317,6 +319,7 @@ export function TabelaProjetos(props: TableProps) {
                 Projeto
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -324,6 +327,7 @@ export function TabelaProjetos(props: TableProps) {
                 CPI
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -331,6 +335,7 @@ export function TabelaProjetos(props: TableProps) {
                 SPI
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -338,6 +343,7 @@ export function TabelaProjetos(props: TableProps) {
                 Orçamento
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -345,6 +351,7 @@ export function TabelaProjetos(props: TableProps) {
                 Realizado
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -352,6 +359,7 @@ export function TabelaProjetos(props: TableProps) {
                 TCPI
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -359,6 +367,7 @@ export function TabelaProjetos(props: TableProps) {
                 Prioridade
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -366,6 +375,7 @@ export function TabelaProjetos(props: TableProps) {
                 Complexidade
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -373,6 +383,7 @@ export function TabelaProjetos(props: TableProps) {
                 Polo
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -380,6 +391,7 @@ export function TabelaProjetos(props: TableProps) {
                 Coordenador
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -387,6 +399,7 @@ export function TabelaProjetos(props: TableProps) {
                 Responsável
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -394,6 +407,7 @@ export function TabelaProjetos(props: TableProps) {
                 Data Início
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -401,6 +415,7 @@ export function TabelaProjetos(props: TableProps) {
                 Data de Término
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -408,6 +423,7 @@ export function TabelaProjetos(props: TableProps) {
                 %
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -415,6 +431,7 @@ export function TabelaProjetos(props: TableProps) {
                 Descrições e Justificativas
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -427,6 +444,7 @@ export function TabelaProjetos(props: TableProps) {
           <Tfoot>
             <Tr background="origem.500" color="white">
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -434,6 +452,7 @@ export function TabelaProjetos(props: TableProps) {
                 Total
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -441,16 +460,19 @@ export function TabelaProjetos(props: TableProps) {
                 {data ? data.length : 0} Projetos
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
               ></Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
               ></Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -458,6 +480,7 @@ export function TabelaProjetos(props: TableProps) {
                 {formatReal(totalOrcado)}
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -465,56 +488,67 @@ export function TabelaProjetos(props: TableProps) {
                 {formatReal(totalRealizado)}
               </Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
               ></Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
               ></Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
               ></Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
               ></Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
               ></Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
               ></Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
               ></Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
               ></Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
               ></Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
               ></Th>
               <Th
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
