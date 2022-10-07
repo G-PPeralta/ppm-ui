@@ -52,10 +52,10 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
   // }, []);
 
   // Pegar id do projeto
-  // console.log("id-cadastrar", projeto.projeto);
 
   useEffect(() => {
-    registerForm.setFieldValue("beneficio.opcao_id", ranking && ranking[0].id);
+    const valorRanking = ranking && ranking?.length > 0 ? ranking[0].id : 0;
+    registerForm.setFieldValue("beneficio.opcao_id", valorRanking);
   }, [ranking]);
 
   useEffect(() => {

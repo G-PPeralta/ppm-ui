@@ -6,7 +6,7 @@ import { cadastroNovaPriorizacaoSchema } from "validations/ModaisRanking";
 
 import { useToast } from "contexts/Toast";
 
-import { getProjetosRanking, getRanking } from "services/get/Projetos-Ranking";
+import { getProjetosRanking } from "services/get/Projetos-Ranking";
 import { postProject } from "services/post/Priorizacao";
 
 import { useAuth } from "./useAuth";
@@ -26,10 +26,8 @@ export function useCadastroPriorizacao(id_projeto: number = 0) {
 
   const reqGet = async () => {
     const priorizacao = await getProjetosRanking();
-    const data = await getRanking(id_projeto);
-    setRanking(data);
-
-    // console.log("dados prior", priorizacao);
+    // const data = await getRanking(id_projeto);
+    setRanking([]);
 
     const beneficiosSorted = priorizacao.data.Benefício.sort((a: any, b: any) =>
       a.nom_opcao.localeCompare(b.nom_opcao)
