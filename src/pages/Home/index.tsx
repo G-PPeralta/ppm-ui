@@ -4,7 +4,6 @@ import { Box, Flex } from "@chakra-ui/react";
 
 import Sidebar from "components/SideBar";
 
-import AreasDemandadas from "./components/AreasDemandadas";
 // import BotoesSelecionarPolo from "./components/BotoesSelecionarPolo";
 import FaseProjetos from "./components/FaseProjetos";
 import NaoPrevisto from "./components/NaoPrevisto";
@@ -64,9 +63,9 @@ export function Home() {
           <Box flex={1} m={1}>
             <FaseProjetos />
           </Box>
-          <Box flex={1} m={1}>
-            <AreasDemandadas />
-          </Box>
+          {/* <Box flex={1} m={1}>
+            <AreasDemandadasComponent />
+          </Box> */}
           <Box flex={1} m={1}>
             <PrevistoxRealizado />
           </Box>
