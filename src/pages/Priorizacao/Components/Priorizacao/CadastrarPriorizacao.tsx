@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { IoIosArrowBack } from "react-icons/io";
 
 import {
   Button,
@@ -18,6 +17,7 @@ import {
   useDisclosure,
   Input,
   Select,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -44,13 +44,18 @@ function ModalCadastrarPriorizacao() {
       <Button
         onClick={onOpen}
         color={"white"}
-        backgroundColor={"origem.500"}
+        backgroundColor={"#0047BB"}
         aria-label="Plus sign"
         variant="primary"
         _hover={{
-          background: "origem.300",
+          background: "white",
           transition: "all 0.4s",
+          color: "#0047BB",
+          border: "#0047BB solid 1px",
         }}
+        borderTopRadius={"8px"}
+        h={"56px"}
+        w={"121px"}
       >
         Cadastrar
       </Button>
@@ -59,15 +64,15 @@ function ModalCadastrarPriorizacao() {
         <ModalContent>
           <ModalHeader
             backgroundColor={"#2E69FD"}
-            borderTopRadius={7}
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Configuração
           </ModalHeader>
-          {/* <ModalCloseButton color={"white"} /> */}
+          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               // e.preventDefault();
@@ -79,26 +84,6 @@ function ModalCadastrarPriorizacao() {
                 <Flex gap={4}>
                   <Stack gap={2}>
                     <Flex direction={"column"}>
-                      <Flex>
-                        <Text>
-                          <Button
-                            aria-label=""
-                            backgroundColor={"white"}
-                            color={"black"}
-                            onClick={() =>
-                              handleCancelar(registerForm, onClose)
-                            }
-                            _hover={{
-                              background: "white",
-                              transition: "all 0.4s",
-                              color: "origem.500",
-                            }}
-                            fontSize={"20px"}
-                          >
-                            <IoIosArrowBack /> Priorização
-                          </Button>
-                        </Text>
-                      </Flex>
                       <Flex direction={"column"}>
                         <Flex
                           flexDirection={useBreakpointValue({
@@ -111,15 +96,22 @@ function ModalCadastrarPriorizacao() {
                           <FormControl>
                             <FormLabel
                               htmlFor="nom_ranking"
-                              fontSize={"12px"}
                               mb={"1px"}
                               ml={"3px"}
+                              color={"#949494"}
+                              fontWeight={"700"}
+                              fontSize={"12px"}
                             >
                               NOME DA PRIORIZAÇÃO
                             </FormLabel>
                             <Input
                               ml={"3px"}
                               w={"400px"}
+                              h={"56px"}
+                              fontSize={"14px"}
+                              color={"#949494"}
+                              fontWeight={"400"}
+                              border={"solid 1px #949494"}
                               isRequired
                               placeholder="Nome"
                               id="nom_ranking"
@@ -147,6 +139,8 @@ function ModalCadastrarPriorizacao() {
                             <FormLabel
                               htmlFor="regulatorio.opcao_id"
                               fontSize={"12px"}
+                              color={"#949494"}
+                              fontWeight={"700"}
                               mb={"1px"}
                               w={"550px"}
                               mt={"5px"}
@@ -157,12 +151,14 @@ function ModalCadastrarPriorizacao() {
                               id="pit"
                               name="pit"
                               placeholder="Selecione"
-                              // value={activitiesForm.values.pit}
+                              w={"480px"}
+                              h={"56px"}
+                              fontSize={"14px"}
+                              color={"#2D2926"}
+                              fontWeight={"400"}
+                              border={"solid 1px #949494"}
+                              // value={activitiesForm.values.acesso}
                               // onChange={activitiesForm.handleChange}
-                              w={useBreakpointValue({
-                                base: "100%",
-                                md: "95%",
-                              })}
                             >
                               {perfis.map((perfil: any, index: any) => (
                                 <option key={index}>{perfil}</option>
@@ -188,12 +184,16 @@ function ModalCadastrarPriorizacao() {
                     transition: "all 0.4s",
                     color: "white",
                   }}
+                  w={"158px"}
+                  h={"56px"}
                 >
                   Cancelar
                 </Button>
                 <Button
                   disabled={!registerForm.isValid}
-                  background="origem.300"
+                  w={"208px"}
+                  h={"56px"}
+                  background="#0047BB"
                   variant="primary"
                   color="white"
                   onClick={() => handleCadastrar(registerForm, onClose)}

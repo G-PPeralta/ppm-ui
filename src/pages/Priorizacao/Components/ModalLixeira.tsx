@@ -1,5 +1,4 @@
-import { FaGreaterThan } from "react-icons/fa";
-import { IoIosArrowBack } from "react-icons/io";
+import { MdArrowForwardIos } from "react-icons/md";
 
 import {
   Button,
@@ -12,10 +11,10 @@ import {
   ModalOverlay,
   Stack,
   Text,
-  // Textarea,
   useDisclosure,
   Icon,
   Box,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 
 import { handleCancelar } from "utils/handleCadastro";
@@ -33,31 +32,33 @@ function ModalLixeira() {
         background="transparent"
         color="#0047BB"
         float={"right"}
-        fontSize="17px"
+        fontSize="18px"
       >
         Lixeira
         <Icon
-          as={FaGreaterThan}
-          fontSize="13px"
-          fontWeight={"none"}
+          as={MdArrowForwardIos}
+          fontSize="20px"
+          fontWeight={"700"}
           ml={1}
           color="#0047BB"
         />
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
+            h={"48px"}
             backgroundColor={"#2E69FD"}
             borderTopRadius={7}
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Lixeira
           </ModalHeader>
-          {/* <ModalCloseButton color={"white"} /> */}
+          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               // e.preventDefault();
@@ -68,47 +69,28 @@ function ModalLixeira() {
               <FormControl>
                 <Flex gap={4}>
                   <Stack gap={2}>
-                    <Flex direction={"column"}>
-                      <Flex>
-                        <Text>
-                          <Button
-                            aria-label=""
-                            backgroundColor={"white"}
-                            color={"black"}
-                            onClick={() =>
-                              handleCancelar(registerForm, onClose)
-                            }
-                            _hover={{
-                              background: "white",
-                              transition: "all 0.4s",
-                              color: "origem.500",
-                            }}
-                            fontSize={"15px"}
-                            mb={"8px"}
-                            mr={"-800px"}
-                          >
-                            <IoIosArrowBack />
-                          </Button>
-                        </Text>
-                      </Flex>
-                      <Flex
-                        mb={"10px"}
-                        mr={"13px"}
-                        fontSize={"15px"}
-                        fontWeight={"700"}
-                      >
-                        <Text>Itens Excluídos</Text>
-                      </Flex>
-
+                    <Flex direction={"column"} gap={10}>
                       <Box
                         border={"solid #9FA2B4 0.5px"}
-                        w="530px"
-                        borderRadius={"10px"}
+                        w="850px"
+                        h={"87px"}
+                        borderRadius={"8px"}
                         p={4}
+                        fontSize={"12px"}
+                        fontWeight={"700"}
+                        color={"#9FA2B4"}
+                        gap={5}
                       >
                         <Flex flex={"flex-start"} justify={"space-between"}>
                           <Flex flex={"flex-end"}>
-                            <Text color={"black"}>Itens excluídos aqui</Text>
+                            <Text
+                              fontSize={"12px"}
+                              fontWeight={"700"}
+                              color={"#D6D4D4"}
+                              fontFamily={"Mulish"}
+                            >
+                              ITENS EXCLUÍDOS AQUI
+                            </Text>
                           </Flex>
                           <Flex direction={"row"} flex={"flex-end"}>
                             <Button
@@ -122,8 +104,12 @@ function ModalLixeira() {
                                 color: "white",
                                 transition: "all 0.4s",
                               }}
+                              h={"56px"}
+                              w={"103px"}
                             >
-                              <Text>Restaurar</Text>
+                              <Text fontSize={"18px"} fontWeight={"700"}>
+                                Restaurar
+                              </Text>
                             </Button>
                           </Flex>
                         </Flex>
@@ -131,14 +117,26 @@ function ModalLixeira() {
 
                       <Box
                         border={"solid #9FA2B4 0.5px"}
-                        w="530px"
-                        borderRadius={"10px"}
+                        w="850px"
+                        h={"87px"}
+                        borderRadius={"8px"}
                         p={4}
-                        mt={"15px"}
+                        fontSize={"12px"}
+                        fontWeight={"700"}
+                        color={"#9FA2B4"}
+                        flexDir={"column"}
+                        mt={"-25px"}
                       >
                         <Flex flex={"flex-start"} justify={"space-between"}>
                           <Flex flex={"flex-end"}>
-                            <Text color={"black"}>Itens excluídos aqui</Text>
+                            <Text
+                              fontSize={"12px"}
+                              fontWeight={"700"}
+                              color={"#D6D4D4"}
+                              fontFamily={"Mulish"}
+                            >
+                              ITENS EXCLUÍDOS AQUI
+                            </Text>
                           </Flex>
                           <Flex direction={"row"} flex={"flex-end"}>
                             <Button
@@ -152,10 +150,30 @@ function ModalLixeira() {
                                 color: "white",
                                 transition: "all 0.4s",
                               }}
+                              h={"56px"}
+                              w={"103px"}
                             >
-                              <Text>Restaurar</Text>
+                              <Text fontSize={"18px"} fontWeight={"700"}>
+                                Restaurar
+                              </Text>
                             </Button>
                           </Flex>
+                        </Flex>
+                        <Flex justifyContent={"center"}>
+                          <Button
+                            variant="ghost"
+                            color="red"
+                            onClick={() =>
+                              handleCancelar(registerForm, onClose)
+                            }
+                            _hover={{
+                              background: "red.500",
+                              transition: "all 0.4s",
+                              color: "white",
+                            }}
+                          >
+                            Cancelar
+                          </Button>
                         </Flex>
                       </Box>
                     </Flex>
