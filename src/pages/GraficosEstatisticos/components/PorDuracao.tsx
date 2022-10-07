@@ -211,7 +211,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                           mt={"-6px"}
                           id="de"
                           name="de"
-                          width={"120px"}
+                          width={"146px"}
                           height={"56px"}
                           borderRadius={"8px"}
                           type={"date"}
@@ -355,7 +355,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                           mt={"-6px"}
                           id="outro"
                           name="outro"
-                          width={"120px"}
+                          width={"146px"}
                           height={"56px"}
                           color={"#2D2926"}
                           fontSize={"14px"}

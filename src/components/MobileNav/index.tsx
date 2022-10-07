@@ -76,6 +76,7 @@ export function MobileNav({
     estatisticas: "Estatisticas",
     reports: "Relatórios",
     graficos: "Gráficos",
+    priorizacao: "Priorização",
   };
 
   // const goNavigate = async (index: number) => {

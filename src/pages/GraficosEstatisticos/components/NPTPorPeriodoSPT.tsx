@@ -271,7 +271,7 @@ export function GraficoNPTPorPeriodoSPT({ Prop }: any) {
                           mt={"-6px"}
                           id="de"
                           name="de"
-                          width={"120px"}
+                          width={"146px"}
                           height={"56px"}
                           borderRadius={"8px"}
                           type={"date"}
@@ -298,7 +298,7 @@ export function GraficoNPTPorPeriodoSPT({ Prop }: any) {
                           mt={"-6px"}
                           id="ate"
                           name="ate"
-                          width={"120px"}
+                          width={"146px"}
                           height={"56px"}
                           borderRadius={"8px"}
                           type={"date"}

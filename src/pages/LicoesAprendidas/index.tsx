@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { AiFillPrinter } from "react-icons/ai";
 import {
   FiChevronLeft,
   FiChevronRight,
   FiChevronsLeft,
   FiChevronsRight,
-  FiPrinter,
   FiSearch,
 } from "react-icons/fi";
 import { MdArrowForwardIos, MdModeEdit } from "react-icons/md";
@@ -260,7 +260,7 @@ export function LicoesAprendidasProjetos() {
                     fontWeight={"700"}
                     variant="ghost"
                     colorScheme="messenger"
-                    rightIcon={<FiPrinter />}
+                    rightIcon={<AiFillPrinter />}
                     onClick={print}
                   >
                     Exportar
