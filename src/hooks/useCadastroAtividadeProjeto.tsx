@@ -6,7 +6,7 @@ import {
   AreaAtuacao,
   Area,
 } from "interfaces/CadastrosModaisInfograficos";
-import { cadastroAtividadeSchema } from "validations/ModaisCadastrosInfografico";
+import { cadastroAtividadeProjetos } from "validations/Projetos";
 
 import { useToast } from "contexts/Toast";
 
@@ -15,11 +15,12 @@ import {
   getAreaAtuacaoList,
   getResponsavelList,
 } from "services/get/Infograficos";
-import { postCadastroAtividadeProjetos } from "services/post/CadastroModaisInfograficos";
+import { getAtividadesRelacaoByProjetoId } from "services/get/Projetos";
+import { postCadastroAtividadeProjetos } from "services/post/Projetos";
 
 import { useAuth } from "./useAuth";
 
-export function useCadastroAtividadeProjeto() {
+export function useCadastroAtividadeProjeto(idProjeto?: number) {
   const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -27,13 +28,13 @@ export function useCadastroAtividadeProjeto() {
   const [listaArea, setListaArea] = useState<Area[]>([]);
   const [listaAreaAtuacao, setListaAreaAtuacao] = useState<AreaAtuacao[]>([]);
   const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
-  // const [listaAtividades, setListaAtividades] = useState<AtividadeLista[]>([]);
-  // const [listaTarefa, setListaTarefa] = useState<Tarefa[]>([]);
+  const [listaAtividadesRelacao, setListaAtividadesRelacao] = useState<[]>([]);
 
   const reqGet = async () => {
     const areas = await getArea();
     const areaAtuacao = await getAreaAtuacaoList();
     const responsaveis = await getResponsavelList();
+    const atividadesRelacao = await getAtividadesRelacaoByProjetoId(idProjeto);
 
     const arrayAreas = areas.data.map(({ id, nom_area }: any) => ({
       id,
@@ -51,9 +52,14 @@ export function useCadastroAtividadeProjeto() {
       a.nome.localeCompare(b.nome)
     );
 
+    const atividadesRelacaoSorted = atividadesRelacao.data.sort(
+      (a: any, b: any) => a.valor.localeCompare(b.valor)
+    );
+
     setListaArea(areasSorted);
     setListaAreaAtuacao(areasAtuacaoSorted);
     setListaResponsaveis(responsaveisSorted);
+    setListaAtividadesRelacao(atividadesRelacaoSorted);
   };
 
   const initialValues = {
@@ -63,6 +69,8 @@ export function useCadastroAtividadeProjeto() {
     nom_atividade: "",
     responsavel_id: 0,
     relacao_id: 0,
+    dat_inicio_plan: "",
+    duracao_plan: 0,
     area_atuacao: "",
     nao_iniciar_antes_de: {
       data: "",
@@ -83,7 +91,7 @@ export function useCadastroAtividadeProjeto() {
 
   const registerForm: any = useFormik({
     initialValues,
-    validationSchema: cadastroAtividadeSchema,
+    validationSchema: cadastroAtividadeProjetos,
     onSubmit: async (values) => {
       const newValues = {
         nom_usu_create: user?.nome,
@@ -129,5 +137,6 @@ export function useCadastroAtividadeProjeto() {
     listaArea,
     listaAreaAtuacao,
     listaResponsaveis,
+    listaAtividadesRelacao,
   };
 }

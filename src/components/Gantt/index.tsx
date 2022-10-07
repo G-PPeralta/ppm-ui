@@ -15,7 +15,7 @@ import ModalCadastroAtividades from "../../pages/DetalhamentoProjeto/components/
 
 type ganttOptionsProps = {
   toolbarOptions?: string[];
-  idProjeto?: string;
+  idProjeto?: number;
 };
 export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
   // const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);

@@ -8,10 +8,12 @@ import { FormikProps } from "formik";
 
 import SelectFiltragem from "components/SelectFiltragem";
 
+// import SelectFiltragem from "components/SelectFiltragem";
+
 interface Props {
   registerForm: FormikProps<any>;
   index: number;
-  atividades: any;
+  atividades?: any;
 }
 
 function AtividadesDraggable({ index, registerForm, atividades }: Props) {
@@ -30,20 +32,20 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
   };
 
   const optionsAtividades = atividades.map((atividade: any) => ({
-    value: atividade.id_atividade,
-    label: atividade.atividade,
+    value: atividade.value,
+    label: atividade.label,
   }));
 
-  const getValue = (options: any, i: number, chave: string) => {
-    const index = options
-      .map(({ value }: any) => value)
-      .indexOf(registerForm?.values?.precedentes?.[i][chave]);
+  // const getValue = (options: any, i: number, chave: string) => {
+  //   const index = options
+  //     .map(({ value }: any) => value)
+  //     .indexOf(registerForm?.values?.precedentes?.[i][chave]);
 
-    return {
-      value: options?.[index]?.value,
-      label: options?.[index]?.label,
-    };
-  };
+  //   return {
+  //     value: options?.[index]?.value,
+  //     label: options?.[index]?.label,
+  //   };
+  // };
 
   useEffect(() => {
     const now = Date.now();
@@ -94,7 +96,7 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
                 flex={1}
               >
                 <Flex direction={"column"} flex={3}>
-                  <SelectFiltragem
+                  {/* <SelectFiltragem
                     registerForm={registerForm}
                     nomeSelect={"ATIVIDADE"}
                     propName={`precedentes[${index}].atividadePrecedenteId`}
@@ -104,6 +106,13 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
                       index,
                       "atividadePrecedenteId"
                     )}
+                  /> */}
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    nomeSelect={"ATIVIDADE"}
+                    propName={`precedentes[${index}].atividadePrecedenteId`}
+                    options={optionsAtividades}
+                    required={true}
                   />
                 </Flex>
                 <Flex flex={1}>

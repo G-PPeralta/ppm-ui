@@ -63,16 +63,16 @@ export default function AtividadesDragAndDrop({
 
   const add = () => {
     // Cria um novo item na lista de atividades com os valores padrões
-    if (registerForm.values.precedentes.length < atividades.length) {
-      registerForm.setFieldValue("precedentes", [
-        ...registerForm.values.precedentes,
-        {
-          atividadePrecedenteId: 0,
-          dias: 0,
-        },
-      ]);
-      setRender(!render);
-    }
+    // if (registerForm.values.precedentes.length < atividades.length) {
+    registerForm.setFieldValue("precedentes", [
+      ...registerForm.values.precedentes,
+      {
+        atividadePrecedenteId: 0,
+        dias: 0,
+      },
+    ]);
+    setRender(!render);
+    // }
   };
 
   useEffect(() => {
@@ -116,7 +116,7 @@ export default function AtividadesDragAndDrop({
       <BotaoAdicionar
         add={add}
         registerForm={registerForm}
-        atividades={atividades}
+        // atividades={atividades}
       />
     </>
   );

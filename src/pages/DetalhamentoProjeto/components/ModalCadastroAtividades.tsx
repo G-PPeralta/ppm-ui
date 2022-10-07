@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import {
   Flex,
   Text,
@@ -11,9 +13,11 @@ import {
   Button,
   useBreakpointValue,
   Input,
+  NumberInput,
+  NumberInputField,
 } from "@chakra-ui/react";
 
-import Restricoes from "pages/Infographics/Components/Restricoes";
+// import Restricoes from "pages/Infographics/Components/Restricoes";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
@@ -24,17 +28,32 @@ import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividadeProjeto } from "hooks/useCadastroAtividadeProjeto";
 
-// import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
+// import PopOverRelacao from "./PopOverRelacao";
+
+import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
+import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
 
 interface Responsavel {
   id: number;
   nome: string;
 }
 
-function ModalCadastroAtividades({ setRefresh, refresh, atividades }: any) {
+interface Props {
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: boolean;
+  atividades?: any;
+  idProjeto?: number;
+}
+
+function ModalCadastroAtividades({
+  setRefresh,
+  refresh,
+  atividades,
+  idProjeto,
+}: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaResponsaveis, listaAreaAtuacao } =
-    useCadastroAtividadeProjeto();
+    useCadastroAtividadeProjeto(idProjeto);
 
   const responsaveisOptions = listaResponsaveis.map(
     (responsavel: Responsavel) => ({
@@ -60,7 +79,14 @@ function ModalCadastroAtividades({ setRefresh, refresh, atividades }: any) {
   //   }
   // }, [registerForm.values]);
 
-  // console.log("registerForm", registerForm.values);
+  useEffect(() => {
+    if (idProjeto) {
+      registerForm.setFieldValue("id_projeto", idProjeto);
+    }
+  }, []);
+
+  console.log("registerForm", registerForm.values);
+  console.log("idProjeto", idProjeto);
 
   return (
     <>
@@ -171,15 +197,13 @@ function ModalCadastroAtividades({ setRefresh, refresh, atividades }: any) {
 
                 <Flex flex={1} direction={"column"}>
                   <Text fontWeight={"bold"}>Relação</Text>
-                  <Flex gap={5} flex={1}>
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"RELAÇÃO"}
-                      propName={"relacao_id"}
-                      options={responsaveisOptions}
-                      required={true}
-                    />
-                  </Flex>
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    nomeSelect={"RELAÇÃO"}
+                    propName={"relacao_id"}
+                    options={responsaveisOptions}
+                    required={false}
+                  />
                 </Flex>
 
                 <Flex flex={1} direction={"column"}>
@@ -203,7 +227,43 @@ function ModalCadastroAtividades({ setRefresh, refresh, atividades }: any) {
                   </Flex>
                 </Flex>
 
-                <Flex
+                <Flex flex={1} direction={"column"}>
+                  <Text fontWeight={"bold"}>Datas</Text>
+                  <Flex gap={5}>
+                    <Flex>
+                      <DateTimePickerDataInicio registerForm={registerForm} />
+                    </Flex>
+                    <Flex direction={"column"} w={"20%"}>
+                      <Flex gap={1}>
+                        <RequiredField />
+                        <Text
+                          fontWeight={"bold"}
+                          fontSize={"12px"}
+                          color={"#949494"}
+                        >
+                          DURAÇÃO EM DIAS
+                        </Text>
+                      </Flex>
+                      <NumberInput
+                        max={99999}
+                        min={0}
+                        id={"duracao_plan"}
+                        name={"duracao_plan"}
+                        value={registerForm.values.duracao_plan}
+                        onChange={(value) => {
+                          registerForm.setFieldValue(
+                            "duracao_plan",
+                            Number(value)
+                          );
+                        }}
+                      >
+                        <NumberInputField bg={"#fff"} h={"56px"} />
+                      </NumberInput>
+                    </Flex>
+                  </Flex>
+                </Flex>
+
+                {/* <Flex
                   flexDirection={useBreakpointValue({
                     base: "column",
                     md: "column",
@@ -212,11 +272,12 @@ function ModalCadastroAtividades({ setRefresh, refresh, atividades }: any) {
                 >
                   <Text fontWeight={"bold"}>Restrições</Text>
                   <Restricoes registerForm={registerForm} />
-                </Flex>
-                {/* <AtividadesDragAndDrop
+                </Flex> */}
+
+                <AtividadesDragAndDrop
                   registerForm={registerForm}
-                  atividades={atividades}
-                /> */}
+                  atividades={responsaveisOptions}
+                />
               </Flex>
             </ModalBody>
 
