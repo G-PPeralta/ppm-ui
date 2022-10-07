@@ -2,7 +2,6 @@ import {
   Button,
   Flex,
   FormControl,
-  FormLabel,
   Modal,
   ModalBody,
   ModalContent,
@@ -10,6 +9,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Stack,
+  Text,
   Textarea,
   useBreakpointValue,
   useDisclosure,
@@ -36,16 +36,19 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
   return (
     <>
       <Button
-        variant="outline"
+        h={"56px"}
+        borderRadius={"10px"}
+        background={"white"}
         border={"2px solid"}
-        borderColor={"origem.500"}
-        textColor={"origem.500"}
+        color={"origem.500"}
         _hover={{
-          borderColor: "origem.600",
-          backgroundColor: "origem.500",
-          textColor: "white",
+          border: "2px solid",
+          borderColor: "origem.500",
+          background: "origem.500",
           transition: "all 0.4s",
+          color: "white",
         }}
+        textColor={"origem.500"}
         onClick={onOpen}
       >
         Nova Campanha
@@ -73,6 +76,7 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
               <FormControl>
                 <Flex direction={"column"} gap={4}>
                   <Stack>
+                    <Text fontWeight={"bold"}>Nome</Text>
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: "column",
@@ -81,17 +85,12 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                       gap={5}
                     >
                       <FormControl>
-                        {/* <SelectFiltragemSondas
-                          form={registerForm}
-                          nomeChave={"nom_campanha"}
-                          nomeLabel={"NOME"}
-                        /> */}
                         <SelectFiltragem
                           registerForm={registerForm}
                           nomeSelect={"SONDA"}
                           propName={"id_projeto"}
                           options={optionsServicoSonda}
-                          // idCampanha={idCampanha}
+                          required={true}
                         />
                       </FormControl>
                     </Flex>
@@ -101,14 +100,21 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: "column",
-                        md: "row",
+                        md: "column",
                       })}
-                      gap={5}
+                      gap={2}
                     >
-                      <FormControl>
-                        <FormLabel htmlFor="dsc_comentario">
-                          COMENTÁRIOS
-                        </FormLabel>
+                      <Text fontWeight={"bold"}>Comentários</Text>
+                      <Flex direction={"column"}>
+                        <Flex gap={1}>
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            COMENTÁRIOS
+                          </Text>
+                        </Flex>
                         <Textarea
                           isRequired
                           placeholder="Adicione comentários sobre a campanha"
@@ -124,7 +130,7 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                               {registerForm.errors.dsc_comentario}
                             </TextError>
                           )}
-                      </FormControl>
+                      </Flex>
                     </Flex>
                   </Stack>
                 </Flex>

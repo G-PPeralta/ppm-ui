@@ -12,7 +12,7 @@ function DateTimePickerDataInicio({ registerForm, data }: any) {
   useEffect(() => {
     if (data) {
       const newDate = new Date(data);
-      newDate.setDate(newDate.getDate() + 15);
+      // newDate.setDate(newDate.getDate() + 15);
       setDataInicio(newDate);
       // setDataMin(newDate);
     } else {
@@ -25,7 +25,7 @@ function DateTimePickerDataInicio({ registerForm, data }: any) {
     if (date) {
       date.setHours(9, 0, 0, 0);
       setDataInicio(date);
-      registerForm.setFieldValue("dat_ini_prev", date);
+      registerForm.setFieldValue("dat_inicio_plan", date);
     }
   };
 

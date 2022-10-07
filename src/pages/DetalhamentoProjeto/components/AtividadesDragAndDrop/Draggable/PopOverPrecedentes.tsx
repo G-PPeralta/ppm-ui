@@ -40,8 +40,6 @@ function PopOverPrecedentes({ registerForm, index }: Props) {
       <Popover isLazy>
         <PopoverTrigger>
           <Button
-            h={"56px"}
-            borderRadius={"10px"}
             backgroundColor={"white"}
             fontWeight={"400"}
             _hover={{

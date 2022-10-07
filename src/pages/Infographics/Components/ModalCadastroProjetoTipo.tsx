@@ -9,11 +9,11 @@ import {
   useDisclosure,
   Button,
   FormControl,
-  FormLabel,
   Stack,
   useBreakpointValue,
   Input,
   Textarea,
+  Text,
 } from "@chakra-ui/react";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
@@ -35,16 +35,19 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
   return (
     <>
       <Button
-        variant="outline"
+        h={"56px"}
+        borderRadius={"10px"}
+        background={"white"}
         border={"2px solid"}
-        borderColor={"origem.500"}
-        textColor={"origem.500"}
+        color={"origem.500"}
         _hover={{
-          borderColor: "origem.600",
-          backgroundColor: "origem.500",
-          textColor: "white",
+          border: "2px solid",
+          borderColor: "origem.500",
+          background: "origem.500",
           transition: "all 0.4s",
+          color: "white",
         }}
+        textColor={"origem.500"}
         onClick={onOpen}
       >
         Projeto
@@ -79,12 +82,26 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                       })}
                       gap={5}
                     >
-                      <Flex w={"50%"} direction={"column"}>
+                      <Flex
+                        w={useBreakpointValue({
+                          base: "100%",
+                          md: "50%",
+                        })}
+                        direction={"column"}
+                      >
+                        <Text fontWeight={"bold"}>Nome</Text>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="nom_projeto_tipo">NOME</FormLabel>
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            NOME
+                          </Text>
                         </Flex>
                         <Input
+                          h={"56px"}
                           isRequired
                           placeholder="Nome do Tipo de Projeto"
                           id="nom_projeto_tipo"
@@ -120,11 +137,15 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                       gap={5}
                     >
                       <FormControl>
+                        <Text fontWeight={"bold"}>Comentários</Text>
                         <Flex gap={1}>
-                          <RequiredField />
-                          <FormLabel htmlFor="comentarios">
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
                             COMENTÁRIOS
-                          </FormLabel>
+                          </Text>
                         </Flex>
                         <Textarea
                           isRequired

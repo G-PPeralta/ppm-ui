@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsCheckCircleFill, BsFillXCircleFill } from "react-icons/bs";
 import {
   FiChevronLeft,
   FiChevronRight,
   FiChevronsLeft,
   FiChevronsRight,
+  FiPrinter,
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
@@ -18,10 +19,11 @@ import {
   Thead,
   Tr,
   Text,
-  Tooltip,
   Flex,
   IconButton,
   Select,
+  Tooltip,
+  Button,
 } from "@chakra-ui/react";
 import { Projetos } from "interfaces/Projetos";
 
@@ -40,11 +42,9 @@ interface TableProps {
 export function TabelaProjetos(props: TableProps) {
   const { data } = props;
   const [pagAtual, setPagAtual] = useState(1);
-  // const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
-
-  // console.log("dados tabela-projeto", data);
+  const [perPage, setPerPage] = useState<number>(5);
 
   const totalOrcado = data.reduce(
     (accumulator, object) => accumulator + +object.vlr_orcado,
@@ -55,17 +55,22 @@ export function TabelaProjetos(props: TableProps) {
     (accumulator, object) => accumulator + +object.vlr_cr,
     0
   );
-
-  const rowsPerPage = 5;
-
   const totalRegs = data.length;
-  const maxPage = Math.ceil(totalRegs / rowsPerPage);
+  const maxPage = Math.ceil(totalRegs / perPage);
 
   const paginate = (pag: number) => {
     setPagAtual(pag);
 
-    const x = (pag - 1) * rowsPerPage;
-    const y = (pag - 1) * rowsPerPage + rowsPerPage;
+    const x = (pag - 1) * perPage;
+    const y = (pag - 1) * perPage + perPage;
+    setFrom(x);
+    setTo(y);
+  };
+
+  const changePerPage = (value: number) => {
+    setPerPage(value);
+    const x = perPage;
+    const y = perPage + perPage;
     setFrom(x);
     setTo(y);
   };
@@ -88,6 +93,10 @@ export function TabelaProjetos(props: TableProps) {
     paginate(_pag);
   };
 
+  useEffect(() => {
+    paginate(pagAtual);
+  }, [from, to]);
+
   const tableData = data.slice(from, to).map((projeto, key) => (
     <Tr key={key}>
       <Td
@@ -97,7 +106,7 @@ export function TabelaProjetos(props: TableProps) {
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
-        {projeto.id_projeto}
+        {projeto.id}
       </Td>
       <Td
         style={{
@@ -105,16 +114,16 @@ export function TabelaProjetos(props: TableProps) {
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
-        <Link to={`/detalhamento/${projeto.id_projeto}`}>
-          <Text color={"#0047BB"}>
-            {projeto.nome_projeto.length > 28 ? (
-              <Tooltip label={projeto.nome_projeto} aria-label="">
+        <Link to={`/detalhamento/${projeto.id}`}>
+          {projeto.nome_projeto.length > 25 ? (
+            <Tooltip label={projeto.nome_projeto} aria-label="Nome do projeto">
+              <Text color={"#0047BB"}>
                 {projeto.nome_projeto.substring(0, 25) + "..."}
-              </Tooltip>
-            ) : (
-              projeto.nome_projeto
-            )}
-          </Text>
+              </Text>
+            </Tooltip>
+          ) : (
+            <Text color={"#0047BB"}>{projeto.nome_projeto}</Text>
+          )}
         </Link>
       </Td>
       <Td
@@ -123,15 +132,20 @@ export function TabelaProjetos(props: TableProps) {
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
-        {projeto.vlr_cpi >= 1 ? (
+        {projeto.vlr_cpi_corrigido >= 1 ? (
           <Flex alignItems={"center"}>
             <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
-            <Text marginLeft="8px"> {` CPI = ${projeto.vlr_cpi}`}</Text>
+            <Text marginLeft="8px">
+              {" "}
+              {` CPI = ${projeto.vlr_cpi_corrigido}`}
+            </Text>
           </Flex>
         ) : (
           <Flex alignItems={"center"}>
             <BsFillXCircleFill color="red" fontSize={25} />{" "}
-            <Text marginLeft="8px">{` CPI = ${projeto.vlr_cpi}`}</Text>
+            <Text marginLeft="8px">{` CPI = ${
+              projeto.vlr_cpi_corrigido ?? 0
+            }`}</Text>
           </Flex>
         )}
       </Td>
@@ -141,15 +155,17 @@ export function TabelaProjetos(props: TableProps) {
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
-        {projeto.vlr_spi >= 1 ? (
+        {projeto.vlr_spi_corrigido >= 1 ? (
           <Flex alignItems={"center"}>
             <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
-            <Text marginLeft="8px">{` SPI = ${projeto.vlr_spi}`}</Text>
+            <Text marginLeft="8px">{` SPI = ${projeto.vlr_spi_corrigido}`}</Text>
           </Flex>
         ) : (
           <Flex alignItems={"center"}>
             <BsFillXCircleFill color="red" fontSize={25} />{" "}
-            <Text marginLeft="8px">{` SPI = ${projeto.vlr_spi}`}</Text>
+            <Text marginLeft="8px">{` SPI = ${
+              projeto.vlr_spi_corrigido ?? 0
+            }`}</Text>
           </Flex>
         )}
       </Td>
@@ -159,7 +175,7 @@ export function TabelaProjetos(props: TableProps) {
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
-        {formatReal(projeto.vlr_orcado)}
+        {formatReal(+projeto.vlr_orcado)}
       </Td>
       <Td
         style={{
@@ -167,24 +183,18 @@ export function TabelaProjetos(props: TableProps) {
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
-        {formatReal(projeto.vlr_cr)}
+        {formatReal(+projeto.vlr_cr)}
       </Td>
       <Td
         style={{
           borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
-      >{`${(100 - (projeto.vlr_cr / projeto.vlr_orcado) * 100).toFixed(
-        2
-      )} %`}</Td>
-      <Td
-        style={{
-          borderBottom: "0.5px solid #A7A7A7",
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {projeto.prioridade}
-      </Td>
+      >{`${
+        projeto.vlr_orcado && projeto.vlr_cr
+          ? (100 - (+projeto.vlr_cr / +projeto.vlr_orcado) * 100).toFixed(2)
+          : 0
+      } %`}</Td>
       <Td
         style={{
           borderBottom: "0.5px solid #A7A7A7",
@@ -192,6 +202,14 @@ export function TabelaProjetos(props: TableProps) {
         }}
       >
         {projeto.complexidade}
+      </Td>
+      <Td
+        style={{
+          borderBottom: "0.5px solid #A7A7A7",
+          borderRight: "0.5px solid #A7A7A7",
+        }}
+      >
+        {projeto.prioridade}
       </Td>
       <Td
         style={{
@@ -238,19 +256,35 @@ export function TabelaProjetos(props: TableProps) {
           borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
-      >{`${((projeto.vlr_cr / projeto.vlr_orcado) * 100).toFixed(2)} %`}</Td>
+      >{`${
+        projeto.vlr_cr && projeto.vlr_orcado
+          ? ((projeto.vlr_cr / projeto.vlr_orcado) * 100).toFixed(2)
+          : 0
+      } %`}</Td>
       <Td
         style={{
           borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
-        <Tooltip
-          label={`${projeto.descricao + " " + projeto.justificativa}`}
-          aria-label="A tooltip"
-        >
-          {projeto.descricao.substring(0, 25)}
-        </Tooltip>
+        {/* <ExpansibleText
+          text={projeto.descricao + " " + projeto.justificativa}
+        /> */}
+        {(projeto.descricao + " " + projeto.justificativa).length > 25 ? (
+          <Tooltip
+            label={projeto.nome_projeto + " " + projeto.justificativa}
+            aria-label="Nome do projeto"
+          >
+            <Text>
+              {(projeto.descricao + " " + projeto.justificativa).substring(
+                0,
+                50
+              ) + "..."}
+            </Text>
+          </Tooltip>
+        ) : (
+          <Text>{projeto.descricao + " " + projeto.justificativa}</Text>
+        )}
       </Td>
       <Td
         style={{
@@ -258,8 +292,8 @@ export function TabelaProjetos(props: TableProps) {
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
-        <ModalCadastrarPriorizacao projeto={projeto.id_projeto} />
-        <ModalDeletarProjeto projeto={projeto.id_projeto} />
+        <ModalCadastrarPriorizacao projeto={projeto.id} />
+        <ModalDeletarProjeto projeto={projeto.id} />
       </Td>
     </Tr>
   ));
@@ -269,12 +303,33 @@ export function TabelaProjetos(props: TableProps) {
       <TableContainer mt={4} mb={3} ml={1}>
         <Table
           variant="unstyled"
+          size="sm"
           style={{
             borderBottom: "0.5px solid #A7A7A7",
             border: "0.5px solid #A7A7A7",
           }}
         >
           <Thead>
+            <Tr
+              backgroundColor={"#0239c3"}
+              color="white"
+              style={{
+                borderBottom: "0.5px solid #A7A7A7",
+              }}
+            >
+              <Th colSpan={15} borderTopLeftRadius="10px">
+                Projetos
+              </Th>
+              <Th borderTopRightRadius={"10px"} colSpan={2}>
+                <Button
+                  backgroundColor="#0239c3"
+                  rightIcon={<FiPrinter />}
+                  variant="solid"
+                >
+                  Imprimir
+                </Button>
+              </Th>
+            </Tr>
             <Tr
               background="origem.500"
               color="white"
@@ -411,14 +466,7 @@ export function TabelaProjetos(props: TableProps) {
               >
                 Descrições e Justificativas
               </Th>
-              <Th
-                style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
-                }}
-              >
-                Ações
-              </Th>
+              <Th>Ações</Th>
             </Tr>
           </Thead>
           <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
@@ -538,15 +586,23 @@ export function TabelaProjetos(props: TableProps) {
           </Tfoot>
         </Table>
       </TableContainer>
-      <Flex justifyContent={"center"}>
+      <Flex justifyContent="end">
         <Flex alignItems={"center"} justifyContent={"space-between"}>
           <Text>Per page</Text>
-          <Select width={100} marginLeft="10px" marginRight="15px">
+          <Select
+            width={100}
+            marginLeft="10px"
+            marginRight="15px"
+            onChange={(e) => changePerPage(+e.target.value)}
+          >
+            <option value="5">5</option>
             <option value="10">10</option>
             <option value="15">15</option>
           </Select>
 
-          <Text>1 - 1 of {pagAtual}</Text>
+          <Text>
+            {pagAtual} - {perPage} of {data.length}{" "}
+          </Text>
 
           <IconButton
             bgColor="#FFFF"

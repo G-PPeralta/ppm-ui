@@ -15,17 +15,19 @@ import {
   FormControl,
   Stack,
   Textarea,
+  Alert,
+  AlertIcon,
+  AlertTitle,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import {
   ListaCampo,
-  // ListaPoco,
   ProjetoTipo,
 } from "interfaces/CadastrosModaisInfograficos";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
-import { RequiredField } from "components/RequiredField/RequiredField";
+// import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
@@ -33,7 +35,6 @@ import {
   getAtividadasByProjetosTipoId,
   getProjetosTipo,
   getServicoDataIntervencaoId,
-  getServicoPocoId,
 } from "services/get/CadastroModaisInfograficos";
 
 import SelectFiltragem from "../../../components/SelectFiltragem";
@@ -45,29 +46,26 @@ function ModalCadastroIntervencao({
   data,
   refresh,
   setRefresh,
+  listaServicosPocos,
 }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     registerForm,
     loading,
-    // listaPocos,
     listaCampos,
     listaSondaCampanha,
     listaAtividadesPrecedentes,
-    // listaServicoSonda,
   } = useCadastroIntervencao();
 
+  // console.log("idCampanha", idCampanha);
+  // console.log("registerForm", registerForm.values);
+
+  // const [erroDataIntervencao, setErroDataIntervencao] = useState(false);
   const [listaProjetos, setListaProjetos] = useState<any>([]);
-  const [listaServicoPocos, setListaServicoPocos] = useState<any>([]);
 
   const innerWidth = window.innerWidth;
 
-  // const optionsPocos = listaPocos.map((poco: ListaPoco) => ({
-  //   value: poco.id,
-  //   label: poco.poco,
-  // }));
-
-  const optionsPocos = listaServicoPocos.map((poco: any) => ({
+  const optionsPocos = listaServicosPocos.map((poco: any) => ({
     value: poco.id,
     label: poco.nom_poco,
   }));
@@ -86,11 +84,6 @@ function ModalCadastroIntervencao({
     value: sondaCampanha.id,
     label: sondaCampanha.nom_campanha,
   }));
-
-  // const optionsServicoSonda = listaServicoSonda.map((sonda: any) => ({
-  //   value: sonda.id,
-  //   label: sonda.nom_sonda,
-  // }));
 
   const reqGetAtividadesByProjetoTipoId = async (id: number) => {
     if (id === 0) {
@@ -118,15 +111,6 @@ function ModalCadastroIntervencao({
     }
   };
 
-  const handleGet = async () => {
-    const projetos = await getProjetosTipo();
-    const projetosTipoSorted = projetos.data.sort(
-      (a: ProjetoTipo, b: ProjetoTipo) =>
-        a.nom_projeto_tipo.localeCompare(b.nom_projeto_tipo)
-    );
-    setListaProjetos(projetosTipoSorted);
-  };
-
   const handleClick = async () => {
     const projetos = await getProjetosTipo();
     const projetosTipoSorted = projetos.data.sort(
@@ -137,21 +121,8 @@ function ModalCadastroIntervencao({
     onOpen();
   };
 
-  const handleServicoPocos = async () => {
-    if (optionsSondaCampanha) {
-      const nomeSondaComId = optionsSondaCampanha.find(
-        (option: any) => option.value === idCampanha
-      );
-      if (nomeSondaComId) {
-        const idSonda = nomeSondaComId.label.split(" - ")[0];
-        const servicoPocos = await getServicoPocoId(idSonda);
-        setListaServicoPocos(servicoPocos.data);
-      }
-    }
-  };
-
   const handleDataLimite = async () => {
-    const pocoCompleto = listaServicoPocos.filter(
+    const pocoCompleto = listaServicosPocos.filter(
       (poco: any) => poco.id === registerForm.values.poco_id
     );
 
@@ -164,35 +135,46 @@ function ModalCadastroIntervencao({
     const { cod_erro } = data;
 
     if (cod_erro === 0) {
-      window.alert(
-        "ATENÇÃO: O planejamento configurado ultrapassa a data de início de execução do poço selecionado."
-      );
+      registerForm.setFieldValue("erroDataIntervencao", true);
+      // setErroDataIntervencao(true);
+    } else {
+      registerForm.setFieldValue("erroDataIntervencao", false);
+      // setErroDataIntervencao(false);
     }
   };
 
   useEffect(() => {
-    handleGet();
+    // handleGet();
     registerForm.setFieldValue("id_campanha", idCampanha);
-    const newDate = new Date(data);
-    newDate.setDate(newDate.getDate() + 15);
-    registerForm.setFieldValue("dat_ini_prev", newDate);
+    // const newDate = new Date(data);
+    // newDate.setDate(newDate.getDate() + 15);
+    // registerForm.setFieldValue("dat_ini_prev", newDate);
     setRefresh(!refresh);
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      handleServicoPocos();
-    }, 1000);
-  }, [registerForm.values.id_campanha]);
+    if (registerForm.values.id_campanha !== idCampanha) {
+      registerForm.setFieldValue("id_campanha", idCampanha);
+    }
+  }, [registerForm.values]);
 
   useEffect(() => {
     reqGetAtividadesByProjetoTipoId(registerForm.values.projeto_tipo_id);
-    handleDataLimite();
   }, [registerForm.values.projeto_tipo_id]);
 
-  // console.log("registerForm", registerForm.values);
-  // console.log("idCampanha", idCampanha);
-  // console.log("optionsSondaCampanha", optionsSondaCampanha);
+  useEffect(() => {
+    if (
+      registerForm.values.dat_ini_prev !== new Date(data) &&
+      registerForm.values.projeto_tipo_id !== 0 &&
+      registerForm.values.poco_id !== 0
+    ) {
+      handleDataLimite();
+    }
+  }, [
+    registerForm.values.dat_ini_prev,
+    registerForm.values.projeto_tipo_id,
+    registerForm.values.poco_id,
+  ]);
 
   return (
     <>
@@ -282,7 +264,7 @@ function ModalCadastroIntervencao({
                         />
                         <DateTimePickerDataInicio
                           registerForm={registerForm}
-                          data={data}
+                          // data={data}
                         />
                       </Flex>
                     </Stack>
@@ -299,6 +281,17 @@ function ModalCadastroIntervencao({
                       </Flex>
                     </Stack>
 
+                    {registerForm.values.erroDataIntervencao && (
+                      <Alert colorScheme={"red"} variant={"solid"}>
+                        <AlertIcon />
+                        <AlertTitle>ATENÇÃO:</AlertTitle>
+                        <Text>
+                          O planejamento configurado ultrapassa a data de início
+                          de execução do poço selecionado.
+                        </Text>
+                      </Alert>
+                    )}
+
                     <AtividadesCadastroIntervencao
                       registerForm={registerForm}
                       listaAtividadesPrecedentes={listaAtividadesPrecedentes}
@@ -308,7 +301,7 @@ function ModalCadastroIntervencao({
                       <Text fontWeight={"bold"}>Comentários</Text>
                       <FormControl>
                         <Flex gap={1}>
-                          <RequiredField />
+                          {/* <RequiredField /> */}
                           <Text
                             fontWeight={"bold"}
                             fontSize={"12px"}

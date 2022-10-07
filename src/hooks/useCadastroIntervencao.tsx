@@ -119,6 +119,7 @@ export function useCadastroIntervencao() {
 
   const initialValues: any = {
     nom_usu_create: user?.nome,
+    erroDataIntervencao: false,
     poco_id: 0,
     campo_id: 0,
     id_campanha: 0,
