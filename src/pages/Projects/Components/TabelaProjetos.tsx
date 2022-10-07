@@ -102,7 +102,6 @@ export function TabelaProjetos(props: TableProps) {
       <Td
         isNumeric
         style={{
-          borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
@@ -110,7 +109,6 @@ export function TabelaProjetos(props: TableProps) {
       </Td>
       <Td
         style={{
-          borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
@@ -128,7 +126,6 @@ export function TabelaProjetos(props: TableProps) {
       </Td>
       <Td
         style={{
-          borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
@@ -151,7 +148,6 @@ export function TabelaProjetos(props: TableProps) {
       </Td>
       <Td
         style={{
-          borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
@@ -171,7 +167,6 @@ export function TabelaProjetos(props: TableProps) {
       </Td>
       <Td
         style={{
-          borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
@@ -179,7 +174,6 @@ export function TabelaProjetos(props: TableProps) {
       </Td>
       <Td
         style={{
-          borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
@@ -187,7 +181,6 @@ export function TabelaProjetos(props: TableProps) {
       </Td>
       <Td
         style={{
-          borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >{`${
@@ -197,7 +190,6 @@ export function TabelaProjetos(props: TableProps) {
       } %`}</Td>
       <Td
         style={{
-          borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
@@ -205,7 +197,6 @@ export function TabelaProjetos(props: TableProps) {
       </Td>
       <Td
         style={{
-          borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
@@ -213,7 +204,6 @@ export function TabelaProjetos(props: TableProps) {
       </Td>
       <Td
         style={{
-          borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
@@ -221,7 +211,6 @@ export function TabelaProjetos(props: TableProps) {
       </Td>
       <Td
         style={{
-          borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
@@ -229,7 +218,6 @@ export function TabelaProjetos(props: TableProps) {
       </Td>
       <Td
         style={{
-          borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
@@ -237,7 +225,6 @@ export function TabelaProjetos(props: TableProps) {
       </Td>
       <Td
         style={{
-          borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
@@ -245,7 +232,6 @@ export function TabelaProjetos(props: TableProps) {
       </Td>
       <Td
         style={{
-          borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
@@ -253,7 +239,6 @@ export function TabelaProjetos(props: TableProps) {
       </Td>
       <Td
         style={{
-          borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >{`${
@@ -263,7 +248,6 @@ export function TabelaProjetos(props: TableProps) {
       } %`}</Td>
       <Td
         style={{
-          borderBottom: "0.5px solid #A7A7A7",
           borderRight: "0.5px solid #A7A7A7",
         }}
       >
@@ -286,12 +270,7 @@ export function TabelaProjetos(props: TableProps) {
           <Text>{projeto.descricao + " " + projeto.justificativa}</Text>
         )}
       </Td>
-      <Td
-        style={{
-          borderBottom: "0.5px solid #A7A7A7",
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
+      <Td>
         <ModalCadastrarPriorizacao projeto={projeto.id} />
         <ModalDeletarProjeto projeto={projeto.id} />
       </Td>
@@ -299,287 +278,245 @@ export function TabelaProjetos(props: TableProps) {
   ));
 
   return (
-    <div className="table-fix">
-      <TableContainer mt={4} mb={3} ml={1}>
-        <Table
-          variant="unstyled"
-          size="sm"
-          style={{
-            borderBottom: "0.5px solid #A7A7A7",
-            border: "0.5px solid #A7A7A7",
-          }}
-        >
+    <Flex direction={"column"} w={"100%"}>
+      <TableContainer mt={4} mb={3} borderRadius={"10px"} overflowX={"scroll"}>
+        <Table variant="striped" colorScheme="strippedGray">
           <Thead>
-            <Tr
-              backgroundColor={"#0239c3"}
-              color="white"
-              style={{
-                borderBottom: "0.5px solid #A7A7A7",
-              }}
-            >
-              <Th colSpan={15} borderTopLeftRadius="10px">
+            <Tr background={"origem.500"}>
+              <Th colSpan={16} color="white">
                 Projetos
               </Th>
-              <Th borderTopRightRadius={"10px"} colSpan={2}>
+              <Th
+                borderTopRightRadius={"10px"}
+                colSpan={1}
+                textAlign={"center"}
+              >
                 <Button
                   backgroundColor="#0239c3"
                   rightIcon={<FiPrinter />}
                   variant="solid"
+                  color="white"
                 >
                   Imprimir
                 </Button>
               </Th>
             </Tr>
-            <Tr
-              background="origem.500"
-              color="white"
-              style={{
-                borderBottom: "0.5px solid #A7A7A7",
-                borderRight: "0.5px solid #A7A7A7",
-              }}
-            >
+            <Tr background="origem.500">
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 ID
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 Projeto
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 CPI
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 SPI
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 Orçamento
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 Realizado
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 TCPI
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 Prioridade
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 Complexidade
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 Polo
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 Coordenador
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 Responsável
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 Data Início
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 Data de Término
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 %
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 Descrições e Justificativas
               </Th>
-              <Th>Ações</Th>
+              <Th
+                style={{
+                  color: "white",
+                }}
+              >
+                Ações
+              </Th>
             </Tr>
           </Thead>
           <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
           <Tfoot>
-            <Tr background="origem.200" color="white">
+            <Tr background="origem.500" color="white">
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 Total
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 {data ? data.length : 0} Projetos
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               ></Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               ></Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 {formatReal(totalOrcado)}
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               >
                 {formatReal(totalRealizado)}
               </Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               ></Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               ></Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               ></Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               ></Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               ></Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               ></Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               ></Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               ></Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               ></Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               ></Th>
               <Th
                 style={{
-                  borderBottom: "0.5px solid #A7A7A7",
-                  borderRight: "0.5px solid #A7A7A7",
+                  color: "white",
                 }}
               ></Th>
             </Tr>
@@ -641,6 +578,6 @@ export function TabelaProjetos(props: TableProps) {
           />
         </Flex>
       </Flex>
-    </div>
+    </Flex>
   );
 }
