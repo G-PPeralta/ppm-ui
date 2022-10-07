@@ -99,19 +99,10 @@ export function TabelaProjetos(props: TableProps) {
 
   const tableData = data.slice(from, to).map((projeto, key) => (
     <Tr key={key}>
-      <Td
-        isNumeric
-        style={{
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
+      <Td isNumeric textAlign={"center"}>
         {projeto.id}
       </Td>
-      <Td
-        style={{
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
+      <Td>
         <Link to={`/detalhamento/${projeto.id}`}>
           {projeto.nome_projeto.length > 25 ? (
             <Tooltip label={projeto.nome_projeto} aria-label="Nome do projeto">
@@ -124,11 +115,7 @@ export function TabelaProjetos(props: TableProps) {
           )}
         </Link>
       </Td>
-      <Td
-        style={{
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
+      <Td textAlign={"center"}>
         {projeto.vlr_cpi_corrigido >= 1 ? (
           <Flex alignItems={"center"}>
             <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
@@ -146,11 +133,7 @@ export function TabelaProjetos(props: TableProps) {
           </Flex>
         )}
       </Td>
-      <Td
-        style={{
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
+      <Td textAlign={"center"}>
         {projeto.vlr_spi_corrigido >= 1 ? (
           <Flex alignItems={"center"}>
             <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
@@ -165,92 +148,26 @@ export function TabelaProjetos(props: TableProps) {
           </Flex>
         )}
       </Td>
-      <Td
-        style={{
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {formatReal(+projeto.vlr_orcado)}
-      </Td>
-      <Td
-        style={{
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {formatReal(+projeto.vlr_cr)}
-      </Td>
-      <Td
-        style={{
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >{`${
+      <Td>{formatReal(+projeto.vlr_orcado)}</Td>
+      <Td>{formatReal(+projeto.vlr_cr)}</Td>
+      <Td textAlign={"center"}>{`${
         projeto.vlr_orcado && projeto.vlr_cr
           ? (100 - (+projeto.vlr_cr / +projeto.vlr_orcado) * 100).toFixed(2)
           : 0
       } %`}</Td>
-      <Td
-        style={{
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {projeto.complexidade}
-      </Td>
-      <Td
-        style={{
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {projeto.prioridade}
-      </Td>
-      <Td
-        style={{
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {projeto.polo}
-      </Td>
-      <Td
-        style={{
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {projeto.coordenador}
-      </Td>
-      <Td
-        style={{
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {projeto.responsavel}
-      </Td>
-      <Td
-        style={{
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {formatDate(new Date(projeto.data_inicio))}
-      </Td>
-      <Td
-        style={{
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {formatDate(new Date(projeto.data_fim))}
-      </Td>
-      <Td
-        style={{
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >{`${
+      <Td textAlign={"center"}>{projeto.complexidade}</Td>
+      <Td textAlign={"center"}>{projeto.prioridade}</Td>
+      <Td textAlign={"center"}>{projeto.polo}</Td>
+      <Td>{projeto.coordenador}</Td>
+      <Td>{projeto.responsavel}</Td>
+      <Td textAlign={"center"}>{formatDate(new Date(projeto.data_inicio))}</Td>
+      <Td textAlign={"center"}>{formatDate(new Date(projeto.data_fim))}</Td>
+      <Td textAlign={"center"}>{`${
         projeto.vlr_cr && projeto.vlr_orcado
           ? ((projeto.vlr_cr / projeto.vlr_orcado) * 100).toFixed(2)
           : 0
       } %`}</Td>
-      <Td
-        style={{
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
+      <Td>
         {/* <ExpansibleText
           text={projeto.descricao + " " + projeto.justificativa}
         /> */}
