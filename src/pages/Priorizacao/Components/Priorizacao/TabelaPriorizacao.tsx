@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-  FiChevronLeft,
-  FiChevronRight,
-  FiChevronsLeft,
-  FiChevronsRight,
-} from "react-icons/fi";
 
 import {
-  IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -16,9 +9,9 @@ import {
   Thead,
   Tr,
   Flex,
-  Text,
-  Select,
 } from "@chakra-ui/react";
+
+import PaginacaoTabela from "components/PaginacaoTabela";
 
 import { getPriorizacoes } from "services/get/Priorizacoes";
 
@@ -26,13 +19,9 @@ import ModalPriorizacao from "../ModaisDinamicosPriorizacao/ModalPriorizacao";
 import ModalDeletarPriorizacao from "./DeletarPriorizacao";
 
 export function TabelaPriorizacao() {
-  const [pagAtual, setPagAtual] = useState(1);
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
-  const rowsPerPage = 5;
   const [data, setData] = useState<any[]>([]);
-
-  // const [loading, setLoading] = useState(false);
 
   const getData = async () => {
     const priorizacao = await getPriorizacoes();
@@ -45,34 +34,11 @@ export function TabelaPriorizacao() {
     getData();
   }, []);
 
-  const totalRegs = data.length;
-  const maxPage = Math.ceil(totalRegs / rowsPerPage);
-
-  const paginate = (pag: number) => {
-    setPagAtual(pag);
-
-    const x = (pag - 1) * rowsPerPage;
-    const y = (pag - 1) * rowsPerPage + rowsPerPage;
-    setFrom(x);
-    setTo(y);
-  };
-
-  const advance = () => {
-    if (pagAtual == maxPage) {
-      return;
-    }
-
-    const _pag = pagAtual + 1;
-
-    paginate(_pag);
-  };
-
-  const back = () => {
-    if (pagAtual == 1) {
-      return;
-    }
-    const _pag = pagAtual - 1;
-    paginate(_pag);
+  const fromTo = {
+    from,
+    to,
+    setFrom,
+    setTo,
   };
 
   const tableData = data
@@ -134,7 +100,7 @@ export function TabelaPriorizacao() {
     ));
 
   return (
-    <div>
+    <>
       <Flex direction={"column"}>
         <TableContainer mt={4} mb={4}>
           <Table
@@ -195,81 +161,10 @@ export function TabelaPriorizacao() {
           </Table>
         </TableContainer>
 
-        <Flex alignItems={"center"} justifyContent={"end"} gap={2} flex={1}>
-          <Flex gap={2} alignItems={"center"}>
-            <Text fontSize={"14px"}>Per page:</Text>
-            <Select
-              // placeholder="Selecione"
-              h={"32px"}
-              w={"110px"}
-              fontSize={"13px"}
-            >
-              <option value="option1">10</option>
-              <option value="option2">20</option>
-              <option value="option3">30</option>
-            </Select>
-            <Text fontSize={"14px"}>1-10 of 15</Text>
-          </Flex>
-          <Flex gap={2}>
-            <IconButton
-              aria-label=""
-              icon={<FiChevronsLeft />}
-              onClick={() => paginate(1)}
-              variant="ghost"
-              size="lg"
-              h={"24px"}
-              _hover={{
-                background: "origem.500",
-                transition: "all 0.4s",
-                color: "white",
-                fontWeight: "bold",
-              }}
-            />
-            <IconButton
-              aria-label=""
-              icon={<FiChevronLeft onClick={back} />}
-              variant="ghost"
-              size="lg"
-              h={"24px"}
-              _hover={{
-                background: "origem.500",
-                transition: "all 0.4s",
-                color: "white",
-                fontWeight: "bold",
-              }}
-            />
-
-            <IconButton
-              aria-label=""
-              icon={<FiChevronRight />}
-              onClick={advance}
-              variant="ghost"
-              size="lg"
-              h={"24px"}
-              _hover={{
-                background: "origem.500",
-                transition: "all 0.4s",
-                color: "white",
-                fontWeight: "bold",
-              }}
-            />
-            <IconButton
-              aria-label=""
-              icon={<FiChevronsRight />}
-              onClick={() => paginate(maxPage)}
-              variant="ghost"
-              size="lg"
-              h={"24px"}
-              _hover={{
-                background: "origem.500",
-                transition: "all 0.4s",
-                color: "white",
-                fontWeight: "bold",
-              }}
-            />
-          </Flex>
+        <Flex>
+          <PaginacaoTabela data={data} fromTo={fromTo} />
         </Flex>
       </Flex>
-    </div>
+    </>
   );
 }

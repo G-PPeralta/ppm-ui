@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AiFillPrinter } from "react-icons/ai";
-import {
-  FiChevronLeft,
-  FiChevronRight,
-  FiChevronsLeft,
-  FiChevronsRight,
-  FiSearch,
-} from "react-icons/fi";
+// import {
+//   FiChevronLeft,
+//   FiChevronRight,
+//   FiChevronsLeft,
+//   FiChevronsRight,
+//   FiSearch,
+// } from "react-icons/fi";
+import { FiSearch } from "react-icons/fi";
 import { MdArrowForwardIos, MdModeEdit } from "react-icons/md";
 
 import {
@@ -35,6 +36,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 
+import PaginacaoTabela from "components/PaginacaoTabela";
 import Sidebar from "components/SideBar";
 
 import { getAllLicoesAprendidas } from "services/get/LicoesAprendidas";
@@ -58,9 +60,15 @@ export function LicoesAprendidasProjetos() {
 
   const [editLicao, setEditLicao] = useState({} as LicoesAprendidas);
 
-  const [pagAtual, setPagAtual] = useState(1);
   const [from, setFrom] = useState<number>(0);
-  const [to, setTo] = useState<number>(8);
+  const [to, setTo] = useState<number>(5);
+
+  const fromTo = {
+    from,
+    to,
+    setFrom,
+    setTo,
+  };
 
   async function handleGetLicoesAprendidas() {
     const payload = await getAllLicoesAprendidas();
@@ -195,36 +203,36 @@ export function LicoesAprendidasProjetos() {
     setFilteredLicoesAprendidas([...filtered]);
   };
 
-  const rowsPerPage = 8;
-  const totalRegs = filteredLicoesAprendidas.length;
-  const maxPage = Math.ceil(totalRegs / rowsPerPage);
+  // const rowsPerPage = 8;
+  // const totalRegs = filteredLicoesAprendidas.length;
+  // const maxPage = Math.ceil(totalRegs / rowsPerPage);
 
-  const paginate = (pag: number) => {
-    setPagAtual(pag);
+  // const paginate = (pag: number) => {
+  //   setPagAtual(pag);
 
-    const x = (pag - 1) * rowsPerPage;
-    const y = (pag - 1) * rowsPerPage + rowsPerPage;
-    setFrom(x);
-    setTo(y);
-  };
+  //   const x = (pag - 1) * rowsPerPage;
+  //   const y = (pag - 1) * rowsPerPage + rowsPerPage;
+  //   setFrom(x);
+  //   setTo(y);
+  // };
 
-  const advance = () => {
-    if (pagAtual == maxPage) {
-      return;
-    }
+  // const advance = () => {
+  //   if (pagAtual == maxPage) {
+  //     return;
+  //   }
 
-    const _pag = pagAtual + 1;
+  //   const _pag = pagAtual + 1;
 
-    paginate(_pag);
-  };
+  //   paginate(_pag);
+  // };
 
-  const back = () => {
-    if (pagAtual == 1) {
-      return;
-    }
-    const _pag = pagAtual - 1;
-    paginate(_pag);
-  };
+  // const back = () => {
+  //   if (pagAtual == 1) {
+  //     return;
+  //   }
+  //   const _pag = pagAtual - 1;
+  //   paginate(_pag);
+  // };
 
   return (
     <Sidebar>
@@ -471,37 +479,9 @@ export function LicoesAprendidasProjetos() {
                   </Tfoot>
                 </Table>
               </TableContainer>
-              <Flex justifyContent={"center"}>
-                <Flex
-                  width={"300px"}
-                  alignItems={"center"}
-                  justifyContent={"space-between"}
-                >
-                  <IconButton
-                    aria-label=""
-                    icon={<FiChevronsLeft />}
-                    onClick={() => paginate(1)}
-                  />
-                  <IconButton
-                    aria-label=""
-                    icon={<FiChevronLeft onClick={back} />}
-                  />
-
-                  <Text>Página atual: {pagAtual}</Text>
-
-                  <IconButton
-                    aria-label=""
-                    icon={<FiChevronRight />}
-                    onClick={advance}
-                  />
-                  <IconButton
-                    aria-label=""
-                    icon={<FiChevronsRight />}
-                    onClick={() => paginate(maxPage)}
-                  />
-                </Flex>
+              <Flex>
+                <PaginacaoTabela data={licoesAprendidas} fromTo={fromTo} />
               </Flex>
-              <Stack spacing="6" alignItems={"center"}></Stack>
             </Box>{" "}
           </Flex>
         </Stack>
