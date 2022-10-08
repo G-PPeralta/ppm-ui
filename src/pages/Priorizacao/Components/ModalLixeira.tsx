@@ -9,7 +9,6 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  Stack,
   Text,
   useDisclosure,
   Icon,
@@ -68,53 +67,52 @@ function ModalLixeira() {
             <ModalBody mt={3}>
               <FormControl>
                 <Flex gap={4}>
-                  <Stack gap={2}>
-                    <Flex direction={"column"} gap={10}>
-                      <Box
-                        border={"solid #9FA2B4 0.5px"}
-                        w="850px"
-                        h={"87px"}
-                        borderRadius={"8px"}
-                        p={4}
-                        fontSize={"12px"}
-                        fontWeight={"700"}
-                        color={"#9FA2B4"}
-                        gap={5}
-                      >
-                        <Flex flex={"flex-start"} justify={"space-between"}>
-                          <Flex flex={"flex-end"}>
-                            <Text
-                              fontSize={"12px"}
-                              fontWeight={"700"}
-                              color={"#D6D4D4"}
-                              fontFamily={"Mulish"}
-                            >
-                              ITENS EXCLUÍDOS AQUI
-                            </Text>
-                          </Flex>
-                          <Flex direction={"row"} flex={"flex-end"}>
-                            <Button
-                              disabled={!registerForm.isValid}
-                              background="white"
-                              variant="primary"
-                              border={"#0047BB solid 1px"}
-                              color="origem.500"
-                              _hover={{
-                                background: "origem.500",
-                                color: "white",
-                                transition: "all 0.4s",
-                              }}
-                              h={"56px"}
-                              w={"103px"}
-                            >
-                              <Text fontSize={"18px"} fontWeight={"700"}>
-                                Restaurar
-                              </Text>
-                            </Button>
-                          </Flex>
+                  <Flex direction={"column"} gap={10}>
+                    <Box
+                      border={"solid #9FA2B4 0.5px"}
+                      w="850px"
+                      h={"87px"}
+                      borderRadius={"8px"}
+                      p={4}
+                      fontSize={"12px"}
+                      fontWeight={"700"}
+                      color={"#9FA2B4"}
+                      gap={5}
+                    >
+                      <Flex flex={"flex-start"} justify={"space-between"}>
+                        <Flex flex={"flex-end"}>
+                          <Text
+                            fontSize={"12px"}
+                            fontWeight={"700"}
+                            color={"#D6D4D4"}
+                            fontFamily={"Mulish"}
+                          >
+                            ITENS EXCLUÍDOS AQUI
+                          </Text>
                         </Flex>
-                      </Box>
-
+                        <Flex direction={"row"} flex={"flex-end"}>
+                          <Button
+                            disabled={!registerForm.isValid}
+                            background="white"
+                            variant="primary"
+                            border={"#0047BB solid 1px"}
+                            color="origem.500"
+                            _hover={{
+                              background: "origem.500",
+                              color: "white",
+                              transition: "all 0.4s",
+                            }}
+                            h={"56px"}
+                            w={"103px"}
+                          >
+                            <Text fontSize={"18px"} fontWeight={"700"}>
+                              Restaurar
+                            </Text>
+                          </Button>
+                        </Flex>
+                      </Flex>
+                    </Box>
+                    <Flex gap={5} direction={"column"}>
                       <Box
                         border={"solid #9FA2B4 0.5px"}
                         w="850px"
@@ -138,6 +136,7 @@ function ModalLixeira() {
                               ITENS EXCLUÍDOS AQUI
                             </Text>
                           </Flex>
+
                           <Flex direction={"row"} flex={"flex-end"}>
                             <Button
                               disabled={!registerForm.isValid}
@@ -159,25 +158,23 @@ function ModalLixeira() {
                             </Button>
                           </Flex>
                         </Flex>
-                        <Flex justifyContent={"center"}>
-                          <Button
-                            variant="ghost"
-                            color="red"
-                            onClick={() =>
-                              handleCancelar(registerForm, onClose)
-                            }
-                            _hover={{
-                              background: "red.500",
-                              transition: "all 0.4s",
-                              color: "white",
-                            }}
-                          >
-                            Cancelar
-                          </Button>
-                        </Flex>
                       </Box>
+                      <Flex justifyContent={"center"}>
+                        <Button
+                          variant="ghost"
+                          color="red.500"
+                          onClick={() => handleCancelar(registerForm, onClose)}
+                          _hover={{
+                            background: "red.500",
+                            transition: "all 0.4s",
+                            color: "white",
+                          }}
+                        >
+                          Cancelar
+                        </Button>
+                      </Flex>
                     </Flex>
-                  </Stack>
+                  </Flex>
                 </Flex>
               </FormControl>
             </ModalBody>
