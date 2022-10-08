@@ -168,14 +168,8 @@ function LicoesAprendidasModal({
                 px={9}
                 py={2}
                 display={"flex"}
-                justifyContent={"space-between"}
               >
-                <Flex
-                  display={"flex"}
-                  justifyContent={"space-between"}
-                  align={"flex-end"}
-                  gap={6}
-                >
+                <Flex ml={"-11px"} gap={6}>
                   <Flex>
                     <FormControl>
                       <FormLabel htmlFor="categoria">
@@ -243,7 +237,7 @@ function LicoesAprendidasModal({
                   /> */}
                   </Flex>
 
-                  <Flex display={"flex"}>
+                  <Flex>
                     <Button
                       mr={"25px"}
                       borderRadius={"8px"}
@@ -267,6 +261,7 @@ function LicoesAprendidasModal({
                       width={"94px"}
                       height={"56px"}
                       fontWeight={"700"}
+                      alignSelf={"end"}
                     >
                       Filtrar
                       <Icon
@@ -276,13 +271,14 @@ function LicoesAprendidasModal({
                         ml={1}
                       />
                     </Button>
-                    <Flex display={"flex"}>
+                    <Flex>
                       <Button
                         borderRadius={"8px"}
                         type="button"
                         background="origem.500"
                         variant="primary"
                         color="white"
+                        alignSelf={"end"}
                         // border={"2px"}
                         // h={useBreakpointValue({ base: "100%", md: "120%" })}
                         // float={"right"}
