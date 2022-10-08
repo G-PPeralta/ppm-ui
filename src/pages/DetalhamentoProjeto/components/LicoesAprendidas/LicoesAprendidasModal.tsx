@@ -128,12 +128,12 @@ function LicoesAprendidasModal({
           color: "white",
           transition: "all 0.4s",
         }}
-        px={6}
-        py={9}
+        p={4}
         borderTopRadius={"0px"}
         borderBottomRadius={"6px"}
         fontSize={"16px"}
         fontWeight={"700"}
+        flex={1}
       >
         Lições Aprendidas
       </Button>

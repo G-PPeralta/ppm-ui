@@ -180,12 +180,12 @@ function BotaoListadeTarefas() {
           color: "white",
           transition: "all 0.4s",
         }}
-        px={6}
-        py={10}
+        p={4}
         borderTopRadius={"0px"}
         borderBottomRadius={"0px"}
         fontSize={"16px"}
         fontWeight={"700"}
+        flex={1}
       >
         Lista de Tarefas
       </Button>
