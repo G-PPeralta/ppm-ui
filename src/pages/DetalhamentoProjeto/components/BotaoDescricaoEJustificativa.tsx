@@ -48,13 +48,13 @@ function BotaoDescricaoEJustificativa({
           color: "white",
           transition: "all 0.4s",
         }}
-        px={6}
-        py={9}
+        p={4}
         borderTopRadius={"6px"}
         borderBottomRadius={"0px"}
         fontSize={"16px"}
         fontWeight={"700"}
         flexWrap={"wrap"}
+        flex={1}
       >
         Descrição e Justificativa
       </Button>

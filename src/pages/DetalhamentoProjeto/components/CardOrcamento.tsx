@@ -48,9 +48,8 @@ function CardOrcamento() {
         p={5}
         borderRadius={5}
         direction={"column"}
-        grow={1}
-        shrink={1}
-        basis={"360px"}
+        flex={2}
+        justify={"space-between"}
       >
         <Box mb={5}>
           <Box display={"flex"} alignItems={"center"}>
@@ -71,13 +70,10 @@ function CardOrcamento() {
           </Box>
         </Box>
 
-        <Flex direction={"column"}>
-          <Flex
-            justify={"space-between"}
-            direction={innerWidth > 520 ? "row" : "column-reverse"}
-          >
-            <Flex alignItems={"center"} mb={3}>
-              <Box>
+        <Flex direction={"row"} gap={4} wrap={"wrap"}>
+          <Flex justify={"space-between"} direction={"column"} flex={1} gap={2}>
+            <Flex alignItems={"center"} flex={1}>
+              <Box flex={1}>
                 <Box display={"flex"} alignItems={"center"}>
                   <Text fontSize={16} fontWeight={600}>
                     Remanescente
@@ -102,9 +98,9 @@ function CardOrcamento() {
                 alignItems="center"
                 bg={"#059502"}
                 ml={4}
-                height={"48px"}
-                width={"48px"}
-                borderRadius={2}
+                height={"56px"}
+                width={"56px"}
+                borderRadius={4}
               >
                 <Text
                   p={1}
@@ -121,47 +117,8 @@ function CardOrcamento() {
                 </Text>
               </Box>
             </Flex>
-
-            <Flex alignItems={"center"} mb={3}>
-              <Box display={"flex"} alignItems={"center"}>
-                <Text color={"#00B53D"} fontSize={20}>
-                  {(id == "443" && cpiSpi && cpiSpi[0]?.cpi) < 1 ? (
-                    <BsCheckCircleFill color={"red"} />
-                  ) : (
-                    <BsCheckCircleFill />
-                  )}
-                </Text>
-                <Text ml={2} fontSize={16} fontWeight={600}>
-                  CPI ={" "}
-                  {!loading && id == "443"
-                    ? cpiSpi[0]?.cpi.toLocaleString()
-                    : 0}
-                </Text>
-              </Box>
-              <Box display={"flex"} alignItems={"center"} ml={4}>
-                <Text color={"#00B53D"} fontSize={20}>
-                  {cpiSpi && cpiSpi[0]?.spi < 1 ? (
-                    <BsCheckCircleFill color={"red"} />
-                  ) : (
-                    <BsCheckCircleFill />
-                  )}
-                </Text>
-                <Text ml={2} fontSize={16} fontWeight={600}>
-                  SPI ={" "}
-                  {!loading && id == "443"
-                    ? cpiSpi[0]?.spi.toLocaleString()
-                    : 0}
-                </Text>
-              </Box>
-            </Flex>
-          </Flex>
-
-          <Flex
-            justify={"space-between"}
-            direction={innerWidth > 520 ? "row" : "column"}
-          >
-            <Flex alignItems={"center"}>
-              <Box>
+            <Flex alignItems={"center"} flex={1}>
+              <Box flex={1}>
                 <Box display={"flex"} alignItems={"center"}>
                   <Text fontSize={16} fontWeight={600}>
                     Realizado
@@ -183,9 +140,9 @@ function CardOrcamento() {
                 alignItems="center"
                 bg={"#2E69FD"}
                 ml={4}
-                height={"48px"}
-                width={"48px"}
-                borderRadius={2}
+                height={"56px"}
+                width={"56px"}
+                borderRadius={4}
               >
                 <Text
                   p={1}
@@ -201,8 +158,11 @@ function CardOrcamento() {
                 </Text>
               </Box>
             </Flex>
-            <Flex alignItems={"center"}>
-              <Box>
+          </Flex>
+
+          <Flex justify={"space-between"} direction={"column"} flex={1} gap={2}>
+            <Flex alignItems={"center"} flex={1}>
+              <Box flex={1}>
                 <Box display={"flex"} alignItems={"center"}>
                   <Text fontSize={16} fontWeight={600}>
                     Não Previsto
@@ -225,18 +185,68 @@ function CardOrcamento() {
                 justifyContent={"center"}
                 alignItems="center"
                 bg={"#CC0000"}
-                ml={4}
-                height={"48px"}
-                width={"48px"}
-                borderRadius={2}
+                height={"56px"}
+                width={"56px"}
+                borderRadius={4}
               >
-                <Text p={1} color="#ffffff" fontSize={20} fontWeight={"600"}>
+                <Text
+                  p={1}
+                  color="#ffffff"
+                  fontSize={"16px"}
+                  fontWeight={"600"}
+                >
                   {naoPrevisto > 0
                     ? (Number(naoPrevisto) /
                         Number(infoFinanceira[0]?.planejado)) *
                         100 +
                       "%"
                     : "0%"}
+                </Text>
+              </Box>
+            </Flex>
+            <Flex alignItems={"center"} flex={1} gap={2}>
+              <Box
+                display={"flex"}
+                alignItems={"center"}
+                flex={1}
+                justifyContent={"center"}
+                flexWrap={"wrap"}
+                gap={1}
+              >
+                <Text color={"#00B53D"} fontSize={20}>
+                  {(id == "443" && cpiSpi && cpiSpi[0]?.cpi) < 1 ? (
+                    <BsCheckCircleFill color={"red"} />
+                  ) : (
+                    <BsCheckCircleFill />
+                  )}
+                </Text>
+                <Text fontSize={16} fontWeight={600}>
+                  CPI ={" "}
+                  {!loading && id == "443"
+                    ? cpiSpi[0]?.cpi.toLocaleString()
+                    : 0}
+                </Text>
+              </Box>
+              <Box
+                display={"flex"}
+                alignItems={"center"}
+                flex={1}
+                justifyContent={"center"}
+                flexWrap={"wrap"}
+                gap={1}
+              >
+                <Text color={"#00B53D"} fontSize={20}>
+                  {cpiSpi && cpiSpi[0]?.spi < 1 ? (
+                    <BsCheckCircleFill color={"red"} />
+                  ) : (
+                    <BsCheckCircleFill />
+                  )}
+                </Text>
+                <Text fontSize={16} fontWeight={600}>
+                  SPI ={" "}
+                  {!loading && id == "443"
+                    ? cpiSpi[0]?.spi.toLocaleString()
+                    : 0}
                 </Text>
               </Box>
             </Flex>
