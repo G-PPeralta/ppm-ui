@@ -54,6 +54,8 @@ export function TabelaProjetos({ data }: TableProps) {
     0
   );
 
+  // console.log({ data });
+
   const tableData = data.slice(from, to).map((projeto, key) => (
     <Tr key={key}>
       <Td isNumeric textAlign={"center"}>
