@@ -51,8 +51,11 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
         aria-label="Plus sign"
         variant="primary"
         _hover={{
-          background: "origem.300",
+          background: "white",
+          border: "solid 1px #0047BB",
+          borderRadius: "8px",
           transition: "all 0.4s",
+          color: "origem.500",
         }}
         h={"56px"}
         w={"105px"}

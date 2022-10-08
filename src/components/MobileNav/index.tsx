@@ -47,7 +47,7 @@ export function MobileNav({
   useEffect(() => {
     const nav = window.location.href;
     const splited = nav.split("/");
-    if (splited[3] === "") splited[3] = "Dashboad";
+    if (splited[3] === "") splited[3] = "Dashboard";
     if (splited[splited.length - 1] === "") splited.pop();
     const completeObject = splited.map((split, index) => {
       let newItem: string = translations[split as keyof typeof translations];
@@ -60,7 +60,7 @@ export function MobileNav({
   }, []);
 
   const translations = {
-    dashboard: "Dashboard",
+    dashboard: "Dashboarrd",
     projects: "Projetos",
     "projects-registration": "Cadastro de projetos",
     budgets: "Financeiro",
@@ -72,9 +72,9 @@ export function MobileNav({
     atividade: "Atividade",
     precedentes: "Visão por Precedentes",
     "visao-por-area": "Visão por Area",
-    estatisticas: "Estatisticas",
+    estatisticas: "Estatísticas",
     reports: "Relatórios",
-    graficos: "Gráficos",
+    graficos: "Gráficos Estatísticos",
     priorizacao: "Priorização",
   };
 

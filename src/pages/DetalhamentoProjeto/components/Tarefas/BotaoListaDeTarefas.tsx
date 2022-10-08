@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import toast from "react-hot-toast";
 import { AiOutlineSearch } from "react-icons/ai";
-import { MdModeEdit } from "react-icons/md";
+import { MdArrowForwardIos, MdModeEdit } from "react-icons/md";
 
 import {
   Button,
@@ -36,6 +36,8 @@ import {
   TarefaAtividadeComId,
 } from "interfaces/Services";
 
+import PaginacaoTabela from "components/PaginacaoTabela";
+
 import { getAtividadesProjeto } from "services/get/Atividades-Projeto";
 import { getAtividadesTarefas } from "services/get/Tarefas";
 
@@ -60,6 +62,15 @@ function BotaoListadeTarefas() {
   );
 
   const [render, setRender] = useState(false);
+  const [from, setFrom] = useState<number>(0);
+  const [to, setTo] = useState<number>(5);
+
+  const fromTo = {
+    from,
+    to,
+    setFrom,
+    setTo,
+  };
 
   async function fetchAtividadesProjeto() {
     const { data } = await getAtividadesProjeto();
@@ -104,85 +115,31 @@ function BotaoListadeTarefas() {
     taskList &&
     taskList
       .sort((a, b) => a.id - b.id)
+      .slice(from, to)
       .map((task, index) => (
         <Tr key={index}>
-          <Td
-            isNumeric
-            style={{
-              borderBottom: "0.5px solid #A7A7A7",
-              borderRight: "0.5px solid #A7A7A7",
-            }}
-            width="48px"
-            height={"56px"}
-            textAlign={"center"}
-          >
-            {task.id}
-          </Td>
-          <Td
-            style={{
-              borderBottom: "0.5px solid #A7A7A7",
-              borderRight: "0.5px solid #A7A7A7",
-            }}
-            width="166px"
-            height={"56px"}
-          >
+          <Td textAlign={"center"}>{task.id}</Td>
+          <Td textAlign={"center"} fontWeight={"semibold"}>
             {task.nome_tarefa}
           </Td>
-          <Td
-            style={{
-              borderBottom: "0.5px solid #A7A7A7",
-              borderRight: "0.5px solid #A7A7A7",
-            }}
-            width="166px"
-            height={"56px"}
-          >
+          <Td textAlign={"center"} fontWeight={"semibold"}>
             {task.atividade_relacionada}
           </Td>
-          <Td
-            style={{
-              borderBottom: "0.5px solid #A7A7A7",
-              borderRight: "0.5px solid #A7A7A7",
-            }}
-            width="112px"
-            height={"56px"}
-          >
+          <Td textAlign={"center"} fontWeight={"semibold"}>
             {formatDate(task.data_tarefa)}
           </Td>
-          <Td
-            style={{
-              borderBottom: "0.5px solid #A7A7A7",
-              borderRight: "0.5px solid #A7A7A7",
-            }}
-            width="200px"
-            height={"56px"}
-          >
+          <Td textAlign={"center"} fontWeight={"semibold"}>
             {task.descricao_tarefa}
           </Td>
-          <Td
-            style={{
-              borderBottom: "0.5px solid #A7A7A7",
-              borderRight: "0.5px solid #A7A7A7",
-            }}
-            width="200px"
-            height={"56px"}
-          >
+          <Td textAlign={"center"} fontWeight={"semibold"}>
             Responsável
           </Td>
-          <Td
-            style={{
-              borderBottom: "0.5px solid #A7A7A7",
-              borderRight: "0.5px solid #A7A7A7",
-            }}
-            width="96px"
-            height={"56px"}
-            color={"#059502"}
-            textAlign={"center"}
-          >
+          <Td textAlign={"center"} fontWeight={"semibold"}>
             {!task.status ? "0%" : task.status}
             <IconButton
               aria-label="Plus sign"
               icon={<MdModeEdit />}
-              background="white"
+              background="transparent"
               variant="secondary"
               color="#0047BB"
               isRound={true}
@@ -191,15 +148,11 @@ function BotaoListadeTarefas() {
               height={"18px"}
             />
           </Td>
-          <Td
-            style={{ borderBottom: "0.5px solid #A7A7A7" }}
-            width="104px"
-            height={"56px"}
-          >
+          <Td>
             <IconButton
               aria-label="Plus sign"
               icon={<MdModeEdit />}
-              background="white"
+              background="transparent"
               variant="secondary"
               color="#0047BB"
               isRound={true}
@@ -269,118 +222,117 @@ function BotaoListadeTarefas() {
                 display={"flex"}
                 justifyContent={"space-between"}
               >
-                <Flex>
-                  <FormControl>
-                    <FormLabel htmlFor="tarefa">
-                      <Text
+                <Flex justify={"space-between"} gap={3}>
+                  <Flex align={"flex-end"}>
+                    <FormControl>
+                      <FormLabel htmlFor="tarefa">
+                        <Text
+                          color="#949494"
+                          fontSize="12px"
+                          fontWeight="700"
+                          mt={"6px"}
+                        >
+                          TAREFA
+                        </Text>
+                      </FormLabel>
+                      <Input
+                        borderRadius={"8px"}
+                        border={"1px solid #A7A7A7"}
+                        mt={"-9px"}
+                        width={"328px"}
+                        height={"56px"}
                         color="#949494"
-                        fontSize="12px"
-                        fontWeight="700"
-                        mt={"6px"}
-                      >
-                        TAREFA
-                      </Text>
-                    </FormLabel>
-                    <Input
-                      borderRadius={"8px"}
-                      border={"1px solid #A7A7A7"}
-                      mt={"-9px"}
-                      width={"328px"}
-                      height={"56px"}
-                      color="#949494"
-                      placeholder="Nome da tarefa"
-                      type="text"
-                      id="tarefa"
-                      name="tarefa"
-                      value={tarefaFilter}
-                      onChange={(e) => setTarefaFilter(e.target.value)}
-                    />
-                  </FormControl>
-                </Flex>
-                <Flex
-                  display={"flex"}
-                  justifyContent={"space-between"}
-                  flex={0}
-                >
-                  <FormControl>
-                    <FormLabel htmlFor="data">
-                      <Text
-                        color="#949494"
-                        fontSize="12px"
-                        fontWeight="700"
-                        mt={"6px"}
-                      >
-                        {" "}
-                        DATA
-                      </Text>
-                    </FormLabel>
-                    <Input
-                      // placeholder="dd/mm/aaaa"
-                      borderRadius={"8px"}
-                      border={"1px solid #A7A7A7"}
-                      mt={"-9px"}
-                      width={"120px"}
-                      height={"56px"}
-                      color="#949494"
-                      id="data"
-                      type="date"
-                      name="data"
-                      // value={dataFilter}
-                      onChange={(event) => setDataFiltered(event.target.value)}
-                    />
-                  </FormControl>
-                  {/* <input
-                    type="date"
-                    onChange={(event) => setData(event.target.value)}
-                  /> */}
-                </Flex>
-
-                <Flex
-                  display={"flex"}
-                  justifyContent={"space-between"}
-                  flex={1.5}
-                >
-                  <Button
-                    type="button"
-                    background="white"
-                    variant="outline"
-                    color="#0047BB"
-                    borderColor="#0047BB"
-                    border={"2px"}
-                    // h={useBreakpointValue({ base: "100%", md: "120%" })}
-                    // float={"right"}
-                    // onClick={() => {
-                    //   handleFilter(categoriaId, data);
-                    //   setCategoriaId("");
-                    // }}
-                    onClick={() => {
-                      handleFilter(tarefaFilter, dataFilter);
-                    }}
-                    _hover={{
-                      background: "#0047BB",
-                      transition: "all 0.4s",
-                      color: "white",
-                    }}
-                    width={"100px"}
-                    height={"56px"}
-                    fontWeight={"700"}
-                    fontSize="18px"
-                  >
-                    Buscar
-                    <Icon
-                      fontWeight={"900"}
-                      as={AiOutlineSearch}
-                      fontSize="18px"
-                      ml={1}
-                      color={"#0047BB"}
-                    />
-                  </Button>
+                        placeholder="Nome da tarefa"
+                        type="text"
+                        id="tarefa"
+                        name="tarefa"
+                        value={tarefaFilter}
+                        onChange={(e) => setTarefaFilter(e.target.value)}
+                      />
+                    </FormControl>
+                  </Flex>
                   <Flex
                     display={"flex"}
                     justifyContent={"space-between"}
-                    flex={2.5}
-                    ml={"15px"}
+                    flex={0}
                   >
+                    <FormControl>
+                      <FormLabel htmlFor="data">
+                        <Text
+                          color="#949494"
+                          fontSize="12px"
+                          fontWeight="700"
+                          mt={"6px"}
+                        >
+                          {" "}
+                          DATA
+                        </Text>
+                      </FormLabel>
+                      <Input
+                        // placeholder="dd/mm/aaaa"
+                        borderRadius={"8px"}
+                        border={"1px solid #A7A7A7"}
+                        mt={"-9px"}
+                        width={"156px"}
+                        height={"56px"}
+                        color="#949494"
+                        id="data"
+                        type="date"
+                        name="data"
+                        // value={dataFilter}
+                        onChange={(event) =>
+                          setDataFiltered(event.target.value)
+                        }
+                      />
+                    </FormControl>
+                    {/* <input
+                    type="date"
+                    onChange={(event) => setData(event.target.value)}
+                  /> */}
+                  </Flex>
+
+                  <Flex>
+                    <Button
+                      type="button"
+                      background="white"
+                      variant="outline"
+                      color="#0047BB"
+                      borderColor="#0047BB"
+                      border={"2px"}
+                      // h={useBreakpointValue({ base: "100%", md: "120%" })}
+                      // float={"right"}
+                      // onClick={() => {
+                      //   handleFilter(categoriaId, data);
+                      //   setCategoriaId("");
+                      // }}
+                      onClick={() => {
+                        handleFilter(tarefaFilter, dataFilter);
+                      }}
+                      _hover={{
+                        background: "#0047BB",
+                        transition: "all 0.4s",
+                        color: "white",
+                      }}
+                      width={"100px"}
+                      height={"56px"}
+                      fontWeight={"700"}
+                      fontSize="18px"
+                      alignSelf={"end"}
+                    >
+                      Buscar
+                      <Icon
+                        fontWeight={"900"}
+                        as={AiOutlineSearch}
+                        fontSize="18px"
+                        ml={1}
+                        color={"#0047BB"}
+                      />
+                    </Button>
+                  </Flex>
+                </Flex>
+
+                <Flex justifyContent={"space-between"}>
+                  <Flex align={"flex-start"} gap={10}>
                     <Button
                       type="button"
                       background="origem.500"
@@ -395,13 +347,30 @@ function BotaoListadeTarefas() {
                         transition: "all 0.4s",
                         color: "white",
                       }}
-                      width={"117px"}
+                      // width={"117px"}
                       height={"56px"}
                     >
                       <Text fontWeight={"700"} fontSize="18px">
-                        Adicionar
+                        Adicionar Tarefa
                       </Text>
                     </Button>
+                    <Flex alignSelf={"end"} align={"flex-start"}>
+                      <Button
+                        onClick={onOpen}
+                        background="transparent"
+                        color="#0047BB"
+                        fontSize="18px"
+                        fontWeight={"700"}
+                      >
+                        Lixeira
+                        <Icon
+                          as={MdArrowForwardIos}
+                          fontSize="20px"
+                          fontWeight={"700"}
+                          color="#0047BB"
+                        />
+                      </Button>
+                    </Flex>
                   </Flex>
                 </Flex>
               </Flex>
@@ -413,83 +382,50 @@ function BotaoListadeTarefas() {
             onClick={() => setTaskList(filteredData)}
           />
           <ModalBody>
-            <TableContainer mt={4} mb={3} ml={1}>
-              <Table
-                variant="unstyled"
-                style={{ border: "0.5px solid #A7A7A7" }}
-              >
-                <Thead>
-                  <Tr background="origem.500" color="white">
-                    <Th
-                      style={{
-                        borderBottom: "0.5px solid #A7A7A7",
-                        borderRight: "0.5px solid #A7A7A7",
-                      }}
-                      width="36px"
-                      height={"56px"}
-                    >
-                      ID
-                    </Th>
-                    <Th
-                      style={{
-                        borderBottom: "0.5px solid #A7A7A7",
-                        borderRight: "0.5px solid #A7A7A7",
-                      }}
-                    >
-                      Lista de Tarefas
-                    </Th>
-                    <Th
-                      style={{
-                        borderBottom: "0.5px solid #A7A7A7",
-                        borderRight: "0.5px solid #A7A7A7",
-                      }}
-                    >
-                      Atividade relacionada
-                    </Th>
-                    <Th
-                      style={{
-                        borderBottom: "0.5px solid #A7A7A7",
-                        borderRight: "0.5px solid #A7A7A7",
-                      }}
-                    >
-                      Data
-                    </Th>
-                    <Th
-                      style={{
-                        borderBottom: "0.5px solid #A7A7A7",
-                        borderRight: "0.5px solid #A7A7A7",
-                      }}
-                    >
-                      Descrição
-                    </Th>
-                    <Th
-                      style={{
-                        borderBottom: "0.5px solid #A7A7A7",
-                        borderRight: "0.5px solid #A7A7A7",
-                      }}
-                    >
-                      Responsável
-                    </Th>
-                    <Th
-                      style={{
-                        borderBottom: "0.5px solid #A7A7A7",
-                        borderRight: "0.5px solid #A7A7A7",
-                      }}
-                    >
-                      Status
-                    </Th>
-                    <Th
-                      style={{
-                        borderBottom: "0.5px solid #A7A7A7",
-                        borderRight: "0.5px solid #A7A7A7",
-                      }}
-                    >
-                      Ações
-                    </Th>
-                  </Tr>
-                </Thead>
-                <Tbody>{tableData}</Tbody>
-                {/* <Tfoot>
+            <Flex direction={"column"} w={"100%"}>
+              <Flex direction={"column"} flex={1}>
+                <TableContainer
+                  mt={4}
+                  mb={3}
+                  borderRadius={"10px"}
+                  overflowX={"scroll"}
+                >
+                  <Table variant="striped" colorScheme={"strippedGray"}>
+                    <Thead>
+                      <Tr background="origem.500">
+                        <Th
+                          color="white"
+                          textAlign={"center"}
+                          width="36px"
+                          height={"56px"}
+                        >
+                          ID
+                        </Th>
+                        <Th color="white" textAlign={"center"}>
+                          Lista de Tarefas
+                        </Th>
+                        <Th color="white" textAlign={"center"}>
+                          Atividade relacionada
+                        </Th>
+                        <Th color="white" textAlign={"center"}>
+                          Data
+                        </Th>
+                        <Th color="white" textAlign={"center"}>
+                          Descrição
+                        </Th>
+                        <Th color="white" textAlign={"center"}>
+                          Responsável
+                        </Th>
+                        <Th color="white" textAlign={"center"}>
+                          Status
+                        </Th>
+                        <Th color="white" textAlign={"center"}>
+                          Ações
+                        </Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>{tableData}</Tbody>
+                    {/* <Tfoot>
           <Tr background="origem.200" color="white">
             <Th></Th>
             <Th></Th>
@@ -498,8 +434,11 @@ function BotaoListadeTarefas() {
             <Th></Th>
           </Tr>
         </Tfoot> */}
-              </Table>
-            </TableContainer>
+                  </Table>
+                </TableContainer>
+              </Flex>
+              <PaginacaoTabela data={taskList} fromTo={fromTo} />
+            </Flex>
           </ModalBody>
 
           {isModalOpen && (

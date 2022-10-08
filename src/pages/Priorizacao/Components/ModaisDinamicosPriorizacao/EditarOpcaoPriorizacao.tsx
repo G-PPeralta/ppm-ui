@@ -101,7 +101,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                               htmlFor="rankingOpcao"
                               mb={"1px"}
                               color={"#949494"}
-                              fontWeight={"400"}
+                              fontWeight={"700"}
                               fontSize={"12px"}
                             >
                               NOME

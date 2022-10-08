@@ -76,6 +76,7 @@ function EditarLicoesAprendidasModal({
           cursor: "pointer",
           borderColor: "origem.500",
         }}
+        backgroundColor={"transparent"}
       >
         <IconButton
           aria-label="Plus sign"

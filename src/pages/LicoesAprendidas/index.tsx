@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AiFillPrinter } from "react-icons/ai";
-import {
-  FiChevronLeft,
-  FiChevronRight,
-  FiChevronsLeft,
-  FiChevronsRight,
-  FiSearch,
-} from "react-icons/fi";
+// import {
+//   FiChevronLeft,
+//   FiChevronRight,
+//   FiChevronsLeft,
+//   FiChevronsRight,
+//   FiSearch,
+// } from "react-icons/fi";
+import { FiSearch } from "react-icons/fi";
 import { MdArrowForwardIos, MdModeEdit } from "react-icons/md";
 
 import {
@@ -35,6 +36,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 
+import PaginacaoTabela from "components/PaginacaoTabela";
 import Sidebar from "components/SideBar";
 
 import { getAllLicoesAprendidas } from "services/get/LicoesAprendidas";
@@ -58,9 +60,15 @@ export function LicoesAprendidasProjetos() {
 
   const [editLicao, setEditLicao] = useState({} as LicoesAprendidas);
 
-  const [pagAtual, setPagAtual] = useState(1);
   const [from, setFrom] = useState<number>(0);
-  const [to, setTo] = useState<number>(8);
+  const [to, setTo] = useState<number>(5);
+
+  const fromTo = {
+    from,
+    to,
+    setFrom,
+    setTo,
+  };
 
   async function handleGetLicoesAprendidas() {
     const payload = await getAllLicoesAprendidas();
@@ -113,57 +121,21 @@ export function LicoesAprendidasProjetos() {
       <Tr key={index}>
         <Td
           // isNumeric
-          style={{
-            borderBottom: "0.5px solid #A7A7A7",
-            border: "0.5px solid #A7A7A7",
-          }}
-          width="48px"
-          height={"56px"}
-          textAlign={"center"}
+          fontWeight={"semibold"}
         >
           {lessons.id}
         </Td>
 
-        <Td
-          style={{
-            borderBottom: "0.5px solid #A7A7A7",
-            borderRight: "0.5px solid #A7A7A7",
-          }}
-          width="284px"
-          height={"56px"}
-        >
-          {lessons.txt_licao_aprendida}
-        </Td>
-        <Td
-          style={{
-            borderBottom: "0.5px solid #A7A7A7",
-            borderRight: "0.5px solid #A7A7A7",
-          }}
-          width="506px"
-          height={"36px"}
-        >
+        <Td fontWeight={"semibold"}>{lessons.txt_licao_aprendida}</Td>
+        <Td width="506px" height={"36px"}>
           {lessons.txt_acao}
         </Td>
-        <Td
-          style={{
-            borderBottom: "0.5px solid #A7A7A7",
-            borderRight: "0.5px solid #A7A7A7",
-          }}
-          width="150px"
-          height={"36px"}
-        >
+        <Td fontWeight={"semibold"}>
           {new Date(lessons.dat_usu_create)
             .toLocaleString("pt-BR")
             .substring(0, 10)}
         </Td>
-        <Td
-          style={{
-            borderBottom: "0.5px solid #A7A7A7",
-            borderRight: "0.5px solid #A7A7A7",
-          }}
-          width="96px"
-          height={"56px"}
-        >
+        <Td fontWeight={"semibold"}>
           <IconButton
             aria-label="Plus sign"
             icon={<MdModeEdit />}
@@ -195,36 +167,36 @@ export function LicoesAprendidasProjetos() {
     setFilteredLicoesAprendidas([...filtered]);
   };
 
-  const rowsPerPage = 8;
-  const totalRegs = filteredLicoesAprendidas.length;
-  const maxPage = Math.ceil(totalRegs / rowsPerPage);
+  // const rowsPerPage = 8;
+  // const totalRegs = filteredLicoesAprendidas.length;
+  // const maxPage = Math.ceil(totalRegs / rowsPerPage);
 
-  const paginate = (pag: number) => {
-    setPagAtual(pag);
+  // const paginate = (pag: number) => {
+  //   setPagAtual(pag);
 
-    const x = (pag - 1) * rowsPerPage;
-    const y = (pag - 1) * rowsPerPage + rowsPerPage;
-    setFrom(x);
-    setTo(y);
-  };
+  //   const x = (pag - 1) * rowsPerPage;
+  //   const y = (pag - 1) * rowsPerPage + rowsPerPage;
+  //   setFrom(x);
+  //   setTo(y);
+  // };
 
-  const advance = () => {
-    if (pagAtual == maxPage) {
-      return;
-    }
+  // const advance = () => {
+  //   if (pagAtual == maxPage) {
+  //     return;
+  //   }
 
-    const _pag = pagAtual + 1;
+  //   const _pag = pagAtual + 1;
 
-    paginate(_pag);
-  };
+  //   paginate(_pag);
+  // };
 
-  const back = () => {
-    if (pagAtual == 1) {
-      return;
-    }
-    const _pag = pagAtual - 1;
-    paginate(_pag);
-  };
+  // const back = () => {
+  //   if (pagAtual == 1) {
+  //     return;
+  //   }
+  //   const _pag = pagAtual - 1;
+  //   paginate(_pag);
+  // };
 
   return (
     <Sidebar>
@@ -365,143 +337,50 @@ export function LicoesAprendidasProjetos() {
                 </Flex>
               </Stack>
 
-              <TableContainer mt={4} mb={3} ml={1}>
-                <Table
-                  variant="striped"
-                  // style={{ border: "0.5px solid #A7A7A7" }}
-                >
-                  <Thead>
-                    <Tr background="#0047BB" color="white">
-                      <Th
-                        style={{
-                          borderBottom: "0.5px solid #A7A7A7",
-                          border: "0.5px solid #A7A7A7",
-                        }}
-                        width="48px"
-                        height={"36px"}
-                        textAlign={"center"}
-                        color={"white"}
-                      >
-                        ID
-                      </Th>
+              <Flex direction={"column"} w={"100%"}>
+                <Flex direction={"column"} flex={1}>
+                  <TableContainer
+                    mt={4}
+                    mb={3}
+                    borderRadius={"10px"}
+                    overflowX={"scroll"}
+                  >
+                    <Table variant="striped" colorScheme={"strippedGray"}>
+                      <Thead>
+                        <Tr background="#0047BB" color="white">
+                          <Th textAlign={"center"} color={"white"}>
+                            ID
+                          </Th>
 
-                      <Th
-                        style={{
-                          borderBottom: "0.5px solid #A7A7A7",
-                          borderRight: "0.5px solid #A7A7A7",
-                        }}
-                        color={"white"}
-                      >
-                        Lições Aprendidas
-                      </Th>
-                      <Th
-                        style={{
-                          borderBottom: "0.5px solid #A7A7A7",
-                          borderRight: "0.5px solid #A7A7A7",
-                        }}
-                        color={"white"}
-                      >
-                        Ações e Recomendações
-                      </Th>
-                      <Th
-                        style={{
-                          borderBottom: "0.5px solid #A7A7A7",
-                          borderRight: "0.5px solid #A7A7A7",
-                        }}
-                        color={"white"}
-                      >
-                        Data
-                      </Th>
-                      <Th
-                        style={{
-                          borderBottom: "0.5px solid #A7A7A7",
-                          borderRight: "0.5px solid #A7A7A7",
-                        }}
-                        color={"white"}
-                      >
-                        Ações
-                      </Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>{tableData}</Tbody>
-                  <Tfoot>
-                    <Tr background="#0047BB" color="white">
-                      <Th
-                        style={{
-                          borderBottom: "0.5px solid #A7A7A7",
-                          borderRight: "0.5px solid #A7A7A7",
-                        }}
-                        color={"white"}
-                      >
-                        Total
-                      </Th>
-                      <Th
-                        style={{
-                          borderBottom: "0.5px solid #A7A7A7",
-                          borderRight: "0.5px solid #A7A7A7",
-                        }}
-                        color={"white"}
-                      >
-                        {tableData.length} Lições
-                      </Th>
-                      <Th
-                        style={{
-                          borderBottom: "0.5px solid #A7A7A7",
-                          borderRight: "0.5px solid #A7A7A7",
-                        }}
-                        color={"white"}
-                      >
-                        {tableData.length} Lições
-                      </Th>
-                      <Th
-                        color={"white"}
-                        style={{
-                          borderBottom: "0.5px solid #A7A7A7",
-                          borderRight: "0.5px solid #A7A7A7",
-                        }}
-                      ></Th>
-                      <Th
-                        color={"white"}
-                        style={{
-                          borderBottom: "0.5px solid #A7A7A7",
-                          borderRight: "0.5px solid #A7A7A7",
-                        }}
-                      ></Th>
-                    </Tr>
-                  </Tfoot>
-                </Table>
-              </TableContainer>
-              <Flex justifyContent={"center"}>
-                <Flex
-                  width={"300px"}
-                  alignItems={"center"}
-                  justifyContent={"space-between"}
-                >
-                  <IconButton
-                    aria-label=""
-                    icon={<FiChevronsLeft />}
-                    onClick={() => paginate(1)}
-                  />
-                  <IconButton
-                    aria-label=""
-                    icon={<FiChevronLeft onClick={back} />}
-                  />
-
-                  <Text>Página atual: {pagAtual}</Text>
-
-                  <IconButton
-                    aria-label=""
-                    icon={<FiChevronRight />}
-                    onClick={advance}
-                  />
-                  <IconButton
-                    aria-label=""
-                    icon={<FiChevronsRight />}
-                    onClick={() => paginate(maxPage)}
-                  />
+                          <Th color={"white"} textAlign={"center"}>
+                            Lições Aprendidas
+                          </Th>
+                          <Th color={"white"} textAlign={"center"}>
+                            Ações e Recomendações
+                          </Th>
+                          <Th color={"white"} textAlign={"center"}>
+                            Data
+                          </Th>
+                          <Th color={"white"} textAlign={"center"}>
+                            Ações
+                          </Th>
+                        </Tr>
+                      </Thead>
+                      <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+                      <Tfoot>
+                        <Tr background={"origem.500"}>
+                          <Th color={"white"}>Total</Th>
+                          <Th color={"white"}>{tableData.length} Lições</Th>
+                          <Th color={"white"}>{tableData.length} Lições</Th>
+                          <Th color={"white"}></Th>
+                          <Th color={"white"}></Th>
+                        </Tr>
+                      </Tfoot>
+                    </Table>
+                  </TableContainer>
                 </Flex>
+                <PaginacaoTabela data={licoesAprendidas} fromTo={fromTo} />
               </Flex>
-              <Stack spacing="6" alignItems={"center"}></Stack>
             </Box>{" "}
           </Flex>
         </Stack>
