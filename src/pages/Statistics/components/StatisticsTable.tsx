@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { AiFillEdit } from "react-icons/ai";
+import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 import {
@@ -12,6 +14,7 @@ import {
   Tr,
   Text,
   Flex,
+  IconButton,
 } from "@chakra-ui/react";
 import "../statistics.css";
 import { StatisticsTableData } from "interfaces/Services";
@@ -33,10 +36,53 @@ export function StatisticsTable({ data }: Props) {
     setTo,
   };
 
+  const tableData = data.slice(from, to).map((projeto, key) => (
+    <Tr key={key}>
+      <Td fontWeight={"semibold"}>
+        <Link to={`/estatisticas/cronograma`} state={{ data: projeto }}>
+          <Text>{projeto.sonda}</Text>
+        </Link>
+      </Td>
+      <Td fontWeight={"semibold"}>
+        <Link to={`/estatisticas/cronograma`} state={{ data: projeto }}>
+          <Text>{projeto.poco}</Text>
+        </Link>
+      </Td>
+      <Td fontWeight={"semibold"}>
+        <IconButton
+          aria-label="Plus sign"
+          icon={<AiFillEdit />}
+          background="white"
+          variant="secondary"
+          color="#2D2926"
+          mr={2}
+          isRound={true}
+          size="sm"
+        />
+        <IconButton
+          aria-label="Plus sign"
+          icon={<FaTrash />}
+          background="white"
+          variant="secondary"
+          color="#F94144"
+          mr={2}
+          isRound={true}
+          size="sm"
+        />
+        {/* <EditaValorModal /> */}
+      </Td>
+    </Tr>
+  ));
+
   return (
     <Flex direction={"column"} flex={1}>
-      <Flex direction={"column"} flex={1} overflowX={"scroll"}>
-        <TableContainer mt={4} mb={3} borderRadius={"10px"}>
+      <Flex direction={"column"} flex={1}>
+        <TableContainer
+          mt={4}
+          mb={3}
+          borderRadius={"10px"}
+          overflowX={"scroll"}
+        >
           <Table variant="striped" colorScheme={"strippedGray"}>
             <Thead>
               <Tr background={"origem.500"}>
@@ -51,52 +97,7 @@ export function StatisticsTable({ data }: Props) {
                 </Th>
               </Tr>
             </Thead>
-            <Tbody scrollBehavior={"smooth"}>
-              {data.slice(from, to).map((projeto, key) => (
-                <Tr key={key}>
-                  <Td fontWeight={"semibold"}>
-                    <Link
-                      to={`/estatisticas/cronograma`}
-                      state={{ data: projeto }}
-                    >
-                      <Text>{projeto.sonda}</Text>
-                    </Link>
-                  </Td>
-                  <Td fontWeight={"semibold"}>
-                    <Link
-                      to={`/estatisticas/cronograma`}
-                      state={{ data: projeto }}
-                    >
-                      <Text>{projeto.poco}</Text>
-                    </Link>
-                  </Td>
-                  <Td fontWeight={"semibold"}>
-                    {/* <IconButton
-                      aria-label="Plus sign"
-                      icon={<AiFillEdit />}
-                      background="white"
-                      variant="secondary"
-                      color="#2D2926"
-                      mr={2}
-                      isRound={true}
-                      size="sm"
-                    /> */}
-                    {/* <IconButton
-                      aria-label="Plus sign"
-                      icon={<FaTrash />}
-                      background="white"
-                      variant="secondary"
-                      color="#F94144"
-                      mr={2}
-                      isRound={true}
-                      size="sm"
-                    /> */}
-
-                    {/* <EditaValorModal /> */}
-                  </Td>
-                </Tr>
-              ))}
-            </Tbody>
+            <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
             <Tfoot>
               <Tr background={"origem.500"}>
                 <Th color="white">Total</Th>
