@@ -38,17 +38,17 @@ export function StatisticsTable({ data }: Props) {
 
   const tableData = data.slice(from, to).map((projeto, key) => (
     <Tr key={key}>
-      <Td fontWeight={"semibold"}>
+      <Td textAlign={"center"} fontWeight={"semibold"}>
         <Link to={`/estatisticas/cronograma`} state={{ data: projeto }}>
           <Text>{projeto.sonda}</Text>
         </Link>
       </Td>
-      <Td fontWeight={"semibold"}>
+      <Td textAlign={"center"} fontWeight={"semibold"}>
         <Link to={`/estatisticas/cronograma`} state={{ data: projeto }}>
           <Text>{projeto.poco}</Text>
         </Link>
       </Td>
-      <Td fontWeight={"semibold"}>
+      <Td textAlign={"center"} fontWeight={"semibold"}>
         {/* <IconButton
           aria-label="Plus sign"
           icon={<AiFillEdit />}

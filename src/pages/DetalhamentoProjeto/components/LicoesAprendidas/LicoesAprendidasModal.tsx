@@ -143,11 +143,13 @@ function LicoesAprendidasModal({
         <ModalContent>
           <ModalHeader
             backgroundColor={"#2E69FD"}
-            borderTopRadius={7}
+            borderTopRadius={"8px"}
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            h={"48px"}
           >
             Lições Aprendidas
           </ModalHeader>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BsCheckCircleFill, BsFillXCircleFill } from "react-icons/bs";
-import { FiPrinter } from "react-icons/fi";
+// import { FiPrinter } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import {
@@ -15,7 +15,7 @@ import {
   Text,
   Flex,
   Tooltip,
-  Button,
+  // Button,
 } from "@chakra-ui/react";
 import { Projetos } from "interfaces/Projetos";
 
@@ -157,10 +157,10 @@ export function TabelaProjetos({ data }: TableProps) {
         <Table variant="striped" colorScheme="strippedGray">
           <Thead>
             <Tr background={"origem.500"}>
-              <Th colSpan={16} color="white">
+              {/* <Th colSpan={16} color="white">
                 Projetos
-              </Th>
-              <Th
+              </Th> */}
+              {/* <Th
                 borderTopRightRadius={"10px"}
                 colSpan={1}
                 textAlign={"center"}
@@ -173,7 +173,7 @@ export function TabelaProjetos({ data }: TableProps) {
                 >
                   Imprimir
                 </Button>
-              </Th>
+              </Th> */}
             </Tr>
             <Tr background="origem.500">
               <Th

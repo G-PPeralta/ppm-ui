@@ -14,7 +14,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  Stack,
+  // Stack,
   Text,
   useDisclosure,
   IconButton,
@@ -79,82 +79,94 @@ function ModalPriorizacao(infosRankings: TableProps) {
               registerForm.handleSubmit(e);
             }}
           >
-            <ModalBody mt={3}>
+            <>
               <FormControl>
-                <Flex gap={4}>
-                  <Stack gap={2}>
-                    <Flex direction={"column"}>
-                      <Flex align={"flex-end"} justify={"space-between"}>
-                        <Flex alignSelf={"start"}>
-                          <Text>
-                            <Button
-                              aria-label=""
-                              backgroundColor={"white"}
-                              color={"#2D2926"}
-                              onClick={() =>
-                                handleCancelar(registerForm, onClose)
-                              }
-                              _hover={{
-                                background: "white",
-                                transition: "all 0.4s",
-                                color: "origem.500",
-                              }}
-                              fontSize={"24px"}
-                              fontWeight={"700"}
-                            >
-                              <Icon
-                                as={MdOutlineArrowBackIosNew}
-                                h={"30px"}
-                                w={"22px"}
-                                fontSize="13px"
-                                fontWeight={"none"}
-                                mr={2}
-                                color="#2D2926"
-                              />{" "}
-                              Priorização
-                            </Button>
-                          </Text>
+                <Flex>
+                  <Flex
+                    mt={"15px"}
+                    justify={"space-between"}
+                    align={"center"}
+                    flex={1}
+                  >
+                    <Flex align={"flex-end"}>
+                      <Text>
+                        <Button
+                          aria-label=""
+                          backgroundColor={"white"}
+                          color={"#2D2926"}
+                          onClick={() => handleCancelar(registerForm, onClose)}
+                          _hover={{
+                            background: "white",
+                            transition: "all 0.4s",
+                            color: "origem.500",
+                          }}
+                          fontSize={"24px"}
+                          fontWeight={"700"}
+                          alignSelf={"end"}
+                        >
+                          <Icon
+                            _hover={{
+                              background: "white",
+                              transition: "all 0.4s",
+                              color: "origem.500",
+                            }}
+                            as={MdOutlineArrowBackIosNew}
+                            h={"30px"}
+                            w={"22px"}
+                            fontSize="13px"
+                            fontWeight={"none"}
+                            mr={2}
+                            color="#2D2926"
+                          />{" "}
+                          Priorização
+                        </Button>
+                      </Text>
+                    </Flex>
+
+                    <Flex gap={9}>
+                      <Flex gap={4}>
+                        <Flex align={"flex-start"}>
+                          <ModalCadastrarOpcaoPriorizacao
+                            nomeRanking={infosRankings.nomeRanking}
+                            idRanking={infosRankings.idRanking}
+                          />
                         </Flex>
-                        <Flex gap="50px">
-                          <Flex gap={4}>
-                            <Flex>
-                              <ModalCadastrarOpcaoPriorizacao
-                                nomeRanking={infosRankings.nomeRanking}
-                                idRanking={infosRankings.idRanking}
-                              />
-                            </Flex>
-                            <Flex>
-                              <EditarPriorizacao
-                                nomeRanking={infosRankings.nomeRanking}
-                                idRanking={infosRankings.idRanking}
-                              />
-                            </Flex>
-                          </Flex>
-                          <Button
-                            background="transparent"
-                            color="#0047BB"
-                            float={"right"}
-                            fontSize="18px"
-                          >
-                            Lixeira
-                            <Icon
-                              as={MdArrowForwardIos}
-                              fontSize={"18px"}
-                              fontWeight={"700"}
-                              ml={1}
-                              color="#0047BB"
-                            />
-                          </Button>
+                        <Flex align={"flex-start"}>
+                          <EditarPriorizacao
+                            nomeRanking={infosRankings.nomeRanking}
+                            idRanking={infosRankings.idRanking}
+                          />
                         </Flex>
                       </Flex>
-                      <TabelaOpcoesPriorizacao
-                        idRanking={infosRankings.idRanking}
-                        nomeRanking={infosRankings.nomeRanking}
-                      />
+                      <Flex alignItems={"flex-start"}>
+                        <Button
+                          background="transparent"
+                          color="#0047BB"
+                          fontSize="18px"
+                          alignSelf={"end"}
+                        >
+                          Lixeira
+                          <Icon
+                            as={MdArrowForwardIos}
+                            fontSize={"18px"}
+                            fontWeight={"700"}
+                            ml={1}
+                            color="#0047BB"
+                          />
+                        </Button>
+                      </Flex>
                     </Flex>
-                  </Stack>
+                  </Flex>
                 </Flex>
               </FormControl>
+            </>
+            <ModalBody mt={3}>
+              <Flex>
+                <TabelaOpcoesPriorizacao
+                  idRanking={infosRankings.idRanking}
+                  nomeRanking={infosRankings.nomeRanking}
+                />
+              </Flex>
             </ModalBody>
           </form>
         </ModalContent>

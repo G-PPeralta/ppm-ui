@@ -58,13 +58,17 @@ export function TabelaFornecedores({
     .slice(from, to)
     .map((fornecedor, index) => (
       <Tr key={index}>
-        <Td isNumeric textAlign={"center"}>
+        <Td isNumeric fontWeight={"semibold"}>
           {fornecedor.id}
         </Td>
-        <Td>{fornecedor.fornecedor}</Td>
-        <Td>{fornecedor.orcamento.toLocaleString("pt-br")}</Td>
-        <Td>{fornecedor.realizado.toLocaleString("pt-br")}</Td>
-        <Td>{fornecedor.responsavel}</Td>
+        <Td fontWeight={"semibold"}>{fornecedor.fornecedor}</Td>
+        <Td fontWeight={"semibold"}>
+          {fornecedor.orcamento.toLocaleString("pt-br")}
+        </Td>
+        <Td fontWeight={"semibold"}>
+          {fornecedor.realizado.toLocaleString("pt-br")}
+        </Td>
+        <Td fontWeight={"semibold"}>{fornecedor.responsavel}</Td>
         <Td width="406px" height={"56px"}>
           {fornecedor.descricao}
         </Td>

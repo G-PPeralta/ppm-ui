@@ -9,6 +9,7 @@ import {
   Thead,
   Tr,
   Flex,
+  // Tfoot,
 } from "@chakra-ui/react";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
@@ -46,30 +47,10 @@ export function TabelaPriorizacao() {
     .slice(from, to)
     .map((prio) => (
       <Tr key={prio.id}>
-        <Td
-          width={"48px"}
-          height={"56px"}
-          isNumeric
-          style={{
-            borderBottom: "0.5px solid #A7A7A7",
-            borderRight: "0.5px solid #A7A7A7",
-          }}
-          fontSize={"13px"}
-          fontWeight={"600"}
-          color={"#2D2926"}
-        >
+        <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
           {prio.id}
         </Td>
-        <Td
-          width={"600px"}
-          style={{
-            borderBottom: "0.5px solid #A7A7A7",
-            borderRight: "0.5px solid #A7A7A7",
-          }}
-          fontSize={"13px"}
-          fontWeight={"600"}
-          color={"#2D2926"}
-        >
+        <Td textAlign={"center"} fontWeight={"semibold"} color={"#2D2926"}>
           {prio.nom_ranking}
         </Td>
         {/* <Td
@@ -81,15 +62,7 @@ export function TabelaPriorizacao() {
       >
         {prio.nome_area}
       </Td> */}
-        <Td
-          textAlign={"center"}
-          style={{
-            borderBottom: "0.5px solid #A7A7A7",
-            borderRight: "0.5px solid #A7A7A7",
-          }}
-          width={"104px"}
-          height={"56px"}
-        >
+        <Td textAlign={"center"} width={"104px"} height={"56px"}>
           <ModalPriorizacao
             nomeRanking={prio.nom_ranking}
             idRanking={prio.id}
@@ -101,63 +74,43 @@ export function TabelaPriorizacao() {
 
   return (
     <>
-      <Flex direction={"column"}>
-        <TableContainer mt={4} mb={4}>
-          <Table
-            variant="striped"
-            style={{
-              borderBottom: "0.5px solid #A7A7A7",
-              border: "0.5px solid #A7A7A7",
-            }}
-          >
+      <Flex direction={"column"} w={"100%"}>
+        <TableContainer
+          mt={4}
+          mb={4}
+          borderRadius={"10px"}
+          overflowX={"scroll"}
+        >
+          <Table variant="striped" colorScheme={"strippedGray"}>
             <Thead>
-              <Tr background="origem.500" color="white">
-                <Th
-                  style={{
-                    borderBottom: "0.5px solid #A7A7A7",
-                    borderRight: "0.5px solid #A7A7A7",
-                  }}
-                  width={"48px"}
-                  height={"36px"}
-                  color="white"
-                >
+              <Tr background={"origem.500"}>
+                <Th color="white" textAlign={"center"}>
                   ID
                 </Th>
-                <Th
-                  style={{
-                    borderBottom: "0.5px solid #A7A7A7",
-                    borderRight: "0.5px solid #A7A7A7",
-                  }}
-                  width={"944px"}
-                  height={"36px"}
-                  color="white"
-                >
+                <Th color="white" textAlign={"center"}>
                   Priorizações
                 </Th>
                 {/* <Th
                   textAlign={"center"}
-                  style={{
-                    borderBottom: "0.5px solid #A7A7A7",
-                    borderRight: "0.5px solid #A7A7A7",
-                  }}
+
                 >
                   Área responsável
                 </Th> */}
-                <Th
-                  textAlign={"center"}
-                  style={{
-                    borderBottom: "0.5px solid #A7A7A7",
-                    borderRight: "0.5px solid #A7A7A7",
-                  }}
-                  width={"104px"}
-                  height={"36px"}
-                  color="white"
-                >
+                <Th color="white" textAlign={"center"}>
                   Ações
                 </Th>
               </Tr>
             </Thead>
-            <Tbody>{tableData}</Tbody>
+            <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+            {/* <Tfoot>
+              <Tr background={"origem.500"}>
+                <Th background={"origem.500"} color="transparent">
+                  total
+                </Th>
+                <Th background={"origem.500"} color="white"></Th>
+                <Th background={"origem.500"} color="white"></Th>
+              </Tr>
+            </Tfoot> */}
           </Table>
         </TableContainer>
 
