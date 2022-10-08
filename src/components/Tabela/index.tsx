@@ -39,9 +39,14 @@ function Tabela({ data, header, body, footer }: Props) {
   }
 
   return (
-    <Flex direction={"column"} flex={1}>
-      <Flex direction={"column"} flex={1} overflowX={"scroll"}>
-        <TableContainer mt={4} mb={3} borderRadius={"10px"}>
+    <Flex direction={"column"} w={"100%"}>
+      <Flex direction={"column"} flex={1}>
+        <TableContainer
+          mt={4}
+          mb={3}
+          borderRadius={"10px"}
+          overflowX={"scroll"}
+        >
           <Table variant="striped" colorScheme={"strippedGray"}>
             <Thead>
               <Tr background={"origem.500"}>
