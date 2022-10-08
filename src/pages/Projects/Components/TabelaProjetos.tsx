@@ -1,12 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsCheckCircleFill, BsFillXCircleFill } from "react-icons/bs";
-import {
-  FiChevronLeft,
-  FiChevronRight,
-  FiChevronsLeft,
-  FiChevronsRight,
-  FiPrinter,
-} from "react-icons/fi";
+import { FiPrinter } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import {
@@ -20,12 +14,12 @@ import {
   Tr,
   Text,
   Flex,
-  IconButton,
-  Select,
   Tooltip,
   Button,
 } from "@chakra-ui/react";
 import { Projetos } from "interfaces/Projetos";
+
+import PaginacaoTabela from "components/PaginacaoTabela";
 
 import { formatDate } from "utils/formatDate";
 import { formatReal } from "utils/formatReal";
@@ -39,12 +33,16 @@ interface TableProps {
   data: Projetos[];
 }
 
-export function TabelaProjetos(props: TableProps) {
-  const { data } = props;
-  const [pagAtual, setPagAtual] = useState(1);
+export function TabelaProjetos({ data }: TableProps) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
-  const [perPage, setPerPage] = useState<number>(5);
+
+  const fromTo = {
+    from,
+    to,
+    setFrom,
+    setTo,
+  };
 
   const totalOrcado = data.reduce(
     (accumulator, object) => accumulator + +object.vlr_orcado,
@@ -55,47 +53,6 @@ export function TabelaProjetos(props: TableProps) {
     (accumulator, object) => accumulator + +object.vlr_cr,
     0
   );
-  const totalRegs = data.length;
-  const maxPage = Math.ceil(totalRegs / perPage);
-
-  const paginate = (pag: number) => {
-    setPagAtual(pag);
-
-    const x = (pag - 1) * perPage;
-    const y = (pag - 1) * perPage + perPage;
-    setFrom(x);
-    setTo(y);
-  };
-
-  const changePerPage = (value: number) => {
-    setPerPage(value);
-    const x = perPage;
-    const y = perPage + perPage;
-    setFrom(x);
-    setTo(y);
-  };
-
-  const advance = () => {
-    if (pagAtual == maxPage) {
-      return;
-    }
-
-    const _pag = pagAtual + 1;
-
-    paginate(_pag);
-  };
-
-  const back = () => {
-    if (pagAtual == 1) {
-      return;
-    }
-    const _pag = pagAtual - 1;
-    paginate(_pag);
-  };
-
-  useEffect(() => {
-    paginate(pagAtual);
-  }, [from, to]);
 
   const tableData = data.slice(from, to).map((projeto, key) => (
     <Tr key={key}>
@@ -474,61 +431,7 @@ export function TabelaProjetos(props: TableProps) {
           </Tfoot>
         </Table>
       </TableContainer>
-      <Flex justifyContent="end">
-        <Flex alignItems={"center"} justifyContent={"space-between"}>
-          <Text>Per page</Text>
-          <Select
-            width={100}
-            marginLeft="10px"
-            marginRight="15px"
-            onChange={(e) => changePerPage(+e.target.value)}
-          >
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-          </Select>
-
-          <Text>
-            {pagAtual} - {perPage} of {data.length}{" "}
-          </Text>
-
-          <IconButton
-            bgColor="#FFFF"
-            marginLeft="10px"
-            marginRight="5px"
-            aria-label=""
-            icon={<FiChevronsLeft />}
-            onClick={() => paginate(1)}
-          />
-
-          <IconButton
-            bgColor="#FFFF"
-            marginLeft="5px"
-            marginRight="5px"
-            aria-label=""
-            icon={<FiChevronLeft onClick={back} />}
-          />
-
-          {/* <Text>Página atual: {pagAtual}</Text> */}
-
-          <IconButton
-            bgColor="#FFFF"
-            marginLeft="5px"
-            marginRight="5px"
-            aria-label=""
-            icon={<FiChevronRight />}
-            onClick={advance}
-          />
-          <IconButton
-            bgColor="#FFFF"
-            marginLeft="5px"
-            marginRight="5px"
-            aria-label=""
-            icon={<FiChevronsRight />}
-            onClick={() => paginate(maxPage)}
-          />
-        </Flex>
-      </Flex>
+      <PaginacaoTabela data={data} fromTo={fromTo} />
     </Flex>
   );
 }
