@@ -38,6 +38,8 @@ export function StatisticsTable({ data }: Props) {
   //   currency: "BRL",
   // });
 
+  const innerWidth = window.innerWidth;
+
   const rowsPerPage = 5;
 
   const totalRegs = data.length;
@@ -71,14 +73,20 @@ export function StatisticsTable({ data }: Props) {
   };
 
   return (
-    <Flex direction={"column"} flex={1}>
+    <Flex direction={"column"} flex={1} overflowX={"scroll"}>
       <TableContainer mt={4} mb={3} borderRadius={"10px"}>
         <Table variant="striped" colorScheme={"strippedGray"}>
           <Thead>
             <Tr background={"origem.500"}>
-              <Th color="white">Item</Th>
-              <Th color="white">Intervenção</Th>
-              <Th color="white">Ações</Th>
+              <Th color="white" textAlign={"center"}>
+                Item
+              </Th>
+              <Th color="white" textAlign={"center"}>
+                Intervenção
+              </Th>
+              <Th color="white" textAlign={"center"}>
+                Ações
+              </Th>
             </Tr>
           </Thead>
           <Tbody scrollBehavior={"smooth"}>
@@ -132,13 +140,18 @@ export function StatisticsTable({ data }: Props) {
               <Th color="white">Total</Th>
               <Th color="white"></Th>
               <Th color="white"></Th>
-              {/* <Th color="white"></Th> */}
             </Tr>
           </Tfoot>
         </Table>
       </TableContainer>
 
-      <Flex alignItems={"center"} justifyContent={"end"} gap={2} flex={1}>
+      <Flex
+        alignItems={"center"}
+        justifyContent={innerWidth >= 400 ? "end" : "center"}
+        gap={2}
+        flex={1}
+        wrap={innerWidth >= 400 ? "nowrap" : "wrap"}
+      >
         <Flex gap={2} alignItems={"center"}>
           <Text fontSize={"14px"}>Per page:</Text>
           <Select placeholder="Selecione" h={"32px"} w={"120px"}>
