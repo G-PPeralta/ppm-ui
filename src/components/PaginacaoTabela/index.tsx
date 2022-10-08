@@ -9,15 +9,15 @@ import {
 import { Flex, IconButton, Select, Text } from "@chakra-ui/react";
 
 interface FromTo {
-  from: number;
-  to: number;
-  setFrom: React.Dispatch<React.SetStateAction<number>>;
-  setTo: React.Dispatch<React.SetStateAction<number>>;
+  from: number; // Inicio da paginação
+  to: number; // Fim da paginação
+  setFrom: React.Dispatch<React.SetStateAction<number>>; // Função para setar o inicio da paginação
+  setTo: React.Dispatch<React.SetStateAction<number>>; // Função para setar o fim da paginação
 }
 
 interface Props {
-  data: any;
-  fromTo: FromTo;
+  data: any; // Dados da tabela
+  fromTo: FromTo; // Objeto com estados (useState's) que controlam a paginação
 }
 
 function PaginacaoTabela({ data, fromTo }: Props) {
@@ -28,9 +28,10 @@ function PaginacaoTabela({ data, fromTo }: Props) {
 
   const innerWidth = window.innerWidth;
 
-  const totalRegs = data.length;
-  const maxPage = Math.ceil(totalRegs / perPage);
+  const totalRegs = data.length; // Total de registros
+  const maxPage = Math.ceil(totalRegs / perPage); // Total de páginas
 
+  // Função para setar a paginação
   const paginate = (pag: number) => {
     setPagAtual(pag);
 
@@ -40,6 +41,7 @@ function PaginacaoTabela({ data, fromTo }: Props) {
     setTo(y);
   };
 
+  // Função para setar a quantidade de registros por página
   const changePerPage = (value: number) => {
     setPerPage(value);
     const x = perPage;
@@ -48,6 +50,7 @@ function PaginacaoTabela({ data, fromTo }: Props) {
     setTo(y);
   };
 
+  // Função para setar a paginação para a próxima página
   const advance = () => {
     if (pagAtual == maxPage) {
       return;
@@ -58,6 +61,7 @@ function PaginacaoTabela({ data, fromTo }: Props) {
     paginate(pag);
   };
 
+  // Função para setar a paginação para a página anterior
   const back = () => {
     if (pagAtual == 1) {
       return;
