@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { AiFillEdit } from "react-icons/ai";
-import { FaTrash } from "react-icons/fa";
+// import { AiFillEdit } from "react-icons/ai";
+// import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 import {
@@ -14,7 +14,7 @@ import {
   Tr,
   Text,
   Flex,
-  IconButton,
+  // IconButton,
 } from "@chakra-ui/react";
 import "../statistics.css";
 import { StatisticsTableData } from "interfaces/Services";
@@ -49,7 +49,7 @@ export function StatisticsTable({ data }: Props) {
         </Link>
       </Td>
       <Td fontWeight={"semibold"}>
-        <IconButton
+        {/* <IconButton
           aria-label="Plus sign"
           icon={<AiFillEdit />}
           background="white"
@@ -58,8 +58,8 @@ export function StatisticsTable({ data }: Props) {
           mr={2}
           isRound={true}
           size="sm"
-        />
-        <IconButton
+        /> */}
+        {/* <IconButton
           aria-label="Plus sign"
           icon={<FaTrash />}
           background="white"
@@ -68,14 +68,14 @@ export function StatisticsTable({ data }: Props) {
           mr={2}
           isRound={true}
           size="sm"
-        />
+        /> */}
         {/* <EditaValorModal /> */}
       </Td>
     </Tr>
   ));
 
   return (
-    <Flex direction={"column"} flex={1}>
+    <Flex direction={"column"} w={"100%"}>
       <Flex direction={"column"} flex={1}>
         <TableContainer
           mt={4}
