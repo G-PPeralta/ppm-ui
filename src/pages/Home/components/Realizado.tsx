@@ -41,8 +41,6 @@ export default function RealizadoComponent() {
 
   const valorFormatado = totalRealizado && totalRealizado.toLocaleString();
 
-  console.log(totalRealizado);
-
   return (
     <Stack spacing="8">
       <Flex
