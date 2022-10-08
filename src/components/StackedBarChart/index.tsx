@@ -19,7 +19,7 @@ export default function StackedBarChart({
   dataEntries,
 }: StackedBarChartProps) {
   return (
-    <ResponsiveContainer width={sizeW} height={sizeH}>
+    <ResponsiveContainer aspect={0}>
       <BarChart data={data} className={style.chart}>
         <XAxis dataKey="month" fontSize={10} />
         {showY ? <YAxis dataKey={dataEntries[0].name} /> : undefined}
