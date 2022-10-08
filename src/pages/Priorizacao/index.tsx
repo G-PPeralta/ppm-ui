@@ -50,7 +50,7 @@ export function Priorizacao() {
                     </FormControl>
                   </Flex>
 
-                  <Flex alignItems={"flex-start"} justifyContent={"center"}>
+                  <Flex alignItems={"flex-start"} alignSelf={"end"}>
                     <ModalLixeira />
                   </Flex>
                 </Flex>
