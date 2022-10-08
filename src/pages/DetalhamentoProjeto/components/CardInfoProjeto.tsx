@@ -49,6 +49,7 @@ function CardInfoProjeto({
         borderRadius={5}
         direction={"column"}
         flex={2}
+        justify={"space-between"}
       >
         <Box
           mb={4}
