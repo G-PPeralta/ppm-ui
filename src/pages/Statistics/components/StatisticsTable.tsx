@@ -147,10 +147,10 @@ export function StatisticsTable({ data }: Props) {
 
       <Flex
         alignItems={"center"}
-        justifyContent={innerWidth >= 400 ? "end" : "center"}
+        justifyContent={innerWidth > 428 ? "end" : "center"}
         gap={2}
         flex={1}
-        wrap={innerWidth >= 400 ? "nowrap" : "wrap"}
+        wrap={innerWidth > 428 ? "nowrap" : "wrap"}
       >
         <Flex gap={2} alignItems={"center"}>
           <Text fontSize={"14px"}>Per page:</Text>

@@ -474,13 +474,19 @@ export function TabelaProjetos(props: TableProps) {
           </Tfoot>
         </Table>
       </TableContainer>
-      <Flex justifyContent="end">
-        <Flex alignItems={"center"} justifyContent={"space-between"}>
-          <Text>Per page</Text>
+      <Flex
+        alignItems={"center"}
+        justifyContent={innerWidth > 428 ? "end" : "center"}
+        gap={2}
+        flex={1}
+        wrap={innerWidth > 428 ? "nowrap" : "wrap"}
+      >
+        <Flex gap={2} alignItems={"center"}>
+          <Text fontSize={"14px"}>Per page:</Text>
           <Select
-            width={100}
-            marginLeft="10px"
-            marginRight="15px"
+            placeholder="Selecione"
+            h={"32px"}
+            w={"120px"}
             onChange={(e) => changePerPage(+e.target.value)}
           >
             <option value="5">5</option>
@@ -488,44 +494,66 @@ export function TabelaProjetos(props: TableProps) {
             <option value="15">15</option>
           </Select>
 
-          <Text>
-            {pagAtual} - {perPage} of {data.length}{" "}
+          <Text fontSize={"14px"}>
+            {from === 0 ? "1" : from} - {to} de {data.length}
           </Text>
-
+        </Flex>
+        <Flex gap={2}>
           <IconButton
-            bgColor="#FFFF"
-            marginLeft="10px"
-            marginRight="5px"
             aria-label=""
             icon={<FiChevronsLeft />}
             onClick={() => paginate(1)}
+            variant="ghost"
+            size="lg"
+            h={"24px"}
+            _hover={{
+              background: "origem.500",
+              transition: "all 0.4s",
+              color: "white",
+              fontWeight: "bold",
+            }}
           />
-
           <IconButton
-            bgColor="#FFFF"
-            marginLeft="5px"
-            marginRight="5px"
             aria-label=""
             icon={<FiChevronLeft onClick={back} />}
+            variant="ghost"
+            size="lg"
+            h={"24px"}
+            _hover={{
+              background: "origem.500",
+              transition: "all 0.4s",
+              color: "white",
+              fontWeight: "bold",
+            }}
           />
 
-          {/* <Text>Página atual: {pagAtual}</Text> */}
-
           <IconButton
-            bgColor="#FFFF"
-            marginLeft="5px"
-            marginRight="5px"
             aria-label=""
             icon={<FiChevronRight />}
             onClick={advance}
+            variant="ghost"
+            size="lg"
+            h={"24px"}
+            _hover={{
+              background: "origem.500",
+              transition: "all 0.4s",
+              color: "white",
+              fontWeight: "bold",
+            }}
           />
           <IconButton
-            bgColor="#FFFF"
-            marginLeft="5px"
-            marginRight="5px"
             aria-label=""
             icon={<FiChevronsRight />}
             onClick={() => paginate(maxPage)}
+            variant="ghost"
+            size="lg"
+            h={"24px"}
+            _hover={{
+              background: "origem.500",
+              transition: "all 0.4s",
+              color: "white",
+              fontWeight: "bold",
+            }}
           />
         </Flex>
       </Flex>
