@@ -104,6 +104,7 @@ function GenericCurveS({ data }: Props) {
             gap={{ base: "1em", md: "4em" }}
             direction={{ base: "column", md: "row" }}
             padding={{ base: "1em", md: "0" }}
+            px={{ base: "1em", md: "0.6em" }}
           >
             <Flex direction={"column"}>
               <Heading as="h3" size="sm">

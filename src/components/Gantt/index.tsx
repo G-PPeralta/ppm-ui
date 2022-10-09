@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import { Flex, Heading } from "@chakra-ui/react";
 import {
@@ -19,6 +20,7 @@ type ganttOptionsProps = {
 };
 export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
   // const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);
+  const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [gantt, setGantt] = useState<GanttProps[]>();
   const [refresh, setRefresh] = useState(false);
@@ -69,11 +71,13 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
   }
 
   async function handleSetGanttData() {
-    const reqGanttData = await getGanttData();
-    if (!reqGanttData) return;
-    const _gantt: IGantt = reqGanttData.data;
-    // setGanttData(_gantt);
-    ganttFormatter(_gantt);
+    if (id) {
+      const reqGanttData = await getGanttData(+id);
+      if (!reqGanttData) return;
+      const _gantt: IGantt = reqGanttData.data;
+      // setGanttData(_gantt);
+      ganttFormatter(_gantt);
+    }
   }
 
   useEffect(() => {

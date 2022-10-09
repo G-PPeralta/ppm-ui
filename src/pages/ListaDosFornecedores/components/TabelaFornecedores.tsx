@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { MdModeEdit } from "react-icons/md";
 
 import {
@@ -10,7 +11,10 @@ import {
   Thead,
   Tr,
   IconButton,
+  Flex,
 } from "@chakra-ui/react";
+
+import PaginacaoTabela from "components/PaginacaoTabela";
 
 import { Fornecedor } from "../index";
 
@@ -23,6 +27,16 @@ export function TabelaFornecedores({
   fornecedores,
   onEdit,
 }: TabelaFornecedoresProps) {
+  const [from, setFrom] = useState<number>(0);
+  const [to, setTo] = useState<number>(7);
+
+  const fromTo = {
+    from,
+    to,
+    setFrom,
+    setTo,
+  };
+
   const orcSum = fornecedores
     .map((forn) => forn.orcamento)
     .reduce(
@@ -41,83 +55,28 @@ export function TabelaFornecedores({
 
   const tableData = fornecedores
     .sort((a, b) => a.id - b.id)
+    .slice(from, to)
     .map((fornecedor, index) => (
       <Tr key={index}>
-        <Td
-          isNumeric
-          style={{
-            borderBottom: "0.5px solid #A7A7A7",
-            borderRight: "0.5px solid #A7A7A7",
-            borderLeft: "0.5px solid #A7A7A7",
-          }}
-          width="48px"
-          height={"56px"}
-          textAlign={"center"}
-        >
+        <Td isNumeric fontWeight={"semibold"}>
           {fornecedor.id}
         </Td>
-        <Td
-          style={{
-            borderBottom: "0.5px solid #A7A7A7",
-            borderRight: "0.5px solid #A7A7A7",
-          }}
-          width="158px"
-          height={"56px"}
-        >
-          {fornecedor.fornecedor}
-        </Td>
-        <Td
-          style={{
-            borderBottom: "0.5px solid #A7A7A7",
-            borderRight: "0.5px solid #A7A7A7",
-          }}
-          width="125px"
-          height={"56px"}
-        >
+        <Td fontWeight={"semibold"}>{fornecedor.fornecedor}</Td>
+        <Td fontWeight={"semibold"}>
           {fornecedor.orcamento.toLocaleString("pt-br")}
         </Td>
-        <Td
-          style={{
-            borderBottom: "0.5px solid #A7A7A7",
-            borderRight: "0.5px solid #A7A7A7",
-          }}
-          width="125px"
-          height={"56px"}
-        >
+        <Td fontWeight={"semibold"}>
           {fornecedor.realizado.toLocaleString("pt-br")}
         </Td>
-        <Td
-          style={{
-            borderBottom: "0.5px solid #A7A7A7",
-            borderRight: "0.5px solid #A7A7A7",
-          }}
-          width="125px"
-          height={"56px"}
-        >
-          {fornecedor.responsavel}
-        </Td>
-        <Td
-          style={{
-            borderBottom: "0.5px solid #A7A7A7",
-            borderRight: "0.5px solid #A7A7A7",
-          }}
-          width="406px"
-          height={"56px"}
-        >
+        <Td fontWeight={"semibold"}>{fornecedor.responsavel}</Td>
+        <Td width="406px" height={"56px"}>
           {fornecedor.descricao}
         </Td>
-        <Td
-          style={{
-            borderBottom: "0.5px solid #A7A7A7",
-            borderRight: "0.5px solid #A7A7A7",
-          }}
-          width="101px"
-          height={"56px"}
-        >
+        <Td>
           <IconButton
             aria-label="Plus sign"
             icon={<MdModeEdit />}
-            background="white"
+            background="transparent"
             variant="secondary"
             color="#0047BB"
             mr={2}
@@ -132,125 +91,51 @@ export function TabelaFornecedores({
     ));
 
   return (
-    <TableContainer mt={4} mb={3} ml={1}>
-      <Table variant="unstyled">
-        <Thead>
-          <Tr background="#0047BB" color="white">
-            <Th
-              style={{
-                borderBottom: "0.5px solid #A7A7A7",
-                border: "0.5px solid #A7A7A7",
-              }}
-              width="48px"
-              height={"36px"}
-              textAlign={"center"}
-            >
-              ID
-            </Th>
-            <Th
-              style={{
-                borderBottom: "0.5px solid #A7A7A7",
-                borderRight: "0.5px solid #A7A7A7",
-              }}
-            >
-              Fornecedor
-            </Th>
-            <Th
-              style={{
-                borderBottom: "0.5px solid #A7A7A7",
-                borderRight: "0.5px solid #A7A7A7",
-              }}
-            >
-              Orçamento
-            </Th>
-            <Th
-              style={{
-                borderBottom: "0.5px solid #A7A7A7",
-                borderRight: "0.5px solid #A7A7A7",
-              }}
-            >
-              Realizado
-            </Th>
-            <Th
-              style={{
-                borderBottom: "0.5px solid #A7A7A7",
-                borderRight: "0.5px solid #A7A7A7",
-              }}
-            >
-              Responsável
-            </Th>
-            <Th
-              style={{
-                borderBottom: "0.5px solid #A7A7A7",
-                borderRight: "0.5px solid #A7A7A7",
-              }}
-            >
-              Descrição e justificativa
-            </Th>
-            <Th
-              style={{
-                borderBottom: "0.5px solid #A7A7A7",
-                borderRight: "0.5px solid #A7A7A7",
-              }}
-            >
-              Ações
-            </Th>
-          </Tr>
-        </Thead>
-        <Tbody>{tableData}</Tbody>
-        <Tfoot>
-          <Tr background="#0047BB" color="white">
-            <Th
-              style={{
-                borderBottom: "0.5px solid #A7A7A7",
-                borderRight: "0.5px solid #A7A7A7",
-              }}
-            >
-              Total
-            </Th>
-            <Th
-              style={{
-                borderBottom: "0.5px solid #A7A7A7",
-                borderRight: "0.5px solid #A7A7A7",
-              }}
-            ></Th>
-            <Th
-              style={{
-                borderBottom: "0.5px solid #A7A7A7",
-                borderRight: "0.5px solid #A7A7A7",
-              }}
-            >
-              {orcSum.toLocaleString("pt-br")}
-            </Th>
-            <Th
-              style={{
-                borderBottom: "0.5px solid #A7A7A7",
-                borderRight: "0.5px solid #A7A7A7",
-              }}
-            >
-              {realSum.toLocaleString("pt-br")}
-            </Th>
-            <Th
-              style={{
-                borderBottom: "0.5px solid #A7A7A7",
-                borderRight: "0.5px solid #A7A7A7",
-              }}
-            ></Th>
-            <Th
-              style={{
-                borderBottom: "0.5px solid #A7A7A7",
-                borderRight: "0.5px solid #A7A7A7",
-              }}
-            ></Th>
-            <Th
-              style={{
-                borderBottom: "0.5px solid #A7A7A7",
-                borderRight: "0.5px solid #A7A7A7",
-              }}
-            ></Th>
-          </Tr>
-        </Tfoot>
-      </Table>
-    </TableContainer>
+    <>
+      <TableContainer mt={4} mb={3} borderRadius={"10px"} overflowX={"scroll"}>
+        <Table variant="striped" colorScheme={"strippedGray"}>
+          <Thead>
+            <Tr background={"origem.500"}>
+              <Th color={"white"} textAlign={"center"}>
+                ID
+              </Th>
+              <Th color={"white"} textAlign={"center"}>
+                Fornecedor
+              </Th>
+              <Th color={"white"} textAlign={"center"}>
+                Orçamento
+              </Th>
+              <Th color={"white"} textAlign={"center"}>
+                Realizado
+              </Th>
+              <Th color={"white"} textAlign={"center"}>
+                Responsável
+              </Th>
+              <Th color={"white"} textAlign={"center"}>
+                Descrição e justificativa
+              </Th>
+              <Th color={"white"} textAlign={"center"}>
+                Ações
+              </Th>
+            </Tr>
+          </Thead>
+          <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+          <Tfoot>
+            <Tr background={"origem.500"}>
+              <Th color="white">Total</Th>
+              <Th></Th>
+              <Th color="white">{orcSum.toLocaleString("pt-br")}</Th>
+              <Th color="white">{realSum.toLocaleString("pt-br")}</Th>
+              <Th color="white"></Th>
+              <Th color="white"></Th>
+              <Th></Th>
+            </Tr>
+          </Tfoot>
+        </Table>
+      </TableContainer>
+      <Flex>
+        <PaginacaoTabela data={fornecedores} fromTo={fromTo} />
+      </Flex>
+    </>
   );
 }

@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { IoIosArrowBack } from "react-icons/io";
 
 import {
   Button,
@@ -18,6 +17,7 @@ import {
   useDisclosure,
   Input,
   Select,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -58,6 +58,11 @@ function EditarPriorizacao(infosRanking: TableProps) {
           color: "white",
           transition: "all 0.4s",
         }}
+        h={"56px"}
+        w={"134px"}
+        fontSize={"18px"}
+        fontWeight={"700"}
+        borderRadius={"8px"}
       >
         <Text>Configuração</Text>
       </Button>
@@ -66,15 +71,17 @@ function EditarPriorizacao(infosRanking: TableProps) {
         <ModalContent>
           <ModalHeader
             backgroundColor={"#2E69FD"}
-            borderTopRadius={7}
+            borderTopRadius={"8px"}
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            h={"48px"}
           >
             Configuração
           </ModalHeader>
-          {/* <ModalCloseButton color={"white"} /> */}
+          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               // e.preventDefault();
@@ -86,26 +93,6 @@ function EditarPriorizacao(infosRanking: TableProps) {
                 <Flex gap={4}>
                   <Stack gap={2}>
                     <Flex direction={"column"}>
-                      <Flex>
-                        <Text>
-                          <Button
-                            aria-label=""
-                            backgroundColor={"white"}
-                            color={"black"}
-                            onClick={() =>
-                              handleCancelar(registerForm, onClose)
-                            }
-                            _hover={{
-                              background: "white",
-                              transition: "all 0.4s",
-                              color: "origem.500",
-                            }}
-                            fontSize={"20px"}
-                          >
-                            <IoIosArrowBack /> Priorização
-                          </Button>
-                        </Text>
-                      </Flex>
                       <Flex direction={"column"}>
                         <Flex
                           flexDirection={useBreakpointValue({
@@ -118,15 +105,22 @@ function EditarPriorizacao(infosRanking: TableProps) {
                           <FormControl>
                             <FormLabel
                               htmlFor="rankingName"
-                              fontSize={"12px"}
                               mb={"1px"}
                               ml={"3px"}
+                              color={"#949494"}
+                              fontWeight={"700"}
+                              fontSize={"12px"}
                             >
                               NOME DA PRIORIZAÇÃO
                             </FormLabel>
                             <Input
                               ml={"3px"}
-                              w={"400px"}
+                              w={"480px"}
+                              h={"56px"}
+                              fontSize={"14px"}
+                              color={"#949494"}
+                              fontWeight={"400"}
+                              border={"solid 1px #949494"}
                               isRequired
                               placeholder="Nome"
                               id="rankingName"
@@ -149,6 +143,8 @@ function EditarPriorizacao(infosRanking: TableProps) {
                             <FormLabel
                               htmlFor="acesso"
                               fontSize={"12px"}
+                              color={"#949494"}
+                              fontWeight={"700"}
                               mb={"1px"}
                               w={"550px"}
                               mt={"5px"}
@@ -156,15 +152,17 @@ function EditarPriorizacao(infosRanking: TableProps) {
                               PERFIS COM ACESSO
                             </FormLabel>
                             <Select
+                              w={"480px"}
+                              h={"56px"}
+                              fontSize={"14px"}
+                              color={"#2D2926"}
+                              fontWeight={"400"}
+                              border={"solid 1px #949494"}
                               id="acesso"
                               name="acesso"
                               placeholder="Selecione"
                               value={registerForm.values.acesso}
                               onChange={registerForm.handleChange}
-                              w={useBreakpointValue({
-                                base: "100%",
-                                md: "95%",
-                              })}
                             >
                               {perfis.map((perfil: any, index: any) => (
                                 <option key={index}>{perfil}</option>
@@ -190,17 +188,23 @@ function EditarPriorizacao(infosRanking: TableProps) {
                     transition: "all 0.4s",
                     color: "white",
                   }}
+                  w={"158px"}
+                  h={"56px"}
                 >
                   Cancelar
                 </Button>
                 <Button
                   // disabled={!registerForm.isValid}
-                  background="origem.300"
+                  w={"208px"}
+                  h={"56px"}
+                  background="#0047BB"
                   variant="primary"
                   color="white"
                   onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
-                    background: "origem.500",
+                    background: "white",
+                    border: "solid 1px #0047BB",
+                    color: "#0047BB",
                     transition: "all 0.4s",
                   }}
                 >

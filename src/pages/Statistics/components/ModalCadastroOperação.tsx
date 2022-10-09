@@ -104,6 +104,7 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                             </Text>
                           </Flex>
                           <Input
+                            h={"56px"}
                             isRequired
                             placeholder="Digite o ID"
                             id="id_origem"
@@ -132,6 +133,7 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                             </Text>
                           </Flex>
                           <Input
+                            h={"56px"}
                             isRequired
                             placeholder="Digite o nome da operação"
                             id="nom_operacao"

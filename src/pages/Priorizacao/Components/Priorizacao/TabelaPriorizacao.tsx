@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-  FiChevronLeft,
-  FiChevronRight,
-  FiChevronsLeft,
-  FiChevronsRight,
-} from "react-icons/fi";
 
 import {
-  IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -16,22 +9,20 @@ import {
   Thead,
   Tr,
   Flex,
-  Text,
+  // Tfoot,
 } from "@chakra-ui/react";
+
+import PaginacaoTabela from "components/PaginacaoTabela";
 
 import { getPriorizacoes } from "services/get/Priorizacoes";
 
 import ModalPriorizacao from "../ModaisDinamicosPriorizacao/ModalPriorizacao";
-// import ModalDeletarPriorizacao from "./DeletarPriorizacao";
+import ModalDeletarPriorizacao from "./DeletarPriorizacao";
 
 export function TabelaPriorizacao() {
-  const [pagAtual, setPagAtual] = useState(1);
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
-  const rowsPerPage = 5;
   const [data, setData] = useState<any[]>([]);
-
-  // const [loading, setLoading] = useState(false);
 
   const getData = async () => {
     const priorizacao = await getPriorizacoes();
@@ -44,58 +35,25 @@ export function TabelaPriorizacao() {
     getData();
   }, []);
 
-  const totalRegs = data.length;
-  const maxPage = Math.ceil(totalRegs / rowsPerPage);
-
-  const paginate = (pag: number) => {
-    setPagAtual(pag);
-
-    const x = (pag - 1) * rowsPerPage;
-    const y = (pag - 1) * rowsPerPage + rowsPerPage;
-    setFrom(x);
-    setTo(y);
+  const fromTo = {
+    from,
+    to,
+    setFrom,
+    setTo,
   };
 
-  const advance = () => {
-    if (pagAtual == maxPage) {
-      return;
-    }
-
-    const _pag = pagAtual + 1;
-
-    paginate(_pag);
-  };
-
-  const back = () => {
-    if (pagAtual == 1) {
-      return;
-    }
-    const _pag = pagAtual - 1;
-    paginate(_pag);
-  };
-
-  const tableData = data.slice(from, to).map((prio) => (
-    <Tr key={prio.id}>
-      <Td
-        width={"50px"}
-        isNumeric
-        style={{
-          borderBottom: "0.5px solid #A7A7A7",
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {prio.id}
-      </Td>
-      <Td
-        width={"600px"}
-        style={{
-          borderBottom: "0.5px solid #A7A7A7",
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {prio.nom_ranking}
-      </Td>
-      <Td
+  const tableData = data
+    .sort((a, b) => a.id - b.id)
+    .slice(from, to)
+    .map((prio) => (
+      <Tr key={prio.id}>
+        <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+          {prio.id}
+        </Td>
+        <Td textAlign={"center"} fontWeight={"semibold"} color={"#2D2926"}>
+          {prio.nom_ranking}
+        </Td>
+        {/* <Td
         textAlign={"center"}
         style={{
           borderBottom: "0.5px solid #A7A7A7",
@@ -103,101 +61,63 @@ export function TabelaPriorizacao() {
         }}
       >
         {prio.nome_area}
-      </Td>
-      <Td
-        textAlign={"center"}
-        style={{
-          borderBottom: "0.5px solid #A7A7A7",
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        <ModalPriorizacao nomeRanking={prio.nom_ranking} idRanking={prio.id} />
-        {/* <ModalDeletarPriorizacao /> */}
-      </Td>
-    </Tr>
-  ));
+      </Td> */}
+        <Td textAlign={"center"} width={"104px"} height={"56px"}>
+          <ModalPriorizacao
+            nomeRanking={prio.nom_ranking}
+            idRanking={prio.id}
+          />
+          <ModalDeletarPriorizacao />
+        </Td>
+      </Tr>
+    ));
 
   return (
-    <div>
-      <Flex direction={"column"}>
-        <TableContainer mt={4} mb={4}>
-          <Table
-            variant="unstyled"
-            style={{
-              borderBottom: "0.5px solid #A7A7A7",
-              border: "0.5px solid #A7A7A7",
-            }}
-          >
+    <>
+      <Flex direction={"column"} w={"100%"}>
+        <TableContainer
+          mt={4}
+          mb={4}
+          borderRadius={"10px"}
+          overflowX={"scroll"}
+        >
+          <Table variant="striped" colorScheme={"strippedGray"}>
             <Thead>
-              <Tr background="origem.500" color="white">
-                <Th
-                  style={{
-                    borderBottom: "0.5px solid #A7A7A7",
-                    borderRight: "0.5px solid #A7A7A7",
-                  }}
-                >
+              <Tr background={"origem.500"}>
+                <Th color="white" textAlign={"center"}>
                   ID
                 </Th>
-                <Th
-                  style={{
-                    borderBottom: "0.5px solid #A7A7A7",
-                    borderRight: "0.5px solid #A7A7A7",
-                  }}
-                >
+                <Th color="white" textAlign={"center"}>
                   Priorizações
                 </Th>
-                <Th
+                {/* <Th
                   textAlign={"center"}
-                  style={{
-                    borderBottom: "0.5px solid #A7A7A7",
-                    borderRight: "0.5px solid #A7A7A7",
-                  }}
+
                 >
                   Área responsável
-                </Th>
-                <Th
-                  textAlign={"center"}
-                  style={{
-                    borderBottom: "0.5px solid #A7A7A7",
-                    borderRight: "0.5px solid #A7A7A7",
-                  }}
-                >
+                </Th> */}
+                <Th color="white" textAlign={"center"}>
                   Ações
                 </Th>
               </Tr>
             </Thead>
-            <Tbody>{tableData}</Tbody>
+            <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+            {/* <Tfoot>
+              <Tr background={"origem.500"}>
+                <Th background={"origem.500"} color="transparent">
+                  total
+                </Th>
+                <Th background={"origem.500"} color="white"></Th>
+                <Th background={"origem.500"} color="white"></Th>
+              </Tr>
+            </Tfoot> */}
           </Table>
         </TableContainer>
 
-        <Flex justifyContent={"center"}>
-          <Flex
-            width={"300px"}
-            alignItems={"center"}
-            justifyContent={"space-between"}
-          >
-            <IconButton
-              aria-label=""
-              icon={<FiChevronsLeft />}
-              onClick={() => paginate(1)}
-            />
-            <IconButton aria-label="" icon={<FiChevronLeft onClick={back} />} />
-
-            <Text>Página atual: {pagAtual}</Text>
-
-            <IconButton
-              aria-label=""
-              icon={<FiChevronRight />}
-              onClick={advance}
-            />
-            <IconButton
-              aria-label=""
-              icon={<FiChevronsRight />}
-              onClick={() => paginate(maxPage)}
-            />
-          </Flex>
+        <Flex>
+          <PaginacaoTabela data={data} fromTo={fromTo} />
         </Flex>
       </Flex>
-    </div>
+    </>
   );
 }
