@@ -21,14 +21,14 @@ import { useToast } from "contexts/Toast";
 import { patchOperacoesEstatisticas } from "services/update/OperacoesEstatisticas";
 
 import { Gantt } from "./components/Gantt";
-import ModalEditarCronograma from "./components/ModalEditarCronograma";
+// import ModalAdicionarAtividade from "./components/ModalAdicionarAtividade";
 
 function StatisticsGantt() {
   const { state }: any = useLocation();
   const navigate = useNavigate();
   const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
   const toolbarOptions = ["ZoomIn", "ZoomOut"];
-  const [refresh, setRefresh] = useState(false);
+  // const [refresh, setRefresh] = useState(false);
   const [projeto, setProjeto] = useState({ sonda: "", poco: "" });
   const { toast } = useToast();
 
@@ -157,11 +157,16 @@ function StatisticsGantt() {
                 </Box>
 
                 <Flex gap={2} flex={2} justify={"end"} align={"end"}>
-                  <ModalEditarCronograma
+                  {/* <ModalEditarCronograma
                     refresh={refresh}
                     setRefresh={setRefresh}
                     atual={state.data}
-                  />
+                  /> */}
+                  {/* <ModalAdicionarAtividade
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                    atual={state.data}
+                  /> */}
                 </Flex>
               </Flex>
             </Stack>

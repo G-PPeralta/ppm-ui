@@ -7,12 +7,12 @@ import { StatisticsTableData } from "interfaces/Services";
 
 import Sidebar from "components/SideBar";
 
-// import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
+import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
 
 import ModalCadastroCronograma from "./components/ModalCadastroCronograma";
 import ModalCadastroOperacao from "./components/ModalCadastroOperação";
 import { StatisticsTable } from "./components/StatisticsTable";
-import { atividades } from "./projeto";
+// import { atividades } from "./projeto";
 
 function Statistics() {
   const [loading, setLoading] = useState(true);
@@ -38,8 +38,8 @@ function Statistics() {
   };
 
   const handleGetAllData = async () => {
-    // const { data } = await getOperacoesEstatisticas();
-    const data = atividades;
+    const { data } = await getOperacoesEstatisticas();
+    // const data = atividades;
     if (!data) return;
     const newData = convertReq(data);
     setAllData(newData);
