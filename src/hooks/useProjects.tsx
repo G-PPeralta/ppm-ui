@@ -16,7 +16,6 @@ export function useProjects() {
 
   const getProjetosDetalhados = async () => {
     const data: Projetos[] = await getProjetos();
-    console.log("data hook", data);
     return data;
   };
 
