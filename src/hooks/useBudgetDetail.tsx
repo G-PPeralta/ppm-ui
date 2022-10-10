@@ -6,7 +6,7 @@ import { BudgetDetail } from "interfaces/Budgets";
 
 import { getBudgetDetail } from "services/get/GetBudget";
 
-export function useBudgetDetail(id: string) {
+export function useBudgetDetail(id: string | null) {
   // const { toast } = useToast();
 
   //  const [loading, setLoading] = useState(false);

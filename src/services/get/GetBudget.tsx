@@ -74,7 +74,9 @@ export async function getBudgets(): Promise<Budget[]> {
   return data;
 }
 
-export async function getBudgetDetail(id: string): Promise<BudgetDetail[]> {
+export async function getBudgetDetail(
+  id: string | null
+): Promise<BudgetDetail[]> {
   const uri = `/budgets/detail/${id}`;
 
   /* const data = [
