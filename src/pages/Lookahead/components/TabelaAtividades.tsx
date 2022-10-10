@@ -13,11 +13,11 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { AtividadesLookahead } from "interfaces/lookahead";
+import { FerramentaServico } from "interfaces/lookahead";
 
 interface TableProps {
   semana?: string;
-  data: AtividadesLookahead[];
+  data: FerramentaServico[];
 }
 
 class DiasSemana {
@@ -32,6 +32,7 @@ class AtividadeDiaHora {
   horaFim: string = "";
   dataIni: string = "";
   dataFim: string = "";
+  tipo: string = "";
 }
 
 export function TabelaAtividades(props: TableProps) {
@@ -69,37 +70,38 @@ export function TabelaAtividades(props: TableProps) {
     }
 
     const atividadesGrid: AtividadeDiaHora[] = [];
-    data.forEach((atividade) => {
-      const atividadeGrid: AtividadeDiaHora = new AtividadeDiaHora();
-      let horaIni;
-      let horaFim;
-      if (atividade.dat_ini_plan && atividade.dat_fim_plan) {
-        const auxIni = atividade.dat_ini_plan.substring(
-          0,
-          atividade.dat_ini_plan.length - 5
-        );
+    data &&
+      data.forEach((atividade) => {
+        const atividadeGrid: AtividadeDiaHora = new AtividadeDiaHora();
+        let horaIni;
+        if (atividade.data_hora && atividade.data_hora) {
+          const auxIni = atividade.data_hora.substring(
+            0,
+            atividade.data_hora.length - 5
+          );
 
-        const auxFim = atividade.dat_fim_plan.substring(
-          0,
-          atividade.dat_fim_plan.length - 5
-        );
+          // const auxFim = atividade.dat_fim_plan.substring(
+          //   0,
+          //   atividade.dat_fim_plan.length - 5
+          // );
 
-        // diaIni = new Date(auxIni).getDate().toString();
-        horaIni = new Date(auxIni).getHours().toString();
+          // diaIni = new Date(auxIni).getDate().toString();
+          horaIni = new Date(auxIni).getHours().toString();
 
-        // diaFim = new Date(auxFim).getDate().toString();
-        horaFim = new Date(auxFim).getHours().toString();
-        atividadeGrid.horaIni = horaIni;
-        atividadeGrid.dataIni = dataBr.format(new Date(auxIni));
+          // diaFim = new Date(auxFim).getDate().toString();
+          // horaFim = new Date(auxFim).getHours().toString();
+          atividadeGrid.horaIni = horaIni;
+          atividadeGrid.dataIni = dataBr.format(new Date(auxIni));
+          atividadeGrid.tipo = atividade.tipo;
 
-        atividadeGrid.horaFim = horaFim;
-        atividadeGrid.dataFim = dataBr.format(new Date(auxFim));
+          // atividadeGrid.horaFim = horaFim;
+          // atividadeGrid.dataFim = dataBr.format(new Date(auxFim));
 
-        atividadeGrid.nome = atividade.nom_atividade;
+          atividadeGrid.nome = atividade.nome;
 
-        atividadesGrid.push(atividadeGrid);
-      }
-    });
+          atividadesGrid.push(atividadeGrid);
+        }
+      });
     setAtividades(atividadesGrid);
     setDias(weekDays);
   }
@@ -158,12 +160,26 @@ export function TabelaAtividades(props: TableProps) {
                   >
                     <Td>{hora}</Td>
                     {dias.map(function (dia) {
-                      const activity = atividades.find(
+                      const activityS = atividades.find(
                         (x) =>
-                          x.dataIni === dia.data &&
-                          x.horaIni === hora.split(":")[0]
+                          x.dataIni == dia.data &&
+                          x.horaIni == hora.split(":")[0] &&
+                          x.tipo == "s"
                       )?.nome;
-                      return <Td>{activity || `-`}</Td>;
+                      const activityF = atividades.find(
+                        (x) =>
+                          x.dataIni == dia.data &&
+                          x.horaIni == hora.split(":")[0] &&
+                          x.tipo == "f"
+                      )?.nome;
+
+                      return (
+                        <Td>
+                          {(activityS && activityF
+                            ? activityS + " - " + activityF
+                            : activityS || activityF) || `-`}
+                        </Td>
+                      );
                     })}
 
                     {/* <Td>{hora}</Td>
@@ -181,13 +197,13 @@ export function TabelaAtividades(props: TableProps) {
           <Tfoot>
             <Tr backgroundColor={"blue"} color="white">
               <Td>Total</Td>
-              <Td>1</Td>
-              <Td>1</Td>
-              <Td>1</Td>
-              <Td>1</Td>
-              <Td>1</Td>
-              <Td>1</Td>
-              <Td>1</Td>
+              <Td></Td>
+              <Td></Td>
+              <Td></Td>
+              <Td></Td>
+              <Td></Td>
+              <Td></Td>
+              <Td></Td>
             </Tr>
           </Tfoot>
         </Table>

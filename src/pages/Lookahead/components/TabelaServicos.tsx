@@ -13,10 +13,11 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import { FerramentasAtividade } from "interfaces/lookahead";
 
 interface TableProps {
   semana?: string;
-  // data: FerramentasAtividade[];
+  data?: FerramentasAtividade[];
 }
 
 class DiasSemana {
@@ -25,32 +26,29 @@ class DiasSemana {
   hora?: number = undefined;
 }
 
-// class AtividadeDiaHora {
-//   nome: string = "";
-//   horaIni: string = "";
-//   horaFim: string = "";
-//   dataIni: string = "";
-//   dataFim: string = "";
-// }
+interface ServicoDiaHora {
+  nome: string;
+  dia: string;
+  hora: string;
+  tipo: string;
+}
 
 export function TabelaServicos(props: TableProps) {
-  const { semana } = props;
+  const { semana, data } = props;
   const [dias, setDias] = useState<DiasSemana[]>();
   const [, setSem] = useState<string>();
+  const [servicosData, setServicosData] = useState<ServicoDiaHora[]>();
 
   function getWeekDays() {
     const weekDays: DiasSemana[] = [];
     const dataBr = Intl.DateTimeFormat("pt-BR");
     const dia: number = semana ? +semana.split("/")[0] : 0;
-    const dias = Array.from({ length: 7 }, (val, ind) =>
+    const _dias = Array.from({ length: 7 }, (val, ind) =>
       (dia + ind).toString()
     );
-    // const horas = Array.from({ length: 24 }, (val, ind) =>
-    //   `${ind}:00`.toString()
-    // );
-    // setHoras(horas);
-    for (let i = 0; i < dias.length; i++) {
-      const dia = dias[i];
+
+    for (let i = 0; i < _dias.length; i++) {
+      const dia = _dias[i];
 
       const realDay = dataBr.format(new Date().setDate(+dia));
       const diaSemana: DiasSemana = new DiasSemana();
@@ -60,6 +58,22 @@ export function TabelaServicos(props: TableProps) {
 
       weekDays.push(diaSemana);
     }
+    const servicosDiaHora: ServicoDiaHora[] = [];
+    data &&
+      data.forEach(function (fer) {
+        const diaFerramenta = dataBr.format(new Date(fer.data_hora));
+        const hora = fer.data_hora.split("T")[1].substring(0, 5);
+
+        const ferramenta: ServicoDiaHora = {
+          dia: diaFerramenta,
+          hora,
+          nome: fer.nome,
+          tipo: fer.tipo ? fer.tipo : "",
+        };
+        servicosDiaHora.push(ferramenta);
+      });
+
+    setServicosData(servicosDiaHora);
     setDias(weekDays);
   }
 
@@ -97,8 +111,18 @@ export function TabelaServicos(props: TableProps) {
           <Tbody>
             <Tr>
               {dias &&
+                servicosData &&
                 dias.map(function (x) {
-                  return <Td>{`${x.diaLabel}`}</Td>;
+                  return (
+                    <Td>
+                      {" "}
+                      {
+                        servicosData.find(
+                          (f) => f.dia == x.data && f.tipo == "s"
+                        )?.nome
+                      }
+                    </Td>
+                  );
                 })}
 
               {/* <Td>

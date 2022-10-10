@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   // FiArrowDown,
   FiChevronLeft,
@@ -20,39 +20,41 @@ import {
   Text,
   Flex,
   IconButton,
+  Select,
   // Icon,
 } from "@chakra-ui/react";
-import { ProjetosLookahead } from "interfaces/lookahead";
+import { AtividadesLookahead } from "interfaces/lookahead";
 
 interface TableProps {
-  data: ProjetosLookahead[];
+  data: AtividadesLookahead[];
 }
 
 export function TabelaLookahead(props: TableProps) {
   const { data } = props;
   const [pagAtual, setPagAtual] = useState(1);
-  // const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
+  const [perPage, setPerPage] = useState<number>(5);
 
   const total = data.length;
   // const planejado = data.reduce((i, value) => i + value.planejado, 0);
   // const realizado = data.reduce((i, value) => i + value.realizado, 0);
 
-  const rowsPerPage = 5;
   const totalRegs = data.length;
-  const maxPage = Math.ceil(totalRegs / rowsPerPage);
-
-  // const brl = Intl.NumberFormat("pt-BR", {
-  //   style: "currency",
-  //   currency: "BRL",
-  // });
-
+  const maxPage = Math.ceil(totalRegs / perPage);
   const paginate = (pag: number) => {
     setPagAtual(pag);
 
-    const x = (pag - 1) * rowsPerPage;
-    const y = (pag - 1) * rowsPerPage + rowsPerPage;
+    const x = (pag - 1) * perPage;
+    const y = (pag - 1) * perPage + perPage;
+    setFrom(x);
+    setTo(y);
+  };
+
+  const changePerPage = (value: number) => {
+    setPerPage(value);
+    const x = perPage;
+    const y = perPage + perPage;
     setFrom(x);
     setTo(y);
   };
@@ -75,16 +77,13 @@ export function TabelaLookahead(props: TableProps) {
     paginate(_pag);
   };
 
-  // const toggleAcordion = (id: number) => {
-  //   const elements = document.getElementsByClassName("item-" + id);
-  //   for (let i = 0; i < elements.length; i++) {
-  //     elements[i].classList.toggle("hide");
-  //   }
-  // };
+  useEffect(() => {
+    paginate(pagAtual);
+  }, [from, to]);
 
-  const tableData = data.slice(from, to).map((budget, key) => (
+  const tableData = data.slice(from, to).map((act, key) => (
     <>
-      <Tr key={budget.id}>
+      <Tr key={key}>
         <Td>
           {/* {budget.filhos && (
             <Icon
@@ -93,14 +92,14 @@ export function TabelaLookahead(props: TableProps) {
               as={FiArrowDown}
             ></Icon>
           )} */}
-          {budget.item}
+          {act.id}
         </Td>
         <Td>
-          <Link to={`/lookahead-detalhe/${budget.id}`}>
-            <Text color="blue">{budget.nome_projeto}</Text>
+          <Link to={`/lookahead-detalhe/${act.id}`}>
+            <Text color="blue">{act.nom_atividade}</Text>
           </Link>
         </Td>
-        <Td>{budget.descricao}</Td>
+        <Td> - </Td>
       </Tr>
 
       {/* {budget.filhos &&
@@ -140,27 +139,55 @@ export function TabelaLookahead(props: TableProps) {
             </Tfoot>
           </Table>
         </TableContainer>
-        <Flex justifyContent={"center"}>
-          <Flex
-            width={"300px"}
-            alignItems={"center"}
-            justifyContent={"space-between"}
-          >
+        <Flex justifyContent="end">
+          <Flex alignItems={"center"} justifyContent={"space-between"}>
+            <Text>Per page</Text>
+            <Select
+              width={100}
+              marginLeft="10px"
+              marginRight="15px"
+              onChange={(e) => changePerPage(+e.target.value)}
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </Select>
+
+            <Text>
+              {pagAtual} - {perPage} of {data.length}{" "}
+            </Text>
+
             <IconButton
+              bgColor="#FFFF"
+              marginLeft="10px"
+              marginRight="5px"
               aria-label=""
               icon={<FiChevronsLeft />}
               onClick={() => paginate(1)}
             />
-            <IconButton aria-label="" icon={<FiChevronLeft onClick={back} />} />
-
-            <Text>Página atual: {pagAtual}</Text>
 
             <IconButton
+              bgColor="#FFFF"
+              marginLeft="5px"
+              marginRight="5px"
+              aria-label=""
+              icon={<FiChevronLeft onClick={back} />}
+            />
+
+            {/* <Text>Página atual: {pagAtual}</Text> */}
+
+            <IconButton
+              bgColor="#FFFF"
+              marginLeft="5px"
+              marginRight="5px"
               aria-label=""
               icon={<FiChevronRight />}
               onClick={advance}
             />
             <IconButton
+              bgColor="#FFFF"
+              marginLeft="5px"
+              marginRight="5px"
               aria-label=""
               icon={<FiChevronsRight />}
               onClick={() => paginate(maxPage)}

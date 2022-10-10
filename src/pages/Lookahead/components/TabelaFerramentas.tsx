@@ -22,57 +22,57 @@ interface TableProps {
 
 class DiasSemana {
   diaLabel: string = "";
-  data?: string = "";
+  data: string = "";
   hora?: number = undefined;
 }
 
-// class AtividadeDiaHora {
-//   nome: string = "";
-//   horaIni: string = "";
-//   horaFim: string = "";
-//   dataIni: string = "";
-//   dataFim: string = "";
-// }
+interface FerramentaDiaHora {
+  nome: string;
+  dia: string;
+  hora: string;
+  tipo?: string;
+}
 
 export function TabelaFerramentas(props: TableProps) {
-  const { semana } = props;
+  const { semana, data } = props;
   const [dias, setDias] = useState<DiasSemana[]>();
   const [, setSem] = useState<string>();
+  const [ferramentasData, setFerramentasData] = useState<FerramentaDiaHora[]>();
 
   function getWeekDays() {
     const weekDays: DiasSemana[] = [];
     const dataBr = Intl.DateTimeFormat("pt-BR");
     const dia: number = semana ? +semana.split("/")[0] : 0;
-    const dias = Array.from({ length: 7 }, (val, ind) =>
+    const _dias = Array.from({ length: 7 }, (val, ind) =>
       (dia + ind).toString()
     );
-    // const horas = Array.from({ length: 24 }, (val, ind) =>
-    //   `${ind}:00`.toString()
-    // );
-    // setHoras(horas);
-    for (let i = 0; i < dias.length; i++) {
-      const dia = dias[i];
+
+    for (let i = 0; i < _dias.length; i++) {
+      const dia = _dias[i];
 
       const realDay = dataBr.format(new Date().setDate(+dia));
       const diaSemana: DiasSemana = new DiasSemana();
       const _dia = realDay.split("/")[0];
       diaSemana.diaLabel = _dia + "/" + realDay.split("/")[1];
       diaSemana.data = realDay;
-      // diaSemana.hora =
-      // horas.forEach((hora) => {
-      //   // const diaAtividade = x.dat_ini_plan
-      //   //     ? x.dat_ini_plan.split("-")[2].substring(0, 2)
-      //   //     : 0;
-      //   const atividade = data.find(
-      //     (x) => x.dat_ini_plan?.split("-")[2].substring(0, 2) == _dia
-      //   );
-      //   // if (atividade) {
-      //   // }
-      // });
 
       weekDays.push(diaSemana);
     }
+    const ferramentasDiaHora: FerramentaDiaHora[] = [];
+    data.forEach(function (fer) {
+      const diaFerramenta = dataBr.format(new Date(fer.data_hora));
+      const hora = fer.data_hora.split("T")[1].substring(0, 5);
 
+      const ferramenta: FerramentaDiaHora = {
+        dia: diaFerramenta,
+        hora,
+        nome: fer.nome,
+        tipo: fer.tipo,
+      };
+      ferramentasDiaHora.push(ferramenta);
+    });
+
+    setFerramentasData(ferramentasDiaHora);
     setDias(weekDays);
   }
 
@@ -109,7 +109,21 @@ export function TabelaFerramentas(props: TableProps) {
           </Thead>
           <Tbody>
             <Tr>
-              <Td>
+              {dias &&
+                ferramentasData &&
+                dias.map(function (x) {
+                  return (
+                    <Td>
+                      {" "}
+                      {
+                        ferramentasData.find(
+                          (f) => f.dia == x.data && f.tipo == "f"
+                        )?.nome
+                      }
+                    </Td>
+                  );
+                })}
+              {/* <Td>
                 Chave de fenda <br /> 01:00 - 22/08
               </Td>
               <Td></Td>
@@ -117,7 +131,7 @@ export function TabelaFerramentas(props: TableProps) {
               <Td></Td>
               <Td></Td>
               <Td></Td>
-              <Td></Td>
+              <Td></Td> */}
             </Tr>
           </Tbody>
           <Tfoot>

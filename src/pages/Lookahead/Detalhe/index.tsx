@@ -12,79 +12,18 @@ import {
   FormLabel,
   Select,
 } from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
 
 // import { FiPlusCircle, FiSearch } from "react-icons/fi";
-import { useLookahead } from "hooks/useLookahead";
+
+import { getAtividade } from "services/get/Lookahead";
 
 import { ModalAddAtividade } from "../components/ModalAddAtividade";
 import { TabelaAtividades } from "../components/TabelaAtividades";
 import { TabelaFerramentas } from "../components/TabelaFerramentas";
 import { TabelaServicos } from "../components/TabelaServicos";
-
-const LookaheadData = [
-  {
-    id: 1,
-    projeto: "SPT - 123",
-    descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    id: 2,
-    projeto: "SPT - 001",
-    descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    id: 3,
-    projeto: "SPT - 002",
-    descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    id: 4,
-    projeto: "SPT - 003",
-    descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    id: 5,
-    projeto: "SPT - 004",
-    descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    id: 6,
-    projeto: "SPT - 005",
-    descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    id: 7,
-    projeto: "SPT - 006",
-    descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    id: 8,
-    projeto: "SPT - 007",
-    descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    id: 9,
-    projeto: "SPT - 008",
-    descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    id: 10,
-    projeto: "SPT - 009",
-    descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    id: 11,
-    projeto: "SPT - 0010",
-    descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    id: 12,
-    projeto: "SPT - 0011",
-    descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-];
 
 interface Weeks {
   id: string;
@@ -93,9 +32,14 @@ interface Weeks {
 
 export function LookaheadDetalhe() {
   const { id } = useParams();
-  const { atividades, ferramentas } = useLookahead();
   const [weeks, setWeeks] = useState<Weeks[]>();
   const [semana, setSemana] = useState<string>();
+  const [atividade, setAtividade] = useState<any>();
+
+  const loadAtividade = async () => {
+    const atividade = id ? await getAtividade(+id) : undefined;
+    setAtividade(atividade);
+  };
 
   function getWeeks() {
     const dataBr = Intl.DateTimeFormat("pt-BR");
@@ -128,6 +72,7 @@ export function LookaheadDetalhe() {
   }
 
   useEffect(() => {
+    loadAtividade();
     getWeeks();
   }, []);
 
@@ -163,9 +108,7 @@ export function LookaheadDetalhe() {
             >
               <Flex direction="column">
                 <Text fontWeight="bold">Relatorio Lookahead</Text>
-                <Text>
-                  {id && LookaheadData.find((x) => x.id == +id)?.projeto}
-                </Text>
+                <Text>{atividade && atividade.id}</Text>
                 <Flex
                   direction="row"
                   justifyContent="flex-end"
@@ -173,9 +116,9 @@ export function LookaheadDetalhe() {
                 >
                   <Flex alignItems="flex-end">
                     <FormControl>
-                      <ModalAddAtividade />
+                      {id && <ModalAddAtividade id={+id} />}
                     </FormControl>
-                    <FormControl>
+                    <FormControl marginLeft="16px">
                       <FormLabel htmlFor="pole">SEMANA</FormLabel>
                       <Select
                         id="poloId"
@@ -198,9 +141,31 @@ export function LookaheadDetalhe() {
                 </Flex>
 
                 <Flex direction="column">
-                  <TabelaAtividades semana={semana} data={atividades} />
-                  <TabelaFerramentas semana={semana} data={ferramentas} />
-                  <TabelaServicos />
+                  <TabelaAtividades semana={semana} data={atividade} />
+                  {atividade ? (
+                    <TabelaFerramentas semana={semana} data={atividade} />
+                  ) : (
+                    <Box
+                      display={"flex"}
+                      alignItems={"center"}
+                      justifyContent={"center"}
+                      h={"84vh"}
+                    >
+                      <Ring speed={2} lineWeight={5} color="blue" size={64} />
+                    </Box>
+                  )}
+                  {atividade ? (
+                    <TabelaServicos semana={semana} data={atividade} />
+                  ) : (
+                    <Box
+                      display={"flex"}
+                      alignItems={"center"}
+                      justifyContent={"center"}
+                      h={"84vh"}
+                    >
+                      <Ring speed={2} lineWeight={5} color="blue" size={64} />
+                    </Box>
+                  )}
                 </Flex>
               </Flex>
             </Box>

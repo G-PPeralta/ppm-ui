@@ -15,48 +15,69 @@ import {
   Textarea,
   useBreakpointValue,
   useDisclosure,
-  Text,
   Input,
 } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-import { useCadastroAtividade } from "hooks/useCadastroAtividade";
-
 import "react-datepicker/dist/react-datepicker.css";
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef, useState } from "react";
 
-import { handleCadastrarRefresh } from "utils/handleCadastro";
+import { CreateServicoFerramenta } from "interfaces/lookahead";
 
-import { Ring } from "@uiball/loaders";
+import {
+  createAtividadeFerramenta,
+  createAtividadeServico,
+} from "services/post/Lookahead";
 
-export function ModalAddAtividade({ id, setRefresh, refresh }: any) {
+type PropsType = {
+  id: number;
+};
+
+export function ModalAddAtividade(props: PropsType) {
+  const { id } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroAtividade();
+  // const { registerForm, loading } = useCadastroAtividade();
   const [startDate, setStartDate] = useState<any>("");
+  const [nomeServico, setNomeServico] = useState("");
+  const [nomeFerramenta, setNomeFerramenta] = useState("");
+  const [anotacao, setAnotacao] = useState("");
+
+  const save = async () => {
+    const ferramenta: CreateServicoFerramenta = {
+      atividade_id: id,
+      nome: nomeFerramenta,
+      data_hora: startDate,
+      anotacoes: anotacao,
+    };
+
+    const servicos: CreateServicoFerramenta = {
+      atividade_id: id,
+      nome: nomeServico,
+      data_hora: startDate,
+      anotacoes: anotacao,
+    };
+
+    await createAtividadeFerramenta(ferramenta);
+    await createAtividadeServico(servicos);
+
+    window.location.reload();
+  };
 
   const handleStartDate = (date: any) => {
     setStartDate(date);
-    registerForm.setFieldValue("dat_ini_plan", date);
   };
-
-  const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => {
-    useEffect(() => {
-      // console.log("value", value);
-    }, []);
-
-    return (
-      <Button
-        onClick={onClick}
-        ref={ref}
-        variant="outline"
-        px={10}
-        minW={"220px"}
-      >
-        {value === "" ? "Selecione a data" : value}
-      </Button>
-    );
-  });
+  const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
+    <Button
+      onClick={onClick}
+      ref={ref}
+      variant="outline"
+      px={10}
+      minW={"220px"}
+    >
+      {value === "" ? "Selecione a data" : value}
+    </Button>
+  ));
 
   return (
     <>
@@ -149,6 +170,7 @@ export function ModalAddAtividade({ id, setRefresh, refresh }: any) {
                           id="nom_atividade"
                           type="text"
                           name="nom_atividade"
+                          onChange={(e) => setNomeFerramenta(e.target.value)}
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
                         />
                       </FormControl>
@@ -164,6 +186,7 @@ export function ModalAddAtividade({ id, setRefresh, refresh }: any) {
                           type="text"
                           name="nom_atividade"
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
+                          onChange={(e) => setNomeServico(e.target.value)}
                         />
                       </FormControl>
                     </Flex>
@@ -190,7 +213,7 @@ export function ModalAddAtividade({ id, setRefresh, refresh }: any) {
                           placeholder="Adicione comentários sobre a atividade"
                           id="dsc_comentario"
                           name="dsc_comentario"
-                          onChange={registerForm.handleChange}
+                          onChange={(e) => setAnotacao(e.target.value)}
                         />
                       </FormControl>
                     </Flex>
@@ -214,30 +237,32 @@ export function ModalAddAtividade({ id, setRefresh, refresh }: any) {
                   Cancelar
                 </Button>
                 <Button
-                  disabled={!registerForm.isValid}
+                  // disabled={!registerForm.isValid}
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() =>
-                    handleCadastrarRefresh(
-                      registerForm,
-                      onClose,
-                      setRefresh,
-                      refresh
-                    )
-                  }
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                  }}
+                  onClick={save}
+                  // onClick={() =>
+                  //   handleCadastrarRefresh(
+                  //     registerForm,
+                  //     onClose,
+                  //     setRefresh,
+                  //     refresh
+                  //   )
+                  // }
+                  // _hover={{
+                  //   background: "origem.500",
+                  //   transition: "all 0.4s",
+                  // }}
                 >
-                  {loading ? (
+                  Gravar
+                  {/* {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (
                     <>
                       <Text>Gravar</Text>
                     </>
-                  )}
+                  )} */}
                 </Button>
               </Flex>
             </ModalFooter>

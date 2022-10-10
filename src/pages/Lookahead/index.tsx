@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
 import {
@@ -12,36 +13,27 @@ import {
   Select,
   Button,
 } from "@chakra-ui/react";
+import { AtividadesLookahead } from "interfaces/lookahead";
 
 import Sidebar from "components/SideBar";
 
-import { useBudgets } from "hooks/useBudgets";
 import { useLookahead } from "hooks/useLookahead";
 
+import { getAtividades } from "services/get/Lookahead";
+
 import { TabelaLookahead } from "./components/TabelaLookahead";
+// import { useState } from "react";
+// import { Projetos } from "interfaces/Projetos";
 
 export function Lookahead() {
-  const {
-    budgetFilter,
-    // loading,
-    // wd,
-    projects,
-    handleProjectChange,
-    filterByProject,
-  } = useBudgets();
-
   const { projetos } = useLookahead();
-
-  // const [projetos, setProjetos] = useState<Project[]>();
-
-  // const getProjects = async () => {
-  //   const data = await getAllProjects("");
-  //   console.log("projetos", data);
-  //   setProjetos(data);
-  // };
-  // useEffect(() => {
-  //   getProjects();
-  // }, []);
+  const [atividades, setAtividades] = useState<AtividadesLookahead[]>();
+  // const [projects, setProjetcs] = useState<Projetos[]>();
+  // const [projectsFiltered, setProjetcsFiltered] = useState<Projetos[]>();
+  async function handleProjectChange(id: string) {
+    const act = await getAtividades(+id);
+    setAtividades(act);
+  }
 
   return (
     <div>
@@ -77,11 +69,11 @@ export function Lookahead() {
                       <FormLabel>Projeto</FormLabel>
                       <Select
                         placeholder="Select option"
-                        onChange={handleProjectChange}
+                        onChange={(e) => handleProjectChange(e.target.value)}
                       >
-                        {projects &&
-                          projects.map((d) => (
-                            <option value={d.id}>{d.nome}</option>
+                        {projetos &&
+                          projetos.map((d) => (
+                            <option value={d.id}>{d.nome_projeto}</option>
                           ))}
                       </Select>
                     </FormControl>
@@ -95,7 +87,7 @@ export function Lookahead() {
                           background: "origem.500",
                           transition: "all 0.4s",
                         }}
-                        onClick={filterByProject}
+                        // onClick={filterByProject}
                         rightIcon={<FiSearch />}
                       >
                         Buscar
@@ -105,7 +97,7 @@ export function Lookahead() {
                 </Flex>
 
                 <Flex>
-                  {budgetFilter && <TabelaLookahead data={projetos} />}
+                  {atividades && <TabelaLookahead data={atividades} />}
                 </Flex>
               </Flex>
             </Box>
