@@ -38,8 +38,7 @@ function Statistics() {
 
   const handleGetAllData = async () => {
     const { data } = await getOperacoesEstatisticas();
-    // const data = atividades;
-    if (!data) return;
+    // console.log("data", data);
     const newData = convertReq(data);
     setAllData(newData);
     setFilter(newData);
@@ -67,7 +66,14 @@ function Statistics() {
 
   useEffect(() => {
     handleGetAllData();
+  }, []);
+
+  useEffect(() => {
+    handleGetAllData();
   }, [refresh]);
+
+  // console.log("filter", filter);
+  // console.log("allData", allData);
 
   return (
     <>
@@ -146,7 +152,7 @@ function Statistics() {
               </Flex>
 
               <Flex flex={1}>
-                {filter && <StatisticsTable data={filter} />}
+                <StatisticsTable data={filter} />
               </Flex>
             </Box>
           </Flex>

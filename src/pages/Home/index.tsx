@@ -58,16 +58,16 @@ export function Home() {
               <NaoPrevisto />
             </Box>
           </Flex>
-          <Box flex={4} m={1}>
+          <Box flex={4}>
             <Projetos />
           </Box>
-          <Box flex={1} m={1}>
+          <Box flex={1}>
             <FaseProjetos />
           </Box>
-          <Box flex={1} m={1}>
+          <Box flex={1}>
             <AreasDemandadas />
           </Box>
-          <Box flex={1} m={1}>
+          <Box flex={1}>
             <PrevistoxRealizado />
           </Box>
         </Flex>

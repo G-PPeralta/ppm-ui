@@ -22,7 +22,7 @@ import { StatisticsTableData } from "interfaces/Services";
 import PaginacaoTabela from "components/PaginacaoTabela";
 
 interface Props {
-  data: StatisticsTableData[];
+  data: StatisticsTableData[] | undefined;
 }
 
 export function StatisticsTable({ data }: Props) {
@@ -35,44 +35,6 @@ export function StatisticsTable({ data }: Props) {
     setFrom,
     setTo,
   };
-
-  const tableData = data.slice(from, to).map((projeto, key) => (
-    <Tr key={key}>
-      <Td textAlign={"center"} fontWeight={"semibold"}>
-        <Link to={`/estatisticas/cronograma`} state={{ data: projeto }}>
-          <Text>{projeto.sonda}</Text>
-        </Link>
-      </Td>
-      <Td textAlign={"center"} fontWeight={"semibold"}>
-        <Link to={`/estatisticas/cronograma`} state={{ data: projeto }}>
-          <Text>{projeto.poco}</Text>
-        </Link>
-      </Td>
-      <Td textAlign={"center"} fontWeight={"semibold"}>
-        {/* <IconButton
-          aria-label="Plus sign"
-          icon={<AiFillEdit />}
-          background="white"
-          variant="secondary"
-          color="#2D2926"
-          mr={2}
-          isRound={true}
-          size="sm"
-        /> */}
-        {/* <IconButton
-          aria-label="Plus sign"
-          icon={<FaTrash />}
-          background="white"
-          variant="secondary"
-          color="#F94144"
-          mr={2}
-          isRound={true}
-          size="sm"
-        /> */}
-        {/* <EditaValorModal /> */}
-      </Td>
-    </Tr>
-  ));
 
   return (
     <Flex direction={"column"} w={"100%"}>
@@ -97,7 +59,59 @@ export function StatisticsTable({ data }: Props) {
                 </Th>
               </Tr>
             </Thead>
-            <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+            <Tbody scrollBehavior={"smooth"}>
+              {data ? (
+                data.slice(from, to).map((projeto, key) => (
+                  <Tr key={key}>
+                    <Td textAlign={"center"} fontWeight={"semibold"}>
+                      <Link
+                        to={`/estatisticas/cronograma`}
+                        state={{ data: projeto }}
+                      >
+                        <Text>{projeto.sonda}</Text>
+                      </Link>
+                    </Td>
+                    <Td textAlign={"center"} fontWeight={"semibold"}>
+                      <Link
+                        to={`/estatisticas/cronograma`}
+                        state={{ data: projeto }}
+                      >
+                        <Text>{projeto.poco}</Text>
+                      </Link>
+                    </Td>
+                    <Td textAlign={"center"} fontWeight={"semibold"}>
+                      {/* <IconButton
+                          aria-label="Plus sign"
+                          icon={<AiFillEdit />}
+                          background="white"
+                          variant="secondary"
+                          color="#2D2926"
+                          mr={2}
+                          isRound={true}
+                          size="sm"
+                        /> */}
+                      {/* <IconButton
+                          aria-label="Plus sign"
+                          icon={<FaTrash />}
+                          background="white"
+                          variant="secondary"
+                          color="#F94144"
+                          mr={2}
+                          isRound={true}
+                          size="sm"
+                        /> */}
+                      {/* <EditaValorModal /> */}
+                    </Td>
+                  </Tr>
+                ))
+              ) : (
+                <Tr>
+                  <Td textAlign={"center"} fontWeight={"semibold"}>
+                    <Text>Não há dados</Text>
+                  </Td>
+                </Tr>
+              )}
+            </Tbody>
             <Tfoot>
               <Tr background={"origem.500"}>
                 <Th color="white">Total</Th>
