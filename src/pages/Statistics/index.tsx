@@ -9,10 +9,8 @@ import Sidebar from "components/SideBar";
 
 import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
 
-// import ModalCadastrarSonda from "./components/ModalCadastrarSonda";
 import ModalCadastroCronograma from "./components/ModalCadastroCronograma";
 import ModalCadastroOperacao from "./components/ModalCadastroOperação";
-// import ModalCadastroPoco from "./components/ModalCadastroPoco";
 import { StatisticsTable } from "./components/StatisticsTable";
 
 function Statistics() {
@@ -40,10 +38,11 @@ function Statistics() {
 
   const handleGetAllData = async () => {
     const { data } = await getOperacoesEstatisticas();
-    if (!data) return;
+    // console.log("data", data);
     const newData = convertReq(data);
     setAllData(newData);
     setFilter(newData);
+    setLoading(false);
   };
 
   const filterData = (text: string) => {
@@ -66,14 +65,15 @@ function Statistics() {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    handleGetAllData();
   }, []);
 
   useEffect(() => {
     handleGetAllData();
-  }, []);
+  }, [refresh]);
+
+  // console.log("filter", filter);
+  // console.log("allData", allData);
 
   return (
     <>
@@ -152,7 +152,7 @@ function Statistics() {
               </Flex>
 
               <Flex flex={1}>
-                {filter && <StatisticsTable data={filter} />}
+                <StatisticsTable data={filter} />
               </Flex>
             </Box>
           </Flex>

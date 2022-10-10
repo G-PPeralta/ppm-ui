@@ -18,9 +18,8 @@ function BotoesModais({
         backgroundColor={"white"}
         borderRadius={6}
         direction={"column"}
-        grow={1}
-        shrink={1}
-        basis={"100px"}
+        flex={1}
+        justify={"space-between"}
       >
         <BotaoDescricaoEJustificativa
           infoProjeto={infoProjeto}

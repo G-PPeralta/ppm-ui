@@ -143,8 +143,7 @@ function DetalhamentoProjeto() {
               direction={"row"}
               wrap={"wrap"}
               mb={4}
-              grow={1}
-              shrink={1}
+              flex={1}
               gap={4}
             >
               <CardInfoProjeto
@@ -166,7 +165,8 @@ function DetalhamentoProjeto() {
                 setRender={() => setRender(true)}
               />
             </Flex>
-            <Gantt />
+
+            <Gantt idProjeto={Number(id)} />
             <GenericCurveS data={curveSData} />
             {/* <GraficoCurvaS /> */}
           </>

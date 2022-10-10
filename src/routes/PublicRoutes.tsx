@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
+import { ForgotPassword } from "pages/ForgotPassword";
 import { Login } from "pages/Login";
 import { NotFound } from "pages/NotFound";
 import { Register } from "pages/Register";
@@ -11,6 +12,7 @@ export function PublicRoutes() {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

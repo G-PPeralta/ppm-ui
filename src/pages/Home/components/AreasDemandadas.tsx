@@ -274,7 +274,7 @@ export default function AreasDemandadasComponent({
               Áreas Demandadas
             </Text>
             <Box display={"flex"} w={"100%"} justifyContent="space-between">
-              <Box ml={-4} pt={6}>
+              <Box pt={6}>
                 <StackedBarChart
                   showY={false}
                   sizeW={180}

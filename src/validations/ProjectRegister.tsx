@@ -29,8 +29,7 @@ export const projectRegisterSchema = yup.object({
   statusId: yup.string(),
   gateId: yup.string(),
   tipoProjetoId: yup.string(),
-  demandaId: yup.string(),
-  comentarios: yup.string().required(),
+  comentarios: yup.string(),
   responsavel: yup.array().of(
     yup.object({
       nomeResponsavel: yup.string().required(),
@@ -38,4 +37,6 @@ export const projectRegisterSchema = yup.object({
     })
   ),
   elementoPep: yup.string().required(),
+  coordenador: yup.string(),
+  coordenador_id: yup.string(),
 });

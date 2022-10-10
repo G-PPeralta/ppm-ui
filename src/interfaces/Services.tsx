@@ -28,6 +28,14 @@ export interface RegisterProps {
   telefone: string;
 }
 
+export interface ResetPasswordProps {
+  email: string;
+}
+
+export interface ResponseResetPassword {
+  message: string;
+}
+
 export interface ResponseRoles {
   id: number;
   role: string;
@@ -106,7 +114,7 @@ export interface GanttPayload {
 
 export interface GanttProps {
   TaskID: number;
-  Item: string;
+  Item?: string;
   TaskName: string;
   StartDate?: string;
   Duration?: number;
@@ -115,7 +123,7 @@ export interface GanttProps {
 }
 export interface GanttMacroDto {
   macroatividade_id: number;
-  macroatividade_item: string;
+  macroatividade_item?: string;
   macroatividade_nome: string;
   duracao?: number;
   progresso?: number;

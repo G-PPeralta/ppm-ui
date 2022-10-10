@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import {
   Flex,
   Modal,
@@ -14,7 +12,8 @@ import {
   Textarea,
   Button,
   Text,
-  Input,
+  NumberInput,
+  NumberInputField,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
@@ -50,34 +49,6 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
     value: sonda.id,
     label: sonda.nom_sonda,
   }));
-
-  // const handleGet = async () => {
-  //   const projetos = await getProjetosTipo();
-  //   const projetosTipoSorted = projetos.data.sort(
-  //     (a: ProjetoTipo, b: ProjetoTipo) =>
-  //       a.nom_projeto_tipo.localeCompare(b.nom_projeto_tipo)
-  //   );
-  //   setListaProjetos(projetosTipoSorted);
-  // };
-
-  // const handleClick = async () => {
-  //   const projetos = await getProjetosTipo();
-  //   const projetosTipoSorted = projetos.data.sort(
-  //     (a: ProjetoTipo, b: ProjetoTipo) =>
-  //       a.nom_projeto_tipo.localeCompare(b.nom_projeto_tipo)
-  //   );
-  //   setListaProjetos(projetosTipoSorted);
-  //   onOpen();
-  // };
-
-  useEffect(() => {
-    // handleGet();
-    // registerForm.setFieldValue("id_campanha", idCampanha);
-    // const newDate = new Date(data);
-    // newDate.setDate(newDate.getDate() + 15);
-    // registerForm.setFieldValue("dat_ini_prev", newDate);
-    // setRefresh(!refresh);
-  }, []);
 
   return (
     <>
@@ -153,21 +124,22 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                               PROFUNDIDADE DA ZONA INTERVIDA MAIS
                             </Text>
                           </Flex>
-                          <Input
-                            // isRequired
-                            placeholder="Profundidade"
-                            id="profundidade"
-                            type="text"
-                            name="profundidade"
-                            // value={regexCaracteresEspeciais(
-                            //   registerForm.values.poco
-                            // )}
-                            onChange={registerForm.handleChange}
-                            maxLength={10}
-                          />
-                          {/* {registerForm.errors.poco && (
-                            <TextError>{registerForm.errors.poco}</TextError>
-                          )} */}
+
+                          <NumberInput
+                            max={999999}
+                            min={0}
+                            id={`profundidade`}
+                            name={`profundidade`}
+                            value={registerForm.values.profundidade}
+                            onChange={(value) => {
+                              registerForm.setFieldValue(
+                                `profundidade`,
+                                Number(value)
+                              );
+                            }}
+                          >
+                            <NumberInputField bg={"#fff"} h={"56px"} />
+                          </NumberInput>
                         </FormControl>
                       </Flex>
                     </Stack>
