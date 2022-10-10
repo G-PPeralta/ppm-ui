@@ -8,8 +8,6 @@ import {
   YAxis,
 } from "recharts";
 
-import style from "./StackedBarChart.module.scss";
-
 export default function StackedBarChart({
   sizeW,
   sizeH,
@@ -19,8 +17,8 @@ export default function StackedBarChart({
   dataEntries,
 }: StackedBarChartProps) {
   return (
-    <ResponsiveContainer aspect={0}>
-      <BarChart data={data} className={style.chart}>
+    <ResponsiveContainer height={"100%"} width={"100%"}>
+      <BarChart data={data}>
         <XAxis dataKey="month" fontSize={10} />
         {showY ? <YAxis dataKey={dataEntries[0].name} /> : undefined}
         <Tooltip />
