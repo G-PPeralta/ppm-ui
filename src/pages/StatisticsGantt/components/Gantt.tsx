@@ -83,7 +83,6 @@ export function Gantt({ data, options, edit }: ganttOptionsProps) {
     //   args.cancel = true;
     // }
     // console.log(">>>>", args.rowData);
-    edit?.onOpen();
     edit?.setEditOp({
       // id_sonda: number;
       // id_poco: number;
@@ -100,6 +99,7 @@ export function Gantt({ data, options, edit }: ganttOptionsProps) {
       pct_real: args.rowData.Progress,
       // id_responsavel: number;
     });
+    edit?.onOpen();
     args.cancel = true;
   };
 
@@ -186,7 +186,7 @@ export function Gantt({ data, options, edit }: ganttOptionsProps) {
               headerText: "Início real",
               headerTextAlign: "Center",
               textAlign: "Center",
-              // format: "dd/MM/yyyy HH:mm",
+              format: "dd/MM/yyyy HH:mm",
               type: "date",
             },
             {
@@ -194,7 +194,7 @@ export function Gantt({ data, options, edit }: ganttOptionsProps) {
               headerText: "Fim real",
               headerTextAlign: "Center",
               textAlign: "Center",
-              // format: "dd/MM/yyyy HH:mm",
+              format: "dd/MM/yyyy HH:mm",
               type: "date",
             },
             {
@@ -202,7 +202,7 @@ export function Gantt({ data, options, edit }: ganttOptionsProps) {
               headerText: "Início planejado",
               headerTextAlign: "Center",
               textAlign: "Center",
-              // format: "dd/MM/yyyy HH:mm",
+              format: "dd/MM/yyyy HH:mm",
               type: "date",
             },
             {
@@ -210,7 +210,7 @@ export function Gantt({ data, options, edit }: ganttOptionsProps) {
               headerText: "Fim planejado",
               headerTextAlign: "Center",
               textAlign: "Center",
-              // format: "dd/MM/yyyy HH:mm",
+              format: "dd/MM/yyyy HH:mm",
               type: "date",
             },
             {

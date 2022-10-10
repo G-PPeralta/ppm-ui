@@ -10,8 +10,8 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  NumberInput,
-  NumberInputField,
+  // NumberInput,
+  // NumberInputField,
   useBreakpointValue,
 } from "@chakra-ui/react";
 
@@ -55,11 +55,14 @@ function ModalAdicionarOperacao({
   // }));
 
   useEffect(() => {
+    // console.log(">>>>editOp", editOp);
     registerForm.setFieldValue("id_atividade", editOp.id_atividade);
     registerForm.setFieldValue("nome_atividade", editOp.nome_atividade);
     // registerForm.setFieldValue("id_responsavel", editOp.id_responsavel);
     registerForm.setFieldValue("inicio_planejado", editOp.inicio_planejado);
     registerForm.setFieldValue("inicio_realizado", editOp.inicio_realizado);
+    registerForm.setFieldValue("fim_planejado", editOp.fim_planejado);
+    registerForm.setFieldValue("fim_realizado", editOp.fim_realizado);
     registerForm.setFieldValue("hrs_totais", editOp.hrs_totais);
     registerForm.setFieldValue("hrs_reais", editOp.hrs_reais);
     registerForm.setFieldValue("pct_real", editOp.pct_real);
@@ -152,14 +155,16 @@ function ModalAdicionarOperacao({
                         value={"inicio_planejado"}
                         label={"INÍCIO PLANEJADO"}
                         required={true}
+                        data={registerForm.values.inicio_planejado}
                       />
                     </Flex>
                     <Flex flex={1}>
                       <DateTimePicker
                         registerForm={registerForm}
-                        value={"fim_pĺanejado"}
+                        value={"fim_planejado"}
                         label={"FIM PLANEJADO"}
                         required={false}
+                        data={registerForm.values.fim_planejado}
                       />
                     </Flex>
                   </Flex>
@@ -170,6 +175,7 @@ function ModalAdicionarOperacao({
                         value={"inicio_realizado"}
                         label={"INÍCIO REAL"}
                         required={false}
+                        data={registerForm.values.inicio_realizado}
                       />
                     </Flex>
                     <Flex flex={1}>
@@ -178,11 +184,12 @@ function ModalAdicionarOperacao({
                         value={"fim_realizado"}
                         label={"FIM REAL"}
                         required={false}
+                        data={registerForm.values.fim_realizado}
                       />
                     </Flex>
                   </Flex>
                 </Flex>
-                <Flex flex={1} direction={"column"}>
+                {/* <Flex flex={1} direction={"column"}>
                   <Text fontWeight={"bold"}>Progresso</Text>
                   <Flex gap={5}>
                     <Flex>
@@ -200,7 +207,7 @@ function ModalAdicionarOperacao({
                       </NumberInput>
                     </Flex>
                   </Flex>
-                </Flex>
+                </Flex> */}
                 {/* <Flex
                   flexDirection={useBreakpointValue({
                     base: "column",
