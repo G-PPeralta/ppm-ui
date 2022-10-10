@@ -217,7 +217,7 @@ export interface TotalNaoPrevisto {
 }
 
 export interface AreasDemandadasPorMes {
-  mes: number;
+  month: number;
   sms: number;
   regulatorio: number;
   operacao: number;

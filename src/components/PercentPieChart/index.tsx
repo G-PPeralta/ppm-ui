@@ -6,12 +6,12 @@ import { PieChart, Pie, Cell } from "recharts";
 interface Props {
   size: number;
   upDown?: boolean;
-  data?: {
+  data: {
     name: string;
     value: number;
     color: string;
   }[];
-  value?: number;
+  value: number;
 }
 
 export default function PieChartComponent({
@@ -38,11 +38,9 @@ export default function PieChartComponent({
           innerRadius={size / 2 - 5}
           outerRadius={size / 2}
         >
-          {data
-            ? data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.color} />
-              ))
-            : ""}
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={entry.color} />
+          ))}
         </Pie>
       </PieChart>
       <Box
@@ -58,13 +56,10 @@ export default function PieChartComponent({
         ) : (
           <AiOutlineCaretDown color="#F94144" size={10} />
         )}
-        {data ? (
-          <Text sx={{ fontSize: 15 }} color={data[1].color}>
-            {value}%
-          </Text>
-        ) : (
-          ""
-        )}
+
+        <Text sx={{ fontSize: 15 }} color={data[1].color}>
+          {value}%
+        </Text>
       </Box>
     </Box>
   );

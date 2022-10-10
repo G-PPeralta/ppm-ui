@@ -223,7 +223,7 @@ export default function AreasDemandadasComponent({
     AreasDemandadasPorMes.forEach((mes) => {
       const total = mes.sms + mes.regulatorio + mes.operacao + mes.outros;
       const dataMock = {
-        month: formatMonth(mes.mes),
+        month: formatMonth(mes.month),
         SMS: (mes.sms / total) * 100,
         Regulatório: (mes.regulatorio / total) * 100,
         Operação: (mes.operacao / total) * 100,
