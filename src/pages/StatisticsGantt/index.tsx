@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FiChevronLeft } from "react-icons/fi";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 import {
   Box,
@@ -12,22 +13,24 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { StatisticsGanttProps } from "interfaces/Services";
+import { StatisticsGanttProps, StatisticsTableData } from "interfaces/Services";
 
 import Sidebar from "components/SideBar";
 
 // import { useToast } from "contexts/Toast";
 
-// import { patchOperacoesEstatisticas } from "services/update/OperacoesEstatisticas";
-
 import { useEditarOperacao } from "hooks/useEditarOperacao";
+
+import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
+
+// import { patchOperacoesEstatisticas } from "services/update/OperacoesEstatisticas";
 
 import { Gantt } from "./components/Gantt";
 import ModalAdicionarOperacao from "./components/ModalAdicionarOperacao";
 import ModalEditarOperacao from "./components/ModalEditarOperacao";
 
 function StatisticsGantt() {
-  const { state }: any = useLocation();
+  const { sonda, poco } = useParams();
   const navigate = useNavigate();
   const [refresh, setRefresh] = useState(false);
   const [editOp, setEditOp] = useState({});
@@ -108,13 +111,45 @@ function StatisticsGantt() {
   //     toast.error("Erro ao editar operação!");
   //   }
   // };
+  const convertReq = (payload: any): StatisticsTableData[] => {
+    const newData: StatisticsTableData[] = [];
+    payload.forEach((s: { id_sonda: number; sonda: string; pocos: any[] }) =>
+      s.pocos.forEach((p) => {
+        newData.push({
+          sonda: s.sonda,
+          id_sonda: s.id_sonda,
+          poco: p.poco,
+          id_poco: p.id_poco,
+          atividades: p.atividades,
+        });
+      })
+    );
+    return newData;
+  };
+
+  const handleGetAllData = async () => {
+    const { data } = await getOperacoesEstatisticas();
+    // const data = atividades;
+    if (!data) return;
+    const newData = convertReq(data);
+
+    const _ganttData = newData.find(
+      (e) => e.id_sonda === Number(sonda) && e.id_poco === Number(poco)
+    );
+    // console.log(":>>>> _ganttData,", _ganttData);
+    formatToGanttData(_ganttData);
+  };
 
   useEffect(() => {
-    formatToGanttData(state.data);
-
-    // handleSetData();
-    // setLoading(false);
+    handleGetAllData();
   }, [refresh]);
+
+  // useEffect(() => {
+  //   formatToGanttData(state.data);
+
+  //   // handleSetData();
+  //   // setLoading(false);
+  // }, [refresh]);
 
   return (
     <>

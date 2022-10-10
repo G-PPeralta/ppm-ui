@@ -75,7 +75,10 @@ export function PrivateRoutes() {
       />
       <Route path="/licoesAprendidas" element={<LicoesAprendidasProjetos />} />
       <Route path="/estatisticas/" element={<Statistics />} />
-      <Route path="/estatisticas/cronograma" element={<StatisticsGantt />} />
+      <Route
+        path="/estatisticas/cronograma/:sonda/:poco"
+        element={<StatisticsGantt />}
+      />
       <Route path="/priorizacao" element={<Priorizacao />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
