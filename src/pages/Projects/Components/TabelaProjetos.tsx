@@ -54,15 +54,15 @@ export function TabelaProjetos({ data }: TableProps) {
     0
   );
 
-  // console.log({ data });
+  // console.log(data);
 
   const tableData = data.slice(from, to).map((projeto, key) => (
     <Tr key={key}>
       <Td isNumeric textAlign={"center"}>
-        {projeto.id}
+        {projeto.id_projeto_real}
       </Td>
       <Td>
-        <Link to={`/detalhamento/${projeto.id}`}>
+        <Link to={`/detalhamento/${projeto.id_projeto_real}`}>
           {projeto.nome_projeto.length > 25 ? (
             <Tooltip label={projeto.nome_projeto} aria-label="Nome do projeto">
               <Text color={"#0047BB"}>
@@ -147,8 +147,8 @@ export function TabelaProjetos({ data }: TableProps) {
         )}
       </Td>
       <Td textAlign={"center"}>
-        <ModalCadastrarPriorizacao projeto={projeto.id} />
-        <ModalDeletarProjeto projeto={projeto.id} />
+        <ModalCadastrarPriorizacao projeto={projeto.id_projeto_real} />
+        <ModalDeletarProjeto projeto={projeto.id_projeto_real} />
       </Td>
     </Tr>
   ));
