@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 // import { Ring } from "@uiball/loaders";
 
-import StackedBarChart from "components/StackedBarChart";
+import StackedBarChart from "components/StackedBarChartGraphic";
 
 import { getCampo, getSonda } from "services/get/CadastroModaisInfograficos";
 
