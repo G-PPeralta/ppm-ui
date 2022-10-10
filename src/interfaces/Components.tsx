@@ -5,8 +5,8 @@ export interface DropzoneProps {
 }
 
 export interface StackedBarChartProps {
-  sizeW: number;
-  sizeH: number;
+  sizeW: number | string;
+  sizeH: number | string;
   barW: number;
   showY: boolean;
   totalBudget?: number;

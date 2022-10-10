@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { IoIosArrowBack } from "react-icons/io";
 import { MdModeEdit } from "react-icons/md";
 
 import {
@@ -57,7 +56,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
         variant="outline"
         aria-label="open menu"
         color={"origem.500"}
-        backgroundColor={"white"}
+        backgroundColor={"transparent"}
         border={"none"}
         textAlign={"center"}
         icon={<MdModeEdit />}
@@ -67,11 +66,13 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
         <ModalContent>
           <ModalHeader
             backgroundColor={"#2E69FD"}
-            borderTopRadius={7}
+            borderTopRadius={"8px"}
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            h={"48px"}
           >
             {`Priorização ${infosOption.nameRanking}`}
           </ModalHeader>
@@ -86,29 +87,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                 <Flex gap={4}>
                   <Stack gap={2}>
                     <Flex direction={"column"}>
-                      <Flex>
-                        <Text>
-                          <Button
-                            aria-label=""
-                            backgroundColor={"white"}
-                            color={"black"}
-                            onClick={() =>
-                              handleCancelar(registerForm, onClose)
-                            }
-                            _hover={{
-                              background: "white",
-                              transition: "all 0.4s",
-                              color: "origem.500",
-                            }}
-                            fontSize={"20px"}
-                            mb={"8px"}
-                          >
-                            <IoIosArrowBack />{" "}
-                            {`Priorização ${infosOption.nameRanking}`}
-                          </Button>
-                        </Text>
-                      </Flex>
-                      <Flex direction={"row"}>
+                      <Flex direction={"column"} gap={3}>
                         <Flex
                           flexDirection={useBreakpointValue({
                             base: "column",
@@ -120,15 +99,21 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                           <FormControl>
                             <FormLabel
                               htmlFor="rankingOpcao"
-                              fontSize={"12px"}
                               mb={"1px"}
-                              w={"350px"}
-                              ml={"3px"}
+                              color={"#949494"}
+                              fontWeight={"700"}
+                              fontSize={"12px"}
                             >
                               NOME
                             </FormLabel>
                             <Input
+                              fontSize={"14px"}
+                              fontWeight={"400"}
+                              color={"#949494"}
                               ml={"3px"}
+                              w={"328px"}
+                              border={"1px solid #949494"}
+                              h={"56px"}
                               isRequired
                               id="rankingOpcao"
                               name="rankingOpcao"
@@ -144,28 +129,29 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                             md: "row",
                           })}
                           gap={5}
-                          mt={"10px"}
-                          ml={"15px"}
                         >
                           <FormControl>
                             <FormLabel
                               htmlFor="num_nota"
                               fontSize={"12px"}
+                              fontWeight={"700"}
+                              color={"#949494"}
                               mb={"1px"}
-                              w={"140px"}
                             >
                               NOTA
                             </FormLabel>
                             <Select
+                              border={"1px solid #949494"}
+                              h={"56px"}
+                              w={"328px"}
+                              fontSize={"14px"}
+                              fontWeight={"400"}
+                              color={"#949494"}
                               id="num_nota"
                               name="num_nota"
                               placeholder="Selecione"
                               value={Number(registerForm.values.num_nota)}
                               onChange={registerForm.handleChange}
-                              w={useBreakpointValue({
-                                base: "100%",
-                                md: "95%",
-                              })}
                             >
                               <option>0</option>
                               <option>1</option>

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-// import { BsPlusLg } from 'react-icons/bs';
-// import { FaGreaterThan } from 'react-icons/fa';
 import { BiPlus } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
+import { MdArrowForwardIos } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -90,13 +89,13 @@ export function Fornecedores() {
   return (
     <Sidebar>
       <Flex
-        w={"100%"}
+        w={"auto"}
         align="center"
         justify="center"
         bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
       >
         <Stack spacing="8">
-          <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
+          <Flex align="center" justify="center" bg={"#EDF2F7"}>
             <Box
               py={{ base: "6", sm: "8" }}
               px={{ base: "6", sm: "8" }}
@@ -127,8 +126,6 @@ export function Fornecedores() {
                   // border={'purple solid 3px'}
                   >
                     <Button
-                      ml={useBreakpointValue({ base: 0 })}
-                      mt={useBreakpointValue({ base: 2, md: 0 })}
                       type="button"
                       background="white"
                       variant="primary"
@@ -170,102 +167,126 @@ export function Fornecedores() {
                     </Button>
                   </Flex>
 
-                  <Flex gap={2}>
-                    <FormControl>
-                      <FormLabel
-                        fontWeight={"700"}
-                        fontSize={"12px"}
-                        color={"#A7A7A7"}
-                        htmlFor="projeto"
-                      >
-                        <Text
-                          fontWeight={"700"}
-                          fontSize={"12px"}
-                          color={"#A7A7A7"}
-                        >
-                          PROJETO
-                        </Text>
-                      </FormLabel>
-                      <Select
-                        mt={"-9px"}
-                        placeholder="Selecione"
-                        id="projeto"
-                        name="projeto"
-                        // onChange={(e) => setProjetoId(e.target.value)}
-                        width={"208px"}
-                        height={"56px"}
-                      >
-                        <option color={"#A7A7A7"} value={0}>
-                          Todos
-                        </option>
-                        {projetos &&
-                          projetos.map((project, index) => (
-                            <option value={project.id} key={index}>
-                              {project.nomeProjeto}
-                            </option>
-                          ))}
-                      </Select>
-                    </FormControl>
-                    <Flex ml={"7px"}>
-                      <FormControl>
-                        <FormLabel
-                          fontWeight={"700"}
-                          fontSize={"12px"}
-                          color={"#A7A7A7"}
-                          htmlFor="projeto"
-                        >
-                          <Text
+                  <Flex justify={"space-between"}>
+                    <Flex align={"flex-end"} gap={4}>
+                      <Flex>
+                        <FormControl>
+                          <FormLabel
                             fontWeight={"700"}
                             fontSize={"12px"}
                             color={"#A7A7A7"}
+                            htmlFor="projeto"
                           >
-                            POLO
-                          </Text>
-                        </FormLabel>
-                        <Select
-                          mt={"-9px"}
-                          placeholder="Selecione"
-                          id="projeto"
-                          name="projeto"
-                          // onChange={(e) => setProjetoId(e.target.value)}
-                          width={"208px"}
+                            <Text
+                              fontWeight={"700"}
+                              fontSize={"12px"}
+                              color={"#A7A7A7"}
+                            >
+                              PROJETO
+                            </Text>
+                          </FormLabel>
+                          <Select
+                            mt={"-9px"}
+                            placeholder="Selecione"
+                            id="projeto"
+                            name="projeto"
+                            // onChange={(e) => setProjetoId(e.target.value)}
+                            width={"208px"}
+                            height={"56px"}
+                          >
+                            <option color={"#A7A7A7"} value={0}>
+                              Todos
+                            </option>
+                            {projetos &&
+                              projetos.map((project, index) => (
+                                <option value={project.id} key={index}>
+                                  {project.nomeProjeto}
+                                </option>
+                              ))}
+                          </Select>
+                        </FormControl>
+                      </Flex>
+
+                      <Flex align={"flex-end"}>
+                        <FormControl>
+                          <FormLabel
+                            fontWeight={"700"}
+                            fontSize={"12px"}
+                            color={"#A7A7A7"}
+                            htmlFor="projeto"
+                          >
+                            <Text
+                              fontWeight={"700"}
+                              fontSize={"12px"}
+                              color={"#A7A7A7"}
+                            >
+                              POLO
+                            </Text>
+                          </FormLabel>
+                          <Select
+                            mt={"-9px"}
+                            placeholder="Selecione"
+                            id="projeto"
+                            name="projeto"
+                            // onChange={(e) => setProjetoId(e.target.value)}
+                            width={"208px"}
+                            height={"56px"}
+                          >
+                            <option color={"#A7A7A7"} value={0}>
+                              Todos
+                            </option>
+                            {projetos &&
+                              projetos.map((project, index) => (
+                                <option value={project.id} key={index}>
+                                  {project.nomeProjeto}
+                                </option>
+                              ))}
+                          </Select>
+                        </FormControl>
+                      </Flex>
+                      <Flex>
+                        <Button
+                          type="button"
+                          background="#0047BB"
+                          variant="outline"
+                          color="white"
+                          borderColor="#0047BB"
+                          _hover={{
+                            background: "white",
+                            transition: "all 0.4s",
+                            color: "#0047BB",
+                          }}
+                          rightIcon={<FiSearch />}
+                          // onClick={filterByProject}
+                          alignSelf={"end"}
                           height={"56px"}
+                          width={"101px"}
+                          fontSize={"18px"}
                         >
-                          <option color={"#A7A7A7"} value={0}>
-                            Todos
-                          </option>
-                          {projetos &&
-                            projetos.map((project, index) => (
-                              <option value={project.id} key={index}>
-                                {project.nomeProjeto}
-                              </option>
-                            ))}
-                        </Select>
-                      </FormControl>
+                          Filtrar
+                        </Button>
+                      </Flex>
                     </Flex>
-                    <Flex>
+                    <Flex
+                      // border={'gray solid 4px'}
+                      // justifyContent={"flex-start"}
+                      align={"flex-start"}
+                    >
                       <Button
-                        type="button"
-                        background="#0047BB"
-                        variant="outline"
-                        color="white"
-                        borderColor="#0047BB"
-                        _hover={{
-                          background: "white",
-                          transition: "all 0.4s",
-                          color: "#0047BB",
-                        }}
-                        rightIcon={<FiSearch />}
-                        // onClick={filterByProject}
+                        background="transparent"
+                        color="#0047BB"
+                        fontSize="17px"
                         alignSelf={"end"}
-                        marginLeft={"5"}
-                        height={"56px"}
-                        width={"101px"}
-                        fontSize={"18px"}
-                        mr="460px"
-                        ml="10px"
                       >
-                        Filtrar
+                        Lixeira
+                        <Icon
+                          // alignSelf={"end"}
+                          as={MdArrowForwardIos}
+                          color="#0047BB"
+                          fontSize="20px"
+                          fontWeight={"700"}
+                          ml={1}
+                        />
                       </Button>
                     </Flex>
                   </Flex>
@@ -362,28 +383,6 @@ export function Fornecedores() {
                         </FormControl>
                       </Flex>
                     </form> */}
-                    {/* <Flex
-                      // border={'gray solid 4px'}
-                      justifyContent={'flex-end'}
-                    >
-                      <Button
-                        background="transparent"
-                        color="#0047BB"
-                        float={'right'}
-                        mt={'45px'}
-                        ml={'290px'}
-                        fontSize="17px"
-                      >
-                        Lixeira
-                        <Icon
-                          as={FaGreaterThan}
-                          fontSize="13px"
-                          fontWeight={'none'}
-                          ml={1}
-                          color="#0047BB"
-                        />
-                      </Button>
-                    </Flex> */}
                   </Flex>
                 </Flex>
               </Stack>

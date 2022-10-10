@@ -34,11 +34,16 @@ function GenericCurveS({ data }: Props) {
         marginTop={4}
       >
         <Flex
-          alignItems={"center"}
+          backgroundColor={"white"}
+          borderTopRadius={"8px"}
+          borderBottomRadius={"0px"}
           border={"1px"}
           borderColor={"gray.200"}
-          borderTopRadius={"2xl"}
-          padding={"1em"}
+          align={"center"}
+          pl={"20px"}
+          gap={5}
+          h={"72px"}
+          py={2}
         >
           <Heading as="h4" size="md">
             Curva S
@@ -99,6 +104,7 @@ function GenericCurveS({ data }: Props) {
             gap={{ base: "1em", md: "4em" }}
             direction={{ base: "column", md: "row" }}
             padding={{ base: "1em", md: "0" }}
+            px={{ base: "1em", md: "0.6em" }}
           >
             <Flex direction={"column"}>
               <Heading as="h3" size="sm">

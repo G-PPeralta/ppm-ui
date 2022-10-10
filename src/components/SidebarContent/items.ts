@@ -76,7 +76,7 @@ export const LinkItems: Array<LinkItemProps> = [
       {
         name: "Gráficos Estatisticos",
         icon: AiOutlineBarChart,
-        link: "/desenvolvimento",
+        link: "/graficos",
       },
       { name: "Look Ahead", icon: AiOutlineBarChart, link: "/lookahead" },
       { name: "Relatórios", icon: FiFile, link: "/reports" },

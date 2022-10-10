@@ -111,29 +111,26 @@ export default function TotalProjetosComponent() {
   ];
 
   return (
-    <Flex
-      w={"100%"}
-      align="center"
-      justify="center"
-      bg={useBreakpointValue({ base: "#EDF2F7", sm: "#EDF2F7" })}
-    >
+    <Flex w={"100%"} align="center" justify="center" bg={"#EDF2F7"}>
       <Box
-        py={{ base: "0", sm: "4" }}
-        px={{ base: "2", sm: "10" }}
+        py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
+        px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         w={"100%"}
-        bg={useBreakpointValue({ base: "white", sm: "white" })}
+        bg={"white"}
         boxShadow={{
           base: "none",
           sm: useColorModeValue("md", "md-dark"),
         }}
-        borderRadius={{ base: "none", sm: "xl" }}
+        borderRadius={"xl"}
         display={"flex"}
         flexDirection={"column"}
         alignItems={"center"}
+        flex={1}
+        gap={4}
       >
         <Text
           sx={{
-            fontSize: 24,
+            fontSize: 18,
             fontWeight: "600",
             width: "100%",
             textAlign: "flex-start",
@@ -142,175 +139,192 @@ export default function TotalProjetosComponent() {
         >
           Total de Projetos
         </Text>
+
         <Box
-          mt={2}
           display="flex"
           flexDirection={{ base: "column", lg: "row" }}
+          w={"100%"}
+          justifyContent={"space-between"}
+          flex={1}
+          gap={4}
         >
-          <Box display={"flex"}>
-            <Box
-              pl={1}
-              pt={5}
-              mt={2}
-              mr={2}
-              bg={"#0047BB"}
-              sx={{ width: "36px", height: "245px", borderRadius: "2px" }}
-            >
-              <Text
-                sx={{
-                  fontSize: 16,
-                  writingMode: "vertical-rl",
-                  transform: "scale(-1)",
-                }}
-                color="#ffffff"
+          <Flex direction={"row"} gap={2} flex={1}>
+            <Flex gap={2} flex={1}>
+              <Flex
+                px={1}
+                py={5}
+                bg={"#0047BB"}
+                sx={{ width: "36px", borderRadius: "2px" }}
+                flex={1}
+                justify={"center"}
+                align={"start"}
               >
-                {total} Projetos
-              </Text>
-            </Box>
-            <Box>
-              <Text
-                p={0.5}
-                mt={2}
-                bg={"#93E01B"}
-                sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                color="#ffffff"
+                <Text
+                  sx={{
+                    fontSize: 16,
+                    writingMode: "vertical-rl",
+                    transform: "scale(-1)",
+                  }}
+                  color="#ffffff"
+                >
+                  {total} Projetos
+                </Text>
+              </Flex>
+
+              <Flex
+                flex={3}
+                direction={"column"}
+                justify={"space-between"}
+                gap={2}
               >
-                {iniciados} Projetos Iniciados
-              </Text>
-              <Text
-                p={0.5}
-                mt={2}
-                bg={"#2E69FD"}
-                sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                color="#ffffff"
-              >
-                {finalizados} Projetos Finalizados
-              </Text>
-              <Text
-                p={0.5}
-                mt={2}
-                bg={"#F94144"}
-                sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                color="#ffffff"
-              >
-                {cancelados} Projetos Cancelados
-              </Text>
-              <Text
-                p={0.5}
-                mt={2}
-                bg={"#F4DD06"}
-                sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                color="#ffffff"
-              >
-                {holds} Projetos Holds
-              </Text>
-              <Text
-                p={0.5}
-                mt={2}
-                bg={"#aaaaaa"}
-                sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                color="#ffffff"
-              >
-                {naoIniciado} Projetos Não Iniciados
-              </Text>
-              <Text
-                p={0.5}
-                mt={2}
-                bg={"#ffa70f"}
-                sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                color="#ffffff"
-              >
-                {reprogramado} Projetos Reprogramados
-              </Text>
-              <Text
-                p={0.5}
-                mt={2}
-                bg={"#c50ffc"}
-                sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                color="#ffffff"
-              >
-                {preAprovacao} Projetos Pré Aprovação Diretor
-              </Text>
-            </Box>
-            <Box>
-              <Text
-                p={0.5}
-                mt={2}
-                sx={{ fontSize: 14, fontWeight: "600" }}
-                color="#93E01B"
-              >
-                {Math.round((iniciados / total) * 100)}%
-              </Text>
-              <Text
-                p={0.5}
-                mt={2}
-                sx={{ fontSize: 14, fontWeight: "600" }}
-                color="#0239C3"
-              >
-                {Math.round((finalizados / total) * 100)}%
-              </Text>
-              <Text
-                p={0.5}
-                mt={2}
-                sx={{ fontSize: 14, fontWeight: "600" }}
-                color="#F94144"
-              >
-                {Math.round((cancelados / total) * 100)}%
-              </Text>
-              <Text
-                p={0.5}
-                mt={2}
-                sx={{ fontSize: 14, fontWeight: "600" }}
-                color="#F4DD06"
-              >
-                {Math.round((holds / total) * 100)}%
-              </Text>
-              <Text
-                p={0.5}
-                mt={2}
-                sx={{ fontSize: 14, fontWeight: "600" }}
-                color="#aaaaaa"
-              >
-                {Math.round((naoIniciado / total) * 100)}%
-              </Text>
-              <Text
-                p={0.5}
-                mt={2}
-                sx={{ fontSize: 14, fontWeight: "600" }}
-                color="#ffa70f"
-              >
-                {Math.round((reprogramado / total) * 100)}%
-              </Text>
-              <Text
-                p={0.5}
-                mt={2}
-                sx={{ fontSize: 14, fontWeight: "600" }}
-                color="#c50ffc"
-              >
-                {Math.round((preAprovacao / total) * 100)}%
-              </Text>
-            </Box>
-            <Box ml={5}>
-              <StackedBarChart
-                showY={false}
-                sizeW={280}
-                sizeH={240}
-                data={dataMock}
-                dataEntries={dataEntries}
-                barW={25}
-              />
-            </Box>
-          </Box>
-          <Box
-            display={"flex"}
-            flexDirection={{ base: "row", lg: "column" }}
-            w={"fit-content"}
-            justifyContent={"space-evenly"}
+                <Flex gap={1} flex={1} align={"center"}>
+                  <Text
+                    p={1}
+                    bg={"#93E01B"}
+                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
+                    color="#ffffff"
+                  >
+                    {iniciados} Projetos Iniciados
+                  </Text>
+                  <Text
+                    p={1}
+                    sx={{ fontSize: 14, fontWeight: "600" }}
+                    color="#93E01B"
+                  >
+                    {Math.round((iniciados / total) * 100)}%
+                  </Text>
+                </Flex>
+
+                <Flex gap={1} flex={1} align={"center"}>
+                  <Text
+                    p={1}
+                    bg={"#2E69FD"}
+                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
+                    color="#ffffff"
+                  >
+                    {finalizados} Projetos Finalizados
+                  </Text>
+                  <Text
+                    p={1}
+                    sx={{ fontSize: 14, fontWeight: "600" }}
+                    color="#0239C3"
+                  >
+                    {Math.round((finalizados / total) * 100)}%
+                  </Text>
+                </Flex>
+
+                <Flex gap={1} flex={1} align={"center"}>
+                  <Text
+                    p={1}
+                    bg={"#F94144"}
+                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
+                    color="#ffffff"
+                  >
+                    {cancelados} Projetos Cancelados
+                  </Text>
+                  <Text
+                    p={1}
+                    sx={{ fontSize: 14, fontWeight: "600" }}
+                    color="#F94144"
+                  >
+                    {Math.round((cancelados / total) * 100)}%
+                  </Text>
+                </Flex>
+
+                <Flex gap={1} flex={1} align={"center"}>
+                  <Text
+                    p={1}
+                    bg={"#F4DD06"}
+                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
+                    color="#ffffff"
+                  >
+                    {holds} Projetos Holds
+                  </Text>
+                  <Text
+                    p={1}
+                    sx={{ fontSize: 14, fontWeight: "600" }}
+                    color="#F4DD06"
+                  >
+                    {Math.round((holds / total) * 100)}%
+                  </Text>
+                </Flex>
+
+                <Flex gap={1} flex={1} align={"center"}>
+                  <Text
+                    p={1}
+                    bg={"#aaaaaa"}
+                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
+                    color="#ffffff"
+                  >
+                    {naoIniciado} Projetos Não Iniciados
+                  </Text>
+                  <Text
+                    p={1}
+                    sx={{ fontSize: 14, fontWeight: "600" }}
+                    color="#aaaaaa"
+                  >
+                    {Math.round((naoIniciado / total) * 100)}%
+                  </Text>
+                </Flex>
+
+                <Flex gap={1} flex={1} align={"center"}>
+                  <Text
+                    p={1}
+                    bg={"#ffa70f"}
+                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
+                    color="#ffffff"
+                  >
+                    {reprogramado} Projetos Reprogramados
+                  </Text>
+                  <Text
+                    p={1}
+                    sx={{ fontSize: 14, fontWeight: "600" }}
+                    color="#ffa70f"
+                  >
+                    {Math.round((reprogramado / total) * 100)}%
+                  </Text>
+                </Flex>
+
+                <Flex gap={1} flex={1} align={"center"}>
+                  <Text
+                    p={1}
+                    bg={"#c50ffc"}
+                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
+                    color="#ffffff"
+                  >
+                    {preAprovacao} Projetos Pré Aprovação Diretor
+                  </Text>
+                  <Text
+                    p={1}
+                    sx={{ fontSize: 14, fontWeight: "600" }}
+                    color="#c50ffc"
+                  >
+                    {Math.round((preAprovacao / total) * 100)}%
+                  </Text>
+                </Flex>
+              </Flex>
+            </Flex>
+          </Flex>
+
+          <Flex align={"center"} justify={"center"} flex={1}>
+            <StackedBarChart
+              showY={false}
+              sizeW={280}
+              sizeH={240}
+              data={dataMock}
+              dataEntries={dataEntries}
+              barW={30}
+            />
+          </Flex>
+
+          <Flex
+            direction={"column"}
+            justifyContent={"space-between"}
+            flex={1}
+            gap={5}
           >
-            <Box ml={5} sx={{ width: 190 }}>
+            <Box>
               <Text
-                ml={5}
-                mb={4}
                 sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
                 color="#000000"
               >
@@ -407,11 +421,8 @@ export default function TotalProjetosComponent() {
                 </Text>
               </Box>
             </Box>
-            <Box ml={{ base: 0, lg: 5 }} sx={{ width: 190 }}>
+            <Box>
               <Text
-                ml={5}
-                mt={{ base: 0, lg: 4 }}
-                mb={{ base: 4, lg: 2 }}
                 sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
                 color="#000000"
               >
@@ -508,7 +519,7 @@ export default function TotalProjetosComponent() {
                 </Text>
               </Box>
             </Box>
-          </Box>
+          </Flex>
         </Box>
       </Box>
     </Flex>
