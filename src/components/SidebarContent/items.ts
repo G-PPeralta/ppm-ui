@@ -64,7 +64,6 @@ export const LinkItems: Array<LinkItemProps> = [
       { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/budgets" },
     ],
   },
-
   {
     name: "Estatísticas",
     icon: AiOutlineBarChart,
@@ -79,7 +78,7 @@ export const LinkItems: Array<LinkItemProps> = [
         icon: AiOutlineBarChart,
         link: "/graficos",
       },
-      { name: "Look Ahead", icon: AiOutlineBarChart, link: "/desenvolvimento" },
+      { name: "Look Ahead", icon: AiOutlineBarChart, link: "/lookahead" },
       { name: "Relatórios", icon: FiFile, link: "/reports" },
     ],
   },
