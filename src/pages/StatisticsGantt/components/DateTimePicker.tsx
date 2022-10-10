@@ -11,15 +11,16 @@ function DateTimePicker({ registerForm, data, label, value, required }: any) {
 
   useEffect(() => {
     if (data) {
+      // console.log(">>>data", data);
       const newDate = new Date(data);
       // newDate.setDate(newDate.getDate() + 15);
       setDataInicio(newDate);
       // setDataMin(newDate);
     } else {
       // const newDate = new Date();
-      // setDataMin(newDate);
+      // setDataInicio(newDate);
     }
-  }, []);
+  }, [data]);
 
   const handleIniciarDate = (date: any) => {
     if (date) {
