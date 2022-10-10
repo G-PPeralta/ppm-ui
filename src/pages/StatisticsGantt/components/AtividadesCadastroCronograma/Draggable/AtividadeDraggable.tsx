@@ -90,15 +90,6 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     const index = options
       .map(({ value }: any) => value)
       .indexOf(registerForm?.values?.atividades?.[i][chave]);
-
-    console.log(
-      `>>>>getValue:${i} ${index}`,
-      `atividades.[${i}].${chave}`,
-      options?.[index]?.value,
-      options?.[index]?.label,
-      registerForm?.values?.atividades?.[i][chave]
-    );
-
     return {
       value: options?.[index]?.value,
       label: options?.[index]?.label,

@@ -202,7 +202,6 @@ export default function AtividadesCadastroCronograma({
         <Droppable droppableId={droppableId}>
           {(provided: DroppableProvided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              {console.log(">>>>AtividadesDraggable map", registerForm.values)}
               {registerForm.values.atividades.map(
                 (_atividade: AtividadesProjetoTipo, index: number) => (
                   <AtividadesDraggable

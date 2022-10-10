@@ -34,32 +34,11 @@ export function useEditarCronograma(atual: any) {
   const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
   const [listaTarefas, setListaTarefas] = useState<Tarefas[]>([]);
   const [listaOperacao, setListaOperacao] = useState<Operacao[]>([]);
-  // const initialValues = {
-  //   nom_usu_create: user?.nome,
-  //   sonda_id: 0,
-  //   poco_id: 0,
-  //   atividades: [
-  //     {
-  //       area_id: 0,
-  //       operacao_id: 0,
-  //       responsavel_id: 0,
-  //       data_inicio: "",
-  //       duracao: 0,
-  //       precedentes: [
-  //         {
-  //           id: 0,
-  //           nome: "",
-  //           checked: false,
-  //         },
-  //       ],
-  //     },
-  //   ],
-  //   comentarios: "",
-  // };
+
   const _atual = {
     nom_usu_create: user?.nome,
-    sonda_id: atual.id_sonda,
-    poco_id: atual.id_poco,
+    id_sonda: atual.id_sonda,
+    id_poco: atual.id_poco,
     atividades: atual.atividades.map((t: any) => ({
       area_id: 0,
       area_nom: "nome area",
@@ -122,7 +101,6 @@ export function useEditarCronograma(atual: any) {
     checked: false,
   }));
 
-  console.log(">>>>>>useFormik");
   const registerForm: any = useFormik({
     initialValues: _atual,
     validationSchema: cadastroNovoCronogramaSchema,
@@ -130,8 +108,8 @@ export function useEditarCronograma(atual: any) {
     onSubmit: async (values: any) => {
       const newValues: any = {
         nom_usu_create: user?.nome,
-        sonda_id: values.sonda_id,
-        poco_id: values.poco_id,
+        id_sonda: values.id_sonda,
+        id_poco: values.id_poco,
         atividades: values.atividades,
         comentarios: values.comentarios,
       };
@@ -139,9 +117,13 @@ export function useEditarCronograma(atual: any) {
       setLoading(true);
 
       try {
-        // TODO endpoint de update
-        console.log(">>>> newValues", newValues);
-        const { status } = { status: 200 }; // await postCadastroNovoCronograma(newValues);
+        // TODO liberar endpoint de update
+        const res = {
+          status: 200,
+          data: newValues,
+        };
+        const status = res.status;
+        // await postCadastroNovoCronograma(newValues);
 
         if (status === 200 || status === 201) {
           toast.success("Cronograma cadastrado com sucesso!", {

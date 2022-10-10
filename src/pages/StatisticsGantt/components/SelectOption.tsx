@@ -14,7 +14,6 @@ function SelectOption({
   required,
 }: any) {
   const handleChange = ({ value }: any, { name }: any) => {
-    console.log(">>>>>>handleChange  ", name, value);
     registerForm.setFieldValue(name, value);
   };
 

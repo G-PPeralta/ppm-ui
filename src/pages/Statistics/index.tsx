@@ -12,7 +12,6 @@ import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
 import ModalCadastroCronograma from "./components/ModalCadastroCronograma";
 import ModalCadastroOperacao from "./components/ModalCadastroOperação";
 import { StatisticsTable } from "./components/StatisticsTable";
-// import { atividades } from "./projeto";
 
 function Statistics() {
   const [loading, setLoading] = useState(true);
@@ -44,6 +43,7 @@ function Statistics() {
     const newData = convertReq(data);
     setAllData(newData);
     setFilter(newData);
+    setLoading(false);
   };
 
   const filterData = (text: string) => {
@@ -66,14 +66,8 @@ function Statistics() {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
-
-  useEffect(() => {
     handleGetAllData();
-  }, []);
+  }, [refresh]);
 
   return (
     <>
