@@ -137,7 +137,7 @@ export default function PrevistoxRealizadoComponent() {
         >
           Previsto x Realizado
         </Text>
-        <Box overflowX={"scroll"} w={width * 0.8} h={260} display={"flex"}>
+        <Box overflowX={"scroll"} w={width * 0.7} h={260} display={"flex"}>
           <StackedBarChart
             showY={true}
             sizeW={1000}
