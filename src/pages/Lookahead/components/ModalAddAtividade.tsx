@@ -1,3 +1,4 @@
+import { forwardRef, useState } from "react";
 import DatePicker from "react-datepicker";
 
 import {
@@ -17,13 +18,11 @@ import {
   useDisclosure,
   Input,
 } from "@chakra-ui/react";
+import { CreateServicoFerramenta } from "interfaces/lookahead";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
 import "react-datepicker/dist/react-datepicker.css";
-import { forwardRef, useState } from "react";
-
-import { CreateServicoFerramenta } from "interfaces/lookahead";
 
 import {
   createAtividadeFerramenta,
