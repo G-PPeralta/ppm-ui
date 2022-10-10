@@ -180,6 +180,7 @@ function CadastrarLicoesAprendidasModal({
                 }}
                 fontSize="18px"
                 fontWeight="700"
+                disabled={licaoAprendida.length < 1 || acao.length < 1}
                 onClick={handleSubmitLicao}
               >
                 Confirmar

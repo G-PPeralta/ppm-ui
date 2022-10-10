@@ -216,10 +216,10 @@ function CardOrcamento() {
                 gap={1}
               >
                 <Text color={"#00B53D"} fontSize={20}>
-                  {(cpiSpi && cpiSpi.cpi) < 1 ? (
-                    <BsCheckCircleFill color={"red"} />
-                  ) : (
+                  {(cpiSpi && cpiSpi.cpi) == 1 ? (
                     <BsCheckCircleFill />
+                  ) : (
+                    <BsCheckCircleFill color={"red"} />
                   )}
                 </Text>
                 <Text fontSize={16} fontWeight={600}>
@@ -235,10 +235,10 @@ function CardOrcamento() {
                 gap={1}
               >
                 <Text color={"#00B53D"} fontSize={20}>
-                  {cpiSpi && cpiSpi.spi < 1 ? (
-                    <BsCheckCircleFill color={"red"} />
-                  ) : (
+                  {cpiSpi && cpiSpi.spi == 1 ? (
                     <BsCheckCircleFill />
+                  ) : (
+                    <BsCheckCircleFill color={"red"} />
                   )}
                 </Text>
                 <Text fontSize={16} fontWeight={600}>
