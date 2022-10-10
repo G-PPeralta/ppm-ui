@@ -73,6 +73,7 @@ export function MobileNav({
     precedentes: "Visão por Precedentes",
     "visao-por-area": "Visão por Area",
     estatisticas: "Estatísticas",
+    cronograma: "Cronograma",
     reports: "Relatórios",
     graficos: "Gráficos Estatísticos",
     priorizacao: "Priorização",
