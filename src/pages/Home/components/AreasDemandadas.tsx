@@ -99,15 +99,15 @@ export default function AreasDemandadasComponent({
     const data = AreasDemandadasPorMes.at(month);
 
     const sms = data ? data.sms : 0;
-    const regulatorio = data ? data.sms : 0;
-    const operacao = data ? data.sms : 0;
-    const outros = data ? data.sms : 0;
+    const regulatorio = data ? data.regulatorio : 0;
+    const operacao = data ? data.operacao : 0;
+    const outros = data ? data.outros : 0;
     const total: number = sms + regulatorio + operacao + outros;
 
-    const smsPercent = (sms / total) * 100;
-    const regulatorioPercent = (regulatorio / total) * 100;
-    const operacaoPercent = (operacao / total) * 100;
-    const outrosPercent = (outros / total) * 100;
+    const smsPercent = ((sms / total) * 100).toFixed(0);
+    const regulatorioPercent = ((regulatorio / total) * 100).toFixed(0);
+    const operacaoPercent = ((operacao / total) * 100).toFixed(0);
+    const outrosPercent = ((outros / total) * 100).toFixed(0);
 
     const values = {
       smsPercent,
@@ -151,9 +151,9 @@ export default function AreasDemandadasComponent({
   function createPieData() {
     const data = AreasDemandadasPorMes.at(0);
     const sms = data ? data.sms : 0;
-    const regulatorio = data ? data.sms : 0;
-    const operacao = data ? data.sms : 0;
-    const outros = data ? data.sms : 0;
+    const regulatorio = data ? data.regulatorio : 0;
+    const operacao = data ? data.operacao : 0;
+    const outros = data ? data.outros : 0;
     const total: number = sms + regulatorio + operacao + outros;
 
     const dataTypes = {
@@ -209,6 +209,7 @@ export default function AreasDemandadasComponent({
         },
       ],
     };
+
     return dataTypes;
   }
 

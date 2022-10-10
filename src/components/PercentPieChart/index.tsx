@@ -11,7 +11,7 @@ interface Props {
     value: number;
     color: string;
   }[];
-  value: number;
+  value: string;
 }
 
 export default function PieChartComponent({
