@@ -65,7 +65,7 @@ export function StatisticsTable({ data }: Props) {
                   <Tr key={key}>
                     <Td textAlign={"center"} fontWeight={"semibold"}>
                       <Link
-                        to={`/estatisticas/cronograma`}
+                        to={`/estatisticas/cronograma/${projeto.id_sonda}/${projeto.id_poco}`}
                         state={{ data: projeto }}
                       >
                         <Text>{projeto.sonda}</Text>
@@ -73,7 +73,7 @@ export function StatisticsTable({ data }: Props) {
                     </Td>
                     <Td textAlign={"center"} fontWeight={"semibold"}>
                       <Link
-                        to={`/estatisticas/cronograma`}
+                        to={`/estatisticas/cronograma/${projeto.id_sonda}/${projeto.id_poco}`}
                         state={{ data: projeto }}
                       >
                         <Text>{projeto.poco}</Text>
