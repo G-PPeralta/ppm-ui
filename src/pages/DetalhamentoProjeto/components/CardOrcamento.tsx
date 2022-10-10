@@ -5,7 +5,7 @@ import { IoIosWallet } from "react-icons/io";
 import { useParams } from "react-router-dom";
 
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-import { CpiSpi, InfoFinanceira } from "interfaces/Services";
+import { InfoFinanceira } from "interfaces/Services";
 
 import {
   getCPiSPi,
@@ -14,15 +14,17 @@ import {
 
 function CardOrcamento() {
   const { id } = useParams();
-  const [cpiSpi, setCpiSpi] = useState([] as CpiSpi[]);
+  const [cpiSpi, setCpiSpi] = useState({ cpi: 0, spi: 0 });
   const [loading, setLoading] = useState(false);
   const [infoFinanceira, setInfoFinanceira] = useState([] as InfoFinanceira[]);
 
   async function handleGetCpiSpi() {
-    setLoading(true);
-    const reqGet = await getCPiSPi();
-    setCpiSpi(reqGet.data);
-    setLoading(false);
+    if (id) {
+      setLoading(true);
+      const reqGet = await getCPiSPi(Number(id));
+      setCpiSpi(reqGet.data);
+      setLoading(false);
+    }
   }
 
   async function handleGetInfoFinanceira() {
@@ -214,17 +216,14 @@ function CardOrcamento() {
                 gap={1}
               >
                 <Text color={"#00B53D"} fontSize={20}>
-                  {(id == "443" && cpiSpi && cpiSpi[0]?.cpi) < 1 ? (
+                  {(cpiSpi && cpiSpi.cpi) < 1 ? (
                     <BsCheckCircleFill color={"red"} />
                   ) : (
                     <BsCheckCircleFill />
                   )}
                 </Text>
                 <Text fontSize={16} fontWeight={600}>
-                  CPI ={" "}
-                  {!loading && id == "443"
-                    ? cpiSpi[0]?.cpi.toLocaleString()
-                    : 0}
+                  CPI = {!loading && cpiSpi.cpi.toLocaleString()}
                 </Text>
               </Box>
               <Box
@@ -236,17 +235,14 @@ function CardOrcamento() {
                 gap={1}
               >
                 <Text color={"#00B53D"} fontSize={20}>
-                  {cpiSpi && cpiSpi[0]?.spi < 1 ? (
+                  {cpiSpi && cpiSpi.spi < 1 ? (
                     <BsCheckCircleFill color={"red"} />
                   ) : (
                     <BsCheckCircleFill />
                   )}
                 </Text>
                 <Text fontSize={16} fontWeight={600}>
-                  SPI ={" "}
-                  {!loading && id == "443"
-                    ? cpiSpi[0]?.spi.toLocaleString()
-                    : 0}
+                  SPI = {!loading && cpiSpi.spi.toLocaleString()}
                 </Text>
               </Box>
             </Flex>

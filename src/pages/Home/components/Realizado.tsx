@@ -93,7 +93,13 @@ export default function RealizadoComponent() {
             sx={{ fontSize: 22, fontWeight: "600", alignSelf: "center" }}
             color="#ffffff"
           >
-            {(Number(totalRealizado) / Number(orcamento)) * 100}%
+            {!totalRealizado ||
+            !orcamento ||
+            isNaN(Number(totalRealizado)) ||
+            isNaN(Number(orcamento))
+              ? 0
+              : (Number(totalRealizado) / Number(orcamento)) * 100}
+            %
           </Text>
         </Box>
       </Box>

@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import {
   Box,
   Flex,
@@ -7,117 +5,236 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { AreasDemandadas } from "interfaces/Services";
+import { AreasDemandadasPorMes } from "interfaces/Services";
 
 import PercentPieChart from "components/PercentPieChart";
 import StackedBarChart from "components/StackedBarChart";
 
-import { getAreasDemandadas } from "services/get/Dashboard";
+type Props = {
+  AreasDemandadasPorMes: AreasDemandadasPorMes[];
+};
 
-export default function AreasDemandadasComponent() {
+export default function AreasDemandadasComponent({
+  AreasDemandadasPorMes,
+}: Props) {
   const innerWidth = window.innerWidth;
 
-  const [areasDemandadas, setAreasDemandadas] = useState<AreasDemandadas[]>(
-    [] as AreasDemandadas[]
-  );
-  async function handleGetAreasDemandadas() {
-    const reqGet = await getAreasDemandadas();
+  // const [areasDemandadas, setAreasDemandadas] = useState<
+  //   AreasDemandadasPorMes[]
+  // >([] as AreasDemandadasPorMes[]);
+  // async function handleGetAreasDemandadas() {
+  //   const reqGet = await getAreasDemandadas();
+  //   const dataReq: AreasDemandadasPorMes[] = reqGet.data;
+  //   setAreasDemandadas(dataReq);
+  // }
 
-    const dataReq: AreasDemandadas[] = reqGet.data;
+  // useEffect(() => {
+  //   handleGetAreasDemandadas();
+  // }, []);
 
-    setAreasDemandadas(dataReq);
+  // useEffect(() => {
+  //   // console.log(areasDemandadas);
+  // }, [areasDemandadas]);
+
+  function getCurrentMonth() {
+    const date = new Date();
+    return date.getMonth() + 1;
   }
 
-  useEffect(() => {
-    handleGetAreasDemandadas();
-  }, []);
+  function formatMonth(month: number) {
+    let monthName: string;
+    let year: number;
+    const date = new Date();
+    const currentYear = date.getFullYear();
+    switch (month) {
+      case 1:
+        monthName = "jan";
+        break;
+      case 2:
+        monthName = "fev";
+        break;
+      case 3:
+        monthName = "mar";
+        break;
+      case 4:
+        monthName = "abr";
+        break;
+      case 5:
+        monthName = "mai";
+        break;
+      case 6:
+        monthName = "jun";
+        break;
+      case 7:
+        monthName = "jul";
+        break;
+      case 8:
+        monthName = "ago";
+        break;
+      case 9:
+        monthName = "set";
+        break;
+      case 10:
+        monthName = "out";
+        break;
+      case 11:
+        monthName = "nov";
+        break;
+      case 12:
+        monthName = "dez";
+        break;
+      default:
+        monthName = "?";
+    }
 
-  useEffect(() => {
-    // console.log(areasDemandadas);
-  }, [areasDemandadas]);
+    if (month > getCurrentMonth()) {
+      year = currentYear - 1;
+    } else {
+      year = currentYear;
+    }
 
-  const grafData1 = [
-    {
-      name: "Undone",
-      value: 70,
-      color: "#A8C1FF",
-    },
-    {
-      name: "Done",
-      value: 30,
-      color: "#2E69FD",
-    },
-  ];
+    return monthName + "/" + year;
+  }
 
-  const grafData2 = [
-    {
-      name: "Undone",
-      value: 70,
-      color: "#9fed9f",
-    },
-    {
-      name: "Done",
-      value: 30,
-      color: "#428542",
-    },
-  ];
+  function getPieValues(month: number) {
+    const data = AreasDemandadasPorMes.at(month);
 
-  const grafData3 = [
-    {
-      name: "Undone",
-      value: 70,
-      color: "#FFB1B1",
-    },
-    {
-      name: "Done",
-      value: 30,
-      color: "#F94144",
-    },
-  ];
+    const sms = data ? data.sms : 0;
+    const regulatorio = data ? data.regulatorio : 0;
+    const operacao = data ? data.operacao : 0;
+    const outros = data ? data.outros : 0;
+    const total: number = sms + regulatorio + operacao + outros;
 
-  const grafData4 = [
-    {
-      name: "Undone",
-      value: 70,
-      color: "#FFF8BC",
-    },
-    {
-      name: "Done",
-      value: 30,
-      color: "#F8E854",
-    },
-  ];
+    const smsPercent = ((sms / total) * 100).toFixed(0);
+    const regulatorioPercent = ((regulatorio / total) * 100).toFixed(0);
+    const operacaoPercent = ((operacao / total) * 100).toFixed(0);
+    const outrosPercent = ((outros / total) * 100).toFixed(0);
 
-  const dataMock = [
-    {
-      month: "Jan/22",
-      SMS: 70,
-      Regulatório: 10,
-      Operação: 10,
-      Outros: 10,
-    },
-    {
-      month: "Fev/22",
-      SMS: 10,
-      Regulatório: 70,
-      Operação: 10,
-      Outros: 10,
-    },
-    {
-      month: "Mar/22",
-      SMS: 10,
-      Regulatório: 10,
-      Operação: 70,
-      Outros: 10,
-    },
-    {
-      month: "Abr/22",
-      SMS: 10,
-      Regulatório: 10,
-      Operação: 10,
-      Outros: 70,
-    },
-  ];
+    const values = {
+      smsPercent,
+      regulatorioPercent,
+      operacaoPercent,
+      outrosPercent,
+    };
+
+    return values;
+  }
+
+  function isUpDown(type: string) {
+    const valuesCurrentMonth = getPieValues(0);
+    const valuesLastMonth = getPieValues(1);
+
+    if (valuesCurrentMonth && valuesLastMonth) {
+      switch (type) {
+        case "sms":
+          return valuesCurrentMonth.smsPercent > valuesLastMonth.smsPercent;
+          break;
+        case "regulatorio":
+          return (
+            valuesCurrentMonth.regulatorioPercent >
+            valuesLastMonth.regulatorioPercent
+          );
+          break;
+        case "operacao":
+          return (
+            valuesCurrentMonth.operacaoPercent > valuesLastMonth.operacaoPercent
+          );
+          break;
+        case "outros":
+          return (
+            valuesCurrentMonth.outrosPercent > valuesLastMonth.outrosPercent
+          );
+          break;
+      }
+    }
+  }
+
+  function createPieData() {
+    const data = AreasDemandadasPorMes.at(0);
+    const sms = data ? data.sms : 0;
+    const regulatorio = data ? data.regulatorio : 0;
+    const operacao = data ? data.operacao : 0;
+    const outros = data ? data.outros : 0;
+    const total: number = sms + regulatorio + operacao + outros;
+
+    const dataTypes = {
+      smsData: [
+        {
+          name: "Undone",
+          value: total - sms,
+          color: "#A8C1FF",
+        },
+        {
+          name: "Done",
+          value: sms,
+          color: "#2E69FD",
+        },
+      ],
+
+      regulatorioData: [
+        {
+          name: "Undone",
+          value: total - regulatorio,
+          color: "#9fed9f",
+        },
+        {
+          name: "Done",
+          value: regulatorio,
+          color: "#FFB1B1",
+        },
+      ],
+
+      operacaoData: [
+        {
+          name: "Undone",
+          value: total - operacao,
+          color: "#FFB1B1",
+        },
+        {
+          name: "Done",
+          value: operacao,
+          color: "#F94144",
+        },
+      ],
+
+      outrosData: [
+        {
+          name: "Undone",
+          value: total - outros,
+          color: "#FFF8BC",
+        },
+        {
+          name: "Done",
+          value: outros,
+          color: "#F8E854",
+        },
+      ],
+    };
+
+    return dataTypes;
+  }
+
+  function createBarChart() {
+    const values: {
+      month: string;
+      SMS: number;
+      Regulatório: number;
+      Operação: number;
+      Outros: number;
+    }[] = [];
+    AreasDemandadasPorMes.forEach((mes) => {
+      const total = mes.sms + mes.regulatorio + mes.operacao + mes.outros;
+      const dataMock = {
+        month: formatMonth(mes.month),
+        SMS: (mes.sms / total) * 100,
+        Regulatório: (mes.regulatorio / total) * 100,
+        Operação: (mes.operacao / total) * 100,
+        Outros: (mes.outros / total) * 100,
+      };
+      values.push(dataMock);
+    });
+    return values;
+  }
 
   const dataEntries = [
     { name: "SMS", color: "#2E69FD" },
@@ -162,7 +279,7 @@ export default function AreasDemandadasComponent() {
                 showY={false}
                 sizeW={innerWidth >= 428 ? 350 : 120}
                 sizeH={180}
-                data={dataMock}
+                data={createBarChart()}
                 dataEntries={dataEntries}
                 barW={20}
               />
@@ -191,7 +308,12 @@ export default function AreasDemandadasComponent() {
                   >
                     SMS
                   </Text>
-                  <PercentPieChart size={60} upDown={false} data={grafData1} />
+                  <PercentPieChart
+                    size={60}
+                    upDown={isUpDown("sms")}
+                    data={createPieData().smsData}
+                    value={getPieValues(0).smsPercent}
+                  />
                 </Box>
                 <Box
                   w={150}
@@ -210,7 +332,12 @@ export default function AreasDemandadasComponent() {
                   >
                     Regulatório
                   </Text>
-                  <PercentPieChart size={60} upDown={true} data={grafData2} />
+                  <PercentPieChart
+                    size={60}
+                    upDown={isUpDown("regulatorio")}
+                    data={createPieData().regulatorioData}
+                    value={getPieValues(0).regulatorioPercent}
+                  />
                 </Box>
               </Box>
               <Box
@@ -226,7 +353,12 @@ export default function AreasDemandadasComponent() {
                   flexDirection="column"
                   alignItems={"center"}
                 >
-                  <PercentPieChart size={60} upDown={true} data={grafData3} />
+                  <PercentPieChart
+                    size={60}
+                    upDown={isUpDown("operacao")}
+                    data={createPieData().operacaoData}
+                    value={getPieValues(0).operacaoPercent}
+                  />
                   <Text
                     mt={2}
                     sx={{
@@ -245,7 +377,12 @@ export default function AreasDemandadasComponent() {
                   flexDirection="column"
                   alignItems={"center"}
                 >
-                  <PercentPieChart size={60} upDown={true} data={grafData4} />
+                  <PercentPieChart
+                    size={60}
+                    upDown={isUpDown("outros")}
+                    data={createPieData().outrosData}
+                    value={getPieValues(0).outrosPercent}
+                  />
                   <Text
                     mt={2}
                     sx={{

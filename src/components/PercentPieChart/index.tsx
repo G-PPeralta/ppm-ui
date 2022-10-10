@@ -5,15 +5,21 @@ import { PieChart, Pie, Cell } from "recharts";
 
 interface Props {
   size: number;
-  upDown: boolean;
+  upDown?: boolean | undefined;
   data: {
     name: string;
     value: number;
     color: string;
   }[];
+  value: string;
 }
 
-export default function PieChartComponent({ size, upDown, data }: Props) {
+export default function PieChartComponent({
+  size,
+  upDown,
+  data,
+  value,
+}: Props) {
   return (
     <Box
       w={size / 5}
@@ -50,8 +56,9 @@ export default function PieChartComponent({ size, upDown, data }: Props) {
         ) : (
           <AiOutlineCaretDown color="#F94144" size={10} />
         )}
+
         <Text sx={{ fontSize: 15 }} color={data[1].color}>
-          30%
+          {value}%
         </Text>
       </Box>
     </Box>

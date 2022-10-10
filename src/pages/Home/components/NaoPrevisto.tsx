@@ -94,7 +94,13 @@ export default function NaoPrevistoComponent() {
             sx={{ fontSize: 20, fontWeight: "600", alignSelf: "center" }}
             color="#ffffff"
           >
-            {(Number(totalNaoPrevisto) / Number(totalOrcamento)) * 100}%
+            {!totalNaoPrevisto ||
+            !totalOrcamento ||
+            isNaN(Number(totalNaoPrevisto)) ||
+            isNaN(Number(totalOrcamento))
+              ? 0
+              : (Number(totalNaoPrevisto) / Number(totalOrcamento)) * 100}
+            %
           </Text>
         </Box>
       </Box>
