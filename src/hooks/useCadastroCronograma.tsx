@@ -20,6 +20,7 @@ import {
 } from "services/get/CadastroModaisInfograficos";
 import { getOperacoes } from "services/get/Estatisticas";
 import { getAreaAtuacaoList } from "services/get/Infograficos";
+import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
 import { postCadastroNovoCronograma } from "services/post/Estatistica";
 
 import { useAuth } from "./useAuth";
@@ -34,6 +35,7 @@ export function useCadastroCronograma() {
   const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
   const [listaTarefas, setListaTarefas] = useState<Tarefas[]>([]);
   const [listaOperacao, setListaOperacao] = useState<Operacao[]>([]);
+  const [listaCronogramas, setListaCronogramas] = useState<any[]>([]);
 
   const reqGet = async () => {
     const sondas = await getSonda();
@@ -42,6 +44,7 @@ export function useCadastroCronograma() {
     const responsaveis = await getResponsaveis();
     const tarefas = await getTarefas();
     const operacoes = await getOperacoes();
+    const cronogramas = await getOperacoesEstatisticas();
 
     const sondasSorted = sondas.data.sort((a: any, b: any) =>
       a.nom_sonda.localeCompare(b.nom_sonda)
@@ -68,6 +71,7 @@ export function useCadastroCronograma() {
     setListaTarefas(tarefasSorted);
     setListaOperacao(operacoesSorted);
     setListaSondas(sondasSorted);
+    setListaCronogramas(cronogramas.data);
   };
 
   const listaAtividadesPrecedentes = listaOperacao.map((atividade) => ({
@@ -154,5 +158,6 @@ export function useCadastroCronograma() {
     listaTarefas,
     listaAtividadesPrecedentes,
     listaOperacao,
+    listaCronogramas,
   };
 }

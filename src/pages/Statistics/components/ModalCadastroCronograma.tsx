@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import {
   Flex,
   Modal,
@@ -51,34 +49,6 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
     value: sonda.id,
     label: sonda.nom_sonda,
   }));
-
-  // const handleGet = async () => {
-  //   const projetos = await getProjetosTipo();
-  //   const projetosTipoSorted = projetos.data.sort(
-  //     (a: ProjetoTipo, b: ProjetoTipo) =>
-  //       a.nom_projeto_tipo.localeCompare(b.nom_projeto_tipo)
-  //   );
-  //   setListaProjetos(projetosTipoSorted);
-  // };
-
-  // const handleClick = async () => {
-  //   const projetos = await getProjetosTipo();
-  //   const projetosTipoSorted = projetos.data.sort(
-  //     (a: ProjetoTipo, b: ProjetoTipo) =>
-  //       a.nom_projeto_tipo.localeCompare(b.nom_projeto_tipo)
-  //   );
-  //   setListaProjetos(projetosTipoSorted);
-  //   onOpen();
-  // };
-
-  useEffect(() => {
-    // handleGet();
-    // registerForm.setFieldValue("id_campanha", idCampanha);
-    // const newDate = new Date(data);
-    // newDate.setDate(newDate.getDate() + 15);
-    // registerForm.setFieldValue("dat_ini_prev", newDate);
-    // setRefresh(!refresh);
-  }, []);
 
   return (
     <>
