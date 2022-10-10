@@ -39,12 +39,16 @@ export function StatisticsTable({ data }: Props) {
   const tableData = data.slice(from, to).map((projeto, key) => (
     <Tr key={key}>
       <Td textAlign={"center"} fontWeight={"semibold"}>
-        <Link to={`/estatisticas/cronograma`} state={{ data: projeto }}>
+        <Link
+          to={`/estatisticas/cronograma/${projeto.id_sonda}/${projeto.id_poco}`}
+        >
           <Text>{projeto.sonda}</Text>
         </Link>
       </Td>
       <Td textAlign={"center"} fontWeight={"semibold"}>
-        <Link to={`/estatisticas/cronograma`} state={{ data: projeto }}>
+        <Link
+          to={`/estatisticas/cronograma/${projeto.id_sonda}/${projeto.id_poco}`}
+        >
           <Text>{projeto.poco}</Text>
         </Link>
       </Td>
