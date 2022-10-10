@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { useFormik } from "formik";
 import { Projetos } from "interfaces/Projetos";
-import { projectRegisterSchema } from "validations/ProjectRegister";
+// import { projectRegisterSchema } from "validations/ProjectRegister";
 
 import { useToast } from "contexts/Toast";
 
@@ -39,7 +39,6 @@ export function useProjects() {
       statusId: 0,
       gateId: 0,
       tipoProjetoId: 0,
-      demandaId: 0,
       comentarios: "",
       responsavel: "",
       coordenador: "",
@@ -48,7 +47,7 @@ export function useProjects() {
       elemento_pep: "",
     },
 
-    validationSchema: projectRegisterSchema,
+    // validationSchema: projectRegisterSchema,
     onSubmit: async (values) => {
       const newValues = {
         nomeProjeto: values.nomeProjeto,
@@ -69,7 +68,6 @@ export function useProjects() {
         statusId: Number(values.statusId),
         gateId: Number(values.statusId),
         tipoProjetoId: Number(values.tipoProjetoId),
-        // demandaId: Number(values.demandaId),
         comentarios: values.comentarios,
         responsavel_id: values.responsavel_id,
         coordenador_id: values.coordenador_id,
