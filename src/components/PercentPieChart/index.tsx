@@ -5,7 +5,7 @@ import { PieChart, Pie, Cell } from "recharts";
 
 interface Props {
   size: number;
-  upDown?: boolean;
+  upDown?: boolean | undefined;
   data: {
     name: string;
     value: number;
