@@ -1,7 +1,6 @@
 import {
   Box,
   Flex,
-  Stack,
   Text,
   useBreakpointValue,
   useColorModeValue,
@@ -18,6 +17,8 @@ type Props = {
 export default function AreasDemandadasComponent({
   AreasDemandadasPorMes,
 }: Props) {
+  const innerWidth = window.innerWidth;
+
   // const [areasDemandadas, setAreasDemandadas] = useState<
   //   AreasDemandadasPorMes[]
   // >([] as AreasDemandadasPorMes[]);
@@ -243,164 +244,162 @@ export default function AreasDemandadasComponent({
   ];
 
   return (
-    <Stack spacing="8">
-      <Flex
+    <Flex w={"100%"} align="center" justify="center" bg={"#EDF2F7"} flex={1}>
+      <Box
+        py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
+        px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         w={"100%"}
-        height={"322px"}
-        align="center"
-        justify="center"
-        bg={useBreakpointValue({ base: "#EDF2F7", sm: "#EDF2F7" })}
+        bg={"white"}
+        boxShadow={{
+          base: "none",
+          sm: useColorModeValue("md", "md-dark"),
+        }}
+        borderRadius={"xl"}
+        display={"flex"}
+        flexDirection={"column"}
+        alignItems={"center"}
+        flex={1}
+        gap={4}
       >
-        <Box
-          py={{ base: "0", sm: "4" }}
-          px={{ base: "0", sm: "4" }}
-          w={"100%"}
-          height={"322px"}
-          bg={useBreakpointValue({ base: "white", sm: "white" })}
-          boxShadow={{
-            base: "none",
-            sm: useColorModeValue("md", "md-dark"),
-          }}
-          borderRadius={{ base: "none", sm: "xl" }}
-          display={"flex"}
-          justifyContent={"center"}
+        <Text
+          sx={{ fontSize: 18, fontWeight: "bold", alignSelf: "flex-start" }}
+          color="#000000"
         >
-          <Box w={300} h={230}>
-            <Text
-              mb={1}
-              sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
-              color="#000000"
-            >
-              Áreas Demandadas
-            </Text>
-            <Box display={"flex"} w={"100%"} justifyContent="space-between">
-              <Box pt={6}>
-                <StackedBarChart
-                  showY={false}
-                  sizeW={180}
-                  sizeH={180}
-                  data={createBarChart()}
-                  dataEntries={dataEntries}
-                  barW={20}
-                />
-              </Box>
-              <Box w={150}>
+          Áreas Demandadas
+        </Text>
+        <Box flex={1}>
+          <Box
+            display={"flex"}
+            w={"100%"}
+            justifyContent="space-between"
+            flexWrap={"wrap"}
+          >
+            <Box pt={6} minW={innerWidth >= 428 ? "350px" : "120px"} flex={1}>
+              <StackedBarChart
+                showY={false}
+                sizeW={innerWidth >= 428 ? 350 : 120}
+                sizeH={180}
+                data={createBarChart()}
+                dataEntries={dataEntries}
+                barW={20}
+              />
+            </Box>
+            <Box w={150}>
+              <Box
+                mb={1}
+                display="flex"
+                w={"100%"}
+                justifyContent="space-between"
+              >
                 <Box
-                  mb={1}
-                  display="flex"
-                  w={"100%"}
-                  justifyContent="space-between"
+                  w={150}
+                  display={"flex"}
+                  flexDirection="column"
+                  alignItems={"center"}
                 >
-                  <Box
-                    w={150}
-                    display={"flex"}
-                    flexDirection="column"
-                    alignItems={"center"}
+                  <Text
+                    mb={2}
+                    sx={{
+                      fontSize: 14,
+                      fontWeight: "600",
+                      alignSelf: "center",
+                    }}
+                    color="#2E69FD"
                   >
-                    <Text
-                      mb={2}
-                      sx={{
-                        fontSize: 14,
-                        fontWeight: "600",
-                        alignSelf: "center",
-                      }}
-                      color="#2E69FD"
-                    >
-                      SMS
-                    </Text>
-                    <PercentPieChart
-                      size={60}
-                      upDown={isUpDown("sms")}
-                      data={createPieData().smsData}
-                      value={getPieValues(0).smsPercent}
-                    />
-                  </Box>
-                  <Box
-                    w={150}
-                    display={"flex"}
-                    flexDirection="column"
-                    alignItems={"center"}
-                  >
-                    <Text
-                      mb={2}
-                      sx={{
-                        fontSize: 14,
-                        fontWeight: "600",
-                        alignSelf: "center",
-                      }}
-                      color="#93E01B"
-                    >
-                      Regulatório
-                    </Text>
-                    <PercentPieChart
-                      size={60}
-                      upDown={isUpDown("regulatorio")}
-                      data={createPieData().regulatorioData}
-                      value={getPieValues(0).regulatorioPercent}
-                    />
-                  </Box>
+                    SMS
+                  </Text>
+                  <PercentPieChart
+                    size={60}
+                    upDown={isUpDown("sms")}
+                    data={createPieData().smsData}
+                    value={getPieValues(0).smsPercent}
+                  />
                 </Box>
                 <Box
-                  mt={8}
-                  mb={1}
-                  display="flex"
-                  w={"100%"}
-                  justifyContent="space-between"
+                  w={150}
+                  display={"flex"}
+                  flexDirection="column"
+                  alignItems={"center"}
                 >
-                  <Box
-                    w={150}
-                    display={"flex"}
-                    flexDirection="column"
-                    alignItems={"center"}
+                  <Text
+                    mb={2}
+                    sx={{
+                      fontSize: 14,
+                      fontWeight: "600",
+                      alignSelf: "center",
+                    }}
+                    color="#93E01B"
                   >
-                    <PercentPieChart
-                      size={60}
-                      upDown={isUpDown("operacao")}
-                      data={createPieData().operacaoData}
-                      value={getPieValues(0).operacaoPercent}
-                    />
-                    <Text
-                      mt={2}
-                      sx={{
-                        fontSize: 14,
-                        fontWeight: "600",
-                        alignSelf: "center",
-                      }}
-                      color="#F94144"
-                    >
-                      Operação
-                    </Text>
-                  </Box>
-                  <Box
-                    w={150}
-                    display={"flex"}
-                    flexDirection="column"
-                    alignItems={"center"}
+                    Regulatório
+                  </Text>
+                  <PercentPieChart
+                    size={60}
+                    upDown={isUpDown("regulatorio")}
+                    data={createPieData().regulatorioData}
+                    value={getPieValues(0).regulatorioPercent}
+                  />
+                </Box>
+              </Box>
+              <Box
+                mt={8}
+                mb={1}
+                display="flex"
+                w={"100%"}
+                justifyContent="space-between"
+              >
+                <Box
+                  w={150}
+                  display={"flex"}
+                  flexDirection="column"
+                  alignItems={"center"}
+                >
+                  <PercentPieChart
+                    size={60}
+                    upDown={isUpDown("operacao")}
+                    data={createPieData().operacaoData}
+                    value={getPieValues(0).operacaoPercent}
+                  />
+                  <Text
+                    mt={2}
+                    sx={{
+                      fontSize: 14,
+                      fontWeight: "600",
+                      alignSelf: "center",
+                    }}
+                    color="#F94144"
                   >
-                    <PercentPieChart
-                      size={60}
-                      upDown={isUpDown("outros")}
-                      data={createPieData().outrosData}
-                      value={getPieValues(0).outrosPercent}
-                    />
-                    <Text
-                      mt={2}
-                      sx={{
-                        fontSize: 14,
-                        fontWeight: "600",
-                        alignSelf: "center",
-                      }}
-                      color="#F4DD06"
-                    >
-                      Outros
-                    </Text>
-                  </Box>
+                    Operação
+                  </Text>
+                </Box>
+                <Box
+                  w={150}
+                  display={"flex"}
+                  flexDirection="column"
+                  alignItems={"center"}
+                >
+                  <PercentPieChart
+                    size={60}
+                    upDown={isUpDown("outros")}
+                    data={createPieData().outrosData}
+                    value={getPieValues(0).outrosPercent}
+                  />
+                  <Text
+                    mt={2}
+                    sx={{
+                      fontSize: 14,
+                      fontWeight: "600",
+                      alignSelf: "center",
+                    }}
+                    color="#F4DD06"
+                  >
+                    Outros
+                  </Text>
                 </Box>
               </Box>
             </Box>
           </Box>
         </Box>
-      </Flex>
-    </Stack>
+      </Box>
+    </Flex>
   );
 }

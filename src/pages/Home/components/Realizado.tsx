@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 
-import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  useBreakpointValue,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { TotalOrcamento, TotalRealizado } from "interfaces/Services";
 
 import { getOrcamentoTotal, getTotalRealizado } from "services/get/Dashboard";
@@ -36,8 +42,8 @@ export default function RealizadoComponent() {
 
   return (
     <Flex
-      py={"4"}
-      px={"4"}
+      py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
+      px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
       w={"100%"}
       bg={"white"}
       boxShadow={useColorModeValue("md", "md-dark")}
@@ -55,7 +61,7 @@ export default function RealizadoComponent() {
         <Box>
           <Text
             mb={1}
-            sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
+            sx={{ fontSize: 16, fontWeight: "bold", alignSelf: "center" }}
             color="#000000"
           >
             Realizado
