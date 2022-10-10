@@ -1,9 +1,14 @@
+import React, { useEffect, useState } from "react";
+
 import { Box, Flex } from "@chakra-ui/react";
+import { AreasDemandadasPorMes } from "interfaces/Services";
 
 import Sidebar from "components/SideBar";
 
-import AreasDemandadas from "./components/AreasDemandadas";
 // import BotoesSelecionarPolo from "./components/BotoesSelecionarPolo";
+import { getAreasDemandadas } from "services/get/Dashboard";
+
+import AreasDemandadasComponent from "./components/AreasDemandadas";
 import FaseProjetos from "./components/FaseProjetos";
 import NaoPrevisto from "./components/NaoPrevisto";
 import PrevistoxRealizado from "./components/PrevistoxRealizado";
@@ -27,6 +32,23 @@ import TotalProjetos from "./components/TotalProjetos";
 
 export function Home() {
   // const [width] = useWindowSize();
+
+  const [areasDemandadas, setAreasDemandadas] = useState<
+    AreasDemandadasPorMes[]
+  >([] as AreasDemandadasPorMes[]);
+  async function handleGetAreasDemandadas() {
+    const reqGet = await getAreasDemandadas();
+    const dataReq: AreasDemandadasPorMes[] = reqGet.data;
+    setAreasDemandadas(dataReq);
+  }
+
+  useEffect(() => {
+    handleGetAreasDemandadas();
+  }, []);
+
+  useEffect(() => {
+    // console.log(areasDemandadas);
+  }, [areasDemandadas]);
 
   return (
     <>
@@ -64,8 +86,8 @@ export function Home() {
           <Box flex={1}>
             <FaseProjetos />
           </Box>
-          <Box flex={1}>
-            <AreasDemandadas />
+          <Box flex={1} m={1}>
+            <AreasDemandadasComponent AreasDemandadasPorMes={areasDemandadas} />
           </Box>
           <Box flex={1}>
             <PrevistoxRealizado />
