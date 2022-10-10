@@ -56,7 +56,7 @@ export async function getAreasDemandadas(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/dashboard/areas-demandadas", {
+  const { data, status } = await api.get("/dashboard/solicitantes", {
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },

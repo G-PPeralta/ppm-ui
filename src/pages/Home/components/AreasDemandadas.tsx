@@ -43,9 +43,13 @@ export interface AreasDemandadasProps {
   };
 }
 
-export default function AreasDemandadasComponent(
-  AreasDemandadasPorMes: AreasDemandadasProps
-) {
+type Props = {
+  AreasDemandadasPorMes: AreasDemandadasProps;
+};
+
+export default function AreasDemandadasComponent({
+  AreasDemandadasPorMes,
+}: Props) {
   // const [areasDemandadas, setAreasDemandadas] = useState<
   //   AreasDemandadasPorMes[]
   // >([] as AreasDemandadasPorMes[]);
