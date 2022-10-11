@@ -1,12 +1,18 @@
 // import { useState } from "react";
 
+import { AiOutlineSearch } from "react-icons/ai";
+import { MdCloudUpload } from "react-icons/md";
+
 import {
   Box,
+  Button,
   Flex,
   Heading,
+  Input,
   Table,
   TableContainer,
   Tbody,
+  Text,
   Tfoot,
   Th,
   Thead,
@@ -66,13 +72,64 @@ export function FinanceiroProjetos() {
             >
               <Flex
                 justify={"space-between"}
-                mb={2}
+                mb={4}
                 wrap={"wrap"}
                 align={"center"}
               >
                 <Heading as="h3" size="md" mb={2} textAlign={"center"}>
                   Financeiro
                 </Heading>
+                <Button
+                  h={"56px"}
+                  borderRadius={"10px"}
+                  background={"white"}
+                  border={"2px solid"}
+                  color={"origem.500"}
+                  _hover={{
+                    border: "2px solid",
+                    borderColor: "origem.500",
+                    background: "origem.500",
+                    transition: "all 0.4s",
+                    color: "white",
+                  }}
+                  rightIcon={<MdCloudUpload size={24} />}
+                >
+                  Carregar Planilha
+                </Button>
+              </Flex>
+              <Flex gap={2} align={"end"}>
+                <Flex gap={1} direction={"column"}>
+                  <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
+                    PROJETO OU ELEMENTO PEP
+                  </Text>
+                  <Input
+                    h={"56px"}
+                    isRequired
+                    placeholder="Projeto ou Elemento PEP"
+                    type="text"
+                    // id="nome"
+                    // name="nome"
+                    // value={regexCaracteresEspeciais(
+                    //   registerForm.values.nome
+                    // )}
+                    // onChange={registerForm.handleChange}
+                    maxLength={50}
+                  />
+                </Flex>
+                <Button
+                  h={"56px"}
+                  borderRadius={"10px"}
+                  background={"origem.500"}
+                  variant="primary"
+                  color="white"
+                  _hover={{
+                    background: "origem.600",
+                    transition: "all 0.4s",
+                  }}
+                  rightIcon={<AiOutlineSearch size={24} />}
+                >
+                  Filtrar
+                </Button>
               </Flex>
               <Flex direction={"column"} w={"100%"}>
                 <TableContainer
