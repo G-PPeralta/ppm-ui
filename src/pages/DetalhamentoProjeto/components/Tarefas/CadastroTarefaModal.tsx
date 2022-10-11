@@ -48,6 +48,8 @@ function CadastroTarefasModal({
   const [atividadeId, setAtividadeId] = useState(0);
   const [descricao, setDescricao] = useState("");
 
+  const regex = /[^a-z ]/gi;
+
   return (
     <Flex>
       <Box
@@ -116,18 +118,20 @@ function CadastroTarefasModal({
                   TAREFA
                 </FormLabel>
                 <Input
+                  maxLength={50}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
-                  width={"328px"}
+                  fontSize={"14px"}
+                  width={"300px"}
                   height={"56px"}
-                  color="#949494"
+                  _placeholder={{ color: "black" }}
                   isRequired
                   placeholder="Nome tarefa"
                   type="text"
                   id="nomeTarefa"
                   name="nomeTarefa"
-                  value={nome}
+                  value={nome.replace(regex, "")}
                   onChange={(event) => setNome(event.target.value)}
                 />
               </Flex>
@@ -143,12 +147,15 @@ function CadastroTarefasModal({
                 </FormLabel>
                 <Input
                   // placeholder="dd/mm/aaaa"
+                  fontSize={"14px"}
+                  max="9999-12-31"
+                  maxLength={1}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
-                  width={"120px"}
+                  width={"156px"}
                   height={"56px"}
-                  color="#949494"
+                  _placeholder={{ color: "black" }}
                   id="data"
                   type="date"
                   name="data"
@@ -169,11 +176,12 @@ function CadastroTarefasModal({
               </FormLabel>
               <Select
                 borderRadius={"8px"}
+                _placeholder={{ color: "black" }}
                 border={"1px solid #A7A7A7"}
                 mt={"-9px"}
+                fontSize={"14px"}
                 width={"208px"}
                 height={"56px"}
-                color="#949494"
                 id="atividadeRel"
                 name="atividadeRel"
                 onChange={(event) => setAtividadeId(Number(event.target.value))}
@@ -197,12 +205,14 @@ function CadastroTarefasModal({
                 DESCRIÇÃO DA TAREFA
               </FormLabel>
               <Textarea
+                fontSize={"14px"}
+                maxLength={255}
                 borderRadius={"8px"}
                 border={"1px solid #A7A7A7"}
                 mt={"-9px"}
                 width={"456px"}
                 height={"121px"}
-                color="#949494"
+                _placeholder={{ color: "black" }}
                 isRequired
                 placeholder="Descrição da tarefa"
                 id="descrição"
