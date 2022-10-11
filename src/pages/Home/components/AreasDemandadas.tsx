@@ -136,8 +136,8 @@ export default function AreasDemandadasComponent({
   }
 
   function isUpDown(type: string) {
-    const valuesCurrentMonth = getPieValues(0);
-    const valuesLastMonth = getPieValues(1);
+    const valuesCurrentMonth = getPieValues(AreasDemandadasPorMes.length - 1);
+    const valuesLastMonth = getPieValues(AreasDemandadasPorMes.length - 2);
 
     if (valuesCurrentMonth && valuesLastMonth) {
       switch (type) {
@@ -165,7 +165,7 @@ export default function AreasDemandadasComponent({
   }
 
   function createPieData() {
-    const data = AreasDemandadasPorMes.at(0);
+    const data = AreasDemandadasPorMes.at(AreasDemandadasPorMes.length - 1);
     if (data) {
       const sms = data.sms;
       const regulatorio = data.regulatorio;
@@ -196,7 +196,7 @@ export default function AreasDemandadasComponent({
           {
             name: "Done",
             value: regulatorio,
-            color: "#FFB1B1",
+            color: "#00B53D",
           },
         ],
 
@@ -339,7 +339,7 @@ export default function AreasDemandadasComponent({
           display={"flex"}
           justifyContent={"center"}
         >
-          <Box w={300} h={230}>
+          <Box w={"fit-content"} h={230}>
             <Text
               mb={1}
               sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
@@ -390,7 +390,10 @@ export default function AreasDemandadasComponent({
                       size={60}
                       upDown={isUpDown("sms")}
                       data={createPieData().smsData}
-                      value={getPieValues(0).smsPercent}
+                      value={
+                        getPieValues(AreasDemandadasPorMes.length - 1)
+                          .smsPercent
+                      }
                     />
                   </Box>
                   <Box
@@ -414,7 +417,10 @@ export default function AreasDemandadasComponent({
                       size={60}
                       upDown={isUpDown("regulatorio")}
                       data={createPieData().regulatorioData}
-                      value={getPieValues(0).regulatorioPercent}
+                      value={
+                        getPieValues(AreasDemandadasPorMes.length - 1)
+                          .regulatorioPercent
+                      }
                     />
                   </Box>
                 </Box>
@@ -435,7 +441,10 @@ export default function AreasDemandadasComponent({
                       size={60}
                       upDown={isUpDown("operacao")}
                       data={createPieData().operacaoData}
-                      value={getPieValues(0).operacaoPercent}
+                      value={
+                        getPieValues(AreasDemandadasPorMes.length - 1)
+                          .operacaoPercent
+                      }
                     />
                     <Text
                       mt={2}
@@ -459,7 +468,10 @@ export default function AreasDemandadasComponent({
                       size={60}
                       upDown={isUpDown("outros")}
                       data={createPieData().outrosData}
-                      value={getPieValues(0).outrosPercent}
+                      value={
+                        getPieValues(AreasDemandadasPorMes.length - 1)
+                          .outrosPercent
+                      }
                     />
                     <Text
                       mt={2}
