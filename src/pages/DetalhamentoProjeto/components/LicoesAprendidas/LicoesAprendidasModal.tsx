@@ -45,6 +45,7 @@ function LicoesAprendidasModal({
   const [openModalRegister, setOpenModalRegister] = useState(false);
   const [categoriaId, setCategoriaId] = useState("");
   const [data, setData] = useState("");
+
   const [filteredTable, setFilteredTable] = useState([]);
 
   function handleEditLicao(licao: LicoesAprendidas): void {
@@ -74,7 +75,7 @@ function LicoesAprendidasModal({
     }
   }
 
-  // console.log(data);
+  // console.log(data.length);
   // console.log(licoes);
   // console.log(
   //   licoes.filter(
@@ -183,6 +184,7 @@ function LicoesAprendidasModal({
                         </Text>
                       </FormLabel>
                       <Input
+                        maxLength={50}
                         borderRadius={"8px"}
                         border={"1px solid #A7A7A7"}
                         mt={"-9px"}
@@ -219,13 +221,15 @@ function LicoesAprendidasModal({
                       <Input
                         // placeholder="dd/mm/aaaa"
                         borderRadius={"8px"}
+                        max="9999-12-31"
+                        maxLength={1}
                         border={"1px solid #A7A7A7"}
                         mt={"-9px"}
-                        width={"146px"}
+                        width={"156px"}
                         height={"56px"}
                         color="#949494"
                         id="data"
-                        type="date"
+                        type="Date"
                         name="data"
                         // value={data}
                         onChange={(event) => setData(event.target.value)}

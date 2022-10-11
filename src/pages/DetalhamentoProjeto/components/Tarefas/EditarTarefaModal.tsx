@@ -47,6 +47,8 @@ function EditarTarefaModal({
 }: EditModalProps) {
   // const { onClose } = useDisclosure();
 
+  const regex = /[^a-z ]/gi;
+
   const novaData = format(new Date(editTarefa?.data_tarefa), "yyyy-MM-dd");
 
   const { user } = useAuth();
@@ -140,6 +142,7 @@ function EditarTarefaModal({
                   TAREFA
                 </FormLabel>
                 <Input
+                  maxLength={50}
                   fontSize={"14px"}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
@@ -152,7 +155,7 @@ function EditarTarefaModal({
                   type="text"
                   id="nomeTarefa"
                   name="nomeTarefa"
-                  value={nome}
+                  value={nome.replace(regex, "")}
                   onChange={(event) => setNome(event.target.value)}
                 />
               </Flex>
@@ -167,6 +170,8 @@ function EditarTarefaModal({
                   DATA
                 </FormLabel>
                 <Input
+                  max="9999-12-31"
+                  maxLength={1}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
@@ -261,6 +266,7 @@ function EditarTarefaModal({
                 DESCRIÇÃO DA TAREFA
               </FormLabel>
               <Textarea
+                maxLength={255}
                 fontSize={"14px"}
                 borderRadius={"8px"}
                 border={"1px solid #A7A7A7"}
@@ -272,7 +278,7 @@ function EditarTarefaModal({
                 placeholder="Descrição da tarefa"
                 id="descrição"
                 name="descrição"
-                value={descricao}
+                value={descricao.replace(regex, "")}
                 onChange={(event) => setDescricao(event.target.value)}
               />
             </FormControl>
