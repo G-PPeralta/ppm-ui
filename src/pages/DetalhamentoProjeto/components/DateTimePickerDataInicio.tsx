@@ -23,7 +23,7 @@ function DateTimePickerDataInicio({ registerForm, data }: any) {
 
   const handleIniciarDate = (date: any) => {
     if (date) {
-      date.setHours(9, 0, 0, 0);
+      // date.setHours(9, 0, 0, 0);
       setDataInicio(date);
       registerForm.setFieldValue("dat_inicio_plan", date);
     }

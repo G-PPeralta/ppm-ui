@@ -2,6 +2,7 @@ import {
   AreaAtuacao,
   Responsavel,
 } from "interfaces/CadastrosModaisInfograficos";
+import { Projetos } from "interfaces/Projetos";
 import { AtividadeLista, Tarefa } from "interfaces/Services";
 
 import { api, token } from "services/api";
@@ -24,9 +25,9 @@ export async function postGetInfoCampanha(
 // }
 
 export async function getInfoProjetos(): Promise<{
-  data: any;
+  data: Projetos[];
 }> {
-  const { data } = await api.get(`/dashboard/projetos-info`, {
+  const { data } = await api.get(`/projetos/detalhados`, {
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },

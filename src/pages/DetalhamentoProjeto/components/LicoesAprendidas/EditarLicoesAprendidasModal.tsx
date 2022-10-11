@@ -60,6 +60,8 @@ function EditarLicoesAprendidasModal({
     if (campo === "txt_acao") return acao;
   };
 
+  const regex = /[^a-z ]/gi;
+
   return (
     <Flex>
       <Box
@@ -125,12 +127,13 @@ function EditarLicoesAprendidasModal({
                   LIÇÃO APRENDIDA
                 </FormLabel>
                 <Input
+                  maxLength={50}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
                   width={"328px"}
                   height={"56px"}
-                  color="#949494"
+                  color="black"
                   fontSize={"14px"}
                   fontWeight={"400"}
                   isRequired
@@ -138,7 +141,7 @@ function EditarLicoesAprendidasModal({
                   type="text"
                   id="licaoAprendida"
                   name="licaoAprendida"
-                  value={licaoAprendida}
+                  value={licaoAprendida.replace(regex, "")}
                   onChange={(event) => setLicaoAprendida(event.target.value)}
                 />
               </Flex>
@@ -168,12 +171,13 @@ function EditarLicoesAprendidasModal({
                   AÇÃO OU RECOMENDAÇÃO
                 </FormLabel>
                 <Textarea
+                  maxLength={255}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
                   width={"456px"}
                   height={"121px"}
-                  color="#949494"
+                  color="black"
                   fontSize={"14px"}
                   fontWeight={"400"}
                   isRequired
@@ -181,7 +185,7 @@ function EditarLicoesAprendidasModal({
                   // type="text"
                   id="acao"
                   name="acao"
-                  value={acao}
+                  value={acao.replace(regex, "")}
                   onChange={(event) => setAcao(event.target.value)}
                 />
               </Flex>

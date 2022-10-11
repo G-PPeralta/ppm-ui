@@ -211,7 +211,7 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
             toolbar={toolbarOptions || []}
             editSettings={{
               allowTaskbarEditing: false,
-              allowEditing: true,
+              // allowEditing: true,
             }}
             height={"100vh"}
             columns={[
