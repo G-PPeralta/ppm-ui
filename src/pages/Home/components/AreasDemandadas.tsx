@@ -41,7 +41,7 @@ export default function AreasDemandadasComponent({
     return date.getMonth() + 1;
   }
 
-  function formatMonth(month: number) {
+  function formatMonth(month?: number) {
     let monthName: string;
     let year: number;
     const date = new Date();
@@ -87,42 +87,62 @@ export default function AreasDemandadasComponent({
         monthName = "?";
     }
 
-    if (month > getCurrentMonth()) {
-      year = currentYear - 1;
-    } else {
-      year = currentYear;
-    }
+    if (month) {
+      if (month > getCurrentMonth()) {
+        year = currentYear - 1;
+      } else {
+        year = currentYear;
+      }
 
-    return monthName + "/" + year;
+      return monthName + "/" + year;
+    } else {
+      return "-";
+    }
   }
 
   function getPieValues(month: number) {
     const data = AreasDemandadasPorMes.at(month);
 
-    const sms = data ? data.sms : 0;
-    const regulatorio = data ? data.regulatorio : 0;
-    const operacao = data ? data.operacao : 0;
-    const outros = data ? data.outros : 0;
-    const total: number = sms + regulatorio + operacao + outros;
+    if (data) {
+      const sms = data.sms;
+      const regulatorio = data.regulatorio;
+      const operacao = data.operacao;
+      const outros = data.outros;
+      const total: number = sms + regulatorio + operacao + outros;
 
-    const smsPercent = ((sms / total) * 100).toFixed(0);
-    const regulatorioPercent = ((regulatorio / total) * 100).toFixed(0);
-    const operacaoPercent = ((operacao / total) * 100).toFixed(0);
-    const outrosPercent = ((outros / total) * 100).toFixed(0);
+      const smsPercent = ((sms / total) * 100).toFixed(0);
+      const regulatorioPercent = ((regulatorio / total) * 100).toFixed(0);
+      const operacaoPercent = ((operacao / total) * 100).toFixed(0);
+      const outrosPercent = ((outros / total) * 100).toFixed(0);
 
-    const values = {
-      smsPercent,
-      regulatorioPercent,
-      operacaoPercent,
-      outrosPercent,
-    };
+      const values = {
+        smsPercent,
+        regulatorioPercent,
+        operacaoPercent,
+        outrosPercent,
+      };
 
-    return values;
+      return values;
+    } else {
+      const smsPercent = "0";
+      const regulatorioPercent = "0";
+      const operacaoPercent = "0";
+      const outrosPercent = "0";
+
+      const values = {
+        smsPercent,
+        regulatorioPercent,
+        operacaoPercent,
+        outrosPercent,
+      };
+
+      return values;
+    }
   }
 
   function isUpDown(type: string) {
-    const valuesCurrentMonth = getPieValues(0);
-    const valuesLastMonth = getPieValues(1);
+    const valuesCurrentMonth = getPieValues(AreasDemandadasPorMes.length - 1);
+    const valuesLastMonth = getPieValues(AreasDemandadasPorMes.length - 2);
 
     if (valuesCurrentMonth && valuesLastMonth) {
       switch (type) {
@@ -150,68 +170,126 @@ export default function AreasDemandadasComponent({
   }
 
   function createPieData() {
-    const data = AreasDemandadasPorMes.at(0);
-    const sms = data ? data.sms : 0;
-    const regulatorio = data ? data.regulatorio : 0;
-    const operacao = data ? data.operacao : 0;
-    const outros = data ? data.outros : 0;
-    const total: number = sms + regulatorio + operacao + outros;
+    const data = AreasDemandadasPorMes.at(AreasDemandadasPorMes.length - 1);
+    if (data) {
+      const sms = data.sms;
+      const regulatorio = data.regulatorio;
+      const operacao = data.operacao;
+      const outros = data.outros;
+      const total: number = sms + regulatorio + operacao + outros;
 
-    const dataTypes = {
-      smsData: [
-        {
-          name: "Undone",
-          value: total - sms,
-          color: "#A8C1FF",
-        },
-        {
-          name: "Done",
-          value: sms,
-          color: "#2E69FD",
-        },
-      ],
+      const dataTypes = {
+        smsData: [
+          {
+            name: "Undone",
+            value: total - sms,
+            color: "#A8C1FF",
+          },
+          {
+            name: "Done",
+            value: sms,
+            color: "#2E69FD",
+          },
+        ],
 
-      regulatorioData: [
-        {
-          name: "Undone",
-          value: total - regulatorio,
-          color: "#9fed9f",
-        },
-        {
-          name: "Done",
-          value: regulatorio,
-          color: "#FFB1B1",
-        },
-      ],
+        regulatorioData: [
+          {
+            name: "Undone",
+            value: total - regulatorio,
+            color: "#9fed9f",
+          },
+          {
+            name: "Done",
+            value: regulatorio,
+            color: "#00B53D",
+          },
+        ],
 
-      operacaoData: [
-        {
-          name: "Undone",
-          value: total - operacao,
-          color: "#FFB1B1",
-        },
-        {
-          name: "Done",
-          value: operacao,
-          color: "#F94144",
-        },
-      ],
+        operacaoData: [
+          {
+            name: "Undone",
+            value: total - operacao,
+            color: "#FFB1B1",
+          },
+          {
+            name: "Done",
+            value: operacao,
+            color: "#F94144",
+          },
+        ],
 
-      outrosData: [
-        {
-          name: "Undone",
-          value: total - outros,
-          color: "#FFF8BC",
-        },
-        {
-          name: "Done",
-          value: outros,
-          color: "#F8E854",
-        },
-      ],
-    };
+        outrosData: [
+          {
+            name: "Undone",
+            value: total - outros,
+            color: "#FFF8BC",
+          },
+          {
+            name: "Done",
+            value: outros,
+            color: "#F8E854",
+          },
+        ],
+      };
 
-    return dataTypes;
+      return dataTypes;
+    } else {
+      const dataTypes = {
+        smsData: [
+          {
+            name: "Undone",
+            value: 100,
+            color: "#A8C1FF",
+          },
+          {
+            name: "Done",
+            value: 0,
+            color: "#2E69FD",
+          },
+        ],
+
+        regulatorioData: [
+          {
+            name: "Undone",
+            value: 100,
+            color: "#9fed9f",
+          },
+          {
+            name: "Done",
+            value: 0,
+            color: "#FFB1B1",
+          },
+        ],
+
+        operacaoData: [
+          {
+            name: "Undone",
+            value: 100,
+            color: "#FFB1B1",
+          },
+          {
+            name: "Done",
+            value: 0,
+            color: "#F94144",
+          },
+        ],
+
+        outrosData: [
+          {
+            name: "Undone",
+            value: 100,
+            color: "#FFF8BC",
+          },
+          {
+            name: "Done",
+            value: 0,
+            color: "#F8E854",
+          },
+        ],
+      };
+
+      return dataTypes;
+    }
   }
 
   function createBarChart() {
@@ -222,18 +300,30 @@ export default function AreasDemandadasComponent({
       Operação: number;
       Outros: number;
     }[] = [];
-    AreasDemandadasPorMes.forEach((mes) => {
-      const total = mes.sms + mes.regulatorio + mes.operacao + mes.outros;
+    if (AreasDemandadasPorMes.length > 0) {
+      AreasDemandadasPorMes.forEach((mes) => {
+        const total = mes.sms + mes.regulatorio + mes.operacao + mes.outros;
+        const dataMock = {
+          month: formatMonth(mes.month),
+          SMS: +((mes.sms / total) * 100).toFixed(2),
+          Regulatório: +((mes.regulatorio / total) * 100).toFixed(2),
+          Operação: +((mes.operacao / total) * 100).toFixed(2),
+          Outros: +((mes.outros / total) * 100).toFixed(2),
+        };
+        values.push(dataMock);
+      });
+      return values;
+    } else {
       const dataMock = {
-        month: formatMonth(mes.month),
-        SMS: (mes.sms / total) * 100,
-        Regulatório: (mes.regulatorio / total) * 100,
-        Operação: (mes.operacao / total) * 100,
-        Outros: (mes.outros / total) * 100,
+        month: formatMonth(),
+        SMS: 0,
+        Regulatório: 0,
+        Operação: 0,
+        Outros: 0,
       };
       values.push(dataMock);
-    });
-    return values;
+      return values;
+    }
   }
 
   const dataEntries = [
@@ -261,19 +351,14 @@ export default function AreasDemandadasComponent({
         flex={1}
         gap={4}
       >
-        <Text
-          sx={{ fontSize: 18, fontWeight: "bold", alignSelf: "flex-start" }}
-          color="#000000"
-        >
-          Áreas Demandadas
-        </Text>
-        <Box flex={1}>
-          <Box
-            display={"flex"}
-            w={"100%"}
-            justifyContent="space-between"
-            flexWrap={"wrap"}
+        <Box w={"fit-content"} h={230}>
+          <Text
+            sx={{ fontSize: 18, fontWeight: "600", alignSelf: "flex-start" }}
+            color="#000000"
           >
+            Áreas Demandadas
+          </Text>
+          <Box display={"flex"} w={"100%"} justifyContent="space-between">
             <Box pt={6} minW={innerWidth >= 428 ? "350px" : "120px"} flex={1}>
               <StackedBarChart
                 showY={false}
@@ -312,7 +397,9 @@ export default function AreasDemandadasComponent({
                     size={60}
                     upDown={isUpDown("sms")}
                     data={createPieData().smsData}
-                    value={getPieValues(0).smsPercent}
+                    value={
+                      getPieValues(AreasDemandadasPorMes.length - 1).smsPercent
+                    }
                   />
                 </Box>
                 <Box
@@ -336,7 +423,10 @@ export default function AreasDemandadasComponent({
                     size={60}
                     upDown={isUpDown("regulatorio")}
                     data={createPieData().regulatorioData}
-                    value={getPieValues(0).regulatorioPercent}
+                    value={
+                      getPieValues(AreasDemandadasPorMes.length - 1)
+                        .regulatorioPercent
+                    }
                   />
                 </Box>
               </Box>
@@ -357,7 +447,10 @@ export default function AreasDemandadasComponent({
                     size={60}
                     upDown={isUpDown("operacao")}
                     data={createPieData().operacaoData}
-                    value={getPieValues(0).operacaoPercent}
+                    value={
+                      getPieValues(AreasDemandadasPorMes.length - 1)
+                        .operacaoPercent
+                    }
                   />
                   <Text
                     mt={2}
@@ -381,7 +474,10 @@ export default function AreasDemandadasComponent({
                     size={60}
                     upDown={isUpDown("outros")}
                     data={createPieData().outrosData}
-                    value={getPieValues(0).outrosPercent}
+                    value={
+                      getPieValues(AreasDemandadasPorMes.length - 1)
+                        .outrosPercent
+                    }
                   />
                   <Text
                     mt={2}
