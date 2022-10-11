@@ -147,7 +147,7 @@ export default function NaoPrevistoComponent() {
                     </Th>
                     {/* {trut ? <Text> {projeto.nomeProjeto}</Text> : ''} */}
                     <Th color="gray.400" sx={{ fontSize: 11 }}>
-                      <Text>
+                      <Text textAlign={"end"}>
                         {projeto.valor_total_previsto
                           ? Intl.NumberFormat("pt-br", {
                               style: "currency",
