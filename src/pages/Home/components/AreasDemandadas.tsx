@@ -40,7 +40,7 @@ export default function AreasDemandadasComponent({
     return date.getMonth() + 1;
   }
 
-  function formatMonth(month: number) {
+  function formatMonth(month?: number) {
     let monthName: string;
     let year: number;
     const date = new Date();
@@ -86,13 +86,17 @@ export default function AreasDemandadasComponent({
         monthName = "?";
     }
 
-    if (month > getCurrentMonth()) {
-      year = currentYear - 1;
-    } else {
-      year = currentYear;
-    }
+    if (month) {
+      if (month > getCurrentMonth()) {
+        year = currentYear - 1;
+      } else {
+        year = currentYear;
+      }
 
-    return monthName + "/" + year;
+      return monthName + "/" + year;
+    } else {
+      return "-";
+    }
   }
 
   function getPieValues(month: number) {
@@ -295,18 +299,30 @@ export default function AreasDemandadasComponent({
       Operação: number;
       Outros: number;
     }[] = [];
-    AreasDemandadasPorMes.forEach((mes) => {
-      const total = mes.sms + mes.regulatorio + mes.operacao + mes.outros;
+    if (AreasDemandadasPorMes.length > 0) {
+      AreasDemandadasPorMes.forEach((mes) => {
+        const total = mes.sms + mes.regulatorio + mes.operacao + mes.outros;
+        const dataMock = {
+          month: formatMonth(mes.month),
+          SMS: +((mes.sms / total) * 100).toFixed(2),
+          Regulatório: +((mes.regulatorio / total) * 100).toFixed(2),
+          Operação: +((mes.operacao / total) * 100).toFixed(2),
+          Outros: +((mes.outros / total) * 100).toFixed(2),
+        };
+        values.push(dataMock);
+      });
+      return values;
+    } else {
       const dataMock = {
-        month: formatMonth(mes.month),
-        SMS: +((mes.sms / total) * 100).toFixed(2),
-        Regulatório: +((mes.regulatorio / total) * 100).toFixed(2),
-        Operação: +((mes.operacao / total) * 100).toFixed(2),
-        Outros: +((mes.outros / total) * 100).toFixed(2),
+        month: formatMonth(),
+        SMS: 0,
+        Regulatório: 0,
+        Operação: 0,
+        Outros: 0,
       };
       values.push(dataMock);
-    });
-    return values;
+      return values;
+    }
   }
 
   const dataEntries = [
@@ -349,18 +365,14 @@ export default function AreasDemandadasComponent({
             </Text>
             <Box display={"flex"} w={"100%"} justifyContent="space-between">
               <Box pt={6}>
-                {AreasDemandadasPorMes.length > 0 ? (
-                  <StackedBarChart
-                    showY={false}
-                    sizeW={180}
-                    sizeH={180}
-                    data={createBarChart()}
-                    dataEntries={dataEntries}
-                    barW={20}
-                  />
-                ) : (
-                  ""
-                )}
+                <StackedBarChart
+                  showY={false}
+                  sizeW={180}
+                  sizeH={180}
+                  data={createBarChart()}
+                  dataEntries={dataEntries}
+                  barW={20}
+                />
               </Box>
               <Box w={150}>
                 <Box
