@@ -1,7 +1,7 @@
 import { IconType } from "react-icons";
 import { AiOutlineBarChart } from "react-icons/ai";
 import { BiData } from "react-icons/bi";
-import { BsBarChartSteps } from "react-icons/bs";
+// import { BsBarChartSteps } from "react-icons/bs";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import {
   FiHome,
@@ -15,6 +15,7 @@ import {
   FiTrash2,
   FiSettings,
 } from "react-icons/fi";
+import { MdPriorityHigh } from "react-icons/md";
 
 interface LinkItemProps {
   name: string;
@@ -39,18 +40,19 @@ export const LinkItems: Array<LinkItemProps> = [
       {
         name: "Fornecedores",
         icon: FiActivity,
-        link: "/fornecedores",
+        link: "/desenvolvimento",
       },
       {
         name: "Lições Aprendidas",
         icon: FiActivity,
         link: "/licoesAprendidas",
       },
-      {
-        name: "Detalhamento Projeto",
-        icon: BsBarChartSteps,
-        link: "/detalhamento/191",
-      },
+      // {
+      //   name: "Detalhamento Projeto",
+      //   icon: BsBarChartSteps,
+      //   link: "/detalhamento/191",
+      // },
+      { name: "Priorização", icon: MdPriorityHigh, link: "/priorizacao" },
     ],
   },
 
@@ -62,7 +64,6 @@ export const LinkItems: Array<LinkItemProps> = [
       { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/budgets" },
     ],
   },
-
   {
     name: "Estatísticas",
     icon: AiOutlineBarChart,
@@ -75,9 +76,9 @@ export const LinkItems: Array<LinkItemProps> = [
       {
         name: "Gráficos Estatisticos",
         icon: AiOutlineBarChart,
-        link: "/desenvolvimento",
+        link: "/graficos",
       },
-      { name: "Look Ahead", icon: AiOutlineBarChart, link: "/desenvolvimento" },
+      { name: "Look Ahead", icon: AiOutlineBarChart, link: "/lookahead" },
       { name: "Relatórios", icon: FiFile, link: "/reports" },
     ],
   },

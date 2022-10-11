@@ -1,76 +1,155 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { FiChevronLeft } from "react-icons/fi";
+import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 import {
   Box,
+  Flex,
+  IconButton,
   Text,
   Heading,
   Stack,
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { StatisticsGanttProps } from "interfaces/Services";
+import { StatisticsGanttProps, StatisticsTableData } from "interfaces/Services";
 
 import Sidebar from "components/SideBar";
 
+// import { useToast } from "contexts/Toast";
+
+import { useEditarOperacao } from "hooks/useEditarOperacao";
+
+import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
+
+// import { patchOperacoesEstatisticas } from "services/update/OperacoesEstatisticas";
+
 import { Gantt } from "./components/Gantt";
+import ModalAdicionarOperacao from "./components/ModalAdicionarOperacao";
+import ModalEditarOperacao from "./components/ModalEditarOperacao";
 
 function StatisticsGantt() {
-  const { state }: any = useLocation();
+  const { sonda, poco } = useParams();
+  const navigate = useNavigate();
+  const [refresh, setRefresh] = useState(false);
+  const [editOp, setEditOp] = useState({});
+  const [projeto, setProjeto] = useState({
+    sonda: "",
+    id_sonda: null,
+    poco: "",
+    id_poco: null,
+  });
   const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
+  const {
+    registerForm,
+    loading,
+    listaResponsaveis,
+    listaAreaAtuacao,
+    onClose,
+    onOpen,
+    isOpen,
+  } = useEditarOperacao(refresh, setRefresh, projeto);
+  // const { toast } = useToast();
   const toolbarOptions = ["ZoomIn", "ZoomOut"];
-  const [projeto, setProjeto] = useState({ sonda: "", poco: "" });
 
   const formatToGanttData = (data: any) => {
     if (!data) return;
-    const newGantt = data.atividades?.map((t: any) => {
-      // TODO: setar qual valor (use) usado no duration
-      let duration;
-      if (
-        Number(t.pct_plan) === 1 ||
-        Number(t.hrs_reais) > Number(t.hrs_totais)
-      ) {
-        duration = Number(t.hrs_reais);
-      } else {
-        duration = Number(t.hrs_totais);
-      }
-      const { max, min, med, dp } = data;
-      let color;
-      if (duration < med - dp) color = "green";
-      else if (duration >= med - dp && duration < med + dp / 2)
-        color = "yellow";
-      else if (duration >= med + dp / 2 && duration < med + dp) color = "red";
-      else if (duration >= med + dp) color = "black";
-      return {
-        TaskID: t.id_atividade,
-        TaskName: t.nome_atividade,
-        StartDate: t.inicio_real, // t.inicio_real,
-        EndDate: t.fim_real, // t.,
-        BaselineStartDate: t.inicio_planejado,
-        BaselineEndDate: t.fim_planejado,
-        Duration: duration,
-        BaselineDuration: Number(t.hrs_totais),
-        Progress: Number(t.pct_plan) * 100,
-        max,
-        min,
-        med,
-        dp,
-        color,
-      };
-    });
+    const newGantt = data.atividades?.map((t: any) => ({
+      sonda: data.sonda,
+      id_sonda: data.id_sonda,
+      poco: data.poco,
+      id_poco: data.id_poco,
+      TaskID: t.id_atividade,
+      TaskName: t.nome_atividade,
+      StartDate: new Date(t.inicio_real),
+      EndDate: new Date(t.fim_real),
+      BaselineStartDate: new Date(t.inicio_planejado), // new Date('04/21/2019')
+      BaselineEndDate: new Date(t.fim_planejado),
+      BaselineDuration: Number(t.hrs_totais),
+      Duration: Number(t.hrs_reais),
+      // Work: Number(t.hrs_reais),
+      Progress: Number(t.pct_real),
+      max: Number(t.vlr_max),
+      min: Number(t.vlr_min),
+      med: Number(t.vlr_media),
+      dp: Number(t.vlr_dp),
+    }));
     setGanttData(newGantt);
     setProjeto({
       sonda: data.sonda,
+      id_sonda: data.id_sonda,
       poco: data.poco,
+      id_poco: data.id_poco,
     });
   };
 
-  useEffect(() => {
-    formatToGanttData(state.data);
+  // const handleEdit = async (task: any) => {
+  //   console.log(">>>edit", task);
+  //   try {
+  //     const payload = {
+  //       // nom_usu_create: user?.nome, // TODO nome do editor?
+  //       // id_sonda: task.id_sonda,
+  //       // id_poco: task.id_poco,
+  //       id_atividade: task.TaskID, // id_atividade no update significa o id da linha
+  //       inicio_realizado: task.StartDate,
+  //       fim_realizado: task.EndDate,
+  //       inicio_planejado: task.BaselineStartDate,
+  //       fim_planejado: task.BaselineEndDate,
+  //       // hrs_reais: task.Duration,
+  //       // hrs_totais: task.BaselineDuration,
+  //       pct_real: task.Progress,
+  //       // nome_responsavel: "noe",
+  //     };
+  //     // const { status } = await patchOperacoesEstatisticas(payload);
+  //     const status = 200;
+  //     console.log(">>>>pauyload", payload);
+  //     if (status === 200 || status === 201) {
+  //       toast.success("Operação atualizada com sucesso!");
+  //     }
+  //   } catch (error) {
+  //     toast.error("Erro ao editar operação!");
+  //   }
+  // };
+  const convertReq = (payload: any): StatisticsTableData[] => {
+    const newData: StatisticsTableData[] = [];
+    payload.forEach((s: { id_sonda: number; sonda: string; pocos: any[] }) =>
+      s.pocos.forEach((p) => {
+        newData.push({
+          sonda: s.sonda,
+          id_sonda: s.id_sonda,
+          poco: p.poco,
+          id_poco: p.id_poco,
+          atividades: p.atividades,
+        });
+      })
+    );
+    return newData;
+  };
 
-    // handleSetData();
-    // setLoading(false);
-  }, []);
+  const handleGetAllData = async () => {
+    const { data } = await getOperacoesEstatisticas();
+    // const data = atividades;
+    if (!data) return;
+    const newData = convertReq(data);
+
+    const _ganttData = newData.find(
+      (e) => e.id_sonda === Number(sonda) && e.id_poco === Number(poco)
+    );
+    // console.log(":>>>> _ganttData,", _ganttData);
+    formatToGanttData(_ganttData);
+  };
+
+  useEffect(() => {
+    handleGetAllData();
+  }, [refresh]);
+
+  // useEffect(() => {
+  //   formatToGanttData(state.data);
+
+  //   // handleSetData();
+  //   // setLoading(false);
+  // }, [refresh]);
 
   return (
     <>
@@ -87,12 +166,63 @@ function StatisticsGantt() {
             }}
             borderRadius={{ base: "none", sm: "xl" }}
           >
-            <Heading as="h3" size="md" mb={5}>
-              {projeto.sonda}
-            </Heading>
-            <Text>{projeto.poco}</Text>
+            <Stack>
+              <Flex mb={5} justify={"space-between"} wrap={"wrap"}>
+                <IconButton
+                  aria-label="voltar"
+                  color={"black"}
+                  backgroundColor="transparent"
+                  size="lg"
+                  icon={<FiChevronLeft />}
+                  onClick={() => navigate(`/estatisticas`)}
+                />
+                <Box>
+                  <Heading as="h3" size="md">
+                    {projeto.sonda}
+                  </Heading>
+                  <Text>{projeto.poco}</Text>
+                </Box>
+
+                <Flex gap={2} flex={2} justify={"end"} align={"end"}>
+                  {/* <ModalEditarCronograma
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                    atual={state.data}
+                  /> */}
+                  <ModalAdicionarOperacao
+                    setRefresh={setRefresh}
+                    refresh={refresh}
+                    // atividades={atividades}
+                    projeto={projeto}
+                  />
+                  <ModalEditarOperacao
+                    setRefresh={setRefresh}
+                    refresh={refresh}
+                    // atividades={atividades}
+                    editOp={editOp}
+                    setEditOp={setEditOp}
+                    listaResponsaveis={listaResponsaveis}
+                    listaAreaAtuacao={listaAreaAtuacao}
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    registerForm={registerForm}
+                    loading={loading}
+                  />
+                </Flex>
+              </Flex>
+            </Stack>
             <Stack spacing="8">
-              <Gantt toolbarOptions={toolbarOptions} data={ganttData} />
+              <Gantt
+                options={{
+                  showGantt: true,
+                  toolbarOptions,
+                }}
+                edit={{
+                  onOpen,
+                  setEditOp,
+                }}
+                data={ganttData}
+              />
             </Stack>
           </Box>
         </Stack>

@@ -98,7 +98,12 @@ export function Login() {
                       display="flex"
                     >
                       Senha
-                      <Button variant="link" color="gray.400" size="sm">
+                      <Button
+                        variant="link"
+                        color="gray.400"
+                        size="sm"
+                        onClick={() => navigate("/forgot-password")}
+                      >
                         Esqueceu sua senha?
                       </Button>
                     </FormLabel>

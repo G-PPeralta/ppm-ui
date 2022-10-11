@@ -6,4 +6,6 @@ export interface Project {
   complexidade: string;
   responsavel: string;
   coordenador: string;
+  descricao: true;
+  justificativa: true;
 }

@@ -1,11 +1,12 @@
 import { useState } from "react";
 
 import { useFormik } from "formik";
-import { projectRegisterSchema } from "validations/ProjectRegister";
+import { Projetos } from "interfaces/Projetos";
+// import { projectRegisterSchema } from "validations/ProjectRegister";
 
 import { useToast } from "contexts/Toast";
 
-import { getProjects } from "services/get/GetProject";
+import { getProjetos } from "services/get/GetProject";
 import { postProject } from "services/post/ProjectRegister";
 
 export function useProjects() {
@@ -13,8 +14,8 @@ export function useProjects() {
 
   const [loading, setLoading] = useState(false);
 
-  const getAllProjects = async (polo: string) => {
-    const data: any[] = await getProjects(polo);
+  const getProjetosDetalhados = async () => {
+    const data: Projetos[] = await getProjetos();
     return data;
   };
 
@@ -38,7 +39,6 @@ export function useProjects() {
       statusId: 0,
       gateId: 0,
       tipoProjetoId: 0,
-      demandaId: 0,
       comentarios: "",
       responsavel: "",
       coordenador: "",
@@ -47,7 +47,7 @@ export function useProjects() {
       elemento_pep: "",
     },
 
-    validationSchema: projectRegisterSchema,
+    // validationSchema: projectRegisterSchema,
     onSubmit: async (values) => {
       const newValues = {
         nomeProjeto: values.nomeProjeto,
@@ -68,7 +68,6 @@ export function useProjects() {
         statusId: Number(values.statusId),
         gateId: Number(values.statusId),
         tipoProjetoId: Number(values.tipoProjetoId),
-        // demandaId: Number(values.demandaId),
         comentarios: values.comentarios,
         responsavel_id: values.responsavel_id,
         coordenador_id: values.coordenador_id,
@@ -96,7 +95,7 @@ export function useProjects() {
   });
 
   return {
-    getAllProjects,
+    getProjetosDetalhados,
     projectsForm,
     loading,
   };

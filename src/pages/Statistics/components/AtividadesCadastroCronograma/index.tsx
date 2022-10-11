@@ -11,7 +11,7 @@ import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
 // import { RequiredField } from "components/RequiredField/RequiredField";
 
-import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
+import { useCadastroCronograma } from "hooks/useCadastroCronograma";
 
 import BotaoAdicionar from "./BotaoAdicionar";
 import AtividadesDraggable from "./Draggable/AtividadeDraggable";
@@ -38,13 +38,13 @@ export default function AtividadesCadastroCronograma({
   const id = useId();
   const [render, setRender] = useState<any>([]);
   const [droppableId, setDroppableId] = useState<string>(id);
-  const { listaAreaAtuacao, listaResponsaveis, listaTarefas } =
-    useCadastroIntervencao();
+  const { listaAreaAtuacao, listaResponsaveis, listaOperacao } =
+    useCadastroCronograma();
 
   const listas = {
     listaAreaAtuacao,
     listaResponsaveis,
-    listaTarefas,
+    listaOperacao,
   };
 
   const reorder = (

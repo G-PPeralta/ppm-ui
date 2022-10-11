@@ -3,100 +3,106 @@ import { useEffect, useState } from "react";
 import {
   Box,
   Flex,
-  Stack,
   Text,
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { TotalOrcamento } from "interfaces/Services";
+import { TotalOrcamento, TotalRealizado } from "interfaces/Services";
 
-import { getOrcamentoTotal } from "services/get/Dashboard";
+import { getOrcamentoTotal, getTotalRealizado } from "services/get/Dashboard";
 
 export default function RealizadoComponent() {
-  const [totalOrcamento, setTotalOrcamento] = useState<TotalOrcamento[]>(
-    [] as TotalOrcamento[]
+  const [totalRealizado, setTotalRealizado] = useState<TotalRealizado[]>(
+    [] as TotalRealizado[]
   );
-  const [loading, setLoading] = useState(true);
+  const [orcamento, setTotalOrcamento] = useState<TotalOrcamento[]>();
+  const [loading, setLoading] = useState(false);
+
+  async function handleGetTotalRealizado() {
+    setLoading(true);
+    const reqGet = await getTotalRealizado();
+
+    setTotalRealizado(reqGet.data[0].totalRealizado);
+    setLoading(false);
+  }
 
   async function handleGetTotalOrcamento() {
     const reqGet = await getOrcamentoTotal();
 
-    setTotalOrcamento(reqGet.data[1].total);
+    setTotalOrcamento(reqGet.data[0].total);
   }
 
   useEffect(() => {
     handleGetTotalOrcamento();
+    handleGetTotalRealizado();
     setLoading(false);
   }, []);
 
-  const valorFormatado = totalOrcamento.toLocaleString();
+  const valorFormatado = totalRealizado && totalRealizado.toLocaleString();
 
   return (
-    <Stack spacing="8">
-      <Flex
+    <Flex
+      py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
+      px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
+      w={"100%"}
+      bg={"white"}
+      boxShadow={useColorModeValue("md", "md-dark")}
+      borderRadius={"xl"}
+      flex={1}
+      align={"center"}
+      justify={"center"}
+    >
+      <Box
         w={"100%"}
-        align="center"
-        justify="center"
-        bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
+        sx={{ display: "flex" }}
+        justifyContent="space-between"
+        alignItems="center"
       >
-        <Box
-          py={{ base: "0", sm: "4" }}
-          px={{ base: "0", sm: "4" }}
-          w={"100%"}
-          bg={useBreakpointValue({ base: "transparent", sm: "white" })}
-          boxShadow={{
-            base: "none",
-            sm: useColorModeValue("md", "md-dark"),
-          }}
-          borderRadius={{ base: "none", sm: "xl" }}
-        >
-          <Box
-            w={"100%"}
-            sx={{ display: "flex" }}
-            justifyContent="space-between"
-            alignItems="center"
+        <Box>
+          <Text
+            mb={1}
+            sx={{ fontSize: 16, fontWeight: "bold", alignSelf: "center" }}
+            color="#000000"
           >
-            <Box>
-              <Text
-                mb={1}
-                sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
-                color="#000000"
-              >
-                Realizado
-              </Text>
-              <Box sx={{ display: "flex" }}>
-                <Text
-                  sx={{ fontSize: 12, fontWeight: "600", alignSelf: "center" }}
-                  color="#000000"
-                >
-                  R$
-                </Text>
-                <Text
-                  ml={2}
-                  sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
-                  color="#000000"
-                >
-                  {!loading && valorFormatado}
-                </Text>
-              </Box>
-            </Box>
-            <Box
-              justifyContent="center"
-              alignItems="center"
-              bg={"#2E69FD"}
-              sx={{ height: "100%", alignItems: "center", borderRadius: "2px" }}
+            Realizado
+          </Text>
+          <Box sx={{ display: "flex" }}>
+            <Text
+              sx={{ fontSize: 12, fontWeight: "600", alignSelf: "center" }}
+              color="#000000"
             >
-              <Text
-                p={1}
-                sx={{ fontSize: 22, fontWeight: "600", alignSelf: "center" }}
-                color="#ffffff"
-              >
-                50%
-              </Text>
-            </Box>
+              R$
+            </Text>
+            <Text
+              ml={2}
+              sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
+              color="#000000"
+            >
+              {!loading && valorFormatado}
+            </Text>
           </Box>
         </Box>
-      </Flex>
-    </Stack>
+        <Box
+          justifyContent="center"
+          alignItems="center"
+          bg={"#2E69FD"}
+          sx={{ height: "100%", alignItems: "center", borderRadius: "2px" }}
+        >
+          <Text
+            p={1}
+            sx={{ fontSize: 22, fontWeight: "600", alignSelf: "center" }}
+            color="#ffffff"
+          >
+            {!totalRealizado ||
+            !orcamento ||
+            isNaN(Number(totalRealizado)) ||
+            isNaN(Number(orcamento))
+              ? 0
+              : (Number(totalRealizado) / Number(orcamento)) * 100}
+            %
+          </Text>
+        </Box>
+      </Box>
+    </Flex>
   );
 }

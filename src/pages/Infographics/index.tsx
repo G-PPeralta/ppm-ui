@@ -64,14 +64,25 @@ export function Infographics() {
         {!loading ? (
           <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
             <Box
-              py={{ base: "6", sm: "8" }}
+              py={{ base: "6", sm: "6" }}
               px={{ base: "6", sm: "8" }}
               w={"100%"}
               bg={"white"}
               borderRadius={{ base: "xl", sm: "xl" }}
             >
-              <Flex justify={"space-between"} mb={2} wrap={"wrap"}>
-                <Heading as="h3" size="md" mb={2} mt={innerWidth}>
+              <Flex
+                justify={"space-between"}
+                mb={2}
+                wrap={"wrap"}
+                align={"center"}
+              >
+                <Heading
+                  as="h3"
+                  size="md"
+                  mb={2}
+                  mt={innerWidth}
+                  textAlign={"center"}
+                >
                   Acompanhamento de Poços
                 </Heading>
                 <Flex gap={4}>

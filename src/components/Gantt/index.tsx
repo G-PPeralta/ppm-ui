@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
+import { Flex, Heading } from "@chakra-ui/react";
 import {
   GanttComponent,
   Inject,
@@ -10,13 +12,18 @@ import { IGantt, GanttProps } from "interfaces/Services";
 
 import { getGanttData } from "services/get/Gantt";
 
+import ModalCadastroAtividades from "../../pages/DetalhamentoProjeto/components/ModalCadastroAtividades";
+
 type ganttOptionsProps = {
   toolbarOptions?: string[];
+  idProjeto?: number;
 };
-export function Gantt({ toolbarOptions }: ganttOptionsProps) {
+export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
   // const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);
+  const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [gantt, setGantt] = useState<GanttProps[]>();
+  const [refresh, setRefresh] = useState(false);
 
   function ganttFormatter(gantt: IGantt) {
     if (!gantt) return;
@@ -64,11 +71,13 @@ export function Gantt({ toolbarOptions }: ganttOptionsProps) {
   }
 
   async function handleSetGanttData() {
-    const reqGanttData = await getGanttData();
-    if (!reqGanttData) return;
-    const _gantt: IGantt = reqGanttData.data;
-    // setGanttData(_gantt);
-    ganttFormatter(_gantt);
+    if (id) {
+      const reqGanttData = await getGanttData(+id);
+      if (!reqGanttData) return;
+      const _gantt: IGantt = reqGanttData.data;
+      // setGanttData(_gantt);
+      ganttFormatter(_gantt);
+    }
   }
 
   useEffect(() => {
@@ -150,90 +159,120 @@ export function Gantt({ toolbarOptions }: ganttOptionsProps) {
   return (
     <>
       {!loading && (
-        <GanttComponent
-          id="gantt-control"
-          dataSource={gantt}
-          taskFields={{
-            id: "TaskID",
-            name: "TaskName",
-            startDate: "StartDate",
-            endDate: "EndDate",
-            duration: "Duration",
-            progress: "Progress",
-            dependency: "Predecessor",
-            child: "subtasks",
-          }}
-          // taskFields={ganttData.macroatividades.map((macroatividade) => ({
-          //   id: macroatividade.macroatividade_id,
-          //   item: macroatividade.macroatividade_item,
-          //   name: macroatividade.macroatividade_nome,
-          //   child: macroatividade.micro.map((microatividade) => ({
-          //     id: microatividade.macroatividade_id,
-          //     item: microatividade.item,
-          //     name: microatividade.nome_projeto,
-          //     startDate: microatividade.data_inicio,
-          //     endDate: microatividade.data_fim,
-          //     duration: microatividade.duracao,
-          //     progress: microatividade.progresso,
-          //   })),
-          // }))}
-          toolbar={toolbarOptions || []}
-          editSettings={{
-            allowTaskbarEditing: false,
-            allowEditing: true,
-          }}
-          height={"100vh"}
-          columns={[
-            { field: "Item", type: "string" },
-            {
-              field: "TaskID",
-              headerText: "ID",
-              visible: false,
-            },
-            {
-              field: "TaskName",
-              headerText: "Ação/Projeto",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              type: "string",
-            },
-            {
-              field: "StartDate",
-              headerText: "Data Início",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "dd/MM/yyyy",
-            },
-            {
-              field: "EndDate",
-              headerText: "Data Fim",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "dd/MM/yyyy",
-            },
-            {
-              field: "Duration",
-              headerText: "Duração",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-            },
-            {
-              field: "Progress",
-              headerText: "Progresso (%)",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "n",
-            },
-            {
-              field: "Predecessor",
-              headerText: "Predecessor",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-            },
-          ]}
-        >
-          <Inject services={[Edit, Toolbar]} />
-        </GanttComponent>
+        <>
+          <Flex
+            backgroundColor={"white"}
+            borderTopRadius={"8px"}
+            borderBottomRadius={"0px"}
+            // borderBottom={"1px solid #F0F3F7"}
+            align={"center"}
+            pl={"20px"}
+            gap={5}
+            h={"100%"}
+            py={2}
+          >
+            <Heading as="h4" size="md">
+              Gráfico Gantt
+            </Heading>
+            <ModalCadastroAtividades
+              setRefresh={setRefresh}
+              refresh={refresh}
+              // atividades={atividades}
+              idProjeto={idProjeto}
+            />
+          </Flex>
+          <GanttComponent
+            id="gantt-control"
+            dataSource={gantt}
+            taskFields={{
+              id: "TaskID",
+              name: "TaskName",
+              startDate: "StartDate",
+              endDate: "EndDate",
+              duration: "Duration",
+              progress: "Progress",
+              dependency: "Predecessor",
+              child: "subtasks",
+            }}
+            // taskFields={ganttData.macroatividades.map((macroatividade) => ({
+            //   id: macroatividade.macroatividade_id,
+            //   item: macroatividade.macroatividade_item,
+            //   name: macroatividade.macroatividade_nome,
+            //   child: macroatividade.micro.map((microatividade) => ({
+            //     id: microatividade.macroatividade_id,
+            //     item: microatividade.item,
+            //     name: microatividade.nome_projeto,
+            //     startDate: microatividade.data_inicio,
+            //     endDate: microatividade.data_fim,
+            //     duration: microatividade.duracao,
+            //     progress: microatividade.progresso,
+            //   })),
+            // }))}
+            toolbar={toolbarOptions || []}
+            editSettings={{
+              allowTaskbarEditing: false,
+              allowEditing: true,
+            }}
+            height={"100vh"}
+            columns={[
+              { field: "Item", type: "string" },
+              {
+                field: "TaskID",
+                headerText: "ID",
+                visible: false,
+              },
+              {
+                field: "TaskName",
+                headerText: "Ação/Projeto",
+                headerTextAlign: "Center",
+                textAlign: "Center",
+                type: "string",
+              },
+              {
+                field: "StartDate",
+                headerText: "Data Início",
+                headerTextAlign: "Center",
+                textAlign: "Center",
+                format: "dd/MM/yyyy",
+              },
+              {
+                field: "EndDate",
+                headerText: "Data Fim",
+                headerTextAlign: "Center",
+                textAlign: "Center",
+                format: "dd/MM/yyyy",
+              },
+              {
+                field: "Duration",
+                headerText: "Duração",
+                headerTextAlign: "Center",
+                textAlign: "Center",
+              },
+              {
+                field: "Progress",
+                headerText: "Progresso (%)",
+                headerTextAlign: "Center",
+                textAlign: "Center",
+                format: "n",
+              },
+              {
+                field: "Predecessor",
+                headerText: "Predecessor",
+                headerTextAlign: "Center",
+                textAlign: "Center",
+              },
+            ]}
+          >
+            {/* <footer
+              style={{
+                background: "white",
+                height: "2px",
+                borderRadius: "8px",
+              }}
+            ></footer> */}
+            <Inject services={[Edit, Toolbar]} />
+          </GanttComponent>
+        </>
       )}
     </>
   );

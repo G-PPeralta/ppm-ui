@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 // import toast from "react-hot-toast";
-import { AiFillEdit, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch } from "react-icons/ai";
+import { MdArrowForwardIos, MdModeEdit } from "react-icons/md";
 
 import {
   Button,
@@ -22,6 +23,7 @@ import {
   TableContainer,
   Tbody,
   Td,
+  Text,
   Th,
   Thead,
   Tr,
@@ -33,6 +35,8 @@ import {
   TarefaAtividade,
   TarefaAtividadeComId,
 } from "interfaces/Services";
+
+import PaginacaoTabela from "components/PaginacaoTabela";
 
 import { getAtividadesProjeto } from "services/get/Atividades-Projeto";
 import { getAtividadesTarefas } from "services/get/Tarefas";
@@ -58,6 +62,15 @@ function BotaoListadeTarefas() {
   );
 
   const [render, setRender] = useState(false);
+  const [from, setFrom] = useState<number>(0);
+  const [to, setTo] = useState<number>(5);
+
+  const fromTo = {
+    from,
+    to,
+    setFrom,
+    setTo,
+  };
 
   async function fetchAtividadesProjeto() {
     const { data } = await getAtividadesProjeto();
@@ -66,7 +79,7 @@ function BotaoListadeTarefas() {
 
   function formatDate(date: Date) {
     const formated = date.toString().substring(0, 10).split("-");
-    return `${formated[2]}-${formated[1]}-${formated[0]}`;
+    return `${formated[2]}/${formated[1]}/${formated[0]}`;
   }
 
   async function getTaskList() {
@@ -102,68 +115,50 @@ function BotaoListadeTarefas() {
     taskList &&
     taskList
       .sort((a, b) => a.id - b.id)
+      .slice(from, to)
       .map((task, index) => (
         <Tr key={index}>
-          <Td
-            isNumeric
-            style={{
-              borderBottom: "0.5px solid #A7A7A7",
-              borderRight: "0.5px solid #A7A7A7",
-            }}
-          >
-            {task.id}
-          </Td>
-          <Td
-            style={{
-              borderBottom: "0.5px solid #A7A7A7",
-              borderRight: "0.5px solid #A7A7A7",
-            }}
-          >
+          <Td textAlign={"center"}>{task.id}</Td>
+          <Td textAlign={"center"} fontWeight={"semibold"}>
             {task.nome_tarefa}
           </Td>
-          <Td
-            style={{
-              borderBottom: "0.5px solid #A7A7A7",
-              borderRight: "0.5px solid #A7A7A7",
-            }}
-          >
+          <Td textAlign={"center"} fontWeight={"semibold"}>
             {task.atividade_relacionada}
           </Td>
-          <Td
-            style={{
-              borderBottom: "0.5px solid #A7A7A7",
-              borderRight: "0.5px solid #A7A7A7",
-            }}
-          >
+          <Td textAlign={"center"} fontWeight={"semibold"}>
             {formatDate(task.data_tarefa)}
           </Td>
-          <Td
-            style={{
-              borderBottom: "0.5px solid #A7A7A7",
-              borderRight: "0.5px solid #A7A7A7",
-            }}
-          >
+          <Td textAlign={"center"} fontWeight={"semibold"}>
             {task.descricao_tarefa}
           </Td>
-          <Td
-            style={{
-              borderBottom: "0.5px solid #A7A7A7",
-              borderRight: "0.5px solid #A7A7A7",
-            }}
-          >
-            {!task.status ? "0%" : task.status}
+          <Td textAlign={"center"} fontWeight={"semibold"}>
+            Responsável
           </Td>
-          <Td style={{ borderBottom: "0.5px solid #A7A7A7" }}>
+          <Td textAlign={"center"} fontWeight={"semibold"}>
+            {!task.status ? "0%" : task.status}
             <IconButton
               aria-label="Plus sign"
-              icon={<AiFillEdit />}
-              background="white"
+              icon={<MdModeEdit />}
+              background="transparent"
               variant="secondary"
-              color="#2D2926"
-              mr={2}
+              color="#0047BB"
               isRound={true}
-              size="sm"
+              // onClick={() => onEdit(lessons)}
+              width={"18px"}
+              height={"18px"}
+            />
+          </Td>
+          <Td>
+            <IconButton
+              aria-label="Plus sign"
+              icon={<MdModeEdit />}
+              background="transparent"
+              variant="secondary"
+              color="#0047BB"
+              isRound={true}
               onClick={() => handleEditTarefa(task)}
+              width={"18px"}
+              height={"18px"}
             />
           </Td>
         </Tr>
@@ -179,21 +174,23 @@ function BotaoListadeTarefas() {
       <Button
         onClick={onOpen}
         background={"white"}
-        color={"origem.300"}
+        color={"#0047BB"}
         _hover={{
-          background: "origem.500",
+          background: "#0047BB",
           color: "white",
           transition: "all 0.4s",
         }}
-        px={6}
-        py={10}
+        p={4}
         borderTopRadius={"0px"}
         borderBottomRadius={"0px"}
+        fontSize={"16px"}
+        fontWeight={"700"}
+        flex={1}
       >
         Lista de Tarefas
       </Button>
 
-      <Modal size={"5xl"} isOpen={isOpen} onClose={onClose}>
+      <Modal size={"6xl"} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -202,7 +199,8 @@ function BotaoListadeTarefas() {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Lista de Tarefas
           </ModalHeader>
@@ -218,97 +216,162 @@ function BotaoListadeTarefas() {
                   base: "center",
                   md: "flex-end",
                 })}
-                px={4}
-                py={4}
-                gap={2}
+                px={7}
+                py={5}
+                gap={4}
+                display={"flex"}
+                justifyContent={"space-between"}
               >
-                <Flex
-                  display={"flex"}
-                  justifyContent={"space-between"}
-                  flex={1}
-                >
-                  <FormControl>
-                    <FormLabel htmlFor="tarefa">TAREFA</FormLabel>
-                    <Input
-                      placeholder="Nome da tarefa"
-                      type="text"
-                      id="tarefa"
-                      name="tarefa"
-                      value={tarefaFilter}
-                      onChange={(e) => setTarefaFilter(e.target.value)}
-                    />
-                  </FormControl>
-                </Flex>
-                <Flex
-                  display={"flex"}
-                  justifyContent={"space-between"}
-                  flex={0}
-                >
-                  <FormControl>
-                    <FormLabel htmlFor="data">DATA</FormLabel>
-                    <Input
-                      // placeholder="dd/mm/aaaa"
-                      id="data"
-                      type="date"
-                      name="data"
-                      // value={dataFilter}
-                      onChange={(event) => setDataFiltered(event.target.value)}
-                    />
-                  </FormControl>
-                  {/* <input
+                <Flex justify={"space-between"} gap={3}>
+                  <Flex align={"flex-end"}>
+                    <FormControl>
+                      <FormLabel htmlFor="tarefa">
+                        <Text
+                          color="#949494"
+                          fontSize="12px"
+                          fontWeight="700"
+                          mt={"6px"}
+                        >
+                          TAREFA
+                        </Text>
+                      </FormLabel>
+                      <Input
+                        borderRadius={"8px"}
+                        border={"1px solid #A7A7A7"}
+                        mt={"-9px"}
+                        width={"328px"}
+                        height={"56px"}
+                        color="#949494"
+                        placeholder="Nome da tarefa"
+                        type="text"
+                        id="tarefa"
+                        name="tarefa"
+                        value={tarefaFilter}
+                        onChange={(e) => setTarefaFilter(e.target.value)}
+                      />
+                    </FormControl>
+                  </Flex>
+                  <Flex
+                    display={"flex"}
+                    justifyContent={"space-between"}
+                    flex={0}
+                  >
+                    <FormControl>
+                      <FormLabel htmlFor="data">
+                        <Text
+                          color="#949494"
+                          fontSize="12px"
+                          fontWeight="700"
+                          mt={"6px"}
+                        >
+                          {" "}
+                          DATA
+                        </Text>
+                      </FormLabel>
+                      <Input
+                        // placeholder="dd/mm/aaaa"
+                        borderRadius={"8px"}
+                        border={"1px solid #A7A7A7"}
+                        mt={"-9px"}
+                        width={"156px"}
+                        height={"56px"}
+                        color="#949494"
+                        id="data"
+                        type="date"
+                        name="data"
+                        // value={dataFilter}
+                        onChange={(event) =>
+                          setDataFiltered(event.target.value)
+                        }
+                      />
+                    </FormControl>
+                    {/* <input
                     type="date"
                     onChange={(event) => setData(event.target.value)}
                   /> */}
+                  </Flex>
+
+                  <Flex>
+                    <Button
+                      type="button"
+                      background="white"
+                      variant="outline"
+                      color="#0047BB"
+                      borderColor="#0047BB"
+                      border={"2px"}
+                      // h={useBreakpointValue({ base: "100%", md: "120%" })}
+                      // float={"right"}
+                      // onClick={() => {
+                      //   handleFilter(categoriaId, data);
+                      //   setCategoriaId("");
+                      // }}
+                      onClick={() => {
+                        handleFilter(tarefaFilter, dataFilter);
+                      }}
+                      _hover={{
+                        background: "#0047BB",
+                        transition: "all 0.4s",
+                        color: "white",
+                      }}
+                      width={"100px"}
+                      height={"56px"}
+                      fontWeight={"700"}
+                      fontSize="18px"
+                      alignSelf={"end"}
+                    >
+                      Buscar
+                      <Icon
+                        fontWeight={"900"}
+                        as={AiOutlineSearch}
+                        fontSize="18px"
+                        ml={1}
+                        color={"#0047BB"}
+                      />
+                    </Button>
+                  </Flex>
                 </Flex>
 
-                <Flex
-                  display={"flex"}
-                  justifyContent={"space-between"}
-                  flex={1.5}
-                >
-                  <Button
-                    type="button"
-                    background="white"
-                    variant="outline"
-                    color="origem.500"
-                    borderColor="origem.500"
-                    // border={"2px"}
-                    // h={useBreakpointValue({ base: "100%", md: "120%" })}
-                    // float={"right"}
-                    // onClick={() => {
-                    //   handleFilter(categoriaId, data);
-                    //   setCategoriaId("");
-                    // }}
-                    onClick={() => {
-                      handleFilter(tarefaFilter, dataFilter);
-                    }}
-                    _hover={{
-                      background: "origem.300",
-                      transition: "all 0.4s",
-                      color: "white",
-                    }}
-                  >
-                    Buscar
-                    <Icon as={AiOutlineSearch} fontSize="20px" ml={1} />
-                  </Button>
-
-                  <Button
-                    type="button"
-                    background="origem.500"
-                    variant="primary"
-                    color="white"
-                    // border={"2px"}
-                    // h={useBreakpointValue({ base: "100%", md: "120%" })}
-                    // float={"right"}
-                    onClick={() => setIsModalOpen(true)}
-                    _hover={{
-                      background: "origem.300",
-                      transition: "all 0.4s",
-                      color: "white",
-                    }}
-                  >
-                    Adicionar
-                  </Button>
+                <Flex justifyContent={"space-between"}>
+                  <Flex align={"flex-start"} gap={10}>
+                    <Button
+                      type="button"
+                      background="origem.500"
+                      variant="primary"
+                      color="white"
+                      // border={"2px"}
+                      // h={useBreakpointValue({ base: "100%", md: "120%" })}
+                      // float={"right"}
+                      onClick={() => setIsModalOpen(true)}
+                      _hover={{
+                        background: "origem.300",
+                        transition: "all 0.4s",
+                        color: "white",
+                      }}
+                      // width={"117px"}
+                      height={"56px"}
+                    >
+                      <Text fontWeight={"700"} fontSize="18px">
+                        Adicionar Tarefa
+                      </Text>
+                    </Button>
+                    <Flex alignSelf={"end"} align={"flex-start"}>
+                      <Button
+                        onClick={onOpen}
+                        background="transparent"
+                        color="#0047BB"
+                        fontSize="18px"
+                        fontWeight={"700"}
+                      >
+                        Lixeira
+                        <Icon
+                          as={MdArrowForwardIos}
+                          fontSize="20px"
+                          fontWeight={"700"}
+                          color="#0047BB"
+                        />
+                      </Button>
+                    </Flex>
+                  </Flex>
                 </Flex>
               </Flex>
             </FormControl>
@@ -319,24 +382,50 @@ function BotaoListadeTarefas() {
             onClick={() => setTaskList(filteredData)}
           />
           <ModalBody>
-            <TableContainer mt={4} mb={3} ml={1}>
-              <Table
-                variant="unstyled"
-                style={{ border: "0.5px solid #A7A7A7" }}
-              >
-                <Thead>
-                  <Tr background="origem.500" color="white">
-                    <Th>ID</Th>
-                    <Th>Lista de Tarefas</Th>
-                    <Th>Atividade relacionada</Th>
-                    <Th>Data</Th>
-                    <Th>Descrição</Th>
-                    <Th>Status</Th>
-                    <Th>Ações</Th>
-                  </Tr>
-                </Thead>
-                <Tbody>{tableData}</Tbody>
-                {/* <Tfoot>
+            <Flex direction={"column"} w={"100%"}>
+              <Flex direction={"column"} flex={1}>
+                <TableContainer
+                  mt={4}
+                  mb={3}
+                  borderRadius={"10px"}
+                  overflowX={"scroll"}
+                >
+                  <Table variant="striped" colorScheme={"strippedGray"}>
+                    <Thead>
+                      <Tr background="origem.500">
+                        <Th
+                          color="white"
+                          textAlign={"center"}
+                          width="36px"
+                          height={"56px"}
+                        >
+                          ID
+                        </Th>
+                        <Th color="white" textAlign={"center"}>
+                          Lista de Tarefas
+                        </Th>
+                        <Th color="white" textAlign={"center"}>
+                          Atividade relacionada
+                        </Th>
+                        <Th color="white" textAlign={"center"}>
+                          Data
+                        </Th>
+                        <Th color="white" textAlign={"center"}>
+                          Descrição
+                        </Th>
+                        <Th color="white" textAlign={"center"}>
+                          Responsável
+                        </Th>
+                        <Th color="white" textAlign={"center"}>
+                          Status
+                        </Th>
+                        <Th color="white" textAlign={"center"}>
+                          Ações
+                        </Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>{tableData}</Tbody>
+                    {/* <Tfoot>
           <Tr background="origem.200" color="white">
             <Th></Th>
             <Th></Th>
@@ -345,8 +434,11 @@ function BotaoListadeTarefas() {
             <Th></Th>
           </Tr>
         </Tfoot> */}
-              </Table>
-            </TableContainer>
+                  </Table>
+                </TableContainer>
+              </Flex>
+              <PaginacaoTabela data={taskList} fromTo={fromTo} />
+            </Flex>
           </ModalBody>
 
           {isModalOpen && (

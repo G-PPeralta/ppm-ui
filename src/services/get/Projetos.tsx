@@ -1,6 +1,6 @@
 import { ProjetosList } from "interfaces/Services";
 
-import { api } from "services/api";
+import { api, token } from "services/api";
 
 export async function getProjetos(): Promise<{
   data: ProjetosList[];
@@ -167,6 +167,15 @@ export async function getDemanda(): Promise<{
       Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },
   });
+
+  return { data, status };
+}
+
+export async function getAtividadesRelacaoByProjetoId(id?: number): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(`/projetos/relacoes/${id}`, token());
 
   return { data, status };
 }

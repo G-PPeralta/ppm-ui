@@ -60,15 +60,15 @@ export function useCadastroOperacao() {
     nom_operacao: "",
     responsavel_id: 0,
     area_id: 0,
-    nao_iniciar_antes_de: {
-      data: "",
-      checked: false,
-    },
-    nao_terminar_depois_de: {
-      data: "",
-      checked: false,
-    },
-    o_mais_breve_possivel: false,
+    // nao_iniciar_antes_de: {
+    //   data: "",
+    //   checked: false,
+    // },
+    // nao_terminar_depois_de: {
+    //   data: "",
+    //   checked: false,
+    // },
+    // o_mais_breve_possivel: false,
   };
 
   const registerForm: any = useFormik({
@@ -81,9 +81,9 @@ export function useCadastroOperacao() {
         nom_operacao: values.nom_operacao,
         responsavel_id: values.responsavel_id,
         area_id: values.area_id,
-        nao_iniciar_antes_de: values.nao_iniciar_antes_de,
-        nao_terminar_depois_de: values.nao_terminar_depois_de,
-        o_mais_breve_possivel: values.o_mais_breve_possivel,
+        // nao_iniciar_antes_de: values.nao_iniciar_antes_de,
+        // nao_terminar_depois_de: values.nao_terminar_depois_de,
+        // o_mais_breve_possivel: values.o_mais_breve_possivel,
       };
 
       setLoading(true);

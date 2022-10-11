@@ -1,10 +1,6 @@
 import { useState } from "react";
-import {
-  FiChevronLeft,
-  FiChevronRight,
-  FiChevronsLeft,
-  FiChevronsRight,
-} from "react-icons/fi";
+import { BsCheckCircleFill, BsFillXCircleFill } from "react-icons/bs";
+// import { FiPrinter } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import {
@@ -17,11 +13,16 @@ import {
   Thead,
   Tr,
   Text,
-  Tooltip,
   Flex,
-  IconButton,
+  Tooltip,
+  // Button,
 } from "@chakra-ui/react";
-import { Project } from "models/Project.model";
+import { Projetos } from "interfaces/Projetos";
+
+import PaginacaoTabela from "components/PaginacaoTabela";
+
+import { formatDate } from "utils/formatDate";
+import { formatReal } from "utils/formatReal";
 
 import ModalCadastrarPriorizacao from "./ModalCadastrarPriorizacao";
 import ModalDeletarProjeto from "./ModalDeletarProjeto";
@@ -29,143 +30,410 @@ import ModalDeletarProjeto from "./ModalDeletarProjeto";
 import "../projects.css";
 
 interface TableProps {
-  data: Project[];
+  data: Projetos[];
 }
 
-export function TabelaProjetos(props: TableProps) {
-  const { data } = props;
-  const [pagAtual, setPagAtual] = useState(1);
-  // const [rowsPerPage, setRowsPerPage] = useState<number>(5);
+export function TabelaProjetos({ data }: TableProps) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
-  const brl = Intl.NumberFormat("pt-BR");
 
-  // console.log("dados tabela-projeto", data);
+  const fromTo = {
+    from,
+    to,
+    setFrom,
+    setTo,
+  };
 
-  const total = data.reduce(
-    (accumulator, object) => accumulator + +object.valorTotalPrevisto,
+  const totalOrcado = data.reduce(
+    (accumulator, object) => accumulator + +object.vlr_orcado,
     0
   );
 
-  const rowsPerPage = 5;
+  const totalRealizado = data.reduce(
+    (accumulator, object) => accumulator + +object.vlr_cr,
+    0
+  );
 
-  const totalRegs = data.length;
-  const maxPage = Math.ceil(totalRegs / rowsPerPage);
-
-  const paginate = (pag: number) => {
-    setPagAtual(pag);
-
-    const x = (pag - 1) * rowsPerPage;
-    const y = (pag - 1) * rowsPerPage + rowsPerPage;
-    setFrom(x);
-    setTo(y);
-  };
-
-  const advance = () => {
-    if (pagAtual == maxPage) {
-      return;
-    }
-
-    const _pag = pagAtual + 1;
-
-    paginate(_pag);
-  };
-
-  const back = () => {
-    if (pagAtual == 1) {
-      return;
-    }
-    const _pag = pagAtual - 1;
-    paginate(_pag);
-  };
+  // console.log(data);
 
   const tableData = data.slice(from, to).map((projeto, key) => (
     <Tr key={key}>
-      <Td isNumeric>{projeto.id}</Td>
+      <Td isNumeric textAlign={"center"}>
+        {projeto.id_projeto_real}
+      </Td>
       <Td>
-        <Link to={`/detalhamento/${projeto.id}`}>
-          <Text color={"#0047BB"}>
-            {projeto.nome.length > 28 ? (
-              <Tooltip label={projeto.nome} aria-label="">
-                {projeto.nome.substring(0, 25) + "..."}
-              </Tooltip>
-            ) : (
-              projeto.nome
-            )}
-          </Text>
+        <Link to={`/detalhamento/${projeto.id_projeto_real}`}>
+          {projeto.nome_projeto.length > 25 ? (
+            <Tooltip label={projeto.nome_projeto} aria-label="Nome do projeto">
+              <Text color={"#0047BB"}>
+                {projeto.nome_projeto.substring(0, 25) + "..."}
+              </Text>
+            </Tooltip>
+          ) : (
+            <Text color={"#0047BB"}>{projeto.nome_projeto}</Text>
+          )}
         </Link>
       </Td>
-      <Td>
-        {projeto.valorTotalPrevisto && brl.format(projeto.valorTotalPrevisto)}
+      <Td textAlign={"center"}>
+        {projeto.vlr_cpi_corrigido >= 1 ? (
+          <Flex alignItems={"center"}>
+            <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
+            <Text marginLeft="8px">
+              {" "}
+              {` CPI = ${projeto.vlr_cpi_corrigido}`}
+            </Text>
+          </Flex>
+        ) : (
+          <Flex alignItems={"center"}>
+            <BsFillXCircleFill color="red" fontSize={25} />{" "}
+            <Text marginLeft="8px">{` CPI = ${
+              projeto.vlr_cpi_corrigido ?? 0
+            }`}</Text>
+          </Flex>
+        )}
       </Td>
-      <Td>{projeto.prioridade}</Td>
-      <Td>{projeto.complexidade}</Td>
+      <Td textAlign={"center"}>
+        {projeto.vlr_spi_corrigido >= 1 ? (
+          <Flex alignItems={"center"}>
+            <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
+            <Text marginLeft="8px">{` SPI = ${projeto.vlr_spi_corrigido}`}</Text>
+          </Flex>
+        ) : (
+          <Flex alignItems={"center"}>
+            <BsFillXCircleFill color="red" fontSize={25} />{" "}
+            <Text marginLeft="8px">{` SPI = ${
+              projeto.vlr_spi_corrigido ?? 0
+            }`}</Text>
+          </Flex>
+        )}
+      </Td>
+      <Td>{formatReal(+projeto.vlr_orcado)}</Td>
+      <Td>{formatReal(+projeto.vlr_cr)}</Td>
+      <Td textAlign={"center"}>{`${
+        projeto.vlr_orcado && projeto.vlr_cr
+          ? (100 - (+projeto.vlr_cr / +projeto.vlr_orcado) * 100).toFixed(2)
+          : 0
+      } %`}</Td>
+      <Td textAlign={"center"}>{projeto.complexidade}</Td>
+      <Td textAlign={"center"}>{projeto.prioridade}</Td>
+      <Td textAlign={"center"}>{projeto.polo}</Td>
+      <Td>{projeto.coordenador}</Td>
       <Td>{projeto.responsavel}</Td>
-      <Td></Td>
+      <Td textAlign={"center"}>{formatDate(new Date(projeto.data_inicio))}</Td>
+      <Td textAlign={"center"}>{formatDate(new Date(projeto.data_fim))}</Td>
+      <Td textAlign={"center"}>{`${
+        projeto.vlr_cr && projeto.vlr_orcado
+          ? ((projeto.vlr_cr / projeto.vlr_orcado) * 100).toFixed(2)
+          : 0
+      } %`}</Td>
       <Td>
-        <ModalCadastrarPriorizacao projeto={projeto.id} />
-        <ModalDeletarProjeto projeto={projeto.id} />
+        {/* <ExpansibleText
+          text={projeto.descricao + " " + projeto.justificativa}
+        /> */}
+        {(projeto.descricao + " " + projeto.justificativa).length > 25 ? (
+          <Tooltip
+            label={projeto.nome_projeto + " " + projeto.justificativa}
+            aria-label="Nome do projeto"
+          >
+            <Text>
+              {(projeto.descricao + " " + projeto.justificativa).substring(
+                0,
+                50
+              ) + "..."}
+            </Text>
+          </Tooltip>
+        ) : (
+          <Text>{projeto.descricao + " " + projeto.justificativa}</Text>
+        )}
+      </Td>
+      <Td textAlign={"center"}>
+        <ModalCadastrarPriorizacao projeto={projeto.id_projeto_real} />
+        <ModalDeletarProjeto projeto={projeto.id_projeto_real} />
       </Td>
     </Tr>
   ));
 
   return (
-    <div className="table-fix">
-      <TableContainer mt={4} mb={3} ml={1}>
-        <Table variant="unstyled">
+    <Flex direction={"column"} w={"100%"}>
+      <TableContainer mt={4} mb={3} borderRadius={"10px"} overflowX={"scroll"}>
+        <Table variant="striped" colorScheme="strippedGray">
           <Thead>
-            <Tr background="origem.500" color="white">
-              <Th>ID</Th>
-              <Th width="50">Nome</Th>
-              <Th>Total Previsto</Th>
-              <Th>Prioridade</Th>
-              <Th>Complexidade</Th>
-              <Th>Responsavel</Th>
-              <Th>Coordenador</Th>
-              <Th>Ações</Th>
+            <Tr background={"origem.500"}>
+              {/* <Th colSpan={16} color="white">
+                Projetos
+              </Th> */}
+              {/* <Th
+                borderTopRightRadius={"10px"}
+                colSpan={1}
+                textAlign={"center"}
+              >
+                <Button
+                  backgroundColor="#0239c3"
+                  rightIcon={<FiPrinter />}
+                  variant="solid"
+                  color="white"
+                >
+                  Imprimir
+                </Button>
+              </Th> */}
+            </Tr>
+            <Tr background="origem.500">
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                ID
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Projeto
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                CPI
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                SPI
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Orçamento
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Realizado
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                TCPI
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Prioridade
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Complexidade
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Polo
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Coordenador
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Responsável
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Data Início
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Data de Término
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                %
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Descrições e Justificativas
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Ações
+              </Th>
             </Tr>
           </Thead>
           <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
           <Tfoot>
-            <Tr background="origem.200" color="white">
-              <Th></Th>
-              <Th>Total</Th>
-              <Th>{brl.format(total)}</Th>
-              <Th></Th>
-              <Th></Th>
-              <Th></Th>
-              <Th></Th>
+            <Tr background="origem.500" color="white">
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Total
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                {data ? data.length : 0} Projetos
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              ></Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              ></Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                {formatReal(totalOrcado)}
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                {formatReal(totalRealizado)}
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              ></Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              ></Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              ></Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              ></Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              ></Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              ></Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              ></Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              ></Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              ></Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              ></Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              ></Th>
             </Tr>
           </Tfoot>
         </Table>
       </TableContainer>
-      <Flex justifyContent={"center"}>
-        <Flex
-          width={"300px"}
-          alignItems={"center"}
-          justifyContent={"space-between"}
-        >
-          <IconButton
-            aria-label=""
-            icon={<FiChevronsLeft />}
-            onClick={() => paginate(1)}
-          />
-          <IconButton aria-label="" icon={<FiChevronLeft onClick={back} />} />
-
-          <Text>Página atual: {pagAtual}</Text>
-
-          <IconButton
-            aria-label=""
-            icon={<FiChevronRight />}
-            onClick={advance}
-          />
-          <IconButton
-            aria-label=""
-            icon={<FiChevronsRight />}
-            onClick={() => paginate(maxPage)}
-          />
-        </Flex>
-      </Flex>
-    </div>
+      <PaginacaoTabela data={data} fromTo={fromTo} />
+    </Flex>
   );
 }

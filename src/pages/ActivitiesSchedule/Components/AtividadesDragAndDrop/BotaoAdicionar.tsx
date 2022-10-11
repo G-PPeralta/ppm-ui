@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 
 import { Flex, IconButton } from "@chakra-ui/react";
@@ -9,6 +10,16 @@ interface Props {
 }
 
 function BotaoAdicionar({ add, registerForm, atividades }: Props) {
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    const isDisabled = registerForm.values.precedentes.some(
+      (atividade: any) =>
+        atividade.atividadePrecedenteId <= 0 || atividade.dias <= 0
+    );
+    setIsDisabled(isDisabled);
+  }, [registerForm.values.precedentes]);
+
   if (registerForm.values.precedentes.length !== atividades.length) {
     return (
       <Flex
@@ -21,22 +32,23 @@ function BotaoAdicionar({ add, registerForm, atividades }: Props) {
         justify={"center"}
         p={2}
         _hover={{
-          cursor: "pointer",
+          // cursor: "pointer",
           borderColor: "#D6D4D4",
         }}
-        onClick={() => add()}
       >
         <IconButton
+          onClick={() => add()}
           icon={<FiPlus />}
           aria-label={"Plus sign icon"}
           isRound={true}
           color={"white"}
-          backgroundColor={"#D6D4D4"}
+          backgroundColor={isDisabled ? "#D6D4D4" : "origem.500"}
           size={"sm"}
           _hover={{
-            backgroundColor: "origem.500",
+            backgroundColor: isDisabled ? "#D6D4D4" : "origem.600",
           }}
           transition={"all 0.4s"}
+          isDisabled={isDisabled}
         />
       </Flex>
     );
