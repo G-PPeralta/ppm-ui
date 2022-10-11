@@ -45,6 +45,8 @@ function CadastrarLicoesAprendidasModal({
     onCloseModal();
   }
 
+  const regex = /[^a-z ]/gi;
+
   return (
     <Flex>
       <Box
@@ -106,19 +108,20 @@ function CadastrarLicoesAprendidasModal({
                 LIÇÃO APRENDIDA
               </FormLabel>
               <Input
+                maxLength={50}
                 borderRadius={"8px"}
                 border={"1px solid #A7A7A7"}
                 mt={"-9px"}
                 width={"328px"}
                 height={"56px"}
-                color="#949494"
+                _placeholder={{ color: "black" }}
                 isRequired
                 placeholder="Lição aprendida"
                 type="text"
                 id="licaoAprendida"
                 name="licaoAprendida"
                 fontSize={"14px"}
-                value={licaoAprendida}
+                value={licaoAprendida.replace(regex, "")}
                 onChange={(event) => setLicaoAprendida(event.target.value)}
               />
             </FormControl>
@@ -138,13 +141,13 @@ function CadastrarLicoesAprendidasModal({
                 mt={"-9px"}
                 width={"456px"}
                 height={"56px"}
-                color="#949494"
+                _placeholder={{ color: "black" }}
                 isRequired
                 fontSize={"14px"}
                 placeholder="Ação ou recomendação"
                 id="acao"
                 name="acao"
-                value={acao}
+                value={acao.replace(regex, "")}
                 onChange={(event) => setAcao(event.target.value)}
               />
             </FormControl>
@@ -180,6 +183,7 @@ function CadastrarLicoesAprendidasModal({
                 }}
                 fontSize="18px"
                 fontWeight="700"
+                disabled={licaoAprendida.length < 1 || acao.length < 1}
                 onClick={handleSubmitLicao}
               >
                 Confirmar

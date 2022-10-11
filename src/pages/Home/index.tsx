@@ -80,18 +80,12 @@ export function Home() {
               <NaoPrevisto />
             </Box>
           </Flex>
-          <Box flex={4}>
+          <Flex w={"100%"} gap={4} wrap={"wrap"} flex={1}>
             <Projetos />
-          </Box>
-          <Box flex={1}>
             <FaseProjetos />
-          </Box>
-          <Box flex={1} m={1}>
             <AreasDemandadasComponent AreasDemandadasPorMes={areasDemandadas} />
-          </Box>
-          <Box flex={1}>
             <PrevistoxRealizado />
-          </Box>
+          </Flex>
         </Flex>
       </Sidebar>
     </>

@@ -19,10 +19,10 @@ import { TotalTable } from "./components/TotalTable";
 
 import "./budgetDetail.css";
 
-export function BudgetDetail() {
-  const { id } = useParams();
+export function BudgetDetail2() {
+  const params = useParams();
 
-  const { budgetFilter } = useBudgetDetail(id || null);
+  const { budgetFilter } = useBudgetDetail(params.id || null);
 
   return (
     <div>

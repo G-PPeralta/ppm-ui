@@ -131,7 +131,7 @@ export default function TotalProjetosComponent() {
         <Text
           sx={{
             fontSize: 18,
-            fontWeight: "600",
+            fontWeight: "bold",
             width: "100%",
             textAlign: "flex-start",
           }}
@@ -310,7 +310,7 @@ export default function TotalProjetosComponent() {
             <StackedBarChart
               showY={false}
               sizeW={280}
-              sizeH={240}
+              sizeH={272}
               data={dataMock}
               dataEntries={dataEntries}
               barW={30}
