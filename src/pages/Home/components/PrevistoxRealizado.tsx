@@ -26,6 +26,7 @@ function useWindowSize() {
 
 export default function PrevistoxRealizadoComponent() {
   const [width] = useWindowSize();
+  const innerWidth = window.innerWidth;
   const grafData = [
     {
       name: "Previsto",
@@ -137,7 +138,12 @@ export default function PrevistoxRealizadoComponent() {
         >
           Previsto x Realizado
         </Text>
-        <Box overflowX={"scroll"} w={width * 0.7} h={260} display={"flex"}>
+        <Box
+          overflowX={"scroll"}
+          w={innerWidth > 428 ? width * 0.7 : width * 0.85}
+          h={260}
+          display={"flex"}
+        >
           <StackedBarChart
             showY={true}
             sizeW={1000}

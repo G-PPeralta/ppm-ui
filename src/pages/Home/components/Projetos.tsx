@@ -78,7 +78,7 @@ export default function NaoPrevistoComponent() {
   // ];
 
   return (
-    <Flex align="center" justify="center" bg={"#EDF2F7"} flex={4}>
+    <Flex align="center" justify="center" bg={"#EDF2F7"} flex={4} w={"100%"}>
       <Box
         py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
@@ -97,7 +97,7 @@ export default function NaoPrevistoComponent() {
       >
         <Box w={"100%"}>
           <Text
-            mb={1}
+            mb={3}
             sx={{ fontSize: 18, fontWeight: "bold", alignSelf: "center" }}
             color="#000000"
           >
@@ -105,7 +105,7 @@ export default function NaoPrevistoComponent() {
           </Text>
           <TableContainer
             overflowY={"scroll"}
-            overflowX={"scroll"}
+            overflowX={innerWidth > 428 ? "hidden" : "scroll"}
             height={260}
           >
             <Table size="sm">
