@@ -4,7 +4,9 @@ import { ActivitiesPrecedents } from "pages/ActivitiesPrecedents";
 import { ActivitiesRegistration } from "pages/ActivitiesRegistration";
 import { ActivitiesSchedule } from "pages/ActivitiesSchedule";
 import { BudgetDetail } from "pages/BudgetDetail";
+import { BudgetDetail2 } from "pages/BudgetDetail2";
 import { Budgets } from "pages/Budgets";
+import { Budgets2 } from "pages/Budgets2";
 import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
 import { GanttPage } from "pages/Gantt";
 import { GráficosEstatisticos } from "pages/GraficosEstatisticos";
@@ -75,10 +77,9 @@ export function PrivateRoutes() {
       />
       <Route path="/licoesAprendidas" element={<LicoesAprendidasProjetos />} />
       <Route path="/estatisticas/" element={<Statistics />} />
-      <Route
-        path="/estatisticas/cronograma/:sonda/:poco"
-        element={<StatisticsGantt />}
-      />
+      <Route path="/estatisticas/cronograma" element={<StatisticsGantt />} />
+      <Route path="/budgets2" element={<Budgets2 />} />
+      <Route path="/budget2/detail/:id" element={<BudgetDetail2 />} />
       <Route path="/priorizacao" element={<Priorizacao />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
