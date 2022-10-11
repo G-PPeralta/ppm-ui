@@ -158,3 +158,10 @@ export async function getBudgetProjects(): Promise<
 
   return data;
 }
+
+export async function getNomePoco(id: string | null) {
+  const uri = `/budgets/poco/${id}`;
+  const { data } = await api.get<{ nom_atividade: string }[]>(uri, token());
+
+  return data;
+}

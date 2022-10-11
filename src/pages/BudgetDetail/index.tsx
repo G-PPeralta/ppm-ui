@@ -22,7 +22,7 @@ import "./budgetDetail.css";
 export function BudgetDetail() {
   const { id } = useParams();
 
-  const { budgetFilter } = useBudgetDetail(id || null);
+  const { budgetFilter, nome } = useBudgetDetail(id || null);
 
   return (
     <div>
@@ -51,7 +51,7 @@ export function BudgetDetail() {
               borderRadius={{ base: "none", sm: "xl" }}
             >
               <Heading as="h2" noOfLines={1}>
-                Spt 123
+                {nome}
               </Heading>
               <Text>PIR 62</Text>
 
