@@ -1,11 +1,11 @@
 export interface Projetos {
-  id_projeto: number;
+  id: number;
+  id_projeto_real: number;
   nome_projeto: string;
-  vlr_cpi: string;
-  vlr_spi: string;
-  vlr_cr: string;
+  vlr_cpi: number;
+  vlr_spi: number;
+  vlr_cr: number;
   vlr_orcado: number;
-  vlr_realizado: number;
   tcpi: number;
   prioridade: string;
   complexidade: string;
@@ -17,4 +17,6 @@ export interface Projetos {
   pct: number;
   descricao: string;
   justificativa: string;
+  vlr_cpi_corrigido: number;
+  vlr_spi_corrigido: number;
 }

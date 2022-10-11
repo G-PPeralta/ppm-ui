@@ -1,3 +1,5 @@
+import { useParams } from "react-router-dom";
+
 import {
   Box,
   Flex,
@@ -16,8 +18,11 @@ import { BudgetDetailTable } from "./components/BudgetDetailTable";
 import { TotalTable } from "./components/TotalTable";
 
 import "./budgetDetail.css";
+
 export function BudgetDetail() {
-  const { budgetFilter } = useBudgetDetail();
+  const { id } = useParams();
+
+  const { budgetFilter } = useBudgetDetail(id || null);
 
   return (
     <div>

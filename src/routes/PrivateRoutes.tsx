@@ -4,13 +4,18 @@ import { ActivitiesPrecedents } from "pages/ActivitiesPrecedents";
 import { ActivitiesRegistration } from "pages/ActivitiesRegistration";
 import { ActivitiesSchedule } from "pages/ActivitiesSchedule";
 import { BudgetDetail } from "pages/BudgetDetail";
+import { BudgetDetail2 } from "pages/BudgetDetail2";
 import { Budgets } from "pages/Budgets";
+import { Budgets2 } from "pages/Budgets2";
 import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
 import { GanttPage } from "pages/Gantt";
+import { GráficosEstatisticos } from "pages/GraficosEstatisticos";
 import { Home } from "pages/Home";
 import { Infographics } from "pages/Infographics";
 import { LicoesAprendidasProjetos } from "pages/LicoesAprendidas";
 import { Fornecedores } from "pages/ListaDosFornecedores";
+import { Lookahead } from "pages/Lookahead";
+import { LookaheadDetalhe } from "pages/Lookahead/Detalhe";
 import { NotFound } from "pages/NotFound";
 import { Permissions } from "pages/Permissions";
 import { PermissionsList } from "pages/PermissionsList";
@@ -31,6 +36,7 @@ export function PrivateRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/graficos" element={<GráficosEstatisticos />} />
       <Route path="/projects-registration" element={<ProjectsRegistration />} />
       <Route
         path="/providers-registration"
@@ -54,6 +60,9 @@ export function PrivateRoutes() {
       <Route path="/gantt" element={<GanttPage />} />
       <Route path="/fornecedores" element={<Fornecedores />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
+      <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
+      <Route path="/lookahead" element={<Lookahead />} />
+      <Route path="/lookahead-detalhe/:id" element={<LookaheadDetalhe />} />
       <Route
         path="/infographics/atividade/:id"
         element={<ActivitiesSchedule />}
@@ -69,6 +78,8 @@ export function PrivateRoutes() {
       <Route path="/licoesAprendidas" element={<LicoesAprendidasProjetos />} />
       <Route path="/estatisticas/" element={<Statistics />} />
       <Route path="/estatisticas/cronograma" element={<StatisticsGantt />} />
+      <Route path="/budgets2" element={<Budgets2 />} />
+      <Route path="/budget2/detail/:id" element={<BudgetDetail2 />} />
       <Route path="/priorizacao" element={<Priorizacao />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

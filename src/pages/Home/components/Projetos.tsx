@@ -4,7 +4,6 @@ import { AiOutlineCaretUp } from "react-icons/ai";
 import {
   Box,
   Flex,
-  Stack,
   Text,
   useBreakpointValue,
   useColorModeValue,
@@ -19,6 +18,7 @@ import {
 import { getInfoProjetos } from "services/get/Infograficos";
 
 export default function NaoPrevistoComponent() {
+  const innerWidth = window.innerWidth;
   const [projetos, setProjetos] = useState<any[]>([]);
   // const [trut, setTrue] = useState(false);
   const handleGetProjetos = async () => {
@@ -78,107 +78,116 @@ export default function NaoPrevistoComponent() {
   // ];
 
   return (
-    <Stack spacing="8">
-      <Flex
+    <Flex align="center" justify="center" bg={"#EDF2F7"} flex={4} w={"100%"}>
+      <Box
+        py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
+        px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         w={"100%"}
-        align="center"
-        justify="center"
-        bg={useBreakpointValue({ base: "#EDF2F7", sm: "#EDF2F7" })}
+        bg={"white"}
+        boxShadow={{
+          base: "none",
+          sm: useColorModeValue("md", "md-dark"),
+        }}
+        borderRadius={"xl"}
+        display={"flex"}
+        flexDirection={"column"}
+        alignItems={"center"}
+        flex={1}
+        gap={4}
       >
-        <Box
-          py={{ base: "0", sm: "4" }}
-          px={{ base: "0", sm: "4" }}
-          w={"100%"}
-          bg={useBreakpointValue({ base: "white", sm: "white" })}
-          boxShadow={{
-            base: "none",
-            sm: useColorModeValue("md", "md-dark"),
-          }}
-          borderRadius={{ base: "none", sm: "xl" }}
-        >
-          <Box w={"100%"} minWidth={480}>
-            <Text
-              mb={1}
-              sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
-              color="#000000"
-            >
-              Projetos
-            </Text>
-            <TableContainer overflowY={"scroll"} height={260}>
-              <Table size="sm">
-                <Thead>
-                  <Tr>
-                    <Th>ID</Th>
-                    <Th>Nome do Projeto</Th>
-                    <Th>Orçamento</Th>
-                    <Th>CPI</Th>
-                    <Th>SPI</Th>
-                  </Tr>
-                </Thead>
-                <Tbody
-                  style={{
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                  }}
-                >
-                  {projetos.map((projeto, index) => (
-                    <Tr mt={1} key={index}>
-                      <Th color="gray.400" sx={{ fontSize: 11 }}>
-                        {projeto.id}
-                      </Th>
-                      <Th
-                        color={"#628EFD"}
-                        sx={{ fontSize: 11 }}
-                        // onMouseOver={(event) => {
-                        //   // console.log(projeto.nomeProjeto);
+        <Box w={"100%"}>
+          <Text
+            mb={3}
+            sx={{ fontSize: 18, fontWeight: "bold", alignSelf: "center" }}
+            color="#000000"
+          >
+            Projetos
+          </Text>
+          <TableContainer
+            overflowY={"scroll"}
+            overflowX={innerWidth > 428 ? "hidden" : "scroll"}
+            height={260}
+          >
+            <Table size="sm">
+              <Thead>
+                <Tr>
+                  <Th>ID</Th>
+                  <Th>Nome do Projeto</Th>
+                  <Th>Orçamento</Th>
+                  <Th>CPI</Th>
+                  <Th>SPI</Th>
+                </Tr>
+              </Thead>
+              <Tbody
+                style={{
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {projetos.map((projeto, index) => (
+                  <Tr mt={1} key={index}>
+                    <Th color="gray.400" sx={{ fontSize: 11 }}>
+                      {projeto.id}
+                    </Th>
+                    <Th
+                      color={"#628EFD"}
+                      sx={{ fontSize: 11 }}
+                      // onMouseOver={(event) => {
+                      //   // console.log(projeto.nomeProjeto);
 
-                        //   setTrue(true);
-                        //   return projeto.nome;
-                        // }}
-                        // onMouseOut={() => {
-                        //   setTrue(false);
-                        // }}
-                      >
-                        <Text>{projeto.nome?.substr(0, 18) + "..."}</Text>
-                      </Th>
-                      {/* {trut ? <Text> {projeto.nomeProjeto}</Text> : ''} */}
-                      <Th color="gray.400" sx={{ fontSize: 11 }}>
-                        {projeto.valorTotalPrevisto}
-                      </Th>
-                      <Th>
-                        {data.cpi == "yellow" ? (
-                          <Box
-                            w={5}
-                            h={5}
-                            bg={"#9FA2B4"}
-                            display={"flex"}
-                            flexDirection="column"
-                            alignItems={"center"}
-                            pt={"2px"}
-                            sx={{ borderRadius: "100%" }}
-                          >
-                            <AiOutlineCaretUp color="#ffffff" size={14} />
-                          </Box>
-                        ) : undefined}
-                      </Th>
-                      <Th>
-                        {data.spi == "red" ? (
-                          <Box
-                            w={5}
-                            h={5}
-                            bg={"#9FA2B4"}
-                            display={"flex"}
-                            flexDirection="column"
-                            alignItems={"center"}
-                            pt={"2px"}
-                            sx={{ borderRadius: "100%" }}
-                          >
-                            <AiOutlineCaretUp color="#ffffff" size={14} />
-                          </Box>
-                        ) : undefined}
-                      </Th>
-                      {/* {d.cpi == 'green' ? (
+                      //   setTrue(true);
+                      //   return projeto.nome;
+                      // }}
+                      // onMouseOut={() => {
+                      //   setTrue(false);
+                      // }}
+                    >
+                      <Text>{projeto.nome?.substr(0, 18) + "..."}</Text>
+                    </Th>
+                    {/* {trut ? <Text> {projeto.nomeProjeto}</Text> : ''} */}
+                    <Th color="gray.400" sx={{ fontSize: 11 }}>
+                      <Text>
+                        {projeto.valorTotalPrevisto &&
+                          Intl.NumberFormat("pt-br", {
+                            style: "currency",
+                            currency: "BRL",
+                          }).format(projeto.valorTotalPrevisto)}
+                      </Text>
+                    </Th>
+                    <Th>
+                      {data.cpi == "yellow" ? (
+                        <Box
+                          w={5}
+                          h={5}
+                          bg={"#9FA2B4"}
+                          display={"flex"}
+                          flexDirection="column"
+                          alignItems={"center"}
+                          pt={"2px"}
+                          sx={{ borderRadius: "100%" }}
+                        >
+                          <AiOutlineCaretUp color="#ffffff" size={14} />
+                        </Box>
+                      ) : undefined}
+                    </Th>
+                    <Th>
+                      {data.spi == "red" ? (
+                        <Box
+                          w={5}
+                          h={5}
+                          bg={"#9FA2B4"}
+                          display={"flex"}
+                          flexDirection="column"
+                          alignItems={"center"}
+                          pt={"2px"}
+                          sx={{ borderRadius: "100%" }}
+                        >
+                          <AiOutlineCaretUp color="#ffffff" size={14} />
+                        </Box>
+                      ) : undefined}
+                    </Th>
+                    {/* {d.cpi == 'green' ? (
                           <Box
                             w={5}
                             h={5}
@@ -192,8 +201,8 @@ export default function NaoPrevistoComponent() {
                             <AiOutlineCaretUp color="#ffffff" size={14} />
                           </Box>
                         ) : undefined} */}
-                      {/* <Th> */}
-                      {/* {d.spi == 'red' ? (
+                    {/* <Th> */}
+                    {/* {d.spi == 'red' ? (
                           <Box
                             w={5}
                             h={5}
@@ -207,7 +216,7 @@ export default function NaoPrevistoComponent() {
                             <AiOutlineCaretUp color="#ffffff" size={14} />
                           </Box>
                         ) : undefined} */}
-                      {/* {d.spi == 'blue' ? (
+                    {/* {d.spi == 'blue' ? (
                           <Box
                             w={5}
                             h={5}
@@ -221,15 +230,14 @@ export default function NaoPrevistoComponent() {
                             <AiOutlineCaretUp color="#ffffff" size={14} />
                           </Box>
                         ) : undefined} */}
-                      {/* </Th> */}
-                    </Tr>
-                  ))}
-                </Tbody>
-              </Table>
-            </TableContainer>
-          </Box>
+                    {/* </Th> */}
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </TableContainer>
         </Box>
-      </Flex>
-    </Stack>
+      </Box>
+    </Flex>
   );
 }

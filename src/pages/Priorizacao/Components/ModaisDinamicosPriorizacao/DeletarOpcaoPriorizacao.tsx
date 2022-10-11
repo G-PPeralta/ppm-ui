@@ -4,92 +4,84 @@ import {
   Button,
   Flex,
   FormControl,
-  // FormLabel,
   Modal,
   ModalBody,
-  // ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalOverlay,
   Stack,
   Text,
-  // Textarea,
-  useBreakpointValue,
   useDisclosure,
   IconButton,
+  ModalHeader,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 // import { TextError } from "components/TextError";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { handleCancelar } from "utils/handleCadastro";
 
-// import { useAuth } from "hooks/useAuth";
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
-
-// import { deleteProject } from "services/delete/DeleteProject";
 
 function ModalDeletarOpcaoPriorizacao() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroPriorizacao();
-  // const { user } = useAuth();
-  // const idUser = user?.nome;
-
-  // Pra pegar o id do projeto e depois ser possível deletar
-  // console.log(projeto.projeto);
 
   return (
     <>
       <IconButton
         onClick={onOpen}
         color={"#F40606"}
-        backgroundColor={"white"}
+        fontWeight={"700"}
+        backgroundColor={"transparent"}
         aria-label="Plus sign"
         _hover={{
-          backgroundColor: "white",
-          color: "#F94144",
+          backgroundColor: "#F40606",
+          color: "white",
         }}
+        w={"14px"}
+        h={"18px"}
       >
         <FiTrash size={"13px"} />
       </IconButton>
-      <Modal isOpen={isOpen} onClose={onClose} size="sm">
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
-          {/* <ModalCloseButton color={"white"} /> */}
+          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               e.preventDefault();
               registerForm.handleSubmit(e);
             }}
           >
+            <ModalHeader
+              backgroundColor={"#2E69FD"}
+              borderTopRadius={7}
+              display={"flex"}
+              justifyContent={"center"}
+              color={"white"}
+              fontSize={"14px"}
+              fontWeight={"700"}
+              height={"48px"}
+            >
+              Excluir
+            </ModalHeader>
+
+            <ModalCloseButton color={"white"} />
             <ModalBody mt={3}>
               <FormControl>
                 <Flex direction={"column"} gap={4}>
                   <Stack gap={2}>
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: "column",
-                        md: "row",
-                      })}
-                      gap={5}
-                    >
-                      <Text
-                        fontSize={"17px"}
-                        mb={"1px"}
-                        color={"#010101"}
-                        fontWeight={"700"}
-                      >
-                        Excluir Priorização
-                      </Text>
-                    </Flex>
                     <Flex>
                       <Text
-                        textAlign={"center"}
-                        fontSize={"16px"}
+                        // textAlign={"center"}
+                        fontSize={"24px"}
                         mb={"1px"}
-                        color={" #010101"}
+                        color={"#010101"}
+                        fontWeight={"400"}
                       >
-                        Tem certeza que deseja mover este Benefício para a
+                        Tem certeza que deseja mover essa informação para a
                         Lixeira?
                       </Text>
                     </Flex>
@@ -109,18 +101,26 @@ function ModalDeletarOpcaoPriorizacao() {
                     transition: "all 0.4s",
                     color: "white",
                   }}
+                  height={"56px"}
+                  width={"100px"}
+                  fontSize={"18px"}
+                  fontWeight={"600"}
                 >
                   Cancelar
                 </Button>
                 <Button
-                  background="origem.300"
+                  background="#0047BB"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  // onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",
                   }}
+                  height={"56px"}
+                  width={"185px"}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />

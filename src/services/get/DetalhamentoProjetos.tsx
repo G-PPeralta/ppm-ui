@@ -44,11 +44,11 @@ export async function getInfoFinanceiro(id: string): Promise<{
   return { data, status };
 }
 
-export async function getCPiSPi(): Promise<{
-  data: CpiSpi[];
+export async function getCPiSPi(id: number): Promise<{
+  data: CpiSpi;
   status: number;
 }> {
-  const { data, status } = await api.get(`/detalhamento/cpi-spi/443}`, {
+  const { data, status } = await api.get(`/detalhamento/cpi-spi/${id}}`, {
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },

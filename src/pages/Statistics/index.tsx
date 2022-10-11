@@ -9,10 +9,8 @@ import Sidebar from "components/SideBar";
 
 import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
 
-// import ModalCadastrarSonda from "./components/ModalCadastrarSonda";
 import ModalCadastroCronograma from "./components/ModalCadastroCronograma";
 import ModalCadastroOperacao from "./components/ModalCadastroOperação";
-// import ModalCadastroPoco from "./components/ModalCadastroPoco";
 import { StatisticsTable } from "./components/StatisticsTable";
 
 function Statistics() {
@@ -26,27 +24,12 @@ function Statistics() {
     const newData: StatisticsTableData[] = [];
     payload.forEach((s: { id_sonda: number; sonda: string; pocos: any[] }) =>
       s.pocos.forEach((p) => {
-        const hrs_reais = p.atividades.map((e: any) => Number(e.hrs_reais));
-        const med =
-          hrs_reais.reduce((a: any, b: any) => a + b, 0) / hrs_reais.length;
-        const dp = Math.sqrt(
-          hrs_reais
-            .map((x: any) => Math.pow(x - med, 2))
-            .reduce((a: any, b: any) => a + b) / hrs_reais.length
-        );
-        // TODO use deve ser p/ cada atividade
-        const use = ["max", "min", "med", "dp"][Math.floor(Math.random() * 4)];
         newData.push({
           sonda: s.sonda,
           id_sonda: s.id_sonda,
           poco: p.poco,
           id_poco: p.id_poco,
           atividades: p.atividades,
-          max: Math.max(...hrs_reais),
-          min: Math.min(...hrs_reais),
-          med: Math.floor(med),
-          dp: Math.floor(dp),
-          use,
         });
       })
     );
@@ -55,10 +38,11 @@ function Statistics() {
 
   const handleGetAllData = async () => {
     const { data } = await getOperacoesEstatisticas();
-    if (!data) return;
+    // console.log("data", data);
     const newData = convertReq(data);
     setAllData(newData);
     setFilter(newData);
+    setLoading(false);
   };
 
   const filterData = (text: string) => {
@@ -81,14 +65,15 @@ function Statistics() {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    handleGetAllData();
   }, []);
 
   useEffect(() => {
     handleGetAllData();
-  }, []);
+  }, [refresh]);
+
+  // console.log("filter", filter);
+  // console.log("allData", allData);
 
   return (
     <>
@@ -167,7 +152,7 @@ function Statistics() {
               </Flex>
 
               <Flex flex={1}>
-                {filter && <StatisticsTable data={filter} />}
+                <StatisticsTable data={filter} />
               </Flex>
             </Box>
           </Flex>

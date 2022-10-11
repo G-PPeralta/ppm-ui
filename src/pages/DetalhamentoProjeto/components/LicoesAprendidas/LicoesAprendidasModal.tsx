@@ -45,6 +45,7 @@ function LicoesAprendidasModal({
   const [openModalRegister, setOpenModalRegister] = useState(false);
   const [categoriaId, setCategoriaId] = useState("");
   const [data, setData] = useState("");
+
   const [filteredTable, setFilteredTable] = useState([]);
 
   function handleEditLicao(licao: LicoesAprendidas): void {
@@ -74,7 +75,7 @@ function LicoesAprendidasModal({
     }
   }
 
-  // console.log(data);
+  // console.log(data.length);
   // console.log(licoes);
   // console.log(
   //   licoes.filter(
@@ -83,17 +84,29 @@ function LicoesAprendidasModal({
   //   )
   // );
 
-  function handleFilter(categoriaId: string, data: string) {
-    if (categoriaId) {
+  function handleFilter(search: string, data: string) {
+    // if (categoriaId) {
+    //   const filtered = licoes.filter(
+    //     (lic: any) => lic.id_categoria == categoriaId
+    //   );
+    //   filtered.length == 0 &&
+    //     toast.error(
+    //       "Nenhum dado encontrado com o presente filtro de categoria"
+    //     );
+    //   return setFilteredTable(filtered);
+    // }
+
+    if (search) {
       const filtered = licoes.filter(
-        (lic: any) => lic.id_categoria == categoriaId
+        (lic: any) =>
+          lic.txt_licao_aprendida.includes(search) ||
+          lic.txt_acao.includes(search)
       );
       filtered.length == 0 &&
-        toast.error(
-          "Nenhum dado encontrado com o presente filtro de categoria"
-        );
+        toast.error("Nenhum dado encontrado com o presente filtro de data");
       return setFilteredTable(filtered);
     }
+
     if (data) {
       const filtered = licoes.filter((lic: any) =>
         lic.dat_usu_create.includes(data)
@@ -116,12 +129,12 @@ function LicoesAprendidasModal({
           color: "white",
           transition: "all 0.4s",
         }}
-        px={6}
-        py={9}
+        p={4}
         borderTopRadius={"0px"}
         borderBottomRadius={"6px"}
         fontSize={"16px"}
         fontWeight={"700"}
+        flex={1}
       >
         Lições Aprendidas
       </Button>
@@ -131,11 +144,13 @@ function LicoesAprendidasModal({
         <ModalContent>
           <ModalHeader
             backgroundColor={"#2E69FD"}
-            borderTopRadius={7}
+            borderTopRadius={"8px"}
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            h={"48px"}
           >
             Lições Aprendidas
           </ModalHeader>
@@ -154,14 +169,8 @@ function LicoesAprendidasModal({
                 px={9}
                 py={2}
                 display={"flex"}
-                justifyContent={"space-between"}
               >
-                <Flex
-                  display={"flex"}
-                  justifyContent={"space-between"}
-                  align={"flex-end"}
-                  gap={6}
-                >
+                <Flex ml={"-11px"} gap={6}>
                   <Flex>
                     <FormControl>
                       <FormLabel htmlFor="categoria">
@@ -175,6 +184,7 @@ function LicoesAprendidasModal({
                         </Text>
                       </FormLabel>
                       <Input
+                        maxLength={50}
                         borderRadius={"8px"}
                         border={"1px solid #A7A7A7"}
                         mt={"-9px"}
@@ -211,13 +221,15 @@ function LicoesAprendidasModal({
                       <Input
                         // placeholder="dd/mm/aaaa"
                         borderRadius={"8px"}
+                        max="9999-12-31"
+                        maxLength={1}
                         border={"1px solid #A7A7A7"}
                         mt={"-9px"}
-                        width={"120px"}
+                        width={"156px"}
                         height={"56px"}
                         color="#949494"
                         id="data"
-                        type="date"
+                        type="Date"
                         name="data"
                         // value={data}
                         onChange={(event) => setData(event.target.value)}
@@ -229,7 +241,7 @@ function LicoesAprendidasModal({
                   /> */}
                   </Flex>
 
-                  <Flex display={"flex"}>
+                  <Flex>
                     <Button
                       mr={"25px"}
                       borderRadius={"8px"}
@@ -253,6 +265,7 @@ function LicoesAprendidasModal({
                       width={"94px"}
                       height={"56px"}
                       fontWeight={"700"}
+                      alignSelf={"end"}
                     >
                       Filtrar
                       <Icon
@@ -262,13 +275,14 @@ function LicoesAprendidasModal({
                         ml={1}
                       />
                     </Button>
-                    <Flex display={"flex"}>
+                    <Flex>
                       <Button
                         borderRadius={"8px"}
                         type="button"
                         background="origem.500"
                         variant="primary"
                         color="white"
+                        alignSelf={"end"}
                         // border={"2px"}
                         // h={useBreakpointValue({ base: "100%", md: "120%" })}
                         // float={"right"}
@@ -278,7 +292,7 @@ function LicoesAprendidasModal({
                           transition: "all 0.4s",
                           color: "white",
                         }}
-                        width={"208px"}
+                        width={"200px"}
                         height={"56px"}
                       >
                         Adicionar

@@ -100,7 +100,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
             w="100%"
             bg={"#f5f5f5"}
             px={5}
-            py={2}
+            py={4}
             borderRadius={"60px"}
             mb={2}
           >
@@ -133,14 +133,14 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                       fontSize={"12px"}
                       color={"#949494"}
                     >
-                      ÁREA
+                      OPERAÇÃO
                     </Text>
                   </Flex>
                   <SelectFiltragem
                     registerForm={registerForm}
-                    propName={`atividades[${index}].area_id`}
-                    options={optionsAreaAtuacao}
-                    value={getValue(optionsAreaAtuacao, index, "area_id")}
+                    propName={`atividades[${index}].operacao_id`}
+                    options={optionsOperacao}
+                    value={getValue(optionsOperacao, index, "operacao_id")}
                   />
                 </Flex>
 
@@ -152,14 +152,14 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                       fontSize={"12px"}
                       color={"#949494"}
                     >
-                      OPERAÇÃO
+                      ÁREA
                     </Text>
                   </Flex>
                   <SelectFiltragem
                     registerForm={registerForm}
-                    propName={`atividades[${index}].operacao_id`}
-                    options={optionsOperacao}
-                    value={getValue(optionsOperacao, index, "operacao_id")}
+                    propName={`atividades[${index}].area_id`}
+                    options={optionsAreaAtuacao}
+                    value={getValue(optionsAreaAtuacao, index, "area_id")}
                   />
                 </Flex>
 
@@ -216,7 +216,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                       );
                     }}
                   >
-                    <NumberInputField bg={"#fff"} />
+                    <NumberInputField bg={"#fff"} h={"56px"} />
                   </NumberInput>
                 </Flex>
                 <Flex direction={"column"} flex={1}>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { useFormik } from "formik";
+import { Ranking } from "interfaces/Ranking";
 import { cadastroNovaPriorizacaoSchema } from "validations/ModaisRanking";
 
 import { useToast } from "contexts/Toast";
@@ -10,9 +11,10 @@ import { postProject } from "services/post/Priorizacao";
 
 import { useAuth } from "./useAuth";
 
-export function useCadastroPriorizacao() {
+export function useCadastroPriorizacao(id_projeto: number = 0) {
   const { user } = useAuth();
   const { toast } = useToast();
+
   const [loading, setLoading] = useState(false);
   const [listaBeneficios, setListaBeneficios] = useState<any[]>([]);
   const [listaOperacao, setListaOperacao] = useState<any[]>([]);
@@ -20,10 +22,12 @@ export function useCadastroPriorizacao() {
   const [listaComplexidade, setComplexidade] = useState<any[]>([]);
   const [listaPrioridade, setPrioridade] = useState<any[]>([]);
   const [listaRegulatorio, setRegulatorio] = useState<any[]>([]);
+  const [ranking, setRanking] = useState<Ranking[]>();
 
   const reqGet = async () => {
     const priorizacao = await getProjetosRanking();
-    // console.log("dados prior", priorizacao);
+    // const data = await getRanking(id_projeto);
+    setRanking([]);
 
     const beneficiosSorted = priorizacao.data.Benefício.sort((a: any, b: any) =>
       a.nom_opcao.localeCompare(b.nom_opcao)
@@ -144,6 +148,7 @@ export function useCadastroPriorizacao() {
     listaComplexidade,
     listaPrioridade,
     listaRegulatorio,
+    ranking,
   };
 }
 // Como pegar os valores

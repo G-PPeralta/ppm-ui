@@ -9,7 +9,7 @@ import {
   Select,
   Modal,
   ModalBody,
-  // ModalCloseButton,
+  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -29,11 +29,11 @@ import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
-type id = {
+type PropsType = {
   projeto: number;
 };
 
-function ModalCadastrarPriorizacao(projeto: id) {
+function ModalCadastrarPriorizacao(projeto: PropsType) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     registerForm,
@@ -44,25 +44,23 @@ function ModalCadastrarPriorizacao(projeto: id) {
     listaComplexidade,
     listaPrioridade,
     listaRegulatorio,
-  } = useCadastroPriorizacao();
-
-  // console.log("registerform", registerForm.values);
-
-  // console.log("isvalid", registerForm.isValid);
+    ranking,
+  } = useCadastroPriorizacao(projeto.projeto);
 
   // useEffect(() => {
   //   registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
   // }, []);
 
   // Pegar id do projeto
-  // console.log("id-cadastrar", projeto.projeto);
+
+  useEffect(() => {
+    const valorRanking = ranking && ranking?.length > 0 ? ranking[0].id : 0;
+    registerForm.setFieldValue("beneficio.opcao_id", valorRanking);
+  }, [ranking]);
 
   useEffect(() => {
     registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
-    registerForm.setFieldValue(
-      "beneficio.id_ranking",
-      Number(listaBeneficios[0]?.id)
-    );
+
     registerForm.setFieldValue(
       "regulatorio.id_ranking",
       Number(listaRegulatorio[0]?.id)
@@ -90,12 +88,14 @@ function ModalCadastrarPriorizacao(projeto: id) {
       <IconButton
         onClick={onOpen}
         color={"origem.500"}
-        backgroundColor={"white"}
+        backgroundColor={"transparent"}
         aria-label="Plus sign"
         _hover={{
           backgroundColor: "origem.500",
           color: "white",
         }}
+        fontSize={"18px"}
+        fontWeight={"700"}
       >
         <IoIosPodium />
       </IconButton>
@@ -104,15 +104,15 @@ function ModalCadastrarPriorizacao(projeto: id) {
         <ModalContent>
           <ModalHeader
             backgroundColor={"#2E69FD"}
-            borderTopRadius={7}
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Priorização
           </ModalHeader>
-          {/* <ModalCloseButton color={"white"} /> */}
+          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               // e.preventDefault();
@@ -134,11 +134,19 @@ function ModalCadastrarPriorizacao(projeto: id) {
                         <FormLabel
                           htmlFor="beneficio.opcao_id"
                           fontSize={"12px"}
+                          fontWeight={"700"}
+                          color={"#A7A7A7"}
                           mb={"1px"}
                         >
                           BENEFÍCIO
                         </FormLabel>
                         <Select
+                          // mt={"-9px"}
+                          h={"56px"}
+                          w={"530px"}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="beneficio.opcao_id"
@@ -152,7 +160,11 @@ function ModalCadastrarPriorizacao(projeto: id) {
                             </TextError>
                           )} */}
                           {listaBeneficios.map((bene: any, index: any) => (
-                            <option value={+bene.opcao_id} key={index}>
+                            <option
+                              color={"#2D2926"}
+                              value={+bene.opcao_id}
+                              key={index}
+                            >
                               {bene.nom_opcao}
                             </option>
                           ))}
@@ -172,11 +184,18 @@ function ModalCadastrarPriorizacao(projeto: id) {
                         <FormLabel
                           htmlFor="regulatorio.opcao_id"
                           fontSize={"12px"}
+                          fontWeight={"700"}
+                          color={"#A7A7A7"}
                           mb={"1px"}
                         >
                           REGULATÓRIO
                         </FormLabel>
                         <Select
+                          h={"56px"}
+                          w={"530px"}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="regulatorio.opcao_id"
@@ -211,11 +230,18 @@ function ModalCadastrarPriorizacao(projeto: id) {
                         <FormLabel
                           htmlFor="operacao.opcao_id"
                           fontSize={"12px"}
+                          fontWeight={"700"}
+                          color={"#A7A7A7"}
                           mb={"1px"}
                         >
                           OPERAÇÃO
                         </FormLabel>
                         <Select
+                          h={"56px"}
+                          w={"530px"}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="operacao.opcao_id"
@@ -249,11 +275,18 @@ function ModalCadastrarPriorizacao(projeto: id) {
                         <FormLabel
                           htmlFor="prioridade.opcao_id"
                           fontSize={"12px"}
+                          fontWeight={"700"}
+                          color={"#A7A7A7"}
                           mb={"1px"}
                         >
                           PRIORIDADE
                         </FormLabel>
                         <Select
+                          h={"56px"}
+                          w={"530px"}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="prioridade.opcao_id"
@@ -287,11 +320,18 @@ function ModalCadastrarPriorizacao(projeto: id) {
                         <FormLabel
                           htmlFor="complexidade.opcao_id"
                           fontSize={"12px"}
+                          fontWeight={"700"}
+                          color={"#A7A7A7"}
                           mb={"1px"}
                         >
                           COMPLEXIDADE
                         </FormLabel>
                         <Select
+                          h={"56px"}
+                          w={"530px"}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="complexidade.opcao_id"
@@ -325,11 +365,18 @@ function ModalCadastrarPriorizacao(projeto: id) {
                         <FormLabel
                           htmlFor="estrategia.opcao_id"
                           fontSize={"12px"}
+                          fontWeight={"700"}
+                          color={"#A7A7A7"}
                           mb={"1px"}
                         >
                           ESTRATÉGIA PARA NEGÓCIO
                         </FormLabel>
                         <Select
+                          h={"56px"}
+                          w={"530px"}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="estrategia.opcao_id"
@@ -367,10 +414,14 @@ function ModalCadastrarPriorizacao(projeto: id) {
                     transition: "all 0.4s",
                     color: "white",
                   }}
+                  w={"208px"}
+                  h={"56px"}
                 >
                   Cancelar
                 </Button>
                 <Button
+                  w={"208px"}
+                  h={"56px"}
                   disabled={!registerForm.isValid}
                   background="origem.300"
                   variant="primary"

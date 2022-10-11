@@ -6,15 +6,14 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  // ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
   Button,
   FormControl,
-  FormLabel,
   useBreakpointValue,
   Input,
+  Text,
 } from "@chakra-ui/react";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
@@ -34,16 +33,19 @@ function ModalCadastrarSonda() {
   return (
     <>
       <Button
-        variant="outline"
+        h={"56px"}
+        borderRadius={"10px"}
+        background={"white"}
         border={"2px solid"}
-        borderColor={"origem.500"}
-        textColor={"origem.500"}
+        color={"origem.500"}
         _hover={{
-          borderColor: "origem.600",
-          backgroundColor: "origem.500",
-          textColor: "white",
+          border: "2px solid",
+          borderColor: "origem.500",
+          background: "origem.500",
           transition: "all 0.4s",
+          color: "white",
         }}
+        textColor={"origem.500"}
         onClick={onOpen}
       >
         Sonda
@@ -61,7 +63,6 @@ function ModalCadastrarSonda() {
           >
             Cadastrar SPT
           </ModalHeader>
-          {/* <ModalCloseButton color={"white"} /> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -83,11 +84,18 @@ function ModalCadastrarSonda() {
                     <FormControl w={"275px"}>
                       <Flex gap={1}>
                         <RequiredField />
-                        <FormLabel htmlFor="nome">NOME</FormLabel>
+                        <Text
+                          fontWeight={"bold"}
+                          fontSize={"12px"}
+                          color={"#949494"}
+                        >
+                          SPT
+                        </Text>
                       </Flex>
                       <Input
+                        h={"56px"}
                         isRequired
-                        placeholder="Nome da Sonda"
+                        placeholder="Nome do SPT"
                         id="nome"
                         type="text"
                         name="nome"
@@ -107,39 +115,6 @@ function ModalCadastrarSonda() {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              {/* <Flex gap={2}>
-                <Button
-                  variant="ghost"
-                  color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
-                  _hover={{
-                    background: "red.500",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  disabled={!registerForm.isValid || !registerForm.values.nome}
-                  background="origem.300"
-                  variant="primary"
-                  color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                  }}
-                >
-                  {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Cadastrar</Text>
-                    </>
-                  )}
-                </Button>
-              </Flex> */}
               <Flex gap={2}>
                 <BotaoVermelhoGhost
                   text={"Cancelar"}

@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 
 import { Flex } from "@chakra-ui/react";
 import {
+  Edit,
   GanttComponent,
   Inject,
-  Edit,
+  Selection,
   Toolbar,
 } from "@syncfusion/ej2-react-gantt";
 import { Ring } from "@uiball/loaders";
@@ -15,26 +16,21 @@ type ganttOptionsProps = {
   options?: {
     toolbarOptions?: string[];
     showGantt?: boolean;
-    handleEdit: Function;
+  };
+  edit: {
+    onOpen: Function;
+    // handleEdit: Function;
+    setEditOp: any;
   };
 };
 
-export function Gantt({ data, options }: ganttOptionsProps) {
+export function Gantt({ data, options, edit }: ganttOptionsProps) {
   // const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);
   const [loading, setLoading] = useState(true);
   const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, [ganttData]);
-
-  useEffect(() => {
-    setGanttData(data);
-  }, [data]);
-
   const queryTaskbarInfo = (args: any) => {
+    // console.log(":::args.data.taskData", args.data.taskData);
     let color;
     const { Duration, med, dp } = args.data.taskData;
 
@@ -70,20 +66,41 @@ export function Gantt({ data, options }: ganttOptionsProps) {
     // leftLabel: "TaskID",
     // taskLabel: "${Progress}%",
     // eslint-disable-next-line no-template-curly-in-string
-    rightLabel: "${TaskName}",
+    rightLabel:
+      // eslint-disable-next-line no-template-curly-in-string
+      "Med: ${taskData.med}h - Min: ${taskData.min}h - Max: ${taskData.max}h - DP: ${taskData.dp}h",
   };
 
   // const handleShowGantt = () => (options?.showGantt ? "Default" : "Grid");
 
-  const endEdit = (args: any) => {
-    options?.handleEdit(args.data.taskData);
-  };
+  // const endEdit = (args: any) => {
+  //   options?.handleEdit(args.data.taskData);
+  // };
 
   const cellEdit = (args: any) => {
-    // console.log(">>> args.columnName ", args.columnName);
-    if (args.columnName !== "Progress") {
-      args.cancel = true;
-    }
+    // if (args.columnName !== "Progress") {
+    // if (["TaskID", "TaskName"].includes(args.columnName)) {
+    //   args.cancel = true;
+    // }
+    // console.log(">>>>", args.rowData);
+    edit?.setEditOp({
+      // id_sonda: number;
+      // id_poco: number;
+      id_atividade: args.rowData.TaskID,
+      nome_atividade: args.rowData.TaskName,
+
+      inicio_realizado: new Date(args.rowData.StartDate),
+      inicio_planejado: new Date(args.rowData.BaselineStartDate),
+      hrs_totais: args.rowData.BaselineDuration,
+      hrs_reais: args.rowData.Duration,
+
+      fim_realizado: new Date(args.rowData.EndDate),
+      fim_planejado: new Date(args.rowData.BaselineEndDate),
+      pct_real: args.rowData.Progress,
+      // id_responsavel: number;
+    });
+    edit?.onOpen();
+    args.cancel = true;
   };
 
   useEffect(() => {
@@ -109,9 +126,10 @@ export function Gantt({ data, options }: ganttOptionsProps) {
             endDate: "EndDate",
             baselineStartDate: "BaselineStartDate",
             baselineEndDate: "BaselineEndDate",
+            // work: "Work",
             duration: "Duration",
             progress: "Progress",
-            child: "subtasks",
+            // child: "subtasks",
             // parentID: "ParentId",
           }}
           queryTaskbarInfo={queryTaskbarInfo}
@@ -120,6 +138,7 @@ export function Gantt({ data, options }: ganttOptionsProps) {
           renderBaseline={true}
           baselineColor="red"
           durationUnit={"Hour"}
+          // workUnit={"Hour"}
           dayWorkingTime={[{ from: 0, to: 24 }]}
           timezone="UTC"
           toolbar={options?.toolbarOptions || []}
@@ -128,13 +147,19 @@ export function Gantt({ data, options }: ganttOptionsProps) {
             mode: "Auto",
             allowTaskbarEditing: false,
           }}
+          // endEdit={endEdit}
+          cellEdit={cellEdit}
+          allowSelection={true}
+          selectionSettings={{
+            mode: "Cell",
+            type: "Single",
+            enableToggle: true,
+          }}
           splitterSettings={{
             // view: handleShowGantt(),
             // columnIndex: 5,
             position: "80%",
           }}
-          endEdit={endEdit}
-          cellEdit={cellEdit}
           height={"100vh"}
           columns={[
             // {
@@ -146,6 +171,7 @@ export function Gantt({ data, options }: ganttOptionsProps) {
             {
               field: "TaskID",
               headerText: "ID",
+              allowEditing: false,
             },
             {
               field: "TaskName",
@@ -153,6 +179,7 @@ export function Gantt({ data, options }: ganttOptionsProps) {
               headerTextAlign: "Center",
               textAlign: "Center",
               type: "string",
+              allowEditing: false,
             },
             {
               field: "StartDate",
@@ -191,19 +218,23 @@ export function Gantt({ data, options }: ganttOptionsProps) {
               headerText: "Duração real",
               headerTextAlign: "Center",
               textAlign: "Center",
-              format: "n",
+              type: "number",
+              format: "N",
             },
             {
               field: "BaselineDuration",
               headerText: "Duração planejada",
               headerTextAlign: "Center",
               textAlign: "Center",
+              type: "number",
+              format: "N",
             },
             {
               field: "Progress",
               headerText: "Progresso (%)",
               headerTextAlign: "Center",
               textAlign: "Center",
+              type: "number",
               format: "n",
             },
             // {
@@ -214,7 +245,7 @@ export function Gantt({ data, options }: ganttOptionsProps) {
             // },
           ]}
         >
-          <Inject services={[Edit, Toolbar]} />
+          <Inject services={[Edit, Selection, Toolbar]} />
         </GanttComponent>
       ) : (
         <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>

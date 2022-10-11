@@ -17,14 +17,32 @@ import {
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
+import { ICardInfoProjeto } from "interfaces/DetalhamentoProjetos";
 
 import { patchProjeto } from "services/update/Projeto";
 
-function BotaoDescricaoEJustificativa() {
+interface DescricaoEJustificativaProps {
+  infoProjeto: ICardInfoProjeto;
+  setRender: () => void;
+}
+
+function BotaoDescricaoEJustificativa({
+  infoProjeto,
+  setRender,
+}: DescricaoEJustificativaProps) {
   const { id } = useParams();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [descricao, setDescricao] = useState("");
-  const [justificativa, setJustificativa] = useState("");
+  const [descricao, setDescricao] = useState(infoProjeto?.descricao);
+  const [justificativa, setJustificativa] = useState(
+    infoProjeto?.justificativa
+  );
+
+  const handleCancelar = () => {
+    setDescricao("");
+    setJustificativa("");
+    onClose();
+  };
+
   return (
     <>
       <Button
@@ -36,13 +54,13 @@ function BotaoDescricaoEJustificativa() {
           color: "white",
           transition: "all 0.4s",
         }}
-        px={6}
-        py={9}
+        p={4}
         borderTopRadius={"6px"}
         borderBottomRadius={"0px"}
         fontSize={"16px"}
         fontWeight={"700"}
         flexWrap={"wrap"}
+        flex={1}
       >
         Descrição e Justificativa
       </Button>
@@ -78,6 +96,7 @@ function BotaoDescricaoEJustificativa() {
                   JUSTIFICATIVA
                 </FormLabel>
                 <Textarea
+                  maxLength={255}
                   mt={"-9px"}
                   fontSize={"14px"}
                   color={"#949494"}
@@ -121,6 +140,7 @@ function BotaoDescricaoEJustificativa() {
                   DESCRIÇÃO
                 </FormLabel>
                 <Textarea
+                  maxLength={255}
                   mt={"-9px"}
                   fontSize={"14px"}
                   color={"#949494"}
@@ -142,40 +162,46 @@ function BotaoDescricaoEJustificativa() {
             alignContent={"center"}
             alignItems={"center"}
           >
-            <Flex gap={16} align={"center"}>
+            <Flex gap={2} align={"center"}>
               <Button
                 // background="origem.300"
                 variant="primary"
-                color="#F40606"
+                color="red.500"
+                onClick={handleCancelar}
+                h={"56px"}
+                w={"206px"}
+                borderRadius={"10px"}
+                background={"white"}
                 _hover={{
-                  background: "red.500",
+                  background: "red.600",
                   transition: "all 0.4s",
                   color: "white",
                 }}
-                onClick={onClose}
-                width={"76px"}
-                height={"20px"}
                 fontSize={"18px"}
-                fontWeight={"600"}
+                fontWeight={"700"}
               >
                 Cancelar
               </Button>
               <Button
+                h={"56px"}
+                w={"206px"}
+                borderRadius={"10px"}
+                background={"origem.300"}
                 variant="primary"
                 color="white"
-                _hover={{
-                  background: "origem.500",
-                  transition: "all 0.4s",
-                }}
                 onClick={async () => {
                   await patchProjeto(Number(id), { descricao, justificativa });
                   setDescricao("");
                   setJustificativa("");
+                  setRender();
                   onClose();
                 }}
-                width={"206px"}
-                height={"55px"}
-                bg={"#0047BB"}
+                _hover={{
+                  background: "origem.500",
+                  transition: "all 0.4s",
+                }}
+                fontSize={"18px"}
+                fontWeight={"700"}
               >
                 Salvar
               </Button>
