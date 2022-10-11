@@ -77,6 +77,7 @@ export function MobileNav({
     reports: "Relatórios",
     graficos: "Gráficos Estatísticos",
     priorizacao: "Priorização",
+    "financeiro-projetos": "Financeiro por Projetos",
   };
 
   // const goNavigate = async (index: number) => {
@@ -145,7 +146,8 @@ export function MobileNav({
                   // onClick={() => goNavigate(index)}
                   ml={2}
                   mr={2}
-                  fontSize={"20px"}
+                  fontSize={"16px"}
+                  color={"origem.500"}
                   fontWeight={"600"}
                 >
                   {item}
