@@ -97,7 +97,7 @@ export default function NaoPrevistoComponent() {
       >
         <Box w={"100%"}>
           <Text
-            mb={1}
+            mb={3}
             sx={{ fontSize: 18, fontWeight: "bold", alignSelf: "center" }}
             color="#000000"
           >
