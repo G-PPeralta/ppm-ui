@@ -146,7 +146,6 @@ function CadastroTarefasModal({
                   DATA
                 </FormLabel>
                 <Input
-                  // placeholder="dd/mm/aaaa"
                   fontSize={"14px"}
                   max="9999-12-31"
                   maxLength={1}
