@@ -9,7 +9,6 @@ import {
   useColorModeValue,
   Text,
   FormControl,
-  FormLabel,
   Select,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
@@ -119,10 +118,17 @@ export function LookaheadDetalhe() {
                       {id && <ModalAddAtividade id={+id} />}
                     </FormControl>
                     <FormControl marginLeft="16px">
-                      <FormLabel htmlFor="pole">SEMANA</FormLabel>
+                      <Text
+                        fontWeight={"bold"}
+                        fontSize={"12px"}
+                        color={"#949494"}
+                      >
+                        SEMANA
+                      </Text>
                       <Select
                         id="poloId"
                         name="pole"
+                        color={"#949494"}
                         width={250}
                         marginRight="15px"
                         onChange={(e) => changeWeek(e.target.value)}
@@ -141,7 +147,9 @@ export function LookaheadDetalhe() {
                 </Flex>
 
                 <Flex direction="column">
-                  <TabelaAtividades semana={semana} data={atividade} />
+                  {atividade && (
+                    <TabelaAtividades semana={semana} data={atividade} />
+                  )}
                   {atividade ? (
                     <TabelaFerramentas semana={semana} data={atividade} />
                   ) : (
