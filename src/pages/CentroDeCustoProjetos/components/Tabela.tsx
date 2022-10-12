@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { FiTrash } from "react-icons/fi";
+import { MdModeEdit } from "react-icons/md";
 
 import {
   Flex,
+  IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -102,8 +105,33 @@ function Tabela({ data }: Props) {
               <Td textAlign={"center"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.descricaoDoServico}</Text>
               </Td>
-              <Td textAlign={"start"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.textoDoPedido}</Text>
+              <Td textAlign={"center"} fontWeight={"semibold"}>
+                <Flex gap={2} align={"center"} justify={"center"}>
+                  <IconButton
+                    aria-label="Botão de Editar"
+                    icon={<MdModeEdit />}
+                    borderRadius={"10px"}
+                    background={"transparent"}
+                    color={"origem.500"}
+                    _hover={{
+                      background: "origem.500",
+                      transition: "all 0.4s",
+                      color: "white",
+                    }}
+                  />
+                  <IconButton
+                    aria-label="Botão de Editar"
+                    icon={<FiTrash />}
+                    borderRadius={"10px"}
+                    background={"transparent"}
+                    color={"red.500"}
+                    _hover={{
+                      background: "red.500",
+                      transition: "all 0.4s",
+                      color: "white",
+                    }}
+                  />
+                </Flex>
               </Td>
             </Tr>
           ))

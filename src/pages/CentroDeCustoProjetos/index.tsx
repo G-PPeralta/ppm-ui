@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { BsPlus } from "react-icons/bs";
 import { IoIosArrowBack } from "react-icons/io";
-import { useLocation } from "react-router-dom";
 
 import { Box, Button, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
@@ -13,12 +12,45 @@ import { useFinanceiroProjetos } from "hooks/useFinanceiroProjetos";
 import Tabela from "./components/Tabela";
 
 export function CentroDeCustoProjetos() {
-  const { state } = useLocation();
+  const mock = {
+    idProjeto: 1, // id do projeto pai
+    nomeProjeto: "Carteira de Projetos", // Nome do projeto pai
+    elementoPep: "OGAL.P0029.FS", // Esse elemento Pep é o que está no pai
+    centroDeCusto: [
+      {
+        idCusto: 1,
+        prestadorDeServico: "Prestador de Serviço",
+        classeDoServico: "Classe do Serviço",
+        dataPagamento: "01/01/2021",
+        previsto: 10000.4,
+        realizado: 10000.4,
+        descricaoDoServico: "Descrição do Serviço",
+      },
+      {
+        idCusto: 2,
+        prestadorDeServico: "Prestador de Serviço",
+        classeDoServico: "Classe do Serviço",
+        dataPagamento: "01/01/2021",
+        previsto: 10000.4,
+        realizado: 10000.4,
+        descricaoDoServico: "Descrição do Serviço",
+      },
+      {
+        idCusto: 3,
+        prestadorDeServico: "Prestador de Serviço",
+        classeDoServico: "Classe do Serviço",
+        dataPagamento: "01/01/2021",
+        previsto: 10000.4,
+        realizado: 10000.4,
+        descricaoDoServico: "Descrição do Serviço",
+      },
+    ],
+  };
   const { loading } = useFinanceiroProjetos();
-  const [data, setData] = useState<any>(state);
+  const [data, setData] = useState<any>(mock);
 
   const handleGetAllData = async () => {
-    setData(state);
+    setData(mock);
   };
 
   useEffect(() => {
@@ -95,7 +127,7 @@ export function CentroDeCustoProjetos() {
                 </Flex>
               </Flex>
 
-              <Tabela data={data.custoRealizado} />
+              <Tabela data={data.centroDeCusto} />
             </Box>
           </Flex>
         ) : (

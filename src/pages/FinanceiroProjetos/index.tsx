@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { MdCloudUpload } from "react-icons/md";
+// import { MdCloudUpload } from "react-icons/md";
 
 import { Box, Button, Flex, Heading, Input, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
@@ -22,42 +22,23 @@ export function FinanceiroProjetos() {
   const mockData = [
     {
       idProjeto: 1,
-      projeto: "Carteira de Projeto",
+      projeto: "Carteira de Intervenções",
       elementoPep: "OGAL.P0029.FS",
       denominacaoDeObjeto: "40. PAL- Automação dos poços IeA",
       mes: "06",
       textoDoPedido: 'Tê reto WPB DN8x8x8" sch 40',
       totalPrevisto: 30000.4,
       totalRealizado: 30000.4,
-      custoRealizado: [
-        {
-          idCusto: 1,
-          prestadorDeServico: "Prestador de Serviço",
-          classeDoServico: "Classe do Serviço",
-          dataPagamento: "01/01/2021",
-          previsto: 10000.4,
-          realizado: 10000.4,
-          descricaoDoServico: "Descrição do Serviço",
-        },
-        {
-          idCusto: 2,
-          prestadorDeServico: "Prestador de Serviço",
-          classeDoServico: "Classe do Serviço",
-          dataPagamento: "01/01/2021",
-          previsto: 10000,
-          realizado: 10000,
-          descricaoDoServico: "Descrição do Serviço",
-        },
-        {
-          idCusto: 3,
-          prestadorDeServico: "Prestador de Serviço",
-          classeDoServico: "Classe do Serviço",
-          dataPagamento: "01/01/2021",
-          previsto: 10000,
-          realizado: 10000,
-          descricaoDoServico: "Descrição do Serviço",
-        },
-      ],
+    },
+    {
+      idProjeto: 2,
+      projeto: "Carteira de Projeto",
+      elementoPep: "OGAL.P0029.FS",
+      denominacaoDeObjeto: "40. PAL- Automação dos poços IeA",
+      mes: "06",
+      textoDoPedido: 'Tê reto WPB DN8x8x8" sch 40',
+      totalPrevisto: 50000.2,
+      totalRealizado: 50000.2,
     },
   ];
 
@@ -118,7 +99,7 @@ export function FinanceiroProjetos() {
                 <Heading as="h3" size="md" textAlign={"center"}>
                   Financeiro
                 </Heading>
-                <Button
+                {/* <Button
                   h={"56px"}
                   borderRadius={"10px"}
                   background={"white"}
@@ -134,7 +115,7 @@ export function FinanceiroProjetos() {
                   rightIcon={<MdCloudUpload size={24} />}
                 >
                   Carregar Planilha
-                </Button>
+                </Button> */}
               </Flex>
               <Flex gap={2} align={"end"}>
                 <Flex gap={1} direction={"column"}>
