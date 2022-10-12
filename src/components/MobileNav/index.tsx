@@ -68,7 +68,7 @@ export function MobileNav({
     upload: "Importat Dados",
     fornecedores: "Fornecedores",
     licoesAprendidas: "Lições Aprendidas",
-    detalhamento: "Detalhamento de projetos",
+    detalhamento: "Detalhamento de Projetos",
     infographics: "Infográficos",
     atividade: "Atividade",
     precedentes: "Visão por Precedentes",
