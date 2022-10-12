@@ -9,7 +9,6 @@ import {
   useColorModeValue,
   Text,
   FormControl,
-  FormLabel,
   Select,
   Button,
 } from "@chakra-ui/react";
@@ -64,11 +63,19 @@ export function Lookahead() {
               <Flex direction="column">
                 <Text fontWeight="bold">Relatorio Lookahead</Text>
                 <Flex direction="row" justifyContent="flex-end">
-                  <Flex>
+                  <Flex direction="row" justifyContent="flex-end">
                     <FormControl>
-                      <FormLabel>Projeto</FormLabel>
+                      <Text
+                        fontWeight={"bold"}
+                        fontSize={"12px"}
+                        color={"#949494"}
+                      >
+                        Projeto
+                      </Text>
                       <Select
-                        placeholder="Select option"
+                        fontWeight={"bold"}
+                        color={"#949494"}
+                        placeholder="Projeto"
                         onChange={(e) => handleProjectChange(e.target.value)}
                       >
                         {projetos &&
@@ -78,7 +85,7 @@ export function Lookahead() {
                       </Select>
                     </FormControl>
 
-                    <FormControl className="toBottom">
+                    <Flex alignItems="flex-end" marginLeft="16px">
                       <Button
                         color="white"
                         background="origem.300"
@@ -90,13 +97,13 @@ export function Lookahead() {
                         // onClick={filterByProject}
                         rightIcon={<FiSearch />}
                       >
-                        Buscar
+                        Filtrar
                       </Button>
-                    </FormControl>
+                    </Flex>
                   </Flex>
                 </Flex>
 
-                <Flex>
+                <Flex justifyContent="flex-end">
                   {atividades && <TabelaLookahead data={atividades} />}
                 </Flex>
               </Flex>

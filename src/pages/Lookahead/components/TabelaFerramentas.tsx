@@ -136,13 +136,26 @@ export function TabelaFerramentas(props: TableProps) {
           </Tbody>
           <Tfoot>
             <Tr backgroundColor={"blue"} color="white">
-              <Td>Total 1</Td>
+              {dias &&
+                ferramentasData &&
+                dias.map(function (dia) {
+                  return (
+                    <Td>
+                      {
+                        ferramentasData.filter(
+                          (x) => x.dia == dia.data && x.tipo == "f"
+                        ).length
+                      }
+                    </Td>
+                  );
+                })}
+              {/* <Td>Total 1</Td>
               <Td>0</Td>
               <Td>0</Td>
               <Td>0</Td>
               <Td>0</Td>
               <Td>0</Td>
-              <Td>0</Td>
+              <Td>0</Td> */}
             </Tr>
           </Tfoot>
         </Table>

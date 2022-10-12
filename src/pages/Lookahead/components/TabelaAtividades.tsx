@@ -26,13 +26,16 @@ class DiasSemana {
   hora?: number = undefined;
 }
 
-class AtividadeDiaHora {
-  nome: string = "";
-  horaIni: string = "";
-  horaFim: string = "";
-  dataIni: string = "";
-  dataFim: string = "";
-  tipo: string = "";
+interface AtividadeDiaHora {
+  nome: string;
+  horaIni: string;
+  dataIni: string;
+  tipo: string;
+}
+
+class Totais {
+  data: string = "";
+  hora: string = "";
 }
 
 export function TabelaAtividades(props: TableProps) {
@@ -41,6 +44,7 @@ export function TabelaAtividades(props: TableProps) {
   const [dias, setDias] = useState<DiasSemana[]>();
   const [horas, setHoras] = useState<string[]>();
   const [atividades, setAtividades] = useState<AtividadeDiaHora[]>();
+  const [total, setTotal] = useState<Totais[]>();
   // const horarios = Array(24)
   //   .fill(0)
   //   .map((_, i) => {
@@ -72,7 +76,6 @@ export function TabelaAtividades(props: TableProps) {
     const atividadesGrid: AtividadeDiaHora[] = [];
     data &&
       data.forEach((atividade) => {
-        const atividadeGrid: AtividadeDiaHora = new AtividadeDiaHora();
         let horaIni;
         if (atividade.data_hora && atividade.data_hora) {
           const auxIni = atividade.data_hora.substring(
@@ -90,20 +93,34 @@ export function TabelaAtividades(props: TableProps) {
 
           // diaFim = new Date(auxFim).getDate().toString();
           // horaFim = new Date(auxFim).getHours().toString();
-          atividadeGrid.horaIni = horaIni;
-          atividadeGrid.dataIni = dataBr.format(new Date(auxIni));
-          atividadeGrid.tipo = atividade.tipo;
-
-          // atividadeGrid.horaFim = horaFim;
-          // atividadeGrid.dataFim = dataBr.format(new Date(auxFim));
-
-          atividadeGrid.nome = atividade.nome;
+          const atividadeGrid: AtividadeDiaHora = {
+            horaIni: horaIni,
+            dataIni: dataBr.format(new Date(auxIni)),
+            tipo: atividade.tipo,
+            nome: atividade.nome,
+          };
 
           atividadesGrid.push(atividadeGrid);
         }
       });
     setAtividades(atividadesGrid);
     setDias(weekDays);
+
+    const arrTotais: Totais[] = [];
+
+    atividadesGrid.forEach((x) => {
+      const jaTem = arrTotais.find(
+        (a) => x.dataIni == a.data && x.horaIni == a.hora
+      )?.data;
+      if (!jaTem) {
+        arrTotais.push({
+          data: x.dataIni,
+          hora: x.horaIni,
+        });
+      }
+    });
+
+    setTotal(arrTotais);
   }
 
   // function atividadesData() {
@@ -149,9 +166,9 @@ export function TabelaAtividades(props: TableProps) {
             </Tr>
           </Thead>
           <Tbody>
-            {atividades &&
-              dias &&
+            {dias &&
               horas &&
+              atividades &&
               horas.map(function (hora, indice) {
                 return (
                   <Tr
@@ -172,7 +189,6 @@ export function TabelaAtividades(props: TableProps) {
                           x.horaIni == hora.split(":")[0] &&
                           x.tipo == "f"
                       )?.nome;
-
                       return (
                         <Td>
                           {(activityS && activityF
@@ -197,13 +213,16 @@ export function TabelaAtividades(props: TableProps) {
           <Tfoot>
             <Tr backgroundColor={"blue"} color="white">
               <Td>Total</Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
+              {dias &&
+                total &&
+                dias.map(function (dia) {
+                  // return <Td>{`${x.diaLabel}`}</Td>;
+                  const _total = total.filter(
+                    (tot) => tot.data == dia.data
+                  ).length;
+
+                  return <Td>{_total}</Td>;
+                })}
             </Tr>
           </Tfoot>
         </Table>

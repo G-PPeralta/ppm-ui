@@ -120,11 +120,11 @@ export function TabelaLookahead(props: TableProps) {
   return (
     <div className="table-fix">
       <>
-        <TableContainer mt={4} mb={3} ml={1}>
-          <Table variant="unstyled">
+        <TableContainer mt={4} mb={3}>
+          <Table variant="unstyled" width="100%">
             <Thead>
               <Tr background="origem.500" color="white">
-                <Th width="50">item</Th>
+                <Th>item</Th>
                 <Th>Projeto</Th>
                 <Th>Descrição e Justificativa</Th>
               </Tr>
