@@ -258,7 +258,7 @@ export function GraficoNPTPorPeriodoSPT({ Prop }: any) {
                           GERAR GRÁFICO POR
                         </FormLabel>
                         <Input
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="gera-grafico"
                           name="gera-grafico"
                           width={"480px"}
@@ -284,7 +284,7 @@ export function GraficoNPTPorPeriodoSPT({ Prop }: any) {
                           DE
                         </FormLabel>
                         <Input
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="de"
                           name="de"
                           width={"146px"}
@@ -311,7 +311,7 @@ export function GraficoNPTPorPeriodoSPT({ Prop }: any) {
                           ATÉ
                         </FormLabel>
                         <Input
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="ate"
                           name="ate"
                           width={"146px"}
