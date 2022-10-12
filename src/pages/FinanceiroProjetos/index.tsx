@@ -57,11 +57,13 @@ export function FinanceiroProjetos() {
     setFilter(mockData);
   };
 
-  const filterData = (text: string) => {
+  const filterData = (search: string) => {
     let filtered;
-    if (text && text.length > 1) {
+    if (search && search.length > 1) {
       filtered = allData?.filter(
-        (x) => x.sonda.toLowerCase().indexOf(text.toLowerCase()) > -1
+        (searched) =>
+          searched.projeto.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+          searched.elementoPep.toLowerCase().indexOf(search.toLowerCase()) > -1
       );
     } else {
       filtered = allData;
@@ -85,6 +87,8 @@ export function FinanceiroProjetos() {
   useEffect(() => {
     handleGetAllData();
   }, []);
+
+  console.log("search", search);
 
   return (
     <>
@@ -136,7 +140,7 @@ export function FinanceiroProjetos() {
                     placeholder="Projeto ou Elemento PEP"
                     type="text"
                     name="pesquisar"
-                    onChange={(e) => handleSearch(e.target.value)}
+                    onChange={(event) => handleSearch(event)}
                     maxLength={50}
                   />
                 </Flex>
