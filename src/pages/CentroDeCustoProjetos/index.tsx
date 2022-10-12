@@ -121,7 +121,7 @@ export function CentroDeCustoProjetos() {
                 </Flex>
               </Flex>
 
-              <Tabela data={data.centroDeCusto} />
+              <Tabela data={data.centroDeCusto} refreshState={refreshState} />
             </Box>
           </Flex>
         ) : (

@@ -18,11 +18,22 @@ import {
 
 import PaginacaoTabela from "components/PaginacaoTabela";
 
+import { useAuth } from "hooks/useAuth";
+
+import { deleteDespesa } from "services/delete/Financeiro";
+
+interface RefreshState {
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+}
 interface Props {
   data: any; // Dados completos da tabela
+  refreshState: RefreshState;
 }
 
-function Tabela({ data }: Props) {
+function Tabela({ data, refreshState }: Props) {
+  const { user } = useAuth();
+  const { refresh, setRefresh } = refreshState;
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
 
@@ -31,6 +42,11 @@ function Tabela({ data }: Props) {
     to,
     setFrom,
     setTo,
+  };
+
+  const handleDeletar = (idCusto: number) => {
+    deleteDespesa(idCusto, user?.id);
+    setRefresh(!refresh);
   };
 
   const formatarParaReal = (valor: number) => {
@@ -130,6 +146,7 @@ function Tabela({ data }: Props) {
                       transition: "all 0.4s",
                       color: "white",
                     }}
+                    onClick={() => handleDeletar(linhaTabela.idCusto)}
                   />
                 </Flex>
               </Td>
