@@ -80,7 +80,6 @@ export function useEditarAtividadeGantt() {
           data: newValues,
         };
         const status = res.status;
-        console.log(">>>>", newValues);
         // const { status } = await patchOperacoesEstatisticas(newValues);
         if (status === 200 || status === 201) {
           toast.success("Operação adicionada com sucesso!", {
@@ -99,7 +98,6 @@ export function useEditarAtividadeGantt() {
   });
 
   const cellEdit = (args: any) => {
-    console.log(">>>>", args.rowData);
     setEditAtividade({
       id_atividade: args.rowData.TaskID,
       nome_atividade: args.rowData.TaskName,

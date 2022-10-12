@@ -55,7 +55,6 @@ function ModalAdicionarOperacao({
   // }));
 
   useEffect(() => {
-    console.log(">>>>editAtividade", editAtividade);
     registerForm.setFieldValue("id_atividade", editAtividade.id_atividade);
     registerForm.setFieldValue("nome_atividade", editAtividade.nome_atividade);
     registerForm.setFieldValue(

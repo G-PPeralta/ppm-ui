@@ -38,8 +38,6 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
   } = useEditarAtividadeGantt();
 
   function ganttFormatter(gantt: IGantt) {
-    console.log(">>>>>>gantt", gantt);
-
     if (!gantt) return;
 
     const _gantt = gantt.macroatividades;
@@ -88,14 +86,12 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
         ),
       })
     );
-    console.log(">>>>>>newGantt", newGantt);
     setGantt(newGantt);
   }
 
   async function handleSetGanttData() {
     if (id) {
       const reqGanttData = await getGanttData(Number(id));
-      console.log(">>>>>>reqGanttData", reqGanttData.data);
 
       if (!reqGanttData) return;
       const _gantt: IGantt = reqGanttData.data;
