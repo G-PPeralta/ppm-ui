@@ -11,7 +11,6 @@ function DateTimePicker({ registerForm, data, label, value, required }: any) {
 
   useEffect(() => {
     if (data) {
-      // console.log(">>>data", data);
       const newDate = new Date(data);
       // newDate.setDate(newDate.getDate() + 15);
       setDataInicio(newDate);
@@ -24,7 +23,6 @@ function DateTimePicker({ registerForm, data, label, value, required }: any) {
 
   const handleIniciarDate = (date: any) => {
     if (date) {
-      date.setHours(9, 0, 0, 0);
       setDataInicio(date);
       registerForm.setFieldValue(value, date);
     }

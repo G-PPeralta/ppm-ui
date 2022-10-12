@@ -25,9 +25,8 @@ type ganttOptionsProps = {
 };
 
 export function Gantt({ data, options, edit }: ganttOptionsProps) {
-  // const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);
   const [loading, setLoading] = useState(true);
-  const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
+  // const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
 
   const queryTaskbarInfo = (args: any) => {
     // console.log(":::args.data.taskData", args.data.taskData);
@@ -104,21 +103,21 @@ export function Gantt({ data, options, edit }: ganttOptionsProps) {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, [ganttData]);
-
-  useEffect(() => {
-    setGanttData(data);
+    // setTimeout(() => {
+    // }, 500);
+    if (data) setLoading(false);
   }, [data]);
+
+  // useEffect(() => {
+  //   setGanttData(data);
+  // }, [data]);
 
   return (
     <>
       {!loading ? (
         <GanttComponent
           id="gantt-control"
-          dataSource={ganttData}
+          dataSource={data}
           taskFields={{
             id: "TaskID",
             name: "TaskName",
