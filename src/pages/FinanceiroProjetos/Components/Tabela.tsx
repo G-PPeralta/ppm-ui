@@ -93,7 +93,7 @@ function Tabela({ data }: Props) {
                   to={`/financeiro-projetos/centro-custo/${linhaTabela.idProjeto}`}
                   state={linhaTabela}
                 >
-                  <Text>{linhaTabela.projeto}</Text>
+                  <Text>{linhaTabela.nomeProjeto}</Text>
                 </Link>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>

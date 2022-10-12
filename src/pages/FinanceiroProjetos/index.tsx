@@ -22,7 +22,7 @@ export function FinanceiroProjetos() {
   const mockData = [
     {
       idProjeto: 1,
-      projeto: "Carteira de Intervenções",
+      nomeProjeto: "Carteira de Intervenções",
       elementoPep: "OGAL.P0029.FS",
       denominacaoDeObjeto: "40. PAL- Automação dos poços IeA",
       mes: "06",
@@ -32,7 +32,7 @@ export function FinanceiroProjetos() {
     },
     {
       idProjeto: 2,
-      projeto: "Carteira de Projeto",
+      nomeProjeto: "Carteira de Projeto",
       elementoPep: "OGAL.P0029.FS",
       denominacaoDeObjeto: "40. PAL- Automação dos poços IeA",
       mes: "06",
@@ -52,7 +52,8 @@ export function FinanceiroProjetos() {
     if (search && search.length > 1) {
       filtered = allData?.filter(
         (searched) =>
-          searched.projeto.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+          searched.nomeProjeto.toLowerCase().indexOf(search.toLowerCase()) >
+            -1 ||
           searched.elementoPep.toLowerCase().indexOf(search.toLowerCase()) > -1
       );
     } else {
