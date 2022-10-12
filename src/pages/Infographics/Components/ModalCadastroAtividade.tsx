@@ -219,7 +219,7 @@ function ModalCadastroAtividade() {
                   onClose={onClose}
                 />
                 <BotaoAzulPrimary
-                  text={"Concluir Cadastro"}
+                  text={"Concluir"}
                   formikForm={registerForm}
                   onClose={onClose}
                   setRefresh={setRefresh}

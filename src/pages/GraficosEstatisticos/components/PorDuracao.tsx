@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 // import { Ring } from "@uiball/loaders";
 
-import StackedBarChart from "components/StackedBarChart";
+import StackedBarChart from "components/StackedBarChartGraphic";
 
 import { getCampo, getSonda } from "services/get/CadastroModaisInfograficos";
 
@@ -197,7 +197,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                           GERAR GRÁFICO POR
                         </FormLabel>
                         <Input
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="gera-grafico"
                           name="gera-grafico"
                           width={"480px"}
@@ -223,7 +223,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                           DE
                         </FormLabel>
                         <Input
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="de"
                           name="de"
                           width={"146px"}
@@ -250,7 +250,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                           ATÉ
                         </FormLabel>
                         <Input
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="ate"
                           name="ate"
                           width={"120px"}
@@ -278,7 +278,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                         <Select
                           placeholder="Sonda"
                           // onChange={handleProjectChange}
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="sonda"
                           name="sonda"
                           width={"208px"}
@@ -306,7 +306,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                           CAMPO
                         </FormLabel>
                         <Select
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="campo"
                           name="campo"
                           width={"208px"}
@@ -338,7 +338,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                         </FormLabel>
                         <Input
                           placeholder="Base da zona intervida mais profunda"
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="base"
                           name="base"
                           width={"328px"}
@@ -367,7 +367,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                         <Select
                           placeholder="Selecione"
                           // onChange={handleProjectChange}
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="outro"
                           name="outro"
                           width={"146px"}

@@ -1,7 +1,7 @@
 import { IconType } from "react-icons";
 import { AiOutlineBarChart } from "react-icons/ai";
 import { BiData } from "react-icons/bi";
-import { BsBarChartSteps } from "react-icons/bs";
+// import { BsBarChartSteps } from "react-icons/bs";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import {
   FiHome,
@@ -35,23 +35,23 @@ export const LinkItems: Array<LinkItemProps> = [
       //   icon: FaRegMoneyBillAlt,
       //   link: "/desenvolvimento",
       // },
-      { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/desenvolvimento" },
+      { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/budgets2" },
       { name: "Importar Dados", icon: BiData, link: "/upload" },
       {
         name: "Fornecedores",
         icon: FiActivity,
-        link: "/fornecedores",
+        link: "/desenvolvimento",
       },
       {
         name: "Lições Aprendidas",
         icon: FiActivity,
         link: "/licoesAprendidas",
       },
-      {
-        name: "Detalhamento Projeto",
-        icon: BsBarChartSteps,
-        link: "/detalhamento/191",
-      },
+      // {
+      //   name: "Detalhamento Projeto",
+      //   icon: BsBarChartSteps,
+      //   link: "/detalhamento/191",
+      // },
       { name: "Priorização", icon: MdPriorityHigh, link: "/priorizacao" },
     ],
   },

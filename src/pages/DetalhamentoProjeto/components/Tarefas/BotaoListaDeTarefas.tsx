@@ -84,6 +84,8 @@ function BotaoListadeTarefas() {
 
   async function getTaskList() {
     const { data } = await getAtividadesTarefas();
+    // console.log(data);
+
     setTaskList(data);
     setFilteredData(data);
   }
@@ -96,7 +98,7 @@ function BotaoListadeTarefas() {
   function handleFilter(nome: string, data: string) {
     if (nome) {
       const filtered = taskList.filter((task: any) =>
-        task.nome_tarefa.includes(nome)
+        task.nome_tarefa.toUpperCase().includes(nome.toUpperCase())
       );
       return setTaskList(filtered);
     }
@@ -236,6 +238,7 @@ function BotaoListadeTarefas() {
                         </Text>
                       </FormLabel>
                       <Input
+                        maxLength={50}
                         borderRadius={"8px"}
                         border={"1px solid #A7A7A7"}
                         mt={"-9px"}
@@ -270,6 +273,8 @@ function BotaoListadeTarefas() {
                       </FormLabel>
                       <Input
                         // placeholder="dd/mm/aaaa"
+                        max="9999-12-31"
+                        maxLength={1}
                         borderRadius={"8px"}
                         border={"1px solid #A7A7A7"}
                         mt={"-9px"}
@@ -278,6 +283,7 @@ function BotaoListadeTarefas() {
                         color="#949494"
                         id="data"
                         type="date"
+                        // maxLength={6}
                         name="data"
                         // value={dataFilter}
                         onChange={(event) =>
@@ -379,7 +385,10 @@ function BotaoListadeTarefas() {
 
           <ModalCloseButton
             color={"white"}
-            onClick={() => setTaskList(filteredData)}
+            onClick={() => {
+              setTaskList(filteredData);
+              setTarefaFilter("");
+            }}
           />
           <ModalBody>
             <Flex direction={"column"} w={"100%"}>
@@ -402,7 +411,7 @@ function BotaoListadeTarefas() {
                           ID
                         </Th>
                         <Th color="white" textAlign={"center"}>
-                          Lista de Tarefas
+                          Tarefa
                         </Th>
                         <Th color="white" textAlign={"center"}>
                           Atividade relacionada

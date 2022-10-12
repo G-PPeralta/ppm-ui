@@ -6,7 +6,7 @@ import { BudgetDetail } from "interfaces/Budgets";
 
 import { getBudgetDetail } from "services/get/GetBudget";
 
-export function useBudgetDetail() {
+export function useBudgetDetail(id: string | null) {
   // const { toast } = useToast();
 
   //  const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ export function useBudgetDetail() {
   const wd = window.innerWidth;
 
   const gerarBudgetsList = async () => {
-    const data = await getBudgetDetail();
+    const data = await getBudgetDetail(id);
     setBudgets(data);
     setBudgetsFilter(data);
   };

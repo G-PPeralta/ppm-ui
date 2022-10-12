@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { AiOutlineRise } from "react-icons/ai";
 
-import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  useBreakpointValue,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { TotalOrcamento } from "interfaces/Services";
 
 import { getOrcamentoTotal } from "services/get/Dashboard";
@@ -27,8 +33,8 @@ export default function TotalOrcamentosComponent() {
 
   return (
     <Flex
-      py={"4"}
-      px={"4"}
+      py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
+      px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
       w={"100%"}
       bg={"white"}
       boxShadow={useColorModeValue("md", "md-dark")}
@@ -47,7 +53,7 @@ export default function TotalOrcamentosComponent() {
           <Text
             w={"200px"}
             mb={1}
-            sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
+            sx={{ fontSize: 16, fontWeight: "bold", alignSelf: "center" }}
             color="#000000"
           >
             Total do Orçamento

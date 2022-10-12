@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { FiMenu, FiChevronDown, FiChevronRight } from "react-icons/fi";
+import { FiMenu, FiChevronDown } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 
 import {
@@ -52,7 +52,7 @@ export function MobileNav({
     const completeObject = splited.map((split, index) => {
       let newItem: string = translations[split as keyof typeof translations];
       if (newItem === undefined) {
-        newItem = split;
+        newItem = "";
       }
       return newItem;
     });
@@ -60,19 +60,21 @@ export function MobileNav({
   }, []);
 
   const translations = {
-    dashboard: "Dashboarrd",
+    Dashboard: "Dashboard",
     projects: "Projetos",
     "projects-registration": "Cadastro de projetos",
     budgets: "Financeiro",
+    budgets2: "Financeiro",
     upload: "Importat Dados",
     fornecedores: "Fornecedores",
     licoesAprendidas: "Lições Aprendidas",
-    detalhamento: "Detalhamento de projetos",
+    detalhamento: "Detalhamento de Projetos",
     infographics: "Infográficos",
     atividade: "Atividade",
     precedentes: "Visão por Precedentes",
     "visao-por-area": "Visão por Area",
     estatisticas: "Estatísticas",
+    cronograma: "Cronograma",
     reports: "Relatórios",
     graficos: "Gráficos Estatísticos",
     priorizacao: "Priorização",
@@ -149,9 +151,9 @@ export function MobileNav({
                 >
                   {item}
                 </Button>
-                {index == way.length - 1 ? undefined : (
+                {/* {index == way.length - 1 ? undefined : (
                   <FiChevronRight color={"#0047bb"} />
-                )}
+                )} */}
               </>
             ) : undefined}
           </Fragment>

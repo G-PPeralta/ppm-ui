@@ -1,5 +1,6 @@
 export interface Projetos {
   id: number;
+  id_projeto_real: number;
   nome_projeto: string;
   vlr_cpi: number;
   vlr_spi: number;
@@ -18,4 +19,5 @@ export interface Projetos {
   justificativa: string;
   vlr_cpi_corrigido: number;
   vlr_spi_corrigido: number;
+  valor_total_previsto: number;
 }

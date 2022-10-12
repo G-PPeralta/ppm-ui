@@ -28,6 +28,14 @@ export interface RegisterProps {
   telefone: string;
 }
 
+export interface ResetPasswordProps {
+  email: string;
+}
+
+export interface ResponseResetPassword {
+  message: string;
+}
+
 export interface ResponseRoles {
   id: number;
   role: string;
@@ -216,9 +224,12 @@ export interface TotalNaoPrevisto {
   totalRealizado: number;
 }
 
-export interface AreasDemandadas {
-  qtd: number;
-  solicitante: string;
+export interface AreasDemandadasPorMes {
+  month: number;
+  sms: number;
+  regulatorio: number;
+  operacao: number;
+  outros: number;
 }
 
 export interface InfoFinanceira {

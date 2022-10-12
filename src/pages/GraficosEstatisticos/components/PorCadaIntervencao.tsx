@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 
 import {
@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 // import { Ring } from "@uiball/loaders";
 
-import StackedBarChart from "components/StackedBarChart";
+import StackedBarChart from "components/StackedBarChartGraphic";
 
 import { getSonda } from "services/get/CadastroModaisInfograficos";
 
@@ -194,20 +194,20 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
     reqGet();
   }, []);
 
-  function useWindowSize() {
-    const [size, setSize] = useState([0, 0]);
-    useLayoutEffect(() => {
-      function updateSize() {
-        setSize([window.innerWidth, window.innerHeight]);
-      }
-      window.addEventListener("resize", updateSize);
-      updateSize();
-      return () => window.removeEventListener("resize", updateSize);
-    }, []);
-    return size;
-  }
+  // function useWindowSize() {
+  //   const [size, setSize] = useState([0, 0]);
+  //   useLayoutEffect(() => {
+  //     function updateSize() {
+  //       setSize([window.innerWidth, window.innerHeight]);
+  //     }
+  //     window.addEventListener("resize", updateSize);
+  //     updateSize();
+  //     return () => window.removeEventListener("resize", updateSize);
+  //   }, []);
+  //   return size;
+  // }
 
-  const [width] = useWindowSize();
+  // const [width] = useWindowSize();
   return (
     <>
       {/* {loading && (
@@ -278,7 +278,7 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                           GERAR GRÁFICO POR
                         </FormLabel>
                         <Input
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="gera-grafico"
                           name="gera-grafico"
                           width={"480px"}
@@ -304,7 +304,7 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                           DE
                         </FormLabel>
                         <Input
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="de"
                           name="de"
                           width={"146px"}
@@ -331,7 +331,7 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                           ATÉ
                         </FormLabel>
                         <Input
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="ate"
                           name="ate"
                           width={"146px"}
@@ -359,7 +359,7 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                         <Select
                           placeholder="Sonda"
                           // onChange={handleProjectChange}
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="sonda"
                           name="sonda"
                           width={"208px"}
@@ -397,7 +397,6 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                       </FormControl>
                     </Flex>
                   </Flex>
-
                   <Flex direction={"column"}>
                     <Flex mb={"-20px"}>
                       <Text
@@ -438,25 +437,24 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                       ))}
                     </Flex>
                   </Flex>
-
-                  <Box
+                  {/* <Box
                     overflowX={"scroll"}
                     w={width * 0.7}
                     h={260}
                     display={"flex"}
                     overflowY={"hidden"}
-                  >
-                    <Flex ml={"-25px"} mt={"50px"}>
-                      <StackedBarChart
-                        showY={true}
-                        sizeW={1050}
-                        sizeH={352}
-                        data={dataMock2}
-                        dataEntries={dataEntries2}
-                        barW={40}
-                      />
-                    </Flex>{" "}
-                  </Box>
+                  > */}
+                  <Flex ml={"-25px"} mt={"50px"}>
+                    <StackedBarChart
+                      showY={true}
+                      sizeW={1000}
+                      sizeH={352}
+                      data={dataMock2}
+                      dataEntries={dataEntries2}
+                      barW={40}
+                    />
+                  </Flex>{" "}
+                  {/* </Box> */}
                 </Flex>
               </Stack>
             </form>
