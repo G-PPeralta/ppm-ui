@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 import {
   Flex,
@@ -41,32 +40,29 @@ function Tabela({ data }: Props) {
 
   const header = [
     "ID",
-    "Projeto",
-    "Elemento PEP",
+    "Prestador de Serviço",
+    "Classe de Serviço",
+    "Data de Pgto",
     "Previsto",
     "Realizado",
-    "Denominação de Objeto",
-    "Mês",
-    "Texto do Pedido",
+    "Descrição do Serviço",
+    "Ações",
   ];
 
   const valorTotalPrevisto = data.reduce(
-    (acc: number, curr: any) => acc + curr.totalPrevisto,
+    (acc: number, curr: any) => acc + curr.previsto,
     0
   );
 
   const valorTotalRealizado = data.reduce(
-    (acc: number, curr: any) => acc + curr.totalRealizado,
+    (acc: number, curr: any) => acc + curr.realizado,
     0
   );
 
-  const totalDeProjetos = data.length;
-
   const footer = [
     "Total",
-    totalDeProjetos === 1
-      ? `${totalDeProjetos} Projeto`
-      : `${totalDeProjetos} Projetos`,
+    "",
+    "",
     "",
     formatarParaReal(valorTotalPrevisto),
     formatarParaReal(valorTotalRealizado),
@@ -86,30 +82,25 @@ function Tabela({ data }: Props) {
           data.slice(from, to).map((linhaTabela: any, index: number) => (
             <Tr key={index}>
               <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.idProjeto}</Text>
+                <Text>{linhaTabela.idCusto}</Text>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Link
-                  to={`/financeiro-projetos/centro-custo/${linhaTabela.idProjeto}`}
-                  state={linhaTabela}
-                >
-                  <Text>{linhaTabela.projeto}</Text>
-                </Link>
+                <Text>{linhaTabela.prestadorDeServico}</Text>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.elementoPep}</Text>
+                <Text>{linhaTabela.classeDoServico}</Text>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{formatarParaReal(linhaTabela.totalPrevisto)}</Text>
+                <Text>{linhaTabela.dataPagamento}</Text>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{formatarParaReal(linhaTabela.totalRealizado)}</Text>
+                <Text>{formatarParaReal(linhaTabela.previsto)}</Text>
               </Td>
               <Td textAlign={"start"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.denominacaoDeObjeto}</Text>
+                <Text>{formatarParaReal(linhaTabela.realizado)}</Text>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.mes}</Text>
+                <Text>{linhaTabela.descricaoDoServico}</Text>
               </Td>
               <Td textAlign={"start"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.textoDoPedido}</Text>

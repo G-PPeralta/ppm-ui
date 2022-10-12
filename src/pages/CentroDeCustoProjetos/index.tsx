@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { BsPlus } from "react-icons/bs";
 import { IoIosArrowBack } from "react-icons/io";
+import { useLocation } from "react-router-dom";
 
-import { Box, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
@@ -11,11 +13,12 @@ import { useFinanceiroProjetos } from "hooks/useFinanceiroProjetos";
 import Tabela from "./components/Tabela";
 
 export function CentroDeCustoProjetos() {
+  const { state } = useLocation();
   const { loading } = useFinanceiroProjetos();
-  const [filter, setFilter] = useState<any[]>([]);
+  const [data, setData] = useState<any>(state);
 
   const handleGetAllData = async () => {
-    setFilter([]);
+    setData(state);
   };
 
   useEffect(() => {
@@ -67,8 +70,32 @@ export function CentroDeCustoProjetos() {
                   </Text>
                 </Flex>
               </Flex>
+              <Flex justify={"space-between"} flex={1}>
+                <Button
+                  h={"56px"}
+                  borderRadius={"10px"}
+                  background={"origem.500"}
+                  variant="primary"
+                  color="white"
+                  _hover={{
+                    background: "origem.600",
+                    transition: "all 0.4s",
+                  }}
+                  rightIcon={<BsPlus size={24} />}
+                >
+                  Adicionar
+                </Button>
+                <Flex direction={"column"} justify={"end"}>
+                  <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
+                    ELEMENTO PEP
+                  </Text>
+                  <Heading as="h3" size="md">
+                    {data.elementoPep}
+                  </Heading>
+                </Flex>
+              </Flex>
 
-              <Tabela data={filter} />
+              <Tabela data={data.custoRealizado} />
             </Box>
           </Flex>
         ) : (
