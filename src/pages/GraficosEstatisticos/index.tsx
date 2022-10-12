@@ -156,6 +156,7 @@ export function GráficosEstatisticos() {
                             <FormLabel
                               fontSize={"12px"}
                               color={"#A7A7A7"}
+                              fontWeight={"700"}
                               htmlFor="gera-grafico"
                             >
                               GERAR GRÁFICO POR
@@ -190,6 +191,7 @@ export function GráficosEstatisticos() {
                             <FormLabel
                               fontSize={"12px"}
                               color={"#A7A7A7"}
+                              fontWeight={"700"}
                               htmlFor="de"
                             >
                               DE
@@ -214,6 +216,7 @@ export function GráficosEstatisticos() {
                             <FormLabel
                               fontSize={"12px"}
                               color={"#A7A7A7"}
+                              fontWeight={"700"}
                               htmlFor="ate"
                               alignItems={"flex-start"}
                             >

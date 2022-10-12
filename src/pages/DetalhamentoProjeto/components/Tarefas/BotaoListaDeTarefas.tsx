@@ -84,6 +84,8 @@ function BotaoListadeTarefas() {
 
   async function getTaskList() {
     const { data } = await getAtividadesTarefas();
+    // console.log(data);
+
     setTaskList(data);
     setFilteredData(data);
   }
@@ -383,7 +385,10 @@ function BotaoListadeTarefas() {
 
           <ModalCloseButton
             color={"white"}
-            onClick={() => setTaskList(filteredData)}
+            onClick={() => {
+              setTaskList(filteredData);
+              setTarefaFilter("");
+            }}
           />
           <ModalBody>
             <Flex direction={"column"} w={"100%"}>
