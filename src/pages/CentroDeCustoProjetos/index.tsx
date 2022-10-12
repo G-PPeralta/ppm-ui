@@ -1,17 +1,24 @@
 import { useEffect, useState } from "react";
-import { BsPlus } from "react-icons/bs";
 import { IoIosArrowBack } from "react-icons/io";
 
-import { Box, Button, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
 
 import { useFinanceiroProjetos } from "hooks/useFinanceiroProjetos";
 
+import ModalAdicionar from "./components/ModalAdicionar";
 import Tabela from "./components/Tabela";
 
 export function CentroDeCustoProjetos() {
+  const [refresh, setRefresh] = useState(false);
+
+  const refreshState = {
+    refresh,
+    setRefresh,
+  };
+
   const mock = {
     idProjeto: 1, // id do projeto pai
     nomeProjeto: "Carteira de Projetos", // Nome do projeto pai
@@ -103,20 +110,7 @@ export function CentroDeCustoProjetos() {
                 </Flex>
               </Flex>
               <Flex justify={"space-between"} flex={1}>
-                <Button
-                  h={"56px"}
-                  borderRadius={"10px"}
-                  background={"origem.500"}
-                  variant="primary"
-                  color="white"
-                  _hover={{
-                    background: "origem.600",
-                    transition: "all 0.4s",
-                  }}
-                  rightIcon={<BsPlus size={24} />}
-                >
-                  Adicionar
-                </Button>
+                <ModalAdicionar refreshState={refreshState} />
                 <Flex direction={"column"} justify={"end"}>
                   <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
                     ELEMENTO PEP
