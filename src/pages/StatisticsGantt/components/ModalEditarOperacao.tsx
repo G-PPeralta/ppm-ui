@@ -10,8 +10,8 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  // NumberInput,
-  // NumberInputField,
+  NumberInput,
+  NumberInputField,
   useBreakpointValue,
 } from "@chakra-ui/react";
 
@@ -117,7 +117,7 @@ function ModalAdicionarOperacao({
                     <Flex direction={"column"} flex={2}>
                       <Input
                         isDisabled
-                        value={registerForm.values.nome_atividade}
+                        value={registerForm.values.nome_atividade || ""}
                         type="text"
                         name="nome_atividade"
                       />
@@ -189,7 +189,7 @@ function ModalAdicionarOperacao({
                     </Flex>
                   </Flex>
                 </Flex>
-                {/* <Flex flex={1} direction={"column"}>
+                <Flex flex={1} direction={"column"}>
                   <Text fontWeight={"bold"}>Progresso</Text>
                   <Flex gap={5}>
                     <Flex>
@@ -207,7 +207,7 @@ function ModalAdicionarOperacao({
                       </NumberInput>
                     </Flex>
                   </Flex>
-                </Flex> */}
+                </Flex>
                 {/* <Flex
                   flexDirection={useBreakpointValue({
                     base: "column",

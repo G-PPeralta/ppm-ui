@@ -24,6 +24,7 @@ export function useEditarAtividadeGantt() {
   // atividade: any
   const { user } = useAuth();
   const { toast } = useToast();
+  const [refresh, setRefresh] = useState(false);
   // const [loading, setLoading] = useState(false);
   const [editAtividade, setEditAtividade] = useState({});
 
@@ -80,13 +81,14 @@ export function useEditarAtividadeGantt() {
           data: newValues,
         };
         const status = res.status;
+        // console.log(newValues);
         // const { status } = await patchOperacoesEstatisticas(newValues);
         if (status === 200 || status === 201) {
           toast.success("Operação adicionada com sucesso!", {
             id: "toast-principal",
           });
           // setLoading(false);
-          // setRefresh(!refresh);
+          setRefresh(!refresh);
         }
       } catch (error) {
         toast.error("Erro ao adicionar operação!", {
@@ -117,6 +119,7 @@ export function useEditarAtividadeGantt() {
 
   return {
     registerForm,
+    refresh,
     // loading,
     // listaAreaAtuacao,
     // listaResponsaveis,

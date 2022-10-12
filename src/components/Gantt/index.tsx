@@ -30,6 +30,7 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
 
   const {
     registerForm,
+    refresh: refreshGant,
     editAtividade,
     setEditAtividade,
     cellEdit,
@@ -104,11 +105,11 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
     setTimeout(() => {
       setLoading(false);
     }, 500);
-  }, [gantt]);
+  }, [gantt, refreshGant]);
 
   useEffect(() => {
     handleSetGanttData();
-  }, []);
+  }, [refreshGant]);
 
   // useEffect(() => {
   //   setGantt(ganttDataLocal);

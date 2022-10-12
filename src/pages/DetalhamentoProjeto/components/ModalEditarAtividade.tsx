@@ -10,8 +10,8 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  // NumberInput,
-  // NumberInputField,
+  NumberInput,
+  NumberInputField,
   useBreakpointValue,
 } from "@chakra-ui/react";
 
@@ -116,7 +116,7 @@ function ModalAdicionarOperacao({
                     <Flex direction={"column"} flex={2}>
                       <Input
                         isDisabled
-                        value={registerForm.values.nome_atividade}
+                        value={registerForm.values.nome_atividade || ""}
                         type="text"
                         name="nome_atividade"
                       />
@@ -152,7 +152,7 @@ function ModalAdicionarOperacao({
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"inicio_realizado"}
-                        label={"INÍCIO REAL"}
+                        label={"INÍCIO"}
                         required={false}
                         data={registerForm.values.inicio_realizado}
                       />
@@ -161,14 +161,14 @@ function ModalAdicionarOperacao({
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"fim_realizado"}
-                        label={"FIM REAL"}
+                        label={"FIM"}
                         required={false}
                         data={registerForm.values.fim_realizado}
                       />
                     </Flex>
                   </Flex>
                 </Flex>
-                {/* <Flex flex={1} direction={"column"}>
+                <Flex flex={1} direction={"column"}>
                   <Text fontWeight={"bold"}>Progresso</Text>
                   <Flex gap={5}>
                     <Flex>
@@ -186,7 +186,7 @@ function ModalAdicionarOperacao({
                       </NumberInput>
                     </Flex>
                   </Flex>
-                </Flex> */}
+                </Flex>
                 {/* <Flex
                   flexDirection={useBreakpointValue({
                     base: "column",
