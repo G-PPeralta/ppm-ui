@@ -78,6 +78,7 @@ export function MobileNav({
     graficos: "Gráficos Estatísticos",
     priorizacao: "Priorização",
     "financeiro-projetos": "Financeiro por Projetos",
+    "centro-custo": "Centro de Custos",
   };
 
   // const goNavigate = async (index: number) => {

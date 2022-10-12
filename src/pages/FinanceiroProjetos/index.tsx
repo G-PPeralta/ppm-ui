@@ -21,34 +21,43 @@ export function FinanceiroProjetos() {
 
   const mockData = [
     {
-      id: 1,
+      idProjeto: 1,
       projeto: "Carteira de Projeto",
       elementoPep: "OGAL.P0029.FS",
-      previsto: 262265.4,
-      realizado: 262265.4,
       denominacaoDeObjeto: "40. PAL- Automação dos poços IeA",
       mes: "06",
       textoDoPedido: 'Tê reto WPB DN8x8x8" sch 40',
-    },
-    {
-      id: 2,
-      projeto: "Carteira de Informações",
-      elementoPep: "OGAL.P1020.FR",
-      previsto: 234512.1,
-      realizado: 234512.1,
-      denominacaoDeObjeto: "23. PAL- Automação das sondas",
-      mes: "06",
-      textoDoPedido: 'Teste WPB DN8x8x8" sch 40',
-    },
-    {
-      id: 3,
-      projeto: "Carteira de Intervenção",
-      elementoPep: "TESTE.P1020.RTS",
-      previsto: 567567.9,
-      realizado: 567567.9,
-      denominacaoDeObjeto: "11. NTFS- Inspeção das sondas",
-      mes: "08",
-      textoDoPedido: 'Algo WPB DN8x8x8" sch 40',
+      totalPrevisto: 30000.4,
+      totalRealizado: 30000.4,
+      custoRealizado: [
+        {
+          idCusto: 1,
+          prestadorDeServico: "Prestador de Serviço",
+          classeDoServico: "Classe do Serviço",
+          dataPagamento: "01/01/2021",
+          previsto: 10000.4,
+          realizado: 10000.4,
+          descricaoDoServico: "Descrição do Serviço",
+        },
+        {
+          idCusto: 2,
+          prestadorDeServico: "Prestador de Serviço",
+          classeDoServico: "Classe do Serviço",
+          dataPagamento: "01/01/2021",
+          previsto: 10000,
+          realizado: 10000,
+          descricaoDoServico: "Descrição do Serviço",
+        },
+        {
+          idCusto: 3,
+          prestadorDeServico: "Prestador de Serviço",
+          classeDoServico: "Classe do Serviço",
+          dataPagamento: "01/01/2021",
+          previsto: 10000,
+          realizado: 10000,
+          descricaoDoServico: "Descrição do Serviço",
+        },
+      ],
     },
   ];
 
@@ -106,7 +115,7 @@ export function FinanceiroProjetos() {
                 wrap={"wrap"}
                 align={"center"}
               >
-                <Heading as="h3" size="md" mb={2} textAlign={"center"}>
+                <Heading as="h3" size="md" textAlign={"center"}>
                   Financeiro
                 </Heading>
                 <Button

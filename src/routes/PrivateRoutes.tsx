@@ -5,8 +5,8 @@ import { ActivitiesRegistration } from "pages/ActivitiesRegistration";
 import { ActivitiesSchedule } from "pages/ActivitiesSchedule";
 import { BudgetDetail } from "pages/BudgetDetail";
 import { Budgets } from "pages/Budgets";
+import { CentroDeCustoProjetos } from "pages/CentroDeCustoProjetos";
 import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
-import { BudgetDetail2 } from "pages/FinanceiroDetalhamentoProjetos";
 import { FinanceiroProjetos } from "pages/FinanceiroProjetos";
 import { GanttPage } from "pages/Gantt";
 import { GráficosEstatisticos } from "pages/GraficosEstatisticos";
@@ -82,7 +82,10 @@ export function PrivateRoutes() {
         element={<StatisticsGantt />}
       />
       <Route path="/financeiro-projetos" element={<FinanceiroProjetos />} />
-      <Route path="/budget2/detail/:id" element={<BudgetDetail2 />} />
+      <Route
+        path="/financeiro-projetos/centro-custo/:id"
+        element={<CentroDeCustoProjetos />}
+      />
       <Route path="/priorizacao" element={<Priorizacao />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
