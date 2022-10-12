@@ -94,7 +94,7 @@ export function TabelaAtividades(props: TableProps) {
           // diaFim = new Date(auxFim).getDate().toString();
           // horaFim = new Date(auxFim).getHours().toString();
           const atividadeGrid: AtividadeDiaHora = {
-            horaIni: horaIni,
+            horaIni,
             dataIni: dataBr.format(new Date(auxIni)),
             tipo: atividade.tipo,
             nome: atividade.nome,
