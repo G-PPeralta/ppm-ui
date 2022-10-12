@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { FiMenu, FiChevronDown, FiChevronRight } from "react-icons/fi";
+import { FiMenu, FiChevronDown } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 
 import {
@@ -52,7 +52,7 @@ export function MobileNav({
     const completeObject = splited.map((split, index) => {
       let newItem: string = translations[split as keyof typeof translations];
       if (newItem === undefined) {
-        newItem = split;
+        newItem = "";
       }
       return newItem;
     });
@@ -150,9 +150,9 @@ export function MobileNav({
                 >
                   {item}
                 </Button>
-                {index == way.length - 1 ? undefined : (
+                {/* {index == way.length - 1 ? undefined : (
                   <FiChevronRight color={"#0047bb"} />
-                )}
+                )} */}
               </>
             ) : undefined}
           </Fragment>
