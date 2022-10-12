@@ -60,10 +60,11 @@ export function MobileNav({
   }, []);
 
   const translations = {
-    dashboard: "Dashboarrd",
+    Dashboard: "Dashboard",
     projects: "Projetos",
     "projects-registration": "Cadastro de projetos",
     budgets: "Financeiro",
+    budgets2: "Financeiro",
     upload: "Importat Dados",
     fornecedores: "Fornecedores",
     licoesAprendidas: "Lições Aprendidas",
