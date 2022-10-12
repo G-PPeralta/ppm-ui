@@ -10,22 +10,36 @@ import {
 } from "@syncfusion/ej2-react-gantt";
 import { IGantt } from "interfaces/Services";
 
+import { useEditarAtividadeGantt } from "hooks/useEditarAtividadeGantt";
+
 import { getGanttData } from "services/get/Gantt";
 
 import ModalCadastroAtividades from "../../pages/DetalhamentoProjeto/components/ModalCadastroAtividades";
+import ModalEditarAtividade from "../../pages/DetalhamentoProjeto/components/ModalEditarAtividade";
 
 type ganttOptionsProps = {
+  ganttOptions?: any;
   toolbarOptions?: string[];
   idProjeto?: number;
 };
 export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
-  // const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [gantt, setGantt] = useState<any[]>();
   const [refresh, setRefresh] = useState(false);
 
+  const {
+    registerForm,
+    editAtividade,
+    setEditAtividade,
+    cellEdit,
+    isOpen,
+    onClose,
+  } = useEditarAtividadeGantt();
+
   function ganttFormatter(gantt: IGantt) {
+    console.log(">>>>>>gantt", gantt);
+
     if (!gantt) return;
 
     const _gantt = gantt.macroatividades;
@@ -74,12 +88,15 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
         ),
       })
     );
+    console.log(">>>>>>newGantt", newGantt);
     setGantt(newGantt);
   }
 
   async function handleSetGanttData() {
     if (id) {
-      const reqGanttData = await getGanttData(+id);
+      const reqGanttData = await getGanttData(Number(id));
+      console.log(">>>>>>reqGanttData", reqGanttData.data);
+
       if (!reqGanttData) return;
       const _gantt: IGantt = reqGanttData.data;
       // setGanttData(_gantt);
@@ -98,8 +115,8 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
   }, []);
 
   // useEffect(() => {
-  //   console.log(ganttData);
-  // }, [ganttData]);
+  //   setGantt(ganttDataLocal);
+  // }, []);
 
   // const ganttDataLocal = ganttData.macroatividades?.map((gantt) => ({
   //   TaskId: gantt.macroatividade_id,
@@ -115,36 +132,34 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
   //   })),
   // }));
 
-  // console.log(ganttDataLocal);
-
   // const ganttDataLocal = [
   //   {
   //     TaskID: 1,
-  //     Item: '1',
-  //     TaskName: 'Projeto 1',
+  //     Item: "1",
+  //     TaskName: "Projeto 1",
   //     subtasks: [
   //       {
   //         TaskID: 2,
-  //         Item: '1.1',
-  //         TaskName: 'Ação 1',
-  //         StartDate: new Date('07/11/2022'),
+  //         Item: "1.1",
+  //         TaskName: "Ação 1",
+  //         StartDate: new Date("07/11/2022"),
   //         Duration: 4,
   //         Progress: 70,
   //       },
   //       {
   //         TaskID: 3,
-  //         Item: '1.2',
-  //         TaskName: 'Ação 2',
-  //         StartDate: new Date('07/11/2022'),
+  //         Item: "1.2",
+  //         TaskName: "Ação 2",
+  //         StartDate: new Date("07/11/2022"),
   //         Duration: 4,
   //         Progress: 50,
   //         Predecessor: `${2}FS`,
   //       },
   //       {
   //         TaskID: 4,
-  //         Item: '1.3',
-  //         TaskName: 'Ação 3',
-  //         StartDate: new Date('07/11/2022'),
+  //         Item: "1.3",
+  //         TaskName: "Ação 3",
+  //         StartDate: new Date("07/11/2022"),
   //         Duration: 4,
   //         Progress: 50,
   //         Predecessor: `${3}FS`,
@@ -155,9 +170,9 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
   //   },
   //   {
   //     TaskID: 8,
-  //     Item: '2.3',
-  //     TaskName: 'Ação 3',
-  //     StartDate: new Date('07/11/2022'),
+  //     Item: "2.3",
+  //     TaskName: "Ação 3",
+  //     StartDate: new Date("07/11/2022"),
   //     Duration: 3,
   //     Progress: 80,
   //     Predecessor: `${7}FS`,
@@ -186,6 +201,16 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
               refresh={refresh}
               // atividades={atividades}
               idProjeto={idProjeto}
+            />
+            <ModalEditarAtividade
+              setRefresh={setRefresh}
+              refresh={refresh}
+              editAtividade={editAtividade}
+              setEditAtividade={setEditAtividade}
+              isOpen={isOpen}
+              onClose={onClose}
+              registerForm={registerForm}
+              loading={loading}
             />
           </Flex>
           <GanttComponent
@@ -217,9 +242,11 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
             // }))}
             toolbar={toolbarOptions || []}
             editSettings={{
+              allowEditing: true,
+              mode: "Auto",
               allowTaskbarEditing: false,
-              // allowEditing: true,
             }}
+            cellEdit={cellEdit}
             height={"100vh"}
             columns={[
               { field: "Item", type: "string" },
