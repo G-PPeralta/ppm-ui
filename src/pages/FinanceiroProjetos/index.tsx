@@ -88,8 +88,6 @@ export function FinanceiroProjetos() {
     handleGetAllData();
   }, []);
 
-  console.log("search", search);
-
   return (
     <>
       <Sidebar>
