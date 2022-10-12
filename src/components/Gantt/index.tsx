@@ -8,7 +8,7 @@ import {
   Edit,
   Toolbar,
 } from "@syncfusion/ej2-react-gantt";
-import { IGantt, GanttProps } from "interfaces/Services";
+import { IGantt } from "interfaces/Services";
 
 import { getGanttData } from "services/get/Gantt";
 
@@ -22,7 +22,7 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
   // const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
-  const [gantt, setGantt] = useState<GanttProps[]>();
+  const [gantt, setGantt] = useState<any[]>();
   const [refresh, setRefresh] = useState(false);
 
   function ganttFormatter(gantt: IGantt) {
@@ -56,14 +56,21 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
             microatividade_id,
             progresso,
             duracao,
-          }) => ({
-            TaskID: microatividade_id || 0,
-            TaskName: nome_atividade || "",
-            Item: item || "",
-            Duration: duracao,
-            Progress: progresso,
-            StartDate: data_inicio,
-          })
+          }) => {
+            const newDate = new Date(data_inicio || "");
+            newDate.setDate(newDate.getDate() - 1);
+
+            const result = {
+              TaskID: microatividade_id || 0,
+              TaskName: nome_atividade || "",
+              Item: item || "",
+              Duration: duracao,
+              Progress: progresso,
+              StartDate: newDate,
+            };
+
+            return result;
+          }
         ),
       })
     );
@@ -211,7 +218,7 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
             toolbar={toolbarOptions || []}
             editSettings={{
               allowTaskbarEditing: false,
-              allowEditing: true,
+              // allowEditing: true,
             }}
             height={"100vh"}
             columns={[
