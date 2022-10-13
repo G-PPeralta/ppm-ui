@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { FiTrash } from "react-icons/fi";
-import { MdModeEdit } from "react-icons/md";
 
 import {
   Flex,
@@ -21,6 +20,8 @@ import PaginacaoTabela from "components/PaginacaoTabela";
 import { useAuth } from "hooks/useAuth";
 
 import { deleteDespesa } from "services/delete/Financeiro";
+
+import ModalEditar from "./ModalEditar";
 
 interface RefreshState {
   refresh: boolean;
@@ -59,22 +60,17 @@ function Tabela({ data, refreshState }: Props) {
 
   const header = [
     "ID",
+    "Pedido",
     "Prestador de Serviço",
     "Classe de Serviço",
     "Data de Pgto",
-    "Previsto",
-    "Realizado",
+    "Valor",
     "Descrição do Serviço",
     "Ações",
   ];
 
-  const valorTotalPrevisto = data.reduce(
-    (acc: number, curr: any) => acc + curr.previsto,
-    0
-  );
-
   const valorTotalRealizado = data.reduce(
-    (acc: number, curr: any) => acc + curr.realizado,
+    (acc: number, curr: any) => acc + curr.valor,
     0
   );
 
@@ -83,7 +79,7 @@ function Tabela({ data, refreshState }: Props) {
     "",
     "",
     "",
-    formatarParaReal(valorTotalPrevisto),
+    "",
     formatarParaReal(valorTotalRealizado),
   ];
 
@@ -104,36 +100,28 @@ function Tabela({ data, refreshState }: Props) {
                 <Text>{linhaTabela.idCusto}</Text>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
+                <Text>{linhaTabela.pedido}</Text>
+              </Td>
+              <Td textAlign={"center"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.prestadorDeServico}</Text>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.classeDoServico}</Text>
+                <Text>{linhaTabela.classeDeServico}</Text>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.dataPagamento}</Text>
               </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{formatarParaReal(linhaTabela.previsto)}</Text>
-              </Td>
               <Td textAlign={"start"} fontWeight={"semibold"}>
-                <Text>{formatarParaReal(linhaTabela.realizado)}</Text>
+                <Text>{formatarParaReal(linhaTabela.valor)}</Text>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.descricaoDoServico}</Text>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
                 <Flex gap={2} align={"center"} justify={"center"}>
-                  <IconButton
-                    aria-label="Botão de Editar"
-                    icon={<MdModeEdit />}
-                    borderRadius={"10px"}
-                    background={"transparent"}
-                    color={"origem.500"}
-                    _hover={{
-                      background: "origem.500",
-                      transition: "all 0.4s",
-                      color: "white",
-                    }}
+                  <ModalEditar
+                    refreshState={refreshState}
+                    linhaTabela={linhaTabela}
                   />
                   <IconButton
                     aria-label="Botão de Editar"

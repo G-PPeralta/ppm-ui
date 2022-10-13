@@ -5,12 +5,16 @@ import { Button, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-function DateTimePickerData({ registerForm, data }: any) {
+function DateTimePickerData({ registerForm, data, required, value }: any) {
   const [dataInicio, setDataInicio] = useState<any>("");
+  const [initialValue, setInitial] = useState<any>("");
 
   useEffect(() => {
     if (data) {
       setDataInicio(data);
+    }
+    if (value) {
+      setInitial(new Date(value));
     }
   }, []);
 
@@ -40,13 +44,13 @@ function DateTimePickerData({ registerForm, data }: any) {
   return (
     <Flex direction={"column"}>
       <Flex gap={1}>
-        <RequiredField />
+        {required ? <RequiredField /> : null}
         <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
           DATA
         </Text>
       </Flex>
       <ReactDatePicker
-        selected={dataInicio}
+        selected={initialValue ? new Date(value) : dataInicio}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
         // showTimeSelect

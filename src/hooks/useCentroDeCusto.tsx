@@ -7,26 +7,26 @@ import { useToast } from "contexts/Toast";
 
 import { postCadastroDespesa } from "services/post/Financeiro";
 
-interface CentroDeCusto {
-  valor: string;
-  data: string;
-  fornecedorId: number;
-  classeDeServicoId: number;
-  pedido: string;
-  textoDoPedido: string;
-}
+// interface CentroDeCusto {
+//   valor: number;
+//   data: string;
+//   prestadorServicoId: number;
+//   classeDeServicoId: number;
+//   pedido: string;
+//   descricaoDoServico: string;
+// }
 
 export function useCentroDeCusto() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
-  const initialValues: CentroDeCusto = {
-    valor: "",
+  const initialValues: any = {
+    valor: 0,
     data: "",
-    fornecedorId: 0,
+    prestadorServicoId: 0,
     classeDeServicoId: 0,
     pedido: "",
-    textoDoPedido: "",
+    descricaoDoServico: "",
   };
 
   const registerForm = useFormik({
@@ -36,10 +36,10 @@ export function useCentroDeCusto() {
       const newValues = {
         valor: values.valor,
         data: values.data,
-        fornecedorId: values.fornecedorId,
+        prestadorServicoId: values.prestadorServicoId,
         classeDeServicoId: values.classeDeServicoId,
         pedido: values.pedido,
-        textoDoPedido: values.textoDoPedido,
+        descricaoDoServico: values.descricaoDoServico,
       };
 
       setLoading(true);

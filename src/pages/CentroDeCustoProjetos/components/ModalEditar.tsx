@@ -1,8 +1,10 @@
-import { BsPlus } from "react-icons/bs";
+import { useEffect } from "react";
+import { MdModeEdit } from "react-icons/md";
 
 import {
   Button,
   Flex,
+  IconButton,
   Input,
   Modal,
   ModalBody,
@@ -18,8 +20,6 @@ import {
 } from "@chakra-ui/react";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
-import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
-import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
 import { regexCaracteresEspeciais } from "utils/regex";
@@ -33,28 +33,45 @@ interface RefreshState {
   setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-interface Props {
-  refreshState: RefreshState;
+interface LinhaTabela {
+  idCusto: number;
+  prestadorDeServico: string;
+  prestadorDeServicoId: number;
+  classeDoServico: string;
+  classeDeServicoId: number;
+  dataPagamento: string;
+  valor: number;
+  descricaoDoServico: string;
+  pedido: string;
 }
 
-function ModalAdicionar({ refreshState }: Props) {
-  const { refresh, setRefresh } = refreshState;
+interface Options {
+  value: number;
+  label: string;
+}
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+interface Props {
+  refreshState: RefreshState;
+  linhaTabela: LinhaTabela;
+}
+
+function ModalEditar({ refreshState, linhaTabela }: Props) {
+  const { refresh, setRefresh } = refreshState;
   const { loading, registerForm } = useCentroDeCusto();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const optionsPrestadorServico = [
     {
       value: 1,
-      label: "Prestador 1",
+      label: "Fornecedor 1",
     },
     {
       value: 2,
-      label: "Prestador 2",
+      label: "Fornecedor 2",
     },
     {
       value: 3,
-      label: "Prestador 3",
+      label: "Fornecedor 3",
     },
   ];
 
@@ -73,23 +90,73 @@ function ModalAdicionar({ refreshState }: Props) {
     },
   ];
 
+  const setInicialValues = () => {
+    registerForm.setFieldValue("valor", linhaTabela.valor);
+    registerForm.setFieldValue("data", linhaTabela.dataPagamento);
+    registerForm.setFieldValue(
+      "prestadorServicoId",
+      linhaTabela.prestadorDeServicoId
+    );
+    registerForm.setFieldValue(
+      "classeDeServicoId",
+      linhaTabela.classeDeServicoId
+    );
+    registerForm.setFieldValue("pedido", linhaTabela.pedido);
+    registerForm.setFieldValue(
+      "descricaoDoServico",
+      linhaTabela.descricaoDoServico
+    );
+  };
+
+  const handleCancelar = () => {
+    registerForm.setFieldValue("valor", linhaTabela.valor);
+    registerForm.setFieldValue("data", linhaTabela.dataPagamento);
+    registerForm.setFieldValue(
+      "prestadorServicoId",
+      linhaTabela.prestadorDeServicoId
+    );
+    registerForm.setFieldValue(
+      "classeDeServicoId",
+      linhaTabela.classeDeServicoId
+    );
+    registerForm.setFieldValue("pedido", linhaTabela.pedido);
+    registerForm.setFieldValue(
+      "descricaoDoServico",
+      linhaTabela.descricaoDoServico
+    );
+    onClose();
+  };
+
+  const getValue = (options: Options[], chave: string) => {
+    const index = options
+      .map(({ value }) => value)
+      .indexOf(registerForm?.values?.[chave]);
+
+    return {
+      value: options?.[index]?.value,
+      label: options?.[index]?.label,
+    };
+  };
+
+  useEffect(() => {
+    setInicialValues();
+  }, []);
+
   return (
     <>
-      <Button
-        h={"56px"}
+      <IconButton
+        aria-label="Botão de Editar"
+        icon={<MdModeEdit />}
         borderRadius={"10px"}
-        background={"origem.500"}
-        variant="primary"
-        color="white"
+        background={"transparent"}
+        color={"origem.500"}
         _hover={{
-          background: "origem.600",
+          background: "origem.500",
           transition: "all 0.4s",
+          color: "white",
         }}
-        rightIcon={<BsPlus size={24} />}
         onClick={onOpen}
-      >
-        Adicionar
-      </Button>
+      />
 
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
@@ -107,13 +174,12 @@ function ModalAdicionar({ refreshState }: Props) {
 
           <ModalBody mt={3}>
             <Text fontWeight={"bold"} mb={3}>
-              LANÇAR DESPESA
+              EDITAR DESPESA
             </Text>
             <Flex direction={"column"} gap={4}>
               <Flex gap={4}>
                 <Flex direction={"column"}>
                   <Flex gap={1}>
-                    <RequiredField />
                     <Text
                       fontWeight={"bold"}
                       fontSize={"12px"}
@@ -140,7 +206,7 @@ function ModalAdicionar({ refreshState }: Props) {
                 <Flex direction={"column"}>
                   <DateTimePickerData
                     registerForm={registerForm}
-                    required={true}
+                    value={registerForm.values.data}
                   />
                 </Flex>
               </Flex>
@@ -150,7 +216,10 @@ function ModalAdicionar({ refreshState }: Props) {
                   nomeSelect={"PRESTADOR DE SERVIÇO"}
                   propName={"prestadorServicoId"}
                   options={optionsPrestadorServico}
-                  required={true}
+                  value={getValue(
+                    optionsPrestadorServico,
+                    "prestadorServicoId"
+                  )}
                 />
               </Flex>
               <Flex gap={4} w={"87%"}>
@@ -159,11 +228,10 @@ function ModalAdicionar({ refreshState }: Props) {
                   nomeSelect={"CLASSE DE SERVIÇO"}
                   propName={"classeDeServicoId"}
                   options={optionsClasseDeServico}
-                  required={true}
+                  value={getValue(optionsClasseDeServico, "classeDeServicoId")}
                 />
                 <Flex direction={"column"}>
                   <Flex gap={1}>
-                    <RequiredField />
                     <Text
                       fontWeight={"bold"}
                       fontSize={"12px"}
@@ -188,7 +256,6 @@ function ModalAdicionar({ refreshState }: Props) {
               <Flex gap={4}>
                 <Flex direction={"column"} flex={1}>
                   <Flex gap={1}>
-                    <RequiredField />
                     <Text
                       fontWeight={"bold"}
                       fontSize={"12px"}
@@ -215,11 +282,22 @@ function ModalAdicionar({ refreshState }: Props) {
 
           <ModalFooter justifyContent={"center"}>
             <Flex gap={2}>
-              <BotaoVermelhoLargoGhost
-                text={"Cancelar"}
-                formikForm={registerForm}
-                onClose={onClose}
-              />
+              <Button
+                h={"56px"}
+                borderRadius={"10px"}
+                variant="ghost"
+                color="red"
+                onClick={() => handleCancelar()}
+                _hover={{
+                  background: "red.500",
+                  transition: "all 0.4s",
+                  color: "white",
+                }}
+              >
+                <Text fontSize="16px" fontWeight={"bold"} mx={12}>
+                  Cancelar
+                </Text>
+              </Button>
               <BotaoAzulLargoPrimary
                 text={"Salvar"}
                 formikForm={registerForm}
@@ -236,4 +314,4 @@ function ModalAdicionar({ refreshState }: Props) {
   );
 }
 
-export default ModalAdicionar;
+export default ModalEditar;
