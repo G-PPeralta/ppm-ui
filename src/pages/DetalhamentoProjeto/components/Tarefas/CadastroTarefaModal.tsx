@@ -196,8 +196,8 @@ function CadastroTarefasModal({
                 >
                   <option value="">Selecione</option>
                   {atividadesProjeto.map((atividade, index) => (
-                    <option value={atividade.nomeAtividade} key={index}>
-                      {atividade.nomeAtividade}
+                    <option value={atividade.nom_atividade} key={index}>
+                      {atividade.nom_atividade}
                     </option>
                   ))}
                 </Select>

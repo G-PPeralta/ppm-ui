@@ -491,7 +491,7 @@ export interface TarefaAtividadeComId {
 
 export interface AtividadesProjeto {
   id: number;
-  nomeAtividade: string;
+  nom_atividade: string;
   tipoAtividade: string;
   deletado: boolean;
   macroatividadeId: number;

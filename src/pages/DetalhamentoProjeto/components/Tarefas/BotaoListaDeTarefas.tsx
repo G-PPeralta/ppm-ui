@@ -75,7 +75,7 @@ function BotaoListadeTarefas() {
   };
 
   async function fetchAtividadesProjeto() {
-    const { data } = await getAtividadesProjeto();
+    const { data } = await getAtividadesProjeto(Number(id));
     setAtividadesProjeto(data);
   }
 

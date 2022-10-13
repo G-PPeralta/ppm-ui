@@ -235,13 +235,13 @@ function EditarTarefaModal({
                   color="#2D2926"
                   id="atividadeRel"
                   name="atividadeRel"
-                  // value={atividadeId}
+                  value={atividade}
                   onChange={(event) => setAtividade(event.target.value)}
                 >
                   <option value="">Selecione</option>
                   {atividadesProjeto.map((atividade, index) => (
-                    <option value={atividade.nomeAtividade} key={index}>
-                      {atividade.nomeAtividade}
+                    <option value={atividade.nom_atividade} key={index}>
+                      {atividade.nom_atividade}
                     </option>
                   ))}
                 </Select>
