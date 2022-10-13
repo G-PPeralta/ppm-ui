@@ -14,7 +14,8 @@ export function useBudgetDetail(id: string | null) {
   // const [projects, setProjects] = useState<Project[]>([]);
   const [budgetFilter, setBudgetsFilter] = useState<BudgetDetail[]>([]);
   // const [projectSelected, setProjectSelected] = useState("");
-  const [nome, setNome] = useState("");
+  const [nomePoco, setNomePoco] = useState("");
+  const [nomeSonda, setNomeSonda] = useState("");
 
   const wd = window.innerWidth;
 
@@ -26,7 +27,8 @@ export function useBudgetDetail(id: string | null) {
 
   const getNome = async () => {
     const ls = await getNomePoco(id);
-    setNome(ls[0].nom_atividade);
+    setNomePoco(ls[0].poco_nome);
+    setNomeSonda(ls[0].sonda_nome);
   };
 
   /* const filterByProject = () => {
@@ -58,6 +60,7 @@ export function useBudgetDetail(id: string | null) {
     // loading,
     wd,
     // projects,
-    nome,
+    nomePoco,
+    nomeSonda,
   };
 }
