@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 // import toast from "react-hot-toast";
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdArrowForwardIos, MdModeEdit } from "react-icons/md";
+import { useParams } from "react-router-dom";
 
 import {
   Button,
@@ -46,6 +47,7 @@ import EditarTarefaModal from "./EditarTarefaModal";
 
 function BotaoListadeTarefas() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [tarefaFilter, setTarefaFilter] = useState("");
@@ -83,7 +85,7 @@ function BotaoListadeTarefas() {
   }
 
   async function getTaskList() {
-    const { data } = await getAtividadesTarefas();
+    const { data } = await getAtividadesTarefas(Number(id));
     // console.log(data);
 
     setTaskList(data);

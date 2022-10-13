@@ -58,16 +58,14 @@ function EditarTarefaModal({
   const [tarefaId, setTarefaId] = useState(editTarefa?.id);
   const [nome, setNome] = useState(editTarefa?.nome_tarefa);
   const [data, setData] = useState(novaData);
-  const [atividadeId, setAtividadeId] = useState(
-    editTarefa?.atividade_relacionada
-  );
-  const [responsavel, setResponsavel] = useState("");
+  const [atividade, setAtividade] = useState(editTarefa?.atividade_relacionada);
+  const [responsavel, setResponsavel] = useState(editTarefa?.responsavel);
   const [descricao, setDescricao] = useState(editTarefa?.descricao_tarefa);
 
   useEffect(() => {
     setNome(editTarefa.nome_tarefa);
     setData(novaData);
-    setAtividadeId(editTarefa.atividade_relacionada);
+    setAtividade(editTarefa.atividade_relacionada);
     setDescricao(editTarefa.descricao_tarefa);
     setTarefaId(editTarefa.id);
   }, [
@@ -89,7 +87,7 @@ function EditarTarefaModal({
   function updatePayload(campo: string) {
     if (campo === "nome_tarefa") return nome;
     if (campo === "data_tarefa") return data;
-    if (campo === "atividade_relacionada") return atividadeId;
+    if (campo === "atividade_relacionada") return atividade;
     if (campo === "descricao_tarefa") return descricao;
     if (campo === "responsavel") return responsavel;
   }
@@ -235,13 +233,11 @@ function EditarTarefaModal({
                   id="atividadeRel"
                   name="atividadeRel"
                   // value={atividadeId}
-                  onChange={(event) =>
-                    setAtividadeId(Number(event.target.value))
-                  }
+                  onChange={(event) => setAtividade(event.target.value)}
                 >
                   <option value="">Selecione</option>
                   {atividadesProjeto.map((atividade, index) => (
-                    <option value={atividade.id} key={index}>
+                    <option value={atividade.nomeAtividade} key={index}>
                       {atividade.nomeAtividade}
                     </option>
                   ))}
