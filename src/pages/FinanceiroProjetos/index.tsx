@@ -15,16 +15,8 @@ import Tabela from "./Components/Tabela";
 
 export function FinanceiroProjetos() {
   const { loading, listaFinanceiroProjetos } = useRequests();
-  console.log(
-    "🚀 ~ file: index.tsx ~ line 18 ~ FinanceiroProjetos ~ listaFinanceiroProjetos",
-    listaFinanceiroProjetos
-  );
   const [allData, setAllData] = useState<any[]>(listaFinanceiroProjetos);
   const [filter, setFilter] = useState<any[]>(listaFinanceiroProjetos);
-  console.log(
-    "🚀 ~ file: index.tsx ~ line 24 ~ FinanceiroProjetos ~ filter",
-    filter
-  );
   const [search, setSearch] = useState("");
 
   const handleGetAllData = async () => {

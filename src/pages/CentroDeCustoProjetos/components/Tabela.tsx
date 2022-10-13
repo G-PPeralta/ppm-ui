@@ -34,7 +34,6 @@ interface Props {
 }
 
 function Tabela({ data, refreshState }: Props) {
-  console.log("🚀 ~ file: Tabela.tsx ~ line 36 ~ Tabela ~ data", data);
   const { user } = useAuth();
   const { refresh, setRefresh } = refreshState;
   const [from, setFrom] = useState<number>(0);
