@@ -9,47 +9,27 @@ import Sidebar from "components/SideBar";
 
 import { regexCaracteresEspeciais } from "utils/regex";
 
-// import { useRequests } from "hooks/useRequests";
-
-import { useFinanceiroProjetos } from "hooks/useFinanceiroProjetos";
+import { useRequests } from "hooks/useRequests";
 
 import Tabela from "./Components/Tabela";
 
 export function FinanceiroProjetos() {
-  // const { loading, listaFinanceiroProjetos } = useRequests();
-  const { loading } = useFinanceiroProjetos();
-  const [allData, setAllData] = useState<any[]>([]);
-  const [filter, setFilter] = useState<any[]>([]);
+  const { loading, listaFinanceiroProjetos } = useRequests();
+  console.log(
+    "🚀 ~ file: index.tsx ~ line 18 ~ FinanceiroProjetos ~ listaFinanceiroProjetos",
+    listaFinanceiroProjetos
+  );
+  const [allData, setAllData] = useState<any[]>(listaFinanceiroProjetos);
+  const [filter, setFilter] = useState<any[]>(listaFinanceiroProjetos);
+  console.log(
+    "🚀 ~ file: index.tsx ~ line 24 ~ FinanceiroProjetos ~ filter",
+    filter
+  );
   const [search, setSearch] = useState("");
 
-  const mockData = [
-    {
-      idProjeto: 1,
-      nomeProjeto: "Carteira de Intervenções",
-      elementoPep: "OGAL.P0029.FS",
-      denominacaoDeObjeto: "40. PAL- Automação dos poços IeA",
-      mes: "06",
-      textoDoPedido: 'Tê reto WPB DN8x8x8" sch 40',
-      totalPrevisto: 30000.4,
-      totalRealizado: 30000.4,
-    },
-    {
-      idProjeto: 2,
-      nomeProjeto: "Carteira de Projeto",
-      elementoPep: "OGAL.P0029.FS",
-      denominacaoDeObjeto: "40. PAL- Automação dos poços IeA",
-      mes: "06",
-      textoDoPedido: 'Tê reto WPB DN8x8x8" sch 40',
-      totalPrevisto: 50000.2,
-      totalRealizado: 50000.2,
-    },
-  ];
-
   const handleGetAllData = async () => {
-    // setAllData(listaFinanceiroProjetos);
-    setAllData(mockData);
-    // setFilter(listaFinanceiroProjetos);
-    setFilter(mockData);
+    setAllData(listaFinanceiroProjetos);
+    setFilter(listaFinanceiroProjetos);
   };
 
   const filterData = (search: string) => {
@@ -57,9 +37,9 @@ export function FinanceiroProjetos() {
     if (search && search.length > 1) {
       filtered = allData?.filter(
         (searched) =>
-          searched.nomeProjeto.toLowerCase().indexOf(search.toLowerCase()) >
+          searched.nomeprojeto.toLowerCase().indexOf(search.toLowerCase()) >
             -1 ||
-          searched.elementoPep.toLowerCase().indexOf(search.toLowerCase()) > -1
+          searched.elementopep.toLowerCase().indexOf(search.toLowerCase()) > -1
       );
     } else {
       filtered = allData;

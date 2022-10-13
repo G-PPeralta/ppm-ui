@@ -3,6 +3,7 @@ import { FiTrash } from "react-icons/fi";
 
 import {
   Flex,
+  Heading,
   IconButton,
   Table,
   TableContainer,
@@ -33,6 +34,7 @@ interface Props {
 }
 
 function Tabela({ data, refreshState }: Props) {
+  console.log("🚀 ~ file: Tabela.tsx ~ line 36 ~ Tabela ~ data", data);
   const { user } = useAuth();
   const { refresh, setRefresh } = refreshState;
   const [from, setFrom] = useState<number>(0);
@@ -94,52 +96,67 @@ function Tabela({ data, refreshState }: Props) {
     return (
       <>
         {data ? (
-          data.slice(from, to).map((linhaTabela: any, index: number) => (
-            <Tr key={index}>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.idCusto}</Text>
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.pedido}</Text>
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.prestadorDeServico}</Text>
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.classeDeServico}</Text>
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.dataPagamento}</Text>
-              </Td>
-              <Td textAlign={"start"} fontWeight={"semibold"}>
-                <Text>{formatarParaReal(linhaTabela.valor)}</Text>
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.descricaoDoServico}</Text>
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Flex gap={2} align={"center"} justify={"center"}>
-                  <ModalEditar
-                    refreshState={refreshState}
-                    linhaTabela={linhaTabela}
-                  />
-                  <IconButton
-                    aria-label="Botão de Editar"
-                    icon={<FiTrash />}
-                    borderRadius={"10px"}
-                    background={"transparent"}
-                    color={"red.500"}
-                    _hover={{
-                      background: "red.500",
-                      transition: "all 0.4s",
-                      color: "white",
-                    }}
-                    onClick={() => handleDeletar(linhaTabela.idCusto)}
-                  />
-                </Flex>
-              </Td>
-            </Tr>
-          ))
+          data.slice(from, to).map((linhaTabela: any, index: number) => {
+            if (linhaTabela.idCusto === 0) {
+              return (
+                <Tr>
+                  <Heading size={"md"} m={4} fontWeight={500}>
+                    Não há dados
+                  </Heading>
+                </Tr>
+              );
+            }
+            return (
+              <Tr key={index}>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Text>{linhaTabela.idCusto}</Text>
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Text>{linhaTabela.pedido}</Text>
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Text>{linhaTabela.prestadorDeServico}</Text>
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Text>{linhaTabela.classeDeServico}</Text>
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Text>
+                    {linhaTabela.dataPagamento === null
+                      ? "01/01/2022"
+                      : linhaTabela.dataPagamento}
+                  </Text>
+                </Td>
+                <Td textAlign={"start"} fontWeight={"semibold"}>
+                  <Text>{formatarParaReal(linhaTabela.valor)}</Text>
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Text>{linhaTabela.descricaoDoServico}</Text>
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Flex gap={2} align={"center"} justify={"center"}>
+                    <ModalEditar
+                      refreshState={refreshState}
+                      linhaTabela={linhaTabela}
+                    />
+                    <IconButton
+                      aria-label="Botão de Editar"
+                      icon={<FiTrash />}
+                      borderRadius={"10px"}
+                      background={"transparent"}
+                      color={"red.500"}
+                      _hover={{
+                        background: "red.500",
+                        transition: "all 0.4s",
+                        color: "white",
+                      }}
+                      onClick={() => handleDeletar(linhaTabela.idCusto)}
+                    />
+                  </Flex>
+                </Td>
+              </Tr>
+            );
+          })
         ) : (
           <Tr>
             <Td textAlign={"center"} fontWeight={"semibold"}>

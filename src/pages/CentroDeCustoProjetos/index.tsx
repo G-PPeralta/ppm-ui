@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { Box, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
 
-// import { useRequests } from "hooks/useRequests";
-
-import { useFinanceiroProjetos } from "hooks/useFinanceiroProjetos";
+import { useRequests } from "hooks/useRequests";
 
 import ModalAdicionar from "./components/ModalAdicionar";
 import Tabela from "./components/Tabela";
@@ -17,62 +15,18 @@ import Tabela from "./components/Tabela";
 export function CentroDeCustoProjetos() {
   const [refresh, setRefresh] = useState(false);
 
-  // const { id } = useParams();
-  // const { loading, listaCentroCustoProjetos } = useRequests(Number(id));
-
-  const { loading } = useFinanceiroProjetos();
+  const { id } = useParams();
+  const { loading, listaCentroCustoProjetos } = useRequests(Number(id));
 
   const refreshState = {
     refresh,
     setRefresh,
   };
 
-  const mock = {
-    idProjeto: 1, // id do projeto pai
-    nomeProjeto: "Carteira de Projetos", // Nome do projeto pai
-    elementoPep: "OGAL.P0029.FS", // Esse elemento Pep é o que está no pai
-    centroDeCusto: [
-      {
-        idCusto: 1,
-        pedido: "Pedido 1",
-        prestadorDeServico: "Prestador de Serviço 1",
-        prestadorDeServicoId: 1,
-        classeDeServico: "Classe de Serviço 1",
-        classeDeServicoId: 1,
-        dataPagamento: "01/01/2022",
-        valor: 10000.4,
-        descricaoDoServico: "Descrição do Serviço 1",
-      },
-      {
-        idCusto: 2,
-        pedido: "Pedido 2",
-        prestadorDeServico: "Prestador de Serviço 2",
-        prestadorDeServicoId: 2,
-        classeDeServico: "Classe de Serviço 2",
-        classeDeServicoId: 2,
-        dataPagamento: "01/02/2021",
-        valor: 20000.4,
-        descricaoDoServico: "Descrição do Serviço 2",
-      },
-      {
-        idCusto: 3,
-        pedido: "Pedido 3",
-        prestadorDeServico: "Prestador de Serviço 3",
-        prestadorDeServicoId: 3,
-        classeDeServico: "Classe de Serviço 3",
-        classeDeServicoId: 3,
-        dataPagamento: "01/03/2021",
-        valor: 30000.4,
-        descricaoDoServico: "Descrição do Serviço 3",
-      },
-    ],
-  };
-
-  const [data, setData] = useState<any>(mock);
+  const [data, setData] = useState<any>(listaCentroCustoProjetos);
 
   const handleGetAllData = async () => {
-    // setData(listaCentroCustoProjetos);
-    setData(mock);
+    setData(listaCentroCustoProjetos);
   };
 
   useEffect(() => {
@@ -139,7 +93,10 @@ export function CentroDeCustoProjetos() {
                 </Flex>
               </Flex>
 
-              <Tabela data={data.centroDeCusto} refreshState={refreshState} />
+              <Tabela
+                data={listaCentroCustoProjetos.centroDeCusto}
+                refreshState={refreshState}
+              />
             </Box>
           </Flex>
         ) : (
