@@ -6,6 +6,8 @@ import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
 
+// import { useRequests } from "hooks/useRequests";
+
 import { useFinanceiroProjetos } from "hooks/useFinanceiroProjetos";
 
 import ModalAdicionar from "./components/ModalAdicionar";
@@ -13,6 +15,10 @@ import Tabela from "./components/Tabela";
 
 export function CentroDeCustoProjetos() {
   const [refresh, setRefresh] = useState(false);
+
+  // const { loading, listaCentroCustoProjetos } = useRequests();
+
+  const { loading } = useFinanceiroProjetos();
 
   const refreshState = {
     refresh,
@@ -59,10 +65,11 @@ export function CentroDeCustoProjetos() {
       },
     ],
   };
-  const { loading } = useFinanceiroProjetos();
+
   const [data, setData] = useState<any>(mock);
 
   const handleGetAllData = async () => {
+    // setData(listaCentroCustoProjetos);
     setData(mock);
   };
 

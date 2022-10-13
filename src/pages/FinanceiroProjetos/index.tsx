@@ -9,11 +9,14 @@ import Sidebar from "components/SideBar";
 
 import { regexCaracteresEspeciais } from "utils/regex";
 
+// import { useRequests } from "hooks/useRequests";
+
 import { useFinanceiroProjetos } from "hooks/useFinanceiroProjetos";
 
 import Tabela from "./Components/Tabela";
 
 export function FinanceiroProjetos() {
+  // const { loading, listaFinanceiroProjetos } = useRequests();
   const { loading } = useFinanceiroProjetos();
   const [allData, setAllData] = useState<any[]>([]);
   const [filter, setFilter] = useState<any[]>([]);
@@ -43,7 +46,9 @@ export function FinanceiroProjetos() {
   ];
 
   const handleGetAllData = async () => {
+    // setAllData(listaFinanceiroProjetos);
     setAllData(mockData);
+    // setFilter(listaFinanceiroProjetos);
     setFilter(mockData);
   };
 

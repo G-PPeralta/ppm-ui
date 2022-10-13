@@ -7,15 +7,6 @@ import { useToast } from "contexts/Toast";
 
 import { postCadastroDespesa } from "services/post/Financeiro";
 
-// interface CentroDeCusto {
-//   valor: number;
-//   data: string;
-//   prestadorServicoId: number;
-//   classeDeServicoId: number;
-//   pedido: string;
-//   descricaoDoServico: string;
-// }
-
 export function useCentroDeCusto() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
