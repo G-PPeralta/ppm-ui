@@ -27,7 +27,7 @@ interface Props {
 
 export function StatisticsTable({ data }: Props) {
   const [from, setFrom] = useState<number>(0);
-  const [to, setTo] = useState<number>(5);
+  const [to, setTo] = useState<number>(10);
 
   const fromTo = {
     from,
