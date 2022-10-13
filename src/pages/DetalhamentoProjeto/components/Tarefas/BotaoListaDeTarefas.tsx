@@ -79,8 +79,6 @@ function BotaoListadeTarefas() {
     setAtividadesProjeto(data);
   }
 
-  console.log(atividadesProjeto);
-
   function formatDate(date: Date) {
     const formated = date.toString().substring(0, 10).split("-");
     return `${formated[2]}/${formated[1]}/${formated[0]}`;
