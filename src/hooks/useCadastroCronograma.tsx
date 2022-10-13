@@ -120,6 +120,8 @@ export function useCadastroCronograma() {
       setLoading(true);
 
       try {
+        // const status = 200;
+        // console.log(">>>>newValues", newValues);
         const { status } = await postCadastroNovoCronograma(newValues);
 
         if (status === 200 || status === 201) {
