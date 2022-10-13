@@ -166,7 +166,7 @@ function EditarTarefaModal({
                   mt={"-9px"}
                   width={"328px"}
                   height={"56px"}
-                  color="#2D2926"
+                  color="black"
                   isRequired
                   placeholder="Nome tarefa"
                   type="text"
@@ -195,7 +195,7 @@ function EditarTarefaModal({
                   width={"136px"}
                   height={"56px"}
                   fontSize={"14px"}
-                  color="#2D2926"
+                  color="black"
                   id="data"
                   type="date"
                   name="data"
@@ -228,7 +228,7 @@ function EditarTarefaModal({
                   mt={"-9px"}
                   width={"208px"}
                   height={"56px"}
-                  color="#2D2926"
+                  color="black"
                   id="atividadeRel"
                   name="atividadeRel"
                   // value={atividadeId}
@@ -263,7 +263,7 @@ function EditarTarefaModal({
                   mt={"-9px"}
                   width={"208px"}
                   height={"56px"}
-                  color="#2D2926"
+                  color="black"
                   id="atividadeRel"
                   name="atividadeRel"
                   // value={atividadeId}
@@ -289,7 +289,7 @@ function EditarTarefaModal({
                 mt={"-9px"}
                 width={"456px"}
                 height={"121px"}
-                color="#2D2926"
+                color="black"
                 isRequired
                 placeholder="Descrição da tarefa"
                 id="descrição"

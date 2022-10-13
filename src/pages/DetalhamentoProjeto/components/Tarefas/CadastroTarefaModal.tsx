@@ -183,9 +183,9 @@ function CadastroTarefasModal({
                 </FormLabel>
                 <Select
                   borderRadius={"8px"}
-                  _placeholder={{ color: "black" }}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
+                  _placeholder={{ color: "black" }}
                   fontSize={"14px"}
                   width={"208px"}
                   height={"56px"}
@@ -220,9 +220,10 @@ function CadastroTarefasModal({
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
+                  _placeholder={{ color: "black" }}
                   width={"208px"}
                   height={"56px"}
-                  color="#2D2926"
+                  color="black"
                   id="atividadeRel"
                   name="atividadeRel"
                   value={responsavel}
