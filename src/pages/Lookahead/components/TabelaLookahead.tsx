@@ -118,8 +118,8 @@ export function TabelaLookahead(props: TableProps) {
   ));
 
   return (
-    <div className="table-fix">
-      <>
+    <>
+      <Flex direction="column" width="100%">
         <TableContainer mt={4} mb={3}>
           <Table variant="unstyled" width="100%">
             <Thead>
@@ -194,7 +194,7 @@ export function TabelaLookahead(props: TableProps) {
             />
           </Flex>
         </Flex>
-      </>
-    </div>
+      </Flex>
+    </>
   );
 }
