@@ -6,7 +6,7 @@ import { cadastroNovaDespesa } from "validations/Financeiro";
 import { useToast } from "contexts/Toast";
 
 import { postCadastroDespesa } from "services/post/Financeiro";
-import { putEditarDespesa } from "services/update/Financeiro";
+import { patchEditarDespesa } from "services/update/Financeiro";
 
 import { useAuth } from "./useAuth";
 
@@ -42,7 +42,7 @@ export function useCentroDeCusto(idCusto?: number) {
 
       if (idCusto) {
         try {
-          const { status } = await putEditarDespesa(idCusto, newValues);
+          const { status } = await patchEditarDespesa(idCusto, newValues);
 
           if (status === 200 || status === 201) {
             toast.success(`Despesa editada com sucesso!`, {

@@ -1,10 +1,10 @@
 import { api, token } from "services/api";
 
-export async function putEditarDespesa(
+export async function patchEditarDespesa(
   id: number,
   payload: any
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.put(
+  const { data, status } = await api.patch(
     `/???????????/${id}`,
     payload,
     token()
