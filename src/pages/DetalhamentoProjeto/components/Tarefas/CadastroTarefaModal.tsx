@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import {
   Flex,
@@ -43,9 +43,10 @@ function CadastroTarefasModal({
 }: CadastroTarefaProps) {
   // const { onClose } = useDisclosure();
   const { user } = useAuth();
+  const { id } = useParams();
   const [nome, setNome] = useState("");
   const [data, setData] = useState("");
-  const [atividadeId, setAtividadeId] = useState(0);
+  const [atividade, setAtividade] = useState("");
   const [responsavel, setResponsavel] = useState("");
   const [descricao, setDescricao] = useState("");
 
@@ -191,13 +192,11 @@ function CadastroTarefasModal({
                   height={"56px"}
                   id="atividadeRel"
                   name="atividadeRel"
-                  onChange={(event) =>
-                    setAtividadeId(Number(event.target.value))
-                  }
+                  onChange={(event) => setAtividade(event.target.value)}
                 >
                   <option value="">Selecione</option>
                   {atividadesProjeto.map((atividade, index) => (
-                    <option value={atividade.id} key={index}>
+                    <option value={atividade.nomeAtividade} key={index}>
                       {atividade.nomeAtividade}
                     </option>
                   ))}
@@ -291,9 +290,11 @@ function CadastroTarefasModal({
                   await postTarefa({
                     nome_tarefa: nome,
                     data_tarefa: new Date(data),
-                    atividade_relacionada: atividadeId,
+                    atividade_relacionada: atividade,
                     descricao_tarefa: descricao,
+                    responsavel,
                     nom_usu_create: user?.nome,
+                    projeto_id: Number(id),
                   });
                   newRender();
                   closeModal();

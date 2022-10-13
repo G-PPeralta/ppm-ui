@@ -31,7 +31,7 @@ import DateTimePicker from "./DateTimePicker";
 //   nome: string;
 // }
 
-function ModalAdicionarOperacao({
+function ModalEditarAtividade({
   setRefresh,
   refresh,
   editAtividade,
@@ -229,4 +229,4 @@ function ModalAdicionarOperacao({
   );
 }
 
-export default ModalAdicionarOperacao;
+export default ModalEditarAtividade;
