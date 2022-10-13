@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { AiFillPrinter } from "react-icons/ai";
-import { FiPrinter, FiPlus } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import ReactToPrint from "react-to-print";
 
 import {
@@ -25,6 +25,11 @@ import { GraficoPorCadaIntervencao } from "./components/PorCadaIntervencao";
 import { GraficoPorDuracao } from "./components/PorDuracao";
 
 export function GráficosEstatisticos() {
+  const [graphic, setGraphic] = useState("0");
+  const [loading, setLoading] = useState(true);
+
+  let initialValue = "0";
+
   interface TypeProps {
     name: string;
     value: string;
@@ -54,7 +59,7 @@ export function GráficosEstatisticos() {
                 color: "#0047BB",
                 transition: "all 0.4s",
               }}
-              disabled={report == "0" || report == ""}
+              disabled={graphic == "0" || graphic == ""}
             >
               Exportar
             </Button>
@@ -64,25 +69,20 @@ export function GráficosEstatisticos() {
       </Flex>
     );
   }
-  function handleReportButton(report: string) {
+  function handleGraphicButton(graphic: string) {
     return (
       <>
-        {report == "1" && <GraficoPorDuracao Prop={Props} />}
-        {report == "2" && <GraficoPorCadaIntervencao Prop={Props} />}
-        {report == "3" && <GraficoNPTPorPeriodoSPT Prop={Props} />}
+        {graphic == "1" && <GraficoPorDuracao Prop={Props} />}
+        {graphic == "2" && <GraficoPorCadaIntervencao Prop={Props} />}
+        {graphic == "3" && <GraficoNPTPorPeriodoSPT Prop={Props} />}
       </>
     );
   }
 
-  const [report, setReport] = useState("0");
-  const [loading, setLoading] = useState(true);
-
-  let initialValue = "1";
-
   const componentRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
-    setReport(initialValue);
+    setGraphic(initialValue);
     setLoading(false);
   };
 
@@ -94,62 +94,71 @@ export function GráficosEstatisticos() {
             <Ring speed={2} lineWeight={5} color="blue" size={64} />
           </Flex>
         )} */}
-        {loading && (
-          <Stack spacing="8">
-            <Flex w={"auto"} align="center" justify="center" bg="#EDF2F7">
-              <Box
-                py={{ base: "6", sm: "8" }}
-                px={{ base: "6", sm: "10" }}
-                w="100%"
-                minH={"83vh"}
-                bg="white"
-                boxShadow={{
-                  base: "none",
-                  sm: "md",
+        {/* {loading && ( */}
+        <Stack spacing="8">
+          <Flex w={"auto"} align="center" justify="center" bg="#EDF2F7">
+            <Box
+              py={{ base: "6", sm: "8" }}
+              px={{ base: "6", sm: "10" }}
+              w="100%"
+              minH={"83vh"}
+              bg="white"
+              boxShadow={{
+                base: "none",
+                sm: "md",
+              }}
+              borderRadius={{ base: "none", sm: "xl" }}
+            >
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  // projectsForm.handleSubmit(e);
                 }}
-                borderRadius={{ base: "none", sm: "xl" }}
               >
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    // projectsForm.handleSubmit(e);
-                  }}
-                >
-                  <Stack spacing="2">
-                    <Flex flexDirection={"column"}>
-                      <Flex justifyContent={"space-between"}>
-                        <Flex align={"flex-end"}>
-                          <FormControl mt={"-190px"}>
-                            <FormLabel htmlFor="name">
-                              <Text
-                                mb={"24px"}
-                                fontSize={"24px"}
-                                color={"#2D2926"}
-                                fontWeight={"700"}
-                                fontFamily={"Mulish"}
-                              >
-                                Gráficos estatísticos
-                              </Text>
-                            </FormLabel>
-                          </FormControl>
-                        </Flex>
-                        <Flex align={"flex-start"}>
-                          <ReactToPrint
-                            trigger={() => (
-                              <Button
-                                variant="ghost"
-                                colorScheme="messenger"
-                                rightIcon={<FiPrinter />}
-                                disabled={report == "0" || report == ""}
-                              >
-                                Exportar
-                              </Button>
-                            )}
-                            content={() => componentRef.current}
-                          />
-                        </Flex>
+                <Stack spacing="2">
+                  <Flex flexDirection={"column"}>
+                    <Flex justifyContent={"space-between"}>
+                      <Flex align={"flex-end"}>
+                        <FormControl>
+                          <FormLabel htmlFor="name">
+                            <Text
+                              mb={"24px"}
+                              fontSize={"24px"}
+                              color={"#2D2926"}
+                              fontWeight={"700"}
+                              fontFamily={"Mulish"}
+                            >
+                              Gráficos estatísticos
+                            </Text>
+                          </FormLabel>
+                        </FormControl>
                       </Flex>
-
+                      <Flex>
+                        <ReactToPrint
+                          trigger={() => (
+                            <Button
+                              // width={"77px"}
+                              height={"23px"}
+                              variant="ghost"
+                              fontSize={"18px"}
+                              fontWeight={"700"}
+                              color={"#0047BB"}
+                              rightIcon={<AiFillPrinter />}
+                              _hover={{
+                                background: "white",
+                                color: "#0047BB",
+                                transition: "all 0.4s",
+                              }}
+                              disabled={graphic == "0" || graphic == ""}
+                            >
+                              Exportar
+                            </Button>
+                          )}
+                          content={() => componentRef.current}
+                        />
+                      </Flex>
+                    </Flex>
+                    <Flex flexDir={"column"} gap={6}>
                       <Flex direction={"row"} gap={4}>
                         <Flex alignItems={"flex-end"}>
                           <FormControl>
@@ -236,6 +245,7 @@ export function GráficosEstatisticos() {
                             />
                           </FormControl>
                         </Flex>
+
                         <Flex>
                           <FormControl className="toBottom">
                             <Button
@@ -260,6 +270,11 @@ export function GráficosEstatisticos() {
                           </FormControl>
                         </Flex>
                       </Flex>
+                      <Flex ref={componentRef}>
+                        {handleGraphicButton(graphic)}
+                      </Flex>
+                    </Flex>
+                    {loading && (
                       <Text
                         fontWeight={"400"}
                         fontSize={"14px"}
@@ -269,14 +284,14 @@ export function GráficosEstatisticos() {
                       >
                         Selecione um tipo de Gráfico
                       </Text>
-                    </Flex>
-                  </Stack>
-                </form>
-              </Box>
-            </Flex>
-          </Stack>
-        )}
-        <Flex ref={componentRef}>{handleReportButton(report)}</Flex>
+                    )}
+                  </Flex>
+                </Stack>
+              </form>
+            </Box>
+          </Flex>
+        </Stack>
+        {/* )} */}
       </Sidebar>
     </>
   );
