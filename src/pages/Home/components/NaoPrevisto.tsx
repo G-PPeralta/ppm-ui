@@ -102,7 +102,7 @@ export default function NaoPrevistoComponent() {
               : (
                   (Number(totalNaoPrevisto) / Number(totalOrcamento)) *
                   100
-                ).toFixed(2)}
+                ).toFixed()}
             %
           </Text>
         </Box>
