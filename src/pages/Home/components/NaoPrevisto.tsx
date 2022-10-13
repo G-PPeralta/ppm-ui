@@ -99,7 +99,10 @@ export default function NaoPrevistoComponent() {
             isNaN(Number(totalNaoPrevisto)) ||
             isNaN(Number(totalOrcamento))
               ? 0
-              : (Number(totalNaoPrevisto) / Number(totalOrcamento)) * 100}
+              : (
+                  (Number(totalNaoPrevisto) / Number(totalOrcamento)) *
+                  100
+                ).toFixed(2)}
             %
           </Text>
         </Box>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 // import toast from "react-hot-toast";
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdArrowForwardIos, MdModeEdit } from "react-icons/md";
+import { useParams } from "react-router-dom";
 
 import {
   Button,
@@ -46,6 +47,7 @@ import EditarTarefaModal from "./EditarTarefaModal";
 
 function BotaoListadeTarefas() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [tarefaFilter, setTarefaFilter] = useState("");
@@ -83,7 +85,7 @@ function BotaoListadeTarefas() {
   }
 
   async function getTaskList() {
-    const { data } = await getAtividadesTarefas();
+    const { data } = await getAtividadesTarefas(Number(id));
     // console.log(data);
 
     setTaskList(data);
@@ -134,21 +136,10 @@ function BotaoListadeTarefas() {
             {task.descricao_tarefa}
           </Td>
           <Td textAlign={"center"} fontWeight={"semibold"}>
-            Responsável
+            {task.responsavel}
           </Td>
           <Td textAlign={"center"} fontWeight={"semibold"}>
-            {!task.status ? "0%" : task.status}
-            <IconButton
-              aria-label="Plus sign"
-              icon={<MdModeEdit />}
-              background="transparent"
-              variant="secondary"
-              color="#0047BB"
-              isRound={true}
-              // onClick={() => onEdit(lessons)}
-              width={"18px"}
-              height={"18px"}
-            />
+            {!task.status ? "1" : task.status}%
           </Td>
           <Td>
             <IconButton
