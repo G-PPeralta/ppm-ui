@@ -10,7 +10,7 @@ import {
   getFinanceiroPorProjetos,
 } from "services/get/Financeiro";
 
-export function useRequests() {
+export function useRequests(id: number) {
   const [loading, setLoading] = useState(false);
 
   const [listaFinanceiroProjetos, setListaFinanceiroProjetos] = useState<
@@ -24,7 +24,7 @@ export function useRequests() {
     setLoading(true);
 
     const financeiroProjetos = await getFinanceiroPorProjetos();
-    const tabelaCentroDeCusto = await getCentroDeCustoProjetos();
+    const tabelaCentroDeCusto = await getCentroDeCustoProjetos(id);
 
     const financeiroProjetosSorted = financeiroProjetos.data.sort(
       (a: FinanceiroPorProjetos, b: FinanceiroPorProjetos) =>

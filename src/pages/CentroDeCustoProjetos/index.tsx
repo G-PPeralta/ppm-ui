@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
+// import { useParams } from "react-router-dom";
 
 import { Box, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
@@ -16,7 +17,8 @@ import Tabela from "./components/Tabela";
 export function CentroDeCustoProjetos() {
   const [refresh, setRefresh] = useState(false);
 
-  // const { loading, listaCentroCustoProjetos } = useRequests();
+  // const { id } = useParams();
+  // const { loading, listaCentroCustoProjetos } = useRequests(Number(id));
 
   const { loading } = useFinanceiroProjetos();
 

@@ -6,8 +6,9 @@ import { cadastroNovaDespesa } from "validations/Financeiro";
 import { useToast } from "contexts/Toast";
 
 import { postCadastroDespesa } from "services/post/Financeiro";
+import { putEditarDespesa } from "services/update/Financeiro";
 
-export function useCentroDeCusto() {
+export function useCentroDeCusto(idCusto?: number) {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
@@ -35,20 +36,38 @@ export function useCentroDeCusto() {
 
       setLoading(true);
 
-      try {
-        const { status } = await postCadastroDespesa(newValues);
+      if (idCusto) {
+        try {
+          const { status } = await putEditarDespesa(idCusto, newValues);
 
-        if (status === 200 || status === 201) {
-          toast.success(`Despesa cadastrada com sucesso!`, {
+          if (status === 200 || status === 201) {
+            toast.success(`Despesa editada com sucesso!`, {
+              id: "toast-principal",
+            });
+            setLoading(false);
+          }
+        } catch (error) {
+          toast.error(`Erro ao editar despesa!`, {
             id: "toast-principal",
           });
           setLoading(false);
         }
-      } catch (error) {
-        toast.error(`Erro ao cadastrar despesa!`, {
-          id: "toast-principal",
-        });
-        setLoading(false);
+      } else {
+        try {
+          const { status } = await postCadastroDespesa(newValues);
+
+          if (status === 200 || status === 201) {
+            toast.success(`Despesa cadastrada com sucesso!`, {
+              id: "toast-principal",
+            });
+            setLoading(false);
+          }
+        } catch (error) {
+          toast.error(`Erro ao cadastrar despesa!`, {
+            id: "toast-principal",
+          });
+          setLoading(false);
+        }
       }
     },
   });

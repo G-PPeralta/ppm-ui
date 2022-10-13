@@ -14,11 +14,11 @@ export async function getFinanceiroPorProjetos(): Promise<{
   return { data, status };
 }
 
-export async function getCentroDeCustoProjetos(): Promise<{
+export async function getCentroDeCustoProjetos(id: number): Promise<{
   data: PaginaCentroDeCusto[];
   status: number;
 }> {
-  const { data, status } = await api.get("/?????????", token());
+  const { data, status } = await api.get(`/?????????/${id}`, token());
 
   return { data, status };
 }
