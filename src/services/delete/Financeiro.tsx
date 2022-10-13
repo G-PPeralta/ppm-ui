@@ -5,7 +5,7 @@ export async function deleteDespesa(
   idUsuario: string | undefined
 ): Promise<{ data: any; status: number }> {
   const { data, status } = await api.delete(
-    `/???????/${idCusto}/${idUsuario}`,
+    `/centro-custo/${idCusto}/${idUsuario}`,
     token()
   );
 

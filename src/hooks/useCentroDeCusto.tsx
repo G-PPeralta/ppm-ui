@@ -10,7 +10,7 @@ import { patchEditarDespesa } from "services/update/Financeiro";
 
 import { useAuth } from "./useAuth";
 
-export function useCentroDeCusto(idCusto?: number) {
+export function useCentroDeCusto(id?: number, post?: boolean, patch?: boolean) {
   const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -40,9 +40,9 @@ export function useCentroDeCusto(idCusto?: number) {
 
       setLoading(true);
 
-      if (idCusto) {
+      if (patch && id) {
         try {
-          const { status } = await patchEditarDespesa(idCusto, newValues);
+          const { status } = await patchEditarDespesa(id, newValues);
 
           if (status === 200 || status === 201) {
             toast.success(`Despesa editada com sucesso!`, {
@@ -56,9 +56,10 @@ export function useCentroDeCusto(idCusto?: number) {
           });
           setLoading(false);
         }
-      } else {
+      }
+      if (post && id) {
         try {
-          const { status } = await postCadastroDespesa(newValues);
+          const { status } = await postCadastroDespesa(id, newValues);
 
           if (status === 200 || status === 201) {
             toast.success(`Despesa cadastrada com sucesso!`, {

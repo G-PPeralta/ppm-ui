@@ -125,7 +125,10 @@ export function CentroDeCustoProjetos() {
                 </Flex>
               </Flex>
               <Flex justify={"space-between"} flex={1}>
-                <ModalAdicionar refreshState={refreshState} />
+                <ModalAdicionar
+                  refreshState={refreshState}
+                  idProjeto={data.idProjeto}
+                />
                 <Flex direction={"column"} justify={"end"}>
                   <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
                     ELEMENTO PEP
