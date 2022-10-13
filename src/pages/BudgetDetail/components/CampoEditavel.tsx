@@ -13,13 +13,11 @@ import {
 } from "@chakra-ui/react";
 import { BudgetDetail } from "interfaces/Budgets";
 
+import { formatReal } from "utils/formatReal";
+
 import { postAatualizarValorPrevisto } from "services/post/Budget";
 
 export default function CampoEditavel(props: { filho: BudgetDetail }) {
-  const brl = Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
   const { planejado, projeto } = props.filho;
 
   const save = (valor: string) => {
@@ -66,7 +64,7 @@ export default function CampoEditavel(props: { filho: BudgetDetail }) {
   return (
     <Editable
       textAlign="center"
-      defaultValue={brl.format(planejado)}
+      defaultValue={formatReal(planejado)}
       // fontSize="2xl"
       isPreviewFocusable={false}
       onSubmit={save}
