@@ -8,7 +8,10 @@ import { useToast } from "contexts/Toast";
 import { postCadastroDespesa } from "services/post/Financeiro";
 import { putEditarDespesa } from "services/update/Financeiro";
 
+import { useAuth } from "./useAuth";
+
 export function useCentroDeCusto(idCusto?: number) {
+  const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
@@ -26,6 +29,7 @@ export function useCentroDeCusto(idCusto?: number) {
     validationSchema: cadastroNovaDespesa,
     onSubmit: async (values) => {
       const newValues = {
+        user: user?.nome,
         valor: values.valor,
         data: values.data,
         prestadorServicoId: values.prestadorServicoId,
