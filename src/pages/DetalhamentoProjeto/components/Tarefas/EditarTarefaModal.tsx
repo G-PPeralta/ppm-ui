@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 // import { useParams } from "react-router-dom";
 
@@ -52,13 +52,30 @@ function EditarTarefaModal({
   const novaData = format(new Date(editTarefa?.data_tarefa), "yyyy-MM-dd");
 
   const { user } = useAuth();
-  const [tarefaId] = useState(editTarefa?.id);
+  // console.log(user);
+  // console.log(editTarefa);
+
+  const [tarefaId, setTarefaId] = useState(editTarefa?.id);
   const [nome, setNome] = useState(editTarefa?.nome_tarefa);
   const [data, setData] = useState(novaData);
   const [atividadeId, setAtividadeId] = useState(
     editTarefa?.atividade_relacionada
   );
   const [descricao, setDescricao] = useState(editTarefa?.descricao_tarefa);
+
+  useEffect(() => {
+    setNome(editTarefa.nome_tarefa);
+    setData(novaData);
+    setAtividadeId(editTarefa.atividade_relacionada);
+    setDescricao(editTarefa.descricao_tarefa);
+    setTarefaId(editTarefa.id);
+  }, [
+    // editTarefa.dat_usu_create,
+    novaData,
+    editTarefa.nome_tarefa,
+    editTarefa.id,
+    editTarefa.atividade_relacionada,
+  ]);
 
   const camposParaEditar = [
     "nome_tarefa",
@@ -238,7 +255,8 @@ function EditarTarefaModal({
                 >
                   RESPONSÁVEL
                 </FormLabel>
-                <Select
+                <Input
+                  type="text"
                   fontSize={"14px"}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
@@ -250,9 +268,7 @@ function EditarTarefaModal({
                   name="atividadeRel"
                   // value={atividadeId}
                   // onChange={(event) => setAtividadeId(Number(event.target.value))}
-                >
-                  <option value="">Selecione</option>
-                </Select>
+                ></Input>
               </Flex>
             </FormControl>
             <FormControl padding={1}>

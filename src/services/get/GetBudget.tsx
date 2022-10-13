@@ -158,3 +158,13 @@ export async function getBudgetProjects(): Promise<
 
   return data;
 }
+
+export async function getNomePoco(id: string | null) {
+  const uri = `/budgets/poco/${id}`;
+  const { data } = await api.get<{ poco_nome: string; sonda_nome: string }[]>(
+    uri,
+    token()
+  );
+
+  return data;
+}

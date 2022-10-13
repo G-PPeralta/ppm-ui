@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import { FiPlus } from "react-icons/fi";
+// import { FiPlus } from "react-icons/fi";
 
 import {
-  Box,
-  Button,
+  // Box,
+  // Button,
   Flex,
   FormControl,
   FormLabel,
-  Input,
+  // Input,
   Select,
   Stack,
   Text,
   useBreakpointValue,
-  useColorModeValue,
+  // useColorModeValue,
 } from "@chakra-ui/react";
 // import { Ring } from "@uiball/loaders";
 
@@ -215,7 +215,7 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
             <Ring speed={2} lineWeight={5} color="blue" size={64} />
           </Flex>
         )} */}
-      <Stack spacing="8">
+      {/* <Stack spacing="8">
         <Flex
           w={"auto"}
           align="center"
@@ -232,22 +232,22 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
               sm: useColorModeValue("md", "md-dark"),
             }}
             borderRadius={{ base: "none", sm: "xl" }}
+          > */}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          // projectsForm.handleSubmit(e);
+        }}
+      >
+        <Stack spacing="3">
+          <Flex
+            flexDirection={useBreakpointValue({
+              base: "column",
+              md: "column",
+            })}
+            gap={4}
           >
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                // projectsForm.handleSubmit(e);
-              }}
-            >
-              <Stack spacing="3">
-                <Flex
-                  flexDirection={useBreakpointValue({
-                    base: "column",
-                    md: "column",
-                  })}
-                  gap={4}
-                >
-                  <Flex justifyContent={"space-between"}>
+            {/* <Flex justifyContent={"space-between"}>
                     <Flex align={"flex-end"}>
                       <FormControl mt={"-50px"}>
                         <FormLabel>
@@ -264,9 +264,9 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                       </FormControl>
                     </Flex>
                     <Prop />
-                  </Flex>
-                  <Flex direction={"row"} mb={"10px"} gap={3}>
-                    <Flex alignItems={"flex-end"}>
+                  </Flex> */}
+            {/* <Flex direction={"row"} mb={"10px"} gap={3}> */}
+            {/* <Flex alignItems={"flex-end"}>
                       <FormControl>
                         <FormLabel
                           mt={"-20px"}
@@ -278,7 +278,7 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                           GERAR GRÁFICO POR
                         </FormLabel>
                         <Input
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="gera-grafico"
                           name="gera-grafico"
                           width={"480px"}
@@ -291,9 +291,8 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                           // onChange={handleProjectChange}
                         ></Input>
                       </FormControl>
-                    </Flex>
-
-                    <Flex>
+                    </Flex> */}
+            {/* <Flex>
                       <FormControl>
                         <FormLabel
                           fontSize={"12px"}
@@ -304,7 +303,7 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                           DE
                         </FormLabel>
                         <Input
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="de"
                           name="de"
                           width={"146px"}
@@ -331,7 +330,7 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                           ATÉ
                         </FormLabel>
                         <Input
-                          mt={"-6px"}
+                          mt={"-9px"}
                           id="ate"
                           name="ate"
                           width={"146px"}
@@ -343,124 +342,124 @@ export function GraficoPorCadaIntervencao({ Prop }: any) {
                           fontWeight={"400"}
                         />
                       </FormControl>
-                    </Flex>
-                  </Flex>
-                  <Flex mt={"-10px"} gap={4} mb={"10px"}>
-                    <Flex alignItems={"flex-end"}>
-                      <FormControl>
-                        <FormLabel
-                          fontSize={"12px"}
-                          color={"#949494"}
-                          fontWeight={"700"}
-                          htmlFor="sonda"
-                        >
-                          SONDA
-                        </FormLabel>
-                        <Select
-                          placeholder="Sonda"
-                          // onChange={handleProjectChange}
-                          mt={"-6px"}
-                          id="sonda"
-                          name="sonda"
-                          width={"208px"}
-                          height={"56px"}
-                          borderRadius={"8px"}
-                          color={"#2D2926"}
-                          fontSize={"14px"}
-                          fontWeight={"400"}
-                        >
-                          {listaSondas.map((sonda) => (
-                            <option>{sonda.nom_sonda}</option>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </Flex>
-                    <Flex>
-                      <FormControl className="toBottom">
-                        <Button
-                          h={"56px"}
-                          background={"#0047BB"}
-                          border={"2.3px solid"}
-                          color={"white"}
-                          variant="primary"
-                          _hover={{
-                            background: "white",
-                            color: "#0047BB",
-                            transition: "all 0.4s",
-                          }}
-                          rightIcon={<FiPlus />}
-                          fontSize={"18px"}
-                          fontWeight={"700"}
-                        >
-                          Gerar
-                        </Button>
-                      </FormControl>
-                    </Flex>
-                  </Flex>
-                  <Flex direction={"column"}>
-                    <Flex mb={"-20px"}>
-                      <Text
-                        mt={"20px"}
-                        fontSize={"24px"}
-                        fontWeight={"700"}
-                        color={"#2D2926"}
-                      >
-                        Relatório de cada intervenção
-                      </Text>
-                    </Flex>
-                    <Flex direction={"row"} gap={2}>
-                      <Text
-                        mt={"20px"}
-                        fontSize={"20px"}
-                        fontWeight={"700"}
-                        color={"#0047BB"}
-                      >
-                        TEMPO TOTAL AGUARDADO:
-                      </Text>
-                      <Text
-                        mt={"20px"}
-                        fontSize={"20px"}
-                        fontWeight={"700"}
-                        color={"#2D2926"}
-                      >
-                        100 HORAS
-                      </Text>
-                    </Flex>
+                    </Flex> */}
+            {/* </Flex> */}
+            <Flex mt={"-10px"} gap={4} mb={"10px"}>
+              <Flex alignItems={"flex-end"}>
+                <FormControl>
+                  <FormLabel
+                    fontSize={"12px"}
+                    color={"#949494"}
+                    fontWeight={"700"}
+                    htmlFor="sonda"
+                  >
+                    SONDA
+                  </FormLabel>
+                  <Select
+                    placeholder="Sonda"
+                    // onChange={handleProjectChange}
+                    mt={"-9px"}
+                    id="sonda"
+                    name="sonda"
+                    width={"208px"}
+                    height={"56px"}
+                    borderRadius={"8px"}
+                    color={"#2D2926"}
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                  >
+                    {listaSondas.map((sonda) => (
+                      <option>{sonda.nom_sonda}</option>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Flex>
+              {/* <Flex>
+                <FormControl className="toBottom">
+                  <Button
+                    h={"56px"}
+                    background={"#0047BB"}
+                    border={"2.3px solid"}
+                    color={"white"}
+                    variant="primary"
+                    _hover={{
+                      background: "white",
+                      color: "#0047BB",
+                      transition: "all 0.4s",
+                    }}
+                    rightIcon={<FiPlus />}
+                    fontSize={"18px"}
+                    fontWeight={"700"}
+                  >
+                    Gerar
+                  </Button>
+                </FormControl>
+              </Flex> */}
+            </Flex>
+            <Flex direction={"column"}>
+              <Flex mb={"-20px"}>
+                <Text
+                  mt={"20px"}
+                  fontSize={"24px"}
+                  fontWeight={"700"}
+                  color={"#2D2926"}
+                >
+                  Relatório de cada intervenção
+                </Text>
+              </Flex>
+              <Flex direction={"row"} gap={2}>
+                <Text
+                  mt={"20px"}
+                  fontSize={"20px"}
+                  fontWeight={"700"}
+                  color={"#0047BB"}
+                >
+                  TEMPO TOTAL AGUARDADO:
+                </Text>
+                <Text
+                  mt={"20px"}
+                  fontSize={"20px"}
+                  fontWeight={"700"}
+                  color={"#2D2926"}
+                >
+                  100 HORAS
+                </Text>
+              </Flex>
 
-                    <Flex gap={2} wrap={"wrap"} mt={"5px"}>
-                      {intervençoes.map((status, index) => (
-                        <StatusIntervencao
-                          key={index}
-                          status={status.status}
-                          color={status.color}
-                        />
-                      ))}
-                    </Flex>
-                  </Flex>
-                  {/* <Box
+              <Flex gap={2} wrap={"wrap"} mt={"5px"}>
+                {intervençoes.map((status, index) => (
+                  <StatusIntervencao
+                    key={index}
+                    status={status.status}
+                    color={status.color}
+                  />
+                ))}
+              </Flex>
+            </Flex>
+            {/* <Box
                     overflowX={"scroll"}
                     w={width * 0.7}
                     h={260}
                     display={"flex"}
                     overflowY={"hidden"}
                   > */}
-                  <Flex ml={"-25px"} mt={"50px"}>
-                    <StackedBarChart
-                      showY={true}
-                      sizeW={1000}
-                      sizeH={352}
-                      data={dataMock2}
-                      dataEntries={dataEntries2}
-                      barW={40}
-                    />
-                  </Flex>{" "}
-                  {/* </Box> */}
-                </Flex>
-              </Stack>
-            </form>
-          </Box>
+            <Flex ml={"-25px"} mt={"50px"}>
+              <StackedBarChart
+                showY={true}
+                sizeW={1000}
+                sizeH={352}
+                data={dataMock2}
+                dataEntries={dataEntries2}
+                barW={40}
+              />
+            </Flex>{" "}
+            {/* </Box> */}
+          </Flex>
+        </Stack>
+      </form>
+      {/* </Box>
         </Flex>
-      </Stack>
+      </Stack> */}
     </>
   );
 }

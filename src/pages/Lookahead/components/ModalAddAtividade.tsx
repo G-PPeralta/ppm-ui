@@ -5,7 +5,6 @@ import {
   Button,
   Flex,
   FormControl,
-  FormLabel,
   Modal,
   ModalBody,
   ModalContent,
@@ -17,6 +16,7 @@ import {
   useBreakpointValue,
   useDisclosure,
   Input,
+  Text,
 } from "@chakra-ui/react";
 import { CreateServicoFerramenta } from "interfaces/lookahead";
 
@@ -68,6 +68,7 @@ export function ModalAddAtividade(props: PropsType) {
   };
   const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
     <Button
+      color={"#949494"}
       onClick={onClick}
       ref={ref}
       variant="outline"
@@ -106,7 +107,7 @@ export function ModalAddAtividade(props: PropsType) {
             color={"white"}
             fontSize={"1em"}
           >
-            Cadastrar Atividade
+            Cadastrar
           </ModalHeader>
           {/* <ModalCloseButton color={"white"} /> */}
           <form
@@ -139,9 +140,9 @@ export function ModalAddAtividade(props: PropsType) {
                       <Flex direction={"column"} grow={1} width={211}>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="dat_ini_plan">
+                          <Text fontSize={"12px"} color={"#949494"}>
                             DATA INÍCIO
-                          </FormLabel>
+                          </Text>
                         </Flex>
                         <DatePicker
                           selected={startDate}
@@ -156,12 +157,12 @@ export function ModalAddAtividade(props: PropsType) {
                     </Flex>
 
                     <Flex>
-                      <FormControl>
+                      <FormControl marginRight="8px">
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="nom_atividade">
+                          <Text fontSize={"12px"} color={"#949494"}>
                             FERRAMENTA
-                          </FormLabel>
+                          </Text>
                         </Flex>
                         <Input
                           isRequired
@@ -169,14 +170,17 @@ export function ModalAddAtividade(props: PropsType) {
                           id="nom_atividade"
                           type="text"
                           name="nom_atividade"
+                          color={"#949494"}
                           onChange={(e) => setNomeFerramenta(e.target.value)}
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
                         />
                       </FormControl>
-                      <FormControl>
+                      <FormControl marginLeft="8px">
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="nom_atividade">SERVIÇO</FormLabel>
+                          <Text fontSize={"12px"} color={"#949494"}>
+                            SERVIÇO
+                          </Text>
                         </Flex>
                         <Input
                           isRequired
@@ -184,6 +188,7 @@ export function ModalAddAtividade(props: PropsType) {
                           id="nom_atividade"
                           type="text"
                           name="nom_atividade"
+                          color={"#949494"}
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
                           onChange={(e) => setNomeServico(e.target.value)}
                         />
@@ -205,13 +210,15 @@ export function ModalAddAtividade(props: PropsType) {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="dsc_comentario">
+                        <Text fontSize={"12px"} color={"#949494"}>
                           ANOTAÇÕES
-                        </FormLabel>
+                        </Text>
                         <Textarea
-                          placeholder="Adicione comentários sobre a atividade"
+                          placeholder="Descreva as anotações"
                           id="dsc_comentario"
                           name="dsc_comentario"
+                          color={"#949494"}
+                          rows={5}
                           onChange={(e) => setAnotacao(e.target.value)}
                         />
                       </FormControl>
@@ -254,7 +261,7 @@ export function ModalAddAtividade(props: PropsType) {
                   //   transition: "all 0.4s",
                   // }}
                 >
-                  Gravar
+                  Cadastrar
                   {/* {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (

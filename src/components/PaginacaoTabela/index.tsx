@@ -24,7 +24,7 @@ function PaginacaoTabela({ data, fromTo }: Props) {
   const { from, to, setFrom, setTo } = fromTo;
 
   const [pagAtual, setPagAtual] = useState(1);
-  const [perPage, setPerPage] = useState<number>(5);
+  const [perPage, setPerPage] = useState<number>(10);
 
   const innerWidth = window.innerWidth;
 
@@ -90,7 +90,7 @@ function PaginacaoTabela({ data, fromTo }: Props) {
             w={"120px"}
             onChange={(e) => changePerPage(+e.target.value)}
           >
-            <option value="5">5</option>
+            {/* <option value="5">5</option> */}
             <option value="10">10</option>
             <option value="15">15</option>
           </Select>
