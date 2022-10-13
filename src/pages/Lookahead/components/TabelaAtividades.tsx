@@ -53,9 +53,7 @@ export function TabelaAtividades(props: TableProps) {
 
   function getWeekDays() {
     const weekDays: DiasSemana[] = [];
-    const dataBr = Intl.DateTimeFormat("pt-BR", {
-      timeZone: "-3",
-    });
+    const dataBr = Intl.DateTimeFormat("pt-BR");
     const dia: number = semana ? +semana.split("/")[0] : 0;
     const dias = Array.from({ length: 7 }, (val, ind) =>
       (dia + ind).toString()
