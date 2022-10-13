@@ -149,7 +149,7 @@ export function ProjectSummary({ data, table }: Props) {
                 alignItems={"center"}
               >
                 <Text fontWeight={"semibold"} color={"gray.400"}>
-                  Início Reaç
+                  Início Real
                 </Text>
                 <Text> {data.startDate} </Text>
               </Flex>
