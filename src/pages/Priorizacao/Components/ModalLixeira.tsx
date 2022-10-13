@@ -30,6 +30,7 @@ function ModalLixeira() {
         onClick={onOpen}
         background="transparent"
         color="#0047BB"
+        fontWeight={"700"}
         float={"right"}
         fontSize="18px"
       >

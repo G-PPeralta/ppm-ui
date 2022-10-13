@@ -10,7 +10,12 @@ import { TextError } from "components/TextError";
 function FormDataInicio(projectsForm: any) {
   return (
     <FormControl>
-      <FormLabel htmlFor="dataInicio">INÍCIO</FormLabel>
+      <FormLabel
+        style={{ fontSize: "12px", color: "#A7A7A7" }}
+        htmlFor="dataInicio"
+      >
+        INÍCIO
+      </FormLabel>
       <Input
         isRequired
         placeholder="dd/mm/aaaa"

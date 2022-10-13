@@ -34,7 +34,12 @@ function FormComplexidade(projectsForm: any) {
 
   return (
     <FormControl>
-      <FormLabel htmlFor="complexidadeId">COMPLEXIDADE</FormLabel>
+      <FormLabel
+        htmlFor="complexidadeId"
+        style={{ fontSize: "12px", color: "#A7A7A7" }}
+      >
+        COMPLEXIDADE
+      </FormLabel>
       <Select
         id="complexidadeId"
         name="complexidadeId"
@@ -42,6 +47,7 @@ function FormComplexidade(projectsForm: any) {
         onChange={projectsForm.projectsForm.handleChange}
         w={useBreakpointValue({ base: "100%", md: "100%" })}
         placeholder="Selecione"
+        style={{ color: "#A7A7A7", fontSize: "14px" }}
       >
         {complexidadeState.map((complexidade) => (
           <option key={complexidade.id} value={complexidade.id}>

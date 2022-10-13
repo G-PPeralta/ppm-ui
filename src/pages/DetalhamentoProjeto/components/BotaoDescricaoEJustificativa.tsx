@@ -99,8 +99,7 @@ function BotaoDescricaoEJustificativa({
                   maxLength={255}
                   mt={"-9px"}
                   fontSize={"14px"}
-                  color={"#949494"}
-                  fontWeight={"400"}
+                  _placeholder={{ color: "black" }}
                   isRequired
                   placeholder="Digite a justificativa"
                   id="justificativa"
@@ -143,9 +142,8 @@ function BotaoDescricaoEJustificativa({
                   maxLength={255}
                   mt={"-9px"}
                   fontSize={"14px"}
-                  color={"#949494"}
-                  fontWeight={"400"}
                   isRequired
+                  _placeholder={{ color: "black" }}
                   placeholder="Digite a descrição"
                   id="descricao"
                   name="descricao"

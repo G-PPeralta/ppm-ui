@@ -12,7 +12,12 @@ import { TextError } from "components/TextError";
 function FormValorTotalPrevisto(projectsForm: any) {
   return (
     <FormControl>
-      <FormLabel htmlFor="valorTotalPrevisto">CAPEX PREVISTO</FormLabel>
+      <FormLabel
+        style={{ fontSize: "12px", color: "#A7A7A7" }}
+        htmlFor="valorTotalPrevisto"
+      >
+        CAPEX PREVISTO
+      </FormLabel>
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"
@@ -33,6 +38,7 @@ function FormValorTotalPrevisto(projectsForm: any) {
             base: "100%",
             md: "95%",
           })}
+          style={{ color: "#A7A7A7", fontSize: "14px" }}
         />
       </InputGroup>
       {projectsForm.projectsForm.errors.valorTotalPrevisto &&

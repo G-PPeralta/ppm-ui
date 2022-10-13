@@ -10,7 +10,12 @@ import { TextError } from "components/TextError";
 function FormElementoPep(projectsForm: any) {
   return (
     <FormControl>
-      <FormLabel htmlFor="elemento_pep">ELEMENTO PEP</FormLabel>
+      <FormLabel
+        htmlFor="elemento_pep"
+        style={{ fontSize: "12px", color: "#A7A7A7" }}
+      >
+        ELEMENTO PEP
+      </FormLabel>
       <Input
         isRequired
         placeholder="Elemento PEP"
@@ -20,6 +25,7 @@ function FormElementoPep(projectsForm: any) {
         value={projectsForm.projectsForm.values.elemento_pep}
         onChange={projectsForm.projectsForm.handleChange}
         w={useBreakpointValue({ base: "100%", md: "100%" })}
+        style={{ color: "#A7A7A7", fontSize: "14px" }}
       />
       {projectsForm.projectsForm.errors.elemento_pep &&
         projectsForm.projectsForm.touched.elemento_pep && (

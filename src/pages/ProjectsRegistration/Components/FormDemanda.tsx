@@ -29,13 +29,19 @@ function FormDemanda(projectsForm: any) {
 
   return (
     <FormControl>
-      <FormLabel htmlFor="demandaId">DEMANDA</FormLabel>
+      <FormLabel
+        style={{ fontSize: "12px", color: "#A7A7A7" }}
+        htmlFor="demandaId"
+      >
+        DEMANDA
+      </FormLabel>
       <Select
         id="demandaId"
         name="demandaId"
         value={projectsForm.projectsForm.values.demandaId}
         onChange={projectsForm.projectsForm.handleChange}
         w={useBreakpointValue({ base: "100%", md: "100%" })}
+        style={{ color: "#A7A7A7", fontSize: "14px" }}
       >
         {demandaState.map((demanda) => (
           <option key={demanda.id} value={demanda.id}>

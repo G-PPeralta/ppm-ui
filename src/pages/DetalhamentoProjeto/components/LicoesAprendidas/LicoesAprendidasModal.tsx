@@ -193,7 +193,7 @@ function LicoesAprendidasModal({
                         mt={"-9px"}
                         width={"208px"}
                         height={"56px"}
-                        color="#949494"
+                        _placeholder={{ color: "black" }}
                         id="categoria"
                         name="categoria"
                         placeholder="Digite"
@@ -230,7 +230,7 @@ function LicoesAprendidasModal({
                         mt={"-9px"}
                         width={"156px"}
                         height={"56px"}
-                        color="#949494"
+                        _placeholder={{ color: "black" }}
                         id="data"
                         type="Date"
                         name="data"

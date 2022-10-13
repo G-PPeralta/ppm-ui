@@ -90,7 +90,12 @@ function FormPolo(projectsForm: any) {
         </Box>
       ) : (
         <>
-          <FormLabel htmlFor="poloId">POLO</FormLabel>
+          <FormLabel
+            style={{ fontSize: "12px", color: "#A7A7A7" }}
+            htmlFor="poloId"
+          >
+            POLO
+          </FormLabel>
           {Number(projectsForm.projectsForm.values.poloId) ===
           poloState[poloState.length - 1].id ? (
             <>
@@ -126,6 +131,7 @@ function FormPolo(projectsForm: any) {
               onChange={projectsForm.projectsForm.handleChange}
               w={"95%"}
               placeholder="Selecione"
+              style={{ color: "#A7A7A7", fontSize: "14px" }}
             >
               {poloState.map((polo) => (
                 <option key={polo.id} value={polo.id}>

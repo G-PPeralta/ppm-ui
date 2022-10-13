@@ -83,12 +83,12 @@ function ModalPriorizacao(infosRankings: TableProps) {
               <FormControl>
                 <Flex>
                   <Flex
-                    mt={"15px"}
+                    mt={"20px"}
                     justify={"space-between"}
                     align={"center"}
                     flex={1}
                   >
-                    <Flex align={"flex-end"}>
+                    <Flex align={"flex-end"} alignSelf={"start"}>
                       <Text>
                         <Button
                           aria-label=""
@@ -102,7 +102,7 @@ function ModalPriorizacao(infosRankings: TableProps) {
                           }}
                           fontSize={"24px"}
                           fontWeight={"700"}
-                          alignSelf={"end"}
+                          textAlign={"start"}
                         >
                           <Icon
                             _hover={{
@@ -123,9 +123,9 @@ function ModalPriorizacao(infosRankings: TableProps) {
                       </Text>
                     </Flex>
 
-                    <Flex gap={9}>
+                    <Flex gap={11}>
                       <Flex gap={4}>
-                        <Flex align={"flex-start"}>
+                        <Flex align={"flex-start"} alignSelf={"start"}>
                           <ModalCadastrarOpcaoPriorizacao
                             nomeRanking={infosRankings.nomeRanking}
                             idRanking={infosRankings.idRanking}
@@ -138,11 +138,12 @@ function ModalPriorizacao(infosRankings: TableProps) {
                           />
                         </Flex>
                       </Flex>
-                      <Flex alignItems={"flex-start"}>
+                      <Flex alignItems={"flex-start"} alignSelf={"center"}>
                         <Button
                           background="transparent"
                           color="#0047BB"
                           fontSize="18px"
+                          fontWeight={"700"}
                           alignSelf={"end"}
                         >
                           Lixeira

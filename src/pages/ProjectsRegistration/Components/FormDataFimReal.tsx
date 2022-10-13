@@ -10,7 +10,12 @@ import { TextError } from "components/TextError";
 function FormDataFimReal(projectsForm: any) {
   return (
     <FormControl>
-      <FormLabel htmlFor="dataFimReal">FIM REAL</FormLabel>
+      <FormLabel
+        style={{ fontSize: "12px", color: "#A7A7A7" }}
+        htmlFor="dataFimReal"
+      >
+        FIM REAL
+      </FormLabel>
       <Input
         isRequired
         placeholder="dd/mm/aaaa"

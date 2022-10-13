@@ -91,7 +91,12 @@ function FormSolicitante(projectsForm: any) {
         </Box>
       ) : (
         <>
-          <FormLabel htmlFor="solicitanteId">SOLICITANTE</FormLabel>
+          <FormLabel
+            style={{ fontSize: "12px", color: "#A7A7A7" }}
+            htmlFor="solicitanteId"
+          >
+            SOLICITANTE
+          </FormLabel>
           {Number(projectsForm.projectsForm.values.solicitanteId) ===
           solicitanteState[solicitanteState.length - 1].id ? (
             <>
@@ -127,6 +132,7 @@ function FormSolicitante(projectsForm: any) {
               onChange={projectsForm.projectsForm.handleChange}
               w={"95%"}
               placeholder="Selecione"
+              style={{ color: "#A7A7A7", fontSize: "14px" }}
             >
               {solicitanteState.map((solicitante) => (
                 <option key={solicitante.id} value={solicitante.id}>

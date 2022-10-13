@@ -13,7 +13,12 @@ function FormDisabledCoordenador(projectsForm: any) {
     <>
       {!loading && (
         <Box>
-          <FormLabel htmlFor={"coordenador"}>COORDENADOR</FormLabel>
+          <FormLabel
+            style={{ fontSize: "12px", color: "#A7A7A7" }}
+            htmlFor={"coordenador"}
+          >
+            COORDENADOR
+          </FormLabel>
           <Input
             disabled
             placeholder=""
@@ -22,6 +27,7 @@ function FormDisabledCoordenador(projectsForm: any) {
             name={"coordenador"}
             value={projectsForm.projectsForm.values.coordenador}
             w={"100%"}
+            style={{ color: "#A7A7A7", fontSize: "14px" }}
           />
         </Box>
       )}
