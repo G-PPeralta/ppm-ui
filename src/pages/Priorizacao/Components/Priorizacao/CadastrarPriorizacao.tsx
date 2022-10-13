@@ -105,6 +105,7 @@ function ModalCadastrarPriorizacao() {
                               NOME DA PRIORIZAÇÃO
                             </FormLabel>
                             <Input
+                              maxLength={30}
                               ml={"3px"}
                               w={"400px"}
                               h={"56px"}

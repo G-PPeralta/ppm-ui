@@ -107,6 +107,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                               NOME
                             </FormLabel>
                             <Input
+                              maxLength={35}
                               fontSize={"14px"}
                               fontWeight={"400"}
                               color={"black"}

@@ -103,6 +103,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               NOME
                             </FormLabel>
                             <Input
+                              maxLength={40}
                               fontSize={"14px"}
                               fontWeight={"400"}
                               placeholder={"Nome"}

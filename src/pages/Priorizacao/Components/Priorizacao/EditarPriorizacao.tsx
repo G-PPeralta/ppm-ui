@@ -114,6 +114,7 @@ function EditarPriorizacao(infosRanking: TableProps) {
                               NOME DA PRIORIZAÇÃO
                             </FormLabel>
                             <Input
+                              maxLength={45}
                               ml={"3px"}
                               w={"480px"}
                               h={"56px"}
