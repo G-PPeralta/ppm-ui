@@ -293,6 +293,7 @@ function CadastroTarefasModal({
                     data_tarefa: new Date(data),
                     atividade_relacionada: atividadeId,
                     descricao_tarefa: descricao,
+                    responsavel,
                     nom_usu_create: user?.nome,
                   });
                   newRender();

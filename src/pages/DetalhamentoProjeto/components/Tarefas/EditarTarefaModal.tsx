@@ -61,6 +61,7 @@ function EditarTarefaModal({
   const [atividadeId, setAtividadeId] = useState(
     editTarefa?.atividade_relacionada
   );
+  const [responsavel, setResponsavel] = useState("");
   const [descricao, setDescricao] = useState(editTarefa?.descricao_tarefa);
 
   useEffect(() => {
@@ -82,6 +83,7 @@ function EditarTarefaModal({
     "data_tarefa",
     "atividade_relacionada",
     "descricao_tarefa",
+    "responsavel",
   ];
 
   function updatePayload(campo: string) {
@@ -89,6 +91,7 @@ function EditarTarefaModal({
     if (campo === "data_tarefa") return data;
     if (campo === "atividade_relacionada") return atividadeId;
     if (campo === "descricao_tarefa") return descricao;
+    if (campo === "responsavel") return responsavel;
   }
 
   return (
@@ -266,8 +269,8 @@ function EditarTarefaModal({
                   color="#2D2926"
                   id="atividadeRel"
                   name="atividadeRel"
-                  // value={atividadeId}
-                  // onChange={(event) => setAtividadeId(Number(event.target.value))}
+                  value={responsavel}
+                  onChange={(event) => setResponsavel(event.target.value)}
                 ></Input>
               </Flex>
             </FormControl>

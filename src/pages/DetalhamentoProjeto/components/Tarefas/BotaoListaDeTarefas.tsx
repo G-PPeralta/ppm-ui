@@ -134,7 +134,7 @@ function BotaoListadeTarefas() {
             {task.descricao_tarefa}
           </Td>
           <Td textAlign={"center"} fontWeight={"semibold"}>
-            Responsável
+            {task.responsavel}
           </Td>
           <Td textAlign={"center"} fontWeight={"semibold"}>
             {!task.status ? "0%" : task.status}

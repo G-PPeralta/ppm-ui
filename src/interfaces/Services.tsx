@@ -471,6 +471,7 @@ export interface TarefaAtividade {
   data_tarefa: Date;
   atividade_relacionada: number;
   descricao_tarefa: string;
+  responsavel?: string;
   nom_usu_create?: string;
   status?: number;
 }
@@ -483,6 +484,7 @@ export interface TarefaAtividadeComId {
   descricao_tarefa: string;
   nom_usu_create?: string;
   status?: number;
+  responsavel: string;
 }
 
 export interface AtividadesProjeto {
