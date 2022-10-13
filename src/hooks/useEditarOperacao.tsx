@@ -96,10 +96,10 @@ export function useEditarOperacao(
         id_atividade: values.id_atividade,
         // id_area: values.id_area,
         // id_responsavel: values.id_responsavel,
-        inicio_realizado: new Date(values.inicio_realizado),
-        fim_realizado: new Date(values.fim_realizado), // tratamento back
-        inicio_planejado: new Date(values.inicio_planejado),
-        fim_planejado: new Date(values.fim_planejado), // tratamento back
+        inicio_realizado: new Date(values.inicio_realizado).toLocaleString(),
+        fim_realizado: new Date(values.fim_realizado).toLocaleString(), // tratamento back
+        inicio_planejado: new Date(values.inicio_planejado).toLocaleString(),
+        fim_planejado: new Date(values.fim_planejado).toLocaleString(), // tratamento back
         // duracao_realizado: values.hrs_reais,
         // duracao_planejado: values.hrs_totais,
         // pct_real: values.pct_real, // tratamento back
