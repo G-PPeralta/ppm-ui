@@ -34,7 +34,7 @@ import { useCadastroOrcamentoPlanejado } from "hooks/useCadastroOrcamentoPlaneja
 
 function ModalGestaoDeCusto(props: { projeto: Projeto }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, setAtividade } =
+  const { registerForm, loading, setAtividade, fornecedores } =
     useCadastroOrcamentoPlanejado();
   const { id } = props.projeto;
 
@@ -136,9 +136,10 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                           value={registerForm.values.fornecedor}
                           onChange={registerForm.handleChange}
                         >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
+                          {fornecedores &&
+                            fornecedores.map((d) => (
+                              <option value={d.id}>{d.fornecedor}</option>
+                            ))}
                         </Select>
                       </FormControl>
                       <Flex

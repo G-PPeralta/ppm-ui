@@ -40,3 +40,25 @@ export interface BudgetReal {
   textPedido: string;
   nom_usu_create?: string;
 }
+
+export interface Totalizacao {
+  inicio: string;
+  fim: string;
+  custoDiarioTotalBRL: number;
+  custoDiarioTotalUSD: number;
+  custoTotalRealizadoBRL: number;
+  custoTotalRealizadoUSD: number;
+  custoTotalTotalPrevistoBRL: number;
+  custoTotalTotalPrevistoUSD: number;
+}
+
+export interface Titulo {
+  poco_nome: string;
+  sonda_nome: string;
+}
+
+export interface Result {
+  totalizacao: Totalizacao;
+  list: BudgetDetail[];
+  titulo: Titulo;
+}

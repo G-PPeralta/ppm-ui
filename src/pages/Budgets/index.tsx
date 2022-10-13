@@ -77,7 +77,7 @@ export function Budgets() {
                       <FormControl>
                         <FormLabel>Projeto</FormLabel>
                         <Select
-                          placeholder="Select option"
+                          placeholder="Todos"
                           onChange={handleProjectChange}
                         >
                           {projects &&

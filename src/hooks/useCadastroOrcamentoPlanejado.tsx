@@ -58,9 +58,10 @@ export function useCadastroOrcamentoPlanejado() {
             id: "toast-principal",
           });
           setLoading(false);
+          location.reload();
         }
       } catch (error) {
-        toast.error(`Erro ao cadastrar valor previsto ${values.gasto}!`, {
+        toast.error(`Erro ao cadastrar valor gasto ${values.gasto}!`, {
           id: "toast-principal",
         });
         setLoading(false);
