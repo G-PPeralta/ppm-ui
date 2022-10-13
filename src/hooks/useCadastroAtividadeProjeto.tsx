@@ -22,6 +22,7 @@ import { useAuth } from "./useAuth";
 
 export function useCadastroAtividadeProjeto(
   refresh: boolean,
+  setRefresh: Function,
   idProjeto?: number
 ) {
   const { user } = useAuth();
@@ -122,6 +123,7 @@ export function useCadastroAtividadeProjeto(
             id: "toast-principal",
           });
           setLoading(false);
+          setRefresh(!refresh);
         }
       } catch (error) {
         toast.error("Erro ao cadastrar atividade!", {
@@ -136,11 +138,11 @@ export function useCadastroAtividadeProjeto(
     reqGet();
   }, []);
 
-  useEffect(() => {
-    if (refresh) {
-      reqGet();
-    }
-  }, [refresh]);
+  // useEffect(() => {
+  //   if (refresh) {
+  //     reqGet();
+  //   }
+  // }, [refresh]);
 
   return {
     registerForm,

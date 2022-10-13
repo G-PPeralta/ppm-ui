@@ -27,6 +27,7 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
   const [loading, setLoading] = useState(true);
   const [gantt, setGantt] = useState<any[]>();
   const [refresh, setRefresh] = useState(false);
+  const [refreshGanttCriacao, setRefreshGanttCriacao] = useState(false);
 
   const {
     registerForm,
@@ -105,11 +106,11 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
     setTimeout(() => {
       setLoading(false);
     }, 500);
-  }, [gantt, refreshGant]);
+  }, [gantt, refreshGant, refreshGanttCriacao]);
 
   useEffect(() => {
     handleSetGanttData();
-  }, [refreshGant]);
+  }, [refreshGant, refreshGanttCriacao]);
 
   // useEffect(() => {
   //   setGantt(ganttDataLocal);
@@ -196,6 +197,8 @@ export function Gantt({ toolbarOptions, idProjeto }: ganttOptionsProps) {
             <ModalCadastroAtividades
               setRefresh={setRefresh}
               refresh={refresh}
+              setRefreshGanttCriacao={setRefreshGanttCriacao}
+              refreshGanttCriacao={refreshGanttCriacao}
               // atividades={atividades}
               idProjeto={idProjeto}
             />

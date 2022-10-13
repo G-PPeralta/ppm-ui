@@ -14,7 +14,7 @@ import { useToast } from "contexts/Toast";
 //   getAreaAtuacaoList,
 //   getResponsavelList,
 // } from "services/get/Infograficos";
-// import { patchOperacoesEstatisticas } from "services/update/OperacoesEstatisticas";
+import { patchAtividadeProjeto } from "services/update/Projeto";
 
 import { useAuth } from "./useAuth";
 
@@ -65,24 +65,15 @@ export function useEditarAtividadeGantt() {
     initialValues,
     validationSchema: adicionarOperacao,
     onSubmit: async (values) => {
+      const id = values.id_atividade;
       const newValues = {
-        id: values.id_atividade,
-        data_inicio: new Date(values.inicio_realizado),
-        data_fim: new Date(values.fim_realizado), // tratamento back
-        progresso: values.pct_real, // tratamento back
+        dat_ini: new Date(values.inicio_realizado).toLocaleString(),
+        dat_fim: new Date(values.fim_realizado).toLocaleString(),
+        pct_real: values.pct_real,
       };
 
-      // setLoading(true);
-
       try {
-        // TODO: liberar endpoint
-        const res = {
-          status: 200,
-          data: newValues,
-        };
-        const status = res.status;
-        // console.log(newValues);
-        // const { status } = await patchOperacoesEstatisticas(newValues);
+        const { status } = await patchAtividadeProjeto(id, newValues);
         if (status === 200 || status === 201) {
           toast.success("Operação adicionada com sucesso!", {
             id: "toast-principal",

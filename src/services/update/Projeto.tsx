@@ -8,3 +8,12 @@ export async function patchProjeto(
 
   return { data, status };
 }
+
+export async function patchAtividadeProjeto(
+  id: number,
+  payload: any
+): Promise<{ data: any; status: number }> {
+  const { data, status } = await api.patch(`/gantt/${id}/`, payload, token());
+
+  return { data, status };
+}
