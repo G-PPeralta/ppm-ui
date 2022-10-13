@@ -49,14 +49,12 @@ export function StatisticsTable({ data }: Props) {
             <Thead>
               <Tr background={"origem.500"}>
                 <Th color="white" textAlign={"center"}>
-                  Item
+                  Sonda
                 </Th>
                 <Th color="white" textAlign={"center"}>
-                  Intervenção
+                  Poço
                 </Th>
-                <Th color="white" textAlign={"center"}>
-                  Ações
-                </Th>
+                <Th color="white" textAlign={"center"}></Th>
               </Tr>
             </Thead>
             <Tbody scrollBehavior={"smooth"}>
@@ -89,8 +87,8 @@ export function StatisticsTable({ data }: Props) {
                           mr={2}
                           isRound={true}
                           size="sm"
-                        /> */}
-                      {/* <IconButton
+                        />
+                      <IconButton
                           aria-label="Plus sign"
                           icon={<FaTrash />}
                           background="white"
@@ -99,8 +97,8 @@ export function StatisticsTable({ data }: Props) {
                           mr={2}
                           isRound={true}
                           size="sm"
-                        /> */}
-                      {/* <EditaValorModal /> */}
+                        />
+                      <EditaValorModal /> */}
                     </Td>
                   </Tr>
                 ))
