@@ -255,7 +255,8 @@ function EditarTarefaModal({
                 >
                   RESPONSÁVEL
                 </FormLabel>
-                <Select
+                <Input
+                  type="text"
                   fontSize={"14px"}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
@@ -267,9 +268,7 @@ function EditarTarefaModal({
                   name="atividadeRel"
                   // value={atividadeId}
                   // onChange={(event) => setAtividadeId(Number(event.target.value))}
-                >
-                  <option value="">Selecione</option>
-                </Select>
+                ></Input>
               </Flex>
             </FormControl>
             <FormControl padding={1}>
