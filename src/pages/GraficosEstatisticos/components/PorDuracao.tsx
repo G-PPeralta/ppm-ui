@@ -172,7 +172,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                       <Text
                         mb={"1px"}
                         fontSize={"24px"}
-                        color={"#2D2926"}
+                        color={"black"}
                         fontWeight={"700"}
                         fontFamily={"Mulish"}
                       >
@@ -203,7 +203,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                       height={"56px"}
                       borderRadius={"8px"}
                       placeholder="Histórico de durações"
-                      _placeholder={{ color: "#2D2926" }}
+                      _placeholder={{ color: "black" }}
                       fontSize={"14px"}
                       fontWeight={"400"}
                       // onChange={handleProjectChange}
@@ -230,7 +230,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                       borderRadius={"8px"}
                       type={"date"}
                       mb={"-10px"}
-                      color={"#2D2926"}
+                      color={"black"}
                       fontSize={"14px"}
                       fontWeight={"400"}
                     />
@@ -256,7 +256,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                       height={"56px"}
                       borderRadius={"8px"}
                       type={"date"}
-                      color={"#2D2926"}
+                      color={"black"}
                       fontSize={"14px"}
                       fontWeight={"400"}
                     />
@@ -283,7 +283,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                   width={"208px"}
                   height={"56px"}
                   borderRadius={"8px"}
-                  color={"#2D2926"}
+                  color={"black"}
                   fontSize={"14px"}
                   fontWeight={"400"}
                 >
@@ -342,7 +342,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                   // color={"#2D2926"}
                   fontSize={"14px"}
                   fontWeight={"400"}
-                  _placeholder={{ color: "#2D2926" }}
+                  _placeholder={{ color: "black" }}
                 />
               </FormControl>
             </Flex>
@@ -367,9 +367,9 @@ export function GraficoPorDuracao({ Prop }: any) {
                   name="outro"
                   width={"146px"}
                   height={"56px"}
-                  color={"#2D2926"}
+                  _placeholder={{ color: "black" }}
                   fontSize={"14px"}
-                  fontWeight={"400"}
+                  // fontWeight={"400"}
                   borderRadius={"8px"}
                 >
                   {durationHistory.map((d) => (
@@ -407,7 +407,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                 mt={"5px"}
                 fontSize={"24px"}
                 fontWeight={"700"}
-                color={"#2D2926"}
+                color={"black"}
               >
                 Histórico de durações
               </Text>
@@ -425,7 +425,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                 mt={"10px"}
                 fontSize={"20px"}
                 fontWeight={"700"}
-                color={"#2D2926"}
+                color={"black"}
               >
                 8 HORAS
               </Text>
@@ -444,7 +444,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                 mt={"10px"}
                 fontSize={"20px"}
                 fontWeight={"700"}
-                color={"#2D2926"}
+                color={"black"}
               >
                 16 HORAS
               </Text>
@@ -463,7 +463,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                 mt={"10px"}
                 fontSize={"20px"}
                 fontWeight={"700"}
-                color={"#2D2926"}
+                color={"black"}
               >
                 24 HORAS
               </Text>
@@ -482,7 +482,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                 mt={"10px"}
                 fontSize={"20px"}
                 fontWeight={"700"}
-                color={"#2D2926"}
+                color={"black"}
               >
                 12 HORAS
               </Text>

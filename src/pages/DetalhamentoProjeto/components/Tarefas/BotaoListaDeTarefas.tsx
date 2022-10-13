@@ -235,7 +235,7 @@ function BotaoListadeTarefas() {
                         mt={"-9px"}
                         width={"328px"}
                         height={"56px"}
-                        color="#949494"
+                        _placeholder={{ color: "black" }}
                         placeholder="Nome da tarefa"
                         type="text"
                         id="tarefa"
@@ -271,7 +271,7 @@ function BotaoListadeTarefas() {
                         mt={"-9px"}
                         width={"156px"}
                         height={"56px"}
-                        color="#949494"
+                        _placeholder={{ color: "black" }}
                         id="data"
                         type="date"
                         // maxLength={6}

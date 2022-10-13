@@ -107,10 +107,12 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                               NOME
                             </FormLabel>
                             <Input
+                              maxLength={35}
                               fontSize={"14px"}
                               fontWeight={"400"}
-                              color={"#949494"}
+                              color={"black"}
                               ml={"3px"}
+                              // placeholder="Nome"
                               w={"328px"}
                               border={"1px solid #949494"}
                               h={"56px"}
@@ -146,7 +148,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                               w={"328px"}
                               fontSize={"14px"}
                               fontWeight={"400"}
-                              color={"#949494"}
+                              _placeholder={{ color: "black" }}
                               id="num_nota"
                               name="num_nota"
                               placeholder="Selecione"

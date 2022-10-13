@@ -88,7 +88,7 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
           mt={4}
           mb={3}
           borderRadius={"10px"}
-          overflowX={"scroll"}
+          // overflowX={"scroll"}
         >
           <Table
             variant="striped"
@@ -111,7 +111,11 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
                 </Th>
               </Tr>
             </Thead>
-            <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+            <Tbody
+            // scrollBehavior={"smooth"}
+            >
+              {tableData}
+            </Tbody>
             {/* <Tfoot>
               <Tr background={"origem.500"}>
                 <Th color="transparent">Total</Th>

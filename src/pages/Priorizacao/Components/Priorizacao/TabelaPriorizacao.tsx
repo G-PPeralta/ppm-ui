@@ -79,7 +79,7 @@ export function TabelaPriorizacao() {
           mt={4}
           mb={4}
           borderRadius={"10px"}
-          overflowX={"scroll"}
+          // overflowX={"scroll"}
         >
           <Table variant="striped" colorScheme={"strippedGray"}>
             <Thead>
@@ -101,7 +101,11 @@ export function TabelaPriorizacao() {
                 </Th>
               </Tr>
             </Thead>
-            <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+            <Tbody
+            //  scrollBehavior={"smooth"}
+            >
+              {tableData}
+            </Tbody>
             {/* <Tfoot>
               <Tr background={"origem.500"}>
                 <Th background={"origem.500"} color="transparent">
