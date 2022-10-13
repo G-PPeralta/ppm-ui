@@ -139,18 +139,7 @@ function BotaoListadeTarefas() {
             {task.responsavel}
           </Td>
           <Td textAlign={"center"} fontWeight={"semibold"}>
-            {!task.status ? "0%" : task.status}
-            <IconButton
-              aria-label="Plus sign"
-              icon={<MdModeEdit />}
-              background="transparent"
-              variant="secondary"
-              color="#0047BB"
-              isRound={true}
-              // onClick={() => onEdit(lessons)}
-              width={"18px"}
-              height={"18px"}
-            />
+            {!task.status ? "1" : task.status}%
           </Td>
           <Td>
             <IconButton

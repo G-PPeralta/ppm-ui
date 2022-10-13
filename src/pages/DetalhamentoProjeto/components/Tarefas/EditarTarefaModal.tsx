@@ -60,6 +60,7 @@ function EditarTarefaModal({
   const [data, setData] = useState(novaData);
   const [atividade, setAtividade] = useState(editTarefa?.atividade_relacionada);
   const [responsavel, setResponsavel] = useState(editTarefa?.responsavel);
+  const [status, setStatus] = useState(editTarefa?.status);
   const [descricao, setDescricao] = useState(editTarefa?.descricao_tarefa);
 
   useEffect(() => {
@@ -82,6 +83,7 @@ function EditarTarefaModal({
     "atividade_relacionada",
     "descricao_tarefa",
     "responsavel",
+    "status",
   ];
 
   function updatePayload(campo: string) {
@@ -90,6 +92,7 @@ function EditarTarefaModal({
     if (campo === "atividade_relacionada") return atividade;
     if (campo === "descricao_tarefa") return descricao;
     if (campo === "responsavel") return responsavel;
+    if (campo === "status") return status;
   }
 
   return (
@@ -270,6 +273,29 @@ function EditarTarefaModal({
                 ></Input>
               </Flex>
             </FormControl>
+            <FormLabel
+              htmlFor="status"
+              color="#949494"
+              fontSize="12px"
+              fontWeight="700"
+              mt={"6px"}
+            >
+              STATUS
+            </FormLabel>
+            <Input
+              type="number"
+              fontSize={"14px"}
+              borderRadius={"8px"}
+              border={"1px solid #A7A7A7"}
+              mt={"-9px"}
+              width={"208px"}
+              height={"56px"}
+              color="#2D2926"
+              id="status"
+              name="status"
+              value={status}
+              onChange={(event) => setStatus(Number(event.target.value))}
+            ></Input>
             <FormControl padding={1}>
               <FormLabel
                 htmlFor="acao"
@@ -330,7 +356,9 @@ function EditarTarefaModal({
                     patchTarefa(
                       Number(tarefaId),
                       tarefa,
-                      updatePayload(tarefa)?.toString() || "",
+                      tarefa !== "status"
+                        ? updatePayload(tarefa) || 0
+                        : updatePayload(tarefa)?.toString() || "",
                       user?.nome
                     )
                   );
