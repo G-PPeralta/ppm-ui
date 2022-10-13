@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { BudgetDetail } from "interfaces/Budgets";
 
-import { getBudgetDetail } from "services/get/GetBudget";
+import { getBudgetDetail, getNomePoco } from "services/get/GetBudget";
 
 export function useBudgetDetail(id: string | null) {
   // const { toast } = useToast();
@@ -14,6 +14,7 @@ export function useBudgetDetail(id: string | null) {
   // const [projects, setProjects] = useState<Project[]>([]);
   const [budgetFilter, setBudgetsFilter] = useState<BudgetDetail[]>([]);
   // const [projectSelected, setProjectSelected] = useState("");
+  const [nome, setNome] = useState("");
 
   const wd = window.innerWidth;
 
@@ -21,6 +22,11 @@ export function useBudgetDetail(id: string | null) {
     const data = await getBudgetDetail(id);
     setBudgets(data);
     setBudgetsFilter(data);
+  };
+
+  const getNome = async () => {
+    const ls = await getNomePoco(id);
+    setNome(ls[0].nom_atividade);
   };
 
   /* const filterByProject = () => {
@@ -44,6 +50,7 @@ export function useBudgetDetail(id: string | null) {
 
   useEffect(() => {
     gerarBudgetsList();
+    getNome();
   }, []);
 
   return {
@@ -51,5 +58,6 @@ export function useBudgetDetail(id: string | null) {
     // loading,
     wd,
     // projects,
+    nome,
   };
 }
