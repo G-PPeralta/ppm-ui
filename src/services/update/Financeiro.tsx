@@ -5,7 +5,7 @@ export async function patchEditarDespesa(
   payload: any
 ): Promise<{ data: any; status: number }> {
   const { data, status } = await api.patch(
-    `/???????????/${id}`,
+    `/centro-custo/${id}`,
     payload,
     token()
   );
