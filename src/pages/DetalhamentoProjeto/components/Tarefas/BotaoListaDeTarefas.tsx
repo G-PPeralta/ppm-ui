@@ -75,9 +75,11 @@ function BotaoListadeTarefas() {
   };
 
   async function fetchAtividadesProjeto() {
-    const { data } = await getAtividadesProjeto();
+    const { data } = await getAtividadesProjeto(Number(id));
     setAtividadesProjeto(data);
   }
+
+  console.log(atividadesProjeto);
 
   function formatDate(date: Date) {
     const formated = date.toString().substring(0, 10).split("-");
