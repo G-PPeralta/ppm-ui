@@ -34,9 +34,9 @@ import DateTimePicker from "./DateTimePicker";
 function ModalAdicionarOperacao({
   setRefresh,
   refresh,
-  editOp,
-  listaResponsaveis,
-  listaAreaAtuacao,
+  editAtividade,
+  // listaResponsaveis,
+  // listaAreaAtuacao,
   isOpen,
   onClose,
   registerForm,
@@ -55,18 +55,17 @@ function ModalAdicionarOperacao({
   // }));
 
   useEffect(() => {
-    // console.log(">>>>editOp", editOp);
-    registerForm.setFieldValue("id_atividade", editOp.id_atividade);
-    registerForm.setFieldValue("nome_atividade", editOp.nome_atividade);
-    // registerForm.setFieldValue("id_responsavel", editOp.id_responsavel);
-    registerForm.setFieldValue("inicio_planejado", editOp.inicio_planejado);
-    registerForm.setFieldValue("inicio_realizado", editOp.inicio_realizado);
-    registerForm.setFieldValue("fim_planejado", editOp.fim_planejado);
-    registerForm.setFieldValue("fim_realizado", editOp.fim_realizado);
-    registerForm.setFieldValue("hrs_totais", editOp.hrs_totais);
-    registerForm.setFieldValue("hrs_reais", editOp.hrs_reais);
-    registerForm.setFieldValue("pct_real", editOp.pct_real);
-  }, [editOp]);
+    registerForm.setFieldValue("id_atividade", editAtividade.id_atividade);
+    registerForm.setFieldValue("nome_atividade", editAtividade.nome_atividade);
+    registerForm.setFieldValue(
+      "inicio_realizado",
+      editAtividade.inicio_realizado
+    );
+    registerForm.setFieldValue("fim_realizado", editAtividade.fim_realizado);
+    // registerForm.setFieldValue("hrs_totais", editOp.hrs_totais);
+    // registerForm.setFieldValue("hrs_reais", editOp.hrs_reais);
+    registerForm.setFieldValue("pct_real", editAtividade.pct_real);
+  }, [editAtividade]);
 
   return (
     <>
@@ -95,7 +94,7 @@ function ModalAdicionarOperacao({
             color={"white"}
             fontSize={"1em"}
           >
-            Editar Operação
+            Editar Atividade
           </ModalHeader>
           <form
             onSubmit={(e) => {
@@ -148,32 +147,12 @@ function ModalAdicionarOperacao({
 
                 <Flex flex={1} direction={"column"}>
                   <Text fontWeight={"bold"}>Datas</Text>
-                  <Flex mb={5}>
-                    <Flex flex={1}>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"inicio_planejado"}
-                        label={"INÍCIO PLANEJADO"}
-                        required={true}
-                        data={registerForm.values.inicio_planejado}
-                      />
-                    </Flex>
-                    <Flex flex={1}>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"fim_planejado"}
-                        label={"FIM PLANEJADO"}
-                        required={false}
-                        data={registerForm.values.fim_planejado}
-                      />
-                    </Flex>
-                  </Flex>
                   <Flex>
                     <Flex flex={1}>
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"inicio_realizado"}
-                        label={"INÍCIO REAL"}
+                        label={"INÍCIO"}
                         required={false}
                         data={registerForm.values.inicio_realizado}
                       />
@@ -182,7 +161,7 @@ function ModalAdicionarOperacao({
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"fim_realizado"}
-                        label={"FIM REAL"}
+                        label={"FIM"}
                         required={false}
                         data={registerForm.values.fim_realizado}
                       />
