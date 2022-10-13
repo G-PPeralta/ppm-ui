@@ -233,7 +233,7 @@ export function ProjectsRegistration() {
                         ) : (
                           <>
                             <BsPlusLg />
-                            <Text ml={2}>CADASTRAR PROJETO</Text>
+                            <Text ml={2}>Cadastrar Projeto</Text>
                           </>
                         )}
                       </Button>

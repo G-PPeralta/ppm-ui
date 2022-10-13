@@ -85,7 +85,12 @@ function FormGate(projectsForm: any) {
         </Box>
       ) : (
         <>
-          <FormLabel htmlFor="gateId">GATE</FormLabel>
+          <FormLabel
+            style={{ fontSize: "12px", color: "#A7A7A7" }}
+            htmlFor="gateId"
+          >
+            GATE
+          </FormLabel>
           {Number(projectsForm.projectsForm.values.gateId) ===
           gateState[gateState.length - 1].id ? (
             <>
@@ -121,6 +126,7 @@ function FormGate(projectsForm: any) {
               onChange={projectsForm.projectsForm.handleChange}
               w={"95%"}
               placeholder="Selecione"
+              style={{ color: "#A7A7A7", fontSize: "14px" }}
             >
               {gateState.map((gate) => (
                 <option key={gate.id} value={gate.id}>

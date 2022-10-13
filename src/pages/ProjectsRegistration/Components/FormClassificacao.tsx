@@ -90,7 +90,12 @@ function FormClassificacao(projectsForm: any) {
         </Box>
       ) : (
         <>
-          <FormLabel htmlFor="classificacaoId">CLASSIFICAÇÃO</FormLabel>
+          <FormLabel
+            htmlFor="classificacaoId"
+            style={{ fontSize: "12px", color: "#A7A7A7" }}
+          >
+            CLASSIFICAÇÃO
+          </FormLabel>
           {Number(projectsForm.projectsForm.values.classificacaoId) ===
           classificacaoState[classificacaoState.length - 1].id ? (
             <>
@@ -126,6 +131,7 @@ function FormClassificacao(projectsForm: any) {
               onChange={projectsForm.projectsForm.handleChange}
               w={"95%"}
               placeholder="Selecione"
+              style={{ color: "#A7A7A7", fontSize: "14px" }}
             >
               {classificacaoState.map((classificacao) => (
                 <option key={classificacao.id} value={classificacao.id}>

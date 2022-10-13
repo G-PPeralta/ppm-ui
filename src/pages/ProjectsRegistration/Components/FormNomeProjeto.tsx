@@ -15,7 +15,12 @@ function FormNomeProjeto(projectsForm: any) {
   // }, [projectsForm]);
   return (
     <FormControl>
-      <FormLabel htmlFor="nomeProjeto">PROJETO</FormLabel>
+      <FormLabel
+        style={{ fontSize: "12px", color: "#A7A7A7" }}
+        htmlFor="nomeProjeto"
+      >
+        PROJETO
+      </FormLabel>
       <Input
         isRequired
         placeholder="Nome do projeto"
@@ -25,6 +30,7 @@ function FormNomeProjeto(projectsForm: any) {
         value={projectsForm.projectsForm.values.nomeProjeto}
         onChange={projectsForm.projectsForm.handleChange}
         w={useBreakpointValue({ base: "100%", md: "95%" })}
+        style={{ color: "#A7A7A7", fontSize: "14px" }}
       />
       {projectsForm.projectsForm.errors.nomeProjeto &&
         projectsForm.projectsForm.touched.nomeProjeto && (

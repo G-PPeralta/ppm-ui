@@ -33,7 +33,12 @@ function FormPrioridade(projectsForm: any) {
 
   return (
     <FormControl>
-      <FormLabel htmlFor="prioridadeId">PRIORIDADE</FormLabel>
+      <FormLabel
+        style={{ fontSize: "12px", color: "#A7A7A7" }}
+        htmlFor="prioridadeId"
+      >
+        PRIORIDADE
+      </FormLabel>
       <Select
         id="prioridadeId"
         name="prioridadeId"
@@ -41,6 +46,7 @@ function FormPrioridade(projectsForm: any) {
         onChange={projectsForm.projectsForm.handleChange}
         w={useBreakpointValue({ base: "100%", md: "95%" })}
         placeholder="Selecione"
+        style={{ color: "#A7A7A7", fontSize: "14px" }}
       >
         {prioridadeState.map((prioridade) => (
           <option key={prioridade.id} value={prioridade.id}>

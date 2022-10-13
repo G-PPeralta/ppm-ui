@@ -88,7 +88,12 @@ function FormTipoProjeto(projectsForm: any) {
         </Box>
       ) : (
         <>
-          <FormLabel htmlFor="tipoProjetoId">TIPO</FormLabel>
+          <FormLabel
+            style={{ fontSize: "12px", color: "#A7A7A7" }}
+            htmlFor="tipoProjetoId"
+          >
+            TIPO
+          </FormLabel>
           {Number(projectsForm.projectsForm.values.tipoProjetoId) ===
           tipoProjetoState[tipoProjetoState.length - 1].id ? (
             <>
@@ -124,6 +129,7 @@ function FormTipoProjeto(projectsForm: any) {
               onChange={projectsForm.projectsForm.handleChange}
               w={"95%"}
               placeholder="Selecione"
+              style={{ color: "#A7A7A7", fontSize: "14px" }}
             >
               {tipoProjetoState.map((tipo) => (
                 <option key={tipo.id} value={tipo.id}>
