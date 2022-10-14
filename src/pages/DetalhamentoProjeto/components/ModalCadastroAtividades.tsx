@@ -39,20 +39,19 @@ interface Responsavel {
 }
 
 interface Props {
-  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
   refresh: boolean;
-  setRefreshGanttCriacao: React.Dispatch<React.SetStateAction<boolean>>;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
   refreshGanttCriacao: boolean;
-  atividades?: any;
+  setRefreshGanttCriacao: React.Dispatch<React.SetStateAction<boolean>>;
+  // atividades?: any;
   idProjeto?: number;
 }
 
 function ModalCadastroAtividades({
-  setRefresh,
   refresh,
+  setRefresh,
   setRefreshGanttCriacao,
   refreshGanttCriacao,
-  atividades,
   idProjeto,
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
