@@ -1,4 +1,4 @@
-import { FiPrinter } from "react-icons/fi";
+// import { FiPrinter } from "react-icons/fi";
 import Moment from "react-moment";
 
 import {
@@ -8,10 +8,8 @@ import {
   Tr,
   Th,
   Td,
-  IconButton,
   Tbody,
   Tfoot,
-  Button,
 } from "@chakra-ui/react";
 import { Totalizacao } from "interfaces/Budgets";
 
@@ -30,7 +28,7 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
             <Tr backgroundColor={"blue"} color="white">
               <Th color="white">Item</Th>
               <Th align="right" color="white" maxWidth="1.5">
-                <Button
+                {/* <Button
                   className={"noprint"}
                   variant="outline"
                   onClick={() => window.print()}
@@ -42,7 +40,7 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
                     aria-label="imprimir"
                     icon={<FiPrinter />}
                   />
-                </Button>
+                </Button>  */}
               </Th>
               <Th color="white" align="center">
                 Valor
@@ -64,7 +62,7 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
               <Td>Dias de Operação</Td>
               <Td></Td>
               <Td>
-                <Moment from={data?.inicio} to={data?.fim} />
+                <Moment from={data?.inicio} date={data?.fim} />
               </Td>
             </Tr>
 

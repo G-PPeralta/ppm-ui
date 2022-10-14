@@ -11770,6 +11770,14 @@ react-currency-input-field@^3.6.5:
   resolved "https://registry.yarnpkg.com/react-currency-input-field/-/react-currency-input-field-3.6.5.tgz#67ed7005a2f1402cb70a23050f6b997e6d1452b6"
   integrity sha512-tP62WFAhkVv0RGOQVGEPE3MfgciQ4gkiASlmLBDu6tdfMC3jFhIkLU1uqUy3glUvRHyT4avnX/YVVbbXKHLtnA==
 
+react-currency-masked-input@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/react-currency-masked-input/-/react-currency-masked-input-2.5.0.tgz#17c5cd23f9dac7d336f5a3882fb41de1128c070b"
+  integrity sha512-ezFGzc0fK/ncXxf1SUO7y5gvmrVXX/dI30MEP7l1SNlXJM52jqPU7eYe1qFZ8zDrgxyyFmAjN+jx6BLq6bLJ1g==
+  dependencies:
+    prop-types "^15.7.2"
+    react "^16.8.6"
+
 react-datepicker@^4.8.0:
   version "4.8.0"
   resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-4.8.0.tgz#11b8918d085a1ce4781eee4c8e4641b3cd592010"
@@ -12096,6 +12104,15 @@ react-transition-group@^4.3.0:
     "@babel/runtime" "^7.5.5"
     dom-helpers "^5.0.1"
     loose-envify "^1.4.0"
+    prop-types "^15.6.2"
+
+react@^16.8.6:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
+  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
     prop-types "^15.6.2"
 
 react@^18.1.0:
