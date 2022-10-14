@@ -2,6 +2,7 @@ import Moment from "react-moment";
 import { BrowserRouter } from "react-router-dom";
 
 import moment from "moment";
+import "moment/locale/pt";
 
 import { AuthProvider } from "contexts/Auth";
 import { ToastProvider } from "contexts/Toast";

@@ -125,7 +125,7 @@ export function TabelaBudgets(props: TableProps) {
 
   return (
     <>
-      <TableContainer mt={4} mb={3} ml={1}>
+      <TableContainer mt={4} mb={3} ml={1} borderRadius={"10px"}>
         <Table variant="unstyled">
           <Thead>
             <Tr background="origem.500" color="white">

@@ -50,6 +50,8 @@ export interface Totalizacao {
   custoTotalRealizadoUSD: number;
   custoTotalTotalPrevistoBRL: number;
   custoTotalTotalPrevistoUSD: number;
+  totalBRL: number;
+  totalUSD: number;
 }
 
 export interface Titulo {
@@ -61,4 +63,9 @@ export interface Result {
   totalizacao: Totalizacao;
   list: BudgetDetail[];
   titulo: Titulo;
+}
+
+export interface ClasseServico {
+  id: number;
+  classe_servico: string;
 }
