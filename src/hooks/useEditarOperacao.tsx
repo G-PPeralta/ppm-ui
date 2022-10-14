@@ -65,7 +65,7 @@ export function useEditarOperacao(
     inicio_planejado: yup.date().required("Campo obrigatório"),
     fim_planejado: yup.date().required("Campo obrigatório"),
     // hrs_totais: yup.number().required("Campo obrigatório").moreThan(0),
-    pct_real: yup.number().required("Campo obrigatório").moreThan(0),
+    pct_real: yup.number().required("Campo obrigatório"),
     // id_responsavel: yup.number(), // .required("Campo obrigatório").moreThan(0),
     // precedentes: yup.array().of(
     //   yup.object({
