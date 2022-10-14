@@ -168,6 +168,13 @@ export function LicoesAprendidasProjetos() {
     setFilteredLicoesAprendidas([...filtered]);
   };
 
+  const headers = [
+    { label: "ID", key: "id" },
+    { label: "Lições Aprendidas", key: "txt_licao_aprendida" },
+    { label: "Ações e Recomendações", key: "txt_acao" },
+    { label: "Data", key: "dat_usu_create" },
+  ];
+
   // const rowsPerPage = 8;
   // const totalRegs = filteredLicoesAprendidas.length;
   // const maxPage = Math.ceil(totalRegs / rowsPerPage);
@@ -228,7 +235,7 @@ export function LicoesAprendidasProjetos() {
                   </Text>
                 </Heading>
                 <Flex align={"flex-start"} fontWeight={"700"}>
-                  <CSVLink data={filteredLicoesAprendidas}>
+                  <CSVLink data={filteredLicoesAprendidas} headers={headers}>
                     <Button
                       color={"#0239C3"}
                       fontWeight={"700"}
