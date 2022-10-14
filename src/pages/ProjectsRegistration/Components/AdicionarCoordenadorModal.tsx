@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { BsPlusLg } from "react-icons/bs";
+// import { BsPlusLg } from "react-icons/bs";
+import { FiPlus } from "react-icons/fi";
 
 import {
   Button,
@@ -7,7 +8,7 @@ import {
   FormControl,
   FormLabel,
   Input,
-  useBreakpointValue,
+  // useBreakpointValue,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -15,10 +16,10 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  IconButton,
+  // IconButton,
   useDisclosure,
-  Box,
-  Text,
+  // Box,
+  // Text,
 } from "@chakra-ui/react";
 
 // import { TextError } from 'components/TextError';
@@ -50,49 +51,52 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
 
   return (
     <Flex>
-      <Box
-        display={"flex"}
-        alignItems={"center"}
-        border="2px"
-        padding={2}
-        borderRadius={6}
-        borderColor={"origem.300"}
+      <Button
         onClick={onOpen}
+        h={"56px"}
+        background={"#0047BB"}
+        border={"2.3px solid"}
+        color={"white"}
+        variant="primary"
         _hover={{
-          background: "#f5f5f5",
+          background: "white",
+          color: "#0047BB",
           transition: "all 0.4s",
-          color: "origem.300",
-          cursor: "pointer",
-          borderColor: "origem.500",
         }}
+        rightIcon={<FiPlus />}
+        fontSize={"18px"}
+        fontWeight={"700"}
       >
-        <IconButton
-          aria-label="Plus sign"
-          icon={<BsPlusLg />}
-          background="origem.300"
-          variant="secondary"
-          color="white"
-          mr={2}
-          isRound={true}
-          size="sm"
-        />
-        <Text
-          fontSize={useBreakpointValue({ base: "sm", md: "sm" })}
-          fontWeight={"bold"}
-          color={"origem.500"}
-        >
-          ADICIONAR COORDENADOR
-        </Text>
-      </Box>
-      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
+        Adicionar Fornecedor
+      </Button>
+
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>ADICIONAR COORDENADOR</ModalHeader>
-          <ModalCloseButton />
+          <ModalHeader
+            backgroundColor={"#2E69FD"}
+            display={"flex"}
+            justifyContent={"center"}
+            color={"white"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+          >
+            Adicionar Fornecedor
+          </ModalHeader>
+          <ModalCloseButton color={"white"} />
           <ModalBody>
             <Flex align="end" mb={3}>
               <FormControl>
-                <FormLabel htmlFor="coordenadorNome">NOME</FormLabel>
+                <FormLabel
+                  fontSize={"12px"}
+                  fontWeight={"700"}
+                  color={"#949494"}
+                  mb={"1px"}
+                  ml={"3px"}
+                  htmlFor="coordenadorNome"
+                >
+                  NOME
+                </FormLabel>
                 <Input
                   isRequired
                   placeholder="Nome do coordenador"
@@ -101,7 +105,15 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
                   name="coordenadorNome"
                   value={coordenador}
                   onChange={(event) => handleChange(event)}
-                  width="100%"
+                  maxLength={40}
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  color={"black"}
+                  _placeholder={{ color: "#949494" }}
+                  ml={"3px"}
+                  w={"328px"}
+                  border={"1px solid #949494"}
+                  h={"56px"}
                 />
                 {/* {projectsForm.projectsForm.errors.coordenadores &&
                     projectsForm.projectsForm.touched.coordenadores && (

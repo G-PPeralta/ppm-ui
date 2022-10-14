@@ -14,7 +14,10 @@ function FormDisabledResponsavel(projectsForm: any) {
       {!loading && (
         <Box>
           <FormLabel
-            style={{ fontSize: "12px", color: "#A7A7A7" }}
+            // style={{ fontSize: "12px", color: "#A7A7A7" }}
+            color={"#949494"}
+            fontWeight={"700"}
+            fontSize={"12px"}
             htmlFor={"responsavel"}
           >
             RESPONSÁVEL
@@ -27,7 +30,8 @@ function FormDisabledResponsavel(projectsForm: any) {
             name={"responsavel"}
             value={projectsForm.projectsForm.values.responsavel}
             w={"100%"}
-            style={{ color: "#A7A7A7", fontSize: "14px" }}
+            style={{ color: "black", fontSize: "14px" }}
+            _placeholder={{ color: "black" }}
           />
         </Box>
       )}

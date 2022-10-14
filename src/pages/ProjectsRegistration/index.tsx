@@ -105,6 +105,7 @@ export function ProjectsRegistration() {
                           base: "column",
                           md: "row",
                         })}
+                        gap={2}
                       >
                         <AdicionarResponsavelModal
                           projectsForm={projectsForm}
