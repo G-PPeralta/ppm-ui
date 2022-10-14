@@ -1,14 +1,23 @@
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { BsPlus } from "react-icons/bs";
+import { IoIosArrowBack } from "react-icons/io";
+
+import { Box, Button, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import InputGenerico from "components/InputGenerico";
 import SelectFiltragem from "components/SelectFiltragem";
 import Sidebar from "components/SideBar";
+import TextAreaGenerico from "components/TextAreaGenerico";
+
+import formatCellphone from "utils/formatCellphone";
+import { formatCnpj } from "utils/formatCnpj";
+import { formatEmail } from "utils/formatEmail";
+import { handleCadastrarPagina } from "utils/handleCadastro";
 
 import { useCadastroFornecedor } from "hooks/useCadastroFornecedor";
 
 export function CadastrarFornecedor() {
-  const { registerForm, loading } = useCadastroFornecedor();
+  const { registerForm, loading, optionsPolos } = useCadastroFornecedor();
 
   const optionsMock = [
     { value: 1, label: "Mock 1" },
@@ -16,7 +25,6 @@ export function CadastrarFornecedor() {
     { value: 3, label: "Mock 3" },
   ];
 
-  // console.log("registerForm", registerForm.values);
   return (
     <>
       <Sidebar>
@@ -29,33 +37,167 @@ export function CadastrarFornecedor() {
               bg={"white"}
               borderRadius={{ base: "xl", sm: "xl" }}
             >
-              <Flex
-                justify={"space-between"}
-                mb={4}
-                wrap={"wrap"}
-                align={"center"}
-              >
+              <Flex align={"center"} gap={2} h={"56px"}>
+                <IconButton
+                  aria-label="Botão Voltar"
+                  icon={<IoIosArrowBack size={20} />}
+                  borderRadius={"10px"}
+                  background={"white"}
+                  color={"origem.500"}
+                  _hover={{
+                    background: "origem.500",
+                    transition: "all 0.4s",
+                    color: "white",
+                  }}
+                  onClick={() => {
+                    window.history.back();
+                  }}
+                />
                 <Heading as="h3" size="md" textAlign={"center"}>
                   Cadastrar Fornecedor
                 </Heading>
               </Flex>
-              <Flex gap={2} align={"end"}>
-                <InputGenerico
-                  registerForm={registerForm}
-                  nomeInput={"NOME"}
-                  propName={"nomeFornecedor"}
-                  value={registerForm.values.nomeFornecedor}
-                  required={true}
-                  placeholder={"Nome do fornecedor"}
-                />
-                <SelectFiltragem
-                  registerForm={registerForm}
-                  nomeSelect={"POLO"}
-                  propName={"poloId"}
-                  options={optionsMock}
-                  value={registerForm.values.poloId}
-                  required={true}
-                />
+              <Flex direction={"column"} gap={4} mt={4}>
+                <Flex gap={2} align={"start"} w={"50%"}>
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    nomeSelect={"POLO"}
+                    propName={"poloId"}
+                    options={optionsPolos}
+                    required={true}
+                  />
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    nomeSelect={"SERVIÇO"}
+                    propName={"servicoId"}
+                    options={optionsMock}
+                    required={true}
+                  />
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    nomeSelect={"STATUS"}
+                    propName={"statusId"}
+                    options={optionsMock}
+                    required={true}
+                  />
+                </Flex>
+                <Flex gap={2} align={"start"} w={"55%"}>
+                  <InputGenerico
+                    registerForm={registerForm}
+                    nomeInput={"NOME DO FORNECEDOR"}
+                    propName={"nomeFornecedor"}
+                    value={registerForm.values.nomeFornecedor}
+                    required={true}
+                    placeholder={"Nome do fornecedor"}
+                    maxLength={50}
+                  />
+                  <InputGenerico
+                    registerForm={registerForm}
+                    nomeInput={"NÚMERO DO CONTRATO"}
+                    propName={"numeroContrato"}
+                    value={registerForm.values.numeroContrato}
+                    required={true}
+                    placeholder={"Número do contrato"}
+                    maxLength={50}
+                  />
+                </Flex>
+                <Flex gap={2} align={"start"} w={"83%"}>
+                  <InputGenerico
+                    registerForm={registerForm}
+                    nomeInput={"REPRESENTANTE/PONTO FOCAL"}
+                    propName={"representante"}
+                    value={registerForm.values.representante}
+                    required={true}
+                    placeholder={"Nome do representante"}
+                    maxLength={50}
+                  />
+                  <InputGenerico
+                    registerForm={registerForm}
+                    nomeInput={"E-MAIL"}
+                    propName={"email"}
+                    value={formatEmail(registerForm.values.email)}
+                    type={"email"}
+                    required={true}
+                    placeholder={"E-mail"}
+                    maxLength={50}
+                  />
+                  <InputGenerico
+                    registerForm={registerForm}
+                    nomeInput={"TELEFONE"}
+                    propName={"telefone"}
+                    value={formatCellphone(registerForm.values.telefone)}
+                    required={true}
+                    placeholder={"(00) 90000-0000"}
+                    maxLength={14}
+                  />
+                </Flex>
+                <Flex gap={2} align={"start"} w={"35%"}>
+                  <InputGenerico
+                    registerForm={registerForm}
+                    nomeInput={"INVOICE"}
+                    propName={"invoice"}
+                    value={registerForm.values.invoice}
+                    required={true}
+                    placeholder={"Número do invoice"}
+                    maxLength={50}
+                  />
+                  <InputGenerico
+                    registerForm={registerForm}
+                    nomeInput={"CNPJ"}
+                    propName={"cnpj"}
+                    value={formatCnpj(registerForm.values.cnpj)}
+                    required={true}
+                    placeholder={"Digite o CNPJ"}
+                    maxLength={14}
+                  />
+                </Flex>
+                <Flex gap={2} align={"start"} w={"45%"}>
+                  <TextAreaGenerico
+                    registerForm={registerForm}
+                    nomeInput={"JUSTIFICATIVA"}
+                    propName={"justificativa"}
+                    value={registerForm.values.justificativa}
+                    required={true}
+                    placeholder={"Escreva a Justificativa"}
+                  />
+                </Flex>
+                <Flex gap={2} align={"start"} w={"45%"}>
+                  <TextAreaGenerico
+                    registerForm={registerForm}
+                    nomeInput={"OUTRAS INFORMAÇÕES"}
+                    propName={"outrasInformacoes"}
+                    value={registerForm.values.outrasInformacoes}
+                    required={false}
+                    placeholder={"Escreva a descrição"}
+                  />
+                </Flex>
+              </Flex>
+              <Flex w={"100%"} mt={6}>
+                <Button
+                  w={"100%"}
+                  h={"56px"}
+                  borderRadius={"10px"}
+                  disabled={!registerForm.isValid || !registerForm.dirty}
+                  background={"origem.500"}
+                  variant="primary"
+                  color="white"
+                  onClick={() => handleCadastrarPagina(registerForm)}
+                  _hover={{
+                    background: "origem.600",
+                    transition: "all 0.4s",
+                  }}
+                  rightIcon={<BsPlus size={24} />}
+                >
+                  {loading ? (
+                    <Ring speed={2} lineWeight={5} color="white" size={24} />
+                  ) : (
+                    <>
+                      <Text fontSize="16px" fontWeight={"bold"}>
+                        Cadastrar Fornecedor
+                      </Text>
+                    </>
+                  )}
+                </Button>
               </Flex>
             </Box>
           </Flex>

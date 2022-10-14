@@ -1,28 +1,24 @@
-import { Flex, Input, Text } from "@chakra-ui/react";
+import { Flex, Textarea, Text } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
 interface Props {
   registerForm: any;
-  nomeInput: string;
-  propName: string;
-  maxLength: number;
-  value?: string | undefined;
-  required?: boolean;
-  placeholder?: string;
-  type?: string;
+  nomeInput: any;
+  propName: any;
+  value: any;
+  required?: any;
+  placeholder?: any;
 }
 
-function InputGenerico({
+function TextAreaGenerico({
   registerForm,
   nomeInput,
   propName,
   value,
   required,
   placeholder,
-  maxLength,
-  type,
 }: Props) {
   return (
     <Flex direction={"column"} w={"100%"}>
@@ -32,14 +28,12 @@ function InputGenerico({
           {nomeInput}
         </Text>
       </Flex>
-      <Input
-        h={"56px"}
+      <Textarea
         placeholder={placeholder}
-        type={type || "text"}
         id={propName}
         name={propName}
         value={value}
-        maxLength={maxLength}
+        maxLength={255}
         onChange={registerForm.handleChange}
         w={"100%"}
       />
@@ -50,4 +44,4 @@ function InputGenerico({
   );
 }
 
-export default InputGenerico;
+export default TextAreaGenerico;

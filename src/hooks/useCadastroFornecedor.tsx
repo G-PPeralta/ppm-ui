@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
+import { cadastroFornecedor } from "validations/Fornecedor";
 
 import { useToast } from "contexts/Toast";
 
-import { postNovaIntervencao } from "services/post/CadastroModaisInfograficos";
+import { getPolo } from "services/get/Projetos";
+import { postCadastroFornecedor } from "services/post/Fornecedor";
 
 import { useAuth } from "./useAuth";
 
@@ -12,8 +14,20 @@ export function useCadastroFornecedor() {
   const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [listaPolos, setListaPolos] = useState<any>([]);
 
-  const reqGet = async () => {};
+  const reqGet = async () => {
+    const polos = await getPolo();
+    const polosSorted = polos.data.sort((a: any, b: any) =>
+      a.polo.localeCompare(b.polo)
+    );
+    setListaPolos(polosSorted);
+  };
+
+  const optionsPolos = listaPolos.map((polo: any) => ({
+    value: polo.id,
+    label: polo.polo,
+  }));
 
   const initialValues: any = {
     nom_usu_create: user?.nome,
@@ -21,7 +35,7 @@ export function useCadastroFornecedor() {
     servicoId: 0,
     statusId: 0,
     nomeFornecedor: "",
-    numeroContrato: 0,
+    numeroContrato: "",
     representante: "",
     email: "",
     telefone: "",
@@ -33,7 +47,7 @@ export function useCadastroFornecedor() {
 
   const registerForm: any = useFormik({
     initialValues,
-    // validationSchema: cadastroNovaIntervencaoSchema,
+    validationSchema: cadastroFornecedor,
     onSubmit: async (values) => {
       const newValues: any = {
         nom_usu_create: user?.nome,
@@ -54,7 +68,7 @@ export function useCadastroFornecedor() {
       setLoading(false);
 
       try {
-        const { status } = await postNovaIntervencao(newValues);
+        const { status } = await postCadastroFornecedor(newValues);
 
         if (status === 200 || status === 201) {
           toast.success("Intervenção cadastrada com sucesso!", {
@@ -85,5 +99,6 @@ export function useCadastroFornecedor() {
   return {
     registerForm,
     loading,
+    optionsPolos,
   };
 }
