@@ -104,15 +104,16 @@ function Statistics() {
                       fontSize={"12px"}
                       color={"#949494"}
                     >
-                      PROJETOS
+                      Sonda
                     </Text>
                     <Input
                       h={"56px"}
                       isRequired
-                      placeholder="Projeto"
+                      placeholder="Sonda"
                       id="name"
                       type="text"
                       name="name"
+                      maxLength={10}
                       onChange={(e) => setSearch(e.target.value)}
                     />
                   </Flex>
