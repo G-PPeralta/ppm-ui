@@ -65,24 +65,27 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
             macroatividade_item,
             macroatividade_nome,
             data_inicio,
+            data_fim,
             item,
             nome_atividade,
             microatividade_id,
             progresso,
             duracao,
-          }) => {
-            const newDate = new Date(data_inicio || "");
-            newDate.setDate(newDate.getDate() - 1);
+          }) =>
+            // const newDate = new Date(data_inicio || "");
+            // newDate.setDate(newDate.getDate() - 1);
 
-            return {
+            ({
               TaskID: microatividade_id || 0,
               TaskName: nome_atividade || "",
               Item: item || "",
               Duration: duracao,
               Progress: progresso,
-              StartDate: newDate,
-            };
-          }
+              StartDate: data_inicio,
+              EndDate: data_fim,
+              BaselineStartDate: data_inicio,
+              BaselineEndDate: data_fim,
+            })
         ),
       })
     );
@@ -219,6 +222,8 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
             name: "TaskName",
             startDate: "StartDate",
             endDate: "EndDate",
+            baselineStartDate: "BaselineStartDate",
+            baselineEndDate: "BaselineEndDate",
             duration: "Duration",
             progress: "Progress",
             dependency: "Predecessor",
@@ -239,6 +244,8 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
           //   })),
           // }))}
           toolbar={toolbarOptions || []}
+          renderBaseline={true}
+          baselineColor="red"
           editSettings={{
             allowEditing: true,
             mode: "Auto",
@@ -272,17 +279,33 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
             },
             {
               field: "StartDate",
-              headerText: "Data Início",
+              headerText: "Início real",
               headerTextAlign: "Center",
               textAlign: "Center",
               format: "dd/MM/yyyy",
             },
             {
               field: "EndDate",
-              headerText: "Data Fim",
+              headerText: "Fim real",
               headerTextAlign: "Center",
               textAlign: "Center",
               format: "dd/MM/yyyy",
+            },
+            {
+              field: "BaselineStartDate",
+              headerText: "Início planejado",
+              headerTextAlign: "Center",
+              textAlign: "Center",
+              format: "dd/MM/yyyy",
+              type: "date",
+            },
+            {
+              field: "BaselineEndDate",
+              headerText: "Fim planejado",
+              headerTextAlign: "Center",
+              textAlign: "Center",
+              format: "dd/MM/yyyy",
+              type: "date",
             },
             {
               field: "Duration",
