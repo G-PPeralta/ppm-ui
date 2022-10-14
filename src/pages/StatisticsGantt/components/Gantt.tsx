@@ -170,7 +170,7 @@ export function Gantt({ data, options, edit }: ganttOptionsProps) {
             {
               field: "TaskID",
               headerText: "ID",
-              allowEditing: false,
+              // allowEditing: false,
             },
             {
               field: "TaskName",
@@ -178,7 +178,7 @@ export function Gantt({ data, options, edit }: ganttOptionsProps) {
               headerTextAlign: "Center",
               textAlign: "Center",
               type: "string",
-              allowEditing: false,
+              // allowEditing: false,
             },
             {
               field: "StartDate",

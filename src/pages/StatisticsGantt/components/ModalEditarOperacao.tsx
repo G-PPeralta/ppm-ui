@@ -174,7 +174,7 @@ function ModalAdicionarOperacao({
                         registerForm={registerForm}
                         value={"inicio_realizado"}
                         label={"INÍCIO REAL"}
-                        required={false}
+                        required={true}
                         data={registerForm.values.inicio_realizado}
                       />
                     </Flex>
@@ -183,7 +183,7 @@ function ModalAdicionarOperacao({
                         registerForm={registerForm}
                         value={"fim_realizado"}
                         label={"FIM REAL"}
-                        required={false}
+                        required={true}
                         data={registerForm.values.fim_realizado}
                       />
                     </Flex>
