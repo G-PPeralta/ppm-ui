@@ -1,12 +1,12 @@
 export interface FinanceiroPorProjetos {
-  idProjeto: number;
-  nomeProjeto: string;
-  elementoPep: string;
-  denominacaoDeObjeto: string;
+  idprojeto: number;
+  nomeprojeto: string;
+  elementopep: string;
+  denominacaodeobjeto: string;
   mes: string;
-  textoDoPedido: string;
-  totalPrevisto: number;
-  totalRealizado: number;
+  textodopedido: string;
+  totalprevisto: number;
+  totalrealizado: number;
 }
 
 export interface TabelaCentroDeCusto {

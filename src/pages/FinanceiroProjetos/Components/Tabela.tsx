@@ -51,12 +51,12 @@ function Tabela({ data }: Props) {
   ];
 
   const valorTotalPrevisto = data.reduce(
-    (acc: number, curr: any) => acc + curr.totalPrevisto,
+    (acc: number, curr: any) => acc + curr.totalprevisto,
     0
   );
 
   const valorTotalRealizado = data.reduce(
-    (acc: number, curr: any) => acc + curr.totalRealizado,
+    (acc: number, curr: any) => acc + curr.totalrealizado,
     0
   );
 
@@ -82,44 +82,46 @@ function Tabela({ data }: Props) {
   function Body() {
     return (
       <>
-        {data ? (
+        {data.length > 0 ? (
           data.slice(from, to).map((linhaTabela: any, index: number) => (
             <Tr key={index}>
               <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.idProjeto}</Text>
+                <Text>{linhaTabela.idprojeto}</Text>
               </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
+              <Td textAlign={"start"} fontWeight={"semibold"}>
                 <Link
-                  to={`/financeiro-projetos/centro-custo/${linhaTabela.idProjeto}`}
+                  to={`/financeiro-projetos/centro-custo/${linhaTabela.idprojeto}`}
                   state={linhaTabela}
                 >
-                  <Text>{linhaTabela.nomeProjeto}</Text>
+                  <Text color={"origem.500"}>{linhaTabela.nomeprojeto}</Text>
                 </Link>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.elementoPep}</Text>
+                <Text>{linhaTabela.elementopep}</Text>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{formatarParaReal(linhaTabela.totalPrevisto)}</Text>
+                <Text>{formatarParaReal(linhaTabela.totalprevisto)}</Text>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{formatarParaReal(linhaTabela.totalRealizado)}</Text>
+                <Text>{formatarParaReal(linhaTabela.totalrealizado)}</Text>
               </Td>
               <Td textAlign={"start"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.denominacaoDeObjeto}</Text>
+                <Text>{linhaTabela.denominacaodeobjeto}</Text>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.mes}</Text>
               </Td>
               <Td textAlign={"start"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.textoDoPedido}</Text>
+                <Text>{linhaTabela.textodopedido}</Text>
               </Td>
             </Tr>
           ))
         ) : (
           <Tr>
-            <Td textAlign={"center"} fontWeight={"semibold"}>
-              <Text>Não há dados</Text>
+            <Td colSpan={header.length} textAlign={"start"}>
+              <Text fontSize="xl" fontWeight={500}>
+                Não há dados
+              </Text>
             </Td>
           </Tr>
         )}
