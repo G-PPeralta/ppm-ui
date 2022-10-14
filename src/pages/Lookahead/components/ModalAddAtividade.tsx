@@ -171,6 +171,7 @@ export function ModalAddAtividade(props: PropsType) {
                           type="text"
                           name="nom_atividade"
                           color={"#949494"}
+                          maxLength={20}
                           onChange={(e) => setNomeFerramenta(e.target.value)}
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
                         />
@@ -189,6 +190,7 @@ export function ModalAddAtividade(props: PropsType) {
                           type="text"
                           name="nom_atividade"
                           color={"#949494"}
+                          maxLength={20}
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
                           onChange={(e) => setNomeServico(e.target.value)}
                         />
@@ -218,6 +220,7 @@ export function ModalAddAtividade(props: PropsType) {
                           id="dsc_comentario"
                           name="dsc_comentario"
                           color={"#949494"}
+                          maxLength={200}
                           rows={5}
                           onChange={(e) => setAnotacao(e.target.value)}
                         />
@@ -260,6 +263,7 @@ export function ModalAddAtividade(props: PropsType) {
                   //   background: "origem.500",
                   //   transition: "all 0.4s",
                   // }}
+                  disabled={!startDate || !nomeFerramenta || !nomeServico}
                 >
                   Cadastrar
                   {/* {loading ? (

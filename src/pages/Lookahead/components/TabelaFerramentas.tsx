@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { FiPrinter } from "react-icons/fi";
 
 import {
+  Button,
   Flex,
-  IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -91,13 +91,19 @@ export function TabelaFerramentas(props: TableProps) {
                 Ferramentas
               </Th>
               <Th borderTopRightRadius={"10px"} colSpan={2}>
-                Imprimir
-                <IconButton
-                  color={"white"}
-                  backgroundColor="transparent"
-                  aria-label="imprimir"
-                  icon={<FiPrinter />}
-                />
+                <Button
+                  variant="ghost"
+                  colorScheme="messenger"
+                  color="white"
+                  rightIcon={<FiPrinter />}
+                  _hover={{
+                    background: "white",
+                    transition: "all 0.4s",
+                    color: "rgb(46, 105, 253)",
+                  }}
+                >
+                  Exportar
+                </Button>
               </Th>
             </Tr>
             <Tr backgroundColor={"rgb(46, 105, 253)"} color="white">
@@ -112,16 +118,12 @@ export function TabelaFerramentas(props: TableProps) {
               {dias &&
                 ferramentasData &&
                 dias.map(function (x) {
-                  return (
-                    <Td>
-                      {" "}
-                      {
-                        ferramentasData.find(
-                          (f) => f.dia == x.data && f.tipo == "f"
-                        )?.nome
-                      }
-                    </Td>
+                  const ferr = ferramentasData.filter(
+                    (f) => f.dia == x.data && f.tipo == "f"
                   );
+                  const fNames =
+                    ferr.length > 0 ? ferr.map((x) => x.nome).join(" - ") : "";
+                  return <Td>{fNames}</Td>;
                 })}
               {/* <Td>
                 Chave de fenda <br /> 01:00 - 22/08

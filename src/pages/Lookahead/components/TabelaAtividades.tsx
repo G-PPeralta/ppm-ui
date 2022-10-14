@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { FiPrinter } from "react-icons/fi";
 
 import {
+  Button,
   Flex,
-  IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -148,13 +148,19 @@ export function TabelaAtividades(props: TableProps) {
                 Atividade
               </Th>
               <Th borderTopRightRadius={"10px"} colSpan={2}>
-                Imprimir
-                <IconButton
-                  color={"white"}
-                  backgroundColor="transparent"
-                  aria-label="imprimir"
-                  icon={<FiPrinter />}
-                />
+                <Button
+                  variant="ghost"
+                  colorScheme="messenger"
+                  color="white"
+                  rightIcon={<FiPrinter />}
+                  _hover={{
+                    background: "white",
+                    transition: "all 0.4s",
+                    color: "rgb(46, 105, 253)",
+                  }}
+                >
+                  Exportar
+                </Button>
               </Th>
             </Tr>
             <Tr backgroundColor={"rgb(46, 105, 253)"} color="white">
@@ -177,23 +183,33 @@ export function TabelaAtividades(props: TableProps) {
                   >
                     <Td>{hora}</Td>
                     {dias.map(function (dia) {
-                      const activityS = atividades.find(
+                      const activityS = atividades.filter(
                         (x) =>
                           x.dataIni == dia.data &&
                           x.horaIni == hora.split(":")[0] &&
                           x.tipo == "s"
-                      )?.nome;
-                      const activityF = atividades.find(
+                      );
+
+                      const arrayS = activityS
+                        ? activityS.map((x) => x.nome)
+                        : undefined;
+                      const activityF = atividades.filter(
                         (x) =>
                           x.dataIni == dia.data &&
-                          x.horaIni == hora.split(":")[0] &&
+                          x.horaIni.split(":")[0] == hora.split(":")[0] &&
                           x.tipo == "f"
-                      )?.nome;
+                      );
+
+                      const arrayF = activityF
+                        ? activityF.map((x) => x.nome)
+                        : undefined;
+
                       return (
                         <Td>
-                          {(activityS && activityF
-                            ? activityS + " - " + activityF
-                            : activityS || activityF) || `-`}
+                          {(arrayS && arrayF
+                            ? arrayS.join("-") + " - " + arrayF.join("-")
+                            : (arrayS && arrayS.join(" ")) ||
+                              (arrayF && arrayF.join(" "))) || `-`}
                         </Td>
                       );
                     })}
