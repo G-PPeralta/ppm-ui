@@ -51,7 +51,7 @@ export function useCadastroFornecedor() {
         outrasInformacoes: values.outrasInformacoes,
       };
 
-      setLoading(true);
+      setLoading(false);
 
       try {
         const { status } = await postNovaIntervencao(newValues);
@@ -72,7 +72,7 @@ export function useCadastroFornecedor() {
   });
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(false);
     reqGet();
   }, []);
 

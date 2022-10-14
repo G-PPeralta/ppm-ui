@@ -2,12 +2,21 @@ import { Box, Flex, Heading } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import InputGenerico from "components/InputGenerico";
+import SelectFiltragem from "components/SelectFiltragem";
 import Sidebar from "components/SideBar";
 
-import { useProjects } from "hooks/useProjects";
+import { useCadastroFornecedor } from "hooks/useCadastroFornecedor";
 
 export function CadastrarFornecedor() {
-  const { projectsForm, loading } = useProjects();
+  const { registerForm, loading } = useCadastroFornecedor();
+
+  const optionsMock = [
+    { value: 1, label: "Mock 1" },
+    { value: 2, label: "Mock 2" },
+    { value: 3, label: "Mock 3" },
+  ];
+
+  // console.log("registerForm", registerForm.values);
   return (
     <>
       <Sidebar>
@@ -32,12 +41,20 @@ export function CadastrarFornecedor() {
               </Flex>
               <Flex gap={2} align={"end"}>
                 <InputGenerico
-                  registerForm={projectsForm}
-                  nomeInput={"Nome"}
-                  propName={"nome"}
-                  value={projectsForm.values.poloId}
+                  registerForm={registerForm}
+                  nomeInput={"NOME"}
+                  propName={"nomeFornecedor"}
+                  value={registerForm.values.nomeFornecedor}
                   required={true}
                   placeholder={"Nome do fornecedor"}
+                />
+                <SelectFiltragem
+                  registerForm={registerForm}
+                  nomeSelect={"POLO"}
+                  propName={"poloId"}
+                  options={optionsMock}
+                  value={registerForm.values.poloId}
+                  required={true}
                 />
               </Flex>
             </Box>
