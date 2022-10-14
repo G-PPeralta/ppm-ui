@@ -4,10 +4,13 @@ import { useParams } from "react-router-dom";
 
 import { Box, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
+import { TabelaCentroDeCusto } from "interfaces/FinanceiroProjetos";
 
 import Sidebar from "components/SideBar";
 
 import { useRequests } from "hooks/useRequests";
+
+import { getCentroDeCustoProjetos } from "services/get/Financeiro";
 
 import ModalAdicionar from "./components/ModalAdicionar";
 import Tabela from "./components/Tabela";
@@ -25,13 +28,35 @@ export function CentroDeCustoProjetos() {
 
   const [data, setData] = useState<any>(listaCentroCustoProjetos);
 
-  const handleGetAllData = async () => {
+  const handleGetAllData = (listaCentroCustoProjetos: any) => {
     setData(listaCentroCustoProjetos);
   };
 
+  const handleRefresh = async () => {
+    if (id) {
+      const tabelaCentroDeCusto = await getCentroDeCustoProjetos(Number(id));
+      const centroDeCustoFormatado = tabelaCentroDeCusto.data.centroDeCusto.map(
+        (item: TabelaCentroDeCusto) => ({
+          ...item,
+          valor: Number(item.valor),
+        })
+      );
+      const data = {
+        ...tabelaCentroDeCusto.data,
+        centroDeCusto: centroDeCustoFormatado,
+      };
+
+      setData(data);
+    }
+  };
+
   useEffect(() => {
-    handleGetAllData();
-  }, []);
+    handleGetAllData(listaCentroCustoProjetos);
+  }, [listaCentroCustoProjetos]);
+
+  useEffect(() => {
+    handleRefresh();
+  }, [refresh]);
 
   return (
     <>
@@ -92,11 +117,9 @@ export function CentroDeCustoProjetos() {
                   </Heading>
                 </Flex>
               </Flex>
-
-              <Tabela
-                data={listaCentroCustoProjetos.centroDeCusto}
-                refreshState={refreshState}
-              />
+              {data && (
+                <Tabela data={data.centroDeCusto} refreshState={refreshState} />
+              )}
             </Box>
           </Flex>
         ) : (

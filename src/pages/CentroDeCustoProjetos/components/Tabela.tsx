@@ -17,11 +17,13 @@ import {
 
 import PaginacaoTabela from "components/PaginacaoTabela";
 
+import { formatDate } from "utils/formatDate";
+
 import { useAuth } from "hooks/useAuth";
 
 import { deleteDespesa } from "services/delete/Financeiro";
 
-import ModalEditar from "./ModalEditar";
+// import ModalEditar from "./ModalEditar";
 
 interface RefreshState {
   refresh: boolean;
@@ -124,7 +126,7 @@ function Tabela({ data, refreshState }: Props) {
                   <Text>
                     {linhaTabela.dataPagamento === null
                       ? "01/01/2022"
-                      : linhaTabela.dataPagamento}
+                      : formatDate(linhaTabela.dataPagamento)}
                   </Text>
                 </Td>
                 <Td textAlign={"start"} fontWeight={"semibold"}>
@@ -135,10 +137,10 @@ function Tabela({ data, refreshState }: Props) {
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Flex gap={2} align={"center"} justify={"center"}>
-                    <ModalEditar
+                    {/* <ModalEditar
                       refreshState={refreshState}
                       linhaTabela={linhaTabela}
-                    />
+                    /> */}
                     <IconButton
                       aria-label="Botão de Editar"
                       icon={<FiTrash />}
