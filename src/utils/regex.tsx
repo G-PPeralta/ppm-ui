@@ -6,3 +6,7 @@ export const regexCaracteresEspeciaisENumeros = (stringToReplace: string) =>
     /[1234567890§ª°º`´¨~!@#$%^&*()_|+=?;:'",.<>{}[]\]*/gi,
     ""
   );
+
+export const regexSomenteNumeros = (stringToReplace: string) =>
+  // .match(/[0-9]+/g).join([]);
+  stringToReplace.replace(/\D/g, "");

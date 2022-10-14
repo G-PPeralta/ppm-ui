@@ -41,6 +41,8 @@ interface Responsavel {
 interface Props {
   setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
   refresh: boolean;
+  setRefreshGanttCriacao: React.Dispatch<React.SetStateAction<boolean>>;
+  refreshGanttCriacao: boolean;
   atividades?: any;
   idProjeto?: number;
 }
@@ -48,6 +50,8 @@ interface Props {
 function ModalCadastroAtividades({
   setRefresh,
   refresh,
+  setRefreshGanttCriacao,
+  refreshGanttCriacao,
   atividades,
   idProjeto,
 }: Props) {
@@ -58,7 +62,11 @@ function ModalCadastroAtividades({
     listaResponsaveis,
     listaAreaAtuacao,
     listaAtividadesRelacao,
-  } = useCadastroAtividadeProjeto(refresh, idProjeto);
+  } = useCadastroAtividadeProjeto(
+    refreshGanttCriacao,
+    setRefreshGanttCriacao,
+    idProjeto
+  );
 
   const responsaveisOptions = listaResponsaveis.map(
     (responsavel: Responsavel) => ({
