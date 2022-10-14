@@ -1,10 +1,9 @@
-import { FiChevronDown, FiPrinter } from "react-icons/fi";
+import { FiChevronDown } from "react-icons/fi";
 
 import "./expansiveTable.css";
 // import ModalCadastrarOrcamentoPrevisto from "./ModalCadastrarOrcamentoPrevisto";
 import {
   Flex,
-  IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -12,7 +11,6 @@ import {
   Th,
   Thead,
   Tr,
-  Text,
 } from "@chakra-ui/react";
 import { BudgetDetail } from "interfaces/Budgets";
 
@@ -120,16 +118,19 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
                 Atividade
               </Th>
               <Th borderTopRightRadius={"10px"} colSpan={2}>
-                <Text className={"noprint"}>
+                {/* <Button
+                  className={"noprint"}
+                  variant="outline"
+                  onClick={() => window.print()}
+                >
                   Imprimir
                   <IconButton
                     color={"white"}
                     backgroundColor="transparent"
                     aria-label="imprimir"
                     icon={<FiPrinter />}
-                    onClick={() => window.print()}
                   />
-                </Text>
+                </Button> */}
               </Th>
             </Tr>
             <Tr backgroundColor={"blue"} color="white">

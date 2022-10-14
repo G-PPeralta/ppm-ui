@@ -34,7 +34,7 @@ import { useCadastroOrcamentoPlanejado } from "hooks/useCadastroOrcamentoPlaneja
 
 function ModalGestaoDeCusto(props: { projeto: Projeto }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, setAtividade } =
+  const { registerForm, loading, setAtividade, fornecedores } =
     useCadastroOrcamentoPlanejado();
   const { id } = props.projeto;
 
@@ -122,6 +122,10 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             value={registerForm.values.data}
                             onChange={registerForm.handleChange}
                           />
+                          {registerForm.errors.data &&
+                            registerForm.touched.data && (
+                              <TextError>{registerForm.errors.data}</TextError>
+                            )}
                         </FormControl>
                       </Flex>
                       <FormControl>
@@ -136,10 +140,18 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                           value={registerForm.values.fornecedor}
                           onChange={registerForm.handleChange}
                         >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
+                          {fornecedores &&
+                            fornecedores.map((d) => (
+                              <option value={d.id}>{d.fornecedor}</option>
+                            ))}
                         </Select>
+
+                        {registerForm.errors.fornecedor &&
+                          registerForm.touched.fornecedor && (
+                            <TextError>
+                              {registerForm.errors.fornecedor}
+                            </TextError>
+                          )}
                       </FormControl>
                       <Flex
                         flexDirection={useBreakpointValue({
@@ -166,6 +178,12 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             <option value="option2">Option 2</option>
                             <option value="option3">Option 3</option>
                           </Select>
+                          {registerForm.errors.servico &&
+                            registerForm.touched.servico && (
+                              <TextError>
+                                {registerForm.errors.servico}
+                              </TextError>
+                            )}
                         </FormControl>
                         <FormControl>
                           <Flex gap={1}>
@@ -181,6 +199,12 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             size="md"
                             type="text"
                           />
+                          {registerForm.errors.pedido &&
+                            registerForm.touched.pedido && (
+                              <TextError>
+                                {registerForm.errors.pedido}
+                              </TextError>
+                            )}
                         </FormControl>
                       </Flex>
 
@@ -198,6 +222,13 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                           value={registerForm.values.pedido_obs}
                           onChange={registerForm.handleChange}
                         />
+
+                        {registerForm.errors.pedido_obs &&
+                          registerForm.touched.pedido_obs && (
+                            <TextError>
+                              {registerForm.errors.pedido_obs}
+                            </TextError>
+                          )}
                       </FormControl>
                     </Flex>
                   </Stack>
