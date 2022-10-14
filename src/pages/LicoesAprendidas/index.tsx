@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { CSVLink } from "react-csv";
 import toast from "react-hot-toast";
 import { AiFillPrinter } from "react-icons/ai";
 // import {
@@ -90,9 +91,9 @@ export function LicoesAprendidasProjetos() {
     filterByProject();
   };
 
-  const print = () => {
-    window.print();
-  };
+  // const print = () => {
+  //   window.print();
+  // };
 
   async function handleUpdateLicoes(
     licao: any,
@@ -227,16 +228,18 @@ export function LicoesAprendidasProjetos() {
                   </Text>
                 </Heading>
                 <Flex align={"flex-start"} fontWeight={"700"}>
-                  <Button
-                    color={"#0239C3"}
-                    fontWeight={"700"}
-                    variant="ghost"
-                    colorScheme="messenger"
-                    rightIcon={<AiFillPrinter />}
-                    onClick={print}
-                  >
-                    Exportar
-                  </Button>
+                  <CSVLink data={filteredLicoesAprendidas}>
+                    <Button
+                      color={"#0239C3"}
+                      fontWeight={"700"}
+                      variant="ghost"
+                      colorScheme="messenger"
+                      rightIcon={<AiFillPrinter />}
+                      // onClick={print}
+                    >
+                      Exportar
+                    </Button>
+                  </CSVLink>
                 </Flex>
               </Flex>
               <Flex flexDir={"row"} justify={"space-between"}>
