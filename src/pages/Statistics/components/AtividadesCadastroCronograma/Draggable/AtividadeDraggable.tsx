@@ -43,6 +43,8 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const remove = (index: number) => {
     // Pega a lista de atividades diretamente do Formik
     const newList = registerForm.values.atividades;
+
+    if (newList.length <= 1) return;
     // Remove item da lista
     newList.splice(index, 1);
     // Atualiza lista no Formik
