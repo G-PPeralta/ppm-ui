@@ -2,7 +2,7 @@ import {
   FormControl,
   FormLabel,
   Input,
-  useBreakpointValue,
+  // useBreakpointValue,
 } from "@chakra-ui/react";
 // import { FormikProps } from 'formik';
 // import { RegisterProjectProps } from 'interfaces/Services';
@@ -16,12 +16,15 @@ function FormNomeProjeto(projectsForm: any) {
   return (
     <FormControl>
       <FormLabel
-        style={{ fontSize: "12px", color: "#A7A7A7" }}
+        fontSize={"12px"}
+        fontWeight={"700"}
+        color={"#949494"}
         htmlFor="nomeProjeto"
       >
-        PROJETO
+        NOME DO PROJETO
       </FormLabel>
       <Input
+        maxLength={80}
         isRequired
         placeholder="Nome do projeto"
         id="nomeProjeto"
@@ -29,8 +32,11 @@ function FormNomeProjeto(projectsForm: any) {
         name="nomeProjeto"
         value={projectsForm.projectsForm.values.nomeProjeto}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: "100%", md: "95%" })}
-        style={{ color: "#A7A7A7", fontSize: "14px" }}
+        mt={"-9px"}
+        h={"56px"}
+        w={"100%"}
+        fontSize={"14px"}
+        fontWeight={"400"}
       />
       {projectsForm.projectsForm.errors.nomeProjeto &&
         projectsForm.projectsForm.touched.nomeProjeto && (

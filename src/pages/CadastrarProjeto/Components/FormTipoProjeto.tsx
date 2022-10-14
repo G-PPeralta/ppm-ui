@@ -11,70 +11,68 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import { Classificacao } from "interfaces/Services";
+import { TipoProjeto } from "interfaces/Services";
 
 import { TextError } from "components/TextError";
 
-import { getClassificacao } from "services/get/Projetos";
-import { postNovaClassificacao } from "services/post/AdicionarOpcaoSelect";
+import { getTipoProjeto } from "services/get/Projetos";
+import { postNovoTipoProjeto } from "services/post/AdicionarOpcaoSelect";
 
-function FormClassificacao(projectsForm: any) {
-  const [classificacaoState, setClassificacaoState] = useState<Classificacao[]>(
-    [] as Classificacao[]
+function FormTipoProjeto(projectsForm: any) {
+  const [tipoProjetoState, setTipoProjetoState] = useState<TipoProjeto[]>(
+    [] as TipoProjeto[]
   );
 
   const [loading, setLoading] = useState(true);
   const [novaOpcao, setNovaOpcao] = useState("");
 
   async function handleGetProjetos() {
-    const reqGet = await getClassificacao();
+    const reqGet = await getTipoProjeto();
 
-    const dataReq: Classificacao[] = reqGet.data.sort(
-      (a: Classificacao, b: Classificacao) =>
-        a.classificacao.localeCompare(b.classificacao)
+    const dataReq: TipoProjeto[] = reqGet.data.sort(
+      (a: TipoProjeto, b: TipoProjeto) => a.tipo.localeCompare(b.tipo)
     );
 
-    const outro: Classificacao = {
+    const outro: TipoProjeto = {
       id: dataReq.length + 2,
-      classificacao: "Outro",
+      tipo: "Outro",
       deletado: false,
     };
 
-    const comOutrosAoFinalArray: Classificacao[] = [...dataReq, outro];
+    const comOutrosAoFinalArray: TipoProjeto[] = [...dataReq, outro];
 
-    setClassificacaoState(comOutrosAoFinalArray);
+    setTipoProjetoState(comOutrosAoFinalArray);
     setLoading(false);
   }
 
   function handleNovo() {
     if (novaOpcao !== "") {
-      const novoAdicionado: Classificacao = {
-        id: classificacaoState.length + 1,
-        classificacao: novaOpcao,
+      const novoAdicionado: TipoProjeto = {
+        id: tipoProjetoState.length + 1,
+        tipo: novaOpcao,
         deletado: false,
       };
 
-      const semOpcaoOutros = classificacaoState.filter(
-        (classificacao: Classificacao) =>
-          classificacao.classificacao !== "Outro"
+      const semOpcaoOutros = tipoProjetoState.filter(
+        (tipo: TipoProjeto) => tipo.tipo !== "Outro"
       );
 
-      const comNovaOpcao: Classificacao[] = [...semOpcaoOutros, novoAdicionado];
+      const comNovaOpcao: TipoProjeto[] = [...semOpcaoOutros, novoAdicionado];
 
-      const outro: Classificacao = {
+      const outro: TipoProjeto = {
         id: comNovaOpcao.length + 2,
-        classificacao: "Outro",
+        tipo: "Outro",
         deletado: false,
       };
 
       const novoState = [...comNovaOpcao, outro];
 
-      setClassificacaoState(novoState);
+      setTipoProjetoState(novoState);
       setNovaOpcao("");
 
       projectsForm.projectsForm.values.tipoProjetoId = novoAdicionado.id;
 
-      postNovaClassificacao(novoAdicionado);
+      postNovoTipoProjeto(novoAdicionado);
     }
   }
 
@@ -91,18 +89,20 @@ function FormClassificacao(projectsForm: any) {
       ) : (
         <>
           <FormLabel
-            htmlFor="classificacaoId"
-            style={{ fontSize: "12px", color: "#A7A7A7" }}
+            fontSize={"12px"}
+            fontWeight={"700"}
+            color={"#949494"}
+            htmlFor="tipoProjetoId"
           >
-            CLASSIFICAÇÃO
+            TIPO
           </FormLabel>
-          {Number(projectsForm.projectsForm.values.classificacaoId) ===
-          classificacaoState[classificacaoState.length - 1].id ? (
+          {Number(projectsForm.projectsForm.values.tipoProjetoId) ===
+          tipoProjetoState[tipoProjetoState.length - 1].id ? (
             <>
               <Flex alignItems={"center"}>
                 <Input
                   isRequired
-                  placeholder="Adicione o classificacao"
+                  placeholder="Adicione o tipo"
                   id="add"
                   type="text"
                   name="add"
@@ -125,31 +125,34 @@ function FormClassificacao(projectsForm: any) {
             </>
           ) : (
             <Select
-              id="classificacaoId"
-              name="classificacaoId"
-              value={projectsForm.projectsForm.values.classificacaoId}
+              id="tipoProjetoId"
+              name="tipoProjetoId"
+              value={projectsForm.projectsForm.values.tipoProjetoId}
               onChange={projectsForm.projectsForm.handleChange}
-              w={"95%"}
               placeholder="Selecione"
-              style={{ color: "#A7A7A7", fontSize: "14px" }}
+              mt={"-9px"}
+              h={"56px"}
+              w={"100%"}
+              fontSize={"14px"}
+              fontWeight={"400"}
             >
-              {classificacaoState.map((classificacao) => (
-                <option key={classificacao.id} value={classificacao.id}>
-                  {classificacao.classificacao}
+              {tipoProjetoState.map((tipo) => (
+                <option key={tipo.id} value={tipo.id}>
+                  {tipo.tipo}
                 </option>
               ))}
             </Select>
           )}
         </>
       )}
-      {projectsForm.projectsForm.errors.classificacaoId &&
-        projectsForm.projectsForm.touched.classificacaoId && (
+      {projectsForm.projectsForm.errors.tipoProjetoId &&
+        projectsForm.projectsForm.touched.tipoProjetoId && (
           <TextError>
-            {projectsForm.projectsForm.errors.classificacaoId}
+            {projectsForm.projectsForm.errors.tipoProjetoId}
           </TextError>
         )}
     </FormControl>
   );
 }
 
-export default FormClassificacao;
+export default FormTipoProjeto;

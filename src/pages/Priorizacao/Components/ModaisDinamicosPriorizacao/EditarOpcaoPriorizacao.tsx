@@ -111,6 +111,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                               fontSize={"14px"}
                               fontWeight={"400"}
                               color={"black"}
+                              _placeholder={{ color: "#949494" }}
                               ml={"3px"}
                               // placeholder="Nome"
                               w={"328px"}

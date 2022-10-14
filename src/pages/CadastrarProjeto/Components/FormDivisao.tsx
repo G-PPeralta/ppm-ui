@@ -11,65 +11,66 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import { Gate } from "interfaces/Services";
+import { Divisao } from "interfaces/Services";
 
 import { TextError } from "components/TextError";
 
-import { getGate } from "services/get/Projetos";
-import { postNovoGate } from "services/post/AdicionarOpcaoSelect";
+import { getDivisao } from "services/get/Projetos";
+import { postNovaDivisao } from "services/post/AdicionarOpcaoSelect";
 
-function FormGate(projectsForm: any) {
-  const [gateState, setGateState] = useState<Gate[]>([] as Gate[]);
+function FormDivisao(projectsForm: any) {
+  const [divisaoState, setDivisaoState] = useState<Divisao[]>([] as Divisao[]);
+
   const [loading, setLoading] = useState(true);
   const [novaOpcao, setNovaOpcao] = useState("");
 
   async function handleGetProjetos() {
-    const reqGet = await getGate();
+    const reqGet = await getDivisao();
 
-    const dataReq: Gate[] = reqGet.data.sort((a: Gate, b: Gate) =>
-      a.gate.localeCompare(b.gate)
+    const dataReq: Divisao[] = reqGet.data.sort((a: Divisao, b: Divisao) =>
+      a.divisao.localeCompare(b.divisao)
     );
 
-    const outro: Gate = {
+    const outro: Divisao = {
       id: dataReq.length + 2,
-      gate: "Outro",
+      divisao: "Outro",
       deletado: false,
     };
 
-    const comOutrosAoFinalArray: Gate[] = [...dataReq, outro];
+    const comOutrosAoFinalArray: Divisao[] = [...dataReq, outro];
 
-    setGateState(comOutrosAoFinalArray);
+    setDivisaoState(comOutrosAoFinalArray);
     setLoading(false);
   }
 
   function handleNovo() {
     if (novaOpcao !== "") {
-      const novoAdicionado: Gate = {
-        id: gateState.length + 1,
-        gate: novaOpcao,
+      const novoAdicionado: Divisao = {
+        id: divisaoState.length + 1,
+        divisao: novaOpcao,
         deletado: false,
       };
 
-      const semOpcaoOutros = gateState.filter(
-        (gate: Gate) => gate.gate !== "Outro"
+      const semOpcaoOutros = divisaoState.filter(
+        (divisao: Divisao) => divisao.divisao !== "Outro"
       );
 
-      const comNovaOpcao: Gate[] = [...semOpcaoOutros, novoAdicionado];
+      const comNovaOpcao: Divisao[] = [...semOpcaoOutros, novoAdicionado];
 
-      const outro: Gate = {
+      const outro: Divisao = {
         id: comNovaOpcao.length + 2,
-        gate: "Outro",
+        divisao: "Outro",
         deletado: false,
       };
 
       const novoState = [...comNovaOpcao, outro];
 
-      setGateState(novoState);
+      setDivisaoState(novoState);
       setNovaOpcao("");
 
-      projectsForm.projectsForm.values.gateId = novoAdicionado.id;
+      projectsForm.projectsForm.values.divisaoId = novoAdicionado.id;
 
-      postNovoGate(novoAdicionado);
+      postNovaDivisao(novoAdicionado);
     }
   }
 
@@ -86,18 +87,20 @@ function FormGate(projectsForm: any) {
       ) : (
         <>
           <FormLabel
-            style={{ fontSize: "12px", color: "#A7A7A7" }}
-            htmlFor="gateId"
+            htmlFor="divisaoId"
+            fontSize={"12px"}
+            fontWeight={"700"}
+            color={"#949494"}
           >
-            GATE
+            DIVISÃO
           </FormLabel>
-          {Number(projectsForm.projectsForm.values.gateId) ===
-          gateState[gateState.length - 1].id ? (
+          {Number(projectsForm.projectsForm.values.divisaoId) ===
+          divisaoState[divisaoState.length - 1].id ? (
             <>
               <Flex alignItems={"center"}>
                 <Input
                   isRequired
-                  placeholder="Adicione o gate"
+                  placeholder="Adicione a divisão"
                   id="add"
                   type="text"
                   name="add"
@@ -120,29 +123,32 @@ function FormGate(projectsForm: any) {
             </>
           ) : (
             <Select
-              id="gateId"
-              name="gateId"
-              value={projectsForm.projectsForm.values.gateId}
+              id="divisaoId"
+              name="divisaoId"
+              value={projectsForm.projectsForm.values.divisaoId}
               onChange={projectsForm.projectsForm.handleChange}
-              w={"95%"}
               placeholder="Selecione"
-              style={{ color: "#A7A7A7", fontSize: "14px" }}
+              mt={"-9px"}
+              h={"56px"}
+              w={"100%"}
+              fontSize={"14px"}
+              fontWeight={"400"}
             >
-              {gateState.map((gate) => (
-                <option key={gate.id} value={gate.id}>
-                  {gate.gate}
+              {divisaoState.map((divisao) => (
+                <option key={divisao.id} value={divisao.id}>
+                  {divisao.divisao}
                 </option>
               ))}
             </Select>
           )}
         </>
       )}
-      {projectsForm.projectsForm.errors.gateId &&
-        projectsForm.projectsForm.touched.gateId && (
-          <TextError>{projectsForm.projectsForm.errors.gateId}</TextError>
+      {projectsForm.projectsForm.errors.divisaoId &&
+        projectsForm.projectsForm.touched.divisaoId && (
+          <TextError>{projectsForm.projectsForm.errors.divisaoId}</TextError>
         )}
     </FormControl>
   );
 }
 
-export default FormGate;
+export default FormDivisao;

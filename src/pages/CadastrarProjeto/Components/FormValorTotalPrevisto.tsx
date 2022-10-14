@@ -2,7 +2,7 @@ import {
   FormControl,
   FormLabel,
   Input,
-  useBreakpointValue,
+  // useBreakpointValue,
   InputGroup,
   InputLeftElement,
 } from "@chakra-ui/react";
@@ -13,7 +13,9 @@ function FormValorTotalPrevisto(projectsForm: any) {
   return (
     <FormControl>
       <FormLabel
-        style={{ fontSize: "12px", color: "#A7A7A7" }}
+        fontSize={"12px"}
+        fontWeight={"700"}
+        color={"#949494"}
         htmlFor="valorTotalPrevisto"
       >
         CAPEX PREVISTO
@@ -21,8 +23,9 @@ function FormValorTotalPrevisto(projectsForm: any) {
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"
-          color="gray.300"
-          fontSize="1.2em"
+          fontSize={"12px"}
+          fontWeight={"700"}
+          color={"#949494"}
         >
           R$
         </InputLeftElement>
@@ -34,11 +37,12 @@ function FormValorTotalPrevisto(projectsForm: any) {
           name="valorTotalPrevisto"
           value={projectsForm.projectsForm.values.valorTotalPrevisto}
           onChange={projectsForm.projectsForm.handleChange}
-          w={useBreakpointValue({
-            base: "100%",
-            md: "95%",
-          })}
-          style={{ color: "#A7A7A7", fontSize: "14px" }}
+          mt={"-9px"}
+          h={"56px"}
+          w={"50%"}
+          border={"solid 1px #949494"}
+          fontSize={"14px"}
+          fontWeight={"400"}
         />
       </InputGroup>
       {projectsForm.projectsForm.errors.valorTotalPrevisto &&

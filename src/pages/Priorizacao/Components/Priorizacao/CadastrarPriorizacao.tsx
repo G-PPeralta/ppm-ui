@@ -111,7 +111,7 @@ function ModalCadastrarPriorizacao() {
                               h={"56px"}
                               fontSize={"14px"}
                               color={"black"}
-                              _placeholder={{ color: "black" }}
+                              _placeholder={{ color: "#949494" }}
                               fontWeight={"400"}
                               border={"solid 1px #949494"}
                               isRequired

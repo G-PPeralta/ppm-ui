@@ -92,7 +92,9 @@ function FormSolicitante(projectsForm: any) {
       ) : (
         <>
           <FormLabel
-            style={{ fontSize: "12px", color: "#A7A7A7" }}
+            color={"#949494"}
+            fontWeight={"700"}
+            fontSize={"12px"}
             htmlFor="solicitanteId"
           >
             SOLICITANTE
@@ -130,9 +132,12 @@ function FormSolicitante(projectsForm: any) {
               name="solicitanteId"
               value={projectsForm.projectsForm.values.solicitanteId}
               onChange={projectsForm.projectsForm.handleChange}
-              w={"95%"}
               placeholder="Selecione"
-              style={{ color: "#A7A7A7", fontSize: "14px" }}
+              mt={"-9px"}
+              h={"56px"}
+              w={"100%"}
+              fontSize={"14px"}
+              fontWeight={"400"}
             >
               {solicitanteState.map((solicitante) => (
                 <option key={solicitante.id} value={solicitante.id}>

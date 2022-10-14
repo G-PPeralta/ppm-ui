@@ -2,7 +2,7 @@ import {
   FormControl,
   FormLabel,
   Input,
-  useBreakpointValue,
+  // useBreakpointValue,
 } from "@chakra-ui/react";
 
 import { TextError } from "components/TextError";
@@ -11,12 +11,16 @@ function FormDataFim(projectsForm: any) {
   return (
     <FormControl>
       <FormLabel
-        style={{ fontSize: "12px", color: "#A7A7A7" }}
+        fontSize={"12px"}
+        fontWeight={"700"}
+        color={"#949494"}
         htmlFor="dataFim"
       >
         FIM
       </FormLabel>
       <Input
+        max="9999-12-31"
+        maxLength={1}
         isRequired
         placeholder="dd/mm/aaaa"
         id="dataFim"
@@ -24,7 +28,12 @@ function FormDataFim(projectsForm: any) {
         name="dataFim"
         value={projectsForm.projectsForm.values.dataFim}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: "100%", md: "90%" })}
+        mt={"-9px"}
+        h={"56px"}
+        w={"30%"}
+        border={"solid 1px #949494"}
+        fontSize={"14px"}
+        fontWeight={"400"}
       />
       {projectsForm.projectsForm.errors.dataFim &&
         projectsForm.projectsForm.touched.dataFim && (

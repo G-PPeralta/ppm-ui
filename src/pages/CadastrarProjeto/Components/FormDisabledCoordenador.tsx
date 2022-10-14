@@ -14,7 +14,9 @@ function FormDisabledCoordenador(projectsForm: any) {
       {!loading && (
         <Box>
           <FormLabel
-            style={{ fontSize: "12px", color: "#A7A7A7" }}
+            color={"#949494"}
+            fontWeight={"700"}
+            fontSize={"12px"}
             htmlFor={"coordenador"}
           >
             COORDENADOR
@@ -26,8 +28,16 @@ function FormDisabledCoordenador(projectsForm: any) {
             type={"coordenador"}
             name={"coordenador"}
             value={projectsForm.projectsForm.values.coordenador}
+            mt={"-9px"}
+            maxLength={40}
+            fontSize={"14px"}
+            fontWeight={"400"}
             w={"100%"}
-            style={{ color: "#A7A7A7", fontSize: "14px" }}
+            border={"1px solid #949494"}
+            h={"56px"}
+            style={{ color: "black", fontSize: "14px" }}
+            _placeholder={{ color: "black" }}
+            color={"black"}
           />
         </Box>
       )}
