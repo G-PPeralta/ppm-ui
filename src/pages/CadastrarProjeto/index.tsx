@@ -42,6 +42,17 @@ function CadastrarProjeto() {
     optionsGates,
   } = useProjetos();
 
+  const getValue = (options: any, chave: any) => {
+    const index = options
+      .map(({ value }: any) => value)
+      .indexOf(registerForm?.values?.[chave]);
+
+    return {
+      value: options?.[index]?.value,
+      label: options?.[index]?.label,
+    };
+  };
+
   return (
     <>
       <Sidebar>
@@ -83,6 +94,7 @@ function CadastrarProjeto() {
                     propName={"responsavelId"}
                     options={optionsResponsaveis}
                     required={true}
+                    value={getValue(optionsResponsaveis, "responsavelId")}
                   />
                   <SelectFiltragem
                     registerForm={registerForm}
@@ -90,6 +102,7 @@ function CadastrarProjeto() {
                     propName={"coordenadorId"}
                     options={optionsCoordenadores}
                     required={true}
+                    value={getValue(optionsCoordenadores, "coordenadorId")}
                   />
                 </Flex>
 
@@ -100,6 +113,7 @@ function CadastrarProjeto() {
                     propName={"poloId"}
                     options={optionsPolos}
                     required={true}
+                    value={getValue(optionsPolos, "poloId")}
                   />
                   <SelectFiltragem
                     registerForm={registerForm}
@@ -107,6 +121,7 @@ function CadastrarProjeto() {
                     propName={"localId"}
                     options={optionsLocais}
                     required={true}
+                    value={getValue(optionsLocais, "localId")}
                   />
                   <SelectFiltragem
                     registerForm={registerForm}
@@ -114,6 +129,7 @@ function CadastrarProjeto() {
                     propName={"solicitanteId"}
                     options={optionsSolicitantes}
                     required={true}
+                    value={getValue(optionsSolicitantes, "solicitanteId")}
                   />
                   {/* <SelectFiltragem
                     registerForm={registerForm}
@@ -128,6 +144,7 @@ function CadastrarProjeto() {
                     propName={"statusId"}
                     options={optionsStatus}
                     required={true}
+                    value={getValue(optionsStatus, "statusId")}
                   />
                 </Flex>
 
@@ -199,6 +216,7 @@ function CadastrarProjeto() {
                     propName={"complexidadeId"}
                     options={optionsComplexidades}
                     required={true}
+                    value={getValue(optionsComplexidades, "complexidadeId")}
                   />
                 </Flex>
 
@@ -209,6 +227,7 @@ function CadastrarProjeto() {
                     propName={"divisaoId"}
                     options={optionsDivisoes}
                     required={true}
+                    value={getValue(optionsDivisoes, "divisaoId")}
                   />
                   <SelectFiltragem
                     registerForm={registerForm}
@@ -216,6 +235,7 @@ function CadastrarProjeto() {
                     propName={"classificacaoId"}
                     options={optionsClassificacoes}
                     required={true}
+                    value={getValue(optionsClassificacoes, "classificacaoId")}
                   />
                   <SelectFiltragem
                     registerForm={registerForm}
@@ -223,6 +243,7 @@ function CadastrarProjeto() {
                     propName={"tipoProjetoId"}
                     options={optionsTipoProjetos}
                     required={true}
+                    value={getValue(optionsTipoProjetos, "tipoProjetoId")}
                   />
                   <SelectFiltragem
                     registerForm={registerForm}
@@ -230,6 +251,7 @@ function CadastrarProjeto() {
                     propName={"gateId"}
                     options={optionsGates}
                     required={true}
+                    value={getValue(optionsGates, "gateId")}
                   />
                 </Flex>
 

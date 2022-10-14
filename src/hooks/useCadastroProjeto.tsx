@@ -179,7 +179,7 @@ export function useProjetos() {
     label: gate.gate,
   }));
 
-  const initialValues = {
+  const initialValues: any = {
     nom_usu_create: user?.nome,
     responsavelId: 0,
     coordenadorId: 0,
@@ -202,7 +202,7 @@ export function useProjetos() {
     comentarios: "",
   };
 
-  const registerForm = useFormik({
+  const registerForm: any = useFormik({
     initialValues,
     validationSchema: cadastroProjetoSchema,
     onSubmit: async (values) => {
