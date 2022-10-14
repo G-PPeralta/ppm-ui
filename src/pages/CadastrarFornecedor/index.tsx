@@ -29,7 +29,7 @@ import FormServicos from "./Components/FormServicos";
 import FormStatusFornecedor from "./Components/FormStatusFornecedor";
 import FormTelefone from "./Components/FormTelefone";
 
-export function ProvidersRegistration() {
+export function CadastrarFornecedor() {
   const wd = window.innerWidth;
   const { projectsForm, loading } = useProjects();
   return (
