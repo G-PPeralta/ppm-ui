@@ -8,7 +8,6 @@ import { Budgets } from "pages/Budgets";
 import { CentroDeCustoProjetos } from "pages/CentroDeCustoProjetos";
 import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
 import { FinanceiroProjetos } from "pages/FinanceiroProjetos";
-import { GanttPage } from "pages/Gantt";
 import { GráficosEstatisticos } from "pages/GraficosEstatisticos";
 import { Home } from "pages/Home";
 import { Infographics } from "pages/Infographics";
@@ -57,7 +56,6 @@ export function PrivateRoutes() {
       <Route path="/projects" element={<Projects />} />
       <Route path="/budgets" element={<Budgets />} />
       <Route path="/budget/detail/:id" element={<BudgetDetail />} />
-      <Route path="/gantt" element={<GanttPage />} />
       <Route path="/fornecedores" element={<Fornecedores />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
       <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
