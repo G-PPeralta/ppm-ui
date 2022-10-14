@@ -91,7 +91,9 @@ function FormLocal(projectsForm: any) {
       ) : (
         <>
           <FormLabel
-            style={{ fontSize: "12px", color: "#A7A7A7" }}
+            color={"#949494"}
+            fontWeight={"700"}
+            fontSize={"12px"}
             htmlFor="localId"
           >
             LOCAL
@@ -129,9 +131,12 @@ function FormLocal(projectsForm: any) {
               name="localId"
               value={projectsForm.projectsForm.values.localId}
               onChange={projectsForm.projectsForm.handleChange}
-              w={"95%"}
               placeholder="Selecione"
-              style={{ color: "#A7A7A7", fontSize: "14px" }}
+              mt={"-9px"}
+              h={"56px"}
+              w={"100%"}
+              fontSize={"14px"}
+              fontWeight={"400"}
             >
               {localProjetoState.map((local) => (
                 <option key={local.id} value={local.id}>

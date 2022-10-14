@@ -92,7 +92,9 @@ function FormClassificacao(projectsForm: any) {
         <>
           <FormLabel
             htmlFor="classificacaoId"
-            style={{ fontSize: "12px", color: "#A7A7A7" }}
+            fontSize={"12px"}
+            fontWeight={"700"}
+            color={"#949494"}
           >
             CLASSIFICAÇÃO
           </FormLabel>
@@ -129,9 +131,12 @@ function FormClassificacao(projectsForm: any) {
               name="classificacaoId"
               value={projectsForm.projectsForm.values.classificacaoId}
               onChange={projectsForm.projectsForm.handleChange}
-              w={"95%"}
               placeholder="Selecione"
-              style={{ color: "#A7A7A7", fontSize: "14px" }}
+              mt={"-9px"}
+              h={"56px"}
+              w={"100%"}
+              fontSize={"14px"}
+              fontWeight={"400"}
             >
               {classificacaoState.map((classificacao) => (
                 <option key={classificacao.id} value={classificacao.id}>

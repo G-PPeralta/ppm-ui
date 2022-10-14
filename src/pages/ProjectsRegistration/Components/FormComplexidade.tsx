@@ -4,7 +4,7 @@ import {
   FormControl,
   FormLabel,
   Select,
-  useBreakpointValue,
+  // useBreakpointValue,
 } from "@chakra-ui/react";
 import { Complexidade } from "interfaces/Services";
 
@@ -36,7 +36,9 @@ function FormComplexidade(projectsForm: any) {
     <FormControl>
       <FormLabel
         htmlFor="complexidadeId"
-        style={{ fontSize: "12px", color: "#A7A7A7" }}
+        fontSize={"12px"}
+        fontWeight={"700"}
+        color={"#949494"}
       >
         COMPLEXIDADE
       </FormLabel>
@@ -45,9 +47,13 @@ function FormComplexidade(projectsForm: any) {
         name="complexidadeId"
         value={projectsForm.projectsForm.values.complexidadeId}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: "100%", md: "100%" })}
         placeholder="Selecione"
-        style={{ color: "#A7A7A7", fontSize: "14px" }}
+        mt={"-9px"}
+        h={"56px"}
+        w={"50%"}
+        border={"solid 1px #949494"}
+        fontSize={"14px"}
+        fontWeight={"400"}
       >
         {complexidadeState.map((complexidade) => (
           <option key={complexidade.id} value={complexidade.id}>

@@ -88,7 +88,9 @@ function FormDivisao(projectsForm: any) {
         <>
           <FormLabel
             htmlFor="divisaoId"
-            style={{ fontSize: "12px", color: "#A7A7A7" }}
+            fontSize={"12px"}
+            fontWeight={"700"}
+            color={"#949494"}
           >
             DIVISÃO
           </FormLabel>
@@ -125,9 +127,12 @@ function FormDivisao(projectsForm: any) {
               name="divisaoId"
               value={projectsForm.projectsForm.values.divisaoId}
               onChange={projectsForm.projectsForm.handleChange}
-              w={"95%"}
               placeholder="Selecione"
-              style={{ color: "#A7A7A7", fontSize: "12px" }}
+              mt={"-9px"}
+              h={"56px"}
+              w={"100%"}
+              fontSize={"14px"}
+              fontWeight={"400"}
             >
               {divisaoState.map((divisao) => (
                 <option key={divisao.id} value={divisao.id}>

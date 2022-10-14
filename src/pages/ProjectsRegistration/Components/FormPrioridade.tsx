@@ -4,7 +4,7 @@ import {
   FormControl,
   FormLabel,
   Select,
-  useBreakpointValue,
+  // useBreakpointValue,
 } from "@chakra-ui/react";
 import { Prioridade } from "interfaces/Services";
 
@@ -34,7 +34,9 @@ function FormPrioridade(projectsForm: any) {
   return (
     <FormControl>
       <FormLabel
-        style={{ fontSize: "12px", color: "#A7A7A7" }}
+        fontSize={"12px"}
+        fontWeight={"700"}
+        color={"#949494"}
         htmlFor="prioridadeId"
       >
         PRIORIDADE
@@ -44,9 +46,12 @@ function FormPrioridade(projectsForm: any) {
         name="prioridadeId"
         value={projectsForm.projectsForm.values.prioridadeId}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: "100%", md: "95%" })}
+        mt={"-9px"}
+        h={"56px"}
+        w={"100%"}
+        fontSize={"14px"}
+        fontWeight={"400"}
         placeholder="Selecione"
-        style={{ color: "#A7A7A7", fontSize: "14px" }}
       >
         {prioridadeState.map((prioridade) => (
           <option key={prioridade.id} value={prioridade.id}>
