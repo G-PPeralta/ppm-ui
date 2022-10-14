@@ -67,7 +67,7 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
         fontSize={"18px"}
         fontWeight={"700"}
       >
-        Adicionar Fornecedor
+        Adicionar Coordenador
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size="lg">
@@ -81,7 +81,7 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            Adicionar Fornecedor
+            Adicionar Coordenador
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <ModalBody>
