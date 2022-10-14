@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
 import {
@@ -33,6 +33,15 @@ export function Lookahead() {
     const act = await getAtividades(+id);
     setAtividades(act);
   }
+
+  const getAllActivities = async () => {
+    const act = await getAtividades(0);
+    setAtividades(act);
+  };
+
+  useEffect(() => {
+    getAllActivities();
+  }, []);
 
   return (
     <div>
@@ -79,8 +88,15 @@ export function Lookahead() {
                         onChange={(e) => handleProjectChange(e.target.value)}
                       >
                         {projetos &&
-                          projetos.map((d) => (
-                            <option value={d.id}>{d.nome_projeto}</option>
+                          projetos.map((d, k) => (
+                            <option key={k} value={d.id}>
+                              {d.nome_projeto.length > 20
+                                ? `${d.id} - ${d.nome_projeto.substring(
+                                    0,
+                                    17
+                                  )}...`
+                                : `${d.id} - ${d.nome_projeto}`}
+                            </option>
                           ))}
                       </Select>
                     </FormControl>

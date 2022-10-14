@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { FiPrinter } from "react-icons/fi";
 
 import {
+  Button,
   Flex,
-  IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -92,13 +92,19 @@ export function TabelaServicos(props: TableProps) {
                 Serviços
               </Th>
               <Th borderTopRightRadius={"10px"} colSpan={2}>
-                Imprimir
-                <IconButton
-                  color={"white"}
-                  backgroundColor="transparent"
-                  aria-label="imprimir"
-                  icon={<FiPrinter />}
-                />
+                <Button
+                  variant="ghost"
+                  colorScheme="messenger"
+                  color="white"
+                  rightIcon={<FiPrinter />}
+                  _hover={{
+                    background: "white",
+                    transition: "all 0.4s",
+                    color: "rgb(46, 105, 253)",
+                  }}
+                >
+                  Exportar
+                </Button>
               </Th>
             </Tr>
             <Tr backgroundColor={"rgb(46, 105, 253)"} color="white">
@@ -113,16 +119,13 @@ export function TabelaServicos(props: TableProps) {
               {dias &&
                 servicosData &&
                 dias.map(function (x) {
-                  return (
-                    <Td>
-                      {" "}
-                      {
-                        servicosData.find(
-                          (f) => f.dia == x.data && f.tipo == "s"
-                        )?.nome
-                      }
-                    </Td>
+                  const serr = servicosData.filter(
+                    (f) => f.dia == x.data && f.tipo == "s"
                   );
+                  const sNames =
+                    serr.length > 0 ? serr.map((x) => x.nome).join(" - ") : "";
+
+                  return <Td>{sNames}</Td>;
                 })}
 
               {/* <Td>
