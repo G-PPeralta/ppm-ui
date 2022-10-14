@@ -10,7 +10,7 @@ import Sidebar from "components/SideBar";
 import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
 
 import ModalCadastroCronograma from "./components/ModalCadastroCronograma";
-import ModalCadastroOperacao from "./components/ModalCadastroOperação";
+import ModalCadastroOperacao from "./components/ModalCadastroOperacao";
 import { StatisticsTable } from "./components/StatisticsTable";
 
 function Statistics() {
