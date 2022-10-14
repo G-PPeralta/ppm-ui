@@ -44,7 +44,7 @@ export const LinkItems: Array<LinkItemProps> = [
       {
         name: "Fornecedores",
         icon: FiActivity,
-        link: "/desenvolvimento",
+        link: "/fornecedores",
       },
       {
         name: "Lições Aprendidas",
