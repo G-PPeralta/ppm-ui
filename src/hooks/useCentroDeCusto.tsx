@@ -10,7 +10,7 @@ import { patchEditarDespesa } from "services/update/Financeiro";
 
 import { useAuth } from "./useAuth";
 
-export function useCentroDeCusto(id?: number, post?: boolean, patch?: boolean) {
+export function useCentroDeCusto(id?: number, metodo?: string) {
   const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ export function useCentroDeCusto(id?: number, post?: boolean, patch?: boolean) {
 
       setLoading(true);
 
-      if (patch && id) {
+      if (metodo === "patch" && id) {
         try {
           const { status } = await patchEditarDespesa(id, newValues);
 
@@ -57,7 +57,7 @@ export function useCentroDeCusto(id?: number, post?: boolean, patch?: boolean) {
           setLoading(false);
         }
       }
-      if (post && id) {
+      if (metodo === "post" && id) {
         try {
           const { status } = await postCadastroDespesa(id, newValues);
 

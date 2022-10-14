@@ -39,11 +39,10 @@ interface Props {
 }
 
 function ModalAdicionar({ refreshState, idProjeto }: Props) {
-  const post = true;
   const { refresh, setRefresh } = refreshState;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { loading, registerForm } = useCentroDeCusto(idProjeto, post);
+  const { loading, registerForm } = useCentroDeCusto(idProjeto, "post");
 
   const optionsPrestadorServico = [
     {

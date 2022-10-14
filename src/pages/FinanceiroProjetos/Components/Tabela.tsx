@@ -88,12 +88,12 @@ function Tabela({ data }: Props) {
               <Td textAlign={"center"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.idprojeto}</Text>
               </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
+              <Td textAlign={"start"} fontWeight={"semibold"}>
                 <Link
                   to={`/financeiro-projetos/centro-custo/${linhaTabela.idprojeto}`}
                   state={linhaTabela}
                 >
-                  <Text>{linhaTabela.nomeprojeto}</Text>
+                  <Text color={"origem.500"}>{linhaTabela.nomeprojeto}</Text>
                 </Link>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>

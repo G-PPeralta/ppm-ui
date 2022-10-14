@@ -23,7 +23,7 @@ import { useAuth } from "hooks/useAuth";
 
 import { deleteDespesa } from "services/delete/Financeiro";
 
-// import ModalEditar from "./ModalEditar";
+import ModalEditar from "./ModalEditar";
 
 interface RefreshState {
   refresh: boolean;
@@ -32,9 +32,10 @@ interface RefreshState {
 interface Props {
   data: any; // Dados completos da tabela
   refreshState: RefreshState;
+  idProjeto: number;
 }
 
-function Tabela({ data, refreshState }: Props) {
+function Tabela({ data, refreshState, idProjeto }: Props) {
   const { user } = useAuth();
   const { refresh, setRefresh } = refreshState;
   const [from, setFrom] = useState<number>(0);
@@ -48,7 +49,7 @@ function Tabela({ data, refreshState }: Props) {
   };
 
   const handleDeletar = (idCusto: number) => {
-    deleteDespesa(idCusto, user?.id);
+    deleteDespesa(idCusto, user?.nome);
     setRefresh(!refresh);
   };
 
@@ -137,10 +138,10 @@ function Tabela({ data, refreshState }: Props) {
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Flex gap={2} align={"center"} justify={"center"}>
-                    {/* <ModalEditar
+                    <ModalEditar
                       refreshState={refreshState}
                       linhaTabela={linhaTabela}
-                    /> */}
+                    />
                     <IconButton
                       aria-label="Botão de Editar"
                       icon={<FiTrash />}

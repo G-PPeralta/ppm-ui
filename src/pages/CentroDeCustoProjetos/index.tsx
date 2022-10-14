@@ -113,12 +113,16 @@ export function CentroDeCustoProjetos() {
                     ELEMENTO PEP
                   </Text>
                   <Heading as="h3" size="md">
-                    {data.elementoPep}
+                    {data.elementoPep ? data.elementoPep : "Não informado"}
                   </Heading>
                 </Flex>
               </Flex>
               {data && (
-                <Tabela data={data.centroDeCusto} refreshState={refreshState} />
+                <Tabela
+                  data={data.centroDeCusto}
+                  refreshState={refreshState}
+                  idProjeto={data.idProjeto}
+                />
               )}
             </Box>
           </Flex>

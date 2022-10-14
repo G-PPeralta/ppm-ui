@@ -56,11 +56,10 @@ interface Props {
 }
 
 function ModalEditar({ refreshState, linhaTabela }: Props) {
-  const patch = true;
   const { refresh, setRefresh } = refreshState;
   const { loading, registerForm } = useCentroDeCusto(
     linhaTabela.idCusto,
-    patch
+    "patch"
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
 
