@@ -6,8 +6,12 @@ import { cadastroNovaDespesa } from "validations/Financeiro";
 import { useToast } from "contexts/Toast";
 
 import { postCadastroDespesa } from "services/post/Financeiro";
+import { patchEditarDespesa } from "services/update/Financeiro";
 
-export function useCentroDeCusto() {
+import { useAuth } from "./useAuth";
+
+export function useCentroDeCusto(id?: number, metodo?: string) {
+  const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
@@ -25,6 +29,7 @@ export function useCentroDeCusto() {
     validationSchema: cadastroNovaDespesa,
     onSubmit: async (values) => {
       const newValues = {
+        user: user?.nome,
         valor: values.valor,
         data: values.data,
         prestadorServicoId: values.prestadorServicoId,
@@ -35,20 +40,39 @@ export function useCentroDeCusto() {
 
       setLoading(true);
 
-      try {
-        const { status } = await postCadastroDespesa(newValues);
+      if (metodo === "patch" && id) {
+        try {
+          const { status } = await patchEditarDespesa(id, newValues);
 
-        if (status === 200 || status === 201) {
-          toast.success(`Despesa cadastrada com sucesso!`, {
+          if (status === 200 || status === 201) {
+            toast.success(`Despesa editada com sucesso!`, {
+              id: "toast-principal",
+            });
+            setLoading(false);
+          }
+        } catch (error) {
+          toast.error(`Erro ao editar despesa!`, {
             id: "toast-principal",
           });
           setLoading(false);
         }
-      } catch (error) {
-        toast.error(`Erro ao cadastrar despesa!`, {
-          id: "toast-principal",
-        });
-        setLoading(false);
+      }
+      if (metodo === "post" && id) {
+        try {
+          const { status } = await postCadastroDespesa(id, newValues);
+
+          if (status === 200 || status === 201) {
+            toast.success(`Despesa cadastrada com sucesso!`, {
+              id: "toast-principal",
+            });
+            setLoading(false);
+          }
+        } catch (error) {
+          toast.error(`Erro ao cadastrar despesa!`, {
+            id: "toast-principal",
+          });
+          setLoading(false);
+        }
       }
     },
   });

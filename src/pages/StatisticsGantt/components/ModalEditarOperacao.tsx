@@ -148,8 +148,8 @@ function ModalAdicionarOperacao({
 
                 <Flex flex={1} direction={"column"}>
                   <Text fontWeight={"bold"}>Datas</Text>
-                  <Flex mb={5}>
-                    <Flex flex={1}>
+                  <Flex gap={5}>
+                    <Flex>
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"inicio_planejado"}
@@ -158,18 +158,18 @@ function ModalAdicionarOperacao({
                         data={registerForm.values.inicio_planejado}
                       />
                     </Flex>
-                    <Flex flex={1}>
+                    <Flex>
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"fim_planejado"}
                         label={"FIM PLANEJADO"}
-                        required={false}
+                        required={true}
                         data={registerForm.values.fim_planejado}
                       />
                     </Flex>
                   </Flex>
-                  <Flex>
-                    <Flex flex={1}>
+                  <Flex gap={5}>
+                    <Flex>
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"inicio_realizado"}
@@ -178,7 +178,7 @@ function ModalAdicionarOperacao({
                         data={registerForm.values.inicio_realizado}
                       />
                     </Flex>
-                    <Flex flex={1}>
+                    <Flex>
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"fim_realizado"}
@@ -188,41 +188,29 @@ function ModalAdicionarOperacao({
                       />
                     </Flex>
                   </Flex>
-                </Flex>
-                <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Progresso</Text>
-                  <Flex gap={5}>
-                    <Flex>
-                      <NumberInput
-                        max={100}
-                        min={0}
-                        id={"pct_real"}
-                        name={"pct_real"}
-                        value={registerForm.values.pct_real}
-                        onChange={(value) => {
-                          registerForm.setFieldValue("pct_real", Number(value));
-                        }}
-                      >
-                        <NumberInputField bg={"#fff"} h={"56px"} />
-                      </NumberInput>
+                  <Flex flex={1} direction={"column"}>
+                    <Text fontWeight={"bold"}>Progresso</Text>
+                    <Flex gap={5}>
+                      <Flex>
+                        <NumberInput
+                          max={100}
+                          min={0}
+                          id={"pct_real"}
+                          name={"pct_real"}
+                          value={registerForm.values.pct_real}
+                          onChange={(value) => {
+                            registerForm.setFieldValue(
+                              "pct_real",
+                              Number(value)
+                            );
+                          }}
+                        >
+                          <NumberInputField bg={"#fff"} h={"56px"} />
+                        </NumberInput>
+                      </Flex>
                     </Flex>
                   </Flex>
                 </Flex>
-                {/* <Flex
-                  flexDirection={useBreakpointValue({
-                    base: "column",
-                    md: "column",
-                  })}
-                  gap={2}
-                >
-                  <Text fontWeight={"bold"}>Restrições</Text>
-                  <Restricoes registerForm={registerForm} />
-                </Flex> */}
-
-                {/* <AtividadesDragAndDrop
-                  registerForm={registerForm}
-                  atividades={relacoesOptions}
-                /> */}
               </Flex>
             </ModalBody>
 

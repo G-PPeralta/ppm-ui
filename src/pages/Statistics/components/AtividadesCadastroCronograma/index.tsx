@@ -47,6 +47,28 @@ export default function AtividadesCadastroCronograma({
     listaOperacao,
   };
 
+  const initAdd = {
+    area_id: 0,
+    operacao_id: 0,
+    responsavel_id: 0,
+    data_inicio: "",
+    duracao: 0,
+    precedentes: listaAtividadesPrecedentes.filter((atividade: any) => {
+      for (
+        let index = 0;
+        index < registerForm.values.atividades.length;
+        index += 1
+      ) {
+        if (
+          atividade.id === registerForm.values.atividades[index].operacao_id
+        ) {
+          return true;
+        }
+      }
+      return false;
+    }),
+  };
+
   const reorder = (
     registerForm: FormikProps<any>,
     startIndex: number,
@@ -91,27 +113,7 @@ export default function AtividadesCadastroCronograma({
   const add = () => {
     registerForm.setFieldValue("atividades", [
       ...registerForm.values.atividades,
-      {
-        area_id: 0,
-        operacao_id: 0,
-        responsavel_id: 0,
-        data_inicio: "",
-        duracao: 0,
-        precedentes: listaAtividadesPrecedentes.filter((atividade: any) => {
-          for (
-            let index = 0;
-            index < registerForm.values.atividades.length;
-            index += 1
-          ) {
-            if (
-              atividade.id === registerForm.values.atividades[index].operacao_id
-            ) {
-              return true;
-            }
-          }
-          return false;
-        }),
-      },
+      initAdd,
     ]);
     setRender(!render);
   };

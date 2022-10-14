@@ -5,10 +5,10 @@ import { ActivitiesRegistration } from "pages/ActivitiesRegistration";
 import { ActivitiesSchedule } from "pages/ActivitiesSchedule";
 import { BudgetDetail } from "pages/BudgetDetail";
 import { Budgets } from "pages/Budgets";
+import { CadastrarFornecedor } from "pages/CadastrarFornecedor";
 import { CentroDeCustoProjetos } from "pages/CentroDeCustoProjetos";
 import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
 import { FinanceiroProjetos } from "pages/FinanceiroProjetos";
-import { GanttPage } from "pages/Gantt";
 import { GráficosEstatisticos } from "pages/GraficosEstatisticos";
 import { Home } from "pages/Home";
 import { Infographics } from "pages/Infographics";
@@ -23,7 +23,6 @@ import { Priorizacao } from "pages/Priorizacao";
 import { Profile } from "pages/Profile";
 import { Projects } from "pages/Projects";
 import { ProjectsRegistration } from "pages/ProjectsRegistration";
-import { ProvidersRegistration } from "pages/ProvidersRegistration";
 import { Reports } from "pages/Reports";
 import { Settings } from "pages/Settings";
 import { ShareRegister } from "pages/ShareRegister";
@@ -38,10 +37,7 @@ export function PrivateRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/graficos" element={<GráficosEstatisticos />} />
       <Route path="/projects-registration" element={<ProjectsRegistration />} />
-      <Route
-        path="/providers-registration"
-        element={<ProvidersRegistration />}
-      />
+      <Route path="/cadastrar-fornecedor" element={<CadastrarFornecedor />} />
       <Route
         path="/activities-registration"
         element={<ActivitiesRegistration />}
@@ -57,7 +53,6 @@ export function PrivateRoutes() {
       <Route path="/projects" element={<Projects />} />
       <Route path="/budgets" element={<Budgets />} />
       <Route path="/budget/detail/:id" element={<BudgetDetail />} />
-      <Route path="/gantt" element={<GanttPage />} />
       <Route path="/fornecedores" element={<Fornecedores />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
       <Route path="/atividade/:id" element={<ActivitiesSchedule />} />

@@ -14,7 +14,7 @@ import { useToast } from "contexts/Toast";
 //   getAreaAtuacaoList,
 //   getResponsavelList,
 // } from "services/get/Infograficos";
-// import { patchOperacoesEstatisticas } from "services/update/OperacoesEstatisticas";
+import { patchAtividadeProjeto } from "services/update/Projeto";
 
 import { useAuth } from "./useAuth";
 
@@ -52,6 +52,8 @@ export function useEditarAtividadeGantt() {
     id_atividade: 0,
     inicio_realizado: "",
     fim_realizado: "",
+    inicio_planejado: "",
+    fim_planejado: "",
     pct_real: 0,
   };
 
@@ -59,30 +61,25 @@ export function useEditarAtividadeGantt() {
     id_atividade: yup.number().required("Campo obrigatório").moreThan(0),
     inicio_realizado: yup.date().required("Campo obrigatório"),
     fim_realizado: yup.date().required("Campo obrigatório"),
+    inicio_planejado: yup.date().required("Campo obrigatório"),
+    fim_planejado: yup.date().required("Campo obrigatório"),
     pct_real: yup.number(), // .required("Campo obrigatório").moreThan(0),
   });
   const registerForm: any = useFormik({
     initialValues,
     validationSchema: adicionarOperacao,
     onSubmit: async (values) => {
+      const id = values.id_atividade;
       const newValues = {
-        id: values.id_atividade,
-        data_inicio: new Date(values.inicio_realizado),
-        data_fim: new Date(values.fim_realizado), // tratamento back
-        progresso: values.pct_real, // tratamento back
+        dat_ini: new Date(values.inicio_realizado).toLocaleString(),
+        dat_fim: new Date(values.fim_realizado).toLocaleString(),
+        dat_ini_plan: new Date(values.inicio_planejado).toLocaleString(),
+        dat_fim_plan: new Date(values.fim_planejado).toLocaleString(),
+        pct_real: values.pct_real,
       };
 
-      // setLoading(true);
-
       try {
-        // TODO: liberar endpoint
-        const res = {
-          status: 200,
-          data: newValues,
-        };
-        const status = res.status;
-        // console.log(newValues);
-        // const { status } = await patchOperacoesEstatisticas(newValues);
+        const { status } = await patchAtividadeProjeto(id, newValues);
         if (status === 200 || status === 201) {
           toast.success("Operação adicionada com sucesso!", {
             id: "toast-principal",
@@ -104,9 +101,11 @@ export function useEditarAtividadeGantt() {
       id_atividade: args.rowData.TaskID,
       nome_atividade: args.rowData.TaskName,
       inicio_realizado: new Date(args.rowData.StartDate),
+      fim_realizado: new Date(args.rowData.EndDate),
+      inicio_planejado: new Date(args.rowData.BaselineStartDate),
+      fim_planejado: new Date(args.rowData.BaselineEndDate),
       // hrs_totais: args.rowData.BaselineDuration,
       // hrs_reais: args.rowData.Duration,
-      fim_realizado: new Date(args.rowData.EndDate),
       pct_real: args.rowData.Progress,
     });
     onOpen();

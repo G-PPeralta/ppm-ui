@@ -62,6 +62,11 @@ function ModalEditarAtividade({
       editAtividade.inicio_realizado
     );
     registerForm.setFieldValue("fim_realizado", editAtividade.fim_realizado);
+    registerForm.setFieldValue(
+      "inicio_planejado",
+      editAtividade.inicio_planejado
+    );
+    registerForm.setFieldValue("fim_planejado", editAtividade.fim_planejado);
     // registerForm.setFieldValue("hrs_totais", editOp.hrs_totais);
     // registerForm.setFieldValue("hrs_reais", editOp.hrs_reais);
     registerForm.setFieldValue("pct_real", editAtividade.pct_real);
@@ -151,8 +156,30 @@ function ModalEditarAtividade({
                     <Flex flex={1}>
                       <DateTimePicker
                         registerForm={registerForm}
+                        value={"inicio_planejado"}
+                        label={"INÍCIO PLANEJADO"}
+                        required={false}
+                        data={registerForm.values.inicio_planejado}
+                      />
+                    </Flex>
+                    <Flex flex={1}>
+                      <DateTimePicker
+                        registerForm={registerForm}
+                        value={"fim_planejado"}
+                        label={"FIM PLANEJADO"}
+                        required={false}
+                        data={registerForm.values.fim_planejado}
+                      />
+                    </Flex>
+                  </Flex>
+                </Flex>
+                <Flex flex={1} direction={"column"}>
+                  <Flex>
+                    <Flex flex={1}>
+                      <DateTimePicker
+                        registerForm={registerForm}
                         value={"inicio_realizado"}
-                        label={"INÍCIO"}
+                        label={"INÍCIO REALIZADO"}
                         required={false}
                         data={registerForm.values.inicio_realizado}
                       />
@@ -161,7 +188,7 @@ function ModalEditarAtividade({
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"fim_realizado"}
-                        label={"FIM"}
+                        label={"FIM REALIZADO"}
                         required={false}
                         data={registerForm.values.fim_realizado}
                       />
