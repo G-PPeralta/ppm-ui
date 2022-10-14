@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { IoIosArrowForward } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
 
 import {
   Box,
+  Button,
   Flex,
   Heading,
+  Link,
   Stack,
   Table,
   TableContainer,
@@ -20,10 +21,9 @@ import {
 import PaginacaoTabela from "components/PaginacaoTabela";
 import Sidebar from "components/SideBar";
 
-export function RegisteredList() {
+export function Trash() {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
-  const navigate = useNavigate();
 
   const fromTo = {
     from,
@@ -60,15 +60,20 @@ export function RegisteredList() {
             }}
             borderRadius={{ base: "none", sm: "xl" }}
           >
-            <Heading
-              mb={"24px"}
-              fontSize={"24px"}
-              color={"#2D2926"}
-              fontWeight={"700"}
-              fontFamily={"Mulish"}
-            >
-              Lista de cadastros
-            </Heading>
+            <Flex direction={"row"} gap={4}>
+              <Link href="javascript:history.back()">
+                <IoIosArrowBack size={"25px"} />
+              </Link>
+              <Heading
+                mb={"24px"}
+                fontSize={"24px"}
+                color={"#2D2926"}
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
+              >
+                Itens excluídos
+              </Heading>
+            </Flex>
             <Flex direction={"column"} w={"100%"}>
               <TableContainer
                 mt={4}
@@ -101,13 +106,9 @@ export function RegisteredList() {
                           <Td>{row.nome}</Td>
                           <Td textAlign={"center"}>{row.qtd}</Td>
                           <Td textAlign={"center"}>
-                            <IoIosArrowForward
-                              size={"25px"}
-                              color={"#0047BB"}
-                              onClick={() => {
-                                navigate("/actions/:" + row.id);
-                              }}
-                            />
+                            <Button background="transparent" color="origem.500">
+                              Restaurar
+                            </Button>
                           </Td>
                         </Tr>
                       ))}

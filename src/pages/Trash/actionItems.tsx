@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
 import {
   Box,
+  Button,
   Flex,
   Heading,
+  Link,
   Stack,
   Table,
   TableContainer,
@@ -20,7 +22,10 @@ import {
 import PaginacaoTabela from "components/PaginacaoTabela";
 import Sidebar from "components/SideBar";
 
-export function RegisteredList() {
+import { DeleteModal } from "./modais/delete";
+import { EditModal } from "./modais/edit";
+
+export function ActionItems() {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
   const navigate = useNavigate();
@@ -60,15 +65,51 @@ export function RegisteredList() {
             }}
             borderRadius={{ base: "none", sm: "xl" }}
           >
-            <Heading
-              mb={"24px"}
-              fontSize={"24px"}
-              color={"#2D2926"}
-              fontWeight={"700"}
-              fontFamily={"Mulish"}
+            <Flex
+              direction={"row"}
+              justify={"space-between"}
+              alignItems={"center"}
             >
-              Lista de cadastros
-            </Heading>
+              <Flex direction={"row"} gap={4}>
+                <Link href="javascript:history.back()">
+                  <IoIosArrowBack size={"25px"} />
+                </Link>
+                <Heading
+                  mb={"24px"}
+                  fontSize={"24px"}
+                  color={"#2D2926"}
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
+                >
+                  Lista de cadastros
+                </Heading>
+              </Flex>
+
+              <Flex direction={"row"} gap={4}>
+                <Button
+                  background="transparent"
+                  color="origem.500"
+                  border={"2px"}
+                  borderColor={"origem.500"}
+                  fontWeight={"bold"}
+                  height={"55px"}
+                >
+                  Cadastrar
+                </Button>
+                <Button
+                  background="transparent"
+                  color="origem.500"
+                  fontWeight={"bold"}
+                  height={"55px"}
+                  onClick={() => {
+                    navigate("/trash");
+                  }}
+                >
+                  Lixeira
+                  <IoIosArrowForward size={"25px"} color={"origem.500"} />
+                </Button>
+              </Flex>
+            </Flex>
             <Flex direction={"column"} w={"100%"}>
               <TableContainer
                 mt={4}
@@ -101,13 +142,10 @@ export function RegisteredList() {
                           <Td>{row.nome}</Td>
                           <Td textAlign={"center"}>{row.qtd}</Td>
                           <Td textAlign={"center"}>
-                            <IoIosArrowForward
-                              size={"25px"}
-                              color={"#0047BB"}
-                              onClick={() => {
-                                navigate("/actions/:" + row.id);
-                              }}
-                            />
+                            <Flex>
+                              <EditModal id={+row.id} />
+                              <DeleteModal />
+                            </Flex>
                           </Td>
                         </Tr>
                       ))}

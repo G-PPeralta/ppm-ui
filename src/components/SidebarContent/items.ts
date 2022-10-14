@@ -86,7 +86,7 @@ export const LinkItems: Array<LinkItemProps> = [
   {
     name: "Lixeira",
     icon: FiTrash2,
-    children: [{ name: "Lixeira", icon: FiTrash2, link: "/lixeira" }],
+    children: [{ name: "Lixeira", icon: FiTrash2, link: "/registered-list" }],
   },
 
   {

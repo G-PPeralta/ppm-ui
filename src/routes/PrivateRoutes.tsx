@@ -29,7 +29,9 @@ import { Settings } from "pages/Settings";
 import { ShareRegister } from "pages/ShareRegister";
 import { Statistics } from "pages/Statistics";
 import { StatisticsGantt } from "pages/StatisticsGantt";
-import { Trash } from "pages/Trash";
+import { RegisteredList } from "pages/Trash";
+import { ActionItems } from "pages/Trash/actionItems";
+import { Trash } from "pages/Trash/trash";
 import { UploadSheet } from "pages/UploadSheet";
 import VisaoPorArea from "pages/VisaoPorArea";
 
@@ -85,7 +87,9 @@ export function PrivateRoutes() {
       <Route path="/budgets2" element={<Budgets2 />} />
       <Route path="/budget2/detail/:id" element={<BudgetDetail2 />} />
       <Route path="/priorizacao" element={<Priorizacao />} />
-      <Route path="/lixeira" element={<Trash />} />
+      <Route path="/registered-list" element={<RegisteredList />} />
+      <Route path="/actions/:id" element={<ActionItems />} />
+      <Route path="/trash" element={<Trash />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
