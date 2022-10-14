@@ -82,7 +82,7 @@ function Tabela({ data }: Props) {
   function Body() {
     return (
       <>
-        {data ? (
+        {data.length > 0 ? (
           data.slice(from, to).map((linhaTabela: any, index: number) => (
             <Tr key={index}>
               <Td textAlign={"center"} fontWeight={"semibold"}>
@@ -118,8 +118,10 @@ function Tabela({ data }: Props) {
           ))
         ) : (
           <Tr>
-            <Td textAlign={"center"} fontWeight={"semibold"}>
-              <Text>Não há dados</Text>
+            <Td colSpan={header.length} textAlign={"start"}>
+              <Text fontSize="xl" fontWeight={500}>
+                Não há dados
+              </Text>
             </Td>
           </Tr>
         )}

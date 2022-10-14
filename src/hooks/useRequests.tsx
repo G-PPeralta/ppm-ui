@@ -65,10 +65,10 @@ export function useRequests(id?: number) {
   }, []);
 
   useEffect(() => {
-    if (listaFinanceiroProjetos.length > 0) {
+    if (listaFinanceiroProjetos.length > 0 && listaCentroCustoProjetos) {
       setLoading(false);
     }
-  }, [listaFinanceiroProjetos]);
+  }, [listaFinanceiroProjetos, listaCentroCustoProjetos]);
 
   return {
     loading,

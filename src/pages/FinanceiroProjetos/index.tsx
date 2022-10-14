@@ -19,11 +19,6 @@ export function FinanceiroProjetos() {
   const [filter, setFilter] = useState<any[]>(listaFinanceiroProjetos);
   const [search, setSearch] = useState("");
 
-  const handleGetAllData = async () => {
-    setAllData(listaFinanceiroProjetos);
-    setFilter(listaFinanceiroProjetos);
-  };
-
   const filterData = (search: string) => {
     let filtered;
     if (search && search.length > 1) {
@@ -52,14 +47,19 @@ export function FinanceiroProjetos() {
     setSearch(regex);
   };
 
+  const handleGetAllData = () => {
+    setAllData(listaFinanceiroProjetos);
+    setFilter(listaFinanceiroProjetos);
+  };
+
   useEffect(() => {
     handleGetAllData();
-  }, []);
+  }, [listaFinanceiroProjetos]);
 
   return (
     <>
       <Sidebar>
-        {!loading ? (
+        {!loading && listaFinanceiroProjetos.length > 0 ? (
           <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
             <Box
               py={{ base: "6", sm: "6" }}
@@ -126,7 +126,7 @@ export function FinanceiroProjetos() {
                   Filtrar
                 </Button>
               </Flex>
-              <Tabela data={filter} />
+              {filter && <Tabela data={filter} />}
             </Box>
           </Flex>
         ) : (

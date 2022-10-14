@@ -3,7 +3,6 @@ import { FiTrash } from "react-icons/fi";
 
 import {
   Flex,
-  Heading,
   IconButton,
   Table,
   TableContainer,
@@ -98,10 +97,12 @@ function Tabela({ data, refreshState }: Props) {
           data.slice(from, to).map((linhaTabela: any, index: number) => {
             if (linhaTabela.idCusto === 0) {
               return (
-                <Tr>
-                  <Heading size={"md"} m={4} fontWeight={500}>
-                    Não há dados
-                  </Heading>
+                <Tr key={index}>
+                  <Td colSpan={header.length} textAlign={"start"}>
+                    <Text fontSize="xl" fontWeight={500}>
+                      Não há dados
+                    </Text>
+                  </Td>
                 </Tr>
               );
             }
