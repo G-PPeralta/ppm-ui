@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
 import toast from "react-hot-toast";
-import { AiFillPrinter } from "react-icons/ai";
+import { FaFileCsv } from "react-icons/fa";
 // import {
 //   FiChevronLeft,
 //   FiChevronRight,
@@ -241,7 +241,7 @@ export function LicoesAprendidasProjetos() {
                       fontWeight={"700"}
                       variant="ghost"
                       colorScheme="messenger"
-                      rightIcon={<AiFillPrinter />}
+                      rightIcon={<FaFileCsv />}
                       // onClick={print}
                     >
                       Exportar
