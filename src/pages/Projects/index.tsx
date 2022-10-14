@@ -173,7 +173,7 @@ export function Projects() {
                     }}
                     rightIcon={<FiPlus />}
                   >
-                    <Link to={"/projects-registration"}>Cadastrar Projeto</Link>
+                    <Link to={"/projetos/cadastro"}>Cadastrar Projeto</Link>
                   </Button>
                 </Flex>
               </Flex>

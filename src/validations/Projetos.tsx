@@ -25,3 +25,60 @@ export const cadastroAtividadeProjetos = yup.object({
     })
   ),
 });
+
+export const cadastroProjetoSchema = yup.object({
+  responsavelId: yup
+    .number()
+    .required("Campo obrigatório")
+    .moreThan(0, "Campo obrigatório"),
+  coordenadorId: yup
+    .number()
+    .required("Campo obrigatório")
+    .moreThan(0, "Campo obrigatório"),
+  poloId: yup
+    .number()
+    .required("Campo obrigatório")
+    .moreThan(0, "Campo obrigatório"),
+  localId: yup
+    .number()
+    .required("Campo obrigatório")
+    .moreThan(0, "Campo obrigatório"),
+  solicitanteId: yup
+    .number()
+    .required("Campo obrigatório")
+    .moreThan(0, "Campo obrigatório"),
+  statusId: yup
+    .number()
+    .required("Campo obrigatório")
+    .moreThan(0, "Campo obrigatório"),
+  nomeProjeto: yup.string().required("Campo obrigatório"),
+  elementoPep: yup.string().required("Campo obrigatório"),
+  dataInicio: yup.string().required("Campo obrigatório"),
+  capexPrevisto: yup
+    .number()
+    .required("Campo obrigatório")
+    .moreThan(0, "Campo obrigatório"),
+  complexidadeId: yup
+    .number()
+    .required("Campo obrigatório")
+    .moreThan(0, "Campo obrigatório"),
+  divisaoId: yup
+    .number()
+    .required("Campo obrigatório")
+    .moreThan(0, "Campo obrigatório"),
+  classificacaoId: yup
+    .number()
+    .required("Campo obrigatório")
+    .moreThan(0, "Campo obrigatório"),
+  tipoProjetoId: yup
+    .number()
+    .required("Campo obrigatório")
+    .moreThan(0, "Campo obrigatório"),
+  gateId: yup
+    .number()
+    .required("Campo obrigatório")
+    .moreThan(0, "Campo obrigatório"),
+  descricao: yup.string().required("Campo obrigatório"),
+  justificativa: yup.string().required("Campo obrigatório"),
+  comentarios: yup.string(),
+});
