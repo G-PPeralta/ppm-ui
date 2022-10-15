@@ -96,11 +96,12 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             <FormLabel htmlFor="gasto">Valor</FormLabel>{" "}
                           </Flex>
                           <Input
-                            // isRequired
+                            isRequired
                             placeholder="Valor Gasto"
                             id="gasto"
                             name="gasto"
-                            // type={"number"}
+                            type={"number"}
+                            max="1000000000000"
                             value={registerForm.values.gasto}
                             onChange={registerForm.handleChange}
                           />
@@ -120,7 +121,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             type="date"
                             id="data"
                             name="data"
-                            max="9999-12-31"
+                            max="3000-12-31"
                             maxLength={1}
                             value={registerForm.values.data}
                             onChange={registerForm.handleChange}
@@ -193,6 +194,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             placeholder="Pedido"
                             id="pedido"
                             name="pedido"
+                            max={"100"}
                             value={registerForm.values.pedido}
                             onChange={registerForm.handleChange}
                             onKeyPress={(e) => {
