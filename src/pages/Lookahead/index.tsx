@@ -27,10 +27,10 @@ import { TabelaLookahead } from "./components/TabelaLookahead";
 export function Lookahead() {
   const { projetos } = useLookahead();
   const [atividades, setAtividades] = useState<AtividadesLookahead[]>();
-  // const [projects, setProjetcs] = useState<Projetos[]>();
-  // const [projectsFiltered, setProjetcsFiltered] = useState<Projetos[]>();
-  async function handleProjectChange(id: string) {
-    const act = await getAtividades(+id);
+  const [idProject, setIdProject] = useState<string>("0");
+
+  async function handleProjectChange() {
+    const act = await getAtividades(+idProject);
     setAtividades(act);
   }
 
@@ -85,7 +85,7 @@ export function Lookahead() {
                         fontWeight={"bold"}
                         color={"#949494"}
                         placeholder="Projeto"
-                        onChange={(e) => handleProjectChange(e.target.value)}
+                        onChange={(e) => setIdProject(e.target.value)}
                       >
                         {projetos &&
                           projetos.map((d, k) => (
@@ -110,7 +110,7 @@ export function Lookahead() {
                           background: "origem.500",
                           transition: "all 0.4s",
                         }}
-                        // onClick={filterByProject}
+                        onClick={handleProjectChange}
                         rightIcon={<FiSearch />}
                       >
                         Filtrar

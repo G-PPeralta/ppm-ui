@@ -12,6 +12,7 @@ import {
   Th,
   Thead,
   Tr,
+  Text,
 } from "@chakra-ui/react";
 import { FerramentasAtividade } from "interfaces/lookahead";
 
@@ -88,23 +89,28 @@ export function TabelaServicos(props: TableProps) {
         <Table variant="unstyled" size={"sm"}>
           <Thead>
             <Tr backgroundColor={"blue"} color="white">
-              <Th colSpan={5} borderTopLeftRadius="10px">
-                Serviços
-              </Th>
-              <Th borderTopRightRadius={"10px"} colSpan={2}>
-                <Button
-                  variant="ghost"
-                  colorScheme="messenger"
-                  color="white"
-                  rightIcon={<FiPrinter />}
-                  _hover={{
-                    background: "white",
-                    transition: "all 0.4s",
-                    color: "rgb(46, 105, 253)",
-                  }}
-                >
-                  Exportar
-                </Button>
+              <Th
+                colSpan={7}
+                borderTopRightRadius={"10px"}
+                borderTopLeftRadius="10px"
+                border="none 0px !important"
+              >
+                <Flex justifyContent="space-between" alignItems="center">
+                  <Text>Serviços</Text>
+                  <Button
+                    variant="ghost"
+                    colorScheme="messenger"
+                    color="white"
+                    rightIcon={<FiPrinter />}
+                    _hover={{
+                      background: "white",
+                      transition: "all 0.4s",
+                      color: "rgb(46, 105, 253)",
+                    }}
+                  >
+                    Exportar
+                  </Button>
+                </Flex>
               </Th>
             </Tr>
             <Tr backgroundColor={"rgb(46, 105, 253)"} color="white">
@@ -127,40 +133,22 @@ export function TabelaServicos(props: TableProps) {
 
                   return <Td>{sNames}</Td>;
                 })}
-
-              {/* <Td>
-                Chave de fenda <br /> 01:00 - 22/08
-              </Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td> */}
             </Tr>
           </Tbody>
           <Tfoot>
             <Tr backgroundColor={"blue"} color="white">
               {dias &&
                 servicosData &&
-                dias.map(function (dia) {
-                  return (
-                    <Td>
-                      {
-                        servicosData.filter(
-                          (x) => x.dia == dia.data && x.tipo == "s"
-                        ).length
-                      }
-                    </Td>
-                  );
+                dias.map(function (dia, key) {
+                  const qtd = servicosData.filter(
+                    (x) => x.dia == dia.data && x.tipo == "s"
+                  ).length;
+                  if (key === 0) {
+                    return <Td borderBottomLeftRadius="10px">{qtd}</Td>;
+                  } else if (key === dias.length - 1) {
+                    return <Td borderBottomRightRadius="10px">{qtd}</Td>;
+                  } else return <Td>{qtd}</Td>;
                 })}
-              {/* <Td>Total 1</Td>
-              <Td>0</Td>
-              <Td>0</Td>
-              <Td>0</Td>
-              <Td>0</Td>
-              <Td>0</Td>
-              <Td>0</Td> */}
             </Tr>
           </Tfoot>
         </Table>

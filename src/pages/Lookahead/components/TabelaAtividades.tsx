@@ -12,6 +12,7 @@ import {
   Th,
   Thead,
   Tr,
+  Text,
 } from "@chakra-ui/react";
 import { FerramentaServico } from "interfaces/lookahead";
 
@@ -143,24 +144,33 @@ export function TabelaAtividades(props: TableProps) {
       <TableContainer mt={4} mb={3} ml={1} width="100%">
         <Table variant="unstyled" size={"sm"}>
           <Thead>
-            <Tr backgroundColor={"blue"} color="white">
-              <Th colSpan={6} borderTopLeftRadius="10px">
-                Atividade
-              </Th>
-              <Th borderTopRightRadius={"10px"} colSpan={2}>
-                <Button
-                  variant="ghost"
-                  colorScheme="messenger"
-                  color="white"
-                  rightIcon={<FiPrinter />}
-                  _hover={{
-                    background: "white",
-                    transition: "all 0.4s",
-                    color: "rgb(46, 105, 253)",
-                  }}
-                >
-                  Exportar
-                </Button>
+            <Tr
+              backgroundColor={"blue"}
+              color="white"
+              border="none 0px !important"
+            >
+              <Th
+                colSpan={8}
+                border="none 0px !important"
+                borderTopLeftRadius="10px"
+                borderTopRightRadius="10px"
+              >
+                <Flex justifyContent="space-between" alignItems="center">
+                  <Text>Atividade</Text>
+                  <Button
+                    variant="ghost"
+                    colorScheme="messenger"
+                    color="white"
+                    rightIcon={<FiPrinter />}
+                    _hover={{
+                      background: "white",
+                      transition: "all 0.4s",
+                      color: "rgb(46, 105, 253)",
+                    }}
+                  >
+                    Exportar
+                  </Button>
+                </Flex>
               </Th>
             </Tr>
             <Tr backgroundColor={"rgb(46, 105, 253)"} color="white">
@@ -213,22 +223,17 @@ export function TabelaAtividades(props: TableProps) {
                         </Td>
                       );
                     })}
-
-                    {/* <Td>{hora}</Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td> */}
                   </Tr>
                 );
               })}
           </Tbody>
           <Tfoot>
-            <Tr backgroundColor={"blue"} color="white">
-              <Td>Total</Td>
+            <Tr
+              backgroundColor={"blue"}
+              color="white"
+              border="none 0px !important"
+            >
+              <Td borderBottomLeftRadius="10px">Total</Td>
               {dias &&
                 total &&
                 dias.map(function (dia) {
@@ -236,8 +241,9 @@ export function TabelaAtividades(props: TableProps) {
                   const _total = total.filter(
                     (tot) => tot.data == dia.data
                   ).length;
-
-                  return <Td>{_total}</Td>;
+                  if (dias[dias.length - 1] == dia) {
+                    return <Td borderBottomRightRadius="10px">{_total}</Td>;
+                  } else return <Td>{_total}</Td>;
                 })}
             </Tr>
           </Tfoot>
