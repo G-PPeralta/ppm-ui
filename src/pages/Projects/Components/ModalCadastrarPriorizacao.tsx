@@ -135,7 +135,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           htmlFor="beneficio.opcao_id"
                           fontSize={"12px"}
                           fontWeight={"700"}
-                          color={"#A7A7A7"}
+                          color={"#949494"}
                           mb={"1px"}
                         >
                           BENEFÍCIO
@@ -146,7 +146,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           w={"530px"}
                           fontSize={"14px"}
                           fontWeight={"400"}
-                          color={"#A7A7A7"}
+                          // color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="beneficio.opcao_id"
@@ -185,7 +185,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           htmlFor="regulatorio.opcao_id"
                           fontSize={"12px"}
                           fontWeight={"700"}
-                          color={"#A7A7A7"}
+                          color={"#949494"}
                           mb={"1px"}
                         >
                           REGULATÓRIO
@@ -195,7 +195,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           w={"530px"}
                           fontSize={"14px"}
                           fontWeight={"400"}
-                          color={"#A7A7A7"}
+                          // color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="regulatorio.opcao_id"
@@ -231,7 +231,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           htmlFor="operacao.opcao_id"
                           fontSize={"12px"}
                           fontWeight={"700"}
-                          color={"#A7A7A7"}
+                          color={"#949494"}
                           mb={"1px"}
                         >
                           OPERAÇÃO
@@ -241,7 +241,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           w={"530px"}
                           fontSize={"14px"}
                           fontWeight={"400"}
-                          color={"#A7A7A7"}
+                          // color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="operacao.opcao_id"
@@ -276,7 +276,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           htmlFor="prioridade.opcao_id"
                           fontSize={"12px"}
                           fontWeight={"700"}
-                          color={"#A7A7A7"}
+                          color={"#949494"}
                           mb={"1px"}
                         >
                           PRIORIDADE
@@ -286,7 +286,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           w={"530px"}
                           fontSize={"14px"}
                           fontWeight={"400"}
-                          color={"#A7A7A7"}
+                          // color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="prioridade.opcao_id"
@@ -321,7 +321,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           htmlFor="complexidade.opcao_id"
                           fontSize={"12px"}
                           fontWeight={"700"}
-                          color={"#A7A7A7"}
+                          color={"#949494"}
                           mb={"1px"}
                         >
                           COMPLEXIDADE
@@ -331,7 +331,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           w={"530px"}
                           fontSize={"14px"}
                           fontWeight={"400"}
-                          color={"#A7A7A7"}
+                          // color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="complexidade.opcao_id"
@@ -366,7 +366,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           htmlFor="estrategia.opcao_id"
                           fontSize={"12px"}
                           fontWeight={"700"}
-                          color={"#A7A7A7"}
+                          color={"#949494"}
                           mb={"1px"}
                         >
                           ESTRATÉGIA PARA NEGÓCIO
@@ -376,7 +376,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           w={"530px"}
                           fontSize={"14px"}
                           fontWeight={"400"}
-                          color={"#A7A7A7"}
+                          // color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="estrategia.opcao_id"

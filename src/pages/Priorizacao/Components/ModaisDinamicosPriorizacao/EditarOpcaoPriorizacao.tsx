@@ -57,7 +57,13 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
         aria-label="open menu"
         color={"origem.500"}
         backgroundColor={"transparent"}
+        _hover={{
+          backgroundColor: "origem.500",
+          color: "white",
+        }}
         border={"none"}
+        w={"14px"}
+        h={"18px"}
         textAlign={"center"}
         icon={<MdModeEdit />}
       />

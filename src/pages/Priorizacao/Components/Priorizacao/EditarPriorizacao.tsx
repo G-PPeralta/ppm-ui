@@ -116,7 +116,7 @@ function EditarPriorizacao(infosRanking: TableProps) {
                             <Input
                               maxLength={45}
                               ml={"3px"}
-                              w={"480px"}
+                              w={"93%"}
                               h={"56px"}
                               fontSize={"14px"}
                               _placeholder={{ color: "black" }}
@@ -153,7 +153,7 @@ function EditarPriorizacao(infosRanking: TableProps) {
                               PERFIS COM ACESSO
                             </FormLabel>
                             <Select
-                              w={"480px"}
+                              w={"93%"}
                               h={"56px"}
                               fontSize={"14px"}
                               _placeholder={{ color: "black" }}

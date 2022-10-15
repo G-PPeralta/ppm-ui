@@ -103,6 +103,7 @@ function ModalPriorizacao(infosRankings: TableProps) {
                           fontSize={"24px"}
                           fontWeight={"700"}
                           textAlign={"start"}
+                          mt={-2}
                         >
                           <Icon
                             _hover={{
@@ -123,7 +124,7 @@ function ModalPriorizacao(infosRankings: TableProps) {
                       </Text>
                     </Flex>
 
-                    <Flex gap={11}>
+                    <Flex gap={20}>
                       <Flex gap={4}>
                         <Flex align={"flex-start"} alignSelf={"start"}>
                           <ModalCadastrarOpcaoPriorizacao
@@ -145,6 +146,8 @@ function ModalPriorizacao(infosRankings: TableProps) {
                           fontSize="18px"
                           fontWeight={"700"}
                           alignSelf={"end"}
+                          mr={9}
+                          ml={-4}
                         >
                           Lixeira
                           <Icon
@@ -161,7 +164,7 @@ function ModalPriorizacao(infosRankings: TableProps) {
                 </Flex>
               </FormControl>
             </>
-            <ModalBody mt={3}>
+            <ModalBody mt={1}>
               <Flex>
                 <TabelaOpcoesPriorizacao
                   idRanking={infosRankings.idRanking}

@@ -65,7 +65,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
       >
         Cadastrar
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
