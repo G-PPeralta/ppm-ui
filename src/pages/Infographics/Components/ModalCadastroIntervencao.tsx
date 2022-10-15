@@ -184,7 +184,7 @@ function ModalCadastroIntervencao({
   }, [registerForm.values.erroDataIntervencao, registerForm.values.poco_id]);
 
   useEffect(() => {
-    if (registerForm.values.poco_id.includes("0 -") === true) {
+    if (registerForm.values.poco_id.split("-")[0] === "0 ") {
       registerForm.setFieldValue("nova_campanha", true);
     } else {
       registerForm.setFieldValue("nova_campanha", false);
