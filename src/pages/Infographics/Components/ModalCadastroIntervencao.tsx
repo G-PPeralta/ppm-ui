@@ -121,7 +121,7 @@ function ModalCadastroIntervencao({
 
   const handleDataLimite = async () => {
     const pocoCompleto = listaServicosPocos.filter(
-      (poco: any) => poco.id === registerForm.values.poco_id
+      (poco: any) => poco.nom_poco === registerForm.values.poco_id
     );
 
     const { data } = await getServicoDataIntervencaoId(
@@ -175,7 +175,7 @@ function ModalCadastroIntervencao({
       registerForm.values.poco_id !== 0
     ) {
       const poco = listaServicosPocos.filter(
-        (poco: any) => poco.id === registerForm.values.poco_id
+        (poco: any) => poco.nom_poco === registerForm.values.poco_id
       );
       const dataPoco = formatDate(poco[0].dat_ini_limite);
 
@@ -299,7 +299,7 @@ function ModalCadastroIntervencao({
                         <AlertTitle>ATENÇÃO:</AlertTitle>
                         <Text>
                           {`O planejamento configurado ultrapassa a data de início
-                          de execução do poço selecionado, previsto para ser iniciado na data ${dataLimite}.`}
+                            de execução do poço selecionado, previsto para ser iniciado na data ${dataLimite}.`}
                         </Text>
                       </Alert>
                     )}
