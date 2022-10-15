@@ -84,7 +84,7 @@ export const cadastroNovaCampanhaSchema = yup.object({
 
 export const cadastroNovaIntervencaoSchema = yup.object({
   id_campanha: yup.number().required().moreThan(0),
-  poco_id: yup.number().required().moreThan(0),
+  poco_id: yup.string().required(),
   projeto_tipo_id: yup.number().required().moreThan(0),
   dat_ini_prev: yup.string().required(),
   atividades: yup.array().of(

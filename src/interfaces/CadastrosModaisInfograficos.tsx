@@ -100,6 +100,7 @@ export interface NovaCampanha {
   id_projeto: number;
   dsc_comentario: string;
   nom_usu_create: string | undefined;
+  nova_campanha: boolean;
 }
 
 export interface NovaIntervencao extends User {

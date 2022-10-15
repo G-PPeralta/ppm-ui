@@ -64,7 +64,7 @@ function ModalCadastroIntervencao({
   const innerWidth = window.innerWidth;
 
   const optionsPocos = listaServicosPocos.map((poco: any) => ({
-    value: poco.id,
+    value: poco.nom_poco,
     label: poco.nom_poco,
   }));
 
@@ -182,6 +182,14 @@ function ModalCadastroIntervencao({
       setDataLimite(dataPoco);
     }
   }, [registerForm.values.erroDataIntervencao, registerForm.values.poco_id]);
+
+  useEffect(() => {
+    if (registerForm.values.poco_id.includes("0 -") === true) {
+      registerForm.setFieldValue("nova_campanha", true);
+    } else {
+      registerForm.setFieldValue("nova_campanha", false);
+    }
+  }, [registerForm.values.poco_id]);
 
   return (
     <>
