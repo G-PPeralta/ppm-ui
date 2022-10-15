@@ -36,43 +36,15 @@ interface RefreshState {
 interface Props {
   refreshState: RefreshState;
   idProjeto: number;
+  optionsSelects: any;
 }
 
-function ModalAdicionar({ refreshState, idProjeto }: Props) {
+function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
   const { refresh, setRefresh } = refreshState;
+  const { optionsFornecedores, optionsClassesDeServico } = optionsSelects;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { loading, registerForm } = useCentroDeCusto(idProjeto, "post");
-
-  const optionsPrestadorServico = [
-    {
-      value: 1,
-      label: "Prestador 1",
-    },
-    {
-      value: 2,
-      label: "Prestador 2",
-    },
-    {
-      value: 3,
-      label: "Prestador 3",
-    },
-  ];
-
-  const optionsClasseDeServico = [
-    {
-      value: 1,
-      label: "Classe de Serviço 1",
-    },
-    {
-      value: 2,
-      label: "Classe de Serviço 2",
-    },
-    {
-      value: 3,
-      label: "Classe de Serviço 3",
-    },
-  ];
 
   return (
     <>
@@ -150,7 +122,7 @@ function ModalAdicionar({ refreshState, idProjeto }: Props) {
                   registerForm={registerForm}
                   nomeSelect={"PRESTADOR DE SERVIÇO"}
                   propName={"prestadorServicoId"}
-                  options={optionsPrestadorServico}
+                  options={optionsFornecedores}
                   required={true}
                 />
               </Flex>
@@ -159,7 +131,7 @@ function ModalAdicionar({ refreshState, idProjeto }: Props) {
                   registerForm={registerForm}
                   nomeSelect={"CLASSE DE SERVIÇO"}
                   propName={"classeDeServicoId"}
-                  options={optionsClasseDeServico}
+                  options={optionsClassesDeServico}
                   required={true}
                 />
                 <Flex direction={"column"}>
