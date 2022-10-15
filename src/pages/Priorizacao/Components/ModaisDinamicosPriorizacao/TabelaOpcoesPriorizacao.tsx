@@ -42,6 +42,8 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
     getData();
   }, []);
 
+  useEffect(() => {}, [getData()]);
+
   const fromTo = {
     from,
     to,

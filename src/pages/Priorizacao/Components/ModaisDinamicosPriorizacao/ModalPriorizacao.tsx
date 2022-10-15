@@ -102,6 +102,7 @@ function ModalPriorizacao(infosRankings: TableProps) {
                           }}
                           fontSize={"24px"}
                           fontWeight={"700"}
+                          fontFamily={"Mulish"}
                           textAlign={"start"}
                           mt={-2}
                         >
@@ -116,7 +117,7 @@ function ModalPriorizacao(infosRankings: TableProps) {
                             w={"22px"}
                             fontSize="13px"
                             fontWeight={"none"}
-                            mr={2}
+                            mr={3}
                             color="#2D2926"
                           />{" "}
                           Priorização

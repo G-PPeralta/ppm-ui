@@ -21,15 +21,17 @@ export function Priorizacao() {
       <Sidebar>
         <Flex
           w="auto"
+          // h="100vh"
           align="center"
           justify="center"
           bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
+          // border={"5px solid red"}
         >
           <Box
             py={{ base: "6", sm: "8" }}
             px={{ base: "6", sm: "8" }}
             w="100%"
-            h="100vh"
+            // h="100vh"
             bg={useBreakpointValue({ base: "transparent", sm: "white" })}
             boxShadow={{
               base: "none",
@@ -38,10 +40,11 @@ export function Priorizacao() {
             borderRadius={{ base: "none", sm: "xl" }}
           >
             <Flex
-              mt={-2}
+              mt={-3}
+              ml={-3}
               flexDirection={"row"}
               justify={"space-between"}
-              mb={5}
+              mb={1}
               wrap={"wrap"}
             >
               <Heading
@@ -65,7 +68,9 @@ export function Priorizacao() {
               </Flex>
             </Flex>
             <>
-              <TabelaPriorizacao />
+              <Flex ml={-3} mr={-3}>
+                <TabelaPriorizacao />
+              </Flex>
             </>
           </Box>
         </Flex>

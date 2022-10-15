@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MdModeEdit } from "react-icons/md";
 
 import {
@@ -19,6 +19,7 @@ import {
   Input,
   Select,
   IconButton,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -36,6 +37,7 @@ interface TableProps {
 
 function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [refresh, setRefresh] = useState(false);
   const { registerForm, loading } = useEdicaoOpcaoPriorizacao(
     infosOption.opcaoName,
     infosOption.initialGrade
@@ -43,10 +45,12 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
 
   // console.log("registerForm", registerForm.values);
   // console.log("infosOption", infosOption);
+  // console.log(registerForm.values.rankingOpcao);
 
   useEffect(() => {
     registerForm.setFieldValue("idOpcao", infosOption.opcaoId);
     registerForm.setFieldValue("idRanking", infosOption.idRanking.idRanking);
+    setRefresh(!refresh);
   }, []);
 
   return (
@@ -82,6 +86,8 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
           >
             {`Priorização ${infosOption.nameRanking}`}
           </ModalHeader>
+          <ModalCloseButton color={"white"} />
+
           <form
             onSubmit={(e) => {
               // e.preventDefault();
@@ -198,7 +204,9 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() => {
+                    handleCadastrar(registerForm, onClose);
+                  }}
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",

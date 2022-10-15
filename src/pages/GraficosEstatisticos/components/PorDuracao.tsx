@@ -263,7 +263,8 @@ export function GraficoPorDuracao({ Prop }: any) {
                   </FormControl>
                 </Flex>
               </Flex> */}
-          <Flex mt={"-10px"} gap={4} mb={"10px"}>
+          {/* <Flex flexDir={"column"} wrap={"wrap"} flex={1}> */}
+          <Flex mt={"-10px"} gap={4} mb={"10px"} wrap={"wrap"} flex={1}>
             <Flex alignItems={"flex-end"}>
               <FormControl>
                 <FormLabel
@@ -378,6 +379,7 @@ export function GraficoPorDuracao({ Prop }: any) {
                 </Select>
               </FormControl>
             </Flex>
+            {/* </Flex> */}
             {/* <Flex>
               <FormControl className="toBottom">
                 <Button
