@@ -39,6 +39,7 @@ import { TabelaFornecedores } from "./components/TabelaFornecedores";
 
 export interface Fornecedor {
   id: number;
+  nomefornecedor: string;
   fornecedor: string;
   orcamento: number;
   realizado: number;

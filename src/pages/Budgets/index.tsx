@@ -111,15 +111,7 @@ export function Budgets() {
                     </Flex>
                   </Stack>
 
-                  {budgetFilter && (
-                    <>
-                      {/* <ProjectTable
-                            data={projetosFilter}
-                            columns={columnsProject}
-                          /> */}
-                      <TabelaBudgets data={budgetFilter} />
-                    </>
-                  )}
+                  <TabelaBudgets data={budgetFilter} />
                 </Stack>
               </Box>
             </Box>

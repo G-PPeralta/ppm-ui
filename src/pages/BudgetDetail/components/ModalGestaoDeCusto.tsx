@@ -25,6 +25,7 @@ import {
 import { Ring } from "@uiball/loaders";
 import { Projeto } from "interfaces/Budgets";
 
+// import RealInput from "components/RealInput/input";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
@@ -95,11 +96,11 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             <FormLabel htmlFor="gasto">Valor</FormLabel>{" "}
                           </Flex>
                           <Input
-                            isRequired
+                            // isRequired
                             placeholder="Valor Gasto"
                             id="gasto"
                             name="gasto"
-                            type={"number"}
+                            // type={"number"}
                             value={registerForm.values.gasto}
                             onChange={registerForm.handleChange}
                           />
@@ -143,7 +144,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                         >
                           {fornecedores &&
                             fornecedores.map((d) => (
-                              <option value={d.id}>{d.fornecedor}</option>
+                              <option value={d.id}>{d.nomefornecedor}</option>
                             ))}
                         </Select>
 

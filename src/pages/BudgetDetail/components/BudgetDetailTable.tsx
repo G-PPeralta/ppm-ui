@@ -14,6 +14,8 @@ import {
 } from "@chakra-ui/react";
 import { BudgetDetail } from "interfaces/Budgets";
 
+import Empty from "components/TableEmpty/empty";
+
 import CampoEditavel from "./CampoEditavel";
 import ModalGestaoDeCusto from "./ModalGestaoDeCusto";
 
@@ -143,7 +145,11 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
               <Th>% Gap</Th>
             </Tr>
           </Thead>
-          <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+          {data.length ? (
+            <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+          ) : (
+            <Empty />
+          )}
         </Table>
       </TableContainer>
     </>

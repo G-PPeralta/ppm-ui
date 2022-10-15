@@ -315,6 +315,7 @@ export function EditarFornecedorModal({
               onClick={() => {
                 onUpdate({
                   id: fornecedor.id,
+                  nomefornecedor: nome,
                   fornecedor: nome,
                   orcamento,
                   realizado,
