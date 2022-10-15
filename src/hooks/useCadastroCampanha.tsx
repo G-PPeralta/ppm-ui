@@ -38,9 +38,10 @@ export function useCadastroCampanha() {
   };
 
   const initialValues: NovaCampanha = {
-    id_projeto: 0,
+    id_projeto: "",
     dsc_comentario: "",
     nom_usu_create: user?.nome,
+    nova_campanha: false,
   };
 
   const registerForm = useFormik({
@@ -51,6 +52,7 @@ export function useCadastroCampanha() {
         id_projeto: values.id_projeto,
         dsc_comentario: values.dsc_comentario,
         nom_usu_create: user?.nome,
+        nova_campanha: values.nova_campanha,
       };
 
       setLoading(true);

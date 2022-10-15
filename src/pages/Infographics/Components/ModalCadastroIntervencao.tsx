@@ -18,6 +18,7 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
+  // Progress,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import {
@@ -27,7 +28,8 @@ import {
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
-// import { RequiredField } from "components/RequiredField/RequiredField";
+
+import { formatDate } from "utils/formatDate";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
@@ -57,16 +59,15 @@ function ModalCadastroIntervencao({
     listaAtividadesPrecedentes,
   } = useCadastroIntervencao();
 
-  // console.log("idCampanha", idCampanha);
-  // console.log("registerForm", registerForm.values);
-
-  // const [erroDataIntervencao, setErroDataIntervencao] = useState(false);
   const [listaProjetos, setListaProjetos] = useState<any>([]);
+  const [dataLimite, setDataLimite] = useState<any>("");
+  // const [valueProgressoMensagemErro, setValueProgressoMensagemErro] =
+  //   useState<any>(100);
 
   const innerWidth = window.innerWidth;
 
   const optionsPocos = listaServicosPocos.map((poco: any) => ({
-    value: poco.id,
+    value: poco.nom_poco,
     label: poco.nom_poco,
   }));
 
@@ -123,7 +124,7 @@ function ModalCadastroIntervencao({
 
   const handleDataLimite = async () => {
     const pocoCompleto = listaServicosPocos.filter(
-      (poco: any) => poco.id === registerForm.values.poco_id
+      (poco: any) => poco.nom_poco === registerForm.values.poco_id
     );
 
     const { data } = await getServicoDataIntervencaoId(
@@ -136,19 +137,13 @@ function ModalCadastroIntervencao({
 
     if (cod_erro === 0) {
       registerForm.setFieldValue("erroDataIntervencao", true);
-      // setErroDataIntervencao(true);
     } else {
       registerForm.setFieldValue("erroDataIntervencao", false);
-      // setErroDataIntervencao(false);
     }
   };
 
   useEffect(() => {
-    // handleGet();
     registerForm.setFieldValue("id_campanha", idCampanha);
-    // const newDate = new Date(data);
-    // newDate.setDate(newDate.getDate() + 15);
-    // registerForm.setFieldValue("dat_ini_prev", newDate);
     setRefresh(!refresh);
   }, []);
 
@@ -175,6 +170,56 @@ function ModalCadastroIntervencao({
     registerForm.values.projeto_tipo_id,
     registerForm.values.poco_id,
   ]);
+
+  useEffect(() => {
+    if (
+      registerForm.values.dat_ini_prev !== new Date(data) &&
+      registerForm.values.projeto_tipo_id !== 0 &&
+      registerForm.values.poco_id !== 0
+    ) {
+      const poco = listaServicosPocos.filter(
+        (poco: any) => poco.nom_poco === registerForm.values.poco_id
+      );
+      const dataPoco = poco[0].dat_ini_limite;
+
+      setDataLimite(dataPoco);
+      registerForm.setFieldValue("data_limite", dataPoco);
+    }
+  }, [registerForm.values.erroDataIntervencao, registerForm.values.poco_id]);
+
+  useEffect(() => {
+    if (registerForm.values.poco_id !== "") {
+      const poco = listaServicosPocos.filter(
+        (poco: any) => poco.nom_poco === registerForm.values.poco_id
+      );
+      const dataPoco = poco[0].dat_ini_limite;
+      registerForm.setFieldValue("data_limite", dataPoco);
+    }
+  }, [registerForm.values.poco_id]);
+
+  useEffect(() => {
+    if (registerForm.values.poco_id.split("-")[0] === "0 ") {
+      registerForm.setFieldValue("nova_campanha", true);
+    } else {
+      registerForm.setFieldValue("nova_campanha", false);
+    }
+  }, [registerForm.values.poco_id]);
+
+  // useEffect(() => {
+  //   setValueProgressoMensagemErro(100);
+  // }, [dataLimite]);
+
+  // useEffect(() => {
+  //   const contagemRegressiva = setInterval(() => {
+  //     setValueProgressoMensagemErro((valueProgressoMensagemErro: number) => {
+  //       if (valueProgressoMensagemErro === 0) {
+  //         clearInterval(contagemRegressiva);
+  //         return 100;
+  //       }
+  //       return valueProgressoMensagemErro - 1;
+  //     });
+  //   }, 1000);
+  // }, [valueProgressoMensagemErro]);
 
   return (
     <>
@@ -262,10 +307,7 @@ function ModalCadastroIntervencao({
                           options={optionsCampo}
                           required={true}
                         />
-                        <DateTimePickerDataInicio
-                          registerForm={registerForm}
-                          // data={data}
-                        />
+                        <DateTimePickerDataInicio registerForm={registerForm} />
                       </Flex>
                     </Stack>
 
@@ -282,14 +324,25 @@ function ModalCadastroIntervencao({
                     </Stack>
 
                     {registerForm.values.erroDataIntervencao && (
-                      <Alert colorScheme={"red"} variant={"solid"}>
-                        <AlertIcon />
-                        <AlertTitle>ATENÇÃO:</AlertTitle>
-                        <Text>
-                          O planejamento configurado ultrapassa a data de início
-                          de execução do poço selecionado.
-                        </Text>
-                      </Alert>
+                      <Flex direction={"column"}>
+                        <Alert colorScheme={"red"} variant={"solid"}>
+                          <AlertIcon />
+                          <AlertTitle>ATENÇÃO:</AlertTitle>
+                          <Text>
+                            {`O planejamento configurado ultrapassa a data de início
+                              de execução do poço selecionado, previsto para ser iniciado na data ${formatDate(
+                                dataLimite
+                              )}.`}
+                          </Text>
+                        </Alert>
+                        {/* <Progress
+                          hasStripe
+                          size="sm"
+                          value={valueProgressoMensagemErro}
+                          colorScheme={"blue"}
+                          isAnimated={true}
+                        /> */}
+                      </Flex>
                     )}
 
                     <AtividadesCadastroIntervencao
@@ -301,7 +354,6 @@ function ModalCadastroIntervencao({
                       <Text fontWeight={"bold"}>Comentários</Text>
                       <FormControl>
                         <Flex gap={1}>
-                          {/* <RequiredField /> */}
                           <Text
                             fontWeight={"bold"}
                             fontSize={"12px"}

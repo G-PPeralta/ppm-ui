@@ -53,47 +53,19 @@ interface Options {
 interface Props {
   refreshState: RefreshState;
   linhaTabela: LinhaTabela;
+  optionsSelects: any;
 }
 
-function ModalEditar({ refreshState, linhaTabela }: Props) {
+function ModalEditar({ refreshState, linhaTabela, optionsSelects }: Props) {
   const { refresh, setRefresh } = refreshState;
+  const { optionsFornecedores, optionsClassesDeServico } = optionsSelects;
   const { loading, registerForm } = useCentroDeCusto(
     linhaTabela.idCusto,
     "patch"
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const optionsPrestadorServico = [
-    {
-      value: 1,
-      label: "Fornecedor 1",
-    },
-    {
-      value: 2,
-      label: "Fornecedor 2",
-    },
-    {
-      value: 3,
-      label: "Fornecedor 3",
-    },
-  ];
-
-  const optionsClasseDeServico = [
-    {
-      value: 1,
-      label: "Classe de Serviço 1",
-    },
-    {
-      value: 2,
-      label: "Classe de Serviço 2",
-    },
-    {
-      value: 3,
-      label: "Classe de Serviço 3",
-    },
-  ];
-
-  const setInicialValues = () => {
+  const setInicialValues = async () => {
     registerForm.setFieldValue("valor", linhaTabela.valor);
     registerForm.setFieldValue("data", linhaTabela.dataPagamento);
     registerForm.setFieldValue(
@@ -218,11 +190,8 @@ function ModalEditar({ refreshState, linhaTabela }: Props) {
                   registerForm={registerForm}
                   nomeSelect={"PRESTADOR DE SERVIÇO"}
                   propName={"prestadorServicoId"}
-                  options={optionsPrestadorServico}
-                  value={getValue(
-                    optionsPrestadorServico,
-                    "prestadorServicoId"
-                  )}
+                  options={optionsFornecedores}
+                  value={getValue(optionsFornecedores, "prestadorServicoId")}
                 />
               </Flex>
               <Flex gap={4} w={"87%"}>
@@ -230,8 +199,8 @@ function ModalEditar({ refreshState, linhaTabela }: Props) {
                   registerForm={registerForm}
                   nomeSelect={"CLASSE DE SERVIÇO"}
                   propName={"classeDeServicoId"}
-                  options={optionsClasseDeServico}
-                  value={getValue(optionsClasseDeServico, "classeDeServicoId")}
+                  options={optionsClassesDeServico}
+                  value={getValue(optionsClassesDeServico, "classeDeServicoId")}
                 />
                 <Flex direction={"column"}>
                   <Flex gap={1}>

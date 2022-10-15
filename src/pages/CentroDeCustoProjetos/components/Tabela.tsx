@@ -33,9 +33,10 @@ interface Props {
   data: any; // Dados completos da tabela
   refreshState: RefreshState;
   idProjeto: number;
+  optionsSelects: any;
 }
 
-function Tabela({ data, refreshState, idProjeto }: Props) {
+function Tabela({ data, refreshState, idProjeto, optionsSelects }: Props) {
   const { user } = useAuth();
   const { refresh, setRefresh } = refreshState;
   const [from, setFrom] = useState<number>(0);
@@ -121,7 +122,7 @@ function Tabela({ data, refreshState, idProjeto }: Props) {
                   <Text>{linhaTabela.prestadorDeServico}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.classeDeServico}</Text>
+                  <Text>{linhaTabela.classeDoServico}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Text>
@@ -141,6 +142,7 @@ function Tabela({ data, refreshState, idProjeto }: Props) {
                     <ModalEditar
                       refreshState={refreshState}
                       linhaTabela={linhaTabela}
+                      optionsSelects={optionsSelects}
                     />
                     <IconButton
                       aria-label="Botão de Editar"
