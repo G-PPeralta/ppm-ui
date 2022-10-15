@@ -22,7 +22,7 @@ export default function CampoEditavel(props: { filho: BudgetDetail }) {
 
   const save = async (valor: string) => {
     const data = {
-      valor,
+      valor: +valor,
       atividadeId: projeto.id,
     };
     const { status } = await postAatualizarValorPrevisto(data);
