@@ -1,6 +1,6 @@
 export interface BudgetPlan {
   atividadeId: number;
-  valor: string;
+  valor: number;
 }
 export interface Projeto {
   id: number;
