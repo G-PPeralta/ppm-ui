@@ -22,7 +22,7 @@ import StackedBarChart from "components/StackedBarChartGraphic";
 
 import StatusIntervencao from "./StatusIntervencao";
 
-export function GraficoNPTPorPeriodoSPT({ Prop }: any) {
+export function GraficoNPTPorPeriodoSPT() {
   const dataMock2 = [
     {
       month: "Pir-61",

@@ -21,7 +21,7 @@ import StackedBarChart from "components/StackedBarChartGraphic";
 
 import { getCampo, getSonda } from "services/get/CadastroModaisInfograficos";
 
-export function GraficoPorDuracao({ Prop }: any) {
+export function GraficoPorDuracao() {
   const [listaSondas, setListaSondas] = useState<any[]>([]);
   const [campos, setCampos] = useState<any[]>([]);
   // const [loading, setLoading] = useState(true);

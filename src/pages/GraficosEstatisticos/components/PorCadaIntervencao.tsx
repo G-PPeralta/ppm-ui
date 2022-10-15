@@ -23,7 +23,7 @@ import { getSonda } from "services/get/CadastroModaisInfograficos";
 
 import StatusIntervencao from "./StatusIntervencao";
 
-export function GraficoPorCadaIntervencao({ Prop }: any) {
+export function GraficoPorCadaIntervencao() {
   const [listaSondas, setListaSondas] = useState<any[]>([]);
 
   const dataMock2 = [

@@ -1,7 +1,8 @@
 // import { useEffect, useState } from "react";
-
 import { useRef, useState } from "react";
+// import { CSVLink } from "react-csv";
 import { AiFillPrinter } from "react-icons/ai";
+// import { FaFileCsv } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
 import ReactToPrint from "react-to-print";
 
@@ -41,40 +42,42 @@ export function GráficosEstatisticos() {
     { name: "Relatório Tempo NPT por período / SPT", value: "3" },
   ];
 
-  function Props() {
-    return (
-      <Flex>
-        <ReactToPrint
-          trigger={() => (
-            <Button
-              // width={"77px"}
-              height={"23px"}
-              variant="ghost"
-              fontSize={"18px"}
-              fontWeight={"700"}
-              color={"#0047BB"}
-              rightIcon={<AiFillPrinter />}
-              _hover={{
-                background: "white",
-                color: "#0047BB",
-                transition: "all 0.4s",
-              }}
-              disabled={graphic == "0" || graphic == ""}
-            >
-              Exportar
-            </Button>
-          )}
-          content={() => componentRef.current}
-        />
-      </Flex>
-    );
-  }
+  // function Props() {
+  //   return (
+  //     <Flex>
+  //       <CSVLink data={graphics}>
+  //         {/* // trigger={() => ( */}
+  //         <Button
+  //           // width={"77px"}
+  //           height={"23px"}
+  //           variant="ghost"
+  //           fontSize={"18px"}
+  //           fontWeight={"700"}
+  //           color={"#0047BB"}
+  //           rightIcon={<FaFileCsv />}
+  //           _hover={{
+  //             background: "white",
+  //             color: "#0047BB",
+  //             transition: "all 0.4s",
+  //           }}
+  //           disabled={graphic == "0" || graphic == ""}
+  //         >
+  //           Exportar
+  //         </Button>
+  //       </CSVLink>
+  //       {/* )} */}
+  //       {/* // content={() => componentRef.current}
+  //       // /> */}
+  //     </Flex>
+  //   );
+  // }
+
   function handleGraphicButton(graphic: string) {
     return (
       <>
-        {graphic == "1" && <GraficoPorDuracao Prop={Props} />}
-        {graphic == "2" && <GraficoPorCadaIntervencao Prop={Props} />}
-        {graphic == "3" && <GraficoNPTPorPeriodoSPT Prop={Props} />}
+        {graphic == "1" && <GraficoPorDuracao />}
+        {graphic == "2" && <GraficoPorCadaIntervencao />}
+        {graphic == "3" && <GraficoNPTPorPeriodoSPT />}
       </>
     );
   }
@@ -165,7 +168,7 @@ export function GráficosEstatisticos() {
                     flex={1}
                     ml={-5}
                   >
-                    <Flex alignItems={"flex-end"} w={"30%"}>
+                    <Flex alignItems={"flex-end"}>
                       <FormControl>
                         <FormLabel
                           fontSize={"12px"}
