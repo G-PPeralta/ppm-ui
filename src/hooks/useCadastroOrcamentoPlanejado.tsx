@@ -32,7 +32,7 @@ export function useCadastroOrcamentoPlanejado() {
   };
 
   const initialValues = {
-    gasto: 0,
+    gasto: "",
     data: "",
     fornecedor: "",
     servico: "",
@@ -47,7 +47,7 @@ export function useCadastroOrcamentoPlanejado() {
     onSubmit: async (values) => {
       const newValues: BudgetReal = {
         atividadeId: atividade,
-        valor: values.gasto,
+        valor: +values.gasto,
         data: values.data,
         fornecedor: values.fornecedor,
         classeServico: values.servico,
