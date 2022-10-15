@@ -133,6 +133,7 @@ export function CentroDeCustoProjetos() {
                   data={data.centroDeCusto}
                   refreshState={refreshState}
                   idProjeto={data.idProjeto}
+                  optionsSelects={options}
                 />
               )}
             </Box>
