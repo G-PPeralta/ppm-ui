@@ -18,6 +18,7 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
+  // Progress,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import {
@@ -60,6 +61,8 @@ function ModalCadastroIntervencao({
 
   const [listaProjetos, setListaProjetos] = useState<any>([]);
   const [dataLimite, setDataLimite] = useState<any>("");
+  // const [valueProgressoMensagemErro, setValueProgressoMensagemErro] =
+  //   useState<any>(100);
 
   const innerWidth = window.innerWidth;
 
@@ -177,11 +180,22 @@ function ModalCadastroIntervencao({
       const poco = listaServicosPocos.filter(
         (poco: any) => poco.nom_poco === registerForm.values.poco_id
       );
-      const dataPoco = formatDate(poco[0].dat_ini_limite);
+      const dataPoco = poco[0].dat_ini_limite;
 
       setDataLimite(dataPoco);
+      registerForm.setFieldValue("data_limite", dataPoco);
     }
   }, [registerForm.values.erroDataIntervencao, registerForm.values.poco_id]);
+
+  useEffect(() => {
+    if (registerForm.values.poco_id !== "") {
+      const poco = listaServicosPocos.filter(
+        (poco: any) => poco.nom_poco === registerForm.values.poco_id
+      );
+      const dataPoco = poco[0].dat_ini_limite;
+      registerForm.setFieldValue("data_limite", dataPoco);
+    }
+  }, [registerForm.values.poco_id]);
 
   useEffect(() => {
     if (registerForm.values.poco_id.split("-")[0] === "0 ") {
@@ -190,6 +204,22 @@ function ModalCadastroIntervencao({
       registerForm.setFieldValue("nova_campanha", false);
     }
   }, [registerForm.values.poco_id]);
+
+  // useEffect(() => {
+  //   setValueProgressoMensagemErro(100);
+  // }, [dataLimite]);
+
+  // useEffect(() => {
+  //   const contagemRegressiva = setInterval(() => {
+  //     setValueProgressoMensagemErro((valueProgressoMensagemErro: number) => {
+  //       if (valueProgressoMensagemErro === 0) {
+  //         clearInterval(contagemRegressiva);
+  //         return 100;
+  //       }
+  //       return valueProgressoMensagemErro - 1;
+  //     });
+  //   }, 1000);
+  // }, [valueProgressoMensagemErro]);
 
   return (
     <>
@@ -294,14 +324,25 @@ function ModalCadastroIntervencao({
                     </Stack>
 
                     {registerForm.values.erroDataIntervencao && (
-                      <Alert colorScheme={"red"} variant={"solid"}>
-                        <AlertIcon />
-                        <AlertTitle>ATENÇÃO:</AlertTitle>
-                        <Text>
-                          {`O planejamento configurado ultrapassa a data de início
-                            de execução do poço selecionado, previsto para ser iniciado na data ${dataLimite}.`}
-                        </Text>
-                      </Alert>
+                      <Flex direction={"column"}>
+                        <Alert colorScheme={"red"} variant={"solid"}>
+                          <AlertIcon />
+                          <AlertTitle>ATENÇÃO:</AlertTitle>
+                          <Text>
+                            {`O planejamento configurado ultrapassa a data de início
+                              de execução do poço selecionado, previsto para ser iniciado na data ${formatDate(
+                                dataLimite
+                              )}.`}
+                          </Text>
+                        </Alert>
+                        {/* <Progress
+                          hasStripe
+                          size="sm"
+                          value={valueProgressoMensagemErro}
+                          colorScheme={"blue"}
+                          isAnimated={true}
+                        /> */}
+                      </Flex>
                     )}
 
                     <AtividadesCadastroIntervencao

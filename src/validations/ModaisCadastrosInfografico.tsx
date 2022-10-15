@@ -96,7 +96,7 @@ export const cadastroNovaIntervencaoSchema = yup.object({
     })
   ),
   comentarios: yup.string(),
-  erroDataIntervencao: yup.boolean().oneOf([false]),
+  // erroDataIntervencao: yup.boolean().oneOf([false]),
 });
 
 export const cadastroNovaAtividadeSchema = yup.object({

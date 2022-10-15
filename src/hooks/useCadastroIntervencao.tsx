@@ -126,6 +126,7 @@ export function useCadastroIntervencao() {
     dat_ini_prev: "",
     projeto_tipo_id: 0,
     nova_campanha: false,
+    data_limite: "",
     atividades: [
       {
         area_id: 0,
@@ -156,6 +157,7 @@ export function useCadastroIntervencao() {
         dat_ini_prev: values.dat_ini_prev,
         projeto_tipo_id: values.projeto_tipo_id,
         nova_campanha: values.nova_campanha,
+        data_limite: values.data_limite,
         atividades: values.atividades,
         comentarios: values.comentarios,
       };
