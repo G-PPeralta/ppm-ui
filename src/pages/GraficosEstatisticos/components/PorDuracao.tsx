@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 // import { FiPlus } from "react-icons/fi";
 
 import {
+  Box,
   // Box,
   // Button,
   Flex,
@@ -112,20 +113,20 @@ export function GraficoPorDuracao({ Prop }: any) {
 
   const componentRef = useRef<HTMLDivElement>(null);
 
-  // function useWindowSize() {
-  //   const [size, setSize] = useState([0, 0]);
-  //   useLayoutEffect(() => {
-  //     function updateSize() {
-  //       setSize([window.innerWidth, window.innerHeight]);
-  //     }
-  //     window.addEventListener("resize", updateSize);
-  //     updateSize();
-  //     return () => window.removeEventListener("resize", updateSize);
-  //   }, []);
-  //   return size;
-  // }
+  function useWindowSize() {
+    const [size, setSize] = useState([0, 0]);
+    useLayoutEffect(() => {
+      function updateSize() {
+        setSize([window.innerWidth, window.innerHeight]);
+      }
+      window.addEventListener("resize", updateSize);
+      updateSize();
+      return () => window.removeEventListener("resize", updateSize);
+    }, []);
+    return size;
+  }
 
-  // const [width] = useWindowSize();
+  const [width] = useWindowSize();
 
   return (
     <>
@@ -403,7 +404,7 @@ export function GraficoPorDuracao({ Prop }: any) {
               </FormControl>
             </Flex> */}
           </Flex>
-          <Flex gap={1} direction={"column"}>
+          <Flex gap={1} direction={"column"} mt={-2}>
             <Flex mb={"-18px"}>
               <Text
                 mt={"5px"}
@@ -490,24 +491,24 @@ export function GraficoPorDuracao({ Prop }: any) {
               </Text>
             </Flex>
           </Flex>
-          {/* <Box
-                    overflowX={"scroll"}
-                    w={width * 0.7}
-                    h={260}
-                    display={"flex"}
-                    overflowY={"hidden"}
-                  > */}
-          <Flex ml={"-25px"} mt={"15px"}>
-            <StackedBarChart
-              showY={true}
-              sizeW={1030}
-              sizeH={352}
-              data={dataMock1}
-              dataEntries={dataEntries1}
-              barW={40}
-            />
-          </Flex>
-          {/* </Box> */}
+          <Box
+            overflowX={"scroll"}
+            w={innerWidth > 428 ? width * 0.7 : width * 0.85}
+            h={460}
+            display={"flex"}
+            overflowY={"hidden"}
+          >
+            <Flex ml={"-25px"} mt={"15px"}>
+              <StackedBarChart
+                showY={true}
+                sizeW={1000}
+                sizeH={352}
+                data={dataMock1}
+                dataEntries={dataEntries1}
+                barW={44}
+              />
+            </Flex>
+          </Box>
         </Flex>
         <Flex ref={componentRef} />
       </form>
