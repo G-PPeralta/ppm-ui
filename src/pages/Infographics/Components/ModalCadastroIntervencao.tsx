@@ -27,7 +27,8 @@ import {
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
-// import { RequiredField } from "components/RequiredField/RequiredField";
+
+import { formatDate } from "utils/formatDate";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
@@ -57,11 +58,8 @@ function ModalCadastroIntervencao({
     listaAtividadesPrecedentes,
   } = useCadastroIntervencao();
 
-  // console.log("idCampanha", idCampanha);
-  // console.log("registerForm", registerForm.values);
-
-  // const [erroDataIntervencao, setErroDataIntervencao] = useState(false);
   const [listaProjetos, setListaProjetos] = useState<any>([]);
+  const [dataLimite, setDataLimite] = useState<any>("");
 
   const innerWidth = window.innerWidth;
 
@@ -136,19 +134,13 @@ function ModalCadastroIntervencao({
 
     if (cod_erro === 0) {
       registerForm.setFieldValue("erroDataIntervencao", true);
-      // setErroDataIntervencao(true);
     } else {
       registerForm.setFieldValue("erroDataIntervencao", false);
-      // setErroDataIntervencao(false);
     }
   };
 
   useEffect(() => {
-    // handleGet();
     registerForm.setFieldValue("id_campanha", idCampanha);
-    // const newDate = new Date(data);
-    // newDate.setDate(newDate.getDate() + 15);
-    // registerForm.setFieldValue("dat_ini_prev", newDate);
     setRefresh(!refresh);
   }, []);
 
@@ -175,6 +167,15 @@ function ModalCadastroIntervencao({
     registerForm.values.projeto_tipo_id,
     registerForm.values.poco_id,
   ]);
+
+  useEffect(() => {
+    const poco = listaServicosPocos.filter(
+      (poco: any) => poco.id === registerForm.values.poco_id
+    );
+    const dataPoco = formatDate(poco[0].dat_ini_limite);
+
+    setDataLimite(dataPoco);
+  }, [registerForm.values.erroDataIntervencao, registerForm.values.poco_id]);
 
   return (
     <>
@@ -262,10 +263,7 @@ function ModalCadastroIntervencao({
                           options={optionsCampo}
                           required={true}
                         />
-                        <DateTimePickerDataInicio
-                          registerForm={registerForm}
-                          // data={data}
-                        />
+                        <DateTimePickerDataInicio registerForm={registerForm} />
                       </Flex>
                     </Stack>
 
@@ -286,8 +284,8 @@ function ModalCadastroIntervencao({
                         <AlertIcon />
                         <AlertTitle>ATENÇÃO:</AlertTitle>
                         <Text>
-                          O planejamento configurado ultrapassa a data de início
-                          de execução do poço selecionado.
+                          {`O planejamento configurado ultrapassa a data de início
+                          de execução do poço selecionado, previsto para ser iniciado na data ${dataLimite}.`}
                         </Text>
                       </Alert>
                     )}
@@ -301,7 +299,6 @@ function ModalCadastroIntervencao({
                       <Text fontWeight={"bold"}>Comentários</Text>
                       <FormControl>
                         <Flex gap={1}>
-                          {/* <RequiredField /> */}
                           <Text
                             fontWeight={"bold"}
                             fontSize={"12px"}
