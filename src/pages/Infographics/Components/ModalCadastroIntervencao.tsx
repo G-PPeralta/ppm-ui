@@ -169,12 +169,18 @@ function ModalCadastroIntervencao({
   ]);
 
   useEffect(() => {
-    const poco = listaServicosPocos.filter(
-      (poco: any) => poco.id === registerForm.values.poco_id
-    );
-    const dataPoco = formatDate(poco[0].dat_ini_limite);
+    if (
+      registerForm.values.dat_ini_prev !== new Date(data) &&
+      registerForm.values.projeto_tipo_id !== 0 &&
+      registerForm.values.poco_id !== 0
+    ) {
+      const poco = listaServicosPocos.filter(
+        (poco: any) => poco.id === registerForm.values.poco_id
+      );
+      const dataPoco = formatDate(poco[0].dat_ini_limite);
 
-    setDataLimite(dataPoco);
+      setDataLimite(dataPoco);
+    }
   }, [registerForm.values.erroDataIntervencao, registerForm.values.poco_id]);
 
   return (
