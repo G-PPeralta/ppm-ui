@@ -105,11 +105,13 @@ function ModalCadastrarPriorizacao() {
                               NOME DA PRIORIZAÇÃO
                             </FormLabel>
                             <Input
+                              maxLength={30}
                               ml={"3px"}
                               w={"400px"}
                               h={"56px"}
                               fontSize={"14px"}
-                              color={"#949494"}
+                              color={"black"}
+                              _placeholder={{ color: "#949494" }}
                               fontWeight={"400"}
                               border={"solid 1px #949494"}
                               isRequired
@@ -154,7 +156,7 @@ function ModalCadastrarPriorizacao() {
                               w={"480px"}
                               h={"56px"}
                               fontSize={"14px"}
-                              color={"#2D2926"}
+                              color={"black"}
                               fontWeight={"400"}
                               border={"solid 1px #949494"}
                               // value={activitiesForm.values.acesso}

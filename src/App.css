@@ -35,3 +35,23 @@ border-radius: 5px;
 body {
   font-family: 'Mulish', sans-serif !important;
 }
+
+
+table {
+  border-collapse: collapse;
+}
+table td, table th {
+  border: 0.5px solid #A7A7A7;
+}
+table tr:first-child th {
+  border-top: 0.5 solid #0047BB;
+}
+table tr:last-child td {
+  border-top: 0.5 solid #0047BB;
+}
+table tr th:first-child {
+  border-top: 0.5 solid #0047BB;
+}
+table tr th:last-child {
+  border-top: 0.5 solid #0047BB;
+}

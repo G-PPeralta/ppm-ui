@@ -10,7 +10,6 @@ import {
   Heading,
   Input,
   Select,
-  Stack,
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
@@ -86,15 +85,79 @@ export function Projects() {
                   Projetos
                 </Heading>
               </Flex>
+
               <Flex
-                direction={"column"}
+                direction={wd > 600 ? "row" : "column"}
+                wrap={"wrap"}
+                alignItems="flex-end"
                 justify={"space-between"}
                 gap={4}
-                wrap={"wrap"}
-                mb={2}
                 flex={1}
               >
-                <Flex gap={2} wrap={"wrap"} flex={1}>
+                <Flex align={"end"} gap={4} wrap={"wrap"} flex={1}>
+                  <Flex direction={"column"} flex={1}>
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      PROJETOS
+                    </Text>
+                    <Input
+                      h={"56px"}
+                      fontWeight={"bold"}
+                      color={"#949494"}
+                      isRequired
+                      placeholder="Projeto"
+                      id="name"
+                      type="text"
+                      name="name"
+                      onChange={(e) => filterProjects(e.target.value)}
+                    />
+                  </Flex>
+                  <Flex direction={"column"} flex={1}>
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      POLO
+                    </Text>
+
+                    <Select
+                      h={"56px"}
+                      id="poloId"
+                      fontWeight={"bold"}
+                      name="pole"
+                      color={"#949494"}
+                      onChange={(e) => setPolo(e.target.value)}
+                      width={300}
+                    >
+                      <option value="0">Todos</option>
+                      <option value="1">Tucano Sul</option>
+                      <option value="2">Alagoas</option>
+                    </Select>
+                  </Flex>
+                  <Flex flex={1}>
+                    <Button
+                      h={"56px"}
+                      borderRadius={"10px"}
+                      background={"origem.500"}
+                      variant="primary"
+                      color="white"
+                      onClick={() => getProjectsPerPolo()}
+                      _hover={{
+                        background: "origem.600",
+                        transition: "all 0.4s",
+                      }}
+                      rightIcon={<BsSearch />}
+                      fontWeight={"bold"}
+                    >
+                      Filtrar
+                    </Button>
+                  </Flex>
+                </Flex>
+                <Flex flex={1} justify={"end"}>
                   <Button
                     h={"56px"}
                     borderRadius={"10px"}
@@ -110,81 +173,10 @@ export function Projects() {
                     }}
                     rightIcon={<FiPlus />}
                   >
-                    <Link to={"/projects-registration"}>Cadastrar Projeto</Link>
+                    <Link to={"/projetos/cadastro"}>Cadastrar Projeto</Link>
                   </Button>
                 </Flex>
               </Flex>
-
-              <Stack spacing="5">
-                <Flex
-                  flexDirection={wd > 600 ? "row" : "column"}
-                  alignItems="flex-end"
-                >
-                  <Flex direction={"column"}>
-                    <Text
-                      fontWeight={"bold"}
-                      fontSize={"12px"}
-                      color={"#949494"}
-                    >
-                      PROJETOS
-                    </Text>
-                    <Input
-                      h={"56px"}
-                      w={"328px"}
-                      marginRight="15px"
-                      fontWeight={"bold"}
-                      color={"#949494"}
-                      isRequired
-                      placeholder="Projeto"
-                      id="name"
-                      type="text"
-                      name="name"
-                      onChange={(e) => filterProjects(e.target.value)}
-                    />
-                  </Flex>
-                  <Flex direction={"column"}>
-                    <Text
-                      fontWeight={"bold"}
-                      fontSize={"12px"}
-                      color={"#949494"}
-                    >
-                      POLO
-                    </Text>
-
-                    <Select
-                      h={"56px"}
-                      w={"200px"}
-                      id="poloId"
-                      fontWeight={"bold"}
-                      name="pole"
-                      color={"#949494"}
-                      onChange={(e) => setPolo(e.target.value)}
-                      width={300}
-                      marginRight="15px"
-                    >
-                      <option value="0">Todos</option>
-                      <option value="1">Tucano Sul</option>
-                      <option value="2">Alagoas</option>
-                    </Select>
-                  </Flex>
-                  <Button
-                    h={"56px"}
-                    borderRadius={"10px"}
-                    background={"origem.500"}
-                    variant="primary"
-                    color="white"
-                    onClick={() => getProjectsPerPolo()}
-                    _hover={{
-                      background: "origem.600",
-                      transition: "all 0.4s",
-                    }}
-                    rightIcon={<BsSearch />}
-                    fontWeight={"bold"}
-                  >
-                    Filtrar
-                  </Button>
-                </Flex>
-              </Stack>
 
               {projetosFilter && (
                 <Flex flex={1}>

@@ -103,9 +103,12 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               NOME
                             </FormLabel>
                             <Input
+                              maxLength={40}
                               fontSize={"14px"}
                               fontWeight={"400"}
-                              color={"#949494"}
+                              placeholder={"Nome"}
+                              color={"black"}
+                              _placeholder={{ color: "#949494" }}
                               ml={"3px"}
                               w={"328px"}
                               border={"1px solid #949494"}
@@ -143,7 +146,8 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               w={"328px"}
                               fontSize={"14px"}
                               fontWeight={"400"}
-                              color={"#949494"}
+                              color={"black"}
+                              _placeholder={{ color: "#949494" }}
                               value={registerForm.values.num_nota}
                               onChange={registerForm.handleChange}
                             >

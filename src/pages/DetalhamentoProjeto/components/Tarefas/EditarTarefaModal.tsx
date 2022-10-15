@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 // import { useParams } from "react-router-dom";
 
@@ -52,26 +52,47 @@ function EditarTarefaModal({
   const novaData = format(new Date(editTarefa?.data_tarefa), "yyyy-MM-dd");
 
   const { user } = useAuth();
-  const [tarefaId] = useState(editTarefa?.id);
+  // console.log(user);
+  // console.log(editTarefa);
+
+  const [tarefaId, setTarefaId] = useState(editTarefa?.id);
   const [nome, setNome] = useState(editTarefa?.nome_tarefa);
   const [data, setData] = useState(novaData);
-  const [atividadeId, setAtividadeId] = useState(
-    editTarefa?.atividade_relacionada
-  );
+  const [atividade, setAtividade] = useState(editTarefa?.atividade_relacionada);
+  const [responsavel, setResponsavel] = useState(editTarefa?.responsavel);
+  const [status, setStatus] = useState(editTarefa?.status);
   const [descricao, setDescricao] = useState(editTarefa?.descricao_tarefa);
+
+  useEffect(() => {
+    setNome(editTarefa.nome_tarefa);
+    setData(novaData);
+    setAtividade(editTarefa.atividade_relacionada);
+    setDescricao(editTarefa.descricao_tarefa);
+    setTarefaId(editTarefa.id);
+  }, [
+    // editTarefa.dat_usu_create,
+    novaData,
+    editTarefa.nome_tarefa,
+    editTarefa.id,
+    editTarefa.atividade_relacionada,
+  ]);
 
   const camposParaEditar = [
     "nome_tarefa",
     "data_tarefa",
     "atividade_relacionada",
     "descricao_tarefa",
+    "responsavel",
+    "status",
   ];
 
   function updatePayload(campo: string) {
     if (campo === "nome_tarefa") return nome;
     if (campo === "data_tarefa") return data;
-    if (campo === "atividade_relacionada") return atividadeId;
+    if (campo === "atividade_relacionada") return atividade;
     if (campo === "descricao_tarefa") return descricao;
+    if (campo === "responsavel") return responsavel;
+    if (campo === "status") return status;
   }
 
   return (
@@ -149,7 +170,7 @@ function EditarTarefaModal({
                   mt={"-9px"}
                   width={"328px"}
                   height={"56px"}
-                  color="#2D2926"
+                  color="black"
                   isRequired
                   placeholder="Nome tarefa"
                   type="text"
@@ -178,7 +199,7 @@ function EditarTarefaModal({
                   width={"136px"}
                   height={"56px"}
                   fontSize={"14px"}
-                  color="#2D2926"
+                  color="black"
                   id="data"
                   type="date"
                   name="data"
@@ -211,18 +232,16 @@ function EditarTarefaModal({
                   mt={"-9px"}
                   width={"208px"}
                   height={"56px"}
-                  color="#2D2926"
+                  color="black"
                   id="atividadeRel"
                   name="atividadeRel"
-                  // value={atividadeId}
-                  onChange={(event) =>
-                    setAtividadeId(Number(event.target.value))
-                  }
+                  value={atividade}
+                  onChange={(event) => setAtividade(event.target.value)}
                 >
                   <option value="">Selecione</option>
                   {atividadesProjeto.map((atividade, index) => (
-                    <option value={atividade.id} key={index}>
-                      {atividade.nomeAtividade}
+                    <option value={atividade.nom_atividade} key={index}>
+                      {atividade.nom_atividade}
                     </option>
                   ))}
                 </Select>
@@ -238,23 +257,45 @@ function EditarTarefaModal({
                 >
                   RESPONSÁVEL
                 </FormLabel>
-                <Select
+                <Input
+                  type="text"
                   fontSize={"14px"}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
                   width={"208px"}
                   height={"56px"}
-                  color="#2D2926"
+                  color="black"
                   id="atividadeRel"
                   name="atividadeRel"
-                  // value={atividadeId}
-                  // onChange={(event) => setAtividadeId(Number(event.target.value))}
-                >
-                  <option value="">Selecione</option>
-                </Select>
+                  value={responsavel}
+                  onChange={(event) => setResponsavel(event.target.value)}
+                ></Input>
               </Flex>
             </FormControl>
+            <FormLabel
+              htmlFor="status"
+              color="#949494"
+              fontSize="12px"
+              fontWeight="700"
+              mt={"6px"}
+            >
+              STATUS
+            </FormLabel>
+            <Input
+              type="number"
+              fontSize={"14px"}
+              borderRadius={"8px"}
+              border={"1px solid #A7A7A7"}
+              mt={"-9px"}
+              width={"208px"}
+              height={"56px"}
+              color="#2D2926"
+              id="status"
+              name="status"
+              value={status}
+              onChange={(event) => setStatus(Number(event.target.value))}
+            ></Input>
             <FormControl padding={1}>
               <FormLabel
                 htmlFor="acao"
@@ -273,7 +314,7 @@ function EditarTarefaModal({
                 mt={"-9px"}
                 width={"456px"}
                 height={"121px"}
-                color="#2D2926"
+                color="black"
                 isRequired
                 placeholder="Descrição da tarefa"
                 id="descrição"
@@ -315,7 +356,9 @@ function EditarTarefaModal({
                     patchTarefa(
                       Number(tarefaId),
                       tarefa,
-                      updatePayload(tarefa)?.toString() || "",
+                      tarefa !== "status"
+                        ? updatePayload(tarefa) || 0
+                        : updatePayload(tarefa)?.toString() || "",
                       user?.nome
                     )
                   );

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { CSVLink } from "react-csv";
 import toast from "react-hot-toast";
-import { AiFillPrinter } from "react-icons/ai";
+import { FaFileCsv } from "react-icons/fa";
 // import {
 //   FiChevronLeft,
 //   FiChevronRight,
@@ -90,9 +91,9 @@ export function LicoesAprendidasProjetos() {
     filterByProject();
   };
 
-  const print = () => {
-    window.print();
-  };
+  // const print = () => {
+  //   window.print();
+  // };
 
   async function handleUpdateLicoes(
     licao: any,
@@ -167,6 +168,13 @@ export function LicoesAprendidasProjetos() {
     setFilteredLicoesAprendidas([...filtered]);
   };
 
+  const headers = [
+    { label: "ID", key: "id" },
+    { label: "Lições Aprendidas", key: "txt_licao_aprendida" },
+    { label: "Ações e Recomendações", key: "txt_acao" },
+    { label: "Data", key: "dat_usu_create" },
+  ];
+
   // const rowsPerPage = 8;
   // const totalRegs = filteredLicoesAprendidas.length;
   // const maxPage = Math.ceil(totalRegs / rowsPerPage);
@@ -227,16 +235,18 @@ export function LicoesAprendidasProjetos() {
                   </Text>
                 </Heading>
                 <Flex align={"flex-start"} fontWeight={"700"}>
-                  <Button
-                    color={"#0239C3"}
-                    fontWeight={"700"}
-                    variant="ghost"
-                    colorScheme="messenger"
-                    rightIcon={<AiFillPrinter />}
-                    onClick={print}
-                  >
-                    Exportar
-                  </Button>
+                  <CSVLink data={filteredLicoesAprendidas} headers={headers}>
+                    <Button
+                      color={"#0239C3"}
+                      fontWeight={"700"}
+                      variant="ghost"
+                      colorScheme="messenger"
+                      rightIcon={<FaFileCsv />}
+                      // onClick={print}
+                    >
+                      Exportar
+                    </Button>
+                  </CSVLink>
                 </Flex>
               </Flex>
               <Flex flexDir={"row"} justify={"space-between"}>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import {
   Flex,
@@ -43,9 +43,11 @@ function CadastroTarefasModal({
 }: CadastroTarefaProps) {
   // const { onClose } = useDisclosure();
   const { user } = useAuth();
+  const { id } = useParams();
   const [nome, setNome] = useState("");
   const [data, setData] = useState("");
-  const [atividadeId, setAtividadeId] = useState(0);
+  const [atividade, setAtividade] = useState("");
+  const [responsavel, setResponsavel] = useState("");
   const [descricao, setDescricao] = useState("");
 
   const regex = /[^a-z ]/gi;
@@ -163,35 +165,70 @@ function CadastroTarefasModal({
                 />
               </Flex>
             </FormControl>
-            <FormControl padding={1} marginBottom={1} width={"204px"}>
-              <FormLabel
-                htmlFor="atividadeRel"
-                color="#949494"
-                fontSize="12px"
-                fontWeight="700"
-                mt={"6px"}
-              >
-                ATIVIDADE RELACIONADA
-              </FormLabel>
-              <Select
-                borderRadius={"8px"}
-                _placeholder={{ color: "black" }}
-                border={"1px solid #A7A7A7"}
-                mt={"-9px"}
-                fontSize={"14px"}
-                width={"208px"}
-                height={"56px"}
-                id="atividadeRel"
-                name="atividadeRel"
-                onChange={(event) => setAtividadeId(Number(event.target.value))}
-              >
-                <option value="">Selecione</option>
-                {atividadesProjeto.map((atividade, index) => (
-                  <option value={atividade.id} key={index}>
-                    {atividade.nomeAtividade}
-                  </option>
-                ))}
-              </Select>
+            <FormControl
+              padding={1}
+              marginBottom={1}
+              width={"204px"}
+              display="flex"
+              gap={4}
+            >
+              <Flex direction={"column"}>
+                <FormLabel
+                  htmlFor="atividadeRel"
+                  color="#949494"
+                  fontSize="12px"
+                  fontWeight="700"
+                  mt={"6px"}
+                >
+                  ATIVIDADE RELACIONADA
+                </FormLabel>
+                <Select
+                  borderRadius={"8px"}
+                  border={"1px solid #A7A7A7"}
+                  mt={"-9px"}
+                  _placeholder={{ color: "black" }}
+                  fontSize={"14px"}
+                  width={"208px"}
+                  height={"56px"}
+                  id="atividadeRel"
+                  name="atividadeRel"
+                  onChange={(event) => setAtividade(event.target.value)}
+                >
+                  <option value="">Selecione</option>
+                  {atividadesProjeto.map((atividade, index) => (
+                    <option value={atividade.nom_atividade} key={index}>
+                      {atividade.nom_atividade}
+                    </option>
+                  ))}
+                </Select>
+              </Flex>
+              <Flex direction={"column"}>
+                <FormLabel
+                  htmlFor="atividadeRel"
+                  color="#949494"
+                  fontSize="12px"
+                  fontWeight="700"
+                  mt={"6px"}
+                >
+                  RESPONSÁVEL
+                </FormLabel>
+                <Input
+                  placeholder="Responsável"
+                  type="text"
+                  fontSize={"14px"}
+                  borderRadius={"8px"}
+                  border={"1px solid #A7A7A7"}
+                  mt={"-9px"}
+                  _placeholder={{ color: "black" }}
+                  width={"208px"}
+                  height={"56px"}
+                  color="black"
+                  id="atividadeRel"
+                  name="atividadeRel"
+                  value={responsavel}
+                  onChange={(event) => setResponsavel(event.target.value)}
+                ></Input>
+              </Flex>
             </FormControl>
             <FormControl padding={1}>
               <FormLabel
@@ -254,9 +291,11 @@ function CadastroTarefasModal({
                   await postTarefa({
                     nome_tarefa: nome,
                     data_tarefa: new Date(data),
-                    atividade_relacionada: atividadeId,
+                    atividade_relacionada: atividade,
                     descricao_tarefa: descricao,
+                    responsavel,
                     nom_usu_create: user?.nome,
+                    projeto_id: Number(id),
                   });
                   newRender();
                   closeModal();

@@ -45,7 +45,7 @@ function ModalDeletarOpcaoPriorizacao() {
       >
         <FiTrash size={"13px"} />
       </IconButton>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton color={"white"} />
@@ -81,7 +81,7 @@ function ModalDeletarOpcaoPriorizacao() {
                         color={"#010101"}
                         fontWeight={"400"}
                       >
-                        Tem certeza que deseja mover essa informação para a
+                        Tem certeza que deseja mover esta informação para a
                         Lixeira?
                       </Text>
                     </Flex>

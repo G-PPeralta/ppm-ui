@@ -38,3 +38,10 @@ export const handleCancelarDatePicker = (
   form.resetForm();
   onClose();
 };
+
+export const handleCadastrarPagina = async (form: any) => {
+  await form.submitForm();
+  if (form.isValid) {
+    await form.resetForm();
+  }
+};

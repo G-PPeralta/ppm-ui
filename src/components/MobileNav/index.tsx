@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { FiMenu, FiChevronDown, FiChevronRight } from "react-icons/fi";
+import { FiMenu, FiChevronDown } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 
 import {
@@ -52,7 +52,7 @@ export function MobileNav({
     const completeObject = splited.map((split, index) => {
       let newItem: string = translations[split as keyof typeof translations];
       if (newItem === undefined) {
-        newItem = split;
+        newItem = "";
       }
       return newItem;
     });
@@ -60,14 +60,15 @@ export function MobileNav({
   }, []);
 
   const translations = {
-    dashboard: "Dashboarrd",
+    Dashboard: "Dashboard",
     projects: "Projetos",
     "projects-registration": "Cadastro de projetos",
     budgets: "Financeiro",
+    budgets2: "Financeiro",
     upload: "Importat Dados",
     fornecedores: "Fornecedores",
     licoesAprendidas: "Lições Aprendidas",
-    detalhamento: "Detalhamento de projetos",
+    detalhamento: "Detalhamento de Projetos",
     infographics: "Infográficos",
     atividade: "Atividade",
     precedentes: "Visão por Precedentes",
@@ -77,6 +78,8 @@ export function MobileNav({
     reports: "Relatórios",
     graficos: "Gráficos Estatísticos",
     priorizacao: "Priorização",
+    "financeiro-projetos": "Financeiro por Projetos",
+    "centro-custo": "Centro de Custos",
   };
 
   // const goNavigate = async (index: number) => {
@@ -145,14 +148,15 @@ export function MobileNav({
                   // onClick={() => goNavigate(index)}
                   ml={2}
                   mr={2}
-                  fontSize={"20px"}
+                  fontSize={"16px"}
+                  color={"origem.500"}
                   fontWeight={"600"}
                 >
                   {item}
                 </Button>
-                {index == way.length - 1 ? undefined : (
+                {/* {index == way.length - 1 ? undefined : (
                   <FiChevronRight color={"#0047bb"} />
-                )}
+                )} */}
               </>
             ) : undefined}
           </Fragment>

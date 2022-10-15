@@ -99,11 +99,14 @@ function LicoesAprendidasModal({
     if (search) {
       const filtered = licoes.filter(
         (lic: any) =>
-          lic.txt_licao_aprendida.includes(search) ||
-          lic.txt_acao.includes(search)
+          lic.txt_licao_aprendida
+            .toUpperCase()
+            .includes(search.toUpperCase()) ||
+          lic.txt_acao.toUpperCase().includes(search.toUpperCase())
       );
-      filtered.length == 0 &&
-        toast.error("Nenhum dado encontrado com o presente filtro de data");
+
+      // filtered.length == 0 &&
+      //   toast.error("Nenhum dado encontrado com o presente filtro de data");
       return setFilteredTable(filtered);
     }
 
@@ -111,8 +114,8 @@ function LicoesAprendidasModal({
       const filtered = licoes.filter((lic: any) =>
         lic.dat_usu_create.includes(data)
       );
-      filtered.length == 0 &&
-        toast.error("Nenhum dado encontrado com o presente filtro de data");
+      // filtered.length == 0 &&
+      //   toast.error("Nenhum dado encontrado com o presente filtro de data");
       return setFilteredTable(filtered);
     }
     setFilteredTable(licoes);
@@ -190,7 +193,7 @@ function LicoesAprendidasModal({
                         mt={"-9px"}
                         width={"208px"}
                         height={"56px"}
-                        color="#949494"
+                        _placeholder={{ color: "black" }}
                         id="categoria"
                         name="categoria"
                         placeholder="Digite"
@@ -227,7 +230,7 @@ function LicoesAprendidasModal({
                         mt={"-9px"}
                         width={"156px"}
                         height={"56px"}
-                        color="#949494"
+                        _placeholder={{ color: "black" }}
                         id="data"
                         type="Date"
                         name="data"
@@ -304,7 +307,10 @@ function LicoesAprendidasModal({
             </FormControl>
           </Stack>
 
-          <ModalCloseButton color={"white"} />
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => setFilteredTable(licoes)}
+          />
           <ModalBody>
             <TabelaLicoesAprendidas
               onEdit={handleEditLicao}

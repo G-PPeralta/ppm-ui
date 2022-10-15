@@ -118,20 +118,20 @@ export function TabelaLookahead(props: TableProps) {
   ));
 
   return (
-    <div className="table-fix">
-      <>
-        <TableContainer mt={4} mb={3} ml={1}>
-          <Table variant="unstyled">
+    <>
+      <Flex direction="column" width="100%">
+        <TableContainer mt={4} mb={3} borderRadius="15px">
+          <Table variant="unstyled" width="100%">
             <Thead>
               <Tr background="origem.500" color="white">
-                <Th width="50">item</Th>
+                <Th>item</Th>
                 <Th>Projeto</Th>
                 <Th>Descrição e Justificativa</Th>
               </Tr>
             </Thead>
             <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
             <Tfoot>
-              <Tr background="origem.200" color="white">
+              <Tr backgroundColor="#0047BB" color="white">
                 <Th>Total</Th>
                 <Th>{total} Projetos</Th>
                 <Th></Th>
@@ -194,7 +194,7 @@ export function TabelaLookahead(props: TableProps) {
             />
           </Flex>
         </Flex>
-      </>
-    </div>
+      </Flex>
+    </>
   );
 }

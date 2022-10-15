@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { FiPrinter } from "react-icons/fi";
 
 import {
+  Button,
   Flex,
-  IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -12,6 +12,7 @@ import {
   Th,
   Thead,
   Tr,
+  Text,
 } from "@chakra-ui/react";
 import { FerramentasAtividade } from "interfaces/lookahead";
 
@@ -88,17 +89,28 @@ export function TabelaServicos(props: TableProps) {
         <Table variant="unstyled" size={"sm"}>
           <Thead>
             <Tr backgroundColor={"blue"} color="white">
-              <Th colSpan={5} borderTopLeftRadius="10px">
-                Serviços
-              </Th>
-              <Th borderTopRightRadius={"10px"} colSpan={2}>
-                Imprimir
-                <IconButton
-                  color={"white"}
-                  backgroundColor="transparent"
-                  aria-label="imprimir"
-                  icon={<FiPrinter />}
-                />
+              <Th
+                colSpan={7}
+                borderTopRightRadius={"10px"}
+                borderTopLeftRadius="10px"
+                border="none 0px !important"
+              >
+                <Flex justifyContent="space-between" alignItems="center">
+                  <Text>Serviços</Text>
+                  <Button
+                    variant="ghost"
+                    colorScheme="messenger"
+                    color="white"
+                    rightIcon={<FiPrinter />}
+                    _hover={{
+                      background: "white",
+                      transition: "all 0.4s",
+                      color: "rgb(46, 105, 253)",
+                    }}
+                  >
+                    Exportar
+                  </Button>
+                </Flex>
               </Th>
             </Tr>
             <Tr backgroundColor={"rgb(46, 105, 253)"} color="white">
@@ -113,38 +125,30 @@ export function TabelaServicos(props: TableProps) {
               {dias &&
                 servicosData &&
                 dias.map(function (x) {
-                  return (
-                    <Td>
-                      {" "}
-                      {
-                        servicosData.find(
-                          (f) => f.dia == x.data && f.tipo == "s"
-                        )?.nome
-                      }
-                    </Td>
+                  const serr = servicosData.filter(
+                    (f) => f.dia == x.data && f.tipo == "s"
                   );
-                })}
+                  const sNames =
+                    serr.length > 0 ? serr.map((x) => x.nome).join(" - ") : "";
 
-              {/* <Td>
-                Chave de fenda <br /> 01:00 - 22/08
-              </Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td> */}
+                  return <Td>{sNames}</Td>;
+                })}
             </Tr>
           </Tbody>
           <Tfoot>
             <Tr backgroundColor={"blue"} color="white">
-              <Td>Total 1</Td>
-              <Td>0</Td>
-              <Td>0</Td>
-              <Td>0</Td>
-              <Td>0</Td>
-              <Td>0</Td>
-              <Td>0</Td>
+              {dias &&
+                servicosData &&
+                dias.map(function (dia, key) {
+                  const qtd = servicosData.filter(
+                    (x) => x.dia == dia.data && x.tipo == "s"
+                  ).length;
+                  if (key === 0) {
+                    return <Td borderBottomLeftRadius="10px">{qtd}</Td>;
+                  } else if (key === dias.length - 1) {
+                    return <Td borderBottomRightRadius="10px">{qtd}</Td>;
+                  } else return <Td>{qtd}</Td>;
+                })}
             </Tr>
           </Tfoot>
         </Table>

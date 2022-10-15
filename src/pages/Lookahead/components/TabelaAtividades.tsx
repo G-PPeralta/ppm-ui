@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { FiPrinter } from "react-icons/fi";
 
 import {
+  Button,
   Flex,
-  IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -12,6 +12,7 @@ import {
   Th,
   Thead,
   Tr,
+  Text,
 } from "@chakra-ui/react";
 import { FerramentaServico } from "interfaces/lookahead";
 
@@ -26,13 +27,16 @@ class DiasSemana {
   hora?: number = undefined;
 }
 
-class AtividadeDiaHora {
-  nome: string = "";
-  horaIni: string = "";
-  horaFim: string = "";
-  dataIni: string = "";
-  dataFim: string = "";
-  tipo: string = "";
+interface AtividadeDiaHora {
+  nome: string;
+  horaIni: string;
+  dataIni: string;
+  tipo: string;
+}
+
+class Totais {
+  data: string = "";
+  hora: string = "";
 }
 
 export function TabelaAtividades(props: TableProps) {
@@ -41,6 +45,7 @@ export function TabelaAtividades(props: TableProps) {
   const [dias, setDias] = useState<DiasSemana[]>();
   const [horas, setHoras] = useState<string[]>();
   const [atividades, setAtividades] = useState<AtividadeDiaHora[]>();
+  const [total, setTotal] = useState<Totais[]>();
   // const horarios = Array(24)
   //   .fill(0)
   //   .map((_, i) => {
@@ -72,7 +77,6 @@ export function TabelaAtividades(props: TableProps) {
     const atividadesGrid: AtividadeDiaHora[] = [];
     data &&
       data.forEach((atividade) => {
-        const atividadeGrid: AtividadeDiaHora = new AtividadeDiaHora();
         let horaIni;
         if (atividade.data_hora && atividade.data_hora) {
           const auxIni = atividade.data_hora.substring(
@@ -90,20 +94,34 @@ export function TabelaAtividades(props: TableProps) {
 
           // diaFim = new Date(auxFim).getDate().toString();
           // horaFim = new Date(auxFim).getHours().toString();
-          atividadeGrid.horaIni = horaIni;
-          atividadeGrid.dataIni = dataBr.format(new Date(auxIni));
-          atividadeGrid.tipo = atividade.tipo;
-
-          // atividadeGrid.horaFim = horaFim;
-          // atividadeGrid.dataFim = dataBr.format(new Date(auxFim));
-
-          atividadeGrid.nome = atividade.nome;
+          const atividadeGrid: AtividadeDiaHora = {
+            horaIni,
+            dataIni: dataBr.format(new Date(auxIni)),
+            tipo: atividade.tipo,
+            nome: atividade.nome,
+          };
 
           atividadesGrid.push(atividadeGrid);
         }
       });
     setAtividades(atividadesGrid);
     setDias(weekDays);
+
+    const arrTotais: Totais[] = [];
+
+    atividadesGrid.forEach((x) => {
+      const jaTem = arrTotais.find(
+        (a) => x.dataIni == a.data && x.horaIni == a.hora
+      )?.data;
+      if (!jaTem) {
+        arrTotais.push({
+          data: x.dataIni,
+          hora: x.horaIni,
+        });
+      }
+    });
+
+    setTotal(arrTotais);
   }
 
   // function atividadesData() {
@@ -126,18 +144,33 @@ export function TabelaAtividades(props: TableProps) {
       <TableContainer mt={4} mb={3} ml={1} width="100%">
         <Table variant="unstyled" size={"sm"}>
           <Thead>
-            <Tr backgroundColor={"blue"} color="white">
-              <Th colSpan={6} borderTopLeftRadius="10px">
-                Atividade
-              </Th>
-              <Th borderTopRightRadius={"10px"} colSpan={2}>
-                Imprimir
-                <IconButton
-                  color={"white"}
-                  backgroundColor="transparent"
-                  aria-label="imprimir"
-                  icon={<FiPrinter />}
-                />
+            <Tr
+              backgroundColor={"blue"}
+              color="white"
+              border="none 0px !important"
+            >
+              <Th
+                colSpan={8}
+                border="none 0px !important"
+                borderTopLeftRadius="10px"
+                borderTopRightRadius="10px"
+              >
+                <Flex justifyContent="space-between" alignItems="center">
+                  <Text>Atividade</Text>
+                  <Button
+                    variant="ghost"
+                    colorScheme="messenger"
+                    color="white"
+                    rightIcon={<FiPrinter />}
+                    _hover={{
+                      background: "white",
+                      transition: "all 0.4s",
+                      color: "rgb(46, 105, 253)",
+                    }}
+                  >
+                    Exportar
+                  </Button>
+                </Flex>
               </Th>
             </Tr>
             <Tr backgroundColor={"rgb(46, 105, 253)"} color="white">
@@ -149,9 +182,9 @@ export function TabelaAtividades(props: TableProps) {
             </Tr>
           </Thead>
           <Tbody>
-            {atividades &&
-              dias &&
+            {dias &&
               horas &&
+              atividades &&
               horas.map(function (hora, indice) {
                 return (
                   <Tr
@@ -160,50 +193,58 @@ export function TabelaAtividades(props: TableProps) {
                   >
                     <Td>{hora}</Td>
                     {dias.map(function (dia) {
-                      const activityS = atividades.find(
+                      const activityS = atividades.filter(
                         (x) =>
                           x.dataIni == dia.data &&
                           x.horaIni == hora.split(":")[0] &&
                           x.tipo == "s"
-                      )?.nome;
-                      const activityF = atividades.find(
+                      );
+
+                      const arrayS = activityS
+                        ? activityS.map((x) => x.nome)
+                        : undefined;
+                      const activityF = atividades.filter(
                         (x) =>
                           x.dataIni == dia.data &&
-                          x.horaIni == hora.split(":")[0] &&
+                          x.horaIni.split(":")[0] == hora.split(":")[0] &&
                           x.tipo == "f"
-                      )?.nome;
+                      );
+
+                      const arrayF = activityF
+                        ? activityF.map((x) => x.nome)
+                        : undefined;
 
                       return (
                         <Td>
-                          {(activityS && activityF
-                            ? activityS + " - " + activityF
-                            : activityS || activityF) || `-`}
+                          {(arrayS && arrayF
+                            ? arrayS.join("-") + " - " + arrayF.join("-")
+                            : (arrayS && arrayS.join(" ")) ||
+                              (arrayF && arrayF.join(" "))) || `-`}
                         </Td>
                       );
                     })}
-
-                    {/* <Td>{hora}</Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td> */}
                   </Tr>
                 );
               })}
           </Tbody>
           <Tfoot>
-            <Tr backgroundColor={"blue"} color="white">
-              <Td>Total</Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
+            <Tr
+              backgroundColor={"blue"}
+              color="white"
+              border="none 0px !important"
+            >
+              <Td borderBottomLeftRadius="10px">Total</Td>
+              {dias &&
+                total &&
+                dias.map(function (dia) {
+                  // return <Td>{`${x.diaLabel}`}</Td>;
+                  const _total = total.filter(
+                    (tot) => tot.data == dia.data
+                  ).length;
+                  if (dias[dias.length - 1] == dia) {
+                    return <Td borderBottomRightRadius="10px">{_total}</Td>;
+                  } else return <Td>{_total}</Td>;
+                })}
             </Tr>
           </Tfoot>
         </Table>

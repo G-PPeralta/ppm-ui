@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
 import {
@@ -9,7 +9,6 @@ import {
   useColorModeValue,
   Text,
   FormControl,
-  FormLabel,
   Select,
   Button,
 } from "@chakra-ui/react";
@@ -28,12 +27,21 @@ import { TabelaLookahead } from "./components/TabelaLookahead";
 export function Lookahead() {
   const { projetos } = useLookahead();
   const [atividades, setAtividades] = useState<AtividadesLookahead[]>();
-  // const [projects, setProjetcs] = useState<Projetos[]>();
-  // const [projectsFiltered, setProjetcsFiltered] = useState<Projetos[]>();
-  async function handleProjectChange(id: string) {
-    const act = await getAtividades(+id);
+  const [idProject, setIdProject] = useState<string>("0");
+
+  async function handleProjectChange() {
+    const act = await getAtividades(+idProject);
     setAtividades(act);
   }
+
+  const getAllActivities = async () => {
+    const act = await getAtividades(0);
+    setAtividades(act);
+  };
+
+  useEffect(() => {
+    getAllActivities();
+  }, []);
 
   return (
     <div>
@@ -64,21 +72,36 @@ export function Lookahead() {
               <Flex direction="column">
                 <Text fontWeight="bold">Relatorio Lookahead</Text>
                 <Flex direction="row" justifyContent="flex-end">
-                  <Flex>
+                  <Flex direction="row" justifyContent="flex-end">
                     <FormControl>
-                      <FormLabel>Projeto</FormLabel>
+                      <Text
+                        fontWeight={"bold"}
+                        fontSize={"12px"}
+                        color={"#949494"}
+                      >
+                        Projeto
+                      </Text>
                       <Select
-                        placeholder="Select option"
-                        onChange={(e) => handleProjectChange(e.target.value)}
+                        fontWeight={"bold"}
+                        color={"#949494"}
+                        placeholder="Projeto"
+                        onChange={(e) => setIdProject(e.target.value)}
                       >
                         {projetos &&
-                          projetos.map((d) => (
-                            <option value={d.id}>{d.nome_projeto}</option>
+                          projetos.map((d, k) => (
+                            <option key={k} value={d.id}>
+                              {d.nome_projeto.length > 20
+                                ? `${d.id} - ${d.nome_projeto.substring(
+                                    0,
+                                    17
+                                  )}...`
+                                : `${d.id} - ${d.nome_projeto}`}
+                            </option>
                           ))}
                       </Select>
                     </FormControl>
 
-                    <FormControl className="toBottom">
+                    <Flex alignItems="flex-end" marginLeft="16px">
                       <Button
                         color="white"
                         background="origem.300"
@@ -87,16 +110,16 @@ export function Lookahead() {
                           background: "origem.500",
                           transition: "all 0.4s",
                         }}
-                        // onClick={filterByProject}
+                        onClick={handleProjectChange}
                         rightIcon={<FiSearch />}
                       >
-                        Buscar
+                        Filtrar
                       </Button>
-                    </FormControl>
+                    </Flex>
                   </Flex>
                 </Flex>
 
-                <Flex>
+                <Flex justifyContent="flex-end">
                   {atividades && <TabelaLookahead data={atividades} />}
                 </Flex>
               </Flex>

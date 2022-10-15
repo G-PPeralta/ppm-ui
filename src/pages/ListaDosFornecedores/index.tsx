@@ -143,7 +143,7 @@ export function Fornecedores() {
                         borderColor: "#0047BB",
                       }}
                       onClick={() => {
-                        navigate("/providers-registration");
+                        navigate("/cadastrar-fornecedor");
                       }}
                       mb={"15px"}
                     >
