@@ -21,6 +21,7 @@ export function useBudgetDetail(id: string | null) {
 
   const gerarBudgetsList = async () => {
     const data = await getBudgetDetail(id);
+
     setBudgets(data.list);
     setBudgetsFilter(data.list);
 

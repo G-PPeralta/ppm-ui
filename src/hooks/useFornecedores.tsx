@@ -27,6 +27,7 @@ export function useFornecedores() {
 
     onSubmit: async (values) => {
       const newValues = {
+        nomefornecedor: values.fornecedor,
         fornecedor: values.fornecedor,
         orcamento: values.orcamento,
         realizado: values.realizado,

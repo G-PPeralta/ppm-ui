@@ -8,7 +8,7 @@ export const cadastroValorPlanejadoSchema = yup.object({
   gasto: yup.number().required("Valor Gasto é obrigatório").max(1000000000000),
   data: yup
     .date()
-    .min(new Date(), "Data minima é hoje.")
+    .max(new Date(), "Data maxima é hoje.")
     .required("Data é Requerida"),
   fornecedor: yup.string().required("Fornecedor é Requerido"),
   servico: yup.string().required("Servico é Requerido"),
