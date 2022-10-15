@@ -75,38 +75,39 @@ export function TabelaPriorizacao() {
   return (
     <>
       <Flex direction={"column"} w={"100%"}>
-        <TableContainer
-          mt={4}
-          mb={4}
-          borderRadius={"10px"}
-          // overflowX={"scroll"}
-        >
-          <Table variant="striped" colorScheme={"strippedGray"}>
-            <Thead>
-              <Tr background={"origem.500"}>
-                <Th color="white" textAlign={"center"}>
-                  ID
-                </Th>
-                <Th color="white" textAlign={"center"}>
-                  Priorizações
-                </Th>
-                {/* <Th
+        <Flex direction={"column"} flex={1}>
+          <TableContainer
+            mt={4}
+            mb={4}
+            borderRadius={"10px"}
+            // overflowX={"scroll"}
+          >
+            <Table variant="striped" colorScheme={"strippedGray"}>
+              <Thead>
+                <Tr background={"origem.500"}>
+                  <Th color="white" textAlign={"center"}>
+                    ID
+                  </Th>
+                  <Th color="white" textAlign={"center"}>
+                    Priorizações
+                  </Th>
+                  {/* <Th
                   textAlign={"center"}
 
                 >
                   Área responsável
                 </Th> */}
-                <Th color="white" textAlign={"center"}>
-                  Ações
-                </Th>
-              </Tr>
-            </Thead>
-            <Tbody
-            //  scrollBehavior={"smooth"}
-            >
-              {tableData}
-            </Tbody>
-            {/* <Tfoot>
+                  <Th color="white" textAlign={"center"}>
+                    Ações
+                  </Th>
+                </Tr>
+              </Thead>
+              <Tbody
+              //  scrollBehavior={"smooth"}
+              >
+                {tableData}
+              </Tbody>
+              {/* <Tfoot>
               <Tr background={"origem.500"}>
                 <Th background={"origem.500"} color="transparent">
                   total
@@ -115,11 +116,12 @@ export function TabelaPriorizacao() {
                 <Th background={"origem.500"} color="white"></Th>
               </Tr>
             </Tfoot> */}
-          </Table>
-        </TableContainer>
+            </Table>
+          </TableContainer>
 
-        <Flex>
-          <PaginacaoTabela data={data} fromTo={fromTo} />
+          <Flex>
+            <PaginacaoTabela data={data} fromTo={fromTo} />
+          </Flex>
         </Flex>
       </Flex>
     </>

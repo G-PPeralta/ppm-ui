@@ -53,9 +53,12 @@ function ModalCadastrarPriorizacao() {
           color: "#0047BB",
           border: "#0047BB solid 1px",
         }}
-        borderTopRadius={"8px"}
+        borderRadius={"8px"}
         h={"56px"}
         w={"121px"}
+        fontSize={"18px"}
+        fontFamily={"Mulish"}
+        fontWeight={"700"}
       >
         Cadastrar
       </Button>
@@ -107,7 +110,7 @@ function ModalCadastrarPriorizacao() {
                             <Input
                               maxLength={30}
                               ml={"3px"}
-                              w={"400px"}
+                              w={"93%"}
                               h={"56px"}
                               fontSize={"14px"}
                               color={"black"}
@@ -153,7 +156,7 @@ function ModalCadastrarPriorizacao() {
                               id="pit"
                               name="pit"
                               placeholder="Selecione"
-                              w={"480px"}
+                              w={"93%"}
                               h={"56px"}
                               fontSize={"14px"}
                               color={"black"}

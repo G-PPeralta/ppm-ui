@@ -42,6 +42,8 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
     getData();
   }, []);
 
+  useEffect(() => {}, [getData()]);
+
   const fromTo = {
     from,
     to,
@@ -60,11 +62,16 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
         <Td textAlign={"center"} fontWeight={"semibold"}>
           {op.nom_opcao}
         </Td>
-        <Td textAlign={"center"} fontWeight={"semibold"}>
+        <Td
+          textAlign={"center"}
+          fontWeight={"semibold"}
+          width={"186px"}
+          height={"56px"}
+        >
           {op.num_nota}
         </Td>
         <Td
-          width={"104px"}
+          width={"74px"}
           height={"56px"}
           textAlign={"center"}
           fontWeight={"semibold"}
