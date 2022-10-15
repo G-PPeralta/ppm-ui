@@ -12,9 +12,11 @@ import {
   Tfoot,
 } from "@chakra-ui/react";
 import { Totalizacao } from "interfaces/Budgets";
+import moment from "moment";
 
 import { formatDate } from "utils/formatDate";
 import { formatReal } from "utils/formatReal";
+import { formatUSD } from "utils/formatUSD";
 Moment.globalLocale = "pt-br";
 
 export function TotalTable(props: { data: Totalizacao | undefined }) {
@@ -62,7 +64,9 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
               <Td>Dias de Operação</Td>
               <Td></Td>
               <Td>
-                <Moment from={data?.inicio} date={data?.fim} />
+                <Moment diff={moment(data?.inicio)} unit="days">
+                  {moment(data?.fim).toISOString()}
+                </Moment>
               </Td>
             </Tr>
 
@@ -74,7 +78,7 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
             <Tr>
               <Td>Custo Diario Acumulado US$</Td>
               <Td></Td>
-              <Td>{formatReal(data?.custoDiarioTotalUSD || 0)}</Td>
+              <Td>{formatUSD(data?.custoDiarioTotalUSD || 0)}</Td>
             </Tr>
 
             <Tr>
@@ -86,7 +90,7 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
             <Tr>
               <Td>Custo Total Realizado US$</Td>
               <Td></Td>
-              <Td>{formatReal(data?.custoTotalRealizadoUSD || 0)}</Td>
+              <Td>{formatUSD(data?.custoTotalRealizadoUSD || 0)}</Td>
             </Tr>
 
             <Tr>
@@ -96,18 +100,24 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
             </Tr>
 
             <Tr>
-              <Td>Custo Total Previsto U$</Td>
+              <Td>Custo Total Previsto US$</Td>
               <Td></Td>
-              <Td>{formatReal(data?.custoTotalTotalPrevistoUSD || 0)}</Td>
+              <Td>{formatUSD(data?.custoTotalTotalPrevistoUSD || 0)}</Td>
             </Tr>
           </Tbody>
           <Tfoot>
             <Tr backgroundColor={"blue"} color="white">
+              <Th colSpan={2} color="white">
+                Total R$
+              </Th>
+              <Th color="white">{formatReal(data?.totalBRL || 0)}</Th>
+            </Tr>
+            <Tr backgroundColor={"blue"} color="white">
               <Th colSpan={2} color="white" borderBottomLeftRadius={"10px"}>
-                Total
+                Total US$
               </Th>
               <Th color="white" borderBottomRightRadius={"10px"}>
-                -
+                {formatUSD(data?.totalUSD || 0)}
               </Th>
             </Tr>
           </Tfoot>

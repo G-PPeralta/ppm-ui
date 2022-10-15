@@ -34,7 +34,7 @@ import { useCadastroOrcamentoPlanejado } from "hooks/useCadastroOrcamentoPlaneja
 
 function ModalGestaoDeCusto(props: { projeto: Projeto }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, setAtividade, fornecedores } =
+  const { registerForm, loading, setAtividade, fornecedores, classesSevicos } =
     useCadastroOrcamentoPlanejado();
   const { id } = props.projeto;
 
@@ -98,8 +98,8 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             isRequired
                             placeholder="Valor Gasto"
                             id="gasto"
-                            type="number"
                             name="gasto"
+                            type={"number"}
                             value={registerForm.values.gasto}
                             onChange={registerForm.handleChange}
                           />
@@ -119,13 +119,14 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             type="date"
                             id="data"
                             name="data"
+                            max="9999-12-31"
+                            maxLength={1}
                             value={registerForm.values.data}
                             onChange={registerForm.handleChange}
                           />
-                          {registerForm.errors.data &&
-                            registerForm.touched.data && (
-                              <TextError>{registerForm.errors.data}</TextError>
-                            )}
+                          {registerForm.errors.data && (
+                            <TextError>{registerForm.errors.data}</TextError>
+                          )}
                         </FormControl>
                       </Flex>
                       <FormControl>
@@ -134,7 +135,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                           <FormLabel htmlFor="fornecedor">Fornecedor</FormLabel>
                         </Flex>
                         <Select
-                          placeholder="Escolha um Forncedor"
+                          placeholder="Escolha um Fornecedor"
                           id="fornecedor"
                           name="fornecedor"
                           value={registerForm.values.fornecedor}
@@ -146,12 +147,11 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             ))}
                         </Select>
 
-                        {registerForm.errors.fornecedor &&
-                          registerForm.touched.fornecedor && (
-                            <TextError>
-                              {registerForm.errors.fornecedor}
-                            </TextError>
-                          )}
+                        {registerForm.errors.fornecedor && (
+                          <TextError>
+                            {registerForm.errors.fornecedor}
+                          </TextError>
+                        )}
                       </FormControl>
                       <Flex
                         flexDirection={useBreakpointValue({
@@ -174,16 +174,14 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             value={registerForm.values.servico}
                             onChange={registerForm.handleChange}
                           >
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
+                            {classesSevicos &&
+                              classesSevicos.map((d) => (
+                                <option value={d.id}>{d.classe_servico}</option>
+                              ))}
                           </Select>
-                          {registerForm.errors.servico &&
-                            registerForm.touched.servico && (
-                              <TextError>
-                                {registerForm.errors.servico}
-                              </TextError>
-                            )}
+                          {registerForm.errors.servico && (
+                            <TextError>{registerForm.errors.servico}</TextError>
+                          )}
                         </FormControl>
                         <FormControl>
                           <Flex gap={1}>
@@ -196,15 +194,19 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             name="pedido"
                             value={registerForm.values.pedido}
                             onChange={registerForm.handleChange}
+                            onKeyPress={(e) => {
+                              // eslint-disable-next-line prefer-regex-literals
+                              const r = new RegExp(/[a-zA-Z0-9]/);
+                              if (!r.test(e.key)) {
+                                e.preventDefault();
+                              }
+                            }}
                             size="md"
                             type="text"
                           />
-                          {registerForm.errors.pedido &&
-                            registerForm.touched.pedido && (
-                              <TextError>
-                                {registerForm.errors.pedido}
-                              </TextError>
-                            )}
+                          {registerForm.errors.pedido && (
+                            <TextError>{registerForm.errors.pedido}</TextError>
+                          )}
                         </FormControl>
                       </Flex>
 
@@ -223,12 +225,11 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                           onChange={registerForm.handleChange}
                         />
 
-                        {registerForm.errors.pedido_obs &&
-                          registerForm.touched.pedido_obs && (
-                            <TextError>
-                              {registerForm.errors.pedido_obs}
-                            </TextError>
-                          )}
+                        {registerForm.errors.pedido_obs && (
+                          <TextError>
+                            {registerForm.errors.pedido_obs}
+                          </TextError>
+                        )}
                       </FormControl>
                     </Flex>
                   </Stack>

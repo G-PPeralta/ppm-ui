@@ -9,7 +9,7 @@ import { getBudgetDetail } from "services/get/GetBudget";
 export function useBudgetDetail(id: string | null) {
   // const { toast } = useToast();
 
-  //  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading
   const [, /* budgets */ setBudgets] = useState<BudgetDetail[]>([]);
   // const [projects, setProjects] = useState<Project[]>([]);
   const [budgetFilter, setBudgetsFilter] = useState<BudgetDetail[]>([]);
@@ -26,6 +26,7 @@ export function useBudgetDetail(id: string | null) {
 
     setTitulo(data.titulo);
     setTotalizacao(data.totalizacao);
+    setLoading(false);
   };
 
   /* const filterByProject = () => {
@@ -53,7 +54,7 @@ export function useBudgetDetail(id: string | null) {
 
   return {
     budgetFilter,
-    // loading,
+    loading,
     wd,
     // projects,
     titulo,
