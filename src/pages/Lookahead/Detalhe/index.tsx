@@ -57,7 +57,7 @@ export function LookaheadDetalhe() {
     });
 
     changeWeek(`${diaInicial} - ${diaFinal}`);
-    const monday2 = new Date(today.setDate(first + 8));
+    const monday2 = new Date(today.setDate(first + 7));
     const sunday2 = new Date(today.setDate(last + 8));
     const diaInicial2 = dataBr.format(monday2);
     const diaFinal2 = dataBr.format(sunday2);

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { FiPrinter } from "react-icons/fi";
 
 import {
   Button,
@@ -15,6 +14,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FerramentasAtividade } from "interfaces/lookahead";
+import { CSVLink } from "react-csv";
+import { FaFileCsv } from "react-icons/fa";
 
 interface TableProps {
   semana?: string;
@@ -33,6 +34,13 @@ interface FerramentaDiaHora {
   hora: string;
   tipo?: string;
 }
+
+const headers = [
+  { label: "nome", key: "nome" },
+  { label: "dia", key: "dia" },
+  { label: "hora", key: "hora" },
+  { label: "tipo", key: "tipo" },
+];
 
 export function TabelaFerramentas(props: TableProps) {
   const { semana, data } = props;
@@ -96,19 +104,26 @@ export function TabelaFerramentas(props: TableProps) {
               >
                 <Flex justifyContent="space-between" alignItems="center">
                   <Text>Ferramentas</Text>
-                  <Button
-                    variant="ghost"
-                    colorScheme="messenger"
-                    color="white"
-                    rightIcon={<FiPrinter />}
-                    _hover={{
-                      background: "white",
-                      transition: "all 0.4s",
-                      color: "rgb(46, 105, 253)",
-                    }}
-                  >
-                    Exportar
-                  </Button>
+                  {ferramentasData && (
+                    <CSVLink
+                      data={ferramentasData.filter((x) => x.tipo == "f")}
+                      headers={headers}
+                    >
+                      <Button
+                        variant="ghost"
+                        colorScheme="messenger"
+                        color="white"
+                        rightIcon={<FaFileCsv />}
+                        _hover={{
+                          background: "white",
+                          transition: "all 0.4s",
+                          color: "rgb(46, 105, 253)",
+                        }}
+                      >
+                        Exportar
+                      </Button>
+                    </CSVLink>
+                  )}
                 </Flex>
               </Th>
             </Tr>

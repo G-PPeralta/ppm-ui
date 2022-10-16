@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { FiPrinter } from "react-icons/fi";
 
 import {
   Button,
@@ -15,6 +14,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FerramentaServico } from "interfaces/lookahead";
+import { FaFileCsv } from "react-icons/fa";
+import { CSVLink } from "react-csv";
 
 interface TableProps {
   semana?: string;
@@ -22,9 +23,9 @@ interface TableProps {
 }
 
 class DiasSemana {
-  diaLabel: string = "";
-  data?: string = "";
-  hora?: number = undefined;
+  label: string = "";
+  data: string = "";
+  key: string = "nome";
 }
 
 interface AtividadeDiaHora {
@@ -39,6 +40,12 @@ class Totais {
   hora: string = "";
 }
 
+const headers = [
+  { label: "nome", key: "nome" },
+  { label: "dataIni", key: "dataIni" },
+  { label: "horaIni", key: "horaIni" },
+  { label: "tipo", key: "tipo" },
+];
 export function TabelaAtividades(props: TableProps) {
   const { semana, data } = props;
   const [, setSem] = useState<string>();
@@ -69,7 +76,7 @@ export function TabelaAtividades(props: TableProps) {
       const realDay = dataBr.format(new Date().setDate(+dia));
       const diaSemana: DiasSemana = new DiasSemana();
       const _dia = realDay.split("/")[0];
-      diaSemana.diaLabel = _dia + "/" + realDay.split("/")[1];
+      diaSemana.label = _dia + "/" + realDay.split("/")[1];
       diaSemana.data = realDay;
       weekDays.push(diaSemana);
     }
@@ -106,7 +113,6 @@ export function TabelaAtividades(props: TableProps) {
       });
     setAtividades(atividadesGrid);
     setDias(weekDays);
-
     const arrTotais: Totais[] = [];
 
     atividadesGrid.forEach((x) => {
@@ -157,19 +163,23 @@ export function TabelaAtividades(props: TableProps) {
               >
                 <Flex justifyContent="space-between" alignItems="center">
                   <Text>Atividade</Text>
-                  <Button
-                    variant="ghost"
-                    colorScheme="messenger"
-                    color="white"
-                    rightIcon={<FiPrinter />}
-                    _hover={{
-                      background: "white",
-                      transition: "all 0.4s",
-                      color: "rgb(46, 105, 253)",
-                    }}
-                  >
-                    Exportar
-                  </Button>
+                  {atividades && (
+                    <CSVLink data={atividades} headers={headers}>
+                      <Button
+                        variant="ghost"
+                        colorScheme="messenger"
+                        color="white"
+                        rightIcon={<FaFileCsv />}
+                        _hover={{
+                          background: "white",
+                          transition: "all 0.4s",
+                          color: "rgb(46, 105, 253)",
+                        }}
+                      >
+                        Exportar
+                      </Button>
+                    </CSVLink>
+                  )}
                 </Flex>
               </Th>
             </Tr>
@@ -177,7 +187,7 @@ export function TabelaAtividades(props: TableProps) {
               <Th>BRT</Th>
               {dias &&
                 dias.map(function (x) {
-                  return <Th>{`${x.diaLabel}`}</Th>;
+                  return <Th>{`${x.label}`}</Th>;
                 })}
             </Tr>
           </Thead>
