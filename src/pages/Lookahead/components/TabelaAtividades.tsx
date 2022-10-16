@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { CSVLink } from "react-csv";
+import { FaFileCsv } from "react-icons/fa";
 
 import {
   Button,
@@ -14,8 +16,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FerramentaServico } from "interfaces/lookahead";
-import { FaFileCsv } from "react-icons/fa";
-import { CSVLink } from "react-csv";
 
 interface TableProps {
   semana?: string;
