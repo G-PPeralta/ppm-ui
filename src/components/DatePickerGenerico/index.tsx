@@ -5,27 +5,21 @@ import { Button, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-function DatePickerDataInicioGenerico({ registerForm, data, propName }: any) {
+function DatePickerGenerico({ registerForm, data, propName, nomeLabel }: any) {
   const [dataInicio, setDataInicio] = useState<any>("");
-  // const [dataMin, setDataMin] = useState<any>("");
 
   useEffect(() => {
     if (data) {
       const newDate = new Date(data);
-      newDate.setDate(newDate.getDate());
       setDataInicio(newDate);
-      // setDataMin(newDate);
-    } else {
-      // const newDate = new Date();
-      // setDataMin(newDate);
     }
   }, []);
 
-  const handleIniciarDate = (date: any) => {
-    if (date) {
-      date.setHours(9, 0, 0, 0);
-      setDataInicio(date);
-      registerForm.setFieldValue(propName, date);
+  const handleIniciarDate = (dataSelecionada: any) => {
+    if (dataSelecionada) {
+      dataSelecionada.setHours(9, 0, 0, 0);
+      setDataInicio(dataSelecionada);
+      registerForm.setFieldValue(propName, dataSelecionada);
     }
   };
 
@@ -49,21 +43,19 @@ function DatePickerDataInicioGenerico({ registerForm, data, propName }: any) {
       <Flex gap={1}>
         <RequiredField />
         <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
-          DATA INÍCIO
+          {nomeLabel}
         </Text>
       </Flex>
       <ReactDatePicker
         selected={dataInicio}
-        // minDate={dataMin}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
         // showTimeSelect
         dateFormat="dd/MM/yyyy, hh:mm"
         customInput={<TriggerDatePickerInicio />}
-        // isClearable={dataInicio !== ""}
       />
     </Flex>
   );
 }
 
-export default DatePickerDataInicioGenerico;
+export default DatePickerGenerico;

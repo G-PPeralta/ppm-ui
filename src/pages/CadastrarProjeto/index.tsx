@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-import DatePickerDataInicioGenerico from "components/DatePickerGenerico";
+import DatePickerGenerico from "components/DatePickerGenerico";
 import InputGenerico from "components/InputGenerico";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
@@ -172,9 +172,11 @@ function CadastrarProjeto() {
                     />
                   </Flex>
                   <Flex flex={1}>
-                    <DatePickerDataInicioGenerico
+                    <DatePickerGenerico
+                      nomeLabel={"DATA INÍCIO"}
                       registerForm={registerForm}
                       propName={"dataInicio"}
+                      data={registerForm.values.dataInicio}
                     />
                   </Flex>
                 </Flex>
