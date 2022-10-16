@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { FiPrinter } from "react-icons/fi";
+import { CSVLink } from "react-csv";
+import { FaFileCsv } from "react-icons/fa";
 
 import {
   Button,
@@ -33,6 +34,12 @@ interface ServicoDiaHora {
   hora: string;
   tipo: string;
 }
+const headers = [
+  { label: "nome", key: "nome" },
+  { label: "dia", key: "dia" },
+  { label: "hora", key: "hora" },
+  { label: "tipo", key: "tipo" },
+];
 
 export function TabelaServicos(props: TableProps) {
   const { semana, data } = props;
@@ -97,19 +104,26 @@ export function TabelaServicos(props: TableProps) {
               >
                 <Flex justifyContent="space-between" alignItems="center">
                   <Text>Serviços</Text>
-                  <Button
-                    variant="ghost"
-                    colorScheme="messenger"
-                    color="white"
-                    rightIcon={<FiPrinter />}
-                    _hover={{
-                      background: "white",
-                      transition: "all 0.4s",
-                      color: "rgb(46, 105, 253)",
-                    }}
-                  >
-                    Exportar
-                  </Button>
+                  {servicosData && (
+                    <CSVLink
+                      data={servicosData.filter((x) => x.tipo == "s")}
+                      headers={headers}
+                    >
+                      <Button
+                        variant="ghost"
+                        colorScheme="messenger"
+                        color="white"
+                        rightIcon={<FaFileCsv />}
+                        _hover={{
+                          background: "white",
+                          transition: "all 0.4s",
+                          color: "rgb(46, 105, 253)",
+                        }}
+                      >
+                        Exportar
+                      </Button>
+                    </CSVLink>
+                  )}
                 </Flex>
               </Th>
             </Tr>

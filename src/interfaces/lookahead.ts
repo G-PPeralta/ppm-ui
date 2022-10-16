@@ -75,6 +75,7 @@ export interface ServicosAtividade {
 export interface CreateServicoFerramenta {
   nome: string;
   atividade_id: number;
-  data_hora: string;
+  data: string;
+  hora: string;
   anotacoes?: string;
 }
