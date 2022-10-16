@@ -30,6 +30,7 @@ export function useProjetos() {
   const { toast } = useToast();
 
   const [loading, setLoading] = useState(false);
+  const [refresh, setRefresh] = useState(false);
   const [listaResponsaveis, setListaResponsaveis] = useState<any>([]);
   const [listaCoordenadores, setListaCoordenadores] = useState<any>([]);
   const [listaPolos, setListaPolos] = useState<any>([]);
@@ -43,78 +44,137 @@ export function useProjetos() {
   const [listaTipoProjetos, setListaTipoProjetos] = useState<any>([]);
   const [listaGates, setListaGates] = useState<any>([]);
 
+  const refreshState = {
+    refresh,
+    setRefresh,
+  };
+
+  const addOutroFinalArray = (array: any, nomeChave: string) => {
+    const outro: any = {
+      id: 0,
+      [nomeChave]: "Outro",
+      deletado: false,
+    };
+
+    const arrayComOutroAoFinalArray: any = [...array, outro];
+
+    return arrayComOutroAoFinalArray;
+  };
+
   const reqGet = async () => {
     const responsaveis = await getResponsaveis();
     const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
       a.nome.localeCompare(b.nome)
     );
-    setListaResponsaveis(responsaveisSorted);
+    const responsaveisComOutrosAoFinalArray = addOutroFinalArray(
+      responsaveisSorted,
+      "nome"
+    );
+    setListaResponsaveis(responsaveisComOutrosAoFinalArray);
 
     const coordenadores = await getCoordenadores();
     const coordenadoresSorted = coordenadores.data.sort((a: any, b: any) =>
       a.coordenadorNome.localeCompare(b.coordenadorNome)
     );
-    setListaCoordenadores(coordenadoresSorted);
+    const coordenadoresComOutrosAoFinalArray = addOutroFinalArray(
+      coordenadoresSorted,
+      "coordenadorNome"
+    );
+    setListaCoordenadores(coordenadoresComOutrosAoFinalArray);
 
     const polos = await getPolo();
     const polosSorted = polos.data.sort((a: any, b: any) =>
       a.polo.localeCompare(b.polo)
     );
-    setListaPolos(polosSorted);
+    const polosComOutrosAoFinalArray = addOutroFinalArray(polosSorted, "polo");
+    setListaPolos(polosComOutrosAoFinalArray);
 
     const locais = await getLocalProjeto();
     const locaisSorted = locais.data.sort((a: any, b: any) =>
       a.local.localeCompare(b.local)
     );
-    setListaLocais(locaisSorted);
+    const locaisComOutrosAoFinalArray = addOutroFinalArray(
+      locaisSorted,
+      "local"
+    );
+    setListaLocais(locaisComOutrosAoFinalArray);
 
     const solicitantes = await getSolicitante();
     const solicitantesSorted = solicitantes.data.sort((a: any, b: any) =>
       a.solicitante.localeCompare(b.solicitante)
     );
-    setListaSolicitantes(solicitantesSorted);
+    const solicitantesComOutrosAoFinalArray = addOutroFinalArray(
+      solicitantesSorted,
+      "solicitante"
+    );
+    setListaSolicitantes(solicitantesComOutrosAoFinalArray);
 
     const prioridades = await getPrioridade();
     const prioridadesSorted = prioridades.data.sort((a: any, b: any) =>
       a.prioridade.localeCompare(b.prioridade)
     );
-    setListaPrioridades(prioridadesSorted);
+    const prioridadesComOutrosAoFinalArray = addOutroFinalArray(
+      prioridadesSorted,
+      "prioridade"
+    );
+    setListaPrioridades(prioridadesComOutrosAoFinalArray);
 
     const status = await getStatusProjeto();
     const statusSorted = status.data.sort((a: any, b: any) =>
       a.status.localeCompare(b.status)
     );
-    setListaStatus(statusSorted);
+    const statusComOutrosAoFinalArray = addOutroFinalArray(
+      statusSorted,
+      "status"
+    );
+    setListaStatus(statusComOutrosAoFinalArray);
 
     const complexidades = await getComplexidade();
     const complexidadesSorted = complexidades.data.sort((a: any, b: any) =>
       a.complexidade.localeCompare(b.complexidade)
     );
+    // const complexidadesComOutrosAoFinalArray = addOutroFinalArray(
+    //   complexidadesSorted,
+    //   "complexidade"
+    // );
     setListaComplexidades(complexidadesSorted);
 
     const divisoes = await getDivisao();
     const divisoesSorted = divisoes.data.sort((a: any, b: any) =>
       a.divisao.localeCompare(b.divisao)
     );
-    setListaDivisoes(divisoesSorted);
+    const divisoesComOutrosAoFinalArray = addOutroFinalArray(
+      divisoesSorted,
+      "divisao"
+    );
+    setListaDivisoes(divisoesComOutrosAoFinalArray);
 
     const classificacoes = await getClassificacao();
     const classificacoesSorted = classificacoes.data.sort((a: any, b: any) =>
       a.classificacao.localeCompare(b.classificacao)
     );
-    setListaClassificacoes(classificacoesSorted);
+    const classificacoesComOutrosAoFinalArray = addOutroFinalArray(
+      classificacoesSorted,
+      "classificacao"
+    );
+    setListaClassificacoes(classificacoesComOutrosAoFinalArray);
 
     const tipoProjetos = await getTipoProjeto();
     const tipoProjetosSorted = tipoProjetos.data.sort((a: any, b: any) =>
       a.tipo.localeCompare(b.tipo)
     );
-    setListaTipoProjetos(tipoProjetosSorted);
+    const tipoProjetosComOutrosAoFinalArray = addOutroFinalArray(
+      tipoProjetosSorted,
+      "tipo"
+    );
+    setListaTipoProjetos(tipoProjetosComOutrosAoFinalArray);
 
     const gates = await getGate();
     const gatesSorted = gates.data.sort((a: any, b: any) =>
       a.gate.localeCompare(b.gate)
     );
-    setListaGates(gatesSorted);
+    const gatesComOutrosAoFinalArray = addOutroFinalArray(gatesSorted, "gate");
+    setListaGates(gatesComOutrosAoFinalArray);
   };
 
   const optionsResponsaveis = listaResponsaveis.map((responsavel: any) => ({
@@ -181,22 +241,22 @@ export function useProjetos() {
 
   const initialValues: any = {
     nom_usu_create: user?.nome,
-    responsavelId: 0,
-    coordenadorId: 0,
-    poloId: 0,
-    localId: 0,
-    solicitanteId: 0,
+    responsavelId: -1,
+    coordenadorId: -1,
+    poloId: -1,
+    localId: -1,
+    solicitanteId: -1,
     prioridadeId: 1,
-    statusId: 0,
+    statusId: -1,
     nomeProjeto: "",
     elementoPep: "",
     dataInicio: "",
     capexPrevisto: 0,
-    complexidadeId: 0,
-    divisaoId: 0,
-    classificacaoId: 0,
-    tipoProjetoId: 0,
-    gateId: 0,
+    complexidadeId: -1,
+    divisaoId: -1,
+    classificacaoId: -1,
+    tipoProjetoId: -1,
+    gateId: -1,
     descricao: "",
     justificativa: "",
     comentarios: "",
@@ -255,6 +315,10 @@ export function useProjetos() {
   }, []);
 
   useEffect(() => {
+    reqGet();
+  }, [refresh]);
+
+  useEffect(() => {
     if (loading) {
       setLoading(false);
     }
@@ -263,6 +327,7 @@ export function useProjetos() {
   return {
     registerForm,
     loading,
+    refreshState,
     optionsResponsaveis,
     optionsCoordenadores,
     optionsPolos,
