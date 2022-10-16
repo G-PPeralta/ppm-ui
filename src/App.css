@@ -43,8 +43,14 @@ table {
 table td, table th {
   border: 0.5px solid #A7A7A7;
 }
+table td, table:first-child th {
+  border-left: 0;
+  border-right: 0;
+}
 table tr:first-child th {
   border-top: 0.5 solid #0047BB;
+  border-left: 0;
+  border-right: 0;
 }
 table tr:last-child td {
   border-top: 0.5 solid #0047BB;

@@ -89,13 +89,8 @@ export function useRequests(id?: number) {
 
   useEffect(() => {
     reqGet();
+    setLoading(false);
   }, []);
-
-  useEffect(() => {
-    if (listaFinanceiroProjetos.length > 0 && listaCentroCustoProjetos) {
-      setLoading(false);
-    }
-  }, [listaFinanceiroProjetos, listaCentroCustoProjetos]);
 
   return {
     loading,

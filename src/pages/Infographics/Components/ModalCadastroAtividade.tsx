@@ -29,7 +29,8 @@ import Restricoes from "./Restricoes";
 
 function ModalCadastroAtividade() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaResponsaveis } = useCadastroAtividade();
+  const { registerForm, loading, listaResponsaveis, listaAreaAtuacao } =
+    useCadastroAtividade();
   const [refresh, setRefresh] = useState(false);
 
   const optionsResponsaveis = listaResponsaveis.map(
@@ -38,6 +39,11 @@ function ModalCadastroAtividade() {
       label: responsavel.nome,
     })
   );
+
+  const optionsAreaAtuacao = listaAreaAtuacao.map((area: any) => ({
+    value: area.id,
+    label: area.tipo,
+  }));
 
   return (
     <>
@@ -190,7 +196,7 @@ function ModalCadastroAtividade() {
                           registerForm={registerForm}
                           nomeSelect={"ÁREA"}
                           propName={"area_atuacao"}
-                          options={optionsResponsaveis}
+                          options={optionsAreaAtuacao}
                           required={true}
                         />
                       </Flex>
