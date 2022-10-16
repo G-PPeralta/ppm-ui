@@ -16,7 +16,7 @@ import { useAuth } from "./useAuth";
 
 export function useCadastroCampanha() {
   const { toast } = useToast();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { user } = useAuth();
   const [listaSondas, setListaSondas] = useState<any[]>([]);
   const [listaServicosSondas, setListaServicosSondas] = useState<any[]>([]);
@@ -76,15 +76,9 @@ export function useCadastroCampanha() {
   });
 
   useEffect(() => {
-    setLoading(true);
     reqGet();
+    setLoading(false);
   }, []);
-
-  useEffect(() => {
-    if (listaSondas.length > 0) {
-      setLoading(false);
-    }
-  }, [listaSondas]);
 
   return {
     registerForm,
