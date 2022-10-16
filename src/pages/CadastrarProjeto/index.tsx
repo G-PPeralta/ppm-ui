@@ -1,18 +1,17 @@
 import { BsPlus } from "react-icons/bs";
-import { IoIosArrowBack } from "react-icons/io";
 
 import {
   Box,
   Button,
   Flex,
   Heading,
-  IconButton,
   NumberInput,
   NumberInputField,
   Text,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
+import BotaoSetaVoltar from "components/BotaoSetaVoltar/BotaoSetaVoltar";
 import DatePickerGenerico from "components/DatePickerGenerico";
 import InputGenerico from "components/InputGenerico";
 import { RequiredField } from "components/RequiredField/RequiredField";
@@ -69,21 +68,7 @@ function CadastrarProjeto() {
               borderRadius={{ base: "xl", sm: "xl" }}
             >
               <Flex align={"center"} gap={2} h={"56px"}>
-                <IconButton
-                  aria-label="Botão Voltar"
-                  icon={<IoIosArrowBack size={20} />}
-                  borderRadius={"10px"}
-                  background={"white"}
-                  color={"origem.500"}
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                  onClick={() => {
-                    window.history.back();
-                  }}
-                />
+                <BotaoSetaVoltar />
                 <Heading as="h3" size="md" textAlign={"center"}>
                   Cadastrar Projeto
                 </Heading>
