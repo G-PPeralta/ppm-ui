@@ -83,7 +83,7 @@ function Statistics() {
           <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
             <Box
               py={{ base: "6", sm: "6" }}
-              px={{ base: "6", sm: "6" }}
+              px={{ base: "6", sm: "8" }}
               w={"100%"}
               bg={"white"}
               borderRadius={{ base: "xl", sm: "xl" }}
@@ -108,10 +108,10 @@ function Statistics() {
                 alignItems="flex-end"
                 justify={"space-between"}
                 gap={4}
-                flex={1}
+                flex={2}
               >
-                <Flex direction={"row"} flex={1} align={"end"} gap={2}>
-                  <Flex direction={"column"}>
+                <Flex align={"end"} gap={4} wrap={"wrap"} flex={1}>
+                  <Flex direction={"column"} flex={1}>
                     <Text
                       fontWeight={"bold"}
                       fontSize={"12px"}
@@ -150,7 +150,7 @@ function Statistics() {
                   </Flex>
                 </Flex>
 
-                <Flex gap={4} flex={2} justify={"end"} align={"end"}>
+                <Flex gap={4} flex={1} justify={"end"} align={"end"}>
                   {/* <ModalCadastrarSonda /> */}
                   {/* <ModalCadastroPoco /> */}
                   <ModalCadastroOperacao

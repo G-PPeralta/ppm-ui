@@ -39,7 +39,7 @@ export function StatisticsTable({ data }: Props) {
   return (
     <Flex direction={"column"} w={"100%"}>
       <TableContainer mt={4} mb={3} borderRadius={"10px"} overflowX={"scroll"}>
-        <Table variant="striped" colorScheme={"strippedGray"}>
+        <Table variant="striped" colorScheme="strippedGray">
           <Thead>
             <Tr background={"origem.500"}>
               <Th color="white" textAlign={"center"}>
