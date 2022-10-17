@@ -20,12 +20,16 @@ import { postAatualizarValorPrevisto } from "services/post/Budget";
 export default function CampoEditavel(props: { filho: BudgetDetail }) {
   const { planejado, projeto } = props.filho;
 
-  const save = (valor: string) => {
+  const save = async (valor: string) => {
     const data = {
-      valor,
+      valor: +valor,
       atividadeId: projeto.id,
     };
-    postAatualizarValorPrevisto(data);
+    const { status } = await postAatualizarValorPrevisto(data);
+
+    if (status == 200 || status == 201) {
+      location.reload();
+    }
   };
 
   /* Here's a custom control */

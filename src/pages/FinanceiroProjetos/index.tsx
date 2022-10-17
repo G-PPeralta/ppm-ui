@@ -59,7 +59,7 @@ export function FinanceiroProjetos() {
   return (
     <>
       <Sidebar>
-        {!loading && listaFinanceiroProjetos.length > 0 ? (
+        {!loading ? (
           <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
             <Box
               py={{ base: "6", sm: "6" }}

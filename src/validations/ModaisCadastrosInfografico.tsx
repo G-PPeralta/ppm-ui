@@ -78,13 +78,13 @@ export const cadastroPocoSchema = yup.object({
 });
 
 export const cadastroNovaCampanhaSchema = yup.object({
-  id_projeto: yup.string().min(3).required("O nome da campanha é obrigatório!"),
+  id_projeto: yup.string().required("O campo é obrigatório"),
   dsc_comentario: yup.string(),
 });
 
 export const cadastroNovaIntervencaoSchema = yup.object({
   id_campanha: yup.number().required().moreThan(0),
-  poco_id: yup.number().required().moreThan(0),
+  poco_id: yup.string().required(),
   projeto_tipo_id: yup.number().required().moreThan(0),
   dat_ini_prev: yup.string().required(),
   atividades: yup.array().of(
@@ -96,7 +96,7 @@ export const cadastroNovaIntervencaoSchema = yup.object({
     })
   ),
   comentarios: yup.string(),
-  erroDataIntervencao: yup.boolean().oneOf([false]),
+  // erroDataIntervencao: yup.boolean().oneOf([false]),
 });
 
 export const cadastroNovaAtividadeSchema = yup.object({

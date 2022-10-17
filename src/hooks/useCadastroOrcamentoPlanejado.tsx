@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
-import { BudgetReal } from "interfaces/Budgets";
+import { BudgetReal, ClasseServico } from "interfaces/Budgets";
 import { Fornecedor } from "interfaces/Services";
 import { cadastroValorPlanejadoSchema } from "validations/ModalCadastroOrcamento";
 
 import { useToast } from "contexts/Toast";
 
 import { getFornecedor } from "services/get/Fornecedor";
+import { getClassesServicos } from "services/get/GetBudget";
 import { postAddValorRealizado } from "services/post/Budget";
 
 import { useAuth } from "./useAuth";
@@ -18,14 +19,20 @@ export function useCadastroOrcamentoPlanejado() {
   const { user } = useAuth();
   const [atividade, setAtividade] = useState<number>(0);
   const [fornecedores, setFornecedores] = useState<Fornecedor[]>([]);
+  const [classesSevicos, setClassesSevicos] = useState<ClasseServico[]>([]);
 
   const listaFornecedores = async () => {
     const { data } = await getFornecedor();
     setFornecedores(data);
   };
 
+  const listaClasseServicos = async () => {
+    const { data } = await getClassesServicos();
+    setClassesSevicos(data);
+  };
+
   const initialValues = {
-    gasto: 0,
+    gasto: "",
     data: "",
     fornecedor: "",
     servico: "",
@@ -40,7 +47,7 @@ export function useCadastroOrcamentoPlanejado() {
     onSubmit: async (values) => {
       const newValues: BudgetReal = {
         atividadeId: atividade,
-        valor: values.gasto,
+        valor: +values.gasto,
         data: values.data,
         fornecedor: values.fornecedor,
         classeServico: values.servico,
@@ -58,9 +65,10 @@ export function useCadastroOrcamentoPlanejado() {
             id: "toast-principal",
           });
           setLoading(false);
+          location.reload();
         }
       } catch (error) {
-        toast.error(`Erro ao cadastrar valor previsto ${values.gasto}!`, {
+        toast.error(`Erro ao cadastrar valor gasto ${values.gasto}!`, {
           id: "toast-principal",
         });
         setLoading(false);
@@ -70,6 +78,7 @@ export function useCadastroOrcamentoPlanejado() {
 
   useEffect(() => {
     listaFornecedores();
+    listaClasseServicos();
   }, []);
 
   return {
@@ -77,5 +86,6 @@ export function useCadastroOrcamentoPlanejado() {
     loading,
     setAtividade,
     fornecedores,
+    classesSevicos,
   };
 }

@@ -2,7 +2,7 @@ import {
   FormControl,
   FormLabel,
   Input,
-  useBreakpointValue,
+  // useBreakpointValue,
 } from "@chakra-ui/react";
 
 import { TextError } from "components/TextError";
@@ -12,11 +12,14 @@ function FormElementoPep(projectsForm: any) {
     <FormControl>
       <FormLabel
         htmlFor="elemento_pep"
-        style={{ fontSize: "12px", color: "#A7A7A7" }}
+        fontSize={"12px"}
+        fontWeight={"700"}
+        color={"#949494"}
       >
         ELEMENTO PEP
       </FormLabel>
       <Input
+        maxLength={30}
         isRequired
         placeholder="Elemento PEP"
         id="elemento_pep"
@@ -24,8 +27,12 @@ function FormElementoPep(projectsForm: any) {
         name="elemento_pep"
         value={projectsForm.projectsForm.values.elemento_pep}
         onChange={projectsForm.projectsForm.handleChange}
-        w={useBreakpointValue({ base: "100%", md: "100%" })}
-        style={{ color: "#A7A7A7", fontSize: "14px" }}
+        mt={"-9px"}
+        h={"56px"}
+        w={"50%"}
+        border={"solid 1px #949494"}
+        fontSize={"14px"}
+        fontWeight={"400"}
       />
       {projectsForm.projectsForm.errors.elemento_pep &&
         projectsForm.projectsForm.touched.elemento_pep && (

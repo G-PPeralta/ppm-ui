@@ -158,23 +158,25 @@ export function Projects() {
                   </Flex>
                 </Flex>
                 <Flex flex={1} justify={"end"}>
-                  <Button
-                    h={"56px"}
-                    borderRadius={"10px"}
-                    background={"white"}
-                    border={"2px solid"}
-                    color={"origem.500"}
-                    _hover={{
-                      border: "2px solid",
-                      borderColor: "origem.500",
-                      background: "origem.500",
-                      transition: "all 0.4s",
-                      color: "white",
-                    }}
-                    rightIcon={<FiPlus />}
-                  >
-                    <Link to={"/projects-registration"}>Cadastrar Projeto</Link>
-                  </Button>
+                  <Link to={"/projetos/cadastro"}>
+                    <Button
+                      h={"56px"}
+                      borderRadius={"10px"}
+                      background={"white"}
+                      border={"2px solid"}
+                      color={"origem.500"}
+                      _hover={{
+                        border: "2px solid",
+                        borderColor: "origem.500",
+                        background: "origem.500",
+                        transition: "all 0.4s",
+                        color: "white",
+                      }}
+                      rightIcon={<FiPlus />}
+                    >
+                      Cadastrar Projeto
+                    </Button>
+                  </Link>
                 </Flex>
               </Flex>
 

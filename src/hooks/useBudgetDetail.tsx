@@ -2,33 +2,32 @@ import { useEffect, useState } from "react";
 
 // import { useToast } from "contexts/Toast";
 
-import { BudgetDetail } from "interfaces/Budgets";
+import { BudgetDetail, Titulo, Totalizacao } from "interfaces/Budgets";
 
-import { getBudgetDetail, getNomePoco } from "services/get/GetBudget";
+import { getBudgetDetail } from "services/get/GetBudget";
 
 export function useBudgetDetail(id: string | null) {
   // const { toast } = useToast();
 
-  //  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading
   const [, /* budgets */ setBudgets] = useState<BudgetDetail[]>([]);
   // const [projects, setProjects] = useState<Project[]>([]);
   const [budgetFilter, setBudgetsFilter] = useState<BudgetDetail[]>([]);
   // const [projectSelected, setProjectSelected] = useState("");
-  const [nomePoco, setNomePoco] = useState("");
-  const [nomeSonda, setNomeSonda] = useState("");
+  const [titulo, setTitulo] = useState<Titulo>();
+  const [totalizacao, setTotalizacao] = useState<Totalizacao>();
 
   const wd = window.innerWidth;
 
   const gerarBudgetsList = async () => {
     const data = await getBudgetDetail(id);
-    setBudgets(data);
-    setBudgetsFilter(data);
-  };
 
-  const getNome = async () => {
-    const ls = await getNomePoco(id);
-    setNomePoco(ls[0].poco_nome);
-    setNomeSonda(ls[0].sonda_nome);
+    setBudgets(data.list);
+    setBudgetsFilter(data.list);
+
+    setTitulo(data.titulo);
+    setTotalizacao(data.totalizacao);
+    setLoading(false);
   };
 
   /* const filterByProject = () => {
@@ -52,15 +51,14 @@ export function useBudgetDetail(id: string | null) {
 
   useEffect(() => {
     gerarBudgetsList();
-    getNome();
   }, []);
 
   return {
     budgetFilter,
-    // loading,
+    loading,
     wd,
     // projects,
-    nomePoco,
-    nomeSonda,
+    titulo,
+    totalizacao,
   };
 }

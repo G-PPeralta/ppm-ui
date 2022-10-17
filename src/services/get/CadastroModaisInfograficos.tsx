@@ -123,3 +123,12 @@ export async function getServicoDataIntervencaoId(
 
   return { data, status };
 }
+
+export async function getCoordenadores(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/coordenador", token());
+
+  return { data, status };
+}

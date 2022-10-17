@@ -6,6 +6,7 @@ import {
   Flex,
   FormControl,
   FormLabel,
+  Heading,
   Select,
   // FormLabel,
   // Input,
@@ -64,6 +65,9 @@ export function Budgets() {
               }}
               borderRadius={{ base: "none", sm: "xl" }}
             >
+              <Heading as="h2" size="lg" textAlign={"start"}>
+                Gerencial do Orçamento
+              </Heading>
               <Box display={wd > 100 ? "flex" : ""}>
                 <Stack spacing="6" w="100%">
                   <Stack spacing="5">Projetos</Stack>
@@ -77,8 +81,9 @@ export function Budgets() {
                       <FormControl>
                         <FormLabel>Projeto</FormLabel>
                         <Select
-                          placeholder="Select option"
+                          placeholder="Todos"
                           onChange={handleProjectChange}
+                          height={"56px"}
                         >
                           {projects &&
                             projects.map((d) => (
@@ -90,10 +95,11 @@ export function Budgets() {
                       <FormControl className="toBottom">
                         <Button
                           color="white"
-                          background="origem.300"
+                          background="origem.500"
+                          height={"56px"}
                           variant="primary"
                           _hover={{
-                            background: "origem.500",
+                            background: "origem.600",
                             transition: "all 0.4s",
                           }}
                           rightIcon={<FiSearch />}
@@ -105,15 +111,7 @@ export function Budgets() {
                     </Flex>
                   </Stack>
 
-                  {budgetFilter && (
-                    <>
-                      {/* <ProjectTable
-                            data={projetosFilter}
-                            columns={columnsProject}
-                          /> */}
-                      <TabelaBudgets data={budgetFilter} />
-                    </>
-                  )}
+                  <TabelaBudgets data={budgetFilter} />
                 </Stack>
               </Box>
             </Box>

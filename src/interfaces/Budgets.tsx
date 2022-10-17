@@ -1,6 +1,6 @@
 export interface BudgetPlan {
   atividadeId: number;
-  valor: string;
+  valor: number;
 }
 export interface Projeto {
   id: number;
@@ -39,4 +39,33 @@ export interface BudgetReal {
   pedido: number;
   textPedido: string;
   nom_usu_create?: string;
+}
+
+export interface Totalizacao {
+  inicio: string;
+  fim: string;
+  custoDiarioTotalBRL: number;
+  custoDiarioTotalUSD: number;
+  custoTotalRealizadoBRL: number;
+  custoTotalRealizadoUSD: number;
+  custoTotalTotalPrevistoBRL: number;
+  custoTotalTotalPrevistoUSD: number;
+  totalBRL: number;
+  totalUSD: number;
+}
+
+export interface Titulo {
+  poco_nome: string;
+  sonda_nome: string;
+}
+
+export interface Result {
+  totalizacao: Totalizacao;
+  list: BudgetDetail[];
+  titulo: Titulo;
+}
+
+export interface ClasseServico {
+  id: number;
+  classe_servico: string;
 }

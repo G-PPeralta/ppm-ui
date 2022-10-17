@@ -127,7 +127,8 @@ function CadastroTarefasModal({
                   fontSize={"14px"}
                   width={"300px"}
                   height={"56px"}
-                  _placeholder={{ color: "black" }}
+                  color={"black"}
+                  _placeholder={{ color: "#949494" }}
                   isRequired
                   placeholder="Nome tarefa"
                   type="text"
@@ -186,7 +187,8 @@ function CadastroTarefasModal({
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
-                  _placeholder={{ color: "black" }}
+                  color={"black"}
+                  _placeholder={{ color: "#949494" }}
                   fontSize={"14px"}
                   width={"208px"}
                   height={"56px"}
@@ -213,16 +215,17 @@ function CadastroTarefasModal({
                   RESPONSÁVEL
                 </FormLabel>
                 <Input
+                  maxLength={50}
                   placeholder="Responsável"
                   type="text"
                   fontSize={"14px"}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
-                  _placeholder={{ color: "black" }}
+                  color={"black"}
+                  _placeholder={{ color: "#949494" }}
                   width={"208px"}
                   height={"56px"}
-                  color="black"
                   id="atividadeRel"
                   name="atividadeRel"
                   value={responsavel}
@@ -248,7 +251,8 @@ function CadastroTarefasModal({
                 mt={"-9px"}
                 width={"456px"}
                 height={"121px"}
-                _placeholder={{ color: "black" }}
+                color={"black"}
+                _placeholder={{ color: "#949494" }}
                 isRequired
                 placeholder="Descrição da tarefa"
                 id="descrição"

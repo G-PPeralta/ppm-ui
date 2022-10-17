@@ -65,7 +65,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
       >
         Cadastrar
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -108,7 +108,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               fontWeight={"400"}
                               placeholder={"Nome"}
                               color={"black"}
-                              _placeholder={{ color: "black" }}
+                              _placeholder={{ color: "#949494" }}
                               ml={"3px"}
                               w={"328px"}
                               border={"1px solid #949494"}
@@ -147,6 +147,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               fontSize={"14px"}
                               fontWeight={"400"}
                               color={"black"}
+                              _placeholder={{ color: "#949494" }}
                               value={registerForm.values.num_nota}
                               onChange={registerForm.handleChange}
                             >

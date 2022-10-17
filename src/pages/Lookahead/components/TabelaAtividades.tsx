@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { FiPrinter } from "react-icons/fi";
+import { CSVLink } from "react-csv";
+import { FaFileCsv } from "react-icons/fa";
 
 import {
   Button,
@@ -12,6 +13,7 @@ import {
   Th,
   Thead,
   Tr,
+  Text,
 } from "@chakra-ui/react";
 import { FerramentaServico } from "interfaces/lookahead";
 
@@ -21,9 +23,9 @@ interface TableProps {
 }
 
 class DiasSemana {
-  diaLabel: string = "";
-  data?: string = "";
-  hora?: number = undefined;
+  label: string = "";
+  data: string = "";
+  key: string = "nome";
 }
 
 interface AtividadeDiaHora {
@@ -38,6 +40,12 @@ class Totais {
   hora: string = "";
 }
 
+const headers = [
+  { label: "nome", key: "nome" },
+  { label: "dataIni", key: "dataIni" },
+  { label: "horaIni", key: "horaIni" },
+  { label: "tipo", key: "tipo" },
+];
 export function TabelaAtividades(props: TableProps) {
   const { semana, data } = props;
   const [, setSem] = useState<string>();
@@ -68,7 +76,7 @@ export function TabelaAtividades(props: TableProps) {
       const realDay = dataBr.format(new Date().setDate(+dia));
       const diaSemana: DiasSemana = new DiasSemana();
       const _dia = realDay.split("/")[0];
-      diaSemana.diaLabel = _dia + "/" + realDay.split("/")[1];
+      diaSemana.label = _dia + "/" + realDay.split("/")[1];
       diaSemana.data = realDay;
       weekDays.push(diaSemana);
     }
@@ -105,7 +113,6 @@ export function TabelaAtividades(props: TableProps) {
       });
     setAtividades(atividadesGrid);
     setDias(weekDays);
-
     const arrTotais: Totais[] = [];
 
     atividadesGrid.forEach((x) => {
@@ -143,31 +150,44 @@ export function TabelaAtividades(props: TableProps) {
       <TableContainer mt={4} mb={3} ml={1} width="100%">
         <Table variant="unstyled" size={"sm"}>
           <Thead>
-            <Tr backgroundColor={"blue"} color="white">
-              <Th colSpan={6} borderTopLeftRadius="10px">
-                Atividade
-              </Th>
-              <Th borderTopRightRadius={"10px"} colSpan={2}>
-                <Button
-                  variant="ghost"
-                  colorScheme="messenger"
-                  color="white"
-                  rightIcon={<FiPrinter />}
-                  _hover={{
-                    background: "white",
-                    transition: "all 0.4s",
-                    color: "rgb(46, 105, 253)",
-                  }}
-                >
-                  Exportar
-                </Button>
+            <Tr
+              backgroundColor={"blue"}
+              color="white"
+              border="none 0px !important"
+            >
+              <Th
+                colSpan={8}
+                border="none 0px !important"
+                borderTopLeftRadius="10px"
+                borderTopRightRadius="10px"
+              >
+                <Flex justifyContent="space-between" alignItems="center">
+                  <Text>Atividade</Text>
+                  {atividades && (
+                    <CSVLink data={atividades} headers={headers}>
+                      <Button
+                        variant="ghost"
+                        colorScheme="messenger"
+                        color="white"
+                        rightIcon={<FaFileCsv />}
+                        _hover={{
+                          background: "white",
+                          transition: "all 0.4s",
+                          color: "rgb(46, 105, 253)",
+                        }}
+                      >
+                        Exportar
+                      </Button>
+                    </CSVLink>
+                  )}
+                </Flex>
               </Th>
             </Tr>
             <Tr backgroundColor={"rgb(46, 105, 253)"} color="white">
               <Th>BRT</Th>
               {dias &&
                 dias.map(function (x) {
-                  return <Th>{`${x.diaLabel}`}</Th>;
+                  return <Th>{`${x.label}`}</Th>;
                 })}
             </Tr>
           </Thead>
@@ -213,22 +233,17 @@ export function TabelaAtividades(props: TableProps) {
                         </Td>
                       );
                     })}
-
-                    {/* <Td>{hora}</Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td> */}
                   </Tr>
                 );
               })}
           </Tbody>
           <Tfoot>
-            <Tr backgroundColor={"blue"} color="white">
-              <Td>Total</Td>
+            <Tr
+              backgroundColor={"blue"}
+              color="white"
+              border="none 0px !important"
+            >
+              <Td borderBottomLeftRadius="10px">Total</Td>
               {dias &&
                 total &&
                 dias.map(function (dia) {
@@ -236,8 +251,9 @@ export function TabelaAtividades(props: TableProps) {
                   const _total = total.filter(
                     (tot) => tot.data == dia.data
                   ).length;
-
-                  return <Td>{_total}</Td>;
+                  if (dias[dias.length - 1] == dia) {
+                    return <Td borderBottomRightRadius="10px">{_total}</Td>;
+                  } else return <Td>{_total}</Td>;
                 })}
             </Tr>
           </Tfoot>

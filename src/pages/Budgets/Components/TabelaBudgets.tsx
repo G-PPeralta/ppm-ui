@@ -23,10 +23,12 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import { Budget } from "interfaces/Budgets";
+
 import "../budgets.css";
+import Empty from "components/TableEmpty/empty";
 
 interface TableProps {
-  data: Budget[];
+  data: Budget[] | undefined;
 }
 
 export function TabelaBudgets(props: TableProps) {
@@ -36,12 +38,12 @@ export function TabelaBudgets(props: TableProps) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
 
-  const total = data.length;
-  const planejado = data.reduce((i, value) => i + value.planejado, 0);
-  const realizado = data.reduce((i, value) => i + value.realizado, 0);
+  const total = data?.length;
+  const planejado = data?.reduce((i, value) => i + value.planejado, 0) || 0;
+  const realizado = data?.reduce((i, value) => i + value.realizado, 0) || 0;
 
   const rowsPerPage = 5;
-  const totalRegs = data.length;
+  const totalRegs = data?.length || 0;
   const maxPage = Math.ceil(totalRegs / rowsPerPage);
 
   const brl = Intl.NumberFormat("pt-BR", {
@@ -83,7 +85,7 @@ export function TabelaBudgets(props: TableProps) {
     }
   };
 
-  const tableData = data.slice(from, to).map((budget, key) => (
+  const tableData = data?.slice(from, to).map((budget, key) => (
     <>
       <Tr key={budget.id}>
         <Td>
@@ -125,7 +127,7 @@ export function TabelaBudgets(props: TableProps) {
 
   return (
     <>
-      <TableContainer mt={4} mb={3} ml={1}>
+      <TableContainer mt={4} mb={3} ml={1} borderRadius={"10px"}>
         <Table variant="unstyled">
           <Thead>
             <Tr background="origem.500" color="white">
@@ -137,7 +139,11 @@ export function TabelaBudgets(props: TableProps) {
               <Th>Descrição e Justificativa</Th>
             </Tr>
           </Thead>
-          <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+          {data?.length ? (
+            <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+          ) : (
+            <Empty />
+          )}
           <Tfoot>
             <Tr background="origem.200" color="white">
               <Th>Total</Th>

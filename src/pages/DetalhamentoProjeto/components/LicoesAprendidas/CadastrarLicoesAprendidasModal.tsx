@@ -108,13 +108,14 @@ function CadastrarLicoesAprendidasModal({
                 LIÇÃO APRENDIDA
               </FormLabel>
               <Input
-                maxLength={50}
+                maxLength={40}
                 borderRadius={"8px"}
                 border={"1px solid #A7A7A7"}
                 mt={"-9px"}
                 width={"328px"}
                 height={"56px"}
-                _placeholder={{ color: "black" }}
+                color={"black"}
+                _placeholder={{ color: "#949494" }}
                 isRequired
                 placeholder="Lição aprendida"
                 type="text"
@@ -136,12 +137,14 @@ function CadastrarLicoesAprendidasModal({
                 AÇÃO OU RECOMENDAÇÃO
               </FormLabel>
               <Textarea
+                maxLength={150}
                 borderRadius={"8px"}
                 border={"1px solid #A7A7A7"}
                 mt={"-9px"}
                 width={"456px"}
                 height={"56px"}
-                _placeholder={{ color: "black" }}
+                color={"black"}
+                _placeholder={{ color: "#949494" }}
                 isRequired
                 fontSize={"14px"}
                 placeholder="Ação ou recomendação"

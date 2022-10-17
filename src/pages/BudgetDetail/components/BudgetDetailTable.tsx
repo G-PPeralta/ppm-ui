@@ -1,10 +1,9 @@
-import { FiChevronDown, FiPrinter } from "react-icons/fi";
+import { FiChevronDown } from "react-icons/fi";
 
 import "./expansiveTable.css";
 // import ModalCadastrarOrcamentoPrevisto from "./ModalCadastrarOrcamentoPrevisto";
 import {
   Flex,
-  IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -12,9 +11,10 @@ import {
   Th,
   Thead,
   Tr,
-  Text,
 } from "@chakra-ui/react";
 import { BudgetDetail } from "interfaces/Budgets";
+
+import Empty from "components/TableEmpty/empty";
 
 import CampoEditavel from "./CampoEditavel";
 import ModalGestaoDeCusto from "./ModalGestaoDeCusto";
@@ -120,16 +120,19 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
                 Atividade
               </Th>
               <Th borderTopRightRadius={"10px"} colSpan={2}>
-                <Text className={"noprint"}>
+                {/* <Button
+                  className={"noprint"}
+                  variant="outline"
+                  onClick={() => window.print()}
+                >
                   Imprimir
                   <IconButton
                     color={"white"}
                     backgroundColor="transparent"
                     aria-label="imprimir"
                     icon={<FiPrinter />}
-                    onClick={() => window.print()}
                   />
-                </Text>
+                </Button> */}
               </Th>
             </Tr>
             <Tr backgroundColor={"blue"} color="white">
@@ -142,7 +145,11 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
               <Th>% Gap</Th>
             </Tr>
           </Thead>
-          <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+          {data.length ? (
+            <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+          ) : (
+            <Empty />
+          )}
         </Table>
       </TableContainer>
     </>

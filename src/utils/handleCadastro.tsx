@@ -43,5 +43,6 @@ export const handleCadastrarPagina = async (form: any) => {
   await form.submitForm();
   if (form.isValid) {
     await form.resetForm();
+    window.history.back();
   }
 };

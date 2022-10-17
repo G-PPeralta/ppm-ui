@@ -19,11 +19,21 @@ export function CentroDeCustoProjetos() {
   const [refresh, setRefresh] = useState(false);
 
   const { id } = useParams();
-  const { loading, listaCentroCustoProjetos } = useRequests(Number(id));
+  const {
+    loading,
+    listaCentroCustoProjetos,
+    optionsFornecedores,
+    optionsClassesDeServico,
+  } = useRequests(Number(id));
 
   const refreshState = {
     refresh,
     setRefresh,
+  };
+
+  const options = {
+    optionsFornecedores,
+    optionsClassesDeServico,
   };
 
   const [data, setData] = useState<any>(listaCentroCustoProjetos);
@@ -107,6 +117,7 @@ export function CentroDeCustoProjetos() {
                 <ModalAdicionar
                   refreshState={refreshState}
                   idProjeto={data.idProjeto}
+                  optionsSelects={options}
                 />
                 <Flex direction={"column"} justify={"end"}>
                   <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
@@ -122,6 +133,7 @@ export function CentroDeCustoProjetos() {
                   data={data.centroDeCusto}
                   refreshState={refreshState}
                   idProjeto={data.idProjeto}
+                  optionsSelects={options}
                 />
               )}
             </Box>

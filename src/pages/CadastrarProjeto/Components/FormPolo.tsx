@@ -91,7 +91,9 @@ function FormPolo(projectsForm: any) {
       ) : (
         <>
           <FormLabel
-            style={{ fontSize: "12px", color: "#A7A7A7" }}
+            color={"#949494"}
+            fontWeight={"700"}
+            fontSize={"12px"}
             htmlFor="poloId"
           >
             POLO
@@ -109,6 +111,15 @@ function FormPolo(projectsForm: any) {
                   value={novoPolo}
                   onChange={(e) => setNovoPolo(e.target.value)}
                   mr={2}
+                  maxLength={40}
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  w={"100%"}
+                  border={"1px solid #949494"}
+                  h={"56px"}
+                  style={{ color: "black", fontSize: "14px" }}
+                  _placeholder={{ color: "black" }}
+                  color={"black"}
                 />
                 <IconButton
                   aria-label="Plus sign"
@@ -129,9 +140,11 @@ function FormPolo(projectsForm: any) {
               name="poloId"
               value={projectsForm.projectsForm.values.poloId}
               onChange={projectsForm.projectsForm.handleChange}
-              w={"95%"}
-              placeholder="Selecione"
-              style={{ color: "#A7A7A7", fontSize: "14px" }}
+              mt={"-9px"}
+              h={"56px"}
+              w={"100%"}
+              fontSize={"14px"}
+              fontWeight={"400"}
             >
               {poloState.map((polo) => (
                 <option key={polo.id} value={polo.id}>

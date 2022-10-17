@@ -25,6 +25,7 @@ import {
 import { Ring } from "@uiball/loaders";
 import { Projeto } from "interfaces/Budgets";
 
+// import RealInput from "components/RealInput/input";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
@@ -34,7 +35,7 @@ import { useCadastroOrcamentoPlanejado } from "hooks/useCadastroOrcamentoPlaneja
 
 function ModalGestaoDeCusto(props: { projeto: Projeto }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, setAtividade } =
+  const { registerForm, loading, setAtividade, fornecedores, classesSevicos } =
     useCadastroOrcamentoPlanejado();
   const { id } = props.projeto;
 
@@ -98,8 +99,9 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             isRequired
                             placeholder="Valor Gasto"
                             id="gasto"
-                            type="number"
                             name="gasto"
+                            type={"number"}
+                            max="1000000000000"
                             value={registerForm.values.gasto}
                             onChange={registerForm.handleChange}
                           />
@@ -119,9 +121,14 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             type="date"
                             id="data"
                             name="data"
+                            max="3000-12-31"
+                            maxLength={1}
                             value={registerForm.values.data}
                             onChange={registerForm.handleChange}
                           />
+                          {registerForm.errors.data && (
+                            <TextError>{registerForm.errors.data}</TextError>
+                          )}
                         </FormControl>
                       </Flex>
                       <FormControl>
@@ -130,16 +137,23 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                           <FormLabel htmlFor="fornecedor">Fornecedor</FormLabel>
                         </Flex>
                         <Select
-                          placeholder="Escolha um Forncedor"
+                          placeholder="Escolha um Fornecedor"
                           id="fornecedor"
                           name="fornecedor"
                           value={registerForm.values.fornecedor}
                           onChange={registerForm.handleChange}
                         >
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
+                          {fornecedores &&
+                            fornecedores.map((d) => (
+                              <option value={d.id}>{d.nomefornecedor}</option>
+                            ))}
                         </Select>
+
+                        {registerForm.errors.fornecedor && (
+                          <TextError>
+                            {registerForm.errors.fornecedor}
+                          </TextError>
+                        )}
                       </FormControl>
                       <Flex
                         flexDirection={useBreakpointValue({
@@ -162,10 +176,14 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             value={registerForm.values.servico}
                             onChange={registerForm.handleChange}
                           >
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
+                            {classesSevicos &&
+                              classesSevicos.map((d) => (
+                                <option value={d.id}>{d.classe_servico}</option>
+                              ))}
                           </Select>
+                          {registerForm.errors.servico && (
+                            <TextError>{registerForm.errors.servico}</TextError>
+                          )}
                         </FormControl>
                         <FormControl>
                           <Flex gap={1}>
@@ -176,11 +194,22 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             placeholder="Pedido"
                             id="pedido"
                             name="pedido"
+                            max={"100"}
                             value={registerForm.values.pedido}
                             onChange={registerForm.handleChange}
+                            onKeyPress={(e) => {
+                              // eslint-disable-next-line prefer-regex-literals
+                              const r = new RegExp(/[a-zA-Z0-9]/);
+                              if (!r.test(e.key)) {
+                                e.preventDefault();
+                              }
+                            }}
                             size="md"
                             type="text"
                           />
+                          {registerForm.errors.pedido && (
+                            <TextError>{registerForm.errors.pedido}</TextError>
+                          )}
                         </FormControl>
                       </Flex>
 
@@ -198,6 +227,12 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                           value={registerForm.values.pedido_obs}
                           onChange={registerForm.handleChange}
                         />
+
+                        {registerForm.errors.pedido_obs && (
+                          <TextError>
+                            {registerForm.errors.pedido_obs}
+                          </TextError>
+                        )}
                       </FormControl>
                     </Flex>
                   </Stack>

@@ -88,7 +88,9 @@ function FormStatusProjeto(projectsForm: any) {
       ) : (
         <>
           <FormLabel
-            style={{ fontSize: "12px", color: "#A7A7A7" }}
+            color={"#949494"}
+            fontWeight={"700"}
+            fontSize={"12px"}
             htmlFor="statusId"
           >
             STATUS
@@ -126,9 +128,12 @@ function FormStatusProjeto(projectsForm: any) {
               name="statusId"
               value={projectsForm.projectsForm.values.statusId}
               onChange={projectsForm.projectsForm.handleChange}
-              w={"95%"}
               placeholder="Selecione"
-              style={{ color: "#A7A7A7", fontSize: "14px" }}
+              mt={"-9px"}
+              h={"56px"}
+              w={"208px"}
+              fontSize={"14px"}
+              fontWeight={"400"}
             >
               {statusProjetoState.map((status) => (
                 <option key={status.id} value={status.id}>
