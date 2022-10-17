@@ -183,7 +183,7 @@ export function useProjetos() {
   }));
 
   const optionsCoordenadores = listaCoordenadores.map((responsavel: any) => ({
-    value: responsavel.id_coordenador,
+    value: responsavel.id,
     label: responsavel.coordenadorNome,
   }));
 
