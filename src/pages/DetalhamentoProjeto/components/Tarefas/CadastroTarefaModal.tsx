@@ -50,7 +50,7 @@ function CadastroTarefasModal({
   const [responsavel, setResponsavel] = useState("");
   const [descricao, setDescricao] = useState("");
 
-  const regex = /[^a-z ]/gi;
+  const regex = /[^\w\s]/gi;
 
   return (
     <Flex>
