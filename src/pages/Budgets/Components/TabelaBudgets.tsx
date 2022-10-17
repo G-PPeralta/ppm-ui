@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  FiArrowDown,
-  FiChevronLeft,
-  FiChevronRight,
-  FiChevronsLeft,
-  FiChevronsRight,
-} from "react-icons/fi";
+import { FiArrowDown } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import {
@@ -18,13 +12,12 @@ import {
   Thead,
   Tr,
   Text,
-  Flex,
-  IconButton,
   Icon,
 } from "@chakra-ui/react";
 import { Budget } from "interfaces/Budgets";
 
 import "../budgets.css";
+import PaginacaoTabela from "components/PaginacaoTabela";
 import Empty from "components/TableEmpty/empty";
 
 interface TableProps {
@@ -33,50 +26,24 @@ interface TableProps {
 
 export function TabelaBudgets(props: TableProps) {
   const { data } = props;
-  const [pagAtual, setPagAtual] = useState(1);
-  // const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
+
+  const fromTo = {
+    from,
+    to,
+    setFrom,
+    setTo,
+  };
 
   const total = data?.length;
   const planejado = data?.reduce((i, value) => i + value.planejado, 0) || 0;
   const realizado = data?.reduce((i, value) => i + value.realizado, 0) || 0;
 
-  const rowsPerPage = 5;
-  const totalRegs = data?.length || 0;
-  const maxPage = Math.ceil(totalRegs / rowsPerPage);
-
   const brl = Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
   });
-
-  const paginate = (pag: number) => {
-    setPagAtual(pag);
-
-    const x = (pag - 1) * rowsPerPage;
-    const y = (pag - 1) * rowsPerPage + rowsPerPage;
-    setFrom(x);
-    setTo(y);
-  };
-
-  const advance = () => {
-    if (pagAtual == maxPage) {
-      return;
-    }
-
-    const _pag = pagAtual + 1;
-
-    paginate(_pag);
-  };
-
-  const back = () => {
-    if (pagAtual == 1) {
-      return;
-    }
-    const _pag = pagAtual - 1;
-    paginate(_pag);
-  };
 
   const toggleAcordion = (id: number) => {
     const elements = document.getElementsByClassName("item-" + id);
@@ -98,27 +65,27 @@ export function TabelaBudgets(props: TableProps) {
           )}
           {budget.item}
         </Td>
-        <Td>
+        <Td textAlign={"center"}>
           <Text>{budget.projeto.nome}</Text>
         </Td>
-        <Td>{brl.format(budget.planejado)}</Td>
-        <Td>{brl.format(budget.realizado)}</Td>
-        <Td align="center">{budget.gap}%</Td>
+        <Td textAlign={"center"}>{brl.format(budget.planejado)}</Td>
+        <Td textAlign={"center"}>{brl.format(budget.realizado)}</Td>
+        <Td textAlign={"center"}>{budget.gap}%</Td>
         <Td>{budget.descricao}</Td>
       </Tr>
 
       {budget.filhos &&
         budget.filhos.map((d) => (
           <Tr className={"hide item-" + key} key={d.id}>
-            <Td>{d.item}</Td>
-            <Td>
+            <Td textAlign={"start"}>{d.item}</Td>
+            <Td textAlign={"center"}>
               <Link to={`/budget/detail/${d.id}`}>
                 <Text color="blue">{d.projeto.nome}</Text>
               </Link>
             </Td>
-            <Td>{brl.format(d.planejado)}</Td>
-            <Td>{brl.format(d.realizado)}</Td>
-            <Td align="center">{d.gap}%</Td>
+            <Td textAlign={"center"}>{brl.format(d.planejado)}</Td>
+            <Td textAlign={"center"}>{brl.format(d.realizado)}</Td>
+            <Td textAlign={"center"}>{d.gap}%</Td>
             <Td>{d.descricao}</Td>
           </Tr>
         ))}
@@ -128,15 +95,58 @@ export function TabelaBudgets(props: TableProps) {
   return (
     <>
       <TableContainer mt={4} mb={3} ml={1} borderRadius={"10px"}>
-        <Table variant="unstyled">
+        <Table variant="striped" colorScheme="strippedGray">
           <Thead>
             <Tr background="origem.500" color="white">
-              <Th width="50">item</Th>
-              <Th>Projeto</Th>
-              <Th>Planejado</Th>
-              <Th>Realizado</Th>
-              <Th>Gap%</Th>
-              <Th>Descrição e Justificativa</Th>
+              <Th
+                textAlign={"start"}
+                style={{
+                  color: "white",
+                }}
+                width="50"
+              >
+                item
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Projeto
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Planejado
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Realizado
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Gap%
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Descrição e Justificativa
+              </Th>
             </Tr>
           </Thead>
           {data?.length ? (
@@ -145,44 +155,56 @@ export function TabelaBudgets(props: TableProps) {
             <Empty />
           )}
           <Tfoot>
-            <Tr background="origem.200" color="white">
-              <Th>Total</Th>
-              <Th>{total} Projetos</Th>
-              <Th>{brl.format(planejado)}</Th>
-              <Th>{brl.format(realizado)}</Th>
-              <Th></Th>
-              <Th></Th>
+            <Tr background="origem.500" color="white">
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                Total
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                {total} Projetos
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                {brl.format(planejado)}
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              >
+                {brl.format(realizado)}
+              </Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              ></Th>
+              <Th
+                textAlign={"center"}
+                style={{
+                  color: "white",
+                }}
+              ></Th>
             </Tr>
           </Tfoot>
         </Table>
       </TableContainer>
-      <Flex justifyContent={"center"}>
-        <Flex
-          width={"300px"}
-          alignItems={"center"}
-          justifyContent={"space-between"}
-        >
-          <IconButton
-            aria-label=""
-            icon={<FiChevronsLeft />}
-            onClick={() => paginate(1)}
-          />
-          <IconButton aria-label="" icon={<FiChevronLeft onClick={back} />} />
-
-          <Text>Página atual: {pagAtual}</Text>
-
-          <IconButton
-            aria-label=""
-            icon={<FiChevronRight />}
-            onClick={advance}
-          />
-          <IconButton
-            aria-label=""
-            icon={<FiChevronsRight />}
-            onClick={() => paginate(maxPage)}
-          />
-        </Flex>
-      </Flex>
+      <PaginacaoTabela data={data} fromTo={fromTo} />
     </>
   );
 }
