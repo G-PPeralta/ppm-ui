@@ -5,8 +5,6 @@ import { BudgetReal, ClasseServico } from "interfaces/Budgets";
 import { Fornecedor } from "interfaces/Services";
 import { cadastroValorPlanejadoSchema } from "validations/ModalCadastroOrcamento";
 
-import { regexSomenteNumeros } from "utils/regex";
-
 import { useToast } from "contexts/Toast";
 
 import { getFornecedor } from "services/get/Fornecedor";
@@ -49,7 +47,7 @@ export function useCadastroOrcamentoRealizado() {
     onSubmit: async (values) => {
       const newValues: BudgetReal = {
         atividadeId: atividade,
-        valor: +regexSomenteNumeros(values.gasto),
+        valor: +values.gasto,
         data: values.data,
         fornecedor: values.fornecedor,
         classeServico: values.servico,

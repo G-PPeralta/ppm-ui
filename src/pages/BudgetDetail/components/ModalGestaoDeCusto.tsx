@@ -96,6 +96,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             <FormLabel htmlFor="gasto">Valor</FormLabel>{" "}
                           </Flex>
                           <Input
+                            h={"56px"}
                             isRequired
                             placeholder="Valor Gasto"
                             id="gasto"
@@ -116,6 +117,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             <FormLabel htmlFor="data">Data</FormLabel>{" "}
                           </Flex>
                           <Input
+                            h={"56px"}
                             placeholder="Selecione a Data"
                             size="md"
                             type="date"
@@ -137,6 +139,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                           <FormLabel htmlFor="fornecedor">Fornecedor</FormLabel>
                         </Flex>
                         <Select
+                          h={"56px"}
                           placeholder="Escolha um Fornecedor"
                           id="fornecedor"
                           name="fornecedor"
@@ -170,6 +173,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             </FormLabel>
                           </Flex>
                           <Select
+                            h={"56px"}
                             placeholder="Escolha uma Classe"
                             id="servico"
                             name="servico"
@@ -191,6 +195,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             <FormLabel htmlFor="pedido">Pedido</FormLabel>
                           </Flex>
                           <Input
+                            h={"56px"}
                             placeholder="Pedido"
                             id="pedido"
                             name="pedido"
