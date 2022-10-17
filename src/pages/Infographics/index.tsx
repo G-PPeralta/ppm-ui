@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
+import ContainerPagina from "components/ContainerPagina";
 import Sidebar from "components/SideBar";
 import StatusProjeto from "components/StatusProjeto";
+import TituloPagina from "components/TituloPagina";
 
 import { useFiltragemCampanha } from "hooks/useFiltragemCampanha";
 
@@ -62,101 +64,84 @@ export function Infographics() {
     <>
       <Sidebar>
         {!loading ? (
-          <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
-            <Box
-              py={{ base: "6", sm: "6" }}
-              px={{ base: "6", sm: "8" }}
-              w={"100%"}
-              bg={"white"}
-              borderRadius={{ base: "xl", sm: "xl" }}
+          <ContainerPagina>
+            <TituloPagina>Acompanhamento de Poços</TituloPagina>
+            <Flex
+              direction={"column"}
+              justify={"space-between"}
+              gap={4}
+              wrap={"wrap"}
+              mb={2}
+              flex={1}
             >
-              <Flex
-                justify={"space-between"}
-                wrap={"wrap"}
-                align={"start"}
-                mb={4}
-              >
-                <Heading as="h3" size="md" textAlign={"center"}>
-                  Acompanhamento de Poços
-                </Heading>
-              </Flex>
-              <Flex
-                direction={"column"}
-                justify={"space-between"}
-                gap={4}
-                wrap={"wrap"}
-                mb={2}
-                flex={1}
-              >
-                <Flex gap={2} wrap={"wrap"} flex={1} justify={"space-between"}>
-                  <Flex gap={2} wrap={"wrap"}>
-                    <ModalCadastrarSonda />
-                    <ModalCadastroPoco />
-                    <ModalCadastroAtividade />
-                    <ModalCadastroProjetoTipo
-                      refresh={refresh}
-                      setRefresh={setRefresh}
-                    />
-                    <ModalNovaCampanha
-                      refresh={refresh}
-                      setRefresh={setRefresh}
-                    />
-                  </Flex>
-                  <Flex>
-                    <FiltrosModal
-                      refresh={refresh}
-                      setRefresh={setRefresh}
-                      listas={listas}
-                      registerForm={registerForm}
-                    />
-                  </Flex>
+              <Flex gap={2} wrap={"wrap"} flex={1} justify={"space-between"}>
+                <Flex gap={2} wrap={"wrap"}>
+                  <ModalCadastrarSonda />
+                  <ModalCadastroPoco />
+                  <ModalCadastroAtividade />
+                  <ModalCadastroProjetoTipo
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
+                  <ModalNovaCampanha
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
                 </Flex>
-                <Flex gap={4} wrap={"wrap"} flex={1} justify={"end"}>
-                  {statusProjeto.map((status, index) => (
-                    <StatusProjeto
+                <Flex>
+                  <FiltrosModal
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                    listas={listas}
+                    registerForm={registerForm}
+                  />
+                </Flex>
+              </Flex>
+              <Flex gap={4} wrap={"wrap"} flex={1} justify={"end"}>
+                {statusProjeto.map((status, index) => (
+                  <StatusProjeto
+                    key={index}
+                    status={status.status}
+                    color={status.color}
+                  />
+                ))}
+              </Flex>
+            </Flex>
+            <Flex align={"center"} justify={"center"}>
+              {campanhas.length !== 0 ? (
+                <Box
+                  overflowX={{ base: "scroll" }}
+                  display={"flex"}
+                  flexDirection={"row"}
+                  gap={10}
+                  py={2}
+                  flex={1}
+                >
+                  {campanhas.map((column, index) => (
+                    <Flex
                       key={index}
-                      status={status.status}
-                      color={status.color}
-                    />
+                      direction={"column"}
+                      gap={4}
+                      align={"end"}
+                      justify={"space-between"}
+                    >
+                      <ColumnSPT
+                        column={column}
+                        refresh={refresh}
+                        setRefresh={setRefresh}
+                      />
+                    </Flex>
                   ))}
+                </Box>
+              ) : (
+                <Flex h={180} align={"center"} justify={"center"}>
+                  <Heading as="h4" size="md">
+                    Nenhuma campanha Cadastrada
+                  </Heading>
                 </Flex>
-              </Flex>
-              <Flex align={"center"} justify={"center"}>
-                {campanhas.length !== 0 ? (
-                  <Box
-                    overflowX={{ base: "scroll" }}
-                    display={"flex"}
-                    flexDirection={"row"}
-                    gap={10}
-                    py={2}
-                    flex={1}
-                  >
-                    {campanhas.map((column, index) => (
-                      <Flex
-                        key={index}
-                        direction={"column"}
-                        gap={4}
-                        align={"end"}
-                        justify={"space-between"}
-                      >
-                        <ColumnSPT
-                          column={column}
-                          refresh={refresh}
-                          setRefresh={setRefresh}
-                        />
-                      </Flex>
-                    ))}
-                  </Box>
-                ) : (
-                  <Flex h={180} align={"center"} justify={"center"}>
-                    <Heading as="h4" size="md">
-                      Nenhuma campanha Cadastrada
-                    </Heading>
-                  </Flex>
-                )}
-              </Flex>
-            </Box>
-          </Flex>
+              )}
+            </Flex>
+          </ContainerPagina>
         ) : (
           <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
             <Ring speed={2} lineWeight={5} color="blue" size={64} />

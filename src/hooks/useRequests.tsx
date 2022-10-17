@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 
+import { AreaAtuacao } from "interfaces/CadastrosModaisInfograficos";
 import {
   FinanceiroPorProjetos,
   TabelaCentroDeCusto,
 } from "interfaces/FinanceiroProjetos";
 
+import { getResponsaveis } from "services/get/CadastroModaisInfograficos";
 import {
   getCentroDeCustoProjetos,
   getClassesDeServico,
   getFinanceiroPorProjetos,
   getFornecedores,
 } from "services/get/Financeiro";
+import { getAreaAtuacaoList } from "services/get/Infograficos";
 
 export function useRequests(id?: number) {
   const [loading, setLoading] = useState(true);
@@ -22,6 +25,8 @@ export function useRequests(id?: number) {
     useState<any>([]);
   const [listaFornecedores, setListaFornecedores] = useState<any>([]);
   const [listaClassesDeServico, setListaClassesDeServico] = useState<any>([]);
+  const [listaAreaAtuacao, setListaAreaAtuacao] = useState<AreaAtuacao[]>([]);
+  const [listaResponsaveis, setListaResponsaveis] = useState<any[]>([]);
 
   const reqGet = async () => {
     setLoading(true);
@@ -73,6 +78,18 @@ export function useRequests(id?: number) {
       (a: any, b: any) => a.classe_servico.localeCompare(b.classe_servico)
     );
     setListaClassesDeServico(classesDeServicoSorted);
+
+    const areaAtuacao = await getAreaAtuacaoList();
+    const areasAtuacaoSorted = areaAtuacao.data.sort((a: any, b: any) =>
+      a.tipo.localeCompare(b.tipo)
+    );
+    setListaAreaAtuacao(areasAtuacaoSorted);
+
+    const responsaveis = await getResponsaveis();
+    const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
+      a.nome.localeCompare(b.nome)
+    );
+    setListaResponsaveis(responsaveisSorted);
   };
 
   const optionsFornecedores = listaFornecedores.map((fornecedor: any) => ({
@@ -87,6 +104,18 @@ export function useRequests(id?: number) {
     })
   );
 
+  const optionsAreaAtuacao = listaAreaAtuacao.map(
+    (areaAtuacao: AreaAtuacao) => ({
+      value: areaAtuacao.id,
+      label: areaAtuacao.tipo,
+    })
+  );
+
+  const optionsResponsaveis = listaResponsaveis.map((responsavel: any) => ({
+    value: responsavel.id,
+    label: responsavel.nome,
+  }));
+
   useEffect(() => {
     reqGet();
     setLoading(false);
@@ -100,5 +129,7 @@ export function useRequests(id?: number) {
     listaClassesDeServico,
     optionsFornecedores,
     optionsClassesDeServico,
+    optionsAreaAtuacao,
+    optionsResponsaveis,
   };
 }
