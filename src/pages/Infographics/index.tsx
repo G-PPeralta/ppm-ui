@@ -65,14 +65,7 @@ export function Infographics() {
       <Sidebar>
         {!loading ? (
           <ContainerPagina>
-            <Flex
-              justify={"space-between"}
-              wrap={"wrap"}
-              align={"start"}
-              mb={4}
-            >
-              <TituloPagina>Acompanhamento de Poços</TituloPagina>
-            </Flex>
+            <TituloPagina>Acompanhamento de Poços</TituloPagina>
             <Flex
               direction={"column"}
               justify={"space-between"}
