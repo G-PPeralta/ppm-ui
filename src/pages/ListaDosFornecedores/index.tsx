@@ -31,47 +31,72 @@ import Sidebar from "components/SideBar";
 // import { useFornecedores } from 'hooks/useFornecedores';
 
 import { getFornecedor } from "services/get/Fornecedor";
-import { getProjetos } from "services/get/Projetos";
+import { getPolo, getProjetos } from "services/get/Projetos";
 import { putFornecedor } from "services/update/Fornecedor";
 
 import { EditarFornecedorModal } from "./components/EditarFornecedorModal";
 import { TabelaFornecedores } from "./components/TabelaFornecedores";
 
-export interface Fornecedor {
+// export interface Fornecedor {
+//   id: number;
+//   nomefornecedor: string;
+//   fornecedor: string;
+//   orcamento: number;
+//   realizado: number;
+//   responsavel: string;
+//   descricao: string;
+// }
+
+export interface FornecedoreDto {
   id: number;
+  nom_usu_create: string;
+  poloid: number;
+  servicoid: number;
+  statusid: number;
   nomefornecedor: string;
-  fornecedor: string;
-  orcamento: number;
-  realizado: number;
-  responsavel: string;
-  descricao: string;
+  numerocontrato: string;
+  representante: string;
+  email: string;
+  telefone: string;
+  invoice: string;
+  cnpj: string;
+  justificativa: string;
+  outrasInformacoes: string;
 }
 
 export function Fornecedores() {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [editFornecedor, setEditFornecedor] = useState({} as Fornecedor);
-  const [fornecedores, setFornecedores] = useState<Fornecedor[]>([]);
+  const [editFornecedor, setEditFornecedor] = useState({} as FornecedoreDto);
+  const [fornecedores, setFornecedores] = useState<FornecedoreDto[]>([]);
   const [projetos, setProjetos] = useState([] as ProjetosList[]);
+  const [polos, setPolos] = useState([]);
+  const [loading, setLoading] = useState(true);
   // const [projetoId, setProjetoId] = useState("");
 
-  function handleEditFornecedor(fornecedor: Fornecedor) {
+  function handleEditFornecedor(fornecedor: FornecedoreDto) {
     setEditFornecedor(fornecedor);
     onOpen();
   }
 
-  function handleUpdateFornecedor(fornecedor: Fornecedor) {
+  async function handleGetPolos() {
+    const payload = await getPolo();
+    setPolos(payload.data);
+  }
+
+  function handleUpdateFornecedor(fornecedor: any) {
     // Atualiza o fornecedor na lista
     setFornecedores(
       fornecedores.map((f) => (f.id === fornecedor.id ? fornecedor : f))
     );
-    putFornecedor(fornecedor.id, fornecedor); // API
+    putFornecedor(fornecedor);
+    handleGetFornecedores();
     onClose();
   }
 
   const handleGetFornecedores = async () => {
     const response = await getFornecedor();
-    setFornecedores(response.data as Fornecedor[]);
+    setFornecedores(response.data as FornecedoreDto[]);
   };
 
   async function handleGetProjetos() {
@@ -86,6 +111,17 @@ export function Fornecedores() {
   useEffect(() => {
     handleGetFornecedores();
   }, []);
+
+  useEffect(() => {
+    handleGetPolos();
+  }, []);
+
+  useEffect(() => {
+    if (polos.length > 0 && fornecedores.length > 0 && projetos.length > 0)
+      setLoading(false);
+  }, [polos, fornecedores, projetos]);
+
+  console.log(polos);
 
   return (
     <Sidebar>
@@ -392,12 +428,15 @@ export function Fornecedores() {
               <TabelaFornecedores
                 fornecedores={fornecedores}
                 onEdit={handleEditFornecedor}
+                polos={polos}
+                loading={loading}
               />
               <EditarFornecedorModal
                 isOpen={isOpen}
                 onClose={onClose}
                 fornecedor={editFornecedor}
                 onUpdate={handleUpdateFornecedor}
+                polos={polos}
               />
               <Stack spacing="6" alignItems={"center"}></Stack>
             </Box>{" "}

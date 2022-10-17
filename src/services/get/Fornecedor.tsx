@@ -1,9 +1,9 @@
-import { Fornecedor } from "interfaces/Services";
+// import { FornecedoreDto } from "pages/ListaDosFornecedores";
 
 import { api } from "services/api";
 
 export async function getFornecedor(): Promise<{
-  data: Fornecedor[];
+  data: any[];
   status: number;
 }> {
   const { data, status } = await api.get("/fornecedores", {
