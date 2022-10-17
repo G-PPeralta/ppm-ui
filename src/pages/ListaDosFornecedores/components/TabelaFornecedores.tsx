@@ -16,16 +16,22 @@ import {
 
 import PaginacaoTabela from "components/PaginacaoTabela";
 
-import { Fornecedor } from "../index";
+import { FornecedoreDto } from "..";
+
+// import { Fornecedor } from "../index";
 
 type TabelaFornecedoresProps = {
-  fornecedores: Fornecedor[];
-  onEdit: (fornecedor: Fornecedor) => any;
+  fornecedores: FornecedoreDto[];
+  onEdit: (fornecedor: FornecedoreDto) => any;
+  polos: any[];
+  loading: boolean;
 };
 
 export function TabelaFornecedores({
   fornecedores,
   onEdit,
+  polos,
+  loading,
 }: TabelaFornecedoresProps) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(7);
@@ -37,58 +43,60 @@ export function TabelaFornecedores({
     setTo,
   };
 
-  const orcSum = fornecedores
-    .map((forn) => forn.orcamento)
-    .reduce(
-      (acumulador: number, valorAtual: number) => acumulador + valorAtual,
-      0
-    );
-  // console.log(fornecedores.map((forn) => forn.orcamento));
+  // const orcSum = fornecedores
+  //   .map((forn) => forn.orcamento)
+  //   .reduce(
+  //     (acumulador: number, valorAtual: number) => acumulador + valorAtual,
+  //     0
+  //   );
+  // // console.log(fornecedores.map((forn) => forn.orcamento));
 
-  const realSum = fornecedores
-    .map((forn) => forn.realizado)
-    .reduce(
-      (acumulador: number, valorAtual: number) => acumulador + valorAtual,
-      0
-    );
+  // const realSum = fornecedores
+  //   .map((forn) => forn.realizado)
+  //   .reduce(
+  //     (acumulador: number, valorAtual: number) => acumulador + valorAtual,
+  //     0
+  //   );
   // console.log(realSum);
 
-  const tableData = fornecedores
-    .sort((a, b) => a.id - b.id)
-    .slice(from, to)
-    .map((fornecedor, index) => (
-      <Tr key={index}>
-        <Td isNumeric fontWeight={"semibold"}>
-          {fornecedor.id}
-        </Td>
-        <Td fontWeight={"semibold"}>{fornecedor.fornecedor}</Td>
-        <Td fontWeight={"semibold"}>
-          {fornecedor.orcamento.toLocaleString("pt-br")}
-        </Td>
-        <Td fontWeight={"semibold"}>
-          {fornecedor.realizado.toLocaleString("pt-br")}
-        </Td>
-        <Td fontWeight={"semibold"}>{fornecedor.responsavel}</Td>
-        <Td width="406px" height={"56px"}>
-          {fornecedor.descricao}
-        </Td>
-        <Td>
-          <IconButton
-            aria-label="Plus sign"
-            icon={<MdModeEdit />}
-            background="transparent"
-            variant="secondary"
-            color="#0047BB"
-            mr={2}
-            isRound={true}
-            size="sm"
-            onClick={() => onEdit(fornecedor)}
-            width={"18px"}
-            height={"18px"}
-          />
-        </Td>
-      </Tr>
-    ));
+  console.log(polos);
+
+  const tableData =
+    fornecedores &&
+    fornecedores
+      .sort((a, b) => a.id - b.id)
+      .slice(from, to)
+      .map((fornecedor, index) => (
+        <Tr key={index}>
+          <Td isNumeric fontWeight={"semibold"}>
+            {fornecedor.id}
+          </Td>
+          <Td fontWeight={"semibold"}>{fornecedor.nomefornecedor}</Td>
+          <Td fontWeight={"semibold"}>
+            {polos.find((pol) => pol.id == fornecedor.poloid)?.polo}
+          </Td>
+          <Td fontWeight={"semibold"}>{fornecedor.servicoid}</Td>
+          <Td fontWeight={"semibold"}>{fornecedor.representante}</Td>
+          <Td width="406px" height={"56px"}>
+            {fornecedor.justificativa}
+          </Td>
+          <Td>
+            <IconButton
+              aria-label="Plus sign"
+              icon={<MdModeEdit />}
+              background="transparent"
+              variant="secondary"
+              color="#0047BB"
+              mr={2}
+              isRound={true}
+              size="sm"
+              onClick={() => onEdit(fornecedor)}
+              width={"18px"}
+              height={"18px"}
+            />
+          </Td>
+        </Tr>
+      ));
 
   return (
     <>
@@ -103,10 +111,10 @@ export function TabelaFornecedores({
                 Fornecedor
               </Th>
               <Th color={"white"} textAlign={"center"}>
-                Orçamento
+                Polo
               </Th>
               <Th color={"white"} textAlign={"center"}>
-                Realizado
+                Serviço
               </Th>
               <Th color={"white"} textAlign={"center"}>
                 Responsável
@@ -123,9 +131,11 @@ export function TabelaFornecedores({
           <Tfoot>
             <Tr background={"origem.500"}>
               <Th color="white">Total</Th>
-              <Th></Th>
-              <Th color="white">{orcSum.toLocaleString("pt-br")}</Th>
-              <Th color="white">{realSum.toLocaleString("pt-br")}</Th>
+              <Th style={{ color: "white" }}>
+                {fornecedores.length} fornecedores
+              </Th>
+              <Th color="white"></Th>
+              <Th color="white"></Th>
               <Th color="white"></Th>
               <Th color="white"></Th>
               <Th></Th>
