@@ -7,7 +7,7 @@ import { maskMoney } from "utils/regexCoinMask";
 
 interface Props {
   registerForm: any;
-  nomeInput: string;
+  nomeInput?: string;
   propName: string;
   maxLength: number;
   value?: string | undefined;
@@ -30,12 +30,14 @@ function InputGenerico({
 }: Props) {
   return (
     <Flex direction={"column"} w={"100%"}>
-      <Flex gap={1}>
-        {required && <RequiredField />}
-        <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
-          {nomeInput}
-        </Text>
-      </Flex>
+      {nomeInput && (
+        <Flex gap={1}>
+          {required && <RequiredField />}
+          <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
+            {nomeInput}
+          </Text>
+        </Flex>
+      )}
       {isNumeric ? (
         <Input
           h={"56px"}
