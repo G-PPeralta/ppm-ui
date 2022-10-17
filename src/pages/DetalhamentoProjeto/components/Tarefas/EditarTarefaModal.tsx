@@ -47,7 +47,7 @@ function EditarTarefaModal({
 }: EditModalProps) {
   // const { onClose } = useDisclosure();
 
-  const regex = /[^a-z ]/gi;
+  const regex = /[^\w\s]/gi;
 
   const novaData = format(new Date(editTarefa?.data_tarefa), "yyyy-MM-dd");
 

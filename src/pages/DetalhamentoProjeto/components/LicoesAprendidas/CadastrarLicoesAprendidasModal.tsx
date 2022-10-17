@@ -45,7 +45,7 @@ function CadastrarLicoesAprendidasModal({
     onCloseModal();
   }
 
-  const regex = /[^a-z ]/gi;
+  const regex = /[^\w\s]/gi;
 
   return (
     <Flex>
