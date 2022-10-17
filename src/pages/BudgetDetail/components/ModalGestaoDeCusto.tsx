@@ -229,6 +229,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                           placeholder="Ação ou Recomendação"
                           id="pedido-obs"
                           name="pedido_obs"
+                          maxLength={240}
                           value={registerForm.values.pedido_obs}
                           onChange={registerForm.handleChange}
                         />
