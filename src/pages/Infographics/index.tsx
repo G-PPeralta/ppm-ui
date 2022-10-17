@@ -70,12 +70,7 @@ export function Infographics() {
               bg={"white"}
               borderRadius={{ base: "xl", sm: "xl" }}
             >
-              <Flex
-                justify={"space-between"}
-                mb={2}
-                wrap={"wrap"}
-                align={"center"}
-              >
+              <Flex justify={"space-between"} wrap={"wrap"} align={"start"}>
                 <Heading
                   as="h3"
                   size="md"
