@@ -19,6 +19,7 @@ function Statistics() {
   const [filter, setFilter] = useState<StatisticsTableData[]>();
   const [refresh, setRefresh] = useState(false);
   const [search, setSearch] = useState("");
+  const windowInnerWidth = window.innerWidth;
 
   const convertReq = (payload: any): StatisticsTableData[] => {
     const newData: StatisticsTableData[] = [];
@@ -87,8 +88,13 @@ function Statistics() {
               bg={"white"}
               borderRadius={{ base: "xl", sm: "xl" }}
             >
-              <Flex justify={"space-between"} mb={2} wrap={"wrap"}>
-                <Heading as="h3" size="md">
+              <Flex
+                justify={"space-between"}
+                mb={2}
+                wrap={"wrap"}
+                align={"center"}
+              >
+                <Heading as="h3" size="md" mb={2} textAlign={"center"}>
                   Projetos
                 </Heading>
                 {/* <Heading as="h3" size="md" color={"origem.500"}>
@@ -96,7 +102,14 @@ function Statistics() {
                 </Heading> */}
               </Flex>
 
-              <Flex justify={"space-between"} wrap={"wrap"}>
+              <Flex
+                direction={windowInnerWidth > 600 ? "row" : "column"}
+                wrap={"wrap"}
+                alignItems="flex-end"
+                justify={"space-between"}
+                gap={4}
+                flex={1}
+              >
                 <Flex direction={"row"} flex={1} align={"end"} gap={2}>
                   <Flex direction={"column"}>
                     <Text
@@ -137,7 +150,7 @@ function Statistics() {
                   </Flex>
                 </Flex>
 
-                <Flex gap={2} flex={2} justify={"end"} align={"end"}>
+                <Flex gap={4} flex={2} justify={"end"} align={"end"}>
                   {/* <ModalCadastrarSonda /> */}
                   {/* <ModalCadastroPoco /> */}
                   <ModalCadastroOperacao
