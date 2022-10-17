@@ -40,6 +40,8 @@ import {
 import PaginacaoTabela from "components/PaginacaoTabela";
 import Sidebar from "components/SideBar";
 
+import { formatDate } from "utils/formatDate";
+
 import { getAllLicoesAprendidas } from "services/get/LicoesAprendidas";
 import { getProjetos } from "services/get/Projetos";
 import { patchLicaoAprendida } from "services/update/LicoesAprendidas";
@@ -169,7 +171,7 @@ export function LicoesAprendidasProjetos() {
   };
 
   const headers = [
-    { label: "ID", key: "id" },
+    { label: "Projeto", key: "projeto" },
     { label: "Lições Aprendidas", key: "txt_licao_aprendida" },
     { label: "Ações e Recomendações", key: "txt_acao" },
     { label: "Data", key: "dat_usu_create" },
@@ -235,7 +237,16 @@ export function LicoesAprendidasProjetos() {
                   </Text>
                 </Heading>
                 <Flex align={"flex-start"} fontWeight={"700"}>
-                  <CSVLink data={filteredLicoesAprendidas} headers={headers}>
+                  <CSVLink
+                    data={filteredLicoesAprendidas.map((lic) => ({
+                      ...lic,
+                      projeto: projetos.find(
+                        (project) => project.id == lic.id_projeto
+                      )?.nomeProjeto,
+                      data: formatDate(lic.dat_usu_create),
+                    }))}
+                    headers={headers}
+                  >
                     <Button
                       color={"#0239C3"}
                       fontWeight={"700"}
