@@ -7,26 +7,21 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 
 function DateTimePicker({ registerForm, index }: any) {
   const [dataInicio, setDataInicio] = useState<any>("");
-  const [dataMin, setDataMin] = useState<any>("");
 
   useEffect(() => {
-    // const data = registerForm.values.atividades[index].data_inicio;
-    const data = "10/20/2022, 12:00:00 AM";
+    const data = registerForm.values.atividades[index].data_inicio;
     if (data) {
       const newDate = new Date(data);
-      console.log(">>>> newDate", newDate);
       // newDate.setDate(newDate.getDate() + 15);
-      // newDate.setHours(9, 0, 0, 0);
       setDataInicio(newDate);
-      setDataMin(newDate);
+      // setDataMin(newDate);
     } else {
-      const newDate = new Date();
-      setDataMin(newDate);
+      // const newDate = new Date();
+      setDataInicio("");
     }
-  }, []);
+  }, [registerForm.values.atividades[index].data_inicio]);
 
   const handleIniciarDate = (date: any) => {
-    console.log(">>>>>handleIniciarDate", date);
     if (date) {
       setDataInicio(date);
       registerForm.setFieldValue(
@@ -67,7 +62,6 @@ function DateTimePicker({ registerForm, index }: any) {
       </Flex>
       <ReactDatePicker
         selected={dataInicio}
-        minDate={dataMin}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
         showTimeSelect

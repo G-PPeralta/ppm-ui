@@ -40,18 +40,24 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
 
+  const initAdd = {
+    area_id: 0,
+    operacao_id: 0,
+    responsavel_id: 0,
+    data_inicio: "",
+    duracao: 0,
+  };
+
   const remove = (index: number) => {
-    // Pega a lista de atividades diretamente do Formik
     const newList = registerForm.values.atividades;
-    console.log(
-      ">>>> registerForm.values.atividades",
-      registerForm.values.atividades
-    );
-    // Remove item da lista
+
     newList.splice(index, 1);
-    console.log(">>>> newList", newList);
-    // Atualiza lista no Formik
-    registerForm.setFieldValue("atividades", newList);
+
+    if (newList.length === 0) {
+      registerForm.setFieldValue("atividades", [initAdd]);
+    } else {
+      registerForm.setFieldValue("atividades", [...newList]);
+    }
   };
 
   const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({

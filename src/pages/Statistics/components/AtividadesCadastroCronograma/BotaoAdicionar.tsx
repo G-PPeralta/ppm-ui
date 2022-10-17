@@ -22,11 +22,6 @@ function BotaoAdicionar({ add, registerForm }: Props) {
         atividade.duracao <= 0
     );
 
-    console.log(
-      ">>>> called isDisabled",
-      isDisabled,
-      registerForm.values.atividades
-    );
     setIsDisabled(isDisabled);
   }, [registerForm.values.atividades]);
 
