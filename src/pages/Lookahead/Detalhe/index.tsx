@@ -4,12 +4,10 @@ import { useParams } from "react-router-dom";
 import {
   Box,
   Flex,
-  Stack,
-  useBreakpointValue,
-  useColorModeValue,
   Text,
   FormControl,
   Select,
+  FormLabel,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -82,103 +80,103 @@ export function LookaheadDetalhe() {
   return (
     <>
       <Sidebar>
-        <Stack spacing="8">
-          <Flex
-            w={useBreakpointValue({ base: "100%", md: "auto" })}
-            align="center"
-            justify="center"
-            bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
+        <Flex w={"auto"} align="center" justify="center" bg="#EDF2F7">
+          <Box
+            py={{ base: "6", sm: "8" }}
+            px={{ base: "6", sm: "10" }}
+            w="100%"
+            bg="white"
+            boxShadow={{
+              base: "none",
+              sm: "md",
+            }}
+            borderRadius={{ base: "none", sm: "xl" }}
           >
-            <Box
-              py={{ base: "0", sm: "16" }}
-              px={{ base: "4", sm: "10" }}
-              w={useBreakpointValue({
-                base: "20rem",
-                sm: "35rem",
-                md: "60rem",
-                lg: "80rem",
-              })}
-              bg={useBreakpointValue({ base: "transparent", sm: "white" })}
-              boxShadow={{
-                base: "none",
-                sm: useColorModeValue("md", "md-dark"),
-              }}
-              borderRadius={{ base: "none", sm: "xl" }}
-            >
-              <Flex direction="column">
-                <Text fontWeight="bold">Relatorio Lookahead</Text>
-                <Text>{atividade && atividade.id}</Text>
-                <Flex
-                  direction="row"
-                  justifyContent="flex-end"
-                  alignItems="flex-end"
-                >
-                  <Flex alignItems="flex-end">
-                    <FormControl>
-                      {id && <ModalAddAtividade id={+id} />}
-                    </FormControl>
-                    <FormControl marginLeft="16px">
-                      <Text
-                        fontWeight={"bold"}
-                        fontSize={"12px"}
-                        color={"#949494"}
-                      >
-                        SEMANA
-                      </Text>
-                      <Select
-                        id="poloId"
-                        name="pole"
-                        color={"#949494"}
-                        width={250}
-                        marginRight="15px"
-                        onChange={(e) => changeWeek(e.target.value)}
-                      >
-                        {weeks &&
-                          weeks.map(function (x, i) {
-                            return (
-                              <option key={i} value={x.id}>
-                                {x.value}
-                              </option>
-                            );
-                          })}
-                      </Select>
-                    </FormControl>
-                  </Flex>
-                </Flex>
-
-                <Flex direction="column">
-                  {atividade && (
-                    <TabelaAtividades semana={semana} data={atividade} />
-                  )}
-                  {atividade ? (
-                    <TabelaFerramentas semana={semana} data={atividade} />
-                  ) : (
-                    <Box
-                      display={"flex"}
-                      alignItems={"center"}
-                      justifyContent={"center"}
-                      h={"84vh"}
+            <Flex direction="column" ml={-5} mt={-5}>
+              <FormControl>
+                <FormLabel htmlFor="name">
+                  <Text
+                    mb={3}
+                    fontSize={"24px"}
+                    color={"#2D2926"}
+                    fontWeight={"700"}
+                    fontFamily={"Mulish"}
+                  >
+                    Relatório Lookahead
+                  </Text>
+                </FormLabel>
+              </FormControl>
+              <Text>{atividade && atividade.id}</Text>
+              <Flex
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="flex-end"
+              >
+                <Flex alignItems="flex-end">
+                  <FormControl>
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
                     >
-                      <Ring speed={2} lineWeight={5} color="blue" size={64} />
-                    </Box>
-                  )}
-                  {atividade ? (
-                    <TabelaServicos semana={semana} data={atividade} />
-                  ) : (
-                    <Box
-                      display={"flex"}
-                      alignItems={"center"}
-                      justifyContent={"center"}
-                      h={"84vh"}
+                      SEMANA
+                    </Text>
+                    <Select
+                      id="poloId"
+                      name="pole"
+                      color={"#949494"}
+                      width={250}
+                      marginRight="16px"
+                      onChange={(e) => changeWeek(e.target.value)}
                     >
-                      <Ring speed={2} lineWeight={5} color="blue" size={64} />
-                    </Box>
-                  )}
+                      {weeks &&
+                        weeks.map(function (x, i) {
+                          return (
+                            <option key={i} value={x.id}>
+                              {x.value}
+                            </option>
+                          );
+                        })}
+                    </Select>
+                  </FormControl>
+                  <FormControl>
+                    {id && <ModalAddAtividade id={+id} />}
+                  </FormControl>
                 </Flex>
               </Flex>
-            </Box>
-          </Flex>
-        </Stack>
+
+              <Flex direction="column">
+                {atividade && (
+                  <TabelaAtividades semana={semana} data={atividade} />
+                )}
+                {atividade ? (
+                  <TabelaFerramentas semana={semana} data={atividade} />
+                ) : (
+                  <Box
+                    display={"flex"}
+                    alignItems={"center"}
+                    justifyContent={"center"}
+                    h={"84vh"}
+                  >
+                    <Ring speed={2} lineWeight={5} color="blue" size={64} />
+                  </Box>
+                )}
+                {atividade ? (
+                  <TabelaServicos semana={semana} data={atividade} />
+                ) : (
+                  <Box
+                    display={"flex"}
+                    alignItems={"center"}
+                    justifyContent={"center"}
+                    h={"84vh"}
+                  >
+                    <Ring speed={2} lineWeight={5} color="blue" size={64} />
+                  </Box>
+                )}
+              </Flex>
+            </Flex>
+          </Box>
+        </Flex>
       </Sidebar>
     </>
   );
