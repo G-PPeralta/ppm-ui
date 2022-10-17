@@ -5,13 +5,16 @@ import { Button, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-function DateTimePickerDataInicio({ registerForm, data, index }: any) {
+function DateTimePicker({ registerForm, index }: any) {
   const [dataInicio, setDataInicio] = useState<any>("");
   const [dataMin, setDataMin] = useState<any>("");
 
   useEffect(() => {
+    // const data = registerForm.values.atividades[index].data_inicio;
+    const data = "10/20/2022, 12:00:00 AM";
     if (data) {
       const newDate = new Date(data);
+      console.log(">>>> newDate", newDate);
       // newDate.setDate(newDate.getDate() + 15);
       // newDate.setHours(9, 0, 0, 0);
       setDataInicio(newDate);
@@ -23,12 +26,17 @@ function DateTimePickerDataInicio({ registerForm, data, index }: any) {
   }, []);
 
   const handleIniciarDate = (date: any) => {
-    // date.setHours(9, 0, 0, 0);
-    setDataInicio(date);
-    registerForm.setFieldValue(
-      `atividades[${index}].data_inicio`,
-      new Date(date).toLocaleString()
-    );
+    console.log(">>>>>handleIniciarDate", date);
+    if (date) {
+      setDataInicio(date);
+      registerForm.setFieldValue(
+        `atividades[${index}].data_inicio`,
+        new Date(date).toLocaleString()
+      );
+    } else {
+      setDataInicio("");
+      registerForm.setFieldValue(`atividades[${index}].data_inicio`, "");
+    }
   };
 
   const TriggerDatePickerInicio = forwardRef(
@@ -71,4 +79,4 @@ function DateTimePickerDataInicio({ registerForm, data, index }: any) {
   );
 }
 
-export default DateTimePickerDataInicio;
+export default DateTimePicker;
