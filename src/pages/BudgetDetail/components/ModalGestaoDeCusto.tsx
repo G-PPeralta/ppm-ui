@@ -31,12 +31,12 @@ import { TextError } from "components/TextError";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroOrcamentoPlanejado } from "hooks/useCadastroOrcamentoPlanejado";
+import { useCadastroOrcamentoRealizado } from "hooks/useCadastroOrcamentoRealizado";
 
 function ModalGestaoDeCusto(props: { projeto: Projeto }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, setAtividade, fornecedores, classesSevicos } =
-    useCadastroOrcamentoPlanejado();
+    useCadastroOrcamentoRealizado();
   const { id } = props.projeto;
 
   useEffect(() => {
@@ -96,12 +96,13 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             <FormLabel htmlFor="gasto">Valor</FormLabel>{" "}
                           </Flex>
                           <Input
+                            h={"56px"}
                             isRequired
                             placeholder="Valor Gasto"
                             id="gasto"
                             name="gasto"
                             type={"number"}
-                            max="1000000000000"
+                            maxLength={12}
                             value={registerForm.values.gasto}
                             onChange={registerForm.handleChange}
                           />
@@ -116,6 +117,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             <FormLabel htmlFor="data">Data</FormLabel>{" "}
                           </Flex>
                           <Input
+                            h={"56px"}
                             placeholder="Selecione a Data"
                             size="md"
                             type="date"
@@ -137,6 +139,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                           <FormLabel htmlFor="fornecedor">Fornecedor</FormLabel>
                         </Flex>
                         <Select
+                          h={"56px"}
                           placeholder="Escolha um Fornecedor"
                           id="fornecedor"
                           name="fornecedor"
@@ -170,6 +173,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             </FormLabel>
                           </Flex>
                           <Select
+                            h={"56px"}
                             placeholder="Escolha uma Classe"
                             id="servico"
                             name="servico"
@@ -191,10 +195,11 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             <FormLabel htmlFor="pedido">Pedido</FormLabel>
                           </Flex>
                           <Input
+                            h={"56px"}
                             placeholder="Pedido"
                             id="pedido"
                             name="pedido"
-                            max={"100"}
+                            maxLength={100}
                             value={registerForm.values.pedido}
                             onChange={registerForm.handleChange}
                             onKeyPress={(e) => {
@@ -224,6 +229,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                           placeholder="Ação ou Recomendação"
                           id="pedido-obs"
                           name="pedido_obs"
+                          maxLength={240}
                           value={registerForm.values.pedido_obs}
                           onChange={registerForm.handleChange}
                         />

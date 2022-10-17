@@ -13,7 +13,7 @@ import { postAddValorRealizado } from "services/post/Budget";
 
 import { useAuth } from "./useAuth";
 
-export function useCadastroOrcamentoPlanejado() {
+export function useCadastroOrcamentoRealizado() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
