@@ -10,3 +10,6 @@ export const regexCaracteresEspeciaisENumeros = (stringToReplace: string) =>
 export const regexSomenteNumeros = (stringToReplace: string) =>
   // .match(/[0-9]+/g).join([]);
   stringToReplace.replace(/\D/g, "");
+
+export const regexApenasNumerosMonetario = (stringToReplace: string) =>
+  stringToReplace.replace(/[§ª°º`´¨~!@#$%^&*()_|+=?;:'"<>{}[]\]*/gi, "");

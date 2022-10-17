@@ -3,7 +3,7 @@ import { Flex, Input, Text } from "@chakra-ui/react";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
-import { maskMoney } from "utils/regexCoinMask";
+import { maskMoney } from "../../utils/regexCoinMask";
 
 interface Props {
   registerForm: any;

@@ -6,7 +6,8 @@ import {
   Flex,
   Heading,
   InputGroup,
-  InputLeftElement,
+  InputLeftAddon,
+  // InputLeftElement,
   Text,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
@@ -289,20 +290,23 @@ function CadastrarProjeto() {
                 >
                   <Flex flex={1}>
                     <InputGroup>
-                      <InputLeftElement
-                        pointerEvents="none"
-                        color="gray.300"
-                        fontSize="1.2em"
+                      <InputLeftAddon
+                        alignSelf={"end"}
+                        color="#949494"
+                        border={"1px solid #949494"}
+                        background={"white"}
+                        h={"56px"}
                       >
                         R$
-                      </InputLeftElement>
+                      </InputLeftAddon>
+
                       <InputGenerico
                         registerForm={registerForm}
                         nomeInput={"CAPEX PREVISTO"}
                         propName={"capexPrevisto"}
-                        value={registerForm.values.capexPrevisto}
+                        value={registerForm.values.capexPrevisto || ""}
                         required={true}
-                        placeholder={"Capex Previsto"}
+                        placeholder={"0"}
                         maxLength={50}
                         isNumeric={true}
                       />

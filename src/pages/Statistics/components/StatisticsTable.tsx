@@ -38,47 +38,41 @@ export function StatisticsTable({ data }: Props) {
 
   return (
     <Flex direction={"column"} w={"100%"}>
-      <Flex direction={"column"} flex={1}>
-        <TableContainer
-          mt={4}
-          mb={3}
-          borderRadius={"10px"}
-          overflowX={"scroll"}
-        >
-          <Table variant="striped" colorScheme={"strippedGray"}>
-            <Thead>
-              <Tr background={"origem.500"}>
-                <Th color="white" textAlign={"center"}>
-                  Sonda
-                </Th>
-                <Th color="white" textAlign={"center"}>
-                  Poço
-                </Th>
-                <Th color="white" textAlign={"center"}></Th>
-              </Tr>
-            </Thead>
-            <Tbody scrollBehavior={"smooth"}>
-              {data ? (
-                data.slice(from, to).map((projeto, key) => (
-                  <Tr key={key}>
-                    <Td textAlign={"center"} fontWeight={"semibold"}>
-                      <Link
-                        to={`/estatisticas/cronograma/${projeto.id_sonda}/${projeto.id_poco}`}
-                        state={{ data: projeto }}
-                      >
-                        <Text>{projeto.sonda}</Text>
-                      </Link>
-                    </Td>
-                    <Td textAlign={"center"} fontWeight={"semibold"}>
-                      <Link
-                        to={`/estatisticas/cronograma/${projeto.id_sonda}/${projeto.id_poco}`}
-                        state={{ data: projeto }}
-                      >
-                        <Text>{projeto.poco}</Text>
-                      </Link>
-                    </Td>
-                    <Td textAlign={"center"} fontWeight={"semibold"}>
-                      {/* <IconButton
+      <TableContainer mt={4} mb={3} borderRadius={"10px"} overflowX={"scroll"}>
+        <Table variant="striped" colorScheme="strippedGray">
+          <Thead>
+            <Tr background={"origem.500"}>
+              <Th color="white" textAlign={"center"}>
+                Sonda
+              </Th>
+              <Th color="white" textAlign={"center"}>
+                Poço
+              </Th>
+              <Th color="white" textAlign={"center"}></Th>
+            </Tr>
+          </Thead>
+          <Tbody scrollBehavior={"smooth"}>
+            {data ? (
+              data.slice(from, to).map((projeto, key) => (
+                <Tr key={key}>
+                  <Td textAlign={"center"} fontWeight={"semibold"}>
+                    <Link
+                      to={`/estatisticas/cronograma/${projeto.id_sonda}/${projeto.id_poco}`}
+                      state={{ data: projeto }}
+                    >
+                      <Text>{projeto.sonda}</Text>
+                    </Link>
+                  </Td>
+                  <Td textAlign={"center"} fontWeight={"semibold"}>
+                    <Link
+                      to={`/estatisticas/cronograma/${projeto.id_sonda}/${projeto.id_poco}`}
+                      state={{ data: projeto }}
+                    >
+                      <Text>{projeto.poco}</Text>
+                    </Link>
+                  </Td>
+                  <Td textAlign={"center"} fontWeight={"semibold"}>
+                    {/* <IconButton
                           aria-label="Plus sign"
                           icon={<AiFillEdit />}
                           background="white"
@@ -99,27 +93,26 @@ export function StatisticsTable({ data }: Props) {
                           size="sm"
                         />
                       <EditaValorModal /> */}
-                    </Td>
-                  </Tr>
-                ))
-              ) : (
-                <Tr>
-                  <Td textAlign={"center"} fontWeight={"semibold"}>
-                    <Text>Não há dados</Text>
                   </Td>
                 </Tr>
-              )}
-            </Tbody>
-            <Tfoot>
-              <Tr background={"origem.500"}>
-                <Th color="white">Total</Th>
-                <Th color="white"></Th>
-                <Th color="white"></Th>
+              ))
+            ) : (
+              <Tr>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Text>Não há dados</Text>
+                </Td>
               </Tr>
-            </Tfoot>
-          </Table>
-        </TableContainer>
-      </Flex>
+            )}
+          </Tbody>
+          <Tfoot>
+            <Tr background={"origem.500"}>
+              <Th color="white">Total</Th>
+              <Th color="white"></Th>
+              <Th color="white"></Th>
+            </Tr>
+          </Tfoot>
+        </Table>
+      </TableContainer>
       <PaginacaoTabela data={data} fromTo={fromTo} />
     </Flex>
   );

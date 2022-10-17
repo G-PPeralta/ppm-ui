@@ -21,6 +21,7 @@ function BotaoAdicionar({ add, registerForm }: Props) {
         atividade.data_inicio === "" ||
         atividade.duracao <= 0
     );
+
     setIsDisabled(isDisabled);
   }, [registerForm.values.atividades]);
 
