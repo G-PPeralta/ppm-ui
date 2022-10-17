@@ -32,9 +32,7 @@ export function Budgets() {
               bg={"white"}
               borderRadius={{ base: "xl", sm: "xl" }}
             >
-              <TituloPagina botaoVoltar={true}>
-                Gerencial do Orçamento
-              </TituloPagina>
+              <TituloPagina>Gerencial do Orçamento</TituloPagina>
 
               <Flex
                 direction={wd > 600 ? "row" : "column"}

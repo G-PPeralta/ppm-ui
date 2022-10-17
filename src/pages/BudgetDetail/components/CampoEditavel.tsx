@@ -42,7 +42,7 @@ export default function CampoEditavel(props: { filho: BudgetDetail }) {
     } = useEditableControls();
 
     return isEditing ? (
-      <ButtonGroup justifyContent="center" size="sm">
+      <ButtonGroup justifyContent="center">
         <IconButton
           aria-label="Send btn"
           icon={<AiFillCheckCircle />}
@@ -58,7 +58,6 @@ export default function CampoEditavel(props: { filho: BudgetDetail }) {
       <IconButton
         aria-label="Edit btn"
         variant={"outline"}
-        size="sm"
         icon={<FiEdit />}
         {...getEditButtonProps()}
       />
