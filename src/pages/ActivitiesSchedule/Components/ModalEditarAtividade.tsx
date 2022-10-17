@@ -53,7 +53,6 @@ function ModalEditarAtividade({
   listaOptions,
 }: any) {
   const { toast } = useToast();
-  const [campanhaId, setCampanhaId] = useState(0);
   const [atividadeStatus, setAtividadeStatus] = useState(0);
   const [nome, setNome] = useState("");
   const [responsavel, setResponsavel] = useState("");
@@ -86,7 +85,6 @@ function ModalEditarAtividade({
     setResponsavel(atividade.nom_responsavel);
     setArea(atividade.nom_area);
     setObservacoes(atividade.sonda);
-    setCampanhaId(atividade.id_filho);
     setAtividadeStatus(Number(atividade.pct_real));
     if (atividade.precedentes) {
       setPrecedentes(atividade.precedentes);
@@ -115,10 +113,7 @@ function ModalEditarAtividade({
 
   const send = async () => {
     try {
-      const { status } = await patchEditarAtividadeIntervencao(
-        campanhaId,
-        payload
-      );
+      const { status } = await patchEditarAtividadeIntervencao(payload);
       if (status === 200 || status === 201) {
         toast.success(`Atividade editada com sucesso!`, {
           id: "toast-principal",
