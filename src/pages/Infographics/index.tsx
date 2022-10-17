@@ -65,7 +65,7 @@ export function Infographics() {
           <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
             <Box
               py={{ base: "6", sm: "6" }}
-              px={{ base: "6", sm: "6" }}
+              px={{ base: "6", sm: "8" }}
               w={"100%"}
               bg={"white"}
               borderRadius={{ base: "xl", sm: "xl" }}
