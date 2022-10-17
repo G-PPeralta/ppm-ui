@@ -1,9 +1,10 @@
 import { BsSearch } from "react-icons/bs";
 
-import { Box, Button, Flex, Heading, Select, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Select, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
+import TituloPagina from "components/TituloPagina";
 
 import { useBudgets } from "hooks/useBudgets";
 
@@ -31,22 +32,10 @@ export function Budgets() {
               bg={"white"}
               borderRadius={{ base: "xl", sm: "xl" }}
             >
-              <Flex
-                justify={"space-between"}
-                mb={4}
-                wrap={"wrap"}
-                align={"center"}
-              >
-                <Heading
-                  as="h3"
-                  size="md"
-                  textAlign={"center"}
-                  fontSize={"24px"}
-                  fontWeight={"bold"}
-                >
-                  Gerencial do Orçamento
-                </Heading>
-              </Flex>
+              <TituloPagina botaoVoltar={true}>
+                Gerencial do Orçamento
+              </TituloPagina>
+
               <Flex
                 direction={wd > 600 ? "row" : "column"}
                 wrap={"wrap"}

@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-import {
-  Box,
-  Flex,
-  Heading,
-  Stack,
-  Button,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Flex, Button } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
+import ContainerPagina from "components/ContainerPagina";
 import Sidebar from "components/SideBar";
+import TituloPagina from "components/TituloPagina";
 
 import { statusProjeto } from "utils/validateDate";
 
@@ -44,8 +39,6 @@ export function ActivitiesSchedule() {
   const [atividades, setAtividades] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
 
-  const innerWidth = useBreakpointValue({ base: 0, md: 1, lg: 2, xl: 3 });
-
   const requestHandler = async () => {
     const response = await getAtividadesCampanha(id);
     setAtividades(response.data);
@@ -70,118 +63,88 @@ export function ActivitiesSchedule() {
     <>
       <Sidebar>
         {!loading ? (
-          <Stack spacing="8">
-            <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
-              <Box
-                py={{ base: "6", sm: "8" }}
-                px={{ base: "6", sm: "8" }}
-                w={"100%"}
-                bg={"white"}
-                borderRadius={{ base: "xl", sm: "xl" }}
-              >
-                <Flex justify={"space-between"} mb={2} wrap={"wrap"}>
-                  <Heading as="h3" size="md" mb={3} mt={innerWidth}>
-                    Acompanhamento de Atividades
-                  </Heading>
-                </Flex>
-                <Flex
-                  direction={"column"}
-                  justify={"space-between"}
-                  gap={4}
-                  wrap={"wrap"}
-                  mb={4}
-                >
-                  <Flex gap={2} wrap={"wrap"} flex={1}>
-                    <Button
-                      h={"56px"}
-                      borderRadius={"10px"}
-                      variant="outline"
-                      border={"2px solid"}
-                      borderColor={"origem.500"}
-                      textColor={"origem.500"}
-                      _hover={{
-                        borderColor: "origem.600",
-                        backgroundColor: "origem.500",
-                        textColor: "white",
-                        transition: "all 0.4s",
-                      }}
-                      onClick={() => {
-                        navigate(`/infographics`);
-                      }}
-                    >
-                      Voltar
-                    </Button>
-                    <ModalCadastroAtividadeIntervencao
-                      id={id}
-                      setRefresh={setRefresh}
-                      refresh={refresh}
-                      atividades={atividades}
-                    />
-                    <Button
-                      h={"56px"}
-                      borderRadius={"10px"}
-                      variant="outline"
-                      border={"2px solid"}
-                      borderColor={"origem.500"}
-                      textColor={"origem.500"}
-                      _hover={{
-                        borderColor: "origem.600",
-                        backgroundColor: "origem.500",
-                        textColor: "white",
-                        transition: "all 0.4s",
-                      }}
-                      onClick={() => {
-                        navigate(`precedentes`, {
-                          state: {
-                            poco,
-                          },
-                        });
-                      }}
-                    >
-                      Visão Por Precedentes
-                    </Button>
-                    <BotaoVisaoPorArea />
-                  </Flex>
-                </Flex>
-                <Flex gap={4} wrap={"wrap"} flex={1} justify={"end"}>
-                  {statusProjeto.map((status, index) => (
-                    <StatusProjeto
-                      key={index}
-                      status={status.status}
-                      color={status.color}
-                    />
-                  ))}
-                </Flex>
+          <ContainerPagina>
+            <TituloPagina botaoVoltar={true}>
+              Acompanhamento de Atividades
+            </TituloPagina>
 
-                <Flex direction={"row"} gap={4} py={4} wrap={"wrap"}>
-                  {atividades.map((atividade, index) => (
-                    <Flex
-                      key={index}
-                      direction={"column"}
-                      align={"center"}
-                      justify={"center"}
-                      onClick={() => openDetails(atividade, index)}
-                      _hover={{ cursor: "pointer" }}
-                    >
-                      <CardACT atividade={atividade} />
-                    </Flex>
-                  ))}
-                </Flex>
-                {openId && optionsAreaAtuacao.length > 0 ? (
-                  <ModalEditarAtividade
-                    listaPrecedentes={atividades}
-                    id={id}
-                    index={openIndex}
-                    atividade={openId}
-                    onClose={() => setOpenId("")}
-                    setRefresh={setRefresh}
-                    refresh={refresh}
-                    listaOptions={listaOptions}
-                  />
-                ) : undefined}
-              </Box>
+            <Flex
+              direction={"column"}
+              justify={"space-between"}
+              gap={4}
+              wrap={"wrap"}
+              mb={4}
+            >
+              <Flex gap={2} wrap={"wrap"} flex={1}>
+                <ModalCadastroAtividadeIntervencao
+                  id={id}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                  atividades={atividades}
+                />
+                <Button
+                  h={"56px"}
+                  borderRadius={"10px"}
+                  variant="outline"
+                  border={"2px solid"}
+                  borderColor={"origem.500"}
+                  textColor={"origem.500"}
+                  _hover={{
+                    borderColor: "origem.600",
+                    backgroundColor: "origem.500",
+                    textColor: "white",
+                    transition: "all 0.4s",
+                  }}
+                  onClick={() => {
+                    navigate(`precedentes`, {
+                      state: {
+                        poco,
+                      },
+                    });
+                  }}
+                >
+                  Visão Por Precedentes
+                </Button>
+                <BotaoVisaoPorArea />
+              </Flex>
             </Flex>
-          </Stack>
+            <Flex gap={4} wrap={"wrap"} flex={1} justify={"end"}>
+              {statusProjeto.map((status, index) => (
+                <StatusProjeto
+                  key={index}
+                  status={status.status}
+                  color={status.color}
+                />
+              ))}
+            </Flex>
+
+            <Flex direction={"row"} gap={4} py={4} wrap={"wrap"}>
+              {atividades.map((atividade, index) => (
+                <Flex
+                  key={index}
+                  direction={"column"}
+                  align={"center"}
+                  justify={"center"}
+                  onClick={() => openDetails(atividade, index)}
+                  _hover={{ cursor: "pointer" }}
+                >
+                  <CardACT atividade={atividade} />
+                </Flex>
+              ))}
+            </Flex>
+            {openId && optionsAreaAtuacao.length > 0 ? (
+              <ModalEditarAtividade
+                listaPrecedentes={atividades}
+                id={id}
+                index={openIndex}
+                atividade={openId}
+                onClose={() => setOpenId("")}
+                setRefresh={setRefresh}
+                refresh={refresh}
+                listaOptions={listaOptions}
+              />
+            ) : undefined}
+          </ContainerPagina>
         ) : (
           <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
             <Ring speed={2} lineWeight={5} color="blue" size={64} />
