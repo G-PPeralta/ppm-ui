@@ -13,7 +13,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Text,
+  // Text,
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -83,9 +83,6 @@ function BotaoDescricaoEJustificativa({
           <ModalBody>
             <FormControl marginBottom={4} padding={1}>
               <Flex direction={"column"}>
-                <Text fontSize={"14px"} fontWeight={"700"}>
-                  Justificativa
-                </Text>
                 <FormLabel
                   mt={"6px"}
                   htmlFor="justificativa"
@@ -127,9 +124,6 @@ function BotaoDescricaoEJustificativa({
               </FormControl> */}
             <FormControl padding={1}>
               <Flex direction={"column"}>
-                <Text fontSize={"14px"} fontWeight={"700"}>
-                  Descrição
-                </Text>
                 <FormLabel
                   htmlFor="descricao"
                   color="#949494"
