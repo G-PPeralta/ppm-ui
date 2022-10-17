@@ -1,5 +1,3 @@
-import { FiTrash } from "react-icons/fi";
-
 import {
   Button,
   Flex,
@@ -12,7 +10,6 @@ import {
   Stack,
   Text,
   useDisclosure,
-  IconButton,
   ModalHeader,
   ModalCloseButton,
 } from "@chakra-ui/react";
@@ -28,25 +25,28 @@ interface TableProps {
   id: number;
 }
 
-export function DeleteModal(id: TableProps) {
+export function RestoreModal(id: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroPriorizacao();
 
   return (
     <>
-      <IconButton
+      <Button
+        background="transparent"
+        color="origem.500"
         onClick={onOpen}
-        color={"#F40606"}
-        fontWeight={"700"}
+        variant="outline"
+        aria-label="open menu"
         backgroundColor={"transparent"}
-        aria-label="Plus sign"
+        border={"none"}
+        textAlign={"center"}
         _hover={{
-          backgroundColor: "#F40606",
+          backgroundColor: "origem.500",
           color: "white",
         }}
       >
-        <FiTrash size={"24px"} />
-      </IconButton>
+        Restaurar
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
@@ -67,7 +67,7 @@ export function DeleteModal(id: TableProps) {
               fontWeight={"700"}
               height={"48px"}
             >
-              Excluir
+              Restaurar
             </ModalHeader>
 
             <ModalCloseButton color={"white"} />
@@ -83,8 +83,7 @@ export function DeleteModal(id: TableProps) {
                         color={"#010101"}
                         fontWeight={"400"}
                       >
-                        Tem certeza que deseja mover essa informação para a
-                        Lixeira?
+                        Tem certeza que deseja restaurar esta informação?
                       </Text>
                     </Flex>
                   </Stack>

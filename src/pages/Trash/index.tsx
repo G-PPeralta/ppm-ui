@@ -6,6 +6,7 @@ import {
   Box,
   Flex,
   Heading,
+  IconButton,
   Stack,
   Table,
   TableContainer,
@@ -101,12 +102,21 @@ export function RegisteredList() {
                           <Td>{row.nome}</Td>
                           <Td textAlign={"center"}>{row.qtd}</Td>
                           <Td textAlign={"center"}>
-                            <IoIosArrowForward
-                              size={"25px"}
-                              color={"#0047BB"}
+                            <IconButton
                               onClick={() => {
                                 navigate("/actions/:" + row.id);
                               }}
+                              variant="outline"
+                              aria-label="open menu"
+                              color={"origem.500"}
+                              backgroundColor={"transparent"}
+                              border={"none"}
+                              textAlign={"center"}
+                              _hover={{
+                                backgroundColor: "origem.500",
+                                color: "white",
+                              }}
+                              icon={<IoIosArrowForward size={"24px"} />}
                             />
                           </Td>
                         </Tr>

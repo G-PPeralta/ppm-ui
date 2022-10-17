@@ -1,4 +1,6 @@
-import { Button, Modal, Text, useDisclosure, Heading } from "@chakra-ui/react";
+import { MdModeEdit } from "react-icons/md";
+
+import { Modal, useDisclosure, Heading, IconButton } from "@chakra-ui/react";
 
 interface TableProps {
   id: number;
@@ -9,25 +11,20 @@ export function EditModal(id: TableProps) {
 
   return (
     <>
-      <Button
+      <IconButton
         onClick={onOpen}
-        background="white"
-        variant="primary"
-        border={"#0047BB solid 1px"}
-        color="origem.500"
+        variant="outline"
+        aria-label="open menu"
+        color={"origem.500"}
+        backgroundColor={"transparent"}
+        border={"none"}
+        textAlign={"center"}
         _hover={{
-          background: "origem.500",
+          backgroundColor: "origem.500",
           color: "white",
-          transition: "all 0.4s",
         }}
-        h={"56px"}
-        w={"134px"}
-        fontSize={"18px"}
-        fontWeight={"700"}
-        borderRadius={"8px"}
-      >
-        <Text>Configuração</Text>
-      </Button>
+        icon={<MdModeEdit size={"24px"} />}
+      />
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <Heading>Oi</Heading>
       </Modal>

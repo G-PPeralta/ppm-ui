@@ -142,9 +142,9 @@ export function ActionItems() {
                           <Td>{row.nome}</Td>
                           <Td textAlign={"center"}>{row.qtd}</Td>
                           <Td textAlign={"center"}>
-                            <Flex>
+                            <Flex gap={2}>
                               <EditModal id={+row.id} />
-                              <DeleteModal />
+                              <DeleteModal id={+row.id} />
                             </Flex>
                           </Td>
                         </Tr>

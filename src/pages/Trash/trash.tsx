@@ -3,7 +3,6 @@ import { IoIosArrowBack } from "react-icons/io";
 
 import {
   Box,
-  Button,
   Flex,
   Heading,
   Link,
@@ -20,6 +19,8 @@ import {
 
 import PaginacaoTabela from "components/PaginacaoTabela";
 import Sidebar from "components/SideBar";
+
+import { RestoreModal } from "./modais/restore";
 
 export function Trash() {
   const [from, setFrom] = useState<number>(0);
@@ -106,9 +107,7 @@ export function Trash() {
                           <Td>{row.nome}</Td>
                           <Td textAlign={"center"}>{row.qtd}</Td>
                           <Td textAlign={"center"}>
-                            <Button background="transparent" color="origem.500">
-                              Restaurar
-                            </Button>
+                            <RestoreModal id={+row.id} />
                           </Td>
                         </Tr>
                       ))}
