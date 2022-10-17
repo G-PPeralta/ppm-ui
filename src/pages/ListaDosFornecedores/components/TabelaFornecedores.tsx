@@ -59,8 +59,6 @@ export function TabelaFornecedores({
   //   );
   // console.log(realSum);
 
-  console.log(polos);
-
   const tableData =
     fornecedores &&
     fornecedores

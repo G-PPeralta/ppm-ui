@@ -90,6 +90,7 @@ export function Fornecedores() {
       fornecedores.map((f) => (f.id === fornecedor.id ? fornecedor : f))
     );
     putFornecedor(fornecedor);
+    handleGetFornecedores();
     onClose();
   }
 
