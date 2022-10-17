@@ -31,7 +31,6 @@ function GenericCurveS({ data }: Props) {
         direction={"column"}
         boxShadow={"md"}
         borderRadius={"2xl"}
-        marginTop={4}
       >
         <Flex
           backgroundColor={"white"}

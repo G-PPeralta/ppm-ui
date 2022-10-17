@@ -82,9 +82,8 @@ export function Reports() {
       <Sidebar>
         <Stack>
           <Box
-            paddingTop={{ base: "5", sm: "10" }}
-            paddingBottom={{ base: "5", sm: "10" }}
-            px={{ base: "4", sm: "10" }}
+            py={{ base: "5", sm: "24px" }}
+            px={{ base: "4", sm: "24px" }}
             bg={useBreakpointValue({ base: "white", sm: "white" })}
             boxShadow={{
               base: "none",
@@ -92,7 +91,7 @@ export function Reports() {
             }}
             borderRadius={{ base: "none", sm: "xl" }}
           >
-            <Flex justify={"space-between"} alignItems={"center"} mb={5}>
+            <Flex justify={"space-between"} alignItems={"center"}>
               <Flex direction={"row"} alignItems={"center"}>
                 {/* <Link href="javascript:history.back()">
                   <IoIosArrowBack

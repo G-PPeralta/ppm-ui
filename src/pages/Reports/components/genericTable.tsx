@@ -36,9 +36,9 @@ export function GenericTable({ data, total }: Props) {
   return (
     <>
       <Flex direction={"column"}>
-        <TableContainer w={"100%}"}>
-          <Table>
-            <Thead backgroundColor={"origem.300"}>
+        <TableContainer w={"100%"} borderTopRadius={"10px"}>
+          <Table variant="striped" colorScheme={"strippedGray"}>
+            <Thead background={"origem.500"}>
               <Tr>
                 {data.columnNames &&
                   data.columnNames.map((column) => (
@@ -62,7 +62,7 @@ export function GenericTable({ data, total }: Props) {
           {total == true && (
             <Table>
               <Thead>
-                <Tr backgroundColor={"origem.200"} fontWeight={"bold"}>
+                <Tr backgroundColor={"origem.500"} fontWeight={"bold"}>
                   <Th color={"white"}>Total</Th>
                   <Th color={"white"} w={"100%"}>
                     {data.rows.length}

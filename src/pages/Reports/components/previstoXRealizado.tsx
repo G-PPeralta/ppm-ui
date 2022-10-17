@@ -8,7 +8,7 @@ import { ProjectSummary } from "./summary";
 export function PrevistoXRealizado() {
   return (
     <>
-      <Flex direction={"column"} w={"100%"} gap={"1.4em"} marginTop={"1.4em"}>
+      <Flex direction={"column"} w={"100%"} gap={"24px"}>
         <ProjectSummary data={summaryValues} table={false} />
         <GenericCurveS data={curveSData} />
         <GenericTable data={tableData} total={true} />
