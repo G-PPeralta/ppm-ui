@@ -13,6 +13,7 @@ type Atividade = {
   pct_real: number;
   qtddias: number;
   sonda: string;
+  ind_alerta?: number;
 };
 
 type Props = {
@@ -33,7 +34,8 @@ function CardACT({ atividade }: Props) {
       backgroundColor={validateDate(
         Number(atividade.pct_plan),
         Number(atividade.comp_pct),
-        Number(atividade.pct_real)
+        Number(atividade.pct_real),
+        Number(atividade.ind_alerta)
       )}
       px={5}
       py={3}
