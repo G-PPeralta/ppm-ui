@@ -81,19 +81,19 @@ function Statistics() {
         {!loading ? (
           <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
             <Box
-              py={{ base: "6", sm: "8" }}
-              px={{ base: "6", sm: "8" }}
+              py={{ base: "6", sm: "6" }}
+              px={{ base: "6", sm: "6" }}
               w={"100%"}
               bg={"white"}
               borderRadius={{ base: "xl", sm: "xl" }}
             >
-              <Flex justify={"space-between"} mb={5} wrap={"wrap"}>
+              <Flex justify={"space-between"} mb={2} wrap={"wrap"}>
                 <Heading as="h3" size="md">
                   Projetos
                 </Heading>
-                <Heading as="h3" size="md" color={"origem.500"}>
+                {/* <Heading as="h3" size="md" color={"origem.500"}>
                   Lixeira
-                </Heading>
+                </Heading> */}
               </Flex>
 
               <Flex justify={"space-between"} wrap={"wrap"}>
