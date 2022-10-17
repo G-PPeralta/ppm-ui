@@ -5,6 +5,8 @@ import { BudgetReal, ClasseServico } from "interfaces/Budgets";
 import { Fornecedor } from "interfaces/Services";
 import { cadastroValorPlanejadoSchema } from "validations/ModalCadastroOrcamento";
 
+import { regexSomenteNumeros } from "utils/regex";
+
 import { useToast } from "contexts/Toast";
 
 import { getFornecedor } from "services/get/Fornecedor";
@@ -13,7 +15,7 @@ import { postAddValorRealizado } from "services/post/Budget";
 
 import { useAuth } from "./useAuth";
 
-export function useCadastroOrcamentoPlanejado() {
+export function useCadastroOrcamentoRealizado() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
@@ -47,7 +49,7 @@ export function useCadastroOrcamentoPlanejado() {
     onSubmit: async (values) => {
       const newValues: BudgetReal = {
         atividadeId: atividade,
-        valor: +values.gasto,
+        valor: +regexSomenteNumeros(values.gasto),
         data: values.data,
         fornecedor: values.fornecedor,
         classeServico: values.servico,

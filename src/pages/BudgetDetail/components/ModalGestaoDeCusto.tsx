@@ -31,12 +31,12 @@ import { TextError } from "components/TextError";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroOrcamentoPlanejado } from "hooks/useCadastroOrcamentoPlanejado";
+import { useCadastroOrcamentoRealizado } from "hooks/useCadastroOrcamentoRealizado";
 
 function ModalGestaoDeCusto(props: { projeto: Projeto }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, setAtividade, fornecedores, classesSevicos } =
-    useCadastroOrcamentoPlanejado();
+    useCadastroOrcamentoRealizado();
   const { id } = props.projeto;
 
   useEffect(() => {
