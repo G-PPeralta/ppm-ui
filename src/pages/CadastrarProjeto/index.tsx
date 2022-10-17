@@ -5,8 +5,8 @@ import {
   Button,
   Flex,
   Heading,
-  NumberInput,
-  NumberInputField,
+  InputGroup,
+  InputLeftElement,
   Text,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
@@ -14,7 +14,6 @@ import { Ring } from "@uiball/loaders";
 import BotaoSetaVoltar from "components/BotaoSetaVoltar/BotaoSetaVoltar";
 import DatePickerGenerico from "components/DatePickerGenerico";
 import InputGenerico from "components/InputGenerico";
-import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 import Sidebar from "components/SideBar";
 import TextAreaGenerico from "components/TextAreaGenerico";
@@ -249,36 +248,26 @@ function CadastrarProjeto() {
                   </Flex>
                 </Flex>
 
-                <Flex gap={2} align={"start"} w={"35%"}>
-                  <Flex direction={"column"}>
-                    <Flex gap={1}>
-                      <RequiredField />
-                      <Text
-                        fontWeight={"bold"}
-                        fontSize={"12px"}
-                        color={"#949494"}
-                      >
-                        CAPEX PREVISTO
-                      </Text>
-                    </Flex>
-                    <NumberInput
-                      h={"56px"}
-                      precision={2}
-                      max={9999999}
-                      min={0}
-                      id="capexPrevisto"
-                      name="capexPrevisto"
-                      value={registerForm.values.capexPrevisto}
-                      onChange={(value) =>
-                        registerForm.setFieldValue(
-                          "capexPrevisto",
-                          Number(value)
-                        )
-                      }
+                <Flex gap={2} align={"start"} w={"35%"} direction={"row"}>
+                  <InputGroup>
+                    <InputLeftElement
+                      pointerEvents="none"
+                      color="gray.300"
+                      fontSize="1.2em"
                     >
-                      <NumberInputField bg={"#fff"} h={"56px"} />
-                    </NumberInput>
-                  </Flex>
+                      R$
+                    </InputLeftElement>
+                    <InputGenerico
+                      registerForm={registerForm}
+                      nomeInput={"CAPEX PREVISTO"}
+                      propName={"capexPrevisto"}
+                      value={registerForm.values.capexPrevisto}
+                      required={true}
+                      placeholder={"Capex Previsto"}
+                      maxLength={50}
+                      isNumeric={true}
+                    />
+                  </InputGroup>
 
                   {registerForm.values.complexidadeId === 0 ? (
                     <InputCadastroInline

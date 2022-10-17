@@ -3,6 +3,8 @@ import { Flex, Input, Text } from "@chakra-ui/react";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
+import { maskMoney } from "utils/regexCoinMask";
+
 interface Props {
   registerForm: any;
   nomeInput: string;
@@ -12,6 +14,7 @@ interface Props {
   required?: boolean;
   placeholder?: string;
   type?: string;
+  isNumeric?: boolean;
 }
 
 function InputGenerico({
@@ -23,6 +26,7 @@ function InputGenerico({
   placeholder,
   maxLength,
   type,
+  isNumeric,
 }: Props) {
   return (
     <Flex direction={"column"} w={"100%"}>
@@ -32,17 +36,32 @@ function InputGenerico({
           {nomeInput}
         </Text>
       </Flex>
-      <Input
-        h={"56px"}
-        placeholder={placeholder}
-        type={type || "text"}
-        id={propName}
-        name={propName}
-        value={value}
-        maxLength={maxLength}
-        onChange={registerForm.handleChange}
-        w={"100%"}
-      />
+      {isNumeric ? (
+        <Input
+          h={"56px"}
+          placeholder={placeholder}
+          type={type || "text"}
+          id={propName}
+          name={propName}
+          value={value}
+          maxLength={maxLength}
+          onChange={registerForm.handleChange}
+          w={"100%"}
+          onKeyUp={(event) => maskMoney(event)}
+        />
+      ) : (
+        <Input
+          h={"56px"}
+          placeholder={placeholder}
+          type={type || "text"}
+          id={propName}
+          name={propName}
+          value={value}
+          maxLength={maxLength}
+          onChange={registerForm.handleChange}
+          w={"100%"}
+        />
+      )}
       {registerForm.touched[propName] && registerForm.errors[propName] && (
         <TextError>{registerForm.errors[propName]}</TextError>
       )}
