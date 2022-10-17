@@ -102,7 +102,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             id="gasto"
                             name="gasto"
                             type={"number"}
-                            max="1000000000000"
+                            maxLength={12}
                             value={registerForm.values.gasto}
                             onChange={registerForm.handleChange}
                           />
@@ -199,7 +199,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             placeholder="Pedido"
                             id="pedido"
                             name="pedido"
-                            max={"100"}
+                            maxLength={100}
                             value={registerForm.values.pedido}
                             onChange={registerForm.handleChange}
                             onKeyPress={(e) => {
