@@ -44,6 +44,8 @@ function CadastrarProjeto() {
     optionsGates,
   } = useProjetos();
 
+  const innerWidth = window.innerWidth;
+
   const getValue = (options: any, chave: any) => {
     const index = options
       .map(({ value }: any) => value)
@@ -75,117 +77,139 @@ function CadastrarProjeto() {
               </Flex>
 
               <Flex direction={"column"} gap={4} mt={4}>
-                <Flex gap={2} align={"start"} w={"50%"}>
-                  {registerForm.values.responsavelId === 0 ? (
-                    <InputCadastroInline
-                      required={true}
-                      refreshState={refreshState}
-                      registerForm={registerForm}
-                      listaOptions={optionsResponsaveis}
-                      nomeLabel={"RESPONSAVEL"}
-                      payloadKey={"nome"}
-                      propName={"responsavelId"}
-                      rota={"/responsavel"}
-                      respOuCoord={true}
-                    />
-                  ) : (
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"RESPONSAVEL"}
-                      propName={"responsavelId"}
-                      options={optionsResponsaveis}
-                      required={true}
-                      value={getValue(optionsResponsaveis, "responsavelId")}
-                    />
-                  )}
-                  {registerForm.values.coordenadorId === 0 ? (
-                    <InputCadastroInline
-                      required={true}
-                      refreshState={refreshState}
-                      registerForm={registerForm}
-                      listaOptions={optionsCoordenadores}
-                      nomeLabel={"COORDENADOR"}
-                      payloadKey={"coordenadorNome"}
-                      propName={"coordenadorId"}
-                      rota={"/coordenador"}
-                      respOuCoord={true}
-                    />
-                  ) : (
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"COORDENADOR"}
-                      propName={"coordenadorId"}
-                      options={optionsCoordenadores}
-                      required={true}
-                      value={getValue(optionsCoordenadores, "coordenadorId")}
-                    />
-                  )}
+                <Flex
+                  gap={2}
+                  align={innerWidth > 428 ? "start" : "stretch"}
+                  w={innerWidth > 428 ? "50%" : "100%"}
+                  wrap={"wrap"}
+                  direction={innerWidth > 428 ? "row" : "column"}
+                >
+                  <Flex flex={1}>
+                    {registerForm.values.responsavelId === 0 ? (
+                      <InputCadastroInline
+                        required={true}
+                        refreshState={refreshState}
+                        registerForm={registerForm}
+                        listaOptions={optionsResponsaveis}
+                        nomeLabel={"RESPONSAVEL"}
+                        payloadKey={"nome"}
+                        propName={"responsavelId"}
+                        rota={"/responsavel"}
+                        respOuCoord={true}
+                      />
+                    ) : (
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"RESPONSAVEL"}
+                        propName={"responsavelId"}
+                        options={optionsResponsaveis}
+                        required={true}
+                        value={getValue(optionsResponsaveis, "responsavelId")}
+                      />
+                    )}
+                  </Flex>
+                  <Flex flex={1}>
+                    {registerForm.values.coordenadorId === 0 ? (
+                      <InputCadastroInline
+                        required={true}
+                        refreshState={refreshState}
+                        registerForm={registerForm}
+                        listaOptions={optionsCoordenadores}
+                        nomeLabel={"COORDENADOR"}
+                        payloadKey={"coordenadorNome"}
+                        propName={"coordenadorId"}
+                        rota={"/coordenador"}
+                        respOuCoord={true}
+                      />
+                    ) : (
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"COORDENADOR"}
+                        propName={"coordenadorId"}
+                        options={optionsCoordenadores}
+                        required={true}
+                        value={getValue(optionsCoordenadores, "coordenadorId")}
+                      />
+                    )}
+                  </Flex>
                 </Flex>
 
-                <Flex gap={2} align={"start"} w={"100%"}>
-                  {registerForm.values.poloId === 0 ? (
-                    <InputCadastroInline
-                      required={true}
-                      refreshState={refreshState}
-                      registerForm={registerForm}
-                      listaOptions={optionsPolos}
-                      nomeLabel={"POLO"}
-                      payloadKey={"polo"}
-                      propName={"poloId"}
-                      rota={"/polo"}
-                    />
-                  ) : (
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"POLO"}
-                      propName={"poloId"}
-                      options={optionsPolos}
-                      required={true}
-                      value={getValue(optionsPolos, "poloId")}
-                    />
-                  )}
-                  {registerForm.values.localId === 0 ? (
-                    <InputCadastroInline
-                      required={true}
-                      refreshState={refreshState}
-                      registerForm={registerForm}
-                      listaOptions={optionsLocais}
-                      nomeLabel={"POLO"}
-                      payloadKey={"local"}
-                      propName={"localId"}
-                      rota={"/local"}
-                    />
-                  ) : (
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"LOCAL"}
-                      propName={"localId"}
-                      options={optionsLocais}
-                      required={true}
-                      value={getValue(optionsLocais, "localId")}
-                    />
-                  )}
-                  {registerForm.values.solicitanteId === 0 ? (
-                    <InputCadastroInline
-                      required={true}
-                      refreshState={refreshState}
-                      registerForm={registerForm}
-                      listaOptions={optionsSolicitantes}
-                      nomeLabel={"SOLICITANTE"}
-                      payloadKey={"solicitante"}
-                      propName={"solicitanteId"}
-                      rota={"/solicitante"}
-                    />
-                  ) : (
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"SOLICITANTE"}
-                      propName={"solicitanteId"}
-                      options={optionsSolicitantes}
-                      required={true}
-                      value={getValue(optionsSolicitantes, "solicitanteId")}
-                    />
-                  )}
+                <Flex
+                  gap={2}
+                  align={innerWidth > 428 ? "start" : "stretch"}
+                  w={"100%"}
+                  wrap={"wrap"}
+                  direction={innerWidth > 428 ? "row" : "column"}
+                >
+                  <Flex flex={1}>
+                    {registerForm.values.poloId === 0 ? (
+                      <InputCadastroInline
+                        required={true}
+                        refreshState={refreshState}
+                        registerForm={registerForm}
+                        listaOptions={optionsPolos}
+                        nomeLabel={"POLO"}
+                        payloadKey={"polo"}
+                        propName={"poloId"}
+                        rota={"/polo"}
+                      />
+                    ) : (
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"POLO"}
+                        propName={"poloId"}
+                        options={optionsPolos}
+                        required={true}
+                        value={getValue(optionsPolos, "poloId")}
+                      />
+                    )}
+                  </Flex>
+                  <Flex flex={1}>
+                    {registerForm.values.localId === 0 ? (
+                      <InputCadastroInline
+                        required={true}
+                        refreshState={refreshState}
+                        registerForm={registerForm}
+                        listaOptions={optionsLocais}
+                        nomeLabel={"LOCAL"}
+                        payloadKey={"local"}
+                        propName={"localId"}
+                        rota={"/local"}
+                      />
+                    ) : (
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"LOCAL"}
+                        propName={"localId"}
+                        options={optionsLocais}
+                        required={true}
+                        value={getValue(optionsLocais, "localId")}
+                      />
+                    )}
+                  </Flex>
+                  <Flex flex={1}>
+                    {registerForm.values.solicitanteId === 0 ? (
+                      <InputCadastroInline
+                        required={true}
+                        refreshState={refreshState}
+                        registerForm={registerForm}
+                        listaOptions={optionsSolicitantes}
+                        nomeLabel={"SOLICITANTE"}
+                        payloadKey={"solicitante"}
+                        propName={"solicitanteId"}
+                        rota={"/solicitante"}
+                      />
+                    ) : (
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"SOLICITANTE"}
+                        propName={"solicitanteId"}
+                        options={optionsSolicitantes}
+                        required={true}
+                        value={getValue(optionsSolicitantes, "solicitanteId")}
+                      />
+                    )}
+                  </Flex>
                   {/* <SelectFiltragem
                     registerForm={registerForm}
                     nomeSelect={"PRIORIDADE"}
@@ -193,30 +217,38 @@ function CadastrarProjeto() {
                     options={optionsPrioridades}
                     required={true}
                   /> */}
-                  {registerForm.values.statusId === 0 ? (
-                    <InputCadastroInline
-                      required={true}
-                      refreshState={refreshState}
-                      registerForm={registerForm}
-                      listaOptions={optionsStatus}
-                      nomeLabel={"STATUS"}
-                      payloadKey={"status"}
-                      propName={"statusId"}
-                      rota={"/status-projeto"}
-                    />
-                  ) : (
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"STATUS"}
-                      propName={"statusId"}
-                      options={optionsStatus}
-                      required={true}
-                      value={getValue(optionsStatus, "statusId")}
-                    />
-                  )}
+                  <Flex flex={1}>
+                    {registerForm.values.statusId === 0 ? (
+                      <InputCadastroInline
+                        required={true}
+                        refreshState={refreshState}
+                        registerForm={registerForm}
+                        listaOptions={optionsStatus}
+                        nomeLabel={"STATUS"}
+                        payloadKey={"status"}
+                        propName={"statusId"}
+                        rota={"/status-projeto"}
+                      />
+                    ) : (
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"STATUS"}
+                        propName={"statusId"}
+                        options={optionsStatus}
+                        required={true}
+                        value={getValue(optionsStatus, "statusId")}
+                      />
+                    )}
+                  </Flex>
                 </Flex>
 
-                <Flex gap={2} align={"start"} w={"60%"}>
+                <Flex
+                  gap={2}
+                  align={innerWidth > 428 ? "end" : "stretch"}
+                  w={innerWidth > 428 ? "60%" : "100%"}
+                  wrap={"wrap"}
+                  direction={innerWidth > 428 ? "row" : "column"}
+                >
                   <Flex flex={2}>
                     <InputGenerico
                       registerForm={registerForm}
@@ -249,8 +281,14 @@ function CadastrarProjeto() {
                   </Flex>
                 </Flex>
 
-                <Flex gap={2} align={"start"} w={"35%"}>
-                  <Flex direction={"column"}>
+                <Flex
+                  gap={2}
+                  align={innerWidth > 428 ? "start" : "stretch"}
+                  w={innerWidth > 428 ? "35%" : "100%"}
+                  wrap={"wrap"}
+                  direction={innerWidth > 428 ? "row" : "column"}
+                >
+                  <Flex direction={"column"} flex={1}>
                     <Flex gap={1}>
                       <RequiredField />
                       <Text
@@ -279,118 +317,142 @@ function CadastrarProjeto() {
                       <NumberInputField bg={"#fff"} h={"56px"} />
                     </NumberInput>
                   </Flex>
-
-                  {registerForm.values.complexidadeId === 0 ? (
-                    <InputCadastroInline
-                      required={true}
-                      refreshState={refreshState}
-                      registerForm={registerForm}
-                      listaOptions={optionsComplexidades}
-                      nomeLabel={"COMPLEXIDADE"}
-                      payloadKey={"complexidade"}
-                      propName={"complexidadeId"}
-                      rota={"/complexidade"}
-                    />
-                  ) : (
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"COMPLEXIDADE"}
-                      propName={"complexidadeId"}
-                      options={optionsComplexidades}
-                      required={true}
-                      value={getValue(optionsComplexidades, "complexidadeId")}
-                    />
-                  )}
+                  <Flex flex={1}>
+                    {registerForm.values.complexidadeId === 0 ? (
+                      <InputCadastroInline
+                        required={true}
+                        refreshState={refreshState}
+                        registerForm={registerForm}
+                        listaOptions={optionsComplexidades}
+                        nomeLabel={"COMPLEXIDADE"}
+                        payloadKey={"complexidade"}
+                        propName={"complexidadeId"}
+                        rota={"/complexidade"}
+                      />
+                    ) : (
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"COMPLEXIDADE"}
+                        propName={"complexidadeId"}
+                        options={optionsComplexidades}
+                        required={true}
+                        value={getValue(optionsComplexidades, "complexidadeId")}
+                      />
+                    )}
+                  </Flex>
                 </Flex>
 
-                <Flex gap={2} align={"start"} w={"80%"}>
-                  {registerForm.values.divisaoId === 0 ? (
-                    <InputCadastroInline
-                      required={true}
-                      refreshState={refreshState}
-                      registerForm={registerForm}
-                      listaOptions={optionsDivisoes}
-                      nomeLabel={"DIVISÃO"}
-                      payloadKey={"divisao"}
-                      propName={"divisaoId"}
-                      rota={"/divisao"}
-                    />
-                  ) : (
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"DIVISÃO"}
-                      propName={"divisaoId"}
-                      options={optionsDivisoes}
-                      required={true}
-                      value={getValue(optionsDivisoes, "divisaoId")}
-                    />
-                  )}
-                  {registerForm.values.classificacaoId === 0 ? (
-                    <InputCadastroInline
-                      required={true}
-                      refreshState={refreshState}
-                      registerForm={registerForm}
-                      listaOptions={optionsClassificacoes}
-                      nomeLabel={"CLASSIFICAÇÃO"}
-                      payloadKey={"classificacao"}
-                      propName={"classificacaoId"}
-                      rota={"/classificacao"}
-                    />
-                  ) : (
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"CLASSIFICAÇÃO"}
-                      propName={"classificacaoId"}
-                      options={optionsClassificacoes}
-                      required={true}
-                      value={getValue(optionsClassificacoes, "classificacaoId")}
-                    />
-                  )}
-                  {registerForm.values.tipoProjetoId === 0 ? (
-                    <InputCadastroInline
-                      required={true}
-                      refreshState={refreshState}
-                      registerForm={registerForm}
-                      listaOptions={optionsTipoProjetos}
-                      nomeLabel={"TIPO"}
-                      payloadKey={"tipo"}
-                      propName={"tipoProjetoId"}
-                      rota={"/tipo-projeto"}
-                    />
-                  ) : (
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"TIPO"}
-                      propName={"tipoProjetoId"}
-                      options={optionsTipoProjetos}
-                      required={true}
-                      value={getValue(optionsTipoProjetos, "tipoProjetoId")}
-                    />
-                  )}
-                  {registerForm.values.gateId === 0 ? (
-                    <InputCadastroInline
-                      required={true}
-                      refreshState={refreshState}
-                      registerForm={registerForm}
-                      listaOptions={optionsGates}
-                      nomeLabel={"GATE"}
-                      payloadKey={"gate"}
-                      propName={"gateId"}
-                      rota={"/gate"}
-                    />
-                  ) : (
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"GATE"}
-                      propName={"gateId"}
-                      options={optionsGates}
-                      required={true}
-                      value={getValue(optionsGates, "gateId")}
-                    />
-                  )}
+                <Flex
+                  gap={2}
+                  align={innerWidth > 428 ? "start" : "stretch"}
+                  w={innerWidth > 428 ? "80%" : "100%"}
+                  wrap={"wrap"}
+                  direction={innerWidth > 428 ? "row" : "column"}
+                >
+                  <Flex flex={1}>
+                    {registerForm.values.divisaoId === 0 ? (
+                      <InputCadastroInline
+                        required={true}
+                        refreshState={refreshState}
+                        registerForm={registerForm}
+                        listaOptions={optionsDivisoes}
+                        nomeLabel={"DIVISÃO"}
+                        payloadKey={"divisao"}
+                        propName={"divisaoId"}
+                        rota={"/divisao"}
+                      />
+                    ) : (
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"DIVISÃO"}
+                        propName={"divisaoId"}
+                        options={optionsDivisoes}
+                        required={true}
+                        value={getValue(optionsDivisoes, "divisaoId")}
+                      />
+                    )}
+                  </Flex>
+                  <Flex flex={1}>
+                    {registerForm.values.classificacaoId === 0 ? (
+                      <InputCadastroInline
+                        required={true}
+                        refreshState={refreshState}
+                        registerForm={registerForm}
+                        listaOptions={optionsClassificacoes}
+                        nomeLabel={"CLASSIFICAÇÃO"}
+                        payloadKey={"classificacao"}
+                        propName={"classificacaoId"}
+                        rota={"/classificacao"}
+                      />
+                    ) : (
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"CLASSIFICAÇÃO"}
+                        propName={"classificacaoId"}
+                        options={optionsClassificacoes}
+                        required={true}
+                        value={getValue(
+                          optionsClassificacoes,
+                          "classificacaoId"
+                        )}
+                      />
+                    )}
+                  </Flex>
+                  <Flex flex={1}>
+                    {registerForm.values.tipoProjetoId === 0 ? (
+                      <InputCadastroInline
+                        required={true}
+                        refreshState={refreshState}
+                        registerForm={registerForm}
+                        listaOptions={optionsTipoProjetos}
+                        nomeLabel={"TIPO"}
+                        payloadKey={"tipo"}
+                        propName={"tipoProjetoId"}
+                        rota={"/tipo-projeto"}
+                      />
+                    ) : (
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"TIPO"}
+                        propName={"tipoProjetoId"}
+                        options={optionsTipoProjetos}
+                        required={true}
+                        value={getValue(optionsTipoProjetos, "tipoProjetoId")}
+                      />
+                    )}
+                  </Flex>
+                  <Flex flex={1}>
+                    {registerForm.values.gateId === 0 ? (
+                      <InputCadastroInline
+                        required={true}
+                        refreshState={refreshState}
+                        registerForm={registerForm}
+                        listaOptions={optionsGates}
+                        nomeLabel={"GATE"}
+                        payloadKey={"gate"}
+                        propName={"gateId"}
+                        rota={"/gate"}
+                      />
+                    ) : (
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"GATE"}
+                        propName={"gateId"}
+                        options={optionsGates}
+                        required={true}
+                        value={getValue(optionsGates, "gateId")}
+                      />
+                    )}
+                  </Flex>
                 </Flex>
 
-                <Flex gap={2} align={"start"} w={"100%"}>
+                <Flex
+                  gap={2}
+                  align={innerWidth > 428 ? "start" : "stretch"}
+                  w={"100%"}
+                  wrap={"wrap"}
+                  direction={innerWidth > 428 ? "row" : "column"}
+                >
                   <TextAreaGenerico
                     registerForm={registerForm}
                     nomeInput={"DESCRIÇÃO"}
@@ -408,7 +470,13 @@ function CadastrarProjeto() {
                     placeholder={"Escreva a justificativa do projeto"}
                   />
                 </Flex>
-                <Flex gap={2} align={"start"} w={"49.5%"}>
+                <Flex
+                  gap={2}
+                  align={innerWidth > 428 ? "start" : "stretch"}
+                  w={innerWidth > 428 ? "49.%" : "100%"}
+                  wrap={"wrap"}
+                  direction={innerWidth > 428 ? "row" : "column"}
+                >
                   <TextAreaGenerico
                     registerForm={registerForm}
                     nomeInput={"COMENTÁRIOS"}
