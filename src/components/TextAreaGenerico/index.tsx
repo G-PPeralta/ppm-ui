@@ -21,7 +21,7 @@ function TextAreaGenerico({
   placeholder,
 }: Props) {
   return (
-    <Flex direction={"column"} w={"100%"}>
+    <Flex direction={"column"} w={"100%"} flex={1}>
       <Flex gap={1}>
         {required && <RequiredField />}
         <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
