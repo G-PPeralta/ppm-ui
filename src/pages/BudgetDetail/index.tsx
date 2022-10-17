@@ -13,6 +13,7 @@ import {
 import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
+import TituloPagina from "components/TituloPagina";
 
 import { useBudgetDetail } from "hooks/useBudgetDetail";
 
@@ -40,7 +41,7 @@ export function BudgetDetail() {
               bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
             >
               <Box
-                py={{ base: "0", sm: "16" }}
+                py={{ base: "0", sm: "5" }}
                 px={{ base: "4", sm: "10" }}
                 w={useBreakpointValue({
                   base: "20rem",
@@ -55,11 +56,17 @@ export function BudgetDetail() {
                 }}
                 borderRadius={{ base: "none", sm: "xl" }}
               >
-                <Heading as="h2" size="lg" textAlign={"start"}>
+                <TituloPagina botaoVoltar={true}>
                   Gerencial do Orçamento
-                </Heading>
+                </TituloPagina>
 
-                <Heading as="h3" size="md" noOfLines={1}>
+                <Heading
+                  as="h3"
+                  size="md"
+                  fontFamily={"Mulish"}
+                  fontWeight={"bold"}
+                  noOfLines={1}
+                >
                   {titulo?.sonda_nome}
                 </Heading>
                 <Text>{titulo?.poco_nome}</Text>

@@ -103,6 +103,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             name="gasto"
                             type={"number"}
                             maxLength={12}
+                            max={1000000000}
                             value={registerForm.values.gasto}
                             onChange={registerForm.handleChange}
                           />

@@ -27,7 +27,7 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
       <TableContainer mt={4} mb={3} ml={1}>
         <Table variant="striped">
           <Thead>
-            <Tr backgroundColor={"blue"} color="white">
+            <Tr background={"origem.500"} color="white">
               <Th color="white">Item</Th>
               <Th align="right" color="white" maxWidth="1.5">
                 {/* <Button
@@ -106,13 +106,13 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
             </Tr>
           </Tbody>
           <Tfoot>
-            <Tr backgroundColor={"blue"} color="white">
+            <Tr background={"origem.500"} color="white">
               <Th colSpan={2} color="white">
                 Total R$
               </Th>
               <Th color="white">{formatReal(data?.totalBRL || 0)}</Th>
             </Tr>
-            <Tr backgroundColor={"blue"} color="white">
+            <Tr background={"origem.500"} color="white">
               <Th colSpan={2} color="white" borderBottomLeftRadius={"10px"}>
                 Total US$
               </Th>
