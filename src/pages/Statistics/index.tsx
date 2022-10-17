@@ -83,7 +83,7 @@ function Statistics() {
           <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
             <Box
               py={{ base: "6", sm: "6" }}
-              px={{ base: "6", sm: "8" }}
+              px={{ base: "6", sm: "6" }}
               w={"100%"}
               bg={"white"}
               borderRadius={{ base: "xl", sm: "xl" }}
@@ -94,7 +94,16 @@ function Statistics() {
                 wrap={"wrap"}
                 align={"center"}
               >
-                <Heading as="h3" size="md" mb={2} textAlign={"center"}>
+                <Heading
+                  as="h1"
+                  size="md"
+                  mb={2}
+                  textAlign={"center"}
+                  fontSize={"24px"}
+                  color={"#2D2926"}
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
+                >
                   Projetos
                 </Heading>
                 {/* <Heading as="h3" size="md" color={"origem.500"}>
@@ -117,7 +126,7 @@ function Statistics() {
                       fontSize={"12px"}
                       color={"#949494"}
                     >
-                      Sonda
+                      SONDA
                     </Text>
                     <Input
                       h={"56px"}
