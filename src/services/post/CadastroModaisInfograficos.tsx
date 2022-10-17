@@ -101,3 +101,15 @@ export async function postCadastroAtividadeIntervencao(
   );
   return { status };
 }
+
+export async function patchEditarAtividadeIntervencao(
+  campanhaId: number,
+  payload: any
+): Promise<{ status: number }> {
+  const { status } = await api.patch(
+    `/campanha/${campanhaId}`,
+    payload,
+    token()
+  );
+  return { status };
+}

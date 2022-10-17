@@ -37,7 +37,13 @@ export function Budgets() {
                 wrap={"wrap"}
                 align={"center"}
               >
-                <Heading as="h3" size="md" textAlign={"center"}>
+                <Heading
+                  as="h3"
+                  size="md"
+                  textAlign={"center"}
+                  fontSize={"24px"}
+                  fontWeight={"bold"}
+                >
                   Gerencial do Orçamento
                 </Heading>
               </Flex>

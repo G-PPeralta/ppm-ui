@@ -15,6 +15,8 @@ import Sidebar from "components/SideBar";
 
 import { statusProjeto } from "utils/validateDate";
 
+import { useRequests } from "hooks/useRequests";
+
 import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
 import StatusProjeto from "../../components/StatusProjeto";
@@ -25,6 +27,13 @@ import ModalCadastroAtividadeIntervencao from "./Components/ModalCadastroAtivida
 import ModalEditarAtividade from "./Components/ModalEditarAtividade";
 
 export function ActivitiesSchedule() {
+  const { optionsAreaAtuacao, optionsResponsaveis } = useRequests();
+
+  const listaOptions = {
+    optionsAreaAtuacao,
+    optionsResponsaveis,
+  };
+
   const navigate = useNavigate();
   const { state }: any = useLocation();
   const { id } = useParams();
@@ -158,7 +167,7 @@ export function ActivitiesSchedule() {
                     </Flex>
                   ))}
                 </Flex>
-                {openId ? (
+                {openId && optionsAreaAtuacao.length > 0 ? (
                   <ModalEditarAtividade
                     listaPrecedentes={atividades}
                     id={id}
@@ -167,6 +176,7 @@ export function ActivitiesSchedule() {
                     onClose={() => setOpenId("")}
                     setRefresh={setRefresh}
                     refresh={refresh}
+                    listaOptions={listaOptions}
                   />
                 ) : undefined}
               </Box>
