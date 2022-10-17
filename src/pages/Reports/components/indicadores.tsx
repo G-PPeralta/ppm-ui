@@ -65,22 +65,24 @@ export function Indicadores() {
               <Flex direction={"row"} justify={"space-between"}>
                 <Flex direction={"row"} alignItems={"center"} gap={2}>
                   <RiCloseCircleFill color={"#F40606"} size={20} />
-                  <Heading
-                    as="h3"
-                    fontSize={"24px"}
-                    fontWeight={"semibold"}
-                    color={"gray.800"}
-                  >
-                    Com Problemas
-                  </Heading>
-                  <Heading
-                    as="h3"
-                    fontSize={"24px"}
-                    fontWeight={"semibold"}
-                    color={"#F40606"}
-                  >
-                    {projectsRed.length} projetos
-                  </Heading>
+                  <Flex direction={{ base: "column", md: "row" }}>
+                    <Heading
+                      as="h3"
+                      fontSize={"24px"}
+                      fontWeight={"semibold"}
+                      color={"gray.800"}
+                    >
+                      Com Problemas
+                    </Heading>
+                    <Heading
+                      as="h3"
+                      fontSize={"24px"}
+                      fontWeight={"semibold"}
+                      color={"#F40606"}
+                    >
+                      {projectsRed.length} projetos
+                    </Heading>
+                  </Flex>
                 </Flex>
                 <Flex>
                   <AccordionButton>
@@ -121,22 +123,24 @@ export function Indicadores() {
               <Flex direction={"row"} justify={"space-between"}>
                 <Flex direction={"row"} alignItems={"center"} gap={2}>
                   <AiFillCheckCircle color={"#059502"} size={20} />
-                  <Heading
-                    as="h3"
-                    fontSize={"24px"}
-                    fontWeight={"semibold"}
-                    color={"gray.800"}
-                  >
-                    Sem Problemas
-                  </Heading>
-                  <Heading
-                    as="h3"
-                    fontSize={"24px"}
-                    fontWeight={"semibold"}
-                    color={"#059502"}
-                  >
-                    {projectsGreen.length} projetos
-                  </Heading>
+                  <Flex direction={{ base: "column", md: "row" }}>
+                    <Heading
+                      as="h3"
+                      fontSize={"24px"}
+                      fontWeight={"semibold"}
+                      color={"gray.800"}
+                    >
+                      Sem Problemas
+                    </Heading>
+                    <Heading
+                      as="h3"
+                      fontSize={"24px"}
+                      fontWeight={"semibold"}
+                      color={"#059502"}
+                    >
+                      {projectsGreen.length} projetos
+                    </Heading>
+                  </Flex>
                 </Flex>
                 <Flex>
                   <AccordionButton>

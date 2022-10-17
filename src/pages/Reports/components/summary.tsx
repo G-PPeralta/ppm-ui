@@ -85,9 +85,10 @@ export function ProjectSummary({ data, table }: Props) {
         >
           <Flex
             direction={{ base: "column", lg: "row" }}
-            justify={"space-between"}
-            // gap={"4"}
-            marginLeft={"14px"}
+            justify={{ base: "center", lg: "space-between" }}
+            align={"center"}
+            gap={{ base: "4", lg: "0" }}
+            marginLeft={{ base: "0", lg: "14px" }}
           >
             <Flex justify={"left"} gap={{ base: "2", md: "4" }}>
               <Box display="flex" alignItems="center" justifyContent="center">
@@ -190,6 +191,8 @@ export function ProjectSummary({ data, table }: Props) {
             <Flex
               direction={"row"}
               gap={4}
+              justify={{ base: "center", lg: "space-between" }}
+              align={"center"}
               w={{ base: "100%", md: "fit-content" }}
             >
               <Flex
