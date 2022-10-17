@@ -159,7 +159,7 @@ export function ProjectSummary({ data, table }: Props) {
               <Flex
                 direction={"column"}
                 w={"fit-content"}
-                alignItems={"end"}
+                alignItems={"center"}
                 justifyContent={"center"}
               >
                 <Text fontSize={"14px"} fontWeight={"500"} color={"gray.400"}>
@@ -176,7 +176,7 @@ export function ProjectSummary({ data, table }: Props) {
               <Flex
                 direction={"column"}
                 w={"fit-content"}
-                alignItems={"start"}
+                alignItems={"center"}
                 justifyContent={"center"}
               >
                 <Text fontSize={"14px"} fontWeight={"500"} color={"gray.400"}>
