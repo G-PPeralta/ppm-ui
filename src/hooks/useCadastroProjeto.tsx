@@ -183,7 +183,7 @@ export function useProjetos() {
   }));
 
   const optionsCoordenadores = listaCoordenadores.map((responsavel: any) => ({
-    value: responsavel.id_coordenador,
+    value: responsavel.id,
     label: responsavel.coordenadorNome,
   }));
 
@@ -251,7 +251,7 @@ export function useProjetos() {
     nomeProjeto: "",
     elementoPep: "",
     dataInicio: "",
-    capexPrevisto: 0,
+    capexPrevisto: "",
     complexidadeId: -1,
     divisaoId: -1,
     classificacaoId: -1,

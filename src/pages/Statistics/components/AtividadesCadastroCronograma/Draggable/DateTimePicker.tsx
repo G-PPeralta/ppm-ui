@@ -5,30 +5,33 @@ import { Button, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-function DateTimePickerDataInicio({ registerForm, data, index }: any) {
+function DateTimePicker({ registerForm, index }: any) {
   const [dataInicio, setDataInicio] = useState<any>("");
-  const [dataMin, setDataMin] = useState<any>("");
 
   useEffect(() => {
+    const data = registerForm.values.atividades[index].data_inicio;
     if (data) {
       const newDate = new Date(data);
       // newDate.setDate(newDate.getDate() + 15);
-      // newDate.setHours(9, 0, 0, 0);
       setDataInicio(newDate);
-      setDataMin(newDate);
+      // setDataMin(newDate);
     } else {
-      const newDate = new Date();
-      setDataMin(newDate);
+      // const newDate = new Date();
+      setDataInicio("");
     }
-  }, []);
+  }, [registerForm.values.atividades[index].data_inicio]);
 
   const handleIniciarDate = (date: any) => {
-    // date.setHours(9, 0, 0, 0);
-    setDataInicio(date);
-    registerForm.setFieldValue(
-      `atividades[${index}].data_inicio`,
-      new Date(date).toLocaleString()
-    );
+    if (date) {
+      setDataInicio(date);
+      registerForm.setFieldValue(
+        `atividades[${index}].data_inicio`,
+        new Date(date).toLocaleString()
+      );
+    } else {
+      setDataInicio("");
+      registerForm.setFieldValue(`atividades[${index}].data_inicio`, "");
+    }
   };
 
   const TriggerDatePickerInicio = forwardRef(
@@ -59,7 +62,6 @@ function DateTimePickerDataInicio({ registerForm, data, index }: any) {
       </Flex>
       <ReactDatePicker
         selected={dataInicio}
-        minDate={dataMin}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
         showTimeSelect
@@ -71,4 +73,4 @@ function DateTimePickerDataInicio({ registerForm, data, index }: any) {
   );
 }
 
-export default DateTimePickerDataInicio;
+export default DateTimePicker;

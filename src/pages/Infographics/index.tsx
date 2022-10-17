@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Box, Flex, Heading, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
@@ -42,7 +42,7 @@ export function Infographics() {
     listaSondas,
   };
 
-  const innerWidth = useBreakpointValue({ base: 0, md: 1, lg: 2, xl: 3 });
+  // const innerWidth = useBreakpointValue({ base: 0, md: 1, lg: 2, xl: 3 });
 
   const handleGetAll = async () => {
     const campanhas = await postGetInfoCampanha(registerForm.values);
@@ -72,27 +72,13 @@ export function Infographics() {
             >
               <Flex
                 justify={"space-between"}
-                mb={2}
                 wrap={"wrap"}
-                align={"center"}
+                align={"start"}
+                mb={4}
               >
-                <Heading
-                  as="h3"
-                  size="md"
-                  mb={2}
-                  mt={innerWidth}
-                  textAlign={"center"}
-                >
+                <Heading as="h3" size="md" textAlign={"center"}>
                   Acompanhamento de Poços
                 </Heading>
-                <Flex gap={4}>
-                  <FiltrosModal
-                    refresh={refresh}
-                    setRefresh={setRefresh}
-                    listas={listas}
-                    registerForm={registerForm}
-                  />
-                </Flex>
               </Flex>
               <Flex
                 direction={"column"}
@@ -102,18 +88,28 @@ export function Infographics() {
                 mb={2}
                 flex={1}
               >
-                <Flex gap={2} wrap={"wrap"} flex={1}>
-                  <ModalCadastrarSonda />
-                  <ModalCadastroPoco />
-                  <ModalCadastroAtividade />
-                  <ModalCadastroProjetoTipo
-                    refresh={refresh}
-                    setRefresh={setRefresh}
-                  />
-                  <ModalNovaCampanha
-                    refresh={refresh}
-                    setRefresh={setRefresh}
-                  />
+                <Flex gap={2} wrap={"wrap"} flex={1} justify={"space-between"}>
+                  <Flex gap={2} wrap={"wrap"}>
+                    <ModalCadastrarSonda />
+                    <ModalCadastroPoco />
+                    <ModalCadastroAtividade />
+                    <ModalCadastroProjetoTipo
+                      refresh={refresh}
+                      setRefresh={setRefresh}
+                    />
+                    <ModalNovaCampanha
+                      refresh={refresh}
+                      setRefresh={setRefresh}
+                    />
+                  </Flex>
+                  <Flex>
+                    <FiltrosModal
+                      refresh={refresh}
+                      setRefresh={setRefresh}
+                      listas={listas}
+                      registerForm={registerForm}
+                    />
+                  </Flex>
                 </Flex>
                 <Flex gap={4} wrap={"wrap"} flex={1} justify={"end"}>
                   {statusProjeto.map((status, index) => (
