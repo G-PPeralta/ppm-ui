@@ -1,5 +1,6 @@
-import { ProjetosLookahead } from "interfaces/lookahead";
 import { useEffect, useState } from "react";
+
+import { ProjetosLookahead } from "interfaces/lookahead";
 
 import { getProjetosAtividades } from "services/get/Lookahead";
 

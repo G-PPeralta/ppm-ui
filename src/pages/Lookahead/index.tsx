@@ -2,18 +2,18 @@ import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
 import { Flex, Text, FormControl, Select, Button } from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
 import { AtividadesLookahead, ProjetosLookahead } from "interfaces/lookahead";
 
+import ContainerPagina from "components/ContainerPagina";
 import Sidebar from "components/SideBar";
+import TituloPagina from "components/TituloPagina";
 
 import { useLookahead } from "hooks/useLookahead";
 
 import { getAtividades } from "services/get/Lookahead";
 
 import { TabelaLookahead } from "./components/TabelaLookahead";
-import ContainerPagina from "components/ContainerPagina";
-import TituloPagina from "components/TituloPagina";
-import { Ring } from "@uiball/loaders";
 // import { useState } from "react";
 // import { Projetos } from "interfaces/Projetos";
 

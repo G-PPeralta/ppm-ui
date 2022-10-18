@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { FaRegCalendarAlt } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 
 import {
@@ -10,7 +11,10 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
+import { AtividadesLookahead } from "interfaces/lookahead";
 
+import BotaoSetaVoltar from "components/BotaoSetaVoltar/BotaoSetaVoltar";
+import ContainerPagina from "components/ContainerPagina";
 import Sidebar from "components/SideBar";
 
 // import { FiPlusCircle, FiSearch } from "react-icons/fi";
@@ -21,10 +25,6 @@ import { ModalAddAtividade } from "../components/ModalAddAtividade";
 import { TabelaAtividades } from "../components/TabelaAtividades";
 import { TabelaFerramentas } from "../components/TabelaFerramentas";
 import { TabelaServicos } from "../components/TabelaServicos";
-import ContainerPagina from "components/ContainerPagina";
-import { FaRegCalendarAlt } from "react-icons/fa";
-import { AtividadesLookahead } from "interfaces/lookahead";
-import BotaoSetaVoltar from "components/BotaoSetaVoltar/BotaoSetaVoltar";
 
 interface Weeks {
   id: string;
