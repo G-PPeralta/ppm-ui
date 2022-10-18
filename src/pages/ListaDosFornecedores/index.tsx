@@ -24,7 +24,7 @@ import {
   FormLabel,
   Select,
 } from "@chakra-ui/react";
-import { ProjetosList } from "interfaces/Services";
+import { Polo, ProjetosList } from "interfaces/Services";
 
 import Sidebar from "components/SideBar";
 
@@ -69,10 +69,15 @@ export function Fornecedores() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [editFornecedor, setEditFornecedor] = useState({} as FornecedoreDto);
   const [fornecedores, setFornecedores] = useState<FornecedoreDto[]>([]);
+  const [filteredFornecedores, setFilteredFornecedores] = useState<
+    FornecedoreDto[]
+  >([] as FornecedoreDto[]);
   const [projetos, setProjetos] = useState([] as ProjetosList[]);
-  const [polos, setPolos] = useState([]);
+  const [polos, setPolos] = useState<Polo[]>([] as Polo[]);
   const [loading, setLoading] = useState(true);
-  // const [projetoId, setProjetoId] = useState("");
+  // estados dos filtros
+  const [projetoId, setProjetoId] = useState(0);
+  const [polo, setPolo] = useState(0);
 
   function handleEditFornecedor(fornecedor: FornecedoreDto) {
     setEditFornecedor(fornecedor);
@@ -97,6 +102,7 @@ export function Fornecedores() {
   const handleGetFornecedores = async () => {
     const response = await getFornecedor();
     setFornecedores(response.data as FornecedoreDto[]);
+    setFilteredFornecedores(response.data as FornecedoreDto[]);
   };
 
   async function handleGetProjetos() {
@@ -121,7 +127,17 @@ export function Fornecedores() {
       setLoading(false);
   }, [polos, fornecedores, projetos]);
 
-  console.log(polos);
+  function handleFilterData(id: number, pol: number) {
+    if (id !== 0) {
+      const filtered = fornecedores.filter((fornec) => fornec.id == id);
+      return setFornecedores(filtered);
+    }
+    if (pol !== 0) {
+      const filtered = fornecedores.filter((fornec) => fornec.poloid == pol);
+      return setFornecedores(filtered);
+    }
+    setFornecedores(filteredFornecedores);
+  }
 
   return (
     <Sidebar>
@@ -227,7 +243,9 @@ export function Fornecedores() {
                             placeholder="Selecione"
                             id="projeto"
                             name="projeto"
-                            // onChange={(e) => setProjetoId(e.target.value)}
+                            onChange={(e) =>
+                              setProjetoId(Number(e.target.value))
+                            }
                             width={"208px"}
                             height={"56px"}
                           >
@@ -265,17 +283,17 @@ export function Fornecedores() {
                             placeholder="Selecione"
                             id="projeto"
                             name="projeto"
-                            // onChange={(e) => setProjetoId(e.target.value)}
+                            onChange={(e) => setPolo(Number(e.target.value))}
                             width={"208px"}
                             height={"56px"}
                           >
                             <option color={"#A7A7A7"} value={0}>
                               Todos
                             </option>
-                            {projetos &&
-                              projetos.map((project, index) => (
-                                <option value={project.id} key={index}>
-                                  {project.nomeProjeto}
+                            {!loading &&
+                              polos.map((pol, index) => (
+                                <option value={pol.id} key={index}>
+                                  {pol.polo}
                                 </option>
                               ))}
                           </Select>
@@ -294,7 +312,11 @@ export function Fornecedores() {
                             color: "#0047BB",
                           }}
                           rightIcon={<FiSearch />}
-                          // onClick={filterByProject}
+                          onClick={() => {
+                            handleFilterData(projetoId, polo);
+                            setPolo(0);
+                            setProjetoId(0);
+                          }}
                           alignSelf={"end"}
                           height={"56px"}
                           width={"101px"}
