@@ -11,7 +11,13 @@ function TituloPagina({ children, botaoVoltar }: Props) {
   return (
     <Flex align={"center"} gap={2} mb={4}>
       {botaoVoltar && <BotaoSetaVoltar />}
-      <Heading as="h3" size="md" textAlign={"center"} fontSize={"24px"}>
+      <Heading
+        as="h2"
+        size="md"
+        fontFamily={"Mulish"}
+        textAlign={"center"}
+        fontSize={"24px"}
+      >
         {children}
       </Heading>
     </Flex>
