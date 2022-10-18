@@ -24,10 +24,7 @@ function DateTimePicker({ registerForm, index }: any) {
   const handleIniciarDate = (date: any) => {
     if (date) {
       setDataInicio(date);
-      registerForm.setFieldValue(
-        `atividades[${index}].data_inicio`,
-        new Date(date).toLocaleString()
-      );
+      registerForm.setFieldValue(`atividades[${index}].data_inicio`, date);
     } else {
       setDataInicio("");
       registerForm.setFieldValue(`atividades[${index}].data_inicio`, "");

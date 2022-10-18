@@ -120,6 +120,10 @@ export function useCadastroCronograma() {
       setLoading(true);
 
       try {
+        newValues.atividades.map((a: any) => {
+          a.data_inicio = new Date(a.data_inicio).toLocaleString();
+          return a;
+        });
         // const status = 200;
         // console.log(">>>>newValues", newValues);
         const { status } = await postCadastroNovoCronograma(newValues);
