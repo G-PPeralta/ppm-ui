@@ -31,8 +31,8 @@ function Statistics() {
           poco: p.poco,
           id_poco: p.id_poco,
           dat_inicio: p.dat_inicio,
-          dat_fim: p.dat_fim,
-          pct_real_consol: p.pct_real_consol,
+          dat_final: p.dat_final,
+          pct_real: p.pct_real,
           atividades: p.atividades,
         });
       })

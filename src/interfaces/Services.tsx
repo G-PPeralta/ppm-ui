@@ -461,8 +461,8 @@ export interface StatisticsTableData {
   poco: string;
   id_poco: number;
   dat_inicio?: string;
-  dat_fim?: string;
-  pct_real_consol?: number;
+  dat_final?: string;
+  pct_real?: number;
   atividades: StatisticsTable[];
   max?: number;
   min?: number;

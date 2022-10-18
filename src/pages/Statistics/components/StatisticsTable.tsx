@@ -83,13 +83,31 @@ export function StatisticsTable({ data }: Props) {
                     </Link>
                   </Td>
                   <Td textAlign={"center"} fontWeight={"semibold"}>
-                    <Text>{projeto.dat_inicio}</Text>
+                    <Text>
+                      {projeto.dat_inicio
+                        ? new Date(projeto.dat_inicio || "").toLocaleString(
+                            "pt-BR",
+                            {
+                              timeZone: "UTC",
+                            }
+                          )
+                        : ""}
+                    </Text>
                   </Td>
                   <Td textAlign={"center"} fontWeight={"semibold"}>
-                    <Text>{projeto.dat_fim}</Text>
+                    <Text>
+                      {projeto.dat_final
+                        ? new Date(projeto.dat_final || "").toLocaleString(
+                            "pt-BR",
+                            {
+                              timeZone: "UTC",
+                            }
+                          )
+                        : ""}
+                    </Text>
                   </Td>
                   <Td textAlign={"center"} fontWeight={"semibold"}>
-                    <Text>{projeto.pct_real_consol}</Text>
+                    <Text>{projeto.pct_real}</Text>
                   </Td>
                   <Td textAlign={"center"} fontWeight={"semibold"}>
                     {/* <IconButton
