@@ -38,7 +38,7 @@ export function useFornecedores() {
       setLoading(true);
 
       try {
-        const { status } = await putFornecedor(values.id, newValues);
+        const { status } = await putFornecedor(newValues);
 
         if (status === 200 || status === 201) {
           toast.success("Fornecedor atualizado com sucesso!", {

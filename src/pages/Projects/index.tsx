@@ -7,11 +7,10 @@ import {
   Box,
   Button,
   Flex,
-  Heading,
+  FormLabel,
   Input,
   Select,
   Text,
-  useBreakpointValue,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { Projetos } from "interfaces/Projetos";
@@ -29,9 +28,6 @@ export function Projects() {
   const [, setPolo] = useState("0");
   const [projetos, setProjetos] = useState<Projetos[]>();
   const [projetosFilter, setProjetosFilter] = useState<Projetos[]>();
-  const wd = window.innerWidth;
-
-  const innerWidth = useBreakpointValue({ base: 0, md: 1, lg: 2, xl: 3 });
 
   const getProjectsPerPolo = async () => {
     const data = await getProjetosDetalhados();
@@ -63,128 +59,130 @@ export function Projects() {
         {!loading ? (
           <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
             <Box
-              py={{ base: "6", sm: "6" }}
-              px={{ base: "6", sm: "8" }}
-              w={"100%"}
-              bg={"white"}
-              borderRadius={{ base: "xl", sm: "xl" }}
+              py={{ base: "6", sm: "8" }}
+              px={{ base: "6", sm: "10" }}
+              w="100%"
+              bg="white"
+              boxShadow={{
+                base: "none",
+                sm: "md",
+              }}
+              borderRadius={{ base: "none", sm: "xl" }}
             >
-              <Flex
-                justify={"space-between"}
-                mb={2}
-                wrap={"wrap"}
-                align={"center"}
-              >
-                <Heading
-                  as="h3"
-                  size="md"
+              <Flex direction="column" ml={-5} mt={-5}>
+                <Flex
+                  justify={"space-between"}
                   mb={2}
-                  mt={innerWidth}
-                  textAlign={"center"}
+                  wrap={"wrap"}
+                  align={"center"}
                 >
-                  Projetos
-                </Heading>
-              </Flex>
-
-              <Flex
-                direction={wd > 600 ? "row" : "column"}
-                wrap={"wrap"}
-                alignItems="flex-end"
-                justify={"space-between"}
-                gap={4}
-                flex={1}
-              >
-                <Flex align={"end"} gap={4} wrap={"wrap"} flex={1}>
-                  <Flex direction={"column"} flex={1}>
+                  <FormLabel htmlFor="name">
                     <Text
-                      fontWeight={"bold"}
-                      fontSize={"12px"}
-                      color={"#949494"}
+                      mb={3}
+                      fontSize={"24px"}
+                      color={"#2D2926"}
+                      fontWeight={"700"}
+                      fontFamily={"Mulish"}
                     >
-                      PROJETOS
+                      Projetos
                     </Text>
-                    <Input
-                      h={"56px"}
-                      fontWeight={"bold"}
-                      color={"#949494"}
-                      isRequired
-                      placeholder="Projeto"
-                      id="name"
-                      type="text"
-                      name="name"
-                      onChange={(e) => filterProjects(e.target.value)}
-                    />
-                  </Flex>
-                  <Flex direction={"column"} flex={1}>
-                    <Text
-                      fontWeight={"bold"}
-                      fontSize={"12px"}
-                      color={"#949494"}
-                    >
-                      POLO
-                    </Text>
+                  </FormLabel>
+                </Flex>
 
-                    <Select
-                      h={"56px"}
-                      id="poloId"
-                      fontWeight={"bold"}
-                      name="pole"
-                      color={"#949494"}
-                      onChange={(e) => setPolo(e.target.value)}
-                      width={300}
-                    >
-                      <option value="0">Todos</option>
-                      <option value="1">Tucano Sul</option>
-                      <option value="2">Alagoas</option>
-                    </Select>
+                <Flex direction={"column"}>
+                  <Flex mb="16px">
+                    <Link to={"/projetos/cadastro"}>
+                      <Button
+                        h={"56px"}
+                        borderRadius={"10px"}
+                        background={"white"}
+                        border={"2px solid"}
+                        color={"origem.500"}
+                        _hover={{
+                          border: "2px solid",
+                          borderColor: "origem.500",
+                          background: "origem.500",
+                          transition: "all 0.4s",
+                          color: "white",
+                        }}
+                        rightIcon={<FiPlus />}
+                      >
+                        Cadastrar Projeto
+                      </Button>
+                    </Link>
                   </Flex>
+                  <Flex align={"end"} wrap={"wrap"}>
+                    <Flex direction={"column"} mr="16px">
+                      <Text
+                        fontWeight={"bold"}
+                        fontSize={"12px"}
+                        color={"#949494"}
+                      >
+                        PROJETOS
+                      </Text>
+                      <Input
+                        h={"56px"}
+                        fontWeight={"bold"}
+                        width={"170px"}
+                        color={"#949494"}
+                        isRequired
+                        placeholder="Projeto"
+                        id="name"
+                        type="text"
+                        name="name"
+                        onChange={(e) => filterProjects(e.target.value)}
+                      />
+                    </Flex>
+                    <Flex direction={"column"} mr="16px">
+                      <Text
+                        fontWeight={"bold"}
+                        fontSize={"12px"}
+                        color={"#949494"}
+                      >
+                        POLO
+                      </Text>
+
+                      <Select
+                        h={"56px"}
+                        id="poloId"
+                        fontWeight={"bold"}
+                        name="pole"
+                        color={"#949494"}
+                        onChange={(e) => setPolo(e.target.value)}
+                        width={300}
+                      >
+                        <option value="0">Todos</option>
+                        <option value="1">Tucano Sul</option>
+                        <option value="2">Alagoas</option>
+                      </Select>
+                    </Flex>
+                    <Flex>
+                      <Button
+                        h={"56px"}
+                        borderRadius={"10px"}
+                        background={"origem.500"}
+                        variant="primary"
+                        color="white"
+                        onClick={() => getProjectsPerPolo()}
+                        _hover={{
+                          background: "origem.600",
+                          transition: "all 0.4s",
+                        }}
+                        rightIcon={<BsSearch />}
+                        fontWeight={"bold"}
+                      >
+                        Filtrar
+                      </Button>
+                    </Flex>
+                  </Flex>
+                </Flex>
+
+                {projetosFilter && (
                   <Flex flex={1}>
-                    <Button
-                      h={"56px"}
-                      borderRadius={"10px"}
-                      background={"origem.500"}
-                      variant="primary"
-                      color="white"
-                      onClick={() => getProjectsPerPolo()}
-                      _hover={{
-                        background: "origem.600",
-                        transition: "all 0.4s",
-                      }}
-                      rightIcon={<BsSearch />}
-                      fontWeight={"bold"}
-                    >
-                      Filtrar
-                    </Button>
+                    <TabelaProjetos data={projetosFilter} />
                   </Flex>
-                </Flex>
-                <Flex flex={1} justify={"end"}>
-                  <Link to={"/projetos/cadastro"}>
-                    <Button
-                      h={"56px"}
-                      borderRadius={"10px"}
-                      background={"white"}
-                      border={"2px solid"}
-                      color={"origem.500"}
-                      _hover={{
-                        border: "2px solid",
-                        borderColor: "origem.500",
-                        background: "origem.500",
-                        transition: "all 0.4s",
-                        color: "white",
-                      }}
-                      rightIcon={<FiPlus />}
-                    >
-                      Cadastrar Projeto
-                    </Button>
-                  </Link>
-                </Flex>
+                )}
               </Flex>
-
-              {projetosFilter && (
-                <Flex flex={1}>
-                  <TabelaProjetos data={projetosFilter} />
-                </Flex>
-              )}
             </Box>
           </Flex>
         ) : (

@@ -16,6 +16,7 @@ type Poco = {
   pct_real: number;
   poco: string;
   sonda: string;
+  ind_alerta?: number;
 };
 
 type Props = {
@@ -53,7 +54,8 @@ function CardPIR({ poco, index }: Props) {
           backgroundColor={validateDate(
             Number(poco.pct_plan),
             Number(poco.comp_pct),
-            Number(poco.pct_real)
+            Number(poco.pct_real),
+            Number(poco.ind_alerta)
           )}
           px={5}
           py={3}

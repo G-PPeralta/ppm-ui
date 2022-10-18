@@ -5,7 +5,7 @@ function padTo2Digits(num: number) {
   return num.toString().padStart(2, "0");
 }
 
-export function formatDate(date: Date | null) {
+export function formatDate(date: Date | null | string) {
   if (date === null) {
     return null;
   } else {

@@ -103,13 +103,8 @@ export async function postCadastroAtividadeIntervencao(
 }
 
 export async function patchEditarAtividadeIntervencao(
-  campanhaId: number,
   payload: any
 ): Promise<{ status: number }> {
-  const { status } = await api.patch(
-    `/campanha/${campanhaId}`,
-    payload,
-    token()
-  );
+  const { status } = await api.patch(`/campanha/`, payload, token());
   return { status };
 }

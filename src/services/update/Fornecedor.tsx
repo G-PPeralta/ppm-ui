@@ -1,16 +1,13 @@
-import { Fornecedor } from "interfaces/Services";
+// import { Fornecedor } from "interfaces/Services";
+
+// import { FornecedoreDto } from "pages/ListaDosFornecedores";
 
 import { api, token } from "services/api";
 
 export async function putFornecedor(
-  id: number,
-  payload: Fornecedor
+  payload: any
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.put(
-    `/fornecedor-temp/${id}`,
-    payload,
-    token()
-  );
+  const { data, status } = await api.patch(`/fornecedores`, payload, token());
 
   return { data, status };
 }
