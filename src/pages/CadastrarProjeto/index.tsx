@@ -68,14 +68,19 @@ function CadastrarProjeto() {
               bg={"white"}
               borderRadius={{ base: "xl", sm: "xl" }}
             >
-              <Flex align={"center"} gap={2} h={"56px"}>
+              <Flex align={"center"} gap={1} h={"56px"} ml={-7} mt={-5}>
                 <BotaoSetaVoltar />
-                <Heading as="h3" size="md" textAlign={"center"}>
-                  Cadastrar Projeto
+                <Heading
+                  fontSize={"24px"}
+                  color={"#2D2926"}
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
+                >
+                  Cadastrar Projetos
                 </Heading>
               </Flex>
 
-              <Flex direction={"column"} gap={4} mt={4}>
+              <Flex direction={"column"} gap={4} mt={4} ml={-3} mr={-3}>
                 <Flex
                   gap={2}
                   align={innerWidth > 428 ? "start" : "stretch"}

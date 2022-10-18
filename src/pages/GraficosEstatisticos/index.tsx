@@ -120,7 +120,7 @@ export function GráficosEstatisticos() {
             >
               <Flex flexDirection={"column"}>
                 <Flex justifyContent={"space-between"}>
-                  <Flex align={"flex-end"} mt={-5} ml={-5}>
+                  <Flex align={"flex-end"} mt={-4} ml={-5}>
                     <FormControl>
                       <FormLabel htmlFor="name">
                         <Text
@@ -130,7 +130,7 @@ export function GráficosEstatisticos() {
                           fontWeight={"700"}
                           fontFamily={"Mulish"}
                         >
-                          Gráficos estatísticos
+                          Gráficos statísticos
                         </Text>
                       </FormLabel>
                     </FormControl>

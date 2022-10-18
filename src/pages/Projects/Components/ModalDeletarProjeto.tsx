@@ -1,4 +1,5 @@
-import { FaTrash } from "react-icons/fa";
+// import { FaTrash } from "react-icons/fa";
+import { FiTrash } from "react-icons/fi";
 
 import {
   Button,
@@ -46,15 +47,17 @@ function ModalDeletarProjeto(projeto: id) {
     <>
       <IconButton
         onClick={onOpen}
-        color={"#F94144"}
+        color={"#F40606"}
         backgroundColor={"transparent"}
         aria-label="Plus sign"
         _hover={{
-          backgroundColor: "#F94144",
+          backgroundColor: "#F40606",
           color: "white",
         }}
+        w={"14px"}
+        h={"18px"}
       >
-        <FaTrash size={"13px"} />
+        <FiTrash size={"13px"} />
       </IconButton>
       <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />

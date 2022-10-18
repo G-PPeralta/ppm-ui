@@ -45,7 +45,9 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
     <>
       <Button
         h={"56px"}
-        borderRadius={"10px"}
+        borderRadius={"8px"}
+        fontSize={"18px"}
+        fontWeight={"700"}
         variant="outline"
         border={"2px solid"}
         borderColor={"origem.500"}
