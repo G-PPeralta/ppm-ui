@@ -36,6 +36,7 @@ import {
   useDisclosure,
   Icon,
 } from "@chakra-ui/react";
+import moment from "moment";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
 import Sidebar from "components/SideBar";
@@ -238,6 +239,9 @@ export function LicoesAprendidasProjetos() {
                 </Heading>
                 <Flex align={"flex-start"} fontWeight={"700"}>
                   <CSVLink
+                    filename={`licoes_aprendidas${moment().format(
+                      "DDMMYYYY_hhmmss"
+                    )}`}
                     data={filteredLicoesAprendidas.map((lic) => ({
                       ...lic,
                       projeto: projetos.find(
