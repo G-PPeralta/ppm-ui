@@ -285,7 +285,7 @@ export function LicoesAprendidasProjetos() {
             </Flex>
           </Flex>
           <Flex flexDir={"row"} justify={"space-between"}>
-            <Flex align={"flex-end"} gap={3}>
+            <Flex align={"flex-end"} gap={3} wrap={"wrap"} flex={1}>
               <Flex ml={-3}>
                 <FormControl>
                   <FormLabel

@@ -187,10 +187,7 @@ export function Fornecedores() {
             wrap={"wrap"}
             // border={'red solid 2px'}
           >
-            <Flex
-              ml={-3}
-              // border={'purple solid 3px'}
-            >
+            <Flex ml={-3}>
               <Button
                 type="button"
                 background="white"
@@ -234,7 +231,7 @@ export function Fornecedores() {
             </Flex>
 
             <Flex justify={"space-between"}>
-              <Flex align={"flex-end"} gap={4}>
+              <Flex align={"flex-end"} gap={4} wrap={"wrap"} flex={1}>
                 <Flex ml={-3}>
                   <FormControl>
                     <FormLabel
