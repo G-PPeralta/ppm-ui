@@ -99,7 +99,7 @@ function ModalEditarAtividade({
   };
   const format = (val: number) => val + "%";
 
-  const intervencaoIniciada = poco.pct_real !== "0";
+  // const intervencaoIniciada = poco.pct_real !== "0";
 
   useEffect(() => {
     setNome(atividade.atividade);
@@ -251,7 +251,8 @@ function ModalEditarAtividade({
                       </Flex>
                       <Input
                         h={"56px"}
-                        isDisabled={intervencaoIniciada}
+                        isDisabled
+                        // isDisabled={intervencaoIniciada}
                         placeholder="Selecione a data e a hora"
                         id="dat_ini_plan"
                         type="text"
@@ -272,7 +273,8 @@ function ModalEditarAtividade({
                       </Flex>
                       <Input
                         h={"56px"}
-                        isDisabled={intervencaoIniciada}
+                        isDisabled
+                        // isDisabled={intervencaoIniciada}
                         placeholder="Selecione a data e a hora"
                         id="dat_ini_plan"
                         type="text"
