@@ -6,7 +6,6 @@ import {
   Flex,
   Heading,
   InputGroup,
-  InputLeftAddon,
   // InputLeftElement,
   Text,
 } from "@chakra-ui/react";
@@ -290,16 +289,6 @@ function CadastrarProjeto() {
                 >
                   <Flex flex={1}>
                     <InputGroup>
-                      <InputLeftAddon
-                        alignSelf={"end"}
-                        color="#949494"
-                        border={"1px solid #949494"}
-                        background={"white"}
-                        h={"56px"}
-                      >
-                        R$
-                      </InputLeftAddon>
-
                       <InputGenerico
                         registerForm={registerForm}
                         nomeInput={"CAPEX PREVISTO"}

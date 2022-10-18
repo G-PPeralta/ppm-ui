@@ -1,4 +1,4 @@
-import { Flex, Input, Text } from "@chakra-ui/react";
+import { Flex, Input, InputLeftAddon, Text } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
@@ -39,18 +39,29 @@ function InputGenerico({
         </Flex>
       )}
       {isNumeric ? (
-        <Input
-          h={"56px"}
-          placeholder={placeholder}
-          type={type || "text"}
-          id={propName}
-          name={propName}
-          value={value}
-          maxLength={maxLength}
-          onChange={registerForm.handleChange}
-          w={"100%"}
-          onKeyUp={(event) => maskMoney(event)}
-        />
+        <Flex gap={1}>
+          <InputLeftAddon
+            alignSelf={"end"}
+            color="#949494"
+            border={"1px solid #949494"}
+            background={"white"}
+            h={"56px"}
+          >
+            R$
+          </InputLeftAddon>
+          <Input
+            h={"56px"}
+            placeholder={placeholder}
+            type={type || "text"}
+            id={propName}
+            name={propName}
+            value={value}
+            maxLength={maxLength}
+            onChange={registerForm.handleChange}
+            w={"100%"}
+            onKeyUp={(event) => maskMoney(event)}
+          />
+        </Flex>
       ) : (
         <Input
           h={"56px"}
