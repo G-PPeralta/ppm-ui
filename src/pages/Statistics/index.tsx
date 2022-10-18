@@ -30,6 +30,9 @@ function Statistics() {
           id_sonda: s.id_sonda,
           poco: p.poco,
           id_poco: p.id_poco,
+          dat_inicio: p.dat_inicio,
+          dat_fim: p.dat_fim,
+          pct_real_consol: p.pct_real_consol,
           atividades: p.atividades,
         });
       })
