@@ -5,11 +5,12 @@ import {
   FormLabel,
   Input,
   Modal,
+  ModalBody,
   ModalContent,
+  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Select,
-  Stack,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -52,12 +53,11 @@ function ModalConfiguracoes() {
           >
             Configurações do Projeto
           </ModalHeader>
-          <Stack spacing={5}>
+          <ModalBody p={"24px"}>
             <FormControl>
               <Flex
                 flexDirection={"column"}
                 alignItems={"start"}
-                p={"24px"}
                 display={"flex"}
                 gap={"16px"}
               >
@@ -440,7 +440,64 @@ function ModalConfiguracoes() {
                 </Flex>
               </Flex>
             </FormControl>
-          </Stack>
+          </ModalBody>
+          <ModalFooter
+            justifyContent={"center"}
+            alignContent={"center"}
+            alignItems={"center"}
+            px={"24px"}
+            pb={"24px"}
+            pt={"0px"}
+          >
+            <Flex
+              gap={"16px"}
+              align={"center"}
+              direction={{ base: "column", md: "row" }}
+            >
+              <Button
+                // background="origem.300"
+                variant="primary"
+                color="red.500"
+                // onClick={handleCancelar}
+                h={"56px"}
+                w={"206px"}
+                borderRadius={"10px"}
+                background={"white"}
+                _hover={{
+                  background: "red.600",
+                  transition: "all 0.4s",
+                  color: "white",
+                }}
+                fontSize={"18px"}
+                fontWeight={"700"}
+              >
+                Cancelar
+              </Button>
+              <Button
+                h={"56px"}
+                w={"206px"}
+                borderRadius={"10px"}
+                background={"origem.300"}
+                variant="primary"
+                color="white"
+                // onClick={async () => {
+                //   await patchProjeto(Number(id), { descricao, justificativa });
+                //   setDescricao("");
+                //   setJustificativa("");
+                //   setRender();
+                //   onClose();
+                // }}
+                _hover={{
+                  background: "origem.500",
+                  transition: "all 0.4s",
+                }}
+                fontSize={"18px"}
+                fontWeight={"700"}
+              >
+                Salvar
+              </Button>
+            </Flex>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
