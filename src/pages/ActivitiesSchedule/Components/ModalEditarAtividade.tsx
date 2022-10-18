@@ -51,6 +51,7 @@ function ModalEditarAtividade({
   listaPrecedentes,
   index,
   listaOptions,
+  poco,
 }: any) {
   const { toast } = useToast();
   const [atividadeStatus, setAtividadeStatus] = useState(0);
@@ -77,6 +78,28 @@ function ModalEditarAtividade({
     fimReal,
     precedentes,
   };
+
+  // console.log("poco", poco);
+
+  const send = async () => {
+    try {
+      const { status } = await patchEditarAtividadeIntervencao(payload);
+      if (status === 200 || status === 201) {
+        toast.success(`Atividade editada com sucesso!`, {
+          id: "toast-principal",
+        });
+      }
+    } catch (error) {
+      toast.error(`Erro ao editar a atividade!`, {
+        id: "toast-principal",
+      });
+    }
+    onClose();
+    setRefresh(!refresh);
+  };
+  const format = (val: number) => val + "%";
+
+  const intervencaoIniciada = poco.pct_real !== "0";
 
   useEffect(() => {
     setNome(atividade.atividade);
@@ -106,24 +129,6 @@ function ModalEditarAtividade({
     )?.value;
     setAreaId(arId);
   }, []);
-
-  const send = async () => {
-    try {
-      const { status } = await patchEditarAtividadeIntervencao(payload);
-      if (status === 200 || status === 201) {
-        toast.success(`Atividade editada com sucesso!`, {
-          id: "toast-principal",
-        });
-      }
-    } catch (error) {
-      toast.error(`Erro ao editar a atividade!`, {
-        id: "toast-principal",
-      });
-    }
-    onClose();
-    setRefresh(!refresh);
-  };
-  const format = (val: number) => val + "%";
 
   return (
     <>
@@ -212,11 +217,16 @@ function ModalEditarAtividade({
                         value={format(atividadeStatus)}
                         onChange={(event) => setAtividadeStatus(Number(event))}
                       >
-                        <NumberInputField h={"56px"} />
+                        <NumberInputField
+                          h={"56px"}
+                          // disabled={!intervencaoIniciada}
+                        />
+                        {/* {intervencaoIniciada && ( */}
                         <NumberInputStepper h={"56px"}>
                           <NumberIncrementStepper />
                           <NumberDecrementStepper />
                         </NumberInputStepper>
+                        {/* )} */}
                       </NumberInput>
                     </FormControl>
                   </Flex>
@@ -241,7 +251,7 @@ function ModalEditarAtividade({
                       </Flex>
                       <Input
                         h={"56px"}
-                        isDisabled
+                        isDisabled={intervencaoIniciada}
                         placeholder="Selecione a data e a hora"
                         id="dat_ini_plan"
                         type="text"
@@ -262,7 +272,7 @@ function ModalEditarAtividade({
                       </Flex>
                       <Input
                         h={"56px"}
-                        isDisabled
+                        isDisabled={intervencaoIniciada}
                         placeholder="Selecione a data e a hora"
                         id="dat_ini_plan"
                         type="text"

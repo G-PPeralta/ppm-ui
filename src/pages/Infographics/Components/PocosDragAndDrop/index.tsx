@@ -6,7 +6,6 @@ import {
 } from "react-beautiful-dnd";
 
 import { Flex, Text } from "@chakra-ui/react";
-import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
 import DraggableNaoArrastavel from "./Draggable/DraggableNaoArrastavel";
 import PocoDraggable from "./Draggable/PocoDraggable";
@@ -62,14 +61,24 @@ export default function PocosDragAndDrop({ pocos, setPocos, setPayload }: any) {
         <Text fontWeight={"bold"}>Intervenções</Text>
       </Flex>
 
-      <DraggableNaoArrastavel pocos={pocos} setPocos={setPocos} index={0} />
+      {pocos[0].pct_real !== "0" && (
+        <DraggableNaoArrastavel pocos={pocos} setPocos={setPocos} index={0} />
+      )}
 
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId={droppableId}>
           {(provided: DroppableProvided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
+              {pocos[0].pct_real === "0" && (
+                <PocoDraggable
+                  pocos={pocos}
+                  setPocos={setPocos}
+                  index={0}
+                  setPayload={setPayload}
+                />
+              )}
               {pocos.map(
-                (_poco: AtividadesProjetoTipo, index: number) =>
+                (_poco: any, index: number) =>
                   index > 0 && (
                     <PocoDraggable
                       key={index}
