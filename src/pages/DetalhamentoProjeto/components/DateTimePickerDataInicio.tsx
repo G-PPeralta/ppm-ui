@@ -5,6 +5,8 @@ import { Button, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
+import { formatDateToYYYYMMDDhhmmss } from "utils/formatDate";
+
 function DateTimePickerDataInicio({ registerForm, data }: any) {
   const [dataInicio, setDataInicio] = useState<any>("");
   // const [dataMin, setDataMin] = useState<any>("");
@@ -25,7 +27,10 @@ function DateTimePickerDataInicio({ registerForm, data }: any) {
     if (date) {
       // date.setHours(9, 0, 0, 0);
       setDataInicio(date);
-      registerForm.setFieldValue("dat_inicio_plan", date);
+      registerForm.setFieldValue(
+        "dat_inicio_plan",
+        formatDateToYYYYMMDDhhmmss(date)
+      );
     }
   };
 

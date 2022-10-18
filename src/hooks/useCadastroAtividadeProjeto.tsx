@@ -105,7 +105,7 @@ export function useCadastroAtividadeProjeto(
         responsavel_id: values.responsavel_id,
         relacao_id: values.relacao_id,
         area_atuacao: values.area_atuacao,
-        dat_inicio_plan: new Date(values.dat_inicio_plan).toLocaleString(),
+        dat_inicio_plan: values.dat_inicio_plan,
         duracao_plan: values.duracao_plan,
         nao_iniciar_antes_de: values.nao_iniciar_antes_de,
         nao_terminar_depois_de: values.nao_terminar_depois_de,
