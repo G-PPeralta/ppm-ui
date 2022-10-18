@@ -127,8 +127,10 @@ export interface GanttMacroDto {
   macroatividade_nome: string;
   duracao?: number;
   progresso?: number;
-  data_inicio?: string;
-  data_fim?: string;
+  dat_ini_real: string;
+  dat_fim_real: string;
+  dat_ini_plan: string;
+  dat_fim_plan: string;
   item?: string;
   microatividade_id?: number;
   nome_atividade?: string;
