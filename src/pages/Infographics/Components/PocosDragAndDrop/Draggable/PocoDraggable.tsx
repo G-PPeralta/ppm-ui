@@ -1,26 +1,42 @@
-// import { useState } from "react";
 import { useEffect, useId, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import { Box, Flex, FormControl, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 
 import SelectPoco from "./SelectPoco";
 
-function PocoDraggable({ pocos, setPocos, index }: any) {
+function PocoDraggable({ pocos, setPocos, index, setPayload }: any) {
   const innerwidth = window.innerWidth;
 
   const id = useId();
+
   const [draggableId, setDraggableId] = useState<any>(id);
 
-  const remove = (index: number) => {};
+  const optionsPocos = pocos.map((poco: any) => ({
+    value: poco.id_poco,
+    label: poco.poco,
+  }));
+
+  const getValue = (options: any, i: number) => ({
+    value: options?.[i]?.value,
+    label: options?.[i]?.label,
+  });
 
   useEffect(() => {
     const now = Date.now();
     const newId = draggableId + "-" + now.toLocaleString();
     setDraggableId(newId);
   }, []);
+
+  useEffect(() => {
+    setPayload(
+      pocos.map((poco: any, index: number) => ({
+        id_cronograma: poco.id_poco,
+        ordem: index,
+      }))
+    );
+  }, [pocos]);
 
   return (
     <Draggable draggableId={draggableId} index={index}>
@@ -35,55 +51,45 @@ function PocoDraggable({ pocos, setPocos, index }: any) {
             flexWrap="wrap"
             flexDirection="row"
             alignItems="center"
-            justifyContent="space-evenly"
+            justifyContent="center"
             w="100%"
             bg={"#f5f5f5"}
             px={5}
-            py={2}
+            py={4}
             borderRadius={"60px"}
             mb={2}
           >
-            <Flex align={"center"} justify={"center"} gap={3}>
-              <GiHamburgerMenu color="#2E69FD" size={16} />
-              <Text sx={{ fontSize: 16, fontWeight: "600" }}>{index + 1}</Text>
-            </Flex>
-
             <Flex
+              flexDirection={"row"}
               gap={4}
-              direction={innerwidth >= 640 ? "row" : "column"}
-              align={"center"}
-              justify={"center"}
-              py={innerwidth >= 640 ? 0 : 4}
+              flex={1}
+              justify={"space-between"}
             >
-              <FormControl>
-                <SelectPoco pocos={pocos} setPocos={setPocos} index={index} />
-              </FormControl>
-            </Flex>
+              <Flex align={"center"} justify={"center"} gap={3}>
+                <GiHamburgerMenu color="#2E69FD" size={16} />
+                <Text sx={{ fontSize: 16, fontWeight: "600" }}>
+                  {index + 1}
+                </Text>
+              </Flex>
 
-            {/* <Flex
-                p={1}
-                align={'center'}
-                justify={'center'}
-                _hover={{ cursor: 'pointer' }}
+              <Flex
+                gap={4}
+                direction={innerwidth >= 640 ? "row" : "column"}
+                align={"center"}
+                justify={"center"}
+                py={innerwidth >= 640 ? 0 : 4}
+                flex={1}
               >
-                <FiEdit
-                  onClick={() => enableEdit(index)}
-                  color="#2E69FD"
-                  size={16}
-                />
-              </Flex> */}
-
-            <Flex
-              p={1}
-              align={"center"}
-              justify={"center"}
-              _hover={{ cursor: "pointer" }}
-            >
-              <FiTrash
-                onClick={() => remove(index)}
-                color="#F94144"
-                size={16}
-              />
+                <Flex direction={"column"} flex={2} pr={3}>
+                  <SelectPoco
+                    pocos={pocos}
+                    setPocos={setPocos}
+                    index={index}
+                    options={optionsPocos}
+                    value={getValue(optionsPocos, index)}
+                  />
+                </Flex>
+              </Flex>
             </Flex>
           </Box>
         </div>

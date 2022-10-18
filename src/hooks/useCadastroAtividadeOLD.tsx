@@ -7,7 +7,7 @@ import { cadastroNovaAtividadeSchema } from "validations/ModaisCadastrosInfograf
 import { useToast } from "contexts/Toast";
 
 import { getArea } from "services/get/CadastroModaisInfograficos";
-import { postNovaAtividade } from "services/post/CadastroModaisInfograficos";
+import { postNovaAtividade } from "services/post/Infograficos";
 
 import { useAuth } from "./useAuth";
 

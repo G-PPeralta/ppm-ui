@@ -6,7 +6,6 @@ import {
   Flex,
   Heading,
   InputGroup,
-  InputLeftAddon,
   // InputLeftElement,
   Text,
 } from "@chakra-ui/react";
@@ -69,14 +68,19 @@ function CadastrarProjeto() {
               bg={"white"}
               borderRadius={{ base: "xl", sm: "xl" }}
             >
-              <Flex align={"center"} gap={2} h={"56px"}>
+              <Flex align={"center"} gap={1} h={"56px"} ml={-7} mt={-5}>
                 <BotaoSetaVoltar />
-                <Heading as="h3" size="md" textAlign={"center"}>
-                  Cadastrar Projeto
+                <Heading
+                  fontSize={"24px"}
+                  color={"#2D2926"}
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
+                >
+                  Cadastrar Projetos
                 </Heading>
               </Flex>
 
-              <Flex direction={"column"} gap={4} mt={4}>
+              <Flex direction={"column"} gap={4} mt={4} ml={-3} mr={-3}>
                 <Flex
                   gap={2}
                   align={innerWidth > 428 ? "start" : "stretch"}
@@ -245,7 +249,7 @@ function CadastrarProjeto() {
                 <Flex
                   gap={2}
                   align={innerWidth > 428 ? "end" : "stretch"}
-                  w={innerWidth > 428 ? "60%" : "100%"}
+                  w={innerWidth > 428 ? "62%" : "100%"}
                   wrap={"wrap"}
                   direction={innerWidth > 428 ? "row" : "column"}
                 >
@@ -290,16 +294,6 @@ function CadastrarProjeto() {
                 >
                   <Flex flex={1}>
                     <InputGroup>
-                      <InputLeftAddon
-                        alignSelf={"end"}
-                        color="#949494"
-                        border={"1px solid #949494"}
-                        background={"white"}
-                        h={"56px"}
-                      >
-                        R$
-                      </InputLeftAddon>
-
                       <InputGenerico
                         registerForm={registerForm}
                         nomeInput={"CAPEX PREVISTO"}

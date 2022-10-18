@@ -17,7 +17,7 @@ import {
   getProjetosTipo,
   getResponsaveis,
 } from "services/get/CadastroModaisInfograficos";
-import { postCadastroIntervencao } from "services/post/CadastroModaisInfograficos";
+import { postCadastroIntervencao } from "services/post/Infograficos";
 
 export function useCadastroIntervencaoOLD() {
   const { toast } = useToast();

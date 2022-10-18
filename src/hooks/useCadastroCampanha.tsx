@@ -10,7 +10,7 @@ import {
   getServicoSonda,
   getSonda,
 } from "services/get/CadastroModaisInfograficos";
-import { postNovaCampanha } from "services/post/CadastroModaisInfograficos";
+import { postNovaCampanha } from "services/post/Infograficos";
 
 import { useAuth } from "./useAuth";
 

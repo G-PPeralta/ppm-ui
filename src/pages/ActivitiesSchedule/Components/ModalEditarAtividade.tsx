@@ -31,7 +31,7 @@ import {
 
 import { useToast } from "contexts/Toast";
 
-import { patchEditarAtividadeIntervencao } from "services/post/CadastroModaisInfograficos";
+import { patchEditarAtividadeIntervencao } from "services/post/Infograficos";
 
 import DateTimePickerDataFim from "./DateTimePickerDataFim";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
@@ -51,19 +51,18 @@ function ModalEditarAtividade({
   listaPrecedentes,
   index,
   listaOptions,
+  poco,
 }: any) {
   const { toast } = useToast();
   const [atividadeStatus, setAtividadeStatus] = useState(0);
   const [nome, setNome] = useState("");
-  const [responsavel, setResponsavel] = useState("");
   const [responsavelId, setResponsavelId] = useState(0);
-  const [area, setArea] = useState("");
   const [areaId, setAreaId] = useState(0);
   const [observacoes, setObservacoes] = useState("");
   const [inicioPlanejado, setInicioPlanejado] = useState("");
   const [fimPlanejado, setFimPlanejado] = useState("");
-  const [inicioReal, setInicioReal] = useState("");
-  const [fimReal, setFimReal] = useState("");
+  const [inicioReal, setInicioReal] = useState(null);
+  const [fimReal, setFimReal] = useState(null);
   const [precedentes, setPrecedentes] = useState<Precedente[]>([]);
 
   const payload = {
@@ -80,10 +79,30 @@ function ModalEditarAtividade({
     precedentes,
   };
 
+  // console.log("poco", poco);
+
+  const send = async () => {
+    try {
+      const { status } = await patchEditarAtividadeIntervencao(payload);
+      if (status === 200 || status === 201) {
+        toast.success(`Atividade editada com sucesso!`, {
+          id: "toast-principal",
+        });
+      }
+    } catch (error) {
+      toast.error(`Erro ao editar a atividade!`, {
+        id: "toast-principal",
+      });
+    }
+    onClose();
+    setRefresh(!refresh);
+  };
+  const format = (val: number) => val + "%";
+
+  // const intervencaoIniciada = poco.pct_real !== "0";
+
   useEffect(() => {
     setNome(atividade.atividade);
-    setResponsavel(atividade.nom_responsavel);
-    setArea(atividade.nom_area);
     setObservacoes(atividade.sonda);
     setAtividadeStatus(Number(atividade.pct_real));
     if (atividade.precedentes) {
@@ -111,24 +130,6 @@ function ModalEditarAtividade({
     setAreaId(arId);
   }, []);
 
-  const send = async () => {
-    try {
-      const { status } = await patchEditarAtividadeIntervencao(payload);
-      if (status === 200 || status === 201) {
-        toast.success(`Atividade editada com sucesso!`, {
-          id: "toast-principal",
-        });
-      }
-    } catch (error) {
-      toast.error(`Erro ao editar a atividade!`, {
-        id: "toast-principal",
-      });
-    }
-    onClose();
-    setRefresh(!refresh);
-  };
-  const format = (val: number) => val + "%";
-
   return (
     <>
       <Modal isOpen={true} onClose={onClose} size="5xl">
@@ -149,6 +150,7 @@ function ModalEditarAtividade({
             <FormControl>
               <Flex direction={"column"} gap={4}>
                 <Stack>
+                  <Text fontWeight={"bold"}>Atividade</Text>
                   <Flex
                     flexDirection={useBreakpointValue({
                       base: "column",
@@ -215,11 +217,16 @@ function ModalEditarAtividade({
                         value={format(atividadeStatus)}
                         onChange={(event) => setAtividadeStatus(Number(event))}
                       >
-                        <NumberInputField h={"56px"} />
+                        <NumberInputField
+                          h={"56px"}
+                          // disabled={!intervencaoIniciada}
+                        />
+                        {/* {intervencaoIniciada && ( */}
                         <NumberInputStepper h={"56px"}>
                           <NumberIncrementStepper />
                           <NumberDecrementStepper />
                         </NumberInputStepper>
+                        {/* )} */}
                       </NumberInput>
                     </FormControl>
                   </Flex>
@@ -245,6 +252,7 @@ function ModalEditarAtividade({
                       <Input
                         h={"56px"}
                         isDisabled
+                        // isDisabled={intervencaoIniciada}
                         placeholder="Selecione a data e a hora"
                         id="dat_ini_plan"
                         type="text"
@@ -266,6 +274,7 @@ function ModalEditarAtividade({
                       <Input
                         h={"56px"}
                         isDisabled
+                        // isDisabled={intervencaoIniciada}
                         placeholder="Selecione a data e a hora"
                         id="dat_ini_plan"
                         type="text"
@@ -305,12 +314,12 @@ function ModalEditarAtividade({
                       />
                     </Flex>
                   </Flex>
+                  <Text fontWeight={"bold"}>Responsável</Text>
                   <Flex
                     flexDirection={useBreakpointValue({
                       base: "column",
                       md: "row",
                     })}
-                    pt={2}
                     gap={5}
                   >
                     <FormControl flex={1}>
@@ -409,7 +418,10 @@ function ModalEditarAtividade({
                     pt={2}
                     gap={5}
                   >
-                    <FormControl>
+                    <FormControl gap={3}>
+                      <Text fontWeight={"bold"} mb={2}>
+                        Observações
+                      </Text>
                       <Flex gap={1}>
                         <Text
                           fontWeight={"bold"}
@@ -454,8 +466,8 @@ function ModalEditarAtividade({
               <Button
                 disabled={
                   !nome ||
-                  !responsavel ||
-                  !area ||
+                  !responsavelId ||
+                  !areaId ||
                   precedentes.filter((item) => item.id == 0).length > 0
                 }
                 onClick={() => send()}

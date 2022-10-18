@@ -93,19 +93,17 @@ function Statistics() {
             >
               <Flex
                 justify={"space-between"}
-                mb={2}
+                mb={6}
                 wrap={"wrap"}
                 align={"center"}
+                mt={-1}
+                ml={-1}
               >
                 <Heading
-                  as="h1"
-                  size="md"
-                  mb={2}
-                  textAlign={"center"}
+                  fontFamily={"Mulish"}
+                  fontWeight={"700"}
                   fontSize={"24px"}
                   color={"#2D2926"}
-                  fontWeight={"700"}
-                  fontFamily={"Mulish"}
                 >
                   Projetos
                 </Heading>
@@ -123,7 +121,7 @@ function Statistics() {
                 flex={2}
               >
                 <Flex align={"end"} gap={4} wrap={"wrap"} flex={1}>
-                  <Flex direction={"column"} flex={1}>
+                  <Flex direction={"column"} flex={1} ml={-1}>
                     <Text
                       fontWeight={"bold"}
                       fontSize={"12px"}
@@ -145,7 +143,9 @@ function Statistics() {
                   <Flex>
                     <Button
                       h={"56px"}
-                      borderRadius={"10px"}
+                      fontSize={"18px"}
+                      fontWeight={"700"}
+                      borderRadius={"8px"}
                       background={"origem.500"}
                       variant="primary"
                       color="white"
@@ -155,7 +155,6 @@ function Statistics() {
                         transition: "all 0.4s",
                       }}
                       rightIcon={<BsSearch />}
-                      fontWeight={"bold"}
                     >
                       Filtrar
                     </Button>
@@ -177,7 +176,7 @@ function Statistics() {
                 </Flex>
               </Flex>
 
-              <Flex flex={1}>
+              <Flex flex={1} ml={-1}>
                 <StatisticsTable data={filter} />
               </Flex>
             </Box>
