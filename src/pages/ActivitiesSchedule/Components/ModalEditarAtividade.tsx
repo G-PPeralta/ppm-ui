@@ -31,7 +31,7 @@ import {
 
 import { useToast } from "contexts/Toast";
 
-import { patchEditarAtividadeIntervencao } from "services/post/CadastroModaisInfograficos";
+import { patchEditarAtividadeIntervencao } from "services/post/Infograficos";
 
 import DateTimePickerDataFim from "./DateTimePickerDataFim";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
@@ -407,7 +407,9 @@ function ModalEditarAtividade({
                     gap={5}
                   >
                     <FormControl gap={3}>
-                      <Text fontWeight={"bold"}>Observações</Text>
+                      <Text fontWeight={"bold"} mb={2}>
+                        Observações
+                      </Text>
                       <Flex gap={1}>
                         <Text
                           fontWeight={"bold"}

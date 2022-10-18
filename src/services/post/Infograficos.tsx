@@ -108,3 +108,15 @@ export async function patchEditarAtividadeIntervencao(
   const { status } = await api.patch(`/campanha/`, payload, token());
   return { status };
 }
+
+export async function postReplanejarCampanha(
+  payload: any,
+  idCampanha: number
+): Promise<{ status: number }> {
+  const { status } = await api.post(
+    `/campanha/replanejar/${idCampanha}`,
+    payload,
+    token()
+  );
+  return { status };
+}
