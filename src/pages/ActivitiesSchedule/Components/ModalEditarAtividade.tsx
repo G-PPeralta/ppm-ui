@@ -55,15 +55,13 @@ function ModalEditarAtividade({
   const { toast } = useToast();
   const [atividadeStatus, setAtividadeStatus] = useState(0);
   const [nome, setNome] = useState("");
-  const [responsavel, setResponsavel] = useState("");
   const [responsavelId, setResponsavelId] = useState(0);
-  const [area, setArea] = useState("");
   const [areaId, setAreaId] = useState(0);
   const [observacoes, setObservacoes] = useState("");
   const [inicioPlanejado, setInicioPlanejado] = useState("");
   const [fimPlanejado, setFimPlanejado] = useState("");
-  const [inicioReal, setInicioReal] = useState("");
-  const [fimReal, setFimReal] = useState("");
+  const [inicioReal, setInicioReal] = useState(null);
+  const [fimReal, setFimReal] = useState(null);
   const [precedentes, setPrecedentes] = useState<Precedente[]>([]);
 
   const payload = {
@@ -82,8 +80,6 @@ function ModalEditarAtividade({
 
   useEffect(() => {
     setNome(atividade.atividade);
-    setResponsavel(atividade.nom_responsavel);
-    setArea(atividade.nom_area);
     setObservacoes(atividade.sonda);
     setAtividadeStatus(Number(atividade.pct_real));
     if (atividade.precedentes) {
@@ -149,6 +145,7 @@ function ModalEditarAtividade({
             <FormControl>
               <Flex direction={"column"} gap={4}>
                 <Stack>
+                  <Text fontWeight={"bold"}>Atividade</Text>
                   <Flex
                     flexDirection={useBreakpointValue({
                       base: "column",
@@ -305,12 +302,12 @@ function ModalEditarAtividade({
                       />
                     </Flex>
                   </Flex>
+                  <Text fontWeight={"bold"}>Responsável</Text>
                   <Flex
                     flexDirection={useBreakpointValue({
                       base: "column",
                       md: "row",
                     })}
-                    pt={2}
                     gap={5}
                   >
                     <FormControl flex={1}>
@@ -409,7 +406,8 @@ function ModalEditarAtividade({
                     pt={2}
                     gap={5}
                   >
-                    <FormControl>
+                    <FormControl gap={3}>
+                      <Text fontWeight={"bold"}>Observações</Text>
                       <Flex gap={1}>
                         <Text
                           fontWeight={"bold"}
@@ -454,8 +452,8 @@ function ModalEditarAtividade({
               <Button
                 disabled={
                   !nome ||
-                  !responsavel ||
-                  !area ||
+                  !responsavelId ||
+                  !areaId ||
                   precedentes.filter((item) => item.id == 0).length > 0
                 }
                 onClick={() => send()}
