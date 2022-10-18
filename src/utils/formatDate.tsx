@@ -44,3 +44,16 @@ export function formatDateToddMMyyyyhhmm(date: Date | null) {
     return data + ", " + time;
   }
 }
+
+export function formatDateToYYYYMMDD(date: Date | null) {
+  if (date === null) {
+    return null;
+  } else {
+    const dateFormated = new Date(date);
+    return [
+      dateFormated.getFullYear(),
+      padTo2Digits(dateFormated.getMonth() + 1),
+      padTo2Digits(dateFormated.getDate()),
+    ].join("/");
+  }
+}
