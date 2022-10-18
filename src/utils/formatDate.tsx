@@ -45,15 +45,21 @@ export function formatDateToddMMyyyyhhmm(date: Date | null) {
   }
 }
 
-export function formatDateToYYYYMMDD(date: Date | null) {
+export function formatDateToYYYYMMDDhhmmss(date: Date | null) {
   if (date === null) {
     return null;
   } else {
     const dateFormated = new Date(date);
-    return [
+    const data: any = [
       dateFormated.getFullYear(),
       padTo2Digits(dateFormated.getMonth() + 1),
       padTo2Digits(dateFormated.getDate()),
-    ].join("/");
+    ].join("-");
+    const time = [
+      padTo2Digits(dateFormated.getHours()),
+      padTo2Digits(dateFormated.getMinutes()),
+      padTo2Digits(dateFormated.getSeconds()),
+    ].join(":");
+    return data + " " + time;
   }
 }
