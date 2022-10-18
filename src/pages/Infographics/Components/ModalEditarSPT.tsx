@@ -39,7 +39,6 @@ function ModalEditarSPT({ column, refresh, setRefresh }: any) {
     },
   ]);
 
-  // console.log("column", column);
   // console.log("payload", payload);
 
   const handleClick = async () => {

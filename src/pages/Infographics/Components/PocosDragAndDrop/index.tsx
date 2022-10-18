@@ -8,11 +8,21 @@ import {
 import { Flex, Text } from "@chakra-ui/react";
 import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
+import DraggableNaoArrastavel from "./Draggable/DraggableNaoArrastavel";
 import PocoDraggable from "./Draggable/PocoDraggable";
 
 export default function PocosDragAndDrop({ pocos, setPocos, setPayload }: any) {
   const id = useId();
   const [droppableId, setDroppableId] = useState<string>(id);
+
+  const handlePayload = (pocos: any) => {
+    setPayload(
+      pocos.map((poco: any, index: number) => ({
+        id_cronograma: poco.id_poco,
+        ordem: index + 1,
+      }))
+    );
+  };
 
   const reorder = (pocos: any, startIndex: number, endIndex: number) => {
     const listaReordenada = (pocos: any) => {
@@ -25,6 +35,7 @@ export default function PocosDragAndDrop({ pocos, setPocos, setPayload }: any) {
       return list;
     };
     setPocos(listaReordenada(pocos));
+    handlePayload(pocos);
   };
 
   const onDragEnd = (result: any) => {
@@ -39,43 +50,37 @@ export default function PocosDragAndDrop({ pocos, setPocos, setPayload }: any) {
     reorder(pocos, result.source.index, result.destination.index);
   };
 
-  const handlePayload = (pocos: any) => {
-    setPayload(
-      pocos.map((poco: any, index: number) => ({
-        id_cronograma: poco.id_poco,
-        ordem: index,
-      }))
-    );
-  };
-
   useEffect(() => {
     const now = Date.now();
     const newId = droppableId + "-" + now.toLocaleString();
     setDroppableId(newId);
   }, []);
 
-  useEffect(() => {
-    handlePayload(pocos);
-  }, [pocos]);
-
   return (
     <>
       <Flex gap={1}>
         <Text fontWeight={"bold"}>Intervenções</Text>
       </Flex>
+
+      <DraggableNaoArrastavel pocos={pocos} setPocos={setPocos} index={0} />
+
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId={droppableId}>
           {(provided: DroppableProvided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              {pocos.map((_poco: AtividadesProjetoTipo, index: number) => (
-                <PocoDraggable
-                  key={index}
-                  pocos={pocos}
-                  setPocos={setPocos}
-                  index={index}
-                  setPayload={setPayload}
-                />
-              ))}
+              {pocos.map(
+                (_poco: AtividadesProjetoTipo, index: number) =>
+                  index > 0 && (
+                    <PocoDraggable
+                      key={index}
+                      pocos={pocos}
+                      setPocos={setPocos}
+                      index={index}
+                      setPayload={setPayload}
+                    />
+                  )
+              )}
+
               {provided.placeholder}
             </div>
           )}
