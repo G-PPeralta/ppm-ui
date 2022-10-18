@@ -460,6 +460,9 @@ export interface StatisticsTableData {
   id_sonda: number;
   poco: string;
   id_poco: number;
+  dat_inicio?: string;
+  dat_fim?: string;
+  pct_real_consol?: number;
   atividades: StatisticsTable[];
   max?: number;
   min?: number;
