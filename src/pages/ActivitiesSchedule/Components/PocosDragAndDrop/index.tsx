@@ -5,7 +5,7 @@ import {
   DroppableProvided,
 } from "react-beautiful-dnd";
 
-import { Flex, FormLabel } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
 import BotaoAdicionar from "./BotaoAdicionar";
@@ -65,7 +65,7 @@ export default function PocosDragAndDrop({
   return (
     <>
       <Flex gap={1}>
-        <FormLabel mb={0}>PRECEDENTES</FormLabel>
+        <Text fontWeight={"bold"}>Precedentes</Text>
       </Flex>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId={droppableId}>

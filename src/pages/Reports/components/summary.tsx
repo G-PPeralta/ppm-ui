@@ -58,39 +58,49 @@ export function ProjectSummary({ data, table }: Props) {
     return percent > 50 ? "#00B53D" : "#F40606";
   }
 
+  function changeShadow() {
+    return table === false ? "md" : "none";
+  }
+
+  function formatToLocale(num: number) {
+    return num.toLocaleString("pt-BR");
+  }
+
   return (
     <Accordion padding={0} margin={0} allowToggle w={"100%"}>
       <AccordionItem
         border={0}
         w={"100%"}
-        boxShadow={"md"}
+        boxShadow={changeShadow()}
         borderRadius={"2xl"}
       >
         <Flex
+          marginTop={"24px"}
           direction={"column"}
           w={"100%"}
           border={"1px"}
           borderRadius={"2xl"}
           borderColor={"gray.200"}
-          paddingY={4}
+          paddingY={"14px"}
         >
           <Flex
             direction={{ base: "column", lg: "row" }}
-            justify={"space-between"}
-            gap={"4"}
-            marginLeft={6}
+            justify={{ base: "center", lg: "space-between" }}
+            align={"center"}
+            gap={{ base: "4", lg: "0" }}
+            marginLeft={{ base: "0", lg: "14px" }}
           >
             <Flex justify={"left"} gap={{ base: "2", md: "4" }}>
               <Box display="flex" alignItems="center" justifyContent="center">
-                <PieChart width={60} height={60}>
+                <PieChart width={50} height={50}>
                   <Pie
                     data={createPieData(data)}
                     dataKey="value"
                     nameKey="name"
                     cx="50%"
                     cy="50%"
-                    innerRadius={23}
-                    outerRadius={30}
+                    innerRadius={18}
+                    outerRadius={25}
                   >
                     {createPieData(data).map((entry, index) => (
                       <Cell
@@ -113,7 +123,7 @@ export function ProjectSummary({ data, table }: Props) {
                   {createPieData(data).map((entry) =>
                     entry.name === "Done" ? (
                       <Text
-                        sx={{ fontSize: 15 }}
+                        sx={{ fontSize: 14 }}
                         color={changeColor(entry.value)}
                         fontWeight={"bold"}
                       >
@@ -126,17 +136,21 @@ export function ProjectSummary({ data, table }: Props) {
               <Flex direction={"column"} w={"100%"}>
                 <Heading
                   as="h3"
-                  size="lg"
-                  fontWeight={"normal"}
+                  fontSize="24px"
+                  fontWeight={"500"}
                   color={"gray.800"}
                 >
                   {data.name}
                 </Heading>
                 <Flex direction={"row"} gap={1} w={"fit-content"}>
-                  <Text fontWeight={"semibold"} color={"gray.400"}>
+                  <Text fontSize={"16px"} fontWeight={"500"} color={"gray.400"}>
                     Responsável:
                   </Text>
-                  <Text fontWeight={"semibold"} color={"origem.300"}>
+                  <Text
+                    fontSize={"16px"}
+                    fontWeight={"500"}
+                    color={"origem.300"}
+                  >
                     {data.responsible}
                   </Text>
                 </Flex>
@@ -147,73 +161,84 @@ export function ProjectSummary({ data, table }: Props) {
                 direction={"column"}
                 w={"fit-content"}
                 alignItems={"center"}
+                justifyContent={"center"}
               >
-                <Text fontWeight={"semibold"} color={"gray.400"}>
-                  Início Reaç
+                <Text fontSize={"14px"} fontWeight={"500"} color={"gray.400"}>
+                  Início Real
                 </Text>
-                <Text> {data.startDate} </Text>
+                <Text fontSize={"16px"} fontWeight={"500"} color={"gray.600"}>
+                  {" "}
+                  {data.startDate}{" "}
+                </Text>
               </Flex>
-              <Heading color={"origem.300"} fontWeight={"normal"}>
+              <Heading color={"#0047BB"} fontWeight={"normal"}>
                 |
               </Heading>
               <Flex
                 direction={"column"}
                 w={"fit-content"}
                 alignItems={"center"}
+                justifyContent={"center"}
               >
-                <Text fontWeight={"semibold"} color={"gray.400"}>
+                <Text fontSize={"14px"} fontWeight={"500"} color={"gray.400"}>
                   Fim Planejado
                 </Text>
-                <Text> {data.endDate} </Text>
+                <Text fontSize={"16px"} fontWeight={"500"} color={"gray.600"}>
+                  {data.endDate}
+                </Text>
               </Flex>
             </Flex>
             <Flex
               direction={"row"}
               gap={4}
+              justify={{ base: "center", lg: "space-between" }}
+              align={"center"}
               w={{ base: "100%", md: "fit-content" }}
             >
               <Flex
                 direction={"column"}
                 w={"fit-content"}
                 alignItems={"center"}
+                justifyContent={"center"}
               >
                 <Flex alignItems={"center"} gap={1} textColor={"origem.300"}>
                   <FaWallet
-                    size={useBreakpointValue({ base: "15px", md: "25px" })}
+                    size={useBreakpointValue({ base: "15px", md: "18px" })}
                   />
                   <Heading
-                    as="h3"
-                    size={{ base: "md", md: "lg" }}
-                    fontWeight={"medium"}
+                    fontSize={"20px"}
+                    fontFamily={"roboto"}
+                    fontWeight={"600"}
                     color={"gray.800"}
                   >
                     Orçamento
                   </Heading>
                 </Flex>
-                <Heading size={{ base: "sm", md: "md" }} color={"gray.600"}>
-                  R$ {data.budget}
+                <Heading fontSize={"18px"} color={"gray.600"}>
+                  R$ {formatToLocale(data.budget)}
                 </Heading>
               </Flex>
               <Flex
                 direction={"column"}
                 w={"fit-content"}
                 alignItems={"center"}
+                justifyContent={"center"}
               >
                 <Flex alignItems={"center"} gap={1} textColor={"origem.200"}>
                   <FaWallet
-                    size={useBreakpointValue({ base: "15px", md: "25px" })}
+                    size={useBreakpointValue({ base: "15px", md: "18px" })}
                   />
                   <Heading
-                    as="h3"
-                    size={{ base: "md", md: "lg" }}
-                    fontWeight={"medium"}
+                    fontSize={"20px"}
+                    fontFamily={"roboto"}
+                    fontWeight={"600"}
                     color={"gray.800"}
                   >
                     Realizado
                   </Heading>
                 </Flex>
-                <Heading size={{ base: "sm", md: "md" }} color={"gray.600"}>
-                  R$ {data.realized}
+                <Heading fontSize={"18px"} color={"gray.600"}>
+                  R$ {formatToLocale(data.realized)}
                 </Heading>
               </Flex>
             </Flex>
@@ -223,13 +248,14 @@ export function ProjectSummary({ data, table }: Props) {
                 alignItems={"center"}
                 marginY={1}
                 borderRadius={"sm"}
-                marginRight={6}
+                marginRight={"14px"}
                 w={"fit-content"}
               >
                 <Heading
                   as="h3"
-                  size="lg"
-                  fontWeight={"medium"}
+                  fontSize="24px"
+                  fontFamily={"roboto"}
+                  fontWeight={"700"}
                   color={"white"}
                   padding={2}
                 >
@@ -239,7 +265,7 @@ export function ProjectSummary({ data, table }: Props) {
               {table == true && (
                 <Flex>
                   <AccordionButton>
-                    <AccordionIcon fontSize={50} />
+                    <AccordionIcon fontSize={"20px"} />
                   </AccordionButton>
                 </Flex>
               )}

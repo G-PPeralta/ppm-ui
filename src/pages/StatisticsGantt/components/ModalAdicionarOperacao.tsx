@@ -166,7 +166,7 @@ function ModalAdicionarOperacao({
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"inicio_planejado"}
-                        label={"DATA PLANEJADA"}
+                        label={"INÍCIO PLANEJADO"}
                         required={true}
                       />
                     </Flex>
@@ -203,8 +203,8 @@ function ModalAdicionarOperacao({
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"inicio_realizado"}
-                        label={"DATA REAL"}
-                        required={false}
+                        label={"INÍCIO REAL"}
+                        required={true}
                       />
                     </Flex>
                     <Flex direction={"column"} flex={1}>

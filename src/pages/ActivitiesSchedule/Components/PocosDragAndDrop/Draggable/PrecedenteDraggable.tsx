@@ -73,7 +73,7 @@ function PrecedenteDraggable({
             w="100%"
             bg={"#f5f5f5"}
             px={5}
-            py={2}
+            py={4}
             borderRadius={"60px"}
             mb={2}
           >
@@ -118,6 +118,7 @@ function PrecedenteDraggable({
                     <FormControl>
                       <Text sx={{ fontSize: 12, fontWeight: "600" }}>DIAS</Text>
                       <Input
+                        h={"56px"}
                         isDisabled
                         bg={"#fff"}
                         placeholder="0"

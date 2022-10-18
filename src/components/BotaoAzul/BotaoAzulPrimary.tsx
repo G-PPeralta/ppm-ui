@@ -30,14 +30,14 @@ function BotaoAzulPrimary({
       h={"56px"}
       borderRadius={"10px"}
       disabled={!formikForm.isValid || !formikForm.dirty}
-      background={"origem.300"}
+      background={"origem.500"}
       variant="primary"
       color="white"
       onClick={() =>
         handleCadastrarRefresh(formikForm, onClose, setRefresh, refresh)
       }
       _hover={{
-        background: "origem.500",
+        background: "origem.600",
         transition: "all 0.4s",
       }}
       leftIcon={leftIcon || null}

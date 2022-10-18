@@ -67,9 +67,9 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
         }}
         onClick={onOpen}
       >
-        Novo Cronograma
+        Adicionar Cronograma
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="7xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="5xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader

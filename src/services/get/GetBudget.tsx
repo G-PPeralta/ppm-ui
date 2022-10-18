@@ -1,4 +1,4 @@
-import { Budget, BudgetDetail } from "interfaces/Budgets";
+import { Budget, ClasseServico, Result } from "interfaces/Budgets";
 
 import { api, token } from "services/api";
 
@@ -74,9 +74,7 @@ export async function getBudgets(): Promise<Budget[]> {
   return data;
 }
 
-export async function getBudgetDetail(
-  id: string | null
-): Promise<BudgetDetail[]> {
+export async function getBudgetDetail(id: string | null): Promise<Result> {
   const uri = `/budgets/detail/${id}`;
 
   /* const data = [
@@ -145,7 +143,7 @@ export async function getBudgetDetail(
       ],
     },
   ]; */
-  const { data } = await api.get<BudgetDetail[]>(uri, token());
+  const { data } = await api.get<Result>(uri, token());
 
   return data;
 }
@@ -159,9 +157,9 @@ export async function getBudgetProjects(): Promise<
   return data;
 }
 
-export async function getNomePoco(id: string | null) {
-  const uri = `/budgets/poco/${id}`;
-  const { data } = await api.get<{ nom_atividade: string }[]>(uri, token());
+export async function getClassesServicos() {
+  const uri = "/classe-servico";
+  const { data } = await api.get<ClasseServico[]>(uri, token());
 
-  return data;
+  return { data };
 }

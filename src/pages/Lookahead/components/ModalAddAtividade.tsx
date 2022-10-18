@@ -37,23 +37,33 @@ export function ModalAddAtividade(props: PropsType) {
   const { id } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   // const { registerForm, loading } = useCadastroAtividade();
-  const [startDate, setStartDate] = useState<any>("");
+  const [startDate, setStartDate] = useState<Date>();
   const [nomeServico, setNomeServico] = useState("");
   const [nomeFerramenta, setNomeFerramenta] = useState("");
   const [anotacao, setAnotacao] = useState("");
-
+  const [loadingBtn, setLoadingBtn] = useState(false);
   const save = async () => {
+    if (!startDate) {
+      return;
+    }
+    setLoadingBtn(true);
+
+    const _data = startDate?.toISOString().split("T")[0];
+    const _hora = startDate?.toLocaleTimeString();
+
     const ferramenta: CreateServicoFerramenta = {
       atividade_id: id,
       nome: nomeFerramenta,
-      data_hora: startDate,
+      data: _data,
+      hora: _hora,
       anotacoes: anotacao,
     };
 
     const servicos: CreateServicoFerramenta = {
       atividade_id: id,
       nome: nomeServico,
-      data_hora: startDate,
+      data: _data,
+      hora: _hora,
       anotacoes: anotacao,
     };
 
@@ -151,7 +161,7 @@ export function ModalAddAtividade(props: PropsType) {
                           showTimeSelect
                           dateFormat="dd/MM/yyyy, hh:mm"
                           customInput={<ExampleCustomInput />}
-                          isClearable={startDate !== ""}
+                          isClearable={startDate !== null}
                         />
                       </Flex>
                     </Flex>
@@ -171,6 +181,7 @@ export function ModalAddAtividade(props: PropsType) {
                           type="text"
                           name="nom_atividade"
                           color={"#949494"}
+                          maxLength={20}
                           onChange={(e) => setNomeFerramenta(e.target.value)}
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
                         />
@@ -189,6 +200,7 @@ export function ModalAddAtividade(props: PropsType) {
                           type="text"
                           name="nom_atividade"
                           color={"#949494"}
+                          maxLength={20}
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
                           onChange={(e) => setNomeServico(e.target.value)}
                         />
@@ -218,6 +230,7 @@ export function ModalAddAtividade(props: PropsType) {
                           id="dsc_comentario"
                           name="dsc_comentario"
                           color={"#949494"}
+                          maxLength={200}
                           rows={5}
                           onChange={(e) => setAnotacao(e.target.value)}
                         />
@@ -248,18 +261,9 @@ export function ModalAddAtividade(props: PropsType) {
                   variant="primary"
                   color="white"
                   onClick={save}
-                  // onClick={() =>
-                  //   handleCadastrarRefresh(
-                  //     registerForm,
-                  //     onClose,
-                  //     setRefresh,
-                  //     refresh
-                  //   )
-                  // }
-                  // _hover={{
-                  //   background: "origem.500",
-                  //   transition: "all 0.4s",
-                  // }}
+                  disabled={
+                    !startDate || !nomeFerramenta || !nomeServico || loadingBtn
+                  }
                 >
                   Cadastrar
                   {/* {loading ? (

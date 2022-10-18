@@ -1,10 +1,9 @@
-import { FiChevronDown, FiPrinter } from "react-icons/fi";
+import { FiChevronDown } from "react-icons/fi";
 
 import "./expansiveTable.css";
 // import ModalCadastrarOrcamentoPrevisto from "./ModalCadastrarOrcamentoPrevisto";
 import {
   Flex,
-  IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -12,9 +11,10 @@ import {
   Th,
   Thead,
   Tr,
-  Text,
 } from "@chakra-ui/react";
 import { BudgetDetail } from "interfaces/Budgets";
+
+import Empty from "components/TableEmpty/empty";
 
 import CampoEditavel from "./CampoEditavel";
 import ModalGestaoDeCusto from "./ModalGestaoDeCusto";
@@ -22,7 +22,7 @@ import ModalGestaoDeCusto from "./ModalGestaoDeCusto";
 export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
   const { data } = props;
 
-  const color = "rgb(46, 105, 253)";
+  //  const color = "rgb(46, 105, 253)";
 
   /*  const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
@@ -73,7 +73,7 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
 
   const tableData = data.map((detail, key) => (
     <>
-      <Tr backgroundColor={color} key={detail.id} color="white">
+      <Tr background={"origem.200"} key={detail.id} color="white">
         {/* <Td>{detail.data}</Td> */}
         <Td>{detail.brt}</Td>
         <Td onClick={() => toggleAcordion(key)}>
@@ -113,36 +113,43 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
   return (
     <>
       <TableContainer mt={4} mb={3} ml={1}>
-        <Table variant="unstyled">
+        <Table>
           <Thead>
-            <Tr backgroundColor={"blue"} color="white">
-              <Th colSpan={4} borderTopLeftRadius="10px">
+            <Tr background={"origem.500"} color="white">
+              <Th colSpan={4} color={"white"} borderTopLeftRadius="10px">
                 Atividade
               </Th>
               <Th borderTopRightRadius={"10px"} colSpan={2}>
-                <Text className={"noprint"}>
+                {/* <Button
+                  className={"noprint"}
+                  variant="outline"
+                  onClick={() => window.print()}
+                >
                   Imprimir
                   <IconButton
                     color={"white"}
                     backgroundColor="transparent"
                     aria-label="imprimir"
                     icon={<FiPrinter />}
-                    onClick={() => window.print()}
                   />
-                </Text>
+                </Button> */}
               </Th>
             </Tr>
-            <Tr backgroundColor={"blue"} color="white">
+            <Tr background={"origem.500"} color="white">
               {/* <Th>Data</Th> */}
-              <Th>BRT</Th>
-              <Th>Serviço/Compra</Th>
-              <Th>Fornecedor</Th>
-              <Th>R$ Previsto</Th>
-              <Th>R$ Realizado</Th>
-              <Th>% Gap</Th>
+              <Th color={"white"}>BRT</Th>
+              <Th color={"white"}>Serviço/Compra</Th>
+              <Th color={"white"}>Fornecedor</Th>
+              <Th color={"white"}>R$ Previsto</Th>
+              <Th color={"white"}>R$ Realizado</Th>
+              <Th color={"white"}>% Gap</Th>
             </Tr>
           </Thead>
-          <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+          {data.length ? (
+            <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+          ) : (
+            <Empty />
+          )}
         </Table>
       </TableContainer>
     </>

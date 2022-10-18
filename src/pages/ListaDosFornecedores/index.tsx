@@ -24,53 +24,85 @@ import {
   FormLabel,
   Select,
 } from "@chakra-ui/react";
-import { ProjetosList } from "interfaces/Services";
+import { Polo, ProjetosList } from "interfaces/Services";
 
 import Sidebar from "components/SideBar";
 
 // import { useFornecedores } from 'hooks/useFornecedores';
 
 import { getFornecedor } from "services/get/Fornecedor";
-import { getProjetos } from "services/get/Projetos";
+import { getPolo, getProjetos } from "services/get/Projetos";
 import { putFornecedor } from "services/update/Fornecedor";
 
 import { EditarFornecedorModal } from "./components/EditarFornecedorModal";
 import { TabelaFornecedores } from "./components/TabelaFornecedores";
 
-export interface Fornecedor {
+// export interface Fornecedor {
+//   id: number;
+//   nomefornecedor: string;
+//   fornecedor: string;
+//   orcamento: number;
+//   realizado: number;
+//   responsavel: string;
+//   descricao: string;
+// }
+
+export interface FornecedoreDto {
   id: number;
-  fornecedor: string;
-  orcamento: number;
-  realizado: number;
-  responsavel: string;
-  descricao: string;
+  nom_usu_create: string;
+  poloid: number;
+  servicoid: number;
+  statusid: number;
+  nomefornecedor: string;
+  numerocontrato: string;
+  representante: string;
+  email: string;
+  telefone: string;
+  invoice: string;
+  cnpj: string;
+  justificativa: string;
+  outrasInformacoes: string;
 }
 
 export function Fornecedores() {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [editFornecedor, setEditFornecedor] = useState({} as Fornecedor);
-  const [fornecedores, setFornecedores] = useState<Fornecedor[]>([]);
+  const [editFornecedor, setEditFornecedor] = useState({} as FornecedoreDto);
+  const [fornecedores, setFornecedores] = useState<FornecedoreDto[]>([]);
+  const [filteredFornecedores, setFilteredFornecedores] = useState<
+    FornecedoreDto[]
+  >([] as FornecedoreDto[]);
   const [projetos, setProjetos] = useState([] as ProjetosList[]);
-  // const [projetoId, setProjetoId] = useState("");
+  const [polos, setPolos] = useState<Polo[]>([] as Polo[]);
+  const [loading, setLoading] = useState(true);
+  // estados dos filtros
+  const [projetoId, setProjetoId] = useState(0);
+  const [polo, setPolo] = useState(0);
 
-  function handleEditFornecedor(fornecedor: Fornecedor) {
+  function handleEditFornecedor(fornecedor: FornecedoreDto) {
     setEditFornecedor(fornecedor);
     onOpen();
   }
 
-  function handleUpdateFornecedor(fornecedor: Fornecedor) {
+  async function handleGetPolos() {
+    const payload = await getPolo();
+    setPolos(payload.data);
+  }
+
+  function handleUpdateFornecedor(fornecedor: any) {
     // Atualiza o fornecedor na lista
     setFornecedores(
       fornecedores.map((f) => (f.id === fornecedor.id ? fornecedor : f))
     );
-    putFornecedor(fornecedor.id, fornecedor); // API
+    putFornecedor(fornecedor);
+    handleGetFornecedores();
     onClose();
   }
 
   const handleGetFornecedores = async () => {
     const response = await getFornecedor();
-    setFornecedores(response.data as Fornecedor[]);
+    setFornecedores(response.data as FornecedoreDto[]);
+    setFilteredFornecedores(response.data as FornecedoreDto[]);
   };
 
   async function handleGetProjetos() {
@@ -85,6 +117,27 @@ export function Fornecedores() {
   useEffect(() => {
     handleGetFornecedores();
   }, []);
+
+  useEffect(() => {
+    handleGetPolos();
+  }, []);
+
+  useEffect(() => {
+    if (polos.length > 0 && fornecedores.length > 0 && projetos.length > 0)
+      setLoading(false);
+  }, [polos, fornecedores, projetos]);
+
+  function handleFilterData(id: number, pol: number) {
+    if (id !== 0) {
+      const filtered = fornecedores.filter((fornec) => fornec.id == id);
+      return setFornecedores(filtered);
+    }
+    if (pol !== 0) {
+      const filtered = fornecedores.filter((fornec) => fornec.poloid == pol);
+      return setFornecedores(filtered);
+    }
+    setFornecedores(filteredFornecedores);
+  }
 
   return (
     <Sidebar>
@@ -143,7 +196,7 @@ export function Fornecedores() {
                         borderColor: "#0047BB",
                       }}
                       onClick={() => {
-                        navigate("/providers-registration");
+                        navigate("/cadastrar-fornecedor");
                       }}
                       mb={"15px"}
                     >
@@ -190,7 +243,9 @@ export function Fornecedores() {
                             placeholder="Selecione"
                             id="projeto"
                             name="projeto"
-                            // onChange={(e) => setProjetoId(e.target.value)}
+                            onChange={(e) =>
+                              setProjetoId(Number(e.target.value))
+                            }
                             width={"208px"}
                             height={"56px"}
                           >
@@ -228,17 +283,17 @@ export function Fornecedores() {
                             placeholder="Selecione"
                             id="projeto"
                             name="projeto"
-                            // onChange={(e) => setProjetoId(e.target.value)}
+                            onChange={(e) => setPolo(Number(e.target.value))}
                             width={"208px"}
                             height={"56px"}
                           >
                             <option color={"#A7A7A7"} value={0}>
                               Todos
                             </option>
-                            {projetos &&
-                              projetos.map((project, index) => (
-                                <option value={project.id} key={index}>
-                                  {project.nomeProjeto}
+                            {!loading &&
+                              polos.map((pol, index) => (
+                                <option value={pol.id} key={index}>
+                                  {pol.polo}
                                 </option>
                               ))}
                           </Select>
@@ -257,7 +312,11 @@ export function Fornecedores() {
                             color: "#0047BB",
                           }}
                           rightIcon={<FiSearch />}
-                          // onClick={filterByProject}
+                          onClick={() => {
+                            handleFilterData(projetoId, polo);
+                            setPolo(0);
+                            setProjetoId(0);
+                          }}
                           alignSelf={"end"}
                           height={"56px"}
                           width={"101px"}
@@ -391,12 +450,15 @@ export function Fornecedores() {
               <TabelaFornecedores
                 fornecedores={fornecedores}
                 onEdit={handleEditFornecedor}
+                polos={polos}
+                loading={loading}
               />
               <EditarFornecedorModal
                 isOpen={isOpen}
                 onClose={onClose}
                 fornecedor={editFornecedor}
                 onUpdate={handleUpdateFornecedor}
+                polos={polos}
               />
               <Stack spacing="6" alignItems={"center"}></Stack>
             </Box>{" "}

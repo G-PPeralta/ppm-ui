@@ -6,7 +6,7 @@ import GenericCurveS from "./genericCurveS";
 export function Evolucao() {
   return (
     <>
-      <Flex direction={"column"} w={"100%"} gap={"1.4em"} marginTop={"1.4em"}>
+      <Flex direction={"column"} w={"100%"} gap={"24px"} marginTop={"24px"}>
         <GenericCurveS data={curveSData} />
         <GenericGantt data={ganttData} taskValues={taskFildsValues} />
       </Flex>

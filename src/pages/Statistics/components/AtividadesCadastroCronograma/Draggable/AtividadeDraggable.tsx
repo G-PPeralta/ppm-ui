@@ -20,8 +20,8 @@ import { Operacao } from "interfaces/Estatisticas";
 import { RequiredField } from "components/RequiredField/RequiredField";
 
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
-import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
-import PopOverPrecedentes from "./PopOverPrecedentes";
+import DateTimePicker from "./DateTimePicker";
+// import PopOverPrecedentes from "./PopOverPrecedentes";
 interface Props {
   registerForm: FormikProps<any>;
   index: number;
@@ -40,13 +40,24 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
 
+  const initAdd = {
+    area_id: 0,
+    operacao_id: 0,
+    responsavel_id: 0,
+    data_inicio: "",
+    duracao: 0,
+  };
+
   const remove = (index: number) => {
-    // Pega a lista de atividades diretamente do Formik
     const newList = registerForm.values.atividades;
-    // Remove item da lista
+
     newList.splice(index, 1);
-    // Atualiza lista no Formik
-    registerForm.setFieldValue("atividades", newList);
+
+    if (newList.length === 0) {
+      registerForm.setFieldValue("atividades", [initAdd]);
+    } else {
+      registerForm.setFieldValue("atividades", [...newList]);
+    }
   };
 
   const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
@@ -187,10 +198,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 </Flex>
 
                 <Flex direction={"column"} flex={1}>
-                  <DateTimePickerDataInicio
-                    registerForm={registerForm}
-                    index={index}
-                  />
+                  <DateTimePicker registerForm={registerForm} index={index} />
                 </Flex>
                 <Flex direction={"column"} flex={1}>
                   <Flex gap={1}>
@@ -219,7 +227,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     <NumberInputField bg={"#fff"} h={"56px"} />
                   </NumberInput>
                 </Flex>
-                <Flex direction={"column"} flex={1}>
+                {/* <Flex direction={"column"} flex={1}>
                   <Flex gap={1}>
                     <Text
                       fontWeight={"bold"}
@@ -233,7 +241,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     registerForm={registerForm}
                     index={index}
                   />
-                </Flex>
+                </Flex> */}
               </Flex>
               <Flex
                 p={1}

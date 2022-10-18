@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import {
   Button,
   Flex,
@@ -22,16 +24,22 @@ import { TextError } from "components/TextError";
 
 import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 
-// import SelectFiltragemSondas from "./SelectFiltragemSonda";
-
 function ModalNovaCampanha({ setRefresh, refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaServicosSondas } = useCadastroCampanha();
 
   const optionsServicoSonda = listaServicosSondas.map((sonda: any) => ({
-    value: sonda.id,
+    value: sonda.nom_sonda,
     label: sonda.nom_sonda,
   }));
+
+  useEffect(() => {
+    if (registerForm.values.id_projeto.split("-")[0] === "0 ") {
+      registerForm.setFieldValue("nova_campanha", true);
+    } else {
+      registerForm.setFieldValue("nova_campanha", false);
+    }
+  }, [registerForm.values.id_projeto]);
 
   return (
     <>
@@ -138,48 +146,6 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              {/* <Flex gap={2}>
-                <Button
-                  variant="ghost"
-                  color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
-                  _hover={{
-                    background: "red.500",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  disabled={
-                    !registerForm.isValid || !registerForm.values.nom_campanha
-                  }
-                  background="origem.300"
-                  variant="primary"
-                  color="white"
-                  onClick={() =>
-                    handleCadastrarRefresh(
-                      registerForm,
-                      onClose,
-                      setRefresh,
-                      refresh
-                    )
-                  }
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                  }}
-                >
-                  {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Concluir Cadastro</Text>
-                    </>
-                  )}
-                </Button>
-              </Flex> */}
               <Flex gap={2}>
                 <BotaoVermelhoGhost
                   text={"Cancelar"}

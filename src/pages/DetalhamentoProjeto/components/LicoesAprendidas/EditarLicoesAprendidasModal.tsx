@@ -60,7 +60,7 @@ function EditarLicoesAprendidasModal({
     if (campo === "txt_acao") return acao;
   };
 
-  const regex = /[^a-z ]/gi;
+  const regex = /[^\w\s]/gi;
 
   return (
     <Flex>

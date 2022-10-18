@@ -91,7 +91,7 @@ function DeleteModal() {
                         color={"#010101"}
                         fontWeight={"400"}
                       >
-                        Tem certeza que deseja mover essa informação para a
+                        Tem certeza que deseja mover esta informação para a
                         Lixeira?
                       </Text>
                     </Flex>

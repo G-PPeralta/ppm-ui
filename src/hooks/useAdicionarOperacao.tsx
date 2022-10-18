@@ -76,7 +76,7 @@ export function useAdicionarOperacao(
   const adicionarOperacao = yup.object({
     id_atividade: yup.number().required("Campo obrigatório").moreThan(0),
     id_area: yup.number().required("Campo obrigatório").moreThan(0),
-    inicio_realizado: yup.string(), // .required("Campo obrigatório"),
+    inicio_realizado: yup.string().required("Campo obrigatório"),
     // fim_realizado: yup.string(), // .required("Campo obrigatório"),
     inicio_planejado: yup.string().required("Campo obrigatório"),
     // fim_planejado: yup.string(), // .required("Campo obrigatório"),
@@ -102,9 +102,11 @@ export function useAdicionarOperacao(
         id_atividade: values.id_atividade,
         id_area: values.id_area,
         id_responsavel: values.id_responsavel,
-        inicio_realizado: values.inicio_realizado,
+
+        inicio_realizado: new Date(values.inicio_realizado).toLocaleString(),
         // fim_realizado: values.fim_realizado, // tratamento back
-        inicio_planejado: values.inicio_planejado,
+        // new Date(values.inicio_planejado).toLocaleString(),
+        inicio_planejado: new Date(values.inicio_planejado).toLocaleString(),
         // fim_planejado: values.fim_planejado, // tratamento back
         duracao_realizado: values.hrs_reais,
         duracao_planejado: values.hrs_totais,
@@ -121,6 +123,7 @@ export function useAdicionarOperacao(
         //   data: newValues,
         // };
         // const status = res.status;
+        // console.log(">>>values", values);
         // console.log(">>>postOperacoesEstatisticas", newValues);
         const { status } = await postOperacoesEstatisticas(newValues);
         if (status === 200 || status === 201) {

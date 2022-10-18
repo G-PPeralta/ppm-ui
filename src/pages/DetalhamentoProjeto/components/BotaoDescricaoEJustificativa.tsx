@@ -13,7 +13,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Text,
+  // Text,
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -83,9 +83,6 @@ function BotaoDescricaoEJustificativa({
           <ModalBody>
             <FormControl marginBottom={4} padding={1}>
               <Flex direction={"column"}>
-                <Text fontSize={"14px"} fontWeight={"700"}>
-                  Justificativa
-                </Text>
                 <FormLabel
                   mt={"6px"}
                   htmlFor="justificativa"
@@ -99,8 +96,8 @@ function BotaoDescricaoEJustificativa({
                   maxLength={255}
                   mt={"-9px"}
                   fontSize={"14px"}
-                  color={"#949494"}
-                  fontWeight={"400"}
+                  color={"black"}
+                  _placeholder={{ color: "#949494" }}
                   isRequired
                   placeholder="Digite a justificativa"
                   id="justificativa"
@@ -127,9 +124,6 @@ function BotaoDescricaoEJustificativa({
               </FormControl> */}
             <FormControl padding={1}>
               <Flex direction={"column"}>
-                <Text fontSize={"14px"} fontWeight={"700"}>
-                  Descrição
-                </Text>
                 <FormLabel
                   htmlFor="descricao"
                   color="#949494"
@@ -143,9 +137,9 @@ function BotaoDescricaoEJustificativa({
                   maxLength={255}
                   mt={"-9px"}
                   fontSize={"14px"}
-                  color={"#949494"}
-                  fontWeight={"400"}
                   isRequired
+                  color={"black"}
+                  _placeholder={{ color: "#949494" }}
                   placeholder="Digite a descrição"
                   id="descricao"
                   name="descricao"

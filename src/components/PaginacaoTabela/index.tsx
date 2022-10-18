@@ -96,7 +96,8 @@ function PaginacaoTabela({ data, fromTo }: Props) {
           </Select>
 
           <Text fontSize={"14px"}>
-            {from === 0 ? "1" : from} - {to} de {data.length}
+            {from === 0 ? "1" : from + 1} -{" "}
+            {data.length < to ? data.length : to} de {data.length}
           </Text>
         </Flex>
         <Flex gap={2}>

@@ -56,7 +56,7 @@ function ModalDeletarProjeto(projeto: id) {
       >
         <FaTrash size={"13px"} />
       </IconButton>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton color={"white"} />

@@ -6,3 +6,11 @@ export async function postCadastroAtividadeProjetos(
   const { status } = await api.post("/projetos/vincular", payload, token());
   return { status };
 }
+
+export async function postCadastroOutro(
+  rota: string,
+  payload: any
+): Promise<{ status: number }> {
+  const { status } = await api.post(`${rota}`, payload, token());
+  return { status };
+}

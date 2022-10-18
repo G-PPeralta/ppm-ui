@@ -127,14 +127,14 @@ function EditModal({
                   LIÇÃO APRENDIDA
                 </FormLabel>
                 <Input
+                  maxLength={40}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
                   width={"328px"}
                   height={"56px"}
-                  color="#949494"
+                  color="black"
                   fontSize={"14px"}
-                  fontWeight={"400"}
                   isRequired
                   placeholder="Lição aprendida"
                   type="text"
@@ -170,14 +170,14 @@ function EditModal({
                   AÇÃO OU RECOMENDAÇÃO
                 </FormLabel>
                 <Textarea
+                  maxLength={150}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
                   width={"456px"}
                   height={"121px"}
-                  color="#949494"
+                  color="black"
                   fontSize={"14px"}
-                  fontWeight={"400"}
                   isRequired
                   placeholder="Ação ou recomendação"
                   // type="text"

@@ -114,11 +114,12 @@ function EditarPriorizacao(infosRanking: TableProps) {
                               NOME DA PRIORIZAÇÃO
                             </FormLabel>
                             <Input
+                              maxLength={45}
                               ml={"3px"}
-                              w={"480px"}
+                              w={"93%"}
                               h={"56px"}
                               fontSize={"14px"}
-                              color={"#949494"}
+                              _placeholder={{ color: "black" }}
                               fontWeight={"400"}
                               border={"solid 1px #949494"}
                               isRequired
@@ -152,10 +153,10 @@ function EditarPriorizacao(infosRanking: TableProps) {
                               PERFIS COM ACESSO
                             </FormLabel>
                             <Select
-                              w={"480px"}
+                              w={"93%"}
                               h={"56px"}
                               fontSize={"14px"}
-                              color={"#2D2926"}
+                              _placeholder={{ color: "black" }}
                               fontWeight={"400"}
                               border={"solid 1px #949494"}
                               id="acesso"

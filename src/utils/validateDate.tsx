@@ -29,9 +29,13 @@ export const statusProjeto = [
 export function validateDate(
   pct_plan: number, // porcentagem planejada
   comp_pct: number, // comparação porcentagens
-  pct_real: number // porcentagem realizada
+  pct_real: number, // porcentagem realizada
+  ind_alerta?: number // indicador de alerta
 ) {
   switch (true) {
+    case ind_alerta === 1:
+      return statusProjeto[3].color; // atrasado
+
     case pct_plan > pct_real:
       return statusProjeto[3].color; // atrasado
 

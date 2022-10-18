@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import {
   Flex,
@@ -43,13 +43,14 @@ function CadastroTarefasModal({
 }: CadastroTarefaProps) {
   // const { onClose } = useDisclosure();
   const { user } = useAuth();
+  const { id } = useParams();
   const [nome, setNome] = useState("");
   const [data, setData] = useState("");
-  const [atividadeId, setAtividadeId] = useState(0);
+  const [atividade, setAtividade] = useState("");
   const [responsavel, setResponsavel] = useState("");
   const [descricao, setDescricao] = useState("");
 
-  const regex = /[^a-z ]/gi;
+  const regex = /[^\w\s]/gi;
 
   return (
     <Flex>
@@ -126,7 +127,8 @@ function CadastroTarefasModal({
                   fontSize={"14px"}
                   width={"300px"}
                   height={"56px"}
-                  _placeholder={{ color: "black" }}
+                  color={"black"}
+                  _placeholder={{ color: "#949494" }}
                   isRequired
                   placeholder="Nome tarefa"
                   type="text"
@@ -183,22 +185,21 @@ function CadastroTarefasModal({
                 </FormLabel>
                 <Select
                   borderRadius={"8px"}
-                  _placeholder={{ color: "black" }}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
+                  color={"black"}
+                  _placeholder={{ color: "#949494" }}
                   fontSize={"14px"}
                   width={"208px"}
                   height={"56px"}
                   id="atividadeRel"
                   name="atividadeRel"
-                  onChange={(event) =>
-                    setAtividadeId(Number(event.target.value))
-                  }
+                  onChange={(event) => setAtividade(event.target.value)}
                 >
                   <option value="">Selecione</option>
                   {atividadesProjeto.map((atividade, index) => (
-                    <option value={atividade.id} key={index}>
-                      {atividade.nomeAtividade}
+                    <option value={atividade.nom_atividade} key={index}>
+                      {atividade.nom_atividade}
                     </option>
                   ))}
                 </Select>
@@ -214,15 +215,17 @@ function CadastroTarefasModal({
                   RESPONSÁVEL
                 </FormLabel>
                 <Input
+                  maxLength={50}
                   placeholder="Responsável"
                   type="text"
                   fontSize={"14px"}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
+                  color={"black"}
+                  _placeholder={{ color: "#949494" }}
                   width={"208px"}
                   height={"56px"}
-                  color="#2D2926"
                   id="atividadeRel"
                   name="atividadeRel"
                   value={responsavel}
@@ -248,7 +251,8 @@ function CadastroTarefasModal({
                 mt={"-9px"}
                 width={"456px"}
                 height={"121px"}
-                _placeholder={{ color: "black" }}
+                color={"black"}
+                _placeholder={{ color: "#949494" }}
                 isRequired
                 placeholder="Descrição da tarefa"
                 id="descrição"
@@ -291,9 +295,11 @@ function CadastroTarefasModal({
                   await postTarefa({
                     nome_tarefa: nome,
                     data_tarefa: new Date(data),
-                    atividade_relacionada: atividadeId,
+                    atividade_relacionada: atividade,
                     descricao_tarefa: descricao,
+                    responsavel,
                     nom_usu_create: user?.nome,
+                    projeto_id: Number(id),
                   });
                   newRender();
                   closeModal();
