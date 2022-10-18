@@ -130,7 +130,7 @@ export function GráficosEstatisticos() {
                           fontWeight={"700"}
                           fontFamily={"Mulish"}
                         >
-                          Gráficos statísticos
+                          Gráficos Estatísticos
                         </Text>
                       </FormLabel>
                     </FormControl>
