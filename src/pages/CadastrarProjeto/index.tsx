@@ -249,7 +249,7 @@ function CadastrarProjeto() {
                 <Flex
                   gap={2}
                   align={innerWidth > 428 ? "end" : "stretch"}
-                  w={innerWidth > 428 ? "60%" : "100%"}
+                  w={innerWidth > 428 ? "62%" : "100%"}
                   wrap={"wrap"}
                   direction={innerWidth > 428 ? "row" : "column"}
                 >
