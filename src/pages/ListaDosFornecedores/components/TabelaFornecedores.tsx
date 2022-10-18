@@ -66,19 +66,25 @@ export function TabelaFornecedores({
       .slice(from, to)
       .map((fornecedor, index) => (
         <Tr key={index}>
-          <Td isNumeric fontWeight={"semibold"}>
+          <Td textAlign={"center"} fontWeight={"semibold"}>
             {fornecedor.id}
           </Td>
-          <Td fontWeight={"semibold"}>{fornecedor.nomefornecedor}</Td>
-          <Td fontWeight={"semibold"}>
+          <Td textAlign={"center"} fontWeight={"semibold"}>
+            {fornecedor.nomefornecedor}
+          </Td>
+          <Td textAlign={"center"} fontWeight={"semibold"}>
             {polos.find((pol) => pol.id == fornecedor.poloid)?.polo}
           </Td>
-          <Td fontWeight={"semibold"}>{fornecedor.servicoid}</Td>
-          <Td fontWeight={"semibold"}>{fornecedor.representante}</Td>
-          <Td width="406px" height={"56px"}>
+          <Td textAlign={"center"} fontWeight={"semibold"}>
+            {fornecedor.servicoid}
+          </Td>
+          <Td textAlign={"center"} fontWeight={"semibold"}>
+            {fornecedor.representante}
+          </Td>
+          <Td textAlign={"center"} width="406px" height={"56px"}>
             {fornecedor.justificativa}
           </Td>
-          <Td>
+          <Td textAlign={"center"}>
             <IconButton
               aria-label="Plus sign"
               icon={<MdModeEdit />}

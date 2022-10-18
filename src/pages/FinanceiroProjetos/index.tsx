@@ -69,12 +69,20 @@ export function FinanceiroProjetos() {
               borderRadius={{ base: "xl", sm: "xl" }}
             >
               <Flex
+                ml={-3}
+                mt={-1}
                 justify={"space-between"}
-                mb={4}
+                mb={6}
                 wrap={"wrap"}
                 align={"center"}
               >
-                <Heading as="h3" size="md" textAlign={"center"}>
+                <Heading
+                  fontSize={"24px"}
+                  color={"#2D2926"}
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
+                  textAlign={"center"}
+                >
                   Financeiro
                 </Heading>
                 {/* <Button
@@ -95,15 +103,19 @@ export function FinanceiroProjetos() {
                   Carregar Planilha
                 </Button> */}
               </Flex>
-              <Flex gap={2} align={"end"}>
-                <Flex gap={1} direction={"column"}>
-                  <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
+              <Flex gap={4} align={"end"}>
+                <Flex direction={"column"} ml={-3} mt={-1} mb={2}>
+                  <Text fontWeight={"700"} fontSize={"12px"} color={"#949494"}>
                     PROJETO OU ELEMENTO PEP
                   </Text>
                   <Input
+                    // mt={"-5px"}
                     h={"56px"}
                     isRequired
-                    placeholder="Projeto ou Elemento PEP"
+                    fontWeight={"400"}
+                    fontSize={"14px"}
+                    _placeholder={{ color: "#949494" }}
+                    placeholder="Projeto ou elemento PEP"
                     type="text"
                     name="pesquisar"
                     onChange={(event) => handleSearch(event)}
@@ -111,8 +123,11 @@ export function FinanceiroProjetos() {
                   />
                 </Flex>
                 <Button
+                  mb={2}
                   h={"56px"}
-                  borderRadius={"10px"}
+                  borderRadius={"8px"}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
                   background={"origem.500"}
                   variant="primary"
                   color="white"
@@ -126,7 +141,9 @@ export function FinanceiroProjetos() {
                   Filtrar
                 </Button>
               </Flex>
-              {filter && <Tabela data={filter} />}
+              <Flex ml={-3} mt={-1} mr={-3}>
+                {filter && <Tabela data={filter} />}
+              </Flex>
             </Box>
           </Flex>
         ) : (
