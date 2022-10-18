@@ -92,16 +92,22 @@ export function ModalAddAtividade(props: PropsType) {
   return (
     <>
       <Button
-        variant="outline"
-        border={"2px solid"}
-        borderColor={"origem.500"}
-        textColor={"origem.500"}
+        h={"56px"}
+        background={"#0047BB"}
+        border={"2.3px solid"}
+        color={"white"}
+        variant="primary"
         _hover={{
-          borderColor: "origem.600",
-          backgroundColor: "origem.500",
-          textColor: "white",
+          background: "white",
+          color: "#0047BB",
           transition: "all 0.4s",
         }}
+        lineHeight="22.59px"
+        fontFamily="Mulish"
+        fontSize={"18px"}
+        fontWeight={"700"}
+        width="208px"
+        letterSpacing="0.2px"
         onClick={onOpen}
       >
         Cadastrar
@@ -159,6 +165,7 @@ export function ModalAddAtividade(props: PropsType) {
                           onChange={(date) => handleStartDate(date)}
                           locale="pt-BR"
                           showTimeSelect
+                          timeIntervals={60}
                           dateFormat="dd/MM/yyyy, hh:mm"
                           customInput={<ExampleCustomInput />}
                           isClearable={startDate !== null}
