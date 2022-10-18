@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
-
 import { ProjetosLookahead } from "interfaces/lookahead";
+import { useEffect, useState } from "react";
 
 import { getProjetosAtividades } from "services/get/Lookahead";
 
 export function useLookahead() {
-  const [projetos, setProjetos] = useState<ProjetosLookahead[]>();
+  const [loading, setLoading] = useState(false);
 
   const getProjetos = async () => {
-    const projs = await getProjetosAtividades();
-    setProjetos(projs);
+    setLoading(true);
+    const data: ProjetosLookahead[] = await getProjetosAtividades();
+    setLoading(false);
+    return data;
   };
 
   useEffect(() => {
@@ -17,6 +18,7 @@ export function useLookahead() {
   }, []);
 
   return {
-    projetos,
+    getProjetos,
+    loading,
   };
 }

@@ -1,16 +1,8 @@
 import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
-import {
-  Box,
-  Flex,
-  Text,
-  FormControl,
-  Select,
-  Button,
-  FormLabel,
-} from "@chakra-ui/react";
-import { AtividadesLookahead } from "interfaces/lookahead";
+import { Flex, Text, FormControl, Select, Button } from "@chakra-ui/react";
+import { AtividadesLookahead, ProjetosLookahead } from "interfaces/lookahead";
 
 import Sidebar from "components/SideBar";
 
@@ -19,13 +11,17 @@ import { useLookahead } from "hooks/useLookahead";
 import { getAtividades } from "services/get/Lookahead";
 
 import { TabelaLookahead } from "./components/TabelaLookahead";
+import ContainerPagina from "components/ContainerPagina";
+import TituloPagina from "components/TituloPagina";
+import { Ring } from "@uiball/loaders";
 // import { useState } from "react";
 // import { Projetos } from "interfaces/Projetos";
 
 export function Lookahead() {
-  const { projetos } = useLookahead();
+  const { getProjetos, loading } = useLookahead();
   const [atividades, setAtividades] = useState<AtividadesLookahead[]>();
   const [idProject, setIdProject] = useState<string>("0");
+  const [projetos, setProjetos] = useState<ProjetosLookahead[]>();
 
   async function handleProjectChange() {
     const act = await getAtividades(+idProject);
@@ -37,6 +33,15 @@ export function Lookahead() {
     setAtividades(act);
   };
 
+  const getAllProjects = async () => {
+    const proj = await getProjetos();
+    setProjetos(proj);
+  };
+
+  useEffect(() => {
+    getAllProjects();
+  }, []);
+
   useEffect(() => {
     getAllActivities();
   }, []);
@@ -44,32 +49,12 @@ export function Lookahead() {
   return (
     <div>
       <Sidebar>
-        <Flex w={"auto"} align="center" justify="center" bg="#EDF2F7">
-          <Box
-            py={{ base: "6", sm: "8" }}
-            px={{ base: "6", sm: "10" }}
-            w="100%"
-            bg="white"
-            boxShadow={{
-              base: "none",
-              sm: "md",
-            }}
-            borderRadius={{ base: "none", sm: "xl" }}
-          >
-            <Flex direction="column" ml={-5}>
-              <Flex align={"flex-end"} mt={-5}>
+        {!loading ? (
+          <ContainerPagina>
+            <Flex direction="column" fontFamily="Mulish">
+              <Flex align={"flex-end"}>
                 <FormControl>
-                  <FormLabel htmlFor="name">
-                    <Text
-                      mb={3}
-                      fontSize={"24px"}
-                      color={"#2D2926"}
-                      fontWeight={"700"}
-                      fontFamily={"Mulish"}
-                    >
-                      Relatório Lookahead
-                    </Text>
-                  </FormLabel>
+                  <TituloPagina botaoVoltar={true}>Lookahead</TituloPagina>
                 </FormControl>
               </Flex>
               <Flex direction="row" justifyContent="flex-start">
@@ -87,10 +72,10 @@ export function Lookahead() {
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
                       color={"#949494"}
-                      placeholder="Projeto"
                       width={"146px"}
                       height={"56px"}
                       borderRadius={"8px"}
+                      placeholder="Projeto"
                       onChange={(e) => setIdProject(e.target.value)}
                     >
                       {projetos &&
@@ -134,8 +119,12 @@ export function Lookahead() {
                 {atividades && <TabelaLookahead data={atividades} />}
               </Flex>
             </Flex>
-          </Box>
-        </Flex>
+          </ContainerPagina>
+        ) : (
+          <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
+            <Ring speed={2} lineWeight={5} color="blue" size={64} />
+          </Flex>
+        )}
       </Sidebar>
     </div>
   );
