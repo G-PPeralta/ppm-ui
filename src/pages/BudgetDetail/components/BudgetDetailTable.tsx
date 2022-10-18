@@ -113,7 +113,7 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
   return (
     <>
       <TableContainer mt={4} mb={3} ml={1}>
-        <Table variant={"striped"}>
+        <Table>
           <Thead>
             <Tr background={"origem.500"} color="white">
               <Th colSpan={4} color={"white"} borderTopLeftRadius="10px">
