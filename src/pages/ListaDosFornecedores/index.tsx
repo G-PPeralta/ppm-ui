@@ -10,7 +10,7 @@ import {
   // FormLabel,
   // HStack,
   Text,
-  Stack,
+  // Stack,
   useBreakpointValue,
   useColorModeValue,
   Heading,
@@ -147,218 +147,235 @@ export function Fornecedores() {
         justify="center"
         bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
       >
-        <Stack spacing="8">
-          <Flex align="center" justify="center" bg={"#EDF2F7"}>
-            <Box
-              py={{ base: "6", sm: "8" }}
-              px={{ base: "6", sm: "8" }}
-              w={"100%"}
-              bg={useBreakpointValue({ base: "transparent", sm: "white" })}
-              boxShadow={{
-                base: "none",
-                sm: useColorModeValue("md", "md-dark"),
-              }}
-              borderRadius={{ base: "xl", sm: "xl" }}
+        {/* <Stack spacing="8"> */}
+        {/* <Flex align="center" justify="center" bg={"#EDF2F7"}> */}
+        <Box
+          py={{ base: "6", sm: "8" }}
+          px={{ base: "6", sm: "8" }}
+          w={"100%"}
+          bg={useBreakpointValue({ base: "transparent", sm: "white" })}
+          boxShadow={{
+            base: "none",
+            sm: useColorModeValue("md", "md-dark"),
+          }}
+          borderRadius={{ base: "xl", sm: "xl" }}
+        >
+          <Flex
+            mt={-3}
+            ml={-3}
+            flexDirection={"row"}
+            justify={"space-between"}
+            mb={4}
+            wrap={"wrap"}
+          >
+            <Heading>
+              <Text
+                fontFamily={"Mulish"}
+                fontWeight={"700"}
+                fontSize={"24px"}
+                color={"#2D2926"}
+              >
+                Fornecedores
+              </Text>
+            </Heading>
+          </Flex>
+          <Flex
+            flexDirection={useBreakpointValue({
+              base: "column",
+              md: "column",
+            })}
+            wrap={"wrap"}
+            // border={'red solid 2px'}
+          >
+            <Flex
+              ml={-3}
+              // border={'purple solid 3px'}
             >
-              <Heading as="h3" size="md" mt={"-15px"} mb={"25px"}>
-                <Text color={"#010101"} fontSize={"24px"} fontWeight={"700"}>
-                  Fornecedores
-                </Text>
-              </Heading>
-
-              <Stack spacing="0">
-                <Flex
-                  flexDirection={useBreakpointValue({
-                    base: "column",
-                    md: "column",
+              <Button
+                type="button"
+                background="white"
+                variant="primary"
+                color="#0047BB"
+                border="2px #0047BB solid"
+                padding={2}
+                borderRadius={6}
+                w={useBreakpointValue({ base: "100%", md: "251px" })}
+                h={"56px"}
+                _hover={{
+                  background: "#f5f5f5",
+                  transition: "all 0.4s",
+                  color: "origem.300",
+                  cursor: "pointer",
+                  borderColor: "#0047BB",
+                }}
+                onClick={() => {
+                  navigate("/cadastrar-fornecedor");
+                }}
+                mb={"15px"}
+              >
+                <Text
+                  fontSize={useBreakpointValue({
+                    base: "sm",
+                    md: "18px",
                   })}
-                  wrap={"wrap"}
-                  // border={'red solid 2px'}
+                  color={"origem.500"}
+                  fontWeight={"700"}
                 >
-                  <Flex
-                  // border={'purple solid 3px'}
-                  >
-                    <Button
-                      type="button"
-                      background="white"
-                      variant="primary"
-                      color="#0047BB"
-                      border="2px #0047BB solid"
-                      padding={2}
-                      borderRadius={6}
-                      w={useBreakpointValue({ base: "100%", md: "251px" })}
-                      h={"56px"}
-                      _hover={{
-                        background: "#f5f5f5",
-                        transition: "all 0.4s",
-                        color: "origem.300",
-                        cursor: "pointer",
-                        borderColor: "#0047BB",
-                      }}
-                      onClick={() => {
-                        navigate("/cadastrar-fornecedor");
-                      }}
-                      mb={"15px"}
+                  Cadastrar Fornecedores
+                </Text>
+                <Icon
+                  as={BiPlus}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  ml={1}
+                  color={"#0047BB"}
+                />
+              </Button>
+            </Flex>
+
+            <Flex justify={"space-between"}>
+              <Flex align={"flex-end"} gap={4}>
+                <Flex ml={-3}>
+                  <FormControl>
+                    <FormLabel
+                      // fontWeight={"700"}
+                      // fontSize={"12px"}
+                      // color={"#A7A7A7"}
+                      htmlFor="projeto"
                     >
                       <Text
-                        fontSize={useBreakpointValue({
-                          base: "sm",
-                          md: "18px",
-                        })}
-                        color={"origem.500"}
                         fontWeight={"700"}
+                        fontSize={"12px"}
+                        color={"#949494"}
                       >
-                        Cadastrar Fornecedores
+                        PROJETO
                       </Text>
-                      <Icon
-                        as={BiPlus}
-                        fontSize="18px"
-                        fontWeight={"700"}
-                        ml={1}
-                        color={"#0047BB"}
-                      />
-                    </Button>
-                  </Flex>
-
-                  <Flex justify={"space-between"}>
-                    <Flex align={"flex-end"} gap={4}>
-                      <Flex>
-                        <FormControl>
-                          <FormLabel
-                            fontWeight={"700"}
-                            fontSize={"12px"}
-                            color={"#A7A7A7"}
-                            htmlFor="projeto"
-                          >
-                            <Text
-                              fontWeight={"700"}
-                              fontSize={"12px"}
-                              color={"#A7A7A7"}
-                            >
-                              PROJETO
-                            </Text>
-                          </FormLabel>
-                          <Select
-                            mt={"-9px"}
-                            placeholder="Selecione"
-                            id="projeto"
-                            name="projeto"
-                            onChange={(e) =>
-                              setProjetoId(Number(e.target.value))
-                            }
-                            width={"208px"}
-                            height={"56px"}
-                          >
-                            <option color={"#A7A7A7"} value={0}>
-                              Todos
-                            </option>
-                            {projetos &&
-                              projetos.map((project, index) => (
-                                <option value={project.id} key={index}>
-                                  {project.nomeProjeto}
-                                </option>
-                              ))}
-                          </Select>
-                        </FormControl>
-                      </Flex>
-
-                      <Flex align={"flex-end"}>
-                        <FormControl>
-                          <FormLabel
-                            fontWeight={"700"}
-                            fontSize={"12px"}
-                            color={"#A7A7A7"}
-                            htmlFor="projeto"
-                          >
-                            <Text
-                              fontWeight={"700"}
-                              fontSize={"12px"}
-                              color={"#A7A7A7"}
-                            >
-                              POLO
-                            </Text>
-                          </FormLabel>
-                          <Select
-                            mt={"-9px"}
-                            placeholder="Selecione"
-                            id="projeto"
-                            name="projeto"
-                            onChange={(e) => setPolo(Number(e.target.value))}
-                            width={"208px"}
-                            height={"56px"}
-                          >
-                            <option color={"#A7A7A7"} value={0}>
-                              Todos
-                            </option>
-                            {!loading &&
-                              polos.map((pol, index) => (
-                                <option value={pol.id} key={index}>
-                                  {pol.polo}
-                                </option>
-                              ))}
-                          </Select>
-                        </FormControl>
-                      </Flex>
-                      <Flex>
-                        <Button
-                          type="button"
-                          background="#0047BB"
-                          variant="outline"
-                          color="white"
-                          borderColor="#0047BB"
-                          _hover={{
-                            background: "white",
-                            transition: "all 0.4s",
-                            color: "#0047BB",
-                          }}
-                          rightIcon={<FiSearch />}
-                          onClick={() => {
-                            handleFilterData(projetoId, polo);
-                            setPolo(0);
-                            setProjetoId(0);
-                          }}
-                          alignSelf={"end"}
-                          height={"56px"}
-                          width={"101px"}
-                          fontSize={"18px"}
-                        >
-                          Filtrar
-                        </Button>
-                      </Flex>
-                    </Flex>
-                    <Flex
-                      // border={'gray solid 4px'}
-                      // justifyContent={"flex-start"}
-                      align={"flex-start"}
+                    </FormLabel>
+                    <Select
+                      mt={"-9px"}
+                      placeholder="Selecione"
+                      id="projeto"
+                      name="projeto"
+                      onChange={(e) => setProjetoId(Number(e.target.value))}
+                      width={"208px"}
+                      height={"56px"}
                     >
-                      <Button
-                        background="transparent"
-                        color="#0047BB"
-                        fontSize="17px"
-                        alignSelf={"end"}
+                      <option color={"#A7A7A7"} value={0}>
+                        Todos
+                      </option>
+                      {projetos &&
+                        projetos.map((project, index) => (
+                          <option value={project.id} key={index}>
+                            {project.nomeProjeto}
+                          </option>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </Flex>
+
+                <Flex align={"flex-end"}>
+                  <FormControl>
+                    <FormLabel
+                      fontWeight={"700"}
+                      fontSize={"12px"}
+                      color={"#A7A7A7"}
+                      htmlFor="projeto"
+                    >
+                      <Text
+                        fontWeight={"700"}
+                        fontSize={"12px"}
+                        color={"#949494"}
                       >
-                        Lixeira
-                        <Icon
-                          // alignSelf={"end"}
-                          as={MdArrowForwardIos}
-                          color="#0047BB"
-                          fontSize="20px"
-                          fontWeight={"700"}
-                          ml={1}
-                        />
-                      </Button>
-                    </Flex>
-                  </Flex>
-                  <Flex
-                    flexDirection={useBreakpointValue({
-                      base: "column",
-                      md: "row",
-                    })}
-                    // border={'green solid 4px'}
-                    justifyContent={"flex-start"}
-                    mt={"5px"}
+                        POLO
+                      </Text>
+                    </FormLabel>
+                    <Select
+                      mt={"-9px"}
+                      placeholder="Selecione"
+                      id="projeto"
+                      name="projeto"
+                      onChange={(e) => setPolo(Number(e.target.value))}
+                      width={"208px"}
+                      height={"56px"}
+                    >
+                      <option color={"#A7A7A7"} value={0}>
+                        Todos
+                      </option>
+                      {!loading &&
+                        polos.map((pol, index) => (
+                          <option value={pol.id} key={index}>
+                            {pol.polo}
+                          </option>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </Flex>
+                <Flex>
+                  <Button
+                    type="button"
+                    background="#0047BB"
+                    variant="outline"
+                    color="white"
+                    borderColor="#0047BB"
+                    _hover={{
+                      background: "white",
+                      transition: "all 0.4s",
+                      color: "#0047BB",
+                    }}
+                    rightIcon={<FiSearch />}
+                    onClick={() => {
+                      handleFilterData(projetoId, polo);
+                      setPolo(0);
+                      setProjetoId(0);
+                    }}
+                    alignSelf={"end"}
+                    height={"56px"}
+                    width={"101px"}
+                    fontSize={"18px"}
+                    fontWeight={"700"}
                   >
-                    {/* <form
+                    Filtrar
+                  </Button>
+                </Flex>
+              </Flex>
+              <Flex
+                // border={'gray solid 4px'}
+                // justifyContent={"flex-start"}
+                align={"flex-start"}
+                alignSelf={"center"}
+                mr={-4}
+                mt={4}
+              >
+                <Button
+                  background="transparent"
+                  color="#0239C3"
+                  float={"right"}
+                  fontWeight={"700"}
+                  fontSize={"18px"}
+                  // alignSelf={"end"}
+                >
+                  Lixeira
+                  <Icon
+                    // alignSelf={"end"}
+                    as={MdArrowForwardIos}
+                    fontSize="20px"
+                    fontWeight={"700"}
+                    ml={1}
+                    color="#0239C3"
+                  />
+                </Button>
+              </Flex>
+            </Flex>
+            <Flex
+              flexDirection={useBreakpointValue({
+                base: "column",
+                md: "row",
+              })}
+              // border={'green solid 4px'}
+              justifyContent={"flex-start"}
+              mt={"5px"}
+            >
+              {/* <form
                       onSubmit={(e) => {
                         e.preventDefault();
                       }}
@@ -442,29 +459,28 @@ export function Fornecedores() {
                         </FormControl>
                       </Flex>
                     </form> */}
-                  </Flex>
-                </Flex>
-              </Stack>
-
-              {/*  Componentes aqui */}
-              <TabelaFornecedores
-                fornecedores={fornecedores}
-                onEdit={handleEditFornecedor}
-                polos={polos}
-                loading={loading}
-              />
-              <EditarFornecedorModal
-                isOpen={isOpen}
-                onClose={onClose}
-                fornecedor={editFornecedor}
-                onUpdate={handleUpdateFornecedor}
-                polos={polos}
-              />
-              <Stack spacing="6" alignItems={"center"}></Stack>
-            </Box>{" "}
+            </Flex>
           </Flex>
-        </Stack>
+          <Flex ml={-3} mr={-3} flexDir={"column"}>
+            {/*  Componentes aqui */}
+            <TabelaFornecedores
+              fornecedores={fornecedores}
+              onEdit={handleEditFornecedor}
+              polos={polos}
+              loading={loading}
+            />
+          </Flex>
+          <EditarFornecedorModal
+            isOpen={isOpen}
+            onClose={onClose}
+            fornecedor={editFornecedor}
+            onUpdate={handleUpdateFornecedor}
+            polos={polos}
+          />
+          {/* <Stack spacing="6" alignItems={"center"}></Stack> */}
+        </Box>{" "}
       </Flex>
+      {/* </Flex> */}
     </Sidebar>
   );
 }
