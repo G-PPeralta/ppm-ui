@@ -44,8 +44,6 @@ export function Infographics() {
     listaSondas,
   };
 
-  // const innerWidth = useBreakpointValue({ base: 0, md: 1, lg: 2, xl: 3 });
-
   const handleGetAll = async () => {
     const campanhas = await postGetInfoCampanha(registerForm.values);
     setCampanhas(campanhas.data);
