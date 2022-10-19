@@ -225,7 +225,7 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                   onClose={onClose}
                 />
                 <BotaoAzulLargoPrimary
-                  text={"Concluir Cadastro"}
+                  text={"Cadastrar"}
                   formikForm={registerForm}
                   onClose={onClose}
                   setRefresh={setRefresh}

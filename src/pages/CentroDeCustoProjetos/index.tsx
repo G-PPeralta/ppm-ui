@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { IoIosArrowBack } from "react-icons/io";
 import { useParams } from "react-router-dom";
 
-import { Box, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { TabelaCentroDeCusto } from "interfaces/FinanceiroProjetos";
 
 import Sidebar from "components/SideBar";
+import TituloPagina from "components/TituloPagina";
 
 import { useRequests } from "hooks/useRequests";
 
@@ -83,33 +83,20 @@ export function CentroDeCustoProjetos() {
               <Flex mb={4} wrap={"wrap"} align={"center"} gap={2}>
                 <Flex direction={"column"}>
                   <Flex align={"center"} gap={2} h={"56px"}>
-                    <IconButton
-                      aria-label="Botão Voltar"
-                      icon={<IoIosArrowBack size={20} />}
-                      borderRadius={"10px"}
-                      background={"white"}
-                      color={"origem.500"}
-                      _hover={{
-                        background: "origem.500",
-                        transition: "all 0.4s",
-                        color: "white",
-                      }}
-                      onClick={() => {
-                        window.history.back();
-                      }}
-                    />
-                    <Heading as="h3" size="md" textAlign={"center"}>
+                    <TituloPagina botaoVoltar={true}>
                       Centro de Custo
-                    </Heading>
+                    </TituloPagina>
                   </Flex>
                   <Text
                     as="h4"
                     size="sm"
-                    textAlign={"end"}
+                    textAlign={"center"}
                     fontWeight={"semibold"}
-                    mt={-3}
+                    mt={-5}
+                    fontSize={"20px"}
+                    ml={12}
                   >
-                    Carteira de Projetos
+                    Carteira de Projeto
                   </Text>
                 </Flex>
               </Flex>
