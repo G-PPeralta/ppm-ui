@@ -108,8 +108,6 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
     }
   }
 
-  console.log(gantt);
-
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -298,22 +296,22 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
               textAlign: "Center",
               format: "dd/MM/yyyy",
             },
-            {
-              field: "BaselineStartDate",
-              headerText: "Início planejado",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "dd/MM/yyyy",
-              type: "date",
-            },
-            {
-              field: "BaselineEndDate",
-              headerText: "Fim planejado",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "dd/MM/yyyy",
-              type: "date",
-            },
+            // {
+            //   field: "BaselineStartDate",
+            //   headerText: "Início planejado",
+            //   headerTextAlign: "Center",
+            //   textAlign: "Center",
+            //   format: "dd/MM/yyyy",
+            //   type: "date",
+            // },
+            // {
+            //   field: "BaselineEndDate",
+            //   headerText: "Fim planejado",
+            //   headerTextAlign: "Center",
+            //   textAlign: "Center",
+            //   format: "dd/MM/yyyy",
+            //   type: "date",
+            // },
             {
               field: "Duration",
               headerText: "Duração",
