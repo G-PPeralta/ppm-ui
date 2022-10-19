@@ -71,7 +71,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
         textAlign={"center"}
         icon={<MdModeEdit />}
       />
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -189,19 +189,21 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red"
+                  color="rred.500ed"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: "red.500",
                     transition: "all 0.4s",
                     color: "white",
                   }}
+                  w={"158px"}
+                  h={"56px"}
                 >
                   Cancelar
                 </Button>
                 <Button
                   disabled={!registerForm.isValid}
-                  background="origem.300"
+                  background="#0047BB"
                   variant="primary"
                   color="white"
                   onClick={() => {
@@ -211,6 +213,9 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                     background: "origem.500",
                     transition: "all 0.4s",
                   }}
+                  borderRadius={"8px"}
+                  w={"208px"}
+                  h={"56px"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
