@@ -52,8 +52,8 @@ export function useEditarAtividadeGantt() {
     id_atividade: 0,
     inicio_realizado: "",
     fim_realizado: "",
-    inicio_planejado: "",
-    fim_planejado: "",
+    // inicio_planejado: "",
+    // fim_planejado: "",
     pct_real: 0,
   };
 
@@ -61,8 +61,8 @@ export function useEditarAtividadeGantt() {
     id_atividade: yup.number().required("Campo obrigatório"), // .moreThan(0),
     inicio_realizado: yup.date().required("Campo obrigatório"),
     fim_realizado: yup.date().required("Campo obrigatório"),
-    inicio_planejado: yup.date().required("Campo obrigatório"),
-    fim_planejado: yup.date().required("Campo obrigatório"),
+    // inicio_planejado: yup.date().required("Campo obrigatório"),
+    // fim_planejado: yup.date().required("Campo obrigatório"),
     pct_real: yup.number(), // .required("Campo obrigatório").moreThan(0),
   });
   const registerForm: any = useFormik({
@@ -73,8 +73,8 @@ export function useEditarAtividadeGantt() {
       const newValues = {
         dat_ini_real: new Date(values.inicio_realizado).toLocaleString(),
         dat_fim_real: new Date(values.fim_realizado).toLocaleString(),
-        dat_ini_plan: new Date(values.inicio_planejado).toLocaleString(),
-        dat_fim_plan: new Date(values.fim_planejado).toLocaleString(),
+        // dat_ini_plan: new Date(values.inicio_planejado).toLocaleString(),
+        // dat_fim_plan: new Date(values.fim_planejado).toLocaleString(),
         pct_real: values.pct_real,
       };
 
@@ -102,8 +102,8 @@ export function useEditarAtividadeGantt() {
       nome_atividade: args.rowData.TaskName,
       inicio_realizado: new Date(args.rowData.StartDate),
       fim_realizado: new Date(args.rowData.EndDate),
-      inicio_planejado: new Date(args.rowData.BaselineStartDate),
-      fim_planejado: new Date(args.rowData.BaselineEndDate),
+      // inicio_planejado: new Date(args.rowData.BaselineStartDate),
+      // fim_planejado: new Date(args.rowData.BaselineEndDate),
       // hrs_totais: args.rowData.BaselineDuration,
       // hrs_reais: args.rowData.Duration,
       pct_real: args.rowData.Progress,
