@@ -29,10 +29,13 @@ function CardPIR({ poco, index }: Props) {
   const dataInicioFormatada = formatDate(new Date(poco.inicioplanejado));
   const dataFimFormatada = formatDate(new Date(poco.finalplanejado));
 
+  const intervencaoFoiIniciada = index === 0 && poco.pct_real !== "0";
+
   const transfer = () => {
     navigate(`/infographics/atividade/${poco.id}`, {
       state: {
         poco,
+        intervencaoFoiIniciada,
       },
     });
   };
@@ -44,7 +47,7 @@ function CardPIR({ poco, index }: Props) {
       <Flex direction={"row"} gap={4} onClick={() => transfer()}>
         <Flex align={"center"} justify={"center"}>
           <Heading as="h3" size="md" textAlign={"center"} width={"60px"}>
-            {index === 0 && poco.pct_real !== "0" ? "Atual" : `${index + 1}º`}
+            {intervencaoFoiIniciada ? "Atual" : `${index + 1}º`}
           </Heading>
         </Flex>
         <Flex

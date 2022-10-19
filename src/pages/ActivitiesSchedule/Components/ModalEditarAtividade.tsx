@@ -33,8 +33,8 @@ import { useToast } from "contexts/Toast";
 
 import { patchEditarAtividadeIntervencao } from "services/post/Infograficos";
 
-import DateTimePickerDataFim from "./DateTimePickerDataFim";
-import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
+import DateTimePickerDataFimReal from "./DateTimePickerDataFimReal";
+import DateTimePickerDataInicioReal from "./DateTimePickerDataInicioReal";
 import PocosDragAndDrop from "./PocosDragAndDrop";
 
 interface Precedente {
@@ -52,6 +52,7 @@ function ModalEditarAtividade({
   index,
   listaOptions,
   poco,
+  intervencaoIniciada,
 }: any) {
   const { toast } = useToast();
   const [atividadeStatus, setAtividadeStatus] = useState(0);
@@ -79,7 +80,8 @@ function ModalEditarAtividade({
     precedentes,
   };
 
-  // console.log("poco", poco);
+  console.log("payload", payload);
+  console.log("poco", poco);
 
   const send = async () => {
     try {
@@ -249,7 +251,7 @@ function ModalEditarAtividade({
                           DATA INÍCIO PLANEJADO
                         </Text>
                       </Flex>
-                      <Input
+                      {/* <Input
                         h={"56px"}
                         isDisabled
                         // isDisabled={intervencaoIniciada}
@@ -259,7 +261,7 @@ function ModalEditarAtividade({
                         name="dat_ini_plan"
                         w={useBreakpointValue({ base: "100%", md: "100%" })}
                         value={inicioPlanejado}
-                      />
+                      /> */}
                     </Flex>
                     <Flex direction={"column"} grow={1}>
                       <Flex gap={1}>
@@ -293,9 +295,11 @@ function ModalEditarAtividade({
                           DATA INÍCIO REAL
                         </Text>
                       </Flex>
-                      <DateTimePickerDataInicio
+                      <DateTimePickerDataInicioReal
                         inicioReal={inicioReal}
                         setInicioReal={setInicioReal}
+                        intervencaoIniciada={intervencaoIniciada}
+                        atividadeStatus={atividadeStatus}
                       />
                     </Flex>
                     <Flex direction={"column"} grow={1}>
@@ -308,9 +312,11 @@ function ModalEditarAtividade({
                           DATA FIM REAL
                         </Text>
                       </Flex>
-                      <DateTimePickerDataFim
+                      <DateTimePickerDataFimReal
                         fimReal={fimReal}
                         setFimReal={setFimReal}
+                        intervencaoIniciada={intervencaoIniciada}
+                        atividadeStatus={atividadeStatus}
                       />
                     </Flex>
                   </Flex>

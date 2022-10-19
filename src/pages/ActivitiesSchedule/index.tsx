@@ -39,6 +39,7 @@ export function ActivitiesSchedule() {
   const [atividades, setAtividades] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
   const [loadingCards, setLoadingCards] = useState(true);
+  const [intervencaoIniciada, setIntervencaoIniciada] = useState<any>(false);
 
   const requestHandler = async () => {
     const response = await getAtividadesCampanha(id);
@@ -52,6 +53,7 @@ export function ActivitiesSchedule() {
 
   useEffect(() => {
     setPoco(state.poco);
+    setIntervencaoIniciada(state.intervencaoFoiIniciada);
     requestHandler();
     setLoading(false);
   }, []);
@@ -66,7 +68,7 @@ export function ActivitiesSchedule() {
     }
   }, [atividades]);
 
-  // console.log("poco", poco);
+  console.log("intervencaoIniciada", intervencaoIniciada);
 
   return (
     <>
@@ -158,6 +160,7 @@ export function ActivitiesSchedule() {
                 refresh={refresh}
                 listaOptions={listaOptions}
                 poco={poco}
+                intervencaoIniciada={intervencaoIniciada}
               />
             ) : undefined}
           </ContainerPagina>
