@@ -33,10 +33,10 @@ export function Gantt({ data, options, edit }: ganttOptionsProps) {
     let color;
     const { Duration, med, dp } = args.data.taskData;
 
-    if (Duration < med - dp) color = "green";
-    if (Duration < med + dp / 2) color = "yellow";
-    if (Duration < med + dp) color = "red";
     if (Duration >= med + dp) color = "black";
+    if (Duration < med + dp) color = "red";
+    if (Duration < med + dp / 2) color = "yellow";
+    if (Duration < med - dp) color = "green";
 
     if (color === "black") {
       // black (duração > média + desvio padrão)
