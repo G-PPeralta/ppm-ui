@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import { useLocation } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 
 import {
@@ -25,16 +24,17 @@ import {
   NumberInputStepper,
   Select,
 } from "@chakra-ui/react";
-// import { Ring } from "@uiball/loaders";
-
-// import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 import { useToast } from "contexts/Toast";
 
+import { useAuth } from "hooks/useAuth";
+
 import { patchEditarAtividadeIntervencao } from "services/post/Infograficos";
 
-import DateTimePickerDataFim from "./DateTimePickerDataFim";
-import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
+import DateTimePickerDataFimPlan from "./DateTimePickerDataFimPlan";
+import DateTimePickerDataFimReal from "./DateTimePickerDataFimReal";
+import DateTimePickerDataInicioPlan from "./DateTimePickerDataInicioPlan";
+import DateTimePickerDataInicioReal from "./DateTimePickerDataInicioReal";
 import PocosDragAndDrop from "./PocosDragAndDrop";
 
 interface Precedente {
@@ -45,27 +45,30 @@ interface Precedente {
 function ModalEditarAtividade({
   onClose,
   atividade,
-  id,
+  // id,
   setRefresh,
   refresh,
   listaPrecedentes,
   index,
   listaOptions,
-  poco,
+  // poco,
+  intervencaoIniciada,
 }: any) {
+  const { user } = useAuth();
   const { toast } = useToast();
   const [atividadeStatus, setAtividadeStatus] = useState(0);
   const [nome, setNome] = useState("");
   const [responsavelId, setResponsavelId] = useState(0);
   const [areaId, setAreaId] = useState(0);
   const [observacoes, setObservacoes] = useState("");
-  const [inicioPlanejado, setInicioPlanejado] = useState("");
-  const [fimPlanejado, setFimPlanejado] = useState("");
+  const [inicioPlanejado, setInicioPlanejado] = useState<any>("");
+  const [fimPlanejado, setFimPlanejado] = useState<any>("");
   const [inicioReal, setInicioReal] = useState(null);
   const [fimReal, setFimReal] = useState(null);
   const [precedentes, setPrecedentes] = useState<Precedente[]>([]);
 
   const payload = {
+    nom_usu_edit: user?.nome,
     atividadeId: atividade.id_atividade,
     atividadeStatus,
     nome,
@@ -78,8 +81,6 @@ function ModalEditarAtividade({
     fimReal,
     precedentes,
   };
-
-  // console.log("poco", poco);
 
   const send = async () => {
     try {
@@ -99,8 +100,6 @@ function ModalEditarAtividade({
   };
   const format = (val: number) => val + "%";
 
-  // const intervencaoIniciada = poco.pct_real !== "0";
-
   useEffect(() => {
     setNome(atividade.atividade);
     setObservacoes(atividade.sonda);
@@ -109,26 +108,30 @@ function ModalEditarAtividade({
       setPrecedentes(atividade.precedentes);
     }
     if (index == 0) {
-      setInicioPlanejado(new Date(atividade.inicioplanejado).toLocaleString());
+      setInicioPlanejado(new Date(atividade.inicioplanejado));
     } else {
       const inicio = new Date(atividade.inicioplanejado);
       inicio.setDate(inicio.getDate() + 1);
-      setInicioPlanejado(inicio.toLocaleString());
+      setInicioPlanejado(inicio);
     }
     const fim = new Date(atividade.finalplanejado);
     fim.setHours(fim.getHours() + 9);
-    setFimPlanejado(fim.toLocaleString());
+    setFimPlanejado(fim);
 
-    const respId = listaOptions.optionsResponsaveis.find(
-      (responsavel: any) => responsavel.label === responsavel
-    )?.value;
+    const respId = listaOptions.optionsResponsaveis.filter(
+      (responsavel: any) => responsavel.label === atividade.nom_responsavel
+    )[0].value;
+
     setResponsavelId(respId);
 
-    const arId = listaOptions.optionsAreaAtuacao.find(
-      (area: any) => area.label === area
-    )?.value;
+    const arId = listaOptions.optionsAreaAtuacao.filter(
+      (area: any) => area.label === atividade.nom_area
+    )[0].value;
     setAreaId(arId);
   }, []);
+
+  const validateStatusEDataInicioReal =
+    atividadeStatus > 0 && inicioReal !== null;
 
   return (
     <>
@@ -217,16 +220,11 @@ function ModalEditarAtividade({
                         value={format(atividadeStatus)}
                         onChange={(event) => setAtividadeStatus(Number(event))}
                       >
-                        <NumberInputField
-                          h={"56px"}
-                          // disabled={!intervencaoIniciada}
-                        />
-                        {/* {intervencaoIniciada && ( */}
+                        <NumberInputField h={"56px"} />
                         <NumberInputStepper h={"56px"}>
                           <NumberIncrementStepper />
                           <NumberDecrementStepper />
                         </NumberInputStepper>
-                        {/* )} */}
                       </NumberInput>
                     </FormControl>
                   </Flex>
@@ -249,16 +247,11 @@ function ModalEditarAtividade({
                           DATA INÍCIO PLANEJADO
                         </Text>
                       </Flex>
-                      <Input
-                        h={"56px"}
-                        isDisabled
-                        // isDisabled={intervencaoIniciada}
-                        placeholder="Selecione a data e a hora"
-                        id="dat_ini_plan"
-                        type="text"
-                        name="dat_ini_plan"
-                        w={useBreakpointValue({ base: "100%", md: "100%" })}
-                        value={inicioPlanejado}
+                      <DateTimePickerDataInicioPlan
+                        inicioPlanejado={inicioPlanejado}
+                        setInicioPlanejado={setInicioPlanejado}
+                        intervencaoIniciada={intervencaoIniciada}
+                        atividadeStatus={atividadeStatus}
                       />
                     </Flex>
                     <Flex direction={"column"} grow={1}>
@@ -271,16 +264,11 @@ function ModalEditarAtividade({
                           DATA FIM PLANEJADO
                         </Text>
                       </Flex>
-                      <Input
-                        h={"56px"}
-                        isDisabled
-                        // isDisabled={intervencaoIniciada}
-                        placeholder="Selecione a data e a hora"
-                        id="dat_ini_plan"
-                        type="text"
-                        name="dat_ini_plan"
-                        w={useBreakpointValue({ base: "100%", md: "100%" })}
-                        value={fimPlanejado}
+                      <DateTimePickerDataFimPlan
+                        fimPlanejado={fimPlanejado}
+                        setFimPlanejado={setFimPlanejado}
+                        intervencaoIniciada={intervencaoIniciada}
+                        atividadeStatus={atividadeStatus}
                       />
                     </Flex>
                     <Flex direction={"column"} grow={1}>
@@ -293,9 +281,11 @@ function ModalEditarAtividade({
                           DATA INÍCIO REAL
                         </Text>
                       </Flex>
-                      <DateTimePickerDataInicio
+                      <DateTimePickerDataInicioReal
                         inicioReal={inicioReal}
                         setInicioReal={setInicioReal}
+                        intervencaoIniciada={intervencaoIniciada}
+                        atividadeStatus={atividadeStatus}
                       />
                     </Flex>
                     <Flex direction={"column"} grow={1}>
@@ -308,9 +298,11 @@ function ModalEditarAtividade({
                           DATA FIM REAL
                         </Text>
                       </Flex>
-                      <DateTimePickerDataFim
+                      <DateTimePickerDataFimReal
                         fimReal={fimReal}
                         setFimReal={setFimReal}
+                        intervencaoIniciada={intervencaoIniciada}
+                        atividadeStatus={atividadeStatus}
                       />
                     </Flex>
                   </Flex>
@@ -348,16 +340,6 @@ function ModalEditarAtividade({
                           </option>
                         ))}
                       </Select>
-                      {/* <Input
-                        h={"56px"}
-                        placeholder="responsavel"
-                        id="responsavel"
-                        type="text"
-                        name="responsavel"
-                        w={useBreakpointValue({ base: "100%", md: "100%" })}
-                        value={responsavel}
-                        onChange={(event) => setResponsavel(event.target.value)}
-                      /> */}
                     </FormControl>
                     <FormControl flex={2}>
                       <Flex gap={1}>
@@ -385,16 +367,6 @@ function ModalEditarAtividade({
                           </option>
                         ))}
                       </Select>
-                      {/* <Input
-                        h={"56px"}
-                        placeholder="area"
-                        id="area"
-                        type="text"
-                        name="area"
-                        w={useBreakpointValue({ base: "100%", md: "100%" })}
-                        value={area}
-                        onChange={(event) => setArea(event.target.value)}
-                      /> */}
                     </FormControl>
                   </Flex>
                   <Flex
@@ -468,7 +440,8 @@ function ModalEditarAtividade({
                   !nome ||
                   !responsavelId ||
                   !areaId ||
-                  precedentes.filter((item) => item.id == 0).length > 0
+                  precedentes.filter((item) => item.id == 0).length > 0 ||
+                  !validateStatusEDataInicioReal
                 }
                 onClick={() => send()}
                 h={"56px"}
