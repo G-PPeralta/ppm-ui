@@ -39,62 +39,13 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
     onClose,
   } = useEditarAtividadeGantt();
 
-  // function ganttFormatter(gantt: IGantt) {
-  //   if (!gantt) return;
-
-  //   const _gantt = gantt.macroatividades;
-  //   const newGantt = _gantt.map(
-  //     ({
-  //       macroatividade_id,
-  //       macroatividade_nome,
-  //       macroatividade_item,
-  //       // data_inicio,
-  //       duracao,
-  //       micro,
-  //       progresso,
-  //     }) =>
-  //       // if (!macroatividade_id || progresso == undefined) return null;
-  //       ({
-  //         TaskID: macroatividade_id || 1,
-  //         Item: macroatividade_item,
-  //         TaskName: macroatividade_nome,
-  //         StartDate: "",
-  //         Duration: duracao,
-  //         Progress: progresso,
-  //         subtasks: micro?.map(
-  //           ({
-  //             macroatividade_id,
-  //             macroatividade_item,
-  //             macroatividade_nome,
-  //             dat_ini_real,
-  //             dat_fim_real,
-  //             dat_ini_plan,
-  //             dat_fim_plan,
-  //             item,
-  //             nome_atividade,
-  //             microatividade_id,
-  //             progresso,
-  //             duracao,
-  //           }) =>
-  //             // const newDate = new Date(data_inicio || "");
-  //             // newDate.setDate(newDate.getDate() - 1);
-
-  //             ({
-  //               TaskID: microatividade_id || 0,
-  //               TaskName: nome_atividade || "",
-  //               Item: item || "",
-  //               Duration: duracao,
-  //               Progress: progresso || 0,
-  //               StartDate: dat_ini_real,
-  //               EndDate: dat_fim_real,
-  //               BaselineStartDate: dat_ini_plan,
-  //               BaselineEndDate: dat_fim_plan,
-  //             })
-  //         ),
-  //       })
-  //   );
-  //   setGantt(newGantt);
-  // }
+  const rowDataBound = (args: any) => {
+    // console.log(">>>> rowDataBound", args);
+    if (args.data.hasChildRecords) {
+      args.row.style.fontWeight = 500;
+      // args.row.style.backgroundColor = "red";
+    }
+  };
 
   async function handleSetGanttData() {
     if (id) {
@@ -267,6 +218,7 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
             // columnIndex: 5,
             position: "80%",
           }}
+          rowDataBound={rowDataBound}
           height={"100vh"}
           columns={[
             { field: "Item", type: "string" },
