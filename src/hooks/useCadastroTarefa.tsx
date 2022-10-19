@@ -5,7 +5,7 @@ import { cadastroTarefaSchema } from "validations/ModaisCadastrosInfografico";
 
 import { useToast } from "contexts/Toast";
 
-import { postCadastroTarefa } from "services/post/CadastroModaisInfograficos";
+import { postCadastroTarefa } from "services/post/Infograficos";
 
 export function useCadastroTarefa() {
   const { toast } = useToast();

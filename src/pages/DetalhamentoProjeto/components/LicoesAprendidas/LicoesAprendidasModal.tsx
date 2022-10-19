@@ -133,8 +133,7 @@ function LicoesAprendidasModal({
           transition: "all 0.4s",
         }}
         p={4}
-        borderTopRadius={"0px"}
-        borderBottomRadius={"6px"}
+        borderRadius={"0px"}
         fontSize={"16px"}
         fontWeight={"700"}
         flex={1}

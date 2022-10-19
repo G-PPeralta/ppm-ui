@@ -48,7 +48,18 @@ export function StatisticsTable({ data }: Props) {
               <Th color="white" textAlign={"center"}>
                 Poço
               </Th>
-              <Th color="white" textAlign={"center"}></Th>
+              <Th color="white" textAlign={"center"}>
+                Data Início
+              </Th>
+              <Th color="white" textAlign={"center"}>
+                Data Fim
+              </Th>
+              <Th color="white" textAlign={"center"}>
+                % Realizado
+              </Th>
+              <Th color="white" textAlign={"center"}>
+                Ações
+              </Th>
             </Tr>
           </Thead>
           <Tbody scrollBehavior={"smooth"}>
@@ -70,6 +81,33 @@ export function StatisticsTable({ data }: Props) {
                     >
                       <Text>{projeto.poco}</Text>
                     </Link>
+                  </Td>
+                  <Td textAlign={"center"} fontWeight={"semibold"}>
+                    <Text>
+                      {projeto.dat_inicio
+                        ? new Date(projeto.dat_inicio || "").toLocaleString(
+                            "pt-BR",
+                            {
+                              timeZone: "UTC",
+                            }
+                          )
+                        : ""}
+                    </Text>
+                  </Td>
+                  <Td textAlign={"center"} fontWeight={"semibold"}>
+                    <Text>
+                      {projeto.dat_final
+                        ? new Date(projeto.dat_final || "").toLocaleString(
+                            "pt-BR",
+                            {
+                              timeZone: "UTC",
+                            }
+                          )
+                        : ""}
+                    </Text>
+                  </Td>
+                  <Td textAlign={"center"} fontWeight={"semibold"}>
+                    <Text>{projeto.pct_real}</Text>
                   </Td>
                   <Td textAlign={"center"} fontWeight={"semibold"}>
                     {/* <IconButton
@@ -107,6 +145,9 @@ export function StatisticsTable({ data }: Props) {
           <Tfoot>
             <Tr background={"origem.500"}>
               <Th color="white">Total</Th>
+              <Th color="white"></Th>
+              <Th color="white"></Th>
+              <Th color="white"></Th>
               <Th color="white"></Th>
               <Th color="white"></Th>
             </Tr>

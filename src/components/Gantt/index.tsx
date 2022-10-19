@@ -8,7 +8,7 @@ import {
   Edit,
   Toolbar,
 } from "@syncfusion/ej2-react-gantt";
-import { IGantt } from "interfaces/Services";
+// import { IGantt } from "interfaces/Services";
 
 import { useEditarAtividadeGantt } from "hooks/useEditarAtividadeGantt";
 
@@ -25,7 +25,7 @@ type ganttOptionsProps = {
 export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
   // const { id } = useParams();
   const [loading, setLoading] = useState(true);
-  const [gantt, setGantt] = useState<any[]>();
+  const [gantt, setGantt] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
   const [refreshGanttCriacao, setRefreshGanttCriacao] = useState(false);
 
@@ -39,67 +39,23 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
     onClose,
   } = useEditarAtividadeGantt();
 
-  function ganttFormatter(gantt: IGantt) {
-    if (!gantt) return;
-
-    const _gantt = gantt.macroatividades;
-    const newGantt = _gantt.map(
-      ({
-        macroatividade_id,
-        macroatividade_nome,
-        macroatividade_item,
-        data_inicio,
-        duracao,
-        micro,
-        progresso,
-      }) => ({
-        TaskID: macroatividade_id,
-        Item: macroatividade_item,
-        TaskName: macroatividade_nome,
-        StartDate: data_inicio,
-        Duration: duracao,
-        Progress: progresso,
-        subtasks: micro?.map(
-          ({
-            macroatividade_id,
-            macroatividade_item,
-            macroatividade_nome,
-            data_inicio,
-            data_fim,
-            item,
-            nome_atividade,
-            microatividade_id,
-            progresso,
-            duracao,
-          }) =>
-            // const newDate = new Date(data_inicio || "");
-            // newDate.setDate(newDate.getDate() - 1);
-
-            ({
-              TaskID: microatividade_id || 0,
-              TaskName: nome_atividade || "",
-              Item: item || "",
-              Duration: duracao,
-              Progress: progresso,
-              StartDate: data_inicio,
-              EndDate: data_fim,
-              BaselineStartDate: data_inicio,
-              BaselineEndDate: data_fim,
-            })
-        ),
-      })
-    );
-    setGantt(newGantt);
-  }
+  const rowDataBound = (args: any) => {
+    // console.log(">>>> rowDataBound", args);
+    if (args.data.hasChildRecords) {
+      args.row.style.fontWeight = 500;
+      // args.row.style.backgroundColor = "red";
+    }
+  };
 
   async function handleSetGanttData() {
     if (id) {
       const reqGanttData = await getGanttData(Number(id));
 
       if (!reqGanttData) return;
-      const _gantt: IGantt = reqGanttData.data;
-      // setGanttData(_gantt);
-      ganttFormatter(_gantt);
+      // const _gantt: IGantt = reqGanttData.data;
+      // // setGanttData(_gantt);
+      // ganttFormatter(_gantt);
+      setGantt(reqGanttData.data);
     }
   }
 
@@ -222,11 +178,11 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
             name: "TaskName",
             startDate: "StartDate",
             endDate: "EndDate",
-            baselineStartDate: "BaselineStartDate",
-            baselineEndDate: "BaselineEndDate",
+            // baselineStartDate: "BaselineStartDate",
+            // baselineEndDate: "BaselineEndDate",
             duration: "Duration",
             progress: "Progress",
-            dependency: "Predecessor",
+            // dependency: "Predecessor",
             child: "subtasks",
           }}
           // taskFields={ganttData.macroatividades.map((macroatividade) => ({
@@ -262,6 +218,7 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
             // columnIndex: 5,
             position: "80%",
           }}
+          rowDataBound={rowDataBound}
           height={"100vh"}
           columns={[
             { field: "Item", type: "string" },
@@ -291,22 +248,22 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
               textAlign: "Center",
               format: "dd/MM/yyyy",
             },
-            {
-              field: "BaselineStartDate",
-              headerText: "Início planejado",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "dd/MM/yyyy",
-              type: "date",
-            },
-            {
-              field: "BaselineEndDate",
-              headerText: "Fim planejado",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "dd/MM/yyyy",
-              type: "date",
-            },
+            // {
+            //   field: "BaselineStartDate",
+            //   headerText: "Início planejado",
+            //   headerTextAlign: "Center",
+            //   textAlign: "Center",
+            //   format: "dd/MM/yyyy",
+            //   type: "date",
+            // },
+            // {
+            //   field: "BaselineEndDate",
+            //   headerText: "Fim planejado",
+            //   headerTextAlign: "Center",
+            //   textAlign: "Center",
+            //   format: "dd/MM/yyyy",
+            //   type: "date",
+            // },
             {
               field: "Duration",
               headerText: "Duração",

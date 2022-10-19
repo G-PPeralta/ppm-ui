@@ -22,7 +22,7 @@ export default function StackedBarChart({
       width={sizeW === 1000 ? sizeW : "100%"}
     >
       <BarChart data={data}>
-        <XAxis dataKey="month" fontSize={10} />
+        <XAxis dataKey="mes" fontSize={10} />
         {showY ? <YAxis dataKey={dataEntries[0].name} /> : undefined}
         <Tooltip />
         {dataEntries.map((dataEntry, index) => (

@@ -90,6 +90,12 @@ function ModalCadastroAtividades({
     }
   }, []);
 
+  useEffect(() => {
+    if (idProjeto) {
+      registerForm.setFieldValue("id_projeto", idProjeto);
+    }
+  }, [registerForm.values.id_projeto]);
+
   return (
     <>
       <Button

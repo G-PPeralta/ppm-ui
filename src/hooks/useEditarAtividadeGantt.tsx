@@ -58,7 +58,7 @@ export function useEditarAtividadeGantt() {
   };
 
   const adicionarOperacao = yup.object({
-    id_atividade: yup.number().required("Campo obrigatório").moreThan(0),
+    id_atividade: yup.number().required("Campo obrigatório"), // .moreThan(0),
     inicio_realizado: yup.date().required("Campo obrigatório"),
     fim_realizado: yup.date().required("Campo obrigatório"),
     inicio_planejado: yup.date().required("Campo obrigatório"),
@@ -71,8 +71,8 @@ export function useEditarAtividadeGantt() {
     onSubmit: async (values) => {
       const id = values.id_atividade;
       const newValues = {
-        dat_ini: new Date(values.inicio_realizado).toLocaleString(),
-        dat_fim: new Date(values.fim_realizado).toLocaleString(),
+        dat_ini_real: new Date(values.inicio_realizado).toLocaleString(),
+        dat_fim_real: new Date(values.fim_realizado).toLocaleString(),
         dat_ini_plan: new Date(values.inicio_planejado).toLocaleString(),
         dat_fim_plan: new Date(values.fim_planejado).toLocaleString(),
         pct_real: values.pct_real,

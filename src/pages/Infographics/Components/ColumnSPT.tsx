@@ -70,7 +70,11 @@ function ColumnSPT({ column, setRefresh, refresh }: Props) {
         <Text fontSize={"xl"} fontWeight={"bold"} textAlign={"center"}>
           {column.sonda}
         </Text>
-        <ModalEditarSPT column={column} />
+        <ModalEditarSPT
+          column={column}
+          refresh={refresh}
+          setRefresh={setRefresh}
+        />
       </Flex>
       <Flex
         direction={"column"}
