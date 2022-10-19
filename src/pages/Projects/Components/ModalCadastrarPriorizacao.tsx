@@ -47,11 +47,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
     ranking,
   } = useCadastroPriorizacao(projeto.projeto);
 
-  // useEffect(() => {
-  //   registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
-  // }, []);
-
-  // Pegar id do projeto
+  // console.log(listaPrioridade);
 
   useEffect(() => {
     const valorRanking = ranking && ranking?.length > 0 ? ranking[0].id : 0;

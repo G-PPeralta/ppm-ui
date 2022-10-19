@@ -36,6 +36,9 @@ function TextAreaGenerico({
         maxLength={255}
         onChange={registerForm.handleChange}
         w={"100%"}
+        _placeholder={{ color: "#949494" }}
+        fontSize={"14px"}
+        fontWeight={"400"}
       />
       {registerForm.touched[propName] && registerForm.errors[propName] && (
         <TextError>{registerForm.errors[propName]}</TextError>

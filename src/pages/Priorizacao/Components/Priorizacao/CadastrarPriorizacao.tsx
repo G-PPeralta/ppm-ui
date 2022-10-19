@@ -73,7 +73,7 @@ function ModalCadastrarPriorizacao() {
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            Configuração
+            Cadastrar Priorização
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <form
@@ -182,7 +182,7 @@ function ModalCadastrarPriorizacao() {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red"
+                  color="red.500"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: "red.500",
