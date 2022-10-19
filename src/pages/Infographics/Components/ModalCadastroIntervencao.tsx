@@ -18,6 +18,7 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
+  ModalCloseButton,
   // Progress,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
@@ -26,10 +27,11 @@ import {
   ProjetoTipo,
 } from "interfaces/CadastrosModaisInfograficos";
 
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
-import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 
 import { formatDate } from "utils/formatDate";
+import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
@@ -270,6 +272,10 @@ function ModalCadastroIntervencao({
           >
             Cadastrar Nova Intervenção/Perfuração
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -382,12 +388,12 @@ function ModalCadastroIntervencao({
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoGhost
+                <BotaoVermelhoLargoGhost
                   text={"Cancelar"}
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                <BotaoAzulPrimary
+                <BotaoAzulLargoPrimary
                   text={"Concluir Cadastro"}
                   formikForm={registerForm}
                   onClose={onClose}
