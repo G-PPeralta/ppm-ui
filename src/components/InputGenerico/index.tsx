@@ -60,6 +60,10 @@ function InputGenerico({
             onChange={registerForm.handleChange}
             w={"100%"}
             onKeyUp={(event) => maskMoney(event)}
+            _placeholder={{ color: "#949494" }}
+            color={"black"}
+            fontSize={"14px"}
+            fontWeight={"400"}
           />
         </Flex>
       ) : (
@@ -73,6 +77,10 @@ function InputGenerico({
           maxLength={maxLength}
           onChange={registerForm.handleChange}
           w={"100%"}
+          _placeholder={{ color: "#949494" }}
+          fontSize={"14px"}
+          fontWeight={"400"}
+          color={"black"}
         />
       )}
       {registerForm.touched[propName] && registerForm.errors[propName] && (
