@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import { useLocation } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 
 import {
@@ -25,11 +24,10 @@ import {
   NumberInputStepper,
   Select,
 } from "@chakra-ui/react";
-// import { Ring } from "@uiball/loaders";
-
-// import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
 import { useToast } from "contexts/Toast";
+
+import { useAuth } from "hooks/useAuth";
 
 import { patchEditarAtividadeIntervencao } from "services/post/Infograficos";
 
@@ -47,15 +45,16 @@ interface Precedente {
 function ModalEditarAtividade({
   onClose,
   atividade,
-  id,
+  // id,
   setRefresh,
   refresh,
   listaPrecedentes,
   index,
   listaOptions,
-  poco,
+  // poco,
   intervencaoIniciada,
 }: any) {
+  const { user } = useAuth();
   const { toast } = useToast();
   const [atividadeStatus, setAtividadeStatus] = useState(0);
   const [nome, setNome] = useState("");
@@ -69,6 +68,7 @@ function ModalEditarAtividade({
   const [precedentes, setPrecedentes] = useState<Precedente[]>([]);
 
   const payload = {
+    nom_usu_edit: user?.nome,
     atividadeId: atividade.id_atividade,
     atividadeStatus,
     nome,
@@ -99,8 +99,6 @@ function ModalEditarAtividade({
     setRefresh(!refresh);
   };
   const format = (val: number) => val + "%";
-
-  // const intervencaoIniciada = poco.pct_real !== "0";
 
   useEffect(() => {
     setNome(atividade.atividade);
@@ -218,16 +216,11 @@ function ModalEditarAtividade({
                         value={format(atividadeStatus)}
                         onChange={(event) => setAtividadeStatus(Number(event))}
                       >
-                        <NumberInputField
-                          h={"56px"}
-                          // disabled={!intervencaoIniciada}
-                        />
-                        {/* {intervencaoIniciada && ( */}
+                        <NumberInputField h={"56px"} />
                         <NumberInputStepper h={"56px"}>
                           <NumberIncrementStepper />
                           <NumberDecrementStepper />
                         </NumberInputStepper>
-                        {/* )} */}
                       </NumberInput>
                     </FormControl>
                   </Flex>
@@ -267,17 +260,6 @@ function ModalEditarAtividade({
                           DATA FIM PLANEJADO
                         </Text>
                       </Flex>
-                      {/* <Input
-                        h={"56px"}
-                        isDisabled
-                        // isDisabled={intervencaoIniciada}
-                        placeholder="Selecione a data e a hora"
-                        id="dat_ini_plan"
-                        type="text"
-                        name="dat_ini_plan"
-                        w={useBreakpointValue({ base: "100%", md: "100%" })}
-                        value={fimPlanejado}
-                      /> */}
                       <DateTimePickerDataFimPlan
                         fimPlanejado={fimPlanejado}
                         setFimPlanejado={setFimPlanejado}
@@ -354,16 +336,6 @@ function ModalEditarAtividade({
                           </option>
                         ))}
                       </Select>
-                      {/* <Input
-                        h={"56px"}
-                        placeholder="responsavel"
-                        id="responsavel"
-                        type="text"
-                        name="responsavel"
-                        w={useBreakpointValue({ base: "100%", md: "100%" })}
-                        value={responsavel}
-                        onChange={(event) => setResponsavel(event.target.value)}
-                      /> */}
                     </FormControl>
                     <FormControl flex={2}>
                       <Flex gap={1}>
@@ -391,16 +363,6 @@ function ModalEditarAtividade({
                           </option>
                         ))}
                       </Select>
-                      {/* <Input
-                        h={"56px"}
-                        placeholder="area"
-                        id="area"
-                        type="text"
-                        name="area"
-                        w={useBreakpointValue({ base: "100%", md: "100%" })}
-                        value={area}
-                        onChange={(event) => setArea(event.target.value)}
-                      /> */}
                     </FormControl>
                   </Flex>
                   <Flex
