@@ -68,8 +68,6 @@ export function ActivitiesSchedule() {
     }
   }, [atividades]);
 
-  console.log("intervencaoIniciada", intervencaoIniciada);
-
   return (
     <>
       <Sidebar>

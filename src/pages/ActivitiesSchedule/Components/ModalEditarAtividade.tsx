@@ -33,7 +33,9 @@ import { useToast } from "contexts/Toast";
 
 import { patchEditarAtividadeIntervencao } from "services/post/Infograficos";
 
+import DateTimePickerDataFimPlan from "./DateTimePickerDataFimPlan";
 import DateTimePickerDataFimReal from "./DateTimePickerDataFimReal";
+import DateTimePickerDataInicioPlan from "./DateTimePickerDataInicioPlan";
 import DateTimePickerDataInicioReal from "./DateTimePickerDataInicioReal";
 import PocosDragAndDrop from "./PocosDragAndDrop";
 
@@ -60,8 +62,8 @@ function ModalEditarAtividade({
   const [responsavelId, setResponsavelId] = useState(0);
   const [areaId, setAreaId] = useState(0);
   const [observacoes, setObservacoes] = useState("");
-  const [inicioPlanejado, setInicioPlanejado] = useState("");
-  const [fimPlanejado, setFimPlanejado] = useState("");
+  const [inicioPlanejado, setInicioPlanejado] = useState<any>("");
+  const [fimPlanejado, setFimPlanejado] = useState<any>("");
   const [inicioReal, setInicioReal] = useState(null);
   const [fimReal, setFimReal] = useState(null);
   const [precedentes, setPrecedentes] = useState<Precedente[]>([]);
@@ -79,9 +81,6 @@ function ModalEditarAtividade({
     fimReal,
     precedentes,
   };
-
-  console.log("payload", payload);
-  console.log("poco", poco);
 
   const send = async () => {
     try {
@@ -111,15 +110,15 @@ function ModalEditarAtividade({
       setPrecedentes(atividade.precedentes);
     }
     if (index == 0) {
-      setInicioPlanejado(new Date(atividade.inicioplanejado).toLocaleString());
+      setInicioPlanejado(new Date(atividade.inicioplanejado));
     } else {
       const inicio = new Date(atividade.inicioplanejado);
       inicio.setDate(inicio.getDate() + 1);
-      setInicioPlanejado(inicio.toLocaleString());
+      setInicioPlanejado(inicio);
     }
     const fim = new Date(atividade.finalplanejado);
     fim.setHours(fim.getHours() + 9);
-    setFimPlanejado(fim.toLocaleString());
+    setFimPlanejado(fim);
 
     const respId = listaOptions.optionsResponsaveis.find(
       (responsavel: any) => responsavel.label === responsavel
@@ -251,17 +250,12 @@ function ModalEditarAtividade({
                           DATA INÍCIO PLANEJADO
                         </Text>
                       </Flex>
-                      {/* <Input
-                        h={"56px"}
-                        isDisabled
-                        // isDisabled={intervencaoIniciada}
-                        placeholder="Selecione a data e a hora"
-                        id="dat_ini_plan"
-                        type="text"
-                        name="dat_ini_plan"
-                        w={useBreakpointValue({ base: "100%", md: "100%" })}
-                        value={inicioPlanejado}
-                      /> */}
+                      <DateTimePickerDataInicioPlan
+                        inicioPlanejado={inicioPlanejado}
+                        setInicioPlanejado={setInicioPlanejado}
+                        intervencaoIniciada={intervencaoIniciada}
+                        atividadeStatus={atividadeStatus}
+                      />
                     </Flex>
                     <Flex direction={"column"} grow={1}>
                       <Flex gap={1}>
@@ -273,7 +267,7 @@ function ModalEditarAtividade({
                           DATA FIM PLANEJADO
                         </Text>
                       </Flex>
-                      <Input
+                      {/* <Input
                         h={"56px"}
                         isDisabled
                         // isDisabled={intervencaoIniciada}
@@ -283,6 +277,12 @@ function ModalEditarAtividade({
                         name="dat_ini_plan"
                         w={useBreakpointValue({ base: "100%", md: "100%" })}
                         value={fimPlanejado}
+                      /> */}
+                      <DateTimePickerDataFimPlan
+                        fimPlanejado={fimPlanejado}
+                        setFimPlanejado={setFimPlanejado}
+                        intervencaoIniciada={intervencaoIniciada}
+                        atividadeStatus={atividadeStatus}
                       />
                     </Flex>
                     <Flex direction={"column"} grow={1}>

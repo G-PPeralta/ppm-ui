@@ -3,20 +3,20 @@ import ReactDatePicker from "react-datepicker";
 
 import { Button, Flex, useBreakpointValue } from "@chakra-ui/react";
 
-function DateTimePickerDataInicioReal({
-  inicioReal,
-  setInicioReal,
+function DateTimePickerDataInicioPlan({
+  inicioPlanejado,
+  setInicioPlanejado,
   intervencaoIniciada,
   atividadeStatus,
 }: any) {
   const handleIniciarDate = (date: any) => {
-    setInicioReal(date);
+    setInicioPlanejado(date);
   };
 
   const TriggerDatePickerInicio = forwardRef(
     ({ value, onClick }: any, ref: any) => (
       <Button
-        isDisabled={!intervencaoIniciada && atividadeStatus === 0}
+        isDisabled={intervencaoIniciada || atividadeStatus !== 0}
         h={"56px"}
         onClick={onClick}
         ref={ref}
@@ -32,17 +32,17 @@ function DateTimePickerDataInicioReal({
   return (
     <Flex direction={"column"}>
       <ReactDatePicker
-        selected={inicioReal}
+        selected={inicioPlanejado}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
         showTimeSelect
         dateFormat="dd/MM/yyyy, hh:mm"
         customInput={<TriggerDatePickerInicio />}
-        isClearable={inicioReal !== ""}
-        disabled={!intervencaoIniciada && atividadeStatus === 0}
+        // isClearable={inicioPlanejado !== ""}
+        disabled={intervencaoIniciada || atividadeStatus !== 0}
       />
     </Flex>
   );
 }
 
-export default DateTimePickerDataInicioReal;
+export default DateTimePickerDataInicioPlan;
