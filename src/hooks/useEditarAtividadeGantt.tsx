@@ -81,14 +81,14 @@ export function useEditarAtividadeGantt() {
       try {
         const { status } = await patchAtividadeProjeto(id, newValues);
         if (status === 200 || status === 201) {
-          toast.success("Operação adicionada com sucesso!", {
+          toast.success("Atividade editada com sucesso!", {
             id: "toast-principal",
           });
           // setLoading(false);
           setRefresh(!refresh);
         }
       } catch (error) {
-        toast.error("Erro ao adicionar operação!", {
+        toast.error("Erro ao editar atividade!", {
           id: "toast-principal",
         });
         // setLoading(false);

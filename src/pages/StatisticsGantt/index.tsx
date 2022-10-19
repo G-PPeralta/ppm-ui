@@ -25,6 +25,7 @@ import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
 
 // import { patchOperacoesEstatisticas } from "services/update/OperacoesEstatisticas";
 
+import ModalCadastroOperacao from "../Statistics/components/ModalCadastroOperacao";
 import { Gantt } from "./components/Gantt";
 import ModalAdicionarOperacao from "./components/ModalAdicionarOperacao";
 import ModalEditarOperacao from "./components/ModalEditarOperacao";
@@ -189,6 +190,10 @@ function StatisticsGantt() {
                     setRefresh={setRefresh}
                     atual={state.data}
                   /> */}
+                  <ModalCadastroOperacao
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
                   <ModalAdicionarOperacao
                     setRefresh={setRefresh}
                     refresh={refresh}
@@ -213,6 +218,8 @@ function StatisticsGantt() {
             </Stack>
             <Stack spacing="8">
               <Gantt
+                refresh={refresh}
+                setRefresh={setRefresh}
                 options={{
                   showGantt: true,
                   toolbarOptions,

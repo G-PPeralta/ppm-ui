@@ -60,7 +60,7 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
         }}
         onClick={onOpen}
       >
-        Operação
+        Cadastrar Operação
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
