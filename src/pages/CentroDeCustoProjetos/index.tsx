@@ -128,7 +128,7 @@ export function CentroDeCustoProjetos() {
                   </Heading>
                 </Flex>
               </Flex>
-              {data && (
+              {data.centroDeCusto && (
                 <Tabela
                   data={data.centroDeCusto}
                   refreshState={refreshState}
