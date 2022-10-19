@@ -108,7 +108,7 @@ export function useEditarOperacao(
           setRefresh(!refresh);
         }
       } catch (error) {
-        toast.error("Erro ao adicionar operação!", {
+        toast.error("Erro ao editar operação!", {
           id: "toast-principal",
         });
         setLoading(false);
