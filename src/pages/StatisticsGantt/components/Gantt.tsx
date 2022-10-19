@@ -90,7 +90,7 @@ export function Gantt({
       if (!props.TaskID) throw new Error("Erro ao remover operação!");
       const { status } = await deleteOperacaoCronograma(props.TaskID);
       if (status === 200 || status === 201) {
-        toast.success("Operação adicionada com sucesso!", {
+        toast.success("Operação removida com sucesso!", {
           id: "toast-principal",
         });
         setLoading(false);
