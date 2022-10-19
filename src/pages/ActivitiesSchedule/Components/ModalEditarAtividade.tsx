@@ -118,14 +118,15 @@ function ModalEditarAtividade({
     fim.setHours(fim.getHours() + 9);
     setFimPlanejado(fim);
 
-    const respId = listaOptions.optionsResponsaveis.find(
-      (responsavel: any) => responsavel.label === responsavel
-    )?.value;
+    const respId = listaOptions.optionsResponsaveis.filter(
+      (responsavel: any) => responsavel.label === atividade.nom_responsavel
+    )[0].value;
+
     setResponsavelId(respId);
 
-    const arId = listaOptions.optionsAreaAtuacao.find(
-      (area: any) => area.label === area
-    )?.value;
+    const arId = listaOptions.optionsAreaAtuacao.filter(
+      (area: any) => area.label === atividade.nom_area
+    )[0].value;
     setAreaId(arId);
   }, []);
 
