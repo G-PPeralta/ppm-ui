@@ -19,6 +19,7 @@ import {
   AlertIcon,
   AlertTitle,
   ModalCloseButton,
+  Button,
   // Progress,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
@@ -65,6 +66,7 @@ function ModalCadastroIntervencao({
   const [dataLimite, setDataLimite] = useState<any>("");
   // const [valueProgressoMensagemErro, setValueProgressoMensagemErro] =
   //   useState<any>(100);
+  const [dataFinalPrevista, setDataFinalPrevista] = useState<any>("");
 
   const innerWidth = window.innerWidth;
 
@@ -142,6 +144,30 @@ function ModalCadastroIntervencao({
     } else {
       registerForm.setFieldValue("erroDataIntervencao", false);
     }
+
+    const quantidadeDias = registerForm.values.atividades.reduce(
+      (acc: number, atividade: any) => acc + atividade.qtde_dias,
+      0
+    );
+
+    const dataInicio = new Date(registerForm.values.dat_ini_prev);
+    const dataLimite = new Date(registerForm.values.data_limite);
+
+    // PEGAR DATA DE FIM PREVISTA (DATA INICIO + QUANTIDADE DE DIAS)
+    const dataFimPrevista = new Date(
+      dataInicio.setDate(dataInicio.getDate() + quantidadeDias)
+    );
+
+    setDataFinalPrevista(dataFimPrevista);
+
+    // console.log("dataInicio", dataInicio);
+    // console.log("dataLimite", dataLimite);
+    // console.log("dataFimPrevista", dataFimPrevista);
+    // console.log("condicional", dataFimPrevista > dataLimite);
+
+    if (dataFimPrevista > dataLimite) {
+      registerForm.setFieldValue("erroDataIntervencao", true);
+    }
   };
 
   useEffect(() => {
@@ -171,6 +197,7 @@ function ModalCadastroIntervencao({
     registerForm.values.dat_ini_prev,
     registerForm.values.projeto_tipo_id,
     registerForm.values.poco_id,
+    registerForm.values.atividades,
   ]);
 
   useEffect(() => {
@@ -222,6 +249,8 @@ function ModalCadastroIntervencao({
   //     });
   //   }, 1000);
   // }, [valueProgressoMensagemErro]);
+
+  // console.log("registerForm", registerForm.values);
 
   return (
     <>
@@ -317,7 +346,7 @@ function ModalCadastroIntervencao({
                       </Flex>
                     </Stack>
 
-                    <Stack>
+                    <Flex justify={"space-between"}>
                       <Flex flexDirection={"row"} gap={4} w={"50%"}>
                         <SelectFiltragem
                           registerForm={registerForm}
@@ -327,7 +356,29 @@ function ModalCadastroIntervencao({
                           required={true}
                         />
                       </Flex>
-                    </Stack>
+                      {dataFinalPrevista !== "" && (
+                        <Flex direction={"column"}>
+                          <Flex gap={1}>
+                            <Text
+                              fontWeight={"bold"}
+                              fontSize={"12px"}
+                              color={"#949494"}
+                            >
+                              DATA FINAL PREVISTA
+                            </Text>
+                          </Flex>
+                          <Button
+                            isDisabled={true}
+                            h={"56px"}
+                            variant="outline"
+                            px={5}
+                            minW={"220px"}
+                          >
+                            {formatDate(dataFinalPrevista)}
+                          </Button>
+                        </Flex>
+                      )}
+                    </Flex>
 
                     {registerForm.values.erroDataIntervencao && (
                       <Flex direction={"column"}>
