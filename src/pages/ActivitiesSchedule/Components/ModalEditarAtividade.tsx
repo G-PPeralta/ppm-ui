@@ -130,6 +130,9 @@ function ModalEditarAtividade({
     setAreaId(arId);
   }, []);
 
+  const validateStatusEDataInicioReal =
+    atividadeStatus > 0 && inicioReal !== null;
+
   return (
     <>
       <Modal isOpen={true} onClose={onClose} size="5xl">
@@ -437,7 +440,8 @@ function ModalEditarAtividade({
                   !nome ||
                   !responsavelId ||
                   !areaId ||
-                  precedentes.filter((item) => item.id == 0).length > 0
+                  precedentes.filter((item) => item.id == 0).length > 0 ||
+                  !validateStatusEDataInicioReal
                 }
                 onClick={() => send()}
                 h={"56px"}
