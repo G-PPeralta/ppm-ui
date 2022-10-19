@@ -55,7 +55,6 @@ function ModalEditarAtividade({
   // }));
 
   useEffect(() => {
-    console.log(editAtividade);
     registerForm.setFieldValue("id_atividade", editAtividade.id_atividade);
     registerForm.setFieldValue("nome_atividade", editAtividade.nome_atividade);
     registerForm.setFieldValue(
