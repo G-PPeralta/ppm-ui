@@ -85,6 +85,10 @@ function InputGenerico({
           maxLength={maxLength}
           onChange={registerForm.handleChange}
           w={"100%"}
+          _placeholder={{ color: "#949494" }}
+          fontSize={"14px"}
+          fontWeight={"400"}
+          color={"black"}
         />
       )}
       {registerForm.touched[propName] && registerForm.errors[propName] && (

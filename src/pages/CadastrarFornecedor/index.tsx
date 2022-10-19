@@ -37,13 +37,13 @@ export function CadastrarFornecedor() {
               bg={"white"}
               borderRadius={{ base: "xl", sm: "xl" }}
             >
-              <Flex align={"center"} gap={2} h={"56px"}>
+              <Flex align={"center"} gap={1} h={"56px"} ml={-7} mt={-5}>
                 <IconButton
                   aria-label="Botão Voltar"
                   icon={<IoIosArrowBack size={20} />}
                   borderRadius={"10px"}
                   background={"white"}
-                  color={"origem.500"}
+                  // color={"origem.500"}
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",
@@ -53,7 +53,13 @@ export function CadastrarFornecedor() {
                     window.history.back();
                   }}
                 />
-                <Heading as="h3" size="md" textAlign={"center"}>
+                <Heading
+                  fontSize={"24px"}
+                  color={"#2D2926"}
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
+                  textAlign={"center"}
+                >
                   Cadastrar Fornecedor
                 </Heading>
               </Flex>

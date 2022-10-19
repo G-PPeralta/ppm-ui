@@ -1,3 +1,5 @@
+import { IoMdPodium } from "react-icons/io";
+
 import {
   Button,
   Flex,
@@ -6,6 +8,7 @@ import {
   Input,
   Modal,
   ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -17,6 +20,10 @@ import {
 
 function ModalConfiguracoes() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const handleCancelar = () => {
+    onClose();
+  };
 
   return (
     <>
@@ -40,7 +47,7 @@ function ModalConfiguracoes() {
       </Button>
       <Modal size={"5xl"} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent borderTopRadius={"10px"}>
           <ModalHeader
             backgroundColor={"#2E69FD"}
             borderTopRadius={"8px"}
@@ -53,6 +60,7 @@ function ModalConfiguracoes() {
           >
             Configurações do Projeto
           </ModalHeader>
+          <ModalCloseButton color={"white"} onClick={() => handleCancelar()} />
           <ModalBody p={"24px"}>
             <FormControl>
               <Flex
@@ -131,7 +139,22 @@ function ModalConfiguracoes() {
                   </FormControl>
                   <Flex>
                     <FormControl pt={"20px"}>
-                      <Button w={"232px"} h={"56px"}>
+                      <Button
+                        w={"232px"}
+                        h={"56px"}
+                        color="#0047BB"
+                        background="white"
+                        borderColor="#0047BB"
+                        border={"2px"}
+                        _hover={{
+                          background: "#0047BB",
+                          transition: "all 0.4s",
+                          color: "white",
+                        }}
+                        fontWeight={"700"}
+                        fontSize="18px"
+                        rightIcon={<IoMdPodium />}
+                      >
                         Priorização
                       </Button>
                     </FormControl>
@@ -217,20 +240,21 @@ function ModalConfiguracoes() {
                         NOME DO PROJETO
                       </Text>
                     </FormLabel>
-                    <Select
+                    <Input
                       fontSize={"14px"}
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
-                      mt={"-6px"}
-                      height={"56px"}
+                      maxLength={50}
                       borderRadius={"8px"}
-                      id="poloId"
-                      name="pole"
+                      border={"1px solid #A7A7A7"}
+                      mt={"-6px"}
                       width={"100%"}
-                      placeholder="Selecione"
-                    >
-                      <option value="">Selecione</option>
-                    </Select>
+                      height={"56px"}
+                      id="nomeProjetoId"
+                      name="nomeProjeto"
+                      placeholder={"Digite"}
+                      // onChange={(e) => setNomeProjeto(e.target.value)}
+                    />
                   </FormControl>
                   <FormControl w={"232px"}>
                     <FormLabel htmlFor="categoria">
@@ -238,20 +262,21 @@ function ModalConfiguracoes() {
                         ELEMENTO PEP
                       </Text>
                     </FormLabel>
-                    <Select
+                    <Input
                       fontSize={"14px"}
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
-                      mt={"-6px"}
-                      height={"56px"}
+                      maxLength={50}
                       borderRadius={"8px"}
-                      id="poloId"
-                      name="pole"
+                      border={"1px solid #A7A7A7"}
+                      mt={"-6px"}
                       width={"100%"}
-                      placeholder="Selecione"
-                    >
-                      <option value="">Selecione</option>
-                    </Select>
+                      height={"56px"}
+                      id="elementoPepId"
+                      name="elementoPep"
+                      placeholder={"Digite"}
+                      // onChange={(e) => setElementoPep(e.target.value)}
+                    />
                   </FormControl>
                 </Flex>
                 <Flex
@@ -458,7 +483,7 @@ function ModalConfiguracoes() {
                 // background="origem.300"
                 variant="primary"
                 color="red.500"
-                // onClick={handleCancelar}
+                onClick={handleCancelar}
                 h={"56px"}
                 w={"206px"}
                 borderRadius={"10px"}

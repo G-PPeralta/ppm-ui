@@ -257,9 +257,7 @@ export function Fornecedores() {
                       width={"208px"}
                       height={"56px"}
                     >
-                      <option color={"#A7A7A7"} value={0}>
-                        Todos
-                      </option>
+                      <option value={0}>Todos</option>
                       {projetos &&
                         projetos.map((project, index) => (
                           <option value={project.id} key={index}>

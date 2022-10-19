@@ -177,7 +177,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red"
+                  color="red.500"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: "red.500",
@@ -191,7 +191,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                 </Button>
                 <Button
                   disabled={!registerForm.isValid}
-                  background="origem.300"
+                  background="#0047BB"
                   variant="primary"
                   color="white"
                   onClick={() => handleCadastrar(registerForm, onClose)}
@@ -199,6 +199,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                     background: "origem.500",
                     transition: "all 0.4s",
                   }}
+                  borderRadius={"8px"}
                   w={"208px"}
                   h={"56px"}
                 >

@@ -123,11 +123,13 @@ export function useProjetos() {
     const statusSorted = status.data.sort((a: any, b: any) =>
       a.status.localeCompare(b.status)
     );
-    const statusComOutrosAoFinalArray = addOutroFinalArray(
-      statusSorted,
-      "status"
-    );
-    setListaStatus(statusComOutrosAoFinalArray);
+    // console.log(statusSorted);
+
+    // const statusComOutrosAoFinalArray = addOutroFinalArray(
+    //   statusSorted,
+    //   "status"
+    // );
+    setListaStatus(statusSorted);
 
     const complexidades = await getComplexidade();
     const complexidadesSorted = complexidades.data.sort((a: any, b: any) =>
