@@ -251,7 +251,7 @@ export function useProjetos() {
     nomeProjeto: "",
     elementoPep: "",
     dataInicio: "",
-    capexPrevisto: "",
+    capexPrevisto: 0,
     complexidadeId: -1,
     divisaoId: -1,
     classificacaoId: -1,
