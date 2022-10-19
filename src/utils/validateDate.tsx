@@ -24,6 +24,11 @@ export const statusProjeto = [
     status: "Concluído",
     color: "#027200",
   },
+  {
+    id: 6,
+    status: "Conflito de Cronograma",
+    color: "#000000",
+  },
 ];
 
 export function validateDate(
@@ -34,7 +39,7 @@ export function validateDate(
 ) {
   switch (true) {
     case ind_alerta === 1:
-      return statusProjeto[3].color; // atrasado
+      return statusProjeto[5].color; // conflito de cronograma
 
     case pct_plan > pct_real:
       return statusProjeto[3].color; // atrasado

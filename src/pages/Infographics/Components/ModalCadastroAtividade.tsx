@@ -231,7 +231,7 @@ function ModalCadastroAtividade() {
                   onClose={onClose}
                 />
                 <BotaoAzulLargoPrimary
-                  text={"Concluir"}
+                  text={"Cadastrar"}
                   formikForm={registerForm}
                   onClose={onClose}
                   setRefresh={setRefresh}

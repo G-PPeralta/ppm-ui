@@ -455,7 +455,7 @@ function ModalEditarAtividade({
                 }}
               >
                 <Text fontSize="16px" fontWeight={"bold"} mx={12}>
-                  Atualizar
+                  Concluir
                 </Text>
               </Button>
             </Flex>
