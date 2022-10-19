@@ -11,5 +11,6 @@ export const regexSomenteNumeros = (stringToReplace: string) =>
   // .match(/[0-9]+/g).join([]);
   stringToReplace.replace(/\D/g, "");
 
-export const regexApenasNumerosMonetario = (stringToReplace: string) =>
-  stringToReplace.replace(/[§ª°º`´¨~!@#$%^&*()_|+=?;:'"<>{}[]\]*/gi, "");
+export const regexSomenteNumerosMonetario = (
+  stringToReplace: string | undefined | null
+) => (stringToReplace ? stringToReplace.replace(/\D/g, "") : null);
