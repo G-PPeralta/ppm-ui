@@ -38,14 +38,22 @@ export function ActivitiesSchedule() {
   const [openIndex, setOpenIndex] = useState("");
   const [atividades, setAtividades] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
+  const [loadingCards, setLoadingCards] = useState(true);
+  const [intervencaoIniciada, setIntervencaoIniciada] = useState<any>(false);
 
   const requestHandler = async () => {
     const response = await getAtividadesCampanha(id);
     setAtividades(response.data);
   };
 
+  const openDetails = (atividade: any, index: any) => {
+    setOpenId(atividade);
+    setOpenIndex(index);
+  };
+
   useEffect(() => {
     setPoco(state.poco);
+    setIntervencaoIniciada(state.intervencaoFoiIniciada);
     requestHandler();
     setLoading(false);
   }, []);
@@ -54,10 +62,11 @@ export function ActivitiesSchedule() {
     requestHandler();
   }, [refresh]);
 
-  const openDetails = (atividade: any, index: any) => {
-    setOpenId(atividade);
-    setOpenIndex(index);
-  };
+  useEffect(() => {
+    if (atividades.length > 0) {
+      setLoadingCards(false);
+    }
+  }, [atividades]);
 
   return (
     <>
@@ -119,18 +128,24 @@ export function ActivitiesSchedule() {
             </Flex>
 
             <Flex direction={"row"} gap={4} py={4} wrap={"wrap"}>
-              {atividades.map((atividade, index) => (
-                <Flex
-                  key={index}
-                  direction={"column"}
-                  align={"center"}
-                  justify={"center"}
-                  onClick={() => openDetails(atividade, index)}
-                  _hover={{ cursor: "pointer" }}
-                >
-                  <CardACT atividade={atividade} />
+              {!loadingCards ? (
+                atividades.map((atividade, index) => (
+                  <Flex
+                    key={index}
+                    direction={"column"}
+                    align={"center"}
+                    justify={"center"}
+                    onClick={() => openDetails(atividade, index)}
+                    _hover={{ cursor: "pointer" }}
+                  >
+                    <CardACT atividade={atividade} />
+                  </Flex>
+                ))
+              ) : (
+                <Flex align={"center"} justify={"center"} w={"100%"} h={"50vh"}>
+                  <Ring speed={2} lineWeight={5} color="blue" size={64} />
                 </Flex>
-              ))}
+              )}
             </Flex>
             {openId && optionsAreaAtuacao.length > 0 ? (
               <ModalEditarAtividade
@@ -142,6 +157,8 @@ export function ActivitiesSchedule() {
                 setRefresh={setRefresh}
                 refresh={refresh}
                 listaOptions={listaOptions}
+                poco={poco}
+                intervencaoIniciada={intervencaoIniciada}
               />
             ) : undefined}
           </ContainerPagina>

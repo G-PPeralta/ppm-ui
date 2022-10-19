@@ -239,7 +239,7 @@ export function LicoesAprendidasProjetos() {
           alignItems={"center"}
         >
           <Flex align={"flex-end"} justify={"space-between"}>
-            <Flex mt={-6} ml={-3} mr={-5} mb={6}>
+            <Flex mt={-3} ml={-3} mr={-5} mb={6}>
               <Heading
                 fontFamily={"Mulish"}
                 fontWeight={"700"}
@@ -381,7 +381,7 @@ export function LicoesAprendidasProjetos() {
             ></Flex>
           </Flex>
 
-          <Flex direction={"column"} ml={-3} mr={-3}>
+          <Flex direction={"column"} ml={-3} mr={-3} mt={1}>
             <Flex direction={"column"} flex={1}>
               <TableContainer
                 mt={4}

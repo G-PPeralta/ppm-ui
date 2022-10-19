@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { BiPlus } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
-import { FiPlus } from "react-icons/fi";
+// import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import {
@@ -69,7 +70,7 @@ export function Projects() {
               }}
               borderRadius={{ base: "none", sm: "xl" }}
             >
-              <Flex direction="column" ml={-5} mt={-5}>
+              <Flex direction="column" ml={-5} mt={-4}>
                 <Flex
                   justify={"space-between"}
                   mb={2}
@@ -94,7 +95,9 @@ export function Projects() {
                     <Link to={"/projetos/cadastro"}>
                       <Button
                         h={"56px"}
-                        borderRadius={"10px"}
+                        borderRadius={"8px"}
+                        fontSize={"18px"}
+                        fontWeight={"700"}
                         background={"white"}
                         border={"2px solid"}
                         color={"origem.500"}
@@ -105,7 +108,7 @@ export function Projects() {
                           transition: "all 0.4s",
                           color: "white",
                         }}
-                        rightIcon={<FiPlus />}
+                        rightIcon={<BiPlus />}
                       >
                         Cadastrar Projeto
                       </Button>
@@ -114,7 +117,7 @@ export function Projects() {
                   <Flex align={"end"} wrap={"wrap"}>
                     <Flex direction={"column"} mr="16px">
                       <Text
-                        fontWeight={"bold"}
+                        fontWeight={"700"}
                         fontSize={"12px"}
                         color={"#949494"}
                       >
@@ -122,11 +125,12 @@ export function Projects() {
                       </Text>
                       <Input
                         h={"56px"}
-                        fontWeight={"bold"}
-                        width={"170px"}
-                        color={"#949494"}
+                        fontWeight={"400"}
+                        width={"328px"}
+                        color={"black"}
                         isRequired
-                        placeholder="Projeto"
+                        placeholder="Nome do projeto"
+                        _placeholder={{ color: "#949494" }}
                         id="name"
                         type="text"
                         name="name"
@@ -135,7 +139,7 @@ export function Projects() {
                     </Flex>
                     <Flex direction={"column"} mr="16px">
                       <Text
-                        fontWeight={"bold"}
+                        fontWeight={"700"}
                         fontSize={"12px"}
                         color={"#949494"}
                       >
@@ -143,11 +147,12 @@ export function Projects() {
                       </Text>
 
                       <Select
+                        fontWeight={"400"}
                         h={"56px"}
+                        w={"208px"}
                         id="poloId"
-                        fontWeight={"bold"}
                         name="pole"
-                        color={"#949494"}
+                        // color={"#949494"}
                         onChange={(e) => setPolo(e.target.value)}
                         width={300}
                       >
@@ -159,7 +164,9 @@ export function Projects() {
                     <Flex>
                       <Button
                         h={"56px"}
-                        borderRadius={"10px"}
+                        borderRadius={"8px"}
+                        fontSize={"18px"}
+                        fontWeight={"700"}
                         background={"origem.500"}
                         variant="primary"
                         color="white"
@@ -169,7 +176,6 @@ export function Projects() {
                           transition: "all 0.4s",
                         }}
                         rightIcon={<BsSearch />}
-                        fontWeight={"bold"}
                       >
                         Filtrar
                       </Button>
@@ -178,7 +184,7 @@ export function Projects() {
                 </Flex>
 
                 {projetosFilter && (
-                  <Flex flex={1}>
+                  <Flex flex={1} mt={1}>
                     <TabelaProjetos data={projetosFilter} />
                   </Flex>
                 )}

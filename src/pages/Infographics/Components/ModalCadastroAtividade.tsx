@@ -13,14 +13,16 @@ import {
   useBreakpointValue,
   Input,
   Text,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { Responsavel } from "interfaces/CadastrosModaisInfograficos";
 
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
-import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
+import { handleCancelar } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
@@ -78,6 +80,10 @@ function ModalCadastroAtividade() {
           >
             Cadastrar Atividade
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -219,12 +225,12 @@ function ModalCadastroAtividade() {
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoGhost
+                <BotaoVermelhoLargoGhost
                   text={"Cancelar"}
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                <BotaoAzulPrimary
+                <BotaoAzulLargoPrimary
                   text={"Concluir"}
                   formikForm={registerForm}
                   onClose={onClose}

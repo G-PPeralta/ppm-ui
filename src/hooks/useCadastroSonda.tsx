@@ -6,8 +6,8 @@ import { cadastroSondaSchema } from "validations/ModaisCadastrosInfografico";
 
 import { useToast } from "contexts/Toast";
 
-import { postNovaSonda } from "services/post/CadastroModaisInfograficos";
 import { postCadastroSondaOperacao } from "services/post/Estatistica";
+import { postNovaSonda } from "services/post/Infograficos";
 
 import { useAuth } from "./useAuth";
 

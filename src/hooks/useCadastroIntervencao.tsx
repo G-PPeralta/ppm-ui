@@ -27,7 +27,7 @@ import {
   postGetInfoCampanha,
   getSondaCampanha,
 } from "services/get/Infograficos";
-import { postNovaIntervencao } from "services/post/CadastroModaisInfograficos";
+import { postNovaIntervencao } from "services/post/Infograficos";
 
 import { useAuth } from "./useAuth";
 

@@ -77,3 +77,16 @@ export async function getProjetosInfo(): Promise<{
 
   return { data, status };
 }
+
+export async function getProjetosPrevistoRealizado(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/projetos/previstoXRealizado", {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
+    },
+  });
+
+  return { data, status };
+}

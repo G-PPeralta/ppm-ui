@@ -127,8 +127,10 @@ export interface GanttMacroDto {
   macroatividade_nome: string;
   duracao?: number;
   progresso?: number;
-  data_inicio?: string;
-  data_fim?: string;
+  dat_ini_real: string;
+  dat_fim_real: string;
+  dat_ini_plan: string;
+  dat_fim_plan: string;
   item?: string;
   microatividade_id?: number;
   nome_atividade?: string;
@@ -458,6 +460,9 @@ export interface StatisticsTableData {
   id_sonda: number;
   poco: string;
   id_poco: number;
+  dat_inicio?: string;
+  dat_final?: string;
+  pct_real?: number;
   atividades: StatisticsTable[];
   max?: number;
   min?: number;

@@ -69,7 +69,8 @@ export function TabelaFerramentas(props: TableProps) {
     }
     const ferramentasDiaHora: FerramentaDiaHora[] = [];
     data.forEach(function (fer) {
-      const diaFerramenta = dataBr.format(new Date(fer.data_hora));
+      const strDt = fer.data_hora.split("T")[0] + "T12:00:00.000Z";
+      const diaFerramenta = dataBr.format(new Date(strDt));
       const hora = fer.data_hora.split("T")[1].substring(0, 5);
 
       const ferramenta: FerramentaDiaHora = {

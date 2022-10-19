@@ -36,6 +36,12 @@ export function StatisticsTable({ data }: Props) {
     setTo,
   };
 
+  const formatDecimal = (pct: any) => {
+    if (!pct || pct == "") return "0,00";
+    const toNumber = +pct;
+    return toNumber.toFixed(2).replace(".", ",");
+  };
+
   return (
     <Flex direction={"column"} w={"100%"}>
       <TableContainer mt={4} mb={3} borderRadius={"10px"} overflowX={"scroll"}>
@@ -48,7 +54,18 @@ export function StatisticsTable({ data }: Props) {
               <Th color="white" textAlign={"center"}>
                 Poço
               </Th>
-              <Th color="white" textAlign={"center"}></Th>
+              <Th color="white" textAlign={"center"}>
+                Data Início
+              </Th>
+              <Th color="white" textAlign={"center"}>
+                Data Fim
+              </Th>
+              <Th color="white" textAlign={"center"}>
+                % Realizado
+              </Th>
+              <Th color="white" textAlign={"center"}>
+                Ações
+              </Th>
             </Tr>
           </Thead>
           <Tbody scrollBehavior={"smooth"}>
@@ -70,6 +87,33 @@ export function StatisticsTable({ data }: Props) {
                     >
                       <Text>{projeto.poco}</Text>
                     </Link>
+                  </Td>
+                  <Td textAlign={"center"} fontWeight={"semibold"}>
+                    <Text>
+                      {projeto.dat_inicio
+                        ? new Date(projeto.dat_inicio || "").toLocaleString(
+                            "pt-BR",
+                            {
+                              timeZone: "UTC",
+                            }
+                          )
+                        : ""}
+                    </Text>
+                  </Td>
+                  <Td textAlign={"center"} fontWeight={"semibold"}>
+                    <Text>
+                      {projeto.dat_final
+                        ? new Date(projeto.dat_final || "").toLocaleString(
+                            "pt-BR",
+                            {
+                              timeZone: "UTC",
+                            }
+                          )
+                        : ""}
+                    </Text>
+                  </Td>
+                  <Td textAlign={"center"} fontWeight={"semibold"}>
+                    <Text>{formatDecimal(projeto.pct_real)}</Text>
                   </Td>
                   <Td textAlign={"center"} fontWeight={"semibold"}>
                     {/* <IconButton
@@ -107,6 +151,9 @@ export function StatisticsTable({ data }: Props) {
           <Tfoot>
             <Tr background={"origem.500"}>
               <Th color="white">Total</Th>
+              <Th color="white"></Th>
+              <Th color="white"></Th>
+              <Th color="white"></Th>
               <Th color="white"></Th>
               <Th color="white"></Th>
             </Tr>

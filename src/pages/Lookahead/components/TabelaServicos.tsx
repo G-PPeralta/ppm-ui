@@ -68,17 +68,18 @@ export function TabelaServicos(props: TableProps) {
     }
     const servicosDiaHora: ServicoDiaHora[] = [];
     data &&
-      data.forEach(function (fer) {
-        const diaFerramenta = dataBr.format(new Date(fer.data_hora));
-        const hora = fer.data_hora.split("T")[1].substring(0, 5);
+      data.forEach(function (ser) {
+        const strDt = ser.data_hora.split("T")[0] + "T12:00:00.000Z";
+        const diaServico = dataBr.format(new Date(strDt));
+        const hora = ser.data_hora.split("T")[1].substring(0, 5);
 
-        const ferramenta: ServicoDiaHora = {
-          dia: diaFerramenta,
+        const servico: ServicoDiaHora = {
+          dia: diaServico,
           hora,
-          nome: fer.nome,
-          tipo: fer.tipo ? fer.tipo : "",
+          nome: ser.nome,
+          tipo: ser.tipo ? ser.tipo : "",
         };
-        servicosDiaHora.push(ferramenta);
+        servicosDiaHora.push(servico);
       });
 
     setServicosData(servicosDiaHora);
