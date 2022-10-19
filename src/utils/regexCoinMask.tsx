@@ -23,3 +23,7 @@ export function maskMoney(event: any) {
   if (length >= 3)
     return (input.value = money.replace(/^(\d{1})(\d{2})$/, "$1,$2"));
 }
+
+export function parserNumber(number: string) {
+  return number.replace(".", "").replace(",", ".");
+}
