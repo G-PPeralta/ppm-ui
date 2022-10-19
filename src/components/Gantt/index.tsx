@@ -8,7 +8,7 @@ import {
   Edit,
   Toolbar,
 } from "@syncfusion/ej2-react-gantt";
-import { IGantt } from "interfaces/Services";
+// import { IGantt } from "interfaces/Services";
 
 import { useEditarAtividadeGantt } from "hooks/useEditarAtividadeGantt";
 
@@ -25,7 +25,7 @@ type ganttOptionsProps = {
 export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
   // const { id } = useParams();
   const [loading, setLoading] = useState(true);
-  const [gantt, setGantt] = useState<any[]>();
+  const [gantt, setGantt] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
   const [refreshGanttCriacao, setRefreshGanttCriacao] = useState(false);
 
@@ -39,73 +39,76 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
     onClose,
   } = useEditarAtividadeGantt();
 
-  function ganttFormatter(gantt: IGantt) {
-    if (!gantt) return;
+  // function ganttFormatter(gantt: IGantt) {
+  //   if (!gantt) return;
 
-    const _gantt = gantt.macroatividades;
-    const newGantt = _gantt.map(
-      ({
-        macroatividade_id,
-        macroatividade_nome,
-        macroatividade_item,
-        // data_inicio,
-        duracao,
-        micro,
-        progresso,
-      }) =>
-        // if (!macroatividade_id || progresso == undefined) return null;
-        ({
-          TaskID: macroatividade_id || 1,
-          Item: macroatividade_item,
-          TaskName: macroatividade_nome,
-          StartDate: "",
-          Duration: duracao,
-          Progress: progresso,
-          subtasks: micro?.map(
-            ({
-              macroatividade_id,
-              macroatividade_item,
-              macroatividade_nome,
-              dat_ini_real,
-              dat_fim_real,
-              dat_ini_plan,
-              dat_fim_plan,
-              item,
-              nome_projeto,
-              microatividade_id,
-              progresso,
-              duracao,
-            }) =>
-              // const newDate = new Date(data_inicio || "");
-              // newDate.setDate(newDate.getDate() - 1);
+  //   const _gantt = gantt.macroatividades;
+  //   const newGantt = _gantt.map(
+  //     ({
+  //       macroatividade_id,
+  //       macroatividade_nome,
+  //       macroatividade_item,
+  //       // data_inicio,
+  //       duracao,
+  //       micro,
+  //       progresso,
+  //     }) =>
+  //       // if (!macroatividade_id || progresso == undefined) return null;
+  //       ({
+  //         TaskID: macroatividade_id || 1,
+  //         Item: macroatividade_item,
+  //         TaskName: macroatividade_nome,
+  //         StartDate: "",
+  //         Duration: duracao,
+  //         Progress: progresso,
+  //         subtasks: micro?.map(
+  //           ({
+  //             macroatividade_id,
+  //             macroatividade_item,
+  //             macroatividade_nome,
+  //             dat_ini_real,
+  //             dat_fim_real,
+  //             dat_ini_plan,
+  //             dat_fim_plan,
+  //             item,
+  //             nome_atividade,
+  //             microatividade_id,
+  //             progresso,
+  //             duracao,
+  //           }) =>
+  //             // const newDate = new Date(data_inicio || "");
+  //             // newDate.setDate(newDate.getDate() - 1);
 
-              ({
-                TaskID: microatividade_id || 0,
-                TaskName: nome_projeto || "",
-                Item: item || "",
-                Duration: duracao,
-                Progress: progresso || 0,
-                StartDate: dat_ini_real,
-                EndDate: dat_fim_real,
-                BaselineStartDate: dat_ini_plan,
-                BaselineEndDate: dat_fim_plan,
-              })
-          ),
-        })
-    );
-    setGantt(newGantt);
-  }
+  //             ({
+  //               TaskID: microatividade_id || 0,
+  //               TaskName: nome_atividade || "",
+  //               Item: item || "",
+  //               Duration: duracao,
+  //               Progress: progresso || 0,
+  //               StartDate: dat_ini_real,
+  //               EndDate: dat_fim_real,
+  //               BaselineStartDate: dat_ini_plan,
+  //               BaselineEndDate: dat_fim_plan,
+  //             })
+  //         ),
+  //       })
+  //   );
+  //   setGantt(newGantt);
+  // }
 
   async function handleSetGanttData() {
     if (id) {
       const reqGanttData = await getGanttData(Number(id));
 
       if (!reqGanttData) return;
-      const _gantt: IGantt = reqGanttData.data;
-      // setGanttData(_gantt);
-      ganttFormatter(_gantt);
+      // const _gantt: IGantt = reqGanttData.data;
+      // // setGanttData(_gantt);
+      // ganttFormatter(_gantt);
+      setGantt(reqGanttData.data);
     }
   }
+
+  console.log(gantt);
 
   useEffect(() => {
     setTimeout(() => {
@@ -226,11 +229,11 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
             name: "TaskName",
             startDate: "StartDate",
             endDate: "EndDate",
-            baselineStartDate: "BaselineStartDate",
-            baselineEndDate: "BaselineEndDate",
+            // baselineStartDate: "BaselineStartDate",
+            // baselineEndDate: "BaselineEndDate",
             duration: "Duration",
             progress: "Progress",
-            dependency: "Predecessor",
+            // dependency: "Predecessor",
             child: "subtasks",
           }}
           // taskFields={ganttData.macroatividades.map((macroatividade) => ({
