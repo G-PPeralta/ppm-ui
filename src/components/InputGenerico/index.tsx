@@ -3,6 +3,7 @@ import { Flex, Input, InputLeftAddon, Text } from "@chakra-ui/react";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
+import { getMoney, formatReal } from "utils/regexCoinMask";
 interface Props {
   registerForm: any;
   nomeInput?: string;
@@ -26,19 +27,7 @@ function InputGenerico({
   type,
   isNumeric,
 }: Props) {
-  function getMoney(str: string | undefined | null) {
-    if (str === undefined || str === null) return null;
-    return parseInt(str.replace(/[\D]+/g, ""));
-  }
-  function formatReal(number: number | undefined | null) {
-    let tmp = number + "";
-    tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
-    if (tmp.length > 6) tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
-
-    return tmp;
-  }
-
-  const valorFormatado = formatReal(getMoney(value || "0"));
+  const valorFormatado = formatReal(getMoney(value || ""));
 
   return (
     <Flex direction={"column"} w={"100%"}>
