@@ -1,35 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Flex,
-  Text,
-  Input,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalBody,
   ModalFooter,
-  NumberInput,
-  NumberInputField,
-  useBreakpointValue,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 
-// import Restricoes from "pages/Infographics/Components/Restricoes";
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
-import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
-// import SelectFiltragem from "components/SelectFiltragem";
+import { handleCancelar } from "utils/handleCadastro";
 
-// import PopOverRelacao from "./PopOverRelacao";
-
-// import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
-import DateTimePicker from "./DateTimePicker";
-
-// interface Responsavel {
-//   id: number;
-//   nome: string;
-// }
+import BotoesTabs from "./BotoesTabs";
+import EditarAtividadeTabAnotacoes from "./EditarAtividadeTabAnotacoes";
+import EditarAtividadeTabCamposPersonalizados from "./EditarAtividadeTabCamposPersonalizados";
+import EditarAtividadeTabGeral from "./EditarAtividadeTabGeral";
+import EditarAtividadeTabLicoesAprendidas from "./EditarAtividadeTabLicoesAprendidas";
+import EditarAtividadeTabMOC from "./EditarAtividadeTabMoc";
 
 interface EditOp {
   fim_planejado?: Date;
@@ -57,31 +49,20 @@ function ModalAdicionarOperacao({
   setRefresh,
   refresh,
   editOp,
-  isOpen,
   onClose,
-  registerForm,
+  isOpen,
   loading,
+  registerForm,
 }: Props) {
-  // const responsaveisOptions = listaResponsaveis.map(
-  //   (responsavel: Responsavel) => ({
-  //     value: responsavel.id,
-  //     label: responsavel.nome,
-  //   })
-  // );
-
-  // const areaAtuacaoOptions = listaAreaAtuacao.map((area: any) => ({
-  //   value: area.id,
-  //   label: area.tipo,
-  // }));
-
-  // console.log("registerForm", registerForm.values);
-  // console.log("editOp", editOp);
+  const [tabSelecionado, setTabSelecionado] = useState<any>(0);
+  const tab = {
+    tabSelecionado,
+    setTabSelecionado,
+  };
 
   useEffect(() => {
-    // console.log(">>>>editOp", editOp);
     registerForm.setFieldValue("id_atividade", editOp.id_atividade);
     registerForm.setFieldValue("nome_atividade", editOp.nome_atividade);
-    // registerForm.setFieldValue("id_responsavel", editOp.id_responsavel);
     registerForm.setFieldValue("inicio_planejado", editOp.inicio_planejado);
     registerForm.setFieldValue("inicio_realizado", editOp.inicio_realizado);
     registerForm.setFieldValue("fim_planejado", editOp.fim_planejado);
@@ -91,23 +72,40 @@ function ModalAdicionarOperacao({
     registerForm.setFieldValue("pct_real", editOp.pct_real);
   }, [editOp]);
 
+  // console.log("registerForm", registerForm.values);
+  // console.log("editOp", editOp);
+
+  // console.log("tabSelecionado", tabSelecionado);
+
+  function HandleTab() {
+    switch (true) {
+      case tabSelecionado === 0:
+        return <EditarAtividadeTabGeral registerForm={registerForm} />;
+
+      case tabSelecionado === 1:
+        return <EditarAtividadeTabAnotacoes registerForm={registerForm} />;
+
+      case tabSelecionado === 2:
+        return <EditarAtividadeTabMOC registerForm={registerForm} />;
+
+      case tabSelecionado === 3:
+        return (
+          <EditarAtividadeTabLicoesAprendidas registerForm={registerForm} />
+        );
+
+      case tabSelecionado === 4:
+        return (
+          <EditarAtividadeTabCamposPersonalizados registerForm={registerForm} />
+        );
+
+      default:
+        return <EditarAtividadeTabGeral registerForm={registerForm} />;
+    }
+  }
+
   return (
     <>
-      {/* <Button
-        h={"56px"}
-        borderRadius={"10px"}
-        background={"white"}
-        color={"origem.500"}
-        onClick={onOpen}
-        _hover={{
-          background: "origem.500",
-          transition: "all 0.4s",
-          color: "white",
-        }}
-      >
-        Editar Operação
-      </Button> */}
-      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="6xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -118,8 +116,12 @@ function ModalAdicionarOperacao({
             color={"white"}
             fontSize={"1em"}
           >
-            Editar Operação
+            Editar Atividade
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -127,6 +129,12 @@ function ModalAdicionarOperacao({
             }}
           >
             <ModalBody mt={3}>
+              <BotoesTabs tab={tab} />
+
+              <HandleTab />
+
+              {/*
+              MODAL ANTIGO - NÃO APAGUEI AINDA PARA CASO VOLTE AO QUE ERA ANTES, É SÓ DESCOMENTAR KKK
               <Flex
                 flexDirection={useBreakpointValue({
                   base: "column",
@@ -147,27 +155,6 @@ function ModalAdicionarOperacao({
                     </Flex>
                   </Flex>
                 </Flex>
-
-                {/* <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Responsável</Text>
-                  <Flex gap={5} flex={1}>
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"RESPONSÁVEL"}
-                      propName={"id_responsavel"}
-                      options={responsaveisOptions}
-                      required={true}
-                    />
-
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"ÁREA"}
-                      propName={"id_area"}
-                      options={areaAtuacaoOptions}
-                      required={true}
-                    />
-                  </Flex>
-                </Flex> */}
 
                 <Flex flex={1} direction={"column"}>
                   <Text fontWeight={"bold"}>Datas</Text>
@@ -234,18 +221,18 @@ function ModalAdicionarOperacao({
                     </Flex>
                   </Flex>
                 </Flex>
-              </Flex>
+              </Flex> */}
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoGhost
+                <BotaoVermelhoLargoGhost
                   text="Cancelar"
                   onClose={onClose}
                   formikForm={registerForm}
                 />
-                <BotaoAzulPrimary
-                  text="Concluir Cadastro"
+                <BotaoAzulLargoPrimary
+                  text="Concluir"
                   onClose={onClose}
                   formikForm={registerForm}
                   refresh={refresh}
