@@ -94,18 +94,17 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
 
   useEffect(() => {
     handleGetInitialValues();
-
-    initialValues.forEach((rank: any) => {
-      if (rank.id_ranking == 1) setBeneficio(rank.id_opcao);
-      if (rank.id_ranking == 2) setRegulatorio(rank.id_opcao);
-      if (rank.id_ranking == 3) setOperacao(rank.id_opcao);
-      if (rank.id_ranking == 4) setPrioridade(rank.id_opcao);
-      if (rank.id_ranking == 5) setComplexidade(rank.id_opcao);
-      if (rank.id_ranking == 6) setEstrategia(rank.id_opcao);
-    });
+    if (initialValues.length > 0) {
+      initialValues.forEach((rank: any) => {
+        if (rank.id_ranking == 1) setBeneficio(rank.id_opcao);
+        if (rank.id_ranking == 2) setRegulatorio(rank.id_opcao);
+        if (rank.id_ranking == 3) setOperacao(rank.id_opcao);
+        if (rank.id_ranking == 4) setPrioridade(rank.id_opcao);
+        if (rank.id_ranking == 5) setComplexidade(rank.id_opcao);
+        if (rank.id_ranking == 6) setEstrategia(rank.id_opcao);
+      });
+    }
   }, []);
-
-  console.log(initialValues);
 
   return (
     <>
