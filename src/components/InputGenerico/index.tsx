@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { Flex, Input, InputLeftAddon, Text } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
@@ -13,6 +15,7 @@ interface Props {
   placeholder?: string;
   type?: string;
   isNumeric?: boolean;
+  isDisabled?: boolean;
 }
 
 function InputGenerico({
@@ -25,6 +28,7 @@ function InputGenerico({
   maxLength,
   type,
   isNumeric,
+  isDisabled,
 }: Props) {
   function getMoney(str: string | undefined | null) {
     if (str === undefined || str === null) return null;
@@ -38,7 +42,10 @@ function InputGenerico({
     return tmp;
   }
 
-  const valorFormatado = formatReal(getMoney(value || "0"));
+  const [valorFormatado, setValorFormatado] = useState<any>("");
+  if (isNumeric) {
+    setValorFormatado(formatReal(getMoney(value || "0")));
+  }
 
   return (
     <Flex direction={"column"} w={"100%"}>
@@ -62,6 +69,7 @@ function InputGenerico({
             R$
           </InputLeftAddon>
           <Input
+            isDisabled={isDisabled}
             h={"56px"}
             placeholder={placeholder}
             type={"text"}
@@ -76,6 +84,7 @@ function InputGenerico({
         </Flex>
       ) : (
         <Input
+          isDisabled={isDisabled}
           h={"56px"}
           placeholder={placeholder}
           type={type || "text"}

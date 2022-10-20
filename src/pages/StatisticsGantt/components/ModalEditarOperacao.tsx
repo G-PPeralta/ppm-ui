@@ -55,6 +55,7 @@ function ModalAdicionarOperacao({
   registerForm,
 }: Props) {
   const [tabSelecionado, setTabSelecionado] = useState<any>(0);
+
   const tab = {
     tabSelecionado,
     setTabSelecionado,
@@ -131,7 +132,9 @@ function ModalAdicionarOperacao({
             <ModalBody mt={3}>
               <BotoesTabs tab={tab} />
 
-              <HandleTab />
+              <Flex flex={1} mt={5}>
+                <HandleTab />
+              </Flex>
 
               {/*
               MODAL ANTIGO - NÃO APAGUEI AINDA PARA CASO VOLTE AO QUE ERA ANTES, É SÓ DESCOMENTAR KKK
