@@ -84,7 +84,7 @@ function PaginacaoTabela({ data, fromTo }: Props) {
         wrap={innerWidth > 428 ? "nowrap" : "wrap"}
       >
         <Flex gap={2} alignItems={"center"}>
-          <Text fontSize={"14px"}>Per page:</Text>
+          <Text fontSize={"14px"}>Por página:</Text>
           <Select
             h={"32px"}
             w={"120px"}
