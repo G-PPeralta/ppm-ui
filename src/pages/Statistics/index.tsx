@@ -166,8 +166,8 @@ function Statistics() {
 
                 <Flex
                   gap={4}
-                  flex={1}
-                  justify={"start"}
+                  flex={2}
+                  justify={windowInnerWidth > 600 ? "end" : "start"}
                   align={"end"}
                   wrap={"wrap"}
                 >
