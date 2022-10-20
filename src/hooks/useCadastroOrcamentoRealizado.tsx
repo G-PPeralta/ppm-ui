@@ -5,7 +5,7 @@ import { BudgetReal, ClasseServico } from "interfaces/Budgets";
 import { Fornecedor } from "interfaces/Services";
 import { cadastroValorPlanejadoSchema } from "validations/ModalCadastroOrcamento";
 
-import { parserNumber } from "utils/regexCoinMask";
+import { parseNumber } from "utils/regexCoinMask";
 
 import { useToast } from "contexts/Toast";
 
@@ -49,7 +49,7 @@ export function useCadastroOrcamentoRealizado() {
     onSubmit: async (values) => {
       const newValues: BudgetReal = {
         atividadeId: atividade,
-        valor: +parserNumber(values.gasto),
+        valor: parseNumber(values.gasto),
         data: values.data,
         fornecedor: values.fornecedor,
         classeServico: values.servico,
@@ -63,16 +63,22 @@ export function useCadastroOrcamentoRealizado() {
         const { status } = await postAddValorRealizado(newValues);
 
         if (status === 200 || status === 201) {
-          toast.success(`Valor Gasto ${values.gasto} cadastrada com sucesso!`, {
-            id: "toast-principal",
-          });
+          toast.success(
+            `Valor Gasto ${parseNumber(values.gasto)} cadastrada com sucesso!`,
+            {
+              id: "toast-principal",
+            }
+          );
           setLoading(false);
           location.reload();
         }
       } catch (error) {
-        toast.error(`Erro ao cadastrar valor gasto ${values.gasto}!`, {
-          id: "toast-principal",
-        });
+        toast.error(
+          `Erro ao cadastrar valor gasto ${parseNumber(values.gasto)}!`,
+          {
+            id: "toast-principal",
+          }
+        );
         setLoading(false);
       }
     },

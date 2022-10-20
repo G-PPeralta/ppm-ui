@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 export const cadastroValorPrevistoSchema = yup.object({
-  previsto: yup.number().required("Valor Previsto é obrigatório"),
+  valor: yup.string().required("Valor Previsto é obrigatório"),
 });
 
 export const cadastroValorPlanejadoSchema = yup.object({

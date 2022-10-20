@@ -8,12 +8,13 @@ import {
   EditablePreview,
   Flex,
   IconButton,
-  Input,
   useEditableControls,
 } from "@chakra-ui/react";
 import { BudgetDetail } from "interfaces/Budgets";
 
-import { formatReal } from "utils/formatReal";
+import RealInput from "components/RealInput/input";
+
+import { formatReal as FormatPrint } from "utils/formatReal";
 
 import { postAatualizarValorPrevisto } from "services/post/Budget";
 
@@ -67,7 +68,7 @@ export default function CampoEditavel(props: { filho: BudgetDetail }) {
   return (
     <Editable
       textAlign="center"
-      defaultValue={formatReal(planejado)}
+      defaultValue={FormatPrint(planejado)}
       // fontSize="2xl"
       isPreviewFocusable={false}
       onSubmit={save}
@@ -75,7 +76,7 @@ export default function CampoEditavel(props: { filho: BudgetDetail }) {
       <Flex>
         <EditablePreview />
         {/* Here is the custom input */}
-        <Input as={EditableInput} type="number" />
+        <RealInput as={EditableInput} value={planejado.toString()} />
         <EditableControls />
       </Flex>
     </Editable>
