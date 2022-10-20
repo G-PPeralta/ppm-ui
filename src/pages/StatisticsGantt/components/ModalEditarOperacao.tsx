@@ -31,17 +31,37 @@ import DateTimePicker from "./DateTimePicker";
 //   nome: string;
 // }
 
+interface EditOp {
+  fim_planejado?: Date;
+  fim_realizado?: Date;
+  hrs_reais?: number;
+  hrs_totais?: number;
+  id_atividade?: number;
+  inicio_planejado?: Date;
+  inicio_realizado?: Date;
+  nome_atividade?: string;
+  pct_real?: number;
+}
+
+interface Props {
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: boolean;
+  editOp: EditOp;
+  onClose: () => void;
+  isOpen: boolean;
+  loading: boolean;
+  registerForm: any;
+}
+
 function ModalAdicionarOperacao({
   setRefresh,
   refresh,
   editOp,
-  listaResponsaveis,
-  listaAreaAtuacao,
   isOpen,
   onClose,
   registerForm,
   loading,
-}: any) {
+}: Props) {
   // const responsaveisOptions = listaResponsaveis.map(
   //   (responsavel: Responsavel) => ({
   //     value: responsavel.id,
@@ -53,6 +73,9 @@ function ModalAdicionarOperacao({
   //   value: area.id,
   //   label: area.tipo,
   // }));
+
+  // console.log("registerForm", registerForm.values);
+  // console.log("editOp", editOp);
 
   useEffect(() => {
     // console.log(">>>>editOp", editOp);
