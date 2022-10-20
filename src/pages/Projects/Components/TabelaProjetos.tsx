@@ -107,8 +107,8 @@ export function TabelaProjetos({ data }: TableProps) {
           ? (100 - (+projeto.vlr_cr / +projeto.vlr_orcado) * 100).toFixed(2)
           : 0
       } %`}</Td>
-      <Td textAlign={"center"}>{projeto.complexidade}</Td>
       <Td textAlign={"center"}>{projeto.prioridade}</Td>
+      <Td textAlign={"center"}>{projeto.complexidade}</Td>
       <Td textAlign={"center"}>{projeto.polo}</Td>
       <Td>{projeto.coordenador}</Td>
       <Td>{projeto.responsavel}</Td>
