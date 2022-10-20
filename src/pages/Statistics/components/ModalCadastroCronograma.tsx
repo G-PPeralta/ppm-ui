@@ -14,18 +14,23 @@ import {
   Text,
   NumberInput,
   NumberInputField,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
 
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
-import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 // import { RequiredField } from "components/RequiredField/RequiredField";
+
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
+
+import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroCronograma } from "hooks/useCadastroCronograma";
 
 import SelectFiltragem from "../../../components/SelectFiltragem";
 import AtividadesCadastroCronograma from "./AtividadesCadastroCronograma";
+
 // import { TextError } from "components/TextError";
 
 function ModalCadastroCronograma({ refresh, setRefresh }: any) {
@@ -84,6 +89,10 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
           >
             Novo Cronograma
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -183,12 +192,12 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoGhost
+                <BotaoVermelhoLargoGhost
                   text={"Cancelar"}
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                <BotaoAzulPrimary
+                <BotaoAzulLargoPrimary
                   text={"Cadastrar"}
                   formikForm={registerForm}
                   onClose={onClose}
