@@ -1,3 +1,4 @@
+import { IConfigProjetoDto } from "interfaces/ConfiguracaoProjeto";
 import { ProjetosList } from "interfaces/Services";
 
 import { api, token } from "services/api";
@@ -7,6 +8,19 @@ export async function getProjetos(): Promise<{
   status: number;
 }> {
   const { data, status } = await api.get("/projetos/listagem", {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
+    },
+  });
+
+  return { data, status };
+}
+
+export async function getProjeto(id: number): Promise<{
+  data: IConfigProjetoDto;
+  status: number;
+}> {
+  const { data, status } = await api.get(`/projetos/${id}`, {
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },

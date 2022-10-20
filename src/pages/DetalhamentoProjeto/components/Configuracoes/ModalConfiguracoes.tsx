@@ -1,3 +1,10 @@
+import {
+  // JSXElementConstructor,
+  // ReactElement,
+  // ReactFragment,
+  // ReactPortal,
+  useState,
+} from "react";
 import { IoMdPodium } from "react-icons/io";
 
 import {
@@ -17,13 +24,60 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import { IConfigProjetoDto } from "interfaces/ConfiguracaoProjeto";
+
+// import {
+//   getCoordenadores,
+//   getResponsaveis,
+// } from "services/get/CadastroModaisInfograficos";
+// import { getLocalProjeto, getPolo } from "services/get/Projetos";
+
+// interface ConfigProjetoProps {
+//   id: number;
+// }
 
 function ModalConfiguracoes() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [projeto] = useState<IConfigProjetoDto>();
+  const [responsavel] = useState(projeto?.responsavel);
+  const [coordenador] = useState(projeto?.coordenador);
+  const [polo] = useState(projeto?.polo);
+  const [local] = useState(projeto?.local);
+  const [nomeProjeto, setNomeProjeto] = useState(projeto?.nome_projeto);
+  const [elementoPep, setElementoPep] = useState(projeto?.elemento_pep);
+  // const [render] = useState(false);
+
+  // const handleGetProjeto = async () => {
+  //   const { data } = await getProjeto(id);
+  //   setProjeto(data);
+  // };
+
+  // useEffect(() => {
+  //   handleGetProjeto();
+  // }, [render]);
 
   const handleCancelar = () => {
     onClose();
   };
+
+  // OPTIONSS
+
+  // function getOptions(options: any) {
+  //   return options.map(
+  //     (option: {
+  //       value: string | number | readonly string[] | undefined;
+  //       label:
+  //         | string
+  //         | number
+  //         | boolean
+  //         | ReactElement<any, string | JSXElementConstructor<any>>
+  //         | ReactFragment
+  //         | ReactPortal
+  //         | null
+  //         | undefined;
+  //     }) => <option value={option.value}>{option.label}</option>
+  //   );
+  // }
 
   return (
     <>
@@ -75,47 +129,57 @@ function ModalConfiguracoes() {
                   gap={"16px"}
                 >
                   <FormControl w={"232px"}>
-                    <FormLabel htmlFor="categoria">
+                    <FormLabel htmlFor="responsavel">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         RESPONSÁVEL
                       </Text>
                     </FormLabel>
                     <Select
+                      required={true}
                       fontSize={"14px"}
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
                       mt={"-6px"}
                       height={"56px"}
                       borderRadius={"8px"}
-                      id="poloId"
-                      name="pole"
+                      id="responsavelId"
+                      name="responsavel"
                       width={"100%"}
-                      placeholder="Selecione"
+                      placeholder={responsavel?.nomeResponsavel}
+                      // onChange={(e) => {
+                      //   setReponsavel(e.target.value);
+                      // }}
                     >
-                      <option value="">Selecione</option>
+                      {/* {getOptions(getResponsaveis())} */}
                     </Select>
                   </FormControl>
+
                   <FormControl w={"232px"}>
-                    <FormLabel htmlFor="categoria">
+                    <FormLabel htmlFor="coordenador">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         COORDENADOR
                       </Text>
                     </FormLabel>
                     <Select
+                      required={true}
                       fontSize={"14px"}
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
                       mt={"-6px"}
                       height={"56px"}
                       borderRadius={"8px"}
-                      id="poloId"
-                      name="pole"
+                      id="coordenadorId"
+                      name="coordenador"
                       width={"100%"}
-                      placeholder="Selecione"
+                      placeholder={coordenador?.coordenadorNome}
+                      // onChange={(e) => {
+                      //   setCoordenador(e.target.value);
+                      // }}
                     >
-                      <option value="">Selecione</option>
+                      {/* {getOptions(getCoordenadores())} */}
                     </Select>
                   </FormControl>
+
                   <FormControl w={"232px"}>
                     <FormLabel htmlFor="categoria">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
@@ -160,18 +224,20 @@ function ModalConfiguracoes() {
                     </FormControl>
                   </Flex>
                 </Flex>
+
                 <Flex
                   flexDirection={{ base: "column", md: "row" }}
                   w={"75%"}
                   gap={"16px"}
                 >
                   <FormControl w={"232px"}>
-                    <FormLabel htmlFor="categoria">
+                    <FormLabel htmlFor="polo">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         POLO
                       </Text>
                     </FormLabel>
                     <Select
+                      required={true}
                       fontSize={"14px"}
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
@@ -179,32 +245,39 @@ function ModalConfiguracoes() {
                       height={"56px"}
                       borderRadius={"8px"}
                       id="poloId"
-                      name="pole"
+                      name="polo"
                       width={"100%"}
-                      placeholder="Selecione"
+                      placeholder={polo?.polo}
+                      // onChange={(e) => {
+                      //   setPolo(e.target.value);
+                      // }}
                     >
-                      <option value="">Selecione</option>
+                      {/* {getOptions(getPolo())} */}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
-                    <FormLabel htmlFor="categoria">
+                    <FormLabel htmlFor="local">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         LOCAL
                       </Text>
                     </FormLabel>
                     <Select
+                      required={true}
                       fontSize={"14px"}
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
                       mt={"-6px"}
                       height={"56px"}
                       borderRadius={"8px"}
-                      id="poloId"
-                      name="pole"
+                      id="localId"
+                      name="local"
                       width={"100%"}
-                      placeholder="Selecione"
+                      placeholder={local?.local}
+                      // onChange={(e) => {
+                      //   setLocal(e.target.value);
+                      // }}
                     >
-                      <option value="">Selecione</option>
+                      {/* {getOptions(getLocalProjeto())} */}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
@@ -235,7 +308,7 @@ function ModalConfiguracoes() {
                   gap={"16px"}
                 >
                   <FormControl w={"480px"}>
-                    <FormLabel htmlFor="categoria">
+                    <FormLabel htmlFor="nomeProjeto">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         NOME DO PROJETO
                       </Text>
@@ -252,12 +325,12 @@ function ModalConfiguracoes() {
                       height={"56px"}
                       id="nomeProjetoId"
                       name="nomeProjeto"
-                      placeholder={"Digite"}
-                      // onChange={(e) => setNomeProjeto(e.target.value)}
-                    />
+                      placeholder={nomeProjeto}
+                      onChange={(e) => setNomeProjeto(e.target.value)}
+                    ></Input>
                   </FormControl>
                   <FormControl w={"232px"}>
-                    <FormLabel htmlFor="categoria">
+                    <FormLabel htmlFor="elementoPep">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         ELEMENTO PEP
                       </Text>
@@ -274,9 +347,9 @@ function ModalConfiguracoes() {
                       height={"56px"}
                       id="elementoPepId"
                       name="elementoPep"
-                      placeholder={"Digite"}
-                      // onChange={(e) => setElementoPep(e.target.value)}
-                    />
+                      placeholder={elementoPep}
+                      onChange={(e) => setElementoPep(e.target.value)}
+                    ></Input>
                   </FormControl>
                 </Flex>
                 <Flex
