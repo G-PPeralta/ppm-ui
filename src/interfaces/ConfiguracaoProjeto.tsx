@@ -1,6 +1,7 @@
 import {
   Classificacao,
   Coordenador,
+  Divisao,
   Gate,
   LocalProjeto,
   Polo,
@@ -36,9 +37,9 @@ export interface IConfigProjetoDto {
   solicitacao: Solicitante;
   nome_projeto: string;
   elemento_pep: string;
-  data_inicio: Date | null;
-  data_fim: Date | null;
-  divisao: number;
+  data_inicio: string;
+  data_fim: string;
+  divisao: Divisao;
   classificacao: Classificacao;
   tipo: TipoProjeto;
   gate: Gate;
