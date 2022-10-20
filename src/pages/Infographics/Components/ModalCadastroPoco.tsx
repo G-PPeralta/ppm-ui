@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import {
   Flex,
   Modal,
@@ -28,10 +26,14 @@ import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroPoco } from "hooks/useCadastroPoco";
 
-function ModalCadastroPoco() {
+interface Props {
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function ModalCadastroPoco({ refresh, setRefresh }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroPoco();
-  const [refresh, setRefresh] = useState(false);
 
   return (
     <>

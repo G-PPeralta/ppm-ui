@@ -50,6 +50,9 @@ export function validateDate(
     case pct_plan > pct_real:
       return statusProjeto[3].color; // atrasado
 
+    case pct_real === 100:
+      return statusProjeto[4].color; // concluído
+
     case pct_real === 100 && comp_pct === 1:
       return statusProjeto[4].color; // concluído
 

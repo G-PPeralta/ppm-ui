@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import {
   Flex,
   Modal,
@@ -27,10 +25,14 @@ import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroSonda } from "hooks/useCadastroSonda";
 
-function ModalCadastrarSonda() {
+interface Props {
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function ModalCadastrarSonda({ refresh, setRefresh }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroSonda();
-  const [refresh, setRefresh] = useState(false);
 
   return (
     <>
