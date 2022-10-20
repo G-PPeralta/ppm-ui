@@ -164,7 +164,13 @@ function Statistics() {
                   </Flex>
                 </Flex>
 
-                <Flex gap={4} flex={1} justify={"end"} align={"end"}>
+                <Flex
+                  gap={4}
+                  flex={1}
+                  justify={"start"}
+                  align={"end"}
+                  wrap={"wrap"}
+                >
                   <ModalCadastrarSonda />
                   <ModalCadastroPoco />
                   <ModalCadastroOperacao
