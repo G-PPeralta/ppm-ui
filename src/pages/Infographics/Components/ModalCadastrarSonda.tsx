@@ -36,18 +36,19 @@ function ModalCadastrarSonda() {
     <>
       <Button
         h={"56px"}
-        borderRadius={"10px"}
-        background={"white"}
+        borderRadius={"8px"}
+        fontSize={"18px"}
+        fontWeight={"700"}
+        variant="outline"
         border={"2px solid"}
-        color={"origem.500"}
-        _hover={{
-          border: "2px solid",
-          borderColor: "origem.500",
-          background: "origem.500",
-          transition: "all 0.4s",
-          color: "white",
-        }}
+        borderColor={"origem.500"}
         textColor={"origem.500"}
+        _hover={{
+          borderColor: "origem.600",
+          backgroundColor: "origem.500",
+          textColor: "white",
+          transition: "all 0.4s",
+        }}
         onClick={onOpen}
       >
         Sonda
