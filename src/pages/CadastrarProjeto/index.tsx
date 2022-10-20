@@ -19,6 +19,7 @@ import Sidebar from "components/SideBar";
 import TextAreaGenerico from "components/TextAreaGenerico";
 
 import { handleCadastrarPagina } from "utils/handleCadastro";
+import { regexSomenteNumerosMonetario } from "utils/regex";
 
 import { useProjetos } from "hooks/useCadastroProjeto";
 
@@ -298,7 +299,11 @@ function CadastrarProjeto() {
                         registerForm={registerForm}
                         nomeInput={"CAPEX PREVISTO"}
                         propName={"capexPrevisto"}
-                        value={registerForm.values.capexPrevisto || ""}
+                        value={
+                          regexSomenteNumerosMonetario(
+                            registerForm.values.capexPrevisto
+                          ) || ""
+                        }
                         required={true}
                         placeholder={"0"}
                         maxLength={50}

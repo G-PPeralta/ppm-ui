@@ -84,15 +84,20 @@ function ModalAdicionarOperacao({
     <>
       <Button
         h={"56px"}
-        borderRadius={"10px"}
-        background={"white"}
-        color={"origem.500"}
-        onClick={onOpen}
+        borderRadius={"8px"}
+        fontSize={"18px"}
+        fontWeight={"700"}
+        variant="outline"
+        border={"2px solid"}
+        borderColor={"origem.500"}
+        textColor={"origem.500"}
         _hover={{
-          background: "origem.500",
+          borderColor: "origem.600",
+          backgroundColor: "origem.500",
+          textColor: "white",
           transition: "all 0.4s",
-          color: "white",
         }}
+        onClick={onOpen}
       >
         Adicionar Operação
       </Button>

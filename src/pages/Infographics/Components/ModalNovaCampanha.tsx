@@ -6,6 +6,7 @@ import {
   FormControl,
   Modal,
   ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -17,10 +18,12 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
-import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import SelectFiltragem from "components/SelectFiltragem";
 import { TextError } from "components/TextError";
+
+import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 
@@ -74,6 +77,10 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
           >
             Cadastrar Nova Campanha
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -147,13 +154,13 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoGhost
+                <BotaoVermelhoLargoGhost
                   text={"Cancelar"}
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                <BotaoAzulPrimary
-                  text={"Concluir Cadastro"}
+                <BotaoAzulLargoPrimary
+                  text={"Cadastrar"}
                   formikForm={registerForm}
                   onClose={onClose}
                   setRefresh={setRefresh}

@@ -79,7 +79,7 @@ function EditarPriorizacao(infosRanking: TableProps) {
             fontWeight={"700"}
             h={"48px"}
           >
-            Configuração
+            {`Editar Priorização ${infosRanking.nomeRanking}`}
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <form
@@ -118,8 +118,8 @@ function EditarPriorizacao(infosRanking: TableProps) {
                               ml={"3px"}
                               w={"93%"}
                               h={"56px"}
-                              fontSize={"14px"}
                               _placeholder={{ color: "black" }}
+                              fontSize={"14px"}
                               fontWeight={"400"}
                               border={"solid 1px #949494"}
                               isRequired

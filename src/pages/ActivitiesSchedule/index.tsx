@@ -118,13 +118,18 @@ export function ActivitiesSchedule() {
               </Flex>
             </Flex>
             <Flex gap={4} wrap={"wrap"} flex={1} justify={"end"}>
-              {statusProjeto.map((status, index) => (
-                <StatusProjeto
-                  key={index}
-                  status={status.status}
-                  color={status.color}
-                />
-              ))}
+              {statusProjeto.map((status, index) => {
+                if (index !== 5) {
+                  return (
+                    <StatusProjeto
+                      key={index}
+                      status={status.status}
+                      color={status.color}
+                    />
+                  );
+                }
+                return null;
+              })}
             </Flex>
 
             <Flex direction={"row"} gap={4} py={4} wrap={"wrap"}>

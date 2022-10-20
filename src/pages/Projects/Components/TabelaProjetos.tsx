@@ -54,7 +54,7 @@ export function TabelaProjetos({ data }: TableProps) {
     0
   );
 
-  // console.log(data);
+  // console.log({ data });
 
   const tableData = data.slice(from, to).map((projeto, key) => (
     <Tr key={key}>
@@ -75,35 +75,28 @@ export function TabelaProjetos({ data }: TableProps) {
         </Link>
       </Td>
       <Td textAlign={"center"}>
-        {projeto.vlr_cpi_corrigido >= 1 ? (
+        {projeto.vlr_cpi >= 1 ? (
           <Flex alignItems={"center"}>
             <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
-            <Text marginLeft="8px">
-              {" "}
-              {` CPI = ${projeto.vlr_cpi_corrigido}`}
-            </Text>
+            <Text marginLeft="8px"> {` CPI = ${projeto.vlr_cpi}`}</Text>
           </Flex>
         ) : (
           <Flex alignItems={"center"}>
             <BsFillXCircleFill color="red" fontSize={25} />{" "}
-            <Text marginLeft="8px">{` CPI = ${
-              projeto.vlr_cpi_corrigido ?? 0
-            }`}</Text>
+            <Text marginLeft="8px">{` CPI = ${projeto.vlr_cpi ?? 0}`}</Text>
           </Flex>
         )}
       </Td>
       <Td textAlign={"center"}>
-        {projeto.vlr_spi_corrigido >= 1 ? (
+        {projeto.vlr_spi == 1 ? (
           <Flex alignItems={"center"}>
             <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
-            <Text marginLeft="8px">{` SPI = ${projeto.vlr_spi_corrigido}`}</Text>
+            <Text marginLeft="8px">{` SPI = ${projeto.vlr_spi}`}</Text>
           </Flex>
         ) : (
           <Flex alignItems={"center"}>
             <BsFillXCircleFill color="red" fontSize={25} />{" "}
-            <Text marginLeft="8px">{` SPI = ${
-              projeto.vlr_spi_corrigido ?? 0
-            }`}</Text>
+            <Text marginLeft="8px">{` SPI = ${projeto.vlr_spi ?? 0}`}</Text>
           </Flex>
         )}
       </Td>

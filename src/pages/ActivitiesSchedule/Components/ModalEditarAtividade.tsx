@@ -69,7 +69,7 @@ function ModalEditarAtividade({
 
   const payload = {
     nom_usu_edit: user?.nome,
-    atividadeId: atividade.id_atividade,
+    atividadeId: atividade.id_filho,
     atividadeStatus,
     nome,
     responsavelId,
@@ -455,7 +455,7 @@ function ModalEditarAtividade({
                 }}
               >
                 <Text fontSize="16px" fontWeight={"bold"} mx={12}>
-                  Atualizar
+                  Concluir
                 </Text>
               </Button>
             </Flex>

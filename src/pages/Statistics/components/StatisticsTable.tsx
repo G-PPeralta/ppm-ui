@@ -36,6 +36,12 @@ export function StatisticsTable({ data }: Props) {
     setTo,
   };
 
+  const formatDecimal = (pct: any) => {
+    if (!pct || pct == "") return "0,00";
+    const toNumber = +pct;
+    return toNumber.toFixed(2).replace(".", ",");
+  };
+
   return (
     <Flex direction={"column"} w={"100%"}>
       <TableContainer mt={4} mb={3} borderRadius={"10px"} overflowX={"scroll"}>
@@ -107,7 +113,7 @@ export function StatisticsTable({ data }: Props) {
                     </Text>
                   </Td>
                   <Td textAlign={"center"} fontWeight={"semibold"}>
-                    <Text>{projeto.pct_real}</Text>
+                    <Text>{formatDecimal(projeto.pct_real)}</Text>
                   </Td>
                   <Td textAlign={"center"} fontWeight={"semibold"}>
                     {/* <IconButton

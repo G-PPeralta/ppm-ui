@@ -19,6 +19,10 @@ interface Props {
 }
 
 function AccordionArea({ area }: Props) {
+  function primeiraLetraMaiuscula(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  }
+
   return (
     <Accordion allowMultiple w={"100%"} m={0}>
       <AccordionItem>
@@ -38,8 +42,8 @@ function AccordionArea({ area }: Props) {
                 justify={"center"}
                 h={"auto"}
               >
-                <Text fontSize="lg" mr={5} fontWeight={600}>
-                  {area.area}
+                <Text fontSize="md" mr={5} fontWeight={600}>
+                  {primeiraLetraMaiuscula(area.area)}
                 </Text>
               </Flex>
               <Flex

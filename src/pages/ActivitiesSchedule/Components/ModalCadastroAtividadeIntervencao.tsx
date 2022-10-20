@@ -13,15 +13,17 @@ import {
   Button,
   useBreakpointValue,
   Input,
+  ModalCloseButton,
 } from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
 
 import Restricoes from "pages/Infographics/Components/Restricoes";
 
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
-import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
+import { handleCancelar } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividadeIntervencao } from "hooks/useCadastroAtividadeIntervencao";
@@ -101,6 +103,10 @@ function ModalCadastroAtividadeIntervencao({
           >
             Cadastrar Atividade de Intervenção
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -234,48 +240,19 @@ function ModalCadastroAtividadeIntervencao({
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <Button
-                  h={"56px"}
-                  borderRadius={"10px"}
-                  variant="ghost"
-                  color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
-                  _hover={{
-                    background: "red.500",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  h={"56px"}
-                  borderRadius={"10px"}
-                  disabled={!registerForm.isValid || !registerForm.dirty}
-                  background="origem.300"
-                  variant="primary"
-                  color="white"
-                  onClick={() =>
-                    handleCadastrarRefresh(
-                      registerForm,
-                      onClose,
-                      setRefresh,
-                      refresh
-                    )
-                  }
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                  }}
-                >
-                  {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Concluir Cadastro</Text>
-                    </>
-                  )}
-                </Button>
+                <BotaoVermelhoLargoGhost
+                  text={"Cancelar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                />
+                <BotaoAzulLargoPrimary
+                  text={"Cadastrar"}
+                  formikForm={registerForm}
+                  onClose={onClose}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                  loading={loading}
+                />
               </Flex>
             </ModalFooter>
           </form>

@@ -18,6 +18,8 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
+  ModalCloseButton,
+  Button,
   // Progress,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
@@ -26,10 +28,11 @@ import {
   ProjetoTipo,
 } from "interfaces/CadastrosModaisInfograficos";
 
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
-import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 
 import { formatDate } from "utils/formatDate";
+import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
@@ -63,6 +66,7 @@ function ModalCadastroIntervencao({
   const [dataLimite, setDataLimite] = useState<any>("");
   // const [valueProgressoMensagemErro, setValueProgressoMensagemErro] =
   //   useState<any>(100);
+  const [dataFinalPrevista, setDataFinalPrevista] = useState<any>("");
 
   const innerWidth = window.innerWidth;
 
@@ -140,6 +144,30 @@ function ModalCadastroIntervencao({
     } else {
       registerForm.setFieldValue("erroDataIntervencao", false);
     }
+
+    const quantidadeDias = registerForm.values.atividades.reduce(
+      (acc: number, atividade: any) => acc + atividade.qtde_dias,
+      0
+    );
+
+    const dataInicio = new Date(registerForm.values.dat_ini_prev);
+    const dataLimite = new Date(registerForm.values.data_limite);
+
+    // PEGAR DATA DE FIM PREVISTA (DATA INICIO + QUANTIDADE DE DIAS)
+    const dataFimPrevista = new Date(
+      dataInicio.setDate(dataInicio.getDate() + quantidadeDias)
+    );
+
+    setDataFinalPrevista(dataFimPrevista);
+
+    // console.log("dataInicio", dataInicio);
+    // console.log("dataLimite", dataLimite);
+    // console.log("dataFimPrevista", dataFimPrevista);
+    // console.log("condicional", dataFimPrevista > dataLimite);
+
+    if (dataFimPrevista > dataLimite) {
+      registerForm.setFieldValue("erroDataIntervencao", true);
+    }
   };
 
   useEffect(() => {
@@ -169,6 +197,7 @@ function ModalCadastroIntervencao({
     registerForm.values.dat_ini_prev,
     registerForm.values.projeto_tipo_id,
     registerForm.values.poco_id,
+    registerForm.values.atividades,
   ]);
 
   useEffect(() => {
@@ -221,6 +250,8 @@ function ModalCadastroIntervencao({
   //   }, 1000);
   // }, [valueProgressoMensagemErro]);
 
+  // console.log("registerForm", registerForm.values);
+
   return (
     <>
       <Flex
@@ -270,6 +301,10 @@ function ModalCadastroIntervencao({
           >
             Cadastrar Nova Intervenção/Perfuração
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -311,7 +346,7 @@ function ModalCadastroIntervencao({
                       </Flex>
                     </Stack>
 
-                    <Stack>
+                    <Flex justify={"space-between"}>
                       <Flex flexDirection={"row"} gap={4} w={"50%"}>
                         <SelectFiltragem
                           registerForm={registerForm}
@@ -321,7 +356,29 @@ function ModalCadastroIntervencao({
                           required={true}
                         />
                       </Flex>
-                    </Stack>
+                      {dataFinalPrevista !== "" && (
+                        <Flex direction={"column"}>
+                          <Flex gap={1}>
+                            <Text
+                              fontWeight={"bold"}
+                              fontSize={"12px"}
+                              color={"#949494"}
+                            >
+                              DATA FINAL PREVISTA
+                            </Text>
+                          </Flex>
+                          <Button
+                            isDisabled={true}
+                            h={"56px"}
+                            variant="outline"
+                            px={5}
+                            minW={"220px"}
+                          >
+                            {formatDate(dataFinalPrevista)}
+                          </Button>
+                        </Flex>
+                      )}
+                    </Flex>
 
                     {registerForm.values.erroDataIntervencao && (
                       <Flex direction={"column"}>
@@ -382,13 +439,13 @@ function ModalCadastroIntervencao({
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoGhost
+                <BotaoVermelhoLargoGhost
                   text={"Cancelar"}
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                <BotaoAzulPrimary
-                  text={"Concluir Cadastro"}
+                <BotaoAzulLargoPrimary
+                  text={"Cadastrar"}
                   formikForm={registerForm}
                   onClose={onClose}
                   setRefresh={setRefresh}

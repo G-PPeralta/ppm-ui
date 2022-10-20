@@ -1,3 +1,4 @@
+import { BiSearch } from "react-icons/bi";
 import { IoMdArrowDropdown } from "react-icons/io";
 
 import {
@@ -14,10 +15,10 @@ import {
   Input,
   useBreakpointValue,
   Text,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 
-import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
-
+import { handleCancelar } from "utils/handleCadastro";
 import { statusProjeto } from "utils/validateDate";
 
 import { postGetInfoCampanha } from "services/get/Infograficos";
@@ -129,6 +130,10 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
           >
             Filtros
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <ModalBody mt={4}>
             <FormControl>
               <Flex direction={"column"} gap={5}>
@@ -272,19 +277,14 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
           </ModalBody>
           <ModalFooter display={"flex"} justifyContent={"center"}>
             <Flex gap={2}>
-              <BotaoVermelhoGhost
-                text={"Cancelar"}
-                formikForm={registerForm}
-                onClose={onClose}
-              />
               <Button
                 h={"56px"}
                 borderRadius={"10px"}
                 variant="ghost"
-                color={"origem.500"}
+                color="red"
                 onClick={() => registerForm.resetForm()}
                 _hover={{
-                  background: "origem.500",
+                  background: "red.500",
                   transition: "all 0.4s",
                   color: "white",
                 }}
@@ -294,7 +294,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
               <Button
                 h={"56px"}
                 borderRadius={"10px"}
-                background="origem.500"
+                background={"origem.300"}
                 variant="primary"
                 color="white"
                 onClick={() => handleFiltrarCampanhas()}
@@ -303,7 +303,12 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                   transition: "all 0.4s",
                 }}
               >
-                Filtrar
+                <Flex mx={12} gap={2}>
+                  <Text fontSize="16px" fontWeight={"bold"}>
+                    Filtrar
+                  </Text>
+                  <BiSearch size={20} />
+                </Flex>
               </Button>
             </Flex>
           </ModalFooter>

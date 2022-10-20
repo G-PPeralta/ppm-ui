@@ -96,7 +96,7 @@ export function TabelaServicos(props: TableProps) {
       <TableContainer mt={4} mb={3} ml={1} width="100%">
         <Table variant="unstyled" size={"sm"}>
           <Thead>
-            <Tr backgroundColor={"blue"} color="white">
+            <Tr backgroundColor={"#0047BB"} color="white">
               <Th
                 colSpan={7}
                 borderTopRightRadius={"10px"}
@@ -128,7 +128,7 @@ export function TabelaServicos(props: TableProps) {
                 </Flex>
               </Th>
             </Tr>
-            <Tr backgroundColor={"rgb(46, 105, 253)"} color="white">
+            <Tr backgroundColor={"#0047BB"} color="white">
               {dias &&
                 dias.map(function (x) {
                   return <Th>{`${x.diaLabel}`}</Th>;
@@ -151,7 +151,7 @@ export function TabelaServicos(props: TableProps) {
             </Tr>
           </Tbody>
           <Tfoot>
-            <Tr backgroundColor={"blue"} color="white">
+            <Tr backgroundColor={"#0047BB"} color="white">
               {dias &&
                 servicosData &&
                 dias.map(function (dia, key) {
