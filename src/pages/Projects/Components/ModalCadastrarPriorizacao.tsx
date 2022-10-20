@@ -57,9 +57,10 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
     ranking,
   } = useCadastroPriorizacao(projeto.projeto);
 
-  async function handleGetInitialValues() {
-    const response = await getInitialRaking(registerForm.values.id_projeto);
+  async function handleGetInitialValues(id: any) {
+    const response = await getInitialRaking(id);
     setInitialValues(response.data);
+    // console.log(response.data);
   }
 
   useEffect(() => {
@@ -68,8 +69,6 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
   }, [ranking]);
 
   useEffect(() => {
-    registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
-
     registerForm.setFieldValue(
       "regulatorio.id_ranking",
       Number(listaRegulatorio[0]?.id)
@@ -93,23 +92,45 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
   }, [registerForm.values]);
 
   useEffect(() => {
-    handleGetInitialValues();
-    if (initialValues.length > 0) {
-      initialValues.forEach((rank: any) => {
-        if (rank.id_ranking == 1) setBeneficio(rank.id_opcao);
-        if (rank.id_ranking == 2) setRegulatorio(rank.id_opcao);
-        if (rank.id_ranking == 3) setOperacao(rank.id_opcao);
-        if (rank.id_ranking == 4) setPrioridade(rank.id_opcao);
-        if (rank.id_ranking == 5) setComplexidade(rank.id_opcao);
-        if (rank.id_ranking == 6) setEstrategia(rank.id_opcao);
-      });
+    registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
+
+    if (registerForm.values.id_projeto !== 0) {
+      // handleGetInitialValues(registerForm.values.id_projeto);
+      // console.log(initialValues);
+
+      if (initialValues.length > 0) {
+        initialValues.forEach((rank: any) => {
+          if (rank.id_ranking == 0) setBeneficio(rank.id_opcao);
+          if (rank.id_ranking == 2) setRegulatorio(rank.id_opcao);
+          if (rank.id_ranking == 3) setOperacao(rank.id_opcao);
+          if (rank.id_ranking == 4) setPrioridade(rank.id_opcao);
+          if (rank.id_ranking == 5) setComplexidade(rank.id_opcao);
+          if (rank.id_ranking == 6) setEstrategia(rank.id_opcao);
+        });
+      }
     }
-  }, []);
+  }, [initialValues]);
+
+  const handleClick = () => {
+    onOpen();
+
+    handleGetInitialValues(registerForm.values.id_projeto);
+    // if (initialValues.length > 0) {
+    //   initialValues.forEach((rank: any) => {
+    //     if (rank.id_ranking == 0) setBeneficio(rank.id_opcao);
+    //     if (rank.id_ranking == 2) setRegulatorio(rank.id_opcao);
+    //     if (rank.id_ranking == 3) setOperacao(rank.id_opcao);
+    //     if (rank.id_ranking == 4) setPrioridade(rank.id_opcao);
+    //     if (rank.id_ranking == 5) setComplexidade(rank.id_opcao);
+    //     if (rank.id_ranking == 6) setEstrategia(rank.id_opcao);
+    //   });
+    // }
+  };
 
   return (
     <>
       <IconButton
-        onClick={onOpen}
+        onClick={handleClick}
         color={"origem.500"}
         backgroundColor={"transparent"}
         aria-label="Plus sign"
