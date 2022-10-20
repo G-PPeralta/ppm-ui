@@ -171,8 +171,14 @@ function Statistics() {
                   align={"end"}
                   wrap={"wrap"}
                 >
-                  <ModalCadastrarSonda />
-                  <ModalCadastroPoco />
+                  <ModalCadastrarSonda
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
+                  <ModalCadastroPoco
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
                   <ModalCadastroOperacao
                     refresh={refresh}
                     setRefresh={setRefresh}
