@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import { cadastroNovaDespesa } from "validations/Financeiro";
 
+import { parseNumber } from "utils/regexCoinMask";
+
 import { useToast } from "contexts/Toast";
 
 import { postCadastroDespesa } from "services/post/Financeiro";
@@ -30,7 +32,7 @@ export function useCentroDeCusto(id?: number, metodo?: string) {
     onSubmit: async (values) => {
       const newValues = {
         user: user?.nome,
-        valor: values.valor,
+        valor: parseNumber(values.valor),
         data: values.data,
         prestadorServicoId: values.prestadorServicoId,
         classeDeServicoId: values.classeDeServicoId,
