@@ -5,6 +5,9 @@ import { Box, Button, Flex, Heading, Input, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { StatisticsTableData } from "interfaces/Services";
 
+import ModalCadastrarSonda from "pages/Infographics/Components/ModalCadastrarSonda";
+import ModalCadastroPoco from "pages/Infographics/Components/ModalCadastroPoco";
+
 import Sidebar from "components/SideBar";
 
 import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
@@ -162,8 +165,8 @@ function Statistics() {
                 </Flex>
 
                 <Flex gap={4} flex={1} justify={"end"} align={"end"}>
-                  {/* <ModalCadastrarSonda /> */}
-                  {/* <ModalCadastroPoco /> */}
+                  <ModalCadastrarSonda />
+                  <ModalCadastroPoco />
                   <ModalCadastroOperacao
                     refresh={refresh}
                     setRefresh={setRefresh}
