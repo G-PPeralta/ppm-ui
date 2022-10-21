@@ -13,102 +13,75 @@ interface Props {
 const data = [
   {
     id: 1,
-    tarefa: "Tarefa 1",
-    atividadeRelacionada: "Atividade 1",
-    dataInicio: "01/01/2021",
-    descricao: "Descrição 1",
-    responsavel: "Responsável 1",
-    status: "Status 1",
+    licaoAprendida: "Lição 1",
+    data: "01/01/2021",
+    acaoERecomendacao: "Ação 1 e Recomendação 1",
   },
   {
     id: 2,
-    tarefa: "Tarefa 2",
-    atividadeRelacionada: "Atividade 2",
-    dataInicio: "01/01/2021",
-    descricao: "Descrição 2",
-    responsavel: "Responsável 2",
-    status: "Status 2",
+    licaoAprendida: "Lição 2",
+    data: "01/01/2021",
+    acaoERecomendacao: "Ação 2 e Recomendação 2",
   },
   {
     id: 3,
-    tarefa: "Tarefa 3",
-    atividadeRelacionada: "Atividade 3",
-    dataInicio: "01/01/2021",
-    descricao: "Descrição 3",
-    responsavel: "Responsável 3",
-    status: "Status 3",
+    licaoAprendida: "Lição 3",
+    data: "01/01/2021",
+    acaoERecomendacao: "Ação 3 e Recomendação 3",
   },
   {
     id: 4,
-    tarefa: "Tarefa 4",
-    atividadeRelacionada: "Atividade 4",
-    dataInicio: "01/01/2021",
-    descricao: "Descrição 4",
-    responsavel: "Responsável 4",
-    status: "Status 4",
+    licaoAprendida: "Lição 4",
+    data: "01/01/2021",
+    acaoERecomendacao: "Ação 4 e Recomendação 4",
   },
   {
     id: 5,
-    tarefa: "Tarefa 5",
-    atividadeRelacionada: "Atividade 5",
-    dataInicio: "01/01/2021",
-    descricao: "Descrição 5",
-    responsavel: "Responsável 5",
-    status: "Status 5",
+    licaoAprendida: "Lição 5",
+    data: "01/01/2021",
+    acaoERecomendacao: "Ação 5 e Recomendação 5",
   },
   {
     id: 6,
-    tarefa: "Tarefa 6",
-    atividadeRelacionada: "Atividade 6",
-    dataInicio: "01/01/2021",
-    descricao: "Descrição 6",
-    responsavel: "Responsável 6",
-    status: "Status 6",
+    licaoAprendida: "Lição 6",
+    data: "01/01/2021",
+    acaoERecomendacao: "Ação 6 e Recomendação 6",
   },
   {
     id: 7,
-    tarefa: "Tarefa 7",
-    atividadeRelacionada: "Atividade 7",
-    dataInicio: "01/01/2021",
-    descricao: "Descrição 7",
-    responsavel: "Responsável 7",
-    status: "Status 7",
+    licaoAprendida: "Lição 7",
+    data: "01/01/2021",
+    acaoERecomendacao: "Ação 7 e Recomendação 7",
   },
   {
     id: 8,
-    tarefa: "Tarefa 8",
-    atividadeRelacionada: "Atividade 8",
-    dataInicio: "01/01/2021",
-    descricao: "Descrição 8",
-    responsavel: "Responsável 8",
-    status: "Status 8",
+    licaoAprendida: "Lição 8",
+    data: "01/01/2021",
+    acaoERecomendacao: "Ação 8 e Recomendação 8",
   },
   {
     id: 9,
-    tarefa: "Tarefa 9",
-    atividadeRelacionada: "Atividade 9",
-    dataInicio: "01/01/2021",
-    descricao: "Descrição 9",
-    responsavel: "Responsável 9",
-    status: "Status 9",
+    licaoAprendida: "Lição 9",
+    data: "01/01/2021",
+    acaoERecomendacao: "Ação 9 e Recomendação 9",
   },
   {
     id: 10,
-    tarefa: "Tarefa 10",
-    atividadeRelacionada: "Atividade 10",
-    dataInicio: "01/01/2021",
-    descricao: "Descrição 10",
-    responsavel: "Responsável 10",
-    status: "Status 10",
+    licaoAprendida: "Lição 10",
+    data: "01/01/2021",
+    acaoERecomendacao: "Ação 10 e Recomendação 10",
   },
   {
     id: 11,
-    tarefa: "Tarefa 11",
-    atividadeRelacionada: "Atividade 11",
-    dataInicio: "01/01/2021",
-    descricao: "Descrição 11",
-    responsavel: "Responsável 11",
-    status: "Status 11",
+    licaoAprendida: "Lição 11",
+    data: "01/01/2021",
+    acaoERecomendacao: "Ação 11 e Recomendação 11",
+  },
+  {
+    id: 12,
+    licaoAprendida: "Lição 12",
+    data: "01/01/2021",
+    acaoERecomendacao: "Ação 12 e Recomendação 12",
   },
 ];
 
@@ -126,17 +99,14 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
 
   const header = [
     "ID",
-    "TAREFA",
-    "ATIVIDADE RELACIONADA",
+    "LIÇÃO APRENDIDA",
     "DATA",
-    "DESCRIÇÃO",
-    "RESPONSÁVEL",
-    "STATUS",
+    "AÇÕES E RECOMENDAÇÕES",
     "AÇÕES",
   ];
 
-  const handleDeletar = (id: number, tarefa: string) => {
-    toast.success(`${tarefa} deletada com sucesso!`, {
+  const handleDeletar = (id: number, licao: string) => {
+    toast.success(`${licao} deletada com sucesso!`, {
       id: "toast-principal",
     });
   };
@@ -155,22 +125,13 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
                   <Text>{linhaTabela.id}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.tarefa}</Text>
+                  <Text>{linhaTabela.licaoAprendida}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.atividadeRelacionada}</Text>
+                  <Text>{linhaTabela.data}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.dataInicio}</Text>
-                </Td>
-                <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.descricao}</Text>
-                </Td>
-                <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.responsavel}</Text>
-                </Td>
-                <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.status}</Text>
+                  <Text>{linhaTabela.acaoERecomendacao}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Flex gap={2} align={"center"} justify={"center"}>
@@ -191,7 +152,10 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
                         color: "white",
                       }}
                       onClick={() =>
-                        handleDeletar(linhaTabela.id, linhaTabela.tarefa)
+                        handleDeletar(
+                          linhaTabela.id,
+                          linhaTabela.licaoAprendida
+                        )
                       }
                     />
                   </Flex>
@@ -215,8 +179,10 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
     <Flex w={"100%"} direction={"column"} gap={2}>
       <FiltragemTabela
         dadosTabela={data}
-        nomeLabel={"Tarefa"}
+        nomeLabel={"Lição Aprendida"}
+        placeholder={"Digite a lição aprendida"}
         setTabelaFiltrada={setTabelaFiltrada}
+        propName={"licaoAprendida"}
       />
       <TabelaGenerica
         maxHeight={"352px"}
