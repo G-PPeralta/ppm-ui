@@ -1,10 +1,8 @@
-// import { useEffect, useState } from "react";
 import { useRef, useState } from "react";
-// import { CSVLink } from "react-csv";
-import { AiFillPrinter } from "react-icons/ai";
-// import { FaFileCsv } from "react-icons/fa";
+import { FaFilePdf } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
-import ReactToPrint from "react-to-print";
+// @ts-ignore
+import Pdf from "react-to-pdf";
 
 import {
   Box,
@@ -26,6 +24,7 @@ import { GraficoCIPComponent } from "./components/ParaCIP";
 import { GraficoSPTComponent } from "./components/ParaSPT";
 import { GraficoPorCadaIntervencaoComponent } from "./components/PorCadaIntervencao";
 import { GraficoPorDuracaoComponent } from "./components/PorDuracao";
+// import { GraficoSPT } from "./graficos/ParaSPT";
 
 export function GráficosEstatisticos() {
   const [graphic, setGraphic] = useState("0");
@@ -142,16 +141,21 @@ export function GráficosEstatisticos() {
                     </FormControl>
                   </Flex>
                   <Flex>
-                    <ReactToPrint
-                      trigger={() => (
+                    <Pdf
+                      targetRef={componentRef.current}
+                      filename="code-example.pdf"
+                    >
+                      {/* @ts-ignore */}
+                      {({ toPdf }) => (
                         <Button
                           // width={"77px"}
+                          onClick={toPdf}
                           height={"23px"}
                           variant="ghost"
                           fontSize={"18px"}
                           fontWeight={"700"}
                           color={"#0047BB"}
-                          rightIcon={<AiFillPrinter />}
+                          rightIcon={<FaFilePdf />}
                           _hover={{
                             background: "white",
                             color: "#0047BB",
@@ -162,8 +166,7 @@ export function GráficosEstatisticos() {
                           Exportar
                         </Button>
                       )}
-                      content={() => componentRef.current}
-                    />
+                    </Pdf>
                   </Flex>
                 </Flex>
                 <Flex flexDir={"column"} gap={6}>
