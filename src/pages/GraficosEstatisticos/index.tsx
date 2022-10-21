@@ -269,13 +269,13 @@ export function GráficosEstatisticos() {
                         <Button
                           h={"56px"}
                           // w={"98px"}
-                          background={"#0047BB"}
+                          background={"origem.500"}
                           border={"2.3px solid"}
                           color={"white"}
                           variant="primary"
                           _hover={{
-                            background: "white",
-                            color: "#0047BB",
+                            background: "origem.600",
+                            color: "white",
                             transition: "all 0.4s",
                           }}
                           rightIcon={<FiPlus />}
