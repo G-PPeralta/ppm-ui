@@ -143,7 +143,7 @@ export function GráficosEstatisticos() {
                   <Flex>
                     <Pdf
                       targetRef={componentRef.current}
-                      filename="code-example.pdf"
+                      filename="grafico-x.pdf"
                     >
                       {/* @ts-ignore */}
                       {({ toPdf }) => (
