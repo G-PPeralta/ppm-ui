@@ -22,6 +22,8 @@ import {
 import Sidebar from "components/SideBar";
 
 import { GraficoNPTPorPeriodoSPT } from "./components/NPTPorPeriodoSPT";
+import { GraficoCIP } from "./components/ParaCIP";
+import { GraficoSPT } from "./components/ParaSPT";
 import { GraficoPorCadaIntervencao } from "./components/PorCadaIntervencao";
 import { GraficoPorDuracao } from "./components/PorDuracao";
 
@@ -40,6 +42,8 @@ export function GráficosEstatisticos() {
     { name: "Histórico de durações", value: "1" },
     { name: "Relatório de cada intervenção", value: "2" },
     { name: "Relatório Tempo NPT por período / SPT", value: "3" },
+    { name: "Relatório para cada SPT", value: "4" },
+    { name: "Relatório para a CIP", value: "5" },
   ];
 
   // function Props() {
@@ -78,6 +82,8 @@ export function GráficosEstatisticos() {
         {graphic == "1" && <GraficoPorDuracao />}
         {graphic == "2" && <GraficoPorCadaIntervencao />}
         {graphic == "3" && <GraficoNPTPorPeriodoSPT />}
+        {graphic == "4" && <GraficoSPT />}
+        {graphic == "5" && <GraficoCIP />}
       </>
     );
   }
