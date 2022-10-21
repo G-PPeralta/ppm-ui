@@ -327,14 +327,14 @@ export function GraficoPorDuracao() {
               </FormControl>
             </Flex>
 
-            <Flex alignItems={"flex-end"}>
+            <Flex alignItems={"flex-end"} border={"red 2px solid"}>
               <FormControl>
                 <FormLabel htmlFor="base">
                   <Text fontSize={"12px"} color={"#949494"} fontWeight={"700"}>
                     BASE DA ZONA INTERVIDA MAIS PROFUNDA
                   </Text>
                 </FormLabel>
-                <Input
+                {/* <Input
                   placeholder="Base da zona intervida mais profunda"
                   mt={"-9px"}
                   id="base"
@@ -346,6 +346,35 @@ export function GraficoPorDuracao() {
                   fontSize={"14px"}
                   fontWeight={"400"}
                   _placeholder={{ color: "black" }}
+                /> */}
+                <Input
+                  mr={4}
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  _placeholder={{ color: "#2D2926" }}
+                  mt={"-6px"}
+                  id="ate"
+                  name="ate"
+                  width={"146px"}
+                  height={"56px"}
+                  borderRadius={"8px"}
+                  type={"date"}
+                  max="9999-12-31"
+                  maxLength={1}
+                />
+                <Input
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  _placeholder={{ color: "#2D2926" }}
+                  mt={"-6px"}
+                  id="ate"
+                  name="ate"
+                  width={"146px"}
+                  height={"56px"}
+                  borderRadius={"8px"}
+                  type={"date"}
+                  max="9999-12-31"
+                  maxLength={1}
                 />
               </FormControl>
             </Flex>
