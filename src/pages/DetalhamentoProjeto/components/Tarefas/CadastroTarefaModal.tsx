@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 
@@ -24,9 +24,11 @@ import {
 } from "@chakra-ui/react";
 import { AtividadesProjeto } from "interfaces/Services";
 
-import { useAuth } from "hooks/useAuth";
+import { RequiredField } from "components/RequiredField/RequiredField";
 
-import { postTarefa } from "services/post/AdicionarTarefa";
+import { handleCancelar, handleCadastrar } from "utils/handleCadastro";
+
+import { useModalCadastroTarefa } from "hooks/useModalCadastroTarefa";
 
 interface CadastroTarefaProps {
   isModalOpen: any;
@@ -41,14 +43,16 @@ function CadastroTarefasModal({
   atividadesProjeto,
   newRender,
 }: CadastroTarefaProps) {
-  // const { onClose } = useDisclosure();
-  const { user } = useAuth();
   const { id } = useParams();
-  const [nome, setNome] = useState("");
-  const [data, setData] = useState("");
-  const [atividade, setAtividade] = useState("");
-  const [responsavel, setResponsavel] = useState("");
-  const [descricao, setDescricao] = useState("");
+
+  // const { onClose } = useDisclosure();
+
+  const { registerForm, setAtividade } = useModalCadastroTarefa(
+    newRender,
+    closeModal
+  );
+
+  useEffect(() => setAtividade(id), [id]);
 
   const regex = /[^\w\s]/gi;
 
@@ -117,7 +121,7 @@ function CadastroTarefasModal({
                   fontWeight="700"
                   mt={"6px"}
                 >
-                  TAREFA
+                  TAREFA <RequiredField />
                 </FormLabel>
                 <Input
                   maxLength={50}
@@ -134,8 +138,8 @@ function CadastroTarefasModal({
                   type="text"
                   id="nomeTarefa"
                   name="nomeTarefa"
-                  value={nome.replace(regex, "")}
-                  onChange={(event) => setNome(event.target.value)}
+                  value={registerForm.values.nomeTarefa.replace(regex, "")}
+                  onChange={registerForm.handleChange}
                 />
               </Flex>
               <Flex flexDir={"column"} flexGrow={1}>
@@ -146,7 +150,7 @@ function CadastroTarefasModal({
                   fontWeight="700"
                   mt={"6px"}
                 >
-                  DATA
+                  DATA <RequiredField />
                 </FormLabel>
                 <Input
                   fontSize={"14px"}
@@ -161,8 +165,8 @@ function CadastroTarefasModal({
                   id="data"
                   type="date"
                   name="data"
-                  value={data}
-                  onChange={(event) => setData(event.target.value)}
+                  value={registerForm.values.data}
+                  onChange={registerForm.handleChange}
                 />
               </Flex>
             </FormControl>
@@ -194,9 +198,10 @@ function CadastroTarefasModal({
                   height={"56px"}
                   id="atividadeRel"
                   name="atividadeRel"
-                  onChange={(event) => setAtividade(event.target.value)}
+                  placeholder="Selecione"
+                  value={registerForm.values.atividadeRel}
+                  onChange={registerForm.handleChange}
                 >
-                  <option value="">Selecione</option>
                   {atividadesProjeto.map((atividade, index) => (
                     <option value={atividade.nom_atividade} key={index}>
                       {atividade.nom_atividade}
@@ -212,7 +217,7 @@ function CadastroTarefasModal({
                   fontWeight="700"
                   mt={"6px"}
                 >
-                  RESPONSÁVEL
+                  RESPONSÁVEL <RequiredField />
                 </FormLabel>
                 <Input
                   maxLength={50}
@@ -226,10 +231,10 @@ function CadastroTarefasModal({
                   _placeholder={{ color: "#949494" }}
                   width={"208px"}
                   height={"56px"}
-                  id="atividadeRel"
-                  name="atividadeRel"
-                  value={responsavel}
-                  onChange={(event) => setResponsavel(event.target.value)}
+                  id="responsavel"
+                  name="responsavel"
+                  value={registerForm.values.responsavel}
+                  onChange={registerForm.handleChange}
                 ></Input>
               </Flex>
             </FormControl>
@@ -255,10 +260,10 @@ function CadastroTarefasModal({
                 _placeholder={{ color: "#949494" }}
                 isRequired
                 placeholder="Descrição da tarefa"
-                id="descrição"
-                name="descrição"
-                value={descricao}
-                onChange={(event) => setDescricao(event.target.value)}
+                id="descricao"
+                name="descricao"
+                value={registerForm.values.descricao}
+                onChange={registerForm.handleChange}
               />
             </FormControl>
           </ModalBody>
@@ -273,13 +278,14 @@ function CadastroTarefasModal({
                   transition: "all 0.4s",
                   color: "white",
                 }}
-                onClick={closeModal}
+                onClick={() => handleCancelar(registerForm, closeModal)}
                 width={"208px"}
                 height={"56px"}
               >
                 Cancelar
               </Button>
               <Button
+                disabled={!registerForm.isValid || !registerForm.dirty}
                 width={"208px"}
                 height={"56px"}
                 fontSize="18px"
@@ -291,19 +297,7 @@ function CadastroTarefasModal({
                   background: "#0047BB",
                   transition: "all 0.4s",
                 }}
-                onClick={async () => {
-                  await postTarefa({
-                    nome_tarefa: nome,
-                    data_tarefa: new Date(data),
-                    atividade_relacionada: atividade,
-                    descricao_tarefa: descricao,
-                    responsavel,
-                    nom_usu_create: user?.nome,
-                    projeto_id: Number(id),
-                  });
-                  newRender();
-                  closeModal();
-                }}
+                onClick={() => handleCadastrar(registerForm, closeModal)}
               >
                 Adicionar
               </Button>
