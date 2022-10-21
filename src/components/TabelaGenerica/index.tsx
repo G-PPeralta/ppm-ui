@@ -17,7 +17,8 @@ interface Props {
   header?: any; // Dados do cabeçalho da tabela
   footer?: any; // Dados do rodapé da tabela
   fromTo: any; // Dados de paginação
-  height?: string; // Altura da tabela
+  maxHeight?: string; // Altura da tabela
+  minHeight?: string; // Altura da tabela
 }
 
 function TabelaGenerica({
@@ -26,7 +27,8 @@ function TabelaGenerica({
   header,
   footer,
   fromTo,
-  height,
+  maxHeight,
+  minHeight,
 }: Props) {
   if (footer && footer.length < header.length) {
     const diferenca = header.length - footer.length;
@@ -43,8 +45,9 @@ function TabelaGenerica({
           mb={3}
           borderRadius={"10px"}
           overflowX={"auto"}
-          h={height}
-          overflowY={height ? "scroll" : "hidden"}
+          minH={minHeight}
+          maxH={maxHeight}
+          overflowY={maxHeight ? "scroll" : "hidden"}
         >
           <Table variant="striped" colorScheme={"strippedGray"}>
             <Thead>

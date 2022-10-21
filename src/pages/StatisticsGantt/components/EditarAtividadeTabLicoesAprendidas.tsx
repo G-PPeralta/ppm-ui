@@ -1,8 +1,10 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { FiTrash } from "react-icons/fi";
 
 import { Flex, IconButton, Td, Text, Tr } from "@chakra-ui/react";
 
+import FiltragemTabela from "components/FiltragemTabela";
 import TabelaGenerica from "components/TabelaGenerica";
 interface Props {
   registerForm: any;
@@ -113,6 +115,7 @@ const data = [
 function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
+  const [tabelaFiltrada, setTabelaFiltrada] = useState<any[]>(data);
 
   const fromTo = {
     from,
@@ -132,61 +135,69 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
     "AÇÕES",
   ];
 
-  const handleDeletar = (id: number) => {
-    // console.log("deletar", id);
+  const handleDeletar = (id: number, tarefa: string) => {
+    toast.success(`${tarefa} deletada com sucesso!`, {
+      id: "toast-principal",
+    });
   };
+
+  // console.log("tabelaFiltrada", tabelaFiltrada);
 
   function Body() {
     return (
       <>
-        {data.length ? (
-          data.slice(from, to).map((linhaTabela: any, index: number) => (
-            <Tr key={index}>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.id}</Text>
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.tarefa}</Text>
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.atividadeRelacionada}</Text>
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.dataInicio}</Text>
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.descricao}</Text>
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.responsavel}</Text>
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.status}</Text>
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Flex gap={2} align={"center"} justify={"center"}>
-                  {/* <ModalEditar
+        {tabelaFiltrada.length ? (
+          tabelaFiltrada
+            .slice(from, to)
+            .map((linhaTabela: any, index: number) => (
+              <Tr key={index}>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Text>{linhaTabela.id}</Text>
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Text>{linhaTabela.tarefa}</Text>
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Text>{linhaTabela.atividadeRelacionada}</Text>
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Text>{linhaTabela.dataInicio}</Text>
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Text>{linhaTabela.descricao}</Text>
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Text>{linhaTabela.responsavel}</Text>
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Text>{linhaTabela.status}</Text>
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Flex gap={2} align={"center"} justify={"center"}>
+                    {/* <ModalEditar
                       refreshState={refreshState}
                       linhaTabela={linhaTabela}
                       optionsSelects={optionsSelects}
                     /> */}
-                  <IconButton
-                    aria-label="Botão de Editar"
-                    icon={<FiTrash />}
-                    borderRadius={"10px"}
-                    background={"transparent"}
-                    color={"red.500"}
-                    _hover={{
-                      background: "red.500",
-                      transition: "all 0.4s",
-                      color: "white",
-                    }}
-                    onClick={() => handleDeletar(linhaTabela.id)}
-                  />
-                </Flex>
-              </Td>
-            </Tr>
-          ))
+                    <IconButton
+                      aria-label="Botão de Editar"
+                      icon={<FiTrash />}
+                      borderRadius={"10px"}
+                      background={"transparent"}
+                      color={"red.500"}
+                      _hover={{
+                        background: "red.500",
+                        transition: "all 0.4s",
+                        color: "white",
+                      }}
+                      onClick={() =>
+                        handleDeletar(linhaTabela.id, linhaTabela.tarefa)
+                      }
+                    />
+                  </Flex>
+                </Td>
+              </Tr>
+            ))
         ) : (
           <Tr>
             <Td colSpan={header.length} textAlign={"start"}>
@@ -201,10 +212,15 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
   }
 
   return (
-    <Flex w={"100%"} direction={"column"} gap={5}>
+    <Flex w={"100%"} direction={"column"} gap={2}>
+      <FiltragemTabela
+        dadosTabela={data}
+        nomeLabel={"Tarefa"}
+        setTabelaFiltrada={setTabelaFiltrada}
+      />
       <TabelaGenerica
-        height={"352px"}
-        data={data}
+        maxHeight={"352px"}
+        data={tabelaFiltrada}
         header={header}
         fromTo={fromTo}
       >
