@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { ICardInfoProjeto } from "interfaces/DetalhamentoProjetos";
 
-import { patchProjeto } from "services/update/Projeto";
+import { patchProjetoDescJust } from "services/update/Projeto";
 
 interface DescricaoEJustificativaProps {
   infoProjeto: ICardInfoProjeto;
@@ -184,7 +184,10 @@ function BotaoDescricaoEJustificativa({
                 variant="primary"
                 color="white"
                 onClick={async () => {
-                  await patchProjeto(Number(id), { descricao, justificativa });
+                  await patchProjetoDescJust(Number(id), {
+                    descricao,
+                    justificativa,
+                  });
                   setDescricao("");
                   setJustificativa("");
                   setRender();
