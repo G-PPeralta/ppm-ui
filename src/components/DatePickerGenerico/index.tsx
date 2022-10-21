@@ -13,6 +13,7 @@ function DatePickerGenerico({
   required,
   selecionaHorario,
   isDisabled,
+  esconderHorario,
 }: any) {
   const [dataInicio, setDataInicio] = useState<any>("");
 
@@ -68,8 +69,8 @@ function DatePickerGenerico({
         selected={dataInicio}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
-        showTimeSelect={selecionaHorario}
-        dateFormat="dd/MM/yyyy, hh:mm"
+        showTimeSelect={!!selecionaHorario}
+        dateFormat={esconderHorario ? "dd/MM/yyyy" : "dd/MM/yyyy, hh:mm"}
         customInput={<TriggerDatePickerInicio />}
       />
     </Flex>

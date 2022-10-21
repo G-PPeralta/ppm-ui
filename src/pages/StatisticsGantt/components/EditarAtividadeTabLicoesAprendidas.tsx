@@ -6,6 +6,8 @@ import { Flex, IconButton, Td, Text, Tr } from "@chakra-ui/react";
 
 import FiltragemTabela from "components/FiltragemTabela";
 import TabelaGenerica from "components/TabelaGenerica";
+
+import ModalAdicionarLicaoAprendida from "./ModalAdicionarLicaoAprendida";
 interface Props {
   registerForm: any;
 }
@@ -104,16 +106,19 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
 
   return (
     <Flex w={"100%"} direction={"column"} gap={2}>
-      <FiltragemTabela
-        dadosTabela={registerForm.values.licoes_aprendidas}
-        nomeLabel={"Lição Aprendida"}
-        nomeLabelData={"Data"}
-        placeholder={"Digite a lição aprendida"}
-        setTabelaFiltrada={setTabelaFiltrada}
-        propName={"licao_aprendida"}
-        registerForm={registerForm}
-        filtrarData={true}
-      />
+      <Flex justify={"space-between"} align={"end"}>
+        <FiltragemTabela
+          dadosTabela={registerForm.values.licoes_aprendidas}
+          nomeLabel={"Lição Aprendida"}
+          nomeLabelData={"Data"}
+          placeholder={"Digite a lição aprendida"}
+          setTabelaFiltrada={setTabelaFiltrada}
+          propName={"licao_aprendida"}
+          registerForm={registerForm}
+          filtrarData={true}
+        />
+        <ModalAdicionarLicaoAprendida />
+      </Flex>
       <TabelaGenerica
         maxHeight={"352px"}
         data={tabelaFiltrada}
