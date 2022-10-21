@@ -21,11 +21,11 @@ import {
 
 import Sidebar from "components/SideBar";
 
-import { GraficoNPTPorPeriodoSPT } from "./components/NPTPorPeriodoSPT";
-import { GraficoCIP } from "./components/ParaCIP";
-import { GraficoSPT } from "./components/ParaSPT";
-import { GraficoPorCadaIntervencao } from "./components/PorCadaIntervencao";
-import { GraficoPorDuracao } from "./components/PorDuracao";
+import { GraficoNPTPorPeriodoSPTComponent } from "./components/NPTPorPeriodoSPT";
+import { GraficoCIPComponent } from "./components/ParaCIP";
+import { GraficoSPTComponent } from "./components/ParaSPT";
+import { GraficoPorCadaIntervencaoComponent } from "./components/PorCadaIntervencao";
+import { GraficoPorDuracaoComponent } from "./components/PorDuracao";
 
 export function GráficosEstatisticos() {
   const [graphic, setGraphic] = useState("0");
@@ -79,11 +79,11 @@ export function GráficosEstatisticos() {
   function handleGraphicButton(graphic: string) {
     return (
       <>
-        {graphic == "1" && <GraficoPorDuracao />}
-        {graphic == "2" && <GraficoPorCadaIntervencao />}
-        {graphic == "3" && <GraficoNPTPorPeriodoSPT />}
-        {graphic == "4" && <GraficoSPT />}
-        {graphic == "5" && <GraficoCIP />}
+        {graphic == "1" && <GraficoPorDuracaoComponent />}
+        {graphic == "2" && <GraficoPorCadaIntervencaoComponent />}
+        {graphic == "3" && <GraficoNPTPorPeriodoSPTComponent />}
+        {graphic == "4" && <GraficoSPTComponent />}
+        {graphic == "5" && <GraficoCIPComponent />}
       </>
     );
   }

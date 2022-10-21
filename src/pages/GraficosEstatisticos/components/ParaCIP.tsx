@@ -17,100 +17,12 @@ import {
 } from "@chakra-ui/react";
 // import { Ring } from "@uiball/loaders";
 
-import StackedBarChart from "components/StackedBarChartGraphic";
-
 import { getSonda } from "services/get/CadastroModaisInfograficos";
 
-// import StatusIntervencao from "./StatusIntervencao";
+import { GraficoCIP } from "../graficos/ParaCIP";
 
-export function GraficoCIP() {
+export function GraficoCIPComponent() {
   const [listaSondas, setListaSondas] = useState<any[]>([]);
-
-  const dataMock2 = [
-    {
-      month: "Jan/2022",
-      Durações: 90,
-    },
-    {
-      month: "Fev/2022",
-      Durações: 80,
-    },
-    {
-      month: "Mar/2022",
-      Durações: 70,
-    },
-    {
-      month: "Abr/2022",
-      Durações: 60,
-    },
-    {
-      month: "Mai/2022",
-      Durações: 50,
-    },
-    {
-      month: "Jun/2022",
-      Durações: 40,
-    },
-    {
-      month: "Jul/2022",
-      Durações: 30,
-    },
-    {
-      month: "Ago/2022",
-      Durações: 20,
-    },
-    {
-      month: "Set/2022",
-      Durações: 90,
-    },
-    {
-      month: "Out/2022",
-      Durações: 70,
-    },
-    {
-      month: "Nov/2022",
-      Durações: 50,
-    },
-    {
-      month: "Dez/2022",
-      Durações: 100,
-    },
-  ];
-
-  const dataEntries2 = [{ name: "Durações", color: "#0047BB" }];
-
-  // const intervençoes = [
-  //   {
-  //     id: 4,
-  //     status: "Manutenção 36hrs/36%",
-  //     color: "#f4dd06",
-  //   },
-  //   {
-  //     id: 2,
-  //     status: "Recurso Origem 6hrs/6%",
-  //     color: "#0047bb",
-  //   },
-  //   {
-  //     id: 5,
-  //     status: "Recurso Cia de Serviço 8hrs/8%",
-  //     color: "#778bd7",
-  //   },
-  //   {
-  //     id: 3,
-  //     status: "Condições Climáticas 10hrs/10%",
-  //     color: "#00b050",
-  //   },
-  //   {
-  //     id: 1,
-  //     status: "Informações Técnicas 23hrs/23%",
-  //     color: "#00b0f0",
-  //   },
-  //   {
-  //     id: 6,
-  //     status: "Aguardando Outros 18hrs/18%",
-  //     color: "#7030a0",
-  //   },
-  // ];
 
   const reqGet = async () => {
     const sondas = await getSonda();
@@ -388,15 +300,8 @@ export function GraficoCIP() {
               display={"flex"}
               overflowY={"hidden"}
             >
-              <Flex ml={"-25px"} mt={"50px"}>
-                <StackedBarChart
-                  showY={true}
-                  sizeW={1000}
-                  sizeH={352}
-                  data={dataMock2}
-                  dataEntries={dataEntries2}
-                  barW={56}
-                />
+              <Flex>
+                <GraficoCIP />
               </Flex>{" "}
             </Box>
           </Flex>
