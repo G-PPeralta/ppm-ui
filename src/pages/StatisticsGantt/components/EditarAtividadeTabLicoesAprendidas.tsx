@@ -104,6 +104,8 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
     );
   }
 
+  console.log("registerForm", registerForm.values);
+
   return (
     <Flex w={"100%"} direction={"column"} gap={2}>
       <Flex justify={"space-between"} align={"end"}>
@@ -117,7 +119,7 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
           registerForm={registerForm}
           filtrarData={true}
         />
-        <ModalAdicionarLicaoAprendida />
+        <ModalAdicionarLicaoAprendida id={registerForm.values.id_atividade} />
       </Flex>
       <TabelaGenerica
         maxHeight={"352px"}

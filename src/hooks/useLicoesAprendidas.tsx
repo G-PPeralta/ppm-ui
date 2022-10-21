@@ -1,15 +1,15 @@
 import { useState } from "react";
 
 import { useFormik } from "formik";
-import { cadastroOperacaoSchema } from "validations/Estatisticas";
+import { cadastroLicaoAprendida } from "validations/Estatisticas";
 
 import { useToast } from "contexts/Toast";
 
-import { postCadastroOperacao } from "services/post/Estatistica";
+import { postCadastroNovaLicaoAprendidaPorAtividade } from "services/post/Estatistica";
 
 import { useAuth } from "./useAuth";
 
-export function useLicoesAprendidas() {
+export function useLicoesAprendidas(id: number) {
   const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ export function useLicoesAprendidas() {
 
   const registerForm: any = useFormik({
     initialValues,
-    validationSchema: cadastroOperacaoSchema,
+    validationSchema: cadastroLicaoAprendida,
     onSubmit: async (values) => {
       const newValues = {
         nom_usu_create: user?.nome,
@@ -35,7 +35,10 @@ export function useLicoesAprendidas() {
       setLoading(true);
 
       try {
-        const { status } = await postCadastroOperacao(newValues);
+        const { status } = await postCadastroNovaLicaoAprendidaPorAtividade(
+          id,
+          newValues
+        );
 
         if (status === 200 || status === 201) {
           toast.success("Lição aprendida cadastrada com sucesso!", {

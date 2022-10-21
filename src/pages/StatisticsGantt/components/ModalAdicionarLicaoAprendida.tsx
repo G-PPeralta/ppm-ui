@@ -24,9 +24,13 @@ import { handleCancelar } from "utils/handleCadastro";
 
 import { useLicoesAprendidas } from "hooks/useLicoesAprendidas";
 
-function ModalAdicionarLicaoAprendida() {
+interface Props {
+  id: number;
+}
+
+function ModalAdicionarLicaoAprendida({ id }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useLicoesAprendidas();
+  const { registerForm, loading } = useLicoesAprendidas(id);
   const [refresh, setRefresh] = useState<boolean>(false);
 
   return (
@@ -89,8 +93,8 @@ function ModalAdicionarLicaoAprendida() {
               <InputGenerico
                 registerForm={registerForm}
                 nomeInput={"AÇÃO E RECOMENDAÇÃO"}
-                propName={"acao_e_recomendacao"}
-                value={registerForm.values.acao_e_recomendacao}
+                propName={"acoes_e_recomendacoes"}
+                value={registerForm.values.acoes_e_recomendacoes}
                 required={true}
                 placeholder={"Digite a ação e recomendação"}
                 maxLength={50}
