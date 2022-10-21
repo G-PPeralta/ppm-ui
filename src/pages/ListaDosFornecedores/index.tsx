@@ -192,41 +192,35 @@ export function Fornecedores() {
                 type="button"
                 background="white"
                 variant="primary"
-                color="#0047BB"
-                border="2px #0047BB solid"
+                borderRadius={"8px"}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                border={"2px solid"}
+                color={"origem.500"}
                 padding={2}
-                borderRadius={6}
                 w={useBreakpointValue({ base: "100%", md: "251px" })}
                 h={"56px"}
                 _hover={{
-                  background: "#f5f5f5",
+                  border: "2px solid",
+                  borderColor: "origem.500",
+                  background: "origem.500",
                   transition: "all 0.4s",
-                  color: "origem.300",
-                  cursor: "pointer",
-                  borderColor: "#0047BB",
+                  color: "white",
                 }}
                 onClick={() => {
                   navigate("/cadastrar-fornecedor");
                 }}
                 mb={"15px"}
+                rightIcon={<BiPlus />}
               >
-                <Text
-                  fontSize={useBreakpointValue({
-                    base: "sm",
-                    md: "18px",
-                  })}
-                  color={"origem.500"}
-                  fontWeight={"700"}
-                >
-                  Cadastrar Fornecedores
-                </Text>
-                <Icon
+                Cadastrar Fornecedores
+                {/* <Icon
                   as={BiPlus}
                   fontSize="18px"
                   fontWeight={"700"}
                   ml={1}
                   color={"#0047BB"}
-                />
+                /> */}
               </Button>
             </Flex>
 
@@ -313,9 +307,8 @@ export function Fornecedores() {
                     color="white"
                     borderColor="#0047BB"
                     _hover={{
-                      background: "white",
+                      background: "origem.600",
                       transition: "all 0.4s",
-                      color: "#0047BB",
                     }}
                     rightIcon={<FiSearch />}
                     onClick={() => {
