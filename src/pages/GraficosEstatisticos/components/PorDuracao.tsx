@@ -327,7 +327,7 @@ export function GraficoPorDuracao() {
               </FormControl>
             </Flex>
 
-            <Flex alignItems={"flex-end"} border={"red 2px solid"}>
+            <Flex alignItems={"flex-end"}>
               <FormControl>
                 <FormLabel htmlFor="base">
                   <Text fontSize={"12px"} color={"#949494"} fontWeight={"700"}>
