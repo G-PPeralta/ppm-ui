@@ -10,85 +10,12 @@ interface Props {
   registerForm: any;
 }
 
-const data = [
-  {
-    id: 1,
-    licaoAprendida: "Lição 1",
-    data: "01/01/2021",
-    acaoERecomendacao: "Ação 1 e Recomendação 1",
-  },
-  {
-    id: 2,
-    licaoAprendida: "Lição 2",
-    data: "01/01/2021",
-    acaoERecomendacao: "Ação 2 e Recomendação 2",
-  },
-  {
-    id: 3,
-    licaoAprendida: "Lição 3",
-    data: "01/01/2021",
-    acaoERecomendacao: "Ação 3 e Recomendação 3",
-  },
-  {
-    id: 4,
-    licaoAprendida: "Lição 4",
-    data: "01/01/2021",
-    acaoERecomendacao: "Ação 4 e Recomendação 4",
-  },
-  {
-    id: 5,
-    licaoAprendida: "Lição 5",
-    data: "01/01/2021",
-    acaoERecomendacao: "Ação 5 e Recomendação 5",
-  },
-  {
-    id: 6,
-    licaoAprendida: "Lição 6",
-    data: "01/01/2021",
-    acaoERecomendacao: "Ação 6 e Recomendação 6",
-  },
-  {
-    id: 7,
-    licaoAprendida: "Lição 7",
-    data: "01/01/2021",
-    acaoERecomendacao: "Ação 7 e Recomendação 7",
-  },
-  {
-    id: 8,
-    licaoAprendida: "Lição 8",
-    data: "01/01/2021",
-    acaoERecomendacao: "Ação 8 e Recomendação 8",
-  },
-  {
-    id: 9,
-    licaoAprendida: "Lição 9",
-    data: "01/01/2021",
-    acaoERecomendacao: "Ação 9 e Recomendação 9",
-  },
-  {
-    id: 10,
-    licaoAprendida: "Lição 10",
-    data: "01/01/2021",
-    acaoERecomendacao: "Ação 10 e Recomendação 10",
-  },
-  {
-    id: 11,
-    licaoAprendida: "Lição 11",
-    data: "01/01/2021",
-    acaoERecomendacao: "Ação 11 e Recomendação 11",
-  },
-  {
-    id: 12,
-    licaoAprendida: "Lição 12",
-    data: "01/01/2021",
-    acaoERecomendacao: "Ação 12 e Recomendação 12",
-  },
-];
-
 function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
-  const [tabelaFiltrada, setTabelaFiltrada] = useState<any[]>(data);
+  const [tabelaFiltrada, setTabelaFiltrada] = useState<any[]>(
+    registerForm.values.licoes_aprendidas
+  );
 
   const fromTo = {
     from,
@@ -105,13 +32,13 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
     "AÇÕES",
   ];
 
+  const footer = ["TOTAL", `${tabelaFiltrada.length} lições aprendidas`];
+
   const handleDeletar = (id: number, licao: string) => {
     toast.success(`${licao} deletada com sucesso!`, {
       id: "toast-principal",
     });
   };
-
-  // console.log("tabelaFiltrada", tabelaFiltrada);
 
   function Body() {
     return (
@@ -125,13 +52,13 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
                   <Text>{linhaTabela.id}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.licaoAprendida}</Text>
+                  <Text>{linhaTabela.licao_aprendida}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Text>{linhaTabela.data}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.acaoERecomendacao}</Text>
+                  <Text>{linhaTabela.acao_e_recomendacao}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Flex gap={2} align={"center"} justify={"center"}>
@@ -154,7 +81,7 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
                       onClick={() =>
                         handleDeletar(
                           linhaTabela.id,
-                          linhaTabela.licaoAprendida
+                          linhaTabela.licao_aprendida
                         )
                       }
                     />
@@ -178,17 +105,21 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
   return (
     <Flex w={"100%"} direction={"column"} gap={2}>
       <FiltragemTabela
-        dadosTabela={data}
+        dadosTabela={registerForm.values.licoes_aprendidas}
         nomeLabel={"Lição Aprendida"}
+        nomeLabelData={"Data"}
         placeholder={"Digite a lição aprendida"}
         setTabelaFiltrada={setTabelaFiltrada}
-        propName={"licaoAprendida"}
+        propName={"licao_aprendida"}
+        registerForm={registerForm}
+        filtrarData={true}
       />
       <TabelaGenerica
         maxHeight={"352px"}
         data={tabelaFiltrada}
         header={header}
         fromTo={fromTo}
+        footer={footer}
       >
         <Body />
       </TabelaGenerica>

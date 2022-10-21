@@ -30,7 +30,7 @@ function BotoesTabs({ tab }: Props) {
       selecionado: tabSelecionado === 3,
     },
     {
-      nome: "Campos Personalizados",
+      nome: "Ocorrências",
       selecionado: tabSelecionado === 4,
     },
   ];

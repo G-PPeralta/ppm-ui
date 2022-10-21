@@ -3,12 +3,18 @@ import { BsSearch } from "react-icons/bs";
 
 import { Button, Flex, Input, Text } from "@chakra-ui/react";
 
+// import DatePickerGenerico from "components/DatePickerGenerico";
+
 interface Props {
   nomeLabel: string;
+  nomeLabelData?: string;
   dadosTabela: any;
   setTabelaFiltrada: React.Dispatch<React.SetStateAction<any>>;
   placeholder: string;
   propName: string;
+  propNameData?: string;
+  filtrarData?: boolean;
+  registerForm: any;
 }
 
 function FiltragemTabela({
@@ -17,12 +23,22 @@ function FiltragemTabela({
   setTabelaFiltrada,
   placeholder,
   propName,
+  filtrarData,
+  nomeLabelData,
+  registerForm,
+  propNameData,
 }: Props) {
   const [search, setSearch] = useState<string>("");
 
   const filtrarTabela = () => {
     let filtered;
     if (search && search.length > 1) {
+      filtered = dadosTabela?.filter(
+        (dado: any) =>
+          dado[propName].toLowerCase().indexOf(search.toLowerCase()) > -1
+      );
+    }
+    if (search && search.length > 1 && filtrarData) {
       filtered = dadosTabela?.filter(
         (dado: any) =>
           dado[propName].toLowerCase().indexOf(search.toLowerCase()) > -1
@@ -37,8 +53,8 @@ function FiltragemTabela({
   };
 
   return (
-    <Flex align={"end"} wrap={"wrap"}>
-      <Flex direction={"column"} mr="16px">
+    <Flex align={"end"} wrap={"wrap"} gap={4}>
+      <Flex direction={"column"}>
         <Text fontWeight={"700"} fontSize={"12px"} color={"#949494"}>
           {nomeLabel.toUpperCase()}
         </Text>
@@ -56,6 +72,19 @@ function FiltragemTabela({
           onChange={(event) => setSearch(event.target.value)}
         />
       </Flex>
+
+      {/* {filtrarData && nomeLabelData && (
+        <Flex direction={"column"}>
+          <Text fontWeight={"700"} fontSize={"12px"} color={"#949494"}>
+            {nomeLabelData.toUpperCase()}
+          </Text>
+          <DatePickerGenerico
+            registerForm={registerForm}
+            propName={propNameData}
+            data={registerForm.values.dataInicio}
+          />
+        </Flex>
+      )} */}
 
       <Flex>
         <Button

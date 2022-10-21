@@ -11,38 +11,12 @@ interface Props {
   registerForm: any;
 }
 
-const data = [
-  {
-    id: 1,
-    nomeCampo: "Agda informação técnica / orientação",
-    valor: "0 dias",
-  },
-  {
-    id: 2,
-    nomeCampo: "Agdo manutenção",
-    valor: "0 dias",
-  },
-  {
-    id: 3,
-    nomeCampo: "Agdo outros",
-    valor: "0 dias",
-  },
-  {
-    id: 4,
-    nomeCampo: "Agdo recursos Cia Serviço",
-    valor: "0 dias",
-  },
-  {
-    id: 5,
-    nomeCampo: "APR",
-    valor: "0 dias",
-  },
-];
-
-function EditarAtividadeTabCamposPersonalizados({ registerForm }: Props) {
+function EditarAtividadeTabOcorrencias({ registerForm }: Props) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
-  const [tabelaFiltrada, setTabelaFiltrada] = useState<any[]>(data);
+  const [tabelaFiltrada, setTabelaFiltrada] = useState<any[]>(
+    registerForm.values.ocorrencias
+  );
 
   const fromTo = {
     from,
@@ -51,15 +25,14 @@ function EditarAtividadeTabCamposPersonalizados({ registerForm }: Props) {
     setTo,
   };
 
-  const header = ["NOME DO CAMPO PERSONALIZADO", "VALOR", "AÇÕES"];
+  const header = ["NOME DO CAMPO PERSONALIZADO", "HORAS", "AÇÕES"];
+  const footer = [""];
 
   const handleDeletar = (id: number, licao: string) => {
     toast.success(`${licao} abrir modal!`, {
       id: "toast-principal",
     });
   };
-
-  // console.log("tabelaFiltrada", tabelaFiltrada);
 
   function Body() {
     return (
@@ -69,14 +42,11 @@ function EditarAtividadeTabCamposPersonalizados({ registerForm }: Props) {
             .slice(from, to)
             .map((linhaTabela: any, index: number) => (
               <Tr key={index}>
-                {/* <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.id}</Text>
-                </Td> */}
                 <Td textAlign={"start"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.nomeCampo}</Text>
+                  <Text>{linhaTabela.nome_ocorrencia}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.valor}</Text>
+                  <Text>{linhaTabela.horas}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Flex gap={2} align={"center"} justify={"center"}>
@@ -92,7 +62,10 @@ function EditarAtividadeTabCamposPersonalizados({ registerForm }: Props) {
                         color: "white",
                       }}
                       onClick={() =>
-                        handleDeletar(linhaTabela.id, linhaTabela.nomeCampo)
+                        handleDeletar(
+                          linhaTabela.id,
+                          linhaTabela.nome_ocorrencia
+                        )
                       }
                     />
                   </Flex>
@@ -115,17 +88,19 @@ function EditarAtividadeTabCamposPersonalizados({ registerForm }: Props) {
   return (
     <Flex w={"100%"} direction={"column"} gap={2}>
       <FiltragemTabela
-        dadosTabela={data}
+        dadosTabela={registerForm.values.ocorrencias}
         nomeLabel={"PESQUISAR"}
         placeholder={"Pesquisar"}
         setTabelaFiltrada={setTabelaFiltrada}
-        propName={"nomeCampo"}
+        propName={"nome_ocorrencia"}
+        registerForm={registerForm}
       />
       <TabelaGenerica
         maxHeight={"352px"}
         data={tabelaFiltrada}
         header={header}
         fromTo={fromTo}
+        footer={footer}
       >
         <Body />
       </TabelaGenerica>
@@ -133,4 +108,4 @@ function EditarAtividadeTabCamposPersonalizados({ registerForm }: Props) {
   );
 }
 
-export default EditarAtividadeTabCamposPersonalizados;
+export default EditarAtividadeTabOcorrencias;
