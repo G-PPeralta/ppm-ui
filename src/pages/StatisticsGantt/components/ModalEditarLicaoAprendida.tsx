@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { BsPlus } from "react-icons/bs";
+import { useEffect } from "react";
+import { MdModeEdit } from "react-icons/md";
 
 import {
   Button,
   Flex,
+  IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -16,7 +17,6 @@ import {
 } from "@chakra-ui/react";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
-import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import DatePickerGenerico from "components/DatePickerGenerico";
 import InputGenerico from "components/InputGenerico";
 
@@ -24,35 +24,67 @@ import { handleCancelar } from "utils/handleCadastro";
 
 import { useLicoesAprendidas } from "hooks/useLicoesAprendidas";
 
-interface Props {
-  id: number;
+interface RefreshState {
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ModalAdicionarLicaoAprendida({ id }: Props) {
+interface Props {
+  idLicao: number;
+  refreshState: RefreshState;
+  linhaTabela: any;
+  idAtividade: number;
+}
+
+function ModalEditarLicaoAprendida({
+  idLicao,
+  refreshState,
+  linhaTabela,
+  idAtividade,
+}: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useLicoesAprendidas(id, "post");
-  const [refresh, setRefresh] = useState<boolean>(false);
+  const { registerForm, loading } = useLicoesAprendidas(
+    idLicao,
+    "patch",
+    idAtividade
+  );
+
+  const { refresh, setRefresh } = refreshState;
+
+  useEffect(() => {
+    registerForm.setFieldValue("data", new Date(linhaTabela.data));
+    registerForm.setFieldValue(
+      "acoes_e_recomendacoes",
+      linhaTabela.acao_e_recomendacao
+    );
+    registerForm.setFieldValue("licao_aprendida", linhaTabela.licao_aprendida);
+  }, []);
+
+  const handleFecharModal = () => {
+    registerForm.setFieldValue("data", new Date(linhaTabela.data));
+    registerForm.setFieldValue(
+      "acao_e_recomendacao",
+      linhaTabela.acao_e_recomendacao
+    );
+    registerForm.setFieldValue("licao_aprendida", linhaTabela.licao_aprendida);
+    onClose();
+  };
 
   return (
     <>
-      <Button
-        h={"56px"}
+      <IconButton
+        aria-label="Botão de Editar"
+        icon={<MdModeEdit />}
         borderRadius={"10px"}
-        background={"origem.300"}
-        variant="primary"
-        color="white"
-        onClick={() => onOpen()}
+        background={"transparent"}
+        color={"origem.500"}
         _hover={{
           background: "origem.500",
           transition: "all 0.4s",
+          color: "white",
         }}
-      >
-        <Text fontSize="16px" fontWeight={"bold"} mx={12}>
-          <Flex gap={1} align={"center"}>
-            Adicionar <BsPlus size={24} />
-          </Flex>
-        </Text>
-      </Button>
+        onClick={onOpen}
+      />
 
       <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
         <ModalOverlay />
@@ -65,7 +97,7 @@ function ModalAdicionarLicaoAprendida({ id }: Props) {
             color={"white"}
             fontSize={"1em"}
           >
-            Adicionar Lição Aprendida
+            Editar Lição Aprendida
           </ModalHeader>
           <ModalCloseButton
             color={"white"}
@@ -78,12 +110,10 @@ function ModalAdicionarLicaoAprendida({ id }: Props) {
                 nomeInput={"LIÇÃO APRENDIDA"}
                 propName={"licao_aprendida"}
                 value={registerForm.values.licao_aprendida}
-                required={true}
                 placeholder={"Digite a lição aprendida"}
                 maxLength={50}
               />
               <DatePickerGenerico
-                required={true}
                 nomeLabel={"DATA"}
                 registerForm={registerForm}
                 propName={"data"}
@@ -95,7 +125,6 @@ function ModalAdicionarLicaoAprendida({ id }: Props) {
                 nomeInput={"AÇÃO E RECOMENDAÇÃO"}
                 propName={"acoes_e_recomendacoes"}
                 value={registerForm.values.acoes_e_recomendacoes}
-                required={true}
                 placeholder={"Digite a ação e recomendação"}
                 maxLength={50}
               />
@@ -104,13 +133,24 @@ function ModalAdicionarLicaoAprendida({ id }: Props) {
 
           <ModalFooter justifyContent={"center"}>
             <Flex gap={2}>
-              <BotaoVermelhoLargoGhost
-                text="Cancelar"
-                onClose={onClose}
-                formikForm={registerForm}
-              />
+              <Button
+                h={"56px"}
+                borderRadius={"10px"}
+                variant="ghost"
+                color="red"
+                onClick={() => handleFecharModal()}
+                _hover={{
+                  background: "red.500",
+                  transition: "all 0.4s",
+                  color: "white",
+                }}
+              >
+                <Text fontSize="16px" fontWeight={"bold"} mx={12}>
+                  Cancelar
+                </Text>
+              </Button>
               <BotaoAzulLargoPrimary
-                text="Adicionar"
+                text="Concluir"
                 onClose={onClose}
                 formikForm={registerForm}
                 refresh={refresh}
@@ -125,4 +165,4 @@ function ModalAdicionarLicaoAprendida({ id }: Props) {
   );
 }
 
-export default ModalAdicionarLicaoAprendida;
+export default ModalEditarLicaoAprendida;

@@ -164,6 +164,11 @@ function ModalAdicionarOperacao({
     setTabSelecionado,
   };
 
+  const refreshState = {
+    setRefresh,
+    refresh,
+  };
+
   useEffect(() => {
     registerForm.setFieldValue("id_atividade", editOp.id_atividade);
     registerForm.setFieldValue("nome_atividade", editOp.nome_atividade);
@@ -196,7 +201,10 @@ function ModalAdicionarOperacao({
 
       case tabSelecionado === 3:
         return (
-          <EditarAtividadeTabLicoesAprendidas registerForm={registerForm} />
+          <EditarAtividadeTabLicoesAprendidas
+            registerForm={registerForm}
+            refreshState={refreshState}
+          />
         );
 
       case tabSelecionado === 4:

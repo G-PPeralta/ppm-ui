@@ -7,12 +7,24 @@ import { Flex, IconButton, Td, Text, Tr } from "@chakra-ui/react";
 import FiltragemTabela from "components/FiltragemTabela";
 import TabelaGenerica from "components/TabelaGenerica";
 
+import { deleteLicaoAprendida } from "services/delete/Estatisticas";
+
 import ModalAdicionarLicaoAprendida from "./ModalAdicionarLicaoAprendida";
+import ModalEditarLicaoAprendida from "./ModalEditarLicaoAprendida";
+
+interface RefreshState {
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+}
 interface Props {
   registerForm: any;
+  refreshState: RefreshState;
 }
 
-function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
+function EditarAtividadeTabLicoesAprendidas({
+  registerForm,
+  refreshState,
+}: Props) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
   const [tabelaFiltrada, setTabelaFiltrada] = useState<any[]>(
@@ -36,8 +48,10 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
 
   const footer = ["TOTAL", `${tabelaFiltrada.length} lições aprendidas`];
 
-  const handleDeletar = (id: number, licao: string) => {
-    toast.success(`${licao} deletada com sucesso!`, {
+  const handleDeletar = (idLicao: number, idAtividade: number) => {
+    deleteLicaoAprendida(idAtividade, idLicao);
+
+    toast.success(`Lição deletada com sucesso!`, {
       id: "toast-principal",
     });
   };
@@ -64,11 +78,12 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Flex gap={2} align={"center"} justify={"center"}>
-                    {/* <ModalEditar
+                    <ModalEditarLicaoAprendida
                       refreshState={refreshState}
+                      idLicao={linhaTabela.id}
                       linhaTabela={linhaTabela}
-                      optionsSelects={optionsSelects}
-                    /> */}
+                      idAtividade={registerForm.values.id_atividade}
+                    />
                     <IconButton
                       aria-label="Botão de Editar"
                       icon={<FiTrash />}
@@ -83,7 +98,7 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
                       onClick={() =>
                         handleDeletar(
                           linhaTabela.id,
-                          linhaTabela.licao_aprendida
+                          registerForm.values.id_atividade
                         )
                       }
                     />
@@ -103,8 +118,6 @@ function EditarAtividadeTabLicoesAprendidas({ registerForm }: Props) {
       </>
     );
   }
-
-  console.log("registerForm", registerForm.values);
 
   return (
     <Flex w={"100%"} direction={"column"} gap={2}>

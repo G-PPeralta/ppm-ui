@@ -33,7 +33,7 @@ export async function postCadastroNovaLicaoAprendidaPorAtividade(
   payload: any
 ): Promise<{ status: number }> {
   const { status } = await api.post(
-    `/estatisticas/cronograma/${id}`,
+    `/estatisticas/cronograma/${id}/licao-aprendida`,
     payload,
     token()
   );
