@@ -466,8 +466,8 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                 <Button
                   w={"208px"}
                   h={"56px"}
-                  disabled={!registerForm.isValid}
-                  background="origem.300"
+                  // disabled={!registerForm.isValid}
+                  background="origem.500"
                   variant="primary"
                   color="white"
                   onClick={() => handleCadastrar(registerForm, onClose)}
