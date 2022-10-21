@@ -1,183 +1,23 @@
 import { useEffect, useLayoutEffect, useState } from "react";
-// import { FiPlus } from "react-icons/fi";
 
 import {
   Box,
-  // Box,
-  // Button,
   Flex,
   FormControl,
   FormLabel,
-  // Input,
   Select,
   Stack,
   Text,
   useBreakpointValue,
-  // useColorModeValue,
 } from "@chakra-ui/react";
 // import { Ring } from "@uiball/loaders";
 
-import StackedBarChart from "components/StackedBarChartGraphic";
-
 import { getSonda } from "services/get/CadastroModaisInfograficos";
 
-// import StatusIntervencao from "./StatusIntervencao";
+import { GraficoSPT } from "../graficos/ParaSPT";
 
-export function GraficoSPT() {
+export function GraficoSPTComponent() {
   const [listaSondas, setListaSondas] = useState<any[]>([]);
-
-  const dataMock2 = [
-    {
-      month: "Jan/2022",
-      Manutenção: 10,
-      "Recurso Origem": 20,
-      "Recurso Cia": 10,
-      "Condições Climáticas": 30,
-      "Informações Técnicas": 10,
-      "Aguardando Outros": 20,
-    },
-    {
-      month: "Fev/2022",
-      Manutenção: 5,
-      "Recurso Origem": 5,
-      "Recurso Cia": 10,
-      "Condições Climáticas": 50,
-      "Informações Técnicas": 10,
-      "Aguardando Outros": 20,
-    },
-    {
-      month: "Mar/2022",
-      Manutenção: 5,
-      "Recurso Origem": 5,
-      "Recurso Cia": 10,
-      "Condições Climáticas": 50,
-      "Informações Técnicas": 10,
-      "Aguardando Outros": 20,
-    },
-    {
-      month: "Abr/2022",
-      Manutenção: 10,
-      "Recurso Origem": 20,
-      "Recurso Cia": 10,
-      "Condições Climáticas": 30,
-      "Informações Técnicas": 10,
-      "Aguardando Outros": 20,
-    },
-    {
-      month: "Mai/2022",
-      Manutenção: 10,
-      "Recurso Origem": 20,
-      "Recurso Cia": 10,
-      "Condições Climáticas": 30,
-      "Informações Técnicas": 10,
-      "Aguardando Outros": 20,
-    },
-    {
-      month: "Jun/2022",
-      Manutenção: 5,
-      "Recurso Origem": 5,
-      "Recurso Cia": 10,
-      "Condições Climáticas": 50,
-      "Informações Técnicas": 10,
-      "Aguardando Outros": 20,
-    },
-    {
-      month: "Jul/2022",
-      Manutenção: 10,
-      "Recurso Origem": 20,
-      "Recurso Cia": 10,
-      "Condições Climáticas": 30,
-      "Informações Técnicas": 10,
-      "Aguardando Outros": 20,
-    },
-    {
-      month: "Ago/2022",
-      Manutenção: 20,
-      "Recurso Origem": 20,
-      "Recurso Cia": 20,
-      "Condições Climáticas": 20,
-      "Informações Técnicas": 20,
-      "Aguardando Outros": 20,
-    },
-    {
-      month: "Set/2022",
-      Manutenção: 5,
-      "Recurso Origem": 5,
-      "Recurso Cia": 10,
-      "Condições Climáticas": 50,
-      "Informações Técnicas": 10,
-      "Aguardando Outros": 20,
-    },
-    {
-      month: "Out/2022",
-      Manutenção: 10,
-      "Recurso Origem": 20,
-      "Recurso Cia": 10,
-      "Condições Climáticas": 30,
-      "Informações Técnicas": 10,
-      "Aguardando Outros": 20,
-    },
-    {
-      month: "Nov/2022",
-      Manutenção: 10,
-      "Recurso Origem": 10,
-      "Recurso Cia": 10,
-      "Condições Climáticas": 10,
-      "Informações Técnicas": 10,
-      "Aguardando Outros": 90,
-    },
-    {
-      month: "Dez/2022",
-      Manutenção: 10,
-      "Recurso Origem": 20,
-      "Recurso Cia": 10,
-      "Condições Climáticas": 30,
-      "Informações Técnicas": 10,
-      "Aguardando Outros": 20,
-    },
-  ];
-
-  const dataEntries2 = [
-    { name: "Aguardando Outros", color: "#7030a0" },
-    { name: "Informações Técnicas", color: "#00b0f0" },
-    { name: "Condições Climáticas", color: "#00b050" },
-    { name: "Recurso Cia", color: "#778bd7" },
-    { name: "Recurso Origem", color: "#0047bb" },
-    { name: "Manutenção", color: "#f4dd06" },
-  ];
-
-  // const intervençoes = [
-  //   {
-  //     id: 4,
-  //     status: "Manutenção 36hrs/36%",
-  //     color: "#f4dd06",
-  //   },
-  //   {
-  //     id: 2,
-  //     status: "Recurso Origem 6hrs/6%",
-  //     color: "#0047bb",
-  //   },
-  //   {
-  //     id: 5,
-  //     status: "Recurso Cia de Serviço 8hrs/8%",
-  //     color: "#778bd7",
-  //   },
-  //   {
-  //     id: 3,
-  //     status: "Condições Climáticas 10hrs/10%",
-  //     color: "#00b050",
-  //   },
-  //   {
-  //     id: 1,
-  //     status: "Informações Técnicas 23hrs/23%",
-  //     color: "#00b0f0",
-  //   },
-  //   {
-  //     id: 6,
-  //     status: "Aguardando Outros 18hrs/18%",
-  //     color: "#7030a0",
-  //   },
-  // ];
 
   const reqGet = async () => {
     const sondas = await getSonda();
@@ -443,15 +283,8 @@ export function GraficoSPT() {
               display={"flex"}
               overflowY={"hidden"}
             >
-              <Flex ml={"-25px"} mt={"50px"}>
-                <StackedBarChart
-                  showY={true}
-                  sizeW={1000}
-                  sizeH={352}
-                  data={dataMock2}
-                  dataEntries={dataEntries2}
-                  barW={56}
-                />
+              <Flex>
+                <GraficoSPT />
               </Flex>{" "}
             </Box>
           </Flex>

@@ -1,28 +1,23 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-// import { FiPlus } from "react-icons/fi";
 
 import {
   Box,
-  // Box,
-  // Button,
   Flex,
   FormControl,
   FormLabel,
   Input,
   Select,
-  // Stack,
   Text,
   useBreakpointValue,
-  // useColorModeValue,
 } from "@chakra-ui/react";
 // import { Ring } from "@uiball/loaders";
-
-import StackedBarChart from "components/StackedBarChartGraphic";
 
 import { getSonda } from "services/get/CadastroModaisInfograficos";
 import { getOperacoes } from "services/get/Estatisticas";
 
-export function GraficoPorDuracao() {
+import { GraficoPorDuracao } from "../graficos/PorDuracao";
+
+export function GraficoPorDuracaoComponent() {
   const [listaSondas, setListaSondas] = useState<any[]>([]);
   const [operacao, setOperacao] = useState<any[]>([]);
   // const [loading, setLoading] = useState(true);
@@ -31,59 +26,6 @@ export function GraficoPorDuracao() {
     "Médio - 16 horas",
     "Máxima - 12 horas",
   ];
-
-  const dataMock1 = [
-    {
-      month: "Pir-61",
-      Durações: 90,
-    },
-    {
-      month: "Pir-62",
-      Durações: 80,
-    },
-    {
-      month: "Pir-63",
-      Durações: 70,
-    },
-    {
-      month: "Pir-64",
-      Durações: 60,
-    },
-    {
-      month: "Pir-65",
-      Durações: 50,
-    },
-    {
-      month: "Pir-66",
-      Durações: 40,
-    },
-    {
-      month: "Pir-67",
-      Durações: 30,
-    },
-    {
-      month: "Pir-68",
-      Durações: 20,
-    },
-    {
-      month: "Pir-69",
-      Durações: 90,
-    },
-    {
-      month: "Pir-70",
-      Durações: 70,
-    },
-    {
-      month: "Pir-71",
-      Durações: 50,
-    },
-    {
-      month: "Pir-72",
-      Durações: 100,
-    },
-  ];
-
-  const dataEntries1 = [{ name: "Durações", color: "#0047BB" }];
 
   const reqGet = async () => {
     const sondas = await getSonda();
@@ -334,7 +276,7 @@ export function GraficoPorDuracao() {
                     BASE DA ZONA INTERVIDA MAIS PROFUNDA
                   </Text>
                 </FormLabel>
-                <Input
+                {/* <Input
                   placeholder="Base da zona intervida mais profunda"
                   mt={"-9px"}
                   id="base"
@@ -346,6 +288,29 @@ export function GraficoPorDuracao() {
                   fontSize={"14px"}
                   fontWeight={"400"}
                   _placeholder={{ color: "black" }}
+                /> */}
+                <Input
+                  mr={4}
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  mt={"-6px"}
+                  id="ate"
+                  name="ate"
+                  width={"125px"}
+                  height={"56px"}
+                  borderRadius={"8px"}
+                  type={"number"}
+                />
+                <Input
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  mt={"-6px"}
+                  id="ate"
+                  name="ate"
+                  width={"125px"}
+                  height={"56px"}
+                  borderRadius={"8px"}
+                  type={"number"}
                 />
               </FormControl>
             </Flex>
@@ -499,15 +464,8 @@ export function GraficoPorDuracao() {
             display={"flex"}
             overflowY={"hidden"}
           >
-            <Flex ml={"-25px"} mt={"15px"}>
-              <StackedBarChart
-                showY={true}
-                sizeW={1000}
-                sizeH={352}
-                data={dataMock1}
-                dataEntries={dataEntries1}
-                barW={44}
-              />
+            <Flex>
+              <GraficoPorDuracao />
             </Flex>
           </Box>
         </Flex>
