@@ -304,7 +304,7 @@ export function GraficoPorDuracao() {
                   fontWeight={"700"}
                   htmlFor="campo"
                 >
-                  CAMPO
+                  OPERAÇÃO
                 </FormLabel>
                 <Select
                   mt={"-9px"}
