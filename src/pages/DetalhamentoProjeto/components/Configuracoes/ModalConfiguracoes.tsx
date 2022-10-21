@@ -1,8 +1,8 @@
 import {
-  // JSXElementConstructor,
-  // ReactElement,
-  // ReactFragment,
-  // ReactPortal,
+  JSXElementConstructor,
+  ReactElement,
+  ReactFragment,
+  ReactPortal,
   useState,
 } from "react";
 import { IoMdPodium } from "react-icons/io";
@@ -26,6 +26,8 @@ import {
 } from "@chakra-ui/react";
 import { IConfigProjetoDto } from "interfaces/ConfiguracaoProjeto";
 
+import { useProjetos } from "hooks/useCadastroProjeto";
+
 // import {
 //   getCoordenadores,
 //   getResponsaveis,
@@ -39,20 +41,35 @@ import { IConfigProjetoDto } from "interfaces/ConfiguracaoProjeto";
 function ModalConfiguracoes() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [projeto] = useState<IConfigProjetoDto>();
-  const [responsavel] = useState(projeto?.responsavel);
-  const [coordenador] = useState(projeto?.coordenador);
-  const [status] = useState(projeto?.status);
-  const [polo] = useState(projeto?.polo);
-  const [local] = useState(projeto?.local);
-  const [solicitacao] = useState(projeto?.solicitacao);
+
+  // FORM LABELS
+  const [responsavel, setReponsavel] = useState(projeto?.responsavel);
+  const [coordenador, setCoordenador] = useState(projeto?.coordenador);
+  const [status, setStatus] = useState(projeto?.status);
+  const [polo, setPolo] = useState(projeto?.polo);
+  const [local, setLocal] = useState(projeto?.local);
+  const [solicitacao, setSolicitacao] = useState(projeto?.solicitacao);
   const [nomeProjeto, setNomeProjeto] = useState(projeto?.nome_projeto);
   const [elementoPep, setElementoPep] = useState(projeto?.elemento_pep);
-  const [inicio, setInicio] = useState(projeto?.data_inicio);
-  const [fim, setFim] = useState(projeto?.data_fim);
-  const [divisao] = useState(projeto?.divisao);
-  const [classificacao] = useState(projeto?.classificacao);
-  const [tipo] = useState(projeto?.tipo);
-  const [gate] = useState(projeto?.gate);
+  const [inicio] = useState(projeto?.data_inicio);
+  const [fim] = useState(projeto?.data_fim);
+  const [divisao, setDivisao] = useState(projeto?.divisao);
+  const [classificacao, setClassificacao] = useState(projeto?.classificacao);
+  const [tipo, setTipo] = useState(projeto?.tipo);
+  const [gate, setGate] = useState(projeto?.gate);
+
+  const {
+    optionsResponsaveis,
+    optionsCoordenadores,
+    optionsPolos,
+    optionsLocais,
+    optionsSolicitantes,
+    optionsStatus,
+    optionsDivisoes,
+    optionsClassificacoes,
+    optionsTipoProjetos,
+    optionsGates,
+  } = useProjetos();
 
   // const [render] = useState(false);
 
@@ -69,24 +86,22 @@ function ModalConfiguracoes() {
     onClose();
   };
 
-  // OPTIONSS
-
-  // function getOptions(options: any) {
-  //   return options.map(
-  //     (option: {
-  //       value: string | number | readonly string[] | undefined;
-  //       label:
-  //         | string
-  //         | number
-  //         | boolean
-  //         | ReactElement<any, string | JSXElementConstructor<any>>
-  //         | ReactFragment
-  //         | ReactPortal
-  //         | null
-  //         | undefined;
-  //     }) => <option value={option.value}>{option.label}</option>
-  //   );
-  // }
+  function getOptions(options: any) {
+    return options.map(
+      (option: {
+        value: string | number | readonly string[] | undefined;
+        label:
+          | string
+          | number
+          | boolean
+          | ReactElement<any, string | JSXElementConstructor<any>>
+          | ReactFragment
+          | ReactPortal
+          | null
+          | undefined;
+      }) => <option value={option.value}>{option.label}</option>
+    );
+  }
 
   return (
     <>
@@ -154,12 +169,12 @@ function ModalConfiguracoes() {
                       id="responsavelId"
                       name="responsavel"
                       width={"100%"}
-                      placeholder={responsavel?.nomeResponsavel}
-                      // onChange={(e) => {
-                      //   setReponsavel(e.target.value);
-                      // }}
+                      placeholder={responsavel?.toString()}
+                      onChange={(e) => {
+                        setReponsavel(+e.target.id);
+                      }}
                     >
-                      {/* {getOptions(getResponsaveis())} */}
+                      {getOptions(optionsResponsaveis)}
                     </Select>
                   </FormControl>
 
@@ -180,12 +195,12 @@ function ModalConfiguracoes() {
                       id="coordenadorId"
                       name="coordenador"
                       width={"100%"}
-                      placeholder={coordenador?.coordenadorNome}
-                      // onChange={(e) => {
-                      //   setCoordenador(e.target.value);
-                      // }}
+                      placeholder={coordenador?.toString()}
+                      onChange={(e) => {
+                        setCoordenador(+e.target.value);
+                      }}
                     >
-                      {/* {getOptions(getCoordenadores())} */}
+                      {getOptions(optionsCoordenadores)}
                     </Select>
                   </FormControl>
 
@@ -206,12 +221,12 @@ function ModalConfiguracoes() {
                       id="statusId"
                       name="status"
                       width={"100%"}
-                      placeholder={status?.status}
-                      // onChange={(e) => {
-                      //   setStatus(e.target.value);
-                      // }}
+                      placeholder={status?.toString()}
+                      onChange={(e) => {
+                        setStatus(+e.target.value);
+                      }}
                     >
-                      {/* {getOptions(getCoordenadores())} */}
+                      {getOptions(optionsStatus)}
                     </Select>
                   </FormControl>
                   <Flex>
@@ -260,12 +275,12 @@ function ModalConfiguracoes() {
                       id="poloId"
                       name="polo"
                       width={"100%"}
-                      placeholder={polo?.polo}
-                      // onChange={(e) => {
-                      //   setPolo(e.target.value);
-                      // }}
+                      placeholder={polo?.toString()}
+                      onChange={(e) => {
+                        setPolo(+e.target.value);
+                      }}
                     >
-                      {/* {getOptions(getPolo())} */}
+                      {getOptions(optionsPolos)}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
@@ -285,12 +300,12 @@ function ModalConfiguracoes() {
                       id="localId"
                       name="local"
                       width={"100%"}
-                      placeholder={local?.local}
-                      // onChange={(e) => {
-                      //   setLocal(e.target.value);
-                      // }}
+                      placeholder={local?.toString()}
+                      onChange={(e) => {
+                        setLocal(+e.target.value);
+                      }}
                     >
-                      {/* {getOptions(getLocalProjeto())} */}
+                      {getOptions(optionsLocais)}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
@@ -310,12 +325,12 @@ function ModalConfiguracoes() {
                       id="solicitacaoId"
                       name="solicitacao"
                       width={"100%"}
-                      placeholder={solicitacao?.solicitante}
-                      // onChange={(e) => {
-                      //   setSolicitacao(e.target.value);
-                      // }}
+                      placeholder={solicitacao?.toString()}
+                      onChange={(e) => {
+                        setSolicitacao(+e.target.value);
+                      }}
                     >
-                      {/* {getOptions(getLocalProjeto())} */}
+                      {getOptions(optionsSolicitantes)}
                     </Select>
                   </FormControl>
                 </Flex>
@@ -381,7 +396,7 @@ function ModalConfiguracoes() {
                       </Text>
                     </FormLabel>
                     <Input
-                      placeholder={inicio}
+                      placeholder={inicio?.toString()}
                       borderRadius={"8px"}
                       max="9999-12-31"
                       maxLength={1}
@@ -392,8 +407,8 @@ function ModalConfiguracoes() {
                       id="fimId"
                       type="Date"
                       name="inicio"
-                      value={inicio}
-                      onChange={(event) => setInicio(event.target.value)}
+                      // value={inicio}
+                      // onChange={(event) => setInicio(event.target.value)}
                     />
                   </FormControl>
                   <FormControl>
@@ -403,7 +418,7 @@ function ModalConfiguracoes() {
                       </Text>
                     </FormLabel>
                     <Input
-                      placeholder={fim}
+                      placeholder={fim?.toString()}
                       borderRadius={"8px"}
                       max="9999-12-31"
                       maxLength={1}
@@ -414,8 +429,8 @@ function ModalConfiguracoes() {
                       id="fiId"
                       type="Date"
                       name="fim"
-                      value={fim}
-                      onChange={(event) => setFim(event.target.value)}
+                      // value={fim}
+                      // onChange={(event) => setFim(event.target.value)}
                     />
                   </FormControl>
                   <FormControl>
@@ -485,12 +500,12 @@ function ModalConfiguracoes() {
                       id="divisaoId"
                       name="divisao"
                       width={"100%"}
-                      placeholder={divisao?.divisao}
-                      // onChange={(e) => {
-                      //   setDivisao(e.target.value);
-                      // }}
+                      placeholder={divisao?.toString()}
+                      onChange={(e) => {
+                        setDivisao(+e.target.value);
+                      }}
                     >
-                      {/* {getOptions(getLocalProjeto())} */}
+                      {getOptions(optionsDivisoes)}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
@@ -510,12 +525,12 @@ function ModalConfiguracoes() {
                       id="classificacaoId"
                       name="classificacao"
                       width={"100%"}
-                      placeholder={classificacao?.classificacao}
-                      // onChange={(e) => {
-                      //   setClassificacao(e.target.value);
-                      // }}
+                      placeholder={classificacao?.toString()}
+                      onChange={(e) => {
+                        setClassificacao(+e.target.value);
+                      }}
                     >
-                      {/* {getOptions(getLocalProjeto())} */}
+                      {getOptions(optionsClassificacoes)}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
@@ -535,12 +550,12 @@ function ModalConfiguracoes() {
                       id="tipoId"
                       name="tipo"
                       width={"100%"}
-                      placeholder={tipo?.tipo}
-                      // onChange={(e) => {
-                      //   setTipo(e.target.value);
-                      // }}
+                      placeholder={tipo?.toString()}
+                      onChange={(e) => {
+                        setTipo(+e.target.value);
+                      }}
                     >
-                      {/* {getOptions(getLocalProjeto())} */}
+                      {getOptions(optionsTipoProjetos)}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
@@ -560,12 +575,12 @@ function ModalConfiguracoes() {
                       id="gateId"
                       name="gate"
                       width={"100%"}
-                      placeholder={gate?.gate}
-                      // onChange={(e) => {
-                      //   setGate(e.target.value);
-                      // }}
+                      placeholder={gate?.toString()}
+                      onChange={(e) => {
+                        setGate(+e.target.value);
+                      }}
                     >
-                      {/* {getOptions(getLocalProjeto())} */}
+                      {getOptions(optionsGates)}
                     </Select>
                   </FormControl>
                 </Flex>

@@ -1,19 +1,6 @@
-import {
-  Classificacao,
-  Coordenador,
-  Divisao,
-  Gate,
-  LocalProjeto,
-  Polo,
-  ResponsavelProjeto,
-  Solicitante,
-  StatusProjeto,
-  TipoProjeto,
-} from "./Services";
-
-export interface IUpdateProjetoDto {
-  nome_responsavel: number;
-  coordenador_nome: number;
+export interface IConfigProjetoDto {
+  responsavel: number;
+  coordenador: number;
   status: number;
   polo: number;
   local: number;
@@ -26,21 +13,4 @@ export interface IUpdateProjetoDto {
   classificacao: number;
   tipo: number;
   gate: number;
-}
-
-export interface IConfigProjetoDto {
-  responsavel: ResponsavelProjeto;
-  coordenador: Coordenador;
-  status: StatusProjeto;
-  polo: Polo;
-  local: LocalProjeto;
-  solicitacao: Solicitante;
-  nome_projeto: string;
-  elemento_pep: string;
-  data_inicio: string;
-  data_fim: string;
-  divisao: Divisao;
-  classificacao: Classificacao;
-  tipo: TipoProjeto;
-  gate: Gate;
 }
