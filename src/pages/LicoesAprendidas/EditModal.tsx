@@ -210,11 +210,11 @@ function EditModal({
                 </Text>
               </Button>
               <Button
-                background="origem.500"
+                background="#0047BB"
                 variant="primary"
                 color="white"
                 _hover={{
-                  background: "origem.600",
+                  background: "#0047BB",
                   transition: "all 0.4s",
                 }}
                 onClick={() => {
@@ -231,7 +231,7 @@ function EditModal({
                 height={"56px"}
               >
                 <Text fontSize={"18px"} fontWeight={"700"}>
-                  Concluir{" "}
+                  Salvar{" "}
                 </Text>
               </Button>
             </Flex>

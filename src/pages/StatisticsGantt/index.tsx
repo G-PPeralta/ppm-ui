@@ -15,6 +15,8 @@ import {
 } from "@chakra-ui/react";
 import { StatisticsGanttProps, StatisticsTableData } from "interfaces/Services";
 
+import ModalCadastroCronograma from "pages/Statistics/components/ModalCadastroCronograma";
+
 import Sidebar from "components/SideBar";
 
 // import { useToast } from "contexts/Toast";
@@ -27,7 +29,7 @@ import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
 
 import ModalCadastroOperacao from "../Statistics/components/ModalCadastroOperacao";
 import { Gantt } from "./components/Gantt";
-import ModalAdicionarOperacao from "./components/ModalAdicionarOperacao";
+// import ModalAdicionarOperacao from "./components/ModalAdicionarOperacao";
 import ModalEditarOperacao from "./components/ModalEditarOperacao";
 
 function StatisticsGantt() {
@@ -45,8 +47,8 @@ function StatisticsGantt() {
   const {
     registerForm,
     loading,
-    listaResponsaveis,
-    listaAreaAtuacao,
+    // listaResponsaveis,
+    // listaAreaAtuacao,
     onClose,
     onOpen,
     isOpen,
@@ -194,20 +196,24 @@ function StatisticsGantt() {
                     refresh={refresh}
                     setRefresh={setRefresh}
                   />
-                  <ModalAdicionarOperacao
+                  <ModalCadastroCronograma
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
+                  {/* <ModalAdicionarOperacao
                     setRefresh={setRefresh}
                     refresh={refresh}
                     // atividades={atividades}
                     projeto={projeto}
-                  />
+                  /> */}
                   <ModalEditarOperacao
                     setRefresh={setRefresh}
                     refresh={refresh}
                     // atividades={atividades}
                     editOp={editOp}
-                    setEditOp={setEditOp}
-                    listaResponsaveis={listaResponsaveis}
-                    listaAreaAtuacao={listaAreaAtuacao}
+                    // setEditOp={setEditOp}
+                    // listaResponsaveis={listaResponsaveis}
+                    // listaAreaAtuacao={listaAreaAtuacao}
                     isOpen={isOpen}
                     onClose={onClose}
                     registerForm={registerForm}

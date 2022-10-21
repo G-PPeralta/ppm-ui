@@ -3,11 +3,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import { cadastroValorPrevistoSchema } from "validations/ModalCadastroOrcamento";
 
-import { parseNumber } from "utils/regexCoinMask";
-
 import { useToast } from "contexts/Toast";
-
-import { postAatualizarValorPrevisto } from "services/post/Budget";
 
 import { useAuth } from "./useAuth";
 
@@ -15,11 +11,9 @@ export function useCadastroOrcamentoPrevisto() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
-  const [atividade, setAtividade] = useState<number>(0);
 
   const initialValues = {
-    valor: "",
-    atividadeId: "",
+    previsto: "",
     nom_usu_create: user?.nome,
   };
 
@@ -27,33 +21,30 @@ export function useCadastroOrcamentoPrevisto() {
     initialValues,
     validationSchema: cadastroValorPrevistoSchema,
     onSubmit: async (values) => {
-      const newValues = {
-        atividadeId: atividade,
-        valor: +parseNumber(values.valor),
+      /* const newValues = {
+        previsto: values.previsto,
         nom_usu_create: user?.nome,
-      };
+      }; */
 
       setLoading(true);
 
       try {
-        const { status } = await postAatualizarValorPrevisto(newValues);
+        //   const { status } = await postNovaSonda(newValues);
+
+        const status = 200;
         if (status === 200 || status === 201) {
           toast.success(
-            `Valor Previsto ${parseNumber(values.valor)} editado com sucesso!`,
+            `Valor Previsto ${values.previsto} cadastrada com sucesso!`,
             {
               id: "toast-principal",
             }
           );
           setLoading(false);
-          location.reload();
         }
       } catch (error) {
-        toast.error(
-          `Erro ao editar valor previsto ${parseNumber(values.valor)}!`,
-          {
-            id: "toast-principal",
-          }
-        );
+        toast.error(`Erro ao cadastrar valor previsto ${values.previsto}!`, {
+          id: "toast-principal",
+        });
         setLoading(false);
       }
     },
@@ -62,6 +53,5 @@ export function useCadastroOrcamentoPrevisto() {
   return {
     registerForm,
     loading,
-    setAtividade,
   };
 }

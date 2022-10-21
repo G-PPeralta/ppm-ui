@@ -311,7 +311,7 @@ export function EditarFornecedorModal({
               </Text>
             </Button>
             <Button
-              background="origem.500"
+              background="#0047BB"
               variant="primary"
               color="white"
               onClick={() => {
@@ -325,7 +325,7 @@ export function EditarFornecedorModal({
                 });
               }}
               _hover={{
-                background: "origem.600",
+                background: "origem.500",
                 transition: "all 0.4s",
               }}
               width={"128px"}
