@@ -69,3 +69,19 @@ export interface ClasseServico {
   id: number;
   classe_servico: string;
 }
+
+interface CustoDiarioFilho {
+  id: number;
+  index: string;
+  atividade: string;
+  fornecedor: string;
+  realizado: number;
+}
+export interface CustoDiario {
+  id: number;
+  index: string;
+  date: string;
+  fornecedor: string;
+  realizado: number;
+  filhos: CustoDiarioFilho[];
+}
