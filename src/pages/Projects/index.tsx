@@ -142,6 +142,8 @@ export function Projects() {
                       </Text>
                       <Input
                         h={"56px"}
+                        fontSize={"14px"}
+                        fontFamily={"Mulish"}
                         fontWeight={"400"}
                         width={"328px"}
                         color={"black"}
@@ -165,6 +167,8 @@ export function Projects() {
                       </Text>
 
                       <Select
+                        fontSize={"14px"}
+                        fontFamily={"Mulish"}
                         fontWeight={"400"}
                         h={"56px"}
                         w={"208px"}

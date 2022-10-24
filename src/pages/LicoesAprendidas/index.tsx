@@ -297,6 +297,9 @@ export function LicoesAprendidasProjetos() {
                     PROJETO
                   </FormLabel>
                   <Select
+                    fontSize={"14px"}
+                    fontFamily={"Mulish"}
+                    fontWeight={"400"}
                     mt={"-9px"}
                     borderRadius={"8px"}
                     placeholder="Selecione"
