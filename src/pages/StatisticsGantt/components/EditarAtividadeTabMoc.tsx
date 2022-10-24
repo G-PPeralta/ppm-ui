@@ -37,7 +37,18 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
       <Flex flex={1} justify={"space-between"} direction={"column"} gap={4}>
         {registerForm.values.mocs.map((_moc: any, index: number) => (
           <Flex gap={4} justify={"space-between"} align={"end"}>
-            <Flex w={"70%"} align={"end"} gap={2}>
+            <Flex w={"50%"} align={"end"} gap={2}>
+              <InputGenerico
+                registerForm={registerForm}
+                nomeInput={"NÚMERO DA MOC"}
+                propName={`mocs[${index}].numero_moc`}
+                value={regexCaracteresEspeciais(
+                  registerForm.values.mocs[index].numero_moc
+                )}
+                required={false}
+                placeholder={"Número da MOC"}
+                maxLength={100}
+              />
               <IconButton
                 aria-label="Botão de Deletar"
                 icon={<FiTrash size={20} />}
@@ -52,17 +63,6 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
                   color: "white",
                 }}
                 onClick={() => removerMoc(index)}
-              />
-              <InputGenerico
-                registerForm={registerForm}
-                nomeInput={"NÚMERO DA MOC"}
-                propName={`mocs[${index}].numero_moc`}
-                value={regexCaracteresEspeciais(
-                  registerForm.values.mocs[index].numero_moc
-                )}
-                required={false}
-                placeholder={"Número da MOC"}
-                maxLength={100}
               />
             </Flex>
             <Button
