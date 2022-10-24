@@ -184,7 +184,7 @@ function ModalAdicionarOperacao({
     registerForm.setFieldValue("ocorrencias", ocorrenciasMock);
   }, [editOp]);
 
-  // console.log("registerForm", registerForm.values);
+  // console.log("registerForm", registerForm);
   // console.log("editOp", editOp);
 
   const botoes = [
@@ -250,7 +250,7 @@ function ModalAdicionarOperacao({
           >
             <ModalBody mt={3}>
               <Flex flex={1} mt={5}>
-                <Tabs variant={"unstyled"} isLazy={true}>
+                <Tabs variant={"unstyled"} isLazy={true} flex={1}>
                   <TabList>
                     <ButtonGroup size="lg" isAttached variant="outline">
                       {botoes.map((botao, index) => (
@@ -274,27 +274,28 @@ function ModalAdicionarOperacao({
                     </ButtonGroup>
                   </TabList>
 
-                  <TabPanels>
-                    <TabPanel>
+                  <TabPanels flex={1}>
+                    <TabPanel flex={1}>
                       <EditarAtividadeTabGeral registerForm={registerForm} />
                     </TabPanel>
-                    <TabPanel>
+                    <TabPanel flex={1}>
                       <EditarAtividadeTabAnotacoes
                         registerForm={registerForm}
                       />
                     </TabPanel>
-                    <TabPanel>
+                    <TabPanel flex={1}>
                       <EditarAtividadeTabMOC registerForm={registerForm} />
                     </TabPanel>
-                    <TabPanel>
+                    <TabPanel flex={1}>
                       <EditarAtividadeTabLicoesAprendidas
                         registerForm={registerForm}
                         refreshState={refreshState}
                       />
                     </TabPanel>
-                    <TabPanel>
+                    <TabPanel flex={1}>
                       <EditarAtividadeTabOcorrencias
                         registerForm={registerForm}
+                        refreshState={refreshState}
                       />
                     </TabPanel>
                   </TabPanels>

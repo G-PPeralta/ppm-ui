@@ -40,3 +40,47 @@ export const cadastroLicaoAprendida = yup.object({
   data: yup.string().required("O campo é obrigatório!"),
   acoes_e_recomendacoes: yup.string().required("O campo é obrigatório!"),
 });
+
+export const cadastroOcorrenciaAtividade = yup.object({
+  ocorrencia: yup.string().required("O campo é obrigatório!"),
+  impacto: yup.string().required("O campo é obrigatório!"),
+  observacoes: yup.string().required("O campo é obrigatório!"),
+});
+
+export const editarAtividadeGanttSchema = yup.object({
+  id_atividade: yup.number().required("Campo obrigatório").moreThan(0),
+  nome_atividade: yup.string().required("Campo obrigatório"),
+  pct_real: yup.number().required("Campo obrigatório"),
+  hrs_reais: yup.number().required("Campo obrigatório"),
+  inicio_realizado: yup.date().required("Campo obrigatório"),
+  fim_realizado: yup.date().required("Campo obrigatório"),
+  inicio_planejado: yup.date().required("Campo obrigatório"),
+  fim_planejado: yup.date().required("Campo obrigatório"),
+  anotacoes: yup.string().required("Campo obrigatório"),
+  mocs: yup.array().of(
+    yup.object({
+      numero_moc: yup.string(),
+    })
+  ),
+});
+
+export const teste = yup.object({
+  geral: yup.object({
+    id_atividade: yup.number().required("Campo obrigatório").moreThan(0),
+    nome_atividade: yup.string().required("Campo obrigatório"),
+    pct_real: yup.number().required("Campo obrigatório"),
+    hrs_reais: yup.number().required("Campo obrigatório"),
+    inicio_realizado: yup.date().required("Campo obrigatório"),
+    fim_realizado: yup.date().required("Campo obrigatório"),
+    inicio_planejado: yup.date().required("Campo obrigatório"),
+    fim_planejado: yup.date().required("Campo obrigatório"),
+  }),
+  anotacoes: yup.object({
+    anotacoes: yup.string().required("Campo obrigatório"),
+  }),
+  mocs: yup.array().of(
+    yup.object({
+      numero_moc: yup.string(),
+    })
+  ),
+});

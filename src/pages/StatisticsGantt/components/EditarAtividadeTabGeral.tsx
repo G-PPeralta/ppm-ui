@@ -3,20 +3,12 @@ import { Flex } from "@chakra-ui/react";
 import DatePickerGenerico from "components/DatePickerGenerico";
 import InputGenerico from "components/InputGenerico";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
-import SelectFiltragem from "components/SelectFiltragem";
-
-import { getSelectFiltragemValue } from "utils/GetSelectFiltragemValue";
 
 interface Props {
   registerForm: any;
 }
 
 function EditarAtividadeTabGeral({ registerForm }: Props) {
-  const optionsStatusMock = [
-    { value: 1, label: "Em andamento" },
-    { value: 2, label: "Concluído" },
-    { value: 3, label: "Cancelado" },
-  ];
   return (
     <Flex w={"100%"} direction={"column"} gap={5}>
       <Flex gap={4}>
@@ -53,7 +45,7 @@ function EditarAtividadeTabGeral({ registerForm }: Props) {
           />
         </Flex>
       </Flex>
-      <Flex gap={4}>
+      <Flex gap={4} w={"70%"}>
         <InputNumericoGenerico
           registerForm={registerForm}
           propName={"hrs_reais"}
@@ -61,17 +53,7 @@ function EditarAtividadeTabGeral({ registerForm }: Props) {
           tipo={"hora"}
           stepper={false}
         />
-        <SelectFiltragem
-          registerForm={registerForm}
-          nomeSelect={"STATUS"}
-          propName={"status_id"}
-          options={optionsStatusMock}
-          value={getSelectFiltragemValue(
-            optionsStatusMock,
-            "status_id",
-            registerForm
-          )}
-        />
+
         <DatePickerGenerico
           nomeLabel={"DATA INÍCIO"}
           registerForm={registerForm}
