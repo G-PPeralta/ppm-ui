@@ -26,7 +26,7 @@ import { AtividadesProjeto } from "interfaces/Services";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-import { handleCancelar, handleCadastrar } from "utils/handleCadastro";
+import { handleCancelar /*, handleCadastrar */ } from "utils/handleCadastro";
 
 import { useModalCadastroTarefa } from "hooks/useModalCadastroTarefa";
 
@@ -293,7 +293,7 @@ function CadastroTarefasModal({
                   background: "#0047BB",
                   transition: "all 0.4s",
                 }}
-                onClick={() => handleCadastrar(registerForm, closeModal)}
+                // onClick={() => handleCadastrar(registerForm, closeModal)}
               >
                 Adicionar
               </Button>
