@@ -28,7 +28,7 @@ export function GraficoSPT() {
 
   const dataMock2 = [
     {
-      month: "Pir-61",
+      month: "Jan/2022",
       Manutenção: 10,
       "Recurso Origem": 20,
       "Recurso Cia": 10,
@@ -37,7 +37,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Pir-62",
+      month: "Fev/2022",
       Manutenção: 5,
       "Recurso Origem": 5,
       "Recurso Cia": 10,
@@ -46,7 +46,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Pir-63",
+      month: "Mar/2022",
       Manutenção: 5,
       "Recurso Origem": 5,
       "Recurso Cia": 10,
@@ -55,7 +55,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Pir-64",
+      month: "Abr/2022",
       Manutenção: 10,
       "Recurso Origem": 20,
       "Recurso Cia": 10,
@@ -64,7 +64,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Pir-65",
+      month: "Mai/2022",
       Manutenção: 10,
       "Recurso Origem": 20,
       "Recurso Cia": 10,
@@ -73,7 +73,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Pir-66",
+      month: "Jun/2022",
       Manutenção: 5,
       "Recurso Origem": 5,
       "Recurso Cia": 10,
@@ -82,7 +82,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Pir-67",
+      month: "Jul/2022",
       Manutenção: 10,
       "Recurso Origem": 20,
       "Recurso Cia": 10,
@@ -91,7 +91,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Pir-68",
+      month: "Ago/2022",
       Manutenção: 20,
       "Recurso Origem": 20,
       "Recurso Cia": 20,
@@ -100,7 +100,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Pir-69",
+      month: "Set/2022",
       Manutenção: 5,
       "Recurso Origem": 5,
       "Recurso Cia": 10,
@@ -109,7 +109,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Pir-70",
+      month: "Out/2022",
       Manutenção: 10,
       "Recurso Origem": 20,
       "Recurso Cia": 10,
@@ -118,7 +118,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Pir-71",
+      month: "Nov/2022",
       Manutenção: 10,
       "Recurso Origem": 10,
       "Recurso Cia": 10,
@@ -127,7 +127,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 90,
     },
     {
-      month: "Pir-72",
+      month: "Dez/2022",
       Manutenção: 10,
       "Recurso Origem": 20,
       "Recurso Cia": 10,

@@ -19,11 +19,11 @@ import {
 
 import StackedBarChart from "components/StackedBarChartGraphic";
 
-import { getCampo, getSonda } from "services/get/CadastroModaisInfograficos";
+import { getSonda } from "services/get/CadastroModaisInfograficos";
 
 export function GraficoPorDuracao() {
   const [listaSondas, setListaSondas] = useState<any[]>([]);
-  const [campos, setCampos] = useState<any[]>([]);
+
   // const [loading, setLoading] = useState(true);
   const durationHistory = [
     "Mínimo - 8 horas",
@@ -91,15 +91,6 @@ export function GraficoPorDuracao() {
     const sondasSorted = sondas.data.sort((a: any, b: any) =>
       a.nom_sonda.localeCompare(b.nom_sonda)
     );
-
-    const campos = await getCampo();
-    // setLoading(false);
-
-    const camposSorted = campos.data.sort((a: any, b: any) =>
-      a.campo.localeCompare(b.campo)
-    );
-
-    setCampos(camposSorted);
 
     setListaSondas(sondasSorted);
   };
@@ -304,7 +295,7 @@ export function GraficoPorDuracao() {
                   fontWeight={"700"}
                   htmlFor="campo"
                 >
-                  CAMPO
+                  OPERAÇÃO
                 </FormLabel>
                 <Select
                   mt={"-9px"}
@@ -319,9 +310,9 @@ export function GraficoPorDuracao() {
                   fontSize={"14px"}
                   fontWeight={"400"}
                 >
-                  {campos.map((d) => (
+                  {/* {campos.map((d) => (
                     <option>{d.campo}</option>
-                  ))}
+                  ))} */}
                 </Select>
               </FormControl>
             </Flex>
