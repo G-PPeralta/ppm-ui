@@ -24,6 +24,8 @@ import {
 } from "@chakra-ui/react";
 import { AtividadesProjeto } from "interfaces/Services";
 
+import { RequiredField } from "components/RequiredField/RequiredField";
+
 import { handleCancelar, handleCadastrar } from "utils/handleCadastro";
 
 import { useModalCadastroTarefa } from "hooks/useModalCadastroTarefa";
@@ -116,7 +118,7 @@ function CadastroTarefasModal({
                   fontWeight="700"
                   mt={"6px"}
                 >
-                  TAREFA
+                  TAREFA <RequiredField />
                 </FormLabel>
                 <Input
                   maxLength={50}
@@ -145,7 +147,7 @@ function CadastroTarefasModal({
                   fontWeight="700"
                   mt={"6px"}
                 >
-                  DATA
+                  DATA <RequiredField />
                 </FormLabel>
                 <Input
                   fontSize={"14px"}
@@ -213,7 +215,7 @@ function CadastroTarefasModal({
                   fontWeight="700"
                   mt={"6px"}
                 >
-                  RESPONSÁVEL
+                  RESPONSÁVEL <RequiredField />
                 </FormLabel>
                 <Input
                   maxLength={50}
