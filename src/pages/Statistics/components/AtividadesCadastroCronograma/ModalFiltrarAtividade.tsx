@@ -1,3 +1,7 @@
+import { forwardRef, useState } from "react";
+import DatePicker from "react-datepicker";
+import { MdFilterAlt } from "react-icons/md";
+
 import {
   Modal,
   useDisclosure,
@@ -14,15 +18,14 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
+import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
+
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import SelectFiltragem from "components/SelectFiltragem";
+
 import { useCadastroCronograma } from "hooks/useCadastroCronograma";
 import { useFiltragemCronogramaAtividade } from "hooks/useFiltragemCronogramaAtividade";
-import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
-import { MdFilterAlt } from "react-icons/md";
-import DatePicker from "react-datepicker";
-import { forwardRef, useState } from "react";
 
 export function ModalFiltrarAtividade({ refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();

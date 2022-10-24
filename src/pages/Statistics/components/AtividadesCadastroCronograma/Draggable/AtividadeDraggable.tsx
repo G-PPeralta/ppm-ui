@@ -20,8 +20,8 @@ import { Operacao } from "interfaces/Estatisticas";
 import { RequiredField } from "components/RequiredField/RequiredField";
 
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
-import DateTimePicker from "./DateTimePicker";
 import { ModalFiltrarAtividade } from "../ModalFiltrarAtividade";
+import DateTimePicker from "./DateTimePicker";
 // import PopOverPrecedentes from "./PopOverPrecedentes";
 interface Props {
   registerForm: FormikProps<any>;
