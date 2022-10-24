@@ -13,6 +13,7 @@ function SelectFiltragem({
   value,
   idCampanha,
   required,
+  width,
 }: any) {
   const handleChange = ({ value }: any, { name }: any) => {
     registerForm.setFieldValue(name, value);
@@ -55,6 +56,34 @@ function SelectFiltragem({
     }),
   };
 
+  const customStyles208 = {
+    placeholder: (defaultStyles: any) => ({
+      ...defaultStyles,
+      color: "#949494",
+    }),
+    control: (base: any) => ({
+      ...base,
+      height: 56,
+      minHeight: 56,
+      border: "0.5px solid #E2E8F0",
+      borderRadius: "8px",
+      fontWeigth: "400",
+      fontSize: "14px",
+      width: "208px",
+    }),
+
+    dropdownIndicator: (base: any) => ({
+      ...base,
+      color: "#2D2926",
+    }),
+
+    menu: (base: any) => ({
+      ...base,
+      zIndex: 9999,
+      minWidth: "300px",
+    }),
+  };
+
   return (
     <>
       <FormControl>
@@ -67,7 +96,7 @@ function SelectFiltragem({
           </Flex>
         )}
         <Select
-          styles={customStyles}
+          styles={width ? customStyles208 : customStyles}
           components={{
             IndicatorSeparator: () => null,
           }}

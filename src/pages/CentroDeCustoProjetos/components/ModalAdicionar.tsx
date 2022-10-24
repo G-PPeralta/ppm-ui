@@ -4,13 +4,14 @@ import {
   Button,
   Flex,
   Input,
-  InputGroup,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  NumberInput,
+  NumberInputField,
   Text,
   Textarea,
   useDisclosure,
@@ -18,7 +19,6 @@ import {
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
-import InputGenerico from "components/InputGenerico";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
@@ -85,7 +85,17 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
             <Flex direction={"column"} gap={4}>
               <Flex gap={4}>
                 <Flex direction={"column"}>
-                  {/* <NumberInput
+                  <Flex gap={1}>
+                    <RequiredField />
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      VALOR
+                    </Text>
+                  </Flex>
+                  <NumberInput
                     h={"56px"}
                     precision={2}
                     max={9999999}
@@ -98,19 +108,7 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
                     }
                   >
                     <NumberInputField bg={"#fff"} h={"56px"} />
-                  </NumberInput> */}
-                  <InputGroup>
-                    <InputGenerico
-                      registerForm={registerForm}
-                      nomeInput={"VALOR"}
-                      propName={"valor"}
-                      value={registerForm.values.valor || ""}
-                      required={true}
-                      placeholder={"0"}
-                      maxLength={20}
-                      isNumeric={true}
-                    />
-                  </InputGroup>
+                  </NumberInput>
                 </Flex>
                 <Flex direction={"column"}>
                   <DateTimePickerData

@@ -15,11 +15,11 @@ export async function getInfoProjetos(id: string): Promise<{
   return { data, status };
 }
 
-export async function getProgressoProjeto(id: number): Promise<{
+export async function getProgressoProjeto(): Promise<{
   data: ProjetoProgresso[];
   status: number;
 }> {
-  const { data, status } = await api.get(`/detalhamento/progresso/${id}`, {
+  const { data, status } = await api.get(`/detalhamento/progresso`, {
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },
@@ -45,10 +45,10 @@ export async function getInfoFinanceiro(id: string): Promise<{
 }
 
 export async function getCPiSPi(id: number): Promise<{
-  data: CpiSpi[];
+  data: CpiSpi;
   status: number;
 }> {
-  const { data, status } = await api.get(`/detalhamento/cpi-spi/${id}`, {
+  const { data, status } = await api.get(`/detalhamento/cpi-spi/${id}}`, {
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },

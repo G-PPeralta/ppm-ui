@@ -21,12 +21,18 @@ function CardInfoProjeto({
   const chartsProps = [
     {
       name: "Undone",
-      value: progresso ? 100 - Number(progresso[0].fn_cron_calc_pct_real) : 0,
+      value:
+        progresso.length > 0
+          ? 100 - Number(progresso[0].fn_cron_calc_pct_real.substring(0, 2))
+          : 0,
       color: "#dddddd",
     },
     {
       name: "Done",
-      value: progresso ? Number(progresso[0].fn_cron_calc_pct_real) : 0,
+      value:
+        progresso.length > 0
+          ? Number(progresso[0].fn_cron_calc_pct_real.substring(0, 2))
+          : 0,
       color: "#00B53D",
     },
   ];

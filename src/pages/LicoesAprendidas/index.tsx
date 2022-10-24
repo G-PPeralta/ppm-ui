@@ -321,13 +321,14 @@ export function LicoesAprendidasProjetos() {
               <Flex align={"flex-end"}>
                 <Button
                   type="button"
-                  background="origem.500"
+                  background="#0047BB"
                   variant="outline"
                   color="white"
                   borderColor="#0047BB"
                   _hover={{
-                    background: "origem.600",
+                    background: "white",
                     transition: "all 0.4s",
+                    color: "#0047BB",
                   }}
                   rightIcon={<FiSearch />}
                   onClick={handleClick}

@@ -30,8 +30,9 @@ import { handleCancelar } from "utils/handleCadastro";
 import { useAuth } from "hooks/useAuth";
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
-import { getInitialRaking } from "services/get/Ranking";
 import { postProject } from "services/post/Priorizacao";
+
+import { getInitialRaking } from "../../../services/get/Ranking";
 
 type PropsType = {
   projeto: number;

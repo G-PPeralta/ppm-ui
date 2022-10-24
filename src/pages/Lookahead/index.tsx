@@ -95,13 +95,13 @@ export function Lookahead() {
                   <Flex alignItems="flex-end" marginLeft="16px">
                     <Button
                       h={"56px"}
-                      background={"origem.500"}
+                      background={"#0047BB"}
                       border={"2.3px solid"}
                       color={"white"}
                       variant="primary"
                       _hover={{
-                        background: "origem.600",
-                        color: "white",
+                        background: "white",
+                        color: "#0047BB",
                         transition: "all 0.4s",
                       }}
                       rightIcon={<FiSearch />}

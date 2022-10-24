@@ -189,7 +189,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red.500"
+                  color="rred.500ed"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: "red.500",

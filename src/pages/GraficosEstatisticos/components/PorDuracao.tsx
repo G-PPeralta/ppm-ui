@@ -19,12 +19,11 @@ import {
 
 import StackedBarChart from "components/StackedBarChartGraphic";
 
-import { getSonda } from "services/get/CadastroModaisInfograficos";
-import { getOperacoes } from "services/get/Estatisticas";
+import { getCampo, getSonda } from "services/get/CadastroModaisInfograficos";
 
 export function GraficoPorDuracao() {
   const [listaSondas, setListaSondas] = useState<any[]>([]);
-  const [operacao, setOperacao] = useState<any[]>([]);
+  const [campos, setCampos] = useState<any[]>([]);
   // const [loading, setLoading] = useState(true);
   const durationHistory = [
     "Mínimo - 8 horas",
@@ -93,20 +92,20 @@ export function GraficoPorDuracao() {
       a.nom_sonda.localeCompare(b.nom_sonda)
     );
 
-    const operacao = await getOperacoes();
+    const campos = await getCampo();
     // setLoading(false);
 
-    // const operacaoSorted = operacao.data.sort((a: any, b: any) =>
-    //   a.campo.localeCompare(b.campo)
-    // );
+    const camposSorted = campos.data.sort((a: any, b: any) =>
+      a.campo.localeCompare(b.campo)
+    );
 
-    setOperacao(operacao.data);
+    setCampos(camposSorted);
 
     setListaSondas(sondasSorted);
   };
 
   // console.log(listaSondas);
-  // console.log(operacao);
+  // console.log(campos);
 
   useEffect(() => {
     reqGet();
@@ -303,25 +302,25 @@ export function GraficoPorDuracao() {
                   fontSize={"12px"}
                   color={"#949494"}
                   fontWeight={"700"}
-                  htmlFor="operacao"
+                  htmlFor="campo"
                 >
-                  OPERAÇÃO
+                  CAMPO
                 </FormLabel>
                 <Select
                   mt={"-9px"}
-                  id="operacao"
-                  name="operacao"
+                  id="campo"
+                  name="campo"
                   width={"208px"}
                   height={"56px"}
                   borderRadius={"8px"}
-                  placeholder="Operação"
+                  placeholder="Campo"
                   // onChange={handleProjectChange}
                   color={"#2D2926"}
                   fontSize={"14px"}
                   fontWeight={"400"}
                 >
-                  {operacao.map((d) => (
-                    <option>{d.nom_operacao}</option>
+                  {campos.map((d) => (
+                    <option>{d.campo}</option>
                   ))}
                 </Select>
               </FormControl>

@@ -58,12 +58,7 @@ export function TabelaProjetos({ data }: TableProps) {
 
   const tableData = data.slice(from, to).map((projeto, key) => (
     <Tr key={key}>
-      <Td
-        // isNumeric
-        fontWeight={"semibold"}
-        textAlign={"center"}
-        color={"#2D2926"}
-      >
+      <Td isNumeric textAlign={"center"}>
         {projeto.id_projeto_real}
       </Td>
       <Td>
@@ -79,7 +74,7 @@ export function TabelaProjetos({ data }: TableProps) {
           )}
         </Link>
       </Td>
-      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+      <Td textAlign={"center"}>
         {projeto.vlr_cpi >= 1 ? (
           <Flex alignItems={"center"}>
             <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
@@ -92,7 +87,7 @@ export function TabelaProjetos({ data }: TableProps) {
           </Flex>
         )}
       </Td>
-      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+      <Td textAlign={"center"}>
         {projeto.vlr_spi == 1 ? (
           <Flex alignItems={"center"}>
             <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
@@ -112,31 +107,19 @@ export function TabelaProjetos({ data }: TableProps) {
           ? (100 - (+projeto.vlr_cr / +projeto.vlr_orcado) * 100).toFixed(2)
           : 0
       } %`}</Td>
-      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-        {projeto.prioridade}
-      </Td>
-      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-        {projeto.complexidade}
-      </Td>
-      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-        {projeto.polo}
-      </Td>
-      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-        {projeto.coordenador}
-      </Td>
+      <Td textAlign={"center"}>{projeto.complexidade}</Td>
+      <Td textAlign={"center"}>{projeto.prioridade}</Td>
+      <Td textAlign={"center"}>{projeto.polo}</Td>
+      <Td>{projeto.coordenador}</Td>
       <Td>{projeto.responsavel}</Td>
-      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-        {formatDate(new Date(projeto.data_inicio))}
-      </Td>
-      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-        {formatDate(new Date(projeto.data_fim))}
-      </Td>
-      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>{`${
+      <Td textAlign={"center"}>{formatDate(new Date(projeto.data_inicio))}</Td>
+      <Td textAlign={"center"}>{formatDate(new Date(projeto.data_fim))}</Td>
+      <Td textAlign={"center"}>{`${
         projeto.vlr_cr && projeto.vlr_orcado
           ? ((projeto.vlr_cr / projeto.vlr_orcado) * 100).toFixed(2)
           : 0
       } %`}</Td>
-      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+      <Td>
         {/* <ExpansibleText
           text={projeto.descricao + " " + projeto.justificativa}
         /> */}
@@ -156,7 +139,7 @@ export function TabelaProjetos({ data }: TableProps) {
           <Text>{projeto.descricao + " " + projeto.justificativa}</Text>
         )}
       </Td>
-      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+      <Td textAlign={"center"}>
         <ModalCadastrarPriorizacao projeto={projeto.id_projeto_real} />
         <ModalDeletarProjeto projeto={projeto.id_projeto_real} />
       </Td>

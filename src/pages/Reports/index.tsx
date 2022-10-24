@@ -165,11 +165,10 @@ export function Reports() {
                   <FormControl className="toBottom" maxW={"fit-content"}>
                     <Button
                       color="white"
-                      background="origem.500"
+                      background="origem.300"
                       variant="primary"
                       _hover={{
-                        background: "origem.600",
-                        color: "white",
+                        background: "origem.500",
                         transition: "all 0.4s",
                       }}
                       rightIcon={<FiPlusCircle />}
@@ -269,13 +268,13 @@ export function Reports() {
                   <Button
                     h={"56px"}
                     // w={"98px"}
-                    background={"origem.500"}
+                    background={"#0047BB"}
                     border={"2.3px solid"}
                     color={"white"}
                     variant="primary"
                     _hover={{
-                      background: "origem.600",
-                      color: "white",
+                      background: "white",
+                      color: "#0047BB",
                       transition: "all 0.4s",
                     }}
                     rightIcon={<FiPlus />}

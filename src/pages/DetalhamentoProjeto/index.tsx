@@ -107,12 +107,10 @@ function DetalhamentoProjeto() {
   }
 
   async function handleGetProgresso() {
-    if (id) {
-      setProgressoLoading(true);
-      const response = await getProgressoProjeto(Number(id));
-      setProgresso(response.data);
-      setProgressoLoading(false);
-    }
+    setProgressoLoading(true);
+    const response = await getProgressoProjeto();
+    setProgresso(response.data);
+    setProgressoLoading(false);
   }
 
   useEffect(() => {
