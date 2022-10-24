@@ -5,7 +5,6 @@ import React, {
   ReactPortal,
   useState,
 } from "react";
-import { IoMdPodium } from "react-icons/io";
 
 import {
   Button,
@@ -47,7 +46,7 @@ function ModalConfiguracoes({
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   // MODAL PRIORIZAÇÃO
-  const [isPriorizacaoModalOpen, setIsPriorizacaoModalOpen] = useState(false);
+  // const [isPriorizacaoModalOpen, setIsPriorizacaoModalOpen] = useState(false);
 
   // FORM LABELS
   const [responsavel, setReponsavel] = useState(projeto?.responsavel_id);
@@ -271,10 +270,17 @@ function ModalConfiguracoes({
                         }}
                         fontWeight={"700"}
                         fontSize="18px"
-                        rightIcon={<IoMdPodium />}
-                        onClick={() => setIsPriorizacaoModalOpen(true)}
+                        // rightIcon={<IoMdPodium />}
+                        // onClick={() => setIsPriorizacaoModalOpen(true)}
                       >
                         Priorização
+                        {
+                          <ModalCadastrarPriorizacao
+                            refresh={refresh}
+                            setRefresh={setRefresh}
+                            projeto={projeto.id}
+                          />
+                        }
                       </Button>
                     </FormControl>
                   </Flex>
@@ -662,13 +668,6 @@ function ModalConfiguracoes({
                 Salvar
               </Button>
             </Flex>
-            {isPriorizacaoModalOpen && (
-              <ModalCadastrarPriorizacao
-                refresh={refresh}
-                setRefresh={setRefresh}
-                projeto={projeto.id}
-              />
-            )}
           </ModalFooter>
         </ModalContent>
       </Modal>
