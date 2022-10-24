@@ -1,4 +1,4 @@
-import {
+import React, {
   JSXElementConstructor,
   ReactElement,
   ReactFragment,
@@ -25,8 +25,11 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { IConfigProjetoDto } from "interfaces/ConfiguracaoProjeto";
+import { ProjetosConfig } from "interfaces/Services";
 
 import { useProjetos } from "hooks/useCadastroProjeto";
+
+import { patchProjeto } from "services/update/Projeto";
 
 // import {
 //   getCoordenadores,
@@ -34,29 +37,38 @@ import { useProjetos } from "hooks/useCadastroProjeto";
 // } from "services/get/CadastroModaisInfograficos";
 // import { getLocalProjeto, getPolo } from "services/get/Projetos";
 
-// interface ConfigProjetoProps {
-//   id: number;
-// }
+interface ConfigProjetoProps {
+  projeto: ProjetosConfig;
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-function ModalConfiguracoes() {
+function ModalConfiguracoes({
+  projeto,
+  refresh,
+  setRefresh,
+}: ConfigProjetoProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [projeto] = useState<IConfigProjetoDto>();
 
   // FORM LABELS
-  const [responsavel, setReponsavel] = useState(projeto?.responsavel);
-  const [coordenador, setCoordenador] = useState(projeto?.coordenador);
-  const [status, setStatus] = useState(projeto?.status);
-  const [polo, setPolo] = useState(projeto?.polo);
-  const [local, setLocal] = useState(projeto?.local);
-  const [solicitacao, setSolicitacao] = useState(projeto?.solicitacao);
+  const [responsavel, setReponsavel] = useState(projeto?.responsavel_id);
+  const [coordenador, setCoordenador] = useState(projeto?.coordenador_id);
+  const [status, setStatus] = useState(projeto?.status_id);
+  const [polo, setPolo] = useState(projeto?.polo_id);
+  const [local, setLocal] = useState(projeto?.local_id);
+  const [solicitacao, setSolicitacao] = useState(projeto?.solicitante_id);
   const [nomeProjeto, setNomeProjeto] = useState(projeto?.nome_projeto);
   const [elementoPep, setElementoPep] = useState(projeto?.elemento_pep);
-  const [inicio] = useState(projeto?.data_inicio);
-  const [fim] = useState(projeto?.data_fim);
-  const [divisao, setDivisao] = useState(projeto?.divisao);
-  const [classificacao, setClassificacao] = useState(projeto?.classificacao);
-  const [tipo, setTipo] = useState(projeto?.tipo);
-  const [gate, setGate] = useState(projeto?.gate);
+  const [inicio, setInicio] = useState(projeto?.data_inicio);
+  const [fim, setFim] = useState(projeto?.data_fim);
+  // eslint-disable-next-line no-unused-vars
+  const [inicioReal, setInicioReal] = useState(projeto?.dataInicio_real);
+  // eslint-disable-next-line no-unused-vars
+  const [fimReal, setFimReal] = useState(projeto?.dataFim_real);
+  const [divisao, setDivisao] = useState(projeto?.divisao_id);
+  const [classificacao, setClassificacao] = useState(projeto?.classificacao_id);
+  const [tipo, setTipo] = useState(projeto?.tipo_projeto_id);
+  const [gate, setGate] = useState(projeto?.gate_id);
 
   const {
     optionsResponsaveis,
@@ -71,19 +83,34 @@ function ModalConfiguracoes() {
     optionsGates,
   } = useProjetos();
 
-  // const [render] = useState(false);
-
-  // const handleGetProjeto = async () => {
-  //   const { data } = await getProjeto(id);
-  //   setProjeto(data);
-  // };
-
-  // useEffect(() => {
-  //   handleGetProjeto();
-  // }, [render]);
+  async function openModalAPI() {
+    onOpen();
+  }
 
   const handleCancelar = () => {
     onClose();
+  };
+
+  const handleSalvar = () => {
+    const payload: IConfigProjetoDto = {
+      nome_responsavel: responsavel,
+      coordenador_nome: coordenador,
+      status,
+      polo,
+      local,
+      solicitacao,
+      nome_projeto: nomeProjeto,
+      elemento_pep: elementoPep,
+      data_inicio: inicio,
+      data_fim: fim,
+      divisao,
+      classificacao,
+      tipo,
+      gate,
+    };
+    patchProjeto(projeto.id, payload);
+    onClose();
+    setRefresh(!refresh);
   };
 
   function getOptions(options: any) {
@@ -106,7 +133,7 @@ function ModalConfiguracoes() {
   return (
     <>
       <Button
-        onClick={onOpen}
+        onClick={() => openModalAPI()}
         background={"white"}
         color={"#0047BB"}
         _hover={{
@@ -169,7 +196,7 @@ function ModalConfiguracoes() {
                       id="responsavelId"
                       name="responsavel"
                       width={"100%"}
-                      placeholder={responsavel?.toString()}
+                      placeholder={projeto.nome_responsavel}
                       onChange={(e) => {
                         setReponsavel(+e.target.id);
                       }}
@@ -195,7 +222,7 @@ function ModalConfiguracoes() {
                       id="coordenadorId"
                       name="coordenador"
                       width={"100%"}
-                      placeholder={coordenador?.toString()}
+                      placeholder={projeto.coordenador_nome}
                       onChange={(e) => {
                         setCoordenador(+e.target.value);
                       }}
@@ -221,7 +248,7 @@ function ModalConfiguracoes() {
                       id="statusId"
                       name="status"
                       width={"100%"}
-                      placeholder={status?.toString()}
+                      placeholder={projeto?.status}
                       onChange={(e) => {
                         setStatus(+e.target.value);
                       }}
@@ -275,7 +302,7 @@ function ModalConfiguracoes() {
                       id="poloId"
                       name="polo"
                       width={"100%"}
-                      placeholder={polo?.toString()}
+                      placeholder={projeto?.polo}
                       onChange={(e) => {
                         setPolo(+e.target.value);
                       }}
@@ -300,7 +327,7 @@ function ModalConfiguracoes() {
                       id="localId"
                       name="local"
                       width={"100%"}
-                      placeholder={local?.toString()}
+                      placeholder={projeto.local}
                       onChange={(e) => {
                         setLocal(+e.target.value);
                       }}
@@ -325,7 +352,7 @@ function ModalConfiguracoes() {
                       id="solicitacaoId"
                       name="solicitacao"
                       width={"100%"}
-                      placeholder={solicitacao?.toString()}
+                      placeholder={projeto?.solicitante}
                       onChange={(e) => {
                         setSolicitacao(+e.target.value);
                       }}
@@ -396,7 +423,6 @@ function ModalConfiguracoes() {
                       </Text>
                     </FormLabel>
                     <Input
-                      placeholder={inicio?.toString()}
                       borderRadius={"8px"}
                       max="9999-12-31"
                       maxLength={1}
@@ -407,8 +433,9 @@ function ModalConfiguracoes() {
                       id="fimId"
                       type="Date"
                       name="inicio"
-                      // value={inicio}
-                      // onChange={(event) => setInicio(event.target.value)}
+                      onChange={(event) =>
+                        setInicio(new Date(event.target.value))
+                      }
                     />
                   </FormControl>
                   <FormControl>
@@ -418,7 +445,6 @@ function ModalConfiguracoes() {
                       </Text>
                     </FormLabel>
                     <Input
-                      placeholder={fim?.toString()}
                       borderRadius={"8px"}
                       max="9999-12-31"
                       maxLength={1}
@@ -429,8 +455,7 @@ function ModalConfiguracoes() {
                       id="fiId"
                       type="Date"
                       name="fim"
-                      // value={fim}
-                      // onChange={(event) => setFim(event.target.value)}
+                      onChange={(event) => setFim(new Date(event.target.value))}
                     />
                   </FormControl>
                   <FormControl>
@@ -440,7 +465,6 @@ function ModalConfiguracoes() {
                       </Text>
                     </FormLabel>
                     <Input
-                      placeholder="dd/mm/aaaa"
                       borderRadius={"8px"}
                       max="9999-12-31"
                       maxLength={1}
@@ -451,18 +475,18 @@ function ModalConfiguracoes() {
                       id="data"
                       type="Date"
                       name="data"
-                      // value={data}
-                      // onChange={(event) => setData(event.target.value)}
+                      onChange={(event) =>
+                        setInicioReal(new Date(event.target.value))
+                      }
                     />
                   </FormControl>
                   <FormControl>
-                    <FormLabel htmlFor="categoria">
+                    <FormLabel htmlFor="dataFim_real">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         FIM REAL
                       </Text>
                     </FormLabel>
                     <Input
-                      placeholder="dd/mm/aaaa"
                       borderRadius={"8px"}
                       max="9999-12-31"
                       maxLength={1}
@@ -470,11 +494,12 @@ function ModalConfiguracoes() {
                       mt={"-9px"}
                       height={"56px"}
                       _placeholder={{ color: "black" }}
-                      id="data"
+                      id="dataFim_real"
                       type="Date"
-                      name="data"
-                      // value={data}
-                      // onChange={(event) => setData(event.target.value)}
+                      name="dataFim_real"
+                      onChange={(event) =>
+                        setFimReal(new Date(event.target.value))
+                      }
                     />
                   </FormControl>
                 </Flex>
@@ -500,7 +525,7 @@ function ModalConfiguracoes() {
                       id="divisaoId"
                       name="divisao"
                       width={"100%"}
-                      placeholder={divisao?.toString()}
+                      placeholder={projeto?.divisao}
                       onChange={(e) => {
                         setDivisao(+e.target.value);
                       }}
@@ -525,7 +550,7 @@ function ModalConfiguracoes() {
                       id="classificacaoId"
                       name="classificacao"
                       width={"100%"}
-                      placeholder={classificacao?.toString()}
+                      placeholder={projeto?.classificacao}
                       onChange={(e) => {
                         setClassificacao(+e.target.value);
                       }}
@@ -550,7 +575,7 @@ function ModalConfiguracoes() {
                       id="tipoId"
                       name="tipo"
                       width={"100%"}
-                      placeholder={tipo?.toString()}
+                      placeholder={projeto?.tipo}
                       onChange={(e) => {
                         setTipo(+e.target.value);
                       }}
@@ -575,7 +600,7 @@ function ModalConfiguracoes() {
                       id="gateId"
                       name="gate"
                       width={"100%"}
-                      placeholder={gate?.toString()}
+                      placeholder={projeto?.gate}
                       onChange={(e) => {
                         setGate(+e.target.value);
                       }}
@@ -604,7 +629,7 @@ function ModalConfiguracoes() {
                 // background="origem.300"
                 variant="primary"
                 color="red.500"
-                onClick={handleCancelar}
+                onClick={() => handleCancelar()}
                 h={"56px"}
                 w={"206px"}
                 borderRadius={"10px"}
@@ -626,13 +651,7 @@ function ModalConfiguracoes() {
                 background={"origem.300"}
                 variant="primary"
                 color="white"
-                // onClick={async () => {
-                //   await patchProjeto(Number(id), { descricao, justificativa });
-                //   setDescricao("");
-                //   setJustificativa("");
-                //   setRender();
-                //   onClose();
-                // }}
+                onClick={() => handleSalvar()}
                 _hover={{
                   background: "origem.500",
                   transition: "all 0.4s",

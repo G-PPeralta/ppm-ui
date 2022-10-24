@@ -1,5 +1,4 @@
-import { IConfigProjetoDto } from "interfaces/ConfiguracaoProjeto";
-import { ProjetosList } from "interfaces/Services";
+import { ProjetosConfig, ProjetosList } from "interfaces/Services";
 
 import { api, token } from "services/api";
 
@@ -17,10 +16,10 @@ export async function getProjetos(): Promise<{
 }
 
 export async function getProjeto(id: number): Promise<{
-  data: IConfigProjetoDto;
+  data: ProjetosConfig[];
   status: number;
 }> {
-  const { data, status } = await api.get(`/projetos/${id}`, {
+  const { data, status } = await api.get(`/projetos/configuracoes/${id}`, {
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },
