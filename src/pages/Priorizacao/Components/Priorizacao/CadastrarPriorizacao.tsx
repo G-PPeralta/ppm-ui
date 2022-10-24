@@ -44,21 +44,19 @@ function ModalCadastrarPriorizacao() {
       <Button
         onClick={onOpen}
         color={"white"}
-        backgroundColor={"#0047BB"}
+        borderRadius={"8px"}
+        fontWeight={"700"}
+        background={"origem.500"}
         aria-label="Plus sign"
         variant="primary"
         _hover={{
-          background: "white",
+          background: "origem.600",
           transition: "all 0.4s",
-          color: "#0047BB",
-          border: "#0047BB solid 1px",
         }}
-        borderRadius={"8px"}
         h={"56px"}
         w={"121px"}
         fontSize={"18px"}
         fontFamily={"Mulish"}
-        fontWeight={"700"}
       >
         Cadastrar
       </Button>
