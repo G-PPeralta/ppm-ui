@@ -101,6 +101,7 @@ function ModalCustoDiario(props: { id: string | undefined }) {
         dia.filhos.map((filho) => (
           <Tr className={"hide item2-" + key} key={"f" + filho.id}>
             <Td>{filho.index}</Td>
+            <Td>{filho.atividade}</Td>
             <Td>{filho.fornecedor}</Td>
             <Td textAlign="center">
               <Flex alignItems={"center"} justifyContent="center">

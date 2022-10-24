@@ -169,9 +169,9 @@ export async function getCustoDiario(
   startDate: string | Date,
   endDate: string | Date | null
 ): Promise<CustoDiario[]> {
-  // const uri = `/budgets/custoDiario/${id}`;
+  const uri = `/budgets/custoDiario/${id}`;
 
-  const data = [
+  /* const data = [
     {
       id: 1,
       index: "1",
@@ -202,9 +202,9 @@ export async function getCustoDiario(
         },
       ],
     },
-  ];
+  ]; */
 
-  // const { data } = await api.post(uri, { startDate, endDate }, token());
+  const { data } = await api.post(uri, { startDate, endDate }, token());
 
   // console.log(startDate, endDate);
   return data;
