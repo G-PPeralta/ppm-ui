@@ -210,11 +210,11 @@ function EditModal({
                 </Text>
               </Button>
               <Button
-                background="#0047BB"
+                background="origem.500"
                 variant="primary"
                 color="white"
                 _hover={{
-                  background: "#0047BB",
+                  background: "origem.600",
                   transition: "all 0.4s",
                 }}
                 onClick={() => {
