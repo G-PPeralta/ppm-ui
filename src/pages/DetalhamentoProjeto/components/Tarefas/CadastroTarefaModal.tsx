@@ -26,7 +26,7 @@ import { AtividadesProjeto } from "interfaces/Services";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-import { handleCancelar /*, handleCadastrar */ } from "utils/handleCadastro";
+// import { handleCancelar, handleCadastrar } from "utils/handleCadastro";
 
 import { useModalCadastroTarefa } from "hooks/useModalCadastroTarefa";
 
@@ -44,11 +44,12 @@ function CadastroTarefasModal({
   newRender,
 }: CadastroTarefaProps) {
   const { id } = useParams();
-  const { registerForm, setAtividade /*, arroba */ } = useModalCadastroTarefa(
-    newRender,
-    closeModal
-    // lion
-  );
+  const { /* registerForm, */ setAtividade /*, arroba */ } =
+    useModalCadastroTarefa(
+      newRender,
+      closeModal
+      // lion
+    );
 
   useEffect(() => setAtividade(id), [id]);
 
@@ -274,14 +275,14 @@ function CadastroTarefasModal({
                   transition: "all 0.4s",
                   color: "white",
                 }}
-                onClick={() => handleCancelar(registerForm, closeModal)}
+                //  onClick={() => handleCancelar(registerForm, closeModal)}
                 width={"208px"}
                 height={"56px"}
               >
                 Cancelar
               </Button>
               <Button
-                disabled={!registerForm.isValid || !registerForm.dirty}
+                //  disabled={!registerForm.isValid || !registerForm.dirty}
                 width={"208px"}
                 height={"56px"}
                 fontSize="18px"
