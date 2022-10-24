@@ -20,9 +20,11 @@ import {
 import StackedBarChart from "components/StackedBarChartGraphic";
 
 import { getSonda } from "services/get/CadastroModaisInfograficos";
+import { getOperacoes } from "services/get/GraficosEstatisticos";
 
 export function GraficoPorDuracao() {
   const [listaSondas, setListaSondas] = useState<any[]>([]);
+  const [operacao, setOperacao] = useState<any[]>([]);
 
   // const [loading, setLoading] = useState(true);
   const durationHistory = [
@@ -93,6 +95,10 @@ export function GraficoPorDuracao() {
     );
 
     setListaSondas(sondasSorted);
+
+    const operacao = await getOperacoes();
+
+    setOperacao(operacao.data);
   };
 
   // console.log(listaSondas);
@@ -304,15 +310,15 @@ export function GraficoPorDuracao() {
                   width={"208px"}
                   height={"56px"}
                   borderRadius={"8px"}
-                  placeholder="Campo"
+                  placeholder="Operação"
                   // onChange={handleProjectChange}
                   color={"#2D2926"}
                   fontSize={"14px"}
                   fontWeight={"400"}
                 >
-                  {/* {campos.map((d) => (
-                    <option>{d.campo}</option>
-                  ))} */}
+                  {operacao.map((d) => (
+                    <option>{d.nom_operacao}</option>
+                  ))}
                 </Select>
               </FormControl>
             </Flex>
