@@ -27,15 +27,11 @@ import {
 import { IConfigProjetoDto } from "interfaces/ConfiguracaoProjeto";
 import { ProjetosConfig } from "interfaces/Services";
 
+import ModalCadastrarPriorizacao from "pages/Projects/Components/ModalCadastrarPriorizacao";
+
 import { useProjetos } from "hooks/useCadastroProjeto";
 
 import { patchProjeto } from "services/update/Projeto";
-
-// import {
-//   getCoordenadores,
-//   getResponsaveis,
-// } from "services/get/CadastroModaisInfograficos";
-// import { getLocalProjeto, getPolo } from "services/get/Projetos";
 
 interface ConfigProjetoProps {
   projeto: ProjetosConfig;
@@ -49,6 +45,9 @@ function ModalConfiguracoes({
   setRefresh,
 }: ConfigProjetoProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  // MODAL PRIORIZAÇÃO
+  const [isPriorizacaoModalOpen, setIsPriorizacaoModalOpen] = useState(false);
 
   // FORM LABELS
   const [responsavel, setReponsavel] = useState(projeto?.responsavel_id);
@@ -273,6 +272,7 @@ function ModalConfiguracoes({
                         fontWeight={"700"}
                         fontSize="18px"
                         rightIcon={<IoMdPodium />}
+                        onClick={() => setIsPriorizacaoModalOpen(true)}
                       >
                         Priorização
                       </Button>
@@ -662,6 +662,13 @@ function ModalConfiguracoes({
                 Salvar
               </Button>
             </Flex>
+            {isPriorizacaoModalOpen && (
+              <ModalCadastrarPriorizacao
+                refresh={refresh}
+                setRefresh={setRefresh}
+                projeto={projeto.id}
+              />
+            )}
           </ModalFooter>
         </ModalContent>
       </Modal>
