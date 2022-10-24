@@ -16,6 +16,7 @@ import {
   useDisclosure,
   Input,
   Select,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -51,11 +52,8 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
         aria-label="Plus sign"
         variant="primary"
         _hover={{
-          background: "white",
-          border: "solid 1px #0047BB",
-          borderRadius: "8px",
+          background: "origem.600",
           transition: "all 0.4s",
-          color: "origem.500",
         }}
         h={"56px"}
         w={"105px"}
@@ -78,6 +76,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
           >
             {`Priorização ${rankingNome}`}
           </ModalHeader>
+          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               // e.preventDefault();
@@ -191,12 +190,12 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                 </Button>
                 <Button
                   disabled={!registerForm.isValid}
-                  background="#0047BB"
+                  background="origem.500"
                   variant="primary"
                   color="white"
                   onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
-                    background: "origem.500",
+                    background: "origem.600",
                     transition: "all 0.4s",
                   }}
                   borderRadius={"8px"}
