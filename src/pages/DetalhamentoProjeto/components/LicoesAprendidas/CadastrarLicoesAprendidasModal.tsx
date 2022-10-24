@@ -21,6 +21,8 @@ import {
   Button,
 } from "@chakra-ui/react";
 
+import { RequiredField } from "components/RequiredField/RequiredField";
+
 import { postLicaoAprendida } from "services/post/AdicionarLicaoAprendida";
 
 function CadastrarLicoesAprendidasModal({
@@ -105,7 +107,7 @@ function CadastrarLicoesAprendidasModal({
                 fontWeight="700"
                 mt={"6px"}
               >
-                LIÇÃO APRENDIDA
+                LIÇÃO APRENDIDA <RequiredField />
               </FormLabel>
               <Input
                 maxLength={40}
@@ -134,7 +136,7 @@ function CadastrarLicoesAprendidasModal({
                 fontWeight="700"
                 mt={"6px"}
               >
-                AÇÃO OU RECOMENDAÇÃO
+                AÇÃO OU RECOMENDAÇÃO <RequiredField />
               </FormLabel>
               <Textarea
                 maxLength={150}
