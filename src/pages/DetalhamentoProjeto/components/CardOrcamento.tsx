@@ -67,7 +67,7 @@ function CardOrcamento() {
               R$
             </Text>
             <Text fontSize={18} ml={2} fontWeight={600}>
-              {infoFinanceira[0]?.planejado.toLocaleString()}
+              {infoFinanceira[0]?.planejado.toLocaleString() + ",00"}
             </Text>
           </Box>
         </Box>
@@ -89,7 +89,7 @@ function CardOrcamento() {
                     {(
                       Number(infoFinanceira[0]?.planejado) -
                       Number(infoFinanceira[0]?.realizado)
-                    ).toLocaleString()}
+                    ).toLocaleString() + ",00"}
                   </Text>
                 </Box>
               </Box>

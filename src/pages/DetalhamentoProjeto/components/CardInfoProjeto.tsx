@@ -18,22 +18,40 @@ function CardInfoProjeto({
   progresso,
   loading,
 }: infoProjetoProps) {
-  const chartsProps = [
-    {
-      name: "Undone",
-      value: progresso
-        ? 100 - Number(progresso[0].fn_cron_calc_pct_real.substring(0, 2))
-        : 0,
-      color: "#dddddd",
-    },
-    {
-      name: "Done",
-      value: progresso
-        ? Number(progresso[0].fn_cron_calc_pct_real.substring(0, 2))
-        : 0,
-      color: "#00B53D",
-    },
-  ];
+  let chartsProps = [];
+  if (!progresso[0]) {
+    chartsProps = [
+      {
+        name: "Undone",
+        value: 0,
+        color: "#dddddd",
+      },
+      {
+        name: "Done",
+        value: 0,
+        color: "#00B53D",
+      },
+    ];
+  } else {
+    chartsProps = [
+      {
+        name: "Undone",
+        value:
+          progresso[0].fn_cron_calc_pct_real != "null"
+            ? 100 - Number(progresso[0].fn_cron_calc_pct_real.substring(0, 2))
+            : 0,
+        color: "#dddddd",
+      },
+      {
+        name: "Done",
+        value:
+          progresso[0].fn_cron_calc_pct_real != "null"
+            ? Number(progresso[0].fn_cron_calc_pct_real.substring(0, 2))
+            : 0,
+        color: "#00B53D",
+      },
+    ];
+  }
   const innerWidth = window.innerWidth;
 
   function formatDate(date: Date) {

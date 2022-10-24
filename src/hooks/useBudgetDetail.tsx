@@ -9,7 +9,7 @@ import { getBudgetDetail } from "services/get/GetBudget";
 export function useBudgetDetail(id: string | null) {
   // const { toast } = useToast();
 
-  const [loading, setLoading] = useState(false); // Loading
+  const [loading, setLoading] = useState(true); // Loading
   const [, /* budgets */ setBudgets] = useState<BudgetDetail[]>([]);
   // const [projects, setProjects] = useState<Project[]>([]);
   const [budgetFilter, setBudgetsFilter] = useState<BudgetDetail[]>([]);

@@ -1,35 +1,89 @@
-import { Input } from "@chakra-ui/react";
+import { /* useRef, */ useState } from "react";
 
-import { getMoney, formatReal } from "utils/regexCoinMask";
+import {
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+} from "@chakra-ui/react";
+
+// import { formatReal } from "utils/formatReal";
+import { regexSomenteNumeros } from "utils/regex";
 
 export function RealInput(props: {
-  id?: string;
-  name?: string;
-  placeholder?: string;
-  value?: string;
-  onChange?: any;
-  maxLength?: number;
-  as?: any;
+  onChange: any;
+  id: string;
+  name: string;
+  placeholder: string;
+  value: string;
 }) {
-  const { onChange, id, name, placeholder, maxLength, value, as } = props;
+  const { onChange, id, name, placeholder } = props;
+  const [valor, setValor] = useState("");
+  // const [display, setDisplay] = useState("");
+  // const [, /* focus */ setFocus] = useState("");
+  // const ref = useRef(null);
+  const format = (val: string) => "R$" + val;
+  const parse = (val: string) => regexSomenteNumeros(val);
 
-  const valorFormatado = formatReal(getMoney(value || ""));
+  /* const handleChangeEvent = (e) => {
+    const r = /\d/;
+    if (!r.test(e.key)) {
+      e.preventDefault();
+    }
+    let dirtyValue = "";
+    if (e.key == "Backspace") {
+      const str = e.target.value;
 
+      dirtyValue = str.substring(0, str.length - 1);
+    } else {
+      dirtyValue =
+        (+regexSomenteNumeros(e.target.value) / 100).toString() + e.key;
+    }
+
+    console.log(dirtyValue);
+    const valor = +regexSomenteNumeros(dirtyValue) || 0;
+    console.log(formatReal(+valor));
+
+    setDisplay(formatReal(+valor));
+    setValor(valor);
+    // onChange(valor);
+  }; */
+
+  /* const handleChangeSubmitEvent = (e: any) => {
+    const dirtyValue = e.target.value;
+    const valor = +regexSomenteNumeros(dirtyValue) || 0;
+    // console.log(formatReal(+valor));
+
+    setDisplay(formatReal(+valor));
+    // setValor(valor);
+  };
+
+  const handleFocus = () => {
+    setFocus(display);
+    setDisplay("");
+  }; */
   return (
-    <Input
-      isRequired
-      h={"56px"}
-      placeholder={placeholder}
-      type={"text"}
-      id={id}
-      name={name}
-      value={valorFormatado}
-      maxLength={maxLength}
-      onChange={onChange}
-      w={"100%"}
-      as={as}
-      // onKeyUp={(event) => maskMoney(event)}
-    />
+    <>
+      <NumberInput
+        isRequired
+        onChange={(valueString) => {
+          setValor(parse(valueString));
+          onChange(valueString);
+        }}
+        value={format(valor)}
+        id={id}
+        name={name}
+        placeholder={placeholder}
+      >
+        <NumberInputField />
+        <NumberInputStepper>
+          <NumberIncrementStepper />
+          <NumberDecrementStepper />
+        </NumberInputStepper>
+      </NumberInput>
+      d
+    </>
   );
 }
 

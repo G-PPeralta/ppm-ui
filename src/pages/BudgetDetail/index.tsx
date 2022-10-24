@@ -11,7 +11,7 @@ import TituloPagina from "components/TituloPagina";
 import { useBudgetDetail } from "hooks/useBudgetDetail";
 
 import { BudgetDetailTable } from "./components/BudgetDetailTable";
-// import ModalCustoDiario from "./components/ModalCustoDiario";
+import ModalCustoDiario from "./components/ModalCustoDiario";
 import { TotalTable } from "./components/TotalTable";
 
 import "./budgetDetail.css";
@@ -42,8 +42,7 @@ export function BudgetDetail() {
               {titulo?.sonda_nome}
             </Heading>
             <Text>{titulo?.poco_nome}</Text>
-            {/* <ModalCustoDiario /> */}
-
+            <ModalCustoDiario id={id} />
             <BudgetDetailTable data={budgetFilter} />
             <TotalTable data={totalizacao} />
           </ContainerPagina>

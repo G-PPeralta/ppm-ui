@@ -24,9 +24,7 @@ import {
 } from "@chakra-ui/react";
 import { AtividadesProjeto } from "interfaces/Services";
 
-import { RequiredField } from "components/RequiredField/RequiredField";
-
-// import { handleCancelar, handleCadastrar } from "utils/handleCadastro";
+import { handleCancelar, handleCadastrar } from "utils/handleCadastro";
 
 import { useModalCadastroTarefa } from "hooks/useModalCadastroTarefa";
 
@@ -44,14 +42,14 @@ function CadastroTarefasModal({
   newRender,
 }: CadastroTarefaProps) {
   const { id } = useParams();
-  const { /* registerForm, */ setAtividade /*, arroba */ } =
-    useModalCadastroTarefa(
-      newRender,
-      closeModal
-      // lion
-    );
+  const { registerForm, setAtividade } = useModalCadastroTarefa(
+    newRender,
+    closeModal
+  );
 
   useEffect(() => setAtividade(id), [id]);
+
+  const regex = /[^\w\s]/gi;
 
   return (
     <Flex>
@@ -118,7 +116,7 @@ function CadastroTarefasModal({
                   fontWeight="700"
                   mt={"6px"}
                 >
-                  TAREFA <RequiredField />
+                  TAREFA
                 </FormLabel>
                 <Input
                   maxLength={50}
@@ -135,8 +133,8 @@ function CadastroTarefasModal({
                   type="text"
                   id="nomeTarefa"
                   name="nomeTarefa"
-                  // value={registerForm.values.nomeTarefa.replace(regex, "")}
-                  // onChange={registerForm.handleChange}
+                  value={registerForm.values.nomeTarefa.replace(regex, "")}
+                  onChange={registerForm.handleChange}
                 />
               </Flex>
               <Flex flexDir={"column"} flexGrow={1}>
@@ -147,7 +145,7 @@ function CadastroTarefasModal({
                   fontWeight="700"
                   mt={"6px"}
                 >
-                  DATA <RequiredField />
+                  DATA
                 </FormLabel>
                 <Input
                   fontSize={"14px"}
@@ -162,8 +160,8 @@ function CadastroTarefasModal({
                   id="data"
                   type="date"
                   name="data"
-                  // value={registerForm.values.data}
-                  // onChange={registerForm.handleChange}
+                  value={registerForm.values.data}
+                  onChange={registerForm.handleChange}
                 />
               </Flex>
             </FormControl>
@@ -196,9 +194,10 @@ function CadastroTarefasModal({
                   id="atividadeRel"
                   name="atividadeRel"
                   placeholder="Selecione"
-                  // value={registerForm.values.atividadeRel}
-                  // onChange={registerForm.handleChange}
+                  value={registerForm.values.atividadeRel}
+                  onChange={registerForm.handleChange}
                 >
+                  <option value="">Selecione</option>
                   {atividadesProjeto.map((atividade, index) => (
                     <option value={atividade.nom_atividade} key={index}>
                       {atividade.nom_atividade}
@@ -214,7 +213,7 @@ function CadastroTarefasModal({
                   fontWeight="700"
                   mt={"6px"}
                 >
-                  RESPONSÁVEL <RequiredField />
+                  RESPONSÁVEL
                 </FormLabel>
                 <Input
                   maxLength={50}
@@ -230,8 +229,8 @@ function CadastroTarefasModal({
                   height={"56px"}
                   id="responsavel"
                   name="responsavel"
-                  // value={registerForm.values.responsavel}
-                  // onChange={registerForm.handleChange}
+                  value={registerForm.values.responsavel}
+                  onChange={registerForm.handleChange}
                 ></Input>
               </Flex>
             </FormControl>
@@ -259,8 +258,8 @@ function CadastroTarefasModal({
                 placeholder="Descrição da tarefa"
                 id="descricao"
                 name="descricao"
-                // value={registerForm.values.descricao}
-                // onChange={registerForm.handleChange}
+                value={registerForm.values.descricao}
+                onChange={registerForm.handleChange}
               />
             </FormControl>
           </ModalBody>
@@ -275,14 +274,14 @@ function CadastroTarefasModal({
                   transition: "all 0.4s",
                   color: "white",
                 }}
-                //  onClick={() => handleCancelar(registerForm, closeModal)}
+                onClick={() => handleCancelar(registerForm, closeModal)}
                 width={"208px"}
                 height={"56px"}
               >
                 Cancelar
               </Button>
               <Button
-                //  disabled={!registerForm.isValid || !registerForm.dirty}
+                disabled={!registerForm.isValid || !registerForm.dirty}
                 width={"208px"}
                 height={"56px"}
                 fontSize="18px"
@@ -294,7 +293,7 @@ function CadastroTarefasModal({
                   background: "#0047BB",
                   transition: "all 0.4s",
                 }}
-                // onClick={() => handleCadastrar(registerForm, closeModal)}
+                onClick={() => handleCadastrar(registerForm, closeModal)}
               >
                 Adicionar
               </Button>
