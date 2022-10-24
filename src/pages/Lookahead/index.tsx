@@ -53,12 +53,14 @@ export function Lookahead() {
           <ContainerPagina>
             <Flex direction="column" fontFamily="Mulish">
               <Flex align={"flex-end"}>
-                <FormControl>
-                  <TituloPagina botaoVoltar={true}>Lookahead</TituloPagina>
+                <FormControl mt={-1} ml={-1}>
+                  <TituloPagina botaoVoltar={false}>
+                    Relatório Lookahead
+                  </TituloPagina>
                 </FormControl>
               </Flex>
               <Flex direction="row" justifyContent="flex-start">
-                <Flex direction="row" justifyContent="flex-end">
+                <Flex direction="row" justifyContent="flex-end" ml={-1}>
                   <FormControl>
                     <Text
                       fontWeight={"bold"}
@@ -115,7 +117,7 @@ export function Lookahead() {
                 </Flex>
               </Flex>
 
-              <Flex justifyContent="flex-end">
+              <Flex justifyContent="flex-end" ml={-1} mr={-1}>
                 {atividades && <TabelaLookahead data={atividades} />}
               </Flex>
             </Flex>
