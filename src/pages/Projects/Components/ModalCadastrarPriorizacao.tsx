@@ -419,12 +419,14 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                   w={"208px"}
                   h={"56px"}
                   disabled={!registerForm.isValid}
-                  background="origem.300"
+                  background="origem.500"
+                  fontSize={"18px"}
+                  fontWeight={"700"}
                   variant="primary"
                   color="white"
                   onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
-                    background: "origem.500",
+                    background: "origem.600",
                     transition: "all 0.4s",
                   }}
                 >
