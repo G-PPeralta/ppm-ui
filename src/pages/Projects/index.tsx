@@ -29,6 +29,7 @@ export function Projects() {
   const [polo, setPolo] = useState("Todos");
   const [projetos, setProjetos] = useState<Projetos[]>();
   const [projetosFilter, setProjetosFilter] = useState<Projetos[]>();
+  const [listaPolos, setListaPolos] = useState<string[]>([]);
   const [filter, setFilter] = useState("");
   const [refresh, setRefresh] = useState(false);
   const [render, setRender] = useState(false);
@@ -37,6 +38,9 @@ export function Projects() {
     const data = await getProjetosDetalhados();
     setProjetos(data);
     setProjetosFilter(data);
+    const polosLista = ["Todos"];
+    data.map((data) => polosLista.push(data.polo));
+    setListaPolos(polosLista);
   };
 
   const filterProjects = (text: string) => {
@@ -170,9 +174,9 @@ export function Projects() {
                         onChange={(e) => setPolo(e.target.value)}
                         width={300}
                       >
-                        <option value="Todos">Todos</option>
-                        <option value="Tucano Sul">Tucano Sul</option>
-                        <option value="Alagoas">Alagoas</option>
+                        {listaPolos.map((val) => (
+                          <option value={val}>{val}</option>
+                        ))}
                       </Select>
                     </Flex>
                     <Flex>

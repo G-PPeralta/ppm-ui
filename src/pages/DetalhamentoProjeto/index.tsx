@@ -103,7 +103,6 @@ function DetalhamentoProjeto() {
     if (id) {
       const { data } = await getInfoProjetos(id);
       setInfoProjeto(data[0]);
-      setLoading(false);
     }
   };
 
@@ -157,6 +156,7 @@ function DetalhamentoProjeto() {
         const { data } = await getProjeto(+id);
         if (data) {
           setProject(data);
+          setLoading(false);
         }
       }
     } catch (error: any) {
