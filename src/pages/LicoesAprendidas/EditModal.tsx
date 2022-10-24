@@ -231,7 +231,7 @@ function EditModal({
                 height={"56px"}
               >
                 <Text fontSize={"18px"} fontWeight={"700"}>
-                  Concluir{" "}
+                  Salvar{" "}
                 </Text>
               </Button>
             </Flex>

@@ -34,3 +34,9 @@ export const cadastroOperacaoSchema = yup.object({
     .required("A área de atuação é obrigatória!")
     .moreThan(0),
 });
+
+export const cadastroLicaoAprendida = yup.object({
+  licao_aprendida: yup.string().required("O campo é obrigatório!"),
+  data: yup.string().required("O campo é obrigatório!"),
+  acoes_e_recomendacoes: yup.string().required("O campo é obrigatório!"),
+});

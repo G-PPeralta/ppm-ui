@@ -105,26 +105,32 @@ export function TabelaProjetos({ data }: TableProps) {
           </Flex>
         )}
       </Td>
-      <Td>{formatReal(+projeto.vlr_orcado)}</Td>
-      <Td>{formatReal(+projeto.vlr_cr)}</Td>
-      <Td textAlign={"center"}>{`${
+      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+        {formatReal(+projeto.vlr_orcado)}
+      </Td>
+      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+        {formatReal(+projeto.vlr_cr)}
+      </Td>
+      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>{`${
         projeto.vlr_orcado && projeto.vlr_cr
           ? (100 - (+projeto.vlr_cr / +projeto.vlr_orcado) * 100).toFixed(2)
           : 0
       } %`}</Td>
       <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-        {projeto.prioridade}
+        {projeto.complexidade}
       </Td>
       <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-        {projeto.complexidade}
+        {projeto.prioridade}
       </Td>
       <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
         {projeto.polo}
       </Td>
-      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+      <Td textAlign={"center"} fontWeight={"semibold"}>
         {projeto.coordenador}
       </Td>
-      <Td>{projeto.responsavel}</Td>
+      <Td textAlign={"center"} fontWeight={"semibold"}>
+        {projeto.responsavel}
+      </Td>
       <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
         {formatDate(new Date(projeto.data_inicio))}
       </Td>
@@ -136,7 +142,7 @@ export function TabelaProjetos({ data }: TableProps) {
           ? ((projeto.vlr_cr / projeto.vlr_orcado) * 100).toFixed(2)
           : 0
       } %`}</Td>
-      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+      <Td textAlign={"center"} fontWeight={"semibold"}>
         {/* <ExpansibleText
           text={projeto.descricao + " " + projeto.justificativa}
         /> */}

@@ -1,4 +1,4 @@
-/* export function maskMoney(event: any) {
+export function maskMoney(event: any) {
   const input = event.target;
   let money = event.target.value;
   const length = money.length;
@@ -22,26 +22,4 @@
     return (input.value = money.replace(/^(\d{2})(\d{2})$/, "$1,$2"));
   if (length >= 3)
     return (input.value = money.replace(/^(\d{1})(\d{2})$/, "$1,$2"));
-}
-*/
-
-export function getMoney(str: string | null): string | null {
-  if (str === undefined || str === null) return null;
-  return str.replace(/[\D]+/g, "");
-}
-export function formatReal(number: string | null): string {
-  let tmp = number + "";
-  tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
-  if (tmp.length >= 3) tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
-
-  return tmp;
-}
-
-export function parseNumber(money: string): number {
-  let temp = getMoney(money) || "000";
-  temp = `${temp.substring(0, temp.length - 2)}.${temp.substring(
-    temp.length - 2
-  )}`;
-
-  return +temp;
 }

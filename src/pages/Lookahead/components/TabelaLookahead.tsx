@@ -83,7 +83,8 @@ export function TabelaLookahead(props: TableProps) {
 
   const tableData = data.slice(from, to).map((act, key) => (
     <>
-      <Tr key={key} backgroundColor={key % 2 == 1 ? "#F9F9F9" : "#FFF"}>
+      {/* <Tr key={key} backgroundColor={key % 2 == 1 ? "#F9F9F9" : "#FFF"}> */}
+      <Tr key={key}>
         <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
           {/* {budget.filhos && (
             <Icon
@@ -96,7 +97,7 @@ export function TabelaLookahead(props: TableProps) {
         </Td>
         <Td textAlign={"center"} color={"#2D2926"}>
           <Link to={`/lookahead-detalhe/${act.id}`}>
-            <Text color="#0047BB">{act.nom_atividade}</Text>
+            <Text color="blue">{act.nom_atividade}</Text>
           </Link>
         </Td>
         <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
@@ -147,7 +148,7 @@ export function TabelaLookahead(props: TableProps) {
                 <Th color="white" textAlign={"center"}>
                   {total} Projetos
                 </Th>
-                <Th></Th>
+                <Th color="white" textAlign={"center"}></Th>
               </Tr>
             </Tfoot>
           </Table>

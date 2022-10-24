@@ -1,12 +1,12 @@
 import * as yup from "yup";
 
 export const cadastroValorPrevistoSchema = yup.object({
-  valor: yup.string().required("Valor Previsto é obrigatório"),
+  previsto: yup.number().required("Valor Previsto é obrigatório"),
 });
 
 export const cadastroValorPlanejadoSchema = yup.object({
   gasto: yup
-    .string()
+    .number()
     .required("Valor Gasto é obrigatório")
     .min(1, "Valor não pode ser inferior a 1.")
     .max(1000000000000, "Valor maximo não pode ultrapasar 1000000000000 "),

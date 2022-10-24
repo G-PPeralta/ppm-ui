@@ -43,7 +43,6 @@ export function BudgetDetail() {
             </Heading>
             <Text>{titulo?.poco_nome}</Text>
             <ModalCustoDiario id={id} />
-
             <BudgetDetailTable data={budgetFilter} />
             <TotalTable data={totalizacao} />
           </ContainerPagina>

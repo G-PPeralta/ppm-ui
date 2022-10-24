@@ -190,16 +190,16 @@ export function Fornecedores() {
             <Flex ml={-3}>
               <Button
                 type="button"
-                background="white"
                 variant="primary"
+                h={"56px"}
                 borderRadius={"8px"}
                 fontSize={"18px"}
                 fontWeight={"700"}
+                background={"white"}
                 border={"2px solid"}
                 color={"origem.500"}
-                padding={2}
+                padding={4}
                 w={useBreakpointValue({ base: "100%", md: "251px" })}
-                h={"56px"}
                 _hover={{
                   border: "2px solid",
                   borderColor: "origem.500",
@@ -214,13 +214,6 @@ export function Fornecedores() {
                 rightIcon={<BiPlus />}
               >
                 Cadastrar Fornecedores
-                {/* <Icon
-                  as={BiPlus}
-                  fontSize="18px"
-                  fontWeight={"700"}
-                  ml={1}
-                  color={"#0047BB"}
-                /> */}
               </Button>
             </Flex>
 
@@ -302,7 +295,9 @@ export function Fornecedores() {
                 <Flex>
                   <Button
                     type="button"
-                    background="#0047BB"
+                    borderRadius={"8px"}
+                    fontWeight={"700"}
+                    background={"origem.500"}
                     variant="outline"
                     color="white"
                     borderColor="#0047BB"
@@ -320,7 +315,6 @@ export function Fornecedores() {
                     height={"56px"}
                     width={"101px"}
                     fontSize={"18px"}
-                    fontWeight={"700"}
                   >
                     Filtrar
                   </Button>
