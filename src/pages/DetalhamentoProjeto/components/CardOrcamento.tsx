@@ -14,7 +14,7 @@ import {
 
 function CardOrcamento() {
   const { id } = useParams();
-  const [cpiSpi, setCpiSpi] = useState({ cpi: 0, spi: 0 });
+  const [cpiSpi, setCpiSpi] = useState([{ cpi: 0, spi: 0 }]);
   const [loading, setLoading] = useState(false);
   const [infoFinanceira, setInfoFinanceira] = useState([] as InfoFinanceira[]);
 
@@ -40,8 +40,11 @@ function CardOrcamento() {
     setLoading(false);
   }, []);
 
-  const naoPrevisto =
-    Number(infoFinanceira[0]?.realizado) - Number(infoFinanceira[0]?.planejado);
+  const naoPrevisto = infoFinanceira[0]?.naoPrevisto;
+  const remanescente = infoFinanceira[0]?.remanescente;
+  const pctRealizado = infoFinanceira[0]?.pctRealizado;
+  const pctRemanescente = infoFinanceira[0]?.pctRemanescente;
+  const pctNaoPrevisto = infoFinanceira[0]?.pctNaoPrevisto;
 
   return (
     <>
@@ -67,7 +70,7 @@ function CardOrcamento() {
               R$
             </Text>
             <Text fontSize={18} ml={2} fontWeight={600}>
-              {infoFinanceira[0]?.planejado.toLocaleString() + ",00"}
+              {infoFinanceira[0]?.planejado.toLocaleString()}
             </Text>
           </Box>
         </Box>
@@ -86,10 +89,7 @@ function CardOrcamento() {
                     R$
                   </Text>
                   <Text fontSize={16} ml={2} fontWeight={600}>
-                    {(
-                      Number(infoFinanceira[0]?.planejado) -
-                      Number(infoFinanceira[0]?.realizado)
-                    ).toLocaleString() + ",00"}
+                    {remanescente}
                   </Text>
                 </Box>
               </Box>
@@ -110,12 +110,7 @@ function CardOrcamento() {
                   fontSize={"16px"}
                   fontWeight={"600"}
                 >
-                  {(
-                    ((Number(infoFinanceira[0]?.planejado) -
-                      Number(infoFinanceira[0]?.realizado)) /
-                      Number(infoFinanceira[0]?.planejado)) *
-                    100
-                  ).toLocaleString() + "%"}
+                  {pctRemanescente}%
                 </Text>
               </Box>
             </Flex>
@@ -131,7 +126,7 @@ function CardOrcamento() {
                     R$
                   </Text>
                   <Text fontSize={16} ml={2} fontWeight={600}>
-                    {infoFinanceira[0]?.realizado.toLocaleString() + ",00"}
+                    {infoFinanceira[0]?.realizado.toLocaleString()}
                   </Text>
                 </Box>
               </Box>
@@ -152,11 +147,7 @@ function CardOrcamento() {
                   fontWeight={"600"}
                   fontSize={"16px"}
                 >
-                  {(
-                    (Number(infoFinanceira[0]?.realizado) /
-                      Number(infoFinanceira[0]?.planejado)) *
-                    100
-                  ).toLocaleString() + "%"}
+                  {pctRealizado}%
                 </Text>
               </Box>
             </Flex>
@@ -175,9 +166,7 @@ function CardOrcamento() {
                     R$
                   </Text>
                   <Text fontSize={16} ml={2} fontWeight={600}>
-                    {naoPrevisto > 0
-                      ? naoPrevisto.toLocaleString() + ",00"
-                      : "0,00"}
+                    {naoPrevisto > 0 ? naoPrevisto.toLocaleString() : "0,00"}
                   </Text>
                 </Box>
               </Box>
@@ -197,12 +186,7 @@ function CardOrcamento() {
                   fontSize={"16px"}
                   fontWeight={"600"}
                 >
-                  {naoPrevisto > 0
-                    ? (Number(naoPrevisto) /
-                        Number(infoFinanceira[0]?.planejado)) *
-                        100 +
-                      "%"
-                    : "0%"}
+                  {pctNaoPrevisto}%
                 </Text>
               </Box>
             </Flex>
@@ -216,14 +200,14 @@ function CardOrcamento() {
                 gap={1}
               >
                 <Text color={"#00B53D"} fontSize={20}>
-                  {(cpiSpi && cpiSpi.cpi) == 1 ? (
+                  {(cpiSpi && cpiSpi[0].cpi) == 1 ? (
                     <BsCheckCircleFill />
                   ) : (
                     <BsCheckCircleFill color={"red"} />
                   )}
                 </Text>
                 <Text fontSize={16} fontWeight={600}>
-                  CPI = {!loading && cpiSpi.cpi.toLocaleString()}
+                  CPI = {!loading && cpiSpi[0].cpi.toLocaleString()}
                 </Text>
               </Box>
               <Box
@@ -235,14 +219,14 @@ function CardOrcamento() {
                 gap={1}
               >
                 <Text color={"#00B53D"} fontSize={20}>
-                  {cpiSpi && cpiSpi.spi == 1 ? (
+                  {cpiSpi && cpiSpi[0].spi == 1 ? (
                     <BsCheckCircleFill />
                   ) : (
                     <BsCheckCircleFill color={"red"} />
                   )}
                 </Text>
                 <Text fontSize={16} fontWeight={600}>
-                  SPI = {!loading && cpiSpi.spi.toLocaleString()}
+                  SPI = {!loading && cpiSpi[0].spi.toLocaleString()}
                 </Text>
               </Box>
             </Flex>
