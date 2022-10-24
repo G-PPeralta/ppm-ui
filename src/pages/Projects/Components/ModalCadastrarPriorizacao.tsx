@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { IoIosPodium } from "react-icons/io";
 
 import {
@@ -29,11 +29,21 @@ import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
+import { getInitialRaking } from "services/get/Ranking";
+
 type PropsType = {
   projeto: number;
 };
 
 function ModalCadastrarPriorizacao(projeto: PropsType) {
+  const [initialValues, setInitialValues] = useState([]);
+  const [beneficio, setBeneficio] = useState("");
+  const [regulatorio, setRegulatorio] = useState("");
+  const [operacao, setOperacao] = useState("");
+  const [prioridade, setPrioridade] = useState("");
+  const [complexidade, setComplexidade] = useState("");
+  const [estrategia, setEstrategia] = useState("");
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     registerForm,
@@ -47,7 +57,11 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
     ranking,
   } = useCadastroPriorizacao(projeto.projeto);
 
-  // console.log(listaPrioridade);
+  async function handleGetInitialValues(id: any) {
+    const response = await getInitialRaking(id);
+    setInitialValues(response.data);
+    // console.log(response.data);
+  }
 
   useEffect(() => {
     const valorRanking = ranking && ranking?.length > 0 ? ranking[0].id : 0;
@@ -55,8 +69,6 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
   }, [ranking]);
 
   useEffect(() => {
-    registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
-
     registerForm.setFieldValue(
       "regulatorio.id_ranking",
       Number(listaRegulatorio[0]?.id)
@@ -79,10 +91,46 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
     );
   }, [registerForm.values]);
 
+  useEffect(() => {
+    registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
+
+    if (registerForm.values.id_projeto !== 0) {
+      // handleGetInitialValues(registerForm.values.id_projeto);
+      // console.log(initialValues);
+
+      if (initialValues.length > 0) {
+        initialValues.forEach((rank: any) => {
+          if (rank.id_ranking == 0) setBeneficio(rank.id_opcao);
+          if (rank.id_ranking == 2) setRegulatorio(rank.id_opcao);
+          if (rank.id_ranking == 3) setOperacao(rank.id_opcao);
+          if (rank.id_ranking == 4) setPrioridade(rank.id_opcao);
+          if (rank.id_ranking == 5) setComplexidade(rank.id_opcao);
+          if (rank.id_ranking == 6) setEstrategia(rank.id_opcao);
+        });
+      }
+    }
+  }, [initialValues]);
+
+  const handleClick = () => {
+    onOpen();
+
+    handleGetInitialValues(registerForm.values.id_projeto);
+    // if (initialValues.length > 0) {
+    //   initialValues.forEach((rank: any) => {
+    //     if (rank.id_ranking == 0) setBeneficio(rank.id_opcao);
+    //     if (rank.id_ranking == 2) setRegulatorio(rank.id_opcao);
+    //     if (rank.id_ranking == 3) setOperacao(rank.id_opcao);
+    //     if (rank.id_ranking == 4) setPrioridade(rank.id_opcao);
+    //     if (rank.id_ranking == 5) setComplexidade(rank.id_opcao);
+    //     if (rank.id_ranking == 6) setEstrategia(rank.id_opcao);
+    //   });
+    // }
+  };
+
   return (
     <>
       <IconButton
-        onClick={onOpen}
+        onClick={handleClick}
         color={"origem.500"}
         backgroundColor={"transparent"}
         aria-label="Plus sign"
@@ -147,7 +195,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           placeholder="Selecione"
                           id="beneficio.opcao_id"
                           name="beneficio.opcao_id"
-                          value={registerForm.values.beneficio.opcao_id}
+                          value={beneficio}
                           onChange={registerForm.handleChange}
                         >
                           {/* {registerForm.errors.beneficio && (
@@ -196,7 +244,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           placeholder="Selecione"
                           id="regulatorio.opcao_id"
                           name="regulatorio.opcao_id"
-                          value={registerForm.values.regulatorio.opcao_id}
+                          value={regulatorio}
                           onChange={registerForm.handleChange}
                         >
                           {/* {registerForm.errors.nom_campanha &&
@@ -242,7 +290,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           placeholder="Selecione"
                           id="operacao.opcao_id"
                           name="operacao.opcao_id"
-                          value={registerForm.values.operacao.opcao_id}
+                          value={operacao}
                           onChange={registerForm.handleChange}
                         >
                           {/* {registerForm.errors.op_priori &&
@@ -287,7 +335,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           placeholder="Selecione"
                           id="prioridade.opcao_id"
                           name="prioridade.opcao_id"
-                          value={registerForm.values.prioridade.opcao_id}
+                          value={prioridade}
                           onChange={registerForm.handleChange}
                         >
                           {/* {registerForm.errors.prioridade_priori &&
@@ -332,7 +380,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           placeholder="Selecione"
                           id="complexidade.opcao_id"
                           name="complexidade.opcao_id"
-                          value={registerForm.values.complexidade.opcao_id}
+                          value={complexidade}
                           onChange={registerForm.handleChange}
                         >
                           {/* {registerForm.errors.complex_priori &&
@@ -377,7 +425,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                           placeholder="Selecione"
                           id="estrategia.opcao_id"
                           name="estrategia.opcao_id"
-                          value={registerForm.values.estrategia.opcao_id}
+                          value={estrategia}
                           onChange={registerForm.handleChange}
                         >
                           {/* {registerForm.errors.est_neg_priori &&
@@ -418,13 +466,15 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                 <Button
                   w={"208px"}
                   h={"56px"}
-                  disabled={!registerForm.isValid}
-                  background="origem.300"
+                  // disabled={!registerForm.isValid}
+                  background="origem.500"
+                  fontSize={"18px"}
+                  fontWeight={"700"}
                   variant="primary"
                   color="white"
                   onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
-                    background: "origem.500",
+                    background: "origem.600",
                     transition: "all 0.4s",
                   }}
                 >

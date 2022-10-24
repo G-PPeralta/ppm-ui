@@ -1,7 +1,10 @@
 import { useEffect, useLayoutEffect, useState } from "react";
+// import { FiPlus } from "react-icons/fi";
 
 import {
   Box,
+  // Box,
+  // Button,
   Flex,
   FormControl,
   FormLabel,
@@ -10,49 +13,16 @@ import {
   Stack,
   Text,
   useBreakpointValue,
+  // useColorModeValue,
 } from "@chakra-ui/react";
 // import { Ring } from "@uiball/loaders";
 
 import { getSonda } from "services/get/CadastroModaisInfograficos";
 
-import { GraficoPorCadaIntervencao } from "../graficos/PorCadaIntervencao";
-import StatusIntervencao from "./StatusIntervencao";
+import { GraficoCIP } from "../graficos/ParaCIP";
 
-export function GraficoPorCadaIntervencaoComponent() {
+export function GraficoCIPComponent() {
   const [listaSondas, setListaSondas] = useState<any[]>([]);
-
-  const intervençoes = [
-    {
-      id: 4,
-      status: "Manutenção 36hrs/36%",
-      color: "#f4dd06",
-    },
-    {
-      id: 2,
-      status: "Recurso Origem 6hrs/6%",
-      color: "#0047bb",
-    },
-    {
-      id: 5,
-      status: "Recurso Cia de Serviço 8hrs/8%",
-      color: "#778bd7",
-    },
-    {
-      id: 3,
-      status: "Condições Climáticas 10hrs/10%",
-      color: "#00b050",
-    },
-    {
-      id: 1,
-      status: "Informações Técnicas 23hrs/23%",
-      color: "#00b0f0",
-    },
-    {
-      id: 6,
-      status: "Aguardando Outros 18hrs/18%",
-      color: "#7030a0",
-    },
-  ];
 
   const reqGet = async () => {
     const sondas = await getSonda();
@@ -272,7 +242,19 @@ export function GraficoPorCadaIntervencaoComponent() {
                 </FormControl>
               </Flex> */}
             </Flex>
-            <Flex direction={"column"}>
+            <Flex direction={"column"} mb={11}>
+              <Flex mb={"-20px"}>
+                <Text
+                  mt={"20px"}
+                  fontSize={"24px"}
+                  fontWeight={"700"}
+                  color={"#2D2926"}
+                >
+                  Relatório para a CIP
+                </Text>
+              </Flex>
+            </Flex>
+            {/* <Flex direction={"column"}>
               <Flex mb={"-20px"}>
                 <Text
                   mt={"20px"}
@@ -311,7 +293,7 @@ export function GraficoPorCadaIntervencaoComponent() {
                   />
                 ))}
               </Flex>
-            </Flex>
+            </Flex> */}
             <Box
               overflowX={"scroll"}
               w={innerWidth > 428 ? width * 0.7 : width * 0.85}
@@ -319,7 +301,7 @@ export function GraficoPorCadaIntervencaoComponent() {
               overflowY={"hidden"}
             >
               <Flex>
-                <GraficoPorCadaIntervencao />
+                <GraficoCIP />
               </Flex>{" "}
             </Box>
           </Flex>

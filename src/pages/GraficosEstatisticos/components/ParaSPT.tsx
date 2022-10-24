@@ -5,7 +5,6 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  // Input,
   Select,
   Stack,
   Text,
@@ -15,44 +14,10 @@ import {
 
 import { getSonda } from "services/get/CadastroModaisInfograficos";
 
-import { GraficoPorCadaIntervencao } from "../graficos/PorCadaIntervencao";
-import StatusIntervencao from "./StatusIntervencao";
+import { GraficoSPT } from "../graficos/ParaSPT";
 
-export function GraficoPorCadaIntervencaoComponent() {
+export function GraficoSPTComponent() {
   const [listaSondas, setListaSondas] = useState<any[]>([]);
-
-  const intervençoes = [
-    {
-      id: 4,
-      status: "Manutenção 36hrs/36%",
-      color: "#f4dd06",
-    },
-    {
-      id: 2,
-      status: "Recurso Origem 6hrs/6%",
-      color: "#0047bb",
-    },
-    {
-      id: 5,
-      status: "Recurso Cia de Serviço 8hrs/8%",
-      color: "#778bd7",
-    },
-    {
-      id: 3,
-      status: "Condições Climáticas 10hrs/10%",
-      color: "#00b050",
-    },
-    {
-      id: 1,
-      status: "Informações Técnicas 23hrs/23%",
-      color: "#00b0f0",
-    },
-    {
-      id: 6,
-      status: "Aguardando Outros 18hrs/18%",
-      color: "#7030a0",
-    },
-  ];
 
   const reqGet = async () => {
     const sondas = await getSonda();
@@ -272,7 +237,7 @@ export function GraficoPorCadaIntervencaoComponent() {
                 </FormControl>
               </Flex> */}
             </Flex>
-            <Flex direction={"column"}>
+            <Flex direction={"column"} mb={11}>
               <Flex mb={"-20px"}>
                 <Text
                   mt={"20px"}
@@ -280,11 +245,11 @@ export function GraficoPorCadaIntervencaoComponent() {
                   fontWeight={"700"}
                   color={"#2D2926"}
                 >
-                  Relatório de cada intervenção
+                  Relatório para cada SPT
                 </Text>
               </Flex>
-              <Flex direction={"row"} gap={2}>
-                <Text
+              {/* <Flex direction={"row"} gap={2}> */}
+              {/* <Text
                   mt={"20px"}
                   fontSize={"20px"}
                   fontWeight={"700"}
@@ -300,9 +265,9 @@ export function GraficoPorCadaIntervencaoComponent() {
                 >
                   100 HORAS
                 </Text>
-              </Flex>
+              </Flex> */}
 
-              <Flex gap={2} wrap={"wrap"} flex={1}>
+              {/* <Flex gap={2} wrap={"wrap"} flex={1}>
                 {intervençoes.map((status, index) => (
                   <StatusIntervencao
                     key={index}
@@ -310,7 +275,7 @@ export function GraficoPorCadaIntervencaoComponent() {
                     color={status.color}
                   />
                 ))}
-              </Flex>
+              </Flex> */}
             </Flex>
             <Box
               overflowX={"scroll"}
@@ -319,7 +284,7 @@ export function GraficoPorCadaIntervencaoComponent() {
               overflowY={"hidden"}
             >
               <Flex>
-                <GraficoPorCadaIntervencao />
+                <GraficoSPT />
               </Flex>{" "}
             </Box>
           </Flex>
