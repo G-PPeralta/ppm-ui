@@ -12,7 +12,7 @@ import {
 import { Ring } from "@uiball/loaders";
 
 import BotaoSetaVoltar from "components/BotaoSetaVoltar/BotaoSetaVoltar";
-import DatePickerGenerico from "components/DatePickerGenerico";
+// import DatePickerGenerico from "components/DatePickerGenerico";
 import InputGenerico from "components/InputGenerico";
 import SelectFiltragem from "components/SelectFiltragem";
 import Sidebar from "components/SideBar";
@@ -37,7 +37,7 @@ function CadastrarProjeto() {
     optionsSolicitantes,
     // optionsPrioridades,
     optionsStatus,
-    optionsComplexidades,
+    // optionsComplexidades,
     optionsDivisoes,
     optionsClassificacoes,
     optionsTipoProjetos,
@@ -276,14 +276,14 @@ function CadastrarProjeto() {
                       maxLength={50}
                     />
                   </Flex>
-                  <Flex flex={1}>
+                  {/* <Flex flex={1}>
                     <DatePickerGenerico
                       nomeLabel={"DATA INÍCIO"}
                       registerForm={registerForm}
                       propName={"dataInicio"}
                       data={registerForm.values.dataInicio}
                     />
-                  </Flex>
+                  </Flex> */}
                 </Flex>
 
                 <Flex
@@ -312,7 +312,7 @@ function CadastrarProjeto() {
                     </InputGroup>
                   </Flex>
 
-                  <Flex flex={1}>
+                  {/* <Flex flex={1}>
                     {registerForm.values.complexidadeId === 0 ? (
                       <InputCadastroInline
                         required={true}
@@ -334,7 +334,7 @@ function CadastrarProjeto() {
                         value={getValue(optionsComplexidades, "complexidadeId")}
                       />
                     )}
-                  </Flex>
+                  </Flex> */}
                 </Flex>
 
                 <Flex
