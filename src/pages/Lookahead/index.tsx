@@ -54,7 +54,9 @@ export function Lookahead() {
             <Flex direction="column" fontFamily="Mulish">
               <Flex align={"flex-end"}>
                 <FormControl mt={-1} ml={-1}>
-                  <TituloPagina botaoVoltar={false}>Lookahead</TituloPagina>
+                  <TituloPagina botaoVoltar={false}>
+                    Relatório Lookahead
+                  </TituloPagina>
                 </FormControl>
               </Flex>
               <Flex direction="row" justifyContent="flex-start">
