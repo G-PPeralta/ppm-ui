@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import {
   Flex,
   Modal,
@@ -14,43 +12,50 @@ import {
   useBreakpointValue,
   Input,
   Text,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
-import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
+import { handleCancelar } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroSonda } from "hooks/useCadastroSonda";
 
-function ModalCadastrarSonda() {
+interface Props {
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function ModalCadastrarSonda({ refresh, setRefresh }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroSonda();
-  const [refresh, setRefresh] = useState(false);
 
   return (
     <>
       <Button
         h={"56px"}
-        borderRadius={"10px"}
-        background={"white"}
+        borderRadius={"8px"}
+        fontSize={"18px"}
+        fontWeight={"700"}
+        variant="outline"
         border={"2px solid"}
-        color={"origem.500"}
-        _hover={{
-          border: "2px solid",
-          borderColor: "origem.500",
-          background: "origem.500",
-          transition: "all 0.4s",
-          color: "white",
-        }}
+        borderColor={"origem.500"}
         textColor={"origem.500"}
+        _hover={{
+          borderColor: "origem.600",
+          backgroundColor: "origem.500",
+          textColor: "white",
+          transition: "all 0.4s",
+        }}
         onClick={onOpen}
       >
         Sonda
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="md">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -63,6 +68,10 @@ function ModalCadastrarSonda() {
           >
             Cadastrar SPT
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -116,13 +125,13 @@ function ModalCadastrarSonda() {
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoGhost
+                <BotaoVermelhoLargoGhost
                   text={"Cancelar"}
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                <BotaoAzulPrimary
-                  text={"Concluir Cadastro"}
+                <BotaoAzulLargoPrimary
+                  text={"Cadastrar"}
                   formikForm={registerForm}
                   onClose={onClose}
                   setRefresh={setRefresh}

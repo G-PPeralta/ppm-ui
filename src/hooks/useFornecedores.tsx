@@ -27,6 +27,7 @@ export function useFornecedores() {
 
     onSubmit: async (values) => {
       const newValues = {
+        nomefornecedor: values.fornecedor,
         fornecedor: values.fornecedor,
         orcamento: values.orcamento,
         realizado: values.realizado,
@@ -37,7 +38,7 @@ export function useFornecedores() {
       setLoading(true);
 
       try {
-        const { status } = await putFornecedor(values.id, newValues);
+        const { status } = await putFornecedor(newValues);
 
         if (status === 200 || status === 201) {
           toast.success("Fornecedor atualizado com sucesso!", {

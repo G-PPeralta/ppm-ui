@@ -16,19 +16,23 @@ import {
   ModalBody,
   ModalCloseButton,
   Text,
+  Select,
 
   // IconButton,
   // Box,
   // Text,
 } from "@chakra-ui/react";
 
-import { Fornecedor } from "../index";
+import { FornecedoreDto } from "..";
+
+// import { Fornecedor } from "../index";
 
 type EditarFornecedorModalProps = {
   isOpen: boolean;
-  fornecedor: Fornecedor;
+  fornecedor: FornecedoreDto;
   onClose: () => void;
-  onUpdate: (fornecedor: Fornecedor) => void;
+  onUpdate: (fornecedor: any) => void;
+  polos: any[];
 };
 
 export function EditarFornecedorModal({
@@ -36,53 +40,30 @@ export function EditarFornecedorModal({
   fornecedor,
   onClose,
   onUpdate,
+  polos,
 }: EditarFornecedorModalProps) {
-  const [nome, setNome] = useState(fornecedor?.fornecedor);
-  const [orcamento, setOrcamento] = useState(
-    fornecedor ? fornecedor.orcamento : 0
-  );
-  const [realizado, setRealizado] = useState(
-    fornecedor ? fornecedor.realizado : 0
-  );
+  const [nome, setNome] = useState(fornecedor?.nomefornecedor);
+  const [poloId, setPolo] = useState(fornecedor ? fornecedor.poloid : 0);
+  const [servico, setServico] = useState(fornecedor ? fornecedor.servicoid : 0);
   const [responsavel, setResponsavel] = useState(
-    fornecedor ? fornecedor.responsavel : ""
+    fornecedor ? fornecedor.representante : ""
   );
   const [descricao, setDescricao] = useState(
-    fornecedor ? fornecedor.descricao : ""
+    fornecedor ? fornecedor.justificativa : ""
   );
 
-  function handleChangeNome(event: any): void {
-    setNome(event.target.value);
-  }
-
-  function handleChangeOrcamento(event: any): void {
-    setOrcamento(event.target.value);
-  }
-
-  function handleChangeRealizado(event: any): void {
-    setRealizado(event.target.value);
-  }
-
-  function handleChangeResponsavel(event: any): void {
-    setResponsavel(event.target.value);
-  }
-
-  function handleChangeDescricao(event: any): void {
-    setDescricao(event.target.value);
-  }
-
   useEffect(() => {
-    setNome(fornecedor.fornecedor);
-    setOrcamento(fornecedor.orcamento);
-    setRealizado(fornecedor.realizado);
-    setResponsavel(fornecedor.responsavel);
-    setDescricao(fornecedor.descricao);
+    setNome(fornecedor.nomefornecedor);
+    setPolo(fornecedor.poloid);
+    setServico(fornecedor.servicoid);
+    setResponsavel(fornecedor.representante);
+    setDescricao(fornecedor.justificativa);
   }, [
-    fornecedor.fornecedor,
-    fornecedor.orcamento,
-    fornecedor.realizado,
-    fornecedor.responsavel,
-    fornecedor.descricao,
+    fornecedor.nomefornecedor,
+    fornecedor.poloid,
+    fornecedor.servicoid,
+    fornecedor.representante,
+    fornecedor.justificativa,
   ]);
 
   return (
@@ -146,7 +127,7 @@ export function EditarFornecedorModal({
                       fontWeight="700"
                       mt={"6px"}
                     >
-                      NOME
+                      FORNECEDOR
                     </Text>
                   </FormLabel>
                   <Input
@@ -164,7 +145,7 @@ export function EditarFornecedorModal({
                     id="fornecedorNome"
                     name="fornecedorNome"
                     value={nome}
-                    onChange={(event) => handleChangeNome(event)}
+                    onChange={(event) => setNome(event.target.value)}
                   />
                 </FormControl>
               </Flex>
@@ -177,9 +158,9 @@ export function EditarFornecedorModal({
                   fontWeight="700"
                   mt={"6px"}
                 >
-                  ORÇAMENTO
+                  POLO
                 </FormLabel>
-                <Input
+                {/* <Input
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
@@ -193,9 +174,30 @@ export function EditarFornecedorModal({
                   type="text"
                   id="orçamento"
                   name="orçamento"
-                  value={orcamento}
-                  onChange={(event) => handleChangeOrcamento(event)}
-                />
+                  value={poloId}
+                  onChange={(event) => handleChangePolo(event)}
+                /> */}
+                <Select
+                  borderRadius={"8px"}
+                  border={"1px solid #A7A7A7"}
+                  mt={"-9px"}
+                  color={"black"}
+                  _placeholder={{ color: "#949494" }}
+                  fontSize={"14px"}
+                  width={"158px"}
+                  height={"56px"}
+                  id="atividadeRel"
+                  name="atividadeRel"
+                  onChange={(event) => setPolo(Number(event.target.value))}
+                  value={poloId}
+                >
+                  <option value="">Selecione</option>
+                  {polos.map((pol, index) => (
+                    <option value={pol.id} key={index}>
+                      {pol.polo}
+                    </option>
+                  ))}
+                </Select>
               </FormControl>
             </Flex>
 
@@ -203,13 +205,13 @@ export function EditarFornecedorModal({
               <Flex>
                 <FormControl>
                   <FormLabel
-                    htmlFor="orçamento"
+                    htmlFor="servico"
                     color="#949494"
                     fontSize="12px"
                     fontWeight="700"
                     mt={"6px"}
                   >
-                    REALIZADO
+                    SERVIÇO
                   </FormLabel>
                   <Input
                     borderRadius={"8px"}
@@ -221,12 +223,12 @@ export function EditarFornecedorModal({
                     fontSize={"14px"}
                     fontWeight={"400"}
                     isRequired
-                    placeholder="Realizado"
+                    placeholder="Servico"
                     type="text"
-                    id="realizado"
-                    name="realizado"
-                    value={realizado}
-                    onChange={(event) => handleChangeRealizado(event)}
+                    id="servico"
+                    name="servico"
+                    value={servico}
+                    onChange={(event) => setServico(Number(event.target.value))}
                   />
                 </FormControl>
               </Flex>
@@ -255,7 +257,7 @@ export function EditarFornecedorModal({
                   id="responsável"
                   name="responsável"
                   value={responsavel}
-                  onChange={(event) => handleChangeResponsavel(event)}
+                  onChange={(event) => setResponsavel(event.target.value)}
                 />
               </FormControl>
             </Flex>
@@ -284,7 +286,7 @@ export function EditarFornecedorModal({
                 id="descrição"
                 name="descrição"
                 value={descricao}
-                onChange={(event) => handleChangeDescricao(event)}
+                onChange={(event) => setDescricao(event.target.value)}
               />
             </FormControl>
           </ModalBody>
@@ -309,21 +311,21 @@ export function EditarFornecedorModal({
               </Text>
             </Button>
             <Button
-              background="#0047BB"
+              background="origem.500"
               variant="primary"
               color="white"
               onClick={() => {
                 onUpdate({
                   id: fornecedor.id,
-                  fornecedor: nome,
-                  orcamento,
-                  realizado,
-                  responsavel,
-                  descricao,
+                  nomeFornecedor: nome,
+                  poloId,
+                  servicoId: servico,
+                  representante: responsavel,
+                  justificativa: descricao,
                 });
               }}
               _hover={{
-                background: "origem.500",
+                background: "origem.600",
                 transition: "all 0.4s",
               }}
               width={"128px"}

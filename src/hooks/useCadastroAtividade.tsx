@@ -15,7 +15,7 @@ import {
   getAreaAtuacaoList,
   getResponsavelList,
 } from "services/get/Infograficos";
-import { postCadastroAtividade } from "services/post/CadastroModaisInfograficos";
+import { postCadastroAtividade } from "services/post/Infograficos";
 
 import { useAuth } from "./useAuth";
 

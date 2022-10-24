@@ -27,7 +27,7 @@ import {
   postGetInfoCampanha,
   getSondaCampanha,
 } from "services/get/Infograficos";
-import { postNovaIntervencao } from "services/post/CadastroModaisInfograficos";
+import { postNovaIntervencao } from "services/post/Infograficos";
 
 import { useAuth } from "./useAuth";
 
@@ -120,11 +120,13 @@ export function useCadastroIntervencao() {
   const initialValues: any = {
     nom_usu_create: user?.nome,
     erroDataIntervencao: false,
-    poco_id: 0,
+    poco_id: "",
     campo_id: 0,
     id_campanha: 0,
     dat_ini_prev: "",
     projeto_tipo_id: 0,
+    nova_campanha: false,
+    data_limite: "",
     atividades: [
       {
         area_id: 0,
@@ -154,6 +156,8 @@ export function useCadastroIntervencao() {
         id_campanha: values.id_campanha,
         dat_ini_prev: values.dat_ini_prev,
         projeto_tipo_id: values.projeto_tipo_id,
+        nova_campanha: values.nova_campanha,
+        data_limite: values.data_limite,
         atividades: values.atividades,
         comentarios: values.comentarios,
       };

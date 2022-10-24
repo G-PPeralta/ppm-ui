@@ -1,8 +1,9 @@
 import {
   Box,
   Flex,
-  FormControl,
-  Stack,
+  // FormControl,
+  Heading,
+  // Stack,
   Text,
   useBreakpointValue,
   useColorModeValue,
@@ -18,49 +19,61 @@ export function Priorizacao() {
   return (
     <>
       <Sidebar>
-        <Stack spacing="8">
-          <Flex
-            w="auto"
-            align="center"
-            justify="center"
-            bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
+        <Flex
+          w="auto"
+          // h="100vh"
+          align="center"
+          justify="center"
+          bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
+          // border={"5px solid red"}
+        >
+          <Box
+            py={{ base: "6", sm: "8" }}
+            px={{ base: "6", sm: "8" }}
+            w="100%"
+            // h="100vh"
+            bg={useBreakpointValue({ base: "transparent", sm: "white" })}
+            boxShadow={{
+              base: "none",
+              sm: useColorModeValue("md", "md-dark"),
+            }}
+            borderRadius={{ base: "none", sm: "xl" }}
           >
-            <Box
-              py={{ base: "6", sm: "8" }}
-              px={{ base: "6", sm: "8" }}
-              w="100%"
-              h="100vh"
-              bg={useBreakpointValue({ base: "transparent", sm: "white" })}
-              boxShadow={{
-                base: "none",
-                sm: useColorModeValue("md", "md-dark"),
-              }}
-              borderRadius={{ base: "none", sm: "xl" }}
+            <Flex
+              mt={-3}
+              ml={-3}
+              flexDirection={"row"}
+              justify={"space-between"}
+              mb={1}
+              wrap={"wrap"}
             >
-              <Flex flexDirection={"row"} justify={"space-between"}>
-                <Flex>
-                  <Text fontWeight={"700"} fontSize={"24px"} color={"#2D2926"}>
-                    Priorização
-                  </Text>
+              <Heading
+                fontFamily={"Mulish"}
+                fontWeight={"700"}
+                fontSize={"24px"}
+                color={"#2D2926"}
+              >
+                <Text>Priorização</Text>
+              </Heading>
+              <Flex gap={5}>
+                <Flex alignItems={"flex-start"}>
+                  <Heading className="toBottom">
+                    <ModalCadastrarPriorizacao />
+                  </Heading>
                 </Flex>
-                <Flex gap={5}>
-                  <Flex alignItems={"flex-start"}>
-                    <FormControl className="toBottom">
-                      <ModalCadastrarPriorizacao />
-                    </FormControl>
-                  </Flex>
 
-                  <Flex alignItems={"flex-start"} alignSelf={"end"}>
-                    <ModalLixeira />
-                  </Flex>
+                <Flex alignItems={"flex-start"} alignSelf={"center"}>
+                  <ModalLixeira />
                 </Flex>
               </Flex>
-              <>
+            </Flex>
+            <>
+              <Flex ml={-3} mr={-3}>
                 <TabelaPriorizacao />
-              </>
-            </Box>
-          </Flex>
-        </Stack>
+              </Flex>
+            </>
+          </Box>
+        </Flex>
       </Sidebar>
     </>
   );

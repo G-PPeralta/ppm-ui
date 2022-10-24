@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
-import { FiPlusCircle, FiPrinter } from "react-icons/fi";
-import { IoIosArrowBack } from "react-icons/io";
+import { FiPlus, FiPlusCircle, FiPrinter } from "react-icons/fi";
+// import { IoIosArrowBack } from "react-icons/io";
 import ReactToPrint from "react-to-print";
 
 import {
@@ -14,7 +14,7 @@ import {
   Button,
   Flex,
   Heading,
-  Link,
+  // Link,
 } from "@chakra-ui/react";
 
 import Sidebar from "components/SideBar";
@@ -82,9 +82,8 @@ export function Reports() {
       <Sidebar>
         <Stack>
           <Box
-            paddingTop={{ base: "5", sm: "10" }}
-            paddingBottom={{ base: "5", sm: "10" }}
-            px={{ base: "4", sm: "10" }}
+            py={{ base: "5", sm: "24px" }}
+            px={{ base: "4", sm: "24px" }}
             bg={useBreakpointValue({ base: "white", sm: "white" })}
             boxShadow={{
               base: "none",
@@ -92,18 +91,21 @@ export function Reports() {
             }}
             borderRadius={{ base: "none", sm: "xl" }}
           >
-            <Flex justify={"space-between"} alignItems={"center"} mb={5}>
+            <Flex justify={"space-between"} alignItems={"center"}>
               <Flex direction={"row"} alignItems={"center"}>
-                <Link href="javascript:history.back()">
+                {/* <Link href="javascript:history.back()">
                   <IoIosArrowBack
                     size={useBreakpointValue({ base: "20", sm: "38" })}
-                  />
-                </Link>
+                  /> */}
+                {/* </Link> */}
                 <Heading
-                  as="h3"
-                  size={useBreakpointValue({ base: "md", sm: "lg" })}
+                  mb={"24px"}
+                  fontSize={"24px"}
+                  color={"#2D2926"}
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
-                  GERAR RELATÓRIO
+                  Gerar Relatório
                 </Heading>
               </Flex>
               {width === "mobile" ? (
@@ -200,10 +202,20 @@ export function Reports() {
             ) : (
               <Flex flexDirection="row" gap={"4"} alignItems={"end"}>
                 <FormControl maxW={"30%"}>
-                  <FormLabel htmlFor="report" color={"gray.400"}>
+                  <FormLabel
+                    htmlFor="report"
+                    fontSize={"12px"}
+                    color={"#A7A7A7"}
+                    fontWeight={"700"}
+                  >
                     TIPO DO RELATÓRIO
                   </FormLabel>
                   <Select
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    _placeholder={{ color: "#2D2926" }}
+                    mt={"-6px"}
+                    h={"56px"}
                     id="poloId"
                     name="pole"
                     width={"100%"}
@@ -222,10 +234,22 @@ export function Reports() {
                 </FormControl>
                 {(report == "6" || report == "5" || report == "2") && (
                   <FormControl maxW={"30%"}>
-                    <FormLabel htmlFor="report" color={"gray.400"}>
+                    <FormLabel
+                      htmlFor="report"
+                      fontSize={"12px"}
+                      color={"#A7A7A7"}
+                      fontWeight={"700"}
+                    >
                       PROJETO
                     </FormLabel>
                     <Select
+                      fontSize={"14px"}
+                      fontWeight={"400"}
+                      _placeholder={{ color: "#2D2926" }}
+                      mt={"-6px"}
+                      // width={"208px"}
+                      height={"56px"}
+                      borderRadius={"8px"}
                       id="poloId"
                       name="pole"
                       width={"100%"}
@@ -242,14 +266,20 @@ export function Reports() {
                 )}
                 <FormControl className="toBottom" maxW={"fit-content"}>
                   <Button
-                    color="white"
-                    background="origem.300"
+                    h={"56px"}
+                    // w={"98px"}
+                    fontSize={"18px"}
+                    fontWeight={"700"}
+                    background={"origem.500"}
+                    border={"2.3px solid"}
+                    color={"white"}
                     variant="primary"
                     _hover={{
-                      background: "origem.500",
+                      background: "origem.600",
+                      color: "white",
                       transition: "all 0.4s",
                     }}
-                    rightIcon={<FiPlusCircle />}
+                    rightIcon={<FiPlus />}
                     onClick={() => setReport(initialValue)}
                   >
                     Gerar

@@ -47,6 +47,28 @@ export default function AtividadesCadastroCronograma({
     listaOperacao,
   };
 
+  const initAdd = {
+    area_id: 0,
+    operacao_id: 0,
+    responsavel_id: 0,
+    data_inicio: "",
+    duracao: 0,
+    precedentes: listaAtividadesPrecedentes.filter((atividade: any) => {
+      for (
+        let index = 0;
+        index < registerForm.values.atividades.length;
+        index += 1
+      ) {
+        if (
+          atividade.id === registerForm.values.atividades[index].operacao_id
+        ) {
+          return true;
+        }
+      }
+      return false;
+    }),
+  };
+
   const reorder = (
     registerForm: FormikProps<any>,
     startIndex: number,
@@ -91,27 +113,7 @@ export default function AtividadesCadastroCronograma({
   const add = () => {
     registerForm.setFieldValue("atividades", [
       ...registerForm.values.atividades,
-      {
-        area_id: 0,
-        operacao_id: 0,
-        responsavel_id: 0,
-        data_inicio: "",
-        duracao: 0,
-        precedentes: listaAtividadesPrecedentes.filter((atividade: any) => {
-          for (
-            let index = 0;
-            index < registerForm.values.atividades.length;
-            index += 1
-          ) {
-            if (
-              atividade.id === registerForm.values.atividades[index].operacao_id
-            ) {
-              return true;
-            }
-          }
-          return false;
-        }),
-      },
+      initAdd,
     ]);
     setRender(!render);
   };
@@ -122,27 +124,27 @@ export default function AtividadesCadastroCronograma({
     const newId = droppableId + "-" + now.toLocaleString();
     setDroppableId(newId);
 
-    const precedentesFiltrados = listaAtividadesPrecedentes.filter(
-      (atividade: AtividadePrecedente) => {
-        for (
-          let index = 0;
-          index < registerForm.values.atividades.length;
-          index += 1
-        ) {
-          if (
-            atividade.id === registerForm.values.atividades[index].operacao_id
-          ) {
-            return true;
-          }
-        }
-        return false;
-      }
-    );
+    // const precedentesFiltrados = listaAtividadesPrecedentes.filter(
+    //   (atividade: AtividadePrecedente) => {
+    //     for (
+    //       let index = 0;
+    //       index < registerForm.values.atividades.length;
+    //       index += 1
+    //     ) {
+    //       if (
+    //         atividade.id === registerForm.values.atividades[index].operacao_id
+    //       ) {
+    //         return true;
+    //       }
+    //     }
+    //     return false;
+    //   }
+    // );
 
-    registerForm.setFieldValue(
-      "atividades[0].precedentes",
-      precedentesFiltrados
-    );
+    // registerForm.setFieldValue(
+    //   "atividades[0].precedentes",
+    //   precedentesFiltrados
+    // );
   }, []);
 
   useEffect(() => {
@@ -150,58 +152,59 @@ export default function AtividadesCadastroCronograma({
       (atividade: Atividade) => atividade
     );
 
-    const listaPrecedentesChecked = listaAtividades.map(
-      (atividade: Atividade) => {
-        const precedentes = atividade.precedentes.map(
-          (precedente: AtividadePrecedente) => {
-            if (precedente.checked) {
-              return precedente;
-            }
-            return null;
-          }
-        );
+    // const listaPrecedentesChecked = listaAtividades.map(
+    //   (atividade: Atividade) => {
+    //     const precedentes = atividade.precedentes.map(
+    //       (precedente: AtividadePrecedente) => {
+    //         if (precedente.checked) {
+    //           return precedente;
+    //         }
+    //         return null;
+    //       }
+    //     );
 
-        return precedentes;
-      }
-    );
+    //     return precedentes;
+    //   }
+    // );
 
-    const precedentesFiltrados = listaAtividadesPrecedentes.filter(
-      (atividade: AtividadePrecedente) => {
-        for (let index = 0; index < listaAtividades.length; index += 1) {
-          if (atividade.id === listaAtividades[index].operacao_id) {
-            return true;
-          }
-        }
-        return false;
-      }
-    );
+    // const precedentesFiltrados = listaAtividadesPrecedentes.filter(
+    //   (atividade: AtividadePrecedente) => {
+    //     for (let index = 0; index < listaAtividades.length; index += 1) {
+    //       if (atividade.id === listaAtividades[index].operacao_id) {
+    //         return true;
+    //       }
+    //     }
+    //     return false;
+    //   }
+    // );
 
-    const listaAtividadesAtualizada = listaAtividades.map(
-      (atividade: Atividade, index: number) => {
-        const precedentes = precedentesFiltrados.map(
-          (precedente: AtividadePrecedente) => {
-            for (
-              let indexPrecedente = 0;
-              indexPrecedente < listaPrecedentesChecked[index].length;
-              indexPrecedente += 1
-            ) {
-              if (
-                listaPrecedentesChecked[index][indexPrecedente] &&
-                listaPrecedentesChecked[index][indexPrecedente].id ===
-                  precedente.id
-              ) {
-                return listaPrecedentesChecked[index][indexPrecedente];
-              }
-            }
-            return { ...precedente };
-          }
-        );
+    // const listaAtividadesAtualizada = listaAtividades.map(
+    //   (atividade: Atividade, index: number) =>
+    //     // const precedentes = precedentesFiltrados.map(
+    //     //   (precedente: AtividadePrecedente) => {
+    //     //     for (
+    //     //       let indexPrecedente = 0;
+    //     //       indexPrecedente < listaPrecedentesChecked[index].length;
+    //     //       indexPrecedente += 1
+    //     //     ) {
+    //     //       if (
+    //     //         listaPrecedentesChecked[index][indexPrecedente] &&
+    //     //         listaPrecedentesChecked[index][indexPrecedente].id ===
+    //     //           precedente.id
+    //     //       ) {
+    //     //         return listaPrecedentesChecked[index][indexPrecedente];
+    //     //       }
+    //     //     }
+    //     //     return { ...precedente };
+    //     //   }
+    //     // );
 
-        return { ...atividade, precedentes };
-      }
-    );
+    //     // return { ...atividade, precedentes };
+    //     ({ ...atividade })
+    // );
     // Atualiza a lista de precedentes para todos os itens da lista de atividades
-    registerForm.setFieldValue("atividades", listaAtividadesAtualizada);
+    // registerForm.setFieldValue("atividades", listaAtividadesAtualizada);
+    registerForm.setFieldValue("atividades", listaAtividades);
   }, [render]);
 
   return (

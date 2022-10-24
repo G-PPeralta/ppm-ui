@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 // import toast from "react-hot-toast";
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdArrowForwardIos, MdModeEdit } from "react-icons/md";
+import { useParams } from "react-router-dom";
 
 import {
   Button,
@@ -46,6 +47,7 @@ import EditarTarefaModal from "./EditarTarefaModal";
 
 function BotaoListadeTarefas() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [tarefaFilter, setTarefaFilter] = useState("");
@@ -73,7 +75,7 @@ function BotaoListadeTarefas() {
   };
 
   async function fetchAtividadesProjeto() {
-    const { data } = await getAtividadesProjeto();
+    const { data } = await getAtividadesProjeto(Number(id));
     setAtividadesProjeto(data);
   }
 
@@ -83,7 +85,9 @@ function BotaoListadeTarefas() {
   }
 
   async function getTaskList() {
-    const { data } = await getAtividadesTarefas();
+    const { data } = await getAtividadesTarefas(Number(id));
+    // console.log(data);
+
     setTaskList(data);
     setFilteredData(data);
   }
@@ -132,21 +136,10 @@ function BotaoListadeTarefas() {
             {task.descricao_tarefa}
           </Td>
           <Td textAlign={"center"} fontWeight={"semibold"}>
-            Responsável
+            {task.responsavel}
           </Td>
           <Td textAlign={"center"} fontWeight={"semibold"}>
-            {!task.status ? "0%" : task.status}
-            <IconButton
-              aria-label="Plus sign"
-              icon={<MdModeEdit />}
-              background="transparent"
-              variant="secondary"
-              color="#0047BB"
-              isRound={true}
-              // onClick={() => onEdit(lessons)}
-              width={"18px"}
-              height={"18px"}
-            />
+            {!task.status ? "1" : task.status}%
           </Td>
           <Td>
             <IconButton
@@ -242,7 +235,7 @@ function BotaoListadeTarefas() {
                         mt={"-9px"}
                         width={"328px"}
                         height={"56px"}
-                        color="#949494"
+                        _placeholder={{ color: "black" }}
                         placeholder="Nome da tarefa"
                         type="text"
                         id="tarefa"
@@ -278,7 +271,7 @@ function BotaoListadeTarefas() {
                         mt={"-9px"}
                         width={"156px"}
                         height={"56px"}
-                        color="#949494"
+                        _placeholder={{ color: "black" }}
                         id="data"
                         type="date"
                         // maxLength={6}
@@ -383,7 +376,10 @@ function BotaoListadeTarefas() {
 
           <ModalCloseButton
             color={"white"}
-            onClick={() => setTaskList(filteredData)}
+            onClick={() => {
+              setTaskList(filteredData);
+              setTarefaFilter("");
+            }}
           />
           <ModalBody>
             <Flex direction={"column"} w={"100%"}>

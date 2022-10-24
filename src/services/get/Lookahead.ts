@@ -19,7 +19,14 @@ export async function getAtividades(
   return data;
 }
 
-export async function getAtividade(id: number): Promise<AtividadesLookahead> {
+export async function getAtividade(id: number): Promise<AtividadesLookahead[]> {
+  const { data } = await api.get(`/lookahead/atividade/${id}`, token());
+  return data;
+}
+
+export async function getFerramentasServicos(
+  id: number
+): Promise<AtividadesLookahead> {
   const { data } = await api.get(
     `/lookahead/ferramentas-servicos/${id}`,
     token()

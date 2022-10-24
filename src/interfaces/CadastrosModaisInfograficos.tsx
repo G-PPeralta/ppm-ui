@@ -97,9 +97,10 @@ export interface ListaProjetoTipo {
 }
 
 export interface NovaCampanha {
-  id_projeto: number;
+  id_projeto: string;
   dsc_comentario: string;
   nom_usu_create: string | undefined;
+  nova_campanha: boolean;
 }
 
 export interface NovaIntervencao extends User {

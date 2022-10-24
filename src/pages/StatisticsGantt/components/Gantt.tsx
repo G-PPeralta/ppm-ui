@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { FiTrash } from "react-icons/fi";
 
 import { Flex } from "@chakra-ui/react";
 import {
   Edit,
+  ColumnDirective,
+  ColumnsDirective,
   GanttComponent,
   Inject,
   Selection,
@@ -11,8 +14,13 @@ import {
 import { Ring } from "@uiball/loaders";
 import { StatisticsGanttProps } from "interfaces/Services";
 
+import { useToast } from "contexts/Toast";
+
+import { deleteOperacaoCronograma } from "services/delete/Estatisticas";
 type ganttOptionsProps = {
   data: StatisticsGanttProps[] | undefined; // TODO: tirar undefined
+  setRefresh: Function;
+  refresh: any;
   options?: {
     toolbarOptions?: string[];
     showGantt?: boolean;
@@ -24,20 +32,26 @@ type ganttOptionsProps = {
   };
 };
 
-export function Gantt({ data, options, edit }: ganttOptionsProps) {
-  // const [ganttData, setGanttData] = useState<IGantt>({} as IGantt);
+export function Gantt({
+  data,
+  options,
+  edit,
+  setRefresh,
+  refresh,
+}: ganttOptionsProps) {
   const [loading, setLoading] = useState(true);
-  const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
+  const { toast } = useToast();
+  // const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
 
   const queryTaskbarInfo = (args: any) => {
     // console.log(":::args.data.taskData", args.data.taskData);
     let color;
     const { Duration, med, dp } = args.data.taskData;
 
+    if (Duration >= med + dp) color = "black";
+    if (Duration < med + dp) color = "red";
+    if (Duration < med + dp / 2) color = "yellow";
     if (Duration < med - dp) color = "green";
-    else if (Duration >= med - dp && Duration < med + dp / 2) color = "yellow";
-    else if (Duration >= med + dp / 2 && Duration < med + dp) color = "red";
-    else if (Duration >= med + dp) color = "black";
 
     if (color === "black") {
       // black (duração > média + desvio padrão)
@@ -71,11 +85,37 @@ export function Gantt({ data, options, edit }: ganttOptionsProps) {
       "Med: ${taskData.med}h - Min: ${taskData.min}h - Max: ${taskData.max}h - DP: ${taskData.dp}h",
   };
 
-  // const handleShowGantt = () => (options?.showGantt ? "Default" : "Grid");
+  const remove = async (props: any) => {
+    try {
+      if (!props.TaskID) throw new Error("Erro ao remover operação!");
+      const { status } = await deleteOperacaoCronograma(props.TaskID);
+      if (status === 200 || status === 201) {
+        toast.success("Operação removida com sucesso!", {
+          id: "toast-principal",
+        });
+        setLoading(false);
+        setRefresh(!refresh);
+      }
+    } catch (error) {
+      toast.error("Erro ao remover operação!", {
+        id: "toast-principal",
+      });
+      setLoading(false);
+    }
+  };
 
-  // const endEdit = (args: any) => {
-  //   options?.handleEdit(args.data.taskData);
-  // };
+  const actionsTemplate = (props: any) => (
+    <Flex
+      w={"100%"}
+      style={{ position: "relative", top: "-8px" }}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
+      <Flex _hover={{ cursor: "pointer" }}>
+        <FiTrash onClick={() => remove(props)} color="#F94144" size={16} />
+      </Flex>
+    </Flex>
+  );
 
   const cellEdit = (args: any) => {
     // if (args.columnName !== "Progress") {
@@ -104,21 +144,21 @@ export function Gantt({ data, options, edit }: ganttOptionsProps) {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, [ganttData]);
-
-  useEffect(() => {
-    setGanttData(data);
+    // setTimeout(() => {
+    // }, 500);
+    if (data) setLoading(false);
   }, [data]);
+
+  // useEffect(() => {
+  //   setGanttData(data);
+  // }, [data]);
 
   return (
     <>
       {!loading ? (
         <GanttComponent
           id="gantt-control"
-          dataSource={ganttData}
+          dataSource={data}
           taskFields={{
             id: "TaskID",
             name: "TaskName",
@@ -161,90 +201,85 @@ export function Gantt({ data, options, edit }: ganttOptionsProps) {
             position: "80%",
           }}
           height={"100vh"}
-          columns={[
-            // {
-            //   field: "item",
-            //   headerText: "Item",
-            //   type: "string",
-            //   visible: false,
-            // },
-            {
-              field: "TaskID",
-              headerText: "ID",
-              allowEditing: false,
-            },
-            {
-              field: "TaskName",
-              headerText: "Ação/Projeto",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              type: "string",
-              allowEditing: false,
-            },
-            {
-              field: "StartDate",
-              headerText: "Início real",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "dd/MM/yyyy HH:mm",
-              type: "date",
-            },
-            {
-              field: "EndDate",
-              headerText: "Fim real",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "dd/MM/yyyy HH:mm",
-              type: "date",
-            },
-            {
-              field: "BaselineStartDate",
-              headerText: "Início planejado",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "dd/MM/yyyy HH:mm",
-              type: "date",
-            },
-            {
-              field: "BaselineEndDate",
-              headerText: "Fim planejado",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "dd/MM/yyyy HH:mm",
-              type: "date",
-            },
-            {
-              field: "Duration",
-              headerText: "Duração real",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              type: "number",
-              format: "N",
-            },
-            {
-              field: "BaselineDuration",
-              headerText: "Duração planejada",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              type: "number",
-              format: "N",
-            },
-            {
-              field: "Progress",
-              headerText: "Progresso (%)",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              type: "number",
-              format: "n",
-            },
-            // {
-            //   field: "ParentID",
-            //   headerText: "Pai",
-            //   headerTextAlign: "Center",
-            //   textAlign: "Center",
-            // },
-          ]}
         >
+          <ColumnsDirective>
+            <ColumnDirective
+              field="acao"
+              headerText="Ação"
+              headerTextAlign="Center"
+              textAlign="Center"
+              width="100"
+              template={actionsTemplate}
+            ></ColumnDirective>
+            <ColumnDirective
+              field="TaskID"
+              headerText="ID"
+              headerTextAlign="Center"
+              textAlign="Center"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="TaskName"
+              headerText="Operação"
+              headerTextAlign="Center"
+              textAlign="Center"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="StartDate"
+              headerText="Início real"
+              headerTextAlign="Center"
+              textAlign="Center"
+              type="date"
+              format="dd/MM/yyyy HH:mm"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="EndDate"
+              headerText="Fim real"
+              headerTextAlign="Center"
+              textAlign="Center"
+              type="date"
+              format="dd/MM/yyyy HH:mm"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="BaselineStartDate"
+              headerText="Início planejado"
+              headerTextAlign="Center"
+              textAlign="Center"
+              type="date"
+              format="dd/MM/yyyy HH:mm"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="BaselineEndDate"
+              headerText="Fim planejado"
+              headerTextAlign="Center"
+              textAlign="Center"
+              type="date"
+              format="dd/MM/yyyy HH:mm"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="Duration"
+              headerText="Duração real"
+              headerTextAlign="Center"
+              textAlign="Center"
+              type="number"
+              format="N"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="BaselineDuration"
+              headerText="Duração planejada"
+              headerTextAlign="Center"
+              textAlign="Center"
+              type="number"
+              format="N"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="Progress"
+              headerText="Progresso (%)"
+              headerTextAlign="Center"
+              textAlign="Center"
+              type="number"
+              format="N"
+            ></ColumnDirective>
+          </ColumnsDirective>
           <Inject services={[Edit, Selection, Toolbar]} />
         </GanttComponent>
       ) : (

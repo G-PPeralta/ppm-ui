@@ -84,15 +84,20 @@ function ModalAdicionarOperacao({
     <>
       <Button
         h={"56px"}
-        borderRadius={"10px"}
-        background={"white"}
-        color={"origem.500"}
-        onClick={onOpen}
+        borderRadius={"8px"}
+        fontSize={"18px"}
+        fontWeight={"700"}
+        variant="outline"
+        border={"2px solid"}
+        borderColor={"origem.500"}
+        textColor={"origem.500"}
         _hover={{
-          background: "origem.500",
+          borderColor: "origem.600",
+          backgroundColor: "origem.500",
+          textColor: "white",
           transition: "all 0.4s",
-          color: "white",
         }}
+        onClick={onOpen}
       >
         Adicionar Operação
       </Button>
@@ -166,7 +171,7 @@ function ModalAdicionarOperacao({
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"inicio_planejado"}
-                        label={"DATA PLANEJADA"}
+                        label={"INÍCIO PLANEJADO"}
                         required={true}
                       />
                     </Flex>
@@ -203,8 +208,8 @@ function ModalAdicionarOperacao({
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"inicio_realizado"}
-                        label={"DATA REAL"}
-                        required={false}
+                        label={"INÍCIO REAL"}
+                        required={true}
                       />
                     </Flex>
                     <Flex direction={"column"} flex={1}>

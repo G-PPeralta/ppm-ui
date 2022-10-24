@@ -10,13 +10,13 @@ import {
   getServicoSonda,
   getSonda,
 } from "services/get/CadastroModaisInfograficos";
-import { postNovaCampanha } from "services/post/CadastroModaisInfograficos";
+import { postNovaCampanha } from "services/post/Infograficos";
 
 import { useAuth } from "./useAuth";
 
 export function useCadastroCampanha() {
   const { toast } = useToast();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { user } = useAuth();
   const [listaSondas, setListaSondas] = useState<any[]>([]);
   const [listaServicosSondas, setListaServicosSondas] = useState<any[]>([]);
@@ -38,9 +38,10 @@ export function useCadastroCampanha() {
   };
 
   const initialValues: NovaCampanha = {
-    id_projeto: 0,
+    id_projeto: "",
     dsc_comentario: "",
     nom_usu_create: user?.nome,
+    nova_campanha: false,
   };
 
   const registerForm = useFormik({
@@ -51,6 +52,7 @@ export function useCadastroCampanha() {
         id_projeto: values.id_projeto,
         dsc_comentario: values.dsc_comentario,
         nom_usu_create: user?.nome,
+        nova_campanha: values.nova_campanha,
       };
 
       setLoading(true);
@@ -74,15 +76,9 @@ export function useCadastroCampanha() {
   });
 
   useEffect(() => {
-    setLoading(true);
     reqGet();
+    setLoading(false);
   }, []);
-
-  useEffect(() => {
-    if (listaSondas.length > 0) {
-      setLoading(false);
-    }
-  }, [listaSondas]);
 
   return {
     registerForm,

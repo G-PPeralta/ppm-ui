@@ -1,7 +1,15 @@
 import { AiFillCheckCircle } from "react-icons/ai";
 import { RiCloseCircleFill } from "react-icons/ri";
 
-import { Flex, Heading } from "@chakra-ui/react";
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Flex,
+  Heading,
+} from "@chakra-ui/react";
 
 import { ProjectSummary } from "./summary";
 
@@ -38,76 +46,121 @@ export function Indicadores() {
   return (
     <>
       <Flex direction={"column"} w={"100%"}>
-        <Flex
-          direction={"column"}
-          w={"100%"}
-          boxShadow={"md"}
-          borderRadius={"2xl"}
-          border={"1px"}
-          borderColor={"gray.200"}
-          padding={4}
-          gap={"1.4em"}
-          marginTop={"1.4em"}
-        >
-          <Flex direction={"row"} alignItems={"center"} gap={2}>
-            <RiCloseCircleFill color={"#F40606"} size={25} />
-            <Heading
-              as="h3"
-              size={{ base: "md", md: "lg" }}
-              fontWeight={"semibold"}
-              color={"gray.800"}
+        <Accordion padding={0} margin={0} allowToggle w={"100%"}>
+          <AccordionItem
+            border={0}
+            w={"100%"}
+            boxShadow={"md"}
+            borderRadius={"2xl"}
+          >
+            <Flex
+              direction={"column"}
+              w={"100%"}
+              borderRadius={"2xl"}
+              border={"1px"}
+              borderColor={"gray.200"}
+              padding={4}
+              marginTop={"24px"}
             >
-              Com Problemas
-            </Heading>
-            <Heading
-              as="h3"
-              size={{ base: "md", md: "lg" }}
-              fontWeight={"semibold"}
-              color={"#F40606"}
+              <Flex direction={"row"} justify={"space-between"}>
+                <Flex direction={"row"} alignItems={"center"} gap={2}>
+                  <RiCloseCircleFill color={"#F40606"} size={20} />
+                  <Flex direction={{ base: "column", md: "row" }}>
+                    <Heading
+                      as="h3"
+                      fontSize={"24px"}
+                      fontWeight={"semibold"}
+                      color={"gray.800"}
+                    >
+                      Com Problemas
+                    </Heading>
+                    <Heading
+                      as="h3"
+                      fontSize={"24px"}
+                      fontWeight={"semibold"}
+                      color={"#F40606"}
+                    >
+                      {projectsRed.length} projetos
+                    </Heading>
+                  </Flex>
+                </Flex>
+                <Flex>
+                  <AccordionButton>
+                    <AccordionIcon fontSize={"20px"} />
+                  </AccordionButton>
+                </Flex>
+              </Flex>
+
+              <AccordionPanel w={"100%"} padding={0}>
+                {projectsRed &&
+                  projectsRed.map((project) => (
+                    <ProjectSummary
+                      data={project}
+                      table={true}
+                    ></ProjectSummary>
+                  ))}
+              </AccordionPanel>
+            </Flex>
+          </AccordionItem>
+        </Accordion>
+
+        <Accordion padding={0} margin={0} allowToggle w={"100%"}>
+          <AccordionItem
+            border={0}
+            w={"100%"}
+            boxShadow={"md"}
+            borderRadius={"2xl"}
+          >
+            <Flex
+              direction={"column"}
+              w={"100%"}
+              borderRadius={"2xl"}
+              border={"1px"}
+              borderColor={"gray.200"}
+              padding={4}
+              marginTop={"24px"}
             >
-              {projectsRed.length} projetos
-            </Heading>
-          </Flex>
-          {projectsRed &&
-            projectsRed.map((project) => (
-              <ProjectSummary data={project} table={true}></ProjectSummary>
-            ))}
-        </Flex>
-        <Flex
-          direction={"column"}
-          w={"100%"}
-          boxShadow={"md"}
-          borderRadius={"2xl"}
-          border={"1px"}
-          borderColor={"gray.200"}
-          padding={4}
-          gap={"1.4em"}
-          marginTop={"1.4em"}
-        >
-          <Flex direction={"row"} alignItems={"center"} gap={2}>
-            <AiFillCheckCircle color={"#059502"} />
-            <Heading
-              as="h3"
-              size={{ base: "md", md: "lg" }}
-              fontWeight={"semibold"}
-              color={"gray.800"}
-            >
-              Sem Problemas
-            </Heading>
-            <Heading
-              as="h3"
-              size={{ base: "md", md: "lg" }}
-              fontWeight={"semibold"}
-              color={"#059502"}
-            >
-              {projectsGreen.length} projetos
-            </Heading>
-          </Flex>
-          {projectsGreen &&
-            projectsGreen.map((project) => (
-              <ProjectSummary data={project} table={true}></ProjectSummary>
-            ))}
-        </Flex>
+              <Flex direction={"row"} justify={"space-between"}>
+                <Flex direction={"row"} alignItems={"center"} gap={2}>
+                  <AiFillCheckCircle color={"#059502"} size={20} />
+                  <Flex direction={{ base: "column", md: "row" }}>
+                    <Heading
+                      as="h3"
+                      fontSize={"24px"}
+                      fontWeight={"semibold"}
+                      color={"gray.800"}
+                    >
+                      Sem Problemas
+                    </Heading>
+                    <Heading
+                      as="h3"
+                      fontSize={"24px"}
+                      fontWeight={"semibold"}
+                      color={"#059502"}
+                    >
+                      {projectsGreen.length} projetos
+                    </Heading>
+                  </Flex>
+                </Flex>
+                <Flex>
+                  <AccordionButton>
+                    <AccordionIcon fontSize={"20px"} />
+                  </AccordionButton>
+                </Flex>
+              </Flex>
+
+              <AccordionPanel w={"100%"} padding={0}>
+                {projectsGreen &&
+                  projectsGreen.map((project) => (
+                    <ProjectSummary
+                      data={project}
+                      table={true}
+                    ></ProjectSummary>
+                  ))}
+              </AccordionPanel>
+            </Flex>
+          </AccordionItem>
+        </Accordion>
       </Flex>
     </>
   );

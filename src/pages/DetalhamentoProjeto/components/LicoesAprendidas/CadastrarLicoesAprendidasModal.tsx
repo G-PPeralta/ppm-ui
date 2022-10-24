@@ -21,6 +21,8 @@ import {
   Button,
 } from "@chakra-ui/react";
 
+import { RequiredField } from "components/RequiredField/RequiredField";
+
 import { postLicaoAprendida } from "services/post/AdicionarLicaoAprendida";
 
 function CadastrarLicoesAprendidasModal({
@@ -45,7 +47,7 @@ function CadastrarLicoesAprendidasModal({
     onCloseModal();
   }
 
-  const regex = /[^a-z ]/gi;
+  const regex = /[^\w\s]/gi;
 
   return (
     <Flex>
@@ -105,16 +107,17 @@ function CadastrarLicoesAprendidasModal({
                 fontWeight="700"
                 mt={"6px"}
               >
-                LIÇÃO APRENDIDA
+                LIÇÃO APRENDIDA <RequiredField />
               </FormLabel>
               <Input
-                maxLength={50}
+                maxLength={40}
                 borderRadius={"8px"}
                 border={"1px solid #A7A7A7"}
                 mt={"-9px"}
                 width={"328px"}
                 height={"56px"}
-                _placeholder={{ color: "black" }}
+                color={"black"}
+                _placeholder={{ color: "#949494" }}
                 isRequired
                 placeholder="Lição aprendida"
                 type="text"
@@ -133,15 +136,17 @@ function CadastrarLicoesAprendidasModal({
                 fontWeight="700"
                 mt={"6px"}
               >
-                AÇÃO OU RECOMENDAÇÃO
+                AÇÃO OU RECOMENDAÇÃO <RequiredField />
               </FormLabel>
               <Textarea
+                maxLength={150}
                 borderRadius={"8px"}
                 border={"1px solid #A7A7A7"}
                 mt={"-9px"}
                 width={"456px"}
                 height={"56px"}
-                _placeholder={{ color: "black" }}
+                color={"black"}
+                _placeholder={{ color: "#949494" }}
                 isRequired
                 fontSize={"14px"}
                 placeholder="Ação ou recomendação"

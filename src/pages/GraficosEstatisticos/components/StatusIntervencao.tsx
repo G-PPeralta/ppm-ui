@@ -7,12 +7,12 @@ type Props = {
 
 function StatusIntervencao({ status, color }: Props) {
   return (
-    <Flex align={"center"}>
+    <Flex align={"center"} wrap={"wrap"}>
       <Box
         backgroundColor={color}
         borderRadius={"50%"}
-        width={"10px"}
-        height={"10px"}
+        width={"8px"}
+        height={"8px"}
       />
       <Text ml={2}>{status}</Text>
     </Flex>

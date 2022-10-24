@@ -20,8 +20,9 @@ import { Operacao } from "interfaces/Estatisticas";
 import { RequiredField } from "components/RequiredField/RequiredField";
 
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
-import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
-import PopOverPrecedentes from "./PopOverPrecedentes";
+import { ModalFiltrarAtividade } from "../ModalFiltrarAtividade";
+import DateTimePicker from "./DateTimePicker";
+// import PopOverPrecedentes from "./PopOverPrecedentes";
 interface Props {
   registerForm: FormikProps<any>;
   index: number;
@@ -35,31 +36,42 @@ interface Props {
 function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const innerwidth = window.innerWidth;
 
-  const { listaAreaAtuacao, listaResponsaveis, listaOperacao } = listas;
+  const { listaOperacao } = listas;
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
 
-  const remove = (index: number) => {
-    // Pega a lista de atividades diretamente do Formik
-    const newList = registerForm.values.atividades;
-    // Remove item da lista
-    newList.splice(index, 1);
-    // Atualiza lista no Formik
-    registerForm.setFieldValue("atividades", newList);
+  const initAdd = {
+    area_id: 0,
+    operacao_id: 0,
+    responsavel_id: 0,
+    data_inicio: "",
+    duracao: 0,
   };
 
-  const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
-    value: poco.id,
-    label: poco.tipo,
-  }));
+  const remove = (index: number) => {
+    const newList = registerForm.values.atividades;
 
-  const optionsResponsaveis = listaResponsaveis.map(
-    (responsavel: Responsavel) => ({
-      value: responsavel.id,
-      label: responsavel.nome,
-    })
-  );
+    newList.splice(index, 1);
+
+    if (newList.length === 0) {
+      registerForm.setFieldValue("atividades", [initAdd]);
+    } else {
+      registerForm.setFieldValue("atividades", [...newList]);
+    }
+  };
+
+  // const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
+  //   value: poco.id,
+  //   label: poco.tipo,
+  // }));
+
+  // const optionsResponsaveis = listaResponsaveis.map(
+  //   (responsavel: Responsavel) => ({
+  //     value: responsavel.id,
+  //     label: responsavel.nome,
+  //   })
+  // );
 
   const optionsOperacao = listaOperacao.map((operacao: Operacao) => ({
     value: operacao.id,
@@ -109,6 +121,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
               gap={4}
               flex={1}
               justify={"space-between"}
+              height="80px"
             >
               <Flex align={"center"} justify={"center"} gap={3}>
                 <GiHamburgerMenu color="#2E69FD" size={16} />
@@ -123,9 +136,8 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 align={"center"}
                 justify={"center"}
                 py={innerwidth >= 640 ? 0 : 4}
-                flex={1}
               >
-                <Flex direction={"column"} flex={2}>
+                <Flex direction={"column"}>
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
@@ -137,6 +149,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     </Text>
                   </Flex>
                   <SelectFiltragem
+                    width={true}
                     registerForm={registerForm}
                     propName={`atividades[${index}].operacao_id`}
                     options={optionsOperacao}
@@ -144,55 +157,14 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   />
                 </Flex>
 
-                <Flex direction={"column"} flex={2}>
-                  <Flex gap={1}>
-                    <RequiredField />
-                    <Text
-                      fontWeight={"bold"}
-                      fontSize={"12px"}
-                      color={"#949494"}
-                    >
-                      ÁREA
-                    </Text>
-                  </Flex>
-                  <SelectFiltragem
-                    registerForm={registerForm}
-                    propName={`atividades[${index}].area_id`}
-                    options={optionsAreaAtuacao}
-                    value={getValue(optionsAreaAtuacao, index, "area_id")}
-                  />
-                </Flex>
-
-                <Flex direction={"column"} flex={2}>
-                  <Flex gap={1}>
-                    <RequiredField />
-                    <Text
-                      fontWeight={"bold"}
-                      fontSize={"12px"}
-                      color={"#949494"}
-                    >
-                      RESPONSÁVEL
-                    </Text>
-                  </Flex>
-                  <SelectFiltragem
-                    registerForm={registerForm}
-                    propName={`atividades[${index}].responsavel_id`}
-                    options={optionsResponsaveis}
-                    value={getValue(
-                      optionsResponsaveis,
-                      index,
-                      "responsavel_id"
-                    )}
-                  />
-                </Flex>
-
-                <Flex direction={"column"} flex={1}>
-                  <DateTimePickerDataInicio
+                <Flex direction={"column"}>
+                  <DateTimePicker
                     registerForm={registerForm}
                     index={index}
+                    width="208px"
                   />
                 </Flex>
-                <Flex direction={"column"} flex={1}>
+                <Flex direction={"column"}>
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
@@ -206,6 +178,8 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   <NumberInput
                     max={99999}
                     min={0}
+                    height="56px"
+                    width="208px"
                     id={`atividades[${index}].duracao`}
                     name={`atividades[${index}].duracao`}
                     value={registerForm.values.atividades[index].duracao}
@@ -219,7 +193,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     <NumberInputField bg={"#fff"} h={"56px"} />
                   </NumberInput>
                 </Flex>
-                <Flex direction={"column"} flex={1}>
+                {/* <Flex direction={"column"} flex={1}>
                   <Flex gap={1}>
                     <Text
                       fontWeight={"bold"}
@@ -233,18 +207,19 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     registerForm={registerForm}
                     index={index}
                   />
-                </Flex>
+                </Flex> */}
               </Flex>
               <Flex
-                p={1}
                 align={"center"}
                 justify={"center"}
                 _hover={{ cursor: "pointer" }}
               >
+                <ModalFiltrarAtividade />
+
                 <FiTrash
                   onClick={() => remove(index)}
                   color="#F94144"
-                  size={16}
+                  size="16px"
                 />
               </Flex>
             </Flex>

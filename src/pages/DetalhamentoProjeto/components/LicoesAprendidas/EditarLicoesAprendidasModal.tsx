@@ -60,7 +60,7 @@ function EditarLicoesAprendidasModal({
     if (campo === "txt_acao") return acao;
   };
 
-  const regex = /[^a-z ]/gi;
+  const regex = /[^\w\s]/gi;
 
   return (
     <Flex>
@@ -171,7 +171,7 @@ function EditarLicoesAprendidasModal({
                   AÇÃO OU RECOMENDAÇÃO
                 </FormLabel>
                 <Textarea
-                  maxLength={255}
+                  maxLength={150}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}

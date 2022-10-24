@@ -127,8 +127,10 @@ export interface GanttMacroDto {
   macroatividade_nome: string;
   duracao?: number;
   progresso?: number;
-  data_inicio?: string;
-  data_fim?: string;
+  dat_ini_real: string;
+  dat_fim_real: string;
+  dat_ini_plan: string;
+  dat_fim_plan: string;
   item?: string;
   microatividade_id?: number;
   nome_atividade?: string;
@@ -346,6 +348,7 @@ export interface Tarefa {
 
 export interface Fornecedor {
   id?: number;
+  nomefornecedor: string;
   fornecedor: string;
   orcamento: number;
   realizado: number;
@@ -457,6 +460,9 @@ export interface StatisticsTableData {
   id_sonda: number;
   poco: string;
   id_poco: number;
+  dat_inicio?: string;
+  dat_final?: string;
+  pct_real?: number;
   atividades: StatisticsTable[];
   max?: number;
   min?: number;
@@ -469,25 +475,29 @@ export interface TarefaAtividade {
   id?: number;
   nome_tarefa: string;
   data_tarefa: Date;
-  atividade_relacionada: number;
+  atividade_relacionada: string;
   descricao_tarefa: string;
+  responsavel?: string;
   nom_usu_create?: string;
   status?: number;
+  projeto_id: number;
 }
 
 export interface TarefaAtividadeComId {
   id: number;
   nome_tarefa: string;
   data_tarefa: Date;
-  atividade_relacionada: number;
+  atividade_relacionada: string;
   descricao_tarefa: string;
   nom_usu_create?: string;
   status?: number;
+  responsavel: string;
+  projeto_id: number;
 }
 
 export interface AtividadesProjeto {
   id: number;
-  nomeAtividade: string;
+  nom_atividade: string;
   tipoAtividade: string;
   deletado: boolean;
   macroatividadeId: number;

@@ -13,14 +13,16 @@ import {
   useBreakpointValue,
   Input,
   Text,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { Responsavel } from "interfaces/CadastrosModaisInfograficos";
 
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
-import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
+import { handleCancelar } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
@@ -29,7 +31,8 @@ import Restricoes from "./Restricoes";
 
 function ModalCadastroAtividade() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaResponsaveis } = useCadastroAtividade();
+  const { registerForm, loading, listaResponsaveis, listaAreaAtuacao } =
+    useCadastroAtividade();
   const [refresh, setRefresh] = useState(false);
 
   const optionsResponsaveis = listaResponsaveis.map(
@@ -38,6 +41,11 @@ function ModalCadastroAtividade() {
       label: responsavel.nome,
     })
   );
+
+  const optionsAreaAtuacao = listaAreaAtuacao.map((area: any) => ({
+    value: area.id,
+    label: area.tipo,
+  }));
 
   return (
     <>
@@ -72,6 +80,10 @@ function ModalCadastroAtividade() {
           >
             Cadastrar Atividade
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -190,7 +202,7 @@ function ModalCadastroAtividade() {
                           registerForm={registerForm}
                           nomeSelect={"ÁREA"}
                           propName={"area_atuacao"}
-                          options={optionsResponsaveis}
+                          options={optionsAreaAtuacao}
                           required={true}
                         />
                       </Flex>
@@ -213,13 +225,13 @@ function ModalCadastroAtividade() {
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoGhost
+                <BotaoVermelhoLargoGhost
                   text={"Cancelar"}
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                <BotaoAzulPrimary
-                  text={"Concluir"}
+                <BotaoAzulLargoPrimary
+                  text={"Cadastrar"}
                   formikForm={registerForm}
                   onClose={onClose}
                   setRefresh={setRefresh}

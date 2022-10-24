@@ -14,12 +14,12 @@ import {
   Th,
   Tbody,
 } from "@chakra-ui/react";
+import { Projetos } from "interfaces/Projetos";
 
 import { getInfoProjetos } from "services/get/Infograficos";
 
 export default function NaoPrevistoComponent() {
-  const innerWidth = window.innerWidth;
-  const [projetos, setProjetos] = useState<any[]>([]);
+  const [projetos, setProjetos] = useState<Projetos[]>([] as Projetos[]);
   // const [trut, setTrue] = useState(false);
   const handleGetProjetos = async () => {
     const response = await getInfoProjetos();
@@ -33,13 +33,13 @@ export default function NaoPrevistoComponent() {
 
   // console.log(projetos);
 
-  const data = {
-    id: 1,
-    name: "Nome do Projeto",
-    orcament: "1.000.000",
-    cpi: "yellow",
-    spi: "red",
-  };
+  // const data = {
+  //   id: 1,
+  //   name: "Nome do Projeto",
+  //   orcament: "1.000.000",
+  //   cpi: "yellow",
+  //   spi: "red",
+  // };
   //   {
   //     id: 2,
   //     name: 'Nome do Projeto',
@@ -128,7 +128,7 @@ export default function NaoPrevistoComponent() {
                 {projetos.map((projeto, index) => (
                   <Tr mt={1} key={index}>
                     <Th color="gray.400" sx={{ fontSize: 11 }}>
-                      {projeto.id}
+                      {projeto.id_projeto_real}
                     </Th>
                     <Th
                       color={"#628EFD"}
@@ -143,20 +143,24 @@ export default function NaoPrevistoComponent() {
                       //   setTrue(false);
                       // }}
                     >
-                      <Text>{projeto.nome?.substr(0, 18) + "..."}</Text>
+                      <Text>{projeto.nome_projeto?.substr(0, 18) + "..."}</Text>
                     </Th>
                     {/* {trut ? <Text> {projeto.nomeProjeto}</Text> : ''} */}
                     <Th color="gray.400" sx={{ fontSize: 11 }}>
-                      <Text>
-                        {projeto.valorTotalPrevisto &&
-                          Intl.NumberFormat("pt-br", {
-                            style: "currency",
-                            currency: "BRL",
-                          }).format(projeto.valorTotalPrevisto)}
+                      <Text textAlign={"end"}>
+                        {projeto.valor_total_previsto
+                          ? Intl.NumberFormat("pt-br", {
+                              style: "currency",
+                              currency: "BRL",
+                            })
+                              .format(projeto.valor_total_previsto)
+                              .toString()
+                              .split(",")[0]
+                          : 0}
                       </Text>
                     </Th>
                     <Th>
-                      {data.cpi == "yellow" ? (
+                      {projeto.vlr_cpi_corrigido == 1 ? (
                         <Box
                           w={5}
                           h={5}
@@ -166,13 +170,28 @@ export default function NaoPrevistoComponent() {
                           alignItems={"center"}
                           pt={"2px"}
                           sx={{ borderRadius: "100%" }}
+                          style={{ backgroundColor: "#008000" }}
                         >
-                          <AiOutlineCaretUp color="#ffffff" size={14} />
+                          <AiOutlineCaretUp color="white" size={14} />
                         </Box>
-                      ) : undefined}
+                      ) : (
+                        <Box
+                          w={5}
+                          h={5}
+                          bg={"#9FA2B4"}
+                          display={"flex"}
+                          flexDirection="column"
+                          alignItems={"center"}
+                          pt={"2px"}
+                          sx={{ borderRadius: "100%" }}
+                          style={{ backgroundColor: "red" }}
+                        >
+                          <AiOutlineCaretUp color="white" size={14} />
+                        </Box>
+                      )}
                     </Th>
                     <Th>
-                      {data.spi == "red" ? (
+                      {projeto.vlr_spi_corrigido == 1 ? (
                         <Box
                           w={5}
                           h={5}
@@ -182,10 +201,25 @@ export default function NaoPrevistoComponent() {
                           alignItems={"center"}
                           pt={"2px"}
                           sx={{ borderRadius: "100%" }}
+                          style={{ backgroundColor: "#008000" }}
                         >
-                          <AiOutlineCaretUp color="#ffffff" size={14} />
+                          <AiOutlineCaretUp color="white" size={14} />
                         </Box>
-                      ) : undefined}
+                      ) : (
+                        <Box
+                          w={5}
+                          h={5}
+                          bg={"#9FA2B4"}
+                          display={"flex"}
+                          flexDirection="column"
+                          alignItems={"center"}
+                          pt={"2px"}
+                          sx={{ borderRadius: "100%" }}
+                          style={{ backgroundColor: "red" }}
+                        >
+                          <AiOutlineCaretUp color="white" size={14} />
+                        </Box>
+                      )}
                     </Th>
                     {/* {d.cpi == 'green' ? (
                           <Box

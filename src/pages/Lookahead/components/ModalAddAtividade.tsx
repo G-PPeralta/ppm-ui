@@ -5,7 +5,6 @@ import {
   Button,
   Flex,
   FormControl,
-  FormLabel,
   Modal,
   ModalBody,
   ModalContent,
@@ -17,6 +16,7 @@ import {
   useBreakpointValue,
   useDisclosure,
   Input,
+  Text,
 } from "@chakra-ui/react";
 import { CreateServicoFerramenta } from "interfaces/lookahead";
 
@@ -37,23 +37,33 @@ export function ModalAddAtividade(props: PropsType) {
   const { id } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   // const { registerForm, loading } = useCadastroAtividade();
-  const [startDate, setStartDate] = useState<any>("");
+  const [startDate, setStartDate] = useState<Date>();
   const [nomeServico, setNomeServico] = useState("");
   const [nomeFerramenta, setNomeFerramenta] = useState("");
   const [anotacao, setAnotacao] = useState("");
-
+  const [loadingBtn, setLoadingBtn] = useState(false);
   const save = async () => {
+    if (!startDate) {
+      return;
+    }
+    setLoadingBtn(true);
+
+    const _data = startDate?.toISOString().split("T")[0];
+    const _hora = startDate?.toLocaleTimeString();
+
     const ferramenta: CreateServicoFerramenta = {
       atividade_id: id,
       nome: nomeFerramenta,
-      data_hora: startDate,
+      data: _data,
+      hora: _hora,
       anotacoes: anotacao,
     };
 
     const servicos: CreateServicoFerramenta = {
       atividade_id: id,
       nome: nomeServico,
-      data_hora: startDate,
+      data: _data,
+      hora: _hora,
       anotacoes: anotacao,
     };
 
@@ -68,6 +78,7 @@ export function ModalAddAtividade(props: PropsType) {
   };
   const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
     <Button
+      color={"#949494"}
       onClick={onClick}
       ref={ref}
       variant="outline"
@@ -81,16 +92,22 @@ export function ModalAddAtividade(props: PropsType) {
   return (
     <>
       <Button
-        variant="outline"
-        border={"2px solid"}
-        borderColor={"origem.500"}
-        textColor={"origem.500"}
+        h={"56px"}
+        background={"#0047BB"}
+        border={"2.3px solid"}
+        color={"white"}
+        variant="primary"
         _hover={{
-          borderColor: "origem.600",
-          backgroundColor: "origem.500",
-          textColor: "white",
+          background: "white",
+          color: "#0047BB",
           transition: "all 0.4s",
         }}
+        lineHeight="22.59px"
+        fontFamily="Mulish"
+        fontSize={"18px"}
+        fontWeight={"700"}
+        width="208px"
+        letterSpacing="0.2px"
         onClick={onOpen}
       >
         Cadastrar
@@ -106,7 +123,7 @@ export function ModalAddAtividade(props: PropsType) {
             color={"white"}
             fontSize={"1em"}
           >
-            Cadastrar Atividade
+            Cadastrar
           </ModalHeader>
           {/* <ModalCloseButton color={"white"} /> */}
           <form
@@ -139,29 +156,30 @@ export function ModalAddAtividade(props: PropsType) {
                       <Flex direction={"column"} grow={1} width={211}>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="dat_ini_plan">
+                          <Text fontSize={"12px"} color={"#949494"}>
                             DATA INÍCIO
-                          </FormLabel>
+                          </Text>
                         </Flex>
                         <DatePicker
                           selected={startDate}
                           onChange={(date) => handleStartDate(date)}
                           locale="pt-BR"
                           showTimeSelect
+                          timeIntervals={60}
                           dateFormat="dd/MM/yyyy, hh:mm"
                           customInput={<ExampleCustomInput />}
-                          isClearable={startDate !== ""}
+                          isClearable={startDate !== null}
                         />
                       </Flex>
                     </Flex>
 
                     <Flex>
-                      <FormControl>
+                      <FormControl marginRight="8px">
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="nom_atividade">
+                          <Text fontSize={"12px"} color={"#949494"}>
                             FERRAMENTA
-                          </FormLabel>
+                          </Text>
                         </Flex>
                         <Input
                           isRequired
@@ -169,14 +187,18 @@ export function ModalAddAtividade(props: PropsType) {
                           id="nom_atividade"
                           type="text"
                           name="nom_atividade"
+                          color={"#949494"}
+                          maxLength={20}
                           onChange={(e) => setNomeFerramenta(e.target.value)}
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
                         />
                       </FormControl>
-                      <FormControl>
+                      <FormControl marginLeft="8px">
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="nom_atividade">SERVIÇO</FormLabel>
+                          <Text fontSize={"12px"} color={"#949494"}>
+                            SERVIÇO
+                          </Text>
                         </Flex>
                         <Input
                           isRequired
@@ -184,6 +206,8 @@ export function ModalAddAtividade(props: PropsType) {
                           id="nom_atividade"
                           type="text"
                           name="nom_atividade"
+                          color={"#949494"}
+                          maxLength={20}
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
                           onChange={(e) => setNomeServico(e.target.value)}
                         />
@@ -205,13 +229,16 @@ export function ModalAddAtividade(props: PropsType) {
                       gap={5}
                     >
                       <FormControl>
-                        <FormLabel htmlFor="dsc_comentario">
+                        <Text fontSize={"12px"} color={"#949494"}>
                           ANOTAÇÕES
-                        </FormLabel>
+                        </Text>
                         <Textarea
-                          placeholder="Adicione comentários sobre a atividade"
+                          placeholder="Descreva as anotações"
                           id="dsc_comentario"
                           name="dsc_comentario"
+                          color={"#949494"}
+                          maxLength={200}
+                          rows={5}
                           onChange={(e) => setAnotacao(e.target.value)}
                         />
                       </FormControl>
@@ -241,20 +268,11 @@ export function ModalAddAtividade(props: PropsType) {
                   variant="primary"
                   color="white"
                   onClick={save}
-                  // onClick={() =>
-                  //   handleCadastrarRefresh(
-                  //     registerForm,
-                  //     onClose,
-                  //     setRefresh,
-                  //     refresh
-                  //   )
-                  // }
-                  // _hover={{
-                  //   background: "origem.500",
-                  //   transition: "all 0.4s",
-                  // }}
+                  disabled={
+                    !startDate || !nomeFerramenta || !nomeServico || loadingBtn
+                  }
                 >
-                  Gravar
+                  Cadastrar
                   {/* {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (

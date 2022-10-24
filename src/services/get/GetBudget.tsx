@@ -1,4 +1,4 @@
-import { Budget, BudgetDetail } from "interfaces/Budgets";
+import { Budget, ClasseServico, CustoDiario, Result } from "interfaces/Budgets";
 
 import { api, token } from "services/api";
 
@@ -74,9 +74,7 @@ export async function getBudgets(): Promise<Budget[]> {
   return data;
 }
 
-export async function getBudgetDetail(
-  id: string | null
-): Promise<BudgetDetail[]> {
+export async function getBudgetDetail(id: string | null): Promise<Result> {
   const uri = `/budgets/detail/${id}`;
 
   /* const data = [
@@ -145,7 +143,7 @@ export async function getBudgetDetail(
       ],
     },
   ]; */
-  const { data } = await api.get<BudgetDetail[]>(uri, token());
+  const { data } = await api.get<Result>(uri, token());
 
   return data;
 }
@@ -156,5 +154,58 @@ export async function getBudgetProjects(): Promise<
   const uri = "/budgets/projects";
   const { data } = await api.get<{ nome: string; id: number }[]>(uri, token());
 
+  return data;
+}
+
+export async function getClassesServicos() {
+  const uri = "/classe-servico";
+  const { data } = await api.get<ClasseServico[]>(uri, token());
+
+  return { data };
+}
+
+export async function getCustoDiario(
+  id: string | undefined,
+  startDate: string | Date,
+  endDate: string | Date | null
+): Promise<CustoDiario[]> {
+  // const uri = `/budgets/custoDiario/${id}`;
+
+  const data = [
+    {
+      id: 1,
+      index: "1",
+      date: "2022-10-08T00:00:00Z",
+      fornecedor: "-",
+      realizado: 2000,
+      filhos: [
+        {
+          id: 2,
+          index: "1.1",
+          atividade: "Dreno",
+          fornecedor: "-",
+          realizado: 500,
+        },
+        {
+          id: 3,
+          index: "1.2",
+          atividade: "Carrego",
+          fornecedor: "-",
+          realizado: 1500,
+        },
+        {
+          id: 1,
+          index: "1.3",
+          atividade: "Carrego",
+          fornecedor: "-",
+          realizado: 3000,
+        },
+      ],
+    },
+  ];
+
+  // const { data } = await api.post(uri, { startDate, endDate }, token());
+
+  // console.log(startDate, endDate);
   return data;
 }

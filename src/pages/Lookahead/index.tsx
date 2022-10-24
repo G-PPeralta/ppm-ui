@@ -1,21 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
-import {
-  Box,
-  Flex,
-  Stack,
-  useBreakpointValue,
-  useColorModeValue,
-  Text,
-  FormControl,
-  FormLabel,
-  Select,
-  Button,
-} from "@chakra-ui/react";
-import { AtividadesLookahead } from "interfaces/lookahead";
+import { Flex, Text, FormControl, Select, Button } from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
+import { AtividadesLookahead, ProjetosLookahead } from "interfaces/lookahead";
 
+import ContainerPagina from "components/ContainerPagina";
 import Sidebar from "components/SideBar";
+import TituloPagina from "components/TituloPagina";
 
 import { useLookahead } from "hooks/useLookahead";
 
@@ -26,83 +18,115 @@ import { TabelaLookahead } from "./components/TabelaLookahead";
 // import { Projetos } from "interfaces/Projetos";
 
 export function Lookahead() {
-  const { projetos } = useLookahead();
+  const { getProjetos, loading } = useLookahead();
   const [atividades, setAtividades] = useState<AtividadesLookahead[]>();
-  // const [projects, setProjetcs] = useState<Projetos[]>();
-  // const [projectsFiltered, setProjetcsFiltered] = useState<Projetos[]>();
-  async function handleProjectChange(id: string) {
-    const act = await getAtividades(+id);
+  const [idProject, setIdProject] = useState<string>("0");
+  const [projetos, setProjetos] = useState<ProjetosLookahead[]>();
+
+  async function handleProjectChange() {
+    const act = await getAtividades(+idProject);
     setAtividades(act);
   }
+
+  const getAllActivities = async () => {
+    const act = await getAtividades(0);
+    setAtividades(act);
+  };
+
+  const getAllProjects = async () => {
+    const proj = await getProjetos();
+    setProjetos(proj);
+  };
+
+  useEffect(() => {
+    getAllProjects();
+  }, []);
+
+  useEffect(() => {
+    getAllActivities();
+  }, []);
 
   return (
     <div>
       <Sidebar>
-        <Stack spacing="8">
-          <Flex
-            w={useBreakpointValue({ base: "100%", md: "auto" })}
-            align="center"
-            justify="center"
-            bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
-          >
-            <Box
-              py={{ base: "0", sm: "16" }}
-              px={{ base: "4", sm: "10" }}
-              w={useBreakpointValue({
-                base: "20rem",
-                sm: "35rem",
-                md: "60rem",
-                lg: "80rem",
-              })}
-              bg={useBreakpointValue({ base: "transparent", sm: "white" })}
-              boxShadow={{
-                base: "none",
-                sm: useColorModeValue("md", "md-dark"),
-              }}
-              borderRadius={{ base: "none", sm: "xl" }}
-            >
-              <Flex direction="column">
-                <Text fontWeight="bold">Relatorio Lookahead</Text>
-                <Flex direction="row" justifyContent="flex-end">
-                  <Flex>
-                    <FormControl>
-                      <FormLabel>Projeto</FormLabel>
-                      <Select
-                        placeholder="Select option"
-                        onChange={(e) => handleProjectChange(e.target.value)}
-                      >
-                        {projetos &&
-                          projetos.map((d) => (
-                            <option value={d.id}>{d.nome_projeto}</option>
-                          ))}
-                      </Select>
-                    </FormControl>
+        {!loading ? (
+          <ContainerPagina>
+            <Flex direction="column" fontFamily="Mulish">
+              <Flex align={"flex-end"}>
+                <FormControl mt={-1} ml={-1}>
+                  <TituloPagina botaoVoltar={false}>
+                    Relatório Lookahead
+                  </TituloPagina>
+                </FormControl>
+              </Flex>
+              <Flex direction="row" justifyContent="flex-start">
+                <Flex direction="row" justifyContent="flex-end" ml={-1}>
+                  <FormControl>
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      PROJETO
+                    </Text>
+                    <Select
+                      fontSize={"14px"}
+                      fontWeight={"400"}
+                      _placeholder={{ color: "#2D2926" }}
+                      color={"#949494"}
+                      width={"146px"}
+                      height={"56px"}
+                      borderRadius={"8px"}
+                      placeholder="Projeto"
+                      onChange={(e) => setIdProject(e.target.value)}
+                    >
+                      {projetos &&
+                        projetos.map((d, k) => (
+                          <option key={k} value={d.id}>
+                            {d.nome_projeto.length > 20
+                              ? `${d.id} - ${d.nome_projeto.substring(
+                                  0,
+                                  17
+                                )}...`
+                              : `${d.id} - ${d.nome_projeto}`}
+                          </option>
+                        ))}
+                    </Select>
+                  </FormControl>
 
-                    <FormControl className="toBottom">
-                      <Button
-                        color="white"
-                        background="origem.300"
-                        variant="primary"
-                        _hover={{
-                          background: "origem.500",
-                          transition: "all 0.4s",
-                        }}
-                        // onClick={filterByProject}
-                        rightIcon={<FiSearch />}
-                      >
-                        Buscar
-                      </Button>
-                    </FormControl>
+                  <Flex alignItems="flex-end" marginLeft="16px">
+                    <Button
+                      h={"56px"}
+                      background={"origem.500"}
+                      border={"2.3px solid"}
+                      color={"white"}
+                      variant="primary"
+                      _hover={{
+                        background: "origem.600",
+                        color: "white",
+                        transition: "all 0.4s",
+                      }}
+                      rightIcon={<FiSearch />}
+                      fontSize={"18px"}
+                      fontWeight={"700"}
+                      onClick={handleProjectChange}
+                    >
+                      Filtrar
+                    </Button>
                   </Flex>
                 </Flex>
-
-                <Flex>
-                  {atividades && <TabelaLookahead data={atividades} />}
-                </Flex>
               </Flex>
-            </Box>
+
+              <Flex justifyContent="flex-end" ml={-1} mr={-1}>
+                {atividades && <TabelaLookahead data={atividades} />}
+              </Flex>
+            </Flex>
+          </ContainerPagina>
+        ) : (
+          <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
+            <Ring speed={2} lineWeight={5} color="blue" size={64} />
           </Flex>
-        </Stack>
+        )}
       </Sidebar>
     </div>
   );

@@ -83,12 +83,12 @@ function ModalPriorizacao(infosRankings: TableProps) {
               <FormControl>
                 <Flex>
                   <Flex
-                    mt={"15px"}
+                    mt={"20px"}
                     justify={"space-between"}
                     align={"center"}
                     flex={1}
                   >
-                    <Flex align={"flex-end"}>
+                    <Flex align={"flex-end"} alignSelf={"start"}>
                       <Text>
                         <Button
                           aria-label=""
@@ -102,7 +102,9 @@ function ModalPriorizacao(infosRankings: TableProps) {
                           }}
                           fontSize={"24px"}
                           fontWeight={"700"}
-                          alignSelf={"end"}
+                          fontFamily={"Mulish"}
+                          textAlign={"start"}
+                          mt={-2}
                         >
                           <Icon
                             _hover={{
@@ -115,7 +117,7 @@ function ModalPriorizacao(infosRankings: TableProps) {
                             w={"22px"}
                             fontSize="13px"
                             fontWeight={"none"}
-                            mr={2}
+                            mr={3}
                             color="#2D2926"
                           />{" "}
                           Priorização
@@ -123,9 +125,9 @@ function ModalPriorizacao(infosRankings: TableProps) {
                       </Text>
                     </Flex>
 
-                    <Flex gap={9}>
+                    <Flex gap={20}>
                       <Flex gap={4}>
-                        <Flex align={"flex-start"}>
+                        <Flex align={"flex-start"} alignSelf={"start"}>
                           <ModalCadastrarOpcaoPriorizacao
                             nomeRanking={infosRankings.nomeRanking}
                             idRanking={infosRankings.idRanking}
@@ -138,12 +140,15 @@ function ModalPriorizacao(infosRankings: TableProps) {
                           />
                         </Flex>
                       </Flex>
-                      <Flex alignItems={"flex-start"}>
+                      <Flex alignItems={"flex-start"} alignSelf={"center"}>
                         <Button
                           background="transparent"
                           color="#0047BB"
                           fontSize="18px"
+                          fontWeight={"700"}
                           alignSelf={"end"}
+                          mr={9}
+                          ml={-4}
                         >
                           Lixeira
                           <Icon
@@ -160,7 +165,7 @@ function ModalPriorizacao(infosRankings: TableProps) {
                 </Flex>
               </FormControl>
             </>
-            <ModalBody mt={3}>
+            <ModalBody mt={1}>
               <Flex>
                 <TabelaOpcoesPriorizacao
                   idRanking={infosRankings.idRanking}

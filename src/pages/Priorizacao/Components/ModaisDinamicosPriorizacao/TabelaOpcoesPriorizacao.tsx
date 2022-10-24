@@ -42,6 +42,8 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
     getData();
   }, []);
 
+  useEffect(() => {}, [getData()]);
+
   const fromTo = {
     from,
     to,
@@ -60,11 +62,16 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
         <Td textAlign={"center"} fontWeight={"semibold"}>
           {op.nom_opcao}
         </Td>
-        <Td textAlign={"center"} fontWeight={"semibold"}>
+        <Td
+          textAlign={"center"}
+          fontWeight={"semibold"}
+          width={"186px"}
+          height={"56px"}
+        >
           {op.num_nota}
         </Td>
         <Td
-          width={"104px"}
+          width={"74px"}
           height={"56px"}
           textAlign={"center"}
           fontWeight={"semibold"}
@@ -88,7 +95,7 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
           mt={4}
           mb={3}
           borderRadius={"10px"}
-          overflowX={"scroll"}
+          // overflowX={"scroll"}
         >
           <Table
             variant="striped"
@@ -111,7 +118,11 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
                 </Th>
               </Tr>
             </Thead>
-            <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+            <Tbody
+            // scrollBehavior={"smooth"}
+            >
+              {tableData}
+            </Tbody>
             {/* <Tfoot>
               <Tr background={"origem.500"}>
                 <Th color="transparent">Total</Th>

@@ -5,12 +5,15 @@ import { Box, Button, Flex, Heading, Input, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { StatisticsTableData } from "interfaces/Services";
 
+import ModalCadastrarSonda from "pages/Infographics/Components/ModalCadastrarSonda";
+import ModalCadastroPoco from "pages/Infographics/Components/ModalCadastroPoco";
+
 import Sidebar from "components/SideBar";
 
 import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
 
 import ModalCadastroCronograma from "./components/ModalCadastroCronograma";
-import ModalCadastroOperacao from "./components/ModalCadastroOperação";
+import ModalCadastroOperacao from "./components/ModalCadastroOperacao";
 import { StatisticsTable } from "./components/StatisticsTable";
 
 function Statistics() {
@@ -19,6 +22,7 @@ function Statistics() {
   const [filter, setFilter] = useState<StatisticsTableData[]>();
   const [refresh, setRefresh] = useState(false);
   const [search, setSearch] = useState("");
+  const windowInnerWidth = window.innerWidth;
 
   const convertReq = (payload: any): StatisticsTableData[] => {
     const newData: StatisticsTableData[] = [];
@@ -29,6 +33,9 @@ function Statistics() {
           id_sonda: s.id_sonda,
           poco: p.poco,
           id_poco: p.id_poco,
+          dat_inicio: p.dat_inicio,
+          dat_final: p.dat_final,
+          pct_real: p.pct_real,
           atividades: p.atividades,
         });
       })
@@ -81,45 +88,67 @@ function Statistics() {
         {!loading ? (
           <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
             <Box
-              py={{ base: "6", sm: "8" }}
-              px={{ base: "6", sm: "8" }}
+              py={{ base: "6", sm: "6" }}
+              px={{ base: "6", sm: "6" }}
               w={"100%"}
               bg={"white"}
               borderRadius={{ base: "xl", sm: "xl" }}
             >
-              <Flex justify={"space-between"} mb={5} wrap={"wrap"}>
-                <Heading as="h3" size="md">
+              <Flex
+                justify={"space-between"}
+                mb={6}
+                wrap={"wrap"}
+                align={"center"}
+                mt={-1}
+                ml={-1}
+              >
+                <Heading
+                  fontFamily={"Mulish"}
+                  fontWeight={"700"}
+                  fontSize={"24px"}
+                  color={"#2D2926"}
+                >
                   Projetos
                 </Heading>
-                <Heading as="h3" size="md" color={"origem.500"}>
+                {/* <Heading as="h3" size="md" color={"origem.500"}>
                   Lixeira
-                </Heading>
+                </Heading> */}
               </Flex>
 
-              <Flex justify={"space-between"} wrap={"wrap"}>
-                <Flex direction={"row"} flex={1} align={"end"} gap={2}>
-                  <Flex direction={"column"}>
+              <Flex
+                direction={windowInnerWidth > 600 ? "row" : "column"}
+                wrap={"wrap"}
+                alignItems="flex-end"
+                justify={"space-between"}
+                gap={4}
+                flex={2}
+              >
+                <Flex align={"end"} gap={4} wrap={"wrap"} flex={1}>
+                  <Flex direction={"column"} flex={1} ml={-1}>
                     <Text
                       fontWeight={"bold"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
-                      PROJETOS
+                      SONDA
                     </Text>
                     <Input
                       h={"56px"}
                       isRequired
-                      placeholder="Projeto"
+                      placeholder="Sonda"
                       id="name"
                       type="text"
                       name="name"
+                      maxLength={10}
                       onChange={(e) => setSearch(e.target.value)}
                     />
                   </Flex>
                   <Flex>
                     <Button
                       h={"56px"}
-                      borderRadius={"10px"}
+                      fontSize={"18px"}
+                      fontWeight={"700"}
+                      borderRadius={"8px"}
                       background={"origem.500"}
                       variant="primary"
                       color="white"
@@ -129,16 +158,27 @@ function Statistics() {
                         transition: "all 0.4s",
                       }}
                       rightIcon={<BsSearch />}
-                      fontWeight={"bold"}
                     >
                       Filtrar
                     </Button>
                   </Flex>
                 </Flex>
 
-                <Flex gap={2} flex={2} justify={"end"} align={"end"}>
-                  {/* <ModalCadastrarSonda /> */}
-                  {/* <ModalCadastroPoco /> */}
+                <Flex
+                  gap={4}
+                  flex={2}
+                  justify={windowInnerWidth > 600 ? "end" : "start"}
+                  align={"end"}
+                  wrap={"wrap"}
+                >
+                  <ModalCadastrarSonda
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
+                  <ModalCadastroPoco
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
                   <ModalCadastroOperacao
                     refresh={refresh}
                     setRefresh={setRefresh}
@@ -151,7 +191,7 @@ function Statistics() {
                 </Flex>
               </Flex>
 
-              <Flex flex={1}>
+              <Flex flex={1} ml={-1}>
                 <StatisticsTable data={filter} />
               </Flex>
             </Box>

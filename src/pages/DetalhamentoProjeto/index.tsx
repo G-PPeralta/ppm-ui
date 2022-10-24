@@ -16,6 +16,7 @@ import { Gantt } from "components/Gantt";
 import Sidebar from "components/SideBar";
 
 import { getCategorias } from "services/get/Categorias";
+import { getCurvaSInfos } from "services/get/Detalhamento";
 import {
   getInfoProjetos,
   getProgressoProjeto,
@@ -27,29 +28,29 @@ import CardInfoProjeto from "./components/CardInfoProjeto";
 import CardOrcamento from "./components/CardOrcamento";
 // import GraficoCurvaS from "./components/GraficoCurvaS";
 
-const curveSData = [
-  {
-    mes: "Nov/2022",
-    cronogramaPrevisto: 6,
-    cronogramaRealizado: 30,
-    capexPrevisto: 40,
-    capexRealizado: 50,
-  },
-  {
-    mes: "Dez/2021",
-    cronogramaPrevisto: 60,
-    cronogramaRealizado: 20,
-    capexPrevisto: 35,
-    capexRealizado: 50,
-  },
-  {
-    mes: "Nov/2022",
-    cronogramaPrevisto: 6,
-    cronogramaRealizado: 30,
-    capexPrevisto: 40,
-    capexRealizado: 50,
-  },
-];
+// const curveSData = [
+//   {
+//     mes: "Nov/2022",
+//     cronogramaPrevisto: 6,
+//     cronogramaRealizado: 30,
+//     capexPrevisto: 40,
+//     capexRealizado: 50,
+//   },
+//   {
+//     mes: "Dez/2021",
+//     cronogramaPrevisto: 60,
+//     cronogramaRealizado: 20,
+//     capexPrevisto: 35,
+//     capexRealizado: 50,
+//   },
+//   {
+//     mes: "Nov/2022",
+//     cronogramaPrevisto: 6,
+//     cronogramaRealizado: 30,
+//     capexPrevisto: 40,
+//     capexRealizado: 50,
+//   },
+// ];
 
 function DetalhamentoProjeto() {
   const { id } = useParams();
@@ -72,6 +73,18 @@ function DetalhamentoProjeto() {
   const [categorias, setCategorias] = useState([] as Categorias[]);
   const [progresso, setProgresso] = useState([] as ProjetoProgresso[]);
   const [render, setRender] = useState(false);
+  const [data, setData] = useState<any[]>([]);
+
+  const getData = async () => {
+    const priorizacao = await getCurvaSInfos(id);
+    setData(priorizacao.data);
+  };
+
+  // console.log({ data });
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const handleGetInfoProjetos = async () => {
     if (id) {
@@ -94,10 +107,12 @@ function DetalhamentoProjeto() {
   }
 
   async function handleGetProgresso() {
-    setProgressoLoading(true);
-    const response = await getProgressoProjeto();
-    setProgresso(response.data);
-    setProgressoLoading(false);
+    if (id) {
+      setProgressoLoading(true);
+      const response = await getProgressoProjeto(Number(id));
+      setProgresso(response.data);
+      setProgressoLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -167,7 +182,7 @@ function DetalhamentoProjeto() {
             </Flex>
 
             <Gantt idProjeto={Number(id)} />
-            <GenericCurveS data={curveSData} />
+            <GenericCurveS data={data} />
             {/* <GraficoCurvaS /> */}
           </>
         )}

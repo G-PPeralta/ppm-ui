@@ -44,18 +44,19 @@ function ModalCadastrarPriorizacao() {
       <Button
         onClick={onOpen}
         color={"white"}
-        backgroundColor={"#0047BB"}
+        borderRadius={"8px"}
+        fontWeight={"700"}
+        background={"origem.500"}
         aria-label="Plus sign"
         variant="primary"
         _hover={{
-          background: "white",
+          background: "origem.600",
           transition: "all 0.4s",
-          color: "#0047BB",
-          border: "#0047BB solid 1px",
         }}
-        borderTopRadius={"8px"}
         h={"56px"}
         w={"121px"}
+        fontSize={"18px"}
+        fontFamily={"Mulish"}
       >
         Cadastrar
       </Button>
@@ -70,7 +71,7 @@ function ModalCadastrarPriorizacao() {
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            Configuração
+            Cadastrar Priorização
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <form
@@ -105,11 +106,13 @@ function ModalCadastrarPriorizacao() {
                               NOME DA PRIORIZAÇÃO
                             </FormLabel>
                             <Input
+                              maxLength={30}
                               ml={"3px"}
-                              w={"400px"}
+                              w={"93%"}
                               h={"56px"}
                               fontSize={"14px"}
-                              color={"#949494"}
+                              color={"black"}
+                              _placeholder={{ color: "#949494" }}
                               fontWeight={"400"}
                               border={"solid 1px #949494"}
                               isRequired
@@ -151,10 +154,10 @@ function ModalCadastrarPriorizacao() {
                               id="pit"
                               name="pit"
                               placeholder="Selecione"
-                              w={"480px"}
+                              w={"93%"}
                               h={"56px"}
                               fontSize={"14px"}
-                              color={"#2D2926"}
+                              color={"black"}
                               fontWeight={"400"}
                               border={"solid 1px #949494"}
                               // value={activitiesForm.values.acesso}
@@ -177,7 +180,7 @@ function ModalCadastrarPriorizacao() {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red"
+                  color="red.500"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: "red.500",
@@ -193,12 +196,12 @@ function ModalCadastrarPriorizacao() {
                   disabled={!registerForm.isValid}
                   w={"208px"}
                   h={"56px"}
-                  background="#0047BB"
+                  background="origem.500"
                   variant="primary"
                   color="white"
                   onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
-                    background: "origem.500",
+                    background: "origem.600",
                     transition: "all 0.4s",
                   }}
                 >

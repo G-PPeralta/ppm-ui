@@ -6,8 +6,8 @@ import { cadastroPocoSchema } from "validations/ModaisCadastrosInfografico";
 
 import { useToast } from "contexts/Toast";
 
-import { postNovoPoco } from "services/post/CadastroModaisInfograficos";
 import { postCadastroPocoOperacao } from "services/post/Estatistica";
+import { postNovoPoco } from "services/post/Infograficos";
 
 export function useCadastroPoco(modulo?: string) {
   const { toast } = useToast();

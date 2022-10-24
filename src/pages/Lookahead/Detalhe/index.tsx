@@ -1,24 +1,25 @@
 import { useState, useEffect } from "react";
+import { FaRegCalendarAlt } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 
 import {
   Box,
   Flex,
-  Stack,
-  useBreakpointValue,
-  useColorModeValue,
   Text,
   FormControl,
-  FormLabel,
   Select,
+  Heading,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
+import { AtividadesLookahead } from "interfaces/lookahead";
 
+import BotaoSetaVoltar from "components/BotaoSetaVoltar/BotaoSetaVoltar";
+import ContainerPagina from "components/ContainerPagina";
 import Sidebar from "components/SideBar";
 
 // import { FiPlusCircle, FiSearch } from "react-icons/fi";
 
-import { getAtividade } from "services/get/Lookahead";
+import { getAtividade, getFerramentasServicos } from "services/get/Lookahead";
 
 import { ModalAddAtividade } from "../components/ModalAddAtividade";
 import { TabelaAtividades } from "../components/TabelaAtividades";
@@ -34,11 +35,19 @@ export function LookaheadDetalhe() {
   const { id } = useParams();
   const [weeks, setWeeks] = useState<Weeks[]>();
   const [semana, setSemana] = useState<string>();
-  const [atividade, setAtividade] = useState<any>();
+  const [ferramentasServicos, setFerramentasServicos] = useState<any>();
+  const [atividade, setAtividade] = useState<AtividadesLookahead[]>();
 
   const loadAtividade = async () => {
-    const atividade = id ? await getAtividade(+id) : undefined;
-    setAtividade(atividade);
+    if (id) {
+      const act = await getAtividade(+id);
+      setAtividade(act);
+    } else return null;
+  };
+
+  const loadFerramentasServicos = async () => {
+    const fs = id ? await getFerramentasServicos(+id) : undefined;
+    setFerramentasServicos(fs);
   };
 
   function getWeeks() {
@@ -58,7 +67,7 @@ export function LookaheadDetalhe() {
     });
 
     changeWeek(`${diaInicial} - ${diaFinal}`);
-    const monday2 = new Date(today.setDate(first + 8));
+    const monday2 = new Date(today.setDate(first + 7));
     const sunday2 = new Date(today.setDate(last + 8));
     const diaInicial2 = dataBr.format(monday2);
     const diaFinal2 = dataBr.format(sunday2);
@@ -73,6 +82,10 @@ export function LookaheadDetalhe() {
 
   useEffect(() => {
     loadAtividade();
+  }, []);
+
+  useEffect(() => {
+    loadFerramentasServicos();
     getWeeks();
   }, []);
 
@@ -82,96 +95,115 @@ export function LookaheadDetalhe() {
 
   return (
     <>
-      <Sidebar>
-        <Stack spacing="8">
-          <Flex
-            w={useBreakpointValue({ base: "100%", md: "auto" })}
-            align="center"
-            justify="center"
-            bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
-          >
-            <Box
-              py={{ base: "0", sm: "16" }}
-              px={{ base: "4", sm: "10" }}
-              w={useBreakpointValue({
-                base: "20rem",
-                sm: "35rem",
-                md: "60rem",
-                lg: "80rem",
-              })}
-              bg={useBreakpointValue({ base: "transparent", sm: "white" })}
-              boxShadow={{
-                base: "none",
-                sm: useColorModeValue("md", "md-dark"),
-              }}
-              borderRadius={{ base: "none", sm: "xl" }}
-            >
-              <Flex direction="column">
-                <Text fontWeight="bold">Relatorio Lookahead</Text>
-                <Text>{atividade && atividade.id}</Text>
-                <Flex
-                  direction="row"
-                  justifyContent="flex-end"
-                  alignItems="flex-end"
-                >
-                  <Flex alignItems="flex-end">
-                    <FormControl>
-                      {id && <ModalAddAtividade id={+id} />}
-                    </FormControl>
-                    <FormControl marginLeft="16px">
-                      <FormLabel htmlFor="pole">SEMANA</FormLabel>
-                      <Select
-                        id="poloId"
-                        name="pole"
-                        width={250}
-                        marginRight="15px"
-                        onChange={(e) => changeWeek(e.target.value)}
-                      >
-                        {weeks &&
-                          weeks.map(function (x, i) {
-                            return (
-                              <option key={i} value={x.id}>
-                                {x.value}
-                              </option>
-                            );
-                          })}
-                      </Select>
-                    </FormControl>
-                  </Flex>
-                </Flex>
-
-                <Flex direction="column">
-                  <TabelaAtividades semana={semana} data={atividade} />
-                  {atividade ? (
-                    <TabelaFerramentas semana={semana} data={atividade} />
-                  ) : (
-                    <Box
-                      display={"flex"}
-                      alignItems={"center"}
-                      justifyContent={"center"}
-                      h={"84vh"}
-                    >
-                      <Ring speed={2} lineWeight={5} color="blue" size={64} />
-                    </Box>
-                  )}
-                  {atividade ? (
-                    <TabelaServicos semana={semana} data={atividade} />
-                  ) : (
-                    <Box
-                      display={"flex"}
-                      alignItems={"center"}
-                      justifyContent={"center"}
-                      h={"84vh"}
-                    >
-                      <Ring speed={2} lineWeight={5} color="blue" size={64} />
-                    </Box>
-                  )}
+      {atividade && ferramentasServicos ? (
+        <Sidebar>
+          <ContainerPagina>
+            <Flex direction="column">
+              <Flex align={"center"} gap={2} mb={4}>
+                <BotaoSetaVoltar />
+                <Flex direction={"column"}>
+                  <Heading
+                    fontFamily={"Mulish"}
+                    fontWeight={"700"}
+                    as="h3"
+                    size="md"
+                    textAlign={"center"}
+                    fontSize={"24px"}
+                  >
+                    Relatório Lookahead
+                  </Heading>
+                  <Text fontSize="20px" color="#585858" fontWeight="400">
+                    {atividade[0].nom_atividade}
+                  </Text>
                 </Flex>
               </Flex>
-            </Box>
-          </Flex>
-        </Stack>
-      </Sidebar>
+
+              <Flex
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="flex-end"
+              >
+                <Flex alignItems="flex-end">
+                  <FormControl>
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      SEMANA
+                    </Text>
+                    <Select
+                      fontSize={"14px"}
+                      fontWeight={"400"}
+                      _placeholder={{ color: "#2D2926" }}
+                      color={"#949494"}
+                      width={"218px"}
+                      height={"56px"}
+                      borderRadius={"8px"}
+                      onChange={(e) => changeWeek(e.target.value)}
+                      icon={<FaRegCalendarAlt />}
+                    >
+                      {weeks &&
+                        weeks.map(function (x, i) {
+                          return (
+                            <option key={i} value={x.id}>
+                              {x.value}
+                            </option>
+                          );
+                        })}
+                    </Select>
+                  </FormControl>
+                  <FormControl marginLeft="16px">
+                    {id && <ModalAddAtividade id={+id} />}
+                  </FormControl>
+                </Flex>
+              </Flex>
+
+              <Flex direction="column">
+                {ferramentasServicos && (
+                  <TabelaAtividades
+                    semana={semana}
+                    data={ferramentasServicos}
+                  />
+                )}
+                {ferramentasServicos ? (
+                  <TabelaFerramentas
+                    semana={semana}
+                    data={ferramentasServicos}
+                  />
+                ) : (
+                  <Box
+                    display={"flex"}
+                    alignItems={"center"}
+                    justifyContent={"center"}
+                    h={"84vh"}
+                  >
+                    <Ring speed={2} lineWeight={5} color="blue" size={64} />
+                  </Box>
+                )}
+                {ferramentasServicos ? (
+                  <TabelaServicos semana={semana} data={ferramentasServicos} />
+                ) : (
+                  <Box
+                    display={"flex"}
+                    alignItems={"center"}
+                    justifyContent={"center"}
+                    h={"84vh"}
+                  >
+                    <Ring speed={2} lineWeight={5} color="blue" size={64} />
+                  </Box>
+                )}
+              </Flex>
+            </Flex>
+            {/* </Box> */}
+            {/* </Flex> */}
+          </ContainerPagina>
+        </Sidebar>
+      ) : (
+        <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
+          <Ring speed={2} lineWeight={5} color="blue" size={64} />
+        </Flex>
+      )}
     </>
   );
 }

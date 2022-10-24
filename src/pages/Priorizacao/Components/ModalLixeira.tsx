@@ -30,11 +30,21 @@ function ModalLixeira() {
         onClick={onOpen}
         background="transparent"
         color="#0047BB"
+        fontWeight={"700"}
         float={"right"}
         fontSize="18px"
+        fontFamily={"Mulish"}
+        // _hover={{
+        //   background: "#0047BB",
+        //   color: "white",
+        // }}
       >
         Lixeira
         <Icon
+          // _hover={{
+          //   background: "#0047BB",
+          //   color: "white",
+          // }}
           as={MdArrowForwardIos}
           fontSize="20px"
           fontWeight={"700"}

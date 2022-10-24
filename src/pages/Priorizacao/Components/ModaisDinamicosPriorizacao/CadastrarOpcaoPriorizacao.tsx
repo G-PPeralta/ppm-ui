@@ -16,6 +16,7 @@ import {
   useDisclosure,
   Input,
   Select,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -51,11 +52,8 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
         aria-label="Plus sign"
         variant="primary"
         _hover={{
-          background: "white",
-          border: "solid 1px #0047BB",
-          borderRadius: "8px",
+          background: "origem.600",
           transition: "all 0.4s",
-          color: "origem.500",
         }}
         h={"56px"}
         w={"105px"}
@@ -65,7 +63,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
       >
         Cadastrar
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -78,6 +76,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
           >
             {`Priorização ${rankingNome}`}
           </ModalHeader>
+          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               // e.preventDefault();
@@ -103,9 +102,12 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               NOME
                             </FormLabel>
                             <Input
+                              maxLength={40}
                               fontSize={"14px"}
                               fontWeight={"400"}
-                              color={"#949494"}
+                              placeholder={"Nome"}
+                              color={"black"}
+                              _placeholder={{ color: "#949494" }}
                               ml={"3px"}
                               w={"328px"}
                               border={"1px solid #949494"}
@@ -143,7 +145,8 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               w={"328px"}
                               fontSize={"14px"}
                               fontWeight={"400"}
-                              color={"#949494"}
+                              color={"black"}
+                              _placeholder={{ color: "#949494" }}
                               value={registerForm.values.num_nota}
                               onChange={registerForm.handleChange}
                             >
@@ -173,7 +176,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red"
+                  color="red.500"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: "red.500",
@@ -187,14 +190,15 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                 </Button>
                 <Button
                   disabled={!registerForm.isValid}
-                  background="origem.300"
+                  background="origem.500"
                   variant="primary"
                   color="white"
                   onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
-                    background: "origem.500",
+                    background: "origem.600",
                     transition: "all 0.4s",
                   }}
+                  borderRadius={"8px"}
                   w={"208px"}
                   h={"56px"}
                 >

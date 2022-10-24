@@ -4,11 +4,12 @@ import { ActivitiesPrecedents } from "pages/ActivitiesPrecedents";
 import { ActivitiesRegistration } from "pages/ActivitiesRegistration";
 import { ActivitiesSchedule } from "pages/ActivitiesSchedule";
 import { BudgetDetail } from "pages/BudgetDetail";
-import { BudgetDetail2 } from "pages/BudgetDetail2";
 import { Budgets } from "pages/Budgets";
-import { Budgets2 } from "pages/Budgets2";
+import { CadastrarFornecedor } from "pages/CadastrarFornecedor";
+import CadastrarProjeto from "pages/CadastrarProjeto";
+import { CentroDeCustoProjetos } from "pages/CentroDeCustoProjetos";
 import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
-import { GanttPage } from "pages/Gantt";
+import { FinanceiroProjetos } from "pages/FinanceiroProjetos";
 import { GráficosEstatisticos } from "pages/GraficosEstatisticos";
 import { Home } from "pages/Home";
 import { Infographics } from "pages/Infographics";
@@ -22,8 +23,6 @@ import { PermissionsList } from "pages/PermissionsList";
 import { Priorizacao } from "pages/Priorizacao";
 import { Profile } from "pages/Profile";
 import { Projects } from "pages/Projects";
-import { ProjectsRegistration } from "pages/ProjectsRegistration";
-import { ProvidersRegistration } from "pages/ProvidersRegistration";
 import { Reports } from "pages/Reports";
 import { Settings } from "pages/Settings";
 import { ShareRegister } from "pages/ShareRegister";
@@ -37,11 +36,8 @@ export function PrivateRoutes() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/graficos" element={<GráficosEstatisticos />} />
-      <Route path="/projects-registration" element={<ProjectsRegistration />} />
-      <Route
-        path="/providers-registration"
-        element={<ProvidersRegistration />}
-      />
+      <Route path="/projetos/cadastro" element={<CadastrarProjeto />} />
+      <Route path="/cadastrar-fornecedor" element={<CadastrarFornecedor />} />
       <Route
         path="/activities-registration"
         element={<ActivitiesRegistration />}
@@ -57,7 +53,6 @@ export function PrivateRoutes() {
       <Route path="/projects" element={<Projects />} />
       <Route path="/budgets" element={<Budgets />} />
       <Route path="/budget/detail/:id" element={<BudgetDetail />} />
-      <Route path="/gantt" element={<GanttPage />} />
       <Route path="/fornecedores" element={<Fornecedores />} />
       <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
       <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
@@ -77,9 +72,15 @@ export function PrivateRoutes() {
       />
       <Route path="/licoesAprendidas" element={<LicoesAprendidasProjetos />} />
       <Route path="/estatisticas/" element={<Statistics />} />
-      <Route path="/estatisticas/cronograma" element={<StatisticsGantt />} />
-      <Route path="/budgets2" element={<Budgets2 />} />
-      <Route path="/budget2/detail/:id" element={<BudgetDetail2 />} />
+      <Route
+        path="/estatisticas/cronograma/:sonda/:poco"
+        element={<StatisticsGantt />}
+      />
+      <Route path="/financeiro-projetos" element={<FinanceiroProjetos />} />
+      <Route
+        path="/financeiro-projetos/centro-custo/:id"
+        element={<CentroDeCustoProjetos />}
+      />
       <Route path="/priorizacao" element={<Priorizacao />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

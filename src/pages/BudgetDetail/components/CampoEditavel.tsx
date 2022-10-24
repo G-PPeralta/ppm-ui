@@ -13,21 +13,23 @@ import {
 } from "@chakra-ui/react";
 import { BudgetDetail } from "interfaces/Budgets";
 
+import { formatReal } from "utils/formatReal";
+
 import { postAatualizarValorPrevisto } from "services/post/Budget";
 
 export default function CampoEditavel(props: { filho: BudgetDetail }) {
-  const brl = Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
   const { planejado, projeto } = props.filho;
 
-  const save = (valor: string) => {
+  const save = async (valor: string) => {
     const data = {
-      valor,
+      valor: +valor,
       atividadeId: projeto.id,
     };
-    postAatualizarValorPrevisto(data);
+    const { status } = await postAatualizarValorPrevisto(data);
+
+    if (status == 200 || status == 201) {
+      location.reload();
+    }
   };
 
   /* Here's a custom control */
@@ -40,7 +42,7 @@ export default function CampoEditavel(props: { filho: BudgetDetail }) {
     } = useEditableControls();
 
     return isEditing ? (
-      <ButtonGroup justifyContent="center" size="sm">
+      <ButtonGroup justifyContent="center">
         <IconButton
           aria-label="Send btn"
           icon={<AiFillCheckCircle />}
@@ -56,7 +58,6 @@ export default function CampoEditavel(props: { filho: BudgetDetail }) {
       <IconButton
         aria-label="Edit btn"
         variant={"outline"}
-        size="sm"
         icon={<FiEdit />}
         {...getEditButtonProps()}
       />
@@ -66,7 +67,7 @@ export default function CampoEditavel(props: { filho: BudgetDetail }) {
   return (
     <Editable
       textAlign="center"
-      defaultValue={brl.format(planejado)}
+      defaultValue={formatReal(planejado)}
       // fontSize="2xl"
       isPreviewFocusable={false}
       onSubmit={save}

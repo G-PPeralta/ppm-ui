@@ -19,4 +19,5 @@ export interface Projetos {
   justificativa: string;
   vlr_cpi_corrigido: number;
   vlr_spi_corrigido: number;
+  valor_total_previsto: number;
 }

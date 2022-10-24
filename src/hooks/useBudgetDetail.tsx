@@ -2,25 +2,32 @@ import { useEffect, useState } from "react";
 
 // import { useToast } from "contexts/Toast";
 
-import { BudgetDetail } from "interfaces/Budgets";
+import { BudgetDetail, Titulo, Totalizacao } from "interfaces/Budgets";
 
 import { getBudgetDetail } from "services/get/GetBudget";
 
 export function useBudgetDetail(id: string | null) {
   // const { toast } = useToast();
 
-  //  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // Loading
   const [, /* budgets */ setBudgets] = useState<BudgetDetail[]>([]);
   // const [projects, setProjects] = useState<Project[]>([]);
   const [budgetFilter, setBudgetsFilter] = useState<BudgetDetail[]>([]);
   // const [projectSelected, setProjectSelected] = useState("");
+  const [titulo, setTitulo] = useState<Titulo>();
+  const [totalizacao, setTotalizacao] = useState<Totalizacao>();
 
   const wd = window.innerWidth;
 
   const gerarBudgetsList = async () => {
     const data = await getBudgetDetail(id);
-    setBudgets(data);
-    setBudgetsFilter(data);
+
+    setBudgets(data.list);
+    setBudgetsFilter(data.list);
+
+    setTitulo(data.titulo);
+    setTotalizacao(data.totalizacao);
+    setLoading(false);
   };
 
   /* const filterByProject = () => {
@@ -48,8 +55,10 @@ export function useBudgetDetail(id: string | null) {
 
   return {
     budgetFilter,
-    // loading,
+    loading,
     wd,
     // projects,
+    titulo,
+    totalizacao,
   };
 }

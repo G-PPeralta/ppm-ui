@@ -18,6 +18,9 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
+  ModalCloseButton,
+  Button,
+  // Progress,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import {
@@ -25,9 +28,11 @@ import {
   ProjetoTipo,
 } from "interfaces/CadastrosModaisInfograficos";
 
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
-import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
-// import { RequiredField } from "components/RequiredField/RequiredField";
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
+
+import { formatDate } from "utils/formatDate";
+import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
@@ -57,16 +62,16 @@ function ModalCadastroIntervencao({
     listaAtividadesPrecedentes,
   } = useCadastroIntervencao();
 
-  // console.log("idCampanha", idCampanha);
-  // console.log("registerForm", registerForm.values);
-
-  // const [erroDataIntervencao, setErroDataIntervencao] = useState(false);
   const [listaProjetos, setListaProjetos] = useState<any>([]);
+  const [dataLimite, setDataLimite] = useState<any>("");
+  // const [valueProgressoMensagemErro, setValueProgressoMensagemErro] =
+  //   useState<any>(100);
+  const [dataFinalPrevista, setDataFinalPrevista] = useState<any>("");
 
   const innerWidth = window.innerWidth;
 
   const optionsPocos = listaServicosPocos.map((poco: any) => ({
-    value: poco.id,
+    value: poco.nom_poco,
     label: poco.nom_poco,
   }));
 
@@ -123,7 +128,7 @@ function ModalCadastroIntervencao({
 
   const handleDataLimite = async () => {
     const pocoCompleto = listaServicosPocos.filter(
-      (poco: any) => poco.id === registerForm.values.poco_id
+      (poco: any) => poco.nom_poco === registerForm.values.poco_id
     );
 
     const { data } = await getServicoDataIntervencaoId(
@@ -136,19 +141,37 @@ function ModalCadastroIntervencao({
 
     if (cod_erro === 0) {
       registerForm.setFieldValue("erroDataIntervencao", true);
-      // setErroDataIntervencao(true);
     } else {
       registerForm.setFieldValue("erroDataIntervencao", false);
-      // setErroDataIntervencao(false);
+    }
+
+    const quantidadeDias = registerForm.values.atividades.reduce(
+      (acc: number, atividade: any) => acc + atividade.qtde_dias,
+      0
+    );
+
+    const dataInicio = new Date(registerForm.values.dat_ini_prev);
+    const dataLimite = new Date(registerForm.values.data_limite);
+
+    // PEGAR DATA DE FIM PREVISTA (DATA INICIO + QUANTIDADE DE DIAS)
+    const dataFimPrevista = new Date(
+      dataInicio.setDate(dataInicio.getDate() + quantidadeDias)
+    );
+
+    setDataFinalPrevista(dataFimPrevista);
+
+    // console.log("dataInicio", dataInicio);
+    // console.log("dataLimite", dataLimite);
+    // console.log("dataFimPrevista", dataFimPrevista);
+    // console.log("condicional", dataFimPrevista > dataLimite);
+
+    if (dataFimPrevista > dataLimite) {
+      registerForm.setFieldValue("erroDataIntervencao", true);
     }
   };
 
   useEffect(() => {
-    // handleGet();
     registerForm.setFieldValue("id_campanha", idCampanha);
-    // const newDate = new Date(data);
-    // newDate.setDate(newDate.getDate() + 15);
-    // registerForm.setFieldValue("dat_ini_prev", newDate);
     setRefresh(!refresh);
   }, []);
 
@@ -174,7 +197,60 @@ function ModalCadastroIntervencao({
     registerForm.values.dat_ini_prev,
     registerForm.values.projeto_tipo_id,
     registerForm.values.poco_id,
+    registerForm.values.atividades,
   ]);
+
+  useEffect(() => {
+    if (
+      registerForm.values.dat_ini_prev !== new Date(data) &&
+      registerForm.values.projeto_tipo_id !== 0 &&
+      registerForm.values.poco_id !== 0
+    ) {
+      const poco = listaServicosPocos.filter(
+        (poco: any) => poco.nom_poco === registerForm.values.poco_id
+      );
+      const dataPoco = poco[0].dat_ini_limite;
+
+      setDataLimite(dataPoco);
+      registerForm.setFieldValue("data_limite", dataPoco);
+    }
+  }, [registerForm.values.erroDataIntervencao, registerForm.values.poco_id]);
+
+  useEffect(() => {
+    if (registerForm.values.poco_id !== "") {
+      const poco = listaServicosPocos.filter(
+        (poco: any) => poco.nom_poco === registerForm.values.poco_id
+      );
+      const dataPoco = poco[0].dat_ini_limite;
+      registerForm.setFieldValue("data_limite", dataPoco);
+    }
+  }, [registerForm.values.poco_id]);
+
+  useEffect(() => {
+    if (registerForm.values.poco_id.split("-")[0] === "0 ") {
+      registerForm.setFieldValue("nova_campanha", true);
+    } else {
+      registerForm.setFieldValue("nova_campanha", false);
+    }
+  }, [registerForm.values.poco_id]);
+
+  // useEffect(() => {
+  //   setValueProgressoMensagemErro(100);
+  // }, [dataLimite]);
+
+  // useEffect(() => {
+  //   const contagemRegressiva = setInterval(() => {
+  //     setValueProgressoMensagemErro((valueProgressoMensagemErro: number) => {
+  //       if (valueProgressoMensagemErro === 0) {
+  //         clearInterval(contagemRegressiva);
+  //         return 100;
+  //       }
+  //       return valueProgressoMensagemErro - 1;
+  //     });
+  //   }, 1000);
+  // }, [valueProgressoMensagemErro]);
+
+  // console.log("registerForm", registerForm.values);
 
   return (
     <>
@@ -225,6 +301,10 @@ function ModalCadastroIntervencao({
           >
             Cadastrar Nova Intervenção/Perfuração
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -262,14 +342,11 @@ function ModalCadastroIntervencao({
                           options={optionsCampo}
                           required={true}
                         />
-                        <DateTimePickerDataInicio
-                          registerForm={registerForm}
-                          // data={data}
-                        />
+                        <DateTimePickerDataInicio registerForm={registerForm} />
                       </Flex>
                     </Stack>
 
-                    <Stack>
+                    <Flex justify={"space-between"}>
                       <Flex flexDirection={"row"} gap={4} w={"50%"}>
                         <SelectFiltragem
                           registerForm={registerForm}
@@ -279,17 +356,50 @@ function ModalCadastroIntervencao({
                           required={true}
                         />
                       </Flex>
-                    </Stack>
+                      {dataFinalPrevista !== "" && (
+                        <Flex direction={"column"}>
+                          <Flex gap={1}>
+                            <Text
+                              fontWeight={"bold"}
+                              fontSize={"12px"}
+                              color={"#949494"}
+                            >
+                              DATA FINAL PREVISTA
+                            </Text>
+                          </Flex>
+                          <Button
+                            isDisabled={true}
+                            h={"56px"}
+                            variant="outline"
+                            px={5}
+                            minW={"220px"}
+                          >
+                            {formatDate(dataFinalPrevista)}
+                          </Button>
+                        </Flex>
+                      )}
+                    </Flex>
 
                     {registerForm.values.erroDataIntervencao && (
-                      <Alert colorScheme={"red"} variant={"solid"}>
-                        <AlertIcon />
-                        <AlertTitle>ATENÇÃO:</AlertTitle>
-                        <Text>
-                          O planejamento configurado ultrapassa a data de início
-                          de execução do poço selecionado.
-                        </Text>
-                      </Alert>
+                      <Flex direction={"column"}>
+                        <Alert colorScheme={"red"} variant={"solid"}>
+                          <AlertIcon />
+                          <AlertTitle>ATENÇÃO:</AlertTitle>
+                          <Text>
+                            {`O planejamento configurado ultrapassa a data de início
+                              de execução do poço selecionado, previsto para ser iniciado na data ${formatDate(
+                                dataLimite
+                              )}.`}
+                          </Text>
+                        </Alert>
+                        {/* <Progress
+                          hasStripe
+                          size="sm"
+                          value={valueProgressoMensagemErro}
+                          colorScheme={"blue"}
+                          isAnimated={true}
+                        /> */}
+                      </Flex>
                     )}
 
                     <AtividadesCadastroIntervencao
@@ -301,7 +411,6 @@ function ModalCadastroIntervencao({
                       <Text fontWeight={"bold"}>Comentários</Text>
                       <FormControl>
                         <Flex gap={1}>
-                          {/* <RequiredField /> */}
                           <Text
                             fontWeight={"bold"}
                             fontSize={"12px"}
@@ -330,13 +439,13 @@ function ModalCadastroIntervencao({
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoGhost
+                <BotaoVermelhoLargoGhost
                   text={"Cancelar"}
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                <BotaoAzulPrimary
-                  text={"Concluir Cadastro"}
+                <BotaoAzulLargoPrimary
+                  text={"Cadastrar"}
                   formikForm={registerForm}
                   onClose={onClose}
                   setRefresh={setRefresh}

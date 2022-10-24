@@ -9,7 +9,7 @@ import { useToast } from "contexts/Toast";
 
 import { getTarefas } from "services/get/CadastroModaisInfograficos";
 import { getAtividadesList } from "services/get/Infograficos";
-import { postProjetoTipo } from "services/post/CadastroModaisInfograficos";
+import { postProjetoTipo } from "services/post/Infograficos";
 
 import { useAuth } from "./useAuth";
 

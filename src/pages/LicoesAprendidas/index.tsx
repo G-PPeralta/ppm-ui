@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { CSVLink } from "react-csv";
 import toast from "react-hot-toast";
-import { AiFillPrinter } from "react-icons/ai";
+import { FaFileCsv } from "react-icons/fa";
 // import {
 //   FiChevronLeft,
 //   FiChevronRight,
@@ -25,7 +26,7 @@ import {
   Box,
   Flex,
   Heading,
-  Stack,
+  // Stack,
   useBreakpointValue,
   useColorModeValue,
   Button,
@@ -35,9 +36,12 @@ import {
   useDisclosure,
   Icon,
 } from "@chakra-ui/react";
+import moment from "moment";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
 import Sidebar from "components/SideBar";
+
+import { formatDate } from "utils/formatDate";
 
 import { getAllLicoesAprendidas } from "services/get/LicoesAprendidas";
 import { getProjetos } from "services/get/Projetos";
@@ -90,9 +94,9 @@ export function LicoesAprendidasProjetos() {
     filterByProject();
   };
 
-  const print = () => {
-    window.print();
-  };
+  // const print = () => {
+  //   window.print();
+  // };
 
   async function handleUpdateLicoes(
     licao: any,
@@ -122,20 +126,28 @@ export function LicoesAprendidasProjetos() {
         <Td
           // isNumeric
           fontWeight={"semibold"}
+          textAlign={"center"}
         >
           {lessons.id}
         </Td>
 
-        <Td fontWeight={"semibold"}>{lessons.txt_licao_aprendida}</Td>
-        <Td width="506px" height={"36px"}>
+        <Td textAlign={"center"} fontWeight={"semibold"}>
+          {lessons.txt_licao_aprendida}
+        </Td>
+        <Td
+          fontWeight={"semibold"}
+          textAlign={"center"}
+          width="506px"
+          height={"36px"}
+        >
           {lessons.txt_acao}
         </Td>
-        <Td fontWeight={"semibold"}>
+        <Td fontWeight={"semibold"} textAlign={"center"}>
           {new Date(lessons.dat_usu_create)
             .toLocaleString("pt-BR")
             .substring(0, 10)}
         </Td>
-        <Td fontWeight={"semibold"}>
+        <Td fontWeight={"semibold"} textAlign={"center"}>
           <IconButton
             aria-label="Plus sign"
             icon={<MdModeEdit />}
@@ -166,6 +178,13 @@ export function LicoesAprendidasProjetos() {
     );
     setFilteredLicoesAprendidas([...filtered]);
   };
+
+  const headers = [
+    { label: "Projeto", key: "projeto" },
+    { label: "Lições Aprendidas", key: "txt_licao_aprendida" },
+    { label: "Ações e Recomendações", key: "txt_acao" },
+    { label: "Data", key: "dat_usu_create" },
+  ];
 
   // const rowsPerPage = 8;
   // const totalRegs = filteredLicoesAprendidas.length;
@@ -201,199 +220,222 @@ export function LicoesAprendidasProjetos() {
   return (
     <Sidebar>
       <Flex
-        // w={"100%"}
+        w="auto"
         align="center"
         justify="center"
         bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
       >
-        <Stack spacing="8">
-          <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}>
-            <Box
-              py={{ base: "6", sm: "8" }}
-              px={{ base: "6", sm: "8" }}
-              w={"100%"}
-              bg={useBreakpointValue({ base: "transparent", sm: "white" })}
-              boxShadow={{
-                base: "none",
-                sm: useColorModeValue("md", "md-dark"),
-              }}
-              borderRadius={{ base: "none", sm: "xl" }}
-              alignItems={"center"}
+        {/* <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}> */}
+        <Box
+          py={{ base: "6", sm: "8" }}
+          px={{ base: "6", sm: "8" }}
+          w={"100%"}
+          bg={useBreakpointValue({ base: "transparent", sm: "white" })}
+          boxShadow={{
+            base: "none",
+            sm: useColorModeValue("md", "md-dark"),
+          }}
+          borderRadius={{ base: "none", sm: "xl" }}
+          alignItems={"center"}
+        >
+          <Flex align={"flex-end"} justify={"space-between"}>
+            <Flex mt={-3} ml={-3} mr={-5} mb={6}>
+              <Heading
+                fontFamily={"Mulish"}
+                fontWeight={"700"}
+                fontSize={"24px"}
+                color={"#2D2926"}
+              >
+                <Text>Lições Aprendidas</Text>
+              </Heading>
+            </Flex>
+            <Flex
+              align={"flex-start"}
+              fontWeight={"700"}
+              fontSize={"18px"}
+              color="#0239C3"
+              mr={-2}
+              mt={-1}
             >
-              <Flex align={"flex-end"} justify={"space-between"}>
-                <Heading as="h3" size="md" mt={"-15px"} mb={"25px"}>
-                  <Text fontSize={"24px"} fontWeight={"700"}>
-                    Lições Aprendidas
-                  </Text>
-                </Heading>
-                <Flex align={"flex-start"} fontWeight={"700"}>
-                  <Button
-                    color={"#0239C3"}
-                    fontWeight={"700"}
-                    variant="ghost"
-                    colorScheme="messenger"
-                    rightIcon={<AiFillPrinter />}
-                    onClick={print}
-                  >
-                    Exportar
-                  </Button>
-                </Flex>
-              </Flex>
-              <Flex flexDir={"row"} justify={"space-between"}>
-                <Flex align={"flex-end"} gap={3}>
-                  <Flex>
-                    <FormControl>
-                      <FormLabel
-                        fontWeight={"700"}
-                        fontSize={"12px"}
-                        color={"#A7A7A7"}
-                        htmlFor="projeto"
-                      >
-                        PROJETO
-                      </FormLabel>
-                      <Select
-                        mt={"-9px"}
-                        borderRadius={"8px"}
-                        placeholder="Selecione"
-                        id="projeto"
-                        name="projeto"
-                        onChange={(e) => setProjetoId(e.target.value)}
-                        width={"208px"}
-                        height={"56px"}
-                      >
-                        <option color={"#A7A7A7"} value={0}>
-                          Todos
-                        </option>
-                        {projetos &&
-                          projetos.map((project, index) => (
-                            <option value={project.id} key={index}>
-                              {project.nomeProjeto}
-                            </option>
-                          ))}
-                      </Select>
-                    </FormControl>
-                  </Flex>
-                  <Flex align={"flex-end"}>
-                    <Button
-                      type="button"
-                      background="#0047BB"
-                      variant="outline"
-                      color="white"
-                      borderColor="#0047BB"
-                      _hover={{
-                        background: "white",
-                        transition: "all 0.4s",
-                        color: "#0047BB",
-                      }}
-                      rightIcon={<FiSearch />}
-                      onClick={handleClick}
-                      // alignSelf={"end"}
-                      // marginLeft={"-332px"}
-                      height={"56px"}
-                      width={"101px"}
-                      fontSize={"18px"}
-                      borderRadius={"8px"}
-                    >
-                      Filtrar
-                    </Button>
-                  </Flex>
-                </Flex>
-
-                <Flex align={"flex-start"} mt={"22px"}>
-                  <Button
-                    // onClick={onOpen}
-                    background="transparent"
-                    color="#0047BB"
-                    float={"right"}
-                    fontSize="17px"
-                    fontWeight={"700"}
-                  >
-                    Lixeira
-                    <Icon
-                      as={MdArrowForwardIos}
-                      fontSize="16px"
-                      fontWeight={"700"}
-                      ml={1}
-                      color="#0047BB"
-                    />
-                  </Button>
-                </Flex>
-              </Flex>
-
-              <Stack spacing="0">
-                <Flex
-                  flexDirection={useBreakpointValue({
-                    base: "column",
-                    md: "column",
-                  })}
+              <CSVLink
+                filename={`licoes_aprendidas${moment().format(
+                  "DDMMYYYY_hhmmss"
+                )}`}
+                data={filteredLicoesAprendidas.map((lic) => ({
+                  ...lic,
+                  projeto: projetos.find(
+                    (project) => project.id == lic.id_projeto
+                  )?.nomeProjeto,
+                  data: formatDate(lic.dat_usu_create),
+                }))}
+                headers={headers}
+              >
+                <Button
+                  fontWeight={"700"}
+                  fontSize={"18px"}
+                  color={"#0239C3"}
+                  variant="ghost"
+                  colorScheme="messenger"
+                  rightIcon={<FaFileCsv />}
+                  // onClick={print}
                 >
-                  <Flex
-                    flexDirection={useBreakpointValue({
-                      base: "column",
-                      md: "row",
-                    })}
-                    justifyContent={"flex-start"}
-                  ></Flex>
-                </Flex>
-              </Stack>
-
-              <Flex direction={"column"} w={"100%"}>
-                <Flex direction={"column"} flex={1}>
-                  <TableContainer
-                    mt={4}
-                    mb={3}
-                    borderRadius={"10px"}
-                    overflowX={"scroll"}
-                  >
-                    <Table variant="striped" colorScheme={"strippedGray"}>
-                      <Thead>
-                        <Tr background="#0047BB" color="white">
-                          <Th textAlign={"center"} color={"white"}>
-                            ID
-                          </Th>
-
-                          <Th color={"white"} textAlign={"center"}>
-                            Lições Aprendidas
-                          </Th>
-                          <Th color={"white"} textAlign={"center"}>
-                            Ações e Recomendações
-                          </Th>
-                          <Th color={"white"} textAlign={"center"}>
-                            Data
-                          </Th>
-                          <Th color={"white"} textAlign={"center"}>
-                            Ações
-                          </Th>
-                        </Tr>
-                      </Thead>
-                      <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
-                      <Tfoot>
-                        <Tr background={"origem.500"}>
-                          <Th color={"white"}>Total</Th>
-                          <Th color={"white"}>{tableData.length} Lições</Th>
-                          <Th color={"white"}>{tableData.length} Lições</Th>
-                          <Th color={"white"}></Th>
-                          <Th color={"white"}></Th>
-                        </Tr>
-                      </Tfoot>
-                    </Table>
-                  </TableContainer>
-                </Flex>
-                <PaginacaoTabela data={licoesAprendidas} fromTo={fromTo} />
-              </Flex>
-            </Box>{" "}
+                  Exportar
+                </Button>
+              </CSVLink>
+            </Flex>
           </Flex>
-        </Stack>
+          <Flex flexDir={"row"} justify={"space-between"}>
+            <Flex align={"flex-end"} gap={3} wrap={"wrap"} flex={1}>
+              <Flex ml={-3}>
+                <FormControl>
+                  <FormLabel
+                    fontWeight={"700"}
+                    fontSize={"12px"}
+                    color={"#949494"}
+                    htmlFor="projeto"
+                  >
+                    PROJETO
+                  </FormLabel>
+                  <Select
+                    mt={"-9px"}
+                    borderRadius={"8px"}
+                    placeholder="Selecione"
+                    id="projeto"
+                    name="projeto"
+                    onChange={(e) => setProjetoId(e.target.value)}
+                    width={"208px"}
+                    height={"56px"}
+                  >
+                    <option color={"#A7A7A7"} value={0}>
+                      Todos
+                    </option>
+                    {projetos &&
+                      projetos.map((project, index) => (
+                        <option value={project.id} key={index}>
+                          {project.nomeProjeto}
+                        </option>
+                      ))}
+                  </Select>
+                </FormControl>
+              </Flex>
+              <Flex align={"flex-end"}>
+                <Button
+                  type="button"
+                  borderRadius={"8px"}
+                  fontWeight={"700"}
+                  background={"origem.500"}
+                  variant="outline"
+                  color="white"
+                  borderColor="#0047BB"
+                  _hover={{
+                    background: "origem.600",
+                    transition: "all 0.4s",
+                  }}
+                  rightIcon={<FiSearch />}
+                  onClick={handleClick}
+                  // alignSelf={"end"}
+                  // marginLeft={"-332px"}
+                  height={"56px"}
+                  width={"101px"}
+                  fontSize={"18px"}
+                >
+                  Filtrar
+                </Button>
+              </Flex>
+            </Flex>
 
-        {isOpen && (
-          <EditModal
-            closeModal={onClose}
-            licao={editLicao}
-            isOpen={isOpen}
-            handleUpdateLicoes={handleUpdateLicoes}
-          />
-        )}
+            <Flex align={"flex-start"} alignSelf={"center"} mr={-3}>
+              <Button
+                // onClick={onOpen}
+                background="transparent"
+                color="#0239C3"
+                float={"right"}
+                fontWeight={"700"}
+                fontSize={"18px"}
+              >
+                Lixeira
+                <Icon
+                  as={MdArrowForwardIos}
+                  fontSize="20px"
+                  fontWeight={"700"}
+                  ml={1}
+                  color="#0239C3"
+                />
+              </Button>
+            </Flex>
+          </Flex>
+
+          <Flex
+            flexDirection={useBreakpointValue({
+              base: "column",
+              md: "column",
+            })}
+          >
+            <Flex
+              flexDirection={useBreakpointValue({
+                base: "column",
+                md: "row",
+              })}
+              justifyContent={"flex-start"}
+            ></Flex>
+          </Flex>
+
+          <Flex direction={"column"} ml={-3} mr={-3} mt={1}>
+            <Flex direction={"column"} flex={1}>
+              <TableContainer
+                mt={4}
+                mb={3}
+                borderRadius={"10px"}
+                overflowX={"scroll"}
+              >
+                <Table variant="striped" colorScheme={"strippedGray"}>
+                  <Thead>
+                    <Tr background="#0047BB" color="white">
+                      <Th textAlign={"center"} color={"white"}>
+                        ID
+                      </Th>
+
+                      <Th color={"white"} textAlign={"center"}>
+                        Lições Aprendidas
+                      </Th>
+                      <Th color={"white"} textAlign={"center"}>
+                        Ações e Recomendações
+                      </Th>
+                      <Th color={"white"} textAlign={"center"}>
+                        Data
+                      </Th>
+                      <Th color={"white"} textAlign={"center"}>
+                        Ações
+                      </Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+                  <Tfoot>
+                    <Tr background={"origem.500"}>
+                      <Th color={"white"}>Total</Th>
+                      <Th color={"white"}>{tableData.length} Lições</Th>
+                      <Th color={"white"}>{tableData.length} Lições</Th>
+                      <Th color={"white"}></Th>
+                      <Th color={"white"}></Th>
+                    </Tr>
+                  </Tfoot>
+                </Table>
+              </TableContainer>
+            </Flex>
+            <PaginacaoTabela data={licoesAprendidas} fromTo={fromTo} />
+          </Flex>
+        </Box>{" "}
       </Flex>
+
+      {isOpen && (
+        <EditModal
+          closeModal={onClose}
+          licao={editLicao}
+          isOpen={isOpen}
+          handleUpdateLicoes={handleUpdateLicoes}
+        />
+      )}
+      {/* </Flex> */}
     </Sidebar>
   );
 }

@@ -79,7 +79,7 @@ function EditarPriorizacao(infosRanking: TableProps) {
             fontWeight={"700"}
             h={"48px"}
           >
-            Configuração
+            {`Editar Priorização ${infosRanking.nomeRanking}`}
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <form
@@ -114,11 +114,12 @@ function EditarPriorizacao(infosRanking: TableProps) {
                               NOME DA PRIORIZAÇÃO
                             </FormLabel>
                             <Input
+                              maxLength={45}
                               ml={"3px"}
-                              w={"480px"}
+                              w={"93%"}
                               h={"56px"}
+                              _placeholder={{ color: "black" }}
                               fontSize={"14px"}
-                              color={"#949494"}
                               fontWeight={"400"}
                               border={"solid 1px #949494"}
                               isRequired
@@ -152,10 +153,10 @@ function EditarPriorizacao(infosRanking: TableProps) {
                               PERFIS COM ACESSO
                             </FormLabel>
                             <Select
-                              w={"480px"}
+                              w={"93%"}
                               h={"56px"}
                               fontSize={"14px"}
-                              color={"#2D2926"}
+                              _placeholder={{ color: "black" }}
                               fontWeight={"400"}
                               border={"solid 1px #949494"}
                               id="acesso"
@@ -197,14 +198,12 @@ function EditarPriorizacao(infosRanking: TableProps) {
                   // disabled={!registerForm.isValid}
                   w={"208px"}
                   h={"56px"}
-                  background="#0047BB"
+                  background={"origem.500"}
                   variant="primary"
                   color="white"
                   onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
-                    background: "white",
-                    border: "solid 1px #0047BB",
-                    color: "#0047BB",
+                    background: "origem.600",
                     transition: "all 0.4s",
                   }}
                 >
