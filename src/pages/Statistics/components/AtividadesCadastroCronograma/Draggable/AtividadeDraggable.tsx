@@ -21,6 +21,7 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
 import DateTimePicker from "./DateTimePicker";
+import { ModalFiltrarAtividade } from "../ModalFiltrarAtividade";
 // import PopOverPrecedentes from "./PopOverPrecedentes";
 interface Props {
   registerForm: FormikProps<any>;
@@ -35,7 +36,7 @@ interface Props {
 function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const innerwidth = window.innerWidth;
 
-  const { listaAreaAtuacao, listaResponsaveis, listaOperacao } = listas;
+  const { listaOperacao } = listas;
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
@@ -60,17 +61,17 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     }
   };
 
-  const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
-    value: poco.id,
-    label: poco.tipo,
-  }));
+  // const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
+  //   value: poco.id,
+  //   label: poco.tipo,
+  // }));
 
-  const optionsResponsaveis = listaResponsaveis.map(
-    (responsavel: Responsavel) => ({
-      value: responsavel.id,
-      label: responsavel.nome,
-    })
-  );
+  // const optionsResponsaveis = listaResponsaveis.map(
+  //   (responsavel: Responsavel) => ({
+  //     value: responsavel.id,
+  //     label: responsavel.nome,
+  //   })
+  // );
 
   const optionsOperacao = listaOperacao.map((operacao: Operacao) => ({
     value: operacao.id,
@@ -120,6 +121,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
               gap={4}
               flex={1}
               justify={"space-between"}
+              height="80px"
             >
               <Flex align={"center"} justify={"center"} gap={3}>
                 <GiHamburgerMenu color="#2E69FD" size={16} />
@@ -134,9 +136,8 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 align={"center"}
                 justify={"center"}
                 py={innerwidth >= 640 ? 0 : 4}
-                flex={1}
               >
-                <Flex direction={"column"} flex={2}>
+                <Flex direction={"column"}>
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
@@ -148,6 +149,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     </Text>
                   </Flex>
                   <SelectFiltragem
+                    width={true}
                     registerForm={registerForm}
                     propName={`atividades[${index}].operacao_id`}
                     options={optionsOperacao}
@@ -155,52 +157,14 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   />
                 </Flex>
 
-                <Flex direction={"column"} flex={2}>
-                  <Flex gap={1}>
-                    <RequiredField />
-                    <Text
-                      fontWeight={"bold"}
-                      fontSize={"12px"}
-                      color={"#949494"}
-                    >
-                      ÁREA
-                    </Text>
-                  </Flex>
-                  <SelectFiltragem
+                <Flex direction={"column"}>
+                  <DateTimePicker
                     registerForm={registerForm}
-                    propName={`atividades[${index}].area_id`}
-                    options={optionsAreaAtuacao}
-                    value={getValue(optionsAreaAtuacao, index, "area_id")}
+                    index={index}
+                    width="208px"
                   />
                 </Flex>
-
-                <Flex direction={"column"} flex={2}>
-                  <Flex gap={1}>
-                    <RequiredField />
-                    <Text
-                      fontWeight={"bold"}
-                      fontSize={"12px"}
-                      color={"#949494"}
-                    >
-                      RESPONSÁVEL
-                    </Text>
-                  </Flex>
-                  <SelectFiltragem
-                    registerForm={registerForm}
-                    propName={`atividades[${index}].responsavel_id`}
-                    options={optionsResponsaveis}
-                    value={getValue(
-                      optionsResponsaveis,
-                      index,
-                      "responsavel_id"
-                    )}
-                  />
-                </Flex>
-
-                <Flex direction={"column"} flex={1}>
-                  <DateTimePicker registerForm={registerForm} index={index} />
-                </Flex>
-                <Flex direction={"column"} flex={1}>
+                <Flex direction={"column"}>
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
@@ -214,6 +178,8 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   <NumberInput
                     max={99999}
                     min={0}
+                    height="56px"
+                    width="208px"
                     id={`atividades[${index}].duracao`}
                     name={`atividades[${index}].duracao`}
                     value={registerForm.values.atividades[index].duracao}
@@ -244,15 +210,16 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 </Flex> */}
               </Flex>
               <Flex
-                p={1}
                 align={"center"}
                 justify={"center"}
                 _hover={{ cursor: "pointer" }}
               >
+                <ModalFiltrarAtividade />
+
                 <FiTrash
                   onClick={() => remove(index)}
                   color="#F94144"
-                  size={16}
+                  size="16px"
                 />
               </Flex>
             </Flex>
