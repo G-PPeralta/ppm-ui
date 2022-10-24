@@ -103,7 +103,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
 
       if (initialValues.length > 0) {
         initialValues.forEach((rank: any) => {
-          if (rank.id_ranking == 0) setBeneficio(rank.id_opcao);
+          if (rank.id_ranking == 1) setBeneficio(rank.id_opcao);
           if (rank.id_ranking == 2) setRegulatorio(rank.id_opcao);
           if (rank.id_ranking == 3) setOperacao(rank.id_opcao);
           if (rank.id_ranking == 4) setPrioridade(rank.id_opcao);
@@ -118,26 +118,34 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
     onOpen();
 
     handleGetInitialValues(registerForm.values.id_projeto);
-    // if (initialValues.length > 0) {
-    //   initialValues.forEach((rank: any) => {
-    //     if (rank.id_ranking == 0) setBeneficio(rank.id_opcao);
-    //     if (rank.id_ranking == 2) setRegulatorio(rank.id_opcao);
-    //     if (rank.id_ranking == 3) setOperacao(rank.id_opcao);
-    //     if (rank.id_ranking == 4) setPrioridade(rank.id_opcao);
-    //     if (rank.id_ranking == 5) setComplexidade(rank.id_opcao);
-    //     if (rank.id_ranking == 6) setEstrategia(rank.id_opcao);
-    //   });
-    // }
   };
 
   const payload = {
     id_projeto: registerForm.values.id_projeto,
-    beneficio: Number(beneficio),
-    regulatorio: Number(regulatorio),
-    operacao: Number(operacao),
-    prioridade: Number(prioridade),
-    complexidade: Number(complexidade),
-    estrategia: Number(estrategia),
+    beneficio: {
+      opcao_id: Number(beneficio),
+      id_ranking: 1,
+    },
+    regulatorio: {
+      opcao_id: Number(regulatorio),
+      id_ranking: 2,
+    },
+    operacao: {
+      opcao_id: Number(operacao),
+      id_ranking: 3,
+    },
+    prioridade: {
+      opcao_id: Number(prioridade),
+      id_ranking: 4,
+    },
+    complexidade: {
+      opcao_id: Number(complexidade),
+      id_ranking: 5,
+    },
+    estrategia: {
+      opcao_id: Number(estrategia),
+      id_ranking: 6,
+    },
     dsc_comentario: "",
     nom_usu_create: user?.nome,
   };
