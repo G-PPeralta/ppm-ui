@@ -36,9 +36,15 @@ import { getInitialRaking } from "../../../services/get/Ranking";
 
 type PropsType = {
   projeto: number;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: boolean;
 };
 
-function ModalCadastrarPriorizacao(projeto: PropsType) {
+function ModalCadastrarPriorizacao({
+  projeto,
+  refresh,
+  setRefresh,
+}: PropsType) {
   const { user } = useAuth();
   const [initialValues, setInitialValues] = useState([]);
   const [beneficio, setBeneficio] = useState("");
@@ -59,7 +65,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
     listaPrioridade,
     listaRegulatorio,
     ranking,
-  } = useCadastroPriorizacao(projeto.projeto);
+  } = useCadastroPriorizacao(projeto);
 
   async function handleGetInitialValues(id: any) {
     const response = await getInitialRaking(id);
@@ -96,7 +102,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
   }, [registerForm.values]);
 
   useEffect(() => {
-    registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
+    registerForm.setFieldValue("id_projeto", Number(projeto));
 
     if (registerForm.values.id_projeto !== 0) {
       // handleGetInitialValues(registerForm.values.id_projeto);
@@ -507,6 +513,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                   onClick={() => {
                     postProject(payload);
                     onClose();
+                    setRefresh(!refresh);
                   }}
                   _hover={{
                     background: "origem.600",

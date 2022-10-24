@@ -31,9 +31,11 @@ import "../projects.css";
 
 interface TableProps {
   data: Projetos[];
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: boolean;
 }
 
-export function TabelaProjetos({ data }: TableProps) {
+export function TabelaProjetos({ data, refresh, setRefresh }: TableProps) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
 
@@ -163,7 +165,11 @@ export function TabelaProjetos({ data }: TableProps) {
         )}
       </Td>
       <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-        <ModalCadastrarPriorizacao projeto={projeto.id_projeto_real} />
+        <ModalCadastrarPriorizacao
+          refresh={refresh}
+          setRefresh={setRefresh}
+          projeto={projeto.id_projeto_real}
+        />
         <ModalDeletarProjeto projeto={projeto.id_projeto_real} />
       </Td>
     </Tr>
