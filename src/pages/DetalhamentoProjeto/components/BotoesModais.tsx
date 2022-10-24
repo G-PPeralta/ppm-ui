@@ -12,6 +12,9 @@ function BotoesModais({
   callBack,
   infoProjeto,
   setRender,
+  projeto,
+  refresh,
+  setRefresh,
 }: any) {
   return (
     <>
@@ -33,7 +36,11 @@ function BotoesModais({
           categorias={categorias}
           callBack={callBack}
         />
-        <ModalConfiguracoes />
+        <ModalConfiguracoes
+          projeto={projeto}
+          refresh={refresh}
+          setRefresh={setRefresh}
+        />
       </Flex>
     </>
   );
