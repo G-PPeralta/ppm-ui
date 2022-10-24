@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Flex, Input, InputLeftAddon, Text } from "@chakra-ui/react";
 
@@ -43,9 +43,11 @@ function InputGenerico({
   }
 
   const [valorFormatado, setValorFormatado] = useState<any>("");
-  if (isNumeric) {
-    setValorFormatado(formatReal(getMoney(value || "0")));
-  }
+  useEffect(() => {
+    if (isNumeric) {
+      setValorFormatado(formatReal(getMoney(value || "0")));
+    }
+  }, []);
 
   return (
     <Flex direction={"column"} w={"100%"}>
