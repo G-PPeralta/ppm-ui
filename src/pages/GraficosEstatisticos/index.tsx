@@ -316,5 +316,3 @@ export function GráficosEstatisticos() {
     </>
   );
 }
-
-// bug do eixo y
