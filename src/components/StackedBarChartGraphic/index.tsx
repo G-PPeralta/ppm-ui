@@ -21,8 +21,8 @@ export default function StackedBarChartGraphic({
   return (
     <ResponsiveContainer width={sizeW} height={sizeH}>
       <BarChart data={data} className={style.chart}>
-        <XAxis dataKey="month" fontSize={10} />
-        {showY ? <YAxis dataKey={dataEntries[0].name} /> : undefined}
+        <XAxis dataKey="key" fontSize={10} />
+        {showY ? <YAxis /> : undefined}
         <Tooltip />
         {dataEntries.map((dataEntry, index) => (
           <Bar

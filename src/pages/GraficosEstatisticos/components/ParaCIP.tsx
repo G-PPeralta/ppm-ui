@@ -28,51 +28,51 @@ export function GraficoCIP() {
 
   const dataMock2 = [
     {
-      month: "Jan/2022",
+      key: "Jan/2022",
       Durações: 90,
     },
     {
-      month: "Fev/2022",
+      key: "Fev/2022",
       Durações: 80,
     },
     {
-      month: "Mar/2022",
+      key: "Mar/2022",
       Durações: 70,
     },
     {
-      month: "Abr/2022",
+      key: "Abr/2022",
       Durações: 60,
     },
     {
-      month: "Mai/2022",
+      key: "Mai/2022",
       Durações: 50,
     },
     {
-      month: "Jun/2022",
+      key: "Jun/2022",
       Durações: 40,
     },
     {
-      month: "Jul/2022",
+      key: "Jul/2022",
       Durações: 30,
     },
     {
-      month: "Ago/2022",
+      key: "Ago/2022",
       Durações: 20,
     },
     {
-      month: "Set/2022",
+      key: "Set/2022",
       Durações: 90,
     },
     {
-      month: "Out/2022",
+      key: "Out/2022",
       Durações: 70,
     },
     {
-      month: "Nov/2022",
+      key: "Nov/2022",
       Durações: 50,
     },
     {
-      month: "Dez/2022",
+      key: "Dez/2022",
       Durações: 100,
     },
   ];

@@ -28,7 +28,7 @@ export function GraficoSPT() {
 
   const dataMock2 = [
     {
-      month: "Jan/2022",
+      key: "Jan/2022",
       Manutenção: 10,
       "Recurso Origem": 20,
       "Recurso Cia": 10,
@@ -37,7 +37,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Fev/2022",
+      key: "Fev/2022",
       Manutenção: 5,
       "Recurso Origem": 5,
       "Recurso Cia": 10,
@@ -46,7 +46,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Mar/2022",
+      key: "Mar/2022",
       Manutenção: 5,
       "Recurso Origem": 5,
       "Recurso Cia": 10,
@@ -55,7 +55,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Abr/2022",
+      key: "Abr/2022",
       Manutenção: 10,
       "Recurso Origem": 20,
       "Recurso Cia": 10,
@@ -64,7 +64,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Mai/2022",
+      key: "Mai/2022",
       Manutenção: 10,
       "Recurso Origem": 20,
       "Recurso Cia": 10,
@@ -73,7 +73,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Jun/2022",
+      key: "Jun/2022",
       Manutenção: 5,
       "Recurso Origem": 5,
       "Recurso Cia": 10,
@@ -82,7 +82,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Jul/2022",
+      key: "Jul/2022",
       Manutenção: 10,
       "Recurso Origem": 20,
       "Recurso Cia": 10,
@@ -91,7 +91,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Ago/2022",
+      key: "Ago/2022",
       Manutenção: 20,
       "Recurso Origem": 20,
       "Recurso Cia": 20,
@@ -100,7 +100,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Set/2022",
+      key: "Set/2022",
       Manutenção: 5,
       "Recurso Origem": 5,
       "Recurso Cia": 10,
@@ -109,7 +109,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Out/2022",
+      key: "Out/2022",
       Manutenção: 10,
       "Recurso Origem": 20,
       "Recurso Cia": 10,
@@ -118,7 +118,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 20,
     },
     {
-      month: "Nov/2022",
+      key: "Nov/2022",
       Manutenção: 10,
       "Recurso Origem": 10,
       "Recurso Cia": 10,
@@ -127,7 +127,7 @@ export function GraficoSPT() {
       "Aguardando Outros": 90,
     },
     {
-      month: "Dez/2022",
+      key: "Dez/2022",
       Manutenção: 10,
       "Recurso Origem": 20,
       "Recurso Cia": 10,
