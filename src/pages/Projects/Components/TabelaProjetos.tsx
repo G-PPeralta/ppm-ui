@@ -82,7 +82,7 @@ export function TabelaProjetos({ data, refresh, setRefresh }: TableProps) {
         </Link>
       </Td>
       <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-        {projeto.vlr_cpi >= 1 ? (
+        {projeto.vlr_cpi == 1 ? (
           <Flex alignItems={"center"}>
             <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
             <Text marginLeft="8px"> {` CPI = ${projeto.vlr_cpi}`}</Text>
