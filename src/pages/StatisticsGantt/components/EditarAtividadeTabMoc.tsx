@@ -1,5 +1,5 @@
 import { BsFillCloudArrowUpFill } from "react-icons/bs";
-import { FiPlus } from "react-icons/fi";
+import { FiPlus, FiTrash } from "react-icons/fi";
 
 import { Button, Flex, IconButton } from "@chakra-ui/react";
 
@@ -22,6 +22,12 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
     ]);
   };
 
+  const removerMoc = (index: number) => {
+    const mocs = registerForm.values.mocs;
+    mocs.splice(index, 1);
+    registerForm.setFieldValue("mocs", [...mocs]);
+  };
+
   const isDisabled = registerForm.values.mocs.some(
     (moc: any) => moc.numero_moc === ""
   );
@@ -31,7 +37,22 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
       <Flex flex={1} justify={"space-between"} direction={"column"} gap={4}>
         {registerForm.values.mocs.map((_moc: any, index: number) => (
           <Flex gap={4} justify={"space-between"} align={"end"}>
-            <Flex w={"50%"}>
+            <Flex w={"70%"} align={"end"} gap={2}>
+              <IconButton
+                aria-label="Botão de Deletar"
+                icon={<FiTrash size={20} />}
+                borderRadius={"10px"}
+                h={"56px"}
+                w={"56px"}
+                background={"transparent"}
+                color={"red.500"}
+                _hover={{
+                  background: "red.500",
+                  transition: "all 0.4s",
+                  color: "white",
+                }}
+                onClick={() => removerMoc(index)}
+              />
               <InputGenerico
                 registerForm={registerForm}
                 nomeInput={"NÚMERO DA MOC"}

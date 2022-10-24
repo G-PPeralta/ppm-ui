@@ -42,6 +42,7 @@ function EditarAtividadeTabGeral({ registerForm }: Props) {
             nomeInput={"PORCENTAGEM CONCLUÍDA"}
             tipo={"porcentagem"}
             stepper={true}
+            step={100}
           />
         </Flex>
       </Flex>
@@ -60,9 +61,10 @@ function EditarAtividadeTabGeral({ registerForm }: Props) {
           propName={"inicio_realizado"}
           data={registerForm.values.inicio_realizado}
           selecionaHorario={true}
+          isDisabled={true}
         />
         <DatePickerGenerico
-          isDisabled={registerForm.values.pct_real !== 100}
+          isDisabled={registerForm.values.pct_real === 100}
           nomeLabel={"DATA FIM"}
           registerForm={registerForm}
           propName={"fim_realizado"}
