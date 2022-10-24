@@ -83,8 +83,9 @@ export function TabelaLookahead(props: TableProps) {
 
   const tableData = data.slice(from, to).map((act, key) => (
     <>
-      <Tr key={key} backgroundColor={key % 2 == 1 ? "#F9F9F9" : "#FFF"}>
-        <Td>
+      {/* <Tr key={key} backgroundColor={key % 2 == 1 ? "#F9F9F9" : "#FFF"}> */}
+      <Tr key={key}>
+        <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
           {/* {budget.filhos && (
             <Icon
               className="cursor"
@@ -94,12 +95,15 @@ export function TabelaLookahead(props: TableProps) {
           )} */}
           {act.id}
         </Td>
-        <Td>
+        <Td textAlign={"center"} color={"#2D2926"}>
           <Link to={`/lookahead-detalhe/${act.id}`}>
             <Text color="blue">{act.nom_atividade}</Text>
           </Link>
         </Td>
-        <Td> - </Td>
+        <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+          {" "}
+          -{" "}
+        </Td>
       </Tr>
 
       {/* {budget.filhos &&
@@ -120,21 +124,31 @@ export function TabelaLookahead(props: TableProps) {
   return (
     <>
       <Flex direction="column" width="100%">
-        <TableContainer mt={4} mb={3} borderRadius="15px">
-          <Table variant="unstyled" width="100%">
+        <TableContainer mt={4} mb={4} borderRadius="10px">
+          <Table variant="striped" width="100%" colorScheme={"strippedGray"}>
             <Thead>
               <Tr background="origem.500" color="white">
-                <Th>item</Th>
-                <Th>Projeto</Th>
-                <Th>Descrição e Justificativa</Th>
+                <Th color="white" textAlign={"center"}>
+                  item
+                </Th>
+                <Th color="white" textAlign={"center"}>
+                  Projeto
+                </Th>
+                <Th color="white" textAlign={"center"}>
+                  Descrição e Justificativa
+                </Th>
               </Tr>
             </Thead>
             <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
             <Tfoot>
               <Tr backgroundColor="#0047BB" color="white">
-                <Th>Total</Th>
-                <Th>{total} Projetos</Th>
-                <Th></Th>
+                <Th color="white" textAlign={"center"}>
+                  Total
+                </Th>
+                <Th color="white" textAlign={"center"}>
+                  {total} Projetos
+                </Th>
+                <Th color="white" textAlign={"center"}></Th>
               </Tr>
             </Tfoot>
           </Table>
