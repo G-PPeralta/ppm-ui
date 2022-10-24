@@ -44,12 +44,10 @@ function CadastroTarefasModal({
   newRender,
 }: CadastroTarefaProps) {
   const { id } = useParams();
-
-  // const { onClose } = useDisclosure();
-
-  const { registerForm, setAtividade } = useModalCadastroTarefa(
+  const { registerForm, setAtividade /*, arroba */ } = useModalCadastroTarefa(
     newRender,
     closeModal
+    // lion
   );
 
   useEffect(() => setAtividade(id), [id]);
