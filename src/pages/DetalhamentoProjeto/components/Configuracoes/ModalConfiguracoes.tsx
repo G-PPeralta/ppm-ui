@@ -198,7 +198,7 @@ function ModalConfiguracoes({
                       width={"100%"}
                       placeholder={projeto.nome_responsavel}
                       onChange={(e) => {
-                        setReponsavel(+e.target.id);
+                        setReponsavel(+e.target.value);
                       }}
                     >
                       {getOptions(optionsResponsaveis)}
