@@ -52,8 +52,6 @@ function CadastroTarefasModal({
 
   useEffect(() => setAtividade(id), [id]);
 
-  const regex = /[^\w\s]/gi;
-
   return (
     <Flex>
       <Box
@@ -136,8 +134,8 @@ function CadastroTarefasModal({
                   type="text"
                   id="nomeTarefa"
                   name="nomeTarefa"
-                  value={registerForm.values.nomeTarefa.replace(regex, "")}
-                  onChange={registerForm.handleChange}
+                  // value={registerForm.values.nomeTarefa.replace(regex, "")}
+                  // onChange={registerForm.handleChange}
                 />
               </Flex>
               <Flex flexDir={"column"} flexGrow={1}>
@@ -163,8 +161,8 @@ function CadastroTarefasModal({
                   id="data"
                   type="date"
                   name="data"
-                  value={registerForm.values.data}
-                  onChange={registerForm.handleChange}
+                  // value={registerForm.values.data}
+                  // onChange={registerForm.handleChange}
                 />
               </Flex>
             </FormControl>
@@ -197,8 +195,8 @@ function CadastroTarefasModal({
                   id="atividadeRel"
                   name="atividadeRel"
                   placeholder="Selecione"
-                  value={registerForm.values.atividadeRel}
-                  onChange={registerForm.handleChange}
+                  // value={registerForm.values.atividadeRel}
+                  // onChange={registerForm.handleChange}
                 >
                   {atividadesProjeto.map((atividade, index) => (
                     <option value={atividade.nom_atividade} key={index}>
@@ -231,8 +229,8 @@ function CadastroTarefasModal({
                   height={"56px"}
                   id="responsavel"
                   name="responsavel"
-                  value={registerForm.values.responsavel}
-                  onChange={registerForm.handleChange}
+                  // value={registerForm.values.responsavel}
+                  // onChange={registerForm.handleChange}
                 ></Input>
               </Flex>
             </FormControl>
@@ -260,8 +258,8 @@ function CadastroTarefasModal({
                 placeholder="Descrição da tarefa"
                 id="descricao"
                 name="descricao"
-                value={registerForm.values.descricao}
-                onChange={registerForm.handleChange}
+                // value={registerForm.values.descricao}
+                // onChange={registerForm.handleChange}
               />
             </FormControl>
           </ModalBody>
