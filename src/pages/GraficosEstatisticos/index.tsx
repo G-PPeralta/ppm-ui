@@ -1,11 +1,14 @@
 // import { useEffect, useState } from "react";
 import { useRef, useState } from "react";
 // import { CSVLink } from "react-csv";
-import { AiFillPrinter } from "react-icons/ai";
+// import { AiFillPrinter } from "react-icons/ai";
 // import { FaFileCsv } from "react-icons/fa";
+import { FaFilePdf } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
-import ReactToPrint from "react-to-print";
+// @ts-ignore
+import Pdf from "react-to-pdf";
 
+// import ReactToPrint from "react-to-print";
 import {
   Box,
   Button,
@@ -14,10 +17,10 @@ import {
   FormLabel,
   Input,
   Select,
-  // Stack,
   Text,
 } from "@chakra-ui/react";
 // import { Ring } from "@uiball/loaders";
+import moment from "moment";
 
 import Sidebar from "components/SideBar";
 
@@ -46,35 +49,32 @@ export function GráficosEstatisticos() {
     { name: "Relatório para a CIP", value: "5" },
   ];
 
-  // function Props() {
-  //   return (
-  //     <Flex>
-  //       <CSVLink data={graphics}>
-  //         {/* // trigger={() => ( */}
-  //         <Button
-  //           // width={"77px"}
-  //           height={"23px"}
-  //           variant="ghost"
-  //           fontSize={"18px"}
-  //           fontWeight={"700"}
-  //           color={"#0047BB"}
-  //           rightIcon={<FaFileCsv />}
-  //           _hover={{
-  //             background: "white",
-  //             color: "#0047BB",
-  //             transition: "all 0.4s",
-  //           }}
-  //           disabled={graphic == "0" || graphic == ""}
-  //         >
-  //           Exportar
-  //         </Button>
-  //       </CSVLink>
-  //       {/* )} */}
-  //       {/* // content={() => componentRef.current}
-  //       // /> */}
-  //     </Flex>
-  //   );
-  // }
+  // console.log(graphics[0].name);
+
+  const x = (prop: any) => {
+    if (prop === "1") {
+      return `historico_de_duracoes_${moment().format("DDMMYYYY_hhmmss")}`;
+    }
+    if (prop === "2") {
+      return `relatorio_de_cada_intervencao_${moment().format(
+        "DDMMYYYY_hhmmss"
+      )}`;
+    }
+    if (prop === "3") {
+      return `relatorio_tempo_npt_por_periodo_spt_${moment().format(
+        "DDMMYYYY_hhmmss"
+      )}`;
+    }
+    if (prop === "4") {
+      return `relatorio_para_cada_spt${moment().format("DDMMYYYY_hhmmss")}`;
+    }
+    if (prop === "5") {
+      return `relatorio_para_a_cip_${moment().format("DDMMYYYY_hhmmss")}`;
+    }
+    return `grafico_${moment().format("DDMMYYYY_hhmmss")}`;
+  };
+
+  // console.log(typeof graphic);
 
   function handleGraphicButton(graphic: string) {
     return (
@@ -142,16 +142,18 @@ export function GráficosEstatisticos() {
                     </FormControl>
                   </Flex>
                   <Flex>
-                    <ReactToPrint
-                      trigger={() => (
+                    <Pdf targetRef={componentRef.current} filename={x(graphic)}>
+                      {/* @ts-ignore */}
+                      {({ toPdf }) => (
                         <Button
                           // width={"77px"}
+                          onClick={toPdf}
                           height={"23px"}
                           variant="ghost"
                           fontSize={"18px"}
                           fontWeight={"700"}
                           color={"#0047BB"}
-                          rightIcon={<AiFillPrinter />}
+                          rightIcon={<FaFilePdf />}
                           _hover={{
                             background: "white",
                             color: "#0047BB",
@@ -162,8 +164,7 @@ export function GráficosEstatisticos() {
                           Exportar
                         </Button>
                       )}
-                      content={() => componentRef.current}
-                    />
+                    </Pdf>
                   </Flex>
                 </Flex>
                 <Flex flexDir={"column"} gap={6}>
