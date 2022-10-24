@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 
 import { Box, Flex } from "@chakra-ui/react";
@@ -22,6 +23,7 @@ import {
   getProgressoProjeto,
 } from "services/get/DetalhamentoProjetos";
 import { getLicoesAprendidas } from "services/get/LicoesAprendidas";
+import { getProjeto } from "services/get/Projetos";
 
 import BotoesModais from "./components/BotoesModais";
 import CardInfoProjeto from "./components/CardInfoProjeto";
@@ -74,6 +76,8 @@ function DetalhamentoProjeto() {
   const [progresso, setProgresso] = useState([] as ProjetoProgresso[]);
   const [render, setRender] = useState(false);
   const [data, setData] = useState<any[]>([]);
+  const [project, setProject] = useState<any[]>([]);
+  const [refresh, setRefresh] = useState(false);
 
   const getData = async () => {
     const priorizacao = await getCurvaSInfos(id);
@@ -84,7 +88,16 @@ function DetalhamentoProjeto() {
 
   useEffect(() => {
     getData();
+    getProject();
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      getData();
+      getProject();
+      setRender(!render);
+    }, 3000);
+  }, [refresh]);
 
   const handleGetInfoProjetos = async () => {
     if (id) {
@@ -138,6 +151,18 @@ function DetalhamentoProjeto() {
     // handleGetLicoes();
   }, [render]);
 
+  async function getProject() {
+    try {
+      if (id) {
+        const { data } = await getProjeto(+id);
+        if (data) {
+          setProject(data);
+        }
+      }
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  }
   return (
     <>
       <Sidebar>
@@ -178,6 +203,9 @@ function DetalhamentoProjeto() {
                 callBack={handleGetLicoes}
                 infoProjeto={infoProjeto}
                 setRender={() => setRender(true)}
+                projeto={project[0]}
+                refresh={refresh}
+                setRefresh={setRefresh}
               />
             </Flex>
 
