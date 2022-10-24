@@ -236,6 +236,9 @@ export function Fornecedores() {
                       </Text>
                     </FormLabel>
                     <Select
+                      fontSize={"14px"}
+                      fontFamily={"Mulish"}
+                      fontWeight={"400"}
                       mt={"-9px"}
                       placeholder="Selecione"
                       id="projeto"
@@ -260,7 +263,7 @@ export function Fornecedores() {
                     <FormLabel
                       fontWeight={"700"}
                       fontSize={"12px"}
-                      color={"#A7A7A7"}
+                      // color={"#A7A7A7"}
                       htmlFor="projeto"
                     >
                       <Text
@@ -272,6 +275,9 @@ export function Fornecedores() {
                       </Text>
                     </FormLabel>
                     <Select
+                      fontSize={"14px"}
+                      fontFamily={"Mulish"}
+                      fontWeight={"400"}
                       mt={"-9px"}
                       placeholder="Selecione"
                       id="projeto"
