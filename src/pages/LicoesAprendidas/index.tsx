@@ -275,7 +275,7 @@ export function LicoesAprendidasProjetos() {
                   fontSize={"18px"}
                   color={"#0239C3"}
                   variant="ghost"
-                  colorScheme="messenger"
+                  // colorScheme="messenger"
                   rightIcon={<FaFileCsv />}
                   // onClick={print}
                 >
