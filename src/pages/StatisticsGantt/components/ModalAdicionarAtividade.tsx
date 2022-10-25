@@ -11,14 +11,18 @@ import {
   ModalCloseButton,
   Button,
   useDisclosure,
+  Text,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
-import DatePickerGenerico from "components/DatePickerGenerico";
+// import DatePickerGenerico from "components/DatePickerGenerico";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
+import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
+import { formatDate } from "utils/formatDate";
 import { handleCancelar } from "utils/handleCadastro";
 
 import { useAdicionarOperacao } from "hooks/useAdicionarOperacao";
@@ -44,6 +48,7 @@ function ModalAdicionarAtividade({
   );
 
   const [dataFinalGantt, setDataFinalGantt] = useState<any>();
+  const [dataFinalAtividade, setDataFinalAtividade] = useState<any>();
 
   const optionsOperacoesMock = [
     {
@@ -71,17 +76,36 @@ function ModalAdicionarAtividade({
     setDataFinalGantt(ultimaData);
   };
 
+  const handleDataFim = () => {
+    const dataInicio = new Date(registerForm.values.data_inicio);
+    const duracaoEmHoras = registerForm.values.duracao;
+    const dataFinal = new Date(dataInicio.getTime() + duracaoEmHoras * 3600000);
+    setDataFinalAtividade(dataFinal);
+  };
+
   useEffect(() => {
     handleDataInicio();
     registerForm.setFieldValue("id_sonda", projeto.id_sonda);
     registerForm.setFieldValue("id_poco", projeto.id_poco);
+    registerForm.setFieldValue("duracao", 0);
   }, []);
+
+  useEffect(() => {
+    handleDataFim();
+  }, [registerForm.values.duracao]);
 
   useEffect(() => {
     registerForm.setFieldValue("data_inicio", new Date(dataFinalGantt));
   }, [dataFinalGantt]);
 
+  useEffect(() => {
+    if (registerForm.values.data_inicio && registerForm.values.duracao) {
+      registerForm.setFieldValue("data_fim", new Date(dataFinalAtividade));
+    }
+  }, [dataFinalAtividade]);
+
   console.log("registerForm", registerForm.values);
+  // console.log("dataFinalAtividade", dataFinalAtividade);
 
   return (
     <>
@@ -144,29 +168,74 @@ function ModalAdicionarAtividade({
                   <Flex gap={4} w={"70%"}>
                     <InputNumericoGenerico
                       registerForm={registerForm}
-                      propName={"hrs_reais"}
+                      propName={"duracao"}
                       nomeInput={"DURAÇÃO"}
                       tipo={"hora"}
                       stepper={false}
+                      limite={999}
                     />
                     {
-                      <DatePickerGenerico
-                        nomeLabel={"DATA INÍCIO"}
-                        registerForm={registerForm}
-                        propName={"data_inicio"}
-                        data={registerForm.values.data_inicio}
-                        selecionaHorario={true}
-                        isDisabled={true}
-                      />
+                      <Flex flex={1}>
+                        <Flex direction={"column"}>
+                          <Flex gap={1}>
+                            <RequiredField />
+                            <Text
+                              fontWeight={"bold"}
+                              fontSize={"12px"}
+                              color={"#949494"}
+                            >
+                              DATA INÍCIO
+                            </Text>
+                          </Flex>
+                          <Button
+                            isDisabled={true}
+                            h={"56px"}
+                            variant="outline"
+                            px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
+                            minW={useBreakpointValue({
+                              base: "180px",
+                              sm: "180px",
+                              md: "220px",
+                            })}
+                            w={"100%"}
+                          >
+                            {registerForm.values.data_inicio
+                              ? formatDate(registerForm.values.data_inicio)
+                              : "Data Início"}
+                          </Button>
+                        </Flex>
+                      </Flex>
                     }
-                    <DatePickerGenerico
-                      nomeLabel={"DATA FIM"}
-                      registerForm={registerForm}
-                      propName={"data_fim"}
-                      data={registerForm.values.data_fim}
-                      selecionaHorario={true}
-                      isDisabled={true}
-                    />
+                    <Flex flex={1}>
+                      <Flex direction={"column"}>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            DATA FIM
+                          </Text>
+                        </Flex>
+                        <Button
+                          isDisabled={true}
+                          h={"56px"}
+                          variant="outline"
+                          px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
+                          minW={useBreakpointValue({
+                            base: "180px",
+                            sm: "180px",
+                            md: "220px",
+                          })}
+                          w={"100%"}
+                        >
+                          {registerForm.values.data_fim
+                            ? formatDate(registerForm.values.data_fim)
+                            : "Data Fim"}
+                        </Button>
+                      </Flex>
+                    </Flex>
                   </Flex>
                 </Flex>
               </Flex>
