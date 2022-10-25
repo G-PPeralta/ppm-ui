@@ -1,7 +1,7 @@
 // import { IoIosArrowBack } from "react-icons/io";
 import {
   MdArrowForwardIos,
-  MdOutlineArrowBackIosNew,
+  // MdOutlineArrowBackIosNew,
   MdModeEdit,
 } from "react-icons/md";
 
@@ -22,7 +22,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 
-import { handleCancelar } from "utils/handleCadastro";
+// import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
@@ -69,6 +69,7 @@ function ModalPriorizacao(infosRankings: TableProps) {
             fontSize={"14px"}
             fontWeight={"700"}
             h={"48px"}
+            // ml={-2}
           >
             {`Priorização ${infosRankings.nomeRanking}`}
           </ModalHeader>
@@ -90,38 +91,25 @@ function ModalPriorizacao(infosRankings: TableProps) {
                   >
                     <Flex align={"flex-end"} alignSelf={"start"}>
                       <Text>
-                        <Button
-                          aria-label=""
-                          backgroundColor={"white"}
-                          color={"#2D2926"}
-                          onClick={() => handleCancelar(registerForm, onClose)}
-                          _hover={{
-                            background: "white",
-                            transition: "all 0.4s",
-                            color: "origem.500",
-                          }}
+                        <Text
+                          // aria-label=""
+                          // backgroundColor={"white"}
+                          // color={"#2D2926"}
+                          // onClick={() => handleCancelar(registerForm, onClose)}
+                          // _hover={{
+                          //   background: "white",
+                          //   transition: "all 0.4s",
+                          //   color: "origem.500",
+                          // }}
                           fontSize={"24px"}
                           fontWeight={"700"}
                           fontFamily={"Mulish"}
                           textAlign={"start"}
                           mt={-2}
+                          ml={"18px"}
                         >
-                          <Icon
-                            _hover={{
-                              background: "white",
-                              transition: "all 0.4s",
-                              color: "origem.500",
-                            }}
-                            as={MdOutlineArrowBackIosNew}
-                            h={"30px"}
-                            w={"22px"}
-                            fontSize="13px"
-                            fontWeight={"none"}
-                            mr={3}
-                            color="#2D2926"
-                          />{" "}
                           Priorização
-                        </Button>
+                        </Text>
                       </Text>
                     </Flex>
 
