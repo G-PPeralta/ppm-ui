@@ -9,11 +9,12 @@ export async function getOperacoes(): Promise<{
   return { data, status };
 }
 
-export async function getGraficoHistorico(): Promise<{
+export async function getGraficoHistorico(params?: any): Promise<{
   data: any[];
   status: number;
 }> {
-  return api.get("graficos/historico", token());
+  const { headers } = token();
+  return api.get("graficos/historico", { params, headers });
 }
 
 export async function getGraficoPorCadaIntervencao(): Promise<{

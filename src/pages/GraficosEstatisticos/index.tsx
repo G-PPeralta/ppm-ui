@@ -32,9 +32,11 @@ import { GraficoPorDuracao } from "./components/PorDuracao";
 
 export function GráficosEstatisticos() {
   const [graphic, setGraphic] = useState("0");
+  const [init, setInit] = useState("0");
   const [loading, setLoading] = useState(true);
-
-  let initialValue = "0";
+  const [de, setDe] = useState<string>("");
+  const [ate, setAte] = useState<string>("");
+  const [refresh, setRefresh] = useState(false);
 
   interface TypeProps {
     name: string;
@@ -48,8 +50,6 @@ export function GráficosEstatisticos() {
     { name: "Relatório para cada SPT", value: "4" },
     { name: "Relatório para a CIP", value: "5" },
   ];
-
-  // console.log(graphics[0].name);
 
   const x = (prop: any) => {
     if (prop === "1") {
@@ -74,12 +74,12 @@ export function GráficosEstatisticos() {
     return `grafico_${moment().format("DDMMYYYY_hhmmss")}`;
   };
 
-  // console.log(typeof graphic);
-
   function handleGraphicButton(graphic: string) {
     return (
       <>
-        {graphic == "1" && <GraficoPorDuracao />}
+        {graphic == "1" && (
+          <GraficoPorDuracao de={de} ate={ate} refresh={refresh} />
+        )}
         {graphic == "2" && <GraficoPorCadaIntervencao />}
         {graphic == "3" && <GraficoNPTPorPeriodoSPT />}
         {graphic == "4" && <GraficoSPT />}
@@ -91,7 +91,8 @@ export function GráficosEstatisticos() {
   const componentRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
-    setGraphic(initialValue);
+    setGraphic(init);
+    setRefresh(!refresh);
     setLoading(false);
   };
 
@@ -196,9 +197,7 @@ export function GráficosEstatisticos() {
                           height={"56px"}
                           borderRadius={"8px"}
                           placeholder="Tipo de gráfico"
-                          onChange={(e) => {
-                            initialValue = e.target.value;
-                          }}
+                          onChange={(event) => setInit(event.target.value)}
                         >
                           {graphics &&
                             graphics.map((reportType) => (
@@ -231,6 +230,7 @@ export function GráficosEstatisticos() {
                           height={"56px"}
                           borderRadius={"8px"}
                           type={"date"}
+                          onChange={(event) => setDe(event.target.value)}
                           max="9999-12-31"
                           maxLength={1}
                         />
@@ -259,6 +259,8 @@ export function GráficosEstatisticos() {
                           height={"56px"}
                           borderRadius={"8px"}
                           type={"date"}
+                          pattern={"d{4}-d{2}-d{2}"}
+                          onChange={(event) => setAte(event.target.value)}
                           max="9999-12-31"
                           maxLength={1}
                         />
