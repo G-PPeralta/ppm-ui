@@ -18,7 +18,7 @@ import {
   ModalFooter,
   Button,
   Textarea,
-  Text,
+  // Text,
 } from "@chakra-ui/react";
 import { LicoesAprendidas } from "interfaces/Services";
 
@@ -109,7 +109,7 @@ function EditModal({
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            Editar lições aprendidas
+            Editar Lições aprendidas
           </ModalHeader>
 
           <ModalCloseButton color={"white"} />
@@ -195,19 +195,20 @@ function EditModal({
               <Button
                 // background="origem.300"
                 variant="primary"
-                color="#F40606"
+                color="red.500"
                 _hover={{
-                  background: "#F40606",
+                  background: "red.500",
                   transition: "all 0.4s",
                   color: "white",
                 }}
                 onClick={closeModal}
                 width={"208px"}
                 height={"56px"}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
               >
-                <Text fontSize={"18px"} fontWeight={"700"}>
-                  Cancelar{" "}
-                </Text>
+                Cancelar{" "}
               </Button>
               <Button
                 background="origem.500"
@@ -229,10 +230,11 @@ function EditModal({
                 }}
                 width={"208px"}
                 height={"56px"}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
               >
-                <Text fontSize={"18px"} fontWeight={"700"}>
-                  Salvar{" "}
-                </Text>
+                Salvar{" "}
               </Button>
             </Flex>
           </ModalFooter>
