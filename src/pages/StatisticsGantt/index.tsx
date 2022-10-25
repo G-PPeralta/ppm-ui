@@ -19,17 +19,12 @@ import ModalCadastroCronograma from "pages/Statistics/components/ModalCadastroCr
 
 import Sidebar from "components/SideBar";
 
-// import { useToast } from "contexts/Toast";
-
 import { useEditarOperacao } from "hooks/useEditarOperacao";
 
 import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
 
-// import { patchOperacoesEstatisticas } from "services/update/OperacoesEstatisticas";
-
 import ModalCadastroOperacao from "../Statistics/components/ModalCadastroOperacao";
 import { Gantt } from "./components/Gantt";
-// import ModalAdicionarOperacao from "./components/ModalAdicionarOperacao";
 import ModalEditarOperacao from "./components/ModalEditarOperacao";
 
 function StatisticsGantt() {
@@ -39,21 +34,16 @@ function StatisticsGantt() {
   const [editOp, setEditOp] = useState({});
   const [projeto, setProjeto] = useState({
     sonda: "",
-    id_sonda: null,
+    id_sonda: 0,
     poco: "",
-    id_poco: null,
+    id_poco: 0,
   });
   const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
-  const {
-    registerForm,
-    loading,
-    // listaResponsaveis,
-    // listaAreaAtuacao,
-    onClose,
-    onOpen,
-    isOpen,
-  } = useEditarOperacao(refresh, setRefresh, projeto);
-  // const { toast } = useToast();
+  const { registerForm, loading, onClose, onOpen, isOpen } = useEditarOperacao(
+    refresh,
+    setRefresh,
+    projeto
+  );
   const toolbarOptions = ["ZoomIn", "ZoomOut"];
 
   const formatToGanttData = (data: any) => {
@@ -87,33 +77,6 @@ function StatisticsGantt() {
     });
   };
 
-  // const handleEdit = async (task: any) => {
-  //   console.log(">>>edit", task);
-  //   try {
-  //     const payload = {
-  //       // nom_usu_create: user?.nome, // TODO nome do editor?
-  //       // id_sonda: task.id_sonda,
-  //       // id_poco: task.id_poco,
-  //       id_atividade: task.TaskID, // id_atividade no update significa o id da linha
-  //       inicio_realizado: task.StartDate,
-  //       fim_realizado: task.EndDate,
-  //       inicio_planejado: task.BaselineStartDate,
-  //       fim_planejado: task.BaselineEndDate,
-  //       // hrs_reais: task.Duration,
-  //       // hrs_totais: task.BaselineDuration,
-  //       pct_real: task.Progress,
-  //       // nome_responsavel: "noe",
-  //     };
-  //     // const { status } = await patchOperacoesEstatisticas(payload);
-  //     const status = 200;
-  //     console.log(">>>>pauyload", payload);
-  //     if (status === 200 || status === 201) {
-  //       toast.success("Operação atualizada com sucesso!");
-  //     }
-  //   } catch (error) {
-  //     toast.error("Erro ao editar operação!");
-  //   }
-  // };
   const convertReq = (payload: any): StatisticsTableData[] => {
     const newData: StatisticsTableData[] = [];
     payload.forEach((s: { id_sonda: number; sonda: string; pocos: any[] }) =>
@@ -132,14 +95,12 @@ function StatisticsGantt() {
 
   const handleGetAllData = async () => {
     const { data } = await getOperacoesEstatisticas();
-    // const data = atividades;
     if (!data) return;
     const newData = convertReq(data);
 
     const _ganttData = newData.find(
       (e) => e.id_sonda === Number(sonda) && e.id_poco === Number(poco)
     );
-    // console.log(":>>>> _ganttData,", _ganttData);
     formatToGanttData(_ganttData);
   };
 
@@ -147,12 +108,7 @@ function StatisticsGantt() {
     handleGetAllData();
   }, [refresh]);
 
-  // useEffect(() => {
-  //   formatToGanttData(state.data);
-
-  //   // handleSetData();
-  //   // setLoading(false);
-  // }, [refresh]);
+  // console.log("registerForm", registerForm.values);
 
   return (
     <>
@@ -187,11 +143,6 @@ function StatisticsGantt() {
                 </Box>
 
                 <Flex gap={2} flex={2} justify={"end"} align={"end"}>
-                  {/* <ModalEditarCronograma
-                    refresh={refresh}
-                    setRefresh={setRefresh}
-                    atual={state.data}
-                  /> */}
                   <ModalCadastroOperacao
                     refresh={refresh}
                     setRefresh={setRefresh}
@@ -200,20 +151,10 @@ function StatisticsGantt() {
                     refresh={refresh}
                     setRefresh={setRefresh}
                   />
-                  {/* <ModalAdicionarOperacao
-                    setRefresh={setRefresh}
-                    refresh={refresh}
-                    // atividades={atividades}
-                    projeto={projeto}
-                  /> */}
                   <ModalEditarOperacao
                     setRefresh={setRefresh}
                     refresh={refresh}
-                    // atividades={atividades}
                     editOp={editOp}
-                    // setEditOp={setEditOp}
-                    // listaResponsaveis={listaResponsaveis}
-                    // listaAreaAtuacao={listaAreaAtuacao}
                     isOpen={isOpen}
                     onClose={onClose}
                     registerForm={registerForm}
