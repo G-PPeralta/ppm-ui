@@ -313,6 +313,7 @@ function BotaoListadeTarefas() {
                       width={"100px"}
                       height={"56px"}
                       fontWeight={"700"}
+                      fontFamily={"Mulish"}
                       fontSize="18px"
                       alignSelf={"end"}
                     >
@@ -340,16 +341,17 @@ function BotaoListadeTarefas() {
                       // float={"right"}
                       onClick={() => setIsModalOpen(true)}
                       _hover={{
-                        background: "origem.300",
+                        background: "origem.600",
                         transition: "all 0.4s",
                         color: "white",
                       }}
                       // width={"117px"}
                       height={"56px"}
+                      fontWeight={"700"}
+                      fontSize="18px"
+                      borderRadius={"8px"}
                     >
-                      <Text fontWeight={"700"} fontSize="18px">
-                        Adicionar Tarefa
-                      </Text>
+                      Adicionar Tarefa
                     </Button>
                     <Flex alignSelf={"end"} align={"flex-start"}>
                       <Button

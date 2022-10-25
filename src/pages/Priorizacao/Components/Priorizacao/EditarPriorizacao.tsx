@@ -63,6 +63,7 @@ function EditarPriorizacao(infosRanking: TableProps) {
         fontSize={"18px"}
         fontWeight={"700"}
         borderRadius={"8px"}
+        fontFamily={"Mulish"}
       >
         <Text>Configuração</Text>
       </Button>

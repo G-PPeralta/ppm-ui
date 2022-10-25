@@ -10,6 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  ModalCloseButton,
   NumberInput,
   NumberInputField,
   Text,
@@ -50,7 +51,10 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
     <>
       <Button
         h={"56px"}
-        borderRadius={"10px"}
+        fontSize={"18px"}
+        fontWeight={"700"}
+        fontFamily={"Mulish"}
+        borderRadius={"8px"}
         background={"origem.500"}
         variant="primary"
         color="white"
@@ -77,9 +81,16 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
           >
             Gestão de Custos
           </ModalHeader>
+          <ModalCloseButton color={"white"} />
 
           <ModalBody mt={3}>
-            <Text fontWeight={"bold"} mb={3}>
+            <Text
+              fontSize={"18px"}
+              fontWeight={"700"}
+              fontFamily={"Mulish"}
+              mb={3}
+              color={"#2D2926"}
+            >
               LANÇAR DESPESA
             </Text>
             <Flex direction={"column"} gap={4}>

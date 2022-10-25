@@ -290,7 +290,7 @@ function LicoesAprendidasModal({
                         // float={"right"}
                         onClick={() => setOpenModalRegister(true)}
                         _hover={{
-                          background: "origem.300",
+                          background: "origem.600",
                           transition: "all 0.4s",
                           color: "white",
                         }}

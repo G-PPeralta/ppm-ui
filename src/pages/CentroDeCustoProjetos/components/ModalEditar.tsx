@@ -8,6 +8,7 @@ import {
   Input,
   Modal,
   ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -146,9 +147,16 @@ function ModalEditar({ refreshState, linhaTabela, optionsSelects }: Props) {
           >
             Gestão de Custos
           </ModalHeader>
+          <ModalCloseButton color={"white"} />
 
           <ModalBody mt={3}>
-            <Text fontWeight={"bold"} mb={3}>
+            <Text
+              fontSize={"18px"}
+              fontWeight={"700"}
+              fontFamily={"Mulish"}
+              mb={3}
+              color={"#2D2926"}
+            >
               EDITAR DESPESA
             </Text>
             <Flex direction={"column"} gap={4}>
@@ -256,19 +264,24 @@ function ModalEditar({ refreshState, linhaTabela, optionsSelects }: Props) {
             <Flex gap={2}>
               <Button
                 h={"56px"}
-                borderRadius={"10px"}
+                borderRadius={"8px"}
                 variant="ghost"
-                color="red"
+                color="red.500"
                 onClick={() => handleCancelar()}
                 _hover={{
                   background: "red.500",
                   transition: "all 0.4s",
                   color: "white",
                 }}
+                // mx={12}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
+                width={"208px"}
               >
-                <Text fontSize="16px" fontWeight={"bold"} mx={12}>
-                  Cancelar
-                </Text>
+                {/* <Text fontSize="16px" fontWeight={"bold"}> */}
+                Cancelar
+                {/* </Text> */}
               </Button>
               <BotaoAzulLargoPrimary
                 text={"Salvar"}
