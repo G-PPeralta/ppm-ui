@@ -23,7 +23,7 @@ export default function StackedBarChartGraphic({
       <BarChart data={data} className={style.chart}>
         <XAxis dataKey="key" fontSize={10} />
         {showY ? <YAxis /> : undefined}
-        <Tooltip />
+        <Tooltip isAnimationActive={false} />
         {dataEntries.map((dataEntry, index) => (
           <Bar
             key={index}
