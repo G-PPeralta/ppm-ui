@@ -41,11 +41,7 @@ export const LinkItems: Array<LinkItemProps> = [
         link: "/financeiro-projetos",
       },
       { name: "Importar Dados", icon: BiData, link: "/upload" },
-      {
-        name: "Fornecedores",
-        icon: FiActivity,
-        link: "/fornecedores",
-      },
+
       {
         name: "Lições Aprendidas",
         icon: FiActivity,
@@ -105,6 +101,11 @@ export const LinkItems: Array<LinkItemProps> = [
         name: "Configurar Prioridades",
         icon: FiSettings,
         link: "/desenvolvimento",
+      },
+      {
+        name: "Fornecedores",
+        icon: FiActivity,
+        link: "/fornecedores",
       },
     ],
   },
