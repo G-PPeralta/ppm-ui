@@ -11,9 +11,9 @@ import { patchEditarOcorrencia } from "services/update/Estatisticas";
 import { useAuth } from "./useAuth";
 
 export function useOcorrencias(
-  idOcorrencia: number,
+  idAtividade: number,
   metodo: string,
-  idAtividade?: number
+  idOcorrencia?: number
 ) {
   const { user } = useAuth();
   const { toast } = useToast();
@@ -21,6 +21,7 @@ export function useOcorrencias(
 
   const initialValues = {
     user: user?.nome,
+    id_atividade: idAtividade,
     ocorrencia: "",
     impacto: "",
     observacoes: "",
@@ -32,6 +33,7 @@ export function useOcorrencias(
     onSubmit: async (values) => {
       const newValues = {
         user: user?.nome,
+        id_atividade: idAtividade,
         ocorrencia: values.ocorrencia,
         impacto: values.impacto,
         observacoes: values.observacoes,
@@ -41,10 +43,10 @@ export function useOcorrencias(
 
       if (metodo === "patch") {
         try {
-          if (idAtividade) {
+          if (idOcorrencia) {
             const { status } = await patchEditarOcorrencia(
-              idAtividade,
               idOcorrencia,
+              idAtividade,
               newValues
             );
 
@@ -66,7 +68,7 @@ export function useOcorrencias(
       if (metodo === "post") {
         try {
           const { status } = await postCadastroNovaOcorrenciaPorAtividade(
-            idOcorrencia,
+            idAtividade,
             newValues
           );
 

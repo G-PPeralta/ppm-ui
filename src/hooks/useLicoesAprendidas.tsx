@@ -11,9 +11,9 @@ import { patchEditarLicaoAprendida } from "services/update/Estatisticas";
 import { useAuth } from "./useAuth";
 
 export function useLicoesAprendidas(
-  idLicao: number,
+  idAtividade: number,
   metodo: string,
-  idAtividade?: number
+  idLicao?: number
 ) {
   const { user } = useAuth();
   const { toast } = useToast();
@@ -21,6 +21,7 @@ export function useLicoesAprendidas(
 
   const initialValues = {
     user: user?.nome,
+    id_atividade: idAtividade,
     licao_aprendida: "",
     data: "",
     acoes_e_recomendacoes: "",
@@ -32,6 +33,7 @@ export function useLicoesAprendidas(
     onSubmit: async (values) => {
       const newValues = {
         user: user?.nome,
+        id_atividade: idAtividade,
         licao_aprendida: values.licao_aprendida,
         data: values.data,
         acoes_e_recomendacoes: values.acoes_e_recomendacoes,
@@ -41,10 +43,10 @@ export function useLicoesAprendidas(
 
       if (metodo === "patch") {
         try {
-          if (idAtividade) {
+          if (idLicao) {
             const { status } = await patchEditarLicaoAprendida(
-              idAtividade,
               idLicao,
+              idAtividade,
               newValues
             );
 
@@ -66,7 +68,6 @@ export function useLicoesAprendidas(
       if (metodo === "post") {
         try {
           const { status } = await postCadastroNovaLicaoAprendidaPorAtividade(
-            idLicao,
             newValues
           );
 

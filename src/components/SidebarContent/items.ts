@@ -65,6 +65,9 @@ const childrenEstatisticas = [
     link: "/graficos",
   },
   { name: "Look Ahead", icon: AiOutlineBarChart, link: "/lookahead" },
+];
+
+const childrenRelatoriosPorProjetos = [
   { name: "Relatórios", icon: FiFile, link: "/reports" },
 ];
 
@@ -111,6 +114,12 @@ export const LinkItems: Array<LinkItemProps> = [
     name: "Lixeira",
     icon: FiTrash2,
     children: childrenLixeira,
+  },
+
+  {
+    name: "Relatórios por Projetos",
+    icon: FiFile,
+    children: childrenRelatoriosPorProjetos,
   },
 
   {

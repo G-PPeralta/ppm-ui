@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BsPlus } from "react-icons/bs";
 
 import {
@@ -24,14 +23,20 @@ import { handleCancelar } from "utils/handleCadastro";
 
 import { useLicoesAprendidas } from "hooks/useLicoesAprendidas";
 
-interface Props {
-  id: number;
+interface RefreshState {
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ModalAdicionarLicaoAprendida({ id }: Props) {
+interface Props {
+  id: number;
+  refreshState: RefreshState;
+}
+
+function ModalAdicionarLicaoAprendida({ id, refreshState }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useLicoesAprendidas(id, "post");
-  const [refresh, setRefresh] = useState<boolean>(false);
+  const { refresh, setRefresh } = refreshState;
 
   return (
     <>
