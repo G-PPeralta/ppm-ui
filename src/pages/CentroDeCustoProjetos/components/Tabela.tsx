@@ -73,10 +73,9 @@ function Tabela({ data, refreshState, idProjeto, optionsSelects }: Props) {
     "Ações",
   ];
 
-  const valorTotalRealizado = data.reduce(
-    (acc: number, curr: any) => acc + curr.valor,
-    0
-  );
+  const valorTotalRealizado = data
+    ? data.reduce((acc: number, curr: any) => acc + curr.valor, 0)
+    : 0;
 
   const footer = [
     "Total",
@@ -205,7 +204,7 @@ function Tabela({ data, refreshState, idProjeto, optionsSelects }: Props) {
           </Table>
         </TableContainer>
       </Flex>
-      <PaginacaoTabela data={data} fromTo={fromTo} />
+      {data ? <PaginacaoTabela data={data} fromTo={fromTo} /> : <></>}
     </Flex>
   );
 }
