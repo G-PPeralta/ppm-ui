@@ -117,6 +117,7 @@ export function LicoesAprendidasProjetos() {
       toast.error("Erro na requisição");
     }
   }
+  // console.log({ filteredLicoesAprendidas });
 
   const tableData = filteredLicoesAprendidas
     .sort((a, b) => a.id - b.id)
@@ -132,7 +133,7 @@ export function LicoesAprendidasProjetos() {
         </Td>
 
         <Td textAlign={"center"} fontWeight={"semibold"}>
-          {lessons.txt_licao_aprendida}
+          {lessons.licao_aprendida}
         </Td>
         <Td
           fontWeight={"semibold"}
@@ -140,12 +141,10 @@ export function LicoesAprendidasProjetos() {
           width="506px"
           height={"36px"}
         >
-          {lessons.txt_acao}
+          {lessons.acao_e_recomendacao}
         </Td>
         <Td fontWeight={"semibold"} textAlign={"center"}>
-          {new Date(lessons.dat_usu_create)
-            .toLocaleString("pt-BR")
-            .substring(0, 10)}
+          {new Date(lessons.data).toLocaleString("pt-BR").substring(0, 10)}
         </Td>
         <Td fontWeight={"semibold"} textAlign={"center"}>
           <IconButton
@@ -181,9 +180,9 @@ export function LicoesAprendidasProjetos() {
 
   const headers = [
     { label: "Projeto", key: "projeto" },
-    { label: "Lições Aprendidas", key: "txt_licao_aprendida" },
-    { label: "Ações e Recomendações", key: "txt_acao" },
-    { label: "Data", key: "dat_usu_create" },
+    { label: "Lições Aprendidas", key: "licao_aprendida" },
+    { label: "Ações e Recomendações", key: "acao_e_recomendacao" },
+    { label: "Data", key: "data" },
   ];
 
   // const rowsPerPage = 8;
@@ -266,7 +265,7 @@ export function LicoesAprendidasProjetos() {
                   projeto: projetos.find(
                     (project) => project.id == lic.id_projeto
                   )?.nomeProjeto,
-                  data: formatDate(lic.dat_usu_create),
+                  data: formatDate(lic.data),
                 }))}
                 headers={headers}
               >

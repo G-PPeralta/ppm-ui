@@ -80,7 +80,7 @@ function LicoesAprendidasModal({
   // console.log(
   //   licoes.filter(
   //     (lic: any) =>
-  //       lic.id_categoria == categoriaId || lic.dat_usu_create.includes(data)
+  //       lic.id_categoria == categoriaId || lic.data.includes(data)
   //   )
   // );
 
@@ -99,10 +99,8 @@ function LicoesAprendidasModal({
     if (search) {
       const filtered = licoes.filter(
         (lic: any) =>
-          lic.txt_licao_aprendida
-            .toUpperCase()
-            .includes(search.toUpperCase()) ||
-          lic.txt_acao.toUpperCase().includes(search.toUpperCase())
+          lic.licao_aprendida.toUpperCase().includes(search.toUpperCase()) ||
+          lic.acao_e_recomendacao.toUpperCase().includes(search.toUpperCase())
       );
 
       // filtered.length == 0 &&
@@ -111,9 +109,7 @@ function LicoesAprendidasModal({
     }
 
     if (data) {
-      const filtered = licoes.filter((lic: any) =>
-        lic.dat_usu_create.includes(data)
-      );
+      const filtered = licoes.filter((lic: any) => lic.data.includes(data));
       // filtered.length == 0 &&
       //   toast.error("Nenhum dado encontrado com o presente filtro de data");
       return setFilteredTable(filtered);

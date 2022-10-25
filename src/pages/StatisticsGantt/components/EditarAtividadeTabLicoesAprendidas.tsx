@@ -132,7 +132,10 @@ function EditarAtividadeTabLicoesAprendidas({
           registerForm={registerForm}
           filtrarData={true}
         />
-        <ModalAdicionarLicaoAprendida id={registerForm.values.id_atividade} />
+        <ModalAdicionarLicaoAprendida
+          id={registerForm.values.id_atividade}
+          refreshState={refreshState}
+        />
       </Flex>
       <TabelaGenerica
         maxHeight={"352px"}

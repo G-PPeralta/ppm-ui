@@ -121,7 +121,7 @@ export function useCadastroIntervencao() {
     nom_usu_create: user?.nome,
     erroDataIntervencao: false,
     poco_id: "",
-    campo_id: 0,
+    // campo_id: 0,
     id_campanha: 0,
     dat_ini_prev: "",
     projeto_tipo_id: 0,
@@ -152,7 +152,7 @@ export function useCadastroIntervencao() {
       const newValues: any = {
         nom_usu_create: user?.nome,
         poco_id: values.poco_id,
-        campo_id: values.campo_id,
+        // campo_id: values.campo_id,
         id_campanha: values.id_campanha,
         dat_ini_prev: values.dat_ini_prev,
         projeto_tipo_id: values.projeto_tipo_id,

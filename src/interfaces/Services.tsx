@@ -401,17 +401,18 @@ export interface LicoesAprendidas {
   id: number;
   id_projeto: number;
   id_categoria: number;
-  dat_usu_create: string;
-  txt_licao_aprendida: string;
-  txt_acao: string;
-  nom_usu_create: string;
+  data: string;
+  licao_aprendida: string;
+  acao_e_recomendacao: string;
+  user: string;
 }
 
 export interface LicoesAprendidasPayload {
-  id_projeto: number;
-  dat_usu_create?: string;
-  txt_licao_aprendida: string;
-  txt_acao: string;
+  id_atividade: number;
+  data?: Date;
+  licao_aprendida: string;
+  acoes_e_recomendacoes: string;
+  user: string | undefined;
 }
 
 export interface Categorias {

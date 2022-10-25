@@ -32,7 +32,7 @@ function CardInfoProjeto({
   ];
   const innerWidth = window.innerWidth;
 
-  function formatDate(date: Date) {
+  function formatDate(date: any) {
     const formated = date.toString().substring(0, 10).split("-");
     return `${formated[2]}/${formated[1]}/${formated[0]}`;
   }
@@ -69,7 +69,7 @@ function CardInfoProjeto({
               <Box display={"flex"}>
                 <Text fontWeight={"600"}>Nº:</Text>
                 <Text ml={2} color={"origem.500"} fontWeight={"600"}>
-                  {infoProjeto.numero}
+                  {infoProjeto.id}
                 </Text>
               </Box>
             </Flex>
@@ -139,7 +139,7 @@ function CardInfoProjeto({
                 fontWeight={"600"}
                 fontSize={14}
               >
-                {infoProjeto.demanda}
+                {infoProjeto.solicitante}
               </Text>
             </Flex>
           </Box>
@@ -192,7 +192,7 @@ function CardInfoProjeto({
                 fontWeight={"600"}
                 fontSize={14}
               >
-                5 dias
+                {infoProjeto.atraso} dias
               </Text>
             </Flex>
 
@@ -206,7 +206,9 @@ function CardInfoProjeto({
                 fontWeight={"600"}
                 fontSize={14}
               >
-                12/08/2022
+                {infoProjeto.dat_usu_update
+                  ? formatDate(infoProjeto.dat_usu_update)
+                  : null}
               </Text>
             </Flex>
           </Box>
