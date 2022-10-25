@@ -196,8 +196,12 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                     transition: "all 0.4s",
                     color: "white",
                   }}
-                  w={"158px"}
+                  w={"208px"}
                   h={"56px"}
+                  borderRadius={"8px"}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   Cancelar
                 </Button>
@@ -216,6 +220,9 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                   borderRadius={"8px"}
                   w={"208px"}
                   h={"56px"}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />

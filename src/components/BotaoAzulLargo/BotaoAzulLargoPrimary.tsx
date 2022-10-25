@@ -27,6 +27,7 @@ function BotaoAzulLargoPrimary({
 }: Props) {
   return (
     <Button
+      w={"208px"}
       h={"56px"}
       borderRadius={"8px"}
       disabled={!formikForm.isValid || !formikForm.dirty}

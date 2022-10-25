@@ -23,6 +23,7 @@ function BotaoVermelhoLargoGhost({
       h={"56px"}
       variant="ghost"
       color="red.500"
+      w={"208px"}
       onClick={() => handleCancelar(formikForm, onClose)}
       _hover={{
         background: "red.500",
@@ -36,7 +37,7 @@ function BotaoVermelhoLargoGhost({
       borderRadius={"8px"}
       fontFamily={"Mulish"}
     >
-      <Text fontSize="16px" fontWeight={"bold"} mx={12}>
+      <Text fontSize="18px" fontWeight={"700"} fontFamily={"Mulish"} mx={12}>
         {text}
       </Text>
     </Button>
