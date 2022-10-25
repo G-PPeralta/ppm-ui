@@ -17,3 +17,9 @@ export interface LicaoAprendida {
   data: string;
   acao_e_recomendacao: string;
 }
+
+export interface Ocorrencia {
+  id: number;
+  nome_ocorrencia: string;
+  horas: string;
+}

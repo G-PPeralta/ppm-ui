@@ -40,3 +40,15 @@ export async function getLicoesAprendidasPorAtividade(
 
   return { data, status };
 }
+
+export async function getOcorrenciasPorAtividade(idAtividade: number): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(
+    `/ocorrencias/${idAtividade}`,
+    token()
+  );
+
+  return { data, status };
+}
