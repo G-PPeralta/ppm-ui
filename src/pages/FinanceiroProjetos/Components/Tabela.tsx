@@ -45,10 +45,10 @@ function Tabela({ data }: Props) {
     "Elemento PEP",
     "Previsto",
     "Realizado",
+    "Gap %",
     "Denominação de Objeto",
     "Mês",
     "Texto do Pedido",
-    "Gap %",
   ];
 
   const valorTotalPrevisto = data.reduce(
@@ -107,6 +107,9 @@ function Tabela({ data }: Props) {
                 <Text>{formatarParaReal(linhaTabela.totalrealizado)}</Text>
               </Td>
               <Td textAlign={"start"} fontWeight={"semibold"}>
+                <Text>{linhaTabela.gap < 1 ? 0 : linhaTabela.gap}%</Text>
+              </Td>
+              <Td textAlign={"start"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.denominacaodeobjeto}</Text>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
@@ -114,9 +117,6 @@ function Tabela({ data }: Props) {
               </Td>
               <Td textAlign={"start"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.textodopedido}</Text>
-              </Td>
-              <Td textAlign={"start"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.gap < 1 ? 0 : linhaTabela.gap}%</Text>
               </Td>
             </Tr>
           ))
