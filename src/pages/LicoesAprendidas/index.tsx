@@ -272,7 +272,7 @@ export function LicoesAprendidasProjetos() {
               >
                 <Button
                   fontWeight={"700"}
-                  fontSize={"18px"}
+                  fontSize="18px"
                   color={"#0239C3"}
                   variant="ghost"
                   // colorScheme="messenger"
