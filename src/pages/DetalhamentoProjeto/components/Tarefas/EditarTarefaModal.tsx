@@ -29,7 +29,7 @@ import {
 } from "@chakra-ui/react";
 import { format } from "date-fns";
 import { AtividadesProjeto, TarefaAtividade } from "interfaces/Services";
-import { Text } from "recharts";
+// import { Text } from "recharts";
 
 import { useAuth } from "hooks/useAuth";
 
@@ -364,10 +364,11 @@ function EditarTarefaModal({
                 onClick={closeModal}
                 width={"208px"}
                 height={"56px"}
+                fontWeight={"700"}
+                fontSize="18px"
+                fontFamily={"Mulish"}
               >
-                <Text fontWeight={"700"} fontSize="18px">
-                  Cancelar
-                </Text>
+                Cancelar
               </Button>
               <Button
                 background="origem.500"
