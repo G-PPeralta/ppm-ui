@@ -37,27 +37,20 @@ function EditarLicoesAprendidasModal({
 }: EditModalProps) {
   const { user } = useAuth();
   const [idLicao, setIdLicao] = useState(licao?.id);
-  const [licaoAprendida, setLicaoAprendida] = useState(
-    licao?.txt_licao_aprendida
-  );
-  const [acao, setAcao] = useState(licao?.txt_acao);
+  const [licaoAprendida, setLicaoAprendida] = useState(licao?.licao_aprendida);
+  const [acao, setAcao] = useState(licao?.acao_e_recomendacao);
 
   useEffect(() => {
-    setLicaoAprendida(licao.txt_licao_aprendida);
-    setAcao(licao.txt_acao);
+    setLicaoAprendida(licao.licao_aprendida);
+    setAcao(licao.acao_e_recomendacao);
     setIdLicao(licao.id);
-  }, [
-    licao.txt_licao_aprendida,
-    licao.dat_usu_create,
-    licao.txt_acao,
-    licao.id,
-  ]);
+  }, [licao.licao_aprendida, licao.data, licao.acao_e_recomendacao, licao.id]);
 
-  const camposParaEditar = ["txt_licao_aprendida", "txt_acao"];
+  const camposParaEditar = ["licao_aprendida", "acao_e_recomendacao"];
 
   const updatepayload = (campo: string) => {
-    if (campo === "txt_licao_aprendida") return licaoAprendida;
-    if (campo === "txt_acao") return acao;
+    if (campo === "licao_aprendida") return licaoAprendida;
+    if (campo === "acao_e_recomendacao") return acao;
   };
 
   const regex = /[^\w\s]/gi;

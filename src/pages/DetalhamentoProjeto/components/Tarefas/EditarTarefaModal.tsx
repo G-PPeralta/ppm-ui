@@ -75,7 +75,7 @@ function EditarTarefaModal({
     setDescricao(editTarefa.descricao_tarefa);
     setTarefaId(editTarefa.id);
   }, [
-    // editTarefa.dat_usu_create,
+    // editTarefa.data,
     novaData,
     editTarefa.nome_tarefa,
     editTarefa.id,
