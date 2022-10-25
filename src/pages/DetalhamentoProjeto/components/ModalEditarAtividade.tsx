@@ -10,8 +10,8 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  NumberInput,
-  NumberInputField,
+  // NumberInput,
+  // NumberInputField,
   useBreakpointValue,
 } from "@chakra-ui/react";
 
@@ -24,6 +24,8 @@ import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 // import PopOverRelacao from "./PopOverRelacao";
 
 // import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
+import InputNumericoGenerico from "components/InputNumericoGenerico";
+
 import DateTimePicker from "./DateTimePicker";
 
 // interface Responsavel {
@@ -200,7 +202,7 @@ function ModalEditarAtividade({
                 <Flex flex={1} direction={"column"}>
                   <Text fontWeight={"bold"}>Progresso</Text>
                   <Flex gap={5}>
-                    <Flex>
+                    {/* <Flex>
                       <NumberInput
                         max={100}
                         min={0}
@@ -213,7 +215,14 @@ function ModalEditarAtividade({
                       >
                         <NumberInputField bg={"#fff"} h={"56px"} />
                       </NumberInput>
-                    </Flex>
+                    </Flex> */}
+                    <InputNumericoGenerico
+                      registerForm={registerForm}
+                      propName={"pct_real"}
+                      nomeInput={"PORCENTAGEM CONCLUÍDA"}
+                      tipo={"porcentagem"}
+                      stepper={true}
+                    />
                   </Flex>
                 </Flex>
                 {/* <Flex
