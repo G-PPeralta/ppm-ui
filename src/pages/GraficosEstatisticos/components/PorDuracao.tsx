@@ -25,7 +25,7 @@ import {
   getGraficoHistorico,
 } from "services/get/GraficosEstatisticos";
 
-export function GraficoPorDuracao() {
+export function GraficoPorDuracao({ de, ate, refresh }: any) {
   const [listaSondas, setListaSondas] = useState<any[]>([]);
   const [operacao, setOperacao] = useState<any[]>([]);
   const [chartData, setChartData] = useState<any[]>([]);
@@ -42,12 +42,17 @@ export function GraficoPorDuracao() {
   const reqGet = async () => {
     const sondas = await getSonda();
     const operacao = await getOperacoes();
-    const historico = await getGraficoHistorico();
+    const params: any = {};
+    if (de && ate) {
+      params.de = de;
+      params.a = ate;
+    }
+    const historico = await getGraficoHistorico(params);
 
     const newData = historico.data.map((e) => ({
       ...e,
-      key: e.poco,
-      Durações: e.vlr_med,
+      key: `${e.nom_sonda}-${e.nom_poco}`,
+      Durações: e.hrs_media,
     }));
 
     const sondasSorted = sondas.data.sort((a: any, b: any) =>
@@ -59,12 +64,9 @@ export function GraficoPorDuracao() {
     setOperacao(operacao.data);
   };
 
-  // console.log(listaSondas);
-  // console.log(campos);
-
   useEffect(() => {
     reqGet();
-  }, []);
+  }, [refresh]);
 
   const componentRef = useRef<HTMLDivElement>(null);
 
