@@ -1,128 +1,26 @@
 import { useEffect, useLayoutEffect, useState } from "react";
-// import { FiPlus } from "react-icons/fi";
 
-import {
-  Box,
-  // Box,
-  // Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  // Input,
-  Select,
-  Stack,
-  Text,
-  useBreakpointValue,
-  // useColorModeValue,
-} from "@chakra-ui/react";
-// import { Ring } from "@uiball/loaders";
+import { Box, Flex, Stack, Text, useBreakpointValue } from "@chakra-ui/react";
 
 import StackedBarChart from "components/StackedBarChartGraphic";
 
-import { getSonda } from "services/get/CadastroModaisInfograficos";
-
-// import StatusIntervencao from "./StatusIntervencao";
+import { getGraficoParaCIP } from "services/get/GraficosEstatisticos";
 
 export function GraficoCIP() {
-  const [listaSondas, setListaSondas] = useState<any[]>([]);
+  const [chartData, setChartData] = useState<any[]>([]);
 
-  const dataMock2 = [
-    {
-      key: "Jan/2022",
-      Durações: 90,
-    },
-    {
-      key: "Fev/2022",
-      Durações: 80,
-    },
-    {
-      key: "Mar/2022",
-      Durações: 70,
-    },
-    {
-      key: "Abr/2022",
-      Durações: 60,
-    },
-    {
-      key: "Mai/2022",
-      Durações: 50,
-    },
-    {
-      key: "Jun/2022",
-      Durações: 40,
-    },
-    {
-      key: "Jul/2022",
-      Durações: 30,
-    },
-    {
-      key: "Ago/2022",
-      Durações: 20,
-    },
-    {
-      key: "Set/2022",
-      Durações: 90,
-    },
-    {
-      key: "Out/2022",
-      Durações: 70,
-    },
-    {
-      key: "Nov/2022",
-      Durações: 50,
-    },
-    {
-      key: "Dez/2022",
-      Durações: 100,
-    },
-  ];
-
-  const dataEntries2 = [{ name: "Durações", color: "#0047BB" }];
-
-  // const intervençoes = [
-  //   {
-  //     id: 4,
-  //     status: "Manutenção 36hrs/36%",
-  //     color: "#f4dd06",
-  //   },
-  //   {
-  //     id: 2,
-  //     status: "Recurso Origem 6hrs/6%",
-  //     color: "#0047bb",
-  //   },
-  //   {
-  //     id: 5,
-  //     status: "Recurso Cia de Serviço 8hrs/8%",
-  //     color: "#778bd7",
-  //   },
-  //   {
-  //     id: 3,
-  //     status: "Condições Climáticas 10hrs/10%",
-  //     color: "#00b050",
-  //   },
-  //   {
-  //     id: 1,
-  //     status: "Informações Técnicas 23hrs/23%",
-  //     color: "#00b0f0",
-  //   },
-  //   {
-  //     id: 6,
-  //     status: "Aguardando Outros 18hrs/18%",
-  //     color: "#7030a0",
-  //   },
-  // ];
+  const dataEntries2 = [{ name: "Taxa", color: "#0047BB" }];
 
   const reqGet = async () => {
-    const sondas = await getSonda();
+    const res = await getGraficoParaCIP();
 
-    const sondasSorted = sondas.data.sort((a: any, b: any) =>
-      a.nom_sonda.localeCompare(b.nom_sonda)
-    );
+    const newData = res.data.map((e) => ({
+      key: e.nom_poco,
+      Taxa: Number(e.taxa),
+    }));
 
-    setListaSondas(sondasSorted);
+    setChartData(newData);
   };
-
-  // console.log(listaSondas);
 
   useEffect(() => {
     reqGet();
@@ -144,33 +42,9 @@ export function GraficoCIP() {
   const [width] = useWindowSize();
   return (
     <>
-      {/* {loading && (
-          <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
-            <Ring speed={2} lineWeight={5} color="blue" size={64} />
-          </Flex>
-        )} */}
-      {/* <Stack spacing="8">
-        <Flex
-          w={"auto"}
-          align="center"
-          justify="center"
-          bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
-        >
-          <Box
-            py={{ base: "6", sm: "8" }}
-            px={{ base: "6", sm: "10" }}
-            w={"100%"}
-            bg={useBreakpointValue({ base: "transparent", sm: "white" })}
-            boxShadow={{
-              base: "none",
-              sm: useColorModeValue("md", "md-dark"),
-            }}
-            borderRadius={{ base: "none", sm: "xl" }}
-          > */}
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          // projectsForm.handleSubmit(e);
         }}
       >
         <Stack spacing="3">
@@ -181,57 +55,6 @@ export function GraficoCIP() {
             })}
             gap={4}
           >
-            <Flex gap={4}>
-              <Flex alignItems={"flex-end"}>
-                <FormControl>
-                  <FormLabel
-                    fontSize={"12px"}
-                    color={"#949494"}
-                    fontWeight={"700"}
-                    htmlFor="sonda"
-                  >
-                    SONDA
-                  </FormLabel>
-                  <Select
-                    placeholder="Sonda"
-                    // onChange={handleProjectChange}
-                    id="sonda"
-                    name="sonda"
-                    width={"208px"}
-                    height={"56px"}
-                    borderRadius={"8px"}
-                    color={"#2D2926"}
-                    fontSize={"14px"}
-                    fontWeight={"400"}
-                  >
-                    {listaSondas.map((sonda) => (
-                      <option>{sonda.nom_sonda}</option>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Flex>
-              {/* <Flex>
-                <FormControl className="toBottom">
-                  <Button
-                    h={"56px"}
-                    background={"#0047BB"}
-                    border={"2.3px solid"}
-                    color={"white"}
-                    variant="primary"
-                    _hover={{
-                      background: "white",
-                      color: "#0047BB",
-                      transition: "all 0.4s",
-                    }}
-                    rightIcon={<FiPlus />}
-                    fontSize={"18px"}
-                    fontWeight={"700"}
-                  >
-                    Gerar
-                  </Button>
-                </FormControl>
-              </Flex> */}
-            </Flex>
             <Flex direction={"column"}>
               <Flex>
                 <Text fontSize={"24px"} fontWeight={"700"} color={"#2D2926"}>
@@ -239,46 +62,6 @@ export function GraficoCIP() {
                 </Text>
               </Flex>
             </Flex>
-            {/* <Flex direction={"column"}>
-              <Flex mb={"-20px"}>
-                <Text
-                  mt={"20px"}
-                  fontSize={"24px"}
-                  fontWeight={"700"}
-                  color={"#2D2926"}
-                >
-                  Relatório de cada intervenção
-                </Text>
-              </Flex>
-              <Flex direction={"row"} gap={2}>
-                <Text
-                  mt={"20px"}
-                  fontSize={"20px"}
-                  fontWeight={"700"}
-                  color={"#0047BB"}
-                >
-                  TEMPO TOTAL AGUARDADO:
-                </Text>
-                <Text
-                  mt={"20px"}
-                  fontSize={"20px"}
-                  fontWeight={"700"}
-                  color={"#2D2926"}
-                >
-                  100 HORAS
-                </Text>
-              </Flex>
-
-              <Flex gap={2} wrap={"wrap"} flex={1}>
-                {intervençoes.map((status, index) => (
-                  <StatusIntervencao
-                    key={index}
-                    status={status.status}
-                    color={status.color}
-                  />
-                ))}
-              </Flex>
-            </Flex> */}
             <Box
               overflowX={"scroll"}
               w={innerWidth > 428 ? width * 0.7 : width * 0.85}
@@ -290,7 +73,7 @@ export function GraficoCIP() {
                   showY={true}
                   sizeW={1000}
                   sizeH={352}
-                  data={dataMock2}
+                  data={chartData}
                   dataEntries={dataEntries2}
                   barW={56}
                 />
@@ -299,9 +82,6 @@ export function GraficoCIP() {
           </Flex>
         </Stack>
       </form>
-      {/* </Box>
-        </Flex>
-      </Stack> */}
     </>
   );
 }
