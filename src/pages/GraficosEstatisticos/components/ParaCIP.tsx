@@ -28,51 +28,51 @@ export function GraficoCIP() {
 
   const dataMock2 = [
     {
-      month: "Jan/2022",
+      key: "Jan/2022",
       Durações: 90,
     },
     {
-      month: "Fev/2022",
+      key: "Fev/2022",
       Durações: 80,
     },
     {
-      month: "Mar/2022",
+      key: "Mar/2022",
       Durações: 70,
     },
     {
-      month: "Abr/2022",
+      key: "Abr/2022",
       Durações: 60,
     },
     {
-      month: "Mai/2022",
+      key: "Mai/2022",
       Durações: 50,
     },
     {
-      month: "Jun/2022",
+      key: "Jun/2022",
       Durações: 40,
     },
     {
-      month: "Jul/2022",
+      key: "Jul/2022",
       Durações: 30,
     },
     {
-      month: "Ago/2022",
+      key: "Ago/2022",
       Durações: 20,
     },
     {
-      month: "Set/2022",
+      key: "Set/2022",
       Durações: 90,
     },
     {
-      month: "Out/2022",
+      key: "Out/2022",
       Durações: 70,
     },
     {
-      month: "Nov/2022",
+      key: "Nov/2022",
       Durações: 50,
     },
     {
-      month: "Dez/2022",
+      key: "Dez/2022",
       Durações: 100,
     },
   ];
@@ -181,104 +181,7 @@ export function GraficoCIP() {
             })}
             gap={4}
           >
-            {/* <Flex justifyContent={"space-between"}>
-                    <Flex align={"flex-end"}>
-                      <FormControl mt={"-50px"}>
-                        <FormLabel>
-                          <Text
-                            mb={"1px"}
-                            fontSize={"24px"}
-                            color={"#2D2926"}
-                            fontWeight={"700"}
-                            fontFamily={"Mulish"}
-                          >
-                            Gráficos estatísticos
-                          </Text>
-                        </FormLabel>
-                      </FormControl>
-                    </Flex>
-                    <Prop />
-                  </Flex> */}
-            {/* <Flex direction={"row"} mb={"10px"} gap={3}> */}
-            {/* <Flex alignItems={"flex-end"}>
-                      <FormControl>
-                        <FormLabel
-                          mt={"-20px"}
-                          fontSize={"12px"}
-                          color={"#949494"}
-                          fontWeight={"700"}
-                          htmlFor="gera-grafico"
-                        >
-                          GERAR GRÁFICO POR
-                        </FormLabel>
-                        <Input
-                          mt={"-9px"}
-                          id="gera-grafico"
-                          name="gera-grafico"
-                          width={"480px"}
-                          height={"56px"}
-                          borderRadius={"8px"}
-                          placeholder="Relatório de cada intervenção"
-                          _placeholder={{ color: "#2D2926" }}
-                          fontSize={"14px"}
-                          fontWeight={"400"}
-                          // onChange={handleProjectChange}
-                        ></Input>
-                      </FormControl>
-                    </Flex> */}
-            {/* <Flex>
-                      <FormControl>
-                        <FormLabel
-                          fontSize={"12px"}
-                          color={"#949494"}
-                          fontWeight={"700"}
-                          htmlFor="de"
-                        >
-                          DE
-                        </FormLabel>
-                        <Input
-                          mt={"-9px"}
-                          id="de"
-                          name="de"
-                          width={"146px"}
-                          height={"56px"}
-                          borderRadius={"8px"}
-                          type={"date"}
-                          mb={"-10px"}
-                          color={"#2D2926"}
-                          fontSize={"14px"}
-                          fontWeight={"400"}
-                        />
-                      </FormControl>
-                    </Flex>
-
-                    <Flex>
-                      <FormControl>
-                        <FormLabel
-                          alignItems={"flex-start"}
-                          fontSize={"12px"}
-                          color={"#949494"}
-                          fontWeight={"700"}
-                          htmlFor="ate"
-                        >
-                          ATÉ
-                        </FormLabel>
-                        <Input
-                          mt={"-9px"}
-                          id="ate"
-                          name="ate"
-                          width={"146px"}
-                          height={"56px"}
-                          borderRadius={"8px"}
-                          type={"date"}
-                          color={"#2D2926"}
-                          fontSize={"14px"}
-                          fontWeight={"400"}
-                        />
-                      </FormControl>
-                    </Flex> */}
-            {/* </Flex> */}
-            <Flex mt={"-10px"} gap={4} mb={"10px"}>
+            <Flex gap={4}>
               <Flex alignItems={"flex-end"}>
                 <FormControl>
                   <FormLabel
@@ -292,7 +195,6 @@ export function GraficoCIP() {
                   <Select
                     placeholder="Sonda"
                     // onChange={handleProjectChange}
-                    mt={"-9px"}
                     id="sonda"
                     name="sonda"
                     width={"208px"}
@@ -330,14 +232,9 @@ export function GraficoCIP() {
                 </FormControl>
               </Flex> */}
             </Flex>
-            <Flex direction={"column"} mb={11}>
-              <Flex mb={"-20px"}>
-                <Text
-                  mt={"20px"}
-                  fontSize={"24px"}
-                  fontWeight={"700"}
-                  color={"#2D2926"}
-                >
+            <Flex direction={"column"}>
+              <Flex>
+                <Text fontSize={"24px"} fontWeight={"700"} color={"#2D2926"}>
                   Relatório para a CIP
                 </Text>
               </Flex>
@@ -388,7 +285,7 @@ export function GraficoCIP() {
               display={"flex"}
               overflowY={"hidden"}
             >
-              <Flex ml={"-25px"} mt={"50px"}>
+              <Flex>
                 <StackedBarChart
                   showY={true}
                   sizeW={1000}
@@ -397,7 +294,7 @@ export function GraficoCIP() {
                   dataEntries={dataEntries2}
                   barW={56}
                 />
-              </Flex>{" "}
+              </Flex>
             </Box>
           </Flex>
         </Stack>
