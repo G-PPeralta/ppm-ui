@@ -26,10 +26,13 @@ import {
 } from "@chakra-ui/react";
 import { IConfigProjetoDto } from "interfaces/ConfiguracaoProjeto";
 import { ProjetosConfig } from "interfaces/Services";
+import moment from "moment";
 
 import { useProjetos } from "hooks/useCadastroProjeto";
 
 import { patchProjeto } from "services/update/Projeto";
+
+import DatePicker from "./DatePicker";
 
 // import {
 //   getCoordenadores,
@@ -59,12 +62,22 @@ function ModalConfiguracoes({
   const [solicitacao, setSolicitacao] = useState(projeto?.solicitante_id);
   const [nomeProjeto, setNomeProjeto] = useState(projeto?.nome_projeto);
   const [elementoPep, setElementoPep] = useState(projeto?.elemento_pep);
-  const [inicio, setInicio] = useState(projeto?.data_inicio);
-  const [fim, setFim] = useState(projeto?.data_fim);
-  // eslint-disable-next-line no-unused-vars
-  const [inicioReal, setInicioReal] = useState(projeto?.dataInicio_real);
-  // eslint-disable-next-line no-unused-vars
-  const [fimReal, setFimReal] = useState(projeto?.dataFim_real);
+  const [inicio, setInicio] = useState(
+    moment.utc(projeto?.data_inicio).add(3, "hours").toDate()
+  );
+  const [fim, setFim] = useState(
+    moment.utc(projeto?.data_fim).add(3, "hours").toDate()
+  );
+  const [inicioReal, setInicioReal] = useState(
+    projeto?.dataInicio_real
+      ? moment.utc(projeto?.dataInicio_real).add(3, "hours").toDate()
+      : null
+  );
+  const [fimReal, setFimReal] = useState(
+    projeto?.dataFim_real
+      ? moment.utc(projeto?.dataFim_real).add(3, "hours").toDate()
+      : null
+  );
   const [divisao, setDivisao] = useState(projeto?.divisao_id);
   const [classificacao, setClassificacao] = useState(projeto?.classificacao_id);
   const [tipo, setTipo] = useState(projeto?.tipo_projeto_id);
@@ -101,8 +114,14 @@ function ModalConfiguracoes({
       solicitacao,
       nome_projeto: nomeProjeto,
       elemento_pep: elementoPep,
-      data_inicio: inicio,
-      data_fim: fim,
+      data_inicio: moment.utc(inicio).subtract(3, "hours").toDate(),
+      data_fim: moment.utc(fim).subtract(3, "hours").toDate(),
+      data_inicio_real: inicioReal
+        ? moment.utc(inicioReal).subtract(3, "hours").toDate()
+        : inicioReal,
+      data_fim_real: fimReal
+        ? moment.utc(fimReal).subtract(3, "hours").toDate()
+        : fimReal,
       divisao,
       classificacao,
       tipo,
@@ -417,90 +436,68 @@ function ModalConfiguracoes({
                   gap={"16px"}
                 >
                   <FormControl>
-                    <FormLabel htmlFor="inicio">
-                      <Text color="#949494" fontSize="12px" fontWeight="700">
-                        INÍCIO
-                      </Text>
-                    </FormLabel>
-                    <Input
-                      borderRadius={"8px"}
-                      max="9999-12-31"
-                      maxLength={1}
-                      border={"1px solid #A7A7A7"}
-                      mt={"-9px"}
-                      height={"56px"}
-                      _placeholder={{ color: "black" }}
-                      id="fimId"
-                      type="Date"
-                      name="inicio"
-                      onChange={(event) =>
-                        setInicio(new Date(event.target.value))
-                      }
-                    />
+                    <Flex flex={1}>
+                      <DatePicker
+                        label={"INICIO"}
+                        setDate={setInicio}
+                        required={false}
+                        data={inicio}
+                        value={inicio.toString()}
+                      />
+                    </Flex>
                   </FormControl>
                   <FormControl>
-                    <FormLabel htmlFor="fim">
-                      <Text color="#949494" fontSize="12px" fontWeight="700">
-                        FIM
-                      </Text>
-                    </FormLabel>
-                    <Input
-                      borderRadius={"8px"}
-                      max="9999-12-31"
-                      maxLength={1}
-                      border={"1px solid #A7A7A7"}
-                      mt={"-9px"}
-                      height={"56px"}
-                      _placeholder={{ color: "black" }}
-                      id="fiId"
-                      type="Date"
-                      name="fim"
-                      onChange={(event) => setFim(new Date(event.target.value))}
-                    />
+                    <Flex flex={1}>
+                      <DatePicker
+                        label={"FIM"}
+                        setDate={setFim}
+                        required={false}
+                        data={fim}
+                        value={fim.toString()}
+                      />
+                    </Flex>
                   </FormControl>
                   <FormControl>
-                    <FormLabel htmlFor="categoria">
-                      <Text color="#949494" fontSize="12px" fontWeight="700">
-                        INÍCIO REAL
-                      </Text>
-                    </FormLabel>
-                    <Input
-                      borderRadius={"8px"}
-                      max="9999-12-31"
-                      maxLength={1}
-                      border={"1px solid #A7A7A7"}
-                      mt={"-9px"}
-                      height={"56px"}
-                      _placeholder={{ color: "black" }}
-                      id="data"
-                      type="Date"
-                      name="data"
-                      onChange={(event) =>
-                        setInicioReal(new Date(event.target.value))
-                      }
-                    />
+                    <Flex flex={1}>
+                      {inicioReal ? (
+                        <DatePicker
+                          label={"INICIO REAL"}
+                          setDate={setInicioReal}
+                          required={false}
+                          data={inicioReal}
+                          value={inicioReal.toString()}
+                        />
+                      ) : (
+                        <DatePicker
+                          label={"INICIO REAL"}
+                          setDate={setInicioReal}
+                          required={false}
+                          data={new Date()}
+                          value={new Date().toString()}
+                        />
+                      )}
+                    </Flex>
                   </FormControl>
                   <FormControl>
-                    <FormLabel htmlFor="dataFim_real">
-                      <Text color="#949494" fontSize="12px" fontWeight="700">
-                        FIM REAL
-                      </Text>
-                    </FormLabel>
-                    <Input
-                      borderRadius={"8px"}
-                      max="9999-12-31"
-                      maxLength={1}
-                      border={"1px solid #A7A7A7"}
-                      mt={"-9px"}
-                      height={"56px"}
-                      _placeholder={{ color: "black" }}
-                      id="dataFim_real"
-                      type="Date"
-                      name="dataFim_real"
-                      onChange={(event) =>
-                        setFimReal(new Date(event.target.value))
-                      }
-                    />
+                    <Flex flex={1}>
+                      {fimReal ? (
+                        <DatePicker
+                          label={"INICIO REAL"}
+                          setDate={setFimReal}
+                          required={false}
+                          data={fimReal}
+                          value={fimReal.toString()}
+                        />
+                      ) : (
+                        <DatePicker
+                          label={"INICIO REAL"}
+                          setDate={setFimReal}
+                          required={false}
+                          data={new Date()}
+                          value={new Date().toString()}
+                        />
+                      )}
+                    </Flex>
                   </FormControl>
                 </Flex>
                 <Flex
