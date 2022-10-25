@@ -51,7 +51,10 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
     <>
       <Button
         h={"56px"}
-        borderRadius={"10px"}
+        fontSize={"18px"}
+        fontWeight={"700"}
+        fontFamily={"Mulish"}
+        borderRadius={"8px"}
         background={"origem.500"}
         variant="primary"
         color="white"
