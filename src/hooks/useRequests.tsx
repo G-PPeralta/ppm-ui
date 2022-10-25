@@ -63,6 +63,7 @@ export function useRequests(id?: number) {
         textodopedido: financeiro.textodopedido,
         totalprevisto: Number(financeiro.totalprevisto),
         totalrealizado: Number(financeiro.totalrealizado),
+        gap: financeiro.gap,
       })
     );
     setListaFinanceiroProjetos(financeiroFormatado);

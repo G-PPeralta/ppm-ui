@@ -48,6 +48,7 @@ function Tabela({ data }: Props) {
     "Denominação de Objeto",
     "Mês",
     "Texto do Pedido",
+    "Gap %",
   ];
 
   const valorTotalPrevisto = data.reduce(
@@ -113,6 +114,9 @@ function Tabela({ data }: Props) {
               </Td>
               <Td textAlign={"start"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.textodopedido}</Text>
+              </Td>
+              <Td textAlign={"start"} fontWeight={"semibold"}>
+                <Text>{linhaTabela.gap < 1 ? 0 : linhaTabela.gap}%</Text>
               </Td>
             </Tr>
           ))
