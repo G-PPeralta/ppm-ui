@@ -154,6 +154,8 @@ function StatisticsGantt() {
   //   // setLoading(false);
   // }, [refresh]);
 
+  // console.log("registerForm", registerForm.values);
+
   return (
     <>
       <Sidebar>
