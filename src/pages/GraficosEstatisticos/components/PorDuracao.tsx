@@ -220,7 +220,7 @@ export function GraficoPorDuracao() {
                 </Flex>
               </Flex> */}
           {/* <Flex flexDir={"column"} wrap={"wrap"} flex={1}> */}
-          <Flex mt={"-10px"} gap={4} mb={"10px"} wrap={"wrap"} flex={1}>
+          <Flex gap={4} wrap={"wrap"} flex={1}>
             <Flex alignItems={"flex-end"}>
               <FormControl>
                 <FormLabel
@@ -335,8 +335,7 @@ export function GraficoPorDuracao() {
               </FormControl>
             </Flex>
           </Flex>
-          <Flex flexDir={"row"} gap={4} mt={"-10px"}>
-            {" "}
+          <Flex flexDir={"row"} gap={4}>
             <Flex alignItems={"flex-end"}>
               <FormControl>
                 <FormLabel
@@ -390,8 +389,8 @@ export function GraficoPorDuracao() {
               </FormControl>
             </Flex> */}
           </Flex>
-          <Flex gap={1} direction={"column"} mt={-2}>
-            <Flex mb={"-18px"}>
+          <Flex gap={1} direction={"column"}>
+            <Flex>
               <Text
                 mt={"5px"}
                 fontSize={"24px"}
@@ -401,78 +400,38 @@ export function GraficoPorDuracao() {
                 Histórico de durações
               </Text>
             </Flex>
-            <Flex mb={"-10px"} direction={"row"} gap={2}>
-              <Text
-                mt={"10px"}
-                fontSize={"20px"}
-                fontWeight={"700"}
-                color={"#0047BB"}
-              >
+            <Flex direction={"row"} gap={2}>
+              <Text fontSize={"20px"} fontWeight={"700"} color={"#0047BB"}>
                 Mínimo:
               </Text>
-              <Text
-                mt={"10px"}
-                fontSize={"20px"}
-                fontWeight={"700"}
-                color={"black"}
-              >
+              <Text fontSize={"20px"} fontWeight={"700"} color={"black"}>
                 8 HORAS
               </Text>
             </Flex>
 
-            <Flex mb={"-10px"} direction={"row"} gap={2}>
-              <Text
-                mt={"10px"}
-                fontSize={"20px"}
-                fontWeight={"700"}
-                color={"#0047BB"}
-              >
+            <Flex direction={"row"} gap={2}>
+              <Text fontSize={"20px"} fontWeight={"700"} color={"#0047BB"}>
                 Médio:
               </Text>
-              <Text
-                mt={"10px"}
-                fontSize={"20px"}
-                fontWeight={"700"}
-                color={"black"}
-              >
+              <Text fontSize={"20px"} fontWeight={"700"} color={"black"}>
                 16 HORAS
               </Text>
             </Flex>
 
-            <Flex mb={"-10px"} direction={"row"} gap={2}>
-              <Text
-                mt={"10px"}
-                fontSize={"20px"}
-                fontWeight={"700"}
-                color={"#0047BB"}
-              >
+            <Flex direction={"row"} gap={2}>
+              <Text fontSize={"20px"} fontWeight={"700"} color={"#0047BB"}>
                 Máxima:
               </Text>
-              <Text
-                mt={"10px"}
-                fontSize={"20px"}
-                fontWeight={"700"}
-                color={"black"}
-              >
+              <Text fontSize={"20px"} fontWeight={"700"} color={"black"}>
                 24 HORAS
               </Text>
             </Flex>
 
-            <Flex mb={"-10px"} direction={"row"} gap={2}>
-              <Text
-                mt={"10px"}
-                fontSize={"20px"}
-                fontWeight={"700"}
-                color={"#0047BB"}
-              >
+            <Flex direction={"row"} gap={2}>
+              <Text fontSize={"20px"} fontWeight={"700"} color={"#0047BB"}>
                 Tendência de duração:
               </Text>
-              <Text
-                mt={"10px"}
-                fontSize={"20px"}
-                fontWeight={"700"}
-                color={"black"}
-              >
+              <Text fontSize={"20px"} fontWeight={"700"} color={"black"}>
                 12 HORAS
               </Text>
             </Flex>
@@ -484,7 +443,7 @@ export function GraficoPorDuracao() {
             display={"flex"}
             overflowY={"hidden"}
           >
-            <Flex ml={"-25px"} mt={"15px"}>
+            <Flex>
               <StackedBarChart
                 showY={true}
                 sizeW={1000}
@@ -498,9 +457,6 @@ export function GraficoPorDuracao() {
         </Flex>
         <Flex ref={componentRef} />
       </form>
-      {/* </Box> */}
-      {/* </Flex> */}
-      {/* </Stack> */}
     </>
   );
 }

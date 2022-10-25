@@ -139,181 +139,17 @@ export function GraficoPorCadaIntervencao() {
             })}
             gap={4}
           >
-            {/* <Flex justifyContent={"space-between"}>
-                    <Flex align={"flex-end"}>
-                      <FormControl mt={"-50px"}>
-                        <FormLabel>
-                          <Text
-                            mb={"1px"}
-                            fontSize={"24px"}
-                            color={"#2D2926"}
-                            fontWeight={"700"}
-                            fontFamily={"Mulish"}
-                          >
-                            Gráficos estatísticos
-                          </Text>
-                        </FormLabel>
-                      </FormControl>
-                    </Flex>
-                    <Prop />
-                  </Flex> */}
-            {/* <Flex direction={"row"} mb={"10px"} gap={3}> */}
-            {/* <Flex alignItems={"flex-end"}>
-                      <FormControl>
-                        <FormLabel
-                          mt={"-20px"}
-                          fontSize={"12px"}
-                          color={"#949494"}
-                          fontWeight={"700"}
-                          htmlFor="gera-grafico"
-                        >
-                          GERAR GRÁFICO POR
-                        </FormLabel>
-                        <Input
-                          mt={"-9px"}
-                          id="gera-grafico"
-                          name="gera-grafico"
-                          width={"480px"}
-                          height={"56px"}
-                          borderRadius={"8px"}
-                          placeholder="Relatório de cada intervenção"
-                          _placeholder={{ color: "#2D2926" }}
-                          fontSize={"14px"}
-                          fontWeight={"400"}
-                          // onChange={handleProjectChange}
-                        ></Input>
-                      </FormControl>
-                    </Flex> */}
-            {/* <Flex>
-                      <FormControl>
-                        <FormLabel
-                          fontSize={"12px"}
-                          color={"#949494"}
-                          fontWeight={"700"}
-                          htmlFor="de"
-                        >
-                          DE
-                        </FormLabel>
-                        <Input
-                          mt={"-9px"}
-                          id="de"
-                          name="de"
-                          width={"146px"}
-                          height={"56px"}
-                          borderRadius={"8px"}
-                          type={"date"}
-                          mb={"-10px"}
-                          color={"#2D2926"}
-                          fontSize={"14px"}
-                          fontWeight={"400"}
-                        />
-                      </FormControl>
-                    </Flex>
-
-                    <Flex>
-                      <FormControl>
-                        <FormLabel
-                          alignItems={"flex-start"}
-                          fontSize={"12px"}
-                          color={"#949494"}
-                          fontWeight={"700"}
-                          htmlFor="ate"
-                        >
-                          ATÉ
-                        </FormLabel>
-                        <Input
-                          mt={"-9px"}
-                          id="ate"
-                          name="ate"
-                          width={"146px"}
-                          height={"56px"}
-                          borderRadius={"8px"}
-                          type={"date"}
-                          color={"#2D2926"}
-                          fontSize={"14px"}
-                          fontWeight={"400"}
-                        />
-                      </FormControl>
-                    </Flex> */}
-            {/* </Flex> */}
-            <Flex mt={"-10px"} gap={4} mb={"10px"}>
-              {/* <Flex alignItems={"flex-end"}>
-                <FormControl>
-                  <FormLabel
-                    fontSize={"12px"}
-                    color={"#949494"}
-                    fontWeight={"700"}
-                    htmlFor="sonda"
-                  >
-                    SONDA
-                  </FormLabel>
-                  <Select
-                    placeholder="Sonda"
-                    // onChange={handleProjectChange}
-                    mt={"-9px"}
-                    id="sonda"
-                    name="sonda"
-                    width={"208px"}
-                    height={"56px"}
-                    borderRadius={"8px"}
-                    color={"#2D2926"}
-                    fontSize={"14px"}
-                    fontWeight={"400"}
-                  >
-                    {listaSondas.map((sonda) => (
-                      <option>{sonda.nom_sonda}</option>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Flex> */}
-              {/* <Flex>
-                <FormControl className="toBottom">
-                  <Button
-                    h={"56px"}
-                    background={"#0047BB"}
-                    border={"2.3px solid"}
-                    color={"white"}
-                    variant="primary"
-                    _hover={{
-                      background: "white",
-                      color: "#0047BB",
-                      transition: "all 0.4s",
-                    }}
-                    rightIcon={<FiPlus />}
-                    fontSize={"18px"}
-                    fontWeight={"700"}
-                  >
-                    Gerar
-                  </Button>
-                </FormControl>
-              </Flex> */}
-            </Flex>
             <Flex direction={"column"}>
-              <Flex mb={"-20px"}>
-                <Text
-                  mt={"20px"}
-                  fontSize={"24px"}
-                  fontWeight={"700"}
-                  color={"#2D2926"}
-                >
+              <Flex>
+                <Text fontSize={"24px"} fontWeight={"700"} color={"#2D2926"}>
                   Relatório de cada intervenção
                 </Text>
               </Flex>
               <Flex direction={"row"} gap={2}>
-                <Text
-                  mt={"20px"}
-                  fontSize={"20px"}
-                  fontWeight={"700"}
-                  color={"#0047BB"}
-                >
+                <Text fontSize={"20px"} fontWeight={"700"} color={"#0047BB"}>
                   TEMPO TOTAL AGUARDADO:
                 </Text>
-                <Text
-                  mt={"20px"}
-                  fontSize={"20px"}
-                  fontWeight={"700"}
-                  color={"#2D2926"}
-                >
+                <Text fontSize={"20px"} fontWeight={"700"} color={"#2D2926"}>
                   100 HORAS
                 </Text>
               </Flex>
@@ -334,7 +170,7 @@ export function GraficoPorCadaIntervencao() {
               display={"flex"}
               overflowY={"hidden"}
             >
-              <Flex ml={"-25px"} mt={"50px"}>
+              <Flex>
                 <StackedBarChart
                   showY={true}
                   sizeW={1000}

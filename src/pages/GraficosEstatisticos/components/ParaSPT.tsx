@@ -345,7 +345,7 @@ export function GraficoSPT() {
                       </FormControl>
                     </Flex> */}
             {/* </Flex> */}
-            <Flex mt={"-10px"} gap={4} mb={"10px"}>
+            <Flex gap={4}>
               <Flex alignItems={"flex-end"}>
                 <FormControl>
                   <FormLabel
@@ -359,7 +359,7 @@ export function GraficoSPT() {
                   <Select
                     placeholder="Sonda"
                     // onChange={handleProjectChange}
-                    mt={"-9px"}
+
                     id="sonda"
                     name="sonda"
                     width={"208px"}
@@ -397,14 +397,9 @@ export function GraficoSPT() {
                 </FormControl>
               </Flex> */}
             </Flex>
-            <Flex direction={"column"} mb={11}>
-              <Flex mb={"-20px"}>
-                <Text
-                  mt={"20px"}
-                  fontSize={"24px"}
-                  fontWeight={"700"}
-                  color={"#2D2926"}
-                >
+            <Flex direction={"column"}>
+              <Flex>
+                <Text fontSize={"24px"} fontWeight={"700"} color={"#2D2926"}>
                   Relatório para cada SPT
                 </Text>
               </Flex>
@@ -443,7 +438,7 @@ export function GraficoSPT() {
               display={"flex"}
               overflowY={"hidden"}
             >
-              <Flex ml={"-25px"} mt={"50px"}>
+              <Flex>
                 <StackedBarChart
                   showY={true}
                   sizeW={1000}
@@ -452,7 +447,7 @@ export function GraficoSPT() {
                   dataEntries={dataEntries2}
                   barW={56}
                 />
-              </Flex>{" "}
+              </Flex>
             </Box>
           </Flex>
         </Stack>
