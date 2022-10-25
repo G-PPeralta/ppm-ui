@@ -135,8 +135,8 @@ export function LookaheadDetalhe() {
                     <Select
                       fontSize={"14px"}
                       fontWeight={"400"}
-                      _placeholder={{ color: "#2D2926" }}
-                      color={"#949494"}
+                      // _placeholder={{ color: "#2D2926" }}
+                      // color={"#949494"}
                       width={"218px"}
                       height={"56px"}
                       borderRadius={"8px"}
