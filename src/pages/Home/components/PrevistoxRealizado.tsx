@@ -34,6 +34,7 @@ function useGetData() {
     const renderPayload: any[] = [];
     data.map((val: any) =>
       renderPayload.push({
+        ...val,
         Realizado: val.cronogramaRealizado,
         Previsto: val.cronogramaPrevisto,
       })
@@ -191,7 +192,7 @@ export default function PrevistoxRealizadoComponent() {
                     sx={{ fontSize: 14, fontWeight: "400" }}
                     color="#ffffff"
                   >
-                    {graphPrevisto}%
+                    {(graphPrevisto * 100).toFixed(0)}%
                   </Text>
                 </Box>
                 <Box bg={"#2E69FD"} py={1} px={2}>
@@ -200,7 +201,7 @@ export default function PrevistoxRealizadoComponent() {
                     sx={{ fontSize: 14, fontWeight: "400" }}
                     color="#ffffff"
                   >
-                    {graphRealizado}%
+                    {(graphRealizado * 100).toFixed(0)}%
                   </Text>
                 </Box>
               </Box>

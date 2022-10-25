@@ -30,20 +30,19 @@ export default function TotalProjetosComponent() {
 
   async function handleGetTipoResponsavel() {
     const { data } = await getTotalProjetos();
-    // console.log(data);
     setTotal(data.totalProjetos);
-    setIniciados(data.projetosPorStatus[1].qtd);
+    data.projetosPorStatus[1] && setIniciados(data.projetosPorStatus[1].qtd);
     // setIniciados(
     //   data.projetosPorStatus[1].qtd +
     //     data.projetosPorStatus[2].qtd +
     //     data.projetosPorStatus[3].qtd,
     // );
-    setNaoIniciado(data.projetosPorStatus[0].qtd);
-    setReprogramado(data.projetosPorStatus[2].qtd);
-    setPreAprovacao(data.projetosPorStatus[3].qtd);
-    setFinalizados(data.projetosPorStatus[5].qtd);
-    setCancelados(data.projetosPorStatus[4].qtd);
-    setHolds(data.projetosPorStatus[6].qtd);
+    data.projetosPorStatus[0] && setNaoIniciado(data.projetosPorStatus[0].qtd);
+    data.projetosPorStatus[2] && setReprogramado(data.projetosPorStatus[2].qtd);
+    data.projetosPorStatus[3] && setPreAprovacao(data.projetosPorStatus[3].qtd);
+    data.projetosPorStatus[5] && setFinalizados(data.projetosPorStatus[5].qtd);
+    data.projetosPorStatus[4] && setCancelados(data.projetosPorStatus[4].qtd);
+    data.projetosPorStatus[6] && setHolds(data.projetosPorStatus[6].qtd);
     // setHolds(data.projetosPorStatus[6].qtd + data.projetosPorStatus[0].qtd);
     setPrioridadeAlta(data.prioridades.alta);
     setPrioridadeMedia(data.prioridades.media);
@@ -59,7 +58,7 @@ export default function TotalProjetosComponent() {
 
   const dataMock = [
     {
-      month: "Jan/22",
+      mes: "Jan/22",
       Iniciados: 10,
       Finalizados: 10,
       Cancelados: 10,
@@ -69,7 +68,7 @@ export default function TotalProjetosComponent() {
       Pré_Aprovação: 40,
     },
     {
-      month: "Fev/22",
+      mes: "Fev/22",
       Iniciados: 10,
       Finalizados: 10,
       Cancelados: 10,
@@ -79,7 +78,7 @@ export default function TotalProjetosComponent() {
       Pré_Aprovação: 10,
     },
     {
-      month: "Mar/22",
+      mes: "Mar/22",
       Iniciados: 10,
       Finalizados: 10,
       Cancelados: 10,
@@ -89,7 +88,7 @@ export default function TotalProjetosComponent() {
       Pré_Aprovação: 10,
     },
     {
-      month: "Abr/22",
+      mes: "Abr/22",
       Iniciados: 10,
       Finalizados: 10,
       Cancelados: 10,
