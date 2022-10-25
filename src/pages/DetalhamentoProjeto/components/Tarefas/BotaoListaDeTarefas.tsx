@@ -321,7 +321,7 @@ function BotaoListadeTarefas() {
                       fontSize="18px"
                       alignSelf={"end"}
                     >
-                      Buscar
+                      Filtrar
                       <Icon
                         fontWeight={"900"}
                         as={AiOutlineSearch}

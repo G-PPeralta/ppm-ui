@@ -101,7 +101,7 @@ function CadastroTarefasModal({
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            Cadastrar tarefa
+            Cadastrar Tarefa
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <ModalBody>
