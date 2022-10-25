@@ -72,7 +72,7 @@ function DatePickerGenerico({
         onChange={(date) => handleIniciarDate(date)}
         locale="ptBR"
         showTimeSelect={!!selecionaHorario}
-        dateFormat={esconderHorario ? "dd/MM/yyyy" : "dd/MM/yyyy, hh:mm"}
+        dateFormat={esconderHorario ? "dd/MM/yyyy" : "Pp"}
         customInput={<TriggerDatePickerInicio />}
         timeFormat="p"
       />
