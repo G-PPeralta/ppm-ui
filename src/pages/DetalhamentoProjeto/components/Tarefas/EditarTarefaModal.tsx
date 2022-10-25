@@ -20,6 +20,11 @@ import {
   ModalFooter,
   Button,
   Select,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
   // useDisclosure,
 } from "@chakra-ui/react";
 import { format } from "date-fns";
@@ -94,6 +99,8 @@ function EditarTarefaModal({
     if (campo === "responsavel") return responsavel;
     if (campo === "status") return status;
   }
+
+  const formataParaPorcentagem = (val: number | undefined) => val + "%";
 
   return (
     <Flex>
@@ -282,7 +289,7 @@ function EditarTarefaModal({
             >
               STATUS
             </FormLabel>
-            <Input
+            {/* <Input
               type="number"
               fontSize={"14px"}
               borderRadius={"8px"}
@@ -295,7 +302,26 @@ function EditarTarefaModal({
               name="status"
               value={status}
               onChange={(event) => setStatus(Number(event.target.value))}
-            ></Input>
+            ></Input> */}
+            <NumberInput
+              width={"208px"}
+              height={"56px"}
+              min={0}
+              max={100}
+              value={formataParaPorcentagem(status)}
+              onChange={(valueString) => {
+                const value = Number(valueString);
+                setStatus(value);
+              }}
+              h={"56px"}
+            >
+              <NumberInputField h={"56px"} />
+
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
             <FormControl padding={1}>
               <FormLabel
                 htmlFor="acao"
