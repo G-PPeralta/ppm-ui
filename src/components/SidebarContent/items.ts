@@ -24,11 +24,11 @@ interface LinkItemProps {
   children: any[];
 }
 
-// interface Children {
-//   name: string;
-//   icon: IconType;
-//   link: string;
-// }
+interface Children {
+  name: string;
+  icon: IconType;
+  link: string;
+}
 
 const childrenCarteiradeProjetos = [
   { name: "Dashboard", icon: FiHome, link: "/" },
@@ -46,14 +46,12 @@ const childrenCarteiradeProjetos = [
     link: "/licoesAprendidas",
   },
   { name: "Priorização", icon: MdPriorityHigh, link: "/priorizacao" },
+  { name: "Relatórios", icon: FiFile, link: "/reports" },
 ];
 
 const childrenInfograficos = [
   { name: "Infográficos", icon: FiBarChart, link: "/infographics" },
   { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/budgets" },
-];
-
-const childrenEstatisticas = [
   {
     name: "Estatísticas",
     icon: AiOutlineBarChart,
@@ -65,10 +63,6 @@ const childrenEstatisticas = [
     link: "/graficos",
   },
   { name: "Look Ahead", icon: AiOutlineBarChart, link: "/lookahead" },
-];
-
-const childrenRelatoriosPorProjetos = [
-  { name: "Relatórios", icon: FiFile, link: "/reports" },
 ];
 
 const childrenLixeira = [
@@ -94,40 +88,34 @@ const childrenConfiguracoes = [
 
 export const LinkItems: Array<LinkItemProps> = [
   {
-    name: "Carteira de Projetos",
+    name: "Projetos",
     icon: FiHome,
-    children: childrenCarteiradeProjetos,
+    children: childrenCarteiradeProjetos.sort((a: Children, b: Children) =>
+      a.name.localeCompare(b.name)
+    ),
   },
 
   {
-    name: "Infográficos",
+    name: "Intervenções",
     icon: FiBarChart,
-    children: childrenInfograficos,
-  },
-  {
-    name: "Estatísticas",
-    icon: AiOutlineBarChart,
-    children: childrenEstatisticas,
+    children: childrenInfograficos.sort((a: Children, b: Children) =>
+      a.name.localeCompare(b.name)
+    ),
   },
 
   {
     name: "Lixeira",
     icon: FiTrash2,
-    children: childrenLixeira,
-  },
-
-  {
-    name: "Relatórios por Projetos",
-    icon: FiFile,
-    children: childrenRelatoriosPorProjetos,
+    children: childrenLixeira.sort((a: Children, b: Children) =>
+      a.name.localeCompare(b.name)
+    ),
   },
 
   {
     name: "Configurações",
     icon: FiSettings,
-    children: childrenConfiguracoes,
-    // .sort((a: Children, b: Children) =>
-    //   a.name.localeCompare(b.name)
-    // ),
+    children: childrenConfiguracoes.sort((a: Children, b: Children) =>
+      a.name.localeCompare(b.name)
+    ),
   },
 ];
