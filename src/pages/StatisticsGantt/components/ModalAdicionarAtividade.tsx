@@ -104,7 +104,7 @@ function ModalAdicionarAtividade({
     }
   }, [dataFinalAtividade]);
 
-  console.log("registerForm", registerForm.values);
+  // console.log("registerForm", registerForm.values);
   // console.log("dataFinalAtividade", dataFinalAtividade);
 
   return (
