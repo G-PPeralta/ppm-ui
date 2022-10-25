@@ -131,7 +131,7 @@ function ModalCustoDiario(props: { id: string | undefined }) {
         textColor={"origem.500"}
         onClick={onOpen}
       >
-        Modal Custo Diario
+        Modal Custo Diário
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size="3xl">
@@ -145,7 +145,7 @@ function ModalCustoDiario(props: { id: string | undefined }) {
             color={"white"}
             fontSize={"1em"}
           >
-            Custo Diario
+            Custo Diário
           </ModalHeader>
           <ModalCloseButton color={"white"} />
 
@@ -196,10 +196,12 @@ function ModalCustoDiario(props: { id: string | undefined }) {
                   <Table>
                     <Thead>
                       <Tr background={"origem.500"} color="white">
-                        <Th color={"white"}></Th>
+                        <Th color={"white"} borderTopLeftRadius="10px"></Th>
                         <Th color={"white"}>Serviço/Compra</Th>
                         <Th color={"white"}>Fornecedor</Th>
-                        <Th color={"white"}>R$ Realizado</Th>
+                        <Th color={"white"} borderTopRightRadius="10px">
+                          R$ Realizado
+                        </Th>
                       </Tr>
                     </Thead>
                     {data.length ? (
