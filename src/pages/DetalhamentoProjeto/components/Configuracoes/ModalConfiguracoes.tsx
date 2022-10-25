@@ -106,14 +106,6 @@ function ModalConfiguracoes({
     onClose();
   };
 
-  console.log(
-    "dsdsasd",
-    projeto?.data_inicio !== null,
-    projeto?.data_inicio,
-    projeto?.data_fim,
-    projeto?.dataInicio_real,
-    projeto?.dataFim_real
-  );
   const handleSalvar = () => {
     const payload: IConfigProjetoDto = {
       nome_responsavel: responsavel,
