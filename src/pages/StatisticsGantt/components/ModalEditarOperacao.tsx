@@ -57,6 +57,109 @@ interface Props {
   registerForm: any;
 }
 
+// const licoesAprendidasMock = [
+//   {
+//     id: 1,
+//     licao_aprendida: "Lição 1",
+//     data: "01/01/2021",
+//     acao_e_recomendacao: "Ação 1 e Recomendação 1",
+//   },
+//   {
+//     id: 2,
+//     licao_aprendida: "Lição 2",
+//     data: "01/01/2022",
+//     acao_e_recomendacao: "Ação 2 e Recomendação 2",
+//   },
+//   {
+//     id: 3,
+//     licao_aprendida: "Lição 3",
+//     data: "01/01/2023",
+//     acao_e_recomendacao: "Ação 3 e Recomendação 3",
+//   },
+//   {
+//     id: 4,
+//     licao_aprendida: "Lição 4",
+//     data: "01/01/2024",
+//     acao_e_recomendacao: "Ação 4 e Recomendação 4",
+//   },
+//   {
+//     id: 5,
+//     licao_aprendida: "Lição 5",
+//     data: "01/01/2025",
+//     acao_e_recomendacao: "Ação 5 e Recomendação 5",
+//   },
+//   {
+//     id: 6,
+//     licao_aprendida: "Lição 6",
+//     data: "01/01/2026",
+//     acao_e_recomendacao: "Ação 6 e Recomendação 6",
+//   },
+//   {
+//     id: 7,
+//     licao_aprendida: "Lição 7",
+//     data: "01/01/2027",
+//     acao_e_recomendacao: "Ação 7 e Recomendação 7",
+//   },
+//   {
+//     id: 8,
+//     licao_aprendida: "Lição 8",
+//     data: "01/01/2028",
+//     acao_e_recomendacao: "Ação 8 e Recomendação 8",
+//   },
+//   {
+//     id: 9,
+//     licao_aprendida: "Lição 9",
+//     data: "01/01/2029",
+//     acao_e_recomendacao: "Ação 9 e Recomendação 9",
+//   },
+//   {
+//     id: 10,
+//     licao_aprendida: "Lição 10",
+//     data: "01/01/2030",
+//     acao_e_recomendacao: "Ação 10 e Recomendação 10",
+//   },
+//   {
+//     id: 11,
+//     licao_aprendida: "Lição 11",
+//     data: "01/01/2031",
+//     acao_e_recomendacao: "Ação 11 e Recomendação 11",
+//   },
+//   {
+//     id: 12,
+//     licao_aprendida: "Lição 12",
+//     data: "01/01/2032",
+//     acao_e_recomendacao: "Ação 12 e Recomendação 12",
+//   },
+// ];
+
+// const ocorrenciasMock = [
+//   {
+//     id: 1,
+//     nome_ocorrencia: "Agda informação técnica / orientação",
+//     horas: "00:00",
+//   },
+//   {
+//     id: 2,
+//     nome_ocorrencia: "Agdo manutenção",
+//     horas: "00:00",
+//   },
+//   {
+//     id: 3,
+//     nome_ocorrencia: "Agdo outros",
+//     horas: "00:00",
+//   },
+//   {
+//     id: 4,
+//     nome_ocorrencia: "Agdo recursos Cia Serviço",
+//     horas: "00:00",
+//   },
+//   {
+//     id: 5,
+//     nome_ocorrencia: "APR",
+//     horas: "00:00",
+//   },
+// ];
+
 function ModalAdicionarOperacao({
   setRefresh,
   refresh,
@@ -111,7 +214,7 @@ function ModalAdicionarOperacao({
     registerForm.setFieldValue("ocorrencias", listaOcorrencias);
   }, [editOp]);
 
-  // console.log("registerForm", registerForm);
+  // console.log("registerForm", registerForm.values);
   // console.log("editOp", editOp);
 
   const botoes = [
