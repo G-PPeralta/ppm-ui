@@ -38,14 +38,6 @@ const childrenCarteiradeProjetos = [
     icon: FaRegMoneyBillAlt,
     link: "/financeiro-projetos",
   },
-  { name: "Importar Dados", icon: BiData, link: "/upload" },
-
-  {
-    name: "Lições Aprendidas",
-    icon: FiActivity,
-    link: "/licoesAprendidas",
-  },
-  { name: "Priorização", icon: MdPriorityHigh, link: "/priorizacao" },
   { name: "Relatórios", icon: FiFile, link: "/reports" },
 ];
 
@@ -84,6 +76,14 @@ const childrenConfiguracoes = [
     icon: FiActivity,
     link: "/fornecedores",
   },
+  { name: "Importar Dados", icon: BiData, link: "/upload" },
+
+  {
+    name: "Lições Aprendidas",
+    icon: FiActivity,
+    link: "/licoesAprendidas",
+  },
+  { name: "Priorização", icon: MdPriorityHigh, link: "/priorizacao" },
 ];
 
 export const LinkItems: Array<LinkItemProps> = [
