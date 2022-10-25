@@ -268,6 +268,7 @@ function CadastroTarefasModal({
                 mr={4}
                 ml={-2}
                 fontSize={"14px"}
+                fontWeight={"400"}
                 maxLength={255}
                 borderRadius={"8px"}
                 border={"1px solid #A7A7A7"}

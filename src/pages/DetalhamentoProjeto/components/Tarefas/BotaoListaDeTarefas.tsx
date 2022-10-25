@@ -235,9 +235,11 @@ function BotaoListadeTarefas() {
                         mt={"-9px"}
                         width={"328px"}
                         height={"56px"}
-                        _placeholder={{ color: "black" }}
+                        _placeholder={{ color: "#949494" }}
                         placeholder="Nome da tarefa"
                         type="text"
+                        fontSize={"14px"}
+                        fontWeight={"400"}
                         id="tarefa"
                         name="tarefa"
                         value={tarefaFilter}
@@ -264,6 +266,8 @@ function BotaoListadeTarefas() {
                       </FormLabel>
                       <Input
                         // placeholder="dd/mm/aaaa"
+                        fontSize={"14px"}
+                        fontWeight={"400"}
                         max="9999-12-31"
                         maxLength={1}
                         borderRadius={"8px"}
