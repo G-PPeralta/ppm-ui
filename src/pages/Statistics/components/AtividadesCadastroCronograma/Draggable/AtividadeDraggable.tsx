@@ -33,6 +33,11 @@ interface Props {
   };
 }
 
+interface Option {
+  value: number;
+  label: string;
+}
+
 function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const innerwidth = window.innerWidth;
 
@@ -40,6 +45,8 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
+  const [duracao, setDuracao] = useState<number>();
+  const [operacao, setOperacao] = useState<number>();
 
   const initAdd = {
     area_id: 0,
@@ -77,8 +84,15 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     value: operacao.id,
     label: operacao.nom_operacao,
   }));
-
   const getValue = (options: any, i: number, chave: string) => {
+    if (operacao) {
+      const obj = options.find((opt: Option) => opt.value == operacao);
+      return {
+        value: obj.value,
+        label: obj.label,
+      };
+    }
+
     const index = options
       .map(({ value }: any) => value)
       .indexOf(registerForm?.values?.atividades?.[i][chave]);
@@ -182,7 +196,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     width="208px"
                     id={`atividades[${index}].duracao`}
                     name={`atividades[${index}].duracao`}
-                    value={registerForm.values.atividades[index].duracao}
+                    value={duracao}
                     onChange={(value) => {
                       registerForm.setFieldValue(
                         `atividades[${index}].duracao`,
@@ -214,7 +228,12 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 justify={"center"}
                 _hover={{ cursor: "pointer" }}
               >
-                <ModalFiltrarAtividade />
+                <ModalFiltrarAtividade
+                  setDuracao={setDuracao}
+                  registerFormAct={registerForm}
+                  setOperacao={setOperacao}
+                  index={index}
+                />
 
                 <FiTrash
                   onClick={() => remove(index)}
