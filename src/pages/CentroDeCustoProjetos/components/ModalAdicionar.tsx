@@ -81,7 +81,13 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
           <ModalCloseButton color={"white"} />
 
           <ModalBody mt={3}>
-            <Text fontWeight={"bold"} mb={3}>
+            <Text
+              fontSize={"18px"}
+              fontWeight={"700"}
+              fontFamily={"Mulish"}
+              mb={3}
+              color={"#2D2926"}
+            >
               LANÇAR DESPESA
             </Text>
             <Flex direction={"column"} gap={4}>
