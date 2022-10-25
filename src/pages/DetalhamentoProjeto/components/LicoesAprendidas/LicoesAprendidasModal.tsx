@@ -188,11 +188,14 @@ function LicoesAprendidasModal({
                       <Input
                         maxLength={50}
                         borderRadius={"8px"}
-                        border={"1px solid #A7A7A7"}
+                        fontSize={"14px"}
+                        fontWeight={"400"}
+                        fontFamily={"Mulish"}
+                        border={"1px solid #949494"}
                         mt={"-9px"}
                         width={"208px"}
                         height={"56px"}
-                        _placeholder={{ color: "black" }}
+                        _placeholder={{ color: "#949494" }}
                         id="categoria"
                         name="categoria"
                         placeholder="Digite"
@@ -222,6 +225,10 @@ function LicoesAprendidasModal({
                       </FormLabel>
                       <Input
                         // placeholder="dd/mm/aaaa"
+                        _placeholder={{ color: "#949494" }}
+                        fontSize={"14px"}
+                        fontWeight={"400"}
+                        fontFamily={"Mulish"}
                         borderRadius={"8px"}
                         max="9999-12-31"
                         maxLength={1}
@@ -229,7 +236,6 @@ function LicoesAprendidasModal({
                         mt={"-9px"}
                         width={"156px"}
                         height={"56px"}
-                        _placeholder={{ color: "black" }}
                         id="data"
                         type="Date"
                         name="data"
@@ -290,7 +296,7 @@ function LicoesAprendidasModal({
                         // float={"right"}
                         onClick={() => setOpenModalRegister(true)}
                         _hover={{
-                          background: "origem.300",
+                          background: "origem.600",
                           transition: "all 0.4s",
                           color: "white",
                         }}

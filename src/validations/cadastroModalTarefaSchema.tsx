@@ -6,4 +6,5 @@ export const cadastroModalTarefaSchema = yup.object({
   data: yup.date().required("Data é requerido."),
   responsavel: yup.string().required("Responsavel é requerido."),
   descricao: yup.string(),
+  // Pass
 });

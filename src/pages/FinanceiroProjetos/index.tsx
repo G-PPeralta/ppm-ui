@@ -112,8 +112,9 @@ export function FinanceiroProjetos() {
                     // mt={"-5px"}
                     h={"56px"}
                     isRequired
-                    fontWeight={"400"}
                     fontSize={"14px"}
+                    fontFamily={"Mulish"}
+                    fontWeight={"400"}
                     _placeholder={{ color: "#949494" }}
                     placeholder="Projeto ou elemento PEP"
                     type="text"

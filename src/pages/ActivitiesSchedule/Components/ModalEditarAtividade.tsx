@@ -58,7 +58,11 @@ function ModalEditarAtividade({
   const { toast } = useToast();
   const [atividadeStatus, setAtividadeStatus] = useState(0);
   const [nome, setNome] = useState("");
-  const [responsavelId, setResponsavelId] = useState(0);
+  const [responsavelId, setResponsavelId] = useState(
+    listaOptions.optionsResponsaveis.filter(
+      (responsavel: any) => responsavel.label === atividade.nom_responsavel
+    )[0].value
+  );
   const [areaId, setAreaId] = useState(0);
   const [observacoes, setObservacoes] = useState("");
   const [inicioPlanejado, setInicioPlanejado] = useState<any>("");

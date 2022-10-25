@@ -20,11 +20,16 @@ import {
   ModalFooter,
   Button,
   Select,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
   // useDisclosure,
 } from "@chakra-ui/react";
 import { format } from "date-fns";
 import { AtividadesProjeto, TarefaAtividade } from "interfaces/Services";
-import { Text } from "recharts";
+// import { Text } from "recharts";
 
 import { useAuth } from "hooks/useAuth";
 
@@ -95,6 +100,8 @@ function EditarTarefaModal({
     if (campo === "status") return status;
   }
 
+  const formataParaPorcentagem = (val: number | undefined) => val + "%";
+
   return (
     <Flex>
       <Box
@@ -140,6 +147,7 @@ function EditarTarefaModal({
             justifyContent={"center"}
             color={"white"}
             fontSize={"14px"}
+            fontWeight={"700"}
           >
             Editar Tarefa
           </ModalHeader>
@@ -150,9 +158,9 @@ function EditarTarefaModal({
               padding={1}
               display={"flex"}
               justifyContent={"space-between"}
-              gap={3}
+              // gap={3}
             >
-              <Flex flexDir={"column"} flexGrow={4}>
+              <Flex flexDir={"column"} flexGrow={4} mr={4} ml={-3}>
                 <FormLabel
                   htmlFor="nomeTarefa"
                   color="#949494"
@@ -213,9 +221,9 @@ function EditarTarefaModal({
               marginBottom={1}
               width={"204px"}
               display="flex"
-              gap={4}
+              // gap={4}
             >
-              <Flex direction={"column"}>
+              <Flex direction={"column"} mr={4} ml={-3}>
                 <FormLabel
                   htmlFor="atividadeRel"
                   color="#949494"
@@ -274,6 +282,8 @@ function EditarTarefaModal({
               </Flex>
             </FormControl>
             <FormLabel
+              mr={4}
+              ml={-2}
               htmlFor="status"
               color="#949494"
               fontSize="12px"
@@ -282,7 +292,7 @@ function EditarTarefaModal({
             >
               STATUS
             </FormLabel>
-            <Input
+            {/* <Input
               type="number"
               fontSize={"14px"}
               borderRadius={"8px"}
@@ -295,9 +305,33 @@ function EditarTarefaModal({
               name="status"
               value={status}
               onChange={(event) => setStatus(Number(event.target.value))}
-            ></Input>
+            ></Input> */}
+            <NumberInput
+              mt={"-9px"}
+              mr={4}
+              ml={-2}
+              width={"208px"}
+              height={"56px"}
+              min={0}
+              max={100}
+              value={formataParaPorcentagem(status)}
+              onChange={(valueString) => {
+                const value = Number(valueString);
+                setStatus(value);
+              }}
+              h={"56px"}
+            >
+              <NumberInputField h={"56px"} />
+
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
             <FormControl padding={1}>
               <FormLabel
+                mr={4}
+                ml={-3}
                 htmlFor="acao"
                 color="#949494"
                 fontSize="12px"
@@ -307,12 +341,14 @@ function EditarTarefaModal({
                 DESCRIÇÃO DA TAREFA
               </FormLabel>
               <Textarea
+                mr={4}
+                ml={-3}
                 maxLength={255}
                 fontSize={"14px"}
                 borderRadius={"8px"}
                 border={"1px solid #A7A7A7"}
                 mt={"-9px"}
-                width={"456px"}
+                width={"436px"}
                 height={"121px"}
                 color="black"
                 isRequired
@@ -338,17 +374,19 @@ function EditarTarefaModal({
                 onClick={closeModal}
                 width={"208px"}
                 height={"56px"}
+                fontWeight={"700"}
+                fontSize="18px"
+                fontFamily={"Mulish"}
               >
-                <Text fontWeight={"700"} fontSize="18px">
-                  Cancelar
-                </Text>
+                Cancelar
               </Button>
               <Button
-                background="#0047BB"
+                background="origem.500"
                 variant="primary"
                 color="white"
+                borderRadius={"8px"}
                 _hover={{
-                  background: "#0047BB",
+                  background: "origem.600",
                   transition: "all 0.4s",
                 }}
                 onClick={() => {
@@ -367,10 +405,11 @@ function EditarTarefaModal({
                 }}
                 width={"208px"}
                 height={"56px"}
+                fontWeight={"700"}
+                fontSize="18px"
+                fontFamily={"Mulish"}
               >
-                <Text fontWeight={"700"} fontSize="18px">
-                  Adicionar
-                </Text>
+                Adicionar
               </Button>
             </Flex>
           </ModalFooter>

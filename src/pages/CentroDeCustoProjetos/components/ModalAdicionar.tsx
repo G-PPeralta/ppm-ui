@@ -4,13 +4,15 @@ import {
   Button,
   Flex,
   Input,
-  InputGroup,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  ModalCloseButton,
+  NumberInput,
+  NumberInputField,
   Text,
   Textarea,
   useDisclosure,
@@ -18,7 +20,6 @@ import {
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
-import InputGenerico from "components/InputGenerico";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
@@ -50,7 +51,10 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
     <>
       <Button
         h={"56px"}
-        borderRadius={"10px"}
+        fontSize={"18px"}
+        fontWeight={"700"}
+        fontFamily={"Mulish"}
+        borderRadius={"8px"}
         background={"origem.500"}
         variant="primary"
         color="white"
@@ -77,15 +81,32 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
           >
             Gestão de Custos
           </ModalHeader>
+          <ModalCloseButton color={"white"} />
 
           <ModalBody mt={3}>
-            <Text fontWeight={"bold"} mb={3}>
+            <Text
+              fontSize={"18px"}
+              fontWeight={"700"}
+              fontFamily={"Mulish"}
+              mb={3}
+              color={"#2D2926"}
+            >
               LANÇAR DESPESA
             </Text>
             <Flex direction={"column"} gap={4}>
               <Flex gap={4}>
                 <Flex direction={"column"}>
-                  {/* <NumberInput
+                  <Flex gap={1}>
+                    <RequiredField />
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      VALOR
+                    </Text>
+                  </Flex>
+                  <NumberInput
                     h={"56px"}
                     precision={2}
                     max={9999999}
@@ -98,19 +119,7 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
                     }
                   >
                     <NumberInputField bg={"#fff"} h={"56px"} />
-                  </NumberInput> */}
-                  <InputGroup>
-                    <InputGenerico
-                      registerForm={registerForm}
-                      nomeInput={"VALOR"}
-                      propName={"valor"}
-                      value={registerForm.values.valor || ""}
-                      required={true}
-                      placeholder={"0"}
-                      maxLength={20}
-                      isNumeric={true}
-                    />
-                  </InputGroup>
+                  </NumberInput>
                 </Flex>
                 <Flex direction={"column"}>
                   <DateTimePickerData

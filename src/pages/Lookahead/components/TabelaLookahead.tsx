@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import {
-  // FiArrowDown,
-  FiChevronLeft,
-  FiChevronRight,
-  FiChevronsLeft,
-  FiChevronsRight,
-} from "react-icons/fi";
+import { useState } from "react";
+// import {
+//   // FiArrowDown,
+//   FiChevronLeft,
+//   FiChevronRight,
+//   FiChevronsLeft,
+//   FiChevronsRight,
+// } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import {
@@ -19,11 +19,13 @@ import {
   Tr,
   Text,
   Flex,
-  IconButton,
-  Select,
+  // IconButton,
+  // Select,
   // Icon,
 } from "@chakra-ui/react";
 import { AtividadesLookahead } from "interfaces/lookahead";
+
+import PaginacaoTabela from "components/PaginacaoTabela";
 
 interface TableProps {
   data: AtividadesLookahead[];
@@ -31,59 +33,66 @@ interface TableProps {
 
 export function TabelaLookahead(props: TableProps) {
   const { data } = props;
-  const [pagAtual, setPagAtual] = useState(1);
+  // const [pagAtual, setPagAtual] = useState(1);
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
-  const [perPage, setPerPage] = useState<number>(5);
+  // const [perPage, setPerPage] = useState<number>(5);
 
   const total = data.length;
   // const planejado = data.reduce((i, value) => i + value.planejado, 0);
   // const realizado = data.reduce((i, value) => i + value.realizado, 0);
-
-  const totalRegs = data.length;
-  const maxPage = Math.ceil(totalRegs / perPage);
-  const paginate = (pag: number) => {
-    setPagAtual(pag);
-
-    const x = (pag - 1) * perPage;
-    const y = (pag - 1) * perPage + perPage;
-    setFrom(x);
-    setTo(y);
+  const fromTo = {
+    from,
+    to,
+    setFrom,
+    setTo,
   };
 
-  const changePerPage = (value: number) => {
-    setPerPage(value);
-    const x = perPage;
-    const y = perPage + perPage;
-    setFrom(x);
-    setTo(y);
-  };
+  // const totalRegs = data.length;
+  // const maxPage = Math.ceil(totalRegs / perPage);
+  // const paginate = (pag: number) => {
+  //   setPagAtual(pag);
 
-  const advance = () => {
-    if (pagAtual == maxPage) {
-      return;
-    }
+  //   const x = (pag - 1) * perPage;
+  //   const y = (pag - 1) * perPage + perPage;
+  //   setFrom(x);
+  //   setTo(y);
+  // };
 
-    const _pag = pagAtual + 1;
+  // const changePerPage = (value: number) => {
+  //   setPerPage(value);
+  //   const x = perPage;
+  //   const y = perPage + perPage;
+  //   setFrom(x);
+  //   setTo(y);
+  // };
 
-    paginate(_pag);
-  };
+  // const advance = () => {
+  //   if (pagAtual == maxPage) {
+  //     return;
+  //   }
 
-  const back = () => {
-    if (pagAtual == 1) {
-      return;
-    }
-    const _pag = pagAtual - 1;
-    paginate(_pag);
-  };
+  //   const _pag = pagAtual + 1;
 
-  useEffect(() => {
-    paginate(pagAtual);
-  }, [from, to]);
+  //   paginate(_pag);
+  // };
+
+  // const back = () => {
+  //   if (pagAtual == 1) {
+  //     return;
+  //   }
+  //   const _pag = pagAtual - 1;
+  //   paginate(_pag);
+  // };
+
+  // useEffect(() => {
+  //   paginate(pagAtual);
+  // }, [from, to]);
 
   const tableData = data.slice(from, to).map((act, key) => (
     <>
-      <Tr key={key} backgroundColor={key % 2 == 1 ? "#F9F9F9" : "#FFF"}>
+      {/* <Tr key={key} backgroundColor={key % 2 == 1 ? "#F9F9F9" : "#FFF"}> */}
+      <Tr key={key}>
         <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
           {/* {budget.filhos && (
             <Icon
@@ -96,7 +105,7 @@ export function TabelaLookahead(props: TableProps) {
         </Td>
         <Td textAlign={"center"} color={"#2D2926"}>
           <Link to={`/lookahead-detalhe/${act.id}`}>
-            <Text color="#0047BB">{act.nom_atividade}</Text>
+            <Text color="blue">{act.nom_atividade}</Text>
           </Link>
         </Td>
         <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
@@ -147,14 +156,14 @@ export function TabelaLookahead(props: TableProps) {
                 <Th color="white" textAlign={"center"}>
                   {total} Projetos
                 </Th>
-                <Th></Th>
+                <Th color="white" textAlign={"center"}></Th>
               </Tr>
             </Tfoot>
           </Table>
         </TableContainer>
-        <Flex justifyContent="end">
-          <Flex alignItems={"center"} justifyContent={"space-between"}>
-            <Text>Per page</Text>
+        {/* <Flex justifyContent="end"> */}
+        {/* <Flex alignItems={"center"} justifyContent={"space-between"}> */}
+        {/* <Text>Per page</Text>
             <Select
               width={100}
               marginLeft="10px"
@@ -164,9 +173,9 @@ export function TabelaLookahead(props: TableProps) {
               <option value="5">5</option>
               <option value="10">10</option>
               <option value="15">15</option>
-            </Select>
+            </Select> */}
 
-            <Text>
+        {/* <Text>
               {pagAtual} - {perPage} of {data.length}{" "}
             </Text>
 
@@ -185,11 +194,11 @@ export function TabelaLookahead(props: TableProps) {
               marginRight="5px"
               aria-label=""
               icon={<FiChevronLeft onClick={back} />}
-            />
+            /> */}
 
-            {/* <Text>Página atual: {pagAtual}</Text> */}
+        {/* <Text>Página atual: {pagAtual}</Text> */}
 
-            <IconButton
+        {/* <IconButton
               bgColor="#FFFF"
               marginLeft="5px"
               marginRight="5px"
@@ -204,8 +213,11 @@ export function TabelaLookahead(props: TableProps) {
               aria-label=""
               icon={<FiChevronsRight />}
               onClick={() => paginate(maxPage)}
-            />
-          </Flex>
+            /> */}
+        {/* </Flex> */}
+        {/* </Flex> */}
+        <Flex>
+          <PaginacaoTabela data={data} fromTo={fromTo} />
         </Flex>
       </Flex>
     </>

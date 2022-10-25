@@ -1,7 +1,8 @@
 // import { IoIosArrowBack } from "react-icons/io";
+import { useState } from "react";
 import {
   MdArrowForwardIos,
-  MdOutlineArrowBackIosNew,
+  // MdOutlineArrowBackIosNew,
   MdModeEdit,
 } from "react-icons/md";
 
@@ -22,7 +23,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 
-import { handleCancelar } from "utils/handleCadastro";
+// import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
@@ -38,6 +39,7 @@ interface TableProps {
 function ModalPriorizacao(infosRankings: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm } = useCadastroPriorizacao();
+  const [refresh, setRefresh] = useState(false);
 
   return (
     <>
@@ -69,6 +71,7 @@ function ModalPriorizacao(infosRankings: TableProps) {
             fontSize={"14px"}
             fontWeight={"700"}
             h={"48px"}
+            // ml={-2}
           >
             {`Priorização ${infosRankings.nomeRanking}`}
           </ModalHeader>
@@ -90,38 +93,25 @@ function ModalPriorizacao(infosRankings: TableProps) {
                   >
                     <Flex align={"flex-end"} alignSelf={"start"}>
                       <Text>
-                        <Button
-                          aria-label=""
-                          backgroundColor={"white"}
-                          color={"#2D2926"}
-                          onClick={() => handleCancelar(registerForm, onClose)}
-                          _hover={{
-                            background: "white",
-                            transition: "all 0.4s",
-                            color: "origem.500",
-                          }}
+                        <Text
+                          // aria-label=""
+                          // backgroundColor={"white"}
+                          // color={"#2D2926"}
+                          // onClick={() => handleCancelar(registerForm, onClose)}
+                          // _hover={{
+                          //   background: "white",
+                          //   transition: "all 0.4s",
+                          //   color: "origem.500",
+                          // }}
                           fontSize={"24px"}
                           fontWeight={"700"}
                           fontFamily={"Mulish"}
                           textAlign={"start"}
-                          mt={-2}
+                          mt={-1}
+                          ml={"19px"}
                         >
-                          <Icon
-                            _hover={{
-                              background: "white",
-                              transition: "all 0.4s",
-                              color: "origem.500",
-                            }}
-                            as={MdOutlineArrowBackIosNew}
-                            h={"30px"}
-                            w={"22px"}
-                            fontSize="13px"
-                            fontWeight={"none"}
-                            mr={3}
-                            color="#2D2926"
-                          />{" "}
                           Priorização
-                        </Button>
+                        </Text>
                       </Text>
                     </Flex>
 
@@ -129,6 +119,8 @@ function ModalPriorizacao(infosRankings: TableProps) {
                       <Flex gap={4}>
                         <Flex align={"flex-start"} alignSelf={"start"}>
                           <ModalCadastrarOpcaoPriorizacao
+                            refresh={refresh}
+                            setRefresh={setRefresh}
                             nomeRanking={infosRankings.nomeRanking}
                             idRanking={infosRankings.idRanking}
                           />
@@ -166,8 +158,10 @@ function ModalPriorizacao(infosRankings: TableProps) {
               </FormControl>
             </>
             <ModalBody mt={1}>
-              <Flex>
+              <Flex ml={"-3px"} mr={"-3px"}>
                 <TabelaOpcoesPriorizacao
+                  refresh={refresh}
+                  setRefresh={setRefresh}
                   idRanking={infosRankings.idRanking}
                   nomeRanking={infosRankings.nomeRanking}
                 />

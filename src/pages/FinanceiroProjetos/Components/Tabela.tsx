@@ -45,6 +45,7 @@ function Tabela({ data }: Props) {
     "Elemento PEP",
     "Previsto",
     "Realizado",
+    "Gap %",
     "Denominação de Objeto",
     "Mês",
     "Texto do Pedido",
@@ -104,6 +105,9 @@ function Tabela({ data }: Props) {
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
                 <Text>{formatarParaReal(linhaTabela.totalrealizado)}</Text>
+              </Td>
+              <Td textAlign={"start"} fontWeight={"semibold"}>
+                <Text>{linhaTabela.gap < 1 ? 0 : linhaTabela.gap}%</Text>
               </Td>
               <Td textAlign={"start"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.denominacaodeobjeto}</Text>

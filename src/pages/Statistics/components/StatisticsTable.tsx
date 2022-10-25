@@ -77,16 +77,11 @@ export function StatisticsTable({ data }: Props) {
                       to={`/estatisticas/cronograma/${projeto.id_sonda}/${projeto.id_poco}`}
                       state={{ data: projeto }}
                     >
-                      <Text>{projeto.sonda}</Text>
+                      <Text color="origem.500">{projeto.sonda}</Text>
                     </Link>
                   </Td>
                   <Td textAlign={"center"} fontWeight={"semibold"}>
-                    <Link
-                      to={`/estatisticas/cronograma/${projeto.id_sonda}/${projeto.id_poco}`}
-                      state={{ data: projeto }}
-                    >
-                      <Text>{projeto.poco}</Text>
-                    </Link>
+                    <Text>{projeto.poco}</Text>
                   </Td>
                   <Td textAlign={"center"} fontWeight={"semibold"}>
                     <Text>

@@ -6,7 +6,7 @@ import {
   AreaAtuacao,
   Responsavel,
 } from "interfaces/CadastrosModaisInfograficos";
-import * as yup from "yup";
+import { editarAtividadeGanttSchema } from "validations/Estatisticas";
 
 import { useToast } from "contexts/Toast";
 
@@ -18,10 +18,17 @@ import { patchOperacoesEstatisticas } from "services/update/OperacoesEstatistica
 
 import { useAuth } from "./useAuth";
 
+interface Projeto {
+  sonda: string;
+  id_sonda: number;
+  poco: string;
+  id_poco: number;
+}
+
 export function useEditarOperacao(
   refresh: boolean,
   setRefresh: Function,
-  projeto: any
+  projeto: Projeto
 ) {
   const { user } = useAuth();
   const { toast } = useToast();
@@ -47,46 +54,59 @@ export function useEditarOperacao(
 
   const initialValues = {
     nom_usu_create: user?.nome,
+    id_poco_pai: projeto.id_poco,
     id_atividade: 0,
-    // id_area: 0,
     inicio_realizado: "",
     fim_realizado: "",
     inicio_planejado: "",
     fim_planejado: "",
     pct_real: 0,
-    // id_responsavel: 0,
+    nome_atividade: "",
+    hrs_reais: 0,
+    anotacoes: "",
+    mocs: [
+      {
+        numero_moc: "",
+      },
+    ],
+    ocorrencias: [
+      {
+        id: 0,
+        nome_ocorrencia: "",
+        horas: "",
+      },
+    ],
+    licoes_aprendidas: [
+      {
+        id: 0,
+        licao_aprendida: "",
+        data: "",
+        acao_e_recomendacao: "",
+      },
+    ],
   };
 
-  const adicionarOperacao = yup.object({
-    id_atividade: yup.number().required("Campo obrigatório").moreThan(0),
-    // id_area: yup.number(), // .required("Campo obrigatório").moreThan(0),
-    inicio_realizado: yup.date().required("Campo obrigatório"),
-    fim_realizado: yup.date().required("Campo obrigatório"),
-    inicio_planejado: yup.date().required("Campo obrigatório"),
-    fim_planejado: yup.date().required("Campo obrigatório"),
-    // hrs_totais: yup.number().required("Campo obrigatório").moreThan(0),
-    pct_real: yup.number().required("Campo obrigatório"),
-    // id_responsavel: yup.number(), // .required("Campo obrigatório").moreThan(0),
-    // precedentes: yup.array().of(
-    //   yup.object({
-    //     atividadePrecedenteId: yup.number(),
-    //     dias: yup.number(),
-    //   })
-    // ),
-  });
   const registerForm: any = useFormik({
     initialValues,
-    validationSchema: adicionarOperacao,
+    validationSchema: editarAtividadeGanttSchema,
     onSubmit: async (values) => {
       const newValues = {
-        id_atividade: values.id_atividade,
-
-        inicio_realizado: new Date(values.inicio_realizado).toLocaleString(),
-        fim_realizado: new Date(values.fim_realizado).toLocaleString(), // tratamento back
-        inicio_planejado: new Date(values.inicio_planejado).toLocaleString(),
-        fim_planejado: new Date(values.fim_planejado).toLocaleString(), // tratamento back
-
-        pct_real: values.pct_real,
+        nom_usu_create: user?.nome,
+        id_poco_pai: projeto.id_poco,
+        geral: {
+          id_atividade: values.id_atividade,
+          nome_atividade: values.nome_atividade,
+          pct_real: values.pct_real,
+          hrs_reais: values.hrs_reais,
+          inicio_realizado: values.inicio_realizado,
+          fim_realizado: values.fim_realizado,
+          inicio_planejado: values.inicio_planejado,
+          fim_planejado: values.fim_planejado,
+        },
+        anotacoes: {
+          anotacoes: values.anotacoes,
+        },
+        mocs: values.mocs,
       };
 
       setLoading(true);
@@ -101,7 +121,7 @@ export function useEditarOperacao(
         // console.log(">>>>", newValues);
         const { status } = await patchOperacoesEstatisticas(newValues);
         if (status === 200 || status === 201) {
-          toast.success("Operação adicionada com sucesso!", {
+          toast.success("Operação editada com sucesso!", {
             id: "toast-principal",
           });
           setLoading(false);

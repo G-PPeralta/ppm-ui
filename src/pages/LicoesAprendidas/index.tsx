@@ -272,10 +272,10 @@ export function LicoesAprendidasProjetos() {
               >
                 <Button
                   fontWeight={"700"}
-                  fontSize={"18px"}
+                  fontSize="18px"
                   color={"#0239C3"}
                   variant="ghost"
-                  colorScheme="messenger"
+                  // colorScheme="messenger"
                   rightIcon={<FaFileCsv />}
                   // onClick={print}
                 >
@@ -297,6 +297,9 @@ export function LicoesAprendidasProjetos() {
                     PROJETO
                   </FormLabel>
                   <Select
+                    fontSize={"14px"}
+                    fontFamily={"Mulish"}
+                    fontWeight={"400"}
                     mt={"-9px"}
                     borderRadius={"8px"}
                     placeholder="Selecione"
@@ -321,7 +324,9 @@ export function LicoesAprendidasProjetos() {
               <Flex align={"flex-end"}>
                 <Button
                   type="button"
-                  background="origem.500"
+                  borderRadius={"8px"}
+                  fontWeight={"700"}
+                  background={"origem.500"}
                   variant="outline"
                   color="white"
                   borderColor="#0047BB"
@@ -336,8 +341,6 @@ export function LicoesAprendidasProjetos() {
                   height={"56px"}
                   width={"101px"}
                   fontSize={"18px"}
-                  fontWeight={"700"}
-                  borderRadius={"8px"}
                 >
                   Filtrar
                 </Button>

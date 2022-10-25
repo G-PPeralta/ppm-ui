@@ -44,21 +44,19 @@ function ModalCadastrarPriorizacao() {
       <Button
         onClick={onOpen}
         color={"white"}
-        backgroundColor={"#0047BB"}
+        background={"origem.500"}
         aria-label="Plus sign"
         variant="primary"
         _hover={{
-          background: "white",
+          background: "origem.600",
           transition: "all 0.4s",
-          color: "#0047BB",
-          border: "#0047BB solid 1px",
         }}
-        borderRadius={"8px"}
         h={"56px"}
         w={"121px"}
         fontSize={"18px"}
-        fontFamily={"Mulish"}
         fontWeight={"700"}
+        borderRadius={"8px"}
+        fontFamily={"Mulish"}
       >
         Cadastrar
       </Button>
@@ -198,12 +196,12 @@ function ModalCadastrarPriorizacao() {
                   disabled={!registerForm.isValid}
                   w={"208px"}
                   h={"56px"}
-                  background="#0047BB"
+                  background="origem.500"
                   variant="primary"
                   color="white"
                   onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
-                    background: "origem.500",
+                    background: "origem.600",
                     transition: "all 0.4s",
                   }}
                 >

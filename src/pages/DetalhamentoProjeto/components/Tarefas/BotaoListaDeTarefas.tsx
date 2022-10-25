@@ -235,9 +235,11 @@ function BotaoListadeTarefas() {
                         mt={"-9px"}
                         width={"328px"}
                         height={"56px"}
-                        _placeholder={{ color: "black" }}
+                        _placeholder={{ color: "#949494" }}
                         placeholder="Nome da tarefa"
                         type="text"
+                        fontSize={"14px"}
+                        fontWeight={"400"}
                         id="tarefa"
                         name="tarefa"
                         value={tarefaFilter}
@@ -264,6 +266,8 @@ function BotaoListadeTarefas() {
                       </FormLabel>
                       <Input
                         // placeholder="dd/mm/aaaa"
+                        fontSize={"14px"}
+                        fontWeight={"400"}
                         max="9999-12-31"
                         maxLength={1}
                         borderRadius={"8px"}
@@ -313,10 +317,11 @@ function BotaoListadeTarefas() {
                       width={"100px"}
                       height={"56px"}
                       fontWeight={"700"}
+                      fontFamily={"Mulish"}
                       fontSize="18px"
                       alignSelf={"end"}
                     >
-                      Buscar
+                      Filtrar
                       <Icon
                         fontWeight={"900"}
                         as={AiOutlineSearch}
@@ -340,16 +345,17 @@ function BotaoListadeTarefas() {
                       // float={"right"}
                       onClick={() => setIsModalOpen(true)}
                       _hover={{
-                        background: "origem.300",
+                        background: "origem.600",
                         transition: "all 0.4s",
                         color: "white",
                       }}
                       // width={"117px"}
                       height={"56px"}
+                      fontWeight={"700"}
+                      fontSize="18px"
+                      borderRadius={"8px"}
                     >
-                      <Text fontWeight={"700"} fontSize="18px">
-                        Adicionar Tarefa
-                      </Text>
+                      Adicionar Tarefa
                     </Button>
                     <Flex alignSelf={"end"} align={"flex-start"}>
                       <Button

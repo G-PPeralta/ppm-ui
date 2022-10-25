@@ -1,11 +1,22 @@
 import { forwardRef, useEffect, useState } from "react";
-import ReactDatePicker from "react-datepicker";
+import ReactDatePicker, { registerLocale } from "react-datepicker";
 
 import { Button, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
+import ptBR from "date-fns/locale/pt-BR";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
+registerLocale("ptBR", ptBR);
 
-function DatePickerGenerico({ registerForm, data, propName, nomeLabel }: any) {
+function DatePickerGenerico({
+  registerForm,
+  data,
+  propName,
+  nomeLabel,
+  required,
+  selecionaHorario,
+  isDisabled,
+  esconderHorario,
+}: any) {
   const [dataInicio, setDataInicio] = useState<any>("");
 
   useEffect(() => {
@@ -17,7 +28,12 @@ function DatePickerGenerico({ registerForm, data, propName, nomeLabel }: any) {
 
   const handleIniciarDate = (dataSelecionada: any) => {
     if (dataSelecionada) {
-      dataSelecionada.setHours(9, 0, 0, 0);
+      if (
+        dataSelecionada.prevState === null ||
+        dataSelecionada.prevState === ""
+      ) {
+        dataSelecionada.setHours(9, 0, 0, 0);
+      }
       setDataInicio(dataSelecionada);
       registerForm.setFieldValue(propName, dataSelecionada);
     }
@@ -25,34 +41,40 @@ function DatePickerGenerico({ registerForm, data, propName, nomeLabel }: any) {
 
   const TriggerDatePickerInicio = forwardRef(
     ({ value, onClick }: any, ref: any) => (
-      <Button
-        h={"56px"}
-        onClick={onClick}
-        ref={ref}
-        variant="outline"
-        px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
-        minW={useBreakpointValue({ base: "180px", sm: "180px", md: "220px" })}
-      >
-        {value === "" ? "Selecione a data" : value}
-      </Button>
+      <Flex flex={1}>
+        <Button
+          isDisabled={isDisabled}
+          h={"56px"}
+          onClick={onClick}
+          ref={ref}
+          variant="outline"
+          px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
+          minW={useBreakpointValue({ base: "180px", sm: "180px", md: "220px" })}
+          w={"100%"}
+        >
+          {value === "" ? "Selecione a data" : value}
+        </Button>
+      </Flex>
     )
   );
 
   return (
     <Flex direction={"column"}>
       <Flex gap={1}>
-        <RequiredField />
+        {required && <RequiredField />}
         <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
           {nomeLabel}
         </Text>
       </Flex>
       <ReactDatePicker
+        disabled={isDisabled}
         selected={dataInicio}
         onChange={(date) => handleIniciarDate(date)}
-        locale="pt-BR"
-        // showTimeSelect
-        dateFormat="dd/MM/yyyy, hh:mm"
+        locale="ptBR"
+        showTimeSelect={!!selecionaHorario}
+        dateFormat={esconderHorario ? "dd/MM/yyyy" : "Pp"}
         customInput={<TriggerDatePickerInicio />}
+        timeFormat="p"
       />
     </Flex>
   );

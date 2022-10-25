@@ -20,11 +20,16 @@ import {
 import StackedBarChart from "components/StackedBarChartGraphic";
 
 import { getSonda } from "services/get/CadastroModaisInfograficos";
-import { getOperacoes } from "services/get/Estatisticas";
+import {
+  getOperacoes,
+  getGraficoHistorico,
+} from "services/get/GraficosEstatisticos";
 
-export function GraficoPorDuracao() {
+export function GraficoPorDuracao({ de, ate, refresh }: any) {
   const [listaSondas, setListaSondas] = useState<any[]>([]);
   const [operacao, setOperacao] = useState<any[]>([]);
+  const [chartData, setChartData] = useState<any[]>([]);
+
   // const [loading, setLoading] = useState(true);
   const durationHistory = [
     "Mínimo - 8 horas",
@@ -32,85 +37,36 @@ export function GraficoPorDuracao() {
     "Máxima - 12 horas",
   ];
 
-  const dataMock1 = [
-    {
-      month: "Pir-61",
-      Durações: 90,
-    },
-    {
-      month: "Pir-62",
-      Durações: 80,
-    },
-    {
-      month: "Pir-63",
-      Durações: 70,
-    },
-    {
-      month: "Pir-64",
-      Durações: 60,
-    },
-    {
-      month: "Pir-65",
-      Durações: 50,
-    },
-    {
-      month: "Pir-66",
-      Durações: 40,
-    },
-    {
-      month: "Pir-67",
-      Durações: 30,
-    },
-    {
-      month: "Pir-68",
-      Durações: 20,
-    },
-    {
-      month: "Pir-69",
-      Durações: 90,
-    },
-    {
-      month: "Pir-70",
-      Durações: 70,
-    },
-    {
-      month: "Pir-71",
-      Durações: 50,
-    },
-    {
-      month: "Pir-72",
-      Durações: 100,
-    },
-  ];
-
   const dataEntries1 = [{ name: "Durações", color: "#0047BB" }];
 
   const reqGet = async () => {
     const sondas = await getSonda();
-    // setLoading(false);
+    const operacao = await getOperacoes();
+    const params: any = {};
+    if (de && ate) {
+      params.de = de;
+      params.a = ate;
+    }
+    const historico = await getGraficoHistorico(params);
+
+    const newData = historico.data.map((e) => ({
+      ...e,
+      key: `${e.nom_sonda}-${e.nom_poco}`,
+      Durações: e.hrs_media,
+    }));
 
     const sondasSorted = sondas.data.sort((a: any, b: any) =>
       a.nom_sonda.localeCompare(b.nom_sonda)
     );
 
-    const operacao = await getOperacoes();
-    // setLoading(false);
-
-    // const operacaoSorted = operacao.data.sort((a: any, b: any) =>
-    //   a.campo.localeCompare(b.campo)
-    // );
-
-    setOperacao(operacao.data);
-
+    setChartData(newData);
     setListaSondas(sondasSorted);
+    setOperacao(operacao.data);
   };
-
-  // console.log(listaSondas);
-  // console.log(operacao);
 
   useEffect(() => {
     reqGet();
-  }, []);
+  }, [refresh]);
 
   const componentRef = useRef<HTMLDivElement>(null);
 
@@ -266,7 +222,7 @@ export function GraficoPorDuracao() {
                 </Flex>
               </Flex> */}
           {/* <Flex flexDir={"column"} wrap={"wrap"} flex={1}> */}
-          <Flex mt={"-10px"} gap={4} mb={"10px"} wrap={"wrap"} flex={1}>
+          <Flex gap={4} wrap={"wrap"} flex={1}>
             <Flex alignItems={"flex-end"}>
               <FormControl>
                 <FormLabel
@@ -303,14 +259,14 @@ export function GraficoPorDuracao() {
                   fontSize={"12px"}
                   color={"#949494"}
                   fontWeight={"700"}
-                  htmlFor="operacao"
+                  htmlFor="campo"
                 >
                   OPERAÇÃO
                 </FormLabel>
                 <Select
                   mt={"-9px"}
-                  id="operacao"
-                  name="operacao"
+                  id="campo"
+                  name="campo"
                   width={"208px"}
                   height={"56px"}
                   borderRadius={"8px"}
@@ -334,7 +290,7 @@ export function GraficoPorDuracao() {
                     BASE DA ZONA INTERVIDA MAIS PROFUNDA
                   </Text>
                 </FormLabel>
-                <Input
+                {/* <Input
                   placeholder="Base da zona intervida mais profunda"
                   mt={"-9px"}
                   id="base"
@@ -346,12 +302,42 @@ export function GraficoPorDuracao() {
                   fontSize={"14px"}
                   fontWeight={"400"}
                   _placeholder={{ color: "black" }}
+                /> */}
+                <Input
+                  mr={4}
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  _placeholder={{ color: "#2D2926" }}
+                  mt={"-6px"}
+                  id="ate"
+                  name="ate"
+                  width={"146px"}
+                  height={"56px"}
+                  borderRadius={"8px"}
+                  type={"number"}
+                  placeholder={"De"}
+                  // max="9999-12-31"
+                  // maxLength={1}
+                />
+                <Input
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  placeholder={"Até"}
+                  _placeholder={{ color: "#2D2926" }}
+                  mt={"-6px"}
+                  id="ate"
+                  name="ate"
+                  width={"146px"}
+                  height={"56px"}
+                  borderRadius={"8px"}
+                  type={"number"}
+                  // max="9999-12-31"
+                  // maxLength={1}
                 />
               </FormControl>
             </Flex>
           </Flex>
-          <Flex flexDir={"row"} gap={4} mt={"-10px"}>
-            {" "}
+          <Flex flexDir={"row"} gap={4}>
             <Flex alignItems={"flex-end"}>
               <FormControl>
                 <FormLabel
@@ -405,8 +391,8 @@ export function GraficoPorDuracao() {
               </FormControl>
             </Flex> */}
           </Flex>
-          <Flex gap={1} direction={"column"} mt={-2}>
-            <Flex mb={"-18px"}>
+          <Flex gap={1} direction={"column"}>
+            <Flex>
               <Text
                 mt={"5px"}
                 fontSize={"24px"}
@@ -416,78 +402,38 @@ export function GraficoPorDuracao() {
                 Histórico de durações
               </Text>
             </Flex>
-            <Flex mb={"-10px"} direction={"row"} gap={2}>
-              <Text
-                mt={"10px"}
-                fontSize={"20px"}
-                fontWeight={"700"}
-                color={"#0047BB"}
-              >
+            <Flex direction={"row"} gap={2}>
+              <Text fontSize={"20px"} fontWeight={"700"} color={"#0047BB"}>
                 Mínimo:
               </Text>
-              <Text
-                mt={"10px"}
-                fontSize={"20px"}
-                fontWeight={"700"}
-                color={"black"}
-              >
+              <Text fontSize={"20px"} fontWeight={"700"} color={"black"}>
                 8 HORAS
               </Text>
             </Flex>
 
-            <Flex mb={"-10px"} direction={"row"} gap={2}>
-              <Text
-                mt={"10px"}
-                fontSize={"20px"}
-                fontWeight={"700"}
-                color={"#0047BB"}
-              >
+            <Flex direction={"row"} gap={2}>
+              <Text fontSize={"20px"} fontWeight={"700"} color={"#0047BB"}>
                 Médio:
               </Text>
-              <Text
-                mt={"10px"}
-                fontSize={"20px"}
-                fontWeight={"700"}
-                color={"black"}
-              >
+              <Text fontSize={"20px"} fontWeight={"700"} color={"black"}>
                 16 HORAS
               </Text>
             </Flex>
 
-            <Flex mb={"-10px"} direction={"row"} gap={2}>
-              <Text
-                mt={"10px"}
-                fontSize={"20px"}
-                fontWeight={"700"}
-                color={"#0047BB"}
-              >
+            <Flex direction={"row"} gap={2}>
+              <Text fontSize={"20px"} fontWeight={"700"} color={"#0047BB"}>
                 Máxima:
               </Text>
-              <Text
-                mt={"10px"}
-                fontSize={"20px"}
-                fontWeight={"700"}
-                color={"black"}
-              >
+              <Text fontSize={"20px"} fontWeight={"700"} color={"black"}>
                 24 HORAS
               </Text>
             </Flex>
 
-            <Flex mb={"-10px"} direction={"row"} gap={2}>
-              <Text
-                mt={"10px"}
-                fontSize={"20px"}
-                fontWeight={"700"}
-                color={"#0047BB"}
-              >
+            <Flex direction={"row"} gap={2}>
+              <Text fontSize={"20px"} fontWeight={"700"} color={"#0047BB"}>
                 Tendência de duração:
               </Text>
-              <Text
-                mt={"10px"}
-                fontSize={"20px"}
-                fontWeight={"700"}
-                color={"black"}
-              >
+              <Text fontSize={"20px"} fontWeight={"700"} color={"black"}>
                 12 HORAS
               </Text>
             </Flex>
@@ -499,12 +445,12 @@ export function GraficoPorDuracao() {
             display={"flex"}
             overflowY={"hidden"}
           >
-            <Flex ml={"-25px"} mt={"15px"}>
+            <Flex>
               <StackedBarChart
                 showY={true}
                 sizeW={1000}
                 sizeH={352}
-                data={dataMock1}
+                data={chartData}
                 dataEntries={dataEntries1}
                 barW={44}
               />
@@ -513,9 +459,6 @@ export function GraficoPorDuracao() {
         </Flex>
         <Flex ref={componentRef} />
       </form>
-      {/* </Box> */}
-      {/* </Flex> */}
-      {/* </Stack> */}
     </>
   );
 }

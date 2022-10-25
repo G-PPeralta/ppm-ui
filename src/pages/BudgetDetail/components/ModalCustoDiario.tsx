@@ -1,9 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // import { GrAddCircle } from "react-icons/gr";
+import ReactDatePicker from "react-datepicker";
+import { BsSearch } from "react-icons/bs";
+import { FiChevronDown } from "react-icons/fi";
+import Moment from "react-moment";
+import "moment/locale/pt-br";
 
 import {
   Flex,
-  Text,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -13,25 +17,101 @@ import {
   ModalFooter,
   useDisclosure,
   Button,
+  ModalCloseButton,
+  TableContainer,
+  Table,
+  Tbody,
+  Th,
+  Thead,
+  Tr,
+  Td,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import { Projeto } from "interfaces/Budgets";
+import { CustoDiario } from "interfaces/Budgets";
+import moment from "moment";
 
-// import RealInput from "components/RealInput/input";
+import Empty from "components/TableEmpty/empty";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { formatReal } from "utils/formatReal";
 
-import { useCadastroOrcamentoRealizado } from "hooks/useCadastroOrcamentoRealizado";
+import { getCustoDiario } from "services/get/GetBudget";
 
-function ModalCustoDiario(props: { projeto: Projeto }) {
+function ModalCustoDiario(props: { id: string | undefined }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, setAtividade } =
-    useCadastroOrcamentoRealizado();
-  const { id } = props.projeto;
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [loading, setLoading] = useState(true); // Loading
+  const [data, setData] = useState<CustoDiario[]>([]);
+  const { id } = props;
+
+  const wd = window.innerWidth;
+
+  const getCustosDiariosInicial = async () => {
+    const localStartDate = new Date(
+      parseInt(moment(new Date()).format("YYYY")),
+      parseInt(moment(new Date()).format("MM")) - 1,
+      1
+    );
+    const localEndDate = new Date();
+    const data = await getCustoDiario(id, localStartDate, localEndDate);
+    setStartDate(localStartDate);
+    setEndDate(localEndDate);
+    setData(data);
+    setLoading(false);
+  };
+
+  const filterByProject = async () => {
+    setLoading(false);
+
+    const data = await getCustoDiario(id, startDate, endDate);
+    setData(data);
+    setLoading(false);
+  };
 
   useEffect(() => {
-    setAtividade(id);
-  }, []);
+    getCustosDiariosInicial();
+  }, [id]);
+
+  const onChange = (dates: [any, any]) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+  };
+  const toggleAcordion = (id: number) => {
+    const elements = document.getElementsByClassName("item2-" + id);
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].classList.toggle("hide");
+    }
+  };
+
+  const tableData = data.map((dia, key) => (
+    <>
+      <Tr background={"origem.200"} key={dia.id} color="white">
+        <Td>{dia.index}</Td>
+        <Td onClick={() => toggleAcordion(key)}>
+          <Flex alignItems={"center"} justifyContent="space-between">
+            <Moment format="DD/MM/YYYY">{dia.date}</Moment>
+            <FiChevronDown size={"18px"} />{" "}
+          </Flex>
+        </Td>
+        <Td>{dia.fornecedor}</Td>
+        <Td align="center">{formatReal(dia.realizado)} </Td>
+      </Tr>
+      {dia.filhos &&
+        dia.filhos.map((filho) => (
+          <Tr className={"hide item2-" + key} key={"f" + filho.id}>
+            <Td>{filho.index}</Td>
+            <Td>{filho.atividade}</Td>
+            <Td>{filho.fornecedor}</Td>
+            <Td textAlign="center">
+              <Flex alignItems={"center"} justifyContent="center">
+                {formatReal(filho.realizado)}
+              </Flex>
+            </Td>
+          </Tr>
+        ))}
+    </>
+  ));
 
   return (
     <>
@@ -51,7 +131,7 @@ function ModalCustoDiario(props: { projeto: Projeto }) {
         textColor={"origem.500"}
         onClick={onOpen}
       >
-        Modal Custo Diario
+        Modal Custo Diário
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size="3xl">
@@ -65,44 +145,97 @@ function ModalCustoDiario(props: { projeto: Projeto }) {
             color={"white"}
             fontSize={"1em"}
           >
-            Gestão de Custos
+            Custo Diário
           </ModalHeader>
-          {/* <ModalCloseButton color={"white"} /> */}
+          <ModalCloseButton color={"white"} />
 
-          <ModalBody mt={3}></ModalBody>
-
+          <ModalBody mt={3}>
+            {!loading ? (
+              <>
+                <Flex
+                  direction={wd > 600 ? "row" : "column"}
+                  wrap={"wrap"}
+                  alignItems="flex-end"
+                  justify={"space-between"}
+                  gap={4}
+                  flex={1}
+                >
+                  <Flex align={"end"} gap={4} wrap={"wrap"} flex={1}>
+                    <Flex direction={"column"} w={"208px"}>
+                      <ReactDatePicker
+                        selectsRange={true}
+                        selected={startDate}
+                        onChange={onChange}
+                        startDate={startDate}
+                        endDate={endDate}
+                        locale="pt-BR"
+                        dateFormat="dd/MM/yyyy"
+                      />
+                    </Flex>
+                    <Flex flex={1}>
+                      <Button
+                        h={"56px"}
+                        borderRadius={"10px"}
+                        background={"origem.500"}
+                        variant="primary"
+                        color="white"
+                        _hover={{
+                          background: "origem.600",
+                          transition: "all 0.4s",
+                        }}
+                        rightIcon={<BsSearch />}
+                        fontWeight={"bold"}
+                        onClick={filterByProject}
+                      >
+                        Filtrar
+                      </Button>
+                    </Flex>
+                  </Flex>
+                </Flex>
+                <TableContainer mt={4} mb={3} ml={1}>
+                  <Table>
+                    <Thead>
+                      <Tr background={"origem.500"} color="white">
+                        <Th color={"white"} borderTopLeftRadius="10px"></Th>
+                        <Th color={"white"}>Serviço/Compra</Th>
+                        <Th color={"white"}>Fornecedor</Th>
+                        <Th color={"white"} borderTopRightRadius="10px">
+                          R$ Realizado
+                        </Th>
+                      </Tr>
+                    </Thead>
+                    {data.length ? (
+                      <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+                    ) : (
+                      <Empty />
+                    )}
+                  </Table>
+                </TableContainer>
+              </>
+            ) : (
+              <Flex
+                display={"flex"}
+                align={"center"}
+                justify={"center"}
+                h={"90vh"}
+              >
+                <Ring speed={2} lineWeight={5} color="blue" size={64} />
+              </Flex>
+            )}
+          </ModalBody>
           <ModalFooter justifyContent={"center"}>
             <Flex gap={2}>
               <Button
                 variant="ghost"
                 color="red"
-                onClick={() => handleCancelar(registerForm, onClose)}
+                onClick={() => onClose}
                 _hover={{
                   background: "red.500",
                   transition: "all 0.4s",
                   color: "white",
                 }}
               >
-                Cancelar
-              </Button>
-              <Button
-                disabled={!registerForm.isValid || !registerForm.dirty}
-                background="origem.300"
-                variant="primary"
-                color="white"
-                onClick={() => handleCadastrar(registerForm, onClose)}
-                _hover={{
-                  background: "origem.500",
-                  transition: "all 0.4s",
-                }}
-              >
-                {loading ? (
-                  <Ring speed={2} lineWeight={5} color="white" size={24} />
-                ) : (
-                  <>
-                    <Text>Concluir Cadastro</Text>
-                  </>
-                )}
+                Fechar
               </Button>
             </Flex>
           </ModalFooter>

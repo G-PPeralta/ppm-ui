@@ -7,6 +7,7 @@ export interface FinanceiroPorProjetos {
   textodopedido: string;
   totalprevisto: number;
   totalrealizado: number;
+  gap: number;
 }
 
 export interface TabelaCentroDeCusto {

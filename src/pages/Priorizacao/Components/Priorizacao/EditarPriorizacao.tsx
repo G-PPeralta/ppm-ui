@@ -63,6 +63,7 @@ function EditarPriorizacao(infosRanking: TableProps) {
         fontSize={"18px"}
         fontWeight={"700"}
         borderRadius={"8px"}
+        fontFamily={"Mulish"}
       >
         <Text>Configuração</Text>
       </Button>
@@ -198,14 +199,12 @@ function EditarPriorizacao(infosRanking: TableProps) {
                   // disabled={!registerForm.isValid}
                   w={"208px"}
                   h={"56px"}
-                  background="#0047BB"
+                  background={"origem.500"}
                   variant="primary"
                   color="white"
                   onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
-                    background: "white",
-                    border: "solid 1px #0047BB",
-                    color: "#0047BB",
+                    background: "origem.600",
                     transition: "all 0.4s",
                   }}
                 >

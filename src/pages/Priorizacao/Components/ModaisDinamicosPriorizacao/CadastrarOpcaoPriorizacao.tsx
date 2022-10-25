@@ -16,6 +16,7 @@ import {
   useDisclosure,
   Input,
   Select,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -28,6 +29,8 @@ import { useCadastroNovaOpcaoPriorizacao } from "hooks/useCadastrarOpcaoPrioriza
 interface TableProps {
   nomeRanking: string;
   idRanking: any;
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
@@ -40,6 +43,12 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
     registerForm.setFieldValue("id_ranking", infosRankings.idRanking);
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      registerForm.setFieldValue("id_ranking", infosRankings.idRanking);
+    }, 3000);
+  }, [infosRankings.refresh]);
+
   const rankingNome = infosRankings.nomeRanking;
 
   return (
@@ -51,17 +60,15 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
         aria-label="Plus sign"
         variant="primary"
         _hover={{
-          background: "white",
-          border: "solid 1px #0047BB",
-          borderRadius: "8px",
+          background: "origem.600",
           transition: "all 0.4s",
-          color: "origem.500",
         }}
         h={"56px"}
         w={"105px"}
         fontSize={"18px"}
         fontWeight={"700"}
         borderRadius={"8px"}
+        fontFamily={"Mulish"}
       >
         Cadastrar
       </Button>
@@ -78,6 +85,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
           >
             {`Priorização ${rankingNome}`}
           </ModalHeader>
+          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               // e.preventDefault();
@@ -191,12 +199,15 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                 </Button>
                 <Button
                   disabled={!registerForm.isValid}
-                  background="#0047BB"
+                  background="origem.500"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() => [
+                    handleCadastrar(registerForm, onClose),
+                    infosRankings.setRefresh(!infosRankings.refresh),
+                  ]}
                   _hover={{
-                    background: "origem.500",
+                    background: "origem.600",
                     transition: "all 0.4s",
                   }}
                   borderRadius={"8px"}
