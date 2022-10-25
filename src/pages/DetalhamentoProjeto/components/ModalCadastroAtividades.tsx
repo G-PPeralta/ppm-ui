@@ -249,7 +249,7 @@ function ModalCadastroAtividades({
                           fontSize={"12px"}
                           color={"#949494"}
                         >
-                          DURAÇÃO EM DIAS
+                          DIAS ÚTEIS
                         </Text>
                       </Flex>
                       <NumberInput
