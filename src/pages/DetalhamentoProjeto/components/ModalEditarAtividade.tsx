@@ -19,11 +19,6 @@ import {
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
-// import SelectFiltragem from "components/SelectFiltragem";
-
-// import PopOverRelacao from "./PopOverRelacao";
-
-// import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 
 import DateTimePicker from "./DateTimePicker";
