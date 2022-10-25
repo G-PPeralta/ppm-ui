@@ -22,12 +22,15 @@ import ModalEditarOpcaoPriorizacao from "./EditarOpcaoPriorizacao";
 interface TableProps {
   idRanking: any;
   nomeRanking: any;
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
   const [data, setData] = useState<any[]>([]);
+  const [render, setRender] = useState(false);
 
   const rankingId = rankingInfos.idRanking;
   const rankingNome = rankingInfos.nomeRanking;
@@ -35,6 +38,7 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
   const getData = async () => {
     const priorizacao = await getOpcoesRankings(rankingId);
     setData(priorizacao.data);
+    setRender(!render);
   };
   // console.log("data", data);
 
@@ -42,7 +46,11 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
     getData();
   }, []);
 
-  useEffect(() => {}, [getData()]);
+  useEffect(() => {
+    setTimeout(() => {
+      getData();
+    }, 3000);
+  }, [rankingInfos.refresh]);
 
   const fromTo = {
     from,
@@ -77,6 +85,8 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
           fontWeight={"semibold"}
         >
           <ModalEditarOpcaoPriorizacao
+            refresh={rankingInfos.refresh}
+            setRefresh={rankingInfos.setRefresh}
             opcaoId={op.id}
             opcaoName={op.nom_opcao}
             idRanking={rankingInfos}
