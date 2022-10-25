@@ -46,7 +46,7 @@ function ModalConfiguracoes({
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   // MODAL PRIORIZAÇÃO
-  // const [isPriorizacaoModalOpen, setIsPriorizacaoModalOpen] = useState(false);
+  const [isPriorizacaoModalOpen, setIsPriorizacaoModalOpen] = useState(false);
 
   // FORM LABELS
   const [responsavel, setReponsavel] = useState(projeto?.responsavel_id);
@@ -271,7 +271,7 @@ function ModalConfiguracoes({
                         fontWeight={"700"}
                         fontSize="18px"
                         // rightIcon={<IoMdPodium />}
-                        // onClick={() => setIsPriorizacaoModalOpen(true)}
+                        onClick={() => setIsPriorizacaoModalOpen(true)}
                       >
                         Priorização
                         {
@@ -279,6 +279,10 @@ function ModalConfiguracoes({
                             refresh={refresh}
                             setRefresh={setRefresh}
                             projeto={projeto.id}
+                            isPriorizacaoModalOpen={isPriorizacaoModalOpen}
+                            setIsPriorizacaoModalOpen={
+                              setIsPriorizacaoModalOpen
+                            }
                           />
                         }
                       </Button>
