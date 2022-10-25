@@ -18,10 +18,17 @@ import { patchOperacoesEstatisticas } from "services/update/OperacoesEstatistica
 
 import { useAuth } from "./useAuth";
 
+interface Projeto {
+  sonda: string;
+  id_sonda: number;
+  poco: string;
+  id_poco: number;
+}
+
 export function useEditarOperacao(
   refresh: boolean,
   setRefresh: Function,
-  projeto: any
+  projeto: Projeto
 ) {
   const { user } = useAuth();
   const { toast } = useToast();
@@ -47,6 +54,7 @@ export function useEditarOperacao(
 
   const initialValues = {
     nom_usu_create: user?.nome,
+    id_poco_pai: projeto.id_poco,
     id_atividade: 0,
     inicio_realizado: "",
     fim_realizado: "",
@@ -84,6 +92,7 @@ export function useEditarOperacao(
     onSubmit: async (values) => {
       const newValues = {
         nom_usu_create: user?.nome,
+        id_poco_pai: projeto.id_poco,
         geral: {
           id_atividade: values.id_atividade,
           nome_atividade: values.nome_atividade,
