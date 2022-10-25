@@ -13,9 +13,8 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
 import { StatisticsGanttProps, StatisticsTableData } from "interfaces/Services";
-
-import ModalCadastroCronograma from "pages/Statistics/components/ModalCadastroCronograma";
 
 import Sidebar from "components/SideBar";
 
@@ -25,6 +24,8 @@ import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
 
 import ModalCadastroOperacao from "../Statistics/components/ModalCadastroOperacao";
 import { Gantt } from "./components/Gantt";
+// import ModalAdicionarOperacao from "./components/ModalAdicionarOperacao";
+import ModalAdicionarAtividade from "./components/ModalAdicionarAtividade";
 import ModalEditarOperacao from "./components/ModalEditarOperacao";
 
 function StatisticsGantt() {
@@ -57,7 +58,7 @@ function StatisticsGantt() {
       TaskName: t.nome_atividade,
       StartDate: new Date(t.inicio_real),
       EndDate: new Date(t.fim_real),
-      BaselineStartDate: new Date(t.inicio_planejado), // new Date('04/21/2019')
+      BaselineStartDate: new Date(t.inicio_planejado),
       BaselineEndDate: new Date(t.fim_planejado),
       BaselineDuration: Number(t.hrs_totais),
       Duration: Number(t.hrs_reais),
@@ -108,7 +109,9 @@ function StatisticsGantt() {
     handleGetAllData();
   }, [refresh]);
 
-  // console.log("registerForm", registerForm.values);
+  useEffect(() => {
+    handleGetAllData();
+  }, []);
 
   return (
     <>
@@ -125,59 +128,82 @@ function StatisticsGantt() {
             }}
             borderRadius={{ base: "none", sm: "xl" }}
           >
-            <Stack>
-              <Flex mb={5} justify={"space-between"} wrap={"wrap"}>
-                <IconButton
-                  aria-label="voltar"
-                  color={"black"}
-                  backgroundColor="transparent"
-                  size="lg"
-                  icon={<FiChevronLeft />}
-                  onClick={() => navigate(`/estatisticas`)}
-                />
-                <Box>
-                  <Heading as="h3" size="md">
-                    {projeto.sonda}
-                  </Heading>
-                  <Text>{projeto.poco}</Text>
-                </Box>
+            {!loading ? (
+              <>
+                <Stack>
+                  <Flex mb={5} justify={"space-between"} wrap={"wrap"}>
+                    <IconButton
+                      aria-label="voltar"
+                      color={"black"}
+                      backgroundColor="transparent"
+                      size="lg"
+                      icon={<FiChevronLeft />}
+                      onClick={() => navigate(`/estatisticas`)}
+                    />
+                    <Box>
+                      <Heading as="h3" size="md">
+                        {projeto.sonda}
+                      </Heading>
+                      <Text>{projeto.poco}</Text>
+                    </Box>
 
-                <Flex gap={2} flex={2} justify={"end"} align={"end"}>
-                  <ModalCadastroOperacao
+                    <Flex gap={2} flex={2} justify={"end"} align={"end"}>
+                      <ModalCadastroOperacao
+                        refresh={refresh}
+                        setRefresh={setRefresh}
+                      />
+
+                      {/* <ModalAdicionarOperacao
                     refresh={refresh}
                     setRefresh={setRefresh}
-                  />
-                  <ModalCadastroCronograma
+                    projeto={projeto}
+                  /> */}
+
+                      <ModalAdicionarAtividade
+                        refresh={refresh}
+                        setRefresh={setRefresh}
+                        projeto={projeto}
+                        ganttData={ganttData}
+                      />
+
+                      <ModalEditarOperacao
+                        setRefresh={setRefresh}
+                        refresh={refresh}
+                        editOp={editOp}
+                        isOpen={isOpen}
+                        onClose={onClose}
+                        registerForm={registerForm}
+                        loading={loading}
+                      />
+                    </Flex>
+                  </Flex>
+                </Stack>
+                <Stack spacing="8">
+                  <Gantt
                     refresh={refresh}
                     setRefresh={setRefresh}
+                    options={{
+                      showGantt: true,
+                      toolbarOptions,
+                    }}
+                    edit={{
+                      onOpen,
+                      setEditOp,
+                    }}
+                    data={ganttData}
                   />
-                  <ModalEditarOperacao
-                    setRefresh={setRefresh}
-                    refresh={refresh}
-                    editOp={editOp}
-                    isOpen={isOpen}
-                    onClose={onClose}
-                    registerForm={registerForm}
-                    loading={loading}
-                  />
-                </Flex>
+                </Stack>
+              </>
+            ) : (
+              <Flex
+                display={"flex"}
+                align={"center"}
+                justify={"center"}
+                h={"90vh"}
+              >
+                <Ring speed={2} lineWeight={5} color="blue" size={64} />
               </Flex>
-            </Stack>
-            <Stack spacing="8">
-              <Gantt
-                refresh={refresh}
-                setRefresh={setRefresh}
-                options={{
-                  showGantt: true,
-                  toolbarOptions,
-                }}
-                edit={{
-                  onOpen,
-                  setEditOp,
-                }}
-                data={ganttData}
-              />
-            </Stack>
+            )}
           </Box>
         </Stack>
       </Sidebar>
