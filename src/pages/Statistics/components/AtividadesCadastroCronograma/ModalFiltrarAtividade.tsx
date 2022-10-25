@@ -19,11 +19,11 @@ import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
+import DatePickerModal from "components/DatePickerGenerico/DatePickerModal";
 import SelectFiltragem from "components/SelectFiltragem";
 
 import { useCadastroCronograma } from "hooks/useCadastroCronograma";
 import { useFiltragemCronogramaAtividade } from "hooks/useFiltragemCronogramaAtividade";
-import DatePickerModal from "components/DatePickerGenerico/DatePickerModal";
 
 export function ModalFiltrarAtividade({ refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
