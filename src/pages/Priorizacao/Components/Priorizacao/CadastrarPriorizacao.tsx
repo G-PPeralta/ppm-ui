@@ -44,8 +44,6 @@ function ModalCadastrarPriorizacao() {
       <Button
         onClick={onOpen}
         color={"white"}
-        borderRadius={"8px"}
-        fontWeight={"700"}
         background={"origem.500"}
         aria-label="Plus sign"
         variant="primary"
@@ -56,6 +54,8 @@ function ModalCadastrarPriorizacao() {
         h={"56px"}
         w={"121px"}
         fontSize={"18px"}
+        fontWeight={"700"}
+        borderRadius={"8px"}
         fontFamily={"Mulish"}
       >
         Cadastrar

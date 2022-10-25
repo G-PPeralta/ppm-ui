@@ -60,6 +60,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
         fontSize={"18px"}
         fontWeight={"700"}
         borderRadius={"8px"}
+        fontFamily={"Mulish"}
       >
         Cadastrar
       </Button>
