@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
+import { BiExpand } from "react-icons/bi";
 
 import { Flex, Heading } from "@chakra-ui/react";
 import {
@@ -169,6 +170,7 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
             registerForm={registerForm}
             loading={loading}
           />
+          <BiExpand color="#Fff" />
         </Flex>
         <GanttComponent
           id="gantt-control"
