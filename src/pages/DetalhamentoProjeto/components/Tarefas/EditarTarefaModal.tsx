@@ -344,11 +344,12 @@ function EditarTarefaModal({
                 </Text>
               </Button>
               <Button
-                background="#0047BB"
+                background="origem.500"
                 variant="primary"
                 color="white"
+                borderRadius={"8px"}
                 _hover={{
-                  background: "#0047BB",
+                  background: "origem.600",
                   transition: "all 0.4s",
                 }}
                 onClick={() => {
@@ -367,10 +368,11 @@ function EditarTarefaModal({
                 }}
                 width={"208px"}
                 height={"56px"}
+                fontWeight={"700"}
+                fontSize="18px"
+                fontFamily={"Mulish"}
               >
-                <Text fontWeight={"700"} fontSize="18px">
-                  Adicionar
-                </Text>
+                Adicionar
               </Button>
             </Flex>
           </ModalFooter>
