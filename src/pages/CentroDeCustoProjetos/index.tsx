@@ -18,13 +18,13 @@ import Tabela from "./components/Tabela";
 export function CentroDeCustoProjetos() {
   const [refresh, setRefresh] = useState(false);
 
-  const { id } = useParams();
+  const { id, mes } = useParams();
   const {
     loading,
     listaCentroCustoProjetos,
     optionsFornecedores,
     optionsClassesDeServico,
-  } = useRequests(Number(id));
+  } = useRequests(Number(id), mes);
 
   const refreshState = {
     refresh,
@@ -43,8 +43,11 @@ export function CentroDeCustoProjetos() {
   };
 
   const handleRefresh = async () => {
-    if (id) {
-      const tabelaCentroDeCusto = await getCentroDeCustoProjetos(Number(id));
+    if (id && mes) {
+      const tabelaCentroDeCusto = await getCentroDeCustoProjetos(
+        Number(id),
+        String(mes)
+      );
       const centroDeCustoFormatado = tabelaCentroDeCusto.data.centroDeCusto.map(
         (item: TabelaCentroDeCusto) => ({
           ...item,
@@ -115,14 +118,12 @@ export function CentroDeCustoProjetos() {
                   </Heading>
                 </Flex>
               </Flex>
-              {data.centroDeCusto && (
-                <Tabela
-                  data={data.centroDeCusto}
-                  refreshState={refreshState}
-                  idProjeto={data.idProjeto}
-                  optionsSelects={options}
-                />
-              )}
+              <Tabela
+                data={data.centroDeCusto}
+                refreshState={refreshState}
+                idProjeto={data.idProjeto}
+                optionsSelects={options}
+              />
             </Box>
           </Flex>
         ) : (

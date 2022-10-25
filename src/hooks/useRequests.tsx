@@ -15,7 +15,7 @@ import {
 } from "services/get/Financeiro";
 import { getAreaAtuacaoList } from "services/get/Infograficos";
 
-export function useRequests(id?: number) {
+export function useRequests(id?: number, mes?: string) {
   const [loading, setLoading] = useState(true);
 
   const [listaFinanceiroProjetos, setListaFinanceiroProjetos] = useState<
@@ -31,8 +31,8 @@ export function useRequests(id?: number) {
   const reqGet = async () => {
     setLoading(true);
 
-    if (id) {
-      const tabelaCentroDeCusto = await getCentroDeCustoProjetos(id);
+    if (id && mes) {
+      const tabelaCentroDeCusto = await getCentroDeCustoProjetos(id, mes);
       const centroDeCustoFormatado = tabelaCentroDeCusto.data.centroDeCusto.map(
         (item: TabelaCentroDeCusto) => ({
           ...item,

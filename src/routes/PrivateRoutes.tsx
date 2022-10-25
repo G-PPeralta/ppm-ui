@@ -78,6 +78,10 @@ export function PrivateRoutes() {
       />
       <Route path="/financeiro-projetos" element={<FinanceiroProjetos />} />
       <Route
+        path="/financeiro-projetos/centro-custo/:id/:mes"
+        element={<CentroDeCustoProjetos />}
+      />
+      <Route
         path="/financeiro-projetos/centro-custo/:id"
         element={<CentroDeCustoProjetos />}
       />
