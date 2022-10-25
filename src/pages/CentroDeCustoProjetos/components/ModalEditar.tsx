@@ -8,6 +8,7 @@ import {
   Input,
   Modal,
   ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -146,6 +147,7 @@ function ModalEditar({ refreshState, linhaTabela, optionsSelects }: Props) {
           >
             Gestão de Custos
           </ModalHeader>
+          <ModalCloseButton color={"white"} />
 
           <ModalBody mt={3}>
             <Text fontWeight={"bold"} mb={3}>

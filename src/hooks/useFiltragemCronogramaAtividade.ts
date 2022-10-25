@@ -1,26 +1,13 @@
 import { useState } from "react";
 
 import { useFormik } from "formik";
-// import { NovaSonda } from "interfaces/CadastrosModaisInfograficos";
-// import { useAuth } from "./useAuth";
-// import { useToast } from "contexts/Toast";
+import { FiltroCronograma } from "interfaces/FiltroCronograma";
 
-interface Filter {
-  pocoId: number;
-  sondaId: number;
-  profundidadeIni: number;
-  profundidadeFim: number;
-  metodoElevacao: string;
-  metodoElevacaoId: number;
-  dataDe: string;
-  dataAte: string;
-}
+import { postFiltroCronograma } from "services/post/FiltroCronograma";
 
 export function useFiltragemCronogramaAtividade() {
-  // const { toast } = useToast();
   const [loading] = useState(false);
-  // const { user } = useAuth();
-  const initialValues: Filter = {
+  const initialValues: FiltroCronograma = {
     pocoId: 0,
     sondaId: 0,
     profundidadeIni: 0,
@@ -31,10 +18,14 @@ export function useFiltragemCronogramaAtividade() {
     dataAte: "",
   };
 
+  const postFiltros = async (initialValues: FiltroCronograma) => {
+    await postFiltroCronograma(initialValues);
+  };
+
   const registerForm = useFormik({
     initialValues,
-    onSubmit: () => {
-      alert("kkkkk");
+    onSubmit: (values) => {
+      postFiltros(values);
     },
   });
 

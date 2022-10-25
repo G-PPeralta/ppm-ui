@@ -272,10 +272,10 @@ export function LicoesAprendidasProjetos() {
               >
                 <Button
                   fontWeight={"700"}
-                  fontSize={"18px"}
+                  fontSize="18px"
                   color={"#0239C3"}
                   variant="ghost"
-                  colorScheme="messenger"
+                  // colorScheme="messenger"
                   rightIcon={<FaFileCsv />}
                   // onClick={print}
                 >
@@ -297,6 +297,9 @@ export function LicoesAprendidasProjetos() {
                     PROJETO
                   </FormLabel>
                   <Select
+                    fontSize={"14px"}
+                    fontFamily={"Mulish"}
+                    fontWeight={"400"}
                     mt={"-9px"}
                     borderRadius={"8px"}
                     placeholder="Selecione"

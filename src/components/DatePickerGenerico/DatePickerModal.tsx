@@ -1,13 +1,11 @@
 import { forwardRef, useEffect, useState } from "react";
-import ReactDatePicker, { registerLocale } from "react-datepicker";
+import ReactDatePicker from "react-datepicker";
 
 import { Button, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
-import ptBR from "date-fns/locale/pt-BR";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
-registerLocale("ptBR", ptBR);
 
-function DatePickerGenerico({
+function DatePickerModal({
   registerForm,
   data,
   propName,
@@ -49,7 +47,7 @@ function DatePickerGenerico({
           ref={ref}
           variant="outline"
           px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
-          minW={useBreakpointValue({ base: "180px", sm: "180px", md: "220px" })}
+          minW={useBreakpointValue({ base: "180px", sm: "180px", md: "174px" })}
           w={"100%"}
         >
           {value === "" ? "Selecione a data" : value}
@@ -70,14 +68,13 @@ function DatePickerGenerico({
         disabled={isDisabled}
         selected={dataInicio}
         onChange={(date) => handleIniciarDate(date)}
-        locale="ptBR"
+        locale="pt-BR"
         showTimeSelect={!!selecionaHorario}
-        dateFormat={esconderHorario ? "dd/MM/yyyy" : "Pp"}
+        dateFormat={esconderHorario ? "dd/MM/yyyy" : "dd/MM/yyyy, hh:mm"}
         customInput={<TriggerDatePickerInicio />}
-        timeFormat="p"
       />
     </Flex>
   );
 }
 
-export default DatePickerGenerico;
+export default DatePickerModal;

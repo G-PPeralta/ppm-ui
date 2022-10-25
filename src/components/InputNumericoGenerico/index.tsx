@@ -17,6 +17,8 @@ interface Props {
   required?: boolean;
   tipo: string;
   stepper?: boolean;
+  step?: number;
+  isDisabled?: boolean;
 }
 
 function InputNumericoGenerico({
@@ -26,6 +28,8 @@ function InputNumericoGenerico({
   required,
   tipo,
   stepper,
+  step,
+  isDisabled,
 }: Props) {
   const handleChange = (event: any) => {
     registerForm.setFieldValue(propName, Number(event));
@@ -52,8 +56,10 @@ function InputNumericoGenerico({
         </Flex>
       )}
       <NumberInput
+        isDisabled={isDisabled}
         min={0}
         max={100}
+        step={step}
         value={formataParaTipo(tipo, registerForm.values[propName])}
         onChange={(event) => handleChange(event)}
         h={"56px"}

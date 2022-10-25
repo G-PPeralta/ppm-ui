@@ -133,7 +133,9 @@ export function ActivitiesSchedule() {
             </Flex>
 
             <Flex direction={"row"} gap={4} py={4} wrap={"wrap"}>
-              {!loadingCards ? (
+              {!loadingCards &&
+              optionsAreaAtuacao.length > 0 &&
+              optionsResponsaveis.length > 0 ? (
                 atividades.map((atividade, index) => (
                   <Flex
                     key={index}

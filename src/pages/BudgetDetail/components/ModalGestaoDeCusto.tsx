@@ -8,7 +8,7 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  // ModalCloseButton,
+  ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
@@ -65,7 +65,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
           >
             Gestão de Custos
           </ModalHeader>
-          {/* <ModalCloseButton color={"white"} /> */}
+          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               e.preventDefault();

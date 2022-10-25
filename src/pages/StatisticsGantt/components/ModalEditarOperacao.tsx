@@ -9,6 +9,13 @@ import {
   ModalBody,
   ModalFooter,
   ModalCloseButton,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  ButtonGroup,
+  Button,
 } from "@chakra-ui/react";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
@@ -16,7 +23,6 @@ import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelho
 
 import { handleCancelar } from "utils/handleCadastro";
 
-import BotoesTabs from "./BotoesTabs";
 import EditarAtividadeTabAnotacoes from "./EditarAtividadeTabAnotacoes";
 import EditarAtividadeTabGeral from "./EditarAtividadeTabGeral";
 import EditarAtividadeTabLicoesAprendidas from "./EditarAtividadeTabLicoesAprendidas";
@@ -159,11 +165,6 @@ function ModalAdicionarOperacao({
 }: Props) {
   const [tabSelecionado, setTabSelecionado] = useState<any>(0);
 
-  const tab = {
-    tabSelecionado,
-    setTabSelecionado,
-  };
-
   const refreshState = {
     setRefresh,
     refresh,
@@ -183,37 +184,44 @@ function ModalAdicionarOperacao({
     registerForm.setFieldValue("ocorrencias", ocorrenciasMock);
   }, [editOp]);
 
-  // console.log("registerForm", registerForm.values);
+  // console.log("registerForm", registerForm);
   // console.log("editOp", editOp);
 
-  // console.log("tabSelecionado", tabSelecionado);
+  const botoes = [
+    {
+      nome: "Geral",
+      selecionado: tabSelecionado === 0,
+    },
+    {
+      nome: "Anotações",
+      selecionado: tabSelecionado === 1,
+    },
+    {
+      nome: "MOC",
+      selecionado: tabSelecionado === 2,
+    },
+    {
+      nome: "Lições Aprendidas",
+      selecionado: tabSelecionado === 3,
+    },
+    {
+      nome: "Ocorrências",
+      selecionado: tabSelecionado === 4,
+    },
+  ];
 
-  function HandleTab() {
-    switch (true) {
-      case tabSelecionado === 0:
-        return <EditarAtividadeTabGeral registerForm={registerForm} />;
+  const handleClick = (index: number) => {
+    setTabSelecionado(index);
 
-      case tabSelecionado === 1:
-        return <EditarAtividadeTabAnotacoes registerForm={registerForm} />;
-
-      case tabSelecionado === 2:
-        return <EditarAtividadeTabMOC registerForm={registerForm} />;
-
-      case tabSelecionado === 3:
-        return (
-          <EditarAtividadeTabLicoesAprendidas
-            registerForm={registerForm}
-            refreshState={refreshState}
-          />
-        );
-
-      case tabSelecionado === 4:
-        return <EditarAtividadeTabOcorrencias registerForm={registerForm} />;
-
-      default:
-        return <EditarAtividadeTabGeral registerForm={registerForm} />;
-    }
-  }
+    botoes.map((botao, i) => {
+      if (i === index) {
+        botao.selecionado = true;
+      } else {
+        botao.selecionado = false;
+      }
+      return botao;
+    });
+  };
 
   return (
     <>
@@ -241,101 +249,58 @@ function ModalAdicionarOperacao({
             }}
           >
             <ModalBody mt={3}>
-              <BotoesTabs tab={tab} />
-
               <Flex flex={1} mt={5}>
-                <HandleTab />
-              </Flex>
-
-              {/*
-              MODAL ANTIGO - NÃO APAGUEI AINDA PARA CASO VOLTE AO QUE ERA ANTES, É SÓ DESCOMENTAR KKK
-              <Flex
-                flexDirection={useBreakpointValue({
-                  base: "column",
-                  md: "column",
-                })}
-                gap={5}
-              >
-                <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Nome</Text>
-                  <Flex gap={5} flex={1}>
-                    <Flex direction={"column"} flex={2}>
-                      <Input
-                        isDisabled
-                        value={registerForm.values.nome_atividade || ""}
-                        type="text"
-                        name="nome_atividade"
-                      />
-                    </Flex>
-                  </Flex>
-                </Flex>
-
-                <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Datas</Text>
-                  <Flex gap={5}>
-                    <Flex>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"inicio_planejado"}
-                        label={"INÍCIO PLANEJADO"}
-                        required={true}
-                        data={registerForm.values.inicio_planejado}
-                      />
-                    </Flex>
-                    <Flex>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"fim_planejado"}
-                        label={"FIM PLANEJADO"}
-                        required={true}
-                        data={registerForm.values.fim_planejado}
-                      />
-                    </Flex>
-                  </Flex>
-                  <Flex gap={5}>
-                    <Flex>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"inicio_realizado"}
-                        label={"INÍCIO REAL"}
-                        required={true}
-                        data={registerForm.values.inicio_realizado}
-                      />
-                    </Flex>
-                    <Flex>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"fim_realizado"}
-                        label={"FIM REAL"}
-                        required={true}
-                        data={registerForm.values.fim_realizado}
-                      />
-                    </Flex>
-                  </Flex>
-                  <Flex flex={1} direction={"column"}>
-                    <Text fontWeight={"bold"}>Progresso</Text>
-                    <Flex gap={5}>
-                      <Flex>
-                        <NumberInput
-                          max={100}
-                          min={0}
-                          id={"pct_real"}
-                          name={"pct_real"}
-                          value={registerForm.values.pct_real}
-                          onChange={(value) => {
-                            registerForm.setFieldValue(
-                              "pct_real",
-                              Number(value)
-                            );
+                <Tabs variant={"unstyled"} isLazy={true} flex={1}>
+                  <TabList>
+                    <ButtonGroup size="lg" isAttached variant="outline">
+                      {botoes.map((botao, index) => (
+                        <Button
+                          fontSize={"14px"}
+                          fontWeight={"bold"}
+                          color={botao.selecionado ? "#FEFEFE" : "origem.300"}
+                          backgroundColor={
+                            botao.selecionado ? "origem.300" : "#FEFEFE"
+                          }
+                          _hover={{
+                            background: "origem.500",
+                            transition: "all 0.4s",
+                            color: "#FEFEFE",
                           }}
+                          onClick={() => handleClick(index)}
                         >
-                          <NumberInputField bg={"#fff"} h={"56px"} />
-                        </NumberInput>
-                      </Flex>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex> */}
+                          <Tab fontWeight={"semibold"}>{botao.nome}</Tab>
+                        </Button>
+                      ))}
+                    </ButtonGroup>
+                  </TabList>
+
+                  <TabPanels flex={1}>
+                    <TabPanel flex={1}>
+                      <EditarAtividadeTabGeral registerForm={registerForm} />
+                    </TabPanel>
+                    <TabPanel flex={1}>
+                      <EditarAtividadeTabAnotacoes
+                        registerForm={registerForm}
+                      />
+                    </TabPanel>
+                    <TabPanel flex={1}>
+                      <EditarAtividadeTabMOC registerForm={registerForm} />
+                    </TabPanel>
+                    <TabPanel flex={1}>
+                      <EditarAtividadeTabLicoesAprendidas
+                        registerForm={registerForm}
+                        refreshState={refreshState}
+                      />
+                    </TabPanel>
+                    <TabPanel flex={1}>
+                      <EditarAtividadeTabOcorrencias
+                        registerForm={registerForm}
+                        refreshState={refreshState}
+                      />
+                    </TabPanel>
+                  </TabPanels>
+                </Tabs>
+              </Flex>
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>

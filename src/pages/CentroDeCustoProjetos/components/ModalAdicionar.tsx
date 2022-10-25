@@ -10,6 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  ModalCloseButton,
   NumberInput,
   NumberInputField,
   Text,
@@ -77,6 +78,7 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
           >
             Gestão de Custos
           </ModalHeader>
+          <ModalCloseButton color={"white"} />
 
           <ModalBody mt={3}>
             <Text fontWeight={"bold"} mb={3}>

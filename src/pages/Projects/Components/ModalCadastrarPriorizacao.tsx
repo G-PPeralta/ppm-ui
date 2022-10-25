@@ -36,9 +36,19 @@ import { getInitialRaking } from "../../../services/get/Ranking";
 
 type PropsType = {
   projeto: number;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: boolean;
+  isPriorizacaoModalOpen?: boolean;
+  setIsPriorizacaoModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function ModalCadastrarPriorizacao(projeto: PropsType) {
+function ModalCadastrarPriorizacao({
+  projeto,
+  refresh,
+  setRefresh,
+  isPriorizacaoModalOpen,
+  setIsPriorizacaoModalOpen,
+}: PropsType) {
   const { user } = useAuth();
   const [initialValues, setInitialValues] = useState([]);
   const [beneficio, setBeneficio] = useState("");
@@ -59,7 +69,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
     listaPrioridade,
     listaRegulatorio,
     ranking,
-  } = useCadastroPriorizacao(projeto.projeto);
+  } = useCadastroPriorizacao(projeto);
 
   async function handleGetInitialValues(id: any) {
     const response = await getInitialRaking(id);
@@ -96,7 +106,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
   }, [registerForm.values]);
 
   useEffect(() => {
-    registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
+    registerForm.setFieldValue("id_projeto", Number(projeto));
 
     if (registerForm.values.id_projeto !== 0) {
       // handleGetInitialValues(registerForm.values.id_projeto);
@@ -151,6 +161,13 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
     nom_usu_create: user?.nome,
   };
 
+  useEffect(() => {
+    if (isPriorizacaoModalOpen == true) {
+      onOpen();
+      handleGetInitialValues(registerForm.values.id_projeto);
+    }
+  }, [isPriorizacaoModalOpen]);
+
   return (
     <>
       <IconButton
@@ -180,7 +197,12 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
           >
             Priorização
           </ModalHeader>
-          <ModalCloseButton color={"white"} />
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => {
+              if (setIsPriorizacaoModalOpen) setIsPriorizacaoModalOpen(false);
+            }}
+          />
           <form
             onSubmit={(e) => {
               // e.preventDefault();
@@ -484,7 +506,11 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                 <Button
                   variant="ghost"
                   color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
+                  onClick={() => {
+                    if (setIsPriorizacaoModalOpen)
+                      setIsPriorizacaoModalOpen(false);
+                    handleCancelar(registerForm, onClose);
+                  }}
                   _hover={{
                     background: "red.500",
                     transition: "all 0.4s",
@@ -507,6 +533,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                   onClick={() => {
                     postProject(payload);
                     onClose();
+                    setRefresh(!refresh);
                   }}
                   _hover={{
                     background: "origem.600",

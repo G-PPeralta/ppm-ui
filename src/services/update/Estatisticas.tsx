@@ -13,3 +13,17 @@ export async function patchEditarLicaoAprendida(
 
   return { data, status };
 }
+
+export async function patchEditarOcorrencia(
+  idAtividade: number,
+  idOcorrencia: number,
+  payload: any
+): Promise<{ data: any; status: number }> {
+  const { data, status } = await api.patch(
+    `/estatisticas/cronograma/${idAtividade}/ocorrencia/${idOcorrencia}`,
+    payload,
+    token()
+  );
+
+  return { data, status };
+}
