@@ -32,7 +32,7 @@ function CardInfoProjeto({
   ];
   const innerWidth = window.innerWidth;
 
-  function formatDate(date: Date) {
+  function formatDate(date: any) {
     const formated = date.toString().substring(0, 10).split("-");
     return `${formated[2]}/${formated[1]}/${formated[0]}`;
   }
@@ -206,7 +206,9 @@ function CardInfoProjeto({
                 fontWeight={"600"}
                 fontSize={14}
               >
-                {infoProjeto.dat_usu_update}
+                {infoProjeto.dat_usu_update
+                  ? formatDate(infoProjeto.dat_usu_update)
+                  : null}
               </Text>
             </Flex>
           </Box>
