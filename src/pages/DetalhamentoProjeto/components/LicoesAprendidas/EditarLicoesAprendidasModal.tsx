@@ -46,11 +46,11 @@ function EditarLicoesAprendidasModal({
     setIdLicao(licao.id);
   }, [licao.licao_aprendida, licao.data, licao.acao_e_recomendacao, licao.id]);
 
-  const camposParaEditar = ["licao_aprendida", "acao_e_recomendacao"];
+  const camposParaEditar = ["txt_licao_aprendida", "txt_acao"];
 
   const updatepayload = (campo: string) => {
-    if (campo === "licao_aprendida") return licaoAprendida;
-    if (campo === "acao_e_recomendacao") return acao;
+    if (campo === "txt_licao_aprendida") return licaoAprendida;
+    if (campo === "txt_acao") return acao;
   };
 
   const regex = /[^\w\s]/gi;
