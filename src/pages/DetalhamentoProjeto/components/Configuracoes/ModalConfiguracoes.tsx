@@ -61,10 +61,14 @@ function ModalConfiguracoes({
   const [nomeProjeto, setNomeProjeto] = useState(projeto?.nome_projeto);
   const [elementoPep, setElementoPep] = useState(projeto?.elemento_pep);
   const [inicio, setInicio] = useState(
-    moment.utc(projeto?.data_inicio).add(3, "hours").toDate()
+    projeto?.data_inicio
+      ? moment.utc(projeto?.data_inicio).add(3, "hours").toDate()
+      : null
   );
   const [fim, setFim] = useState(
-    moment.utc(projeto?.data_fim).add(3, "hours").toDate()
+    projeto?.data_fim
+      ? moment.utc(projeto?.data_fim).add(3, "hours").toDate()
+      : null
   );
   const [inicioReal, setInicioReal] = useState(
     projeto?.dataInicio_real
@@ -447,24 +451,44 @@ function ModalConfiguracoes({
                 >
                   <FormControl>
                     <Flex flex={1}>
-                      <DatePicker
-                        label={"INICIO"}
-                        setDate={setInicio}
-                        required={false}
-                        data={inicio}
-                        value={inicio.toString()}
-                      />
+                      {inicio ? (
+                        <DatePicker
+                          label={"INICIO"}
+                          setDate={setInicio}
+                          required={false}
+                          data={inicio}
+                          value={inicio.toString()}
+                        />
+                      ) : (
+                        <DatePicker
+                          label={"INICIO"}
+                          setDate={setInicio}
+                          required={false}
+                          data={new Date()}
+                          value={new Date().toString()}
+                        />
+                      )}
                     </Flex>
                   </FormControl>
                   <FormControl>
                     <Flex flex={1}>
-                      <DatePicker
-                        label={"FIM"}
-                        setDate={setFim}
-                        required={false}
-                        data={fim}
-                        value={fim.toString()}
-                      />
+                      {fim ? (
+                        <DatePicker
+                          label={"FIM"}
+                          setDate={setFim}
+                          required={false}
+                          data={fim}
+                          value={fim.toString()}
+                        />
+                      ) : (
+                        <DatePicker
+                          label={"FIM"}
+                          setDate={setFim}
+                          required={false}
+                          data={new Date()}
+                          value={new Date().toString()}
+                        />
+                      )}
                     </Flex>
                   </FormControl>
                   <FormControl>

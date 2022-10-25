@@ -49,6 +49,14 @@ function InputGenerico({
     }
   }, []);
 
+  const changeValueFormated = (value: number) => {
+    registerForm.setFieldValue(
+      propName,
+      value.toString().replace(/[^0-9]/g, "")
+    );
+    setValorFormatado(formatReal(getMoney(value.toString() || "0")));
+  };
+
   return (
     <Flex direction={"column"} w={"100%"}>
       {nomeInput && (
@@ -79,7 +87,8 @@ function InputGenerico({
             name={propName}
             value={valorFormatado}
             maxLength={maxLength}
-            onChange={registerForm.handleChange}
+            // onChange={registerForm.handleChange}
+            onChange={(event: any) => changeValueFormated(event.target.value)}
             w={"100%"}
             // onKeyUp={(event) => maskMoney(event)}
           />
