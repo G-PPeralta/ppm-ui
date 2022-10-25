@@ -93,21 +93,23 @@ export function ModalAddAtividade(props: PropsType) {
     <>
       <Button
         h={"56px"}
-        background={"#0047BB"}
+        w={"208px"}
+        background={"origem.500"}
         border={"2.3px solid"}
         color={"white"}
         variant="primary"
         _hover={{
-          background: "white",
-          color: "#0047BB",
-          transition: "all 0.4s",
+          // background: "white",
+          background: "origem.600",
+          // transition: "all 0.4s",
         }}
-        lineHeight="22.59px"
-        fontFamily="Mulish"
+        // lineHeight="22.59px"
         fontSize={"18px"}
         fontWeight={"700"}
+        borderRadius={"8px"}
+        fontFamily={"Mulish"}
         width="208px"
-        letterSpacing="0.2px"
+        // letterSpacing="0.2px"
         onClick={onOpen}
       >
         Cadastrar

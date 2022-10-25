@@ -90,3 +90,16 @@ export async function getProjetosPrevistoRealizado(): Promise<{
 
   return { data, status };
 }
+
+export async function getGates(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/dashboard/gates", {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
+    },
+  });
+
+  return { data, status };
+}
