@@ -18,7 +18,7 @@ import {
   ModalFooter,
   Button,
   Textarea,
-  Text,
+  // Text,
 } from "@chakra-ui/react";
 import { LicoesAprendidas } from "interfaces/Services";
 
@@ -230,10 +230,11 @@ function EditModal({
                 }}
                 width={"208px"}
                 height={"56px"}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
               >
-                <Text fontSize={"18px"} fontWeight={"700"}>
-                  Salvar{" "}
-                </Text>
+                Salvar{" "}
               </Button>
             </Flex>
           </ModalFooter>
