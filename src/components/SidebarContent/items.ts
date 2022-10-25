@@ -23,90 +23,102 @@ interface LinkItemProps {
   link?: string;
   children: any[];
 }
+
+// interface Children {
+//   name: string;
+//   icon: IconType;
+//   link: string;
+// }
+
+const childrenCarteiradeProjetos = [
+  { name: "Dashboard", icon: FiHome, link: "/" },
+  { name: "Projetos", icon: FaRegMoneyBillAlt, link: "/projects" },
+  {
+    name: "Financeiro",
+    icon: FaRegMoneyBillAlt,
+    link: "/financeiro-projetos",
+  },
+  { name: "Importar Dados", icon: BiData, link: "/upload" },
+
+  {
+    name: "Lições Aprendidas",
+    icon: FiActivity,
+    link: "/licoesAprendidas",
+  },
+  { name: "Priorização", icon: MdPriorityHigh, link: "/priorizacao" },
+];
+
+const childrenInfograficos = [
+  { name: "Infográficos", icon: FiBarChart, link: "/infographics" },
+  { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/budgets" },
+];
+
+const childrenEstatisticas = [
+  {
+    name: "Estatísticas",
+    icon: AiOutlineBarChart,
+    link: "/estatisticas",
+  },
+  {
+    name: "Gráficos Estatisticos",
+    icon: AiOutlineBarChart,
+    link: "/graficos",
+  },
+  { name: "Look Ahead", icon: AiOutlineBarChart, link: "/lookahead" },
+  { name: "Relatórios", icon: FiFile, link: "/reports" },
+];
+
+const childrenLixeira = [
+  { name: "Lixeira", icon: FiTrash2, link: "/desenvolvimento" },
+];
+
+const childrenConfiguracoes = [
+  { name: "Configurações", icon: FiSettings, link: "/desenvolvimento" },
+  { name: "Usuários", icon: FiSettings, link: "/profile" },
+  { name: "Perfil", icon: FiSettings, link: "/profile" },
+  { name: "Gestão de Áreas", icon: FiSettings, link: "/desenvolvimento" },
+  {
+    name: "Configurar Prioridades",
+    icon: FiSettings,
+    link: "/desenvolvimento",
+  },
+  {
+    name: "Fornecedores",
+    icon: FiActivity,
+    link: "/fornecedores",
+  },
+];
+
 export const LinkItems: Array<LinkItemProps> = [
   {
     name: "Carteira de Projetos",
     icon: FiHome,
-    children: [
-      { name: "Dashboard", icon: FiHome, link: "/" },
-      { name: "Projetos", icon: FaRegMoneyBillAlt, link: "/projects" },
-      // {
-      //   name: "Fornecedores",
-      //   icon: FaRegMoneyBillAlt,
-      //   link: "/desenvolvimento",
-      // },
-      {
-        name: "Financeiro",
-        icon: FaRegMoneyBillAlt,
-        link: "/financeiro-projetos",
-      },
-      { name: "Importar Dados", icon: BiData, link: "/upload" },
-
-      {
-        name: "Lições Aprendidas",
-        icon: FiActivity,
-        link: "/licoesAprendidas",
-      },
-      // {
-      //   name: "Detalhamento Projeto",
-      //   icon: BsBarChartSteps,
-      //   link: "/detalhamento/191",
-      // },
-      { name: "Priorização", icon: MdPriorityHigh, link: "/priorizacao" },
-    ],
+    children: childrenCarteiradeProjetos,
   },
 
   {
     name: "Infográficos",
     icon: FiBarChart,
-    children: [
-      { name: "Infográficos", icon: FiBarChart, link: "/infographics" },
-      { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/budgets" },
-    ],
+    children: childrenInfograficos,
   },
   {
     name: "Estatísticas",
     icon: AiOutlineBarChart,
-    children: [
-      {
-        name: "Estatísticas",
-        icon: AiOutlineBarChart,
-        link: "/estatisticas",
-      },
-      {
-        name: "Gráficos Estatisticos",
-        icon: AiOutlineBarChart,
-        link: "/graficos",
-      },
-      { name: "Look Ahead", icon: AiOutlineBarChart, link: "/lookahead" },
-      { name: "Relatórios", icon: FiFile, link: "/reports" },
-    ],
+    children: childrenEstatisticas,
   },
 
   {
     name: "Lixeira",
     icon: FiTrash2,
-    children: [{ name: "Lixeira", icon: FiTrash2, link: "/desenvolvimento" }],
+    children: childrenLixeira,
   },
 
   {
     name: "Configurações",
     icon: FiSettings,
-    children: [
-      { name: "Configurações", icon: FiSettings, link: "/desenvolvimento" },
-      { name: "Usuários", icon: FiSettings, link: "/profile" },
-      { name: "Perfil", icon: FiSettings, link: "/profile" },
-      { name: "Gestão de Áreas", icon: FiSettings, link: "/desenvolvimento" },
-      {
-        name: "Configurar Prioridades",
-        icon: FiSettings,
-        link: "/desenvolvimento",
-      },
-      {
-        name: "Fornecedores",
-        icon: FiActivity,
-        link: "/fornecedores",
-      },
-    ],
+    children: childrenConfiguracoes,
+    // .sort((a: Children, b: Children) =>
+    //   a.name.localeCompare(b.name)
+    // ),
   },
 ];
