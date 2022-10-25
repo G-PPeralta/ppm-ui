@@ -1,5 +1,3 @@
-import { forwardRef, useState } from "react";
-import DatePicker from "react-datepicker";
 import { MdFilterAlt } from "react-icons/md";
 
 import {
@@ -15,7 +13,6 @@ import {
   Text,
   NumberInputField,
   NumberInput,
-  Button,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
@@ -26,13 +23,12 @@ import SelectFiltragem from "components/SelectFiltragem";
 
 import { useCadastroCronograma } from "hooks/useCadastroCronograma";
 import { useFiltragemCronogramaAtividade } from "hooks/useFiltragemCronogramaAtividade";
+import DatePickerModal from "components/DatePickerGenerico/DatePickerModal";
 
 export function ModalFiltrarAtividade({ refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useFiltragemCronogramaAtividade();
   const { listaPocos, listaSondas } = useCadastroCronograma();
-  const [startDate, setStartDate] = useState<Date>();
-  const [endDate, setEndDate] = useState<Date>();
 
   const optionsPocos = listaPocos.map((poco: ListaPoco) => ({
     value: poco.id,
@@ -62,28 +58,6 @@ export function ModalFiltrarAtividade({ refresh, setRefresh }: any) {
       label: "Metodo 4",
     },
   ];
-
-  const handleStartDate = (date: any) => {
-    setStartDate(date);
-  };
-
-  const handleEndDate = (date: any) => {
-    setEndDate(date);
-  };
-
-  const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
-    <Button
-      color={"#949494"}
-      onClick={onClick}
-      ref={ref}
-      variant="outline"
-      px={10}
-      width="174px"
-      height="56px"
-    >
-      {value === "" ? "Selecione a data" : value}
-    </Button>
-  ));
 
   return (
     <>
@@ -139,7 +113,6 @@ export function ModalFiltrarAtividade({ refresh, setRefresh }: any) {
                     <Flex direction={"column"}>
                       <FormControl>
                         <Flex gap={1}>
-                          {/* <RequiredField /> */}
                           <Text
                             fontWeight={"bold"}
                             fontSize={"12px"}
@@ -169,7 +142,6 @@ export function ModalFiltrarAtividade({ refresh, setRefresh }: any) {
                     <Flex direction={"column"}>
                       <FormControl>
                         <Flex gap={1}>
-                          {/* <RequiredField /> */}
                           <Text
                             fontWeight={"bold"}
                             fontSize={"12px"}
@@ -210,38 +182,35 @@ export function ModalFiltrarAtividade({ refresh, setRefresh }: any) {
                     </Flex>
                     <Flex direction={"column"} grow={1} marginLeft="16px">
                       <Flex gap={1}>
-                        {/* <RequiredField /> */}
                         <Text fontSize={"12px"} color={"#949494"}>
                           DATA INÍCIO
                         </Text>
                       </Flex>
-                      <DatePicker
-                        selected={startDate}
-                        onChange={(date) => handleStartDate(date)}
+                      <DatePickerModal
+                        width="174px"
+                        registerForm={registerForm}
+                        propName={"dataDe"}
+                        data={registerForm.values.dataDe}
+                        dateFormat="dd/MM/yyyy"
                         locale="pt-BR"
-                        showTimeSelect
-                        timeIntervals={60}
-                        dateFormat="dd/MM/yyyy, hh:mm"
-                        customInput={<ExampleCustomInput />}
-                        isClearable={startDate !== null}
                       />
                     </Flex>
-                    <Flex direction={"column"} grow={1} marginLeft="16px">
+                    <Flex
+                      direction={"column"}
+                      grow={1}
+                      marginLeft="16px"
+                      width={174}
+                    >
                       <Flex gap={1}>
-                        {/* <RequiredField /> */}
                         <Text fontSize={"12px"} color={"#949494"}>
                           DATA FIM
                         </Text>
                       </Flex>
-                      <DatePicker
-                        selected={endDate}
-                        onChange={(date) => handleEndDate(date)}
+                      <DatePickerModal
                         locale="pt-BR"
-                        showTimeSelect
-                        timeIntervals={60}
-                        dateFormat="dd/MM/yyyy, hh:mm"
-                        customInput={<ExampleCustomInput />}
-                        isClearable={endDate !== null}
+                        registerForm={registerForm}
+                        propName={"dataAte"}
+                        data={registerForm.values.dataAte}
                       />
                     </Flex>
                   </Flex>
