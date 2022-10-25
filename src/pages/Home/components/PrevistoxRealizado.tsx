@@ -27,11 +27,18 @@ function useWindowSize() {
 }
 
 function useGetData() {
-  const [previstoRealizado, setPrevistoRealizado] = useState([]);
+  const [previstoRealizado, setPrevistoRealizado] = useState<any[]>([]);
 
   const loadData = async () => {
     const { data } = await getProjetosPrevistoRealizado();
-    setPrevistoRealizado(data);
+    const renderPayload: any[] = [];
+    data.map((val: any) =>
+      renderPayload.push({
+        Realizado: val.cronogramaRealizado,
+        Previsto: val.cronogramaPrevisto,
+      })
+    );
+    setPrevistoRealizado(renderPayload);
   };
 
   useEffect(() => {
@@ -88,10 +95,8 @@ export default function PrevistoxRealizadoComponent() {
   ];
 
   const dataEntries = [
-    { name: "capexPrevisto", color: "#93E01B" },
-    { name: "capexRealizado", color: "#2E69FD" },
-    { name: "cronogramaPrevisto", color: "#93E01B" },
-    { name: "cronogramaRealizado", color: "#2E69FD" },
+    { name: "Realizado", color: "#2E69FD" },
+    { name: "Previsto", color: "#93E01B" },
   ];
 
   return (

@@ -29,6 +29,8 @@ import { useCadastroNovaOpcaoPriorizacao } from "hooks/useCadastrarOpcaoPrioriza
 interface TableProps {
   nomeRanking: string;
   idRanking: any;
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
@@ -40,6 +42,12 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
   useEffect(() => {
     registerForm.setFieldValue("id_ranking", infosRankings.idRanking);
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      registerForm.setFieldValue("id_ranking", infosRankings.idRanking);
+    }, 3000);
+  }, [infosRankings.refresh]);
 
   const rankingNome = infosRankings.nomeRanking;
 
@@ -194,7 +202,10 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                   background="origem.500"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() => [
+                    handleCadastrar(registerForm, onClose),
+                    infosRankings.setRefresh(!infosRankings.refresh),
+                  ]}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",

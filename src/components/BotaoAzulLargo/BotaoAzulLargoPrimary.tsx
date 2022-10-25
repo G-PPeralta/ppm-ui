@@ -51,7 +51,12 @@ function BotaoAzulLargoPrimary({
         <Ring speed={2} lineWeight={5} color="white" size={24} />
       ) : (
         <>
-          <Text fontSize="16px" fontWeight={"bold"} mx={12}>
+          <Text
+            fontSize="18px"
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
+            mx={12}
+          >
             {text}
           </Text>
         </>

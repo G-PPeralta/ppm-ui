@@ -41,15 +41,15 @@ export function useEdicaoOpcaoPriorizacao(opcAtual: any, initialGra: number) {
 
       try {
         // Rota update - opção ranking
-        const { status } = await updateOptionRanking(
+        const { status } = await updateOptionRankingNota(
           newValues.idOpcao,
-          newValues.rankingOpcao,
+          newValues.num_nota,
           newValues.nom_usu_create
         );
 
-        await updateOptionRankingNota(
+        await updateOptionRanking(
           newValues.idOpcao,
-          newValues.num_nota,
+          newValues.rankingOpcao,
           newValues.nom_usu_create
         );
 
