@@ -1,4 +1,5 @@
 export interface ICardInfoProjeto {
+  id?: number;
   nome_projeto: string;
   data_inicio: null;
   data_fim: null;
@@ -10,4 +11,7 @@ export interface ICardInfoProjeto {
   coordenador_nome: string;
   descricao: string;
   justificativa: string;
+  atraso?: number;
+  solicitante?: string;
+  dat_usu_update?: string;
 }
