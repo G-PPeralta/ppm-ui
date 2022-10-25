@@ -1,4 +1,5 @@
 // import { IoIosArrowBack } from "react-icons/io";
+import { useState } from "react";
 import {
   MdArrowForwardIos,
   // MdOutlineArrowBackIosNew,
@@ -38,6 +39,7 @@ interface TableProps {
 function ModalPriorizacao(infosRankings: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm } = useCadastroPriorizacao();
+  const [refresh, setRefresh] = useState(false);
 
   return (
     <>
@@ -117,6 +119,8 @@ function ModalPriorizacao(infosRankings: TableProps) {
                       <Flex gap={4}>
                         <Flex align={"flex-start"} alignSelf={"start"}>
                           <ModalCadastrarOpcaoPriorizacao
+                            refresh={refresh}
+                            setRefresh={setRefresh}
                             nomeRanking={infosRankings.nomeRanking}
                             idRanking={infosRankings.idRanking}
                           />
@@ -156,6 +160,8 @@ function ModalPriorizacao(infosRankings: TableProps) {
             <ModalBody mt={1}>
               <Flex ml={"-3px"} mr={"-3px"}>
                 <TabelaOpcoesPriorizacao
+                  refresh={refresh}
+                  setRefresh={setRefresh}
                   idRanking={infosRankings.idRanking}
                   nomeRanking={infosRankings.nomeRanking}
                 />

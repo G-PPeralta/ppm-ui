@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { MdModeEdit } from "react-icons/md";
 
 import {
@@ -33,11 +33,12 @@ interface TableProps {
   idRanking: any;
   nameRanking: string;
   initialGrade: number;
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [refresh, setRefresh] = useState(false);
   const { registerForm, loading } = useEdicaoOpcaoPriorizacao(
     infosOption.opcaoName,
     infosOption.initialGrade
@@ -50,8 +51,14 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
   useEffect(() => {
     registerForm.setFieldValue("idOpcao", infosOption.opcaoId);
     registerForm.setFieldValue("idRanking", infosOption.idRanking.idRanking);
-    setRefresh(!refresh);
   }, []);
+
+  useEffect(() => {
+    registerForm.setFieldValue("idOpcao", infosOption.opcaoId);
+    registerForm.setFieldValue("idRanking", infosOption.idRanking.idRanking);
+    registerForm.setFieldValue("rankingOpcao", infosOption.opcaoName);
+    registerForm.setFieldValue("num_nota", infosOption.initialGrade);
+  }, [infosOption.opcaoName, infosOption.initialGrade]);
 
   return (
     <>
@@ -212,6 +219,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                   color="white"
                   onClick={() => {
                     handleCadastrar(registerForm, onClose);
+                    infosOption.setRefresh(!infosOption.refresh);
                   }}
                   _hover={{
                     background: "origem.600",
