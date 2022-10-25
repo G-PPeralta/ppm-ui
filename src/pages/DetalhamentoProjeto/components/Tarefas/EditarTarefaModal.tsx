@@ -307,6 +307,7 @@ function EditarTarefaModal({
               onChange={(event) => setStatus(Number(event.target.value))}
             ></Input> */}
             <NumberInput
+              mt={"-9px"}
               mr={4}
               ml={-2}
               width={"208px"}
@@ -329,6 +330,8 @@ function EditarTarefaModal({
             </NumberInput>
             <FormControl padding={1}>
               <FormLabel
+                mr={4}
+                ml={-3}
                 htmlFor="acao"
                 color="#949494"
                 fontSize="12px"
@@ -338,12 +341,14 @@ function EditarTarefaModal({
                 DESCRIÇÃO DA TAREFA
               </FormLabel>
               <Textarea
+                mr={4}
+                ml={-3}
                 maxLength={255}
                 fontSize={"14px"}
                 borderRadius={"8px"}
                 border={"1px solid #A7A7A7"}
                 mt={"-9px"}
-                width={"456px"}
+                width={"436px"}
                 height={"121px"}
                 color="black"
                 isRequired

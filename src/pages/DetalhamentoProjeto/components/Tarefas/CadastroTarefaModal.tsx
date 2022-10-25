@@ -259,12 +259,14 @@ function CadastroTarefasModal({
                 fontWeight="700"
                 mt={"6px"}
               >
-                <Flex gap={1}>
+                <Flex gap={1} mr={4} ml={-2}>
                   <RequiredField />
                   DESCRIÇÃO DA TAREFA
                 </Flex>
               </FormLabel>
               <Textarea
+                mr={4}
+                ml={-2}
                 fontSize={"14px"}
                 maxLength={255}
                 borderRadius={"8px"}
