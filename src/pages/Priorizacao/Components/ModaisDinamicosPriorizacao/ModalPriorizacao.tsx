@@ -105,8 +105,8 @@ function ModalPriorizacao(infosRankings: TableProps) {
                           fontWeight={"700"}
                           fontFamily={"Mulish"}
                           textAlign={"start"}
-                          mt={-2}
-                          ml={"18px"}
+                          mt={-1}
+                          ml={"19px"}
                         >
                           Priorização
                         </Text>
@@ -154,7 +154,7 @@ function ModalPriorizacao(infosRankings: TableProps) {
               </FormControl>
             </>
             <ModalBody mt={1}>
-              <Flex>
+              <Flex ml={"-3px"} mr={"-3px"}>
                 <TabelaOpcoesPriorizacao
                   idRanking={infosRankings.idRanking}
                   nomeRanking={infosRankings.nomeRanking}
