@@ -23,6 +23,8 @@ import {
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
+import { useAuth } from "hooks/useAuth";
+
 import { postLicaoAprendida } from "services/post/AdicionarLicaoAprendida";
 
 function CadastrarLicoesAprendidasModal({
@@ -33,14 +35,15 @@ function CadastrarLicoesAprendidasModal({
   const { id } = useParams();
   const [licaoAprendida, setLicaoAprendida] = useState("");
   const [acao, setAcao] = useState("");
+  const { user } = useAuth();
 
   async function handleSubmitLicao() {
     const payload = {
-      id_projeto: Number(id),
-      txt_licao_aprendida: licaoAprendida,
-      txt_acao: acao,
-      id_categoria: null,
-      nom_usu_create: "teste",
+      id_atividade: Number(id),
+      licao_aprendida: licaoAprendida,
+      acoes_e_recomendacoes: acao,
+      data: new Date(),
+      user: user?.nome,
     };
     await postLicaoAprendida(payload);
     callBack();

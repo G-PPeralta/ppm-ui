@@ -37,21 +37,14 @@ function EditarLicoesAprendidasModal({
 }: EditModalProps) {
   const { user } = useAuth();
   const [idLicao, setIdLicao] = useState(licao?.id);
-  const [licaoAprendida, setLicaoAprendida] = useState(
-    licao?.txt_licao_aprendida
-  );
-  const [acao, setAcao] = useState(licao?.txt_acao);
+  const [licaoAprendida, setLicaoAprendida] = useState(licao?.licao_aprendida);
+  const [acao, setAcao] = useState(licao?.acao_e_recomendacao);
 
   useEffect(() => {
-    setLicaoAprendida(licao.txt_licao_aprendida);
-    setAcao(licao.txt_acao);
+    setLicaoAprendida(licao.licao_aprendida);
+    setAcao(licao.acao_e_recomendacao);
     setIdLicao(licao.id);
-  }, [
-    licao.txt_licao_aprendida,
-    licao.dat_usu_create,
-    licao.txt_acao,
-    licao.id,
-  ]);
+  }, [licao.licao_aprendida, licao.data, licao.acao_e_recomendacao, licao.id]);
 
   const camposParaEditar = ["txt_licao_aprendida", "txt_acao"];
 

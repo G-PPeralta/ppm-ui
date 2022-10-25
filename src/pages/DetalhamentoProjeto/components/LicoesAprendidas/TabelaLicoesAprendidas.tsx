@@ -33,6 +33,8 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
     setTo,
   };
 
+  // console.log({ licoes });
+
   const tableData = licoes
     .sort((a, b) => a.id - b.id)
     .map((lessons, index) => (
@@ -41,15 +43,13 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
           {lessons.id}
         </Td>
         <Td textAlign={"center"} fontWeight={"semibold"}>
-          {lessons.txt_licao_aprendida}
+          {lessons.licao_aprendida}
         </Td>
         <Td textAlign={"center"} fontWeight={"semibold"}>
-          {new Date(lessons.dat_usu_create)
-            .toLocaleString("pt-BR")
-            .substring(0, 10)}
+          {new Date(lessons.data).toLocaleString("pt-BR").substring(0, 10)}
         </Td>
         <Td textAlign={"center"} fontWeight={"semibold"}>
-          {lessons.txt_acao}
+          {lessons.acao_e_recomendacao}
         </Td>
 
         <Td>
