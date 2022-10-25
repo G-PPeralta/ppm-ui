@@ -44,10 +44,6 @@ export async function postCadastroNovaOcorrenciaPorAtividade(
   id: number,
   payload: any
 ): Promise<{ status: number }> {
-  const { status } = await api.post(
-    `/estatisticas/cronograma/${id}/ocorrencia`,
-    payload,
-    token()
-  );
+  const { status } = await api.post(`/ocorrencias/${id}`, payload, token());
   return { status };
 }

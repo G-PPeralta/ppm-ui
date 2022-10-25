@@ -47,9 +47,19 @@ function ColumnSPT({ column, setRefresh, refresh }: Props) {
     const idNomeSonda = column.sonda.split(" - ")[0];
     const servicoPocos = await getServicoPocoId(idNomeSonda);
 
+    // O POÇO VEM COMO 0 - NOME DO POÇO
+    // PRECISO ORDENAR POR NOME DO POÇO COM BASE NO QUE VEM DEPOIS DO "-"
     const servicoPocosSorted = servicoPocos.data.sort(
-      (a: ServicoPoco, b: ServicoPoco) => a.nom_poco.localeCompare(b.nom_poco)
+      (a: ServicoPoco, b: ServicoPoco) => {
+        const nomePocoA = a.nom_poco.split(" - ")[1];
+        const nomePocoB = b.nom_poco.split(" - ")[1];
+        return nomePocoA.localeCompare(nomePocoB);
+      }
     );
+
+    // const servicoPocosSorted = servicoPocos.data.sort(
+    //   (a: ServicoPoco, b: ServicoPoco) => a.nom_poco.localeCompare(b.nom_poco)
+    // );
 
     setListaServicosPocos(servicoPocosSorted);
   };
