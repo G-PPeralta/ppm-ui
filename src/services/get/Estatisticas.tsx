@@ -26,3 +26,17 @@ export async function getSondasOperacoes(): Promise<{
 
   return { data, status };
 }
+
+export async function getLicoesAprendidasPorAtividade(
+  idAtividade: number
+): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(
+    `projetos-atividades-licoes-aprendidas/${idAtividade}`,
+    token()
+  );
+
+  return { data, status };
+}

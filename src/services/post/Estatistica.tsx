@@ -29,11 +29,11 @@ export async function postCadastroNovoCronograma(
 }
 
 export async function postCadastroNovaLicaoAprendidaPorAtividade(
-  id: number,
+  // id: number,
   payload: any
 ): Promise<{ status: number }> {
   const { status } = await api.post(
-    `/estatisticas/cronograma/${id}/licao-aprendida`,
+    `projetos-atividades-licoes-aprendidas`,
     payload,
     token()
   );

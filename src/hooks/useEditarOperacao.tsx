@@ -28,7 +28,8 @@ interface Projeto {
 export function useEditarOperacao(
   refresh: boolean,
   setRefresh: Function,
-  projeto: Projeto
+  projeto: Projeto,
+  idAtividade?: number
 ) {
   const { user } = useAuth();
   const { toast } = useToast();

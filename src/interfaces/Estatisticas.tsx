@@ -10,3 +10,10 @@ export interface Operacao {
   nom_usu_create: string;
   dat_usu_create: string;
 }
+
+export interface LicaoAprendida {
+  id: number;
+  licao_aprendida: string;
+  data: string;
+  acao_e_recomendacao: string;
+}
