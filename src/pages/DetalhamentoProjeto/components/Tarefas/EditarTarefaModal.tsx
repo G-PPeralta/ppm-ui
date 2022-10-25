@@ -147,6 +147,7 @@ function EditarTarefaModal({
             justifyContent={"center"}
             color={"white"}
             fontSize={"14px"}
+            fontWeight={"700"}
           >
             Editar Tarefa
           </ModalHeader>
@@ -157,9 +158,9 @@ function EditarTarefaModal({
               padding={1}
               display={"flex"}
               justifyContent={"space-between"}
-              gap={3}
+              // gap={3}
             >
-              <Flex flexDir={"column"} flexGrow={4}>
+              <Flex flexDir={"column"} flexGrow={4} mr={4} ml={-3}>
                 <FormLabel
                   htmlFor="nomeTarefa"
                   color="#949494"
@@ -220,9 +221,9 @@ function EditarTarefaModal({
               marginBottom={1}
               width={"204px"}
               display="flex"
-              gap={4}
+              // gap={4}
             >
-              <Flex direction={"column"}>
+              <Flex direction={"column"} mr={4} ml={-3}>
                 <FormLabel
                   htmlFor="atividadeRel"
                   color="#949494"
@@ -281,6 +282,8 @@ function EditarTarefaModal({
               </Flex>
             </FormControl>
             <FormLabel
+              mr={4}
+              ml={-2}
               htmlFor="status"
               color="#949494"
               fontSize="12px"
@@ -304,6 +307,8 @@ function EditarTarefaModal({
               onChange={(event) => setStatus(Number(event.target.value))}
             ></Input> */}
             <NumberInput
+              mr={4}
+              ml={-2}
               width={"208px"}
               height={"56px"}
               min={0}
