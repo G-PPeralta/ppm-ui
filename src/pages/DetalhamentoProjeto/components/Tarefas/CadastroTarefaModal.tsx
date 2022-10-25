@@ -110,9 +110,9 @@ function CadastroTarefasModal({
               padding={1}
               display={"flex"}
               justifyContent={"space-between"}
-              gap={3}
+              // gap={3}
             >
-              <Flex flexDir={"column"} flexGrow={4}>
+              <Flex flexDir={"column"} flexGrow={4} mr={4} ml={-2}>
                 {" "}
                 <FormLabel
                   htmlFor="nomeTarefa"
@@ -182,9 +182,9 @@ function CadastroTarefasModal({
               marginBottom={1}
               width={"204px"}
               display="flex"
-              gap={4}
+              // gap={1}
             >
-              <Flex direction={"column"}>
+              <Flex direction={"column"} mr={4} ml={-2}>
                 <FormLabel
                   htmlFor="atividadeRel"
                   color="#949494"
