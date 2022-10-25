@@ -20,6 +20,7 @@ import {
   ModalFooter,
   Button,
   Select,
+  Text,
   // useDisclosure,
 } from "@chakra-ui/react";
 import { AtividadesProjeto } from "interfaces/Services";
@@ -97,9 +98,10 @@ function CadastroTarefasModal({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
-            Cadastrar tarefa
+            Cadastrar Tarefa
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <ModalBody>
@@ -108,9 +110,10 @@ function CadastroTarefasModal({
               padding={1}
               display={"flex"}
               justifyContent={"space-between"}
-              gap={3}
+              // gap={3}
             >
-              <Flex flexDir={"column"} flexGrow={4}>
+              <Flex flexDir={"column"} flexGrow={4} mr={4} ml={-2}>
+                {" "}
                 <FormLabel
                   htmlFor="nomeTarefa"
                   color="#949494"
@@ -118,7 +121,10 @@ function CadastroTarefasModal({
                   fontWeight="700"
                   mt={"6px"}
                 >
-                  TAREFA <RequiredField />
+                  <Flex gap={1}>
+                    <RequiredField />
+                    <Text>TAREFA</Text>
+                  </Flex>
                 </FormLabel>
                 <Input
                   maxLength={50}
@@ -147,8 +153,12 @@ function CadastroTarefasModal({
                   fontWeight="700"
                   mt={"6px"}
                 >
-                  DATA <RequiredField />
+                  <Flex gap={1}>
+                    <RequiredField />
+                    <Text>DATA</Text>{" "}
+                  </Flex>
                 </FormLabel>
+
                 <Input
                   fontSize={"14px"}
                   max="9999-12-31"
@@ -172,9 +182,9 @@ function CadastroTarefasModal({
               marginBottom={1}
               width={"204px"}
               display="flex"
-              gap={4}
+              // gap={1}
             >
-              <Flex direction={"column"}>
+              <Flex direction={"column"} mr={4} ml={-2}>
                 <FormLabel
                   htmlFor="atividadeRel"
                   color="#949494"
@@ -182,7 +192,10 @@ function CadastroTarefasModal({
                   fontWeight="700"
                   mt={"6px"}
                 >
-                  ATIVIDADE RELACIONADA
+                  <Flex gap={1}>
+                    <RequiredField />
+                    ATIVIDADE RELACIONADA
+                  </Flex>
                 </FormLabel>
                 <Select
                   borderRadius={"8px"}
@@ -215,7 +228,9 @@ function CadastroTarefasModal({
                   fontWeight="700"
                   mt={"6px"}
                 >
-                  RESPONSÁVEL <RequiredField />
+                  <Flex gap={1}>
+                    <RequiredField /> RESPONSÁVEL{" "}
+                  </Flex>
                 </FormLabel>
                 <Input
                   maxLength={50}
@@ -244,10 +259,16 @@ function CadastroTarefasModal({
                 fontWeight="700"
                 mt={"6px"}
               >
-                DESCRIÇÃO DA TAREFA
+                <Flex gap={1} mr={4} ml={-2}>
+                  <RequiredField />
+                  DESCRIÇÃO DA TAREFA
+                </Flex>
               </FormLabel>
               <Textarea
+                mr={4}
+                ml={-2}
                 fontSize={"14px"}
+                fontWeight={"400"}
                 maxLength={255}
                 borderRadius={"8px"}
                 border={"1px solid #A7A7A7"}
@@ -279,6 +300,9 @@ function CadastroTarefasModal({
                 onClick={() => handleCancelar(registerForm, closeModal)}
                 width={"208px"}
                 height={"56px"}
+                fontSize="18px"
+                fontWeight="700"
+                fontFamily={"Mulish"}
               >
                 Cancelar
               </Button>
@@ -288,11 +312,12 @@ function CadastroTarefasModal({
                 height={"56px"}
                 fontSize="18px"
                 fontWeight="700"
-                background="#0047BB"
+                fontFamily={"Mulish"}
+                background="origem.500"
                 variant="primary"
                 color="white"
                 _hover={{
-                  background: "#0047BB",
+                  background: "origem.600",
                   transition: "all 0.4s",
                 }}
                 onClick={() => handleCadastrar(registerForm, closeModal)}

@@ -93,26 +93,29 @@ function CadastrarLicoesAprendidasModal({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
-            Adicionar lições aprendidas
+            Adicionar Lições Aprendidas
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <ModalBody>
             <FormControl marginBottom={4}>
               <FormLabel
+                mt={3}
                 htmlFor="fornecedorNome"
                 color="#949494"
                 fontSize="12px"
                 fontWeight="700"
-                mt={"6px"}
               >
-                LIÇÃO APRENDIDA <RequiredField />
+                <Flex gap={1}>
+                  <RequiredField /> LIÇÃO APRENDIDA
+                </Flex>
               </FormLabel>
               <Input
                 maxLength={40}
                 borderRadius={"8px"}
-                border={"1px solid #A7A7A7"}
+                border={"1px solid #949494"}
                 mt={"-9px"}
                 width={"328px"}
                 height={"56px"}
@@ -136,15 +139,17 @@ function CadastrarLicoesAprendidasModal({
                 fontWeight="700"
                 mt={"6px"}
               >
-                AÇÃO OU RECOMENDAÇÃO <RequiredField />
+                <Flex gap={1}>
+                  <RequiredField /> AÇÃO OU RECOMENDAÇÃO
+                </Flex>
               </FormLabel>
               <Textarea
                 maxLength={150}
                 borderRadius={"8px"}
-                border={"1px solid #A7A7A7"}
+                border={"1px solid #949494"}
                 mt={"-9px"}
-                width={"456px"}
-                height={"56px"}
+                width={"465px"}
+                height={"121px"}
                 color={"black"}
                 _placeholder={{ color: "#949494" }}
                 isRequired
