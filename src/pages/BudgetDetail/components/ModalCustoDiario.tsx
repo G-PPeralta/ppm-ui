@@ -143,7 +143,9 @@ function ModalCustoDiario(props: { id: string | undefined }) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
             Custo Diário
           </ModalHeader>
@@ -192,16 +194,18 @@ function ModalCustoDiario(props: { id: string | undefined }) {
                     </Flex>
                   </Flex>
                 </Flex>
-                <TableContainer mt={4} mb={3} ml={1}>
-                  <Table>
+                <TableContainer mt={4} mb={3} ml={1} borderRadius={"10px"}>
+                  <Table
+                    variant="striped"
+                    colorScheme={"strippedGray"}
+                    align={"center"}
+                  >
                     <Thead>
                       <Tr background={"origem.500"} color="white">
-                        <Th color={"white"} borderTopLeftRadius="10px"></Th>
+                        <Th color={"white"}></Th>
                         <Th color={"white"}>Serviço/Compra</Th>
                         <Th color={"white"}>Fornecedor</Th>
-                        <Th color={"white"} borderTopRightRadius="10px">
-                          R$ Realizado
-                        </Th>
+                        <Th color={"white"}>R$ Realizado</Th>
                       </Tr>
                     </Thead>
                     {data.length ? (

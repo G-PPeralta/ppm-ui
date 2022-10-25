@@ -82,6 +82,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
             color={"white"}
             fontSize={"14px"}
             fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
             {`Priorização ${rankingNome}`}
           </ModalHeader>
