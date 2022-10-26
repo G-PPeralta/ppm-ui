@@ -66,6 +66,7 @@ export function ModalFiltrarAtividade({
     setLoading(true);
     const result = await postFiltroCronograma(payload);
     setResponsePOST(result);
+    onClose();
 
     setLoading(false);
     // setDuracao(23, 30);
@@ -73,7 +74,6 @@ export function ModalFiltrarAtividade({
     if (result && result.length > 0) {
       setOperacao(result[0].operacao_id);
       setDuracao(result[0].hrs_media);
-      onClose();
     }
   };
 
@@ -281,16 +281,23 @@ export function ModalFiltrarAtividade({
                   onClose={onClose}
                 />
                 <Button
-                  // disabled={!registerForm.isValid}
-                  background="origem.300"
+                  w={"208px"}
+                  h={"56px"}
+                  borderRadius={"8px"}
+                  background={"origem.500"}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                   variant="primary"
                   color="white"
                   onClick={getFilter}
-                  height="56px"
-                  width={174}
                   disabled={
                     !registerForm.values.pocoId || !registerForm.values.sondaId
                   }
+                  _hover={{
+                    background: "origem.600",
+                    transition: "all 0.4s",
+                  }}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
