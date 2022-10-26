@@ -138,18 +138,25 @@ function ModalConfiguracoes({
     const filtered = options.filter((option: any) => option.label !== selected);
 
     return filtered.map(
-      (option: {
-        value: string | number | readonly string[] | undefined;
-        label:
-          | string
-          | number
-          | boolean
-          | ReactElement<any, string | JSXElementConstructor<any>>
-          | ReactFragment
-          | ReactPortal
-          | null
-          | undefined;
-      }) => <option value={option.value}>{option.label}</option>
+      (
+        option: {
+          value: string | number | readonly string[] | undefined;
+          label:
+            | string
+            | number
+            | boolean
+            | ReactElement<any, string | JSXElementConstructor<any>>
+            | ReactFragment
+            | ReactPortal
+            | null
+            | undefined;
+        },
+        index: any
+      ) => (
+        <option value={option.value} key={index}>
+          {option.label}
+        </option>
+      )
     );
   }
 
