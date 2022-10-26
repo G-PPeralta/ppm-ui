@@ -16,11 +16,18 @@ import { BudgetDetail } from "interfaces/Budgets";
 
 import Empty from "components/TableEmpty/empty";
 
-import CampoEditavel from "./CampoEditavel";
-import ModalGestaoDeCusto from "./ModalGestaoDeCusto";
+import { formatReal } from "utils/formatReal";
 
-export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
-  const { data } = props;
+import ModalGestaoDeCusto from "./ModalGestaoDeCusto";
+import ModalValorPrevisto from "./ModalValorPrevisto";
+
+interface PropsInterface {
+  data: BudgetDetail[];
+  toogleRender: () => void;
+}
+
+export function BudgetDetailTable(props: PropsInterface) {
+  const { data, toogleRender } = props;
 
   //  const color = "rgb(46, 105, 253)";
 
@@ -95,13 +102,20 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
             <Td>{filho.fornecedor}</Td>
             <Td textAlign="center">
               <Flex alignItems={"center"} justifyContent="center">
-                <CampoEditavel filho={filho} />
+                {formatReal(filho.planejado)}{" "}
+                <ModalValorPrevisto
+                  projeto={filho.projeto}
+                  toogleRender={toogleRender}
+                />
               </Flex>
             </Td>
             <Td textAlign="center">
               <Flex alignItems={"center"} justifyContent="center">
-                {brl.format(filho.realizado)}{" "}
-                <ModalGestaoDeCusto projeto={filho.projeto} />
+                {formatReal(filho.realizado)}{" "}
+                <ModalGestaoDeCusto
+                  projeto={filho.projeto}
+                  toogleRender={toogleRender}
+                />
               </Flex>
             </Td>
             <Td align="center">{filho.gap}%</Td>
