@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { MdFilterAlt } from "react-icons/md";
 
 import {
@@ -13,11 +14,12 @@ import {
   Text,
   NumberInputField,
   NumberInput,
+  Button,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
 
-import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+// import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import DatePickerModal from "components/DatePickerGenerico/DatePickerModal";
 import SelectFiltragem from "components/SelectFiltragem";
@@ -25,11 +27,18 @@ import SelectFiltragem from "components/SelectFiltragem";
 import { useCadastroCronograma } from "hooks/useCadastroCronograma";
 import { useFiltragemCronogramaAtividade } from "hooks/useFiltragemCronogramaAtividade";
 
-export function ModalFiltrarAtividade({ refresh, setRefresh }: any) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useFiltragemCronogramaAtividade();
-  const { listaPocos, listaSondas } = useCadastroCronograma();
+import { postFiltroCronograma } from "services/post/FiltroCronograma";
 
+export function ModalFiltrarAtividade({
+  refresh,
+  setRefresh,
+  setDuracao,
+  setOperacao,
+}: any) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { registerForm } = useFiltragemCronogramaAtividade();
+  const { listaPocos, listaSondas } = useCadastroCronograma();
+  const [loading, setLoading] = useState(false);
   const optionsPocos = listaPocos.map((poco: ListaPoco) => ({
     value: poco.id,
     label: poco.poco,
@@ -58,6 +67,33 @@ export function ModalFiltrarAtividade({ refresh, setRefresh }: any) {
       label: "Metodo 4",
     },
   ];
+
+  const getFilter = async () => {
+    const payload = {
+      pocoId: registerForm.values.pocoId,
+      sondaId: registerForm.values.sondaId,
+      profundidadeIni: registerForm.values.profundidadeIni,
+      profundidadeFim: registerForm.values.profundidadeFim,
+      metodoElevacao: metodoElevacao
+        ? metodoElevacao.find(
+            (x) => x.value == registerForm.values.metodoElevacaoId
+          )?.label
+        : "",
+      metodoElevacaoId: registerForm.values.metodoElevacaoId,
+      dataDe: registerForm.values.dataDe,
+      dataAte: registerForm.values.dataAte,
+    };
+    setLoading(true);
+    const result = await postFiltroCronograma(payload);
+    setLoading(false);
+    // setDuracao(23, 30);
+    // registerFormAct.values.atividades[index].duracao += 3;
+    if (result && result.length > 0) {
+      setOperacao(result[0].operacao_id);
+      setDuracao(result[0].hrs_media);
+      onClose();
+    }
+  };
 
   return (
     <>
@@ -226,14 +262,26 @@ export function ModalFiltrarAtividade({ refresh, setRefresh }: any) {
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                <BotaoAzulLargoPrimary
-                  text={"Cadastrar"}
-                  formikForm={registerForm}
-                  onClose={onClose}
-                  setRefresh={setRefresh}
-                  refresh={refresh}
-                  loading={loading}
-                />
+                <Button
+                  // disabled={!registerForm.isValid}
+                  background="origem.300"
+                  variant="primary"
+                  color="white"
+                  onClick={getFilter}
+                  height="56px"
+                  width={174}
+                  disabled={
+                    !registerForm.values.pocoId || !registerForm.values.sondaId
+                  }
+                >
+                  {loading ? (
+                    <Ring speed={2} lineWeight={5} color="white" size={24} />
+                  ) : (
+                    <>
+                      <Text>Buscar</Text>
+                    </>
+                  )}
+                </Button>
               </Flex>
             </ModalFooter>
           </form>

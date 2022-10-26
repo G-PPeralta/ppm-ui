@@ -3,7 +3,7 @@ export interface FiltroCronograma {
   sondaId: number;
   profundidadeIni: number;
   profundidadeFim: number;
-  metodoElevacao: string;
+  metodoElevacao?: string;
   metodoElevacaoId: number;
   dataDe: string;
   dataAte: string;
