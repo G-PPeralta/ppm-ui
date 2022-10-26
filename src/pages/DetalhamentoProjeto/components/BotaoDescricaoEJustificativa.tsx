@@ -23,12 +23,14 @@ import { patchProjetoDescJust } from "services/update/Projeto";
 
 interface DescricaoEJustificativaProps {
   infoProjeto: ICardInfoProjeto;
-  setRender: () => void;
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function BotaoDescricaoEJustificativa({
   infoProjeto,
-  setRender,
+  refresh,
+  setRefresh,
 }: DescricaoEJustificativaProps) {
   const { id } = useParams();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -185,10 +187,8 @@ function BotaoDescricaoEJustificativa({
                     descricao,
                     justificativa,
                   });
-                  setDescricao("");
-                  setJustificativa("");
-                  setRender();
                   onClose();
+                  setRefresh(!refresh);
                 }}
                 _hover={{
                   background: "origem.600",

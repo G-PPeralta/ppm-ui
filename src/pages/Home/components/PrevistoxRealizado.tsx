@@ -35,8 +35,8 @@ function useGetData() {
     data.map((val: any) =>
       renderPayload.push({
         ...val,
-        Realizado: val.cronogramaRealizado,
-        Previsto: val.cronogramaPrevisto,
+        Realizado: val.capexRealizado,
+        Previsto: val.capexPrevisto,
       })
     );
     setPrevistoRealizado(renderPayload);
