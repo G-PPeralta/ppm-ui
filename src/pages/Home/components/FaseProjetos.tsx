@@ -26,28 +26,28 @@ export default function NaoPrevistoComponent() {
 
   const innerWidth = window.innerWidth;
 
-  // const grafData = [
-  //   {
-  //     name: "Engenharia",
-  //     value: 30,
-  //     color: "#93E01B",
-  //   },
-  //   {
-  //     name: "C&M",
-  //     value: 30,
-  //     color: "#F4DD06",
-  //   },
-  //   {
-  //     name: "Suprimentos",
-  //     value: 20,
-  //     color: "#F94144",
-  //   },
-  //   {
-  //     name: "Pré-projeto",
-  //     value: 20,
-  //     color: "#2E69FD",
-  //   },
-  // ];
+  const grafData = [
+    {
+      name: "Engenharia",
+      value: Number(data[2]?.value.toFixed(1)),
+      color: "#93E01B",
+    },
+    {
+      name: "C&M",
+      value: Number(data[3]?.value.toFixed(1)),
+      color: "#F4DD06",
+    },
+    {
+      name: "Suprimentos",
+      value: Number(data[1]?.value.toFixed(1)),
+      color: "#F94144",
+    },
+    {
+      name: "Pré-projeto",
+      value: Number(data[0]?.value.toFixed(1)),
+      color: "#2E69FD",
+    },
+  ];
 
   return (
     <Flex
@@ -124,19 +124,19 @@ export default function NaoPrevistoComponent() {
           <Flex mt={5} mb={5} align={"center"} justify={"center"} flex={1}>
             <Flex h={20} justify={"space-between"} direction={"column"}>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#F4DD06">
-                50%
+                {data[3]?.value.toFixed(1)}%
               </Text>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#F94144">
-                0%
+                {data[1]?.value.toFixed(1)}%
               </Text>
             </Flex>
-            {data && <PieChart size={136} data={data} />}
+            {grafData && <PieChart size={136} data={grafData} />}
             <Flex h={20} justify={"space-between"} direction={"column"}>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#93E01B">
-                50%
+                {data[2]?.value.toFixed(1)}%
               </Text>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#2E69FD">
-                0%
+                {data[0]?.value.toFixed(1)}%
               </Text>
             </Flex>
           </Flex>

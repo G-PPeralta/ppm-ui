@@ -2,25 +2,24 @@ import { PieChart, Pie, Cell } from "recharts";
 
 const data01 = [
   {
-    name: "Pré-Projeto",
-    // value: 20,
-    color: "#F94144",
+    name: "Engenharia",
+    // value: 30,
+    color: "#93E01B",
   },
   {
     name: "C&M",
     // value: 30,
     color: "#F4DD06",
   },
-
   {
     name: "Suprimentos",
     // value: 20,
-    color: "#2E69FD",
+    color: "#F94144",
   },
   {
-    name: "Engenharia",
-    // value: 30,
-    color: "#93E01B",
+    name: "Pré-projeto",
+    // value: 20,
+    color: "#2E69FD",
   },
 ];
 
