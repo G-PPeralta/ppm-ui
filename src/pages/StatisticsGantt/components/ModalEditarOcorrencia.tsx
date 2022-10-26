@@ -53,14 +53,14 @@ function ModalEditarOcorrencia({
   const { refresh, setRefresh } = refreshState;
 
   const handleFecharModal = () => {
-    registerForm.setFieldValue("impacto", linhaTabela.horas);
+    registerForm.setFieldValue("impacto", linhaTabela.impacto);
     registerForm.setFieldValue("ocorrencia", linhaTabela.nome_ocorrencia);
     registerForm.setFieldValue("observacoes", "");
     onClose();
   };
 
   useEffect(() => {
-    registerForm.setFieldValue("impacto", linhaTabela.horas);
+    registerForm.setFieldValue("impacto", linhaTabela.impacto);
     registerForm.setFieldValue("ocorrencia", linhaTabela.nome_ocorrencia);
   }, []);
 

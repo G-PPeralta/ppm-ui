@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import { cadastroOcorrenciaAtividade } from "validations/Estatisticas";
 
+import { formatFloatToMinutes } from "utils/formatDate";
+
 import { useToast } from "contexts/Toast";
 
 import { postCadastroNovaOcorrenciaPorAtividade } from "services/post/Estatistica";
@@ -23,7 +25,7 @@ export function useOcorrencias(
     user: user?.nome,
     id_atividade: idAtividade,
     ocorrencia: "",
-    impacto: "",
+    impacto: 0,
   };
 
   const registerForm: any = useFormik({
@@ -34,7 +36,7 @@ export function useOcorrencias(
         user: user?.nome,
         id_atividade: idAtividade,
         ocorrencia: values.ocorrencia,
-        impacto: values.impacto,
+        impacto: formatFloatToMinutes(values.impacto),
       };
 
       setLoading(true);
