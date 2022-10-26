@@ -134,8 +134,10 @@ function ModalConfiguracoes({
     setRefresh(!refresh);
   };
 
-  function getOptions(options: any) {
-    return options.map(
+  function getOptions(options: any, selected: any) {
+    const filtered = options.filter((option: any) => option.value !== selected);
+
+    return filtered.map(
       (option: {
         value: string | number | readonly string[] | undefined;
         label:
@@ -222,7 +224,7 @@ function ModalConfiguracoes({
                         setReponsavel(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsResponsaveis)}
+                      {getOptions(optionsResponsaveis, responsavel)}
                     </Select>
                   </FormControl>
 
@@ -248,7 +250,7 @@ function ModalConfiguracoes({
                         setCoordenador(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsCoordenadores)}
+                      {getOptions(optionsCoordenadores, coordenador)}
                     </Select>
                   </FormControl>
 
@@ -274,7 +276,7 @@ function ModalConfiguracoes({
                         setStatus(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsStatus)}
+                      {getOptions(optionsStatus, status)}
                     </Select>
                   </FormControl>
                   <Flex>
@@ -340,7 +342,7 @@ function ModalConfiguracoes({
                         setPolo(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsPolos)}
+                      {getOptions(optionsPolos, polo)}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
@@ -365,7 +367,7 @@ function ModalConfiguracoes({
                         setLocal(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsLocais)}
+                      {getOptions(optionsLocais, local)}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
@@ -390,7 +392,7 @@ function ModalConfiguracoes({
                         setSolicitacao(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsSolicitantes)}
+                      {getOptions(optionsSolicitantes, solicitacao)}
                     </Select>
                   </FormControl>
                 </Flex>
@@ -561,7 +563,7 @@ function ModalConfiguracoes({
                         setDivisao(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsDivisoes)}
+                      {getOptions(optionsDivisoes, divisao)}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
@@ -586,7 +588,7 @@ function ModalConfiguracoes({
                         setClassificacao(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsClassificacoes)}
+                      {getOptions(optionsClassificacoes, classificacao)}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
@@ -611,7 +613,7 @@ function ModalConfiguracoes({
                         setTipo(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsTipoProjetos)}
+                      {getOptions(optionsTipoProjetos, tipo)}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
@@ -636,7 +638,7 @@ function ModalConfiguracoes({
                         setGate(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsGates)}
+                      {getOptions(optionsGates, gate)}
                     </Select>
                   </FormControl>
                 </Flex>
