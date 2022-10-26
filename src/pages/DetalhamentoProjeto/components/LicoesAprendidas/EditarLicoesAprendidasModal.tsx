@@ -20,13 +20,13 @@ import {
   Textarea,
   // Text,
 } from "@chakra-ui/react";
-import { LicoesAprendidas } from "interfaces/Services";
+import { LicoesAprendidasNew } from "interfaces/Services";
 
 import { useAuth } from "hooks/useAuth";
 
 interface EditModalProps {
   closeModal: any;
-  licao: LicoesAprendidas;
+  licao: LicoesAprendidasNew;
   handleUpdateLicoes: any;
 }
 

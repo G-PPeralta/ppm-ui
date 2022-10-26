@@ -232,7 +232,7 @@ function ModalCustoDiario(props: { id: string | undefined }) {
               <Button
                 variant="ghost"
                 color="red"
-                onClick={() => onClose}
+                onClick={() => onClose()}
                 _hover={{
                   background: "red.500",
                   transition: "all 0.4s",
