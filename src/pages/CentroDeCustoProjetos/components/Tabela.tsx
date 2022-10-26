@@ -163,7 +163,7 @@ function Tabela({ data, refreshState, idProjeto, optionsSelects }: Props) {
           })
         ) : (
           <Tr>
-            <Td textAlign={"center"} fontWeight={"semibold"}>
+            <Td colSpan={8} textAlign={"center"} fontWeight={"semibold"}>
               <Text>Não há dados</Text>
             </Td>
           </Tr>
