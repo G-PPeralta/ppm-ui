@@ -23,11 +23,12 @@ import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelho
 import DatePickerModal from "components/DatePickerGenerico/DatePickerModal";
 import SelectFiltragem from "components/SelectFiltragem";
 
+import { useToast } from "contexts/Toast";
+
 import { useFiltragemCronogramaAtividade } from "hooks/useFiltragemCronogramaAtividade";
 
-import { postFiltroCronograma } from "services/post/FiltroCronograma";
 import { getDataIdPoco } from "services/get/FiltroCronograma";
-import { useToast } from "contexts/Toast";
+import { postFiltroCronograma } from "services/post/FiltroCronograma";
 
 export function ModalFiltrarAtividade({
   refresh,
