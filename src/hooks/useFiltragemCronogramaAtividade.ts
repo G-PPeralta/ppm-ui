@@ -1,13 +1,19 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { FiltroCronograma } from "interfaces/FiltroCronograma";
-
-import { postFiltroCronograma } from "services/post/FiltroCronograma";
+// import { postFiltroCronograma } from "services/post/FiltroCronograma";
+import {
+  getMetodoElevacao,
+  getPocos,
+  getSondas,
+} from "services/get/FiltroCronograma";
 
 export function useFiltragemCronogramaAtividade() {
-  const [loading] = useState(false);
-  const [resultados, setResultados] = useState<any>();
+  const [loading, setLoading] = useState(false);
+  const [pocos, setPocos] = useState([]);
+  const [sonda, setSonda] = useState([]);
+  const [metodoElevacao, setMetodoElevacao] = useState([]);
+
   const initialValues: FiltroCronograma = {
     pocoId: 0,
     sondaId: 0,
@@ -20,10 +26,16 @@ export function useFiltragemCronogramaAtividade() {
   };
 
   const postFiltros = async (initialValues: FiltroCronograma) => {
-    await postFiltroCronograma(initialValues);
-    setResultados({
-      duracao: 3,
-    });
+    // await postFiltroCronograma(initialValues);
+  };
+
+  const reqGet = async () => {
+    const _sondas = await getSondas();
+    const _pocos = await getPocos();
+    const _metodo = await getMetodoElevacao();
+    setPocos(_pocos);
+    setSonda(_sondas);
+    setMetodoElevacao(_metodo);
   };
 
   const registerForm = useFormik({
@@ -33,9 +45,22 @@ export function useFiltragemCronogramaAtividade() {
     },
   });
 
+  useEffect(() => {
+    setLoading(true);
+    reqGet();
+  }, []);
+
+  useEffect(() => {
+    if (pocos.length > 0 && sonda.length > 0 && metodoElevacao.length > 0) {
+      setLoading(false);
+    }
+  }, [pocos, sonda, metodoElevacao]);
+
   return {
     registerForm,
     loading,
-    resultados,
+    pocos,
+    sonda,
+    metodoElevacao,
   };
 }
