@@ -13,7 +13,7 @@ import {
   getAreaAtuacaoList,
   getResponsavelList,
 } from "services/get/Infograficos";
-import { postOperacoesEstatisticas } from "services/post/OperacoesEstatisticas";
+import { postCadastroNovaAtividadeCronograma } from "services/post/Estatistica";
 
 import { useAuth } from "./useAuth";
 
@@ -85,7 +85,7 @@ export function useAdicionarOperacao(
         // const status = res.status;
         // console.log(">>>values", values);
         // console.log(">>>postOperacoesEstatisticas", newValues);
-        const { status } = await postOperacoesEstatisticas(newValues);
+        const { status } = await postCadastroNovaAtividadeCronograma(newValues);
         if (status === 200 || status === 201) {
           toast.success("Operação adicionada com sucesso!", {
             id: "toast-principal",
