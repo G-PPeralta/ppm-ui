@@ -53,6 +53,7 @@ function EditarAtividadeTabGeral({ registerForm }: Props) {
           nomeInput={"DURAÇÃO"}
           tipo={"hora"}
           stepper={false}
+          limite={1000}
         />
 
         <DatePickerGenerico

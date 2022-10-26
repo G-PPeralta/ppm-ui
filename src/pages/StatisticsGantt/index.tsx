@@ -113,6 +113,8 @@ function StatisticsGantt() {
     handleGetAllData();
   }, []);
 
+  // console.log("isOpen", isOpen);
+
   return (
     <>
       <Sidebar>

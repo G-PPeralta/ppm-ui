@@ -33,9 +33,15 @@ interface Props {
   };
 }
 
-interface Option {
-  value: number;
-  label: string;
+// interface Option {
+//   value: number;
+//   label: string;
+// }
+
+interface OpcoesFiltro {
+  duracao?: number;
+  operacao?: number;
+  dataInicio?: string;
 }
 
 function AtividadesDraggable({ index, registerForm, listas }: Props) {
@@ -45,9 +51,10 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
-  const [duracao, setDuracao] = useState<number>();
-  const [operacao, setOperacao] = useState<number>();
-
+  const [, setDuracao] = useState<number>();
+  const [, setOperacao] = useState<number>();
+  const [, setDataInicio] = useState<string>();
+  const [, setOpcoesFiltro] = useState<OpcoesFiltro>();
   const initAdd = {
     area_id: 0,
     operacao_id: 0,
@@ -68,6 +75,19 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     }
   };
 
+  function filterData(data: OpcoesFiltro) {
+    // registerForm.setFieldValue(
+    //   `atividades[${index}].operacao_id`,
+    //   data.operacao
+    // );
+    registerForm.setFieldValue(
+      `atividades[${index}].data_inicio`,
+      data.dataInicio
+    );
+
+    registerForm.setFieldValue(`atividades[${index}].duracao`, data.duracao);
+  }
+
   // const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
   //   value: poco.id,
   //   label: poco.tipo,
@@ -85,13 +105,13 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     label: operacao.nom_operacao,
   }));
   const getValue = (options: any, i: number, chave: string) => {
-    if (operacao) {
-      const obj = options.find((opt: Option) => opt.value == operacao);
-      return {
-        value: obj.value,
-        label: obj.label,
-      };
-    }
+    // if (operacao) {
+    //   const obj = options.find((opt: Option) => opt.value == operacao);
+    //   return {
+    //     value: obj.value,
+    //     label: obj.label,
+    //   };
+    // }
 
     const index = options
       .map(({ value }: any) => value)
@@ -102,6 +122,10 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
       label: options?.[index]?.label,
     };
   };
+
+  // function mudaOperacao(evt: any) {
+  //   console.log(evt);
+  // }
 
   useEffect(() => {
     const now = Date.now();
@@ -151,7 +175,25 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 justify={"center"}
                 py={innerwidth >= 640 ? 0 : 4}
               >
-                <Flex direction={"column"}>
+                <Flex direction={"column"} flex={2}>
+                  <Flex>
+                    <RequiredField />
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      OPERAÇÃO
+                    </Text>
+                  </Flex>
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    propName={`atividades[${index}].operacao_id`}
+                    options={optionsOperacao}
+                    value={getValue(optionsOperacao, index, "operacao_id")}
+                  />
+                </Flex>
+                {/* <Flex direction={"column"}>
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
@@ -167,18 +209,29 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     registerForm={registerForm}
                     propName={`atividades[${index}].operacao_id`}
                     options={optionsOperacao}
+                    // onChange={getValue(optionsOperacao, index, "operacao_id")}
                     value={getValue(optionsOperacao, index, "operacao_id")}
                   />
+                </Flex> */}
+
+                <Flex direction={"column"} flex={1}>
+                  <DateTimePicker registerForm={registerForm} index={index} />
                 </Flex>
 
-                <Flex direction={"column"}>
-                  <DateTimePicker
+                {/* <Flex direction={"column"}>
+                  <DateTimePickerModal
                     registerForm={registerForm}
+                    value={
+                      dataInicio &&
+                      formatDateToddMMyyyyhhmm(new Date(dataInicio))
+                    }
+                    dateFormat="dd/MM/yyyy, hh:mm"
                     index={index}
                     width="208px"
                   />
-                </Flex>
-                <Flex direction={"column"}>
+                </Flex> */}
+
+                {/* <Flex direction={"column"}>
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
@@ -206,22 +259,93 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   >
                     <NumberInputField bg={"#fff"} h={"56px"} />
                   </NumberInput>
-                </Flex>
-                {/* <Flex direction={"column"} flex={1}>
+                </Flex> */}
+
+                <Flex direction={"column"} flex={1}>
                   <Flex gap={1}>
+                    <RequiredField />
                     <Text
                       fontWeight={"bold"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
-                      PRECEDENTES
+                      DURAÇÃO
                     </Text>
                   </Flex>
-                  <PopOverPrecedentes
+                  <NumberInput
+                    width={99}
+                    max={99999}
+                    min={0}
+                    id={`atividades[${index}].duracao`}
+                    name={`atividades[${index}].duracao`}
+                    value={registerForm.values.atividades[index].duracao}
+                    onChange={(value) => {
+                      registerForm.setFieldValue(
+                        `atividades[${index}].duracao`,
+                        Number(value)
+                      );
+                    }}
+                  >
+                    <NumberInputField bg={"#fff"} h={"56px"} />
+                  </NumberInput>
+                </Flex>
+
+                <Flex direction={"column"} flex={1}>
+                  <Flex>
+                    <RequiredField />
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      PROFUNDIDADE
+                    </Text>
+                  </Flex>
+                  <NumberInput
+                    max={99999}
+                    min={0}
+                    width={99}
+                    // id={`atividades[${index}].duracao`}
+                    // name={`atividades[${index}].duracao`}
+                    // value={registerForm.values.atividades[index].duracao}
+                    // onChange={(value) => {
+                    //   registerForm.setFieldValue(
+                    //     `atividades[${index}].duracao`,
+                    //     Number(value)
+                    //   );
+                    // }}
+                  >
+                    <NumberInputField bg={"#fff"} h={"56px"} />
+                  </NumberInput>
+                </Flex>
+                <Flex direction={"column"} flex={1}>
+                  <Flex>
+                    <RequiredField />
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      MÉTODO
+                    </Text>
+                  </Flex>
+                  <SelectFiltragem
+                    width={174}
                     registerForm={registerForm}
-                    index={index}
+                    // propName={`atividades[${index}].operacao_id`}
+                    options={[
+                      {
+                        value: 1,
+                        label: "Gás Lift",
+                      },
+                      {
+                        value: 2,
+                        label: "Surgente",
+                      },
+                    ]}
+                    // value={getValue(optionsOperacao, index, "operacao_id")}
                   />
-                </Flex> */}
+                </Flex>
               </Flex>
               <Flex
                 align={"center"}
@@ -232,13 +356,16 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   setDuracao={setDuracao}
                   registerFormAct={registerForm}
                   setOperacao={setOperacao}
+                  setDataInicio={setDataInicio}
+                  filterData={filterData}
+                  setOpcoesFiltro={setOpcoesFiltro}
                   index={index}
                 />
 
                 <FiTrash
                   onClick={() => remove(index)}
                   color="#F94144"
-                  size="16px"
+                  size="22px"
                 />
               </Flex>
             </Flex>

@@ -291,9 +291,6 @@ export function ModalFiltrarAtividade({
                   variant="primary"
                   color="white"
                   onClick={getFilter}
-                  disabled={
-                    !registerForm.values.pocoId || !registerForm.values.sondaId
-                  }
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",
@@ -303,7 +300,7 @@ export function ModalFiltrarAtividade({
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (
                     <>
-                      <Text>Buscar</Text>
+                      <Text>Filtrar</Text>
                     </>
                   )}
                 </Button>

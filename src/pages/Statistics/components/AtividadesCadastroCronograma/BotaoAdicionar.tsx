@@ -16,8 +16,6 @@ function BotaoAdicionar({ add, registerForm }: Props) {
     const isDisabled = registerForm.values.atividades.some(
       (atividade: any) =>
         atividade.operacao_id <= 0 ||
-        atividade.area_id <= 0 ||
-        atividade.responsavel_id <= 0 ||
         atividade.data_inicio === "" ||
         atividade.duracao <= 0
     );
@@ -52,7 +50,7 @@ function BotaoAdicionar({ add, registerForm }: Props) {
           backgroundColor: isDisabled ? "#D6D4D4" : "origem.600",
         }}
         transition={"all 0.4s"}
-        isDisabled={isDisabled}
+        isDisabled={false}
       />
     </Flex>
   );

@@ -1,15 +1,20 @@
-import { useState } from "react";
-import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
 import { FiltroCronograma } from "interfaces/FiltroCronograma";
 
-import { postFiltroCronograma } from "services/post/FiltroCronograma";
+import {
+  getMetodoElevacao,
+  getPocos,
+  getSondas,
+} from "services/get/FiltroCronograma";
 
 export function useFiltragemCronogramaAtividade() {
-  const [loading] = useState(false);
-  const [resultados, setResultados] = useState<any>();
-  const [responsePOST, setResponsePOST] = useState<any>([]);
+  const [loading, setLoading] = useState(false);
+  const [pocos, setPocos] = useState([]);
+  const [sonda, setSonda] = useState([]);
+  const [metodoElevacao, setMetodoElevacao] = useState([]);
+
   const initialValues: FiltroCronograma = {
     pocoId: 0,
     sondaId: 0,
@@ -22,25 +27,16 @@ export function useFiltragemCronogramaAtividade() {
   };
 
   const postFiltros = async (initialValues: FiltroCronograma) => {
-    try {
-      const { status, data } = await postFiltroCronograma(initialValues);
+    // await postFiltroCronograma(initialValues);
+  };
 
-      if (data) {
-        setResponsePOST(data);
-      }
-      if (status === 200 || status === 201) {
-        toast.success("Atividade filtrada com sucesso!", {
-          id: "toast-principal",
-        });
-      }
-    } catch (error) {
-      toast.error("Erro ao filtrar atividade!", {
-        id: "toast-principal",
-      });
-    }
-    setResultados({
-      duracao: 3,
-    });
+  const reqGet = async () => {
+    const _sondas = await getSondas();
+    const _pocos = await getPocos();
+    const _metodo = await getMetodoElevacao();
+    setPocos(_pocos);
+    setSonda(_sondas);
+    setMetodoElevacao(_metodo);
   };
 
   const registerForm = useFormik({
@@ -50,10 +46,22 @@ export function useFiltragemCronogramaAtividade() {
     },
   });
 
+  useEffect(() => {
+    setLoading(true);
+    reqGet();
+  }, []);
+
+  useEffect(() => {
+    if (pocos.length > 0 && sonda.length > 0 && metodoElevacao.length > 0) {
+      setLoading(false);
+    }
+  }, [pocos, sonda, metodoElevacao]);
+
   return {
     registerForm,
     loading,
-    resultados,
-    responsePOST,
+    pocos,
+    sonda,
+    metodoElevacao,
   };
 }

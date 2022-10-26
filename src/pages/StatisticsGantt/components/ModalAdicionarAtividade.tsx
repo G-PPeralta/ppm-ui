@@ -13,6 +13,11 @@ import {
   useDisclosure,
   Text,
   useBreakpointValue,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { Operacao } from "interfaces/Estatisticas";
 
@@ -73,13 +78,27 @@ function ModalAdicionarAtividade({
   }));
 
   const handleDataInicio = () => {
-    const ultimaData = ganttData?.reduce((acc: any, curr: any) => {
-      if (acc.EndDate > curr.EndDate) {
-        return acc.EndDate;
-      } else {
-        return curr.EndDate;
+    // const ultimaData = ganttData?.reduce((acc: any, curr: any) => {
+    //   if (acc.EndDate > curr.EndDate) {
+    //     return acc.EndDate;
+    //   } else {
+    //     return curr.EndDate;
+    //   }
+    // });
+    let ultimaData = new Date();
+    if (ganttData?.length > 1) {
+      ultimaData = ganttData?.reduce((acc: any, curr: any) => {
+        if (acc.EndDate > curr.EndDate) {
+          return acc.EndDate;
+        } else {
+          return curr.EndDate;
+        }
+      });
+    } else {
+      if (ganttData?.length > 0) {
+        ultimaData = ganttData[0].EndDate;
       }
-    });
+    }
     setDataFinalGantt(ultimaData);
   };
 
@@ -134,6 +153,10 @@ function ModalAdicionarAtividade({
     registerForm.resetForm();
     registerForm.setFieldValue("data_inicio", new Date(dataFinalGantt));
     onClose();
+  };
+
+  const handleChange = (event: any) => {
+    registerForm.setFieldValue("profundidade", Number(event));
   };
 
   return (
@@ -275,14 +298,41 @@ function ModalAdicionarAtividade({
                     </Flex>
                   </Flex>
                   <Flex gap={4} justify={"end"} align={"end"}>
-                    <Flex flex={2} w={"50%"}>
+                    <Flex flex={2} w={"50%"} gap={4}>
                       <SelectFiltragem
                         registerForm={registerForm}
                         nomeSelect={"MÉTODO DE ELEVAÇÃO"}
                         propName={"metodo_elevacao_id"}
                         options={optionsMetodosElevacao}
-                        required={true}
+                        required={false}
                       />
+                      <Flex direction={"column"} w={"100%"}>
+                        <Flex gap={1}>
+                          {/* <RequiredField /> */}
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            PROFUNDIDADE
+                          </Text>
+                        </Flex>
+
+                        <NumberInput
+                          min={0}
+                          max={999999}
+                          step={1}
+                          value={registerForm.values.profundidade}
+                          onChange={(event) => handleChange(event)}
+                          h={"56px"}
+                        >
+                          <NumberInputField h={"56px"} />
+                          <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
+                        </NumberInput>
+                      </Flex>
                     </Flex>
                   </Flex>
                 </Flex>
