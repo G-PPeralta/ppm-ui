@@ -22,7 +22,7 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { LicoesAprendidas } from "interfaces/Services";
+import { LicoesAprendidasNew } from "interfaces/Services";
 
 import { useToast } from "contexts/Toast";
 
@@ -40,7 +40,7 @@ function LicoesAprendidasModal({
 }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { toast } = useToast();
-  const [editLicao, setEditLicao] = useState({} as LicoesAprendidas);
+  const [editLicao, setEditLicao] = useState({} as LicoesAprendidasNew);
   const [openModalEdit, setOpenModalEdit] = useState(false);
   const [openModalRegister, setOpenModalRegister] = useState(false);
   const [categoriaId, setCategoriaId] = useState("");
@@ -48,7 +48,7 @@ function LicoesAprendidasModal({
 
   const [filteredTable, setFilteredTable] = useState([]);
 
-  function handleEditLicao(licao: LicoesAprendidas): void {
+  function handleEditLicao(licao: LicoesAprendidasNew): void {
     setEditLicao(licao);
     setOpenModalEdit(true);
   }

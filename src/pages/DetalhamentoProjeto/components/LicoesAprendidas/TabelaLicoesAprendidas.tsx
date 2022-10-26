@@ -13,13 +13,13 @@ import {
   Td,
   Flex,
 } from "@chakra-ui/react";
-import { LicoesAprendidas } from "interfaces/Services";
+import { LicoesAprendidasNew } from "interfaces/Services";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
 
 interface EditProps {
-  onEdit: (licao: LicoesAprendidas) => void;
-  licoes: LicoesAprendidas[];
+  onEdit: (licao: LicoesAprendidasNew) => void;
+  licoes: LicoesAprendidasNew[];
 }
 
 function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {

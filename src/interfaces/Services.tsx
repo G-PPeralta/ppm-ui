@@ -401,6 +401,16 @@ export interface LicoesAprendidas {
   id: number;
   id_projeto: number;
   id_categoria: number;
+  dat_usu_create: string;
+  txt_licao_aprendida: string;
+  txt_acao: string;
+  user: string;
+}
+
+export interface LicoesAprendidasNew {
+  id: number;
+  id_projeto: number;
+  id_categoria: number;
   data: string;
   licao_aprendida: string;
   acao_e_recomendacao: string;

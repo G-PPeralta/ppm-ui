@@ -13,7 +13,7 @@ import {
   getAreaAtuacaoList,
   getResponsavelList,
 } from "services/get/Infograficos";
-import { postOperacoesEstatisticas } from "services/post/OperacoesEstatisticas";
+import { postCadastroNovaAtividadeCronograma } from "services/post/Estatistica";
 
 import { useAuth } from "./useAuth";
 
@@ -54,6 +54,7 @@ export function useAdicionarOperacao(
     nom_usu_create: user?.nome,
     id_sonda: projeto.id_sonda,
     id_poco: projeto.id_poco,
+    operacao_id: 0,
     duracao: 0,
     data_inicio: "",
     data_fim: "",
@@ -67,6 +68,7 @@ export function useAdicionarOperacao(
         nom_usu_create: user?.nome,
         id_sonda: projeto.id_sonda,
         id_poco: projeto.id_poco,
+        operacao_id: values.operacao_id,
         duracao: values.duracao,
         data_inicio: values.data_inicio,
         data_fim: values.data_fim,
@@ -83,7 +85,7 @@ export function useAdicionarOperacao(
         // const status = res.status;
         // console.log(">>>values", values);
         // console.log(">>>postOperacoesEstatisticas", newValues);
-        const { status } = await postOperacoesEstatisticas(newValues);
+        const { status } = await postCadastroNovaAtividadeCronograma(newValues);
         if (status === 200 || status === 201) {
           toast.success("Operação adicionada com sucesso!", {
             id: "toast-principal",

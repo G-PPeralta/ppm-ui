@@ -133,7 +133,7 @@ export function LicoesAprendidasProjetos() {
         </Td>
 
         <Td textAlign={"center"} fontWeight={"semibold"}>
-          {lessons.licao_aprendida}
+          {lessons.txt_licao_aprendida}
         </Td>
         <Td
           fontWeight={"semibold"}
@@ -141,10 +141,12 @@ export function LicoesAprendidasProjetos() {
           width="506px"
           height={"36px"}
         >
-          {lessons.acao_e_recomendacao}
+          {lessons.txt_acao}
         </Td>
         <Td fontWeight={"semibold"} textAlign={"center"}>
-          {new Date(lessons.data).toLocaleString("pt-BR").substring(0, 10)}
+          {new Date(lessons.dat_usu_create)
+            .toLocaleString("pt-BR")
+            .substring(0, 10)}
         </Td>
         <Td fontWeight={"semibold"} textAlign={"center"}>
           <IconButton
@@ -265,7 +267,7 @@ export function LicoesAprendidasProjetos() {
                   projeto: projetos.find(
                     (project) => project.id == lic.id_projeto
                   )?.nomeProjeto,
-                  data: formatDate(lic.data),
+                  data: formatDate(lic.dat_usu_create),
                 }))}
                 headers={headers}
               >

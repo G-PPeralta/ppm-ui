@@ -14,18 +14,22 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { Operacao } from "interfaces/Estatisticas";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
-import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
-// import DatePickerGenerico from "components/DatePickerGenerico";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
-import { formatDate } from "utils/formatDate";
+import { formatDateToddMMyyyyhhmm } from "utils/formatDate";
 import { handleCancelar } from "utils/handleCadastro";
 
 import { useAdicionarOperacao } from "hooks/useAdicionarOperacao";
+import { useCadastroCronograma } from "hooks/useCadastroCronograma";
+
+import { getDuracaoHorasAdicionarAtividade } from "services/get/Estatisticas";
+
+import { ModalFiltrarAtividade } from "./ModalFiltrarAtividade";
 
 interface Props {
   setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
@@ -46,24 +50,27 @@ function ModalAdicionarAtividade({
     setRefresh,
     projeto
   );
+  const { listaOperacao } = useCadastroCronograma();
 
-  const [dataFinalGantt, setDataFinalGantt] = useState<any>();
-  const [dataFinalAtividade, setDataFinalAtividade] = useState<any>();
-
-  const optionsOperacoesMock = [
+  const optionsMetodosElevacao = [
     {
       value: 1,
-      label: "Operação 1",
+      label: "Gás Lift",
     },
     {
       value: 2,
-      label: "Operação 2",
-    },
-    {
-      value: 3,
-      label: "Operação 3",
+      label: "Surgente",
     },
   ];
+
+  const [dataFinalGantt, setDataFinalGantt] = useState<any>();
+  const [dataFinalAtividade, setDataFinalAtividade] = useState<any>();
+  const [mediaHorasFiltradas, setMediaHorasFiltradas] = useState<any>(0);
+
+  const optionsOperacao = listaOperacao.map((operacao: Operacao) => ({
+    value: operacao.id,
+    label: operacao.nom_operacao,
+  }));
 
   const handleDataInicio = () => {
     const ultimaData = ganttData?.reduce((acc: any, curr: any) => {
@@ -83,6 +90,14 @@ function ModalAdicionarAtividade({
     setDataFinalAtividade(dataFinal);
   };
 
+  const handleDuracao = async () => {
+    const horasDuracao = await getDuracaoHorasAdicionarAtividade(
+      registerForm.values.operacao_id
+    );
+    // console.log(horasDuracao.data.hrs_media);
+    registerForm.setFieldValue("duracao", horasDuracao.data.hrs_media);
+  };
+
   useEffect(() => {
     handleDataInicio();
     registerForm.setFieldValue("id_sonda", projeto.id_sonda);
@@ -91,8 +106,16 @@ function ModalAdicionarAtividade({
   }, []);
 
   useEffect(() => {
+    registerForm.setFieldValue("duracao", mediaHorasFiltradas);
+  }, [mediaHorasFiltradas]);
+
+  useEffect(() => {
     handleDataFim();
   }, [registerForm.values.duracao]);
+
+  useEffect(() => {
+    handleDuracao();
+  }, [registerForm.values.operacao_id]);
 
   useEffect(() => {
     registerForm.setFieldValue("data_inicio", new Date(dataFinalGantt));
@@ -106,6 +129,12 @@ function ModalAdicionarAtividade({
 
   // console.log("registerForm", registerForm.values);
   // console.log("dataFinalAtividade", dataFinalAtividade);
+
+  const handleCancelarModal = () => {
+    registerForm.resetForm();
+    registerForm.setFieldValue("data_inicio", new Date(dataFinalGantt));
+    onClose();
+  };
 
   return (
     <>
@@ -128,7 +157,7 @@ function ModalAdicionarAtividade({
       >
         Adicionar Atividade
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="6xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -139,7 +168,7 @@ function ModalAdicionarAtividade({
             color={"white"}
             fontSize={"1em"}
           >
-            Editar Atividade
+            Adicionar Atividade
           </ModalHeader>
           <ModalCloseButton
             color={"white"}
@@ -154,18 +183,22 @@ function ModalAdicionarAtividade({
             <ModalBody mt={3}>
               <Flex flex={1} mt={5}>
                 <Flex w={"100%"} direction={"column"} gap={5}>
-                  <Flex gap={4}>
+                  <Flex gap={4} justify={"end"} align={"end"}>
                     <Flex flex={2}>
                       <SelectFiltragem
                         registerForm={registerForm}
                         nomeSelect={"NOME"}
                         propName={"operacao_id"}
-                        options={optionsOperacoesMock}
+                        options={optionsOperacao}
                         required={true}
                       />
                     </Flex>
+                    <ModalFiltrarAtividade
+                      operacaoId={registerForm.values.operacao_id}
+                      setMediaHorasFiltradas={setMediaHorasFiltradas}
+                    />
                   </Flex>
-                  <Flex gap={4} w={"70%"}>
+                  <Flex gap={4} w={"100%"}>
                     <InputNumericoGenerico
                       registerForm={registerForm}
                       propName={"duracao"}
@@ -174,38 +207,40 @@ function ModalAdicionarAtividade({
                       stepper={false}
                       limite={999}
                     />
-                    {
-                      <Flex flex={1}>
-                        <Flex direction={"column"}>
-                          <Flex gap={1}>
-                            <RequiredField />
-                            <Text
-                              fontWeight={"bold"}
-                              fontSize={"12px"}
-                              color={"#949494"}
-                            >
-                              DATA INÍCIO
-                            </Text>
-                          </Flex>
-                          <Button
-                            isDisabled={true}
-                            h={"56px"}
-                            variant="outline"
-                            px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
-                            minW={useBreakpointValue({
-                              base: "180px",
-                              sm: "180px",
-                              md: "220px",
-                            })}
-                            w={"100%"}
+
+                    <Flex flex={1}>
+                      <Flex direction={"column"}>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
                           >
-                            {registerForm.values.data_inicio
-                              ? formatDate(registerForm.values.data_inicio)
-                              : "Data Início"}
-                          </Button>
+                            DATA INÍCIO
+                          </Text>
                         </Flex>
+                        <Button
+                          isDisabled={true}
+                          h={"56px"}
+                          variant="outline"
+                          px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
+                          minW={useBreakpointValue({
+                            base: "180px",
+                            sm: "180px",
+                            md: "220px",
+                          })}
+                          w={"100%"}
+                        >
+                          {registerForm.values.data_inicio
+                            ? formatDateToddMMyyyyhhmm(
+                                registerForm.values.data_inicio
+                              )
+                            : "Data Início"}
+                        </Button>
                       </Flex>
-                    }
+                    </Flex>
+
                     <Flex flex={1}>
                       <Flex direction={"column"}>
                         <Flex gap={1}>
@@ -231,10 +266,23 @@ function ModalAdicionarAtividade({
                           w={"100%"}
                         >
                           {registerForm.values.data_fim
-                            ? formatDate(registerForm.values.data_fim)
+                            ? formatDateToddMMyyyyhhmm(
+                                registerForm.values.data_fim
+                              )
                             : "Data Fim"}
                         </Button>
                       </Flex>
+                    </Flex>
+                  </Flex>
+                  <Flex gap={4} justify={"end"} align={"end"}>
+                    <Flex flex={2} w={"50%"}>
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"MÉTODO DE ELEVAÇÃO"}
+                        propName={"metodo_elevacao_id"}
+                        options={optionsMetodosElevacao}
+                        required={true}
+                      />
                     </Flex>
                   </Flex>
                 </Flex>
@@ -243,11 +291,31 @@ function ModalAdicionarAtividade({
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoLargoGhost
-                  text="Cancelar"
-                  onClose={onClose}
-                  formikForm={registerForm}
-                />
+                <Button
+                  h={"56px"}
+                  variant="ghost"
+                  color="red.500"
+                  w={"208px"}
+                  _hover={{
+                    background: "red.500",
+                    transition: "all 0.4s",
+                    color: "white",
+                  }}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
+                  borderRadius={"8px"}
+                  fontFamily={"Mulish"}
+                  onClick={() => handleCancelarModal()}
+                >
+                  <Text
+                    fontSize="18px"
+                    fontWeight={"700"}
+                    fontFamily={"Mulish"}
+                    mx={12}
+                  >
+                    Cancelar
+                  </Text>
+                </Button>
                 <BotaoAzulLargoPrimary
                   text="Concluir"
                   onClose={onClose}
