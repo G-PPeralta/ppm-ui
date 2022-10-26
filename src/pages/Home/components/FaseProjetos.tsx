@@ -29,22 +29,22 @@ export default function NaoPrevistoComponent() {
   const grafData = [
     {
       name: "Engenharia",
-      value: Number(data[2]?.value.toFixed(1)),
+      value: data ? Number(data[2]?.value.toFixed(1)) : 0,
       color: "#93E01B",
     },
     {
       name: "C&M",
-      value: Number(data[3]?.value.toFixed(1)),
+      value: data ? Number(data[3]?.value.toFixed(1)) : 0,
       color: "#F4DD06",
     },
     {
       name: "Suprimentos",
-      value: Number(data[1]?.value.toFixed(1)),
+      value: data ? Number(data[1]?.value.toFixed(1)) : 0,
       color: "#F94144",
     },
     {
       name: "Pré-projeto",
-      value: Number(data[0]?.value.toFixed(1)),
+      value: data ? Number(data[0]?.value.toFixed(1)) : 0,
       color: "#2E69FD",
     },
   ];
@@ -124,19 +124,19 @@ export default function NaoPrevistoComponent() {
           <Flex mt={5} mb={5} align={"center"} justify={"center"} flex={1}>
             <Flex h={20} justify={"space-between"} direction={"column"}>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#F4DD06">
-                {data[3]?.value.toFixed(1)}%
+                {data ? data[3]?.value.toFixed(1) : 0}%
               </Text>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#F94144">
-                {data[1]?.value.toFixed(1)}%
+                {data ? data[1]?.value.toFixed(1) : 0}%
               </Text>
             </Flex>
             {grafData && <PieChart size={136} data={grafData} />}
             <Flex h={20} justify={"space-between"} direction={"column"}>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#93E01B">
-                {data[2]?.value.toFixed(1)}%
+                {data ? data[2]?.value.toFixed(1) : 0}%
               </Text>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#2E69FD">
-                {data[0]?.value.toFixed(1)}%
+                {data ? data[0]?.value.toFixed(1) : 0}%
               </Text>
             </Flex>
           </Flex>

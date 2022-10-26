@@ -161,7 +161,7 @@ function CardInfoProjeto({
                 fontSize={14}
               >
                 {infoProjeto.data_inicio === null
-                  ? "01/01/1900"
+                  ? "---"
                   : formatDate(infoProjeto.data_inicio)}
               </Text>
             </Flex>
@@ -177,7 +177,7 @@ function CardInfoProjeto({
                 fontSize={14}
               >
                 {infoProjeto.data_fim === null
-                  ? "31/12/1900"
+                  ? "---"
                   : formatDate(infoProjeto.data_fim)}
               </Text>
             </Flex>

@@ -66,7 +66,7 @@ export default function TotalProjetosComponent() {
     fetchProjetosMes();
   }, []);
 
-  const dataMock =
+  const data =
     totalProjetosMes &&
     totalProjetosMes.map((pr) => ({
       mes: pr.month,
@@ -79,7 +79,7 @@ export default function TotalProjetosComponent() {
       Pré_Aprovação: pr.pre_aprovacao,
     }));
 
-  // const dataMock = [
+  // const data = [
   //   {
   //     mes: "Jan/22",
   //     Iniciados: 10,
@@ -333,7 +333,7 @@ export default function TotalProjetosComponent() {
               showY={false}
               sizeW={280}
               sizeH={272}
-              data={dataMock}
+              data={data}
               dataEntries={dataEntries}
               barW={30}
             />
