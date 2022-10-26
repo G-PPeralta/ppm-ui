@@ -17,7 +17,7 @@ import {
   ButtonGroup,
   Button,
 } from "@chakra-ui/react";
-import { Anotacoes, LicaoAprendida, Ocorrencia } from "interfaces/Estatisticas";
+import { Anotacoes, LicaoAprendida } from "interfaces/Estatisticas";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
@@ -28,7 +28,7 @@ import {
   getAnotacoesPorAtividade,
   getLicoesAprendidasPorAtividade,
   getMocPorAtividade,
-  getOcorrenciasPorAtividade,
+  // getOcorrenciasPorAtividade,
 } from "services/get/Estatisticas";
 
 import EditarAtividadeTabAnotacoes from "./EditarAtividadeTabAnotacoes";
@@ -134,33 +134,33 @@ interface Props {
 //   },
 // ];
 
-// const ocorrenciasMock = [
-//   {
-//     id: 1,
-//     nome_ocorrencia: "Agda informação técnica / orientação",
-//     horas: "00:00",
-//   },
-//   {
-//     id: 2,
-//     nome_ocorrencia: "Agdo manutenção",
-//     horas: "00:00",
-//   },
-//   {
-//     id: 3,
-//     nome_ocorrencia: "Agdo outros",
-//     horas: "00:00",
-//   },
-//   {
-//     id: 4,
-//     nome_ocorrencia: "Agdo recursos Cia Serviço",
-//     horas: "00:00",
-//   },
-//   {
-//     id: 5,
-//     nome_ocorrencia: "APR",
-//     horas: "00:00",
-//   },
-// ];
+const ocorrenciasMock = [
+  {
+    id: 1,
+    nome_ocorrencia: "Agda informação técnica / orientação",
+    horas: "00:00",
+  },
+  {
+    id: 2,
+    nome_ocorrencia: "Agdo manutenção",
+    horas: "00:00",
+  },
+  {
+    id: 3,
+    nome_ocorrencia: "Agdo outros",
+    horas: "00:00",
+  },
+  {
+    id: 4,
+    nome_ocorrencia: "Agdo recursos Cia Serviço",
+    horas: "00:00",
+  },
+  {
+    id: 5,
+    nome_ocorrencia: "APR",
+    horas: "00:00",
+  },
+];
 
 function ModalAdicionarOperacao({
   setRefresh,
@@ -175,7 +175,7 @@ function ModalAdicionarOperacao({
   const [listaLicoesAprendidas, setListaLicoesAprendidas] = useState<
     LicaoAprendida[]
   >([]);
-  const [listaOcorrencias, setListaOcorrencias] = useState<Ocorrencia[]>([]);
+  // const [listaOcorrencias, setListaOcorrencias] = useState<Ocorrencia[]>([]);
   const [anotacoes, setAnotacoes] = useState<Anotacoes[]>([]);
   const [mocs, setMocs] = useState<any[]>([]);
   const [gambiarra, setGambiarra] = useState<any>(true);
@@ -191,10 +191,10 @@ function ModalAdicionarOperacao({
         await getLicoesAprendidasPorAtividade(editOp.id_atividade);
       setListaLicoesAprendidas(licoesAprendidasPorAtividade.data);
 
-      const ocorrenciasPorAtividade = await getOcorrenciasPorAtividade(
-        editOp.id_atividade
-      );
-      setListaOcorrencias(ocorrenciasPorAtividade.data);
+      // const ocorrenciasPorAtividade = await getOcorrenciasPorAtividade(
+      //   editOp.id_atividade
+      // );
+      // setListaOcorrencias(ocorrenciasPorAtividade.data);
 
       const anotacoesPorAtividade = await getAnotacoesPorAtividade(
         editOp.id_atividade
@@ -233,7 +233,7 @@ function ModalAdicionarOperacao({
     registerForm.setFieldValue("hrs_reais", editOp.hrs_reais);
     registerForm.setFieldValue("pct_real", editOp.pct_real);
     registerForm.setFieldValue("licoes_aprendidas", listaLicoesAprendidas);
-    registerForm.setFieldValue("ocorrencias", listaOcorrencias);
+    registerForm.setFieldValue("ocorrencias", ocorrenciasMock);
     if (anotacoes.length > 0) {
       registerForm.setFieldValue("anotacoes", anotacoes[0].txt_nota);
     }
@@ -254,7 +254,7 @@ function ModalAdicionarOperacao({
     registerForm.setFieldValue("hrs_reais", editOp.hrs_reais);
     registerForm.setFieldValue("pct_real", editOp.pct_real);
     registerForm.setFieldValue("licoes_aprendidas", listaLicoesAprendidas);
-    registerForm.setFieldValue("ocorrencias", listaOcorrencias);
+    registerForm.setFieldValue("ocorrencias", ocorrenciasMock);
     if (anotacoes.length > 0) {
       registerForm.setFieldValue("anotacoes", anotacoes[0].txt_nota);
     }

@@ -1,11 +1,13 @@
-import { useState } from "react";
-import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
+// import toast from "react-hot-toast";
 import { FiTrash } from "react-icons/fi";
 
 import { Flex, IconButton, Td, Text, Tr } from "@chakra-ui/react";
 
 import FiltragemTabela from "components/FiltragemTabela";
 import TabelaGenerica from "components/TabelaGenerica";
+
+import { formatDate } from "utils/formatDate";
 
 import { deleteLicaoAprendida } from "services/delete/Estatisticas";
 
@@ -31,6 +33,8 @@ function EditarAtividadeTabLicoesAprendidas({
     registerForm.values.licoes_aprendidas
   );
 
+  const { refresh, setRefresh } = refreshState;
+
   const fromTo = {
     from,
     to,
@@ -50,11 +54,14 @@ function EditarAtividadeTabLicoesAprendidas({
 
   const handleDeletar = (idLicao: number, idAtividade: number) => {
     deleteLicaoAprendida(idAtividade, idLicao);
-
-    toast.success(`Lição deletada com sucesso!`, {
-      id: "toast-principal",
-    });
+    setRefresh(!refresh);
   };
+
+  // console.log("registerForm", registerForm.values);
+
+  useEffect(() => {
+    setTabelaFiltrada(registerForm.values.licoes_aprendidas);
+  }, [registerForm.values.licoes_aprendidas]);
 
   function Body() {
     return (
@@ -71,7 +78,7 @@ function EditarAtividadeTabLicoesAprendidas({
                   <Text>{linhaTabela.licao_aprendida}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.data}</Text>
+                  <Text>{formatDate(linhaTabela.data)}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Text>{linhaTabela.acao_e_recomendacao}</Text>
