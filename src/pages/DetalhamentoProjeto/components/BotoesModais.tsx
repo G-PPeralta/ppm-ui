@@ -27,7 +27,8 @@ function BotoesModais({
       >
         <BotaoDescricaoEJustificativa
           infoProjeto={infoProjeto}
-          setRender={setRender}
+          refresh={refresh}
+          setRefresh={setRefresh}
         />
         <BotaoListadeTarefas />
         <LicoesAprendidasModal

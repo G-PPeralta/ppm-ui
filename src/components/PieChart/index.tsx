@@ -1,27 +1,27 @@
 import { PieChart, Pie, Cell } from "recharts";
 
-const data01 = [
-  {
-    name: "Engenharia",
-    // value: 30,
-    color: "#93E01B",
-  },
-  {
-    name: "C&M",
-    // value: 30,
-    color: "#F4DD06",
-  },
-  {
-    name: "Suprimentos",
-    // value: 20,
-    color: "#F94144",
-  },
-  {
-    name: "Pré-projeto",
-    // value: 20,
-    color: "#2E69FD",
-  },
-];
+// const data01 = [
+//   {
+//     name: "Engenharia",
+//     // value: 30,
+//     color: "#93E01B",
+//   },
+//   {
+//     name: "C&M",
+//     // value: 30,
+//     color: "#F4DD06",
+//   },
+//   {
+//     name: "Suprimentos",
+//     // value: 20,
+//     color: "#F94144",
+//   },
+//   {
+//     name: "Pré-projeto",
+//     // value: 20,
+//     color: "#2E69FD",
+//   },
+// ];
 
 interface Props {
   size: number;
@@ -49,7 +49,7 @@ export default function PieChartComponent({ size, data }: Props) {
           {/* {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={entry.color} />
           ))} */}
-          {data01.map((entry, index) => (
+          {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={entry.color} />
           ))}
         </Pie>
