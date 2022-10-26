@@ -16,8 +16,10 @@ import { BudgetDetail } from "interfaces/Budgets";
 
 import Empty from "components/TableEmpty/empty";
 
-import CampoEditavel from "./CampoEditavel";
+import { formatReal } from "utils/formatReal";
+
 import ModalGestaoDeCusto from "./ModalGestaoDeCusto";
+import ModalValorPrevisto from "./ModalValorPrevisto";
 
 export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
   const { data } = props;
@@ -95,12 +97,13 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
             <Td>{filho.fornecedor}</Td>
             <Td textAlign="center">
               <Flex alignItems={"center"} justifyContent="center">
-                <CampoEditavel filho={filho} />
+                {formatReal(filho.planejado)}{" "}
+                <ModalValorPrevisto projeto={filho.projeto} />
               </Flex>
             </Td>
             <Td textAlign="center">
               <Flex alignItems={"center"} justifyContent="center">
-                {brl.format(filho.realizado)}{" "}
+                {formatReal(filho.realizado)}{" "}
                 <ModalGestaoDeCusto projeto={filho.projeto} />
               </Flex>
             </Td>

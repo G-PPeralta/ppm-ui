@@ -21,11 +21,13 @@ import {
   IconButton,
   Select,
   Textarea,
+  InputGroup,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { Projeto } from "interfaces/Budgets";
 
 // import RealInput from "components/RealInput/input";
+import InputGenerico from "components/InputGenerico";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
@@ -93,23 +95,22 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                         <FormControl>
                           <Flex gap={1}>
                             <RequiredField />
-                            <FormLabel htmlFor="gasto">Valor</FormLabel>{" "}
+                            <FormLabel htmlFor="gasto">
+                              Valor Gasto
+                            </FormLabel>{" "}
                           </Flex>
-                          <Input
-                            h={"56px"}
-                            isRequired
-                            placeholder="Valor Gasto"
-                            id="gasto"
-                            name="gasto"
-                            type={"number"}
-                            maxLength={12}
-                            max={1000000000}
-                            value={registerForm.values.gasto}
-                            onChange={registerForm.handleChange}
-                          />
-                          {registerForm.errors.gasto && (
-                            <TextError>{registerForm.errors.gasto}</TextError>
-                          )}
+                          <InputGroup>
+                            <InputGenerico
+                              registerForm={registerForm}
+                              // nomeInput={"Valor Gasto"}
+                              propName={"gasto"}
+                              value={registerForm.values.gasto || ""}
+                              required={true}
+                              placeholder={"0"}
+                              maxLength={20}
+                              isNumeric={true}
+                            />
+                          </InputGroup>
                         </FormControl>
 
                         <FormControl>
