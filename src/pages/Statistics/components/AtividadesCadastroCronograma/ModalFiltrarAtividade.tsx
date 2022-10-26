@@ -17,16 +17,17 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
 
 // import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import DatePickerModal from "components/DatePickerGenerico/DatePickerModal";
 import SelectFiltragem from "components/SelectFiltragem";
 
-import { useCadastroCronograma } from "hooks/useCadastroCronograma";
+import { useToast } from "contexts/Toast";
+
 import { useFiltragemCronogramaAtividade } from "hooks/useFiltragemCronogramaAtividade";
 
+import { getDataIdPoco } from "services/get/FiltroCronograma";
 import { postFiltroCronograma } from "services/post/FiltroCronograma";
 
 export function ModalFiltrarAtividade({
@@ -34,39 +35,30 @@ export function ModalFiltrarAtividade({
   setRefresh,
   setDuracao,
   setOperacao,
+  setOpcoesFiltro,
+  setDataInicio,
+  filterData,
 }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm } = useFiltragemCronogramaAtividade();
-  const { listaPocos, listaSondas } = useCadastroCronograma();
-  const [loading, setLoading] = useState(false);
-  const optionsPocos = listaPocos.map((poco: ListaPoco) => ({
+  const { registerForm, pocos, sonda, metodoElevacao, loading } =
+    useFiltragemCronogramaAtividade();
+  const { toast } = useToast();
+  const [loadingBtn, setLoading] = useState(false);
+
+  const optionsPocos = pocos.map((poco: any) => ({
     value: poco.id,
-    label: poco.poco,
+    label: poco.nom_atividade,
   }));
 
-  const optionsSondas = listaSondas.map((sonda: any) => ({
-    value: sonda.id,
-    label: sonda.nom_sonda,
+  const optionsSondas = sonda.map((_sonda: any) => ({
+    value: _sonda.id,
+    label: _sonda.nom_atividade,
   }));
 
-  const metodoElevacao = [
-    {
-      value: 1,
-      label: "Metodo 1",
-    },
-    {
-      value: 2,
-      label: "Metodo 2",
-    },
-    {
-      value: 3,
-      label: "Metodo 3",
-    },
-    {
-      value: 4,
-      label: "Metodo 4",
-    },
-  ];
+  const optionsMetodo = metodoElevacao.map((metodo: any) => ({
+    value: metodo.id,
+    label: metodo.metodo,
+  }));
 
   const getFilter = async () => {
     const payload = {
@@ -74,30 +66,41 @@ export function ModalFiltrarAtividade({
       sondaId: registerForm.values.sondaId,
       profundidadeIni: registerForm.values.profundidadeIni,
       profundidadeFim: registerForm.values.profundidadeFim,
-      metodoElevacao: metodoElevacao
-        ? metodoElevacao.find(
-            (x) => x.value == registerForm.values.metodoElevacaoId
-          )?.label
-        : "",
       metodoElevacaoId: registerForm.values.metodoElevacaoId,
       dataDe: registerForm.values.dataDe,
       dataAte: registerForm.values.dataAte,
     };
     setLoading(true);
     const result = await postFiltroCronograma(payload);
+    const dataIni = await getDataIdPoco(registerForm.values.pocoId);
     setLoading(false);
-    // setDuracao(23, 30);
-    // registerFormAct.values.atividades[index].duracao += 3;
     if (result && result.length > 0) {
-      setOperacao(result[0].operacao_id);
+      setOperacao(result[0].id_operacao);
       setDuracao(result[0].hrs_media);
+      if (dataIni && dataIni.length > 0) {
+        setDataInicio(dataIni[0].prox_ini);
+      }
+      setOpcoesFiltro({
+        duracao: result[0].hrs_media,
+        operacao: result[0].id_operacao,
+        dataInicio: dataIni[0].prox_ini,
+      });
+      filterData({
+        duracao: result[0].hrs_media,
+        operacao: result[0].id_operacao,
+        dataInicio: dataIni[0].prox_ini,
+      });
       onClose();
+    } else {
+      toast.error("Nenhum registro encontrado!", {
+        id: "toast-filtro-operacao",
+      });
     }
   };
 
   return (
     <>
-      <MdFilterAlt onClick={onOpen} color="#0047BB" size="16px" />
+      <MdFilterAlt onClick={onOpen} color="#0047BB" size="22px" />
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
         <ModalContent>
@@ -154,7 +157,7 @@ export function ModalFiltrarAtividade({
                             fontSize={"12px"}
                             color={"#949494"}
                           >
-                            DE
+                            PRODUNDIDADE DE
                           </Text>
                         </Flex>
 
@@ -183,7 +186,7 @@ export function ModalFiltrarAtividade({
                             fontSize={"12px"}
                             color={"#949494"}
                           >
-                            ATE
+                            PRODUNDIDADE ATE
                           </Text>
                         </Flex>
 
@@ -212,7 +215,7 @@ export function ModalFiltrarAtividade({
                         registerForm={registerForm}
                         nomeSelect={"Metodo Elevação"}
                         propName={"metodoElevacaoId"}
-                        options={metodoElevacao}
+                        options={optionsMetodo}
                         required={true}
                       />
                     </Flex>
@@ -274,7 +277,7 @@ export function ModalFiltrarAtividade({
                     !registerForm.values.pocoId || !registerForm.values.sondaId
                   }
                 >
-                  {loading ? (
+                  {loadingBtn ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (
                     <>
