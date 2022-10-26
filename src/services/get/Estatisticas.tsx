@@ -84,3 +84,12 @@ export async function getPocosAtividadeOperacao(): Promise<{
 
   return { data, status };
 }
+
+export async function getMetodosElevacao(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/filtros/metodos", token());
+
+  return { data, status };
+}

@@ -8,6 +8,7 @@ import {
 
 import { getResponsaveis } from "services/get/CadastroModaisInfograficos";
 import {
+  getMetodosElevacao,
   getPocosAtividadeOperacao,
   getSondasAtividadeOperacao,
 } from "services/get/Estatisticas";
@@ -33,6 +34,7 @@ export function useRequests(id?: number, mes?: string) {
   const [listaResponsaveis, setListaResponsaveis] = useState<any[]>([]);
   const [listaPocosOperacoes, setListaPocosOperacoes] = useState<any[]>([]);
   const [listaSondasOperacoes, setListaSondasOperacoes] = useState<any[]>([]);
+  const [listaMetodosElevacao, setListaMetodosElevacao] = useState<any[]>([]);
 
   const reqGet = async () => {
     setLoading(true);
@@ -109,6 +111,12 @@ export function useRequests(id?: number, mes?: string) {
       a.nom_atividade.localeCompare(b.nom_atividade)
     );
     setListaSondasOperacoes(sondasOperacoesSorted);
+
+    const metodosElevacao = await getMetodosElevacao();
+    const metodosElevacaoSorted = metodosElevacao.data.sort((a: any, b: any) =>
+      a.metodo.localeCompare(b.metodo)
+    );
+    setListaMetodosElevacao(metodosElevacaoSorted);
   };
 
   const optionsFornecedores = listaFornecedores.map((fornecedor: any) => ({
@@ -149,6 +157,13 @@ export function useRequests(id?: number, mes?: string) {
     })
   );
 
+  const optionsMetodosElevacao = listaMetodosElevacao.map(
+    (metodoElevacao: any) => ({
+      value: metodoElevacao.id,
+      label: metodoElevacao.metodo,
+    })
+  );
+
   useEffect(() => {
     reqGet();
     setLoading(false);
@@ -170,5 +185,6 @@ export function useRequests(id?: number, mes?: string) {
     optionsResponsaveis,
     optionsPocosOperacoes,
     optionsSondasOperacoes,
+    optionsMetodosElevacao,
   };
 }

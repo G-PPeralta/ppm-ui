@@ -38,30 +38,15 @@ export function ModalFiltrarAtividade({
 }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm } = useFiltragemCronogramaAtividade();
-  const { optionsPocosOperacoes, optionsSondasOperacoes } = useRequests();
+  const {
+    optionsPocosOperacoes,
+    optionsSondasOperacoes,
+    optionsMetodosElevacao,
+  } = useRequests();
   const [loading, setLoading] = useState(false);
   const [responsePOST, setResponsePOST] = useState([]);
 
   // console.log("operacaoId", operacaoId);
-
-  const metodoElevacao = [
-    {
-      value: 1,
-      label: "Metodo 1",
-    },
-    {
-      value: 2,
-      label: "Metodo 2",
-    },
-    {
-      value: 3,
-      label: "Metodo 3",
-    },
-    {
-      value: 4,
-      label: "Metodo 4",
-    },
-  ];
 
   const getFilter = async () => {
     const payload = {
@@ -69,8 +54,8 @@ export function ModalFiltrarAtividade({
       sondaId: registerForm.values.sondaId,
       profundidadeIni: registerForm.values.profundidadeIni,
       profundidadeFim: registerForm.values.profundidadeFim,
-      metodoElevacao: metodoElevacao
-        ? metodoElevacao.find(
+      metodoElevacao: optionsMetodosElevacao
+        ? optionsMetodosElevacao.find(
             (x) => x.value == registerForm.values.metodoElevacaoId
           )?.label
         : "",
@@ -237,7 +222,7 @@ export function ModalFiltrarAtividade({
                         registerForm={registerForm}
                         nomeSelect={"METODO DE ELEVAÇÃO"}
                         propName={"metodoElevacaoId"}
-                        options={metodoElevacao}
+                        options={optionsMetodosElevacao}
                         required={false}
                       />
                     </Flex>
