@@ -52,3 +52,17 @@ export async function getOcorrenciasPorAtividade(idAtividade: number): Promise<{
 
   return { data, status };
 }
+
+export async function getDuracaoHorasAdicionarAtividade(
+  idOperacao: number
+): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(
+    `/filtros/media-hora/${idOperacao}`,
+    token()
+  );
+
+  return { data, status };
+}
