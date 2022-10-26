@@ -33,7 +33,7 @@ export function useEditarOperacao(
 ) {
   const { user } = useAuth();
   const { toast } = useToast();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [listaAreaAtuacao, setListaAreaAtuacao] = useState<AreaAtuacao[]>([]);
   const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
@@ -139,7 +139,17 @@ export function useEditarOperacao(
 
   useEffect(() => {
     reqGet();
+  }, []);
+
+  useEffect(() => {
+    reqGet();
   }, [refresh, projeto]);
+
+  useEffect(() => {
+    if (listaResponsaveis.length > 0 && listaResponsaveis.length > 0) {
+      setLoading(false);
+    }
+  }, [listaResponsaveis, listaResponsaveis]);
 
   return {
     registerForm,

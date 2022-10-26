@@ -5,7 +5,6 @@ import {
   AreaAtuacao,
   Responsavel,
 } from "interfaces/CadastrosModaisInfograficos";
-import * as yup from "yup";
 
 import { useToast } from "contexts/Toast";
 
@@ -53,65 +52,24 @@ export function useAdicionarOperacao(
 
   const initialValues = {
     nom_usu_create: user?.nome,
-    id_sonda: "",
-    id_poco: "",
-    id_atividade: 0,
-    id_area: 0,
-    inicio_realizado: "",
-    // fim_realizado: "",
-    inicio_planejado: "",
-    // fim_planejado: "",
-    hrs_reais: 0, // tratamento combinado
-    hrs_totais: 0, // tratamento combinado
-    // pct_real: 0,
-    id_responsavel: 0,
-    // precedentes: [
-    //   {
-    //     atividadePrecedenteId: 0,
-    //     dias: 0,
-    //   },
-    // ],
+    id_sonda: projeto.id_sonda,
+    id_poco: projeto.id_poco,
+    duracao: 0,
+    data_inicio: "",
+    data_fim: "",
   };
 
-  const adicionarOperacao = yup.object({
-    id_atividade: yup.number().required("Campo obrigatório").moreThan(0),
-    id_area: yup.number().required("Campo obrigatório").moreThan(0),
-    inicio_realizado: yup.string().required("Campo obrigatório"),
-    // fim_realizado: yup.string(), // .required("Campo obrigatório"),
-    inicio_planejado: yup.string().required("Campo obrigatório"),
-    // fim_planejado: yup.string(), // .required("Campo obrigatório"),
-    hrs_totais: yup.number().required("Campo obrigatório").moreThan(0),
-    // pct_real: yup.number().required("Campo obrigatório").moreThan(0),
-    id_responsavel: yup.number().required("Campo obrigatório").moreThan(0),
-    // precedentes: yup.array().of(
-    //   yup.object({
-    //     atividadePrecedenteId: yup.number(),
-    //     dias: yup.number(),
-    //   })
-    // ),
-  });
   const registerForm: any = useFormik({
     initialValues,
-    validationSchema: adicionarOperacao,
+    // validationSchema: adicionarOperacao,
     onSubmit: async (values) => {
       const newValues = {
         nom_usu_create: user?.nome,
         id_sonda: projeto.id_sonda,
         id_poco: projeto.id_poco,
-
-        id_atividade: values.id_atividade,
-        id_area: values.id_area,
-        id_responsavel: values.id_responsavel,
-
-        inicio_realizado: new Date(values.inicio_realizado).toLocaleString(),
-        // fim_realizado: values.fim_realizado, // tratamento back
-        // new Date(values.inicio_planejado).toLocaleString(),
-        inicio_planejado: new Date(values.inicio_planejado).toLocaleString(),
-        // fim_planejado: values.fim_planejado, // tratamento back
-        duracao_realizado: values.hrs_reais,
-        duracao_planejado: values.hrs_totais,
-        pct_real: 0, // tratamento back
-        // precedentes: values.precedentes,
+        duracao: values.duracao,
+        data_inicio: values.data_inicio,
+        data_fim: values.data_fim,
       };
 
       setLoading(true);
