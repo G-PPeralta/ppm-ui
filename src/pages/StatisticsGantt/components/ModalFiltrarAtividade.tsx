@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdFilterAlt } from "react-icons/md";
 
 import {
@@ -18,15 +18,13 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
 
-// import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import DatePickerModal from "components/DatePickerGenerico/DatePickerModal";
 import SelectFiltragem from "components/SelectFiltragem";
 
-import { useCadastroCronograma } from "hooks/useCadastroCronograma";
 import { useFiltragemCronogramaAtividade } from "hooks/useFiltragemCronogramaAtividade";
+import { useRequests } from "hooks/useRequests";
 
 import { postFiltroCronograma } from "services/post/FiltroCronograma";
 
@@ -35,20 +33,16 @@ export function ModalFiltrarAtividade({
   setRefresh,
   setDuracao,
   setOperacao,
+  operacaoId,
+  setMediaHorasFiltradas,
 }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm } = useFiltragemCronogramaAtividade();
-  const { listaPocos, listaSondas } = useCadastroCronograma();
+  const { optionsPocosOperacoes, optionsSondasOperacoes } = useRequests();
   const [loading, setLoading] = useState(false);
-  const optionsPocos = listaPocos.map((poco: ListaPoco) => ({
-    value: poco.id,
-    label: poco.poco,
-  }));
+  const [responsePOST, setResponsePOST] = useState([]);
 
-  const optionsSondas = listaSondas.map((sonda: any) => ({
-    value: sonda.id,
-    label: sonda.nom_sonda,
-  }));
+  // console.log("operacaoId", operacaoId);
 
   const metodoElevacao = [
     {
@@ -86,6 +80,8 @@ export function ModalFiltrarAtividade({
     };
     setLoading(true);
     const result = await postFiltroCronograma(payload);
+    setResponsePOST(result);
+
     setLoading(false);
     // setDuracao(23, 30);
     // registerFormAct.values.atividades[index].duracao += 3;
@@ -96,7 +92,19 @@ export function ModalFiltrarAtividade({
     }
   };
 
+  useEffect(() => {
+    const getOperacaoPorOperacaoId: any = responsePOST.find(
+      (operacao: any) => operacao.id_operacao === operacaoId
+    );
+    if (getOperacaoPorOperacaoId) {
+      setMediaHorasFiltradas(getOperacaoPorOperacaoId.hrs_media);
+    } else {
+      setMediaHorasFiltradas(0);
+    }
+  }, [responsePOST]);
+
   // console.log("registerForm", registerForm.values);
+  // console.log("responsePOST", responsePOST);
 
   return (
     <>
@@ -148,7 +156,7 @@ export function ModalFiltrarAtividade({
                       registerForm={registerForm}
                       nomeSelect={"POÇO"}
                       propName={"pocoId"}
-                      options={optionsPocos}
+                      options={optionsPocosOperacoes}
                       required={false}
                     />
                   </Flex>
@@ -159,7 +167,7 @@ export function ModalFiltrarAtividade({
                         registerForm={registerForm}
                         nomeSelect={"SONDA"}
                         propName={"sondaId"}
-                        options={optionsSondas}
+                        options={optionsSondasOperacoes}
                         required={false}
                       />
                     </Flex>

@@ -54,6 +54,7 @@ function ModalAdicionarAtividade({
 
   const [dataFinalGantt, setDataFinalGantt] = useState<any>();
   const [dataFinalAtividade, setDataFinalAtividade] = useState<any>();
+  const [mediaHorasFiltradas, setMediaHorasFiltradas] = useState<any>(0);
 
   const optionsOperacao = listaOperacao.map((operacao: Operacao) => ({
     value: operacao.id,
@@ -92,6 +93,10 @@ function ModalAdicionarAtividade({
     registerForm.setFieldValue("id_poco", projeto.id_poco);
     registerForm.setFieldValue("duracao", 0);
   }, []);
+
+  useEffect(() => {
+    registerForm.setFieldValue("duracao", mediaHorasFiltradas);
+  }, [mediaHorasFiltradas]);
 
   useEffect(() => {
     handleDataFim();
@@ -177,7 +182,10 @@ function ModalAdicionarAtividade({
                         required={true}
                       />
                     </Flex>
-                    <ModalFiltrarAtividade />
+                    <ModalFiltrarAtividade
+                      operacaoId={registerForm.values.operacao_id}
+                      setMediaHorasFiltradas={setMediaHorasFiltradas}
+                    />
                   </Flex>
                   <Flex gap={4} w={"100%"}>
                     <InputNumericoGenerico

@@ -8,6 +8,10 @@ import {
 
 import { getResponsaveis } from "services/get/CadastroModaisInfograficos";
 import {
+  getPocosAtividadeOperacao,
+  getSondasAtividadeOperacao,
+} from "services/get/Estatisticas";
+import {
   getCentroDeCustoProjetos,
   getClassesDeServico,
   getFinanceiroPorProjetos,
@@ -27,6 +31,8 @@ export function useRequests(id?: number, mes?: string) {
   const [listaClassesDeServico, setListaClassesDeServico] = useState<any>([]);
   const [listaAreaAtuacao, setListaAreaAtuacao] = useState<AreaAtuacao[]>([]);
   const [listaResponsaveis, setListaResponsaveis] = useState<any[]>([]);
+  const [listaPocosOperacoes, setListaPocosOperacoes] = useState<any[]>([]);
+  const [listaSondasOperacoes, setListaSondasOperacoes] = useState<any[]>([]);
 
   const reqGet = async () => {
     setLoading(true);
@@ -91,6 +97,18 @@ export function useRequests(id?: number, mes?: string) {
       a.nome.localeCompare(b.nome)
     );
     setListaResponsaveis(responsaveisSorted);
+
+    const pocosOperacoes = await getPocosAtividadeOperacao();
+    const pocosOperacoesSorted = pocosOperacoes.data.sort((a: any, b: any) =>
+      a.nom_atividade.localeCompare(b.nom_atividade)
+    );
+    setListaPocosOperacoes(pocosOperacoesSorted);
+
+    const sondasOperacoes = await getSondasAtividadeOperacao();
+    const sondasOperacoesSorted = sondasOperacoes.data.sort((a: any, b: any) =>
+      a.nom_atividade.localeCompare(b.nom_atividade)
+    );
+    setListaSondasOperacoes(sondasOperacoesSorted);
   };
 
   const optionsFornecedores = listaFornecedores.map((fornecedor: any) => ({
@@ -117,6 +135,20 @@ export function useRequests(id?: number, mes?: string) {
     label: responsavel.nome,
   }));
 
+  const optionsPocosOperacoes = listaPocosOperacoes.map(
+    (pocoOperacao: any) => ({
+      value: pocoOperacao.id,
+      label: pocoOperacao.nom_atividade,
+    })
+  );
+
+  const optionsSondasOperacoes = listaSondasOperacoes.map(
+    (sondaOperacao: any) => ({
+      value: sondaOperacao.id,
+      label: sondaOperacao.nom_atividade,
+    })
+  );
+
   useEffect(() => {
     reqGet();
     setLoading(false);
@@ -128,9 +160,15 @@ export function useRequests(id?: number, mes?: string) {
     listaCentroCustoProjetos,
     listaFornecedores,
     listaClassesDeServico,
+    listaAreaAtuacao,
+    listaResponsaveis,
+    listaPocosOperacoes,
+    listaSondasOperacoes,
     optionsFornecedores,
     optionsClassesDeServico,
     optionsAreaAtuacao,
     optionsResponsaveis,
+    optionsPocosOperacoes,
+    optionsSondasOperacoes,
   };
 }

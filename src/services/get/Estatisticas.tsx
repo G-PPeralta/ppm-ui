@@ -66,3 +66,21 @@ export async function getDuracaoHorasAdicionarAtividade(
 
   return { data, status };
 }
+
+export async function getSondasAtividadeOperacao(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/filtros/sondas", token());
+
+  return { data, status };
+}
+
+export async function getPocosAtividadeOperacao(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/filtros/pocos", token());
+
+  return { data, status };
+}
