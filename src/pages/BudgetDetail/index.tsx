@@ -19,9 +19,8 @@ import "./budgetDetail.css";
 export function BudgetDetail() {
   const { id } = useParams();
 
-  const { budgetFilter, titulo, totalizacao, loading } = useBudgetDetail(
-    id || null
-  );
+  const { budgetFilter, titulo, totalizacao, loading, toogleRender } =
+    useBudgetDetail(id || null);
 
   return (
     <div>
@@ -49,7 +48,10 @@ export function BudgetDetail() {
                 <ModalCustoDiario id={id} />
               </Box>
             </Flex>
-            <BudgetDetailTable data={budgetFilter} />
+            <BudgetDetailTable
+              data={budgetFilter}
+              toogleRender={toogleRender}
+            />
             <TotalTable data={totalizacao} />
           </ContainerPagina>
         ) : (

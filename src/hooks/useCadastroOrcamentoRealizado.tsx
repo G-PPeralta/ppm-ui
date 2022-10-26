@@ -70,7 +70,6 @@ export function useCadastroOrcamentoRealizado() {
             }
           );
           setLoading(false);
-          location.reload();
         }
       } catch (error) {
         toast.error(

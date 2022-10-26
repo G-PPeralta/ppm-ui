@@ -21,8 +21,13 @@ import { formatReal } from "utils/formatReal";
 import ModalGestaoDeCusto from "./ModalGestaoDeCusto";
 import ModalValorPrevisto from "./ModalValorPrevisto";
 
-export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
-  const { data } = props;
+interface PropsInterface {
+  data: BudgetDetail[];
+  toogleRender: () => void;
+}
+
+export function BudgetDetailTable(props: PropsInterface) {
+  const { data, toogleRender } = props;
 
   //  const color = "rgb(46, 105, 253)";
 
@@ -98,13 +103,19 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
             <Td textAlign="center">
               <Flex alignItems={"center"} justifyContent="center">
                 {formatReal(filho.planejado)}{" "}
-                <ModalValorPrevisto projeto={filho.projeto} />
+                <ModalValorPrevisto
+                  projeto={filho.projeto}
+                  toogleRender={toogleRender}
+                />
               </Flex>
             </Td>
             <Td textAlign="center">
               <Flex alignItems={"center"} justifyContent="center">
                 {formatReal(filho.realizado)}{" "}
-                <ModalGestaoDeCusto projeto={filho.projeto} />
+                <ModalGestaoDeCusto
+                  projeto={filho.projeto}
+                  toogleRender={toogleRender}
+                />
               </Flex>
             </Td>
             <Td align="center">{filho.gap}%</Td>

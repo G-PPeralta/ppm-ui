@@ -45,7 +45,6 @@ export function useCadastroOrcamentoPrevisto() {
             }
           );
           setLoading(false);
-          location.reload();
         }
       } catch (error) {
         toast.error(

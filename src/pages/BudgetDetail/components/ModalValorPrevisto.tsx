@@ -30,15 +30,19 @@ import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroOrcamentoPrevisto } from "hooks/useCadastroOrcamentoPrevisto";
 
-function ModalValorPrevisto(props: { projeto: Projeto }) {
+interface PropsInterface {
+  projeto: Projeto;
+  toogleRender: () => void;
+}
+
+function ModalValorPrevisto(props: PropsInterface) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, setAtividade } =
     useCadastroOrcamentoPrevisto();
-
-  const { id } = props.projeto;
+  const { projeto, toogleRender } = props;
 
   useEffect(() => {
-    setAtividade(id);
+    setAtividade(projeto.id);
   }, []);
 
   return (
@@ -128,7 +132,12 @@ function ModalValorPrevisto(props: { projeto: Projeto }) {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() => {
+                    handleCadastrar(registerForm, () => {
+                      onClose();
+                      toogleRender();
+                    });
+                  }}
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",

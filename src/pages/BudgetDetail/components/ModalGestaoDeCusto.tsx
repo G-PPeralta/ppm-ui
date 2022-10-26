@@ -35,14 +35,19 @@ import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroOrcamentoRealizado } from "hooks/useCadastroOrcamentoRealizado";
 
-function ModalGestaoDeCusto(props: { projeto: Projeto }) {
+interface PropsInterface {
+  projeto: Projeto;
+  toogleRender: () => void;
+}
+
+function ModalGestaoDeCusto(props: PropsInterface) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, setAtividade, fornecedores, classesSevicos } =
     useCadastroOrcamentoRealizado();
-  const { id } = props.projeto;
+  const { projeto, toogleRender } = props;
 
   useEffect(() => {
-    setAtividade(id);
+    setAtividade(projeto.id);
   }, []);
 
   return (
@@ -267,7 +272,12 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                   background="origem.300"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() => {
+                    handleCadastrar(registerForm, () => {
+                      onClose();
+                      toogleRender();
+                    });
+                  }}
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",
