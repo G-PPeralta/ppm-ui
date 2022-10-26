@@ -51,15 +51,6 @@ function ModalEditarLicaoAprendida({
 
   const { refresh, setRefresh } = refreshState;
 
-  useEffect(() => {
-    registerForm.setFieldValue("data", new Date(linhaTabela.data));
-    registerForm.setFieldValue(
-      "acoes_e_recomendacoes",
-      linhaTabela.acao_e_recomendacao
-    );
-    registerForm.setFieldValue("licao_aprendida", linhaTabela.licao_aprendida);
-  }, []);
-
   const handleFecharModal = () => {
     registerForm.setFieldValue("data", new Date(linhaTabela.data));
     registerForm.setFieldValue(
@@ -69,6 +60,15 @@ function ModalEditarLicaoAprendida({
     registerForm.setFieldValue("licao_aprendida", linhaTabela.licao_aprendida);
     onClose();
   };
+
+  useEffect(() => {
+    registerForm.setFieldValue("data", new Date(linhaTabela.data));
+    registerForm.setFieldValue(
+      "acoes_e_recomendacoes",
+      linhaTabela.acao_e_recomendacao
+    );
+    registerForm.setFieldValue("licao_aprendida", linhaTabela.licao_aprendida);
+  }, []);
 
   return (
     <>

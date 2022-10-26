@@ -57,11 +57,11 @@ function EditarAtividadeTabLicoesAprendidas({
     setRefresh(!refresh);
   };
 
-  // console.log("registerForm", registerForm.values);
-
   useEffect(() => {
     setTabelaFiltrada(registerForm.values.licoes_aprendidas);
   }, [registerForm.values.licoes_aprendidas]);
+
+  // console.log("registerForm", registerForm.values);
 
   function Body() {
     return (
