@@ -24,7 +24,6 @@ export function useOcorrencias(
     id_atividade: idAtividade,
     ocorrencia: "",
     impacto: "",
-    observacoes: "",
   };
 
   const registerForm: any = useFormik({
@@ -36,7 +35,6 @@ export function useOcorrencias(
         id_atividade: idAtividade,
         ocorrencia: values.ocorrencia,
         impacto: values.impacto,
-        observacoes: values.observacoes,
       };
 
       setLoading(true);

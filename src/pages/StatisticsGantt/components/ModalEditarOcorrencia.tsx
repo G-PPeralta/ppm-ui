@@ -19,7 +19,7 @@ import {
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import InputGenerico from "components/InputGenerico";
-import TextAreaGenerico from "components/TextAreaGenerico";
+import InputNumericoGenerico from "components/InputNumericoGenerico";
 
 import { handleCancelar } from "utils/handleCadastro";
 
@@ -110,17 +110,19 @@ function ModalEditarOcorrencia({
                   value={registerForm.values.ocorrencia}
                   placeholder={"Digite a ocorrência"}
                   maxLength={50}
+                  isDisabled={true}
                 />
               </Flex>
               <Flex justify={"space-between"} align={"end"} flex={1} gap={4}>
                 <Flex w={"40%"}>
-                  <InputGenerico
+                  <InputNumericoGenerico
                     registerForm={registerForm}
-                    nomeInput={"IMPACTO DA OCORRÊNCIA"}
                     propName={"impacto"}
-                    value={registerForm.values.impacto}
-                    placeholder={"00:00"}
-                    maxLength={50}
+                    nomeInput={"DURAÇÃO"}
+                    tipo={"hora"}
+                    stepper={true}
+                    limite={999}
+                    step={0.5}
                   />
                 </Flex>
                 <Button
@@ -139,16 +141,6 @@ function ModalEditarOcorrencia({
                 >
                   Anexar
                 </Button>
-              </Flex>
-              <Flex direction={"column"} gap={4}>
-                <TextAreaGenerico
-                  registerForm={registerForm}
-                  nomeInput={"OBSERVAÇÕES"}
-                  propName={"observacoes"}
-                  value={registerForm.values.observacoes}
-                  required={false}
-                  placeholder={"Descreva as observações"}
-                />
               </Flex>
             </Flex>
           </ModalBody>
