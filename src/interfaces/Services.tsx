@@ -407,6 +407,16 @@ export interface LicoesAprendidas {
   user: string;
 }
 
+export interface LicoesAprendidasNew {
+  id: number;
+  id_projeto: number;
+  id_categoria: number;
+  data: string;
+  licao_aprendida: string;
+  acao_e_recomendacao: string;
+  user: string;
+}
+
 export interface LicoesAprendidasPayload {
   id_atividade: number;
   data?: Date;
