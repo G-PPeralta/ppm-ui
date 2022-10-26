@@ -52,6 +52,17 @@ function ModalAdicionarAtividade({
   );
   const { listaOperacao } = useCadastroCronograma();
 
+  const optionsMetodosElevacao = [
+    {
+      value: 1,
+      label: "Gás Lift",
+    },
+    {
+      value: 2,
+      label: "Surgente",
+    },
+  ];
+
   const [dataFinalGantt, setDataFinalGantt] = useState<any>();
   const [dataFinalAtividade, setDataFinalAtividade] = useState<any>();
   const [mediaHorasFiltradas, setMediaHorasFiltradas] = useState<any>(0);
@@ -261,6 +272,17 @@ function ModalAdicionarAtividade({
                             : "Data Fim"}
                         </Button>
                       </Flex>
+                    </Flex>
+                  </Flex>
+                  <Flex gap={4} justify={"end"} align={"end"}>
+                    <Flex flex={2} w={"50%"}>
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"MÉTODO DE ELEVAÇÃO"}
+                        propName={"metodo_elevacao_id"}
+                        options={optionsMetodosElevacao}
+                        required={true}
+                      />
                     </Flex>
                   </Flex>
                 </Flex>
