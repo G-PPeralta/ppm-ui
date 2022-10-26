@@ -1,4 +1,5 @@
 import { TotalProjetosDashboard } from "interfaces/Services";
+
 import { api } from "services/api";
 
 export async function getTotalProjetos(): Promise<{
