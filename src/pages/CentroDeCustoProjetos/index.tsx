@@ -106,7 +106,7 @@ export function CentroDeCustoProjetos() {
               <Flex justify={"space-between"} flex={1}>
                 <ModalAdicionar
                   refreshState={refreshState}
-                  idProjeto={data.idProjeto}
+                  idProjeto={id ? +id : 0}
                   optionsSelects={options}
                 />
                 <Flex direction={"column"} justify={"end"}>
@@ -121,7 +121,7 @@ export function CentroDeCustoProjetos() {
               <Tabela
                 data={data.centroDeCusto}
                 refreshState={refreshState}
-                idProjeto={data.idProjeto}
+                idProjeto={id ? +id : 0}
                 optionsSelects={options}
               />
             </Box>

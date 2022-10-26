@@ -134,10 +134,14 @@ export function TabelaProjetos({ data, refresh, setRefresh }: TableProps) {
         {projeto.responsavel}
       </Td>
       <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-        {formatDate(new Date(projeto.data_inicio))}
+        {projeto.data_inicio == null
+          ? "---"
+          : formatDate(new Date(projeto.data_inicio))}
       </Td>
       <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-        {formatDate(new Date(projeto.data_fim))}
+        {projeto.data_fim == null
+          ? "---"
+          : formatDate(new Date(projeto.data_fim))}
       </Td>
       <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>{`${
         projeto.vlr_cr && projeto.vlr_orcado

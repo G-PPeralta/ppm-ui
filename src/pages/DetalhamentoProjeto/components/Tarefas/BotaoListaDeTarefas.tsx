@@ -160,7 +160,7 @@ function BotaoListadeTarefas() {
   useEffect(() => {
     getTaskList();
     fetchAtividadesProjeto();
-  }, [render]);
+  }, [render, isModalOpen]);
 
   return (
     <>
