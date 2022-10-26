@@ -78,7 +78,12 @@ export function GráficosEstatisticos() {
     return (
       <>
         {graphic == "1" && (
-          <GraficoPorDuracao de={de} ate={ate} refresh={refresh} />
+          <GraficoPorDuracao
+            de={de}
+            ate={ate}
+            refresh={refresh}
+            setRefresh={setRefresh}
+          />
         )}
         {graphic == "2" && <GraficoPorCadaIntervencao />}
         {graphic == "3" && <GraficoNPTPorPeriodoSPT />}

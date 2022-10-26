@@ -7,6 +7,7 @@ import { postFiltroCronograma } from "services/post/FiltroCronograma";
 
 export function useFiltragemCronogramaAtividade() {
   const [loading] = useState(false);
+  const [resultados, setResultados] = useState<any>();
   const initialValues: FiltroCronograma = {
     pocoId: 0,
     sondaId: 0,
@@ -20,6 +21,9 @@ export function useFiltragemCronogramaAtividade() {
 
   const postFiltros = async (initialValues: FiltroCronograma) => {
     await postFiltroCronograma(initialValues);
+    setResultados({
+      duracao: 3,
+    });
   };
 
   const registerForm = useFormik({
@@ -32,5 +36,6 @@ export function useFiltragemCronogramaAtividade() {
   return {
     registerForm,
     loading,
+    resultados,
   };
 }

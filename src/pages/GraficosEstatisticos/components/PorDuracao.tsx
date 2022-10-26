@@ -19,15 +19,15 @@ import {
 
 import StackedBarChart from "components/StackedBarChartGraphic";
 
-import { getSonda } from "services/get/CadastroModaisInfograficos";
 import {
-  getOperacoes,
+  getSondas,
+  // getOperacoes,
   getGraficoHistorico,
 } from "services/get/GraficosEstatisticos";
 
-export function GraficoPorDuracao({ de, ate, refresh }: any) {
+export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
   const [listaSondas, setListaSondas] = useState<any[]>([]);
-  const [operacao, setOperacao] = useState<any[]>([]);
+  const [selectedSonda, setSelectedSonda] = useState<any>();
   const [chartData, setChartData] = useState<any[]>([]);
 
   // const [loading, setLoading] = useState(true);
@@ -38,35 +38,6 @@ export function GraficoPorDuracao({ de, ate, refresh }: any) {
   ];
 
   const dataEntries1 = [{ name: "Durações", color: "#0047BB" }];
-
-  const reqGet = async () => {
-    const sondas = await getSonda();
-    const operacao = await getOperacoes();
-    const params: any = {};
-    if (de && ate) {
-      params.de = de;
-      params.a = ate;
-    }
-    const historico = await getGraficoHistorico(params);
-
-    const newData = historico.data.map((e) => ({
-      ...e,
-      key: `${e.nom_sonda}-${e.nom_poco}`,
-      Durações: e.hrs_media,
-    }));
-
-    const sondasSorted = sondas.data.sort((a: any, b: any) =>
-      a.nom_sonda.localeCompare(b.nom_sonda)
-    );
-
-    setChartData(newData);
-    setListaSondas(sondasSorted);
-    setOperacao(operacao.data);
-  };
-
-  useEffect(() => {
-    reqGet();
-  }, [refresh]);
 
   const componentRef = useRef<HTMLDivElement>(null);
 
@@ -84,6 +55,48 @@ export function GraficoPorDuracao({ de, ate, refresh }: any) {
   }
 
   const [width] = useWindowSize();
+
+  const reqGet = async () => {
+    const sondas = await getSondas();
+    // const operacao = await getOperacoes();
+    const params: any = {};
+    if (de && ate) {
+      params.de = de;
+      params.a = ate;
+    }
+    if (selectedSonda) {
+      params.sonda = selectedSonda;
+    }
+
+    const historico = await getGraficoHistorico(params);
+
+    const newData = historico.data.map((e) => ({
+      ...e,
+      key: `${e.nom_poco}`,
+      Durações: e.hrs_media,
+    }));
+
+    const sondasSorted = sondas.data.sort((a: any, b: any) =>
+      a.nom_sonda.localeCompare(b.nom_sonda)
+    );
+    const sondasSortedOptions = sondasSorted.map((a: any) => ({
+      value: a.id,
+      label: a.nom_sonda,
+    }));
+
+    setChartData(newData);
+    setListaSondas(sondasSortedOptions);
+    // setOperacao(operacao.data);
+  };
+
+  const handleChange = (e: any) => {
+    setSelectedSonda(e.target.value);
+    setRefresh(!refresh);
+  };
+
+  useEffect(() => {
+    reqGet();
+  }, [refresh]);
 
   return (
     <>
@@ -245,15 +258,18 @@ export function GraficoPorDuracao({ de, ate, refresh }: any) {
                   color={"black"}
                   fontSize={"14px"}
                   fontWeight={"400"}
+                  onChange={handleChange}
                 >
-                  {listaSondas.map((sonda) => (
-                    <option>{sonda.nom_sonda}</option>
+                  {listaSondas.map((s) => (
+                    <option key={s.value} value={s.value}>
+                      {s.label}
+                    </option>
                   ))}
                 </Select>
               </FormControl>
             </Flex>
 
-            <Flex alignItems={"flex-end"}>
+            {/* <Flex alignItems={"flex-end"}>
               <FormControl>
                 <FormLabel
                   fontSize={"12px"}
@@ -281,7 +297,7 @@ export function GraficoPorDuracao({ de, ate, refresh }: any) {
                   ))}
                 </Select>
               </FormControl>
-            </Flex>
+            </Flex> */}
 
             <Flex alignItems={"flex-end"}>
               <FormControl>
