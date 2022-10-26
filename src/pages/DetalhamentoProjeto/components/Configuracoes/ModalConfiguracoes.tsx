@@ -135,7 +135,7 @@ function ModalConfiguracoes({
   };
 
   function getOptions(options: any, selected: any) {
-    const filtered = options.filter((option: any) => option.value !== selected);
+    const filtered = options.filter((option: any) => option.label !== selected);
 
     return filtered.map(
       (option: {
@@ -224,7 +224,10 @@ function ModalConfiguracoes({
                         setReponsavel(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsResponsaveis, responsavel)}
+                      {getOptions(
+                        optionsResponsaveis,
+                        projeto.nome_responsavel
+                      )}
                     </Select>
                   </FormControl>
 
@@ -250,7 +253,10 @@ function ModalConfiguracoes({
                         setCoordenador(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsCoordenadores, coordenador)}
+                      {getOptions(
+                        optionsCoordenadores,
+                        projeto.coordenador_nome
+                      )}
                     </Select>
                   </FormControl>
 
@@ -271,12 +277,12 @@ function ModalConfiguracoes({
                       id="statusId"
                       name="status"
                       width={"100%"}
-                      placeholder={projeto?.status}
+                      placeholder={projeto.status}
                       onChange={(e) => {
                         setStatus(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsStatus, status)}
+                      {getOptions(optionsStatus, projeto.status)}
                     </Select>
                   </FormControl>
                   <Flex>
@@ -337,12 +343,12 @@ function ModalConfiguracoes({
                       id="poloId"
                       name="polo"
                       width={"100%"}
-                      placeholder={projeto?.polo}
+                      placeholder={projeto.polo}
                       onChange={(e) => {
                         setPolo(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsPolos, polo)}
+                      {getOptions(optionsPolos, projeto.polo)}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
@@ -367,7 +373,7 @@ function ModalConfiguracoes({
                         setLocal(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsLocais, local)}
+                      {getOptions(optionsLocais, projeto.local)}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
@@ -387,12 +393,12 @@ function ModalConfiguracoes({
                       id="solicitacaoId"
                       name="solicitacao"
                       width={"100%"}
-                      placeholder={projeto?.solicitante}
+                      placeholder={projeto.solicitante}
                       onChange={(e) => {
                         setSolicitacao(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsSolicitantes, solicitacao)}
+                      {getOptions(optionsSolicitantes, projeto.solicitante)}
                     </Select>
                   </FormControl>
                 </Flex>
@@ -558,12 +564,12 @@ function ModalConfiguracoes({
                       id="divisaoId"
                       name="divisao"
                       width={"100%"}
-                      placeholder={projeto?.divisao}
+                      placeholder={projeto.divisao}
                       onChange={(e) => {
                         setDivisao(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsDivisoes, divisao)}
+                      {getOptions(optionsDivisoes, projeto.divisao)}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
@@ -583,12 +589,12 @@ function ModalConfiguracoes({
                       id="classificacaoId"
                       name="classificacao"
                       width={"100%"}
-                      placeholder={projeto?.classificacao}
+                      placeholder={projeto.classificacao}
                       onChange={(e) => {
                         setClassificacao(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsClassificacoes, classificacao)}
+                      {getOptions(optionsClassificacoes, projeto.classificacao)}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
@@ -608,12 +614,12 @@ function ModalConfiguracoes({
                       id="tipoId"
                       name="tipo"
                       width={"100%"}
-                      placeholder={projeto?.tipo}
+                      placeholder={projeto.tipo}
                       onChange={(e) => {
                         setTipo(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsTipoProjetos, tipo)}
+                      {getOptions(optionsTipoProjetos, projeto.tipo)}
                     </Select>
                   </FormControl>
                   <FormControl w={"232px"}>
@@ -633,12 +639,12 @@ function ModalConfiguracoes({
                       id="gateId"
                       name="gate"
                       width={"100%"}
-                      placeholder={projeto?.gate}
+                      placeholder={projeto.gate}
                       onChange={(e) => {
                         setGate(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsGates, gate)}
+                      {getOptions(optionsGates, projeto.gate)}
                     </Select>
                   </FormControl>
                 </Flex>
