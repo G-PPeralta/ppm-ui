@@ -87,12 +87,20 @@ function DetalhamentoProjeto() {
   // console.log({ data });
 
   useEffect(() => {
+    handleGetInfoProjetos();
+    handleGetLicoes();
+    handleGetCategorias();
+    handleGetProgresso();
     getData();
     getProject();
   }, []);
 
   useEffect(() => {
     setTimeout(() => {
+      handleGetInfoProjetos();
+      handleGetLicoes();
+      handleGetCategorias();
+      handleGetProgresso();
       getData();
       getProject();
       setRender(!render);
@@ -127,28 +135,28 @@ function DetalhamentoProjeto() {
     }
   }
 
-  useEffect(() => {
-    handleGetInfoProjetos();
-    handleGetLicoes();
-    handleGetCategorias();
-    handleGetProgresso();
+  // useEffect(() => {
+  //   handleGetInfoProjetos();
+  //   handleGetLicoes();
+  //   handleGetCategorias();
+  //   handleGetProgresso();
 
-    return () =>
-      setInfoProjeto({
-        nome_projeto: "",
-        data_inicio: null,
-        data_fim: null,
-        numero: 0,
-        polo: "",
-        local: "",
-        demanda: "",
-        nome_responsavel: "",
-        coordenador_nome: "",
-        descricao: "",
-        justificativa: "",
-      });
-    // handleGetLicoes();
-  }, [render]);
+  //   return () =>
+  //     setInfoProjeto({
+  //       nome_projeto: "",
+  //       data_inicio: null,
+  //       data_fim: null,
+  //       numero: 0,
+  //       polo: "",
+  //       local: "",
+  //       demanda: "",
+  //       nome_responsavel: "",
+  //       coordenador_nome: "",
+  //       descricao: "",
+  //       justificativa: "",
+  //     });
+  //   // handleGetLicoes();
+  // }, [render]);
 
   async function getProject() {
     try {
