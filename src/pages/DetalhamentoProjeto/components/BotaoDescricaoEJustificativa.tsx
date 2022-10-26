@@ -187,10 +187,8 @@ function BotaoDescricaoEJustificativa({
                     descricao,
                     justificativa,
                   });
-                  setDescricao("");
-                  setJustificativa("");
-                  setRefresh(!refresh);
                   onClose();
+                  setRefresh(!refresh);
                 }}
                 _hover={{
                   background: "origem.600",
