@@ -178,6 +178,7 @@ function ModalAdicionarOperacao({
   const [listaOcorrencias, setListaOcorrencias] = useState<Ocorrencia[]>([]);
   const [anotacoes, setAnotacoes] = useState<Anotacoes[]>([]);
   const [mocs, setMocs] = useState<any[]>([]);
+  const [gambiarra, setGambiarra] = useState<any>(true);
 
   const refreshState = {
     setRefresh,
@@ -205,14 +206,20 @@ function ModalAdicionarOperacao({
     }
   };
 
-  // console.log("mocs", mocs);
+  const handleGambiarra = () => {
+    setTimeout(() => {
+      setGambiarra(!gambiarra);
+    }, 2000);
+  };
 
   useEffect(() => {
     requestLicoesEOperacoes();
+    handleGambiarra();
   }, []);
 
   useEffect(() => {
     requestLicoesEOperacoes();
+    handleGambiarra();
   }, [refresh]);
 
   useEffect(() => {
@@ -233,6 +240,28 @@ function ModalAdicionarOperacao({
     if (mocs.length > 0) {
       registerForm.setFieldValue("mocs", mocs);
     }
+    // console.log("GAMBIARRA", editOp);
+  }, [gambiarra]);
+
+  useEffect(() => {
+    registerForm.setFieldValue("id_atividade", editOp.id_atividade);
+    registerForm.setFieldValue("nome_atividade", editOp.nome_atividade);
+    registerForm.setFieldValue("inicio_planejado", editOp.inicio_planejado);
+    registerForm.setFieldValue("inicio_realizado", editOp.inicio_realizado);
+    registerForm.setFieldValue("fim_planejado", editOp.fim_planejado);
+    registerForm.setFieldValue("fim_realizado", editOp.fim_realizado);
+    registerForm.setFieldValue("hrs_totais", editOp.hrs_totais);
+    registerForm.setFieldValue("hrs_reais", editOp.hrs_reais);
+    registerForm.setFieldValue("pct_real", editOp.pct_real);
+    registerForm.setFieldValue("licoes_aprendidas", listaLicoesAprendidas);
+    registerForm.setFieldValue("ocorrencias", listaOcorrencias);
+    if (anotacoes.length > 0) {
+      registerForm.setFieldValue("anotacoes", anotacoes[0].txt_nota);
+    }
+    if (mocs.length > 0) {
+      registerForm.setFieldValue("mocs", mocs);
+    }
+    handleGambiarra();
   }, [editOp, isOpen]);
 
   useEffect(() => {
@@ -242,8 +271,14 @@ function ModalAdicionarOperacao({
     if (mocs.length > 0) {
       registerForm.setFieldValue("mocs", mocs);
     }
+    handleGambiarra();
   }, [anotacoes, mocs]);
 
+  useEffect(() => {
+    requestLicoesEOperacoes();
+  }, [isOpen]);
+
+  // console.log("mocs", mocs);
   // console.log("anotacoes", anotacoes);
   // console.log("registerForm", registerForm.values);
   // console.log("editOp", editOp);

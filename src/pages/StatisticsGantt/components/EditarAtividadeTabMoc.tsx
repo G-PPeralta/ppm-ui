@@ -36,7 +36,7 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
     <Flex w={"100%"} direction={"column"} gap={4}>
       <Flex flex={1} justify={"space-between"} direction={"column"} gap={4}>
         {registerForm.values.mocs.map((_moc: any, index: number) => (
-          <Flex gap={4} justify={"space-between"} align={"end"}>
+          <Flex gap={4} justify={"space-between"} align={"end"} key={index}>
             <Flex w={"50%"} align={"end"} gap={2}>
               <InputGenerico
                 registerForm={registerForm}
