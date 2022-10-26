@@ -546,3 +546,15 @@ export interface AtividadesProjeto {
   item: string;
   temporario: boolean;
 }
+
+export interface TotalProjetosDashboard {
+  month: string;
+  nao_iniciados: number;
+  holds: number;
+  iniciados: number;
+  em_analise: number;
+  finalizados: number;
+  cancelados: number;
+  pre_aprovacao: number;
+  reprogramado: number;
+}

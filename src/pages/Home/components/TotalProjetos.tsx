@@ -7,10 +7,11 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { TotalProjetosDashboard } from "interfaces/Services";
 
 import StackedBarChart from "components/StackedBarChart";
 
-import { getTotalProjetos } from "services/get/Dashboard";
+import { getTotalProjetos, getTotalProjetosMes } from "services/get/Dashboard";
 
 export default function TotalProjetosComponent() {
   const [total, setTotal] = useState(1);
@@ -27,6 +28,9 @@ export default function TotalProjetosComponent() {
   const [complexidadeAlta, setComplexidadeAlta] = useState(0);
   const [complexidadeMedia, setComplexidadeMedia] = useState(0);
   const [complexidadeBaixa, setComplexidadeBaixa] = useState(0);
+  const [totalProjetosMes, setTotalProjetosMes] = useState<
+    TotalProjetosDashboard[]
+  >([] as TotalProjetosDashboard[]);
 
   async function handleGetTipoResponsavel() {
     const { data } = await getTotalProjetos();
@@ -52,52 +56,71 @@ export default function TotalProjetosComponent() {
     setComplexidadeBaixa(data.complexidades.baixa);
   }
 
+  async function fetchProjetosMes() {
+    const response = await getTotalProjetosMes();
+    setTotalProjetosMes(response.data);
+  }
+
   useEffect(() => {
     handleGetTipoResponsavel();
+    fetchProjetosMes();
   }, []);
 
-  const dataMock = [
-    {
-      mes: "Jan/22",
-      Iniciados: 10,
-      Finalizados: 10,
-      Cancelados: 10,
-      Holds: 10,
-      Não_Iniciados: 10,
-      Reprogramados: 10,
-      Pré_Aprovação: 40,
-    },
-    {
-      mes: "Fev/22",
-      Iniciados: 10,
-      Finalizados: 10,
-      Cancelados: 10,
-      Holds: 40,
-      Não_Iniciados: 10,
-      Reprogramados: 10,
-      Pré_Aprovação: 10,
-    },
-    {
-      mes: "Mar/22",
-      Iniciados: 10,
-      Finalizados: 10,
-      Cancelados: 10,
-      Holds: 10,
-      Não_Iniciados: 10,
-      Reprogramados: 40,
-      Pré_Aprovação: 10,
-    },
-    {
-      mes: "Abr/22",
-      Iniciados: 10,
-      Finalizados: 10,
-      Cancelados: 10,
-      Holds: 10,
-      Não_Iniciados: 40,
-      Reprogramados: 10,
-      Pré_Aprovação: 10,
-    },
-  ];
+  const dataMock =
+    totalProjetosMes &&
+    totalProjetosMes.map((pr) => ({
+      mes: pr.month,
+      Iniciados: pr.iniciados,
+      Finalizados: pr.finalizados,
+      Cancelados: pr.cancelados,
+      Holds: pr.holds,
+      Não_Iniciados: pr.nao_iniciados,
+      Reprogramados: pr.reprogramado,
+      Pré_Aprovação: pr.pre_aprovacao,
+    }));
+
+  // const dataMock = [
+  //   {
+  //     mes: "Jan/22",
+  //     Iniciados: 10,
+  //     Finalizados: 10,
+  //     Cancelados: 10,
+  //     Holds: 10,
+  //     Não_Iniciados: 10,
+  //     Reprogramados: 10,
+  //     Pré_Aprovação: 40,
+  //   },
+  //   {
+  //     mes: "Fev/22",
+  //     Iniciados: 10,
+  //     Finalizados: 10,
+  //     Cancelados: 10,
+  //     Holds: 40,
+  //     Não_Iniciados: 10,
+  //     Reprogramados: 10,
+  //     Pré_Aprovação: 10,
+  //   },
+  //   {
+  //     mes: "Mar/22",
+  //     Iniciados: 10,
+  //     Finalizados: 10,
+  //     Cancelados: 10,
+  //     Holds: 10,
+  //     Não_Iniciados: 10,
+  //     Reprogramados: 40,
+  //     Pré_Aprovação: 10,
+  //   },
+  //   {
+  //     mes: "Abr/22",
+  //     Iniciados: 10,
+  //     Finalizados: 10,
+  //     Cancelados: 10,
+  //     Holds: 10,
+  //     Não_Iniciados: 40,
+  //     Reprogramados: 10,
+  //     Pré_Aprovação: 10,
+  //   },
+  // ];
 
   const dataEntries = [
     { name: "Iniciados", color: "#93E01B" },
