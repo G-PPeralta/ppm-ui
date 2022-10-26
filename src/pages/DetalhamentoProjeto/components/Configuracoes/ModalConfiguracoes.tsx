@@ -417,7 +417,7 @@ function ModalConfiguracoes({
                       height={"56px"}
                       id="nomeProjetoId"
                       name="nomeProjeto"
-                      placeholder={nomeProjeto}
+                      value={nomeProjeto}
                       onChange={(e) => setNomeProjeto(e.target.value)}
                     ></Input>
                   </FormControl>
@@ -439,7 +439,7 @@ function ModalConfiguracoes({
                       height={"56px"}
                       id="elementoPepId"
                       name="elementoPep"
-                      placeholder={elementoPep}
+                      value={elementoPep}
                       onChange={(e) => setElementoPep(e.target.value)}
                     ></Input>
                   </FormControl>

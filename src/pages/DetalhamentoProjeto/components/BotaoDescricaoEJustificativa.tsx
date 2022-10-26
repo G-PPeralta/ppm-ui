@@ -38,8 +38,6 @@ function BotaoDescricaoEJustificativa({
   );
 
   const handleCancelar = () => {
-    setDescricao("");
-    setJustificativa("");
     onClose();
   };
 

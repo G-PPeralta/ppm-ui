@@ -45,7 +45,7 @@ function DatePicker({ setDate, data, label, required }: any) {
         selected={data}
         // minDate={dataMin}
         onChange={(date) => setDate(date)}
-        locale="pt-BR"
+        // locale="pt-BR"
         dateFormat="dd/MM/yyyy"
         customInput={<TriggerDatePickerInicio />}
         // isClearable={dataInicio !== ""}
