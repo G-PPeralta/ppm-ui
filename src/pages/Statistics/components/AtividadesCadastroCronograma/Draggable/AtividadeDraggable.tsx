@@ -76,10 +76,10 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
   };
 
   function filterData(data: OpcoesFiltro) {
-    registerForm.setFieldValue(
-      `atividades[${index}].operacao_id`,
-      data.operacao
-    );
+    // registerForm.setFieldValue(
+    //   `atividades[${index}].operacao_id`,
+    //   data.operacao
+    // );
     registerForm.setFieldValue(
       `atividades[${index}].data_inicio`,
       data.dataInicio
