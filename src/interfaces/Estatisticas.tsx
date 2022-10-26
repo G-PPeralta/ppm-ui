@@ -23,3 +23,14 @@ export interface Ocorrencia {
   nome_ocorrencia: string;
   horas: string;
 }
+
+export interface Anotacoes {
+  cod_moc: any;
+  dat_usu_create: string;
+  id: number;
+  id_atividade: number;
+  ind_tipo_anotacao: number;
+  nom_usu_create: string;
+  txt_nota: string;
+  url_anexo: any;
+}

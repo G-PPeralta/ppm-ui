@@ -17,7 +17,7 @@ import {
   ButtonGroup,
   Button,
 } from "@chakra-ui/react";
-import { LicaoAprendida, Ocorrencia } from "interfaces/Estatisticas";
+import { Anotacoes, LicaoAprendida, Ocorrencia } from "interfaces/Estatisticas";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
@@ -25,7 +25,9 @@ import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelho
 import { handleCancelar } from "utils/handleCadastro";
 
 import {
+  getAnotacoesPorAtividade,
   getLicoesAprendidasPorAtividade,
+  getMocPorAtividade,
   getOcorrenciasPorAtividade,
 } from "services/get/Estatisticas";
 
@@ -174,6 +176,8 @@ function ModalAdicionarOperacao({
     LicaoAprendida[]
   >([]);
   const [listaOcorrencias, setListaOcorrencias] = useState<Ocorrencia[]>([]);
+  const [anotacoes, setAnotacoes] = useState<Anotacoes[]>([]);
+  const [mocs, setMocs] = useState<any[]>([]);
 
   const refreshState = {
     setRefresh,
@@ -185,12 +189,23 @@ function ModalAdicionarOperacao({
       const licoesAprendidasPorAtividade =
         await getLicoesAprendidasPorAtividade(editOp.id_atividade);
       setListaLicoesAprendidas(licoesAprendidasPorAtividade.data);
+
       const ocorrenciasPorAtividade = await getOcorrenciasPorAtividade(
         editOp.id_atividade
       );
       setListaOcorrencias(ocorrenciasPorAtividade.data);
+
+      const anotacoesPorAtividade = await getAnotacoesPorAtividade(
+        editOp.id_atividade
+      );
+      setAnotacoes(anotacoesPorAtividade.data);
+
+      const mocPorAtividade = await getMocPorAtividade(editOp.id_atividade);
+      setMocs(mocPorAtividade.data);
     }
   };
+
+  // console.log("mocs", mocs);
 
   useEffect(() => {
     requestLicoesEOperacoes();
@@ -212,8 +227,24 @@ function ModalAdicionarOperacao({
     registerForm.setFieldValue("pct_real", editOp.pct_real);
     registerForm.setFieldValue("licoes_aprendidas", listaLicoesAprendidas);
     registerForm.setFieldValue("ocorrencias", listaOcorrencias);
-  }, [editOp]);
+    if (anotacoes.length > 0) {
+      registerForm.setFieldValue("anotacoes", anotacoes[0].txt_nota);
+    }
+    if (mocs.length > 0) {
+      registerForm.setFieldValue("mocs", mocs);
+    }
+  }, [editOp, isOpen]);
 
+  useEffect(() => {
+    if (anotacoes.length > 0) {
+      registerForm.setFieldValue("anotacoes", anotacoes[0].txt_nota);
+    }
+    if (mocs.length > 0) {
+      registerForm.setFieldValue("mocs", mocs);
+    }
+  }, [anotacoes, mocs]);
+
+  // console.log("anotacoes", anotacoes);
   // console.log("registerForm", registerForm.values);
   // console.log("editOp", editOp);
 

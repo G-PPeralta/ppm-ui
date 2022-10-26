@@ -93,3 +93,27 @@ export async function getMetodosElevacao(): Promise<{
 
   return { data, status };
 }
+
+export async function getAnotacoesPorAtividade(idAtividade: number): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(
+    `projetos-atividades-notas/all/${idAtividade}`,
+    token()
+  );
+
+  return { data, status };
+}
+
+export async function getMocPorAtividade(idAtividade: number): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(
+    `projetos-atividades-notas/moc/${idAtividade}`,
+    token()
+  );
+
+  return { data, status };
+}
