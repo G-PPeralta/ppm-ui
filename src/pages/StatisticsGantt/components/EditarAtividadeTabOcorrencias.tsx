@@ -82,10 +82,12 @@ function EditarAtividadeTabOcorrencias({ registerForm, refreshState }: Props) {
       <FiltragemTabela
         dadosTabela={registerForm.values.ocorrencias}
         nomeLabel={"PESQUISAR"}
+        nomeLabelData={"Data"}
         placeholder={"Pesquisar"}
         setTabelaFiltrada={setTabelaFiltrada}
-        propName={"ocorrencias"}
+        propName={"nome_ocorrencia"}
         registerForm={registerForm}
+        filtrarData={true}
       />
       <TabelaGenerica
         maxHeight={"352px"}
