@@ -45,6 +45,28 @@ const move = (
 };
 
 export function PriorizacaoDiretores() {
+  const [dataBaixa, setDataBaixa] = useState([
+    "lorem",
+    "ipsum",
+    "dolor",
+    "sit",
+    "amet",
+  ]);
+  const [dataMedia, setDataMedia] = useState([
+    "lorem1",
+    "ipsum1",
+    "dolor1",
+    "sit1",
+    "amet1",
+  ]);
+  const [dataAlta, setDataAlta] = useState([
+    "lorem2",
+    "ipsum2",
+    "dolor2",
+    "sit2",
+    "ame2t",
+  ]);
+
   const onDragEnd = (result: any) => {
     const { source, destination } = result;
     if (!destination) {
@@ -54,18 +76,18 @@ export function PriorizacaoDiretores() {
     const sourceData =
       // eslint-disable-next-line no-nested-ternary
       source.droppableId === "droppableBaixa"
-        ? data
+        ? dataBaixa
         : source.droppableId === "droppableMedia"
-        ? data01
-        : data02;
+        ? dataMedia
+        : dataAlta;
 
     const destinationData =
       // eslint-disable-next-line no-nested-ternary
       destination.droppableId === "droppableBaixa"
-        ? data
+        ? dataBaixa
         : destination.droppableId === "droppableMedia"
-        ? data01
-        : data02;
+        ? dataMedia
+        : dataAlta;
 
     if (source.droppableId === destination.droppableId) {
       const items = reorder(sourceData, source.index, destination.index);
@@ -73,59 +95,43 @@ export function PriorizacaoDiretores() {
       const state = items;
 
       if (source.droppableId === "droppableBaixa") {
-        setData(state);
+        setDataBaixa(state);
       }
 
       if (source.droppableId === "droppableMedia") {
-        setData01(state);
+        setDataMedia(state);
       }
 
       if (source.droppableId === "droppableAlta") {
-        setData02(state);
+        setDataAlta(state);
       }
     } else {
       const result = move(sourceData, destinationData, source, destination);
 
       if (source.droppableId === "droppableBaixa") {
-        setData(result[0]);
+        setDataBaixa(result[0]);
       }
 
       if (source.droppableId === "droppableMedia") {
-        setData01(result[0]);
+        setDataMedia(result[0]);
       }
 
       if (source.droppableId === "droppableAlta") {
-        setData02(result[0]);
+        setDataAlta(result[0]);
       }
       if (destination.droppableId === "droppableBaixa") {
-        setData(result[1]);
+        setDataBaixa(result[1]);
       }
 
       if (destination.droppableId === "droppableMedia") {
-        setData01(result[1]);
+        setDataMedia(result[1]);
       }
 
       if (destination.droppableId === "droppableAlta") {
-        setData02(result[1]);
+        setDataAlta(result[1]);
       }
     }
   };
-
-  const [data, setData] = useState(["lorem", "ipsum", "dolor", "sit", "amet"]);
-  const [data01, setData01] = useState([
-    "lorem1",
-    "ipsum1",
-    "dolor1",
-    "sit1",
-    "amet1",
-  ]);
-  const [data02, setData02] = useState([
-    "lorem2",
-    "ipsum2",
-    "dolor2",
-    "sit2",
-    "ame2t",
-  ]);
 
   return (
     <>
@@ -170,7 +176,7 @@ export function PriorizacaoDiretores() {
                 <Droppable droppableId={"droppableBaixa"}>
                   {(provided: DroppableProvided) => (
                     <div ref={provided.innerRef} {...provided.droppableProps}>
-                      {data.map((val, index) => (
+                      {dataBaixa.map((val, index) => (
                         <Card key={index} data={val} index={index} />
                       ))}
                       {provided.placeholder}
@@ -215,7 +221,7 @@ export function PriorizacaoDiretores() {
                 <Droppable droppableId={"droppableMedia"}>
                   {(provided: DroppableProvided) => (
                     <div ref={provided.innerRef} {...provided.droppableProps}>
-                      {data01.map((val, index) => (
+                      {dataMedia.map((val, index) => (
                         <Card key={index} data={val} index={index} />
                       ))}
                       {provided.placeholder}
@@ -259,7 +265,7 @@ export function PriorizacaoDiretores() {
                 <Droppable droppableId={"droppableAlta"}>
                   {(provided: DroppableProvided) => (
                     <div ref={provided.innerRef} {...provided.droppableProps}>
-                      {data02.map((val, index) => (
+                      {dataAlta.map((val, index) => (
                         <Card key={index} data={val} index={index} />
                       ))}
                       {provided.placeholder}
