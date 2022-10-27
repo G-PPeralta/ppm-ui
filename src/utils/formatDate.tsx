@@ -67,10 +67,15 @@ export function formatDateToYYYYMMDDhhmmss(date: Date | null) {
 export function formatMinutesToHHmm(minutes: number) {
   const hours = Math.floor(minutes / 60);
   const minutesRest = minutes % 60;
-  return `${hours}:${padTo2Digits(minutesRest)}`;
+  return `${hours}h${padTo2Digits(minutesRest)}`;
 }
 
 export function formatFloatToMinutes(float: number) {
   const minutes = float * 60;
   return minutes;
+}
+
+export function formatMinutesToHours(minutes: number) {
+  const hours = minutes / 60;
+  return hours;
 }

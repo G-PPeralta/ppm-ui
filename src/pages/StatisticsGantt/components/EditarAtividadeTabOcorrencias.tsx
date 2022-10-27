@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Flex, Td, Text, Tr } from "@chakra-ui/react";
 
@@ -35,6 +35,10 @@ function EditarAtividadeTabOcorrencias({ registerForm, refreshState }: Props) {
   const header = ["NOME DO CAMPO PERSONALIZADO", "HORAS", "AÇÕES"];
   const footer = [""];
 
+  useEffect(() => {
+    setTabelaFiltrada(registerForm.values.ocorrencias);
+  }, [registerForm.values.ocorrencias]);
+
   function Body() {
     return (
       <>
@@ -53,7 +57,6 @@ function EditarAtividadeTabOcorrencias({ registerForm, refreshState }: Props) {
                   <Flex gap={2} align={"center"} justify={"center"}>
                     <ModalEditarOcorrencia
                       refreshState={refreshState}
-                      idOcorrencia={linhaTabela.id}
                       linhaTabela={linhaTabela}
                       idAtividade={registerForm.values.id_atividade}
                     />
@@ -81,7 +84,7 @@ function EditarAtividadeTabOcorrencias({ registerForm, refreshState }: Props) {
         nomeLabel={"PESQUISAR"}
         placeholder={"Pesquisar"}
         setTabelaFiltrada={setTabelaFiltrada}
-        propName={"nome_ocorrencia"}
+        propName={"ocorrencias"}
         registerForm={registerForm}
       />
       <TabelaGenerica

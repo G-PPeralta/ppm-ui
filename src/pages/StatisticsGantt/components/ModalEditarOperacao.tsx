@@ -141,7 +141,6 @@ function ModalAdicionarOperacao({
     if (mocs.length > 0) {
       registerForm.setFieldValue("mocs", mocs);
     }
-    // console.log("GAMBIARRA", editOp);
   }, [gambiarra]);
 
   useEffect(() => {

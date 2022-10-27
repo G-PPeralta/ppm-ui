@@ -21,6 +21,7 @@ import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrima
 import InputGenerico from "components/InputGenerico";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 
+import { formatMinutesToHours } from "utils/formatDate";
 import { handleCancelar } from "utils/handleCadastro";
 
 import { useOcorrencias } from "hooks/useOcorrencias";
@@ -31,14 +32,12 @@ interface RefreshState {
 }
 
 interface Props {
-  idOcorrencia: number;
   refreshState: RefreshState;
   linhaTabela: any;
   idAtividade: number;
 }
 
 function ModalEditarOcorrencia({
-  idOcorrencia,
   refreshState,
   linhaTabela,
   idAtividade,
@@ -49,14 +48,20 @@ function ModalEditarOcorrencia({
   const { refresh, setRefresh } = refreshState;
 
   const handleFecharModal = () => {
-    registerForm.setFieldValue("impacto", linhaTabela.impacto);
+    registerForm.setFieldValue(
+      "impacto",
+      formatMinutesToHours(linhaTabela.impacto)
+    );
     registerForm.setFieldValue("ocorrencia", linhaTabela.nome_ocorrencia);
     registerForm.setFieldValue("observacoes", "");
     onClose();
   };
 
   useEffect(() => {
-    registerForm.setFieldValue("impacto", linhaTabela.impacto);
+    registerForm.setFieldValue(
+      "impacto",
+      formatMinutesToHours(linhaTabela.impacto)
+    );
     registerForm.setFieldValue("ocorrencia", linhaTabela.nome_ocorrencia);
   }, []);
 
