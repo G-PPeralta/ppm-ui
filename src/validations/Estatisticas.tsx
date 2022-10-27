@@ -25,14 +25,6 @@ export const cadastroNovoCronogramaSchema = yup.object({
 export const cadastroOperacaoSchema = yup.object({
   id_origem: yup.string().required("O ID é obrigatório!").min(1),
   nom_operacao: yup.string().required("O nome da atividade é obrigatório!"),
-  responsavel_id: yup
-    .number()
-    .required("O responsável é obrigatório!")
-    .moreThan(0),
-  area_id: yup
-    .number()
-    .required("A área de atuação é obrigatória!")
-    .moreThan(0),
 });
 
 export const cadastroLicaoAprendida = yup.object({
@@ -42,9 +34,8 @@ export const cadastroLicaoAprendida = yup.object({
 });
 
 export const cadastroOcorrenciaAtividade = yup.object({
-  ocorrencia: yup.string().required("O campo é obrigatório!"),
+  ocorrencia: yup.string(),
   impacto: yup.string().required("O campo é obrigatório!"),
-  observacoes: yup.string().required("O campo é obrigatório!"),
 });
 
 export const editarAtividadeGanttSchema = yup.object({

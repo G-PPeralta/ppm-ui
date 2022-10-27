@@ -14,12 +14,10 @@ import {
   Text,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { AreaAtuacao } from "interfaces/CadastrosModaisInfograficos";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
-import SelectFiltragem from "components/SelectFiltragem";
 
 import { handleCancelar } from "utils/handleCadastro";
 import { regexSomenteNumeros, regexCaracteresEspeciais } from "utils/regex";
@@ -28,18 +26,7 @@ import { useCadastroOperacao } from "hooks/useCadastroOperacao";
 
 function ModalCadastroOperacao({ refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaAreaAtuacao, listaResponsaveis } =
-    useCadastroOperacao();
-
-  const optionsAreaAtuacao = listaAreaAtuacao.map((area: AreaAtuacao) => ({
-    value: area.id,
-    label: area.tipo,
-  }));
-
-  const optionsResponsaveis = listaResponsaveis.map((responsavel: any) => ({
-    value: responsavel.id,
-    label: responsavel.nome,
-  }));
+  const { registerForm, loading } = useCadastroOperacao();
 
   return (
     <>
@@ -160,46 +147,6 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                       </Flex>
                     </Flex>
                   </Flex>
-
-                  <Text fontWeight={"bold"}>Responsável</Text>
-                  <Flex
-                    flexDirection={useBreakpointValue({
-                      base: "column",
-                      md: "row",
-                    })}
-                    gap={5}
-                    mb={10}
-                  >
-                    <Flex flex={1}>
-                      <SelectFiltragem
-                        registerForm={registerForm}
-                        nomeSelect={"RESPONSÁVEL"}
-                        propName={"responsavel_id"}
-                        options={optionsResponsaveis}
-                        required={true}
-                      />
-                    </Flex>
-                    <Flex flex={1}>
-                      <SelectFiltragem
-                        registerForm={registerForm}
-                        nomeSelect={"ÁREA"}
-                        propName={"area_id"}
-                        options={optionsAreaAtuacao}
-                        required={true}
-                      />
-                    </Flex>
-                  </Flex>
-
-                  {/* <Flex
-                    flexDirection={useBreakpointValue({
-                      base: "column",
-                      md: "column",
-                    })}
-                    gap={2}
-                  >
-                    <Text fontWeight={"bold"}>Restrições</Text>
-                    <Restricoes registerForm={registerForm} />
-                  </Flex> */}
                 </Stack>
               </Flex>
             </ModalBody>
