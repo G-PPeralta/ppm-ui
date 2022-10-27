@@ -86,7 +86,7 @@ function ModalCustoDiario(props: { id: string | undefined }) {
 
   const tableData = data.map((dia, key) => (
     <>
-      <Tr background={"origem.200"} key={dia.id} color="white">
+      <Tr background={"origem.200"} key={dia.id}>
         <Td>{dia.index}</Td>
         <Td onClick={() => toggleAcordion(key)}>
           <Flex alignItems={"center"} justifyContent="space-between">
