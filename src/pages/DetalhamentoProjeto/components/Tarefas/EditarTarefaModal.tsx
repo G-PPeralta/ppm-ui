@@ -102,6 +102,22 @@ function EditarTarefaModal({
 
   const formataParaPorcentagem = (val: number | undefined) => val + "%";
 
+  const handlePatchProject = async () => {
+    const promises = camposParaEditar.map((tarefa) =>
+      patchTarefa(
+        Number(tarefaId),
+        tarefa,
+        tarefa !== "status"
+          ? updatePayload(tarefa) || 0
+          : updatePayload(tarefa)?.toString() || "",
+        user?.nome
+      )
+    );
+    await Promise.all(promises);
+    newRender();
+    closeModal();
+  };
+
   return (
     <Flex>
       <Box
@@ -389,27 +405,14 @@ function EditarTarefaModal({
                   background: "origem.600",
                   transition: "all 0.4s",
                 }}
-                onClick={() => {
-                  camposParaEditar.forEach((tarefa) =>
-                    patchTarefa(
-                      Number(tarefaId),
-                      tarefa,
-                      tarefa !== "status"
-                        ? updatePayload(tarefa) || 0
-                        : updatePayload(tarefa)?.toString() || "",
-                      user?.nome
-                    )
-                  );
-                  newRender();
-                  closeModal();
-                }}
+                onClick={() => handlePatchProject()}
                 width={"208px"}
                 height={"56px"}
                 fontWeight={"700"}
                 fontSize="18px"
                 fontFamily={"Mulish"}
               >
-                Adicionar
+                Confirmar
               </Button>
             </Flex>
           </ModalFooter>
