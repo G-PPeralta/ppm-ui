@@ -6,7 +6,7 @@ export async function patchEditarLicaoAprendida(
   payload: any
 ): Promise<{ data: any; status: number }> {
   const { data, status } = await api.patch(
-    `/estatisticas/cronograma/${idAtividade}/licao-aprendida/${idLicaoAprendida}`,
+    `projetos-atividades-licoes-aprendidas/${idAtividade}/${idLicaoAprendida}`,
     payload,
     token()
   );
