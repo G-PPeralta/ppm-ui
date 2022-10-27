@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
-import toast from "react-hot-toast";
 import { BsFillCloudArrowUpFill } from "react-icons/bs";
 
 import { Button, Flex, Text } from "@chakra-ui/react";
@@ -14,39 +13,23 @@ function BotaoUploadArquivo({ registerForm, index }: Props) {
   const [arquivoSelecionadoPath, setArquivoSelecionadoPath] = useState("");
 
   const onDrop = (acceptedFiles: any) => {
-    // console.log("acceptedFiles", acceptedFiles);
-    const nomeArquivo = acceptedFiles[0].name;
-    const extensaoArquivo = nomeArquivo.split(".")[1];
-    const novoNomeArquivo = `${registerForm.values.id_atividade}_${registerForm.values.mocs[index].numero_moc}.${extensaoArquivo}`;
-    const novoArquivo = new File([acceptedFiles[0]], novoNomeArquivo, {
-      type: acceptedFiles[0].type,
-    });
-    registerForm.setFieldValue(`mocs[${index}].arquivo`, novoArquivo);
-    setArquivoSelecionadoPath(novoArquivo.name);
-
     const file = acceptedFiles[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      const base64 = reader.result;
-      registerForm.setFieldValue(`mocs[${index}].anexo`, base64);
-    };
-
-    reader.onerror = (_error) => {
-      toast.error("Erro ao carregar arquivo");
-    };
+    registerForm.setFieldValue(`mocs[${index}].anexo`, file);
+    setArquivoSelecionadoPath(file.name);
   };
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: {
       "application/pdf": [".pdf"],
+      pdf: [".pdf"],
     },
     maxFiles: 1,
     maxSize: 99999999999999,
   });
 
   // console.log("arquivoSelecionadoPath", arquivoSelecionadoPath);
+  // console.log("registerForm", registerForm.values);
 
   return (
     <Flex direction={"row-reverse"} gap={6} align={"center"}>
