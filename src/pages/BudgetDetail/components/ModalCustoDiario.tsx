@@ -177,7 +177,7 @@ function ModalCustoDiario(props: { id: string | undefined }) {
                     <Flex flex={1}>
                       <Button
                         h={"56px"}
-                        borderRadius={"10px"}
+                        borderRadius={"8px"}
                         background={"origem.500"}
                         variant="primary"
                         color="white"
