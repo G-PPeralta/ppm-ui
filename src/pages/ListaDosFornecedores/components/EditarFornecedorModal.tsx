@@ -17,6 +17,7 @@ import {
   ModalCloseButton,
   Text,
   Select,
+  Textarea,
 
   // IconButton,
   // Box,
@@ -101,7 +102,7 @@ export function EditarFornecedorModal({
           EDITAR FORNECEDOR
         </Text>
       </Box> */}
-      <Modal isOpen={isOpen} onClose={onClose} size="sm">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -134,9 +135,9 @@ export function EditarFornecedorModal({
                     borderRadius={"8px"}
                     border={"1px solid #A7A7A7"}
                     mt={"-9px"}
-                    width={"158px"}
+                    width={"290px"}
                     height={"56px"}
-                    color="#949494"
+                    // color="#949494"
                     fontSize={"14px"}
                     fontWeight={"400"}
                     isRequired
@@ -182,7 +183,7 @@ export function EditarFornecedorModal({
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
                   color={"black"}
-                  _placeholder={{ color: "#949494" }}
+                  // _placeholder={{ color: "#949494" }}
                   fontSize={"14px"}
                   width={"158px"}
                   height={"56px"}
@@ -209,7 +210,7 @@ export function EditarFornecedorModal({
                     color="#949494"
                     fontSize="12px"
                     fontWeight="700"
-                    mt={"6px"}
+                    mt={"10px"}
                   >
                     SERVIÇO
                   </FormLabel>
@@ -217,9 +218,9 @@ export function EditarFornecedorModal({
                     borderRadius={"8px"}
                     border={"1px solid #A7A7A7"}
                     mt={"-9px"}
-                    width={"158px"}
+                    width={"224px"}
                     height={"56px"}
-                    color="#949494"
+                    // color="#949494"
                     fontSize={"14px"}
                     fontWeight={"400"}
                     isRequired
@@ -237,18 +238,18 @@ export function EditarFornecedorModal({
                   color="#949494"
                   fontSize="12px"
                   fontWeight="700"
-                  mt={"6px"}
+                  mt={"10px"}
                   htmlFor="orçamento"
                 >
                   RESPONSÁVEL
                 </FormLabel>
                 <Input
                   borderRadius={"8px"}
-                  border={"1px solid #A7A7A7"}
+                  // border={"1px solid #A7A7A7"}
                   mt={"-9px"}
-                  width={"158px"}
+                  width={"224px"}
                   height={"56px"}
-                  color="#949494"
+                  // color="#949494"
                   fontSize={"14px"}
                   fontWeight={"400"}
                   isRequired
@@ -271,18 +272,18 @@ export function EditarFornecedorModal({
               >
                 DESCRIÇÃO
               </FormLabel>
-              <Input
-                borderRadius={"8px"}
-                border={"1px solid #A7A7A7"}
+              <Textarea
+                // borderRadius={"8px"}
+                // border={"1px solid #A7A7A7"}
                 mt={"-9px"}
-                width={"158px"}
-                height={"56px"}
-                color="#949494"
+                width={"428px"}
+                height={"106px"}
+                // color="#949494"
                 fontSize={"14px"}
                 fontWeight={"400"}
                 isRequired
                 placeholder="Descrição"
-                type="text"
+                // type="text"
                 id="descrição"
                 name="descrição"
                 value={descricao}
@@ -291,7 +292,7 @@ export function EditarFornecedorModal({
             </FormControl>
           </ModalBody>
 
-          <ModalFooter justifyContent={"center"}>
+          <ModalFooter justifyContent={"center"} gap={2}>
             <Button
               // background="origem.300"
               variant="primary"
@@ -302,7 +303,7 @@ export function EditarFornecedorModal({
                 color: "white",
               }}
               // onClick={closeModal}
-              width={"128px"}
+              width={"208px"}
               height={"56px"}
               onClick={() => onClose()}
             >
@@ -328,11 +329,11 @@ export function EditarFornecedorModal({
                 background: "origem.600",
                 transition: "all 0.4s",
               }}
-              width={"128px"}
+              width={"208px"}
               height={"56px"}
             >
-              <Text fontSize={"18px"} fontWeight={"700"}>
-                Salvar{" "}
+              <Text fontFamily={"Mulish"} fontSize={"18px"} fontWeight={"700"}>
+                Concluir{" "}
               </Text>
             </Button>
           </ModalFooter>
