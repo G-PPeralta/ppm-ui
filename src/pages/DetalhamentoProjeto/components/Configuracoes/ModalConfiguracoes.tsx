@@ -209,7 +209,7 @@ function ModalConfiguracoes({
                   w={"100%"}
                   gap={"16px"}
                 >
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="responsavel">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         RESPONSÁVEL
@@ -238,7 +238,7 @@ function ModalConfiguracoes({
                     </Select>
                   </FormControl>
 
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="coordenador">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         COORDENADOR
@@ -267,7 +267,7 @@ function ModalConfiguracoes({
                     </Select>
                   </FormControl>
 
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="status">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         STATUS
@@ -292,8 +292,13 @@ function ModalConfiguracoes({
                       {getOptions(optionsStatus, projeto.status)}
                     </Select>
                   </FormControl>
-                  <Flex>
-                    <FormControl pt={"20px"}>
+                  <Flex w={"100%"} justifyContent={"center"}>
+                    <FormControl
+                      pt={"20px"}
+                      w={"232px"}
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                    >
                       <Button
                         w={"232px"}
                         h={"56px"}
@@ -330,10 +335,10 @@ function ModalConfiguracoes({
 
                 <Flex
                   flexDirection={{ base: "column", md: "row" }}
-                  w={"75%"}
+                  w={"100%"}
                   gap={"16px"}
                 >
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="polo">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         POLO
@@ -358,7 +363,7 @@ function ModalConfiguracoes({
                       {getOptions(optionsPolos, projeto.polo)}
                     </Select>
                   </FormControl>
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="local">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         LOCAL
@@ -383,7 +388,7 @@ function ModalConfiguracoes({
                       {getOptions(optionsLocais, projeto.local)}
                     </Select>
                   </FormControl>
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="solicitacao">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         SOLICITAÇÃO
@@ -414,7 +419,7 @@ function ModalConfiguracoes({
                   w={"100%"}
                   gap={"16px"}
                 >
-                  <FormControl w={"480px"}>
+                  <FormControl w={{ sm: "100%", md: "480px" }}>
                     <FormLabel htmlFor="nomeProjeto">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         NOME DO PROJETO
@@ -436,7 +441,7 @@ function ModalConfiguracoes({
                       onChange={(e) => setNomeProjeto(e.target.value)}
                     ></Input>
                   </FormControl>
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="elementoPep">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         ELEMENTO PEP
@@ -464,8 +469,8 @@ function ModalConfiguracoes({
                   w={"100%"}
                   gap={"16px"}
                 >
-                  <FormControl>
-                    <Flex flex={1}>
+                  <Flex flexDirection={"row"} w={"100%"} gap={"16px"}>
+                    <FormControl w={{ sm: "100%", md: "232px" }}>
                       {inicio ? (
                         <DatePicker
                           label={"INICIO"}
@@ -483,10 +488,8 @@ function ModalConfiguracoes({
                           value={new Date().toString()}
                         />
                       )}
-                    </Flex>
-                  </FormControl>
-                  <FormControl>
-                    <Flex flex={1}>
+                    </FormControl>
+                    <FormControl w={{ sm: "100%", md: "232px" }}>
                       {fim ? (
                         <DatePicker
                           label={"FIM"}
@@ -504,10 +507,10 @@ function ModalConfiguracoes({
                           value={new Date().toString()}
                         />
                       )}
-                    </Flex>
-                  </FormControl>
-                  <FormControl>
-                    <Flex flex={1}>
+                    </FormControl>
+                  </Flex>
+                  <Flex flexDirection={"row"} w={"100%"} gap={"16px"}>
+                    <FormControl w={{ sm: "100%", md: "232px" }}>
                       {inicioReal ? (
                         <DatePicker
                           label={"INICIO REAL"}
@@ -525,13 +528,11 @@ function ModalConfiguracoes({
                           value={new Date().toString()}
                         />
                       )}
-                    </Flex>
-                  </FormControl>
-                  <FormControl>
-                    <Flex flex={1}>
+                    </FormControl>
+                    <FormControl w={{ sm: "100%", md: "232px" }}>
                       {fimReal ? (
                         <DatePicker
-                          label={"INICIO REAL"}
+                          label={"FIM REAL"}
                           setDate={setFimReal}
                           required={false}
                           data={fimReal}
@@ -539,22 +540,22 @@ function ModalConfiguracoes({
                         />
                       ) : (
                         <DatePicker
-                          label={"INICIO REAL"}
+                          label={"FIM REAL"}
                           setDate={setFimReal}
                           required={false}
                           data={new Date()}
                           value={new Date().toString()}
                         />
                       )}
-                    </Flex>
-                  </FormControl>
+                    </FormControl>
+                  </Flex>
                 </Flex>
                 <Flex
                   flexDirection={{ base: "column", md: "row" }}
                   w={"100%"}
                   gap={"16px"}
                 >
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="divisao">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         DIVISÃO
@@ -579,7 +580,7 @@ function ModalConfiguracoes({
                       {getOptions(optionsDivisoes, projeto.divisao)}
                     </Select>
                   </FormControl>
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="classificacao">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         CLASSIFICAÇÃO
@@ -604,7 +605,7 @@ function ModalConfiguracoes({
                       {getOptions(optionsClassificacoes, projeto.classificacao)}
                     </Select>
                   </FormControl>
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="tipo">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         TIPO
@@ -629,7 +630,7 @@ function ModalConfiguracoes({
                       {getOptions(optionsTipoProjetos, projeto.tipo)}
                     </Select>
                   </FormControl>
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="gate">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         GATE

@@ -15,7 +15,7 @@ function DatePicker({ setDate, data, label, required }: any) {
         h={"56px"}
         onClick={onClick}
         ref={ref}
-        w={"230px"}
+        w={{ sm: "100%", md: "232px" }}
         fontSize={"14px"}
         fontWeight={"400"}
         _placeholder={{ color: "#2D2926" }}
