@@ -59,7 +59,7 @@ interface Props {
   registerForm: any;
 }
 
-function ModalAdicionarOperacao({
+function ModalEditarOperacao({
   setRefresh,
   refresh,
   editOp,
@@ -323,4 +323,4 @@ function ModalAdicionarOperacao({
   );
 }
 
-export default ModalAdicionarOperacao;
+export default ModalEditarOperacao;
