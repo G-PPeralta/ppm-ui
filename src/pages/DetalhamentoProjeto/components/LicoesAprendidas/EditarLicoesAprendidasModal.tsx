@@ -53,6 +53,13 @@ function EditarLicoesAprendidasModal({
     if (campo === "txt_acao") return acao;
   };
 
+  const handlePatchLicaoAprendida = async () => {
+    const promises = camposParaEditar.map((lic) =>
+      handleUpdateLicoes(idLicao, lic, updatepayload(lic), user?.nome)
+    );
+    await Promise.all(promises);
+  };
+
   const regex = /[^\w\s]/gi;
 
   return (
@@ -214,16 +221,7 @@ function EditarLicoesAprendidasModal({
                   background: "origem.500",
                   transition: "all 0.4s",
                 }}
-                onClick={() => {
-                  camposParaEditar.forEach((lic) =>
-                    handleUpdateLicoes(
-                      idLicao,
-                      lic,
-                      updatepayload(lic),
-                      user?.nome
-                    )
-                  );
-                }}
+                onClick={() => handlePatchLicaoAprendida()}
                 width={"208px"}
                 height={"56px"}
                 fontSize={"18px"}
