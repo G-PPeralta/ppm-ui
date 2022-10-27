@@ -62,6 +62,13 @@ function EditModal({
     if (campo === "txt_acao") return acao;
   };
 
+  const handlePatchLicoes = async () => {
+    const promises = camposParaEditar.map((lic) =>
+      handleUpdateLicoes(idLicao, lic, updatepayload(lic), user?.nome)
+    );
+    await Promise.all(promises);
+  };
+
   return (
     <Flex>
       <Box
@@ -218,16 +225,7 @@ function EditModal({
                   background: "origem.600",
                   transition: "all 0.4s",
                 }}
-                onClick={() => {
-                  camposParaEditar.forEach((lic) =>
-                    handleUpdateLicoes(
-                      idLicao,
-                      lic,
-                      updatepayload(lic),
-                      user?.nome
-                    )
-                  );
-                }}
+                onClick={() => handlePatchLicoes()}
                 width={"208px"}
                 height={"56px"}
                 fontSize={"18px"}
