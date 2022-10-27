@@ -46,7 +46,7 @@ function LicoesAprendidasModal({
   const [categoriaId, setCategoriaId] = useState("");
   const [data, setData] = useState("");
 
-  const [filteredTable, setFilteredTable] = useState([]);
+  const [filteredTable, setFilteredTable] = useState(licoes);
 
   function handleEditLicao(licao: LicoesAprendidasNew): void {
     setEditLicao(licao);
@@ -95,9 +95,10 @@ function LicoesAprendidasModal({
     //     );
     //   return setFilteredTable(filtered);
     // }
+    let filtered = licoes;
 
     if (search) {
-      const filtered = licoes.filter(
+      filtered = licoes.filter(
         (lic: any) =>
           lic.licao_aprendida.toUpperCase().includes(search.toUpperCase()) ||
           lic.acao_e_recomendacao.toUpperCase().includes(search.toUpperCase())
@@ -105,16 +106,14 @@ function LicoesAprendidasModal({
 
       // filtered.length == 0 &&
       //   toast.error("Nenhum dado encontrado com o presente filtro de data");
-      return setFilteredTable(filtered);
     }
 
     if (data) {
-      const filtered = licoes.filter((lic: any) => lic.data.includes(data));
+      filtered = filtered.filter((lic: any) => lic.data.includes(data));
       // filtered.length == 0 &&
       //   toast.error("Nenhum dado encontrado com o presente filtro de data");
-      return setFilteredTable(filtered);
     }
-    setFilteredTable(licoes);
+    if (filtered) setFilteredTable(filtered);
   }
 
   return (
@@ -315,7 +314,7 @@ function LicoesAprendidasModal({
           <ModalBody>
             <TabelaLicoesAprendidas
               onEdit={handleEditLicao}
-              licoes={filteredTable.length > 0 ? filteredTable : licoes}
+              licoes={filteredTable}
             />
             {openModalEdit && (
               <EditarLicoesAprendidasModal
