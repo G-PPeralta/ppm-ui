@@ -245,8 +245,8 @@ function ModalEditarOperacao({
             }}
           >
             <ModalBody mt={3}>
-              <Flex flex={1} mt={5}>
-                <Tabs variant={"unstyled"} isLazy={true} flex={1}>
+              <Flex flex={1} mt={5} w={"100%"}>
+                <Tabs variant={"unstyled"} isLazy={true} flex={1} w={"100%"}>
                   <TabList>
                     <ButtonGroup size="lg" isAttached variant="outline">
                       {botoes.map((botao, index) => (
@@ -270,7 +270,7 @@ function ModalEditarOperacao({
                     </ButtonGroup>
                   </TabList>
 
-                  <TabPanels flex={1}>
+                  <TabPanels flex={1} w={"100%"}>
                     <TabPanel flex={1}>
                       <EditarAtividadeTabGeral registerForm={registerForm} />
                     </TabPanel>

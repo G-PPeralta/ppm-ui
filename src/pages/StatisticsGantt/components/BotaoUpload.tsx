@@ -28,9 +28,6 @@ function BotaoUploadArquivo({ registerForm, index }: Props) {
     maxSize: 99999999999999,
   });
 
-  // console.log("arquivoSelecionadoPath", arquivoSelecionadoPath);
-  // console.log("registerForm", registerForm.values);
-
   return (
     <Flex direction={"row-reverse"} gap={6} align={"center"}>
       <div {...getRootProps()}>
