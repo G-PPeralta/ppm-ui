@@ -16,11 +16,11 @@ export async function patchEditarLicaoAprendida(
 
 export async function patchEditarOcorrencia(
   idAtividade: number,
-  idOcorrencia: number,
+  // idOcorrencia: number,
   payload: any
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.patch(
-    `/estatisticas/cronograma/${idAtividade}/ocorrencia/${idOcorrencia}`,
+  const { data, status } = await api.post(
+    `/ocorrencias/${idAtividade}`,
     payload,
     token()
   );

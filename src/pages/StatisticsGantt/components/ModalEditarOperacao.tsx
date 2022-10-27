@@ -59,34 +59,6 @@ interface Props {
   registerForm: any;
 }
 
-// const ocorrenciasMock = [
-//   {
-//     id: 1,
-//     nome_ocorrencia: "Agda informação técnica / orientação",
-//     horas: "00:00",
-//   },
-//   {
-//     id: 2,
-//     nome_ocorrencia: "Agdo manutenção",
-//     horas: "00:00",
-//   },
-//   {
-//     id: 3,
-//     nome_ocorrencia: "Agdo outros",
-//     horas: "00:00",
-//   },
-//   {
-//     id: 4,
-//     nome_ocorrencia: "Agdo recursos Cia Serviço",
-//     horas: "00:00",
-//   },
-//   {
-//     id: 5,
-//     nome_ocorrencia: "APR",
-//     horas: "00:00",
-//   },
-// ];
-
 function ModalAdicionarOperacao({
   setRefresh,
   refresh,

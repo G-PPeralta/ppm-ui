@@ -44,11 +44,7 @@ function ModalEditarOcorrencia({
   idAtividade,
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useOcorrencias(
-    idOcorrencia,
-    "post",
-    idAtividade
-  );
+  const { registerForm, loading } = useOcorrencias(idAtividade, "patch");
 
   const { refresh, setRefresh } = refreshState;
 
