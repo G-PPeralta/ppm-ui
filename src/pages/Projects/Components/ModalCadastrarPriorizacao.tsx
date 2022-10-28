@@ -505,7 +505,7 @@ function ModalCadastrarPriorizacao({
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red"
+                  color="red.500"
                   onClick={() => {
                     if (setIsPriorizacaoModalOpen)
                       setIsPriorizacaoModalOpen(false);
@@ -518,6 +518,9 @@ function ModalCadastrarPriorizacao({
                   }}
                   w={"208px"}
                   h={"56px"}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   Cancelar
                 </Button>
@@ -526,8 +529,6 @@ function ModalCadastrarPriorizacao({
                   h={"56px"}
                   // disabled={!registerForm.isValid}
                   background="origem.500"
-                  fontSize={"18px"}
-                  fontWeight={"700"}
                   variant="primary"
                   color="white"
                   onClick={() => {
@@ -539,6 +540,9 @@ function ModalCadastrarPriorizacao({
                     background: "origem.600",
                     transition: "all 0.4s",
                   }}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
