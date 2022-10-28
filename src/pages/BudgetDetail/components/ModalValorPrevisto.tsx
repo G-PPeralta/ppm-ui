@@ -139,6 +139,7 @@ function ModalValorPrevisto(props: PropsInterface) {
                 >
                   Cancelar
                 </Button>
+
                 <Button
                   h={"56px"}
                   w={"208px"}
@@ -146,15 +147,15 @@ function ModalValorPrevisto(props: PropsInterface) {
                   background="origem.500"
                   variant="primary"
                   color="white"
+                  _hover={{
+                    background: "origem.600",
+                    transition: "all 0.4s",
+                  }}
                   onClick={() => {
                     handleCadastrar(registerForm, () => {
                       onClose();
                       toogleRender();
                     });
-                  }}
-                  _hover={{
-                    background: "origem.600",
-                    transition: "all 0.4s",
                   }}
                   fontSize="18px"
                   fontWeight={"700"}
@@ -164,7 +165,7 @@ function ModalValorPrevisto(props: PropsInterface) {
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (
                     <>
-                      <Text>Editar Valor</Text>
+                      <Text>Confirmar</Text>
                     </>
                   )}
                 </Button>
