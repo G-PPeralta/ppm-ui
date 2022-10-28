@@ -45,6 +45,7 @@ export function useCadastroPoco(modulo?: string) {
               id: "toast-principal",
             });
             setLoading(false);
+            setInterval(() => window.location.reload(), 1000);
           }
         }
       } catch (error) {
