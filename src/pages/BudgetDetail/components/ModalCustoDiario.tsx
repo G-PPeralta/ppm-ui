@@ -145,7 +145,6 @@ function ModalCustoDiario(props: { id: string | undefined }) {
             color={"white"}
             fontSize={"14px"}
             fontWeight={"700"}
-            fontFamily={"Mulish"}
           >
             Custo Diário
           </ModalHeader>
@@ -226,14 +225,16 @@ function ModalCustoDiario(props: { id: string | undefined }) {
           <ModalFooter justifyContent={"center"}>
             <Flex gap={2}>
               <Button
+                h={"56px"}
+                borderRadius={"10px"}
                 variant="ghost"
                 color="red"
-                onClick={() => onClose()}
                 _hover={{
                   background: "red.500",
                   transition: "all 0.4s",
                   color: "white",
                 }}
+                onClick={() => onClose()}
               >
                 Fechar
               </Button>
