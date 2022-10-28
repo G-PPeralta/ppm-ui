@@ -66,6 +66,22 @@ function AtividadesDraggable({ index, registerForm }: Props) {
     setDraggableId(newId);
   }, []);
 
+  useEffect(() => {
+    const ind = listaTarefas.findIndex(
+      (val) => val.id == registerForm.values.atividades[index].tarefa_id
+    );
+
+    registerForm.setFieldValue(
+      `atividades[${index}].atividade_id_origem`,
+      listaTarefas[ind]?.id_origem || ""
+    );
+
+    registerForm.setFieldValue(
+      `atividades[${index}].area_id`,
+      listaTarefas[ind]?.area_atuacao || ""
+    );
+  }, [registerForm.values]);
+
   return (
     <Draggable draggableId={draggableId} index={index}>
       {(provided) => (
