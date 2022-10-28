@@ -123,7 +123,8 @@ export function ModalAddAtividade(props: PropsType) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Cadastrar
           </ModalHeader>
