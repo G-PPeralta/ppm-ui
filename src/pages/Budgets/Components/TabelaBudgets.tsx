@@ -95,7 +95,7 @@ export function TabelaBudgets(props: TableProps) {
   return (
     <>
       <TableContainer mt={4} mb={3} ml={1} borderRadius={"10px"}>
-        <Table variant="striped" colorScheme="strippedGray">
+        <Table variant="striped" colorScheme={"strippedGray"}>
           <Thead>
             <Tr background="origem.500" color="white">
               <Th

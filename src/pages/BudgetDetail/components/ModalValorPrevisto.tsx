@@ -56,7 +56,7 @@ function ModalValorPrevisto(props: PropsInterface) {
         onClick={onOpen}
       />
 
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -65,7 +65,9 @@ function ModalValorPrevisto(props: PropsInterface) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
             Mobilização/Desmobilização
           </ModalHeader>
@@ -98,7 +100,7 @@ function ModalValorPrevisto(props: PropsInterface) {
                           <InputGroup>
                             <InputGenerico
                               registerForm={registerForm}
-                              nomeInput={"Valor Previsto"}
+                              nomeInput={"VALOR PREVISTO"}
                               propName={"valor"}
                               value={
                                 registerForm.values.valor ||
@@ -121,20 +123,27 @@ function ModalValorPrevisto(props: PropsInterface) {
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
                 <Button
+                  h={"56px"}
+                  w={"208px"}
                   variant="ghost"
-                  color="red"
+                  color="red.500"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: "red.500",
                     transition: "all 0.4s",
                     color: "white",
                   }}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   Cancelar
                 </Button>
                 <Button
+                  h={"56px"}
+                  w={"208px"}
                   disabled={!registerForm.isValid || !registerForm.dirty}
-                  background="origem.300"
+                  background="origem.500"
                   variant="primary"
                   color="white"
                   onClick={() => {
@@ -144,9 +153,12 @@ function ModalValorPrevisto(props: PropsInterface) {
                     });
                   }}
                   _hover={{
-                    background: "origem.500",
+                    background: "origem.600",
                     transition: "all 0.4s",
                   }}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />

@@ -117,21 +117,26 @@ function ModalCustoDiario(props: { id: string | undefined }) {
     <>
       <Button
         h={"56px"}
-        borderRadius={"10px"}
-        background={"white"}
+        w={"208px"}
+        borderRadius={"8px"}
+        fontSize="18px"
+        fontWeight={"700"}
+        fontFamily={"Mulish"}
+        background={"origem.500"}
         border={"2px solid"}
-        color={"origem.500"}
+        color={"white"}
+        alignSelf={"end"}
         _hover={{
-          border: "2px solid",
-          borderColor: "origem.500",
-          background: "origem.500",
+          // border: "2px solid",
+          // borderColor: "origem.500",
+          background: "origem.600",
           transition: "all 0.4s",
           color: "white",
         }}
-        textColor={"origem.500"}
+        // textColor={"origem.500"}
         onClick={onOpen}
       >
-        Modal Custo Diário
+        Custo Diário
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size="3xl">
@@ -177,6 +182,7 @@ function ModalCustoDiario(props: { id: string | undefined }) {
                     <Flex flex={1}>
                       <Button
                         h={"56px"}
+                        w={"101px"}
                         borderRadius={"8px"}
                         background={"origem.500"}
                         variant="primary"
@@ -186,7 +192,9 @@ function ModalCustoDiario(props: { id: string | undefined }) {
                           transition: "all 0.4s",
                         }}
                         rightIcon={<BsSearch />}
-                        fontWeight={"bold"}
+                        fontSize="18px"
+                        fontWeight={"700"}
+                        fontFamily={"Mulish"}
                         onClick={filterByProject}
                       >
                         Filtrar

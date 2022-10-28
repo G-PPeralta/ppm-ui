@@ -32,8 +32,9 @@ export function Budgets() {
               bg={"white"}
               borderRadius={{ base: "xl", sm: "xl" }}
             >
-              <TituloPagina>Gerencial do Orçamento</TituloPagina>
-
+              <Flex ml={-3} mt={-1}>
+                <TituloPagina>Gerencial do Orçamento</TituloPagina>
+              </Flex>
               <Flex
                 direction={wd > 600 ? "row" : "column"}
                 wrap={"wrap"}
@@ -43,7 +44,7 @@ export function Budgets() {
                 flex={1}
               >
                 <Flex align={"end"} gap={4} wrap={"wrap"} flex={1}>
-                  <Flex direction={"column"} w={"208px"}>
+                  <Flex direction={"column"} w={"208px"} ml={-3}>
                     <Text
                       fontWeight={"bold"}
                       fontSize={"12px"}
@@ -65,7 +66,7 @@ export function Budgets() {
                   <Flex flex={1}>
                     <Button
                       h={"56px"}
-                      borderRadius={"10px"}
+                      borderRadius={"8px"}
                       background={"origem.500"}
                       variant="primary"
                       color="white"
@@ -74,7 +75,9 @@ export function Budgets() {
                         transition: "all 0.4s",
                       }}
                       rightIcon={<BsSearch />}
-                      fontWeight={"bold"}
+                      fontSize="18px"
+                      fontWeight={"700"}
+                      fontFamily={"Mulish"}
                       onClick={filterByProject}
                     >
                       Filtrar
@@ -82,8 +85,9 @@ export function Budgets() {
                   </Flex>
                 </Flex>
               </Flex>
-
-              {budgetFilter && <TabelaBudgets data={budgetFilter} />}
+              <Flex ml={-3} mr={-3} flexDir={"column"}>
+                {budgetFilter && <TabelaBudgets data={budgetFilter} />}
+              </Flex>
             </Box>
           </Flex>
         ) : (
