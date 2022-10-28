@@ -214,6 +214,9 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                   borderRadius={"8px"}
                   w={"208px"}
                   h={"56px"}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />

@@ -40,8 +40,8 @@ function ModalDeletarPriorizacao() {
           backgroundColor: "#F40606",
           color: "white",
         }}
-        w={"14px"}
-        h={"18px"}
+        // w={"14px"}
+        // h={"18px"}
       >
         <FiTrash size={"13px"} />
       </IconButton>

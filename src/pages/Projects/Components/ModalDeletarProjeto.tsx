@@ -51,13 +51,13 @@ function ModalDeletarProjeto(projeto: id) {
         backgroundColor={"transparent"}
         aria-label="Plus sign"
         _hover={{
-          backgroundColor: "#F40606",
+          backgroundColor: "#F94144",
           color: "white",
         }}
-        w={"14px"}
-        h={"18px"}
+        // w={"14px"}
+        // h={"18px"}
       >
-        <FiTrash size={"13px"} />
+        <FiTrash />
       </IconButton>
       <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />

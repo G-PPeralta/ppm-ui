@@ -55,7 +55,9 @@ export function Infographics() {
   }, []);
 
   useEffect(() => {
-    handleGetAll();
+    setTimeout(() => {
+      handleGetAll();
+    }, 3000);
   }, [refresh]);
 
   return (
