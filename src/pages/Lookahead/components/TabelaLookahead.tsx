@@ -29,14 +29,17 @@ import PaginacaoTabela from "components/PaginacaoTabela";
 
 interface TableProps {
   data: AtividadesLookahead[];
+  projetos: any;
 }
 
 export function TabelaLookahead(props: TableProps) {
-  const { data } = props;
+  const { data, projetos } = props;
   // const [pagAtual, setPagAtual] = useState(1);
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
   // const [perPage, setPerPage] = useState<number>(5);
+
+  // console.log(projetos);
 
   const total = data.length;
   // const planejado = data.reduce((i, value) => i + value.planejado, 0);
@@ -103,9 +106,18 @@ export function TabelaLookahead(props: TableProps) {
           )} */}
           {act.id}
         </Td>
+        {/* <Td textAlign={"center"} color={"#2D2926"}>
+            <Link to={`/lookahead-detalhe/${act.id}`}>
+              <Text color="blue">{act.nom_atividade}</Text>
+            </Link>
+          </Td> */}
         <Td textAlign={"center"} color={"#2D2926"}>
           <Link to={`/lookahead-detalhe/${act.id}`}>
-            <Text color="blue">{act.nom_atividade}</Text>
+            <Text color="blue">
+              {projetos &&
+                projetos.find((products: any) => products.id === act.id_projeto)
+                  .nome_projeto}
+            </Text>
           </Link>
         </Td>
         <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
