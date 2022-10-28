@@ -5,6 +5,8 @@ import { Flex, Td, Text, Tr } from "@chakra-ui/react";
 import FiltragemTabela from "components/FiltragemTabela";
 import TabelaGenerica from "components/TabelaGenerica";
 
+import { formatMinutesToHHmm } from "utils/formatDate";
+
 import ModalEditarOcorrencia from "./ModalEditarOcorrencia";
 
 interface RefreshState {
@@ -33,12 +35,6 @@ function EditarAtividadeTabOcorrencias({ registerForm, refreshState }: Props) {
   const header = ["NOME DO CAMPO PERSONALIZADO", "HORAS", "AÇÕES"];
   const footer = [""];
 
-  // const handleDeletar = (id: number, licao: string) => {
-  //   toast.success(`${licao} abrir modal!`, {
-  //     id: "toast-principal",
-  //   });
-  // };
-
   function Body() {
     return (
       <>
@@ -51,7 +47,7 @@ function EditarAtividadeTabOcorrencias({ registerForm, refreshState }: Props) {
                   <Text>{linhaTabela.nome_ocorrencia}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.horas}</Text>
+                  <Text>{formatMinutesToHHmm(linhaTabela.impacto)}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Flex gap={2} align={"center"} justify={"center"}>

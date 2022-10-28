@@ -134,20 +134,29 @@ function ModalConfiguracoes({
     setRefresh(!refresh);
   };
 
-  function getOptions(options: any) {
-    return options.map(
-      (option: {
-        value: string | number | readonly string[] | undefined;
-        label:
-          | string
-          | number
-          | boolean
-          | ReactElement<any, string | JSXElementConstructor<any>>
-          | ReactFragment
-          | ReactPortal
-          | null
-          | undefined;
-      }) => <option value={option.value}>{option.label}</option>
+  function getOptions(options: any, selected: any) {
+    const filtered = options.filter((option: any) => option.label !== selected);
+
+    return filtered.map(
+      (
+        option: {
+          value: string | number | readonly string[] | undefined;
+          label:
+            | string
+            | number
+            | boolean
+            | ReactElement<any, string | JSXElementConstructor<any>>
+            | ReactFragment
+            | ReactPortal
+            | null
+            | undefined;
+        },
+        index: any
+      ) => (
+        <option value={option.value} key={index}>
+          {option.label}
+        </option>
+      )
     );
   }
 
@@ -200,7 +209,7 @@ function ModalConfiguracoes({
                   w={"100%"}
                   gap={"16px"}
                 >
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="responsavel">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         RESPONSÁVEL
@@ -222,11 +231,14 @@ function ModalConfiguracoes({
                         setReponsavel(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsResponsaveis)}
+                      {getOptions(
+                        optionsResponsaveis,
+                        projeto.nome_responsavel
+                      )}
                     </Select>
                   </FormControl>
 
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="coordenador">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         COORDENADOR
@@ -248,11 +260,14 @@ function ModalConfiguracoes({
                         setCoordenador(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsCoordenadores)}
+                      {getOptions(
+                        optionsCoordenadores,
+                        projeto.coordenador_nome
+                      )}
                     </Select>
                   </FormControl>
 
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="status">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         STATUS
@@ -269,16 +284,21 @@ function ModalConfiguracoes({
                       id="statusId"
                       name="status"
                       width={"100%"}
-                      placeholder={projeto?.status}
+                      placeholder={projeto.status}
                       onChange={(e) => {
                         setStatus(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsStatus)}
+                      {getOptions(optionsStatus, projeto.status)}
                     </Select>
                   </FormControl>
-                  <Flex>
-                    <FormControl pt={"20px"}>
+                  <Flex w={"100%"} justifyContent={"center"}>
+                    <FormControl
+                      pt={"20px"}
+                      w={"232px"}
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                    >
                       <Button
                         w={"232px"}
                         h={"56px"}
@@ -315,10 +335,10 @@ function ModalConfiguracoes({
 
                 <Flex
                   flexDirection={{ base: "column", md: "row" }}
-                  w={"75%"}
+                  w={"100%"}
                   gap={"16px"}
                 >
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="polo">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         POLO
@@ -335,15 +355,15 @@ function ModalConfiguracoes({
                       id="poloId"
                       name="polo"
                       width={"100%"}
-                      placeholder={projeto?.polo}
+                      placeholder={projeto.polo}
                       onChange={(e) => {
                         setPolo(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsPolos)}
+                      {getOptions(optionsPolos, projeto.polo)}
                     </Select>
                   </FormControl>
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="local">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         LOCAL
@@ -365,10 +385,10 @@ function ModalConfiguracoes({
                         setLocal(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsLocais)}
+                      {getOptions(optionsLocais, projeto.local)}
                     </Select>
                   </FormControl>
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="solicitacao">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         SOLICITAÇÃO
@@ -385,12 +405,12 @@ function ModalConfiguracoes({
                       id="solicitacaoId"
                       name="solicitacao"
                       width={"100%"}
-                      placeholder={projeto?.solicitante}
+                      placeholder={projeto.solicitante}
                       onChange={(e) => {
                         setSolicitacao(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsSolicitantes)}
+                      {getOptions(optionsSolicitantes, projeto.solicitante)}
                     </Select>
                   </FormControl>
                 </Flex>
@@ -399,7 +419,7 @@ function ModalConfiguracoes({
                   w={"100%"}
                   gap={"16px"}
                 >
-                  <FormControl w={"480px"}>
+                  <FormControl w={{ sm: "100%", md: "480px" }}>
                     <FormLabel htmlFor="nomeProjeto">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         NOME DO PROJETO
@@ -421,7 +441,7 @@ function ModalConfiguracoes({
                       onChange={(e) => setNomeProjeto(e.target.value)}
                     ></Input>
                   </FormControl>
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="elementoPep">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         ELEMENTO PEP
@@ -449,8 +469,8 @@ function ModalConfiguracoes({
                   w={"100%"}
                   gap={"16px"}
                 >
-                  <FormControl>
-                    <Flex flex={1}>
+                  <Flex flexDirection={"row"} w={"100%"} gap={"16px"}>
+                    <FormControl w={{ sm: "100%", md: "232px" }}>
                       {inicio ? (
                         <DatePicker
                           label={"INICIO"}
@@ -468,10 +488,8 @@ function ModalConfiguracoes({
                           value={new Date().toString()}
                         />
                       )}
-                    </Flex>
-                  </FormControl>
-                  <FormControl>
-                    <Flex flex={1}>
+                    </FormControl>
+                    <FormControl w={{ sm: "100%", md: "232px" }}>
                       {fim ? (
                         <DatePicker
                           label={"FIM"}
@@ -489,10 +507,10 @@ function ModalConfiguracoes({
                           value={new Date().toString()}
                         />
                       )}
-                    </Flex>
-                  </FormControl>
-                  <FormControl>
-                    <Flex flex={1}>
+                    </FormControl>
+                  </Flex>
+                  <Flex flexDirection={"row"} w={"100%"} gap={"16px"}>
+                    <FormControl w={{ sm: "100%", md: "232px" }}>
                       {inicioReal ? (
                         <DatePicker
                           label={"INICIO REAL"}
@@ -510,13 +528,11 @@ function ModalConfiguracoes({
                           value={new Date().toString()}
                         />
                       )}
-                    </Flex>
-                  </FormControl>
-                  <FormControl>
-                    <Flex flex={1}>
+                    </FormControl>
+                    <FormControl w={{ sm: "100%", md: "232px" }}>
                       {fimReal ? (
                         <DatePicker
-                          label={"INICIO REAL"}
+                          label={"FIM REAL"}
                           setDate={setFimReal}
                           required={false}
                           data={fimReal}
@@ -524,22 +540,22 @@ function ModalConfiguracoes({
                         />
                       ) : (
                         <DatePicker
-                          label={"INICIO REAL"}
+                          label={"FIM REAL"}
                           setDate={setFimReal}
                           required={false}
                           data={new Date()}
                           value={new Date().toString()}
                         />
                       )}
-                    </Flex>
-                  </FormControl>
+                    </FormControl>
+                  </Flex>
                 </Flex>
                 <Flex
                   flexDirection={{ base: "column", md: "row" }}
                   w={"100%"}
                   gap={"16px"}
                 >
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="divisao">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         DIVISÃO
@@ -556,15 +572,15 @@ function ModalConfiguracoes({
                       id="divisaoId"
                       name="divisao"
                       width={"100%"}
-                      placeholder={projeto?.divisao}
+                      placeholder={projeto.divisao}
                       onChange={(e) => {
                         setDivisao(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsDivisoes)}
+                      {getOptions(optionsDivisoes, projeto.divisao)}
                     </Select>
                   </FormControl>
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="classificacao">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         CLASSIFICAÇÃO
@@ -581,15 +597,15 @@ function ModalConfiguracoes({
                       id="classificacaoId"
                       name="classificacao"
                       width={"100%"}
-                      placeholder={projeto?.classificacao}
+                      placeholder={projeto.classificacao}
                       onChange={(e) => {
                         setClassificacao(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsClassificacoes)}
+                      {getOptions(optionsClassificacoes, projeto.classificacao)}
                     </Select>
                   </FormControl>
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="tipo">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         TIPO
@@ -606,15 +622,15 @@ function ModalConfiguracoes({
                       id="tipoId"
                       name="tipo"
                       width={"100%"}
-                      placeholder={projeto?.tipo}
+                      placeholder={projeto.tipo}
                       onChange={(e) => {
                         setTipo(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsTipoProjetos)}
+                      {getOptions(optionsTipoProjetos, projeto.tipo)}
                     </Select>
                   </FormControl>
-                  <FormControl w={"232px"}>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
                     <FormLabel htmlFor="gate">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         GATE
@@ -631,12 +647,12 @@ function ModalConfiguracoes({
                       id="gateId"
                       name="gate"
                       width={"100%"}
-                      placeholder={projeto?.gate}
+                      placeholder={projeto.gate}
                       onChange={(e) => {
                         setGate(+e.target.value);
                       }}
                     >
-                      {getOptions(optionsGates)}
+                      {getOptions(optionsGates, projeto.gate)}
                     </Select>
                   </FormControl>
                 </Flex>

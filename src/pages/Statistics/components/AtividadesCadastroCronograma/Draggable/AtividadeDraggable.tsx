@@ -19,6 +19,8 @@ import { Operacao } from "interfaces/Estatisticas";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
+import { getDuracaoHorasAdicionarAtividade } from "services/get/Estatisticas";
+
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
 import { ModalFiltrarAtividade } from "../ModalFiltrarAtividade";
 import DateTimePicker from "./DateTimePicker";
@@ -76,10 +78,6 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
   };
 
   function filterData(data: OpcoesFiltro) {
-    // registerForm.setFieldValue(
-    //   `atividades[${index}].operacao_id`,
-    //   data.operacao
-    // );
     registerForm.setFieldValue(
       `atividades[${index}].data_inicio`,
       data.dataInicio
@@ -88,34 +86,26 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     registerForm.setFieldValue(`atividades[${index}].duracao`, data.duracao);
   }
 
-  // const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
-  //   value: poco.id,
-  //   label: poco.tipo,
-  // }));
-
-  // const optionsResponsaveis = listaResponsaveis.map(
-  //   (responsavel: Responsavel) => ({
-  //     value: responsavel.id,
-  //     label: responsavel.nome,
-  //   })
-  // );
+  const MediaHorasPorOperacao = async (id: number) => {
+    const horasDuracao = await getDuracaoHorasAdicionarAtividade(id);
+    registerForm.setFieldValue(
+      `atividades[${index}].duracao`,
+      horasDuracao.data.hrs_media
+    );
+  };
 
   const optionsOperacao = listaOperacao.map((operacao: Operacao) => ({
     value: operacao.id,
     label: operacao.nom_operacao,
   }));
   const getValue = (options: any, i: number, chave: string) => {
-    // if (operacao) {
-    //   const obj = options.find((opt: Option) => opt.value == operacao);
-    //   return {
-    //     value: obj.value,
-    //     label: obj.label,
-    //   };
-    // }
-
     const index = options
       .map(({ value }: any) => value)
       .indexOf(registerForm?.values?.atividades?.[i][chave]);
+
+    const idOperacao = options?.[index]?.value;
+
+    MediaHorasPorOperacao(idOperacao);
 
     return {
       value: options?.[index]?.value,
