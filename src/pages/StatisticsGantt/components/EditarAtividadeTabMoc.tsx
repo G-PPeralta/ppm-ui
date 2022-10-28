@@ -19,6 +19,8 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
       ...mocs,
       {
         numero_moc: "",
+        anexo: "",
+        arquivo: "",
       },
     ]);
   };
@@ -36,7 +38,7 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
   return (
     <Flex w={"100%"} direction={"column"} gap={4}>
       <Flex flex={1} justify={"space-between"} direction={"column"} gap={4}>
-        {registerForm.values.mocs.map((_moc: any, index: number) => (
+        {registerForm.values.mocs.map((moc: any, index: number) => (
           <>
             <Flex gap={4} justify={"space-between"} align={"end"} key={index}>
               <Flex w={"50%"} align={"end"} gap={2}>
@@ -67,7 +69,11 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
                   onClick={() => removerMoc(index)}
                 />
               </Flex>
-              <BotaoUploadArquivo registerForm={registerForm} index={index} />
+              <BotaoUploadArquivo
+                registerForm={registerForm}
+                index={index}
+                nomeArquivo={moc.anexo}
+              />
             </Flex>
           </>
         ))}

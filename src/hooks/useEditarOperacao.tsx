@@ -109,10 +109,7 @@ export function useEditarOperacao(
         anotacoes: {
           anotacoes: values.anotacoes,
         },
-        mocs: values.mocs.map((moc: any) => ({
-          numero_moc: moc.numero_moc,
-          anexo: `${values.id_atividade}_${moc.numero_moc}`,
-        })),
+        mocs: values.mocs,
       };
 
       setLoading(true);
@@ -122,7 +119,7 @@ export function useEditarOperacao(
         values.mocs.map(async (moc: any) => {
           if (moc.anexo) {
             const formData = new FormData();
-            formData.append("files", moc.anexo);
+            formData.append("files", moc.arquivo);
 
             await uploadArquivo(formData);
           }

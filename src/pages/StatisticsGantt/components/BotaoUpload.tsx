@@ -1,25 +1,34 @@
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
+import toast from "react-hot-toast";
+import { AiFillCloseCircle } from "react-icons/ai";
 import { BsFillCloudArrowUpFill } from "react-icons/bs";
 
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, IconButton, Text } from "@chakra-ui/react";
+
+import { getArquivoPdf } from "services/get/Estatisticas";
 
 interface Props {
   registerForm: any;
   index: number;
+  nomeArquivo: string;
 }
 
-function BotaoUploadArquivo({ registerForm, index }: Props) {
-  const [arquivoSelecionadoPath, setArquivoSelecionadoPath] = useState("");
+function BotaoUploadArquivo({ registerForm, index, nomeArquivo }: Props) {
+  const [nomeArquivoSelecionado, setNomeArquivoSelecionado] =
+    useState(nomeArquivo);
+  const [arquivoSelecionado, setArquivoSelecionado] = useState("");
 
   const onDrop = (acceptedFiles: any) => {
     const file = acceptedFiles[0];
+    setArquivoSelecionado(file.name);
     const nomeArquivo = `${registerForm.values.id_atividade}_${registerForm.values.mocs[index].numero_moc}.pdf`;
     const fileRenomeado = new File([file], nomeArquivo, {
       type: file.type,
     });
-    registerForm.setFieldValue(`mocs[${index}].anexo`, fileRenomeado);
-    setArquivoSelecionadoPath(file.name);
+    registerForm.setFieldValue(`mocs[${index}].arquivo`, fileRenomeado);
+    registerForm.setFieldValue(`mocs[${index}].anexo`, fileRenomeado.name);
+    setNomeArquivoSelecionado(file.name);
   };
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -31,6 +40,22 @@ function BotaoUploadArquivo({ registerForm, index }: Props) {
     maxFiles: 1,
     maxSize: 99999999999999,
   });
+
+  const handleTeste = async () => {
+    try {
+      if (arquivoSelecionado.length === 0) {
+        const nomeArquivoSemExtensao = nomeArquivo.split(".")[0];
+        const { data } = await getArquivoPdf(nomeArquivoSemExtensao);
+        const arquivo = new File([data], nomeArquivo, {
+          type: "application/pdf",
+        });
+        const fileURL = URL.createObjectURL(arquivo);
+        window.open(fileURL);
+      }
+    } catch (error) {
+      toast.error("Erro ao abrir arquivo");
+    }
+  };
 
   return (
     <Flex direction={"row-reverse"} gap={6} align={"center"}>
@@ -53,9 +78,39 @@ function BotaoUploadArquivo({ registerForm, index }: Props) {
           Anexar
         </Button>
       </div>
-      <Text fontSize={"12px"} fontWeight={"semibold"}>
-        {arquivoSelecionadoPath}
-      </Text>
+      {nomeArquivoSelecionado !== "" && (
+        <Flex gap={1} align={"center"}>
+          <IconButton
+            isRound
+            variant={"ghost"}
+            size={"xs"}
+            aria-label="Botão excluir anexo"
+            color={"red.500"}
+            _hover={{
+              background: "transparent",
+              transition: "all 0.4s",
+              color: "red.600",
+              size: "sm",
+            }}
+            icon={<AiFillCloseCircle size={16} />}
+            onClick={() => {
+              registerForm.setFieldValue(`mocs[${index}].arquivo`, "");
+              registerForm.setFieldValue(`mocs[${index}].anexo`, "");
+              setNomeArquivoSelecionado("");
+            }}
+          />
+
+          <Text
+            fontSize={"12px"}
+            fontWeight={"semibold"}
+            onClick={() => {
+              handleTeste();
+            }}
+          >
+            {nomeArquivoSelecionado}
+          </Text>
+        </Flex>
+      )}
     </Flex>
   );
 }
