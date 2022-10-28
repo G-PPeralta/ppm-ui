@@ -48,7 +48,6 @@ function ModalEditarSPT({ column, refresh, setRefresh }: any) {
   };
 
   useEffect(() => {
-    console.log("heyheyhey", column.pocos);
     setPocos(column.pocos);
   }, [column]);
 
