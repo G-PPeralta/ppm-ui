@@ -26,10 +26,9 @@ import {
 import { Ring } from "@uiball/loaders";
 import { Projeto } from "interfaces/Budgets";
 
-// import RealInput from "components/RealInput/input";
 import InputGenerico from "components/InputGenerico";
 import { RequiredField } from "components/RequiredField/RequiredField";
-import { TextError } from "components/TextError";
+// import { TextError } from "components/TextError";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
@@ -135,9 +134,9 @@ function ModalGestaoDeCusto(props: PropsInterface) {
                             value={registerForm.values.data}
                             onChange={registerForm.handleChange}
                           />
-                          {registerForm.errors.data && (
+                          {/* {registerForm.errors.data && (
                             <TextError>{registerForm.errors.data}</TextError>
-                          )}
+                         )} */}
                         </FormControl>
                       </Flex>
                       <FormControl>
@@ -159,11 +158,11 @@ function ModalGestaoDeCusto(props: PropsInterface) {
                             ))}
                         </Select>
 
-                        {registerForm.errors.fornecedor && (
+                        {/* {registerForm.errors.fornecedor && (
                           <TextError>
                             {registerForm.errors.fornecedor}
                           </TextError>
-                        )}
+                       )} */}
                       </FormControl>
                       <Flex
                         flexDirection={useBreakpointValue({
@@ -192,9 +191,10 @@ function ModalGestaoDeCusto(props: PropsInterface) {
                                 <option value={d.id}>{d.classe_servico}</option>
                               ))}
                           </Select>
-                          {registerForm.errors.servico && (
+                          {/*  {registerForm.errors.servico && (
                             <TextError>{registerForm.errors.servico}</TextError>
                           )}
+                          */}
                         </FormControl>
                         <FormControl>
                           <Flex gap={1}>
@@ -219,9 +219,9 @@ function ModalGestaoDeCusto(props: PropsInterface) {
                             size="md"
                             type="text"
                           />
-                          {registerForm.errors.pedido && (
+                          {/*  {registerForm.errors.pedido && (
                             <TextError>{registerForm.errors.pedido}</TextError>
-                          )}
+                        )} */}
                         </FormControl>
                       </Flex>
 
@@ -241,11 +241,11 @@ function ModalGestaoDeCusto(props: PropsInterface) {
                           onChange={registerForm.handleChange}
                         />
 
-                        {registerForm.errors.pedido_obs && (
+                        {/* {registerForm.errors.pedido_obs && (
                           <TextError>
                             {registerForm.errors.pedido_obs}
                           </TextError>
-                        )}
+                        )} */}
                       </FormControl>
                     </Flex>
                   </Stack>
