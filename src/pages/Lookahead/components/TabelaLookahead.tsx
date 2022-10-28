@@ -95,7 +95,7 @@ export function TabelaLookahead(props: TableProps) {
   const tableData = data.slice(from, to).map((act, key) => (
     <>
       {/* <Tr key={key} backgroundColor={key % 2 == 1 ? "#F9F9F9" : "#FFF"}> */}
-      <Tr key={key}>
+      <Tr key={act.id}>
         <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
           {/* {budget.filhos && (
             <Icon
