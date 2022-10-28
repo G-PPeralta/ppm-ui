@@ -92,41 +92,45 @@ export function TabelaLookahead(props: TableProps) {
   //   paginate(pagAtual);
   // }, [from, to]);
 
-  const tableData = data.slice(from, to).map((act, key) => (
-    <>
-      {/* <Tr key={key} backgroundColor={key % 2 == 1 ? "#F9F9F9" : "#FFF"}> */}
-      <Tr key={act.id}>
-        <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-          {/* {budget.filhos && (
+  const tableData = data
+    .sort((a, b) => a.id - b.id)
+    .slice(from, to)
+    .map((act) => (
+      <>
+        {/* <Tr key={key} backgroundColor={key % 2 == 1 ? "#F9F9F9" : "#FFF"}> */}
+        <Tr key={act.id}>
+          <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+            {/* {budget.filhos && (
             <Icon
               className="cursor"
               onClick={() => toggleAcordion(key)}
               as={FiArrowDown}
             ></Icon>
           )} */}
-          {act.id}
-        </Td>
-        {/* <Td textAlign={"center"} color={"#2D2926"}>
+            {act.id}
+          </Td>
+          {/* <Td textAlign={"center"} color={"#2D2926"}>
             <Link to={`/lookahead-detalhe/${act.id}`}>
               <Text color="blue">{act.nom_atividade}</Text>
             </Link>
           </Td> */}
-        <Td textAlign={"center"} color={"#2D2926"}>
-          <Link to={`/lookahead-detalhe/${act.id}`}>
-            <Text color="blue">
-              {projetos &&
-                projetos.find((products: any) => products.id === act.id_projeto)
-                  .nome_projeto}
-            </Text>
-          </Link>
-        </Td>
-        <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-          {" "}
-          -{" "}
-        </Td>
-      </Tr>
+          <Td textAlign={"center"} color={"#2D2926"}>
+            <Link to={`/lookahead-detalhe/${act.id}`}>
+              <Text color="blue">
+                {projetos &&
+                  projetos.find(
+                    (products: any) => products.id === act.id_projeto
+                  ).nome_projeto}
+              </Text>
+            </Link>
+          </Td>
+          <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+            {" "}
+            -{" "}
+          </Td>
+        </Tr>
 
-      {/* {budget.filhos &&
+        {/* {budget.filhos &&
         budget.filhos.map((d) => (
           <Tr className={"hide item-" + key} key={d.id}>
             <Td>{d.item}</Td>
@@ -138,8 +142,8 @@ export function TabelaLookahead(props: TableProps) {
             <Td>{d.descricao}</Td>
           </Tr>
         ))} */}
-    </>
-  ));
+      </>
+    ));
 
   return (
     <>
