@@ -16,6 +16,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FerramentasAtividade } from "interfaces/lookahead";
+import moment from "moment";
 
 interface TableProps {
   semana?: string;
@@ -109,6 +110,9 @@ export function TabelaFerramentas(props: TableProps) {
                     <CSVLink
                       data={ferramentasData.filter((x) => x.tipo == "f")}
                       headers={headers}
+                      filename={`ferramentas_lookahead${moment().format(
+                        "DDMMYYYY_hhmmss"
+                      )}`}
                     >
                       <Button
                         variant="ghost"
