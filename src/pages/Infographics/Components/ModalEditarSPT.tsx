@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 import {
@@ -46,6 +46,11 @@ function ModalEditarSPT({ column, refresh, setRefresh }: any) {
     setRefresh(!refresh);
     onClose();
   };
+
+  useEffect(() => {
+    console.log("heyheyhey", column.pocos);
+    setPocos(column.pocos);
+  }, [column]);
 
   return (
     <>
