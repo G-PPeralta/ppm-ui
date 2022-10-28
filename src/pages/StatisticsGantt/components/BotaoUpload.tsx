@@ -14,7 +14,11 @@ function BotaoUploadArquivo({ registerForm, index }: Props) {
 
   const onDrop = (acceptedFiles: any) => {
     const file = acceptedFiles[0];
-    registerForm.setFieldValue(`mocs[${index}].anexo`, file);
+    const nomeArquivo = `${registerForm.values.id_atividade}_${registerForm.values.mocs[index].numero_moc}.pdf`;
+    const fileRenomeado = new File([file], nomeArquivo, {
+      type: file.type,
+    });
+    registerForm.setFieldValue(`mocs[${index}].anexo`, fileRenomeado);
     setArquivoSelecionadoPath(file.name);
   };
 
@@ -49,7 +53,9 @@ function BotaoUploadArquivo({ registerForm, index }: Props) {
           Anexar
         </Button>
       </div>
-      <Text>{arquivoSelecionadoPath}</Text>
+      <Text fontSize={"12px"} fontWeight={"semibold"}>
+        {arquivoSelecionadoPath}
+      </Text>
     </Flex>
   );
 }
