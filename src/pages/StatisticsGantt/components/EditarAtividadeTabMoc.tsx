@@ -1,11 +1,12 @@
-import { BsFillCloudArrowUpFill } from "react-icons/bs";
 import { FiPlus, FiTrash } from "react-icons/fi";
 
-import { Button, Flex, IconButton } from "@chakra-ui/react";
+import { Flex, IconButton } from "@chakra-ui/react";
 
 import InputGenerico from "components/InputGenerico";
 
 import { regexCaracteresEspeciais } from "utils/regex";
+
+import BotaoUploadArquivo from "./BotaoUpload";
 
 interface Props {
   registerForm: any;
@@ -36,52 +37,39 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
     <Flex w={"100%"} direction={"column"} gap={4}>
       <Flex flex={1} justify={"space-between"} direction={"column"} gap={4}>
         {registerForm.values.mocs.map((_moc: any, index: number) => (
-          <Flex gap={4} justify={"space-between"} align={"end"} key={index}>
-            <Flex w={"50%"} align={"end"} gap={2}>
-              <InputGenerico
-                registerForm={registerForm}
-                nomeInput={"NÚMERO DA MOC"}
-                propName={`mocs[${index}].numero_moc`}
-                value={regexCaracteresEspeciais(
-                  registerForm.values.mocs[index].numero_moc
-                )}
-                required={false}
-                placeholder={"Número da MOC"}
-                maxLength={100}
-              />
-              <IconButton
-                aria-label="Botão de Deletar"
-                icon={<FiTrash size={20} />}
-                borderRadius={"10px"}
-                h={"56px"}
-                w={"56px"}
-                background={"transparent"}
-                color={"red.500"}
-                _hover={{
-                  background: "red.500",
-                  transition: "all 0.4s",
-                  color: "white",
-                }}
-                onClick={() => removerMoc(index)}
-              />
+          <>
+            <Flex gap={4} justify={"space-between"} align={"end"} key={index}>
+              <Flex w={"50%"} align={"end"} gap={2}>
+                <InputGenerico
+                  registerForm={registerForm}
+                  nomeInput={"NÚMERO DA MOC"}
+                  propName={`mocs[${index}].numero_moc`}
+                  value={regexCaracteresEspeciais(
+                    registerForm.values.mocs[index].numero_moc
+                  )}
+                  required={false}
+                  placeholder={"Número da MOC"}
+                  maxLength={100}
+                />
+                <IconButton
+                  aria-label="Botão de Deletar"
+                  icon={<FiTrash size={20} />}
+                  borderRadius={"10px"}
+                  h={"56px"}
+                  w={"56px"}
+                  background={"transparent"}
+                  color={"red.500"}
+                  _hover={{
+                    background: "red.500",
+                    transition: "all 0.4s",
+                    color: "white",
+                  }}
+                  onClick={() => removerMoc(index)}
+                />
+              </Flex>
+              <BotaoUploadArquivo registerForm={registerForm} index={index} />
             </Flex>
-            <Button
-              h={"56px"}
-              borderRadius={"10px"}
-              background={"white"}
-              color={"origem.500"}
-              _hover={{
-                background: "origem.500",
-                transition: "all 0.4s",
-                color: "white",
-              }}
-              colorScheme="blue"
-              variant="ghost"
-              rightIcon={<BsFillCloudArrowUpFill size={24} />}
-            >
-              Anexar
-            </Button>
-          </Flex>
+          </>
         ))}
       </Flex>
       <Flex

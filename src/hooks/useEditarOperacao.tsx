@@ -14,6 +14,7 @@ import {
   getAreaAtuacaoList,
   getResponsavelList,
 } from "services/get/Infograficos";
+import { uploadArquivo } from "services/post/Upload";
 import { patchOperacoesEstatisticas } from "services/update/OperacoesEstatisticas";
 
 import { useAuth } from "./useAuth";
@@ -68,6 +69,7 @@ export function useEditarOperacao(
     mocs: [
       {
         numero_moc: "",
+        anexo: "",
       },
     ],
     ocorrencias: [
@@ -107,20 +109,24 @@ export function useEditarOperacao(
         anotacoes: {
           anotacoes: values.anotacoes,
         },
-        mocs: values.mocs,
+        mocs: values.mocs.map((moc: any) => ({
+          numero_moc: moc.numero_moc,
+          anexo: `${values.id_atividade}_${moc.numero_moc}`,
+        })),
       };
 
       setLoading(true);
 
       try {
-        // TODO: liberar endpoint
-        // const res = {
-        //   status: 200,
-        //   data: newValues,
-        // };
-        // const status = res.status;
-        // console.log(">>>>", newValues);
         const { status } = await patchOperacoesEstatisticas(newValues);
+        values.mocs.map(async (moc: any) => {
+          if (moc.anexo) {
+            const formData = new FormData();
+            formData.append("files", moc.anexo);
+
+            await uploadArquivo(formData);
+          }
+        });
         if (status === 200 || status === 201) {
           toast.success("Operação editada com sucesso!", {
             id: "toast-principal",

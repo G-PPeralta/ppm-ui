@@ -117,3 +117,12 @@ export async function getMocPorAtividade(idAtividade: number): Promise<{
 
   return { data, status };
 }
+
+export async function getArquivoPdf(nomeDoArquivo: string): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(`pdf/${nomeDoArquivo}`, token());
+
+  return { data, status };
+}
