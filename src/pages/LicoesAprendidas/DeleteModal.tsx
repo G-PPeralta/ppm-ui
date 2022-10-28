@@ -49,8 +49,8 @@ function DeleteModal() {
         backgroundColor={"transparent"}
         aria-label="Plus sign"
         _hover={{
-          backgroundColor: "transparent",
-          color: "#F94144",
+          backgroundColor: "#F40606",
+          color: "white",
         }}
       >
         <FiTrash size={"13px"} />
