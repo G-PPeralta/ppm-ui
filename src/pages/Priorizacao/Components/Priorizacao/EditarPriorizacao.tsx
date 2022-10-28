@@ -190,8 +190,11 @@ function EditarPriorizacao(infosRanking: TableProps) {
                     transition: "all 0.4s",
                     color: "white",
                   }}
-                  w={"158px"}
+                  w={"208px"}
                   h={"56px"}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   Cancelar
                 </Button>
@@ -207,6 +210,9 @@ function EditarPriorizacao(infosRanking: TableProps) {
                     background: "origem.600",
                     transition: "all 0.4s",
                   }}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
