@@ -144,15 +144,17 @@ function EditarAtividadeTabLicoesAprendidas({
           refreshState={refreshState}
         />
       </Flex>
-      <TabelaGenerica
-        maxHeight={"352px"}
-        data={tabelaFiltrada}
-        header={header}
-        fromTo={fromTo}
-        footer={footer}
-      >
-        <Body />
-      </TabelaGenerica>
+      <Flex flex={1} w={"100%"}>
+        <TabelaGenerica
+          maxHeight={"352px"}
+          data={tabelaFiltrada}
+          header={header}
+          fromTo={fromTo}
+          footer={footer}
+        >
+          <Body />
+        </TabelaGenerica>
+      </Flex>
     </Flex>
   );
 }

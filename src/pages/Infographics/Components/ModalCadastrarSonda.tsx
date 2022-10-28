@@ -32,7 +32,7 @@ interface Props {
 
 function ModalCadastrarSonda({ refresh, setRefresh }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroSonda();
+  const { registerForm, loading } = useCadastroSonda("", refresh, setRefresh);
 
   return (
     <>

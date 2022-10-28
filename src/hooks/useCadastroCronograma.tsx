@@ -24,7 +24,7 @@ import { postCadastroNovoCronograma } from "services/post/Estatistica";
 
 import { useAuth } from "./useAuth";
 
-export function useCadastroCronograma() {
+export function useCadastroCronograma(refresh?: boolean) {
   const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -145,7 +145,7 @@ export function useCadastroCronograma() {
   useEffect(() => {
     setLoading(true);
     reqGet();
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     if (listaSondas.length > 0 && listaPocos.length > 0) {

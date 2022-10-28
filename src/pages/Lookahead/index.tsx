@@ -74,7 +74,7 @@ export function Lookahead() {
                       fontWeight={"400"}
                       // _placeholder={{ color: "#2D2926" }}
                       // color={"#949494"}
-                      width={"146px"}
+                      width={"208px"}
                       height={"56px"}
                       borderRadius={"8px"}
                       placeholder="Projeto"
@@ -97,6 +97,8 @@ export function Lookahead() {
                   <Flex alignItems="flex-end" marginLeft="16px">
                     <Button
                       h={"56px"}
+                      borderRadius={"8px"}
+                      w={"101px"}
                       background={"origem.500"}
                       border={"2.3px solid"}
                       color={"white"}
@@ -109,6 +111,7 @@ export function Lookahead() {
                       rightIcon={<FiSearch />}
                       fontSize={"18px"}
                       fontWeight={"700"}
+                      fontFamily={"Mulish"}
                       onClick={handleProjectChange}
                     >
                       Filtrar
