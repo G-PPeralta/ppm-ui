@@ -185,7 +185,7 @@ export function ModalAddAtividade(props: PropsType) {
                     </Flex>
 
                     <Flex>
-                      <FormControl marginRight="8px">
+                      <FormControl marginRight="8px" mt={2}>
                         <Flex gap={1}>
                           <RequiredField />
                           <Text
@@ -213,7 +213,7 @@ export function ModalAddAtividade(props: PropsType) {
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
                         />
                       </FormControl>
-                      <FormControl marginLeft="8px">
+                      <FormControl marginLeft="8px" mt={2}>
                         <Flex gap={1}>
                           <RequiredField />
                           <Text
