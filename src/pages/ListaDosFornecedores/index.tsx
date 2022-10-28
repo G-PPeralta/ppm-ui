@@ -105,6 +105,8 @@ export function Fornecedores() {
     setFilteredFornecedores(response.data as FornecedoreDto[]);
   };
 
+  // console.log(fornecedores);
+
   async function handleGetProjetos() {
     const payload = await getProjetos();
     setProjetos(payload.data);
@@ -220,7 +222,7 @@ export function Fornecedores() {
             <Flex justify={"space-between"}>
               <Flex align={"flex-end"} gap={4} wrap={"wrap"} flex={1}>
                 <Flex ml={-3}>
-                  <FormControl>
+                  {/* <FormControl>
                     <FormLabel
                       // fontWeight={"700"}
                       // fontSize={"12px"}
@@ -252,6 +254,42 @@ export function Fornecedores() {
                         projetos.map((project, index) => (
                           <option value={project.id} key={index}>
                             {project.nomeProjeto}
+                          </option>
+                        ))}
+                    </Select>
+                  </FormControl> */}
+                  <FormControl>
+                    <FormLabel
+                      // fontWeight={"700"}
+                      // fontSize={"12px"}
+                      // color={"#A7A7A7"}
+                      htmlFor="projeto"
+                    >
+                      <Text
+                        fontWeight={"700"}
+                        fontSize={"12px"}
+                        color={"#949494"}
+                      >
+                        FORNECEDOR
+                      </Text>
+                    </FormLabel>
+                    <Select
+                      fontSize={"14px"}
+                      fontFamily={"Mulish"}
+                      fontWeight={"400"}
+                      mt={"-9px"}
+                      placeholder="Selecione"
+                      id="projeto"
+                      name="projeto"
+                      onChange={(e) => setProjetoId(Number(e.target.value))}
+                      width={"208px"}
+                      height={"56px"}
+                    >
+                      <option value={0}>Todos</option>
+                      {fornecedores &&
+                        fornecedores.map((forn, index) => (
+                          <option value={forn.id} key={index}>
+                            {forn.nomefornecedor}
                           </option>
                         ))}
                     </Select>
