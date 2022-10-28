@@ -92,7 +92,7 @@ export function ModalAddAtividade(props: PropsType) {
   return (
     <>
       <Button
-        h={"56px"}
+        h={"57px"}
         w={"208px"}
         background={"origem.500"}
         border={"2.3px solid"}
