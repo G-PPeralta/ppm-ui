@@ -41,7 +41,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
     listaPocos,
     listaSondas,
     listaAtividadesPrecedentes,
-  } = useCadastroCronograma();
+  } = useCadastroCronograma(refresh);
 
   const innerWidth = window.innerWidth;
 
