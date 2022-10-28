@@ -125,6 +125,10 @@ function ModalAdicionarAtividade({
   }, []);
 
   useEffect(() => {
+    handleDataInicio();
+  }, [ganttData]);
+
+  useEffect(() => {
     registerForm.setFieldValue("duracao", mediaHorasFiltradas);
   }, [mediaHorasFiltradas]);
 

@@ -68,6 +68,8 @@ export function useCadastroOperacao() {
         nom_usu_create: user?.nome,
         id_origem: values.id_origem,
         nom_operacao: values.nom_operacao,
+        responsavel_id: null,
+        area_id: null,
       };
 
       setLoading(true);
@@ -80,6 +82,7 @@ export function useCadastroOperacao() {
             id: "toast-principal",
           });
           setLoading(false);
+          setInterval(() => window.location.reload(), 1000);
         }
       } catch (error) {
         toast.error("Erro ao cadastrar operação!", {
