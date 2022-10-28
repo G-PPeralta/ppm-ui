@@ -1,9 +1,9 @@
-import { LicoesAprendidas } from "interfaces/Services";
+import { LicoesAprendidasNew, LicoesAprendidas } from "interfaces/Services";
 
 import { api } from "services/api";
 
 export async function getLicoesAprendidas(id: string): Promise<{
-  data: LicoesAprendidas[];
+  data: LicoesAprendidasNew[];
   status: number;
 }> {
   const { data, status } = await api.get(
