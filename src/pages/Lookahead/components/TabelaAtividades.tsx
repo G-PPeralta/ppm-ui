@@ -169,7 +169,7 @@ export function TabelaAtividades(props: TableProps) {
                     <CSVLink
                       data={atividades}
                       headers={headers}
-                      filename={`lookahead${moment().format(
+                      filename={`atividades_lookahead${moment().format(
                         "DDMMYYYY_hhmmss"
                       )}`}
                     >
