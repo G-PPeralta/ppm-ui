@@ -27,19 +27,21 @@ import { Projeto } from "interfaces/Budgets";
 import InputGenerico from "components/InputGenerico";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { formatReal, getMoney } from "utils/regexCoinMask";
 
 import { useCadastroOrcamentoPrevisto } from "hooks/useCadastroOrcamentoPrevisto";
 
 interface PropsInterface {
   projeto: Projeto;
   toogleRender: () => void;
+  value: string;
 }
 
 function ModalValorPrevisto(props: PropsInterface) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, setAtividade } =
     useCadastroOrcamentoPrevisto();
-  const { projeto, toogleRender } = props;
+  const { projeto, toogleRender, value } = props;
 
   useEffect(() => {
     setAtividade(projeto.id);
@@ -98,7 +100,10 @@ function ModalValorPrevisto(props: PropsInterface) {
                               registerForm={registerForm}
                               nomeInput={"Valor Previsto"}
                               propName={"valor"}
-                              value={registerForm.values.valor || ""}
+                              value={
+                                registerForm.values.valor ||
+                                formatReal(getMoney(value + "00"))
+                              }
                               required={true}
                               placeholder={"0"}
                               maxLength={20}
