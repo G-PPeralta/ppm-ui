@@ -68,6 +68,8 @@ export function useCadastroOperacao() {
         nom_usu_create: user?.nome,
         id_origem: values.id_origem,
         nom_operacao: values.nom_operacao,
+        responsavel_id: null,
+        area_id: null,
       };
 
       setLoading(true);

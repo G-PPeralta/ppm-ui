@@ -4,6 +4,8 @@ import { BiExpand } from "react-icons/bi";
 
 import {
   Flex,
+  Button,
+  Text,
   Heading,
   IconButton,
   Modal,
@@ -316,7 +318,7 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
         <Modal
           isOpen={expandGantt}
           onClose={() => setExpandGantt(false)}
-          size="6xl"
+          size="full"
         >
           <ModalOverlay />
           <ModalContent>
@@ -328,7 +330,33 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
               color={"white"}
               fontSize={"1em"}
             >
-              Gráfico Gantt
+              <Flex justifyContent={"flex-end"} flexGrow={1}>
+                <Text fontSize="16px" fontWeight={"bold"}>
+                  Gráfico Gantt
+                </Text>
+              </Flex>
+              <Flex justifyContent={"flex-end"} flexGrow={1}>
+                <Button
+                  h={"56px"}
+                  borderRadius={"10px"}
+                  variant="outline"
+                  color="gray.100"
+                  border={"2px solid"}
+                  borderColor={"gray.100"}
+                  onClick={() => setExpandGantt(false)}
+                  _hover={{
+                    border: "2px solid",
+                    borderColor: "gray.100",
+                    background: "gray.100",
+                    transition: "all 0.4s",
+                    color: "white",
+                  }}
+                >
+                  <Text fontSize="16px" fontWeight={"bold"}>
+                    Fechar
+                  </Text>
+                </Button>
+              </Flex>
             </ModalHeader>
             <ModalBody mt={3}>
               <GanttComponent
@@ -377,7 +405,7 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
                 splitterSettings={{
                   // view: handleShowGantt(),
                   // columnIndex: 5,
-                  position: "80%",
+                  position: "47%",
                 }}
                 rowDataBound={rowDataBound}
                 height={"90%"}

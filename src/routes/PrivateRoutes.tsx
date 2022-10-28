@@ -21,6 +21,7 @@ import { NotFound } from "pages/NotFound";
 import { Permissions } from "pages/Permissions";
 import { PermissionsList } from "pages/PermissionsList";
 import { Priorizacao } from "pages/Priorizacao";
+import { PriorizacaoDiretores } from "pages/PriorizacaoDiretores";
 import { Profile } from "pages/Profile";
 import { Projects } from "pages/Projects";
 import { Reports } from "pages/Reports";
@@ -86,6 +87,7 @@ export function PrivateRoutes() {
         element={<CentroDeCustoProjetos />}
       />
       <Route path="/priorizacao" element={<Priorizacao />} />
+      <Route path="/priorizacao-diretores" element={<PriorizacaoDiretores />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
