@@ -82,6 +82,7 @@ export function useCadastroOperacao() {
             id: "toast-principal",
           });
           setLoading(false);
+          setInterval(() => window.location.reload(), 1000);
         }
       } catch (error) {
         toast.error("Erro ao cadastrar operação!", {
