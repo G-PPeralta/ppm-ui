@@ -65,7 +65,8 @@ function ModalValorPrevisto(props: PropsInterface) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Mobilização/Desmobilização
           </ModalHeader>
@@ -121,38 +122,43 @@ function ModalValorPrevisto(props: PropsInterface) {
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
                 <Button
+                  h={"56px"}
+                  borderRadius={"10px"}
                   variant="ghost"
                   color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: "red.500",
                     transition: "all 0.4s",
                     color: "white",
                   }}
+                  onClick={() => handleCancelar(registerForm, onClose)}
                 >
                   Cancelar
                 </Button>
+
                 <Button
+                  h={"56px"}
+                  borderRadius={"10px"}
                   disabled={!registerForm.isValid || !registerForm.dirty}
-                  background="origem.300"
+                  background={"origem.500"}
                   variant="primary"
                   color="white"
+                  _hover={{
+                    background: "origem.600",
+                    transition: "all 0.4s",
+                  }}
                   onClick={() => {
                     handleCadastrar(registerForm, () => {
                       onClose();
                       toogleRender();
                     });
                   }}
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                  }}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (
                     <>
-                      <Text>Editar Valor</Text>
+                      <Text>Confirmar</Text>
                     </>
                   )}
                 </Button>
