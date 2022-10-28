@@ -20,7 +20,7 @@ import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelho
 import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { handleCancelar } from "utils/handleCadastro";
-import { regexSomenteNumeros, regexCaracteresEspeciais } from "utils/regex";
+import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroOperacao } from "hooks/useCadastroOperacao";
 
@@ -108,7 +108,7 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                               base: "100%",
                               md: "100%",
                             })}
-                            value={regexSomenteNumeros(
+                            value={regexCaracteresEspeciais(
                               registerForm.values.id_origem
                             )}
                             onChange={registerForm.handleChange}

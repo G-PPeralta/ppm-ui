@@ -168,7 +168,12 @@ export function TabelaProjetos({ data, refresh, setRefresh }: TableProps) {
           <Text>{projeto.descricao + " " + projeto.justificativa}</Text>
         )}
       </Td>
-      <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+      <Td
+        fontWeight={"semibold"}
+        textAlign={"center"}
+        align={"center"}
+        color={"#2D2926"}
+      >
         <ModalCadastrarPriorizacao
           refresh={refresh}
           setRefresh={setRefresh}
