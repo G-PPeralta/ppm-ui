@@ -97,7 +97,7 @@ export function Lookahead() {
                       fontWeight={"400"}
                       // _placeholder={{ color: "#2D2926" }}
                       // color={"#949494"}
-                      width={"146px"}
+                      width={"208px"}
                       height={"56px"}
                       borderRadius={"8px"}
                       placeholder="Projeto"
@@ -127,6 +127,7 @@ export function Lookahead() {
                   <Flex alignItems="flex-end" marginLeft="16px">
                     <Button
                       h={"56px"}
+                      w={"101px"}
                       background={"origem.500"}
                       border={"2.3px solid"}
                       color={"white"}
