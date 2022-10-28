@@ -24,6 +24,8 @@ import { LicoesAprendidasNew } from "interfaces/Services";
 
 import { useAuth } from "hooks/useAuth";
 
+import { patchLicaoAprendida } from "services/update/LicoesAprendidas";
+
 interface EditModalProps {
   closeModal: any;
   licao: LicoesAprendidasNew;
@@ -51,6 +53,16 @@ function EditarLicoesAprendidasModal({
   const updatepayload = (campo: string) => {
     if (campo === "txt_licao_aprendida") return licaoAprendida;
     if (campo === "txt_acao") return acao;
+    return "";
+  };
+
+  const handlePatchLicaoAprendida = async () => {
+    const promises = camposParaEditar.map(
+      async (lic) =>
+        await patchLicaoAprendida(idLicao, lic, updatepayload(lic), user?.nome)
+    );
+    await Promise.all(promises);
+    handleUpdateLicoes();
   };
 
   const regex = /[^\w\s]/gi;
@@ -214,16 +226,7 @@ function EditarLicoesAprendidasModal({
                   background: "origem.500",
                   transition: "all 0.4s",
                 }}
-                onClick={() => {
-                  camposParaEditar.forEach((lic) =>
-                    handleUpdateLicoes(
-                      idLicao,
-                      lic,
-                      updatepayload(lic),
-                      user?.nome
-                    )
-                  );
-                }}
+                onClick={() => handlePatchLicaoAprendida()}
                 width={"208px"}
                 height={"56px"}
                 fontSize={"18px"}

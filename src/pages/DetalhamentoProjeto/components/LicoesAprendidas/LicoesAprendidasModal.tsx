@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
 import {
@@ -26,8 +26,6 @@ import { LicoesAprendidasNew } from "interfaces/Services";
 
 import { useToast } from "contexts/Toast";
 
-import { patchLicaoAprendida } from "services/update/LicoesAprendidas";
-
 import CadastrarLicoesAprendidasModal from "./CadastrarLicoesAprendidasModal";
 import EditarLicoesAprendidasModal from "./EditarLicoesAprendidasModal";
 import TabelaLicoesAprendidas from "./TabelaLicoesAprendidas";
@@ -46,23 +44,16 @@ function LicoesAprendidasModal({
   const [categoriaId, setCategoriaId] = useState("");
   const [data, setData] = useState("");
 
-  const [filteredTable, setFilteredTable] = useState([]);
+  const [filteredTable, setFilteredTable] = useState(licoes);
 
   function handleEditLicao(licao: LicoesAprendidasNew): void {
     setEditLicao(licao);
     setOpenModalEdit(true);
   }
 
-  async function handleUpdateLicoes(
-    licao: any,
-    campo: any,
-    payload: any,
-    user: any
-  ) {
+  async function handleUpdateLicoes() {
     try {
-      await patchLicaoAprendida(licao, campo, payload, user);
-      callBack();
-      setFilteredTable([]);
+      await callBack();
       setOpenModalEdit(false);
     } catch (error) {
       toast({
@@ -75,47 +66,28 @@ function LicoesAprendidasModal({
     }
   }
 
-  // console.log(data.length);
-  // console.log(licoes);
-  // console.log(
-  //   licoes.filter(
-  //     (lic: any) =>
-  //       lic.id_categoria == categoriaId || lic.data.includes(data)
-  //   )
-  // );
+  // console.log(filteredTable);
 
   function handleFilter(search: string, data: string) {
-    // if (categoriaId) {
-    //   const filtered = licoes.filter(
-    //     (lic: any) => lic.id_categoria == categoriaId
-    //   );
-    //   filtered.length == 0 &&
-    //     toast.error(
-    //       "Nenhum dado encontrado com o presente filtro de categoria"
-    //     );
-    //   return setFilteredTable(filtered);
-    // }
+    let filtered = licoes;
 
     if (search) {
-      const filtered = licoes.filter(
+      filtered = licoes.filter(
         (lic: any) =>
           lic.licao_aprendida.toUpperCase().includes(search.toUpperCase()) ||
           lic.acao_e_recomendacao.toUpperCase().includes(search.toUpperCase())
       );
-
-      // filtered.length == 0 &&
-      //   toast.error("Nenhum dado encontrado com o presente filtro de data");
-      return setFilteredTable(filtered);
     }
 
     if (data) {
-      const filtered = licoes.filter((lic: any) => lic.data.includes(data));
-      // filtered.length == 0 &&
-      //   toast.error("Nenhum dado encontrado com o presente filtro de data");
-      return setFilteredTable(filtered);
+      filtered = filtered.filter((lic: any) => lic.data.includes(data));
     }
-    setFilteredTable(licoes);
+    if (filtered) setFilteredTable(filtered);
   }
+
+  useEffect(() => {
+    setFilteredTable(licoes);
+  }, [licoes]);
 
   return (
     <>
@@ -315,7 +287,7 @@ function LicoesAprendidasModal({
           <ModalBody>
             <TabelaLicoesAprendidas
               onEdit={handleEditLicao}
-              licoes={filteredTable.length > 0 ? filteredTable : licoes}
+              licoes={filteredTable}
             />
             {openModalEdit && (
               <EditarLicoesAprendidasModal

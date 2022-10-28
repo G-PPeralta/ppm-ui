@@ -46,7 +46,7 @@ function CadastrarLicoesAprendidasModal({
       user: user?.nome,
     };
     await postLicaoAprendida(payload);
-    callBack();
+    await callBack();
     onCloseModal();
   }
 

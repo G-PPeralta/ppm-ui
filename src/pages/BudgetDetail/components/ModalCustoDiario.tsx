@@ -195,11 +195,7 @@ function ModalCustoDiario(props: { id: string | undefined }) {
                   </Flex>
                 </Flex>
                 <TableContainer mt={4} mb={3} ml={1} borderRadius={"10px"}>
-                  <Table
-                    variant="striped"
-                    colorScheme={"strippedGray"}
-                    align={"center"}
-                  >
+                  <Table colorScheme={"strippedGray"} align={"center"}>
                     <Thead>
                       <Tr background={"origem.500"} color="white">
                         <Th color={"white"}></Th>
