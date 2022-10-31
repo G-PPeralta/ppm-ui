@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { IoIosPodium } from "react-icons/io";
+import { IoMdPodium } from "react-icons/io";
 
 import {
-  Button,
   Flex,
   FormControl,
   FormLabel,
@@ -19,6 +18,7 @@ import {
   // Textarea,
   useBreakpointValue,
   useDisclosure,
+  Button,
   // IconButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
@@ -172,23 +172,34 @@ function ModalCadastrarPriorizacao({
     <>
       <Button
         onClick={handleClick}
-        // w={"232px"}
-        // h={"56px"}
-        color={"origem.500"}
-        backgroundColor={"transparent"}
-        border="none"
+        w={"100%"}
+        h={"56px"}
+        color="#0047BB"
+        background="white"
+        borderColor="#0047BB"
+        border={"2px"}
         _hover={{
-          // backgroundColor: "origem.500",
+          background: "#0047BB",
+          transition: "all 0.4s",
           color: "white",
         }}
-        fontSize={"18px"}
         fontWeight={"700"}
-        fontFamily={"Mulish"}
-        rightIcon={<IoIosPodium />}
+        fontSize="18px"
+        gap={2}
+        justifyItems={"center"}
+        alignItems={"center"}
       >
         Priorização
+        <IoMdPodium />
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal
+        isOpen={isOpen}
+        onClose={() => {
+          if (setIsPriorizacaoModalOpen) setIsPriorizacaoModalOpen(false);
+          handleCancelar(registerForm, onClose);
+        }}
+        size="xl"
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
