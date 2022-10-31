@@ -4,6 +4,7 @@ import { Page } from "react-pdf";
 import { Document } from "react-pdf/dist/esm/entry.webpack";
 
 import { Flex, IconButton, Text } from "@chakra-ui/react";
+// import { Ring } from "@uiball/loaders";
 
 interface Props {
   arquivoPdf: File;
@@ -36,11 +37,16 @@ function LeitorPDF({ arquivoPdf }: Props) {
     <Flex
       border={"1px"}
       borderColor={"origem.500"}
+      borderRadius={"md"}
       direction={"column"}
       align={"center"}
       justify={"center"}
+      p={5}
     >
-      <Document file={arquivoPdf} onLoadSuccess={onDocumentLoadSuccess}>
+      <Document
+        file={{ url: arquivoPdf }}
+        onLoadSuccess={onDocumentLoadSuccess}
+      >
         <Page pageNumber={pageNumber} />
       </Document>
       <Flex justify={"center"} gap={4} w={"100%"}>

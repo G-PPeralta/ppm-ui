@@ -6,8 +6,6 @@ import { BsFillCloudArrowUpFill } from "react-icons/bs";
 
 import { Button, Flex, IconButton, Text } from "@chakra-ui/react";
 
-import { getArquivoPdf } from "services/get/Estatisticas";
-
 interface Props {
   registerForm: any;
   index: number;
@@ -51,15 +49,8 @@ function BotaoUploadArquivo({
     try {
       if (arquivoSelecionado.length === 0) {
         const nomeArquivoSemExtensao = nomeArquivo.split(".")[0];
-        const { data } = await getArquivoPdf(nomeArquivoSemExtensao);
-        const arquivo = new File([data], nomeArquivo, {
-          type: "application/pdf",
-        });
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(arquivo);
-        fileReader.onload = () => {
-          setArquivoPdf(fileReader.result);
-        };
+        const url = `${process.env.REACT_APP_API_URL}pdf/${nomeArquivoSemExtensao}`;
+        setArquivoPdf(url);
       }
     } catch (error) {
       toast.error("Erro ao abrir arquivo");

@@ -80,9 +80,9 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
                 setArquivoPdf={setArquivoPdf}
               />
             </Flex>
-            {arquivoPdf && <LeitorPDF arquivoPdf={arquivoPdf} />}
           </Flex>
         ))}
+        {arquivoPdf && <LeitorPDF arquivoPdf={arquivoPdf} />}
       </Flex>
       <Flex
         w="100%"
