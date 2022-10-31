@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { IoIosPodium } from "react-icons/io";
 
 import {
   Button,
@@ -175,16 +174,17 @@ function ModalCadastrarPriorizacao({
         color={"origem.500"}
         backgroundColor={"transparent"}
         aria-label="Plus sign"
-        _hover={{
-          backgroundColor: "origem.500",
-          color: "white",
-        }}
         fontSize={"18px"}
         fontWeight={"700"}
+      ></IconButton>
+      <Modal
+        isOpen={isOpen}
+        onClose={() => {
+          if (setIsPriorizacaoModalOpen) setIsPriorizacaoModalOpen(false);
+          handleCancelar(registerForm, onClose);
+        }}
+        size="xl"
       >
-        <IoIosPodium />
-      </IconButton>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader

@@ -5,6 +5,7 @@ import React, {
   ReactPortal,
   useState,
 } from "react";
+import { IoMdPodium } from "react-icons/io";
 
 import {
   Button,
@@ -292,7 +293,7 @@ function ModalConfiguracoes({
                       {getOptions(optionsStatus, projeto.status)}
                     </Select>
                   </FormControl>
-                  <Flex w={"100%"} justifyContent={"center"}>
+                  <Flex w={"232px"} justifyContent={"center"}>
                     <FormControl
                       pt={"20px"}
                       w={"232px"}
@@ -313,7 +314,7 @@ function ModalConfiguracoes({
                         }}
                         fontWeight={"700"}
                         fontSize="18px"
-                        // rightIcon={<IoMdPodium />}
+                        rightIcon={<IoMdPodium />}
                         onClick={() => setIsPriorizacaoModalOpen(true)}
                       >
                         Priorização
