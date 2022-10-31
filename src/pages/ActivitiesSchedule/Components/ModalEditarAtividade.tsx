@@ -125,7 +125,7 @@ function ModalEditarAtividade({
     if (atividade.inicioreal !== null) {
       setInicioReal(new Date(atividade.inicioreal));
     }
-    if (atividade.finalreal !== null) {
+    if (atividade.fimreal !== null) {
       setFimReal(new Date(atividade.fimreal));
     }
 
@@ -140,6 +140,16 @@ function ModalEditarAtividade({
     )[0].value;
     setAreaId(arId);
   }, []);
+
+  const handlePercentInput = async (val: any) => {
+    if (atividadeStatus === 0 && Number(atividade.pct_real) === 0) {
+      setInicioReal(new Date());
+    }
+    if (atividadeStatus === 100) {
+      setFimReal(null);
+    }
+    setAtividadeStatus(Number(val));
+  };
 
   const validateStatusEDataInicioReal =
     atividadeStatus > 0 && inicioReal !== null;
@@ -229,7 +239,7 @@ function ModalEditarAtividade({
                         min={0}
                         max={100}
                         value={format(atividadeStatus)}
-                        onChange={(event) => setAtividadeStatus(Number(event))}
+                        onChange={(event) => handlePercentInput(event)}
                       >
                         <NumberInputField h={"56px"} />
                         <NumberInputStepper h={"56px"}>
