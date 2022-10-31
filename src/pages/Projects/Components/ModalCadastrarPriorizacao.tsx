@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { IoIosPodium } from "react-icons/io";
 
 import {
-  Button,
   Flex,
   FormControl,
   FormLabel,
@@ -19,7 +18,9 @@ import {
   // Textarea,
   useBreakpointValue,
   useDisclosure,
+  Button,
   IconButton,
+  // IconButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -40,6 +41,7 @@ type PropsType = {
   refresh: boolean;
   isPriorizacaoModalOpen?: boolean;
   setIsPriorizacaoModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  completeButton?: boolean;
 };
 
 function ModalCadastrarPriorizacao({
@@ -48,6 +50,7 @@ function ModalCadastrarPriorizacao({
   setRefresh,
   isPriorizacaoModalOpen,
   setIsPriorizacaoModalOpen,
+  completeButton,
 }: PropsType) {
   const { user } = useAuth();
   const [initialValues, setInitialValues] = useState([]);
@@ -170,21 +173,54 @@ function ModalCadastrarPriorizacao({
 
   return (
     <>
-      <IconButton
-        onClick={handleClick}
-        color={"origem.500"}
-        backgroundColor={"transparent"}
-        aria-label="Plus sign"
-        _hover={{
-          backgroundColor: "origem.500",
-          color: "white",
+      {completeButton ? (
+        <Button
+          onClick={handleClick}
+          w={"100%"}
+          h={"56px"}
+          color="#0047BB"
+          background="white"
+          borderColor="#0047BB"
+          border={"2px"}
+          _hover={{
+            background: "#0047BB",
+            transition: "all 0.4s",
+            color: "white",
+          }}
+          fontWeight={"700"}
+          fontSize="18px"
+          gap={2}
+          justifyItems={"center"}
+          alignItems={"center"}
+        >
+          Priorização
+          <IoIosPodium />
+        </Button>
+      ) : (
+        <IconButton
+          onClick={handleClick}
+          color={"origem.500"}
+          backgroundColor={"transparent"}
+          aria-label="Plus sign"
+          _hover={{
+            backgroundColor: "origem.500",
+            color: "white",
+          }}
+          fontSize={"18px"}
+          fontWeight={"700"}
+        >
+          <IoIosPodium />
+        </IconButton>
+      )}
+
+      <Modal
+        isOpen={isOpen}
+        onClose={() => {
+          if (setIsPriorizacaoModalOpen) setIsPriorizacaoModalOpen(false);
+          handleCancelar(registerForm, onClose);
         }}
-        fontSize={"18px"}
-        fontWeight={"700"}
+        size="xl"
       >
-        <IoIosPodium />
-      </IconButton>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader

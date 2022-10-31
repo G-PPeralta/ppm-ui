@@ -1,7 +1,8 @@
 import { FaWarehouse } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
+import { IoIosArrowBack } from "react-icons/io";
 
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Link, Text } from "@chakra-ui/react";
 import { ICardInfoProjeto } from "interfaces/DetalhamentoProjetos";
 import { ProjetoProgresso } from "interfaces/Services";
 
@@ -54,6 +55,9 @@ function CardInfoProjeto({
           alignItems={"center"}
           // justifyContent={"center"}
         >
+          <Link href="javascript:history.back()" pr={"14px"} pl={0}>
+            <IoIosArrowBack size={"25px"} />
+          </Link>
           {!loading && <PercentagePieChartProjetoInfo data={chartsProps} />}
           <Heading as="h4" size="md" ml={4}>
             {infoProjeto.nome_projeto}

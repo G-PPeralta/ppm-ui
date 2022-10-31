@@ -292,43 +292,21 @@ function ModalConfiguracoes({
                       {getOptions(optionsStatus, projeto.status)}
                     </Select>
                   </FormControl>
-                  <Flex w={"100%"} justifyContent={"center"}>
+                  <Flex w={"232px"} justifyContent={"center"}>
                     <FormControl
                       pt={"20px"}
                       w={"232px"}
                       justifyContent={"center"}
                       alignItems={"center"}
                     >
-                      <Button
-                        w={"232px"}
-                        h={"56px"}
-                        color="#0047BB"
-                        background="white"
-                        borderColor="#0047BB"
-                        border={"2px"}
-                        _hover={{
-                          background: "#0047BB",
-                          transition: "all 0.4s",
-                          color: "white",
-                        }}
-                        fontWeight={"700"}
-                        fontSize="18px"
-                        // rightIcon={<IoMdPodium />}
-                        onClick={() => setIsPriorizacaoModalOpen(true)}
-                      >
-                        Priorização
-                        {
-                          <ModalCadastrarPriorizacao
-                            refresh={refresh}
-                            setRefresh={setRefresh}
-                            projeto={projeto.id}
-                            isPriorizacaoModalOpen={isPriorizacaoModalOpen}
-                            setIsPriorizacaoModalOpen={
-                              setIsPriorizacaoModalOpen
-                            }
-                          />
-                        }
-                      </Button>
+                      <ModalCadastrarPriorizacao
+                        completeButton={true}
+                        refresh={refresh}
+                        setRefresh={setRefresh}
+                        projeto={projeto.id}
+                        isPriorizacaoModalOpen={isPriorizacaoModalOpen}
+                        setIsPriorizacaoModalOpen={setIsPriorizacaoModalOpen}
+                      />
                     </FormControl>
                   </Flex>
                 </Flex>

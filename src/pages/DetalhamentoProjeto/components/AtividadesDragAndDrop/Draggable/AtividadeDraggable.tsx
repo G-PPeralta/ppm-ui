@@ -3,7 +3,14 @@ import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  FormControl,
+  NumberInput,
+  NumberInputField,
+  Text,
+} from "@chakra-ui/react";
 import { FormikProps } from "formik";
 
 import SelectFiltragem from "components/SelectFiltragem";
@@ -112,7 +119,7 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
                     nomeSelect={"ATIVIDADE"}
                     propName={`precedentes[${index}].atividadePrecedenteId`}
                     options={optionsAtividades}
-                    required={true}
+                    required={false}
                   />
                 </Flex>
                 <Flex flex={1}>
@@ -124,22 +131,27 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
                     >
                       DIAS
                     </Text>
-                    <Input
-                      h={"56px"}
-                      maxW={"128px"}
-                      placeholder="0"
-                      type={"number"}
-                      bg={"#fff"}
+                    <NumberInput
+                      max={99999}
+                      min={0}
+                      placeholder={"0"}
                       id={`precedentes[${index}].dias`}
                       name={`precedentes[${index}].dias`}
                       value={registerForm.values.precedentes[index].dias}
-                      onChange={(event) => {
+                      onChange={(value) => {
                         registerForm.setFieldValue(
                           `precedentes[${index}].dias`,
-                          Number(event.target.value)
+                          Number(value)
                         );
                       }}
-                    />
+                    >
+                      <NumberInputField
+                        h={"56px"}
+                        maxW={"128px"}
+                        maxLength={5}
+                        bg={"#fff"}
+                      />
+                    </NumberInput>
                   </FormControl>
                 </Flex>
               </Flex>
