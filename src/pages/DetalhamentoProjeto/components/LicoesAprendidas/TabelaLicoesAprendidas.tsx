@@ -67,12 +67,17 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
                     icon={<MdModeEdit />}
                     backgroundColor={"transparent"}
                     variant="secondary"
-                    color="#0047BB"
-                    mr={2}
-                    isRound={true}
+                    color="origem.500"
+                    _hover={{
+                      background: "origem.500",
+                      color: "white",
+                      transition: "all 0.4s",
+                    }}
+                    // mr={2}
+                    // isRound={true}
                     onClick={() => onEdit(lessons)}
-                    width={"18px"}
-                    height={"18px"}
+                    // width={"18px"}
+                    // height={"18px"}
                   />
                   <ModalDeletarLicao />
                   {/* <IconButton
