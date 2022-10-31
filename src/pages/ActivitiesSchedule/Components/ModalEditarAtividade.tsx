@@ -67,8 +67,8 @@ function ModalEditarAtividade({
   const [observacoes, setObservacoes] = useState("");
   const [inicioPlanejado, setInicioPlanejado] = useState<any>("");
   const [fimPlanejado, setFimPlanejado] = useState<any>("");
-  const [inicioReal, setInicioReal] = useState(null);
-  const [fimReal, setFimReal] = useState(null);
+  const [inicioReal, setInicioReal] = useState<any>(null);
+  const [fimReal, setFimReal] = useState<any>(null);
   const [precedentes, setPrecedentes] = useState<Precedente[]>([]);
 
   const payload = {
@@ -122,6 +122,13 @@ function ModalEditarAtividade({
     fim.setHours(fim.getHours() + 9);
     setFimPlanejado(fim);
 
+    if (atividade.inicioreal !== null) {
+      setInicioReal(new Date(atividade.inicioreal));
+    }
+    if (atividade.fimreal !== null) {
+      setFimReal(new Date(atividade.fimreal));
+    }
+
     const respId = listaOptions.optionsResponsaveis.filter(
       (responsavel: any) => responsavel.label === atividade.nom_responsavel
     )[0].value;
@@ -133,6 +140,16 @@ function ModalEditarAtividade({
     )[0].value;
     setAreaId(arId);
   }, []);
+
+  const handlePercentInput = async (val: any) => {
+    if (atividadeStatus === 0 && Number(atividade.pct_real) === 0) {
+      setInicioReal(new Date());
+    }
+    if (atividadeStatus === 100) {
+      setFimReal(null);
+    }
+    setAtividadeStatus(Number(val));
+  };
 
   const validateStatusEDataInicioReal =
     atividadeStatus > 0 && inicioReal !== null;
@@ -222,7 +239,7 @@ function ModalEditarAtividade({
                         min={0}
                         max={100}
                         value={format(atividadeStatus)}
-                        onChange={(event) => setAtividadeStatus(Number(event))}
+                        onChange={(event) => handlePercentInput(event)}
                       >
                         <NumberInputField h={"56px"} />
                         <NumberInputStepper h={"56px"}>
@@ -290,6 +307,7 @@ function ModalEditarAtividade({
                         setInicioReal={setInicioReal}
                         intervencaoIniciada={intervencaoIniciada}
                         atividadeStatus={atividadeStatus}
+                        fimReal={fimReal}
                       />
                     </Flex>
                     <Flex direction={"column"} grow={1}>
@@ -307,6 +325,7 @@ function ModalEditarAtividade({
                         setFimReal={setFimReal}
                         intervencaoIniciada={intervencaoIniciada}
                         atividadeStatus={atividadeStatus}
+                        inicioReal={inicioReal}
                       />
                     </Flex>
                   </Flex>

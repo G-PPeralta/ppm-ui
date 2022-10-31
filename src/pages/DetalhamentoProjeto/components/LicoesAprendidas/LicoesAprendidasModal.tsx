@@ -71,19 +71,21 @@ function LicoesAprendidasModal({
   function handleFilter(search: string, data: string) {
     let filtered = licoes;
 
-    if (search) {
+    if (search && data) {
       filtered = licoes.filter(
         (lic: any) =>
-          lic.licao_aprendida.toUpperCase().includes(search.toUpperCase()) ||
-          lic.acao_e_recomendacao.toUpperCase().includes(search.toUpperCase())
+          lic.licao_aprendida.toUpperCase().includes(search.toUpperCase()) &&
+          lic.data.includes(data)
       );
     }
 
-    if (data) {
-      filtered = filtered.filter((lic: any) => lic.data.includes(data));
-    }
+    // if (data) {
+    //   filtered = filtered.filter((lic: any) => lic.data.includes(data));
+    // }
     if (filtered) setFilteredTable(filtered);
   }
+
+  // console.log({ filteredTable });
 
   useEffect(() => {
     setFilteredTable(licoes);

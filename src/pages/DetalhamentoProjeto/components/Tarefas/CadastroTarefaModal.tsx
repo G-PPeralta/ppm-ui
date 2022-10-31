@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { BsPlusLg } from "react-icons/bs";
+// import { BsPlusLg } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 
 import {
   Flex,
   Box,
-  IconButton,
+  // IconButton,
   // useBreakpointValue,
   Textarea,
   Modal,
@@ -57,21 +57,21 @@ function CadastroTarefasModal({
   return (
     <Flex>
       <Box
-        display={"flex"}
-        alignItems={"center"}
-        border="2px"
-        padding={2}
-        borderRadius={6}
-        borderColor={"origem.300"}
-        _hover={{
-          background: "#f5f5f5",
-          transition: "all 0.4s",
-          color: "origem.300",
-          cursor: "pointer",
-          borderColor: "origem.500",
-        }}
+      // display={"flex"}
+      // alignItems={"center"}
+      // border="2px"
+      // padding={2}
+      // borderRadius={6}
+      // borderColor={"origem.300"}
+      // _hover={{
+      //   background: "#f5f5f5",
+      //   transition: "all 0.4s",
+      //   color: "origem.300",
+      //   cursor: "pointer",
+      //   borderColor: "origem.500",
+      // }}
       >
-        <IconButton
+        {/* <IconButton
           aria-label="Plus sign"
           icon={<BsPlusLg />}
           background="origem.300"
@@ -80,7 +80,7 @@ function CadastroTarefasModal({
           mr={2}
           isRound={true}
           size="sm"
-        />
+        /> */}
         {/* <Text
           fontSize={useBreakpointValue({ base: "sm", md: "sm" })}
           fontWeight={"bold"}

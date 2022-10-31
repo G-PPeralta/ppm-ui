@@ -296,9 +296,9 @@ export function EditarFornecedorModal({
             <Button
               // background="origem.300"
               variant="primary"
-              color="#F40606"
+              color="red.500"
               _hover={{
-                background: "#F40606",
+                background: "red.600",
                 transition: "all 0.4s",
                 color: "white",
               }}

@@ -4,7 +4,7 @@ import { BiExpand } from "react-icons/bi";
 
 import {
   Flex,
-  Button,
+  // Button,
   Text,
   Heading,
   IconButton,
@@ -14,6 +14,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import {
   GanttComponent,
@@ -156,13 +157,13 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
           borderTopRadius={"8px"}
           borderBottomRadius={"0px"}
           // borderBottom={"1px solid #F0F3F7"}
-          align={"center"}
+          alignSelf={"center"}
           pl={"20px"}
           gap={5}
           h={"100%"}
           py={2}
         >
-          <Heading as="h4" size="md">
+          <Heading fontSize={"14px"} fontWeight={"700"} fontFamily={"Mulish"}>
             Gráfico Gantt
           </Heading>
           <ModalCadastroAtividades
@@ -330,24 +331,24 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
               color={"white"}
               fontSize={"1em"}
             >
-              <Flex justifyContent={"flex-end"} flexGrow={1}>
+              <Flex justifyContent={"center"} flexGrow={1}>
                 <Text fontSize="16px" fontWeight={"bold"}>
                   Gráfico Gantt
                 </Text>
               </Flex>
-              <Flex justifyContent={"flex-end"} flexGrow={1}>
+              {/* <Flex justifyContent={"flex-end"} flexGrow={1}>
                 <Button
                   h={"56px"}
-                  borderRadius={"10px"}
+                  borderRadius={"8px"}
                   variant="outline"
-                  color="gray.100"
+                  color="white"
                   border={"2px solid"}
-                  borderColor={"gray.100"}
+                  borderColor={"white"}
                   onClick={() => setExpandGantt(false)}
                   _hover={{
-                    border: "2px solid",
-                    borderColor: "gray.100",
-                    background: "gray.100",
+                    border: "2px solid origem.500",
+                    // borderColor: "gray.100",
+                    background: "origem.500",
                     transition: "all 0.4s",
                     color: "white",
                   }}
@@ -356,7 +357,7 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
                     Fechar
                   </Text>
                 </Button>
-              </Flex>
+              </Flex> */}
             </ModalHeader>
             <ModalBody mt={3}>
               <GanttComponent
@@ -484,6 +485,13 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
                 <Inject services={[Edit, Toolbar]} />
               </GanttComponent>
             </ModalBody>
+            <ModalCloseButton
+              color={"white"}
+              onClick={() => {
+                onClose();
+                setExpandGantt(false);
+              }}
+            />
             <ModalFooter justifyContent={"center"}></ModalFooter>
           </ModalContent>
         </Modal>
