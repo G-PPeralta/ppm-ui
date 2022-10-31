@@ -380,14 +380,15 @@ function BotaoListadeTarefas() {
                       fontFamily={"Mulish"}
                       fontSize="18px"
                       alignSelf={"end"}
+                      // rightIcon={<AiOutlineSearch />}
                     >
                       Filtrar
                       <Icon
-                        fontWeight={"900"}
+                        fontWeight={"700"}
                         as={AiOutlineSearch}
                         fontSize="18px"
                         ml={1}
-                        color={"#0047BB"}
+                        // color={"#0047BB"}
                       />
                     </Button>
                   </Flex>
