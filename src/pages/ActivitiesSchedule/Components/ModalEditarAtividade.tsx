@@ -67,8 +67,8 @@ function ModalEditarAtividade({
   const [observacoes, setObservacoes] = useState("");
   const [inicioPlanejado, setInicioPlanejado] = useState<any>("");
   const [fimPlanejado, setFimPlanejado] = useState<any>("");
-  const [inicioReal, setInicioReal] = useState(null);
-  const [fimReal, setFimReal] = useState(null);
+  const [inicioReal, setInicioReal] = useState<any>(null);
+  const [fimReal, setFimReal] = useState<any>(null);
   const [precedentes, setPrecedentes] = useState<Precedente[]>([]);
 
   const payload = {
@@ -121,6 +121,13 @@ function ModalEditarAtividade({
     const fim = new Date(atividade.finalplanejado);
     fim.setHours(fim.getHours() + 9);
     setFimPlanejado(fim);
+
+    if (atividade.inicioreal !== null) {
+      setInicioReal(new Date(atividade.inicioreal));
+    }
+    if (atividade.finalreal !== null) {
+      setFimReal(new Date(atividade.fimreal));
+    }
 
     const respId = listaOptions.optionsResponsaveis.filter(
       (responsavel: any) => responsavel.label === atividade.nom_responsavel
@@ -290,6 +297,7 @@ function ModalEditarAtividade({
                         setInicioReal={setInicioReal}
                         intervencaoIniciada={intervencaoIniciada}
                         atividadeStatus={atividadeStatus}
+                        fimReal={fimReal}
                       />
                     </Flex>
                     <Flex direction={"column"} grow={1}>
@@ -307,6 +315,7 @@ function ModalEditarAtividade({
                         setFimReal={setFimReal}
                         intervencaoIniciada={intervencaoIniciada}
                         atividadeStatus={atividadeStatus}
+                        inicioReal={inicioReal}
                       />
                     </Flex>
                   </Flex>
