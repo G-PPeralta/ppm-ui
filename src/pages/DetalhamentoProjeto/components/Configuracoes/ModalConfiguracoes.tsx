@@ -646,7 +646,7 @@ function ModalConfiguracoes({
             pt={"0px"}
           >
             <Flex
-              gap={"16px"}
+              gap={2}
               align={"center"}
               direction={{ base: "column", md: "row" }}
             >
@@ -657,22 +657,23 @@ function ModalConfiguracoes({
                 onClick={() => handleCancelar()}
                 h={"56px"}
                 w={"206px"}
-                borderRadius={"10px"}
+                borderRadius={"8px"}
                 background={"white"}
                 _hover={{
-                  background: "red.600",
+                  background: "red.500",
                   transition: "all 0.4s",
                   color: "white",
                 }}
                 fontSize={"18px"}
                 fontWeight={"700"}
+                fontFamily={"Mulish"}
               >
                 Cancelar
               </Button>
               <Button
                 h={"56px"}
                 w={"206px"}
-                borderRadius={"10px"}
+                borderRadius={"8px"}
                 background="origem.500"
                 variant="primary"
                 color="white"
@@ -683,6 +684,7 @@ function ModalConfiguracoes({
                 }}
                 fontSize={"18px"}
                 fontWeight={"700"}
+                fontFamily={"Mulish"}
               >
                 Concluir
               </Button>
