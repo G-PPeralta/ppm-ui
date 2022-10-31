@@ -234,7 +234,7 @@ function LicoesAprendidasModal({
                         setCategoriaId("");
                       }}
                       _hover={{
-                        background: "origem.600",
+                        background: "origem.500",
                         transition: "all 0.4s",
                         color: "white",
                       }}
