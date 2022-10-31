@@ -90,6 +90,7 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
           isRound={true}
           size="sm"
         /> */}
+                  {/*  */}
 
                   {/* <EditaValorModal /> */}
                 </Td>
