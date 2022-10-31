@@ -42,6 +42,7 @@ import PaginacaoTabela from "components/PaginacaoTabela";
 import { getAtividadesProjeto } from "services/get/Atividades-Projeto";
 import { getAtividadesTarefas } from "services/get/Tarefas";
 
+import ModalDeletarTarefa from "./BotaoDeletarTarefa";
 import CadastrarTarefasModal from "./CadastroTarefaModal";
 import EditarTarefaModal from "./EditarTarefaModal";
 
@@ -149,12 +150,17 @@ function BotaoListadeTarefas() {
                     icon={<MdModeEdit />}
                     background="transparent"
                     variant="secondary"
-                    color="#0047BB"
-                    isRound={true}
+                    color="origem.500"
+                    _hover={{
+                      backgroundColor: "origem.500",
+                      color: "white",
+                    }}
+                    // isRound={true}
                     onClick={() => handleEditTarefa(task)}
-                    width={"18px"}
-                    height={"18px"}
+                    // width={"18px"}
+                    // height={"18px"}
                   />
+                  <ModalDeletarTarefa />
                 </Td>
               </Tr>
             ))
