@@ -106,7 +106,7 @@ export function BudgetDetailTable(props: PropsInterface) {
                 <ModalValorPrevisto
                   projeto={filho.projeto}
                   toogleRender={toogleRender}
-                  value={filho.planejado.toString() || ""}
+                  value={filho.planejado.toFixed(2).toString() || ""}
                 />
               </Flex>
             </Td>

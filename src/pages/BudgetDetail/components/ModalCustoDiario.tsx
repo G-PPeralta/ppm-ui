@@ -86,7 +86,7 @@ function ModalCustoDiario(props: { id: string | undefined }) {
 
   const tableData = data.map((dia, key) => (
     <>
-      <Tr background={"origem.200"} key={dia.id}>
+      <Tr color={"white"} background={"origem.200"} key={dia.id}>
         <Td>{dia.index}</Td>
         <Td onClick={() => toggleAcordion(key)}>
           <Flex alignItems={"center"} justifyContent="space-between">
@@ -202,7 +202,7 @@ function ModalCustoDiario(props: { id: string | undefined }) {
                   </Flex>
                 </Flex>
                 <TableContainer mt={4} mb={3} ml={1} borderRadius={"10px"}>
-                  <Table colorScheme={"strippedGray"} align={"center"}>
+                  <Table align={"center"}>
                     <Thead>
                       <Tr background={"origem.500"} color="white">
                         <Th color={"white"}></Th>
