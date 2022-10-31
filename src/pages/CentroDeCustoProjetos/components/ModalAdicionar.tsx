@@ -99,7 +99,7 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
                   <InputGroup>
                     <InputGenerico
                       registerForm={registerForm}
-                      nomeInput={"Valor Previsto"}
+                      nomeInput={"VALOR PREVISTO"}
                       propName={"valor"}
                       value={registerForm.values.valor || ""}
                       required={true}
@@ -178,7 +178,6 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
                       registerForm.values.descricaoDoServico
                     )}
                     onChange={registerForm.handleChange}
-                    maxLength={255}
                   />
                 </Flex>
               </Flex>
