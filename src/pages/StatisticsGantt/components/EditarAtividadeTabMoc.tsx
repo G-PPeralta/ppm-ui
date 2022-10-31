@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { FiPlus, FiTrash } from "react-icons/fi";
 
 import { Flex, IconButton } from "@chakra-ui/react";
 
 import InputGenerico from "components/InputGenerico";
+import LeitorPDF from "components/LeitorPDF";
 
 import { regexCaracteresEspeciais } from "utils/regex";
 
@@ -13,6 +15,8 @@ interface Props {
 }
 
 function EditarAtividadeTabMOC({ registerForm }: Props) {
+  const [arquivoPdf, setArquivoPdf] = useState<any>("");
+
   const adicionarNovaMoc = () => {
     const mocs = registerForm.values.mocs;
     registerForm.setFieldValue("mocs", [
@@ -39,7 +43,7 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
     <Flex w={"100%"} direction={"column"} gap={4}>
       <Flex flex={1} justify={"space-between"} direction={"column"} gap={4}>
         {registerForm.values.mocs.map((moc: any, index: number) => (
-          <>
+          <Flex direction={"column"} gap={5}>
             <Flex gap={4} justify={"space-between"} align={"end"} key={index}>
               <Flex w={"50%"} align={"end"} gap={2}>
                 <InputGenerico
@@ -73,9 +77,11 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
                 registerForm={registerForm}
                 index={index}
                 nomeArquivo={moc.anexo}
+                setArquivoPdf={setArquivoPdf}
               />
             </Flex>
-          </>
+            {arquivoPdf && <LeitorPDF arquivoPdf={arquivoPdf} />}
+          </Flex>
         ))}
       </Flex>
       <Flex

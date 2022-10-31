@@ -12,9 +12,15 @@ interface Props {
   registerForm: any;
   index: number;
   nomeArquivo: string;
+  setArquivoPdf: React.Dispatch<React.SetStateAction<any>>;
 }
 
-function BotaoUploadArquivo({ registerForm, index, nomeArquivo }: Props) {
+function BotaoUploadArquivo({
+  registerForm,
+  index,
+  nomeArquivo,
+  setArquivoPdf,
+}: Props) {
   const [nomeArquivoSelecionado, setNomeArquivoSelecionado] =
     useState(nomeArquivo);
   const [arquivoSelecionado, setArquivoSelecionado] = useState("");
@@ -49,8 +55,11 @@ function BotaoUploadArquivo({ registerForm, index, nomeArquivo }: Props) {
         const arquivo = new File([data], nomeArquivo, {
           type: "application/pdf",
         });
-        const fileURL = URL.createObjectURL(arquivo);
-        window.open(fileURL);
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(arquivo);
+        fileReader.onload = () => {
+          setArquivoPdf(fileReader.result);
+        };
       }
     } catch (error) {
       toast.error("Erro ao abrir arquivo");
@@ -58,59 +67,60 @@ function BotaoUploadArquivo({ registerForm, index, nomeArquivo }: Props) {
   };
 
   return (
-    <Flex direction={"row-reverse"} gap={6} align={"center"}>
-      <div {...getRootProps()}>
-        <input {...getInputProps()} />
-        <Button
-          h={"56px"}
-          borderRadius={"10px"}
-          background={"white"}
-          color={"origem.500"}
-          _hover={{
-            background: "origem.500",
-            transition: "all 0.4s",
-            color: "white",
-          }}
-          colorScheme="blue"
-          variant="ghost"
-          rightIcon={<BsFillCloudArrowUpFill size={24} />}
-        >
-          Anexar
-        </Button>
-      </div>
-      {nomeArquivoSelecionado !== "" && (
-        <Flex gap={1} align={"center"}>
-          <IconButton
-            isRound
-            variant={"ghost"}
-            size={"xs"}
-            aria-label="Botão excluir anexo"
-            color={"red.500"}
+    <Flex direction={"column"} gap={6}>
+      <Flex direction={"row-reverse"} gap={6} align={"center"}>
+        <div {...getRootProps()}>
+          <input {...getInputProps()} />
+          <Button
+            h={"56px"}
+            borderRadius={"10px"}
+            background={"white"}
+            color={"origem.500"}
             _hover={{
-              background: "transparent",
+              background: "origem.500",
               transition: "all 0.4s",
-              color: "red.600",
-              size: "sm",
+              color: "white",
             }}
-            icon={<AiFillCloseCircle size={16} />}
-            onClick={() => {
-              registerForm.setFieldValue(`mocs[${index}].arquivo`, "");
-              registerForm.setFieldValue(`mocs[${index}].anexo`, "");
-              setNomeArquivoSelecionado("");
-            }}
-          />
-
-          <Text
-            fontSize={"12px"}
-            fontWeight={"semibold"}
-            onClick={() => {
-              handleTeste();
-            }}
+            colorScheme="blue"
+            variant="ghost"
+            rightIcon={<BsFillCloudArrowUpFill size={24} />}
           >
-            {nomeArquivoSelecionado}
-          </Text>
-        </Flex>
-      )}
+            Anexar
+          </Button>
+        </div>
+        {nomeArquivoSelecionado !== "" && (
+          <Flex gap={1} align={"center"}>
+            <IconButton
+              isRound
+              variant={"ghost"}
+              size={"xs"}
+              aria-label="Botão excluir anexo"
+              color={"red.500"}
+              _hover={{
+                background: "transparent",
+                transition: "all 0.4s",
+                color: "red.600",
+                size: "sm",
+              }}
+              icon={<AiFillCloseCircle size={16} />}
+              onClick={() => {
+                registerForm.setFieldValue(`mocs[${index}].arquivo`, "");
+                registerForm.setFieldValue(`mocs[${index}].anexo`, "");
+                setNomeArquivoSelecionado("");
+              }}
+            />
+            <Text
+              fontSize={"12px"}
+              fontWeight={"semibold"}
+              onClick={() => {
+                handleTeste();
+              }}
+            >
+              {nomeArquivoSelecionado}
+            </Text>
+          </Flex>
+        )}
+      </Flex>
     </Flex>
   );
 }
