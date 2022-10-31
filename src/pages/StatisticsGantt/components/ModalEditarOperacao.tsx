@@ -59,35 +59,7 @@ interface Props {
   registerForm: any;
 }
 
-// const ocorrenciasMock = [
-//   {
-//     id: 1,
-//     nome_ocorrencia: "Agda informação técnica / orientação",
-//     horas: "00:00",
-//   },
-//   {
-//     id: 2,
-//     nome_ocorrencia: "Agdo manutenção",
-//     horas: "00:00",
-//   },
-//   {
-//     id: 3,
-//     nome_ocorrencia: "Agdo outros",
-//     horas: "00:00",
-//   },
-//   {
-//     id: 4,
-//     nome_ocorrencia: "Agdo recursos Cia Serviço",
-//     horas: "00:00",
-//   },
-//   {
-//     id: 5,
-//     nome_ocorrencia: "APR",
-//     horas: "00:00",
-//   },
-// ];
-
-function ModalAdicionarOperacao({
+function ModalEditarOperacao({
   setRefresh,
   refresh,
   editOp,
@@ -169,7 +141,6 @@ function ModalAdicionarOperacao({
     if (mocs.length > 0) {
       registerForm.setFieldValue("mocs", mocs);
     }
-    // console.log("GAMBIARRA", editOp);
   }, [gambiarra]);
 
   useEffect(() => {
@@ -274,8 +245,8 @@ function ModalAdicionarOperacao({
             }}
           >
             <ModalBody mt={3}>
-              <Flex flex={1} mt={5}>
-                <Tabs variant={"unstyled"} isLazy={true} flex={1}>
+              <Flex flex={1} mt={5} w={"100%"}>
+                <Tabs variant={"unstyled"} isLazy={true} flex={1} w={"100%"}>
                   <TabList>
                     <ButtonGroup size="lg" isAttached variant="outline">
                       {botoes.map((botao, index) => (
@@ -299,7 +270,7 @@ function ModalAdicionarOperacao({
                     </ButtonGroup>
                   </TabList>
 
-                  <TabPanels flex={1}>
+                  <TabPanels flex={1} w={"100%"}>
                     <TabPanel flex={1}>
                       <EditarAtividadeTabGeral registerForm={registerForm} />
                     </TabPanel>
@@ -352,4 +323,4 @@ function ModalAdicionarOperacao({
   );
 }
 
-export default ModalAdicionarOperacao;
+export default ModalEditarOperacao;
