@@ -27,8 +27,8 @@ import { useEditarAtividadeGantt } from "hooks/useEditarAtividadeGantt";
 
 import { getGanttData } from "services/get/Gantt";
 
-import ModalCadastroAtividades from "../../pages/DetalhamentoProjeto/components/ModalCadastroAtividades";
-import ModalEditarAtividade from "../../pages/DetalhamentoProjeto/components/ModalEditarAtividade";
+import ModalCadastroAtividades from "../ModalCadastroAtividades";
+import ModalEditarAtividade from "../ModalEditarAtividade";
 
 type ganttOptionsProps = {
   ganttOptions?: any;
