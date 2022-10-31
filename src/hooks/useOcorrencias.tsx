@@ -26,6 +26,12 @@ export function useOcorrencias(idAtividade: number, metodo: string) {
     ocorrencia: "",
     impacto: 0,
     observacoes: "",
+    anexo: [
+      {
+        anexo: "",
+        arquivo: "",
+      },
+    ],
   };
 
   const registerForm: any = useFormik({
@@ -39,6 +45,7 @@ export function useOcorrencias(idAtividade: number, metodo: string) {
         ocorrencia: values.ocorrencia,
         impacto: formatFloatToMinutes(values.impacto),
         observacoes: "",
+        anexo: values.anexo,
       };
 
       setLoading(true);
