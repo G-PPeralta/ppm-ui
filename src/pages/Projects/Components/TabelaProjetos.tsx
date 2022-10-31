@@ -21,7 +21,6 @@ import { Projetos } from "interfaces/Projetos";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
 
-import { formatDate } from "utils/formatDate";
 import { formatReal } from "utils/formatReal";
 
 import ModalCadastrarPriorizacao from "./ModalCadastrarPriorizacao";
@@ -56,7 +55,10 @@ export function TabelaProjetos({ data, refresh, setRefresh }: TableProps) {
     0
   );
 
-  // console.log({ data });
+  function formatDate(date: string) {
+    const formated = date.substring(0, 10).split("-");
+    return `${formated[2]}/${formated[1]}/${formated[0]}`;
+  }
 
   const tableData = data.slice(from, to).map((projeto, key) => (
     <Tr key={key}>
@@ -134,14 +136,10 @@ export function TabelaProjetos({ data, refresh, setRefresh }: TableProps) {
         {projeto.responsavel}
       </Td>
       <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-        {projeto.data_inicio == null
-          ? "---"
-          : formatDate(new Date(projeto.data_inicio))}
+        {projeto.data_inicio == null ? "---" : formatDate(projeto.data_inicio)}
       </Td>
       <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-        {projeto.data_fim == null
-          ? "---"
-          : formatDate(new Date(projeto.data_fim))}
+        {projeto.data_fim == null ? "---" : formatDate(projeto.data_fim)}
       </Td>
       <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>{`${
         projeto.vlr_cr && projeto.vlr_orcado
