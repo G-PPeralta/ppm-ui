@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FiPlus, FiTrash } from "react-icons/fi";
 
 import { Flex, IconButton } from "@chakra-ui/react";
@@ -15,8 +14,6 @@ interface Props {
 }
 
 function EditarAtividadeTabMOC({ registerForm }: Props) {
-  const [arquivoPdf, setArquivoPdf] = useState<any>("");
-
   const adicionarNovaMoc = () => {
     const mocs = registerForm.values.mocs;
     registerForm.setFieldValue("mocs", [
@@ -38,6 +35,8 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
   const isDisabled = registerForm.values.mocs.some(
     (moc: any) => moc.numero_moc === ""
   );
+
+  console.log("registerForm", registerForm.values);
 
   return (
     <Flex w={"100%"} direction={"column"} gap={4}>
@@ -77,12 +76,13 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
                 registerForm={registerForm}
                 index={index}
                 nomeArquivo={moc.anexo}
-                setArquivoPdf={setArquivoPdf}
               />
             </Flex>
+            {moc?.url?.length > 0 && (
+              <LeitorPDF registerForm={registerForm} index={index} />
+            )}
           </Flex>
         ))}
-        {arquivoPdf && <LeitorPDF arquivoPdf={arquivoPdf} />}
       </Flex>
       <Flex
         w="100%"

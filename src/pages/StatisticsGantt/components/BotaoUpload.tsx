@@ -10,15 +10,9 @@ interface Props {
   registerForm: any;
   index: number;
   nomeArquivo: string;
-  setArquivoPdf: React.Dispatch<React.SetStateAction<any>>;
 }
 
-function BotaoUploadArquivo({
-  registerForm,
-  index,
-  nomeArquivo,
-  setArquivoPdf,
-}: Props) {
+function BotaoUploadArquivo({ registerForm, index, nomeArquivo }: Props) {
   const [nomeArquivoSelecionado, setNomeArquivoSelecionado] =
     useState(nomeArquivo);
   const [arquivoSelecionado, setArquivoSelecionado] = useState("");
@@ -45,12 +39,17 @@ function BotaoUploadArquivo({
     maxSize: 99999999999999,
   });
 
-  const handleTeste = async () => {
+  const handleClick = async () => {
     try {
       if (arquivoSelecionado.length === 0) {
         const nomeArquivoSemExtensao = nomeArquivo.split(".")[0];
         const url = `${process.env.REACT_APP_API_URL}pdf/${nomeArquivoSemExtensao}`;
-        setArquivoPdf(url);
+        registerForm.setFieldValue(`mocs[${index}].url`, url);
+        registerForm.setFieldValue(`mocs[${index}].isOpen`, true);
+      } else {
+        toast.error(
+          "A pré visualização do arquivo só é possível para arquivos cadastrados anteriormente."
+        );
       }
     } catch (error) {
       toast.error("Erro ao abrir arquivo");
@@ -103,8 +102,9 @@ function BotaoUploadArquivo({
             <Text
               fontSize={"12px"}
               fontWeight={"semibold"}
+              cursor={"pointer"}
               onClick={() => {
-                handleTeste();
+                handleClick();
               }}
             >
               {nomeArquivoSelecionado}
