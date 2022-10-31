@@ -35,37 +35,44 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
 
   // console.log({ licoes });
 
-  const tableData = licoes
-    .sort((a, b) => a.id - b.id)
-    .map((lessons, index) => (
-      <Tr key={index}>
-        <Td textAlign={"center"} fontWeight={"semibold"}>
-          {lessons.id}
-        </Td>
-        <Td textAlign={"center"} fontWeight={"semibold"}>
-          {lessons.licao_aprendida}
-        </Td>
-        <Td textAlign={"center"} fontWeight={"semibold"}>
-          {new Date(lessons.data).toLocaleString("pt-BR").substring(0, 10)}
-        </Td>
-        <Td textAlign={"center"} fontWeight={"semibold"}>
-          {lessons.acao_e_recomendacao}
-        </Td>
+  function Body() {
+    return (
+      <>
+        {licoes.length > 0 ? (
+          licoes
+            .sort((a, b) => a.id - b.id)
+            .slice(from, to)
+            .map((lessons: any, index: any) => (
+              <Tr key={index}>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  {lessons.id}
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  {lessons.licao_aprendida}
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  {new Date(lessons.data)
+                    .toLocaleString("pt-BR")
+                    .substring(0, 10)}
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  {lessons.acao_e_recomendacao}
+                </Td>
 
-        <Td>
-          <IconButton
-            aria-label="Plus sign"
-            icon={<MdModeEdit />}
-            backgroundColor={"transparent"}
-            variant="secondary"
-            color="#0047BB"
-            mr={2}
-            isRound={true}
-            onClick={() => onEdit(lessons)}
-            width={"18px"}
-            height={"18px"}
-          />
-          {/* <IconButton
+                <Td>
+                  <IconButton
+                    aria-label="Plus sign"
+                    icon={<MdModeEdit />}
+                    backgroundColor={"transparent"}
+                    variant="secondary"
+                    color="#0047BB"
+                    mr={2}
+                    isRound={true}
+                    onClick={() => onEdit(lessons)}
+                    width={"18px"}
+                    height={"18px"}
+                  />
+                  {/* <IconButton
           aria-label="Plus sign"
           icon={<FaTrash />}
           background="white"
@@ -76,10 +83,66 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
           size="sm"
         /> */}
 
-          {/* <EditaValorModal /> */}
-        </Td>
-      </Tr>
-    ));
+                  {/* <EditaValorModal /> */}
+                </Td>
+              </Tr>
+            ))
+        ) : (
+          <Tr>
+            <Td textAlign={"start"} fontWeight={"semibold"}>
+              Não há dados
+            </Td>
+          </Tr>
+        )}
+      </>
+    );
+  }
+
+  // const tableData = licoes
+  //   .sort((a, b) => a.id - b.id)
+  //   .map((lessons, index) => (
+  //     <Tr key={index}>
+  //       <Td textAlign={"center"} fontWeight={"semibold"}>
+  //         {lessons.id}
+  //       </Td>
+  //       <Td textAlign={"center"} fontWeight={"semibold"}>
+  //         {lessons.licao_aprendida}
+  //       </Td>
+  //       <Td textAlign={"center"} fontWeight={"semibold"}>
+  //         {new Date(lessons.data).toLocaleString("pt-BR").substring(0, 10)}
+  //       </Td>
+  //       <Td textAlign={"center"} fontWeight={"semibold"}>
+  //         {lessons.acao_e_recomendacao}
+  //       </Td>
+
+  //       <Td>
+  //         <IconButton
+  //           aria-label="Plus sign"
+  //           icon={<MdModeEdit />}
+  //           backgroundColor={"transparent"}
+  //           variant="secondary"
+  //           color="#0047BB"
+  //           mr={2}
+  //           isRound={true}
+  //           onClick={() => onEdit(lessons)}
+  //           width={"18px"}
+  //           height={"18px"}
+  //         />
+  //         {/* <IconButton
+  //         aria-label="Plus sign"
+  //         icon={<FaTrash />}
+  //         background="white"
+  //         variant="secondary"
+  //         color="#F94144"
+  //         mr={2}
+  //         isRound={true}
+  //         size="sm"
+  //       /> */}
+
+  //         {/* <EditaValorModal /> */}
+  //       </Td>
+  //     </Tr>
+  //   ));
 
   return (
     <Flex direction={"column"} w={"100%"}>
@@ -110,7 +173,7 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
                 </Th>
               </Tr>
             </Thead>
-            <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+            <Tbody scrollBehavior={"smooth"}>{<Body />}</Tbody>
             {/* <Tfoot>
           <Tr background="origem.200" color="white">
             <Th></Th>
