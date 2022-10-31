@@ -106,18 +106,13 @@ export function LicoesAprendidasProjetos() {
   ) {
     try {
       await patchLicaoAprendida(licao, campo, payload, user);
-      setLicoesAprendidas(
-        licoesAprendidas.map((lic) =>
-          lic.id == editLicao.id ? editLicao : lic
-        )
-      );
       await handleGetLicoesAprendidas();
+      setProjetoId("0");
       onClose();
     } catch (error) {
       toast.error("Erro na requisição");
     }
   }
-  // console.log({ filteredLicoesAprendidas });
 
   const tableData = filteredLicoesAprendidas
     .sort((a, b) => a.id - b.id)
@@ -156,10 +151,11 @@ export function LicoesAprendidasProjetos() {
             variant="secondary"
             color="#0047BB"
             // mr={2}
-            isRound={true}
+            // isRound={true}
             // size="md"
-            width={"18px"}
-            height={"18px"}
+            _hover={{ background: "origem.500", color: "white" }}
+            // width={"18px"}
+            // height={"18px"}
             onClick={() => {
               setEditLicao(lessons);
               onOpen();
@@ -309,6 +305,7 @@ export function LicoesAprendidasProjetos() {
                     onChange={(e) => setProjetoId(e.target.value)}
                     width={"208px"}
                     height={"56px"}
+                    value={projetoId}
                   >
                     <option color={"#A7A7A7"} value={0}>
                       Todos

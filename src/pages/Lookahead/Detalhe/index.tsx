@@ -100,19 +100,27 @@ export function LookaheadDetalhe() {
           <ContainerPagina>
             <Flex direction="column">
               <Flex align={"center"} gap={2} mb={4}>
-                <BotaoSetaVoltar />
+                <Flex ml={-3} mt={-8} mr={-2}>
+                  <BotaoSetaVoltar />
+                </Flex>
                 <Flex direction={"column"}>
                   <Heading
+                    mt={-1}
                     fontFamily={"Mulish"}
                     fontWeight={"700"}
-                    as="h3"
-                    size="md"
+                    // as="h3"
+                    // size="md"
                     textAlign={"center"}
                     fontSize={"24px"}
                   >
                     Relatório Lookahead
                   </Heading>
-                  <Text fontSize="20px" color="#585858" fontWeight="400">
+                  <Text
+                    fontFamily={"Mulish"}
+                    fontSize="20px"
+                    color="#585858"
+                    fontWeight="400"
+                  >
                     {atividade[0].nom_atividade}
                   </Text>
                 </Flex>

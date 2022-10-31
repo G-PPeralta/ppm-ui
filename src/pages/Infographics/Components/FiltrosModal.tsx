@@ -216,7 +216,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                           e.target.value
                         );
                       }}
-                      value={registerForm.values.data_inicio}
+                      value={registerForm.values.data_inicio || new Date()}
                       defaultValue={"dd/mm/aaaa"}
                     />
                   </Flex>
@@ -240,7 +240,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                       onChange={(e) => {
                         registerForm.setFieldValue("data_fim", e.target.value);
                       }}
-                      value={registerForm.values.data_fim}
+                      value={registerForm.values.data_fim || new Date()}
                     />
                   </Flex>
                 </Flex>

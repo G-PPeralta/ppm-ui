@@ -86,17 +86,26 @@ export function TabelaFornecedores({
           </Td>
           <Td textAlign={"center"}>
             <IconButton
-              aria-label="Plus sign"
+              // aria-label="Plus sign"
               icon={<MdModeEdit />}
               background="transparent"
-              variant="secondary"
-              color="#0047BB"
+              // variant="secondary"
+              // color="#0047BB"
+              color={"origem.500"}
+              backgroundColor={"transparent"}
+              aria-label="Plus sign"
               mr={2}
-              isRound={true}
+              // isRound={true}
               size="sm"
               onClick={() => onEdit(fornecedor)}
-              width={"18px"}
-              height={"18px"}
+              // width={"18px"}
+              // height={"18px"}
+              _hover={{
+                backgroundColor: "origem.500",
+                color: "white",
+              }}
+              fontSize={"18px"}
+              fontWeight={"700"}
             />
           </Td>
         </Tr>

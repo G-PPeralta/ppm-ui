@@ -274,7 +274,9 @@ export function ModalFiltrarAtividade({
                   height="56px"
                   width={174}
                   disabled={
-                    !registerForm.values.pocoId || !registerForm.values.sondaId
+                    !Object.values(registerForm.values).some(
+                      (element) => element !== "" && element !== 0
+                    )
                   }
                 >
                   {loadingBtn ? (

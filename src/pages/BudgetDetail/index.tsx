@@ -27,21 +27,30 @@ export function BudgetDetail() {
       <Sidebar>
         {!loading ? (
           <ContainerPagina>
-            <TituloPagina botaoVoltar={true}>
-              Gerencial do Orçamento
-            </TituloPagina>
+            <Flex mt={-2} ml={-5} mb={-7}>
+              <TituloPagina botaoVoltar={true}>
+                Gerencial do Orçamento
+              </TituloPagina>
+            </Flex>
             <Flex>
               <Box p="4">
                 <Heading
-                  as="h3"
-                  size="md"
+                  // as="h3"
+                  // size="md"
                   fontFamily={"Mulish"}
-                  fontWeight={"bold"}
+                  fontWeight={"700"}
+                  fontSize={"24px"}
                   noOfLines={1}
                 >
                   {titulo?.sonda_nome}
                 </Heading>
-                <Text>{titulo?.poco_nome}</Text>
+                <Text
+                  fontFamily={"Mulish"}
+                  fontWeight={"400"}
+                  fontSize={"20px"}
+                >
+                  {titulo?.poco_nome}
+                </Text>
               </Box>
               <Spacer />
               <Box p="4">

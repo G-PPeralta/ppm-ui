@@ -51,13 +51,13 @@ function ModalDeletarProjeto(projeto: id) {
         backgroundColor={"transparent"}
         aria-label="Plus sign"
         _hover={{
-          backgroundColor: "#F40606",
+          backgroundColor: "#F94144",
           color: "white",
         }}
-        w={"14px"}
-        h={"18px"}
+        // w={"14px"}
+        // h={"18px"}
       >
-        <FiTrash size={"13px"} />
+        <FiTrash />
       </IconButton>
       <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
@@ -104,7 +104,7 @@ function ModalDeletarProjeto(projeto: id) {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red"
+                  color="red.500"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: "red.500",
@@ -112,9 +112,9 @@ function ModalDeletarProjeto(projeto: id) {
                     color: "white",
                   }}
                   height={"56px"}
-                  width={"100px"}
+                  width={"206px"}
                   fontSize={"18px"}
-                  fontWeight={"600"}
+                  fontWeight={"700"}
                 >
                   Cancelar
                 </Button>
@@ -124,13 +124,13 @@ function ModalDeletarProjeto(projeto: id) {
                   color="white"
                   onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
-                    background: "origem.500",
+                    background: "origem.600",
                     transition: "all 0.4s",
                   }}
                   height={"56px"}
-                  width={"208px"}
+                  width={"206px"}
                   fontSize={"18px"}
-                  fontWeight={"600"}
+                  fontWeight={"700"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />

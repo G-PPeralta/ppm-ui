@@ -73,8 +73,8 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
           color: "white",
         }}
         border={"none"}
-        w={"14px"}
-        h={"18px"}
+        // w={"14px"}
+        // h={"18px"}
         textAlign={"center"}
         icon={<MdModeEdit />}
       />

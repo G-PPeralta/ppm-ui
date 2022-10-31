@@ -7,7 +7,7 @@ import { Ring } from "@uiball/loaders";
 import { ICardInfoProjeto } from "interfaces/DetalhamentoProjetos";
 import {
   Categorias,
-  LicoesAprendidas,
+  LicoesAprendidasNew,
   ProjetoProgresso,
 } from "interfaces/Services";
 
@@ -71,7 +71,7 @@ function DetalhamentoProjeto() {
     descricao: "",
     justificativa: "",
   });
-  const [licoes, setLicoes] = useState([] as LicoesAprendidas[]);
+  const [licoes, setLicoes] = useState([] as LicoesAprendidasNew[]);
   const [categorias, setCategorias] = useState([] as Categorias[]);
   const [progresso, setProgresso] = useState([] as ProjetoProgresso[]);
   const [render, setRender] = useState(false);
@@ -117,7 +117,8 @@ function DetalhamentoProjeto() {
   async function handleGetLicoes() {
     if (id) {
       const response = await getLicoesAprendidas(id);
-      setLicoes(response.data as LicoesAprendidas[]);
+      // console.log("ENTROU", response);
+      setLicoes(response.data as LicoesAprendidasNew[]);
     }
   }
 

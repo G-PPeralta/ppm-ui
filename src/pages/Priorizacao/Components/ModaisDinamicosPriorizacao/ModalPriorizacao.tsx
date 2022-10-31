@@ -55,8 +55,8 @@ function ModalPriorizacao(infosRankings: TableProps) {
           backgroundColor: "origem.500",
           color: "white",
         }}
-        w={"14px"}
-        h={"18px"}
+        // w={"14px"}
+        // h={"18px"}
         icon={<MdModeEdit />}
       />
       <Modal isOpen={isOpen} onClose={onClose} size="4xl">
