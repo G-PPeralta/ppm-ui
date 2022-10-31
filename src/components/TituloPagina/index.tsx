@@ -9,7 +9,7 @@ interface Props {
 
 function TituloPagina({ children, botaoVoltar }: Props) {
   return (
-    <Flex align={"center"} gap={2} mb={4}>
+    <Flex align={"center"} mb={4}>
       {botaoVoltar && <BotaoSetaVoltar />}
       <Heading
         as="h2"
@@ -17,6 +17,7 @@ function TituloPagina({ children, botaoVoltar }: Props) {
         fontFamily={"Mulish"}
         textAlign={"center"}
         fontSize={"24px"}
+        fontWeight={"700"}
       >
         {children}
       </Heading>

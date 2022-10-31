@@ -116,7 +116,7 @@ function EditModal({
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            Editar Lições aprendidas
+            Editar Lições Aprendidas
           </ModalHeader>
 
           <ModalCloseButton color={"white"} />
