@@ -8,6 +8,7 @@ function DateTimePickerDataFimReal({
   setFimReal,
   intervencaoIniciada,
   atividadeStatus,
+  inicioReal,
 }: any) {
   const handleIniciarDate = (date: any) => {
     setFimReal(date);
@@ -40,6 +41,7 @@ function DateTimePickerDataFimReal({
         customInput={<TriggerDatePickerInicio />}
         isClearable={fimReal !== ""}
         disabled={!intervencaoIniciada && atividadeStatus !== 100}
+        minDate={inicioReal}
       />
     </Flex>
   );
