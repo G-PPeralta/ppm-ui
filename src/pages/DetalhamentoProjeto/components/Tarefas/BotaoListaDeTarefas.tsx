@@ -99,20 +99,25 @@ function BotaoListadeTarefas() {
   }
 
   function handleFilter(nome: string, data: string) {
-    if (nome) {
-      const filtered = taskList.filter((task: any) =>
-        task.nome_tarefa.toUpperCase().includes(nome.toUpperCase())
+    let filtered = taskList;
+
+    if (nome && data) {
+      filtered = taskList.filter(
+        (task: any) =>
+          task.nome_tarefa.toUpperCase().includes(nome.toUpperCase()) &&
+          task.data_tarefa.includes(data)
       );
       return setTaskList(filtered);
     }
-    if (data) {
-      const filtered = taskList.filter((task: any) =>
-        task.data_tarefa.includes(data)
-      );
-      // filtered.length == 0 &&
-      //   toast.error("Nenhum dado encontrado com o presente filtro de data");
-      return setTaskList(filtered);
-    }
+    // if (data) {
+    //   const filtered = taskList.filter((task: any) =>
+    //     task.data_tarefa.includes(data)
+    //   );
+    // filtered.length == 0 &&
+    //   toast.error("Nenhum dado encontrado com o presente filtro de data");
+    //   return setTaskList(filtered);
+    // }
+    if (filtered) setTaskList(filtered);
     setTaskList(filteredData);
   }
 
