@@ -19,7 +19,7 @@ import {
   // Textarea,
   useBreakpointValue,
   useDisclosure,
-  IconButton,
+  // IconButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -170,20 +170,24 @@ function ModalCadastrarPriorizacao({
 
   return (
     <>
-      <IconButton
+      <Button
         onClick={handleClick}
+        // w={"232px"}
+        // h={"56px"}
         color={"origem.500"}
         backgroundColor={"transparent"}
-        aria-label="Plus sign"
+        border="none"
         _hover={{
-          backgroundColor: "origem.500",
+          // backgroundColor: "origem.500",
           color: "white",
         }}
         fontSize={"18px"}
         fontWeight={"700"}
+        fontFamily={"Mulish"}
+        rightIcon={<IoIosPodium />}
       >
-        <IoIosPodium />
-      </IconButton>
+        Priorização
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
