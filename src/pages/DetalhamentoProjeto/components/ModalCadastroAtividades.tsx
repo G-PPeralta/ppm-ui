@@ -210,7 +210,7 @@ function ModalCadastroAtividades({
                     nomeSelect={"RELAÇÃO"}
                     propName={"relacao_id"}
                     options={relacoesOptions}
-                    required={false}
+                    required={true}
                   />
                 </Flex>
 
@@ -265,7 +265,11 @@ function ModalCadastroAtividades({
                           );
                         }}
                       >
-                        <NumberInputField bg={"#fff"} h={"56px"} />
+                        <NumberInputField
+                          maxLength={5}
+                          bg={"#fff"}
+                          h={"56px"}
+                        />
                       </NumberInput>
                     </Flex>
                   </Flex>
