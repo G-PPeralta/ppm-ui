@@ -300,7 +300,7 @@ function ModalConfiguracoes({
                       alignItems={"center"}
                     >
                       <Button
-                        w={"232px"}
+                        w={"208px"}
                         h={"56px"}
                         color="#0047BB"
                         background="white"
@@ -316,7 +316,6 @@ function ModalConfiguracoes({
                         // rightIcon={<IoMdPodium />}
                         onClick={() => setIsPriorizacaoModalOpen(true)}
                       >
-                        Priorização
                         {
                           <ModalCadastrarPriorizacao
                             refresh={refresh}

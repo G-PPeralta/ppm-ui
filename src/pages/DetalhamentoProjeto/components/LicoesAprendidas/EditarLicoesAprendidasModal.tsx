@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { BsPlusLg } from "react-icons/bs";
+// import { BsPlusLg } from "react-icons/bs";
 
 import {
   Flex,
   Box,
-  IconButton,
+  // IconButton,
   // useBreakpointValue,
   Modal,
   ModalOverlay,
@@ -70,22 +70,22 @@ function EditarLicoesAprendidasModal({
   return (
     <Flex>
       <Box
-        display={"flex"}
-        alignItems={"center"}
-        border="2px"
-        padding={2}
-        borderRadius={6}
-        borderColor={"origem.300"}
-        _hover={{
-          background: "#f5f5f5",
-          transition: "all 0.4s",
-          color: "origem.300",
-          cursor: "pointer",
-          borderColor: "origem.500",
-        }}
-        backgroundColor={"transparent"}
+      // display={"flex"}
+      // alignItems={"center"}
+      // border="2px"
+      // padding={2}
+      // borderRadius={6}
+      // borderColor={"origem.300"}
+      // _hover={{
+      //   background: "#f5f5f5",
+      //   transition: "all 0.4s",
+      //   color: "origem.300",
+      //   cursor: "pointer",
+      //   borderColor: "origem.500",
+      // }}
+      // backgroundColor={"transparent"}
       >
-        <IconButton
+        {/* <IconButton
           aria-label="Plus sign"
           icon={<BsPlusLg />}
           background="origem.300"
@@ -94,7 +94,7 @@ function EditarLicoesAprendidasModal({
           mr={2}
           isRound={true}
           size="sm"
-        />
+        /> */}
         {/* <Text
           fontSize={useBreakpointValue({ base: "sm", md: "sm" })}
           fontWeight={"bold"}
@@ -177,7 +177,7 @@ function EditarLicoesAprendidasModal({
                   AÇÃO OU RECOMENDAÇÃO
                 </FormLabel>
                 <Textarea
-                  maxLength={150}
+                  // maxLength={150}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
