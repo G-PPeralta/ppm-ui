@@ -109,7 +109,7 @@ function LicoesAprendidasModal({
         Lições Aprendidas
       </Button>
 
-      <Modal size={"3xl"} isOpen={isOpen} onClose={onClose}>
+      <Modal size={"6xl"} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -234,7 +234,7 @@ function LicoesAprendidasModal({
                         setCategoriaId("");
                       }}
                       _hover={{
-                        background: "origem.600",
+                        background: "origem.500",
                         transition: "all 0.4s",
                         color: "white",
                       }}

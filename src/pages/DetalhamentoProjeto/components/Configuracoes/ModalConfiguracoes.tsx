@@ -5,7 +5,6 @@ import React, {
   ReactPortal,
   useState,
 } from "react";
-import { IoMdPodium } from "react-icons/io";
 
 import {
   Button,
@@ -300,36 +299,13 @@ function ModalConfiguracoes({
                       justifyContent={"center"}
                       alignItems={"center"}
                     >
-                      <Button
-                        w={"232px"}
-                        h={"56px"}
-                        color="#0047BB"
-                        background="white"
-                        borderColor="#0047BB"
-                        border={"2px"}
-                        _hover={{
-                          background: "#0047BB",
-                          transition: "all 0.4s",
-                          color: "white",
-                        }}
-                        fontWeight={"700"}
-                        fontSize="18px"
-                        rightIcon={<IoMdPodium />}
-                        onClick={() => setIsPriorizacaoModalOpen(true)}
-                      >
-                        Priorização
-                        {
-                          <ModalCadastrarPriorizacao
-                            refresh={refresh}
-                            setRefresh={setRefresh}
-                            projeto={projeto.id}
-                            isPriorizacaoModalOpen={isPriorizacaoModalOpen}
-                            setIsPriorizacaoModalOpen={
-                              setIsPriorizacaoModalOpen
-                            }
-                          />
-                        }
-                      </Button>
+                      <ModalCadastrarPriorizacao
+                        refresh={refresh}
+                        setRefresh={setRefresh}
+                        projeto={projeto.id}
+                        isPriorizacaoModalOpen={isPriorizacaoModalOpen}
+                        setIsPriorizacaoModalOpen={setIsPriorizacaoModalOpen}
+                      />
                     </FormControl>
                   </Flex>
                 </Flex>

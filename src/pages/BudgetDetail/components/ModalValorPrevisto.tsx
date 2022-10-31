@@ -27,7 +27,7 @@ import { Projeto } from "interfaces/Budgets";
 import InputGenerico from "components/InputGenerico";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
-import { formatReal, getMoney } from "utils/regexCoinMask";
+// import { formatReal, getMoney } from "utils/regexCoinMask";
 
 import { useCadastroOrcamentoPrevisto } from "hooks/useCadastroOrcamentoPrevisto";
 
@@ -102,10 +102,7 @@ function ModalValorPrevisto(props: PropsInterface) {
                               registerForm={registerForm}
                               nomeInput={"VALOR PREVISTO"}
                               propName={"valor"}
-                              value={
-                                registerForm.values.valor ||
-                                formatReal(getMoney(value + "00"))
-                              }
+                              value={registerForm.values.valor || value}
                               required={true}
                               placeholder={"0"}
                               maxLength={20}

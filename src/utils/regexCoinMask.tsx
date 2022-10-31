@@ -43,3 +43,15 @@ export function parseNumber(money: string): number {
 
   return +temp;
 }
+
+export function formatRealInput(value: string) {
+  let formatedValue = value.replace(/\D/g, "");
+
+  if (formatedValue.length === 4) {
+    formatedValue = formatedValue.replace(/^(0)/, "");
+  }
+
+  formatedValue = formatedValue.replace(/(\d{1,2})$/, ",$1");
+  formatedValue = formatedValue.replace(/(?=(\d{3})+(\D))\B/g, ".");
+  return formatedValue;
+}
