@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight, FiPrinter } from "react-icons/fi";
 import { Page } from "react-pdf";
 import { Document } from "react-pdf/dist/esm/entry.webpack";
 
-import { Flex, IconButton, Text } from "@chakra-ui/react";
-// import { Ring } from "@uiball/loaders";
+import { Button, Flex, IconButton, Text } from "@chakra-ui/react";
 
 interface Props {
   registerForm: any;
@@ -48,7 +47,7 @@ function LeitorPDF({ registerForm, index }: Props) {
           p={5}
           w={"100%"}
         >
-          <Flex flex={1} w={"100%"} align={"start"} justify={"start"}>
+          <Flex flex={1} w={"100%"} align={"start"} justify={"space-between"}>
             <IconButton
               isRound
               variant={"ghost"}
@@ -66,6 +65,27 @@ function LeitorPDF({ registerForm, index }: Props) {
                 registerForm.setFieldValue(`mocs[${index}].isOpen`, false)
               }
             />
+            <a
+              href={`${registerForm.values.mocs[index]?.url}`}
+              download
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Button
+                h={"56px"}
+                borderRadius={"10px"}
+                background={"white"}
+                color={"origem.500"}
+                _hover={{
+                  background: "origem.500",
+                  transition: "all 0.4s",
+                  color: "white",
+                }}
+                rightIcon={<FiPrinter />}
+              >
+                Exportar
+              </Button>
+            </a>
           </Flex>
 
           <Document
@@ -74,6 +94,7 @@ function LeitorPDF({ registerForm, index }: Props) {
           >
             <Page pageNumber={pageNumber} />
           </Document>
+
           <Flex justify={"center"} gap={4} w={"100%"}>
             <IconButton
               aria-label=""
