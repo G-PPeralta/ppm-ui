@@ -115,47 +115,101 @@ function BotaoListadeTarefas() {
     setTaskList(filteredData);
   }
 
-  const tableData =
-    taskList &&
-    taskList
-      .sort((a, b) => a.id - b.id)
-      .slice(from, to)
-      .map((task, index) => (
-        <Tr key={index}>
-          <Td textAlign={"center"}>{task.id}</Td>
-          <Td textAlign={"center"} fontWeight={"semibold"}>
-            {task.nome_tarefa}
-          </Td>
-          <Td textAlign={"center"} fontWeight={"semibold"}>
-            {task.atividade_relacionada}
-          </Td>
-          <Td textAlign={"center"} fontWeight={"semibold"}>
-            {formatDate(task.data_tarefa)}
-          </Td>
-          <Td textAlign={"center"} fontWeight={"semibold"}>
-            {task.descricao_tarefa}
-          </Td>
-          <Td textAlign={"center"} fontWeight={"semibold"}>
-            {task.responsavel}
-          </Td>
-          <Td textAlign={"center"} fontWeight={"semibold"}>
-            {!task.status ? "1" : task.status}%
-          </Td>
-          <Td>
-            <IconButton
-              aria-label="Plus sign"
-              icon={<MdModeEdit />}
-              background="transparent"
-              variant="secondary"
-              color="#0047BB"
-              isRound={true}
-              onClick={() => handleEditTarefa(task)}
-              width={"18px"}
-              height={"18px"}
-            />
-          </Td>
-        </Tr>
-      ));
+  function Body() {
+    return (
+      <>
+        {taskList.length > 0 ? (
+          taskList
+            .sort((a, b) => a.id - b.id)
+            .slice(from, to)
+            .map((task: any, index: any) => (
+              <Tr key={index}>
+                <Td textAlign={"center"}>{task.id}</Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  {task.nome_tarefa}
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  {task.atividade_relacionada}
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  {formatDate(task.data_tarefa)}
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  {task.descricao_tarefa}
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  {task.responsavel}
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  {!task.status ? "1" : task.status}%
+                </Td>
+                <Td>
+                  <IconButton
+                    aria-label="Plus sign"
+                    icon={<MdModeEdit />}
+                    background="transparent"
+                    variant="secondary"
+                    color="#0047BB"
+                    isRound={true}
+                    onClick={() => handleEditTarefa(task)}
+                    width={"18px"}
+                    height={"18px"}
+                  />
+                </Td>
+              </Tr>
+            ))
+        ) : (
+          <Tr>
+            <Td textAlign={"start"} fontWeight={"semibold"}>
+              Não há dados
+            </Td>
+          </Tr>
+        )}
+      </>
+    );
+  }
+
+  // const tableData =
+  //   taskList &&
+  //   taskList
+  //     .sort((a, b) => a.id - b.id)
+  //     .slice(from, to)
+  //     .map((task, index) => (
+  //       <Tr key={index}>
+  //         <Td textAlign={"center"}>{task.id}</Td>
+  //         <Td textAlign={"center"} fontWeight={"semibold"}>
+  //           {task.nome_tarefa}
+  //         </Td>
+  //         <Td textAlign={"center"} fontWeight={"semibold"}>
+  //           {task.atividade_relacionada}
+  //         </Td>
+  //         <Td textAlign={"center"} fontWeight={"semibold"}>
+  //           {formatDate(task.data_tarefa)}
+  //         </Td>
+  //         <Td textAlign={"center"} fontWeight={"semibold"}>
+  //           {task.descricao_tarefa}
+  //         </Td>
+  //         <Td textAlign={"center"} fontWeight={"semibold"}>
+  //           {task.responsavel}
+  //         </Td>
+  //         <Td textAlign={"center"} fontWeight={"semibold"}>
+  //           {!task.status ? "1" : task.status}%
+  //         </Td>
+  //         <Td>
+  //           <IconButton
+  //             aria-label="Plus sign"
+  //             icon={<MdModeEdit />}
+  //             background="transparent"
+  //             variant="secondary"
+  //             color="#0047BB"
+  //             isRound={true}
+  //             onClick={() => handleEditTarefa(task)}
+  //             width={"18px"}
+  //             height={"18px"}
+  //           />
+  //         </Td>
+  //       </Tr>
+  //     ));
 
   useEffect(() => {
     getTaskList();
@@ -430,7 +484,7 @@ function BotaoListadeTarefas() {
                         </Th>
                       </Tr>
                     </Thead>
-                    <Tbody>{tableData}</Tbody>
+                    <Tbody>{<Body />}</Tbody>
                     {/* <Tfoot>
           <Tr background="origem.200" color="white">
             <Th></Th>
