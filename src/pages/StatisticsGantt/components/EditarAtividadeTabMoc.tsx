@@ -36,7 +36,7 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
     (moc: any) => moc.numero_moc === ""
   );
 
-  console.log("registerForm", registerForm.values);
+  // console.log("registerForm", registerForm.values);
 
   return (
     <Flex w={"100%"} direction={"column"} gap={4}>
@@ -76,10 +76,15 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
                 registerForm={registerForm}
                 index={index}
                 nomeArquivo={moc.anexo}
+                propName={"mocs"}
               />
             </Flex>
             {moc?.url?.length > 0 && (
-              <LeitorPDF registerForm={registerForm} index={index} />
+              <LeitorPDF
+                registerForm={registerForm}
+                index={index}
+                propName={"mocs"}
+              />
             )}
           </Flex>
         ))}

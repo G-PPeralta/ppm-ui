@@ -92,11 +92,22 @@ function ModalEditarOperacao({
       const ocorrenciasPorAtividade = await getOcorrenciasPorAtividade(
         editOp.id_atividade
       );
+
+      const ocorrencias = ocorrenciasPorAtividade.data.map(
+        (ocorrencia: any) => ({
+          ...ocorrencia,
+          url: "",
+          anexo: "",
+        })
+      );
+
       setListaOcorrencias(
-        ocorrenciasPorAtividade.data.sort((a: any, b: any) =>
+        ocorrencias.sort((a: any, b: any) =>
           a.nome_ocorrencia.localeCompare(b.nome_ocorrencia)
         )
       );
+
+      // console.log("ocorrenciasPorAtividade", ocorrenciasPorAtividade.data);
 
       const anotacoesPorAtividade = await getAnotacoesPorAtividade(
         editOp.id_atividade

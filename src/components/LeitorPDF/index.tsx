@@ -9,9 +9,10 @@ import { Button, Flex, IconButton, Text } from "@chakra-ui/react";
 interface Props {
   registerForm: any;
   index: number;
+  propName: string;
 }
 
-function LeitorPDF({ registerForm, index }: Props) {
+function LeitorPDF({ registerForm, index, propName }: Props) {
   const [numPages, setNumPages] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -36,7 +37,7 @@ function LeitorPDF({ registerForm, index }: Props) {
   }, []);
   return (
     <>
-      {registerForm.values.mocs[index].isOpen && (
+      {registerForm.values[propName][index].isOpen && (
         <Flex
           border={"1px"}
           borderColor={"origem.500"}
@@ -62,11 +63,14 @@ function LeitorPDF({ registerForm, index }: Props) {
               }}
               icon={<AiFillCloseCircle size={24} />}
               onClick={() =>
-                registerForm.setFieldValue(`mocs[${index}].isOpen`, false)
+                registerForm.setFieldValue(
+                  `${propName}[${index}].isOpen`,
+                  false
+                )
               }
             />
             <a
-              href={`${registerForm.values.mocs[index]?.url}`}
+              href={`${registerForm.values[propName][index]?.url}`}
               download
               target="_blank"
               rel="noreferrer"
@@ -89,7 +93,7 @@ function LeitorPDF({ registerForm, index }: Props) {
           </Flex>
 
           <Document
-            file={{ url: registerForm.values.mocs[index]?.url }}
+            file={{ url: registerForm.values[propName][index]?.url }}
             onLoadSuccess={onDocumentLoadSuccess}
           >
             <Page pageNumber={pageNumber} />

@@ -70,6 +70,8 @@ export function useEditarOperacao(
       {
         numero_moc: "",
         anexo: "",
+        url: "",
+        isOpen: false,
       },
     ],
     ocorrencias: [
@@ -77,6 +79,9 @@ export function useEditarOperacao(
         id: 0,
         nome_ocorrencia: "",
         horas: "",
+        anexo: "",
+        url: "",
+        isOpen: false,
       },
     ],
     licoes_aprendidas: [

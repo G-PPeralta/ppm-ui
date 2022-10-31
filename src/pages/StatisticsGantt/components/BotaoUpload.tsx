@@ -10,22 +10,54 @@ interface Props {
   registerForm: any;
   index: number;
   nomeArquivo: string;
+  propName: string;
 }
 
-function BotaoUploadArquivo({ registerForm, index, nomeArquivo }: Props) {
+function BotaoUploadArquivo({
+  registerForm,
+  index,
+  nomeArquivo,
+  propName,
+}: Props) {
   const [nomeArquivoSelecionado, setNomeArquivoSelecionado] =
     useState(nomeArquivo);
   const [arquivoSelecionado, setArquivoSelecionado] = useState("");
 
+  const handleNomeArquivo = (nomeArquivo: string) =>
+    nomeArquivo.replace(/\s/g, "_");
+
   const onDrop = (acceptedFiles: any) => {
     const file = acceptedFiles[0];
     setArquivoSelecionado(file.name);
-    const nomeArquivo = `${registerForm.values.id_atividade}_${registerForm.values.mocs[index].numero_moc}.pdf`;
-    const fileRenomeado = new File([file], nomeArquivo, {
-      type: file.type,
-    });
-    registerForm.setFieldValue(`mocs[${index}].arquivo`, fileRenomeado);
-    registerForm.setFieldValue(`mocs[${index}].anexo`, fileRenomeado.name);
+    if (propName === "anexo") {
+      const nomeArquivo = `${registerForm.values.id_poco}_${
+        registerForm.values.id_sonda
+      }_${handleNomeArquivo(registerForm.values.ocorrencia)}.pdf`;
+      const fileRenomeado = new File([file], nomeArquivo, {
+        type: file.type,
+      });
+      registerForm.setFieldValue(
+        `${propName}[${index}].arquivo`,
+        fileRenomeado
+      );
+      registerForm.setFieldValue(
+        `${propName}[${index}].anexo`,
+        fileRenomeado.name
+      );
+    } else {
+      const nomeArquivo = `${registerForm.values.id_atividade}_${registerForm.values[propName][index].numero_moc}.pdf`;
+      const fileRenomeado = new File([file], nomeArquivo, {
+        type: file.type,
+      });
+      registerForm.setFieldValue(
+        `${propName}[${index}].arquivo`,
+        fileRenomeado
+      );
+      registerForm.setFieldValue(
+        `${propName}[${index}].anexo`,
+        fileRenomeado.name
+      );
+    }
     setNomeArquivoSelecionado(file.name);
   };
 
@@ -44,8 +76,8 @@ function BotaoUploadArquivo({ registerForm, index, nomeArquivo }: Props) {
       if (arquivoSelecionado.length === 0) {
         const nomeArquivoSemExtensao = nomeArquivo.split(".")[0];
         const url = `${process.env.REACT_APP_API_URL}pdf/${nomeArquivoSemExtensao}`;
-        registerForm.setFieldValue(`mocs[${index}].url`, url);
-        registerForm.setFieldValue(`mocs[${index}].isOpen`, true);
+        registerForm.setFieldValue(`${propName}[${index}].url`, url);
+        registerForm.setFieldValue(`${propName}[${index}].isOpen`, true);
       } else {
         toast.error(
           "A pré visualização do arquivo só é possível para arquivos cadastrados anteriormente."
