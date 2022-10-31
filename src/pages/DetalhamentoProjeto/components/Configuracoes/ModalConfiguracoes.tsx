@@ -300,6 +300,7 @@ function ModalConfiguracoes({
                       alignItems={"center"}
                     >
                       <ModalCadastrarPriorizacao
+                        completeButton={true}
                         refresh={refresh}
                         setRefresh={setRefresh}
                         projeto={projeto.id}
