@@ -28,7 +28,8 @@ function BotaoAzulPrimary({
   return (
     <Button
       h={"56px"}
-      borderRadius={"10px"}
+      w={"208px"}
+      borderRadius={"8px"}
       disabled={!formikForm.isValid || !formikForm.dirty}
       background={"origem.500"}
       variant="primary"
@@ -47,7 +48,7 @@ function BotaoAzulPrimary({
         <Ring speed={2} lineWeight={5} color="white" size={24} />
       ) : (
         <>
-          <Text fontSize="16px" fontWeight={"bold"}>
+          <Text fontSize="18px" fontWeight={"700"} fontFamily={"Mulish"}>
             {text}
           </Text>
         </>
