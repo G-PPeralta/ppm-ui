@@ -124,6 +124,7 @@ function ModalCadastroAtividades({
             color={"white"}
             fontSize={"14px"}
             fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
             Cadastrar Atividade
           </ModalHeader>

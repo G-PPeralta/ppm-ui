@@ -162,7 +162,7 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
           h={"100%"}
           py={2}
         >
-          <Heading as="h4" size="md">
+          <Heading fontSize={"14px"} fontWeight={"700"} fontFamily={"Mulish"}>
             Gráfico Gantt
           </Heading>
           <ModalCadastroAtividades
@@ -338,16 +338,16 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
               <Flex justifyContent={"flex-end"} flexGrow={1}>
                 <Button
                   h={"56px"}
-                  borderRadius={"10px"}
+                  borderRadius={"8px"}
                   variant="outline"
-                  color="gray.100"
+                  color="white"
                   border={"2px solid"}
-                  borderColor={"gray.100"}
+                  borderColor={"white"}
                   onClick={() => setExpandGantt(false)}
                   _hover={{
-                    border: "2px solid",
-                    borderColor: "gray.100",
-                    background: "gray.100",
+                    border: "2px solid origem.500",
+                    // borderColor: "gray.100",
+                    background: "origem.500",
                     transition: "all 0.4s",
                     color: "white",
                   }}
