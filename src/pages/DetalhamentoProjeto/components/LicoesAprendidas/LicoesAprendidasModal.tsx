@@ -109,7 +109,7 @@ function LicoesAprendidasModal({
         Lições Aprendidas
       </Button>
 
-      <Modal size={"3xl"} isOpen={isOpen} onClose={onClose}>
+      <Modal size={"6xl"} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader

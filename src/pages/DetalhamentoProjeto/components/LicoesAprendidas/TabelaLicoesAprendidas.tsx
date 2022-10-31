@@ -17,6 +17,8 @@ import { LicoesAprendidasNew } from "interfaces/Services";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
 
+import ModalDeletarLicao from "./BotaoDeletarLicao";
+
 interface EditProps {
   onEdit: (licao: LicoesAprendidasNew) => void;
   licoes: LicoesAprendidasNew[];
@@ -72,6 +74,7 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
                     width={"18px"}
                     height={"18px"}
                   />
+                  <ModalDeletarLicao />
                   {/* <IconButton
           aria-label="Plus sign"
           icon={<FaTrash />}
