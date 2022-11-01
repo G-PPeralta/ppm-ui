@@ -98,27 +98,42 @@ function BotaoListadeTarefas() {
     setIsEditModalOpen(true);
   }
 
-  function handleFilter(nome: string, data: string) {
-    let filtered = taskListFiltered;
+  // function handleFilter(nome: string, data: string) {
+  //   let filtered = taskListFiltered;
 
-    if (nome && data) {
-      filtered = taskListFiltered.filter(
-        (task: any) =>
-          task.nome_tarefa.toUpperCase().includes(nome.toUpperCase()) &&
-          task.data_tarefa.includes(data)
-      );
-      return setTaskListFiltered(filtered);
+  //   if (nome && data) {
+  //     filtered = taskListFiltered.filter(
+  //       (task: any) =>
+  //         task.nome_tarefa.toUpperCase().includes(nome.toUpperCase()) &&
+  //         task.data_tarefa.includes(data)
+  //     );
+  //     return setTaskListFiltered(filtered);
+  //   }
+  //   // if (data) {
+  //   //   const filtered = taskListFiltered.filter((task: any) =>
+  //   //     task.data_tarefa.includes(data)
+  //   //   );
+  //   // filtered.length == 0 &&
+  //   //   toast.error("Nenhum dado encontrado com o presente filtro de data");
+  //   //   return setTaskListFiltered(filtered);
+  //   // }
+  //   if (filtered) setTaskListFiltered(filtered);
+  //   setTaskListFiltered(taskList);
+  // }
+
+  function handleFilterTwo() {
+    if (tarefaFilter || dataFilter) {
+      const filter = taskList
+        .filter((task: any) =>
+          task.nome_tarefa.toUpperCase().includes(tarefaFilter.toUpperCase())
+        )
+        .filter((task: any) => task.data_tarefa.includes(dataFilter));
+
+      setTaskListFiltered(filter);
+      return filter;
+    } else {
+      setTaskListFiltered(taskList);
     }
-    // if (data) {
-    //   const filtered = taskListFiltered.filter((task: any) =>
-    //     task.data_tarefa.includes(data)
-    //   );
-    // filtered.length == 0 &&
-    //   toast.error("Nenhum dado encontrado com o presente filtro de data");
-    //   return setTaskListFiltered(filtered);
-    // }
-    if (filtered) setTaskListFiltered(filtered);
-    setTaskListFiltered(taskList);
   }
 
   function Body() {
@@ -372,7 +387,7 @@ function BotaoListadeTarefas() {
                       //   setCategoriaId("");
                       // }}
                       onClick={() => {
-                        handleFilter(tarefaFilter, dataFilter);
+                        handleFilterTwo();
                       }}
                       _hover={{
                         background: "#0047BB",
