@@ -24,10 +24,10 @@ function BotaoVermelhoGhost({
       w={"208px"}
       borderRadius={"8px"}
       variant="ghost"
-      color="red.500"
+      color="#F40606"
       onClick={() => handleCancelar(formikForm, onClose)}
       _hover={{
-        background: "red.500",
+        background: "red.600",
         transition: "all 0.4s",
         color: "white",
       }}
