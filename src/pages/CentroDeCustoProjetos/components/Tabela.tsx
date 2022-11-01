@@ -34,9 +34,10 @@ interface Props {
   refreshState: RefreshState;
   idProjeto: number;
   optionsSelects: any;
+  mes: number;
 }
 
-function Tabela({ data, refreshState, idProjeto, optionsSelects }: Props) {
+function Tabela({ data, refreshState, idProjeto, optionsSelects, mes }: Props) {
   const { user } = useAuth();
   const { refresh, setRefresh } = refreshState;
   const [from, setFrom] = useState<number>(0);
@@ -142,6 +143,7 @@ function Tabela({ data, refreshState, idProjeto, optionsSelects }: Props) {
                       refreshState={refreshState}
                       linhaTabela={linhaTabela}
                       optionsSelects={optionsSelects}
+                      mes={mes}
                     />
                     <IconButton
                       aria-label="Botão de Editar"

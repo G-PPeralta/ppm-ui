@@ -42,7 +42,6 @@ export default function Sidebar({ children }: { children: ReactNode }) {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      {/* mobilenav */}
       <MobileNav
         onOpen={onOpen}
         name={user?.nome}
