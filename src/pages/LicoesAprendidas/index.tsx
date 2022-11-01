@@ -270,10 +270,10 @@ export function LicoesAprendidasProjetos() {
                 <Button
                   fontWeight={"700"}
                   fontSize="18px"
-                  color={"#0239C3"}
+                  color={"#0047BB"}
                   variant="ghost"
                   // colorScheme="messenger"
-                  rightIcon={<FaFileCsv />}
+                  rightIcon={<FaFileCsv size={18} />}
                   // onClick={print}
                 >
                   Exportar
@@ -348,9 +348,9 @@ export function LicoesAprendidasProjetos() {
             <Flex align={"flex-start"} alignSelf={"center"} mr={-3}>
               <Button
                 // onClick={onOpen}
-                background="transparent"
-                color="#0239C3"
-                float={"right"}
+                variant="ghost"
+                color="#0047BB"
+                // float={"right"}
                 fontWeight={"700"}
                 fontSize={"18px"}
               >
@@ -360,7 +360,7 @@ export function LicoesAprendidasProjetos() {
                   fontSize="20px"
                   fontWeight={"700"}
                   ml={1}
-                  color="#0239C3"
+                  color="#0047BB"
                 />
               </Button>
             </Flex>

@@ -105,7 +105,10 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
       <Button
         rightIcon={<IoMdArrowDropdown />}
         h={"56px"}
-        borderRadius={"10px"}
+        fontSize={"18px"}
+        fontWeight={"700"}
+        borderRadius={"8px"}
+        fontFamily={"Mulish"}
         background={"white"}
         color={"origem.500"}
         onClick={onOpen}
@@ -117,7 +120,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
       >
         Filtrar
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size={"md"}>
+      <Modal isOpen={isOpen} onClose={onClose} size={"lg"}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -126,7 +129,9 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
             Filtros
           </ModalHeader>
@@ -276,25 +281,27 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
             </FormControl>
           </ModalBody>
           <ModalFooter display={"flex"} justifyContent={"center"}>
-            <Flex gap={2}>
+            <Flex gap={3}>
               <Button
-                h={"56px"}
-                borderRadius={"10px"}
                 variant="ghost"
-                color="red"
+                color="red.500"
                 onClick={() => registerForm.resetForm()}
                 _hover={{
-                  background: "red.500",
+                  background: "red.600",
                   transition: "all 0.4s",
                   color: "white",
                 }}
+                w={"208px"}
+                h={"56px"}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                borderRadius={"8px"}
+                fontFamily={"Mulish"}
               >
                 Remover Filtros
               </Button>
               <Button
-                h={"56px"}
-                borderRadius={"10px"}
-                background={"origem.300"}
+                background={"origem.500"}
                 variant="primary"
                 color="white"
                 onClick={() => handleFiltrarCampanhas()}
@@ -302,9 +309,19 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                   background: "origem.600",
                   transition: "all 0.4s",
                 }}
+                w={"208px"}
+                h={"56px"}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                borderRadius={"8px"}
+                fontFamily={"Mulish"}
               >
-                <Flex mx={12} gap={2}>
-                  <Text fontSize="16px" fontWeight={"bold"}>
+                <Flex mx={12} gap={3}>
+                  <Text
+                    fontSize={"18px"}
+                    fontWeight={"700"}
+                    fontFamily={"Mulish"}
+                  >
                     Filtrar
                   </Text>
                   <BiSearch size={20} />

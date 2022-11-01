@@ -157,13 +157,13 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
           borderTopRadius={"8px"}
           borderBottomRadius={"0px"}
           // borderBottom={"1px solid #F0F3F7"}
-          alignSelf={"center"}
+          align={"center"}
           pl={"20px"}
           gap={5}
           h={"100%"}
           py={2}
         >
-          <Heading fontSize={"14px"} fontWeight={"700"} fontFamily={"Mulish"}>
+          <Heading as="h4" size="md">
             Gráfico Gantt
           </Heading>
           <ModalCadastroAtividades
@@ -331,24 +331,24 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
               color={"white"}
               fontSize={"1em"}
             >
-              <Flex justifyContent={"center"} flexGrow={1}>
+              <Flex justifyContent={"flex-end"} flexGrow={1}>
                 <Text fontSize="16px" fontWeight={"bold"}>
                   Gráfico Gantt
                 </Text>
               </Flex>
-              {/* <Flex justifyContent={"flex-end"} flexGrow={1}>
-                <Button
+              <Flex justifyContent={"flex-end"} flexGrow={1}>
+                {/* <Button
                   h={"56px"}
-                  borderRadius={"8px"}
+                  borderRadius={"10px"}
                   variant="outline"
-                  color="white"
+                  color="gray.100"
                   border={"2px solid"}
-                  borderColor={"white"}
+                  borderColor={"gray.100"}
                   onClick={() => setExpandGantt(false)}
                   _hover={{
-                    border: "2px solid origem.500",
-                    // borderColor: "gray.100",
-                    background: "origem.500",
+                    border: "2px solid",
+                    borderColor: "gray.100",
+                    background: "gray.100",
                     transition: "all 0.4s",
                     color: "white",
                   }}
@@ -356,8 +356,8 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
                   <Text fontSize="16px" fontWeight={"bold"}>
                     Fechar
                   </Text>
-                </Button>
-              </Flex> */}
+                </Button> */}
+              </Flex>
             </ModalHeader>
             <ModalBody mt={3}>
               <GanttComponent
@@ -487,10 +487,7 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
             </ModalBody>
             <ModalCloseButton
               color={"white"}
-              onClick={() => {
-                onClose();
-                setExpandGantt(false);
-              }}
+              onClick={() => setExpandGantt(false)}
             />
             <ModalFooter justifyContent={"center"}></ModalFooter>
           </ModalContent>

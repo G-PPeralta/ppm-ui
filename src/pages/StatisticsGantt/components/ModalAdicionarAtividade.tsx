@@ -193,7 +193,8 @@ function ModalAdicionarAtividade({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Adicionar Atividade
           </ModalHeader>
@@ -208,7 +209,7 @@ function ModalAdicionarAtividade({
             }}
           >
             <ModalBody mt={3}>
-              <Flex flex={1} mt={5}>
+              <Flex flex={1} mt={2}>
                 <Flex w={"100%"} direction={"column"} gap={5}>
                   <Flex gap={4} justify={"end"} align={"end"}>
                     <Flex flex={2}>
@@ -351,7 +352,7 @@ function ModalAdicionarAtividade({
                   color="red.500"
                   w={"208px"}
                   _hover={{
-                    background: "red.500",
+                    background: "red.600",
                     transition: "all 0.4s",
                     color: "white",
                   }}
