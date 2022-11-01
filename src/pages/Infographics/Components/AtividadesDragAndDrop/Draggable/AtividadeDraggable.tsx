@@ -80,7 +80,7 @@ function AtividadesDraggable({ index, registerForm }: Props) {
       `atividades[${index}].area_id`,
       listaTarefas[ind]?.area_atuacao || ""
     );
-  }, [registerForm.values]);
+  }, [registerForm.values.atividades[index].tarefa_id]);
 
   return (
     <Draggable draggableId={draggableId} index={index}>
