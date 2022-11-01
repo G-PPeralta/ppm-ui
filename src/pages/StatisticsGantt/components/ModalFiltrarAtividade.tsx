@@ -300,7 +300,13 @@ export function ModalFiltrarAtividade({
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (
                     <>
-                      <Text>Filtrar</Text>
+                      <Text
+                        fontSize={"18px"}
+                        fontWeight={"700"}
+                        fontFamily={"Mulish"}
+                      >
+                        Filtrar
+                      </Text>
                     </>
                   )}
                 </Button>
