@@ -126,7 +126,7 @@ export function Lookahead() {
 
                   <Flex alignItems="flex-end" marginLeft="16px">
                     <Button
-                      h={"56px"}
+                      h={"58px"}
                       w={"101px"}
                       background={"origem.500"}
                       border={"2.3px solid"}
@@ -140,6 +140,8 @@ export function Lookahead() {
                       rightIcon={<FiSearch />}
                       fontSize={"18px"}
                       fontWeight={"700"}
+                      borderRadius={"8px"}
+                      fontFamily={"Mulish"}
                       onClick={handleFilter}
                     >
                       Filtrar
