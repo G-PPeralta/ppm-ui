@@ -121,7 +121,7 @@ function BotaoListadeTarefas() {
   //   setTaskListFiltered(taskList);
   // }
 
-  function handleFilterTwo() {
+  function handleFilter() {
     if (tarefaFilter || dataFilter) {
       const filter = taskList
         .filter((task: any) =>
@@ -130,7 +130,6 @@ function BotaoListadeTarefas() {
         .filter((task: any) => task.data_tarefa.includes(dataFilter));
 
       setTaskListFiltered(filter);
-      return filter;
     } else {
       setTaskListFiltered(taskList);
     }
@@ -387,7 +386,7 @@ function BotaoListadeTarefas() {
                       //   setCategoriaId("");
                       // }}
                       onClick={() => {
-                        handleFilterTwo();
+                        handleFilter();
                       }}
                       _hover={{
                         background: "#0047BB",
