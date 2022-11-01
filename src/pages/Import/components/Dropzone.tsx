@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { FiUpload } from "react-icons/fi";
 import { MdDriveFolderUpload } from "react-icons/md";
@@ -13,15 +13,15 @@ export interface DropzoneProps {
 }
 
 const Dropzone: React.FC<DropzoneProps> = ({ onFileUploaded, name }) => {
-  const [selectedFileUrl, setSelectedFileUrl] = useState("");
+  // const [selectedFileUrl, setSelectedFileUrl] = useState("");
 
   const onDrop = useCallback(
     (acceptedFiles: any[]) => {
       const file = acceptedFiles[0];
 
-      const fileUrl = URL.createObjectURL(file);
+      // const fileUrl = URL.createObjectURL(file);
 
-      setSelectedFileUrl(fileUrl);
+      // setSelectedFileUrl(fileUrl);
       onFileUploaded(file);
     },
     [onFileUploaded]
@@ -48,25 +48,14 @@ const Dropzone: React.FC<DropzoneProps> = ({ onFileUploaded, name }) => {
       {isDragReject ? (
         <p>
           <FiUpload />
-          Arquivo não suportado, tente enviar um arquivo .csv ou .xlsx
+          Arquivo não suportado, envie um arquivo .csv ou .xlsx
         </p>
       ) : (
         <>
-          {selectedFileUrl ? (
-            <p>
-              <img
-                src="https://findicons.com/files/icons/2795/office_2013_hd/2000/excel.png"
-                alt="Point thumbnail"
-                // className={styles.thumbnail}
-              />
-              <span>{name}</span>
-            </p>
-          ) : (
-            <p className="icon-text">
-              Importar planilha{" "}
-              {<Icon as={MdDriveFolderUpload} fontSize="25px" ml={2} />}
-            </p>
-          )}
+          <p className="icon-text">
+            Importar planilha{" "}
+            {<Icon as={MdDriveFolderUpload} fontSize="25px" ml={2} />}
+          </p>
         </>
       )}
     </div>

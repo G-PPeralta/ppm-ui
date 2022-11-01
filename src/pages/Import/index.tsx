@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
+// import { BiImport } from "react-icons/bi";
+// import { MdDriveFolderUpload } from "react-icons/md";
+import { RiFolderUploadFill } from "react-icons/ri";
 
 import {
   Flex,
@@ -6,16 +9,30 @@ import {
   FormControl,
   FormLabel,
   Select,
+  Button,
+  InputGroup,
+  Input,
 } from "@chakra-ui/react";
 
 import ContainerPagina from "components/ContainerPagina";
 import Sidebar from "components/SideBar";
 
 import { RegrasGeraisDeImportacao } from "./components/regrasGerais";
+
 // import { TextError } from "components/TextError";
 
 export function Import() {
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const [tableType, setTableType] = useState("");
+  const [importIsVisible, setImportIsVisible] = useState(false);
+
+  useMemo(() => {
+    if (tableType.includes("gerais")) {
+      return setImportIsVisible(true);
+    }
+
+    setImportIsVisible(false);
+  }, [tableType]);
 
   return (
     <Sidebar>
@@ -99,17 +116,66 @@ export function Import() {
 
           {tableType === "gerais" && <RegrasGeraisDeImportacao />}
           {/* {tableType === "producao" && <RegrasDeImportacaoProducao />} */}
-
-          {/* <Stack spacing="6">
-          {importIsVisible && (
-            <ImportPlanilha
-              onUploadFile={(file) => setSelectedFile(file)}
-              onSubmit={handleSubmit}
-              selectedFile={selectedFile}
-              loading={loading}
-            />
-          )}
-        </Stack> */}
+          <Flex mt={4}>
+            {importIsVisible && (
+              <Flex flexDir={"row"}>
+                <InputGroup gap={5}>
+                  <Flex>
+                    <Input
+                      w={"0px"}
+                      type="file"
+                      ref={(e) => {
+                        inputRef.current = e;
+                      }}
+                      hidden
+                    />
+                    <Button
+                      onClick={() => inputRef.current?.click()}
+                      borderRadius={"8px"}
+                      background="white"
+                      variant="outline"
+                      color="#0047BB"
+                      borderColor="#0047BB"
+                      border={"2px"}
+                      _hover={{
+                        background: "origem.500",
+                        transition: "all 0.4s",
+                        color: "white",
+                      }}
+                      width={"208px"}
+                      height={"56px"}
+                      fontWeight={"700"}
+                      fontSize={"18px"}
+                      fontFamily={"Mulish"}
+                      // alignSelf={"start"}
+                      rightIcon={<RiFolderUploadFill size={22} />}
+                    >
+                      Importar Planilha
+                    </Button>
+                  </Flex>
+                  <Flex>
+                    <Button
+                      borderRadius={"8px"}
+                      background="origem.500"
+                      variant="outline"
+                      color="white"
+                      _hover={{
+                        background: "origem.600",
+                        transition: "all 0.4s",
+                      }}
+                      width={"206px"}
+                      height={"56px"}
+                      fontWeight={"700"}
+                      fontSize={"18px"}
+                      fontFamily={"Mulish"}
+                    >
+                      Enviar
+                    </Button>
+                  </Flex>
+                </InputGroup>
+              </Flex>
+            )}
+          </Flex>
         </Flex>
       </ContainerPagina>
     </Sidebar>
