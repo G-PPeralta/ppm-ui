@@ -66,30 +66,15 @@ function LicoesAprendidasModal({
     }
   }
 
-  // function handleFilter(search: string, data: string) {
-  //   let filtered = licoes;
-
-  //   if (search && data) {
-  //     filtered = licoes.filter(
-  //       (lic: any) =>
-  //         lic.licao_aprendida.toUpperCase().includes(search.toUpperCase()) &&
-  //         lic.data.includes(data)
-  //     );
-  //   }
-
-  //   if (data) {
-  //     filtered = filtered.filter((lic: any) => lic.data.includes(data));
-  //   }
-  //   if (filtered) setFilteredTable(filtered);
-  // }
-
   function handleFilter(arrayToFilter: any) {
     if (categoriaId || data) {
-      return arrayToFilter
+      const filter = arrayToFilter
         .filter((lic: any) =>
           lic.licao_aprendida.toUpperCase().includes(categoriaId.toUpperCase())
         )
         .filter((lic: any) => lic.data.includes(data));
+
+      return filter;
     } else {
       return arrayToFilter;
     }
