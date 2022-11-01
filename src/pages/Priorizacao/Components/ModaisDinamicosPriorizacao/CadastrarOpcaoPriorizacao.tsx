@@ -189,12 +189,16 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                   color="red.500"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
-                    background: "red.500",
+                    background: "red.600",
                     transition: "all 0.4s",
                     color: "white",
                   }}
                   w={"208px"}
                   h={"56px"}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
+                  borderRadius={"8px"}
+                  fontFamily={"Mulish"}
                 >
                   Cancelar
                 </Button>
