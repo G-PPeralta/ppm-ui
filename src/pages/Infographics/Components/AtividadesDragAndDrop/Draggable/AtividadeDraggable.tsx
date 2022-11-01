@@ -1,5 +1,6 @@
 import { useEffect, useId, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
+import toast from "react-hot-toast";
 import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
@@ -31,12 +32,18 @@ function AtividadesDraggable({ index, registerForm }: Props) {
   const { listaTarefas } = useCadastroProjetoTipo();
 
   const remove = (index: number) => {
-    // Pega a lista de atividades diretamente do Formik
-    const newList = registerForm.values.atividades;
-    // Remove item da lista
-    newList.splice(index, 1);
-    // Atualiza lista no Formik
-    registerForm.setFieldValue("atividades", newList);
+    if (registerForm.values.atividades.length > 1) {
+      // Pega a lista de atividades diretamente do Formik
+      const newList = registerForm.values.atividades;
+      // Remove item da lista
+      newList.splice(index, 1);
+      // Atualiza lista no Formik
+      registerForm.setFieldValue("atividades", newList);
+    } else {
+      toast.error("O projeto tipo deve ter ao menos uma atividade", {
+        id: "toast-principal",
+      });
+    }
   };
 
   const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
@@ -80,7 +87,7 @@ function AtividadesDraggable({ index, registerForm }: Props) {
       `atividades[${index}].area_id`,
       listaTarefas[ind]?.area_atuacao || ""
     );
-  }, [registerForm.values]);
+  }, [registerForm.values.atividades[index].tarefa_id]);
 
   return (
     <Draggable draggableId={draggableId} index={index}>
@@ -119,6 +126,16 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                 py={innerwidth >= 640 ? 0 : 4}
                 flex={1}
               >
+                <Flex direction={"column"} flex={2}>
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    nomeSelect={"ATIVIDADE"}
+                    required={true}
+                    propName={`atividades[${index}].tarefa_id`}
+                    options={optionsTarefa}
+                    value={getValue(optionsTarefa, index, "tarefa_id")}
+                  />
+                </Flex>
                 <Flex direction={"column"} flex={2}>
                   <Flex gap={1}>
                     <RequiredField />
@@ -159,17 +176,6 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     propName={`atividades[${index}].area_id`}
                     options={optionsAreaAtuacao}
                     value={getValue(optionsAreaAtuacao, index, "area_id")}
-                  />
-                </Flex>
-
-                <Flex direction={"column"} flex={2}>
-                  <SelectFiltragem
-                    registerForm={registerForm}
-                    nomeSelect={"TAREFA"}
-                    required={true}
-                    propName={`atividades[${index}].tarefa_id`}
-                    options={optionsTarefa}
-                    value={getValue(optionsTarefa, index, "tarefa_id")}
                   />
                 </Flex>
 
