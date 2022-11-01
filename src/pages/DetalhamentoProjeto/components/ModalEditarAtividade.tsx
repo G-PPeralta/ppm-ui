@@ -13,6 +13,8 @@ import {
   // NumberInput,
   // NumberInputField,
   useBreakpointValue,
+  FormLabel,
+  FormControl,
 } from "@chakra-ui/react";
 
 // import Restricoes from "pages/Infographics/Components/Restricoes";
@@ -87,7 +89,7 @@ function ModalEditarAtividade({
       >
         Editar Operação
       </Button> */}
-      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -96,7 +98,9 @@ function ModalEditarAtividade({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            // h={"48px"}
           >
             Editar Atividade
           </ModalHeader>
@@ -112,18 +116,40 @@ function ModalEditarAtividade({
                   base: "column",
                   md: "column",
                 })}
-                gap={5}
+                gap={3}
               >
                 <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Nome</Text>
-                  <Flex gap={5} flex={1}>
+                  {/* <Text fontWeight={"bold"}>Nome</Text> */}
+                  <Flex flex={1}>
                     <Flex direction={"column"} flex={2}>
-                      <Input
-                        isDisabled
-                        value={registerForm.values.nome_atividade || ""}
-                        type="text"
-                        name="nome_atividade"
-                      />
+                      <FormControl>
+                        <FormLabel htmlFor="nome_atividade">
+                          <Text
+                            color="#949494"
+                            fontSize="12px"
+                            fontWeight="700"
+                            mt={"6px"}
+                          >
+                            NOME
+                          </Text>
+                        </FormLabel>
+                        <Input
+                          borderRadius={"8px"}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          fontFamily={"Mulish"}
+                          border={"1px solid #949494"}
+                          mt={"-9px"}
+                          width={"328px"}
+                          color={"black"}
+                          height={"56px"}
+                          isDisabled
+                          value={registerForm.values.nome_atividade || ""}
+                          type="text"
+                          name="nome_atividade"
+                          id="nome_atividade"
+                        />
+                      </FormControl>
                     </Flex>
                   </Flex>
                 </Flex>
@@ -149,8 +175,8 @@ function ModalEditarAtividade({
                   </Flex>
                 </Flex> */}
 
-                <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Datas</Text>
+                <Flex flex={1} direction={"column"} mt={-3} mb={-3}>
+                  {/* <Text fontWeight={"bold"}>Datas</Text> */}
                   {/* <Flex>
                     <Flex flex={1}>
                       <DateTimePicker
@@ -174,7 +200,7 @@ function ModalEditarAtividade({
                 </Flex>
                 <Flex flex={1} direction={"column"}>
                   <Flex>
-                    <Flex flex={1}>
+                    <Flex flex={1} mt={4} mb={2}>
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"inicio_realizado"}
@@ -183,7 +209,7 @@ function ModalEditarAtividade({
                         data={registerForm.values.inicio_realizado}
                       />
                     </Flex>
-                    <Flex flex={1}>
+                    <Flex flex={1} mt={4} mb={2}>
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"fim_realizado"}
@@ -195,8 +221,8 @@ function ModalEditarAtividade({
                   </Flex>
                 </Flex>
                 <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Progresso</Text>
-                  <Flex gap={5}>
+                  {/* <Text fontWeight={"bold"}>Progresso</Text> */}
+                  <Flex mt={-1} w={"76%"}>
                     {/* <Flex>
                       <NumberInput
                         max={100}
@@ -246,7 +272,7 @@ function ModalEditarAtividade({
                   formikForm={registerForm}
                 />
                 <BotaoAzulPrimary
-                  text="Concluir Cadastro"
+                  text="Cadastrar"
                   onClose={onClose}
                   formikForm={registerForm}
                   refresh={refresh}
