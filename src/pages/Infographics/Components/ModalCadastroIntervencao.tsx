@@ -299,6 +299,7 @@ function ModalCadastroIntervencao({
             color={"white"}
             fontSize={"14px"}
             fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
             Cadastrar Nova Intervenção/Perfuração
           </ModalHeader>

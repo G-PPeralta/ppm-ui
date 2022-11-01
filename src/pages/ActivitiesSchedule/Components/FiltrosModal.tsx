@@ -135,25 +135,37 @@ function FiltrosModal() {
             <Flex gap={2}>
               <Button
                 variant="ghost"
-                color="red"
+                color="red.500"
                 onClick={() => onClose()}
                 _hover={{
-                  background: "red.500",
+                  background: "red.600",
                   transition: "all 0.4s",
                   color: "white",
                 }}
+                w={"208px"}
+                h={"56px"}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                borderRadius={"8px"}
+                fontFamily={"Mulish"}
               >
                 Remover Filtros
               </Button>
               <Button
-                background="origem.300"
+                background="origem.500"
                 variant="primary"
                 color="white"
                 onClick={() => onClose()}
                 _hover={{
-                  background: "origem.500",
+                  background: "origem.600",
                   transition: "all 0.4s",
                 }}
+                w={"208px"}
+                h={"56px"}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                borderRadius={"8px"}
+                fontFamily={"Mulish"}
               >
                 Filtrar
               </Button>
