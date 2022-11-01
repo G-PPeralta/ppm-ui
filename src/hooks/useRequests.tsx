@@ -39,22 +39,6 @@ export function useRequests(id?: number, mes?: string) {
   const reqGet = async () => {
     setLoading(true);
 
-    if (id && mes) {
-      const tabelaCentroDeCusto = await getCentroDeCustoProjetos(id, mes);
-      const centroDeCustoFormatado = tabelaCentroDeCusto.data.centroDeCusto.map(
-        (item: TabelaCentroDeCusto) => ({
-          ...item,
-          valor: Number(item.valor),
-        })
-      );
-      const data = {
-        ...tabelaCentroDeCusto.data,
-        centroDeCusto: centroDeCustoFormatado,
-      };
-
-      setTabelaCentroCustoProjetos(data);
-    }
-
     const financeiroProjetos = await getFinanceiroPorProjetos();
 
     const financeiroProjetosSorted = financeiroProjetos.data.sort(
@@ -117,6 +101,22 @@ export function useRequests(id?: number, mes?: string) {
       a.metodo.localeCompare(b.metodo)
     );
     setListaMetodosElevacao(metodosElevacaoSorted);
+
+    if (id && mes) {
+      const tabelaCentroDeCusto = await getCentroDeCustoProjetos(id, mes);
+      const centroDeCustoFormatado = tabelaCentroDeCusto.data.centroDeCusto.map(
+        (item: TabelaCentroDeCusto) => ({
+          ...item,
+          valor: Number(item.valor),
+        })
+      );
+      const data = {
+        ...tabelaCentroDeCusto.data,
+        centroDeCusto: centroDeCustoFormatado,
+      };
+
+      setTabelaCentroCustoProjetos(data);
+    }
   };
 
   const optionsFornecedores = listaFornecedores.map((fornecedor: any) => ({
