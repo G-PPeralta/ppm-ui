@@ -1,17 +1,12 @@
 import { IconType } from "react-icons";
 import { AiOutlineBarChart } from "react-icons/ai";
 import { BiData } from "react-icons/bi";
-// import { BsBarChartSteps } from "react-icons/bs";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import {
   FiHome,
-  // FiTrendingUp,
-  // FiEdit2,
   FiBarChart,
   FiActivity,
-  // FiUsers,
   FiFile,
-  // FiGrid,
   FiTrash2,
   FiSettings,
 } from "react-icons/fi";
@@ -63,10 +58,6 @@ const childrenInfograficos = [
   { name: "Look Ahead", icon: AiOutlineBarChart, link: "/lookahead" },
 ];
 
-const childrenLixeira = [
-  { name: "Lixeira", icon: FiTrash2, link: "/desenvolvimento" },
-];
-
 const childrenConfiguracoes = [
   { name: "Configurações", icon: FiSettings, link: "/desenvolvimento" },
   { name: "Usuários", icon: FiSettings, link: "/profile" },
@@ -90,6 +81,7 @@ const childrenConfiguracoes = [
     link: "/licoesAprendidas",
   },
   { name: "Priorização", icon: MdPriorityHigh, link: "/priorizacao" },
+  { name: "Lixeira", icon: FiTrash2, link: "/desenvolvimento" },
 ];
 
 export const LinkItems: Array<LinkItemProps> = [
@@ -105,14 +97,6 @@ export const LinkItems: Array<LinkItemProps> = [
     name: "Intervenções",
     icon: FiBarChart,
     children: childrenInfograficos.sort((a: Children, b: Children) =>
-      a.name.localeCompare(b.name)
-    ),
-  },
-
-  {
-    name: "Lixeira",
-    icon: FiTrash2,
-    children: childrenLixeira.sort((a: Children, b: Children) =>
       a.name.localeCompare(b.name)
     ),
   },

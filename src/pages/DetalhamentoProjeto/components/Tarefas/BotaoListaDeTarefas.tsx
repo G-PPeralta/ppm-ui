@@ -51,17 +51,17 @@ function BotaoListadeTarefas() {
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
   const [tarefaFilter, setTarefaFilter] = useState("");
+  const [dataFilter, setDataFiltered] = useState("");
+
   const [taskList, setTaskList] = useState([] as TarefaAtividadeComId[]);
+  const [taskListFiltered, setTaskListFiltered] = useState(
+    [] as TarefaAtividadeComId[]
+  );
   const [editTarefa, setEditTarefa] = useState({} as TarefaAtividade);
   const [atividadesProjeto, setAtividadesProjeto] = useState(
     [] as AtividadesProjeto[]
-  );
-
-  const [dataFilter, setDataFiltered] = useState("");
-
-  const [filteredData, setFilteredData] = useState(
-    [] as TarefaAtividadeComId[]
   );
 
   const [render, setRender] = useState(false);
@@ -80,17 +80,17 @@ function BotaoListadeTarefas() {
     setAtividadesProjeto(data);
   }
 
-  function formatDate(date: Date) {
-    const formated = date.toString().substring(0, 10).split("-");
-    return `${formated[2]}/${formated[1]}/${formated[0]}`;
-  }
-
   async function getTaskList() {
     const { data } = await getAtividadesTarefas(Number(id));
     // console.log(data);
 
+    setTaskListFiltered(data);
     setTaskList(data);
-    setFilteredData(data);
+  }
+
+  function formatDate(date: Date) {
+    const formated = date.toString().substring(0, 10).split("-");
+    return `${formated[2]}/${formated[1]}/${formated[0]}`;
   }
 
   function handleEditTarefa(tarefa: TarefaAtividade) {
@@ -98,34 +98,48 @@ function BotaoListadeTarefas() {
     setIsEditModalOpen(true);
   }
 
-  function handleFilter(nome: string, data: string) {
-    let filtered = taskList;
+  // function handleFilter(nome: string, data: string) {
+  //   let filtered = taskListFiltered;
 
-    if (nome && data) {
-      filtered = taskList.filter(
-        (task: any) =>
-          task.nome_tarefa.toUpperCase().includes(nome.toUpperCase()) &&
-          task.data_tarefa.includes(data)
-      );
-      return setTaskList(filtered);
+  //   if (nome && data) {
+  //     filtered = taskListFiltered.filter(
+  //       (task: any) =>
+  //         task.nome_tarefa.toUpperCase().includes(nome.toUpperCase()) &&
+  //         task.data_tarefa.includes(data)
+  //     );
+  //     return setTaskListFiltered(filtered);
+  //   }
+  //   // if (data) {
+  //   //   const filtered = taskListFiltered.filter((task: any) =>
+  //   //     task.data_tarefa.includes(data)
+  //   //   );
+  //   // filtered.length == 0 &&
+  //   //   toast.error("Nenhum dado encontrado com o presente filtro de data");
+  //   //   return setTaskListFiltered(filtered);
+  //   // }
+  //   if (filtered) setTaskListFiltered(filtered);
+  //   setTaskListFiltered(taskList);
+  // }
+
+  function handleFilter() {
+    if (tarefaFilter || dataFilter) {
+      const filter = taskList
+        .filter((task: any) =>
+          task.nome_tarefa.toUpperCase().includes(tarefaFilter.toUpperCase())
+        )
+        .filter((task: any) => task.data_tarefa.includes(dataFilter));
+
+      setTaskListFiltered(filter);
+    } else {
+      setTaskListFiltered(taskList);
     }
-    // if (data) {
-    //   const filtered = taskList.filter((task: any) =>
-    //     task.data_tarefa.includes(data)
-    //   );
-    // filtered.length == 0 &&
-    //   toast.error("Nenhum dado encontrado com o presente filtro de data");
-    //   return setTaskList(filtered);
-    // }
-    if (filtered) setTaskList(filtered);
-    setTaskList(filteredData);
   }
 
   function Body() {
     return (
       <>
-        {taskList.length > 0 ? (
-          taskList
+        {taskListFiltered.length > 0 ? (
+          taskListFiltered
             .sort((a, b) => a.id - b.id)
             .slice(from, to)
             .map((task: any, index: any) => (
@@ -181,8 +195,8 @@ function BotaoListadeTarefas() {
   }
 
   // const tableData =
-  //   taskList &&
-  //   taskList
+  //   taskListFiltered &&
+  //   taskListFiltered
   //     .sort((a, b) => a.id - b.id)
   //     .slice(from, to)
   //     .map((task, index) => (
@@ -372,7 +386,7 @@ function BotaoListadeTarefas() {
                       //   setCategoriaId("");
                       // }}
                       onClick={() => {
-                        handleFilter(tarefaFilter, dataFilter);
+                        handleFilter();
                       }}
                       _hover={{
                         background: "#0047BB",
@@ -449,7 +463,7 @@ function BotaoListadeTarefas() {
           <ModalCloseButton
             color={"white"}
             onClick={() => {
-              setTaskList(filteredData);
+              setTaskListFiltered(taskList);
               setTarefaFilter("");
             }}
           />
@@ -509,7 +523,7 @@ function BotaoListadeTarefas() {
                   </Table>
                 </TableContainer>
               </Flex>
-              <PaginacaoTabela data={taskList} fromTo={fromTo} />
+              <PaginacaoTabela data={taskListFiltered} fromTo={fromTo} />
             </Flex>
           </ModalBody>
 
