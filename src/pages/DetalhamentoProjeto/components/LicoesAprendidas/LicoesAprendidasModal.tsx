@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
 import {
@@ -66,25 +66,19 @@ function LicoesAprendidasModal({
     }
   }
 
-  function handleFilter(arrayToFilter: any) {
+  function handleFilter() {
     if (categoriaId || data) {
-      const filter = arrayToFilter
+      const filter = licoes
         .filter((lic: any) =>
           lic.licao_aprendida.toUpperCase().includes(categoriaId.toUpperCase())
         )
         .filter((lic: any) => lic.data.includes(data));
 
-      return filter;
+      setFilteredTable(filter);
     } else {
-      return arrayToFilter;
+      setFilteredTable(licoes);
     }
   }
-
-  let result = licoes;
-
-  useEffect(() => {
-    result = handleFilter(result);
-  }, [licoes, categoriaId, data]);
 
   return (
     <>
@@ -227,7 +221,7 @@ function LicoesAprendidasModal({
                       // h={useBreakpointValue({ base: "100%", md: "120%" })}
                       // float={"right"}
                       onClick={() => {
-                        setFilteredTable(result);
+                        handleFilter();
                       }}
                       _hover={{
                         background: "origem.500",
