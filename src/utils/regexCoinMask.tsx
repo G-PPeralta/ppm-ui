@@ -44,6 +44,10 @@ export function parseNumber(money: string): number {
   return +temp;
 }
 
+export function parserString(value: number) {
+  return value.toFixed(2).toString();
+}
+
 export function formatRealInput(value: string) {
   let formatedValue = value.replace(/\D/g, "");
 

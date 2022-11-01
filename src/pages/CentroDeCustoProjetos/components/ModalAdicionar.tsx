@@ -27,7 +27,7 @@ import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCentroDeCusto } from "hooks/useCentroDeCusto";
 
-import DateTimePickerData from "./DateTimePickerData";
+import DatePickerGenericoFinanceiro from "./DatePickerGenericoFinanceiro";
 
 interface RefreshState {
   refresh: boolean;
@@ -38,9 +38,15 @@ interface Props {
   refreshState: RefreshState;
   idProjeto: number;
   optionsSelects: any;
+  mes: number;
 }
 
-function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
+function ModalAdicionar({
+  refreshState,
+  idProjeto,
+  optionsSelects,
+  mes,
+}: Props) {
   const { refresh, setRefresh } = refreshState;
   const { optionsFornecedores, optionsClassesDeServico } = optionsSelects;
 
@@ -110,9 +116,12 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
                   </InputGroup>
                 </Flex>
                 <Flex direction={"column"}>
-                  <DateTimePickerData
+                  <DatePickerGenericoFinanceiro
                     registerForm={registerForm}
+                    propName={"data"}
                     required={true}
+                    mes={mes}
+                    esconderHorario
                   />
                 </Flex>
               </Flex>

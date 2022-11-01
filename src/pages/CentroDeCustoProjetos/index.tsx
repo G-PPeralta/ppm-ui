@@ -108,6 +108,7 @@ export function CentroDeCustoProjetos() {
                   refreshState={refreshState}
                   idProjeto={id ? +id : 0}
                   optionsSelects={options}
+                  mes={mes ? +mes : 0}
                 />
                 <Flex direction={"column"} justify={"end"}>
                   <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
@@ -123,6 +124,7 @@ export function CentroDeCustoProjetos() {
                 refreshState={refreshState}
                 idProjeto={id ? +id : 0}
                 optionsSelects={options}
+                mes={mes ? +mes : 0}
               />
             </Box>
           </Flex>

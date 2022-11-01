@@ -24,10 +24,11 @@ import InputGenerico from "components/InputGenerico";
 import SelectFiltragem from "components/SelectFiltragem";
 
 import { regexCaracteresEspeciais } from "utils/regex";
+import { parserString } from "utils/regexCoinMask";
 
 import { useCentroDeCusto } from "hooks/useCentroDeCusto";
 
-import DateTimePickerData from "./DateTimePickerData";
+import DatePickerGenericoFinanceiro from "./DatePickerGenericoFinanceiro";
 
 interface RefreshState {
   refresh: boolean;
@@ -55,9 +56,15 @@ interface Props {
   refreshState: RefreshState;
   linhaTabela: LinhaTabela;
   optionsSelects: any;
+  mes: number;
 }
 
-function ModalEditar({ refreshState, linhaTabela, optionsSelects }: Props) {
+function ModalEditar({
+  refreshState,
+  linhaTabela,
+  optionsSelects,
+  mes,
+}: Props) {
   const { refresh, setRefresh } = refreshState;
   const { optionsFornecedores, optionsClassesDeServico } = optionsSelects;
   const { loading, registerForm } = useCentroDeCusto(
@@ -67,7 +74,7 @@ function ModalEditar({ refreshState, linhaTabela, optionsSelects }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const setInicialValues = async () => {
-    registerForm.setFieldValue("valor", linhaTabela.valor);
+    registerForm.setFieldValue("valor", parserString(linhaTabela.valor));
     registerForm.setFieldValue("data", linhaTabela.dataPagamento);
     registerForm.setFieldValue(
       "prestadorServicoId",
@@ -176,9 +183,12 @@ function ModalEditar({ refreshState, linhaTabela, optionsSelects }: Props) {
                   </InputGroup>
                 </Flex>
                 <Flex direction={"column"}>
-                  <DateTimePickerData
+                  <DatePickerGenericoFinanceiro
                     registerForm={registerForm}
+                    propName={"data"}
                     value={registerForm.values.data}
+                    mes={mes}
+                    esconderHorario
                   />
                 </Flex>
               </Flex>
