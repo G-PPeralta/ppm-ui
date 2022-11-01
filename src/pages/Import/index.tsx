@@ -79,7 +79,7 @@ export function Import() {
                 value={tableType}
                 onChange={(e) => setTableType(e.target.value)}
                 height="56px"
-                // w={"208px"}
+                w={"238px"}
                 mr={"1.5rem"}
                 mb={useBreakpointValue({
                   base: "1rem",

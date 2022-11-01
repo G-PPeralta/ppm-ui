@@ -46,7 +46,7 @@ export function RegrasGeraisDeImportacao() {
             <AccordionIcon />
           </AccordionButton>
         </h2>
-        <AccordionPanel pb={4}>
+        <AccordionPanel>
           <br />
           <ul>
             <li>
