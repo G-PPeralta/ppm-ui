@@ -105,7 +105,10 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
       <Button
         rightIcon={<IoMdArrowDropdown />}
         h={"56px"}
-        borderRadius={"10px"}
+        fontSize={"18px"}
+        fontWeight={"700"}
+        borderRadius={"8px"}
+        fontFamily={"Mulish"}
         background={"white"}
         color={"origem.500"}
         onClick={onOpen}
@@ -278,7 +281,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
             </FormControl>
           </ModalBody>
           <ModalFooter display={"flex"} justifyContent={"center"}>
-            <Flex gap={4}>
+            <Flex gap={3}>
               <Button
                 variant="ghost"
                 color="red.500"

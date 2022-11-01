@@ -276,7 +276,7 @@ export function EditarFornecedorModal({
                 // borderRadius={"8px"}
                 // border={"1px solid #A7A7A7"}
                 mt={"-9px"}
-                width={"428px"}
+                width={"464px"}
                 height={"106px"}
                 // color="#949494"
                 fontSize={"14px"}
