@@ -13,7 +13,7 @@ import { getBudgetProjects, getBudgets } from "services/get/GetBudget";
 export function useBudgets() {
   // const { toast } = useToast();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [budgets, setBudgets] = useState<Budget[]>([]);
   const [projects, setProjects] = useState<ListaSonda[]>([]);
   const [budgetFilter, setBudgetsFilter] = useState<Budget[]>();
@@ -25,6 +25,7 @@ export function useBudgets() {
     const data = await getBudgets();
     setBudgets(data);
     setBudgetsFilter(data);
+    setLoading(false);
   };
 
   const gerarProjectList = async () => {
