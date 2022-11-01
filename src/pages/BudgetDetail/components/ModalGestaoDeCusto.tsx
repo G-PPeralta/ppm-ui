@@ -14,7 +14,6 @@ import {
   useDisclosure,
   Button,
   FormControl,
-  FormLabel,
   Stack,
   useBreakpointValue,
   Input,
@@ -99,9 +98,13 @@ function ModalGestaoDeCusto(props: PropsInterface) {
                         <FormControl>
                           <Flex gap={1}>
                             <RequiredField />
-                            <FormLabel htmlFor="gasto">
-                              Valor Gasto
-                            </FormLabel>{" "}
+                            <Text
+                              fontWeight={"bold"}
+                              fontSize={"12px"}
+                              color={"#949494"}
+                            >
+                              VALOR GASTO
+                            </Text>
                           </Flex>
                           <InputGroup>
                             <InputGenerico
@@ -120,7 +123,13 @@ function ModalGestaoDeCusto(props: PropsInterface) {
                         <FormControl>
                           <Flex gap={1}>
                             <RequiredField />
-                            <FormLabel htmlFor="data">Data</FormLabel>{" "}
+                            <Text
+                              fontWeight={"bold"}
+                              fontSize={"12px"}
+                              color={"#949494"}
+                            >
+                              DATA
+                            </Text>{" "}
                           </Flex>
                           <Input
                             h={"56px"}
@@ -142,7 +151,13 @@ function ModalGestaoDeCusto(props: PropsInterface) {
                       <FormControl>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="fornecedor">Fornecedor</FormLabel>
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            FORNECEDOR
+                          </Text>
                         </Flex>
                         <Select
                           h={"56px"}
@@ -174,9 +189,13 @@ function ModalGestaoDeCusto(props: PropsInterface) {
                         <FormControl>
                           <Flex gap={1}>
                             <RequiredField />
-                            <FormLabel htmlFor="servico">
-                              Classe de Serviço
-                            </FormLabel>
+                            <Text
+                              fontWeight={"bold"}
+                              fontSize={"12px"}
+                              color={"#949494"}
+                            >
+                              CLASSE DE SERVIÇO
+                            </Text>
                           </Flex>
                           <Select
                             h={"56px"}
@@ -199,7 +218,13 @@ function ModalGestaoDeCusto(props: PropsInterface) {
                         <FormControl>
                           <Flex gap={1}>
                             <RequiredField />
-                            <FormLabel htmlFor="pedido">Pedido</FormLabel>
+                            <Text
+                              fontWeight={"bold"}
+                              fontSize={"12px"}
+                              color={"#949494"}
+                            >
+                              PEDIDO
+                            </Text>
                           </Flex>
                           <Input
                             h={"56px"}
@@ -228,9 +253,13 @@ function ModalGestaoDeCusto(props: PropsInterface) {
                       <FormControl>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="pedido-obs">
-                            Texto do Pedido
-                          </FormLabel>
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            TEXTO DO PEDIDO
+                          </Text>
                         </Flex>
                         <Textarea
                           placeholder="Ação ou Recomendação"
@@ -256,20 +285,32 @@ function ModalGestaoDeCusto(props: PropsInterface) {
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
                 <Button
+                  h={"56px"}
                   variant="ghost"
-                  color="red"
+                  color="red.500"
+                  w={"208px"}
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: "red.500",
                     transition: "all 0.4s",
                     color: "white",
                   }}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
+                  borderRadius={"8px"}
+                  fontFamily={"Mulish"}
                 >
                   Cancelar
                 </Button>
                 <Button
+                  w={"208px"}
+                  h={"56px"}
+                  borderRadius={"8px"}
                   disabled={!registerForm.isValid || !registerForm.dirty}
-                  background="origem.300"
+                  background={"origem.500"}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                   variant="primary"
                   color="white"
                   onClick={() => {
@@ -279,7 +320,7 @@ function ModalGestaoDeCusto(props: PropsInterface) {
                     });
                   }}
                   _hover={{
-                    background: "origem.500",
+                    background: "origem.600",
                     transition: "all 0.4s",
                   }}
                 >
@@ -287,7 +328,7 @@ function ModalGestaoDeCusto(props: PropsInterface) {
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (
                     <>
-                      <Text>Concluir Cadastro</Text>
+                      <Text>Concluir</Text>
                     </>
                   )}
                 </Button>
