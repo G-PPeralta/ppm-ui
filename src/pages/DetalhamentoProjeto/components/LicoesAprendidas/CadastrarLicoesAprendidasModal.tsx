@@ -147,7 +147,7 @@ function CadastrarLicoesAprendidasModal({
                 </Flex>
               </FormLabel>
               <Textarea
-                maxLength={150}
+                // maxLength={150}
                 borderRadius={"8px"}
                 border={"1px solid #949494"}
                 mt={"-9px"}

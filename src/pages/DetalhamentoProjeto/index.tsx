@@ -13,7 +13,6 @@ import {
 
 import GenericCurveS from "pages/Reports/components/genericCurveS";
 
-import { Gantt } from "components/Gantt";
 import Sidebar from "components/SideBar";
 
 import { getCategorias } from "services/get/Categorias";
@@ -28,6 +27,7 @@ import { getProjeto } from "services/get/Projetos";
 import BotoesModais from "./components/BotoesModais";
 import CardInfoProjeto from "./components/CardInfoProjeto";
 import CardOrcamento from "./components/CardOrcamento";
+import { Gantt } from "./components/Gantt";
 // import GraficoCurvaS from "./components/GraficoCurvaS";
 
 // const curveSData = [

@@ -15,6 +15,7 @@ import {
   Input,
   NumberInput,
   NumberInputField,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 
 // import Restricoes from "pages/Infographics/Components/Restricoes";
@@ -121,7 +122,9 @@ function ModalCadastroAtividades({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
             Cadastrar Atividade
           </ModalHeader>
@@ -210,7 +213,7 @@ function ModalCadastroAtividades({
                     nomeSelect={"RELAÇÃO"}
                     propName={"relacao_id"}
                     options={relacoesOptions}
-                    required={false}
+                    required={true}
                   />
                 </Flex>
 
@@ -265,7 +268,11 @@ function ModalCadastroAtividades({
                           );
                         }}
                       >
-                        <NumberInputField bg={"#fff"} h={"56px"} />
+                        <NumberInputField
+                          maxLength={5}
+                          bg={"#fff"}
+                          h={"56px"}
+                        />
                       </NumberInput>
                     </Flex>
                   </Flex>
@@ -289,6 +296,8 @@ function ModalCadastroAtividades({
               </Flex>
             </ModalBody>
 
+            <ModalCloseButton color={"white"} onClick={() => onClose()} />
+
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
                 <BotaoVermelhoGhost
@@ -297,7 +306,7 @@ function ModalCadastroAtividades({
                   formikForm={registerForm}
                 />
                 <BotaoAzulPrimary
-                  text="Concluir Cadastro"
+                  text="Cadastrar"
                   onClose={onClose}
                   formikForm={registerForm}
                   refresh={refresh}

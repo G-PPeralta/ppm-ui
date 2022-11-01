@@ -75,6 +75,7 @@ function ModalEditarOperacao({
   const [listaOcorrencias, setListaOcorrencias] = useState<Ocorrencia[]>([]);
   const [anotacoes, setAnotacoes] = useState<Anotacoes[]>([]);
   const [mocs, setMocs] = useState<any[]>([]);
+  // const [anexosMocs, setAnexosMocs] = useState<any[]>([]);
   const [gambiarra, setGambiarra] = useState<any>(true);
 
   const refreshState = {
@@ -91,11 +92,22 @@ function ModalEditarOperacao({
       const ocorrenciasPorAtividade = await getOcorrenciasPorAtividade(
         editOp.id_atividade
       );
+
+      const ocorrencias = ocorrenciasPorAtividade.data.map(
+        (ocorrencia: any) => ({
+          ...ocorrencia,
+          url: "",
+          anexo: "",
+        })
+      );
+
       setListaOcorrencias(
-        ocorrenciasPorAtividade.data.sort((a: any, b: any) =>
+        ocorrencias.sort((a: any, b: any) =>
           a.nome_ocorrencia.localeCompare(b.nome_ocorrencia)
         )
       );
+
+      // console.log("ocorrenciasPorAtividade", ocorrenciasPorAtividade.data);
 
       const anotacoesPorAtividade = await getAnotacoesPorAtividade(
         editOp.id_atividade
@@ -106,6 +118,16 @@ function ModalEditarOperacao({
       setMocs(mocPorAtividade.data);
     }
   };
+
+  // const handleAnexosMocs = async () => {
+  //   if (editOp.id_atividade) {
+  //     const pdf = await getArquivoPdf(
+  //       editOp.id_atividade,
+  //       registerForm.values.mocs[0].numero_moc
+  //     );
+  //     setAnexosMocs(pdf.data);
+  //   }
+  // };
 
   const handleGambiarra = () => {
     setTimeout(() => {
@@ -175,10 +197,17 @@ function ModalEditarOperacao({
   }, [anotacoes, mocs]);
 
   useEffect(() => {
+    // if (mocs.length > 0) {
+    //   handleAnexosMocs();
+    // }
+  }, [mocs]);
+
+  useEffect(() => {
     requestLicoesEOperacoes();
   }, [isOpen]);
 
   // console.log("mocs", mocs);
+  // console.log("anexosMocs", anexosMocs);
   // console.log("anotacoes", anotacoes);
   // console.log("registerForm", registerForm.values);
   // console.log("editOp", editOp);

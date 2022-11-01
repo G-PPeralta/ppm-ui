@@ -1,13 +1,16 @@
 import { forwardRef } from "react";
-import ReactDatePicker from "react-datepicker";
+import ReactDatePicker, { registerLocale } from "react-datepicker";
 
 import { Button, Flex, useBreakpointValue } from "@chakra-ui/react";
+import ptBR from "date-fns/locale/pt-BR";
+registerLocale("pt-BR", ptBR);
 
 function DateTimePickerDataInicioReal({
   inicioReal,
   setInicioReal,
   intervencaoIniciada,
   atividadeStatus,
+  fimReal,
 }: any) {
   const handleIniciarDate = (date: any) => {
     setInicioReal(date);
@@ -40,6 +43,7 @@ function DateTimePickerDataInicioReal({
         customInput={<TriggerDatePickerInicio />}
         isClearable={inicioReal !== ""}
         disabled={!intervencaoIniciada && atividadeStatus === 0}
+        maxDate={fimReal}
       />
     </Flex>
   );

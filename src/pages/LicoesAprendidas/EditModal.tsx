@@ -116,7 +116,7 @@ function EditModal({
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            Editar Lições aprendidas
+            Editar Lições Aprendidas
           </ModalHeader>
 
           <ModalCloseButton color={"white"} />
@@ -177,7 +177,7 @@ function EditModal({
                   AÇÃO OU RECOMENDAÇÃO
                 </FormLabel>
                 <Textarea
-                  maxLength={150}
+                  // maxLength={150}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}

@@ -3,6 +3,7 @@ import { FiPlus, FiTrash } from "react-icons/fi";
 import { Flex, IconButton } from "@chakra-ui/react";
 
 import InputGenerico from "components/InputGenerico";
+import LeitorPDF from "components/LeitorPDF";
 
 import { regexCaracteresEspeciais } from "utils/regex";
 
@@ -19,6 +20,8 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
       ...mocs,
       {
         numero_moc: "",
+        anexo: "",
+        arquivo: "",
       },
     ]);
   };
@@ -33,11 +36,13 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
     (moc: any) => moc.numero_moc === ""
   );
 
+  // console.log("registerForm", registerForm.values);
+
   return (
     <Flex w={"100%"} direction={"column"} gap={4}>
       <Flex flex={1} justify={"space-between"} direction={"column"} gap={4}>
-        {registerForm.values.mocs.map((_moc: any, index: number) => (
-          <>
+        {registerForm.values.mocs.map((moc: any, index: number) => (
+          <Flex direction={"column"} gap={5}>
             <Flex gap={4} justify={"space-between"} align={"end"} key={index}>
               <Flex w={"50%"} align={"end"} gap={2}>
                 <InputGenerico
@@ -67,9 +72,21 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
                   onClick={() => removerMoc(index)}
                 />
               </Flex>
-              <BotaoUploadArquivo registerForm={registerForm} index={index} />
+              <BotaoUploadArquivo
+                registerForm={registerForm}
+                index={index}
+                nomeArquivo={moc.anexo}
+                propName={"mocs"}
+              />
             </Flex>
-          </>
+            {moc?.url?.length > 0 && (
+              <LeitorPDF
+                registerForm={registerForm}
+                index={index}
+                propName={"mocs"}
+              />
+            )}
+          </Flex>
         ))}
       </Flex>
       <Flex

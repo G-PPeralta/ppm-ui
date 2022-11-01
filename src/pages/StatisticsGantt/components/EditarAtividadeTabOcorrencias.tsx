@@ -59,6 +59,7 @@ function EditarAtividadeTabOcorrencias({ registerForm, refreshState }: Props) {
                       refreshState={refreshState}
                       linhaTabela={linhaTabela}
                       idAtividade={registerForm.values.id_atividade}
+                      index={index}
                     />
                   </Flex>
                 </Td>
