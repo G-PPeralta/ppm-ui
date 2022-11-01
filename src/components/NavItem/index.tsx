@@ -23,14 +23,13 @@ export function NavItem({ icon, children, link, ...rest }: NavItemProps) {
       <Flex
         align="center"
         p="4"
-        pl="10"
-        mx="4"
-        borderRadius="lg"
+        pl="2"
         role="group"
         cursor="pointer"
         _hover={{
-          bg: "origem.400",
-          color: "white",
+          borderLeftWidth: "2px",
+          borderColor: "origem.500",
+          color: "origem.500",
         }}
         {...rest}
       >
@@ -39,10 +38,10 @@ export function NavItem({ icon, children, link, ...rest }: NavItemProps) {
             mr="4"
             fontSize="14"
             _groupHover={{
-              color: "white",
+              color: "origem.500",
             }}
             _activeLink={{
-              color: "white",
+              color: "origem.500",
             }}
             color={
               window.location.pathname === link ? "origem.500" : "black.500"

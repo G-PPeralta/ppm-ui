@@ -9,10 +9,10 @@ import {
   Image,
   Text,
   Accordion,
-  AccordionButton,
   AccordionItem,
-  AccordionPanel,
+  AccordionButton,
   AccordionIcon,
+  AccordionPanel,
 } from "@chakra-ui/react";
 import logoImage from "assets/logo.png";
 
@@ -44,34 +44,31 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
       bg={useColorModeValue("white", "gray.900")}
       borderRight="1px"
       borderRightColor={useColorModeValue("gray.200", "gray.700")}
-      w={{ base: "full", md: "full", lg: 60 }}
+      w={{ base: "full", md: 60 }}
       pos="fixed"
       h="full"
+      overflowY={"scroll"}
       {...rest}
-      overflowX="auto"
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Link to="/">
+        <Link to="/import">
           <Image src={logoImage} alt="Logo Origem Energias" />
         </Link>
-        <CloseButton
-          display={{ base: "flex", md: "flex", lg: "none" }}
-          onClick={onClose}
-        />
+        <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
-      <Accordion allowMultiple border={"none"}>
+      <Accordion allowMultiple>
         {LinkItems.map((link, index) => (
           <div key={index}>
             {!verifyPermissionAdmin(link.name) && (
               <AccordionItem border={"none"}>
-                <AccordionButton>
+                <AccordionButton border={"none"}>
                   <Flex
                     w={"100%"}
                     align={"center"}
                     justifyContent={"space-between"}
                   >
                     <NavItemMain
-                      key={link.name}
+                      key={link.link}
                       icon={link.icon}
                       link={link.link || "/"}
                       color={
@@ -115,11 +112,10 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
                       <Text
                         sx={{ fontSize: 12 }}
                         _groupHover={{
-                          color: "white",
+                          color: "origem.500",
                         }}
                         _hover={{
-                          bg: "origem.400",
-                          color: "white",
+                          color: "origem.500",
                         }}
                         color={
                           window.location.pathname === link.link
