@@ -174,7 +174,9 @@ function ModalEditar({
                       registerForm={registerForm}
                       nomeInput={"Valor Previsto"}
                       propName={"valor"}
-                      value={registerForm.values.valor || ""}
+                      value={
+                        registerForm.values.valor && registerForm.values.valor
+                      }
                       required={true}
                       placeholder={"0"}
                       maxLength={20}

@@ -1,5 +1,6 @@
 import { useEffect, useId, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
+import toast from "react-hot-toast";
 import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
@@ -39,12 +40,18 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const [draggableId, setDraggableId] = useState<any>(id);
 
   const remove = (index: number) => {
-    // Pega a lista de atividades diretamente do Formik
-    const newList = registerForm.values.atividades;
-    // Remove item da lista
-    newList.splice(index, 1);
-    // Atualiza lista no Formik
-    registerForm.setFieldValue("atividades", newList);
+    if (registerForm.values.atividades.length > 1) {
+      // Pega a lista de atividades diretamente do Formik
+      const newList = registerForm.values.atividades;
+      // Remove item da lista
+      newList.splice(index, 1);
+      // Atualiza lista no Formik
+      registerForm.setFieldValue("atividades", newList);
+    } else {
+      toast.error("A intervenção deve ter ao menos uma atividade", {
+        id: "toast-principal",
+      });
+    }
   };
 
   const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
