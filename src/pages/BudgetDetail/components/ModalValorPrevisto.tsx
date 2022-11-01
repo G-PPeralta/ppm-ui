@@ -27,7 +27,7 @@ import { Projeto } from "interfaces/Budgets";
 import InputGenerico from "components/InputGenerico";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
-import { formatReal, getMoney } from "utils/regexCoinMask";
+// import { formatReal, getMoney } from "utils/regexCoinMask";
 
 import { useCadastroOrcamentoPrevisto } from "hooks/useCadastroOrcamentoPrevisto";
 
@@ -56,7 +56,7 @@ function ModalValorPrevisto(props: PropsInterface) {
         onClick={onOpen}
       />
 
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -65,7 +65,9 @@ function ModalValorPrevisto(props: PropsInterface) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
             Mobilização/Desmobilização
           </ModalHeader>
@@ -98,12 +100,9 @@ function ModalValorPrevisto(props: PropsInterface) {
                           <InputGroup>
                             <InputGenerico
                               registerForm={registerForm}
-                              nomeInput={"Valor Previsto"}
+                              nomeInput={"VALOR PREVISTO"}
                               propName={"valor"}
-                              value={
-                                registerForm.values.valor ||
-                                formatReal(getMoney(value + "00"))
-                              }
+                              value={registerForm.values.valor || value}
                               required={true}
                               placeholder={"0"}
                               maxLength={20}
@@ -121,38 +120,49 @@ function ModalValorPrevisto(props: PropsInterface) {
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
                 <Button
+                  h={"56px"}
+                  w={"208px"}
                   variant="ghost"
-                  color="red"
+                  color="red.500"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: "red.500",
                     transition: "all 0.4s",
                     color: "white",
                   }}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   Cancelar
                 </Button>
+
                 <Button
+                  h={"56px"}
+                  w={"208px"}
                   disabled={!registerForm.isValid || !registerForm.dirty}
-                  background="origem.300"
+                  background="origem.500"
                   variant="primary"
                   color="white"
+                  _hover={{
+                    background: "origem.600",
+                    transition: "all 0.4s",
+                  }}
                   onClick={() => {
                     handleCadastrar(registerForm, () => {
                       onClose();
                       toogleRender();
                     });
                   }}
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                  }}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (
                     <>
-                      <Text>Editar Valor</Text>
+                      <Text>Confirmar</Text>
                     </>
                   )}
                 </Button>
@@ -166,3 +176,4 @@ function ModalValorPrevisto(props: PropsInterface) {
 }
 
 export default ModalValorPrevisto;
+//

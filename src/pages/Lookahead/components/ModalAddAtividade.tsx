@@ -17,6 +17,7 @@ import {
   useDisclosure,
   Input,
   Text,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { CreateServicoFerramenta } from "interfaces/lookahead";
 
@@ -282,6 +283,8 @@ export function ModalAddAtividade(props: PropsType) {
                 </Flex>
               </FormControl>
             </ModalBody>
+
+            <ModalCloseButton color={"white"} onClick={() => onClose()} />
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>

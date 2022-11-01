@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { BsFillCloudArrowUpFill } from "react-icons/bs";
 import { MdModeEdit } from "react-icons/md";
 
 import {
@@ -26,6 +25,8 @@ import { handleCancelar } from "utils/handleCadastro";
 
 import { useOcorrencias } from "hooks/useOcorrencias";
 
+import BotaoUploadArquivo from "./BotaoUpload";
+
 interface RefreshState {
   refresh: boolean;
   setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
@@ -35,12 +36,14 @@ interface Props {
   refreshState: RefreshState;
   linhaTabela: any;
   idAtividade: number;
+  index: number;
 }
 
 function ModalEditarOcorrencia({
   refreshState,
   linhaTabela,
   idAtividade,
+  index,
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useOcorrencias(idAtividade, "patch");
@@ -84,7 +87,7 @@ function ModalEditarOcorrencia({
         onClick={onOpen}
       />
 
-      <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
+      <Modal isOpen={isOpen} onClose={onClose} size={"4xl"}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -126,22 +129,12 @@ function ModalEditarOcorrencia({
                     step={0.5}
                   />
                 </Flex>
-                <Button
-                  h={"56px"}
-                  borderRadius={"10px"}
-                  background={"white"}
-                  color={"origem.500"}
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                  colorScheme="blue"
-                  variant="ghost"
-                  rightIcon={<BsFillCloudArrowUpFill size={24} />}
-                >
-                  Anexar
-                </Button>
+                <BotaoUploadArquivo
+                  registerForm={registerForm}
+                  index={index}
+                  nomeArquivo={linhaTabela.anexo}
+                  propName={"anexo"}
+                />
               </Flex>
             </Flex>
           </ModalBody>

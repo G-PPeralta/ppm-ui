@@ -1,14 +1,11 @@
-// import { FaTrash } from "react-icons/fa";
 import { FiTrash } from "react-icons/fi";
 
 import {
   Button,
   Flex,
   FormControl,
-  // FormLabel,
   Modal,
   ModalBody,
-  // ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalOverlay,
@@ -16,69 +13,62 @@ import {
   Text,
   useDisclosure,
   IconButton,
-  ModalCloseButton,
   ModalHeader,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 // import { TextError } from "components/TextError";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { handleCancelar } from "utils/handleCadastro";
 
-// import { useAuth } from "hooks/useAuth";
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
-// import { deleteProject } from "services/delete/DeleteProject";
-
-type id = {
-  projeto: number;
-};
-
-function ModalDeletarProjeto(projeto: id) {
+function ModalDeletarTarefa() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroPriorizacao();
-  // const { user } = useAuth();
-  // const idUser = user?.nome;
-
-  // Pra pegar o id do projeto e depois ser possível deletar
-  // console.log(projeto.projeto);
 
   return (
     <>
       <IconButton
         onClick={onOpen}
         color={"#F40606"}
+        fontWeight={"700"}
         backgroundColor={"transparent"}
         aria-label="Plus sign"
         _hover={{
-          backgroundColor: "#F94144",
+          backgroundColor: "#F40606",
           color: "white",
         }}
         // w={"14px"}
         // h={"18px"}
       >
-        <FiTrash />
+        <FiTrash size={"13px"} />
       </IconButton>
-      <Modal isOpen={isOpen} onClose={onClose} size="lg">
+      <Modal isOpen={isOpen} onClose={onClose} size="md">
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton color={"white"} />
-          <ModalHeader
-            backgroundColor={"#2E69FD"}
-            display={"flex"}
-            justifyContent={"center"}
-            color={"white"}
-            fontSize={"14px"}
-            fontWeight={"700"}
-          >
-            Excluir
-          </ModalHeader>
           <form
             onSubmit={(e) => {
               e.preventDefault();
               registerForm.handleSubmit(e);
             }}
           >
+            <ModalHeader
+              backgroundColor={"#2E69FD"}
+              borderTopRadius={7}
+              display={"flex"}
+              justifyContent={"center"}
+              color={"white"}
+              fontSize={"14px"}
+              fontWeight={"700"}
+              height={"48px"}
+            >
+              Excluir
+            </ModalHeader>
+
+            <ModalCloseButton color={"white"} />
             <ModalBody mt={3}>
               <FormControl>
                 <Flex direction={"column"} gap={4}>
@@ -91,8 +81,7 @@ function ModalDeletarProjeto(projeto: id) {
                         color={"#010101"}
                         fontWeight={"400"}
                       >
-                        Tem certeza que deseja mover este Projeto para a
-                        Lixeira?
+                        Tem certeza que deseja mover esta tarefa para a Lixeira?
                       </Text>
                     </Flex>
                   </Stack>
@@ -100,7 +89,7 @@ function ModalDeletarProjeto(projeto: id) {
               </FormControl>
             </ModalBody>
 
-            <ModalFooter justifyContent={"center"}>
+            <ModalFooter justifyContent={"center"} mt={4}>
               <Flex gap={2}>
                 <Button
                   variant="ghost"
@@ -112,25 +101,27 @@ function ModalDeletarProjeto(projeto: id) {
                     color: "white",
                   }}
                   height={"56px"}
-                  width={"206px"}
+                  width={"208px"}
                   fontSize={"18px"}
                   fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   Cancelar
                 </Button>
                 <Button
-                  background="origem.500"
+                  background="#0047BB"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  // onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",
                   }}
                   height={"56px"}
-                  width={"206px"}
+                  width={"208px"}
                   fontSize={"18px"}
                   fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
@@ -149,4 +140,4 @@ function ModalDeletarProjeto(projeto: id) {
   );
 }
 
-export default ModalDeletarProjeto;
+export default ModalDeletarTarefa;

@@ -151,10 +151,11 @@ export function LicoesAprendidasProjetos() {
             variant="secondary"
             color="#0047BB"
             // mr={2}
-            isRound={true}
+            // isRound={true}
             // size="md"
-            width={"18px"}
-            height={"18px"}
+            _hover={{ background: "origem.500", color: "white" }}
+            // width={"18px"}
+            // height={"18px"}
             onClick={() => {
               setEditLicao(lessons);
               onOpen();
