@@ -5,7 +5,7 @@ import { Flex, Input, InputLeftAddon, Text } from "@chakra-ui/react";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
-import { formatReal, formatRealInput, getMoney } from "utils/regexCoinMask";
+import { formatRealInput } from "utils/regexCoinMask";
 
 interface Props {
   registerForm: any;
@@ -35,7 +35,7 @@ function InputGenerico({
   const [valorFormatado, setValorFormatado] = useState<any>("");
   useEffect(() => {
     if (isNumeric) {
-      setValorFormatado(formatReal(getMoney(value || "")));
+      setValorFormatado(formatRealInput(value || ""));
     }
   }, []);
 
