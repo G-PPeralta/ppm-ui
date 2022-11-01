@@ -64,7 +64,7 @@ function ModalEditarAtividade({
     )[0].value
   );
   const [areaId, setAreaId] = useState(0);
-  const [observacoes, setObservacoes] = useState("");
+  const [comentario, setComentario] = useState("");
   const [inicioPlanejado, setInicioPlanejado] = useState<any>("");
   const [fimPlanejado, setFimPlanejado] = useState<any>("");
   const [inicioReal, setInicioReal] = useState<any>(null);
@@ -78,7 +78,7 @@ function ModalEditarAtividade({
     nome,
     responsavelId,
     areaId,
-    observacoes,
+    comentario,
     inicioPlanejado,
     fimPlanejado,
     inicioReal,
@@ -106,7 +106,7 @@ function ModalEditarAtividade({
 
   useEffect(() => {
     setNome(atividade.atividade);
-    setObservacoes(atividade.sonda);
+    setComentario(atividade.comentario);
     setAtividadeStatus(Number(atividade.pct_real));
     if (atividade.precedentes) {
       setPrecedentes(atividade.precedentes);
@@ -430,8 +430,8 @@ function ModalEditarAtividade({
                         placeholder="Adicione comentários sobre a atividade"
                         id="dsc_comentario"
                         name="dsc_comentario"
-                        value={observacoes}
-                        onChange={(event) => setObservacoes(event.target.value)}
+                        value={comentario}
+                        onChange={(event) => setComentario(event.target.value)}
                       />
                     </FormControl>
                   </Flex>
