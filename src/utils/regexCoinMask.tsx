@@ -26,6 +26,7 @@
 
 export function getMoney(str: string | null): string | null {
   if (str === undefined || str === null) return null;
+  if (typeof str == "number") return str;
   return str.replace(/[\D]+/g, "");
 }
 export function formatReal(number: string | null): string {

@@ -46,9 +46,7 @@ function Tabela({ data }: Props) {
     "Previsto",
     "Realizado",
     "Gap %",
-    "Denominação de Objeto",
     "Mês",
-    "Texto do Pedido",
   ];
 
   const valorTotalPrevisto = data.reduce(
@@ -109,15 +107,15 @@ function Tabela({ data }: Props) {
               <Td textAlign={"start"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.gap < 1 ? 0 : linhaTabela.gap}%</Text>
               </Td>
-              <Td textAlign={"start"} fontWeight={"semibold"}>
+              {/* <Td textAlign={"start"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.denominacaodeobjeto}</Text>
-              </Td>
+              </Td> */}
               <Td textAlign={"center"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.mes}</Text>
               </Td>
-              <Td textAlign={"start"} fontWeight={"semibold"}>
+              {/* <Td textAlign={"start"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.textodopedido}</Text>
-              </Td>
+              </Td> */}
             </Tr>
           ))
         ) : (
