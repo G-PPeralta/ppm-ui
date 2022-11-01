@@ -50,6 +50,7 @@ export function parserString(value: number) {
 }
 
 export function formatRealInput(value: string) {
+  if (typeof value == "number") return value;
   let formatedValue = value.replace(/\D/g, "");
 
   if (formatedValue.length === 4) {
