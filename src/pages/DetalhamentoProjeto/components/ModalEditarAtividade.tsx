@@ -15,6 +15,7 @@ import {
   useBreakpointValue,
   FormLabel,
   FormControl,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 
 // import Restricoes from "pages/Infographics/Components/Restricoes";
@@ -263,6 +264,8 @@ function ModalEditarAtividade({
                 /> */}
               </Flex>
             </ModalBody>
+
+            <ModalCloseButton color={"white"} />
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
