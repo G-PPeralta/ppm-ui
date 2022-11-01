@@ -66,30 +66,25 @@ function LicoesAprendidasModal({
     }
   }
 
-  // console.log(filteredTable);
+  function handleFilter(arrayToFilter: any) {
+    if (categoriaId || data) {
+      const filter = arrayToFilter
+        .filter((lic: any) =>
+          lic.licao_aprendida.toUpperCase().includes(categoriaId.toUpperCase())
+        )
+        .filter((lic: any) => lic.data.includes(data));
 
-  function handleFilter(search: string, data: string) {
-    let filtered = licoes;
-
-    if (search && data) {
-      filtered = licoes.filter(
-        (lic: any) =>
-          lic.licao_aprendida.toUpperCase().includes(search.toUpperCase()) &&
-          lic.data.includes(data)
-      );
+      return filter;
+    } else {
+      return arrayToFilter;
     }
-
-    // if (data) {
-    //   filtered = filtered.filter((lic: any) => lic.data.includes(data));
-    // }
-    if (filtered) setFilteredTable(filtered);
   }
 
-  // console.log({ filteredTable });
+  let result = licoes;
 
   useEffect(() => {
-    setFilteredTable(licoes);
-  }, [licoes]);
+    result = handleFilter(result);
+  }, [licoes, categoriaId, data]);
 
   return (
     <>
@@ -232,8 +227,7 @@ function LicoesAprendidasModal({
                       // h={useBreakpointValue({ base: "100%", md: "120%" })}
                       // float={"right"}
                       onClick={() => {
-                        handleFilter(categoriaId, data);
-                        setCategoriaId("");
+                        setFilteredTable(result);
                       }}
                       _hover={{
                         background: "origem.500",
