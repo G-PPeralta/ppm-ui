@@ -18,6 +18,7 @@ import Empty from "components/TableEmpty/empty";
 
 import { formatReal } from "utils/formatReal";
 
+import ModalCustoDiario from "./ModalCustoDiario";
 import ModalGestaoDeCusto from "./ModalGestaoDeCusto";
 import ModalValorPrevisto from "./ModalValorPrevisto";
 
@@ -39,10 +40,6 @@ export function BudgetDetailTable(props: PropsInterface) {
   const totalRegs = data.length;
   const maxPage = Math.ceil(totalRegs / rowsPerPage);
 */
-  const brl = Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
 
   /* const paginate = (pag: number) => {
     setPagAtual(pag);
@@ -89,8 +86,10 @@ export function BudgetDetailTable(props: PropsInterface) {
           </Flex>
         </Td>
         <Td></Td>
-        <Td align="center">{brl.format(detail.planejado)}</Td>
-        <Td align="center">{brl.format(detail.realizado)} </Td>
+        <Td align="center">{formatReal(detail.planejado)}</Td>
+        <Td align="center">
+          <ModalCustoDiario pai={detail} />
+        </Td>
         <Td></Td>
       </Tr>
       {detail.filhos &&
@@ -112,7 +111,7 @@ export function BudgetDetailTable(props: PropsInterface) {
             </Td>
             <Td textAlign="center">
               <Flex alignItems={"center"} justifyContent="center">
-                {formatReal(filho.realizado)}{" "}
+                <ModalCustoDiario filho={filho} />
                 <ModalGestaoDeCusto
                   projeto={filho.projeto}
                   toogleRender={toogleRender}

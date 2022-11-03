@@ -164,12 +164,12 @@ export async function getClassesServicos() {
   return { data };
 }
 
-export async function getCustoDiario(
-  id: string | undefined,
-  startDate: string | Date,
+export async function getCustoDiarioFilho(
+  id: number | undefined,
+  startDate: string | Date | null,
   endDate: string | Date | null
 ): Promise<CustoDiario[]> {
-  const uri = `/budgets/custoDiario/${id}`;
+  const uri = `/budgets/custoDiario/filho/${id}`;
 
   /* const data = [
     {
@@ -207,5 +207,17 @@ export async function getCustoDiario(
   const { data } = await api.post(uri, { startDate, endDate }, token());
 
   // console.log(startDate, endDate);
+  return data;
+}
+
+export async function getCustoDiarioPai(
+  id: number | undefined,
+  startDate: string | Date | null,
+  endDate: string | Date | null
+): Promise<CustoDiario[]> {
+  const uri = `/budgets/custoDiario/pai/${id}`;
+
+  const { data } = await api.post(uri, { startDate, endDate }, token());
+
   return data;
 }
