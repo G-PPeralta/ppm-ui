@@ -143,7 +143,7 @@ export function Fornecedores() {
   //   setFornecedores(filteredFornecedores);
   // }
 
-  console.log(fornecedores);
+  // console.log(fornecedores);
 
   function handleFilter() {
     if (fornecedor || polo) {
@@ -152,8 +152,8 @@ export function Fornecedores() {
           forn.nomefornecedor.toUpperCase().includes(fornecedor.toUpperCase())
         )
         .filter((forn: any) => forn.poloid === polo);
-      console.log({ filtered });
-      console.log({ polo });
+      // console.log({ filtered });
+      // console.log({ polo });
 
       setFornecedores(filtered);
     } else {
