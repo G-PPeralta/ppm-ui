@@ -78,7 +78,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
         textAlign={"center"}
         icon={<MdModeEdit />}
       />
-      <Modal isOpen={isOpen} onClose={onClose} size="lg">
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -91,7 +91,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
             fontWeight={"700"}
             h={"48px"}
           >
-            {`Priorização ${infosOption.nameRanking}`}
+            {`Editar Priorização ${infosOption.nameRanking}`}
           </ModalHeader>
           <ModalCloseButton color={"white"} />
 
@@ -123,7 +123,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                               fontWeight={"700"}
                               fontSize={"12px"}
                             >
-                              NOME
+                              NOME DA PRIORIZAÇÃO
                             </FormLabel>
                             <Input
                               maxLength={35}
@@ -193,7 +193,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
+              <Flex gap={2} ml={9}>
                 <Button
                   variant="ghost"
                   color="red.500"

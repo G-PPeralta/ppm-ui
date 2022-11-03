@@ -98,7 +98,7 @@ function ModalCadastrarPriorizacao() {
                             <FormLabel
                               htmlFor="nom_ranking"
                               mb={"1px"}
-                              ml={"3px"}
+                              ml={"2px"}
                               color={"#949494"}
                               fontWeight={"700"}
                               fontSize={"12px"}
@@ -107,7 +107,7 @@ function ModalCadastrarPriorizacao() {
                             </FormLabel>
                             <Input
                               maxLength={30}
-                              ml={"3px"}
+                              ml={"2px"}
                               w={"93%"}
                               h={"56px"}
                               fontSize={"14px"}
@@ -147,10 +147,12 @@ function ModalCadastrarPriorizacao() {
                               mb={"1px"}
                               w={"550px"}
                               mt={"5px"}
+                              ml={"2px"}
                             >
                               PERFIS COM ACESSO
                             </FormLabel>
                             <Select
+                              ml={"2px"}
                               id="pit"
                               name="pit"
                               placeholder="Selecione"
@@ -177,7 +179,7 @@ function ModalCadastrarPriorizacao() {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
+              <Flex gap={2} ml={9}>
                 <Button
                   variant="ghost"
                   color="red.500"
