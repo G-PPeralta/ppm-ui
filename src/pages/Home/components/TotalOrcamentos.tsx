@@ -70,7 +70,7 @@ export default function TotalOrcamentosComponent() {
               sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
-              {!loading && valorFormatado}
+              {!loading && valorFormatado.toString().split(",")[0]}
             </Text>
           </Box>
         </Box>

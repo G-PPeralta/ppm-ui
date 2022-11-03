@@ -41,6 +41,7 @@ export default function NaoPrevistoComponent() {
   }, []);
 
   const valorFormatado = totalNaoPrevisto && totalNaoPrevisto.toLocaleString();
+
   return (
     <Flex
       py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
@@ -79,7 +80,7 @@ export default function NaoPrevistoComponent() {
               sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
-              {!loading && valorFormatado}
+              {!loading && valorFormatado.toString().split(",")[0]}
             </Text>
           </Box>
         </Box>
