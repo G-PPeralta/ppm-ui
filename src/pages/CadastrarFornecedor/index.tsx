@@ -30,7 +30,7 @@ export function CadastrarFornecedor() {
     { value: 3, label: "Mock 3" },
   ];
 
-  console.log(registerForm.values);
+  // console.log(registerForm.values);
 
   return (
     <>
