@@ -204,7 +204,7 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
             // baselineEndDate: "BaselineEndDate",
             duration: "Duration",
             progress: "Progress",
-            // dependency: "Predecessor",
+            dependency: "Predecessor",
             child: "subtasks",
           }}
           // taskFields={ganttData.macroatividades.map((macroatividade) => ({
