@@ -150,7 +150,9 @@ function ModalEditar({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
             Gestão de Custos
           </ModalHeader>
@@ -270,7 +272,7 @@ function ModalEditar({
                 color="red.500"
                 onClick={() => handleCancelar()}
                 _hover={{
-                  background: "red.500",
+                  background: "red.600",
                   transition: "all 0.4s",
                   color: "white",
                 }}

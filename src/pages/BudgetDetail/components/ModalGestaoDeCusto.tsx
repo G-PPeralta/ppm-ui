@@ -66,7 +66,9 @@ function ModalGestaoDeCusto(props: PropsInterface) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
             Gestão de Custos
           </ModalHeader>
@@ -291,7 +293,7 @@ function ModalGestaoDeCusto(props: PropsInterface) {
                   w={"208px"}
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
-                    background: "red.500",
+                    background: "red.600",
                     transition: "all 0.4s",
                     color: "white",
                   }}

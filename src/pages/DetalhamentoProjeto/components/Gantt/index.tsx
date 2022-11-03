@@ -30,12 +30,14 @@ import { getGanttData } from "services/get/Gantt";
 
 import ModalCadastroAtividades from "../ModalCadastroAtividades";
 import ModalEditarAtividade from "../ModalEditarAtividade";
+import "./gantt.css";
 
 type ganttOptionsProps = {
   ganttOptions?: any;
   toolbarOptions?: string[];
   idProjeto?: number;
 };
+
 export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
   // const { id } = useParams();
   const [loading, setLoading] = useState(true);

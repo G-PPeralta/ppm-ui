@@ -72,7 +72,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
       >
         Cadastrar
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="lg">
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -84,7 +84,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
             fontWeight={"700"}
             fontFamily={"Mulish"}
           >
-            {`Priorização ${rankingNome}`}
+            {`Cadastrar Priorização ${rankingNome}`}
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <form
@@ -107,19 +107,20 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               fontWeight={"700"}
                               color={"#949494"}
                               mb={"1px"}
-                              ml={"3px"}
+                              ml={"2px"}
                             >
-                              NOME
+                              NOME DA PRIORIZAÇÃO
                             </FormLabel>
                             <Input
+                              ml={"2px"}
                               maxLength={40}
                               fontSize={"14px"}
                               fontWeight={"400"}
                               placeholder={"Nome"}
+                              // w={"93%"}
                               color={"black"}
                               _placeholder={{ color: "#949494" }}
-                              ml={"3px"}
-                              w={"328px"}
+                              w={"524px"}
                               border={"1px solid #949494"}
                               h={"56px"}
                               id="nom_opcao"
@@ -143,16 +144,19 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               fontWeight={"700"}
                               color={"#949494"}
                               mb={"1px"}
+                              ml={"2px"}
                             >
                               NOTA
                             </FormLabel>
                             <Select
+                              ml={"2px"}
+                              // w={"93.6%"}
                               id="num_nota"
                               name="num_nota"
                               placeholder="Selecione"
                               border={"1px solid #949494"}
                               h={"56px"}
-                              w={"328px"}
+                              w={"208px"}
                               fontSize={"14px"}
                               fontWeight={"400"}
                               color={"black"}
@@ -183,7 +187,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
+              <Flex gap={2} ml={9}>
                 <Button
                   variant="ghost"
                   color="red.500"
