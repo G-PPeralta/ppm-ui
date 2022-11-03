@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
 import {
@@ -79,6 +79,10 @@ function LicoesAprendidasModal({
       setFilteredTable(licoes);
     }
   }
+
+  useEffect(() => {
+    handleFilter();
+  }, [licoes]);
 
   return (
     <>
