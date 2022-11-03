@@ -78,7 +78,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
         textAlign={"center"}
         icon={<MdModeEdit />}
       />
-      <Modal isOpen={isOpen} onClose={onClose} size="lg">
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -91,7 +91,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
             fontWeight={"700"}
             h={"48px"}
           >
-            {`Priorização ${infosOption.nameRanking}`}
+            {`Editar Priorização ${infosOption.nameRanking}`}
           </ModalHeader>
           <ModalCloseButton color={"white"} />
 
@@ -122,10 +122,12 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                               color={"#949494"}
                               fontWeight={"700"}
                               fontSize={"12px"}
+                              ml={1}
                             >
-                              NOME
+                              NOME DA PRIORIZAÇÃO
                             </FormLabel>
                             <Input
+                              mr={1}
                               maxLength={35}
                               fontSize={"14px"}
                               fontWeight={"400"}
@@ -133,7 +135,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                               _placeholder={{ color: "#949494" }}
                               ml={"3px"}
                               // placeholder="Nome"
-                              w={"328px"}
+                              w={"523px"}
                               border={"1px solid #949494"}
                               h={"56px"}
                               isRequired
@@ -159,13 +161,15 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                               fontWeight={"700"}
                               color={"#949494"}
                               mb={"1px"}
+                              ml={1}
                             >
                               NOTA
                             </FormLabel>
                             <Select
+                              ml={1}
                               border={"1px solid #949494"}
                               h={"56px"}
-                              w={"328px"}
+                              w={"208px"}
                               fontSize={"14px"}
                               fontWeight={"400"}
                               _placeholder={{ color: "black" }}
@@ -193,7 +197,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
+              <Flex gap={2} ml={9}>
                 <Button
                   variant="ghost"
                   color="red.500"
