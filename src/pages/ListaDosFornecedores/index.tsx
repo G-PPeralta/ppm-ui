@@ -23,6 +23,7 @@ import {
   FormControl,
   FormLabel,
   Select,
+  Input,
 } from "@chakra-ui/react";
 import { Polo, ProjetosList } from "interfaces/Services";
 
@@ -76,8 +77,9 @@ export function Fornecedores() {
   const [polos, setPolos] = useState<Polo[]>([] as Polo[]);
   const [loading, setLoading] = useState(true);
   // estados dos filtros
-  const [projetoId, setProjetoId] = useState(0);
+  // const [projetoId, setProjetoId] = useState(0);
   const [polo, setPolo] = useState(0);
+  const [fornecedor, setFornecedor] = useState("");
 
   function handleEditFornecedor(fornecedor: FornecedoreDto) {
     setEditFornecedor(fornecedor);
@@ -129,16 +131,34 @@ export function Fornecedores() {
       setLoading(false);
   }, [polos, fornecedores, projetos]);
 
-  function handleFilterData(id: number, pol: number) {
-    if (id !== 0) {
-      const filtered = fornecedores.filter((fornec) => fornec.id == id);
-      return setFornecedores(filtered);
+  // function handleFilterData(id: number, pol: number) {
+  //   if (id !== 0) {
+  //     const filtered = fornecedores.filter((fornec) => fornec.id == id);
+  //     return setFornecedores(filtered);
+  //   }
+  //   if (pol !== 0) {
+  //     const filtered = fornecedores.filter((fornec) => fornec.poloid == pol);
+  //     return setFornecedores(filtered);
+  //   }
+  //   setFornecedores(filteredFornecedores);
+  // }
+
+  console.log(fornecedores);
+
+  function handleFilter() {
+    if (fornecedor || polo) {
+      const filtered = fornecedores
+        .filter((forn: any) =>
+          forn.nomefornecedor.toUpperCase().includes(fornecedor.toUpperCase())
+        )
+        .filter((forn: any) => forn.poloid === polo);
+      console.log({ filtered });
+      console.log({ polo });
+
+      setFornecedores(filtered);
+    } else {
+      setFornecedores(filteredFornecedores);
     }
-    if (pol !== 0) {
-      const filtered = fornecedores.filter((fornec) => fornec.poloid == pol);
-      return setFornecedores(filtered);
-    }
-    setFornecedores(filteredFornecedores);
   }
 
   return (
@@ -259,6 +279,41 @@ export function Fornecedores() {
                     </Select>
                   </FormControl> */}
                   <FormControl>
+                    <FormLabel htmlFor="categoria">
+                      <Text
+                        color="#949494"
+                        fontSize="12px"
+                        fontWeight="700"
+                        mt={"6px"}
+                      >
+                        PESQUISAR
+                      </Text>
+                    </FormLabel>
+                    <Input
+                      maxLength={50}
+                      borderRadius={"8px"}
+                      fontSize={"14px"}
+                      fontWeight={"400"}
+                      fontFamily={"Mulish"}
+                      border={"1px solid #949494"}
+                      mt={"-9px"}
+                      width={"208px"}
+                      height={"56px"}
+                      _placeholder={{ color: "#949494" }}
+                      id="projeto"
+                      name="projeto"
+                      placeholder="Digite"
+                      onChange={(e) => setFornecedor(e.target.value)}
+                    >
+                      {/* <option value="">Selecione</option>
+                      {categorias.map((cat: any, index: number) => (
+                        <option value={cat.id} key={index}>
+                          {cat.nom_categoria}
+                        </option>
+                      ))} */}
+                    </Input>
+                  </FormControl>
+                  {/* <FormControl>
                     <FormLabel
                       // fontWeight={"700"}
                       // fontSize={"12px"}
@@ -270,7 +325,7 @@ export function Fornecedores() {
                         fontSize={"12px"}
                         color={"#949494"}
                       >
-                        FORNECEDOR
+                        PESQUISAR
                       </Text>
                     </FormLabel>
                     <Select
@@ -293,7 +348,7 @@ export function Fornecedores() {
                           </option>
                         ))}
                     </Select>
-                  </FormControl>
+                  </FormControl> */}
                 </Flex>
 
                 <Flex align={"flex-end"}>
@@ -351,9 +406,9 @@ export function Fornecedores() {
                     }}
                     rightIcon={<FiSearch />}
                     onClick={() => {
-                      handleFilterData(projetoId, polo);
-                      setPolo(0);
-                      setProjetoId(0);
+                      handleFilter();
+                      // setPolo(0);
+                      // setProjetoId(0);
                     }}
                     alignSelf={"end"}
                     height={"56px"}
