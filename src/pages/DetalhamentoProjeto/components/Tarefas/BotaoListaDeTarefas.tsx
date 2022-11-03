@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import toast from "react-hot-toast";
 import { AiOutlineSearch } from "react-icons/ai";
-import { MdArrowForwardIos, MdModeEdit } from "react-icons/md";
+import { MdModeEdit } from "react-icons/md";
 import { useParams } from "react-router-dom";
 
 import {
@@ -438,7 +438,7 @@ function BotaoListadeTarefas() {
                       Adicionar Tarefa
                     </Button>
                     <Flex alignSelf={"end"} align={"flex-start"}>
-                      <Button
+                      {/* <Button
                         onClick={onOpen}
                         background="transparent"
                         color="#0047BB"
@@ -452,7 +452,7 @@ function BotaoListadeTarefas() {
                           fontWeight={"700"}
                           color="#0047BB"
                         />
-                      </Button>
+                      </Button> */}
                     </Flex>
                   </Flex>
                 </Flex>

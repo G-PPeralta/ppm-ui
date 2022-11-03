@@ -10,9 +10,14 @@ import Sidebar from "components/SideBar";
 import TextAreaGenerico from "components/TextAreaGenerico";
 
 import formatCellphone from "utils/formatCellphone";
-import { formatCnpj } from "utils/formatCnpj";
+// import { formatCnpj } from "utils/formatCnpj";
 import { formatEmail } from "utils/formatEmail";
 import { handleCadastrarPagina } from "utils/handleCadastro";
+import {
+  regexCaracteresEspeciaisENumeros,
+  regexCnpj,
+  regexSomenteNumeros,
+} from "utils/regex";
 
 import { useCadastroFornecedor } from "hooks/useCadastroFornecedor";
 
@@ -24,6 +29,8 @@ export function CadastrarFornecedor() {
     { value: 2, label: "Mock 2" },
     { value: 3, label: "Mock 3" },
   ];
+
+  // console.log(registerForm.values);
 
   return (
     <>
@@ -101,7 +108,9 @@ export function CadastrarFornecedor() {
                     registerForm={registerForm}
                     nomeInput={"NÚMERO DO CONTRATO"}
                     propName={"numeroContrato"}
-                    value={registerForm.values.numeroContrato}
+                    value={regexSomenteNumeros(
+                      registerForm.values.numeroContrato
+                    )}
                     required={true}
                     placeholder={"Número do contrato"}
                     maxLength={50}
@@ -112,7 +121,9 @@ export function CadastrarFornecedor() {
                     registerForm={registerForm}
                     nomeInput={"REPRESENTANTE/PONTO FOCAL"}
                     propName={"representante"}
-                    value={registerForm.values.representante}
+                    value={regexCaracteresEspeciaisENumeros(
+                      registerForm.values.representante
+                    )}
                     required={true}
                     placeholder={"Nome do representante"}
                     maxLength={50}
@@ -142,7 +153,7 @@ export function CadastrarFornecedor() {
                     registerForm={registerForm}
                     nomeInput={"INVOICE"}
                     propName={"invoice"}
-                    value={registerForm.values.invoice}
+                    value={regexSomenteNumeros(registerForm.values.invoice)}
                     required={true}
                     placeholder={"Número do invoice"}
                     maxLength={50}
@@ -151,10 +162,10 @@ export function CadastrarFornecedor() {
                     registerForm={registerForm}
                     nomeInput={"CNPJ"}
                     propName={"cnpj"}
-                    value={formatCnpj(registerForm.values.cnpj)}
+                    value={regexCnpj(registerForm.values.cnpj)?.toString()}
                     required={true}
                     placeholder={"Digite o CNPJ"}
-                    maxLength={14}
+                    maxLength={18}
                   />
                 </Flex>
                 <Flex gap={2} align={"start"} w={"45%"}>
