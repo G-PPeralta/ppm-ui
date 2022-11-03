@@ -19,6 +19,8 @@ import PaginacaoTabela from "components/PaginacaoTabela";
 
 import { FornecedoreDto } from "..";
 
+import ModalDeletarFornecedor from "./DeletarFornecedor";
+
 // import { Fornecedor } from "../index";
 
 type TabelaFornecedoresProps = {
@@ -91,15 +93,15 @@ export function TabelaFornecedores({
                   <IconButton
                     // aria-label="Plus sign"
                     icon={<MdModeEdit />}
-                    background="transparent"
+                    textAlign={"center"}
                     // variant="secondary"
                     // color="#0047BB"
                     color={"origem.500"}
                     backgroundColor={"transparent"}
                     aria-label="Plus sign"
-                    mr={2}
+                    // mr={2}
                     // isRound={true}
-                    size="sm"
+                    // size="sm"
                     onClick={() => onEdit(fornecedor)}
                     // width={"18px"}
                     // height={"18px"}
@@ -110,6 +112,7 @@ export function TabelaFornecedores({
                     fontSize={"18px"}
                     fontWeight={"700"}
                   />
+                  <ModalDeletarFornecedor />
                 </Td>
               </Tr>
             ))
