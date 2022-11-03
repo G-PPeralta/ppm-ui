@@ -70,9 +70,13 @@ export function useEditarAtividadeGantt() {
     validationSchema: adicionarOperacao,
     onSubmit: async (values) => {
       const id = values.id_atividade;
+      const dat_ini = new Date(values.inicio_realizado);
+      // dat_ini.setHours(dat_ini.getHours() - 3);
+      const dat_fim = new Date(values.fim_realizado);
+      // dat_fim.setHours(dat_fim.getHours() - 3);
       const newValues = {
-        dat_ini_real: new Date(values.inicio_realizado).toLocaleString(),
-        dat_fim_real: new Date(values.fim_realizado).toLocaleString(),
+        dat_ini_real: dat_ini.toISOString(),
+        dat_fim_real: dat_fim.toISOString(),
         // dat_ini_plan: new Date(values.inicio_planejado).toLocaleString(),
         // dat_fim_plan: new Date(values.fim_planejado).toLocaleString(),
         pct_real: values.pct_real,
@@ -100,8 +104,8 @@ export function useEditarAtividadeGantt() {
     setEditAtividade({
       id_atividade: args.rowData.TaskID,
       nome_atividade: args.rowData.TaskName,
-      inicio_realizado: new Date(args.rowData.StartDate),
-      fim_realizado: new Date(args.rowData.EndDate),
+      inicio_realizado: args.rowData.StartDate,
+      fim_realizado: args.rowData.EndDate,
       // inicio_planejado: new Date(args.rowData.BaselineStartDate),
       // fim_planejado: new Date(args.rowData.BaselineEndDate),
       // hrs_totais: args.rowData.BaselineDuration,
