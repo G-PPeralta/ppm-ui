@@ -120,7 +120,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               // w={"93%"}
                               color={"black"}
                               _placeholder={{ color: "#949494" }}
-                              w={"328px"}
+                              w={"524px"}
                               border={"1px solid #949494"}
                               h={"56px"}
                               id="nom_opcao"
@@ -156,7 +156,7 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               placeholder="Selecione"
                               border={"1px solid #949494"}
                               h={"56px"}
-                              w={"328px"}
+                              w={"208px"}
                               fontSize={"14px"}
                               fontWeight={"400"}
                               color={"black"}

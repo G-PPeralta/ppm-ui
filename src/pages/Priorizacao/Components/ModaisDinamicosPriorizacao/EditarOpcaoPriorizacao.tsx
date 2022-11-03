@@ -122,10 +122,12 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                               color={"#949494"}
                               fontWeight={"700"}
                               fontSize={"12px"}
+                              ml={1}
                             >
                               NOME DA PRIORIZAÇÃO
                             </FormLabel>
                             <Input
+                              mr={1}
                               maxLength={35}
                               fontSize={"14px"}
                               fontWeight={"400"}
@@ -133,7 +135,7 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                               _placeholder={{ color: "#949494" }}
                               ml={"3px"}
                               // placeholder="Nome"
-                              w={"328px"}
+                              w={"523px"}
                               border={"1px solid #949494"}
                               h={"56px"}
                               isRequired
@@ -159,13 +161,15 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                               fontWeight={"700"}
                               color={"#949494"}
                               mb={"1px"}
+                              ml={1}
                             >
                               NOTA
                             </FormLabel>
                             <Select
+                              ml={1}
                               border={"1px solid #949494"}
                               h={"56px"}
-                              w={"328px"}
+                              w={"208px"}
                               fontSize={"14px"}
                               fontWeight={"400"}
                               _placeholder={{ color: "black" }}
