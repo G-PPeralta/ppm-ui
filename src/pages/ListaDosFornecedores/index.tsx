@@ -297,12 +297,12 @@ export function Fornecedores() {
                       fontFamily={"Mulish"}
                       border={"1px solid #949494"}
                       mt={"-9px"}
-                      width={"208px"}
+                      width={"220px"}
                       height={"56px"}
                       _placeholder={{ color: "#949494" }}
                       id="projeto"
                       name="projeto"
-                      placeholder="Digite"
+                      placeholder="Digite o nome do Fornecedor"
                       onChange={(e) => setFornecedor(e.target.value)}
                     >
                       {/* <option value="">Selecione</option>
