@@ -145,7 +145,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   <SelectFiltragem
                     registerForm={registerForm}
                     required={true}
-                    nomeSelect={"TAREFA"}
+                    nomeSelect={"ATIVIDADE"}
                     propName={`atividades[${index}].tarefa_id`}
                     options={optionsTarefa}
                     value={getValue(optionsTarefa, index, "tarefa_id")}
