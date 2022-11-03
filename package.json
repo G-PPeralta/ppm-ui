@@ -6,9 +6,9 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.2.1",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
+    "@chakra-ui/react": "^2.3.7",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@syncfusion/ej2-base": "^20.2.39",
     "@syncfusion/ej2-react-charts": "^20.2.40",
     "@syncfusion/ej2-react-gantt": "^20.2.39",
@@ -21,7 +21,7 @@
     "cldr-data": "^36.0.1",
     "date-fns": "^2.29.3",
     "formik": "^2.2.9",
-    "framer-motion": "^6.3.11",
+    "framer-motion": "^7.6.4",
     "moment": "^2.29.4",
     "react": "^18.1.0",
     "react-archer": "^4.1.0",
