@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+
 import { AiOutlineRise } from "react-icons/ai";
 
 import {
@@ -8,28 +9,32 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { TotalOrcamento } from "interfaces/Services";
 
-import { getOrcamentoTotal } from "services/get/Dashboard";
+// import { TotalOrcamento } from "interfaces/Services";
+
+// import { getOrcamentoTotal } from "services/get/Dashboard";
+
+import { useDashboard } from "contexts/Dashboard";
 
 export default function TotalOrcamentosComponent() {
-  const [totalOrcamento, setTotalOrcamento] = useState<TotalOrcamento[]>(
-    [] as TotalOrcamento[]
-  );
-  const [loading, setLoading] = useState(true);
+  // const [totalOrcamento, setTotalOrcamento] = useState<TotalOrcamento[]>(
+  //   [] as TotalOrcamento[]
+  // );
+  // const [loading, setLoading] = useState(true);
 
-  async function handleGetTotalOrcamento() {
-    const reqGet = await getOrcamentoTotal();
+  // async function handleGetTotalOrcamento() {
+  //   const reqGet = await getOrcamentoTotal();
 
-    setTotalOrcamento(reqGet.data[0].total);
-  }
+  //   setTotalOrcamento(reqGet.data[0].total);
+  // }
 
-  useEffect(() => {
-    handleGetTotalOrcamento();
-    setLoading(false);
-  }, []);
+  // useEffect(() => {
+  //   handleGetTotalOrcamento();
+  //   setLoading(false);
+  // }, []);
 
-  const valorFormatado = totalOrcamento.toLocaleString();
+  // const valorFormatado = totalOrcamento.toLocaleString();
+  const { loading, valorTotalOrcamento } = useDashboard();
 
   return (
     <Flex
@@ -70,7 +75,9 @@ export default function TotalOrcamentosComponent() {
               sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
-              {!loading && valorFormatado.toString().split(",")[0]}
+              {!loading && valorTotalOrcamento === 0
+                ? "0,00"
+                : valorTotalOrcamento.toLocaleString().split(",")[0]}
             </Text>
           </Box>
         </Box>

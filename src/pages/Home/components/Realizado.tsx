@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 import {
   Box,
@@ -7,38 +7,42 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { TotalOrcamento, TotalRealizado } from "interfaces/Services";
 
-import { getOrcamentoTotal, getTotalRealizado } from "services/get/Dashboard";
+// import { TotalOrcamento, TotalRealizado } from "interfaces/Services";
+
+// import { getOrcamentoTotal, getTotalRealizado } from "services/get/Dashboard";
+
+import { useDashboard } from "contexts/Dashboard";
 
 export default function RealizadoComponent() {
-  const [totalRealizado, setTotalRealizado] = useState<TotalRealizado[]>(
-    [] as TotalRealizado[]
-  );
-  const [orcamento, setTotalOrcamento] = useState<TotalOrcamento[]>();
-  const [loading, setLoading] = useState(false);
+  // const [totalRealizado, setTotalRealizado] = useState<TotalRealizado[]>(
+  //   [] as TotalRealizado[]
+  // );
+  // const [orcamento, setTotalOrcamento] = useState<TotalOrcamento[]>();
+  // const [loading, setLoading] = useState(false);
 
-  async function handleGetTotalRealizado() {
-    setLoading(true);
-    const reqGet = await getTotalRealizado();
+  // async function handleGetTotalRealizado() {
+  //   setLoading(true);
+  //   const reqGet = await getTotalRealizado();
 
-    setTotalRealizado(reqGet.data[0].totalRealizado);
-    setLoading(false);
-  }
+  //   setTotalRealizado(reqGet.data[0].totalRealizado);
+  //   setLoading(false);
+  // }
 
-  async function handleGetTotalOrcamento() {
-    const reqGet = await getOrcamentoTotal();
+  // async function handleGetTotalOrcamento() {
+  //   const reqGet = await getOrcamentoTotal();
 
-    setTotalOrcamento(reqGet.data[0].total);
-  }
+  //   setTotalOrcamento(reqGet.data[0].total);
+  // }
 
-  useEffect(() => {
-    handleGetTotalOrcamento();
-    handleGetTotalRealizado();
-    setLoading(false);
-  }, []);
+  // useEffect(() => {
+  //   handleGetTotalOrcamento();
+  //   handleGetTotalRealizado();
+  //   setLoading(false);
+  // }, []);
 
-  const valorFormatado = totalRealizado && totalRealizado.toLocaleString();
+  // const valorFormatado = totalRealizado && totalRealizado.toLocaleString();
+  const { loading, valorRealizado, porcentagemRealizado } = useDashboard();
 
   return (
     <Flex
@@ -78,7 +82,9 @@ export default function RealizadoComponent() {
               sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
-              {!loading && valorFormatado.toString().split(",")[0]}
+              {!loading && valorRealizado === 0
+                ? "0,00"
+                : valorRealizado.toLocaleString().split(",")[0]}
             </Text>
           </Box>
         </Box>
@@ -93,13 +99,13 @@ export default function RealizadoComponent() {
             sx={{ fontSize: 22, fontWeight: "600", alignSelf: "center" }}
             color="#ffffff"
           >
-            {!totalRealizado ||
+            {/* {!totalRealizado ||
             !orcamento ||
             isNaN(Number(totalRealizado)) ||
             isNaN(Number(orcamento))
               ? 0
-              : ((Number(totalRealizado) / Number(orcamento)) * 100).toFixed(2)}
-            %
+              : ((Number(totalRealizado) / Number(orcamento)) * 100).toFixed(2)} */}
+            {!loading && porcentagemRealizado}%
           </Text>
         </Box>
       </Box>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 import {
   Box,
@@ -7,40 +7,44 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { TotalNaoPrevisto, TotalOrcamento } from "interfaces/Services";
 
-import { getOrcamentoTotal, getTotalNaoPrevisto } from "services/get/Dashboard";
+// import { TotalNaoPrevisto, TotalOrcamento } from "interfaces/Services";
+
+// import { getOrcamentoTotal, getTotalNaoPrevisto } from "services/get/Dashboard";
+
+import { useDashboard } from "contexts/Dashboard";
 
 export default function NaoPrevistoComponent() {
-  const [totalNaoPrevisto, setTotalNaoPrevisto] = useState<TotalNaoPrevisto[]>(
-    [] as TotalNaoPrevisto[]
-  );
-  const [totalOrcamento, setTotalOrcamento] = useState<TotalOrcamento[]>(
-    [] as TotalOrcamento[]
-  );
-  const [loading, setLoading] = useState(false);
+  // const [totalNaoPrevisto, setTotalNaoPrevisto] = useState<TotalNaoPrevisto[]>(
+  //   [] as TotalNaoPrevisto[]
+  // );
+  // const [totalOrcamento, setTotalOrcamento] = useState<TotalOrcamento[]>(
+  //   [] as TotalOrcamento[]
+  // );
+  // const [loading, setLoading] = useState(false);
 
-  async function handleGetTotalOrcamento() {
-    const reqGet = await getOrcamentoTotal();
+  // async function handleGetTotalOrcamento() {
+  //   const reqGet = await getOrcamentoTotal();
 
-    setTotalOrcamento(reqGet.data[0].total);
-  }
+  //   setTotalOrcamento(reqGet.data[0].total);
+  // }
 
-  async function handleGetTotalNaoPrevisto() {
-    setLoading(true);
-    const reqGet = await getTotalNaoPrevisto();
+  // async function handleGetTotalNaoPrevisto() {
+  //   setLoading(true);
+  //   const reqGet = await getTotalNaoPrevisto();
 
-    setTotalNaoPrevisto(reqGet.data[0].totalNaoPrevisto);
-    setLoading(false);
-  }
+  //   setTotalNaoPrevisto(reqGet.data[0].totalNaoPrevisto);
+  //   setLoading(false);
+  // }
 
-  useEffect(() => {
-    handleGetTotalOrcamento();
-    handleGetTotalNaoPrevisto();
-    setLoading(false);
-  }, []);
+  // useEffect(() => {
+  //   handleGetTotalOrcamento();
+  //   handleGetTotalNaoPrevisto();
+  //   setLoading(false);
+  // }, []);
 
-  const valorFormatado = totalNaoPrevisto && totalNaoPrevisto.toLocaleString();
+  // const valorFormatado = totalNaoPrevisto && totalNaoPrevisto.toLocaleString();
+  const { loading, valorNaoPrevisto, porcentagemNaoPrevisto } = useDashboard();
 
   return (
     <Flex
@@ -80,7 +84,9 @@ export default function NaoPrevistoComponent() {
               sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
-              {!loading && valorFormatado.toString().split(",")[0]}
+              {!loading && valorNaoPrevisto === 0
+                ? "0,00"
+                : valorNaoPrevisto.toLocaleString().split(",")[0]}
             </Text>
           </Box>
         </Box>
@@ -95,7 +101,7 @@ export default function NaoPrevistoComponent() {
             sx={{ fontSize: 20, fontWeight: "600", alignSelf: "center" }}
             color="#ffffff"
           >
-            {!totalNaoPrevisto ||
+            {/* {!totalNaoPrevisto ||
             !totalOrcamento ||
             isNaN(Number(totalNaoPrevisto)) ||
             isNaN(Number(totalOrcamento))
@@ -103,8 +109,8 @@ export default function NaoPrevistoComponent() {
               : (
                   (Number(totalNaoPrevisto) / Number(totalOrcamento)) *
                   100
-                ).toFixed(2)}
-            %
+                ).toFixed(2)} */}
+            {!loading && porcentagemNaoPrevisto}%
           </Text>
         </Box>
       </Box>
