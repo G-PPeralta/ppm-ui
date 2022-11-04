@@ -13,6 +13,8 @@ import {
 
 import Sidebar from "components/SideBar";
 
+import { BotaoAdicionar } from "./components/AdicionarUsuario";
+
 export function Usuarios() {
   // const [loading, _setLoading] = useState(true);
 
@@ -31,7 +33,7 @@ export function Usuarios() {
             }}
             borderRadius={{ base: "none", sm: "xl" }}
           >
-            <Flex direction="column" ml={-5} mt={-4}>
+            <Flex direction="column" ml={-5} mt={-4} mr={-5}>
               <Flex
                 justify={"space-between"}
                 mb={2}
@@ -50,10 +52,9 @@ export function Usuarios() {
                   </Text>
                 </FormLabel>
               </Flex>
-
-              <Flex direction={"column"}>
+              <Flex direction={"row"} justify={"space-between"}>
                 <Flex flexDir="row" wrap={"wrap"}>
-                  <Flex align={"end"} direction={"column"} mr="16px">
+                  <Flex align={"start"} direction={"column"} mr="16px">
                     <Text
                       fontWeight={"700"}
                       fontSize={"12px"}
@@ -62,12 +63,11 @@ export function Usuarios() {
                       NOME/EMAIL
                     </Text>
                     <Input
-                      alignSelf={"end"}
                       h={"56px"}
                       fontSize={"14px"}
                       fontFamily={"Mulish"}
                       fontWeight={"400"}
-                      width={"328px"}
+                      width={"410px"}
                       color={"black"}
                       isRequired
                       placeholder="Digite o nome ou o e-mail"
@@ -91,8 +91,8 @@ export function Usuarios() {
                       fontWeight={"400"}
                       h={"56px"}
                       w={"208px"}
-                      id="poloId"
-                      name="pole"
+                      id="permission"
+                      name="permission"
                       width={300}
                     >
                       <option>Todos</option>
@@ -121,7 +121,11 @@ export function Usuarios() {
                     </Button>
                   </Flex>
                 </Flex>
+                <Flex align={"start"} alignSelf={"end"}>
+                  <BotaoAdicionar />
+                </Flex>
               </Flex>
+              xxxxxxxxxxx
             </Flex>
           </Box>
         </Flex>
