@@ -153,7 +153,6 @@ export function BotaoAdicionar() {
                     NÍVEL DE ACESSO
                   </FormLabel>
                   <Select
-                    ml={"2px"}
                     id="pit"
                     name="pit"
                     placeholder="Selecione"
