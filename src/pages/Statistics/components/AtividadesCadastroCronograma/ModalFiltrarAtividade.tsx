@@ -135,7 +135,6 @@ export function ModalFiltrarAtividade({
                       nomeSelect={"POÇO"}
                       propName={"pocoId"}
                       options={optionsPocos}
-                      required={true}
                     />
                   </Flex>
                   <Flex direction={"row"} height="56px" gap={3}>
@@ -146,7 +145,6 @@ export function ModalFiltrarAtividade({
                         nomeSelect={"SONDA"}
                         propName={"sondaId"}
                         options={optionsSondas}
-                        required={true}
                       />
                     </Flex>
                     <Flex direction={"column"}>
@@ -213,10 +211,9 @@ export function ModalFiltrarAtividade({
                       <SelectFiltragem
                         width={true}
                         registerForm={registerForm}
-                        nomeSelect={"Metodo Elevação"}
+                        nomeSelect={"MÉTODO ELEVAÇÃO"}
                         propName={"metodoElevacaoId"}
                         options={optionsMetodo}
-                        required={true}
                       />
                     </Flex>
                     <Flex direction={"column"} grow={1} marginLeft="16px">

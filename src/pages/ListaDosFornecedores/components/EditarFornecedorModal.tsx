@@ -315,6 +315,7 @@ export function EditarFornecedorModal({
               background="origem.500"
               variant="primary"
               color="white"
+              disabled={poloId == 0}
               onClick={() => {
                 onUpdate({
                   id: fornecedor.id,
