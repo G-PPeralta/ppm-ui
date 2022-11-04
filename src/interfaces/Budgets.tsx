@@ -70,18 +70,20 @@ export interface ClasseServico {
   classe_servico: string;
 }
 
+/*
 interface CustoDiarioFilho {
   id: number;
   index: string;
   atividade: string;
   fornecedor: string;
   realizado: number;
-}
+} */
 export interface CustoDiario {
   id: number;
-  index: string;
+  atividade: string;
   date: string;
+  pedido: string;
+  txt_pedido: string;
   fornecedor: string;
   realizado: number;
-  filhos: CustoDiarioFilho[];
 }

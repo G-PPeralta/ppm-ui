@@ -1,8 +1,10 @@
+/* eslint-disable no-nested-ternary */
 import { useEffect, useState } from "react";
 // import { GrAddCircle } from "react-icons/gr";
-import ReactDatePicker from "react-datepicker";
+import { AiFillDelete } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
-import { FiChevronDown } from "react-icons/fi";
+import { FiEdit2 } from "react-icons/fi";
+// import { FiChevronDown } from "react-icons/fi";
 import Moment from "react-moment";
 import "moment/locale/pt-br";
 
@@ -14,130 +16,114 @@ import {
   ModalHeader,
   // ModalCloseButton,
   ModalBody,
-  ModalFooter,
+  // ModalFooter,
   useDisclosure,
   Button,
   ModalCloseButton,
   TableContainer,
   Table,
+  Text,
   Tbody,
   Th,
   Thead,
   Tr,
   Td,
+  Input,
+  IconButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import { CustoDiario } from "interfaces/Budgets";
-import moment from "moment";
+import { BudgetDetail, CustoDiario } from "interfaces/Budgets";
 
 import Empty from "components/TableEmpty/empty";
 
 import { formatReal } from "utils/formatReal";
 
-import { getCustoDiario } from "services/get/GetBudget";
+import { getCustoDiarioFilho, getCustoDiarioPai } from "services/get/GetBudget";
 
-function ModalCustoDiario(props: { id: string | undefined }) {
+import "./modalCustoDiario.css";
+
+function ModalCustoDiario(props: { filho?: BudgetDetail; pai?: BudgetDetail }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [startDate, setStartDate] = useState<string | null>(null);
+  const [endDate, setEndDate] = useState<Date | string | null>(null);
   const [loading, setLoading] = useState(true); // Loading
   const [data, setData] = useState<CustoDiario[]>([]);
-  const { id } = props;
+  const { filho, pai } = props;
 
   const wd = window.innerWidth;
 
   const getCustosDiariosInicial = async () => {
-    const localStartDate = new Date(
-      parseInt(moment(new Date()).format("YYYY")),
-      parseInt(moment(new Date()).format("MM")) - 1,
-      1
-    );
-    const localEndDate = new Date();
-    const data = await getCustoDiario(id, localStartDate, localEndDate);
-    setStartDate(localStartDate);
-    setEndDate(localEndDate);
-    setData(data);
-    setLoading(false);
-  };
-
-  const filterByProject = async () => {
-    setLoading(false);
-
-    const data = await getCustoDiario(id, startDate, endDate);
-    setData(data);
+    if (filho) {
+      const data = await getCustoDiarioFilho(filho.projeto.id, null, null);
+      setData(data);
+    } else if (pai) {
+      const data = await getCustoDiarioPai(pai.projeto.id, null, null);
+      setData(data);
+    }
     setLoading(false);
   };
 
   useEffect(() => {
     getCustosDiariosInicial();
-  }, [id]);
+  }, []);
 
-  const onChange = (dates: [any, any]) => {
+  const FilterByDate = async () => {
+    setLoading(true);
+    if (filho) {
+      const data = await getCustoDiarioFilho(
+        filho.projeto.id,
+        startDate,
+        endDate
+      );
+      setData(data);
+    } else if (pai) {
+      const data = await getCustoDiarioPai(pai.projeto.id, startDate, endDate);
+      setData(data);
+    }
+    setLoading(false);
+  };
+
+  /* const onChange = (dates: [any, any]) => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
-  };
-  const toggleAcordion = (id: number) => {
+  }; */
+
+  /* const toggleAcordion = (id: number) => {
     const elements = document.getElementsByClassName("item2-" + id);
     for (let i = 0; i < elements.length; i++) {
       elements[i].classList.toggle("hide");
     }
-  };
+  }; */
 
   const tableData = data.map((dia, key) => (
     <>
-      <Tr color={"white"} background={"origem.200"} key={dia.id}>
-        <Td>{dia.index}</Td>
-        <Td onClick={() => toggleAcordion(key)}>
-          <Flex alignItems={"center"} justifyContent="space-between">
-            <Moment format="DD/MM/YYYY">{dia.date}</Moment>
-            <FiChevronDown size={"18px"} />{" "}
-          </Flex>
+      <Tr key={dia.id}>
+        <Td>
+          <Moment format="DD/MM/YYYY">{dia.date}</Moment>
         </Td>
+        <Td>{dia.atividade}</Td>
         <Td>{dia.fornecedor}</Td>
-        <Td align="center">{formatReal(dia.realizado)} </Td>
+        <Td>{dia.pedido}</Td>
+        <Td className="description">{dia.txt_pedido}</Td>
+        <Td>{formatReal(dia.realizado)} </Td>
+        <Td>
+          <IconButton variant="outline" aria-label="Edit" icon={<FiEdit2 />} />
+          <IconButton
+            variant="outline"
+            aria-label="Remove"
+            icon={<AiFillDelete />}
+          />
+        </Td>
       </Tr>
-      {dia.filhos &&
-        dia.filhos.map((filho) => (
-          <Tr className={"hide item2-" + key} key={"f" + filho.id}>
-            <Td>{filho.index}</Td>
-            <Td>{filho.atividade}</Td>
-            <Td>{filho.fornecedor}</Td>
-            <Td textAlign="center">
-              <Flex alignItems={"center"} justifyContent="center">
-                {formatReal(filho.realizado)}
-              </Flex>
-            </Td>
-          </Tr>
-        ))}
     </>
   ));
 
   return (
     <>
-      <Button
-        h={"56px"}
-        w={"208px"}
-        borderRadius={"8px"}
-        fontSize="18px"
-        fontWeight={"700"}
-        fontFamily={"Mulish"}
-        background={"origem.500"}
-        border={"2px solid"}
-        color={"white"}
-        alignSelf={"end"}
-        _hover={{
-          // border: "2px solid",
-          // borderColor: "origem.500",
-          background: "origem.600",
-          transition: "all 0.4s",
-          color: "white",
-        }}
-        // textColor={"origem.500"}
-        onClick={onOpen}
-      >
-        Custo Diário
-      </Button>
+      <Text style={{ cursor: "pointer" }} onClick={onOpen}>
+        {formatReal(filho ? filho.realizado : pai ? pai.realizado : 0)}
+      </Text>
 
       <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
@@ -151,7 +137,7 @@ function ModalCustoDiario(props: { id: string | undefined }) {
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            Custo Diário
+            {filho ? filho.projeto.nome : pai?.projeto.nome}
           </ModalHeader>
           <ModalCloseButton color={"white"} />
 
@@ -167,15 +153,64 @@ function ModalCustoDiario(props: { id: string | undefined }) {
                   flex={1}
                 >
                   <Flex align={"end"} gap={4} wrap={"wrap"} flex={1}>
+                    <Flex direction={"column"} w={"150px"}>
+                      <Flex gap={1}>
+                        <Text
+                          fontWeight={"bold"}
+                          fontSize={"12px"}
+                          color={"#949494"}
+                        >
+                          DATA INICIO
+                        </Text>
+                      </Flex>
+                      <Input
+                        // placeholder="dd/mm/aaaa"
+                        _placeholder={{ color: "#949494" }}
+                        fontSize={"14px"}
+                        fontWeight={"400"}
+                        fontFamily={"Mulish"}
+                        borderRadius={"8px"}
+                        max="9999-12-31"
+                        maxLength={1}
+                        border={"1px solid #A7A7A7"}
+                        mt={"-9px"}
+                        width={"156px"}
+                        height={"56px"}
+                        id="data"
+                        type="Date"
+                        name="data"
+                        // value={startDate}
+                        onChange={(event) => setStartDate(event.target.value)}
+                      />
+                    </Flex>
                     <Flex direction={"column"} w={"208px"}>
-                      <ReactDatePicker
-                        selectsRange={true}
-                        selected={startDate}
-                        onChange={onChange}
-                        startDate={startDate}
-                        endDate={endDate}
-                        locale="pt-BR"
-                        dateFormat="dd/MM/yyyy"
+                      <Flex gap={1}>
+                        <Text
+                          fontWeight={"bold"}
+                          fontSize={"12px"}
+                          color={"#949494"}
+                        >
+                          DATA FIM
+                        </Text>
+                      </Flex>
+                      <Input
+                        // placeholder="dd/mm/aaaa"
+                        _placeholder={{ color: "#949494" }}
+                        fontSize={"14px"}
+                        fontWeight={"400"}
+                        fontFamily={"Mulish"}
+                        borderRadius={"8px"}
+                        max="9999-12-31"
+                        maxLength={1}
+                        border={"1px solid #A7A7A7"}
+                        mt={"-9px"}
+                        width={"156px"}
+                        height={"56px"}
+                        id="data"
+                        type="Date"
+                        name="data"
+                        // value={endDate}
+                        onChange={(event) => setEndDate(event.target.value)}
                       />
                     </Flex>
                     <Flex flex={1}>
@@ -194,7 +229,7 @@ function ModalCustoDiario(props: { id: string | undefined }) {
                         fontSize="18px"
                         fontWeight={"700"}
                         fontFamily={"Mulish"}
-                        onClick={filterByProject}
+                        onClick={FilterByDate}
                       >
                         Filtrar
                       </Button>
@@ -202,13 +237,20 @@ function ModalCustoDiario(props: { id: string | undefined }) {
                   </Flex>
                 </Flex>
                 <TableContainer mt={4} mb={3} ml={1} borderRadius={"10px"}>
-                  <Table align={"center"}>
+                  <Table
+                    variant="striped"
+                    colorScheme={"strippedGray"}
+                    align={"center"}
+                  >
                     <Thead>
                       <Tr background={"origem.500"} color="white">
-                        <Th color={"white"}></Th>
+                        <Th color={"white"}>Data</Th>
                         <Th color={"white"}>Serviço/Compra</Th>
                         <Th color={"white"}>Fornecedor</Th>
+                        <Th color={"white"}>Pedido</Th>
+                        <Th color={"white"}>Texto Pedido</Th>
                         <Th color={"white"}>R$ Realizado</Th>
+                        <Th color={"white"}>Ações</Th>
                       </Tr>
                     </Thead>
                     {data.length ? (
@@ -230,7 +272,7 @@ function ModalCustoDiario(props: { id: string | undefined }) {
               </Flex>
             )}
           </ModalBody>
-          <ModalFooter justifyContent={"center"}>
+          {/* }ModalFooter justifyContent={"center"}>
             <Flex gap={2}>
               <Button
                 h={"56px"}
@@ -247,7 +289,7 @@ function ModalCustoDiario(props: { id: string | undefined }) {
                 Fechar
               </Button>
             </Flex>
-          </ModalFooter>
+              </ModalFooter> */}
         </ModalContent>
       </Modal>
     </>

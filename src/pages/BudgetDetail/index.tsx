@@ -11,7 +11,6 @@ import TituloPagina from "components/TituloPagina";
 import { useBudgetDetail } from "hooks/useBudgetDetail";
 
 import { BudgetDetailTable } from "./components/BudgetDetailTable";
-import ModalCustoDiario from "./components/ModalCustoDiario";
 import { TotalTable } from "./components/TotalTable";
 
 import "./budgetDetail.css";
@@ -53,9 +52,6 @@ export function BudgetDetail() {
                 </Text>
               </Box>
               <Spacer />
-              <Box p="4">
-                <ModalCustoDiario id={id} />
-              </Box>
             </Flex>
             <BudgetDetailTable
               data={budgetFilter}
