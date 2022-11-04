@@ -25,9 +25,8 @@ export function CadastrarFornecedor() {
   const { registerForm, loading, optionsPolos } = useCadastroFornecedor();
 
   const optionsMock = [
-    { value: 1, label: "Mock 1" },
-    { value: 2, label: "Mock 2" },
-    { value: 3, label: "Mock 3" },
+    { value: 1, label: "Ativo" },
+    { value: 2, label: "Inativo" },
   ];
 
   // console.log(registerForm.values);
@@ -50,7 +49,6 @@ export function CadastrarFornecedor() {
                   icon={<IoIosArrowBack size={20} />}
                   borderRadius={"10px"}
                   background={"white"}
-                  // color={"origem.500"}
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",
@@ -71,7 +69,7 @@ export function CadastrarFornecedor() {
                 </Heading>
               </Flex>
               <Flex direction={"column"} gap={4} mt={4}>
-                <Flex gap={2} align={"start"} w={"50%"}>
+                <Flex gap={2} align={"start"} w={"60%"}>
                   <SelectFiltragem
                     registerForm={registerForm}
                     nomeSelect={"POLO"}
@@ -79,12 +77,14 @@ export function CadastrarFornecedor() {
                     options={optionsPolos}
                     required={true}
                   />
-                  <SelectFiltragem
+                  <InputGenerico
                     registerForm={registerForm}
-                    nomeSelect={"SERVIÇO"}
-                    propName={"servicoId"}
-                    options={optionsMock}
+                    nomeInput={"SERVIÇO"}
+                    propName={"servico"}
+                    value={registerForm.values.servico}
                     required={true}
+                    placeholder={"Nome do fornecedor"}
+                    maxLength={50}
                   />
                   <SelectFiltragem
                     registerForm={registerForm}
@@ -94,7 +94,7 @@ export function CadastrarFornecedor() {
                     required={true}
                   />
                 </Flex>
-                <Flex gap={2} align={"start"} w={"55%"}>
+                <Flex gap={2} align={"start"} w={"65%"}>
                   <InputGenerico
                     registerForm={registerForm}
                     nomeInput={"NOME DO FORNECEDOR"}
