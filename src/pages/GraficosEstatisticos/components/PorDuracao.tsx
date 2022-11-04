@@ -22,6 +22,7 @@ import StackedBarChart from "components/StackedBarChartGraphic";
 import {
   getSondas,
   // getOperacoes,
+  getLabelHistorico,
   getGraficoHistorico,
 } from "services/get/GraficosEstatisticos";
 
@@ -29,6 +30,13 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
   const [listaSondas, setListaSondas] = useState<any[]>([]);
   const [selectedSonda, setSelectedSonda] = useState<any>();
   const [chartData, setChartData] = useState<any[]>([]);
+  const [label, setLabel] = useState({
+    hrs_min: "",
+    hrs_max: "",
+    hrs_media: "",
+    hrs_dp: "",
+    tend_duracao: "",
+  });
 
   // const [loading, setLoading] = useState(true);
   const durationHistory = [
@@ -68,6 +76,7 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
       params.sonda = selectedSonda;
     }
 
+    const labelReq = await getLabelHistorico();
     const historico = await getGraficoHistorico(params);
 
     const newData = historico.data.map((e) => ({
@@ -84,6 +93,7 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
       label: a.nom_sonda,
     }));
 
+    setLabel(labelReq.data[0]);
     setChartData(newData);
     setListaSondas(sondasSortedOptions);
     // setOperacao(operacao.data);
@@ -423,7 +433,7 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
                 Mínimo:
               </Text>
               <Text fontSize={"20px"} fontWeight={"700"} color={"black"}>
-                8 HORAS
+                {label.hrs_min} HORAS
               </Text>
             </Flex>
 
@@ -432,7 +442,7 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
                 Médio:
               </Text>
               <Text fontSize={"20px"} fontWeight={"700"} color={"black"}>
-                16 HORAS
+                {label.hrs_media} HORAS
               </Text>
             </Flex>
 
@@ -441,7 +451,7 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
                 Máxima:
               </Text>
               <Text fontSize={"20px"} fontWeight={"700"} color={"black"}>
-                24 HORAS
+                {label.hrs_max} HORAS
               </Text>
             </Flex>
 
@@ -450,7 +460,7 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
                 Tendência de duração:
               </Text>
               <Text fontSize={"20px"} fontWeight={"700"} color={"black"}>
-                12 HORAS
+                {label.tend_duracao} HORAS
               </Text>
             </Flex>
           </Flex>
