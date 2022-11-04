@@ -16,7 +16,7 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 
-import Restricoes from "pages/Infographics/Components/Restricoes";
+// import Restricoes from "pages/Infographics/Components/Restricoes";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
@@ -228,8 +228,8 @@ function ModalCadastroAtividadeIntervencao({
                   })}
                   gap={2}
                 >
-                  <Text fontWeight={"bold"}>Restrição</Text>
-                  <Restricoes registerForm={registerForm} />
+                  {/* <Text fontWeight={"bold"}>Restrição</Text> */}
+                  {/* <Restricoes registerForm={registerForm} /> */}
                 </Flex>
                 <AtividadesDragAndDrop
                   registerForm={registerForm}

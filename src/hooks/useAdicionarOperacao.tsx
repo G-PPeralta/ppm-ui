@@ -5,6 +5,7 @@ import {
   AreaAtuacao,
   Responsavel,
 } from "interfaces/CadastrosModaisInfograficos";
+import { cadastroAtividadeEstatisticaSchema } from "validations/Estatisticas";
 
 import { useToast } from "contexts/Toast";
 
@@ -58,11 +59,13 @@ export function useAdicionarOperacao(
     duracao: 0,
     data_inicio: "",
     data_fim: "",
+    metodo_elevacao_id: 0,
+    profundidade: 0,
   };
 
   const registerForm: any = useFormik({
     initialValues,
-    // validationSchema: adicionarOperacao,
+    validationSchema: cadastroAtividadeEstatisticaSchema,
     onSubmit: async (values) => {
       const newValues = {
         nom_usu_create: user?.nome,
@@ -72,19 +75,13 @@ export function useAdicionarOperacao(
         duracao: values.duracao,
         data_inicio: values.data_inicio,
         data_fim: values.data_fim,
+        metodo_elevacao_id: values.metodo_elevacao_id,
+        profundidade: values.profundidade,
       };
 
       setLoading(true);
 
       try {
-        // TODO: liberar endpoint
-        // const res = {
-        //   status: 200,
-        //   data: newValues,
-        // };
-        // const status = res.status;
-        // console.log(">>>values", values);
-        // console.log(">>>postOperacoesEstatisticas", newValues);
         const { status } = await postCadastroNovaAtividadeCronograma(newValues);
         if (status === 200 || status === 201) {
           toast.success("Operação adicionada com sucesso!", {
