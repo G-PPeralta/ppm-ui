@@ -1,4 +1,4 @@
-import { BsPlus } from "react-icons/bs";
+// import { BsPlus } from "react-icons/bs";
 
 import {
   Button,
@@ -53,9 +53,10 @@ function ModalAdicionarLicaoAprendida({ id, refreshState }: Props) {
           transition: "all 0.4s",
         }}
       >
-        <Text fontSize="16px" fontWeight={"bold"} mx={12}>
+        <Text fontSize="18px" fontWeight={"700"} fontFamily={"Mulish"} mx={12}>
           <Flex gap={1} align={"center"}>
-            Adicionar <BsPlus size={24} />
+            {/* Adicionar <BsPlus size={24} /> */}
+            Adicionar
           </Flex>
         </Text>
       </Button>
