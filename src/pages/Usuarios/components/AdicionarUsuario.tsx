@@ -16,12 +16,24 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  Text,
+  Select,
 } from "@chakra-ui/react";
+
+import formatCellphone from "utils/formatCellphone";
+
+import { useCadastroUsuario } from "hooks/useUsuarios";
 
 // import { TextError } from 'components/TextError';
 
 export function BotaoAdicionar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const perfis = ["Administrador", "Operador"];
+  const areas = ["Engenharia", "Operação", "Transporte"];
+
+  const { registerForm } = useCadastroUsuario();
+
+  // console.log(registerForm.values);
 
   return (
     <>
@@ -63,14 +75,13 @@ export function BotaoAdicionar() {
             </ModalHeader>
             <ModalCloseButton color={"white"} />
             <ModalBody>
-              <Flex align="end" mb={3} mt={3}>
+              <Flex align="end" mb={3} mt={3} flexDir={"column"} gap={2}>
                 <FormControl>
                   <FormLabel
                     fontSize={"12px"}
                     fontWeight={"700"}
                     color={"#949494"}
                     mb={"1px"}
-                    ml={"3px"}
                     htmlFor="nome"
                   >
                     NOME
@@ -86,17 +97,132 @@ export function BotaoAdicionar() {
                     fontWeight={"400"}
                     color={"black"}
                     _placeholder={{ color: "#949494" }}
-                    ml={"3px"}
-                    w={"328px"}
+                    w={"100%"}
                     border={"1px solid #949494"}
                     h={"56px"}
+                    value={registerForm.values.nome}
+                    onChange={registerForm.handleChange}
                   />
-                  {/* {projectsForm.projectsForm.errors.responsavel &&
-                  projectsForm.projectsForm.touched.responsavel && (
-                    <TextError>
-                      {projectsForm.projectsForm.errors.responsavel}
-                    </TextError>
-                  )} */}
+                </FormControl>
+                <FormControl>
+                  <FormLabel
+                    fontSize={"12px"}
+                    fontWeight={"700"}
+                    color={"#949494"}
+                    mb={"1px"}
+                    htmlFor="nome"
+                  >
+                    E-MAIL
+                  </FormLabel>
+                  <Input
+                    isRequired
+                    placeholder="E-mail"
+                    type="text"
+                    id="email"
+                    name="email"
+                    maxLength={40}
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    color={"black"}
+                    _placeholder={{ color: "#949494" }}
+                    w={"100%"}
+                    border={"1px solid #949494"}
+                    h={"56px"}
+                    value={registerForm.values.email}
+                    onChange={registerForm.handleChange}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel
+                    htmlFor="regulatorio.opcao_id"
+                    fontSize={"12px"}
+                    color={"#949494"}
+                    fontWeight={"700"}
+                    mb={"1px"}
+                    w={"550px"}
+                    mt={"5px"}
+                    ml={"2px"}
+                  >
+                    NÍVEL DE ACESSO
+                  </FormLabel>
+                  <Select
+                    ml={"2px"}
+                    id="pit"
+                    name="pit"
+                    placeholder="Selecione"
+                    w={"100%"}
+                    h={"56px"}
+                    fontSize={"14px"}
+                    color={"black"}
+                    fontWeight={"400"}
+                    border={"solid 1px #949494"}
+                    // value={registerForm.values.perfil}
+                    // onChange={registerForm.handleChange}
+                  >
+                    {perfis.map((perfil: any, index: any) => (
+                      <option key={index}>{perfil}</option>
+                    ))}
+                  </Select>
+                </FormControl>
+                <FormControl>
+                  <FormLabel
+                    fontSize={"12px"}
+                    fontWeight={"700"}
+                    color={"#949494"}
+                    mb={"1px"}
+                    htmlFor="telefone"
+                  >
+                    TELEFONE
+                  </FormLabel>
+                  <Input
+                    isRequired
+                    type="text"
+                    id="telefone"
+                    name="telefone"
+                    maxLength={40}
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    color={"black"}
+                    _placeholder={{ color: "#949494" }}
+                    w={"60%"}
+                    border={"1px solid #949494"}
+                    h={"56px"}
+                    value={formatCellphone(registerForm.values.telefone)}
+                    onChange={registerForm.handleChange}
+                    placeholder={"(00) 90000-0000"}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel
+                    htmlFor="area"
+                    fontSize={"12px"}
+                    color={"#949494"}
+                    fontWeight={"700"}
+                    mb={"1px"}
+                    w={"550px"}
+                    mt={"5px"}
+                    ml={"2px"}
+                  >
+                    ÁREA
+                  </FormLabel>
+                  <Select
+                    ml={"2px"}
+                    id="area"
+                    name="area"
+                    placeholder="Selecione"
+                    w={"100%"}
+                    h={"56px"}
+                    fontSize={"14px"}
+                    color={"black"}
+                    fontWeight={"400"}
+                    border={"solid 1px #949494"}
+                    // value={registerForm.values.area}
+                    // onChange={registerForm.handleChange}
+                  >
+                    {areas.map((perfil: any, index: any) => (
+                      <option key={index}>{perfil}</option>
+                    ))}
+                  </Select>
                 </FormControl>
               </Flex>
               <Flex
@@ -107,18 +233,55 @@ export function BotaoAdicionar() {
               ></Flex>
             </ModalBody>
 
-            <ModalFooter>
-              <Button
-                background="origem.300"
-                variant="primary"
-                color="white"
-                _hover={{
-                  background: "origem.500",
-                  transition: "all 0.4s",
-                }}
-              >
-                SALVAR
-              </Button>
+            <ModalFooter justifyContent={"center"}>
+              <Flex gap={2} ml={9}>
+                <Button
+                  variant="ghost"
+                  color="red.500"
+                  onClick={onClose}
+                  _hover={{
+                    background: "red.600",
+                    transition: "all 0.4s",
+                    color: "white",
+                  }}
+                  w={"208px"}
+                  h={"56px"}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
+                  borderRadius={"8px"}
+                  fontFamily={"Mulish"}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  // disabled={!registerForm.isValid}
+                  background="origem.500"
+                  variant="primary"
+                  color="white"
+                  // onClick={() => [
+                  //   handleCadastrar(registerForm, onClose),
+                  //   infosRankings.setRefresh(!infosRankings.refresh),
+                  // ]}
+                  _hover={{
+                    background: "origem.600",
+                    transition: "all 0.4s",
+                  }}
+                  borderRadius={"8px"}
+                  w={"208px"}
+                  h={"56px"}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
+                >
+                  {/* {loading ? (
+                    <Ring speed={2} lineWeight={5} color="white" size={24} />
+                  ) : ( */}
+                  <>
+                    <Text>Cadastrar</Text>
+                  </>
+                  {/* )} */}
+                </Button>
+              </Flex>
             </ModalFooter>
           </ModalContent>
         </Modal>

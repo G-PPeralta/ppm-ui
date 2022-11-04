@@ -32,7 +32,7 @@ function ModalCadastrarPriorizacao() {
   const { registerForm, loading } = useCadastroNovaPriorizacao();
 
   // console.log(registerForm.values);
-  const perfis = ["Nível 0", "Nível 1", "Nível 2"];
+  const perfis = ["Administrador", "Operador"];
 
   useEffect(() => {
     registerForm.setFieldValue("id_area_responsavel", 1);
