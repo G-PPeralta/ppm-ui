@@ -78,13 +78,6 @@ function ModalAdicionarAtividade({
   }));
 
   const handleDataInicio = () => {
-    // const ultimaData = ganttData?.reduce((acc: any, curr: any) => {
-    //   if (acc.EndDate > curr.EndDate) {
-    //     return acc.EndDate;
-    //   } else {
-    //     return curr.EndDate;
-    //   }
-    // });
     let ultimaData = new Date();
     if (ganttData?.length > 1) {
       ultimaData = ganttData?.reduce((acc: any, curr: any) => {
@@ -234,12 +227,13 @@ function ModalAdicionarAtividade({
                       tipo={"hora"}
                       stepper={false}
                       limite={999}
+                      required={true}
                     />
 
                     <Flex flex={1}>
                       <Flex direction={"column"}>
                         <Flex gap={1}>
-                          <RequiredField />
+                          {/* <RequiredField /> */}
                           <Text
                             fontWeight={"bold"}
                             fontSize={"12px"}
@@ -272,7 +266,7 @@ function ModalAdicionarAtividade({
                     <Flex flex={1}>
                       <Flex direction={"column"}>
                         <Flex gap={1}>
-                          <RequiredField />
+                          {/* <RequiredField /> */}
                           <Text
                             fontWeight={"bold"}
                             fontSize={"12px"}
@@ -309,11 +303,11 @@ function ModalAdicionarAtividade({
                         nomeSelect={"MÉTODO DE ELEVAÇÃO"}
                         propName={"metodo_elevacao_id"}
                         options={optionsMetodosElevacao}
-                        required={false}
+                        required={true}
                       />
                       <Flex direction={"column"} w={"100%"}>
                         <Flex gap={1}>
-                          {/* <RequiredField /> */}
+                          <RequiredField />
                           <Text
                             fontWeight={"bold"}
                             fontSize={"12px"}
