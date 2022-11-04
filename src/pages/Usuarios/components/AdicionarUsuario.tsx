@@ -77,7 +77,7 @@ export function BotaoAdicionar() {
                   </FormLabel>
                   <Input
                     isRequired
-                    placeholder="Nome do usuário"
+                    placeholder="Nome do Usuário"
                     type="text"
                     id="nome"
                     name="nome"
