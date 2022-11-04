@@ -98,7 +98,7 @@ export default function RealizadoComponent() {
             isNaN(Number(totalRealizado)) ||
             isNaN(Number(orcamento))
               ? 0
-              : (Number(totalRealizado) / Number(orcamento)) * 100}
+              : ((Number(totalRealizado) / Number(orcamento)) * 100).toFixed(2)}
             %
           </Text>
         </Box>
