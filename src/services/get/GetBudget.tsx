@@ -1,4 +1,10 @@
-import { Budget, ClasseServico, CustoDiario, Result } from "interfaces/Budgets";
+import {
+  Budget,
+  ClasseServico,
+  CustoDiario,
+  Realizado,
+  Result,
+} from "interfaces/Budgets";
 
 import { api, token } from "services/api";
 
@@ -218,6 +224,14 @@ export async function getCustoDiarioPai(
   const uri = `/budgets/custoDiario/pai/${id}`;
 
   const { data } = await api.post(uri, { startDate, endDate }, token());
+
+  return data;
+}
+
+export async function getCustoRealizado(id: number): Promise<Realizado> {
+  const uri = `/budgets/custoDiario/${id}`;
+
+  const { data } = await api.get(uri, token());
 
   return data;
 }
