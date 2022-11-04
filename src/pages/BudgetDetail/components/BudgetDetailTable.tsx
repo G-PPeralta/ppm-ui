@@ -18,8 +18,8 @@ import Empty from "components/TableEmpty/empty";
 
 import { formatReal } from "utils/formatReal";
 
+import ModalAdicionarGestaoDeCusto from "./ModalAdicionarGestaoDeCusto";
 import ModalCustoDiario from "./ModalCustoDiario";
-import ModalGestaoDeCusto from "./ModalGestaoDeCusto";
 import ModalValorPrevisto from "./ModalValorPrevisto";
 
 interface PropsInterface {
@@ -88,7 +88,7 @@ export function BudgetDetailTable(props: PropsInterface) {
         <Td></Td>
         <Td align="center">{formatReal(detail.planejado)}</Td>
         <Td align="center">
-          <ModalCustoDiario pai={detail} />
+          <ModalCustoDiario pai={detail} toogleRender={toogleRender} />
         </Td>
         <Td></Td>
       </Tr>
@@ -111,8 +111,8 @@ export function BudgetDetailTable(props: PropsInterface) {
             </Td>
             <Td textAlign="center">
               <Flex alignItems={"center"} justifyContent="center">
-                <ModalCustoDiario filho={filho} />
-                <ModalGestaoDeCusto
+                <ModalCustoDiario filho={filho} toogleRender={toogleRender} />
+                <ModalAdicionarGestaoDeCusto
                   projeto={filho.projeto}
                   toogleRender={toogleRender}
                 />

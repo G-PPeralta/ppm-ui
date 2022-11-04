@@ -31,7 +31,8 @@ export interface BudgetDetail {
 }
 
 export interface BudgetReal {
-  atividadeId: number;
+  id?: number;
+  atividadeId?: number;
   valor: number;
   data: string;
   fornecedor: string;
@@ -39,6 +40,7 @@ export interface BudgetReal {
   pedido: number;
   textPedido: string;
   nom_usu_create?: string;
+  nom_usu_edit?: string;
 }
 
 export interface Totalizacao {
@@ -86,4 +88,14 @@ export interface CustoDiario {
   txt_pedido: string;
   fornecedor: string;
   realizado: number;
+}
+
+export interface Realizado {
+  id: number;
+  id_atividade: number;
+  id_fornecedor: number;
+  dat_lcto: string;
+  vlr_realizado: number;
+  txt_observacao: string;
+  num_pedido: number;
 }
