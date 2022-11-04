@@ -27,7 +27,7 @@ import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
-import Restricoes from "./Restricoes";
+// import Restricoes from "./Restricoes";
 
 function ModalCadastroAtividade() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -218,8 +218,8 @@ function ModalCadastroAtividade() {
                   })}
                   gap={2}
                 >
-                  <Text fontWeight={"bold"}>Restrição</Text>
-                  <Restricoes registerForm={registerForm} />
+                  {/* <Text fontWeight={"bold"}>Restrição</Text> */}
+                  {/* <Restricoes registerForm={registerForm} /> */}
                 </Flex>
               </Flex>
             </ModalBody>
