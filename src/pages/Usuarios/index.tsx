@@ -94,7 +94,9 @@ export function Usuarios() {
       setFilteredUsers(users);
     }
     const filteredArray = users.filter(
-      (user) => user.nome.includes(input) || user.email.includes(input)
+      (user) =>
+        user.nome.toUpperCase().includes(input.toUpperCase()) ||
+        user.email.toUpperCase().includes(input.toUpperCase())
     );
     setFilteredUsers(filteredArray);
   };

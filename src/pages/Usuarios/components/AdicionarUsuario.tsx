@@ -21,6 +21,7 @@ import {
 } from "@chakra-ui/react";
 
 import formatCellphone from "utils/formatCellphone";
+import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroUsuario } from "hooks/useUsuarios";
 
@@ -60,7 +61,7 @@ export function BotaoAdicionar() {
           Adicionar Usuário
         </Button>
 
-        <Modal isOpen={isOpen} onClose={onClose} size="lg">
+        <Modal isOpen={isOpen} onClose={onClose} size="xl">
           <ModalOverlay />
           <ModalContent>
             <ModalHeader
@@ -75,13 +76,19 @@ export function BotaoAdicionar() {
             </ModalHeader>
             <ModalCloseButton color={"white"} />
             <ModalBody>
-              <Flex align="end" mb={3} mt={3} flexDir={"column"} gap={2}>
+              <Flex
+                align="end"
+                // mb={3}
+                mt={3}
+                flexDir={"column"}
+                gap={2}
+              >
                 <FormControl>
                   <FormLabel
                     fontSize={"12px"}
                     fontWeight={"700"}
                     color={"#949494"}
-                    mb={"1px"}
+                    // mb={"1px"}
                     htmlFor="nome"
                   >
                     NOME
@@ -115,6 +122,7 @@ export function BotaoAdicionar() {
                     E-MAIL
                   </FormLabel>
                   <Input
+                    mb={-1}
                     isRequired
                     placeholder="E-mail"
                     type="text"
@@ -141,7 +149,6 @@ export function BotaoAdicionar() {
                     mb={"1px"}
                     w={"550px"}
                     mt={"5px"}
-                    ml={"2px"}
                   >
                     NÍVEL DE ACESSO
                   </FormLabel>
@@ -175,6 +182,7 @@ export function BotaoAdicionar() {
                     TELEFONE
                   </FormLabel>
                   <Input
+                    mb={-1}
                     isRequired
                     type="text"
                     id="telefone"
@@ -201,12 +209,10 @@ export function BotaoAdicionar() {
                     mb={"1px"}
                     w={"550px"}
                     mt={"5px"}
-                    ml={"2px"}
                   >
                     ÁREA
                   </FormLabel>
                   <Select
-                    ml={"2px"}
                     id="area"
                     name="area"
                     placeholder="Selecione"
@@ -238,7 +244,7 @@ export function BotaoAdicionar() {
                 <Button
                   variant="ghost"
                   color="red.500"
-                  onClick={onClose}
+                  onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: "red.600",
                     transition: "all 0.4s",
@@ -272,6 +278,8 @@ export function BotaoAdicionar() {
                   fontSize="18px"
                   fontWeight={"700"}
                   fontFamily={"Mulish"}
+                  // disabled={!registerForm.isValid}
+                  onClick={() => handleCadastrar(registerForm, onClose)}
                 >
                   {/* {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
