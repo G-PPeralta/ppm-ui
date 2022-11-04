@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
+import { FaUserCircle } from "react-icons/fa";
 
 import {
   Box,
@@ -17,6 +18,8 @@ import Sidebar from "components/SideBar";
 import { useToast } from "contexts/Toast";
 
 import { BotaoAdicionar } from "./components/AdicionarUsuario";
+import { BotaoAtualizar } from "./components/AtualizarUsuario";
+import ModalDeletarUsuario from "./components/DeletarUsuario";
 
 export function Usuarios() {
   // const [loading, _setLoading] = useState(true);
@@ -44,6 +47,17 @@ export function Usuarios() {
       id: 2,
       login: "peralta.m",
       nome: "Gabriel Peralta",
+      perfil: "Administrador",
+      primeiroAcesso: true,
+      telefone: "(99) 99999-99999",
+    },
+    {
+      area: "Time Origem",
+      deletado: false,
+      email: "giovana.potenza@origemenergia.com",
+      id: 3,
+      login: "giovana.potenza",
+      nome: "Giovana Potenza",
       perfil: "Administrador",
       primeiroAcesso: true,
       telefone: "(99) 99999-99999",
@@ -85,9 +99,9 @@ export function Usuarios() {
     setFilteredUsers(filteredArray);
   };
 
-  useEffect(() => {
-    handleFilter();
-  }, [users]);
+  // useEffect(() => {
+  //   handleFilter();
+  // }, [users]);
 
   return (
     <>
@@ -188,7 +202,7 @@ export function Usuarios() {
                         transition: "all 0.4s",
                       }}
                       rightIcon={<BsSearch />}
-                      // onClick={handleFilter()}
+                      onClick={handleFilter}
                     >
                       Filtrar
                     </Button>
@@ -231,11 +245,13 @@ export function Usuarios() {
                 </Flex>
               </Box>
 
-              <Box marginTop="10px">
+              <Box>
                 {filteredUsers.map((user) => (
                   <Flex
+                    ml={-2}
+                    mr={-2}
                     paddingX="2"
-                    marginY="10px"
+                    // marginY="10px"
                     align="center"
                     justifyContent="space-between"
                     alignItems="center"
@@ -261,107 +277,66 @@ export function Usuarios() {
                         flexDirection="column"
                         px="10px"
                       >
-                        <Text textColor="gray.500">{user.perfil}</Text>
-                        <Text>{user.nome}</Text>
+                        <Flex flexDirection="row">
+                          <Flex mr={20} color={"#585858"}>
+                            <FaUserCircle size={55} />
+                          </Flex>
+                          <Flex flexDirection="column">
+                            <Text
+                              color="#2D2926"
+                              fontWeight={"400"}
+                              fontSize={"14px"}
+                              fontFamily={"Mulish"}
+                            >
+                              {user.perfil}
+                            </Text>
+
+                            <Text
+                              color="#2D2926"
+                              fontWeight={"700"}
+                              fontSize={"16px"}
+                              fontFamily={"Mulish"}
+                            >
+                              {user.nome}
+                            </Text>
+                          </Flex>
+                        </Flex>
                       </Flex>
                       <Flex
                         w={{ base: "100%", lg: "45%" }}
                         flexDirection="column"
                       >
-                        <Text textColor="gray.500">{user.email}</Text>
-                        <Text>{user.telefone}</Text>
+                        <Text
+                          color="#2D2926"
+                          fontWeight={"700"}
+                          fontSize={"16px"}
+                          fontFamily={"Mulish"}
+                        >
+                          {`Email: ${user.email}`}
+                        </Text>
+                        <Text
+                          color="#2D2926"
+                          fontWeight={"700"}
+                          fontSize={"16px"}
+                          fontFamily={"Mulish"}
+                        >
+                          {`Telefone: ${user.telefone}`}
+                        </Text>
                       </Flex>
 
                       <Flex
                         w={{ base: "100%", lg: "auto" }}
                         flexDirection="column"
                       >
-                        <Flex flexDirection="row">
-                          <Button
-                            type="submit"
-                            background="white"
-                            variant="solid"
-                            border={"2px solid #0047BB"}
-                            borderRadius={"8px"}
-                            flex={"none"}
-                            mt={{ base: 1 }}
-                            order={0}
-                            flexGrow={0}
-                            p={"16px 8px"}
-                            color="origem.500"
-                            fontWeight={"700"}
-                            fontFamily={"Mulish"}
-                            fontStyle={"normal"}
-                            fontSize={"18px"}
-                            lineHeight={"23px"}
-                            textAlign={"center"}
-                            letterSpacing={"0.3px"}
-                            boxShadow="0px 4px 12px rgba(55, 81, 255, 0.24)"
-                            w={{ base: "100%", md: "98px" }}
-                            h={"55px"}
-                            _hover={{
-                              background: "origem.500",
-                              transition: "all 0.4s",
-                              color: "white",
-                            }}
-                            // onClick={() => {
-                            //   navigate(`/update-user/${user.id}`);
-                            // }}
-                          >
-                            Atualizar
-                          </Button>
-                          <Button
-                            type="button"
-                            background="white"
-                            variant="none"
-                            color="red"
-                            mt={{ md: 1 }}
-                            marginLeft="2"
-                            w={"56px"}
-                            h={"56px"}
-                            _hover={{
-                              background: "red",
-                              transition: "all 0.4s",
-                              color: "white",
-                            }}
-                            // onClick={onOpen}
-                          >
-                            {/* <Icon as={CgTrashEmpty} fontSize="24px" /> */}
-                          </Button>
+                        <Flex flexDirection="row" gap={4}>
+                          <BotaoAtualizar />
+
+                          <ModalDeletarUsuario />
                         </Flex>
                       </Flex>
                     </Flex>
                   </Flex>
                 ))}
-                <Button
-                  type="submit"
-                  background="origem.15"
-                  variant="primary"
-                  lineHeight={"23px"}
-                  boxShadow="0px 4px 12px rgba(55, 81, 255, 0.24)"
-                  fontFamily={"Mulish"}
-                  fontWeight={"700"}
-                  fontSize={"16px"}
-                  fontStyle={"normal"}
-                  textAlign={"center"}
-                  visibility={{ base: "visible", md: "hidden" }}
-                  letterSpacing={"0.3px"}
-                  borderRadius={"8px"}
-                  color="white"
-                  w={{ base: "100%", md: "208px" }}
-                  h="56px"
-                  mt="1rem"
-                  _hover={{
-                    background: "#012A91",
-                    transition: "all 0.4s",
-                  }}
-                  // onClick={() => {
-                  //   navigate("/register");
-                  // }}
-                >
-                  Adicionar Usuário
-                  {/* <Icon as={AiOutlinePlus} fontSize="20px" ml={1} /> */}
-                </Button>
               </Box>
             </Flex>
           </Box>
