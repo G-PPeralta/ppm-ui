@@ -14,7 +14,7 @@ import StackedBarChart from "components/StackedBarChart";
 import { getTotalProjetos, getTotalProjetosMes } from "services/get/Dashboard";
 
 export default function TotalProjetosComponent() {
-  const [total, setTotal] = useState(1);
+  const [total, setTotal] = useState(0);
   const [iniciados, setIniciados] = useState(0);
   const [finalizados, setFinalizados] = useState(0);
   const [cancelados, setCancelados] = useState(0);
@@ -213,7 +213,7 @@ export default function TotalProjetosComponent() {
                     sx={{ fontSize: 14, fontWeight: "600" }}
                     color="#93E01B"
                   >
-                    {Math.round((iniciados / total) * 100)}%
+                    {total === 0 ? 0 : Math.round((iniciados / total) * 100)}%
                   </Text>
                 </Flex>
 
@@ -231,7 +231,7 @@ export default function TotalProjetosComponent() {
                     sx={{ fontSize: 14, fontWeight: "600" }}
                     color="#0239C3"
                   >
-                    {Math.round((finalizados / total) * 100)}%
+                    {total === 0 ? 0 : Math.round((finalizados / total) * 100)}%
                   </Text>
                 </Flex>
 
@@ -249,7 +249,7 @@ export default function TotalProjetosComponent() {
                     sx={{ fontSize: 14, fontWeight: "600" }}
                     color="#F94144"
                   >
-                    {Math.round((cancelados / total) * 100)}%
+                    {total === 0 ? 0 : Math.round((cancelados / total) * 100)}%
                   </Text>
                 </Flex>
 
@@ -267,7 +267,7 @@ export default function TotalProjetosComponent() {
                     sx={{ fontSize: 14, fontWeight: "600" }}
                     color="#F4DD06"
                   >
-                    {Math.round((holds / total) * 100)}%
+                    {total === 0 ? 0 : Math.round((holds / total) * 100)}%
                   </Text>
                 </Flex>
 
@@ -285,7 +285,7 @@ export default function TotalProjetosComponent() {
                     sx={{ fontSize: 14, fontWeight: "600" }}
                     color="#aaaaaa"
                   >
-                    {Math.round((naoIniciado / total) * 100)}%
+                    {total === 0 ? 0 : Math.round((naoIniciado / total) * 100)}%
                   </Text>
                 </Flex>
 
@@ -303,7 +303,8 @@ export default function TotalProjetosComponent() {
                     sx={{ fontSize: 14, fontWeight: "600" }}
                     color="#ffa70f"
                   >
-                    {Math.round((reprogramado / total) * 100)}%
+                    {total === 0 ? 0 : Math.round((reprogramado / total) * 100)}
+                    %
                   </Text>
                 </Flex>
 
@@ -321,7 +322,8 @@ export default function TotalProjetosComponent() {
                     sx={{ fontSize: 14, fontWeight: "600" }}
                     color="#c50ffc"
                   >
-                    {Math.round((preAprovacao / total) * 100)}%
+                    {total === 0 ? 0 : Math.round((preAprovacao / total) * 100)}
+                    %
                   </Text>
                 </Flex>
               </Flex>
