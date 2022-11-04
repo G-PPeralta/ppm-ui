@@ -84,7 +84,9 @@ export default function NaoPrevistoComponent() {
               sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
-              {!loading && valorNaoPrevisto.toLocaleString().split(",")[0]}
+              {!loading && valorNaoPrevisto === 0
+                ? "0,00"
+                : valorNaoPrevisto.toLocaleString().split(",")[0]}
             </Text>
           </Box>
         </Box>
@@ -107,7 +109,7 @@ export default function NaoPrevistoComponent() {
               : (
                   (Number(totalNaoPrevisto) / Number(totalOrcamento)) *
                   100
-                ).toFixed()} */}
+                ).toFixed(2)} */}
             {!loading && porcentagemNaoPrevisto}%
           </Text>
         </Box>

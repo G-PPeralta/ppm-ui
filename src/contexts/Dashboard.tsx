@@ -66,9 +66,12 @@ export const DashboardProvider = ({ children }: any) => {
   }, []);
 
   useEffect(() => {
-    if (initialValues.valorTotalOrcamento !== 0) {
+    // if (initialValues.valorTotalOrcamento !== 0) {
+    //   setLoading(false);
+    // }
+    setTimeout(() => {
       setLoading(false);
-    }
+    }, 2000);
   }, [initialValues]);
 
   return (

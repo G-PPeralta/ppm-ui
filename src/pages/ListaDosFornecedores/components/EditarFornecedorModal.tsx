@@ -26,6 +26,8 @@ import {
 
 import { FornecedoreDto } from "..";
 
+import { RequiredField } from "components/RequiredField/RequiredField";
+
 // import { Fornecedor } from "../index";
 
 type EditarFornecedorModalProps = {
@@ -67,6 +69,15 @@ export function EditarFornecedorModal({
     fornecedor.justificativa,
   ]);
 
+  function closeModal() {
+    setNome(fornecedor.nomefornecedor);
+    setPolo(fornecedor.poloid);
+    setServico(fornecedor.servicoid);
+    setResponsavel(fornecedor.representante);
+    setDescricao(fornecedor.justificativa);
+    onClose();
+  }
+
   return (
     <Flex>
       {/* <Box
@@ -102,7 +113,7 @@ export function EditarFornecedorModal({
           EDITAR FORNECEDOR
         </Text>
       </Box> */}
-      <Modal isOpen={isOpen} onClose={onClose} size="lg">
+      <Modal isOpen={isOpen} onClose={() => closeModal()} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -122,14 +133,12 @@ export function EditarFornecedorModal({
               <Flex>
                 <FormControl>
                   <FormLabel htmlFor="fornecedorNome">
-                    <Text
-                      color="#949494"
-                      fontSize="12px"
-                      fontWeight="700"
-                      mt={"6px"}
-                    >
-                      FORNECEDOR
-                    </Text>
+                    <Flex flexDirection={"row"} gap={1} mt={"6px"}>
+                      <RequiredField />
+                      <Text color="#949494" fontSize="12px" fontWeight="700">
+                        FORNECEDOR
+                      </Text>
+                    </Flex>
                   </FormLabel>
                   <Input
                     borderRadius={"8px"}
@@ -146,21 +155,24 @@ export function EditarFornecedorModal({
                     id="fornecedorNome"
                     name="fornecedorNome"
                     value={nome}
+                    maxLength={50}
                     onChange={(event) => setNome(event.target.value)}
                   />
                 </FormControl>
               </Flex>
 
               <FormControl>
-                <FormLabel
-                  htmlFor="orçamento"
-                  color="#949494"
-                  fontSize="12px"
-                  fontWeight="700"
-                  mt={"6px"}
-                >
-                  POLO
-                </FormLabel>
+                <Flex flexDirection={"row"} gap={1} mt={"6px"}>
+                  <RequiredField />
+                  <FormLabel
+                    htmlFor="orçamento"
+                    color="#949494"
+                    fontSize="12px"
+                    fontWeight="700"
+                  >
+                    POLO
+                  </FormLabel>
+                </Flex>
                 {/* <Input
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
@@ -205,15 +217,17 @@ export function EditarFornecedorModal({
             <Flex flexDir={"row"} gap={4}>
               <Flex>
                 <FormControl>
-                  <FormLabel
-                    htmlFor="servico"
-                    color="#949494"
-                    fontSize="12px"
-                    fontWeight="700"
-                    mt={"10px"}
-                  >
-                    SERVIÇO
-                  </FormLabel>
+                  <Flex flexDirection={"row"} gap={1} mt={"10px"}>
+                    <RequiredField />
+                    <FormLabel
+                      htmlFor="servico"
+                      color="#949494"
+                      fontSize="12px"
+                      fontWeight="700"
+                    >
+                      SERVIÇO
+                    </FormLabel>
+                  </Flex>
                   <Input
                     borderRadius={"8px"}
                     border={"1px solid #A7A7A7"}
@@ -234,15 +248,13 @@ export function EditarFornecedorModal({
                 </FormControl>
               </Flex>
               <FormControl>
-                <FormLabel
-                  color="#949494"
-                  fontSize="12px"
-                  fontWeight="700"
-                  mt={"10px"}
-                  htmlFor="orçamento"
-                >
-                  RESPONSÁVEL
-                </FormLabel>
+                <Flex flexDirection={"row"} gap={1} mt={"10px"}>
+                  <RequiredField />
+                  <FormLabel color="#949494" fontSize="12px" fontWeight="700">
+                    RESPONSÁVEL
+                  </FormLabel>
+                </Flex>
+
                 <Input
                   borderRadius={"8px"}
                   // border={"1px solid #A7A7A7"}
@@ -258,20 +270,24 @@ export function EditarFornecedorModal({
                   id="responsável"
                   name="responsável"
                   value={responsavel}
+                  maxLength={50}
                   onChange={(event) => setResponsavel(event.target.value)}
                 />
               </FormControl>
             </Flex>
             <FormControl>
-              <FormLabel
-                htmlFor="orçamento"
-                color="#949494"
-                fontSize="12px"
-                fontWeight="700"
-                mt={"6px"}
-              >
-                DESCRIÇÃO
-              </FormLabel>
+              <Flex flexDirection={"row"} gap={1} mt={"10px"}>
+                <RequiredField />
+                <FormLabel
+                  htmlFor="orçamento"
+                  color="#949494"
+                  fontSize="12px"
+                  fontWeight="700"
+                >
+                  DESCRIÇÃO
+                </FormLabel>
+              </Flex>
+
               <Textarea
                 // borderRadius={"8px"}
                 // border={"1px solid #A7A7A7"}
@@ -305,7 +321,7 @@ export function EditarFornecedorModal({
               // onClick={closeModal}
               width={"208px"}
               height={"56px"}
-              onClick={() => onClose()}
+              onClick={() => closeModal()}
             >
               <Text fontSize={"18px"} fontWeight={"700"}>
                 Cancelar{" "}
@@ -315,6 +331,7 @@ export function EditarFornecedorModal({
               background="origem.500"
               variant="primary"
               color="white"
+              disabled={poloId == 0}
               onClick={() => {
                 onUpdate({
                   id: fornecedor.id,

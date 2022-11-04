@@ -82,7 +82,9 @@ export default function RealizadoComponent() {
               sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
-              {!loading && valorRealizado.toLocaleString().split(",")[0]}
+              {!loading && valorRealizado === 0
+                ? "0,00"
+                : valorRealizado.toLocaleString().split(",")[0]}
             </Text>
           </Box>
         </Box>
@@ -102,7 +104,7 @@ export default function RealizadoComponent() {
             isNaN(Number(totalRealizado)) ||
             isNaN(Number(orcamento))
               ? 0
-              : (Number(totalRealizado) / Number(orcamento)) * 100} */}
+              : ((Number(totalRealizado) / Number(orcamento)) * 100).toFixed(2)} */}
             {!loading && porcentagemRealizado}%
           </Text>
         </Box>

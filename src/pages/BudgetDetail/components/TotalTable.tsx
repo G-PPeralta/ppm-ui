@@ -25,7 +25,7 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
   return (
     <>
       <TableContainer mt={4} mb={3} ml={1}>
-        <Table variant="striped">
+        <Table variant="striped" colorScheme={"strippedGray"}>
           <Thead>
             <Tr background={"origem.500"} color="white">
               <Th color="white">Item</Th>
