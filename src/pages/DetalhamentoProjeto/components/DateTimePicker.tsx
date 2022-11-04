@@ -10,9 +10,9 @@ function DateTimePicker({ registerForm, data, label, value, required }: any) {
   // const [dataMin, setDataMin] = useState<any>("");
 
   useEffect(() => {
-    if (data) {
+    if (data && !dataInicio) {
       const newDate = new Date(data);
-      // newDate.setDate(newDate.getDate() + 15);
+      // newDate.setHours(newDate.getHours() + 3);
       setDataInicio(newDate);
       // setDataMin(newDate);
     } else {
