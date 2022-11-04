@@ -53,8 +53,8 @@ export function Usuarios() {
       deletado: false,
       email: "pedro.m@origemenergia.com",
       id: 3,
-      login: "pedro.m",
-      nome: "Pedro x",
+      login: "pedro.franca",
+      nome: "Pedro França",
       perfil: "Administrador",
       primeiroAcesso: true,
       telefone: "(99) 99999-99999",
@@ -300,7 +300,7 @@ export function Usuarios() {
                             w={{ base: "100%", md: "98px" }}
                             h={"55px"}
                             _hover={{
-                              background: "origem.15",
+                              background: "origem.500",
                               transition: "all 0.4s",
                               color: "white",
                             }}
