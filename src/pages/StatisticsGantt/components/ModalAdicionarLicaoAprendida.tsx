@@ -42,13 +42,14 @@ function ModalAdicionarLicaoAprendida({ id, refreshState }: Props) {
     <>
       <Button
         h={"56px"}
-        borderRadius={"10px"}
-        background={"origem.300"}
+        w={"208px"}
+        borderRadius={"8px"}
+        background={"origem.500"}
         variant="primary"
         color="white"
         onClick={() => onOpen()}
         _hover={{
-          background: "origem.500",
+          background: "origem.600",
           transition: "all 0.4s",
         }}
       >
