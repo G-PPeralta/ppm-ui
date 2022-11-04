@@ -39,6 +39,8 @@ export default function RealizadoComponent() {
   }, []);
 
   const valorFormatado = totalRealizado && totalRealizado.toLocaleString();
+  console.log(totalRealizado);
+  console.log({ orcamento });
 
   return (
     <Flex
@@ -98,7 +100,7 @@ export default function RealizadoComponent() {
             isNaN(Number(totalRealizado)) ||
             isNaN(Number(orcamento))
               ? 0
-              : (Number(totalRealizado) / Number(orcamento)) * 100}
+              : ((Number(totalRealizado) / Number(orcamento)) * 100).toFixed(2)}
             %
           </Text>
         </Box>
