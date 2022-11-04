@@ -27,6 +27,7 @@ export function Usuarios() {
   const [users, setUsers] = useState<any[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<any[]>([]);
   const [input, setInput] = useState("");
+  const [permissao, setPermissao] = useState("");
 
   const data = [
     {
@@ -90,14 +91,18 @@ export function Usuarios() {
   }, []);
 
   const handleFilter = () => {
-    if (input === "") {
+    if (input === "" || permissao === "") {
       setFilteredUsers(users);
     }
     const filteredArray = users.filter(
-      (user) =>
-        user.nome.toUpperCase().includes(input.toUpperCase()) ||
-        user.email.toUpperCase().includes(input.toUpperCase())
+      (user) => user.nome.toUpperCase().includes(input.toUpperCase())
+      // ||
+      // .filter((use: any) =>
+      //   use.perfil.toUpperCase().includes(permissao.toUpperCase())
     );
+    // );
+    // console.log(permissao);
+
     setFilteredUsers(filteredArray);
   };
 
@@ -182,8 +187,11 @@ export function Usuarios() {
                       id="permission"
                       name="permission"
                       width={300}
+                      onChange={(e) => setPermissao(e.target.value)}
                     >
                       <option>Todos</option>
+                      <option value={"Administrador"}>Administrador</option>
+                      <option value={"Operação"}>Operação</option>
                     </Select>
                   </Flex>
                   <Flex>
@@ -246,9 +254,105 @@ export function Usuarios() {
                   </Flex>
                 </Flex>
               </Box>
+              {filteredUsers.length > 0 ? (
+                <Box>
+                  {filteredUsers.map((user) => (
+                    <Flex
+                      ml={-2}
+                      mr={-2}
+                      paddingX="2"
+                      // marginY="10px"
+                      align="center"
+                      justifyContent="space-between"
+                      alignItems="center"
+                      flexDirection={{ base: "column", md: "row" }}
+                      key={user.nome}
+                    >
+                      <Flex
+                        flexDirection={{
+                          base: "column",
+                          lg: "row",
+                        }}
+                        w="100%"
+                        minHeight={"6rem"}
+                        display={"flex"}
+                        alignItems={"center"}
+                        borderTop={"1px"}
+                        borderColor="gray.200"
+                        mt={"0.6rem"}
+                        py={"1rem"}
+                      >
+                        <Flex
+                          w={{ base: "100%", lg: "45%" }}
+                          flexDirection="column"
+                          px="10px"
+                        >
+                          <Flex flexDirection="row">
+                            <Flex mr={20} color={"#585858"}>
+                              <FaUserCircle size={55} />
+                            </Flex>
+                            <Flex flexDirection="column">
+                              <Text
+                                color="#2D2926"
+                                fontWeight={"400"}
+                                fontSize={"14px"}
+                                fontFamily={"Mulish"}
+                              >
+                                {user.perfil}
+                              </Text>
 
-              <Box>
-                {filteredUsers.map((user) => (
+                              <Text
+                                color="#2D2926"
+                                fontWeight={"700"}
+                                fontSize={"16px"}
+                                fontFamily={"Mulish"}
+                              >
+                                {user.nome}
+                              </Text>
+                            </Flex>
+                          </Flex>
+                        </Flex>
+                        <Flex
+                          w={{ base: "100%", lg: "45%" }}
+                          flexDirection="column"
+                        >
+                          <Text
+                            color="#2D2926"
+                            fontWeight={"700"}
+                            fontSize={"16px"}
+                            fontFamily={"Mulish"}
+                          >
+                            {`Email: ${user.email}`}
+                          </Text>
+                          <Text
+                            color="#2D2926"
+                            fontWeight={"700"}
+                            fontSize={"16px"}
+                            fontFamily={"Mulish"}
+                          >
+                            {`Telefone: ${user.telefone}`}
+                          </Text>
+                        </Flex>
+
+                        <Flex
+                          w={{ base: "100%", lg: "auto" }}
+                          flexDirection="column"
+                        >
+                          <Flex flexDirection="row" gap={4}>
+                            <BotaoAtualizar />
+
+                            <ModalDeletarUsuario />
+                          </Flex>
+                        </Flex>
+                      </Flex>
+                    </Flex>
+                  ))}
+                </Box>
+              ) : (
+                <>
+                  <Text fontSize="16px" fontWeight={"bold"}>
+                    Não há dados
+                  </Text>
                   <Flex
                     ml={-2}
                     mr={-2}
@@ -258,7 +362,7 @@ export function Usuarios() {
                     justifyContent="space-between"
                     alignItems="center"
                     flexDirection={{ base: "column", md: "row" }}
-                    key={user.id}
+                    // key={user.nome}
                   >
                     <Flex
                       flexDirection={{
@@ -280,9 +384,6 @@ export function Usuarios() {
                         px="10px"
                       >
                         <Flex flexDirection="row">
-                          <Flex mr={20} color={"#585858"}>
-                            <FaUserCircle size={55} />
-                          </Flex>
                           <Flex flexDirection="column">
                             <Text
                               color="#2D2926"
@@ -290,7 +391,7 @@ export function Usuarios() {
                               fontSize={"14px"}
                               fontFamily={"Mulish"}
                             >
-                              {user.perfil}
+                              {/* {user.perfil} */}
                             </Text>
 
                             <Text
@@ -299,47 +400,15 @@ export function Usuarios() {
                               fontSize={"16px"}
                               fontFamily={"Mulish"}
                             >
-                              {user.nome}
+                              {/* {user.nome} */}
                             </Text>
                           </Flex>
                         </Flex>
                       </Flex>
-                      <Flex
-                        w={{ base: "100%", lg: "45%" }}
-                        flexDirection="column"
-                      >
-                        <Text
-                          color="#2D2926"
-                          fontWeight={"700"}
-                          fontSize={"16px"}
-                          fontFamily={"Mulish"}
-                        >
-                          {`Email: ${user.email}`}
-                        </Text>
-                        <Text
-                          color="#2D2926"
-                          fontWeight={"700"}
-                          fontSize={"16px"}
-                          fontFamily={"Mulish"}
-                        >
-                          {`Telefone: ${user.telefone}`}
-                        </Text>
-                      </Flex>
-
-                      <Flex
-                        w={{ base: "100%", lg: "auto" }}
-                        flexDirection="column"
-                      >
-                        <Flex flexDirection="row" gap={4}>
-                          <BotaoAtualizar />
-
-                          <ModalDeletarUsuario />
-                        </Flex>
-                      </Flex>
                     </Flex>
                   </Flex>
-                ))}
-              </Box>
+                </>
+              )}
             </Flex>
           </Box>
         </Flex>
