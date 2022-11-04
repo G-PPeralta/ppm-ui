@@ -18,6 +18,7 @@ import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrima
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import DatePickerGenerico from "components/DatePickerGenerico";
 import InputGenerico from "components/InputGenerico";
+import TextAreaGenerico from "components/TextAreaGenerico";
 
 import { handleCancelar } from "utils/handleCadastro";
 
@@ -79,7 +80,7 @@ function ModalAdicionarLicaoAprendida({ id, refreshState }: Props) {
             onClick={() => handleCancelar(registerForm, onClose)}
           />
           <ModalBody>
-            <Flex direction={"column"} gap={4} mt={4} w={"60%"}>
+            <Flex direction={"column"} gap={4} mt={4} w={"100%"}>
               <InputGenerico
                 registerForm={registerForm}
                 nomeInput={"LIÇÃO APRENDIDA"}
@@ -89,15 +90,18 @@ function ModalAdicionarLicaoAprendida({ id, refreshState }: Props) {
                 placeholder={"Digite a lição aprendida"}
                 maxLength={50}
               />
-              <DatePickerGenerico
-                required={true}
-                nomeLabel={"DATA"}
-                registerForm={registerForm}
-                propName={"data"}
-                data={registerForm.values.data}
-                esconderHorario={true}
-              />
-              <InputGenerico
+
+              <Flex w={"63%"}>
+                <DatePickerGenerico
+                  required={true}
+                  nomeLabel={"DATA"}
+                  registerForm={registerForm}
+                  propName={"data"}
+                  data={registerForm.values.data}
+                  esconderHorario={true}
+                />
+              </Flex>
+              <TextAreaGenerico
                 registerForm={registerForm}
                 nomeInput={"AÇÃO E RECOMENDAÇÃO"}
                 propName={"acoes_e_recomendacoes"}
