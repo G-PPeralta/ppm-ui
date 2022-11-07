@@ -127,7 +127,7 @@ export function Lookahead() {
                   <Flex alignItems="flex-end" marginLeft="16px">
                     <Button
                       h={"58px"}
-                      w={"101px"}
+                      w={"117px"}
                       background={"origem.500"}
                       border={"2.3px solid"}
                       color={"white"}
