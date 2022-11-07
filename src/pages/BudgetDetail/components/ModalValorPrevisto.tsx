@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { FiEdit2 } from "react-icons/fi";
+import { MdModeEdit } from "react-icons/md";
 
 import {
   Flex,
@@ -52,8 +52,15 @@ function ModalValorPrevisto(props: PropsInterface) {
       <IconButton
         aria-label="Edit Realizado"
         variant={"outline"}
-        icon={<FiEdit2 />}
+        icon={<MdModeEdit />}
         onClick={onOpen}
+        backgroundColor={"transparent"}
+        border={"none"}
+        _hover={{
+          backgroundColor: "origem.500",
+          color: "white",
+        }}
+        color={"origem.500"}
       />
 
       <Modal isOpen={isOpen} onClose={onClose} size="lg">
