@@ -95,17 +95,34 @@ export function Usuarios() {
     if (input === "" || permissao === "") {
       setFilteredUsers(users);
     }
-    const filteredArray = users.filter(
-      (user) => user.nome.toUpperCase().includes(input.toUpperCase())
-      // ||
-      // .filter((use: any) =>
-      //   use.perfil.toUpperCase().includes(permissao.toUpperCase())
-    );
-    // );
-    // console.log(permissao);
+    if (input !== "" && permissao === "Todos") {
+      // console.log({ permissao });s
 
-    setFilteredUsers(filteredArray);
+      const filteredArray = users.filter((user) =>
+        user.nome.toUpperCase().includes(input.toUpperCase())
+      );
+      setFilteredUsers(filteredArray);
+    }
+    if (input !== "" && permissao !== "Todos") {
+      const filteredArray = users
+        .filter((user: any) =>
+          user.nome.toUpperCase().includes(input.toUpperCase())
+        )
+        .filter((us: any) =>
+          us.perfil.toUpperCase().includes(permissao.toUpperCase())
+        );
+      setFilteredUsers(filteredArray);
+    }
+    if (input === "" && permissao !== "Todos") {
+      // console.log({ permissao });
+
+      const filteredArray = users.filter((user) =>
+        user.perfil.toUpperCase().includes(permissao.toUpperCase())
+      );
+      setFilteredUsers(filteredArray);
+    }
   };
+  // console.log(permissao);
 
   // useEffect(() => {
   //   handleFilter();
