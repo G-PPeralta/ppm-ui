@@ -61,7 +61,8 @@ export function EditarFornecedorModal({
   const [invoice, setInvoice] = useState(fornecedor.invoice);
   const [cnpj, setCnjpj] = useState(fornecedor.cnpj);
   const [telefone, setTelefone] = useState(fornecedor.telefone);
-  const [outras, setOutras] = useState(fornecedor.outrasInformacoes);
+  const [outras, setOutras] = useState(fornecedor.outrasinformacoes);
+  const [status, setStatus] = useState(fornecedor.statusid);
 
   useEffect(() => {
     setNome(fornecedor.nomefornecedor);
@@ -88,7 +89,8 @@ export function EditarFornecedorModal({
     setInvoice(fornecedor.invoice);
     setCnjpj(fornecedor.cnpj);
     setTelefone(fornecedor.telefone);
-    setOutras(fornecedor.outrasInformacoes);
+    setOutras(fornecedor.outrasinformacoes);
+    setStatus(fornecedor.statusid);
     onClose();
   }
 
@@ -157,7 +159,8 @@ export function EditarFornecedorModal({
                     SERVICO
                   </FormLabel>
                 </Flex>
-                <Select
+                <Input
+                  type="text"
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
@@ -165,18 +168,11 @@ export function EditarFornecedorModal({
                   fontSize={"14px"}
                   width={"100%"}
                   height={"56px"}
-                  id="atividadeRel"
-                  name="atividadeRel"
-                  onChange={(event) => setPolo(Number(event.target.value))}
-                  value={poloId}
-                >
-                  <option value="">Selecione</option>
-                  {polos.map((pol, index) => (
-                    <option value={pol.id} key={index}>
-                      {pol.polo}
-                    </option>
-                  ))}
-                </Select>
+                  id="servico"
+                  name="servico"
+                  onChange={(event) => setServico(event.target.value)}
+                  value={servico}
+                />
               </FormControl>
 
               <FormControl>
@@ -201,15 +197,12 @@ export function EditarFornecedorModal({
                   height={"56px"}
                   id="atividadeRel"
                   name="atividadeRel"
-                  onChange={(event) => setPolo(Number(event.target.value))}
-                  value={poloId}
+                  onChange={(event) => setStatus(Number(event.target.value))}
+                  value={status}
                 >
                   <option value="">Selecione</option>
-                  {polos.map((pol, index) => (
-                    <option value={pol.id} key={index}>
-                      {pol.polo}
-                    </option>
-                  ))}
+                  <option value={1}>Ativo</option>
+                  <option value={2}>Inativo</option>
                 </Select>
               </FormControl>
             </Flex>
@@ -418,7 +411,7 @@ export function EditarFornecedorModal({
                 fontSize={"14px"}
                 fontWeight={"400"}
                 isRequired
-                placeholder="Outras"
+                // placeholder="Outras"
                 id="outras"
                 name="outras"
                 value={outras}

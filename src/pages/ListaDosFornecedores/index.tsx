@@ -51,7 +51,7 @@ export interface FornecedoreDto {
   id: number;
   nom_usu_create: string;
   poloid: number;
-  servicoid: number;
+  servicoid: string;
   statusid: number;
   nomefornecedor: string;
   numerocontrato: string;
@@ -61,7 +61,7 @@ export interface FornecedoreDto {
   invoice: string;
   cnpj: string;
   justificativa: string;
-  outrasInformacoes: string;
+  outrasinformacoes: string;
 }
 
 export function Fornecedores() {
