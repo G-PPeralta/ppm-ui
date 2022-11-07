@@ -107,17 +107,25 @@ function ModalCustoDiario(props: {
   const tableData = data.map((dia, key) => (
     <>
       <Tr key={dia.id}>
-        <Td>
+        <Td textAlign={"center"} fontWeight={"semibold"}>
           <Moment format="DD/MM/YYYY">{dia.date}</Moment>
         </Td>
-        <Td>{dia.atividade}</Td>
-        <Td>{dia.fornecedor}</Td>
-        <Td>{dia.pedido}</Td>
-        <Td>
+        <Td textAlign={"center"} fontWeight={"semibold"}>
+          {dia.atividade}
+        </Td>
+        <Td textAlign={"center"} fontWeight={"semibold"}>
+          {dia.fornecedor}
+        </Td>
+        <Td textAlign={"center"} fontWeight={"semibold"}>
+          {dia.pedido}
+        </Td>
+        <Td textAlign={"center"} fontWeight={"semibold"}>
           <Text className="description">{dia.txt_pedido}</Text>
         </Td>
-        <Td>{formatReal(dia.realizado)} </Td>
-        <Td>
+        <Td textAlign={"center"} fontWeight={"semibold"}>
+          {formatReal(dia.realizado)}{" "}
+        </Td>
+        <Td textAlign={"center"} fontWeight={"semibold"}>
           <ModalEditarGestaoDeCusto id={dia.id} toogleRender={closeOnSuccess} />
           <ModalDeleteCustoDiario id={dia.id} toogleRender={closeOnSuccess} />
         </Td>
@@ -143,7 +151,8 @@ function ModalCustoDiario(props: {
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            {filho ? filho.projeto.nome : pai?.projeto.nome}
+            {/* {filho ? filho.projeto.nome : pai?.projeto.nome} */}
+            Custo Diário
           </ModalHeader>
           <ModalCloseButton color={"white"} />
 
@@ -155,90 +164,100 @@ function ModalCustoDiario(props: {
                   wrap={"wrap"}
                   alignItems="flex-end"
                   justify={"space-between"}
-                  gap={4}
                   flex={1}
                 >
-                  <Flex align={"end"} gap={4} wrap={"wrap"} flex={1}>
-                    <Flex direction={"column"} w={"150px"}>
-                      <Flex gap={1}>
-                        <Text
-                          fontWeight={"bold"}
-                          fontSize={"12px"}
-                          color={"#949494"}
-                        >
-                          DATA INICIO
-                        </Text>
+                  <Flex direction={"row"}>
+                    <Flex
+                      align={"end"}
+                      gap={3}
+                      wrap={"wrap"}
+                      flex={1}
+                      direction={"row"}
+                    >
+                      <Flex direction={"column"}>
+                        <Flex>
+                          <Text
+                            fontWeight={"700"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                            mb={2}
+                          >
+                            DATA INÍCIO
+                          </Text>
+                        </Flex>
+                        <Input
+                          // placeholder="dd/mm/aaaa"
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          fontFamily={"Mulish"}
+                          borderRadius={"8px"}
+                          max="9999-12-31"
+                          maxLength={1}
+                          border={"1px solid #A7A7A7"}
+                          mt={"-9px"}
+                          width={"156px"}
+                          height={"58px"}
+                          id="data"
+                          type="Date"
+                          name="data"
+                          // value={startDate}
+                          onChange={(event) => setStartDate(event.target.value)}
+                        />
                       </Flex>
-                      <Input
-                        // placeholder="dd/mm/aaaa"
-                        _placeholder={{ color: "#949494" }}
-                        fontSize={"14px"}
-                        fontWeight={"400"}
-                        fontFamily={"Mulish"}
-                        borderRadius={"8px"}
-                        max="9999-12-31"
-                        maxLength={1}
-                        border={"1px solid #A7A7A7"}
-                        mt={"-9px"}
-                        width={"156px"}
-                        height={"56px"}
-                        id="data"
-                        type="Date"
-                        name="data"
-                        // value={startDate}
-                        onChange={(event) => setStartDate(event.target.value)}
-                      />
-                    </Flex>
-                    <Flex direction={"column"} w={"208px"}>
-                      <Flex gap={1}>
-                        <Text
-                          fontWeight={"bold"}
-                          fontSize={"12px"}
-                          color={"#949494"}
-                        >
-                          DATA FIM
-                        </Text>
+                      <Flex direction={"column"}>
+                        <Flex>
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                            mb={2}
+                          >
+                            DATA FIM
+                          </Text>
+                        </Flex>
+                        <Input
+                          // placeholder="dd/mm/aaaa"
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          fontFamily={"Mulish"}
+                          borderRadius={"8px"}
+                          max="9999-12-31"
+                          maxLength={1}
+                          border={"1px solid #A7A7A7"}
+                          mt={"-9px"}
+                          width={"156px"}
+                          height={"58px"}
+                          id="data"
+                          type="Date"
+                          name="data"
+                          // value={endDate}
+                          onChange={(event) => setEndDate(event.target.value)}
+                        />
                       </Flex>
-                      <Input
-                        // placeholder="dd/mm/aaaa"
-                        _placeholder={{ color: "#949494" }}
-                        fontSize={"14px"}
-                        fontWeight={"400"}
-                        fontFamily={"Mulish"}
-                        borderRadius={"8px"}
-                        max="9999-12-31"
-                        maxLength={1}
-                        border={"1px solid #A7A7A7"}
-                        mt={"-9px"}
-                        width={"156px"}
-                        height={"56px"}
-                        id="data"
-                        type="Date"
-                        name="data"
-                        // value={endDate}
-                        onChange={(event) => setEndDate(event.target.value)}
-                      />
-                    </Flex>
-                    <Flex flex={1}>
-                      <Button
-                        h={"56px"}
-                        w={"101px"}
-                        borderRadius={"8px"}
-                        background={"origem.500"}
-                        variant="primary"
-                        color="white"
-                        _hover={{
-                          background: "origem.600",
-                          transition: "all 0.4s",
-                        }}
-                        rightIcon={<BsSearch />}
-                        fontSize="18px"
-                        fontWeight={"700"}
-                        fontFamily={"Mulish"}
-                        onClick={FilterByDate}
-                      >
-                        Filtrar
-                      </Button>
+
+                      <Flex flex={1}>
+                        <Button
+                          h={"57px"}
+                          w={"117px"}
+                          borderRadius={"8px"}
+                          background={"origem.500"}
+                          variant="primary"
+                          color="white"
+                          _hover={{
+                            background: "origem.600",
+                            transition: "all 0.4s",
+                          }}
+                          rightIcon={<BsSearch />}
+                          fontSize="18px"
+                          fontWeight={"700"}
+                          fontFamily={"Mulish"}
+                          onClick={FilterByDate}
+                        >
+                          Filtrar
+                        </Button>
+                      </Flex>
                     </Flex>
                   </Flex>
                 </Flex>
@@ -250,13 +269,27 @@ function ModalCustoDiario(props: {
                   >
                     <Thead>
                       <Tr background={"origem.500"} color="white">
-                        <Th color={"white"}>Data</Th>
-                        <Th color={"white"}>Serviço/Compra</Th>
-                        <Th color={"white"}>Fornecedor</Th>
-                        <Th color={"white"}>Pedido</Th>
-                        <Th color={"white"}>Texto Pedido</Th>
-                        <Th color={"white"}>R$ Realizado</Th>
-                        <Th color={"white"}>Ações</Th>
+                        <Th color={"white"} textAlign={"center"}>
+                          Data
+                        </Th>
+                        <Th color={"white"} textAlign={"center"}>
+                          Serviço/Compra
+                        </Th>
+                        <Th color={"white"} textAlign={"center"}>
+                          Fornecedor
+                        </Th>
+                        <Th color={"white"} textAlign={"center"}>
+                          Pedido
+                        </Th>
+                        <Th color={"white"} textAlign={"center"}>
+                          Texto Pedido
+                        </Th>
+                        <Th color={"white"} textAlign={"center"}>
+                          R$ Realizado
+                        </Th>
+                        <Th color={"white"} textAlign={"center"}>
+                          Ações
+                        </Th>
                       </Tr>
                     </Thead>
                     {data.length ? (

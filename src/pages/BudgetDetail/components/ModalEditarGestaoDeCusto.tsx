@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { MdModeEditOutline } from "react-icons/md";
+import { MdModeEdit } from "react-icons/md";
 
 import {
   Flex,
@@ -52,7 +52,14 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
       <IconButton
         variant="outline"
         aria-label="Editar Realizado"
-        icon={<MdModeEditOutline />}
+        icon={<MdModeEdit />}
+        color={"origem.500"}
+        backgroundColor={"transparent"}
+        _hover={{
+          backgroundColor: "origem.500",
+          color: "white",
+        }}
+        border={"none"}
         onClick={onOpen}
       />
 
