@@ -88,7 +88,7 @@ export function BotaoAdicionar() {
                     fontSize={"12px"}
                     fontWeight={"700"}
                     color={"#949494"}
-                    // mb={"1px"}
+                    mb={"1px"}
                     htmlFor="nome"
                   >
                     NOME
