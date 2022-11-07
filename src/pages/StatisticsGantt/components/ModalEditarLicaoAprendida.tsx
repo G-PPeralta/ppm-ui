@@ -95,7 +95,8 @@ function ModalEditarLicaoAprendida({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Editar Lição Aprendida
           </ModalHeader>
@@ -104,7 +105,7 @@ function ModalEditarLicaoAprendida({
             onClick={() => handleCancelar(registerForm, onClose)}
           />
           <ModalBody>
-            <Flex direction={"column"} gap={4} mt={4} w={"60%"}>
+            <Flex direction={"column"} gap={4} mt={4} w={"100%"}>
               <InputGenerico
                 registerForm={registerForm}
                 nomeInput={"LIÇÃO APRENDIDA"}
@@ -113,13 +114,16 @@ function ModalEditarLicaoAprendida({
                 placeholder={"Digite a lição aprendida"}
                 maxLength={50}
               />
-              <DatePickerGenerico
-                nomeLabel={"DATA"}
-                registerForm={registerForm}
-                propName={"data"}
-                data={registerForm.values.data}
-                esconderHorario={true}
-              />
+              <Flex w={"63%"}>
+                <DatePickerGenerico
+                  nomeLabel={"DATA"}
+                  registerForm={registerForm}
+                  propName={"data"}
+                  data={registerForm.values.data}
+                  esconderHorario={true}
+                />
+              </Flex>
+
               <InputGenerico
                 registerForm={registerForm}
                 nomeInput={"AÇÃO E RECOMENDAÇÃO"}
