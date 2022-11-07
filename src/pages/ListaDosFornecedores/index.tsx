@@ -89,8 +89,6 @@ export function Fornecedores() {
     setPolos(payload.data);
   }
 
-  console.log(fornecedores);
-
   function handleUpdateFornecedor(fornecedor: any) {
     // Atualiza o fornecedor na lista
     setFornecedores(
