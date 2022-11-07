@@ -1,7 +1,9 @@
 import { Flex } from "@chakra-ui/react";
 
-import DatePickerGenerico from "components/DatePickerGenerico";
+// import DatePickerGenerico from "components/DatePickerGenerico";
+import DatePickerGenericoDesabilitado from "components/DatePickerGenericoDesabilitado";
 import InputGenerico from "components/InputGenerico";
+import InputGenericoDesabilitado from "components/InputGenericoDesabilitado";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 
 interface Props {
@@ -13,7 +15,7 @@ function EditarAtividadeTabGeral({ registerForm }: Props) {
     <Flex w={"100%"} direction={"column"} gap={5}>
       <Flex gap={4}>
         <Flex flex={1}>
-          <InputGenerico
+          <InputGenericoDesabilitado
             registerForm={registerForm}
             nomeInput={"ID"}
             propName={"id_atividade"}
@@ -56,7 +58,7 @@ function EditarAtividadeTabGeral({ registerForm }: Props) {
           limite={1000}
         />
 
-        <DatePickerGenerico
+        <DatePickerGenericoDesabilitado
           nomeLabel={"DATA INÍCIO"}
           registerForm={registerForm}
           propName={"inicio_realizado"}
@@ -64,7 +66,7 @@ function EditarAtividadeTabGeral({ registerForm }: Props) {
           selecionaHorario={true}
           isDisabled={true}
         />
-        <DatePickerGenerico
+        <DatePickerGenericoDesabilitado
           isDisabled={registerForm.values.pct_real === 100}
           nomeLabel={"DATA FIM"}
           registerForm={registerForm}

@@ -1,4 +1,4 @@
-import { BsPlus } from "react-icons/bs";
+// import { BsPlus } from "react-icons/bs";
 
 import {
   Button,
@@ -18,6 +18,7 @@ import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrima
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import DatePickerGenerico from "components/DatePickerGenerico";
 import InputGenerico from "components/InputGenerico";
+import TextAreaGenerico from "components/TextAreaGenerico";
 
 import { handleCancelar } from "utils/handleCadastro";
 
@@ -42,19 +43,21 @@ function ModalAdicionarLicaoAprendida({ id, refreshState }: Props) {
     <>
       <Button
         h={"56px"}
-        borderRadius={"10px"}
-        background={"origem.300"}
+        w={"208px"}
+        borderRadius={"8px"}
+        background={"origem.500"}
         variant="primary"
         color="white"
         onClick={() => onOpen()}
         _hover={{
-          background: "origem.500",
+          background: "origem.600",
           transition: "all 0.4s",
         }}
       >
-        <Text fontSize="16px" fontWeight={"bold"} mx={12}>
+        <Text fontSize="18px" fontWeight={"700"} fontFamily={"Mulish"} mx={12}>
           <Flex gap={1} align={"center"}>
-            Adicionar <BsPlus size={24} />
+            {/* Adicionar <BsPlus size={24} /> */}
+            Adicionar
           </Flex>
         </Text>
       </Button>
@@ -77,7 +80,7 @@ function ModalAdicionarLicaoAprendida({ id, refreshState }: Props) {
             onClick={() => handleCancelar(registerForm, onClose)}
           />
           <ModalBody>
-            <Flex direction={"column"} gap={4} mt={4} w={"60%"}>
+            <Flex direction={"column"} gap={4} mt={4} w={"100%"}>
               <InputGenerico
                 registerForm={registerForm}
                 nomeInput={"LIÇÃO APRENDIDA"}
@@ -87,15 +90,18 @@ function ModalAdicionarLicaoAprendida({ id, refreshState }: Props) {
                 placeholder={"Digite a lição aprendida"}
                 maxLength={50}
               />
-              <DatePickerGenerico
-                required={true}
-                nomeLabel={"DATA"}
-                registerForm={registerForm}
-                propName={"data"}
-                data={registerForm.values.data}
-                esconderHorario={true}
-              />
-              <InputGenerico
+
+              <Flex w={"63%"}>
+                <DatePickerGenerico
+                  required={true}
+                  nomeLabel={"DATA"}
+                  registerForm={registerForm}
+                  propName={"data"}
+                  data={registerForm.values.data}
+                  esconderHorario={true}
+                />
+              </Flex>
+              <TextAreaGenerico
                 registerForm={registerForm}
                 nomeInput={"AÇÃO E RECOMENDAÇÃO"}
                 propName={"acoes_e_recomendacoes"}

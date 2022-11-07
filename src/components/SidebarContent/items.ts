@@ -60,7 +60,7 @@ const childrenInfograficos = [
 
 const childrenConfiguracoes = [
   { name: "Configurações", icon: FiSettings, link: "/desenvolvimento" },
-  { name: "Usuários", icon: FiSettings, link: "/profile" },
+  { name: "Usuários", icon: FiSettings, link: "/usuarios" },
   { name: "Perfil", icon: FiSettings, link: "/profile" },
   { name: "Gestão de Áreas", icon: FiSettings, link: "/desenvolvimento" },
   {

@@ -146,7 +146,7 @@ function EditarAtividadeTabLicoesAprendidas({
       </Flex>
       <Flex flex={1} w={"100%"}>
         <TabelaGenerica
-          maxHeight={"352px"}
+          // maxHeight={"352px"}
           data={tabelaFiltrada}
           header={header}
           fromTo={fromTo}

@@ -1,68 +1,62 @@
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
-import { cadastroFornecedor } from "validations/Fornecedor";
+import { cadastroUsuario } from "validations/Usuarios";
 
 import { useToast } from "contexts/Toast";
 
-import { getPolo } from "services/get/Projetos";
+// import { getPolo } from "services/get/Projetos";
 import { postCadastroFornecedor } from "services/post/Fornecedor";
 
 import { useAuth } from "./useAuth";
 
-export function useCadastroFornecedor() {
+export function useCadastroUsuario() {
   const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [listaPolos, setListaPolos] = useState<any>([]);
+  // const [listaPolos, setListaPolos] = useState<any>([]);
 
-  const reqGet = async () => {
-    const polos = await getPolo();
-    const polosSorted = polos.data.sort((a: any, b: any) =>
-      a.polo.localeCompare(b.polo)
-    );
-    setListaPolos(polosSorted);
-  };
+  // const reqGet = async () => {
+  //   const polos = await getPolo();
+  //   const polosSorted = polos.data.sort((a: any, b: any) =>
+  //     a.polo.localeCompare(b.polo)
+  //   );
+  //   setListaPolos(polosSorted);
+  // };
 
-  const optionsPolos = listaPolos.map((polo: any) => ({
-    value: polo.id,
-    label: polo.polo,
-  }));
+  // const optionsPolos = listaPolos.map((polo: any) => ({
+  //   value: polo.id,
+  //   label: polo.polo,
+  // }));
 
   const initialValues: any = {
     nom_usu_create: user?.nome,
-    poloId: 0,
-    servico: "",
-    statusId: 0,
-    nomeFornecedor: "",
-    numeroContrato: "",
-    representante: "",
+    id: 0,
+    area: "",
+    deletado: false,
     email: "",
+    login: "",
+    nome: "",
+    perfil: "",
+    primeiroAcesso: true,
     telefone: "",
-    invoice: "",
-    cnpj: "",
-    justificativa: "",
-    outrasInformacoes: "",
   };
 
   const registerForm: any = useFormik({
     initialValues,
-    validationSchema: cadastroFornecedor,
+    validationSchema: cadastroUsuario,
     onSubmit: async (values) => {
       const newValues: any = {
         nom_usu_create: user?.nome,
-        poloId: values.poloId,
-        servico: values.servico,
-        statusId: values.statusId,
-        nomeFornecedor: values.nomeFornecedor,
-        numeroContrato: values.numeroContrato,
-        representante: values.representante,
+        id: values.id,
+        area: values.area,
+        deletado: values.deletado,
         email: values.email,
+        login: values.login,
+        nome: values.nome,
+        perfil: values.perfil,
+        primeiroAcesso: values.primeiroAcesso,
         telefone: values.telefone,
-        invoice: values.invoice,
-        cnpj: values.cnpj,
-        justificativa: values.justificativa,
-        outrasInformacoes: values.outrasInformacoes,
       };
 
       setLoading(false);
@@ -85,10 +79,10 @@ export function useCadastroFornecedor() {
     },
   });
 
-  useEffect(() => {
-    setLoading(false);
-    reqGet();
-  }, []);
+  // useEffect(() => {
+  //   setLoading(false);
+  //   reqGet();
+  // }, []);
 
   useEffect(() => {
     if (loading) {
@@ -99,6 +93,6 @@ export function useCadastroFornecedor() {
   return {
     registerForm,
     loading,
-    optionsPolos,
+    // optionsPolos,
   };
 }

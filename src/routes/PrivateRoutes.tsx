@@ -31,6 +31,7 @@ import { ShareRegister } from "pages/ShareRegister";
 import { Statistics } from "pages/Statistics";
 import { StatisticsGantt } from "pages/StatisticsGantt";
 // import { UploadSheet } from "pages/UploadSheet";
+import { Usuarios } from "pages/Usuarios";
 import VisaoPorArea from "pages/VisaoPorArea";
 
 export function PrivateRoutes() {
@@ -38,6 +39,7 @@ export function PrivateRoutes() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/graficos" element={<GráficosEstatisticos />} />
+      <Route path="/usuarios" element={<Usuarios />} />
       <Route path="/projetos/cadastro" element={<CadastrarProjeto />} />
       <Route path="/cadastrar-fornecedor" element={<CadastrarFornecedor />} />
       <Route

@@ -38,7 +38,7 @@ interface PropsInterface {
   toogleRender: () => void;
 }
 
-function ModalGestaoDeCusto(props: PropsInterface) {
+function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, setAtividade, fornecedores, classesSevicos } =
     useCadastroOrcamentoRealizado();
@@ -343,4 +343,4 @@ function ModalGestaoDeCusto(props: PropsInterface) {
   );
 }
 
-export default ModalGestaoDeCusto;
+export default ModalAdicionarGestaoDeCusto;

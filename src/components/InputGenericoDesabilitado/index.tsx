@@ -20,7 +20,7 @@ interface Props {
   isDisabled?: boolean;
 }
 
-function InputGenerico({
+function InputGenericoDesabilitado({
   registerForm,
   nomeInput,
   propName,
@@ -102,7 +102,7 @@ function InputGenerico({
           _placeholder={{ color: "#949494" }}
           fontSize={"14px"}
           fontWeight={"400"}
-          color={"black"}
+          color={"#949494"}
         />
       )}
       {registerForm.touched[propName] && registerForm.errors[propName] && (
@@ -112,4 +112,4 @@ function InputGenerico({
   );
 }
 
-export default InputGenerico;
+export default InputGenericoDesabilitado;

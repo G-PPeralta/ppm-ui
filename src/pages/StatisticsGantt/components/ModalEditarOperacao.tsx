@@ -259,7 +259,9 @@ function ModalEditarOperacao({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
             Editar Atividade
           </ModalHeader>
@@ -282,9 +284,9 @@ function ModalEditarOperacao({
                         <Button
                           fontSize={"14px"}
                           fontWeight={"bold"}
-                          color={botao.selecionado ? "#FEFEFE" : "origem.300"}
+                          color={botao.selecionado ? "white" : "origem.500"}
                           backgroundColor={
-                            botao.selecionado ? "origem.300" : "#FEFEFE"
+                            botao.selecionado ? "origem.500" : "#FEFEFE"
                           }
                           _hover={{
                             background: "origem.500",
