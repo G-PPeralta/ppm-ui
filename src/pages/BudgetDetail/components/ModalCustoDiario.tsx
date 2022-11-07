@@ -1,9 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import { useEffect, useState } from "react";
 // import { GrAddCircle } from "react-icons/gr";
-import { AiFillDelete } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
-import { FiEdit2 } from "react-icons/fi";
 // import { FiChevronDown } from "react-icons/fi";
 import Moment from "react-moment";
 import "moment/locale/pt-br";
@@ -29,7 +27,6 @@ import {
   Tr,
   Td,
   Input,
-  IconButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { BudgetDetail, CustoDiario } from "interfaces/Budgets";
@@ -41,14 +38,20 @@ import { formatReal } from "utils/formatReal";
 import { getCustoDiarioFilho, getCustoDiarioPai } from "services/get/GetBudget";
 
 import "./modalCustoDiario.css";
+import ModalDeleteCustoDiario from "./ModalDeleteCustoDiario";
+import ModalEditarGestaoDeCusto from "./ModalEditarGestaoDeCusto";
 
-function ModalCustoDiario(props: { filho?: BudgetDetail; pai?: BudgetDetail }) {
+function ModalCustoDiario(props: {
+  filho?: BudgetDetail;
+  pai?: BudgetDetail;
+  toogleRender: () => void;
+}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [startDate, setStartDate] = useState<string | null>(null);
   const [endDate, setEndDate] = useState<Date | string | null>(null);
   const [loading, setLoading] = useState(true); // Loading
   const [data, setData] = useState<CustoDiario[]>([]);
-  const { filho, pai } = props;
+  const { filho, pai, toogleRender } = props;
 
   const wd = window.innerWidth;
 
@@ -83,6 +86,11 @@ function ModalCustoDiario(props: { filho?: BudgetDetail; pai?: BudgetDetail }) {
     setLoading(false);
   };
 
+  const closeOnSuccess = () => {
+    onClose();
+    toogleRender();
+  };
+
   /* const onChange = (dates: [any, any]) => {
     const [start, end] = dates;
     setStartDate(start);
@@ -105,15 +113,13 @@ function ModalCustoDiario(props: { filho?: BudgetDetail; pai?: BudgetDetail }) {
         <Td>{dia.atividade}</Td>
         <Td>{dia.fornecedor}</Td>
         <Td>{dia.pedido}</Td>
-        <Td className="description">{dia.txt_pedido}</Td>
+        <Td>
+          <Text className="description">{dia.txt_pedido}</Text>
+        </Td>
         <Td>{formatReal(dia.realizado)} </Td>
         <Td>
-          <IconButton variant="outline" aria-label="Edit" icon={<FiEdit2 />} />
-          <IconButton
-            variant="outline"
-            aria-label="Remove"
-            icon={<AiFillDelete />}
-          />
+          <ModalEditarGestaoDeCusto id={dia.id} toogleRender={closeOnSuccess} />
+          <ModalDeleteCustoDiario id={dia.id} toogleRender={closeOnSuccess} />
         </Td>
       </Tr>
     </>

@@ -18,6 +18,13 @@ export async function getOperacoes(): Promise<{
   return { data, status };
 }
 
+export async function getLabelHistorico(): Promise<{
+  data: any[];
+  status: number;
+}> {
+  return api.get("graficos/total", token());
+}
+
 export async function getGraficoHistorico(params?: any): Promise<{
   data: any[];
   status: number;
