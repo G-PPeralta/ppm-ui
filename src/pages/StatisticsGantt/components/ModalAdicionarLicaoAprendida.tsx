@@ -71,7 +71,8 @@ function ModalAdicionarLicaoAprendida({ id, refreshState }: Props) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Adicionar Lição Aprendida
           </ModalHeader>
@@ -87,7 +88,7 @@ function ModalAdicionarLicaoAprendida({ id, refreshState }: Props) {
                 propName={"licao_aprendida"}
                 value={registerForm.values.licao_aprendida}
                 required={true}
-                placeholder={"Digite a lição aprendida"}
+                placeholder={"Digite a Lição Aprendida"}
                 maxLength={50}
               />
 

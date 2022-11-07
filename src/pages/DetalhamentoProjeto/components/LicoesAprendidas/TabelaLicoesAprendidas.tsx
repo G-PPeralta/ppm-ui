@@ -61,7 +61,7 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
                   {lessons.acao_e_recomendacao}
                 </Td>
 
-                <Td>
+                <Td textAlign={"center"}>
                   <IconButton
                     aria-label="Plus sign"
                     icon={<MdModeEdit />}
