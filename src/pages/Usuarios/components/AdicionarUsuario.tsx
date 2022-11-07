@@ -39,7 +39,7 @@ export function BotaoAdicionar(getRefreshs: RefreshProps) {
 
   const { registerForm } = useCadastroUsuario();
 
-  console.log(registerForm.values);
+  // console.log(registerForm.values);
 
   return (
     <>
