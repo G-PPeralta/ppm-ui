@@ -54,6 +54,14 @@ export function EditarFornecedorModal({
   const [descricao, setDescricao] = useState(
     fornecedor ? fornecedor.justificativa : ""
   );
+  const [numeroDoContrato, setNumeroDoContrato] = useState(
+    fornecedor.numerocontrato
+  );
+  const [email, setEmail] = useState(fornecedor.email);
+  const [invoice, setInvoice] = useState(fornecedor.invoice);
+  const [cnpj, setCnjpj] = useState(fornecedor.cnpj);
+  const [telefone, setTelefone] = useState(fornecedor.telefone);
+  const [outras, setOutras] = useState(fornecedor.outrasInformacoes);
 
   useEffect(() => {
     setNome(fornecedor.nomefornecedor);
@@ -75,6 +83,12 @@ export function EditarFornecedorModal({
     setServico(fornecedor.servicoid);
     setResponsavel(fornecedor.representante);
     setDescricao(fornecedor.justificativa);
+    setNumeroDoContrato(fornecedor.numerocontrato);
+    setEmail(fornecedor.email);
+    setInvoice(fornecedor.invoice);
+    setCnjpj(fornecedor.cnpj);
+    setTelefone(fornecedor.telefone);
+    setOutras(fornecedor.outrasInformacoes);
     onClose();
   }
 
@@ -242,13 +256,13 @@ export function EditarFornecedorModal({
                   fontSize={"14px"}
                   fontWeight={"400"}
                   isRequired
-                  placeholder="Responsável"
+                  placeholder="Numero do Contrato"
                   type="text"
-                  id="responsável"
-                  name="responsável"
-                  value={responsavel}
+                  id="numero"
+                  name="numero"
+                  value={numeroDoContrato}
                   maxLength={50}
-                  onChange={(event) => setResponsavel(event.target.value)}
+                  onChange={(event) => setNumeroDoContrato(event.target.value)}
                 />
               </FormControl>
             </Flex>
@@ -295,13 +309,13 @@ export function EditarFornecedorModal({
                   fontSize={"14px"}
                   fontWeight={"400"}
                   isRequired
-                  placeholder="Responsável"
+                  placeholder="E-mail"
                   type="text"
-                  id="responsável"
-                  name="responsável"
-                  value={responsavel}
+                  id="email"
+                  name="email"
+                  value={email}
                   maxLength={50}
-                  onChange={(event) => setResponsavel(event.target.value)}
+                  onChange={(event) => setEmail(event.target.value)}
                 />
               </FormControl>
             </Flex>
@@ -324,13 +338,13 @@ export function EditarFornecedorModal({
                   fontSize={"14px"}
                   fontWeight={"400"}
                   isRequired
-                  placeholder="Nome do fornecedor"
+                  placeholder="Invoice"
                   type="text"
-                  id="fornecedorNome"
-                  name="fornecedorNome"
-                  value={nome}
+                  id="invoice"
+                  name="invoice"
+                  value={invoice}
                   maxLength={50}
-                  onChange={(event) => setNome(event.target.value)}
+                  onChange={(event) => setInvoice(event.target.value)}
                 />
               </FormControl>
 
@@ -349,13 +363,13 @@ export function EditarFornecedorModal({
                   fontSize={"14px"}
                   fontWeight={"400"}
                   isRequired
-                  placeholder="Responsável"
+                  placeholder="CNPJ"
                   type="text"
-                  id="responsável"
-                  name="responsável"
-                  value={responsavel}
+                  id="cnpj"
+                  name="cnpj"
+                  value={cnpj}
                   maxLength={50}
-                  onChange={(event) => setResponsavel(event.target.value)}
+                  onChange={(event) => setCnjpj(event.target.value)}
                 />
               </FormControl>
 
@@ -374,13 +388,13 @@ export function EditarFornecedorModal({
                   fontSize={"14px"}
                   fontWeight={"400"}
                   isRequired
-                  placeholder="Responsável"
+                  placeholder="Telefone"
                   type="text"
-                  id="responsável"
-                  name="responsável"
-                  value={responsavel}
+                  id="telefone"
+                  name="telefone"
+                  value={telefone}
                   maxLength={50}
-                  onChange={(event) => setResponsavel(event.target.value)}
+                  onChange={(event) => setTelefone(event.target.value)}
                 />
               </FormControl>
             </Flex>
@@ -404,11 +418,11 @@ export function EditarFornecedorModal({
                 fontSize={"14px"}
                 fontWeight={"400"}
                 isRequired
-                placeholder="Descrição"
-                id="descrição"
-                name="descrição"
-                value={descricao}
-                onChange={(event) => setDescricao(event.target.value)}
+                placeholder="Outras"
+                id="outras"
+                name="outras"
+                value={outras}
+                onChange={(event) => setOutras(event.target.value)}
               />
             </FormControl>
           </ModalBody>
