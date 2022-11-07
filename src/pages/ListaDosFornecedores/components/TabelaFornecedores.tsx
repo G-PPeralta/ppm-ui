@@ -81,13 +81,13 @@ export function TabelaFornecedores({
                   {polos.find((pol) => pol.id == fornecedor.poloid)?.polo}
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  {fornecedor.servicoid}
+                  {fornecedor.servico_txt}
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   {fornecedor.representante}
                 </Td>
                 <Td textAlign={"center"} width="406px" height={"56px"}>
-                  {fornecedor.justificativa}
+                  {fornecedor.outrasinformacoes}
                 </Td>
                 <Td textAlign={"center"}>
                   <IconButton

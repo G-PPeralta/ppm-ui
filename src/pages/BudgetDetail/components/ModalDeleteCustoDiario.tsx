@@ -8,7 +8,7 @@ import {
   ModalContent,
   ModalHeader,
   // ModalCloseButton,
-  // ModalBody,
+  ModalBody,
   ModalFooter,
   useDisclosure,
   Button,
@@ -72,11 +72,13 @@ function ModalDeleteCustoDiario(props: PropsInterface) {
             fontWeight={"700"}
             fontFamily={"Mulish"}
           >
-            Deseja Exluir custo?
+            Excluir Custo Diario
           </ModalHeader>
           <ModalCloseButton color={"white"} />
 
-          {/* <ModalBody mt={3}></ModalBody> */}
+          <ModalBody mt={3}>
+            Tem certeza que deseja excluir este custo diário?
+          </ModalBody>
           <ModalFooter justifyContent={"center"}>
             <Flex gap={2}>
               <Button
