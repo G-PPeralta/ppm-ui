@@ -33,12 +33,12 @@ export function useCadastroUsuario() {
     nom_usu_create: user?.nome,
     id: 0,
     area: "",
-    deletado: false,
+    // deletado: false,
     email: "",
-    login: "",
+    // login: "",
     nome: "",
     perfil: "",
-    primeiroAcesso: true,
+    // primeiroAcesso: true,
     telefone: "",
   };
 
@@ -50,12 +50,12 @@ export function useCadastroUsuario() {
         nom_usu_create: user?.nome,
         id: values.id,
         area: values.area,
-        deletado: values.deletado,
+        // deletado: values.deletado,
         email: values.email,
-        login: values.login,
+        // login: values.login,
         nome: values.nome,
         perfil: values.perfil,
-        primeiroAcesso: values.primeiroAcesso,
+        // primeiroAcesso: values.primeiroAcesso,
         telefone: values.telefone,
       };
 
