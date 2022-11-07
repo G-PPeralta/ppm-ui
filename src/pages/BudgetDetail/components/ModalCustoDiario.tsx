@@ -222,6 +222,7 @@ function ModalCustoDiario(props: {
                     <Button
                       h={"56px"}
                       w={"101px"}
+                      disabled={!startDate || !endDate}
                       borderRadius={"8px"}
                       background={"origem.500"}
                       variant="primary"
