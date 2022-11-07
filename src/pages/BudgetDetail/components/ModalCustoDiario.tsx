@@ -28,7 +28,7 @@ import {
   Td,
   Input,
 } from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
+// import { Ring } from "@uiball/loaders";
 import { BudgetDetail, CustoDiario } from "interfaces/Budgets";
 
 import Empty from "components/TableEmpty/empty";
@@ -49,7 +49,7 @@ function ModalCustoDiario(props: {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [startDate, setStartDate] = useState<string | null>(null);
   const [endDate, setEndDate] = useState<Date | string | null>(null);
-  const [loading, setLoading] = useState(true); // Loading
+  // const [loading, setLoading] = useState(true); // Loading
   const [data, setData] = useState<CustoDiario[]>([]);
   const { filho, pai, toogleRender } = props;
 
@@ -63,7 +63,7 @@ function ModalCustoDiario(props: {
       const data = await getCustoDiarioPai(pai.projeto.id, null, null);
       setData(data);
     }
-    setLoading(false);
+    // setLoading(false);
   };
 
   useEffect(() => {
@@ -71,7 +71,7 @@ function ModalCustoDiario(props: {
   }, []);
 
   const FilterByDate = async () => {
-    setLoading(true);
+    //  setLoading(true);
     if (filho) {
       const data = await getCustoDiarioFilho(
         filho.projeto.id,
@@ -83,7 +83,7 @@ function ModalCustoDiario(props: {
       const data = await getCustoDiarioPai(pai.projeto.id, startDate, endDate);
       setData(data);
     }
-    setLoading(false);
+    // setLoading(false);
   };
 
   const closeOnSuccess = () => {
@@ -148,135 +148,124 @@ function ModalCustoDiario(props: {
           <ModalCloseButton color={"white"} />
 
           <ModalBody mt={3}>
-            {!loading ? (
-              <>
-                <Flex
-                  direction={wd > 600 ? "row" : "column"}
-                  wrap={"wrap"}
-                  alignItems="flex-end"
-                  justify={"space-between"}
-                  gap={4}
-                  flex={1}
-                >
-                  <Flex align={"end"} gap={4} wrap={"wrap"} flex={1}>
-                    <Flex direction={"column"} w={"150px"}>
-                      <Flex gap={1}>
-                        <Text
-                          fontWeight={"bold"}
-                          fontSize={"12px"}
-                          color={"#949494"}
-                        >
-                          DATA INICIO
-                        </Text>
-                      </Flex>
-                      <Input
-                        // placeholder="dd/mm/aaaa"
-                        _placeholder={{ color: "#949494" }}
-                        fontSize={"14px"}
-                        fontWeight={"400"}
-                        fontFamily={"Mulish"}
-                        borderRadius={"8px"}
-                        max="9999-12-31"
-                        maxLength={1}
-                        border={"1px solid #A7A7A7"}
-                        mt={"-9px"}
-                        width={"156px"}
-                        height={"56px"}
-                        id="data"
-                        type="Date"
-                        name="data"
-                        // value={startDate}
-                        onChange={(event) => setStartDate(event.target.value)}
-                      />
-                    </Flex>
-                    <Flex direction={"column"} w={"208px"}>
-                      <Flex gap={1}>
-                        <Text
-                          fontWeight={"bold"}
-                          fontSize={"12px"}
-                          color={"#949494"}
-                        >
-                          DATA FIM
-                        </Text>
-                      </Flex>
-                      <Input
-                        // placeholder="dd/mm/aaaa"
-                        _placeholder={{ color: "#949494" }}
-                        fontSize={"14px"}
-                        fontWeight={"400"}
-                        fontFamily={"Mulish"}
-                        borderRadius={"8px"}
-                        max="9999-12-31"
-                        maxLength={1}
-                        border={"1px solid #A7A7A7"}
-                        mt={"-9px"}
-                        width={"156px"}
-                        height={"56px"}
-                        id="data"
-                        type="Date"
-                        name="data"
-                        // value={endDate}
-                        onChange={(event) => setEndDate(event.target.value)}
-                      />
-                    </Flex>
-                    <Flex flex={1}>
-                      <Button
-                        h={"56px"}
-                        w={"101px"}
-                        borderRadius={"8px"}
-                        background={"origem.500"}
-                        variant="primary"
-                        color="white"
-                        _hover={{
-                          background: "origem.600",
-                          transition: "all 0.4s",
-                        }}
-                        rightIcon={<BsSearch />}
-                        fontSize="18px"
-                        fontWeight={"700"}
-                        fontFamily={"Mulish"}
-                        onClick={FilterByDate}
+            <>
+              <Flex
+                direction={wd > 600 ? "row" : "column"}
+                wrap={"wrap"}
+                alignItems="flex-end"
+                justify={"space-between"}
+                gap={4}
+                flex={1}
+              >
+                <Flex align={"end"} gap={4} wrap={"wrap"} flex={1}>
+                  <Flex direction={"column"} w={"150px"}>
+                    <Flex gap={1}>
+                      <Text
+                        fontWeight={"bold"}
+                        fontSize={"12px"}
+                        color={"#949494"}
                       >
-                        Filtrar
-                      </Button>
+                        DATA INICIO
+                      </Text>
                     </Flex>
+                    <Input
+                      // placeholder="dd/mm/aaaa"
+                      _placeholder={{ color: "#949494" }}
+                      fontSize={"14px"}
+                      fontWeight={"400"}
+                      fontFamily={"Mulish"}
+                      borderRadius={"8px"}
+                      max="9999-12-31"
+                      maxLength={1}
+                      border={"1px solid #A7A7A7"}
+                      mt={"-9px"}
+                      width={"156px"}
+                      height={"56px"}
+                      id="data"
+                      type="Date"
+                      name="data"
+                      // value={startDate}
+                      onChange={(event) => setStartDate(event.target.value)}
+                    />
+                  </Flex>
+                  <Flex direction={"column"} w={"208px"}>
+                    <Flex gap={1}>
+                      <Text
+                        fontWeight={"bold"}
+                        fontSize={"12px"}
+                        color={"#949494"}
+                      >
+                        DATA FIM
+                      </Text>
+                    </Flex>
+                    <Input
+                      // placeholder="dd/mm/aaaa"
+                      _placeholder={{ color: "#949494" }}
+                      fontSize={"14px"}
+                      fontWeight={"400"}
+                      fontFamily={"Mulish"}
+                      borderRadius={"8px"}
+                      max="9999-12-31"
+                      maxLength={1}
+                      border={"1px solid #A7A7A7"}
+                      mt={"-9px"}
+                      width={"156px"}
+                      height={"56px"}
+                      id="data"
+                      type="Date"
+                      name="data"
+                      // value={endDate}
+                      onChange={(event) => setEndDate(event.target.value)}
+                    />
+                  </Flex>
+                  <Flex flex={1}>
+                    <Button
+                      h={"56px"}
+                      w={"101px"}
+                      borderRadius={"8px"}
+                      background={"origem.500"}
+                      variant="primary"
+                      color="white"
+                      _hover={{
+                        background: "origem.600",
+                        transition: "all 0.4s",
+                      }}
+                      rightIcon={<BsSearch />}
+                      fontSize="18px"
+                      fontWeight={"700"}
+                      fontFamily={"Mulish"}
+                      onClick={FilterByDate}
+                    >
+                      Filtrar
+                    </Button>
                   </Flex>
                 </Flex>
-                <TableContainer mt={4} mb={3} ml={1} borderRadius={"10px"}>
-                  <Table
-                    variant="striped"
-                    colorScheme={"strippedGray"}
-                    align={"center"}
-                  >
-                    <Thead>
-                      <Tr background={"origem.500"} color="white">
-                        <Th color={"white"}>Data</Th>
-                        <Th color={"white"}>Serviço/Compra</Th>
-                        <Th color={"white"}>Fornecedor</Th>
-                        <Th color={"white"}>Pedido</Th>
-                        <Th color={"white"}>Texto Pedido</Th>
-                        <Th color={"white"}>R$ Realizado</Th>
-                        <Th color={"white"}>Ações</Th>
-                      </Tr>
-                    </Thead>
-                    {data.length ? (
-                      <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
-                    ) : (
-                      <Empty />
-                    )}
-                  </Table>
-                </TableContainer>
-              </>
-            ) : (
-              <Flex
-                display={"flex"}
-                align={"center"}
-                justify={"center"}
-                h={"90vh"}
-              >
-                <Ring speed={2} lineWeight={5} color="blue" size={64} />
               </Flex>
-            )}
+              <TableContainer mt={4} mb={3} ml={1} borderRadius={"10px"}>
+                <Table
+                  variant="striped"
+                  colorScheme={"strippedGray"}
+                  align={"center"}
+                >
+                  <Thead>
+                    <Tr background={"origem.500"} color="white">
+                      <Th color={"white"}>Data</Th>
+                      <Th color={"white"}>Serviço/Compra</Th>
+                      <Th color={"white"}>Fornecedor</Th>
+                      <Th color={"white"}>Pedido</Th>
+                      <Th color={"white"}>Texto Pedido</Th>
+                      <Th color={"white"}>R$ Realizado</Th>
+                      <Th color={"white"}>Ações</Th>
+                    </Tr>
+                  </Thead>
+                  {data.length ? (
+                    <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+                  ) : (
+                    <Empty />
+                  )}
+                </Table>
+              </TableContainer>
+            </>
           </ModalBody>
           {/* }ModalFooter justifyContent={"center"}>
             <Flex gap={2}>
