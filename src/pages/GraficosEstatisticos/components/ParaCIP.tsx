@@ -6,13 +6,18 @@ import StackedBarChart from "components/StackedBarChartGraphic";
 
 import { getGraficoParaCIP } from "services/get/GraficosEstatisticos";
 
-export function GraficoCIP() {
+export function GraficoCIP({ de, ate, refresh, setRefresh }: any) {
   const [chartData, setChartData] = useState<any[]>([]);
 
   const dataEntries2 = [{ name: "Taxa", color: "#0047BB" }];
 
   const reqGet = async () => {
-    const res = await getGraficoParaCIP();
+    const params: any = {};
+    if (de && ate) {
+      params.de = de;
+      params.a = ate;
+    }
+    const res = await getGraficoParaCIP(params);
 
     const newData = res.data.map((e) => ({
       key: e.nom_poco,
@@ -21,10 +26,6 @@ export function GraficoCIP() {
 
     setChartData(newData);
   };
-
-  useEffect(() => {
-    reqGet();
-  }, []);
 
   function useWindowSize() {
     const [size, setSize] = useState([0, 0]);
@@ -40,6 +41,11 @@ export function GraficoCIP() {
   }
 
   const [width] = useWindowSize();
+
+  useEffect(() => {
+    reqGet();
+  }, [refresh]);
+
   return (
     <>
       <form

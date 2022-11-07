@@ -1,5 +1,8 @@
 import { useEffect } from "react";
-import { GrAddCircle } from "react-icons/gr";
+// import { GrAddCircle } from "react-icons/gr";
+// import { AiOutlinePlusCircle } from "react-icons/ai";
+import { BiPlusCircle } from "react-icons/bi";
+// import { BsPlusCircle } from "react-icons/bs";
 
 import {
   Flex,
@@ -53,8 +56,15 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
       <IconButton
         aria-label="Edit Realizado"
         variant={"outline"}
-        icon={<GrAddCircle />}
+        icon={<BiPlusCircle size={19} />}
         onClick={onOpen}
+        color={"origem.500"}
+        backgroundColor={"transparent"}
+        _hover={{
+          backgroundColor: "origem.500",
+          color: "white",
+        }}
+        border={"none"}
       />
 
       <Modal isOpen={isOpen} onClose={onClose} size="3xl">
@@ -330,7 +340,7 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (
                     <>
-                      <Text>Concluir</Text>
+                      <Text>Gravar</Text>
                     </>
                   )}
                 </Button>

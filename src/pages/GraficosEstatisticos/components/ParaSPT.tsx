@@ -7,13 +7,18 @@ import StackedBarChart from "components/StackedBarChartGraphic";
 
 import { getGraficoPorCadaSonda } from "services/get/GraficosEstatisticos";
 
-export function GraficoSPT() {
+export function GraficoSPT({ de, ate, refresh, setRefresh }: any) {
   const [chartData, setChartData] = useState<any[]>([]);
 
   const dataEntries2 = [{ name: "Durações", color: "#0047BB" }];
 
   const reqGet = async () => {
-    const res = await getGraficoPorCadaSonda();
+    const params: any = {};
+    if (de && ate) {
+      params.de = de;
+      params.a = ate;
+    }
+    const res = await getGraficoPorCadaSonda(params);
 
     const newData = res.data.map((e) => ({
       key: e.nom_sonda,
@@ -22,10 +27,6 @@ export function GraficoSPT() {
 
     setChartData(newData);
   };
-
-  useEffect(() => {
-    reqGet();
-  }, []);
 
   function useWindowSize() {
     const [size, setSize] = useState([0, 0]);
@@ -41,6 +42,11 @@ export function GraficoSPT() {
   }
 
   const [width] = useWindowSize();
+
+  useEffect(() => {
+    reqGet();
+  }, [refresh]);
+
   return (
     <>
       <form
