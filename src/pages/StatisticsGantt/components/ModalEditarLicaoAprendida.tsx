@@ -141,15 +141,16 @@ function ModalEditarLicaoAprendida({
                 h={"56px"}
                 borderRadius={"10px"}
                 variant="ghost"
-                color="red"
+                color="red.500"
                 onClick={() => handleFecharModal()}
                 _hover={{
-                  background: "red.500",
+                  background: "red.600",
                   transition: "all 0.4s",
                   color: "white",
                 }}
+                w={"208px"}
               >
-                <Text fontSize="16px" fontWeight={"bold"} mx={12}>
+                <Text fontSize="18px" fontWeight={"700"} mx={12}>
                   Cancelar
                 </Text>
               </Button>
