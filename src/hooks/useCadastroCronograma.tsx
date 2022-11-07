@@ -91,6 +91,7 @@ export function useCadastroCronograma(refresh?: boolean) {
         responsavel_id: 0,
         data_inicio: "",
         duracao: 0,
+        profundidade: 0,
         precedentes: [
           {
             id: 0,
@@ -102,6 +103,19 @@ export function useCadastroCronograma(refresh?: boolean) {
     ],
     comentarios: "",
   };
+
+  function formatData(data: string): string {
+    const _data = data.split(",")[0].trim();
+    const _hora = data.split(",")[1].trim();
+    const ymd =
+      _data.split("/")[2] +
+      "-" +
+      _data.split("/")[1] +
+      "-" +
+      _data.split("/")[0];
+
+    return ymd + "T" + _hora;
+  }
 
   const registerForm: any = useFormik({
     initialValues,
@@ -120,11 +134,11 @@ export function useCadastroCronograma(refresh?: boolean) {
 
       try {
         newValues.atividades.map((a: any) => {
-          a.data_inicio = new Date(a.data_inicio).toLocaleString();
+          a.data_inicio = formatData(new Date(a.data_inicio).toLocaleString());
           return a;
         });
         // const status = 200;
-        // console.log(">>>>newValues", newValues);
+
         const { status } = await postCadastroNovoCronograma(newValues);
 
         if (status === 200 || status === 201) {

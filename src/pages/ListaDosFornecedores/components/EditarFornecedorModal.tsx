@@ -45,75 +45,76 @@ export function EditarFornecedorModal({
   onUpdate,
   polos,
 }: EditarFornecedorModalProps) {
-  const [nome, setNome] = useState(fornecedor?.nomefornecedor);
-  const [poloId, setPolo] = useState(fornecedor ? fornecedor.poloid : 0);
-  const [servico, setServico] = useState(fornecedor ? fornecedor.servicoid : 0);
-  const [responsavel, setResponsavel] = useState(
+  const [nomefornecedor, setNome] = useState(fornecedor?.nomefornecedor);
+  const [poloid, setPolo] = useState(fornecedor ? fornecedor.poloid : 0);
+  const [representante, setResponsavel] = useState(
     fornecedor ? fornecedor.representante : ""
   );
-  const [descricao, setDescricao] = useState(
-    fornecedor ? fornecedor.justificativa : ""
+
+  const [numerocontrato, setNumeroDoContrato] = useState(
+    fornecedor.numerocontrato
   );
+  const [email, setEmail] = useState(fornecedor.email);
+  const [invoice, setInvoice] = useState(fornecedor.invoice);
+  const [cnpj, setCnjpj] = useState(fornecedor.cnpj);
+  const [telefone, setTelefone] = useState(fornecedor.telefone);
+  const [outrasinformacoes, setOutras] = useState(fornecedor.outrasinformacoes);
+  const [statusid, setStatus] = useState(fornecedor.statusid);
+
+  const [usuario, setUsuario] = useState(fornecedor.nom_usu_create);
+  const [servicoid, setServicoId] = useState(fornecedor.servicoid);
+  const [servico_txt, setServicoTxt] = useState(fornecedor.servico_txt);
 
   useEffect(() => {
     setNome(fornecedor.nomefornecedor);
     setPolo(fornecedor.poloid);
-    setServico(fornecedor.servicoid);
     setResponsavel(fornecedor.representante);
-    setDescricao(fornecedor.justificativa);
+    setNumeroDoContrato(fornecedor.numerocontrato);
+    setEmail(fornecedor.email);
+    setInvoice(fornecedor.invoice);
+    setCnjpj(fornecedor.cnpj);
+    setTelefone(fornecedor.telefone);
+    setOutras(fornecedor.outrasinformacoes);
+    setStatus(fornecedor.statusid);
+    setUsuario(fornecedor.nom_usu_create);
+    setServicoTxt(fornecedor.servico_txt);
+    setServicoId(fornecedor.servicoid);
   }, [
     fornecedor.nomefornecedor,
     fornecedor.poloid,
-    fornecedor.servicoid,
     fornecedor.representante,
-    fornecedor.justificativa,
+    fornecedor.numerocontrato,
+    fornecedor.email,
+    fornecedor.invoice,
+    fornecedor.cnpj,
+    fornecedor.telefone,
+    fornecedor.outrasinformacoes,
+    fornecedor.statusid,
+    fornecedor.nom_usu_create,
+    fornecedor.servico_txt,
+    fornecedor.servicoid,
   ]);
 
   function closeModal() {
     setNome(fornecedor.nomefornecedor);
     setPolo(fornecedor.poloid);
-    setServico(fornecedor.servicoid);
     setResponsavel(fornecedor.representante);
-    setDescricao(fornecedor.justificativa);
+    setNumeroDoContrato(fornecedor.numerocontrato);
+    setEmail(fornecedor.email);
+    setInvoice(fornecedor.invoice);
+    setCnjpj(fornecedor.cnpj);
+    setTelefone(fornecedor.telefone);
+    setOutras(fornecedor.outrasinformacoes);
+    setStatus(fornecedor.statusid);
+    setUsuario(fornecedor.nom_usu_create);
+    setServicoTxt(fornecedor.servico_txt);
+    setServicoId(fornecedor.servicoid);
     onClose();
   }
 
   return (
     <Flex>
-      {/* <Box
-        display={"flex"}
-        alignItems={"center"}
-        border="2px"
-        padding={2}
-        borderRadius={6}
-        borderColor={"origem.300"}
-        _hover={{
-          background: "#f5f5f5",
-          transition: "all 0.4s",
-          color: "origem.300",
-          cursor: "pointer",
-          borderColor: "origem.500",
-        }}
-      >
-        <IconButton
-          aria-label="Plus sign"
-          icon={<BsPlusLg />}
-          background="origem.300"
-          variant="secondary"
-          color="white"
-          mr={2}
-          isRound={true}
-          size="sm"
-        />
-        <Text
-          fontSize={useBreakpointValue({ base: "sm", md: "sm" })}
-          fontWeight={"bold"}
-          color={"origem.500"}
-        >
-          EDITAR FORNECEDOR
-        </Text>
-      </Box> */}
-      <Modal isOpen={isOpen} onClose={() => closeModal()} size="lg">
+      <Modal isOpen={isOpen} onClose={() => closeModal()} size="3xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -130,37 +131,6 @@ export function EditarFornecedorModal({
           <ModalCloseButton color={"white"} />
           <ModalBody alignItems={"center"}>
             <Flex flexDir={"row"} gap={4}>
-              <Flex>
-                <FormControl>
-                  <FormLabel htmlFor="fornecedorNome">
-                    <Flex flexDirection={"row"} gap={1} mt={"6px"}>
-                      <RequiredField />
-                      <Text color="#949494" fontSize="12px" fontWeight="700">
-                        FORNECEDOR
-                      </Text>
-                    </Flex>
-                  </FormLabel>
-                  <Input
-                    borderRadius={"8px"}
-                    border={"1px solid #A7A7A7"}
-                    mt={"-9px"}
-                    width={"290px"}
-                    height={"56px"}
-                    // color="#949494"
-                    fontSize={"14px"}
-                    fontWeight={"400"}
-                    isRequired
-                    placeholder="Nome do fornecedor"
-                    type="text"
-                    id="fornecedorNome"
-                    name="fornecedorNome"
-                    value={nome}
-                    maxLength={50}
-                    onChange={(event) => setNome(event.target.value)}
-                  />
-                </FormControl>
-              </Flex>
-
               <FormControl>
                 <Flex flexDirection={"row"} gap={1} mt={"6px"}>
                   <RequiredField />
@@ -173,36 +143,18 @@ export function EditarFornecedorModal({
                     POLO
                   </FormLabel>
                 </Flex>
-                {/* <Input
-                  borderRadius={"8px"}
-                  border={"1px solid #A7A7A7"}
-                  mt={"-9px"}
-                  width={"158px"}
-                  height={"56px"}
-                  color="#949494"
-                  fontSize={"14px"}
-                  fontWeight={"400"}
-                  isRequired
-                  placeholder="Orçamento"
-                  type="text"
-                  id="orçamento"
-                  name="orçamento"
-                  value={poloId}
-                  onChange={(event) => handleChangePolo(event)}
-                /> */}
                 <Select
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
                   color={"black"}
-                  // _placeholder={{ color: "#949494" }}
                   fontSize={"14px"}
-                  width={"158px"}
+                  width={"100%"}
                   height={"56px"}
                   id="atividadeRel"
                   name="atividadeRel"
                   onChange={(event) => setPolo(Number(event.target.value))}
-                  value={poloId}
+                  value={poloid}
                 >
                   <option value="">Selecione</option>
                   {polos.map((pol, index) => (
@@ -212,69 +164,252 @@ export function EditarFornecedorModal({
                   ))}
                 </Select>
               </FormControl>
+
+              <FormControl>
+                <Flex flexDirection={"row"} gap={1} mt={"6px"}>
+                  <RequiredField />
+                  <FormLabel
+                    htmlFor="orçamento"
+                    color="#949494"
+                    fontSize="12px"
+                    fontWeight="700"
+                  >
+                    SERVICO
+                  </FormLabel>
+                </Flex>
+                <Input
+                  type="text"
+                  borderRadius={"8px"}
+                  border={"1px solid #A7A7A7"}
+                  mt={"-9px"}
+                  color={"black"}
+                  fontSize={"14px"}
+                  width={"100%"}
+                  height={"56px"}
+                  id="servico"
+                  name="servico"
+                  onChange={(event) => setServicoTxt(event.target.value)}
+                  value={servico_txt}
+                />
+              </FormControl>
+
+              <FormControl>
+                <Flex flexDirection={"row"} gap={1} mt={"6px"}>
+                  <RequiredField />
+                  <FormLabel
+                    htmlFor="orçamento"
+                    color="#949494"
+                    fontSize="12px"
+                    fontWeight="700"
+                  >
+                    STATUS
+                  </FormLabel>
+                </Flex>
+                <Select
+                  borderRadius={"8px"}
+                  border={"1px solid #A7A7A7"}
+                  mt={"-9px"}
+                  color={"black"}
+                  fontSize={"14px"}
+                  width={"100%"}
+                  height={"56px"}
+                  id="atividadeRel"
+                  name="atividadeRel"
+                  onChange={(event) => setStatus(Number(event.target.value))}
+                  value={statusid}
+                >
+                  <option value="">Selecione</option>
+                  <option value={1}>Ativo</option>
+                  <option value={2}>Inativo</option>
+                </Select>
+              </FormControl>
             </Flex>
 
             <Flex flexDir={"row"} gap={4}>
-              <Flex>
-                <FormControl>
-                  <Flex flexDirection={"row"} gap={1} mt={"10px"}>
-                    <RequiredField />
-                    <FormLabel
-                      htmlFor="servico"
-                      color="#949494"
-                      fontSize="12px"
-                      fontWeight="700"
-                    >
-                      SERVIÇO
-                    </FormLabel>
-                  </Flex>
-                  <Input
-                    borderRadius={"8px"}
-                    border={"1px solid #A7A7A7"}
-                    mt={"-9px"}
-                    width={"224px"}
-                    height={"56px"}
-                    // color="#949494"
-                    fontSize={"14px"}
-                    fontWeight={"400"}
-                    isRequired
-                    placeholder="Servico"
-                    type="text"
-                    id="servico"
-                    name="servico"
-                    value={servico}
-                    onChange={(event) => setServico(Number(event.target.value))}
-                  />
-                </FormControl>
-              </Flex>
+              <FormControl>
+                <Flex flexDirection={"row"} gap={1} mt={"6px"}>
+                  <RequiredField />
+                  <FormLabel color="#949494" fontSize="12px" fontWeight="700">
+                    FORNECEDOR
+                  </FormLabel>
+                </Flex>
+                <Input
+                  borderRadius={"8px"}
+                  border={"1px solid #A7A7A7"}
+                  mt={"-9px"}
+                  width={"100%"}
+                  height={"56px"}
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  isRequired
+                  placeholder="Nome do fornecedor"
+                  type="text"
+                  id="fornecedorNome"
+                  name="fornecedorNome"
+                  value={nomefornecedor}
+                  maxLength={50}
+                  onChange={(event) => setNome(event.target.value)}
+                />
+              </FormControl>
+
               <FormControl>
                 <Flex flexDirection={"row"} gap={1} mt={"10px"}>
                   <RequiredField />
                   <FormLabel color="#949494" fontSize="12px" fontWeight="700">
-                    RESPONSÁVEL
+                    NUMERO DO CONTRATO
                   </FormLabel>
                 </Flex>
-
                 <Input
                   borderRadius={"8px"}
-                  // border={"1px solid #A7A7A7"}
                   mt={"-9px"}
-                  width={"224px"}
+                  width={"100%"}
+                  height={"56px"}
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  isRequired
+                  placeholder="Numero do Contrato"
+                  type="text"
+                  id="numero"
+                  name="numero"
+                  value={numerocontrato}
+                  maxLength={50}
+                  onChange={(event) => setNumeroDoContrato(event.target.value)}
+                />
+              </FormControl>
+            </Flex>
+
+            <Flex flexDir={"row"} gap={4}>
+              <FormControl>
+                <Flex flexDirection={"row"} gap={1} mt={"6px"}>
+                  <RequiredField />
+                  <FormLabel color="#949494" fontSize="12px" fontWeight="700">
+                    REPRESENTANTE/PONTO FOCAL
+                  </FormLabel>
+                </Flex>
+                <Input
+                  borderRadius={"8px"}
+                  border={"1px solid #A7A7A7"}
+                  mt={"-9px"}
+                  width={"100%"}
+                  height={"56px"}
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  isRequired
+                  placeholder="Nome do fornecedor"
+                  type="text"
+                  id="fornecedorNome"
+                  name="fornecedorNome"
+                  value={representante}
+                  maxLength={50}
+                  onChange={(event) => setNome(event.target.value)}
+                />
+              </FormControl>
+
+              <FormControl>
+                <Flex flexDirection={"row"} gap={1} mt={"10px"}>
+                  <RequiredField />
+                  <FormLabel color="#949494" fontSize="12px" fontWeight="700">
+                    E-MAIL
+                  </FormLabel>
+                </Flex>
+                <Input
+                  borderRadius={"8px"}
+                  mt={"-9px"}
+                  width={"100%"}
+                  height={"56px"}
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  isRequired
+                  placeholder="E-mail"
+                  type="text"
+                  id="email"
+                  name="email"
+                  value={email}
+                  maxLength={50}
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+              </FormControl>
+            </Flex>
+
+            <Flex flexDir={"row"} gap={4}>
+              <FormControl>
+                <Flex flexDirection={"row"} gap={1} mt={"6px"}>
+                  <RequiredField />
+                  <FormLabel color="#949494" fontSize="12px" fontWeight="700">
+                    INVOICE
+                  </FormLabel>
+                </Flex>
+                <Input
+                  borderRadius={"8px"}
+                  border={"1px solid #A7A7A7"}
+                  mt={"-9px"}
+                  width={"100%"}
                   height={"56px"}
                   // color="#949494"
                   fontSize={"14px"}
                   fontWeight={"400"}
                   isRequired
-                  placeholder="Responsável"
+                  placeholder="Invoice"
                   type="text"
-                  id="responsável"
-                  name="responsável"
-                  value={responsavel}
+                  id="invoice"
+                  name="invoice"
+                  value={invoice}
                   maxLength={50}
-                  onChange={(event) => setResponsavel(event.target.value)}
+                  onChange={(event) => setInvoice(event.target.value)}
+                />
+              </FormControl>
+
+              <FormControl>
+                <Flex flexDirection={"row"} gap={1} mt={"10px"}>
+                  <RequiredField />
+                  <FormLabel color="#949494" fontSize="12px" fontWeight="700">
+                    CNPJ
+                  </FormLabel>
+                </Flex>
+                <Input
+                  borderRadius={"8px"}
+                  mt={"-9px"}
+                  width={"100%"}
+                  height={"56px"}
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  isRequired
+                  placeholder="CNPJ"
+                  type="text"
+                  id="cnpj"
+                  name="cnpj"
+                  value={cnpj}
+                  maxLength={50}
+                  onChange={(event) => setCnjpj(event.target.value)}
+                />
+              </FormControl>
+
+              <FormControl>
+                <Flex flexDirection={"row"} gap={1} mt={"10px"}>
+                  <RequiredField />
+                  <FormLabel color="#949494" fontSize="12px" fontWeight="700">
+                    TELEFONE
+                  </FormLabel>
+                </Flex>
+                <Input
+                  borderRadius={"8px"}
+                  mt={"-9px"}
+                  width={"100%"}
+                  height={"56px"}
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  isRequired
+                  placeholder="Telefone"
+                  type="text"
+                  id="telefone"
+                  name="telefone"
+                  value={telefone}
+                  maxLength={50}
+                  onChange={(event) => setTelefone(event.target.value)}
                 />
               </FormControl>
             </Flex>
+
             <FormControl>
               <Flex flexDirection={"row"} gap={1} mt={"10px"}>
                 <RequiredField />
@@ -284,26 +419,21 @@ export function EditarFornecedorModal({
                   fontSize="12px"
                   fontWeight="700"
                 >
-                  DESCRIÇÃO
+                  OUTRAS INFORMAÇÕES
                 </FormLabel>
               </Flex>
-
               <Textarea
-                // borderRadius={"8px"}
-                // border={"1px solid #A7A7A7"}
                 mt={"-9px"}
-                width={"464px"}
+                width={"100%"}
                 height={"106px"}
-                // color="#949494"
                 fontSize={"14px"}
                 fontWeight={"400"}
                 isRequired
-                placeholder="Descrição"
-                // type="text"
-                id="descrição"
-                name="descrição"
-                value={descricao}
-                onChange={(event) => setDescricao(event.target.value)}
+                // placeholder="Outras"
+                id="outras"
+                name="outras"
+                value={outrasinformacoes}
+                onChange={(event) => setOutras(event.target.value)}
               />
             </FormControl>
           </ModalBody>
@@ -331,15 +461,23 @@ export function EditarFornecedorModal({
               background="origem.500"
               variant="primary"
               color="white"
-              disabled={poloId == 0}
+              disabled={poloid == 0}
               onClick={() => {
                 onUpdate({
                   id: fornecedor.id,
-                  nomeFornecedor: nome,
-                  poloId,
-                  servicoId: servico,
-                  representante: responsavel,
-                  justificativa: descricao,
+                  poloid,
+                  servicoid,
+                  servico_txt,
+                  nomefornecedor,
+                  representante,
+                  numerocontrato,
+                  email,
+                  invoice,
+                  cnpj,
+                  statusid,
+                  telefone,
+                  outrasinformacoes,
+                  nom_usu_create: usuario,
                 });
               }}
               _hover={{
