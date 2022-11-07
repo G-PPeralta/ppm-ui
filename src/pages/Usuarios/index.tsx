@@ -17,6 +17,8 @@ import Sidebar from "components/SideBar";
 
 import { useToast } from "contexts/Toast";
 
+import { getUsers } from "services/post/Usuario";
+
 import { BotaoAdicionar } from "./components/AdicionarUsuario";
 import { BotaoAtualizar } from "./components/AtualizarUsuario";
 import ModalDeletarUsuario from "./components/DeletarUsuario";
@@ -124,9 +126,9 @@ export function Usuarios() {
   };
   // console.log(permissao);
 
-  // useEffect(() => {
-  //   handleFilter();
-  // }, [users]);
+  useEffect(() => {
+    getUsers();
+  }, [users]);
 
   return (
     <>
@@ -214,7 +216,7 @@ export function Usuarios() {
                   </Flex>
                   <Flex>
                     <Button
-                      h={"56px"}
+                      h={"58px"}
                       borderRadius={"8px"}
                       fontSize={"18px"}
                       fontWeight={"700"}

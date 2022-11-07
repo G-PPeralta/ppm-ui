@@ -1,4 +1,5 @@
 // import { BsPlusLg } from "react-icons/bs";
+import { useEffect } from "react";
 import { FiPlus } from "react-icons/fi";
 
 import {
@@ -34,10 +35,13 @@ interface RefreshProps {
 
 export function BotaoAdicionar(getRefreshs: RefreshProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const perfis = ["Administrador", "Operador"];
   const areas = ["Engenharia", "Operação", "Transporte"];
 
   const { registerForm } = useCadastroUsuario();
+
+  useEffect(() => {
+    registerForm.setFieldValue("senha", "Mudar@123");
+  }, []);
 
   // console.log(registerForm.values);
 
@@ -46,7 +50,7 @@ export function BotaoAdicionar(getRefreshs: RefreshProps) {
       <Flex>
         <Button
           onClick={onOpen}
-          h={"56px"}
+          h={"58px"}
           borderRadius={"8px"}
           background={"#0047BB"}
           border={"2.3px solid"}
@@ -158,8 +162,8 @@ export function BotaoAdicionar(getRefreshs: RefreshProps) {
                     NÍVEL DE ACESSO
                   </FormLabel>
                   <Select
-                    id="perfil"
-                    name="perfil"
+                    id="roleId"
+                    name="roleId"
                     placeholder="Selecione"
                     w={"100%"}
                     h={"56px"}
@@ -170,9 +174,8 @@ export function BotaoAdicionar(getRefreshs: RefreshProps) {
                     value={registerForm.values.perfil}
                     onChange={registerForm.handleChange}
                   >
-                    {perfis.map((perfil: any, index: any) => (
-                      <option key={index}>{perfil}</option>
-                    ))}
+                    <option value={1}>Administrador</option>
+                    <option value={2}>Usuário</option>
                   </Select>
                 </FormControl>
                 <FormControl>
@@ -206,7 +209,7 @@ export function BotaoAdicionar(getRefreshs: RefreshProps) {
                 </FormControl>
                 <FormControl>
                   <FormLabel
-                    htmlFor="area"
+                    htmlFor="areaAtuacao"
                     fontSize={"12px"}
                     color={"#949494"}
                     fontWeight={"700"}
@@ -217,8 +220,8 @@ export function BotaoAdicionar(getRefreshs: RefreshProps) {
                     ÁREA
                   </FormLabel>
                   <Select
-                    id="area"
-                    name="area"
+                    id="areaAtuacao"
+                    name="areaAtuacao"
                     placeholder="Selecione"
                     w={"100%"}
                     h={"56px"}

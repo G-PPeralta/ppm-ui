@@ -6,40 +6,23 @@ import { cadastroUsuario } from "validations/Usuarios";
 import { useToast } from "contexts/Toast";
 
 // import { getPolo } from "services/get/Projetos";
-import { postCadastroFornecedor } from "services/post/Fornecedor";
 
-import { useAuth } from "./useAuth";
+import { postUsuario } from "services/post/Usuario";
+
+// import { useAuth } from "./useAuth";
 
 export function useCadastroUsuario() {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  // const [listaPolos, setListaPolos] = useState<any>([]);
-
-  // const reqGet = async () => {
-  //   const polos = await getPolo();
-  //   const polosSorted = polos.data.sort((a: any, b: any) =>
-  //     a.polo.localeCompare(b.polo)
-  //   );
-  //   setListaPolos(polosSorted);
-  // };
-
-  // const optionsPolos = listaPolos.map((polo: any) => ({
-  //   value: polo.id,
-  //   label: polo.polo,
-  // }));
 
   const initialValues: any = {
-    nom_usu_create: user?.nome,
-    id: 0,
-    area: "",
-    // deletado: false,
+    areaAtuacao: "",
     email: "",
-    // login: "",
     nome: "",
-    perfil: "",
-    // primeiroAcesso: true,
     telefone: "",
+    roleId: 0,
+    senha: "",
   };
 
   const registerForm: any = useFormik({
@@ -47,31 +30,27 @@ export function useCadastroUsuario() {
     validationSchema: cadastroUsuario,
     onSubmit: async (values) => {
       const newValues: any = {
-        nom_usu_create: user?.nome,
-        id: values.id,
-        area: values.area,
-        // deletado: values.deletado,
+        areaAtuacao: values.areaAtuacao,
         email: values.email,
-        // login: values.login,
         nome: values.nome,
-        perfil: values.perfil,
-        // primeiroAcesso: values.primeiroAcesso,
+        roleId: values.roleId,
         telefone: values.telefone,
+        senha: values.senha,
       };
 
       setLoading(false);
 
       try {
-        const { status } = await postCadastroFornecedor(newValues);
+        const { status } = await postUsuario(newValues);
 
         if (status === 200 || status === 201) {
-          toast.success("Intervenção cadastrada com sucesso!", {
+          toast.success("Usuário cadastrado com sucesso!", {
             id: "toast-principal",
           });
           setLoading(false);
         }
       } catch (error) {
-        toast.error("Erro ao cadastrar intervenção!", {
+        toast.error("Erro ao cadastrar usuário!", {
           id: "toast-principal",
         });
         setLoading(false);
