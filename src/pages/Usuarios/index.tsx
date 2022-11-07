@@ -28,6 +28,7 @@ export function Usuarios() {
   const [filteredUsers, setFilteredUsers] = useState<any[]>([]);
   const [input, setInput] = useState("");
   const [permissao, setPermissao] = useState("");
+  const [refresh, setRefresh] = useState(false);
 
   const data = [
     {
@@ -219,7 +220,7 @@ export function Usuarios() {
                   </Flex>
                 </Flex>
                 <Flex align={"start"} alignSelf={"end"}>
-                  <BotaoAdicionar />
+                  <BotaoAdicionar setRefresh={setRefresh} refresh={refresh} />
                 </Flex>
               </Flex>
               <Box mt={"1.5rem"}>
@@ -339,7 +340,10 @@ export function Usuarios() {
                           flexDirection="column"
                         >
                           <Flex flexDirection="row" gap={4}>
-                            <BotaoAtualizar />
+                            <BotaoAtualizar
+                              setRefresh={setRefresh}
+                              refresh={refresh}
+                            />
 
                             <ModalDeletarUsuario />
                           </Flex>

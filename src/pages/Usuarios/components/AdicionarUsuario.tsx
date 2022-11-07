@@ -25,16 +25,21 @@ import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroUsuario } from "hooks/useUsuarios";
 
+interface RefreshProps {
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 // import { TextError } from 'components/TextError';
 
-export function BotaoAdicionar() {
+export function BotaoAdicionar(getRefreshs: RefreshProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const perfis = ["Administrador", "Operador"];
   const areas = ["Engenharia", "Operação", "Transporte"];
 
   const { registerForm } = useCadastroUsuario();
 
-  // console.log(registerForm.values);
+  console.log(registerForm.values);
 
   return (
     <>
@@ -153,8 +158,8 @@ export function BotaoAdicionar() {
                     NÍVEL DE ACESSO
                   </FormLabel>
                   <Select
-                    id="pit"
-                    name="pit"
+                    id="perfil"
+                    name="perfil"
                     placeholder="Selecione"
                     w={"100%"}
                     h={"56px"}
@@ -162,8 +167,8 @@ export function BotaoAdicionar() {
                     color={"black"}
                     fontWeight={"400"}
                     border={"solid 1px #949494"}
-                    // value={registerForm.values.perfil}
-                    // onChange={registerForm.handleChange}
+                    value={registerForm.values.perfil}
+                    onChange={registerForm.handleChange}
                   >
                     {perfis.map((perfil: any, index: any) => (
                       <option key={index}>{perfil}</option>
@@ -221,8 +226,8 @@ export function BotaoAdicionar() {
                     color={"black"}
                     fontWeight={"400"}
                     border={"solid 1px #949494"}
-                    // value={registerForm.values.area}
-                    // onChange={registerForm.handleChange}
+                    value={registerForm.values.area}
+                    onChange={registerForm.handleChange}
                   >
                     {areas.map((perfil: any, index: any) => (
                       <option key={index}>{perfil}</option>
@@ -263,10 +268,10 @@ export function BotaoAdicionar() {
                   background="origem.500"
                   variant="primary"
                   color="white"
-                  // onClick={() => [
-                  //   handleCadastrar(registerForm, onClose),
-                  //   infosRankings.setRefresh(!infosRankings.refresh),
-                  // ]}
+                  onClick={() => [
+                    handleCadastrar(registerForm, onClose),
+                    getRefreshs.setRefresh(!getRefreshs.refresh),
+                  ]}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",
@@ -277,8 +282,7 @@ export function BotaoAdicionar() {
                   fontSize="18px"
                   fontWeight={"700"}
                   fontFamily={"Mulish"}
-                  // disabled={!registerForm.isValid}
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  disabled={!registerForm.isValid}
                 >
                   {/* {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
