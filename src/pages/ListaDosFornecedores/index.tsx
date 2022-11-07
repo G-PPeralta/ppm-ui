@@ -49,19 +49,19 @@ import { TabelaFornecedores } from "./components/TabelaFornecedores";
 
 export interface FornecedoreDto {
   id: number;
-  nom_usu_create: string;
   poloid: number;
-  servicoid: string;
-  statusid: number;
+  servicoid: number;
+  servico_txt: string;
   nomefornecedor: string;
-  numerocontrato: string;
   representante: string;
+  numerocontrato: string;
   email: string;
-  telefone: string;
   invoice: string;
   cnpj: string;
-  justificativa: string;
+  statusid: number;
+  telefone: string;
   outrasinformacoes: string;
+  nom_usu_create: string;
 }
 
 export function Fornecedores() {
@@ -88,6 +88,8 @@ export function Fornecedores() {
     const payload = await getPolo();
     setPolos(payload.data);
   }
+
+  console.log(fornecedores);
 
   function handleUpdateFornecedor(fornecedor: any) {
     // Atualiza o fornecedor na lista

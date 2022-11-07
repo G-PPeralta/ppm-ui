@@ -45,45 +45,30 @@ export function EditarFornecedorModal({
   onUpdate,
   polos,
 }: EditarFornecedorModalProps) {
-  const [nome, setNome] = useState(fornecedor?.nomefornecedor);
-  const [poloId, setPolo] = useState(fornecedor ? fornecedor.poloid : 0);
-  const [servico, setServico] = useState(fornecedor ? fornecedor.servicoid : 0);
-  const [responsavel, setResponsavel] = useState(
+  const [nomefornecedor, setNome] = useState(fornecedor?.nomefornecedor);
+  const [poloid, setPolo] = useState(fornecedor ? fornecedor.poloid : 0);
+  const [representante, setResponsavel] = useState(
     fornecedor ? fornecedor.representante : ""
   );
-  const [descricao, setDescricao] = useState(
-    fornecedor ? fornecedor.justificativa : ""
-  );
-  const [numeroDoContrato, setNumeroDoContrato] = useState(
+
+  const [numerocontrato, setNumeroDoContrato] = useState(
     fornecedor.numerocontrato
   );
   const [email, setEmail] = useState(fornecedor.email);
   const [invoice, setInvoice] = useState(fornecedor.invoice);
   const [cnpj, setCnjpj] = useState(fornecedor.cnpj);
   const [telefone, setTelefone] = useState(fornecedor.telefone);
-  const [outras, setOutras] = useState(fornecedor.outrasinformacoes);
-  const [status, setStatus] = useState(fornecedor.statusid);
+  const [outrasinformacoes, setOutras] = useState(fornecedor.outrasinformacoes);
+  const [statusid, setStatus] = useState(fornecedor.statusid);
+
+  const [usuario, setUsuario] = useState(fornecedor.nom_usu_create);
+  const [servicoid, setServicoId] = useState(fornecedor.servicoid);
+  const [servico_txt, setServicoTxt] = useState(fornecedor.servico_txt);
 
   useEffect(() => {
     setNome(fornecedor.nomefornecedor);
     setPolo(fornecedor.poloid);
-    setServico(fornecedor.servicoid);
     setResponsavel(fornecedor.representante);
-    setDescricao(fornecedor.justificativa);
-  }, [
-    fornecedor.nomefornecedor,
-    fornecedor.poloid,
-    fornecedor.servicoid,
-    fornecedor.representante,
-    fornecedor.justificativa,
-  ]);
-
-  function closeModal() {
-    setNome(fornecedor.nomefornecedor);
-    setPolo(fornecedor.poloid);
-    setServico(fornecedor.servicoid);
-    setResponsavel(fornecedor.representante);
-    setDescricao(fornecedor.justificativa);
     setNumeroDoContrato(fornecedor.numerocontrato);
     setEmail(fornecedor.email);
     setInvoice(fornecedor.invoice);
@@ -91,6 +76,39 @@ export function EditarFornecedorModal({
     setTelefone(fornecedor.telefone);
     setOutras(fornecedor.outrasinformacoes);
     setStatus(fornecedor.statusid);
+    setUsuario(fornecedor.nom_usu_create);
+    setServicoTxt(fornecedor.servico_txt);
+    setServicoId(fornecedor.servicoid);
+  }, [
+    fornecedor.nomefornecedor,
+    fornecedor.poloid,
+    fornecedor.representante,
+    fornecedor.numerocontrato,
+    fornecedor.email,
+    fornecedor.invoice,
+    fornecedor.cnpj,
+    fornecedor.telefone,
+    fornecedor.outrasinformacoes,
+    fornecedor.statusid,
+    fornecedor.nom_usu_create,
+    fornecedor.servico_txt,
+    fornecedor.servicoid,
+  ]);
+
+  function closeModal() {
+    setNome(fornecedor.nomefornecedor);
+    setPolo(fornecedor.poloid);
+    setResponsavel(fornecedor.representante);
+    setNumeroDoContrato(fornecedor.numerocontrato);
+    setEmail(fornecedor.email);
+    setInvoice(fornecedor.invoice);
+    setCnjpj(fornecedor.cnpj);
+    setTelefone(fornecedor.telefone);
+    setOutras(fornecedor.outrasinformacoes);
+    setStatus(fornecedor.statusid);
+    setUsuario(fornecedor.nom_usu_create);
+    setServicoTxt(fornecedor.servico_txt);
+    setServicoId(fornecedor.servicoid);
     onClose();
   }
 
@@ -136,7 +154,7 @@ export function EditarFornecedorModal({
                   id="atividadeRel"
                   name="atividadeRel"
                   onChange={(event) => setPolo(Number(event.target.value))}
-                  value={poloId}
+                  value={poloid}
                 >
                   <option value="">Selecione</option>
                   {polos.map((pol, index) => (
@@ -170,8 +188,8 @@ export function EditarFornecedorModal({
                   height={"56px"}
                   id="servico"
                   name="servico"
-                  onChange={(event) => setServico(event.target.value)}
-                  value={servico}
+                  onChange={(event) => setServicoTxt(event.target.value)}
+                  value={servico_txt}
                 />
               </FormControl>
 
@@ -198,7 +216,7 @@ export function EditarFornecedorModal({
                   id="atividadeRel"
                   name="atividadeRel"
                   onChange={(event) => setStatus(Number(event.target.value))}
-                  value={status}
+                  value={statusid}
                 >
                   <option value="">Selecione</option>
                   <option value={1}>Ativo</option>
@@ -228,7 +246,7 @@ export function EditarFornecedorModal({
                   type="text"
                   id="fornecedorNome"
                   name="fornecedorNome"
-                  value={nome}
+                  value={nomefornecedor}
                   maxLength={50}
                   onChange={(event) => setNome(event.target.value)}
                 />
@@ -253,7 +271,7 @@ export function EditarFornecedorModal({
                   type="text"
                   id="numero"
                   name="numero"
-                  value={numeroDoContrato}
+                  value={numerocontrato}
                   maxLength={50}
                   onChange={(event) => setNumeroDoContrato(event.target.value)}
                 />
@@ -281,7 +299,7 @@ export function EditarFornecedorModal({
                   type="text"
                   id="fornecedorNome"
                   name="fornecedorNome"
-                  value={nome}
+                  value={representante}
                   maxLength={50}
                   onChange={(event) => setNome(event.target.value)}
                 />
@@ -414,7 +432,7 @@ export function EditarFornecedorModal({
                 // placeholder="Outras"
                 id="outras"
                 name="outras"
-                value={outras}
+                value={outrasinformacoes}
                 onChange={(event) => setOutras(event.target.value)}
               />
             </FormControl>
@@ -443,15 +461,23 @@ export function EditarFornecedorModal({
               background="origem.500"
               variant="primary"
               color="white"
-              disabled={poloId == 0}
+              disabled={poloid == 0}
               onClick={() => {
                 onUpdate({
                   id: fornecedor.id,
-                  nomeFornecedor: nome,
-                  poloId,
-                  servicoId: servico,
-                  representante: responsavel,
-                  justificativa: descricao,
+                  poloid,
+                  servicoid,
+                  servico_txt,
+                  nomefornecedor,
+                  representante,
+                  numerocontrato,
+                  email,
+                  invoice,
+                  cnpj,
+                  statusid,
+                  telefone,
+                  outrasinformacoes,
+                  nom_usu_create: usuario,
                 });
               }}
               _hover={{
