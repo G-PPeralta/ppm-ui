@@ -110,7 +110,12 @@ export function BudgetDetailTable(props: PropsInterface) {
               </Flex>
             </Td>
             <Td textAlign="center">
-              <Flex alignItems={"center"} justifyContent="center">
+              <Flex
+                alignItems={"center"}
+                justifyContent="center"
+                textAlign="center"
+                align="center"
+              >
                 <ModalCustoDiario filho={filho} toogleRender={toogleRender} />
                 <ModalAdicionarGestaoDeCusto
                   projeto={filho.projeto}

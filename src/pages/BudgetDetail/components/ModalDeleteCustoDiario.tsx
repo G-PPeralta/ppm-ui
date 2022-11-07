@@ -1,4 +1,4 @@
-import { MdDeleteOutline } from "react-icons/md";
+import { FiTrash } from "react-icons/fi";
 
 import {
   Flex,
@@ -47,8 +47,16 @@ function ModalDeleteCustoDiario(props: PropsInterface) {
       <IconButton
         variant="outline"
         aria-label="Remove"
-        icon={<MdDeleteOutline />}
+        icon={<FiTrash size={"13px"} />}
         onClick={onOpen}
+        _hover={{
+          backgroundColor: "#F40606",
+          color: "white",
+        }}
+        color={"#F40606"}
+        fontWeight={"700"}
+        backgroundColor={"transparent"}
+        border={"none"}
       />
 
       <Modal isOpen={isOpen} onClose={onClose} size="lg">

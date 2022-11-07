@@ -107,17 +107,25 @@ function ModalCustoDiario(props: {
   const tableData = data.map((dia, key) => (
     <>
       <Tr key={dia.id}>
-        <Td>
+        <Td textAlign={"center"} fontWeight={"semibold"}>
           <Moment format="DD/MM/YYYY">{dia.date}</Moment>
         </Td>
-        <Td>{dia.atividade}</Td>
-        <Td>{dia.fornecedor}</Td>
-        <Td>{dia.pedido}</Td>
-        <Td>
+        <Td textAlign={"center"} fontWeight={"semibold"}>
+          {dia.atividade}
+        </Td>
+        <Td textAlign={"center"} fontWeight={"semibold"}>
+          {dia.fornecedor}
+        </Td>
+        <Td textAlign={"center"} fontWeight={"semibold"}>
+          {dia.pedido}
+        </Td>
+        <Td textAlign={"center"} fontWeight={"semibold"}>
           <Text className="description">{dia.txt_pedido}</Text>
         </Td>
-        <Td>{formatReal(dia.realizado)} </Td>
-        <Td>
+        <Td textAlign={"center"} fontWeight={"semibold"}>
+          {formatReal(dia.realizado)}{" "}
+        </Td>
+        <Td textAlign={"center"} fontWeight={"semibold"}>
           <ModalEditarGestaoDeCusto id={dia.id} toogleRender={closeOnSuccess} />
           <ModalDeleteCustoDiario id={dia.id} toogleRender={closeOnSuccess} />
         </Td>
@@ -143,7 +151,8 @@ function ModalCustoDiario(props: {
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            {filho ? filho.projeto.nome : pai?.projeto.nome}
+            {/* {filho ? filho.projeto.nome : pai?.projeto.nome} */}
+            Custo Diário
           </ModalHeader>
           <ModalCloseButton color={"white"} />
 

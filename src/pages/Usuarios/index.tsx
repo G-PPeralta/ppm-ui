@@ -17,6 +17,8 @@ import Sidebar from "components/SideBar";
 
 import { useToast } from "contexts/Toast";
 
+import { getUsers } from "services/post/Usuario";
+
 import { BotaoAdicionar } from "./components/AdicionarUsuario";
 import { BotaoAtualizar } from "./components/AtualizarUsuario";
 import ModalDeletarUsuario from "./components/DeletarUsuario";
@@ -28,6 +30,7 @@ export function Usuarios() {
   const [filteredUsers, setFilteredUsers] = useState<any[]>([]);
   const [input, setInput] = useState("");
   const [permissao, setPermissao] = useState("");
+  const [refresh, setRefresh] = useState(false);
 
   const data = [
     {
@@ -94,21 +97,38 @@ export function Usuarios() {
     if (input === "" || permissao === "") {
       setFilteredUsers(users);
     }
-    const filteredArray = users.filter(
-      (user) => user.nome.toUpperCase().includes(input.toUpperCase())
-      // ||
-      // .filter((use: any) =>
-      //   use.perfil.toUpperCase().includes(permissao.toUpperCase())
-    );
-    // );
-    // console.log(permissao);
+    if (input !== "" && permissao === "Todos") {
+      // console.log({ permissao });s
 
-    setFilteredUsers(filteredArray);
+      const filteredArray = users.filter((user) =>
+        user.nome.toUpperCase().includes(input.toUpperCase())
+      );
+      setFilteredUsers(filteredArray);
+    }
+    if (input !== "" && permissao !== "Todos") {
+      const filteredArray = users
+        .filter((user: any) =>
+          user.nome.toUpperCase().includes(input.toUpperCase())
+        )
+        .filter((us: any) =>
+          us.perfil.toUpperCase().includes(permissao.toUpperCase())
+        );
+      setFilteredUsers(filteredArray);
+    }
+    if (input === "" && permissao !== "Todos") {
+      // console.log({ permissao });
+
+      const filteredArray = users.filter((user) =>
+        user.perfil.toUpperCase().includes(permissao.toUpperCase())
+      );
+      setFilteredUsers(filteredArray);
+    }
   };
+  // console.log(permissao);
 
-  // useEffect(() => {
-  //   handleFilter();
-  // }, [users]);
+  useEffect(() => {
+    getUsers();
+  }, [users]);
 
   return (
     <>
@@ -196,7 +216,7 @@ export function Usuarios() {
                   </Flex>
                   <Flex>
                     <Button
-                      h={"56px"}
+                      h={"58px"}
                       borderRadius={"8px"}
                       fontSize={"18px"}
                       fontWeight={"700"}
@@ -219,7 +239,7 @@ export function Usuarios() {
                   </Flex>
                 </Flex>
                 <Flex align={"start"} alignSelf={"end"}>
-                  <BotaoAdicionar />
+                  <BotaoAdicionar setRefresh={setRefresh} refresh={refresh} />
                 </Flex>
               </Flex>
               <Box mt={"1.5rem"}>
@@ -339,7 +359,10 @@ export function Usuarios() {
                           flexDirection="column"
                         >
                           <Flex flexDirection="row" gap={4}>
-                            <BotaoAtualizar />
+                            <BotaoAtualizar
+                              setRefresh={setRefresh}
+                              refresh={refresh}
+                            />
 
                             <ModalDeletarUsuario />
                           </Flex>

@@ -17,7 +17,8 @@ import {
 } from "@chakra-ui/react";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
-import InputGenerico from "components/InputGenerico";
+// import InputGenerico from "components/InputGenerico";
+import InputGenericoDesabilitado from "components/InputGenericoDesabilitado";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 
 import { formatMinutesToHours } from "utils/formatDate";
@@ -96,7 +97,8 @@ function ModalEditarOcorrencia({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Editar Ocorrência
           </ModalHeader>
@@ -107,7 +109,7 @@ function ModalEditarOcorrencia({
           <ModalBody>
             <Flex gap={4} direction={"column"} mt={4}>
               <Flex direction={"column"} gap={4} w={"70%"}>
-                <InputGenerico
+                <InputGenericoDesabilitado
                   registerForm={registerForm}
                   nomeInput={"OCORRÊNCIA"}
                   propName={"ocorrencia"}
@@ -145,15 +147,16 @@ function ModalEditarOcorrencia({
                 h={"56px"}
                 borderRadius={"10px"}
                 variant="ghost"
-                color="red"
+                color="red.500"
                 onClick={() => handleFecharModal()}
                 _hover={{
-                  background: "red.500",
+                  background: "red.600",
                   transition: "all 0.4s",
                   color: "white",
                 }}
+                w={"208px"}
               >
-                <Text fontSize="16px" fontWeight={"bold"} mx={12}>
+                <Text fontSize="18px" fontWeight={"700"} mx={12}>
                   Cancelar
                 </Text>
               </Button>

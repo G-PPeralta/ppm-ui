@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 import { useFormik } from "formik";
-import { updateNovaOpcaoDePriorizacao } from "validations/ModaisRanking";
+import { updateUsuario } from "validations/Usuarios";
 
 import { useToast } from "contexts/Toast";
 
-import { updateUsuario } from "services/post/Usuario";
+import { updateUser } from "services/post/Usuario";
 
 import { useAuth } from "./useAuth";
 
@@ -16,31 +16,23 @@ export function useEdicaoUsuario() {
 
   const initialValues: any = {
     nom_usu_create: user?.nome,
-    id: 0,
-    area: "",
-    deletado: false,
+    areaAtuacao: "",
     email: "",
-    login: "",
     nome: "",
-    perfil: "",
-    primeiroAcesso: true,
     telefone: "",
+    roleId: 0,
   };
 
   const registerForm = useFormik({
     initialValues,
-    validationSchema: updateNovaOpcaoDePriorizacao,
+    validationSchema: updateUsuario,
     onSubmit: async (values) => {
       const newValues: any = {
         nom_usu_create: user?.nome,
-        id: values.id,
-        area: values.area,
-        deletado: values.deletado,
+        areaAtuacao: values.areaAtuacao,
         email: values.email,
-        login: values.login,
         nome: values.nome,
-        perfil: values.perfil,
-        primeiroAcesso: values.primeiroAcesso,
+        roleId: values.roleId,
         telefone: values.telefone,
       };
 
@@ -48,7 +40,7 @@ export function useEdicaoUsuario() {
 
       try {
         // Rota update - user
-        const { status } = await updateUsuario(newValues, 0);
+        const { status } = await updateUser(newValues, 0);
 
         if (status === 200 || status === 201) {
           toast.success(`Usuário editado com sucesso!`, {
