@@ -33,30 +33,34 @@ export async function getGraficoHistorico(params?: any): Promise<{
   return api.get("graficos/historico", { params, headers });
 }
 
-export async function getGraficoPorCadaIntervencao(): Promise<{
+export async function getGraficoPorCadaIntervencao(params?: any): Promise<{
   data: any[];
   status: number;
 }> {
-  return api.get("graficos/intervencao", token());
+  const { headers } = token();
+  return api.get("graficos/intervencao", { params, headers });
 }
 
-export async function getGraficoTempoPorSonda(): Promise<{
+export async function getGraficoTempoPorSonda(params?: any): Promise<{
   data: any[];
   status: number;
 }> {
-  return api.get("graficos/tempo", token());
+  const { headers } = token();
+  return api.get("graficos/tempo", { params, headers });
 }
 
-export async function getGraficoPorCadaSonda(): Promise<{
+export async function getGraficoPorCadaSonda(params?: any): Promise<{
   data: any[];
   status: number;
 }> {
-  return api.get("graficos/sonda", token());
+  const { headers } = token();
+  return api.get("graficos/sonda", { params, headers });
 }
 
-export async function getGraficoParaCIP(): Promise<{
+export async function getGraficoParaCIP(params?: any): Promise<{
   data: any[];
   status: number;
 }> {
-  return api.get("graficos/cpi", token());
+  const { headers } = token();
+  return api.get("graficos/cpi", { params, headers });
 }

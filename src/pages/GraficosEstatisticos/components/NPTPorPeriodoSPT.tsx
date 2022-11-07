@@ -17,7 +17,7 @@ import { getGraficoTempoPorSonda } from "services/get/GraficosEstatisticos";
 
 import StatusIntervencao from "./StatusIntervencao";
 
-export function GraficoNPTPorPeriodoSPT() {
+export function GraficoNPTPorPeriodoSPT({ de, ate, refresh, setRefresh }: any) {
   const [chartData, setChartData] = useState<any[]>([]);
 
   const dataEntries2 = [
@@ -78,7 +78,12 @@ export function GraficoNPTPorPeriodoSPT() {
   const [width] = useWindowSize();
 
   const reqGet = async () => {
-    const res = await getGraficoTempoPorSonda();
+    const params: any = {};
+    if (de && ate) {
+      params.de = de;
+      params.a = ate;
+    }
+    const res = await getGraficoTempoPorSonda(params);
 
     const newData = res.data.map((e) => ({
       key: e.nom_sonda,
@@ -95,7 +100,7 @@ export function GraficoNPTPorPeriodoSPT() {
 
   useEffect(() => {
     reqGet();
-  }, []);
+  }, [refresh]);
 
   return (
     <>
