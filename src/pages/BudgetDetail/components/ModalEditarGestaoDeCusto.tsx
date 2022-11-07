@@ -52,6 +52,7 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
       <IconButton
         variant="outline"
         aria-label="Editar Realizado"
+        color="#000f"
         icon={<MdModeEditOutline />}
         onClick={onOpen}
       />
@@ -329,7 +330,7 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (
                     <>
-                      <Text>Concluir</Text>
+                      <Text>Gravar</Text>
                     </>
                   )}
                 </Button>
