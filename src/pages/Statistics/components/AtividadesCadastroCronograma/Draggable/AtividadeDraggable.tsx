@@ -24,7 +24,7 @@ import { getDuracaoHorasAdicionarAtividade } from "services/get/Estatisticas";
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
 import { ModalFiltrarAtividade } from "../ModalFiltrarAtividade";
 import DateTimePicker from "./DateTimePicker";
-// import PopOverPrecedentes from "./PopOverPrecedentes";
+
 interface Props {
   registerForm: FormikProps<any>;
   index: number;
@@ -34,11 +34,6 @@ interface Props {
     listaOperacao: Operacao[];
   };
 }
-
-// interface Option {
-//   value: number;
-//   label: string;
-// }
 
 interface OpcoesFiltro {
   duracao?: number;
@@ -57,6 +52,8 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const [, setOperacao] = useState<number>();
   const [, setDataInicio] = useState<string>();
   const [, setOpcoesFiltro] = useState<OpcoesFiltro>();
+  const [operacaoId, setOperacaoId] = useState();
+
   const initAdd = {
     area_id: 0,
     operacao_id: 0,
@@ -83,7 +80,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
       data.dataInicio
     );
 
-    registerForm.setFieldValue(`atividades[${index}].duracao`, data.duracao);
+    // registerForm.setFieldValue(`atividades[${index}].duracao`, data.duracao);
   }
 
   const MediaHorasPorOperacao = async (id: number) => {
@@ -104,8 +101,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
       .indexOf(registerForm?.values?.atividades?.[i][chave]);
 
     const idOperacao = options?.[index]?.value;
-
-    MediaHorasPorOperacao(idOperacao);
+    setOperacaoId(idOperacao);
 
     return {
       value: options?.[index]?.value,
@@ -113,15 +109,15 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     };
   };
 
-  // function mudaOperacao(evt: any) {
-  //   console.log(evt);
-  // }
-
   useEffect(() => {
     const now = Date.now();
     const newId = draggableId + "-" + now.toLocaleString();
     setDraggableId(newId);
   }, []);
+
+  useEffect(() => {
+    operacaoId && MediaHorasPorOperacao(operacaoId);
+  }, [operacaoId]);
 
   return (
     <Draggable draggableId={draggableId} index={index}>
@@ -282,7 +278,6 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
 
                 <Flex direction={"column"} flex={1}>
                   <Flex>
-                    <RequiredField />
                     <Text
                       fontWeight={"bold"}
                       fontSize={"12px"}
