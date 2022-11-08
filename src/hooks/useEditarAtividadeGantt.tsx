@@ -71,9 +71,8 @@ export function useEditarAtividadeGantt() {
     onSubmit: async (values) => {
       const id = values.id_atividade;
       const dat_ini = new Date(values.inicio_realizado);
-      // dat_ini.setHours(dat_ini.getHours() - 3);
       const dat_fim = new Date(values.fim_realizado);
-      // dat_fim.setHours(dat_fim.getHours() - 3);
+      // dat_fim.setDate(dat_fim.getDate() - 1);
       const newValues = {
         dat_ini_real: dat_ini.toISOString(),
         dat_fim_real: dat_fim.toISOString(),
