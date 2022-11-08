@@ -143,7 +143,7 @@ function ModalCadastroAtividade() {
                         <Flex gap={1}>
                           <RequiredField />
                           <Text
-                            fontWeight={"bold"}
+                            fontWeight={"700"}
                             fontSize={"12px"}
                             color={"#949494"}
                           >
