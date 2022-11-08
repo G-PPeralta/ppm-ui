@@ -19,7 +19,12 @@ import { getGraficoPorCadaIntervencao } from "services/get/GraficosEstatisticos"
 
 import StatusIntervencao from "./StatusIntervencao";
 
-export function GraficoPorCadaIntervencao() {
+export function GraficoPorCadaIntervencao({
+  de,
+  ate,
+  refresh,
+  setRefresh,
+}: any) {
   const [chartData, setChartData] = useState<any[]>([]);
 
   // const [listaSondas, setListaSondas] = useState<any[]>([]);
@@ -67,7 +72,12 @@ export function GraficoPorCadaIntervencao() {
   ];
 
   const reqGet = async () => {
-    const res = await getGraficoPorCadaIntervencao();
+    const params: any = {};
+    if (de && ate) {
+      params.de = de;
+      params.a = ate;
+    }
+    const res = await getGraficoPorCadaIntervencao(params);
 
     const newData = res.data.map((e) => ({
       key: e.nom_poco,
@@ -81,10 +91,6 @@ export function GraficoPorCadaIntervencao() {
 
     setChartData(newData);
   };
-
-  useEffect(() => {
-    reqGet();
-  }, []);
 
   function useWindowSize() {
     const [size, setSize] = useState([0, 0]);
@@ -100,6 +106,11 @@ export function GraficoPorCadaIntervencao() {
   }
 
   const [width] = useWindowSize();
+
+  useEffect(() => {
+    reqGet();
+  }, [refresh]);
+
   return (
     <>
       {/* {loading && (

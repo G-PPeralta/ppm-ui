@@ -49,19 +49,19 @@ import { TabelaFornecedores } from "./components/TabelaFornecedores";
 
 export interface FornecedoreDto {
   id: number;
-  nom_usu_create: string;
   poloid: number;
   servicoid: number;
-  statusid: number;
+  servico_txt: string;
   nomefornecedor: string;
-  numerocontrato: string;
   representante: string;
+  numerocontrato: string;
   email: string;
-  telefone: string;
   invoice: string;
   cnpj: string;
-  justificativa: string;
-  outrasInformacoes: string;
+  statusid: number;
+  telefone: string;
+  outrasinformacoes: string;
+  nom_usu_create: string;
 }
 
 export function Fornecedores() {

@@ -1,6 +1,4 @@
 import { useState } from "react";
-// import { AiFillEdit } from "react-icons/ai";
-// import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 import {
@@ -14,12 +12,13 @@ import {
   Tr,
   Text,
   Flex,
-  // IconButton,
 } from "@chakra-ui/react";
 import "../statistics.css";
 import { StatisticsTableData } from "interfaces/Services";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
+
+import ModalDeletar from "./AtividadesCadastroCronograma/ModalDeletar";
 
 interface Props {
   data: StatisticsTableData[] | undefined;
@@ -111,27 +110,7 @@ export function StatisticsTable({ data }: Props) {
                     <Text>{formatDecimal(projeto.pct_real)}</Text>
                   </Td>
                   <Td textAlign={"center"} fontWeight={"semibold"}>
-                    {/* <IconButton
-                          aria-label="Plus sign"
-                          icon={<AiFillEdit />}
-                          background="white"
-                          variant="secondary"
-                          color="#2D2926"
-                          mr={2}
-                          isRound={true}
-                          size="sm"
-                        />
-                      <IconButton
-                          aria-label="Plus sign"
-                          icon={<FaTrash />}
-                          background="white"
-                          variant="secondary"
-                          color="#F94144"
-                          mr={2}
-                          isRound={true}
-                          size="sm"
-                        />
-                      <EditaValorModal /> */}
+                    <ModalDeletar />
                   </Td>
                 </Tr>
               ))

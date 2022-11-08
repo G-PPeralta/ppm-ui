@@ -85,10 +85,38 @@ export function GráficosEstatisticos() {
             setRefresh={setRefresh}
           />
         )}
-        {graphic == "2" && <GraficoPorCadaIntervencao />}
-        {graphic == "3" && <GraficoNPTPorPeriodoSPT />}
-        {graphic == "4" && <GraficoSPT />}
-        {graphic == "5" && <GraficoCIP />}
+        {graphic == "2" && (
+          <GraficoPorCadaIntervencao
+            de={de}
+            ate={ate}
+            refresh={refresh}
+            setRefresh={setRefresh}
+          />
+        )}
+        {graphic == "3" && (
+          <GraficoNPTPorPeriodoSPT
+            de={de}
+            ate={ate}
+            refresh={refresh}
+            setRefresh={setRefresh}
+          />
+        )}
+        {graphic == "4" && (
+          <GraficoSPT
+            de={de}
+            ate={ate}
+            refresh={refresh}
+            setRefresh={setRefresh}
+          />
+        )}
+        {graphic == "5" && (
+          <GraficoCIP
+            de={de}
+            ate={ate}
+            refresh={refresh}
+            setRefresh={setRefresh}
+          />
+        )}
       </>
     );
   }
