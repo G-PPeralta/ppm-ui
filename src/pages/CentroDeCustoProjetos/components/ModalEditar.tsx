@@ -154,12 +154,12 @@ function ModalEditar({
             fontWeight={"700"}
             fontFamily={"Mulish"}
           >
-            Gestão de Custos
+            Editar Despesa
           </ModalHeader>
           <ModalCloseButton color={"white"} />
 
           <ModalBody mt={3}>
-            <Text
+            {/* <Text
               fontSize={"18px"}
               fontWeight={"700"}
               fontFamily={"Mulish"}
@@ -167,7 +167,7 @@ function ModalEditar({
               color={"#2D2926"}
             >
               EDITAR DESPESA
-            </Text>
+            </Text> */}
             <Flex direction={"column"} gap={4}>
               <Flex gap={4}>
                 <Flex direction={"column"}>

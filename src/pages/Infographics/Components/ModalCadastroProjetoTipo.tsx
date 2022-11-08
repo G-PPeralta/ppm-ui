@@ -96,11 +96,11 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                         })}
                         direction={"column"}
                       >
-                        <Text fontWeight={"bold"}>Nome</Text>
+                        {/* <Text fontWeight={"bold"}>Nome</Text> */}
                         <Flex gap={1}>
                           <RequiredField />
                           <Text
-                            fontWeight={"bold"}
+                            fontWeight={"700"}
                             fontSize={"12px"}
                             color={"#949494"}
                           >
@@ -144,10 +144,10 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                       gap={5}
                     >
                       <FormControl>
-                        <Text fontWeight={"bold"}>Comentários</Text>
+                        {/* <Text fontWeight={"bold"}>Comentários</Text> */}
                         <Flex gap={1}>
                           <Text
-                            fontWeight={"bold"}
+                            fontWeight={"700"}
                             fontSize={"12px"}
                             color={"#949494"}
                           >

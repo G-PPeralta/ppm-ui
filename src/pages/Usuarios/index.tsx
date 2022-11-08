@@ -211,7 +211,7 @@ export function Usuarios() {
                     >
                       <option>Todos</option>
                       <option value={"Administrador"}>Administrador</option>
-                      <option value={"Operação"}>Operação</option>
+                      <option value={"Usuário"}>Usuário</option>
                     </Select>
                   </Flex>
                   <Flex>
