@@ -62,6 +62,7 @@ export interface FornecedoreDto {
   telefone: string;
   outrasinformacoes: string;
   nom_usu_create: string;
+  justificativa: string;
 }
 
 export function Fornecedores() {

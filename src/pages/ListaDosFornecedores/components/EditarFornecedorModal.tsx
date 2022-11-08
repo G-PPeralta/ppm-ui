@@ -24,15 +24,9 @@ import {
   // Text,
 } from "@chakra-ui/react";
 
-import { FornecedoreDto } from "..";
-
-import { RequiredField } from "components/RequiredField/RequiredField";
-
-// import { Fornecedor } from "../index";
-
 type EditarFornecedorModalProps = {
   isOpen: boolean;
-  fornecedor: FornecedoreDto;
+  fornecedor: any;
   onClose: () => void;
   onUpdate: (fornecedor: any) => void;
   polos: any[];
@@ -64,6 +58,23 @@ export function EditarFornecedorModal({
   const [usuario, setUsuario] = useState(fornecedor.nom_usu_create);
   const [servicoid, setServicoId] = useState(fornecedor.servicoid);
   const [servico_txt, setServicoTxt] = useState(fornecedor.servico_txt);
+
+  const updatePayload = {
+    id: fornecedor.id,
+    poloid,
+    servicoid,
+    servico_txt,
+    nomefornecedor,
+    representante,
+    numerocontrato,
+    email,
+    invoice,
+    cnpj,
+    statusid,
+    telefone,
+    outrasinformacoes,
+    nom_usu_create: usuario,
+  };
 
   useEffect(() => {
     setNome(fornecedor.nomefornecedor);
@@ -112,6 +123,17 @@ export function EditarFornecedorModal({
     onClose();
   }
 
+  const {
+    dat_usu_create,
+    nom_usu_edit,
+    dat_usu_edit,
+    nom_usu_erase,
+    dat_usu_erase,
+    justificativa,
+    ...newFor
+  } = fornecedor;
+  const newFornecedor = newFor;
+
   return (
     <Flex>
       <Modal isOpen={isOpen} onClose={() => closeModal()} size="3xl">
@@ -133,7 +155,6 @@ export function EditarFornecedorModal({
             <Flex flexDir={"row"} gap={4}>
               <FormControl>
                 <Flex flexDirection={"row"} gap={1} mt={"6px"}>
-                  <RequiredField />
                   <FormLabel
                     htmlFor="orçamento"
                     color="#949494"
@@ -167,7 +188,6 @@ export function EditarFornecedorModal({
 
               <FormControl>
                 <Flex flexDirection={"row"} gap={1} mt={"6px"}>
-                  <RequiredField />
                   <FormLabel
                     htmlFor="orçamento"
                     color="#949494"
@@ -195,7 +215,6 @@ export function EditarFornecedorModal({
 
               <FormControl>
                 <Flex flexDirection={"row"} gap={1} mt={"6px"}>
-                  <RequiredField />
                   <FormLabel
                     htmlFor="orçamento"
                     color="#949494"
@@ -228,7 +247,6 @@ export function EditarFornecedorModal({
             <Flex flexDir={"row"} gap={4}>
               <FormControl>
                 <Flex flexDirection={"row"} gap={1} mt={"6px"}>
-                  <RequiredField />
                   <FormLabel color="#949494" fontSize="12px" fontWeight="700">
                     FORNECEDOR
                   </FormLabel>
@@ -254,7 +272,6 @@ export function EditarFornecedorModal({
 
               <FormControl>
                 <Flex flexDirection={"row"} gap={1} mt={"10px"}>
-                  <RequiredField />
                   <FormLabel color="#949494" fontSize="12px" fontWeight="700">
                     NUMERO DO CONTRATO
                   </FormLabel>
@@ -281,7 +298,6 @@ export function EditarFornecedorModal({
             <Flex flexDir={"row"} gap={4}>
               <FormControl>
                 <Flex flexDirection={"row"} gap={1} mt={"6px"}>
-                  <RequiredField />
                   <FormLabel color="#949494" fontSize="12px" fontWeight="700">
                     REPRESENTANTE/PONTO FOCAL
                   </FormLabel>
@@ -307,7 +323,6 @@ export function EditarFornecedorModal({
 
               <FormControl>
                 <Flex flexDirection={"row"} gap={1} mt={"10px"}>
-                  <RequiredField />
                   <FormLabel color="#949494" fontSize="12px" fontWeight="700">
                     E-MAIL
                   </FormLabel>
@@ -334,7 +349,6 @@ export function EditarFornecedorModal({
             <Flex flexDir={"row"} gap={4}>
               <FormControl>
                 <Flex flexDirection={"row"} gap={1} mt={"6px"}>
-                  <RequiredField />
                   <FormLabel color="#949494" fontSize="12px" fontWeight="700">
                     INVOICE
                   </FormLabel>
@@ -361,7 +375,6 @@ export function EditarFornecedorModal({
 
               <FormControl>
                 <Flex flexDirection={"row"} gap={1} mt={"10px"}>
-                  <RequiredField />
                   <FormLabel color="#949494" fontSize="12px" fontWeight="700">
                     CNPJ
                   </FormLabel>
@@ -386,7 +399,6 @@ export function EditarFornecedorModal({
 
               <FormControl>
                 <Flex flexDirection={"row"} gap={1} mt={"10px"}>
-                  <RequiredField />
                   <FormLabel color="#949494" fontSize="12px" fontWeight="700">
                     TELEFONE
                   </FormLabel>
@@ -412,7 +424,6 @@ export function EditarFornecedorModal({
 
             <FormControl>
               <Flex flexDirection={"row"} gap={1} mt={"10px"}>
-                <RequiredField />
                 <FormLabel
                   htmlFor="orçamento"
                   color="#949494"
@@ -461,25 +472,11 @@ export function EditarFornecedorModal({
               background="origem.500"
               variant="primary"
               color="white"
-              disabled={poloid == 0}
-              onClick={() => {
-                onUpdate({
-                  id: fornecedor.id,
-                  poloid,
-                  servicoid,
-                  servico_txt,
-                  nomefornecedor,
-                  representante,
-                  numerocontrato,
-                  email,
-                  invoice,
-                  cnpj,
-                  statusid,
-                  telefone,
-                  outrasinformacoes,
-                  nom_usu_create: usuario,
-                });
-              }}
+              disabled={
+                JSON.stringify(Object.values(updatePayload).sort()) ===
+                JSON.stringify(Object.values(newFornecedor).sort())
+              }
+              onClick={() => onUpdate(updatePayload)}
               _hover={{
                 background: "origem.600",
                 transition: "all 0.4s",
