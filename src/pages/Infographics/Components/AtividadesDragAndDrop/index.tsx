@@ -205,7 +205,7 @@ export default function AtividadesDragAndDrop({
           fontWeight={"700"}
           fontSize={"12px"}
           color={"#949494"}
-          mb={-4}
+          mb={-2}
           // ml={8}
         >
           ATIVIDADES
