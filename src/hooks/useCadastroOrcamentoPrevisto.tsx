@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import { cadastroValorPrevistoSchema } from "validations/ModalCadastroOrcamento";
 
+import { formatReal } from "utils/formatReal";
 import { parseNumber } from "utils/regexCoinMask";
 
 import { useToast } from "contexts/Toast";
@@ -39,7 +40,9 @@ export function useCadastroOrcamentoPrevisto() {
         const { status } = await postAatualizarValorPrevisto(newValues);
         if (status === 200 || status === 201) {
           toast.success(
-            `Valor Previsto ${parseNumber(values.valor)} editado com sucesso!`,
+            `Valor Previsto ${formatReal(
+              parseNumber(values.valor)
+            )} editado com sucesso!`,
             {
               id: "toast-principal",
             }
@@ -48,7 +51,9 @@ export function useCadastroOrcamentoPrevisto() {
         }
       } catch (error) {
         toast.error(
-          `Erro ao editar valor previsto ${parseNumber(values.valor)}!`,
+          `Erro ao editar valor previsto ${formatReal(
+            parseNumber(values.valor)
+          )}!`,
           {
             id: "toast-principal",
           }
