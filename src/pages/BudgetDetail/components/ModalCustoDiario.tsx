@@ -56,19 +56,21 @@ function ModalCustoDiario(props: {
   const wd = window.innerWidth;
 
   const getCustosDiariosInicial = async () => {
-    if (filho) {
-      const data = await getCustoDiarioFilho(filho.projeto.id, null, null);
-      setData(data);
-    } else if (pai) {
-      const data = await getCustoDiarioPai(pai.projeto.id, null, null);
-      setData(data);
+    if (!startDate || !endDate) {
+      if (filho) {
+        const data = await getCustoDiarioFilho(filho.projeto.id, null, null);
+        setData(data);
+      } else if (pai) {
+        const data = await getCustoDiarioPai(pai.projeto.id, null, null);
+        setData(data);
+      }
     }
     // setLoading(false);
   };
 
   useEffect(() => {
     getCustosDiariosInicial();
-  }, []);
+  }, [startDate, endDate]);
 
   const FilterByDate = async () => {
     //  setLoading(true);
