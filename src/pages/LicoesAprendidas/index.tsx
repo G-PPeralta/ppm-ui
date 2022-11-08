@@ -114,6 +114,74 @@ export function LicoesAprendidasProjetos() {
     }
   }
 
+  function Body() {
+    return (
+      <>
+        {filteredLicoesAprendidas.length > 0 ? (
+          filteredLicoesAprendidas
+            .sort((a, b) => a.id - b.id)
+            .slice(from, to)
+            .map((lessons, index) => (
+              <Tr key={index}>
+                <Td
+                  // isNumeric
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                >
+                  {lessons.id}
+                </Td>
+
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  {lessons.txt_licao_aprendida}
+                </Td>
+                <Td
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                  width="406px"
+                  height={"36px"}
+                >
+                  {lessons.txt_acao}
+                </Td>
+                <Td fontWeight={"semibold"} textAlign={"center"}>
+                  {new Date(lessons.dat_usu_create)
+                    .toLocaleString("pt-BR")
+                    .substring(0, 10)}
+                </Td>
+                <Td fontWeight={"semibold"} textAlign={"center"}>
+                  <IconButton
+                    aria-label="Plus sign"
+                    icon={<MdModeEdit />}
+                    background="transparent"
+                    variant="secondary"
+                    color="#0047BB"
+                    // mr={2}
+                    // isRound={true}
+                    // size="md"
+                    _hover={{ background: "origem.500", color: "white" }}
+                    // width={"18px"}
+                    // height={"18px"}
+                    onClick={() => {
+                      setEditLicao(lessons);
+                      onOpen();
+                    }}
+                  />
+                  <DeleteModal />
+                </Td>
+              </Tr>
+            ))
+        ) : (
+          <Tr>
+            <Td textAlign={"start"}>
+              <Text textAlign={"start"} fontWeight={"semibold"}>
+                Não há dados
+              </Text>
+            </Td>
+          </Tr>
+        )}
+      </>
+    );
+  }
+
   const tableData = filteredLicoesAprendidas
     .sort((a, b) => a.id - b.id)
     .slice(from, to)
@@ -410,7 +478,7 @@ export function LicoesAprendidasProjetos() {
                       </Th>
                     </Tr>
                   </Thead>
-                  <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+                  <Tbody scrollBehavior={"smooth"}>{<Body />}</Tbody>
                   <Tfoot>
                     <Tr background={"origem.500"}>
                       <Th color={"white"}>Total</Th>
