@@ -143,13 +143,13 @@ function ModalCadastroAtividades({
                 gap={5}
               >
                 <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Nome</Text>
+                  {/* <Text fontWeight={"bold"}>Nome</Text> */}
                   <Flex gap={5} flex={1}>
                     <Flex direction={"column"} flex={1}>
                       <Flex gap={1}>
                         <RequiredField />
                         <Text
-                          fontWeight={"bold"}
+                          fontWeight={"700"}
                           fontSize={"12px"}
                           color={"#949494"}
                         >
@@ -178,7 +178,7 @@ function ModalCadastroAtividades({
                       <Flex gap={1}>
                         <RequiredField />
                         <Text
-                          fontWeight={"bold"}
+                          fontWeight={"700"}
                           fontSize={"12px"}
                           color={"#949494"}
                         >
@@ -207,7 +207,7 @@ function ModalCadastroAtividades({
                 </Flex>
 
                 <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Relação</Text>
+                  {/* <Text fontWeight={"bold"}>Relação</Text> */}
                   <SelectFiltragem
                     registerForm={registerForm}
                     nomeSelect={"RELAÇÃO"}
@@ -218,7 +218,7 @@ function ModalCadastroAtividades({
                 </Flex>
 
                 <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Responsável</Text>
+                  {/* <Text fontWeight={"bold"}>Responsável</Text> */}
                   <Flex gap={5} flex={1}>
                     <SelectFiltragem
                       registerForm={registerForm}
@@ -239,7 +239,7 @@ function ModalCadastroAtividades({
                 </Flex>
 
                 <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Datas</Text>
+                  {/* <Text fontWeight={"bold"}>Datas</Text> */}
                   <Flex gap={5}>
                     <Flex>
                       <DateTimePickerDataInicio registerForm={registerForm} />
@@ -248,7 +248,7 @@ function ModalCadastroAtividades({
                       <Flex gap={1}>
                         <RequiredField />
                         <Text
-                          fontWeight={"bold"}
+                          fontWeight={"700"}
                           fontSize={"12px"}
                           color={"#949494"}
                         >
