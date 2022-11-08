@@ -97,10 +97,10 @@ export function TabelaBudgets(props: TableProps) {
             <Td fontWeight={"semibold"} textAlign={"end"}>
               {brl.format(d.realizado)}
             </Td>
-            <Td fontWeight={"semibold"} textAlign={"center"}>
+            <Td fontWeight={"semibold"} textAlign={"end"}>
               {d.gap}%
             </Td>
-            <Td fontWeight={"semibold"} textAlign={"center"}>
+            <Td fontWeight={"semibold"} textAlign={"end"}>
               {d.descricao}
             </Td>
           </Tr>
