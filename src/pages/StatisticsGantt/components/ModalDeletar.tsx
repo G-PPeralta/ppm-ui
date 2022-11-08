@@ -42,7 +42,6 @@ function ModalDeletar({
         toast.success("Operação removida com sucesso!", {
           id: "toast-principal",
         });
-        console.log(">>>>callbackSetRefresh");
         callbackSetRefresh();
         setLoading(false);
         onClose();
