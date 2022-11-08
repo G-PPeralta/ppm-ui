@@ -6,8 +6,9 @@ import { Button, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 import { RequiredField } from "components/RequiredField/RequiredField";
 
 function DateTimePicker({ registerForm, data, label, value, required }: any) {
+  const [horaMin, setHoraMin] = useState<any>(new Date());
+  const [horaMax, setHoraMax] = useState<any>(new Date());
   const [dataInicio, setDataInicio] = useState<any>("");
-  // const [dataMin, setDataMin] = useState<any>("");
 
   useEffect(() => {
     if (data && !dataInicio) {
@@ -20,6 +21,17 @@ function DateTimePicker({ registerForm, data, label, value, required }: any) {
       // setDataInicio(newDate);
     }
   }, [data]);
+
+  useEffect(() => {
+    const dateMin = new Date();
+    dateMin.setHours(8);
+    dateMin.setMinutes(0);
+    setHoraMin(dateMin);
+    const dateMax = new Date();
+    dateMax.setHours(18);
+    dateMax.setMinutes(0);
+    setHoraMax(dateMax);
+  }, []);
 
   const handleIniciarDate = (date: any) => {
     if (date) {
@@ -58,6 +70,8 @@ function DateTimePicker({ registerForm, data, label, value, required }: any) {
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
         showTimeSelect
+        minTime={horaMin}
+        maxTime={horaMax}
         dateFormat="dd/MM/yyyy, hh:mm"
         customInput={<TriggerDatePickerInicio />}
         // isClearable={dataInicio !== ""}
