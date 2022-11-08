@@ -87,7 +87,7 @@ function ModalAdicionar({
             fontWeight={"700"}
             fontFamily={"Mulish"}
           >
-            Lançar de Despesa
+            Lançar Despesa
           </ModalHeader>
           <ModalCloseButton color={"white"} />
 
