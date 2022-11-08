@@ -101,7 +101,7 @@ function ModalCadastroAtividade() {
                   gap={5}
                 >
                   <Flex flex={1} direction={"column"}>
-                    <Text fontWeight={"bold"}>Nome</Text>
+                    {/* <Text fontWeight={"bold"}>Nome</Text> */}
                     <Flex
                       gap={5}
                       flex={1}
@@ -180,7 +180,7 @@ function ModalCadastroAtividade() {
                   gap={5}
                 >
                   <Flex flex={1} direction={"column"}>
-                    <Text fontWeight={"bold"}>Responsável</Text>
+                    {/* <Text fontWeight={"bold"}>Responsável</Text> */}
                     <Flex
                       gap={5}
                       flex={1}
