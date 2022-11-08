@@ -50,6 +50,7 @@ function ModalValorPrevisto(props: PropsInterface) {
   return (
     <>
       <IconButton
+        ml={3}
         aria-label="Edit Realizado"
         variant={"outline"}
         icon={<MdModeEdit />}
