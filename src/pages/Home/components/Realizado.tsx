@@ -105,7 +105,7 @@ export default function RealizadoComponent() {
             isNaN(Number(orcamento))
               ? 0
               : ((Number(totalRealizado) / Number(orcamento)) * 100).toFixed(2)} */}
-            {!loading && porcentagemRealizado}%
+            {!loading && porcentagemRealizado.toFixed(2).replace(".", ",")}%
           </Text>
         </Box>
       </Box>
