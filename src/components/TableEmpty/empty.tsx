@@ -5,8 +5,8 @@ export default function Empty() {
     <>
       <Tbody scrollBehavior={"smooth"}>
         <Tr>
-          <Td align={"center"} alignContent={"cemter"} colSpan={6}>
-            Nenhum dado pra exibir
+          <Td textAlign="start" fontWeight={"semibold"} colSpan={6}>
+            Não há dados
           </Td>
         </Tr>
       </Tbody>

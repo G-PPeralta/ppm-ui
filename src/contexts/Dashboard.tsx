@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import {
   getOrcamentoTotal,
-  getTotalNaoPrevisto,
+  // getTotalNaoPrevisto,
   getTotalRealizado,
 } from "services/get/Dashboard";
 
@@ -29,7 +29,7 @@ export const DashboardProvider = ({ children }: any) => {
   async function handleRequests() {
     const reqOrcamentoTotal = await getOrcamentoTotal();
     const reqTotalRealizado = await getTotalRealizado();
-    const reqTotalNaoPrevisto = await getTotalNaoPrevisto();
+    // const reqTotalNaoPrevisto = await getTotalNaoPrevisto();
 
     if (reqOrcamentoTotal.data[0].total) {
       const porcentagemRealizado =
@@ -54,7 +54,10 @@ export const DashboardProvider = ({ children }: any) => {
         valorRealizado: reqTotalRealizado.data[0].totalRealizado,
         porcentagemRealizado:
           porcentagemRealizado > 100 ? 100 : porcentagemRealizado,
-        valorNaoPrevisto: reqTotalNaoPrevisto.data[0].totalNaoPrevisto,
+        valorNaoPrevisto:
+          reqOrcamentoTotal.data[0].total -
+          reqTotalRealizado.data[0].totalRealizado,
+        // valorNaoPrevisto: reqTotalNaoPrevisto.data[0].totalNaoPrevisto,
         porcentagemNaoPrevisto:
           porcentagemRealizado > 100 ? porcentagemNaoPrevisto : 0,
       });
