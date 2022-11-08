@@ -18,10 +18,6 @@ import {
   Text,
   Select,
   Textarea,
-
-  // IconButton,
-  // Box,
-  // Text,
 } from "@chakra-ui/react";
 
 type EditarFornecedorModalProps = {
