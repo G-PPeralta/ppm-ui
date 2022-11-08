@@ -65,44 +65,28 @@ export function TabelaBudgets(props: TableProps) {
           )}
           {budget.item}
         </Td>
-        <Td fontWeight={"semibold"} textAlign={"center"}>
+        <Td textAlign={"start"}>
           <Text>{budget.projeto.nome}</Text>
         </Td>
-        <Td fontWeight={"semibold"} textAlign={"center"}>
-          {brl.format(budget.planejado)}
-        </Td>
-        <Td fontWeight={"semibold"} textAlign={"center"}>
-          {brl.format(budget.realizado)}
-        </Td>
-        <Td fontWeight={"semibold"} textAlign={"center"}>
-          {budget.gap}%
-        </Td>
+        <Td textAlign={"end"}>{brl.format(budget.planejado)}</Td>
+        <Td textAlign={"end"}>{brl.format(budget.realizado)}</Td>
+        <Td textAlign={"center"}>{budget.gap}%</Td>
         <Td>{budget.descricao}</Td>
       </Tr>
 
       {budget.filhos &&
         budget.filhos.map((d) => (
           <Tr className={"hide item-" + key} key={d.id}>
-            <Td textAlign={"center"} fontWeight={"semibold"}>
-              {d.item}
-            </Td>
-            <Td textAlign={"end"} fontWeight={"semibold"}>
+            <Td textAlign={"center"}>{d.item}</Td>
+            <Td textAlign={"start"}>
               <Link to={`/budget/detail/${d.id}`}>
                 <Text color="blue">{d.projeto.nome}</Text>
               </Link>
             </Td>
-            <Td fontWeight={"semibold"} textAlign={"end"}>
-              {brl.format(d.planejado)}
-            </Td>
-            <Td fontWeight={"semibold"} textAlign={"end"}>
-              {brl.format(d.realizado)}
-            </Td>
-            <Td fontWeight={"semibold"} textAlign={"end"}>
-              {d.gap}%
-            </Td>
-            <Td fontWeight={"semibold"} textAlign={"end"}>
-              {d.descricao}
-            </Td>
+            <Td textAlign={"end"}>{brl.format(d.planejado)}</Td>
+            <Td textAlign={"end"}>{brl.format(d.realizado)}</Td>
+            <Td textAlign={"center"}>{d.gap}%</Td>
+            <Td>{d.descricao}</Td>
           </Tr>
         ))}
     </>
@@ -115,7 +99,7 @@ export function TabelaBudgets(props: TableProps) {
           <Thead>
             <Tr background="origem.500" color="white">
               <Th
-                textAlign={"center"}
+                textAlign={"start"}
                 style={{
                   color: "white",
                 }}
@@ -124,7 +108,7 @@ export function TabelaBudgets(props: TableProps) {
                 item
               </Th>
               <Th
-                textAlign={"center"}
+                textAlign={"start"}
                 style={{
                   color: "white",
                 }}
@@ -132,7 +116,7 @@ export function TabelaBudgets(props: TableProps) {
                 Projeto
               </Th>
               <Th
-                textAlign={"start"}
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
@@ -140,7 +124,7 @@ export function TabelaBudgets(props: TableProps) {
                 Planejado
               </Th>
               <Th
-                textAlign={"start"}
+                textAlign={"center"}
                 style={{
                   color: "white",
                 }}
