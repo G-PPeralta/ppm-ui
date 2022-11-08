@@ -12,7 +12,7 @@ import {
   Tr,
   IconButton,
   Flex,
-  Text,
+  // Text,
 } from "@chakra-ui/react";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
@@ -117,61 +117,11 @@ export function TabelaFornecedores({
               </Tr>
             ))
         ) : (
-          <>
-            <Tr>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                {""}
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                {""}
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                {""}
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                {""}
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                {""}
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                {""}
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                {""}
-              </Td>
-            </Tr>
-            <Tr>
-              <Td textAlign={"start"}>
-                <Text fontSize="xl" fontWeight={500}>
-                  Não há dados
-                </Text>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                {""}
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                {""}
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                {""}
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                {""}
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                {""}
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                {""}
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                {""}
-              </Td>
-            </Tr>
-          </>
+          <Tr>
+            <Td textAlign={"start"} fontWeight={"semibold"}>
+              Não há dados
+            </Td>
+          </Tr>
         )}
       </>
     );

@@ -92,7 +92,7 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
               <FormControl>
                 <Flex direction={"column"} gap={4}>
                   <Stack>
-                    <Text fontWeight={"bold"}>Nome</Text>
+                    {/* <Text fontWeight={"bold"}>Nome</Text> */}
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: "column",
@@ -120,7 +120,7 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                       })}
                       gap={2}
                     >
-                      <Text fontWeight={"bold"}>Comentários</Text>
+                      {/* <Text fontWeight={"bold"}>Comentários</Text> */}
                       <Flex direction={"column"}>
                         <Flex gap={1}>
                           <Text

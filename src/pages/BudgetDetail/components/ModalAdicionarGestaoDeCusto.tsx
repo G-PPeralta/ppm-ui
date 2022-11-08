@@ -54,6 +54,7 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
   return (
     <>
       <IconButton
+        ml={3.5}
         aria-label="Edit Realizado"
         variant={"outline"}
         icon={<BiPlusCircle size={19} />}

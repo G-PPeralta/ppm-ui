@@ -5,6 +5,7 @@ import { BudgetReal, ClasseServico } from "interfaces/Budgets";
 import { Fornecedor } from "interfaces/Services";
 import { cadastroValorPlanejadoSchema } from "validations/ModalCadastroOrcamento";
 
+import { formatReal } from "utils/formatReal";
 import { parseNumber } from "utils/regexCoinMask";
 
 import { useToast } from "contexts/Toast";
@@ -64,7 +65,9 @@ export function useCadastroOrcamentoRealizado() {
 
         if (status === 200 || status === 201) {
           toast.success(
-            `Valor Gasto ${parseNumber(values.gasto)} cadastrada com sucesso!`,
+            `Valor Gasto ${formatReal(
+              parseNumber(values.gasto)
+            )} cadastrada com sucesso!`,
             {
               id: "toast-principal",
             }
@@ -73,7 +76,9 @@ export function useCadastroOrcamentoRealizado() {
         }
       } catch (error) {
         toast.error(
-          `Erro ao cadastrar valor gasto ${parseNumber(values.gasto)}!`,
+          `Erro ao cadastrar valor gasto ${formatReal(
+            parseNumber(values.gasto)
+          )}!`,
           {
             id: "toast-principal",
           }

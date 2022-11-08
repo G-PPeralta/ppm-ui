@@ -46,7 +46,13 @@ export function ModalFiltrarAtividade({
   const [loading, setLoading] = useState(false);
   const [responsePOST, setResponsePOST] = useState([]);
 
-  // console.log("operacaoId", operacaoId);
+  const isEnable = () =>
+    registerForm.values.pocoId ||
+    registerForm.values.sondaId ||
+    registerForm.values.profundidadeIni ||
+    registerForm.values.profundidadeFim ||
+    registerForm.values.metodoElevacaoId ||
+    (registerForm.values.dataDe && registerForm.values.dataAte);
 
   const getFilter = async () => {
     const payload = {
@@ -87,9 +93,6 @@ export function ModalFiltrarAtividade({
       setMediaHorasFiltradas(0);
     }
   }, [responsePOST]);
-
-  // console.log("registerForm", registerForm.values);
-  // console.log("responsePOST", responsePOST);
 
   return (
     <>
@@ -290,6 +293,7 @@ export function ModalFiltrarAtividade({
                   fontFamily={"Mulish"}
                   variant="primary"
                   color="white"
+                  isDisabled={!isEnable()}
                   onClick={getFilter}
                   _hover={{
                     background: "origem.600",
