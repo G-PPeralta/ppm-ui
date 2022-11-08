@@ -24,12 +24,44 @@ import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 
+import { getGanttData } from "services/get/Gantt";
+
 import DateTimePicker from "./DateTimePicker";
 
 // interface Responsavel {
 //   id: number;
 //   nome: string;
 // }
+
+function getObject(theObject: any, id: any): any {
+  let result = null;
+  if (theObject instanceof Array) {
+    for (let i = 0; i < theObject.length; i++) {
+      result = getObject(theObject[i], id);
+      if (result) {
+        break;
+      }
+    }
+  } else {
+    for (const prop in theObject) {
+      if (prop == "TaskID") {
+        if (theObject[prop] == id) {
+          return theObject;
+        }
+      }
+      if (
+        theObject[prop] instanceof Object ||
+        theObject[prop] instanceof Array
+      ) {
+        result = getObject(theObject[prop], id);
+        if (result) {
+          break;
+        }
+      }
+    }
+  }
+  return result;
+}
 
 function ModalEditarAtividade({
   setRefresh,
@@ -55,24 +87,44 @@ function ModalEditarAtividade({
   // }));
 
   useEffect(() => {
+    asyncGet();
+  }, [editAtividade]);
+
+  // const asyncGet = async () => {
+  //   const reqGanttData = await getGanttData(Number("24"));
+  //   console.log("reqGanttData", reqGanttData.data);
+  //   const item = reqGanttData.data.map((val: any) => {
+  //     if (val.TaskID == editAtividade.id_atividade) {
+  //       return val;
+  //     } else {
+  //       return val.subtasks
+  //         .map((val2: any) => {
+  //           if (val2.TaskID == editAtividade.id_atividade) {
+  //             return val2;
+  //           } else {
+  //             return null;
+  //           }
+  //         })
+  //         .filter((val: any) => val !== null)[0];
+  //     }
+  //   });
+  //   console.log("item", item[0]);
+  //   registerForm.setFieldValue("id_atividade", editAtividade.id_atividade);
+  //   registerForm.setFieldValue("nome_atividade", editAtividade.nome_atividade);
+  //   registerForm.setFieldValue("inicio_realizado", item[0].StartDate);
+  //   registerForm.setFieldValue("fim_realizado", item[0].EndDate);
+  //   registerForm.setFieldValue("pct_real", editAtividade.pct_real);
+  // };
+
+  const asyncGet = async () => {
+    const reqGanttData = await getGanttData(Number("24"));
+    const item = getObject(reqGanttData.data, editAtividade.id_atividade);
     registerForm.setFieldValue("id_atividade", editAtividade.id_atividade);
     registerForm.setFieldValue("nome_atividade", editAtividade.nome_atividade);
-    registerForm.setFieldValue(
-      "inicio_realizado",
-      editAtividade.inicio_realizado
-    );
-    registerForm.setFieldValue("fim_realizado", editAtividade.fim_realizado);
-
-    // registerForm.setFieldValue(
-    //   "inicio_planejado",
-    //   editAtividade.inicio_planejado
-    // );
-
-    // registerForm.setFieldValue("fim_planejado", editAtividade.fim_planejado);
-    // registerForm.setFieldValue("hrs_totais", editOp.hrs_totais);
-    // registerForm.setFieldValue("hrs_reais", editOp.hrs_reais);
+    registerForm.setFieldValue("inicio_realizado", item.StartDate);
+    registerForm.setFieldValue("fim_realizado", item.EndDate);
     registerForm.setFieldValue("pct_real", editAtividade.pct_real);
-  }, [editAtividade]);
+  };
 
   return (
     <>

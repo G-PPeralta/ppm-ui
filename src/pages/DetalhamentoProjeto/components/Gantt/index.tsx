@@ -67,7 +67,6 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
   async function handleSetGanttData() {
     if (id) {
       const reqGanttData = await getGanttData(Number(id));
-
       if (!reqGanttData) return;
       // const _gantt: IGantt = reqGanttData.data;
       // // setGanttData(_gantt);
