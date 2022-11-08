@@ -24,12 +24,14 @@ type ModalDeletarProps = {
   id: number;
   setLoading: Function;
   callbackSetRefresh: Function;
+  handleGetAllData: any;
 };
 
 function ModalDeletar({
   id,
   setLoading,
   callbackSetRefresh,
+  handleGetAllData,
 }: ModalDeletarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { toast } = useToast();
@@ -44,6 +46,7 @@ function ModalDeletar({
         });
         callbackSetRefresh();
         setLoading(false);
+        handleGetAllData();
         onClose();
       }
     } catch (error) {

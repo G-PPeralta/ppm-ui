@@ -27,6 +27,7 @@ type ganttOptionsProps = {
     // handleEdit: Function;
     setEditOp: any;
   };
+  handleGetAllData: any;
 };
 
 export function Gantt({
@@ -34,6 +35,7 @@ export function Gantt({
   options,
   edit,
   callbackSetRefresh,
+  handleGetAllData,
 }: ganttOptionsProps) {
   const [loading, setLoading] = useState(true);
 
@@ -91,6 +93,7 @@ export function Gantt({
           id={props.TaskID}
           setLoading={setLoading}
           callbackSetRefresh={callbackSetRefresh}
+          handleGetAllData={handleGetAllData}
         />
         {/* <FiTrash onClick={() => remove(props)} color="#F94144" size={16} /> */}
       </Flex>

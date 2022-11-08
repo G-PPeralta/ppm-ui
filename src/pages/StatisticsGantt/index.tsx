@@ -178,6 +178,7 @@ function StatisticsGantt() {
                 <Stack spacing="8">
                   <Gantt
                     callbackSetRefresh={() => setRefreshDelete(!refreshDelete)}
+                    handleGetAllData={handleGetAllData}
                     options={{
                       showGantt: true,
                       toolbarOptions,
