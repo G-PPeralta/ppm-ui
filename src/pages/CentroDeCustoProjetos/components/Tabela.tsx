@@ -23,8 +23,8 @@ import { formatDate } from "utils/formatDate";
 
 // import { deleteDespesa } from "services/delete/Financeiro";
 
-import ModalEditar from "./ModalEditar";
 import ModalDeletarCentroDeCusto from "./ModalDeletarCentroDeCusto";
+import ModalEditar from "./ModalEditar";
 
 interface RefreshState {
   refresh: boolean;

@@ -22,11 +22,12 @@ import {
 
 // import { TextError } from "components/TextError";
 
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+
 import { handleCancelar } from "utils/handleCadastro";
 
 // import { useAuth } from "hooks/useAuth";
 import { useDeletarCentroDeCusto } from "hooks/useDeletarCentroDeCusto";
-import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 
 interface RefreshState {
   refresh: boolean;
