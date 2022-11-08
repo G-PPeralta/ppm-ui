@@ -166,7 +166,7 @@ function Tabela({ data, refreshState, idProjeto, optionsSelects, mes }: Props) {
         ) : (
           <Tr>
             <Td colSpan={header.length} textAlign={"start"}>
-              <Text fontSize="xl" fontWeight={500}>
+              <Text textAlign={"start"} fontWeight={"semibold"}>
                 Não há dados
               </Text>
             </Td>
