@@ -84,7 +84,7 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                     gap={5}
                   >
                     <Flex flex={1} direction={"column"}>
-                      <Text fontWeight={"bold"}>Nome</Text>
+                      {/* <Text fontWeight={"bold"}>Nome</Text> */}
                       <Flex gap={5} flex={1}>
                         <Flex direction={"column"} flex={1}>
                           <Flex gap={1}>
