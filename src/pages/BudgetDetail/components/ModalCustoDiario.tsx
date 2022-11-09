@@ -1,8 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import { useEffect, useState } from "react";
-// import { GrAddCircle } from "react-icons/gr";
-import { BsSearch } from "react-icons/bs";
-// import { FiChevronDown } from "react-icons/fi";
+import { BsFillEyeFill, BsSearch } from "react-icons/bs";
 import Moment from "react-moment";
 import "moment/locale/pt-br";
 
@@ -27,6 +25,7 @@ import {
   Tr,
   Td,
   Input,
+  IconButton,
 } from "@chakra-ui/react";
 // import { Ring } from "@uiball/loaders";
 import { BudgetDetail, CustoDiario } from "interfaces/Budgets";
@@ -137,9 +136,25 @@ function ModalCustoDiario(props: {
 
   return (
     <>
-      <Text style={{ cursor: "pointer" }} onClick={onOpen}>
-        {formatReal(filho ? filho.realizado : pai ? pai.realizado : 0)}
-      </Text>
+      <Flex direction={"row"} align={"center"} justify={"center"}>
+        <IconButton
+          icon={<BsFillEyeFill />}
+          onClick={onOpen}
+          variant="outline"
+          aria-label="open menu"
+          color={"white"}
+          backgroundColor={"transparent"}
+          _hover={{
+            backgroundColor: "transparent",
+            color: "white",
+          }}
+          border={"none"}
+          alignSelf={"center"}
+        ></IconButton>
+        <Text color={"white"} textAlign={"end"}>
+          {formatReal(filho ? filho.realizado : pai ? pai.realizado : 0)}
+        </Text>
+      </Flex>
 
       <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
