@@ -43,7 +43,7 @@ export function useEditarOrcamentoRealizado(id: number) {
       formatDateToYMD(new Date(data.dat_lcto))
     );
     registerForm.setFieldValue("fornecedor", data.id_fornecedor);
-    // registerForm.setFieldValue("servico", data.);
+    registerForm.setFieldValue("servico", data.classe_servico);
     registerForm.setFieldValue("pedido", data.num_pedido);
     registerForm.setFieldValue("pedido_obs", data.txt_observacao);
     setLoading(false);
@@ -63,10 +63,14 @@ export function useEditarOrcamentoRealizado(id: number) {
     initialValues,
     validationSchema: cadastroValorPlanejadoSchema,
     onSubmit: async (values) => {
+      const dateb = new Date(values.data);
+      dateb.setHours(11);
+      dateb.setDate(dateb.getDate() + 1);
+      const dateS = dateb.toDateString();
       const newValues: BudgetReal = {
         id,
         valor: parseNumber(values.gasto),
-        data: values.data,
+        data: dateS,
         fornecedor: values.fornecedor,
         classeServico: values.servico,
         pedido: parseInt(values.pedido),
