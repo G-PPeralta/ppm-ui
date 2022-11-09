@@ -154,8 +154,12 @@ export function BudgetDetailTable(props: PropsInterface) {
               <Th color={"white"}>BRT</Th>
               <Th color={"white"}>Serviço/Compra</Th>
               <Th color={"white"}>Fornecedor</Th>
-              <Th color={"white"}>R$ Previsto</Th>
-              <Th color={"white"}>R$ Realizado</Th>
+              <Th color={"white"} textAlign="right">
+                R$ Previsto
+              </Th>
+              <Th color={"white"} textAlign="right">
+                R$ Realizado
+              </Th>
               <Th color={"white"}>% Gap</Th>
             </Tr>
           </Thead>
