@@ -24,6 +24,11 @@ import {
   Select,
   Textarea,
   InputGroup,
+  NumberInput,
+  NumberInputField,
+  // NumberInputStepper,
+  // NumberIncrementStepper,
+  // NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { Projeto } from "interfaces/Budgets";
@@ -239,7 +244,7 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                               PEDIDO
                             </Text>
                           </Flex>
-                          <Input
+                          {/* <Input
                             h={"56px"}
                             placeholder="Pedido"
                             id="pedido"
@@ -247,19 +252,36 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                             maxLength={100}
                             value={registerForm.values.pedido}
                             onChange={registerForm.handleChange}
-                            onKeyPress={(e) => {
-                              // eslint-disable-next-line prefer-regex-literals
-                              const r = new RegExp(/[a-zA-Z0-9]/);
-                              if (!r.test(e.key)) {
-                                e.preventDefault();
-                              }
-                            }}
+                            // onKeyPress={(e) => {
+                            //   // eslint-disable-next-line prefer-regex-literals
+                            //   const r = new RegExp(/[a-zA-Z0-9]/);
+                            //   if (!r.test(e.key)) {
+                            //     e.preventDefault();
+                            //   }
+                            // }}
                             size="md"
                             type="text"
-                          />
-                          {/*  {registerForm.errors.pedido && (
-                            <TextError>{registerForm.errors.pedido}</TextError>
-                        )} */}
+                          /> */}
+                          <NumberInput
+                            h={"56px"}
+                            placeholder="Pedido"
+                            id="pedido"
+                            name="pedido"
+                            max={999999999999}
+                            value={registerForm.values.pedido}
+                            onChange={(value) => {
+                              registerForm.setFieldValue(
+                                "pedido",
+                                Number(value)
+                              );
+                            }}
+                          >
+                            <NumberInputField h={"56px"} />
+                            {/* <NumberInputStepper>
+                              <NumberIncrementStepper />
+                              <NumberDecrementStepper />
+                            </NumberInputStepper> */}
+                          </NumberInput>
                         </FormControl>
                       </Flex>
 
