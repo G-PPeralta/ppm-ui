@@ -43,7 +43,7 @@ import ModalEditarGestaoDeCusto from "./ModalEditarGestaoDeCusto";
 function ModalCustoDiario(props: {
   filho?: BudgetDetail;
   pai?: BudgetDetail;
-  r?: boolean;
+  showButton?: boolean;
   toogleRender: () => void;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -51,7 +51,7 @@ function ModalCustoDiario(props: {
   const [endDate, setEndDate] = useState<Date | string | null>(null);
   // const [loading, setLoading] = useState(true); // Loading
   const [data, setData] = useState<CustoDiario[]>([]);
-  const { filho, pai, toogleRender, r } = props;
+  const { filho, pai, toogleRender, showButton } = props;
 
   const wd = window.innerWidth;
 
@@ -137,7 +137,7 @@ function ModalCustoDiario(props: {
 
   return (
     <>
-      {r === false && (
+      {showButton === false && (
         <IconButton
           icon={<BsFillEyeFill />}
           onClick={onOpen}
@@ -154,7 +154,7 @@ function ModalCustoDiario(props: {
         ></IconButton>
       )}
 
-      {r === true && (
+      {showButton === true && (
         <IconButton
           hidden
           onClick={onOpen}

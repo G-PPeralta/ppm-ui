@@ -91,7 +91,7 @@ export function BudgetDetailTable(props: PropsInterface) {
           <ModalCustoDiario
             pai={detail}
             toogleRender={toogleRender}
-            r={false}
+            showButton={false}
           />
         </Td>
         <Td></Td>
@@ -119,7 +119,7 @@ export function BudgetDetailTable(props: PropsInterface) {
               <ModalCustoDiario
                 filho={filho}
                 toogleRender={toogleRender}
-                r={true}
+                showButton={true}
               />
             </Td>
             <Td align="center">{filho.gap}%</Td>
