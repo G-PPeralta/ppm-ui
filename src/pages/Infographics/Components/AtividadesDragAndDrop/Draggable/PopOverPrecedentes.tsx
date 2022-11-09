@@ -41,14 +41,15 @@ function PopOverPrecedentes({ registerForm, index }: Props) {
         <PopoverTrigger>
           <Button
             h={"56px"}
-            borderRadius={"10px"}
+            borderRadius={"8px"}
             backgroundColor={"white"}
-            fontWeight={"400"}
             _hover={{
               backgroundColor: "origem.500",
               color: "white",
               transition: "all 0.4s",
             }}
+            fontSize={"14px"}
+            fontWeight={"400"}
           >
             Selecionar
           </Button>

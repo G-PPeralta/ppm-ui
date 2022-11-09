@@ -109,6 +109,10 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                         </Flex>
                         <Input
                           h={"56px"}
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"black"}
                           isRequired
                           placeholder="Nome do Tipo de Projeto"
                           id="nom_projeto_tipo"
@@ -157,6 +161,10 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                         <Textarea
                           isRequired
                           placeholder="Adicione comentários sobre o projeto"
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"black"}
                           id="comentarios"
                           name="comentarios"
                           value={regexCaracteresEspeciais(
