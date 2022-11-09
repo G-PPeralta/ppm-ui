@@ -146,6 +146,10 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                           </Flex>
                           <Input
                             h={"56px"}
+                            _placeholder={{ color: "#949494" }}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"black"}
                             placeholder="Selecione a Data"
                             size="md"
                             type="date"
@@ -174,6 +178,10 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                         </Flex>
                         <Select
                           h={"56px"}
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"black"}
                           placeholder="Escolha um Fornecedor"
                           id="fornecedor"
                           name="fornecedor"
@@ -211,6 +219,10 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                             </Text>
                           </Flex>
                           <Select
+                            _placeholder={{ color: "#949494" }}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"black"}
                             h={"56px"}
                             placeholder="Escolha uma Classe"
                             id="servico"
@@ -241,6 +253,10 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                           </Flex>
                           <Input
                             h={"56px"}
+                            _placeholder={{ color: "#949494" }}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"black"}
                             placeholder="Pedido"
                             id="pedido"
                             name="pedido"
@@ -275,6 +291,10 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                           </Text>
                         </Flex>
                         <Textarea
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"black"}
                           placeholder="Ação ou Recomendação"
                           id="pedido-obs"
                           name="pedido_obs"
