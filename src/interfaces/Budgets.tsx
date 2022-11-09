@@ -34,7 +34,7 @@ export interface BudgetReal {
   id?: number;
   atividadeId?: number;
   valor: number;
-  data: string;
+  data: any;
   fornecedor: string;
   classeServico: string;
   pedido: number;
@@ -94,6 +94,7 @@ export interface Realizado {
   id: number;
   id_atividade: number;
   id_fornecedor: number;
+  classe_servico: any;
   dat_lcto: string;
   vlr_realizado: number;
   txt_observacao: string;
