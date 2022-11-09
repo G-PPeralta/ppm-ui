@@ -132,14 +132,14 @@ function Tabela({ data, refreshState, optionsSelects, mes }: Props) {
                   <Text>{linhaTabela.descricaoDoServico}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Flex gap={2} align={"center"} justify={"center"}>
-                    <ModalEditar
-                      refreshState={refreshState}
-                      linhaTabela={linhaTabela}
-                      optionsSelects={optionsSelects}
-                      mes={mes}
-                    />
-                    {/* <IconButton
+                  {/* <Flex gap={2} align={"center"} justify={"center"}> */}
+                  <ModalEditar
+                    refreshState={refreshState}
+                    linhaTabela={linhaTabela}
+                    optionsSelects={optionsSelects}
+                    mes={mes}
+                  />
+                  {/* <IconButton
                       aria-label="Botão de Editar"
                       icon={<FiTrash />}
                       borderRadius={"10px"}
@@ -152,11 +152,11 @@ function Tabela({ data, refreshState, optionsSelects, mes }: Props) {
                       }}
                       onClick={() => handleDeletar(linhaTabela.idCusto)}
                     /> */}
-                    <ModalDeletarCentroDeCusto
-                      idCusto={linhaTabela.idCusto}
-                      refreshState={refreshState}
-                    />
-                  </Flex>
+                  <ModalDeletarCentroDeCusto
+                    idCusto={linhaTabela.idCusto}
+                    refreshState={refreshState}
+                  />
+                  {/* </Flex> */}
                 </Td>
               </Tr>
             );

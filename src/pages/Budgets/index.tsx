@@ -46,13 +46,15 @@ export function Budgets() {
                 <Flex align={"end"} gap={4} wrap={"wrap"} flex={1}>
                   <Flex direction={"column"} w={"208px"} ml={-3}>
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
                       PROJETO
                     </Text>
                     <Select
+                      fontSize={"14px"}
+                      fontWeight={"400"}
                       placeholder="Todos"
                       onChange={handleProjectChange}
                       height={"56px"}

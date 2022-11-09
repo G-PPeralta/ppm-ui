@@ -84,7 +84,7 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                     gap={5}
                   >
                     <Flex flex={1} direction={"column"}>
-                      <Text fontWeight={"bold"}>Nome</Text>
+                      {/* <Text fontWeight={"bold"}>Nome</Text> */}
                       <Flex gap={5} flex={1}>
                         <Flex direction={"column"} flex={1}>
                           <Flex gap={1}>
@@ -99,6 +99,10 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                           </Flex>
                           <Input
                             h={"56px"}
+                            _placeholder={{ color: "#949494" }}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"black"}
                             isRequired
                             placeholder="Digite o ID"
                             id="id_origem"
@@ -128,6 +132,10 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                           </Flex>
                           <Input
                             h={"56px"}
+                            _placeholder={{ color: "#949494" }}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"black"}
                             isRequired
                             placeholder="Digite o nome da operação"
                             id="nom_operacao"

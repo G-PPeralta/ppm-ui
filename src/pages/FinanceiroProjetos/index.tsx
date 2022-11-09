@@ -116,7 +116,7 @@ export function FinanceiroProjetos() {
                     fontFamily={"Mulish"}
                     fontWeight={"400"}
                     _placeholder={{ color: "#949494" }}
-                    placeholder="Projeto ou elemento PEP"
+                    placeholder="Projeto ou Elemento PEP"
                     type="text"
                     name="pesquisar"
                     onChange={(event) => handleSearch(event)}
