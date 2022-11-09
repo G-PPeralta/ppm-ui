@@ -132,6 +132,10 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                           </Text>
                         </Flex>
                         <Textarea
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"black"}
                           isRequired
                           placeholder="Adicione comentários sobre a campanha"
                           id="dsc_comentario"
