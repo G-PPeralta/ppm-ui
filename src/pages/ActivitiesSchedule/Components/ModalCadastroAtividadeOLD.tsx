@@ -255,7 +255,7 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red"
+                  color="red.500"
                   onClick={() =>
                     handleCancelarDatePicker(
                       registerForm,
@@ -265,7 +265,7 @@ function ModalCadastroAtividade({ id, setRefresh, refresh }: any) {
                     )
                   }
                   _hover={{
-                    background: "red.500",
+                    background: "red.600",
                     transition: "all 0.4s",
                     color: "white",
                   }}
