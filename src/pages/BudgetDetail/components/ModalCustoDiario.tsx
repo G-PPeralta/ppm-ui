@@ -151,7 +151,7 @@ function ModalCustoDiario(props: {
           border={"none"}
           alignSelf={"center"}
         ></IconButton>
-        <Text color={"white"} textAlign={"end"}>
+        <Text textAlign={"end"}>
           {formatReal(filho ? filho.realizado : pai ? pai.realizado : 0)}
         </Text>
       </Flex>
