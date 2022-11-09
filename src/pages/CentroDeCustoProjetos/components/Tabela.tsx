@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { FiTrash } from "react-icons/fi";
+// import { FiTrash } from "react-icons/fi";
 
 import {
   Flex,
-  IconButton,
+  // IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -19,10 +19,11 @@ import PaginacaoTabela from "components/PaginacaoTabela";
 
 import { formatDate } from "utils/formatDate";
 
-import { useAuth } from "hooks/useAuth";
+// import { useAuth } from "hooks/useAuth";
 
-import { deleteDespesa } from "services/delete/Financeiro";
+// import { deleteDespesa } from "services/delete/Financeiro";
 
+import ModalDeletarCentroDeCusto from "./ModalDeletarCentroDeCusto";
 import ModalEditar from "./ModalEditar";
 
 interface RefreshState {
@@ -37,9 +38,7 @@ interface Props {
   mes: number;
 }
 
-function Tabela({ data, refreshState, idProjeto, optionsSelects, mes }: Props) {
-  const { user } = useAuth();
-  const { refresh, setRefresh } = refreshState;
+function Tabela({ data, refreshState, optionsSelects, mes }: Props) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
 
@@ -48,11 +47,6 @@ function Tabela({ data, refreshState, idProjeto, optionsSelects, mes }: Props) {
     to,
     setFrom,
     setTo,
-  };
-
-  const handleDeletar = (idCusto: number) => {
-    deleteDespesa(idCusto, user?.nome);
-    setRefresh(!refresh);
   };
 
   const formatarParaReal = (valor: number) => {
@@ -145,7 +139,7 @@ function Tabela({ data, refreshState, idProjeto, optionsSelects, mes }: Props) {
                       optionsSelects={optionsSelects}
                       mes={mes}
                     />
-                    <IconButton
+                    {/* <IconButton
                       aria-label="Botão de Editar"
                       icon={<FiTrash />}
                       borderRadius={"10px"}
@@ -157,6 +151,10 @@ function Tabela({ data, refreshState, idProjeto, optionsSelects, mes }: Props) {
                         color: "white",
                       }}
                       onClick={() => handleDeletar(linhaTabela.idCusto)}
+                    /> */}
+                    <ModalDeletarCentroDeCusto
+                      idCusto={linhaTabela.idCusto}
+                      refreshState={refreshState}
                     />
                   </Flex>
                 </Td>

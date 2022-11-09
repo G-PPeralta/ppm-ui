@@ -48,12 +48,15 @@ export function CentroDeCustoProjetos() {
         Number(id),
         String(mes)
       );
-      const centroDeCustoFormatado = tabelaCentroDeCusto.data.centroDeCusto.map(
-        (item: TabelaCentroDeCusto) => ({
-          ...item,
-          valor: Number(item.valor),
-        })
-      );
+      const centroDeCustoFormatado =
+        tabelaCentroDeCusto &&
+        tabelaCentroDeCusto.data &&
+        tabelaCentroDeCusto.data.centroDeCusto.map(
+          (item: TabelaCentroDeCusto) => ({
+            ...item,
+            valor: Number(item.valor),
+          })
+        );
       const data = {
         ...tabelaCentroDeCusto.data,
         centroDeCusto: centroDeCustoFormatado,
