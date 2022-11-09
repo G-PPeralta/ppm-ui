@@ -88,7 +88,7 @@ export function useAdicionarOperacao(
             id: "toast-principal",
           });
           setLoading(false);
-          setRefresh(!refresh);
+          // setRefresh(!refresh);
         }
       } catch (error) {
         toast.error("Erro ao adicionar operação!", {
