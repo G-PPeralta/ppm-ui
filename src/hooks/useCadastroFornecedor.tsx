@@ -71,13 +71,13 @@ export function useCadastroFornecedor() {
         const { status } = await postCadastroFornecedor(newValues);
 
         if (status === 200 || status === 201) {
-          toast.success("Intervenção cadastrada com sucesso!", {
+          toast.success("Fornecedor cadastrado com sucesso!", {
             id: "toast-principal",
           });
           setLoading(false);
         }
       } catch (error) {
-        toast.error("Erro ao cadastrar intervenção!", {
+        toast.error("Erro ao cadastrar fornecedor!", {
           id: "toast-principal",
         });
         setLoading(false);
