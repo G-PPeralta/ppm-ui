@@ -32,6 +32,7 @@ function StatisticsGantt() {
   const { sonda, poco } = useParams();
   const navigate = useNavigate();
   const [refresh, setRefresh] = useState(false);
+  const [refreshDelete, setRefreshDelete] = useState(false);
   const [editOp, setEditOp] = useState({});
   const [projeto, setProjeto] = useState({
     sonda: "",
@@ -107,13 +108,7 @@ function StatisticsGantt() {
 
   useEffect(() => {
     handleGetAllData();
-  }, [refresh]);
-
-  useEffect(() => {
-    handleGetAllData();
-  }, []);
-
-  // console.log("isOpen", isOpen);
+  }, [refresh, refreshDelete]);
 
   return (
     <>
@@ -182,8 +177,8 @@ function StatisticsGantt() {
                 </Stack>
                 <Stack spacing="8">
                   <Gantt
-                    refresh={refresh}
-                    setRefresh={setRefresh}
+                    callbackSetRefresh={() => setRefreshDelete(!refreshDelete)}
+                    handleGetAllData={handleGetAllData}
                     options={{
                       showGantt: true,
                       toolbarOptions,

@@ -29,10 +29,10 @@ import { useRequests } from "hooks/useRequests";
 import { postFiltroCronograma } from "services/post/FiltroCronograma";
 
 export function ModalFiltrarAtividade({
-  refresh,
-  setRefresh,
-  setDuracao,
-  setOperacao,
+  // refresh,
+  // setRefresh,
+  // setDuracao,
+  // setOperacao,
   operacaoId,
   setMediaHorasFiltradas,
 }: any) {
@@ -78,8 +78,10 @@ export function ModalFiltrarAtividade({
     // setDuracao(23, 30);
     // registerFormAct.values.atividades[index].duracao += 3;
     if (result && result.length > 0) {
-      setOperacao(result[0].operacao_id);
-      setDuracao(result[0].hrs_media);
+      // TODO: setMediaHorasFiltradas
+      // setOperacao(result[0].operacao_id);
+      // setDuracao(result[0].hrs_media);
+      // console.log(">>>>>>> res:: ", result);
     }
   };
 
