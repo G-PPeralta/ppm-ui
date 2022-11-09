@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MdFilterAlt } from "react-icons/md";
 
 import {
@@ -26,7 +26,7 @@ import SelectFiltragem from "components/SelectFiltragem";
 import { useFiltragemCronogramaAtividade } from "hooks/useFiltragemCronogramaAtividade";
 import { useRequests } from "hooks/useRequests";
 
-import { postFiltroCronograma } from "services/post/FiltroCronograma";
+import { postFiltroDuracaoMedia } from "services/post/FiltroCronograma";
 
 export function ModalFiltrarAtividade({
   // refresh,
@@ -44,15 +44,15 @@ export function ModalFiltrarAtividade({
     optionsMetodosElevacao,
   } = useRequests();
   const [loading, setLoading] = useState(false);
-  const [responsePOST, setResponsePOST] = useState([]);
+  // const [responsePOST, setResponsePOST] = useState([]);
 
-  const isEnable = () =>
-    registerForm.values.pocoId ||
-    registerForm.values.sondaId ||
-    registerForm.values.profundidadeIni ||
-    registerForm.values.profundidadeFim ||
-    registerForm.values.metodoElevacaoId ||
-    (registerForm.values.dataDe && registerForm.values.dataAte);
+  // const isEnable = () =>
+  //   registerForm.values.pocoId ||
+  //   registerForm.values.sondaId ||
+  //   registerForm.values.profundidadeIni ||
+  //   registerForm.values.profundidadeFim ||
+  //   registerForm.values.metodoElevacaoId ||
+  //   (registerForm.values.dataDe && registerForm.values.dataAte);
 
   const getFilter = async () => {
     const payload = {
@@ -70,31 +70,30 @@ export function ModalFiltrarAtividade({
       dataAte: registerForm.values.dataAte,
     };
     setLoading(true);
-    const result = await postFiltroCronograma(payload);
-    setResponsePOST(result);
-    onClose();
+    const result = await postFiltroDuracaoMedia(payload);
+    // setResponsePOST(result);
 
+    onClose();
     setLoading(false);
     // setDuracao(23, 30);
     // registerFormAct.values.atividades[index].duracao += 3;
-    if (result && result.length > 0) {
-      // TODO: setMediaHorasFiltradas
+    if (result) {
       // setOperacao(result[0].operacao_id);
       // setDuracao(result[0].hrs_media);
-      // console.log(">>>>>>> res:: ", result);
+      setMediaHorasFiltradas(Number(result));
     }
   };
 
-  useEffect(() => {
-    const getOperacaoPorOperacaoId: any = responsePOST.find(
-      (operacao: any) => operacao.id_operacao === operacaoId
-    );
-    if (getOperacaoPorOperacaoId) {
-      setMediaHorasFiltradas(getOperacaoPorOperacaoId.hrs_media);
-    } else {
-      setMediaHorasFiltradas(0);
-    }
-  }, [responsePOST]);
+  // useEffect(() => {
+  //   const getOperacaoPorOperacaoId: any = responsePOST.find(
+  //     (operacao: any) => operacao.id_operacao === operacaoId
+  //   );
+  //   if (getOperacaoPorOperacaoId) {
+  //     setMediaHorasFiltradas(getOperacaoPorOperacaoId.hrs_media);
+  //   } else {
+  //     setMediaHorasFiltradas(0);
+  //   }
+  // }, [responsePOST]);
 
   return (
     <>
@@ -295,7 +294,7 @@ export function ModalFiltrarAtividade({
                   fontFamily={"Mulish"}
                   variant="primary"
                   color="white"
-                  isDisabled={!isEnable()}
+                  // isDisabled={!isEnable()}
                   onClick={getFilter}
                   _hover={{
                     background: "origem.600",
