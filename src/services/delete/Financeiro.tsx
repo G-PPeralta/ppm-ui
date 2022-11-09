@@ -11,3 +11,11 @@ export async function deleteDespesa(
 
   return { data, status };
 }
+export async function deleteCustoReal(
+  id: number
+): Promise<{ data: any; status: number }> {
+  const uri = `/budgets/orcamento-real/${id}`;
+  const { data, status } = await api.delete(uri, token());
+
+  return { data, status };
+}

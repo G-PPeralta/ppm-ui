@@ -32,8 +32,8 @@ export function useCadastroFornecedor() {
   const initialValues: any = {
     nom_usu_create: user?.nome,
     poloId: 0,
-    servicoId: 0,
     statusId: 0,
+    servico_txt: "",
     nomeFornecedor: "",
     numeroContrato: "",
     representante: "",
@@ -52,7 +52,7 @@ export function useCadastroFornecedor() {
       const newValues: any = {
         nom_usu_create: user?.nome,
         poloId: values.poloId,
-        servicoId: values.servicoId,
+        servico_txt: values.servico_txt,
         statusId: values.statusId,
         nomeFornecedor: values.nomeFornecedor,
         numeroContrato: values.numeroContrato,
@@ -71,13 +71,13 @@ export function useCadastroFornecedor() {
         const { status } = await postCadastroFornecedor(newValues);
 
         if (status === 200 || status === 201) {
-          toast.success("Intervenção cadastrada com sucesso!", {
+          toast.success("Fornecedor cadastrado com sucesso!", {
             id: "toast-principal",
           });
           setLoading(false);
         }
       } catch (error) {
-        toast.error("Erro ao cadastrar intervenção!", {
+        toast.error("Erro ao cadastrar fornecedor!", {
           id: "toast-principal",
         });
         setLoading(false);

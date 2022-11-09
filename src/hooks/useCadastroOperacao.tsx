@@ -58,17 +58,6 @@ export function useCadastroOperacao() {
     nom_usu_create: user?.nome,
     id_origem: "",
     nom_operacao: "",
-    responsavel_id: 0,
-    area_id: 0,
-    // nao_iniciar_antes_de: {
-    //   data: "",
-    //   checked: false,
-    // },
-    // nao_terminar_depois_de: {
-    //   data: "",
-    //   checked: false,
-    // },
-    // o_mais_breve_possivel: false,
   };
 
   const registerForm: any = useFormik({
@@ -79,11 +68,8 @@ export function useCadastroOperacao() {
         nom_usu_create: user?.nome,
         id_origem: values.id_origem,
         nom_operacao: values.nom_operacao,
-        responsavel_id: values.responsavel_id,
-        area_id: values.area_id,
-        // nao_iniciar_antes_de: values.nao_iniciar_antes_de,
-        // nao_terminar_depois_de: values.nao_terminar_depois_de,
-        // o_mais_breve_possivel: values.o_mais_breve_possivel,
+        responsavel_id: null,
+        area_id: null,
       };
 
       setLoading(true);
@@ -96,6 +82,7 @@ export function useCadastroOperacao() {
             id: "toast-principal",
           });
           setLoading(false);
+          setInterval(() => window.location.reload(), 1000);
         }
       } catch (error) {
         toast.error("Erro ao cadastrar operação!", {

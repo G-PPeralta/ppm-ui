@@ -12,6 +12,7 @@ import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
 import { FinanceiroProjetos } from "pages/FinanceiroProjetos";
 import { GráficosEstatisticos } from "pages/GraficosEstatisticos";
 import { Home } from "pages/Home";
+import { Import } from "pages/Import";
 import { Infographics } from "pages/Infographics";
 import { LicoesAprendidasProjetos } from "pages/LicoesAprendidas";
 import { Fornecedores } from "pages/ListaDosFornecedores";
@@ -21,6 +22,7 @@ import { NotFound } from "pages/NotFound";
 import { Permissions } from "pages/Permissions";
 import { PermissionsList } from "pages/PermissionsList";
 import { Priorizacao } from "pages/Priorizacao";
+import { PriorizacaoDiretores } from "pages/PriorizacaoDiretores";
 import { Profile } from "pages/Profile";
 import { Projects } from "pages/Projects";
 import { Reports } from "pages/Reports";
@@ -28,7 +30,8 @@ import { Settings } from "pages/Settings";
 import { ShareRegister } from "pages/ShareRegister";
 import { Statistics } from "pages/Statistics";
 import { StatisticsGantt } from "pages/StatisticsGantt";
-import { UploadSheet } from "pages/UploadSheet";
+// import { UploadSheet } from "pages/UploadSheet";
+import { Usuarios } from "pages/Usuarios";
 import VisaoPorArea from "pages/VisaoPorArea";
 
 export function PrivateRoutes() {
@@ -36,6 +39,7 @@ export function PrivateRoutes() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/graficos" element={<GráficosEstatisticos />} />
+      <Route path="/usuarios" element={<Usuarios />} />
       <Route path="/projetos/cadastro" element={<CadastrarProjeto />} />
       <Route path="/cadastrar-fornecedor" element={<CadastrarFornecedor />} />
       <Route
@@ -49,7 +53,7 @@ export function PrivateRoutes() {
       <Route path="permissions/:id" element={<Permissions />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/upload" element={<UploadSheet />} />
+      <Route path="/upload" element={<Import />} />
       <Route path="/projects" element={<Projects />} />
       <Route path="/budgets" element={<Budgets />} />
       <Route path="/budget/detail/:id" element={<BudgetDetail />} />
@@ -78,10 +82,15 @@ export function PrivateRoutes() {
       />
       <Route path="/financeiro-projetos" element={<FinanceiroProjetos />} />
       <Route
+        path="/financeiro-projetos/centro-custo/:id/:mes"
+        element={<CentroDeCustoProjetos />}
+      />
+      <Route
         path="/financeiro-projetos/centro-custo/:id"
         element={<CentroDeCustoProjetos />}
       />
       <Route path="/priorizacao" element={<Priorizacao />} />
+      <Route path="/priorizacao-diretores" element={<PriorizacaoDiretores />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

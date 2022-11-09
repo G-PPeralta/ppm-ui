@@ -1,7 +1,8 @@
 import { FaWarehouse } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
+import { IoIosArrowBack } from "react-icons/io";
 
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Link, Text } from "@chakra-ui/react";
 import { ICardInfoProjeto } from "interfaces/DetalhamentoProjetos";
 import { ProjetoProgresso } from "interfaces/Services";
 
@@ -32,7 +33,7 @@ function CardInfoProjeto({
   ];
   const innerWidth = window.innerWidth;
 
-  function formatDate(date: Date) {
+  function formatDate(date: any) {
     const formated = date.toString().substring(0, 10).split("-");
     return `${formated[2]}/${formated[1]}/${formated[0]}`;
   }
@@ -54,6 +55,9 @@ function CardInfoProjeto({
           alignItems={"center"}
           // justifyContent={"center"}
         >
+          <Link href="javascript:history.back()" pr={"14px"} pl={0}>
+            <IoIosArrowBack size={"25px"} />
+          </Link>
           {!loading && <PercentagePieChartProjetoInfo data={chartsProps} />}
           <Heading as="h4" size="md" ml={4}>
             {infoProjeto.nome_projeto}
@@ -69,7 +73,7 @@ function CardInfoProjeto({
               <Box display={"flex"}>
                 <Text fontWeight={"600"}>Nº:</Text>
                 <Text ml={2} color={"origem.500"} fontWeight={"600"}>
-                  {infoProjeto.numero}
+                  {infoProjeto.id}
                 </Text>
               </Box>
             </Flex>
@@ -139,7 +143,7 @@ function CardInfoProjeto({
                 fontWeight={"600"}
                 fontSize={14}
               >
-                {infoProjeto.demanda}
+                {infoProjeto.solicitante}
               </Text>
             </Flex>
           </Box>
@@ -161,7 +165,7 @@ function CardInfoProjeto({
                 fontSize={14}
               >
                 {infoProjeto.data_inicio === null
-                  ? "01/01/1900"
+                  ? "---"
                   : formatDate(infoProjeto.data_inicio)}
               </Text>
             </Flex>
@@ -177,7 +181,7 @@ function CardInfoProjeto({
                 fontSize={14}
               >
                 {infoProjeto.data_fim === null
-                  ? "31/12/1900"
+                  ? "---"
                   : formatDate(infoProjeto.data_fim)}
               </Text>
             </Flex>
@@ -192,7 +196,7 @@ function CardInfoProjeto({
                 fontWeight={"600"}
                 fontSize={14}
               >
-                5 dias
+                {infoProjeto.atraso} dias
               </Text>
             </Flex>
 
@@ -206,7 +210,9 @@ function CardInfoProjeto({
                 fontWeight={"600"}
                 fontSize={14}
               >
-                12/08/2022
+                {infoProjeto.dat_usu_update
+                  ? formatDate(infoProjeto.dat_usu_update)
+                  : null}
               </Text>
             </Flex>
           </Box>

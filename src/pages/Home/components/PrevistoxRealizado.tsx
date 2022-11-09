@@ -27,11 +27,19 @@ function useWindowSize() {
 }
 
 function useGetData() {
-  const [previstoRealizado, setPrevistoRealizado] = useState([]);
+  const [previstoRealizado, setPrevistoRealizado] = useState<any[]>([]);
 
   const loadData = async () => {
     const { data } = await getProjetosPrevistoRealizado();
-    setPrevistoRealizado(data);
+    const renderPayload: any[] = [];
+    data.map((val: any) =>
+      renderPayload.push({
+        ...val,
+        Realizado: val.capexRealizado,
+        Previsto: val.capexPrevisto,
+      })
+    );
+    setPrevistoRealizado(renderPayload);
   };
 
   useEffect(() => {
@@ -88,10 +96,8 @@ export default function PrevistoxRealizadoComponent() {
   ];
 
   const dataEntries = [
-    { name: "capexPrevisto", color: "#93E01B" },
-    { name: "capexRealizado", color: "#2E69FD" },
-    { name: "cronogramaPrevisto", color: "#93E01B" },
-    { name: "cronogramaRealizado", color: "#2E69FD" },
+    { name: "Realizado", color: "#2E69FD" },
+    { name: "Previsto", color: "#93E01B" },
   ];
 
   return (
@@ -186,7 +192,7 @@ export default function PrevistoxRealizadoComponent() {
                     sx={{ fontSize: 14, fontWeight: "400" }}
                     color="#ffffff"
                   >
-                    {graphPrevisto}%
+                    {(graphPrevisto * 100).toFixed(0)}%
                   </Text>
                 </Box>
                 <Box bg={"#2E69FD"} py={1} px={2}>
@@ -195,7 +201,7 @@ export default function PrevistoxRealizadoComponent() {
                     sx={{ fontSize: 14, fontWeight: "400" }}
                     color="#ffffff"
                   >
-                    {graphRealizado}%
+                    {(graphRealizado * 100).toFixed(0)}%
                   </Text>
                 </Box>
               </Box>

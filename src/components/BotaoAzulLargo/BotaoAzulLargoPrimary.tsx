@@ -27,17 +27,21 @@ function BotaoAzulLargoPrimary({
 }: Props) {
   return (
     <Button
+      w={"208px"}
       h={"56px"}
-      borderRadius={"10px"}
+      borderRadius={"8px"}
       disabled={!formikForm.isValid || !formikForm.dirty}
-      background={"origem.300"}
+      background={"origem.500"}
+      fontSize={"18px"}
+      fontWeight={"700"}
+      fontFamily={"Mulish"}
       variant="primary"
       color="white"
       onClick={() =>
         handleCadastrarRefresh(formikForm, onClose, setRefresh, refresh)
       }
       _hover={{
-        background: "origem.500",
+        background: "origem.600",
         transition: "all 0.4s",
       }}
       leftIcon={leftIcon || null}
@@ -47,7 +51,12 @@ function BotaoAzulLargoPrimary({
         <Ring speed={2} lineWeight={5} color="white" size={24} />
       ) : (
         <>
-          <Text fontSize="16px" fontWeight={"bold"} mx={12}>
+          <Text
+            fontSize="18px"
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
+            mx={12}
+          >
             {text}
           </Text>
         </>

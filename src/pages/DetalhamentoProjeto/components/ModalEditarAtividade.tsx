@@ -10,26 +10,58 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  NumberInput,
-  NumberInputField,
+  // NumberInput,
+  // NumberInputField,
   useBreakpointValue,
+  FormLabel,
+  FormControl,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 
 // import Restricoes from "pages/Infographics/Components/Restricoes";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
-// import SelectFiltragem from "components/SelectFiltragem";
+import InputNumericoGenerico from "components/InputNumericoGenerico";
 
-// import PopOverRelacao from "./PopOverRelacao";
+import { getGanttData } from "services/get/Gantt";
 
-// import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
 import DateTimePicker from "./DateTimePicker";
 
 // interface Responsavel {
 //   id: number;
 //   nome: string;
 // }
+
+function getObject(theObject: any, id: any): any {
+  let result = null;
+  if (theObject instanceof Array) {
+    for (let i = 0; i < theObject.length; i++) {
+      result = getObject(theObject[i], id);
+      if (result) {
+        break;
+      }
+    }
+  } else {
+    for (const prop in theObject) {
+      if (prop == "TaskID") {
+        if (theObject[prop] == id) {
+          return theObject;
+        }
+      }
+      if (
+        theObject[prop] instanceof Object ||
+        theObject[prop] instanceof Array
+      ) {
+        result = getObject(theObject[prop], id);
+        if (result) {
+          break;
+        }
+      }
+    }
+  }
+  return result;
+}
 
 function ModalEditarAtividade({
   setRefresh,
@@ -55,24 +87,44 @@ function ModalEditarAtividade({
   // }));
 
   useEffect(() => {
+    asyncGet();
+  }, [editAtividade]);
+
+  // const asyncGet = async () => {
+  //   const reqGanttData = await getGanttData(Number("24"));
+  //   console.log("reqGanttData", reqGanttData.data);
+  //   const item = reqGanttData.data.map((val: any) => {
+  //     if (val.TaskID == editAtividade.id_atividade) {
+  //       return val;
+  //     } else {
+  //       return val.subtasks
+  //         .map((val2: any) => {
+  //           if (val2.TaskID == editAtividade.id_atividade) {
+  //             return val2;
+  //           } else {
+  //             return null;
+  //           }
+  //         })
+  //         .filter((val: any) => val !== null)[0];
+  //     }
+  //   });
+  //   console.log("item", item[0]);
+  //   registerForm.setFieldValue("id_atividade", editAtividade.id_atividade);
+  //   registerForm.setFieldValue("nome_atividade", editAtividade.nome_atividade);
+  //   registerForm.setFieldValue("inicio_realizado", item[0].StartDate);
+  //   registerForm.setFieldValue("fim_realizado", item[0].EndDate);
+  //   registerForm.setFieldValue("pct_real", editAtividade.pct_real);
+  // };
+
+  const asyncGet = async () => {
+    const reqGanttData = await getGanttData(Number("24"));
+    const item = getObject(reqGanttData.data, editAtividade.id_atividade);
     registerForm.setFieldValue("id_atividade", editAtividade.id_atividade);
     registerForm.setFieldValue("nome_atividade", editAtividade.nome_atividade);
-    registerForm.setFieldValue(
-      "inicio_realizado",
-      editAtividade.inicio_realizado
-    );
-    registerForm.setFieldValue("fim_realizado", editAtividade.fim_realizado);
-
-    // registerForm.setFieldValue(
-    //   "inicio_planejado",
-    //   editAtividade.inicio_planejado
-    // );
-
-    // registerForm.setFieldValue("fim_planejado", editAtividade.fim_planejado);
-    // registerForm.setFieldValue("hrs_totais", editOp.hrs_totais);
-    // registerForm.setFieldValue("hrs_reais", editOp.hrs_reais);
+    registerForm.setFieldValue("inicio_realizado", item.StartDate);
+    registerForm.setFieldValue("fim_realizado", item.EndDate);
     registerForm.setFieldValue("pct_real", editAtividade.pct_real);
-  }, [editAtividade]);
+  };
 
   return (
     <>
@@ -90,7 +142,7 @@ function ModalEditarAtividade({
       >
         Editar Operação
       </Button> */}
-      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -99,7 +151,9 @@ function ModalEditarAtividade({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            // h={"48px"}
           >
             Editar Atividade
           </ModalHeader>
@@ -115,18 +169,40 @@ function ModalEditarAtividade({
                   base: "column",
                   md: "column",
                 })}
-                gap={5}
+                gap={3}
               >
                 <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Nome</Text>
-                  <Flex gap={5} flex={1}>
+                  {/* <Text fontWeight={"bold"}>Nome</Text> */}
+                  <Flex flex={1}>
                     <Flex direction={"column"} flex={2}>
-                      <Input
-                        isDisabled
-                        value={registerForm.values.nome_atividade || ""}
-                        type="text"
-                        name="nome_atividade"
-                      />
+                      <FormControl>
+                        <FormLabel htmlFor="nome_atividade">
+                          <Text
+                            color="#949494"
+                            fontSize="12px"
+                            fontWeight="700"
+                            mt={"6px"}
+                          >
+                            NOME
+                          </Text>
+                        </FormLabel>
+                        <Input
+                          borderRadius={"8px"}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          fontFamily={"Mulish"}
+                          border={"1px solid #949494"}
+                          mt={"-9px"}
+                          width={"328px"}
+                          color={"black"}
+                          height={"56px"}
+                          isDisabled
+                          value={registerForm.values.nome_atividade || ""}
+                          type="text"
+                          name="nome_atividade"
+                          id="nome_atividade"
+                        />
+                      </FormControl>
                     </Flex>
                   </Flex>
                 </Flex>
@@ -152,8 +228,8 @@ function ModalEditarAtividade({
                   </Flex>
                 </Flex> */}
 
-                <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Datas</Text>
+                <Flex flex={1} direction={"column"} mt={-3} mb={-3}>
+                  {/* <Text fontWeight={"bold"}>Datas</Text> */}
                   {/* <Flex>
                     <Flex flex={1}>
                       <DateTimePicker
@@ -177,7 +253,7 @@ function ModalEditarAtividade({
                 </Flex>
                 <Flex flex={1} direction={"column"}>
                   <Flex>
-                    <Flex flex={1}>
+                    <Flex flex={1} mt={4} mb={2}>
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"inicio_realizado"}
@@ -186,7 +262,7 @@ function ModalEditarAtividade({
                         data={registerForm.values.inicio_realizado}
                       />
                     </Flex>
-                    <Flex flex={1}>
+                    <Flex flex={1} mt={4} mb={2}>
                       <DateTimePicker
                         registerForm={registerForm}
                         value={"fim_realizado"}
@@ -198,9 +274,9 @@ function ModalEditarAtividade({
                   </Flex>
                 </Flex>
                 <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Progresso</Text>
-                  <Flex gap={5}>
-                    <Flex>
+                  {/* <Text fontWeight={"bold"}>Progresso</Text> */}
+                  <Flex mt={-1} w={"76%"}>
+                    {/* <Flex>
                       <NumberInput
                         max={100}
                         min={0}
@@ -213,7 +289,14 @@ function ModalEditarAtividade({
                       >
                         <NumberInputField bg={"#fff"} h={"56px"} />
                       </NumberInput>
-                    </Flex>
+                    </Flex> */}
+                    <InputNumericoGenerico
+                      registerForm={registerForm}
+                      propName={"pct_real"}
+                      nomeInput={"PORCENTAGEM CONCLUÍDA"}
+                      tipo={"porcentagem"}
+                      stepper={true}
+                    />
                   </Flex>
                 </Flex>
                 {/* <Flex
@@ -234,6 +317,8 @@ function ModalEditarAtividade({
               </Flex>
             </ModalBody>
 
+            <ModalCloseButton color={"white"} />
+
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
                 <BotaoVermelhoGhost
@@ -242,7 +327,7 @@ function ModalEditarAtividade({
                   formikForm={registerForm}
                 />
                 <BotaoAzulPrimary
-                  text="Concluir Cadastro"
+                  text="Cadastrar"
                   onClose={onClose}
                   formikForm={registerForm}
                   refresh={refresh}

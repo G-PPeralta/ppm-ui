@@ -16,11 +16,19 @@ import { BudgetDetail } from "interfaces/Budgets";
 
 import Empty from "components/TableEmpty/empty";
 
-import CampoEditavel from "./CampoEditavel";
-import ModalGestaoDeCusto from "./ModalGestaoDeCusto";
+import { formatReal } from "utils/formatReal";
 
-export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
-  const { data } = props;
+import ModalAdicionarGestaoDeCusto from "./ModalAdicionarGestaoDeCusto";
+import ModalCustoDiario from "./ModalCustoDiario";
+import ModalValorPrevisto from "./ModalValorPrevisto";
+
+interface PropsInterface {
+  data: BudgetDetail[];
+  toogleRender: () => void;
+}
+
+export function BudgetDetailTable(props: PropsInterface) {
+  const { data, toogleRender } = props;
 
   //  const color = "rgb(46, 105, 253)";
 
@@ -32,10 +40,6 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
   const totalRegs = data.length;
   const maxPage = Math.ceil(totalRegs / rowsPerPage);
 */
-  const brl = Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
 
   /* const paginate = (pag: number) => {
     setPagAtual(pag);
@@ -82,8 +86,10 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
           </Flex>
         </Td>
         <Td></Td>
-        <Td align="center">{brl.format(detail.planejado)}</Td>
-        <Td align="center">{brl.format(detail.realizado)} </Td>
+        <Td textAlign="right">{formatReal(detail.planejado)}</Td>
+        <Td textAlign="right">
+          <ModalCustoDiario pai={detail} toogleRender={toogleRender} />
+        </Td>
         <Td></Td>
       </Tr>
       {detail.filhos &&
@@ -93,15 +99,23 @@ export function BudgetDetailTable(props: { data: BudgetDetail[] }) {
             <Td>{filho.brt}</Td>
             <Td>{filho.projeto.nome}</Td>
             <Td>{filho.fornecedor}</Td>
-            <Td textAlign="center">
+            <Td textAlign="right">
               <Flex alignItems={"center"} justifyContent="center">
-                <CampoEditavel filho={filho} />
+                {formatReal(filho.planejado)}{" "}
+                <ModalValorPrevisto
+                  projeto={filho.projeto}
+                  toogleRender={toogleRender}
+                  value={filho.planejado.toFixed(2).toString() || ""}
+                />
               </Flex>
             </Td>
-            <Td textAlign="center">
+            <Td textAlign="right">
               <Flex alignItems={"center"} justifyContent="center">
-                {brl.format(filho.realizado)}{" "}
-                <ModalGestaoDeCusto projeto={filho.projeto} />
+                <ModalCustoDiario filho={filho} toogleRender={toogleRender} />
+                <ModalAdicionarGestaoDeCusto
+                  projeto={filho.projeto}
+                  toogleRender={toogleRender}
+                />
               </Flex>
             </Td>
             <Td align="center">{filho.gap}%</Td>

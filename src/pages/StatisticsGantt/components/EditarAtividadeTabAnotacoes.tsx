@@ -17,6 +17,8 @@ function EditarAtividadeTabAnotacoes({ registerForm }: Props) {
             propName={"anotacoes"}
             value={registerForm.values.anotacoes}
             placeholder={"Escreva anotações sobre a atividade"}
+            minHeight={"200px"}
+            maxLength={2500}
           />
         </Flex>
       </Flex>

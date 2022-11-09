@@ -19,16 +19,18 @@ import {
 } from "@chakra-ui/react";
 import { ICardInfoProjeto } from "interfaces/DetalhamentoProjetos";
 
-import { patchProjeto } from "services/update/Projeto";
+import { patchProjetoDescJust } from "services/update/Projeto";
 
 interface DescricaoEJustificativaProps {
   infoProjeto: ICardInfoProjeto;
-  setRender: () => void;
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function BotaoDescricaoEJustificativa({
   infoProjeto,
-  setRender,
+  refresh,
+  setRefresh,
 }: DescricaoEJustificativaProps) {
   const { id } = useParams();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -38,8 +40,6 @@ function BotaoDescricaoEJustificativa({
   );
 
   const handleCancelar = () => {
-    setDescricao("");
-    setJustificativa("");
     onClose();
   };
 
@@ -179,23 +179,24 @@ function BotaoDescricaoEJustificativa({
               <Button
                 h={"56px"}
                 w={"206px"}
-                borderRadius={"10px"}
-                background={"origem.300"}
+                background={"origem.500"}
                 variant="primary"
                 color="white"
                 onClick={async () => {
-                  await patchProjeto(Number(id), { descricao, justificativa });
-                  setDescricao("");
-                  setJustificativa("");
-                  setRender();
+                  await patchProjetoDescJust(Number(id), {
+                    descricao,
+                    justificativa,
+                  });
                   onClose();
+                  setRefresh(!refresh);
                 }}
                 _hover={{
-                  background: "origem.500",
+                  background: "origem.600",
                   transition: "all 0.4s",
                 }}
                 fontSize={"18px"}
                 fontWeight={"700"}
+                borderRadius={"8px"}
               >
                 Salvar
               </Button>

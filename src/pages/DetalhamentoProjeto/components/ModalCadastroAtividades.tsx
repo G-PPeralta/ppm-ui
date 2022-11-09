@@ -15,6 +15,7 @@ import {
   Input,
   NumberInput,
   NumberInputField,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 
 // import Restricoes from "pages/Infographics/Components/Restricoes";
@@ -121,7 +122,9 @@ function ModalCadastroAtividades({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
             Cadastrar Atividade
           </ModalHeader>
@@ -140,13 +143,13 @@ function ModalCadastroAtividades({
                 gap={5}
               >
                 <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Nome</Text>
+                  {/* <Text fontWeight={"bold"}>Nome</Text> */}
                   <Flex gap={5} flex={1}>
                     <Flex direction={"column"} flex={1}>
                       <Flex gap={1}>
                         <RequiredField />
                         <Text
-                          fontWeight={"bold"}
+                          fontWeight={"700"}
                           fontSize={"12px"}
                           color={"#949494"}
                         >
@@ -175,7 +178,7 @@ function ModalCadastroAtividades({
                       <Flex gap={1}>
                         <RequiredField />
                         <Text
-                          fontWeight={"bold"}
+                          fontWeight={"700"}
                           fontSize={"12px"}
                           color={"#949494"}
                         >
@@ -204,18 +207,18 @@ function ModalCadastroAtividades({
                 </Flex>
 
                 <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Relação</Text>
+                  {/* <Text fontWeight={"bold"}>Relação</Text> */}
                   <SelectFiltragem
                     registerForm={registerForm}
                     nomeSelect={"RELAÇÃO"}
                     propName={"relacao_id"}
                     options={relacoesOptions}
-                    required={false}
+                    required={true}
                   />
                 </Flex>
 
                 <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Responsável</Text>
+                  {/* <Text fontWeight={"bold"}>Responsável</Text> */}
                   <Flex gap={5} flex={1}>
                     <SelectFiltragem
                       registerForm={registerForm}
@@ -236,7 +239,7 @@ function ModalCadastroAtividades({
                 </Flex>
 
                 <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Datas</Text>
+                  {/* <Text fontWeight={"bold"}>Datas</Text> */}
                   <Flex gap={5}>
                     <Flex>
                       <DateTimePickerDataInicio registerForm={registerForm} />
@@ -245,11 +248,11 @@ function ModalCadastroAtividades({
                       <Flex gap={1}>
                         <RequiredField />
                         <Text
-                          fontWeight={"bold"}
+                          fontWeight={"700"}
                           fontSize={"12px"}
                           color={"#949494"}
                         >
-                          DURAÇÃO EM DIAS
+                          DIAS ÚTEIS
                         </Text>
                       </Flex>
                       <NumberInput
@@ -265,7 +268,11 @@ function ModalCadastroAtividades({
                           );
                         }}
                       >
-                        <NumberInputField bg={"#fff"} h={"56px"} />
+                        <NumberInputField
+                          maxLength={5}
+                          bg={"#fff"}
+                          h={"56px"}
+                        />
                       </NumberInput>
                     </Flex>
                   </Flex>
@@ -289,6 +296,8 @@ function ModalCadastroAtividades({
               </Flex>
             </ModalBody>
 
+            <ModalCloseButton color={"white"} onClick={() => onClose()} />
+
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
                 <BotaoVermelhoGhost
@@ -297,7 +306,7 @@ function ModalCadastroAtividades({
                   formikForm={registerForm}
                 />
                 <BotaoAzulPrimary
-                  text="Concluir Cadastro"
+                  text="Cadastrar"
                   onClose={onClose}
                   formikForm={registerForm}
                   refresh={refresh}

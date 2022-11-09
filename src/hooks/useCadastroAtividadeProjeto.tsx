@@ -136,7 +136,7 @@ export function useCadastroAtividadeProjeto(
 
   useEffect(() => {
     reqGet();
-  }, []);
+  }, [refresh]);
 
   // useEffect(() => {
   //   if (refresh) {

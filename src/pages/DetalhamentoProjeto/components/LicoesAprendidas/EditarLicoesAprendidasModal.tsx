@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { BsPlusLg } from "react-icons/bs";
+// import { BsPlusLg } from "react-icons/bs";
 
 import {
   Flex,
   Box,
-  IconButton,
+  // IconButton,
   // useBreakpointValue,
   Modal,
   ModalOverlay,
@@ -18,15 +18,17 @@ import {
   ModalFooter,
   Button,
   Textarea,
-  Text,
+  // Text,
 } from "@chakra-ui/react";
-import { LicoesAprendidas } from "interfaces/Services";
+import { LicoesAprendidasNew } from "interfaces/Services";
 
 import { useAuth } from "hooks/useAuth";
 
+import { patchLicaoAprendida } from "services/update/LicoesAprendidas";
+
 interface EditModalProps {
   closeModal: any;
-  licao: LicoesAprendidas;
+  licao: LicoesAprendidasNew;
   handleUpdateLicoes: any;
 }
 
@@ -37,27 +39,30 @@ function EditarLicoesAprendidasModal({
 }: EditModalProps) {
   const { user } = useAuth();
   const [idLicao, setIdLicao] = useState(licao?.id);
-  const [licaoAprendida, setLicaoAprendida] = useState(
-    licao?.txt_licao_aprendida
-  );
-  const [acao, setAcao] = useState(licao?.txt_acao);
+  const [licaoAprendida, setLicaoAprendida] = useState(licao?.licao_aprendida);
+  const [acao, setAcao] = useState(licao?.acao_e_recomendacao);
 
   useEffect(() => {
-    setLicaoAprendida(licao.txt_licao_aprendida);
-    setAcao(licao.txt_acao);
+    setLicaoAprendida(licao.licao_aprendida);
+    setAcao(licao.acao_e_recomendacao);
     setIdLicao(licao.id);
-  }, [
-    licao.txt_licao_aprendida,
-    licao.dat_usu_create,
-    licao.txt_acao,
-    licao.id,
-  ]);
+  }, [licao.licao_aprendida, licao.data, licao.acao_e_recomendacao, licao.id]);
 
   const camposParaEditar = ["txt_licao_aprendida", "txt_acao"];
 
   const updatepayload = (campo: string) => {
     if (campo === "txt_licao_aprendida") return licaoAprendida;
     if (campo === "txt_acao") return acao;
+    return "";
+  };
+
+  const handlePatchLicaoAprendida = async () => {
+    const promises = camposParaEditar.map(
+      async (lic) =>
+        await patchLicaoAprendida(idLicao, lic, updatepayload(lic), user?.nome)
+    );
+    await Promise.all(promises);
+    handleUpdateLicoes();
   };
 
   const regex = /[^\w\s]/gi;
@@ -65,22 +70,22 @@ function EditarLicoesAprendidasModal({
   return (
     <Flex>
       <Box
-        display={"flex"}
-        alignItems={"center"}
-        border="2px"
-        padding={2}
-        borderRadius={6}
-        borderColor={"origem.300"}
-        _hover={{
-          background: "#f5f5f5",
-          transition: "all 0.4s",
-          color: "origem.300",
-          cursor: "pointer",
-          borderColor: "origem.500",
-        }}
-        backgroundColor={"transparent"}
+      // display={"flex"}
+      // alignItems={"center"}
+      // border="2px"
+      // padding={2}
+      // borderRadius={6}
+      // borderColor={"origem.300"}
+      // _hover={{
+      //   background: "#f5f5f5",
+      //   transition: "all 0.4s",
+      //   color: "origem.300",
+      //   cursor: "pointer",
+      //   borderColor: "origem.500",
+      // }}
+      // backgroundColor={"transparent"}
       >
-        <IconButton
+        {/* <IconButton
           aria-label="Plus sign"
           icon={<BsPlusLg />}
           background="origem.300"
@@ -89,7 +94,7 @@ function EditarLicoesAprendidasModal({
           mr={2}
           isRound={true}
           size="sm"
-        />
+        /> */}
         {/* <Text
           fontSize={useBreakpointValue({ base: "sm", md: "sm" })}
           fontWeight={"bold"}
@@ -107,7 +112,8 @@ function EditarLicoesAprendidasModal({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Editar Lições Aprendidas
           </ModalHeader>
@@ -171,7 +177,7 @@ function EditarLicoesAprendidasModal({
                   AÇÃO OU RECOMENDAÇÃO
                 </FormLabel>
                 <Textarea
-                  maxLength={150}
+                  // maxLength={150}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
@@ -204,12 +210,13 @@ function EditarLicoesAprendidasModal({
                   color: "white",
                 }}
                 onClick={closeModal}
-                // width={"50px"}
+                width={"208px"}
                 height={"56px"}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
               >
-                <Text fontSize={"18px"} fontWeight={"700"}>
-                  Cancelar
-                </Text>
+                Cancelar
               </Button>
               <Button
                 background="#0047BB"
@@ -219,22 +226,14 @@ function EditarLicoesAprendidasModal({
                   background: "origem.500",
                   transition: "all 0.4s",
                 }}
-                onClick={() => {
-                  camposParaEditar.forEach((lic) =>
-                    handleUpdateLicoes(
-                      idLicao,
-                      lic,
-                      updatepayload(lic),
-                      user?.nome
-                    )
-                  );
-                }}
+                onClick={() => handlePatchLicaoAprendida()}
                 width={"208px"}
                 height={"56px"}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
               >
-                <Text fontSize={"18px"} fontWeight={"700"}>
-                  Salvar{" "}
-                </Text>
+                Salvar{" "}
               </Button>
             </Flex>
           </ModalFooter>

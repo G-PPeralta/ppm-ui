@@ -1,6 +1,4 @@
 import { useState } from "react";
-// import { AiFillEdit } from "react-icons/ai";
-// import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 import {
@@ -14,12 +12,13 @@ import {
   Tr,
   Text,
   Flex,
-  // IconButton,
 } from "@chakra-ui/react";
 import "../statistics.css";
 import { StatisticsTableData } from "interfaces/Services";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
+
+import ModalDeletar from "./AtividadesCadastroCronograma/ModalDeletar";
 
 interface Props {
   data: StatisticsTableData[] | undefined;
@@ -41,6 +40,66 @@ export function StatisticsTable({ data }: Props) {
     const toNumber = +pct;
     return toNumber.toFixed(2).replace(".", ",");
   };
+
+  function Body() {
+    return (
+      <>
+        {data && data.length > 0 ? (
+          data.slice(from, to).map((projeto, key) => (
+            <Tr key={key}>
+              <Td textAlign={"center"} fontWeight={"semibold"}>
+                <Link
+                  to={`/estatisticas/cronograma/${projeto.id_sonda}/${projeto.id_poco}`}
+                  state={{ data: projeto }}
+                >
+                  <Text color="origem.500">{projeto.sonda}</Text>
+                </Link>
+              </Td>
+              <Td textAlign={"center"} fontWeight={"semibold"}>
+                <Text>{projeto.poco}</Text>
+              </Td>
+              <Td textAlign={"center"} fontWeight={"semibold"}>
+                <Text>
+                  {projeto.dat_inicio
+                    ? new Date(projeto.dat_inicio || "").toLocaleString(
+                        "pt-BR",
+                        {
+                          timeZone: "UTC",
+                        }
+                      )
+                    : ""}
+                </Text>
+              </Td>
+              <Td textAlign={"center"} fontWeight={"semibold"}>
+                <Text>
+                  {projeto.dat_final
+                    ? new Date(projeto.dat_final || "").toLocaleString(
+                        "pt-BR",
+                        {
+                          timeZone: "UTC",
+                        }
+                      )
+                    : ""}
+                </Text>
+              </Td>
+              <Td textAlign={"center"} fontWeight={"semibold"}>
+                <Text>{formatDecimal(projeto.pct_real)}</Text>
+              </Td>
+              <Td textAlign={"center"} fontWeight={"semibold"}>
+                <ModalDeletar />
+              </Td>
+            </Tr>
+          ))
+        ) : (
+          <Tr>
+            <Td textAlign={"start"} fontWeight={"semibold"}>
+              <Text>Não há dados</Text>
+            </Td>
+          </Tr>
+        )}
+      </>
+    );
+  }
 
   return (
     <Flex direction={"column"} w={"100%"}>
@@ -68,86 +127,7 @@ export function StatisticsTable({ data }: Props) {
               </Th>
             </Tr>
           </Thead>
-          <Tbody scrollBehavior={"smooth"}>
-            {data ? (
-              data.slice(from, to).map((projeto, key) => (
-                <Tr key={key}>
-                  <Td textAlign={"center"} fontWeight={"semibold"}>
-                    <Link
-                      to={`/estatisticas/cronograma/${projeto.id_sonda}/${projeto.id_poco}`}
-                      state={{ data: projeto }}
-                    >
-                      <Text>{projeto.sonda}</Text>
-                    </Link>
-                  </Td>
-                  <Td textAlign={"center"} fontWeight={"semibold"}>
-                    <Link
-                      to={`/estatisticas/cronograma/${projeto.id_sonda}/${projeto.id_poco}`}
-                      state={{ data: projeto }}
-                    >
-                      <Text>{projeto.poco}</Text>
-                    </Link>
-                  </Td>
-                  <Td textAlign={"center"} fontWeight={"semibold"}>
-                    <Text>
-                      {projeto.dat_inicio
-                        ? new Date(projeto.dat_inicio || "").toLocaleString(
-                            "pt-BR",
-                            {
-                              timeZone: "UTC",
-                            }
-                          )
-                        : ""}
-                    </Text>
-                  </Td>
-                  <Td textAlign={"center"} fontWeight={"semibold"}>
-                    <Text>
-                      {projeto.dat_final
-                        ? new Date(projeto.dat_final || "").toLocaleString(
-                            "pt-BR",
-                            {
-                              timeZone: "UTC",
-                            }
-                          )
-                        : ""}
-                    </Text>
-                  </Td>
-                  <Td textAlign={"center"} fontWeight={"semibold"}>
-                    <Text>{formatDecimal(projeto.pct_real)}</Text>
-                  </Td>
-                  <Td textAlign={"center"} fontWeight={"semibold"}>
-                    {/* <IconButton
-                          aria-label="Plus sign"
-                          icon={<AiFillEdit />}
-                          background="white"
-                          variant="secondary"
-                          color="#2D2926"
-                          mr={2}
-                          isRound={true}
-                          size="sm"
-                        />
-                      <IconButton
-                          aria-label="Plus sign"
-                          icon={<FaTrash />}
-                          background="white"
-                          variant="secondary"
-                          color="#F94144"
-                          mr={2}
-                          isRound={true}
-                          size="sm"
-                        />
-                      <EditaValorModal /> */}
-                  </Td>
-                </Tr>
-              ))
-            ) : (
-              <Tr>
-                <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Text>Não há dados</Text>
-                </Td>
-              </Tr>
-            )}
-          </Tbody>
+          <Tbody scrollBehavior={"smooth"}>{<Body />}</Tbody>
           <Tfoot>
             <Tr background={"origem.500"}>
               <Th color="white">Total</Th>

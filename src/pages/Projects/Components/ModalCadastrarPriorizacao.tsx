@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { IoIosPodium } from "react-icons/io";
 
 import {
-  Button,
   Flex,
   FormControl,
   FormLabel,
@@ -19,7 +18,9 @@ import {
   // Textarea,
   useBreakpointValue,
   useDisclosure,
+  Button,
   IconButton,
+  // IconButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -36,9 +37,21 @@ import { getInitialRaking } from "../../../services/get/Ranking";
 
 type PropsType = {
   projeto: number;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: boolean;
+  isPriorizacaoModalOpen?: boolean;
+  setIsPriorizacaoModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  completeButton?: boolean;
 };
 
-function ModalCadastrarPriorizacao(projeto: PropsType) {
+function ModalCadastrarPriorizacao({
+  projeto,
+  refresh,
+  setRefresh,
+  isPriorizacaoModalOpen,
+  setIsPriorizacaoModalOpen,
+  completeButton,
+}: PropsType) {
   const { user } = useAuth();
   const [initialValues, setInitialValues] = useState([]);
   const [beneficio, setBeneficio] = useState("");
@@ -59,7 +72,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
     listaPrioridade,
     listaRegulatorio,
     ranking,
-  } = useCadastroPriorizacao(projeto.projeto);
+  } = useCadastroPriorizacao(projeto);
 
   async function handleGetInitialValues(id: any) {
     const response = await getInitialRaking(id);
@@ -96,7 +109,7 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
   }, [registerForm.values]);
 
   useEffect(() => {
-    registerForm.setFieldValue("id_projeto", Number(projeto.projeto));
+    registerForm.setFieldValue("id_projeto", Number(projeto));
 
     if (registerForm.values.id_projeto !== 0) {
       // handleGetInitialValues(registerForm.values.id_projeto);
@@ -151,23 +164,63 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
     nom_usu_create: user?.nome,
   };
 
+  useEffect(() => {
+    if (isPriorizacaoModalOpen == true) {
+      onOpen();
+      handleGetInitialValues(registerForm.values.id_projeto);
+    }
+  }, [isPriorizacaoModalOpen]);
+
   return (
     <>
-      <IconButton
-        onClick={handleClick}
-        color={"origem.500"}
-        backgroundColor={"transparent"}
-        aria-label="Plus sign"
-        _hover={{
-          backgroundColor: "origem.500",
-          color: "white",
+      {completeButton ? (
+        <Button
+          onClick={handleClick}
+          w={"100%"}
+          h={"56px"}
+          color="#0047BB"
+          background="white"
+          borderColor="#0047BB"
+          border={"2px"}
+          _hover={{
+            background: "#0047BB",
+            transition: "all 0.4s",
+            color: "white",
+          }}
+          fontWeight={"700"}
+          fontSize="18px"
+          gap={2}
+          justifyItems={"center"}
+          alignItems={"center"}
+        >
+          Priorização
+          <IoIosPodium />
+        </Button>
+      ) : (
+        <IconButton
+          onClick={handleClick}
+          color={"origem.500"}
+          backgroundColor={"transparent"}
+          aria-label="Plus sign"
+          _hover={{
+            backgroundColor: "origem.500",
+            color: "white",
+          }}
+          fontSize={"18px"}
+          fontWeight={"700"}
+        >
+          <IoIosPodium />
+        </IconButton>
+      )}
+
+      <Modal
+        isOpen={isOpen}
+        onClose={() => {
+          if (setIsPriorizacaoModalOpen) setIsPriorizacaoModalOpen(false);
+          handleCancelar(registerForm, onClose);
         }}
-        fontSize={"18px"}
-        fontWeight={"700"}
+        size="xl"
       >
-        <IoIosPodium />
-      </IconButton>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -180,7 +233,12 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
           >
             Priorização
           </ModalHeader>
-          <ModalCloseButton color={"white"} />
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => {
+              if (setIsPriorizacaoModalOpen) setIsPriorizacaoModalOpen(false);
+            }}
+          />
           <form
             onSubmit={(e) => {
               // e.preventDefault();
@@ -483,8 +541,12 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
+                  color="red.500"
+                  onClick={() => {
+                    if (setIsPriorizacaoModalOpen)
+                      setIsPriorizacaoModalOpen(false);
+                    handleCancelar(registerForm, onClose);
+                  }}
                   _hover={{
                     background: "red.500",
                     transition: "all 0.4s",
@@ -492,6 +554,9 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                   }}
                   w={"208px"}
                   h={"56px"}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   Cancelar
                 </Button>
@@ -500,18 +565,20 @@ function ModalCadastrarPriorizacao(projeto: PropsType) {
                   h={"56px"}
                   // disabled={!registerForm.isValid}
                   background="origem.500"
-                  fontSize={"18px"}
-                  fontWeight={"700"}
                   variant="primary"
                   color="white"
                   onClick={() => {
                     postProject(payload);
                     onClose();
+                    setRefresh(!refresh);
                   }}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",
                   }}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />

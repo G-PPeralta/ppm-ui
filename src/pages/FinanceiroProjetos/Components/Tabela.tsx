@@ -45,9 +45,7 @@ function Tabela({ data }: Props) {
     "Elemento PEP",
     "Previsto",
     "Realizado",
-    "Denominação de Objeto",
-    "Mês",
-    "Texto do Pedido",
+    "Gap %",
   ];
 
   const valorTotalPrevisto = data.reduce(
@@ -90,7 +88,9 @@ function Tabela({ data }: Props) {
               </Td>
               <Td textAlign={"start"} fontWeight={"semibold"}>
                 <Link
-                  to={`/financeiro-projetos/centro-custo/${linhaTabela.idprojeto}`}
+                  to={`/financeiro-projetos/centro-custo/${
+                    linhaTabela.idprojeto
+                  }/${linhaTabela.mes.split("/")[0]}`}
                   state={linhaTabela}
                 >
                   <Text color={"origem.500"}>{linhaTabela.nomeprojeto}</Text>
@@ -106,20 +106,20 @@ function Tabela({ data }: Props) {
                 <Text>{formatarParaReal(linhaTabela.totalrealizado)}</Text>
               </Td>
               <Td textAlign={"start"} fontWeight={"semibold"}>
+                <Text>{linhaTabela.gap < 1 ? 0 : linhaTabela.gap}%</Text>
+              </Td>
+              {/* <Td textAlign={"start"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.denominacaodeobjeto}</Text>
-              </Td>
-              <Td textAlign={"center"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.mes}</Text>
-              </Td>
-              <Td textAlign={"start"} fontWeight={"semibold"}>
+              </Td> */}
+              {/* <Td textAlign={"start"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.textodopedido}</Text>
-              </Td>
+              </Td> */}
             </Tr>
           ))
         ) : (
           <Tr>
             <Td colSpan={header.length} textAlign={"start"}>
-              <Text fontSize="xl" fontWeight={500}>
+              <Text textAlign={"start"} fontWeight={"semibold"}>
                 Não há dados
               </Text>
             </Td>

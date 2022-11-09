@@ -10,6 +10,8 @@ import { AreasDemandadasPorMes } from "interfaces/Services";
 import PercentPieChart from "components/PercentPieChart";
 import StackedBarChart from "components/StackedBarChart";
 
+import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
+
 type Props = {
   AreasDemandadasPorMes: AreasDemandadasPorMes[];
 };
@@ -294,7 +296,7 @@ export default function AreasDemandadasComponent({
 
   function createBarChart() {
     const values: {
-      month: string;
+      mes: string;
       SMS: number;
       Regulatório: number;
       Operação: number;
@@ -304,7 +306,7 @@ export default function AreasDemandadasComponent({
       AreasDemandadasPorMes.forEach((mes) => {
         const total = mes.sms + mes.regulatorio + mes.operacao + mes.outros;
         const dataMock = {
-          month: formatMonth(mes.month),
+          mes: capitalizeFirstLetter(formatMonth(mes.month)),
           SMS: +((mes.sms / total) * 100).toFixed(2),
           Regulatório: +((mes.regulatorio / total) * 100).toFixed(2),
           Operação: +((mes.operacao / total) * 100).toFixed(2),
@@ -315,7 +317,7 @@ export default function AreasDemandadasComponent({
       return values;
     } else {
       const dataMock = {
-        month: formatMonth(),
+        mes: formatMonth().toUpperCase(),
         SMS: 0,
         Regulatório: 0,
         Operação: 0,

@@ -20,23 +20,27 @@ export default function StackedBarChartGraphic({
 }: StackedBarChartProps) {
   return (
     <ResponsiveContainer width={sizeW} height={sizeH}>
-      <BarChart data={data} className={style.chart}>
-        <XAxis dataKey="month" fontSize={10} />
-        {showY ? <YAxis dataKey={dataEntries[0].name} /> : undefined}
-        <Tooltip />
-        {dataEntries.map((dataEntry, index) => (
-          <Bar
-            key={index}
-            dataKey={dataEntry.name}
-            stackId="a"
-            fill={dataEntry.color}
-            legendType="circle"
-            isAnimationActive={true}
-            animationDuration={1300}
-            barSize={barW}
-          />
-        ))}
-      </BarChart>
+      {data.length > 0 ? (
+        <BarChart data={data} className={style.chart}>
+          <XAxis dataKey="key" fontSize={10} />
+          {showY ? <YAxis /> : undefined}
+          <Tooltip isAnimationActive={false} />
+          {dataEntries.map((dataEntry, index) => (
+            <Bar
+              key={index}
+              dataKey={dataEntry.name}
+              stackId="a"
+              fill={dataEntry.color}
+              legendType="circle"
+              isAnimationActive={true}
+              animationDuration={1300}
+              barSize={barW}
+            />
+          ))}
+        </BarChart>
+      ) : (
+        <></>
+      )}
     </ResponsiveContainer>
   );
 }

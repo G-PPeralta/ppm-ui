@@ -27,7 +27,7 @@ import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
-import Restricoes from "./Restricoes";
+// import Restricoes from "./Restricoes";
 
 function ModalCadastroAtividade() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -76,7 +76,8 @@ function ModalCadastroAtividade() {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Cadastrar Atividade
           </ModalHeader>
@@ -100,7 +101,7 @@ function ModalCadastroAtividade() {
                   gap={5}
                 >
                   <Flex flex={1} direction={"column"}>
-                    <Text fontWeight={"bold"}>Nome</Text>
+                    {/* <Text fontWeight={"bold"}>Nome</Text> */}
                     <Flex
                       gap={5}
                       flex={1}
@@ -121,6 +122,10 @@ function ModalCadastroAtividade() {
                           </Text>
                         </Flex>
                         <Input
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"black"}
                           h={"56px"}
                           isRequired
                           placeholder="Digite o ID"
@@ -142,7 +147,7 @@ function ModalCadastroAtividade() {
                         <Flex gap={1}>
                           <RequiredField />
                           <Text
-                            fontWeight={"bold"}
+                            fontWeight={"700"}
                             fontSize={"12px"}
                             color={"#949494"}
                           >
@@ -151,6 +156,10 @@ function ModalCadastroAtividade() {
                         </Flex>
                         <Input
                           h={"56px"}
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"black"}
                           isRequired
                           placeholder="Digite o nome da atividade"
                           id="nom_atividade"
@@ -179,7 +188,7 @@ function ModalCadastroAtividade() {
                   gap={5}
                 >
                   <Flex flex={1} direction={"column"}>
-                    <Text fontWeight={"bold"}>Responsável</Text>
+                    {/* <Text fontWeight={"bold"}>Responsável</Text> */}
                     <Flex
                       gap={5}
                       flex={1}
@@ -217,8 +226,8 @@ function ModalCadastroAtividade() {
                   })}
                   gap={2}
                 >
-                  <Text fontWeight={"bold"}>Restrição</Text>
-                  <Restricoes registerForm={registerForm} />
+                  {/* <Text fontWeight={"bold"}>Restrição</Text> */}
+                  {/* <Restricoes registerForm={registerForm} /> */}
                 </Flex>
               </Flex>
             </ModalBody>

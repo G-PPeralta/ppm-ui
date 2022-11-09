@@ -48,7 +48,7 @@ export async function getCPiSPi(id: number): Promise<{
   data: CpiSpi[];
   status: number;
 }> {
-  const { data, status } = await api.get(`/detalhamento/cpi-spi/${id}}`, {
+  const { data, status } = await api.get(`/detalhamento/cpi-spi/${id}`, {
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },

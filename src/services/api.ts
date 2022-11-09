@@ -11,3 +11,10 @@ export const token = () => ({
     Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
   },
 });
+
+export const tokenFile = () => ({
+  headers: {
+    Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
+    "Content-Type": "multipart/form-data",
+  },
+});

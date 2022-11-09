@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   Flex,
   Text,
@@ -7,27 +9,42 @@ import {
 
 import PieChart from "components/PieChart";
 
+import { getGates } from "services/get/Dashboard";
+
 export default function NaoPrevistoComponent() {
+  const [data, setData] = useState<any[]>([]);
+
+  const getData = async () => {
+    const gates = await getGates();
+    setData(gates.data);
+  };
+  // console.log("data", data);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   const innerWidth = window.innerWidth;
+
   const grafData = [
     {
       name: "Engenharia",
-      value: 30,
+      value: data ? Number(data[2]?.value.toFixed(1)) : 0,
       color: "#93E01B",
     },
     {
       name: "C&M",
-      value: 30,
+      value: data ? Number(data[3]?.value.toFixed(1)) : 0,
       color: "#F4DD06",
     },
     {
       name: "Suprimentos",
-      value: 20,
+      value: data ? Number(data[1]?.value.toFixed(1)) : 0,
       color: "#F94144",
     },
     {
       name: "Pré-projeto",
-      value: 20,
+      value: data ? Number(data[0]?.value.toFixed(1)) : 0,
       color: "#2E69FD",
     },
   ];
@@ -107,19 +124,19 @@ export default function NaoPrevistoComponent() {
           <Flex mt={5} mb={5} align={"center"} justify={"center"} flex={1}>
             <Flex h={20} justify={"space-between"} direction={"column"}>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#F4DD06">
-                32%
+                {data ? data[3]?.value.toFixed(1) : 0}%
               </Text>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#F94144">
-                18%
+                {data ? data[1]?.value.toFixed(1) : 0}%
               </Text>
             </Flex>
-            <PieChart size={136} data={grafData} />
+            {grafData && <PieChart size={136} data={grafData} />}
             <Flex h={20} justify={"space-between"} direction={"column"}>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#93E01B">
-                32%
+                {data ? data[2]?.value.toFixed(1) : 0}%
               </Text>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#2E69FD">
-                18%
+                {data ? data[0]?.value.toFixed(1) : 0}%
               </Text>
             </Flex>
           </Flex>

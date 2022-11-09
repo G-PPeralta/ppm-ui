@@ -40,8 +40,8 @@ function ModalDeletarOpcaoPriorizacao() {
           backgroundColor: "#F40606",
           color: "white",
         }}
-        w={"14px"}
-        h={"18px"}
+        // w={"14px"}
+        // h={"18px"}
       >
         <FiTrash size={"13px"} />
       </IconButton>
@@ -94,7 +94,7 @@ function ModalDeletarOpcaoPriorizacao() {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red"
+                  color="red.500"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: "red.500",
@@ -102,9 +102,9 @@ function ModalDeletarOpcaoPriorizacao() {
                     color: "white",
                   }}
                   height={"56px"}
-                  width={"100px"}
+                  width={"206px"}
                   fontSize={"18px"}
-                  fontWeight={"600"}
+                  fontWeight={"700"}
                 >
                   Cancelar
                 </Button>
@@ -114,11 +114,11 @@ function ModalDeletarOpcaoPriorizacao() {
                   color="white"
                   // onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
-                    background: "origem.500",
+                    background: "origem.600",
                     transition: "all 0.4s",
                   }}
                   height={"56px"}
-                  width={"185px"}
+                  width={"206px"}
                   fontSize={"18px"}
                   fontWeight={"700"}
                 >

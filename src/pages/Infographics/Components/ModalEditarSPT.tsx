@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 import {
@@ -30,7 +30,6 @@ interface Payload {
 
 function ModalEditarSPT({ column, refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [nome, setNome] = useState(column.sonda);
   const [pocos, setPocos] = useState(column.pocos);
   const [payload, setPayload] = useState<Payload[]>([
     {
@@ -46,6 +45,10 @@ function ModalEditarSPT({ column, refresh, setRefresh }: any) {
     setRefresh(!refresh);
     onClose();
   };
+
+  useEffect(() => {
+    setPocos(column.pocos);
+  }, [column]);
 
   return (
     <>
@@ -122,8 +125,7 @@ function ModalEditarSPT({ column, refresh, setRefresh }: any) {
                         disabled
                         placeholder="Nome do SPT"
                         type="text"
-                        value={nome}
-                        onChange={(event) => setNome(event.target.value)}
+                        value={column.sonda}
                       />
                     </FormControl>
                   </Flex>

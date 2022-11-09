@@ -18,13 +18,13 @@ import Tabela from "./components/Tabela";
 export function CentroDeCustoProjetos() {
   const [refresh, setRefresh] = useState(false);
 
-  const { id } = useParams();
+  const { id, mes } = useParams();
   const {
     loading,
     listaCentroCustoProjetos,
     optionsFornecedores,
     optionsClassesDeServico,
-  } = useRequests(Number(id));
+  } = useRequests(Number(id), mes);
 
   const refreshState = {
     refresh,
@@ -43,14 +43,20 @@ export function CentroDeCustoProjetos() {
   };
 
   const handleRefresh = async () => {
-    if (id) {
-      const tabelaCentroDeCusto = await getCentroDeCustoProjetos(Number(id));
-      const centroDeCustoFormatado = tabelaCentroDeCusto.data.centroDeCusto.map(
-        (item: TabelaCentroDeCusto) => ({
-          ...item,
-          valor: Number(item.valor),
-        })
+    if (id && mes) {
+      const tabelaCentroDeCusto = await getCentroDeCustoProjetos(
+        Number(id),
+        String(mes)
       );
+      const centroDeCustoFormatado =
+        tabelaCentroDeCusto &&
+        tabelaCentroDeCusto.data &&
+        tabelaCentroDeCusto.data.centroDeCusto.map(
+          (item: TabelaCentroDeCusto) => ({
+            ...item,
+            valor: Number(item.valor),
+          })
+        );
       const data = {
         ...tabelaCentroDeCusto.data,
         centroDeCusto: centroDeCustoFormatado,
@@ -103,8 +109,9 @@ export function CentroDeCustoProjetos() {
               <Flex justify={"space-between"} flex={1}>
                 <ModalAdicionar
                   refreshState={refreshState}
-                  idProjeto={data.idProjeto}
+                  idProjeto={id ? +id : 0}
                   optionsSelects={options}
+                  mes={mes ? +mes : 0}
                 />
                 <Flex direction={"column"} justify={"end"}>
                   <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
@@ -115,14 +122,13 @@ export function CentroDeCustoProjetos() {
                   </Heading>
                 </Flex>
               </Flex>
-              {data.centroDeCusto && (
-                <Tabela
-                  data={data.centroDeCusto}
-                  refreshState={refreshState}
-                  idProjeto={data.idProjeto}
-                  optionsSelects={options}
-                />
-              )}
+              <Tabela
+                data={data.centroDeCusto}
+                refreshState={refreshState}
+                idProjeto={id ? +id : 0}
+                optionsSelects={options}
+                mes={mes ? +mes : 0}
+              />
             </Box>
           </Flex>
         ) : (

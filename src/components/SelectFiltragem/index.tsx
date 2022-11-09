@@ -32,7 +32,9 @@ function SelectFiltragem({
   const customStyles = {
     placeholder: (defaultStyles: any) => ({
       ...defaultStyles,
-      color: "#949494",
+      color: "black",
+      fontWeigth: "400",
+      fontSize: "14px",
     }),
     control: (base: any) => ({
       ...base,
@@ -59,7 +61,9 @@ function SelectFiltragem({
   const customStyles208 = {
     placeholder: (defaultStyles: any) => ({
       ...defaultStyles,
-      color: "#949494",
+      color: "black",
+      fontWeigth: "400",
+      fontSize: "14px",
     }),
     control: (base: any) => ({
       ...base,
