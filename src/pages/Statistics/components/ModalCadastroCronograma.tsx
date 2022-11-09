@@ -105,7 +105,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                 <FormControl>
                   <Flex direction={"column"} gap={4}>
                     <Stack>
-                      <Text fontWeight={"bold"}>Nome</Text>
+                      {/* <Text fontWeight={"bold"}>Nome</Text> */}
                       <Flex
                         direction={innerWidth >= 460 ? "row" : "column"}
                         gap={5}
@@ -162,7 +162,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                     />
 
                     <Stack>
-                      <Text fontWeight={"bold"}>Comentários</Text>
+                      {/* <Text fontWeight={"bold"}>Comentários</Text> */}
                       <FormControl>
                         <Flex gap={1}>
                           <Text
