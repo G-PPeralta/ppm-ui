@@ -209,6 +209,9 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                     </Text>
                     <Input
                       h={"56px"}
+                      _placeholder={{ color: "#949494" }}
+                      fontSize={"14px"}
+                      fontWeight={"400"}
                       isRequired
                       placeholder="dd/mm/aaaa"
                       id="data_inicio"
@@ -236,6 +239,8 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                     </Text>{" "}
                     <Input
                       h={"56px"}
+                      fontSize={"14px"}
+                      fontWeight={"400"}
                       isRequired
                       placeholder="dd/mm/aaaa"
                       id="data_fim"
