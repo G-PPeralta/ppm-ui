@@ -88,7 +88,11 @@ export function BudgetDetailTable(props: PropsInterface) {
         <Td></Td>
         <Td textAlign="right">{formatReal(detail.planejado)}</Td>
         <Td textAlign="right">
-          <ModalCustoDiario pai={detail} toogleRender={toogleRender} />
+          <ModalCustoDiario
+            pai={detail}
+            toogleRender={toogleRender}
+            r={false}
+          />
         </Td>
         <Td></Td>
       </Tr>
@@ -100,24 +104,23 @@ export function BudgetDetailTable(props: PropsInterface) {
             <Td>{filho.projeto.nome}</Td>
             <Td>{filho.fornecedor}</Td>
             <Td textAlign="right">
-              <Flex alignItems={"center"} justifyContent="center">
-                <ModalValorPrevisto
-                  projeto={filho.projeto}
-                  toogleRender={toogleRender}
-                  value={filho.planejado.toFixed(2).toString() || ""}
-                />
-                {formatReal(filho.planejado)}{" "}
-              </Flex>
+              <ModalValorPrevisto
+                projeto={filho.projeto}
+                toogleRender={toogleRender}
+                value={filho.planejado.toFixed(2).toString() || ""}
+              />
+              {formatReal(filho.planejado)}{" "}
             </Td>
             <Td textAlign="right">
-              <Flex alignItems={"center"} justifyContent="center">
-                <ModalAdicionarGestaoDeCusto
-                  projeto={filho.projeto}
-                  toogleRender={toogleRender}
-                />
-
-                <ModalCustoDiario filho={filho} toogleRender={toogleRender} />
-              </Flex>
+              <ModalAdicionarGestaoDeCusto
+                projeto={filho.projeto}
+                toogleRender={toogleRender}
+              />
+              <ModalCustoDiario
+                filho={filho}
+                toogleRender={toogleRender}
+                r={true}
+              />
             </Td>
             <Td align="center">{filho.gap}%</Td>
           </Tr>

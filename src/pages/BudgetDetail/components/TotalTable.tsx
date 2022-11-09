@@ -44,26 +44,31 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
                   />
                 </Button>  */}
               </Th>
-              <Th color="white" align="center">
+              <Th color="white" textAlign="right">
                 Valor
               </Th>
             </Tr>
           </Thead>
           <Tbody scrollBehavior={"smooth"}>
             <Tr>
-              <Td>Inicio das Atividades</Td>
+              <Td>Início das Atividades</Td>
               <Td></Td>
-              <Td>{data?.inicio ? formatDate(new Date(data?.inicio)) : "-"}</Td>
+              <Td textAlign="right">
+                {data?.inicio ? formatDate(new Date(data?.inicio)) : "-"}
+              </Td>
             </Tr>
             <Tr>
               <Td>Data Atual (Final)</Td>
               <Td></Td>
-              <Td> {data?.fim ? formatDate(new Date(data?.fim)) : "-"} </Td>
+              <Td textAlign="right">
+                {" "}
+                {data?.fim ? formatDate(new Date(data?.fim)) : "-"}{" "}
+              </Td>
             </Tr>
             <Tr>
               <Td>Dias de Operação</Td>
               <Td></Td>
-              <Td>
+              <Td textAlign="right">
                 {data?.inicio && data?.fim ? (
                   <Moment diff={moment(data?.inicio)} unit="days">
                     {moment(data?.fim).toISOString()}

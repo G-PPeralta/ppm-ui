@@ -43,6 +43,7 @@ import ModalEditarGestaoDeCusto from "./ModalEditarGestaoDeCusto";
 function ModalCustoDiario(props: {
   filho?: BudgetDetail;
   pai?: BudgetDetail;
+  r?: boolean;
   toogleRender: () => void;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -50,7 +51,7 @@ function ModalCustoDiario(props: {
   const [endDate, setEndDate] = useState<Date | string | null>(null);
   // const [loading, setLoading] = useState(true); // Loading
   const [data, setData] = useState<CustoDiario[]>([]);
-  const { filho, pai, toogleRender } = props;
+  const { filho, pai, toogleRender, r } = props;
 
   const wd = window.innerWidth;
 
@@ -136,20 +137,39 @@ function ModalCustoDiario(props: {
 
   return (
     <>
-      <IconButton
-        icon={<BsFillEyeFill />}
-        onClick={onOpen}
-        variant="outline"
-        aria-label="open menu"
-        color={"white"}
-        backgroundColor={"transparent"}
-        _hover={{
-          backgroundColor: "transparent",
-          color: "white",
-        }}
-        border={"none"}
-        alignSelf={"center"}
-      ></IconButton>
+      {r === false && (
+        <IconButton
+          icon={<BsFillEyeFill />}
+          onClick={onOpen}
+          variant="outline"
+          aria-label="open menu"
+          color={"white"}
+          backgroundColor={"transparent"}
+          _hover={{
+            backgroundColor: "transparent",
+            color: "white",
+          }}
+          border={"none"}
+          alignSelf={"center"}
+        ></IconButton>
+      )}
+
+      {r === true && (
+        <IconButton
+          hidden
+          onClick={onOpen}
+          variant="outline"
+          aria-label="open menu"
+          color={"white"}
+          backgroundColor={"transparent"}
+          _hover={{
+            backgroundColor: "transparent",
+            color: "white",
+          }}
+          border={"none"}
+          alignSelf={"center"}
+        ></IconButton>
+      )}
 
       {formatReal(filho ? filho.realizado : pai ? pai.realizado : 0)}
 
