@@ -80,10 +80,10 @@ export function CadastrarFornecedor() {
                   <InputGenerico
                     registerForm={registerForm}
                     nomeInput={"SERVIÇO"}
-                    propName={"servico"}
-                    value={registerForm.values.servico}
+                    propName={"servico_txt"}
+                    value={registerForm.values.servico_txt}
                     required={true}
-                    placeholder={"Nome do fornecedor"}
+                    placeholder={"Serviço"}
                     maxLength={50}
                   />
                   <SelectFiltragem
