@@ -71,11 +71,11 @@ function InputGenerico({
           </InputLeftAddon>
           <Input
             isDisabled={isDisabled}
-            _placeholder={{ color: "#949494" }}
             h={"56px"}
             fontSize={"14px"}
             fontWeight={"400"}
-            color={"black"}
+            color={"#2D2926"}
+            _placeholder={{ color: "#949494" }}
             placeholder={placeholder}
             type={"text"}
             id={propName}
@@ -106,7 +106,7 @@ function InputGenerico({
           _placeholder={{ color: "#949494" }}
           fontSize={"14px"}
           fontWeight={"400"}
-          color={"black"}
+          color={"#2D2926"}
         />
       )}
       {registerForm.touched[propName] && registerForm.errors[propName] && (

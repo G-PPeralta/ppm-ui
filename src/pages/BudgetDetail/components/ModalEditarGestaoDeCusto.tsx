@@ -141,6 +141,9 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                           </Flex>
                           <Input
                             h={"56px"}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"#2D2926"}
                             placeholder="Selecione a Data"
                             size="md"
                             type="date"
@@ -169,6 +172,9 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                         </Flex>
                         <Select
                           h={"56px"}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"#2D2926"}
                           placeholder="Escolha um Fornecedor"
                           id="fornecedor"
                           name="fornecedor"
@@ -207,6 +213,9 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                           </Flex>
                           <Select
                             h={"56px"}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"#2D2926"}
                             placeholder="Escolha uma Classe"
                             id="servico"
                             name="servico"
@@ -236,6 +245,10 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                           </Flex>
                           <Input
                             h={"56px"}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"#2D2926"}
+                            _placeholder={{ color: "#949494" }}
                             placeholder="Pedido"
                             id="pedido"
                             name="pedido"
@@ -249,7 +262,7 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                                 e.preventDefault();
                               }
                             }}
-                            size="md"
+                            // size="md"
                             type="text"
                           />
                           {/*  {registerForm.errors.pedido && (
@@ -270,6 +283,9 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                           </Text>
                         </Flex>
                         <Textarea
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"#2D2926"}
                           placeholder="Ação ou Recomendação"
                           id="pedido-obs"
                           name="pedido_obs"
