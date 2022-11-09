@@ -32,8 +32,8 @@ export function useCadastroFornecedor() {
   const initialValues: any = {
     nom_usu_create: user?.nome,
     poloId: 0,
-    servico: "",
     statusId: 0,
+    servico_txt: "",
     nomeFornecedor: "",
     numeroContrato: "",
     representante: "",
@@ -52,7 +52,7 @@ export function useCadastroFornecedor() {
       const newValues: any = {
         nom_usu_create: user?.nome,
         poloId: values.poloId,
-        servico: values.servico,
+        servico_txt: values.servico_txt,
         statusId: values.statusId,
         nomeFornecedor: values.nomeFornecedor,
         numeroContrato: values.numeroContrato,
