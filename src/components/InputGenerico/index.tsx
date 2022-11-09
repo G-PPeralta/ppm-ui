@@ -71,6 +71,7 @@ function InputGenerico({
           </InputLeftAddon>
           <Input
             isDisabled={isDisabled}
+            _placeholder={{ color: "#949494" }}
             h={"56px"}
             fontSize={"14px"}
             fontWeight={"400"}
