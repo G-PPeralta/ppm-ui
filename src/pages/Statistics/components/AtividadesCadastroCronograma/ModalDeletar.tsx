@@ -76,7 +76,7 @@ function ModalDeletar() {
                     <Flex>
                       <Text
                         // textAlign={"center"}
-                        fontSize={"24px"}
+                        fontSize={"20px"}
                         mb={"1px"}
                         color={"#010101"}
                         fontWeight={"400"}

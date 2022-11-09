@@ -45,7 +45,7 @@ function ModalDeletarTarefa() {
       >
         <FiTrash size={"13px"} />
       </IconButton>
-      <Modal isOpen={isOpen} onClose={onClose} size="md">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton color={"white"} />
@@ -76,7 +76,7 @@ function ModalDeletarTarefa() {
                     <Flex>
                       <Text
                         // textAlign={"center"}
-                        fontSize={"24px"}
+                        fontSize={"20px"}
                         mb={"1px"}
                         color={"#010101"}
                         fontWeight={"400"}
