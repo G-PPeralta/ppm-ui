@@ -37,7 +37,7 @@ export function EditarFornecedorModal({
 }: EditarFornecedorModalProps) {
   const [nomefornecedor, setNome] = useState(fornecedor?.nomefornecedor);
   const [poloid, setPolo] = useState(fornecedor ? fornecedor.poloid : 0);
-  const [representante, setResponsavel] = useState(
+  const [representante, setRepresentante] = useState(
     fornecedor ? fornecedor.representante : ""
   );
 
@@ -75,7 +75,7 @@ export function EditarFornecedorModal({
   useEffect(() => {
     setNome(fornecedor.nomefornecedor);
     setPolo(fornecedor.poloid);
-    setResponsavel(fornecedor.representante);
+    setRepresentante(fornecedor.representante);
     setNumeroDoContrato(fornecedor.numerocontrato);
     setEmail(fornecedor.email);
     setInvoice(fornecedor.invoice);
@@ -105,7 +105,7 @@ export function EditarFornecedorModal({
   function closeModal() {
     setNome(fornecedor.nomefornecedor);
     setPolo(fornecedor.poloid);
-    setResponsavel(fornecedor.representante);
+    setRepresentante(fornecedor.representante);
     setNumeroDoContrato(fornecedor.numerocontrato);
     setEmail(fornecedor.email);
     setInvoice(fornecedor.invoice);
@@ -307,13 +307,13 @@ export function EditarFornecedorModal({
                   fontSize={"14px"}
                   fontWeight={"400"}
                   isRequired
-                  placeholder="Nome do fornecedor"
+                  placeholder="Representante"
                   type="text"
-                  id="fornecedorNome"
-                  name="fornecedorNome"
+                  id="representante"
+                  name="representante"
                   value={representante}
                   maxLength={50}
-                  onChange={(event) => setNome(event.target.value)}
+                  onChange={(event) => setRepresentante(event.target.value)}
                 />
               </FormControl>
 
