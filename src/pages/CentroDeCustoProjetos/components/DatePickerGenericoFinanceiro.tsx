@@ -58,8 +58,12 @@ function DatePickerGenericoFinanceiro({
           px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
           minW={useBreakpointValue({ base: "180px", sm: "180px", md: "220px" })}
           w={"100%"}
+          // textColor={value === "" ? "#949494" : "#2D3748"}
+          fontSize={"14px"}
+          fontWeight={"400"}
+          color={"black"}
         >
-          {value === "" ? "Selecione a data" : value}
+          {value === "" ? "Selecione a Data" : value}
         </Button>
       </Flex>
     )
