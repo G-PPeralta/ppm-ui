@@ -101,21 +101,22 @@ export function BudgetDetailTable(props: PropsInterface) {
             <Td>{filho.fornecedor}</Td>
             <Td textAlign="right">
               <Flex alignItems={"center"} justifyContent="center">
-                {formatReal(filho.planejado)}{" "}
                 <ModalValorPrevisto
                   projeto={filho.projeto}
                   toogleRender={toogleRender}
                   value={filho.planejado.toFixed(2).toString() || ""}
                 />
+                {formatReal(filho.planejado)}{" "}
               </Flex>
             </Td>
             <Td textAlign="right">
               <Flex alignItems={"center"} justifyContent="center">
-                <ModalCustoDiario filho={filho} toogleRender={toogleRender} />
                 <ModalAdicionarGestaoDeCusto
                   projeto={filho.projeto}
                   toogleRender={toogleRender}
                 />
+
+                <ModalCustoDiario filho={filho} toogleRender={toogleRender} />
               </Flex>
             </Td>
             <Td align="center">{filho.gap}%</Td>

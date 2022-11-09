@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import { useEffect, useState } from "react";
-import { BsFillEyeFill, BsSearch } from "react-icons/bs";
+import { BsSearch, BsFillEyeFill } from "react-icons/bs";
 import Moment from "react-moment";
 import "moment/locale/pt-br";
 
@@ -136,25 +136,26 @@ function ModalCustoDiario(props: {
 
   return (
     <>
-      <Flex direction={"row"} align={"center"} justify={"center"}>
-        <IconButton
-          icon={<BsFillEyeFill />}
-          onClick={onOpen}
-          variant="outline"
-          aria-label="open menu"
-          color={"white"}
-          backgroundColor={"transparent"}
-          _hover={{
-            backgroundColor: "transparent",
-            color: "white",
-          }}
-          border={"none"}
-          alignSelf={"center"}
-        ></IconButton>
-        <Text textAlign={"end"}>
-          {formatReal(filho ? filho.realizado : pai ? pai.realizado : 0)}
-        </Text>
-      </Flex>
+      <IconButton
+        icon={<BsFillEyeFill />}
+        onClick={onOpen}
+        variant="outline"
+        aria-label="open menu"
+        color={"white"}
+        backgroundColor={"transparent"}
+        _hover={{
+          backgroundColor: "transparent",
+          color: "white",
+        }}
+        border={"none"}
+        alignSelf={"center"}
+      ></IconButton>
+
+      {formatReal(filho ? filho.realizado : pai ? pai.realizado : 0)}
+
+      {/* <Text style={{ cursor: "pointer" }} onClick={onOpen}>
+        {formatReal(filho ? filho.realizado : pai ? pai.realizado : 0)}
+      </Text> */}
 
       <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
