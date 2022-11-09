@@ -28,7 +28,7 @@ import InputGenerico from "components/InputGenerico";
 import { RequiredField } from "components/RequiredField/RequiredField";
 // import { TextError } from "components/TextError";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { handleCadastrar } from "utils/handleCadastro";
 
 import { useEditarOrcamentoRealizado } from "hooks/useEditarOrcamentoRealizado";
 
@@ -313,7 +313,7 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                   variant="ghost"
                   color="red.500"
                   w={"208px"}
-                  onClick={() => handleCancelar(registerForm, onClose)}
+                  onClick={() => onClose()}
                   _hover={{
                     background: "red.600",
                     transition: "all 0.4s",

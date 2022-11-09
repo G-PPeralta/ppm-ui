@@ -39,7 +39,7 @@ export function useCadastroOrcamentoRealizado() {
     data: "",
     fornecedor: "",
     servico: "",
-    pedido: "",
+    pedido: 0,
     pedido_obs: "",
     nom_usu_create: user?.nome,
   };
@@ -48,13 +48,17 @@ export function useCadastroOrcamentoRealizado() {
     initialValues,
     validationSchema: cadastroValorPlanejadoSchema,
     onSubmit: async (values) => {
+      const dateF = new Date(values.data);
+      dateF.setHours(11);
+      dateF.setDate(dateF.getDate() + 1);
+      const dateS = dateF.toISOString();
       const newValues: BudgetReal = {
         atividadeId: atividade,
         valor: parseNumber(values.gasto),
-        data: values.data,
+        data: dateS,
         fornecedor: values.fornecedor,
         classeServico: values.servico,
-        pedido: parseInt(values.pedido),
+        pedido: values.pedido,
         textPedido: values.pedido_obs,
         nom_usu_create: user?.nome,
       };
