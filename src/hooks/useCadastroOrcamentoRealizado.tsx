@@ -39,7 +39,7 @@ export function useCadastroOrcamentoRealizado() {
     data: "",
     fornecedor: "",
     servico: "",
-    pedido: "",
+    pedido: 0,
     pedido_obs: "",
     nom_usu_create: user?.nome,
   };
@@ -58,7 +58,7 @@ export function useCadastroOrcamentoRealizado() {
         data: dateS,
         fornecedor: values.fornecedor,
         classeServico: values.servico,
-        pedido: parseInt(values.pedido),
+        pedido: values.pedido,
         textPedido: values.pedido_obs,
         nom_usu_create: user?.nome,
       };
