@@ -35,6 +35,10 @@ function DateTimePicker({ registerForm, index }: any) {
     ({ value, onClick }: any, ref: any) => (
       <Button
         h={"56px"}
+        // _placeholder={{ color: "#949494" }}
+        fontSize={"14px"}
+        fontWeight={"400"}
+        color={"black"}
         onClick={onClick}
         ref={ref}
         variant="outline"
@@ -42,7 +46,7 @@ function DateTimePicker({ registerForm, index }: any) {
         minW={useBreakpointValue({ base: "180px", sm: "180px", md: "180px" })}
         backgroundColor="white"
         borderColor={"#E2E8F0"}
-        textColor={value === "" ? "#718096" : "#2D3748"}
+        textColor={value === "" ? "#949494" : "#2D3748"}
       >
         {value === "" ? "Selecione a data" : value}
       </Button>

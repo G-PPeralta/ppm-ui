@@ -99,6 +99,10 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                           </Flex>
                           <Input
                             h={"56px"}
+                            _placeholder={{ color: "#949494" }}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"black"}
                             isRequired
                             placeholder="Digite o ID"
                             id="id_origem"
@@ -128,6 +132,10 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                           </Flex>
                           <Input
                             h={"56px"}
+                            _placeholder={{ color: "#949494" }}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"black"}
                             isRequired
                             placeholder="Digite o nome da operação"
                             id="nom_operacao"
