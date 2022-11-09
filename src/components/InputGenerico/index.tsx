@@ -72,6 +72,9 @@ function InputGenerico({
           <Input
             isDisabled={isDisabled}
             h={"56px"}
+            fontSize={"14px"}
+            fontWeight={"400"}
+            color={"black"}
             placeholder={placeholder}
             type={"text"}
             id={propName}

@@ -6,7 +6,7 @@ export const cadastroFornecedor = yup.object({
     .required("Campo obrigatório")
     .moreThan(0, "Campo obrigatório")
     .typeError("Campo obrigatório"),
-  servico: yup.string().required("Campo obrigatório"),
+  servico_txt: yup.string().required("Campo obrigatório"),
   statusId: yup
     .number()
     .required("Campo obrigatório")

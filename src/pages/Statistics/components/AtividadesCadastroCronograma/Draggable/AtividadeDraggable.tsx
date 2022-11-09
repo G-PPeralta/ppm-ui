@@ -165,7 +165,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   <Flex>
                     <RequiredField />
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -183,7 +183,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -221,7 +221,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -251,7 +251,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -259,6 +259,10 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     </Text>
                   </Flex>
                   <NumberInput
+                    _placeholder={{ color: "#949494" }}
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    color={"black"}
                     width={99}
                     max={99999}
                     min={0}
@@ -279,7 +283,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 <Flex direction={"column"} flex={1}>
                   <Flex>
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -287,6 +291,10 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     </Text>
                   </Flex>
                   <NumberInput
+                    _placeholder={{ color: "#949494" }}
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    color={"black"}
                     max={99999}
                     min={0}
                     width={99}
@@ -307,7 +315,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   <Flex>
                     <RequiredField />
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >

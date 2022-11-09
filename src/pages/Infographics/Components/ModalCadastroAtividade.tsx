@@ -122,6 +122,10 @@ function ModalCadastroAtividade() {
                           </Text>
                         </Flex>
                         <Input
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"black"}
                           h={"56px"}
                           isRequired
                           placeholder="Digite o ID"
@@ -152,6 +156,10 @@ function ModalCadastroAtividade() {
                         </Flex>
                         <Input
                           h={"56px"}
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"black"}
                           isRequired
                           placeholder="Digite o nome da atividade"
                           id="nom_atividade"

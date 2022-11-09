@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import { Box, Flex, Input, Text } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Input, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 import { AreaAtuacao, Tarefas } from "interfaces/CadastrosModaisInfograficos";
 
@@ -140,7 +140,7 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -149,6 +149,10 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                   </Flex>
                   <Input
                     maxW={innerwidth >= 440 ? "auto" : "128px"}
+                    _placeholder={{ color: "#949494" }}
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    color={"black"}
                     h={"56px"}
                     placeholder="Ex.: CIP02"
                     type="text"
@@ -183,7 +187,7 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -192,6 +196,10 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                   </Flex>
                   <Input
                     h={"56px"}
+                    _placeholder={{ color: "#949494" }}
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    color={"black"}
                     maxW={"128px"}
                     placeholder="0"
                     type={"number"}
@@ -211,7 +219,7 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                 <Flex direction={"column"} flex={1}>
                   <Flex gap={1}>
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -224,18 +232,28 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                   />
                 </Flex>
               </Flex>
-              <Flex
+              {/* <Flex
+                mr={4}
                 p={1}
                 align={"center"}
                 justify={"center"}
                 _hover={{ cursor: "pointer" }}
+              > */}
+              <IconButton
+                onClick={() => remove(index)}
+                color={"#F40606"}
+                fontWeight={"700"}
+                backgroundColor={"transparent"}
+                aria-label="Plus sign"
+                _hover={{
+                  backgroundColor: "#F40606",
+                  color: "white",
+                }}
+                alignSelf={"center"}
               >
-                <FiTrash
-                  onClick={() => remove(index)}
-                  color="#F94144"
-                  size={16}
-                />
-              </Flex>
+                <FiTrash size={13} />
+              </IconButton>
+              {/* </Flex> */}
             </Flex>
           </Box>
         </div>

@@ -177,7 +177,7 @@ function ModalEditar({
                   <InputGroup>
                     <InputGenerico
                       registerForm={registerForm}
-                      nomeInput={"Valor Previsto"}
+                      nomeInput={"VALOR PREVISTO"}
                       propName={"valor"}
                       value={
                         registerForm.values.valor && registerForm.values.valor
@@ -189,7 +189,7 @@ function ModalEditar({
                     />
                   </InputGroup>
                 </Flex>
-                <Flex direction={"column"}>
+                <Flex direction={"column"} alignSelf={"end"} align={"end"}>
                   <DatePickerGenericoFinanceiro
                     registerForm={registerForm}
                     propName={"data"}
@@ -253,6 +253,9 @@ function ModalEditar({
                     </Text>
                   </Flex>
                   <Textarea
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    color={"black"}
                     isRequired
                     placeholder="Ação ou recomendação"
                     id="descricaoDoServico"

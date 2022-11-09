@@ -105,7 +105,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                 <FormControl>
                   <Flex direction={"column"} gap={4}>
                     <Stack>
-                      <Text fontWeight={"bold"}>Nome</Text>
+                      {/* <Text fontWeight={"bold"}>Nome</Text> */}
                       <Flex
                         direction={innerWidth >= 460 ? "row" : "column"}
                         gap={5}
@@ -129,7 +129,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                           <Flex gap={1}>
                             {/* <RequiredField /> */}
                             <Text
-                              fontWeight={"bold"}
+                              fontWeight={"700"}
                               fontSize={"12px"}
                               color={"#949494"}
                             >
@@ -138,6 +138,10 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                           </Flex>
 
                           <NumberInput
+                            _placeholder={{ color: "#949494" }}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"black"}
                             max={999999}
                             min={0}
                             id={`profundidade`}
@@ -162,7 +166,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                     />
 
                     <Stack>
-                      <Text fontWeight={"bold"}>Comentários</Text>
+                      {/* <Text fontWeight={"bold"}>Comentários</Text> */}
                       <FormControl>
                         <Flex gap={1}>
                           <Text
@@ -174,6 +178,10 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                           </Text>
                         </Flex>
                         <Textarea
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"black"}
                           isRequired
                           placeholder="Adicione comentários sobre a intervenção"
                           id="comentarios"

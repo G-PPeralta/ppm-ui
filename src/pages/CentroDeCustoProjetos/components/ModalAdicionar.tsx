@@ -120,9 +120,9 @@ function ModalAdicionar({
                 <Flex direction={"column"}>
                   <DatePickerGenericoFinanceiro
                     registerForm={registerForm}
+                    nomeLabel="Data"
                     propName={"data"}
                     required={true}
-                    mes={mes}
                     esconderHorario
                   />
                 </Flex>
@@ -148,7 +148,7 @@ function ModalAdicionar({
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -173,7 +173,7 @@ function ModalAdicionar({
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -181,6 +181,10 @@ function ModalAdicionar({
                     </Text>
                   </Flex>
                   <Textarea
+                    _placeholder={{ color: "#949494" }}
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    color={"black"}
                     isRequired
                     placeholder="Ação ou recomendação"
                     id="descricaoDoServico"

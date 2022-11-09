@@ -86,8 +86,8 @@ export function BudgetDetailTable(props: PropsInterface) {
           </Flex>
         </Td>
         <Td></Td>
-        <Td align="center">{formatReal(detail.planejado)}</Td>
-        <Td align="center">
+        <Td textAlign="right">{formatReal(detail.planejado)}</Td>
+        <Td textAlign="right">
           <ModalCustoDiario pai={detail} toogleRender={toogleRender} />
         </Td>
         <Td></Td>
@@ -99,7 +99,7 @@ export function BudgetDetailTable(props: PropsInterface) {
             <Td>{filho.brt}</Td>
             <Td>{filho.projeto.nome}</Td>
             <Td>{filho.fornecedor}</Td>
-            <Td textAlign="center">
+            <Td textAlign="right">
               <Flex alignItems={"center"} justifyContent="center">
                 {formatReal(filho.planejado)}{" "}
                 <ModalValorPrevisto
@@ -109,7 +109,7 @@ export function BudgetDetailTable(props: PropsInterface) {
                 />
               </Flex>
             </Td>
-            <Td textAlign="center">
+            <Td textAlign="right">
               <Flex alignItems={"center"} justifyContent="center">
                 <ModalCustoDiario filho={filho} toogleRender={toogleRender} />
                 <ModalAdicionarGestaoDeCusto
@@ -154,8 +154,12 @@ export function BudgetDetailTable(props: PropsInterface) {
               <Th color={"white"}>BRT</Th>
               <Th color={"white"}>Serviço/Compra</Th>
               <Th color={"white"}>Fornecedor</Th>
-              <Th color={"white"}>R$ Previsto</Th>
-              <Th color={"white"}>R$ Realizado</Th>
+              <Th color={"white"} textAlign="right">
+                R$ Previsto
+              </Th>
+              <Th color={"white"} textAlign="right">
+                R$ Realizado
+              </Th>
               <Th color={"white"}>% Gap</Th>
             </Tr>
           </Thead>
