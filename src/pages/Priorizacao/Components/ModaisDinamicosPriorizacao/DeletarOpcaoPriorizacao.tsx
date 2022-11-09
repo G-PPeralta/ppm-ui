@@ -40,8 +40,6 @@ function ModalDeletarOpcaoPriorizacao() {
           backgroundColor: "#F40606",
           color: "white",
         }}
-        // w={"14px"}
-        // h={"18px"}
       >
         <FiTrash size={"13px"} />
       </IconButton>
@@ -76,7 +74,7 @@ function ModalDeletarOpcaoPriorizacao() {
                     <Flex>
                       <Text
                         // textAlign={"center"}
-                        fontSize={"24px"}
+                        fontSize={"20px"}
                         mb={"1px"}
                         color={"#010101"}
                         fontWeight={"400"}
