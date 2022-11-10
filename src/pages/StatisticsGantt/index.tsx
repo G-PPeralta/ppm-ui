@@ -50,26 +50,30 @@ function StatisticsGantt() {
 
   const formatToGanttData = (data: any) => {
     if (!data) return;
-    const newGantt = data.atividades?.map((t: any) => ({
-      sonda: data.sonda,
-      id_sonda: data.id_sonda,
-      poco: data.poco,
-      id_poco: data.id_poco,
-      TaskID: t.id_atividade,
-      TaskName: t.nome_atividade,
-      StartDate: new Date(t.inicio_real),
-      EndDate: new Date(t.fim_real),
-      BaselineStartDate: new Date(t.inicio_planejado),
-      BaselineEndDate: new Date(t.fim_planejado),
-      BaselineDuration: Number(t.hrs_totais),
-      Duration: Number(t.hrs_reais),
-      // Work: Number(t.hrs_reais),
-      Progress: Number(t.pct_real),
-      max: Number(t.vlr_max),
-      min: Number(t.vlr_min),
-      med: Number(t.vlr_media),
-      dp: Number(t.vlr_dp),
-    }));
+    const newGantt = data.atividades
+      ?.filter(function (t: any) {
+        return t.id_atividade !== null;
+      })
+      .map((t: any) => ({
+        sonda: data.sonda,
+        id_sonda: data.id_sonda,
+        poco: data.poco,
+        id_poco: data.id_poco,
+        TaskID: t.id_atividade,
+        TaskName: t.nome_atividade,
+        StartDate: new Date(t.inicio_real),
+        EndDate: new Date(t.fim_real),
+        BaselineStartDate: new Date(t.inicio_planejado),
+        BaselineEndDate: new Date(t.fim_planejado),
+        BaselineDuration: Number(t.hrs_totais),
+        Duration: Number(t.hrs_reais),
+        // Work: Number(t.hrs_reais),
+        Progress: Number(t.pct_real),
+        max: Number(t.vlr_max),
+        min: Number(t.vlr_min),
+        med: Number(t.vlr_media),
+        dp: Number(t.vlr_dp),
+      }));
     setGanttData(newGantt);
     setProjeto({
       sonda: data.sonda,
