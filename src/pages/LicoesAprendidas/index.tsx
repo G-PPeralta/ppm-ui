@@ -106,16 +106,80 @@ export function LicoesAprendidasProjetos() {
   ) {
     try {
       await patchLicaoAprendida(licao, campo, payload, user);
-      setLicoesAprendidas(
-        licoesAprendidas.map((lic) =>
-          lic.id == editLicao.id ? editLicao : lic
-        )
-      );
       await handleGetLicoesAprendidas();
+      setProjetoId("0");
       onClose();
     } catch (error) {
       toast.error("Erro na requisição");
     }
+  }
+
+  function Body() {
+    return (
+      <>
+        {filteredLicoesAprendidas.length > 0 ? (
+          filteredLicoesAprendidas
+            .sort((a, b) => a.id - b.id)
+            .slice(from, to)
+            .map((lessons, index) => (
+              <Tr key={index}>
+                <Td
+                  // isNumeric
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                >
+                  {lessons.id}
+                </Td>
+
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  {lessons.txt_licao_aprendida}
+                </Td>
+                <Td
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                  width="406px"
+                  height={"36px"}
+                >
+                  {lessons.txt_acao}
+                </Td>
+                <Td fontWeight={"semibold"} textAlign={"center"}>
+                  {new Date(lessons.dat_usu_create)
+                    .toLocaleString("pt-BR")
+                    .substring(0, 10)}
+                </Td>
+                <Td fontWeight={"semibold"} textAlign={"center"}>
+                  <IconButton
+                    aria-label="Plus sign"
+                    icon={<MdModeEdit />}
+                    background="transparent"
+                    variant="secondary"
+                    color="#0047BB"
+                    // mr={2}
+                    // isRound={true}
+                    // size="md"
+                    _hover={{ background: "origem.500", color: "white" }}
+                    // width={"18px"}
+                    // height={"18px"}
+                    onClick={() => {
+                      setEditLicao(lessons);
+                      onOpen();
+                    }}
+                  />
+                  <DeleteModal />
+                </Td>
+              </Tr>
+            ))
+        ) : (
+          <Tr>
+            <Td textAlign={"start"}>
+              <Text textAlign={"start"} fontWeight={"semibold"}>
+                Não há dados
+              </Text>
+            </Td>
+          </Tr>
+        )}
+      </>
+    );
   }
 
   const tableData = filteredLicoesAprendidas
@@ -155,10 +219,11 @@ export function LicoesAprendidasProjetos() {
             variant="secondary"
             color="#0047BB"
             // mr={2}
-            isRound={true}
+            // isRound={true}
             // size="md"
-            width={"18px"}
-            height={"18px"}
+            _hover={{ background: "origem.500", color: "white" }}
+            // width={"18px"}
+            // height={"18px"}
             onClick={() => {
               setEditLicao(lessons);
               onOpen();
@@ -181,9 +246,9 @@ export function LicoesAprendidasProjetos() {
 
   const headers = [
     { label: "Projeto", key: "projeto" },
-    { label: "Lições Aprendidas", key: "txt_licao_aprendida" },
-    { label: "Ações e Recomendações", key: "txt_acao" },
-    { label: "Data", key: "dat_usu_create" },
+    { label: "Lições Aprendidas", key: "licao_aprendida" },
+    { label: "Ações e Recomendações", key: "acao_e_recomendacao" },
+    { label: "Data", key: "data" },
   ];
 
   // const rowsPerPage = 8;
@@ -272,11 +337,11 @@ export function LicoesAprendidasProjetos() {
               >
                 <Button
                   fontWeight={"700"}
-                  fontSize={"18px"}
-                  color={"#0239C3"}
+                  fontSize="18px"
+                  color={"#0047BB"}
                   variant="ghost"
-                  colorScheme="messenger"
-                  rightIcon={<FaFileCsv />}
+                  // colorScheme="messenger"
+                  rightIcon={<FaFileCsv size={18} />}
                   // onClick={print}
                 >
                   Exportar
@@ -297,6 +362,9 @@ export function LicoesAprendidasProjetos() {
                     PROJETO
                   </FormLabel>
                   <Select
+                    fontSize={"14px"}
+                    fontFamily={"Mulish"}
+                    fontWeight={"400"}
                     mt={"-9px"}
                     borderRadius={"8px"}
                     placeholder="Selecione"
@@ -305,6 +373,7 @@ export function LicoesAprendidasProjetos() {
                     onChange={(e) => setProjetoId(e.target.value)}
                     width={"208px"}
                     height={"56px"}
+                    value={projetoId}
                   >
                     <option color={"#A7A7A7"} value={0}>
                       Todos
@@ -347,9 +416,9 @@ export function LicoesAprendidasProjetos() {
             <Flex align={"flex-start"} alignSelf={"center"} mr={-3}>
               <Button
                 // onClick={onOpen}
-                background="transparent"
-                color="#0239C3"
-                float={"right"}
+                variant="ghost"
+                color="#0047BB"
+                // float={"right"}
                 fontWeight={"700"}
                 fontSize={"18px"}
               >
@@ -359,7 +428,7 @@ export function LicoesAprendidasProjetos() {
                   fontSize="20px"
                   fontWeight={"700"}
                   ml={1}
-                  color="#0239C3"
+                  color="#0047BB"
                 />
               </Button>
             </Flex>
@@ -409,7 +478,7 @@ export function LicoesAprendidasProjetos() {
                       </Th>
                     </Tr>
                   </Thead>
-                  <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+                  <Tbody scrollBehavior={"smooth"}>{<Body />}</Tbody>
                   <Tfoot>
                     <Tr background={"origem.500"}>
                       <Th color={"white"}>Total</Th>

@@ -29,11 +29,30 @@ export async function postCadastroNovoCronograma(
 }
 
 export async function postCadastroNovaLicaoAprendidaPorAtividade(
-  id: number,
+  // id: number,
   payload: any
 ): Promise<{ status: number }> {
   const { status } = await api.post(
-    `/estatisticas/cronograma/${id}/licao-aprendida`,
+    `projetos-atividades-licoes-aprendidas`,
+    payload,
+    token()
+  );
+  return { status };
+}
+
+export async function postCadastroNovaOcorrenciaPorAtividade(
+  id: number,
+  payload: any
+): Promise<{ status: number }> {
+  const { status } = await api.post(`/ocorrencias/${id}`, payload, token());
+  return { status };
+}
+
+export async function postCadastroNovaAtividadeCronograma(
+  payload: any
+): Promise<{ status: number }> {
+  const { status } = await api.post(
+    "/projetos-atividades/vincular",
     payload,
     token()
   );

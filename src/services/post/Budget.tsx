@@ -23,3 +23,14 @@ export async function postAddValorRealizado(
   );
   return { status };
 }
+
+export async function patchValorRealizado(
+  payload: BudgetReal
+): Promise<{ status: number }> {
+  const { status } = await api.patch(
+    "/budgets/orcamento-real",
+    payload,
+    token()
+  );
+  return { status };
+}

@@ -1,17 +1,24 @@
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { MdModeEdit } from "react-icons/md";
+import { useEffect, useState } from "react";
 
-import { Flex, IconButton, Td, Text, Tr } from "@chakra-ui/react";
+import { Flex, Td, Text, Tr } from "@chakra-ui/react";
 
 import FiltragemTabela from "components/FiltragemTabela";
 import TabelaGenerica from "components/TabelaGenerica";
 
+import { formatMinutesToHHmm } from "utils/formatDate";
+
+import ModalEditarOcorrencia from "./ModalEditarOcorrencia";
+
+interface RefreshState {
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+}
 interface Props {
   registerForm: any;
+  refreshState: RefreshState;
 }
 
-function EditarAtividadeTabOcorrencias({ registerForm }: Props) {
+function EditarAtividadeTabOcorrencias({ registerForm, refreshState }: Props) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
   const [tabelaFiltrada, setTabelaFiltrada] = useState<any[]>(
@@ -28,11 +35,9 @@ function EditarAtividadeTabOcorrencias({ registerForm }: Props) {
   const header = ["NOME DO CAMPO PERSONALIZADO", "HORAS", "AÇÕES"];
   const footer = [""];
 
-  const handleDeletar = (id: number, licao: string) => {
-    toast.success(`${licao} abrir modal!`, {
-      id: "toast-principal",
-    });
-  };
+  useEffect(() => {
+    setTabelaFiltrada(registerForm.values.ocorrencias);
+  }, [registerForm.values.ocorrencias]);
 
   function Body() {
     return (
@@ -46,27 +51,15 @@ function EditarAtividadeTabOcorrencias({ registerForm }: Props) {
                   <Text>{linhaTabela.nome_ocorrencia}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.horas}</Text>
+                  <Text>{formatMinutesToHHmm(linhaTabela.impacto)}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Flex gap={2} align={"center"} justify={"center"}>
-                    <IconButton
-                      aria-label="Botão de Editar"
-                      icon={<MdModeEdit />}
-                      borderRadius={"10px"}
-                      background={"transparent"}
-                      color={"origem.500"}
-                      _hover={{
-                        background: "origem.500",
-                        transition: "all 0.4s",
-                        color: "white",
-                      }}
-                      onClick={() =>
-                        handleDeletar(
-                          linhaTabela.id,
-                          linhaTabela.nome_ocorrencia
-                        )
-                      }
+                    <ModalEditarOcorrencia
+                      refreshState={refreshState}
+                      linhaTabela={linhaTabela}
+                      idAtividade={registerForm.values.id_atividade}
+                      index={index}
                     />
                   </Flex>
                 </Td>
@@ -90,10 +83,12 @@ function EditarAtividadeTabOcorrencias({ registerForm }: Props) {
       <FiltragemTabela
         dadosTabela={registerForm.values.ocorrencias}
         nomeLabel={"PESQUISAR"}
+        nomeLabelData={"Data"}
         placeholder={"Pesquisar"}
         setTabelaFiltrada={setTabelaFiltrada}
         propName={"nome_ocorrencia"}
         registerForm={registerForm}
+        filtrarData={true}
       />
       <TabelaGenerica
         maxHeight={"352px"}

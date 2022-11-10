@@ -9,14 +9,28 @@ import {
   ModalBody,
   ModalFooter,
   ModalCloseButton,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  ButtonGroup,
+  Button,
 } from "@chakra-ui/react";
+import { Anotacoes, LicaoAprendida, Ocorrencia } from "interfaces/Estatisticas";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 
 import { handleCancelar } from "utils/handleCadastro";
 
-import BotoesTabs from "./BotoesTabs";
+import {
+  getAnotacoesPorAtividade,
+  getLicoesAprendidasPorAtividade,
+  getMocPorAtividade,
+  getOcorrenciasPorAtividade,
+} from "services/get/Estatisticas";
+
 import EditarAtividadeTabAnotacoes from "./EditarAtividadeTabAnotacoes";
 import EditarAtividadeTabGeral from "./EditarAtividadeTabGeral";
 import EditarAtividadeTabLicoesAprendidas from "./EditarAtividadeTabLicoesAprendidas";
@@ -45,110 +59,7 @@ interface Props {
   registerForm: any;
 }
 
-const licoesAprendidasMock = [
-  {
-    id: 1,
-    licao_aprendida: "Lição 1",
-    data: "01/01/2021",
-    acao_e_recomendacao: "Ação 1 e Recomendação 1",
-  },
-  {
-    id: 2,
-    licao_aprendida: "Lição 2",
-    data: "01/01/2022",
-    acao_e_recomendacao: "Ação 2 e Recomendação 2",
-  },
-  {
-    id: 3,
-    licao_aprendida: "Lição 3",
-    data: "01/01/2023",
-    acao_e_recomendacao: "Ação 3 e Recomendação 3",
-  },
-  {
-    id: 4,
-    licao_aprendida: "Lição 4",
-    data: "01/01/2024",
-    acao_e_recomendacao: "Ação 4 e Recomendação 4",
-  },
-  {
-    id: 5,
-    licao_aprendida: "Lição 5",
-    data: "01/01/2025",
-    acao_e_recomendacao: "Ação 5 e Recomendação 5",
-  },
-  {
-    id: 6,
-    licao_aprendida: "Lição 6",
-    data: "01/01/2026",
-    acao_e_recomendacao: "Ação 6 e Recomendação 6",
-  },
-  {
-    id: 7,
-    licao_aprendida: "Lição 7",
-    data: "01/01/2027",
-    acao_e_recomendacao: "Ação 7 e Recomendação 7",
-  },
-  {
-    id: 8,
-    licao_aprendida: "Lição 8",
-    data: "01/01/2028",
-    acao_e_recomendacao: "Ação 8 e Recomendação 8",
-  },
-  {
-    id: 9,
-    licao_aprendida: "Lição 9",
-    data: "01/01/2029",
-    acao_e_recomendacao: "Ação 9 e Recomendação 9",
-  },
-  {
-    id: 10,
-    licao_aprendida: "Lição 10",
-    data: "01/01/2030",
-    acao_e_recomendacao: "Ação 10 e Recomendação 10",
-  },
-  {
-    id: 11,
-    licao_aprendida: "Lição 11",
-    data: "01/01/2031",
-    acao_e_recomendacao: "Ação 11 e Recomendação 11",
-  },
-  {
-    id: 12,
-    licao_aprendida: "Lição 12",
-    data: "01/01/2032",
-    acao_e_recomendacao: "Ação 12 e Recomendação 12",
-  },
-];
-
-const ocorrenciasMock = [
-  {
-    id: 1,
-    nome_ocorrencia: "Agda informação técnica / orientação",
-    horas: "00:00",
-  },
-  {
-    id: 2,
-    nome_ocorrencia: "Agdo manutenção",
-    horas: "00:00",
-  },
-  {
-    id: 3,
-    nome_ocorrencia: "Agdo outros",
-    horas: "00:00",
-  },
-  {
-    id: 4,
-    nome_ocorrencia: "Agdo recursos Cia Serviço",
-    horas: "00:00",
-  },
-  {
-    id: 5,
-    nome_ocorrencia: "APR",
-    horas: "00:00",
-  },
-];
-
-function ModalAdicionarOperacao({
+function ModalEditarOperacao({
   setRefresh,
   refresh,
   editOp,
@@ -158,16 +69,81 @@ function ModalAdicionarOperacao({
   registerForm,
 }: Props) {
   const [tabSelecionado, setTabSelecionado] = useState<any>(0);
-
-  const tab = {
-    tabSelecionado,
-    setTabSelecionado,
-  };
+  const [listaLicoesAprendidas, setListaLicoesAprendidas] = useState<
+    LicaoAprendida[]
+  >([]);
+  const [listaOcorrencias, setListaOcorrencias] = useState<Ocorrencia[]>([]);
+  const [anotacoes, setAnotacoes] = useState<Anotacoes[]>([]);
+  const [mocs, setMocs] = useState<any[]>([]);
+  // const [anexosMocs, setAnexosMocs] = useState<any[]>([]);
+  const [gambiarra, setGambiarra] = useState<any>(true);
 
   const refreshState = {
     setRefresh,
     refresh,
   };
+
+  const requestLicoesEOperacoes = async () => {
+    if (editOp.id_atividade) {
+      const licoesAprendidasPorAtividade =
+        await getLicoesAprendidasPorAtividade(editOp.id_atividade);
+      setListaLicoesAprendidas(licoesAprendidasPorAtividade.data);
+
+      const ocorrenciasPorAtividade = await getOcorrenciasPorAtividade(
+        editOp.id_atividade
+      );
+
+      const ocorrencias = ocorrenciasPorAtividade.data.map(
+        (ocorrencia: any) => ({
+          ...ocorrencia,
+          url: "",
+          anexo: "",
+        })
+      );
+
+      setListaOcorrencias(
+        ocorrencias.sort((a: any, b: any) =>
+          a.nome_ocorrencia.localeCompare(b.nome_ocorrencia)
+        )
+      );
+
+      // console.log("ocorrenciasPorAtividade", ocorrenciasPorAtividade.data);
+
+      const anotacoesPorAtividade = await getAnotacoesPorAtividade(
+        editOp.id_atividade
+      );
+      setAnotacoes(anotacoesPorAtividade.data);
+
+      const mocPorAtividade = await getMocPorAtividade(editOp.id_atividade);
+      setMocs(mocPorAtividade.data);
+    }
+  };
+
+  // const handleAnexosMocs = async () => {
+  //   if (editOp.id_atividade) {
+  //     const pdf = await getArquivoPdf(
+  //       editOp.id_atividade,
+  //       registerForm.values.mocs[0].numero_moc
+  //     );
+  //     setAnexosMocs(pdf.data);
+  //   }
+  // };
+
+  const handleGambiarra = () => {
+    setTimeout(() => {
+      setGambiarra(!gambiarra);
+    }, 2000);
+  };
+
+  useEffect(() => {
+    requestLicoesEOperacoes();
+    handleGambiarra();
+  }, []);
+
+  useEffect(() => {
+    requestLicoesEOperacoes();
+    handleGambiarra();
+  }, [refresh]);
 
   useEffect(() => {
     registerForm.setFieldValue("id_atividade", editOp.id_atividade);
@@ -179,41 +155,98 @@ function ModalAdicionarOperacao({
     registerForm.setFieldValue("hrs_totais", editOp.hrs_totais);
     registerForm.setFieldValue("hrs_reais", editOp.hrs_reais);
     registerForm.setFieldValue("pct_real", editOp.pct_real);
-    registerForm.setFieldValue("licoes_aprendidas", licoesAprendidasMock);
-    registerForm.setFieldValue("ocorrencias", ocorrenciasMock);
-  }, [editOp]);
+    registerForm.setFieldValue("licoes_aprendidas", listaLicoesAprendidas);
+    registerForm.setFieldValue("ocorrencias", listaOcorrencias);
+    if (anotacoes.length > 0) {
+      registerForm.setFieldValue("anotacoes", anotacoes[0].txt_nota);
+    }
+    if (mocs.length > 0) {
+      registerForm.setFieldValue("mocs", mocs);
+    }
+  }, [gambiarra]);
 
+  useEffect(() => {
+    registerForm.setFieldValue("id_atividade", editOp.id_atividade);
+    registerForm.setFieldValue("nome_atividade", editOp.nome_atividade);
+    registerForm.setFieldValue("inicio_planejado", editOp.inicio_planejado);
+    registerForm.setFieldValue("inicio_realizado", editOp.inicio_realizado);
+    registerForm.setFieldValue("fim_planejado", editOp.fim_planejado);
+    registerForm.setFieldValue("fim_realizado", editOp.fim_realizado);
+    registerForm.setFieldValue("hrs_totais", editOp.hrs_totais);
+    registerForm.setFieldValue("hrs_reais", editOp.hrs_reais);
+    registerForm.setFieldValue("pct_real", editOp.pct_real);
+    registerForm.setFieldValue("licoes_aprendidas", listaLicoesAprendidas);
+    registerForm.setFieldValue("ocorrencias", listaOcorrencias);
+    if (anotacoes.length > 0) {
+      registerForm.setFieldValue("anotacoes", anotacoes[0].txt_nota);
+    }
+    if (mocs.length > 0) {
+      registerForm.setFieldValue("mocs", mocs);
+    }
+    handleGambiarra();
+  }, [editOp, isOpen]);
+
+  useEffect(() => {
+    if (anotacoes.length > 0) {
+      registerForm.setFieldValue("anotacoes", anotacoes[0].txt_nota);
+    }
+    if (mocs.length > 0) {
+      registerForm.setFieldValue("mocs", mocs);
+    }
+    handleGambiarra();
+  }, [anotacoes, mocs]);
+
+  useEffect(() => {
+    // if (mocs.length > 0) {
+    //   handleAnexosMocs();
+    // }
+  }, [mocs]);
+
+  useEffect(() => {
+    requestLicoesEOperacoes();
+  }, [isOpen]);
+
+  // console.log("mocs", mocs);
+  // console.log("anexosMocs", anexosMocs);
+  // console.log("anotacoes", anotacoes);
   // console.log("registerForm", registerForm.values);
   // console.log("editOp", editOp);
 
-  // console.log("tabSelecionado", tabSelecionado);
+  const botoes = [
+    {
+      nome: "Geral",
+      selecionado: tabSelecionado === 0,
+    },
+    {
+      nome: "Anotações",
+      selecionado: tabSelecionado === 1,
+    },
+    {
+      nome: "MOC",
+      selecionado: tabSelecionado === 2,
+    },
+    {
+      nome: "Lições Aprendidas",
+      selecionado: tabSelecionado === 3,
+    },
+    {
+      nome: "Tempo Aguardando",
+      selecionado: tabSelecionado === 4,
+    },
+  ];
 
-  function HandleTab() {
-    switch (true) {
-      case tabSelecionado === 0:
-        return <EditarAtividadeTabGeral registerForm={registerForm} />;
+  const handleClick = (index: number) => {
+    setTabSelecionado(index);
 
-      case tabSelecionado === 1:
-        return <EditarAtividadeTabAnotacoes registerForm={registerForm} />;
-
-      case tabSelecionado === 2:
-        return <EditarAtividadeTabMOC registerForm={registerForm} />;
-
-      case tabSelecionado === 3:
-        return (
-          <EditarAtividadeTabLicoesAprendidas
-            registerForm={registerForm}
-            refreshState={refreshState}
-          />
-        );
-
-      case tabSelecionado === 4:
-        return <EditarAtividadeTabOcorrencias registerForm={registerForm} />;
-
-      default:
-        return <EditarAtividadeTabGeral registerForm={registerForm} />;
-    }
-  }
+    botoes.map((botao, i) => {
+      if (i === index) {
+        botao.selecionado = true;
+      } else {
+        botao.selecionado = false;
+      }
+      return botao;
+    });
+  };
 
   return (
     <>
@@ -226,7 +259,9 @@ function ModalAdicionarOperacao({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
             Editar Atividade
           </ModalHeader>
@@ -241,101 +276,58 @@ function ModalAdicionarOperacao({
             }}
           >
             <ModalBody mt={3}>
-              <BotoesTabs tab={tab} />
-
-              <Flex flex={1} mt={5}>
-                <HandleTab />
-              </Flex>
-
-              {/*
-              MODAL ANTIGO - NÃO APAGUEI AINDA PARA CASO VOLTE AO QUE ERA ANTES, É SÓ DESCOMENTAR KKK
-              <Flex
-                flexDirection={useBreakpointValue({
-                  base: "column",
-                  md: "column",
-                })}
-                gap={5}
-              >
-                <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Nome</Text>
-                  <Flex gap={5} flex={1}>
-                    <Flex direction={"column"} flex={2}>
-                      <Input
-                        isDisabled
-                        value={registerForm.values.nome_atividade || ""}
-                        type="text"
-                        name="nome_atividade"
-                      />
-                    </Flex>
-                  </Flex>
-                </Flex>
-
-                <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Datas</Text>
-                  <Flex gap={5}>
-                    <Flex>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"inicio_planejado"}
-                        label={"INÍCIO PLANEJADO"}
-                        required={true}
-                        data={registerForm.values.inicio_planejado}
-                      />
-                    </Flex>
-                    <Flex>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"fim_planejado"}
-                        label={"FIM PLANEJADO"}
-                        required={true}
-                        data={registerForm.values.fim_planejado}
-                      />
-                    </Flex>
-                  </Flex>
-                  <Flex gap={5}>
-                    <Flex>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"inicio_realizado"}
-                        label={"INÍCIO REAL"}
-                        required={true}
-                        data={registerForm.values.inicio_realizado}
-                      />
-                    </Flex>
-                    <Flex>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"fim_realizado"}
-                        label={"FIM REAL"}
-                        required={true}
-                        data={registerForm.values.fim_realizado}
-                      />
-                    </Flex>
-                  </Flex>
-                  <Flex flex={1} direction={"column"}>
-                    <Text fontWeight={"bold"}>Progresso</Text>
-                    <Flex gap={5}>
-                      <Flex>
-                        <NumberInput
-                          max={100}
-                          min={0}
-                          id={"pct_real"}
-                          name={"pct_real"}
-                          value={registerForm.values.pct_real}
-                          onChange={(value) => {
-                            registerForm.setFieldValue(
-                              "pct_real",
-                              Number(value)
-                            );
+              <Flex flex={1} mt={5} w={"100%"}>
+                <Tabs variant={"unstyled"} isLazy={true} flex={1} w={"100%"}>
+                  <TabList>
+                    <ButtonGroup size="lg" isAttached variant="outline">
+                      {botoes.map((botao, index) => (
+                        <Button
+                          fontSize={"14px"}
+                          fontWeight={"bold"}
+                          color={botao.selecionado ? "white" : "origem.500"}
+                          backgroundColor={
+                            botao.selecionado ? "origem.500" : "#FEFEFE"
+                          }
+                          _hover={{
+                            background: "origem.500",
+                            transition: "all 0.4s",
+                            color: "#FEFEFE",
                           }}
+                          onClick={() => handleClick(index)}
                         >
-                          <NumberInputField bg={"#fff"} h={"56px"} />
-                        </NumberInput>
-                      </Flex>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex> */}
+                          <Tab fontWeight={"semibold"}>{botao.nome}</Tab>
+                        </Button>
+                      ))}
+                    </ButtonGroup>
+                  </TabList>
+
+                  <TabPanels flex={1} w={"100%"}>
+                    <TabPanel flex={1}>
+                      <EditarAtividadeTabGeral registerForm={registerForm} />
+                    </TabPanel>
+                    <TabPanel flex={1}>
+                      <EditarAtividadeTabAnotacoes
+                        registerForm={registerForm}
+                      />
+                    </TabPanel>
+                    <TabPanel flex={1}>
+                      <EditarAtividadeTabMOC registerForm={registerForm} />
+                    </TabPanel>
+                    <TabPanel flex={1}>
+                      <EditarAtividadeTabLicoesAprendidas
+                        registerForm={registerForm}
+                        refreshState={refreshState}
+                      />
+                    </TabPanel>
+                    <TabPanel flex={1}>
+                      <EditarAtividadeTabOcorrencias
+                        registerForm={registerForm}
+                        refreshState={refreshState}
+                      />
+                    </TabPanel>
+                  </TabPanels>
+                </Tabs>
+              </Flex>
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
@@ -362,4 +354,4 @@ function ModalAdicionarOperacao({
   );
 }
 
-export default ModalAdicionarOperacao;
+export default ModalEditarOperacao;

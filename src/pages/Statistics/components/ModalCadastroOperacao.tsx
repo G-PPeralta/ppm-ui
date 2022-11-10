@@ -14,32 +14,19 @@ import {
   Text,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { AreaAtuacao } from "interfaces/CadastrosModaisInfograficos";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
-import SelectFiltragem from "components/SelectFiltragem";
 
 import { handleCancelar } from "utils/handleCadastro";
-import { regexSomenteNumeros, regexCaracteresEspeciais } from "utils/regex";
+import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroOperacao } from "hooks/useCadastroOperacao";
 
 function ModalCadastroOperacao({ refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaAreaAtuacao, listaResponsaveis } =
-    useCadastroOperacao();
-
-  const optionsAreaAtuacao = listaAreaAtuacao.map((area: AreaAtuacao) => ({
-    value: area.id,
-    label: area.tipo,
-  }));
-
-  const optionsResponsaveis = listaResponsaveis.map((responsavel: any) => ({
-    value: responsavel.id,
-    label: responsavel.nome,
-  }));
+  const { registerForm, loading } = useCadastroOperacao();
 
   return (
     <>
@@ -71,7 +58,8 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Cadastrar Operação
           </ModalHeader>
@@ -96,7 +84,7 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                     gap={5}
                   >
                     <Flex flex={1} direction={"column"}>
-                      <Text fontWeight={"bold"}>Nome</Text>
+                      {/* <Text fontWeight={"bold"}>Nome</Text> */}
                       <Flex gap={5} flex={1}>
                         <Flex direction={"column"} flex={1}>
                           <Flex gap={1}>
@@ -111,6 +99,10 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                           </Flex>
                           <Input
                             h={"56px"}
+                            _placeholder={{ color: "#949494" }}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"black"}
                             isRequired
                             placeholder="Digite o ID"
                             id="id_origem"
@@ -120,7 +112,7 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                               base: "100%",
                               md: "100%",
                             })}
-                            value={regexSomenteNumeros(
+                            value={regexCaracteresEspeciais(
                               registerForm.values.id_origem
                             )}
                             onChange={registerForm.handleChange}
@@ -140,6 +132,10 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                           </Flex>
                           <Input
                             h={"56px"}
+                            _placeholder={{ color: "#949494" }}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"black"}
                             isRequired
                             placeholder="Digite o nome da operação"
                             id="nom_operacao"
@@ -159,46 +155,6 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                       </Flex>
                     </Flex>
                   </Flex>
-
-                  <Text fontWeight={"bold"}>Responsável</Text>
-                  <Flex
-                    flexDirection={useBreakpointValue({
-                      base: "column",
-                      md: "row",
-                    })}
-                    gap={5}
-                    mb={10}
-                  >
-                    <Flex flex={1}>
-                      <SelectFiltragem
-                        registerForm={registerForm}
-                        nomeSelect={"RESPONSÁVEL"}
-                        propName={"responsavel_id"}
-                        options={optionsResponsaveis}
-                        required={true}
-                      />
-                    </Flex>
-                    <Flex flex={1}>
-                      <SelectFiltragem
-                        registerForm={registerForm}
-                        nomeSelect={"ÁREA"}
-                        propName={"area_id"}
-                        options={optionsAreaAtuacao}
-                        required={true}
-                      />
-                    </Flex>
-                  </Flex>
-
-                  {/* <Flex
-                    flexDirection={useBreakpointValue({
-                      base: "column",
-                      md: "column",
-                    })}
-                    gap={2}
-                  >
-                    <Text fontWeight={"bold"}>Restrições</Text>
-                    <Restricoes registerForm={registerForm} />
-                  </Flex> */}
                 </Stack>
               </Flex>
             </ModalBody>

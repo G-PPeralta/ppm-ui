@@ -10,6 +10,8 @@ interface Props {
   value: any;
   required?: any;
   placeholder?: any;
+  minHeight?: string;
+  maxLength?: number;
 }
 
 function TextAreaGenerico({
@@ -19,6 +21,8 @@ function TextAreaGenerico({
   value,
   required,
   placeholder,
+  minHeight,
+  maxLength,
 }: Props) {
   return (
     <Flex direction={"column"} w={"100%"} flex={1}>
@@ -39,6 +43,7 @@ function TextAreaGenerico({
         _placeholder={{ color: "#949494" }}
         fontSize={"14px"}
         fontWeight={"400"}
+        minH={minHeight}
       />
       {registerForm.touched[propName] && registerForm.errors[propName] && (
         <TextError>{registerForm.errors[propName]}</TextError>

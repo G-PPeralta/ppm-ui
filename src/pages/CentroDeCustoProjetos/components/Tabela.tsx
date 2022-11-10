@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { FiTrash } from "react-icons/fi";
+// import { FiTrash } from "react-icons/fi";
 
 import {
   Flex,
-  IconButton,
+  // IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -19,10 +19,11 @@ import PaginacaoTabela from "components/PaginacaoTabela";
 
 import { formatDate } from "utils/formatDate";
 
-import { useAuth } from "hooks/useAuth";
+// import { useAuth } from "hooks/useAuth";
 
-import { deleteDespesa } from "services/delete/Financeiro";
+// import { deleteDespesa } from "services/delete/Financeiro";
 
+import ModalDeletarCentroDeCusto from "./ModalDeletarCentroDeCusto";
 import ModalEditar from "./ModalEditar";
 
 interface RefreshState {
@@ -34,11 +35,10 @@ interface Props {
   refreshState: RefreshState;
   idProjeto: number;
   optionsSelects: any;
+  mes: number;
 }
 
-function Tabela({ data, refreshState, idProjeto, optionsSelects }: Props) {
-  const { user } = useAuth();
-  const { refresh, setRefresh } = refreshState;
+function Tabela({ data, refreshState, optionsSelects, mes }: Props) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
 
@@ -47,11 +47,6 @@ function Tabela({ data, refreshState, idProjeto, optionsSelects }: Props) {
     to,
     setFrom,
     setTo,
-  };
-
-  const handleDeletar = (idCusto: number) => {
-    deleteDespesa(idCusto, user?.nome);
-    setRefresh(!refresh);
   };
 
   const formatarParaReal = (valor: number) => {
@@ -73,10 +68,9 @@ function Tabela({ data, refreshState, idProjeto, optionsSelects }: Props) {
     "Ações",
   ];
 
-  const valorTotalRealizado = data.reduce(
-    (acc: number, curr: any) => acc + curr.valor,
-    0
-  );
+  const valorTotalRealizado = data
+    ? data.reduce((acc: number, curr: any) => acc + curr.valor, 0)
+    : 0;
 
   const footer = [
     "Total",
@@ -138,13 +132,14 @@ function Tabela({ data, refreshState, idProjeto, optionsSelects }: Props) {
                   <Text>{linhaTabela.descricaoDoServico}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Flex gap={2} align={"center"} justify={"center"}>
-                    <ModalEditar
-                      refreshState={refreshState}
-                      linhaTabela={linhaTabela}
-                      optionsSelects={optionsSelects}
-                    />
-                    <IconButton
+                  {/* <Flex gap={2} align={"center"} justify={"center"}> */}
+                  <ModalEditar
+                    refreshState={refreshState}
+                    linhaTabela={linhaTabela}
+                    optionsSelects={optionsSelects}
+                    mes={mes}
+                  />
+                  {/* <IconButton
                       aria-label="Botão de Editar"
                       icon={<FiTrash />}
                       borderRadius={"10px"}
@@ -156,16 +151,22 @@ function Tabela({ data, refreshState, idProjeto, optionsSelects }: Props) {
                         color: "white",
                       }}
                       onClick={() => handleDeletar(linhaTabela.idCusto)}
-                    />
-                  </Flex>
+                    /> */}
+                  <ModalDeletarCentroDeCusto
+                    idCusto={linhaTabela.idCusto}
+                    refreshState={refreshState}
+                  />
+                  {/* </Flex> */}
                 </Td>
               </Tr>
             );
           })
         ) : (
           <Tr>
-            <Td textAlign={"center"} fontWeight={"semibold"}>
-              <Text>Não há dados</Text>
+            <Td colSpan={header.length} textAlign={"start"}>
+              <Text textAlign={"start"} fontWeight={"semibold"}>
+                Não há dados
+              </Text>
             </Td>
           </Tr>
         )}
@@ -205,7 +206,7 @@ function Tabela({ data, refreshState, idProjeto, optionsSelects }: Props) {
           </Table>
         </TableContainer>
       </Flex>
-      <PaginacaoTabela data={data} fromTo={fromTo} />
+      {data ? <PaginacaoTabela data={data} fromTo={fromTo} /> : <></>}
     </Flex>
   );
 }

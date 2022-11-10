@@ -1,9 +1,10 @@
 import { useEffect, useId, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
+import toast from "react-hot-toast";
 import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import { Box, Flex, Input, Text } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Input, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 import { AreaAtuacao, Tarefas } from "interfaces/CadastrosModaisInfograficos";
 
@@ -31,12 +32,18 @@ function AtividadesDraggable({ index, registerForm }: Props) {
   const { listaTarefas } = useCadastroProjetoTipo();
 
   const remove = (index: number) => {
-    // Pega a lista de atividades diretamente do Formik
-    const newList = registerForm.values.atividades;
-    // Remove item da lista
-    newList.splice(index, 1);
-    // Atualiza lista no Formik
-    registerForm.setFieldValue("atividades", newList);
+    if (registerForm.values.atividades.length > 1) {
+      // Pega a lista de atividades diretamente do Formik
+      const newList = registerForm.values.atividades;
+      // Remove item da lista
+      newList.splice(index, 1);
+      // Atualiza lista no Formik
+      registerForm.setFieldValue("atividades", newList);
+    } else {
+      toast.error("O projeto tipo deve ter ao menos uma atividade", {
+        id: "toast-principal",
+      });
+    }
   };
 
   const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
@@ -65,6 +72,22 @@ function AtividadesDraggable({ index, registerForm }: Props) {
     const newId = draggableId + "-" + now.toLocaleString();
     setDraggableId(newId);
   }, []);
+
+  useEffect(() => {
+    const ind = listaTarefas.findIndex(
+      (val) => val.id == registerForm.values.atividades[index].tarefa_id
+    );
+
+    registerForm.setFieldValue(
+      `atividades[${index}].atividade_id_origem`,
+      listaTarefas[ind]?.id_origem || ""
+    );
+
+    registerForm.setFieldValue(
+      `atividades[${index}].area_id`,
+      listaTarefas[ind]?.area_atuacao || ""
+    );
+  }, [registerForm.values.atividades[index].tarefa_id]);
 
   return (
     <Draggable draggableId={draggableId} index={index}>
@@ -104,10 +127,20 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                 flex={1}
               >
                 <Flex direction={"column"} flex={2}>
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    nomeSelect={"ATIVIDADE"}
+                    required={true}
+                    propName={`atividades[${index}].tarefa_id`}
+                    options={optionsTarefa}
+                    value={getValue(optionsTarefa, index, "tarefa_id")}
+                  />
+                </Flex>
+                <Flex direction={"column"} flex={2}>
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -116,6 +149,10 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                   </Flex>
                   <Input
                     maxW={innerwidth >= 440 ? "auto" : "128px"}
+                    _placeholder={{ color: "#949494" }}
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    color={"black"}
                     h={"56px"}
                     placeholder="Ex.: CIP02"
                     type="text"
@@ -146,22 +183,11 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                   />
                 </Flex>
 
-                <Flex direction={"column"} flex={2}>
-                  <SelectFiltragem
-                    registerForm={registerForm}
-                    nomeSelect={"TAREFA"}
-                    required={true}
-                    propName={`atividades[${index}].tarefa_id`}
-                    options={optionsTarefa}
-                    value={getValue(optionsTarefa, index, "tarefa_id")}
-                  />
-                </Flex>
-
                 <Flex direction={"column"} flex={1}>
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -170,6 +196,10 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                   </Flex>
                   <Input
                     h={"56px"}
+                    _placeholder={{ color: "#949494" }}
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    color={"black"}
                     maxW={"128px"}
                     placeholder="0"
                     type={"number"}
@@ -189,7 +219,7 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                 <Flex direction={"column"} flex={1}>
                   <Flex gap={1}>
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -202,18 +232,28 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                   />
                 </Flex>
               </Flex>
-              <Flex
+              {/* <Flex
+                mr={4}
                 p={1}
                 align={"center"}
                 justify={"center"}
                 _hover={{ cursor: "pointer" }}
+              > */}
+              <IconButton
+                onClick={() => remove(index)}
+                color={"#F40606"}
+                fontWeight={"700"}
+                backgroundColor={"transparent"}
+                aria-label="Plus sign"
+                _hover={{
+                  backgroundColor: "#F40606",
+                  color: "white",
+                }}
+                alignSelf={"center"}
               >
-                <FiTrash
-                  onClick={() => remove(index)}
-                  color="#F94144"
-                  size={16}
-                />
-              </Flex>
+                <FiTrash size={13} />
+              </IconButton>
+              {/* </Flex> */}
             </Flex>
           </Box>
         </div>

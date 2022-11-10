@@ -11,7 +11,11 @@ import { postNovaSonda } from "services/post/Infograficos";
 
 import { useAuth } from "./useAuth";
 
-export function useCadastroSonda(modulo?: string) {
+export function useCadastroSonda(
+  modulo?: string,
+  refresh?: boolean,
+  setRefresh?: Function
+) {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
@@ -50,6 +54,9 @@ export function useCadastroSonda(modulo?: string) {
               id: "toast-principal",
             });
             setLoading(false);
+            if (setRefresh) {
+              setRefresh(!refresh);
+            }
           }
         }
         // const { status } = await postNovaSonda(newValues);

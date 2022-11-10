@@ -6,13 +6,14 @@ import { Button, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 import { RequiredField } from "components/RequiredField/RequiredField";
 
 function DateTimePicker({ registerForm, data, label, value, required }: any) {
+  const [horaMin, setHoraMin] = useState<any>(new Date());
+  const [horaMax, setHoraMax] = useState<any>(new Date());
   const [dataInicio, setDataInicio] = useState<any>("");
-  // const [dataMin, setDataMin] = useState<any>("");
 
   useEffect(() => {
-    if (data) {
+    if (data && !dataInicio) {
       const newDate = new Date(data);
-      // newDate.setDate(newDate.getDate() + 15);
+      // newDate.setHours(newDate.getHours() + 3);
       setDataInicio(newDate);
       // setDataMin(newDate);
     } else {
@@ -20,6 +21,17 @@ function DateTimePicker({ registerForm, data, label, value, required }: any) {
       // setDataInicio(newDate);
     }
   }, [data]);
+
+  useEffect(() => {
+    const dateMin = new Date();
+    dateMin.setHours(8);
+    dateMin.setMinutes(0);
+    setHoraMin(dateMin);
+    const dateMax = new Date();
+    dateMax.setHours(18);
+    dateMax.setMinutes(0);
+    setHoraMax(dateMax);
+  }, []);
 
   const handleIniciarDate = (date: any) => {
     if (date) {
@@ -32,6 +44,7 @@ function DateTimePicker({ registerForm, data, label, value, required }: any) {
     ({ value, onClick }: any, ref: any) => (
       <Button
         h={"56px"}
+        w={"100%"}
         onClick={onClick}
         ref={ref}
         variant="outline"
@@ -47,7 +60,7 @@ function DateTimePicker({ registerForm, data, label, value, required }: any) {
     <Flex direction={"column"}>
       <Flex gap={1}>
         {required && <RequiredField />}
-        <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
+        <Text fontWeight={"700"} fontSize={"12px"} color={"#949494"}>
           {label}
         </Text>
       </Flex>
@@ -57,6 +70,8 @@ function DateTimePicker({ registerForm, data, label, value, required }: any) {
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
         showTimeSelect
+        minTime={horaMin}
+        maxTime={horaMax}
         dateFormat="dd/MM/yyyy, hh:mm"
         customInput={<TriggerDatePickerInicio />}
         // isClearable={dataInicio !== ""}

@@ -148,12 +148,12 @@ export default function NaoPrevistoComponent() {
                     {/* {trut ? <Text> {projeto.nomeProjeto}</Text> : ''} */}
                     <Th color="gray.400" sx={{ fontSize: 11 }}>
                       <Text textAlign={"end"}>
-                        {projeto.valor_total_previsto
+                        {projeto.vlr_orcado
                           ? Intl.NumberFormat("pt-br", {
                               style: "currency",
                               currency: "BRL",
                             })
-                              .format(projeto.valor_total_previsto)
+                              .format(projeto.vlr_orcado)
                               .toString()
                               .split(",")[0]
                           : 0}

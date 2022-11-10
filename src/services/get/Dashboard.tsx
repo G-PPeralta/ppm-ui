@@ -1,3 +1,5 @@
+import { TotalProjetosDashboard } from "interfaces/Services";
+
 import { api } from "services/api";
 
 export async function getTotalProjetos(): Promise<{
@@ -83,6 +85,32 @@ export async function getProjetosPrevistoRealizado(): Promise<{
   status: number;
 }> {
   const { data, status } = await api.get("/projetos/previstoXRealizado", {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
+    },
+  });
+
+  return { data, status };
+}
+
+export async function getGates(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/dashboard/gates", {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
+    },
+  });
+
+  return { data, status };
+}
+
+export async function getTotalProjetosMes(): Promise<{
+  data: TotalProjetosDashboard[];
+  status: number;
+}> {
+  const { data, status } = await api.get("/dashboard/total-projetos-mes", {
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },

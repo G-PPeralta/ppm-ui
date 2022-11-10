@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { GrAddCircle } from "react-icons/gr";
+import { MdModeEdit } from "react-icons/md";
 
 import {
   Flex,
@@ -8,47 +8,58 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  // ModalCloseButton,
+  ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
   Button,
   FormControl,
-  FormLabel,
   Stack,
   useBreakpointValue,
   Input,
   IconButton,
   Select,
   Textarea,
+  InputGroup,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import { Projeto } from "interfaces/Budgets";
 
-// import RealInput from "components/RealInput/input";
+import InputGenerico from "components/InputGenerico";
 import { RequiredField } from "components/RequiredField/RequiredField";
-import { TextError } from "components/TextError";
+// import { TextError } from "components/TextError";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { handleCadastrar } from "utils/handleCadastro";
 
-import { useCadastroOrcamentoRealizado } from "hooks/useCadastroOrcamentoRealizado";
+import { useEditarOrcamentoRealizado } from "hooks/useEditarOrcamentoRealizado";
 
-function ModalGestaoDeCusto(props: { projeto: Projeto }) {
+interface PropsInterface {
+  id: number;
+  toogleRender: () => void;
+}
+
+function ModalEditarGestaoDeCusto(props: PropsInterface) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, setAtividade, fornecedores, classesSevicos } =
-    useCadastroOrcamentoRealizado();
-  const { id } = props.projeto;
+  const { id, toogleRender } = props;
+  const { registerForm, loading, fornecedores, classesSevicos } =
+    useEditarOrcamentoRealizado(id);
 
   useEffect(() => {
-    setAtividade(id);
+    // setAtividade(realizado.id);
   }, []);
 
   return (
     <>
       <IconButton
-        aria-label="Edit Realizado"
-        variant={"outline"}
-        icon={<GrAddCircle />}
+        variant="outline"
+        aria-label="Editar Realizado"
+        icon={<MdModeEdit />}
+        color={"origem.500"}
+        backgroundColor={"transparent"}
+        _hover={{
+          backgroundColor: "origem.500",
+          color: "white",
+        }}
+        border={"none"}
         onClick={onOpen}
       />
 
@@ -61,11 +72,13 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
             Gestão de Custos
           </ModalHeader>
-          {/* <ModalCloseButton color={"white"} /> */}
+          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -93,32 +106,44 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                         <FormControl>
                           <Flex gap={1}>
                             <RequiredField />
-                            <FormLabel htmlFor="gasto">Valor</FormLabel>{" "}
+                            <Text
+                              fontWeight={"bold"}
+                              fontSize={"12px"}
+                              color={"#949494"}
+                            >
+                              VALOR GASTO
+                            </Text>
                           </Flex>
-                          <Input
-                            h={"56px"}
-                            isRequired
-                            placeholder="Valor Gasto"
-                            id="gasto"
-                            name="gasto"
-                            type={"number"}
-                            maxLength={12}
-                            max={1000000000}
-                            value={registerForm.values.gasto}
-                            onChange={registerForm.handleChange}
-                          />
-                          {registerForm.errors.gasto && (
-                            <TextError>{registerForm.errors.gasto}</TextError>
-                          )}
+                          <InputGroup>
+                            <InputGenerico
+                              registerForm={registerForm}
+                              // nomeInput={"Valor Gasto"}
+                              propName={"gasto"}
+                              value={registerForm.values.gasto || ""}
+                              required={true}
+                              placeholder={"0"}
+                              maxLength={20}
+                              isNumeric={true}
+                            />
+                          </InputGroup>
                         </FormControl>
 
                         <FormControl>
                           <Flex gap={1}>
                             <RequiredField />
-                            <FormLabel htmlFor="data">Data</FormLabel>{" "}
+                            <Text
+                              fontWeight={"bold"}
+                              fontSize={"12px"}
+                              color={"#949494"}
+                            >
+                              DATA
+                            </Text>{" "}
                           </Flex>
                           <Input
                             h={"56px"}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"#2D2926"}
                             placeholder="Selecione a Data"
                             size="md"
                             type="date"
@@ -126,21 +151,30 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             name="data"
                             max="3000-12-31"
                             maxLength={1}
-                            value={registerForm.values.data}
+                            defaultValue={registerForm.values.data}
                             onChange={registerForm.handleChange}
                           />
-                          {registerForm.errors.data && (
+                          {/* {registerForm.errors.data && (
                             <TextError>{registerForm.errors.data}</TextError>
-                          )}
+                         )} */}
                         </FormControl>
                       </Flex>
                       <FormControl>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="fornecedor">Fornecedor</FormLabel>
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            FORNECEDOR
+                          </Text>
                         </Flex>
                         <Select
                           h={"56px"}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"#2D2926"}
                           placeholder="Escolha um Fornecedor"
                           id="fornecedor"
                           name="fornecedor"
@@ -153,11 +187,11 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                             ))}
                         </Select>
 
-                        {registerForm.errors.fornecedor && (
+                        {/* {registerForm.errors.fornecedor && (
                           <TextError>
                             {registerForm.errors.fornecedor}
                           </TextError>
-                        )}
+                       )} */}
                       </FormControl>
                       <Flex
                         flexDirection={useBreakpointValue({
@@ -169,12 +203,19 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                         <FormControl>
                           <Flex gap={1}>
                             <RequiredField />
-                            <FormLabel htmlFor="servico">
-                              Classe de Serviço
-                            </FormLabel>
+                            <Text
+                              fontWeight={"bold"}
+                              fontSize={"12px"}
+                              color={"#949494"}
+                            >
+                              CLASSE DE SERVIÇO
+                            </Text>
                           </Flex>
                           <Select
                             h={"56px"}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"#2D2926"}
                             placeholder="Escolha uma Classe"
                             id="servico"
                             name="servico"
@@ -186,17 +227,28 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                                 <option value={d.id}>{d.classe_servico}</option>
                               ))}
                           </Select>
-                          {registerForm.errors.servico && (
+                          {/*  {registerForm.errors.servico && (
                             <TextError>{registerForm.errors.servico}</TextError>
                           )}
+                          */}
                         </FormControl>
                         <FormControl>
                           <Flex gap={1}>
                             <RequiredField />
-                            <FormLabel htmlFor="pedido">Pedido</FormLabel>
+                            <Text
+                              fontWeight={"bold"}
+                              fontSize={"12px"}
+                              color={"#949494"}
+                            >
+                              PEDIDO
+                            </Text>
                           </Flex>
                           <Input
                             h={"56px"}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"#2D2926"}
+                            _placeholder={{ color: "#949494" }}
                             placeholder="Pedido"
                             id="pedido"
                             name="pedido"
@@ -210,23 +262,30 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                                 e.preventDefault();
                               }
                             }}
-                            size="md"
+                            // size="md"
                             type="text"
                           />
-                          {registerForm.errors.pedido && (
+                          {/*  {registerForm.errors.pedido && (
                             <TextError>{registerForm.errors.pedido}</TextError>
-                          )}
+                        )} */}
                         </FormControl>
                       </Flex>
 
                       <FormControl>
                         <Flex gap={1}>
                           <RequiredField />
-                          <FormLabel htmlFor="pedido-obs">
-                            Texto do Pedido
-                          </FormLabel>
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            TEXTO DO PEDIDO
+                          </Text>
                         </Flex>
                         <Textarea
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"#2D2926"}
                           placeholder="Ação ou Recomendação"
                           id="pedido-obs"
                           name="pedido_obs"
@@ -235,11 +294,11 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                           onChange={registerForm.handleChange}
                         />
 
-                        {registerForm.errors.pedido_obs && (
+                        {/* {registerForm.errors.pedido_obs && (
                           <TextError>
                             {registerForm.errors.pedido_obs}
                           </TextError>
-                        )}
+                        )} */}
                       </FormControl>
                     </Flex>
                   </Stack>
@@ -250,25 +309,42 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
                 <Button
+                  h={"56px"}
                   variant="ghost"
-                  color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
+                  color="red.500"
+                  w={"208px"}
+                  onClick={() => onClose()}
                   _hover={{
-                    background: "red.500",
+                    background: "red.600",
                     transition: "all 0.4s",
                     color: "white",
                   }}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
+                  borderRadius={"8px"}
+                  fontFamily={"Mulish"}
                 >
                   Cancelar
                 </Button>
                 <Button
+                  w={"208px"}
+                  h={"56px"}
+                  borderRadius={"8px"}
                   disabled={!registerForm.isValid || !registerForm.dirty}
-                  background="origem.300"
+                  background={"origem.500"}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() => {
+                    handleCadastrar(registerForm, () => {
+                      onClose();
+                      toogleRender();
+                    });
+                  }}
                   _hover={{
-                    background: "origem.500",
+                    background: "origem.600",
                     transition: "all 0.4s",
                   }}
                 >
@@ -276,7 +352,7 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
                   ) : (
                     <>
-                      <Text>Concluir Cadastro</Text>
+                      <Text>Gravar</Text>
                     </>
                   )}
                 </Button>
@@ -289,4 +365,4 @@ function ModalGestaoDeCusto(props: { projeto: Projeto }) {
   );
 }
 
-export default ModalGestaoDeCusto;
+export default ModalEditarGestaoDeCusto;

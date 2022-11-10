@@ -26,14 +26,21 @@ import { TabelaProjetos } from "./Components/TabelaProjetos";
 export function Projects() {
   const { loading, getProjetosDetalhados } = useProjects();
 
-  const [, setPolo] = useState("0");
+  const [polo, setPolo] = useState("Todos");
   const [projetos, setProjetos] = useState<Projetos[]>();
   const [projetosFilter, setProjetosFilter] = useState<Projetos[]>();
+  const [listaPolos, setListaPolos] = useState<string[]>([]);
+  const [filter, setFilter] = useState("");
+  const [refresh, setRefresh] = useState(false);
+  const [render, setRender] = useState(false);
 
   const getProjectsPerPolo = async () => {
     const data = await getProjetosDetalhados();
     setProjetos(data);
     setProjetosFilter(data);
+    const polosLista = ["Todos"];
+    data.map((data) => polosLista.push(data.polo));
+    setListaPolos(polosLista);
   };
 
   const filterProjects = (text: string) => {
@@ -45,7 +52,9 @@ export function Projects() {
     } else {
       filtered = projetos;
     }
-
+    if (polo !== "Todos") {
+      filtered = filtered?.filter((x) => x.polo == polo);
+    }
     if (filtered) {
       setProjetosFilter([...filtered]);
     }
@@ -54,6 +63,14 @@ export function Projects() {
   useEffect(() => {
     getProjectsPerPolo();
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      getProjectsPerPolo();
+      setRender(!render);
+    }, 3000);
+  }, [refresh]);
+
   return (
     <>
       <Sidebar>
@@ -125,6 +142,8 @@ export function Projects() {
                       </Text>
                       <Input
                         h={"56px"}
+                        fontSize={"14px"}
+                        fontFamily={"Mulish"}
                         fontWeight={"400"}
                         width={"328px"}
                         color={"black"}
@@ -134,7 +153,8 @@ export function Projects() {
                         id="name"
                         type="text"
                         name="name"
-                        onChange={(e) => filterProjects(e.target.value)}
+                        value={filter}
+                        onChange={(e) => setFilter(e.target.value)}
                       />
                     </Flex>
                     <Flex direction={"column"} mr="16px">
@@ -147,6 +167,8 @@ export function Projects() {
                       </Text>
 
                       <Select
+                        fontSize={"14px"}
+                        fontFamily={"Mulish"}
                         fontWeight={"400"}
                         h={"56px"}
                         w={"208px"}
@@ -156,9 +178,9 @@ export function Projects() {
                         onChange={(e) => setPolo(e.target.value)}
                         width={300}
                       >
-                        <option value="0">Todos</option>
-                        <option value="1">Tucano Sul</option>
-                        <option value="2">Alagoas</option>
+                        {listaPolos.map((val) => (
+                          <option value={val}>{val}</option>
+                        ))}
                       </Select>
                     </Flex>
                     <Flex>
@@ -170,7 +192,7 @@ export function Projects() {
                         background={"origem.500"}
                         variant="primary"
                         color="white"
-                        onClick={() => getProjectsPerPolo()}
+                        onClick={() => filterProjects(filter)}
                         _hover={{
                           background: "origem.600",
                           transition: "all 0.4s",
@@ -185,7 +207,11 @@ export function Projects() {
 
                 {projetosFilter && (
                   <Flex flex={1} mt={1}>
-                    <TabelaProjetos data={projetosFilter} />
+                    <TabelaProjetos
+                      refresh={refresh}
+                      setRefresh={setRefresh}
+                      data={projetosFilter}
+                    />
                   </Flex>
                 )}
               </Flex>

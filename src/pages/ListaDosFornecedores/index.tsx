@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import { MdArrowForwardIos } from "react-icons/md";
@@ -16,7 +16,7 @@ import {
   Heading,
   Button,
   Icon,
-  // Input,
+  Input,
   // FormControl,
   // Select,
   useDisclosure,
@@ -49,19 +49,20 @@ import { TabelaFornecedores } from "./components/TabelaFornecedores";
 
 export interface FornecedoreDto {
   id: number;
-  nom_usu_create: string;
   poloid: number;
   servicoid: number;
-  statusid: number;
+  servico_txt: string;
   nomefornecedor: string;
-  numerocontrato: string;
   representante: string;
+  numerocontrato: string;
   email: string;
-  telefone: string;
   invoice: string;
   cnpj: string;
+  statusid: number;
+  telefone: string;
+  outrasinformacoes: string;
+  nom_usu_create: string;
   justificativa: string;
-  outrasInformacoes: string;
 }
 
 export function Fornecedores() {
@@ -76,7 +77,7 @@ export function Fornecedores() {
   const [polos, setPolos] = useState<Polo[]>([] as Polo[]);
   const [loading, setLoading] = useState(true);
   // estados dos filtros
-  const [projetoId, setProjetoId] = useState(0);
+  const [filtroFornecedor, setFiltroFornecedor] = useState("");
   const [polo, setPolo] = useState(0);
 
   function handleEditFornecedor(fornecedor: FornecedoreDto) {
@@ -105,6 +106,8 @@ export function Fornecedores() {
     setFilteredFornecedores(response.data as FornecedoreDto[]);
   };
 
+  // console.log(fornecedores);
+
   async function handleGetProjetos() {
     const payload = await getProjetos();
     setProjetos(payload.data);
@@ -127,16 +130,17 @@ export function Fornecedores() {
       setLoading(false);
   }, [polos, fornecedores, projetos]);
 
-  function handleFilterData(id: number, pol: number) {
-    if (id !== 0) {
-      const filtered = fornecedores.filter((fornec) => fornec.id == id);
-      return setFornecedores(filtered);
-    }
+  function handleFilterData(nomeFor: string, pol: number) {
+    const filtered = fornecedores.filter((fornec) =>
+      fornec.nomefornecedor.toLowerCase().includes(nomeFor.toLowerCase())
+    );
+    let filteredPol: SetStateAction<FornecedoreDto[]> = [];
     if (pol !== 0) {
-      const filtered = fornecedores.filter((fornec) => fornec.poloid == pol);
-      return setFornecedores(filtered);
+      filteredPol = filtered.filter((fornec) => fornec.poloid == pol);
+    } else {
+      filteredPol = filtered;
     }
-    setFornecedores(filteredFornecedores);
+    setFilteredFornecedores(filteredPol);
   }
 
   return (
@@ -220,7 +224,7 @@ export function Fornecedores() {
             <Flex justify={"space-between"}>
               <Flex align={"flex-end"} gap={4} wrap={"wrap"} flex={1}>
                 <Flex ml={-3}>
-                  <FormControl>
+                  {/* <FormControl>
                     <FormLabel
                       // fontWeight={"700"}
                       // fontSize={"12px"}
@@ -236,6 +240,9 @@ export function Fornecedores() {
                       </Text>
                     </FormLabel>
                     <Select
+                      fontSize={"14px"}
+                      fontFamily={"Mulish"}
+                      fontWeight={"400"}
                       mt={"-9px"}
                       placeholder="Selecione"
                       id="projeto"
@@ -252,6 +259,38 @@ export function Fornecedores() {
                           </option>
                         ))}
                     </Select>
+                  </FormControl> */}
+                  <FormControl>
+                    <FormLabel
+                      // fontWeight={"700"}
+                      // fontSize={"12px"}
+                      // color={"#A7A7A7"}
+                      htmlFor="projeto"
+                    >
+                      <Text
+                        fontWeight={"700"}
+                        fontSize={"12px"}
+                        color={"#949494"}
+                      >
+                        FORNECEDOR
+                      </Text>
+                    </FormLabel>
+                    <Input
+                      h={"56px"}
+                      fontSize={"14px"}
+                      fontFamily={"Mulish"}
+                      fontWeight={"400"}
+                      width={"328px"}
+                      color={"black"}
+                      isRequired
+                      placeholder="Nome do fornecedor"
+                      _placeholder={{ color: "#949494" }}
+                      id="name"
+                      type="text"
+                      name="name"
+                      value={filtroFornecedor}
+                      onChange={(e) => setFiltroFornecedor(e.target.value)}
+                    />
                   </FormControl>
                 </Flex>
 
@@ -260,7 +299,7 @@ export function Fornecedores() {
                     <FormLabel
                       fontWeight={"700"}
                       fontSize={"12px"}
-                      color={"#A7A7A7"}
+                      // color={"#A7A7A7"}
                       htmlFor="projeto"
                     >
                       <Text
@@ -272,8 +311,10 @@ export function Fornecedores() {
                       </Text>
                     </FormLabel>
                     <Select
+                      fontSize={"14px"}
+                      fontFamily={"Mulish"}
+                      fontWeight={"400"}
                       mt={"-9px"}
-                      placeholder="Selecione"
                       id="projeto"
                       name="projeto"
                       onChange={(e) => setPolo(Number(e.target.value))}
@@ -307,9 +348,7 @@ export function Fornecedores() {
                     }}
                     rightIcon={<FiSearch />}
                     onClick={() => {
-                      handleFilterData(projetoId, polo);
-                      setPolo(0);
-                      setProjetoId(0);
+                      handleFilterData(filtroFornecedor, polo);
                     }}
                     alignSelf={"end"}
                     height={"56px"}
@@ -446,7 +485,7 @@ export function Fornecedores() {
           <Flex ml={-3} mr={-3} flexDir={"column"}>
             {/*  Componentes aqui */}
             <TabelaFornecedores
-              fornecedores={fornecedores}
+              fornecedores={filteredFornecedores}
               onEdit={handleEditFornecedor}
               polos={polos}
               loading={loading}

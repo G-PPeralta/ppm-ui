@@ -1,0 +1,14 @@
+.description {
+  width: 150px ;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.description:hover{
+  overflow: visible;
+  white-space: normal;
+  width: auto;
+  text-overflow: normal;
+  word-break: break-all;
+}

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MdModeEdit } from "react-icons/md";
 
 import {
@@ -6,27 +6,29 @@ import {
   Flex,
   IconButton,
   Input,
+  InputGroup,
   Modal,
   ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  NumberInput,
-  NumberInputField,
   Text,
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import InputGenerico from "components/InputGenerico";
 import SelectFiltragem from "components/SelectFiltragem";
 
 import { regexCaracteresEspeciais } from "utils/regex";
+import { parserString } from "utils/regexCoinMask";
 
 import { useCentroDeCusto } from "hooks/useCentroDeCusto";
 
-import DateTimePickerData from "./DateTimePickerData";
+import DatePickerGenericoFinanceiro from "./DatePickerGenericoFinanceiro";
 
 interface RefreshState {
   refresh: boolean;
@@ -54,9 +56,15 @@ interface Props {
   refreshState: RefreshState;
   linhaTabela: LinhaTabela;
   optionsSelects: any;
+  mes: number;
 }
 
-function ModalEditar({ refreshState, linhaTabela, optionsSelects }: Props) {
+function ModalEditar({
+  refreshState,
+  linhaTabela,
+  optionsSelects,
+  mes,
+}: Props) {
   const { refresh, setRefresh } = refreshState;
   const { optionsFornecedores, optionsClassesDeServico } = optionsSelects;
   const { loading, registerForm } = useCentroDeCusto(
@@ -65,9 +73,12 @@ function ModalEditar({ refreshState, linhaTabela, optionsSelects }: Props) {
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const [dataPagamento, setDataPagamento] = useState<Date>();
+
   const setInicialValues = async () => {
-    registerForm.setFieldValue("valor", linhaTabela.valor);
+    registerForm.setFieldValue("valor", parserString(linhaTabela.valor));
     registerForm.setFieldValue("data", linhaTabela.dataPagamento);
+    setDataPagamento(new Date(linhaTabela.dataPagamento));
     registerForm.setFieldValue(
       "prestadorServicoId",
       linhaTabela.prestadorDeServicoId
@@ -142,46 +153,51 @@ function ModalEditar({ refreshState, linhaTabela, optionsSelects }: Props) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
-            Gestão de Custos
+            Editar Despesa
           </ModalHeader>
+          <ModalCloseButton color={"white"} />
 
           <ModalBody mt={3}>
-            <Text fontWeight={"bold"} mb={3}>
+            {/* <Text
+              fontSize={"18px"}
+              fontWeight={"700"}
+              fontFamily={"Mulish"}
+              mb={3}
+              color={"#2D2926"}
+            >
               EDITAR DESPESA
-            </Text>
+            </Text> */}
             <Flex direction={"column"} gap={4}>
               <Flex gap={4}>
                 <Flex direction={"column"}>
-                  <Flex gap={1}>
-                    <Text
-                      fontWeight={"bold"}
-                      fontSize={"12px"}
-                      color={"#949494"}
-                    >
-                      VALOR
-                    </Text>
-                  </Flex>
-                  <NumberInput
-                    h={"56px"}
-                    precision={2}
-                    max={9999999}
-                    min={0}
-                    id="valor"
-                    name="valor"
-                    value={registerForm.values.valor}
-                    onChange={(value) =>
-                      registerForm.setFieldValue("valor", Number(value))
-                    }
-                  >
-                    <NumberInputField bg={"#fff"} h={"56px"} />
-                  </NumberInput>
+                  <InputGroup>
+                    <InputGenerico
+                      registerForm={registerForm}
+                      nomeInput={"VALOR PREVISTO"}
+                      propName={"valor"}
+                      value={
+                        registerForm.values.valor && registerForm.values.valor
+                      }
+                      required={true}
+                      placeholder={"0"}
+                      maxLength={20}
+                      isNumeric={true}
+                    />
+                  </InputGroup>
                 </Flex>
-                <Flex direction={"column"}>
-                  <DateTimePickerData
+                <Flex direction={"column"} alignSelf={"end"} align={"end"}>
+                  <DatePickerGenericoFinanceiro
                     registerForm={registerForm}
-                    value={registerForm.values.data}
+                    propName={"data"}
+                    nomeLabel="Data"
+                    required={true}
+                    data={dataPagamento}
+                    esconderHorario
+                    mes={mes}
                   />
                 </Flex>
               </Flex>
@@ -237,6 +253,9 @@ function ModalEditar({ refreshState, linhaTabela, optionsSelects }: Props) {
                     </Text>
                   </Flex>
                   <Textarea
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    color={"black"}
                     isRequired
                     placeholder="Ação ou recomendação"
                     id="descricaoDoServico"
@@ -256,19 +275,24 @@ function ModalEditar({ refreshState, linhaTabela, optionsSelects }: Props) {
             <Flex gap={2}>
               <Button
                 h={"56px"}
-                borderRadius={"10px"}
+                borderRadius={"8px"}
                 variant="ghost"
-                color="red"
+                color="red.500"
                 onClick={() => handleCancelar()}
                 _hover={{
-                  background: "red.500",
+                  background: "red.600",
                   transition: "all 0.4s",
                   color: "white",
                 }}
+                // mx={12}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
+                width={"208px"}
               >
-                <Text fontSize="16px" fontWeight={"bold"} mx={12}>
-                  Cancelar
-                </Text>
+                {/* <Text fontSize="16px" fontWeight={"bold"}> */}
+                Cancelar
+                {/* </Text> */}
               </Button>
               <BotaoAzulLargoPrimary
                 text={"Salvar"}

@@ -32,7 +32,7 @@ interface Props {
 
 function ModalCadastrarSonda({ refresh, setRefresh }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroSonda();
+  const { registerForm, loading } = useCadastroSonda("", refresh, setRefresh);
 
   return (
     <>
@@ -64,7 +64,8 @@ function ModalCadastrarSonda({ refresh, setRefresh }: Props) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Cadastrar SPT
           </ModalHeader>
@@ -87,10 +88,10 @@ function ModalCadastrarSonda({ refresh, setRefresh }: Props) {
                       md: "row",
                     })}
                     gap={5}
-                    align={"center"}
-                    justify={"center"}
+                    // align={"center"}
+                    // justify={"center"}
                   >
-                    <FormControl w={"275px"}>
+                    <FormControl>
                       <Flex gap={1}>
                         <RequiredField />
                         <Text
@@ -102,7 +103,14 @@ function ModalCadastrarSonda({ refresh, setRefresh }: Props) {
                         </Text>
                       </Flex>
                       <Input
+                        w={"100%"}
                         h={"56px"}
+                        borderRadius={"8px"}
+                        fontSize={"14px"}
+                        fontWeight={"400"}
+                        fontFamily={"Mulish"}
+                        border={"1px solid #949494"}
+                        _placeholder={{ color: "#949494" }}
                         isRequired
                         placeholder="Nome do SPT"
                         id="nome"

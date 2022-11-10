@@ -63,6 +63,7 @@ function EditarPriorizacao(infosRanking: TableProps) {
         fontSize={"18px"}
         fontWeight={"700"}
         borderRadius={"8px"}
+        fontFamily={"Mulish"}
       >
         <Text>Configuração</Text>
       </Button>
@@ -79,7 +80,7 @@ function EditarPriorizacao(infosRanking: TableProps) {
             fontWeight={"700"}
             h={"48px"}
           >
-            {`Editar Priorização ${infosRanking.nomeRanking}`}
+            {`Editar Priorização`}
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <form
@@ -106,7 +107,7 @@ function EditarPriorizacao(infosRanking: TableProps) {
                             <FormLabel
                               htmlFor="rankingName"
                               mb={"1px"}
-                              ml={"3px"}
+                              ml={"2px"}
                               color={"#949494"}
                               fontWeight={"700"}
                               fontSize={"12px"}
@@ -115,7 +116,7 @@ function EditarPriorizacao(infosRanking: TableProps) {
                             </FormLabel>
                             <Input
                               maxLength={45}
-                              ml={"3px"}
+                              ml={"2px"}
                               w={"93%"}
                               h={"56px"}
                               _placeholder={{ color: "black" }}
@@ -147,12 +148,14 @@ function EditarPriorizacao(infosRanking: TableProps) {
                               color={"#949494"}
                               fontWeight={"700"}
                               mb={"1px"}
+                              ml={"2px"}
                               w={"550px"}
                               mt={"5px"}
                             >
                               PERFIS COM ACESSO
                             </FormLabel>
                             <Select
+                              ml={"2px"}
                               w={"93%"}
                               h={"56px"}
                               fontSize={"14px"}
@@ -179,18 +182,21 @@ function EditarPriorizacao(infosRanking: TableProps) {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
+              <Flex gap={2} ml={9}>
                 <Button
                   variant="ghost"
-                  color="red"
+                  color="red.500"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
-                    background: "red.500",
+                    background: "red.600",
                     transition: "all 0.4s",
                     color: "white",
                   }}
-                  w={"158px"}
+                  w={"208px"}
                   h={"56px"}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   Cancelar
                 </Button>
@@ -206,6 +212,9 @@ function EditarPriorizacao(infosRanking: TableProps) {
                     background: "origem.600",
                     transition: "all 0.4s",
                   }}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />

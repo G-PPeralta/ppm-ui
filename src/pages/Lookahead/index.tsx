@@ -20,17 +20,21 @@ import { TabelaLookahead } from "./components/TabelaLookahead";
 export function Lookahead() {
   const { getProjetos, loading } = useLookahead();
   const [atividades, setAtividades] = useState<AtividadesLookahead[]>();
+  const [filtered, setFiltered] = useState<AtividadesLookahead[]>();
   const [idProject, setIdProject] = useState<string>("0");
+  // console.log(idProject);
+
   const [projetos, setProjetos] = useState<ProjetosLookahead[]>();
 
-  async function handleProjectChange() {
-    const act = await getAtividades(+idProject);
-    setAtividades(act);
-  }
+  // async function handleProjectChange() {
+  //   const act = await getAtividades(+idProject);
+  //   setAtividades(act);
+  // }
 
   const getAllActivities = async () => {
     const act = await getAtividades(0);
     setAtividades(act);
+    setFiltered(act);
   };
 
   const getAllProjects = async () => {
@@ -45,6 +49,25 @@ export function Lookahead() {
   useEffect(() => {
     getAllActivities();
   }, []);
+
+  // console.log(idProject);
+
+  async function handleFilter() {
+    if (Number(idProject) === 0) {
+      // console.log("works");
+      // console.log({ atividades });
+      return setFiltered(atividades);
+    }
+    if (atividades) {
+      const filteredActivity = atividades.filter(
+        (b) => b.id_projeto === Number(idProject)
+      );
+      setFiltered(filteredActivity);
+    }
+    // return setAtividades(atividades);
+  }
+
+  // console.log({ filtered, atividades });
 
   return (
     <div>
@@ -72,23 +95,30 @@ export function Lookahead() {
                     <Select
                       fontSize={"14px"}
                       fontWeight={"400"}
-                      _placeholder={{ color: "#2D2926" }}
-                      color={"#949494"}
-                      width={"146px"}
+                      // _placeholder={{ color: "#2D2926" }}
+                      // color={"#949494"}
+                      width={"208px"}
                       height={"56px"}
                       borderRadius={"8px"}
                       placeholder="Projeto"
                       onChange={(e) => setIdProject(e.target.value)}
                     >
+                      <option value={0}>Todos</option>
                       {projetos &&
                         projetos.map((d, k) => (
+                          // <option key={k} value={d.id}>
+                          //   {d.nome_projeto.length > 20
+                          //     ? `${d.id} - ${d.nome_projeto.substring(
+                          //         0,
+                          //         17
+                          //       )}...`
+                          //     : `${d.id} - ${d.nome_projeto}`}
+                          // </option>
+
                           <option key={k} value={d.id}>
                             {d.nome_projeto.length > 20
-                              ? `${d.id} - ${d.nome_projeto.substring(
-                                  0,
-                                  17
-                                )}...`
-                              : `${d.id} - ${d.nome_projeto}`}
+                              ? `${d.nome_projeto.substring(0, 17)}...`
+                              : `${d.nome_projeto}`}
                           </option>
                         ))}
                     </Select>
@@ -96,7 +126,8 @@ export function Lookahead() {
 
                   <Flex alignItems="flex-end" marginLeft="16px">
                     <Button
-                      h={"56px"}
+                      h={"58px"}
+                      w={"117px"}
                       background={"origem.500"}
                       border={"2.3px solid"}
                       color={"white"}
@@ -109,7 +140,9 @@ export function Lookahead() {
                       rightIcon={<FiSearch />}
                       fontSize={"18px"}
                       fontWeight={"700"}
-                      onClick={handleProjectChange}
+                      borderRadius={"8px"}
+                      fontFamily={"Mulish"}
+                      onClick={handleFilter}
                     >
                       Filtrar
                     </Button>
@@ -118,7 +151,9 @@ export function Lookahead() {
               </Flex>
 
               <Flex justifyContent="flex-end" ml={-1} mr={-1}>
-                {atividades && <TabelaLookahead data={atividades} />}
+                {filtered && (
+                  <TabelaLookahead data={filtered} projetos={projetos} />
+                )}
               </Flex>
             </Flex>
           </ContainerPagina>

@@ -1,4 +1,10 @@
-import { IoMdPodium } from "react-icons/io";
+import React, {
+  JSXElementConstructor,
+  ReactElement,
+  ReactFragment,
+  ReactPortal,
+  useState,
+} from "react";
 
 import {
   Button,
@@ -17,18 +23,147 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import { IConfigProjetoDto } from "interfaces/ConfiguracaoProjeto";
+import { ProjetosConfig } from "interfaces/Services";
+import moment from "moment";
 
-function ModalConfiguracoes() {
+import ModalCadastrarPriorizacao from "pages/Projects/Components/ModalCadastrarPriorizacao";
+
+import { useProjetos } from "hooks/useCadastroProjeto";
+
+import { patchProjeto } from "services/update/Projeto";
+
+import DatePicker from "./DatePicker";
+
+interface ConfigProjetoProps {
+  projeto: ProjetosConfig;
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function ModalConfiguracoes({
+  projeto,
+  refresh,
+  setRefresh,
+}: ConfigProjetoProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  // MODAL PRIORIZAÇÃO
+  const [isPriorizacaoModalOpen, setIsPriorizacaoModalOpen] = useState(false);
+
+  // FORM LABELS
+  const [responsavel, setReponsavel] = useState(projeto?.responsavel_id);
+  const [coordenador, setCoordenador] = useState(projeto?.coordenador_id);
+  const [status, setStatus] = useState(projeto?.status_id);
+  const [polo, setPolo] = useState(projeto?.polo_id);
+  const [local, setLocal] = useState(projeto?.local_id);
+  const [solicitacao, setSolicitacao] = useState(projeto?.solicitante_id);
+  const [nomeProjeto, setNomeProjeto] = useState(projeto?.nome_projeto);
+  const [elementoPep, setElementoPep] = useState(projeto?.elemento_pep);
+  const [inicio, setInicio] = useState(
+    projeto?.data_inicio
+      ? moment.utc(projeto?.data_inicio).add(3, "hours").toDate()
+      : null
+  );
+  const [fim, setFim] = useState(
+    projeto?.data_fim
+      ? moment.utc(projeto?.data_fim).add(3, "hours").toDate()
+      : null
+  );
+  const [inicioReal, setInicioReal] = useState(
+    projeto?.dataInicio_real
+      ? moment.utc(projeto?.dataInicio_real).add(3, "hours").toDate()
+      : null
+  );
+  const [fimReal, setFimReal] = useState(
+    projeto?.dataFim_real
+      ? moment.utc(projeto?.dataFim_real).add(3, "hours").toDate()
+      : null
+  );
+  const [divisao, setDivisao] = useState(projeto?.divisao_id);
+  const [classificacao, setClassificacao] = useState(projeto?.classificacao_id);
+  const [tipo, setTipo] = useState(projeto?.tipo_projeto_id);
+  const [gate, setGate] = useState(projeto?.gate_id);
+
+  const {
+    optionsResponsaveis,
+    optionsCoordenadores,
+    optionsPolos,
+    optionsLocais,
+    optionsSolicitantes,
+    optionsStatus,
+    optionsDivisoes,
+    optionsClassificacoes,
+    optionsTipoProjetos,
+    optionsGates,
+  } = useProjetos();
+
+  async function openModalAPI() {
+    onOpen();
+  }
 
   const handleCancelar = () => {
     onClose();
   };
 
+  const handleSalvar = () => {
+    const payload: IConfigProjetoDto = {
+      nome_responsavel: responsavel,
+      coordenador_nome: coordenador,
+      status,
+      polo,
+      local,
+      solicitacao,
+      nome_projeto: nomeProjeto,
+      elemento_pep: elementoPep,
+      data_inicio: moment.utc(inicio).subtract(3, "hours").toDate(),
+      data_fim: moment.utc(fim).subtract(3, "hours").toDate(),
+      data_inicio_real: inicioReal
+        ? moment.utc(inicioReal).subtract(3, "hours").toDate()
+        : inicioReal,
+      data_fim_real: fimReal
+        ? moment.utc(fimReal).subtract(3, "hours").toDate()
+        : fimReal,
+      divisao,
+      classificacao,
+      tipo,
+      gate,
+    };
+    patchProjeto(projeto.id, payload);
+    onClose();
+    setRefresh(!refresh);
+  };
+
+  function getOptions(options: any, selected: any) {
+    const filtered = options.filter((option: any) => option.label !== selected);
+
+    return filtered.map(
+      (
+        option: {
+          value: string | number | readonly string[] | undefined;
+          label:
+            | string
+            | number
+            | boolean
+            | ReactElement<any, string | JSXElementConstructor<any>>
+            | ReactFragment
+            | ReactPortal
+            | null
+            | undefined;
+        },
+        index: any
+      ) => (
+        <option value={option.value} key={index}>
+          {option.label}
+        </option>
+      )
+    );
+  }
+
   return (
     <>
       <Button
-        onClick={onOpen}
+        onClick={() => openModalAPI()}
         background={"white"}
         color={"#0047BB"}
         _hover={{
@@ -74,104 +209,121 @@ function ModalConfiguracoes() {
                   w={"100%"}
                   gap={"16px"}
                 >
-                  <FormControl w={"232px"}>
-                    <FormLabel htmlFor="categoria">
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
+                    <FormLabel htmlFor="responsavel">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         RESPONSÁVEL
                       </Text>
                     </FormLabel>
                     <Select
+                      required={true}
                       fontSize={"14px"}
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
                       mt={"-6px"}
                       height={"56px"}
                       borderRadius={"8px"}
-                      id="poloId"
-                      name="pole"
+                      id="responsavelId"
+                      name="responsavel"
                       width={"100%"}
-                      placeholder="Selecione"
+                      placeholder={projeto.nome_responsavel}
+                      onChange={(e) => {
+                        setReponsavel(+e.target.value);
+                      }}
                     >
-                      <option value="">Selecione</option>
+                      {getOptions(
+                        optionsResponsaveis,
+                        projeto.nome_responsavel
+                      )}
                     </Select>
                   </FormControl>
-                  <FormControl w={"232px"}>
-                    <FormLabel htmlFor="categoria">
+
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
+                    <FormLabel htmlFor="coordenador">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         COORDENADOR
                       </Text>
                     </FormLabel>
                     <Select
+                      required={true}
                       fontSize={"14px"}
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
                       mt={"-6px"}
                       height={"56px"}
                       borderRadius={"8px"}
-                      id="poloId"
-                      name="pole"
+                      id="coordenadorId"
+                      name="coordenador"
                       width={"100%"}
-                      placeholder="Selecione"
+                      placeholder={projeto.coordenador_nome}
+                      onChange={(e) => {
+                        setCoordenador(+e.target.value);
+                      }}
                     >
-                      <option value="">Selecione</option>
+                      {getOptions(
+                        optionsCoordenadores,
+                        projeto.coordenador_nome
+                      )}
                     </Select>
                   </FormControl>
-                  <FormControl w={"232px"}>
-                    <FormLabel htmlFor="categoria">
+
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
+                    <FormLabel htmlFor="status">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         STATUS
                       </Text>
                     </FormLabel>
                     <Select
+                      required={true}
                       fontSize={"14px"}
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
                       mt={"-6px"}
                       height={"56px"}
                       borderRadius={"8px"}
-                      id="poloId"
-                      name="pole"
+                      id="statusId"
+                      name="status"
                       width={"100%"}
-                      placeholder="Selecione"
+                      placeholder={projeto.status}
+                      onChange={(e) => {
+                        setStatus(+e.target.value);
+                      }}
                     >
-                      <option value="">Selecione</option>
+                      {getOptions(optionsStatus, projeto.status)}
                     </Select>
                   </FormControl>
-                  <Flex>
-                    <FormControl pt={"20px"}>
-                      <Button
-                        w={"232px"}
-                        h={"56px"}
-                        color="#0047BB"
-                        background="white"
-                        borderColor="#0047BB"
-                        border={"2px"}
-                        _hover={{
-                          background: "#0047BB",
-                          transition: "all 0.4s",
-                          color: "white",
-                        }}
-                        fontWeight={"700"}
-                        fontSize="18px"
-                        rightIcon={<IoMdPodium />}
-                      >
-                        Priorização
-                      </Button>
+                  <Flex w={"232px"} justifyContent={"center"}>
+                    <FormControl
+                      pt={"20px"}
+                      w={"232px"}
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                    >
+                      <ModalCadastrarPriorizacao
+                        completeButton={true}
+                        refresh={refresh}
+                        setRefresh={setRefresh}
+                        projeto={projeto.id}
+                        isPriorizacaoModalOpen={isPriorizacaoModalOpen}
+                        setIsPriorizacaoModalOpen={setIsPriorizacaoModalOpen}
+                      />
                     </FormControl>
                   </Flex>
                 </Flex>
+
                 <Flex
                   flexDirection={{ base: "column", md: "row" }}
-                  w={"75%"}
+                  w={"100%"}
                   gap={"16px"}
                 >
-                  <FormControl w={"232px"}>
-                    <FormLabel htmlFor="categoria">
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
+                    <FormLabel htmlFor="polo">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         POLO
                       </Text>
                     </FormLabel>
                     <Select
+                      required={true}
                       fontSize={"14px"}
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
@@ -179,53 +331,64 @@ function ModalConfiguracoes() {
                       height={"56px"}
                       borderRadius={"8px"}
                       id="poloId"
-                      name="pole"
+                      name="polo"
                       width={"100%"}
-                      placeholder="Selecione"
+                      placeholder={projeto.polo}
+                      onChange={(e) => {
+                        setPolo(+e.target.value);
+                      }}
                     >
-                      <option value="">Selecione</option>
+                      {getOptions(optionsPolos, projeto.polo)}
                     </Select>
                   </FormControl>
-                  <FormControl w={"232px"}>
-                    <FormLabel htmlFor="categoria">
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
+                    <FormLabel htmlFor="local">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         LOCAL
                       </Text>
                     </FormLabel>
                     <Select
+                      required={true}
                       fontSize={"14px"}
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
                       mt={"-6px"}
                       height={"56px"}
                       borderRadius={"8px"}
-                      id="poloId"
-                      name="pole"
+                      id="localId"
+                      name="local"
                       width={"100%"}
-                      placeholder="Selecione"
+                      placeholder={projeto.local}
+                      onChange={(e) => {
+                        setLocal(+e.target.value);
+                      }}
                     >
-                      <option value="">Selecione</option>
+                      {getOptions(optionsLocais, projeto.local)}
                     </Select>
                   </FormControl>
-                  <FormControl w={"232px"}>
-                    <FormLabel htmlFor="categoria">
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
+                    <FormLabel htmlFor="solicitacao">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         SOLICITAÇÃO
                       </Text>
                     </FormLabel>
                     <Select
+                      required={true}
                       fontSize={"14px"}
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
                       mt={"-6px"}
                       height={"56px"}
                       borderRadius={"8px"}
-                      id="poloId"
-                      name="pole"
+                      id="solicitacaoId"
+                      name="solicitacao"
                       width={"100%"}
-                      placeholder="Selecione"
+                      placeholder={projeto.solicitante}
+                      onChange={(e) => {
+                        setSolicitacao(+e.target.value);
+                      }}
                     >
-                      <option value="">Selecione</option>
+                      {getOptions(optionsSolicitantes, projeto.solicitante)}
                     </Select>
                   </FormControl>
                 </Flex>
@@ -234,8 +397,8 @@ function ModalConfiguracoes() {
                   w={"100%"}
                   gap={"16px"}
                 >
-                  <FormControl w={"480px"}>
-                    <FormLabel htmlFor="categoria">
+                  <FormControl w={{ sm: "100%", md: "480px" }}>
+                    <FormLabel htmlFor="nomeProjeto">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         NOME DO PROJETO
                       </Text>
@@ -252,12 +415,12 @@ function ModalConfiguracoes() {
                       height={"56px"}
                       id="nomeProjetoId"
                       name="nomeProjeto"
-                      placeholder={"Digite"}
-                      // onChange={(e) => setNomeProjeto(e.target.value)}
-                    />
+                      value={nomeProjeto}
+                      onChange={(e) => setNomeProjeto(e.target.value)}
+                    ></Input>
                   </FormControl>
-                  <FormControl w={"232px"}>
-                    <FormLabel htmlFor="categoria">
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
+                    <FormLabel htmlFor="elementoPep">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         ELEMENTO PEP
                       </Text>
@@ -274,9 +437,9 @@ function ModalConfiguracoes() {
                       height={"56px"}
                       id="elementoPepId"
                       name="elementoPep"
-                      placeholder={"Digite"}
-                      // onChange={(e) => setElementoPep(e.target.value)}
-                    />
+                      value={elementoPep}
+                      onChange={(e) => setElementoPep(e.target.value)}
+                    ></Input>
                   </FormControl>
                 </Flex>
                 <Flex
@@ -284,182 +447,190 @@ function ModalConfiguracoes() {
                   w={"100%"}
                   gap={"16px"}
                 >
-                  <FormControl>
-                    <FormLabel htmlFor="categoria">
-                      <Text color="#949494" fontSize="12px" fontWeight="700">
-                        INÍCIO
-                      </Text>
-                    </FormLabel>
-                    <Input
-                      placeholder="dd/mm/aaaa"
-                      borderRadius={"8px"}
-                      max="9999-12-31"
-                      maxLength={1}
-                      border={"1px solid #A7A7A7"}
-                      mt={"-9px"}
-                      height={"56px"}
-                      _placeholder={{ color: "black" }}
-                      id="data"
-                      type="Date"
-                      name="data"
-                      // value={data}
-                      // onChange={(event) => setData(event.target.value)}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel htmlFor="categoria">
-                      <Text color="#949494" fontSize="12px" fontWeight="700">
-                        FIM
-                      </Text>
-                    </FormLabel>
-                    <Input
-                      placeholder="dd/mm/aaaa"
-                      borderRadius={"8px"}
-                      max="9999-12-31"
-                      maxLength={1}
-                      border={"1px solid #A7A7A7"}
-                      mt={"-9px"}
-                      height={"56px"}
-                      _placeholder={{ color: "black" }}
-                      id="data"
-                      type="Date"
-                      name="data"
-                      // value={data}
-                      // onChange={(event) => setData(event.target.value)}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel htmlFor="categoria">
-                      <Text color="#949494" fontSize="12px" fontWeight="700">
-                        INÍCIO REAL
-                      </Text>
-                    </FormLabel>
-                    <Input
-                      placeholder="dd/mm/aaaa"
-                      borderRadius={"8px"}
-                      max="9999-12-31"
-                      maxLength={1}
-                      border={"1px solid #A7A7A7"}
-                      mt={"-9px"}
-                      height={"56px"}
-                      _placeholder={{ color: "black" }}
-                      id="data"
-                      type="Date"
-                      name="data"
-                      // value={data}
-                      // onChange={(event) => setData(event.target.value)}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel htmlFor="categoria">
-                      <Text color="#949494" fontSize="12px" fontWeight="700">
-                        FIM REAL
-                      </Text>
-                    </FormLabel>
-                    <Input
-                      placeholder="dd/mm/aaaa"
-                      borderRadius={"8px"}
-                      max="9999-12-31"
-                      maxLength={1}
-                      border={"1px solid #A7A7A7"}
-                      mt={"-9px"}
-                      height={"56px"}
-                      _placeholder={{ color: "black" }}
-                      id="data"
-                      type="Date"
-                      name="data"
-                      // value={data}
-                      // onChange={(event) => setData(event.target.value)}
-                    />
-                  </FormControl>
+                  <Flex flexDirection={"row"} w={"100%"} gap={"16px"}>
+                    <FormControl w={{ sm: "100%", md: "232px" }}>
+                      {inicio ? (
+                        <DatePicker
+                          label={"INICIO"}
+                          setDate={setInicio}
+                          required={false}
+                          data={inicio}
+                          value={inicio.toString()}
+                        />
+                      ) : (
+                        <DatePicker
+                          label={"INICIO"}
+                          setDate={setInicio}
+                          required={false}
+                          data={new Date()}
+                          value={new Date().toString()}
+                        />
+                      )}
+                    </FormControl>
+                    <FormControl w={{ sm: "100%", md: "232px" }}>
+                      {fim ? (
+                        <DatePicker
+                          label={"FIM"}
+                          setDate={setFim}
+                          required={false}
+                          data={fim}
+                          value={fim.toString()}
+                        />
+                      ) : (
+                        <DatePicker
+                          label={"FIM"}
+                          setDate={setFim}
+                          required={false}
+                          data={new Date()}
+                          value={new Date().toString()}
+                        />
+                      )}
+                    </FormControl>
+                  </Flex>
+                  <Flex flexDirection={"row"} w={"100%"} gap={"16px"}>
+                    <FormControl w={{ sm: "100%", md: "232px" }}>
+                      {inicioReal ? (
+                        <DatePicker
+                          label={"INICIO REAL"}
+                          setDate={setInicioReal}
+                          required={false}
+                          data={inicioReal}
+                          value={inicioReal.toString()}
+                        />
+                      ) : (
+                        <DatePicker
+                          label={"INICIO REAL"}
+                          setDate={setInicioReal}
+                          required={false}
+                          data={new Date()}
+                          value={new Date().toString()}
+                        />
+                      )}
+                    </FormControl>
+                    <FormControl w={{ sm: "100%", md: "232px" }}>
+                      {fimReal ? (
+                        <DatePicker
+                          label={"FIM REAL"}
+                          setDate={setFimReal}
+                          required={false}
+                          data={fimReal}
+                          value={fimReal.toString()}
+                        />
+                      ) : (
+                        <DatePicker
+                          label={"FIM REAL"}
+                          setDate={setFimReal}
+                          required={false}
+                          data={new Date()}
+                          value={new Date().toString()}
+                        />
+                      )}
+                    </FormControl>
+                  </Flex>
                 </Flex>
                 <Flex
                   flexDirection={{ base: "column", md: "row" }}
                   w={"100%"}
                   gap={"16px"}
                 >
-                  <FormControl>
-                    <FormLabel htmlFor="categoria">
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
+                    <FormLabel htmlFor="divisao">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         DIVISÃO
                       </Text>
                     </FormLabel>
                     <Select
+                      required={true}
                       fontSize={"14px"}
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
                       mt={"-6px"}
                       height={"56px"}
                       borderRadius={"8px"}
-                      id="poloId"
-                      name="pole"
+                      id="divisaoId"
+                      name="divisao"
                       width={"100%"}
-                      placeholder="Selecione"
+                      placeholder={projeto.divisao}
+                      onChange={(e) => {
+                        setDivisao(+e.target.value);
+                      }}
                     >
-                      <option value="">Selecione</option>
+                      {getOptions(optionsDivisoes, projeto.divisao)}
                     </Select>
                   </FormControl>
-                  <FormControl>
-                    <FormLabel htmlFor="categoria">
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
+                    <FormLabel htmlFor="classificacao">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         CLASSIFICAÇÃO
                       </Text>
                     </FormLabel>
                     <Select
+                      required={true}
                       fontSize={"14px"}
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
                       mt={"-6px"}
                       height={"56px"}
                       borderRadius={"8px"}
-                      id="poloId"
-                      name="pole"
+                      id="classificacaoId"
+                      name="classificacao"
                       width={"100%"}
-                      placeholder="Selecione"
+                      placeholder={projeto.classificacao}
+                      onChange={(e) => {
+                        setClassificacao(+e.target.value);
+                      }}
                     >
-                      <option value="">Selecione</option>
+                      {getOptions(optionsClassificacoes, projeto.classificacao)}
                     </Select>
                   </FormControl>
-                  <FormControl>
-                    <FormLabel htmlFor="categoria">
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
+                    <FormLabel htmlFor="tipo">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         TIPO
                       </Text>
                     </FormLabel>
                     <Select
+                      required={true}
                       fontSize={"14px"}
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
                       mt={"-6px"}
                       height={"56px"}
                       borderRadius={"8px"}
-                      id="poloId"
-                      name="pole"
+                      id="tipoId"
+                      name="tipo"
                       width={"100%"}
-                      placeholder="Selecione"
+                      placeholder={projeto.tipo}
+                      onChange={(e) => {
+                        setTipo(+e.target.value);
+                      }}
                     >
-                      <option value="">Selecione</option>
+                      {getOptions(optionsTipoProjetos, projeto.tipo)}
                     </Select>
                   </FormControl>
-                  <FormControl>
-                    <FormLabel htmlFor="categoria">
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
+                    <FormLabel htmlFor="gate">
                       <Text color="#949494" fontSize="12px" fontWeight="700">
                         GATE
                       </Text>
                     </FormLabel>
                     <Select
+                      required={true}
                       fontSize={"14px"}
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
                       mt={"-6px"}
                       height={"56px"}
                       borderRadius={"8px"}
-                      id="poloId"
-                      name="pole"
+                      id="gateId"
+                      name="gate"
                       width={"100%"}
-                      placeholder="Selecione"
+                      placeholder={projeto.gate}
+                      onChange={(e) => {
+                        setGate(+e.target.value);
+                      }}
                     >
-                      <option value="">Selecione</option>
+                      {getOptions(optionsGates, projeto.gate)}
                     </Select>
                   </FormControl>
                 </Flex>
@@ -475,7 +646,7 @@ function ModalConfiguracoes() {
             pt={"0px"}
           >
             <Flex
-              gap={"16px"}
+              gap={2}
               align={"center"}
               direction={{ base: "column", md: "row" }}
             >
@@ -483,43 +654,39 @@ function ModalConfiguracoes() {
                 // background="origem.300"
                 variant="primary"
                 color="red.500"
-                onClick={handleCancelar}
+                onClick={() => handleCancelar()}
                 h={"56px"}
                 w={"206px"}
-                borderRadius={"10px"}
+                borderRadius={"8px"}
                 background={"white"}
                 _hover={{
-                  background: "red.600",
+                  background: "red.500",
                   transition: "all 0.4s",
                   color: "white",
                 }}
                 fontSize={"18px"}
                 fontWeight={"700"}
+                fontFamily={"Mulish"}
               >
                 Cancelar
               </Button>
               <Button
                 h={"56px"}
                 w={"206px"}
-                borderRadius={"10px"}
-                background={"origem.300"}
+                borderRadius={"8px"}
+                background="origem.500"
                 variant="primary"
                 color="white"
-                // onClick={async () => {
-                //   await patchProjeto(Number(id), { descricao, justificativa });
-                //   setDescricao("");
-                //   setJustificativa("");
-                //   setRender();
-                //   onClose();
-                // }}
+                onClick={() => handleSalvar()}
                 _hover={{
-                  background: "origem.500",
+                  background: "origem.600",
                   transition: "all 0.4s",
                 }}
                 fontSize={"18px"}
                 fontWeight={"700"}
+                fontFamily={"Mulish"}
               >
-                Salvar
+                Concluir
               </Button>
             </Flex>
           </ModalFooter>

@@ -8,7 +8,6 @@ import {
   Tarefas,
 } from "interfaces/CadastrosModaisInfograficos";
 import { Operacao } from "interfaces/Estatisticas";
-import { cadastroNovoCronogramaSchema } from "validations/Estatisticas";
 
 import { useToast } from "contexts/Toast";
 
@@ -25,7 +24,7 @@ import { postCadastroNovoCronograma } from "services/post/Estatistica";
 
 import { useAuth } from "./useAuth";
 
-export function useCadastroCronograma() {
+export function useCadastroCronograma(refresh?: boolean) {
   const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -92,6 +91,7 @@ export function useCadastroCronograma() {
         responsavel_id: 0,
         data_inicio: "",
         duracao: 0,
+        profundidade: 0,
         precedentes: [
           {
             id: 0,
@@ -104,9 +104,22 @@ export function useCadastroCronograma() {
     comentarios: "",
   };
 
+  // function formatData(data: string): string {
+  //   const _data = data.split(",")[0].trim();
+  //   const _hora = data.split(",")[1].trim();
+  //   const ymd =
+  //     _data.split("/")[2] +
+  //     "-" +
+  //     _data.split("/")[1] +
+  //     "-" +
+  //     _data.split("/")[0];
+
+  //   return ymd + "T" + _hora;
+  // }
+
   const registerForm: any = useFormik({
     initialValues,
-    validationSchema: cadastroNovoCronogramaSchema,
+    // validationSchema: cadastroNovoCronogramaSchema,
     onSubmit: async (values) => {
       const newValues: any = {
         nom_usu_create: user?.nome,
@@ -125,7 +138,6 @@ export function useCadastroCronograma() {
           return a;
         });
         // const status = 200;
-        // console.log(">>>>newValues", newValues);
         const { status } = await postCadastroNovoCronograma(newValues);
 
         if (status === 200 || status === 201) {
@@ -146,7 +158,7 @@ export function useCadastroCronograma() {
   useEffect(() => {
     setLoading(true);
     reqGet();
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     if (listaSondas.length > 0 && listaPocos.length > 0) {

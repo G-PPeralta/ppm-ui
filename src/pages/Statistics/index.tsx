@@ -134,6 +134,10 @@ function Statistics() {
                     </Text>
                     <Input
                       h={"56px"}
+                      _placeholder={{ color: "#949494" }}
+                      fontSize={"14px"}
+                      fontWeight={"400"}
+                      color={"black"}
                       isRequired
                       placeholder="Sonda"
                       id="name"

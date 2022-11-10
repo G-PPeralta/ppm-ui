@@ -18,7 +18,7 @@ import {
   ModalFooter,
   Button,
   Textarea,
-  Text,
+  // Text,
 } from "@chakra-ui/react";
 import { LicoesAprendidas } from "interfaces/Services";
 
@@ -60,6 +60,13 @@ function EditModal({
   const updatepayload = (campo: string) => {
     if (campo === "txt_licao_aprendida") return licaoAprendida;
     if (campo === "txt_acao") return acao;
+  };
+
+  const handlePatchLicoes = async () => {
+    const promises = camposParaEditar.map((lic) =>
+      handleUpdateLicoes(idLicao, lic, updatepayload(lic), user?.nome)
+    );
+    await Promise.all(promises);
   };
 
   return (
@@ -109,7 +116,7 @@ function EditModal({
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            Editar lições aprendidas
+            Editar Lições Aprendidas
           </ModalHeader>
 
           <ModalCloseButton color={"white"} />
@@ -170,7 +177,7 @@ function EditModal({
                   AÇÃO OU RECOMENDAÇÃO
                 </FormLabel>
                 <Textarea
-                  maxLength={150}
+                  // maxLength={150}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
@@ -195,19 +202,20 @@ function EditModal({
               <Button
                 // background="origem.300"
                 variant="primary"
-                color="#F40606"
+                color="red.500"
                 _hover={{
-                  background: "#F40606",
+                  background: "red.500",
                   transition: "all 0.4s",
                   color: "white",
                 }}
                 onClick={closeModal}
                 width={"208px"}
                 height={"56px"}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
               >
-                <Text fontSize={"18px"} fontWeight={"700"}>
-                  Cancelar{" "}
-                </Text>
+                Cancelar{" "}
               </Button>
               <Button
                 background="origem.500"
@@ -217,22 +225,14 @@ function EditModal({
                   background: "origem.600",
                   transition: "all 0.4s",
                 }}
-                onClick={() => {
-                  camposParaEditar.forEach((lic) =>
-                    handleUpdateLicoes(
-                      idLicao,
-                      lic,
-                      updatepayload(lic),
-                      user?.nome
-                    )
-                  );
-                }}
+                onClick={() => handlePatchLicoes()}
                 width={"208px"}
                 height={"56px"}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
               >
-                <Text fontSize={"18px"} fontWeight={"700"}>
-                  Salvar{" "}
-                </Text>
+                Salvar{" "}
               </Button>
             </Flex>
           </ModalFooter>

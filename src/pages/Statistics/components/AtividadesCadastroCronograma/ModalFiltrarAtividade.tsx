@@ -1,5 +1,4 @@
-import { forwardRef, useState } from "react";
-import DatePicker from "react-datepicker";
+import { useState } from "react";
 import { MdFilterAlt } from "react-icons/md";
 
 import {
@@ -18,76 +17,90 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
 
-import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+// import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
+import DatePickerModal from "components/DatePickerGenerico/DatePickerModal";
 import SelectFiltragem from "components/SelectFiltragem";
 
-import { useCadastroCronograma } from "hooks/useCadastroCronograma";
+import { useToast } from "contexts/Toast";
+
 import { useFiltragemCronogramaAtividade } from "hooks/useFiltragemCronogramaAtividade";
 
-export function ModalFiltrarAtividade({ refresh, setRefresh }: any) {
+import { getDataIdPoco } from "services/get/FiltroCronograma";
+import { postFiltroCronograma } from "services/post/FiltroCronograma";
+
+export function ModalFiltrarAtividade({
+  refresh,
+  setRefresh,
+  setDuracao,
+  setOperacao,
+  setOpcoesFiltro,
+  setDataInicio,
+  filterData,
+}: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useFiltragemCronogramaAtividade();
-  const { listaPocos, listaSondas } = useCadastroCronograma();
-  const [startDate, setStartDate] = useState<Date>();
-  const [endDate, setEndDate] = useState<Date>();
+  const { registerForm, pocos, sonda, metodoElevacao, loading } =
+    useFiltragemCronogramaAtividade();
+  const { toast } = useToast();
+  const [loadingBtn, setLoading] = useState(false);
 
-  const optionsPocos = listaPocos.map((poco: ListaPoco) => ({
+  const optionsPocos = pocos.map((poco: any) => ({
     value: poco.id,
-    label: poco.poco,
+    label: poco.nom_atividade,
   }));
 
-  const optionsSondas = listaSondas.map((sonda: any) => ({
-    value: sonda.id,
-    label: sonda.nom_sonda,
+  const optionsSondas = sonda.map((_sonda: any) => ({
+    value: _sonda.id,
+    label: _sonda.nom_atividade,
   }));
 
-  const metodoElevacao = [
-    {
-      value: 1,
-      label: "Metodo 1",
-    },
-    {
-      value: 2,
-      label: "Metodo 2",
-    },
-    {
-      value: 3,
-      label: "Metodo 3",
-    },
-    {
-      value: 4,
-      label: "Metodo 4",
-    },
-  ];
+  const optionsMetodo = metodoElevacao.map((metodo: any) => ({
+    value: metodo.id,
+    label: metodo.metodo,
+  }));
 
-  const handleStartDate = (date: any) => {
-    setStartDate(date);
+  const getFilter = async () => {
+    const payload = {
+      pocoId: registerForm.values.pocoId,
+      sondaId: registerForm.values.sondaId,
+      profundidadeIni: registerForm.values.profundidadeIni,
+      profundidadeFim: registerForm.values.profundidadeFim,
+      metodoElevacaoId: registerForm.values.metodoElevacaoId,
+      dataDe: registerForm.values.dataDe,
+      dataAte: registerForm.values.dataAte,
+    };
+    setLoading(true);
+    const result = await postFiltroCronograma(payload);
+    const dataIni = await getDataIdPoco(registerForm.values.pocoId);
+    setLoading(false);
+    if (result && result.length > 0) {
+      setOperacao(result[0].id_operacao);
+      setDuracao(result[0].hrs_media);
+      if (dataIni && dataIni.length > 0) {
+        setDataInicio(dataIni[0].prox_ini);
+      }
+      setOpcoesFiltro({
+        duracao: result[0].hrs_media,
+        operacao: result[0].id_operacao,
+        dataInicio: dataIni[0].prox_ini,
+      });
+      filterData({
+        duracao: result[0].hrs_media,
+        operacao: result[0].id_operacao,
+        dataInicio: dataIni[0].prox_ini,
+      });
+      onClose();
+    } else {
+      toast.error("Nenhum registro encontrado!", {
+        id: "toast-filtro-operacao",
+      });
+    }
   };
-
-  const handleEndDate = (date: any) => {
-    setEndDate(date);
-  };
-
-  const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
-    <Button
-      color={"#949494"}
-      onClick={onClick}
-      ref={ref}
-      variant="outline"
-      px={10}
-      width="174px"
-      height="56px"
-    >
-      {value === "" ? "Selecione a data" : value}
-    </Button>
-  ));
 
   return (
     <>
-      <MdFilterAlt onClick={onOpen} color="#0047BB" size="16px" />
+      <MdFilterAlt onClick={onOpen} color="#0047BB" size="22px" />
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
         <ModalContent>
@@ -122,7 +135,6 @@ export function ModalFiltrarAtividade({ refresh, setRefresh }: any) {
                       nomeSelect={"POÇO"}
                       propName={"pocoId"}
                       options={optionsPocos}
-                      required={true}
                     />
                   </Flex>
                   <Flex direction={"row"} height="56px" gap={3}>
@@ -133,19 +145,17 @@ export function ModalFiltrarAtividade({ refresh, setRefresh }: any) {
                         nomeSelect={"SONDA"}
                         propName={"sondaId"}
                         options={optionsSondas}
-                        required={true}
                       />
                     </Flex>
                     <Flex direction={"column"}>
                       <FormControl>
                         <Flex gap={1}>
-                          {/* <RequiredField /> */}
                           <Text
                             fontWeight={"bold"}
                             fontSize={"12px"}
                             color={"#949494"}
                           >
-                            DE
+                            PRODUNDIDADE DE
                           </Text>
                         </Flex>
 
@@ -169,13 +179,12 @@ export function ModalFiltrarAtividade({ refresh, setRefresh }: any) {
                     <Flex direction={"column"}>
                       <FormControl>
                         <Flex gap={1}>
-                          {/* <RequiredField /> */}
                           <Text
                             fontWeight={"bold"}
                             fontSize={"12px"}
                             color={"#949494"}
                           >
-                            ATE
+                            PRODUNDIDADE ATE
                           </Text>
                         </Flex>
 
@@ -202,46 +211,42 @@ export function ModalFiltrarAtividade({ refresh, setRefresh }: any) {
                       <SelectFiltragem
                         width={true}
                         registerForm={registerForm}
-                        nomeSelect={"Metodo Elevação"}
+                        nomeSelect={"MÉTODO ELEVAÇÃO"}
                         propName={"metodoElevacaoId"}
-                        options={metodoElevacao}
-                        required={true}
+                        options={optionsMetodo}
                       />
                     </Flex>
                     <Flex direction={"column"} grow={1} marginLeft="16px">
                       <Flex gap={1}>
-                        {/* <RequiredField /> */}
                         <Text fontSize={"12px"} color={"#949494"}>
                           DATA INÍCIO
                         </Text>
                       </Flex>
-                      <DatePicker
-                        selected={startDate}
-                        onChange={(date) => handleStartDate(date)}
+                      <DatePickerModal
+                        width="174px"
+                        registerForm={registerForm}
+                        propName={"dataDe"}
+                        data={registerForm.values.dataDe}
+                        dateFormat="dd/MM/yyyy"
                         locale="pt-BR"
-                        showTimeSelect
-                        timeIntervals={60}
-                        dateFormat="dd/MM/yyyy, hh:mm"
-                        customInput={<ExampleCustomInput />}
-                        isClearable={startDate !== null}
                       />
                     </Flex>
-                    <Flex direction={"column"} grow={1} marginLeft="16px">
+                    <Flex
+                      direction={"column"}
+                      grow={1}
+                      marginLeft="16px"
+                      width={174}
+                    >
                       <Flex gap={1}>
-                        {/* <RequiredField /> */}
                         <Text fontSize={"12px"} color={"#949494"}>
                           DATA FIM
                         </Text>
                       </Flex>
-                      <DatePicker
-                        selected={endDate}
-                        onChange={(date) => handleEndDate(date)}
+                      <DatePickerModal
                         locale="pt-BR"
-                        showTimeSelect
-                        timeIntervals={60}
-                        dateFormat="dd/MM/yyyy, hh:mm"
-                        customInput={<ExampleCustomInput />}
-                        isClearable={endDate !== null}
+                        registerForm={registerForm}
+                        propName={"dataAte"}
+                        data={registerForm.values.dataAte}
                       />
                     </Flex>
                   </Flex>
@@ -257,14 +262,28 @@ export function ModalFiltrarAtividade({ refresh, setRefresh }: any) {
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                <BotaoAzulLargoPrimary
-                  text={"Cadastrar"}
-                  formikForm={registerForm}
-                  onClose={onClose}
-                  setRefresh={setRefresh}
-                  refresh={refresh}
-                  loading={loading}
-                />
+                <Button
+                  // disabled={!registerForm.isValid}
+                  background="origem.300"
+                  variant="primary"
+                  color="white"
+                  onClick={getFilter}
+                  height="56px"
+                  width={174}
+                  disabled={
+                    !Object.values(registerForm.values).some(
+                      (element) => element !== "" && element !== 0
+                    )
+                  }
+                >
+                  {loadingBtn ? (
+                    <Ring speed={2} lineWeight={5} color="white" size={24} />
+                  ) : (
+                    <>
+                      <Text>Buscar</Text>
+                    </>
+                  )}
+                </Button>
               </Flex>
             </ModalFooter>
           </form>

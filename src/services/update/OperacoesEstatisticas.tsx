@@ -4,8 +4,8 @@ export async function patchOperacoesEstatisticas(
   // id: number,
   payload: any
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.patch(
-    `/estatisticas/projetos/`,
+  const { data, status } = await api.post(
+    `/editar-atividade/`,
     payload,
     token()
   );

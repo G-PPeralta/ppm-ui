@@ -48,7 +48,11 @@ function ColumnSPT({ column, setRefresh, refresh }: Props) {
     const servicoPocos = await getServicoPocoId(idNomeSonda);
 
     const servicoPocosSorted = servicoPocos.data.sort(
-      (a: ServicoPoco, b: ServicoPoco) => a.nom_poco.localeCompare(b.nom_poco)
+      (a: ServicoPoco, b: ServicoPoco) => {
+        const nomePocoA = a.nom_poco.split(" - ")[1];
+        const nomePocoB = b.nom_poco.split(" - ")[1];
+        return nomePocoA.localeCompare(nomePocoB);
+      }
     );
 
     setListaServicosPocos(servicoPocosSorted);

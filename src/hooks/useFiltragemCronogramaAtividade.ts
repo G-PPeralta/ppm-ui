@@ -1,26 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
-// import { NovaSonda } from "interfaces/CadastrosModaisInfograficos";
-// import { useAuth } from "./useAuth";
-// import { useToast } from "contexts/Toast";
+import { FiltroCronograma } from "interfaces/FiltroCronograma";
 
-interface Filter {
-  pocoId: number;
-  sondaId: number;
-  profundidadeIni: number;
-  profundidadeFim: number;
-  metodoElevacao: string;
-  metodoElevacaoId: number;
-  dataDe: string;
-  dataAte: string;
-}
+import {
+  getMetodoElevacao,
+  getPocos,
+  getSondas,
+} from "services/get/FiltroCronograma";
 
 export function useFiltragemCronogramaAtividade() {
-  // const { toast } = useToast();
-  const [loading] = useState(false);
-  // const { user } = useAuth();
-  const initialValues: Filter = {
+  const [loading, setLoading] = useState(false);
+  const [pocos, setPocos] = useState([]);
+  const [sonda, setSonda] = useState([]);
+  const [metodoElevacao, setMetodoElevacao] = useState([]);
+
+  const initialValues: FiltroCronograma = {
     pocoId: 0,
     sondaId: 0,
     profundidadeIni: 0,
@@ -31,15 +26,42 @@ export function useFiltragemCronogramaAtividade() {
     dataAte: "",
   };
 
+  const postFiltros = async (initialValues: FiltroCronograma) => {
+    // await postFiltroCronograma(initialValues);
+  };
+
+  const reqGet = async () => {
+    const _sondas = await getSondas();
+    const _pocos = await getPocos();
+    const _metodo = await getMetodoElevacao();
+    setPocos(_pocos);
+    setSonda(_sondas);
+    setMetodoElevacao(_metodo);
+  };
+
   const registerForm = useFormik({
     initialValues,
-    onSubmit: () => {
-      alert("kkkkk");
+    onSubmit: (values) => {
+      postFiltros(values);
     },
   });
+
+  useEffect(() => {
+    setLoading(true);
+    reqGet();
+  }, []);
+
+  useEffect(() => {
+    if (pocos.length > 0 && sonda.length > 0 && metodoElevacao.length > 0) {
+      setLoading(false);
+    }
+  }, [pocos, sonda, metodoElevacao]);
 
   return {
     registerForm,
     loading,
+    pocos,
+    sonda,
+    metodoElevacao,
   };
 }

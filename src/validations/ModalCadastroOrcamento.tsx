@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 export const cadastroValorPrevistoSchema = yup.object({
-  previsto: yup.number().required("Valor Previsto é obrigatório"),
+  valor: yup.string().required("Valor Previsto é obrigatório"),
 });
 
 export const cadastroValorPlanejadoSchema = yup.object({
@@ -16,14 +16,9 @@ export const cadastroValorPlanejadoSchema = yup.object({
     .required("Data é Requerida"),
   fornecedor: yup.string().required("Fornecedor é Requerido"),
   servico: yup.string().required("Servico é Requerido"),
-  pedido: yup
-    .string()
-    .required("Servico é Requerido")
-    .max(100, "Maximo 100 caracteres")
-    .matches(/^[a-zA-Z0-9]+$/, "O campo precisa ser alfanumerico."),
+  pedido: yup.number().required("Pedido é Requerido").moreThan(0),
   pedido_obs: yup
     .string()
     .required("Txt do pedido  é requerido.")
-    .min(50, "O texto precisa ter no minimo 50 caracteres.")
     .max(240, "Max 240 caracteres "),
 });

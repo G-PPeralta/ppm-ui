@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useParams } from "react-router-dom";
 
-import { Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Spacer, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import ContainerPagina from "components/ContainerPagina";
@@ -11,7 +11,6 @@ import TituloPagina from "components/TituloPagina";
 import { useBudgetDetail } from "hooks/useBudgetDetail";
 
 import { BudgetDetailTable } from "./components/BudgetDetailTable";
-import ModalCustoDiario from "./components/ModalCustoDiario";
 import { TotalTable } from "./components/TotalTable";
 
 import "./budgetDetail.css";
@@ -19,31 +18,45 @@ import "./budgetDetail.css";
 export function BudgetDetail() {
   const { id } = useParams();
 
-  const { budgetFilter, titulo, totalizacao, loading } = useBudgetDetail(
-    id || null
-  );
+  const { budgetFilter, titulo, totalizacao, loading, toogleRender } =
+    useBudgetDetail(id || null);
 
   return (
     <div>
       <Sidebar>
         {!loading ? (
           <ContainerPagina>
-            <TituloPagina botaoVoltar={true}>
-              Gerencial do Orçamento
-            </TituloPagina>
-
-            <Heading
-              as="h3"
-              size="md"
-              fontFamily={"Mulish"}
-              fontWeight={"bold"}
-              noOfLines={1}
-            >
-              {titulo?.sonda_nome}
-            </Heading>
-            <Text>{titulo?.poco_nome}</Text>
-            <ModalCustoDiario id={id} />
-            <BudgetDetailTable data={budgetFilter} />
+            <Flex mt={-2} ml={-5} mb={-7}>
+              <TituloPagina botaoVoltar={true}>
+                Gerencial do Orçamento
+              </TituloPagina>
+            </Flex>
+            <Flex>
+              <Box p="4">
+                <Heading
+                  // as="h3"
+                  // size="md"
+                  fontFamily={"Mulish"}
+                  fontWeight={"700"}
+                  fontSize={"24px"}
+                  noOfLines={1}
+                >
+                  {titulo?.sonda_nome}
+                </Heading>
+                <Text
+                  fontFamily={"Mulish"}
+                  fontWeight={"400"}
+                  fontSize={"20px"}
+                >
+                  {titulo?.poco_nome}
+                </Text>
+              </Box>
+              <Spacer />
+            </Flex>
+            <BudgetDetailTable
+              data={budgetFilter}
+              toogleRender={toogleRender}
+            />
             <TotalTable data={totalizacao} />
           </ContainerPagina>
         ) : (

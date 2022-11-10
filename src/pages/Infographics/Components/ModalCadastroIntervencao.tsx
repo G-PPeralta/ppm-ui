@@ -24,7 +24,7 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import {
-  ListaCampo,
+  // ListaCampo,
   ProjetoTipo,
 } from "interfaces/CadastrosModaisInfograficos";
 
@@ -57,7 +57,7 @@ function ModalCadastroIntervencao({
   const {
     registerForm,
     loading,
-    listaCampos,
+    // listaCampos,
     listaSondaCampanha,
     listaAtividadesPrecedentes,
   } = useCadastroIntervencao();
@@ -75,10 +75,10 @@ function ModalCadastroIntervencao({
     label: poco.nom_poco,
   }));
 
-  const optionsCampo = listaCampos.map((campo: ListaCampo) => ({
-    value: campo.id,
-    label: campo.campo,
-  }));
+  // const optionsCampo = listaCampos.map((campo: ListaCampo) => ({
+  //   value: campo.id,
+  //   label: campo.campo,
+  // }));
 
   const optionsProjetoTipo = listaProjetos.map((projetoTipo: ProjetoTipo) => ({
     value: projetoTipo.id,
@@ -297,7 +297,9 @@ function ModalCadastroIntervencao({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
             Cadastrar Nova Intervenção/Perfuração
           </ModalHeader>
@@ -335,13 +337,13 @@ function ModalCadastroIntervencao({
                           options={optionsPocos}
                           required={true}
                         />
-                        <SelectFiltragem
+                        {/* <SelectFiltragem
                           registerForm={registerForm}
                           nomeSelect={"CAMPO"}
                           propName={"campo_id"}
                           options={optionsCampo}
                           required={true}
-                        />
+                        /> */}
                         <DateTimePickerDataInicio registerForm={registerForm} />
                       </Flex>
                     </Stack>
