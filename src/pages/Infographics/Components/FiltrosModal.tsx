@@ -1,5 +1,6 @@
 import { BiSearch } from "react-icons/bi";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { RiFilterOffFill } from "react-icons/ri";
 
 import {
   Button,
@@ -302,6 +303,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
                 fontWeight={"700"}
                 borderRadius={"8px"}
                 fontFamily={"Mulish"}
+                rightIcon={<RiFilterOffFill />}
               >
                 Remover Filtros
               </Button>
