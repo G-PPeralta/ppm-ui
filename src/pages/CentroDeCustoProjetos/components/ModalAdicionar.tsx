@@ -10,15 +10,16 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  NumberInput,
-  NumberInputField,
+  ModalCloseButton,
   Text,
   Textarea,
   useDisclosure,
+  InputGroup,
 } from "@chakra-ui/react";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
+import InputGenerico from "components/InputGenerico";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
@@ -26,7 +27,7 @@ import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCentroDeCusto } from "hooks/useCentroDeCusto";
 
-import DateTimePickerData from "./DateTimePickerData";
+import DatePickerGenericoFinanceiro from "./DatePickerGenericoFinanceiro";
 
 interface RefreshState {
   refresh: boolean;
@@ -37,9 +38,15 @@ interface Props {
   refreshState: RefreshState;
   idProjeto: number;
   optionsSelects: any;
+  mes: number;
 }
 
-function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
+function ModalAdicionar({
+  refreshState,
+  idProjeto,
+  optionsSelects,
+  mes,
+}: Props) {
   const { refresh, setRefresh } = refreshState;
   const { optionsFornecedores, optionsClassesDeServico } = optionsSelects;
 
@@ -50,7 +57,10 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
     <>
       <Button
         h={"56px"}
-        borderRadius={"10px"}
+        fontSize={"18px"}
+        fontWeight={"700"}
+        fontFamily={"Mulish"}
+        borderRadius={"8px"}
         background={"origem.500"}
         variant="primary"
         color="white"
@@ -73,47 +83,47 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
-            Gestão de Custos
+            Lançar Despesa
           </ModalHeader>
+          <ModalCloseButton color={"white"} />
 
           <ModalBody mt={3}>
-            <Text fontWeight={"bold"} mb={3}>
+            {/* <Text
+              fontSize={"18px"}
+              fontWeight={"700"}
+              fontFamily={"Mulish"}
+              mb={3}
+              color={"#2D2926"}
+            >
               LANÇAR DESPESA
-            </Text>
+            </Text> */}
             <Flex direction={"column"} gap={4}>
               <Flex gap={4}>
                 <Flex direction={"column"}>
-                  <Flex gap={1}>
-                    <RequiredField />
-                    <Text
-                      fontWeight={"bold"}
-                      fontSize={"12px"}
-                      color={"#949494"}
-                    >
-                      VALOR
-                    </Text>
-                  </Flex>
-                  <NumberInput
-                    h={"56px"}
-                    precision={2}
-                    max={9999999}
-                    min={0}
-                    id="valor"
-                    name="valor"
-                    value={registerForm.values.valor}
-                    onChange={(value) =>
-                      registerForm.setFieldValue("valor", Number(value))
-                    }
-                  >
-                    <NumberInputField bg={"#fff"} h={"56px"} />
-                  </NumberInput>
+                  <InputGroup>
+                    <InputGenerico
+                      registerForm={registerForm}
+                      nomeInput={"VALOR PREVISTO"}
+                      propName={"valor"}
+                      value={registerForm.values.valor || ""}
+                      required={true}
+                      placeholder={"0"}
+                      maxLength={20}
+                      isNumeric={true}
+                    />
+                  </InputGroup>
                 </Flex>
                 <Flex direction={"column"}>
-                  <DateTimePickerData
+                  <DatePickerGenericoFinanceiro
                     registerForm={registerForm}
+                    nomeLabel="DATA"
+                    propName={"data"}
                     required={true}
+                    esconderHorario
                   />
                 </Flex>
               </Flex>
@@ -138,7 +148,7 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -163,7 +173,7 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -171,6 +181,10 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
                     </Text>
                   </Flex>
                   <Textarea
+                    _placeholder={{ color: "#949494" }}
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    color={"black"}
                     isRequired
                     placeholder="Ação ou recomendação"
                     id="descricaoDoServico"
@@ -179,7 +193,6 @@ function ModalAdicionar({ refreshState, idProjeto, optionsSelects }: Props) {
                       registerForm.values.descricaoDoServico
                     )}
                     onChange={registerForm.handleChange}
-                    maxLength={255}
                   />
                 </Flex>
               </Flex>

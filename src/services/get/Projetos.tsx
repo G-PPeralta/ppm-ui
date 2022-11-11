@@ -1,4 +1,4 @@
-import { ProjetosList } from "interfaces/Services";
+import { ProjetosConfig, ProjetosList } from "interfaces/Services";
 
 import { api, token } from "services/api";
 
@@ -7,6 +7,19 @@ export async function getProjetos(): Promise<{
   status: number;
 }> {
   const { data, status } = await api.get("/projetos/listagem", {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
+    },
+  });
+
+  return { data, status };
+}
+
+export async function getProjeto(id: number): Promise<{
+  data: ProjetosConfig[];
+  status: number;
+}> {
+  const { data, status } = await api.get(`/projetos/configuracoes/${id}`, {
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },

@@ -9,17 +9,19 @@ import { getBudgetDetail } from "services/get/GetBudget";
 export function useBudgetDetail(id: string | null) {
   // const { toast } = useToast();
 
-  const [loading, setLoading] = useState(false); // Loading
+  const [loading, setLoading] = useState(true); // Loading
   const [, /* budgets */ setBudgets] = useState<BudgetDetail[]>([]);
   // const [projects, setProjects] = useState<Project[]>([]);
   const [budgetFilter, setBudgetsFilter] = useState<BudgetDetail[]>([]);
   // const [projectSelected, setProjectSelected] = useState("");
   const [titulo, setTitulo] = useState<Titulo>();
   const [totalizacao, setTotalizacao] = useState<Totalizacao>();
+  const [render, setRender] = useState(false);
 
   const wd = window.innerWidth;
 
   const gerarBudgetsList = async () => {
+    setLoading(true);
     const data = await getBudgetDetail(id);
 
     setBudgets(data.list);
@@ -49,9 +51,13 @@ export function useBudgetDetail(id: string | null) {
     setProjectSelected(e.target.value);
   }; */
 
+  const toogleRender = () => {
+    setRender(!render);
+  };
+
   useEffect(() => {
     gerarBudgetsList();
-  }, []);
+  }, [render]);
 
   return {
     budgetFilter,
@@ -60,5 +66,6 @@ export function useBudgetDetail(id: string | null) {
     // projects,
     titulo,
     totalizacao,
+    toogleRender,
   };
 }

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { FaRegCalendarAlt } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 
 import {
@@ -7,15 +8,18 @@ import {
   Text,
   FormControl,
   Select,
-  FormLabel,
+  Heading,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
+import { AtividadesLookahead } from "interfaces/lookahead";
 
+import BotaoSetaVoltar from "components/BotaoSetaVoltar/BotaoSetaVoltar";
+import ContainerPagina from "components/ContainerPagina";
 import Sidebar from "components/SideBar";
 
 // import { FiPlusCircle, FiSearch } from "react-icons/fi";
 
-import { getAtividade } from "services/get/Lookahead";
+import { getAtividade, getFerramentasServicos } from "services/get/Lookahead";
 
 import { ModalAddAtividade } from "../components/ModalAddAtividade";
 import { TabelaAtividades } from "../components/TabelaAtividades";
@@ -31,11 +35,19 @@ export function LookaheadDetalhe() {
   const { id } = useParams();
   const [weeks, setWeeks] = useState<Weeks[]>();
   const [semana, setSemana] = useState<string>();
-  const [atividade, setAtividade] = useState<any>();
+  const [ferramentasServicos, setFerramentasServicos] = useState<any>();
+  const [atividade, setAtividade] = useState<AtividadesLookahead[]>();
 
   const loadAtividade = async () => {
-    const atividade = id ? await getAtividade(+id) : undefined;
-    setAtividade(atividade);
+    if (id) {
+      const act = await getAtividade(+id);
+      setAtividade(act);
+    } else return null;
+  };
+
+  const loadFerramentasServicos = async () => {
+    const fs = id ? await getFerramentasServicos(+id) : undefined;
+    setFerramentasServicos(fs);
   };
 
   function getWeeks() {
@@ -70,6 +82,10 @@ export function LookaheadDetalhe() {
 
   useEffect(() => {
     loadAtividade();
+  }, []);
+
+  useEffect(() => {
+    loadFerramentasServicos();
     getWeeks();
   }, []);
 
@@ -79,34 +95,37 @@ export function LookaheadDetalhe() {
 
   return (
     <>
-      <Sidebar>
-        <Flex w={"auto"} align="center" justify="center" bg="#EDF2F7">
-          <Box
-            py={{ base: "6", sm: "8" }}
-            px={{ base: "6", sm: "10" }}
-            w="100%"
-            bg="white"
-            boxShadow={{
-              base: "none",
-              sm: "md",
-            }}
-            borderRadius={{ base: "none", sm: "xl" }}
-          >
-            <Flex direction="column" ml={-5} mt={-5}>
-              <FormControl>
-                <FormLabel htmlFor="name">
-                  <Text
-                    mb={3}
-                    fontSize={"24px"}
-                    color={"#2D2926"}
-                    fontWeight={"700"}
+      {atividade && ferramentasServicos ? (
+        <Sidebar>
+          <ContainerPagina>
+            <Flex direction="column">
+              <Flex align={"center"} gap={2} mb={4}>
+                <Flex ml={-3} mt={-8} mr={-2}>
+                  <BotaoSetaVoltar />
+                </Flex>
+                <Flex direction={"column"}>
+                  <Heading
+                    mt={-1}
                     fontFamily={"Mulish"}
+                    fontWeight={"700"}
+                    // as="h3"
+                    // size="md"
+                    textAlign={"center"}
+                    fontSize={"24px"}
                   >
                     Relatório Lookahead
+                  </Heading>
+                  <Text
+                    fontFamily={"Mulish"}
+                    fontSize="20px"
+                    color="#585858"
+                    fontWeight="400"
+                  >
+                    {atividade[0].nom_atividade}
                   </Text>
-                </FormLabel>
-              </FormControl>
-              <Text>{atividade && atividade.id}</Text>
+                </Flex>
+              </Flex>
+
               <Flex
                 direction="row"
                 justifyContent="flex-start"
@@ -122,12 +141,15 @@ export function LookaheadDetalhe() {
                       SEMANA
                     </Text>
                     <Select
-                      id="poloId"
-                      name="pole"
-                      color={"#949494"}
-                      width={250}
-                      marginRight="16px"
+                      fontSize={"14px"}
+                      fontWeight={"400"}
+                      // _placeholder={{ color: "#2D2926" }}
+                      // color={"#949494"}
+                      width={"218px"}
+                      height={"56px"}
+                      borderRadius={"8px"}
                       onChange={(e) => changeWeek(e.target.value)}
+                      icon={<FaRegCalendarAlt />}
                     >
                       {weeks &&
                         weeks.map(function (x, i) {
@@ -139,18 +161,24 @@ export function LookaheadDetalhe() {
                         })}
                     </Select>
                   </FormControl>
-                  <FormControl>
+                  <FormControl marginLeft="16px">
                     {id && <ModalAddAtividade id={+id} />}
                   </FormControl>
                 </Flex>
               </Flex>
 
               <Flex direction="column">
-                {atividade && (
-                  <TabelaAtividades semana={semana} data={atividade} />
+                {ferramentasServicos && (
+                  <TabelaAtividades
+                    semana={semana}
+                    data={ferramentasServicos}
+                  />
                 )}
-                {atividade ? (
-                  <TabelaFerramentas semana={semana} data={atividade} />
+                {ferramentasServicos ? (
+                  <TabelaFerramentas
+                    semana={semana}
+                    data={ferramentasServicos}
+                  />
                 ) : (
                   <Box
                     display={"flex"}
@@ -161,8 +189,8 @@ export function LookaheadDetalhe() {
                     <Ring speed={2} lineWeight={5} color="blue" size={64} />
                   </Box>
                 )}
-                {atividade ? (
-                  <TabelaServicos semana={semana} data={atividade} />
+                {ferramentasServicos ? (
+                  <TabelaServicos semana={semana} data={ferramentasServicos} />
                 ) : (
                   <Box
                     display={"flex"}
@@ -175,9 +203,15 @@ export function LookaheadDetalhe() {
                 )}
               </Flex>
             </Flex>
-          </Box>
+            {/* </Box> */}
+            {/* </Flex> */}
+          </ContainerPagina>
+        </Sidebar>
+      ) : (
+        <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
+          <Ring speed={2} lineWeight={5} color="blue" size={64} />
         </Flex>
-      </Sidebar>
+      )}
     </>
   );
 }

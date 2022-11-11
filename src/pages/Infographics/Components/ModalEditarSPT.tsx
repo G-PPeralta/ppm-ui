@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 import {
@@ -13,20 +13,42 @@ import {
   useDisclosure,
   Button,
   FormControl,
-  FormLabel,
   Stack,
   useBreakpointValue,
   Input,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 
-import { RequiredField } from "components/RequiredField/RequiredField";
+import { postReplanejarCampanha } from "services/post/Infograficos";
 
 import PocosDragAndDrop from "./PocosDragAndDrop";
 
-function ModalEditarSPT({ column }: any) {
+interface Payload {
+  id_cronograma: number;
+  ordem: number;
+}
+
+function ModalEditarSPT({ column, refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [nome, setNome] = useState(column.sonda);
   const [pocos, setPocos] = useState(column.pocos);
+  const [payload, setPayload] = useState<Payload[]>([
+    {
+      id_cronograma: 0,
+      ordem: 0,
+    },
+  ]);
+
+  // console.log("payload", payload);
+
+  const handleClick = async () => {
+    await postReplanejarCampanha(payload, column.id_campanha);
+    setRefresh(!refresh);
+    onClose();
+  };
+
+  useEffect(() => {
+    setPocos(column.pocos);
+  }, [column]);
 
   return (
     <>
@@ -55,12 +77,14 @@ function ModalEditarSPT({ column }: any) {
             color={"white"}
             fontSize={"1em"}
           >
-            Editar SPT
+            Replanejar Cronograma
           </ModalHeader>
+          <ModalCloseButton color={"white"} />
           <ModalBody mt={3}>
             <FormControl>
               <Flex direction={"column"} gap={4}>
                 <Stack>
+                  <Text fontWeight={"bold"}>Campanha</Text>
                   <Flex
                     flexDirection={useBreakpointValue({
                       base: "column",
@@ -70,12 +94,17 @@ function ModalEditarSPT({ column }: any) {
                   >
                     <FormControl>
                       <Flex gap={1}>
-                        <RequiredField />
-                        <FormLabel htmlFor="nom_projeto_tipo">ID</FormLabel>
+                        <Text
+                          fontWeight={"bold"}
+                          fontSize={"12px"}
+                          color={"#949494"}
+                        >
+                          ID
+                        </Text>
                       </Flex>
                       <Input
+                        h={"56px"}
                         disabled
-                        isRequired
                         placeholder="id"
                         type="text"
                         value={column.id_campanha}
@@ -83,21 +112,30 @@ function ModalEditarSPT({ column }: any) {
                     </FormControl>
                     <FormControl>
                       <Flex gap={1}>
-                        <RequiredField />
-                        <FormLabel htmlFor="nom_projeto_tipo">SPT</FormLabel>
+                        <Text
+                          fontWeight={"bold"}
+                          fontSize={"12px"}
+                          color={"#949494"}
+                        >
+                          SPT
+                        </Text>
                       </Flex>
                       <Input
-                        isRequired
+                        h={"56px"}
+                        disabled
                         placeholder="Nome do SPT"
                         type="text"
-                        value={nome}
-                        onChange={(event) => setNome(event.target.value)}
+                        value={column.sonda}
                       />
                     </FormControl>
                   </Flex>
                 </Stack>
 
-                <PocosDragAndDrop pocos={pocos} setPocos={setPocos} />
+                <PocosDragAndDrop
+                  pocos={pocos}
+                  setPocos={setPocos}
+                  setPayload={setPayload}
+                />
               </Flex>
             </FormControl>
           </ModalBody>
@@ -105,28 +143,36 @@ function ModalEditarSPT({ column }: any) {
           <ModalFooter justifyContent={"center"}>
             <Flex gap={2}>
               <Button
+                onClick={() => onClose()}
+                h={"56px"}
+                borderRadius={"10px"}
                 variant="ghost"
                 color="red"
-                onClick={() => onClose()}
                 _hover={{
                   background: "red.500",
                   transition: "all 0.4s",
                   color: "white",
                 }}
               >
-                Cancelar
+                <Text fontSize="16px" fontWeight={"bold"}>
+                  Cancelar
+                </Text>
               </Button>
               <Button
-                background="origem.300"
+                onClick={() => handleClick()}
+                h={"56px"}
+                borderRadius={"10px"}
+                background={"origem.500"}
                 variant="primary"
                 color="white"
-                onClick={() => onClose()}
                 _hover={{
-                  background: "origem.500",
+                  background: "origem.600",
                   transition: "all 0.4s",
                 }}
               >
-                <Text>Salvar</Text>
+                <Text fontSize="16px" fontWeight={"bold"}>
+                  Salvar
+                </Text>
               </Button>
             </Flex>
           </ModalFooter>

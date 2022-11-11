@@ -16,6 +16,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FerramentasAtividade } from "interfaces/lookahead";
+import moment from "moment";
 
 interface TableProps {
   semana?: string;
@@ -68,17 +69,18 @@ export function TabelaServicos(props: TableProps) {
     }
     const servicosDiaHora: ServicoDiaHora[] = [];
     data &&
-      data.forEach(function (fer) {
-        const diaFerramenta = dataBr.format(new Date(fer.data_hora));
-        const hora = fer.data_hora.split("T")[1].substring(0, 5);
+      data.forEach(function (ser) {
+        const strDt = ser.data_hora.split("T")[0] + "T12:00:00.000Z";
+        const diaServico = dataBr.format(new Date(strDt));
+        const hora = ser.data_hora.split("T")[1].substring(0, 5);
 
-        const ferramenta: ServicoDiaHora = {
-          dia: diaFerramenta,
+        const servico: ServicoDiaHora = {
+          dia: diaServico,
           hora,
-          nome: fer.nome,
-          tipo: fer.tipo ? fer.tipo : "",
+          nome: ser.nome,
+          tipo: ser.tipo ? ser.tipo : "",
         };
-        servicosDiaHora.push(ferramenta);
+        servicosDiaHora.push(servico);
       });
 
     setServicosData(servicosDiaHora);
@@ -95,7 +97,7 @@ export function TabelaServicos(props: TableProps) {
       <TableContainer mt={4} mb={3} ml={1} width="100%">
         <Table variant="unstyled" size={"sm"}>
           <Thead>
-            <Tr backgroundColor={"blue"} color="white">
+            <Tr backgroundColor={"#0047BB"} color="white">
               <Th
                 colSpan={7}
                 borderTopRightRadius={"10px"}
@@ -108,6 +110,9 @@ export function TabelaServicos(props: TableProps) {
                     <CSVLink
                       data={servicosData.filter((x) => x.tipo == "s")}
                       headers={headers}
+                      filename={`servicos_lookahead${moment().format(
+                        "DDMMYYYY_hhmmss"
+                      )}`}
                     >
                       <Button
                         variant="ghost"
@@ -127,7 +132,7 @@ export function TabelaServicos(props: TableProps) {
                 </Flex>
               </Th>
             </Tr>
-            <Tr backgroundColor={"rgb(46, 105, 253)"} color="white">
+            <Tr backgroundColor={"#0047BB"} color="white">
               {dias &&
                 dias.map(function (x) {
                   return <Th>{`${x.diaLabel}`}</Th>;
@@ -150,7 +155,7 @@ export function TabelaServicos(props: TableProps) {
             </Tr>
           </Tbody>
           <Tfoot>
-            <Tr backgroundColor={"blue"} color="white">
+            <Tr backgroundColor={"#0047BB"} color="white">
               {dias &&
                 servicosData &&
                 dias.map(function (dia, key) {

@@ -5,6 +5,9 @@ import { Box, Button, Flex, Heading, Input, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { StatisticsTableData } from "interfaces/Services";
 
+import ModalCadastrarSonda from "pages/Infographics/Components/ModalCadastrarSonda";
+import ModalCadastroPoco from "pages/Infographics/Components/ModalCadastroPoco";
+
 import Sidebar from "components/SideBar";
 
 import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
@@ -30,6 +33,9 @@ function Statistics() {
           id_sonda: s.id_sonda,
           poco: p.poco,
           id_poco: p.id_poco,
+          dat_inicio: p.dat_inicio,
+          dat_final: p.dat_final,
+          pct_real: p.pct_real,
           atividades: p.atividades,
         });
       })
@@ -90,19 +96,17 @@ function Statistics() {
             >
               <Flex
                 justify={"space-between"}
-                mb={2}
+                mb={6}
                 wrap={"wrap"}
                 align={"center"}
+                mt={-1}
+                ml={-1}
               >
                 <Heading
-                  as="h1"
-                  size="md"
-                  mb={2}
-                  textAlign={"center"}
+                  fontFamily={"Mulish"}
+                  fontWeight={"700"}
                   fontSize={"24px"}
                   color={"#2D2926"}
-                  fontWeight={"700"}
-                  fontFamily={"Mulish"}
                 >
                   Projetos
                 </Heading>
@@ -120,7 +124,7 @@ function Statistics() {
                 flex={2}
               >
                 <Flex align={"end"} gap={4} wrap={"wrap"} flex={1}>
-                  <Flex direction={"column"} flex={1}>
+                  <Flex direction={"column"} flex={1} ml={-1}>
                     <Text
                       fontWeight={"bold"}
                       fontSize={"12px"}
@@ -130,6 +134,10 @@ function Statistics() {
                     </Text>
                     <Input
                       h={"56px"}
+                      _placeholder={{ color: "#949494" }}
+                      fontSize={"14px"}
+                      fontWeight={"400"}
+                      color={"black"}
                       isRequired
                       placeholder="Sonda"
                       id="name"
@@ -142,7 +150,9 @@ function Statistics() {
                   <Flex>
                     <Button
                       h={"56px"}
-                      borderRadius={"10px"}
+                      fontSize={"18px"}
+                      fontWeight={"700"}
+                      borderRadius={"8px"}
                       background={"origem.500"}
                       variant="primary"
                       color="white"
@@ -152,16 +162,27 @@ function Statistics() {
                         transition: "all 0.4s",
                       }}
                       rightIcon={<BsSearch />}
-                      fontWeight={"bold"}
                     >
                       Filtrar
                     </Button>
                   </Flex>
                 </Flex>
 
-                <Flex gap={4} flex={1} justify={"end"} align={"end"}>
-                  {/* <ModalCadastrarSonda /> */}
-                  {/* <ModalCadastroPoco /> */}
+                <Flex
+                  gap={4}
+                  flex={2}
+                  justify={windowInnerWidth > 600 ? "end" : "start"}
+                  align={"end"}
+                  wrap={"wrap"}
+                >
+                  <ModalCadastrarSonda
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
+                  <ModalCadastroPoco
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
                   <ModalCadastroOperacao
                     refresh={refresh}
                     setRefresh={setRefresh}
@@ -174,7 +195,7 @@ function Statistics() {
                 </Flex>
               </Flex>
 
-              <Flex flex={1}>
+              <Flex flex={1} ml={-1}>
                 <StatisticsTable data={filter} />
               </Flex>
             </Box>

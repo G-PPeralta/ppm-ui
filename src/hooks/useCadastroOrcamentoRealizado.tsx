@@ -5,6 +5,9 @@ import { BudgetReal, ClasseServico } from "interfaces/Budgets";
 import { Fornecedor } from "interfaces/Services";
 import { cadastroValorPlanejadoSchema } from "validations/ModalCadastroOrcamento";
 
+import { formatReal } from "utils/formatReal";
+import { parseNumber } from "utils/regexCoinMask";
+
 import { useToast } from "contexts/Toast";
 
 import { getFornecedor } from "services/get/Fornecedor";
@@ -36,7 +39,7 @@ export function useCadastroOrcamentoRealizado() {
     data: "",
     fornecedor: "",
     servico: "",
-    pedido: "",
+    pedido: 0,
     pedido_obs: "",
     nom_usu_create: user?.nome,
   };
@@ -45,13 +48,17 @@ export function useCadastroOrcamentoRealizado() {
     initialValues,
     validationSchema: cadastroValorPlanejadoSchema,
     onSubmit: async (values) => {
+      const dateF = new Date(values.data);
+      dateF.setHours(11);
+      dateF.setDate(dateF.getDate() + 1);
+      const dateS = dateF.toISOString();
       const newValues: BudgetReal = {
         atividadeId: atividade,
-        valor: +values.gasto,
-        data: values.data,
+        valor: parseNumber(values.gasto),
+        data: dateS,
         fornecedor: values.fornecedor,
         classeServico: values.servico,
-        pedido: parseInt(values.pedido),
+        pedido: values.pedido,
         textPedido: values.pedido_obs,
         nom_usu_create: user?.nome,
       };
@@ -61,16 +68,25 @@ export function useCadastroOrcamentoRealizado() {
         const { status } = await postAddValorRealizado(newValues);
 
         if (status === 200 || status === 201) {
-          toast.success(`Valor Gasto ${values.gasto} cadastrada com sucesso!`, {
-            id: "toast-principal",
-          });
+          toast.success(
+            `Valor Gasto ${formatReal(
+              parseNumber(values.gasto)
+            )} cadastrada com sucesso!`,
+            {
+              id: "toast-principal",
+            }
+          );
           setLoading(false);
-          location.reload();
         }
       } catch (error) {
-        toast.error(`Erro ao cadastrar valor gasto ${values.gasto}!`, {
-          id: "toast-principal",
-        });
+        toast.error(
+          `Erro ao cadastrar valor gasto ${formatReal(
+            parseNumber(values.gasto)
+          )}!`,
+          {
+            id: "toast-principal",
+          }
+        );
         setLoading(false);
       }
     },

@@ -6,12 +6,16 @@ import { cadastroSondaSchema } from "validations/ModaisCadastrosInfografico";
 
 import { useToast } from "contexts/Toast";
 
-import { postNovaSonda } from "services/post/CadastroModaisInfograficos";
 import { postCadastroSondaOperacao } from "services/post/Estatistica";
+import { postNovaSonda } from "services/post/Infograficos";
 
 import { useAuth } from "./useAuth";
 
-export function useCadastroSonda(modulo?: string) {
+export function useCadastroSonda(
+  modulo?: string,
+  refresh?: boolean,
+  setRefresh?: Function
+) {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
@@ -37,7 +41,7 @@ export function useCadastroSonda(modulo?: string) {
           const { status } = await postCadastroSondaOperacao(newValues);
 
           if (status === 200 || status === 201) {
-            toast.success(`Poço cadastrado com sucesso!`, {
+            toast.success(`Sonda cadastrada com sucesso!`, {
               id: "toast-principal",
             });
             setLoading(false);
@@ -46,10 +50,13 @@ export function useCadastroSonda(modulo?: string) {
           const { status } = await postNovaSonda(newValues);
 
           if (status === 200 || status === 201) {
-            toast.success(`Poço cadastrado com sucesso!`, {
+            toast.success(`Sonda cadastrada com sucesso!`, {
               id: "toast-principal",
             });
             setLoading(false);
+            if (setRefresh) {
+              setRefresh(!refresh);
+            }
           }
         }
         // const { status } = await postNovaSonda(newValues);
@@ -61,7 +68,7 @@ export function useCadastroSonda(modulo?: string) {
         //   setLoading(false);
         // }
       } catch (error) {
-        toast.error(`Erro ao cadastrar sonda ${values.nome}!`, {
+        toast.error(`Erro ao cadastrar sonda!`, {
           id: "toast-principal",
         });
         setLoading(false);

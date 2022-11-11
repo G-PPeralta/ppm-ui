@@ -52,17 +52,17 @@ export function useEditarAtividadeGantt() {
     id_atividade: 0,
     inicio_realizado: "",
     fim_realizado: "",
-    inicio_planejado: "",
-    fim_planejado: "",
+    // inicio_planejado: "",
+    // fim_planejado: "",
     pct_real: 0,
   };
 
   const adicionarOperacao = yup.object({
-    id_atividade: yup.number().required("Campo obrigatório").moreThan(0),
+    id_atividade: yup.number().required("Campo obrigatório"), // .moreThan(0),
     inicio_realizado: yup.date().required("Campo obrigatório"),
     fim_realizado: yup.date().required("Campo obrigatório"),
-    inicio_planejado: yup.date().required("Campo obrigatório"),
-    fim_planejado: yup.date().required("Campo obrigatório"),
+    // inicio_planejado: yup.date().required("Campo obrigatório"),
+    // fim_planejado: yup.date().required("Campo obrigatório"),
     pct_real: yup.number(), // .required("Campo obrigatório").moreThan(0),
   });
   const registerForm: any = useFormik({
@@ -70,25 +70,28 @@ export function useEditarAtividadeGantt() {
     validationSchema: adicionarOperacao,
     onSubmit: async (values) => {
       const id = values.id_atividade;
+      const dat_ini = new Date(values.inicio_realizado);
+      const dat_fim = new Date(values.fim_realizado);
+      // dat_fim.setDate(dat_fim.getDate() - 1);
       const newValues = {
-        dat_ini: new Date(values.inicio_realizado).toLocaleString(),
-        dat_fim: new Date(values.fim_realizado).toLocaleString(),
-        dat_ini_plan: new Date(values.inicio_planejado).toLocaleString(),
-        dat_fim_plan: new Date(values.fim_planejado).toLocaleString(),
+        dat_ini_real: dat_ini.toISOString(),
+        dat_fim_real: dat_fim.toISOString(),
+        // dat_ini_plan: new Date(values.inicio_planejado).toLocaleString(),
+        // dat_fim_plan: new Date(values.fim_planejado).toLocaleString(),
         pct_real: values.pct_real,
       };
 
       try {
         const { status } = await patchAtividadeProjeto(id, newValues);
         if (status === 200 || status === 201) {
-          toast.success("Operação adicionada com sucesso!", {
+          toast.success("Atividade editada com sucesso!", {
             id: "toast-principal",
           });
           // setLoading(false);
           setRefresh(!refresh);
         }
       } catch (error) {
-        toast.error("Erro ao adicionar operação!", {
+        toast.error("Erro ao editar atividade!", {
           id: "toast-principal",
         });
         // setLoading(false);
@@ -100,10 +103,10 @@ export function useEditarAtividadeGantt() {
     setEditAtividade({
       id_atividade: args.rowData.TaskID,
       nome_atividade: args.rowData.TaskName,
-      inicio_realizado: new Date(args.rowData.StartDate),
-      fim_realizado: new Date(args.rowData.EndDate),
-      inicio_planejado: new Date(args.rowData.BaselineStartDate),
-      fim_planejado: new Date(args.rowData.BaselineEndDate),
+      inicio_realizado: args.rowData.StartDate,
+      fim_realizado: args.rowData.EndDate,
+      // inicio_planejado: new Date(args.rowData.BaselineStartDate),
+      // fim_planejado: new Date(args.rowData.BaselineEndDate),
       // hrs_totais: args.rowData.BaselineDuration,
       // hrs_reais: args.rowData.Duration,
       pct_real: args.rowData.Progress,

@@ -127,8 +127,10 @@ export interface GanttMacroDto {
   macroatividade_nome: string;
   duracao?: number;
   progresso?: number;
-  data_inicio?: string;
-  data_fim?: string;
+  dat_ini_real: string;
+  dat_fim_real: string;
+  dat_ini_plan: string;
+  dat_fim_plan: string;
   item?: string;
   microatividade_id?: number;
   nome_atividade?: string;
@@ -297,6 +299,47 @@ export interface ProjetosList {
   elemento_pep: string;
 }
 
+export interface ProjetosConfig {
+  id: number;
+  nome_projeto: string;
+  nome_responsavel: string;
+  coordenador_nome: string;
+  descricao: string;
+  justificativa: string;
+  valor_total_previsto: number;
+  data_inicio: Date;
+  data_fim?: Date;
+  polo_id?: number;
+  local_id: number;
+  solicitante_id: number;
+  classificacao_id: number;
+  divisao_id: number;
+  gate_id: number;
+  tipo_projeto_id: number;
+  demanda_id?: number;
+  status_id: number;
+  prioridade_id: number;
+  complexidade_id: number;
+  dataInicio_real: Date | null;
+  dataFim_real: Date | null;
+  comentarios: string;
+  deletado: boolean;
+  item?: number;
+  numero?: number;
+  responsavel_id: number;
+  coordenador_id: number;
+  elemento_pep: string;
+  nom_usu_create: string;
+  polo: string;
+  local: string;
+  solicitante: string;
+  classificacao: string;
+  divisao: string;
+  gate: string;
+  tipo: string;
+  status: string;
+}
+
 export interface ProjetosInfo {
   id: number;
   nomeProjeto: string;
@@ -361,14 +404,25 @@ export interface LicoesAprendidas {
   dat_usu_create: string;
   txt_licao_aprendida: string;
   txt_acao: string;
-  nom_usu_create: string;
+  user: string;
+}
+
+export interface LicoesAprendidasNew {
+  id: number;
+  id_projeto: number;
+  id_categoria: number;
+  data: string;
+  licao_aprendida: string;
+  acao_e_recomendacao: string;
+  user: string;
 }
 
 export interface LicoesAprendidasPayload {
-  id_projeto: number;
-  dat_usu_create?: string;
-  txt_licao_aprendida: string;
-  txt_acao: string;
+  id_atividade: number;
+  data?: Date;
+  licao_aprendida: string;
+  acoes_e_recomendacoes: string;
+  user: string | undefined;
 }
 
 export interface Categorias {
@@ -458,6 +512,9 @@ export interface StatisticsTableData {
   id_sonda: number;
   poco: string;
   id_poco: number;
+  dat_inicio?: string;
+  dat_final?: string;
+  pct_real?: number;
   atividades: StatisticsTable[];
   max?: number;
   min?: number;
@@ -498,4 +555,16 @@ export interface AtividadesProjeto {
   macroatividadeId: number;
   item: string;
   temporario: boolean;
+}
+
+export interface TotalProjetosDashboard {
+  month: string;
+  nao_iniciados: number;
+  holds: number;
+  iniciados: number;
+  em_analise: number;
+  finalizados: number;
+  cancelados: number;
+  pre_aprovacao: number;
+  reprogramado: number;
 }

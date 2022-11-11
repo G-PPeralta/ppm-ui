@@ -17,7 +17,7 @@ import {
   getAtividadesList,
   getResponsavelList,
 } from "services/get/Infograficos";
-import { postCadastroAtividadeIntervencao } from "services/post/CadastroModaisInfograficos";
+import { postCadastroAtividadeIntervencao } from "services/post/Infograficos";
 
 import { useAuth } from "./useAuth";
 

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { BsPlusLg } from "react-icons/bs";
+// import { BsPlusLg } from "react-icons/bs";
 // import { useParams } from "react-router-dom";
 
 import {
   Flex,
   Box,
-  IconButton,
+  // IconButton,
   // useBreakpointValue,
   Textarea,
   Modal,
@@ -20,11 +20,16 @@ import {
   ModalFooter,
   Button,
   Select,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
   // useDisclosure,
 } from "@chakra-ui/react";
 import { format } from "date-fns";
 import { AtividadesProjeto, TarefaAtividade } from "interfaces/Services";
-import { Text } from "recharts";
+// import { Text } from "recharts";
 
 import { useAuth } from "hooks/useAuth";
 
@@ -70,7 +75,7 @@ function EditarTarefaModal({
     setDescricao(editTarefa.descricao_tarefa);
     setTarefaId(editTarefa.id);
   }, [
-    // editTarefa.dat_usu_create,
+    // editTarefa.data,
     novaData,
     editTarefa.nome_tarefa,
     editTarefa.id,
@@ -95,24 +100,42 @@ function EditarTarefaModal({
     if (campo === "status") return status;
   }
 
+  const formataParaPorcentagem = (val: number | undefined) => val + "%";
+
+  const handlePatchProject = async () => {
+    const promises = camposParaEditar.map((tarefa) =>
+      patchTarefa(
+        Number(tarefaId),
+        tarefa,
+        tarefa !== "status"
+          ? updatePayload(tarefa) || 0
+          : updatePayload(tarefa)?.toString() || "",
+        user?.nome
+      )
+    );
+    await Promise.all(promises);
+    newRender();
+    closeModal();
+  };
+
   return (
     <Flex>
       <Box
-        display={"flex"}
-        alignItems={"center"}
-        border="2px"
-        padding={2}
-        borderRadius={6}
-        borderColor={"origem.300"}
-        _hover={{
-          background: "#f5f5f5",
-          transition: "all 0.4s",
-          color: "origem.300",
-          cursor: "pointer",
-          borderColor: "origem.500",
-        }}
+      // display={"flex"}
+      // alignItems={"center"}
+      // border="2px"
+      // padding={2}
+      // borderRadius={6}
+      // borderColor={"origem.300"}
+      // _hover={{
+      //   background: "#f5f5f5",
+      //   transition: "all 0.4s",
+      //   color: "origem.300",
+      //   cursor: "pointer",
+      //   borderColor: "origem.500",
+      // }}
       >
-        <IconButton
+        {/* <IconButton
           aria-label="Plus sign"
           icon={<BsPlusLg />}
           background="origem.300"
@@ -121,7 +144,7 @@ function EditarTarefaModal({
           mr={2}
           isRound={true}
           size="sm"
-        />
+        /> */}
         {/* <Text
           fontSize={useBreakpointValue({ base: "sm", md: "sm" })}
           fontWeight={"bold"}
@@ -140,6 +163,7 @@ function EditarTarefaModal({
             justifyContent={"center"}
             color={"white"}
             fontSize={"14px"}
+            fontWeight={"700"}
           >
             Editar Tarefa
           </ModalHeader>
@@ -150,9 +174,9 @@ function EditarTarefaModal({
               padding={1}
               display={"flex"}
               justifyContent={"space-between"}
-              gap={3}
+              // gap={3}
             >
-              <Flex flexDir={"column"} flexGrow={4}>
+              <Flex flexDir={"column"} flexGrow={4} mr={4} ml={-3}>
                 <FormLabel
                   htmlFor="nomeTarefa"
                   color="#949494"
@@ -213,9 +237,9 @@ function EditarTarefaModal({
               marginBottom={1}
               width={"204px"}
               display="flex"
-              gap={4}
+              // gap={4}
             >
-              <Flex direction={"column"}>
+              <Flex direction={"column"} mr={4} ml={-3}>
                 <FormLabel
                   htmlFor="atividadeRel"
                   color="#949494"
@@ -274,6 +298,8 @@ function EditarTarefaModal({
               </Flex>
             </FormControl>
             <FormLabel
+              mr={4}
+              ml={-2}
               htmlFor="status"
               color="#949494"
               fontSize="12px"
@@ -282,7 +308,7 @@ function EditarTarefaModal({
             >
               STATUS
             </FormLabel>
-            <Input
+            {/* <Input
               type="number"
               fontSize={"14px"}
               borderRadius={"8px"}
@@ -295,9 +321,33 @@ function EditarTarefaModal({
               name="status"
               value={status}
               onChange={(event) => setStatus(Number(event.target.value))}
-            ></Input>
+            ></Input> */}
+            <NumberInput
+              mt={"-9px"}
+              mr={4}
+              ml={-2}
+              width={"208px"}
+              height={"56px"}
+              min={0}
+              max={100}
+              value={formataParaPorcentagem(status)}
+              onChange={(valueString) => {
+                const value = Number(valueString);
+                setStatus(value);
+              }}
+              h={"56px"}
+            >
+              <NumberInputField h={"56px"} />
+
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
             <FormControl padding={1}>
               <FormLabel
+                mr={4}
+                ml={-3}
                 htmlFor="acao"
                 color="#949494"
                 fontSize="12px"
@@ -307,12 +357,14 @@ function EditarTarefaModal({
                 DESCRIÇÃO DA TAREFA
               </FormLabel>
               <Textarea
+                mr={4}
+                ml={-3}
                 maxLength={255}
                 fontSize={"14px"}
                 borderRadius={"8px"}
                 border={"1px solid #A7A7A7"}
                 mt={"-9px"}
-                width={"456px"}
+                width={"436px"}
                 height={"121px"}
                 color="black"
                 isRequired
@@ -338,39 +390,29 @@ function EditarTarefaModal({
                 onClick={closeModal}
                 width={"208px"}
                 height={"56px"}
+                fontWeight={"700"}
+                fontSize="18px"
+                fontFamily={"Mulish"}
               >
-                <Text fontWeight={"700"} fontSize="18px">
-                  Cancelar
-                </Text>
+                Cancelar
               </Button>
               <Button
-                background="#0047BB"
+                background="origem.500"
                 variant="primary"
                 color="white"
+                borderRadius={"8px"}
                 _hover={{
-                  background: "#0047BB",
+                  background: "origem.600",
                   transition: "all 0.4s",
                 }}
-                onClick={() => {
-                  camposParaEditar.forEach((tarefa) =>
-                    patchTarefa(
-                      Number(tarefaId),
-                      tarefa,
-                      tarefa !== "status"
-                        ? updatePayload(tarefa) || 0
-                        : updatePayload(tarefa)?.toString() || "",
-                      user?.nome
-                    )
-                  );
-                  newRender();
-                  closeModal();
-                }}
+                onClick={() => handlePatchProject()}
                 width={"208px"}
                 height={"56px"}
+                fontWeight={"700"}
+                fontSize="18px"
+                fontFamily={"Mulish"}
               >
-                <Text fontWeight={"700"} fontSize="18px">
-                  Adicionar
-                </Text>
+                Confirmar
               </Button>
             </Flex>
           </ModalFooter>

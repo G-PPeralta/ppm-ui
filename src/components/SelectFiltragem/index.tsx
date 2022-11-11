@@ -13,6 +13,7 @@ function SelectFiltragem({
   value,
   idCampanha,
   required,
+  width,
 }: any) {
   const handleChange = ({ value }: any, { name }: any) => {
     registerForm.setFieldValue(name, value);
@@ -29,11 +30,55 @@ function SelectFiltragem({
   };
 
   const customStyles = {
+    placeholder: (defaultStyles: any) => ({
+      ...defaultStyles,
+      color: "black",
+      fontWeigth: "400",
+      fontSize: "14px",
+    }),
     control: (base: any) => ({
       ...base,
       height: 56,
       minHeight: 56,
-      border: "1px solid #E2E8F0",
+      border: "0.5px solid #E2E8F0",
+      borderRadius: "8px",
+      fontWeigth: "400",
+      fontSize: "14px",
+    }),
+
+    dropdownIndicator: (base: any) => ({
+      ...base,
+      color: "#2D2926",
+    }),
+
+    menu: (base: any) => ({
+      ...base,
+      zIndex: 9999,
+      minWidth: "300px",
+    }),
+  };
+
+  const customStyles208 = {
+    placeholder: (defaultStyles: any) => ({
+      ...defaultStyles,
+      color: "black",
+      fontWeigth: "400",
+      fontSize: "14px",
+    }),
+    control: (base: any) => ({
+      ...base,
+      height: 56,
+      minHeight: 56,
+      border: "0.5px solid #E2E8F0",
+      borderRadius: "8px",
+      fontWeigth: "400",
+      fontSize: "14px",
+      width: "208px",
+    }),
+
+    dropdownIndicator: (base: any) => ({
+      ...base,
+      color: "#2D2926",
     }),
 
     menu: (base: any) => ({
@@ -49,13 +94,16 @@ function SelectFiltragem({
         {nomeSelect && (
           <Flex gap={1}>
             {required && <RequiredField />}
-            <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
+            <Text fontWeight={"700"} fontSize={"12px"} color={"#949494"}>
               {nomeSelect}
             </Text>
           </Flex>
         )}
         <Select
-          styles={customStyles}
+          styles={width ? customStyles208 : customStyles}
+          components={{
+            IndicatorSeparator: () => null,
+          }}
           id={propName}
           name={propName}
           placeholder={idCampanha ? getNomeCampanha(idCampanha) : "Selecione"}

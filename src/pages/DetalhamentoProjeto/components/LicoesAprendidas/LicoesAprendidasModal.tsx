@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
 import {
@@ -22,11 +22,9 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { LicoesAprendidas } from "interfaces/Services";
+import { LicoesAprendidasNew } from "interfaces/Services";
 
 import { useToast } from "contexts/Toast";
-
-import { patchLicaoAprendida } from "services/update/LicoesAprendidas";
 
 import CadastrarLicoesAprendidasModal from "./CadastrarLicoesAprendidasModal";
 import EditarLicoesAprendidasModal from "./EditarLicoesAprendidasModal";
@@ -40,29 +38,22 @@ function LicoesAprendidasModal({
 }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { toast } = useToast();
-  const [editLicao, setEditLicao] = useState({} as LicoesAprendidas);
+  const [editLicao, setEditLicao] = useState({} as LicoesAprendidasNew);
   const [openModalEdit, setOpenModalEdit] = useState(false);
   const [openModalRegister, setOpenModalRegister] = useState(false);
   const [categoriaId, setCategoriaId] = useState("");
   const [data, setData] = useState("");
 
-  const [filteredTable, setFilteredTable] = useState([]);
+  const [filteredTable, setFilteredTable] = useState(licoes);
 
-  function handleEditLicao(licao: LicoesAprendidas): void {
+  function handleEditLicao(licao: LicoesAprendidasNew): void {
     setEditLicao(licao);
     setOpenModalEdit(true);
   }
 
-  async function handleUpdateLicoes(
-    licao: any,
-    campo: any,
-    payload: any,
-    user: any
-  ) {
+  async function handleUpdateLicoes() {
     try {
-      await patchLicaoAprendida(licao, campo, payload, user);
-      callBack();
-      setFilteredTable([]);
+      await callBack();
       setOpenModalEdit(false);
     } catch (error) {
       toast({
@@ -75,51 +66,23 @@ function LicoesAprendidasModal({
     }
   }
 
-  // console.log(data.length);
-  // console.log(licoes);
-  // console.log(
-  //   licoes.filter(
-  //     (lic: any) =>
-  //       lic.id_categoria == categoriaId || lic.dat_usu_create.includes(data)
-  //   )
-  // );
+  function handleFilter() {
+    if (categoriaId || data) {
+      const filter = licoes
+        .filter((lic: any) =>
+          lic.licao_aprendida.toUpperCase().includes(categoriaId.toUpperCase())
+        )
+        .filter((lic: any) => lic.data.includes(data));
 
-  function handleFilter(search: string, data: string) {
-    // if (categoriaId) {
-    //   const filtered = licoes.filter(
-    //     (lic: any) => lic.id_categoria == categoriaId
-    //   );
-    //   filtered.length == 0 &&
-    //     toast.error(
-    //       "Nenhum dado encontrado com o presente filtro de categoria"
-    //     );
-    //   return setFilteredTable(filtered);
-    // }
-
-    if (search) {
-      const filtered = licoes.filter(
-        (lic: any) =>
-          lic.txt_licao_aprendida
-            .toUpperCase()
-            .includes(search.toUpperCase()) ||
-          lic.txt_acao.toUpperCase().includes(search.toUpperCase())
-      );
-
-      // filtered.length == 0 &&
-      //   toast.error("Nenhum dado encontrado com o presente filtro de data");
-      return setFilteredTable(filtered);
+      setFilteredTable(filter);
+    } else {
+      setFilteredTable(licoes);
     }
-
-    if (data) {
-      const filtered = licoes.filter((lic: any) =>
-        lic.dat_usu_create.includes(data)
-      );
-      // filtered.length == 0 &&
-      //   toast.error("Nenhum dado encontrado com o presente filtro de data");
-      return setFilteredTable(filtered);
-    }
-    setFilteredTable(licoes);
   }
+
+  useEffect(() => {
+    handleFilter();
+  }, [licoes]);
 
   return (
     <>
@@ -133,8 +96,7 @@ function LicoesAprendidasModal({
           transition: "all 0.4s",
         }}
         p={4}
-        borderTopRadius={"0px"}
-        borderBottomRadius={"6px"}
+        borderRadius={"0px"}
         fontSize={"16px"}
         fontWeight={"700"}
         flex={1}
@@ -142,7 +104,7 @@ function LicoesAprendidasModal({
         Lições Aprendidas
       </Button>
 
-      <Modal size={"3xl"} isOpen={isOpen} onClose={onClose}>
+      <Modal size={"6xl"} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -189,11 +151,14 @@ function LicoesAprendidasModal({
                       <Input
                         maxLength={50}
                         borderRadius={"8px"}
-                        border={"1px solid #A7A7A7"}
+                        fontSize={"14px"}
+                        fontWeight={"400"}
+                        fontFamily={"Mulish"}
+                        border={"1px solid #949494"}
                         mt={"-9px"}
                         width={"208px"}
                         height={"56px"}
-                        _placeholder={{ color: "black" }}
+                        _placeholder={{ color: "#949494" }}
                         id="categoria"
                         name="categoria"
                         placeholder="Digite"
@@ -223,6 +188,10 @@ function LicoesAprendidasModal({
                       </FormLabel>
                       <Input
                         // placeholder="dd/mm/aaaa"
+                        _placeholder={{ color: "#949494" }}
+                        fontSize={"14px"}
+                        fontWeight={"400"}
+                        fontFamily={"Mulish"}
                         borderRadius={"8px"}
                         max="9999-12-31"
                         maxLength={1}
@@ -230,7 +199,6 @@ function LicoesAprendidasModal({
                         mt={"-9px"}
                         width={"156px"}
                         height={"56px"}
-                        _placeholder={{ color: "black" }}
                         id="data"
                         type="Date"
                         name="data"
@@ -257,11 +225,10 @@ function LicoesAprendidasModal({
                       // h={useBreakpointValue({ base: "100%", md: "120%" })}
                       // float={"right"}
                       onClick={() => {
-                        handleFilter(categoriaId, data);
-                        setCategoriaId("");
+                        handleFilter();
                       }}
                       _hover={{
-                        background: "origem.300",
+                        background: "origem.500",
                         transition: "all 0.4s",
                         color: "white",
                       }}
@@ -291,7 +258,7 @@ function LicoesAprendidasModal({
                         // float={"right"}
                         onClick={() => setOpenModalRegister(true)}
                         _hover={{
-                          background: "origem.300",
+                          background: "origem.600",
                           transition: "all 0.4s",
                           color: "white",
                         }}
@@ -314,7 +281,7 @@ function LicoesAprendidasModal({
           <ModalBody>
             <TabelaLicoesAprendidas
               onEdit={handleEditLicao}
-              licoes={filteredTable.length > 0 ? filteredTable : licoes}
+              licoes={filteredTable}
             />
             {openModalEdit && (
               <EditarLicoesAprendidasModal

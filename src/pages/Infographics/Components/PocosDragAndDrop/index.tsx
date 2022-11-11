@@ -5,27 +5,48 @@ import {
   DroppableProvided,
 } from "react-beautiful-dnd";
 
-import { Flex, FormLabel } from "@chakra-ui/react";
-import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
+import { Flex, Text } from "@chakra-ui/react";
 
-import { RequiredField } from "components/RequiredField/RequiredField";
-
-import BotaoAdicionar from "./BotaoAdicionar";
+import DraggableNaoArrastavel from "./Draggable/DraggableNaoArrastavel";
 import PocoDraggable from "./Draggable/PocoDraggable";
 
-export default function PocosDragAndDrop({ pocos, setPocos }: any) {
+export default function PocosDragAndDrop({ pocos, setPocos, setPayload }: any) {
   const id = useId();
-  const [render, setRender] = useState<any>([]);
   const [droppableId, setDroppableId] = useState<string>(id);
 
-  const reorder = () => {};
-
-  const onDragEnd = (result: any) => {
-    reorder();
+  const handlePayload = (pocos: any) => {
+    setPayload(
+      pocos.map((poco: any, index: number) => ({
+        id_cronograma: poco.id_poco,
+        ordem: index + 1,
+      }))
+    );
   };
 
-  const add = () => {
-    setRender(!render);
+  const reorder = (pocos: any, startIndex: number, endIndex: number) => {
+    const listaReordenada = (pocos: any) => {
+      const list = pocos;
+
+      const [removed] = list.splice(startIndex, 1);
+
+      list.splice(endIndex, 0, removed);
+
+      return list;
+    };
+    setPocos(listaReordenada(pocos));
+    handlePayload(pocos);
+  };
+
+  const onDragEnd = (result: any) => {
+    if (!result.destination) {
+      return;
+    }
+
+    if (result.destination.index === result.source.index) {
+      return;
+    }
+
+    reorder(pocos, result.source.index, result.destination.index);
   };
 
   useEffect(() => {
@@ -37,27 +58,43 @@ export default function PocosDragAndDrop({ pocos, setPocos }: any) {
   return (
     <>
       <Flex gap={1}>
-        <RequiredField />
-        <FormLabel mb={0}>Poços</FormLabel>
+        <Text fontWeight={"bold"}>Intervenções</Text>
       </Flex>
+
+      {pocos[0].pct_real !== "0" && (
+        <DraggableNaoArrastavel pocos={pocos} setPocos={setPocos} index={0} />
+      )}
+
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId={droppableId}>
           {(provided: DroppableProvided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              {pocos.map((poco: AtividadesProjetoTipo, index: number) => (
+              {pocos[0].pct_real === "0" && (
                 <PocoDraggable
-                  key={index}
                   pocos={pocos}
                   setPocos={setPocos}
-                  index={index}
+                  index={0}
+                  setPayload={setPayload}
                 />
-              ))}
+              )}
+              {pocos.map(
+                (_poco: any, index: number) =>
+                  index > 0 && (
+                    <PocoDraggable
+                      key={index}
+                      pocos={pocos}
+                      setPocos={setPocos}
+                      index={index}
+                      setPayload={setPayload}
+                    />
+                  )
+              )}
+
               {provided.placeholder}
             </div>
           )}
         </Droppable>
       </DragDropContext>
-      <BotaoAdicionar add={add} />
     </>
   );
 }

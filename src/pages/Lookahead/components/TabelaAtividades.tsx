@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
 import { FaFileCsv } from "react-icons/fa";
+import { TbTool } from "react-icons/tb";
 
 import {
   Button,
@@ -16,6 +17,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FerramentaServico } from "interfaces/lookahead";
+import moment from "moment";
 
 interface TableProps {
   semana?: string;
@@ -151,7 +153,7 @@ export function TabelaAtividades(props: TableProps) {
         <Table variant="unstyled" size={"sm"}>
           <Thead>
             <Tr
-              backgroundColor={"blue"}
+              backgroundColor={"#0047BB"}
               color="white"
               border="none 0px !important"
             >
@@ -164,7 +166,13 @@ export function TabelaAtividades(props: TableProps) {
                 <Flex justifyContent="space-between" alignItems="center">
                   <Text>Atividade</Text>
                   {atividades && (
-                    <CSVLink data={atividades} headers={headers}>
+                    <CSVLink
+                      data={atividades}
+                      headers={headers}
+                      filename={`atividades_lookahead${moment().format(
+                        "DDMMYYYY_hhmmss"
+                      )}`}
+                    >
                       <Button
                         variant="ghost"
                         colorScheme="messenger"
@@ -183,7 +191,7 @@ export function TabelaAtividades(props: TableProps) {
                 </Flex>
               </Th>
             </Tr>
-            <Tr backgroundColor={"rgb(46, 105, 253)"} color="white">
+            <Tr backgroundColor={"#0047BB"} color="white">
               <Th>BRT</Th>
               {dias &&
                 dias.map(function (x) {
@@ -201,7 +209,9 @@ export function TabelaAtividades(props: TableProps) {
                     backgroundColor={indice % 2 == 1 ? "#F9F9F9" : "#FFF"}
                     key={indice}
                   >
-                    <Td>{hora}</Td>
+                    <Td width="146px" height="56px">
+                      {hora}
+                    </Td>
                     {dias.map(function (dia) {
                       const activityS = atividades.filter(
                         (x) =>
@@ -223,13 +233,43 @@ export function TabelaAtividades(props: TableProps) {
                       const arrayF = activityF
                         ? activityF.map((x) => x.nome)
                         : undefined;
+                      //
 
+                      const nomeServ = arrayS ? arrayS.join(" ") : "";
+                      const nomeFerr = arrayF ? arrayF.join(" ") : "";
                       return (
-                        <Td>
-                          {(arrayS && arrayF
-                            ? arrayS.join("-") + " - " + arrayF.join("-")
-                            : (arrayS && arrayS.join(" ")) ||
-                              (arrayF && arrayF.join(" "))) || `-`}
+                        <Td width="146px" height="56px">
+                          <>
+                            {nomeServ && (
+                              <>
+                                <Text
+                                  fontFamily={"Mulish"}
+                                  fontStyle="normal"
+                                  display="inline-flex"
+                                  color="#585858"
+                                  fontWeight="600"
+                                  fontSize="13px"
+                                  lineHeight="150%"
+                                >
+                                  {nomeServ}
+                                </Text>
+                                <br />
+                              </>
+                            )}
+
+                            {nomeFerr && (
+                              <Text
+                                display="inline-flex"
+                                color="#585858"
+                                fontWeight="400"
+                                fontSize="12px"
+                                lineHeight="14px"
+                                gap={1}
+                              >
+                                <TbTool /> {nomeFerr.toLocaleLowerCase()}
+                              </Text>
+                            )}
+                          </>
                         </Td>
                       );
                     })}
@@ -239,7 +279,7 @@ export function TabelaAtividades(props: TableProps) {
           </Tbody>
           <Tfoot>
             <Tr
-              backgroundColor={"blue"}
+              backgroundColor={"#0047BB"}
               color="white"
               border="none 0px !important"
             >

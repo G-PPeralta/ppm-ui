@@ -32,7 +32,7 @@ function ModalCadastrarPriorizacao() {
   const { registerForm, loading } = useCadastroNovaPriorizacao();
 
   // console.log(registerForm.values);
-  const perfis = ["Nível 0", "Nível 1", "Nível 2"];
+  const perfis = ["Administrador", "Operador"];
 
   useEffect(() => {
     registerForm.setFieldValue("id_area_responsavel", 1);
@@ -44,21 +44,19 @@ function ModalCadastrarPriorizacao() {
       <Button
         onClick={onOpen}
         color={"white"}
-        backgroundColor={"#0047BB"}
+        background={"origem.500"}
         aria-label="Plus sign"
         variant="primary"
         _hover={{
-          background: "white",
+          background: "origem.600",
           transition: "all 0.4s",
-          color: "#0047BB",
-          border: "#0047BB solid 1px",
         }}
-        borderRadius={"8px"}
         h={"56px"}
         w={"121px"}
         fontSize={"18px"}
-        fontFamily={"Mulish"}
         fontWeight={"700"}
+        borderRadius={"8px"}
+        fontFamily={"Mulish"}
       >
         Cadastrar
       </Button>
@@ -73,7 +71,7 @@ function ModalCadastrarPriorizacao() {
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            Configuração
+            Cadastrar Priorização
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <form
@@ -100,7 +98,7 @@ function ModalCadastrarPriorizacao() {
                             <FormLabel
                               htmlFor="nom_ranking"
                               mb={"1px"}
-                              ml={"3px"}
+                              ml={"2px"}
                               color={"#949494"}
                               fontWeight={"700"}
                               fontSize={"12px"}
@@ -109,7 +107,7 @@ function ModalCadastrarPriorizacao() {
                             </FormLabel>
                             <Input
                               maxLength={30}
-                              ml={"3px"}
+                              ml={"2px"}
                               w={"93%"}
                               h={"56px"}
                               fontSize={"14px"}
@@ -149,10 +147,12 @@ function ModalCadastrarPriorizacao() {
                               mb={"1px"}
                               w={"550px"}
                               mt={"5px"}
+                              ml={"2px"}
                             >
                               PERFIS COM ACESSO
                             </FormLabel>
                             <Select
+                              ml={"2px"}
                               id="pit"
                               name="pit"
                               placeholder="Selecione"
@@ -179,18 +179,21 @@ function ModalCadastrarPriorizacao() {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
+              <Flex gap={2} ml={9}>
                 <Button
                   variant="ghost"
-                  color="red"
+                  color="red.500"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
-                    background: "red.500",
+                    background: "red.600",
                     transition: "all 0.4s",
                     color: "white",
                   }}
-                  w={"158px"}
+                  w={"208px"}
                   h={"56px"}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   Cancelar
                 </Button>
@@ -198,14 +201,17 @@ function ModalCadastrarPriorizacao() {
                   disabled={!registerForm.isValid}
                   w={"208px"}
                   h={"56px"}
-                  background="#0047BB"
+                  background="origem.500"
                   variant="primary"
                   color="white"
                   onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
-                    background: "origem.500",
+                    background: "origem.600",
                     transition: "all 0.4s",
                   }}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />

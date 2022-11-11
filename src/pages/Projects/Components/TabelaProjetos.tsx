@@ -21,7 +21,6 @@ import { Projetos } from "interfaces/Projetos";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
 
-import { formatDate } from "utils/formatDate";
 import { formatReal } from "utils/formatReal";
 
 import ModalCadastrarPriorizacao from "./ModalCadastrarPriorizacao";
@@ -31,9 +30,11 @@ import "../projects.css";
 
 interface TableProps {
   data: Projetos[];
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: boolean;
 }
 
-export function TabelaProjetos({ data }: TableProps) {
+export function TabelaProjetos({ data, refresh, setRefresh }: TableProps) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
 
@@ -54,104 +55,336 @@ export function TabelaProjetos({ data }: TableProps) {
     0
   );
 
-  // console.log(data);
+  function formatDate(date: string) {
+    const formated = date.substring(0, 10).split("-");
+    return `${formated[2]}/${formated[1]}/${formated[0]}`;
+  }
 
-  const tableData = data.slice(from, to).map((projeto, key) => (
-    <Tr key={key}>
-      <Td isNumeric textAlign={"center"}>
-        {projeto.id_projeto_real}
-      </Td>
-      <Td>
-        <Link to={`/detalhamento/${projeto.id_projeto_real}`}>
-          {projeto.nome_projeto.length > 25 ? (
-            <Tooltip label={projeto.nome_projeto} aria-label="Nome do projeto">
-              <Text color={"#0047BB"}>
-                {projeto.nome_projeto.substring(0, 25) + "..."}
-              </Text>
-            </Tooltip>
-          ) : (
-            <Text color={"#0047BB"}>{projeto.nome_projeto}</Text>
-          )}
-        </Link>
-      </Td>
-      <Td textAlign={"center"}>
-        {projeto.vlr_cpi_corrigido >= 1 ? (
-          <Flex alignItems={"center"}>
-            <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
-            <Text marginLeft="8px">
-              {" "}
-              {` CPI = ${projeto.vlr_cpi_corrigido}`}
-            </Text>
-          </Flex>
+  function Body() {
+    return (
+      <>
+        {data.length > 0 ? (
+          data
+            .sort((a, b) => a.id - b.id)
+            .slice(from, to)
+            .map((projeto, key) => (
+              <Tr key={key}>
+                <Td
+                  // isNumeric
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                  color={"#2D2926"}
+                >
+                  {projeto.id_projeto_real}
+                </Td>
+                <Td>
+                  <Link to={`/detalhamento/${projeto.id_projeto_real}`}>
+                    {projeto.nome_projeto.length > 25 ? (
+                      <Tooltip
+                        label={projeto.nome_projeto}
+                        aria-label="Nome do projeto"
+                      >
+                        <Text color={"#0047BB"}>
+                          {projeto.nome_projeto.substring(0, 25) + "..."}
+                        </Text>
+                      </Tooltip>
+                    ) : (
+                      <Text color={"#0047BB"}>{projeto.nome_projeto}</Text>
+                    )}
+                  </Link>
+                </Td>
+                <Td
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                  color={"#2D2926"}
+                >
+                  {projeto.vlr_cpi == 1 ? (
+                    <Flex alignItems={"center"}>
+                      <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
+                      <Text marginLeft="8px">
+                        {" "}
+                        {` CPI = ${projeto.vlr_cpi}`}
+                      </Text>
+                    </Flex>
+                  ) : (
+                    <Flex alignItems={"center"}>
+                      <BsFillXCircleFill color="red" fontSize={25} />{" "}
+                      <Text marginLeft="8px">{` CPI = ${
+                        projeto.vlr_cpi ?? 0
+                      }`}</Text>
+                    </Flex>
+                  )}
+                </Td>
+                <Td
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                  color={"#2D2926"}
+                >
+                  {projeto.vlr_spi == 1 ? (
+                    <Flex alignItems={"center"}>
+                      <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
+                      <Text marginLeft="8px">{` SPI = ${projeto.vlr_spi}`}</Text>
+                    </Flex>
+                  ) : (
+                    <Flex alignItems={"center"}>
+                      <BsFillXCircleFill color="red" fontSize={25} />{" "}
+                      <Text marginLeft="8px">{` SPI = ${
+                        projeto.vlr_spi ?? 0
+                      }`}</Text>
+                    </Flex>
+                  )}
+                </Td>
+                <Td
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                  color={"#2D2926"}
+                >
+                  {formatReal(+projeto.vlr_orcado)}
+                </Td>
+                <Td
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                  color={"#2D2926"}
+                >
+                  {formatReal(+projeto.vlr_cr)}
+                </Td>
+                <Td
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                  color={"#2D2926"}
+                >{`${
+                  projeto.vlr_orcado && projeto.vlr_cr
+                    ? (
+                        100 -
+                        (+projeto.vlr_cr / +projeto.vlr_orcado) * 100
+                      ).toFixed(2)
+                    : 0
+                } %`}</Td>
+                <Td
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                  color={"#2D2926"}
+                >
+                  {projeto.complexidade}
+                </Td>
+                <Td
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                  color={"#2D2926"}
+                >
+                  {projeto.prioridade}
+                </Td>
+                <Td
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                  color={"#2D2926"}
+                >
+                  {projeto.polo}
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  {projeto.coordenador}
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  {projeto.responsavel}
+                </Td>
+                <Td
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                  color={"#2D2926"}
+                >
+                  {projeto.data_inicio == null
+                    ? "---"
+                    : formatDate(projeto.data_inicio)}
+                </Td>
+                <Td
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                  color={"#2D2926"}
+                >
+                  {projeto.data_fim == null
+                    ? "---"
+                    : formatDate(projeto.data_fim)}
+                </Td>
+                <Td
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                  color={"#2D2926"}
+                >{`${
+                  projeto.vlr_cr && projeto.vlr_orcado
+                    ? ((projeto.vlr_cr / projeto.vlr_orcado) * 100).toFixed(2)
+                    : 0
+                } %`}</Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  {/* <ExpansibleText
+                    text={projeto.descricao + " " + projeto.justificativa}
+                  /> */}
+                  {(projeto.descricao + " " + projeto.justificativa).length >
+                  25 ? (
+                    <Tooltip
+                      label={projeto.nome_projeto + " " + projeto.justificativa}
+                      aria-label="Nome do projeto"
+                    >
+                      <Text>
+                        {(
+                          projeto.descricao +
+                          " " +
+                          projeto.justificativa
+                        ).substring(0, 50) + "..."}
+                      </Text>
+                    </Tooltip>
+                  ) : (
+                    <Text>
+                      {projeto.descricao + " " + projeto.justificativa}
+                    </Text>
+                  )}
+                </Td>
+                <Td
+                  fontWeight={"semibold"}
+                  textAlign={"center"}
+                  align={"center"}
+                  color={"#2D2926"}
+                >
+                  <ModalCadastrarPriorizacao
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                    projeto={projeto.id_projeto_real}
+                  />
+                  <ModalDeletarProjeto projeto={projeto.id_projeto_real} />
+                </Td>
+              </Tr>
+            ))
         ) : (
-          <Flex alignItems={"center"}>
-            <BsFillXCircleFill color="red" fontSize={25} />{" "}
-            <Text marginLeft="8px">{` CPI = ${
-              projeto.vlr_cpi_corrigido ?? 0
-            }`}</Text>
-          </Flex>
+          <Tr>
+            <Td textAlign={"start"} fontWeight={"semibold"}>
+              Não há dados
+            </Td>
+          </Tr>
         )}
-      </Td>
-      <Td textAlign={"center"}>
-        {projeto.vlr_spi_corrigido >= 1 ? (
-          <Flex alignItems={"center"}>
-            <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
-            <Text marginLeft="8px">{` SPI = ${projeto.vlr_spi_corrigido}`}</Text>
-          </Flex>
-        ) : (
-          <Flex alignItems={"center"}>
-            <BsFillXCircleFill color="red" fontSize={25} />{" "}
-            <Text marginLeft="8px">{` SPI = ${
-              projeto.vlr_spi_corrigido ?? 0
-            }`}</Text>
-          </Flex>
-        )}
-      </Td>
-      <Td>{formatReal(+projeto.vlr_orcado)}</Td>
-      <Td>{formatReal(+projeto.vlr_cr)}</Td>
-      <Td textAlign={"center"}>{`${
-        projeto.vlr_orcado && projeto.vlr_cr
-          ? (100 - (+projeto.vlr_cr / +projeto.vlr_orcado) * 100).toFixed(2)
-          : 0
-      } %`}</Td>
-      <Td textAlign={"center"}>{projeto.complexidade}</Td>
-      <Td textAlign={"center"}>{projeto.prioridade}</Td>
-      <Td textAlign={"center"}>{projeto.polo}</Td>
-      <Td>{projeto.coordenador}</Td>
-      <Td>{projeto.responsavel}</Td>
-      <Td textAlign={"center"}>{formatDate(new Date(projeto.data_inicio))}</Td>
-      <Td textAlign={"center"}>{formatDate(new Date(projeto.data_fim))}</Td>
-      <Td textAlign={"center"}>{`${
-        projeto.vlr_cr && projeto.vlr_orcado
-          ? ((projeto.vlr_cr / projeto.vlr_orcado) * 100).toFixed(2)
-          : 0
-      } %`}</Td>
-      <Td>
-        {/* <ExpansibleText
-          text={projeto.descricao + " " + projeto.justificativa}
-        /> */}
-        {(projeto.descricao + " " + projeto.justificativa).length > 25 ? (
-          <Tooltip
-            label={projeto.nome_projeto + " " + projeto.justificativa}
-            aria-label="Nome do projeto"
-          >
-            <Text>
-              {(projeto.descricao + " " + projeto.justificativa).substring(
-                0,
-                50
-              ) + "..."}
-            </Text>
-          </Tooltip>
-        ) : (
-          <Text>{projeto.descricao + " " + projeto.justificativa}</Text>
-        )}
-      </Td>
-      <Td textAlign={"center"}>
-        <ModalCadastrarPriorizacao projeto={projeto.id_projeto_real} />
-        <ModalDeletarProjeto projeto={projeto.id_projeto_real} />
-      </Td>
-    </Tr>
-  ));
+      </>
+    );
+  }
+
+  // const tableData = data.slice(from, to).map((projeto, key) => (
+  //   <Tr key={key}>
+  //     <Td
+  //       // isNumeric
+  //       fontWeight={"semibold"}
+  //       textAlign={"center"}
+  //       color={"#2D2926"}
+  //     >
+  //       {projeto.id_projeto_real}
+  //     </Td>
+  //     <Td>
+  //       <Link to={`/detalhamento/${projeto.id_projeto_real}`}>
+  //         {projeto.nome_projeto.length > 25 ? (
+  //           <Tooltip label={projeto.nome_projeto} aria-label="Nome do projeto">
+  //             <Text color={"#0047BB"}>
+  //               {projeto.nome_projeto.substring(0, 25) + "..."}
+  //             </Text>
+  //           </Tooltip>
+  //         ) : (
+  //           <Text color={"#0047BB"}>{projeto.nome_projeto}</Text>
+  //         )}
+  //       </Link>
+  //     </Td>
+  //     <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+  //       {projeto.vlr_cpi == 1 ? (
+  //         <Flex alignItems={"center"}>
+  //           <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
+  //           <Text marginLeft="8px"> {` CPI = ${projeto.vlr_cpi}`}</Text>
+  //         </Flex>
+  //       ) : (
+  //         <Flex alignItems={"center"}>
+  //           <BsFillXCircleFill color="red" fontSize={25} />{" "}
+  //           <Text marginLeft="8px">{` CPI = ${projeto.vlr_cpi ?? 0}`}</Text>
+  //         </Flex>
+  //       )}
+  //     </Td>
+  //     <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+  //       {projeto.vlr_spi == 1 ? (
+  //         <Flex alignItems={"center"}>
+  //           <BsCheckCircleFill color="#00B53D" fontSize={25} />{" "}
+  //           <Text marginLeft="8px">{` SPI = ${projeto.vlr_spi}`}</Text>
+  //         </Flex>
+  //       ) : (
+  //         <Flex alignItems={"center"}>
+  //           <BsFillXCircleFill color="red" fontSize={25} />{" "}
+  //           <Text marginLeft="8px">{` SPI = ${projeto.vlr_spi ?? 0}`}</Text>
+  //         </Flex>
+  //       )}
+  //     </Td>
+  //     <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+  //       {formatReal(+projeto.vlr_orcado)}
+  //     </Td>
+  //     <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+  //       {formatReal(+projeto.vlr_cr)}
+  //     </Td>
+  //     <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>{`${
+  //       projeto.vlr_orcado && projeto.vlr_cr
+  //         ? (100 - (+projeto.vlr_cr / +projeto.vlr_orcado) * 100).toFixed(2)
+  //         : 0
+  //     } %`}</Td>
+  //     <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+  //       {projeto.complexidade}
+  //     </Td>
+  //     <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+  //       {projeto.prioridade}
+  //     </Td>
+  //     <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+  //       {projeto.polo}
+  //     </Td>
+  //     <Td textAlign={"center"} fontWeight={"semibold"}>
+  //       {projeto.coordenador}
+  //     </Td>
+  //     <Td textAlign={"center"} fontWeight={"semibold"}>
+  //       {projeto.responsavel}
+  //     </Td>
+  //     <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+  //       {projeto.data_inicio == null ? "---" : formatDate(projeto.data_inicio)}
+  //     </Td>
+  //     <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+  //       {projeto.data_fim == null ? "---" : formatDate(projeto.data_fim)}
+  //     </Td>
+  //     <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>{`${
+  //       projeto.vlr_cr && projeto.vlr_orcado
+  //         ? ((projeto.vlr_cr / projeto.vlr_orcado) * 100).toFixed(2)
+  //         : 0
+  //     } %`}</Td>
+  //     <Td textAlign={"center"} fontWeight={"semibold"}>
+  //       {/* <ExpansibleText
+  //         text={projeto.descricao + " " + projeto.justificativa}
+  //       /> */}
+  //       {(projeto.descricao + " " + projeto.justificativa).length > 25 ? (
+  //         <Tooltip
+  //           label={projeto.nome_projeto + " " + projeto.justificativa}
+  //           aria-label="Nome do projeto"
+  //         >
+  //           <Text>
+  //             {(projeto.descricao + " " + projeto.justificativa).substring(
+  //               0,
+  //               50
+  //             ) + "..."}
+  //           </Text>
+  //         </Tooltip>
+  //       ) : (
+  //         <Text>{projeto.descricao + " " + projeto.justificativa}</Text>
+  //       )}
+  //     </Td>
+  //     <Td
+  //       fontWeight={"semibold"}
+  //       textAlign={"center"}
+  //       align={"center"}
+  //       color={"#2D2926"}
+  //     >
+  //       <ModalCadastrarPriorizacao
+  //         refresh={refresh}
+  //         setRefresh={setRefresh}
+  //         projeto={projeto.id_projeto_real}
+  //       />
+  //       <ModalDeletarProjeto projeto={projeto.id_projeto_real} />
+  //     </Td>
+  //   </Tr>
+  // ));
 
   return (
     <Flex direction={"column"} w={"100%"}>
@@ -316,7 +549,7 @@ export function TabelaProjetos({ data }: TableProps) {
               </Th>
             </Tr>
           </Thead>
-          <Tbody scrollBehavior={"smooth"}>{tableData}</Tbody>
+          <Tbody scrollBehavior={"smooth"}>{<Body />}</Tbody>
           <Tfoot>
             <Tr background="origem.500" color="white">
               <Th

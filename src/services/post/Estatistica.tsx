@@ -27,3 +27,34 @@ export async function postCadastroNovoCronograma(
   const { status } = await api.post("/projetos-atividades", payload, token());
   return { status };
 }
+
+export async function postCadastroNovaLicaoAprendidaPorAtividade(
+  // id: number,
+  payload: any
+): Promise<{ status: number }> {
+  const { status } = await api.post(
+    `projetos-atividades-licoes-aprendidas`,
+    payload,
+    token()
+  );
+  return { status };
+}
+
+export async function postCadastroNovaOcorrenciaPorAtividade(
+  id: number,
+  payload: any
+): Promise<{ status: number }> {
+  const { status } = await api.post(`/ocorrencias/${id}`, payload, token());
+  return { status };
+}
+
+export async function postCadastroNovaAtividadeCronograma(
+  payload: any
+): Promise<{ status: number }> {
+  const { status } = await api.post(
+    "/projetos-atividades/vincular",
+    payload,
+    token()
+  );
+  return { status };
+}

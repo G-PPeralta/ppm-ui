@@ -6,6 +6,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import {
   Box,
   Flex,
+  IconButton,
   NumberInput,
   NumberInputField,
   Text,
@@ -19,9 +20,12 @@ import { Operacao } from "interfaces/Estatisticas";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
+import { getDuracaoHorasAdicionarAtividade } from "services/get/Estatisticas";
+
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
+import { ModalFiltrarAtividade } from "../ModalFiltrarAtividade";
 import DateTimePicker from "./DateTimePicker";
-// import PopOverPrecedentes from "./PopOverPrecedentes";
+
 interface Props {
   registerForm: FormikProps<any>;
   index: number;
@@ -32,13 +36,24 @@ interface Props {
   };
 }
 
+interface OpcoesFiltro {
+  duracao?: number;
+  operacao?: number;
+  dataInicio?: string;
+}
+
 function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const innerwidth = window.innerWidth;
 
-  const { listaAreaAtuacao, listaResponsaveis, listaOperacao } = listas;
+  const { listaOperacao } = listas;
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
+  const [, setDuracao] = useState<number>();
+  const [, setOperacao] = useState<number>();
+  const [, setDataInicio] = useState<string>();
+  const [, setOpcoesFiltro] = useState<OpcoesFiltro>();
+  const [operacaoId, setOperacaoId] = useState();
 
   const initAdd = {
     area_id: 0,
@@ -60,27 +75,34 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     }
   };
 
-  const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
-    value: poco.id,
-    label: poco.tipo,
-  }));
+  function filterData(data: OpcoesFiltro) {
+    registerForm.setFieldValue(
+      `atividades[${index}].data_inicio`,
+      data.dataInicio
+    );
 
-  const optionsResponsaveis = listaResponsaveis.map(
-    (responsavel: Responsavel) => ({
-      value: responsavel.id,
-      label: responsavel.nome,
-    })
-  );
+    // registerForm.setFieldValue(`atividades[${index}].duracao`, data.duracao);
+  }
+
+  const MediaHorasPorOperacao = async (id: number) => {
+    const horasDuracao = await getDuracaoHorasAdicionarAtividade(id);
+    registerForm.setFieldValue(
+      `atividades[${index}].duracao`,
+      horasDuracao.data.hrs_media
+    );
+  };
 
   const optionsOperacao = listaOperacao.map((operacao: Operacao) => ({
     value: operacao.id,
     label: operacao.nom_operacao,
   }));
-
   const getValue = (options: any, i: number, chave: string) => {
     const index = options
       .map(({ value }: any) => value)
       .indexOf(registerForm?.values?.atividades?.[i][chave]);
+
+    const idOperacao = options?.[index]?.value;
+    setOperacaoId(idOperacao);
 
     return {
       value: options?.[index]?.value,
@@ -93,6 +115,10 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     const newId = draggableId + "-" + now.toLocaleString();
     setDraggableId(newId);
   }, []);
+
+  useEffect(() => {
+    operacaoId && MediaHorasPorOperacao(operacaoId);
+  }, [operacaoId]);
 
   return (
     <Draggable draggableId={draggableId} index={index}>
@@ -120,6 +146,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
               gap={4}
               flex={1}
               justify={"space-between"}
+              height="80px"
             >
               <Flex align={"center"} justify={"center"} gap={3}>
                 <GiHamburgerMenu color="#2E69FD" size={16} />
@@ -134,13 +161,12 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 align={"center"}
                 justify={"center"}
                 py={innerwidth >= 640 ? 0 : 4}
-                flex={1}
               >
                 <Flex direction={"column"} flex={2}>
-                  <Flex gap={1}>
+                  <Flex>
                     <RequiredField />
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -154,57 +180,49 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     value={getValue(optionsOperacao, index, "operacao_id")}
                   />
                 </Flex>
-
-                <Flex direction={"column"} flex={2}>
+                {/* <Flex direction={"column"}>
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
-                      ÁREA
+                      OPERAÇÃO
                     </Text>
                   </Flex>
                   <SelectFiltragem
+                    width={true}
                     registerForm={registerForm}
-                    propName={`atividades[${index}].area_id`}
-                    options={optionsAreaAtuacao}
-                    value={getValue(optionsAreaAtuacao, index, "area_id")}
+                    propName={`atividades[${index}].operacao_id`}
+                    options={optionsOperacao}
+                    // onChange={getValue(optionsOperacao, index, "operacao_id")}
+                    value={getValue(optionsOperacao, index, "operacao_id")}
                   />
-                </Flex>
-
-                <Flex direction={"column"} flex={2}>
-                  <Flex gap={1}>
-                    <RequiredField />
-                    <Text
-                      fontWeight={"bold"}
-                      fontSize={"12px"}
-                      color={"#949494"}
-                    >
-                      RESPONSÁVEL
-                    </Text>
-                  </Flex>
-                  <SelectFiltragem
-                    registerForm={registerForm}
-                    propName={`atividades[${index}].responsavel_id`}
-                    options={optionsResponsaveis}
-                    value={getValue(
-                      optionsResponsaveis,
-                      index,
-                      "responsavel_id"
-                    )}
-                  />
-                </Flex>
+                </Flex> */}
 
                 <Flex direction={"column"} flex={1}>
                   <DateTimePicker registerForm={registerForm} index={index} />
                 </Flex>
-                <Flex direction={"column"} flex={1}>
+
+                {/* <Flex direction={"column"}>
+                  <DateTimePickerModal
+                    registerForm={registerForm}
+                    value={
+                      dataInicio &&
+                      formatDateToddMMyyyyhhmm(new Date(dataInicio))
+                    }
+                    dateFormat="dd/MM/yyyy, hh:mm"
+                    index={index}
+                    width="208px"
+                  />
+                </Flex> */}
+
+                {/* <Flex direction={"column"}>
                   <Flex gap={1}>
                     <RequiredField />
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -212,6 +230,41 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     </Text>
                   </Flex>
                   <NumberInput
+                    max={99999}
+                    min={0}
+                    height="56px"
+                    width="208px"
+                    id={`atividades[${index}].duracao`}
+                    name={`atividades[${index}].duracao`}
+                    value={duracao}
+                    onChange={(value) => {
+                      registerForm.setFieldValue(
+                        `atividades[${index}].duracao`,
+                        Number(value)
+                      );
+                    }}
+                  >
+                    <NumberInputField bg={"#fff"} h={"56px"} />
+                  </NumberInput>
+                </Flex> */}
+
+                <Flex direction={"column"} flex={1}>
+                  <Flex gap={1}>
+                    <RequiredField />
+                    <Text
+                      fontWeight={"700"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      DURAÇÃO
+                    </Text>
+                  </Flex>
+                  <NumberInput
+                    _placeholder={{ color: "#949494" }}
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    color={"black"}
+                    width={99}
                     max={99999}
                     min={0}
                     id={`atividades[${index}].duracao`}
@@ -227,33 +280,94 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     <NumberInputField bg={"#fff"} h={"56px"} />
                   </NumberInput>
                 </Flex>
-                {/* <Flex direction={"column"} flex={1}>
-                  <Flex gap={1}>
+
+                <Flex direction={"column"} flex={1}>
+                  <Flex>
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
-                      PRECEDENTES
+                      PROFUNDIDADE
                     </Text>
                   </Flex>
-                  <PopOverPrecedentes
+                  <NumberInput
+                    _placeholder={{ color: "#949494" }}
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    color={"black"}
+                    max={99999}
+                    min={0}
+                    width={99}
+                    // id={`atividades[${index}].duracao`}
+                    // name={`atividades[${index}].duracao`}
+                    // value={registerForm.values.atividades[index].duracao}
+                    // onChange={(value) => {
+                    //   registerForm.setFieldValue(
+                    //     `atividades[${index}].duracao`,
+                    //     Number(value)
+                    //   );
+                    // }}
+                  >
+                    <NumberInputField bg={"#fff"} h={"56px"} />
+                  </NumberInput>
+                </Flex>
+                <Flex direction={"column"} flex={1}>
+                  <Flex>
+                    <RequiredField />
+                    <Text
+                      fontWeight={"700"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      MÉTODO
+                    </Text>
+                  </Flex>
+                  <SelectFiltragem
+                    width={174}
                     registerForm={registerForm}
-                    index={index}
+                    // propName={`atividades[${index}].operacao_id`}
+                    options={[
+                      {
+                        value: 1,
+                        label: "Gás Lift",
+                      },
+                      {
+                        value: 2,
+                        label: "Surgente",
+                      },
+                    ]}
+                    // value={getValue(optionsOperacao, index, "operacao_id")}
                   />
-                </Flex> */}
+                </Flex>
               </Flex>
               <Flex
-                p={1}
                 align={"center"}
                 justify={"center"}
                 _hover={{ cursor: "pointer" }}
               >
-                <FiTrash
-                  onClick={() => remove(index)}
-                  color="#F94144"
-                  size={16}
+                <ModalFiltrarAtividade
+                  setDuracao={setDuracao}
+                  registerFormAct={registerForm}
+                  setOperacao={setOperacao}
+                  setDataInicio={setDataInicio}
+                  filterData={filterData}
+                  setOpcoesFiltro={setOpcoesFiltro}
+                  index={index}
                 />
+                <IconButton
+                  onClick={() => remove(index)}
+                  color={"#F40606"}
+                  fontWeight={"700"}
+                  backgroundColor={"transparent"}
+                  aria-label="Plus sign"
+                  _hover={{
+                    backgroundColor: "#F40606",
+                    color: "white",
+                  }}
+                >
+                  <FiTrash size={"13px"} />
+                </IconButton>
               </Flex>
             </Flex>
           </Box>

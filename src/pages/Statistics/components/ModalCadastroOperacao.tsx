@@ -12,40 +12,29 @@ import {
   useBreakpointValue,
   Input,
   Text,
+  ModalCloseButton,
 } from "@chakra-ui/react";
-import { AreaAtuacao } from "interfaces/CadastrosModaisInfograficos";
 
-// import Restricoes from "pages/Infographics/Components/Restricoes";
-
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
-import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
-import SelectFiltragem from "components/SelectFiltragem";
 
-import { regexSomenteNumeros, regexCaracteresEspeciais } from "utils/regex";
+import { handleCancelar } from "utils/handleCadastro";
+import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroOperacao } from "hooks/useCadastroOperacao";
 
 function ModalCadastroOperacao({ refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaAreaAtuacao, listaResponsaveis } =
-    useCadastroOperacao();
-
-  const optionsAreaAtuacao = listaAreaAtuacao.map((area: AreaAtuacao) => ({
-    value: area.id,
-    label: area.tipo,
-  }));
-
-  const optionsResponsaveis = listaResponsaveis.map((responsavel: any) => ({
-    value: responsavel.id,
-    label: responsavel.nome,
-  }));
+  const { registerForm, loading } = useCadastroOperacao();
 
   return (
     <>
       <Button
         h={"56px"}
-        borderRadius={"10px"}
+        borderRadius={"8px"}
+        fontSize={"18px"}
+        fontWeight={"700"}
         variant="outline"
         border={"2px solid"}
         borderColor={"origem.500"}
@@ -58,7 +47,7 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
         }}
         onClick={onOpen}
       >
-        Operação
+        Cadastrar Operação
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
@@ -69,10 +58,15 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Cadastrar Operação
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -90,7 +84,7 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                     gap={5}
                   >
                     <Flex flex={1} direction={"column"}>
-                      <Text fontWeight={"bold"}>Nome</Text>
+                      {/* <Text fontWeight={"bold"}>Nome</Text> */}
                       <Flex gap={5} flex={1}>
                         <Flex direction={"column"} flex={1}>
                           <Flex gap={1}>
@@ -105,6 +99,10 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                           </Flex>
                           <Input
                             h={"56px"}
+                            _placeholder={{ color: "#949494" }}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"black"}
                             isRequired
                             placeholder="Digite o ID"
                             id="id_origem"
@@ -114,7 +112,7 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                               base: "100%",
                               md: "100%",
                             })}
-                            value={regexSomenteNumeros(
+                            value={regexCaracteresEspeciais(
                               registerForm.values.id_origem
                             )}
                             onChange={registerForm.handleChange}
@@ -134,6 +132,10 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                           </Flex>
                           <Input
                             h={"56px"}
+                            _placeholder={{ color: "#949494" }}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"black"}
                             isRequired
                             placeholder="Digite o nome da operação"
                             id="nom_operacao"
@@ -153,59 +155,19 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                       </Flex>
                     </Flex>
                   </Flex>
-
-                  <Text fontWeight={"bold"}>Responsável</Text>
-                  <Flex
-                    flexDirection={useBreakpointValue({
-                      base: "column",
-                      md: "row",
-                    })}
-                    gap={5}
-                    mb={10}
-                  >
-                    <Flex flex={1}>
-                      <SelectFiltragem
-                        registerForm={registerForm}
-                        nomeSelect={"RESPONSÁVEL"}
-                        propName={"responsavel_id"}
-                        options={optionsResponsaveis}
-                        required={true}
-                      />
-                    </Flex>
-                    <Flex flex={1}>
-                      <SelectFiltragem
-                        registerForm={registerForm}
-                        nomeSelect={"ÁREA"}
-                        propName={"area_id"}
-                        options={optionsAreaAtuacao}
-                        required={true}
-                      />
-                    </Flex>
-                  </Flex>
-
-                  {/* <Flex
-                    flexDirection={useBreakpointValue({
-                      base: "column",
-                      md: "column",
-                    })}
-                    gap={2}
-                  >
-                    <Text fontWeight={"bold"}>Restrições</Text>
-                    <Restricoes registerForm={registerForm} />
-                  </Flex> */}
                 </Stack>
               </Flex>
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoGhost
+                <BotaoVermelhoLargoGhost
                   text={"Cancelar"}
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                <BotaoAzulPrimary
-                  text={"Concluir Cadastro"}
+                <BotaoAzulLargoPrimary
+                  text={"Cadastrar"}
                   formikForm={registerForm}
                   onClose={onClose}
                   setRefresh={setRefresh}

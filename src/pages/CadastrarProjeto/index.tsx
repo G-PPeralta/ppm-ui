@@ -6,20 +6,20 @@ import {
   Flex,
   Heading,
   InputGroup,
-  InputLeftAddon,
   // InputLeftElement,
   Text,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import BotaoSetaVoltar from "components/BotaoSetaVoltar/BotaoSetaVoltar";
-import DatePickerGenerico from "components/DatePickerGenerico";
+// import DatePickerGenerico from "components/DatePickerGenerico";
 import InputGenerico from "components/InputGenerico";
 import SelectFiltragem from "components/SelectFiltragem";
 import Sidebar from "components/SideBar";
 import TextAreaGenerico from "components/TextAreaGenerico";
 
 import { handleCadastrarPagina } from "utils/handleCadastro";
+import { regexSomenteNumerosMonetario } from "utils/regex";
 
 import { useProjetos } from "hooks/useCadastroProjeto";
 
@@ -37,7 +37,7 @@ function CadastrarProjeto() {
     optionsSolicitantes,
     // optionsPrioridades,
     optionsStatus,
-    optionsComplexidades,
+    // optionsComplexidades,
     optionsDivisoes,
     optionsClassificacoes,
     optionsTipoProjetos,
@@ -69,14 +69,19 @@ function CadastrarProjeto() {
               bg={"white"}
               borderRadius={{ base: "xl", sm: "xl" }}
             >
-              <Flex align={"center"} gap={2} h={"56px"}>
+              <Flex align={"center"} gap={1} h={"56px"} ml={-7} mt={-5}>
                 <BotaoSetaVoltar />
-                <Heading as="h3" size="md" textAlign={"center"}>
-                  Cadastrar Projeto
+                <Heading
+                  fontSize={"24px"}
+                  color={"#2D2926"}
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
+                >
+                  Cadastrar Projetos
                 </Heading>
               </Flex>
 
-              <Flex direction={"column"} gap={4} mt={4}>
+              <Flex direction={"column"} gap={4} mt={4} ml={-3} mr={-3}>
                 <Flex
                   gap={2}
                   align={innerWidth > 428 ? "start" : "stretch"}
@@ -245,7 +250,7 @@ function CadastrarProjeto() {
                 <Flex
                   gap={2}
                   align={innerWidth > 428 ? "end" : "stretch"}
-                  w={innerWidth > 428 ? "60%" : "100%"}
+                  w={innerWidth > 428 ? "62%" : "100%"}
                   wrap={"wrap"}
                   direction={innerWidth > 428 ? "row" : "column"}
                 >
@@ -271,14 +276,14 @@ function CadastrarProjeto() {
                       maxLength={50}
                     />
                   </Flex>
-                  <Flex flex={1}>
+                  {/* <Flex flex={1}>
                     <DatePickerGenerico
                       nomeLabel={"DATA INÍCIO"}
                       registerForm={registerForm}
                       propName={"dataInicio"}
                       data={registerForm.values.dataInicio}
                     />
-                  </Flex>
+                  </Flex> */}
                 </Flex>
 
                 <Flex
@@ -290,21 +295,15 @@ function CadastrarProjeto() {
                 >
                   <Flex flex={1}>
                     <InputGroup>
-                      <InputLeftAddon
-                        alignSelf={"end"}
-                        color="#949494"
-                        border={"1px solid #949494"}
-                        background={"white"}
-                        h={"56px"}
-                      >
-                        R$
-                      </InputLeftAddon>
-
                       <InputGenerico
                         registerForm={registerForm}
                         nomeInput={"CAPEX PREVISTO"}
                         propName={"capexPrevisto"}
-                        value={registerForm.values.capexPrevisto || ""}
+                        value={
+                          regexSomenteNumerosMonetario(
+                            registerForm.values.capexPrevisto
+                          ) || ""
+                        }
                         required={true}
                         placeholder={"0"}
                         maxLength={50}
@@ -313,7 +312,7 @@ function CadastrarProjeto() {
                     </InputGroup>
                   </Flex>
 
-                  <Flex flex={1}>
+                  {/* <Flex flex={1}>
                     {registerForm.values.complexidadeId === 0 ? (
                       <InputCadastroInline
                         required={true}
@@ -335,7 +334,7 @@ function CadastrarProjeto() {
                         value={getValue(optionsComplexidades, "complexidadeId")}
                       />
                     )}
-                  </Flex>
+                  </Flex> */}
                 </Flex>
 
                 <Flex

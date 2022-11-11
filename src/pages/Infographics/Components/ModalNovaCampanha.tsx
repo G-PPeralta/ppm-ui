@@ -6,6 +6,7 @@ import {
   FormControl,
   Modal,
   ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -17,10 +18,12 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
-import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import SelectFiltragem from "components/SelectFiltragem";
 import { TextError } from "components/TextError";
+
+import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 
@@ -70,10 +73,15 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Cadastrar Nova Campanha
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -84,7 +92,7 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
               <FormControl>
                 <Flex direction={"column"} gap={4}>
                   <Stack>
-                    <Text fontWeight={"bold"}>Nome</Text>
+                    {/* <Text fontWeight={"bold"}>Nome</Text> */}
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: "column",
@@ -112,7 +120,7 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                       })}
                       gap={2}
                     >
-                      <Text fontWeight={"bold"}>Comentários</Text>
+                      {/* <Text fontWeight={"bold"}>Comentários</Text> */}
                       <Flex direction={"column"}>
                         <Flex gap={1}>
                           <Text
@@ -124,6 +132,10 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
                           </Text>
                         </Flex>
                         <Textarea
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"black"}
                           isRequired
                           placeholder="Adicione comentários sobre a campanha"
                           id="dsc_comentario"
@@ -147,13 +159,13 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoGhost
+                <BotaoVermelhoLargoGhost
                   text={"Cancelar"}
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                <BotaoAzulPrimary
-                  text={"Concluir Cadastro"}
+                <BotaoAzulLargoPrimary
+                  text={"Cadastrar"}
                   formikForm={registerForm}
                   onClose={onClose}
                   setRefresh={setRefresh}

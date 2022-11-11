@@ -14,13 +14,15 @@ import {
   Input,
   Textarea,
   Text,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
-import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import { TextError } from "components/TextError";
 
+import { handleCancelar } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
@@ -61,10 +63,15 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Cadastrar Projeto Tipo
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -89,11 +96,11 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                         })}
                         direction={"column"}
                       >
-                        <Text fontWeight={"bold"}>Nome</Text>
+                        {/* <Text fontWeight={"bold"}>Nome</Text> */}
                         <Flex gap={1}>
                           <RequiredField />
                           <Text
-                            fontWeight={"bold"}
+                            fontWeight={"700"}
                             fontSize={"12px"}
                             color={"#949494"}
                           >
@@ -102,6 +109,10 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                         </Flex>
                         <Input
                           h={"56px"}
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"black"}
                           isRequired
                           placeholder="Nome do Tipo de Projeto"
                           id="nom_projeto_tipo"
@@ -137,10 +148,10 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                       gap={5}
                     >
                       <FormControl>
-                        <Text fontWeight={"bold"}>Comentários</Text>
+                        {/* <Text fontWeight={"bold"}>Comentários</Text> */}
                         <Flex gap={1}>
                           <Text
-                            fontWeight={"bold"}
+                            fontWeight={"700"}
                             fontSize={"12px"}
                             color={"#949494"}
                           >
@@ -150,6 +161,10 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                         <Textarea
                           isRequired
                           placeholder="Adicione comentários sobre o projeto"
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"black"}
                           id="comentarios"
                           name="comentarios"
                           value={regexCaracteresEspeciais(
@@ -213,13 +228,13 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                 </Button>
               </Flex> */}
               <Flex gap={2}>
-                <BotaoVermelhoGhost
+                <BotaoVermelhoLargoGhost
                   text={"Cancelar"}
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                <BotaoAzulPrimary
-                  text={"Concluir Cadastro"}
+                <BotaoAzulLargoPrimary
+                  text={"Cadastrar"}
                   formikForm={registerForm}
                   onClose={onClose}
                   setRefresh={setRefresh}

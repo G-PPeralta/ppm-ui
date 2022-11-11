@@ -21,6 +21,10 @@ import {
   Button,
 } from "@chakra-ui/react";
 
+import { RequiredField } from "components/RequiredField/RequiredField";
+
+import { useAuth } from "hooks/useAuth";
+
 import { postLicaoAprendida } from "services/post/AdicionarLicaoAprendida";
 
 function CadastrarLicoesAprendidasModal({
@@ -31,17 +35,18 @@ function CadastrarLicoesAprendidasModal({
   const { id } = useParams();
   const [licaoAprendida, setLicaoAprendida] = useState("");
   const [acao, setAcao] = useState("");
+  const { user } = useAuth();
 
   async function handleSubmitLicao() {
     const payload = {
-      id_projeto: Number(id),
-      txt_licao_aprendida: licaoAprendida,
-      txt_acao: acao,
-      id_categoria: null,
-      nom_usu_create: "teste",
+      id_atividade: Number(id),
+      licao_aprendida: licaoAprendida,
+      acoes_e_recomendacoes: acao,
+      data: new Date(),
+      user: user?.nome,
     };
     await postLicaoAprendida(payload);
-    callBack();
+    await callBack();
     onCloseModal();
   }
 
@@ -91,26 +96,29 @@ function CadastrarLicoesAprendidasModal({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
-            Adicionar lições aprendidas
+            Adicionar Lições Aprendidas
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <ModalBody>
             <FormControl marginBottom={4}>
               <FormLabel
+                mt={3}
                 htmlFor="fornecedorNome"
                 color="#949494"
                 fontSize="12px"
                 fontWeight="700"
-                mt={"6px"}
               >
-                LIÇÃO APRENDIDA
+                <Flex gap={1}>
+                  <RequiredField /> LIÇÃO APRENDIDA
+                </Flex>
               </FormLabel>
               <Input
                 maxLength={40}
                 borderRadius={"8px"}
-                border={"1px solid #A7A7A7"}
+                border={"1px solid #949494"}
                 mt={"-9px"}
                 width={"328px"}
                 height={"56px"}
@@ -134,15 +142,17 @@ function CadastrarLicoesAprendidasModal({
                 fontWeight="700"
                 mt={"6px"}
               >
-                AÇÃO OU RECOMENDAÇÃO
+                <Flex gap={1}>
+                  <RequiredField /> AÇÃO OU RECOMENDAÇÃO
+                </Flex>
               </FormLabel>
               <Textarea
-                maxLength={150}
+                // maxLength={150}
                 borderRadius={"8px"}
-                border={"1px solid #A7A7A7"}
+                border={"1px solid #949494"}
                 mt={"-9px"}
-                width={"456px"}
-                height={"56px"}
+                width={"465px"}
+                height={"121px"}
                 color={"black"}
                 _placeholder={{ color: "#949494" }}
                 isRequired

@@ -65,11 +65,11 @@ export function TabelaBudgets(props: TableProps) {
           )}
           {budget.item}
         </Td>
-        <Td textAlign={"center"}>
+        <Td textAlign={"start"}>
           <Text>{budget.projeto.nome}</Text>
         </Td>
-        <Td textAlign={"center"}>{brl.format(budget.planejado)}</Td>
-        <Td textAlign={"center"}>{brl.format(budget.realizado)}</Td>
+        <Td textAlign={"end"}>{brl.format(budget.planejado)}</Td>
+        <Td textAlign={"end"}>{brl.format(budget.realizado)}</Td>
         <Td textAlign={"center"}>{budget.gap}%</Td>
         <Td>{budget.descricao}</Td>
       </Tr>
@@ -77,14 +77,14 @@ export function TabelaBudgets(props: TableProps) {
       {budget.filhos &&
         budget.filhos.map((d) => (
           <Tr className={"hide item-" + key} key={d.id}>
-            <Td textAlign={"start"}>{d.item}</Td>
-            <Td textAlign={"center"}>
+            <Td textAlign={"center"}>{d.item}</Td>
+            <Td textAlign={"start"}>
               <Link to={`/budget/detail/${d.id}`}>
                 <Text color="blue">{d.projeto.nome}</Text>
               </Link>
             </Td>
-            <Td textAlign={"center"}>{brl.format(d.planejado)}</Td>
-            <Td textAlign={"center"}>{brl.format(d.realizado)}</Td>
+            <Td textAlign={"end"}>{brl.format(d.planejado)}</Td>
+            <Td textAlign={"end"}>{brl.format(d.realizado)}</Td>
             <Td textAlign={"center"}>{d.gap}%</Td>
             <Td>{d.descricao}</Td>
           </Tr>
@@ -95,7 +95,7 @@ export function TabelaBudgets(props: TableProps) {
   return (
     <>
       <TableContainer mt={4} mb={3} ml={1} borderRadius={"10px"}>
-        <Table variant="striped" colorScheme="strippedGray">
+        <Table variant="striped" colorScheme={"strippedGray"}>
           <Thead>
             <Tr background="origem.500" color="white">
               <Th
@@ -108,7 +108,7 @@ export function TabelaBudgets(props: TableProps) {
                 item
               </Th>
               <Th
-                textAlign={"center"}
+                textAlign={"start"}
                 style={{
                   color: "white",
                 }}
@@ -165,7 +165,7 @@ export function TabelaBudgets(props: TableProps) {
                 Total
               </Th>
               <Th
-                textAlign={"center"}
+                textAlign={"start"}
                 style={{
                   color: "white",
                 }}
@@ -173,7 +173,7 @@ export function TabelaBudgets(props: TableProps) {
                 {total} Projetos
               </Th>
               <Th
-                textAlign={"center"}
+                textAlign={"end"}
                 style={{
                   color: "white",
                 }}
@@ -181,7 +181,7 @@ export function TabelaBudgets(props: TableProps) {
                 {brl.format(planejado)}
               </Th>
               <Th
-                textAlign={"center"}
+                textAlign={"end"}
                 style={{
                   color: "white",
                 }}

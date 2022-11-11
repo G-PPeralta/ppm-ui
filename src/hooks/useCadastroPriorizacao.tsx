@@ -46,7 +46,28 @@ export function useCadastroPriorizacao(id_projeto: number = 0) {
     );
 
     const prioridadeSorted = priorizacao.data.Prioridade.sort(
-      (a: any, b: any) => a.nom_opcao.localeCompare(b.nom_opcao)
+      (a: any, b: any) => {
+        if (a.nom_opcao === "Alto" && b.nom_opcao === "Médio") {
+          return -1;
+        }
+        if (a.nom_opcao === "Alto" && b.nom_opcao === "Baixo") {
+          return -1;
+        }
+        if (a.nom_opcao === "Médio" && b.nom_opcao === "Alto") {
+          return 1;
+        }
+        if (a.nom_opcao === "Médio" && b.nom_opcao === "Baixo") {
+          return -1;
+        }
+        if (a.nom_opcao === "Baixo" && b.nom_opcao === "Alto") {
+          return 1;
+        }
+        if (a.nom_opcao === "Baixo" && b.nom_opcao === "Médio") {
+          return 1;
+        } else {
+          return 0;
+        }
+      }
     );
 
     const regulatorioSorted = priorizacao.data.Regulatório.sort(

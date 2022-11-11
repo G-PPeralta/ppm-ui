@@ -6,8 +6,8 @@ import { cadastroPocoSchema } from "validations/ModaisCadastrosInfografico";
 
 import { useToast } from "contexts/Toast";
 
-import { postNovoPoco } from "services/post/CadastroModaisInfograficos";
 import { postCadastroPocoOperacao } from "services/post/Estatistica";
+import { postNovoPoco } from "services/post/Infograficos";
 
 export function useCadastroPoco(modulo?: string) {
   const { toast } = useToast();
@@ -45,6 +45,7 @@ export function useCadastroPoco(modulo?: string) {
               id: "toast-principal",
             });
             setLoading(false);
+            setInterval(() => window.location.reload(), 1000);
           }
         }
       } catch (error) {

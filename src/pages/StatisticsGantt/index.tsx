@@ -13,68 +13,67 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
 import { StatisticsGanttProps, StatisticsTableData } from "interfaces/Services";
 
 import Sidebar from "components/SideBar";
-
-// import { useToast } from "contexts/Toast";
 
 import { useEditarOperacao } from "hooks/useEditarOperacao";
 
 import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
 
-// import { patchOperacoesEstatisticas } from "services/update/OperacoesEstatisticas";
-
+import ModalCadastroOperacao from "../Statistics/components/ModalCadastroOperacao";
 import { Gantt } from "./components/Gantt";
-import ModalAdicionarOperacao from "./components/ModalAdicionarOperacao";
+// import ModalAdicionarOperacao from "./components/ModalAdicionarOperacao";
+import ModalAdicionarAtividade from "./components/ModalAdicionarAtividade";
 import ModalEditarOperacao from "./components/ModalEditarOperacao";
 
 function StatisticsGantt() {
   const { sonda, poco } = useParams();
   const navigate = useNavigate();
   const [refresh, setRefresh] = useState(false);
+  const [refreshDelete, setRefreshDelete] = useState(false);
   const [editOp, setEditOp] = useState({});
   const [projeto, setProjeto] = useState({
     sonda: "",
-    id_sonda: null,
+    id_sonda: 0,
     poco: "",
-    id_poco: null,
+    id_poco: 0,
   });
   const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
-  const {
-    registerForm,
-    loading,
-    listaResponsaveis,
-    listaAreaAtuacao,
-    onClose,
-    onOpen,
-    isOpen,
-  } = useEditarOperacao(refresh, setRefresh, projeto);
-  // const { toast } = useToast();
+  const { registerForm, loading, onClose, onOpen, isOpen } = useEditarOperacao(
+    refresh,
+    setRefresh,
+    projeto
+  );
   const toolbarOptions = ["ZoomIn", "ZoomOut"];
 
   const formatToGanttData = (data: any) => {
     if (!data) return;
-    const newGantt = data.atividades?.map((t: any) => ({
-      sonda: data.sonda,
-      id_sonda: data.id_sonda,
-      poco: data.poco,
-      id_poco: data.id_poco,
-      TaskID: t.id_atividade,
-      TaskName: t.nome_atividade,
-      StartDate: new Date(t.inicio_real),
-      EndDate: new Date(t.fim_real),
-      BaselineStartDate: new Date(t.inicio_planejado), // new Date('04/21/2019')
-      BaselineEndDate: new Date(t.fim_planejado),
-      BaselineDuration: Number(t.hrs_totais),
-      Duration: Number(t.hrs_reais),
-      // Work: Number(t.hrs_reais),
-      Progress: Number(t.pct_real),
-      max: Number(t.vlr_max),
-      min: Number(t.vlr_min),
-      med: Number(t.vlr_media),
-      dp: Number(t.vlr_dp),
-    }));
+    const newGantt = data.atividades
+      ?.filter(function (t: any) {
+        return t.id_atividade !== null;
+      })
+      .map((t: any) => ({
+        sonda: data.sonda,
+        id_sonda: data.id_sonda,
+        poco: data.poco,
+        id_poco: data.id_poco,
+        TaskID: t.id_atividade,
+        TaskName: t.nome_atividade,
+        StartDate: new Date(t.inicio_real),
+        EndDate: new Date(t.fim_real),
+        BaselineStartDate: new Date(t.inicio_planejado),
+        BaselineEndDate: new Date(t.fim_planejado),
+        BaselineDuration: Number(t.hrs_totais),
+        Duration: Number(t.hrs_reais),
+        // Work: Number(t.hrs_reais),
+        Progress: Number(t.pct_real),
+        max: Number(t.vlr_max),
+        min: Number(t.vlr_min),
+        med: Number(t.vlr_media),
+        dp: Number(t.vlr_dp),
+      }));
     setGanttData(newGantt);
     setProjeto({
       sonda: data.sonda,
@@ -84,33 +83,6 @@ function StatisticsGantt() {
     });
   };
 
-  // const handleEdit = async (task: any) => {
-  //   console.log(">>>edit", task);
-  //   try {
-  //     const payload = {
-  //       // nom_usu_create: user?.nome, // TODO nome do editor?
-  //       // id_sonda: task.id_sonda,
-  //       // id_poco: task.id_poco,
-  //       id_atividade: task.TaskID, // id_atividade no update significa o id da linha
-  //       inicio_realizado: task.StartDate,
-  //       fim_realizado: task.EndDate,
-  //       inicio_planejado: task.BaselineStartDate,
-  //       fim_planejado: task.BaselineEndDate,
-  //       // hrs_reais: task.Duration,
-  //       // hrs_totais: task.BaselineDuration,
-  //       pct_real: task.Progress,
-  //       // nome_responsavel: "noe",
-  //     };
-  //     // const { status } = await patchOperacoesEstatisticas(payload);
-  //     const status = 200;
-  //     console.log(">>>>pauyload", payload);
-  //     if (status === 200 || status === 201) {
-  //       toast.success("Operação atualizada com sucesso!");
-  //     }
-  //   } catch (error) {
-  //     toast.error("Erro ao editar operação!");
-  //   }
-  // };
   const convertReq = (payload: any): StatisticsTableData[] => {
     const newData: StatisticsTableData[] = [];
     payload.forEach((s: { id_sonda: number; sonda: string; pocos: any[] }) =>
@@ -129,27 +101,18 @@ function StatisticsGantt() {
 
   const handleGetAllData = async () => {
     const { data } = await getOperacoesEstatisticas();
-    // const data = atividades;
     if (!data) return;
     const newData = convertReq(data);
 
     const _ganttData = newData.find(
       (e) => e.id_sonda === Number(sonda) && e.id_poco === Number(poco)
     );
-    // console.log(":>>>> _ganttData,", _ganttData);
     formatToGanttData(_ganttData);
   };
 
   useEffect(() => {
     handleGetAllData();
-  }, [refresh]);
-
-  // useEffect(() => {
-  //   formatToGanttData(state.data);
-
-  //   // handleSetData();
-  //   // setLoading(false);
-  // }, [refresh]);
+  }, [refresh, refreshDelete]);
 
   return (
     <>
@@ -166,64 +129,82 @@ function StatisticsGantt() {
             }}
             borderRadius={{ base: "none", sm: "xl" }}
           >
-            <Stack>
-              <Flex mb={5} justify={"space-between"} wrap={"wrap"}>
-                <IconButton
-                  aria-label="voltar"
-                  color={"black"}
-                  backgroundColor="transparent"
-                  size="lg"
-                  icon={<FiChevronLeft />}
-                  onClick={() => navigate(`/estatisticas`)}
-                />
-                <Box>
-                  <Heading as="h3" size="md">
-                    {projeto.sonda}
-                  </Heading>
-                  <Text>{projeto.poco}</Text>
-                </Box>
+            {!loading ? (
+              <>
+                <Stack>
+                  <Flex mb={5} justify={"space-between"} wrap={"wrap"}>
+                    <IconButton
+                      aria-label="voltar"
+                      color={"black"}
+                      backgroundColor="transparent"
+                      size="lg"
+                      icon={<FiChevronLeft />}
+                      onClick={() => navigate(`/estatisticas`)}
+                    />
+                    <Box>
+                      <Heading as="h3" size="md">
+                        {projeto.sonda}
+                      </Heading>
+                      <Text>{projeto.poco}</Text>
+                    </Box>
 
-                <Flex gap={2} flex={2} justify={"end"} align={"end"}>
-                  {/* <ModalEditarCronograma
+                    <Flex gap={2} flex={2} justify={"end"} align={"end"}>
+                      <ModalCadastroOperacao
+                        refresh={refresh}
+                        setRefresh={setRefresh}
+                      />
+
+                      {/* <ModalAdicionarOperacao
                     refresh={refresh}
                     setRefresh={setRefresh}
-                    atual={state.data}
-                  /> */}
-                  <ModalAdicionarOperacao
-                    setRefresh={setRefresh}
-                    refresh={refresh}
-                    // atividades={atividades}
                     projeto={projeto}
+                  /> */}
+
+                      <ModalAdicionarAtividade
+                        refresh={refresh}
+                        setRefresh={setRefresh}
+                        projeto={projeto}
+                        ganttData={ganttData}
+                      />
+
+                      <ModalEditarOperacao
+                        setRefresh={setRefresh}
+                        refresh={refresh}
+                        editOp={editOp}
+                        isOpen={isOpen}
+                        onClose={onClose}
+                        registerForm={registerForm}
+                        loading={loading}
+                      />
+                    </Flex>
+                  </Flex>
+                </Stack>
+                <Stack spacing="8">
+                  <Gantt
+                    callbackSetRefresh={() => setRefreshDelete(!refreshDelete)}
+                    handleGetAllData={handleGetAllData}
+                    options={{
+                      showGantt: true,
+                      toolbarOptions,
+                    }}
+                    edit={{
+                      onOpen,
+                      setEditOp,
+                    }}
+                    data={ganttData}
                   />
-                  <ModalEditarOperacao
-                    setRefresh={setRefresh}
-                    refresh={refresh}
-                    // atividades={atividades}
-                    editOp={editOp}
-                    setEditOp={setEditOp}
-                    listaResponsaveis={listaResponsaveis}
-                    listaAreaAtuacao={listaAreaAtuacao}
-                    isOpen={isOpen}
-                    onClose={onClose}
-                    registerForm={registerForm}
-                    loading={loading}
-                  />
-                </Flex>
+                </Stack>
+              </>
+            ) : (
+              <Flex
+                display={"flex"}
+                align={"center"}
+                justify={"center"}
+                h={"90vh"}
+              >
+                <Ring speed={2} lineWeight={5} color="blue" size={64} />
               </Flex>
-            </Stack>
-            <Stack spacing="8">
-              <Gantt
-                options={{
-                  showGantt: true,
-                  toolbarOptions,
-                }}
-                edit={{
-                  onOpen,
-                  setEditOp,
-                }}
-                data={ganttData}
-              />
-            </Stack>
+            )}
           </Box>
         </Stack>
       </Sidebar>

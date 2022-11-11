@@ -18,18 +18,18 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
-  // Progress,
+  ModalCloseButton,
+  Button,
+  Progress,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import {
-  ListaCampo,
-  ProjetoTipo,
-} from "interfaces/CadastrosModaisInfograficos";
+import { ProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
-import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 
 import { formatDate } from "utils/formatDate";
+import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
@@ -54,26 +54,21 @@ function ModalCadastroIntervencao({
   const {
     registerForm,
     loading,
-    listaCampos,
     listaSondaCampanha,
     listaAtividadesPrecedentes,
   } = useCadastroIntervencao();
 
   const [listaProjetos, setListaProjetos] = useState<any>([]);
   const [dataLimite, setDataLimite] = useState<any>("");
-  // const [valueProgressoMensagemErro, setValueProgressoMensagemErro] =
-  //   useState<any>(100);
+  const [valueProgressoMensagemErro, setValueProgressoMensagemErro] =
+    useState<number>(100);
+  const [dataFinalPrevista, setDataFinalPrevista] = useState<any>("");
 
   const innerWidth = window.innerWidth;
 
   const optionsPocos = listaServicosPocos.map((poco: any) => ({
     value: poco.nom_poco,
     label: poco.nom_poco,
-  }));
-
-  const optionsCampo = listaCampos.map((campo: ListaCampo) => ({
-    value: campo.id,
-    label: campo.campo,
   }));
 
   const optionsProjetoTipo = listaProjetos.map((projetoTipo: ProjetoTipo) => ({
@@ -140,6 +135,21 @@ function ModalCadastroIntervencao({
     } else {
       registerForm.setFieldValue("erroDataIntervencao", false);
     }
+
+    const quantidadeDias = registerForm.values.atividades.reduce(
+      (acc: number, atividade: any) => acc + atividade.qtde_dias,
+      0
+    );
+
+    const dataInicio = new Date(registerForm.values.dat_ini_prev);
+    const dataFimPrevista = new Date(
+      dataInicio.setDate(dataInicio.getDate() + quantidadeDias)
+    );
+    setDataFinalPrevista(dataFimPrevista);
+
+    // if (dataFimPrevista > dataLimite) {
+    registerForm.setFieldValue("erroDataIntervencao", true);
+    // }
   };
 
   useEffect(() => {
@@ -165,10 +175,23 @@ function ModalCadastroIntervencao({
     ) {
       handleDataLimite();
     }
+    setValueProgressoMensagemErro(100);
+    if (registerForm.values.erroDataIntervencao) {
+      const interval = setInterval(() => {
+        setValueProgressoMensagemErro((value) => {
+          if (value === 0) {
+            return 0;
+          }
+          return value - 1;
+        });
+      }, 500);
+      return () => clearInterval(interval);
+    }
   }, [
     registerForm.values.dat_ini_prev,
     registerForm.values.projeto_tipo_id,
     registerForm.values.poco_id,
+    registerForm.values.atividades,
   ]);
 
   useEffect(() => {
@@ -205,21 +228,26 @@ function ModalCadastroIntervencao({
     }
   }, [registerForm.values.poco_id]);
 
+  useEffect(() => {
+    setValueProgressoMensagemErro(100);
+  }, [dataLimite]);
+
+  // TODA VEZ QUE A MENSAGEM DE ERRO FOR ALTERADA, O PROGRESSO DA MENSAGEM DE ERRO É ALTERADO
+  // PARA 100, E ENTÃO ELE VAI DIMINUINDO ATÉ 0 DURANTE 10 SEGUNDOS
   // useEffect(() => {
   //   setValueProgressoMensagemErro(100);
-  // }, [dataLimite]);
-
-  // useEffect(() => {
-  //   const contagemRegressiva = setInterval(() => {
-  //     setValueProgressoMensagemErro((valueProgressoMensagemErro: number) => {
-  //       if (valueProgressoMensagemErro === 0) {
-  //         clearInterval(contagemRegressiva);
-  //         return 100;
-  //       }
-  //       return valueProgressoMensagemErro - 1;
-  //     });
-  //   }, 1000);
-  // }, [valueProgressoMensagemErro]);
+  //   if (registerForm.values.erroDataIntervencao) {
+  //     const interval = setInterval(() => {
+  //       setValueProgressoMensagemErro((value) => {
+  //         if (value === 0) {
+  //           return 0;
+  //         }
+  //         return value - 1;
+  //       });
+  //     }, 1000);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [registerForm.values.erroDataIntervencao]);
 
   return (
     <>
@@ -266,10 +294,16 @@ function ModalCadastroIntervencao({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
             Cadastrar Nova Intervenção/Perfuração
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -300,18 +334,11 @@ function ModalCadastroIntervencao({
                           options={optionsPocos}
                           required={true}
                         />
-                        <SelectFiltragem
-                          registerForm={registerForm}
-                          nomeSelect={"CAMPO"}
-                          propName={"campo_id"}
-                          options={optionsCampo}
-                          required={true}
-                        />
                         <DateTimePickerDataInicio registerForm={registerForm} />
                       </Flex>
                     </Stack>
 
-                    <Stack>
+                    <Flex justify={"space-between"}>
                       <Flex flexDirection={"row"} gap={4} w={"50%"}>
                         <SelectFiltragem
                           registerForm={registerForm}
@@ -321,7 +348,29 @@ function ModalCadastroIntervencao({
                           required={true}
                         />
                       </Flex>
-                    </Stack>
+                      {dataFinalPrevista !== "" && (
+                        <Flex direction={"column"}>
+                          <Flex gap={1}>
+                            <Text
+                              fontWeight={"bold"}
+                              fontSize={"12px"}
+                              color={"#949494"}
+                            >
+                              DATA FINAL PREVISTA
+                            </Text>
+                          </Flex>
+                          <Button
+                            isDisabled={true}
+                            h={"56px"}
+                            variant="outline"
+                            px={5}
+                            minW={"220px"}
+                          >
+                            {formatDate(dataFinalPrevista)}
+                          </Button>
+                        </Flex>
+                      )}
+                    </Flex>
 
                     {registerForm.values.erroDataIntervencao && (
                       <Flex direction={"column"}>
@@ -335,13 +384,13 @@ function ModalCadastroIntervencao({
                               )}.`}
                           </Text>
                         </Alert>
-                        {/* <Progress
+                        <Progress
                           hasStripe
                           size="sm"
                           value={valueProgressoMensagemErro}
-                          colorScheme={"blue"}
+                          colorScheme={"red"}
                           isAnimated={true}
-                        /> */}
+                        />
                       </Flex>
                     )}
 
@@ -382,13 +431,13 @@ function ModalCadastroIntervencao({
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoGhost
+                <BotaoVermelhoLargoGhost
                   text={"Cancelar"}
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                <BotaoAzulPrimary
-                  text={"Concluir Cadastro"}
+                <BotaoAzulLargoPrimary
+                  text={"Cadastrar"}
                   formikForm={registerForm}
                   onClose={onClose}
                   setRefresh={setRefresh}

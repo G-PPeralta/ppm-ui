@@ -14,18 +14,23 @@ import {
   Text,
   NumberInput,
   NumberInputField,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
 
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
-import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 // import { RequiredField } from "components/RequiredField/RequiredField";
+
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
+
+import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroCronograma } from "hooks/useCadastroCronograma";
 
 import SelectFiltragem from "../../../components/SelectFiltragem";
 import AtividadesCadastroCronograma from "./AtividadesCadastroCronograma";
+
 // import { TextError } from "components/TextError";
 
 function ModalCadastroCronograma({ refresh, setRefresh }: any) {
@@ -36,7 +41,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
     listaPocos,
     listaSondas,
     listaAtividadesPrecedentes,
-  } = useCadastroCronograma();
+  } = useCadastroCronograma(refresh);
 
   const innerWidth = window.innerWidth;
 
@@ -54,7 +59,9 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
     <>
       <Button
         h={"56px"}
-        borderRadius={"10px"}
+        borderRadius={"8px"}
+        fontSize={"18px"}
+        fontWeight={"700"}
         variant="outline"
         border={"2px solid"}
         borderColor={"origem.500"}
@@ -78,10 +85,15 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Novo Cronograma
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -93,7 +105,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                 <FormControl>
                   <Flex direction={"column"} gap={4}>
                     <Stack>
-                      <Text fontWeight={"bold"}>Nome</Text>
+                      {/* <Text fontWeight={"bold"}>Nome</Text> */}
                       <Flex
                         direction={innerWidth >= 460 ? "row" : "column"}
                         gap={5}
@@ -117,7 +129,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                           <Flex gap={1}>
                             {/* <RequiredField /> */}
                             <Text
-                              fontWeight={"bold"}
+                              fontWeight={"700"}
                               fontSize={"12px"}
                               color={"#949494"}
                             >
@@ -126,6 +138,10 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                           </Flex>
 
                           <NumberInput
+                            _placeholder={{ color: "#949494" }}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"black"}
                             max={999999}
                             min={0}
                             id={`profundidade`}
@@ -150,7 +166,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                     />
 
                     <Stack>
-                      <Text fontWeight={"bold"}>Comentários</Text>
+                      {/* <Text fontWeight={"bold"}>Comentários</Text> */}
                       <FormControl>
                         <Flex gap={1}>
                           <Text
@@ -162,6 +178,10 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                           </Text>
                         </Flex>
                         <Textarea
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"black"}
                           isRequired
                           placeholder="Adicione comentários sobre a intervenção"
                           id="comentarios"
@@ -181,13 +201,13 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoGhost
+                <BotaoVermelhoLargoGhost
                   text={"Cancelar"}
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                <BotaoAzulPrimary
-                  text={"Concluir Cadastro"}
+                <BotaoAzulLargoPrimary
+                  text={"Cadastrar"}
                   formikForm={registerForm}
                   onClose={onClose}
                   setRefresh={setRefresh}

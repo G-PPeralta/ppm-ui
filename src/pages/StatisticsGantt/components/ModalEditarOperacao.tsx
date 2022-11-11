@@ -1,64 +1,146 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Flex,
-  Text,
-  Input,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalBody,
   ModalFooter,
-  NumberInput,
-  NumberInputField,
-  useBreakpointValue,
+  ModalCloseButton,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  ButtonGroup,
+  Button,
+  Text,
 } from "@chakra-ui/react";
+import { Anotacoes, LicaoAprendida, Ocorrencia } from "interfaces/Estatisticas";
 
-// import Restricoes from "pages/Infographics/Components/Restricoes";
+import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
-import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
-// import SelectFiltragem from "components/SelectFiltragem";
+import { handleCancelar } from "utils/handleCadastro";
 
-// import PopOverRelacao from "./PopOverRelacao";
+import {
+  getAnotacoesPorAtividade,
+  getLicoesAprendidasPorAtividade,
+  getMocPorAtividade,
+  getOcorrenciasPorAtividade,
+} from "services/get/Estatisticas";
 
-// import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
-import DateTimePicker from "./DateTimePicker";
+import EditarAtividadeTabAnotacoes from "./EditarAtividadeTabAnotacoes";
+import EditarAtividadeTabGeral from "./EditarAtividadeTabGeral";
+import EditarAtividadeTabLicoesAprendidas from "./EditarAtividadeTabLicoesAprendidas";
+import EditarAtividadeTabMOC from "./EditarAtividadeTabMoc";
+import EditarAtividadeTabOcorrencias from "./EditarAtividadeTabOcorrencias";
 
-// interface Responsavel {
-//   id: number;
-//   nome: string;
-// }
+interface EditOp {
+  fim_planejado?: Date;
+  fim_realizado?: Date;
+  hrs_reais?: number;
+  hrs_totais?: number;
+  id_atividade?: number;
+  inicio_planejado?: Date;
+  inicio_realizado?: Date;
+  nome_atividade?: string;
+  pct_real?: number;
+}
 
-function ModalAdicionarOperacao({
+interface Props {
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: boolean;
+  editOp: EditOp;
+  onClose: () => void;
+  isOpen: boolean;
+  loading: boolean;
+  registerForm: any;
+}
+
+function ModalEditarOperacao({
   setRefresh,
   refresh,
   editOp,
-  listaResponsaveis,
-  listaAreaAtuacao,
-  isOpen,
   onClose,
-  registerForm,
+  isOpen,
   loading,
-}: any) {
-  // const responsaveisOptions = listaResponsaveis.map(
-  //   (responsavel: Responsavel) => ({
-  //     value: responsavel.id,
-  //     label: responsavel.nome,
-  //   })
-  // );
+  registerForm,
+}: Props) {
+  const [tabSelecionado, setTabSelecionado] = useState<any>(0);
+  const [listaLicoesAprendidas, setListaLicoesAprendidas] = useState<
+    LicaoAprendida[]
+  >([]);
+  const [listaOcorrencias, setListaOcorrencias] = useState<Ocorrencia[]>([]);
+  const [anotacoes, setAnotacoes] = useState<Anotacoes[]>([]);
+  const [mocs, setMocs] = useState<any[]>([]);
+  const [gambiarra, setGambiarra] = useState<any>(true);
 
-  // const areaAtuacaoOptions = listaAreaAtuacao.map((area: any) => ({
-  //   value: area.id,
-  //   label: area.tipo,
-  // }));
+  const refreshState = {
+    setRefresh,
+    refresh,
+  };
+
+  const requestLicoesEOperacoes = async () => {
+    if (editOp.id_atividade) {
+      const licoesAprendidasPorAtividade =
+        await getLicoesAprendidasPorAtividade(editOp.id_atividade);
+      setListaLicoesAprendidas(licoesAprendidasPorAtividade.data);
+
+      const ocorrenciasPorAtividade = await getOcorrenciasPorAtividade(
+        editOp.id_atividade
+      );
+
+      const ocorrencias = ocorrenciasPorAtividade.data.map(
+        (ocorrencia: any) => ({
+          ...ocorrencia,
+          url: "",
+          anexo: "",
+        })
+      );
+
+      setListaOcorrencias(
+        ocorrencias.sort((a: any, b: any) =>
+          a.nome_ocorrencia.localeCompare(b.nome_ocorrencia)
+        )
+      );
+
+      const anotacoesPorAtividade = await getAnotacoesPorAtividade(
+        editOp.id_atividade
+      );
+      setAnotacoes(anotacoesPorAtividade.data);
+
+      const mocPorAtividade = await getMocPorAtividade(editOp.id_atividade);
+      setMocs(mocPorAtividade.data);
+    }
+  };
+
+  const handleFecharModal = () => {
+    setTabSelecionado(0);
+    registerForm.resetForm();
+    onClose();
+  };
+
+  const handleGambiarra = () => {
+    setTimeout(() => {
+      setGambiarra(!gambiarra);
+    }, 2000);
+  };
 
   useEffect(() => {
-    // console.log(">>>>editOp", editOp);
+    requestLicoesEOperacoes();
+    handleGambiarra();
+  }, []);
+
+  useEffect(() => {
+    requestLicoesEOperacoes();
+    handleGambiarra();
+  }, [refresh]);
+
+  useEffect(() => {
     registerForm.setFieldValue("id_atividade", editOp.id_atividade);
     registerForm.setFieldValue("nome_atividade", editOp.nome_atividade);
-    // registerForm.setFieldValue("id_responsavel", editOp.id_responsavel);
     registerForm.setFieldValue("inicio_planejado", editOp.inicio_planejado);
     registerForm.setFieldValue("inicio_realizado", editOp.inicio_realizado);
     registerForm.setFieldValue("fim_planejado", editOp.fim_planejado);
@@ -66,25 +148,90 @@ function ModalAdicionarOperacao({
     registerForm.setFieldValue("hrs_totais", editOp.hrs_totais);
     registerForm.setFieldValue("hrs_reais", editOp.hrs_reais);
     registerForm.setFieldValue("pct_real", editOp.pct_real);
-  }, [editOp]);
+    registerForm.setFieldValue("licoes_aprendidas", listaLicoesAprendidas);
+    registerForm.setFieldValue("ocorrencias", listaOcorrencias);
+    if (anotacoes.length > 0) {
+      registerForm.setFieldValue("anotacoes", anotacoes[0].txt_nota);
+    }
+    if (mocs.length > 0) {
+      registerForm.setFieldValue("mocs", mocs);
+    }
+  }, [gambiarra]);
+
+  useEffect(() => {
+    registerForm.setFieldValue("id_atividade", editOp.id_atividade);
+    registerForm.setFieldValue("nome_atividade", editOp.nome_atividade);
+    registerForm.setFieldValue("inicio_planejado", editOp.inicio_planejado);
+    registerForm.setFieldValue("inicio_realizado", editOp.inicio_realizado);
+    registerForm.setFieldValue("fim_planejado", editOp.fim_planejado);
+    registerForm.setFieldValue("fim_realizado", editOp.fim_realizado);
+    registerForm.setFieldValue("hrs_totais", editOp.hrs_totais);
+    registerForm.setFieldValue("hrs_reais", editOp.hrs_reais);
+    registerForm.setFieldValue("pct_real", editOp.pct_real);
+    registerForm.setFieldValue("licoes_aprendidas", listaLicoesAprendidas);
+    registerForm.setFieldValue("ocorrencias", listaOcorrencias);
+    if (anotacoes.length > 0) {
+      registerForm.setFieldValue("anotacoes", anotacoes[0].txt_nota);
+    }
+    if (mocs.length > 0) {
+      registerForm.setFieldValue("mocs", mocs);
+    }
+    handleGambiarra();
+  }, [editOp, isOpen]);
+
+  useEffect(() => {
+    if (anotacoes.length > 0) {
+      registerForm.setFieldValue("anotacoes", anotacoes[0].txt_nota);
+    }
+    if (mocs.length > 0) {
+      registerForm.setFieldValue("mocs", mocs);
+    }
+    handleGambiarra();
+  }, [anotacoes, mocs]);
+
+  useEffect(() => {
+    requestLicoesEOperacoes();
+  }, [isOpen]);
+
+  const botoes = [
+    {
+      nome: "Geral",
+      selecionado: tabSelecionado === 0,
+    },
+    {
+      nome: "Anotações",
+      selecionado: tabSelecionado === 1,
+    },
+    {
+      nome: "MOC",
+      selecionado: tabSelecionado === 2,
+    },
+    {
+      nome: "Lições Aprendidas",
+      selecionado: tabSelecionado === 3,
+    },
+    {
+      nome: "Tempo Aguardando",
+      selecionado: tabSelecionado === 4,
+    },
+  ];
+
+  const handleClick = (index: number) => {
+    setTabSelecionado(index);
+
+    botoes.map((botao, i) => {
+      if (i === index) {
+        botao.selecionado = true;
+      } else {
+        botao.selecionado = false;
+      }
+      return botao;
+    });
+  };
 
   return (
     <>
-      {/* <Button
-        h={"56px"}
-        borderRadius={"10px"}
-        background={"white"}
-        color={"origem.500"}
-        onClick={onOpen}
-        _hover={{
-          background: "origem.500",
-          transition: "all 0.4s",
-          color: "white",
-        }}
-      >
-        Editar Operação
-      </Button> */}
-      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="6xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -93,10 +240,16 @@ function ModalAdicionarOperacao({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
-            Editar Operação
+            Editar Atividade
           </ModalHeader>
+          <ModalCloseButton
+            color={"white"}
+            onClick={() => handleCancelar(registerForm, onClose)}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -104,125 +257,89 @@ function ModalAdicionarOperacao({
             }}
           >
             <ModalBody mt={3}>
-              <Flex
-                flexDirection={useBreakpointValue({
-                  base: "column",
-                  md: "column",
-                })}
-                gap={5}
-              >
-                <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Nome</Text>
-                  <Flex gap={5} flex={1}>
-                    <Flex direction={"column"} flex={2}>
-                      <Input
-                        isDisabled
-                        value={registerForm.values.nome_atividade || ""}
-                        type="text"
-                        name="nome_atividade"
-                      />
-                    </Flex>
-                  </Flex>
-                </Flex>
-
-                {/* <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Responsável</Text>
-                  <Flex gap={5} flex={1}>
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"RESPONSÁVEL"}
-                      propName={"id_responsavel"}
-                      options={responsaveisOptions}
-                      required={true}
-                    />
-
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"ÁREA"}
-                      propName={"id_area"}
-                      options={areaAtuacaoOptions}
-                      required={true}
-                    />
-                  </Flex>
-                </Flex> */}
-
-                <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Datas</Text>
-                  <Flex gap={5}>
-                    <Flex>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"inicio_planejado"}
-                        label={"INÍCIO PLANEJADO"}
-                        required={true}
-                        data={registerForm.values.inicio_planejado}
-                      />
-                    </Flex>
-                    <Flex>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"fim_planejado"}
-                        label={"FIM PLANEJADO"}
-                        required={true}
-                        data={registerForm.values.fim_planejado}
-                      />
-                    </Flex>
-                  </Flex>
-                  <Flex gap={5}>
-                    <Flex>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"inicio_realizado"}
-                        label={"INÍCIO REAL"}
-                        required={true}
-                        data={registerForm.values.inicio_realizado}
-                      />
-                    </Flex>
-                    <Flex>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"fim_realizado"}
-                        label={"FIM REAL"}
-                        required={true}
-                        data={registerForm.values.fim_realizado}
-                      />
-                    </Flex>
-                  </Flex>
-                  <Flex flex={1} direction={"column"}>
-                    <Text fontWeight={"bold"}>Progresso</Text>
-                    <Flex gap={5}>
-                      <Flex>
-                        <NumberInput
-                          max={100}
-                          min={0}
-                          id={"pct_real"}
-                          name={"pct_real"}
-                          value={registerForm.values.pct_real}
-                          onChange={(value) => {
-                            registerForm.setFieldValue(
-                              "pct_real",
-                              Number(value)
-                            );
+              <Flex flex={1} mt={5} w={"100%"}>
+                <Tabs variant={"unstyled"} isLazy={true} flex={1} w={"100%"}>
+                  <TabList>
+                    <ButtonGroup size="lg" isAttached variant="outline">
+                      {botoes.map((botao, index) => (
+                        <Button
+                          fontSize={"14px"}
+                          fontWeight={"bold"}
+                          color={botao.selecionado ? "white" : "origem.500"}
+                          backgroundColor={
+                            botao.selecionado ? "origem.500" : "#FEFEFE"
+                          }
+                          _hover={{
+                            background: "origem.500",
+                            transition: "all 0.4s",
+                            color: "#FEFEFE",
                           }}
+                          onClick={() => handleClick(index)}
                         >
-                          <NumberInputField bg={"#fff"} h={"56px"} />
-                        </NumberInput>
-                      </Flex>
-                    </Flex>
-                  </Flex>
-                </Flex>
+                          <Tab fontWeight={"semibold"}>{botao.nome}</Tab>
+                        </Button>
+                      ))}
+                    </ButtonGroup>
+                  </TabList>
+
+                  <TabPanels flex={1} w={"100%"}>
+                    <TabPanel flex={1}>
+                      <EditarAtividadeTabGeral registerForm={registerForm} />
+                    </TabPanel>
+                    <TabPanel flex={1}>
+                      <EditarAtividadeTabAnotacoes
+                        registerForm={registerForm}
+                      />
+                    </TabPanel>
+                    <TabPanel flex={1}>
+                      <EditarAtividadeTabMOC registerForm={registerForm} />
+                    </TabPanel>
+                    <TabPanel flex={1}>
+                      <EditarAtividadeTabLicoesAprendidas
+                        registerForm={registerForm}
+                        refreshState={refreshState}
+                      />
+                    </TabPanel>
+                    <TabPanel flex={1}>
+                      <EditarAtividadeTabOcorrencias
+                        registerForm={registerForm}
+                        refreshState={refreshState}
+                      />
+                    </TabPanel>
+                  </TabPanels>
+                </Tabs>
               </Flex>
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoGhost
-                  text="Cancelar"
-                  onClose={onClose}
-                  formikForm={registerForm}
-                />
-                <BotaoAzulPrimary
-                  text="Concluir Cadastro"
+                <Button
+                  h={"56px"}
+                  variant="ghost"
+                  color="red.500"
+                  w={"208px"}
+                  onClick={() => handleFecharModal()}
+                  _hover={{
+                    background: "red.600",
+                    transition: "all 0.4s",
+                    color: "white",
+                  }}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
+                  borderRadius={"8px"}
+                  fontFamily={"Mulish"}
+                >
+                  <Text
+                    fontSize="18px"
+                    fontWeight={"700"}
+                    fontFamily={"Mulish"}
+                    mx={12}
+                  >
+                    Cancelar
+                  </Text>
+                </Button>
+                <BotaoAzulLargoPrimary
+                  text="Concluir"
                   onClose={onClose}
                   formikForm={registerForm}
                   refresh={refresh}
@@ -238,4 +355,4 @@ function ModalAdicionarOperacao({
   );
 }
 
-export default ModalAdicionarOperacao;
+export default ModalEditarOperacao;

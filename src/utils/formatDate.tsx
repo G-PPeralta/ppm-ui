@@ -44,3 +44,38 @@ export function formatDateToddMMyyyyhhmm(date: Date | null) {
     return data + ", " + time;
   }
 }
+
+export function formatDateToYYYYMMDDhhmmss(date: Date | null) {
+  if (date === null) {
+    return null;
+  } else {
+    const dateFormated = new Date(date);
+    const data: any = [
+      dateFormated.getFullYear(),
+      padTo2Digits(dateFormated.getMonth() + 1),
+      padTo2Digits(dateFormated.getDate()),
+    ].join("-");
+    const time = [
+      padTo2Digits(dateFormated.getHours()),
+      padTo2Digits(dateFormated.getMinutes()),
+      padTo2Digits(dateFormated.getSeconds()),
+    ].join(":");
+    return data + " " + time;
+  }
+}
+
+export function formatMinutesToHHmm(minutes: number) {
+  const hours = Math.floor(minutes / 60);
+  const minutesRest = minutes % 60;
+  return `${hours}h${padTo2Digits(minutesRest)}`;
+}
+
+export function formatFloatToMinutes(float: number) {
+  const minutes = float * 60;
+  return minutes;
+}
+
+export function formatMinutesToHours(minutes: number) {
+  const hours = minutes / 60;
+  return hours;
+}

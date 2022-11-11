@@ -9,7 +9,7 @@ function BotaoSetaVoltar() {
       icon={<IoIosArrowBack size={20} />}
       borderRadius={"10px"}
       background={"white"}
-      color={"origem.500"}
+      // color={"origem.500"}
       _hover={{
         background: "origem.500",
         transition: "all 0.4s",

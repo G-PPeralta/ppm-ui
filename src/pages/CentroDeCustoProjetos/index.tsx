@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { IoIosArrowBack } from "react-icons/io";
 import { useParams } from "react-router-dom";
 
-import { Box, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { TabelaCentroDeCusto } from "interfaces/FinanceiroProjetos";
 
 import Sidebar from "components/SideBar";
+import TituloPagina from "components/TituloPagina";
 
 import { useRequests } from "hooks/useRequests";
 
@@ -18,13 +18,13 @@ import Tabela from "./components/Tabela";
 export function CentroDeCustoProjetos() {
   const [refresh, setRefresh] = useState(false);
 
-  const { id } = useParams();
+  const { id, mes } = useParams();
   const {
     loading,
     listaCentroCustoProjetos,
     optionsFornecedores,
     optionsClassesDeServico,
-  } = useRequests(Number(id));
+  } = useRequests(Number(id), mes);
 
   const refreshState = {
     refresh,
@@ -43,14 +43,20 @@ export function CentroDeCustoProjetos() {
   };
 
   const handleRefresh = async () => {
-    if (id) {
-      const tabelaCentroDeCusto = await getCentroDeCustoProjetos(Number(id));
-      const centroDeCustoFormatado = tabelaCentroDeCusto.data.centroDeCusto.map(
-        (item: TabelaCentroDeCusto) => ({
-          ...item,
-          valor: Number(item.valor),
-        })
+    if (id && mes) {
+      const tabelaCentroDeCusto = await getCentroDeCustoProjetos(
+        Number(id),
+        String(mes)
       );
+      const centroDeCustoFormatado =
+        tabelaCentroDeCusto &&
+        tabelaCentroDeCusto.data &&
+        tabelaCentroDeCusto.data.centroDeCusto.map(
+          (item: TabelaCentroDeCusto) => ({
+            ...item,
+            valor: Number(item.valor),
+          })
+        );
       const data = {
         ...tabelaCentroDeCusto.data,
         centroDeCusto: centroDeCustoFormatado,
@@ -83,41 +89,29 @@ export function CentroDeCustoProjetos() {
               <Flex mb={4} wrap={"wrap"} align={"center"} gap={2}>
                 <Flex direction={"column"}>
                   <Flex align={"center"} gap={2} h={"56px"}>
-                    <IconButton
-                      aria-label="Botão Voltar"
-                      icon={<IoIosArrowBack size={20} />}
-                      borderRadius={"10px"}
-                      background={"white"}
-                      color={"origem.500"}
-                      _hover={{
-                        background: "origem.500",
-                        transition: "all 0.4s",
-                        color: "white",
-                      }}
-                      onClick={() => {
-                        window.history.back();
-                      }}
-                    />
-                    <Heading as="h3" size="md" textAlign={"center"}>
+                    <TituloPagina botaoVoltar={true}>
                       Centro de Custo
-                    </Heading>
+                    </TituloPagina>
                   </Flex>
                   <Text
                     as="h4"
                     size="sm"
-                    textAlign={"end"}
+                    textAlign={"center"}
                     fontWeight={"semibold"}
-                    mt={-3}
+                    mt={-5}
+                    fontSize={"20px"}
+                    ml={12}
                   >
-                    Carteira de Projetos
+                    Carteira de Projeto
                   </Text>
                 </Flex>
               </Flex>
               <Flex justify={"space-between"} flex={1}>
                 <ModalAdicionar
                   refreshState={refreshState}
-                  idProjeto={data.idProjeto}
+                  idProjeto={id ? +id : 0}
                   optionsSelects={options}
+                  mes={mes ? +mes : 0}
                 />
                 <Flex direction={"column"} justify={"end"}>
                   <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
@@ -128,14 +122,13 @@ export function CentroDeCustoProjetos() {
                   </Heading>
                 </Flex>
               </Flex>
-              {data && (
-                <Tabela
-                  data={data.centroDeCusto}
-                  refreshState={refreshState}
-                  idProjeto={data.idProjeto}
-                  optionsSelects={options}
-                />
-              )}
+              <Tabela
+                data={data.centroDeCusto}
+                refreshState={refreshState}
+                idProjeto={id ? +id : 0}
+                optionsSelects={options}
+                mes={mes ? +mes : 0}
+              />
             </Box>
           </Flex>
         ) : (

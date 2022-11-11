@@ -1,18 +1,13 @@
 import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
-import {
-  Box,
-  Flex,
-  Text,
-  FormControl,
-  Select,
-  Button,
-  FormLabel,
-} from "@chakra-ui/react";
-import { AtividadesLookahead } from "interfaces/lookahead";
+import { Flex, Text, FormControl, Select, Button } from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
+import { AtividadesLookahead, ProjetosLookahead } from "interfaces/lookahead";
 
+import ContainerPagina from "components/ContainerPagina";
 import Sidebar from "components/SideBar";
+import TituloPagina from "components/TituloPagina";
 
 import { useLookahead } from "hooks/useLookahead";
 
@@ -23,57 +18,72 @@ import { TabelaLookahead } from "./components/TabelaLookahead";
 // import { Projetos } from "interfaces/Projetos";
 
 export function Lookahead() {
-  const { projetos } = useLookahead();
+  const { getProjetos, loading } = useLookahead();
   const [atividades, setAtividades] = useState<AtividadesLookahead[]>();
+  const [filtered, setFiltered] = useState<AtividadesLookahead[]>();
   const [idProject, setIdProject] = useState<string>("0");
+  // console.log(idProject);
 
-  async function handleProjectChange() {
-    const act = await getAtividades(+idProject);
-    setAtividades(act);
-  }
+  const [projetos, setProjetos] = useState<ProjetosLookahead[]>();
+
+  // async function handleProjectChange() {
+  //   const act = await getAtividades(+idProject);
+  //   setAtividades(act);
+  // }
 
   const getAllActivities = async () => {
     const act = await getAtividades(0);
     setAtividades(act);
+    setFiltered(act);
   };
+
+  const getAllProjects = async () => {
+    const proj = await getProjetos();
+    setProjetos(proj);
+  };
+
+  useEffect(() => {
+    getAllProjects();
+  }, []);
 
   useEffect(() => {
     getAllActivities();
   }, []);
 
+  // console.log(idProject);
+
+  async function handleFilter() {
+    if (Number(idProject) === 0) {
+      // console.log("works");
+      // console.log({ atividades });
+      return setFiltered(atividades);
+    }
+    if (atividades) {
+      const filteredActivity = atividades.filter(
+        (b) => b.id_projeto === Number(idProject)
+      );
+      setFiltered(filteredActivity);
+    }
+    // return setAtividades(atividades);
+  }
+
+  // console.log({ filtered, atividades });
+
   return (
     <div>
       <Sidebar>
-        <Flex w={"auto"} align="center" justify="center" bg="#EDF2F7">
-          <Box
-            py={{ base: "6", sm: "8" }}
-            px={{ base: "6", sm: "10" }}
-            w="100%"
-            bg="white"
-            boxShadow={{
-              base: "none",
-              sm: "md",
-            }}
-            borderRadius={{ base: "none", sm: "xl" }}
-          >
-            <Flex direction="column" ml={-5}>
-              <Flex align={"flex-end"} mt={-5}>
-                <FormControl>
-                  <FormLabel htmlFor="name">
-                    <Text
-                      mb={3}
-                      fontSize={"24px"}
-                      color={"#2D2926"}
-                      fontWeight={"700"}
-                      fontFamily={"Mulish"}
-                    >
-                      Relatório Lookahead
-                    </Text>
-                  </FormLabel>
+        {!loading ? (
+          <ContainerPagina>
+            <Flex direction="column" fontFamily="Mulish">
+              <Flex align={"flex-end"}>
+                <FormControl mt={-1} ml={-1}>
+                  <TituloPagina botaoVoltar={false}>
+                    Relatório Lookahead
+                  </TituloPagina>
                 </FormControl>
               </Flex>
               <Flex direction="row" justifyContent="flex-start">
-                <Flex direction="row" justifyContent="flex-end">
+                <Flex direction="row" justifyContent="flex-end" ml={-1}>
                   <FormControl>
                     <Text
                       fontWeight={"bold"}
@@ -85,23 +95,30 @@ export function Lookahead() {
                     <Select
                       fontSize={"14px"}
                       fontWeight={"400"}
-                      _placeholder={{ color: "#2D2926" }}
-                      color={"#949494"}
-                      placeholder="Projeto"
-                      width={"146px"}
+                      // _placeholder={{ color: "#2D2926" }}
+                      // color={"#949494"}
+                      width={"208px"}
                       height={"56px"}
                       borderRadius={"8px"}
+                      placeholder="Projeto"
                       onChange={(e) => setIdProject(e.target.value)}
                     >
+                      <option value={0}>Todos</option>
                       {projetos &&
                         projetos.map((d, k) => (
+                          // <option key={k} value={d.id}>
+                          //   {d.nome_projeto.length > 20
+                          //     ? `${d.id} - ${d.nome_projeto.substring(
+                          //         0,
+                          //         17
+                          //       )}...`
+                          //     : `${d.id} - ${d.nome_projeto}`}
+                          // </option>
+
                           <option key={k} value={d.id}>
                             {d.nome_projeto.length > 20
-                              ? `${d.id} - ${d.nome_projeto.substring(
-                                  0,
-                                  17
-                                )}...`
-                              : `${d.id} - ${d.nome_projeto}`}
+                              ? `${d.nome_projeto.substring(0, 17)}...`
+                              : `${d.nome_projeto}`}
                           </option>
                         ))}
                     </Select>
@@ -109,20 +126,23 @@ export function Lookahead() {
 
                   <Flex alignItems="flex-end" marginLeft="16px">
                     <Button
-                      h={"56px"}
-                      background={"#0047BB"}
+                      h={"58px"}
+                      w={"117px"}
+                      background={"origem.500"}
                       border={"2.3px solid"}
                       color={"white"}
                       variant="primary"
                       _hover={{
-                        background: "white",
-                        color: "#0047BB",
+                        background: "origem.600",
+                        color: "white",
                         transition: "all 0.4s",
                       }}
                       rightIcon={<FiSearch />}
                       fontSize={"18px"}
                       fontWeight={"700"}
-                      onClick={handleProjectChange}
+                      borderRadius={"8px"}
+                      fontFamily={"Mulish"}
+                      onClick={handleFilter}
                     >
                       Filtrar
                     </Button>
@@ -130,12 +150,18 @@ export function Lookahead() {
                 </Flex>
               </Flex>
 
-              <Flex justifyContent="flex-end">
-                {atividades && <TabelaLookahead data={atividades} />}
+              <Flex justifyContent="flex-end" ml={-1} mr={-1}>
+                {filtered && (
+                  <TabelaLookahead data={filtered} projetos={projetos} />
+                )}
               </Flex>
             </Flex>
-          </Box>
-        </Flex>
+          </ContainerPagina>
+        ) : (
+          <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
+            <Ring speed={2} lineWeight={5} color="blue" size={64} />
+          </Flex>
+        )}
       </Sidebar>
     </div>
   );

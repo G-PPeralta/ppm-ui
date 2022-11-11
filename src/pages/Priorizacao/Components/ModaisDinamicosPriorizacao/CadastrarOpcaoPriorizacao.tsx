@@ -16,6 +16,7 @@ import {
   useDisclosure,
   Input,
   Select,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -28,6 +29,8 @@ import { useCadastroNovaOpcaoPriorizacao } from "hooks/useCadastrarOpcaoPrioriza
 interface TableProps {
   nomeRanking: string;
   idRanking: any;
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
@@ -40,6 +43,12 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
     registerForm.setFieldValue("id_ranking", infosRankings.idRanking);
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      registerForm.setFieldValue("id_ranking", infosRankings.idRanking);
+    }, 3000);
+  }, [infosRankings.refresh]);
+
   const rankingNome = infosRankings.nomeRanking;
 
   return (
@@ -51,21 +60,19 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
         aria-label="Plus sign"
         variant="primary"
         _hover={{
-          background: "white",
-          border: "solid 1px #0047BB",
-          borderRadius: "8px",
+          background: "origem.600",
           transition: "all 0.4s",
-          color: "origem.500",
         }}
         h={"56px"}
         w={"105px"}
         fontSize={"18px"}
         fontWeight={"700"}
         borderRadius={"8px"}
+        fontFamily={"Mulish"}
       >
         Cadastrar
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="lg">
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -75,9 +82,11 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
             color={"white"}
             fontSize={"14px"}
             fontWeight={"700"}
+            fontFamily={"Mulish"}
           >
-            {`Priorização ${rankingNome}`}
+            {`Cadastrar Priorização ${rankingNome}`}
           </ModalHeader>
+          <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
               // e.preventDefault();
@@ -98,19 +107,20 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               fontWeight={"700"}
                               color={"#949494"}
                               mb={"1px"}
-                              ml={"3px"}
+                              ml={"2px"}
                             >
-                              NOME
+                              NOME DA PRIORIZAÇÃO
                             </FormLabel>
                             <Input
+                              ml={"2px"}
                               maxLength={40}
                               fontSize={"14px"}
                               fontWeight={"400"}
                               placeholder={"Nome"}
+                              // w={"93%"}
                               color={"black"}
                               _placeholder={{ color: "#949494" }}
-                              ml={"3px"}
-                              w={"328px"}
+                              w={"524px"}
                               border={"1px solid #949494"}
                               h={"56px"}
                               id="nom_opcao"
@@ -134,16 +144,19 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               fontWeight={"700"}
                               color={"#949494"}
                               mb={"1px"}
+                              ml={"2px"}
                             >
                               NOTA
                             </FormLabel>
                             <Select
+                              ml={"2px"}
+                              // w={"93.6%"}
                               id="num_nota"
                               name="num_nota"
                               placeholder="Selecione"
                               border={"1px solid #949494"}
                               h={"56px"}
-                              w={"328px"}
+                              w={"208px"}
                               fontSize={"14px"}
                               fontWeight={"400"}
                               color={"black"}
@@ -174,33 +187,44 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
+              <Flex gap={2} ml={9}>
                 <Button
                   variant="ghost"
-                  color="red"
+                  color="red.500"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
-                    background: "red.500",
+                    background: "red.600",
                     transition: "all 0.4s",
                     color: "white",
                   }}
                   w={"208px"}
                   h={"56px"}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
+                  borderRadius={"8px"}
+                  fontFamily={"Mulish"}
                 >
                   Cancelar
                 </Button>
                 <Button
                   disabled={!registerForm.isValid}
-                  background="origem.300"
+                  background="origem.500"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() => [
+                    handleCadastrar(registerForm, onClose),
+                    infosRankings.setRefresh(!infosRankings.refresh),
+                  ]}
                   _hover={{
-                    background: "origem.500",
+                    background: "origem.600",
                     transition: "all 0.4s",
                   }}
+                  borderRadius={"8px"}
                   w={"208px"}
                   h={"56px"}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />

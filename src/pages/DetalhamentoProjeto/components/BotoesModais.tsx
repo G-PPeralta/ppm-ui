@@ -1,6 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 
 import BotaoDescricaoEJustificativa from "./BotaoDescricaoEJustificativa";
+import ModalConfiguracoes from "./Configuracoes/ModalConfiguracoes";
 import LicoesAprendidasModal from "./LicoesAprendidas/LicoesAprendidasModal";
 import BotaoListadeTarefas from "./Tarefas/BotaoListaDeTarefas";
 
@@ -11,6 +12,9 @@ function BotoesModais({
   callBack,
   infoProjeto,
   setRender,
+  projeto,
+  refresh,
+  setRefresh,
 }: any) {
   return (
     <>
@@ -23,7 +27,8 @@ function BotoesModais({
       >
         <BotaoDescricaoEJustificativa
           infoProjeto={infoProjeto}
-          setRender={setRender}
+          refresh={refresh}
+          setRefresh={setRefresh}
         />
         <BotaoListadeTarefas />
         <LicoesAprendidasModal
@@ -31,6 +36,11 @@ function BotoesModais({
           setLicoes={setLicoes}
           categorias={categorias}
           callBack={callBack}
+        />
+        <ModalConfiguracoes
+          projeto={projeto}
+          refresh={refresh}
+          setRefresh={setRefresh}
         />
       </Flex>
     </>

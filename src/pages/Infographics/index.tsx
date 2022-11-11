@@ -15,9 +15,9 @@ import { postGetInfoCampanha } from "services/get/Infograficos";
 import { statusProjeto } from "../../utils/validateDate";
 import ColumnSPT from "./Components/ColumnSPT";
 import FiltrosModal from "./Components/FiltrosModal";
-import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
+// import ModalCadastrarSonda from "./Components/ModalCadastrarSonda";
 import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
-import ModalCadastroPoco from "./Components/ModalCadastroPoco";
+// import ModalCadastroPoco from "./Components/ModalCadastroPoco";
 import ModalCadastroProjetoTipo from "./Components/ModalCadastroProjetoTipo";
 import ModalNovaCampanha from "./Components/ModalNovaCampanha";
 
@@ -44,8 +44,6 @@ export function Infographics() {
     listaSondas,
   };
 
-  // const innerWidth = useBreakpointValue({ base: 0, md: 1, lg: 2, xl: 3 });
-
   const handleGetAll = async () => {
     const campanhas = await postGetInfoCampanha(registerForm.values);
     setCampanhas(campanhas.data);
@@ -57,7 +55,9 @@ export function Infographics() {
   }, []);
 
   useEffect(() => {
-    handleGetAll();
+    setTimeout(() => {
+      handleGetAll();
+    }, 3000);
   }, [refresh]);
 
   return (
@@ -76,8 +76,8 @@ export function Infographics() {
             >
               <Flex gap={2} wrap={"wrap"} flex={1} justify={"space-between"}>
                 <Flex gap={2} wrap={"wrap"}>
-                  <ModalCadastrarSonda />
-                  <ModalCadastroPoco />
+                  {/* <ModalCadastrarSonda /> */}
+                  {/* <ModalCadastroPoco /> */}
                   <ModalCadastroAtividade />
                   <ModalCadastroProjetoTipo
                     refresh={refresh}

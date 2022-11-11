@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 
 import { useToast } from "contexts/Toast";
 
-import { postNovaIntervencao } from "services/post/CadastroModaisInfograficos";
+import { postNovaIntervencao } from "services/post/Infograficos";
 
 import { useAuth } from "./useAuth";
 

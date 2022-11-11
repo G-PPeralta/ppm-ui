@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 
 import {
   Box,
@@ -10,6 +10,8 @@ import {
 
 import PieChart from "components/PieChart";
 import StackedBarChart from "components/StackedBarChart";
+
+import { getProjetosPrevistoRealizado } from "services/get/Dashboard";
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -24,88 +26,78 @@ function useWindowSize() {
   return size;
 }
 
+function useGetData() {
+  const [previstoRealizado, setPrevistoRealizado] = useState<any[]>([]);
+
+  const loadData = async () => {
+    const { data } = await getProjetosPrevistoRealizado();
+    const renderPayload: any[] = [];
+    data.map((val: any) =>
+      renderPayload.push({
+        ...val,
+        Realizado: val.capexRealizado,
+        Previsto: val.capexPrevisto,
+      })
+    );
+    setPrevistoRealizado(renderPayload);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+  return previstoRealizado;
+}
+
+function useGetGraph(previstoRealizado: any) {
+  const initialValue = 0;
+
+  const totalPrevisto = previstoRealizado.reduce(
+    (previousValue: number, currentValue: { capexPrevisto: number }) =>
+      previousValue + +currentValue.capexPrevisto,
+    initialValue
+  );
+
+  const totalRealizado = previstoRealizado.reduce(
+    (previousValue: number, currentValue: { capexRealizado: any }) =>
+      previousValue + +currentValue.capexRealizado,
+    initialValue
+  );
+
+  const total = totalPrevisto + totalRealizado;
+  const graphPrevisto = totalPrevisto / total || 0;
+  const graphRealizado = totalRealizado / total || 0;
+
+  return {
+    total,
+    graphPrevisto,
+    graphRealizado,
+  };
+}
+
 export default function PrevistoxRealizadoComponent() {
   const [width] = useWindowSize();
   const innerWidth = window.innerWidth;
+
+  const previstoRealizado = useGetData();
+
+  const { graphPrevisto, graphRealizado } = useGetGraph(previstoRealizado);
+
   const grafData = [
     {
       name: "Previsto",
-      value: 50,
+      value: graphPrevisto,
       color: "#93E01B",
     },
     {
       name: "Realizado",
-      value: 50,
+      value: graphRealizado,
       color: "#2E69FD",
     },
   ];
 
-  const dataMock = [
-    {
-      month: "Jan/22",
-      Previsto: 90,
-      Realizado: 10,
-    },
-    {
-      month: "Fev/22",
-      Previsto: 80,
-      Realizado: 20,
-    },
-    {
-      month: "Mar/22",
-      Previsto: 70,
-      Realizado: 30,
-    },
-    {
-      month: "Abr/22",
-      Previsto: 60,
-      Realizado: 40,
-    },
-    {
-      month: "Mai/22",
-      Previsto: 50,
-      Realizado: 50,
-    },
-    {
-      month: "Jun/22",
-      Previsto: 40,
-      Realizado: 60,
-    },
-    {
-      month: "Jul/22",
-      Previsto: 30,
-      Realizado: 70,
-    },
-    {
-      month: "Ago/22",
-      Previsto: 20,
-      Realizado: 80,
-    },
-    {
-      month: "Set/22",
-      Previsto: 90,
-      Realizado: 10,
-    },
-    {
-      month: "Out/22",
-      Previsto: 90,
-      Realizado: 10,
-    },
-    {
-      month: "Nov/22",
-      Previsto: 90,
-      Realizado: 10,
-    },
-    {
-      month: "Dez/22",
-      Previsto: 90,
-      Realizado: 10,
-    },
-  ];
-
   const dataEntries = [
-    { name: "Previsto", color: "#93E01B" },
     { name: "Realizado", color: "#2E69FD" },
+    { name: "Previsto", color: "#93E01B" },
   ];
 
   return (
@@ -148,7 +140,7 @@ export default function PrevistoxRealizadoComponent() {
             showY={true}
             sizeW={1000}
             sizeH={200}
-            data={dataMock}
+            data={previstoRealizado}
             dataEntries={dataEntries}
             barW={25}
           />
@@ -200,7 +192,7 @@ export default function PrevistoxRealizadoComponent() {
                     sx={{ fontSize: 14, fontWeight: "400" }}
                     color="#ffffff"
                   >
-                    50%
+                    {(graphPrevisto * 100).toFixed(0)}%
                   </Text>
                 </Box>
                 <Box bg={"#2E69FD"} py={1} px={2}>
@@ -209,7 +201,7 @@ export default function PrevistoxRealizadoComponent() {
                     sx={{ fontSize: 14, fontWeight: "400" }}
                     color="#ffffff"
                   >
-                    50%
+                    {(graphRealizado * 100).toFixed(0)}%
                   </Text>
                 </Box>
               </Box>
