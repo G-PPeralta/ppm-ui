@@ -8,7 +8,7 @@ export const cadastroUsuario = yup.object({
     .email("O campo deve ser um e-mail válido"),
   telefone: yup.string().required("Campo obrigatório"),
   nome: yup.string().required("Campo obrigatório"),
-  roleId: yup.number().required("Campo obrigatório"),
+  // roleId: yup.number().required("Campo obrigatório"),
   senha: yup.string().notRequired(),
 });
 
