@@ -70,10 +70,14 @@ function ModalDeletar({
           backgroundColor: "#F40606",
           color: "white",
         }}
-        // w={"14px"}
-        // h={"18px"}
+        w={"24px"}
+        minW={"24px"}
+        maxW={"24px"}
+        h={"16px"}
+        minH={"14px"}
+        maxH={"18px"}
       >
-        <FiTrash size={16} />
+        <FiTrash size={14} />
       </IconButton>
       <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
