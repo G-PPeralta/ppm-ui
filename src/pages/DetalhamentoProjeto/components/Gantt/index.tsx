@@ -79,6 +79,7 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
         setLoading={setLoading}
         refreshGanttDelete={refreshGanttDelete}
         setRefreshGanttDelete={setRefreshGanttDelete}
+        handleSetGanttData={handleSetGanttData}
       />
     </Flex>
   );
@@ -264,6 +265,7 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
           height={"100vh"}
         >
           <ColumnsDirective>
+            <ColumnDirective field="Item" type="string"></ColumnDirective>
             <ColumnDirective
               field="TaskID"
               headerText="ID"
@@ -279,7 +281,6 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
               width="100"
               template={actionsTemplate}
             ></ColumnDirective>
-            <ColumnDirective field="Item" type="string"></ColumnDirective>
             <ColumnDirective
               field="TaskName"
               headerText="Ação/Projeto"

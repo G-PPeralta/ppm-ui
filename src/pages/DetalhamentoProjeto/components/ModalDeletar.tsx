@@ -19,13 +19,14 @@ import {
 
 import { useToast } from "contexts/Toast";
 
-// import { deleteOperacaoCronograma } from "services/delete/Estatisticas";
+import { deleteAtividade } from "services/delete/DeleteProject";
 type ModalDeletarProps = {
   id: number;
   isParent: boolean;
   setLoading: Function;
   refreshGanttDelete: boolean;
   setRefreshGanttDelete: Function;
+  handleSetGanttData: Function;
 };
 
 function ModalDeletar({
@@ -34,6 +35,7 @@ function ModalDeletar({
   setLoading,
   refreshGanttDelete,
   setRefreshGanttDelete,
+  handleSetGanttData,
 }: ModalDeletarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { toast } = useToast();
@@ -41,14 +43,15 @@ function ModalDeletar({
   const remove = async () => {
     try {
       if (!id) throw new Error("Erro ao remover operação!");
-      const { status } = await (() => ({ data: {}, status: 200 }))();
+      const { status } = await deleteAtividade(id);
       if (status === 200 || status === 201) {
         toast.success("Operação removida com sucesso!", {
           id: "toast-principal",
         });
+        setRefreshGanttDelete(!refreshGanttDelete);
+        handleSetGanttData();
         setLoading(false);
         onClose();
-        setRefreshGanttDelete(!refreshGanttDelete);
       }
     } catch (error) {
       toast.error("Erro ao remover operação!", {
