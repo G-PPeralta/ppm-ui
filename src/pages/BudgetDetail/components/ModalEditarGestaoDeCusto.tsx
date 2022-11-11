@@ -219,12 +219,19 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                             placeholder="Escolha uma Classe"
                             id="servico"
                             name="servico"
-                            value={registerForm.values.servico}
                             onChange={registerForm.handleChange}
                           >
                             {classesSevicos &&
                               classesSevicos.map((d) => (
-                                <option value={d.id}>{d.classe_servico}</option>
+                                <option
+                                  value={d.id}
+                                  selected={
+                                    registerForm.values.servico ==
+                                    d.id.toString()
+                                  }
+                                >
+                                  {d.classe_servico}
+                                </option>
                               ))}
                           </Select>
                           {/*  {registerForm.errors.servico && (

@@ -120,7 +120,7 @@ function ModalAdicionar({
                 <Flex direction={"column"}>
                   <DatePickerGenericoFinanceiro
                     registerForm={registerForm}
-                    nomeLabel="Data"
+                    nomeLabel="DATA"
                     propName={"data"}
                     required={true}
                     esconderHorario

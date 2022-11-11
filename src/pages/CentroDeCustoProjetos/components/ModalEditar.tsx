@@ -193,7 +193,7 @@ function ModalEditar({
                   <DatePickerGenericoFinanceiro
                     registerForm={registerForm}
                     propName={"data"}
-                    nomeLabel="Data"
+                    nomeLabel="DATA"
                     required={true}
                     data={dataPagamento}
                     esconderHorario

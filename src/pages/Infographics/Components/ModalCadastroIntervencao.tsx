@@ -20,13 +20,10 @@ import {
   AlertTitle,
   ModalCloseButton,
   Button,
-  // Progress,
+  Progress,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import {
-  // ListaCampo,
-  ProjetoTipo,
-} from "interfaces/CadastrosModaisInfograficos";
+import { ProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
@@ -57,15 +54,14 @@ function ModalCadastroIntervencao({
   const {
     registerForm,
     loading,
-    // listaCampos,
     listaSondaCampanha,
     listaAtividadesPrecedentes,
   } = useCadastroIntervencao();
 
   const [listaProjetos, setListaProjetos] = useState<any>([]);
   const [dataLimite, setDataLimite] = useState<any>("");
-  // const [valueProgressoMensagemErro, setValueProgressoMensagemErro] =
-  //   useState<any>(100);
+  const [valueProgressoMensagemErro, setValueProgressoMensagemErro] =
+    useState<number>(100);
   const [dataFinalPrevista, setDataFinalPrevista] = useState<any>("");
 
   const innerWidth = window.innerWidth;
@@ -74,11 +70,6 @@ function ModalCadastroIntervencao({
     value: poco.nom_poco,
     label: poco.nom_poco,
   }));
-
-  // const optionsCampo = listaCampos.map((campo: ListaCampo) => ({
-  //   value: campo.id,
-  //   label: campo.campo,
-  // }));
 
   const optionsProjetoTipo = listaProjetos.map((projetoTipo: ProjetoTipo) => ({
     value: projetoTipo.id,
@@ -151,23 +142,14 @@ function ModalCadastroIntervencao({
     );
 
     const dataInicio = new Date(registerForm.values.dat_ini_prev);
-    const dataLimite = new Date(registerForm.values.data_limite);
-
-    // PEGAR DATA DE FIM PREVISTA (DATA INICIO + QUANTIDADE DE DIAS)
     const dataFimPrevista = new Date(
       dataInicio.setDate(dataInicio.getDate() + quantidadeDias)
     );
-
     setDataFinalPrevista(dataFimPrevista);
 
-    // console.log("dataInicio", dataInicio);
-    // console.log("dataLimite", dataLimite);
-    // console.log("dataFimPrevista", dataFimPrevista);
-    // console.log("condicional", dataFimPrevista > dataLimite);
-
-    if (dataFimPrevista > dataLimite) {
-      registerForm.setFieldValue("erroDataIntervencao", true);
-    }
+    // if (dataFimPrevista > dataLimite) {
+    registerForm.setFieldValue("erroDataIntervencao", true);
+    // }
   };
 
   useEffect(() => {
@@ -192,6 +174,18 @@ function ModalCadastroIntervencao({
       registerForm.values.poco_id !== 0
     ) {
       handleDataLimite();
+    }
+    setValueProgressoMensagemErro(100);
+    if (registerForm.values.erroDataIntervencao) {
+      const interval = setInterval(() => {
+        setValueProgressoMensagemErro((value) => {
+          if (value === 0) {
+            return 0;
+          }
+          return value - 1;
+        });
+      }, 500);
+      return () => clearInterval(interval);
     }
   }, [
     registerForm.values.dat_ini_prev,
@@ -234,23 +228,26 @@ function ModalCadastroIntervencao({
     }
   }, [registerForm.values.poco_id]);
 
+  useEffect(() => {
+    setValueProgressoMensagemErro(100);
+  }, [dataLimite]);
+
+  // TODA VEZ QUE A MENSAGEM DE ERRO FOR ALTERADA, O PROGRESSO DA MENSAGEM DE ERRO É ALTERADO
+  // PARA 100, E ENTÃO ELE VAI DIMINUINDO ATÉ 0 DURANTE 10 SEGUNDOS
   // useEffect(() => {
   //   setValueProgressoMensagemErro(100);
-  // }, [dataLimite]);
-
-  // useEffect(() => {
-  //   const contagemRegressiva = setInterval(() => {
-  //     setValueProgressoMensagemErro((valueProgressoMensagemErro: number) => {
-  //       if (valueProgressoMensagemErro === 0) {
-  //         clearInterval(contagemRegressiva);
-  //         return 100;
-  //       }
-  //       return valueProgressoMensagemErro - 1;
-  //     });
-  //   }, 1000);
-  // }, [valueProgressoMensagemErro]);
-
-  // console.log("registerForm", registerForm.values);
+  //   if (registerForm.values.erroDataIntervencao) {
+  //     const interval = setInterval(() => {
+  //       setValueProgressoMensagemErro((value) => {
+  //         if (value === 0) {
+  //           return 0;
+  //         }
+  //         return value - 1;
+  //       });
+  //     }, 1000);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [registerForm.values.erroDataIntervencao]);
 
   return (
     <>
@@ -337,13 +334,6 @@ function ModalCadastroIntervencao({
                           options={optionsPocos}
                           required={true}
                         />
-                        {/* <SelectFiltragem
-                          registerForm={registerForm}
-                          nomeSelect={"CAMPO"}
-                          propName={"campo_id"}
-                          options={optionsCampo}
-                          required={true}
-                        /> */}
                         <DateTimePickerDataInicio registerForm={registerForm} />
                       </Flex>
                     </Stack>
@@ -394,13 +384,13 @@ function ModalCadastroIntervencao({
                               )}.`}
                           </Text>
                         </Alert>
-                        {/* <Progress
+                        <Progress
                           hasStripe
                           size="sm"
                           value={valueProgressoMensagemErro}
-                          colorScheme={"blue"}
+                          colorScheme={"red"}
                           isAnimated={true}
-                        /> */}
+                        />
                       </Flex>
                     )}
 

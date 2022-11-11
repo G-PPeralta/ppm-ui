@@ -6,6 +6,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import {
   Box,
   Flex,
+  IconButton,
   NumberInput,
   NumberInputField,
   Text,
@@ -354,12 +355,19 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   setOpcoesFiltro={setOpcoesFiltro}
                   index={index}
                 />
-
-                <FiTrash
+                <IconButton
                   onClick={() => remove(index)}
-                  color="#F94144"
-                  size="22px"
-                />
+                  color={"#F40606"}
+                  fontWeight={"700"}
+                  backgroundColor={"transparent"}
+                  aria-label="Plus sign"
+                  _hover={{
+                    backgroundColor: "#F40606",
+                    color: "white",
+                  }}
+                >
+                  <FiTrash size={"13px"} />
+                </IconButton>
               </Flex>
             </Flex>
           </Box>
