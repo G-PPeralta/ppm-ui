@@ -16,11 +16,11 @@ import {
   TabPanel,
   ButtonGroup,
   Button,
+  Text,
 } from "@chakra-ui/react";
 import { Anotacoes, LicaoAprendida, Ocorrencia } from "interfaces/Estatisticas";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
-import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 
 import { handleCancelar } from "utils/handleCadastro";
 
@@ -75,7 +75,6 @@ function ModalEditarOperacao({
   const [listaOcorrencias, setListaOcorrencias] = useState<Ocorrencia[]>([]);
   const [anotacoes, setAnotacoes] = useState<Anotacoes[]>([]);
   const [mocs, setMocs] = useState<any[]>([]);
-  // const [anexosMocs, setAnexosMocs] = useState<any[]>([]);
   const [gambiarra, setGambiarra] = useState<any>(true);
 
   const refreshState = {
@@ -107,8 +106,6 @@ function ModalEditarOperacao({
         )
       );
 
-      // console.log("ocorrenciasPorAtividade", ocorrenciasPorAtividade.data);
-
       const anotacoesPorAtividade = await getAnotacoesPorAtividade(
         editOp.id_atividade
       );
@@ -119,15 +116,11 @@ function ModalEditarOperacao({
     }
   };
 
-  // const handleAnexosMocs = async () => {
-  //   if (editOp.id_atividade) {
-  //     const pdf = await getArquivoPdf(
-  //       editOp.id_atividade,
-  //       registerForm.values.mocs[0].numero_moc
-  //     );
-  //     setAnexosMocs(pdf.data);
-  //   }
-  // };
+  const handleFecharModal = () => {
+    setTabSelecionado(0);
+    registerForm.resetForm();
+    onClose();
+  };
 
   const handleGambiarra = () => {
     setTimeout(() => {
@@ -197,20 +190,8 @@ function ModalEditarOperacao({
   }, [anotacoes, mocs]);
 
   useEffect(() => {
-    // if (mocs.length > 0) {
-    //   handleAnexosMocs();
-    // }
-  }, [mocs]);
-
-  useEffect(() => {
     requestLicoesEOperacoes();
   }, [isOpen]);
-
-  // console.log("mocs", mocs);
-  // console.log("anexosMocs", anexosMocs);
-  // console.log("anotacoes", anotacoes);
-  // console.log("registerForm", registerForm.values);
-  // console.log("editOp", editOp);
 
   const botoes = [
     {
@@ -332,11 +313,31 @@ function ModalEditarOperacao({
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoLargoGhost
-                  text="Cancelar"
-                  onClose={onClose}
-                  formikForm={registerForm}
-                />
+                <Button
+                  h={"56px"}
+                  variant="ghost"
+                  color="red.500"
+                  w={"208px"}
+                  onClick={() => handleFecharModal()}
+                  _hover={{
+                    background: "red.600",
+                    transition: "all 0.4s",
+                    color: "white",
+                  }}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
+                  borderRadius={"8px"}
+                  fontFamily={"Mulish"}
+                >
+                  <Text
+                    fontSize="18px"
+                    fontWeight={"700"}
+                    fontFamily={"Mulish"}
+                    mx={12}
+                  >
+                    Cancelar
+                  </Text>
+                </Button>
                 <BotaoAzulLargoPrimary
                   text="Concluir"
                   onClose={onClose}
