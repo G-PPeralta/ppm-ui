@@ -6,7 +6,7 @@ import {
   FiHome,
   FiBarChart,
   FiActivity,
-  FiFile,
+  // FiFile,
   FiTrash2,
   FiSettings,
 } from "react-icons/fi";
@@ -34,7 +34,7 @@ const childrenCarteiradeProjetos = [
     icon: FaRegMoneyBillAlt,
     link: "/financeiro-projetos",
   },
-  { name: "Relatórios", icon: FiFile, link: "/reports" },
+  // { name: "Relatórios", icon: FiFile, link: "/reports" },
   // {
   //   name: "Priorização Diretores",
   //   icon: IoMdPodium,
