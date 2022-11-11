@@ -273,7 +273,7 @@ export function ModalAddAtividade(props: PropsType) {
                           _placeholder={{ color: "#949494" }}
                           name="dsc_comentario"
                           // color={"#949494"}
-                          maxLength={200}
+                          // maxLength={5000}
                           rows={5}
                           onChange={(e) => setAnotacao(e.target.value)}
                         />

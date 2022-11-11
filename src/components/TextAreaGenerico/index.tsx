@@ -37,7 +37,7 @@ function TextAreaGenerico({
         id={propName}
         name={propName}
         value={value}
-        maxLength={255}
+        maxLength={5000}
         onChange={registerForm.handleChange}
         w={"100%"}
         _placeholder={{ color: "#949494" }}
