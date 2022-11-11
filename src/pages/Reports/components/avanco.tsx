@@ -1,7 +1,8 @@
 import { Flex } from "@chakra-ui/react";
 
+import CurvaS from "components/CurvaS";
+
 import { curveSData, tableData, summaryValues } from "./data";
-import GenericCurveS from "./genericCurveS";
 import { GenericTable } from "./genericTable";
 import { ProjectSummary } from "./summary";
 
@@ -10,7 +11,7 @@ export function Avanco() {
     <>
       <Flex direction={"column"} w={"100%"} gap={"24px"}>
         <ProjectSummary data={summaryValues} table={false} />
-        <GenericCurveS data={curveSData} />
+        <CurvaS data={curveSData} />
         <GenericTable data={tableData} />
       </Flex>
     </>
