@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import {
   Flex,
@@ -10,15 +11,16 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  // NumberInput,
-  // NumberInputField,
   useBreakpointValue,
   FormLabel,
   FormControl,
   ModalCloseButton,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
 } from "@chakra-ui/react";
-
-// import Restricoes from "pages/Infographics/Components/Restricoes";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
@@ -27,11 +29,6 @@ import InputNumericoGenerico from "components/InputNumericoGenerico";
 import { getGanttData } from "services/get/Gantt";
 
 import DateTimePicker from "./DateTimePicker";
-
-// interface Responsavel {
-//   id: number;
-//   nome: string;
-// }
 
 function getObject(theObject: any, id: any): any {
   let result = null;
@@ -67,81 +64,31 @@ function ModalEditarAtividade({
   setRefresh,
   refresh,
   editAtividade,
-  // listaResponsaveis,
-  // listaAreaAtuacao,
   isOpen,
   onClose,
   registerForm,
   loading,
 }: any) {
-  // const responsaveisOptions = listaResponsaveis.map(
-  //   (responsavel: Responsavel) => ({
-  //     value: responsavel.id,
-  //     label: responsavel.nome,
-  //   })
-  // );
-
-  // const areaAtuacaoOptions = listaAreaAtuacao.map((area: any) => ({
-  //   value: area.id,
-  //   label: area.tipo,
-  // }));
+  const { id } = useParams();
 
   useEffect(() => {
     asyncGet();
   }, [editAtividade]);
 
-  // const asyncGet = async () => {
-  //   const reqGanttData = await getGanttData(Number("24"));
-  //   console.log("reqGanttData", reqGanttData.data);
-  //   const item = reqGanttData.data.map((val: any) => {
-  //     if (val.TaskID == editAtividade.id_atividade) {
-  //       return val;
-  //     } else {
-  //       return val.subtasks
-  //         .map((val2: any) => {
-  //           if (val2.TaskID == editAtividade.id_atividade) {
-  //             return val2;
-  //           } else {
-  //             return null;
-  //           }
-  //         })
-  //         .filter((val: any) => val !== null)[0];
-  //     }
-  //   });
-  //   console.log("item", item[0]);
-  //   registerForm.setFieldValue("id_atividade", editAtividade.id_atividade);
-  //   registerForm.setFieldValue("nome_atividade", editAtividade.nome_atividade);
-  //   registerForm.setFieldValue("inicio_realizado", item[0].StartDate);
-  //   registerForm.setFieldValue("fim_realizado", item[0].EndDate);
-  //   registerForm.setFieldValue("pct_real", editAtividade.pct_real);
-  // };
-
   const asyncGet = async () => {
-    const reqGanttData = await getGanttData(Number("24"));
+    const reqGanttData = await getGanttData(Number(id));
     const item = getObject(reqGanttData.data, editAtividade.id_atividade);
     registerForm.setFieldValue("id_atividade", editAtividade.id_atividade);
     registerForm.setFieldValue("nome_atividade", editAtividade.nome_atividade);
     registerForm.setFieldValue("inicio_realizado", item.StartDate);
     registerForm.setFieldValue("fim_realizado", item.EndDate);
+    registerForm.setFieldValue("duracao_dias", item.Duration);
     registerForm.setFieldValue("pct_real", editAtividade.pct_real);
+    registerForm.setFieldValue("inicio_planejado", item.StartDatePlan);
   };
 
   return (
     <>
-      {/* <Button
-        h={"56px"}
-        borderRadius={"10px"}
-        background={"white"}
-        color={"origem.500"}
-        onClick={onOpen}
-        _hover={{
-          background: "origem.500",
-          transition: "all 0.4s",
-          color: "white",
-        }}
-      >
-        Editar Operação
-      </Button> */}
       <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
@@ -153,7 +100,6 @@ function ModalEditarAtividade({
             color={"white"}
             fontSize={"14px"}
             fontWeight={"700"}
-            // h={"48px"}
           >
             Editar Atividade
           </ModalHeader>
@@ -172,7 +118,6 @@ function ModalEditarAtividade({
                 gap={3}
               >
                 <Flex flex={1} direction={"column"}>
-                  {/* <Text fontWeight={"bold"}>Nome</Text> */}
                   <Flex flex={1}>
                     <Flex direction={"column"} flex={2}>
                       <FormControl>
@@ -207,49 +152,48 @@ function ModalEditarAtividade({
                   </Flex>
                 </Flex>
 
-                {/* <Flex flex={1} direction={"column"}>
-                  <Text fontWeight={"bold"}>Responsável</Text>
-                  <Flex gap={5} flex={1}>
-                    <SelectFiltragem
+                <Flex flex={1} direction={"row"} mt={1} mb={-3} gap={3}>
+                  <Flex flex={1}>
+                    <DateTimePicker
                       registerForm={registerForm}
-                      nomeSelect={"RESPONSÁVEL"}
-                      propName={"id_responsavel"}
-                      options={responsaveisOptions}
-                      required={true}
-                    />
-
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"ÁREA"}
-                      propName={"id_area"}
-                      options={areaAtuacaoOptions}
-                      required={true}
+                      value={"inicio_planejado"}
+                      label={"INÍCIO PLANEJADO"}
+                      required={false}
+                      data={registerForm.values.inicio_planejado}
                     />
                   </Flex>
-                </Flex> */}
-
-                <Flex flex={1} direction={"column"} mt={-3} mb={-3}>
-                  {/* <Text fontWeight={"bold"}>Datas</Text> */}
-                  {/* <Flex>
-                    <Flex flex={1}>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"inicio_planejado"}
-                        label={"INÍCIO PLANEJADO"}
-                        required={false}
-                        data={registerForm.values.inicio_planejado}
-                      />
+                  <Flex direction={"column"}>
+                    <Flex gap={1}>
+                      <Text
+                        fontWeight={"bold"}
+                        fontSize={"12px"}
+                        color={"#949494"}
+                      >
+                        DURAÇÃO PLANEJADA
+                      </Text>
                     </Flex>
-                    <Flex flex={1}>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"fim_planejado"}
-                        label={"FIM PLANEJADO"}
-                        required={false}
-                        data={registerForm.values.fim_planejado}
-                      />
-                    </Flex>
-                  </Flex> */}
+                    <NumberInput
+                      h={"56px"}
+                      placeholder="Duração em Dias"
+                      id="duracao_dias"
+                      name="duracao_dias"
+                      max={999999999999}
+                      value={registerForm.values.duracao_dias}
+                      onChange={(value) => {
+                        registerForm.setFieldValue(
+                          "duracao_dias",
+                          Number(value)
+                        );
+                      }}
+                      w={"95%"}
+                    >
+                      <NumberInputField h={"56px"} />
+                      <NumberInputStepper>
+                        <NumberIncrementStepper />
+                        <NumberDecrementStepper />
+                      </NumberInputStepper>
+                    </NumberInput>
+                  </Flex>
                 </Flex>
                 <Flex flex={1} direction={"column"}>
                   <Flex>
@@ -274,22 +218,7 @@ function ModalEditarAtividade({
                   </Flex>
                 </Flex>
                 <Flex flex={1} direction={"column"}>
-                  {/* <Text fontWeight={"bold"}>Progresso</Text> */}
                   <Flex mt={-1} w={"76%"}>
-                    {/* <Flex>
-                      <NumberInput
-                        max={100}
-                        min={0}
-                        id={"pct_real"}
-                        name={"pct_real"}
-                        value={registerForm.values.pct_real}
-                        onChange={(value) => {
-                          registerForm.setFieldValue("pct_real", Number(value));
-                        }}
-                      >
-                        <NumberInputField bg={"#fff"} h={"56px"} />
-                      </NumberInput>
-                    </Flex> */}
                     <InputNumericoGenerico
                       registerForm={registerForm}
                       propName={"pct_real"}
@@ -299,21 +228,6 @@ function ModalEditarAtividade({
                     />
                   </Flex>
                 </Flex>
-                {/* <Flex
-                  flexDirection={useBreakpointValue({
-                    base: "column",
-                    md: "column",
-                  })}
-                  gap={2}
-                >
-                  <Text fontWeight={"bold"}>Restrições</Text>
-                  <Restricoes registerForm={registerForm} />
-                </Flex> */}
-
-                {/* <AtividadesDragAndDrop
-                  registerForm={registerForm}
-                  atividades={relacoesOptions}
-                /> */}
               </Flex>
             </ModalBody>
 
@@ -327,7 +241,7 @@ function ModalEditarAtividade({
                   formikForm={registerForm}
                 />
                 <BotaoAzulPrimary
-                  text="Cadastrar"
+                  text="Concluir"
                   onClose={onClose}
                   formikForm={registerForm}
                   refresh={refresh}

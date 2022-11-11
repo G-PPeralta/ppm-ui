@@ -52,18 +52,18 @@ export function useEditarAtividadeGantt() {
     id_atividade: 0,
     inicio_realizado: "",
     fim_realizado: "",
-    // inicio_planejado: "",
-    // fim_planejado: "",
     pct_real: 0,
+    inicio_planejado: "",
+    duracao_dias: 0,
   };
 
   const adicionarOperacao = yup.object({
-    id_atividade: yup.number().required("Campo obrigatório"), // .moreThan(0),
-    inicio_realizado: yup.date().required("Campo obrigatório"),
-    fim_realizado: yup.date().required("Campo obrigatório"),
-    // inicio_planejado: yup.date().required("Campo obrigatório"),
-    // fim_planejado: yup.date().required("Campo obrigatório"),
-    pct_real: yup.number(), // .required("Campo obrigatório").moreThan(0),
+    id_atividade: yup.number(),
+    inicio_realizado: yup.date(),
+    fim_realizado: yup.date(),
+    pct_real: yup.number(),
+    inicio_planejado: yup.date(),
+    duracao_dias: yup.number(),
   });
   const registerForm: any = useFormik({
     initialValues,
@@ -72,13 +72,13 @@ export function useEditarAtividadeGantt() {
       const id = values.id_atividade;
       const dat_ini = new Date(values.inicio_realizado);
       const dat_fim = new Date(values.fim_realizado);
-      // dat_fim.setDate(dat_fim.getDate() - 1);
+      const dat_ini_plan = new Date(values.inicio_planejado);
       const newValues = {
         dat_ini_real: dat_ini.toISOString(),
         dat_fim_real: dat_fim.toISOString(),
-        // dat_ini_plan: new Date(values.inicio_planejado).toLocaleString(),
-        // dat_fim_plan: new Date(values.fim_planejado).toLocaleString(),
+        dat_ini_plan: dat_ini_plan.toISOString(),
         pct_real: values.pct_real,
+        duracao_dias: values.duracao_dias,
       };
 
       try {
