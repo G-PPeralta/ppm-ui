@@ -34,7 +34,7 @@ import { useCadastroCronograma } from "hooks/useCadastroCronograma";
 
 import { getDuracaoHorasAdicionarAtividade } from "services/get/Estatisticas";
 
-import { ModalFiltrarAtividade } from "./ModalFiltrarAtividade";
+import { ModalFiltrarDuracaoMedia } from "./ModalFiltrarDuracaoMedia";
 
 interface Props {
   setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
@@ -211,7 +211,7 @@ function ModalAdicionarAtividade({
                         required={true}
                       />
                     </Flex>
-                    <ModalFiltrarAtividade
+                    <ModalFiltrarDuracaoMedia
                       operacaoId={registerForm.values.operacao_id}
                       setMediaHorasFiltradas={setMediaHorasFiltradas}
                     />
