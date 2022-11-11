@@ -13,7 +13,7 @@ import {
 import { Ring } from "@uiball/loaders";
 import { StatisticsGanttProps } from "interfaces/Services";
 
-// import ModalDeletar from "./ModalDeletar";
+import ModalDeletar from "./ModalDeletar";
 
 type ganttOptionsProps = {
   data: StatisticsGanttProps[] | undefined; // TODO: tirar undefined
@@ -81,24 +81,22 @@ export function Gantt({
       "Med: ${taskData.med}h - Min: ${taskData.min}h - Max: ${taskData.max}h - DP: ${taskData.dp}h",
   };
 
-  // const actionsTemplate = (props: any) => (
-  //   <Flex
-  //     w={"100%"}
-  //     style={{ position: "relative", top: "-8px" }}
-  //     justifyContent={"center"}
-  //     alignItems={"center"}
-  //   >
-  //     <Flex _hover={{ cursor: "pointer" }}>
-  //       {/* <ModalDeletar
-  //         id={props.TaskID}
-  //         setLoading={setLoading}
-  //         callbackSetRefresh={callbackSetRefresh}
-  //         handleGetAllData={handleGetAllData}
-  //       /> */}
-  //       {/* <FiTrash onClick={() => remove(props)} color="#F94144" size={16} /> */}
-  //     </Flex>
-  //   </Flex>
-  // );
+  const actionsTemplate = (props: any) => (
+    <Flex
+      // w={"100%"}
+      style={{ position: "relative", top: "-8px" }}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
+      <ModalDeletar
+        id={props.TaskID}
+        setLoading={setLoading}
+        callbackSetRefresh={callbackSetRefresh}
+        handleGetAllData={handleGetAllData}
+      />
+      {/* <FiTrash onClick={() => remove(props)} color="#F94144" size={16} /> */}
+    </Flex>
+  );
 
   const cellEdit = (args: any) => {
     // if (args.columnName !== "Progress") {
@@ -180,14 +178,14 @@ export function Gantt({
           height={"100vh"}
         >
           <ColumnsDirective>
-            {/* <ColumnDirective
+            <ColumnDirective
               field="acao"
               headerText="Ação"
               headerTextAlign="Center"
               textAlign="Center"
               width="100"
               template={actionsTemplate}
-            ></ColumnDirective> */}
+            ></ColumnDirective>
             <ColumnDirective
               field="TaskID"
               headerText="ID"
