@@ -49,7 +49,7 @@ function ModalDeletarProjeto(projeto: id) {
         backgroundColor={"transparent"}
         aria-label="Plus sign"
         _hover={{
-          backgroundColor: "#F94144",
+          backgroundColor: "#F40606",
           color: "white",
         }}
         // w={"14px"}
@@ -84,7 +84,7 @@ function ModalDeletarProjeto(projeto: id) {
                     <Flex>
                       <Text
                         // textAlign={"center"}
-                        fontSize={"24px"}
+                        fontSize={"20px"}
                         mb={"1px"}
                         color={"#010101"}
                         fontWeight={"400"}
@@ -105,7 +105,7 @@ function ModalDeletarProjeto(projeto: id) {
                   color="red.500"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
-                    background: "red.500",
+                    background: "red.600",
                     transition: "all 0.4s",
                     color: "white",
                   }}

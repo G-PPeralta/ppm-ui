@@ -28,7 +28,7 @@ import InputGenerico from "components/InputGenerico";
 import { RequiredField } from "components/RequiredField/RequiredField";
 // import { TextError } from "components/TextError";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+import { handleCadastrar } from "utils/handleCadastro";
 
 import { useEditarOrcamentoRealizado } from "hooks/useEditarOrcamentoRealizado";
 
@@ -141,6 +141,9 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                           </Flex>
                           <Input
                             h={"56px"}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"#2D2926"}
                             placeholder="Selecione a Data"
                             size="md"
                             type="date"
@@ -169,6 +172,9 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                         </Flex>
                         <Select
                           h={"56px"}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"#2D2926"}
                           placeholder="Escolha um Fornecedor"
                           id="fornecedor"
                           name="fornecedor"
@@ -207,15 +213,25 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                           </Flex>
                           <Select
                             h={"56px"}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"#2D2926"}
                             placeholder="Escolha uma Classe"
                             id="servico"
                             name="servico"
-                            value={registerForm.values.servico}
                             onChange={registerForm.handleChange}
                           >
                             {classesSevicos &&
                               classesSevicos.map((d) => (
-                                <option value={d.id}>{d.classe_servico}</option>
+                                <option
+                                  value={d.id}
+                                  selected={
+                                    registerForm.values.servico ==
+                                    d.id.toString()
+                                  }
+                                >
+                                  {d.classe_servico}
+                                </option>
                               ))}
                           </Select>
                           {/*  {registerForm.errors.servico && (
@@ -236,6 +252,10 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                           </Flex>
                           <Input
                             h={"56px"}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            color={"#2D2926"}
+                            _placeholder={{ color: "#949494" }}
                             placeholder="Pedido"
                             id="pedido"
                             name="pedido"
@@ -249,7 +269,7 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                                 e.preventDefault();
                               }
                             }}
-                            size="md"
+                            // size="md"
                             type="text"
                           />
                           {/*  {registerForm.errors.pedido && (
@@ -270,6 +290,9 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                           </Text>
                         </Flex>
                         <Textarea
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          color={"#2D2926"}
                           placeholder="Ação ou Recomendação"
                           id="pedido-obs"
                           name="pedido_obs"
@@ -297,7 +320,7 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                   variant="ghost"
                   color="red.500"
                   w={"208px"}
-                  onClick={() => handleCancelar(registerForm, onClose)}
+                  onClick={() => onClose()}
                   _hover={{
                     background: "red.600",
                     transition: "all 0.4s",

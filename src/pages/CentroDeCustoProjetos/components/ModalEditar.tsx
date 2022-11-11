@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MdModeEdit } from "react-icons/md";
 
 import {
@@ -73,9 +73,12 @@ function ModalEditar({
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const [dataPagamento, setDataPagamento] = useState<Date>();
+
   const setInicialValues = async () => {
     registerForm.setFieldValue("valor", parserString(linhaTabela.valor));
     registerForm.setFieldValue("data", linhaTabela.dataPagamento);
+    setDataPagamento(new Date(linhaTabela.dataPagamento));
     registerForm.setFieldValue(
       "prestadorServicoId",
       linhaTabela.prestadorDeServicoId
@@ -190,9 +193,11 @@ function ModalEditar({
                   <DatePickerGenericoFinanceiro
                     registerForm={registerForm}
                     propName={"data"}
-                    value={registerForm.values.data}
-                    mes={mes}
+                    nomeLabel="DATA"
+                    required={true}
+                    data={dataPagamento}
                     esconderHorario
+                    mes={mes}
                   />
                 </Flex>
               </Flex>

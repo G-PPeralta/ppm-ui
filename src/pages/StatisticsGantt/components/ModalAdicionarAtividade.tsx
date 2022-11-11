@@ -34,7 +34,7 @@ import { useCadastroCronograma } from "hooks/useCadastroCronograma";
 
 import { getDuracaoHorasAdicionarAtividade } from "services/get/Estatisticas";
 
-import { ModalFiltrarAtividade } from "./ModalFiltrarAtividade";
+import { ModalFiltrarDuracaoMedia } from "./ModalFiltrarDuracaoMedia";
 
 interface Props {
   setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
@@ -106,8 +106,8 @@ function ModalAdicionarAtividade({
     const horasDuracao = await getDuracaoHorasAdicionarAtividade(
       registerForm.values.operacao_id
     );
-    // console.log(horasDuracao.data.hrs_media);
-    registerForm.setFieldValue("duracao", horasDuracao.data.hrs_media);
+    // registerForm.setFieldValue("duracao", horasDuracao.data.hrs_media);
+    setMediaHorasFiltradas(horasDuracao.data.hrs_media);
   };
 
   useEffect(() => {
@@ -142,9 +142,6 @@ function ModalAdicionarAtividade({
       registerForm.setFieldValue("data_fim", new Date(dataFinalAtividade));
     }
   }, [dataFinalAtividade]);
-
-  // console.log("registerForm", registerForm.values);
-  // console.log("dataFinalAtividade", dataFinalAtividade);
 
   const handleCancelarModal = () => {
     registerForm.resetForm();
@@ -214,7 +211,7 @@ function ModalAdicionarAtividade({
                         required={true}
                       />
                     </Flex>
-                    <ModalFiltrarAtividade
+                    <ModalFiltrarDuracaoMedia
                       operacaoId={registerForm.values.operacao_id}
                       setMediaHorasFiltradas={setMediaHorasFiltradas}
                     />

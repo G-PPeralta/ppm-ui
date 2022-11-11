@@ -16,11 +16,7 @@ export const cadastroValorPlanejadoSchema = yup.object({
     .required("Data é Requerida"),
   fornecedor: yup.string().required("Fornecedor é Requerido"),
   servico: yup.string().required("Servico é Requerido"),
-  pedido: yup
-    .string()
-    .required("Servico é Requerido")
-    .max(100, "Maximo 100 caracteres")
-    .matches(/^[a-zA-Z0-9]+$/, "O campo precisa ser alfanumerico."),
+  pedido: yup.number().required("Pedido é Requerido").moreThan(0),
   pedido_obs: yup
     .string()
     .required("Txt do pedido  é requerido.")

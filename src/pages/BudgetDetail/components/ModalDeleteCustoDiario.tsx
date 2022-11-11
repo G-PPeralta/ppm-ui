@@ -85,7 +85,7 @@ function ModalDeleteCustoDiario(props: PropsInterface) {
                   <Flex>
                     <Text
                       // textAlign={"center"}
-                      fontSize={"24px"}
+                      fontSize={"20px"}
                       mb={"1px"}
                       color={"#010101"}
                       fontWeight={"400"}
@@ -107,7 +107,7 @@ function ModalDeleteCustoDiario(props: PropsInterface) {
                 color="red.500"
                 onClick={onClose}
                 _hover={{
-                  background: "red.500",
+                  background: "red.600",
                   transition: "all 0.4s",
                   color: "white",
                 }}

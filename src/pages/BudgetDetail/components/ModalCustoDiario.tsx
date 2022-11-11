@@ -1,8 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import { useEffect, useState } from "react";
-// import { GrAddCircle } from "react-icons/gr";
-import { BsSearch } from "react-icons/bs";
-// import { FiChevronDown } from "react-icons/fi";
+import { BsSearch, BsFillEyeFill } from "react-icons/bs";
 import Moment from "react-moment";
 import "moment/locale/pt-br";
 
@@ -27,6 +25,7 @@ import {
   Tr,
   Td,
   Input,
+  IconButton,
 } from "@chakra-ui/react";
 // import { Ring } from "@uiball/loaders";
 import { BudgetDetail, CustoDiario } from "interfaces/Budgets";
@@ -44,6 +43,7 @@ import ModalEditarGestaoDeCusto from "./ModalEditarGestaoDeCusto";
 function ModalCustoDiario(props: {
   filho?: BudgetDetail;
   pai?: BudgetDetail;
+  showButton?: boolean;
   toogleRender: () => void;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -51,7 +51,7 @@ function ModalCustoDiario(props: {
   const [endDate, setEndDate] = useState<Date | string | null>(null);
   // const [loading, setLoading] = useState(true); // Loading
   const [data, setData] = useState<CustoDiario[]>([]);
-  const { filho, pai, toogleRender } = props;
+  const { filho, pai, toogleRender, showButton } = props;
 
   const wd = window.innerWidth;
 
@@ -137,9 +137,45 @@ function ModalCustoDiario(props: {
 
   return (
     <>
-      <Text style={{ cursor: "pointer" }} onClick={onOpen}>
+      {showButton === false && (
+        <IconButton
+          icon={<BsFillEyeFill />}
+          onClick={onOpen}
+          variant="outline"
+          aria-label="open menu"
+          color={"white"}
+          backgroundColor={"transparent"}
+          _hover={{
+            backgroundColor: "transparent",
+            color: "white",
+          }}
+          border={"none"}
+          alignSelf={"center"}
+        ></IconButton>
+      )}
+
+      {showButton === true && (
+        <IconButton
+          hidden
+          onClick={onOpen}
+          variant="outline"
+          aria-label="open menu"
+          color={"white"}
+          backgroundColor={"transparent"}
+          _hover={{
+            backgroundColor: "transparent",
+            color: "white",
+          }}
+          border={"none"}
+          alignSelf={"center"}
+        ></IconButton>
+      )}
+
+      {formatReal(filho ? filho.realizado : pai ? pai.realizado : 0)}
+
+      {/* <Text style={{ cursor: "pointer" }} onClick={onOpen}>
         {formatReal(filho ? filho.realizado : pai ? pai.realizado : 0)}
-      </Text>
+      </Text> */}
 
       <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />

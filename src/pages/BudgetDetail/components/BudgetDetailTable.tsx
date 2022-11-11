@@ -88,7 +88,11 @@ export function BudgetDetailTable(props: PropsInterface) {
         <Td></Td>
         <Td textAlign="right">{formatReal(detail.planejado)}</Td>
         <Td textAlign="right">
-          <ModalCustoDiario pai={detail} toogleRender={toogleRender} />
+          <ModalCustoDiario
+            pai={detail}
+            toogleRender={toogleRender}
+            showButton={false}
+          />
         </Td>
         <Td></Td>
       </Tr>
@@ -100,23 +104,23 @@ export function BudgetDetailTable(props: PropsInterface) {
             <Td>{filho.projeto.nome}</Td>
             <Td>{filho.fornecedor}</Td>
             <Td textAlign="right">
-              <Flex alignItems={"center"} justifyContent="center">
-                {formatReal(filho.planejado)}{" "}
-                <ModalValorPrevisto
-                  projeto={filho.projeto}
-                  toogleRender={toogleRender}
-                  value={filho.planejado.toFixed(2).toString() || ""}
-                />
-              </Flex>
+              <ModalValorPrevisto
+                projeto={filho.projeto}
+                toogleRender={toogleRender}
+                value={filho.planejado.toFixed(2).toString() || ""}
+              />
+              {formatReal(filho.planejado)}{" "}
             </Td>
             <Td textAlign="right">
-              <Flex alignItems={"center"} justifyContent="center">
-                <ModalCustoDiario filho={filho} toogleRender={toogleRender} />
-                <ModalAdicionarGestaoDeCusto
-                  projeto={filho.projeto}
-                  toogleRender={toogleRender}
-                />
-              </Flex>
+              <ModalAdicionarGestaoDeCusto
+                projeto={filho.projeto}
+                toogleRender={toogleRender}
+              />
+              <ModalCustoDiario
+                filho={filho}
+                toogleRender={toogleRender}
+                showButton={true}
+              />
             </Td>
             <Td align="center">{filho.gap}%</Td>
           </Tr>
@@ -154,8 +158,12 @@ export function BudgetDetailTable(props: PropsInterface) {
               <Th color={"white"}>BRT</Th>
               <Th color={"white"}>Serviço/Compra</Th>
               <Th color={"white"}>Fornecedor</Th>
-              <Th color={"white"}>R$ Previsto</Th>
-              <Th color={"white"}>R$ Realizado</Th>
+              <Th color={"white"} textAlign="right">
+                R$ Previsto
+              </Th>
+              <Th color={"white"} textAlign="right">
+                R$ Realizado
+              </Th>
               <Th color={"white"}>% Gap</Th>
             </Tr>
           </Thead>
