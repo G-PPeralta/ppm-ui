@@ -81,7 +81,7 @@ const childrenConfiguracoes = [
     link: "/licoesAprendidas",
   },
   { name: "Priorização", icon: MdPriorityHigh, link: "/priorizacao" },
-  { name: "Lixeira", icon: FiTrash2, link: "/desenvolvimento" },
+  { name: "Lixeira", icon: FiTrash2, link: "/trash" },
 ];
 
 export const LinkItems: Array<LinkItemProps> = [
