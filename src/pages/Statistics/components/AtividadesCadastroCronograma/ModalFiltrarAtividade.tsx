@@ -15,6 +15,7 @@ import {
   NumberInputField,
   NumberInput,
   Button,
+  IconButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -100,7 +101,19 @@ export function ModalFiltrarAtividade({
 
   return (
     <>
-      <MdFilterAlt onClick={onOpen} color="#0047BB" size="22px" />
+      <IconButton
+        onClick={onOpen}
+        color={"#0047BB"}
+        fontWeight={"700"}
+        backgroundColor={"transparent"}
+        aria-label="Plus sign"
+        _hover={{
+          backgroundColor: "#0047BB",
+          color: "white",
+        }}
+      >
+        <MdFilterAlt />
+      </IconButton>
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
         <ModalContent>
