@@ -390,7 +390,7 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
                 //     progress: microatividade.progresso,
                 //   })),
                 // }))}
-                toolbar={toolbarOptions || []}
+                toolbar={["ZoomIn", "ZoomOut"]}
                 renderBaseline={true}
                 baselineColor="red"
                 editSettings={{
