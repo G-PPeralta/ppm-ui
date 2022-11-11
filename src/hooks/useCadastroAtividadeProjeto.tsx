@@ -69,13 +69,11 @@ export function useCadastroAtividadeProjeto(
   const initialValues = {
     nom_usu_create: user?.nome,
     id_projeto: 0,
-    id_origem: "",
     nom_atividade: "",
     responsavel_id: 0,
     relacao_id: 0,
     dat_inicio_plan: "",
     duracao_plan: 0,
-    area_atuacao: "",
     nao_iniciar_antes_de: {
       data: "",
       checked: false,
@@ -102,11 +100,9 @@ export function useCadastroAtividadeProjeto(
       const newValues = {
         nom_usu_create: user?.nome,
         id_projeto: values.id_projeto,
-        id_origem: values.id_origem,
         nom_atividade: values.nom_atividade,
         responsavel_id: values.responsavel_id,
         relacao_id: values.relacao_id,
-        area_atuacao: values.area_atuacao,
         dat_inicio_plan: newDate,
         duracao_plan: values.duracao_plan - 1,
         nao_iniciar_antes_de: values.nao_iniciar_antes_de,
