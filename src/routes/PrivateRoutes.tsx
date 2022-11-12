@@ -30,7 +30,9 @@ import { Settings } from "pages/Settings";
 import { ShareRegister } from "pages/ShareRegister";
 import { Statistics } from "pages/Statistics";
 import { StatisticsGantt } from "pages/StatisticsGantt";
-// import { UploadSheet } from "pages/UploadSheet";
+import { RegisteredList } from "pages/Trash";
+import { ActionItems } from "pages/Trash/actionItems";
+import { Trash } from "pages/Trash/trash";
 import { Usuarios } from "pages/Usuarios";
 import VisaoPorArea from "pages/VisaoPorArea";
 
@@ -90,6 +92,9 @@ export function PrivateRoutes() {
         element={<CentroDeCustoProjetos />}
       />
       <Route path="/priorizacao" element={<Priorizacao />} />
+      <Route path="/registered-list" element={<RegisteredList />} />
+      <Route path="/actions/:id" element={<ActionItems />} />
+      <Route path="/trash" element={<Trash />} />
       <Route path="/priorizacao-diretores" element={<PriorizacaoDiretores />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
