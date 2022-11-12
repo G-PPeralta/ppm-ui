@@ -11,3 +11,16 @@ export async function deleteProject(
 }
 
 // DELETE /projetos-ranking/:id/:user ???????
+
+/**
+ * Deletar Atividade do gantt de projetos e os seus nós filhos
+ * @param id
+ * @returns
+ */
+export async function deleteAtividade(
+  id: number
+): Promise<{ data: any; status: number }> {
+  const { data, status } = await api.delete(`/gantt/${id}`);
+
+  return { data, status };
+}
