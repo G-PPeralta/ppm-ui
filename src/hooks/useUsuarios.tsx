@@ -21,7 +21,8 @@ export function useCadastroUsuario() {
     email: "",
     nome: "",
     telefone: "",
-    roleId: 0,
+    // Back nõo espera uma chave role, como saber o nível de permissão do usuário cadastrado?
+    // roleId: 0,
     senha: "",
   };
 
@@ -33,7 +34,7 @@ export function useCadastroUsuario() {
         areaAtuacao: values.areaAtuacao,
         email: values.email,
         nome: values.nome,
-        roleId: values.roleId,
+        // roleId: values.roleId,
         telefone: values.telefone,
         senha: values.senha,
       };

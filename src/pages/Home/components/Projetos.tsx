@@ -31,7 +31,7 @@ export default function NaoPrevistoComponent() {
     handleGetProjetos();
   }, []);
 
-  // console.log(projetos);
+  console.log(projetos);
 
   // const data = {
   //   id: 1,
@@ -160,7 +160,7 @@ export default function NaoPrevistoComponent() {
                       </Text>
                     </Th>
                     <Th>
-                      {projeto.vlr_cpi_corrigido == 1 ? (
+                      {projeto.vlr_cpi == 1 ? (
                         <Box
                           w={5}
                           h={5}
@@ -191,7 +191,7 @@ export default function NaoPrevistoComponent() {
                       )}
                     </Th>
                     <Th>
-                      {projeto.vlr_spi_corrigido == 1 ? (
+                      {projeto.vlr_spi == 1 ? (
                         <Box
                           w={5}
                           h={5}

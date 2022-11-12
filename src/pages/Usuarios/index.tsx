@@ -17,7 +17,7 @@ import Sidebar from "components/SideBar";
 
 import { useToast } from "contexts/Toast";
 
-import { getUsers } from "services/post/Usuario";
+// import { getUsers } from "services/post/Usuario";
 
 import { BotaoAdicionar } from "./components/AdicionarUsuario";
 import { BotaoAtualizar } from "./components/AtualizarUsuario";
@@ -126,9 +126,10 @@ export function Usuarios() {
   };
   // console.log(permissao);
 
-  useEffect(() => {
-    getUsers();
-  }, [users]);
+  // AINDA NÃO INTEGRADO
+  // useEffect(() => {
+  //   getUsers();
+  // }, [users]);
 
   return (
     <>
