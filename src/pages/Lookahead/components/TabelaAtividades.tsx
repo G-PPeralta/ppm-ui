@@ -168,7 +168,7 @@ export function TabelaAtividades(props: TableProps) {
                   justifyContent="space-between"
                   alignItems="center"
                 >
-                  <Text>Atividade</Text>
+                  <Text>Atividades</Text>
                   {atividades && (
                     <CSVLink
                       data={atividades}
