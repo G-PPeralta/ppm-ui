@@ -42,10 +42,10 @@ function ModalDeletar({
 
   const remove = async () => {
     try {
-      if (!id) throw new Error("Erro ao remover operação!");
+      if (!id) throw new Error("Erro ao remover atividade!");
       const { status } = await deleteAtividade(id);
       if (status === 200 || status === 201) {
-        toast.success("Operação removida com sucesso!", {
+        toast.success("Atividade removida com sucesso!", {
           id: "toast-principal",
         });
         setRefreshGanttDelete(!refreshGanttDelete);
@@ -54,7 +54,7 @@ function ModalDeletar({
         onClose();
       }
     } catch (error) {
-      toast.error("Erro ao remover operação!", {
+      toast.error("Erro ao remover atividade!", {
         id: "toast-principal",
       });
       setLoading(false);
