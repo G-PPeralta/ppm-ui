@@ -68,7 +68,9 @@ export function ActivitiesSchedule() {
     }
   }, [atividades]);
 
-  const subTitulo = `${state.poco.sonda} (${state.poco.poco})`;
+  const subTitulo = `${state.poco.sonda.split(" - ")[1]} (${
+    state.poco.poco.split(" - ")[1]
+  })`;
 
   return (
     <>
