@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
 
+import { Flex } from "@chakra-ui/react";
 import {
   GanttComponent,
   Inject,
   Edit,
   Toolbar,
 } from "@syncfusion/ej2-react-gantt";
+import { Ring } from "@uiball/loaders";
 
-import { getGanttData } from "services/get/Gantt";
+import { getAllGanttData } from "services/get/Gantt";
 
 import "./gantt.css";
 
-type ganttOptionsProps = {
-  id?: number;
-};
-
-export function Gantt({ id }: ganttOptionsProps) {
-  // const [loading, setLoading] = useState(true);
+export function Gantt() {
+  const [loading, setLoading] = useState(true);
   // const [refresh, setRefresh] = useState(false);
   const [gantt, setGantt] = useState<any[]>([]);
 
@@ -27,11 +25,10 @@ export function Gantt({ id }: ganttOptionsProps) {
   };
 
   async function handleSetGanttData() {
-    if (id) {
-      const reqGanttData = await getGanttData(Number(id));
-      if (!reqGanttData) return;
-      setGantt(reqGanttData.data);
-    }
+    const reqGanttData = await getAllGanttData();
+    if (!reqGanttData) return;
+    setGantt(reqGanttData.data);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -40,8 +37,11 @@ export function Gantt({ id }: ganttOptionsProps) {
 
   return (
     <>
-      {/* {!loading && ( */}
-      <>
+      {loading ? (
+        <Flex justify={"center"} gap={4} w={"100%"}>
+          <Ring speed={2} lineWeight={5} color="blue" size={24} />
+        </Flex>
+      ) : (
         <GanttComponent
           id="gantt-control"
           dataSource={gantt}
@@ -151,8 +151,7 @@ export function Gantt({ id }: ganttOptionsProps) {
             ></footer> */}
           <Inject services={[Edit, Toolbar]} />
         </GanttComponent>
-      </>
-      {/* )} */}
+      )}
     </>
   );
 }
