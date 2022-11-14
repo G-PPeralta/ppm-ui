@@ -92,8 +92,6 @@ function ModalCadastroAtividadeIntervencao({
     }
   }, [registerForm.values]);
 
-  console.log("registerForm", registerForm.values);
-
   return (
     <>
       <Button
@@ -274,13 +272,28 @@ function ModalCadastroAtividadeIntervencao({
                   </Flex>
 
                   <Flex flex={1}>
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"ÁREA"}
-                      propName={"area_atuacao"}
-                      options={areaAtuacaoOptions}
-                      required={true}
-                    />
+                    {registerForm.values.area_atuacao === 0 ? (
+                      <InputCadastroInline
+                        required={true}
+                        refreshState={hookRefreshState}
+                        registerForm={registerForm}
+                        listaOptions={responsaveisOptions}
+                        nomeLabel={"ÁREA"}
+                        payloadKey={"nome"}
+                        propName={"area_atuacao"}
+                        rota={"/nova-atividade/area/outros"}
+                        respOuCoord={false}
+                      />
+                    ) : (
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"ÁREA"}
+                        propName={"area_atuacao"}
+                        options={areaAtuacaoOptions}
+                        required={true}
+                        value={getValue(areaAtuacaoOptions, "area_atuacao")}
+                      />
+                    )}
                   </Flex>
                 </Flex>
 

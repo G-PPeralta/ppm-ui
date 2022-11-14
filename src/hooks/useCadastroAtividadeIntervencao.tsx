@@ -59,6 +59,10 @@ export function useCadastroAtividadeIntervencao() {
       a.tipo.localeCompare(b.tipo)
     );
 
+    const areasComOutrosAoFinalArray = addOutroFinalArray(
+      areasAtuacaoSorted,
+      "tipo"
+    );
     const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
       a.nome.localeCompare(b.nome)
     );
@@ -76,7 +80,7 @@ export function useCadastroAtividadeIntervencao() {
     );
 
     setListaArea(areasSorted);
-    setListaAreaAtuacao(areasAtuacaoSorted);
+    setListaAreaAtuacao(areasComOutrosAoFinalArray);
     setListaResponsaveis(responsaveisComOutrosAoFinalArray);
     setListaAtividades(atividadesComOutrosAoFinalArray);
   };
@@ -93,7 +97,7 @@ export function useCadastroAtividadeIntervencao() {
     id_origem: "",
     nom_atividade: "",
     responsavel_id: -1,
-    area_atuacao: 0,
+    area_atuacao: -1,
     duracao: 0,
     atividade_id: -1,
     nao_iniciar_antes_de: {

@@ -80,7 +80,7 @@ function InputCadastroInline({
   };
 
   return (
-    <Flex alignItems={"start"} direction={"column"} flex={1}>
+    <Flex alignItems={"stretch"} direction={"column"} w={"100%"}>
       {nomeLabel && (
         <Flex gap={1}>
           {required && <RequiredField />}
