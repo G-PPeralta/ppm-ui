@@ -149,21 +149,25 @@ export function TabelaAtividades(props: TableProps) {
 
   return (
     <Flex>
-      <TableContainer mt={4} mb={3} ml={1} width="100%">
-        <Table variant="unstyled" size={"sm"}>
+      <TableContainer mt={4} mb={3} ml={1} width="100%" borderRadius={"10px"}>
+        <Table colorScheme={"strippedGray"}>
           <Thead>
             <Tr
               backgroundColor={"#0047BB"}
               color="white"
-              border="none 0px !important"
+              // border="none 0px !important"
             >
               <Th
                 colSpan={8}
-                border="none 0px !important"
-                borderTopLeftRadius="10px"
-                borderTopRightRadius="10px"
+                // border="none 0px !important"
+                // borderTopLeftRadius="10px"
+                // borderTopRightRadius="10px"
               >
-                <Flex justifyContent="space-between" alignItems="center">
+                <Flex
+                  color="white"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
                   <Text>Atividade</Text>
                   {atividades && (
                     <CSVLink
@@ -192,10 +196,18 @@ export function TabelaAtividades(props: TableProps) {
               </Th>
             </Tr>
             <Tr backgroundColor={"#0047BB"} color="white">
-              <Th>BRT</Th>
+              <Th color="white" textAlign={"center"}>
+                BRT
+              </Th>
               {dias &&
                 dias.map(function (x) {
-                  return <Th>{`${x.label}`}</Th>;
+                  return (
+                    <Th
+                      color="white"
+                      textAlign={"center"}
+                      width="146px"
+                    >{`${x.label}`}</Th>
+                  );
                 })}
             </Tr>
           </Thead>
@@ -209,7 +221,7 @@ export function TabelaAtividades(props: TableProps) {
                     backgroundColor={indice % 2 == 1 ? "#F9F9F9" : "#FFF"}
                     key={indice}
                   >
-                    <Td width="146px" height="56px">
+                    <Td textAlign={"center"} width="146px" height="56px">
                       {hora}
                     </Td>
                     {dias.map(function (dia) {
@@ -238,7 +250,7 @@ export function TabelaAtividades(props: TableProps) {
                       const nomeServ = arrayS ? arrayS.join(" ") : "";
                       const nomeFerr = arrayF ? arrayF.join(" ") : "";
                       return (
-                        <Td width="146px" height="56px">
+                        <Td textAlign={"center"} width="146px" height="56px">
                           <>
                             {nomeServ && (
                               <>
