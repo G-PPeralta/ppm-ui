@@ -43,6 +43,9 @@ function DateTimePickerDataInicio({ registerForm, data }: any) {
         variant="outline"
         px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
         minW={useBreakpointValue({ base: "180px", sm: "180px", md: "220px" })}
+        fontSize={"14px"}
+        fontWeight={"700"}
+        fontFamily={"Mulish"}
       >
         {value === "" ? "Selecione a data" : value}
       </Button>
@@ -53,7 +56,7 @@ function DateTimePickerDataInicio({ registerForm, data }: any) {
     <Flex direction={"column"}>
       <Flex gap={1}>
         <RequiredField />
-        <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
+        <Text fontWeight={"700"} fontSize={"12px"} color={"#949494"}>
           DATA INÍCIO
         </Text>
       </Flex>
