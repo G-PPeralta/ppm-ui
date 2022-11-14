@@ -31,7 +31,7 @@ export default function NaoPrevistoComponent() {
     handleGetProjetos();
   }, []);
 
-  console.log(projetos);
+  // console.log(projetos);
 
   // const data = {
   //   id: 1,
