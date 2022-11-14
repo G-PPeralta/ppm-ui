@@ -139,7 +139,7 @@ function CadastrarLicoesAprendidasModal({
                 variant="primary"
                 color="#F40606"
                 _hover={{
-                  background: "red.500",
+                  background: "red.600",
                   transition: "all 0.4s",
                   color: "white",
                 }}
@@ -154,11 +154,11 @@ function CadastrarLicoesAprendidasModal({
               <Button
                 width={"208px"}
                 height={"56px"}
-                background="#0047BB"
+                background="origem.500"
                 variant="primary"
                 color="white"
                 _hover={{
-                  background: "origem.500",
+                  background: "origem.600",
                   transition: "all 0.4s",
                 }}
                 fontSize="18px"
