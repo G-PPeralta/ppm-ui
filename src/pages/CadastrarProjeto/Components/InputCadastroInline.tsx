@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
 import { BsPlusLg } from "react-icons/bs";
 
 import { Flex, IconButton, Input, Text } from "@chakra-ui/react";
@@ -73,6 +74,11 @@ function InputCadastroInline({
     }
   };
 
+  const handleCancelar = () => {
+    setCadastroOutro("");
+    registerForm.setFieldValue(`${propName}`, -1);
+  };
+
   return (
     <Flex alignItems={"start"} direction={"column"} flex={1}>
       {nomeLabel && (
@@ -83,7 +89,7 @@ function InputCadastroInline({
           </Text>
         </Flex>
       )}
-      <Flex align={"center"} gap={2} flex={1}>
+      <Flex align={"center"} gap={1} flex={1}>
         <Input
           placeholder="Outro"
           id={propName}
@@ -105,6 +111,27 @@ function InputCadastroInline({
           isRound={true}
           size="sm"
           onClick={() => handleClick()}
+          _hover={{
+            background: "origem.500",
+            transition: "all 0.4s",
+            cursor: "pointer",
+          }}
+        />
+        <IconButton
+          isRound
+          variant={"secondary"}
+          size={"sm"}
+          aria-label="Botão excluir anexo"
+          color="white"
+          background="red.500"
+          _hover={{
+            background: "red.600",
+            transition: "all 0.4s",
+            color: "white",
+            size: "md",
+          }}
+          icon={<AiOutlineClose />}
+          onClick={() => handleCancelar()}
         />
       </Flex>
     </Flex>

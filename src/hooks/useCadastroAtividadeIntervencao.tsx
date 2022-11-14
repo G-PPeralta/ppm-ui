@@ -12,11 +12,13 @@ import { addOutroFinalArray } from "utils/AdicionaOpcaoOutroAoFinalArray";
 
 import { useToast } from "contexts/Toast";
 
-import { getArea } from "services/get/CadastroModaisInfograficos";
+import {
+  getArea,
+  getResponsaveis,
+} from "services/get/CadastroModaisInfograficos";
 import {
   getAreaAtuacaoList,
   getNovaAtividadesTarefas,
-  getResponsavelList,
 } from "services/get/Infograficos";
 import { postCadastroAtividadeIntervencao } from "services/post/Infograficos";
 
@@ -42,8 +44,8 @@ export function useCadastroAtividadeIntervencao() {
   const reqGet = async () => {
     const areas = await getArea();
     const areaAtuacao = await getAreaAtuacaoList();
-    const responsaveis = await getResponsavelList();
     const atividades = await getNovaAtividadesTarefas();
+    const responsaveis = await getResponsaveis();
 
     const arrayAreas = areas.data.map(({ id, nom_area }: any) => ({
       id,
@@ -60,6 +62,10 @@ export function useCadastroAtividadeIntervencao() {
     const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
       a.nome.localeCompare(b.nome)
     );
+    const responsaveisComOutrosAoFinalArray = addOutroFinalArray(
+      responsaveisSorted,
+      "nome"
+    );
 
     const atividadesSorted = atividades.data.sort((a, b) =>
       a.nom_atividade.localeCompare(b.nom_atividade)
@@ -71,7 +77,7 @@ export function useCadastroAtividadeIntervencao() {
 
     setListaArea(areasSorted);
     setListaAreaAtuacao(areasAtuacaoSorted);
-    setListaResponsaveis(responsaveisSorted);
+    setListaResponsaveis(responsaveisComOutrosAoFinalArray);
     setListaAtividades(atividadesComOutrosAoFinalArray);
   };
 
@@ -86,7 +92,7 @@ export function useCadastroAtividadeIntervencao() {
     id_intervencao: 0,
     id_origem: "",
     nom_atividade: "",
-    responsavel_id: 0,
+    responsavel_id: -1,
     area_atuacao: 0,
     duracao: 0,
     atividade_id: -1,
