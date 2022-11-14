@@ -19,19 +19,23 @@ import {
 
 import { useToast } from "contexts/Toast";
 
-import { deleteOperacaoCronograma } from "services/delete/Estatisticas";
+import { deleteAtividade } from "services/delete/DeleteProject";
 type ModalDeletarProps = {
   id: number;
+  isParent: boolean;
   setLoading: Function;
-  callbackSetRefresh: Function;
-  handleGetAllData: any;
+  refreshGanttDelete: boolean;
+  setRefreshGanttDelete: Function;
+  handleSetGanttData: Function;
 };
 
 function ModalDeletar({
   id,
+  isParent,
   setLoading,
-  callbackSetRefresh,
-  handleGetAllData,
+  refreshGanttDelete,
+  setRefreshGanttDelete,
+  handleSetGanttData,
 }: ModalDeletarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { toast } = useToast();
@@ -39,14 +43,14 @@ function ModalDeletar({
   const remove = async () => {
     try {
       if (!id) throw new Error("Erro ao remover operação!");
-      const { status } = await deleteOperacaoCronograma(id);
+      const { status } = await deleteAtividade(id);
       if (status === 200 || status === 201) {
         toast.success("Operação removida com sucesso!", {
           id: "toast-principal",
         });
-        callbackSetRefresh();
+        setRefreshGanttDelete(!refreshGanttDelete);
+        handleSetGanttData();
         setLoading(false);
-        handleGetAllData();
         onClose();
       }
     } catch (error) {
@@ -109,7 +113,9 @@ function ModalDeletar({
                       color={"#010101"}
                       fontWeight={"400"}
                     >
-                      Tem certeza que deseja mover este item para a Lixeira?
+                      {isParent
+                        ? "Esse item possui filhos relacionados. Essa ação irá mover todos para a lixeira. Tem certeza que deseja prosseguir?"
+                        : "Tem certeza que deseja mover este item para a Lixeira?"}
                     </Text>
                   </Flex>
                 </Stack>

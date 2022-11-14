@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
 import { BiExpand } from "react-icons/bi";
 
 import {
@@ -17,34 +16,37 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import {
+  ColumnsDirective,
+  ColumnDirective,
   GanttComponent,
   Inject,
   Edit,
   Toolbar,
 } from "@syncfusion/ej2-react-gantt";
-// import { IGantt } from "interfaces/Services";
 
 import { useEditarAtividadeGantt } from "hooks/useEditarAtividadeGantt";
 
 import { getGanttData } from "services/get/Gantt";
 
 import ModalCadastroAtividades from "../ModalCadastroAtividades";
+import ModalDeletar from "../ModalDeletar";
 import ModalEditarAtividade from "../ModalEditarAtividade";
+
 import "./gantt.css";
 
 type ganttOptionsProps = {
   ganttOptions?: any;
-  toolbarOptions?: string[];
   idProjeto?: number;
 };
 
-export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
+export function Gantt({ idProjeto: id }: ganttOptionsProps) {
   // const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [gantt, setGantt] = useState<any[]>([]);
   const [expandGantt, setExpandGantt] = useState(false);
   const [refresh, setRefresh] = useState(false);
   const [refreshGanttCriacao, setRefreshGanttCriacao] = useState(false);
+  const [refreshGanttDelete, setRefreshGanttDelete] = useState(false);
 
   const {
     registerForm,
@@ -63,6 +65,24 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
       // args.row.style.backgroundColor = "red";
     }
   };
+
+  const actionsTemplate = (props: any) => (
+    <Flex
+      // w={"100%"}
+      // style={{ position: "relative", top: "-8px" }}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
+      <ModalDeletar
+        id={props.TaskID}
+        isParent={props.hasChildRecords}
+        setLoading={setLoading}
+        refreshGanttDelete={refreshGanttDelete}
+        setRefreshGanttDelete={setRefreshGanttDelete}
+        handleSetGanttData={handleSetGanttData}
+      />
+    </Flex>
+  );
 
   async function handleSetGanttData() {
     if (id) {
@@ -83,7 +103,7 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
 
   useEffect(() => {
     handleSetGanttData();
-  }, [refreshGant, refreshGanttCriacao]);
+  }, [refreshGant, refreshGanttCriacao, refreshGanttDelete]);
 
   // useEffect(() => {
   //   setGantt(ganttDataLocal);
@@ -222,7 +242,7 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
           //     progress: microatividade.progresso,
           //   })),
           // }))}
-          toolbar={toolbarOptions || []}
+          toolbar={["ZoomIn", "ZoomOut"]}
           renderBaseline={true}
           baselineColor="red"
           editSettings={{
@@ -243,78 +263,69 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
           }}
           rowDataBound={rowDataBound}
           height={"100vh"}
-          columns={[
-            { field: "Item", type: "string" },
-            {
-              field: "TaskID",
-              headerText: "ID",
-              visible: false,
-            },
-            {
-              field: "TaskName",
-              headerText: "Ação/Projeto",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              type: "string",
-            },
-            {
-              field: "StartDate",
-              headerText: "Início real",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "dd/MM/yyyy",
-            },
-            {
-              field: "EndDate",
-              headerText: "Fim real",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "dd/MM/yyyy",
-            },
-            // {
-            //   field: "BaselineStartDate",
-            //   headerText: "Início planejado",
-            //   headerTextAlign: "Center",
-            //   textAlign: "Center",
-            //   format: "dd/MM/yyyy",
-            //   type: "date",
-            // },
-            // {
-            //   field: "BaselineEndDate",
-            //   headerText: "Fim planejado",
-            //   headerTextAlign: "Center",
-            //   textAlign: "Center",
-            //   format: "dd/MM/yyyy",
-            //   type: "date",
-            // },
-            {
-              field: "Duration",
-              headerText: "Duração",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-            },
-            {
-              field: "Progress",
-              headerText: "Progresso (%)",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-              format: "n",
-            },
-            {
-              field: "Predecessor",
-              headerText: "Predecessor",
-              headerTextAlign: "Center",
-              textAlign: "Center",
-            },
-          ]}
         >
-          {/* <footer
-              style={{
-                background: "white",
-                height: "2px",
-                borderRadius: "8px",
-              }}
-            ></footer> */}
+          <ColumnsDirective>
+            <ColumnDirective field="Item" type="string"></ColumnDirective>
+            <ColumnDirective
+              field="TaskID"
+              headerText="ID"
+              visible={false}
+              headerTextAlign="Center"
+              textAlign="Center"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="acao"
+              headerText="Ação"
+              headerTextAlign="Center"
+              textAlign="Center"
+              width="100"
+              template={actionsTemplate}
+            ></ColumnDirective>
+            <ColumnDirective
+              field="TaskName"
+              headerText="Ação/Projeto"
+              headerTextAlign="Center"
+              textAlign="Center"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="StartDate"
+              headerText="Início real"
+              headerTextAlign="Center"
+              textAlign="Center"
+              type="date"
+              format="dd/MM/yyyy"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="EndDate"
+              headerText="Fim real"
+              headerTextAlign="Center"
+              textAlign="Center"
+              type="date"
+              format="dd/MM/yyyy"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="Duration"
+              headerText="Duração"
+              headerTextAlign="Center"
+              textAlign="Center"
+              // type="number"
+              // format="N"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="Progress"
+              headerText="Progresso (%)"
+              headerTextAlign="Center"
+              textAlign="Center"
+              // type="number"
+              format="N"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="Predecessor"
+              headerText="Predecessor"
+              headerTextAlign="Center"
+              textAlign="Center"
+            ></ColumnDirective>
+          </ColumnsDirective>
           <Inject services={[Edit, Toolbar]} />
         </GanttComponent>
         <Modal
@@ -390,7 +401,7 @@ export function Gantt({ toolbarOptions, idProjeto: id }: ganttOptionsProps) {
                 //     progress: microatividade.progresso,
                 //   })),
                 // }))}
-                toolbar={toolbarOptions || []}
+                toolbar={["ZoomIn", "ZoomOut"]}
                 renderBaseline={true}
                 baselineColor="red"
                 editSettings={{

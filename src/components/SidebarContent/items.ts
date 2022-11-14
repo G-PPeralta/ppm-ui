@@ -6,7 +6,7 @@ import {
   FiHome,
   FiBarChart,
   FiActivity,
-  FiFile,
+  // FiFile,
   FiTrash2,
   FiSettings,
 } from "react-icons/fi";
@@ -34,7 +34,7 @@ const childrenCarteiradeProjetos = [
     icon: FaRegMoneyBillAlt,
     link: "/financeiro-projetos",
   },
-  { name: "Relatórios", icon: FiFile, link: "/reports" },
+  // { name: "Relatórios", icon: FiFile, link: "/reports" },
   // {
   //   name: "Priorização Diretores",
   //   icon: IoMdPodium,
@@ -81,7 +81,7 @@ const childrenConfiguracoes = [
     link: "/licoesAprendidas",
   },
   { name: "Priorização", icon: MdPriorityHigh, link: "/priorizacao" },
-  { name: "Lixeira", icon: FiTrash2, link: "/desenvolvimento" },
+  { name: "Lixeira", icon: FiTrash2, link: "/registered-list" },
 ];
 
 export const LinkItems: Array<LinkItemProps> = [

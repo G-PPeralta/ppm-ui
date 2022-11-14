@@ -122,7 +122,7 @@ export async function getArquivoPdf(nomeArquivo: string): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get(`pdf/${nomeArquivo}`, token());
+  const { data, status } = await api.get(`/pdf/${nomeArquivo}`, token());
 
   return { data, status };
 }

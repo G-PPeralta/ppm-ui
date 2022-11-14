@@ -1,7 +1,7 @@
 import { api, token } from "services/api";
 
 export async function getUsers(): Promise<{ status: number }> {
-  const { status } = await api.get("/user");
+  const { status } = await api.get("/user", token());
   return { status };
 }
 
@@ -14,6 +14,6 @@ export async function updateUser(
   payload: any,
   id: number
 ): Promise<{ status: number }> {
-  const { status } = await api.put(`/user/${id}`, payload);
+  const { status } = await api.put(`/user/${id}`, payload, token());
   return { status };
 }

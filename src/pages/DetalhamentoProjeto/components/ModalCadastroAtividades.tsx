@@ -56,17 +56,12 @@ function ModalCadastroAtividades({
   idProjeto,
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    registerForm,
-    loading,
-    listaResponsaveis,
-    listaAreaAtuacao,
-    listaAtividadesRelacao,
-  } = useCadastroAtividadeProjeto(
-    refreshGanttCriacao,
-    setRefreshGanttCriacao,
-    idProjeto
-  );
+  const { registerForm, loading, listaResponsaveis, listaAtividadesRelacao } =
+    useCadastroAtividadeProjeto(
+      refreshGanttCriacao,
+      setRefreshGanttCriacao,
+      idProjeto
+    );
 
   const responsaveisOptions = listaResponsaveis.map(
     (responsavel: Responsavel) => ({
@@ -74,11 +69,6 @@ function ModalCadastroAtividades({
       label: responsavel.nome,
     })
   );
-
-  const areaAtuacaoOptions = listaAreaAtuacao.map((area: any) => ({
-    value: area.id,
-    label: area.tipo,
-  }));
 
   const relacoesOptions = listaAtividadesRelacao.map((atividade: any) => ({
     value: atividade.id,
@@ -145,35 +135,6 @@ function ModalCadastroAtividades({
                 <Flex flex={1} direction={"column"}>
                   {/* <Text fontWeight={"bold"}>Nome</Text> */}
                   <Flex gap={5} flex={1}>
-                    <Flex direction={"column"} flex={1}>
-                      <Flex gap={1}>
-                        <RequiredField />
-                        <Text
-                          fontWeight={"700"}
-                          fontSize={"12px"}
-                          color={"#949494"}
-                        >
-                          ID
-                        </Text>
-                      </Flex>
-                      <Input
-                        h={"56px"}
-                        isRequired
-                        placeholder="Digite o ID"
-                        id="id_origem"
-                        type="text"
-                        name="id_origem"
-                        w={useBreakpointValue({
-                          base: "100%",
-                          md: "100%",
-                        })}
-                        value={regexCaracteresEspeciais(
-                          registerForm.values.id_origem
-                        )}
-                        onChange={registerForm.handleChange}
-                        maxLength={10}
-                      />
-                    </Flex>
                     <Flex direction={"column"} flex={2}>
                       <Flex gap={1}>
                         <RequiredField />
@@ -206,18 +167,17 @@ function ModalCadastroAtividades({
                   </Flex>
                 </Flex>
 
-                <Flex flex={1} direction={"column"}>
+                <Flex flex={1} direction={"row"} gap={2}>
                   {/* <Text fontWeight={"bold"}>Relação</Text> */}
-                  <SelectFiltragem
-                    registerForm={registerForm}
-                    nomeSelect={"RELAÇÃO"}
-                    propName={"relacao_id"}
-                    options={relacoesOptions}
-                    required={true}
-                  />
-                </Flex>
-
-                <Flex flex={1} direction={"column"}>
+                  <Flex gap={5} flex={1}>
+                    <SelectFiltragem
+                      registerForm={registerForm}
+                      nomeSelect={"RELAÇÃO"}
+                      propName={"relacao_id"}
+                      options={relacoesOptions}
+                      required={true}
+                    />
+                  </Flex>
                   {/* <Text fontWeight={"bold"}>Responsável</Text> */}
                   <Flex gap={5} flex={1}>
                     <SelectFiltragem
@@ -225,14 +185,6 @@ function ModalCadastroAtividades({
                       nomeSelect={"RESPONSÁVEL"}
                       propName={"responsavel_id"}
                       options={responsaveisOptions}
-                      required={true}
-                    />
-
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"ÁREA"}
-                      propName={"area_atuacao"}
-                      options={areaAtuacaoOptions}
                       required={true}
                     />
                   </Flex>
