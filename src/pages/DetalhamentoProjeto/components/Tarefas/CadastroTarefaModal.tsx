@@ -204,7 +204,7 @@ function CadastroTarefasModal({
                   color={"black"}
                   _placeholder={{ color: "#949494" }}
                   fontSize={"14px"}
-                  width={"208px"}
+                  width={"228px"}
                   height={"56px"}
                   id="atividadeRel"
                   name="atividadeRel"
@@ -242,7 +242,7 @@ function CadastroTarefasModal({
                   mt={"-9px"}
                   color={"black"}
                   _placeholder={{ color: "#949494" }}
-                  width={"208px"}
+                  width={"228px"}
                   height={"56px"}
                   id="responsavel"
                   name="responsavel"
@@ -273,7 +273,7 @@ function CadastroTarefasModal({
                 borderRadius={"8px"}
                 border={"1px solid #A7A7A7"}
                 mt={"-9px"}
-                width={"456px"}
+                width={"472px"}
                 height={"121px"}
                 color={"black"}
                 _placeholder={{ color: "#949494" }}
