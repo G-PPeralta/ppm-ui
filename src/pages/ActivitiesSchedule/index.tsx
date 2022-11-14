@@ -68,12 +68,14 @@ export function ActivitiesSchedule() {
     }
   }, [atividades]);
 
+  const subTitulo = `${state.poco.sonda} (${state.poco.poco})`;
+
   return (
     <>
       <Sidebar>
         {!loading ? (
           <ContainerPagina>
-            <TituloPagina botaoVoltar={true}>
+            <TituloPagina botaoVoltar={true} subTitulo={subTitulo}>
               Acompanhamento de Atividades
             </TituloPagina>
 
