@@ -116,7 +116,7 @@ function EditarAtividadeTabLicoesAprendidas({
         ) : (
           <Tr>
             <Td colSpan={header.length} textAlign={"start"}>
-              <Text fontSize="lg" fontWeight={500}>
+              <Text textAlign={"start"} fontWeight={"semibold"}>
                 Não há dados
               </Text>
             </Td>
