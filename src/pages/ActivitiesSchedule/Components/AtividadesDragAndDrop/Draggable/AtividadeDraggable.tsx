@@ -21,11 +21,8 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
   const [draggableId, setDraggableId] = useState<any>(id);
 
   const remove = (index: number) => {
-    // Pega a lista de precedentes diretamente do Formik
     const newList = registerForm.values.precedentes;
-    // Remove item da lista
     newList.splice(index, 1);
-    // Atualiza lista no Formik
     registerForm.setFieldValue("precedentes", newList);
   };
 

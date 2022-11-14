@@ -41,6 +41,10 @@ export function ActivitiesSchedule() {
   const [loadingCards, setLoadingCards] = useState(true);
   const [intervencaoIniciada, setIntervencaoIniciada] = useState<any>(false);
 
+  const subTitulo = `${state.poco.sonda.split(" - ")[1]} (${
+    state.poco.poco.split(" - ")[1]
+  })`;
+
   const requestHandler = async () => {
     const response = await getAtividadesCampanha(id);
     setAtividades(response.data);
@@ -63,14 +67,11 @@ export function ActivitiesSchedule() {
   }, [refresh]);
 
   useEffect(() => {
+    setLoadingCards(true);
     if (atividades.length > 0) {
       setLoadingCards(false);
     }
   }, [atividades]);
-
-  const subTitulo = `${state.poco.sonda.split(" - ")[1]} (${
-    state.poco.poco.split(" - ")[1]
-  })`;
 
   return (
     <>
