@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { BsPlusLg } from "react-icons/bs";
+// import { BsPlusLg } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 
 import {
   Flex,
-  Box,
-  IconButton,
+  // Box,
+  // IconButton,
   // useBreakpointValue,
   Textarea,
   Modal,
@@ -54,39 +54,6 @@ function CadastrarLicoesAprendidasModal({
 
   return (
     <Flex>
-      <Box
-        display={"flex"}
-        alignItems={"center"}
-        border="2px"
-        padding={2}
-        borderRadius={6}
-        borderColor={"origem.300"}
-        _hover={{
-          background: "#f5f5f5",
-          transition: "all 0.4s",
-          color: "origem.300",
-          cursor: "pointer",
-          borderColor: "origem.500",
-        }}
-      >
-        <IconButton
-          aria-label="Plus sign"
-          icon={<BsPlusLg />}
-          background="origem.300"
-          variant="secondary"
-          color="white"
-          mr={2}
-          isRound={true}
-          size="sm"
-        />
-        {/* <Text
-          fontSize={useBreakpointValue({ base: "sm", md: "sm" })}
-          fontWeight={"bold"}
-          color={"origem.500"}
-        >
-          EDITAR FORNECEDOR
-        </Text> */}
-      </Box>
       <Modal isOpen={true} onClose={closeModal} size="lg">
         <ModalOverlay />
         <ModalContent>
@@ -120,7 +87,7 @@ function CadastrarLicoesAprendidasModal({
                 borderRadius={"8px"}
                 border={"1px solid #949494"}
                 mt={"-9px"}
-                width={"328px"}
+                width={"100%"}
                 height={"56px"}
                 color={"black"}
                 _placeholder={{ color: "#949494" }}
@@ -151,7 +118,7 @@ function CadastrarLicoesAprendidasModal({
                 borderRadius={"8px"}
                 border={"1px solid #949494"}
                 mt={"-9px"}
-                width={"465px"}
+                width={"100%"}
                 height={"121px"}
                 color={"black"}
                 _placeholder={{ color: "#949494" }}
