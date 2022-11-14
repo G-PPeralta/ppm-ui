@@ -295,7 +295,7 @@ export function TabelaAtividades(props: TableProps) {
               color="white"
               border="none 0px !important"
             >
-              <Td borderBottomLeftRadius="10px">Total</Td>
+              <Td textAlign={"center"}>Total</Td>
               {dias &&
                 total &&
                 dias.map(function (dia) {
@@ -304,8 +304,8 @@ export function TabelaAtividades(props: TableProps) {
                     (tot) => tot.data == dia.data
                   ).length;
                   if (dias[dias.length - 1] == dia) {
-                    return <Td borderBottomRightRadius="10px">{_total}</Td>;
-                  } else return <Td>{_total}</Td>;
+                    return <Td textAlign={"center"}>{_total}</Td>;
+                  } else return <Td textAlign={"center"}>{_total}</Td>;
                 })}
             </Tr>
           </Tfoot>
