@@ -9,7 +9,7 @@ export function Evolucao() {
     <>
       <Flex direction={"column"} w={"100%"} gap={"24px"} marginTop={"24px"}>
         <CurvaS data={curveSData} />
-        <Gantt id={24} />
+        <Gantt />
       </Flex>
     </>
   );

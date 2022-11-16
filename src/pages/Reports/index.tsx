@@ -24,7 +24,7 @@ import { useProjects } from "hooks/useProjects";
 
 import { Avanco } from "./components/avanco";
 import { Evolucao } from "./components/evolucao";
-import { Indicadores } from "./components/indicadores";
+import { Indicadores } from "./components/Indicadores";
 import { PanoramaGeral } from "./components/PanoramaGeral";
 import { Pendencias } from "./components/pendencias";
 import { PrevistoXRealizado } from "./components/previstoXRealizado";
