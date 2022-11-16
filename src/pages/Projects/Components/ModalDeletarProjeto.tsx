@@ -55,7 +55,7 @@ function ModalDeletarProjeto(projeto: id) {
         // w={"14px"}
         // h={"18px"}
       >
-        <FiTrash />
+        <FiTrash size={"13px"} />
       </IconButton>
       <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
