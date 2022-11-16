@@ -34,7 +34,7 @@ function DateTimePickerData({ registerForm, data, required, value }: any) {
         ref={ref}
         variant="outline"
         px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
-        minW={useBreakpointValue({ base: "180px", sm: "180px", md: "220px" })}
+        minW={useBreakpointValue({ base: "220px", sm: "220px", md: "220px" })}
       >
         {value === "" ? "Selecione a data" : value}
       </Button>

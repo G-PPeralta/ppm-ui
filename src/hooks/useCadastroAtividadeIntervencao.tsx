@@ -6,16 +6,19 @@ import {
   AreaAtuacao,
   Area,
 } from "interfaces/CadastrosModaisInfograficos";
-import { AtividadeLista } from "interfaces/Services";
 import { cadastroAtividadeIntervencaoSchema } from "validations/ModaisCadastrosInfografico";
+
+import { addOutroFinalArray } from "utils/AdicionaOpcaoOutroAoFinalArray";
 
 import { useToast } from "contexts/Toast";
 
-import { getArea } from "services/get/CadastroModaisInfograficos";
+import {
+  getArea,
+  getResponsaveis,
+} from "services/get/CadastroModaisInfograficos";
 import {
   getAreaAtuacaoList,
-  getAtividadesList,
-  getResponsavelList,
+  getNovaAtividadesTarefas,
 } from "services/get/Infograficos";
 import { postCadastroAtividadeIntervencao } from "services/post/Infograficos";
 
@@ -29,14 +32,20 @@ export function useCadastroAtividadeIntervencao() {
   const [listaArea, setListaArea] = useState<Area[]>([]);
   const [listaAreaAtuacao, setListaAreaAtuacao] = useState<AreaAtuacao[]>([]);
   const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
-  const [listaAtividades, setListaAtividades] = useState<AtividadeLista[]>([]);
+  const [listaAtividades, setListaAtividades] = useState<any[]>([]);
   // const [listaTarefa, setListaTarefa] = useState<Tarefa[]>([]);
+  const [refresh, setRefresh] = useState(false);
+
+  const hookRefreshState = {
+    refresh,
+    setRefresh,
+  };
 
   const reqGet = async () => {
     const areas = await getArea();
     const areaAtuacao = await getAreaAtuacaoList();
-    const responsaveis = await getResponsavelList();
-    const atividades = await getAtividadesList();
+    const atividades = await getNovaAtividadesTarefas();
+    const responsaveis = await getResponsaveis();
 
     const arrayAreas = areas.data.map(({ id, nom_area }: any) => ({
       id,
@@ -50,18 +59,30 @@ export function useCadastroAtividadeIntervencao() {
       a.tipo.localeCompare(b.tipo)
     );
 
+    const areasComOutrosAoFinalArray = addOutroFinalArray(
+      areasAtuacaoSorted,
+      "tipo"
+    );
     const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
       a.nome.localeCompare(b.nome)
     );
+    const responsaveisComOutrosAoFinalArray = addOutroFinalArray(
+      responsaveisSorted,
+      "nome"
+    );
 
     const atividadesSorted = atividades.data.sort((a, b) =>
-      a.tarefa.localeCompare(b.tarefa)
+      a.nom_atividade.localeCompare(b.nom_atividade)
+    );
+    const atividadesComOutrosAoFinalArray = addOutroFinalArray(
+      atividadesSorted,
+      "nom_atividade"
     );
 
     setListaArea(areasSorted);
-    setListaAreaAtuacao(areasAtuacaoSorted);
-    setListaResponsaveis(responsaveisSorted);
-    setListaAtividades(atividadesSorted);
+    setListaAreaAtuacao(areasComOutrosAoFinalArray);
+    setListaResponsaveis(responsaveisComOutrosAoFinalArray);
+    setListaAtividades(atividadesComOutrosAoFinalArray);
   };
 
   const listaAtividadesPrecedentes = listaAtividades.map((atividade) => ({
@@ -75,8 +96,10 @@ export function useCadastroAtividadeIntervencao() {
     id_intervencao: 0,
     id_origem: "",
     nom_atividade: "",
-    responsavel_id: 0,
-    area_atuacao: 0,
+    responsavel_id: -1,
+    area_atuacao: -1,
+    duracao: 0,
+    atividade_id: -1,
     nao_iniciar_antes_de: {
       data: "",
       checked: false,
@@ -101,14 +124,16 @@ export function useCadastroAtividadeIntervencao() {
       const id_intervencao = Number(values.id_intervencao);
       const newValues = {
         nom_usu_create: user?.nome,
-        id_origem: values.id_origem,
-        nom_atividade: values.nom_atividade,
+        // id_origem: values.id_origem,
+        // nom_atividade: values.nom_atividade,
+        atividade_id: values.atividade_id,
         responsavel_id: values.responsavel_id,
         area_atuacao: values.area_atuacao,
         nao_iniciar_antes_de: values.nao_iniciar_antes_de,
         nao_terminar_depois_de: values.nao_terminar_depois_de,
         o_mais_breve_possivel: values.o_mais_breve_possivel,
         precedentes: values.precedentes,
+        duracao: values.duracao,
       };
 
       setLoading(true);
@@ -138,6 +163,10 @@ export function useCadastroAtividadeIntervencao() {
     reqGet();
   }, []);
 
+  useEffect(() => {
+    reqGet();
+  }, [refresh]);
+
   return {
     registerForm,
     loading,
@@ -146,5 +175,6 @@ export function useCadastroAtividadeIntervencao() {
     listaResponsaveis,
     listaAtividades,
     listaAtividadesPrecedentes,
+    hookRefreshState,
   };
 }
