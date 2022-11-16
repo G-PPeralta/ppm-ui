@@ -41,11 +41,15 @@ export function validateDate(
   pct_plan: number, // porcentagem planejada
   comp_pct: number, // comparação porcentagens
   pct_real: number, // porcentagem realizada
+  finalplanejado: any, // data final planejada
   ind_alerta?: number // indicador de alerta
 ) {
   switch (true) {
     case ind_alerta === 1:
       return statusProjeto[5].color; // conflito de cronograma
+
+    case new Date(finalplanejado) < new Date():
+      return statusProjeto[3].color; // atrasado
 
     case pct_plan > pct_real:
       return statusProjeto[3].color; // atrasado
@@ -62,7 +66,7 @@ export function validateDate(
     case pct_plan === 0 && pct_real === 0:
       return statusProjeto[0].color; // não iniciado
 
-    default:
-      return statusProjeto[2].color; // não aplicável
+    default: // não aplicável
+      return statusProjeto[2].color;
   }
 }

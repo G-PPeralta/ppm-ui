@@ -26,7 +26,7 @@ function DatePicker({ setDate, data, label, required }: any) {
         justifyContent={"space-between"}
         rightIcon={<FaRegCalendarAlt color="#2D2926" size={"20px"} />}
         px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
-        minW={useBreakpointValue({ base: "180px", sm: "180px", md: "220px" })}
+        minW={useBreakpointValue({ base: "220px", sm: "220px", md: "220px" })}
       >
         {value === "" ? "Selecione a data" : value}
       </Button>
