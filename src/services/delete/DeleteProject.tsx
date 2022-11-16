@@ -20,7 +20,7 @@ export async function deleteProject(
 export async function deleteAtividade(
   id: number
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.patch(`/gantt/${id}`);
+  const { data, status } = await api.delete(`/gantt/${id}`);
 
   return { data, status };
 }
