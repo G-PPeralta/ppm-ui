@@ -5,7 +5,7 @@ import { api } from "services/api";
 export async function deleteProject(
   id_projeto: number
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.patch(`/projetos/${id_projeto}`);
+  const { data, status } = await api.delete(`/projetos/delete/${id_projeto}`);
 
   return { data, status };
 }
