@@ -4,7 +4,15 @@ export async function deleteOperacaoCronograma(
   id: number,
   id_usu_create?: number
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.patch(`/estatisticas/projetos/${id}`);
+  const { data, status } = await api.delete(`/estatisticas/projetos/${id}`);
+
+  return { data, status };
+}
+
+export async function deleteEstatistica(
+  id: number
+): Promise<{ data: any; status: number }> {
+  const { data, status } = await api.delete(`/estatisticas/projetos/${id}`);
 
   return { data, status };
 }
