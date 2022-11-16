@@ -19,9 +19,10 @@ export async function deleteProject(
  * @returns
  */
 export async function deleteAtividade(
-  id: number
+  id: number,
+  user: string | undefined
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.delete(`/gantt/${id}`);
+  const { data, status } = await api.delete(`/gantt/${id}/${user}`);
 
   return { data, status };
 }
