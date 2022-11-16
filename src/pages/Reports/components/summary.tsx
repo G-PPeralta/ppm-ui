@@ -24,6 +24,7 @@ export interface SummaryData {
   endDate: string;
   budget: number;
   realized: number;
+  percent?: string;
 }
 
 type Props = {
@@ -32,26 +33,24 @@ type Props = {
 };
 
 export function ProjectSummary({ data, table }: Props) {
+  function calculatePercent(data: SummaryData) {
+    const done = (data.realized / data.budget) * 100;
+    return done > 100 ? 100 : done;
+  }
+
   function createPieData(data: SummaryData) {
+    const p = Number(data.percent);
     const pieData = [
       {
         name: "Undone",
-        value: calculatePercet(data).undone,
+        value: 100 - p,
       },
       {
         name: "Done",
-        value: calculatePercet(data).done,
+        value: p,
       },
     ];
     return pieData;
-  }
-
-  function calculatePercet(data: SummaryData) {
-    const percents = {
-      undone: ((data.budget - data.realized) / data.budget) * 100,
-      done: ((data.budget - (data.budget - data.realized)) / data.budget) * 100,
-    };
-    return percents;
   }
 
   function changeColor(percent: number) {
@@ -259,7 +258,7 @@ export function ProjectSummary({ data, table }: Props) {
                   color={"white"}
                   padding={2}
                 >
-                  {calculatePercet(data).done}%
+                  {calculatePercent(data)}%
                 </Heading>
               </Flex>
               {table == true && (
