@@ -25,6 +25,8 @@ import { Ring } from "@uiball/loaders";
 
 import { useToast } from "contexts/Toast";
 
+import { useAuth } from "hooks/useAuth";
+
 import { deleteTarefa } from "services/delete/DeleteTarefa";
 
 type ModalDeletarProps = {
@@ -34,13 +36,14 @@ type ModalDeletarProps = {
 function ModalDeletarTarefa({ id }: ModalDeletarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { toast } = useToast();
+  const { user } = useAuth();
 
   const [loading, setLoading] = useState<boolean>(false);
 
   const remove = async () => {
     try {
       if (!id) throw new Error("Erro ao remover tarefa!");
-      const { status } = await deleteTarefa(id);
+      const { status } = await deleteTarefa(id, user?.nome);
       if (status === 200 || status === 201) {
         toast.success("Tarefa removida com sucesso!", {
           id: "toast-principal",
