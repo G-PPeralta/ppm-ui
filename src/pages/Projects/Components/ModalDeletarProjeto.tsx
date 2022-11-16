@@ -1,4 +1,5 @@
 // import { FaTrash } from "react-icons/fa";
+import { useState } from "react";
 import { FiTrash } from "react-icons/fi";
 
 import {
@@ -21,12 +22,13 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-// import { TextError } from "components/TextError";
+import { useToast } from "contexts/Toast";
 
-import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
+// import { useDeletarProjeto } from "hooks/useDeletarProjeto";
 
-// import { useAuth } from "hooks/useAuth";
-import { useDeletarProjeto } from "hooks/useDeletarProjeto";
+import { useAuth } from "hooks/useAuth";
+
+import { deleteProject } from "services/delete/DeleteProject";
 
 type id = {
   projeto: number;
@@ -34,12 +36,30 @@ type id = {
 
 function ModalDeletarProjeto(projeto: id) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useDeletarProjeto(projeto.projeto);
-  // const { user } = useAuth();
-  // const idUser = user?.nome;
+  // const { registerForm } = useDeletarProjeto(projeto.projeto);
+  const { toast } = useToast();
+  const [loading, setLoading] = useState<boolean>(false);
+  const { user } = useAuth();
 
-  // Pra pegar o id do projeto e depois ser possível deletar
-  // console.log(projeto.projeto);
+  const remove = async () => {
+    try {
+      if (!projeto.projeto) throw new Error("Erro ao remover projeto!");
+      const { status } = await deleteProject(projeto.projeto, user?.nome);
+      if (status === 200 || status === 201) {
+        toast.success("Projeto removido com sucesso!", {
+          id: "toast-principal",
+        });
+        setLoading(false);
+        onClose();
+      }
+    } catch (error) {
+      toast.error("Erro ao remover o projeto!", {
+        id: "toast-principal",
+      });
+      setLoading(false);
+      onClose();
+    }
+  };
 
   return (
     <>
@@ -74,7 +94,7 @@ function ModalDeletarProjeto(projeto: id) {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              registerForm.handleSubmit(e);
+              // registerForm.handleSubmit(e);
             }}
           >
             <ModalBody mt={3}>
@@ -103,7 +123,7 @@ function ModalDeletarProjeto(projeto: id) {
                 <Button
                   variant="ghost"
                   color="red.500"
-                  onClick={() => handleCancelar(registerForm, onClose)}
+                  onClick={() => onClose()}
                   _hover={{
                     background: "red.600",
                     transition: "all 0.4s",
@@ -120,7 +140,7 @@ function ModalDeletarProjeto(projeto: id) {
                   background="origem.500"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() => remove()}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",

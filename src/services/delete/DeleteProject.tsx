@@ -3,9 +3,10 @@
 import { api } from "services/api";
 
 export async function deleteProject(
-  id_projeto: number
+  id_projeto: any,
+  user: any
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.delete(`/projetos/delete/${id_projeto}`);
+  const { data, status } = await api.delete(`/projetos/${id_projeto}/${user}`);
 
   return { data, status };
 }
