@@ -23,7 +23,6 @@ type Props = {
 function CardACT({ atividade }: Props) {
   const dataInicioFormatada = formatDate(new Date(atividade.inicioplanejado));
   const dataFinalFormatada = formatDate(new Date(atividade.finalplanejado));
-  // console.log(validateDate(dataInicioFormatada));
 
   return (
     <Flex
@@ -35,6 +34,7 @@ function CardACT({ atividade }: Props) {
         Number(atividade.pct_plan),
         Number(atividade.comp_pct),
         Number(atividade.pct_real),
+        atividade.finalplanejado,
         Number(atividade.ind_alerta)
       )}
       px={5}

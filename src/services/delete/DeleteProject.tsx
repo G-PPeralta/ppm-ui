@@ -5,7 +5,7 @@ import { api } from "services/api";
 export async function deleteProject(
   id_projeto: number
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.delete(`/projetos/${id_projeto}`);
+  const { data, status } = await api.patch(`/projetos/${id_projeto}`);
 
   return { data, status };
 }
@@ -20,7 +20,7 @@ export async function deleteProject(
 export async function deleteAtividade(
   id: number
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.delete(`/gantt/${id}`);
+  const { data, status } = await api.patch(`/gantt/${id}`);
 
   return { data, status };
 }

@@ -28,6 +28,7 @@ type TabelaFornecedoresProps = {
   onEdit: (fornecedor: FornecedoreDto) => any;
   polos: any[];
   loading: boolean;
+  onDelete: (fornecedor: any) => void;
 };
 
 export function TabelaFornecedores({
@@ -35,6 +36,7 @@ export function TabelaFornecedores({
   onEdit,
   polos,
   loading,
+  onDelete,
 }: TabelaFornecedoresProps) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(7);
@@ -112,7 +114,10 @@ export function TabelaFornecedores({
                     fontSize={"18px"}
                     fontWeight={"700"}
                   />
-                  <ModalDeletarFornecedor />
+                  <ModalDeletarFornecedor
+                    onDelete={onDelete}
+                    fornecedor={fornecedor}
+                  />
                 </Td>
               </Tr>
             ))

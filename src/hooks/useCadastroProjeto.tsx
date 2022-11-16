@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { cadastroProjetoSchema } from "validations/Projetos";
 
+import { addOutroFinalArray } from "utils/AdicionaOpcaoOutroAoFinalArray";
+
 import { useToast } from "contexts/Toast";
 
 import {
@@ -47,18 +49,6 @@ export function useProjetos() {
   const refreshState = {
     refresh,
     setRefresh,
-  };
-
-  const addOutroFinalArray = (array: any, nomeChave: string) => {
-    const outro: any = {
-      id: 0,
-      [nomeChave]: "Outro",
-      deletado: false,
-    };
-
-    const arrayComOutroAoFinalArray: any = [...array, outro];
-
-    return arrayComOutroAoFinalArray;
   };
 
   const reqGet = async () => {

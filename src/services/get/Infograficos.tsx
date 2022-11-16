@@ -80,3 +80,12 @@ export async function getSondaCampanha(): Promise<{
 
   return { data, status };
 }
+
+export async function getNovaAtividadesTarefas(): Promise<{
+  data: any[];
+  status: number;
+}> {
+  const { data, status } = await api.get(`/nova-atividade/tarefas`, token());
+
+  return { data, status };
+}

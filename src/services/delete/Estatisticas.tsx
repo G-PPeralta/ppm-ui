@@ -4,7 +4,7 @@ export async function deleteOperacaoCronograma(
   id: number,
   id_usu_create?: number
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.delete(`/estatisticas/projetos/${id}`);
+  const { data, status } = await api.patch(`/estatisticas/projetos/${id}`);
 
   return { data, status };
 }
@@ -13,7 +13,7 @@ export async function deleteLicaoAprendida(
   idAtividade: number,
   idLicaoAprendida: number
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.delete(
+  const { data, status } = await api.patch(
     `projetos-atividades-licoes-aprendidas/${idAtividade}/${idLicaoAprendida}`,
     // `/estatisticas/cronograma/${idAtividade}/licao-aprendida/${idLicaoAprendida}`,
     token()

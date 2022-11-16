@@ -137,7 +137,7 @@ function EditarLicoesAprendidasModal({
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
-                  width={"328px"}
+                  width={"100%"}
                   height={"56px"}
                   color="black"
                   fontSize={"14px"}
@@ -181,7 +181,7 @@ function EditarLicoesAprendidasModal({
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
-                  width={"456px"}
+                  width={"100%"}
                   height={"121px"}
                   color="black"
                   fontSize={"14px"}
@@ -203,9 +203,9 @@ function EditarLicoesAprendidasModal({
               <Button
                 // background="origem.300"
                 variant="primary"
-                color="red"
+                color="#F40606"
                 _hover={{
-                  background: "red.500",
+                  background: "red.600",
                   transition: "all 0.4s",
                   color: "white",
                 }}
@@ -219,11 +219,11 @@ function EditarLicoesAprendidasModal({
                 Cancelar
               </Button>
               <Button
-                background="#0047BB"
+                background="origem.500"
                 variant="primary"
                 color="white"
                 _hover={{
-                  background: "origem.500",
+                  background: "origem.600",
                   transition: "all 0.4s",
                 }}
                 onClick={() => handlePatchLicaoAprendida()}
