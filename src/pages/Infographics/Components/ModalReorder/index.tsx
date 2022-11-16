@@ -1,0 +1,304 @@
+import { useEffect, useState } from "react";
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DroppableProvided,
+} from "react-beautiful-dnd";
+
+import {
+  Flex,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+  Button,
+  Text,
+  ModalCloseButton,
+  Box,
+} from "@chakra-ui/react";
+
+import { postGetInfoCampanha } from "services/get/Infograficos";
+
+import Card from "./components/Card";
+
+const reorder = (list: any, startIndex: any, endIndex: any) => {
+  const result = list;
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+
+  return result;
+};
+
+/**
+ * Moves an item from one list to another list.
+ */
+const move = (
+  source: any,
+  destination: any,
+  droppableSource: any,
+  droppableDestination: any
+) => {
+  const sourceClone = source;
+  const destClone = destination;
+  const [removed] = sourceClone.splice(droppableSource.index, 1);
+
+  destClone.splice(droppableDestination.index, 0, removed);
+
+  const result = [];
+  result.push(sourceClone);
+  result.push(destClone);
+
+  return result;
+};
+
+export default function ModalReorder() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [campanhas, setCampanhas] = useState<any[]>([]);
+
+  useEffect(() => {
+    handleGetAll();
+  }, []);
+
+  const handleGetAll = async () => {
+    const deafultPayload = {
+      area_atuacao_id: null,
+      poco_id: null,
+      atividade_id: null,
+      responsavel_id: null,
+      data_inicio: null,
+      data_fim: null,
+      sonda_id: null,
+      status: null,
+    };
+    const campanhas = await postGetInfoCampanha(deafultPayload);
+    setCampanhas(campanhas.data);
+  };
+
+  const onDragEnd = (result: any) => {
+    const { source, destination } = result;
+    if (!destination) {
+      return;
+    }
+
+    const oldCampanhas = campanhas;
+
+    const sourceData = oldCampanhas.filter(
+      (val) => val.sonda == source.droppableId
+    )[0].pocos;
+
+    const sourceIndex = oldCampanhas
+      .map((e) => e.sonda)
+      .indexOf(source.droppableId);
+
+    const destinationData = oldCampanhas.filter(
+      (val) => val.sonda == destination.droppableId
+    )[0].pocos;
+
+    const destinationIndex = oldCampanhas
+      .map((e) => e.sonda)
+      .indexOf(destination.droppableId);
+
+    const newCampanhas = campanhas;
+
+    if (source.droppableId === destination.droppableId) {
+      const items = reorder(sourceData, source.index, destination.index);
+
+      newCampanhas[sourceIndex].pocos = items;
+    } else {
+      const result = move(sourceData, destinationData, source, destination);
+
+      newCampanhas[sourceIndex].pocos = result[0];
+      newCampanhas[destinationIndex].pocos = result[1];
+    }
+    setCampanhas(newCampanhas);
+  };
+
+  const save = async () => {
+    console.log("campanhas saved", campanhas);
+  };
+
+  return (
+    <>
+      <Button
+        h={"56px"}
+        borderRadius={"10px"}
+        disabled={campanhas.length == 0}
+        background={"white"}
+        border={"2px solid"}
+        color={"origem.500"}
+        _hover={{
+          border: "2px solid",
+          borderColor: "origem.500",
+          background: "origem.500",
+          transition: "all 0.4s",
+          color: "white",
+        }}
+        textColor={"origem.500"}
+        onClick={onOpen}
+      >
+        Reordenar
+      </Button>
+      <Modal isOpen={isOpen} onClose={onClose} size="full">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader
+            backgroundColor={"#2E69FD"}
+            borderTopRadius={7}
+            display={"flex"}
+            justifyContent={"center"}
+            color={"white"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+          >
+            Reordenar Poços
+          </ModalHeader>
+          <ModalCloseButton color={"white"} onClick={() => onClose()} />
+          <ModalBody mt={3}>
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Box
+                overflowX={{ base: "scroll" }}
+                display={"flex"}
+                flexDirection={"row"}
+                gap={10}
+                py={2}
+                flex={1}
+              >
+                {campanhas.map((collum, index) => (
+                  <Flex
+                    key={index}
+                    width={"300px"}
+                    direction={"column"}
+                    gap={2}
+                    minHeight={"500px"}
+                  >
+                    <Flex
+                      mt={3}
+                      alignItems={"center"}
+                      justify={"end"}
+                      w="235px"
+                    >
+                      <Text
+                        fontSize={"xl"}
+                        fontWeight={"bold"}
+                        textAlign={"center"}
+                      >
+                        {collum.sonda}
+                      </Text>
+                    </Flex>
+                    <Droppable droppableId={collum.sonda}>
+                      {(provided: DroppableProvided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.droppableProps}
+                        >
+                          <Flex
+                            width={"300px"}
+                            direction={"column"}
+                            gap={2}
+                            minHeight={"500px"}
+                          >
+                            {collum.pocos.map((val: any, index: number) => (
+                              <>
+                                {index == 0 && val.pct_real != 0 ? (
+                                  <Card
+                                    key={index}
+                                    poco={collum.pocos[0]}
+                                    index={0}
+                                  />
+                                ) : undefined}
+                                {val.pct_real == 0 ? (
+                                  <Draggable
+                                    draggableId={String(val.id_poco)}
+                                    index={index}
+                                  >
+                                    {(provided) => (
+                                      <div
+                                        ref={provided.innerRef}
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                      >
+                                        <Card
+                                          key={index}
+                                          poco={val}
+                                          index={index}
+                                        />
+                                      </div>
+                                    )}
+                                  </Draggable>
+                                ) : undefined}
+                              </>
+                            ))}
+                          </Flex>
+                          {provided.placeholder}
+                        </div>
+                      )}
+                    </Droppable>
+                  </Flex>
+                ))}
+              </Box>
+            </DragDropContext>
+          </ModalBody>
+
+          <ModalFooter justifyContent={"center"}>
+            <Flex gap={2}>
+              <Button
+                h={"56px"}
+                variant="ghost"
+                color="red.500"
+                w={"208px"}
+                onClick={() => onClose()}
+                _hover={{
+                  background: "red.600",
+                  transition: "all 0.4s",
+                  color: "white",
+                }}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                borderRadius={"8px"}
+                fontFamily={"Mulish"}
+              >
+                <Text
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
+                  mx={12}
+                >
+                  Cancelar
+                </Text>
+              </Button>
+              <Button
+                w={"208px"}
+                h={"56px"}
+                borderRadius={"8px"}
+                background={"origem.500"}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
+                variant="primary"
+                color="white"
+                onClick={() => save()}
+                _hover={{
+                  background: "origem.600",
+                  transition: "all 0.4s",
+                }}
+              >
+                <Text
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
+                  mx={12}
+                >
+                  Concluir
+                </Text>
+              </Button>
+            </Flex>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
