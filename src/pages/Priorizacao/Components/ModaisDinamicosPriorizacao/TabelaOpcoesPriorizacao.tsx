@@ -93,7 +93,11 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
             nameRanking={rankingNome}
             initialGrade={op.num_nota}
           />
-          <ModalDeletarOpcaoPriorizacao id={op.id} />
+          <ModalDeletarOpcaoPriorizacao
+            id={op.id}
+            refresh={rankingInfos.refresh}
+            setRefresh={rankingInfos.setRefresh}
+          />
         </Td>
       </Tr>
     ));

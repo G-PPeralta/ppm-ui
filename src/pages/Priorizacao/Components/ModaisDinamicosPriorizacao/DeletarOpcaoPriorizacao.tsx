@@ -27,9 +27,11 @@ import { deleteOpcaoPriorizacao } from "services/delete/DeletePriorizacao";
 
 type props = {
   id: number;
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function ModalDeletarOpcaoPriorizacao({ id }: props) {
+function ModalDeletarOpcaoPriorizacao({ id, refresh, setRefresh }: props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [loading, setLoading] = useState<boolean>(false);
   const { toast } = useToast();
@@ -138,7 +140,10 @@ function ModalDeletarOpcaoPriorizacao({ id }: props) {
                   background="#0047BB"
                   variant="primary"
                   color="white"
-                  onClick={() => remove()}
+                  onClick={() => {
+                    setRefresh(!refresh);
+                    remove();
+                  }}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",
