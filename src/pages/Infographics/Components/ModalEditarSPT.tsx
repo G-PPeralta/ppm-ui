@@ -75,7 +75,8 @@ function ModalEditarSPT({ column, refresh, setRefresh }: any) {
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Replanejar Cronograma
           </ModalHeader>
@@ -84,7 +85,7 @@ function ModalEditarSPT({ column, refresh, setRefresh }: any) {
             <FormControl>
               <Flex direction={"column"} gap={4}>
                 <Stack>
-                  <Text fontWeight={"bold"}>Campanha</Text>
+                  {/* <Text fontWeight={"bold"}>Campanha</Text> */}
                   <Flex
                     flexDirection={useBreakpointValue({
                       base: "column",
@@ -144,24 +145,26 @@ function ModalEditarSPT({ column, refresh, setRefresh }: any) {
             <Flex gap={2}>
               <Button
                 onClick={() => onClose()}
+                w={"208px"}
                 h={"56px"}
-                borderRadius={"10px"}
+                fontSize="18px"
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
+                borderRadius={"8px"}
                 variant="ghost"
                 color="red"
                 _hover={{
-                  background: "red.500",
+                  background: "red.600",
                   transition: "all 0.4s",
                   color: "white",
                 }}
               >
-                <Text fontSize="16px" fontWeight={"bold"}>
-                  Cancelar
-                </Text>
+                <Text>Cancelar</Text>
               </Button>
               <Button
                 onClick={() => handleClick()}
                 h={"56px"}
-                borderRadius={"10px"}
+                borderRadius={"8px"}
                 background={"origem.500"}
                 variant="primary"
                 color="white"
@@ -169,10 +172,12 @@ function ModalEditarSPT({ column, refresh, setRefresh }: any) {
                   background: "origem.600",
                   transition: "all 0.4s",
                 }}
+                w={"208px"}
+                fontSize="18px"
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
               >
-                <Text fontSize="16px" fontWeight={"bold"}>
-                  Salvar
-                </Text>
+                <Text>Salvar</Text>
               </Button>
             </Flex>
           </ModalFooter>

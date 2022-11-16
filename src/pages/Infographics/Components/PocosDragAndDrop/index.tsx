@@ -58,7 +58,10 @@ export default function PocosDragAndDrop({ pocos, setPocos, setPayload }: any) {
   return (
     <>
       <Flex gap={1}>
-        <Text fontWeight={"bold"}>Intervenções</Text>
+        {/* <Text fontWeight={"bold"}>Intervenções</Text> */}
+        <Text fontWeight={"700"} fontSize={"12px"} color={"#949494"} mb={-2}>
+          INTERVENÇÕES
+        </Text>
       </Flex>
 
       {pocos[0].pct_real !== "0" && (
