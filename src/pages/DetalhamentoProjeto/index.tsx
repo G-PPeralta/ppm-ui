@@ -11,8 +11,7 @@ import {
   ProjetoProgresso,
 } from "interfaces/Services";
 
-import GenericCurveS from "pages/Reports/components/genericCurveS";
-
+import CurvaS from "components/CurvaS";
 import Sidebar from "components/SideBar";
 
 import { getCategorias } from "services/get/Categorias";
@@ -219,7 +218,7 @@ function DetalhamentoProjeto() {
             </Flex>
 
             <Gantt idProjeto={Number(id)} />
-            <GenericCurveS data={data} />
+            <CurvaS data={data} />
             {/* <GraficoCurvaS /> */}
           </>
         )}

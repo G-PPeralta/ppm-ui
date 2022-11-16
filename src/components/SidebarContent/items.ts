@@ -6,11 +6,11 @@ import {
   FiHome,
   FiBarChart,
   FiActivity,
-  // FiFile,
+  FiFile,
   FiTrash2,
   FiSettings,
 } from "react-icons/fi";
-// import { IoMdPodium } from "react-icons/io";
+import { IoMdPodium } from "react-icons/io";
 import { MdPriorityHigh } from "react-icons/md";
 
 interface LinkItemProps {
@@ -34,12 +34,12 @@ const childrenCarteiradeProjetos = [
     icon: FaRegMoneyBillAlt,
     link: "/financeiro-projetos",
   },
-  // { name: "Relatórios", icon: FiFile, link: "/reports" },
-  // {
-  //   name: "Priorização Diretores",
-  //   icon: IoMdPodium,
-  //   link: "/priorizacao-diretores",
-  // },
+  { name: "Relatórios", icon: FiFile, link: "/reports" },
+  {
+    name: "Priorização Diretores",
+    icon: IoMdPodium,
+    link: "/priorizacao-diretores",
+  },
 ];
 
 const childrenInfograficos = [

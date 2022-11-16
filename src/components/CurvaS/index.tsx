@@ -23,7 +23,7 @@ type Props = {
   data: CurveSData[];
 };
 
-function GenericCurveS({ data }: Props) {
+function CurvaS({ data }: Props) {
   return (
     <>
       <Flex
@@ -142,4 +142,4 @@ function GenericCurveS({ data }: Props) {
   );
 }
 
-export default GenericCurveS;
+export default CurvaS;
