@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FiTrash } from "react-icons/fi";
 
 import {
@@ -20,9 +21,11 @@ import { Ring } from "@uiball/loaders";
 
 // import { TextError } from "components/TextError";
 
-import { handleCancelar } from "utils/handleCadastro";
+import { useToast } from "contexts/Toast";
 
-import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
+import { useAuth } from "hooks/useAuth";
+
+import { deleteEstatistica } from "services/delete/Estatisticas";
 
 type ModalDeletarProps = {
   id: number;
@@ -30,7 +33,31 @@ type ModalDeletarProps = {
 
 function ModalDeletar({ id }: ModalDeletarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroPriorizacao();
+  const { toast } = useToast();
+  const [loading, setLoading] = useState<boolean>(false);
+  const { user } = useAuth();
+
+  const remove = async () => {
+    try {
+      if (!id) throw new Error("Erro ao remover a atividade!");
+      const { status } = await deleteEstatistica(id, user?.nome);
+      if (status === 200 || status === 201) {
+        toast.success("Atividade removida com sucesso!", {
+          id: "toast-principal",
+        });
+
+        setLoading(false);
+
+        onClose();
+      }
+    } catch (error) {
+      toast.error("Erro ao remover atividade!", {
+        id: "toast-principal",
+      });
+      setLoading(false);
+      onClose();
+    }
+  };
 
   return (
     <>
@@ -56,7 +83,6 @@ function ModalDeletar({ id }: ModalDeletarProps) {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              registerForm.handleSubmit(e);
             }}
           >
             <ModalHeader
@@ -98,7 +124,7 @@ function ModalDeletar({ id }: ModalDeletarProps) {
                 <Button
                   variant="ghost"
                   color="red.500"
-                  onClick={() => handleCancelar(registerForm, onClose)}
+                  onClick={() => onClose()}
                   _hover={{
                     background: "red.600",
                     transition: "all 0.4s",
@@ -115,7 +141,7 @@ function ModalDeletar({ id }: ModalDeletarProps) {
                   background="#0047BB"
                   variant="primary"
                   color="white"
-                  // onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() => remove()}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",
