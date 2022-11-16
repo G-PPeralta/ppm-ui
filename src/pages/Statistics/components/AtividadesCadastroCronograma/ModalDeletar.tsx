@@ -24,7 +24,11 @@ import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
-function ModalDeletar() {
+type ModalDeletarProps = {
+  id: number;
+};
+
+function ModalDeletar({ id }: ModalDeletarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroPriorizacao();
 
