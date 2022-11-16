@@ -20,10 +20,12 @@ import {
   ModalCloseButton,
   Box,
 } from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
 
 import { postGetInfoCampanha } from "services/get/Infograficos";
 
 import Card from "./components/Card";
+import "./components/styles.scss";
 
 const reorder = (list: any, startIndex: any, endIndex: any) => {
   const result = list;
@@ -58,6 +60,8 @@ const move = (
 export default function ModalReorder() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [campanhas, setCampanhas] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [isShown, setIsShown] = useState(false);
 
   useEffect(() => {
     handleGetAll();
@@ -108,6 +112,14 @@ export default function ModalReorder() {
       const items = reorder(sourceData, source.index, destination.index);
 
       newCampanhas[sourceIndex].pocos = items;
+      setIsShown(true);
+      setTimeout(() => {
+        setLoading(true);
+      }, 300);
+      setTimeout(() => {
+        setLoading(false);
+        setIsShown(false);
+      }, 1000);
     } else {
       const result = move(sourceData, destinationData, source, destination);
 
@@ -158,89 +170,103 @@ export default function ModalReorder() {
           </ModalHeader>
           <ModalCloseButton color={"white"} onClick={() => onClose()} />
           <ModalBody mt={3}>
-            <DragDropContext onDragEnd={onDragEnd}>
-              <Box
-                overflowX={{ base: "scroll" }}
-                display={"flex"}
-                flexDirection={"row"}
-                gap={10}
-                py={2}
-                flex={1}
+            {loading ? (
+              <Flex
+                minHeight={"200px"}
+                flexGrow={1}
+                alignItems={"center"}
+                justifyContent={"center"}
               >
-                {campanhas.map((collum, index) => (
-                  <Flex
-                    key={index}
-                    width={"300px"}
-                    direction={"column"}
-                    gap={2}
-                    minHeight={"500px"}
-                  >
+                <Ring speed={2} lineWeight={5} color="blue" size={48} />
+              </Flex>
+            ) : (
+              <DragDropContext onDragEnd={onDragEnd}>
+                <Box
+                  className={`square ${
+                    isShown ? "square-full" : "square-none"
+                  }`}
+                  overflowX={{ base: "scroll" }}
+                  display={"flex"}
+                  flexDirection={"row"}
+                  gap={10}
+                  py={2}
+                  flex={1}
+                >
+                  {campanhas.map((collum, index) => (
                     <Flex
-                      mt={3}
-                      alignItems={"center"}
-                      justify={"end"}
-                      w="235px"
+                      key={index}
+                      width={"300px"}
+                      direction={"column"}
+                      gap={2}
+                      minHeight={"500px"}
                     >
-                      <Text
-                        fontSize={"xl"}
-                        fontWeight={"bold"}
-                        textAlign={"center"}
+                      <Flex
+                        mt={3}
+                        alignItems={"center"}
+                        justify={"end"}
+                        w="235px"
                       >
-                        {collum.sonda}
-                      </Text>
-                    </Flex>
-                    <Droppable droppableId={collum.sonda}>
-                      {(provided: DroppableProvided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.droppableProps}
+                        <Text
+                          fontSize={"xl"}
+                          fontWeight={"bold"}
+                          textAlign={"center"}
                         >
-                          <Flex
-                            width={"300px"}
-                            direction={"column"}
-                            gap={2}
-                            minHeight={"500px"}
+                          {collum.sonda}
+                        </Text>
+                      </Flex>
+                      <Droppable droppableId={collum.sonda}>
+                        {(provided: DroppableProvided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
                           >
-                            {collum.pocos.map((val: any, index: number) => (
-                              <>
-                                {index == 0 && val.pct_real != 0 ? (
-                                  <Card
-                                    key={index}
-                                    poco={collum.pocos[0]}
-                                    index={0}
-                                  />
-                                ) : undefined}
-                                {val.pct_real == 0 ? (
-                                  <Draggable
-                                    draggableId={String(val.id_poco)}
-                                    index={index}
-                                  >
-                                    {(provided) => (
-                                      <div
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                      >
-                                        <Card
-                                          key={index}
-                                          poco={val}
-                                          index={index}
-                                        />
-                                      </div>
-                                    )}
-                                  </Draggable>
-                                ) : undefined}
-                              </>
-                            ))}
-                          </Flex>
-                          {provided.placeholder}
-                        </div>
-                      )}
-                    </Droppable>
-                  </Flex>
-                ))}
-              </Box>
-            </DragDropContext>
+                            <Flex
+                              width={"300px"}
+                              direction={"column"}
+                              gap={2}
+                              minHeight={"500px"}
+                            >
+                              {collum.pocos.map((val: any, index: number) => (
+                                <>
+                                  {index == 0 && val.pct_real != 0 ? (
+                                    <Card
+                                      key={index}
+                                      poco={collum.pocos[0]}
+                                      index={0}
+                                    />
+                                  ) : undefined}
+                                  {val.pct_real == 0 ? (
+                                    <Draggable
+                                      draggableId={String(val.id_poco)}
+                                      index={index}
+                                    >
+                                      {(provided) => (
+                                        <div
+                                          ref={provided.innerRef}
+                                          {...provided.draggableProps}
+                                          {...provided.dragHandleProps}
+                                        >
+                                          <Card
+                                            key={index}
+                                            poco={val}
+                                            index={index}
+                                          />
+                                        </div>
+                                      )}
+                                    </Draggable>
+                                  ) : undefined}
+                                </>
+                              ))}
+                            </Flex>
+                            {provided.placeholder}
+                          </div>
+                        )}
+                      </Droppable>
+                    </Flex>
+                  ))}
+                </Box>
+              </DragDropContext>
+            )}
           </ModalBody>
 
           <ModalFooter justifyContent={"center"}>
