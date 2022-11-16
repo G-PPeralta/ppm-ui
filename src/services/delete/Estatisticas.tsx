@@ -2,17 +2,22 @@ import { api, token } from "services/api";
 
 export async function deleteOperacaoCronograma(
   id: number,
-  id_usu_create?: number
+  user: string | undefined
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.delete(`/estatisticas/projetos/${id}`);
+  const { data, status } = await api.delete(
+    `/estatisticas/projetos/${id}/${user}`
+  );
 
   return { data, status };
 }
 
 export async function deleteEstatistica(
-  id: number
+  id: number,
+  user: string | undefined
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.delete(`/estatisticas/projetos/${id}`);
+  const { data, status } = await api.delete(
+    `/estatisticas/projetos/${id}/${user}`
+  );
 
   return { data, status };
 }
