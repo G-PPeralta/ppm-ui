@@ -21,6 +21,7 @@ import {
 
 import { postReplanejarCampanha } from "services/post/Infograficos";
 
+import BotaoReplanejar from "./BotaoReplanejar";
 import PocosDragAndDrop from "./PocosDragAndDrop";
 
 interface Payload {
@@ -40,6 +41,7 @@ function ModalEditarSPT({ column, refresh, setRefresh }: any) {
 
   // console.log("payload", payload);
 
+  // eslint-disable-next-line no-unused-vars
   const handleClick = async () => {
     await postReplanejarCampanha(payload, column.id_campanha);
     setRefresh(!refresh);
@@ -161,24 +163,7 @@ function ModalEditarSPT({ column, refresh, setRefresh }: any) {
               >
                 <Text>Cancelar</Text>
               </Button>
-              <Button
-                onClick={() => handleClick()}
-                h={"56px"}
-                borderRadius={"8px"}
-                background={"origem.500"}
-                variant="primary"
-                color="white"
-                _hover={{
-                  background: "origem.600",
-                  transition: "all 0.4s",
-                }}
-                w={"208px"}
-                fontSize="18px"
-                fontWeight={"700"}
-                fontFamily={"Mulish"}
-              >
-                <Text>Salvar</Text>
-              </Button>
+              <BotaoReplanejar payload={payload} id={column.id_campanha} />
             </Flex>
           </ModalFooter>
         </ModalContent>
