@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FiPlus, FiPlusCircle, FiPrinter } from "react-icons/fi";
 // import { IoIosArrowBack } from "react-icons/io";
 import ReactToPrint from "react-to-print";
@@ -16,8 +16,11 @@ import {
   Heading,
   // Link,
 } from "@chakra-ui/react";
+import { Projetos } from "interfaces/Projetos";
 
 import Sidebar from "components/SideBar";
+
+import { useProjects } from "hooks/useProjects";
 
 import { Avanco } from "./components/avanco";
 import { Evolucao } from "./components/evolucao";
@@ -40,30 +43,21 @@ const reports: ReportTypeProps[] = [
   { name: "Avanço Físico x Avanço Financeiro", value: "6" },
 ];
 
-const projects: ReportTypeProps[] = [
-  { name: "Projeto 1", value: "1" },
-  { name: "Projeto 2", value: "2" },
-  { name: "Projeto 3", value: "3" },
-  { name: "Projeto 4", value: "4" },
-  { name: "Projeto 5", value: "5" },
-  { name: "Projeto 6", value: "6" },
-];
-
-function handleReportButton(report: string) {
-  return (
-    <>
-      {report == "1" && <PanoramaGeral />}
-      {report == "2" && <Pendencias />}
-      {report == "3" && <Indicadores />}
-      {report == "4" && <Evolucao />}
-      {report == "5" && <PrevistoXRealizado />}
-      {report == "6" && <Avanco />}
-    </>
-  );
-}
-
 export function Reports() {
+  const { getProjetosDetalhados } = useProjects();
+
   const [report, setReport] = useState("0");
+  const [projetos, setProjetos] = useState<Projetos[]>();
+  const [projeto, setProjeto] = useState<Projetos>();
+
+  const getProjectsPerPolo = async () => {
+    const data = await getProjetosDetalhados();
+    setProjetos(data);
+  };
+
+  useEffect(() => {
+    getProjectsPerPolo();
+  }, []);
 
   let initialValue = "0";
 
@@ -76,6 +70,26 @@ export function Reports() {
     lg: "desktop",
     xl: "desktop",
   });
+
+  function changeProjeto(value: any) {
+    const _projeto = projetos?.find(
+      (x) => x.id_projeto_real == value.target.value
+    );
+    setProjeto(_projeto);
+  }
+
+  function handleReportButton(report: string) {
+    return (
+      <>
+        {report == "1" && <PanoramaGeral />}
+        {report == "2" && projeto && <Pendencias data={projeto} />}
+        {report == "3" && <Indicadores />}
+        {report == "4" && <Evolucao />}
+        {report == "5" && projeto && <PrevistoXRealizado data={projeto} />}
+        {report == "6" && <Avanco />}
+      </>
+    );
+  }
 
   return (
     <>
@@ -189,10 +203,10 @@ export function Reports() {
                       width={"100%"}
                       placeholder="Selecione"
                     >
-                      {projects &&
-                        projects.map((reportType) => (
-                          <option value={reportType.value}>
-                            {reportType.name}
+                      {projetos &&
+                        projetos.map((reportType) => (
+                          <option value={reportType.id_projeto_real}>
+                            {reportType.nome_projeto}
                           </option>
                         ))}
                     </Select>
@@ -254,11 +268,12 @@ export function Reports() {
                       name="pole"
                       width={"100%"}
                       placeholder="Selecione"
+                      onChange={changeProjeto}
                     >
-                      {projects &&
-                        projects.map((reportType) => (
-                          <option value={reportType.value}>
-                            {reportType.name}
+                      {projetos &&
+                        projetos.map((projeto) => (
+                          <option value={projeto.id_projeto_real}>
+                            {projeto.nome_projeto}
                           </option>
                         ))}
                     </Select>
