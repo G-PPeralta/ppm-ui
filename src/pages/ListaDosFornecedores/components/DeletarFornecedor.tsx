@@ -24,7 +24,15 @@ import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
-function ModalDeletarPFornecedor() {
+type TabelaFornecedoresProps = {
+  onDelete: (fornecedor: any) => void;
+  fornecedor: any;
+};
+
+function ModalDeletarFornecedor({
+  onDelete,
+  fornecedor,
+}: TabelaFornecedoresProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroPriorizacao();
 
@@ -112,7 +120,7 @@ function ModalDeletarPFornecedor() {
                   background="#0047BB"
                   variant="primary"
                   color="white"
-                  // onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() => onDelete(fornecedor)}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",
@@ -139,4 +147,4 @@ function ModalDeletarPFornecedor() {
   );
 }
 
-export default ModalDeletarPFornecedor;
+export default ModalDeletarFornecedor;

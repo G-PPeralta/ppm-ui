@@ -95,16 +95,20 @@ export function TabelaServicos(props: TableProps) {
   return (
     <Flex>
       <TableContainer mt={4} mb={3} ml={1} width="100%">
-        <Table variant="unstyled" size={"sm"}>
+        <Table colorScheme={"strippedGray"}>
           <Thead>
             <Tr backgroundColor={"#0047BB"} color="white">
               <Th
                 colSpan={7}
-                borderTopRightRadius={"10px"}
-                borderTopLeftRadius="10px"
-                border="none 0px !important"
+                // borderTopRightRadius={"10px"}
+                // borderTopLeftRadius="10px"
+                // border="none 0px !important"
               >
-                <Flex justifyContent="space-between" alignItems="center">
+                <Flex
+                  justifyContent="space-between"
+                  alignItems="center"
+                  color="white"
+                >
                   <Text>Serviços</Text>
                   {servicosData && (
                     <CSVLink
@@ -135,7 +139,12 @@ export function TabelaServicos(props: TableProps) {
             <Tr backgroundColor={"#0047BB"} color="white">
               {dias &&
                 dias.map(function (x) {
-                  return <Th>{`${x.diaLabel}`}</Th>;
+                  return (
+                    <Th
+                      color="white"
+                      textAlign={"center"}
+                    >{`${x.diaLabel}`}</Th>
+                  );
                 })}
             </Tr>
           </Thead>
@@ -150,7 +159,11 @@ export function TabelaServicos(props: TableProps) {
                   const sNames =
                     serr.length > 0 ? serr.map((x) => x.nome).join(" - ") : "";
 
-                  return <Td>{sNames}</Td>;
+                  return (
+                    <Td textAlign={"center"} fontWeight={"semibold"}>
+                      {sNames}
+                    </Td>
+                  );
                 })}
             </Tr>
           </Tbody>
@@ -163,10 +176,10 @@ export function TabelaServicos(props: TableProps) {
                     (x) => x.dia == dia.data && x.tipo == "s"
                   ).length;
                   if (key === 0) {
-                    return <Td borderBottomLeftRadius="10px">{qtd}</Td>;
+                    return <Td textAlign={"center"}>{qtd}</Td>;
                   } else if (key === dias.length - 1) {
-                    return <Td borderBottomRightRadius="10px">{qtd}</Td>;
-                  } else return <Td>{qtd}</Td>;
+                    return <Td textAlign={"center"}>{qtd}</Td>;
+                  } else return <Td textAlign={"center"}>{qtd}</Td>;
                 })}
             </Tr>
           </Tfoot>

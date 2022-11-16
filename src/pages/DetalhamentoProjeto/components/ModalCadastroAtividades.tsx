@@ -147,6 +147,10 @@ function ModalCadastroAtividades({
                         </Text>
                       </Flex>
                       <Input
+                        fontSize={"14px"}
+                        fontWeight={"400"}
+                        fontFamily={"Mulish"}
+                        _placeholder={{ color: "#949494" }}
                         h={"56px"}
                         isRequired
                         placeholder="Digite o nome da atividade"
