@@ -30,6 +30,7 @@ import Sidebar from "components/SideBar";
 
 // import { useFornecedores } from 'hooks/useFornecedores';
 
+import { deleteFornecedor } from "services/delete/DeleteFornecedor";
 import { getFornecedor } from "services/get/Fornecedor";
 import { getPolo, getProjetos } from "services/get/Projetos";
 import { putFornecedor } from "services/update/Fornecedor";
@@ -96,6 +97,16 @@ export function Fornecedores() {
       fornecedores.map((f) => (f.id === fornecedor.id ? fornecedor : f))
     );
     putFornecedor(fornecedor);
+    handleGetFornecedores();
+    onClose();
+  }
+
+  function handleDeleteFornecedor(fornecedor: any) {
+    // "Deleta" o fornecedor na lista
+    setFornecedores(
+      fornecedores.map((f) => (f.id === fornecedor.id ? fornecedor : f))
+    );
+    deleteFornecedor(fornecedor);
     handleGetFornecedores();
     onClose();
   }
@@ -487,6 +498,7 @@ export function Fornecedores() {
             <TabelaFornecedores
               fornecedores={filteredFornecedores}
               onEdit={handleEditFornecedor}
+              onDelete={handleDeleteFornecedor}
               polos={polos}
               loading={loading}
             />

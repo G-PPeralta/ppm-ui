@@ -44,6 +44,10 @@ function InputNumericoGenerico({
     if (tipo === "hora") {
       return val + "h";
     }
+    if (tipo === "dias") {
+      const isPlural = val > 1 ? " dias" : " dia";
+      return val + isPlural;
+    }
     return val;
   };
 
@@ -52,7 +56,7 @@ function InputNumericoGenerico({
       {nomeInput && (
         <Flex gap={1}>
           {required && <RequiredField />}
-          <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
+          <Text fontWeight={"700"} fontSize={"12px"} color={"#949494"}>
             {nomeInput}
           </Text>
         </Flex>

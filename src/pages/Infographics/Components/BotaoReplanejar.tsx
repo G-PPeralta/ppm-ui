@@ -1,5 +1,3 @@
-import { FiTrash } from "react-icons/fi";
-
 import {
   Button,
   Flex,
@@ -12,7 +10,6 @@ import {
   Stack,
   Text,
   useDisclosure,
-  IconButton,
   ModalHeader,
   ModalCloseButton,
 } from "@chakra-ui/react";
@@ -24,35 +21,45 @@ import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
-type TabelaFornecedoresProps = {
-  onDelete: (fornecedor: any) => void;
-  fornecedor: any;
-};
+import { postReplanejarCampanha } from "services/post/Infograficos";
 
-function ModalDeletarFornecedor({
-  onDelete,
-  fornecedor,
-}: TabelaFornecedoresProps) {
+interface Payload {
+  id_cronograma: number;
+  ordem: number;
+}
+
+interface Props {
+  payload: Payload[];
+  id: any;
+}
+
+function BotaoReplanejar({ payload, id }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroPriorizacao();
 
+  const handleClick = async () => {
+    await postReplanejarCampanha(payload, id);
+    onClose();
+  };
+
   return (
     <>
-      <IconButton
+      <Button
         onClick={onOpen}
-        color={"#F40606"}
-        fontWeight={"700"}
-        backgroundColor={"transparent"}
-        aria-label="Plus sign"
+        h={"56px"}
+        borderRadius={"10px"}
+        background={"origem.500"}
+        variant="primary"
+        color="white"
         _hover={{
-          backgroundColor: "#F40606",
-          color: "white",
+          background: "origem.600",
+          transition: "all 0.4s",
         }}
-        // w={"14px"}
-        // h={"18px"}
       >
-        <FiTrash size={"13px"} />
-      </IconButton>
+        <Text fontSize="16px" fontWeight={"bold"}>
+          Salvar
+        </Text>
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
@@ -73,7 +80,7 @@ function ModalDeletarFornecedor({
               fontWeight={"700"}
               height={"48px"}
             >
-              Excluir
+              Alterar
             </ModalHeader>
 
             <ModalCloseButton color={"white"} />
@@ -89,8 +96,7 @@ function ModalDeletarFornecedor({
                         color={"#010101"}
                         fontWeight={"400"}
                       >
-                        Tem certeza que deseja mover este Fornecedor para a
-                        Lixeira?
+                        Tem certeza que deseja alterar o planejamento?
                       </Text>
                     </Flex>
                   </Stack>
@@ -98,21 +104,22 @@ function ModalDeletarFornecedor({
               </FormControl>
             </ModalBody>
 
-            <ModalFooter justifyContent={"center"}>
+            <ModalFooter justifyContent={"center"} mt={4}>
               <Flex gap={2}>
                 <Button
                   variant="ghost"
                   color="red.500"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
-                    background: "red.500",
+                    background: "red.600",
                     transition: "all 0.4s",
                     color: "white",
                   }}
                   height={"56px"}
-                  width={"206px"}
+                  width={"208px"}
                   fontSize={"18px"}
                   fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   Cancelar
                 </Button>
@@ -120,15 +127,16 @@ function ModalDeletarFornecedor({
                   background="#0047BB"
                   variant="primary"
                   color="white"
-                  onClick={() => onDelete(fornecedor)}
+                  onClick={() => handleClick()}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",
                   }}
                   height={"56px"}
-                  width={"206px"}
+                  width={"208px"}
                   fontSize={"18px"}
                   fontWeight={"700"}
+                  fontFamily={"Mulish"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
@@ -147,4 +155,4 @@ function ModalDeletarFornecedor({
   );
 }
 
-export default ModalDeletarFornecedor;
+export default BotaoReplanejar;

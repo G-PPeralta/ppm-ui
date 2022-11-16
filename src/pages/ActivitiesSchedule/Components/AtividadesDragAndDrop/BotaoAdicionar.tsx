@@ -17,7 +17,13 @@ function BotaoAdicionar({ add, registerForm, atividades }: Props) {
       (atividade: any) =>
         atividade.atividadePrecedenteId <= 0 || atividade.dias <= 0
     );
-    setIsDisabled(isDisabled);
+    const semPrecedentesNoArray = atividades.length === 0;
+
+    if (isDisabled || semPrecedentesNoArray) {
+      setIsDisabled(true);
+    } else {
+      setIsDisabled(false);
+    }
   }, [registerForm.values.precedentes]);
 
   if (registerForm.values.precedentes.length !== atividades.length) {
@@ -32,7 +38,6 @@ function BotaoAdicionar({ add, registerForm, atividades }: Props) {
         justify={"center"}
         p={2}
         _hover={{
-          // cursor: "pointer",
           borderColor: "#D6D4D4",
         }}
       >
