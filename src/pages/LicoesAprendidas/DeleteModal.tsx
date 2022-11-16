@@ -41,7 +41,7 @@ function DeleteModal({ id }: props) {
 
   const remove = async () => {
     try {
-      if (!id) throw new Error("Erro ao remover lição!");
+      if (!id) throw new Error("Erro ao remover a lição!");
       const { status } = await deleteLicao(id, user?.nome);
       if (status === 200 || status === 201) {
         toast.success("Lição removido com sucesso!", {
@@ -51,7 +51,7 @@ function DeleteModal({ id }: props) {
         onClose();
       }
     } catch (error) {
-      toast.error("Erro ao remover o lição!", {
+      toast.error("Erro ao remover a lição!", {
         id: "toast-principal",
       });
       setLoading(false);
