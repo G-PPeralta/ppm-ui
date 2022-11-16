@@ -6,7 +6,7 @@ export async function getAllGanttData(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get(`/gantt/`, {
+  const { data, status } = await api.get(`/gantt/panorama`, {
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
     },

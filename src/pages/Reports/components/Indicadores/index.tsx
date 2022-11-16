@@ -15,7 +15,7 @@ import {
 import { getProgressoProjeto } from "services/get/DetalhamentoProjetos";
 import { getProjetos } from "services/get/GetProject";
 
-import { ProjectSummary } from "../summary";
+import { ProjectSummary } from "./summary";
 
 type CardProjeto = {
   name: string;
@@ -136,7 +136,8 @@ export function Indicadores() {
                   projectsRed.map((project) => (
                     <ProjectSummary
                       data={project}
-                      table={true}
+                      table={false}
+                      tableData={{ columnNames: [], rows: [] }}
                     ></ProjectSummary>
                   ))}
               </AccordionPanel>
@@ -195,7 +196,8 @@ export function Indicadores() {
                   projectsGreen.map((project) => (
                     <ProjectSummary
                       data={project}
-                      table={true}
+                      table={false}
+                      tableData={{ columnNames: [], rows: [] }}
                     ></ProjectSummary>
                   ))}
               </AccordionPanel>

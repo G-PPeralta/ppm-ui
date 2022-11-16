@@ -118,3 +118,16 @@ export async function getTotalProjetosMes(): Promise<{
 
   return { data, status };
 }
+
+export async function getDadosCurvaSGeral(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/projetos/curva-s", {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
+    },
+  });
+
+  return { data, status };
+}
