@@ -29,9 +29,10 @@ import { deleteLicao } from "services/delete/DeleteLicoesProjetos";
 
 type ModalDeletarProps = {
   id: number;
+  newRender: Function;
 };
 
-function ModalDeletarLicao({ id }: ModalDeletarProps) {
+function ModalDeletarLicao({ id, newRender }: ModalDeletarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { toast } = useToast();
   const [loading, setLoading] = useState<boolean>(false);
@@ -141,7 +142,10 @@ function ModalDeletarLicao({ id }: ModalDeletarProps) {
                   background="#0047BB"
                   variant="primary"
                   color="white"
-                  onClick={() => remove()}
+                  onClick={() => {
+                    newRender();
+                    remove();
+                  }}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",
