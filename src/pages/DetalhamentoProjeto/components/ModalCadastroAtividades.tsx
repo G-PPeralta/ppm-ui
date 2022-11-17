@@ -27,17 +27,14 @@ import SelectFiltragem from "components/SelectFiltragem";
 
 import { regexCaracteresEspeciais } from "utils/regex";
 
+import { useDetalhamentoProjeto } from "contexts/DetalhamentoDeProjetos";
+
 import { useCadastroAtividadeProjeto } from "hooks/useCadastroAtividadeProjeto";
 
 // import PopOverRelacao from "./PopOverRelacao";
 
 import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
-
-interface Responsavel {
-  id: number;
-  nome: string;
-}
 
 interface Props {
   refresh: boolean;
@@ -48,6 +45,12 @@ interface Props {
   idProjeto?: number;
 }
 
+interface AreaResponsavel {
+  id: number;
+  id_classe: number;
+  nom_responsavel: string;
+  num_peso: string;
+}
 function ModalCadastroAtividades({
   refresh,
   setRefresh,
@@ -56,19 +59,20 @@ function ModalCadastroAtividades({
   idProjeto,
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaResponsaveis, listaAtividadesRelacao } =
+  const { registerForm, loading, listaAtividadesRelacao } =
     useCadastroAtividadeProjeto(
       refreshGanttCriacao,
       setRefreshGanttCriacao,
       idProjeto
     );
+  const { areaResponsavel } = useDetalhamentoProjeto();
 
-  const responsaveisOptions = listaResponsaveis.map(
-    (responsavel: Responsavel) => ({
-      value: responsavel.id,
-      label: responsavel.nome,
-    })
-  );
+  const areasResponsaveisOptions = areaResponsavel.data
+    .map((areaResponsavel: AreaResponsavel) => ({
+      value: areaResponsavel.id,
+      label: areaResponsavel.nom_responsavel,
+    }))
+    .sort((a: any, b: any) => a.label.localeCompare(b.label));
 
   const relacoesOptions = listaAtividadesRelacao.map((atividade: any) => ({
     value: atividade.id,
@@ -186,9 +190,9 @@ function ModalCadastroAtividades({
                   <Flex gap={5} flex={1}>
                     <SelectFiltragem
                       registerForm={registerForm}
-                      nomeSelect={"RESPONSÁVEL"}
+                      nomeSelect={"ÁREA RESPONSÁVEL"}
                       propName={"responsavel_id"}
-                      options={responsaveisOptions}
+                      options={areasResponsaveisOptions}
                       required={true}
                     />
                   </Flex>
@@ -233,17 +237,6 @@ function ModalCadastroAtividades({
                     </Flex>
                   </Flex>
                 </Flex>
-
-                {/* <Flex
-                  flexDirection={useBreakpointValue({
-                    base: "column",
-                    md: "column",
-                  })}
-                  gap={2}
-                >
-                  <Text fontWeight={"bold"}>Restrições</Text>
-                  <Restricoes registerForm={registerForm} />
-                </Flex> */}
 
                 <AtividadesDragAndDrop
                   registerForm={registerForm}
