@@ -179,7 +179,7 @@ function BotaoListadeTarefas() {
                     // width={"18px"}
                     // height={"18px"}
                   />
-                  <ModalDeletarTarefa />
+                  <ModalDeletarTarefa id={Number(task.id)} />
                 </Td>
               </Tr>
             ))

@@ -3,9 +3,10 @@
 import { api } from "services/api";
 
 export async function deleteProject(
-  id_projeto: number
+  id_projeto: any,
+  user: any
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.patch(`/projetos/${id_projeto}`);
+  const { data, status } = await api.delete(`/projetos/${id_projeto}/${user}`);
 
   return { data, status };
 }
@@ -18,9 +19,10 @@ export async function deleteProject(
  * @returns
  */
 export async function deleteAtividade(
-  id: number
+  id: number,
+  user: string | undefined
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.patch(`/gantt/${id}`);
+  const { data, status } = await api.delete(`/gantt/${id}/${user}`);
 
   return { data, status };
 }

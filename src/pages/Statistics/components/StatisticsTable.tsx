@@ -86,7 +86,7 @@ export function StatisticsTable({ data }: Props) {
                 <Text>{formatDecimal(projeto.pct_real)}</Text>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
-                <ModalDeletar />
+                <ModalDeletar id={projeto.id_poco} />
               </Td>
             </Tr>
           ))

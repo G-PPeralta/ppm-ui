@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import {
   Flex,
-  Text,
+  // Text,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -120,7 +120,8 @@ function ModalCadastroAtividadeIntervencao({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Cadastrar Atividade de Intervenção
           </ModalHeader>
@@ -144,7 +145,7 @@ function ModalCadastroAtividadeIntervencao({
                   gap={5}
                 >
                   <Flex flex={1} direction={"column"}>
-                    <Text fontWeight={"bold"}>Nome</Text>
+                    {/* <Text fontWeight={"bold"}>Nome</Text> */}
                     {/* <Flex
                       gap={5}
                       flex={1}

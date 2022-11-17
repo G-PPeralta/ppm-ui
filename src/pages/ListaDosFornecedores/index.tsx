@@ -1,4 +1,6 @@
 import { SetStateAction, useEffect, useState } from "react";
+// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
 import { BiPlus } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import { MdArrowForwardIos } from "react-icons/md";
@@ -29,6 +31,8 @@ import { Polo, ProjetosList } from "interfaces/Services";
 import Sidebar from "components/SideBar";
 
 // import { useFornecedores } from 'hooks/useFornecedores';
+
+import { useAuth } from "hooks/useAuth";
 
 import { deleteFornecedor } from "services/delete/DeleteFornecedor";
 import { getFornecedor } from "services/get/Fornecedor";
@@ -81,6 +85,8 @@ export function Fornecedores() {
   const [filtroFornecedor, setFiltroFornecedor] = useState("");
   const [polo, setPolo] = useState(0);
 
+  const { user } = useAuth();
+
   function handleEditFornecedor(fornecedor: FornecedoreDto) {
     setEditFornecedor(fornecedor);
     onOpen();
@@ -101,14 +107,35 @@ export function Fornecedores() {
     onClose();
   }
 
-  function handleDeleteFornecedor(fornecedor: any) {
+  async function handleDeleteFornecedor(fornecedor: any) {
     // "Deleta" o fornecedor na lista
     setFornecedores(
       fornecedores.map((f) => (f.id === fornecedor.id ? fornecedor : f))
     );
-    deleteFornecedor(fornecedor);
-    handleGetFornecedores();
-    onClose();
+    // deleteFornecedor(fornecedor.id, user?.nome);
+
+    // handleGetFornecedores();
+    // onClose();
+
+    try {
+      if (!fornecedor.id) throw new Error("Erro ao remover o fornecedor!");
+      const { status } = await deleteFornecedor(fornecedor.id, user?.nome);
+      if (status === 200 || status === 201) {
+        toast.success("Fornecedor removido com sucesso!", {
+          id: "toast-principal",
+        });
+
+        setLoading(false);
+        handleGetFornecedores();
+        onClose();
+      }
+    } catch (error) {
+      toast.error("Erro ao remover o fornecedor!", {
+        id: "toast-principal",
+      });
+      setLoading(false);
+      onClose();
+    }
   }
 
   const handleGetFornecedores = async () => {

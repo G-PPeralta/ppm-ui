@@ -45,9 +45,9 @@ export function DeleteModal(id: TableProps) {
           color: "white",
         }}
       >
-        <FiTrash size={"24px"} />
+        <FiTrash size={"13px"} />
       </IconButton>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton color={"white"} />
@@ -78,7 +78,7 @@ export function DeleteModal(id: TableProps) {
                     <Flex>
                       <Text
                         // textAlign={"center"}
-                        fontSize={"24px"}
+                        fontSize={"20px"}
                         mb={"1px"}
                         color={"#010101"}
                         fontWeight={"400"}

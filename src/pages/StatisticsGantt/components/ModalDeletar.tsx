@@ -19,6 +19,8 @@ import {
 
 import { useToast } from "contexts/Toast";
 
+import { useAuth } from "hooks/useAuth";
+
 import { deleteOperacaoCronograma } from "services/delete/Estatisticas";
 type ModalDeletarProps = {
   id: number;
@@ -35,11 +37,12 @@ function ModalDeletar({
 }: ModalDeletarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { toast } = useToast();
+  const { user } = useAuth();
 
   const remove = async () => {
     try {
       if (!id) throw new Error("Erro ao remover operação!");
-      const { status } = await deleteOperacaoCronograma(id);
+      const { status } = await deleteOperacaoCronograma(id, user?.nome);
       if (status === 200 || status === 201) {
         toast.success("Operação removida com sucesso!", {
           id: "toast-principal",
