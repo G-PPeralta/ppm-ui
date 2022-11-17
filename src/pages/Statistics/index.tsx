@@ -22,6 +22,7 @@ function Statistics() {
   const [filter, setFilter] = useState<StatisticsTableData[]>();
   const [refresh, setRefresh] = useState(false);
   const [search, setSearch] = useState("");
+  const [render, setRender] = useState(false);
   const windowInnerWidth = window.innerWidth;
 
   const convertReq = (payload: any): StatisticsTableData[] => {
@@ -196,7 +197,11 @@ function Statistics() {
               </Flex>
 
               <Flex flex={1} ml={-1}>
-                <StatisticsTable data={filter} />
+                <StatisticsTable
+                  data={filter}
+                  render={render}
+                  setRender={setRender}
+                />
               </Flex>
             </Box>
           </Flex>
