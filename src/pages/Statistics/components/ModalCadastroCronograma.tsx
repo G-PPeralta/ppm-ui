@@ -47,7 +47,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
 
   const optionsPocos = listaPocos.map((poco: ListaPoco) => ({
     value: poco.id,
-    label: poco.poco,
+    label: poco.nom_poco,
   }));
 
   const optionsSondas = listaSondas.map((sonda: any) => ({
