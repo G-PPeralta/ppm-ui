@@ -27,6 +27,7 @@ export function TabelaLixeira() {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
   const [data, setData] = useState<Lixeira[]>();
+  const [render, setRender] = useState(false);
 
   const fromTo = {
     from,
@@ -34,6 +35,19 @@ export function TabelaLixeira() {
     setFrom,
     setTo,
   };
+
+  const rows = [
+    {
+      id: "1",
+      nome: "Projetos",
+      qtd: "1000",
+    },
+    {
+      id: "2",
+      nome: "spt",
+      qtd: "1000",
+    },
+  ];
 
   const getData = async () => {
     const lixeira = await getLixeira();
@@ -45,6 +59,10 @@ export function TabelaLixeira() {
   useEffect(() => {
     getData();
   }, []);
+
+  useEffect(() => {
+    getData();
+  }, [render]);
 
   return (
     <>
@@ -107,6 +125,7 @@ export function TabelaLixeira() {
                   {/* <Tbody scrollBehavior={"smooth"}> */}
                   <Tbody>
                     {data &&
+                      data?.length > 0 &&
                       data
                         .sort((a, b) => a.id - b.id)
                         .slice(from, to)
@@ -117,7 +136,11 @@ export function TabelaLixeira() {
                             <Td textAlign={"center"}>{row.criado}</Td>
                             <Td textAlign={"center"}>{row.exclusao}</Td>
                             <Td textAlign={"center"}>
-                              <RestoreModal id={Number(row.id)} />
+                              <RestoreModal
+                                id={Number(row.id)}
+                                tableName={row.table_name}
+                                newRender={() => setRender(!render)}
+                              />
                               <DeleteModal id={Number(row.id)} />
                             </Td>
                           </Tr>
@@ -127,7 +150,7 @@ export function TabelaLixeira() {
               </TableContainer>
 
               <Flex>
-                <PaginacaoTabela data={data} fromTo={fromTo} />
+                <PaginacaoTabela data={rows} fromTo={fromTo} />
               </Flex>
             </Flex>
           </Flex>
