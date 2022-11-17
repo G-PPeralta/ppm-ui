@@ -62,6 +62,10 @@ export function TabelaLixeira() {
     }, 1000);
   }, [render]);
 
+  useEffect(() => {
+    getData();
+  }, []);
+
   const tableData =
     data &&
     data?.length > 0 &&
@@ -91,36 +95,36 @@ export function TabelaLixeira() {
 
   return (
     <>
-      {data && (
-        <Sidebar>
-          <Box
-            paddingTop={{ base: "5", sm: "10" }}
-            paddingBottom={{ base: "5", sm: "10" }}
-            px={{ base: "4", sm: "10" }}
-            bg={{ base: "white", sm: "white" }}
-            boxShadow={{
-              base: "none",
-              // sm: useColorModeValue("md", "md-dark"),
-            }}
-            borderRadius={{ base: "none", sm: "xl" }}
+      <Sidebar>
+        <Box
+          paddingTop={{ base: "5", sm: "10" }}
+          paddingBottom={{ base: "5", sm: "10" }}
+          px={{ base: "4", sm: "10" }}
+          bg={{ base: "white", sm: "white" }}
+          boxShadow={{
+            base: "none",
+            // sm: useColorModeValue("md", "md-dark"),
+          }}
+          borderRadius={{ base: "none", sm: "xl" }}
+        >
+          <Flex
+            mt={-5}
+            ml={-5}
+            mr={-5}
+            flexDirection={"row"}
+            justify={"space-between"}
+            mb={1}
+            wrap={"wrap"}
           >
-            <Flex
-              mt={-5}
-              ml={-5}
-              mr={-5}
-              flexDirection={"row"}
-              justify={"space-between"}
-              mb={1}
-              wrap={"wrap"}
+            <Heading
+              fontFamily={"Mulish"}
+              fontWeight={"700"}
+              fontSize={"24px"}
+              color={"#2D2926"}
             >
-              <Heading
-                fontFamily={"Mulish"}
-                fontWeight={"700"}
-                fontSize={"24px"}
-                color={"#2D2926"}
-              >
-                Lixeira
-              </Heading>
+              Lixeira
+            </Heading>
+            {data && (
               <Flex direction={"column"} w={"100%"} mr={-10}>
                 <TableContainer
                   mt={4}
@@ -160,10 +164,10 @@ export function TabelaLixeira() {
                   />
                 </Flex>
               </Flex>
-            </Flex>
-          </Box>
-        </Sidebar>
-      )}
+            )}
+          </Flex>
+        </Box>
+      </Sidebar>
     </>
   );
 }
