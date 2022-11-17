@@ -65,9 +65,9 @@ function ModalCadastroAtividades({
       setRefreshGanttCriacao,
       idProjeto
     );
-  const { areaResponsavel } = useDetalhamentoProjeto();
+  const { data } = useDetalhamentoProjeto();
 
-  const areasResponsaveisOptions = areaResponsavel.data
+  const areasResponsaveisOptions = data
     .map((areaResponsavel: AreaResponsavel) => ({
       value: areaResponsavel.id,
       label: areaResponsavel.nom_responsavel,
