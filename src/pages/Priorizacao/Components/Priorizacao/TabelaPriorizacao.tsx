@@ -43,7 +43,7 @@ export function TabelaPriorizacao({ refresh, setRefresh }: TableProps) {
   useEffect(() => {
     setTimeout(() => {
       getData();
-    }, 3000);
+    }, 1000);
   }, [refresh]);
 
   const fromTo = {
