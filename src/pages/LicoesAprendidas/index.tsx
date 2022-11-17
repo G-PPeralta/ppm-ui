@@ -92,8 +92,10 @@ export function LicoesAprendidasProjetos() {
   }, []);
 
   useEffect(() => {
-    handleGetLicoesAprendidas();
-    handleGetProjetos();
+    setTimeout(() => {
+      handleGetLicoesAprendidas();
+      handleGetProjetos();
+    }, 1000);
   }, [render]);
 
   const handleClick = () => {
