@@ -24,6 +24,12 @@ export function useCentroDeCusto(id?: number, metodo?: string) {
     classeDeServicoId: 0,
     pedido: "",
     descricaoDoServico: "",
+    bm: "",
+    id_nf: "",
+    valor_bm_nf: 0,
+    status: 0,
+    data_pagamento: null,
+    valor_pago: 0,
   };
 
   const registerForm = useFormik({
@@ -38,6 +44,12 @@ export function useCentroDeCusto(id?: number, metodo?: string) {
         classeDeServicoId: values.classeDeServicoId,
         pedido: values.pedido,
         descricaoDoServico: values.descricaoDoServico,
+        bm: values.bm,
+        id_nf: values.id_nf,
+        valor_bm_nf: values.valor_bm_nf,
+        status: values.status,
+        data_pagamento: values.data_pagamento ? values.data_pagamento : null,
+        valor_pago: values.valor_pago,
       };
 
       setLoading(true);

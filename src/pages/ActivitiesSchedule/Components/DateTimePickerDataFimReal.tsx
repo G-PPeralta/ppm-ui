@@ -11,6 +11,7 @@ function DateTimePickerDataFimReal({
   inicioReal,
 }: any) {
   const handleIniciarDate = (date: any) => {
+    date.setHours(18, 0, 0, 0);
     setFimReal(date);
   };
 
@@ -36,8 +37,8 @@ function DateTimePickerDataFimReal({
         selected={fimReal}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
-        showTimeSelect
-        dateFormat="dd/MM/yyyy, hh:mm"
+        // showTimeSelect
+        dateFormat="Pp"
         customInput={<TriggerDatePickerInicio />}
         isClearable={fimReal !== ""}
         disabled={!intervencaoIniciada && atividadeStatus !== 100}

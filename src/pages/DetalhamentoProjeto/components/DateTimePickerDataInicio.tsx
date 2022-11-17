@@ -14,18 +14,13 @@ function DateTimePickerDataInicio({ registerForm, data }: any) {
   useEffect(() => {
     if (data) {
       const newDate = new Date(data);
-      // newDate.setDate(newDate.getDate() + 15);
       setDataInicio(newDate);
-      // setDataMin(newDate);
-    } else {
-      // const newDate = new Date();
-      // setDataMin(newDate);
     }
   }, []);
 
   const handleIniciarDate = (date: any) => {
     if (date) {
-      // date.setHours(9, 0, 0, 0);
+      date.setHours(9, 0, 0, 0);
       setDataInicio(date);
       registerForm.setFieldValue(
         "dat_inicio_plan",
@@ -65,8 +60,8 @@ function DateTimePickerDataInicio({ registerForm, data }: any) {
         // minDate={dataMin}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
-        showTimeSelect
-        dateFormat="dd/MM/yyyy, hh:mm"
+        // showTimeSelect
+        dateFormat="Pp"
         customInput={<TriggerDatePickerInicio />}
         // isClearable={dataInicio !== ""}
       />

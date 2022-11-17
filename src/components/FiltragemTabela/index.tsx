@@ -3,8 +3,6 @@ import { BsSearch } from "react-icons/bs";
 
 import { Button, Flex, Input, Text } from "@chakra-ui/react";
 
-// import DatePickerGenerico from "components/DatePickerGenerico";
-
 interface Props {
   nomeLabel: string;
   nomeLabelData?: string;
@@ -72,19 +70,6 @@ function FiltragemTabela({
           onChange={(event) => setSearch(event.target.value)}
         />
       </Flex>
-
-      {/* {filtrarData && nomeLabelData && (
-        <Flex direction={"column"}>
-          <Text fontWeight={"700"} fontSize={"12px"} color={"#949494"}>
-            {nomeLabelData.toUpperCase()}
-          </Text>
-          <DatePickerGenerico
-            registerForm={registerForm}
-            propName={propNameData}
-            data={registerForm.values.dataInicio}
-          />
-        </Flex>
-      )} */}
 
       <Flex>
         <Button
