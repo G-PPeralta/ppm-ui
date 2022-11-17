@@ -11,7 +11,7 @@ import {
   Th,
   Thead,
   Tr,
-  useColorModeValue,
+  // useColorModeValue,
 } from "@chakra-ui/react";
 import { Lixeira } from "interfaces/Lixeira";
 
@@ -36,18 +36,18 @@ export function TabelaLixeira() {
     setTo,
   };
 
-  const rows = [
-    {
-      id: "1",
-      nome: "Projetos",
-      qtd: "1000",
-    },
-    {
-      id: "2",
-      nome: "spt",
-      qtd: "1000",
-    },
-  ];
+  // const rows = [
+  //   {
+  //     id: "1",
+  //     nome: "Projetos",
+  //     qtd: "1000",
+  //   },
+  //   {
+  //     id: "2",
+  //     nome: "spt",
+  //     qtd: "1000",
+  //   },
+  // ];
 
   const getData = async () => {
     const lixeira = await getLixeira();
@@ -93,74 +93,79 @@ export function TabelaLixeira() {
 
   return (
     <>
-      <Sidebar>
-        <Box
-          paddingTop={{ base: "5", sm: "10" }}
-          paddingBottom={{ base: "5", sm: "10" }}
-          px={{ base: "4", sm: "10" }}
-          bg={{ base: "white", sm: "white" }}
-          boxShadow={{
-            base: "none",
-            sm: useColorModeValue("md", "md-dark"),
-          }}
-          borderRadius={{ base: "none", sm: "xl" }}
-        >
-          <Flex
-            mt={-5}
-            ml={-5}
-            mr={-5}
-            flexDirection={"row"}
-            justify={"space-between"}
-            mb={1}
-            wrap={"wrap"}
+      {data && (
+        <Sidebar>
+          <Box
+            paddingTop={{ base: "5", sm: "10" }}
+            paddingBottom={{ base: "5", sm: "10" }}
+            px={{ base: "4", sm: "10" }}
+            bg={{ base: "white", sm: "white" }}
+            boxShadow={{
+              base: "none",
+              // sm: useColorModeValue("md", "md-dark"),
+            }}
+            borderRadius={{ base: "none", sm: "xl" }}
           >
-            <Heading
-              fontFamily={"Mulish"}
-              fontWeight={"700"}
-              fontSize={"24px"}
-              color={"#2D2926"}
+            <Flex
+              mt={-5}
+              ml={-5}
+              mr={-5}
+              flexDirection={"row"}
+              justify={"space-between"}
+              mb={1}
+              wrap={"wrap"}
             >
-              Lixeira
-            </Heading>
-            <Flex direction={"column"} w={"100%"} mr={-10}>
-              <TableContainer
-                mt={4}
-                mb={4}
-                borderRadius={"10px"}
-                // overflowX={"scroll"}
+              <Heading
+                fontFamily={"Mulish"}
+                fontWeight={"700"}
+                fontSize={"24px"}
+                color={"#2D2926"}
               >
-                <Table variant="striped" colorScheme={"strippedGray"}>
-                  <Thead backgroundColor={"origem.300"}>
-                    <Tr background={"origem.500"}>
-                      <Th color="white" textAlign={"center"} w={"56px"}>
-                        ID
-                      </Th>
-                      <Th color="white" textAlign={"center"}>
-                        Item
-                      </Th>
-                      <Th color="white" textAlign={"center"} w={"166px"}>
-                        Data de Criação
-                      </Th>
-                      <Th color="white" textAlign={"center"} w={"104px"}>
-                        Data de Exclusão
-                      </Th>
-                      <Th color="white" textAlign={"center"} w={"104px"}>
-                        Ações
-                      </Th>
-                    </Tr>
-                  </Thead>
-                  {/* <Tbody scrollBehavior={"smooth"}> */}
-                  <Tbody>{tableData}</Tbody>
-                </Table>
-              </TableContainer>
+                Lixeira
+              </Heading>
+              <Flex direction={"column"} w={"100%"} mr={-10}>
+                <TableContainer
+                  mt={4}
+                  mb={4}
+                  borderRadius={"10px"}
+                  // overflowX={"scroll"}
+                >
+                  <Table variant="striped" colorScheme={"strippedGray"}>
+                    <Thead backgroundColor={"origem.300"}>
+                      <Tr background={"origem.500"}>
+                        <Th color="white" textAlign={"center"} w={"56px"}>
+                          ID
+                        </Th>
+                        <Th color="white" textAlign={"center"}>
+                          Item
+                        </Th>
+                        <Th color="white" textAlign={"center"} w={"166px"}>
+                          Data de Criação
+                        </Th>
+                        <Th color="white" textAlign={"center"} w={"104px"}>
+                          Data de Exclusão
+                        </Th>
+                        <Th color="white" textAlign={"center"} w={"104px"}>
+                          Ações
+                        </Th>
+                      </Tr>
+                    </Thead>
+                    {/* <Tbody scrollBehavior={"smooth"}> */}
+                    <Tbody>{tableData}</Tbody>
+                  </Table>
+                </TableContainer>
 
-              <Flex>
-                <PaginacaoTabela data={data || rows} fromTo={fromTo} />
+                <Flex>
+                  <PaginacaoTabela
+                    data={data && data?.length > 0}
+                    fromTo={fromTo}
+                  />
+                </Flex>
               </Flex>
             </Flex>
-          </Flex>
-        </Box>
-      </Sidebar>
+          </Box>
+        </Sidebar>
+      )}
     </>
   );
 }
