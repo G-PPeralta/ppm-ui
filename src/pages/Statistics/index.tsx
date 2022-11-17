@@ -80,6 +80,11 @@ function Statistics() {
     handleGetAllData();
   }, [refresh]);
 
+  useEffect(() => {
+    handleGetAllData();
+    handleClick();
+  }, [render]);
+
   // console.log("filter", filter);
   // console.log("allData", allData);
 
