@@ -16,13 +16,7 @@ import {
   ModalHeader,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
-
-// import { TextError } from "components/TextError";
-
-import { handleCancelar } from "utils/handleCadastro";
-
-import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
+// import { Ring } from "@uiball/loaders";
 
 type TabelaFornecedoresProps = {
   onDelete: (fornecedor: any) => void;
@@ -34,7 +28,6 @@ function ModalDeletarFornecedor({
   fornecedor,
 }: TabelaFornecedoresProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroPriorizacao();
 
   return (
     <>
@@ -48,8 +41,6 @@ function ModalDeletarFornecedor({
           backgroundColor: "#F40606",
           color: "white",
         }}
-        // w={"14px"}
-        // h={"18px"}
       >
         <FiTrash size={"13px"} />
       </IconButton>
@@ -60,7 +51,6 @@ function ModalDeletarFornecedor({
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              registerForm.handleSubmit(e);
             }}
           >
             <ModalHeader
@@ -103,9 +93,9 @@ function ModalDeletarFornecedor({
                 <Button
                   variant="ghost"
                   color="red.500"
-                  onClick={() => handleCancelar(registerForm, onClose)}
+                  onClick={() => onClose()}
                   _hover={{
-                    background: "red.500",
+                    background: "red.600",
                     transition: "all 0.4s",
                     color: "white",
                   }}
@@ -117,7 +107,7 @@ function ModalDeletarFornecedor({
                   Cancelar
                 </Button>
                 <Button
-                  background="#0047BB"
+                  background="origem.500"
                   variant="primary"
                   color="white"
                   onClick={() => onDelete(fornecedor)}
@@ -130,13 +120,13 @@ function ModalDeletarFornecedor({
                   fontSize={"18px"}
                   fontWeight={"700"}
                 >
-                  {loading ? (
+                  {/* {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Confirmar</Text>
-                    </>
-                  )}
+                  ) : ( */}
+                  <>
+                    <Text>Confirmar</Text>
+                  </>
+                  {/* )} */}
                 </Button>
               </Flex>
             </ModalFooter>
