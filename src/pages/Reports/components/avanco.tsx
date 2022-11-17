@@ -2,7 +2,7 @@ import { Flex } from "@chakra-ui/react";
 
 import CurvaS from "components/CurvaS";
 
-import { curveSData, tableData, summaryValues } from "./data";
+import { curveSData, summaryValues, tableData } from "./data";
 import { GenericTable } from "./genericTable";
 import { ProjectSummary } from "./summary";
 
