@@ -57,11 +57,9 @@ export function TabelaLixeira() {
   // console.log(data);
 
   useEffect(() => {
-    getData();
-  }, []);
-
-  useEffect(() => {
-    getData();
+    setTimeout(() => {
+      getData();
+    }, 1000);
   }, [render]);
 
   const tableData =
