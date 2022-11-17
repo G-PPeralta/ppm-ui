@@ -19,7 +19,12 @@ import { getPriorizacoes } from "services/get/Priorizacoes";
 import ModalPriorizacao from "../ModaisDinamicosPriorizacao/ModalPriorizacao";
 import ModalDeletarPriorizacao from "./DeletarPriorizacao";
 
-export function TabelaPriorizacao() {
+interface TableProps {
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export function TabelaPriorizacao({ refresh, setRefresh }: TableProps) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
   const [data, setData] = useState<any[]>([]);
@@ -34,6 +39,12 @@ export function TabelaPriorizacao() {
   useEffect(() => {
     getData();
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      getData();
+    }, 3000);
+  }, [refresh]);
 
   const fromTo = {
     from,
@@ -67,7 +78,11 @@ export function TabelaPriorizacao() {
             nomeRanking={prio.nom_ranking}
             idRanking={prio.id}
           />
-          <ModalDeletarPriorizacao id={prio.id} />
+          <ModalDeletarPriorizacao
+            id={prio.id}
+            refresh={refresh}
+            setRefresh={setRefresh}
+          />
         </Td>
       </Tr>
     ));
