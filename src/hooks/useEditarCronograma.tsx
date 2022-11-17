@@ -71,7 +71,7 @@ export function useEditarCronograma(atual: any) {
       a.nom_sonda.localeCompare(b.nom_sonda)
     );
     const pocosSorted = pocos.data.sort((a: ListaPoco, b: ListaPoco) =>
-      a.poco.localeCompare(b.poco)
+      a.nom_poco.localeCompare(b.nom_poco)
     );
     const areasAtuacaoSorted = areaAtuacao.data.sort((a: any, b: any) =>
       a.tipo.localeCompare(b.tipo)
