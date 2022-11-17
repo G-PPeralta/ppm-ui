@@ -5,7 +5,7 @@ import { Ring } from "@uiball/loaders";
 
 import CurvaS from "components/CurvaS";
 
-import { getProjetosPrevistoRealizado } from "services/get/Dashboard";
+import { getDadosCurvaSGeral } from "services/get/Dashboard";
 
 import { Gantt } from "../Gantt";
 
@@ -14,7 +14,7 @@ export function PanoramaGeral() {
   const [loadingCurva, setLoadingCurva] = useState(true);
 
   const getData = async () => {
-    const res = await getProjetosPrevistoRealizado();
+    const res = await getDadosCurvaSGeral();
     setData(res.data);
     setLoadingCurva(false);
   };

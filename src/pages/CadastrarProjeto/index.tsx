@@ -12,7 +12,6 @@ import {
 import { Ring } from "@uiball/loaders";
 
 import BotaoSetaVoltar from "components/BotaoSetaVoltar/BotaoSetaVoltar";
-// import DatePickerGenerico from "components/DatePickerGenerico";
 import InputGenerico from "components/InputGenerico";
 import SelectFiltragem from "components/SelectFiltragem";
 import Sidebar from "components/SideBar";
@@ -276,14 +275,6 @@ function CadastrarProjeto() {
                       maxLength={50}
                     />
                   </Flex>
-                  {/* <Flex flex={1}>
-                    <DatePickerGenerico
-                      nomeLabel={"DATA INÍCIO"}
-                      registerForm={registerForm}
-                      propName={"dataInicio"}
-                      data={registerForm.values.dataInicio}
-                    />
-                  </Flex> */}
                 </Flex>
 
                 <Flex
