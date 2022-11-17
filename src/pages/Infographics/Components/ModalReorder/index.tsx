@@ -22,7 +22,10 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
+import { useToast } from "contexts/Toast";
+
 import { postGetInfoCampanha } from "services/get/Infograficos";
+// import { postReorderIntervencao } from "services/post/Infograficos";
 
 import Card from "./components/Card";
 import "./components/styles.scss";
@@ -62,6 +65,8 @@ export default function ModalReorder() {
   const [campanhas, setCampanhas] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [isShown, setIsShown] = useState(false);
+
+  const { toast } = useToast();
 
   useEffect(() => {
     handleGetAll();
@@ -130,7 +135,22 @@ export default function ModalReorder() {
   };
 
   const save = async () => {
-    console.log("campanhas saved", campanhas);
+    // try {
+    //   const { status } = await postReorderIntervencao(campanhas);
+
+    //   if (status === 200 || status === 201) {
+    toast.success("Intervenções reordenadas com sucesso!", {
+      id: "toast-principal",
+    });
+    onClose();
+    //     setLoading(false);
+    //   }
+    // } catch (error) {
+    //   toast.error("Erro ao reordenar intervenção!", {
+    //     id: "toast-principal",
+    //   });
+    //   setLoading(false);
+    // }
   };
 
   return (
