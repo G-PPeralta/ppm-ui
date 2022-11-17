@@ -118,7 +118,7 @@ export function RestoreModal({ id, tableName, newRender }: TableProps) {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red"
+                  color="#F40606"
                   onClick={() => onClose()}
                   _hover={{
                     background: "red.600",

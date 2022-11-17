@@ -123,7 +123,7 @@ function ModalDeletarLicao({ id, newRender }: ModalDeletarProps) {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red.500"
+                  color="#F40606"
                   onClick={() => onClose()}
                   _hover={{
                     background: "red.600",
@@ -139,7 +139,7 @@ function ModalDeletarLicao({ id, newRender }: ModalDeletarProps) {
                   Cancelar
                 </Button>
                 <Button
-                  background="#0047BB"
+                  background="origem.500"
                   variant="primary"
                   color="white"
                   onClick={() => {

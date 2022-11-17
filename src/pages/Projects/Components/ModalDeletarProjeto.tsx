@@ -125,7 +125,7 @@ function ModalDeletarProjeto(projeto: id) {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red.500"
+                  color="#F40606"
                   onClick={() => onClose()}
                   _hover={{
                     background: "red.600",
