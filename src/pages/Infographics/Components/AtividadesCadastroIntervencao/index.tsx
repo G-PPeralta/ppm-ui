@@ -203,7 +203,10 @@ export default function AtividadesCadastroIntervencao({
   return (
     <>
       <Flex gap={1}>
-        <Text fontWeight={"bold"}>Atividades</Text>
+        {/* <Text fontWeight={"bold"}>Atividades</Text> */}
+        <Text fontWeight={"700"} fontSize={"12px"} color={"#949494"} mb={-2}>
+          ATIVIDADES
+        </Text>
       </Flex>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId={droppableId}>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FiTrash } from "react-icons/fi";
 
 import {
@@ -20,13 +21,44 @@ import { Ring } from "@uiball/loaders";
 
 // import { TextError } from "components/TextError";
 
-import { handleCancelar } from "utils/handleCadastro";
+// import { handleCancelar } from "utils/handleCadastro";
 
-import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
+import { useToast } from "contexts/Toast";
 
-function ModalDeletarTarefa() {
+import { useAuth } from "hooks/useAuth";
+
+import { deleteTarefa } from "services/delete/DeleteTarefa";
+
+type ModalDeletarProps = {
+  id: number;
+};
+
+function ModalDeletarTarefa({ id }: ModalDeletarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroPriorizacao();
+  const { toast } = useToast();
+  const { user } = useAuth();
+
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const remove = async () => {
+    try {
+      if (!id) throw new Error("Erro ao remover tarefa!");
+      const { status } = await deleteTarefa(id, user?.nome);
+      if (status === 200 || status === 201) {
+        toast.success("Tarefa removida com sucesso!", {
+          id: "toast-principal",
+        });
+        setLoading(false);
+        onClose();
+      }
+    } catch (error) {
+      toast.error("Erro ao remover tarefa!", {
+        id: "toast-principal",
+      });
+      setLoading(false);
+      onClose();
+    }
+  };
 
   return (
     <>
@@ -52,7 +84,6 @@ function ModalDeletarTarefa() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              registerForm.handleSubmit(e);
             }}
           >
             <ModalHeader
@@ -94,7 +125,7 @@ function ModalDeletarTarefa() {
                 <Button
                   variant="ghost"
                   color="red.500"
-                  onClick={() => handleCancelar(registerForm, onClose)}
+                  onClick={() => onClose()}
                   _hover={{
                     background: "red.500",
                     transition: "all 0.4s",
@@ -112,7 +143,7 @@ function ModalDeletarTarefa() {
                   background="#0047BB"
                   variant="primary"
                   color="white"
-                  // onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() => remove()}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",

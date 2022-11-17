@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FiTrash } from "react-icons/fi";
 
 import {
@@ -22,23 +23,41 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-// import { TextError } from "components/TextError";
+import { useToast } from "contexts/Toast";
 
-import { handleCancelar } from "utils/handleCadastro";
+import { useAuth } from "hooks/useAuth";
 
-// import { useAuth } from "hooks/useAuth";
-import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
+import { deleteLicao } from "services/delete/DeleteLicoesProjetos";
 
-// import { deleteProject } from "services/delete/DeleteProject";
+type props = {
+  id: number;
+};
 
-function DeleteModal() {
+function DeleteModal({ id }: props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroPriorizacao();
-  // const { user } = useAuth();
-  // const idUser = user?.nome;
+  const { toast } = useToast();
+  const [loading, setLoading] = useState<boolean>(false);
+  const { user } = useAuth();
 
-  // Pra pegar o id do projeto e depois ser possível deletar
-  // console.log(projeto.projeto);
+  const remove = async () => {
+    try {
+      if (!id) throw new Error("Erro ao remover a lição!");
+      const { status } = await deleteLicao(id, user?.nome);
+      if (status === 200 || status === 201) {
+        toast.success("Lição removido com sucesso!", {
+          id: "toast-principal",
+        });
+        setLoading(false);
+        onClose();
+      }
+    } catch (error) {
+      toast.error("Erro ao remover a lição!", {
+        id: "toast-principal",
+      });
+      setLoading(false);
+      onClose();
+    }
+  };
 
   return (
     <>
@@ -62,7 +81,6 @@ function DeleteModal() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              registerForm.handleSubmit(e);
             }}
           >
             <ModalHeader
@@ -105,7 +123,7 @@ function DeleteModal() {
                 <Button
                   variant="ghost"
                   color="red.500"
-                  onClick={() => handleCancelar(registerForm, onClose)}
+                  onClick={() => onClose()}
                   _hover={{
                     background: "red.500",
                     transition: "all 0.4s",
@@ -122,7 +140,7 @@ function DeleteModal() {
                   background="#0047BB"
                   variant="primary"
                   color="white"
-                  // onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() => remove()}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",

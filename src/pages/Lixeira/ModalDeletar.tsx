@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FiTrash } from "react-icons/fi";
 
 import {
@@ -19,45 +18,19 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-import { useToast } from "contexts/Toast";
+// import { TextError } from "components/TextError";
 
-import { useAuth } from "hooks/useAuth";
+import { handleCancelar } from "utils/handleCadastro";
 
-import { deleteOpcaoPriorizacao } from "services/delete/DeletePriorizacao";
+import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
-type props = {
+interface TableProps {
   id: number;
-  refresh: boolean;
-  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
-function ModalDeletarOpcaoPriorizacao({ id, refresh, setRefresh }: props) {
+export function DeleteModal(id: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [loading, setLoading] = useState<boolean>(false);
-  const { toast } = useToast();
-  const { user } = useAuth();
-
-  const remove = async () => {
-    try {
-      if (!id) throw new Error("Erro ao remover priorização!");
-      const { status } = await deleteOpcaoPriorizacao(id, user?.nome);
-      if (status === 200 || status === 201) {
-        toast.success("Priorização removida com sucesso!", {
-          id: "toast-principal",
-        });
-
-        setLoading(false);
-
-        onClose();
-      }
-    } catch (error) {
-      toast.error("Erro ao remover priorização!", {
-        id: "toast-principal",
-      });
-      setLoading(false);
-      onClose();
-    }
-  };
+  const { registerForm, loading } = useCadastroPriorizacao();
 
   return (
     <>
@@ -81,6 +54,7 @@ function ModalDeletarOpcaoPriorizacao({ id, refresh, setRefresh }: props) {
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              registerForm.handleSubmit(e);
             }}
           >
             <ModalHeader
@@ -109,8 +83,8 @@ function ModalDeletarOpcaoPriorizacao({ id, refresh, setRefresh }: props) {
                         color={"#010101"}
                         fontWeight={"400"}
                       >
-                        Tem certeza que deseja mover esta informação para a
-                        Lixeira?
+                        Tem certeza que deseja apagar essa informação
+                        permanentemente?
                       </Text>
                     </Flex>
                   </Stack>
@@ -122,36 +96,33 @@ function ModalDeletarOpcaoPriorizacao({ id, refresh, setRefresh }: props) {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red.500"
-                  onClick={() => onClose()}
+                  color="red"
+                  onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
-                    background: "red.500",
+                    background: "red.600",
                     transition: "all 0.4s",
                     color: "white",
                   }}
                   height={"56px"}
-                  width={"206px"}
+                  width={"204px"}
                   fontSize={"18px"}
-                  fontWeight={"700"}
+                  fontWeight={"600"}
                 >
                   Cancelar
                 </Button>
                 <Button
-                  background="#0047BB"
+                  background="origem.500"
                   variant="primary"
                   color="white"
-                  onClick={() => {
-                    setRefresh(!refresh);
-                    remove();
-                  }}
+                  // onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",
                   }}
                   height={"56px"}
-                  width={"206px"}
+                  width={"204px"}
                   fontSize={"18px"}
-                  fontWeight={"700"}
+                  fontWeight={"600"}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
@@ -169,5 +140,3 @@ function ModalDeletarOpcaoPriorizacao({ id, refresh, setRefresh }: props) {
     </>
   );
 }
-
-export default ModalDeletarOpcaoPriorizacao;

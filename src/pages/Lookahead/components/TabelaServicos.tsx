@@ -94,7 +94,7 @@ export function TabelaServicos(props: TableProps) {
 
   return (
     <Flex>
-      <TableContainer mt={4} mb={3} ml={1} width="100%">
+      <TableContainer mt={4} mb={3} ml={1} borderRadius={"10px"} width="100%">
         <Table colorScheme={"strippedGray"}>
           <Thead>
             <Tr backgroundColor={"#0047BB"} color="white">
