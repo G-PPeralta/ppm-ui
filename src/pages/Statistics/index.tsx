@@ -81,8 +81,9 @@ function Statistics() {
   }, [refresh]);
 
   useEffect(() => {
-    handleGetAllData();
-    handleClick();
+    setTimeout(() => {
+      handleGetAllData();
+    }, 1000);
   }, [render]);
 
   // console.log("filter", filter);
