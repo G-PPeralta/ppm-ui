@@ -13,6 +13,7 @@ function DateTimePickerDataInicioReal({
   fimReal,
 }: any) {
   const handleIniciarDate = (date: any) => {
+    date.setHours(9, 0, 0, 0);
     setInicioReal(date);
   };
 
@@ -38,8 +39,8 @@ function DateTimePickerDataInicioReal({
         selected={inicioReal}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
-        showTimeSelect
-        dateFormat="dd/MM/yyyy, hh:mm"
+        // showTimeSelect
+        dateFormat="Pp"
         customInput={<TriggerDatePickerInicio />}
         isClearable={inicioReal !== ""}
         disabled={!intervencaoIniciada && atividadeStatus === 0}
