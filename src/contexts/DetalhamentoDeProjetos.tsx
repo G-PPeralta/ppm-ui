@@ -13,11 +13,9 @@ export const DetalhamentoProjetoProvider = ({ children }: any) => {
   });
 
   const value = {
-    areaResponsavel: {
-      isLoading,
-      error,
-      data,
-    },
+    isLoading,
+    error,
+    data,
   };
 
   return (
