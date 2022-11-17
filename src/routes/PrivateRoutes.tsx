@@ -16,6 +16,7 @@ import { Import } from "pages/Import";
 import { Infographics } from "pages/Infographics";
 import { LicoesAprendidasProjetos } from "pages/LicoesAprendidas";
 import { Fornecedores } from "pages/ListaDosFornecedores";
+import { TabelaLixeira } from "pages/Lixeira";
 import { Lookahead } from "pages/Lookahead";
 import { LookaheadDetalhe } from "pages/Lookahead/Detalhe";
 import { NotFound } from "pages/NotFound";
@@ -30,7 +31,7 @@ import { Settings } from "pages/Settings";
 import { ShareRegister } from "pages/ShareRegister";
 import { Statistics } from "pages/Statistics";
 import { StatisticsGantt } from "pages/StatisticsGantt";
-import { RegisteredList } from "pages/Trash";
+// import { RegisteredList } from "pages/Trash";
 import { ActionItems } from "pages/Trash/actionItems";
 import { Trash } from "pages/Trash/trash";
 import { Usuarios } from "pages/Usuarios";
@@ -92,8 +93,9 @@ export function PrivateRoutes() {
         element={<CentroDeCustoProjetos />}
       />
       <Route path="/priorizacao" element={<Priorizacao />} />
-      <Route path="/registered-list" element={<RegisteredList />} />
+      {/* <Route path="/registered-list" element={<RegisteredList />} /> */}
       <Route path="/actions/:id" element={<ActionItems />} />
+      <Route path="/registered-list" element={<TabelaLixeira />} />
       <Route path="/trash" element={<Trash />} />
       <Route path="/priorizacao-diretores" element={<PriorizacaoDiretores />} />
       <Route path="*" element={<NotFound />} />

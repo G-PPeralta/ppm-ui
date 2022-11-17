@@ -46,8 +46,12 @@ function BotaoReplanejar({ payload, id }: Props) {
     <>
       <Button
         onClick={onOpen}
+        w={"208px"}
         h={"56px"}
-        borderRadius={"10px"}
+        fontSize="18px"
+        fontWeight={"700"}
+        fontFamily={"Mulish"}
+        borderRadius={"8px"}
         background={"origem.500"}
         variant="primary"
         color="white"
@@ -56,9 +60,7 @@ function BotaoReplanejar({ payload, id }: Props) {
           transition: "all 0.4s",
         }}
       >
-        <Text fontSize="16px" fontWeight={"bold"}>
-          Salvar
-        </Text>
+        <Text>Salvar</Text>
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
