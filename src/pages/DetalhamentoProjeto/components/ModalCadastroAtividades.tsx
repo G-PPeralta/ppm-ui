@@ -11,14 +11,12 @@ import {
   ModalFooter,
   useDisclosure,
   Button,
-  useBreakpointValue,
   Input,
   NumberInput,
   NumberInputField,
   ModalCloseButton,
 } from "@chakra-ui/react";
-
-// import Restricoes from "pages/Infographics/Components/Restricoes";
+import { Ring } from "@uiball/loaders";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
@@ -27,17 +25,14 @@ import SelectFiltragem from "components/SelectFiltragem";
 
 import { regexCaracteresEspeciais } from "utils/regex";
 
+import { useDetalhamentoProjeto } from "contexts/DetalhamentoDeProjetos";
+
 import { useCadastroAtividadeProjeto } from "hooks/useCadastroAtividadeProjeto";
 
 // import PopOverRelacao from "./PopOverRelacao";
 
 import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
-
-interface Responsavel {
-  id: number;
-  nome: string;
-}
 
 interface Props {
   refresh: boolean;
@@ -48,6 +43,12 @@ interface Props {
   idProjeto?: number;
 }
 
+interface AreaResponsavel {
+  id: number;
+  id_classe: number;
+  nom_responsavel: string;
+  num_peso: string;
+}
 function ModalCadastroAtividades({
   refresh,
   setRefresh,
@@ -56,24 +57,13 @@ function ModalCadastroAtividades({
   idProjeto,
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    registerForm,
-    loading,
-    listaResponsaveis,
-    listaAtividadesRelacao,
-    reqGet,
-  } = useCadastroAtividadeProjeto(
-    refreshGanttCriacao,
-    setRefreshGanttCriacao,
-    idProjeto
-  );
-
-  const responsaveisOptions = listaResponsaveis.map(
-    (responsavel: Responsavel) => ({
-      value: responsavel.id,
-      label: responsavel.nome,
-    })
-  );
+  const { registerForm, loading, listaAtividadesRelacao, reqGet } =
+    useCadastroAtividadeProjeto(
+      refreshGanttCriacao,
+      setRefreshGanttCriacao,
+      idProjeto
+    );
+  const { data, isLoading } = useDetalhamentoProjeto();
 
   const relacoesOptions = listaAtividadesRelacao.map((atividade: any) => ({
     value: atividade.id,
@@ -133,131 +123,124 @@ function ModalCadastroAtividades({
             }}
           >
             <ModalBody mt={3}>
-              <Flex
-                flexDirection={useBreakpointValue({
-                  base: "column",
-                  md: "column",
-                })}
-                gap={5}
-              >
-                <Flex flex={1} direction={"column"}>
-                  {/* <Text fontWeight={"bold"}>Nome</Text> */}
-                  <Flex gap={5} flex={1}>
-                    <Flex direction={"column"} flex={2}>
-                      <Flex gap={1}>
-                        <RequiredField />
-                        <Text
-                          fontWeight={"700"}
-                          fontSize={"12px"}
-                          color={"#949494"}
-                        >
-                          NOME
-                        </Text>
+              {!isLoading ? (
+                <Flex flexDirection={"column"} gap={5}>
+                  <Flex flex={1} direction={"column"}>
+                    {/* <Text fontWeight={"bold"}>Nome</Text> */}
+                    <Flex gap={5} flex={1}>
+                      <Flex direction={"column"} flex={2}>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <Text
+                            fontWeight={"700"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            NOME
+                          </Text>
+                        </Flex>
+                        <Input
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          fontFamily={"Mulish"}
+                          _placeholder={{ color: "#949494" }}
+                          h={"56px"}
+                          isRequired
+                          placeholder="Digite o nome da atividade"
+                          id="nom_atividade"
+                          type="text"
+                          name="nom_atividade"
+                          w={"100%"}
+                          value={regexCaracteresEspeciais(
+                            registerForm.values.nom_atividade
+                          )}
+                          onChange={registerForm.handleChange}
+                          maxLength={100}
+                        />
                       </Flex>
-                      <Input
-                        fontSize={"14px"}
-                        fontWeight={"400"}
-                        fontFamily={"Mulish"}
-                        _placeholder={{ color: "#949494" }}
-                        h={"56px"}
-                        isRequired
-                        placeholder="Digite o nome da atividade"
-                        id="nom_atividade"
-                        type="text"
-                        name="nom_atividade"
-                        w={useBreakpointValue({
-                          base: "100%",
-                          md: "100%",
-                        })}
-                        value={regexCaracteresEspeciais(
-                          registerForm.values.nom_atividade
-                        )}
-                        onChange={registerForm.handleChange}
-                        maxLength={100}
+                    </Flex>
+                  </Flex>
+
+                  <Flex flex={1} direction={"row"} gap={2}>
+                    {/* <Text fontWeight={"bold"}>Relação</Text> */}
+                    <Flex gap={5} flex={1}>
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"RELAÇÃO"}
+                        propName={"relacao_id"}
+                        options={relacoesOptions}
+                        required={true}
+                      />
+                    </Flex>
+                    {/* <Text fontWeight={"bold"}>Responsável</Text> */}
+                    <Flex gap={5} flex={1}>
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"ÁREA RESPONSÁVEL"}
+                        propName={"responsavel_id"}
+                        options={data
+                          .map((areaResponsavel: AreaResponsavel) => ({
+                            value: areaResponsavel.id,
+                            label: areaResponsavel.nom_responsavel,
+                          }))
+                          .sort((a: any, b: any) =>
+                            a.label.localeCompare(b.label)
+                          )}
+                        required={true}
                       />
                     </Flex>
                   </Flex>
-                </Flex>
 
-                <Flex flex={1} direction={"row"} gap={2}>
-                  {/* <Text fontWeight={"bold"}>Relação</Text> */}
-                  <Flex gap={5} flex={1}>
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"RELAÇÃO"}
-                      propName={"relacao_id"}
-                      options={relacoesOptions}
-                      required={true}
-                    />
-                  </Flex>
-                  {/* <Text fontWeight={"bold"}>Responsável</Text> */}
-                  <Flex gap={5} flex={1}>
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"RESPONSÁVEL"}
-                      propName={"responsavel_id"}
-                      options={responsaveisOptions}
-                      required={true}
-                    />
-                  </Flex>
-                </Flex>
-
-                <Flex flex={1} direction={"column"}>
-                  {/* <Text fontWeight={"bold"}>Datas</Text> */}
-                  <Flex gap={5}>
-                    <Flex>
-                      <DateTimePickerDataInicio registerForm={registerForm} />
-                    </Flex>
-                    <Flex direction={"column"} w={"20%"}>
-                      <Flex gap={1}>
-                        <RequiredField />
-                        <Text
-                          fontWeight={"700"}
-                          fontSize={"12px"}
-                          color={"#949494"}
-                        >
-                          DIAS ÚTEIS
-                        </Text>
+                  <Flex flex={1} direction={"column"}>
+                    {/* <Text fontWeight={"bold"}>Datas</Text> */}
+                    <Flex gap={5}>
+                      <Flex>
+                        <DateTimePickerDataInicio registerForm={registerForm} />
                       </Flex>
-                      <NumberInput
-                        max={99999}
-                        min={0}
-                        id={"duracao_plan"}
-                        name={"duracao_plan"}
-                        value={registerForm.values.duracao_plan}
-                        onChange={(value) => {
-                          registerForm.setFieldValue(
-                            "duracao_plan",
-                            Number(value)
-                          );
-                        }}
-                      >
-                        <NumberInputField
-                          maxLength={5}
-                          bg={"#fff"}
-                          h={"56px"}
-                        />
-                      </NumberInput>
+                      <Flex direction={"column"} w={"20%"}>
+                        <Flex gap={1}>
+                          <RequiredField />
+                          <Text
+                            fontWeight={"700"}
+                            fontSize={"12px"}
+                            color={"#949494"}
+                          >
+                            DIAS ÚTEIS
+                          </Text>
+                        </Flex>
+                        <NumberInput
+                          max={99999}
+                          min={0}
+                          id={"duracao_plan"}
+                          name={"duracao_plan"}
+                          value={registerForm.values.duracao_plan}
+                          onChange={(value) => {
+                            registerForm.setFieldValue(
+                              "duracao_plan",
+                              Number(value)
+                            );
+                          }}
+                        >
+                          <NumberInputField
+                            maxLength={5}
+                            bg={"#fff"}
+                            h={"56px"}
+                          />
+                        </NumberInput>
+                      </Flex>
                     </Flex>
                   </Flex>
+
+                  <AtividadesDragAndDrop
+                    registerForm={registerForm}
+                    atividades={relacoesOptions}
+                  />
                 </Flex>
-
-                {/* <Flex
-                  flexDirection={useBreakpointValue({
-                    base: "column",
-                    md: "column",
-                  })}
-                  gap={2}
-                >
-                  <Text fontWeight={"bold"}>Restrições</Text>
-                  <Restricoes registerForm={registerForm} />
-                </Flex> */}
-
-                <AtividadesDragAndDrop
-                  registerForm={registerForm}
-                  atividades={relacoesOptions}
-                />
-              </Flex>
+              ) : (
+                <Flex align={"center"} justify={"center"} w={"100%"} h={"50vh"}>
+                  <Ring speed={2} lineWeight={5} color="blue" size={64} />
+                </Flex>
+              )}
             </ModalBody>
 
             <ModalCloseButton color={"white"} onClick={() => onClose()} />

@@ -51,7 +51,7 @@ export function useFiltragemCampanha() {
       a.tipo.localeCompare(b.tipo)
     );
     const pocosSorted = pocos.data.sort((a: any, b: any) =>
-      a.poco.localeCompare(b.poco)
+      a.nom_poco.localeCompare(b.nom_poco)
     );
     const tarefasSorted = tarefas.data.sort((a: any, b: any) =>
       a.nom_atividade.localeCompare(b.nom_atividade)
