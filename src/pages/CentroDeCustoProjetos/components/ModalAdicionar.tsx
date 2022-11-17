@@ -74,7 +74,7 @@ function ModalAdicionar({
         Adicionar
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -92,15 +92,6 @@ function ModalAdicionar({
           <ModalCloseButton color={"white"} />
 
           <ModalBody mt={3}>
-            {/* <Text
-              fontSize={"18px"}
-              fontWeight={"700"}
-              fontFamily={"Mulish"}
-              mb={3}
-              color={"#2D2926"}
-            >
-              LANÇAR DESPESA
-            </Text> */}
             <Flex direction={"column"} gap={4}>
               <Flex gap={4}>
                 <Flex direction={"column"}>
@@ -127,7 +118,7 @@ function ModalAdicionar({
                   />
                 </Flex>
               </Flex>
-              <Flex gap={4} w={"43%"}>
+              <Flex gap={4}>
                 <SelectFiltragem
                   registerForm={registerForm}
                   nomeSelect={"PRESTADOR DE SERVIÇO"}
@@ -135,8 +126,7 @@ function ModalAdicionar({
                   options={optionsFornecedores}
                   required={true}
                 />
-              </Flex>
-              <Flex gap={4} w={"87%"}>
+
                 <SelectFiltragem
                   registerForm={registerForm}
                   nomeSelect={"CLASSE DE SERVIÇO"}
@@ -157,6 +147,7 @@ function ModalAdicionar({
                   </Flex>
                   <Input
                     h={"56px"}
+                    w="100px"
                     isRequired
                     placeholder="Pedido"
                     id="pedido"
@@ -168,6 +159,108 @@ function ModalAdicionar({
                   />
                 </Flex>
               </Flex>
+
+              <Flex gap={4}>
+                <Flex direction={"column"}>
+                  <Flex gap={1}>
+                    <RequiredField />
+                    <Text
+                      fontWeight={"700"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      BM
+                    </Text>
+                  </Flex>
+                  <Input
+                    h={"56px"}
+                    isRequired
+                    placeholder="BM"
+                    id="bm"
+                    type="text"
+                    name="bm"
+                    value={regexCaracteresEspeciais(registerForm.values.bm)}
+                    onChange={registerForm.handleChange}
+                    maxLength={150}
+                  />
+                </Flex>
+
+                <Flex direction={"column"}>
+                  <Flex gap={1}>
+                    <RequiredField />
+                    <Text
+                      fontWeight={"700"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      NOTA FISCAL
+                    </Text>
+                  </Flex>
+                  <Input
+                    h={"56px"}
+                    isRequired
+                    placeholder="Nota Fiscal"
+                    id="id_nf"
+                    type="text"
+                    name="id_nf"
+                    value={regexCaracteresEspeciais(registerForm.values.id_nf)}
+                    onChange={registerForm.handleChange}
+                    maxLength={150}
+                  />
+                </Flex>
+                <Flex direction={"column"}>
+                  <InputGroup>
+                    <InputGenerico
+                      registerForm={registerForm}
+                      nomeInput={"VALOR NF"}
+                      propName={"valor_bm_nf"}
+                      value={registerForm.values.valor_bm_nf || ""}
+                      required={true}
+                      placeholder={"0"}
+                      maxLength={20}
+                      isNumeric={true}
+                    />
+                  </InputGroup>
+                </Flex>
+              </Flex>
+
+              <Flex gap={4}>
+                <Flex direction={"column"}>
+                  <SelectFiltragem
+                    width="190px"
+                    registerForm={registerForm}
+                    nomeSelect={"STATUS"}
+                    propName={"status"}
+                    options={[
+                      { label: "Pendente", value: 0 },
+                      { label: "Pago", value: 1 },
+                    ]}
+                  />
+                </Flex>
+                <Flex direction={"column"}>
+                  <DatePickerGenericoFinanceiro
+                    registerForm={registerForm}
+                    nomeLabel="DATA PAGAMENTO"
+                    propName={"data_pagamento"}
+                    esconderHorario
+                  />
+                </Flex>
+
+                <Flex direction={"column"}>
+                  <InputGroup>
+                    <InputGenerico
+                      registerForm={registerForm}
+                      nomeInput={"VALOR PAGO"}
+                      propName={"valor_pago"}
+                      value={registerForm.values.valor_pago || ""}
+                      placeholder={"0"}
+                      maxLength={20}
+                      isNumeric={true}
+                    />
+                  </InputGroup>
+                </Flex>
+              </Flex>
+
               <Flex gap={4}>
                 <Flex direction={"column"} flex={1}>
                   <Flex gap={1}>

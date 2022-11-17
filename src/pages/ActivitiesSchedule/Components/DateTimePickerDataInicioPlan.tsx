@@ -36,7 +36,7 @@ function DateTimePickerDataInicioPlan({
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
         showTimeSelect
-        dateFormat="dd/MM/yyyy, hh:mm"
+        dateFormat="Pp"
         customInput={<TriggerDatePickerInicio />}
         // isClearable={inicioPlanejado !== ""}
         disabled={intervencaoIniciada || atividadeStatus !== 0}

@@ -12,9 +12,10 @@ import {
   Heading,
 } from "@chakra-ui/react";
 
+import { getProgressoProjeto } from "services/get/DetalhamentoProjetos";
 import { getProjetos } from "services/get/GetProject";
 
-import { ProjectSummary } from "../summary";
+import { ProjectSummary } from "./summary";
 
 type CardProjeto = {
   name: string;
@@ -25,6 +26,7 @@ type CardProjeto = {
   realized: number;
   cpi: string;
   spi: string;
+  percent?: string;
 };
 
 export function Indicadores() {
@@ -33,18 +35,24 @@ export function Indicadores() {
 
   const handleProjetosDetalhados = async () => {
     const projetos = await getProjetos();
-    const formatados: any[] = projetos.map((e) => ({
-      name: e.nome_projeto,
-      responsible: e.responsavel,
-      startDate: new Date(e.data_inicio).toLocaleDateString(),
-      endDate: new Date(e.data_fim).toLocaleDateString(),
-      budget: e.vlr_orcado,
-      realized: e.vlr_cr,
-      cpi: e.vlr_cpi,
-      spi: e.vlr_spi,
-    }));
-    setProjectsGreen(formatados.filter((e) => e.cpi === 1));
-    setProjectsRed(formatados.filter((e) => e.cpi !== 1));
+    const _formatados: any[] = projetos.map(async (e) => {
+      const _percent: any = await getProgressoProjeto(Number(e.id));
+      return {
+        name: e.nome_projeto,
+        responsible: e.responsavel,
+        startDate: new Date(e.data_inicio).toLocaleDateString(),
+        endDate: new Date(e.data_fim).toLocaleDateString(),
+        budget: e.vlr_orcado,
+        realized: e.vlr_cr,
+        cpi: e.vlr_cpi,
+        spi: e.vlr_spi,
+        percent: _percent.data[0].fn_cron_calc_pct_real || "0",
+      };
+    });
+
+    const formatados = await Promise.all(_formatados);
+    setProjectsGreen(formatados.filter((e) => e.cpi === "1"));
+    setProjectsRed(formatados.filter((e) => e.cpi !== "1"));
   };
 
   //   {
@@ -128,7 +136,8 @@ export function Indicadores() {
                   projectsRed.map((project) => (
                     <ProjectSummary
                       data={project}
-                      table={true}
+                      table={false}
+                      tableData={{ columnNames: [], rows: [] }}
                     ></ProjectSummary>
                   ))}
               </AccordionPanel>
@@ -187,7 +196,8 @@ export function Indicadores() {
                   projectsGreen.map((project) => (
                     <ProjectSummary
                       data={project}
-                      table={true}
+                      table={false}
+                      tableData={{ columnNames: [], rows: [] }}
                     ></ProjectSummary>
                   ))}
               </AccordionPanel>

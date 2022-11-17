@@ -40,10 +40,10 @@ function CardPIR({ poco, index }: Props) {
     });
   };
 
+  // console.log("poco", poco);
+
   return (
     <>
-      {/* A data 31/12/1969 é o valor de null no banco de dados.
-      Se o valor for exatamente esse, o componente não deverá ser renderizado. */}
       <Flex direction={"row"} gap={4} onClick={() => transfer()}>
         <Flex align={"center"} justify={"center"}>
           <Heading as="h3" size="md" textAlign={"center"} width={"60px"}>
@@ -58,6 +58,7 @@ function CardPIR({ poco, index }: Props) {
             Number(poco.pct_plan),
             Number(poco.comp_pct),
             Number(poco.pct_real),
+            poco.finalplanejado,
             Number(poco.ind_alerta)
           )}
           px={5}

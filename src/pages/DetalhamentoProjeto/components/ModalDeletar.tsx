@@ -19,6 +19,8 @@ import {
 
 import { useToast } from "contexts/Toast";
 
+import { useAuth } from "hooks/useAuth";
+
 import { deleteAtividade } from "services/delete/DeleteProject";
 type ModalDeletarProps = {
   id: number;
@@ -39,11 +41,12 @@ function ModalDeletar({
 }: ModalDeletarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { toast } = useToast();
+  const { user } = useAuth();
 
   const remove = async () => {
     try {
       if (!id) throw new Error("Erro ao remover atividade!");
-      const { status } = await deleteAtividade(id);
+      const { status } = await deleteAtividade(id, user?.nome);
       if (status === 200 || status === 201) {
         toast.success("Atividade removida com sucesso!", {
           id: "toast-principal",

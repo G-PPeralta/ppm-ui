@@ -12,10 +12,9 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { IDadosAtividades } from "interfaces/TabelaAtividades";
 import { Cell, Pie, PieChart } from "recharts";
 
-import { TabelaAtividadesPendentes } from "./TabelaAtividadesPendentes";
+import { GenericTable, TableData } from "./../genericTable";
 
 export interface SummaryData {
   name: string;
@@ -30,10 +29,15 @@ export interface SummaryData {
 type Props = {
   data: SummaryData;
   table: boolean;
-  dataTable?: IDadosAtividades[];
+  tableData: TableData;
 };
 
-export function ProjectSummary({ data, table, dataTable }: Props) {
+export function ProjectSummary({ data, table, tableData }: Props) {
+  function calculatePercent(data: SummaryData) {
+    const done = (data.realized / data.budget) * 100;
+    return done > 100 ? 100 : done;
+  }
+
   function createPieData(data: SummaryData) {
     const p = Number(data.percent);
     const pieData = [
@@ -47,15 +51,6 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
       },
     ];
     return pieData;
-  }
-
-  function calculatePercet(data: SummaryData) {
-    const percents = {
-      undone: ((+data.budget - +data.realized) / +data.budget) * 100,
-      done:
-        ((+data.budget - (+data.budget - +data.realized)) / +data.budget) * 100,
-    };
-    return percents;
   }
 
   function changeColor(percent: number) {
@@ -131,7 +126,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                         color={changeColor(entry.value)}
                         fontWeight={"bold"}
                       >
-                        {entry.value.toFixed(2)}%
+                        {entry.value}%
                       </Text>
                     ) : null
                   )}
@@ -171,7 +166,8 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                   Início Real
                 </Text>
                 <Text fontSize={"16px"} fontWeight={"500"} color={"gray.600"}>
-                  {new Date(data.startDate).toLocaleDateString()}
+                  {" "}
+                  {data.startDate}{" "}
                 </Text>
               </Flex>
               <Heading color={"#0047BB"} fontWeight={"normal"}>
@@ -187,7 +183,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                   Fim Planejado
                 </Text>
                 <Text fontSize={"16px"} fontWeight={"500"} color={"gray.600"}>
-                  {new Date(data.endDate).toLocaleDateString()}
+                  {data.endDate}
                 </Text>
               </Flex>
             </Flex>
@@ -262,7 +258,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                   color={"white"}
                   padding={2}
                 >
-                  {calculatePercet(data).done.toFixed(2)}%
+                  {calculatePercent(data)}%
                 </Heading>
               </Flex>
               {table == true && (
@@ -276,7 +272,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
           </Flex>
           {table == true && (
             <AccordionPanel w={"100%"} marginTop={5}>
-              {dataTable && <TabelaAtividadesPendentes data={dataTable} />}
+              <GenericTable data={tableData} />
             </AccordionPanel>
           )}
         </Flex>

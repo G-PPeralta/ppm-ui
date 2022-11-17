@@ -45,6 +45,12 @@ interface LinhaTabela {
   valor: number;
   descricaoDoServico: string;
   pedido: string;
+  bm: string;
+  id_nf: string;
+  valor_bm_nf: number;
+  status: number;
+  data_pagamento: string;
+  valor_pago: number;
 }
 
 interface Options {
@@ -74,11 +80,13 @@ function ModalEditar({
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [dataPagamento, setDataPagamento] = useState<Date>();
+  const [data_Pagamento, setData_Pagamento] = useState<Date>();
 
   const setInicialValues = async () => {
     registerForm.setFieldValue("valor", parserString(linhaTabela.valor));
     registerForm.setFieldValue("data", linhaTabela.dataPagamento);
     setDataPagamento(new Date(linhaTabela.dataPagamento));
+    setData_Pagamento(new Date(linhaTabela.data_pagamento));
     registerForm.setFieldValue(
       "prestadorServicoId",
       linhaTabela.prestadorDeServicoId
@@ -92,6 +100,12 @@ function ModalEditar({
       "descricaoDoServico",
       linhaTabela.descricaoDoServico
     );
+    registerForm.setFieldValue("bm", linhaTabela.bm);
+    registerForm.setFieldValue("id_nf", linhaTabela.id_nf);
+    registerForm.setFieldValue("valor_bm_nf", linhaTabela.valor_bm_nf);
+    registerForm.setFieldValue("status", linhaTabela.status);
+    registerForm.setFieldValue("data_pagamento", linhaTabela.data_pagamento);
+    registerForm.setFieldValue("valor_pago", linhaTabela.valor_pago);
   };
 
   const handleCancelar = () => {
@@ -110,6 +124,12 @@ function ModalEditar({
       "descricaoDoServico",
       linhaTabela.descricaoDoServico
     );
+    registerForm.setFieldValue("bm", linhaTabela.bm);
+    registerForm.setFieldValue("id_nf", linhaTabela.id_nf);
+    registerForm.setFieldValue("valor_bm_nf", linhaTabela.valor_bm_nf);
+    registerForm.setFieldValue("status", linhaTabela.status);
+    registerForm.setFieldValue("data_pagamento", linhaTabela.data_pagamento);
+    registerForm.setFieldValue("valor_pago", linhaTabela.valor_pago);
     onClose();
   };
 
@@ -144,7 +164,7 @@ function ModalEditar({
         onClick={onOpen}
       />
 
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -162,15 +182,6 @@ function ModalEditar({
           <ModalCloseButton color={"white"} />
 
           <ModalBody mt={3}>
-            {/* <Text
-              fontSize={"18px"}
-              fontWeight={"700"}
-              fontFamily={"Mulish"}
-              mb={3}
-              color={"#2D2926"}
-            >
-              EDITAR DESPESA
-            </Text> */}
             <Flex direction={"column"} gap={4}>
               <Flex gap={4}>
                 <Flex direction={"column"}>
@@ -179,9 +190,7 @@ function ModalEditar({
                       registerForm={registerForm}
                       nomeInput={"VALOR PREVISTO"}
                       propName={"valor"}
-                      value={
-                        registerForm.values.valor && registerForm.values.valor
-                      }
+                      value={registerForm.values.valor || ""}
                       required={true}
                       placeholder={"0"}
                       maxLength={20}
@@ -189,19 +198,18 @@ function ModalEditar({
                     />
                   </InputGroup>
                 </Flex>
-                <Flex direction={"column"} alignSelf={"end"} align={"end"}>
+                <Flex direction={"column"}>
                   <DatePickerGenericoFinanceiro
                     registerForm={registerForm}
-                    propName={"data"}
                     nomeLabel="DATA"
+                    propName={"data"}
                     required={true}
                     data={dataPagamento}
                     esconderHorario
-                    mes={mes}
                   />
                 </Flex>
               </Flex>
-              <Flex gap={4} w={"43%"}>
+              <Flex gap={4}>
                 <SelectFiltragem
                   registerForm={registerForm}
                   nomeSelect={"PRESTADOR DE SERVIÇO"}
@@ -209,8 +217,7 @@ function ModalEditar({
                   options={optionsFornecedores}
                   value={getValue(optionsFornecedores, "prestadorServicoId")}
                 />
-              </Flex>
-              <Flex gap={4} w={"87%"}>
+
                 <SelectFiltragem
                   registerForm={registerForm}
                   nomeSelect={"CLASSE DE SERVIÇO"}
@@ -221,7 +228,7 @@ function ModalEditar({
                 <Flex direction={"column"}>
                   <Flex gap={1}>
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -230,6 +237,7 @@ function ModalEditar({
                   </Flex>
                   <Input
                     h={"56px"}
+                    w="100px"
                     isRequired
                     placeholder="Pedido"
                     id="pedido"
@@ -241,11 +249,119 @@ function ModalEditar({
                   />
                 </Flex>
               </Flex>
+
+              <Flex gap={4}>
+                <Flex direction={"column"}>
+                  <Flex gap={1}>
+                    <Text
+                      fontWeight={"700"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      BM
+                    </Text>
+                  </Flex>
+                  <Input
+                    h={"56px"}
+                    isRequired
+                    placeholder="BM"
+                    id="bm"
+                    type="text"
+                    name="bm"
+                    value={regexCaracteresEspeciais(registerForm.values.bm)}
+                    onChange={registerForm.handleChange}
+                    maxLength={150}
+                  />
+                </Flex>
+
+                <Flex direction={"column"}>
+                  <Flex gap={1}>
+                    <Text
+                      fontWeight={"700"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      NOTA FISCAL
+                    </Text>
+                  </Flex>
+                  <Input
+                    h={"56px"}
+                    isRequired
+                    placeholder="Nota Fiscal"
+                    id="id_nf"
+                    type="text"
+                    name="id_nf"
+                    value={regexCaracteresEspeciais(registerForm.values.id_nf)}
+                    onChange={registerForm.handleChange}
+                    maxLength={150}
+                  />
+                </Flex>
+                <Flex direction={"column"}>
+                  <InputGroup>
+                    <InputGenerico
+                      registerForm={registerForm}
+                      nomeInput={"VALOR NF"}
+                      propName={"valor_bm_nf"}
+                      value={registerForm.values.valor_bm_nf || ""}
+                      required={true}
+                      placeholder={"0"}
+                      maxLength={20}
+                      isNumeric={true}
+                    />
+                  </InputGroup>
+                </Flex>
+              </Flex>
+
+              <Flex gap={4}>
+                <Flex direction={"column"}>
+                  <SelectFiltragem
+                    width="190px"
+                    registerForm={registerForm}
+                    nomeSelect={"STATUS"}
+                    propName={"status"}
+                    options={[
+                      { label: "Pendente", value: 0 },
+                      { label: "Pago", value: 1 },
+                    ]}
+                    value={getValue(
+                      [
+                        { label: "Pendente", value: 0 },
+                        { label: "Pago", value: 1 },
+                      ],
+                      "status"
+                    )}
+                  />
+                </Flex>
+                <Flex direction={"column"}>
+                  <DatePickerGenericoFinanceiro
+                    registerForm={registerForm}
+                    nomeLabel="DATA PAGAMENTO"
+                    propName={"data_pagamento"}
+                    data={data_Pagamento}
+                    esconderHorario
+                  />
+                </Flex>
+
+                <Flex direction={"column"}>
+                  <InputGroup>
+                    <InputGenerico
+                      registerForm={registerForm}
+                      nomeInput={"VALOR PAGO"}
+                      propName={"valor_pago"}
+                      value={registerForm.values.valor_pago || ""}
+                      placeholder={"0"}
+                      maxLength={20}
+                      isNumeric={true}
+                    />
+                  </InputGroup>
+                </Flex>
+              </Flex>
+
               <Flex gap={4}>
                 <Flex direction={"column"} flex={1}>
                   <Flex gap={1}>
                     <Text
-                      fontWeight={"bold"}
+                      fontWeight={"700"}
                       fontSize={"12px"}
                       color={"#949494"}
                     >
@@ -253,6 +369,7 @@ function ModalEditar({
                     </Text>
                   </Flex>
                   <Textarea
+                    _placeholder={{ color: "#949494" }}
                     fontSize={"14px"}
                     fontWeight={"400"}
                     color={"black"}
@@ -264,7 +381,6 @@ function ModalEditar({
                       registerForm.values.descricaoDoServico
                     )}
                     onChange={registerForm.handleChange}
-                    maxLength={255}
                   />
                 </Flex>
               </Flex>
