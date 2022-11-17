@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Box,
@@ -13,10 +13,12 @@ import {
   Tr,
   useColorModeValue,
 } from "@chakra-ui/react";
-import moment from "moment";
+import { Lixeira } from "interfaces/Lixeira";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
 import Sidebar from "components/SideBar";
+
+import { getLixeira } from "services/get/Lixeira";
 
 import { DeleteModal } from "./ModalDeletar";
 import { RestoreModal } from "./ModalRestaurar";
@@ -24,6 +26,7 @@ import { RestoreModal } from "./ModalRestaurar";
 export function TabelaLixeira() {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
+  const [data, setData] = useState<Lixeira[]>();
 
   const fromTo = {
     from,
@@ -32,18 +35,16 @@ export function TabelaLixeira() {
     setTo,
   };
 
-  const rows = [
-    {
-      id: "1",
-      nome: "Projetos",
-      qtd: "1000",
-    },
-    {
-      id: "2",
-      nome: "spt",
-      qtd: "1000",
-    },
-  ];
+  const getData = async () => {
+    const lixeira = await getLixeira();
+    setData(lixeira.data);
+  };
+
+  // console.log(data);
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <>
@@ -105,29 +106,28 @@ export function TabelaLixeira() {
                   </Thead>
                   {/* <Tbody scrollBehavior={"smooth"}> */}
                   <Tbody>
-                    {rows &&
-                      rows.map((row) => (
-                        <Tr textColor={"#2D2926"} fontWeight={"semibold"}>
-                          <Td textAlign={"center"}>{row.id}</Td>
-                          <Td textAlign={"center"}>{row.nome}</Td>
-                          <Td textAlign={"center"}>
-                            {moment().format("DDMMYYYY_hhmmss")}
-                          </Td>
-                          <Td textAlign={"center"}>
-                            {moment().format("DDMMYYYY_hhmmss")}
-                          </Td>
-                          <Td textAlign={"center"}>
-                            <RestoreModal id={Number(row.id)} />
-                            <DeleteModal id={Number(row.id)} />
-                          </Td>
-                        </Tr>
-                      ))}
+                    {data &&
+                      data
+                        .sort((a, b) => a.id - b.id)
+                        .slice(from, to)
+                        .map((row) => (
+                          <Tr textColor={"#2D2926"} fontWeight={"semibold"}>
+                            <Td textAlign={"center"}>{row.id}</Td>
+                            <Td textAlign={"center"}>{row.local_deletado}</Td>
+                            <Td textAlign={"center"}>{row.criado}</Td>
+                            <Td textAlign={"center"}>{row.exclusao}</Td>
+                            <Td textAlign={"center"}>
+                              <RestoreModal id={Number(row.id)} />
+                              <DeleteModal id={Number(row.id)} />
+                            </Td>
+                          </Tr>
+                        ))}
                   </Tbody>
                 </Table>
               </TableContainer>
 
               <Flex>
-                <PaginacaoTabela data={rows} fromTo={fromTo} />
+                <PaginacaoTabela data={data} fromTo={fromTo} />
               </Flex>
             </Flex>
           </Flex>
