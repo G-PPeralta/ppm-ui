@@ -32,6 +32,9 @@ import { deleteProject } from "services/delete/DeleteProject";
 
 type id = {
   projeto: number;
+  newRender: Function;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: boolean;
 };
 
 function ModalDeletarProjeto(projeto: id) {
@@ -140,7 +143,10 @@ function ModalDeletarProjeto(projeto: id) {
                   background="origem.500"
                   variant="primary"
                   color="white"
-                  onClick={() => remove()}
+                  onClick={() => {
+                    projeto.setRefresh(!projeto.refresh);
+                    remove();
+                  }}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",
