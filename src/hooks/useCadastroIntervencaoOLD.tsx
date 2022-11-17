@@ -39,7 +39,7 @@ export function useCadastroIntervencaoOLD() {
       a.nome.localeCompare(b.nome)
     );
     const pocosSorted = pocos.data.sort((a: ListaPoco, b: ListaPoco) =>
-      a.poco.localeCompare(b.poco)
+      a.nom_poco.localeCompare(b.nom_poco)
     );
     const projetosTipoSorted = projetosTipo.data.sort(
       (a: ListaProjetoTipo, b: ListaProjetoTipo) => a.nome.localeCompare(b.nome)

@@ -9,6 +9,7 @@ import {
   setCulture,
   setCurrencyCode,
 } from "@syncfusion/ej2-base";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import theme from "theme/index";
 
 import { App } from "./App";
@@ -105,10 +106,14 @@ const root = ReactDOM.createRoot(container);
 
 registerLicense(`${process.env.REACT_APP_SYNCFUSION_KEY}`);
 
+const queryClient = new QueryClient();
+
 root.render(
   // <React.StrictMode>
-  <ChakraProvider theme={theme}>
-    <App />
-  </ChakraProvider>
+  <QueryClientProvider client={queryClient}>
+    <ChakraProvider theme={theme}>
+      <App />
+    </ChakraProvider>
+  </QueryClientProvider>
   // </React.StrictMode>,
 );

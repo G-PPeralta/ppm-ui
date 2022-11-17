@@ -70,7 +70,7 @@ export interface CadastroPoco {
 
 export interface ListaPoco {
   id: number;
-  poco: string;
+  nom_poco: string;
 }
 
 export interface ListaSonda {

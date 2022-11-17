@@ -37,6 +37,8 @@ import { Trash } from "pages/Trash/trash";
 import { Usuarios } from "pages/Usuarios";
 import VisaoPorArea from "pages/VisaoPorArea";
 
+import { DetalhamentoProjetoProvider } from "contexts/DetalhamentoDeProjetos";
+
 export function PrivateRoutes() {
   return (
     <Routes>
@@ -61,7 +63,14 @@ export function PrivateRoutes() {
       <Route path="/budgets" element={<Budgets />} />
       <Route path="/budget/detail/:id" element={<BudgetDetail />} />
       <Route path="/fornecedores" element={<Fornecedores />} />
-      <Route path="/detalhamento/:id" element={<DetalhamentoProjeto />} />
+      <Route
+        path="/detalhamento/:id"
+        element={
+          <DetalhamentoProjetoProvider>
+            <DetalhamentoProjeto />
+          </DetalhamentoProjetoProvider>
+        }
+      />
       <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
       <Route path="/lookahead" element={<Lookahead />} />
       <Route path="/lookahead-detalhe/:id" element={<LookaheadDetalhe />} />
