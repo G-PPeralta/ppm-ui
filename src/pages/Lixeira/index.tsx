@@ -64,6 +64,33 @@ export function TabelaLixeira() {
     getData();
   }, [render]);
 
+  const tableData =
+    data &&
+    data?.length > 0 &&
+    data
+      .sort((a, b) => a.id - b.id)
+      .slice(from, to)
+      .map((row) => (
+        <Tr textColor={"#2D2926"} fontWeight={"semibold"}>
+          <Td textAlign={"center"}>{row.id}</Td>
+          <Td textAlign={"center"}>{row.local_deletado}</Td>
+          <Td textAlign={"center"}>{row.criado}</Td>
+          <Td textAlign={"center"}>{row.exclusao}</Td>
+          <Td textAlign={"center"}>
+            <RestoreModal
+              id={Number(row.id)}
+              tableName={row.table_name}
+              newRender={() => setRender(!render)}
+            />
+            <DeleteModal
+              id={Number(row.id)}
+              tableName={row.table_name}
+              newRender={() => setRender(!render)}
+            />
+          </Td>
+        </Tr>
+      ));
+
   return (
     <>
       <Sidebar>
@@ -123,38 +150,12 @@ export function TabelaLixeira() {
                     </Tr>
                   </Thead>
                   {/* <Tbody scrollBehavior={"smooth"}> */}
-                  <Tbody>
-                    {data &&
-                      data?.length > 0 &&
-                      data
-                        .sort((a, b) => a.id - b.id)
-                        .slice(from, to)
-                        .map((row) => (
-                          <Tr textColor={"#2D2926"} fontWeight={"semibold"}>
-                            <Td textAlign={"center"}>{row.id}</Td>
-                            <Td textAlign={"center"}>{row.local_deletado}</Td>
-                            <Td textAlign={"center"}>{row.criado}</Td>
-                            <Td textAlign={"center"}>{row.exclusao}</Td>
-                            <Td textAlign={"center"}>
-                              <RestoreModal
-                                id={Number(row.id)}
-                                tableName={row.table_name}
-                                newRender={() => setRender(!render)}
-                              />
-                              <DeleteModal
-                                id={Number(row.id)}
-                                tableName={row.table_name}
-                                newRender={() => setRender(!render)}
-                              />
-                            </Td>
-                          </Tr>
-                        ))}
-                  </Tbody>
+                  <Tbody>{tableData}</Tbody>
                 </Table>
               </TableContainer>
 
               <Flex>
-                <PaginacaoTabela data={rows} fromTo={fromTo} />
+                <PaginacaoTabela data={data || rows} fromTo={fromTo} />
               </Flex>
             </Flex>
           </Flex>
