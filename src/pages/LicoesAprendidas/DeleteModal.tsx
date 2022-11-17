@@ -142,8 +142,8 @@ function DeleteModal({ id, newRender }: props) {
                   variant="primary"
                   color="white"
                   onClick={() => {
-                    remove();
                     newRender();
+                    remove();
                   }}
                   _hover={{
                     background: "origem.600",
