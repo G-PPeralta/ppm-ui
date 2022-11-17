@@ -244,6 +244,11 @@ function BotaoListadeTarefas() {
     fetchAtividadesProjeto();
   }, [render, isModalOpen]);
 
+  useEffect(() => {
+    getTaskList();
+    fetchAtividadesProjeto();
+  }, [render]);
+
   return (
     <>
       <Button
