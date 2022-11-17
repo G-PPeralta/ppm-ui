@@ -4,14 +4,14 @@ import { useFormik } from "formik";
 
 import { useToast } from "contexts/Toast";
 
-import { deleteProject } from "services/delete/DeleteProject";
+// import { deleteProject } from "services/delete/DeleteProject";
 
 export function useDeletarProjeto(id_projeto: number = 0) {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
   const handleDeletar = (id_projeto: number) => {
-    deleteProject(id_projeto);
+    // deleteProject(id_projeto);
   };
 
   const initialValues: any = {

@@ -43,7 +43,7 @@ export function EditModal(id: TableProps) {
           backgroundColor: "origem.500",
           color: "white",
         }}
-        icon={<MdModeEdit size={"24px"} />}
+        icon={<MdModeEdit />}
       />
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />

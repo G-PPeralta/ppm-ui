@@ -79,7 +79,7 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
                     // width={"18px"}
                     // height={"18px"}
                   />
-                  <ModalDeletarLicao />
+                  <ModalDeletarLicao id={lessons.id} />
                   {/* <IconButton
           aria-label="Plus sign"
           icon={<FaTrash />}

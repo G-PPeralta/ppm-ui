@@ -165,7 +165,7 @@ export function LicoesAprendidasProjetos() {
                       onOpen();
                     }}
                   />
-                  <DeleteModal />
+                  <DeleteModal id={lessons.id} />
                 </Td>
               </Tr>
             ))
@@ -229,7 +229,7 @@ export function LicoesAprendidasProjetos() {
               onOpen();
             }}
           />
-          <DeleteModal />
+          <DeleteModal id={lessons.id} />
         </Td>
       </Tr>
     ));

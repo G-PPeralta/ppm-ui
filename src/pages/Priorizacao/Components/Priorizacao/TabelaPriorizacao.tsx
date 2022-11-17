@@ -67,7 +67,7 @@ export function TabelaPriorizacao() {
             nomeRanking={prio.nom_ranking}
             idRanking={prio.id}
           />
-          <ModalDeletarPriorizacao />
+          <ModalDeletarPriorizacao id={prio.id} />
         </Td>
       </Tr>
     ));

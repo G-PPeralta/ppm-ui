@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FiTrash } from "react-icons/fi";
 
 import {
@@ -20,13 +21,42 @@ import { Ring } from "@uiball/loaders";
 
 // import { TextError } from "components/TextError";
 
-import { handleCancelar } from "utils/handleCadastro";
+import { useToast } from "contexts/Toast";
 
-import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
+import { useAuth } from "hooks/useAuth";
 
-function ModalDeletarLicao() {
+import { deleteLicao } from "services/delete/DeleteLicoesProjetos";
+
+type ModalDeletarProps = {
+  id: number;
+};
+
+function ModalDeletarLicao({ id }: ModalDeletarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroPriorizacao();
+  const { toast } = useToast();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const { user } = useAuth();
+
+  const remove = async () => {
+    try {
+      if (!id) throw new Error("Erro ao remover lição!");
+      const { status } = await deleteLicao(Number(id), user?.nome);
+      if (status === 200 || status === 201) {
+        toast.success("Lição removida com sucesso!", {
+          id: "toast-principal",
+        });
+        setLoading(false);
+        onClose();
+      }
+    } catch (error) {
+      toast.error("Erro ao remover lição!", {
+        id: "toast-principal",
+      });
+      setLoading(false);
+      onClose();
+    }
+  };
 
   return (
     <>
@@ -52,7 +82,6 @@ function ModalDeletarLicao() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              registerForm.handleSubmit(e);
             }}
           >
             <ModalHeader
@@ -94,7 +123,7 @@ function ModalDeletarLicao() {
                 <Button
                   variant="ghost"
                   color="red.500"
-                  onClick={() => handleCancelar(registerForm, onClose)}
+                  onClick={() => onClose()}
                   _hover={{
                     background: "red.600",
                     transition: "all 0.4s",
@@ -112,7 +141,7 @@ function ModalDeletarLicao() {
                   background="#0047BB"
                   variant="primary"
                   color="white"
-                  // onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() => remove()}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",
