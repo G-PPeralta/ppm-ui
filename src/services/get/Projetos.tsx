@@ -192,3 +192,9 @@ export async function getAtividadesRelacaoByProjetoId(id?: number): Promise<{
 
   return { data, status };
 }
+
+export async function getAreaResponsavel(): Promise<any> {
+  const response = await api.get("/area-responsavel ", token());
+
+  return response.data;
+}
