@@ -48,7 +48,7 @@ export function RestoreModal({ id, tableName, newRender }: TableProps) {
         onClose();
       }
     } catch (error) {
-      toast.error("Erro ao remover o item!", {
+      toast.error("Erro ao restaurar o item!", {
         id: "toast-principal",
       });
       setLoading(false);

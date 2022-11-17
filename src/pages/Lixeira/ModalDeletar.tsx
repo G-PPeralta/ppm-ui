@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FiTrash } from "react-icons/fi";
 
 import {
@@ -18,19 +19,40 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-// import { TextError } from "components/TextError";
+import { useToast } from "contexts/Toast";
 
-import { handleCancelar } from "utils/handleCadastro";
-
-import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
+import { deleteLixeira } from "services/delete/DeleteLixeira";
 
 interface TableProps {
   id: number;
+  tableName: string;
+  newRender: Function;
 }
 
-export function DeleteModal(id: TableProps) {
+export function DeleteModal({ id, tableName, newRender }: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroPriorizacao();
+  const { toast } = useToast();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const remove = async () => {
+    try {
+      if (!id) throw new Error("Erro ao remover o item!");
+      const { status } = await deleteLixeira(id, tableName);
+      if (status === 200 || status === 201) {
+        toast.success("Item removido permanentemente com sucesso!", {
+          id: "toast-principal",
+        });
+        setLoading(false);
+        onClose();
+      }
+    } catch (error) {
+      toast.error("Erro ao remover o item!", {
+        id: "toast-principal",
+      });
+      setLoading(false);
+      onClose();
+    }
+  };
 
   return (
     <>
@@ -54,7 +76,6 @@ export function DeleteModal(id: TableProps) {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              registerForm.handleSubmit(e);
             }}
           >
             <ModalHeader
@@ -97,7 +118,7 @@ export function DeleteModal(id: TableProps) {
                 <Button
                   variant="ghost"
                   color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
+                  onClick={() => onClose()}
                   _hover={{
                     background: "red.600",
                     transition: "all 0.4s",
@@ -114,7 +135,10 @@ export function DeleteModal(id: TableProps) {
                   background="origem.500"
                   variant="primary"
                   color="white"
-                  // onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() => {
+                    newRender();
+                    remove();
+                  }}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",

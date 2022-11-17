@@ -141,7 +141,11 @@ export function TabelaLixeira() {
                                 tableName={row.table_name}
                                 newRender={() => setRender(!render)}
                               />
-                              <DeleteModal id={Number(row.id)} />
+                              <DeleteModal
+                                id={Number(row.id)}
+                                tableName={row.table_name}
+                                newRender={() => setRender(!render)}
+                              />
                             </Td>
                           </Tr>
                         ))}
