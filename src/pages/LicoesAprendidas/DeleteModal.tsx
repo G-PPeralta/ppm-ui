@@ -45,7 +45,7 @@ function DeleteModal({ id, newRender }: props) {
       if (!id) throw new Error("Erro ao remover a lição!");
       const { status } = await deleteLicao(id, user?.nome);
       if (status === 200 || status === 201) {
-        toast.success("Lição removido com sucesso!", {
+        toast.success("Lição removida com sucesso!", {
           id: "toast-principal",
         });
         setLoading(false);
