@@ -46,6 +46,7 @@ function Card({ poco, index }: Props) {
             Number(poco.pct_plan),
             Number(poco.comp_pct),
             Number(poco.pct_real),
+            poco.finalplanejado,
             Number(poco.ind_alerta)
           )}
           px={5}
