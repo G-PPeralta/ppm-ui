@@ -120,3 +120,14 @@ export async function postReplanejarCampanha(
   );
   return { status };
 }
+
+export async function postReorderIntervencao(
+  payload: any
+): Promise<{ status: number }> {
+  const { status } = await api.post(
+    "/intervencoes/realocacao",
+    payload,
+    token()
+  );
+  return { status };
+}

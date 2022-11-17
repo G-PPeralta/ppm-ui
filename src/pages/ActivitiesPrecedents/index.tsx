@@ -36,6 +36,7 @@ declare type AreaCompetaType = {
 export function ActivitiesPrecedents() {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
+  const [show, setShow] = useState<string>("");
   const [atividades, setAtividades] = useState<any[]>([]);
   const [data, setData] = useState<any[]>([]);
   // const [refresh, setRefresh] = useState(false);
@@ -75,148 +76,9 @@ export function ActivitiesPrecedents() {
     setLoading(false);
   }, []);
 
-  // useEffect(() => {
-  //   requestHandler();
-  // }, [refresh]);
-
   const openDetails = (atividade: any) => {
-    // setOpenId(atividade);
+    setShow(atividade);
   };
-
-  const payload = [
-    {
-      area: "Área 1",
-      atividades: [
-        {
-          atividade: "Escavaçao de Rocha",
-          comp_pct: 1,
-          finalplanejado: "2022-09-19T13:27:00.000Z",
-          id_poco: 41,
-          inicioplanejado: "2022-09-19T12:27:00.000Z",
-          pct_plan: 0,
-          pct_real: 4,
-          qtddias: 0,
-          sonda: "PIR-999",
-          atividadeId: "id1",
-          precedentesIds: [],
-        },
-        {
-          atividade: "Escavaçao Solo",
-          comp_pct: 1,
-          finalplanejado: "2022-09-19T13:27:00.000Z",
-          id_poco: 41,
-          inicioplanejado: "2022-09-19T12:27:00.000Z",
-          pct_plan: 100,
-          pct_real: 100,
-          qtddias: 0,
-          sonda: "PIR-999",
-          atividadeId: "id2",
-          precedentesIds: ["id1"],
-        },
-        {
-          atividade: "Escavaçao Monte",
-          comp_pct: 1,
-          finalplanejado: "2022-09-19T13:27:00.000Z",
-          id_poco: 41,
-          inicioplanejado: "2022-09-19T12:27:00.000Z",
-          pct_plan: 65.8,
-          pct_real: 3,
-          qtddias: 0,
-          sonda: "PIR-999",
-          atividadeId: "id3",
-          precedentesIds: ["id2"],
-        },
-      ],
-    },
-    {
-      area: "Área 2",
-      atividades: [
-        {
-          atividade: "Escavaçao Solo",
-          comp_pct: 1,
-          finalplanejado: "2022-09-19T13:27:00.000Z",
-          id_poco: 41,
-          inicioplanejado: "2022-09-19T12:27:00.000Z",
-          pct_plan: 100,
-          pct_real: 100,
-          qtddias: 0,
-          sonda: "PIR-999",
-          atividadeId: "id4",
-          precedentesIds: ["id1"],
-        },
-        {
-          atividade: "Escavaçao Solo",
-          comp_pct: 1,
-          finalplanejado: "2022-09-19T13:27:00.000Z",
-          id_poco: 41,
-          inicioplanejado: "2022-09-19T12:27:00.000Z",
-          pct_plan: 100,
-          pct_real: 100,
-          qtddias: 0,
-          sonda: "PIR-999",
-          atividadeId: "id5",
-          precedentesIds: ["id3"],
-        },
-        {
-          atividade: "Escavaçao Solo",
-          comp_pct: 1,
-          finalplanejado: "2022-09-19T13:27:00.000Z",
-          id_poco: 41,
-          inicioplanejado: "2022-09-19T12:27:00.000Z",
-          pct_plan: 100,
-          pct_real: 100,
-          qtddias: 0,
-          sonda: "PIR-999",
-          atividadeId: "id6",
-          precedentesIds: ["id8"],
-        },
-      ],
-    },
-    {
-      area: "Área 3",
-      atividades: [
-        {
-          atividade: "Escavaçao Solo",
-          comp_pct: 1,
-          finalplanejado: "2022-09-19T13:27:00.000Z",
-          id_poco: 41,
-          inicioplanejado: "2022-09-19T12:27:00.000Z",
-          pct_plan: 100,
-          pct_real: 100,
-          qtddias: 0,
-          sonda: "PIR-999",
-          atividadeId: "id7",
-          precedentesIds: [],
-        },
-        {
-          atividade: "Escavaçao Solo",
-          comp_pct: 1,
-          finalplanejado: "2022-09-19T13:27:00.000Z",
-          id_poco: 41,
-          inicioplanejado: "2022-09-19T12:27:00.000Z",
-          pct_plan: 100,
-          pct_real: 100,
-          qtddias: 0,
-          sonda: "PIR-999",
-          atividadeId: "id8",
-          precedentesIds: ["id9"],
-        },
-        {
-          atividade: "Escavaçao Solo",
-          comp_pct: 1,
-          finalplanejado: "2022-09-19T13:27:00.000Z",
-          id_poco: 41,
-          inicioplanejado: "2022-09-19T12:27:00.000Z",
-          pct_plan: 100,
-          pct_real: 100,
-          qtddias: 0,
-          sonda: "PIR-999",
-          atividadeId: "id9",
-          precedentesIds: [],
-        },
-      ],
-    },
-  ];
 
   const getAreabyIdTarget = (
     precedenteId: string,
@@ -224,11 +86,17 @@ export function ActivitiesPrecedents() {
     currentIndex: number
   ): AnchorPositionType => {
     let area = "";
+    let areaIndex = 0;
+    let currentAreaIndex = 0;
     let index = 0;
-    for (const pay in payload) {
-      for (const atividade in payload[pay].atividades) {
-        if (payload[pay].atividades[atividade].atividadeId == precedenteId) {
-          area = payload[pay].area;
+    for (const pay in data) {
+      if (data[pay].area == currentArea) {
+        currentAreaIndex = Number(pay);
+      }
+      for (const atividade in data[pay].atividades) {
+        if (data[pay].atividades[atividade].id_atividade == precedenteId) {
+          area = data[pay].area;
+          areaIndex = Number(pay);
           index = Number(atividade);
         }
       }
@@ -240,7 +108,7 @@ export function ActivitiesPrecedents() {
         return "left";
       }
     } else {
-      if (Number(area.split(" ")[1]) < Number(currentArea.split(" ")[1])) {
+      if (areaIndex < currentAreaIndex) {
         return "bottom";
       } else {
         return "top";
@@ -254,11 +122,17 @@ export function ActivitiesPrecedents() {
     currentIndex: number
   ): AnchorPositionType => {
     let area = "";
+    let areaIndex = 0;
+    let currentAreaIndex = 0;
     let index = 0;
-    for (const pay in payload) {
-      for (const atividade in payload[pay].atividades) {
-        if (payload[pay].atividades[atividade].atividadeId == precedenteId) {
-          area = payload[pay].area;
+    for (const pay in data) {
+      if (data[pay].area == currentArea) {
+        currentAreaIndex = Number(pay);
+      }
+      for (const atividade in data[pay].atividades) {
+        if (data[pay].atividades[atividade].id_atividade == precedenteId) {
+          area = data[pay].area;
+          areaIndex = Number(pay);
           index = Number(atividade);
         }
       }
@@ -270,7 +144,7 @@ export function ActivitiesPrecedents() {
         return "right";
       }
     } else {
-      if (Number(area.split(" ")[1]) < Number(currentArea.split(" ")[1])) {
+      if (areaIndex < currentAreaIndex) {
         return "top";
       } else {
         return "bottom";
@@ -306,8 +180,8 @@ export function ActivitiesPrecedents() {
               </Flex>
             </Flex>
             <ArcherContainer
-              startMarker={false}
-              endMarker={true}
+              startMarker={true}
+              endMarker={false}
               strokeColor="black"
               strokeWidth={1}
             >
@@ -352,6 +226,16 @@ export function ActivitiesPrecedents() {
                                       area.area,
                                       index
                                     ),
+                                    style: {
+                                      strokeColor:
+                                        show == atividade.id_atividade
+                                          ? "#0000ff"
+                                          : "#000000",
+                                      strokeWidth:
+                                        show == atividade.id_atividade
+                                          ? 1.5
+                                          : 1,
+                                    },
                                   };
                                   return item;
                                 }
@@ -362,7 +246,9 @@ export function ActivitiesPrecedents() {
                                 direction={"column"}
                                 align={"center"}
                                 justify={"center"}
-                                onClick={() => openDetails(atividade)}
+                                onClick={() =>
+                                  openDetails(String(atividade.id_atividade))
+                                }
                                 _hover={{ cursor: "pointer" }}
                               >
                                 <CardACT atividade={atividade} />
