@@ -221,8 +221,8 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
             name: "TaskName",
             startDate: "StartDate",
             endDate: "EndDate",
-            // baselineStartDate: "BaselineStartDate",
-            // baselineEndDate: "BaselineEndDate",
+            baselineStartDate: "BaselineStartDate",
+            baselineEndDate: "BaselineEndDate",
             duration: "Duration",
             progress: "Progress",
             dependency: "Predecessor",
@@ -288,6 +288,22 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
               textAlign="Center"
             ></ColumnDirective>
             <ColumnDirective
+              field="BaselineStartDate"
+              headerText="Início planejado"
+              headerTextAlign="Center"
+              textAlign="Center"
+              type="date"
+              format="dd/MM/yyyy"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="BaselineEndDate"
+              headerText="Fim planejado"
+              headerTextAlign="Center"
+              textAlign="Center"
+              type="date"
+              format="dd/MM/yyyy"
+            ></ColumnDirective>
+            <ColumnDirective
               field="StartDate"
               headerText="Início real"
               headerTextAlign="Center"
@@ -322,6 +338,12 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
             <ColumnDirective
               field="Predecessor"
               headerText="Predecessor"
+              headerTextAlign="Center"
+              textAlign="Center"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="Responsavel"
+              headerText="Responsável"
               headerTextAlign="Center"
               textAlign="Center"
             ></ColumnDirective>
@@ -380,8 +402,8 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
                   name: "TaskName",
                   startDate: "StartDate",
                   endDate: "EndDate",
-                  // baselineStartDate: "BaselineStartDate",
-                  // baselineEndDate: "BaselineEndDate",
+                  baselineStartDate: "BaselineStartDate",
+                  baselineEndDate: "BaselineEndDate",
                   duration: "Duration",
                   progress: "Progress",
                   // dependency: "Predecessor",
