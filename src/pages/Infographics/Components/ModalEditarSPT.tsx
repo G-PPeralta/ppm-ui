@@ -163,7 +163,7 @@ function ModalEditarSPT({ column, refresh, setRefresh }: any) {
               >
                 <Text>Cancelar</Text>
               </Button>
-              <BotaoReplanejar payload={payload} id={column.id_campanha} />
+              <BotaoReplanejar execute={handleClick} />
             </Flex>
           </ModalFooter>
         </ModalContent>
