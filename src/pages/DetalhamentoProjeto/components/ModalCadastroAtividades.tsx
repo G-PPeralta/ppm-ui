@@ -63,7 +63,7 @@ function ModalCadastroAtividades({
       setRefreshGanttCriacao,
       idProjeto
     );
-  const { data, isLoading } = useDetalhamentoProjeto();
+  const { areaResponsavel } = useDetalhamentoProjeto();
 
   const relacoesOptions = listaAtividadesRelacao.map((atividade: any) => ({
     value: atividade.id,
@@ -120,7 +120,7 @@ function ModalCadastroAtividades({
             }}
           >
             <ModalBody mt={3}>
-              {!isLoading ? (
+              {!areaResponsavel.isLoading ? (
                 <Flex flexDirection={"column"} gap={5}>
                   <Flex flex={1} direction={"column"}>
                     {/* <Text fontWeight={"bold"}>Nome</Text> */}
@@ -175,7 +175,7 @@ function ModalCadastroAtividades({
                         registerForm={registerForm}
                         nomeSelect={"ÁREA RESPONSÁVEL"}
                         propName={"responsavel_id"}
-                        options={data
+                        options={areaResponsavel.data
                           .map((areaResponsavel: AreaResponsavel) => ({
                             value: areaResponsavel.id,
                             label: areaResponsavel.nom_responsavel,
