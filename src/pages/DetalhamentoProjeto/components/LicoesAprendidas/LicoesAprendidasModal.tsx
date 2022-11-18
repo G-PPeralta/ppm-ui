@@ -43,6 +43,7 @@ function LicoesAprendidasModal({
   const [openModalRegister, setOpenModalRegister] = useState(false);
   const [categoriaId, setCategoriaId] = useState("");
   const [data, setData] = useState("");
+  const [render, setRender] = useState(false);
 
   const [filteredTable, setFilteredTable] = useState(licoes);
 
@@ -66,6 +67,12 @@ function LicoesAprendidasModal({
     }
   }
 
+  useEffect(() => {
+    setTimeout(() => {
+      callBack();
+    }, 1000);
+  }, [render]);
+
   function handleFilter() {
     if (categoriaId || data) {
       const filter = licoes
@@ -82,7 +89,7 @@ function LicoesAprendidasModal({
 
   useEffect(() => {
     handleFilter();
-  }, [licoes]);
+  }, [licoes, render]);
 
   return (
     <>
@@ -282,6 +289,8 @@ function LicoesAprendidasModal({
             <TabelaLicoesAprendidas
               onEdit={handleEditLicao}
               licoes={filteredTable}
+              render={render}
+              setRender={setRender}
             />
             {openModalEdit && (
               <EditarLicoesAprendidasModal

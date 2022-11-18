@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { MdSettingsBackupRestore } from "react-icons/md";
 
 import {
@@ -20,17 +21,40 @@ import { Ring } from "@uiball/loaders";
 
 // import { TextError } from "components/TextError";
 
-import { handleCancelar } from "utils/handleCadastro";
+import { useToast } from "contexts/Toast";
 
-import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
+import { restoreLixeira } from "services/update/Lixeira";
 
 interface TableProps {
   id: number;
+  tableName: string;
+  newRender: Function;
 }
 
-export function RestoreModal(id: TableProps) {
+export function RestoreModal({ id, tableName, newRender }: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroPriorizacao();
+  const { toast } = useToast();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const update = async () => {
+    try {
+      if (!id) throw new Error("Erro ao restaurar o item!");
+      const { status } = await restoreLixeira(id, tableName);
+      if (status === 200 || status === 201) {
+        toast.success("Item restaurado com sucesso!", {
+          id: "toast-principal",
+        });
+        setLoading(false);
+        onClose();
+      }
+    } catch (error) {
+      toast.error("Erro ao restaurar o item!", {
+        id: "toast-principal",
+      });
+      setLoading(false);
+      onClose();
+    }
+  };
 
   return (
     <>
@@ -54,7 +78,6 @@ export function RestoreModal(id: TableProps) {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              registerForm.handleSubmit(e);
             }}
           >
             <ModalHeader
@@ -95,8 +118,8 @@ export function RestoreModal(id: TableProps) {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
+                  color="#F40606"
+                  onClick={() => onClose()}
                   _hover={{
                     background: "red.600",
                     transition: "all 0.4s",
@@ -113,7 +136,10 @@ export function RestoreModal(id: TableProps) {
                   background="origem.500"
                   variant="primary"
                   color="white"
-                  // onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() => {
+                    newRender();
+                    update();
+                  }}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",

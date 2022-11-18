@@ -260,7 +260,7 @@ function CadastroTarefasModal({
                 mt={"6px"}
               >
                 <Flex gap={1} mr={4} ml={-2}>
-                  <RequiredField />
+                  {/* <RequiredField /> */}
                   DESCRIÇÃO DA TAREFA
                 </Flex>
               </FormLabel>

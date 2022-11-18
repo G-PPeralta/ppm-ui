@@ -55,6 +55,7 @@ export function useEditarAtividadeGantt() {
     pct_real: 0,
     inicio_planejado: "",
     duracao_dias: 0,
+    responsavel_id: 0,
   };
 
   const adicionarOperacao = yup.object({
@@ -62,8 +63,9 @@ export function useEditarAtividadeGantt() {
     inicio_realizado: yup.date(),
     fim_realizado: yup.date(),
     pct_real: yup.number(),
-    inicio_planejado: yup.date(),
+    inicio_planejado: yup.date().required(),
     duracao_dias: yup.number(),
+    responsavel_id: yup.number(),
   });
   const registerForm: any = useFormik({
     initialValues,
@@ -79,6 +81,7 @@ export function useEditarAtividadeGantt() {
         dat_ini_plan: dat_ini_plan.toISOString(),
         pct_real: values.pct_real,
         duracao_dias: values.duracao_dias,
+        responsavel_id: values.responsavel_id,
       };
 
       try {

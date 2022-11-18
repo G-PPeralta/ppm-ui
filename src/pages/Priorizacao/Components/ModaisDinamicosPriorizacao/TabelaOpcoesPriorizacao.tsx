@@ -49,7 +49,7 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
   useEffect(() => {
     setTimeout(() => {
       getData();
-    }, 3000);
+    }, 1000);
   }, [rankingInfos.refresh]);
 
   const fromTo = {
