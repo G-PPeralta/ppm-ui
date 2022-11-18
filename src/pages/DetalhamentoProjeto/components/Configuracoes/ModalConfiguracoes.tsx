@@ -52,7 +52,7 @@ function ModalConfiguracoes({
   // MODAL PRIORIZAÇÃO
   const [isPriorizacaoModalOpen, setIsPriorizacaoModalOpen] = useState(false);
 
-  console.log(projeto.valor_total_previsto);
+  // console.log(projeto.valor_total_previsto);
 
   // FORM LABELS
   const [responsavel, setReponsavel] = useState(projeto?.responsavel_id);
