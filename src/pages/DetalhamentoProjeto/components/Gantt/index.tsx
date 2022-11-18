@@ -265,14 +265,14 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
           height={"100vh"}
         >
           <ColumnsDirective>
-            <ColumnDirective field="Item" type="string"></ColumnDirective>
+            {/* <ColumnDirective field="Item" type="string"></ColumnDirective>
             <ColumnDirective
               field="TaskID"
               headerText="ID"
               visible={false}
               headerTextAlign="Center"
               textAlign="Center"
-            ></ColumnDirective>
+            ></ColumnDirective> */}
             <ColumnDirective
               field="acao"
               headerText="Ação"
