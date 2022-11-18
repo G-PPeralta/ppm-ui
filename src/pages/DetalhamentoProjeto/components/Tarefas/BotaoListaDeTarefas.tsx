@@ -155,7 +155,7 @@ function BotaoListadeTarefas() {
                   {formatDate(task.data_tarefa)}
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  {task.descricao_tarefa}
+                  {task.descricao_tarefa === "---" ? "" : task.descricao_tarefa}
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   {task.responsavel}
