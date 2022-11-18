@@ -31,9 +31,10 @@ import { deleteLicao } from "services/delete/DeleteLicoesProjetos";
 
 type props = {
   id: number;
+  newRender: Function;
 };
 
-function DeleteModal({ id }: props) {
+function DeleteModal({ id, newRender }: props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { toast } = useToast();
   const [loading, setLoading] = useState<boolean>(false);
@@ -44,7 +45,7 @@ function DeleteModal({ id }: props) {
       if (!id) throw new Error("Erro ao remover a lição!");
       const { status } = await deleteLicao(id, user?.nome);
       if (status === 200 || status === 201) {
-        toast.success("Lição removido com sucesso!", {
+        toast.success("Lição removida com sucesso!", {
           id: "toast-principal",
         });
         setLoading(false);
@@ -122,10 +123,10 @@ function DeleteModal({ id }: props) {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red.500"
+                  color="#F40606"
                   onClick={() => onClose()}
                   _hover={{
-                    background: "red.500",
+                    background: "red.600",
                     transition: "all 0.4s",
                     color: "white",
                   }}
@@ -137,10 +138,13 @@ function DeleteModal({ id }: props) {
                   Cancelar
                 </Button>
                 <Button
-                  background="#0047BB"
+                  background="origem.500"
                   variant="primary"
                   color="white"
-                  onClick={() => remove()}
+                  onClick={() => {
+                    newRender();
+                    remove();
+                  }}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",

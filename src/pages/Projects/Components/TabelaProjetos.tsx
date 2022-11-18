@@ -32,9 +32,17 @@ interface TableProps {
   data: Projetos[];
   setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
   refresh: boolean;
+  setRender: React.Dispatch<React.SetStateAction<boolean>>;
+  render: boolean;
 }
 
-export function TabelaProjetos({ data, refresh, setRefresh }: TableProps) {
+export function TabelaProjetos({
+  data,
+  refresh,
+  setRefresh,
+  render,
+  setRender,
+}: TableProps) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
 
@@ -249,7 +257,12 @@ export function TabelaProjetos({ data, refresh, setRefresh }: TableProps) {
                     setRefresh={setRefresh}
                     projeto={projeto.id_projeto_real}
                   />
-                  <ModalDeletarProjeto projeto={projeto.id_projeto_real} />
+                  <ModalDeletarProjeto
+                    projeto={projeto.id_projeto_real}
+                    newRender={() => setRender(!render)}
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
                 </Td>
               </Tr>
             ))

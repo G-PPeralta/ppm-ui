@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Box,
@@ -11,12 +11,14 @@ import {
   Th,
   Thead,
   Tr,
-  useColorModeValue,
+  // useColorModeValue,
 } from "@chakra-ui/react";
-import moment from "moment";
+import { Lixeira } from "interfaces/Lixeira";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
 import Sidebar from "components/SideBar";
+
+import { getLixeira } from "services/get/Lixeira";
 
 import { DeleteModal } from "./ModalDeletar";
 import { RestoreModal } from "./ModalRestaurar";
@@ -24,6 +26,8 @@ import { RestoreModal } from "./ModalRestaurar";
 export function TabelaLixeira() {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
+  const [data, setData] = useState<Lixeira[]>();
+  const [render, setRender] = useState(false);
 
   const fromTo = {
     from,
@@ -32,18 +36,62 @@ export function TabelaLixeira() {
     setTo,
   };
 
-  const rows = [
-    {
-      id: "1",
-      nome: "Projetos",
-      qtd: "1000",
-    },
-    {
-      id: "2",
-      nome: "spt",
-      qtd: "1000",
-    },
-  ];
+  // const rows = [
+  //   {
+  //     id: "1",
+  //     nome: "Projetos",
+  //     qtd: "1000",
+  //   },
+  //   {
+  //     id: "2",
+  //     nome: "spt",
+  //     qtd: "1000",
+  //   },
+  // ];
+
+  const getData = async () => {
+    const lixeira = await getLixeira();
+    setData(lixeira.data);
+  };
+
+  // console.log(data);
+
+  useEffect(() => {
+    setTimeout(() => {
+      getData();
+    }, 1000);
+  }, [render]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const tableData =
+    data &&
+    data?.length > 0 &&
+    data
+      .sort((a, b) => a.id - b.id)
+      .slice(from, to)
+      .map((row) => (
+        <Tr textColor={"#2D2926"} fontWeight={"semibold"}>
+          <Td textAlign={"center"}>{row.id}</Td>
+          <Td textAlign={"center"}>{row.local_deletado}</Td>
+          <Td textAlign={"center"}>{row.criado}</Td>
+          <Td textAlign={"center"}>{row.exclusao}</Td>
+          <Td textAlign={"center"}>
+            <RestoreModal
+              id={Number(row.id)}
+              tableName={row.table_name}
+              newRender={() => setRender(!render)}
+            />
+            <DeleteModal
+              id={Number(row.id)}
+              tableName={row.table_name}
+              newRender={() => setRender(!render)}
+            />
+          </Td>
+        </Tr>
+      ));
 
   return (
     <>
@@ -55,7 +103,7 @@ export function TabelaLixeira() {
           bg={{ base: "white", sm: "white" }}
           boxShadow={{
             base: "none",
-            sm: useColorModeValue("md", "md-dark"),
+            // sm: useColorModeValue("md", "md-dark"),
           }}
           borderRadius={{ base: "none", sm: "xl" }}
         >
@@ -76,60 +124,47 @@ export function TabelaLixeira() {
             >
               Lixeira
             </Heading>
-            <Flex direction={"column"} w={"100%"} mr={-10}>
-              <TableContainer
-                mt={4}
-                mb={4}
-                borderRadius={"10px"}
-                // overflowX={"scroll"}
-              >
-                <Table variant="striped" colorScheme={"strippedGray"}>
-                  <Thead backgroundColor={"origem.300"}>
-                    <Tr background={"origem.500"}>
-                      <Th color="white" textAlign={"center"} w={"56px"}>
-                        ID
-                      </Th>
-                      <Th color="white" textAlign={"center"}>
-                        Item
-                      </Th>
-                      <Th color="white" textAlign={"center"} w={"166px"}>
-                        Data de Criação
-                      </Th>
-                      <Th color="white" textAlign={"center"} w={"104px"}>
-                        Data de Exclusão
-                      </Th>
-                      <Th color="white" textAlign={"center"} w={"104px"}>
-                        Ações
-                      </Th>
-                    </Tr>
-                  </Thead>
-                  {/* <Tbody scrollBehavior={"smooth"}> */}
-                  <Tbody>
-                    {rows &&
-                      rows.map((row) => (
-                        <Tr textColor={"#2D2926"} fontWeight={"semibold"}>
-                          <Td textAlign={"center"}>{row.id}</Td>
-                          <Td textAlign={"center"}>{row.nome}</Td>
-                          <Td textAlign={"center"}>
-                            {moment().format("DDMMYYYY_hhmmss")}
-                          </Td>
-                          <Td textAlign={"center"}>
-                            {moment().format("DDMMYYYY_hhmmss")}
-                          </Td>
-                          <Td textAlign={"center"}>
-                            <RestoreModal id={Number(row.id)} />
-                            <DeleteModal id={Number(row.id)} />
-                          </Td>
-                        </Tr>
-                      ))}
-                  </Tbody>
-                </Table>
-              </TableContainer>
+            {data && (
+              <Flex direction={"column"} w={"100%"} mr={-10}>
+                <TableContainer
+                  mt={4}
+                  mb={4}
+                  borderRadius={"10px"}
+                  // overflowX={"scroll"}
+                >
+                  <Table variant="striped" colorScheme={"strippedGray"}>
+                    <Thead backgroundColor={"origem.300"}>
+                      <Tr background={"origem.500"}>
+                        <Th color="white" textAlign={"center"} w={"56px"}>
+                          ID
+                        </Th>
+                        <Th color="white" textAlign={"center"}>
+                          Item
+                        </Th>
+                        <Th color="white" textAlign={"center"} w={"166px"}>
+                          Data de Criação
+                        </Th>
+                        <Th color="white" textAlign={"center"} w={"104px"}>
+                          Data de Exclusão
+                        </Th>
+                        <Th color="white" textAlign={"center"} w={"104px"}>
+                          Ações
+                        </Th>
+                      </Tr>
+                    </Thead>
+                    {/* <Tbody scrollBehavior={"smooth"}> */}
+                    <Tbody>{tableData}</Tbody>
+                  </Table>
+                </TableContainer>
 
-              <Flex>
-                <PaginacaoTabela data={rows} fromTo={fromTo} />
+                <Flex>
+                  <PaginacaoTabela
+                    data={data && data?.length > 0}
+                    fromTo={fromTo}
+                  />
+                </Flex>
               </Flex>
-            </Flex>
+            )}
           </Flex>
         </Box>
       </Sidebar>

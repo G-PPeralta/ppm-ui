@@ -31,9 +31,10 @@ import { deleteTarefa } from "services/delete/DeleteTarefa";
 
 type ModalDeletarProps = {
   id: number;
+  newRender: Function;
 };
 
-function ModalDeletarTarefa({ id }: ModalDeletarProps) {
+function ModalDeletarTarefa({ id, newRender }: ModalDeletarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { toast } = useToast();
   const { user } = useAuth();
@@ -124,10 +125,10 @@ function ModalDeletarTarefa({ id }: ModalDeletarProps) {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red.500"
+                  color="#F40606"
                   onClick={() => onClose()}
                   _hover={{
-                    background: "red.500",
+                    background: "red.600",
                     transition: "all 0.4s",
                     color: "white",
                   }}
@@ -140,10 +141,13 @@ function ModalDeletarTarefa({ id }: ModalDeletarProps) {
                   Cancelar
                 </Button>
                 <Button
-                  background="#0047BB"
+                  background="origem.500"
                   variant="primary"
                   color="white"
-                  onClick={() => remove()}
+                  onClick={() => {
+                    newRender();
+                    remove();
+                  }}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",
