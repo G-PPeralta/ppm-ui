@@ -57,7 +57,7 @@ function ModalCadastroAtividades({
   idProjeto,
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaAtividadesRelacao } =
+  const { registerForm, loading, listaAtividadesRelacao, reqGet } =
     useCadastroAtividadeProjeto(
       refreshGanttCriacao,
       setRefreshGanttCriacao,
@@ -70,11 +70,11 @@ function ModalCadastroAtividades({
     label: atividade.valor,
   }));
 
-  useEffect(() => {
-    if (idProjeto) {
-      registerForm.setFieldValue("id_projeto", idProjeto);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (idProjeto) {
+  //     registerForm.setFieldValue("id_projeto", idProjeto);
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (idProjeto) {
@@ -89,7 +89,10 @@ function ModalCadastroAtividades({
         borderRadius={"10px"}
         background={"white"}
         color={"origem.500"}
-        onClick={onOpen}
+        onClick={() => {
+          reqGet();
+          onOpen();
+        }}
         _hover={{
           background: "origem.500",
           transition: "all 0.4s",
