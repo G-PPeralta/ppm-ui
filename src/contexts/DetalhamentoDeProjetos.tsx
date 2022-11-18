@@ -7,15 +7,17 @@ import { getAreaResponsavel } from "services/get/Projetos";
 const DetalhamentoProjetoContext = createContext<any>({} as any);
 
 export const DetalhamentoProjetoProvider = ({ children }: any) => {
-  const { isLoading, error, data } = useQuery({
+  const reqGetAreaResponsavel = useQuery({
     queryKey: ["area-responsavel"],
     queryFn: getAreaResponsavel,
   });
 
   const value = {
-    isLoading,
-    error,
-    data,
+    areaResponsavel: {
+      isLoading: reqGetAreaResponsavel.isLoading,
+      error: reqGetAreaResponsavel.error,
+      data: reqGetAreaResponsavel.data,
+    },
   };
 
   return (

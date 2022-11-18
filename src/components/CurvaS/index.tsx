@@ -72,28 +72,28 @@ function CurvaS({ data }: Props) {
               <Line
                 type="monotone"
                 dataKey="cronogramaPrevisto"
-                stroke="#F94144"
+                stroke="#FBB4B4"
                 strokeWidth={4}
                 name="Cronograma Previsto"
               />
               <Line
                 type="monotone"
                 dataKey="cronogramaRealizado"
-                stroke="#F4DD06"
+                stroke="#F40606"
                 strokeWidth={4}
                 name="Cronograma Realizado"
               />
               <Line
                 type="monotone"
                 dataKey="capexPrevisto"
-                stroke="#93E01B"
+                stroke="#B2C7EA"
                 strokeWidth={4}
                 name="Capex Previsto"
               />
               <Line
                 type="monotone"
                 dataKey="capexRealizado"
-                stroke="#2E69FD"
+                stroke="#0047BB"
                 strokeWidth={4}
                 name="Capex Realizado"
               />
