@@ -74,7 +74,7 @@ export function TabelaProjetos({
     if (a === "Acima de R$3.000.000,01 (Alto)") {
       return "Alto";
     }
-    if (a === "R$300.000,00 até R$3.000.000,00 (Médio)") {
+    if (a === "R$300.000,01 até R$ 3.000.000,00 (Médio)") {
       return "Médio";
     }
     if (a === "R$0 até R$300.000,00 (Baixo)") {
