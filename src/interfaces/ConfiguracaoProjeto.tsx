@@ -7,6 +7,7 @@ export interface IConfigProjetoDto {
   solicitacao?: number;
   nome_projeto?: string;
   elemento_pep?: string;
+  valor_total_previsto?: number;
   data_inicio?: Date;
   data_fim?: Date;
   data_inicio_real?: Date | null;
