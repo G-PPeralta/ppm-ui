@@ -12,6 +12,7 @@ import {
   FormControl,
   FormLabel,
   Input,
+  InputGroup,
   InputLeftAddon,
   Modal,
   ModalBody,
@@ -29,6 +30,8 @@ import { ProjetosConfig } from "interfaces/Services";
 import moment from "moment";
 
 import ModalCadastrarPriorizacao from "pages/Projects/Components/ModalCadastrarPriorizacao";
+
+import { formatRealInput } from "utils/regexCoinMask";
 
 import { useProjetos } from "hooks/useCadastroProjeto";
 
@@ -88,6 +91,9 @@ function ModalConfiguracoes({
   const [classificacao, setClassificacao] = useState(projeto?.classificacao_id);
   const [tipo, setTipo] = useState(projeto?.tipo_projeto_id);
   const [gate, setGate] = useState(projeto?.gate_id);
+
+  // console.log(typeof orcamento);
+  // console.log({ orcamento });
 
   const {
     optionsResponsaveis,
@@ -452,30 +458,40 @@ function ModalConfiguracoes({
                         ORÇAMENTO
                       </Text>
                     </FormLabel>
-                    <InputLeftAddon
-                      alignSelf={"end"}
-                      color="#949494"
-                      border={"1px solid #949494"}
-                      background={"white"}
-                      h={"56px"}
-                    >
-                      R$
-                    </InputLeftAddon>
-                    <Input
-                      fontSize={"14px"}
-                      fontWeight={"400"}
-                      _placeholder={{ color: "#2D2926" }}
-                      maxLength={50}
-                      borderRadius={"8px"}
-                      border={"1px solid #A7A7A7"}
-                      mt={"-6px"}
-                      width={"100%"}
-                      height={"56px"}
-                      id="orcamento"
-                      name="orcamento"
-                      value={orcamento}
-                      onChange={(e) => setOrcamento(Number(e.target.value))}
-                    ></Input>
+                    <Flex>
+                      <InputGroup>
+                        <InputLeftAddon
+                          mt={-1.5}
+                          color="#949494"
+                          border={"1px solid #949494"}
+                          background={"white"}
+                          h={"56px"}
+                        >
+                          R$
+                        </InputLeftAddon>
+                        <Input
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          _placeholder={{ color: "#2D2926" }}
+                          maxLength={50}
+                          borderRadius={"8px"}
+                          border={"1px solid #A7A7A7"}
+                          mt={"-6px"}
+                          width={"100%"}
+                          height={"56px"}
+                          id="orcamento"
+                          name="orcamento"
+                          value={formatRealInput(String(orcamento) || "")}
+                          onChange={(e) =>
+                            setOrcamento(
+                              Number(
+                                e.target.value.toString().replace(/[^0-9]/g, "")
+                              )
+                            )
+                          }
+                        ></Input>
+                      </InputGroup>
+                    </Flex>
                   </FormControl>
                 </Flex>
                 <Flex
