@@ -106,7 +106,7 @@ function ModalDeletarCentroDeCusto({ idCusto, refreshState }: PropsType) {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red.500"
+                  color="#F40606"
                   onClick={() => handleCancelar(registerForm, onClose)}
                   _hover={{
                     background: "red.600",

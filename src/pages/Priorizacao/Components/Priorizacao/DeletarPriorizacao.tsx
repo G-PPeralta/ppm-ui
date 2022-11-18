@@ -27,9 +27,11 @@ import { deletePriorizacao } from "services/delete/DeletePriorizacao";
 
 type props = {
   id: number;
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function ModalDeletarPriorizacao({ id }: props) {
+function ModalDeletarPriorizacao({ id, refresh, setRefresh }: props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [loading, setLoading] = useState<boolean>(false);
   const { toast } = useToast();
@@ -122,10 +124,10 @@ function ModalDeletarPriorizacao({ id }: props) {
               <Flex gap={2}>
                 <Button
                   variant="ghost"
-                  color="red.500"
+                  color="#F40606"
                   onClick={() => onClose()}
                   _hover={{
-                    background: "red.500",
+                    background: "red.600",
                     transition: "all 0.4s",
                     color: "white",
                   }}
@@ -137,10 +139,13 @@ function ModalDeletarPriorizacao({ id }: props) {
                   Cancelar
                 </Button>
                 <Button
-                  background="#0047BB"
+                  background="origem.500"
                   variant="primary"
                   color="white"
-                  onClick={() => remove()}
+                  onClick={() => {
+                    remove();
+                    setRefresh(!refresh);
+                  }}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",

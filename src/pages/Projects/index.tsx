@@ -65,6 +65,10 @@ export function Projects() {
   }, []);
 
   useEffect(() => {
+    getProjectsPerPolo();
+  }, [render]);
+
+  useEffect(() => {
     setTimeout(() => {
       getProjectsPerPolo();
       setRender(!render);
@@ -210,6 +214,8 @@ export function Projects() {
                     <TabelaProjetos
                       refresh={refresh}
                       setRefresh={setRefresh}
+                      render={render}
+                      setRender={setRender}
                       data={projetosFilter}
                     />
                   </Flex>

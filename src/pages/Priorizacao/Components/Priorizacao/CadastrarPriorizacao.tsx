@@ -27,7 +27,12 @@ import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroNovaPriorizacao } from "hooks/useCadastrarNovaPriorizacao";
 
-function ModalCadastrarPriorizacao() {
+type props = {
+  refresh: boolean;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function ModalCadastrarPriorizacao({ refresh, setRefresh }: props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroNovaPriorizacao();
 
@@ -204,7 +209,10 @@ function ModalCadastrarPriorizacao() {
                   background="origem.500"
                   variant="primary"
                   color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
+                  onClick={() => {
+                    handleCadastrar(registerForm, onClose);
+                    setRefresh(!refresh);
+                  }}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",

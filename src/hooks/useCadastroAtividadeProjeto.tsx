@@ -149,5 +149,6 @@ export function useCadastroAtividadeProjeto(
     listaAreaAtuacao,
     listaResponsaveis,
     listaAtividadesRelacao,
+    reqGet,
   };
 }

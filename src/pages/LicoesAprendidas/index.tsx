@@ -66,6 +66,7 @@ export function LicoesAprendidasProjetos() {
 
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
+  const [render, setRender] = useState(false);
 
   const fromTo = {
     from,
@@ -89,6 +90,13 @@ export function LicoesAprendidasProjetos() {
     handleGetLicoesAprendidas();
     handleGetProjetos();
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      handleGetLicoesAprendidas();
+      handleGetProjetos();
+    }, 1000);
+  }, [render]);
 
   const handleClick = () => {
     filterByProject();
@@ -165,7 +173,10 @@ export function LicoesAprendidasProjetos() {
                       onOpen();
                     }}
                   />
-                  <DeleteModal id={lessons.id} />
+                  <DeleteModal
+                    id={lessons.id}
+                    newRender={() => setRender(!render)}
+                  />
                 </Td>
               </Tr>
             ))
@@ -229,7 +240,7 @@ export function LicoesAprendidasProjetos() {
               onOpen();
             }}
           />
-          <DeleteModal id={lessons.id} />
+          <DeleteModal id={lessons.id} newRender={() => setRender(!render)} />
         </Td>
       </Tr>
     ));

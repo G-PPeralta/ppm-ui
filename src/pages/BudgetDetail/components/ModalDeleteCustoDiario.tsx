@@ -104,7 +104,7 @@ function ModalDeleteCustoDiario(props: PropsInterface) {
                 h={"56px"}
                 w={"208px"}
                 variant="ghost"
-                color="red.500"
+                color="#F40606"
                 onClick={onClose}
                 _hover={{
                   background: "red.600",

@@ -22,9 +22,16 @@ import ModalDeletarLicao from "./BotaoDeletarLicao";
 interface EditProps {
   onEdit: (licao: LicoesAprendidasNew) => void;
   licoes: LicoesAprendidasNew[];
+  setRender: Function;
+  render: boolean;
 }
 
-function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
+function TabelaLicoesAprendidas({
+  onEdit,
+  licoes,
+  setRender,
+  render,
+}: EditProps) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
 
@@ -79,7 +86,10 @@ function TabelaLicoesAprendidas({ onEdit, licoes }: EditProps) {
                     // width={"18px"}
                     // height={"18px"}
                   />
-                  <ModalDeletarLicao id={lessons.id} />
+                  <ModalDeletarLicao
+                    id={lessons.id}
+                    newRender={() => setRender(!render)}
+                  />
                   {/* <IconButton
           aria-label="Plus sign"
           icon={<FaTrash />}
