@@ -212,7 +212,7 @@ function CadastroTarefasModal({
                   value={registerForm.values.atividadeRel}
                   onChange={registerForm.handleChange}
                 >
-                  <option value="">Selecione</option>
+                  {/* <option value="">Selecione</option> */}
                   {atividadesProjeto.map((atividade, index) => (
                     <option value={atividade.nom_atividade} key={index}>
                       {atividade.nom_atividade}

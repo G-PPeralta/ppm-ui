@@ -108,7 +108,7 @@ function EditarTarefaModal({
         Number(tarefaId),
         tarefa,
         tarefa !== "status"
-          ? updatePayload(tarefa) || 0
+          ? updatePayload(tarefa) || "---"
           : updatePayload(tarefa)?.toString() || "",
         user?.nome
       )
