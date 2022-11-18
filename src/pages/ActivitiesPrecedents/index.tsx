@@ -36,8 +36,8 @@ declare type AreaCompetaType = {
 export function ActivitiesPrecedents() {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
-  const [show, setShow] = useState<string>("");
   const [atividades, setAtividades] = useState<any[]>([]);
+  const [destaques, setDestaques] = useState<any[]>([]);
   const [data, setData] = useState<any[]>([]);
   // const [refresh, setRefresh] = useState(false);
   // const [openId, setOpenId] = useState("");
@@ -77,7 +77,26 @@ export function ActivitiesPrecedents() {
   }, []);
 
   const openDetails = (atividade: any) => {
-    setShow(atividade);
+    const newDest = atividade.precedentesId.map(
+      (val: any) => val.precedente_id
+    );
+    const atvLocal = atividades;
+    let renderList = newDest;
+    if (renderList[0] != 0) {
+      for (let index = 0; index < renderList.length; index++) {
+        const element = renderList[index];
+        const listaLocal = atvLocal.filter(
+          (val2) => val2.id_atividade == element
+        );
+        if (listaLocal[0]) {
+          renderList = renderList.concat(
+            listaLocal[0].precedentesId.map((val3: any) => val3.precedente_id)
+          );
+        }
+      }
+    }
+    renderList.push(atividade.id_atividade);
+    setDestaques(renderList);
   };
 
   const getAreabyIdTarget = (
@@ -227,14 +246,16 @@ export function ActivitiesPrecedents() {
                                       index
                                     ),
                                     style: {
-                                      strokeColor:
-                                        show == atividade.id_atividade
-                                          ? "#0000ff"
-                                          : "#000000",
-                                      strokeWidth:
-                                        show == atividade.id_atividade
-                                          ? 1.5
-                                          : 1,
+                                      strokeColor: destaques.includes(
+                                        atividade.id_atividade
+                                      )
+                                        ? "#0000ff"
+                                        : "#000000",
+                                      strokeWidth: destaques.includes(
+                                        atividade.id_atividade
+                                      )
+                                        ? 1.5
+                                        : 1,
                                     },
                                   };
                                   return item;
@@ -244,14 +265,18 @@ export function ActivitiesPrecedents() {
                               <Flex
                                 key={index}
                                 direction={"column"}
+                                opacity={
+                                  destaques.includes(atividade.id_atividade)
+                                    ? 1
+                                    : 0.5
+                                }
                                 align={"center"}
                                 justify={"center"}
-                                onClick={() =>
-                                  openDetails(String(atividade.id_atividade))
-                                }
+                                onClick={() => openDetails(atividade)}
                                 _hover={{ cursor: "pointer" }}
                               >
                                 <CardACT atividade={atividade} />
+                                {atividade.id_atividade}
                               </Flex>
                             </ArcherElement>
                           )
