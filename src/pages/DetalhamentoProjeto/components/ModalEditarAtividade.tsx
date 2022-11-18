@@ -27,6 +27,8 @@ import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 import SelectFiltragem from "components/SelectFiltragem";
 
+import { formataParaTipo } from "utils/FormataParaTipo";
+
 import { useDetalhamentoProjeto } from "contexts/DetalhamentoDeProjetos";
 
 import { getGanttData } from "services/get/Gantt";
@@ -75,10 +77,6 @@ function ModalEditarAtividade({
   const { id } = useParams();
   const { areaResponsavel } = useDetalhamentoProjeto();
 
-  useEffect(() => {
-    asyncGet();
-  }, [editAtividade]);
-
   const getValue = (options: any[], chave: string) => {
     const index = options
       .map(({ value }) => value)
@@ -96,7 +94,9 @@ function ModalEditarAtividade({
     const responsavelId = areaResponsavel.data.find(
       (areaResponsavel: any) =>
         areaResponsavel.nom_responsavel === item.Responsavel
-    ).id;
+    )?.id;
+
+    // console.log("responsavelId", responsavelId);
     registerForm.setFieldValue("id_atividade", editAtividade.id_atividade);
     registerForm.setFieldValue("nome_atividade", editAtividade.nome_atividade);
     registerForm.setFieldValue("inicio_realizado", new Date(item.StartDate));
@@ -105,8 +105,26 @@ function ModalEditarAtividade({
     registerForm.setFieldValue("pct_real", editAtividade.pct_real);
     registerForm.setFieldValue("inicio_planejado", item.StartDatePlan);
     registerForm.setFieldValue("responsavel_id", responsavelId);
+    registerForm.setFieldValue("inicio_planejado", item.BaselineStartDate);
+    registerForm.setFieldValue("fim_planejado", item.BaselineEndDate);
   };
 
+  // console.log("registerForm", registerForm.values);
+
+  const addDays = (date: any, days: any) => {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  };
+
+  useEffect(() => {
+    asyncGet();
+  }, [editAtividade]);
+
+  // console.log(
+  //   "registerForm.values.inicio_planejado",
+  //   registerForm.values.inicio_planejado
+  // );
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} size="lg">
@@ -194,7 +212,7 @@ function ModalEditarAtividade({
                     </Flex>
                   </Flex>
 
-                  <Flex flex={1} direction={"row"} mt={1} mb={-3} gap={3}>
+                  <Flex flex={1} direction={"row"} mt={1} gap={3}>
                     <Flex flex={1}>
                       <DateTimePicker
                         registerForm={registerForm}
@@ -204,38 +222,58 @@ function ModalEditarAtividade({
                         data={registerForm.values.inicio_planejado}
                       />
                     </Flex>
-                    <Flex direction={"column"}>
-                      <Flex gap={1}>
-                        <Text
-                          fontWeight={"bold"}
-                          fontSize={"12px"}
-                          color={"#949494"}
-                        >
-                          DURAÇÃO PLANEJADA
-                        </Text>
-                      </Flex>
-                      <NumberInput
-                        h={"56px"}
-                        placeholder="Duração em Dias"
-                        id="duracao_dias"
-                        name="duracao_dias"
-                        max={999999999999}
-                        value={registerForm.values.duracao_dias}
-                        onChange={(value) => {
-                          registerForm.setFieldValue(
-                            "duracao_dias",
-                            Number(value)
-                          );
-                        }}
-                        w={"95%"}
-                      >
-                        <NumberInputField h={"56px"} />
-                        <NumberInputStepper>
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
+                    <Flex flex={1}>
+                      <DateTimePicker
+                        registerForm={registerForm}
+                        value={"fim_planejado"}
+                        label={"FIM PLANEJADO"}
+                        required={false}
+                        data={registerForm.values.fim_planejado}
+                        isDisabled={true}
+                      />
                     </Flex>
+                  </Flex>
+                  <Flex direction={"column"} width={"328px"} mb={-3}>
+                    <Flex gap={1}>
+                      <Text
+                        fontWeight={"bold"}
+                        fontSize={"12px"}
+                        color={"#949494"}
+                      >
+                        DURAÇÃO PLANEJADA
+                      </Text>
+                    </Flex>
+                    <NumberInput
+                      h={"56px"}
+                      placeholder="Duração em Dias"
+                      id="duracao_dias"
+                      name="duracao_dias"
+                      max={999999999999}
+                      value={formataParaTipo(
+                        "dias",
+                        registerForm.values.duracao_dias
+                      )}
+                      onChange={(value) => {
+                        registerForm.setFieldValue(
+                          "duracao_dias",
+                          Number(value)
+                        );
+                        registerForm.setFieldValue(
+                          "fim_planejado",
+                          addDays(
+                            registerForm.values.inicio_planejado,
+                            Number(value)
+                          )
+                        );
+                      }}
+                      w={"95%"}
+                    >
+                      <NumberInputField h={"56px"} />
+                      <NumberInputStepper>
+                        <NumberIncrementStepper />
+                        <NumberDecrementStepper />
+                      </NumberInputStepper>
+                    </NumberInput>
                   </Flex>
                   <Flex flex={1} direction={"column"}>
                     <Flex>
