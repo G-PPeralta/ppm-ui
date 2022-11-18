@@ -11,7 +11,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  useBreakpointValue,
   FormLabel,
   FormControl,
   ModalCloseButton,
@@ -21,10 +20,14 @@ import {
   NumberDecrementStepper,
   NumberIncrementStepper,
 } from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
+import SelectFiltragem from "components/SelectFiltragem";
+
+import { useDetalhamentoProjeto } from "contexts/DetalhamentoDeProjetos";
 
 import { getGanttData } from "services/get/Gantt";
 
@@ -70,21 +73,38 @@ function ModalEditarAtividade({
   loading,
 }: any) {
   const { id } = useParams();
+  const { areaResponsavel } = useDetalhamentoProjeto();
 
   useEffect(() => {
     asyncGet();
   }, [editAtividade]);
 
+  const getValue = (options: any[], chave: string) => {
+    const index = options
+      .map(({ value }) => value)
+      .indexOf(registerForm?.values?.[chave]);
+
+    return {
+      value: options?.[index]?.value,
+      label: options?.[index]?.label,
+    };
+  };
+
   const asyncGet = async () => {
     const reqGanttData = await getGanttData(Number(id));
     const item = getObject(reqGanttData.data, editAtividade.id_atividade);
+    const responsavelId = areaResponsavel.data.find(
+      (areaResponsavel: any) =>
+        areaResponsavel.nom_responsavel === item.Responsavel
+    ).id;
     registerForm.setFieldValue("id_atividade", editAtividade.id_atividade);
     registerForm.setFieldValue("nome_atividade", editAtividade.nome_atividade);
-    registerForm.setFieldValue("inicio_realizado", item.StartDate);
-    registerForm.setFieldValue("fim_realizado", item.EndDate);
+    registerForm.setFieldValue("inicio_realizado", new Date(item.StartDate));
+    registerForm.setFieldValue("fim_realizado", new Date(item.EndDate));
     registerForm.setFieldValue("duracao_dias", item.Duration);
     registerForm.setFieldValue("pct_real", editAtividade.pct_real);
     registerForm.setFieldValue("inicio_planejado", item.StartDatePlan);
+    registerForm.setFieldValue("responsavel_id", responsavelId);
   };
 
   return (
@@ -110,126 +130,153 @@ function ModalEditarAtividade({
             }}
           >
             <ModalBody mt={3}>
-              <Flex
-                flexDirection={useBreakpointValue({
-                  base: "column",
-                  md: "column",
-                })}
-                gap={3}
-              >
-                <Flex flex={1} direction={"column"}>
-                  <Flex flex={1}>
-                    <Flex direction={"column"} flex={2}>
-                      <FormControl>
-                        <FormLabel htmlFor="nome_atividade">
-                          <Text
-                            color="#949494"
-                            fontSize="12px"
-                            fontWeight="700"
-                            mt={"6px"}
-                          >
-                            NOME
-                          </Text>
-                        </FormLabel>
-                        <Input
-                          borderRadius={"8px"}
-                          fontSize={"14px"}
-                          fontWeight={"400"}
-                          fontFamily={"Mulish"}
-                          border={"1px solid #949494"}
-                          mt={"-9px"}
-                          width={"328px"}
-                          color={"black"}
-                          height={"56px"}
-                          isDisabled
-                          value={registerForm.values.nome_atividade || ""}
-                          type="text"
-                          name="nome_atividade"
-                          id="nome_atividade"
-                        />
-                      </FormControl>
+              {!areaResponsavel.isLoading ? (
+                <Flex flexDirection={"column"} gap={3}>
+                  <Flex flex={1} direction={"column"}>
+                    <Flex flex={1}>
+                      <Flex direction={"column"} flex={2} gap={2}>
+                        <FormControl>
+                          <FormLabel htmlFor="nome_atividade">
+                            <Text
+                              color="#949494"
+                              fontSize="12px"
+                              fontWeight="700"
+                              mt={"6px"}
+                            >
+                              NOME
+                            </Text>
+                          </FormLabel>
+                          <Input
+                            borderRadius={"8px"}
+                            fontSize={"14px"}
+                            fontWeight={"400"}
+                            fontFamily={"Mulish"}
+                            border={"1px solid #949494"}
+                            mt={"-9px"}
+                            width={"328px"}
+                            color={"black"}
+                            height={"56px"}
+                            isDisabled
+                            value={registerForm.values.nome_atividade || ""}
+                            type="text"
+                            name="nome_atividade"
+                            id="nome_atividade"
+                          />
+                        </FormControl>
+                        <Flex w={"328px"}>
+                          <SelectFiltragem
+                            registerForm={registerForm}
+                            nomeSelect={"ÁREA RESPONSÁVEL"}
+                            propName={"responsavel_id"}
+                            options={areaResponsavel.data
+                              .map((areaResponsavel: any) => ({
+                                value: areaResponsavel.id,
+                                label: areaResponsavel.nom_responsavel,
+                              }))
+                              .sort((a: any, b: any) =>
+                                a.label.localeCompare(b.label)
+                              )}
+                            required={false}
+                            value={getValue(
+                              areaResponsavel.data
+                                .map((areaResponsavel: any) => ({
+                                  value: areaResponsavel.id,
+                                  label: areaResponsavel.nom_responsavel,
+                                }))
+                                .sort((a: any, b: any) =>
+                                  a.label.localeCompare(b.label)
+                                ),
+                              "responsavel_id"
+                            )}
+                          />
+                        </Flex>
+                      </Flex>
                     </Flex>
                   </Flex>
-                </Flex>
 
-                <Flex flex={1} direction={"row"} mt={1} mb={-3} gap={3}>
-                  <Flex flex={1}>
-                    <DateTimePicker
-                      registerForm={registerForm}
-                      value={"inicio_planejado"}
-                      label={"INÍCIO PLANEJADO"}
-                      required={false}
-                      data={registerForm.values.inicio_planejado}
-                    />
-                  </Flex>
-                  <Flex direction={"column"}>
-                    <Flex gap={1}>
-                      <Text
-                        fontWeight={"bold"}
-                        fontSize={"12px"}
-                        color={"#949494"}
+                  <Flex flex={1} direction={"row"} mt={1} mb={-3} gap={3}>
+                    <Flex flex={1}>
+                      <DateTimePicker
+                        registerForm={registerForm}
+                        value={"inicio_planejado"}
+                        label={"INÍCIO PLANEJADO"}
+                        required={false}
+                        data={registerForm.values.inicio_planejado}
+                      />
+                    </Flex>
+                    <Flex direction={"column"}>
+                      <Flex gap={1}>
+                        <Text
+                          fontWeight={"bold"}
+                          fontSize={"12px"}
+                          color={"#949494"}
+                        >
+                          DURAÇÃO PLANEJADA
+                        </Text>
+                      </Flex>
+                      <NumberInput
+                        h={"56px"}
+                        placeholder="Duração em Dias"
+                        id="duracao_dias"
+                        name="duracao_dias"
+                        max={999999999999}
+                        value={registerForm.values.duracao_dias}
+                        onChange={(value) => {
+                          registerForm.setFieldValue(
+                            "duracao_dias",
+                            Number(value)
+                          );
+                        }}
+                        w={"95%"}
                       >
-                        DURAÇÃO PLANEJADA
-                      </Text>
+                        <NumberInputField h={"56px"} />
+                        <NumberInputStepper>
+                          <NumberIncrementStepper />
+                          <NumberDecrementStepper />
+                        </NumberInputStepper>
+                      </NumberInput>
                     </Flex>
-                    <NumberInput
-                      h={"56px"}
-                      placeholder="Duração em Dias"
-                      id="duracao_dias"
-                      name="duracao_dias"
-                      max={999999999999}
-                      value={registerForm.values.duracao_dias}
-                      onChange={(value) => {
-                        registerForm.setFieldValue(
-                          "duracao_dias",
-                          Number(value)
-                        );
-                      }}
-                      w={"95%"}
-                    >
-                      <NumberInputField h={"56px"} />
-                      <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                      </NumberInputStepper>
-                    </NumberInput>
                   </Flex>
-                </Flex>
-                <Flex flex={1} direction={"column"}>
-                  <Flex>
-                    <Flex flex={1} mt={4} mb={2}>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"inicio_realizado"}
-                        label={"INÍCIO REALIZADO"}
-                        required={false}
-                        data={registerForm.values.inicio_realizado}
-                      />
+                  <Flex flex={1} direction={"column"}>
+                    <Flex>
+                      <Flex flex={1} mt={4} mb={2}>
+                        <DateTimePicker
+                          registerForm={registerForm}
+                          value={"inicio_realizado"}
+                          label={"INÍCIO REALIZADO"}
+                          required={false}
+                          data={registerForm.values.inicio_realizado}
+                        />
+                      </Flex>
+                      <Flex flex={1} mt={4} mb={2}>
+                        <DateTimePicker
+                          registerForm={registerForm}
+                          value={"fim_realizado"}
+                          label={"FIM REALIZADO"}
+                          required={false}
+                          data={registerForm.values.fim_realizado}
+                          isDataFim={true}
+                        />
+                      </Flex>
                     </Flex>
-                    <Flex flex={1} mt={4} mb={2}>
-                      <DateTimePicker
+                  </Flex>
+                  <Flex flex={1} direction={"column"}>
+                    <Flex mt={-1} width={"328px"}>
+                      <InputNumericoGenerico
                         registerForm={registerForm}
-                        value={"fim_realizado"}
-                        label={"FIM REALIZADO"}
-                        required={false}
-                        data={registerForm.values.fim_realizado}
-                        isDataFim={true}
+                        propName={"pct_real"}
+                        nomeInput={"PORCENTAGEM CONCLUÍDA"}
+                        tipo={"porcentagem"}
+                        stepper={true}
                       />
                     </Flex>
                   </Flex>
                 </Flex>
-                <Flex flex={1} direction={"column"}>
-                  <Flex mt={-1} w={"76%"}>
-                    <InputNumericoGenerico
-                      registerForm={registerForm}
-                      propName={"pct_real"}
-                      nomeInput={"PORCENTAGEM CONCLUÍDA"}
-                      tipo={"porcentagem"}
-                      stepper={true}
-                    />
-                  </Flex>
+              ) : (
+                <Flex align={"center"} justify={"center"} w={"100%"} h={"50vh"}>
+                  <Ring speed={2} lineWeight={5} color="blue" size={64} />
                 </Flex>
-              </Flex>
+              )}
             </ModalBody>
 
             <ModalCloseButton color={"white"} />

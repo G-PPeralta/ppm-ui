@@ -4,7 +4,7 @@ export async function deletePriorizacao(
   id: number,
   user: string | undefined
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.delete(`/projetos-ranking/${id}/${user}`);
+  const { data, status } = await api.delete(`/rankings/${id}/${user}`);
 
   return { data, status };
 }

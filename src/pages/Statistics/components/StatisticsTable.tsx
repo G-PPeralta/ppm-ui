@@ -22,9 +22,11 @@ import ModalDeletar from "./AtividadesCadastroCronograma/ModalDeletar";
 
 interface Props {
   data: StatisticsTableData[] | undefined;
+  setRender: Function;
+  render: boolean;
 }
 
-export function StatisticsTable({ data }: Props) {
+export function StatisticsTable({ data, render, setRender }: Props) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(10);
 
@@ -86,7 +88,10 @@ export function StatisticsTable({ data }: Props) {
                 <Text>{formatDecimal(projeto.pct_real)}</Text>
               </Td>
               <Td textAlign={"center"} fontWeight={"semibold"}>
-                <ModalDeletar id={projeto.id_poco} />
+                <ModalDeletar
+                  id={projeto.id_poco}
+                  newRender={() => setRender(!render)}
+                />
               </Td>
             </Tr>
           ))

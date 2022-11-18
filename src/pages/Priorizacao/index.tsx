@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   Box,
   Flex,
@@ -16,6 +18,7 @@ import ModalCadastrarPriorizacao from "./Components/Priorizacao/CadastrarPrioriz
 import { TabelaPriorizacao } from "./Components/Priorizacao/TabelaPriorizacao";
 
 export function Priorizacao() {
+  const [refresh, setRefresh] = useState(false);
   return (
     <>
       <Sidebar>
@@ -58,7 +61,10 @@ export function Priorizacao() {
               <Flex gap={5}>
                 <Flex alignItems={"flex-start"}>
                   <Heading className="toBottom">
-                    <ModalCadastrarPriorizacao />
+                    <ModalCadastrarPriorizacao
+                      refresh={refresh}
+                      setRefresh={setRefresh}
+                    />
                   </Heading>
                 </Flex>
 
@@ -69,7 +75,7 @@ export function Priorizacao() {
             </Flex>
             <>
               <Flex ml={-3} mr={-3}>
-                <TabelaPriorizacao />
+                <TabelaPriorizacao refresh={refresh} setRefresh={setRefresh} />
               </Flex>
             </>
           </Box>
