@@ -270,13 +270,17 @@ export function ActivitiesPrecedents() {
                                     ? 1
                                     : 0.5
                                 }
+                                shadow={
+                                  destaques.includes(atividade.id_atividade)
+                                    ? "xl"
+                                    : undefined
+                                }
                                 align={"center"}
                                 justify={"center"}
                                 onClick={() => openDetails(atividade)}
                                 _hover={{ cursor: "pointer" }}
                               >
                                 <CardACT atividade={atividade} />
-                                {atividade.id_atividade}
                               </Flex>
                             </ArcherElement>
                           )
