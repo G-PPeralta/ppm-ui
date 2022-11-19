@@ -118,6 +118,8 @@ function ModalConfiguracoes({
 
   // console.log(orcamento);
 
+  const format = /^[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/;
+
   const handleSalvar = () => {
     const payload: IConfigProjetoDto = {
       nome_responsavel: responsavel,
@@ -128,7 +130,9 @@ function ModalConfiguracoes({
       solicitacao,
       nome_projeto: nomeProjeto,
       elemento_pep: elementoPep,
-      valor_total_previsto: orcamento / 100,
+      valor_total_previsto: String(orcamento).match(format)
+        ? orcamento
+        : orcamento / 100,
       data_inicio: moment.utc(inicio).subtract(3, "hours").toDate(),
       data_fim: moment.utc(fim).subtract(3, "hours").toDate(),
       data_inicio_real: inicioReal

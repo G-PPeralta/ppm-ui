@@ -41,8 +41,10 @@ function CardOrcamento({ refresh }: any) {
   }, []);
 
   useEffect(() => {
-    handleGetCpiSpi();
-    handleGetInfoFinanceira();
+    setTimeout(() => {
+      handleGetCpiSpi();
+      handleGetInfoFinanceira();
+    }, 1000);
   }, [refresh]);
 
   const naoPrevisto = infoFinanceira[0]?.naoPrevisto;
