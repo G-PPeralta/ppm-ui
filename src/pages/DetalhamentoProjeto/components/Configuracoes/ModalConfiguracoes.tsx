@@ -116,6 +116,8 @@ function ModalConfiguracoes({
     onClose();
   };
 
+  // console.log(orcamento);
+
   const handleSalvar = () => {
     const payload: IConfigProjetoDto = {
       nome_responsavel: responsavel,
@@ -126,7 +128,7 @@ function ModalConfiguracoes({
       solicitacao,
       nome_projeto: nomeProjeto,
       elemento_pep: elementoPep,
-      valor_total_previsto: orcamento,
+      valor_total_previsto: orcamento / 100,
       data_inicio: moment.utc(inicio).subtract(3, "hours").toDate(),
       data_fim: moment.utc(fim).subtract(3, "hours").toDate(),
       data_inicio_real: inicioReal
