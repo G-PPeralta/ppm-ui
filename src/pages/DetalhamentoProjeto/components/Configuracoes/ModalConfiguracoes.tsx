@@ -140,9 +140,11 @@ function ModalConfiguracoes({
       tipo,
       gate,
     };
-    patchProjeto(projeto.id, payload);
-    onClose();
-    setRefresh(!refresh);
+    if (nomeProjeto !== "" && elementoPep !== "" && orcamento !== 0) {
+      patchProjeto(projeto.id, payload);
+      onClose();
+      setRefresh(!refresh);
+    }
   };
 
   function getOptions(options: any, selected: any) {
