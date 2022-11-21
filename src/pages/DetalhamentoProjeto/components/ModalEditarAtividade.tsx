@@ -293,6 +293,7 @@ function ModalEditarAtividade({
                           label={"FIM REALIZADO"}
                           required={false}
                           data={registerForm.values.fim_realizado}
+                          dataMin={registerForm.values.inicio_realizado}
                           isDataFim={true}
                         />
                       </Flex>
