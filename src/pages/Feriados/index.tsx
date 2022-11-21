@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { FiTrash } from "react-icons/fi";
+import { MdModeEdit } from "react-icons/md";
 
-import { Flex, Td, Text, Tr } from "@chakra-ui/react";
+import { Flex, IconButton, Td, Text, Tr } from "@chakra-ui/react";
 
 import ContainerPagina from "components/ContainerPagina";
 import FiltragemTabela from "components/FiltragemTabela";
@@ -43,7 +45,7 @@ function Feriados() {
                   <Text>{linhaTabela.nome_feriado}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  {/* <Text>{formatDate(linhaTabela.data)}</Text> */}
+                  {linhaTabela.ind_global === 1 ? "Nacional" : "Outros"}
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Text>
@@ -55,30 +57,37 @@ function Feriados() {
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Flex gap={2} align={"center"} justify={"center"}>
-                    {/* <ModalEditarLicaoAprendida
-                    refreshState={refreshState}
-                    idLicao={linhaTabela.id}
-                    linhaTabela={linhaTabela}
-                    idAtividade={registerForm.values.id_atividade}
-                  />
-                  <IconButton
-                    aria-label="Botão de Editar"
-                    icon={<FiTrash />}
-                    borderRadius={"10px"}
-                    background={"transparent"}
-                    color={"red.500"}
-                    _hover={{
-                      background: "red.500",
-                      transition: "all 0.4s",
-                      color: "white",
-                    }}
-                    onClick={() =>
-                      handleDeletar(
-                        linhaTabela.id,
-                        registerForm.values.id_atividade
-                      )
-                    }
-                  /> */}
+                    <IconButton
+                      aria-label="Botão de Editar"
+                      icon={<MdModeEdit />}
+                      borderRadius={"10px"}
+                      background={"transparent"}
+                      color={"origem.500"}
+                      _hover={{
+                        background: "origem.500",
+                        transition: "all 0.4s",
+                        color: "white",
+                      }}
+                      // onClick={onOpen}
+                    />
+                    <IconButton
+                      aria-label="Botão de Editar"
+                      icon={<FiTrash />}
+                      borderRadius={"10px"}
+                      background={"transparent"}
+                      color={"red.500"}
+                      _hover={{
+                        background: "red.500",
+                        transition: "all 0.4s",
+                        color: "white",
+                      }}
+                      // onClick={() =>
+                      //   handleDeletar(
+                      //     linhaTabela.id,
+                      //     registerForm.values.id_atividade
+                      //   )
+                      // }
+                    />
                   </Flex>
                 </Td>
               </Tr>
