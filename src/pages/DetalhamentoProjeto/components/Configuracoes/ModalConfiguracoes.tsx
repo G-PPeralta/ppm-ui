@@ -12,6 +12,8 @@ import {
   FormControl,
   FormLabel,
   Input,
+  InputGroup,
+  InputLeftAddon,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -28,6 +30,8 @@ import { ProjetosConfig } from "interfaces/Services";
 import moment from "moment";
 
 import ModalCadastrarPriorizacao from "pages/Projects/Components/ModalCadastrarPriorizacao";
+
+import { formatRealInput } from "utils/regexCoinMask";
 
 import { useProjetos } from "hooks/useCadastroProjeto";
 
@@ -51,6 +55,8 @@ function ModalConfiguracoes({
   // MODAL PRIORIZAÇÃO
   const [isPriorizacaoModalOpen, setIsPriorizacaoModalOpen] = useState(false);
 
+  // console.log(projeto.valor_total_previsto);
+
   // FORM LABELS
   const [responsavel, setReponsavel] = useState(projeto?.responsavel_id);
   const [coordenador, setCoordenador] = useState(projeto?.coordenador_id);
@@ -60,6 +66,7 @@ function ModalConfiguracoes({
   const [solicitacao, setSolicitacao] = useState(projeto?.solicitante_id);
   const [nomeProjeto, setNomeProjeto] = useState(projeto?.nome_projeto);
   const [elementoPep, setElementoPep] = useState(projeto?.elemento_pep);
+  const [orcamento, setOrcamento] = useState(projeto?.valor_total_previsto);
   const [inicio, setInicio] = useState(
     projeto?.data_inicio
       ? moment.utc(projeto?.data_inicio).add(3, "hours").toDate()
@@ -85,6 +92,9 @@ function ModalConfiguracoes({
   const [tipo, setTipo] = useState(projeto?.tipo_projeto_id);
   const [gate, setGate] = useState(projeto?.gate_id);
 
+  // console.log(typeof orcamento);
+  // console.log({ orcamento });
+
   const {
     optionsResponsaveis,
     optionsCoordenadores,
@@ -106,6 +116,10 @@ function ModalConfiguracoes({
     onClose();
   };
 
+  // console.log(orcamento);
+
+  const format = /^[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/;
+
   const handleSalvar = () => {
     const payload: IConfigProjetoDto = {
       nome_responsavel: responsavel,
@@ -116,6 +130,9 @@ function ModalConfiguracoes({
       solicitacao,
       nome_projeto: nomeProjeto,
       elemento_pep: elementoPep,
+      valor_total_previsto: String(orcamento).match(format)
+        ? orcamento
+        : orcamento / 100,
       data_inicio: moment.utc(inicio).subtract(3, "hours").toDate(),
       data_fim: moment.utc(fim).subtract(3, "hours").toDate(),
       data_inicio_real: inicioReal
@@ -129,9 +146,11 @@ function ModalConfiguracoes({
       tipo,
       gate,
     };
-    patchProjeto(projeto.id, payload);
-    onClose();
-    setRefresh(!refresh);
+    if (nomeProjeto !== "" && elementoPep !== "" && orcamento !== 0) {
+      patchProjeto(projeto.id, payload);
+      onClose();
+      setRefresh(!refresh);
+    }
   };
 
   function getOptions(options: any, selected: any) {
@@ -440,6 +459,47 @@ function ModalConfiguracoes({
                       value={elementoPep}
                       onChange={(e) => setElementoPep(e.target.value)}
                     ></Input>
+                  </FormControl>
+                  <FormControl w={{ sm: "100%", md: "232px" }}>
+                    <FormLabel htmlFor="orcamento">
+                      <Text color="#949494" fontSize="12px" fontWeight="700">
+                        ORÇAMENTO
+                      </Text>
+                    </FormLabel>
+                    <Flex>
+                      <InputGroup>
+                        <InputLeftAddon
+                          mt={-1.5}
+                          color="#949494"
+                          border={"1px solid #949494"}
+                          background={"white"}
+                          h={"56px"}
+                        >
+                          R$
+                        </InputLeftAddon>
+                        <Input
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          _placeholder={{ color: "#2D2926" }}
+                          maxLength={50}
+                          borderRadius={"8px"}
+                          border={"1px solid #A7A7A7"}
+                          mt={"-6px"}
+                          width={"100%"}
+                          height={"56px"}
+                          id="orcamento"
+                          name="orcamento"
+                          value={formatRealInput(String(orcamento) || "")}
+                          onChange={(e) =>
+                            setOrcamento(
+                              Number(
+                                e.target.value.toString().replace(/[^0-9]/g, "")
+                              )
+                            )
+                          }
+                        ></Input>
+                      </InputGroup>
+                    </Flex>
                   </FormControl>
                 </Flex>
                 <Flex

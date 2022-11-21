@@ -12,7 +12,7 @@ import {
   getInfoFinanceiro,
 } from "services/get/DetalhamentoProjetos";
 
-function CardOrcamento() {
+function CardOrcamento({ refresh }: any) {
   const { id } = useParams();
   const [cpiSpi, setCpiSpi] = useState([{ cpi: 0, spi: 0 }]);
   const [loading, setLoading] = useState(false);
@@ -39,6 +39,13 @@ function CardOrcamento() {
     handleGetInfoFinanceira();
     setLoading(false);
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      handleGetCpiSpi();
+      handleGetInfoFinanceira();
+    }, 1000);
+  }, [refresh]);
 
   const naoPrevisto = infoFinanceira[0]?.naoPrevisto;
   const remanescente = infoFinanceira[0]?.remanescente;

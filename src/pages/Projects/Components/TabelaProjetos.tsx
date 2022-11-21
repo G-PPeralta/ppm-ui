@@ -68,6 +68,24 @@ export function TabelaProjetos({
     return `${formated[2]}/${formated[1]}/${formated[0]}`;
   }
 
+  // console.log(data[0].prioridade);
+
+  const complexidades = (a: string) => {
+    if (a === "Acima de R$3.000.000,01 (Alto)") {
+      return "Alto";
+    }
+    if (a === "R$300.000,01 até R$ 3.000.000,00 (Médio)") {
+      return "Médio";
+    }
+    if (a === "R$0 até R$300.000,00 (Baixo)") {
+      return "Baixo";
+    } else {
+      return "";
+    }
+  };
+
+  // console.log(data);
+
   function Body() {
     return (
       <>
@@ -173,14 +191,14 @@ export function TabelaProjetos({
                   textAlign={"center"}
                   color={"#2D2926"}
                 >
-                  {projeto.complexidade}
+                  {projeto.prioridade}
                 </Td>
                 <Td
                   fontWeight={"semibold"}
                   textAlign={"center"}
                   color={"#2D2926"}
                 >
-                  {projeto.prioridade}
+                  {complexidades(projeto.complexidade)}
                 </Td>
                 <Td
                   fontWeight={"semibold"}
