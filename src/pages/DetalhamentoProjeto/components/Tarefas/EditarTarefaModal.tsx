@@ -397,6 +397,14 @@ function EditarTarefaModal({
                 Cancelar
               </Button>
               <Button
+                isDisabled={
+                  nome === "" ||
+                  data === "" ||
+                  atividade === "" ||
+                  responsavel === "" ||
+                  // status === 0 ||
+                  descricao === ""
+                }
                 background="origem.500"
                 variant="primary"
                 color="white"
