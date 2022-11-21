@@ -96,7 +96,8 @@ export function useCadastroAtividadeProjeto(
     validationSchema: cadastroAtividadeProjetos,
     onSubmit: async (values) => {
       const newDate = new Date(values.dat_inicio_plan);
-      newDate.setHours(11);
+      // console.log("values", values);
+      // console.log("newDate", newDate);
       const newValues = {
         nom_usu_create: user?.nome,
         id_projeto: values.id_projeto,

@@ -82,6 +82,8 @@ function ModalCadastroAtividades({
     }
   }, [registerForm.values.id_projeto]);
 
+  // console.log("registerForm", registerForm.values);
+
   return (
     <>
       <Button
