@@ -1953,6 +1953,9 @@ function ModalConfiguracoes({
                 Cancelar
               </Button>
               <Button
+                isDisabled={
+                  nomeProjeto === "" || elementoPep === "" || orcamento === 0
+                }
                 h={"56px"}
                 w={"206px"}
                 borderRadius={"8px"}

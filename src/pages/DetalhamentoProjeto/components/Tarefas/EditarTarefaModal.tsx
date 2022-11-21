@@ -402,7 +402,6 @@ function EditarTarefaModal({
                   data === "" ||
                   atividade === "" ||
                   responsavel === "" ||
-                  // status === 0 ||
                   descricao === ""
                 }
                 background="origem.500"
