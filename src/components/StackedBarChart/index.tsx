@@ -24,7 +24,16 @@ export default function StackedBarChart({
       {data.length > 0 ? (
         <BarChart data={data}>
           <XAxis dataKey="mes" fontSize={10} />
-          {showY ? <YAxis dataKey={dataEntries[0].name} /> : undefined}
+          {showY ? (
+            <YAxis
+              dataKey={dataEntries[0].name}
+              style={{
+                fontSize: "0.65rem",
+                fontFamily: "'Mulish', sans-serif",
+                width: "100%",
+              }}
+            />
+          ) : undefined}
           <Tooltip />
           {dataEntries.map((dataEntry, index) => (
             <Bar
