@@ -22,6 +22,8 @@ import {
   Inject,
   Edit,
   Toolbar,
+  HolidaysDirective,
+  // HolidayDirective,
 } from "@syncfusion/ej2-react-gantt";
 
 import { useEditarAtividadeGantt } from "hooks/useEditarAtividadeGantt";
@@ -91,66 +93,64 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
 
       // console.log(">>>> reqGanttData", reqGanttData.data);
 
-      // const minBaselineStartDate = reqGanttData.data[0].subtasks.reduce(
-      //   (acc: any, curr: any) => {
-      //     if (acc > curr.BaselineStartDate) {
-      //       return curr.BaselineStartDate;
-      //     }
-      //     return acc;
-      //   },
-      //   reqGanttData.data[0].subtasks[0].BaselineStartDate
-      // );
+      const calculateDaysBetween = (date1: Date, date2: Date) => {
+        const one_day = 1000 * 60 * 60 * 24;
+        const date1_ms = date1.getTime();
+        const date2_ms = date2.getTime();
+        const difference_ms = date2_ms - date1_ms;
 
-      // const maxBaselineEndDate = reqGanttData.data[0].subtasks.reduce(
-      //   (acc: any, curr: any) => {
-      //     if (acc < curr.BaselineEndDate) {
-      //       return curr.BaselineEndDate;
-      //     }
-      //     return acc;
-      //   },
-      //   reqGanttData.data[0].subtasks[0].BaselineEndDate
-      // );
+        const days = Math.round(difference_ms / one_day);
+        const weeks = Math.floor(days / 7);
+        const daysInWeek = days % 7;
+        const daysInWeekWithoutWeekends =
+          daysInWeek - 2 * Math.floor(daysInWeek / 5);
+        const daysWithoutWeekends = weeks * 5 + daysInWeekWithoutWeekends;
 
-      // console.log("minBaselineStartDate", minBaselineStartDate);
-      // console.log("maxBaselineEndDate", maxBaselineEndDate);
+        return daysWithoutWeekends;
+      };
 
-      // const calculateDaysBetween = (date1: Date, date2: Date) => {
-      //   // Get 1 day in milliseconds
-      //   const one_day = 1000 * 60 * 60 * 24;
+      const minBaselineStartDate = reqGanttData.data[0].subtasks.reduce(
+        (acc: any, curr: any) => {
+          if (acc > curr.BaselineStartDate) {
+            return curr.BaselineStartDate;
+          }
+          return acc;
+        },
+        reqGanttData.data[0].subtasks[0].BaselineStartDate
+      );
 
-      //   // Convert both dates to milliseconds
-      //   const date1_ms = date1.getTime();
-      //   const date2_ms = date2.getTime();
+      const maxBaselineEndDate = reqGanttData.data[0].subtasks.reduce(
+        (acc: any, curr: any) => {
+          if (acc < curr.BaselineEndDate) {
+            return curr.BaselineEndDate;
+          }
+          return acc;
+        },
+        reqGanttData.data[0].subtasks[0].BaselineEndDate
+      );
 
-      //   // Calculate the difference in milliseconds
-      //   const difference_ms = date2_ms - date1_ms;
-
-      //   // Convert back to days and return
-      //   return Math.round(difference_ms / one_day);
-      // };
+      const duracaoPlanejadaSemFinaisDeSemana = calculateDaysBetween(
+        new Date(minBaselineStartDate),
+        new Date(maxBaselineEndDate)
+      );
 
       const baselineDuration = reqGanttData.data.map((item: any) => ({
         ...item,
-        BaselineDuration: item.BaselineDuration.toString().concat(" dias"),
+        BaselineDuration: duracaoPlanejadaSemFinaisDeSemana
+          .toString()
+          .concat(" dias"),
         subtasks: item.subtasks.map((sub: any) => ({
           ...sub,
           BaselineDuration: sub.BaselineDuration.toString().concat(" dias"),
         })),
+        // BaselineEndDate: maxBaselineEndDate,
+        // BaselineStartDate: minBaselineStartDate,
       }));
 
-      // console.log(
-      //   "calculateDaysBetween",
-      //   calculateDaysBetween(
-      //     new Date(minBaselineStartDate),
-      //     new Date(maxBaselineEndDate)
-      //   )
-      // );
-
+      // console.log("minBaselineStartDate", minBaselineStartDate);
+      // console.log("maxBaselineEndDate", maxBaselineEndDate);
       // console.log("baselineDuration", baselineDuration);
 
-      // const _gantt: IGantt = reqGanttData.data;
-      // // setGanttData(_gantt);
-      // ganttFormatter(_gantt);
       setGantt(baselineDuration);
     }
   }
@@ -417,6 +417,43 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
               textAlign="Center"
             ></ColumnDirective>
           </ColumnsDirective>
+          <HolidaysDirective>
+            {/* <HolidayDirective
+              from="07/09/2022"
+              label="Independencia do Brasil"
+              cssClass="e-custom-holiday"
+            ></HolidayDirective>
+            <HolidayDirective
+              from="12/10/2022"
+              label="Nossa Senhora Aparecida"
+              cssClass="e-custom-holiday"
+            ></HolidayDirective>
+            <HolidayDirective
+              from="02/11/2022"
+              label="Finados"
+              cssClass="e-custom-holiday"
+            ></HolidayDirective> */}
+            {/* <HolidayDirective
+              from="15/11/2022"
+              label="Proclamação da República"
+              cssClass="e-custom-holiday"
+            ></HolidayDirective> */}
+            {/* <HolidayDirective
+              from="25/12/2022"
+              label="Natal"
+              cssClass="e-custom-holiday"
+            ></HolidayDirective>
+            <HolidayDirective
+              from="01/01/2023"
+              label="Ano Novo"
+              cssClass="e-custom-holiday"
+            ></HolidayDirective> */}
+            {/* <HolidayDirective
+              from="21/02/2023"
+              label="Carnaval"
+              cssClass="e-custom-holiday"
+            ></HolidayDirective> */}
+          </HolidaysDirective>
           <Inject services={[Edit, Toolbar]} />
         </GanttComponent>
         <Modal
