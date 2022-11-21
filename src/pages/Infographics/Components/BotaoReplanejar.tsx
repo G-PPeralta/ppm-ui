@@ -13,34 +13,15 @@ import {
   ModalHeader,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
 
 // import { TextError } from "components/TextError";
 
-import { handleCancelar } from "utils/handleCadastro";
-
-import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
-
-import { postReplanejarCampanha } from "services/post/Infograficos";
-
-interface Payload {
-  id_cronograma: number;
-  ordem: number;
-}
-
 interface Props {
-  payload: Payload[];
-  id: any;
+  execute: any;
 }
 
-function BotaoReplanejar({ payload, id }: Props) {
+function BotaoReplanejar({ execute }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading } = useCadastroPriorizacao();
-
-  const handleClick = async () => {
-    await postReplanejarCampanha(payload, id);
-    onClose();
-  };
 
   return (
     <>
@@ -66,91 +47,78 @@ function BotaoReplanejar({ payload, id }: Props) {
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton color={"white"} />
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              registerForm.handleSubmit(e);
-            }}
+          <ModalHeader
+            backgroundColor={"#2E69FD"}
+            borderTopRadius={7}
+            display={"flex"}
+            justifyContent={"center"}
+            color={"white"}
+            fontSize={"14px"}
+            fontWeight={"700"}
+            height={"48px"}
           >
-            <ModalHeader
-              backgroundColor={"#2E69FD"}
-              borderTopRadius={7}
-              display={"flex"}
-              justifyContent={"center"}
-              color={"white"}
-              fontSize={"14px"}
-              fontWeight={"700"}
-              height={"48px"}
-            >
-              Alterar
-            </ModalHeader>
+            Alterar
+          </ModalHeader>
 
-            <ModalCloseButton color={"white"} />
-            <ModalBody mt={3}>
-              <FormControl>
-                <Flex direction={"column"} gap={4}>
-                  <Stack gap={2}>
-                    <Flex>
-                      <Text
-                        // textAlign={"center"}
-                        fontSize={"20px"}
-                        mb={"1px"}
-                        color={"#010101"}
-                        fontWeight={"400"}
-                      >
-                        Tem certeza que deseja alterar o planejamento?
-                      </Text>
-                    </Flex>
-                  </Stack>
-                </Flex>
-              </FormControl>
-            </ModalBody>
-
-            <ModalFooter justifyContent={"center"} mt={4}>
-              <Flex gap={2}>
-                <Button
-                  variant="ghost"
-                  color="#F40606"
-                  onClick={() => handleCancelar(registerForm, onClose)}
-                  _hover={{
-                    background: "red.600",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                  height={"56px"}
-                  width={"208px"}
-                  fontSize={"18px"}
-                  fontWeight={"700"}
-                  fontFamily={"Mulish"}
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  background="#0047BB"
-                  variant="primary"
-                  color="white"
-                  onClick={() => handleClick()}
-                  _hover={{
-                    background: "origem.600",
-                    transition: "all 0.4s",
-                  }}
-                  height={"56px"}
-                  width={"208px"}
-                  fontSize={"18px"}
-                  fontWeight={"700"}
-                  fontFamily={"Mulish"}
-                >
-                  {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Confirmar</Text>
-                    </>
-                  )}
-                </Button>
+          <ModalCloseButton color={"white"} />
+          <ModalBody mt={3}>
+            <FormControl>
+              <Flex direction={"column"} gap={4}>
+                <Stack gap={2}>
+                  <Flex>
+                    <Text
+                      // textAlign={"center"}
+                      fontSize={"20px"}
+                      mb={"1px"}
+                      color={"#010101"}
+                      fontWeight={"400"}
+                    >
+                      Tem certeza que deseja alterar o planejamento?
+                    </Text>
+                  </Flex>
+                </Stack>
               </Flex>
-            </ModalFooter>
-          </form>
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter justifyContent={"center"} mt={4}>
+            <Flex gap={2}>
+              <Button
+                variant="ghost"
+                color="#F40606"
+                onClick={() => onClose()}
+                _hover={{
+                  background: "red.600",
+                  transition: "all 0.4s",
+                  color: "white",
+                }}
+                height={"56px"}
+                width={"208px"}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
+              >
+                Cancelar
+              </Button>
+              <Button
+                background="#0047BB"
+                variant="primary"
+                color="white"
+                onClick={() => execute()}
+                _hover={{
+                  background: "origem.600",
+                  transition: "all 0.4s",
+                }}
+                height={"56px"}
+                width={"208px"}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
+              >
+                <Text>Confirmar</Text>
+              </Button>
+            </Flex>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
