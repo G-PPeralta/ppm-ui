@@ -88,10 +88,70 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
     if (id) {
       const reqGanttData = await getGanttData(Number(id));
       if (!reqGanttData) return;
+
+      // console.log(">>>> reqGanttData", reqGanttData.data);
+
+      // const minBaselineStartDate = reqGanttData.data[0].subtasks.reduce(
+      //   (acc: any, curr: any) => {
+      //     if (acc > curr.BaselineStartDate) {
+      //       return curr.BaselineStartDate;
+      //     }
+      //     return acc;
+      //   },
+      //   reqGanttData.data[0].subtasks[0].BaselineStartDate
+      // );
+
+      // const maxBaselineEndDate = reqGanttData.data[0].subtasks.reduce(
+      //   (acc: any, curr: any) => {
+      //     if (acc < curr.BaselineEndDate) {
+      //       return curr.BaselineEndDate;
+      //     }
+      //     return acc;
+      //   },
+      //   reqGanttData.data[0].subtasks[0].BaselineEndDate
+      // );
+
+      // console.log("minBaselineStartDate", minBaselineStartDate);
+      // console.log("maxBaselineEndDate", maxBaselineEndDate);
+
+      // const calculateDaysBetween = (date1: Date, date2: Date) => {
+      //   // Get 1 day in milliseconds
+      //   const one_day = 1000 * 60 * 60 * 24;
+
+      //   // Convert both dates to milliseconds
+      //   const date1_ms = date1.getTime();
+      //   const date2_ms = date2.getTime();
+
+      //   // Calculate the difference in milliseconds
+      //   const difference_ms = date2_ms - date1_ms;
+
+      //   // Convert back to days and return
+      //   return Math.round(difference_ms / one_day);
+      // };
+
+      const baselineDuration = reqGanttData.data.map((item: any) => ({
+        ...item,
+        BaselineDuration: item.BaselineDuration.toString().concat(" dias"),
+        subtasks: item.subtasks.map((sub: any) => ({
+          ...sub,
+          BaselineDuration: sub.BaselineDuration.toString().concat(" dias"),
+        })),
+      }));
+
+      // console.log(
+      //   "calculateDaysBetween",
+      //   calculateDaysBetween(
+      //     new Date(minBaselineStartDate),
+      //     new Date(maxBaselineEndDate)
+      //   )
+      // );
+
+      // console.log("baselineDuration", baselineDuration);
+
       // const _gantt: IGantt = reqGanttData.data;
       // // setGanttData(_gantt);
       // ganttFormatter(_gantt);
-      setGantt(reqGanttData.data);
+      setGantt(baselineDuration);
     }
   }
 
@@ -263,6 +323,7 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
           }}
           rowDataBound={rowDataBound}
           height={"100vh"}
+          taskMode={"Auto"}
         >
           <ColumnsDirective>
             <ColumnDirective field="Item" type="string"></ColumnDirective>
@@ -320,8 +381,16 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
               format="dd/MM/yyyy"
             ></ColumnDirective>
             <ColumnDirective
+              field="BaselineDuration"
+              headerText="Duração Planejada"
+              headerTextAlign="Center"
+              textAlign="Center"
+              // type="number"
+              // format="N"
+            />
+            <ColumnDirective
               field="Duration"
-              headerText="Duração"
+              headerText="Duração Realizada"
               headerTextAlign="Center"
               textAlign="Center"
               // type="number"
