@@ -40,7 +40,7 @@ export function ActivitiesSchedule() {
   const [refresh, setRefresh] = useState(false);
   const [loadingCards, setLoadingCards] = useState(true);
   const [intervencaoIniciada, setIntervencaoIniciada] = useState<any>(false);
-  // const [bool, setBool] = useState(true);
+
   const subTitulo = `${state.poco.sonda.split(" - ")[1]} (${
     state.poco.poco.split(" - ")[1]
   })`;
@@ -147,13 +147,12 @@ export function ActivitiesSchedule() {
                     direction={"column"}
                     align={"center"}
                     justify={"center"}
-                    onClick={() => {
+                    onDoubleClick={() => {
                       openDetails(atividade, index);
-                      // setBool(false);
                     }}
                     _hover={{ cursor: "pointer" }}
                   >
-                    <CardACT atividade={atividade} id={openId} />
+                    <CardACT atividade={atividade} id={atividade} />
                   </Flex>
                 ))
               ) : (
