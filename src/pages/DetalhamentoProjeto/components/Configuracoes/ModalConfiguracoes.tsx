@@ -94,7 +94,7 @@ function ModalConfiguracoes({
   const [gate, setGate] = useState(projeto?.gate_id);
 
   // console.log(typeof orcamento);
-  // console.log({ orcamento });
+  // console.log({ orcamento, changed });
 
   const {
     optionsResponsaveis,
@@ -121,6 +121,26 @@ function ModalConfiguracoes({
 
   const format = /^[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/;
 
+  const setIfChanged = () => {
+    if (
+      projeto?.valor_total_previsto !== orcamento &&
+      String(orcamento).match(format)
+    ) {
+      return orcamento;
+    }
+
+    if (
+      projeto?.valor_total_previsto !== orcamento &&
+      !String(orcamento).match(format)
+    ) {
+      return orcamento / 100;
+    }
+
+    if (projeto?.valor_total_previsto === orcamento) {
+      return orcamento;
+    }
+  };
+
   const handleSalvar = () => {
     const payload: IConfigProjetoDto = {
       nome_responsavel: responsavel,
@@ -131,9 +151,10 @@ function ModalConfiguracoes({
       solicitacao,
       nome_projeto: nomeProjeto,
       elemento_pep: elementoPep,
-      valor_total_previsto: String(orcamento).match(format)
-        ? orcamento
-        : orcamento / 100,
+      // valor_total_previsto: String(orcamento).match(format)
+      //   ? orcamento
+      //   : orcamento / 100,
+      valor_total_previsto: setIfChanged(),
       data_inicio: moment.utc(inicio).subtract(3, "hours").toDate(),
       data_fim: moment.utc(fim).subtract(3, "hours").toDate(),
       data_inicio_real: inicioReal
