@@ -12,14 +12,20 @@ function DateTimePicker({
   value,
   required,
   isDataFim,
+  isDisabled,
 }: any) {
   const [horaMin, setHoraMin] = useState<any>(new Date());
   const [horaMax, setHoraMax] = useState<any>(new Date());
   const [dataInicio, setDataInicio] = useState<any>("");
 
+  // console.log("data", data);
+  // console.log("dataInicio", dataInicio);
+
   useEffect(() => {
     if (data && !dataInicio) {
       const newDate = new Date(data);
+      // console.log("newDate", newDate);
+
       // newDate.setHours(newDate.getHours() + 3);
       setDataInicio(newDate);
       // setDataMin(newDate);
@@ -57,6 +63,7 @@ function DateTimePicker({
   const TriggerDatePickerInicio = forwardRef(
     ({ value, onClick }: any, ref: any) => (
       <Button
+        disabled={isDisabled}
         h={"56px"}
         w={"100%"}
         onClick={onClick}
@@ -79,14 +86,15 @@ function DateTimePicker({
         </Text>
       </Flex>
       <ReactDatePicker
+        disabled={isDisabled}
         selected={dataInicio}
         // minDate={dataMin}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
-        // showTimeSelect
+        showTimeSelect
         minTime={horaMin}
         maxTime={horaMax}
-        dateFormat="Pp"
+        dateFormat="dd/MM/yyyy HH:mm"
         customInput={<TriggerDatePickerInicio />}
         // isClearable={dataInicio !== ""}
       />
