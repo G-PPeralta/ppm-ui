@@ -203,7 +203,7 @@ function DetalhamentoProjeto() {
                 }
                 loading={loadingProgresso}
               />
-              <CardOrcamento />
+              <CardOrcamento refresh={refresh} setRefresh={setRefresh} />
               <BotoesModais
                 licoes={licoes}
                 setLicoes={setLicoes}

@@ -326,14 +326,14 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
           taskMode={"Auto"}
         >
           <ColumnsDirective>
-            <ColumnDirective field="Item" type="string"></ColumnDirective>
+            {/* <ColumnDirective field="Item" type="string"></ColumnDirective>
             <ColumnDirective
               field="TaskID"
               headerText="ID"
               visible={false}
               headerTextAlign="Center"
               textAlign="Center"
-            ></ColumnDirective>
+            ></ColumnDirective> */}
             <ColumnDirective
               field="acao"
               headerText="Ação"
