@@ -28,9 +28,8 @@ import { useFeriadosContext } from "contexts/Feriados";
 
 function ModalAdicionarFeriado() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, handleClick, selectProjetos } = useFeriadosContext();
-
-  // console.log("registerForm", registerForm.values);
+  const { registerForm, handleClick, selectProjetos, feriados } =
+    useFeriadosContext();
 
   const optionsTipoFeriado = [
     {
@@ -39,13 +38,12 @@ function ModalAdicionarFeriado() {
     },
     {
       value: false,
-      label: "Estadual",
-    },
-    {
-      value: false,
-      label: "Municipal",
+      label: "Outros",
     },
   ];
+
+  // console.log("registerForm", registerForm.values);
+  // console.log("feriados", feriados);
 
   return (
     <>
@@ -86,7 +84,7 @@ function ModalAdicionarFeriado() {
           <ModalCloseButton color={"white"} />
 
           <ModalBody mt={3}>
-            {selectProjetos.isLoading ? (
+            {selectProjetos.isLoading && !feriados.isLoading ? (
               <Flex
                 display={"flex"}
                 align={"center"}
