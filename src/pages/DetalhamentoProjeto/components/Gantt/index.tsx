@@ -345,8 +345,8 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
             <ColumnDirective
               field="TaskName"
               headerText="Ação/Projeto"
-              headerTextAlign="Center"
-              textAlign="Center"
+              headerTextAlign="Left"
+              textAlign="Left"
             ></ColumnDirective>
             <ColumnDirective
               field="BaselineStartDate"
