@@ -60,7 +60,7 @@ const move = (
   return result;
 };
 
-export default function ModalReorder() {
+export default function ModalReorder({ refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [campanhas, setCampanhas] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -71,6 +71,12 @@ export default function ModalReorder() {
   useEffect(() => {
     handleGetAll();
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      handleGetAll();
+    }, 3000);
+  }, [refresh]);
 
   const handleGetAll = async () => {
     const deafultPayload = {
@@ -248,17 +254,13 @@ export default function ModalReorder() {
                             >
                               {collum.pocos.map((val: any, index: number) => (
                                 <>
-                                  {index == 0 && val.pct_real != 0 ? (
-                                    <Card
-                                      key={index}
-                                      poco={collum.pocos[0]}
-                                      index={0}
-                                    />
-                                  ) : undefined}
-                                  {val.pct_real == 0 ? (
+                                  {index < 9 ? (
                                     <Draggable
                                       draggableId={String(val.id_poco)}
                                       index={index}
+                                      isDragDisabled={
+                                        !!(index == 0 && val.pct_real != 0)
+                                      }
                                     >
                                       {(provided) => (
                                         <div
