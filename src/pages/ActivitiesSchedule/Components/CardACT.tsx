@@ -1,7 +1,15 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { FiTrash } from "react-icons/fi";
+
+import { Button, Flex, Text, useDisclosure } from "@chakra-ui/react";
 
 import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
+
+import { useAuth } from "hooks/useAuth";
+
+import { deleteInfograficos } from "services/delete/DeleteInfografico";
 
 type Atividade = {
   atividade: string;
@@ -18,11 +26,53 @@ type Atividade = {
 
 type Props = {
   atividade: Atividade;
+  id?: any;
 };
 
-function CardACT({ atividade }: Props) {
+function CardACT({ atividade, id }: Props) {
   const dataInicioFormatada = formatDate(new Date(atividade.inicioplanejado));
   const dataFinalFormatada = formatDate(new Date(atividade.finalplanejado));
+  const [atividadeId, setAtividadeId] = useState(0);
+
+  const { onClose } = useDisclosure();
+
+  const { user } = useAuth();
+
+  // console.log({ atividade });
+
+  // console.log(id.id_atividade);
+
+  // console.log({ atividadeId });
+
+  useEffect(() => {
+    setAtividadeId(id.id_atividade);
+  }, []);
+
+  async function handleDeleteAtividade() {
+    // "Deleta" o atividade na lista
+    if (atividadeId !== 0) {
+      try {
+        if (!id.id_atividade) throw new Error("Erro ao remover a atividade!");
+        const { status } = await deleteInfograficos(
+          id.id_atividade,
+          user?.nome
+        );
+        if (status === 200 || status === 201) {
+          toast.success("Atividade removida com sucesso!", {
+            id: "toast-principal",
+          });
+
+          onClose();
+        }
+      } catch (error) {
+        toast.error("Erro ao remover a atividade!", {
+          id: "toast-principal",
+        });
+
+        onClose();
+      }
+    }
+  }
 
   return (
     <Flex
@@ -133,6 +183,23 @@ function CardACT({ atividade }: Props) {
           >
             {`${atividade.pct_real}%`}
           </Text>
+        </Flex>
+        <Flex alignSelf={"center"} mt={3}>
+          <Button
+            onClick={() => {
+              // console.log("clicou");
+              handleDeleteAtividade();
+            }}
+            color={"white"}
+            fontWeight={"700"}
+            backgroundColor={"transparent"}
+            _hover={{
+              backgroundColor: "transparent",
+              color: "white",
+            }}
+          >
+            <FiTrash size={16} />
+          </Button>
         </Flex>
       </Flex>
     </Flex>
