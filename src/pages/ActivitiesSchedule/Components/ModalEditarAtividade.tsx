@@ -165,7 +165,8 @@ function ModalEditarAtividade({
             display={"flex"}
             justifyContent={"center"}
             color={"white"}
-            fontSize={"1em"}
+            fontSize={"14px"}
+            fontWeight={"700"}
           >
             Editar Atividade
           </ModalHeader>
@@ -445,18 +446,20 @@ function ModalEditarAtividade({
               <Button
                 onClick={() => onClose()}
                 h={"56px"}
-                borderRadius={"10px"}
+                borderRadius={"8px"}
                 variant="ghost"
                 color="red"
                 _hover={{
-                  background: "red.500",
+                  background: "red.600",
                   transition: "all 0.4s",
                   color: "white",
                 }}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
+                w={"208px"}
               >
-                <Text fontSize="16px" fontWeight={"bold"} mx={12}>
-                  Cancelar
-                </Text>
+                <Text mx={12}>Cancelar</Text>
               </Button>
               <Button
                 disabled={
@@ -468,18 +471,20 @@ function ModalEditarAtividade({
                 }
                 onClick={() => send()}
                 h={"56px"}
-                borderRadius={"10px"}
-                background={"origem.300"}
+                borderRadius={"8px"}
+                background={"origem.500"}
                 variant="primary"
                 color="white"
                 _hover={{
-                  background: "origem.500",
+                  background: "origem.600",
                   transition: "all 0.4s",
                 }}
+                fontSize={"18px"}
+                fontWeight={"700"}
+                fontFamily={"Mulish"}
+                w={"208px"}
               >
-                <Text fontSize="16px" fontWeight={"bold"} mx={12}>
-                  Concluir
-                </Text>
+                <Text mx={12}>Concluir</Text>
               </Button>
             </Flex>
           </ModalFooter>
