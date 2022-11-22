@@ -37,12 +37,17 @@ type Props = {
 export function ProjectSummary({ data, table, tableData }: Props) {
   // const format = /^[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/;
   const budget = data.budget + ".00";
+  const budget2 = data.budget + "0";
   const realized = data.realized + ".00";
   const realized2 = data.realized + "0";
 
-  // console.log(typeof data.budget);
-
   const formatOrc = () => {
+    if (!data.budget.includes(".")) {
+      return budget;
+    }
+    if (data.budget.substring(data.budget.indexOf(".") + 1).length < 2) {
+      return budget2;
+    }
     if (data.budget.includes(".")) {
       return data.budget;
     }
