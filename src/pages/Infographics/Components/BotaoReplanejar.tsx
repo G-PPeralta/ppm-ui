@@ -65,7 +65,7 @@ function BotaoReplanejar({ execute }: Props) {
             <FormControl>
               <Flex direction={"column"} gap={4}>
                 <Stack gap={2}>
-                  <Flex>
+                  <Flex direction={"column"}>
                     <Text
                       // textAlign={"center"}
                       fontSize={"20px"}
@@ -74,6 +74,15 @@ function BotaoReplanejar({ execute }: Props) {
                       fontWeight={"400"}
                     >
                       Tem certeza que deseja alterar o planejamento?
+                    </Text>
+                    <Text
+                      // textAlign={"center"}
+                      fontSize={"16px"}
+                      mt={"30px"}
+                      color={"origem.600"}
+                      fontWeight={"400"}
+                    >
+                      OBS: O replanejamento da datas levará alguns segundos.
                     </Text>
                   </Flex>
                 </Stack>
