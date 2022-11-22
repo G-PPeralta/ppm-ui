@@ -401,8 +401,7 @@ function EditarTarefaModal({
                   nome === "" ||
                   data === "" ||
                   atividade === "" ||
-                  responsavel === "" ||
-                  descricao === ""
+                  responsavel === ""
                 }
                 background="origem.500"
                 variant="primary"

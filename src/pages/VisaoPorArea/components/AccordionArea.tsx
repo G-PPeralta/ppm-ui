@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   Accordion,
   AccordionButton,
@@ -19,6 +21,7 @@ interface Props {
 }
 
 function AccordionArea({ area }: Props) {
+  const [refresh, setRefresh] = useState(false);
   function primeiraLetraMaiuscula(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
@@ -88,7 +91,11 @@ function AccordionArea({ area }: Props) {
           >
             {area.atividades.map((atividade: Atividade, index: number) => (
               <Flex key={index}>
-                <CardACT atividade={atividade} />
+                <CardACT
+                  atividade={atividade}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                />
               </Flex>
             ))}
           </Flex>

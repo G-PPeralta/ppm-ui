@@ -14,10 +14,10 @@ import { statusProjeto } from "utils/validateDate";
 
 import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
-import CardACT from "../ActivitiesSchedule/Components/CardACT";
+import BotaoVisaoGeral from "./components/BotaoVisaoGeral";
+import CardACT from "./components/CardACT";
 // import ModalCadastroAtividade from "../ActivitiesSchedule/Components/ModalCadastroAtividadeOLD";
 // import ModalEditarAtividade from "../ActivitiesSchedule/Components/ModalEditarAtividade";
-import BotaoVisaoGeral from "./components/BotaoVisaoGeral";
 // import ExibirModal from "./components/ExibirModal";
 // import FiltrosModal from "./components/FiltrosModal";
 
@@ -39,7 +39,7 @@ export function ActivitiesPrecedents() {
   const [atividades, setAtividades] = useState<any[]>([]);
   const [destaques, setDestaques] = useState<any[]>([]);
   const [data, setData] = useState<any[]>([]);
-  // const [refresh, setRefresh] = useState(false);
+  const [refresh, setRefresh] = useState(false);
   // const [openId, setOpenId] = useState("");
 
   const requestHandler = async () => {
@@ -75,6 +75,10 @@ export function ActivitiesPrecedents() {
     requestHandler();
     setLoading(false);
   }, []);
+
+  useEffect(() => {
+    requestHandler();
+  }, [refresh]);
 
   const openDetails = (atividade: any) => {
     const newDest = atividade.precedentesId.map(
@@ -280,7 +284,11 @@ export function ActivitiesPrecedents() {
                                 onClick={() => openDetails(atividade)}
                                 _hover={{ cursor: "pointer" }}
                               >
-                                <CardACT atividade={atividade} />
+                                <CardACT
+                                  atividade={atividade}
+                                  setRefresh={setRefresh}
+                                  refresh={refresh}
+                                />
                               </Flex>
                             </ArcherElement>
                           )
