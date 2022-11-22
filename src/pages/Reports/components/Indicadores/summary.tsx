@@ -14,6 +14,8 @@ import {
 } from "@chakra-ui/react";
 import { Cell, Pie, PieChart } from "recharts";
 
+import { formatRealInput } from "utils/regexCoinMask";
+
 import { GenericTable, TableData } from "./../genericTable";
 
 export interface SummaryData {
@@ -21,8 +23,8 @@ export interface SummaryData {
   responsible: string;
   startDate: string;
   endDate: string;
-  budget: number;
-  realized: number;
+  budget: string;
+  realized: string;
   percent?: string;
 }
 
@@ -33,9 +35,43 @@ type Props = {
 };
 
 export function ProjectSummary({ data, table, tableData }: Props) {
+  const budget = data.budget + ".00";
+  const budget2 = data.budget + "0";
+  const realized = data.realized + ".00";
+  const realized2 = data.realized + "0";
+
+  const formatOrc = () => {
+    if (!data.budget.includes(".")) {
+      return budget;
+    }
+    if (data.budget.substring(data.budget.indexOf(".") + 1).length < 2) {
+      return budget2;
+    }
+    if (data.budget.includes(".")) {
+      return data.budget;
+    }
+    return budget;
+  };
+
+  const formatRealized = () => {
+    if (!data.realized.includes(".")) {
+      return realized;
+    }
+    if (data.realized.substring(data.realized.indexOf(".") + 1).length < 2) {
+      return realized2;
+    }
+    if (data.realized.includes(".")) {
+      return data.realized;
+    }
+    return realized;
+  };
+
   function calculatePercent(data: SummaryData) {
-    const done = (data.realized / data.budget) * 100;
-    return done > 100 ? 100 : done;
+    if (Number(data.realized) > 0 && Number(data.budget) > 0) {
+      const done = (Number(data.realized) / Number(data.budget)) * 100;
+      return done > 100 ? 100 : done;
+    }
+    return 0;
   }
 
   function createPieData(data: SummaryData) {
@@ -61,9 +97,9 @@ export function ProjectSummary({ data, table, tableData }: Props) {
     return table === false ? "md" : "none";
   }
 
-  function formatToLocale(num: number) {
-    return num.toLocaleString("pt-BR");
-  }
+  // function formatToLocale(num: number) {
+  //   return num.toLocaleString("pt-BR");
+  // }
 
   return (
     <Accordion padding={0} margin={0} allowToggle w={"100%"}>
@@ -214,7 +250,7 @@ export function ProjectSummary({ data, table, tableData }: Props) {
                   </Heading>
                 </Flex>
                 <Heading fontSize={"18px"} color={"gray.600"}>
-                  R$ {formatToLocale(data.budget)}
+                  R$ {formatRealInput(formatOrc())}
                 </Heading>
               </Flex>
               <Flex
@@ -237,7 +273,7 @@ export function ProjectSummary({ data, table, tableData }: Props) {
                   </Heading>
                 </Flex>
                 <Heading fontSize={"18px"} color={"gray.600"}>
-                  R$ {formatToLocale(data.realized)}
+                  R$ {formatRealInput(formatRealized())}
                 </Heading>
               </Flex>
             </Flex>
@@ -258,7 +294,11 @@ export function ProjectSummary({ data, table, tableData }: Props) {
                   color={"white"}
                   padding={2}
                 >
-                  {calculatePercent(data)}%
+                  {calculatePercent(data)
+                    .toFixed(2)
+                    .toString()
+                    .replace(".", ",")}
+                  %
                 </Heading>
               </Flex>
               {table == true && (

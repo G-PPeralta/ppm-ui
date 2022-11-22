@@ -135,6 +135,7 @@ function EditarLicoesAprendidasModal({
                   LIÇÃO APRENDIDA
                 </FormLabel>
                 <Input
+                  _placeholder={{ color: "#949494" }}
                   maxLength={50}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
@@ -180,6 +181,7 @@ function EditarLicoesAprendidasModal({
                 </FormLabel>
                 <Textarea
                   // maxLength={150}
+                  _placeholder={{ color: "#949494" }}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
