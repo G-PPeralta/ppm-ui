@@ -58,7 +58,7 @@ function Feriados() {
   function Body() {
     return (
       <>
-        {!feriados.isLoading ? (
+        {!feriados.isLoading && tabelaFiltrada.length ? (
           tabelaFiltrada
             .slice(from, to)
             .map((linhaTabela: any, index: number) => (
@@ -158,7 +158,6 @@ function Feriados() {
                 setTabelaFiltrada={setTabelaFiltrada}
                 propName={"nome_feriado"}
                 registerForm={registerForm}
-                filtrarData={false}
               />
 
               <TabelaGenerica
