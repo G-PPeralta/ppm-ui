@@ -45,6 +45,8 @@ export function useCadastroProjetoTipo() {
   const initialValues = {
     nom_usu_create: user?.nome,
     nom_projeto_tipo: "",
+    tipo_intervencao_id: null,
+    controlar_cronograma: false,
     atividades: [
       {
         atividade_id_origem: "",
@@ -70,6 +72,8 @@ export function useCadastroProjetoTipo() {
       const newValues = {
         nom_usu_create: user?.nome,
         nom_projeto_tipo: values.nom_projeto_tipo,
+        tipo_intervencao_id: values.tipo_intervencao_id,
+        controlar_cronograma: values.controlar_cronograma,
         atividades: values.atividades.map((atividade) => ({
           atividade_id_origem: atividade.atividade_id_origem,
           area_id: atividade.area_id,
@@ -87,7 +91,6 @@ export function useCadastroProjetoTipo() {
 
       try {
         const { status } = await postProjetoTipo(newValues);
-
         if (status === 200 || status === 201) {
           toast.success("Projeto Tipo cadastrado com sucesso!", {
             id: "toast-principal",
