@@ -13,6 +13,7 @@ import {
   Flex,
   Text,
   Stack,
+  Checkbox,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { ProjetosFeriados } from "interfaces/Feriados";
@@ -33,11 +34,11 @@ function ModalAdicionarFeriado() {
 
   const optionsTipoFeriado = [
     {
-      value: true,
+      value: 1,
       label: "Nacional",
     },
     {
-      value: false,
+      value: 0,
       label: "Outros",
     },
   ];
@@ -106,7 +107,7 @@ function ModalAdicionarFeriado() {
                     maxLength={50}
                   />
                 </Stack>
-                <Stack w={"75%"}>
+                <Stack spacing={2} w={"75%"}>
                   <DatePickerGenerico
                     required={true}
                     nomeLabel={"DATA"}
@@ -115,6 +116,17 @@ function ModalAdicionarFeriado() {
                     data={registerForm.values.data_completa}
                     esconderHorario={true}
                   />
+                  <Checkbox
+                    colorScheme="blue"
+                    onChange={(e) => {
+                      registerForm.setFieldValue(
+                        "aplicar_todos_os_anos",
+                        e.target.checked
+                      );
+                    }}
+                  >
+                    Aplicar para todos os anos
+                  </Checkbox>
                 </Stack>
                 <Stack>
                   <SelectFiltragem
@@ -130,7 +142,7 @@ function ModalAdicionarFeriado() {
                     )}
                   />
                 </Stack>
-                {registerForm.values.ind_global === false &&
+                {registerForm.values.ind_global === 0 &&
                   !selectProjetos.isLoading && (
                     <Stack>
                       <SelectFiltragem

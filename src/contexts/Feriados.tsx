@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import { PostFeriado } from "interfaces/Feriados";
+import { cadastroFeriadoSchema } from "validations/Feriados";
 
 import { useAuth } from "hooks/useAuth";
 
@@ -52,8 +53,10 @@ export const FeriadosProvider = ({ children }: any) => {
     id_projeto: 0,
     dia_feriado: "",
     mes_feriado: "",
+    ano_feriado: "",
     nome_feriado: "",
     nom_usu_create: user?.nome,
+    aplicar_todos_os_anos: false,
   };
 
   const handleClick = (formikForm: any, onClose: Function) => {
@@ -63,6 +66,9 @@ export const FeriadosProvider = ({ children }: any) => {
       ...formikForm.values,
       dia_feriado: data.getDate(),
       mes_feriado: data.getMonth() + 1,
+      ano_feriado: formikForm.values.aplicar_todos_os_anos
+        ? data.getFullYear()
+        : null,
     });
     formikForm.resetForm();
     onClose();
@@ -70,7 +76,7 @@ export const FeriadosProvider = ({ children }: any) => {
 
   const registerForm = useFormik({
     initialValues,
-    // validationSchema: cadastroNovaDespesa,
+    validationSchema: cadastroFeriadoSchema,
     onSubmit: () => {},
   });
 
