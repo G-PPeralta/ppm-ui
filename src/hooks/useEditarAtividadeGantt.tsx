@@ -48,6 +48,7 @@ export function useEditarAtividadeGantt() {
   // };
 
   const initialValues = {
+    nome_atividade: "",
     nom_usu_create: user?.nome,
     id_atividade: 0,
     inicio_realizado: "",
@@ -59,6 +60,7 @@ export function useEditarAtividadeGantt() {
   };
 
   const adicionarOperacao = yup.object({
+    nome_atividade: yup.string(),
     id_atividade: yup.number(),
     inicio_realizado: yup.date(),
     fim_realizado: yup.date(),
@@ -76,6 +78,7 @@ export function useEditarAtividadeGantt() {
       const dat_fim = new Date(values.fim_realizado);
       const dat_ini_plan = new Date(values.inicio_planejado);
       const newValues = {
+        nome_atividade: values.nome_atividade,
         dat_ini_real: dat_ini.toISOString(),
         dat_fim_real: dat_fim.toISOString(),
         dat_ini_plan: dat_ini_plan.toISOString(),

@@ -135,7 +135,16 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
         new Date(maxBaselineEndDate)
       );
 
-      const baselineDuration = reqGanttData.data.map((item: any) => ({
+      const formatter = (list: any) => {
+        if (list.length === 0) return [];
+        return list.map((sub: any) => ({
+          ...sub,
+          BaselineDuration: sub.BaselineDuration.toString().concat(" dias"),
+          subtasks: formatter(sub.subtasks),
+        }));
+      };
+
+      const ganttFormatter = reqGanttData.data.map((item: any) => ({
         ...item,
         BaselineDuration: duracaoPlanejadaSemFinaisDeSemana
           .toString()
@@ -143,6 +152,7 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
         subtasks: item.subtasks.map((sub: any) => ({
           ...sub,
           BaselineDuration: sub.BaselineDuration.toString().concat(" dias"),
+          subtasks: formatter(sub.subtasks),
         })),
         // BaselineEndDate: maxBaselineEndDate,
         // BaselineStartDate: minBaselineStartDate,
@@ -152,7 +162,10 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
       // console.log("maxBaselineEndDate", maxBaselineEndDate);
       // console.log("baselineDuration", baselineDuration);
 
-      setGantt(baselineDuration);
+      // const _gantt: IGantt = reqGanttData.data;
+      // // setGanttData(_gantt);
+      // ganttFormatter(_gantt);
+      setGantt(ganttFormatter);
     }
   }
 
@@ -327,7 +340,6 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
           height={"100vh"}
           taskMode={"Auto"}
         >
-          <Inject services={[Sort]} />
           <ColumnsDirective>
             {/* <ColumnDirective field="Item" type="string"></ColumnDirective>
             <ColumnDirective
@@ -457,7 +469,7 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
               cssClass="e-custom-holiday"
             ></HolidayDirective> */}
           </HolidaysDirective>
-          <Inject services={[Edit, Toolbar]} />
+          <Inject services={[Edit, Toolbar, Sort]} />
         </GanttComponent>
         <Modal
           isOpen={expandGantt}
