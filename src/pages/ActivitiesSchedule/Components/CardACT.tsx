@@ -28,9 +28,11 @@ type Atividade = {
 type Props = {
   atividade: Atividade;
   id?: any;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>; // Função para atualizar a página
+  refresh: boolean;
 };
 
-function CardACT({ atividade, id }: Props) {
+function CardACT({ atividade, id, setRefresh, refresh }: Props) {
   const dataInicioFormatada = formatDate(new Date(atividade.inicioplanejado));
   const dataFinalFormatada = formatDate(new Date(atividade.finalplanejado));
   const [atividadeId, setAtividadeId] = useState(0);
@@ -40,35 +42,34 @@ function CardACT({ atividade, id }: Props) {
 
   // console.log({ atividade });
 
-  // console.log("id", id.id_atividade);
+  // console.log("id", id.id_filho);
 
   // console.log({ atividadeId });
 
   useEffect(() => {
-    setAtividadeId(id.id_atividade);
+    setAtividadeId(id.id_filho);
   }, []);
 
-  useEffect(() => {}, [id.id_atividade]);
+  useEffect(() => {}, [id.id_filho]);
 
   async function handleDeleteAtividade() {
     // "Deleta" o atividade na lista
     if (atividadeId !== undefined) {
       try {
-        if (!id.id_atividade) throw new Error("Erro ao remover a atividade!");
-        const { status } = await deleteInfograficos(
-          id.id_atividade,
-          user?.nome
-        );
+        if (!id.id_filho) throw new Error("Erro ao remover a atividade!");
+        const { status } = await deleteInfograficos(id.id_filho, user?.nome);
         if (status === 200 || status === 201) {
           toast.success("Atividade removida com sucesso!", {
             id: "toast-principal",
           });
+
           onClose();
         }
       } catch (error) {
         toast.error("Erro ao remover!", {
           id: "toast-principal",
         });
+
         onClose();
       }
     }
@@ -185,7 +186,10 @@ function CardACT({ atividade, id }: Props) {
           </Text>
         </Flex>
         <Flex alignSelf={"center"} mt={4}>
-          <ModalDeletar onDelete={handleDeleteAtividade} />
+          <ModalDeletar
+            onDelete={handleDeleteAtividade}
+            newRender={() => setRefresh(!refresh)}
+          />
         </Flex>
       </Flex>
     </Flex>
