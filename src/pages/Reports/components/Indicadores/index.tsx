@@ -23,8 +23,8 @@ type CardProjeto = {
   responsible: string;
   startDate: string;
   endDate: string;
-  budget: number;
-  realized: number;
+  budget: string;
+  realized: string;
   cpi: string;
   spi: string;
   percent?: string;

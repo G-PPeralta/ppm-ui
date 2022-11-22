@@ -23,8 +23,8 @@ export interface SummaryData {
   responsible: string;
   startDate: string;
   endDate: string;
-  budget: number;
-  realized: number;
+  budget: string;
+  realized: string;
   percent?: string;
 }
 
@@ -35,27 +35,38 @@ type Props = {
 };
 
 export function ProjectSummary({ data, table, tableData }: Props) {
-  const format = /^[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/;
+  // const format = /^[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/;
+  const budget = data.budget + ".00";
+  const realized = data.realized + ".00";
+  const realized2 = data.realized + "0";
+
+  // console.log(typeof data.budget);
 
   const formatOrc = () => {
-    if (String(data.budget).match(format)) {
-      return formatRealInput(String(data.budget));
+    if (data.budget.includes(".")) {
+      return data.budget;
     }
-    if (!String(data.budget).match(format)) {
-      return formatRealInput(String(data.budget + ".00"));
-    }
+    return budget;
   };
 
   const formatRealized = () => {
-    if (String(data.realized).match(format)) {
-      return formatRealInput(String(data.realized));
+    if (!data.realized.includes(".")) {
+      return realized;
     }
-    return formatRealInput(String(data.realized + ".00"));
+    if (data.realized.substring(data.realized.indexOf(".") + 1).length < 2) {
+      return realized2;
+    }
+    if (data.realized.includes(".")) {
+      return data.realized;
+    }
+    return realized;
   };
 
+  // console.log(formatRealized());
+
   function calculatePercent(data: SummaryData) {
-    if (data.realized > 0 && data.budget > 0) {
-      const done = (data.realized / data.budget) * 100;
+    if (Number(data.realized) > 0 && Number(data.budget) > 0) {
+      const done = (Number(data.realized) / Number(data.budget)) * 100;
       return done > 100 ? 100 : done;
     }
     return 0;
@@ -239,7 +250,7 @@ export function ProjectSummary({ data, table, tableData }: Props) {
                   </Heading>
                 </Flex>
                 <Heading fontSize={"18px"} color={"gray.600"}>
-                  R$ {formatOrc()}
+                  R$ {formatRealInput(formatOrc())}
                 </Heading>
               </Flex>
               <Flex
@@ -262,7 +273,7 @@ export function ProjectSummary({ data, table, tableData }: Props) {
                   </Heading>
                 </Flex>
                 <Heading fontSize={"18px"} color={"gray.600"}>
-                  R$ {formatRealized()}
+                  R$ {formatRealInput(formatRealized())}
                 </Heading>
               </Flex>
             </Flex>
