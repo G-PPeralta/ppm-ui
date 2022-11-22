@@ -9,6 +9,7 @@ import { CadastrarFornecedor } from "pages/CadastrarFornecedor";
 import CadastrarProjeto from "pages/CadastrarProjeto";
 import { CentroDeCustoProjetos } from "pages/CentroDeCustoProjetos";
 import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
+import Feriados from "pages/Feriados";
 import { FinanceiroProjetos } from "pages/FinanceiroProjetos";
 import { GráficosEstatisticos } from "pages/GraficosEstatisticos";
 import { Home } from "pages/Home";
@@ -38,6 +39,7 @@ import { Usuarios } from "pages/Usuarios";
 import VisaoPorArea from "pages/VisaoPorArea";
 
 import { DetalhamentoProjetoProvider } from "contexts/DetalhamentoDeProjetos";
+import { FeriadosProvider } from "contexts/Feriados";
 
 export function PrivateRoutes() {
   return (
@@ -69,6 +71,14 @@ export function PrivateRoutes() {
           <DetalhamentoProjetoProvider>
             <DetalhamentoProjeto />
           </DetalhamentoProjetoProvider>
+        }
+      />
+      <Route
+        path="/feriados"
+        element={
+          <FeriadosProvider>
+            <Feriados />
+          </FeriadosProvider>
         }
       />
       <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
