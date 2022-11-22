@@ -17,46 +17,8 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 
-// import { useToast } from "contexts/Toast";
-
-// import { useAuth } from "hooks/useAuth";
-
-// import { deleteInfograficos } from "services/delete/DeleteInfografico";
-
-// import { deleteOperacaoCronograma } from "services/delete/Estatisticas";
-// type ModalDeletarProps = {
-//   // id: number;
-//   // setLoading: Function;
-//   // callbackSetRefresh: Function;
-//   // handleGetAllData: any;
-// };
-
-function ModalDeletar({ id, onDelete }: any) {
+function ModalDeletar({ id, onDelete, newRender }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const { toast } = useToast();
-  // const { user } = useAuth();
-
-  // console.log("id delete", id);
-
-  // const remove = async () => {
-  //   try {
-  //     if (!id) throw new Error("Erro ao remover atividade!");
-  //     const { status } = await deleteInfograficos(id, user?.nome);
-  //     if (status === 200 || status === 201) {
-  //       toast.success("Atividade removida com sucesso!", {
-  //         id: "toast-principal",
-  //       });
-
-  //       onClose();
-  //     }
-  //   } catch (error) {
-  //     toast.error("Erro ao remover a atividade!", {
-  //       id: "toast-principal",
-  //     });
-
-  //     onClose();
-  //   }
-  // };
 
   return (
     <>
@@ -103,7 +65,6 @@ function ModalDeletar({ id, onDelete }: any) {
                 <Stack gap={2}>
                   <Flex>
                     <Text
-                      // textAlign={"center"}
                       fontSize={"20px"}
                       mb={"1px"}
                       color={"#010101"}
@@ -142,6 +103,7 @@ function ModalDeletar({ id, onDelete }: any) {
                 color="white"
                 onClick={() => {
                   onDelete();
+                  newRender();
                   onClose();
                 }}
                 _hover={{
