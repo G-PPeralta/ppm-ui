@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   Flex,
   Modal,
@@ -35,17 +37,26 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaAtividadesPrecedentes } =
     useCadastroProjetoTipo();
+  const [controlaCronograma, setControlaCronograma] = useState();
 
-  const getValue = (options: any, chave: any) => {
-    const index = options
-      .map(({ value }: any) => value)
-      .indexOf(registerForm?.values?.tipo_intervencao_id);
+  useEffect(() => {
+    registerForm.setFieldValue("controlar_cronograma", controlaCronograma);
+  }, [controlaCronograma]);
 
-    return {
-      value: options?.[index]?.value,
-      label: options?.[index]?.label,
-    };
-  };
+  const opcoesTipo = [
+    {
+      value: 1,
+      label: "PRÉ INTERVENÇÂO",
+    },
+    {
+      value: 2,
+      label: "INTERVENÇÂO",
+    },
+    {
+      value: 3,
+      label: "PÓS INTERVENÇÂO",
+    },
+  ];
 
   return (
     <>
@@ -156,52 +167,19 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
 
                         <SelectFiltragem
                           registerForm={registerForm}
-                          nomeSelect={"ATIVIDADE"}
+                          nomeSelect={"TIPO DE INTERVENÇÃO"}
                           required={true}
-                          propName={`registerForm.values.tipo_intervencao_id`}
-                          options={[
-                            {
-                              value: 1,
-                              label: "PRÉ INTERVENÇÂO",
-                            },
-                            {
-                              value: 2,
-                              label: "INTERVENÇÂO",
-                            },
-                            {
-                              value: 3,
-                              label: "PÓS INTERVENÇÂO",
-                            },
-                          ]}
-                          value={getValue(
-                            [
-                              {
-                                value: 1,
-                                label: "PRÉ INTERVENÇÂO",
-                              },
-                              {
-                                value: 2,
-                                label: "INTERVENÇÂO",
-                              },
-                              {
-                                value: 3,
-                                label: "PÓS INTERVENÇÂO",
-                              },
-                            ],
-                            "tipo_intervencao_id"
-                          )}
+                          propName={`tipo_intervencao_id`}
+                          options={opcoesTipo}
                         />
                       </Flex>
-                      <Flex
-                        w={useBreakpointValue({
-                          base: "100%",
-                          md: "50%",
-                        })}
-                        direction={"column"}
-                      >
-                        {/* <Text fontWeight={"bold"}>Nome</Text> */}
-                        <Flex gap={1}></Flex>
-                        <Checkbox />
+                      <Flex w={100} direction={"column"} justifyContent="end">
+                        <Checkbox
+                          width={100}
+                          onChange={(e: any) =>
+                            setControlaCronograma(e.target.checked)
+                          }
+                        />
                       </Flex>
                     </Flex>
                   </Stack>
