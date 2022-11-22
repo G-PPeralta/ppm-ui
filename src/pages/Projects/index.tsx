@@ -45,7 +45,7 @@ export function Projects() {
 
   const filterProjects = (text: string) => {
     let filtered;
-    if (text && text.length > 3) {
+    if (text && text.length > 0) {
       filtered = projetos?.filter(
         (x) => x.nome_projeto.toLowerCase().indexOf(text.toLowerCase()) > -1
       );
