@@ -45,11 +45,6 @@ function Feriados() {
   ];
   const footer = [""];
 
-  // console.log("tabelaFiltrada", tabelaFiltrada);
-  // console.log("feriados", feriados);
-  // console.log("registerForm", registerForm.values);
-  // console.log("feriados", feriados);
-
   useEffect(() => {
     if (feriados.isLoading === false) {
       setTabelaFiltrada(feriados.data);

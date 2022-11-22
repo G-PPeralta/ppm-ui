@@ -96,8 +96,8 @@ export const FeriadosProvider = ({ children }: any) => {
         dia_feriado: data.getDate(),
         mes_feriado: data.getMonth() + 1,
         ano_feriado: formikForm.values.aplicar_todos_os_anos
-          ? data.getFullYear()
-          : null,
+          ? null
+          : data.getFullYear(),
         nome_feriado: formikForm.values.nome_feriado,
         ind_global: formikForm.values.ind_global,
         id_projeto:

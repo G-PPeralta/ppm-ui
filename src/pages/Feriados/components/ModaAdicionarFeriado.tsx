@@ -43,9 +43,6 @@ function ModalAdicionarFeriado() {
     },
   ];
 
-  // console.log("registerForm", registerForm.values);
-  // console.log("feriados", feriados);
-
   return (
     <>
       <Button
