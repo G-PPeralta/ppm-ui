@@ -1,16 +1,7 @@
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-
-import { Flex, Text, useDisclosure } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
 import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
-
-import { useAuth } from "hooks/useAuth";
-
-import { deleteInfograficos } from "services/delete/DeleteInfografico";
-
-import ModalDeletar from "./ModalDeleteAtividade";
 
 type Atividade = {
   atividade: string;
@@ -35,45 +26,6 @@ type Props = {
 function CardACT({ atividade, id, setRefresh, refresh }: Props) {
   const dataInicioFormatada = formatDate(new Date(atividade.inicioplanejado));
   const dataFinalFormatada = formatDate(new Date(atividade.finalplanejado));
-  const [atividadeId, setAtividadeId] = useState(0);
-  const { onClose } = useDisclosure();
-
-  const { user } = useAuth();
-
-  // console.log({ atividade });
-
-  // console.log("id", id.id_filho);
-
-  // console.log({ atividadeId });
-
-  useEffect(() => {
-    setAtividadeId(id.id_filho);
-  }, []);
-
-  useEffect(() => {}, [id.id_filho]);
-
-  async function handleDeleteAtividade() {
-    // "Deleta" o atividade na lista
-    if (atividadeId !== undefined) {
-      try {
-        if (!id.id_filho) throw new Error("Erro ao remover a atividade!");
-        const { status } = await deleteInfograficos(id.id_filho, user?.nome);
-        if (status === 200 || status === 201) {
-          toast.success("Atividade removida com sucesso!", {
-            id: "toast-principal",
-          });
-
-          onClose();
-        }
-      } catch (error) {
-        toast.error("Erro ao remover!", {
-          id: "toast-principal",
-        });
-
-        onClose();
-      }
-    }
-  }
 
   return (
     <Flex
@@ -184,12 +136,6 @@ function CardACT({ atividade, id, setRefresh, refresh }: Props) {
           >
             {`${atividade.pct_real}%`}
           </Text>
-        </Flex>
-        <Flex alignSelf={"center"} mt={4}>
-          <ModalDeletar
-            onDelete={handleDeleteAtividade}
-            newRender={() => setRefresh(!refresh)}
-          />
         </Flex>
       </Flex>
     </Flex>

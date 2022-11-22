@@ -63,7 +63,9 @@ export function ActivitiesSchedule() {
   }, []);
 
   useEffect(() => {
-    requestHandler();
+    setTimeout(() => {
+      requestHandler();
+    }, 1000);
   }, [refresh]);
 
   useEffect(() => {
@@ -92,8 +94,6 @@ export function ActivitiesSchedule() {
               <Flex gap={2} wrap={"wrap"} flex={1}>
                 <ModalCadastroAtividadeIntervencao
                   id={id}
-                  setRefresh={setRefresh}
-                  refresh={refresh}
                   atividades={atividades}
                 />
                 <Button
@@ -147,10 +147,17 @@ export function ActivitiesSchedule() {
                     direction={"column"}
                     align={"center"}
                     justify={"center"}
-                    onClick={() => openDetails(atividade, index)}
+                    onDoubleClick={() => {
+                      openDetails(atividade, index);
+                    }}
                     _hover={{ cursor: "pointer" }}
                   >
-                    <CardACT atividade={atividade} />
+                    <CardACT
+                      atividade={atividade}
+                      id={atividade}
+                      setRefresh={setRefresh}
+                      refresh={refresh}
+                    />
                   </Flex>
                 ))
               ) : (

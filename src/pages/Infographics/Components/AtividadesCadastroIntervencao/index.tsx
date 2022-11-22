@@ -9,6 +9,8 @@ import { Flex, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
+import { getUniqueActivities } from "utils/removeDuplicateObjectsFromArray";
+
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
 import BotaoAdicionar from "./BotaoAdicionar";
@@ -41,7 +43,7 @@ export default function AtividadesCadastroIntervencao({
   const listas = {
     listaAreaAtuacao,
     listaResponsaveis,
-    listaTarefas,
+    listaTarefas: getUniqueActivities(listaTarefas, "nom_atividade"),
   };
 
   const reorder = (

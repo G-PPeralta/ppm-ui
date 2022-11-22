@@ -163,7 +163,7 @@ export default function ModalReorder({ refresh }: any) {
     <>
       <Button
         h={"56px"}
-        borderRadius={"10px"}
+        borderRadius={"8px"}
         disabled={campanhas.length == 0}
         background={"white"}
         border={"2px solid"}

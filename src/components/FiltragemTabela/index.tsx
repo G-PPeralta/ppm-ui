@@ -36,12 +36,13 @@ function FiltragemTabela({
           dado[propName].toLowerCase().indexOf(search.toLowerCase()) > -1
       );
     }
-    if (search && search.length > 1 && filtrarData) {
-      filtered = dadosTabela?.filter(
-        (dado: any) =>
-          dado[propName].toLowerCase().indexOf(search.toLowerCase()) > -1
-      );
-    } else {
+    // if (search && search.length > 1 && filtrarData) {
+    //   filtered = dadosTabela?.filter(
+    //     (dado: any) =>
+    //       dado[propName].toLowerCase().indexOf(search.toLowerCase()) > -1
+    //   );
+    // }
+    else {
       filtered = dadosTabela;
     }
 

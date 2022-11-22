@@ -21,11 +21,10 @@ import InputCadastroInline from "pages/CadastrarProjeto/Components/InputCadastro
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
-// import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
 import { handleCancelar } from "utils/handleCadastro";
-// import { regexCaracteresEspeciais } from "utils/regex";
+import { getUniqueActivities } from "utils/removeDuplicateObjectsFromArray";
 
 import { useCadastroAtividadeIntervencao } from "hooks/useCadastroAtividadeIntervencao";
 
@@ -64,10 +63,13 @@ function ModalCadastroAtividadeIntervencao({
     label: area.tipo,
   }));
 
-  const atividadesOptions = listaAtividades.map((atividade: any) => ({
-    value: atividade.id,
-    label: atividade.nom_atividade,
-  }));
+  const atividadesOptions = getUniqueActivities(
+    listaAtividades.map((atividade: any) => ({
+      value: atividade.id,
+      label: atividade.nom_atividade,
+    })),
+    "label"
+  );
 
   const getValue = (options: any, chave: any) => {
     const index = options

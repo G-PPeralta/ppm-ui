@@ -174,8 +174,9 @@ function ModalEditarAtividade({
                             width={"328px"}
                             color={"black"}
                             height={"56px"}
-                            isDisabled
+                            // isDisabled
                             value={registerForm.values.nome_atividade || ""}
+                            onChange={registerForm.handleChange}
                             type="text"
                             name="nome_atividade"
                             id="nome_atividade"
@@ -293,6 +294,7 @@ function ModalEditarAtividade({
                           label={"FIM REALIZADO"}
                           required={false}
                           data={registerForm.values.fim_realizado}
+                          dataMin={registerForm.values.inicio_realizado}
                           isDataFim={true}
                         />
                       </Flex>

@@ -42,6 +42,8 @@ function EditarLicoesAprendidasModal({
   const [licaoAprendida, setLicaoAprendida] = useState(licao?.licao_aprendida);
   const [acao, setAcao] = useState(licao?.acao_e_recomendacao);
 
+  // console.log(licaoAprendida, acao);
+
   useEffect(() => {
     setLicaoAprendida(licao.licao_aprendida);
     setAcao(licao.acao_e_recomendacao);
@@ -219,6 +221,7 @@ function EditarLicoesAprendidasModal({
                 Cancelar
               </Button>
               <Button
+                isDisabled={licaoAprendida === "" || acao === ""}
                 background="origem.500"
                 variant="primary"
                 color="white"

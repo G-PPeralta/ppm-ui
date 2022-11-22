@@ -1,6 +1,7 @@
 import { IconType } from "react-icons";
 import { AiOutlineBarChart } from "react-icons/ai";
 import { BiData } from "react-icons/bi";
+import { BsCalendarWeek } from "react-icons/bs";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import {
   FiHome,
@@ -82,6 +83,7 @@ const childrenConfiguracoes = [
   },
   { name: "Priorização", icon: MdPriorityHigh, link: "/priorizacao" },
   { name: "Lixeira", icon: FiTrash2, link: "/registered-list" },
+  { name: "Feriados", icon: BsCalendarWeek, link: "/feriados" },
 ];
 
 export const LinkItems: Array<LinkItemProps> = [

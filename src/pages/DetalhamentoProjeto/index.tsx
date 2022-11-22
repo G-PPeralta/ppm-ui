@@ -103,7 +103,7 @@ function DetalhamentoProjeto() {
       getData();
       getProject();
       setRender(!render);
-    }, 3000);
+    }, 1000);
   }, [refresh]);
 
   const handleGetInfoProjetos = async () => {
