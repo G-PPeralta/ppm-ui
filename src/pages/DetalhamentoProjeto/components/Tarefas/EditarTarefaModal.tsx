@@ -187,6 +187,7 @@ function EditarTarefaModal({
                   TAREFA
                 </FormLabel>
                 <Input
+                  _placeholder={{ color: "#949494" }}
                   maxLength={50}
                   fontSize={"14px"}
                   borderRadius={"8px"}
@@ -282,6 +283,8 @@ function EditarTarefaModal({
                   RESPONSÁVEL
                 </FormLabel>
                 <Input
+                  _placeholder={{ color: "#949494" }}
+                  placeholder={"Nome do responsável"}
                   type="text"
                   fontSize={"14px"}
                   borderRadius={"8px"}
@@ -368,6 +371,7 @@ function EditarTarefaModal({
                 height={"121px"}
                 color="black"
                 isRequired
+                _placeholder={{ color: "#949494" }}
                 placeholder="Descrição da tarefa"
                 id="descrição"
                 name="descrição"
