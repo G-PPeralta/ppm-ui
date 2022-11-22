@@ -38,8 +38,8 @@ export function Projects() {
     const data = await getProjetosDetalhados();
     setProjetos(data);
     setProjetosFilter(data);
-    const polosLista = ["Todos"];
-    data.map((data) => polosLista.push(data.polo));
+    const polosLista = ["Todos", "Alagoas", "Tucano Sul"];
+    // data.map((data) => polosLista.push(data.polo));
     setListaPolos(polosLista);
   };
 
