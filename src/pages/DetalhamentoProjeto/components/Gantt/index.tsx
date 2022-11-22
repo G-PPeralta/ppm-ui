@@ -22,6 +22,7 @@ import {
   Inject,
   Edit,
   Toolbar,
+  Sort,
 } from "@syncfusion/ej2-react-gantt";
 
 import { useEditarAtividadeGantt } from "hooks/useEditarAtividadeGantt";
@@ -276,6 +277,7 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
         <GanttComponent
           id="gantt-control"
           dataSource={gantt}
+          allowSorting={true}
           taskFields={{
             id: "TaskID",
             name: "TaskName",
@@ -325,6 +327,7 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
           height={"100vh"}
           taskMode={"Auto"}
         >
+          <Inject services={[Sort]} />
           <ColumnsDirective>
             {/* <ColumnDirective field="Item" type="string"></ColumnDirective>
             <ColumnDirective
