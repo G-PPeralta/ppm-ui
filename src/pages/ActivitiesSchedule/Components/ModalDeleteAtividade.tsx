@@ -1,3 +1,5 @@
+import { FiTrash } from "react-icons/fi";
+
 import {
   Button,
   Flex,
@@ -10,39 +12,73 @@ import {
   Stack,
   Text,
   useDisclosure,
+  IconButton,
   ModalHeader,
   ModalCloseButton,
 } from "@chakra-ui/react";
 
-// import { TextError } from "components/TextError";
+// import { useToast } from "contexts/Toast";
 
-interface Props {
-  execute: any;
-}
+// import { useAuth } from "hooks/useAuth";
 
-function BotaoReplanejar({ execute }: Props) {
+// import { deleteInfograficos } from "services/delete/DeleteInfografico";
+
+// import { deleteOperacaoCronograma } from "services/delete/Estatisticas";
+// type ModalDeletarProps = {
+//   // id: number;
+//   // setLoading: Function;
+//   // callbackSetRefresh: Function;
+//   // handleGetAllData: any;
+// };
+
+function ModalDeletar({ id, onDelete }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  // const { toast } = useToast();
+  // const { user } = useAuth();
+
+  // console.log("id delete", id);
+
+  // const remove = async () => {
+  //   try {
+  //     if (!id) throw new Error("Erro ao remover atividade!");
+  //     const { status } = await deleteInfograficos(id, user?.nome);
+  //     if (status === 200 || status === 201) {
+  //       toast.success("Atividade removida com sucesso!", {
+  //         id: "toast-principal",
+  //       });
+
+  //       onClose();
+  //     }
+  //   } catch (error) {
+  //     toast.error("Erro ao remover a atividade!", {
+  //       id: "toast-principal",
+  //     });
+
+  //     onClose();
+  //   }
+  // };
 
   return (
     <>
-      <Button
+      <IconButton
         onClick={onOpen}
-        w={"208px"}
-        h={"56px"}
-        fontSize="18px"
+        color={"white"}
         fontWeight={"700"}
-        fontFamily={"Mulish"}
-        borderRadius={"8px"}
-        background={"origem.500"}
-        variant="primary"
-        color="white"
+        backgroundColor={"transparent"}
+        aria-label="Botão excluir"
         _hover={{
-          background: "origem.600",
-          transition: "all 0.4s",
+          backgroundColor: "transparent",
+          color: "white",
         }}
+        w={"24px"}
+        minW={"24px"}
+        maxW={"24px"}
+        h={"16px"}
+        minH={"14px"}
+        maxH={"18px"}
       >
-        <Text>Salvar</Text>
-      </Button>
+        <FiTrash size={16} />
+      </IconButton>
       <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
@@ -57,7 +93,7 @@ function BotaoReplanejar({ execute }: Props) {
             fontWeight={"700"}
             height={"48px"}
           >
-            Alterar
+            Excluir
           </ModalHeader>
 
           <ModalCloseButton color={"white"} />
@@ -65,7 +101,7 @@ function BotaoReplanejar({ execute }: Props) {
             <FormControl>
               <Flex direction={"column"} gap={4}>
                 <Stack gap={2}>
-                  <Flex direction={"column"}>
+                  <Flex>
                     <Text
                       // textAlign={"center"}
                       fontSize={"20px"}
@@ -73,16 +109,8 @@ function BotaoReplanejar({ execute }: Props) {
                       color={"#010101"}
                       fontWeight={"400"}
                     >
-                      Tem certeza que deseja alterar o planejamento?
-                    </Text>
-                    <Text
-                      // textAlign={"center"}
-                      fontSize={"16px"}
-                      mt={"30px"}
-                      color={"origem.600"}
-                      fontWeight={"400"}
-                    >
-                      OBS: O replanejamento da datas levará alguns segundos.
+                      Tem certeza que deseja mover esta atividade para a
+                      Lixeira?
                     </Text>
                   </Flex>
                 </Stack>
@@ -90,7 +118,7 @@ function BotaoReplanejar({ execute }: Props) {
             </FormControl>
           </ModalBody>
 
-          <ModalFooter justifyContent={"center"} mt={4}>
+          <ModalFooter justifyContent={"center"}>
             <Flex gap={2}>
               <Button
                 variant="ghost"
@@ -102,29 +130,32 @@ function BotaoReplanejar({ execute }: Props) {
                   color: "white",
                 }}
                 height={"56px"}
-                width={"208px"}
+                width={"206px"}
                 fontSize={"18px"}
                 fontWeight={"700"}
-                fontFamily={"Mulish"}
               >
                 Cancelar
               </Button>
               <Button
-                background="#0047BB"
+                background="origem.500"
                 variant="primary"
                 color="white"
-                onClick={() => execute()}
+                onClick={() => {
+                  onDelete();
+                  onClose();
+                }}
                 _hover={{
                   background: "origem.600",
                   transition: "all 0.4s",
                 }}
                 height={"56px"}
-                width={"208px"}
+                width={"206px"}
                 fontSize={"18px"}
                 fontWeight={"700"}
-                fontFamily={"Mulish"}
               >
-                <Text>Confirmar</Text>
+                <>
+                  <Text>Confirmar</Text>
+                </>
               </Button>
             </Flex>
           </ModalFooter>
@@ -134,4 +165,4 @@ function BotaoReplanejar({ execute }: Props) {
   );
 }
 
-export default BotaoReplanejar;
+export default ModalDeletar;

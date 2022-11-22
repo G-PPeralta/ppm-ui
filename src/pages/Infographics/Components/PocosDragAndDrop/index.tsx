@@ -83,13 +83,17 @@ export default function PocosDragAndDrop({ pocos, setPocos, setPayload }: any) {
               {pocos.map(
                 (_poco: any, index: number) =>
                   index > 0 && (
-                    <PocoDraggable
-                      key={index}
-                      pocos={pocos}
-                      setPocos={setPocos}
-                      index={index}
-                      setPayload={setPayload}
-                    />
+                    <>
+                      {index < 9 ? (
+                        <PocoDraggable
+                          key={index}
+                          pocos={pocos}
+                          setPocos={setPocos}
+                          index={index}
+                          setPayload={setPayload}
+                        />
+                      ) : undefined}
+                    </>
                   )
               )}
 

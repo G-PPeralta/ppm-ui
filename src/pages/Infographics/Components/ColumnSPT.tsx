@@ -94,27 +94,31 @@ function ColumnSPT({ column, setRefresh, refresh }: Props) {
           mb={4}
         >
           {column.pocos.map((poco, index) => {
-            if (!poco.poco) {
-              return (
-                <Flex
-                  key={index}
-                  justify={"center"}
-                  align={"center"}
-                  h={"179px"}
-                >
-                  <Text
-                    ml={20}
-                    fontSize="lg"
-                    fontWeight={"semibold"}
-                    textAlign={"center"}
-                    w={"220px"}
+            if (index < 9) {
+              if (!poco.poco) {
+                return (
+                  <Flex
+                    key={index}
+                    justify={"center"}
+                    align={"center"}
+                    h={"179px"}
                   >
-                    Não há intervenções cadastradas para essa campanha.
-                  </Text>
-                </Flex>
-              );
+                    <Text
+                      ml={20}
+                      fontSize="lg"
+                      fontWeight={"semibold"}
+                      textAlign={"center"}
+                      w={"220px"}
+                    >
+                      Não há intervenções cadastradas para essa campanha.
+                    </Text>
+                  </Flex>
+                );
+              } else {
+                return <CardPIR poco={poco} index={index} key={index} />;
+              }
             } else {
-              return <CardPIR poco={poco} index={index} key={index} />;
+              return undefined;
             }
           })}
         </Flex>

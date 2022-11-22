@@ -138,7 +138,7 @@ export default function PrevistoxRealizadoComponent() {
         >
           <StackedBarChart
             showY={true}
-            sizeW={1000}
+            sizeW={100}
             sizeH={200}
             data={previstoRealizado}
             dataEntries={dataEntries}

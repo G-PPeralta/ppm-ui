@@ -58,7 +58,7 @@ export function Infographics() {
   useEffect(() => {
     setTimeout(() => {
       handleGetAll();
-    }, 3000);
+    }, 10000);
   }, [refresh]);
 
   return (
@@ -90,7 +90,7 @@ export function Infographics() {
                   />
                 </Flex>
                 <Flex gap={2}>
-                  <ModalReorder />
+                  <ModalReorder refresh={refresh} />
                   <FiltrosModal
                     refresh={refresh}
                     setRefresh={setRefresh}

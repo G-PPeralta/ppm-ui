@@ -103,7 +103,7 @@ function DetalhamentoProjeto() {
       getData();
       getProject();
       setRender(!render);
-    }, 3000);
+    }, 1000);
   }, [refresh]);
 
   const handleGetInfoProjetos = async () => {
@@ -203,7 +203,7 @@ function DetalhamentoProjeto() {
                 }
                 loading={loadingProgresso}
               />
-              <CardOrcamento />
+              <CardOrcamento refresh={refresh} setRefresh={setRefresh} />
               <BotoesModais
                 licoes={licoes}
                 setLicoes={setLicoes}
