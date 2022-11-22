@@ -85,6 +85,7 @@ export const FeriadosProvider = ({ children }: any) => {
       isLoading: reqGetFeriados.isLoading,
       error: reqGetFeriados.error,
       data: reqGetFeriados.data,
+      isFetching: reqGetFeriados.isFetching,
     },
     selectProjetos: {
       isLoading: reqGetProjetosSelectFeriado.isLoading,

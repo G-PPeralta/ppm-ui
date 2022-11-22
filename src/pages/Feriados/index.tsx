@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiTrash } from "react-icons/fi";
 import { MdModeEdit } from "react-icons/md";
 
 import { Flex, IconButton, Td, Text, Tr } from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
 
 import ContainerPagina from "components/ContainerPagina";
 import FiltragemTabela from "components/FiltragemTabela";
@@ -18,7 +19,8 @@ function Feriados() {
   const { registerForm, feriados } = useFeriadosContext();
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
-  const [tabelaFiltrada, setTabelaFiltrada] = useState<any[]>(feriados.data);
+  const [tabelaFiltrada, setTabelaFiltrada] = useState<any[]>([]);
+  const [refreshTable, setRefreshTable] = useState<any>(false);
 
   const fromTo = {
     from,
@@ -30,10 +32,25 @@ function Feriados() {
   const header = ["ID", "NOME DO FERIADO", "TIPO", "DATA", "AÇÕES"];
   const footer = [""];
 
+  // console.log("tabelaFiltrada", tabelaFiltrada);
+  // console.log("feriados", feriados);
+  // console.log("registerForm", registerForm.values);
+  // console.log("feriados", feriados);
+
+  useEffect(() => {
+    if (feriados.isLoading === false) {
+      setTabelaFiltrada(feriados.data);
+    }
+    if (feriados.isFetching === false) {
+      setRefreshTable(true);
+    }
+    setRefreshTable(false);
+  }, [feriados]);
+
   function Body() {
     return (
       <>
-        {tabelaFiltrada.length ? (
+        {!feriados.isLoading ? (
           tabelaFiltrada
             .slice(from, to)
             .map((linhaTabela: any, index: number) => (
@@ -109,29 +126,43 @@ function Feriados() {
     <>
       <Sidebar>
         <ContainerPagina>
-          <Flex justify={"space-between"} align={"start"}>
-            <TituloPagina botaoVoltar={false}>Feriados</TituloPagina>
-            <ModalAdicionarFeriado />
-          </Flex>
-          <FiltragemTabela
-            dadosTabela={registerForm.values.licoes_aprendidas}
-            nomeLabel={"Pesquise o feriado"}
-            nomeLabelData={"Data"}
-            placeholder={"Digite o feriado"}
-            setTabelaFiltrada={setTabelaFiltrada}
-            propName={"licao_aprendida"}
-            registerForm={registerForm}
-            filtrarData={true}
-          />
-          <TabelaGenerica
-            // maxHeight={"352px"}
-            data={tabelaFiltrada}
-            header={header}
-            fromTo={fromTo}
-            footer={footer}
-          >
-            <Body />
-          </TabelaGenerica>
+          {feriados.isLoading || refreshTable ? (
+            <Flex
+              display={"flex"}
+              align={"center"}
+              justify={"center"}
+              h={"90vh"}
+            >
+              <Ring speed={2} lineWeight={5} color="blue" size={64} />
+            </Flex>
+          ) : (
+            <>
+              <Flex justify={"space-between"} align={"start"}>
+                <TituloPagina botaoVoltar={false}>Feriados</TituloPagina>
+                <ModalAdicionarFeriado />
+              </Flex>
+              <FiltragemTabela
+                dadosTabela={feriados.data}
+                nomeLabel={"Pesquise o feriado"}
+                nomeLabelData={"Data"}
+                placeholder={"Digite o feriado"}
+                setTabelaFiltrada={setTabelaFiltrada}
+                propName={"nome_feriado"}
+                registerForm={registerForm}
+                filtrarData={false}
+              />
+
+              <TabelaGenerica
+                // maxHeight={"352px"}
+                data={tabelaFiltrada}
+                header={header}
+                fromTo={fromTo}
+                footer={footer}
+              >
+                <Body />
+              </TabelaGenerica>
+            </>
+          )}
         </ContainerPagina>
       </Sidebar>
     </>
