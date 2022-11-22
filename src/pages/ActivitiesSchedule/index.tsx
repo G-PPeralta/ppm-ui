@@ -147,10 +147,12 @@ export function ActivitiesSchedule() {
                     direction={"column"}
                     align={"center"}
                     justify={"center"}
-                    onClick={() => openDetails(atividade, index)}
+                    onDoubleClick={() => {
+                      openDetails(atividade, index);
+                    }}
                     _hover={{ cursor: "pointer" }}
                   >
-                    <CardACT atividade={atividade} />
+                    <CardACT atividade={atividade} id={atividade} />
                   </Flex>
                 ))
               ) : (
