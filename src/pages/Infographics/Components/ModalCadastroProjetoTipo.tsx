@@ -15,11 +15,13 @@ import {
   Textarea,
   Text,
   ModalCloseButton,
+  Checkbox,
 } from "@chakra-ui/react";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
+import SelectFiltragem from "components/SelectFiltragem";
 import { TextError } from "components/TextError";
 
 import { handleCancelar } from "utils/handleCadastro";
@@ -33,6 +35,17 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaAtividadesPrecedentes } =
     useCadastroProjetoTipo();
+
+  const getValue = (options: any, chave: any) => {
+    const index = options
+      .map(({ value }: any) => value)
+      .indexOf(registerForm?.values?.tipo_intervencao_id);
+
+    return {
+      value: options?.[index]?.value,
+      label: options?.[index]?.label,
+    };
+  };
 
   return (
     <>
@@ -130,6 +143,65 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                               {registerForm.errors.nom_projeto_tipo}
                             </TextError>
                           )}
+                      </Flex>
+
+                      <Flex
+                        w={useBreakpointValue({
+                          base: "100%",
+                          md: "50%",
+                        })}
+                        direction={"column"}
+                      >
+                        {/* <Text fontWeight={"bold"}>Nome</Text> */}
+
+                        <SelectFiltragem
+                          registerForm={registerForm}
+                          nomeSelect={"ATIVIDADE"}
+                          required={true}
+                          propName={`registerForm.values.tipo_intervencao_id`}
+                          options={[
+                            {
+                              value: 1,
+                              label: "PRÉ INTERVENÇÂO",
+                            },
+                            {
+                              value: 2,
+                              label: "INTERVENÇÂO",
+                            },
+                            {
+                              value: 3,
+                              label: "PÓS INTERVENÇÂO",
+                            },
+                          ]}
+                          value={getValue(
+                            [
+                              {
+                                value: 1,
+                                label: "PRÉ INTERVENÇÂO",
+                              },
+                              {
+                                value: 2,
+                                label: "INTERVENÇÂO",
+                              },
+                              {
+                                value: 3,
+                                label: "PÓS INTERVENÇÂO",
+                              },
+                            ],
+                            "tipo_intervencao_id"
+                          )}
+                        />
+                      </Flex>
+                      <Flex
+                        w={useBreakpointValue({
+                          base: "100%",
+                          md: "50%",
+                        })}
+                        direction={"column"}
+                      >
+                        {/* <Text fontWeight={"bold"}>Nome</Text> */}
+                        <Flex gap={1}></Flex>
+                        <Checkbox />
                       </Flex>
                     </Flex>
                   </Stack>

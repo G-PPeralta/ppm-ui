@@ -45,6 +45,8 @@ export function useCadastroProjetoTipo() {
   const initialValues = {
     nom_usu_create: user?.nome,
     nom_projeto_tipo: "",
+    tipo_intervencao_id: null,
+    controlar_cronograma: false,
     atividades: [
       {
         atividade_id_origem: "",
