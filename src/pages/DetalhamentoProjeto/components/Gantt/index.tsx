@@ -130,12 +130,22 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
       //   return Math.round(difference_ms / one_day);
       // };
 
-      const baselineDuration = reqGanttData.data.map((item: any) => ({
+      const formatter = (list: any) => {
+        if (list.length === 0) return [];
+        return list.map((sub: any) => ({
+          ...sub,
+          BaselineDuration: sub.BaselineDuration.toString().concat(" dias"),
+          subtasks: formatter(sub.subtasks),
+        }));
+      };
+
+      const ganttFormatter = reqGanttData.data.map((item: any) => ({
         ...item,
         BaselineDuration: item.BaselineDuration.toString().concat(" dias"),
         subtasks: item.subtasks.map((sub: any) => ({
           ...sub,
           BaselineDuration: sub.BaselineDuration.toString().concat(" dias"),
+          subtasks: formatter(sub.subtasks),
         })),
       }));
 
@@ -152,7 +162,7 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
       // const _gantt: IGantt = reqGanttData.data;
       // // setGanttData(_gantt);
       // ganttFormatter(_gantt);
-      setGantt(baselineDuration);
+      setGantt(ganttFormatter);
     }
   }
 
