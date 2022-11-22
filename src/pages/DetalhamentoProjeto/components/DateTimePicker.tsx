@@ -13,50 +13,14 @@ function DateTimePicker({
   required,
   isDataFim,
   isDisabled,
+  dataMin,
 }: any) {
-  const [horaMin, setHoraMin] = useState<any>(new Date());
-  const [horaMax, setHoraMax] = useState<any>(new Date());
   const [dataInicio, setDataInicio] = useState<any>("");
-
-  // console.log("data", data);
-  // console.log("dataInicio", dataInicio);
-
-  useEffect(() => {
-    if (data && !dataInicio) {
-      const newDate = new Date(data);
-      // console.log("newDate", newDate);
-
-      // newDate.setHours(newDate.getHours() + 3);
-      setDataInicio(newDate);
-      // setDataMin(newDate);
-    } else {
-      // const newDate = new Date();
-      // setDataInicio(newDate);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    const dateMin = new Date();
-    dateMin.setHours(8);
-    dateMin.setMinutes(0);
-    setHoraMin(dateMin);
-    const dateMax = new Date();
-    dateMax.setHours(18);
-    dateMax.setMinutes(0);
-    setHoraMax(dateMax);
-  }, []);
 
   const handleIniciarDate = (date: any) => {
     if (date) {
-      if (isDataFim) {
-        date.setHours(18, 0, 0);
-        setDataInicio(date);
-        registerForm.setFieldValue(value, date);
-      } else {
-        date.setHours(9, 0, 0);
-        setDataInicio(date);
-        registerForm.setFieldValue(value, date);
-      }
+      setDataInicio(date);
+      registerForm.setFieldValue(value, date);
     }
   };
 
@@ -77,6 +41,13 @@ function DateTimePicker({
     )
   );
 
+  useEffect(() => {
+    if (data && !dataInicio) {
+      const newDate = new Date(data);
+      setDataInicio(newDate);
+    }
+  }, [data]);
+
   return (
     <Flex direction={"column"}>
       <Flex gap={1}>
@@ -88,12 +59,12 @@ function DateTimePicker({
       <ReactDatePicker
         disabled={isDisabled}
         selected={dataInicio}
-        // minDate={dataMin}
+        minDate={new Date(dataMin)}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
         showTimeSelect
-        minTime={horaMin}
-        maxTime={horaMax}
+        minTime={new Date(0, 0, 0, 8, 0)}
+        maxTime={new Date(0, 0, 0, 18, 0)}
         dateFormat="dd/MM/yyyy HH:mm"
         customInput={<TriggerDatePickerInicio />}
         // isClearable={dataInicio !== ""}
