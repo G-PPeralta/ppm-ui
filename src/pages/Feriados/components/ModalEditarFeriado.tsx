@@ -1,4 +1,4 @@
-import { BsPlus } from "react-icons/bs";
+import { MdModeEdit } from "react-icons/md";
 
 import {
   Button,
@@ -14,23 +14,57 @@ import {
   Text,
   Stack,
   Checkbox,
+  IconButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
+import { useFormik } from "formik";
 import { ProjetosFeriados } from "interfaces/Feriados";
+import { editarFeriadoSchema } from "validations/Feriados";
 
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import DatePickerGenerico from "components/DatePickerGenerico";
 import InputGenerico from "components/InputGenerico";
 import SelectFiltragem from "components/SelectFiltragem";
 
+import { formatarDigitosData } from "utils/formatarDigitosData";
 import { getSelectFiltragemValue } from "utils/GetSelectFiltragemValue";
 
 import { useFeriadosContext } from "contexts/Feriados";
 
-function ModalAdicionarFeriado() {
+import { useAuth } from "hooks/useAuth";
+
+interface Props {
+  feriado: any;
+}
+
+function ModalEditarFeriado({ feriado }: Props) {
+  const { user } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, handleClick, selectProjetos, feriados } =
-    useFeriadosContext();
+  const { handleClick, selectProjetos } = useFeriadosContext();
+  const getAno = new Date().getFullYear();
+
+  const initialValues: any = {
+    data_completa: new Date(
+      `${formatarDigitosData(feriado.mes_feriado)}/${formatarDigitosData(
+        feriado.dia_feriado
+      )}/${feriado.ano_feriado === null ? getAno : feriado.ano_feriado}`
+    ),
+    id: feriado.id,
+    ind_global: feriado.ind_global,
+    id_projeto: feriado.id_projeto,
+    dia_feriado: feriado.dia_feriado,
+    mes_feriado: feriado.mes_feriado,
+    ano_feriado: feriado.ano_feriado === null ? "" : feriado.ano_feriado,
+    nome_feriado: feriado.nome_feriado,
+    nom_usu_create: user?.nome,
+    aplicar_todos_os_anos: feriado.ano_feriado === null,
+  };
+
+  const updateForm = useFormik({
+    initialValues,
+    validationSchema: editarFeriadoSchema,
+    onSubmit: () => {},
+  });
 
   const optionsTipoFeriado = [
     {
@@ -43,29 +77,21 @@ function ModalAdicionarFeriado() {
     },
   ];
 
-  // console.log("registerForm", registerForm.values);
-  // console.log("feriados", feriados);
-
   return (
     <>
-      <Button
-        h={"56px"}
-        fontSize={"18px"}
-        fontWeight={"700"}
-        fontFamily={"Mulish"}
-        borderRadius={"8px"}
-        background={"origem.500"}
-        variant="primary"
-        color="white"
+      <IconButton
+        aria-label="Botão de Editar"
+        icon={<MdModeEdit />}
+        borderRadius={"10px"}
+        background={"transparent"}
+        color={"origem.500"}
         _hover={{
-          background: "origem.600",
+          background: "origem.500",
           transition: "all 0.4s",
+          color: "white",
         }}
-        rightIcon={<BsPlus size={24} />}
         onClick={onOpen}
-      >
-        Adicionar Feriado
-      </Button>
+      />
 
       <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
@@ -80,12 +106,12 @@ function ModalAdicionarFeriado() {
             fontWeight={"700"}
             fontFamily={"Mulish"}
           >
-            Adicionar Feriado
+            Editar Feriado
           </ModalHeader>
           <ModalCloseButton color={"white"} />
 
           <ModalBody mt={3}>
-            {selectProjetos.isLoading && !feriados.isLoading ? (
+            {selectProjetos.isLoading ? (
               <Flex
                 display={"flex"}
                 align={"center"}
@@ -98,55 +124,56 @@ function ModalAdicionarFeriado() {
               <Flex direction={"column"} gap={4}>
                 <Stack>
                   <InputGenerico
-                    registerForm={registerForm}
+                    registerForm={updateForm}
                     nomeInput={"NOME DO FERIADO"}
                     propName={"nome_feriado"}
-                    value={registerForm.values.nome_feriado}
-                    required={true}
+                    value={updateForm.values.nome_feriado}
+                    required={false}
                     placeholder={"Nome do feriado"}
                     maxLength={50}
                   />
                 </Stack>
                 <Stack spacing={2} w={"75%"}>
                   <DatePickerGenerico
-                    required={true}
+                    required={false}
                     nomeLabel={"DATA"}
-                    registerForm={registerForm}
+                    registerForm={updateForm}
                     propName={"data_completa"}
-                    data={registerForm.values.data_completa}
+                    data={updateForm.values.data_completa}
                     esconderHorario={true}
                   />
                   <Checkbox
                     colorScheme="blue"
                     onChange={(e) => {
-                      registerForm.setFieldValue(
+                      updateForm.setFieldValue(
                         "aplicar_todos_os_anos",
                         e.target.checked
                       );
                     }}
+                    defaultChecked={updateForm.values.aplicar_todos_os_anos}
                   >
                     Aplicar para todos os anos
                   </Checkbox>
                 </Stack>
                 <Stack>
                   <SelectFiltragem
-                    registerForm={registerForm}
+                    registerForm={updateForm}
                     nomeSelect={"TIPO DO FERIADO"}
                     propName={"ind_global"}
                     options={optionsTipoFeriado}
-                    required={true}
+                    required={false}
                     value={getSelectFiltragemValue(
                       optionsTipoFeriado,
                       "ind_global",
-                      registerForm
+                      updateForm
                     )}
                   />
                 </Stack>
-                {registerForm.values.ind_global === 0 &&
+                {updateForm.values.ind_global === 0 &&
                   !selectProjetos.isLoading && (
                     <Stack>
                       <SelectFiltragem
-                        registerForm={registerForm}
+                        registerForm={updateForm}
                         nomeSelect={"PROJETO"}
                         propName={"id_projeto"}
                         options={selectProjetos?.data
@@ -174,7 +201,7 @@ function ModalAdicionarFeriado() {
                               ) => a.label.localeCompare(b.label)
                             ),
                           "id_projeto",
-                          registerForm
+                          updateForm
                         )}
                       />
                     </Stack>
@@ -187,21 +214,21 @@ function ModalAdicionarFeriado() {
             <Flex gap={2}>
               <BotaoVermelhoLargoGhost
                 text={"Cancelar"}
-                formikForm={registerForm}
+                formikForm={updateForm}
                 onClose={onClose}
               />
               <Button
                 w={"208px"}
                 h={"56px"}
                 borderRadius={"8px"}
-                disabled={!registerForm.isValid || !registerForm.dirty}
+                disabled={!updateForm.isValid}
                 background={"origem.500"}
                 fontSize={"18px"}
                 fontWeight={"700"}
                 fontFamily={"Mulish"}
                 variant="primary"
                 color="white"
-                onClick={() => handleClick(registerForm, onClose, "post")}
+                onClick={() => handleClick(updateForm, onClose, "patch")}
                 _hover={{
                   background: "origem.600",
                   transition: "all 0.4s",
@@ -224,4 +251,4 @@ function ModalAdicionarFeriado() {
   );
 }
 
-export default ModalAdicionarFeriado;
+export default ModalEditarFeriado;

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { FiTrash } from "react-icons/fi";
-import { MdModeEdit } from "react-icons/md";
 
 import { Flex, IconButton, Td, Text, Tr } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
@@ -11,12 +10,18 @@ import Sidebar from "components/SideBar";
 import TabelaGenerica from "components/TabelaGenerica";
 import TituloPagina from "components/TituloPagina";
 
+import { formatarDigitosData } from "utils/formatarDigitosData";
+
 import { useFeriadosContext } from "contexts/Feriados";
 
+import { useAuth } from "hooks/useAuth";
+
 import ModalAdicionarFeriado from "./components/ModaAdicionarFeriado";
+import ModalEditarFeriado from "./components/ModalEditarFeriado";
 
 function Feriados() {
-  const { registerForm, feriados } = useFeriadosContext();
+  const { user } = useAuth();
+  const { registerForm, feriados, reqDeleteFeriado } = useFeriadosContext();
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
   const [tabelaFiltrada, setTabelaFiltrada] = useState<any[]>([]);
@@ -29,7 +34,15 @@ function Feriados() {
     setTo,
   };
 
-  const header = ["ID", "NOME DO FERIADO", "TIPO", "DATA", "AÇÕES"];
+  const header = [
+    "ID",
+    "NOME DO FERIADO",
+    "TIPO",
+    "DATA",
+    "PROJETO",
+    "OBSERVAÇÕES",
+    "AÇÕES",
+  ];
   const footer = [""];
 
   // console.log("tabelaFiltrada", tabelaFiltrada);
@@ -62,31 +75,32 @@ function Feriados() {
                   <Text>{linhaTabela.nome_feriado}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  {linhaTabela.ind_global === 1 ? "Nacional" : "Outros"}
+                  {linhaTabela.ind_global === 1 ? "Nacional" : "Específico"}
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Text>
-                    {linhaTabela.dia_feriado +
-                      "/" +
-                      linhaTabela.mes_feriado +
-                      "/2022"}
+                    {linhaTabela.ano_feriado === null
+                      ? formatarDigitosData(linhaTabela.dia_feriado) +
+                        "/" +
+                        formatarDigitosData(linhaTabela.mes_feriado)
+                      : formatarDigitosData(linhaTabela.dia_feriado) +
+                        "/" +
+                        formatarDigitosData(linhaTabela.mes_feriado) +
+                        "/" +
+                        linhaTabela.ano_feriado}
+                  </Text>
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Text>{linhaTabela.nome_projeto}</Text>
+                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
+                  <Text>
+                    {linhaTabela.ano_feriado === null ? "Feriado fixo" : "---"}
                   </Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Flex gap={2} align={"center"} justify={"center"}>
-                    <IconButton
-                      aria-label="Botão de Editar"
-                      icon={<MdModeEdit />}
-                      borderRadius={"10px"}
-                      background={"transparent"}
-                      color={"origem.500"}
-                      _hover={{
-                        background: "origem.500",
-                        transition: "all 0.4s",
-                        color: "white",
-                      }}
-                      // onClick={onOpen}
-                    />
+                    <ModalEditarFeriado feriado={linhaTabela} />
                     <IconButton
                       aria-label="Botão de Editar"
                       icon={<FiTrash />}
@@ -98,12 +112,12 @@ function Feriados() {
                         transition: "all 0.4s",
                         color: "white",
                       }}
-                      // onClick={() =>
-                      //   handleDeletar(
-                      //     linhaTabela.id,
-                      //     registerForm.values.id_atividade
-                      //   )
-                      // }
+                      onClick={() =>
+                        reqDeleteFeriado.mutate({
+                          id: linhaTabela.id,
+                          user: user?.nome,
+                        })
+                      }
                     />
                   </Flex>
                 </Td>
