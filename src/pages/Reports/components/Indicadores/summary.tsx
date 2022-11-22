@@ -14,6 +14,8 @@ import {
 } from "@chakra-ui/react";
 import { Cell, Pie, PieChart } from "recharts";
 
+import { formatRealInput } from "utils/regexCoinMask";
+
 import { GenericTable, TableData } from "./../genericTable";
 
 export interface SummaryData {
@@ -33,10 +35,33 @@ type Props = {
 };
 
 export function ProjectSummary({ data, table, tableData }: Props) {
+  const format = /^[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/;
+
+  const formatOrc = () => {
+    if (String(data.budget).match(format)) {
+      return formatRealInput(String(data.budget));
+    }
+    if (!String(data.budget).match(format)) {
+      return formatRealInput(String(data.budget + ".00"));
+    }
+  };
+
+  const formatRealized = () => {
+    if (String(data.realized).match(format)) {
+      return formatRealInput(String(data.realized));
+    }
+    return formatRealInput(String(data.realized + ".00"));
+  };
+
   function calculatePercent(data: SummaryData) {
-    const done = (data.realized / data.budget) * 100;
-    return done > 100 ? 100 : done;
+    if (data.realized > 0 && data.budget > 0) {
+      const done = (data.realized / data.budget) * 100;
+      return done > 100 ? 100 : done;
+    }
+    return 0;
   }
+
+  // console.log(data);
 
   function createPieData(data: SummaryData) {
     const p = Number(data.percent);
@@ -61,9 +86,9 @@ export function ProjectSummary({ data, table, tableData }: Props) {
     return table === false ? "md" : "none";
   }
 
-  function formatToLocale(num: number) {
-    return num.toLocaleString("pt-BR");
-  }
+  // function formatToLocale(num: number) {
+  //   return num.toLocaleString("pt-BR");
+  // }
 
   return (
     <Accordion padding={0} margin={0} allowToggle w={"100%"}>
@@ -214,7 +239,7 @@ export function ProjectSummary({ data, table, tableData }: Props) {
                   </Heading>
                 </Flex>
                 <Heading fontSize={"18px"} color={"gray.600"}>
-                  R$ {formatToLocale(data.budget)}
+                  R$ {formatOrc()}
                 </Heading>
               </Flex>
               <Flex
@@ -237,7 +262,7 @@ export function ProjectSummary({ data, table, tableData }: Props) {
                   </Heading>
                 </Flex>
                 <Heading fontSize={"18px"} color={"gray.600"}>
-                  R$ {formatToLocale(data.realized)}
+                  R$ {formatRealized()}
                 </Heading>
               </Flex>
             </Flex>
@@ -258,7 +283,11 @@ export function ProjectSummary({ data, table, tableData }: Props) {
                   color={"white"}
                   padding={2}
                 >
-                  {calculatePercent(data)}%
+                  {calculatePercent(data)
+                    .toFixed(2)
+                    .toString()
+                    .replace(".", ",")}
+                  %
                 </Heading>
               </Flex>
               {table == true && (
