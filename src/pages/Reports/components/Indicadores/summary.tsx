@@ -35,7 +35,6 @@ type Props = {
 };
 
 export function ProjectSummary({ data, table, tableData }: Props) {
-  // const format = /^[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/;
   const budget = data.budget + ".00";
   const budget2 = data.budget + "0";
   const realized = data.realized + ".00";
@@ -67,8 +66,6 @@ export function ProjectSummary({ data, table, tableData }: Props) {
     return realized;
   };
 
-  // console.log(formatRealized());
-
   function calculatePercent(data: SummaryData) {
     if (Number(data.realized) > 0 && Number(data.budget) > 0) {
       const done = (Number(data.realized) / Number(data.budget)) * 100;
@@ -76,8 +73,6 @@ export function ProjectSummary({ data, table, tableData }: Props) {
     }
     return 0;
   }
-
-  // console.log(data);
 
   function createPieData(data: SummaryData) {
     const p = Number(data.percent);
