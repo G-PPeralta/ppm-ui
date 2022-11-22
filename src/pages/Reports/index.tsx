@@ -47,6 +47,7 @@ export function Reports() {
   const { getProjetosDetalhados } = useProjects();
 
   const [report, setReport] = useState("0");
+  const [gerar, setGerar] = useState(false);
   const [projetos, setProjetos] = useState<Projetos[]>();
   const [projeto, setProjeto] = useState<Projetos>();
 
@@ -58,8 +59,6 @@ export function Reports() {
   useEffect(() => {
     getProjectsPerPolo();
   }, []);
-
-  let initialValue = "0";
 
   const componentRef = useRef<HTMLDivElement>(null);
 
@@ -165,7 +164,8 @@ export function Reports() {
                       width={"100%"}
                       placeholder="Selecione"
                       onChange={(e) => {
-                        initialValue = e.target.value;
+                        setGerar(false);
+                        setReport(e.target.value);
                       }}
                     >
                       {reports &&
@@ -186,7 +186,7 @@ export function Reports() {
                         transition: "all 0.4s",
                       }}
                       rightIcon={<FiPlusCircle />}
-                      onClick={() => setReport(initialValue)}
+                      onClick={() => setGerar(true)}
                     >
                       Gerar
                     </Button>
@@ -202,6 +202,7 @@ export function Reports() {
                       name="pole"
                       width={"100%"}
                       placeholder="Selecione"
+                      onChange={changeProjeto}
                     >
                       {projetos &&
                         projetos.map((reportType) => (
@@ -235,7 +236,8 @@ export function Reports() {
                     width={"100%"}
                     placeholder="Selecione"
                     onChange={(e) => {
-                      initialValue = e.target.value;
+                      setGerar(false);
+                      setReport(e.target.value);
                     }}
                   >
                     {reports &&
@@ -295,15 +297,18 @@ export function Reports() {
                       transition: "all 0.4s",
                     }}
                     rightIcon={<FiPlus />}
-                    onClick={() => setReport(initialValue)}
+                    onClick={() => setGerar(true)}
                   >
                     Gerar
                   </Button>
                 </FormControl>
               </Flex>
             )}
-
-            <Flex ref={componentRef}>{handleReportButton(report)}</Flex>
+            {gerar === true ? (
+              <Flex ref={componentRef}>{handleReportButton(report)}</Flex>
+            ) : (
+              <Flex></Flex>
+            )}
           </Box>
         </Stack>
       </Sidebar>
