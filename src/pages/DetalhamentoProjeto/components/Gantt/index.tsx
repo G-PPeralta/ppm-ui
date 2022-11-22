@@ -337,7 +337,6 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
           height={"100vh"}
           taskMode={"Auto"}
         >
-          <Inject services={[Sort]} />
           <ColumnsDirective>
             {/* <ColumnDirective field="Item" type="string"></ColumnDirective>
             <ColumnDirective
@@ -430,7 +429,7 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
               textAlign="Center"
             ></ColumnDirective>
           </ColumnsDirective>
-          <Inject services={[Edit, Toolbar]} />
+          <Inject services={[Edit, Toolbar, Sort]} />
         </GanttComponent>
         <Modal
           isOpen={expandGantt}
