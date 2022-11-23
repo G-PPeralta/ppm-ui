@@ -255,7 +255,7 @@ function ModalEditarAtividade({
                       id="duracao_dias"
                       name="duracao_dias"
                       max={999999999999}
-                      min={0}
+                      min={1}
                       value={formataParaTipo(
                         "dias",
                         registerForm.values.duracao_dias

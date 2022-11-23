@@ -73,7 +73,7 @@ export function useCadastroAtividadeProjeto(
     responsavel_id: 0,
     relacao_id: 0,
     dat_inicio_plan: "",
-    duracao_plan: 0,
+    duracao_plan: 1,
     nao_iniciar_antes_de: {
       data: "",
       checked: false,
@@ -89,6 +89,7 @@ export function useCadastroAtividadeProjeto(
         dias: 0,
       },
     ],
+    dat_fim_plan: "",
   };
 
   const registerForm: any = useFormik({
