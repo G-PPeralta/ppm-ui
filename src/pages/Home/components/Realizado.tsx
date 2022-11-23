@@ -71,12 +71,12 @@ export default function RealizadoComponent() {
             Realizado
           </Text>
           <Box sx={{ display: "flex" }}>
-            <Text
+            {/* <Text
               sx={{ fontSize: 12, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
               R$
-            </Text>
+            </Text> */}
             <Text
               ml={2}
               sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
@@ -84,7 +84,12 @@ export default function RealizadoComponent() {
             >
               {!loading && valorRealizado === 0
                 ? "0,00"
-                : valorRealizado.toLocaleString().split(",")[0]}
+                : valorRealizado
+                    .toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    })
+                    .split(",")[0]}
             </Text>
           </Box>
         </Box>
