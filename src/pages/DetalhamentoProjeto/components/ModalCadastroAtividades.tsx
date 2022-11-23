@@ -15,6 +15,9 @@ import {
   NumberInput,
   NumberInputField,
   ModalCloseButton,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -23,6 +26,8 @@ import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
+import { formataParaTipo } from "utils/FormataParaTipo";
+import { formatDateToddMMyyyyhhmmCronograma } from "utils/formatDate";
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useDetalhamentoProjeto } from "contexts/DetalhamentoDeProjetos";
@@ -81,6 +86,13 @@ function ModalCadastroAtividades({
       registerForm.setFieldValue("id_projeto", idProjeto);
     }
   }, [registerForm.values.id_projeto]);
+
+  useEffect(() => {
+    if (registerForm.values.precedentes.length === 0) {
+      registerForm.setFieldValue("dat_inicio_plan", "");
+      registerForm.setFieldValue("dat_fim_plan", "");
+    }
+  }, [registerForm.values]);
 
   // console.log("registerForm", registerForm.values);
 
@@ -193,11 +205,47 @@ function ModalCadastroAtividades({
                     </Flex>
                   </Flex>
 
+                  <AtividadesDragAndDrop
+                    registerForm={registerForm}
+                    atividades={relacoesOptions}
+                  />
+
                   <Flex flex={1} direction={"column"}>
                     {/* <Text fontWeight={"bold"}>Datas</Text> */}
                     <Flex gap={5}>
                       <Flex>
-                        <DateTimePickerDataInicio registerForm={registerForm} />
+                        {registerForm.values.dat_fim_plan === "" ? (
+                          <DateTimePickerDataInicio
+                            registerForm={registerForm}
+                          />
+                        ) : (
+                          <Flex direction={"column"}>
+                            <Flex gap={1}>
+                              <Text
+                                fontWeight={"700"}
+                                fontSize={"12px"}
+                                color={"#949494"}
+                              >
+                                DATA INÍCIO
+                              </Text>
+                            </Flex>
+                            <Button
+                              h={"56px"}
+                              variant="outline"
+                              px={5}
+                              minW={"220px"}
+                              fontSize={"14px"}
+                              fontWeight={"700"}
+                              fontFamily={"Mulish"}
+                              isDisabled={true}
+                            >
+                              {formatDateToddMMyyyyhhmmCronograma(
+                                registerForm.values.dat_fim_plan,
+                                "inicio"
+                              )}
+                            </Button>
+                          </Flex>
+                        )}
                       </Flex>
                       <Flex direction={"column"} w={"20%"}>
                         <Flex gap={1}>
@@ -207,7 +255,7 @@ function ModalCadastroAtividades({
                             fontSize={"12px"}
                             color={"#949494"}
                           >
-                            DIAS ÚTEIS
+                            DURAÇÃO
                           </Text>
                         </Flex>
                         <NumberInput
@@ -215,7 +263,10 @@ function ModalCadastroAtividades({
                           min={0}
                           id={"duracao_plan"}
                           name={"duracao_plan"}
-                          value={registerForm.values.duracao_plan}
+                          value={formataParaTipo(
+                            "dias",
+                            registerForm.values.duracao_plan
+                          )}
                           onChange={(value) => {
                             registerForm.setFieldValue(
                               "duracao_plan",
@@ -228,15 +279,14 @@ function ModalCadastroAtividades({
                             bg={"#fff"}
                             h={"56px"}
                           />
+                          <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
                         </NumberInput>
                       </Flex>
                     </Flex>
                   </Flex>
-
-                  <AtividadesDragAndDrop
-                    registerForm={registerForm}
-                    atividades={relacoesOptions}
-                  />
                 </Flex>
               ) : (
                 <Flex align={"center"} justify={"center"} w={"100%"} h={"50vh"}>

@@ -11,7 +11,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 
-import CardACT from "pages/ActivitiesSchedule/Components/CardACT";
+import CardACT from "pages/ActivitiesPrecedents/components/CardACT";
 
 import { Area, Atividade } from "../interfaces";
 import AtividadesPorStatus from "./AtividadesPorStatus";
