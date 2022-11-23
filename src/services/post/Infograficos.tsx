@@ -131,3 +131,8 @@ export async function postReorderIntervencao(
   );
   return { status };
 }
+
+export async function postReorder(payload: any): Promise<{ status: number }> {
+  const { status } = await api.post("/reorder", payload, token());
+  return { status };
+}
