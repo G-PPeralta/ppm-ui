@@ -34,6 +34,7 @@ import { useCadastroCronograma } from "hooks/useCadastroCronograma";
 
 import { getDuracaoHorasAdicionarAtividade } from "services/get/Estatisticas";
 
+import AtividadeCronogramaDragAndDrop from "./AtividadeCronogramaDragAndDrop";
 import { ModalFiltrarDuracaoMedia } from "./ModalFiltrarDuracaoMedia";
 
 interface Props {
@@ -41,6 +42,7 @@ interface Props {
   refresh: boolean;
   projeto: any;
   ganttData: any;
+  atividades: any;
 }
 
 function ModalAdicionarAtividade({
@@ -48,6 +50,7 @@ function ModalAdicionarAtividade({
   refresh,
   projeto,
   ganttData,
+  atividades,
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useAdicionarOperacao(
@@ -56,6 +59,8 @@ function ModalAdicionarAtividade({
     projeto
   );
   const { listaOperacao } = useCadastroCronograma();
+
+  // console.log("atividades", atividades);
 
   const optionsMetodosElevacao = [
     {
@@ -153,6 +158,11 @@ function ModalAdicionarAtividade({
     registerForm.setFieldValue("profundidade", Number(event));
   };
 
+  const atividadesOptions = atividades.map((atividade: any) => ({
+    value: atividade.id,
+    label: atividade.valor,
+  }));
+
   return (
     <>
       <Button
@@ -216,6 +226,10 @@ function ModalAdicionarAtividade({
                       setMediaHorasFiltradas={setMediaHorasFiltradas}
                     />
                   </Flex>
+                  <AtividadeCronogramaDragAndDrop
+                    registerForm={registerForm}
+                    atividades={atividadesOptions}
+                  />
                   <Flex gap={4} w={"100%"}>
                     <InputNumericoGenerico
                       registerForm={registerForm}

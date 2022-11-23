@@ -3,26 +3,12 @@ import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import {
-  Box,
-  Flex,
-  FormControl,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 
 import SelectFiltragem from "components/SelectFiltragem";
 
-import { formataParaTipo } from "utils/FormataParaTipo";
-
-import { getDataFinalPrecedessor } from "services/get/Estatisticas";
-
-// import SelectFiltragem from "components/SelectFiltragem";
+// import { getDataInicioExecucao } from "services/get/Estatisticas";
 
 interface Props {
   registerForm: FormikProps<any>;
@@ -46,11 +32,6 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
     registerForm.setFieldValue("precedentes", newList);
   };
 
-  const optionsAtividades = atividades.map((atividade: any) => ({
-    value: atividade.value,
-    label: atividade.label,
-  }));
-
   // const getValue = (options: any, i: number, chave: string) => {
   //   const index = options
   //     .map(({ value }: any) => value)
@@ -67,14 +48,10 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
       registerForm?.values?.precedentes?.[index]?.atividadePrecedenteId &&
       registerForm?.values?.precedentes?.[index]?.atividadePrecedenteId !== ""
     ) {
-      registerForm.setFieldValue(`precedentes[${index}].dias`, 1);
-      const { data } = await getDataFinalPrecedessor(
-        registerForm?.values?.precedentes?.[index]?.atividadePrecedenteId
-      );
-      if (registerForm.values.dat_fim_plan < data[0].dat_fim_plan) {
-        registerForm.setFieldValue("dat_fim_plan", data[0].dat_fim_plan);
-        registerForm.setFieldValue("dat_inicio_plan", data[0].dat_fim_plan);
-      }
+      // const dataInicioExecucao = await getDataInicioExecucao(
+      //   registerForm?.values?.precedentes?.[index]?.atividadePrecedenteId
+      // );
+      // console.log("dataInicioExecucao", dataInicioExecucao);
     }
   };
 
@@ -86,8 +63,8 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
 
   useEffect(() => {
     handleDataFinalPredecessor();
-    // console.log("teste", `precedentes[${index}].atividadePrecedenteId`);
   }, [registerForm.values.precedentes[index].atividadePrecedenteId]);
+  // console.log("teste", registerForm.values);
 
   return (
     <Draggable draggableId={draggableId} index={index}>
@@ -132,63 +109,13 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
                 flex={1}
               >
                 <Flex direction={"column"} flex={3}>
-                  {/* <SelectFiltragem
-                    registerForm={registerForm}
-                    nomeSelect={"ATIVIDADE"}
-                    propName={`precedentes[${index}].atividadePrecedenteId`}
-                    options={optionsAtividades}
-                    value={getValue(
-                      optionsAtividades,
-                      index,
-                      "atividadePrecedenteId"
-                    )}
-                  /> */}
                   <SelectFiltragem
                     registerForm={registerForm}
                     nomeSelect={"ATIVIDADE"}
                     propName={`precedentes[${index}].atividadePrecedenteId`}
-                    options={optionsAtividades}
+                    options={atividades}
                     required={false}
                   />
-                </Flex>
-                <Flex flex={1}>
-                  <FormControl>
-                    <Text
-                      fontWeight={"bold"}
-                      fontSize={"12px"}
-                      color={"#949494"}
-                    >
-                      DIAS
-                    </Text>
-                    <NumberInput
-                      max={99999}
-                      min={1}
-                      placeholder={"0"}
-                      id={`precedentes[${index}].dias`}
-                      name={`precedentes[${index}].dias`}
-                      value={formataParaTipo(
-                        "dias",
-                        registerForm.values.precedentes[index].dias
-                      )}
-                      onChange={(value) => {
-                        registerForm.setFieldValue(
-                          `precedentes[${index}].dias`,
-                          Number(value)
-                        );
-                      }}
-                    >
-                      <NumberInputField
-                        h={"56px"}
-                        maxW={"128px"}
-                        maxLength={5}
-                        bg={"#fff"}
-                      />
-                      <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                      </NumberInputStepper>
-                    </NumberInput>
-                  </FormControl>
                 </Flex>
               </Flex>
               <Flex
