@@ -30,6 +30,7 @@ function ModalReorderSimples({ setRefresh, refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaSondas, listaPocos } = useReorder();
   const [render, setRender] = useState(false);
+  const [showError, setShowError] = useState(false);
   const [pocoOrigem, setPocoOrigem] = useState("");
 
   const optionsPocos = listaPocos.map((poco: any) => ({
@@ -48,19 +49,50 @@ function ModalReorderSimples({ setRefresh, refresh }: any) {
         (val) => val.id === registerForm.values.id_cronograma_original
       );
       registerForm.setFieldValue("id_campanha_original", sonda[0].sonda);
-      const pocoName = listaSondas.map((val) => {
-        if (val.id == sonda[0].sonda) {
-          return val.name;
-        } else {
-          return undefined;
-        }
-      });
-      setPocoOrigem(pocoName[0]);
+      const pocoName = listaSondas.filter(
+        (val: any) => val.id == sonda[0].sonda
+      );
+
+      setPocoOrigem(pocoName[0].name);
       setRender(!render);
     } else {
       setPocoOrigem("");
     }
   }, [registerForm.values.id_cronograma_original]);
+
+  useEffect(() => {
+    if (
+      registerForm.values.id_campanha_original ==
+      registerForm.values.id_campanha_destino
+    ) {
+      registerForm.setFieldValue("id_campanha_destino", "");
+      if (registerForm.values.id_campanha_original !== "") {
+        setShowError(true);
+      }
+      setRender(!render);
+    } else {
+      if (registerForm.values.id_campanha_destino !== "") {
+        setShowError(false);
+      }
+    }
+  }, [registerForm.values.id_campanha_destino]);
+
+  useEffect(() => {
+    if (
+      registerForm.values.id_campanha_original ==
+      registerForm.values.id_campanha_destino
+    ) {
+      registerForm.setFieldValue("id_campanha_destino", "");
+      if (registerForm.values.id_campanha_original !== "") {
+        setShowError(true);
+      }
+      setRender(!render);
+    } else {
+      if (registerForm.values.id_campanha_destino !== "") {
+        setShowError(false);
+      }
+    }
+  }, [registerForm.values.id_campanha_original]);
 
   return (
     <>
@@ -188,10 +220,20 @@ function ModalReorderSimples({ setRefresh, refresh }: any) {
                       </FormControl>
                     </Flex>
                   </Stack>
+                  {showError ? (
+                    <Text
+                      // textAlign={"center"}
+                      fontSize={"10px"}
+                      color={"#ff0000"}
+                      fontWeight={"400"}
+                    >
+                      A sonda de destino não pode ser a mesma de origem.
+                    </Text>
+                  ) : undefined}
                   <Text
                     // textAlign={"center"}
                     fontSize={"16px"}
-                    mt={"30px"}
+                    mt={"25px"}
                     color={"origem.600"}
                     fontWeight={"400"}
                   >
