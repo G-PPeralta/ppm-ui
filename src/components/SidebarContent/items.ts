@@ -63,6 +63,11 @@ const childrenInfograficos = [
     icon: AiOutlineBarChart,
     link: "/graficos",
   },
+  {
+    name: "Gantt Campanha",
+    icon: AiOutlineBarChart,
+    link: "/gantt-campanha",
+  },
 ];
 
 const childrenConfiguracoes = [

@@ -550,7 +550,7 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
                 //     progress: microatividade.progresso,
                 //   })),
                 // }))}
-                toolbar={["ZoomIn", "ZoomOut"]}
+                toolbar={["ZoomIn", "ZoomOut", "ZoomToFit"]}
                 renderBaseline={true}
                 baselineColor="red"
                 editSettings={{

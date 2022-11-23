@@ -11,6 +11,7 @@ import { CentroDeCustoProjetos } from "pages/CentroDeCustoProjetos";
 import DetalhamentoProjeto from "pages/DetalhamentoProjeto";
 import Feriados from "pages/Feriados";
 import { FinanceiroProjetos } from "pages/FinanceiroProjetos";
+import GanttCampanha from "pages/GanttCampanha";
 import { GráficosEstatisticos } from "pages/GraficosEstatisticos";
 import { Home } from "pages/Home";
 import { Import } from "pages/Import";
@@ -96,6 +97,7 @@ export function PrivateRoutes() {
         path="/infographics/atividade/:id/visao-por-area"
         element={<VisaoPorArea />}
       />
+      <Route path="/gantt-campanha" element={<GanttCampanha />} />
       <Route path="/licoesAprendidas" element={<LicoesAprendidasProjetos />} />
       <Route path="/estatisticas/" element={<Statistics />} />
       <Route
