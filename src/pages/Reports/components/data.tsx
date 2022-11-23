@@ -107,6 +107,7 @@ export const summaryValues: SummaryData = {
   endDate: "25/07/2022",
   budget: 6576585,
   realized: 4932438.75,
+  percent: 55,
 };
 
 export const tableData: TableData = {

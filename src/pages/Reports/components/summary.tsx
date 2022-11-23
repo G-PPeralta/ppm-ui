@@ -24,7 +24,7 @@ export interface SummaryData {
   endDate: string;
   budget: number;
   realized: number;
-  percent?: string;
+  percent?: number;
 }
 
 type Props = {
@@ -131,7 +131,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                         color={changeColor(entry.value)}
                         fontWeight={"bold"}
                       >
-                        {entry.value.toFixed(2)}%
+                        {entry.value.toFixed()}%
                       </Text>
                     ) : null
                   )}
@@ -171,7 +171,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                   Início Real
                 </Text>
                 <Text fontSize={"16px"} fontWeight={"500"} color={"gray.600"}>
-                  {new Date(data.startDate).toLocaleDateString()}
+                  {data.startDate}
                 </Text>
               </Flex>
               <Heading color={"#0047BB"} fontWeight={"normal"}>
@@ -187,7 +187,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                   Fim Planejado
                 </Text>
                 <Text fontSize={"16px"} fontWeight={"500"} color={"gray.600"}>
-                  {new Date(data.endDate).toLocaleDateString()}
+                  {data.endDate}
                 </Text>
               </Flex>
             </Flex>
@@ -262,7 +262,11 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                   color={"white"}
                   padding={2}
                 >
-                  {calculatePercet(data).done.toFixed(2)}%
+                  {calculatePercet(data)
+                    .done.toFixed(2)
+                    .toString()
+                    .replace(".", ",")}
+                  %
                 </Heading>
               </Flex>
               {table == true && (
