@@ -218,6 +218,7 @@ function EditModal({
                 Cancelar{" "}
               </Button>
               <Button
+                isDisabled={licaoAprendida === "" || acao === ""}
                 background="origem.500"
                 variant="primary"
                 color="white"
