@@ -7,13 +7,20 @@ import {
   Box,
   Flex,
   FormControl,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
   NumberInput,
   NumberInputField,
+  NumberInputStepper,
   Text,
 } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 
 import SelectFiltragem from "components/SelectFiltragem";
+
+import { formataParaTipo } from "utils/FormataParaTipo";
+
+import { getDataFinalPrecedessor } from "services/get/Estatisticas";
 
 // import SelectFiltragem from "components/SelectFiltragem";
 
@@ -32,6 +39,7 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
   const remove = (index: number) => {
     // Pega a lista de precedentes diretamente do Formik
     const newList = registerForm.values.precedentes;
+
     // Remove item da lista
     newList.splice(index, 1);
     // Atualiza lista no Formik
@@ -54,11 +62,32 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
   //   };
   // };
 
+  const handleDataFinalPredecessor = async () => {
+    if (
+      registerForm?.values?.precedentes?.[index]?.atividadePrecedenteId &&
+      registerForm?.values?.precedentes?.[index]?.atividadePrecedenteId !== ""
+    ) {
+      registerForm.setFieldValue(`precedentes[${index}].dias`, 1);
+      const { data } = await getDataFinalPrecedessor(
+        registerForm?.values?.precedentes?.[index]?.atividadePrecedenteId
+      );
+      if (registerForm.values.dat_fim_plan < data[0].dat_fim_plan) {
+        registerForm.setFieldValue("dat_fim_plan", data[0].dat_fim_plan);
+        registerForm.setFieldValue("dat_inicio_plan", data[0].dat_fim_plan);
+      }
+    }
+  };
+
   useEffect(() => {
     const now = Date.now();
     const newId = draggableId + "-" + now.toLocaleString();
     setDraggableId(newId);
   }, []);
+
+  useEffect(() => {
+    handleDataFinalPredecessor();
+    // console.log("teste", `precedentes[${index}].atividadePrecedenteId`);
+  }, [registerForm.values.precedentes[index].atividadePrecedenteId]);
 
   return (
     <Draggable draggableId={draggableId} index={index}>
@@ -129,15 +158,18 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
                       fontSize={"12px"}
                       color={"#949494"}
                     >
-                      DIAS
+                      DURAÇÃO
                     </Text>
                     <NumberInput
                       max={99999}
-                      min={0}
+                      min={1}
                       placeholder={"0"}
                       id={`precedentes[${index}].dias`}
                       name={`precedentes[${index}].dias`}
-                      value={registerForm.values.precedentes[index].dias}
+                      value={formataParaTipo(
+                        "dias",
+                        registerForm.values.precedentes[index].dias
+                      )}
                       onChange={(value) => {
                         registerForm.setFieldValue(
                           `precedentes[${index}].dias`,
@@ -151,6 +183,10 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
                         maxLength={5}
                         bg={"#fff"}
                       />
+                      <NumberInputStepper>
+                        <NumberIncrementStepper />
+                        <NumberDecrementStepper />
+                      </NumberInputStepper>
                     </NumberInput>
                   </FormControl>
                 </Flex>
