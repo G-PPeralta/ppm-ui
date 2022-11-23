@@ -133,6 +133,6 @@ export async function postReorderIntervencao(
 }
 
 export async function postReorder(payload: any): Promise<{ status: number }> {
-  const { status } = await api.post("/reorder", payload, token());
+  const { status } = await api.post("/campanha/replanejar", payload, token());
   return { status };
 }

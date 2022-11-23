@@ -44,7 +44,9 @@ export function useReorder() {
           id: val2.id_poco,
           sonda: val.id_campanha,
         };
-        dataPocos.push(pocoPush);
+        if (val2.ind_block !== 1) {
+          dataPocos.push(pocoPush);
+        }
       });
     });
     setListaPocos(dataPocos);
