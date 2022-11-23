@@ -67,7 +67,10 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
   }
 
   function formatToLocale(num: number) {
-    return num.toLocaleString("pt-BR");
+    return num.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
   }
 
   return (
