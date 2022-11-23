@@ -2,17 +2,23 @@ import { IconType } from "react-icons";
 import { AiOutlineBarChart } from "react-icons/ai";
 import { BiData } from "react-icons/bi";
 import { BsCalendarWeek } from "react-icons/bs";
-import { FaRegMoneyBillAlt } from "react-icons/fa";
+import {
+  FaChartArea,
+  FaProjectDiagram,
+  FaRegMoneyBillAlt,
+  FaSitemap,
+} from "react-icons/fa";
 import {
   FiHome,
   FiBarChart,
   FiActivity,
-  FiFile,
+  //  FiFile,
   FiTrash2,
   FiSettings,
 } from "react-icons/fi";
 // import { IoMdPodium } from "react-icons/io";
 import { MdPriorityHigh } from "react-icons/md";
+import { TbGauge } from "react-icons/tb";
 
 interface LinkItemProps {
   name: string;
@@ -28,14 +34,14 @@ interface Children {
 }
 
 const childrenCarteiradeProjetos = [
-  { name: "Dashboard", icon: FiHome, link: "/" },
-  { name: "Projetos", icon: FaRegMoneyBillAlt, link: "/projects" },
+  { name: "Dashboard", icon: TbGauge, link: "/" },
+  { name: "Carteira de Projetos", icon: FaProjectDiagram, link: "/projects" },
   {
     name: "Financeiro",
     icon: FaRegMoneyBillAlt,
     link: "/financeiro-projetos",
   },
-  { name: "Relatórios", icon: FiFile, link: "/reports" },
+  { name: "Relatórios", icon: FaChartArea, link: "/reports" },
   // {
   //   name: "Priorização Diretores",
   //   icon: IoMdPodium,
@@ -44,19 +50,19 @@ const childrenCarteiradeProjetos = [
 ];
 
 const childrenInfograficos = [
-  { name: "Infográficos", icon: FiBarChart, link: "/infographics" },
-  { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/budgets" },
+  { name: "Campanhas", icon: FaSitemap, link: "/infographics" },
   {
-    name: "Estatísticas",
+    name: "Cronogramas",
     icon: AiOutlineBarChart,
     link: "/estatisticas",
   },
+  { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/budgets" },
+  { name: "Look Ahead", icon: AiOutlineBarChart, link: "/lookahead" },
   {
     name: "Gráficos Estatisticos",
     icon: AiOutlineBarChart,
     link: "/graficos",
   },
-  { name: "Look Ahead", icon: AiOutlineBarChart, link: "/lookahead" },
 ];
 
 const childrenConfiguracoes = [
