@@ -73,20 +73,23 @@ export default function NaoPrevistoComponent() {
             Não Previsto
           </Text>
           <Box display={"flex"}>
-            <Text
+            {/* <Text
               sx={{ fontSize: 12, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
               R$
-            </Text>
+            </Text> */}
             <Text
               ml={2}
               sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
               {!loading && valorNaoPrevisto <= 0
-                ? Math.abs(valorNaoPrevisto).toLocaleString()
-                : "0,00"}
+                ? Math.abs(valorNaoPrevisto).toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })
+                : "R$ 0,00"}
             </Text>
           </Box>
         </Box>

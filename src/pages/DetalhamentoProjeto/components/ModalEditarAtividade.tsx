@@ -19,6 +19,7 @@ import {
   NumberInputStepper,
   NumberDecrementStepper,
   NumberIncrementStepper,
+  Button,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
@@ -28,6 +29,7 @@ import InputNumericoGenerico from "components/InputNumericoGenerico";
 import SelectFiltragem from "components/SelectFiltragem";
 
 import { formataParaTipo } from "utils/FormataParaTipo";
+import { formatDateToddMMyyyyhhmmCronograma } from "utils/formatDate";
 
 import { useDetalhamentoProjeto } from "contexts/DetalhamentoDeProjetos";
 
@@ -96,7 +98,6 @@ function ModalEditarAtividade({
         areaResponsavel.nom_responsavel === item.Responsavel
     )?.id;
 
-    // console.log("responsavelId", responsavelId);
     registerForm.setFieldValue("id_atividade", editAtividade.id_atividade);
     registerForm.setFieldValue("nome_atividade", editAtividade.nome_atividade);
     registerForm.setFieldValue("inicio_realizado", new Date(item.StartDate));
@@ -109,8 +110,6 @@ function ModalEditarAtividade({
     registerForm.setFieldValue("fim_planejado", item.BaselineEndDate);
   };
 
-  // console.log("registerForm", registerForm.values);
-
   const addDays = (date: any, days: any) => {
     const result = new Date(date);
     result.setDate(result.getDate() + days);
@@ -121,10 +120,6 @@ function ModalEditarAtividade({
     asyncGet();
   }, [editAtividade]);
 
-  // console.log(
-  //   "registerForm.values.inicio_planejado",
-  //   registerForm.values.inicio_planejado
-  // );
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} size="lg">
@@ -223,15 +218,25 @@ function ModalEditarAtividade({
                         data={registerForm.values.inicio_planejado}
                       />
                     </Flex>
-                    <Flex flex={1}>
-                      <DateTimePicker
-                        registerForm={registerForm}
-                        value={"fim_planejado"}
-                        label={"FIM PLANEJADO"}
-                        required={false}
-                        data={registerForm.values.fim_planejado}
-                        isDisabled={true}
-                      />
+                    <Flex direction={"column"}>
+                      <Flex gap={1}>
+                        <Text color="#949494" fontSize="12px" fontWeight="700">
+                          FIM PLANEJADO
+                        </Text>
+                      </Flex>
+                      <Button
+                        disabled={true}
+                        h={"56px"}
+                        w={"100%"}
+                        variant="outline"
+                        px={5}
+                        minW={"220px"}
+                      >
+                        {formatDateToddMMyyyyhhmmCronograma(
+                          registerForm.values.fim_planejado,
+                          "fim"
+                        )}
+                      </Button>
                     </Flex>
                   </Flex>
                   <Flex direction={"column"} width={"328px"} mb={-3}>
@@ -250,6 +255,7 @@ function ModalEditarAtividade({
                       id="duracao_dias"
                       name="duracao_dias"
                       max={999999999999}
+                      min={0}
                       value={formataParaTipo(
                         "dias",
                         registerForm.values.duracao_dias

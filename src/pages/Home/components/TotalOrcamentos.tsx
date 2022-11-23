@@ -64,12 +64,12 @@ export default function TotalOrcamentosComponent() {
             Total do Orçamento
           </Text>
           <Box sx={{ display: "flex" }}>
-            <Text
+            {/* <Text
               sx={{ fontSize: 12, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
               R$
-            </Text>
+            </Text> */}
             <Text
               ml={2}
               sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
@@ -77,7 +77,12 @@ export default function TotalOrcamentosComponent() {
             >
               {!loading && valorTotalOrcamento === 0
                 ? "0,00"
-                : valorTotalOrcamento.toLocaleString().split(",")[0]}
+                : valorTotalOrcamento
+                    .toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    })
+                    .split(",")[0]}
             </Text>
           </Box>
         </Box>

@@ -24,6 +24,7 @@ import {
   Toolbar,
   Sort,
   HolidaysDirective,
+  SortSettingsModel,
   // HolidayDirective,
 } from "@syncfusion/ej2-react-gantt";
 
@@ -179,6 +180,10 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
     handleSetGanttData();
   }, [refreshGant, refreshGanttCriacao, refreshGanttDelete]);
 
+  const sortingOptions: SortSettingsModel = {
+    columns: [{ field: "BaselineStartDate", direction: "Ascending" }],
+  };
+
   // useEffect(() => {
   //   setGantt(ganttDataLocal);
   // }, []);
@@ -291,6 +296,7 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
           id="gantt-control"
           dataSource={gantt}
           allowSorting={true}
+          sortSettings={sortingOptions}
           taskFields={{
             id: "TaskID",
             name: "TaskName",
@@ -317,7 +323,7 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
           //     progress: microatividade.progresso,
           //   })),
           // }))}
-          toolbar={["ZoomIn", "ZoomOut"]}
+          toolbar={["ZoomIn", "ZoomOut", "ZoomToFit"]}
           renderBaseline={true}
           baselineColor="red"
           editSettings={{

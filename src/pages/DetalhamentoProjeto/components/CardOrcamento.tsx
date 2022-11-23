@@ -73,11 +73,11 @@ function CardOrcamento({ refresh }: any) {
             </Heading>
           </Box>
           <Box display={"flex"} alignItems={"center"}>
-            <Text fontSize={14} fontWeight={600}>
-              R$
-            </Text>
             <Text fontSize={18} ml={2} fontWeight={600}>
-              {infoFinanceira[0]?.planejado.toLocaleString()}
+              {infoFinanceira[0]?.planejado.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })}
             </Text>
           </Box>
         </Box>
@@ -92,11 +92,13 @@ function CardOrcamento({ refresh }: any) {
                   </Text>
                 </Box>
                 <Box display={"flex"} alignItems={"center"}>
-                  <Text fontSize={14} fontWeight={600}>
-                    R$
-                  </Text>
                   <Text fontSize={16} ml={2} fontWeight={600}>
-                    {remanescente}
+                    {remanescente
+                      ? remanescente.toLocaleString("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        })
+                      : "R$ 0,00"}
                   </Text>
                 </Box>
               </Box>
@@ -129,11 +131,11 @@ function CardOrcamento({ refresh }: any) {
                   </Text>
                 </Box>
                 <Box display={"flex"} alignItems={"center"}>
-                  <Text fontSize={14} fontWeight={600}>
-                    R$
-                  </Text>
                   <Text fontSize={16} ml={2} fontWeight={600}>
-                    {infoFinanceira[0]?.realizado.toLocaleString()}
+                    {infoFinanceira[0]?.realizado.toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    })}
                   </Text>
                 </Box>
               </Box>
@@ -169,11 +171,13 @@ function CardOrcamento({ refresh }: any) {
                   </Text>
                 </Box>
                 <Box display={"flex"} alignItems={"center"}>
-                  <Text fontSize={14} fontWeight={600}>
-                    R$
-                  </Text>
                   <Text fontSize={16} ml={2} fontWeight={600}>
-                    {naoPrevisto > 0 ? naoPrevisto.toLocaleString() : "0,00"}
+                    {naoPrevisto > 0
+                      ? naoPrevisto.toLocaleString("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        })
+                      : "R$ 0,00"}
                   </Text>
                 </Box>
               </Box>
@@ -214,7 +218,7 @@ function CardOrcamento({ refresh }: any) {
                   )}
                 </Text>
                 <Text fontSize={16} fontWeight={600}>
-                  CPI = {!loading && cpiSpi[0].cpi.toLocaleString()}
+                  CPI = {!loading && cpiSpi[0].cpi.toString()}
                 </Text>
               </Box>
               <Box
@@ -233,7 +237,7 @@ function CardOrcamento({ refresh }: any) {
                   )}
                 </Text>
                 <Text fontSize={16} fontWeight={600}>
-                  SPI = {!loading && cpiSpi[0].spi.toLocaleString()}
+                  SPI = {!loading && cpiSpi[0].spi.toString()}
                 </Text>
               </Box>
             </Flex>
