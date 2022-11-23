@@ -79,3 +79,53 @@ export function formatMinutesToHours(minutes: number) {
   const hours = minutes / 60;
   return hours;
 }
+
+export function formatDateToddMMyyyy(date: Date | string) {
+  const dateFormated = new Date(date);
+  return [
+    padTo2Digits(dateFormated.getDate()),
+    padTo2Digits(dateFormated.getMonth() + 1),
+    dateFormated.getFullYear(),
+  ].join("/");
+}
+
+export function formatDateToddMMyyyyhhmmCronograma(
+  date: Date | null,
+  inicioOuFim: string
+) {
+  if (inicioOuFim === "fim") {
+    if (date === null) {
+      return null;
+    } else {
+      const dateFormated = new Date(date);
+      dateFormated.setHours(18);
+      const data: any = [
+        padTo2Digits(dateFormated.getDate()),
+        padTo2Digits(dateFormated.getMonth() + 1),
+        dateFormated.getFullYear(),
+      ].join("/");
+      const time = [
+        padTo2Digits(dateFormated.getHours()),
+        padTo2Digits(dateFormated.getMinutes()),
+      ].join(":");
+      return data + ", " + time;
+    }
+  } else if (inicioOuFim === "inicio") {
+    if (date === null) {
+      return null;
+    } else {
+      const dateFormated = new Date(date);
+      dateFormated.setHours(9);
+      const data: any = [
+        padTo2Digits(dateFormated.getDate()),
+        padTo2Digits(dateFormated.getMonth() + 1),
+        dateFormated.getFullYear(),
+      ].join("/");
+      const time = [
+        padTo2Digits(dateFormated.getHours()),
+        padTo2Digits(dateFormated.getMinutes()),
+      ].join(":");
+      return data + ", " + time;
+    }
+  }
+}
