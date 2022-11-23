@@ -168,7 +168,7 @@ export function ProjectSummary({ data, table, tableData }: Props) {
                   )}
                 </Box>
               </Box>
-              <Flex direction={"column"} w={"100%"}>
+              <Flex direction={"column"} w={"280px"}>
                 <Heading
                   as="h3"
                   fontSize="24px"
