@@ -188,6 +188,15 @@ function ModalReorderSimples({ setRefresh, refresh }: any) {
                       </FormControl>
                     </Flex>
                   </Stack>
+                  <Text
+                    // textAlign={"center"}
+                    fontSize={"16px"}
+                    mt={"30px"}
+                    color={"origem.600"}
+                    fontWeight={"400"}
+                  >
+                    OBS: O replanejamento da datas levará alguns segundos.
+                  </Text>
                 </Flex>
               </FormControl>
             </ModalBody>

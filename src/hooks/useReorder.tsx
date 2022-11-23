@@ -73,13 +73,13 @@ export function useReorder() {
         const { status } = await postReorder(newValues);
 
         if (status === 200 || status === 201) {
-          toast.success(`Campanha cadastrada com sucesso!`, {
+          toast.success(`Replanejamento feito com sucesso!`, {
             id: "toast-principal",
           });
           setLoading(false);
         }
       } catch (error) {
-        toast.error(`Erro ao cadastrar campanha!`, {
+        toast.error(`Erro ao replanejar sondas`, {
           id: "toast-principal",
         });
         setLoading(false);
