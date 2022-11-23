@@ -131,3 +131,8 @@ export async function postReorderIntervencao(
   );
   return { status };
 }
+
+export async function postReorder(payload: any): Promise<{ status: number }> {
+  const { status } = await api.post("/campanha/replanejar", payload, token());
+  return { status };
+}
