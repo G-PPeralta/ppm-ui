@@ -221,7 +221,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                   </Heading>
                 </Flex>
                 <Heading fontSize={"18px"} color={"gray.600"}>
-                  R$ {formatToLocale(data.budget)}
+                  {formatToLocale(data.budget)}
                 </Heading>
               </Flex>
               <Flex
@@ -244,7 +244,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                   </Heading>
                 </Flex>
                 <Heading fontSize={"18px"} color={"gray.600"}>
-                  R$ {formatToLocale(data.realized)}
+                  {formatToLocale(data.realized)}
                 </Heading>
               </Flex>
             </Flex>
