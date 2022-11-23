@@ -162,7 +162,7 @@ export function ProjectSummary({ data, table, tableData }: Props) {
                         color={changeColor(entry.value)}
                         fontWeight={"bold"}
                       >
-                        {entry.value}%
+                        {entry.value > 100 ? 100 : entry.value}%
                       </Text>
                     ) : null
                   )}
