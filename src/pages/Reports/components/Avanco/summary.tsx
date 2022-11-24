@@ -15,7 +15,7 @@ import {
 import { IDadosAtividades } from "interfaces/TabelaAtividades";
 import { Cell, Pie, PieChart } from "recharts";
 
-import { TabelaAtividadesPendentes } from "./TabelaAtividadesPendentes";
+import { TabelaAtividadesPendentes } from "../TabelaAtividadesPendentes/index";
 
 export interface SummaryData {
   name: string;
@@ -35,8 +35,7 @@ type Props = {
 
 export function ProjectSummary({ data, table, dataTable }: Props) {
   function createPieData(data: SummaryData) {
-    const p = Number(data.percent ? data.percent : 65);
-    // Chave .percent ainda não presente no back
+    const p = Number(data.percent ? data.percent : 50);
     const pieData = [
       {
         name: "Undone",
@@ -175,9 +174,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                   Início Real
                 </Text>
                 <Text fontSize={"16px"} fontWeight={"500"} color={"gray.600"}>
-                  {data.startDate === null
-                    ? "NA"
-                    : new Date(data.startDate).toLocaleDateString()}
+                  {data.startDate}
                 </Text>
               </Flex>
               <Heading color={"#0047BB"} fontWeight={"normal"}>
@@ -193,9 +190,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                   Fim Planejado
                 </Text>
                 <Text fontSize={"16px"} fontWeight={"500"} color={"gray.600"}>
-                  {data.endDate === null
-                    ? "NA"
-                    : new Date(data.endDate).toLocaleDateString()}
+                  {data.endDate}
                 </Text>
               </Flex>
             </Flex>
