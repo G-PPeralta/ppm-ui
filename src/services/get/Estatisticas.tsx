@@ -139,6 +139,20 @@ export async function getDataInicioExecucao(idAtividade: number): Promise<{
   return { data, status };
 }
 
+export async function getDataInicioExecucaoEstatistica(
+  idAtividade: number
+): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(
+    `/campanha/datainicioexecucao/estatistica/${idAtividade}`,
+    token()
+  );
+
+  return { data, status };
+}
+
 export async function getDataFinalPrecedessor(idAtividade: number): Promise<{
   data: any;
   status: number;

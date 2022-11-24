@@ -1,20 +1,23 @@
 import { Flex, Heading, Text } from "@chakra-ui/react";
 
-import { formatDate } from "utils/formatDate";
+// import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
 
 type Poco = {
   id?: number;
   comp_pct: number;
   finalplanejado: string;
+  finalplanejado_fmt: string;
   id_campanha: number;
   id_poco: number;
   inicioplanejado: string;
+  inicioplanejado_fmt: string;
   pct_plan: string;
   pct_real: string;
   poco: string;
   sonda: string;
   ind_alerta?: number;
+  ind_status?: number;
 };
 
 type Props = {
@@ -23,8 +26,8 @@ type Props = {
 };
 
 function Card({ poco, index }: Props) {
-  const dataInicioFormatada = formatDate(new Date(poco.inicioplanejado));
-  const dataFimFormatada = formatDate(new Date(poco.finalplanejado));
+  const dataInicioFormatada = poco.inicioplanejado_fmt; // formatDate(new Date(poco.inicioplanejado));
+  const dataFimFormatada = poco.finalplanejado_fmt; // formatDate(new Date(poco.finalplanejado));
 
   const intervencaoFoiIniciada = index === 0 && poco.pct_real !== "0";
 
@@ -47,7 +50,8 @@ function Card({ poco, index }: Props) {
             Number(poco.comp_pct),
             Number(poco.pct_real),
             poco.finalplanejado,
-            Number(poco.ind_alerta)
+            Number(poco.ind_alerta),
+            Number(poco.ind_status)
           )}
           px={5}
           py={3}

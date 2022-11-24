@@ -7,6 +7,7 @@ export interface Projetos {
   vlr_cr: number;
   vlr_orcado: number;
   tcpi: number;
+  vlr_tpci: number;
   prioridade: string;
   complexidade: string;
   polo: string;
