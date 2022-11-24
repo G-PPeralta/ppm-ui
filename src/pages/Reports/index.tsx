@@ -22,7 +22,7 @@ import Sidebar from "components/SideBar";
 
 import { useProjects } from "hooks/useProjects";
 
-import { Avanco } from "./components/avanco";
+import { Avanco } from "./components/Avanco/avanco";
 import { Evolucao } from "./components/evolucao";
 import { Indicadores } from "./components/Indicadores";
 import { PanoramaGeral } from "./components/PanoramaGeral";

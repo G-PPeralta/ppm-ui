@@ -20,6 +20,7 @@ export interface SummaryData {
   endDate: string;
   budget: number;
   realized: number;
+  percent: number;
 }
 
 export function Pendencias({ data }: Props) {
@@ -32,6 +33,7 @@ export function Pendencias({ data }: Props) {
     endDate: data.data_fim,
     budget: +data.vlr_cr,
     realized: +data.vlr_orcado,
+    percent: +data.pct,
   };
 
   const getPendentes = async (idProject: number) => {
