@@ -162,13 +162,13 @@ export function ProjectSummary({ data, table, tableData }: Props) {
                         color={changeColor(entry.value)}
                         fontWeight={"bold"}
                       >
-                        {entry.value}%
+                        {entry.value > 100 ? 100 : entry.value}%
                       </Text>
                     ) : null
                   )}
                 </Box>
               </Box>
-              <Flex direction={"column"} w={"100%"}>
+              <Flex direction={"column"} w={"280px"}>
                 <Heading
                   as="h3"
                   fontSize="24px"
