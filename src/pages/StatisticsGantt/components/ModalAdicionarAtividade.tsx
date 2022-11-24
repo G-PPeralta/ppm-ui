@@ -87,7 +87,6 @@ function ModalAdicionarAtividade({
 
   const handleDataInicio = async () => {
     const dados = await getDataInicioExecucaoEstatistica(projeto.id_poco);
-    console.log(dados.data);
     // let ultimaData = new Date();
     let ultimaData = dados
       ? new Date(dados.data.dat_ini_plan).getTime() + 3 * 60 * 60 * 1000
