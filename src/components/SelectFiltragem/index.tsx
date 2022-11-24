@@ -14,6 +14,7 @@ function SelectFiltragem({
   idCampanha,
   required,
   width,
+  isDisabled,
 }: any) {
   const handleChange = ({ value }: any, { name }: any) => {
     registerForm.setFieldValue(name, value);
@@ -116,7 +117,7 @@ function SelectFiltragem({
               : value
           }
           isSearchable
-          isDisabled={!!idCampanha}
+          isDisabled={isDisabled}
         />
         {registerForm.touched[propName] && registerForm.errors[propName] && (
           <TextError>{registerForm.errors[propName]}</TextError>
