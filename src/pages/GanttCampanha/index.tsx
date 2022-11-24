@@ -40,6 +40,9 @@ function GanttCampanha() {
   const [ganttData, setGanttData] = useState<GanttCampanha[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pocoId, setPocoId] = useState(0);
+  const [intervencaoIniciada, setIntervencaoIniciada] = useState<
+    boolean | undefined
+  >(undefined);
 
   const rowDataBound = (args: any) => {
     // console.log(">>>> rowDataBound", args);
@@ -49,9 +52,10 @@ function GanttCampanha() {
     }
   };
 
-  function handleOpenModalClick(id: number) {
+  function handleOpenModalClick(id: number, iniciada: boolean) {
     setIsModalOpen(true);
     setPocoId(id);
+    setIntervencaoIniciada(iniciada);
   }
 
   const actionsTemplate = (props: any) => (
@@ -63,7 +67,12 @@ function GanttCampanha() {
     >
       <span>{props.id}</span>
       <IconButton
-        onClick={() => handleOpenModalClick(props.taskData.id)}
+        onClick={() =>
+          handleOpenModalClick(
+            props.taskData.id,
+            props.taskData.intervencaoIniciada
+          )
+        }
         color={"#0047DB"}
         fontWeight={"700"}
         backgroundColor={"transparent"}
@@ -100,13 +109,14 @@ function GanttCampanha() {
     if (data) {
       const list: any = [];
       data.forEach((item: any) => {
-        const formatted = item.pocos.map((poc: any) => ({
+        const formatted = item.pocos.map((poc: any, index: number) => ({
           TaskID: poc.poco || "",
           startDate: poc.inicioprojplanejado || "",
           endDate: poc.finalprojplanejado || "",
           pct_plan: Number(poc.pct_plan) || "",
           Progress: Number(poc.pct_real),
           id: poc.id,
+          intervencaoIniciada: index === 0 && poc.pct_real !== "0",
         }));
         list.push(...formatted);
       });
@@ -241,6 +251,7 @@ function GanttCampanha() {
           isModalOpen={isModalOpen}
           setIsModalOpen={() => setIsModalOpen(!isModalOpen)}
           pocoId={pocoId}
+          intervencaoIniciada={intervencaoIniciada}
         />
       )}
     </>
