@@ -45,7 +45,6 @@ export function useCadastroProjetoTipo() {
   const initialValues = {
     nom_usu_create: user?.nome,
     nom_projeto_tipo: "",
-    tipo_intervencao_id: null,
     controlar_cronograma: false,
     atividades: [
       {
@@ -60,6 +59,7 @@ export function useCadastroProjetoTipo() {
             checked: false,
           },
         ],
+        fase_id: 0,
       },
     ],
     comentarios: "",
@@ -72,7 +72,6 @@ export function useCadastroProjetoTipo() {
       const newValues = {
         nom_usu_create: user?.nome,
         nom_projeto_tipo: values.nom_projeto_tipo,
-        tipo_intervencao_id: values.tipo_intervencao_id,
         controlar_cronograma: values.controlar_cronograma,
         atividades: values.atividades.map((atividade) => ({
           atividade_id_origem: atividade.atividade_id_origem,
@@ -82,7 +81,7 @@ export function useCadastroProjetoTipo() {
           precedentes: atividade.precedentes.filter(
             (precedente) => precedente.checked
           ),
-          // .map((precedente) => precedente.id),
+          fase_id: atividade.fase_id,
         })),
         comentarios: values.comentarios,
       };

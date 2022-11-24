@@ -65,6 +65,7 @@ export const cadastroProjetoTipoSchema = yup.object({
           checked: yup.boolean(),
         })
       ),
+      fase_id: yup.number().required().moreThan(0),
     })
   ),
   comentarios: yup.string(),

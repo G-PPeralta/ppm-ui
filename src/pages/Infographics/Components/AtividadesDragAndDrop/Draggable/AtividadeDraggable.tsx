@@ -56,6 +56,21 @@ function AtividadesDraggable({ index, registerForm }: Props) {
     label: tarefa.nom_atividade,
   }));
 
+  const opcoesTipo = [
+    {
+      value: 1,
+      label: "Pré Intervenção",
+    },
+    {
+      value: 2,
+      label: "Intervenção",
+    },
+    {
+      value: 3,
+      label: "Pós Intervenção",
+    },
+  ];
+
   const getValue = (options: any, i: number, chave: string) => {
     const index = options
       .map(({ value }: any) => value)
@@ -136,6 +151,17 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     value={getValue(optionsTarefa, index, "tarefa_id")}
                   />
                 </Flex>
+                <Flex direction={"column"} flex={2}>
+                  <SelectFiltragem
+                    registerForm={registerForm}
+                    nomeSelect={"FASE"}
+                    required={true}
+                    propName={`atividades[${index}].fase_id`}
+                    options={opcoesTipo}
+                    value={getValue(opcoesTipo, index, "fase_id")}
+                  />
+                </Flex>
+
                 <Flex direction={"column"} flex={2}>
                   <Flex gap={1}>
                     <RequiredField />
