@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { ArcherContainer, ArcherElement } from "react-archer";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import ContainerPagina from "components/ContainerPagina";
@@ -35,6 +35,10 @@ declare type AreaCompetaType = {
 
 export function ActivitiesPrecedents() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/infographics/atividade/${id}/visao-por-area`);
+  };
   const [loading, setLoading] = useState(true);
   const [atividades, setAtividades] = useState<any[]>([]);
   const [destaques, setDestaques] = useState<any[]>([]);
@@ -180,8 +184,11 @@ export function ActivitiesPrecedents() {
       <Sidebar>
         {!loading ? (
           <ContainerPagina>
-            <TituloPagina botaoVoltar={true}>
+            {/* <TituloPagina botaoVoltar={true}>
               {atividades[0] ? atividades[0].sonda : ""}
+            </TituloPagina> */}
+            <TituloPagina botaoVoltar={true}>
+              Visão Por Precedentes
             </TituloPagina>
             <Flex justify={"space-between"} gap={1} wrap={"wrap"} mb={4}>
               <Flex gap={2}>
@@ -191,17 +198,38 @@ export function ActivitiesPrecedents() {
                       setRefresh={setRefresh}
                       refresh={refresh}
                     /> */}
-              </Flex>
-              <Flex gap={4} wrap={"wrap"}>
-                {statusProjeto.map((status, index) => (
-                  <StatusProjeto
-                    key={index}
-                    status={status.status}
-                    color={status.color}
-                  />
-                ))}
+                <Button
+                  h={"56px"}
+                  borderRadius={"10px"}
+                  variant="outline"
+                  border={"2px solid"}
+                  borderColor={"origem.500"}
+                  textColor={"origem.500"}
+                  _hover={{
+                    borderColor: "origem.600",
+                    backgroundColor: "origem.500",
+                    textColor: "white",
+                    transition: "all 0.4s",
+                  }}
+                  onClick={() => {
+                    handleClick();
+                  }}
+                >
+                  {" "}
+                  Visão Por Área
+                </Button>
               </Flex>
             </Flex>
+            <Flex gap={4} wrap={"wrap"} justify={"end"}>
+              {statusProjeto.map((status, index) => (
+                <StatusProjeto
+                  key={index}
+                  status={status.status}
+                  color={status.color}
+                />
+              ))}
+            </Flex>
+
             <ArcherContainer
               startMarker={true}
               endMarker={false}

@@ -25,11 +25,8 @@ import {
 import { Ring } from "@uiball/loaders";
 import { ProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
-import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
-import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
-
 import { formatDate } from "utils/formatDate";
-import { handleCancelar } from "utils/handleCadastro";
+import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
 
@@ -85,9 +82,9 @@ function ModalCadastroIntervencao({
     if (id === 0) {
       registerForm.setFieldValue("atividades", [
         {
+          id_origem: "",
           area_id: 0,
           tarefa_id: 0,
-          responsavel_id: 0,
           qtde_dias: 0,
           precedentes: listaAtividadesPrecedentes,
         },
@@ -96,11 +93,12 @@ function ModalCadastroIntervencao({
       const atividades = await getAtividadasByProjetosTipoId(id);
 
       const atividadesFormatadas = atividades.data.map((atividade: any) => ({
+        id_origem: atividade.nome_atividade,
         area_id: atividade.id_area,
         tarefa_id: atividade.id_tarefa,
-        responsavel_id: atividade.responsavel_id,
         qtde_dias: atividade.qtde_dias,
         precedentes: atividade.precedentes,
+        ind_atv_execucao: false,
       }));
 
       registerForm.setFieldValue("atividades", atividadesFormatadas);
@@ -131,9 +129,11 @@ function ModalCadastroIntervencao({
     const { cod_erro } = data;
 
     if (cod_erro === 0) {
-      registerForm.setFieldValue("erroDataIntervencao", true);
-    } else {
       registerForm.setFieldValue("erroDataIntervencao", false);
+    } else if (cod_erro === null) {
+      registerForm.setFieldValue("erroDataIntervencao", false);
+    } else {
+      registerForm.setFieldValue("erroDataIntervencao", true);
     }
 
     const quantidadeDias = registerForm.values.atividades.reduce(
@@ -147,9 +147,9 @@ function ModalCadastroIntervencao({
     );
     setDataFinalPrevista(dataFimPrevista);
 
-    // if (dataFimPrevista > dataLimite) {
-    registerForm.setFieldValue("erroDataIntervencao", true);
-    // }
+    if (dataFimPrevista > dataLimite) {
+      registerForm.setFieldValue("erroDataIntervencao", true);
+    }
   };
 
   useEffect(() => {
@@ -231,8 +231,6 @@ function ModalCadastroIntervencao({
   useEffect(() => {
     setValueProgressoMensagemErro(100);
   }, [dataLimite]);
-
-  // console.log("registerForm", registerForm.values);
 
   return (
     <>
@@ -385,7 +383,6 @@ function ModalCadastroIntervencao({
                     />
 
                     <Stack>
-                      {/* <Text fontWeight={"bold"}>Comentários</Text> */}
                       <FormControl>
                         <Flex gap={1}>
                           <Text
@@ -416,19 +413,79 @@ function ModalCadastroIntervencao({
 
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
-                <BotaoVermelhoLargoGhost
-                  text={"Cancelar"}
-                  formikForm={registerForm}
-                  onClose={onClose}
-                />
-                <BotaoAzulLargoPrimary
-                  text={"Cadastrar"}
-                  formikForm={registerForm}
-                  onClose={onClose}
-                  setRefresh={setRefresh}
-                  refresh={refresh}
-                  loading={loading}
-                />
+                <Button
+                  h={"56px"}
+                  variant="ghost"
+                  color="red.500"
+                  w={"208px"}
+                  onClick={() => {
+                    setDataFinalPrevista("");
+                    handleCancelar(registerForm, onClose);
+                  }}
+                  _hover={{
+                    background: "red.600",
+                    transition: "all 0.4s",
+                    color: "white",
+                  }}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
+                  borderRadius={"8px"}
+                  fontFamily={"Mulish"}
+                >
+                  <Text
+                    fontSize="18px"
+                    fontWeight={"700"}
+                    fontFamily={"Mulish"}
+                    mx={12}
+                  >
+                    Cancelar
+                  </Text>
+                </Button>
+                <Button
+                  w={"208px"}
+                  h={"56px"}
+                  borderRadius={"8px"}
+                  disabled={
+                    !registerForm.isValid ||
+                    !registerForm.dirty ||
+                    !registerForm.values.atividades.some(
+                      (atividade: any) => atividade.ind_atv_execucao === true
+                    )
+                  }
+                  background={"origem.500"}
+                  fontSize={"18px"}
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
+                  variant="primary"
+                  color="white"
+                  onClick={() =>
+                    handleCadastrarRefresh(
+                      registerForm,
+                      onClose,
+                      setRefresh,
+                      refresh
+                    )
+                  }
+                  _hover={{
+                    background: "origem.600",
+                    transition: "all 0.4s",
+                  }}
+                >
+                  {loading ? (
+                    <Ring speed={2} lineWeight={5} color="white" size={24} />
+                  ) : (
+                    <>
+                      <Text
+                        fontSize="18px"
+                        fontWeight={"700"}
+                        fontFamily={"Mulish"}
+                        mx={12}
+                      >
+                        Cadastrar
+                      </Text>
+                    </>
+                  )}
+                </Button>
               </Flex>
             </ModalFooter>
           </form>

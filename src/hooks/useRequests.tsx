@@ -102,8 +102,8 @@ export function useRequests(id?: number, mes?: string) {
     );
     setListaMetodosElevacao(metodosElevacaoSorted);
 
-    if (id && mes) {
-      const tabelaCentroDeCusto = await getCentroDeCustoProjetos(id, mes);
+    if (id) {
+      const tabelaCentroDeCusto = await getCentroDeCustoProjetos(id);
       const centroDeCustoFormatado = tabelaCentroDeCusto.data.centroDeCusto.map(
         (item: TabelaCentroDeCusto) => ({
           ...item,

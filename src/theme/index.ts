@@ -1,6 +1,7 @@
 import { extendTheme } from "@chakra-ui/react";
 
 import { ButtonStyles as Button } from "./components/buttonStyles";
+import { CheckboxStyles as Checkbox } from "./components/checkboxStyles";
 import { InputStyles as Input } from "./components/inputStyles";
 import { modalTheme as Modal } from "./components/modalStyles";
 import foundations from "./foundations";
@@ -21,6 +22,7 @@ export const theme = {
     Button,
     Input,
     Modal,
+    Checkbox,
   },
 };
 

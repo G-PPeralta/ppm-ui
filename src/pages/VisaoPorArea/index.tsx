@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 
-import { Flex } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import ContainerPagina from "components/ContainerPagina";
@@ -47,9 +48,12 @@ function validateDate(
 
 function VisaoPorArea() {
   const { id } = useParams();
+  const handleClick = () => {
+    navigate(`/infographics/atividade/${id}/precedentes`);
+  };
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any[]>([] as Area[]);
-
+  const navigate = useNavigate();
   const requestHandler = async () => {
     const response = await getAtividadesCampanha(id);
     const payload = response.data;
@@ -138,8 +142,27 @@ function VisaoPorArea() {
             >
               <Flex gap={2} wrap={"wrap"}>
                 <BotaoVisaoGeral />
+                <Button
+                  h={"56px"}
+                  borderRadius={"10px"}
+                  variant="outline"
+                  border={"2px solid"}
+                  borderColor={"origem.500"}
+                  textColor={"origem.500"}
+                  _hover={{
+                    borderColor: "origem.600",
+                    backgroundColor: "origem.500",
+                    textColor: "white",
+                    transition: "all 0.4s",
+                  }}
+                  onClick={() => {
+                    handleClick();
+                  }}
+                >
+                  Visão Por Precedentes
+                </Button>
               </Flex>
-              <Flex gap={4} wrap={"wrap"}>
+              <Flex gap={4} wrap={"wrap"} justify={"end"}>
                 {statusProjeto.map((status, index) => (
                   <StatusProjeto
                     key={index}
