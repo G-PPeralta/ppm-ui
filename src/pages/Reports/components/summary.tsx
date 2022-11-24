@@ -35,8 +35,8 @@ type Props = {
 
 export function ProjectSummary({ data, table, dataTable }: Props) {
   function createPieData(data: SummaryData) {
-    const p = Number(data.percent ? data.percent : 65);
-    // Chave .percent ainda não presente no back
+    const p = Number(data.percent);
+
     const pieData = [
       {
         name: "Undone",
@@ -51,11 +51,29 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
   }
 
   function calculatePercet(data: SummaryData) {
+    if (data.budget && data.realized && data.budget > 0 && data.realized > 0) {
+      const percents = {
+        undone:
+          ((+data.budget - +data.realized) / +data.budget) * 100 > 100
+            ? 100
+            : ((+data.budget - +data.realized) / +data.budget) * 100,
+        done:
+          ((+data.budget - (+data.budget - +data.realized)) / +data.budget) *
+            100 >
+          100
+            ? 100
+            : ((+data.budget - (+data.budget - +data.realized)) /
+                +data.budget) *
+              100,
+      };
+
+      return percents;
+    }
     const percents = {
-      undone: ((+data.budget - +data.realized) / +data.budget) * 100,
-      done:
-        ((+data.budget - (+data.budget - +data.realized)) / +data.budget) * 100,
+      undone: 0,
+      done: 0,
     };
+
     return percents;
   }
 
