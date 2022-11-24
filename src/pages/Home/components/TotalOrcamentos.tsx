@@ -80,10 +80,10 @@ export default function TotalOrcamentosComponent() {
             </Text> */}
             <Text
               ml={2}
-              sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
+              sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
-              {!loading && valorTotalOrcamento === 0 ? "0,00" : vlrTratado}
+              {!loading && valorTotalOrcamento === 0 ? "R$ 0,00" : vlrTratado}
             </Text>
           </Box>
         </Box>

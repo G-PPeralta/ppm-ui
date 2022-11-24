@@ -123,13 +123,13 @@ export default function TotalProjetosComponent() {
   // ];
 
   const dataEntries = [
-    { name: "Iniciados", color: "#93E01B" },
-    { name: "Finalizados", color: "#2E69FD" },
-    { name: "Cancelados", color: "#F94144" },
-    { name: "Holds", color: "#F4DD06" },
-    { name: "Não_Iniciados", color: "#aaaaaa" },
-    { name: "Reprogramados", color: "#ffa70f" },
-    { name: "Pré_Aprovação", color: "#c50ffc" },
+    { name: "Iniciados", color: "#649efd" },
+    { name: "Finalizados", color: "#4d87e5" },
+    { name: "Cancelados", color: "#3771d1" },
+    { name: "Holds", color: "#2762c2" },
+    { name: "Não_Iniciados", color: "#1954b4" },
+    { name: "Reprogramados", color: "#1048a4" },
+    { name: "Pré_Aprovação", color: "#003a9a" },
   ];
 
   return (
@@ -202,7 +202,7 @@ export default function TotalProjetosComponent() {
                 <Flex gap={1} flex={1} align={"center"}>
                   <Text
                     p={1}
-                    bg={"#93E01B"}
+                    bg={"#649efd"}
                     sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                     color="#ffffff"
                   >
@@ -220,7 +220,7 @@ export default function TotalProjetosComponent() {
                 <Flex gap={1} flex={1} align={"center"}>
                   <Text
                     p={1}
-                    bg={"#2E69FD"}
+                    bg={"#4d87e5"}
                     sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                     color="#ffffff"
                   >
@@ -238,7 +238,7 @@ export default function TotalProjetosComponent() {
                 <Flex gap={1} flex={1} align={"center"}>
                   <Text
                     p={1}
-                    bg={"#F94144"}
+                    bg={"#3771d1"}
                     sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                     color="#ffffff"
                   >
@@ -256,11 +256,11 @@ export default function TotalProjetosComponent() {
                 <Flex gap={1} flex={1} align={"center"}>
                   <Text
                     p={1}
-                    bg={"#F4DD06"}
+                    bg={"#2762c2"}
                     sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                     color="#ffffff"
                   >
-                    {holds} Projetos Holds
+                    {holds} Projetos on Hold
                   </Text>
                   <Text
                     p={1}
@@ -274,7 +274,7 @@ export default function TotalProjetosComponent() {
                 <Flex gap={1} flex={1} align={"center"}>
                   <Text
                     p={1}
-                    bg={"#aaaaaa"}
+                    bg={"#1954b4"}
                     sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                     color="#ffffff"
                   >
@@ -283,7 +283,7 @@ export default function TotalProjetosComponent() {
                   <Text
                     p={1}
                     sx={{ fontSize: 14, fontWeight: "600" }}
-                    color="#aaaaaa"
+                    color="#1954b4"
                   >
                     {total === 0 ? 0 : Math.round((naoIniciado / total) * 100)}%
                   </Text>
@@ -292,7 +292,7 @@ export default function TotalProjetosComponent() {
                 <Flex gap={1} flex={1} align={"center"}>
                   <Text
                     p={1}
-                    bg={"#ffa70f"}
+                    bg={"#1048a4"}
                     sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                     color="#ffffff"
                   >
@@ -301,7 +301,7 @@ export default function TotalProjetosComponent() {
                   <Text
                     p={1}
                     sx={{ fontSize: 14, fontWeight: "600" }}
-                    color="#ffa70f"
+                    color="#1048a4"
                   >
                     {total === 0 ? 0 : Math.round((reprogramado / total) * 100)}
                     %
@@ -311,7 +311,7 @@ export default function TotalProjetosComponent() {
                 <Flex gap={1} flex={1} align={"center"}>
                   <Text
                     p={1}
-                    bg={"#c50ffc"}
+                    bg={"#003a9a"}
                     sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                     color="#ffffff"
                   >
@@ -320,7 +320,7 @@ export default function TotalProjetosComponent() {
                   <Text
                     p={1}
                     sx={{ fontSize: 14, fontWeight: "600" }}
-                    color="#c50ffc"
+                    color="#003a9a"
                   >
                     {total === 0 ? 0 : Math.round((preAprovacao / total) * 100)}
                     %
