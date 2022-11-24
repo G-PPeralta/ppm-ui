@@ -23,13 +23,13 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 import SelectFiltragem from "components/SelectFiltragem";
 
 import { formataParaTipo } from "utils/FormataParaTipo";
 import { formatDateToddMMyyyyhhmmCronograma } from "utils/formatDate";
+import { handleCadastrarRefresh } from "utils/handleCadastro";
 
 import { useDetalhamentoProjeto } from "contexts/DetalhamentoDeProjetos";
 
@@ -75,6 +75,7 @@ function ModalEditarAtividade({
   onClose,
   registerForm,
   loading,
+  setInfoProjetoRefresh,
 }: any) {
   const { id } = useParams();
   const { areaResponsavel } = useDetalhamentoProjeto();
@@ -98,10 +99,15 @@ function ModalEditarAtividade({
         areaResponsavel.nom_responsavel === item.Responsavel
     )?.id;
 
-    const dat_ini_real = new Date(item.StartDate).getTime() + 3 * 3600 * 1000;
-    const dat_fim_real = new Date(item.EndDate).getTime() + 3 * 3600 * 1000;
-    const dat_ini_plan =
-      new Date(item.BaselineStartDate).getTime() + 3 * 3600 * 1000;
+    const dat_ini_real = new Date(
+      new Date(item.StartDate).getTime() + 3 * 3600 * 1000
+    );
+    const dat_fim_real = new Date(
+      new Date(item.EndDate).getTime() + 3 * 3600 * 1000
+    );
+    const dat_ini_plan = new Date(
+      new Date(item.BaselineStartDate).getTime() + 3 * 3600 * 1000
+    );
 
     registerForm.setFieldValue("id_atividade", editAtividade.id_atividade);
     registerForm.setFieldValue("nome_atividade", editAtividade.nome_atividade);
@@ -339,14 +345,47 @@ function ModalEditarAtividade({
                   onClose={onClose}
                   formikForm={registerForm}
                 />
-                <BotaoAzulPrimary
-                  text="Gravar"
+                <Button
+                  h={"56px"}
+                  w={"208px"}
+                  borderRadius={"8px"}
+                  background={"origem.500"}
+                  variant="primary"
+                  color="white"
+                  onClick={() => {
+                    handleCadastrarRefresh(
+                      registerForm,
+                      onClose,
+                      setRefresh,
+                      refresh
+                    );
+                    setInfoProjetoRefresh();
+                  }}
+                  _hover={{
+                    background: "origem.600",
+                    transition: "all 0.4s",
+                  }}
+                >
+                  {
+                    <>
+                      <Text
+                        fontSize="18px"
+                        fontWeight={"700"}
+                        fontFamily={"Mulish"}
+                      >
+                        Concluir
+                      </Text>
+                    </>
+                  }
+                </Button>
+                {/* <BotaoAzulPrimary
+                  text="Concluir"
                   onClose={onClose}
                   formikForm={registerForm}
                   refresh={refresh}
                   setRefresh={setRefresh}
                   loading={loading}
-                />
+                /> */}
               </Flex>
             </ModalFooter>
           </form>
