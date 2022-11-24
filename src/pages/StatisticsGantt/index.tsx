@@ -48,8 +48,6 @@ function StatisticsGantt() {
     setRefresh,
     projeto
   );
-  const toolbarOptions = ["ZoomIn", "ZoomOut"];
-
   const formatToGanttData = (data: any) => {
     if (!data) return;
     const newGantt = data.atividades
@@ -197,7 +195,6 @@ function StatisticsGantt() {
                     handleGetAllData={handleGetAllData}
                     options={{
                       showGantt: true,
-                      toolbarOptions,
                     }}
                     edit={{
                       onOpen,
