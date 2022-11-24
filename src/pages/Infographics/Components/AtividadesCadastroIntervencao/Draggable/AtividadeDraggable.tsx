@@ -6,6 +6,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import {
   Box,
+  Checkbox,
   Flex,
   NumberInput,
   NumberInputField,
@@ -38,6 +39,20 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
+  // const [checked, setChecked] = useState<boolean>(false);
+  const [disabled, setDisabled] = useState<boolean>(false);
+
+  // console.log(checked);
+  // console.log(checked == "checked");
+
+  // console.log(registerForm.values.ind_atv_execucao);
+
+  // useEffect(() => {
+  //   // registerForm.setFieldValue(
+  //   //   `atividades[${index}].ind_atv_execucao`,
+  //   //   checked !== "checked"
+  //   // );
+  // }, [checked]);
 
   const remove = (index: number) => {
     if (registerForm.values.atividades.length > 1) {
@@ -88,6 +103,20 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     setDraggableId(newId);
   }, []);
 
+  useEffect(() => {
+    const atividadeDefinida = registerForm.values.atividades.some(
+      (atividade: any) => atividade.ind_atv_execucao === true
+    );
+    if (
+      atividadeDefinida &&
+      registerForm.values.atividades[index].ind_atv_execucao === false
+    ) {
+      setDisabled(!disabled);
+    } else {
+      setDisabled(false);
+    }
+  }, [registerForm.values.atividades]);
+
   return (
     <Draggable draggableId={draggableId} index={index}>
       {(provided) => (
@@ -99,7 +128,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
           <Box
             display="flex"
             flexWrap="wrap"
-            flexDirection="row"
+            flexDirection="column"
             alignItems="center"
             justifyContent="center"
             w="100%"
@@ -108,11 +137,13 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
             py={4}
             borderRadius={"60px"}
             mb={2}
+            gap={3}
           >
             <Flex
               flexDirection={"row"}
               gap={4}
               flex={1}
+              w="100%"
               justify={"space-between"}
             >
               <Flex align={"center"} justify={"center"} gap={3}>
@@ -124,91 +155,119 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
 
               <Flex
                 gap={4}
-                direction={innerwidth >= 640 ? "row" : "column"}
-                align={"center"}
+                direction={"column"}
+                align={"start"}
                 justify={"center"}
                 py={innerwidth >= 640 ? 0 : 4}
                 flex={1}
               >
-                <Flex direction={"column"} flex={2}>
-                  <SelectFiltragem
-                    registerForm={registerForm}
-                    required={true}
-                    nomeSelect={"ÁREA"}
-                    propName={`atividades[${index}].area_id`}
-                    options={optionsAreaAtuacao}
-                    value={getValue(optionsAreaAtuacao, index, "area_id")}
-                  />
-                </Flex>
-
-                <Flex direction={"column"} flex={2}>
-                  <SelectFiltragem
-                    registerForm={registerForm}
-                    required={true}
-                    nomeSelect={"ATIVIDADE"}
-                    propName={`atividades[${index}].tarefa_id`}
-                    options={optionsTarefa}
-                    value={getValue(optionsTarefa, index, "tarefa_id")}
-                  />
-                </Flex>
-
-                <Flex direction={"column"} flex={2}>
-                  <SelectFiltragem
-                    required={true}
-                    nomeSelect={"RESPONSÁVEL"}
-                    registerForm={registerForm}
-                    propName={`atividades[${index}].responsavel_id`}
-                    options={optionsResponsaveis}
-                    value={getValue(
-                      optionsResponsaveis,
-                      index,
-                      "responsavel_id"
-                    )}
-                  />
-                </Flex>
-
-                <Flex direction={"column"} flex={1}>
-                  <Flex gap={1}>
-                    <RequiredField />
-                    <Text
-                      fontWeight={"bold"}
-                      fontSize={"12px"}
-                      color={"#949494"}
-                    >
-                      DIAS
-                    </Text>
+                <Flex
+                  gap={4}
+                  direction={innerwidth >= 640 ? "row" : "column"}
+                  align={"center"}
+                  justify={"center"}
+                  py={innerwidth >= 640 ? 0 : 4}
+                  flex={1}
+                  w="100%"
+                >
+                  <Flex direction={"column"} flex={2}>
+                    <SelectFiltragem
+                      registerForm={registerForm}
+                      required={true}
+                      nomeSelect={"ÁREA"}
+                      propName={`atividades[${index}].area_id`}
+                      options={optionsAreaAtuacao}
+                      value={getValue(optionsAreaAtuacao, index, "area_id")}
+                    />
                   </Flex>
-                  <NumberInput
-                    maxW={"128px"}
-                    max={99999}
-                    min={0}
-                    id={`atividades[${index}].qtde_dias`}
-                    name={`atividades[${index}].qtde_dias`}
-                    value={registerForm.values.atividades[index].qtde_dias}
-                    onChange={(value) => {
+
+                  <Flex direction={"column"} flex={2}>
+                    <SelectFiltragem
+                      registerForm={registerForm}
+                      required={true}
+                      nomeSelect={"ATIVIDADE"}
+                      propName={`atividades[${index}].tarefa_id`}
+                      options={optionsTarefa}
+                      value={getValue(optionsTarefa, index, "tarefa_id")}
+                    />
+                  </Flex>
+
+                  <Flex direction={"column"} flex={2}>
+                    <SelectFiltragem
+                      required={true}
+                      nomeSelect={"RESPONSÁVEL"}
+                      registerForm={registerForm}
+                      propName={`atividades[${index}].responsavel_id`}
+                      options={optionsResponsaveis}
+                      value={getValue(
+                        optionsResponsaveis,
+                        index,
+                        "responsavel_id"
+                      )}
+                    />
+                  </Flex>
+
+                  <Flex direction={"column"} flex={1}>
+                    <Flex gap={1}>
+                      <RequiredField />
+                      <Text
+                        fontWeight={"bold"}
+                        fontSize={"12px"}
+                        color={"#949494"}
+                      >
+                        DIAS
+                      </Text>
+                    </Flex>
+                    <NumberInput
+                      maxW={"128px"}
+                      max={99999}
+                      min={0}
+                      id={`atividades[${index}].qtde_dias`}
+                      name={`atividades[${index}].qtde_dias`}
+                      value={registerForm.values.atividades[index].qtde_dias}
+                      onChange={(value) => {
+                        registerForm.setFieldValue(
+                          `atividades[${index}].qtde_dias`,
+                          Number(value)
+                        );
+                      }}
+                    >
+                      <NumberInputField bg={"#fff"} h={"56px"} />
+                    </NumberInput>
+                  </Flex>
+                  <Flex direction={"column"} flex={1}>
+                    <Flex gap={1}>
+                      <Text
+                        fontWeight={"bold"}
+                        fontSize={"12px"}
+                        color={"#949494"}
+                      >
+                        PRECEDENTES
+                      </Text>
+                    </Flex>
+                    <PopOverPrecedentes
+                      registerForm={registerForm}
+                      index={index}
+                    />
+                  </Flex>
+                </Flex>
+                <Flex>
+                  <Checkbox
+                    isChecked={
+                      registerForm.values.atividades[index].ind_atv_execucao
+                    }
+                    onChange={(e) => {
                       registerForm.setFieldValue(
-                        `atividades[${index}].qtde_dias`,
-                        Number(value)
+                        `atividades[${index}].ind_atv_execucao`,
+                        e.target.checked
                       );
                     }}
+                    isDisabled={disabled}
+                    size="md"
+                    colorScheme="blue"
                   >
-                    <NumberInputField bg={"#fff"} h={"56px"} />
-                  </NumberInput>
-                </Flex>
-                <Flex direction={"column"} flex={1}>
-                  <Flex gap={1}>
-                    <Text
-                      fontWeight={"bold"}
-                      fontSize={"12px"}
-                      color={"#949494"}
-                    >
-                      PRECEDENTES
-                    </Text>
-                  </Flex>
-                  <PopOverPrecedentes
-                    registerForm={registerForm}
-                    index={index}
-                  />
+                    Primeira atividade do Cronograma de Execução
+                  </Checkbox>
                 </Flex>
               </Flex>
               <Flex

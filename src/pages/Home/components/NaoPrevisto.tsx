@@ -81,7 +81,7 @@ export default function NaoPrevistoComponent() {
             </Text> */}
             <Text
               ml={2}
-              sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
+              sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
               {!loading && valorNaoPrevisto <= 0
@@ -96,12 +96,12 @@ export default function NaoPrevistoComponent() {
         <Box
           justifyContent="center"
           alignItems="center"
-          bg={"#F94144"}
+          bg={valorNaoPrevisto > 0 ? "#F94144" : "#27852a"}
           sx={{ height: "100%", alignItems: "center", borderRadius: "2px" }}
         >
           <Text
             p={1}
-            sx={{ fontSize: 20, fontWeight: "600", alignSelf: "center" }}
+            sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
             color="#ffffff"
           >
             {/* {!totalNaoPrevisto ||

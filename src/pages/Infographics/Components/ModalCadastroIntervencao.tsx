@@ -232,22 +232,7 @@ function ModalCadastroIntervencao({
     setValueProgressoMensagemErro(100);
   }, [dataLimite]);
 
-  // TODA VEZ QUE A MENSAGEM DE ERRO FOR ALTERADA, O PROGRESSO DA MENSAGEM DE ERRO É ALTERADO
-  // PARA 100, E ENTÃO ELE VAI DIMINUINDO ATÉ 0 DURANTE 10 SEGUNDOS
-  // useEffect(() => {
-  //   setValueProgressoMensagemErro(100);
-  //   if (registerForm.values.erroDataIntervencao) {
-  //     const interval = setInterval(() => {
-  //       setValueProgressoMensagemErro((value) => {
-  //         if (value === 0) {
-  //           return 0;
-  //         }
-  //         return value - 1;
-  //       });
-  //     }, 1000);
-  //     return () => clearInterval(interval);
-  //   }
-  // }, [registerForm.values.erroDataIntervencao]);
+  // console.log("registerForm", registerForm.values);
 
   return (
     <>
