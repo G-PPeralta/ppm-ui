@@ -198,3 +198,9 @@ export async function getAreaResponsavel(): Promise<any> {
 
   return response.data;
 }
+
+export async function getRelacoesExecucao(id: number | string): Promise<any> {
+  const response = await api.get(`/projetos/relacoesexecucao/${id}`, token());
+
+  return response.data;
+}

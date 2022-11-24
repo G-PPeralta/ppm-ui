@@ -43,6 +43,10 @@ function CadastrarProjeto() {
     optionsGates,
   } = useProjetos();
 
+  const tiposProjetos = optionsTipoProjetos.filter(
+    (option: any) => option.label !== "Intervenção"
+  );
+
   const innerWidth = window.innerWidth;
 
   const getValue = (options: any, chave: any) => {
@@ -390,7 +394,7 @@ function CadastrarProjeto() {
                         required={true}
                         refreshState={refreshState}
                         registerForm={registerForm}
-                        listaOptions={optionsTipoProjetos}
+                        listaOptions={tiposProjetos}
                         nomeLabel={"TIPO"}
                         payloadKey={"tipo"}
                         propName={"tipoProjetoId"}
@@ -401,9 +405,9 @@ function CadastrarProjeto() {
                         registerForm={registerForm}
                         nomeSelect={"TIPO"}
                         propName={"tipoProjetoId"}
-                        options={optionsTipoProjetos}
+                        options={tiposProjetos}
                         required={true}
-                        value={getValue(optionsTipoProjetos, "tipoProjetoId")}
+                        value={getValue(tiposProjetos, "tipoProjetoId")}
                       />
                     )}
                   </Flex>
