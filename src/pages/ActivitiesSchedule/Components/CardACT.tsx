@@ -23,6 +23,7 @@ type Atividade = {
   qtddias: number;
   sonda: string;
   ind_alerta?: number;
+  ind_status?: number;
 };
 
 type Props = {
@@ -86,7 +87,8 @@ function CardACT({ atividade, id, setRefresh, refresh }: Props) {
         Number(atividade.comp_pct),
         Number(atividade.pct_real),
         atividade.finalplanejado,
-        Number(atividade.ind_alerta)
+        Number(atividade.ind_alerta),
+        Number(atividade.ind_status)
       )}
       px={5}
       py={3}
