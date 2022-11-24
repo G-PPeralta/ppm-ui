@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Flex, Heading, Text } from "@chakra-ui/react";
 
-import { formatDate } from "utils/formatDate";
+// import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
 
 type Poco = {
@@ -17,6 +17,7 @@ type Poco = {
   poco: string;
   sonda: string;
   ind_alerta?: number;
+  ind_status?: number;
 };
 
 type Props = {
@@ -26,8 +27,10 @@ type Props = {
 
 function CardPIR({ poco, index }: Props) {
   const navigate = useNavigate();
-  const dataInicioFormatada = formatDate(new Date(poco.inicioplanejado));
-  const dataFimFormatada = formatDate(new Date(poco.finalplanejado));
+  const dataInicioFormatada = poco.inicioplanejado;
+  const dataFimFormatada = poco.finalplanejado;
+  // const dataInicioFormatada = formatDate(new Date(poco.inicioplanejado));
+  // const dataFimFormatada = formatDate(new Date(poco.finalplanejado));
 
   const intervencaoFoiIniciada = index === 0 && poco.pct_real !== "0";
 
@@ -59,7 +62,8 @@ function CardPIR({ poco, index }: Props) {
             Number(poco.comp_pct),
             Number(poco.pct_real),
             poco.finalplanejado,
-            Number(poco.ind_alerta)
+            Number(poco.ind_alerta),
+            Number(poco.ind_status)
           )}
           px={5}
           py={3}

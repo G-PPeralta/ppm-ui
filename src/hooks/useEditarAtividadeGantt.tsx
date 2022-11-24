@@ -76,7 +76,9 @@ export function useEditarAtividadeGantt() {
       const id = values.id_atividade;
       const dat_ini = new Date(values.inicio_realizado);
       const dat_fim = new Date(values.fim_realizado);
-      const dat_ini_plan = new Date(values.inicio_planejado);
+      const dat_ini_plan = new Date(
+        new Date(values.inicio_planejado).getTime() - 3 * 3600 * 1000
+      );
       const newValues = {
         nome_atividade: values.nome_atividade,
         dat_ini_real: dat_ini.toISOString(),
