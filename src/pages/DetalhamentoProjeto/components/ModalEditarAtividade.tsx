@@ -120,8 +120,6 @@ function ModalEditarAtividade({
     registerForm.setFieldValue("fim_planejado", item.BaselineEndDate);
   };
 
-  console.log(registerForm);
-
   const addDays = (date: any, days: any) => {
     const result = new Date(date);
     result.setDate(result.getDate() + days);
