@@ -49,7 +49,7 @@ function CardPIR({ poco, index }: Props) {
     <>
       <Flex direction={"row"} gap={4} onClick={() => transfer()}>
         <Flex align={"center"} justify={"center"}>
-          <Heading as="h3" size="md" textAlign={"center"} width={"60px"}>
+          <Heading as="h3" size="sm" textAlign={"center"} width={"60px"}>
             {intervencaoFoiIniciada ? "Atual" : `${index + 1}º`}
           </Heading>
         </Flex>
@@ -76,7 +76,7 @@ function CardPIR({ poco, index }: Props) {
         >
           <Flex>
             <Text
-              fontSize={"lg"}
+              fontSize={"sm"}
               color={poco.ind_alerta === 1 ? "#000000" : "#FEFEFE"}
               fontWeight={"bold"}
             >
@@ -86,7 +86,7 @@ function CardPIR({ poco, index }: Props) {
           <Flex direction={"column"} w={"100%"}>
             <Flex direction={"row"} justify={"space-between"} w={"100%"}>
               <Text
-                fontSize={"md"}
+                fontSize={"sm"}
                 color={poco.ind_alerta === 1 ? "#000000" : "#FEFEFE"}
                 fontWeight={"bold"}
                 textAlign={"start"}
@@ -95,7 +95,7 @@ function CardPIR({ poco, index }: Props) {
                 Data Início:
               </Text>
               <Text
-                fontSize={"md"}
+                fontSize={"sm"}
                 color={poco.ind_alerta === 1 ? "#000000" : "#FEFEFE"}
                 fontWeight={"semi-bold"}
                 textAlign={"end"}
@@ -107,7 +107,7 @@ function CardPIR({ poco, index }: Props) {
             </Flex>
             <Flex direction={"row"} justify={"space-between"} w={"100%"}>
               <Text
-                fontSize={"md"}
+                fontSize={"sm"}
                 color={poco.ind_alerta === 1 ? "#000000" : "#FEFEFE"}
                 fontWeight={"bold"}
                 textAlign={"start"}
@@ -116,7 +116,7 @@ function CardPIR({ poco, index }: Props) {
                 Data Fim:
               </Text>
               <Text
-                fontSize={"md"}
+                fontSize={"sm"}
                 color={poco.ind_alerta === 1 ? "#000000" : "#FEFEFE"}
                 fontWeight={"semi-bold"}
                 textAlign={"end"}
@@ -128,7 +128,7 @@ function CardPIR({ poco, index }: Props) {
             </Flex>
             <Flex direction={"row"} justify={"space-between"} w={"100%"}>
               <Text
-                fontSize={"md"}
+                fontSize={"sm"}
                 color={poco.ind_alerta === 1 ? "#000000" : "#FEFEFE"}
                 fontWeight={"bold"}
                 textAlign={"start"}
@@ -137,7 +137,7 @@ function CardPIR({ poco, index }: Props) {
                 Planejado:
               </Text>
               <Text
-                fontSize={"md"}
+                fontSize={"sm"}
                 color={poco.ind_alerta === 1 ? "#000000" : "#FEFEFE"}
                 fontWeight={"semi-bold"}
                 textAlign={"end"}
@@ -149,7 +149,7 @@ function CardPIR({ poco, index }: Props) {
             </Flex>
             <Flex direction={"row"} justify={"space-between"} w={"100%"}>
               <Text
-                fontSize={"md"}
+                fontSize={"sm"}
                 color={poco.ind_alerta === 1 ? "#000000" : "#FEFEFE"}
                 fontWeight={"bold"}
                 textAlign={"start"}
@@ -158,7 +158,7 @@ function CardPIR({ poco, index }: Props) {
                 Realizado:
               </Text>
               <Text
-                fontSize={"md"}
+                fontSize={"sm"}
                 color={poco.ind_alerta === 1 ? "#000000" : "#FEFEFE"}
                 fontWeight={"semi-bold"}
                 textAlign={"end"}
