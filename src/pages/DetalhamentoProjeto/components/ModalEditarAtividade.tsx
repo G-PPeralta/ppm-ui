@@ -168,6 +168,7 @@ function ModalEditarAtividade({
                             borderRadius={"8px"}
                             fontSize={"14px"}
                             fontWeight={"400"}
+                            disabled={editAtividade.pct_real === 100}
                             fontFamily={"Mulish"}
                             border={"1px solid #949494"}
                             mt={"-9px"}
@@ -186,6 +187,7 @@ function ModalEditarAtividade({
                           <SelectFiltragem
                             registerForm={registerForm}
                             nomeSelect={"ÁREA RESPONSÁVEL"}
+                            isDisabled={editAtividade.pct_real === 100}
                             propName={"responsavel_id"}
                             options={areaResponsavel.data
                               .map((areaResponsavel: any) => ({
@@ -217,6 +219,7 @@ function ModalEditarAtividade({
                     <Flex flex={1}>
                       <DateTimePicker
                         registerForm={registerForm}
+                        isDisabled={editAtividade.pct_real === 100}
                         value={"inicio_planejado"}
                         label={"INÍCIO PLANEJADO"}
                         required={false}
@@ -259,6 +262,7 @@ function ModalEditarAtividade({
                       placeholder="Duração em Dias"
                       id="duracao_dias"
                       name="duracao_dias"
+                      isDisabled={editAtividade.pct_real === 100}
                       max={999999999999}
                       min={1}
                       value={formataParaTipo(
@@ -292,6 +296,7 @@ function ModalEditarAtividade({
                       <Flex flex={1} mt={4} mb={2}>
                         <DateTimePicker
                           registerForm={registerForm}
+                          isDisabled={editAtividade.pct_real === 100}
                           value={"inicio_realizado"}
                           label={"INÍCIO REALIZADO"}
                           required={false}
@@ -301,6 +306,7 @@ function ModalEditarAtividade({
                       <Flex flex={1} mt={4} mb={2}>
                         <DateTimePicker
                           registerForm={registerForm}
+                          isDisabled={editAtividade.pct_real === 100}
                           value={"fim_realizado"}
                           label={"FIM REALIZADO"}
                           required={false}
