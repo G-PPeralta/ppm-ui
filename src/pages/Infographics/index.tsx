@@ -20,7 +20,8 @@ import ModalCadastroAtividade from "./Components/ModalCadastroAtividade";
 // import ModalCadastroPoco from "./Components/ModalCadastroPoco";
 import ModalCadastroProjetoTipo from "./Components/ModalCadastroProjetoTipo";
 import ModalNovaCampanha from "./Components/ModalNovaCampanha";
-import ModalReorder from "./Components/ModalReorder";
+// import ModalReorder from "./Components/ModalReorder";
+import ModalReorderSimples from "./Components/ModalReorderSimples";
 
 export function Infographics() {
   const [loading, setLoading] = useState(true);
@@ -90,7 +91,10 @@ export function Infographics() {
                   />
                 </Flex>
                 <Flex gap={2}>
-                  <ModalReorder refresh={refresh} />
+                  <ModalReorderSimples
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
                   <FiltrosModal
                     refresh={refresh}
                     setRefresh={setRefresh}

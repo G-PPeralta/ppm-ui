@@ -61,6 +61,11 @@ export function useAdicionarOperacao(
     data_fim: "",
     metodo_elevacao_id: 0,
     profundidade: 0,
+    precedentes: [
+      {
+        atividadePrecedenteId: 0,
+      },
+    ],
   };
 
   const registerForm: any = useFormik({
