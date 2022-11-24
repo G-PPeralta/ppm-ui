@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   Text,
   Flex,
@@ -20,9 +22,25 @@ import {
   Sort,
 } from "@syncfusion/ej2-react-gantt";
 
+import { getGanttCampanhaData } from "services/get/Campanhas";
+
 // import { ganttData } from "pages/Reports/components/data";
 
-function ExpandGanttModal({ isModalOpen, setIsModalOpen }: any) {
+function ExpandGanttModal({ isModalOpen, setIsModalOpen, pocoId }: any) {
+  const [ganttData, setGanttData] = useState([]);
+
+  const handleGetGanttData = async () => {
+    if (pocoId) {
+      const { data } = await getGanttCampanhaData(pocoId);
+      setGanttData(data);
+    }
+  };
+
+  console.log(ganttData);
+
+  useEffect(() => {
+    handleGetGanttData();
+  }, []);
   return (
     <>
       <Modal isOpen={isModalOpen} onClose={setIsModalOpen} size="full">
@@ -68,11 +86,17 @@ function ExpandGanttModal({ isModalOpen, setIsModalOpen }: any) {
             <GanttComponent
               taskFields={{
                 id: "TaskID",
-                startDate: "startDate",
-                endDate: "endDate",
+                name: "TaskName",
+                startDate: "StartDate",
+                endDate: "EndDate",
+                baselineStartDate: "BaselineStartDate",
+                baselineEndDate: "BaselineEndDate",
+                duration: "Duration",
                 progress: "Progress",
+                dependency: "Predecessor",
+                child: "subtasks",
               }}
-              dataSource={[]}
+              dataSource={ganttData}
               toolbar={["ZoomIn", "ZoomOut", "ZoomToFit"]}
               renderBaseline={false}
               baselineColor="red"
@@ -81,6 +105,7 @@ function ExpandGanttModal({ isModalOpen, setIsModalOpen }: any) {
                 mode: "Auto",
                 allowTaskbarEditing: false,
               }}
+              // cellEdit={cellEdit}
               selectionSettings={{
                 mode: "Cell",
                 type: "Single",
@@ -95,29 +120,30 @@ function ExpandGanttModal({ isModalOpen, setIsModalOpen }: any) {
               height={"90%"}
             >
               <ColumnsDirective>
+                {/* <ColumnDirective field="Item" type="string"></ColumnDirective>
+            <ColumnDirective
+              field="TaskID"
+              headerText="ID"
+              visible={false}
+              headerTextAlign="Center"
+              textAlign="Center"
+            ></ColumnDirective> */}
                 {/* <ColumnDirective
-                        field="acao"
-                        headerText="Ação"
-                        headerTextAlign="Center"
-                        textAlign="Center"
-                        width="100"
-                      ></ColumnDirective> */}
-                <ColumnDirective
                   field="acao"
                   headerText="Ação"
                   headerTextAlign="Center"
                   textAlign="Center"
                   width="100"
-                  // template={actionsTemplate}
-                ></ColumnDirective>
+                  template={actionsTemplate}
+                ></ColumnDirective> */}
                 <ColumnDirective
-                  field="TaskID"
-                  headerText="Poço"
+                  field="TaskName"
+                  headerText="Ação/Projeto"
                   headerTextAlign="Left"
                   textAlign="Left"
                 ></ColumnDirective>
                 <ColumnDirective
-                  field="startDate"
+                  field="BaselineStartDate"
                   headerText="Início planejado"
                   headerTextAlign="Center"
                   textAlign="Center"
@@ -125,36 +151,64 @@ function ExpandGanttModal({ isModalOpen, setIsModalOpen }: any) {
                   format="dd/MM/yyyy"
                 ></ColumnDirective>
                 <ColumnDirective
-                  field="endDate"
+                  field="BaselineEndDate"
                   headerText="Fim planejado"
                   headerTextAlign="Center"
                   textAlign="Center"
                   type="date"
                   format="dd/MM/yyyy"
                 ></ColumnDirective>
-                {/* <ColumnDirective
-                        field="pct_plan"
-                        headerText="Progresso Planejado (%)"
-                        headerTextAlign="Center"
-                        textAlign="Center"
-                        // type="number"
-                        format="N"
-                      ></ColumnDirective> */}
+                <ColumnDirective
+                  field="StartDate"
+                  headerText="Início real"
+                  headerTextAlign="Center"
+                  textAlign="Center"
+                  type="date"
+                  format="dd/MM/yyyy"
+                ></ColumnDirective>
+                <ColumnDirective
+                  field="EndDate"
+                  headerText="Fim real"
+                  headerTextAlign="Center"
+                  textAlign="Center"
+                  type="date"
+                  format="dd/MM/yyyy"
+                ></ColumnDirective>
+                <ColumnDirective
+                  field="BaselineDuration"
+                  headerText="Duração Planejada"
+                  headerTextAlign="Center"
+                  textAlign="Center"
+                  // type="number"
+                  // format="N"
+                />
+                <ColumnDirective
+                  field="Duration"
+                  headerText="Duração Realizada"
+                  headerTextAlign="Center"
+                  textAlign="Center"
+                  // type="number"
+                  // format="N"
+                ></ColumnDirective>
                 <ColumnDirective
                   field="Progress"
-                  headerText="Progresso Real (%)"
+                  headerText="Progresso (%)"
                   headerTextAlign="Center"
                   textAlign="Center"
                   // type="number"
                   format="N"
                 ></ColumnDirective>
                 <ColumnDirective
-                  field="pct_plan"
-                  headerText="Progresso Planejado (%)"
+                  field="Predecessor"
+                  headerText="Predecessor"
                   headerTextAlign="Center"
                   textAlign="Center"
-                  // type="number"
-                  format="N"
+                ></ColumnDirective>
+                <ColumnDirective
+                  field="Responsavel"
+                  headerText="Responsável"
+                  headerTextAlign="Center"
+                  textAlign="Center"
                 ></ColumnDirective>
               </ColumnsDirective>
               <Inject services={[Edit, Toolbar, Sort]} />

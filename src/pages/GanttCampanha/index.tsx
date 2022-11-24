@@ -39,6 +39,7 @@ interface GanttCampanha {
 function GanttCampanha() {
   const [ganttData, setGanttData] = useState<GanttCampanha[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [pocoId, setPocoId] = useState(0);
 
   const rowDataBound = (args: any) => {
     // console.log(">>>> rowDataBound", args);
@@ -48,6 +49,11 @@ function GanttCampanha() {
     }
   };
 
+  function handleOpenModalClick(id: number) {
+    setIsModalOpen(true);
+    setPocoId(id);
+  }
+
   const actionsTemplate = (props: any) => (
     <Flex
       // w={"100%"}
@@ -55,8 +61,9 @@ function GanttCampanha() {
       justifyContent={"center"}
       alignItems={"center"}
     >
+      <span>{props.id}</span>
       <IconButton
-        onClick={() => setIsModalOpen(true)}
+        onClick={() => handleOpenModalClick(props.taskData.id)}
         color={"#0047DB"}
         fontWeight={"700"}
         backgroundColor={"transparent"}
@@ -99,6 +106,7 @@ function GanttCampanha() {
           endDate: poc.finalprojplanejado || "",
           pct_plan: Number(poc.pct_plan) || "",
           Progress: Number(poc.pct_real),
+          id: poc.id,
         }));
         list.push(...formatted);
       });
@@ -232,6 +240,7 @@ function GanttCampanha() {
         <ExpandGanttModal
           isModalOpen={isModalOpen}
           setIsModalOpen={() => setIsModalOpen(!isModalOpen)}
+          pocoId={pocoId}
         />
       )}
     </>
