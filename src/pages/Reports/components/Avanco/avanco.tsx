@@ -2,8 +2,8 @@ import { Flex } from "@chakra-ui/react";
 
 import CurvaS from "components/CurvaS";
 
-import { curveSData, summaryValues, tableData } from "./data";
-import { GenericTable } from "./genericTable";
+import { curveSData, summaryValues, tableData } from "../data";
+import { GenericTable } from "../genericTable";
 import { ProjectSummary } from "./summary";
 
 export function Avanco() {

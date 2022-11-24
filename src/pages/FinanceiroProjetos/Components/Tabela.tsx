@@ -86,16 +86,27 @@ function Tabela({ data }: Props) {
               <Td textAlign={"center"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.idprojeto}</Text>
               </Td>
-              <Td textAlign={"start"} fontWeight={"semibold"}>
-                <Link
-                  to={`/financeiro-projetos/centro-custo/${
-                    linhaTabela.idprojeto
-                  }/${linhaTabela.mes.split("/")[0]}`}
-                  state={linhaTabela}
-                >
-                  <Text color={"origem.500"}>{linhaTabela.nomeprojeto}</Text>
-                </Link>
-              </Td>
+              {linhaTabela.mes ? (
+                <Td textAlign={"start"} fontWeight={"semibold"}>
+                  <Link
+                    to={`/financeiro-projetos/centro-custo/${
+                      linhaTabela.idprojeto
+                    }/${linhaTabela.mes.split("/")[0]}`}
+                    state={linhaTabela}
+                  >
+                    <Text color={"origem.500"}>{linhaTabela.nomeprojeto}</Text>
+                  </Link>
+                </Td>
+              ) : (
+                <Td textAlign={"start"} fontWeight={"semibold"}>
+                  <Link
+                    to={`/financeiro-projetos/centro-custo/${linhaTabela.idprojeto}`}
+                    state={linhaTabela}
+                  >
+                    <Text color={"origem.500"}>{linhaTabela.nomeprojeto}</Text>
+                  </Link>
+                </Td>
+              )}
               <Td textAlign={"center"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.elementopep}</Text>
               </Td>
