@@ -309,6 +309,7 @@ function ModalCadastroIntervencao({
                           propName={"id_campanha"}
                           options={optionsSondaCampanha}
                           idCampanha={idCampanha}
+                          isDisabled={true}
                         />
                         <SelectFiltragem
                           registerForm={registerForm}
