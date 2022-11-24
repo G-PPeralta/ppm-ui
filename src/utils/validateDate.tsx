@@ -88,8 +88,8 @@ export function validateDate(
       // case pct_real === 100 && comp_pct === 1:
       //   return statusProjeto[4].color; // concluído
 
-      // case pct_plan === 0 && pct_real === 0:
-      //   return statusProjeto[0].color; // não iniciado
+      case pct_plan === 0 && pct_real === 0:
+        return statusProjeto[0].color; // não iniciado
 
       default: // não aplicável
         return statusProjeto[2].color;
