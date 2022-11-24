@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+// import { useLocation } from "react-router-dom";
 
 import {
   Text,
@@ -22,12 +23,47 @@ import {
   Sort,
 } from "@syncfusion/ej2-react-gantt";
 
+import ModalEditarAtividade from "pages/ActivitiesSchedule/Components/ModalEditarAtividade";
+
+import { useRequests } from "hooks/useRequests";
+
+// import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 import { getGanttCampanhaData } from "services/get/Campanhas";
 
 // import { ganttData } from "pages/Reports/components/data";
 
 function ExpandGanttModal({ isModalOpen, setIsModalOpen, pocoId }: any) {
+  // const { state }: any = useLocation();
+  // const [poco, setPoco] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [ganttData, setGanttData] = useState([]);
+  // const [atividades, setAtividades] = useState<any[]>([]);
+  // const [atividade, setOpenAtividade] = useState("");
+  // const [openIndex, setOpenIndex] = useState("");
+  const [refresh, setRefresh] = useState(false);
+  // const [intervencaoIniciada, setIntervencaoIniciada] = useState<any>(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const { optionsAreaAtuacao, optionsResponsaveis } = useRequests();
+
+  const listaOptions = {
+    optionsAreaAtuacao,
+    optionsResponsaveis,
+  };
+
+  // const requestHandler = async () => {
+  //   const response = await getAtividadesCampanha(pocoId);
+  //   setAtividades(response.data);
+  // };
+
+  // const cellEdit = (args: any) => {
+  //   const filteredAtv = atividades.find((atv) => atv.id === args.rowData.id);
+
+  //   setOpenAtividade(filteredAtv);
+  //   setIsEditModalOpen(true);
+  //   // onOpen();
+  //   args.cancel = true;
+  // };
 
   const handleGetGanttData = async () => {
     if (pocoId) {
@@ -36,7 +72,12 @@ function ExpandGanttModal({ isModalOpen, setIsModalOpen, pocoId }: any) {
     }
   };
 
-  console.log(ganttData);
+  // useEffect(() => {
+  //   setPoco(state.poco);
+  //   setIntervencaoIniciada(state.intervencaoFoiIniciada);
+  //   requestHandler();
+  //   // setLoading(false);
+  // }, []);
 
   useEffect(() => {
     handleGetGanttData();
@@ -221,6 +262,20 @@ function ExpandGanttModal({ isModalOpen, setIsModalOpen, pocoId }: any) {
           <ModalFooter justifyContent={"center"}></ModalFooter>
         </ModalContent>
       </Modal>
+      {isEditModalOpen ? (
+        <ModalEditarAtividade
+          // listaPrecedentes={atividades}
+          id={pocoId}
+          // index={openIndex}
+          // atividade={atividade}
+          onClose={() => setIsEditModalOpen(false)}
+          setRefresh={setRefresh}
+          refresh={refresh}
+          listaOptions={listaOptions}
+          // poco={poco}
+          // intervencaoIniciada={intervencaoIniciada}
+        />
+      ) : undefined}
     </>
   );
 }
