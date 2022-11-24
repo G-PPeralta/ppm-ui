@@ -107,6 +107,7 @@ function InputGenerico({
           fontSize={"14px"}
           fontWeight={"400"}
           color={"#2D2926"}
+          backgroundColor={"white"}
         />
       )}
       {registerForm.touched[propName] && registerForm.errors[propName] && (

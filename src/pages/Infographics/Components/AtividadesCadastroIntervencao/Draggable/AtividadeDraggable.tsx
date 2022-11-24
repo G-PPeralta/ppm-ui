@@ -18,6 +18,7 @@ import {
   Responsavel,
 } from "interfaces/CadastrosModaisInfograficos";
 
+import InputGenerico from "components/InputGenerico";
 import { RequiredField } from "components/RequiredField/RequiredField";
 
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
@@ -35,7 +36,11 @@ interface Props {
 function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const innerwidth = window.innerWidth;
 
-  const { listaAreaAtuacao, listaResponsaveis, listaTarefas } = listas;
+  const {
+    listaAreaAtuacao,
+    // listaResponsaveis,
+    listaTarefas,
+  } = listas;
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
@@ -79,12 +84,12 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     label: tarefa.nom_atividade,
   }));
 
-  const optionsResponsaveis = listaResponsaveis.map(
-    (responsavel: Responsavel) => ({
-      value: responsavel.id,
-      label: responsavel.nome,
-    })
-  );
+  // const optionsResponsaveis = listaResponsaveis.map(
+  //   (responsavel: Responsavel) => ({
+  //     value: responsavel.id,
+  //     label: responsavel.nome,
+  //   })
+  // );
 
   const getValue = (options: any, i: number, chave: string) => {
     const index = options
@@ -171,6 +176,19 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   w="100%"
                 >
                   <Flex direction={"column"} flex={2}>
+                    <InputGenerico
+                      registerForm={registerForm}
+                      nomeInput={"ID"}
+                      propName={`atividades[${index}].id_origem`}
+                      value={
+                        registerForm.values.atividades[index].id_origem || ""
+                      }
+                      required={true}
+                      placeholder={"Digite o ID"}
+                      maxLength={20}
+                    />
+                  </Flex>
+                  <Flex direction={"column"} flex={2}>
                     <SelectFiltragem
                       registerForm={registerForm}
                       required={true}
@@ -192,7 +210,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                     />
                   </Flex>
 
-                  <Flex direction={"column"} flex={2}>
+                  {/* <Flex direction={"column"} flex={2}>
                     <SelectFiltragem
                       required={true}
                       nomeSelect={"RESPONSÁVEL"}
@@ -205,7 +223,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                         "responsavel_id"
                       )}
                     />
-                  </Flex>
+                  </Flex> */}
 
                   <Flex direction={"column"} flex={1}>
                     <Flex gap={1}>
@@ -253,6 +271,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                 </Flex>
                 <Flex>
                   <Checkbox
+                    variant={"origem"}
                     isChecked={
                       registerForm.values.atividades[index].ind_atv_execucao
                     }

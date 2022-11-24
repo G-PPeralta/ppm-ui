@@ -121,7 +121,6 @@ export function useCadastroIntervencao() {
     nom_usu_create: user?.nome,
     erroDataIntervencao: false,
     poco_id: "",
-    // campo_id: 0,
     id_campanha: 0,
     dat_ini_prev: "",
     projeto_tipo_id: 0,
@@ -129,9 +128,10 @@ export function useCadastroIntervencao() {
     data_limite: "",
     atividades: [
       {
+        id_origem: "",
         area_id: 0,
         tarefa_id: 0,
-        responsavel_id: 0,
+        // responsavel_id: 0,
         qtde_dias: 0,
         ind_atv_execucao: false,
         precedentes: [

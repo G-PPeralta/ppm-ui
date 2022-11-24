@@ -96,9 +96,9 @@ export const cadastroNovaIntervencaoSchema = yup.object({
   dat_ini_prev: yup.string().required(),
   atividades: yup.array().of(
     yup.object({
+      id_origem: yup.string().required(),
       area_id: yup.number().required().moreThan(0),
       tarefa_id: yup.number().required().moreThan(0),
-      responsavel_id: yup.number().required().moreThan(0),
       qtde_dias: yup.number().required().moreThan(0),
       ind_atv_execucao: yup.boolean(),
     })
