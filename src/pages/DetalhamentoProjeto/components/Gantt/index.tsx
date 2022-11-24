@@ -91,6 +91,7 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
   async function handleSetGanttData() {
     if (id) {
       const reqGanttData = await getGanttData(Number(id));
+      console.log(reqGanttData);
       if (!reqGanttData) return;
 
       // console.log(">>>> reqGanttData", reqGanttData.data);

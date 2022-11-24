@@ -31,7 +31,7 @@ export const DashboardProvider = ({ children }: any) => {
     const reqTotalRealizado = await getTotalRealizado();
     // const reqTotalNaoPrevisto = await getTotalNaoPrevisto();
 
-    if (reqOrcamentoTotal.data[0].total) {
+    if (reqOrcamentoTotal.data[0].total > 0) {
       const porcentagemRealizado =
         (reqTotalRealizado.data[0].totalRealizado /
           reqOrcamentoTotal.data[0].total) *

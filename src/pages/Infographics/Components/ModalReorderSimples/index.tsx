@@ -112,7 +112,7 @@ function ModalReorderSimples({ setRefresh, refresh }: any) {
         textColor={"origem.500"}
         onClick={onOpen}
       >
-        Reordenar
+        Movimentar Poço
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
@@ -126,7 +126,7 @@ function ModalReorderSimples({ setRefresh, refresh }: any) {
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            Reordenar Poços em sondas
+            Alterar um Poço para uma Nova Sonda
           </ModalHeader>
           <ModalCloseButton
             color={"white"}

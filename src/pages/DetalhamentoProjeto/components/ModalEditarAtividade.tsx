@@ -98,15 +98,20 @@ function ModalEditarAtividade({
         areaResponsavel.nom_responsavel === item.Responsavel
     )?.id;
 
+    const dat_ini_real = new Date(item.StartDate).getTime() + 3 * 3600 * 1000;
+    const dat_fim_real = new Date(item.EndDate).getTime() + 3 * 3600 * 1000;
+    const dat_ini_plan =
+      new Date(item.BaselineStartDate).getTime() + 3 * 3600 * 1000;
+
     registerForm.setFieldValue("id_atividade", editAtividade.id_atividade);
     registerForm.setFieldValue("nome_atividade", editAtividade.nome_atividade);
-    registerForm.setFieldValue("inicio_realizado", new Date(item.StartDate));
-    registerForm.setFieldValue("fim_realizado", new Date(item.EndDate));
-    registerForm.setFieldValue("duracao_dias", item.Duration);
+    registerForm.setFieldValue("inicio_realizado", dat_ini_real);
+    registerForm.setFieldValue("fim_realizado", dat_fim_real);
+    registerForm.setFieldValue("duracao_dias", item.BaselineDuration);
     registerForm.setFieldValue("pct_real", editAtividade.pct_real);
     registerForm.setFieldValue("inicio_planejado", item.StartDatePlan);
     registerForm.setFieldValue("responsavel_id", responsavelId);
-    registerForm.setFieldValue("inicio_planejado", item.BaselineStartDate);
+    registerForm.setFieldValue("inicio_planejado", dat_ini_plan);
     registerForm.setFieldValue("fim_planejado", item.BaselineEndDate);
   };
 
@@ -335,7 +340,7 @@ function ModalEditarAtividade({
                   formikForm={registerForm}
                 />
                 <BotaoAzulPrimary
-                  text="Concluir"
+                  text="Gravar"
                   onClose={onClose}
                   formikForm={registerForm}
                   refresh={refresh}
