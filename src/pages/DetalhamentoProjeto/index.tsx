@@ -77,6 +77,7 @@ function DetalhamentoProjeto() {
   const [data, setData] = useState<any[]>([]);
   const [project, setProject] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
+  const [infoProjetoRefresh, setInfoProjetoRefresh] = useState(false);
 
   const getData = async () => {
     const priorizacao = await getCurvaSInfos(id);
@@ -105,6 +106,10 @@ function DetalhamentoProjeto() {
       setRender(!render);
     }, 1000);
   }, [refresh]);
+
+  useEffect(() => {
+    setTimeout(() => handleGetInfoProjetos(), 1000);
+  }, [infoProjetoRefresh]);
 
   const handleGetInfoProjetos = async () => {
     if (id) {
@@ -217,7 +222,12 @@ function DetalhamentoProjeto() {
               />
             </Flex>
 
-            <Gantt idProjeto={Number(id)} />
+            <Gantt
+              idProjeto={Number(id)}
+              setInfoProjetoRefresh={() =>
+                setInfoProjetoRefresh(!infoProjetoRefresh)
+              }
+            />
             <CurvaS data={data} />
             {/* <GraficoCurvaS /> */}
           </>
