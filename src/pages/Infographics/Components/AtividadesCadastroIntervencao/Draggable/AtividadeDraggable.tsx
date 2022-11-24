@@ -38,6 +38,20 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
+  const [checked, setChecked] = useState<any>();
+  const [disabled, setDisabled] = useState<boolean>(false);
+
+  // console.log(checked);
+  // console.log(checked == "checked");
+
+  // console.log(registerForm.values.ind_atv_execucao);
+
+  useEffect(() => {
+    registerForm.setFieldValue(
+      "ind_atv_execucao",
+      checked !== "checked" ? 1 : null
+    );
+  }, [checked]);
 
   const remove = (index: number) => {
     if (registerForm.values.atividades.length > 1) {
@@ -223,6 +237,21 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                   size={16}
                 />
               </Flex>
+              <input
+                type={"checkbox"}
+                value={getValue(optionsTarefa, index, "tarefa_id").label}
+                onChange={(e) => {
+                  setDisabled(!disabled);
+
+                  setChecked(
+                    e.target.value ===
+                      getValue(optionsTarefa, index, "tarefa_id").label
+                      ? "checked"
+                      : 0
+                  );
+                }}
+                disabled={disabled}
+              />
             </Flex>
           </Box>
         </div>

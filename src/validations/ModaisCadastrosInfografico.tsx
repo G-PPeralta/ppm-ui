@@ -96,6 +96,7 @@ export const cadastroNovaIntervencaoSchema = yup.object({
     })
   ),
   comentarios: yup.string(),
+  ind_atv_execucao: yup.number(),
   // erroDataIntervencao: yup.boolean().oneOf([false]),
 });
 

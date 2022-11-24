@@ -143,6 +143,7 @@ export function useCadastroIntervencao() {
       },
     ],
     comentarios: "",
+    ind_atv_execucao: null,
   };
 
   const registerForm: any = useFormik({
@@ -160,6 +161,7 @@ export function useCadastroIntervencao() {
         data_limite: values.data_limite,
         atividades: values.atividades,
         comentarios: values.comentarios,
+        ind_atv_execucao: values.ind_atv_execucao,
       };
 
       setLoading(true);
