@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import {
   Flex,
   Modal,
@@ -17,13 +15,11 @@ import {
   Textarea,
   Text,
   ModalCloseButton,
-  Checkbox,
 } from "@chakra-ui/react";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
-import SelectFiltragem from "components/SelectFiltragem";
 import { TextError } from "components/TextError";
 
 import { handleCancelar } from "utils/handleCadastro";
@@ -37,26 +33,6 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaAtividadesPrecedentes } =
     useCadastroProjetoTipo();
-  const [controlaCronograma, setControlaCronograma] = useState();
-
-  useEffect(() => {
-    registerForm.setFieldValue("controlar_cronograma", controlaCronograma);
-  }, [controlaCronograma]);
-
-  const opcoesTipo = [
-    {
-      value: 1,
-      label: "PRÉ INTERVENÇÂO",
-    },
-    {
-      value: 2,
-      label: "INTERVENÇÂO",
-    },
-    {
-      value: 3,
-      label: "PÓS INTERVENÇÂO",
-    },
-  ];
 
   return (
     <>
@@ -78,7 +54,7 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
       >
         Projeto
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="6xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -120,7 +96,6 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                         })}
                         direction={"column"}
                       >
-                        {/* <Text fontWeight={"bold"}>Nome</Text> */}
                         <Flex gap={1}>
                           <RequiredField />
                           <Text
@@ -155,32 +130,6 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                             </TextError>
                           )}
                       </Flex>
-
-                      <Flex
-                        w={useBreakpointValue({
-                          base: "100%",
-                          md: "50%",
-                        })}
-                        direction={"column"}
-                      >
-                        {/* <Text fontWeight={"bold"}>Nome</Text> */}
-
-                        <SelectFiltragem
-                          registerForm={registerForm}
-                          nomeSelect={"TIPO DE INTERVENÇÃO"}
-                          required={true}
-                          propName={`tipo_intervencao_id`}
-                          options={opcoesTipo}
-                        />
-                      </Flex>
-                      <Flex w={100} direction={"column"} justifyContent="end">
-                        <Checkbox
-                          width={100}
-                          onChange={(e: any) =>
-                            setControlaCronograma(e.target.checked)
-                          }
-                        />
-                      </Flex>
                     </Flex>
                   </Stack>
 
@@ -198,7 +147,6 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
                       gap={5}
                     >
                       <FormControl>
-                        {/* <Text fontWeight={"bold"}>Comentários</Text> */}
                         <Flex gap={1}>
                           <Text
                             fontWeight={"700"}
@@ -237,46 +185,6 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              {/* <Flex gap={2}>
-                <Button
-                  variant="ghost"
-                  color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
-                  _hover={{
-                    background: "red.500",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  disabled={!registerForm.isValid}
-                  background="origem.300"
-                  variant="primary"
-                  color="white"
-                  onClick={() =>
-                    handleCadastrarRefresh(
-                      registerForm,
-                      onClose,
-                      setRefresh,
-                      refresh
-                    )
-                  }
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                  }}
-                >
-                  {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Concluir Cadastro</Text>
-                    </>
-                  )}
-                </Button>
-              </Flex> */}
               <Flex gap={2}>
                 <BotaoVermelhoLargoGhost
                   text={"Cancelar"}

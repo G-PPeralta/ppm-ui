@@ -18,7 +18,8 @@ function BotaoAdicionar({ add, registerForm }: Props) {
         atividade.tarefa_id <= 0 ||
         atividade.id_origem <= 0 ||
         atividade.area_atuacao <= 0 ||
-        atividade.qtde_dias <= 0
+        atividade.qtde_dias <= 0 ||
+        atividade.fase_id <= 0
     );
     setIsDisabled(isDisabled);
   }, [registerForm.values.atividades]);
