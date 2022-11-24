@@ -146,6 +146,9 @@ function ModalAdicionar({
                     </Text>
                   </Flex>
                   <Input
+                    _placeholder={{ color: "#949494" }}
+                    fontWeight={"400"}
+                    fontSize={"14px"}
                     h={"56px"}
                     w="100px"
                     isRequired
@@ -163,7 +166,6 @@ function ModalAdicionar({
               <Flex gap={4}>
                 <Flex direction={"column"}>
                   <Flex gap={1}>
-                    <RequiredField />
                     <Text
                       fontWeight={"700"}
                       fontSize={"12px"}
@@ -173,6 +175,9 @@ function ModalAdicionar({
                     </Text>
                   </Flex>
                   <Input
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    _placeholder={{ color: "#949494" }}
                     h={"56px"}
                     isRequired
                     placeholder="BM"
@@ -187,7 +192,6 @@ function ModalAdicionar({
 
                 <Flex direction={"column"}>
                   <Flex gap={1}>
-                    <RequiredField />
                     <Text
                       fontWeight={"700"}
                       fontSize={"12px"}
@@ -197,6 +201,9 @@ function ModalAdicionar({
                     </Text>
                   </Flex>
                   <Input
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    _placeholder={{ color: "#949494" }}
                     h={"56px"}
                     isRequired
                     placeholder="Nota Fiscal"
@@ -215,7 +222,7 @@ function ModalAdicionar({
                       nomeInput={"VALOR NF"}
                       propName={"valor_bm_nf"}
                       value={registerForm.values.valor_bm_nf || ""}
-                      required={true}
+                      required={false}
                       placeholder={"0"}
                       maxLength={20}
                       isNumeric={true}
@@ -264,7 +271,6 @@ function ModalAdicionar({
               <Flex gap={4}>
                 <Flex direction={"column"} flex={1}>
                   <Flex gap={1}>
-                    <RequiredField />
                     <Text
                       fontWeight={"700"}
                       fontSize={"12px"}

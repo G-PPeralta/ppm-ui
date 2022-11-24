@@ -12,5 +12,5 @@ export const cadastroNovaDespesa = yup.object({
     .required("Classe de serviço requerida.")
     .moreThan(0),
   pedido: yup.string().required("Pedido requerido"),
-  descricaoDoServico: yup.string().required("Descricao Requerido"),
+  descricaoDoServico: yup.string(),
 });

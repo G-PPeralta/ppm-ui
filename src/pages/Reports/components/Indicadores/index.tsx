@@ -42,8 +42,14 @@ export function Indicadores() {
       return {
         name: e.nome_projeto,
         responsible: e.responsavel,
-        startDate: new Date(e.data_inicio).toLocaleDateString(),
-        endDate: new Date(e.data_fim).toLocaleDateString(),
+        startDate:
+          e.data_inicio === null
+            ? "NA"
+            : new Date(e.data_inicio).toLocaleDateString(),
+        endDate:
+          e.data_fim === null
+            ? "NA"
+            : new Date(e.data_fim).toLocaleDateString(),
         budget: e.vlr_orcado,
         realized: e.vlr_cr,
         cpi: e.vlr_cpi,
