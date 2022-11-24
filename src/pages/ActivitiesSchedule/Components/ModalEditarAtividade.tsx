@@ -86,8 +86,6 @@ function ModalEditarAtividade({
     precedentes,
   };
 
-  console.log(atividade);
-
   const send = async () => {
     try {
       const { status } = await patchEditarAtividadeIntervencao(payload);
