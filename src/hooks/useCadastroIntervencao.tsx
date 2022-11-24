@@ -133,6 +133,7 @@ export function useCadastroIntervencao() {
         tarefa_id: 0,
         responsavel_id: 0,
         qtde_dias: 0,
+        ind_atv_execucao: false,
         precedentes: [
           {
             id: 0,
@@ -143,7 +144,6 @@ export function useCadastroIntervencao() {
       },
     ],
     comentarios: "",
-    ind_atv_execucao: null,
   };
 
   const registerForm: any = useFormik({
@@ -153,7 +153,6 @@ export function useCadastroIntervencao() {
       const newValues: any = {
         nom_usu_create: user?.nome,
         poco_id: values.poco_id,
-        // campo_id: values.campo_id,
         id_campanha: values.id_campanha,
         dat_ini_prev: values.dat_ini_prev,
         projeto_tipo_id: values.projeto_tipo_id,
@@ -161,7 +160,6 @@ export function useCadastroIntervencao() {
         data_limite: values.data_limite,
         atividades: values.atividades,
         comentarios: values.comentarios,
-        ind_atv_execucao: values.ind_atv_execucao,
       };
 
       setLoading(true);

@@ -99,10 +99,10 @@ export const cadastroNovaIntervencaoSchema = yup.object({
       tarefa_id: yup.number().required().moreThan(0),
       responsavel_id: yup.number().required().moreThan(0),
       qtde_dias: yup.number().required().moreThan(0),
+      ind_atv_execucao: yup.boolean(),
     })
   ),
   comentarios: yup.string(),
-  ind_atv_execucao: yup.number(),
   // erroDataIntervencao: yup.boolean().oneOf([false]),
 });
 
