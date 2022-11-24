@@ -100,7 +100,7 @@ function Tabela({ data }: Props) {
               ) : (
                 <Td textAlign={"start"} fontWeight={"semibold"}>
                   <Link
-                    to={`/financeiro-projetos/centro-custo/${linhaTabela.idprojeto}}`}
+                    to={`/financeiro-projetos/centro-custo/${linhaTabela.idprojeto}`}
                     state={linhaTabela}
                   >
                     <Text color={"origem.500"}>{linhaTabela.nomeprojeto}</Text>

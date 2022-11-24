@@ -11,15 +11,12 @@ export async function getFinanceiroPorProjetos(): Promise<{
   return { data, status };
 }
 
-export async function getCentroDeCustoProjetos(
-  id: number,
-  mes: string
-): Promise<{
+export async function getCentroDeCustoProjetos(id: number): Promise<{
   data: any;
   status: number;
 }> {
   const { data, status } = await api.get(
-    `/projetos-financeiro/filhos/${id}/${mes}`,
+    `/projetos-financeiro/filhos/${id}/`,
     token()
   );
 
