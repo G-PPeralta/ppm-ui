@@ -98,10 +98,15 @@ function ModalEditarAtividade({
         areaResponsavel.nom_responsavel === item.Responsavel
     )?.id;
 
-    const dat_ini_real = new Date(item.StartDate).getTime() + 3 * 3600 * 1000;
-    const dat_fim_real = new Date(item.EndDate).getTime() + 3 * 3600 * 1000;
-    const dat_ini_plan =
-      new Date(item.BaselineStartDate).getTime() + 3 * 3600 * 1000;
+    const dat_ini_real = new Date(
+      new Date(item.StartDate).getTime() + 3 * 3600 * 1000
+    );
+    const dat_fim_real = new Date(
+      new Date(item.EndDate).getTime() + 3 * 3600 * 1000
+    );
+    const dat_ini_plan = new Date(
+      new Date(item.BaselineStartDate).getTime() + 3 * 3600 * 1000
+    );
 
     registerForm.setFieldValue("id_atividade", editAtividade.id_atividade);
     registerForm.setFieldValue("nome_atividade", editAtividade.nome_atividade);
@@ -114,6 +119,8 @@ function ModalEditarAtividade({
     registerForm.setFieldValue("inicio_planejado", dat_ini_plan);
     registerForm.setFieldValue("fim_planejado", item.BaselineEndDate);
   };
+
+  console.log(registerForm);
 
   const addDays = (date: any, days: any) => {
     const result = new Date(date);

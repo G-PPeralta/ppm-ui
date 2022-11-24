@@ -36,6 +36,14 @@ export default function TotalOrcamentosComponent() {
   // const valorFormatado = totalOrcamento.toLocaleString();
   const { loading, valorTotalOrcamento } = useDashboard();
 
+  const vlrATratar = valorTotalOrcamento * 1;
+  const vlrTratado = vlrATratar
+    .toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    })
+    .split(",")[0];
+
   return (
     <Flex
       py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
@@ -75,14 +83,7 @@ export default function TotalOrcamentosComponent() {
               sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
-              {!loading && valorTotalOrcamento === 0
-                ? "0,00"
-                : valorTotalOrcamento
-                    .toLocaleString("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    })
-                    .split(",")[0]}
+              {!loading && valorTotalOrcamento === 0 ? "0,00" : vlrTratado}
             </Text>
           </Box>
         </Box>
