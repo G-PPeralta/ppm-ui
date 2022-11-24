@@ -40,7 +40,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
   // const [checked, setChecked] = useState<boolean>(false);
-  // const [disabled, setDisabled] = useState<boolean>(false);
+  const [disabled, setDisabled] = useState<boolean>(false);
 
   // console.log(checked);
   // console.log(checked == "checked");
@@ -103,7 +103,19 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     setDraggableId(newId);
   }, []);
 
-  // console.log(index, registerForm.values.atividades[index]);
+  useEffect(() => {
+    const atividadeDefinida = registerForm.values.atividades.some(
+      (atividade: any) => atividade.ind_atv_execucao === true
+    );
+    if (
+      atividadeDefinida &&
+      registerForm.values.atividades[index].ind_atv_execucao === false
+    ) {
+      setDisabled(!disabled);
+    } else {
+      setDisabled(false);
+    }
+  }, [registerForm.values.atividades]);
 
   return (
     <Draggable draggableId={draggableId} index={index}>
@@ -250,6 +262,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                         e.target.checked
                       );
                     }}
+                    isDisabled={disabled}
                     size="md"
                     colorScheme="blue"
                   >
