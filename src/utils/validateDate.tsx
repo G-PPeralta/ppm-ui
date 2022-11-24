@@ -79,9 +79,6 @@ export function validateDate(
       case pct_real > 0 && pct_real < 100:
         return statusProjeto[1].color; // em andamento
 
-      case pct_plan !== 100 && pct_plan !== 0 && pct_plan === pct_real:
-        return statusProjeto[1].color; // em andamento quando planejado = realizado
-
       case pct_plan > pct_real || new Date(finalplanejado) < new Date():
         return statusProjeto[3].color; // atrasado
 
