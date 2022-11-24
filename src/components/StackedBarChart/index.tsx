@@ -27,14 +27,29 @@ export default function StackedBarChart({
           {showY ? (
             <YAxis
               dataKey={dataEntries[0].name}
+              tickFormatter={(tick) =>
+                tick
+                  .toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })
+                  .substring(3)
+              }
               style={{
-                fontSize: "0.65rem",
+                fontSize: "0.50rem",
                 fontFamily: "'Mulish', sans-serif",
                 width: "100%",
               }}
             />
           ) : undefined}
-          <Tooltip />
+          <Tooltip
+            formatter={(value: any) =>
+              value.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })
+            }
+          />
           {dataEntries.map((dataEntry, index) => (
             <Bar
               key={index}

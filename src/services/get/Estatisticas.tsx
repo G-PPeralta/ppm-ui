@@ -126,3 +126,27 @@ export async function getArquivoPdf(nomeArquivo: string): Promise<{
 
   return { data, status };
 }
+
+export async function getDataInicioExecucao(idAtividade: number): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(
+    `/campanha/datainicioexecucao/${idAtividade}`,
+    token()
+  );
+
+  return { data, status };
+}
+
+export async function getDataFinalPrecedessor(idAtividade: number): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(
+    `/projetos-atividades/finddatafinalpredecessor/${idAtividade}`,
+    token()
+  );
+
+  return { data, status };
+}

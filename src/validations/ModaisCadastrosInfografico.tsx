@@ -82,6 +82,12 @@ export const cadastroNovaCampanhaSchema = yup.object({
   dsc_comentario: yup.string(),
 });
 
+export const reorderSchema = yup.object({
+  id_campanha_original: yup.string().required("O campo é obrigatório"),
+  id_campanha_destino: yup.string().required("O campo é obrigatório"),
+  id_cronograma_original: yup.string().required("O campo é obrigatório"),
+});
+
 export const cadastroNovaIntervencaoSchema = yup.object({
   id_campanha: yup.number().required().moreThan(0),
   poco_id: yup.string().required(),
