@@ -123,20 +123,20 @@ export default function ModalReorder({ refresh }: any) {
       const items = reorder(sourceData, source.index, destination.index);
 
       newCampanhas[sourceIndex].pocos = items;
-      setIsShown(true);
-      setTimeout(() => {
-        setLoading(true);
-      }, 300);
-      setTimeout(() => {
-        setLoading(false);
-        setIsShown(false);
-      }, 1000);
     } else {
       const result = move(sourceData, destinationData, source, destination);
 
       newCampanhas[sourceIndex].pocos = result[0];
       newCampanhas[destinationIndex].pocos = result[1];
     }
+    setIsShown(true);
+    setTimeout(() => {
+      setLoading(true);
+    }, 300);
+    setTimeout(() => {
+      setLoading(false);
+      setIsShown(false);
+    }, 1000);
     setCampanhas(newCampanhas);
   };
 

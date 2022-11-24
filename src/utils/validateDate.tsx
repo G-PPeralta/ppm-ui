@@ -42,28 +42,54 @@ export function validateDate(
   comp_pct: number, // comparação porcentagens
   pct_real: number, // porcentagem realizada
   finalplanejado: any, // data final planejada
-  ind_alerta: number // indicador de alerta
+  ind_alerta: number, // indicador de alerta
+  ind_status: number
 ) {
-  switch (true) {
-    case ind_alerta === 1:
-      return statusProjeto[5].color; // conflito de cronograma
+  if (ind_status > 0) {
+    switch (true) {
+      case ind_status === 1:
+        return statusProjeto[4].color; // concluído
 
-    case pct_plan > pct_real || new Date(finalplanejado) < new Date():
-      return statusProjeto[3].color; // atrasado
+      case ind_alerta === 1:
+        return statusProjeto[5].color; // conflito de cronograma
 
-    case pct_real === 100:
-      return statusProjeto[4].color; // concluído
+      case ind_status === 3:
+        return statusProjeto[1].color; // em andamento
 
-    case pct_real === 100 && comp_pct === 1:
-      return statusProjeto[4].color; // concluído
+      case ind_status === 2:
+        return statusProjeto[3].color; // atrasado
 
-    case pct_real > 0 && pct_real < 100:
-      return statusProjeto[1].color; // em andamento
+      // case pct_real === 100 && comp_pct === 1:
+      //   return statusProjeto[4].color; // concluído
 
-    case pct_plan === 0 && pct_real === 0:
-      return statusProjeto[0].color; // não iniciado
+      case ind_status === 4:
+        return statusProjeto[0].color; // não iniciado
 
-    default: // não aplicável
-      return statusProjeto[2].color;
+      default: // não aplicável
+        return statusProjeto[2].color;
+    }
+  } else {
+    switch (true) {
+      case pct_real === 100:
+        return statusProjeto[4].color; // concluído
+
+      case ind_alerta === 1:
+        return statusProjeto[5].color; // conflito de cronograma
+
+      case pct_real > 0 && pct_real < 100:
+        return statusProjeto[1].color; // em andamento
+
+      case pct_plan > pct_real || new Date(finalplanejado) < new Date():
+        return statusProjeto[3].color; // atrasado
+
+      // case pct_real === 100 && comp_pct === 1:
+      //   return statusProjeto[4].color; // concluído
+
+      case pct_plan === 0 && pct_real === 0:
+        return statusProjeto[0].color; // não iniciado
+
+      default: // não aplicável
+        return statusProjeto[2].color;
+    }
   }
 }

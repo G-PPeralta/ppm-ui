@@ -15,7 +15,7 @@ import {
 import { IDadosAtividades } from "interfaces/TabelaAtividades";
 import { Cell, Pie, PieChart } from "recharts";
 
-import { TabelaAtividadesPendentes } from "./TabelaAtividadesPendentes";
+import { TabelaAtividadesPendentes } from "../TabelaAtividadesPendentes/index";
 
 export interface SummaryData {
   name: string;
@@ -35,8 +35,7 @@ type Props = {
 
 export function ProjectSummary({ data, table, dataTable }: Props) {
   function createPieData(data: SummaryData) {
-    const p = Number(data.percent);
-
+    const p = Number(data.percent ? data.percent : 50);
     const pieData = [
       {
         name: "Undone",
@@ -51,29 +50,11 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
   }
 
   function calculatePercet(data: SummaryData) {
-    if (data.budget && data.realized && data.budget > 0 && data.realized > 0) {
-      const percents = {
-        undone:
-          ((+data.budget - +data.realized) / +data.budget) * 100 > 100
-            ? 100
-            : ((+data.budget - +data.realized) / +data.budget) * 100,
-        done:
-          ((+data.budget - (+data.budget - +data.realized)) / +data.budget) *
-            100 >
-          100
-            ? 100
-            : ((+data.budget - (+data.budget - +data.realized)) /
-                +data.budget) *
-              100,
-      };
-
-      return percents;
-    }
     const percents = {
-      undone: 0,
-      done: 0,
+      undone: ((+data.budget - +data.realized) / +data.budget) * 100,
+      done:
+        ((+data.budget - (+data.budget - +data.realized)) / +data.budget) * 100,
     };
-
     return percents;
   }
 
@@ -193,9 +174,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                   Início Real
                 </Text>
                 <Text fontSize={"16px"} fontWeight={"500"} color={"gray.600"}>
-                  {data.startDate === null
-                    ? "NA"
-                    : new Date(data.startDate).toLocaleDateString()}
+                  {data.startDate}
                 </Text>
               </Flex>
               <Heading color={"#0047BB"} fontWeight={"normal"}>
@@ -211,9 +190,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                   Fim Planejado
                 </Text>
                 <Text fontSize={"16px"} fontWeight={"500"} color={"gray.600"}>
-                  {data.endDate === null
-                    ? "NA"
-                    : new Date(data.endDate).toLocaleDateString()}
+                  {data.endDate}
                 </Text>
               </Flex>
             </Flex>

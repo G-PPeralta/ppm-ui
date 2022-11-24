@@ -79,11 +79,11 @@ export default function RealizadoComponent() {
             </Text> */}
             <Text
               ml={2}
-              sx={{ fontSize: 18, fontWeight: "600", alignSelf: "center" }}
+              sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
               {!loading && valorRealizado === 0
-                ? "0,00"
+                ? "R$ 0,00"
                 : valorRealizado
                     .toLocaleString("pt-BR", {
                       style: "currency",
@@ -96,12 +96,12 @@ export default function RealizadoComponent() {
         <Box
           justifyContent="center"
           alignItems="center"
-          bg={"#2E69FD"}
+          bg={"#194367"}
           sx={{ height: "100%", alignItems: "center", borderRadius: "2px" }}
         >
           <Text
             p={1}
-            sx={{ fontSize: 22, fontWeight: "600", alignSelf: "center" }}
+            sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
             color="#ffffff"
           >
             {/* {!totalRealizado ||

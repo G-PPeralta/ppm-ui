@@ -27,7 +27,6 @@ type Props = {
 function CardACT({ atividade, id, setRefresh, refresh }: Props) {
   const dataInicioFormatada = atividade.inicioplanejado;
   const dataFinalFormatada = atividade.finalplanejado;
-
   // const dataInicioFormatada = formatDate(new Date(atividade.inicioplanejado));
   // const dataFinalFormatada = formatDate(new Date(atividade.finalplanejado));
 

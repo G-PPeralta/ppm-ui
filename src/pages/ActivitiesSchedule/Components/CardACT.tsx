@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 import { Flex, Text, useDisclosure } from "@chakra-ui/react";
 
-import { formatDate } from "utils/formatDate";
+// import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
 
 import { useAuth } from "hooks/useAuth";
@@ -23,6 +23,7 @@ type Atividade = {
   qtddias: number;
   sonda: string;
   ind_alerta?: number;
+  ind_status?: number;
 };
 
 type Props = {
@@ -33,8 +34,10 @@ type Props = {
 };
 
 function CardACT({ atividade, id, setRefresh, refresh }: Props) {
-  const dataInicioFormatada = formatDate(new Date(atividade.inicioplanejado));
-  const dataFinalFormatada = formatDate(new Date(atividade.finalplanejado));
+  const dataInicioFormatada = atividade.inicioplanejado;
+  const dataFinalFormatada = atividade.finalplanejado;
+  // const dataInicioFormatada = formatDate(new Date(atividade.inicioplanejado));
+  // const dataFinalFormatada = formatDate(new Date(atividade.finalplanejado));
   const [atividadeId, setAtividadeId] = useState(0);
   const { onClose } = useDisclosure();
 
@@ -86,7 +89,8 @@ function CardACT({ atividade, id, setRefresh, refresh }: Props) {
         Number(atividade.comp_pct),
         Number(atividade.pct_real),
         atividade.finalplanejado,
-        Number(atividade.ind_alerta)
+        Number(atividade.ind_alerta),
+        Number(atividade.ind_status)
       )}
       px={5}
       py={3}
@@ -96,14 +100,14 @@ function CardACT({ atividade, id, setRefresh, refresh }: Props) {
       flex={1}
     >
       <Flex>
-        <Text fontSize={"lg"} color={"white"} fontWeight={"bold"}>
+        <Text fontSize={"sm"} color={"white"} fontWeight={"bold"}>
           {atividade.atividade}
         </Text>
       </Flex>
       <Flex direction={"column"} w={"100%"}>
         <Flex direction={"row"} justify={"space-between"} w={"100%"}>
           <Text
-            fontSize={"md"}
+            fontSize={"sm"}
             color={"white"}
             fontWeight={"bold"}
             textAlign={"start"}
@@ -112,7 +116,7 @@ function CardACT({ atividade, id, setRefresh, refresh }: Props) {
             Data Início:
           </Text>
           <Text
-            fontSize={"md"}
+            fontSize={"sm"}
             color={"white"}
             fontWeight={"semi-bold"}
             textAlign={"end"}
@@ -124,7 +128,7 @@ function CardACT({ atividade, id, setRefresh, refresh }: Props) {
         </Flex>
         <Flex direction={"row"} justify={"space-between"} w={"100%"}>
           <Text
-            fontSize={"md"}
+            fontSize={"sm"}
             color={"white"}
             fontWeight={"bold"}
             textAlign={"start"}
@@ -133,7 +137,7 @@ function CardACT({ atividade, id, setRefresh, refresh }: Props) {
             Data Fim:
           </Text>
           <Text
-            fontSize={"md"}
+            fontSize={"sm"}
             color={"white"}
             fontWeight={"semi-bold"}
             textAlign={"end"}
@@ -145,7 +149,7 @@ function CardACT({ atividade, id, setRefresh, refresh }: Props) {
         </Flex>
         <Flex direction={"row"} justify={"space-between"} w={"100%"}>
           <Text
-            fontSize={"md"}
+            fontSize={"sm"}
             color={"white"}
             fontWeight={"bold"}
             textAlign={"start"}
@@ -154,7 +158,7 @@ function CardACT({ atividade, id, setRefresh, refresh }: Props) {
             Planejado:
           </Text>
           <Text
-            fontSize={"md"}
+            fontSize={"sm"}
             color={"white"}
             fontWeight={"semi-bold"}
             textAlign={"end"}
@@ -166,7 +170,7 @@ function CardACT({ atividade, id, setRefresh, refresh }: Props) {
         </Flex>
         <Flex direction={"row"} justify={"space-between"} w={"100%"}>
           <Text
-            fontSize={"md"}
+            fontSize={"sm"}
             color={"white"}
             fontWeight={"bold"}
             textAlign={"start"}
@@ -175,7 +179,7 @@ function CardACT({ atividade, id, setRefresh, refresh }: Props) {
             Realizado:
           </Text>
           <Text
-            fontSize={"md"}
+            fontSize={"sm"}
             color={"white"}
             fontWeight={"semi-bold"}
             textAlign={"end"}

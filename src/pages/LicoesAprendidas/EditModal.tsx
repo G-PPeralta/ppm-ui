@@ -134,6 +134,7 @@ function EditModal({
                   LIÇÃO APRENDIDA
                 </FormLabel>
                 <Input
+                  _placeholder={{ color: "#949494" }}
                   maxLength={40}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
@@ -178,6 +179,7 @@ function EditModal({
                 </FormLabel>
                 <Textarea
                   // maxLength={150}
+                  _placeholder={{ color: "#949494" }}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
                   mt={"-9px"}
@@ -218,6 +220,7 @@ function EditModal({
                 Cancelar{" "}
               </Button>
               <Button
+                isDisabled={licaoAprendida === "" || acao === ""}
                 background="origem.500"
                 variant="primary"
                 color="white"

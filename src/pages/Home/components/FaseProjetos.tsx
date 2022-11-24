@@ -26,26 +26,36 @@ export default function NaoPrevistoComponent() {
 
   const innerWidth = window.innerWidth;
 
+  // const dataEntries = [
+  //   { name: "Iniciados", color: "#649efd" },
+  //   { name: "Finalizados", color: "#4d87e5" },
+  //   { name: "Cancelados", color: "#3771d1" },
+  //   { name: "Holds", color: "#2762c2" },
+  //   { name: "Não_Iniciados", color: "#1954b4" },
+  //   { name: "Reprogramados", color: "#1048a4" },
+  //   { name: "Pré_Aprovação", color: "#003a9a" },
+  // ];
+
   const grafData = [
     {
       name: "Engenharia",
       value: data ? Number(data[2]?.value.toFixed(1)) : 0,
-      color: "#93E01B",
+      color: "#649efd",
     },
     {
       name: "C&M",
       value: data ? Number(data[3]?.value.toFixed(1)) : 0,
-      color: "#F4DD06",
+      color: "#3771d1",
     },
     {
       name: "Suprimentos",
       value: data ? Number(data[1]?.value.toFixed(1)) : 0,
-      color: "#F94144",
+      color: "#1954b4",
     },
     {
       name: "Pré-projeto",
       value: data ? Number(data[0]?.value.toFixed(1)) : 0,
-      color: "#2E69FD",
+      color: "#003a9a",
     },
   ];
 
@@ -91,7 +101,7 @@ export default function NaoPrevistoComponent() {
                 direction="column"
                 align={"center"}
                 w={120}
-                bg={"#F4DD06"}
+                bg={"#3771d1"}
                 py={1}
                 justify={"center"}
               >
@@ -107,7 +117,7 @@ export default function NaoPrevistoComponent() {
                 direction="column"
                 align={"center"}
                 w={120}
-                bg={"#93E01B"}
+                bg={"#649efd"}
                 py={1}
                 justify={"center"}
               >
@@ -123,19 +133,19 @@ export default function NaoPrevistoComponent() {
           </Flex>
           <Flex mt={5} mb={5} align={"center"} justify={"center"} flex={1}>
             <Flex h={20} justify={"space-between"} direction={"column"}>
-              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#F4DD06">
+              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#3771d1">
                 {data ? data[3]?.value.toFixed(1) : 0}%
               </Text>
-              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#F94144">
+              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#1954b4">
                 {data ? data[1]?.value.toFixed(1) : 0}%
               </Text>
             </Flex>
             {grafData && <PieChart size={136} data={grafData} />}
             <Flex h={20} justify={"space-between"} direction={"column"}>
-              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#93E01B">
+              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#649efd">
                 {data ? data[2]?.value.toFixed(1) : 0}%
               </Text>
-              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#2E69FD">
+              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#003a9a">
                 {data ? data[0]?.value.toFixed(1) : 0}%
               </Text>
             </Flex>
@@ -146,7 +156,7 @@ export default function NaoPrevistoComponent() {
                 direction="column"
                 align={"center"}
                 w={120}
-                bg={"#F94144"}
+                bg={"#1954b4"}
                 py={1}
                 justify={"center"}
               >
@@ -162,7 +172,7 @@ export default function NaoPrevistoComponent() {
                 direction="column"
                 align={"center"}
                 w={120}
-                bg={"#2E69FD"}
+                bg={"#003a9a"}
                 py={1}
                 justify={"center"}
               >

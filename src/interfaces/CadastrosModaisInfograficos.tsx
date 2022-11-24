@@ -103,6 +103,12 @@ export interface NovaCampanha {
   nova_campanha: boolean;
 }
 
+export interface Reorder {
+  id_campanha_original: string;
+  id_campanha_destino: string;
+  id_cronograma_original: string;
+}
+
 export interface NovaIntervencao extends User {
   id_campanha: number; // enviar id da sonda
   nom_atividade: string; // enviar nome do poço

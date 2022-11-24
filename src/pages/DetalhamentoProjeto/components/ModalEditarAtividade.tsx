@@ -23,13 +23,13 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 import SelectFiltragem from "components/SelectFiltragem";
 
 import { formataParaTipo } from "utils/FormataParaTipo";
 import { formatDateToddMMyyyyhhmmCronograma } from "utils/formatDate";
+import { handleCadastrarRefresh } from "utils/handleCadastro";
 
 import { useDetalhamentoProjeto } from "contexts/DetalhamentoDeProjetos";
 
@@ -75,6 +75,7 @@ function ModalEditarAtividade({
   onClose,
   registerForm,
   loading,
+  setInfoProjetoRefresh,
 }: any) {
   const { id } = useParams();
   const { areaResponsavel } = useDetalhamentoProjeto();
@@ -98,15 +99,25 @@ function ModalEditarAtividade({
         areaResponsavel.nom_responsavel === item.Responsavel
     )?.id;
 
+    const dat_ini_real = new Date(
+      new Date(item.StartDate).getTime() + 3 * 3600 * 1000
+    );
+    const dat_fim_real = new Date(
+      new Date(item.EndDate).getTime() + 3 * 3600 * 1000
+    );
+    const dat_ini_plan = new Date(
+      new Date(item.BaselineStartDate).getTime() + 3 * 3600 * 1000
+    );
+
     registerForm.setFieldValue("id_atividade", editAtividade.id_atividade);
     registerForm.setFieldValue("nome_atividade", editAtividade.nome_atividade);
-    registerForm.setFieldValue("inicio_realizado", new Date(item.StartDate));
-    registerForm.setFieldValue("fim_realizado", new Date(item.EndDate));
-    registerForm.setFieldValue("duracao_dias", item.Duration);
+    registerForm.setFieldValue("inicio_realizado", dat_ini_real);
+    registerForm.setFieldValue("fim_realizado", dat_fim_real);
+    registerForm.setFieldValue("duracao_dias", item.BaselineDuration);
     registerForm.setFieldValue("pct_real", editAtividade.pct_real);
     registerForm.setFieldValue("inicio_planejado", item.StartDatePlan);
     registerForm.setFieldValue("responsavel_id", responsavelId);
-    registerForm.setFieldValue("inicio_planejado", item.BaselineStartDate);
+    registerForm.setFieldValue("inicio_planejado", dat_ini_plan);
     registerForm.setFieldValue("fim_planejado", item.BaselineEndDate);
   };
 
@@ -163,6 +174,7 @@ function ModalEditarAtividade({
                             borderRadius={"8px"}
                             fontSize={"14px"}
                             fontWeight={"400"}
+                            disabled={editAtividade.pct_real === 100}
                             fontFamily={"Mulish"}
                             border={"1px solid #949494"}
                             mt={"-9px"}
@@ -181,6 +193,7 @@ function ModalEditarAtividade({
                           <SelectFiltragem
                             registerForm={registerForm}
                             nomeSelect={"ÁREA RESPONSÁVEL"}
+                            isDisabled={editAtividade.pct_real === 100}
                             propName={"responsavel_id"}
                             options={areaResponsavel.data
                               .map((areaResponsavel: any) => ({
@@ -212,6 +225,7 @@ function ModalEditarAtividade({
                     <Flex flex={1}>
                       <DateTimePicker
                         registerForm={registerForm}
+                        isDisabled={editAtividade.pct_real === 100}
                         value={"inicio_planejado"}
                         label={"INÍCIO PLANEJADO"}
                         required={false}
@@ -254,8 +268,9 @@ function ModalEditarAtividade({
                       placeholder="Duração em Dias"
                       id="duracao_dias"
                       name="duracao_dias"
+                      isDisabled={editAtividade.pct_real === 100}
                       max={999999999999}
-                      min={0}
+                      min={1}
                       value={formataParaTipo(
                         "dias",
                         registerForm.values.duracao_dias
@@ -287,6 +302,7 @@ function ModalEditarAtividade({
                       <Flex flex={1} mt={4} mb={2}>
                         <DateTimePicker
                           registerForm={registerForm}
+                          isDisabled={editAtividade.pct_real === 100}
                           value={"inicio_realizado"}
                           label={"INÍCIO REALIZADO"}
                           required={false}
@@ -296,6 +312,7 @@ function ModalEditarAtividade({
                       <Flex flex={1} mt={4} mb={2}>
                         <DateTimePicker
                           registerForm={registerForm}
+                          isDisabled={editAtividade.pct_real === 100}
                           value={"fim_realizado"}
                           label={"FIM REALIZADO"}
                           required={false}
@@ -334,14 +351,47 @@ function ModalEditarAtividade({
                   onClose={onClose}
                   formikForm={registerForm}
                 />
-                <BotaoAzulPrimary
+                <Button
+                  h={"56px"}
+                  w={"208px"}
+                  borderRadius={"8px"}
+                  background={"origem.500"}
+                  variant="primary"
+                  color="white"
+                  onClick={() => {
+                    handleCadastrarRefresh(
+                      registerForm,
+                      onClose,
+                      setRefresh,
+                      refresh
+                    );
+                    setInfoProjetoRefresh();
+                  }}
+                  _hover={{
+                    background: "origem.600",
+                    transition: "all 0.4s",
+                  }}
+                >
+                  {
+                    <>
+                      <Text
+                        fontSize="18px"
+                        fontWeight={"700"}
+                        fontFamily={"Mulish"}
+                      >
+                        Concluir
+                      </Text>
+                    </>
+                  }
+                </Button>
+                {/* <BotaoAzulPrimary
                   text="Concluir"
                   onClose={onClose}
                   formikForm={registerForm}
                   refresh={refresh}
                   setRefresh={setRefresh}
                   loading={loading}
-                />
+                /> */}
               </Flex>
             </ModalFooter>
           </form>

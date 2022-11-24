@@ -95,6 +95,7 @@ export default function AtividadesCadastroIntervencao({
         tarefa_id: 0,
         responsavel_id: 0,
         qtde_dias: 0,
+        ind_atv_execucao: false,
         precedentes: listaAtividadesPrecedentes.filter((atividade: any) => {
           for (
             let index = 0;

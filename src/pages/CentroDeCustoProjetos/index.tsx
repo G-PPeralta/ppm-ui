@@ -18,13 +18,13 @@ import Tabela from "./components/Tabela";
 export function CentroDeCustoProjetos() {
   const [refresh, setRefresh] = useState(false);
 
-  const { id, mes } = useParams();
+  const { id } = useParams();
   const {
     loading,
     listaCentroCustoProjetos,
     optionsFornecedores,
     optionsClassesDeServico,
-  } = useRequests(Number(id), mes);
+  } = useRequests(Number(id));
 
   const refreshState = {
     refresh,
@@ -43,11 +43,8 @@ export function CentroDeCustoProjetos() {
   };
 
   const handleRefresh = async () => {
-    if (id && mes) {
-      const tabelaCentroDeCusto = await getCentroDeCustoProjetos(
-        Number(id),
-        String(mes)
-      );
+    if (id) {
+      const tabelaCentroDeCusto = await getCentroDeCustoProjetos(Number(id));
       const centroDeCustoFormatado =
         tabelaCentroDeCusto &&
         tabelaCentroDeCusto.data &&
@@ -111,7 +108,7 @@ export function CentroDeCustoProjetos() {
                   refreshState={refreshState}
                   idProjeto={id ? +id : 0}
                   optionsSelects={options}
-                  mes={mes ? +mes : 0}
+                  mes={0}
                 />
                 <Flex direction={"column"} justify={"end"}>
                   <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
@@ -127,7 +124,7 @@ export function CentroDeCustoProjetos() {
                 refreshState={refreshState}
                 idProjeto={id ? +id : 0}
                 optionsSelects={options}
-                mes={mes ? +mes : 0}
+                mes={0}
               />
             </Box>
           </Flex>

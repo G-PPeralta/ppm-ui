@@ -32,8 +32,12 @@ import { handleCancelar } from "utils/handleCadastro";
 import { useAdicionarOperacao } from "hooks/useAdicionarOperacao";
 import { useCadastroCronograma } from "hooks/useCadastroCronograma";
 
-import { getDuracaoHorasAdicionarAtividade } from "services/get/Estatisticas";
+import {
+  getDataInicioExecucaoEstatistica,
+  getDuracaoHorasAdicionarAtividade,
+} from "services/get/Estatisticas";
 
+import AtividadeCronogramaDragAndDrop from "./AtividadeCronogramaDragAndDrop";
 import { ModalFiltrarDuracaoMedia } from "./ModalFiltrarDuracaoMedia";
 
 interface Props {
@@ -41,6 +45,7 @@ interface Props {
   refresh: boolean;
   projeto: any;
   ganttData: any;
+  atividades: any;
 }
 
 function ModalAdicionarAtividade({
@@ -48,6 +53,7 @@ function ModalAdicionarAtividade({
   refresh,
   projeto,
   ganttData,
+  atividades,
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useAdicionarOperacao(
@@ -56,6 +62,8 @@ function ModalAdicionarAtividade({
     projeto
   );
   const { listaOperacao } = useCadastroCronograma();
+
+  // console.log("atividades", atividades);
 
   const optionsMetodosElevacao = [
     {
@@ -77,8 +85,12 @@ function ModalAdicionarAtividade({
     label: operacao.nom_operacao,
   }));
 
-  const handleDataInicio = () => {
-    let ultimaData = new Date();
+  const handleDataInicio = async () => {
+    const dados = await getDataInicioExecucaoEstatistica(projeto.id_poco);
+    // let ultimaData = new Date();
+    let ultimaData = dados
+      ? new Date(dados.data.dat_ini_plan).getTime() + 3 * 60 * 60 * 1000
+      : new Date();
     if (ganttData?.length > 1) {
       ultimaData = ganttData?.reduce((acc: any, curr: any) => {
         if (acc.EndDate > curr.EndDate) {
@@ -153,6 +165,11 @@ function ModalAdicionarAtividade({
     registerForm.setFieldValue("profundidade", Number(event));
   };
 
+  const atividadesOptions = atividades.map((atividade: any) => ({
+    value: atividade.id,
+    label: atividade.valor,
+  }));
+
   return (
     <>
       <Button
@@ -216,6 +233,10 @@ function ModalAdicionarAtividade({
                       setMediaHorasFiltradas={setMediaHorasFiltradas}
                     />
                   </Flex>
+                  <AtividadeCronogramaDragAndDrop
+                    registerForm={registerForm}
+                    atividades={atividadesOptions}
+                  />
                   <Flex gap={4} w={"100%"}>
                     <InputNumericoGenerico
                       registerForm={registerForm}
@@ -300,7 +321,7 @@ function ModalAdicionarAtividade({
                         nomeSelect={"MÉTODO DE ELEVAÇÃO"}
                         propName={"metodo_elevacao_id"}
                         options={optionsMetodosElevacao}
-                        required={true}
+                        // required={true}
                       />
                       <Flex direction={"column"} w={"100%"}>
                         <Flex gap={1}>

@@ -178,14 +178,7 @@ export function TabelaProjetos({
                   fontWeight={"semibold"}
                   textAlign={"center"}
                   color={"#2D2926"}
-                >{`${
-                  projeto.vlr_orcado && projeto.vlr_cr
-                    ? (
-                        100 -
-                        (+projeto.vlr_cr / +projeto.vlr_orcado) * 100
-                      ).toFixed(2)
-                    : 0
-                } %`}</Td>
+                >{`${(+projeto.vlr_tpci * 100).toFixed(2)} %`}</Td>
                 <Td
                   fontWeight={"semibold"}
                   textAlign={"center"}
@@ -231,7 +224,7 @@ export function TabelaProjetos({
                     ? "---"
                     : formatDate(projeto.data_fim)}
                 </Td>
-                <Td
+                {/* <Td
                   fontWeight={"semibold"}
                   textAlign={"center"}
                   color={"#2D2926"}
@@ -239,7 +232,7 @@ export function TabelaProjetos({
                   projeto.vlr_cr && projeto.vlr_orcado
                     ? ((projeto.vlr_cr / projeto.vlr_orcado) * 100).toFixed(2)
                     : 0
-                } %`}</Td>
+                } %`}</Td> */}
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   {/* <ExpansibleText
                     text={projeto.descricao + " " + projeto.justificativa}
@@ -554,14 +547,14 @@ export function TabelaProjetos({
               >
                 Data de Término
               </Th>
-              <Th
+              {/* <Th
                 textAlign={"center"}
                 style={{
                   color: "white",
                 }}
               >
                 %
-              </Th>
+              </Th> */}
               <Th
                 textAlign={"center"}
                 style={{
@@ -687,12 +680,12 @@ export function TabelaProjetos({
                   color: "white",
                 }}
               ></Th>
-              <Th
+              {/* <Th
                 textAlign={"center"}
                 style={{
                   color: "white",
                 }}
-              ></Th>
+              ></Th> */}
             </Tr>
           </Tfoot>
         </Table>

@@ -8,6 +8,8 @@ import {
   GanttComponent,
   Inject,
   Selection,
+  Sort,
+  SortSettingsModel,
   Toolbar,
 } from "@syncfusion/ej2-react-gantt";
 import { Ring } from "@uiball/loaders";
@@ -19,7 +21,6 @@ type ganttOptionsProps = {
   data: StatisticsGanttProps[] | undefined; // TODO: tirar undefined
   callbackSetRefresh: Function;
   options?: {
-    toolbarOptions?: string[];
     showGantt?: boolean;
   };
   edit: {
@@ -124,6 +125,10 @@ export function Gantt({
     args.cancel = true;
   };
 
+  const sortingOptions: SortSettingsModel = {
+    columns: [{ field: "BaselineStartDate", direction: "Ascending" }],
+  };
+
   useEffect(() => {
     if (data) setLoading(false);
   }, [data]);
@@ -147,6 +152,8 @@ export function Gantt({
             // child: "subtasks",
             // parentID: "ParentId",
           }}
+          allowSorting={true}
+          sortSettings={sortingOptions}
           queryTaskbarInfo={queryTaskbarInfo}
           labelSettings={labelSettings}
           includeWeekend={true}
@@ -156,7 +163,7 @@ export function Gantt({
           // workUnit={"Hour"}
           dayWorkingTime={[{ from: 0, to: 24 }]}
           timezone="UTC"
-          toolbar={options?.toolbarOptions || []}
+          toolbar={["ZoomIn", "ZoomOut", "ZoomToFit"]}
           editSettings={{
             allowEditing: true,
             mode: "Auto",
@@ -255,7 +262,7 @@ export function Gantt({
               format="N"
             ></ColumnDirective>
           </ColumnsDirective>
-          <Inject services={[Edit, Selection, Toolbar]} />
+          <Inject services={[Edit, Selection, Toolbar, Sort]} />
         </GanttComponent>
       ) : (
         <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>

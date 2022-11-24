@@ -41,9 +41,13 @@ import "./gantt.css";
 type ganttOptionsProps = {
   ganttOptions?: any;
   idProjeto?: number;
+  setInfoProjetoRefresh: () => void;
 };
 
-export function Gantt({ idProjeto: id }: ganttOptionsProps) {
+export function Gantt({
+  idProjeto: id,
+  setInfoProjetoRefresh,
+}: ganttOptionsProps) {
   // const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [gantt, setGantt] = useState<any[]>([]);
@@ -283,6 +287,7 @@ export function Gantt({ idProjeto: id }: ganttOptionsProps) {
             onClose={onClose}
             registerForm={registerForm}
             loading={loading}
+            setInfoProjetoRefresh={setInfoProjetoRefresh}
           />
           <Flex flexGrow={1} justifyContent={"flex-end"} pr={4}>
             <IconButton

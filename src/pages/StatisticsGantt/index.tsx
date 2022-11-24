@@ -21,6 +21,7 @@ import Sidebar from "components/SideBar";
 import { useEditarOperacao } from "hooks/useEditarOperacao";
 
 import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
+import { getRelacoesExecucao } from "services/get/Projetos";
 
 import ModalCadastroOperacao from "../Statistics/components/ModalCadastroOperacao";
 import { Gantt } from "./components/Gantt";
@@ -41,13 +42,12 @@ function StatisticsGantt() {
     id_poco: 0,
   });
   const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
+  const [atividadesCronograma, setAtividadesCronograma] = useState<any[]>();
   const { registerForm, loading, onClose, onOpen, isOpen } = useEditarOperacao(
     refresh,
     setRefresh,
     projeto
   );
-  const toolbarOptions = ["ZoomIn", "ZoomOut"];
-
   const formatToGanttData = (data: any) => {
     if (!data) return;
     const newGantt = data.atividades
@@ -110,9 +110,18 @@ function StatisticsGantt() {
     formatToGanttData(_ganttData);
   };
 
+  const handleReqRelacoes = async () => {
+    const reqAtividadesCronograma = await getRelacoesExecucao(Number(poco));
+    setAtividadesCronograma(reqAtividadesCronograma);
+  };
+
   useEffect(() => {
     handleGetAllData();
   }, [refresh, refreshDelete]);
+
+  useEffect(() => {
+    handleReqRelacoes();
+  }, []);
 
   return (
     <>
@@ -165,6 +174,7 @@ function StatisticsGantt() {
                         setRefresh={setRefresh}
                         projeto={projeto}
                         ganttData={ganttData}
+                        atividades={atividadesCronograma}
                       />
 
                       <ModalEditarOperacao
@@ -185,7 +195,6 @@ function StatisticsGantt() {
                     handleGetAllData={handleGetAllData}
                     options={{
                       showGantt: true,
-                      toolbarOptions,
                     }}
                     edit={{
                       onOpen,
