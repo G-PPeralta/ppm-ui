@@ -39,12 +39,21 @@ function SelectFiltragem({
     }),
     control: (base: any) => ({
       ...base,
+      backgroundColor: "white",
       height: 56,
       minHeight: 56,
       border: "0.5px solid #E2E8F0",
       borderRadius: "8px",
       fontWeigth: "400",
       fontSize: "14px",
+      "&:disabled": {
+        backgroundColor: "#F7FAFC",
+        color: "#718096",
+      },
+
+      "&:disabled:hover": {
+        cursor: "not-allowed",
+      },
     }),
 
     dropdownIndicator: (base: any) => ({

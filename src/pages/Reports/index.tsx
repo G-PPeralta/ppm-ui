@@ -27,7 +27,7 @@ import { Evolucao } from "./components/evolucao";
 import { Indicadores } from "./components/Indicadores";
 import { PanoramaGeral } from "./components/PanoramaGeral";
 import { Pendencias } from "./components/pendencias";
-import { PrevistoXRealizado } from "./components/previstoXRealizado";
+import { PrevistoXRealizado } from "./components/PrevistoxRealizado/previstoXRealizado";
 
 export interface ReportTypeProps {
   name: string;

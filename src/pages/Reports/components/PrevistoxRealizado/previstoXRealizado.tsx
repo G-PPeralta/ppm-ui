@@ -12,16 +12,17 @@ import {
 } from "services/get/Relatorios-pendencias";
 
 // import { curveSData } from "./data";
+import { TabelaAtividadesPendentes } from "../TabelaAtividadesPendentes";
 import { ProjectSummary } from "./summary";
-import { TabelaAtividadesPendentes } from "./TabelaAtividadesPendentes";
 
-export interface SummaryData {
+export interface SummaryDataPrev {
   name: string;
   responsible: string;
   startDate: string;
   endDate: string;
   budget: number;
   realized: number;
+  percent: number;
 }
 
 type Props = {
@@ -37,16 +38,19 @@ export interface CurveSData {
 }
 
 export function PrevistoXRealizado({ data }: Props) {
+  // console.log(data.pct);
+
   const [atividades, setAtividades] = useState<IDadosAtividades[]>();
   const [curvas, setCurvas] = useState<CurveSData[]>();
 
-  const summary: SummaryData = {
+  const summary: SummaryDataPrev = {
     name: data.nome_projeto,
     responsible: data.responsavel,
     startDate: data.data_inicio,
     endDate: data.data_fim,
     budget: +data.vlr_cr,
     realized: +data.vlr_orcado,
+    percent: +data.pct,
   };
 
   const getCurvaSProjeto = async (idProject: number) => {
