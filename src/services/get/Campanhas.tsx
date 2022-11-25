@@ -1,3 +1,5 @@
+import { api } from "services/api";
+
 export const campanhasMock = [
   {
     sonda: "PIR-999",
@@ -212,4 +214,17 @@ export function filtrarIntervencoes(
     default:
       return campanhas;
   }
+}
+
+export async function getGanttCampanhaData(id: number): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(`/gantt/campanha/${id}`, {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
+    },
+  });
+
+  return { data, status };
 }
