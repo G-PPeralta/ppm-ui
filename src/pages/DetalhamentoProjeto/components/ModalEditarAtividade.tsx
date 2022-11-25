@@ -176,7 +176,7 @@ function ModalEditarAtividade({
                             fontWeight={"400"}
                             disabled={editAtividade.pct_real === 100}
                             fontFamily={"Mulish"}
-                            border={"1px solid #949494"}
+                            border={"0.5px solid #E2E8F0"}
                             mt={"-9px"}
                             width={"328px"}
                             color={"black"}

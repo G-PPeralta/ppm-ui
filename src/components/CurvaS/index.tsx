@@ -111,11 +111,11 @@ function CurvaS({ data }: Props) {
               </Heading>
               <Flex direction={"row"} gap={"1em"}>
                 <Flex alignItems={"center"} gap={"1"}>
-                  <FiCircle color="#F94144" fill="#F94144" size={12} />
+                  <FiCircle color="#FBB4B4" fill="#FBB4B4" size={12} />
                   <p color="gray.400"> Previsto</p>
                 </Flex>
                 <Flex alignItems={"center"} gap={"1"}>
-                  <FiCircle color={"#F4DD06"} fill={"#F4DD06"} size={12} />
+                  <FiCircle color={"#F40606"} fill={"#F40606"} size={12} />
                   <p color="gray.400"> Realizado</p>
                 </Flex>
               </Flex>
@@ -126,11 +126,11 @@ function CurvaS({ data }: Props) {
               </Heading>
               <Flex direction={"row"} gap={"1em"}>
                 <Flex alignItems={"center"} gap={"1"}>
-                  <FiCircle color="#93E01B" fill="#93E01B" size={12} />
+                  <FiCircle color="#B2C7EA" fill="#B2C7EA" size={12} />
                   <p color="gray.400"> Previsto</p>
                 </Flex>
                 <Flex alignItems={"center"} gap={"1"}>
-                  <FiCircle color="#2E69FD" fill="#2E69FD" size={12} />
+                  <FiCircle color="#0047BB" fill="#0047BB" size={12} />
                   <p color="gray.400"> Realizado</p>
                 </Flex>
               </Flex>

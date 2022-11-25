@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { TotalProjetosDashboard } from "interfaces/Services";
 
-import StackedBarChart from "components/StackedBarChart";
+import StackedBarChartProjetos from "components/StackedBarChart";
 
 import { getTotalProjetos, getTotalProjetosMes } from "services/get/Dashboard";
 
@@ -331,7 +331,7 @@ export default function TotalProjetosComponent() {
           </Flex>
 
           <Flex align={"center"} justify={"center"} flex={1}>
-            <StackedBarChart
+            <StackedBarChartProjetos
               showY={false}
               sizeW={280}
               sizeH={272}
