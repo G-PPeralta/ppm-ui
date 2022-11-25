@@ -85,7 +85,7 @@ export function BudgetDetailTable(props: PropsInterface) {
             {detail.projeto.nome} <FiChevronDown size={"18px"} />{" "}
           </Flex>
         </Td>
-        <Td></Td>
+        {/* <Td></Td> */}
         <Td textAlign="right">{formatReal(detail.planejado)}</Td>
         <Td textAlign="right">
           <ModalCustoDiario
@@ -102,7 +102,7 @@ export function BudgetDetailTable(props: PropsInterface) {
             {/* <Td></Td> */}
             <Td>{filho.brt}</Td>
             <Td>{filho.projeto.nome}</Td>
-            <Td>{filho.fornecedor}</Td>
+            {/* <Td>{filho.fornecedor}</Td> */}
             <Td textAlign="right">
               <ModalValorPrevisto
                 projeto={filho.projeto}
@@ -157,7 +157,7 @@ export function BudgetDetailTable(props: PropsInterface) {
               {/* <Th>Data</Th> */}
               <Th color={"white"}>BRT</Th>
               <Th color={"white"}>Serviço/Compra</Th>
-              <Th color={"white"}>Fornecedor</Th>
+              {/* <Th color={"white"}>Fornecedor</Th> */}
               <Th color={"white"} textAlign="right">
                 R$ Previsto
               </Th>

@@ -177,7 +177,7 @@ function ModalCustoDiario(props: {
         {formatReal(filho ? filho.realizado : pai ? pai.realizado : 0)}
       </Text> */}
 
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="6xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
