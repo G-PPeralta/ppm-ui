@@ -5,7 +5,7 @@ import {
   Button,
   Flex,
   Heading,
-  InputGroup,
+  // InputGroup,
   // InputLeftElement,
   Text,
 } from "@chakra-ui/react";
@@ -18,7 +18,7 @@ import Sidebar from "components/SideBar";
 import TextAreaGenerico from "components/TextAreaGenerico";
 
 import { handleCadastrarPagina } from "utils/handleCadastro";
-import { regexSomenteNumerosMonetario } from "utils/regex";
+// import { regexSomenteNumerosMonetario } from "utils/regex";
 
 import { useProjetos } from "hooks/useCadastroProjeto";
 
@@ -288,7 +288,7 @@ function CadastrarProjeto() {
                   wrap={"wrap"}
                   direction={innerWidth > 428 ? "row" : "column"}
                 >
-                  <Flex flex={1}>
+                  {/* <Flex flex={1}>
                     <InputGroup>
                       <InputGenerico
                         registerForm={registerForm}
@@ -305,7 +305,7 @@ function CadastrarProjeto() {
                         isNumeric={true}
                       />
                     </InputGroup>
-                  </Flex>
+                  </Flex> */}
 
                   {/* <Flex flex={1}>
                     {registerForm.values.complexidadeId === 0 ? (
