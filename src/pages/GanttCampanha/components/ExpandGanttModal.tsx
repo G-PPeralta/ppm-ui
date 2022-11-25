@@ -59,7 +59,7 @@ function ExpandGanttModal({
   };
 
   const cellEdit = (args: any) => {
-    if (args.rowData.hasChildRecords) {
+    if (args.rowData.hasChildRecords || atividades.length === 0) {
       args.cancel = true;
       return;
     }
