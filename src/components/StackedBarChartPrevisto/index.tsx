@@ -8,7 +8,7 @@ import {
   YAxis,
 } from "recharts";
 
-export default function StackedBarChartProjetos({
+export default function StackedBarChartPrevisto({
   sizeW,
   sizeH,
   barW,
@@ -27,7 +27,14 @@ export default function StackedBarChartProjetos({
           {showY ? (
             <YAxis
               dataKey={dataEntries[0].name}
-              tickFormatter={(tick) => tick.toLocaleString().substring(3)}
+              tickFormatter={(tick) =>
+                tick
+                  .toLocaleString("pt-br", {
+                    style: "currency",
+                    currency: "BRL",
+                  })
+                  .substring(3)
+              }
               style={{
                 fontSize: "0.50rem",
                 fontFamily: "'Mulish', sans-serif",
@@ -35,7 +42,14 @@ export default function StackedBarChartProjetos({
               }}
             />
           ) : undefined}
-          <Tooltip formatter={(value: any) => value.toString()} />
+          <Tooltip
+            formatter={(value: any) =>
+              value.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })
+            }
+          />
           {dataEntries.map((dataEntry, index) => (
             <Bar
               key={index}

@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 
 import PieChart from "components/PieChart";
-import StackedBarChart from "components/StackedBarChart";
+import StackedBarChartPrevisto from "components/StackedBarChartPrevisto";
 
 import { getProjetosPrevistoRealizado } from "services/get/Dashboard";
 
@@ -136,7 +136,7 @@ export default function PrevistoxRealizadoComponent() {
           h={260}
           display={"flex"}
         >
-          <StackedBarChart
+          <StackedBarChartPrevisto
             showY={true}
             sizeW={100}
             sizeH={200}
