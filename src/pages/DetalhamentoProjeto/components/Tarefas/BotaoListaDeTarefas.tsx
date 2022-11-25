@@ -161,7 +161,8 @@ function BotaoListadeTarefas() {
                   {task.responsavel}
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  {!task.status ? "1" : task.status}%
+                  {/* {!task.status ? "Não Iniciado" : task.status} */}
+                  Em Andamento
                 </Td>
                 <Td>
                   <IconButton
