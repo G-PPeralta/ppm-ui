@@ -74,9 +74,9 @@ export default function TotalProjetosComponent() {
       Finalizados: pr.finalizados,
       Cancelados: pr.cancelados,
       Holds: pr.holds,
-      Não_Iniciados: pr.nao_iniciados,
+      "Não Iniciados": pr.nao_iniciados,
       Reprogramados: pr.reprogramado,
-      Pré_Aprovação: pr.pre_aprovacao,
+      "Pré-Aprovação": pr.pre_aprovacao,
     }));
 
   // const data = [
@@ -127,9 +127,9 @@ export default function TotalProjetosComponent() {
     { name: "Finalizados", color: "#4d87e5" },
     { name: "Cancelados", color: "#3771d1" },
     { name: "Holds", color: "#2762c2" },
-    { name: "Não_Iniciados", color: "#1954b4" },
+    { name: "Não Iniciados", color: "#1954b4" },
     { name: "Reprogramados", color: "#1048a4" },
-    { name: "Pré_Aprovação", color: "#003a9a" },
+    { name: "Pré-Aprovação", color: "#003a9a" },
   ];
 
   return (
