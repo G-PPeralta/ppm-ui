@@ -34,6 +34,8 @@ import { getGanttCampanhaData } from "services/get/Campanhas";
 
 // import { ganttData } from "pages/Reports/components/data";
 
+import "../gantt.css";
+
 function ExpandGanttModal({
   isModalOpen,
   setIsModalOpen,

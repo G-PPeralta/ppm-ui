@@ -25,6 +25,8 @@ import { getCampanhasInfo } from "services/post/Campanhas";
 
 import ExpandGanttModal from "./components/ExpandGanttModal";
 
+import "./gantt.css";
+
 // import { Gantt } from "../StatisticsGantt/components/Gantt";
 // import ModalAdicionarOperacao from "./components/ModalAdicionarOperacao";
 

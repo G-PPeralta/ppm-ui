@@ -17,6 +17,8 @@ import { StatisticsGanttProps } from "interfaces/Services";
 
 import ModalDeletar from "./ModalDeletar";
 
+import "./gantt.css";
+
 type ganttOptionsProps = {
   data: StatisticsGanttProps[] | undefined; // TODO: tirar undefined
   callbackSetRefresh: Function;
