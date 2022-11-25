@@ -23,9 +23,9 @@ import { Operacao } from "interfaces/Estatisticas";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
-import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
+import { formataParaTipo } from "utils/FormataParaTipo";
 import { formatDateToddMMyyyyhhmm } from "utils/formatDate";
 import { handleCancelar } from "utils/handleCadastro";
 
@@ -122,6 +122,21 @@ function ModalAdicionarAtividade({
     setMediaHorasFiltradas(horasDuracao.data.hrs_media);
   };
 
+  const handleCancelarModal = () => {
+    registerForm.resetForm();
+    registerForm.setFieldValue("data_inicio", new Date(dataFinalGantt));
+    onClose();
+  };
+
+  const handleChange = (event: any) => {
+    registerForm.setFieldValue("profundidade", Number(event));
+  };
+
+  const atividadesOptions = atividades.map((atividade: any) => ({
+    value: atividade.id,
+    label: atividade.valor,
+  }));
+
   useEffect(() => {
     handleDataInicio();
     registerForm.setFieldValue("id_sonda", projeto.id_sonda);
@@ -143,6 +158,16 @@ function ModalAdicionarAtividade({
 
   useEffect(() => {
     handleDuracao();
+    if (
+      registerForm.values.operacao_id === 3 ||
+      registerForm.values.operacao_id === 8
+    ) {
+      registerForm.setFieldValue("metodo_elevacao_id", 0);
+      registerForm.setFieldValue("profundidade", 0);
+    } else {
+      registerForm.setFieldValue("metodo_elevacao_id", null);
+      registerForm.setFieldValue("profundidade", null);
+    }
   }, [registerForm.values.operacao_id]);
 
   useEffect(() => {
@@ -155,20 +180,7 @@ function ModalAdicionarAtividade({
     }
   }, [dataFinalAtividade]);
 
-  const handleCancelarModal = () => {
-    registerForm.resetForm();
-    registerForm.setFieldValue("data_inicio", new Date(dataFinalGantt));
-    onClose();
-  };
-
-  const handleChange = (event: any) => {
-    registerForm.setFieldValue("profundidade", Number(event));
-  };
-
-  const atividadesOptions = atividades.map((atividade: any) => ({
-    value: atividade.id,
-    label: atividade.valor,
-  }));
+  // console.log("registerForm", registerForm.values);
 
   return (
     <>
@@ -243,7 +255,7 @@ function ModalAdicionarAtividade({
                       propName={"duracao"}
                       nomeInput={"DURAÇÃO"}
                       tipo={"hora"}
-                      stepper={false}
+                      stepper={true}
                       limite={999}
                       required={true}
                     />
@@ -314,44 +326,47 @@ function ModalAdicionarAtividade({
                       </Flex>
                     </Flex>
                   </Flex>
-                  <Flex gap={4} justify={"end"} align={"end"}>
-                    <Flex flex={2} w={"50%"} gap={4}>
-                      <SelectFiltragem
-                        registerForm={registerForm}
-                        nomeSelect={"MÉTODO DE ELEVAÇÃO"}
-                        propName={"metodo_elevacao_id"}
-                        options={optionsMetodosElevacao}
-                        // required={true}
-                      />
-                      <Flex direction={"column"} w={"100%"}>
-                        <Flex gap={1}>
-                          <RequiredField />
-                          <Text
-                            fontWeight={"bold"}
-                            fontSize={"12px"}
-                            color={"#949494"}
+                  {(registerForm.values.operacao_id === 3 ||
+                    registerForm.values.operacao_id === 8) && (
+                    <Flex gap={4} justify={"end"} align={"end"}>
+                      <Flex flex={2} w={"50%"} gap={4}>
+                        <SelectFiltragem
+                          registerForm={registerForm}
+                          nomeSelect={"MÉTODO DE ELEVAÇÃO"}
+                          propName={"metodo_elevacao_id"}
+                          options={optionsMetodosElevacao}
+                        />
+                        <Flex direction={"column"} w={"100%"}>
+                          <Flex gap={1}>
+                            <Text
+                              fontWeight={"bold"}
+                              fontSize={"12px"}
+                              color={"#949494"}
+                            >
+                              PROFUNDIDADE
+                            </Text>
+                          </Flex>
+                          <NumberInput
+                            min={0}
+                            max={999999}
+                            step={1}
+                            value={formataParaTipo(
+                              "metros",
+                              registerForm.values.profundidade
+                            )}
+                            onChange={(event) => handleChange(event)}
+                            h={"56px"}
                           >
-                            PROFUNDIDADE
-                          </Text>
+                            <NumberInputField h={"56px"} />
+                            <NumberInputStepper>
+                              <NumberIncrementStepper />
+                              <NumberDecrementStepper />
+                            </NumberInputStepper>
+                          </NumberInput>
                         </Flex>
-
-                        <NumberInput
-                          min={0}
-                          max={999999}
-                          step={1}
-                          value={registerForm.values.profundidade}
-                          onChange={(event) => handleChange(event)}
-                          h={"56px"}
-                        >
-                          <NumberInputField h={"56px"} />
-                          <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                          </NumberInputStepper>
-                        </NumberInput>
                       </Flex>
                     </Flex>
-                  </Flex>
+                  )}
                 </Flex>
               </Flex>
             </ModalBody>
