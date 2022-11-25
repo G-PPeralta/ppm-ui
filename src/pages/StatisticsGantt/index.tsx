@@ -117,6 +117,7 @@ function StatisticsGantt() {
 
   useEffect(() => {
     handleGetAllData();
+    handleReqRelacoes();
   }, [refresh, refreshDelete]);
 
   useEffect(() => {
