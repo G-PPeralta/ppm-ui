@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Flex,
@@ -74,12 +74,23 @@ function ModalCadastroAtividades({
     value: atividade.id,
     label: atividade.valor,
   }));
+  const [, setDate] = useState<any>();
 
-  // useEffect(() => {
-  //   if (idProjeto) {
-  //     registerForm.setFieldValue("id_projeto", idProjeto);
-  //   }
-  // }, []);
+  // console.log(new Date(new Date().setHours(new Date().getHours() + 24)));
+
+  // console.log(date);
+
+  // console.log(registerForm.values.precedentes[0].dias);
+
+  useEffect(() => {
+    setDate(
+      new Date(
+        new Date(registerForm.values.dat_fim_plan).setHours(
+          new Date(registerForm.values.dat_fim_plan).getHours() + 24
+        )
+      )
+    );
+  }, []);
 
   useEffect(() => {
     if (idProjeto) {
@@ -216,6 +227,7 @@ function ModalCadastroAtividades({
                       <Flex>
                         {registerForm.values.dat_fim_plan === "" ? (
                           <DateTimePickerDataInicio
+                            hidden
                             registerForm={registerForm}
                           />
                         ) : (
@@ -240,7 +252,17 @@ function ModalCadastroAtividades({
                               isDisabled={true}
                             >
                               {formatDateToddMMyyyyhhmmCronograma(
-                                registerForm.values.dat_fim_plan,
+                                new Date(
+                                  new Date(
+                                    registerForm.values.dat_fim_plan
+                                  ).setHours(
+                                    new Date(
+                                      registerForm.values.dat_fim_plan
+                                    ).getHours() +
+                                      registerForm.values.precedentes[0].dias *
+                                        24
+                                  )
+                                ),
                                 "inicio"
                               )}
                             </Button>
