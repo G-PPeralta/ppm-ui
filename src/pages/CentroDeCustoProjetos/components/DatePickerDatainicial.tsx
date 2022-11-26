@@ -5,6 +5,7 @@ import { Button, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 import ptBR from "date-fns/locale/pt-BR";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
+
 registerLocale("ptBR", ptBR);
 
 function DatePickerGenericoDataInicial({
@@ -18,10 +19,12 @@ function DatePickerGenericoDataInicial({
   esconderHorario,
   mes,
   dataInicial,
+
+  dates,
 }: any) {
   const [dataInicio, setDataInicio] = useState<any>("");
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndSate] = useState(new Date());
+  const [startDate, setStartDate] = useState<any>("");
+  const [endDate, setEndSate] = useState<any>("");
 
   // console.log(dataInicial);
 
@@ -32,8 +35,23 @@ function DatePickerGenericoDataInicial({
     }
 
     const mesAtual = mes - 1;
-    setStartDate(new Date(dataInicial));
-    setEndSate(new Date(new Date().getFullYear(), mesAtual + 1, 0));
+
+    if (
+      startDate ===
+      "Wed Dec 31 1969 21:00:00 GMT-0300 (Horário Padrão de Brasília)"
+    ) {
+      setStartDate(new Date(new Date().getFullYear(), mesAtual + 1, 0));
+      setEndSate(new Date(new Date().getFullYear(), mesAtual + 1, 0));
+    }
+
+    if (
+      dates &&
+      startDate !==
+        "Wed Dec 31 1969 21:00:00 GMT-0300 (Horário Padrão de Brasília)"
+    ) {
+      setStartDate(new Date(dates.data.data_inicio));
+      setEndSate(new Date(new Date().getFullYear(), mesAtual + 1, 0));
+    }
   }, [mes]);
 
   const handleIniciarDate = (dataSelecionada: any) => {

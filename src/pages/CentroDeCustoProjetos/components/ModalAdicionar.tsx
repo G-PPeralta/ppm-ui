@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { BsPlus } from "react-icons/bs";
 
 import {
@@ -27,6 +28,8 @@ import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCentroDeCusto } from "hooks/useCentroDeCusto";
 
+import { getDataInicialFinalProjeto } from "services/get/CentrodeCustosData";
+
 import DatePickerGenericoDataInicial from "./DatePickerDatainicial";
 import DatePickerGenericoFinanceiro from "./DatePickerGenericoFinanceiro";
 
@@ -55,6 +58,16 @@ function ModalAdicionar({
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { loading, registerForm } = useCentroDeCusto(idProjeto, "post");
+  const [dates, setDates] = useState<any>("");
+
+  const getDates = async () => {
+    const dates = await getDataInicialFinalProjeto(idProjeto);
+    setDates(dates);
+  };
+
+  useEffect(() => {
+    getDates();
+  }, []);
 
   return (
     <>
@@ -119,6 +132,8 @@ function ModalAdicionar({
                     required={true}
                     esconderHorario
                     dataInicial={dataInicial}
+                    idProjeto={idProjeto}
+                    dates={dates}
                   />
                 </Flex>
               </Flex>
