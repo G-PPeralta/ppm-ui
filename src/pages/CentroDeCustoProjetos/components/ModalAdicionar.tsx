@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { BsPlus } from "react-icons/bs";
 
 import {
@@ -27,6 +28,9 @@ import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCentroDeCusto } from "hooks/useCentroDeCusto";
 
+import { getDataInicialFinalProjeto } from "services/get/CentrodeCustosData";
+
+import DatePickerGenericoDataInicial from "./DatePickerDatainicial";
 import DatePickerGenericoFinanceiro from "./DatePickerGenericoFinanceiro";
 
 interface RefreshState {
@@ -39,6 +43,7 @@ interface Props {
   idProjeto: number;
   optionsSelects: any;
   mes: number;
+  dataInicial: Date;
 }
 
 function ModalAdicionar({
@@ -46,12 +51,23 @@ function ModalAdicionar({
   idProjeto,
   optionsSelects,
   mes,
+  dataInicial,
 }: Props) {
   const { refresh, setRefresh } = refreshState;
   const { optionsFornecedores, optionsClassesDeServico } = optionsSelects;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { loading, registerForm } = useCentroDeCusto(idProjeto, "post");
+  const [dates, setDates] = useState<any>("");
+
+  const getDates = async () => {
+    const dates = await getDataInicialFinalProjeto(idProjeto);
+    setDates(dates);
+  };
+
+  useEffect(() => {
+    getDates();
+  }, []);
 
   return (
     <>
@@ -109,12 +125,15 @@ function ModalAdicionar({
                   </InputGroup>
                 </Flex>
                 <Flex direction={"column"}>
-                  <DatePickerGenericoFinanceiro
+                  <DatePickerGenericoDataInicial
                     registerForm={registerForm}
                     nomeLabel="DATA"
                     propName={"data"}
                     required={true}
                     esconderHorario
+                    dataInicial={dataInicial}
+                    idProjeto={idProjeto}
+                    dates={dates}
                   />
                 </Flex>
               </Flex>

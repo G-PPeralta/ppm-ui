@@ -19,7 +19,7 @@ export function useCadastroPriorizacao(id_projeto: number = 0) {
   const [listaBeneficios, setListaBeneficios] = useState<any[]>([]);
   const [listaOperacao, setListaOperacao] = useState<any[]>([]);
   const [listaEstrategia, setListaEstrategia] = useState<any[]>([]);
-  const [listaComplexidade, setComplexidade] = useState<any[]>([]);
+  // const [listaComplexidade, setComplexidade] = useState<any[]>([]);
   const [listaPrioridade, setPrioridade] = useState<any[]>([]);
   const [listaRegulatorio, setRegulatorio] = useState<any[]>([]);
   const [ranking, setRanking] = useState<Ranking[]>();
@@ -41,9 +41,9 @@ export function useCadastroPriorizacao(id_projeto: number = 0) {
       (a: any, b: any) => a.nom_opcao.localeCompare(b.nom_opcao)
     );
 
-    const complexidadeSorted = priorizacao.data.Complexidade.sort(
-      (a: any, b: any) => a.nom_opcao.localeCompare(b.nom_opcao)
-    );
+    // const complexidadeSorted = priorizacao.data.Complexidade.sort(
+    //   (a: any, b: any) => a.nom_opcao.localeCompare(b.nom_opcao)
+    // );
 
     const prioridadeSorted = priorizacao.data.Prioridade.sort(
       (a: any, b: any) => {
@@ -74,7 +74,7 @@ export function useCadastroPriorizacao(id_projeto: number = 0) {
       (a: any, b: any) => a.nom_opcao.localeCompare(b.nom_opcao)
     );
 
-    setComplexidade(complexidadeSorted);
+    // setComplexidade(complexidadeSorted);
     setListaEstrategia(estrategiaSorted);
     setListaOperacao(operacaoSorted);
     setListaBeneficios(beneficiosSorted);
@@ -100,10 +100,10 @@ export function useCadastroPriorizacao(id_projeto: number = 0) {
       opcao_id: "",
       id_ranking: 0,
     },
-    complexidade: {
-      opcao_id: "",
-      id_ranking: 0,
-    },
+    // complexidade: {
+    //   opcao_id: "",
+    //   id_ranking: 0,
+    // },
     estrategia: {
       opcao_id: "",
       id_ranking: 0,
@@ -122,7 +122,7 @@ export function useCadastroPriorizacao(id_projeto: number = 0) {
         regulatorio: values.regulatorio,
         operacao: values.operacao,
         prioridade: values.prioridade,
-        complexidade: values.complexidade,
+        // complexidade: values.complexidade,
         estrategia: values.estrategia,
         dsc_comentario: "",
         nom_usu_create: user?.nome,
@@ -166,7 +166,7 @@ export function useCadastroPriorizacao(id_projeto: number = 0) {
     listaBeneficios,
     listaOperacao,
     listaEstrategia,
-    listaComplexidade,
+    // listaComplexidade,
     listaPrioridade,
     listaRegulatorio,
     ranking,

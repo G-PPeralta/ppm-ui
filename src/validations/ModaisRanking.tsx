@@ -20,10 +20,10 @@ export const cadastroNovaPriorizacaoSchema = yup.object({
     opcao_id: yup.string().required(),
     id_ranking: yup.number().required(),
   }),
-  complexidade: yup.object({
-    opcao_id: yup.string().required(),
-    id_ranking: yup.number().required(),
-  }),
+  // complexidade: yup.object({
+  //   opcao_id: yup.string().required(),
+  //   id_ranking: yup.number().required(),
+  // }),
   estrategia: yup.object({
     opcao_id: yup.string().required(),
     id_ranking: yup.number().required(),

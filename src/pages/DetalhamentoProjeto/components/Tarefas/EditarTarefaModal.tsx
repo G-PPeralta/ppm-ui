@@ -20,11 +20,11 @@ import {
   ModalFooter,
   Button,
   Select,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
+  // NumberInput,
+  // NumberInputField,
+  // NumberInputStepper,
+  // NumberIncrementStepper,
+  // NumberDecrementStepper,
   // useDisclosure,
 } from "@chakra-ui/react";
 import { format } from "date-fns";
@@ -68,6 +68,8 @@ function EditarTarefaModal({
   const [status, setStatus] = useState(editTarefa?.status);
   const [descricao, setDescricao] = useState(editTarefa?.descricao_tarefa);
 
+  // console.log(status);
+
   useEffect(() => {
     setNome(editTarefa.nome_tarefa);
     setData(novaData);
@@ -91,6 +93,8 @@ function EditarTarefaModal({
     "status",
   ];
 
+  // console.log(editTarefa?.status);
+
   function updatePayload(campo: string) {
     if (campo === "nome_tarefa") return nome;
     if (campo === "data_tarefa") return data;
@@ -100,7 +104,7 @@ function EditarTarefaModal({
     if (campo === "status") return status;
   }
 
-  const formataParaPorcentagem = (val: number | undefined) => val + "%";
+  // const formataParaPorcentagem = (val: number | undefined) => val + "%";
 
   const handlePatchProject = async () => {
     const promises = camposParaEditar.map((tarefa) =>
@@ -311,6 +315,27 @@ function EditarTarefaModal({
             >
               STATUS
             </FormLabel>
+            <Select
+              ml={-2}
+              fontSize={"14px"}
+              borderRadius={"8px"}
+              border={"1px solid #A7A7A7"}
+              mt={"-9px"}
+              width={"208px"}
+              height={"56px"}
+              color="black"
+              id="atividadeRel"
+              name="atividadeRel"
+              value={status}
+              onChange={(event) => setStatus(Number(event.target.value))}
+            >
+              <option value="">Selecione</option>
+
+              <option value={0}>Em Andamento</option>
+              <option value={1}>Concluído</option>
+              <option value={2}>Cancelado</option>
+            </Select>
+
             {/* <Input
               type="number"
               fontSize={"14px"}
@@ -325,7 +350,7 @@ function EditarTarefaModal({
               value={status}
               onChange={(event) => setStatus(Number(event.target.value))}
             ></Input> */}
-            <NumberInput
+            {/* <NumberInput
               mt={"-9px"}
               mr={4}
               ml={-2}
@@ -339,14 +364,14 @@ function EditarTarefaModal({
                 setStatus(value);
               }}
               h={"56px"}
-            >
-              <NumberInputField h={"56px"} />
+            > */}
+            {/* <NumberInputField h={"56px"} /> */}
 
-              <NumberInputStepper>
+            {/* <NumberInputStepper>
                 <NumberIncrementStepper />
                 <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
+              </NumberInputStepper> */}
+            {/* </NumberInput> */}
             <FormControl padding={1}>
               <FormLabel
                 mr={4}

@@ -127,6 +127,8 @@ function ModalEditarAtividade({
     return result;
   };
 
+  // console.log(registerForm.values.pct_real);
+
   useEffect(() => {
     asyncGet();
   }, [editAtividade]);
@@ -174,14 +176,14 @@ function ModalEditarAtividade({
                             borderRadius={"8px"}
                             fontSize={"14px"}
                             fontWeight={"400"}
-                            disabled={editAtividade.pct_real === 100}
+                            disabled={registerForm.values.pct_real === 100}
                             fontFamily={"Mulish"}
                             border={"0.5px solid #E2E8F0"}
                             mt={"-9px"}
                             width={"328px"}
                             color={"black"}
                             height={"56px"}
-                            // isDisabled
+                            // isDisabled={registerForm.values.pct_real === 100}
                             value={registerForm.values.nome_atividade || ""}
                             onChange={registerForm.handleChange}
                             type="text"
@@ -193,7 +195,7 @@ function ModalEditarAtividade({
                           <SelectFiltragem
                             registerForm={registerForm}
                             nomeSelect={"ÁREA RESPONSÁVEL"}
-                            isDisabled={editAtividade.pct_real === 100}
+                            isDisabled={registerForm.values.pct_real === 100}
                             propName={"responsavel_id"}
                             options={areaResponsavel.data
                               .map((areaResponsavel: any) => ({
@@ -225,7 +227,7 @@ function ModalEditarAtividade({
                     <Flex flex={1}>
                       <DateTimePicker
                         registerForm={registerForm}
-                        isDisabled={editAtividade.pct_real === 100}
+                        isDisabled={registerForm.values.pct_real === 100}
                         value={"inicio_planejado"}
                         label={"INÍCIO PLANEJADO"}
                         required={false}
@@ -268,7 +270,7 @@ function ModalEditarAtividade({
                       placeholder="Duração em Dias"
                       id="duracao_dias"
                       name="duracao_dias"
-                      isDisabled={editAtividade.pct_real === 100}
+                      isDisabled={registerForm.values.pct_real === 100}
                       max={999999999999}
                       min={1}
                       value={formataParaTipo(
@@ -302,7 +304,7 @@ function ModalEditarAtividade({
                       <Flex flex={1} mt={4} mb={2}>
                         <DateTimePicker
                           registerForm={registerForm}
-                          isDisabled={editAtividade.pct_real === 100}
+                          isDisabled={registerForm.values.pct_real === 100}
                           value={"inicio_realizado"}
                           label={"INÍCIO REALIZADO"}
                           required={false}
@@ -312,7 +314,7 @@ function ModalEditarAtividade({
                       <Flex flex={1} mt={4} mb={2}>
                         <DateTimePicker
                           registerForm={registerForm}
-                          isDisabled={editAtividade.pct_real === 100}
+                          isDisabled={registerForm.values.pct_real === 100}
                           value={"fim_realizado"}
                           label={"FIM REALIZADO"}
                           required={false}
