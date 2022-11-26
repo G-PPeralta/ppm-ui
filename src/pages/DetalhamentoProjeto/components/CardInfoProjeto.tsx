@@ -31,6 +31,7 @@ function CardInfoProjeto({
       color: "#00B53D",
     },
   ];
+
   const innerWidth = window.innerWidth;
 
   function formatDate(date: any) {
@@ -210,9 +211,7 @@ function CardInfoProjeto({
                 fontWeight={"600"}
                 fontSize={14}
               >
-                {infoProjeto.dat_usu_update
-                  ? formatDate(infoProjeto.dat_usu_update)
-                  : null}
+                {infoProjeto.dat_usu_update ? infoProjeto.dat_usu_update : null}
               </Text>
             </Flex>
           </Box>

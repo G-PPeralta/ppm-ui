@@ -177,7 +177,7 @@ export function ModalFiltrarDuracaoMedia({
                   <SelectFiltragem
                     width={true}
                     registerForm={registerForm}
-                    nomeSelect={"POÇO"}
+                    nomeSelect={"CAMPO"}
                     propName={"pocoId"}
                     options={optionsPocosOperacoes}
                     required={false}
