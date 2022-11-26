@@ -160,10 +160,27 @@ function BotaoListadeTarefas() {
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   {task.responsavel}
                 </Td>
-                <Td textAlign={"center"} fontWeight={"semibold"}>
-                  {/* {!task.status ? "Não Iniciado" : task.status} */}
-                  Em Andamento
-                </Td>
+                {task.status === 0 && (
+                  <Td textAlign={"center"} fontWeight={"semibold"}>
+                    {!task.status ? "Em Andamento" : task.status}
+                  </Td>
+                )}
+                {task.status === "1" && (
+                  <Td textAlign={"center"} fontWeight={"semibold"}>
+                    Concluído
+                  </Td>
+                )}
+
+                {task.status === "0" && (
+                  <Td textAlign={"center"} fontWeight={"semibold"}>
+                    Em Andamento
+                  </Td>
+                )}
+                {task.status === "2" && (
+                  <Td textAlign={"center"} fontWeight={"semibold"}>
+                    Cancelado
+                  </Td>
+                )}
                 <Td>
                   <IconButton
                     aria-label="Plus sign"

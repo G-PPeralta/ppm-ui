@@ -65,7 +65,7 @@ function EditarTarefaModal({
   const [data, setData] = useState(novaData);
   const [atividade, setAtividade] = useState(editTarefa?.atividade_relacionada);
   const [responsavel, setResponsavel] = useState(editTarefa?.responsavel);
-  const [status, setStatus] = useState<number>();
+  const [status, setStatus] = useState(editTarefa?.status);
   const [descricao, setDescricao] = useState(editTarefa?.descricao_tarefa);
 
   // console.log(status);
@@ -92,6 +92,8 @@ function EditarTarefaModal({
     "responsavel",
     "status",
   ];
+
+  // console.log(editTarefa?.status);
 
   function updatePayload(campo: string) {
     if (campo === "nome_tarefa") return nome;
@@ -324,7 +326,7 @@ function EditarTarefaModal({
               color="black"
               id="atividadeRel"
               name="atividadeRel"
-              // value={atividade}
+              value={status}
               onChange={(event) => setStatus(Number(event.target.value))}
             >
               <option value="">Selecione</option>
