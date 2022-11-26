@@ -52,7 +52,7 @@ export const cadastroProjetoSchema = yup.object({
   nomeProjeto: yup.string().required("Campo obrigatório"),
   elementoPep: yup.string().required("Campo obrigatório"),
   // dataInicio: yup.string().required("Campo obrigatório"),
-  // capexPrevisto: yup.string().required("Campo obrigatório"),
+  capexPrevisto: yup.string().required("Campo obrigatório"),
   // complexidadeId: yup
   //   .number()
   //   .required("Campo obrigatório")
