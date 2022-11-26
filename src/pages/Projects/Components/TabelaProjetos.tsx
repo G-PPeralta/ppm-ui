@@ -165,7 +165,9 @@ export function TabelaProjetos({
                   textAlign={"center"}
                   color={"#2D2926"}
                 >
-                  {formatReal(+projeto.vlr_orcado)}
+                  {+projeto.vlr_orcado
+                    ? formatReal(+projeto.vlr_orcado)
+                    : "R$ 0"}
                 </Td>
                 <Td
                   fontWeight={"semibold"}

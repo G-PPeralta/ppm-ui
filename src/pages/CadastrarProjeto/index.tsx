@@ -473,7 +473,7 @@ function CadastrarProjeto() {
                     propName={"comentarios"}
                     value={registerForm.values.comentarios}
                     required={false}
-                    placeholder={"Escreva a comentários sobre o projeto"}
+                    placeholder={"Escreva comentários sobre o projeto"}
                   />
                 </Flex>
               </Flex>
