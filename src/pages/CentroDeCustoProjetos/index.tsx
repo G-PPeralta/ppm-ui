@@ -8,6 +8,8 @@ import { TabelaCentroDeCusto } from "interfaces/FinanceiroProjetos";
 import Sidebar from "components/SideBar";
 import TituloPagina from "components/TituloPagina";
 
+// import { formatDate } from "utils/formatDate";
+
 import { useRequests } from "hooks/useRequests";
 
 import { getCentroDeCustoProjetos } from "services/get/Financeiro";
@@ -37,10 +39,13 @@ export function CentroDeCustoProjetos() {
   };
 
   const [data, setData] = useState<any>(listaCentroCustoProjetos);
+  const [dataInicial, setDataInicial] = useState<any>();
 
   const handleGetAllData = (listaCentroCustoProjetos: any) => {
     setData(listaCentroCustoProjetos);
   };
+
+  // console.log(data);
 
   const handleRefresh = async () => {
     if (id) {
@@ -62,6 +67,17 @@ export function CentroDeCustoProjetos() {
       setData(data);
     }
   };
+
+  const handleCentro = async () => {
+    if (id) {
+      const inicial = await getCentroDeCustoProjetos(Number(id));
+      setDataInicial(inicial.data.data_inicio);
+    }
+  };
+
+  useEffect(() => {
+    handleCentro();
+  }, []);
 
   useEffect(() => {
     handleGetAllData(listaCentroCustoProjetos);
@@ -93,13 +109,13 @@ export function CentroDeCustoProjetos() {
                   <Text
                     as="h4"
                     size="sm"
-                    textAlign={"center"}
+                    textAlign={"start"}
                     fontWeight={"semibold"}
                     mt={-5}
                     fontSize={"20px"}
                     ml={12}
                   >
-                    Carteira de Projeto
+                    {data.nomeProjeto}
                   </Text>
                 </Flex>
               </Flex>
@@ -109,6 +125,7 @@ export function CentroDeCustoProjetos() {
                   idProjeto={id ? +id : 0}
                   optionsSelects={options}
                   mes={0}
+                  dataInicial={dataInicial}
                 />
                 <Flex direction={"column"} justify={"end"}>
                   <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
