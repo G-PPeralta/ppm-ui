@@ -36,11 +36,8 @@ export interface ReportTypeProps {
 
 const reports: ReportTypeProps[] = [
   { name: "Panorama Geral dos projetos", value: "1" },
-  { name: "Pendências de Projeto", value: "2" },
   { name: "Indicadores", value: "3" },
-  { name: "Evolução dos projetos", value: "4" },
   { name: "Previsto x Realizado", value: "5" },
-  { name: "Avanço Físico x Avanço Financeiro", value: "6" },
 ];
 
 export function Reports() {
