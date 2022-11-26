@@ -449,8 +449,8 @@ function ModalCadastroIntervencao({
                   disabled={
                     !registerForm.isValid ||
                     !registerForm.dirty ||
-                    !registerForm.values.atividades.some(
-                      (atividade: any) => atividade.ind_atv_execucao === true
+                    registerForm.values.atividades.every(
+                      (atividade: any) => atividade.ind_atv_execucao === false
                     )
                   }
                   background={"origem.500"}
