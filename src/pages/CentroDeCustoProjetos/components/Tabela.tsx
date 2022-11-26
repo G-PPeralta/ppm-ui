@@ -97,7 +97,7 @@ function Tabela({ data, refreshState, optionsSelects, mes }: Props) {
               return (
                 <Tr key={index}>
                   <Td colSpan={header.length} textAlign={"start"}>
-                    <Text fontSize="xl" fontWeight={500}>
+                    <Text textAlign={"start"} fontWeight={"semibold"}>
                       Não há dados
                     </Text>
                   </Td>
