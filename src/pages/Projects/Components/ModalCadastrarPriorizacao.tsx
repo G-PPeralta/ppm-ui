@@ -58,7 +58,7 @@ function ModalCadastrarPriorizacao({
   const [regulatorio, setRegulatorio] = useState("");
   const [operacao, setOperacao] = useState("");
   const [prioridade, setPrioridade] = useState("");
-  const [complexidade, setComplexidade] = useState("");
+  // const [complexidade, setComplexidade] = useState("");
   const [estrategia, setEstrategia] = useState("");
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -68,7 +68,7 @@ function ModalCadastrarPriorizacao({
     listaBeneficios,
     listaOperacao,
     listaEstrategia,
-    listaComplexidade,
+    // listaComplexidade,
     listaPrioridade,
     listaRegulatorio,
     ranking,
@@ -79,6 +79,8 @@ function ModalCadastrarPriorizacao({
     setInitialValues(response.data);
     // console.log(response.data);
   }
+
+  // console.log(listaPrioridade[0]?.id);
 
   useEffect(() => {
     const valorRanking = ranking && ranking?.length > 0 ? ranking[0].id : 0;
@@ -98,10 +100,10 @@ function ModalCadastrarPriorizacao({
       "prioridade.id_ranking",
       Number(listaPrioridade[0]?.id)
     );
-    registerForm.setFieldValue(
-      "complexidade.id_ranking",
-      Number(listaComplexidade[0]?.id)
-    );
+    // registerForm.setFieldValue(
+    //   "complexidade.id_ranking",
+    //   Number(listaComplexidade[0]?.id)
+    // );
     registerForm.setFieldValue(
       "estrategia.id_ranking",
       Number(listaEstrategia[0]?.id)
@@ -121,7 +123,7 @@ function ModalCadastrarPriorizacao({
           if (rank.id_ranking == 2) setRegulatorio(rank.id_opcao);
           if (rank.id_ranking == 3) setOperacao(rank.id_opcao);
           if (rank.id_ranking == 4) setPrioridade(rank.id_opcao);
-          if (rank.id_ranking == 5) setComplexidade(rank.id_opcao);
+          // if (rank.id_ranking == 5) setComplexidade(rank.id_opcao);
           if (rank.id_ranking == 6) setEstrategia(rank.id_opcao);
         });
       }
@@ -152,10 +154,10 @@ function ModalCadastrarPriorizacao({
       opcao_id: Number(prioridade),
       id_ranking: 4,
     },
-    complexidade: {
-      opcao_id: Number(complexidade),
-      id_ranking: 5,
-    },
+    // complexidade: {
+    //   opcao_id: Number(complexidade),
+    //   id_ranking: 5,
+    // },
     estrategia: {
       opcao_id: Number(estrategia),
       id_ranking: 6,
@@ -445,6 +447,7 @@ function ModalCadastrarPriorizacao({
                       })}
                       gap={5}
                       mb={"10px"}
+                      hidden
                     >
                       <FormControl>
                         <FormLabel
@@ -466,10 +469,10 @@ function ModalCadastrarPriorizacao({
                           placeholder="Selecione"
                           id="complexidade.opcao_id"
                           name="complexidade.opcao_id"
-                          value={complexidade}
-                          onChange={(event) =>
-                            setComplexidade(event.target.value)
-                          }
+                          // value={complexidade}
+                          // onChange={(event) =>
+                          //   setComplexidade(event.target.value)
+                          // }
                         >
                           {/* {registerForm.errors.complex_priori &&
                           registerForm.touched.complex_priori && (
@@ -477,11 +480,11 @@ function ModalCadastrarPriorizacao({
                               {registerForm.errors.complex_priori}
                             </TextError>
                           )} */}
-                          {listaComplexidade.map((compl: any, index: any) => (
+                          {/* {listaComplexidade.map((compl: any, index: any) => (
                             <option value={Number(compl.opcao_id)} key={index}>
                               {compl.nom_opcao}
                             </option>
-                          ))}
+                          ))} */}
                         </Select>
                       </FormControl>
                     </Flex>
