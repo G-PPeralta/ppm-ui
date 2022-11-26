@@ -93,9 +93,7 @@ export function ActivitiesPrecedents() {
     if (renderList[0] != 0) {
       for (let index = 0; index < renderList.length; index++) {
         const element = renderList[index];
-        const listaLocal = atvLocal.filter(
-          (val2) => val2.id_atividade == element
-        );
+        const listaLocal = atvLocal.filter((val2) => val2.id_filho == element);
         if (listaLocal[0]) {
           renderList = renderList.concat(
             listaLocal[0].precedentesId.map((val3: any) => val3.precedente_id)
@@ -103,7 +101,7 @@ export function ActivitiesPrecedents() {
         }
       }
     }
-    renderList.push(atividade.id_atividade);
+    renderList.push(atividade.id_filho);
     setDestaques(renderList);
   };
 
@@ -121,7 +119,7 @@ export function ActivitiesPrecedents() {
         currentAreaIndex = Number(pay);
       }
       for (const atividade in data[pay].atividades) {
-        if (data[pay].atividades[atividade].id_atividade == precedenteId) {
+        if (data[pay].atividades[atividade].id_filho == precedenteId) {
           area = data[pay].area;
           areaIndex = Number(pay);
           index = Number(atividade);
@@ -157,7 +155,7 @@ export function ActivitiesPrecedents() {
         currentAreaIndex = Number(pay);
       }
       for (const atividade in data[pay].atividades) {
-        if (data[pay].atividades[atividade].id_atividade == precedenteId) {
+        if (data[pay].atividades[atividade].id_filho == precedenteId) {
           area = data[pay].area;
           areaIndex = Number(pay);
           index = Number(atividade);
@@ -262,7 +260,7 @@ export function ActivitiesPrecedents() {
                         {area.atividades.map(
                           (atividade: any, index: number) => (
                             <ArcherElement
-                              id={String(atividade.id_atividade)}
+                              id={String(atividade.id_filho)}
                               relations={atividade.precedentesId.map(
                                 (precedente: any) => {
                                   const item = {
@@ -279,12 +277,12 @@ export function ActivitiesPrecedents() {
                                     ),
                                     style: {
                                       strokeColor: destaques.includes(
-                                        atividade.id_atividade
+                                        atividade.id_filho
                                       )
                                         ? "#0000ff"
                                         : "#000000",
                                       strokeWidth: destaques.includes(
-                                        atividade.id_atividade
+                                        atividade.id_filho
                                       )
                                         ? 1.5
                                         : 1,
@@ -298,12 +296,12 @@ export function ActivitiesPrecedents() {
                                 key={index}
                                 direction={"column"}
                                 opacity={
-                                  destaques.includes(atividade.id_atividade)
+                                  destaques.includes(atividade.id_filho)
                                     ? 1
                                     : 0.5
                                 }
                                 shadow={
-                                  destaques.includes(atividade.id_atividade)
+                                  destaques.includes(atividade.id_filho)
                                     ? "xl"
                                     : undefined
                                 }

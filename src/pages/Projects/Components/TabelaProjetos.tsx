@@ -71,16 +71,16 @@ export function TabelaProjetos({
   // console.log(data[0].prioridade);
 
   const complexidades = (a: string) => {
-    if (a === "Acima de R$3.000.000,01 (Alto)") {
+    if (a === "A") {
       return "Alto";
     }
-    if (a === "R$300.000,01 até R$ 3.000.000,00 (Médio)") {
+    if (a === "M") {
       return "Médio";
     }
-    if (a === "R$0 até R$300.000,00 (Baixo)") {
+    if (a === "B") {
       return "Baixo";
     } else {
-      return "";
+      return "Baixo";
     }
   };
 
