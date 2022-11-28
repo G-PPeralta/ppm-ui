@@ -42,9 +42,10 @@ export function ActivitiesSchedule() {
   const [loadings, setLoadings] = useState(false);
   const [intervencaoIniciada, setIntervencaoIniciada] = useState<any>(false);
 
-  const subTitulo = `${state.poco.sonda.split(" - ")[1]} (${
-    state.poco.poco.split(" - ")[1]
-  })`;
+  const subTitulo = {
+    sonda: `${state.poco.sonda.split(" - ")[1]}`,
+    poco: `${state.poco.poco.split(" - ")[1]}`,
+  };
 
   const requestHandler = async () => {
     const response = await getAtividadesCampanha(id);
