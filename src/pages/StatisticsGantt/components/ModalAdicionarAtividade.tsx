@@ -167,7 +167,18 @@ function ModalAdicionarAtividade({
   }, [registerForm.values.duracao]);
 
   useEffect(() => {
-    handleDuracao();
+    if (registerForm.values.precedentes.length > 0) {
+      handleDuracao();
+      registerForm.values.precedentes.map((precedente: any) => {
+        const getAtividadePrecedenteId = optionsOperacao.find(
+          (atividade: any) =>
+            atividade.label === precedente.atividadePrecedenteId.valor
+        );
+        return handlePrecedentes(getAtividadePrecedenteId?.value);
+      });
+    } else {
+      handleDuracao();
+    }
     if (
       registerForm.values.operacao_id === 3 ||
       registerForm.values.operacao_id === 8
