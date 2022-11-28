@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import {
   Flex,
@@ -77,8 +77,13 @@ function ModalCadastroAtividades({
     value: atividade.id,
     label: atividade.valor,
   }));
-  const [, setDate] = useState<any>();
 
+  const getSumOfDays = registerForm.values.precedentes
+    .map((i: any) => i.dias)
+    .reduce((partialSum: any, a: any) => partialSum + a, 0);
+  // console.log(getSumOfDays);
+
+  // console.log(registerForm.values.precedentes[0].dias);
   const getNomeProjeto = listaAtividadesRelacao
     .map((atividade: any) => ({
       value: atividade.id,
@@ -89,16 +94,6 @@ function ModalCadastroAtividades({
   useEffect(() => {
     registerForm.setFieldValue("relacao_id", getNomeProjeto?.value);
   }, [isOpen]);
-
-  useEffect(() => {
-    setDate(
-      new Date(
-        new Date(registerForm.values.dat_fim_plan).setHours(
-          new Date(registerForm.values.dat_fim_plan).getHours() + 24
-        )
-      )
-    );
-  }, []);
 
   useEffect(() => {
     if (idProjeto) {
@@ -270,8 +265,7 @@ function ModalCadastroAtividades({
                                     new Date(
                                       registerForm.values.dat_fim_plan
                                     ).getHours() +
-                                      registerForm.values.precedentes[0].dias *
-                                        24
+                                      getSumOfDays * 24
                                   )
                                 ),
                                 "inicio"

@@ -112,13 +112,13 @@ function ModalEditarAtividade({
       setPrecedentes(atividade.precedentes);
     }
     if (index == 0) {
-      setInicioPlanejado(new Date(atividade.inicioplanejado));
+      setInicioPlanejado(new Date(atividade.inicioplanejadohrs));
     } else {
-      const inicio = new Date(atividade.inicioplanejado);
+      const inicio = new Date(atividade.inicioplanejadohrs);
       inicio.setDate(inicio.getDate() + 1);
       setInicioPlanejado(inicio);
     }
-    const fim = new Date(atividade.finalplanejado);
+    const fim = new Date(atividade.finalplanejadohrs);
     fim.setHours(fim.getHours() + 9);
     setFimPlanejado(fim);
 
