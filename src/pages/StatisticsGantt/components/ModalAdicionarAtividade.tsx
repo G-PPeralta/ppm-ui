@@ -118,8 +118,17 @@ function ModalAdicionarAtividade({
     const horasDuracao = await getDuracaoHorasAdicionarAtividade(
       registerForm.values.operacao_id
     );
-    // registerForm.setFieldValue("duracao", horasDuracao.data.hrs_media);
     setMediaHorasFiltradas(horasDuracao.data.hrs_media);
+  };
+
+  const handlePrecedentes = async (id: number | undefined) => {
+    if (id) {
+      const duracaoPrecedente = await getDuracaoHorasAdicionarAtividade(id);
+      setMediaHorasFiltradas(
+        (prevState: any) =>
+          Number(duracaoPrecedente.data.hrs_media) + Number(prevState)
+      );
+    }
   };
 
   const handleCancelarModal = () => {
@@ -133,7 +142,7 @@ function ModalAdicionarAtividade({
   };
 
   const atividadesOptions = atividades.map((atividade: any) => ({
-    value: atividade.id,
+    value: atividade,
     label: atividade.valor,
   }));
 
@@ -142,6 +151,7 @@ function ModalAdicionarAtividade({
     registerForm.setFieldValue("id_sonda", projeto.id_sonda);
     registerForm.setFieldValue("id_poco", projeto.id_poco);
     registerForm.setFieldValue("duracao", 0);
+    registerForm.setFieldValue("data_fim", "");
   }, []);
 
   useEffect(() => {
@@ -169,6 +179,17 @@ function ModalAdicionarAtividade({
       registerForm.setFieldValue("profundidade", null);
     }
   }, [registerForm.values.operacao_id]);
+
+  useEffect(() => {
+    handleDuracao();
+    registerForm.values.precedentes.map((precedente: any) => {
+      const getAtividadePrecedenteId = optionsOperacao.find(
+        (atividade: any) =>
+          atividade.label === precedente.atividadePrecedenteId.valor
+      );
+      return handlePrecedentes(getAtividadePrecedenteId?.value);
+    });
+  }, [registerForm.values.precedentes]);
 
   useEffect(() => {
     registerForm.setFieldValue("data_inicio", new Date(dataFinalGantt));
@@ -256,7 +277,7 @@ function ModalAdicionarAtividade({
                       nomeInput={"DURAÇÃO"}
                       tipo={"hora"}
                       stepper={true}
-                      limite={999}
+                      limite={99999}
                       required={true}
                     />
 
