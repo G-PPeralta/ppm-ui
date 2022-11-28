@@ -66,7 +66,7 @@ export function ActivitiesSchedule() {
   useEffect(() => {
     setTimeout(() => {
       requestHandler();
-    }, 1000);
+    }, 100);
   }, [refresh]);
 
   useEffect(() => {

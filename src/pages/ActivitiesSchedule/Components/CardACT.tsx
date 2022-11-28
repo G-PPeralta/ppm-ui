@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-import { Flex, Text, useDisclosure } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
 // import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
@@ -39,7 +39,6 @@ function CardACT({ atividade, id, setRefresh, refresh }: Props) {
   // const dataInicioFormatada = formatDate(new Date(atividade.inicioplanejado));
   // const dataFinalFormatada = formatDate(new Date(atividade.finalplanejado));
   const [atividadeId, setAtividadeId] = useState(0);
-  const { onClose } = useDisclosure();
 
   const { user } = useAuth();
 
@@ -65,15 +64,11 @@ function CardACT({ atividade, id, setRefresh, refresh }: Props) {
           toast.success("Atividade removida com sucesso!", {
             id: "toast-principal",
           });
-
-          onClose();
         }
       } catch (error) {
         toast.error("Erro ao remover!", {
           id: "toast-principal",
         });
-
-        onClose();
       }
     }
   }
