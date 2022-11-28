@@ -39,6 +39,7 @@ export function ActivitiesSchedule() {
   const [atividades, setAtividades] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
   const [loadingCards, setLoadingCards] = useState(true);
+  const [loadings, setLoadings] = useState(false);
   const [intervencaoIniciada, setIntervencaoIniciada] = useState<any>(false);
 
   const subTitulo = `${state.poco.sonda.split(" - ")[1]} (${
@@ -73,6 +74,15 @@ export function ActivitiesSchedule() {
     if (atividades.length > 0) {
       setLoadingCards(false);
     }
+  }, [atividades]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (atividades.length === 0) {
+        setLoadingCards(false);
+        setLoadings(true);
+      }
+    }, 15000);
   }, [atividades]);
 
   return (
@@ -166,6 +176,11 @@ export function ActivitiesSchedule() {
                 </Flex>
               )}
             </Flex>
+            {loadings && atividades.length === 0 && (
+              <Flex align={"center"} justify={"center"} w={"100%"} h={"50vh"}>
+                Não há atividades cadastradas
+              </Flex>
+            )}
             {openId && optionsAreaAtuacao.length > 0 ? (
               <ModalEditarAtividade
                 listaPrecedentes={atividades}
