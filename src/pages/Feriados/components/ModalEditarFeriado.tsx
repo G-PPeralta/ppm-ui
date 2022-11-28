@@ -82,7 +82,6 @@ function ModalEditarFeriado({ feriado }: Props) {
       <IconButton
         aria-label="Botão de Editar"
         icon={<MdModeEdit />}
-        borderRadius={"10px"}
         background={"transparent"}
         color={"origem.500"}
         _hover={{

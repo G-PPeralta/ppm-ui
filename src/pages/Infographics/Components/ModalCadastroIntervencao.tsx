@@ -402,6 +402,9 @@ function ModalCadastroIntervencao({
                           value={registerForm.values.comentarios}
                           onChange={registerForm.handleChange}
                           maxLength={255}
+                          _placeholder={{ color: "#949494" }}
+                          fontSize={"14px"}
+                          fontWeight={"400"}
                         />
                       </FormControl>
                     </Stack>

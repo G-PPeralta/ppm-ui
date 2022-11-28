@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { FiTrash } from "react-icons/fi";
 
-import { Flex, IconButton, Td, Text, Tr } from "@chakra-ui/react";
+import { Flex, Td, Text, Tr } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import ContainerPagina from "components/ContainerPagina";
@@ -17,11 +16,12 @@ import { useFeriadosContext } from "contexts/Feriados";
 import { useAuth } from "hooks/useAuth";
 
 import ModalAdicionarFeriado from "./components/ModaAdicionarFeriado";
+import ModalDeletarFeriado from "./components/ModalDeletarFeriado";
 import ModalEditarFeriado from "./components/ModalEditarFeriado";
 
 function Feriados() {
   const { user } = useAuth();
-  const { registerForm, feriados, reqDeleteFeriado } = useFeriadosContext();
+  const { registerForm, feriados } = useFeriadosContext();
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
   const [tabelaFiltrada, setTabelaFiltrada] = useState<any[]>([]);
@@ -39,7 +39,7 @@ function Feriados() {
     "NOME DO FERIADO",
     "TIPO",
     "DATA",
-    "PROJETO",
+    // "PROJETO",
     "OBSERVAÇÕES",
     "AÇÕES",
   ];
@@ -54,6 +54,13 @@ function Feriados() {
     }
     setRefreshTable(false);
   }, [feriados]);
+
+  useEffect(() => {
+    if (feriados.isLoading === false) {
+      setTabelaFiltrada(feriados.data);
+    }
+    setRefreshTable(false);
+  }, [refreshTable]);
 
   function Body() {
     return (
@@ -85,25 +92,25 @@ function Feriados() {
                         linhaTabela.ano_feriado}
                   </Text>
                 </Td>
-                <Td textAlign={"center"} fontWeight={"semibold"}>
+                {/* <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Text>{linhaTabela.nome_projeto}</Text>
-                </Td>
+                </Td> */}
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Text>
                     {linhaTabela.ano_feriado === null ? "Feriado fixo" : "---"}
                   </Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Flex gap={2} align={"center"} justify={"center"}>
+                  <Flex align={"center"} justify={"center"}>
                     <ModalEditarFeriado feriado={linhaTabela} />
-                    <IconButton
+                    {/* <IconButton
                       aria-label="Botão de Editar"
-                      icon={<FiTrash />}
+                      icon={<FiTrash size={13} />}
                       borderRadius={"10px"}
                       background={"transparent"}
-                      color={"red.500"}
+                      color={"#F40606"}
                       _hover={{
-                        background: "red.500",
+                        background: "#F40606",
                         transition: "all 0.4s",
                         color: "white",
                       }}
@@ -113,6 +120,12 @@ function Feriados() {
                           user: user?.nome,
                         })
                       }
+                    /> */}
+                    <ModalDeletarFeriado
+                      refreshTable={refreshTable}
+                      setRefreshTable={setRefreshTable}
+                      id={linhaTabela.id}
+                      nome={user?.nome}
                     />
                   </Flex>
                 </Td>

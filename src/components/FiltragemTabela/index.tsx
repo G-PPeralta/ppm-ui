@@ -30,7 +30,7 @@ function FiltragemTabela({
 
   const filtrarTabela = () => {
     let filtered;
-    if (search && search.length > 1) {
+    if (search && search.length > 0) {
       filtered = dadosTabela?.filter(
         (dado: any) =>
           dado[propName].toLowerCase().indexOf(search.toLowerCase()) > -1
