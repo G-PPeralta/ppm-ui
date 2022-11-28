@@ -28,6 +28,7 @@ import SelectFiltragem from "components/SelectFiltragem";
 
 import { formataParaTipo } from "utils/FormataParaTipo";
 import { formatDateToddMMyyyyhhmmCronograma } from "utils/formatDate";
+import { getSelectFiltragemValue } from "utils/GetSelectFiltragemValue";
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useDetalhamentoProjeto } from "contexts/DetalhamentoDeProjetos";
@@ -46,6 +47,7 @@ interface Props {
   setRefreshGanttCriacao: React.Dispatch<React.SetStateAction<boolean>>;
   // atividades?: any;
   idProjeto?: number;
+  infoProjeto: any;
 }
 
 interface AreaResponsavel {
@@ -60,6 +62,7 @@ function ModalCadastroAtividades({
   setRefreshGanttCriacao,
   refreshGanttCriacao,
   idProjeto,
+  infoProjeto,
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaAtividadesRelacao, reqGet } =
@@ -76,11 +79,16 @@ function ModalCadastroAtividades({
   }));
   const [, setDate] = useState<any>();
 
-  // console.log(new Date(new Date().setHours(new Date().getHours() + 24)));
+  const getNomeProjeto = listaAtividadesRelacao
+    .map((atividade: any) => ({
+      value: atividade.id,
+      label: atividade.valor,
+    }))
+    .find((item) => item.label === infoProjeto.nome_projeto);
 
-  // console.log(date);
-
-  // console.log(registerForm.values.precedentes[0].dias);
+  useEffect(() => {
+    registerForm.setFieldValue("relacao_id", getNomeProjeto?.value);
+  }, [isOpen]);
 
   useEffect(() => {
     setDate(
@@ -104,8 +112,6 @@ function ModalCadastroAtividades({
       registerForm.setFieldValue("dat_fim_plan", "");
     }
   }, [registerForm.values]);
-
-  // console.log("registerForm", registerForm.values);
 
   return (
     <>
@@ -195,6 +201,11 @@ function ModalCadastroAtividades({
                         propName={"relacao_id"}
                         options={relacoesOptions}
                         required={true}
+                        value={getSelectFiltragemValue(
+                          relacoesOptions,
+                          "relacao_id",
+                          registerForm
+                        )}
                       />
                     </Flex>
                     {/* <Text fontWeight={"bold"}>Responsável</Text> */}

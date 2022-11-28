@@ -176,6 +176,7 @@ function DetalhamentoProjeto() {
       toast.error(error.message);
     }
   }
+
   return (
     <>
       <Sidebar>
@@ -227,6 +228,7 @@ function DetalhamentoProjeto() {
               setInfoProjetoRefresh={() =>
                 setInfoProjetoRefresh(!infoProjetoRefresh)
               }
+              infoProjeto={infoProjeto}
             />
             <CurvaS data={data} />
             {/* <GraficoCurvaS /> */}

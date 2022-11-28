@@ -42,11 +42,13 @@ type ganttOptionsProps = {
   ganttOptions?: any;
   idProjeto?: number;
   setInfoProjetoRefresh: () => void;
+  infoProjeto: any;
 };
 
 export function Gantt({
   idProjeto: id,
   setInfoProjetoRefresh,
+  infoProjeto,
 }: ganttOptionsProps) {
   // const { id } = useParams();
   const [loading, setLoading] = useState(true);
@@ -277,6 +279,7 @@ export function Gantt({
             refreshGanttCriacao={refreshGanttCriacao}
             // atividades={atividades}
             idProjeto={id}
+            infoProjeto={infoProjeto}
           />
           <ModalEditarAtividade
             setRefresh={setRefresh}
