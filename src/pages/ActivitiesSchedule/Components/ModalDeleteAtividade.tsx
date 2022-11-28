@@ -102,8 +102,8 @@ function ModalDeletar({ id, onDelete, newRender }: any) {
                 variant="primary"
                 color="white"
                 onClick={() => {
-                  onDelete();
                   newRender();
+                  onDelete();
                   onClose();
                 }}
                 _hover={{
