@@ -4,6 +4,7 @@ import {
   TableContainer,
   Tbody,
   Td,
+  Tfoot,
   Th,
   Thead,
   Tr,
@@ -26,6 +27,8 @@ const columnNames = [
 ];
 
 export function TabelaAtividadesPendentes({ data, total }: Props) {
+  console.log(data);
+
   return (
     <>
       <Flex direction={"column"}>
@@ -54,9 +57,9 @@ export function TabelaAtividadesPendentes({ data, total }: Props) {
                     <Td>
                       {new Date(row.dat_fim_real) >
                       new Date(row.dat_fim_plan) ? (
-                        <Td textColor="#F40606">Pendente</Td>
+                        <Td color="#F40606">Pendente</Td>
                       ) : (
-                        <Td textColor="#059502">Concluído</Td>
+                        <Td color="#059502">Concluído</Td>
                       )}
                     </Td>
 
@@ -66,19 +69,27 @@ export function TabelaAtividadesPendentes({ data, total }: Props) {
                   </Tr>
                 ))}
             </Tbody>
+
+            {total == true && (
+              <>
+                <Tfoot>
+                  <Tr backgroundColor={"origem.500"} fontWeight={"bold"}>
+                    <Th color={"white"}>Total</Th>
+                    <Th color={"white"} w={"100%"}>
+                      {data.length > 1
+                        ? `${data.length} atividades`
+                        : `${data.length} atividade`}
+                    </Th>
+                    <Th></Th>
+                    <Th></Th>
+                    <Th></Th>
+                    <Th></Th>
+                    <Th></Th>
+                  </Tr>
+                </Tfoot>
+              </>
+            )}
           </Table>
-          {total == true && (
-            <Table>
-              <Thead>
-                <Tr backgroundColor={"origem.500"} fontWeight={"bold"}>
-                  <Th color={"white"}>Total</Th>
-                  <Th color={"white"} w={"100%"}>
-                    {data.length}
-                  </Th>
-                </Tr>
-              </Thead>
-            </Table>
-          )}
         </TableContainer>
       </Flex>
     </>
