@@ -36,7 +36,7 @@ export function TabelaAtividadesPendentes({ data, total }: Props) {
               <Tr>
                 {columnNames &&
                   columnNames.map((column) => (
-                    <Th color={"white"} fontWeight={"bold"}>
+                    <Th textAlign={"center"} color={"white"}>
                       {column}
                     </Th>
                   ))}
@@ -46,18 +46,42 @@ export function TabelaAtividadesPendentes({ data, total }: Props) {
               {data &&
                 data.map((row) => (
                   <Tr>
-                    <Td>{row.id}</Td>
-                    <Td>{row.nom_atividade}</Td>
-                    <Td>{row.vlr_planejado}</Td>
-                    <Td>{row.vlr_realizado}</Td>
-                    <Td>{row.nome_responsavel}</Td>
-                    <Td>{row.fase}</Td>
-                    <Td>
+                    <Td textAlign={"center"} fontWeight={"semibold"}>
+                      {row.id}
+                    </Td>
+                    <Td textAlign={"center"} fontWeight={"semibold"}>
+                      {row.nom_atividade}
+                    </Td>
+                    <Td textAlign={"center"} fontWeight={"semibold"}>
+                      {row.vlr_planejado}
+                    </Td>
+                    <Td textAlign={"center"} fontWeight={"semibold"}>
+                      {row.vlr_realizado}
+                    </Td>
+                    <Td textAlign={"center"} fontWeight={"semibold"}>
+                      {row.nome_responsavel}
+                    </Td>
+                    <Td textAlign={"center"} fontWeight={"semibold"}>
+                      {row.fase}
+                    </Td>
+                    <Td textAlign={"center"} fontWeight={"semibold"}>
                       {new Date(row.dat_fim_real) >
                       new Date(row.dat_fim_plan) ? (
-                        <Td color="#F40606">Pendente</Td>
+                        <Td
+                          textAlign={"center"}
+                          fontWeight={"semibold"}
+                          color="#F40606"
+                        >
+                          Pendente
+                        </Td>
                       ) : (
-                        <Td color="#059502">Concluído</Td>
+                        <Td
+                          textAlign={"center"}
+                          fontWeight={"semibold"}
+                          color="#059502"
+                        >
+                          Concluído
+                        </Td>
                       )}
                     </Td>
 
@@ -73,7 +97,7 @@ export function TabelaAtividadesPendentes({ data, total }: Props) {
                 <Tfoot>
                   <Tr backgroundColor={"origem.500"} fontWeight={"bold"}>
                     <Th color={"white"}>Total</Th>
-                    <Th color={"white"} w={"100%"}>
+                    <Th textAlign={"center"} color={"white"} w={"100%"}>
                       {data.length > 1
                         ? `${data.length} atividades`
                         : `${data.length} atividade`}

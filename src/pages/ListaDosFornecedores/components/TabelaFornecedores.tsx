@@ -217,7 +217,7 @@ export function TabelaFornecedores({
           <Tfoot>
             <Tr background={"origem.500"}>
               <Th color="white">Total</Th>
-              <Th style={{ color: "white" }}>
+              <Th textAlign={"center"} style={{ color: "white" }}>
                 {fornecedores.length > 0
                   ? `${fornecedores.length} fornecedores`
                   : `${fornecedores.length} fornecedor`}

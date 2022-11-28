@@ -493,7 +493,7 @@ export function LicoesAprendidasProjetos() {
                   <Tfoot>
                     <Tr background={"origem.500"}>
                       <Th color={"white"}>Total</Th>
-                      <Th color={"white"}>
+                      <Th textAlign={"center"} color={"white"}>
                         {tableData.length > 1
                           ? `${tableData.length} lições`
                           : `${tableData.length} lição `}{" "}
