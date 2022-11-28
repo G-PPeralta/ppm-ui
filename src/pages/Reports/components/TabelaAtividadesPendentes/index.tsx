@@ -27,8 +27,6 @@ const columnNames = [
 ];
 
 export function TabelaAtividadesPendentes({ data, total }: Props) {
-  console.log(data);
-
   return (
     <>
       <Flex direction={"column"}>
