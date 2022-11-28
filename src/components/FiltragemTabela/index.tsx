@@ -58,6 +58,7 @@ function FiltragemTabela({
           {nomeLabel.toUpperCase()}
         </Text>
         <Input
+          fontSize={"14px"}
           h={"56px"}
           fontWeight={"400"}
           width={"328px"}
@@ -75,7 +76,9 @@ function FiltragemTabela({
       <Flex>
         <Button
           h={"56px"}
-          borderRadius={"10px"}
+          w={"117px"}
+          borderRadius={"8px"}
+          fontFamily={"Mulish"}
           background={"white"}
           border={"2px solid"}
           color={"origem.500"}
