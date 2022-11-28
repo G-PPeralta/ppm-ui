@@ -24,24 +24,12 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
 
   const remove = (index: number) => {
     // Pega a lista de precedentes diretamente do Formik
-    const newList = registerForm.values.precedentes;
-
+    const oldList = registerForm.values.precedentes;
     // Remove item da lista
-    newList.splice(index, 1);
+    const newList = oldList.splice(index, 1);
     // Atualiza lista no Formik
     registerForm.setFieldValue("precedentes", newList);
   };
-
-  // const getValue = (options: any, i: number, chave: string) => {
-  //   const index = options
-  //     .map(({ value }: any) => value)
-  //     .indexOf(registerForm?.values?.precedentes?.[i][chave]);
-
-  //   return {
-  //     value: options?.[index]?.value,
-  //     label: options?.[index]?.label,
-  //   };
-  // };
 
   const handleDataFinalPredecessor = async () => {
     if (
