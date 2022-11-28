@@ -28,7 +28,8 @@ import { useReorder } from "hooks/useReorder";
 
 function ModalReorderSimples({ setRefresh, refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaSondas, listaPocos } = useReorder();
+  const { registerForm, loading, listaSondas, listaPocos, update } =
+    useReorder();
   const [render, setRender] = useState(false);
   const [showError, setShowError] = useState(false);
   const [pocoOrigem, setPocoOrigem] = useState("");
@@ -93,6 +94,12 @@ function ModalReorderSimples({ setRefresh, refresh }: any) {
       }
     }
   }, [registerForm.values.id_campanha_original]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      update();
+    }, 1000);
+  }, [refresh]);
 
   return (
     <>
