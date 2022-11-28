@@ -9,6 +9,7 @@ import {
   Thead,
   Tr,
   Flex,
+  Tfoot,
   // Tfoot,
 } from "@chakra-ui/react";
 
@@ -52,6 +53,17 @@ export function TabelaPriorizacao({ refresh, setRefresh }: TableProps) {
     setFrom,
     setTo,
   };
+
+  const header = ["ID", "Priorizações", "Ações"];
+
+  const footer = [""];
+
+  if (footer && footer.length < header.length) {
+    const diferenca = header.length - footer.length;
+    for (let index = 0; index < diferenca; index += 1) {
+      footer.push("");
+    }
+  }
 
   const tableData = data
     .sort((a, b) => a.id - b.id)
@@ -122,15 +134,15 @@ export function TabelaPriorizacao({ refresh, setRefresh }: TableProps) {
               >
                 {tableData}
               </Tbody>
-              {/* <Tfoot>
-              <Tr background={"origem.500"}>
-                <Th background={"origem.500"} color="transparent">
-                  total
-                </Th>
-                <Th background={"origem.500"} color="white"></Th>
-                <Th background={"origem.500"} color="white"></Th>
-              </Tr>
-            </Tfoot> */}
+              <Tfoot>
+                <Tr background={"origem.500"}>
+                  {footer.map((item: string, index: number) => (
+                    <Th color="white" key={index}>
+                      {item}
+                    </Th>
+                  ))}
+                </Tr>
+              </Tfoot>
             </Table>
           </TableContainer>
 
