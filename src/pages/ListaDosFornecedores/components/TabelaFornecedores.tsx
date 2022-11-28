@@ -218,7 +218,9 @@ export function TabelaFornecedores({
             <Tr background={"origem.500"}>
               <Th color="white">Total</Th>
               <Th style={{ color: "white" }}>
-                {fornecedores.length} fornecedores
+                {fornecedores.length > 0
+                  ? `${fornecedores.length} fornecedores`
+                  : `${fornecedores.length} fornecedor`}
               </Th>
               <Th color="white"></Th>
               <Th color="white"></Th>
