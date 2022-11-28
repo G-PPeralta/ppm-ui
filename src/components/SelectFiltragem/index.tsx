@@ -46,13 +46,9 @@ function SelectFiltragem({
       borderRadius: "8px",
       fontWeigth: "400",
       fontSize: "14px",
-      "&:disabled": {
-        backgroundColor: "#F7FAFC",
-        color: "#718096",
-      },
 
-      "&:disabled:hover": {
-        cursor: "not-allowed",
+      "&:disabled": {
+        backgroundColor: "#FFFFFF",
       },
     }),
 
