@@ -39,7 +39,7 @@ function Feriados() {
     "NOME DO FERIADO",
     "TIPO",
     "DATA",
-    "PROJETO",
+    // "PROJETO",
     "OBSERVAÇÕES",
     "AÇÕES",
   ];
@@ -85,9 +85,9 @@ function Feriados() {
                         linhaTabela.ano_feriado}
                   </Text>
                 </Td>
-                <Td textAlign={"center"} fontWeight={"semibold"}>
+                {/* <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Text>{linhaTabela.nome_projeto}</Text>
-                </Td>
+                </Td> */}
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Text>
                     {linhaTabela.ano_feriado === null ? "Feriado fixo" : "---"}
