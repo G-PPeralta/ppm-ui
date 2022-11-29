@@ -13,7 +13,10 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { IDadosAtividades } from "interfaces/TabelaAtividades";
+import moment from "moment";
 import { Cell, Pie, PieChart } from "recharts";
+
+// import { formatDate } from "utils/formatDate";
 
 import { TabelaAtividadesPendentes } from "../TabelaAtividadesPendentes/index";
 
@@ -91,6 +94,10 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
       currency: "BRL",
     });
   }
+
+  // console.log(typeof data.startDate);
+  // console.log(new Date(data.startDate));
+  // console.log(moment(new Date(data.startDate)).utc().format("DD/MM/YYYY"));
 
   return (
     <Accordion padding={0} margin={0} allowToggle w={"100%"}>
@@ -195,7 +202,9 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                 <Text fontSize={"16px"} fontWeight={"500"} color={"gray.600"}>
                   {data.startDate === null
                     ? "NA"
-                    : new Date(data.startDate).toLocaleDateString()}
+                    : moment(new Date(data.startDate))
+                        .utc()
+                        .format("DD/MM/YYYY")}
                 </Text>
               </Flex>
               <Heading color={"#0047BB"} fontWeight={"normal"}>
@@ -213,7 +222,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                 <Text fontSize={"16px"} fontWeight={"500"} color={"gray.600"}>
                   {data.endDate === null
                     ? "NA"
-                    : new Date(data.endDate).toLocaleDateString()}
+                    : moment(new Date(data.endDate)).utc().format("DD/MM/YYYY")}
                 </Text>
               </Flex>
             </Flex>
