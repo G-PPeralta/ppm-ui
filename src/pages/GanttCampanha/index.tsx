@@ -3,9 +3,12 @@ import { MdViewList } from "react-icons/md";
 
 import {
   Box,
+  Button,
   Flex,
   IconButton,
+  Input,
   Stack,
+  Text,
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -26,20 +29,24 @@ import { getCampanhasInfo } from "services/post/Campanhas";
 import ExpandGanttModal from "./components/ExpandGanttModal";
 
 import "./gantt.css";
-
+import { BsSearch } from "react-icons/bs";
 // import { Gantt } from "../StatisticsGantt/components/Gantt";
 // import ModalAdicionarOperacao from "./components/ModalAdicionarOperacao";
 
 interface GanttCampanha {
-  id_poco: number;
+  TaskID: string;
   inicioprojplanejado: Date;
   finalprojplanejado: Date;
   pct_plan: string;
-  pct_real: string;
+  Progress: string;
+  id: number;
+  intervencaoIniciada: string;
 }
 
 function GanttCampanha() {
   const [ganttData, setGanttData] = useState<GanttCampanha[]>([]);
+  const [ganttDataFilter, setGanttDataFilter] = useState<GanttCampanha[]>([]);
+  const [filter, setFilter] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pocoId, setPocoId] = useState(0);
   const [intervencaoIniciada, setIntervencaoIniciada] = useState<
@@ -124,6 +131,19 @@ function GanttCampanha() {
       });
 
       setGanttData(list);
+      setGanttDataFilter(list);
+    }
+  };
+
+  const filterPocos = (poco_id: string) => {
+    let filtered;
+    if (poco_id && poco_id.length > 0) {
+      filtered = ganttData?.filter((x) => x.TaskID.includes(poco_id));
+    } else {
+      filtered = ganttData;
+    }
+    if (filtered) {
+      setGanttDataFilter([...filtered]);
     }
   };
 
@@ -148,6 +168,53 @@ function GanttCampanha() {
             {
               <>
                 <Stack spacing="8">
+                  <Flex align={"end"} wrap={"wrap"}>
+                    <Flex direction={"column"} mr="16px">
+                      <Text
+                        fontWeight={"700"}
+                        fontSize={"12px"}
+                        color={"#949494"}
+                      >
+                        POÇO
+                      </Text>
+
+                      <Input
+                        h={"56px"}
+                        fontSize={"14px"}
+                        fontFamily={"Mulish"}
+                        fontWeight={"400"}
+                        width={"328px"}
+                        color={"black"}
+                        isRequired
+                        placeholder="Nome do poço"
+                        _placeholder={{ color: "#949494" }}
+                        id="name"
+                        type="text"
+                        name="name"
+                        value={filter}
+                        onChange={(e) => setFilter(e.target.value)}
+                      />
+                    </Flex>
+                    <Flex>
+                      <Button
+                        h={"56px"}
+                        borderRadius={"8px"}
+                        fontSize={"18px"}
+                        fontWeight={"700"}
+                        background={"origem.500"}
+                        variant="primary"
+                        color="white"
+                        onClick={() => filterPocos(filter)}
+                        _hover={{
+                          background: "origem.600",
+                          transition: "all 0.4s",
+                        }}
+                        rightIcon={<BsSearch />}
+                      >
+                        Filtrar
+                      </Button>
+                    </Flex>
+                  </Flex>
                   <GanttComponent
                     taskFields={{
                       id: "TaskID",
@@ -155,7 +222,7 @@ function GanttCampanha() {
                       endDate: "endDate",
                       progress: "Progress",
                     }}
-                    dataSource={ganttData}
+                    dataSource={ganttDataFilter}
                     toolbar={["ZoomIn", "ZoomOut", "ZoomToFit"]}
                     renderBaseline={false}
                     baselineColor="red"
