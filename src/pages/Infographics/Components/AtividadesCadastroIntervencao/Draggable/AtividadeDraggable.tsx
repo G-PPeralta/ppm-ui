@@ -44,20 +44,6 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<any>(id);
-  // const [checked, setChecked] = useState<boolean>(false);
-  const [disabled, setDisabled] = useState<boolean>(false);
-
-  // console.log(checked);
-  // console.log(checked == "checked");
-
-  // console.log(registerForm.values.ind_atv_execucao);
-
-  // useEffect(() => {
-  //   // registerForm.setFieldValue(
-  //   //   `atividades[${index}].ind_atv_execucao`,
-  //   //   checked !== "checked"
-  //   // );
-  // }, [checked]);
 
   const remove = (index: number) => {
     if (registerForm.values.atividades.length > 1) {
@@ -102,13 +88,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     };
   };
 
-  useEffect(() => {
-    const now = Date.now();
-    const newId = draggableId + "-" + now.toLocaleString();
-    setDraggableId(newId);
-  }, []);
-
-  useEffect(() => {
+  const isDisabled = (index: any) => {
     const atividadeDefinida = registerForm.values.atividades.some(
       (atividade: any) => atividade.ind_atv_execucao === true
     );
@@ -116,10 +96,20 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
       atividadeDefinida &&
       registerForm.values.atividades[index].ind_atv_execucao === false
     ) {
-      setDisabled(!disabled);
+      return true;
     } else {
-      setDisabled(false);
+      return false;
     }
+  };
+
+  useEffect(() => {
+    const now = Date.now();
+    const newId = draggableId + "-" + now.toLocaleString();
+    setDraggableId(newId);
+  }, []);
+
+  useEffect(() => {
+    isDisabled(index);
   }, [registerForm.values.atividades]);
 
   return (
@@ -281,7 +271,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                         e.target.checked
                       );
                     }}
-                    isDisabled={disabled}
+                    isDisabled={isDisabled(index)}
                     size="md"
                     colorScheme="blue"
                   >

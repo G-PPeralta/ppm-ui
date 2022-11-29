@@ -25,7 +25,6 @@ import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrima
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 import SelectFiltragem from "components/SelectFiltragem";
 
-import { formataParaTipo } from "utils/FormataParaTipo";
 import { formatDateToddMMyyyyhhmm } from "utils/formatDate";
 import { handleCancelar } from "utils/handleCadastro";
 
@@ -187,7 +186,7 @@ function ModalAdicionarAtividade({
       registerForm.setFieldValue("profundidade", 0);
     } else {
       registerForm.setFieldValue("metodo_elevacao_id", null);
-      registerForm.setFieldValue("profundidade", null);
+      registerForm.setFieldValue("profundidade", 0);
     }
   }, [registerForm.values.operacao_id]);
 
@@ -375,17 +374,14 @@ function ModalAdicionarAtividade({
                               fontSize={"12px"}
                               color={"#949494"}
                             >
-                              PROFUNDIDADE
+                              PROFUNDIDADE (METROS)
                             </Text>
                           </Flex>
                           <NumberInput
                             min={0}
-                            max={999999}
+                            max={99999999}
                             step={1}
-                            value={formataParaTipo(
-                              "metros",
-                              registerForm.values.profundidade
-                            )}
+                            value={registerForm.values.profundidade}
                             onChange={(event) => handleChange(event)}
                             h={"56px"}
                           >

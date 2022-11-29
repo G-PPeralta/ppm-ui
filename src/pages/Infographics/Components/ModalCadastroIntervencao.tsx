@@ -22,7 +22,7 @@ import {
   Button,
   Progress,
 } from "@chakra-ui/react";
-import { Ring } from "@uiball/loaders";
+import { ChaoticOrbit, Ring } from "@uiball/loaders";
 import { ProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
 import { formatDate } from "utils/formatDate";
@@ -60,6 +60,7 @@ function ModalCadastroIntervencao({
   const [valueProgressoMensagemErro, setValueProgressoMensagemErro] =
     useState<number>(100);
   const [dataFinalPrevista, setDataFinalPrevista] = useState<any>("");
+  const [reorderLoading, setReorderLoading] = useState<any>(false);
 
   const innerWidth = window.innerWidth;
 
@@ -378,10 +379,23 @@ function ModalCadastroIntervencao({
                       </Flex>
                     )}
 
-                    <AtividadesCadastroIntervencao
-                      registerForm={registerForm}
-                      listaAtividadesPrecedentes={listaAtividadesPrecedentes}
-                    />
+                    {!reorderLoading ? (
+                      <AtividadesCadastroIntervencao
+                        registerForm={registerForm}
+                        listaAtividadesPrecedentes={listaAtividadesPrecedentes}
+                        reorderState={{ reorderLoading, setReorderLoading }}
+                      />
+                    ) : (
+                      <Flex
+                        display={"flex"}
+                        align={"center"}
+                        justify={"center"}
+                        h={"40vh"}
+                      >
+                        {/* <Ring speed={2} lineWeight={5} color="blue" size={64} /> */}
+                        <ChaoticOrbit size={64} speed={1.5} color="blue" />
+                      </Flex>
+                    )}
 
                     <Stack>
                       <FormControl>
