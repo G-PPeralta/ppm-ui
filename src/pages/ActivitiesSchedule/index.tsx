@@ -67,11 +67,11 @@ export function ActivitiesSchedule() {
   useEffect(() => {
     setTimeout(() => {
       requestHandler();
-    }, 10);
-  }, [refresh, atividades]);
+    }, 100);
+  }, [refresh]);
 
   useEffect(() => {
-    // setLoadingCards(true);
+    setLoadingCards(true);
     if (atividades.length > 0) {
       setLoadingCards(false);
     }
@@ -84,12 +84,7 @@ export function ActivitiesSchedule() {
         setLoadings(true);
       }
     }, 15000);
-  }, [loadings]);
-
-  // console.log(atividades);
-  // console.log(atividades.length);
-  // console.log(loadings);
-  // console.log(loadingCards);
+  }, [atividades]);
 
   return (
     <>
@@ -111,8 +106,6 @@ export function ActivitiesSchedule() {
                 <ModalCadastroAtividadeIntervencao
                   id={id}
                   atividades={atividades}
-                  setRefresh={setRefresh}
-                  refresh={refresh}
                 />
                 <Button
                   h={"56px"}
