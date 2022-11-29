@@ -17,7 +17,6 @@ function BotaoAdicionar({ add, registerForm }: Props) {
       (atividade: any) =>
         atividade.tarefa_id <= 0 ||
         atividade.area_atuacao_id <= 0 ||
-        atividade.responsavel_id === 0 ||
         atividade.qtde_dias === 0
     );
     setIsDisabled(isDisabled);
