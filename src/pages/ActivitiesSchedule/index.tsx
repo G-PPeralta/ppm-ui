@@ -71,7 +71,7 @@ export function ActivitiesSchedule() {
   }, [refresh, atividades]);
 
   useEffect(() => {
-    setLoadingCards(true);
+    // setLoadingCards(true);
     if (atividades.length > 0) {
       setLoadingCards(false);
     }
@@ -84,7 +84,12 @@ export function ActivitiesSchedule() {
         setLoadings(true);
       }
     }, 15000);
-  }, [atividades]);
+  }, [loadings]);
+
+  // console.log(atividades);
+  // console.log(atividades.length);
+  // console.log(loadings);
+  // console.log(loadingCards);
 
   return (
     <>
