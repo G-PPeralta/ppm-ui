@@ -35,6 +35,7 @@ import { getGanttCampanhaData } from "services/get/Campanhas";
 // import { ganttData } from "pages/Reports/components/data";
 
 import "../gantt.css";
+import ModalDeletarAtvCampanha from "./ModalDeletarAtvCampanha";
 
 function ExpandGanttModal({
   isModalOpen,
@@ -52,6 +53,7 @@ function ExpandGanttModal({
   const [refresh, setRefresh] = useState(false);
   // const [intervencaoIniciada, setIntervencaoIniciada] = useState<any>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [refreshGanttDelete, setRefreshGanttDelete] = useState(false);
 
   const { optionsAreaAtuacao, optionsResponsaveis } = useRequests();
 
@@ -92,9 +94,26 @@ function ExpandGanttModal({
     setLoading(false);
   };
 
+  const actionsTemplate = (props: any) => (
+    <Flex
+      // w={"100%"}
+      // style={{ position: "relative", top: "-8px" }}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
+      <ModalDeletarAtvCampanha
+        id={props.TaskID}
+        // isParent={props.hasChildRecords}
+        setLoading={setLoading}
+        setRefreshGanttDelete={() => setRefreshGanttDelete(!refreshGanttDelete)}
+        handleSetGanttData={requestHandler}
+      />
+    </Flex>
+  );
+
   useEffect(() => {
     requestHandler();
-  }, [refresh]);
+  }, [refresh, refreshGanttDelete]);
 
   return (
     <>
@@ -194,6 +213,14 @@ function ExpandGanttModal({
                   width="100"
                   template={actionsTemplate}
                 ></ColumnDirective> */}
+                  <ColumnDirective
+                    field="acao"
+                    headerText="Ação"
+                    headerTextAlign="Center"
+                    textAlign="Center"
+                    width="100"
+                    template={actionsTemplate}
+                  ></ColumnDirective>
                   <ColumnDirective
                     field="TaskName"
                     headerText="Ação/Projeto"
