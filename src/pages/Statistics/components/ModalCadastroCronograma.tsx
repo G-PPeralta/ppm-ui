@@ -12,8 +12,8 @@ import {
   Textarea,
   Button,
   Text,
-  NumberInput,
-  NumberInputField,
+  // NumberInput,
+  // NumberInputField,
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
@@ -126,8 +126,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                           required={true}
                         />
                         <FormControl>
-                          <Flex gap={1}>
-                            {/* <RequiredField /> */}
+                          {/* <Flex gap={1}>
                             <Text
                               fontWeight={"700"}
                               fontSize={"12px"}
@@ -135,9 +134,9 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                             >
                               PROFUNDIDADE DA ZONA INTERVIDA MAIS
                             </Text>
-                          </Flex>
+                          </Flex> */}
 
-                          <NumberInput
+                          {/* <NumberInput
                             _placeholder={{ color: "#949494" }}
                             fontSize={"14px"}
                             fontWeight={"400"}
@@ -155,7 +154,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                             }}
                           >
                             <NumberInputField bg={"#fff"} h={"56px"} />
-                          </NumberInput>
+                          </NumberInput> */}
                         </FormControl>
                       </Flex>
                     </Stack>
