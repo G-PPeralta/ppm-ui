@@ -94,10 +94,15 @@ export function useReorder() {
     setLoading(false);
   }, []);
 
+  const update = () => {
+    reqGet();
+  };
+
   return {
     registerForm,
     loading,
     listaSondas,
     listaPocos,
+    update,
   };
 }
