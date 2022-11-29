@@ -66,6 +66,8 @@ function ModalEditarFeriado({ feriado }: Props) {
     onSubmit: () => {},
   });
 
+  // console.log(updateForm.isValid);
+
   const optionsTipoFeriado = [
     {
       value: 1,

@@ -9,7 +9,7 @@ import {
   Thead,
   Tr,
   Flex,
-  // Tfoot,
+  Tfoot,
 } from "@chakra-ui/react";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
@@ -58,6 +58,17 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
     setFrom,
     setTo,
   };
+
+  const header = ["ID", "Benefícios", "Nota", "Ações"];
+
+  const footer = [""];
+
+  if (footer && footer.length < header.length) {
+    const diferenca = header.length - footer.length;
+    for (let index = 0; index < diferenca; index += 1) {
+      footer.push("");
+    }
+  }
 
   const tableData = data
     .sort((a, b) => a.id - b.id)
@@ -137,14 +148,15 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
             >
               {tableData}
             </Tbody>
-            {/* <Tfoot>
+            <Tfoot>
               <Tr background={"origem.500"}>
-                <Th color="transparent">Total</Th>
-                <Th></Th>
-                <Th></Th>
-                <Th color="transparent"></Th>
+                {footer.map((item: string, index: number) => (
+                  <Th color="white" key={index}>
+                    {item}
+                  </Th>
+                ))}
               </Tr>
-            </Tfoot> */}
+            </Tfoot>
           </Table>
         </TableContainer>
 

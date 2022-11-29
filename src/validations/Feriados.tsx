@@ -11,8 +11,10 @@ export const cadastroFeriadoSchema = yup.object({
 });
 
 export const editarFeriadoSchema = yup.object({
-  id_projeto: yup.number().when("ind_global", {
-    is: 0,
-    then: yup.number().required("Campo obrigatório").moreThan(0),
-  }),
+  // id_projeto: yup.number().when("ind_global", {
+  //   is: 0,
+  //   then: yup.number().required("Campo obrigatório").moreThan(0),
+  // }),
+  nome_feriado: yup.string().required("Campo obrigatório"),
+  aplicar_todos_os_anos: yup.boolean().notRequired(),
 });

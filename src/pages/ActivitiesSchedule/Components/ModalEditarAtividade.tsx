@@ -175,7 +175,7 @@ function ModalEditarAtividade({
             <FormControl>
               <Flex direction={"column"} gap={4}>
                 <Stack>
-                  <Text fontWeight={"bold"}>Atividade</Text>
+                  {/* <Text fontWeight={"bold"}>Atividade</Text> */}
                   <Flex
                     flexDirection={useBreakpointValue({
                       base: "column",
@@ -194,6 +194,8 @@ function ModalEditarAtividade({
                         </Text>
                       </Flex>
                       <Input
+                        fontSize={"14px"}
+                        fontWeight={"400"}
                         h={"56px"}
                         isDisabled
                         placeholder="Id"
@@ -215,6 +217,8 @@ function ModalEditarAtividade({
                         </Text>
                       </Flex>
                       <Input
+                        fontSize={"14px"}
+                        fontWeight={"400"}
                         h={"56px"}
                         placeholder="Digite o nome da atividade"
                         id="nom_atividade"
@@ -236,6 +240,8 @@ function ModalEditarAtividade({
                         </Text>
                       </Flex>
                       <NumberInput
+                        fontSize={"14px"}
+                        fontWeight={"400"}
                         h={"56px"}
                         min={0}
                         max={100}
@@ -270,6 +276,8 @@ function ModalEditarAtividade({
                         </Text>
                       </Flex>
                       <DateTimePickerDataInicioPlan
+                        fontSize={"14px"}
+                        fontWeight={"400"}
                         inicioPlanejado={inicioPlanejado}
                         setInicioPlanejado={setInicioPlanejado}
                         intervencaoIniciada={intervencaoIniciada}
@@ -330,7 +338,7 @@ function ModalEditarAtividade({
                       />
                     </Flex>
                   </Flex>
-                  <Text fontWeight={"bold"}>Responsável</Text>
+                  {/* <Text fontWeight={"bold"}>Responsável</Text> */}
                   <Flex
                     flexDirection={useBreakpointValue({
                       base: "column",
@@ -349,6 +357,8 @@ function ModalEditarAtividade({
                         </Text>
                       </Flex>
                       <Select
+                        fontSize={"14px"}
+                        fontWeight={"400"}
                         h={"56px"}
                         placeholder="Selecione o responsável"
                         id="responsavelId"
@@ -376,6 +386,8 @@ function ModalEditarAtividade({
                         </Text>
                       </Flex>
                       <Select
+                        fontSize={"14px"}
+                        fontWeight={"400"}
                         h={"56px"}
                         placeholder="Selecione o responsável"
                         id="areaId"
@@ -415,9 +427,9 @@ function ModalEditarAtividade({
                     gap={5}
                   >
                     <FormControl gap={3}>
-                      <Text fontWeight={"bold"} mb={2}>
+                      {/* <Text fontWeight={"bold"} mb={2}>
                         Observações
-                      </Text>
+                      </Text> */}
                       <Flex gap={1}>
                         <Text
                           fontWeight={"bold"}
@@ -428,6 +440,9 @@ function ModalEditarAtividade({
                         </Text>
                       </Flex>
                       <Textarea
+                        _placeholder={{ color: "#949494" }}
+                        fontSize={"14px"}
+                        fontWeight={"400"}
                         placeholder="Adicione comentários sobre a atividade"
                         id="dsc_comentario"
                         name="dsc_comentario"
