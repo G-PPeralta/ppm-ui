@@ -60,7 +60,7 @@ export function useAdicionarOperacao(
     data_inicio: "",
     data_fim: "",
     metodo_elevacao_id: null,
-    profundidade: null,
+    profundidade: 0,
     precedentes: [
       {
         atividadePrecedenteId: 0,
