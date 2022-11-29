@@ -14,16 +14,17 @@ import {
   useBreakpointValue,
   // Input,
   ModalCloseButton,
+  Text,
 } from "@chakra-ui/react";
+import { Ring } from "@uiball/loaders";
 
 import InputCadastroInline from "pages/CadastrarProjeto/Components/InputCadastroInline";
 
-import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 import SelectFiltragem from "components/SelectFiltragem";
 
-import { handleCancelar } from "utils/handleCadastro";
+import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 import { getUniqueActivities } from "utils/removeDuplicateObjectsFromArray";
 
 import { useCadastroAtividadeIntervencao } from "hooks/useCadastroAtividadeIntervencao";
@@ -50,6 +51,10 @@ function ModalCadastroAtividadeIntervencao({
     listaAtividades,
     hookRefreshState,
   } = useCadastroAtividadeIntervencao();
+
+  const newRender = () => {
+    setRefresh(!refresh);
+  };
 
   const responsaveisOptions = listaResponsaveis.map(
     (responsavel: Responsavel) => ({
@@ -93,6 +98,8 @@ function ModalCadastroAtividadeIntervencao({
       registerForm.setFieldValue("id_intervencao", id);
     }
   }, [registerForm.values]);
+
+  useEffect(() => {}, [refresh, atividades]);
 
   return (
     <>
@@ -341,14 +348,43 @@ function ModalCadastroAtividadeIntervencao({
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                <BotaoAzulLargoPrimary
+                {/* <BotaoAzulLargoPrimary
                   text={"Cadastrar"}
                   formikForm={registerForm}
                   onClose={onClose}
                   setRefresh={setRefresh}
                   refresh={refresh}
                   loading={loading}
-                />
+                /> */}
+                <Button
+                  // disabled={!registerForm.isValid}
+                  background="origem.500"
+                  variant="primary"
+                  color="white"
+                  onClick={() => {
+                    newRender();
+                    handleCadastrar(registerForm, onClose);
+                  }}
+                  _hover={{
+                    background: "origem.600",
+                    transition: "all 0.4s",
+                  }}
+                  borderRadius={"8px"}
+                  w={"208px"}
+                  h={"56px"}
+                  fontSize="18px"
+                  fontWeight={"700"}
+                  fontFamily={"Mulish"}
+                  disabled={!registerForm.isValid}
+                >
+                  {loading ? (
+                    <Ring speed={2} lineWeight={5} color="white" size={24} />
+                  ) : (
+                    <>
+                      <Text>Cadastrar</Text>
+                    </>
+                  )}
+                </Button>
               </Flex>
             </ModalFooter>
           </form>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BsSearch } from "react-icons/bs";
 import { MdViewList } from "react-icons/md";
 
 import {
@@ -29,7 +30,7 @@ import { getCampanhasInfo } from "services/post/Campanhas";
 import ExpandGanttModal from "./components/ExpandGanttModal";
 
 import "./gantt.css";
-import { BsSearch } from "react-icons/bs";
+
 // import { Gantt } from "../StatisticsGantt/components/Gantt";
 // import ModalAdicionarOperacao from "./components/ModalAdicionarOperacao";
 

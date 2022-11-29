@@ -27,6 +27,11 @@ export const cadastroOperacaoSchema = yup.object({
   nom_operacao: yup.string().required("O nome da atividade é obrigatório!"),
 });
 
+export const cadastroNovoCronograma = yup.object({
+  sonda_id: yup.number().required().moreThan(0),
+  poco_id: yup.number().required().moreThan(0),
+});
+
 export const cadastroLicaoAprendida = yup.object({
   licao_aprendida: yup.string().required("O campo é obrigatório!"),
   data: yup.string().required("O campo é obrigatório!"),

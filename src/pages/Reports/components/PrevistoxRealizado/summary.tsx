@@ -15,6 +15,8 @@ import {
 import { IDadosAtividades } from "interfaces/TabelaAtividades";
 import { Cell, Pie, PieChart } from "recharts";
 
+import { formatDate } from "utils/formatDate";
+
 import { TabelaAtividadesPendentes } from "../TabelaAtividadesPendentes/index";
 
 export interface SummaryData {
@@ -35,7 +37,7 @@ type Props = {
 
 export function ProjectSummary({ data, table, dataTable }: Props) {
   function createPieData(data: SummaryData) {
-    const p = Number(data.percent);
+    const p = Number(data.percent) > 100 ? 100 : Number(data.percent);
 
     const pieData = [
       {
@@ -91,6 +93,10 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
       currency: "BRL",
     });
   }
+
+  // console.log(typeof data.startDate);
+  // console.log(new Date(data.startDate));
+  // console.log(moment(new Date(data.startDate)).utc().format("DD/MM/YYYY"));
 
   return (
     <Accordion padding={0} margin={0} allowToggle w={"100%"}>
@@ -159,7 +165,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                   )}
                 </Box>
               </Box>
-              <Flex direction={"column"} w={"100%"}>
+              <Flex direction={"column"} w={"280px"}>
                 <Heading
                   as="h3"
                   fontSize="24px"
@@ -193,9 +199,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                   Início Real
                 </Text>
                 <Text fontSize={"16px"} fontWeight={"500"} color={"gray.600"}>
-                  {data.startDate === null
-                    ? "NA"
-                    : new Date(data.startDate).toLocaleDateString()}
+                  {data.startDate === null ? "NA" : formatDate(data.startDate)}
                 </Text>
               </Flex>
               <Heading color={"#0047BB"} fontWeight={"normal"}>

@@ -68,7 +68,7 @@ export function ActivitiesSchedule() {
     setTimeout(() => {
       requestHandler();
     }, 100);
-  }, [refresh]);
+  }, [refresh, atividades]);
 
   useEffect(() => {
     setLoadingCards(true);
@@ -106,6 +106,8 @@ export function ActivitiesSchedule() {
                 <ModalCadastroAtividadeIntervencao
                   id={id}
                   atividades={atividades}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
                 />
                 <Button
                   h={"56px"}

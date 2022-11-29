@@ -63,10 +63,10 @@ export function TabelaProjetos({
     0
   );
 
-  function formatDate(date: string) {
-    const formated = date.substring(0, 10).split("-");
-    return `${formated[2]}/${formated[1]}/${formated[0]}`;
-  }
+  // function formatDate(date: string) {
+  //   const formated = date.substring(0, 10).split("-");
+  //   return `${formated[2]}/${formated[1]}/${formated[0]}`;
+  // }
 
   // console.log(data[0].prioridade);
 
@@ -215,7 +215,7 @@ export function TabelaProjetos({
                 >
                   {projeto.data_inicio == null
                     ? "---"
-                    : formatDate(projeto.data_inicio)}
+                    : new Date(projeto.data_inicio).toLocaleDateString()}
                 </Td>
                 <Td
                   fontWeight={"semibold"}
@@ -224,7 +224,7 @@ export function TabelaProjetos({
                 >
                   {projeto.data_fim == null
                     ? "---"
-                    : formatDate(projeto.data_fim)}
+                    : new Date(projeto.data_fim).toLocaleDateString()}
                 </Td>
                 {/* <Td
                   fontWeight={"semibold"}

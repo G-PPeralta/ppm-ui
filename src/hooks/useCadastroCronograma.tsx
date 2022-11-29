@@ -8,6 +8,7 @@ import {
   Tarefas,
 } from "interfaces/CadastrosModaisInfograficos";
 import { Operacao } from "interfaces/Estatisticas";
+import { cadastroNovoCronograma } from "validations/Estatisticas";
 
 import { useToast } from "contexts/Toast";
 
@@ -119,7 +120,7 @@ export function useCadastroCronograma(refresh?: boolean) {
 
   const registerForm: any = useFormik({
     initialValues,
-    // validationSchema: cadastroNovoCronogramaSchema,
+    validationSchema: cadastroNovoCronograma,
     onSubmit: async (values) => {
       const newValues: any = {
         nom_usu_create: user?.nome,
