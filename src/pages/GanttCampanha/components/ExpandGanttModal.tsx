@@ -27,6 +27,8 @@ import { Ring } from "@uiball/loaders";
 
 import ModalEditarAtividade from "pages/ActivitiesSchedule/Components/ModalEditarAtividade";
 
+import { useToast } from "contexts/Toast";
+
 import { useRequests } from "hooks/useRequests";
 
 import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
@@ -45,6 +47,7 @@ function ExpandGanttModal({
 }: any) {
   // const { state }: any = useLocation();
   // const [poco, setPoco] = useState(true);
+  const { toast } = useToast();
   const [loading, setLoading] = useState(true);
   const [ganttData, setGanttData] = useState([]);
   const [atividades, setAtividades] = useState<any[]>([]);
@@ -54,7 +57,6 @@ function ExpandGanttModal({
   // const [intervencaoIniciada, setIntervencaoIniciada] = useState<any>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [refreshGanttDelete, setRefreshGanttDelete] = useState(false);
-
   const { optionsAreaAtuacao, optionsResponsaveis } = useRequests();
 
   const listaOptions = {
@@ -62,15 +64,31 @@ function ExpandGanttModal({
     optionsResponsaveis,
   };
 
+  const handleToast = (msg: string) => {
+    toast.error(msg, {
+      id: "toast-principal",
+    });
+  };
+
   const cellEdit = (args: any) => {
-    if (args.rowData.hasChildRecords || atividades.length === 0) {
+    if (
+      (args.rowData.index === 0 && args.rowData.level === 0) ||
+      atividades.length === 0
+    ) {
       args.cancel = true;
+      handleToast("Não é possível editar esta atividade!");
       return;
     }
     const filteredIndex = atividades.findIndex(
       (atv) => atv.id_filho === args.rowData.TaskID
     );
     const filteredAtv = atividades[filteredIndex];
+
+    if (!filteredAtv) {
+      args.cancel = true;
+      handleToast("Não é possível editar esta atividade!");
+      return;
+    }
 
     setAtividade(filteredAtv);
     setCurrentIndex(filteredIndex);
