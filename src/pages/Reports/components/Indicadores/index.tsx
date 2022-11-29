@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-import { getProgressoProjeto } from "services/get/DetalhamentoProjetos";
+// import { getProgressoProjeto } from "services/get/DetalhamentoProjetos";
 import { getProjetos } from "services/get/GetProject";
 
 import { ProjectSummary } from "./summary";
@@ -36,10 +36,12 @@ export function Indicadores() {
 
   const handleProjetosDetalhados = async () => {
     const projetos = await getProjetos();
+    // console.log({ projetos });
 
-    const _formatados: any[] = projetos.map(async (e) => {
-      const _percent: any = await getProgressoProjeto(Number(e.id));
-      return {
+    const _formatados: any[] = projetos.map(async (e) =>
+      // const _percent: any = await getProgressoProjeto(Number(e.id));
+
+      ({
         name: e.nome_projeto,
         responsible: e.responsavel,
         startDate:
@@ -54,9 +56,9 @@ export function Indicadores() {
         realized: e.vlr_cr,
         cpi: e.vlr_cpi,
         spi: e.vlr_spi,
-        percent: _percent.data[0].fn_cron_calc_pct_real || "0",
-      };
-    });
+        percent: e.pct || "0",
+      })
+    );
 
     const formatados = await Promise.all(_formatados);
     setProjectsGreen(formatados.filter((e) => e.cpi === "1"));

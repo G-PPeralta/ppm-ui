@@ -37,7 +37,7 @@ type Props = {
 
 export function ProjectSummary({ data, table, dataTable }: Props) {
   function createPieData(data: SummaryData) {
-    const p = Number(data.percent);
+    const p = Number(data.percent) > 100 ? 100 : Number(data.percent);
 
     const pieData = [
       {
