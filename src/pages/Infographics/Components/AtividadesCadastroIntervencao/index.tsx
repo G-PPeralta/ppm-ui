@@ -33,12 +33,14 @@ interface Atividade {
 export default function AtividadesCadastroIntervencao({
   registerForm,
   listaAtividadesPrecedentes,
+  reorderState,
 }: any) {
   const id = useId();
   const [render, setRender] = useState<any>([]);
   const [droppableId, setDroppableId] = useState<string>(id);
   const { listaAreaAtuacao, listaResponsaveis, listaTarefas } =
     useCadastroIntervencao();
+  const { setReorderLoading } = reorderState;
 
   const listas = {
     listaAreaAtuacao,
@@ -68,7 +70,11 @@ export default function AtividadesCadastroIntervencao({
       // Retorna lista atualizada
       return list;
     };
+    setReorderLoading(true);
     registerForm.setFieldValue("atividades", listaReordenada(registerForm));
+    setTimeout(() => {
+      setReorderLoading(false);
+    }, 1000);
   };
 
   const onDragEnd = (result: any) => {
@@ -91,9 +97,9 @@ export default function AtividadesCadastroIntervencao({
     registerForm.setFieldValue("atividades", [
       ...registerForm.values.atividades,
       {
+        id_origem: "",
         area_id: 0,
         tarefa_id: 0,
-        responsavel_id: 0,
         qtde_dias: 0,
         ind_atv_execucao: false,
         precedentes: listaAtividadesPrecedentes.filter((atividade: any) => {
@@ -142,6 +148,65 @@ export default function AtividadesCadastroIntervencao({
       "atividades[0].precedentes",
       precedentesFiltrados
     );
+  }, []);
+
+  useEffect(() => {
+    const listaAtividades = registerForm.values.atividades.map(
+      (atividade: Atividade) => atividade
+    );
+
+    const listaPrecedentesChecked = listaAtividades.map(
+      (atividade: Atividade) => {
+        const precedentes = atividade.precedentes.map(
+          (precedente: AtividadePrecedente) => {
+            if (precedente.checked) {
+              return precedente;
+            }
+            return null;
+          }
+        );
+
+        return precedentes;
+      }
+    );
+
+    const precedentesFiltrados = listaAtividadesPrecedentes.filter(
+      (atividade: AtividadePrecedente) => {
+        for (let index = 0; index < listaAtividades.length; index += 1) {
+          if (atividade.id === listaAtividades[index].tarefa_id) {
+            return true;
+          }
+        }
+        return false;
+      }
+    );
+
+    const listaAtividadesAtualizada = listaAtividades.map(
+      (atividade: Atividade, index: number) => {
+        const precedentes = precedentesFiltrados.map(
+          (precedente: AtividadePrecedente) => {
+            for (
+              let indexPrecedente = 0;
+              indexPrecedente < listaPrecedentesChecked[index].length;
+              indexPrecedente += 1
+            ) {
+              if (
+                listaPrecedentesChecked[index][indexPrecedente] &&
+                listaPrecedentesChecked[index][indexPrecedente].id ===
+                  precedente.id
+              ) {
+                return listaPrecedentesChecked[index][indexPrecedente];
+              }
+            }
+            return { ...precedente };
+          }
+        );
+
+        return { ...atividade, precedentes };
+      }
+    );
+    // Atualiza a lista de precedentes para todos os itens da lista de atividades
+    registerForm.setFieldValue("atividades", listaAtividadesAtualizada);
   }, []);
 
   useEffect(() => {

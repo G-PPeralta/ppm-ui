@@ -12,3 +12,6 @@ export const getSelectFiltragemValue = (
     label: options?.[index]?.label,
   };
 };
+
+export const getCheckboxValue = (registerForm: any, chave: string) =>
+  registerForm?.values?.[chave];
