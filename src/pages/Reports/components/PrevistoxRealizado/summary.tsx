@@ -13,10 +13,9 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { IDadosAtividades } from "interfaces/TabelaAtividades";
-import moment from "moment";
 import { Cell, Pie, PieChart } from "recharts";
 
-// import { formatDate } from "utils/formatDate";
+import { formatDate } from "utils/formatDate";
 
 import { TabelaAtividadesPendentes } from "../TabelaAtividadesPendentes/index";
 
@@ -200,11 +199,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                   Início Real
                 </Text>
                 <Text fontSize={"16px"} fontWeight={"500"} color={"gray.600"}>
-                  {data.startDate === null
-                    ? "NA"
-                    : moment(new Date(data.startDate))
-                        .utc()
-                        .format("DD/MM/YYYY")}
+                  {data.startDate === null ? "NA" : formatDate(data.startDate)}
                 </Text>
               </Flex>
               <Heading color={"#0047BB"} fontWeight={"normal"}>
@@ -222,7 +217,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                 <Text fontSize={"16px"} fontWeight={"500"} color={"gray.600"}>
                   {data.endDate === null
                     ? "NA"
-                    : moment(data.endDate).utc().format("DD/MM/YYYY")}
+                    : new Date(data.endDate).toLocaleDateString()}
                 </Text>
               </Flex>
             </Flex>
