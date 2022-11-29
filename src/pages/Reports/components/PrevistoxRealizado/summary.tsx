@@ -166,7 +166,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                   )}
                 </Box>
               </Box>
-              <Flex direction={"column"} w={"100%"}>
+              <Flex direction={"column"} w={"280px"}>
                 <Heading
                   as="h3"
                   fontSize="24px"
@@ -222,7 +222,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
                 <Text fontSize={"16px"} fontWeight={"500"} color={"gray.600"}>
                   {data.endDate === null
                     ? "NA"
-                    : moment(new Date(data.endDate)).utc().format("DD/MM/YYYY")}
+                    : moment(data.endDate).utc().format("DD/MM/YYYY")}
                 </Text>
               </Flex>
             </Flex>
