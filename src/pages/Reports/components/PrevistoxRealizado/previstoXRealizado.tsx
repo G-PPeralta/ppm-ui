@@ -81,7 +81,7 @@ export function PrevistoXRealizado({ data }: Props) {
 
   useEffect(() => {
     getCurvaSProjeto(data.id_projeto_real);
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     getPendentes(data.id_projeto_real);
