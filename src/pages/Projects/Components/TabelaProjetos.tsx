@@ -84,7 +84,7 @@ export function TabelaProjetos({
     }
   };
 
-  console.log(data);
+  // console.log(data);
 
   function Body() {
     return (
