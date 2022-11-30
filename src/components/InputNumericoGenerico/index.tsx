@@ -57,6 +57,8 @@ function InputNumericoGenerico({
         value={formataParaTipo(tipo, registerForm.values[propName])}
         onChange={(event) => handleChange(event)}
         h={"56px"}
+        fontWeight={"400"}
+        fontSize={"14px"}
       >
         <NumberInputField h={"56px"} />
         {stepper && (

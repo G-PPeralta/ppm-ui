@@ -52,6 +52,8 @@ export const editarAtividadeGanttSchema = yup.object({
   fim_realizado: yup.date().required("Campo obrigatório"),
   inicio_planejado: yup.date(),
   fim_planejado: yup.date(),
+  inicio_real: yup.date(),
+  fim_real: yup.date(),
   anotacoes: yup.string(),
   mocs: yup.array().of(
     yup.object({

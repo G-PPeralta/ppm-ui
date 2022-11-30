@@ -62,6 +62,8 @@ export function useEditarOperacao(
     fim_realizado: "",
     inicio_planejado: "",
     fim_planejado: "",
+    inicio_real: "",
+    fim_real: "",
     pct_real: 0,
     nome_atividade: "",
     hrs_reais: 0,
@@ -110,6 +112,8 @@ export function useEditarOperacao(
           fim_realizado: values.fim_realizado,
           inicio_planejado: values.inicio_planejado,
           fim_planejado: values.fim_planejado,
+          inicio_real: values.inicio_real,
+          fim_real: values.fim_real,
         },
         anotacoes: {
           anotacoes: values.anotacoes,

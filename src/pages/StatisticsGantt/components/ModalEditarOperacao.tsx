@@ -45,6 +45,8 @@ interface EditOp {
   id_atividade?: number;
   inicio_planejado?: Date;
   inicio_realizado?: Date;
+  inicio_real?: Date;
+  fim_real?: Date;
   nome_atividade?: string;
   pct_real?: number;
 }
@@ -138,6 +140,8 @@ function ModalEditarOperacao({
     handleGambiarra();
   }, [refresh]);
 
+  // console.log(editOp);
+
   useEffect(() => {
     registerForm.setFieldValue("id_atividade", editOp.id_atividade);
     registerForm.setFieldValue("nome_atividade", editOp.nome_atividade);
@@ -178,6 +182,13 @@ function ModalEditarOperacao({
     }
     handleGambiarra();
   }, [editOp, isOpen]);
+
+  useEffect(() => {
+    requestLicoesEOperacoes();
+    handleGambiarra();
+  }, [registerForm.values.inicio_real, registerForm.values.inicio_realizado]);
+
+  // console.log(registerForm.values);
 
   useEffect(() => {
     if (anotacoes.length > 0) {
