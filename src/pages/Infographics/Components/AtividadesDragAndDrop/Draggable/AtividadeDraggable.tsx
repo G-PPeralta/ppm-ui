@@ -86,7 +86,12 @@ function AtividadesDraggable({ index, registerForm }: Props) {
 
     registerForm.setFieldValue(
       `atividades[${index}].area_id`,
-      listaTarefas[ind]?.area_atuacao || ""
+      listaTarefas[ind]?.area_atuacao || 0
+    );
+
+    registerForm.setFieldValue(
+      `atividades[${index}].fase_id`,
+      listaTarefas[ind]?.ind_fase || 0
     );
   }, [registerForm.values.atividades[index].tarefa_id]);
 

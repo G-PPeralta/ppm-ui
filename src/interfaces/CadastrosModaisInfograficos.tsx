@@ -179,4 +179,5 @@ export interface Tarefas {
   o_mais_breve_possivel: Boolean;
   nom_usuario_create: string | null;
   dat_usuario_create: string | null;
+  ind_fase?: number;
 }
