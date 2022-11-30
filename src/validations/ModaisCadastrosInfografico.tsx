@@ -34,17 +34,12 @@ export const cadastroIntervencaoSchema = yup.object({
 export const cadastroAtividadeSchema = yup.object({
   id_origem: yup.string().required("O ID é obrigatório!"),
   nom_atividade: yup.string().required("O nome da atividade é obrigatório!"),
-  responsavel_id: yup.number().required("O responsável é obrigatório!"),
+  responsavel_id: yup
+    .number()
+    .required("O responsável é obrigatório!")
+    .moreThan(0),
   area_atuacao: yup.string().required("A área de atuação é obrigatória!"),
-  nao_iniciar_antes_de: yup.object({
-    data: yup.string(),
-    checked: yup.boolean(),
-  }),
-  nao_terminar_depois_de: yup.object({
-    data: yup.string(),
-    checked: yup.boolean(),
-  }),
-  o_mais_breve_possivel: yup.boolean(),
+  fase_id: yup.number().required("A fase é obrigatória!").moreThan(0),
 });
 
 export const cadastroProjetoTipoSchema = yup.object({

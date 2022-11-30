@@ -23,11 +23,10 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
 import { handleCancelar } from "utils/handleCadastro";
+import { opcoesFase } from "utils/opcoesFase";
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
-
-// import Restricoes from "./Restricoes";
 
 function ModalCadastroAtividade() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -67,7 +66,7 @@ function ModalCadastroAtividade() {
       >
         Atividade
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -101,7 +100,6 @@ function ModalCadastroAtividade() {
                   gap={5}
                 >
                   <Flex flex={1} direction={"column"}>
-                    {/* <Text fontWeight={"bold"}>Nome</Text> */}
                     <Flex
                       gap={5}
                       flex={1}
@@ -176,6 +174,15 @@ function ModalCadastroAtividade() {
                           maxLength={100}
                         />
                       </Flex>
+                      <Flex flex={1}>
+                        <SelectFiltragem
+                          registerForm={registerForm}
+                          nomeSelect={"FASE"}
+                          propName={"fase_id"}
+                          options={opcoesFase}
+                          required={true}
+                        />
+                      </Flex>
                     </Flex>
                   </Flex>
                 </Flex>
@@ -188,7 +195,6 @@ function ModalCadastroAtividade() {
                   gap={5}
                 >
                   <Flex flex={1} direction={"column"}>
-                    {/* <Text fontWeight={"bold"}>Responsável</Text> */}
                     <Flex
                       gap={5}
                       flex={1}
@@ -225,10 +231,7 @@ function ModalCadastroAtividade() {
                     md: "column",
                   })}
                   gap={2}
-                >
-                  {/* <Text fontWeight={"bold"}>Restrição</Text> */}
-                  {/* <Restricoes registerForm={registerForm} /> */}
-                </Flex>
+                ></Flex>
               </Flex>
             </ModalBody>
 
