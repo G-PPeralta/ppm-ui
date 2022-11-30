@@ -18,7 +18,10 @@ function DateTimePickerDataFimReal({
   const TriggerDatePickerInicio = forwardRef(
     ({ value, onClick }: any, ref: any) => (
       <Button
-        isDisabled={!intervencaoIniciada && atividadeStatus !== 100}
+        isDisabled={atividadeStatus !== 100}
+        fontSize={"14px"}
+        fontWeight={"400"}
+        _placeholder={{ color: "#949494" }}
         h={"56px"}
         onClick={onClick}
         ref={ref}
