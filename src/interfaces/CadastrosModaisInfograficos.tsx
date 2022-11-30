@@ -53,15 +53,16 @@ export interface CadastroAtividade extends User {
   responsavel_id: number;
   area_atuacao?: string | number;
   area_atuacao_id?: number;
-  nao_iniciar_antes_de: {
+  nao_iniciar_antes_de?: {
     data: string;
     checked: Boolean | null;
   };
-  nao_terminar_depois_de: {
+  nao_terminar_depois_de?: {
     data: string;
     checked: Boolean | null;
   };
-  o_mais_breve_possivel: Boolean | null;
+  o_mais_breve_possivel?: Boolean | null;
+  fase_id?: number;
 }
 
 export interface CadastroPoco {

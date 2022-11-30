@@ -27,8 +27,6 @@ export function useCadastroAtividade() {
   const [listaArea, setListaArea] = useState<Area[]>([]);
   const [listaAreaAtuacao, setListaAreaAtuacao] = useState<AreaAtuacao[]>([]);
   const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
-  // const [listaAtividades, setListaAtividades] = useState<AtividadeLista[]>([]);
-  // const [listaTarefa, setListaTarefa] = useState<Tarefa[]>([]);
 
   const reqGet = async () => {
     const areas = await getArea();
@@ -62,15 +60,7 @@ export function useCadastroAtividade() {
     nom_atividade: "",
     responsavel_id: 0,
     area_atuacao: "",
-    nao_iniciar_antes_de: {
-      data: "",
-      checked: false,
-    },
-    nao_terminar_depois_de: {
-      data: "",
-      checked: false,
-    },
-    o_mais_breve_possivel: false,
+    fase_id: 0,
   };
 
   const registerForm: any = useFormik({
@@ -83,9 +73,7 @@ export function useCadastroAtividade() {
         nom_atividade: values.nom_atividade,
         responsavel_id: values.responsavel_id,
         area_atuacao: values.area_atuacao,
-        nao_iniciar_antes_de: values.nao_iniciar_antes_de,
-        nao_terminar_depois_de: values.nao_terminar_depois_de,
-        o_mais_breve_possivel: values.o_mais_breve_possivel,
+        fase_id: values.fase_id,
       };
 
       setLoading(true);

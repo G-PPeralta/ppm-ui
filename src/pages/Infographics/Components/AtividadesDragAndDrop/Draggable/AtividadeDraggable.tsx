@@ -10,6 +10,7 @@ import { AreaAtuacao, Tarefas } from "interfaces/CadastrosModaisInfograficos";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
+import { opcoesFase } from "utils/opcoesFase";
 import { regexCaracteresEspeciais } from "utils/regex";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
@@ -55,21 +56,6 @@ function AtividadesDraggable({ index, registerForm }: Props) {
     value: tarefa.id,
     label: tarefa.nom_atividade,
   }));
-
-  const opcoesTipo = [
-    {
-      value: 1,
-      label: "Pré Intervenção",
-    },
-    {
-      value: 2,
-      label: "Intervenção",
-    },
-    {
-      value: 3,
-      label: "Pós Intervenção",
-    },
-  ];
 
   const getValue = (options: any, i: number, chave: string) => {
     const index = options
@@ -157,8 +143,8 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     nomeSelect={"FASE"}
                     required={true}
                     propName={`atividades[${index}].fase_id`}
-                    options={opcoesTipo}
-                    value={getValue(opcoesTipo, index, "fase_id")}
+                    options={opcoesFase}
+                    value={getValue(opcoesFase, index, "fase_id")}
                   />
                 </Flex>
 
