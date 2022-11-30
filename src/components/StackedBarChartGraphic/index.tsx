@@ -35,6 +35,12 @@ export default function StackedBarChartGraphic({
               isAnimationActive={true}
               animationDuration={1300}
               barSize={barW}
+              label={{
+                position: "top",
+                fill: "origem.500",
+                fontSize: 10,
+                fontWeight: 700,
+              }}
             />
           ))}
         </BarChart>
