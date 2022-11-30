@@ -43,6 +43,9 @@ function DatePickerModal({
     ({ value, onClick }: any, ref: any) => (
       <Flex flex={1}>
         <Button
+          fontWeight={"400"}
+          fontSize={"14px"}
+          color={isDisabled ? "#949494" : "black"}
           isDisabled={isDisabled}
           h={"56px"}
           onClick={onClick}

@@ -48,6 +48,7 @@ function StatisticsGantt() {
     setRefresh,
     projeto
   );
+
   const formatToGanttData = (data: any) => {
     if (!data) return;
     const newGantt = data.atividades
@@ -101,6 +102,9 @@ function StatisticsGantt() {
 
   const handleGetAllData = async () => {
     const { data } = await getOperacoesEstatisticas();
+    // console.log({ data });
+    // GET por onde atividades vem
+
     if (!data) return;
     const newData = convertReq(data);
 
