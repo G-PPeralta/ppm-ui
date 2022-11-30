@@ -35,7 +35,7 @@ import DateTimePickerDataFimPlan from "./DateTimePickerDataFimPlan";
 import DateTimePickerDataFimReal from "./DateTimePickerDataFimReal";
 import DateTimePickerDataInicioPlan from "./DateTimePickerDataInicioPlan";
 import DateTimePickerDataInicioReal from "./DateTimePickerDataInicioReal";
-import PocosDragAndDrop from "./PocosDragAndDrop";
+// import PocosDragAndDrop from "./PocosDragAndDrop";
 
 interface Precedente {
   id: any;
@@ -129,6 +129,9 @@ function ModalEditarAtividade({
       setFimReal(new Date(atividade.fimreal));
     }
 
+    // console.log(inicioReal);
+    // console.log(atividade);
+
     const respId = listaOptions.optionsResponsaveis.filter(
       (responsavel: any) => responsavel.label === atividade.nom_responsavel
     )[0].value;
@@ -217,6 +220,8 @@ function ModalEditarAtividade({
                         </Text>
                       </Flex>
                       <Input
+                        disabled
+                        _placeholder={{ color: "#949494" }}
                         fontSize={"14px"}
                         fontWeight={"400"}
                         h={"56px"}
@@ -278,6 +283,7 @@ function ModalEditarAtividade({
                       <DateTimePickerDataInicioPlan
                         fontSize={"14px"}
                         fontWeight={"400"}
+                        _placeholder={{ color: "#949494" }}
                         inicioPlanejado={inicioPlanejado}
                         setInicioPlanejado={setInicioPlanejado}
                         intervencaoIniciada={intervencaoIniciada}
@@ -357,6 +363,7 @@ function ModalEditarAtividade({
                         </Text>
                       </Flex>
                       <Select
+                        isDisabled
                         fontSize={"14px"}
                         fontWeight={"400"}
                         h={"56px"}
@@ -386,6 +393,7 @@ function ModalEditarAtividade({
                         </Text>
                       </Flex>
                       <Select
+                        isDisabled
                         fontSize={"14px"}
                         fontWeight={"400"}
                         h={"56px"}
@@ -405,7 +413,7 @@ function ModalEditarAtividade({
                       </Select>
                     </FormControl>
                   </Flex>
-                  <Flex
+                  {/* <Flex
                     flexDirection={useBreakpointValue({
                       base: "column",
                       md: "column",
@@ -417,7 +425,7 @@ function ModalEditarAtividade({
                       precedentes={precedentes}
                       setPrecedentes={setPrecedentes}
                     />
-                  </Flex>
+                  </Flex> */}
                   <Flex
                     flexDirection={useBreakpointValue({
                       base: "column",
@@ -446,7 +454,7 @@ function ModalEditarAtividade({
                         placeholder="Adicione comentários sobre a atividade"
                         id="dsc_comentario"
                         name="dsc_comentario"
-                        value={comentario}
+                        value={comentario === null ? "" : comentario}
                         onChange={(event) => setComentario(event.target.value)}
                       />
                     </FormControl>
