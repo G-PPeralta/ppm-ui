@@ -121,9 +121,9 @@ function GanttCampanha() {
       data.forEach((item: any) => {
         const formatted = item.pocos.map((poc: any, index: number) => ({
           TaskID: poc.poco || "",
-          startDate: poc.inicioprojplanejado || "",
-          endDate: poc.finalprojplanejado || "",
-          pct_plan: Number(poc.pct_plan) || "",
+          startDate: poc.inicioplanejado,
+          endDate: poc.finalplanejado,
+          pct_plan: Number(poc.pct_plan) || 0,
           Progress: Number(poc.pct_real),
           id: poc.id,
           intervencaoIniciada: index === 0 && poc.pct_real !== "0",
