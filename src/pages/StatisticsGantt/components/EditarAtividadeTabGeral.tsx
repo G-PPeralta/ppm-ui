@@ -135,7 +135,7 @@ function EditarAtividadeTabGeral({ registerForm }: Props) {
               nomeInput={"PORCENTAGEM CONCLUÍDA"}
               tipo={"porcentagem"}
               stepper={true}
-              step={100}
+              // step={100}
             />
           </Flex>
         </Flex>
