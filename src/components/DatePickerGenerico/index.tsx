@@ -43,6 +43,8 @@ function DatePickerGenerico({
     ({ value, onClick }: any, ref: any) => (
       <Flex flex={1}>
         <Button
+          fontWeight={"400"}
+          fontSize={"14px"}
           isDisabled={isDisabled}
           h={"56px"}
           onClick={onClick}
