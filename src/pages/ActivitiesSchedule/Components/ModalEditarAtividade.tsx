@@ -145,12 +145,12 @@ function ModalEditarAtividade({
   }, []);
 
   const handlePercentInput = async (val: any) => {
-    if (atividadeStatus === 0 && Number(atividade.pct_real) === 0) {
-      setInicioReal(new Date());
-    }
-    if (atividadeStatus === 100) {
-      setFimReal(null);
-    }
+    // if (atividadeStatus === 0 && Number(atividade.pct_real) === 0) {
+    //   setInicioReal(new Date());
+    // }
+    // if (atividadeStatus === 100) {
+    //   setFimReal(null);
+    // }
     setAtividadeStatus(Number(val));
   };
 
