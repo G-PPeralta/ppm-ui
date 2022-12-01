@@ -9,16 +9,23 @@ import InputNumericoGenerico from "components/InputNumericoGenerico";
 
 interface Props {
   registerForm: any;
+  data: any;
+  sondaN: any;
+  pocoN: any;
 }
 
-function EditarAtividadeTabGeral({ registerForm }: Props) {
-  // console.log(
-  //   new Date(
-  //     registerForm.values.inicio_real.getTime() +
-  //       60 * 60 * (registerForm.values.hrs_reais * 1000)
-  //   )
-  // );
-  // console.log(registerForm.values.inicio_real);
+function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
+  // console.log(registerForm.values);
+
+  // console.log(data);
+
+  // console.log(sondaN);
+
+  const flag = sondaN.atividades.find(
+    (s: any) => s.nome_atividade === registerForm.values.nome_atividade
+  ).flag;
+
+  // console.log(flag);
 
   return (
     <Flex w={"100%"} direction={"column"} gap={5}>
@@ -100,16 +107,20 @@ function EditarAtividadeTabGeral({ registerForm }: Props) {
               tipo={"hora"}
               stepper={false}
               limite={1000}
-              // isDisabled={registerForm.values.inicio_real}
+              isDisabled={flag === 0}
             />
 
             <DatePickerModal
               nomeLabel={"DATA INÍCIO REAL"}
               registerForm={registerForm}
               propName={"inicio_real"}
-              data={registerForm.values.inicio_real}
+              data={
+                registerForm.values.inicio_real
+                  ? registerForm.values.inicio_real
+                  : registerForm.values.inicio_realizado
+              }
               selecionaHorario={true}
-              isDisabled={registerForm.values.pct_real === 100}
+              isDisabled={flag === 0 || registerForm.values.pct_real === 100}
             />
           </Flex>
           <DatePickerModal
@@ -136,6 +147,7 @@ function EditarAtividadeTabGeral({ registerForm }: Props) {
               tipo={"porcentagem"}
               stepper={true}
               // step={100}
+              isDisabled={flag === 0}
             />
           </Flex>
         </Flex>

@@ -35,6 +35,8 @@ function StatisticsGantt() {
   const [refresh, setRefresh] = useState(false);
   const [refreshDelete, setRefreshDelete] = useState(false);
   const [editOp, setEditOp] = useState({});
+  const [sondaN, setSonda] = useState<any>();
+  const [pocoN, setPoco] = useState<any>();
   const [projeto, setProjeto] = useState({
     sonda: "",
     id_sonda: 0,
@@ -42,6 +44,7 @@ function StatisticsGantt() {
     id_poco: 0,
   });
   const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
+  const [data, setData] = useState<StatisticsGanttProps[]>();
   const [atividadesCronograma, setAtividadesCronograma] = useState<any[]>();
   const { registerForm, loading, onClose, onOpen, isOpen } = useEditarOperacao(
     refresh,
@@ -74,6 +77,7 @@ function StatisticsGantt() {
         min: Number(t.vlr_min),
         med: Number(t.vlr_media),
         dp: Number(t.vlr_dp),
+        flag: Number(t.flag),
       }));
     setGanttData(newGantt);
     setProjeto({
@@ -104,6 +108,7 @@ function StatisticsGantt() {
     const { data } = await getOperacoesEstatisticas();
     // console.log({ data });
     // GET por onde atividades vem
+    setData(data);
 
     if (!data) return;
     const newData = convertReq(data);
@@ -112,6 +117,8 @@ function StatisticsGantt() {
       (e) => e.id_sonda === Number(sonda) && e.id_poco === Number(poco)
     );
     formatToGanttData(_ganttData);
+    setSonda(_ganttData);
+    setPoco(_ganttData);
   };
 
   const handleReqRelacoes = async () => {
@@ -183,6 +190,9 @@ function StatisticsGantt() {
                       />
 
                       <ModalEditarOperacao
+                        data={data}
+                        pocoN={pocoN}
+                        sondaN={sondaN}
                         setRefresh={setRefresh}
                         refresh={refresh}
                         editOp={editOp}

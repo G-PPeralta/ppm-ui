@@ -59,6 +59,9 @@ interface Props {
   isOpen: boolean;
   loading: boolean;
   registerForm: any;
+  data: any;
+  sondaN: any;
+  pocoN: any;
 }
 
 function ModalEditarOperacao({
@@ -69,6 +72,9 @@ function ModalEditarOperacao({
   isOpen,
   loading,
   registerForm,
+  data,
+  sondaN,
+  pocoN,
 }: Props) {
   const [tabSelecionado, setTabSelecionado] = useState<any>(0);
   const [listaLicoesAprendidas, setListaLicoesAprendidas] = useState<
@@ -295,7 +301,12 @@ function ModalEditarOperacao({
 
                   <TabPanels flex={1} w={"100%"}>
                     <TabPanel flex={1}>
-                      <EditarAtividadeTabGeral registerForm={registerForm} />
+                      <EditarAtividadeTabGeral
+                        registerForm={registerForm}
+                        data={data}
+                        pocoN={pocoN}
+                        sondaN={sondaN}
+                      />
                     </TabPanel>
                     <TabPanel flex={1}>
                       <EditarAtividadeTabAnotacoes
