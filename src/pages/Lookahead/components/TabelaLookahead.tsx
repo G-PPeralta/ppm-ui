@@ -115,7 +115,7 @@ export function TabelaLookahead(props: TableProps) {
             </Link>
           </Td> */}
           <Td textAlign={"center"} color={"#2D2926"}>
-            <Link to={`/lookahead-detalhe/${act.id}`}>
+            <Link to={`/lookahead-detalhamento/${act.id}`}>
               <Text color="blue">
                 {projetos &&
                   projetos.find(

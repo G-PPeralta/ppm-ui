@@ -46,7 +46,7 @@ export function PrivateRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/graficos" element={<GráficosEstatisticos />} />
+      <Route path="/graficos-estatisticos" element={<GráficosEstatisticos />} />
       <Route path="/usuarios" element={<Usuarios />} />
       <Route path="/projetos/cadastro" element={<CadastrarProjeto />} />
       <Route path="/cadastrar-fornecedor" element={<CadastrarFornecedor />} />
@@ -55,16 +55,16 @@ export function PrivateRoutes() {
         element={<ActivitiesRegistration />}
       />
       <Route path="/share-register" element={<ShareRegister />} />
-      <Route path="/reports" element={<Reports />} />
-      <Route path="/infographics" element={<Infographics />} />
-      <Route path="/permissions" element={<PermissionsList />} />
-      <Route path="permissions/:id" element={<Permissions />} />
-      <Route path="/settings" element={<Settings />} />
-      <Route path="/profile" element={<Profile />} />
+      <Route path="/relatorios" element={<Reports />} />
+      <Route path="/campanhas" element={<Infographics />} />
+      <Route path="/permissoes" element={<PermissionsList />} />
+      <Route path="permissoes/:id" element={<Permissions />} />
+      <Route path="/configuracoes" element={<Settings />} />
+      <Route path="/perfil" element={<Profile />} />
       <Route path="/upload" element={<Import />} />
-      <Route path="/projects" element={<Projects />} />
-      <Route path="/budgets" element={<Budgets />} />
-      <Route path="/budget/detail/:id" element={<BudgetDetail />} />
+      <Route path="/projetos" element={<Projects />} />
+      <Route path="/financeiro-intervencoes" element={<Budgets />} />
+      <Route path="/financeiro/detalhamento/:id" element={<BudgetDetail />} />
       <Route path="/fornecedores" element={<Fornecedores />} />
       <Route
         path="/detalhamento/:id"
@@ -84,21 +84,21 @@ export function PrivateRoutes() {
       />
       <Route path="/atividade/:id" element={<ActivitiesSchedule />} />
       <Route path="/lookahead" element={<Lookahead />} />
-      <Route path="/lookahead-detalhe/:id" element={<LookaheadDetalhe />} />
       <Route
-        path="/infographics/atividade/:id"
-        element={<ActivitiesSchedule />}
+        path="/lookahead-detalhamento/:id"
+        element={<LookaheadDetalhe />}
       />
+      <Route path="/campanhas/atividade/:id" element={<ActivitiesSchedule />} />
       <Route
-        path="/infographics/atividade/:id/precedentes"
+        path="/campanhas/atividade/:id/precedentes"
         element={<ActivitiesPrecedents />}
       />
       <Route
-        path="/infographics/atividade/:id/visao-por-area"
+        path="/campanhas/atividade/:id/visao-por-area"
         element={<VisaoPorArea />}
       />
       <Route path="/gantt-campanha" element={<GanttCampanha />} />
-      <Route path="/licoesAprendidas" element={<LicoesAprendidasProjetos />} />
+      <Route path="/licoes-aprendidas" element={<LicoesAprendidasProjetos />} />
       <Route path="/estatisticas/" element={<Statistics />} />
       <Route
         path="/estatisticas/cronograma/:sonda/:poco"
@@ -116,7 +116,7 @@ export function PrivateRoutes() {
       <Route path="/priorizacao" element={<Priorizacao />} />
       {/* <Route path="/registered-list" element={<RegisteredList />} /> */}
       <Route path="/actions/:id" element={<ActionItems />} />
-      <Route path="/registered-list" element={<TabelaLixeira />} />
+      <Route path="/lixeira" element={<TabelaLixeira />} />
       <Route path="/trash" element={<Trash />} />
       <Route path="/priorizacao-diretores" element={<PriorizacaoDiretores />} />
       <Route path="*" element={<NotFound />} />

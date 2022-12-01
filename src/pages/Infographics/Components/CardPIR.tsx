@@ -35,7 +35,7 @@ function CardPIR({ poco, index }: Props) {
   const intervencaoFoiIniciada = index === 0 && poco.pct_real !== "0";
 
   const transfer = () => {
-    navigate(`/infographics/atividade/${poco.id}`, {
+    navigate(`/campanhas/atividade/${poco.id}`, {
       state: {
         poco,
         intervencaoFoiIniciada,

@@ -37,7 +37,7 @@ export function ActivitiesPrecedents() {
   const { id } = useParams();
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/infographics/atividade/${id}/visao-por-area`);
+    navigate(`/campanhas/atividade/${id}/visao-por-area`);
   };
   const [loading, setLoading] = useState(true);
   const [atividades, setAtividades] = useState<any[]>([]);

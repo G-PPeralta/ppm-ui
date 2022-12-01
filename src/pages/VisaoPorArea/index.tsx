@@ -49,7 +49,7 @@ function validateDate(
 function VisaoPorArea() {
   const { id } = useParams();
   const handleClick = () => {
-    navigate(`/infographics/atividade/${id}/precedentes`);
+    navigate(`/campanhas/atividade/${id}/precedentes`);
   };
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any[]>([] as Area[]);

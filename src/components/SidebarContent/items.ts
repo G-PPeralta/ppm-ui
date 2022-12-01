@@ -35,13 +35,13 @@ interface Children {
 
 const childrenCarteiradeProjetos = [
   { name: "Dashboard", icon: TbGauge, link: "/" },
-  { name: "Carteira de Projetos", icon: FaProjectDiagram, link: "/projects" },
+  { name: "Carteira de Projetos", icon: FaProjectDiagram, link: "/projetos" },
   {
     name: "Financeiro",
     icon: FaRegMoneyBillAlt,
     link: "/financeiro-projetos",
   },
-  { name: "Relatórios", icon: FaChartArea, link: "/reports" },
+  { name: "Relatórios", icon: FaChartArea, link: "/relatorios" },
   // {
   //   name: "Priorização Diretores",
   //   icon: IoMdPodium,
@@ -50,18 +50,22 @@ const childrenCarteiradeProjetos = [
 ];
 
 const childrenInfograficos = [
-  { name: "Campanhas", icon: FaSitemap, link: "/infographics" },
+  { name: "Campanhas", icon: FaSitemap, link: "/campanhas" },
   {
     name: "Cronogramas",
     icon: AiOutlineBarChart,
     link: "/estatisticas",
   },
-  { name: "Financeiro", icon: FaRegMoneyBillAlt, link: "/budgets" },
+  {
+    name: "Financeiro",
+    icon: FaRegMoneyBillAlt,
+    link: "/financeiro-intervencoes",
+  },
   { name: "Look Ahead", icon: AiOutlineBarChart, link: "/lookahead" },
   {
     name: "Gráficos Estatisticos",
     icon: AiOutlineBarChart,
-    link: "/graficos",
+    link: "/graficos-estatisticos",
   },
   {
     name: "Gantt Campanha",
@@ -73,7 +77,7 @@ const childrenInfograficos = [
 const childrenConfiguracoes = [
   { name: "Configurações", icon: FiSettings, link: "/desenvolvimento" },
   { name: "Usuários", icon: FiSettings, link: "/usuarios" },
-  { name: "Perfil", icon: FiSettings, link: "/profile" },
+  { name: "Perfil", icon: FiSettings, link: "/perfil" },
   { name: "Gestão de Áreas", icon: FiSettings, link: "/desenvolvimento" },
   {
     name: "Configurar Prioridades",
@@ -90,10 +94,10 @@ const childrenConfiguracoes = [
   {
     name: "Lições Aprendidas",
     icon: FiActivity,
-    link: "/licoesAprendidas",
+    link: "/licoes-aprendidas",
   },
   { name: "Priorização", icon: MdPriorityHigh, link: "/priorizacao" },
-  { name: "Lixeira", icon: FiTrash2, link: "/registered-list" },
+  { name: "Lixeira", icon: FiTrash2, link: "/lixeira" },
   { name: "Feriados", icon: BsCalendarWeek, link: "/feriados" },
 ];
 

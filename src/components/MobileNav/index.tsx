@@ -195,14 +195,14 @@ export function MobileNav({
             >
               <MenuItem
                 onClick={() => {
-                  navigate("/profile");
+                  navigate("/perfil");
                 }}
               >
                 Perfil
               </MenuItem>
               <MenuItem
                 onClick={() => {
-                  navigate("/settings");
+                  navigate("/configuracoes");
                 }}
               >
                 Configurações

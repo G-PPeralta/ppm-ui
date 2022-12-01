@@ -44,7 +44,7 @@ export function usePermissions() {
         const { status } = await putProfile(idUser, newValues);
         if (status === 200) {
           toast.success("Cadastro atualizado com sucesso!");
-          navigate("/permissions");
+          navigate("/permissoes");
         }
 
         setLoading(false);

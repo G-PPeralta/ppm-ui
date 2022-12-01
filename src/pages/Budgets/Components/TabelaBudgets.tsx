@@ -79,7 +79,7 @@ export function TabelaBudgets(props: TableProps) {
           <Tr className={"hide item-" + key} key={d.id}>
             <Td textAlign={"center"}>{d.item}</Td>
             <Td textAlign={"start"}>
-              <Link to={`/budget/detail/${d.id}`}>
+              <Link to={`/financeiro/detalhamento/${d.id}`}>
                 <Text color="blue">{d.projeto.nome}</Text>
               </Link>
             </Td>
