@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
+import ReactDatePicker from "react-datepicker";
 import { BsPlusLg } from "react-icons/bs";
 
 import {
@@ -21,9 +22,12 @@ import {
   ModalCloseButton,
   Button,
   Progress,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { ChaoticOrbit, Ring } from "@uiball/loaders";
 import { ProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
+
+import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { formatDate } from "utils/formatDate";
 import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
@@ -35,10 +39,11 @@ import {
   getProjetosTipo,
   getServicoDataIntervencaoId,
 } from "services/get/CadastroModaisInfograficos";
+import { getCampanhaDataInicio } from "services/get/Campanhas";
 
 import SelectFiltragem from "../../../components/SelectFiltragem";
 import AtividadesCadastroIntervencao from "./AtividadesCadastroIntervencao";
-import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
+// import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
 
 function ModalCadastroIntervencao({
   idCampanha,
@@ -61,6 +66,7 @@ function ModalCadastroIntervencao({
     useState<number>(100);
   const [dataFinalPrevista, setDataFinalPrevista] = useState<any>("");
   const [reorderLoading, setReorderLoading] = useState<any>(false);
+  const [dataInicioIntervencao, setDataInicioIntervencao] = useState("");
 
   const innerWidth = window.innerWidth;
 
@@ -153,6 +159,36 @@ function ModalCadastroIntervencao({
     }
   };
 
+  const handleGetDataInicio = async (id: number) => {
+    if (id) {
+      const { data } = await getCampanhaDataInicio(id);
+      setDataInicioIntervencao(data.ultima_data);
+    }
+  };
+
+  const TriggerDatePickerInicio = forwardRef(
+    ({ value, onClick }: any, ref: any) => (
+      <Button
+        h={"56px"}
+        onClick={onClick}
+        ref={ref}
+        variant="outline"
+        px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
+        minW={useBreakpointValue({ base: "220px", sm: "220px", md: "220px" })}
+      >
+        {value === "" ? "Selecione a data" : value}
+      </Button>
+    )
+  );
+
+  const handleIniciarDate = (date: any) => {
+    if (date) {
+      date.setHours(9, 0, 0, 0);
+      setDataInicioIntervencao(date);
+      registerForm.setFieldValue("dat_ini_prev", date);
+    }
+  };
+
   useEffect(() => {
     registerForm.setFieldValue("id_campanha", idCampanha);
     setRefresh(!refresh);
@@ -232,6 +268,14 @@ function ModalCadastroIntervencao({
   useEffect(() => {
     setValueProgressoMensagemErro(100);
   }, [dataLimite]);
+
+  useEffect(() => {
+    handleGetDataInicio(idCampanha);
+  }, []);
+
+  useEffect(() => {
+    registerForm.setFieldValue("dat_ini_prev", dataInicioIntervencao);
+  }, [dataInicioIntervencao]);
 
   return (
     <>
@@ -319,7 +363,29 @@ function ModalCadastroIntervencao({
                           options={optionsPocos}
                           required={true}
                         />
-                        <DateTimePickerDataInicio registerForm={registerForm} />
+                        {/* <DateTimePickerDataInicio registerForm={registerForm} /> */}
+                        <Flex direction={"column"}>
+                          <Flex gap={1}>
+                            <RequiredField />
+                            <Text
+                              fontWeight={"bold"}
+                              fontSize={"12px"}
+                              color={"#949494"}
+                            >
+                              DATA INÍCIO
+                            </Text>
+                          </Flex>
+                          <ReactDatePicker
+                            selected={new Date(dataInicioIntervencao)}
+                            minDate={new Date(dataInicioIntervencao)}
+                            onChange={(date) => handleIniciarDate(date)}
+                            locale="pt-BR"
+                            showTimeSelect
+                            dateFormat="dd/MM/yyyy, hh:mm"
+                            customInput={<TriggerDatePickerInicio />}
+                            isClearable={dataInicioIntervencao !== ""}
+                          />
+                        </Flex>
                       </Flex>
                     </Stack>
 
@@ -476,14 +542,18 @@ function ModalCadastroIntervencao({
                   fontFamily={"Mulish"}
                   variant="primary"
                   color="white"
-                  onClick={() =>
+                  onClick={() => {
+                    // registerForm.setFieldValue(
+                    //   "dat_ini_prev",
+                    //   dataInicioIntervencao
+                    // );
                     handleCadastrarRefresh(
                       registerForm,
                       onClose,
                       setRefresh,
                       refresh
-                    )
-                  }
+                    );
+                  }}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",
