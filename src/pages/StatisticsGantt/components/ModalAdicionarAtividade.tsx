@@ -140,10 +140,12 @@ function ModalAdicionarAtividade({
     registerForm.setFieldValue("profundidade", Number(event));
   };
 
-  const atividadesOptions = atividades.map((atividade: any) => ({
-    value: atividade,
-    label: atividade.valor,
-  }));
+  const atividadesOptions =
+    atividades &&
+    atividades.map((atividade: any) => ({
+      value: atividade,
+      label: atividade.valor,
+    }));
 
   useEffect(() => {
     handleDataInicio();
