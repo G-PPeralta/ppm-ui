@@ -76,6 +76,14 @@ export function useEditarOperacao(
         isOpen: false,
       },
     ],
+    aprs: [
+      {
+        codigo_apr: "",
+        anexo: "",
+        url: "",
+        isOpen: false,
+      },
+    ],
     ocorrencias: [
       {
         id: 0,
@@ -119,6 +127,7 @@ export function useEditarOperacao(
           anotacoes: values.anotacoes,
         },
         mocs: values.mocs,
+        aprs: values.aprs,
       };
 
       setLoading(true);
@@ -129,6 +138,14 @@ export function useEditarOperacao(
           if (moc.anexo) {
             const formData = new FormData();
             formData.append("files", moc.arquivo);
+
+            await uploadArquivo(formData);
+          }
+        });
+        values.aprs.map(async (apr: any) => {
+          if (apr.anexo) {
+            const formData = new FormData();
+            formData.append("files", apr.arquivo);
 
             await uploadArquivo(formData);
           }

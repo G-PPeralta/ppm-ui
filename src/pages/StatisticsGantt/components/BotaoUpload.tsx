@@ -44,8 +44,21 @@ function BotaoUploadArquivo({
         `${propName}[${index}].anexo`,
         fileRenomeado.name
       );
+    } else if (propName === "mocs") {
+      const nomeArquivo = `MOC_${registerForm.values.id_atividade}_${registerForm.values[propName][index].numero_moc}.pdf`;
+      const fileRenomeado = new File([file], nomeArquivo, {
+        type: file.type,
+      });
+      registerForm.setFieldValue(
+        `${propName}[${index}].arquivo`,
+        fileRenomeado
+      );
+      registerForm.setFieldValue(
+        `${propName}[${index}].anexo`,
+        fileRenomeado.name
+      );
     } else {
-      const nomeArquivo = `${registerForm.values.id_atividade}_${registerForm.values[propName][index].numero_moc}.pdf`;
+      const nomeArquivo = `APR_${registerForm.values.id_atividade}_${registerForm.values[propName][index].codigo_apr}.pdf`;
       const fileRenomeado = new File([file], nomeArquivo, {
         type: file.type,
       });
@@ -126,8 +139,11 @@ function BotaoUploadArquivo({
               }}
               icon={<AiFillCloseCircle size={16} />}
               onClick={() => {
-                registerForm.setFieldValue(`mocs[${index}].arquivo`, "");
-                registerForm.setFieldValue(`mocs[${index}].anexo`, "");
+                registerForm.setFieldValue(
+                  `[${propName}][${index}].arquivo`,
+                  ""
+                );
+                registerForm.setFieldValue(`[${propName}][${index}].anexo`, "");
                 setNomeArquivoSelecionado("");
               }}
             />
