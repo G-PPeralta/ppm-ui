@@ -26,7 +26,7 @@ type ModalDeletarProps = {
   id: number;
   isParent: boolean;
   setLoading: Function;
-  refreshGanttDelete: boolean;
+  refreshGanttDelete: number;
   setRefreshGanttDelete: Function;
   handleSetGanttData: Function;
 };
@@ -51,8 +51,7 @@ function ModalDeletar({
         toast.success("Atividade removida com sucesso!", {
           id: "toast-principal",
         });
-        setRefreshGanttDelete(!refreshGanttDelete);
-        handleSetGanttData();
+        setRefreshGanttDelete(id);
         setLoading(false);
         onClose();
       }

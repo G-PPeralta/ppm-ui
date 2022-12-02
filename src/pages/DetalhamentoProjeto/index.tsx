@@ -54,10 +54,7 @@ import { Gantt } from "./components/Gantt";
 // ];
 
 function DetalhamentoProjeto() {
-  const { id } = useParams();
-  const [loading, setLoading] = useState(true);
-  const [loadingProgresso, setProgressoLoading] = useState(false);
-  const [infoProjeto, setInfoProjeto] = useState<ICardInfoProjeto>({
+  const initCardInfo = {
     nome_projeto: "",
     data_inicio: null,
     data_fim: null,
@@ -69,7 +66,12 @@ function DetalhamentoProjeto() {
     coordenador_nome: "",
     descricao: "",
     justificativa: "",
-  });
+  };
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [loadingProgresso, setProgressoLoading] = useState(false);
+  const [infoProjeto, setInfoProjeto] =
+    useState<ICardInfoProjeto>(initCardInfo);
   const [licoes, setLicoes] = useState([] as LicoesAprendidasNew[]);
   const [categorias, setCategorias] = useState([] as Categorias[]);
   const [progresso, setProgresso] = useState([] as ProjetoProgresso[]);
@@ -114,7 +116,11 @@ function DetalhamentoProjeto() {
   const handleGetInfoProjetos = async () => {
     if (id) {
       const { data } = await getInfoProjetos(id);
-      setInfoProjeto(data[0]);
+      if (data.length === 0) {
+        setInfoProjeto(initCardInfo);
+      } else {
+        setInfoProjeto(data[0]);
+      }
     }
   };
 
