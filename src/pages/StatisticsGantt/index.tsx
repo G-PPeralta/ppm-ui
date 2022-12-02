@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-import { FiChevronLeft } from "react-icons/fi";
 import { useParams } from "react-router";
-import { useNavigate } from "react-router-dom";
 
 import {
   Box,
   Flex,
-  IconButton,
   Text,
   Heading,
   Stack,
@@ -16,6 +13,7 @@ import {
 import { Ring } from "@uiball/loaders";
 import { StatisticsGanttProps, StatisticsTableData } from "interfaces/Services";
 
+import BotaoSetaVoltar from "components/BotaoSetaVoltar/BotaoSetaVoltar";
 import Sidebar from "components/SideBar";
 
 import { useEditarOperacao } from "hooks/useEditarOperacao";
@@ -31,7 +29,6 @@ import ModalEditarOperacao from "./components/ModalEditarOperacao";
 
 function StatisticsGantt() {
   const { sonda, poco } = useParams();
-  const navigate = useNavigate();
   const [refresh, setRefresh] = useState(false);
   const [refreshDelete, setRefreshDelete] = useState(false);
   const [editOp, setEditOp] = useState({});
@@ -154,15 +151,8 @@ function StatisticsGantt() {
               <>
                 <Stack>
                   <Flex mb={5} justify={"space-between"} wrap={"wrap"}>
-                    <IconButton
-                      aria-label="voltar"
-                      color={"black"}
-                      backgroundColor="transparent"
-                      size="lg"
-                      icon={<FiChevronLeft />}
-                      onClick={() => navigate(-1)}
-                    />
-                    <Box>
+                    <BotaoSetaVoltar />
+                    <Box ml={2}>
                       <Heading as="h3" size="md">
                         {projeto.sonda}
                       </Heading>
