@@ -118,6 +118,18 @@ export async function getMocPorAtividade(idAtividade: number): Promise<{
   return { data, status };
 }
 
+export async function getAprPorAtividade(idAtividade: number): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(
+    `projetos-atividades-notas/apr/${idAtividade}`,
+    token()
+  );
+
+  return { data, status };
+}
+
 export async function getArquivoPdf(nomeArquivo: string): Promise<{
   data: any;
   status: number;

@@ -26,12 +26,14 @@ import { handleCancelar } from "utils/handleCadastro";
 
 import {
   getAnotacoesPorAtividade,
+  getAprPorAtividade,
   getLicoesAprendidasPorAtividade,
   getMocPorAtividade,
   getOcorrenciasPorAtividade,
 } from "services/get/Estatisticas";
 
 import EditarAtividadeTabAnotacoes from "./EditarAtividadeTabAnotacoes";
+import EditarAtividadeTabAPR from "./EditarAtividadeTabApr";
 import EditarAtividadeTabGeral from "./EditarAtividadeTabGeral";
 import EditarAtividadeTabLicoesAprendidas from "./EditarAtividadeTabLicoesAprendidas";
 import EditarAtividadeTabMOC from "./EditarAtividadeTabMoc";
@@ -83,6 +85,7 @@ function ModalEditarOperacao({
   const [listaOcorrencias, setListaOcorrencias] = useState<Ocorrencia[]>([]);
   const [anotacoes, setAnotacoes] = useState<Anotacoes[]>([]);
   const [mocs, setMocs] = useState<any[]>([]);
+  const [aprs, setAprs] = useState<any[]>([]);
   const [gambiarra, setGambiarra] = useState<any>(true);
 
   const refreshState = {
@@ -120,7 +123,9 @@ function ModalEditarOperacao({
       setAnotacoes(anotacoesPorAtividade.data);
 
       const mocPorAtividade = await getMocPorAtividade(editOp.id_atividade);
+      const aprPorAtividade = await getAprPorAtividade(editOp.id_atividade);
       setMocs(mocPorAtividade.data);
+      setAprs(aprPorAtividade.data);
     }
   };
 
@@ -165,6 +170,9 @@ function ModalEditarOperacao({
     }
     if (mocs.length > 0) {
       registerForm.setFieldValue("mocs", mocs);
+    }
+    if (aprs.length > 0) {
+      registerForm.setFieldValue("aprs", aprs);
     }
   }, [gambiarra]);
 
@@ -224,12 +232,16 @@ function ModalEditarOperacao({
       selecionado: tabSelecionado === 2,
     },
     {
-      nome: "Lições Aprendidas",
+      nome: "APR",
       selecionado: tabSelecionado === 3,
     },
     {
-      nome: "Tempo Aguardando",
+      nome: "Lições Aprendidas",
       selecionado: tabSelecionado === 4,
+    },
+    {
+      nome: "Tempo Aguardando",
+      selecionado: tabSelecionado === 5,
     },
   ];
 
@@ -315,6 +327,9 @@ function ModalEditarOperacao({
                     </TabPanel>
                     <TabPanel flex={1}>
                       <EditarAtividadeTabMOC registerForm={registerForm} />
+                    </TabPanel>
+                    <TabPanel flex={1}>
+                      <EditarAtividadeTabAPR registerForm={registerForm} />
                     </TabPanel>
                     <TabPanel flex={1}>
                       <EditarAtividadeTabLicoesAprendidas

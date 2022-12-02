@@ -13,11 +13,11 @@ import {
   useDisclosure,
   Text,
   useBreakpointValue,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
+  // NumberInput,
+  // NumberInputField,
+  // NumberInputStepper,
+  // NumberIncrementStepper,
+  // NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { Operacao } from "interfaces/Estatisticas";
 
@@ -136,9 +136,9 @@ function ModalAdicionarAtividade({
     onClose();
   };
 
-  const handleChange = (event: any) => {
-    registerForm.setFieldValue("profundidade", Number(event));
-  };
+  // const handleChange = (event: any) => {
+  //   registerForm.setFieldValue("profundidade", Number(event));
+  // };
 
   const atividadesOptions =
     atividades &&
@@ -185,10 +185,10 @@ function ModalAdicionarAtividade({
       registerForm.values.operacao_id === 8
     ) {
       registerForm.setFieldValue("metodo_elevacao_id", 0);
-      registerForm.setFieldValue("profundidade", 0);
+      // registerForm.setFieldValue("profundidade", 0);
     } else {
       registerForm.setFieldValue("metodo_elevacao_id", null);
-      registerForm.setFieldValue("profundidade", 0);
+      // registerForm.setFieldValue("profundidade", 0);
     }
   }, [registerForm.values.operacao_id]);
 
@@ -361,15 +361,14 @@ function ModalAdicionarAtividade({
                   </Flex>
                   {(registerForm.values.operacao_id === 3 ||
                     registerForm.values.operacao_id === 8) && (
-                    <Flex gap={4} justify={"end"} align={"end"}>
-                      <Flex flex={2} w={"50%"} gap={4}>
-                        <SelectFiltragem
-                          registerForm={registerForm}
-                          nomeSelect={"MÉTODO DE ELEVAÇÃO"}
-                          propName={"metodo_elevacao_id"}
-                          options={optionsMetodosElevacao}
-                        />
-                        <Flex direction={"column"} w={"100%"}>
+                    <Flex gap={4} justify={"end"} align={"end"} w={"50%"}>
+                      <SelectFiltragem
+                        registerForm={registerForm}
+                        nomeSelect={"MÉTODO DE ELEVAÇÃO"}
+                        propName={"metodo_elevacao_id"}
+                        options={optionsMetodosElevacao}
+                      />
+                      {/* <Flex direction={"column"} w={"100%"}>
                           <Flex gap={1}>
                             <Text
                               fontWeight={"bold"}
@@ -393,8 +392,7 @@ function ModalAdicionarAtividade({
                               <NumberDecrementStepper />
                             </NumberInputStepper>
                           </NumberInput>
-                        </Flex>
-                      </Flex>
+                        </Flex> */}
                     </Flex>
                   )}
                 </Flex>

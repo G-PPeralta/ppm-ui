@@ -1,6 +1,7 @@
+import { BsArrowRightShort } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
-import { Flex, Heading, Text } from "@chakra-ui/react";
+import { Flex, Heading, IconButton, Text } from "@chakra-ui/react";
 
 // import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
@@ -18,6 +19,7 @@ type Poco = {
   sonda: string;
   ind_alerta?: number;
   ind_status?: number;
+  existe_cronograma?: boolean;
 };
 
 type Props = {
@@ -43,16 +45,51 @@ function CardPIR({ poco, index }: Props) {
     });
   };
 
+  const transferToCronograma = (
+    idCampanha: number,
+    idAtividade: number | undefined
+  ) => {
+    navigate(`/estatisticas/cronograma/${idCampanha}/${idAtividade}`);
+  };
+
   // console.log("poco", poco);
 
   return (
     <>
-      <Flex direction={"row"} gap={4} onClick={() => transfer()}>
+      <Flex direction={"row"} gap={4} position={"relative"}>
         <Flex align={"center"} justify={"center"}>
           <Heading as="h3" size="sm" textAlign={"center"} width={"60px"}>
             {intervencaoFoiIniciada ? "Atual" : `${index + 1}º`}
           </Heading>
         </Flex>
+        {poco.existe_cronograma ? (
+          <IconButton
+            icon={<BsArrowRightShort size={24} />}
+            aria-label="Ir para o cronograma de execução"
+            position={"absolute"}
+            right={2}
+            top={2}
+            size={"sm"}
+            backgroundColor={"transparent"}
+            color={"white"}
+            borderRadius={10}
+            _hover={{
+              backgroundColor: "white",
+              color: validateDate(
+                Number(poco.pct_plan),
+                Number(poco.comp_pct),
+                Number(poco.pct_real),
+                poco.finalplanejado,
+                Number(poco.ind_alerta),
+                Number(poco.ind_status)
+              ),
+            }}
+            onClick={() => {
+              transferToCronograma(poco.id_campanha, poco.id_poco);
+            }}
+            zIndex={2}
+          />
+        ) : null}
         <Flex
           direction={"column"}
           align={"center"}
@@ -73,6 +110,8 @@ function CardPIR({ poco, index }: Props) {
           }}
           gap={2}
           minW={"220px"}
+          position={"relative"}
+          onClick={() => transfer()}
         >
           <Flex>
             <Text
