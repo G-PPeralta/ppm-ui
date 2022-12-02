@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import { Flex, Text } from "@chakra-ui/react";
 
 import DatePickerModal from "components/DatePickerGenerico/DatePickerModal";
@@ -17,11 +19,24 @@ interface Props {
 }
 
 function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
-  // console.log(registerForm.values);
+  const [mediaHorasFiltradas, setMediaHorasFiltradas] = useState<any>(0);
+  // console.log(registerForm.values.hrs_reais);
+
+  // console.log({ mediaHorasFiltradas });
+
+  useEffect(() => {
+    registerForm.setFieldValue("hrs_reais", mediaHorasFiltradas);
+  }, [mediaHorasFiltradas]);
 
   // console.log(data);
 
   // console.log(sondaN);
+
+  // const hrs = sondaN.atividades.find(
+  //   (s: any) => s.nome_atividade === registerForm.values.nome_atividade
+  // ).hrs_reais;
+
+  // console.log(hrs);
 
   const flag = sondaN.atividades.find(
     (s: any) => s.nome_atividade === registerForm.values.nome_atividade
@@ -69,7 +84,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
       <Flex gap={4} w={"70%"} mb={2}>
         <InputNumericoGenerico
           registerForm={registerForm}
-          propName={"hrs_reais"}
+          propName={"hrs_totais"}
           nomeInput={"DURAÇÃO"}
           tipo={"hora"}
           stepper={false}
@@ -90,7 +105,12 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
           nomeLabel={"DATA FIM"}
           registerForm={registerForm}
           propName={"fim_realizado"}
-          data={registerForm.values.fim_realizado}
+          data={
+            new Date(
+              registerForm.values.inicio_realizado.getTime() +
+                60 * 60 * (registerForm.values.hrs_reais * 1000)
+            )
+          }
           selecionaHorario={true}
           isDisabled={registerForm.values.inicio_real}
         />
@@ -111,8 +131,11 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
               limite={1000}
               isDisabled={flag === 0}
             />
+            {/* <Input value={mediaHorasFiltradas} /> */}
             <Flex align={"end"}>
-              <ModalFiltrarDuracaoMedia />
+              <ModalFiltrarDuracaoMedia
+                setMediaHorasFiltradas={setMediaHorasFiltradas}
+              />
             </Flex>
 
             <DatePickerModal
