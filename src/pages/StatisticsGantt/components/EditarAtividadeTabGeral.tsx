@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import { Flex, Text } from "@chakra-ui/react";
 
 import DatePickerModal from "components/DatePickerGenerico/DatePickerModal";
@@ -7,6 +9,8 @@ import InputGenerico from "components/InputGenerico";
 import InputGenericoDesabilitado from "components/InputGenericoDesabilitado";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 
+import { ModalFiltrarDuracaoMedia } from "./ModalFiltrarDuracaoMedia";
+
 interface Props {
   registerForm: any;
   data: any;
@@ -15,11 +19,25 @@ interface Props {
 }
 
 function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
-  // console.log(registerForm.values);
+  const [mediaHorasFiltradas, setMediaHorasFiltradas] = useState<any>(0);
+  const [date, setDate] = useState<any>();
 
-  // console.log(data);
+  useEffect(() => {
+    registerForm.setFieldValue(
+      "hrs_reais",
+      mediaHorasFiltradas === 0
+        ? registerForm.values.hrs_reais
+        : mediaHorasFiltradas
+    );
+  }, [mediaHorasFiltradas]);
 
-  // console.log(sondaN);
+  useEffect(() => {
+    registerForm.setFieldValue("hrs_totais", registerForm.values.hrs_reais);
+  }, [mediaHorasFiltradas]);
+
+  useEffect(() => {
+    setDate(registerForm.values.inicio_realizado);
+  }, [registerForm.values]);
 
   const flag = sondaN.atividades.find(
     (s: any) => s.nome_atividade === registerForm.values.nome_atividade
@@ -67,30 +85,35 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
       <Flex gap={4} w={"70%"} mb={2}>
         <InputNumericoGenerico
           registerForm={registerForm}
-          propName={"hrs_reais"}
+          propName={"hrs_totais"}
           nomeInput={"DURAÇÃO"}
           tipo={"hora"}
           stepper={false}
           limite={1000}
-          isDisabled={registerForm.values.inicio_real}
+          isDisabled={registerForm.values.inicio_real || flag === 1}
         />
 
         <DatePickerModal
           nomeLabel={"DATA INÍCIO"}
           registerForm={registerForm}
           propName={"inicio_realizado"}
-          data={registerForm.values.inicio_realizado}
+          data={date}
           selecionaHorario={true}
-          isDisabled={registerForm.values.inicio_real}
+          isDisabled={registerForm.values.inicio_real || flag === 1}
         />
         <DatePickerModal
           // isDisabled={registerForm.values.pct_real === 100}
           nomeLabel={"DATA FIM"}
           registerForm={registerForm}
           propName={"fim_realizado"}
-          data={registerForm.values.fim_realizado}
+          data={
+            new Date(
+              registerForm.values.inicio_realizado.getTime() +
+                60 * 60 * (registerForm.values.hrs_totais * 1000)
+            )
+          }
           selecionaHorario={true}
-          isDisabled={registerForm.values.inicio_real}
+          isDisabled={registerForm.values.inicio_real || flag === 1}
         />
       </Flex>
       <hr />
@@ -99,7 +122,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
       </Text>
       <Flex direction={"row"}>
         <Flex direction={"row"} gap={4} w={"100%"}>
-          <Flex direction={"row"} w={"52.2%"} gap={4}>
+          <Flex direction={"row"} w={"59%"} gap={4}>
             <InputNumericoGenerico
               registerForm={registerForm}
               propName={"hrs_reais"}
@@ -109,6 +132,12 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
               limite={1000}
               isDisabled={flag === 0}
             />
+            {/* <Input value={mediaHorasFiltradas} /> */}
+            <Flex align={"end"}>
+              <ModalFiltrarDuracaoMedia
+                setMediaHorasFiltradas={setMediaHorasFiltradas}
+              />
+            </Flex>
 
             <DatePickerModal
               nomeLabel={"DATA INÍCIO REAL"}
@@ -133,7 +162,10 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                     registerForm.values.inicio_real.getTime() +
                       60 * 60 * (registerForm.values.hrs_reais * 1000)
                   )
-                : registerForm.values.fim_realizado
+                : new Date(
+                    registerForm.values.inicio_realizado.getTime() +
+                      60 * 60 * (registerForm.values.hrs_reais * 1000)
+                  )
             }
             // data={registerForm.values.inicio_real}
             selecionaHorario={true}
