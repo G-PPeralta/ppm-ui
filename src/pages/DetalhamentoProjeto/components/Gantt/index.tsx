@@ -146,24 +146,24 @@ export function Gantt({
         if (list.length === 0) return [];
         return list.map((sub: any) => ({
           ...sub,
-          BaselineDuration: sub.BaselineDuration.toString().concat(" dias"),
+          BaselineDuration: sub.BaselineDuration?.toString().concat(" dias"),
           subtasks: formatter(sub.subtasks),
         }));
       };
 
-      const paiSemFilho = reqGanttData.data[0].subtasks.length === 0;
+      const paiSemFilho = reqGanttData.data[0]?.subtasks.length === 0;
       if (paiSemFilho) {
         setGantt([]);
         return;
       }
       const ganttFormatter = reqGanttData.data.map((item: any) => ({
         ...item,
-        BaselineDuration: item.BaselineDuration.toString() // duracaoPlanejadaSemFinaisDeSemana
+        BaselineDuration: item.BaselineDuration?.toString() // duracaoPlanejadaSemFinaisDeSemana
           // .toString() //  //
           .concat(" dias"),
-        subtasks: item.subtasks.map((sub: any) => ({
+        subtasks: item.subtasks?.map((sub: any) => ({
           ...sub,
-          BaselineDuration: sub.BaselineDuration.toString().concat(" dias"),
+          BaselineDuration: sub.BaselineDuration?.toString().concat(" dias"),
           subtasks: formatter(sub.subtasks),
         })),
         // BaselineEndDate: maxBaselineEndDate,
