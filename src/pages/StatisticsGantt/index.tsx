@@ -160,7 +160,7 @@ function StatisticsGantt() {
                       backgroundColor="transparent"
                       size="lg"
                       icon={<FiChevronLeft />}
-                      onClick={() => navigate(`/estatisticas`)}
+                      onClick={() => navigate(-1)}
                     />
                     <Box>
                       <Heading as="h3" size="md">
