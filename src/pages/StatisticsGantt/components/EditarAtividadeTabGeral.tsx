@@ -7,6 +7,8 @@ import InputGenerico from "components/InputGenerico";
 import InputGenericoDesabilitado from "components/InputGenericoDesabilitado";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 
+import { ModalFiltrarDuracaoMedia } from "./ModalFiltrarDuracaoMedia";
+
 interface Props {
   registerForm: any;
   data: any;
@@ -99,7 +101,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
       </Text>
       <Flex direction={"row"}>
         <Flex direction={"row"} gap={4} w={"100%"}>
-          <Flex direction={"row"} w={"52.2%"} gap={4}>
+          <Flex direction={"row"} w={"59%"} gap={4}>
             <InputNumericoGenerico
               registerForm={registerForm}
               propName={"hrs_reais"}
@@ -109,6 +111,9 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
               limite={1000}
               isDisabled={flag === 0}
             />
+            <Flex align={"end"}>
+              <ModalFiltrarDuracaoMedia />
+            </Flex>
 
             <DatePickerModal
               nomeLabel={"DATA INÍCIO REAL"}
