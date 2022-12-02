@@ -56,7 +56,7 @@ export function Gantt({
   const [expandGantt, setExpandGantt] = useState(false);
   const [refresh, setRefresh] = useState(false);
   const [refreshGanttCriacao, setRefreshGanttCriacao] = useState(false);
-  const [refreshGanttDelete, setRefreshGanttDelete] = useState(false);
+  const [refreshGanttDelete, setRefreshGanttDelete] = useState<number>(0);
 
   const {
     registerForm,
@@ -101,46 +101,46 @@ export function Gantt({
 
       // console.log(">>>> reqGanttData", reqGanttData.data);
 
-      const calculateDaysBetween = (date1: Date, date2: Date) => {
-        const one_day = 1000 * 60 * 60 * 24;
-        const date1_ms = date1.getTime();
-        const date2_ms = date2.getTime();
-        const difference_ms = date2_ms - date1_ms;
+      // const calculateDaysBetween = (date1: Date, date2: Date) => {
+      //   const one_day = 1000 * 60 * 60 * 24;
+      //   const date1_ms = date1.getTime();
+      //   const date2_ms = date2.getTime();
+      //   const difference_ms = date2_ms - date1_ms;
 
-        const days = Math.round(difference_ms / one_day);
-        const weeks = Math.floor(days / 7);
-        const daysInWeek = days % 7;
-        const daysInWeekWithoutWeekends =
-          daysInWeek - 2 * Math.floor(daysInWeek / 5);
-        const daysWithoutWeekends = weeks * 5 + daysInWeekWithoutWeekends;
+      //   const days = Math.round(difference_ms / one_day);
+      //   const weeks = Math.floor(days / 7);
+      //   const daysInWeek = days % 7;
+      //   const daysInWeekWithoutWeekends =
+      //     daysInWeek - 2 * Math.floor(daysInWeek / 5);
+      //   const daysWithoutWeekends = weeks * 5 + daysInWeekWithoutWeekends;
 
-        return daysWithoutWeekends;
-      };
+      //   return daysWithoutWeekends;
+      // };
 
-      const minBaselineStartDate = reqGanttData.data[0].subtasks.reduce(
-        (acc: any, curr: any) => {
-          if (acc > curr.BaselineStartDate) {
-            return curr.BaselineStartDate;
-          }
-          return acc;
-        },
-        reqGanttData.data[0].subtasks[0].BaselineStartDate
-      );
+      // const minBaselineStartDate = reqGanttData.data[0].subtasks.reduce(
+      //   (acc: any, curr: any) => {
+      //     if (acc > curr.BaselineStartDate) {
+      //       return curr.BaselineStartDate;
+      //     }
+      //     return acc;
+      //   },
+      //   reqGanttData.data[0].subtasks[0].BaselineStartDate
+      // );
 
-      const maxBaselineEndDate = reqGanttData.data[0].subtasks.reduce(
-        (acc: any, curr: any) => {
-          if (acc < curr.BaselineEndDate) {
-            return curr.BaselineEndDate;
-          }
-          return acc;
-        },
-        reqGanttData.data[0].subtasks[0].BaselineEndDate
-      );
+      // const maxBaselineEndDate = reqGanttData.data[0].subtasks.reduce(
+      //   (acc: any, curr: any) => {
+      //     if (acc < curr.BaselineEndDate) {
+      //       return curr.BaselineEndDate;
+      //     }
+      //     return acc;
+      //   },
+      //   reqGanttData.data[0].subtasks[0].BaselineEndDate
+      // );
 
-      const duracaoPlanejadaSemFinaisDeSemana = calculateDaysBetween(
-        new Date(minBaselineStartDate),
-        new Date(maxBaselineEndDate)
-      );
+      // const duracaoPlanejadaSemFinaisDeSemana = calculateDaysBetween(
+      //   new Date(minBaselineStartDate),
+      //   new Date(maxBaselineEndDate)
+      // );
 
       const formatter = (list: any) => {
         if (list.length === 0) return [];
@@ -151,10 +151,15 @@ export function Gantt({
         }));
       };
 
+      const paiSemFilho = reqGanttData.data[0].subtasks.length === 0;
+      if (paiSemFilho) {
+        setGantt([]);
+        return;
+      }
       const ganttFormatter = reqGanttData.data.map((item: any) => ({
         ...item,
-        BaselineDuration: duracaoPlanejadaSemFinaisDeSemana
-          .toString()
+        BaselineDuration: item.BaselineDuration.toString() // duracaoPlanejadaSemFinaisDeSemana
+          // .toString() //  //
           .concat(" dias"),
         subtasks: item.subtasks.map((sub: any) => ({
           ...sub,
@@ -175,16 +180,6 @@ export function Gantt({
       setGantt(ganttFormatter);
     }
   }
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, [gantt, refreshGant]);
-
-  useEffect(() => {
-    handleSetGanttData();
-  }, [refreshGant, refreshGanttCriacao, refreshGanttDelete]);
 
   const sortingOptions: SortSettingsModel = {
     columns: [{ field: "BaselineStartDate", direction: "Ascending" }],
@@ -254,6 +249,17 @@ export function Gantt({
   //     Predecessor: `${7}FS`,
   //   },
   // ];
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, [gantt, refreshGant]);
+
+  useEffect(() => {
+    handleSetGanttData();
+  }, [refreshGant, refreshGanttCriacao, refreshGanttDelete]);
+
   return (
     <>
       {/* {!loading && ( */}
