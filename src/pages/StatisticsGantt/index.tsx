@@ -92,7 +92,7 @@ function StatisticsGantt() {
 
     payload.forEach((s: { id_sonda: number; sonda: string; pocos: any[] }) =>
       s.pocos.forEach((p) => {
-        console.log(`DADOS_POCO -->` + p.dat_atualizacao);
+        // console.log(`DADOS_POCO -->` + p.dat_atualizacao);
         newData.push({
           sonda: s.sonda,
           id_sonda: s.id_sonda,
