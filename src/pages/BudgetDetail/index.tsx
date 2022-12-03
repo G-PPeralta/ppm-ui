@@ -28,7 +28,7 @@ export function BudgetDetail() {
           <ContainerPagina>
             <Flex mt={-2} ml={-5} mb={-7}>
               <TituloPagina botaoVoltar={true}>
-                Gerencial do Orçamento
+                Acompanhamento Financeiro
               </TituloPagina>
             </Flex>
             <Flex>

@@ -76,7 +76,7 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
             fontWeight={"700"}
             fontFamily={"Mulish"}
           >
-            Gestão de Custos
+            Adicionar Despesa
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <form

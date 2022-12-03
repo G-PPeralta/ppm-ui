@@ -33,7 +33,7 @@ export function Budgets() {
               borderRadius={{ base: "xl", sm: "xl" }}
             >
               <Flex ml={-3} mt={-1}>
-                <TituloPagina>Gerencial do Orçamento</TituloPagina>
+                <TituloPagina>Acompanhamento Financeiro</TituloPagina>
               </Flex>
               <Flex
                 direction={wd > 600 ? "row" : "column"}

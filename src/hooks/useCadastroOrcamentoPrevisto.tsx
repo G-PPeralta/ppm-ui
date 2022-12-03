@@ -17,10 +17,12 @@ export function useCadastroOrcamentoPrevisto() {
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
   const [atividade, setAtividade] = useState<number>(0);
+  const [projeto, setProjeto] = useState<number>(0);
 
   const initialValues = {
     valor: "",
     atividadeId: "",
+    projetoId: "",
     nom_usu_create: user?.nome,
   };
 
@@ -31,9 +33,9 @@ export function useCadastroOrcamentoPrevisto() {
       const newValues = {
         atividadeId: atividade,
         valor: +parseNumber(values.valor),
+        projetoId: projeto,
         nom_usu_create: user?.nome,
       };
-
       setLoading(true);
 
       try {
@@ -67,5 +69,6 @@ export function useCadastroOrcamentoPrevisto() {
     registerForm,
     loading,
     setAtividade,
+    setProjeto,
   };
 }

@@ -48,12 +48,22 @@ interface PropsInterface {
 
 function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, setAtividade, fornecedores, classesSevicos } =
-    useCadastroOrcamentoRealizado();
+  const {
+    registerForm,
+    loading,
+    setAtividade,
+    setProjeto,
+    fornecedores,
+    classesSevicos,
+  } = useCadastroOrcamentoRealizado();
   const { projeto, toogleRender } = props;
 
   useEffect(() => {
     setAtividade(projeto.id);
+  }, []);
+
+  useEffect(() => {
+    setProjeto(projeto.id_projeto);
   }, []);
 
   return (
@@ -86,7 +96,7 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
             fontWeight={"700"}
             fontFamily={"Mulish"}
           >
-            Gestão de Custos
+            Adicionar Despesa
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <form

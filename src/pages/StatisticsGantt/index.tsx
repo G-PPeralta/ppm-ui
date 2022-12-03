@@ -39,6 +39,7 @@ function StatisticsGantt() {
     id_sonda: 0,
     poco: "",
     id_poco: 0,
+    dat_atualizacao: "",
   });
   const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
   const [data, setData] = useState<StatisticsGanttProps[]>();
@@ -82,13 +83,16 @@ function StatisticsGantt() {
       id_sonda: data.id_sonda,
       poco: data.poco,
       id_poco: data.id_poco,
+      dat_atualizacao: data.dat_atualizacao,
     });
   };
 
   const convertReq = (payload: any): StatisticsTableData[] => {
     const newData: StatisticsTableData[] = [];
+
     payload.forEach((s: { id_sonda: number; sonda: string; pocos: any[] }) =>
       s.pocos.forEach((p) => {
+        console.log(`DADOS_POCO -->` + p.dat_atualizacao);
         newData.push({
           sonda: s.sonda,
           id_sonda: s.id_sonda,
@@ -103,7 +107,6 @@ function StatisticsGantt() {
 
   const handleGetAllData = async () => {
     const { data } = await getOperacoesEstatisticas();
-    // console.log({ data });
     // GET por onde atividades vem
     setData(data);
 
