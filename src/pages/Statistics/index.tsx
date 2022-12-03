@@ -46,6 +46,7 @@ function Statistics() {
 
   const handleGetAllData = async () => {
     const { data } = await getOperacoesEstatisticas();
+    // console.log("ORIGEM --> " + data.poco);
     // console.log("data", data);
     const newData = convertReq(data);
     setAllData(newData);

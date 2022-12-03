@@ -18,11 +18,11 @@ import { formatReal } from "utils/formatReal";
 import { postAatualizarValorPrevisto } from "services/post/Budget";
 
 export default function CampoEditavel(props: { filho: BudgetDetail }) {
-  const { planejado, projeto } = props.filho;
-
+  const { planejado, projeto, id_projeto } = props.filho;
   const save = async (valor: string) => {
     const data = {
       valor: +valor,
+      projetoId: id_projeto,
       atividadeId: projeto.id,
     };
     const { status } = await postAatualizarValorPrevisto(data);

@@ -3,11 +3,13 @@ export interface BudgetPlan {
   valor: number;
 }
 export interface Projeto {
+  id_projeto: number;
   id: number;
   nome: string;
 }
 
 export interface Budget {
+  id_projeto: number;
   id: number;
   item: string;
   projeto: Projeto;
@@ -19,6 +21,7 @@ export interface Budget {
 }
 
 export interface BudgetDetail {
+  id_projeto: number;
   id: number;
   data?: string;
   brt: string;
@@ -33,6 +36,7 @@ export interface BudgetDetail {
 export interface BudgetReal {
   id?: number;
   atividadeId?: number;
+  projetoId?: number;
   valor: number;
   data: any;
   fornecedor: string;

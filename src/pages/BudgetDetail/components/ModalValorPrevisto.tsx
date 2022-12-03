@@ -39,12 +39,16 @@ interface PropsInterface {
 
 function ModalValorPrevisto(props: PropsInterface) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, setAtividade } =
+  const { registerForm, loading, setAtividade, setProjeto } =
     useCadastroOrcamentoPrevisto();
   const { projeto, toogleRender, value } = props;
 
   useEffect(() => {
     setAtividade(projeto.id);
+  }, []);
+
+  useEffect(() => {
+    setProjeto(projeto.id_projeto);
   }, []);
 
   return (

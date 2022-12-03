@@ -21,6 +21,7 @@ export function useCadastroOrcamentoRealizado() {
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
   const [atividade, setAtividade] = useState<number>(0);
+  const [projeto, setProjeto] = useState<number>(0);
   const [fornecedores, setFornecedores] = useState<Fornecedor[]>([]);
   const [classesSevicos, setClassesSevicos] = useState<ClasseServico[]>([]);
 
@@ -54,6 +55,7 @@ export function useCadastroOrcamentoRealizado() {
       const dateS = dateF.toISOString();
       const newValues: BudgetReal = {
         atividadeId: atividade,
+        projetoId: projeto,
         valor: parseNumber(values.gasto),
         data: dateS,
         fornecedor: values.fornecedor,
@@ -101,6 +103,7 @@ export function useCadastroOrcamentoRealizado() {
     registerForm,
     loading,
     setAtividade,
+    setProjeto,
     fornecedores,
     classesSevicos,
   };
