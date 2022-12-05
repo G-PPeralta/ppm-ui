@@ -22,7 +22,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   const [mediaHorasFiltradas, setMediaHorasFiltradas] = useState<any>(0);
   const [date, setDate] = useState<any>();
 
-  console.log(registerForm.values);
+  // console.log(registerForm.values);
 
   useEffect(() => {
     registerForm.setFieldValue(
