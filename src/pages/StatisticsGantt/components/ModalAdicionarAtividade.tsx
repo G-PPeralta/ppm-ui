@@ -22,6 +22,7 @@ import {
 import { Operacao } from "interfaces/Estatisticas";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import DatePickerModal from "components/DatePickerGenerico/DatePickerModal";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 import SelectFiltragem from "components/SelectFiltragem";
 
@@ -36,7 +37,7 @@ import {
   getDuracaoHorasAdicionarAtividade,
 } from "services/get/Estatisticas";
 
-import AtividadeCronogramaDragAndDrop from "./AtividadeCronogramaDragAndDrop";
+// import AtividadeCronogramaDragAndDrop from "./AtividadeCronogramaDragAndDrop";
 import { ModalFiltrarDuracaoMedia } from "./ModalFiltrarDuracaoMedia";
 
 interface Props {
@@ -140,12 +141,12 @@ function ModalAdicionarAtividade({
   //   registerForm.setFieldValue("profundidade", Number(event));
   // };
 
-  const atividadesOptions =
-    atividades &&
-    atividades.map((atividade: any) => ({
-      value: atividade,
-      label: atividade.valor,
-    }));
+  // const atividadesOptions =
+  //   atividades &&
+  //   atividades.map((atividade: any) => ({
+  //     value: atividade,
+  //     label: atividade.valor,
+  //   }));
 
   useEffect(() => {
     handleDataInicio();
@@ -225,7 +226,7 @@ function ModalAdicionarAtividade({
   // console.log("Dados --> ", registerForm);
   // console.log("dados atv -->", atividades.length);
 
-  // console.log("dados -->", registerForm.values.flag);
+  console.log("dados -->", registerForm.values.flag);
 
   return (
     <>
@@ -290,10 +291,10 @@ function ModalAdicionarAtividade({
                       setMediaHorasFiltradas={setMediaHorasFiltradas}
                     />
                   </Flex>
-                  <AtividadeCronogramaDragAndDrop
+                  {/* <AtividadeCronogramaDragAndDrop
                     registerForm={registerForm}
                     atividades={atividadesOptions}
-                  />
+                  /> */}
                   <Flex gap={4} w={"100%"}>
                     <InputNumericoGenerico
                       registerForm={registerForm}
@@ -309,16 +310,16 @@ function ModalAdicionarAtividade({
                       <Flex direction={"column"}>
                         <Flex gap={1}>
                           {/* <RequiredField /> */}
-                          <Text
+                          {/* <Text
                             fontWeight={"bold"}
                             fontSize={"12px"}
                             color={"#949494"}
                           >
                             DATA INÍCIO
-                          </Text>
+                          </Text> */}
                         </Flex>
-                        <Button
-                          isDisabled={registerForm.values.flag === 1}
+                        {/* <Button
+                          isDisabled={true}
                           h={"56px"}
                           variant="outline"
                           px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
@@ -334,7 +335,17 @@ function ModalAdicionarAtividade({
                                 registerForm.values.data_inicio
                               )
                             : "Data Início"}
-                        </Button>
+                        </Button> */}
+                        <DatePickerModal
+                          use12hours={true}
+                          nomeLabel={"DATA INÍCIO"}
+                          registerForm={registerForm}
+                          propName={"data_inicio"}
+                          data={new Date(registerForm.values.data_inicio)}
+                          selecionaHorario={true}
+                          isDisabled={false}
+                          // isDisabled={registerForm.values.flag === 1}
+                        />
                       </Flex>
                     </Flex>
 
@@ -351,6 +362,9 @@ function ModalAdicionarAtividade({
                           </Text>
                         </Flex>
                         <Button
+                          fontWeight={"400"}
+                          fontSize={"14px"}
+                          color={"#949494"}
                           isDisabled={true}
                           h={"56px"}
                           variant="outline"
