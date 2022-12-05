@@ -154,7 +154,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
               }
               selecionaHorario={true}
               // isDisabled={flag === 0 || registerForm.values.pct_real === 100}
-              isDisabled={flag === 1}
+              isDisabled={flag === 0}
             />
           </Flex>
           <DatePickerModal
