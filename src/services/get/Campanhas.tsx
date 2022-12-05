@@ -229,6 +229,19 @@ export async function getGanttCampanhaData(id: number): Promise<{
   return { data, status };
 }
 
+export async function getGanttCampanhaAtividades(id: number): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(`/gantt/atividades/${id}`, {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
+    },
+  });
+
+  return { data, status };
+}
+
 export async function getCampanhaDataInicio(id: number): Promise<{
   data: any;
   status: number;

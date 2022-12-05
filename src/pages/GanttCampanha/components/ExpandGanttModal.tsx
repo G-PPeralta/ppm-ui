@@ -241,13 +241,14 @@ function ExpandGanttModal({
                   ></ColumnDirective>
                   <ColumnDirective
                     field="TaskName"
-                    headerText="Ação/Projeto"
+                    headerText="Atividade"
                     headerTextAlign="Left"
                     textAlign="Left"
+                    width="250"
                   ></ColumnDirective>
-                  <ColumnDirective
+                  {/* <ColumnDirective
                     field="BaselineStartDate"
-                    headerText="Início planejado"
+                    headerText="Início Baseline"
                     headerTextAlign="Center"
                     textAlign="Center"
                     type="date"
@@ -260,10 +261,10 @@ function ExpandGanttModal({
                     textAlign="Center"
                     type="date"
                     format="dd/MM/yyyy"
-                  ></ColumnDirective>
+                  ></ColumnDirective> */}
                   <ColumnDirective
                     field="StartDate"
-                    headerText="Início real"
+                    headerText="Início Real"
                     headerTextAlign="Center"
                     textAlign="Center"
                     type="date"
@@ -271,23 +272,23 @@ function ExpandGanttModal({
                   ></ColumnDirective>
                   <ColumnDirective
                     field="EndDate"
-                    headerText="Fim real"
+                    headerText="Fim Real"
                     headerTextAlign="Center"
                     textAlign="Center"
                     type="date"
                     format="dd/MM/yyyy"
                   ></ColumnDirective>
-                  <ColumnDirective
+                  {/* <ColumnDirective
                     field="BaselineDuration"
                     headerText="Duração Planejada"
                     headerTextAlign="Center"
                     textAlign="Center"
                     // type="number"
                     // format="N"
-                  />
+                  /> */}
                   <ColumnDirective
                     field="Duration"
-                    headerText="Duração Realizada"
+                    headerText="Duração"
                     headerTextAlign="Center"
                     textAlign="Center"
                     // type="number"
@@ -295,11 +296,10 @@ function ExpandGanttModal({
                   ></ColumnDirective>
                   <ColumnDirective
                     field="Progress"
-                    headerText="Progresso (%)"
+                    headerText="Real (%)"
                     headerTextAlign="Center"
                     textAlign="Center"
                     // type="number"
-                    format="N"
                   ></ColumnDirective>
                   <ColumnDirective
                     field="Predecessor"
