@@ -22,6 +22,7 @@ import {
 import { Operacao } from "interfaces/Estatisticas";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
+import DatePickerModal from "components/DatePickerGenerico/DatePickerModal";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 import SelectFiltragem from "components/SelectFiltragem";
 
@@ -36,7 +37,7 @@ import {
   getDuracaoHorasAdicionarAtividade,
 } from "services/get/Estatisticas";
 
-import AtividadeCronogramaDragAndDrop from "./AtividadeCronogramaDragAndDrop";
+// import AtividadeCronogramaDragAndDrop from "./AtividadeCronogramaDragAndDrop";
 import { ModalFiltrarDuracaoMedia } from "./ModalFiltrarDuracaoMedia";
 
 interface Props {
@@ -140,12 +141,12 @@ function ModalAdicionarAtividade({
   //   registerForm.setFieldValue("profundidade", Number(event));
   // };
 
-  const atividadesOptions =
-    atividades &&
-    atividades.map((atividade: any) => ({
-      value: atividade,
-      label: atividade.valor,
-    }));
+  // const atividadesOptions =
+  //   atividades &&
+  //   atividades.map((atividade: any) => ({
+  //     value: atividade,
+  //     label: atividade.valor,
+  //   }));
 
   useEffect(() => {
     handleDataInicio();
@@ -278,10 +279,10 @@ function ModalAdicionarAtividade({
                       setMediaHorasFiltradas={setMediaHorasFiltradas}
                     />
                   </Flex>
-                  <AtividadeCronogramaDragAndDrop
+                  {/* <AtividadeCronogramaDragAndDrop
                     registerForm={registerForm}
                     atividades={atividadesOptions}
-                  />
+                  /> */}
                   <Flex gap={4} w={"100%"}>
                     <InputNumericoGenerico
                       registerForm={registerForm}
@@ -297,15 +298,15 @@ function ModalAdicionarAtividade({
                       <Flex direction={"column"}>
                         <Flex gap={1}>
                           {/* <RequiredField /> */}
-                          <Text
+                          {/* <Text
                             fontWeight={"bold"}
                             fontSize={"12px"}
                             color={"#949494"}
                           >
                             DATA INÍCIO
-                          </Text>
+                          </Text> */}
                         </Flex>
-                        <Button
+                        {/* <Button
                           isDisabled={true}
                           h={"56px"}
                           variant="outline"
@@ -322,7 +323,16 @@ function ModalAdicionarAtividade({
                                 registerForm.values.data_inicio
                               )
                             : "Data Início"}
-                        </Button>
+                        </Button> */}
+                        <DatePickerModal
+                          use12hours={true}
+                          nomeLabel={"DATA INÍCIO"}
+                          registerForm={registerForm}
+                          propName={"data_inicio"}
+                          data={new Date(registerForm.values.data_inicio)}
+                          selecionaHorario={true}
+                          isDisabled={true}
+                        />
                       </Flex>
                     </Flex>
 
@@ -339,6 +349,9 @@ function ModalAdicionarAtividade({
                           </Text>
                         </Flex>
                         <Button
+                          fontWeight={"400"}
+                          fontSize={"14px"}
+                          color={"#949494"}
                           isDisabled={true}
                           h={"56px"}
                           variant="outline"
