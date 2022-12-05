@@ -108,7 +108,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
           nomeLabel={"DATA INÍCIO"}
           registerForm={registerForm}
           propName={"inicio_planejado"}
-          data={date}
+          data={registerForm.values.inicio_planejado}
           selecionaHorario={true}
           // isDisabled={registerForm.values.inicio_real || flag === 1}
           isDisabled={flag === 1}
@@ -120,15 +120,10 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
           propName={"fim_planejado"}
           selecionaHorario={true}
           data={
-            registerForm.values.inicio_real !== ""
-              ? new Date(
-                  registerForm.values.inicio_planejado.getTime() +
-                    60 * 60 * (registerForm.values.hrs_totais * 1000)
-                )
-              : new Date(
-                  registerForm.values.inicio_planejado.getTime() +
-                    60 * 60 * (registerForm.values.hrs_totais * 1000)
-                )
+            new Date(
+              registerForm.values.inicio_planejado.getTime() +
+                60 * 60 * (registerForm.values.hrs_totais * 1000)
+            )
           }
           // isDisabled={registerForm.values.inicio_real || flag === 1}
           isDisabled={true}
@@ -156,12 +151,8 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
             <DatePickerModal
               nomeLabel={"DATA INÍCIO REAL"}
               registerForm={registerForm}
-              propName={"inicio_real"}
-              data={
-                registerForm.values.inicio_real
-                  ? registerForm.values.inicio_real
-                  : registerForm.values.inicio_realizado
-              }
+              propName={"inicio_realizado"}
+              data={date}
               selecionaHorario={true}
               // isDisabled={flag === 0 || registerForm.values.pct_real === 100}
               isDisabled={flag === 1}
@@ -174,7 +165,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
             data={
               registerForm.values.inicio_real
                 ? new Date(
-                    registerForm.values.inicio_real.getTime() +
+                    registerForm.values.inicio_realizado.getTime() +
                       60 * 60 * (registerForm.values.hrs_reais * 1000)
                   )
                 : new Date(
