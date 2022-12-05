@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+// import { AiOutlineBarChart } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import { MdViewList } from "react-icons/md";
 
@@ -25,7 +26,7 @@ import {
 
 import Sidebar from "components/SideBar";
 
-import { getCampanhasInfo } from "services/post/Campanhas";
+import { getCampanhasGantt } from "services/post/Campanhas";
 
 import ExpandGanttModal from "./components/ExpandGanttModal";
 
@@ -40,6 +41,7 @@ interface GanttCampanha {
   finalprojplanejado: Date;
   pct_plan: string;
   Progress: string;
+  pct_real: string;
   id: number;
   intervencaoIniciada: string;
 }
@@ -115,7 +117,7 @@ function GanttCampanha() {
   };
 
   const handleGetAllData = async () => {
-    const { data } = await getCampanhasInfo(payload);
+    const { data } = await getCampanhasGantt(payload);
     if (data) {
       const list: any = [];
       data.forEach((item: any) => {
@@ -123,8 +125,13 @@ function GanttCampanha() {
           TaskID: poc.poco || "",
           startDate: poc.inicioplanejado,
           endDate: poc.finalplanejado,
-          pct_plan: Number(poc.pct_plan) || 0,
-          Progress: Number(poc.pct_real),
+          pct_real: poc.pct_real + "%" || 0 + "%",
+          Progress: poc.pct_plan + "%",
+          pct_plan: poc.pct_plan + "%",
+          status:
+            Number(poc.pct_real) >= Number(poc.pct_plan)
+              ? "EM LINHA"
+              : "ATRASADO",
           id: poc.id,
           intervencaoIniciada: index === 0 && poc.pct_real !== "0",
         }));
@@ -240,7 +247,7 @@ function GanttCampanha() {
                     splitterSettings={{
                       // view: handleShowGantt(),
                       // columnIndex: 5,
-                      position: "47%",
+                      position: "60%",
                     }}
                     rowDataBound={rowDataBound}
                     height={"90%"}
@@ -265,47 +272,51 @@ function GanttCampanha() {
                         field="TaskID"
                         headerText="Poço"
                         headerTextAlign="Left"
+                        width="150"
                         textAlign="Left"
                       ></ColumnDirective>
                       <ColumnDirective
                         field="startDate"
-                        headerText="Início planejado"
+                        headerText="Início Real"
                         headerTextAlign="Center"
                         textAlign="Center"
                         type="date"
+                        width="115"
                         format="dd/MM/yyyy"
                       ></ColumnDirective>
                       <ColumnDirective
                         field="endDate"
-                        headerText="Fim planejado"
+                        headerText="Fim Real"
                         headerTextAlign="Center"
                         textAlign="Center"
                         type="date"
+                        width="115"
                         format="dd/MM/yyyy"
                       ></ColumnDirective>
-                      {/* <ColumnDirective
-                        field="pct_plan"
-                        headerText="Progresso Planejado (%)"
-                        headerTextAlign="Center"
-                        textAlign="Center"
-                        // type="number"
-                        format="N"
-                      ></ColumnDirective> */}
+                      {
+                        <ColumnDirective
+                          field="status"
+                          headerText="Status"
+                          headerTextAlign="Center"
+                          textAlign="Center"
+                          // type="number"
+                        ></ColumnDirective>
+                      }
                       <ColumnDirective
-                        field="Progress"
-                        headerText="Progresso Real (%)"
+                        field="pct_plan"
+                        headerText="% Plan"
                         headerTextAlign="Center"
                         textAlign="Center"
                         // type="number"
-                        format="N"
+                        width="115"
                       ></ColumnDirective>
                       <ColumnDirective
-                        field="pct_plan"
-                        headerText="Progresso Planejado (%)"
+                        field="pct_real"
+                        headerText="% Real"
                         headerTextAlign="Center"
                         textAlign="Center"
                         // type="number"
-                        format="N"
+                        width="115"
                       ></ColumnDirective>
                     </ColumnsDirective>
                     <Inject services={[Edit, Toolbar, Sort]} />
