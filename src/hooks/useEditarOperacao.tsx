@@ -65,8 +65,10 @@ export function useEditarOperacao(
     inicio_real: "",
     fim_real: "",
     pct_real: 0,
+    flag: 0,
     nome_atividade: "",
     hrs_reais: 0,
+    hrs_totais: 0,
     anotacoes: "",
     mocs: [
       {
@@ -108,6 +110,15 @@ export function useEditarOperacao(
     initialValues,
     validationSchema: editarAtividadeGanttSchema,
     onSubmit: async (values) => {
+      /*
+      Correção bug timezone
+      */
+      const dat_ini_plan: any = new Date(
+        registerForm.values.inicio_planejado.getTime() - 3 * 60 * 60 * 1000
+      );
+      const dat_ini_real: any = new Date(
+        registerForm.values.inicio_realizado.getTime() - 3 * 60 * 60 * 1000
+      );
       const newValues = {
         nom_usu_create: user?.nome,
         id_poco_pai: projeto.id_poco,
@@ -116,12 +127,14 @@ export function useEditarOperacao(
           nome_atividade: values.nome_atividade,
           pct_real: values.pct_real,
           hrs_reais: values.hrs_reais,
-          inicio_realizado: values.inicio_realizado,
+          hrs_totais: values.hrs_totais,
+          inicio_realizado: dat_ini_real,
           fim_realizado: values.fim_realizado,
-          inicio_planejado: values.inicio_planejado,
+          inicio_planejado: dat_ini_plan,
           fim_planejado: values.fim_planejado,
           inicio_real: values.inicio_real,
           fim_real: values.fim_real,
+          flag: values.flag,
         },
         anotacoes: {
           anotacoes: values.anotacoes,

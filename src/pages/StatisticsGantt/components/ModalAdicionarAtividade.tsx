@@ -62,8 +62,6 @@ function ModalAdicionarAtividade({
   );
   const { listaOperacao } = useCadastroCronograma();
 
-  // console.log("atividades", atividades);
-
   const optionsMetodosElevacao = [
     {
       value: 1,
@@ -87,6 +85,8 @@ function ModalAdicionarAtividade({
   const handleDataInicio = async () => {
     const dados = await getDataInicioExecucaoEstatistica(projeto.id_poco);
     // let ultimaData = new Date();
+
+    // SOLUCAO PARA BUG TIMEZONE
     let ultimaData = dados
       ? new Date(dados.data.dat_ini_plan).getTime() + 3 * 60 * 60 * 1000
       : new Date();
@@ -213,7 +213,19 @@ function ModalAdicionarAtividade({
     }
   }, [dataFinalAtividade]);
 
+  useEffect(() => {
+    if (atividades.length === 0) {
+      registerForm.setFieldValue("flag", 1);
+    } else {
+      registerForm.setFieldValue("flag", 0);
+    }
+  }, []);
   // console.log("registerForm", registerForm.values);
+
+  // console.log("Dados --> ", registerForm);
+  // console.log("dados atv -->", atividades.length);
+
+  // console.log("dados -->", registerForm.values.flag);
 
   return (
     <>
@@ -306,7 +318,7 @@ function ModalAdicionarAtividade({
                           </Text>
                         </Flex>
                         <Button
-                          isDisabled={true}
+                          isDisabled={registerForm.values.flag === 1}
                           h={"56px"}
                           variant="outline"
                           px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}

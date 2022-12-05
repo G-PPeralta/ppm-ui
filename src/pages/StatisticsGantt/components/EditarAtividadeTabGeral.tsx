@@ -32,7 +32,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   }, [mediaHorasFiltradas]);
 
   useEffect(() => {
-    registerForm.setFieldValue("hrs_totais", registerForm.values.hrs_reais);
+    registerForm.setFieldValue("hrs_totais", registerForm.values.hrs_totais);
   }, [mediaHorasFiltradas]);
 
   useEffect(() => {
@@ -43,8 +43,12 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
     (s: any) => s.nome_atividade === registerForm.values.nome_atividade
   ).flag;
 
-  // const flag = sondaN.dat_atualizacao;
+  // para entrar no formulário para envio ao backend
+  useEffect(() => {
+    registerForm.setFieldValue("flag", flag);
+  }, []);
 
+  console.log("Dados --> ", registerForm.values);
   return (
     <Flex w={"100%"} direction={"column"} gap={5}>
       <Flex gap={4} w={"80%"}>
@@ -69,6 +73,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
             required={false}
             placeholder={"Nome"}
             maxLength={100}
+            isDisabled={false}
           />
         </Flex>
         {/* <Flex flex={1}>
@@ -97,7 +102,8 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
         <DatePickerModal
           nomeLabel={"DATA INÍCIO"}
           registerForm={registerForm}
-          propName={"inicio_realizado"}
+          propName={"inicio_planejado"}
+          use12hours={true}
           data={date}
           selecionaHorario={true}
           // isDisabled={registerForm.values.inicio_real || flag === 1}
@@ -146,12 +152,8 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
             <DatePickerModal
               nomeLabel={"DATA INÍCIO REAL"}
               registerForm={registerForm}
-              propName={"inicio_real"}
-              data={
-                registerForm.values.inicio_real
-                  ? registerForm.values.inicio_real
-                  : registerForm.values.inicio_realizado
-              }
+              propName={"inicio_realizado"}
+              data={registerForm.values.inicio_realizado}
               selecionaHorario={true}
               // isDisabled={flag === 0 || registerForm.values.pct_real === 100}
               isDisabled={flag === 0}
