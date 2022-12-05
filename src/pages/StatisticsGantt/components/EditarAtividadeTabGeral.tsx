@@ -44,7 +44,6 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   ).flag;
 
   // const flag = sondaN.dat_atualizacao;
-  console.log("FLAG --> ", flag);
 
   return (
     <Flex w={"100%"} direction={"column"} gap={5}>
@@ -92,7 +91,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
           stepper={false}
           limite={1000}
           // isDisabled={registerForm.values.inicio_real || flag === 1}
-          isDisabled={flag === 0}
+          isDisabled={flag === 1}
         />
 
         <DatePickerModal
@@ -102,7 +101,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
           data={date}
           selecionaHorario={true}
           // isDisabled={registerForm.values.inicio_real || flag === 1}
-          isDisabled={flag === 0}
+          isDisabled={flag === 1}
         />
         <DatePickerModal
           // isDisabled={registerForm.values.pct_real === 100}
@@ -155,7 +154,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
               }
               selecionaHorario={true}
               // isDisabled={flag === 0 || registerForm.values.pct_real === 100}
-              isDisabled={flag === 0}
+              isDisabled={flag === 1}
             />
           </Flex>
           <DatePickerModal
