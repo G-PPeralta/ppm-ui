@@ -78,8 +78,12 @@ function DatePickerModal({
         selected={dataInicio}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
-        showTimeSelect={!!selecionaHorario}
-        dateFormat={esconderHorario ? "dd/MM/yyyy" : "dd/MM/yyyy, hh:mm"}
+        showTimeSelect={!selecionaHorario}
+        timeFormat="p"
+        timeIntervals={15}
+        dateFormat="Pp"
+        // timeFormat="HH:mm"
+        // dateFormat={esconderHorario ? "dd/MM/yyyy" : "dd/MM/yyyy, hh:mm aa"}
         customInput={<TriggerDatePickerInicio />}
       />
     </Flex>
