@@ -86,7 +86,7 @@ function ModalAdicionarAtividade({
   const handleDataInicio = async () => {
     const dados = await getDataInicioExecucaoEstatistica(projeto.id_poco);
     // let ultimaData = new Date();
-
+    // console.log("dados --->", dados);
     // SOLUCAO PARA BUG TIMEZONE
     let ultimaData = dados
       ? new Date(dados.data.dat_ini_plan).getTime() + 3 * 60 * 60 * 1000
@@ -104,6 +104,7 @@ function ModalAdicionarAtividade({
         ultimaData = ganttData[0].EndDate;
       }
     }
+    sessionStorage.setItem("data_inicio", dados.data.dat_ini_plan);
     setDataFinalGantt(ultimaData);
   };
 
@@ -165,7 +166,9 @@ function ModalAdicionarAtividade({
   }, [mediaHorasFiltradas]);
 
   useEffect(() => {
+    // console.log("dados 1 ---> ", registerForm.values.data_fim);
     handleDataFim();
+    // console.log("dados 2 ---> ", registerForm.values.data_fim);
   }, [registerForm.values.duracao]);
 
   useEffect(() => {
@@ -215,39 +218,49 @@ function ModalAdicionarAtividade({
   }, [dataFinalAtividade]);
 
   useEffect(() => {
-    if (atividades.length === 0) {
+    if (projeto.total_atv === 0) {
       registerForm.setFieldValue("flag", 1);
     } else {
       registerForm.setFieldValue("flag", 0);
     }
   }, []);
-  // console.log("registerForm", registerForm.values);
+
+  // console.log("dados registerform", projeto.total_atv);
 
   // console.log("Dados --> ", registerForm);
   // console.log("dados atv -->", atividades.length);
 
-  console.log("dados -->", registerForm.values.flag);
+  // console.log("dados -->", registerForm.values.flag);
+  const flag: any = projeto.total_atv !== 0;
+  // console.log("dados --->", flag);
+
+  // console.log("dados -->", registerForm.values.data_inicio);
+
+  const dat_ini_atv_session: any = sessionStorage.getItem("data_inicio");
+  const data_inicial =
+    new Date(dat_ini_atv_session).getTime() + 3 * 60 * 60 * 1000;
 
   return (
     <>
       <Button
-        h={"56px"}
+        h={"46px"}
         borderRadius={"8px"}
-        fontSize={"18px"}
+        fontSize={"14px"}
         fontWeight={"700"}
         variant="outline"
         border={"2px solid"}
         borderColor={"origem.500"}
-        textColor={"origem.500"}
+        textColor={"white"}
+        backgroundColor={"origem.500"}
         _hover={{
           borderColor: "origem.600",
-          backgroundColor: "origem.500",
+          backgroundColor: "origem.600",
           textColor: "white",
           transition: "all 0.4s",
         }}
         onClick={onOpen}
       >
-        Adicionar Atividade
+        Nova Operação
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
@@ -261,7 +274,7 @@ function ModalAdicionarAtividade({
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            Adicionar Atividade
+            Nova Operação
           </ModalHeader>
           <ModalCloseButton
             color={"white"}
@@ -341,10 +354,10 @@ function ModalAdicionarAtividade({
                           nomeLabel={"DATA INÍCIO"}
                           registerForm={registerForm}
                           propName={"data_inicio"}
-                          data={new Date(registerForm.values.data_inicio)}
+                          data={data_inicial || ""}
                           selecionaHorario={true}
-                          isDisabled={false}
-                          // isDisabled={registerForm.values.flag === 1}
+                          // isDisabled={true}
+                          isDisabled={flag}
                         />
                       </Flex>
                     </Flex>

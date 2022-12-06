@@ -70,6 +70,7 @@ export function useEditarOperacao(
     hrs_reais: 0,
     hrs_totais: 0,
     anotacoes: "",
+    realEditado: 0,
     mocs: [
       {
         numero_moc: "",
@@ -135,6 +136,7 @@ export function useEditarOperacao(
           inicio_real: values.inicio_real,
           fim_real: values.fim_real,
           flag: values.flag,
+          realEditado: values.realEditado,
         },
         anotacoes: {
           anotacoes: values.anotacoes,

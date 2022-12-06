@@ -5,22 +5,22 @@ import { Box, Button, Flex, Heading, Input, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { StatisticsTableData } from "interfaces/Services";
 
-import ModalCadastrarSonda from "pages/Infographics/Components/ModalCadastrarSonda";
-import ModalCadastroPoco from "pages/Infographics/Components/ModalCadastroPoco";
+// import ModalCadastrarSonda from "pages/Infographics/Components/ModalCadastrarSonda";
+// import ModalCadastroPoco from "pages/Infographics/Components/ModalCadastroPoco";
 
 import Sidebar from "components/SideBar";
 
 import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
 
-import ModalCadastroCronograma from "./components/ModalCadastroCronograma";
-import ModalCadastroOperacao from "./components/ModalCadastroOperacao";
+// import ModalCadastroCronograma from "./components/ModalCadastroCronograma";
+// import ModalCadastroOperacao from "./components/ModalCadastroOperacao";
 import { StatisticsTable } from "./components/StatisticsTable";
 
 function Statistics() {
   const [loading, setLoading] = useState(true);
   const [allData, setAllData] = useState<StatisticsTableData[]>([]);
   const [filter, setFilter] = useState<StatisticsTableData[]>();
-  const [refresh, setRefresh] = useState(false);
+  // const [refresh, setRefresh] = useState(false);
   const [search, setSearch] = useState("");
   const [render, setRender] = useState(false);
   const windowInnerWidth = window.innerWidth;
@@ -77,9 +77,9 @@ function Statistics() {
     handleGetAllData();
   }, []);
 
-  useEffect(() => {
-    handleGetAllData();
-  }, [refresh]);
+  // useEffect(() => {
+  //   handleGetAllData();
+  // }, [refresh]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -141,7 +141,7 @@ function Statistics() {
                       SONDA
                     </Text>
                     <Input
-                      h={"56px"}
+                      h={"46px"}
                       _placeholder={{ color: "#949494" }}
                       fontSize={"14px"}
                       fontWeight={"400"}
@@ -157,8 +157,8 @@ function Statistics() {
                   </Flex>
                   <Flex>
                     <Button
-                      h={"56px"}
-                      fontSize={"18px"}
+                      h={"46px"}
+                      fontSize={"14px"}
                       fontWeight={"700"}
                       borderRadius={"8px"}
                       background={"origem.500"}
@@ -175,8 +175,15 @@ function Statistics() {
                     </Button>
                   </Flex>
                 </Flex>
-
                 <Flex
+                  gap={4}
+                  flex={2}
+                  justify={windowInnerWidth > 600 ? "end" : "start"}
+                  align={"end"}
+                  wrap={"wrap"}
+                ></Flex>
+
+                {/* <Flex
                   gap={4}
                   flex={2}
                   justify={windowInnerWidth > 600 ? "end" : "start"}
@@ -200,7 +207,7 @@ function Statistics() {
                     refresh={refresh}
                     setRefresh={setRefresh}
                   />
-                </Flex>
+                </Flex> */}
               </Flex>
 
               <Flex flex={1} ml={-1}>
