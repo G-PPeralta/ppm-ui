@@ -47,7 +47,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
     (s: any) => s.nome_atividade === registerForm.values.nome_atividade
   ).flag;
 
-  console.log("dados flag ---> ", flag);
+  // console.log("dados flag ---> ", flag);
 
   // para entrar no formulário para envio ao backend
   useEffect(() => {
