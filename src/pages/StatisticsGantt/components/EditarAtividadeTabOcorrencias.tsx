@@ -50,7 +50,7 @@ function EditarAtividadeTabOcorrencias({ registerForm, refreshState }: Props) {
             .slice(from, to)
             .map((linhaTabela: any, index: number) => (
               <Tr key={index}>
-                <Td textAlign={"start"} fontWeight={"semibold"}>
+                <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Text>{linhaTabela.dsc_ocorrencia}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
