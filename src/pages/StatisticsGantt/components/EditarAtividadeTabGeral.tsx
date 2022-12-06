@@ -29,12 +29,6 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   // console.log(registerForm.values);
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, [registerForm.values]);
-
-  useEffect(() => {
     registerForm.setFieldValue(
       "hrs_totais",
       mediaHorasFiltradas === 0
@@ -53,6 +47,12 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   useEffect(() => {
     registerForm.setFieldValue("flag", flag);
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, [sondaN]);
 
   useEffect(() => {
     setDate(registerForm.values.inicio_realizado);
