@@ -21,6 +21,7 @@ interface Props {
 function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   const [mediaHorasFiltradas, setMediaHorasFiltradas] = useState<any>(0);
   const [date, setDate] = useState<any>();
+  // const [loading, setLoading] = useState(false);
 
   // console.log(registerForm.values);
 
@@ -39,10 +40,6 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
 
   // console.log(mediaHorasFiltradas);
 
-  useEffect(() => {
-    setDate(registerForm.values.inicio_realizado);
-  }, [registerForm.values]);
-
   const flag = sondaN.atividades.find(
     (s: any) => s.nome_atividade === registerForm.values.nome_atividade
   ).flag;
@@ -55,6 +52,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   }, []);
 
   useEffect(() => {
+    setDate(registerForm.values.inicio_realizado);
     const hrs_reais: any = sessionStorage.getItem(
       "hrs_totais_" + registerForm.values.id_atividade
     );
@@ -63,7 +61,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
     } else {
       registerForm.setFieldValue("realEditado", 0);
     }
-  }, [registerForm.values.hrs_reais]);
+  }, [registerForm.values]);
 
   return (
     <Flex w={"100%"} direction={"column"} gap={5}>
@@ -125,7 +123,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
           nomeLabel={"DATA INÍCIO"}
           registerForm={registerForm}
           propName={"inicio_planejado"}
-          data={date}
+          data={registerForm.values.inicio_planejado}
           selecionaHorario={true}
           // isDisabled={registerForm.values.inicio_real || flag === 1}
           isDisabled={!(flag === 1)}
