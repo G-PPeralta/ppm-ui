@@ -490,6 +490,7 @@ export interface StatisticsGanttProps {
   BaselineDuration?: number;
   Progress?: number | null | undefined;
   subtasks?: StatisticsGanttProps[];
+  ProgressPlan?: number | null | undefined;
   // ParentID: number | null | undefined;
 }
 
@@ -521,6 +522,7 @@ export interface StatisticsTableData {
   med?: number;
   dp?: number;
   use?: string;
+  total_atv?: number;
 }
 
 export interface TarefaAtividade {

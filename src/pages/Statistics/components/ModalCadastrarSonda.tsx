@@ -34,7 +34,7 @@ function ModalCadastrarSonda() {
   return (
     <>
       <Button
-        h={"56px"}
+        h={"46px"}
         borderRadius={"10px"}
         variant="outline"
         border={"2px solid"}

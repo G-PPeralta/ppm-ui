@@ -330,7 +330,7 @@ function ModalEditarAtividade({
                       <InputNumericoGenerico
                         registerForm={registerForm}
                         propName={"pct_real"}
-                        nomeInput={"PORCENTAGEM CONCLUÍDA"}
+                        nomeInput={"% CONCLUSÃO"}
                         tipo={"porcentagem"}
                         stepper={true}
                       />

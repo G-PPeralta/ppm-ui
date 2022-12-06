@@ -47,7 +47,23 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
     (s: any) => s.nome_atividade === registerForm.values.nome_atividade
   ).flag;
 
-  // const flag = sondaN.dat_atualizacao;
+  // console.log("dados flag ---> ", flag);
+
+  // para entrar no formulário para envio ao backend
+  useEffect(() => {
+    registerForm.setFieldValue("flag", flag);
+  }, []);
+
+  useEffect(() => {
+    const hrs_reais: any = sessionStorage.getItem(
+      "hrs_totais_" + registerForm.values.id_atividade
+    );
+    if (+hrs_reais !== registerForm.values.hrs_reais) {
+      registerForm.setFieldValue("realEditado", 1);
+    } else {
+      registerForm.setFieldValue("realEditado", 0);
+    }
+  }, [registerForm.values.hrs_reais]);
 
   return (
     <Flex w={"100%"} direction={"column"} gap={5}>
@@ -73,6 +89,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
             required={false}
             placeholder={"Nome"}
             maxLength={100}
+            isDisabled={false}
           />
         </Flex>
         {/* <Flex flex={1}>
@@ -95,7 +112,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
           stepper={false}
           limite={1000}
           // isDisabled={registerForm.values.inicio_real || flag === 1}
-          isDisabled={flag === 1}
+          isDisabled={!(flag === 1)}
         />
 
         <Flex align={"end"}>
@@ -108,10 +125,10 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
           nomeLabel={"DATA INÍCIO"}
           registerForm={registerForm}
           propName={"inicio_planejado"}
-          data={registerForm.values.inicio_planejado}
+          data={date}
           selecionaHorario={true}
           // isDisabled={registerForm.values.inicio_real || flag === 1}
-          isDisabled={flag === 1}
+          isDisabled={!(flag === 1)}
         />
         <DatePickerModal
           // isDisabled={registerForm.values.pct_real === 100}
@@ -144,7 +161,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
               stepper={false}
               limite={1000}
               // isDisabled={flag === 0}
-              isDisabled={false}
+              isDisabled={registerForm.values.pct_real === 100}
             />
             {/* <Input value={mediaHorasFiltradas} /> */}
 
@@ -155,7 +172,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
               data={date}
               selecionaHorario={true}
               // isDisabled={flag === 0 || registerForm.values.pct_real === 100}
-              isDisabled={flag === 1}
+              isDisabled={!(flag === 1 || flag === 2)}
             />
           </Flex>
           <DatePickerModal
@@ -181,9 +198,10 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
             <InputNumericoGenerico
               registerForm={registerForm}
               propName={"pct_real"}
-              nomeInput={"PORCENTAGEM CONCLUÍDA"}
+              nomeInput={"% CONCLUSÃO"}
               tipo={"porcentagem"}
               stepper={true}
+              isDisabled={flag === 3}
               // step={100}
               // isDisabled={flag === 0}
               // isDisabled={registerForm.values.pct_real === 100}
