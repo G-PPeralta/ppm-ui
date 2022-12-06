@@ -114,19 +114,21 @@ function ModalEditarAtividade({
     if (index == 0) {
       setInicioPlanejado(new Date(atividade.inicioplanejadohrs));
     } else {
-      const inicio = new Date(atividade.inicioplanejadohrs);
-      inicio.setDate(inicio.getDate() + 1);
+      const inicio =
+        new Date(atividade.inicioplanejadohrs).getTime() + 3 * 3600 * 1000;
+      // inicio.setDate(inicio.getDate() + 1);
       setInicioPlanejado(inicio);
     }
-    const fim = new Date(atividade.finalplanejadohrs);
-    fim.setHours(fim.getHours() + 9);
+    const fim =
+      new Date(atividade.finalplanejadohrs).getTime() + 3 * 3600 * 1000;
+    // fim.setHours(fim.getHours() + 9);
     setFimPlanejado(fim);
 
     if (atividade.inicioreal !== null) {
-      setInicioReal(new Date(atividade.inicioreal));
+      setInicioReal(new Date(atividade.inicioreal).getTime() + 3 * 3600 * 1000);
     }
     if (atividade.fimreal !== null) {
-      setFimReal(new Date(atividade.fimreal));
+      setFimReal(new Date(atividade.fimreal).getTime() + 3 * 3600 * 1000);
     }
 
     // console.log(inicioReal);
@@ -171,7 +173,7 @@ function ModalEditarAtividade({
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            Editar Atividade
+            Editar Atividade da Campanha
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <ModalBody mt={3}>
@@ -277,7 +279,7 @@ function ModalEditarAtividade({
                           fontSize={"12px"}
                           color={"#949494"}
                         >
-                          DATA INÍCIO PLANEJADO
+                          INÍCIO PLANEJADO
                         </Text>
                       </Flex>
                       <DateTimePickerDataInicioPlan
@@ -288,6 +290,7 @@ function ModalEditarAtividade({
                         setInicioPlanejado={setInicioPlanejado}
                         intervencaoIniciada={intervencaoIniciada}
                         atividadeStatus={atividadeStatus}
+                        isDisabled={!(atividadeStatus === 0)}
                       />
                     </Flex>
                     <Flex direction={"column"} grow={1}>
@@ -297,7 +300,7 @@ function ModalEditarAtividade({
                           fontSize={"12px"}
                           color={"#949494"}
                         >
-                          DATA FIM PLANEJADO
+                          FIM PLANEJADO
                         </Text>
                       </Flex>
                       <DateTimePickerDataFimPlan
@@ -314,7 +317,7 @@ function ModalEditarAtividade({
                           fontSize={"12px"}
                           color={"#949494"}
                         >
-                          DATA INÍCIO REAL
+                          INÍCIO REAL
                         </Text>
                       </Flex>
                       <DateTimePickerDataInicioReal
@@ -332,7 +335,7 @@ function ModalEditarAtividade({
                           fontSize={"12px"}
                           color={"#949494"}
                         >
-                          DATA FIM REAL
+                          FIM REAL
                         </Text>
                       </Flex>
                       <DateTimePickerDataFimReal
