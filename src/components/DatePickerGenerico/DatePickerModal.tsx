@@ -78,7 +78,7 @@ function DatePickerModal({
         selected={dataInicio}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
-        showTimeSelect={!selecionaHorario}
+        showTimeSelect={selecionaHorario}
         timeFormat="p"
         timeIntervals={15}
         dateFormat="Pp"
