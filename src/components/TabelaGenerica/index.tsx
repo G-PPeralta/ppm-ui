@@ -46,8 +46,8 @@ function TabelaGenerica({
           borderRadius={"10px"}
           overflowX={"auto"}
           minH={minHeight}
-          maxH={maxHeight}
-          overflowY={maxHeight ? "scroll" : "hidden"}
+          // maxH={maxHeight}
+          // overflowY={maxHeight ? "scroll" : "hidden"}
         >
           <Table variant="striped" colorScheme={"strippedGray"}>
             <Thead>

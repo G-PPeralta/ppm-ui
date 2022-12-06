@@ -36,6 +36,7 @@ function EditarAtividadeTabOcorrencias({ registerForm, refreshState }: Props) {
   const footer = [""];
 
   // console.log(registerForm.values);
+  // console.log(tabelaFiltrada);
 
   useEffect(() => {
     setTabelaFiltrada(registerForm.values.ocorrencias);
