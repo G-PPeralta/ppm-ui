@@ -193,8 +193,8 @@ export function Gantt({
       justifyContent={"center"}
       alignItems={"center"}
     >
-      {props.taskData.pct_real == props.taskData.pct_plan &&
-        props.taskData.pct_real !== "0" && (
+      {props.taskData.Progress == props.taskData.ProgressPlan &&
+        props.taskData.Progress != "0" && (
           <Box
             w={5}
             h={5}
@@ -207,7 +207,7 @@ export function Gantt({
             style={{ backgroundColor: "#008000" }}
           ></Box>
         )}
-      {props.taskData.pct_real < props.taskData.pct_plan && (
+      {props.taskData.Progress < props.taskData.ProgressPlan && (
         <Box
           w={5}
           h={5}
@@ -220,7 +220,7 @@ export function Gantt({
           style={{ backgroundColor: "red" }}
         ></Box>
       )}
-      {props.taskData.pct_real == "0" && props.taskData.pct_plan == "0" && (
+      {props.taskData.Progress == "0" && props.taskData.ProgressPlan == "0" && (
         <Box
           w={5}
           h={5}
@@ -483,20 +483,28 @@ export function Gantt({
               // format="N"
             ></ColumnDirective>
             <ColumnDirective
-              field="Progress"
-              headerText="Progresso (%)"
-              headerTextAlign="Center"
-              textAlign="Center"
-              // type="number"
-              format="N"
-            ></ColumnDirective>
-            <ColumnDirective
               field="s"
               headerText="S"
               headerTextAlign="Center"
               textAlign="Center"
               // type="number"
               template={statusTemplate}
+            ></ColumnDirective>
+            <ColumnDirective
+              field="ProgressPlan"
+              headerText="% Plan"
+              headerTextAlign="Center"
+              textAlign="Center"
+              // type="number"
+              format="N"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="Progress"
+              headerText="% Real"
+              headerTextAlign="Center"
+              textAlign="Center"
+              // type="number"
+              format="N"
             ></ColumnDirective>
             <ColumnDirective
               field="Predecessor"
