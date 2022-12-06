@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import {
   Edit,
   ColumnDirective,
@@ -98,6 +98,56 @@ export function Gantt({
         handleGetAllData={handleGetAllData}
       />
       {/* <FiTrash onClick={() => remove(props)} color="#F94144" size={16} /> */}
+    </Flex>
+  );
+
+  const statusTemplate = (props: any) => (
+    <Flex
+      // w={"100%"}
+      // style={{ position: "relative", top: "-8px" }}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
+      {props.taskData.Progress == props.taskData.pct_plan &&
+        props.taskData.Progress !== 0 && (
+          <Box
+            w={5}
+            h={5}
+            bg={"#9FA2B4"}
+            display={"flex"}
+            flexDirection="column"
+            alignItems={"center"}
+            pt={"2px"}
+            sx={{ borderRadius: "100%" }}
+            style={{ backgroundColor: "#008000" }}
+          ></Box>
+        )}
+      {props.taskData.Progress < props.taskData.pct_plan && (
+        <Box
+          w={5}
+          h={5}
+          bg={"#9FA2B4"}
+          display={"flex"}
+          flexDirection="column"
+          alignItems={"center"}
+          pt={"2px"}
+          sx={{ borderRadius: "100%" }}
+          style={{ backgroundColor: "red" }}
+        ></Box>
+      )}
+      {props.taskData.Progress == 0 && props.taskData.pct_plan == 0 && (
+        <Box
+          w={5}
+          h={5}
+          bg={"#9FA2B4"}
+          display={"flex"}
+          flexDirection="column"
+          alignItems={"center"}
+          pt={"2px"}
+          sx={{ borderRadius: "100%" }}
+          style={{ backgroundColor: "gray" }}
+        ></Box>
+      )}
     </Flex>
   );
 
@@ -256,8 +306,24 @@ export function Gantt({
               format="N"
             ></ColumnDirective>
             <ColumnDirective
+              field="s"
+              headerText="S"
+              headerTextAlign="Center"
+              textAlign="Center"
+              // type="number"
+              template={statusTemplate}
+            ></ColumnDirective>
+            <ColumnDirective
+              field="pct_plan"
+              headerText="% Plan"
+              headerTextAlign="Center"
+              textAlign="Center"
+              type="number"
+              format="N"
+            ></ColumnDirective>
+            <ColumnDirective
               field="Progress"
-              headerText="Progresso (%)"
+              headerText="% Real"
               headerTextAlign="Center"
               textAlign="Center"
               type="number"

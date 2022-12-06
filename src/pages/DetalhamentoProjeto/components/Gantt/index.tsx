@@ -14,6 +14,7 @@ import {
   ModalBody,
   ModalFooter,
   ModalCloseButton,
+  Box,
 } from "@chakra-ui/react";
 import {
   ColumnsDirective,
@@ -184,6 +185,56 @@ export function Gantt({
   const sortingOptions: SortSettingsModel = {
     columns: [{ field: "BaselineStartDate", direction: "Ascending" }],
   };
+
+  const statusTemplate = (props: any) => (
+    <Flex
+      // w={"100%"}
+      // style={{ position: "relative", top: "-8px" }}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
+      {props.taskData.pct_real == props.taskData.pct_plan &&
+        props.taskData.pct_real !== "0" && (
+          <Box
+            w={5}
+            h={5}
+            bg={"#9FA2B4"}
+            display={"flex"}
+            flexDirection="column"
+            alignItems={"center"}
+            pt={"2px"}
+            sx={{ borderRadius: "100%" }}
+            style={{ backgroundColor: "#008000" }}
+          ></Box>
+        )}
+      {props.taskData.pct_real < props.taskData.pct_plan && (
+        <Box
+          w={5}
+          h={5}
+          bg={"#9FA2B4"}
+          display={"flex"}
+          flexDirection="column"
+          alignItems={"center"}
+          pt={"2px"}
+          sx={{ borderRadius: "100%" }}
+          style={{ backgroundColor: "red" }}
+        ></Box>
+      )}
+      {props.taskData.pct_real == "0" && props.taskData.pct_plan == "0" && (
+        <Box
+          w={5}
+          h={5}
+          bg={"#9FA2B4"}
+          display={"flex"}
+          flexDirection="column"
+          alignItems={"center"}
+          pt={"2px"}
+          sx={{ borderRadius: "100%" }}
+          style={{ backgroundColor: "gray" }}
+        ></Box>
+      )}
+    </Flex>
+  );
 
   // useEffect(() => {
   //   setGantt(ganttDataLocal);
@@ -438,6 +489,14 @@ export function Gantt({
               textAlign="Center"
               // type="number"
               format="N"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="s"
+              headerText="S"
+              headerTextAlign="Center"
+              textAlign="Center"
+              // type="number"
+              template={statusTemplate}
             ></ColumnDirective>
             <ColumnDirective
               field="Predecessor"
