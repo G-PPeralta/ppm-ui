@@ -35,6 +35,8 @@ function EditarAtividadeTabOcorrencias({ registerForm, refreshState }: Props) {
   const header = ["NOME DO CAMPO PERSONALIZADO", "HORAS", "AÇÕES"];
   const footer = [""];
 
+  // console.log(registerForm.values);
+
   useEffect(() => {
     setTabelaFiltrada(registerForm.values.ocorrencias);
   }, [registerForm.values.ocorrencias]);
@@ -48,7 +50,7 @@ function EditarAtividadeTabOcorrencias({ registerForm, refreshState }: Props) {
             .map((linhaTabela: any, index: number) => (
               <Tr key={index}>
                 <Td textAlign={"start"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.nome_ocorrencia}</Text>
+                  <Text>{linhaTabela.dsc_ocorrencia}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Text>{formatMinutesToHHmm(linhaTabela.impacto)}</Text>
@@ -86,7 +88,7 @@ function EditarAtividadeTabOcorrencias({ registerForm, refreshState }: Props) {
         nomeLabelData={"Data"}
         placeholder={"Pesquisar"}
         setTabelaFiltrada={setTabelaFiltrada}
-        propName={"nome_ocorrencia"}
+        propName={"dsc_ocorrencia"}
         registerForm={registerForm}
         filtrarData={true}
       />

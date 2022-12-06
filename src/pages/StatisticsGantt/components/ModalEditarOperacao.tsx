@@ -113,7 +113,7 @@ function ModalEditarOperacao({
 
       setListaOcorrencias(
         ocorrencias.sort((a: any, b: any) =>
-          a.nome_ocorrencia.localeCompare(b.nome_ocorrencia)
+          a.dsc_ocorrencia.localeCompare(b.dsc_ocorrencia)
         )
       );
 
@@ -128,6 +128,8 @@ function ModalEditarOperacao({
       setAprs(aprPorAtividade.data);
     }
   };
+
+  // console.log({ listaOcorrencias });
 
   const handleFecharModal = () => {
     setTabSelecionado(0);
