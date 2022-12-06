@@ -22,7 +22,7 @@ import { Anotacoes, LicaoAprendida, Ocorrencia } from "interfaces/Estatisticas";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 
-import { handleCancelar } from "utils/handleCadastro";
+// import { handleCancelar } from "utils/handleCadastro";
 
 import {
   getAnotacoesPorAtividade,
@@ -279,7 +279,7 @@ function ModalEditarOperacao({
           </ModalHeader>
           <ModalCloseButton
             color={"white"}
-            onClick={() => handleCancelar(registerForm, onClose)}
+            onClick={() => handleFecharModal()}
           />
           <form
             onSubmit={(e) => {
