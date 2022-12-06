@@ -42,7 +42,7 @@ function DateTimePickerDataInicioPlan({
         dateFormat="Pp"
         customInput={<TriggerDatePickerInicio />}
         // isClearable={inicioPlanejado !== ""}
-        disabled={intervencaoIniciada || atividadeStatus !== 0}
+        disabled={!(atividadeStatus === 0)}
       />
     </Flex>
   );
