@@ -94,7 +94,7 @@ function EditarAtividadeTabOcorrencias({ registerForm, refreshState }: Props) {
         filtrarData={true}
       />
       <TabelaGenerica
-        maxHeight={"352px"}
+        // maxHeight={"352px"}
         data={tabelaFiltrada}
         header={header}
         fromTo={fromTo}
