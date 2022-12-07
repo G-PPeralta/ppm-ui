@@ -39,7 +39,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
 
   const flag = sondaN.atividades.find(
     (s: any) => s.nome_atividade === registerForm.values.nome_atividade
-  ).flag;
+  )?.flag;
 
   // console.log("dados flag ---> ", flag);
 
