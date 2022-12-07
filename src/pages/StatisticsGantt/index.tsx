@@ -72,6 +72,7 @@ function StatisticsGantt() {
         BaselineEndDate: new Date(t.fim_planejado),
         BaselineDuration: Number(t.hrs_totais),
         Duration: Number(t.hrs_reais),
+        pct_plan: Number(t.pct_plan),
         // Work: Number(t.hrs_reais),
         Progress: Number(t.pct_real),
         ProgressPlan: Number(t.pct_plan),
