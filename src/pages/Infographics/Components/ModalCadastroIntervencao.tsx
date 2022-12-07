@@ -398,13 +398,15 @@ function ModalCadastroIntervencao({
                             onChange={(date) => handleIniciarDate(date)}
                             locale="pt-BR"
                             showTimeSelect
-                            dateFormat="dd/MM/yyyy, hh:mm"
                             customInput={<TriggerDatePickerInicio />}
                             isClearable={dataInicioIntervencao !== ""}
                             disabled={
                               registerForm.values.projeto_tipo_id === 0 ||
                               registerForm.values.projeto_tipo_id === ""
                             }
+                            timeFormat="p"
+                            timeIntervals={15}
+                            dateFormat="Pp"
                           />
                         </Flex>
                         {/* <Flex align={"start"}>
