@@ -353,6 +353,7 @@ function ExpandGanttModal({
                     textAlign="Center"
                     // type="number"
                     template={statusTemplate}
+                    width="100"
                   ></ColumnDirective>
                   <ColumnDirective
                     field="ProgressPlanejado"

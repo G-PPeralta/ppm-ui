@@ -285,6 +285,15 @@ export function Gantt({
               width="100"
             ></ColumnDirective>
             <ColumnDirective
+              field="s"
+              headerText="S"
+              headerTextAlign="Center"
+              textAlign="Center"
+              // type="number"
+              template={statusTemplate}
+              width="100"
+            ></ColumnDirective>
+            <ColumnDirective
               field="Progress"
               headerText="% Real"
               headerTextAlign="Center"
@@ -318,20 +327,13 @@ export function Gantt({
               format="N"
             ></ColumnDirective>
             <ColumnDirective
-              field="s"
-              headerText="S"
-              headerTextAlign="Center"
-              textAlign="Center"
-              // type="number"
-              template={statusTemplate}
-            ></ColumnDirective>
-            <ColumnDirective
               field="pct_plan"
               headerText="% Plan"
               headerTextAlign="Center"
               textAlign="Center"
               type="number"
               format="N"
+              width="100"
             ></ColumnDirective>
             <ColumnDirective
               field="Progress"
@@ -340,6 +342,7 @@ export function Gantt({
               textAlign="Center"
               type="number"
               format="N"
+              width="100"
             ></ColumnDirective>
           </ColumnsDirective>
           <Inject services={[Edit, Selection, Toolbar, Sort]} />

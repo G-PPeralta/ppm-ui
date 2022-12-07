@@ -349,6 +349,7 @@ function GanttCampanha() {
                         headerTextAlign="Center"
                         textAlign="Center"
                         // type="number"
+                        width="100"
                       ></ColumnDirective>
                       <ColumnDirective
                         field="s"
@@ -356,6 +357,7 @@ function GanttCampanha() {
                         headerTextAlign="Center"
                         textAlign="Center"
                         template={statusTemplate}
+                        width="100"
                       ></ColumnDirective>
                       <ColumnDirective
                         field="pct_plan"
