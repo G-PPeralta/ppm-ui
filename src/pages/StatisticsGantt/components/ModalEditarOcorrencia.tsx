@@ -56,7 +56,7 @@ function ModalEditarOcorrencia({
       "impacto",
       formatMinutesToHours(linhaTabela.impacto)
     );
-    registerForm.setFieldValue("ocorrencia", linhaTabela.nome_ocorrencia);
+    registerForm.setFieldValue("ocorrencia", linhaTabela.dsc_ocorrencia);
     registerForm.setFieldValue("observacoes", "");
     onClose();
   };
@@ -66,7 +66,7 @@ function ModalEditarOcorrencia({
       "impacto",
       formatMinutesToHours(linhaTabela.impacto)
     );
-    registerForm.setFieldValue("ocorrencia", linhaTabela.nome_ocorrencia);
+    registerForm.setFieldValue("ocorrencia", linhaTabela.dsc_ocorrencia);
   }, []);
 
   // console.log("registerForm", registerForm.values);
