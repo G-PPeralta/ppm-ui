@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import {
   Edit,
   ColumnDirective,
@@ -98,6 +98,56 @@ export function Gantt({
     </Flex>
   );
 
+  const statusTemplate = (props: any) => (
+    <Flex
+      // w={"100%"}
+      // style={{ position: "relative", top: "-8px" }}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
+      {props.taskData.Progress == props.taskData.pct_plan &&
+        props.taskData.Progress !== 0 && (
+          <Box
+            w={5}
+            h={5}
+            bg={"#9FA2B4"}
+            display={"flex"}
+            flexDirection="column"
+            alignItems={"center"}
+            pt={"2px"}
+            sx={{ borderRadius: "100%" }}
+            style={{ backgroundColor: "#008000" }}
+          ></Box>
+        )}
+      {props.taskData.Progress < props.taskData.pct_plan && (
+        <Box
+          w={5}
+          h={5}
+          bg={"#9FA2B4"}
+          display={"flex"}
+          flexDirection="column"
+          alignItems={"center"}
+          pt={"2px"}
+          sx={{ borderRadius: "100%" }}
+          style={{ backgroundColor: "red" }}
+        ></Box>
+      )}
+      {props.taskData.Progress == 0 && props.taskData.pct_plan == 0 && (
+        <Box
+          w={5}
+          h={5}
+          bg={"#9FA2B4"}
+          display={"flex"}
+          flexDirection="column"
+          alignItems={"center"}
+          pt={"2px"}
+          sx={{ borderRadius: "100%" }}
+          style={{ backgroundColor: "gray" }}
+        ></Box>
+      )}
+    </Flex>
+  );
+
   const cellEdit = (args: any) => {
     // if (args.columnName !== "Progress") {
     // if (["TaskID", "TaskName"].includes(args.columnName)) {
@@ -118,6 +168,7 @@ export function Gantt({
       fim_realizado: new Date(args.rowData.EndDate),
       fim_planejado: new Date(args.rowData.BaselineEndDate),
       pct_real: args.rowData.Progress,
+      pct_plan: args.rowData.ProgressPlan,
       // id_responsavel: number;
     });
     edit?.onOpen();
@@ -125,7 +176,7 @@ export function Gantt({
   };
 
   const sortingOptions: SortSettingsModel = {
-    columns: [{ field: "BaselineStartDate", direction: "Ascending" }],
+    columns: [{ field: "StartDate", direction: "Ascending" }],
   };
 
   useEffect(() => {
@@ -186,23 +237,24 @@ export function Gantt({
           <ColumnsDirective>
             <ColumnDirective
               field="acao"
-              headerText="Ação"
+              headerText=" "
               headerTextAlign="Center"
               textAlign="Center"
-              width="100"
+              width="60"
               template={actionsTemplate}
             ></ColumnDirective>
-            <ColumnDirective
+            {/* <ColumnDirective
               field="TaskID"
               headerText="ID"
               headerTextAlign="Center"
               textAlign="Center"
-            ></ColumnDirective>
+            ></ColumnDirective> */}
             <ColumnDirective
               field="TaskName"
               headerText="Operação"
-              headerTextAlign="Center"
-              textAlign="Center"
+              headerTextAlign="Left"
+              textAlign="Left"
+              width="300"
             ></ColumnDirective>
             <ColumnDirective
               field="StartDate"
@@ -221,6 +273,24 @@ export function Gantt({
               format="dd/MM/yyyy HH:mm"
             ></ColumnDirective>
             <ColumnDirective
+              field="Duration"
+              headerText="Duração"
+              headerTextAlign="Center"
+              textAlign="Center"
+              type="number"
+              format="N"
+              width="100"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="Progress"
+              headerText="% Real"
+              headerTextAlign="Center"
+              textAlign="Center"
+              type="number"
+              format="N"
+              width="100"
+            ></ColumnDirective>
+            <ColumnDirective
               field="BaselineStartDate"
               headerText="Início planejado"
               headerTextAlign="Center"
@@ -237,14 +307,6 @@ export function Gantt({
               format="dd/MM/yyyy HH:mm"
             ></ColumnDirective>
             <ColumnDirective
-              field="Duration"
-              headerText="Duração real"
-              headerTextAlign="Center"
-              textAlign="Center"
-              type="number"
-              format="N"
-            ></ColumnDirective>
-            <ColumnDirective
               field="BaselineDuration"
               headerText="Duração planejada"
               headerTextAlign="Center"
@@ -253,8 +315,24 @@ export function Gantt({
               format="N"
             ></ColumnDirective>
             <ColumnDirective
+              field="s"
+              headerText="S"
+              headerTextAlign="Center"
+              textAlign="Center"
+              // type="number"
+              template={statusTemplate}
+            ></ColumnDirective>
+            <ColumnDirective
+              field="pct_plan"
+              headerText="% Plan"
+              headerTextAlign="Center"
+              textAlign="Center"
+              type="number"
+              format="N"
+            ></ColumnDirective>
+            <ColumnDirective
               field="Progress"
-              headerText="Progresso (%)"
+              headerText="% Real"
               headerTextAlign="Center"
               textAlign="Center"
               type="number"

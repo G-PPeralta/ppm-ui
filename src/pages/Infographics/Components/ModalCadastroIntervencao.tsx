@@ -64,7 +64,7 @@ function ModalCadastroIntervencao({
   const [dataLimite, setDataLimite] = useState<any>("");
   const [valueProgressoMensagemErro, setValueProgressoMensagemErro] =
     useState<number>(100);
-  const [dataFinalPrevista, setDataFinalPrevista] = useState<any>("");
+  const [, setDataFinalPrevista] = useState<any>("");
   const [reorderLoading, setReorderLoading] = useState<any>(false);
   const [dataInicioIntervencao, setDataInicioIntervencao] = useState("");
 
@@ -364,6 +364,23 @@ function ModalCadastroIntervencao({
                           required={true}
                         />
                         {/* <DateTimePickerDataInicio registerForm={registerForm} /> */}
+                        <SelectFiltragem
+                          registerForm={registerForm}
+                          nomeSelect={"PROJETO"}
+                          propName={"projeto_tipo_id"}
+                          options={optionsProjetoTipo}
+                          required={true}
+                        />
+                      </Flex>
+                    </Stack>
+
+                    <Flex justify={"space-between"}>
+                      <Flex
+                        flexDirection={"row"}
+                        gap={4}
+                        w={"50%"}
+                        align={"end"}
+                      >
                         <Flex direction={"column"}>
                           <Flex gap={1}>
                             <RequiredField />
@@ -384,43 +401,37 @@ function ModalCadastroIntervencao({
                             dateFormat="dd/MM/yyyy, hh:mm"
                             customInput={<TriggerDatePickerInicio />}
                             isClearable={dataInicioIntervencao !== ""}
+                            disabled={
+                              registerForm.values.projeto_tipo_id === 0 ||
+                              registerForm.values.projeto_tipo_id === ""
+                            }
                           />
                         </Flex>
+                        {/* <Flex align={"start"}>
+                          {dataFinalPrevista !== "" && (
+                            <Flex direction={"column"}>
+                              <Flex gap={1}>
+                                <Text
+                                  fontWeight={"bold"}
+                                  fontSize={"12px"}
+                                  color={"#949494"}
+                                >
+                                  DATA FINAL PREVISTA
+                                </Text>
+                              </Flex>
+                              <Button
+                                isDisabled={true}
+                                h={"56px"}
+                                variant="outline"
+                                px={5}
+                                minW={"220px"}
+                              >
+                                {formatDate(dataFinalPrevista)}
+                              </Button>
+                            </Flex>
+                          )} */}
+                        {/* </Flex> */}
                       </Flex>
-                    </Stack>
-
-                    <Flex justify={"space-between"}>
-                      <Flex flexDirection={"row"} gap={4} w={"50%"}>
-                        <SelectFiltragem
-                          registerForm={registerForm}
-                          nomeSelect={"PROJETO"}
-                          propName={"projeto_tipo_id"}
-                          options={optionsProjetoTipo}
-                          required={true}
-                        />
-                      </Flex>
-                      {dataFinalPrevista !== "" && (
-                        <Flex direction={"column"}>
-                          <Flex gap={1}>
-                            <Text
-                              fontWeight={"bold"}
-                              fontSize={"12px"}
-                              color={"#949494"}
-                            >
-                              DATA FINAL PREVISTA
-                            </Text>
-                          </Flex>
-                          <Button
-                            isDisabled={true}
-                            h={"56px"}
-                            variant="outline"
-                            px={5}
-                            minW={"220px"}
-                          >
-                            {formatDate(dataFinalPrevista)}
-                          </Button>
-                        </Flex>
-                      )}
                     </Flex>
 
                     {registerForm.values.erroDataIntervencao && (

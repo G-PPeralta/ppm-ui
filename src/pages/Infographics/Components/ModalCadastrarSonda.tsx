@@ -37,9 +37,9 @@ function ModalCadastrarSonda({ refresh, setRefresh }: Props) {
   return (
     <>
       <Button
-        h={"56px"}
+        h={"46px"}
         borderRadius={"8px"}
-        fontSize={"18px"}
+        fontSize={"14px"}
         fontWeight={"700"}
         variant="outline"
         border={"2px solid"}

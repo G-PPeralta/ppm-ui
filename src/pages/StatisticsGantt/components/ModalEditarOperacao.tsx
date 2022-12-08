@@ -22,7 +22,7 @@ import { Anotacoes, LicaoAprendida, Ocorrencia } from "interfaces/Estatisticas";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 
-import { handleCancelar } from "utils/handleCadastro";
+// import { handleCancelar } from "utils/handleCadastro";
 
 import {
   getAnotacoesPorAtividade,
@@ -113,7 +113,7 @@ function ModalEditarOperacao({
 
       setListaOcorrencias(
         ocorrencias.sort((a: any, b: any) =>
-          a.nome_ocorrencia.localeCompare(b.nome_ocorrencia)
+          a.dsc_ocorrencia.localeCompare(b.dsc_ocorrencia)
         )
       );
 
@@ -128,6 +128,8 @@ function ModalEditarOperacao({
       setAprs(aprPorAtividade.data);
     }
   };
+
+  // console.log({ listaOcorrencias });
 
   const handleFecharModal = () => {
     setTabSelecionado(0);
@@ -277,7 +279,7 @@ function ModalEditarOperacao({
           </ModalHeader>
           <ModalCloseButton
             color={"white"}
-            onClick={() => handleCancelar(registerForm, onClose)}
+            onClick={() => handleFecharModal()}
           />
           <form
             onSubmit={(e) => {

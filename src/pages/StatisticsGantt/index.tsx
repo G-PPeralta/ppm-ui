@@ -40,6 +40,7 @@ function StatisticsGantt() {
     poco: "",
     id_poco: 0,
     dat_atualizacao: "",
+    total_atv: 0,
   });
   const [ganttData, setGanttData] = useState<StatisticsGanttProps[]>();
   const [data, setData] = useState<StatisticsGanttProps[]>();
@@ -54,6 +55,8 @@ function StatisticsGantt() {
     if (!data) return;
     const newGantt = data.atividades
       ?.filter(function (t: any) {
+        // console.log("dados atv --", t);
+        sessionStorage.setItem("hrs_totais_" + t.id_atividade, t.hrs_totais);
         return t.id_atividade !== null;
       })
       .map((t: any) => ({
@@ -69,8 +72,10 @@ function StatisticsGantt() {
         BaselineEndDate: new Date(t.fim_planejado),
         BaselineDuration: Number(t.hrs_totais),
         Duration: Number(t.hrs_reais),
+        pct_plan: Number(t.pct_plan),
         // Work: Number(t.hrs_reais),
         Progress: Number(t.pct_real),
+        ProgressPlan: Number(t.pct_plan),
         max: Number(t.vlr_max),
         min: Number(t.vlr_min),
         med: Number(t.vlr_media),
@@ -84,6 +89,7 @@ function StatisticsGantt() {
       poco: data.poco,
       id_poco: data.id_poco,
       dat_atualizacao: data.dat_atualizacao,
+      total_atv: data.total_atv,
     });
   };
 
@@ -99,6 +105,7 @@ function StatisticsGantt() {
           poco: p.poco,
           id_poco: p.id_poco,
           atividades: p.atividades,
+          total_atv: p.total_atv,
         });
       })
     );

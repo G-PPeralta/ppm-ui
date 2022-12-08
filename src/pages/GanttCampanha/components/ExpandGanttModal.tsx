@@ -12,6 +12,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Box,
 } from "@chakra-ui/react";
 import {
   GanttComponent,
@@ -125,6 +126,57 @@ function ExpandGanttModal({
         setLoading={setLoading}
         setRefreshGanttDelete={setRefreshGanttDelete}
       />
+    </Flex>
+  );
+
+  const statusTemplate = (props: any) => (
+    <Flex
+      // w={"100%"}
+      // style={{ position: "relative", top: "-8px" }}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
+      {props.taskData.Progress == props.taskData.ProgressPlanejado &&
+        props.taskData.Progress != "0" && (
+          <Box
+            w={5}
+            h={5}
+            bg={"#9FA2B4"}
+            display={"flex"}
+            flexDirection="column"
+            alignItems={"center"}
+            pt={"2px"}
+            sx={{ borderRadius: "100%" }}
+            style={{ backgroundColor: "#008000" }}
+          ></Box>
+        )}
+      {props.taskData.Progress < props.taskData.ProgressPlanejado && (
+        <Box
+          w={5}
+          h={5}
+          bg={"#9FA2B4"}
+          display={"flex"}
+          flexDirection="column"
+          alignItems={"center"}
+          pt={"2px"}
+          sx={{ borderRadius: "100%" }}
+          style={{ backgroundColor: "red" }}
+        ></Box>
+      )}
+      {props.taskData.Progress == "0" &&
+        props.taskData.ProgressPlanejado == "0" && (
+          <Box
+            w={5}
+            h={5}
+            bg={"#9FA2B4"}
+            display={"flex"}
+            flexDirection="column"
+            alignItems={"center"}
+            pt={"2px"}
+            sx={{ borderRadius: "100%" }}
+            style={{ backgroundColor: "gray" }}
+          ></Box>
+        )}
     </Flex>
   );
 
@@ -294,8 +346,23 @@ function ExpandGanttModal({
                     // format="N"
                   ></ColumnDirective>
                   <ColumnDirective
+                    field="s"
+                    headerText="S"
+                    headerTextAlign="Center"
+                    textAlign="Center"
+                    // type="number"
+                    template={statusTemplate}
+                  ></ColumnDirective>
+                  <ColumnDirective
+                    field="ProgressPlanejado"
+                    headerText="% Plan"
+                    headerTextAlign="Center"
+                    textAlign="Center"
+                    // type="number"
+                  ></ColumnDirective>
+                  <ColumnDirective
                     field="Progress"
-                    headerText="Real (%)"
+                    headerText="% Real"
                     headerTextAlign="Center"
                     textAlign="Center"
                     // type="number"

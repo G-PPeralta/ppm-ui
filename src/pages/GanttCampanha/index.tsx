@@ -105,6 +105,56 @@ function GanttCampanha() {
     </Flex>
   );
 
+  const statusTemplate = (props: any) => (
+    <Flex
+      // w={"100%"}
+      // style={{ position: "relative", top: "-8px" }}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
+      {props.taskData.pct_real == props.taskData.pct_plan &&
+        props.taskData.pct_real !== "0%" && (
+          <Box
+            w={5}
+            h={5}
+            bg={"#9FA2B4"}
+            display={"flex"}
+            flexDirection="column"
+            alignItems={"center"}
+            pt={"2px"}
+            sx={{ borderRadius: "100%" }}
+            style={{ backgroundColor: "#008000" }}
+          ></Box>
+        )}
+      {props.taskData.pct_real < props.taskData.pct_plan && (
+        <Box
+          w={5}
+          h={5}
+          bg={"#9FA2B4"}
+          display={"flex"}
+          flexDirection="column"
+          alignItems={"center"}
+          pt={"2px"}
+          sx={{ borderRadius: "100%" }}
+          style={{ backgroundColor: "red" }}
+        ></Box>
+      )}
+      {props.taskData.pct_real == "0%" && props.taskData.pct_plan == "0%" && (
+        <Box
+          w={5}
+          h={5}
+          bg={"#9FA2B4"}
+          display={"flex"}
+          flexDirection="column"
+          alignItems={"center"}
+          pt={"2px"}
+          sx={{ borderRadius: "100%" }}
+          style={{ backgroundColor: "gray" }}
+        ></Box>
+      )}
+    </Flex>
+  );
+
   const payload = {
     area_atuacao_id: null,
     poco_id: null,
@@ -293,15 +343,20 @@ function GanttCampanha() {
                         width="115"
                         format="dd/MM/yyyy"
                       ></ColumnDirective>
-                      {
-                        <ColumnDirective
-                          field="status"
-                          headerText="Status"
-                          headerTextAlign="Center"
-                          textAlign="Center"
-                          // type="number"
-                        ></ColumnDirective>
-                      }
+                      <ColumnDirective
+                        field="status"
+                        headerText="Status"
+                        headerTextAlign="Center"
+                        textAlign="Center"
+                        // type="number"
+                      ></ColumnDirective>
+                      <ColumnDirective
+                        field="s"
+                        headerText="S"
+                        headerTextAlign="Center"
+                        textAlign="Center"
+                        template={statusTemplate}
+                      ></ColumnDirective>
                       <ColumnDirective
                         field="pct_plan"
                         headerText="% Plan"
