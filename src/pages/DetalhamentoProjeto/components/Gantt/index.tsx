@@ -88,9 +88,7 @@ export function Gantt({
         id={props.TaskID}
         isParent={props.hasChildRecords}
         setLoading={setLoading}
-        refreshGanttDelete={refreshGanttDelete}
         setRefreshGanttDelete={setRefreshGanttDelete}
-        handleSetGanttData={handleSetGanttData}
       />
     </Flex>
   );
@@ -488,6 +486,7 @@ export function Gantt({
               headerTextAlign="Center"
               textAlign="Center"
               // type="number"
+              width="100"
               template={statusTemplate}
             ></ColumnDirective>
             <ColumnDirective
@@ -496,6 +495,7 @@ export function Gantt({
               headerTextAlign="Center"
               textAlign="Center"
               // type="number"
+              width="100"
               format="N"
             ></ColumnDirective>
             <ColumnDirective
@@ -504,6 +504,7 @@ export function Gantt({
               headerTextAlign="Center"
               textAlign="Center"
               // type="number"
+              width="100"
               format="N"
             ></ColumnDirective>
             <ColumnDirective

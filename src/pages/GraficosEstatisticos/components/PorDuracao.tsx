@@ -5,7 +5,7 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Input,
+  // Input,
   Select,
   Text,
   useBreakpointValue,
@@ -23,6 +23,7 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
   const [listaSondas, setListaSondas] = useState<any[]>([]);
   const [selectedSonda, setSelectedSonda] = useState<any>();
   const [chartData, setChartData] = useState<any[]>([]);
+  const [historicoData, setHistorico] = useState<any>();
   const [label, setLabel] = useState({
     hrs_min: "",
     hrs_max: "",
@@ -31,11 +32,11 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
     tend_duracao: "",
   });
 
-  const durationHistory = [
-    "Mínimo - 8 horas",
-    "Médio - 16 horas",
-    "Máxima - 12 horas",
-  ];
+  // const durationHistory = [
+  //   "Mínimo - 8 horas",
+  //   "Médio - 16 horas",
+  //   "Máxima - 12 horas",
+  // ];
 
   const dataEntries1 = [{ name: "Durações", color: "#0047BB" }];
 
@@ -62,6 +63,7 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
     if (de && ate) {
       params.de = de;
       params.a = ate;
+      // console.log(params);
     }
     if (selectedSonda) {
       params.sonda = selectedSonda;
@@ -69,6 +71,8 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
 
     const labelReq = await getLabelHistorico();
     const historico = await getGraficoHistorico(params);
+    setHistorico(historico.data);
+    // console.log(historico.data);
 
     const newData = historico.data.map((e) => ({
       ...e,
@@ -146,7 +150,7 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
             </Flex>
 
             <Flex alignItems={"flex-end"}>
-              <FormControl>
+              {/* <FormControl>
                 <FormLabel htmlFor="base">
                   <Text fontSize={"12px"} color={"#949494"} fontWeight={"700"}>
                     BASE DA ZONA INTERVIDA MAIS PROFUNDA
@@ -180,12 +184,12 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
                   borderRadius={"8px"}
                   type={"number"}
                 />
-              </FormControl>
+              </FormControl> */}
             </Flex>
           </Flex>
           <Flex flexDir={"row"} gap={4}>
             <Flex alignItems={"flex-end"}>
-              <FormControl>
+              {/* <FormControl>
                 <FormLabel
                   fontSize={"12px"}
                   color={"#949494"}
@@ -209,7 +213,7 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
                     <option>{d}</option>
                   ))}
                 </Select>
-              </FormControl>
+              </FormControl> */}
             </Flex>
           </Flex>
           <Flex gap={1} direction={"column"}>
@@ -266,16 +270,24 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
             display={"flex"}
             overflowY={"hidden"}
           >
-            <Flex direction={"column"}>
-              <StackedBarChart
-                showY={true}
-                sizeW={1000}
-                sizeH={352}
-                data={chartData}
-                dataEntries={dataEntries1}
-                barW={44}
-              />
-            </Flex>
+            <>
+              {historicoData && historicoData.length > 0 ? (
+                <Flex direction={"column"}>
+                  <StackedBarChart
+                    showY={true}
+                    sizeW={1000}
+                    sizeH={352}
+                    data={chartData}
+                    dataEntries={dataEntries1}
+                    barW={44}
+                  />
+                </Flex>
+              ) : (
+                <Flex align={"center"} justify={"center"} w={"100%"} h={"50vh"}>
+                  Não há dados nesse período
+                </Flex>
+              )}
+            </>
           </Box>
         </Flex>
         <Flex ref={componentRef} />

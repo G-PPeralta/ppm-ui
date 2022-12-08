@@ -26,18 +26,14 @@ type ModalDeletarProps = {
   id: number;
   isParent: boolean;
   setLoading: Function;
-  refreshGanttDelete: number;
   setRefreshGanttDelete: Function;
-  handleSetGanttData: Function;
 };
 
 function ModalDeletar({
   id,
   isParent,
   setLoading,
-  refreshGanttDelete,
   setRefreshGanttDelete,
-  handleSetGanttData,
 }: ModalDeletarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { toast } = useToast();

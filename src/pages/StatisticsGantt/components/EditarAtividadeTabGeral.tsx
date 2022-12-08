@@ -51,7 +51,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 4000);
   }, [sondaN]);
 
   useEffect(() => {
