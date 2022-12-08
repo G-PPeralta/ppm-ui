@@ -88,7 +88,7 @@ function BotaoUploadArquivo({
     try {
       if (arquivoSelecionado.length === 0) {
         const nomeArquivoSemExtensao = nomeArquivo.split(".")[0];
-        const url = `${process.env.REACT_APP_API_URL}pdf/${nomeArquivoSemExtensao}`;
+        const url = `${process.env.REACT_APP_API_URL}/pdf/${nomeArquivoSemExtensao}`;
         registerForm.setFieldValue(`${propName}[${index}].url`, url);
         registerForm.setFieldValue(`${propName}[${index}].isOpen`, true);
       } else {
