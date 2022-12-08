@@ -57,7 +57,7 @@ function ExpandGanttModal({
   const [refresh, setRefresh] = useState(false);
   // const [intervencaoIniciada, setIntervencaoIniciada] = useState<any>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [refreshGanttDelete, setRefreshGanttDelete] = useState(false);
+  const [refreshGanttDelete, setRefreshGanttDelete] = useState<number>(0);
   const { optionsAreaAtuacao, optionsResponsaveis } = useRequests();
 
   const listaOptions = {
@@ -124,8 +124,7 @@ function ExpandGanttModal({
         id={props.TaskID}
         // isParent={props.hasChildRecords}
         setLoading={setLoading}
-        setRefreshGanttDelete={() => setRefreshGanttDelete(!refreshGanttDelete)}
-        handleSetGanttData={requestHandler}
+        setRefreshGanttDelete={setRefreshGanttDelete}
       />
     </Flex>
   );

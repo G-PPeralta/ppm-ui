@@ -21,7 +21,7 @@ import "./gantt.css";
 
 type ganttOptionsProps = {
   data: StatisticsGanttProps[] | undefined; // TODO: tirar undefined
-  callbackSetRefresh: Function;
+  setRefreshDelete: Function;
   options?: {
     showGantt?: boolean;
   };
@@ -30,15 +30,13 @@ type ganttOptionsProps = {
     // handleEdit: Function;
     setEditOp: any;
   };
-  handleGetAllData: any;
 };
 
 export function Gantt({
   data,
   options,
   edit,
-  callbackSetRefresh,
-  handleGetAllData,
+  setRefreshDelete,
 }: ganttOptionsProps) {
   const [loading, setLoading] = useState(true);
 
@@ -94,8 +92,7 @@ export function Gantt({
       <ModalDeletar
         id={props.TaskID}
         setLoading={setLoading}
-        callbackSetRefresh={callbackSetRefresh}
-        handleGetAllData={handleGetAllData}
+        setRefreshDelete={setRefreshDelete}
       />
       {/* <FiTrash onClick={() => remove(props)} color="#F94144" size={16} /> */}
     </Flex>
