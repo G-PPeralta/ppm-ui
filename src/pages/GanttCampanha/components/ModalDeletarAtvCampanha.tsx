@@ -26,14 +26,12 @@ import { deleteAtividadeGanttCampanha } from "services/delete/DeleteAtividadeGan
 type ModalDeletarProps = {
   id: number;
   setLoading: Function;
-  setRefreshGanttDelete: () => void;
-  handleSetGanttData: () => void;
+  setRefreshGanttDelete: Function;
 };
 
 function ModalDeletar({
   id,
   setRefreshGanttDelete,
-  handleSetGanttData,
   setLoading,
 }: ModalDeletarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -48,8 +46,7 @@ function ModalDeletar({
         toast.success("Atividade removida com sucesso!", {
           id: "toast-principal",
         });
-        setRefreshGanttDelete();
-        handleSetGanttData();
+        setRefreshGanttDelete(id);
         setLoading(false);
         onClose();
       }

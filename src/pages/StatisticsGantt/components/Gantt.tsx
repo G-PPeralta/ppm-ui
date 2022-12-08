@@ -21,7 +21,7 @@ import "./gantt.css";
 
 type ganttOptionsProps = {
   data: StatisticsGanttProps[] | undefined; // TODO: tirar undefined
-  callbackSetRefresh: Function;
+  setRefreshDelete: Function;
   options?: {
     showGantt?: boolean;
   };
@@ -30,15 +30,13 @@ type ganttOptionsProps = {
     // handleEdit: Function;
     setEditOp: any;
   };
-  handleGetAllData: any;
 };
 
 export function Gantt({
   data,
   options,
   edit,
-  callbackSetRefresh,
-  handleGetAllData,
+  setRefreshDelete,
 }: ganttOptionsProps) {
   const [loading, setLoading] = useState(true);
 
@@ -94,8 +92,7 @@ export function Gantt({
       <ModalDeletar
         id={props.TaskID}
         setLoading={setLoading}
-        callbackSetRefresh={callbackSetRefresh}
-        handleGetAllData={handleGetAllData}
+        setRefreshDelete={setRefreshDelete}
       />
       {/* <FiTrash onClick={() => remove(props)} color="#F94144" size={16} /> */}
     </Flex>
@@ -285,6 +282,15 @@ export function Gantt({
               width="100"
             ></ColumnDirective>
             <ColumnDirective
+              field="s"
+              headerText="S"
+              headerTextAlign="Center"
+              textAlign="Center"
+              // type="number"
+              template={statusTemplate}
+              width="100"
+            ></ColumnDirective>
+            <ColumnDirective
               field="Progress"
               headerText="% Real"
               headerTextAlign="Center"
@@ -318,20 +324,13 @@ export function Gantt({
               format="N"
             ></ColumnDirective>
             <ColumnDirective
-              field="s"
-              headerText="S"
-              headerTextAlign="Center"
-              textAlign="Center"
-              // type="number"
-              template={statusTemplate}
-            ></ColumnDirective>
-            <ColumnDirective
               field="pct_plan"
               headerText="% Plan"
               headerTextAlign="Center"
               textAlign="Center"
               type="number"
               format="N"
+              width="100"
             ></ColumnDirective>
             <ColumnDirective
               field="Progress"
@@ -340,6 +339,7 @@ export function Gantt({
               textAlign="Center"
               type="number"
               format="N"
+              width="100"
             ></ColumnDirective>
           </ColumnsDirective>
           <Inject services={[Edit, Selection, Toolbar, Sort]} />

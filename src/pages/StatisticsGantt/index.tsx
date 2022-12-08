@@ -30,7 +30,7 @@ import ModalEditarOperacao from "./components/ModalEditarOperacao";
 function StatisticsGantt() {
   const { sonda, poco } = useParams();
   const [refresh, setRefresh] = useState(false);
-  const [refreshDelete, setRefreshDelete] = useState(false);
+  const [refreshDelete, setRefreshDelete] = useState<number>(0);
   const [editOp, setEditOp] = useState({});
   const [sondaN, setSonda] = useState<any>();
   const [pocoN, setPoco] = useState<any>();
@@ -206,8 +206,7 @@ function StatisticsGantt() {
                 </Stack>
                 <Stack spacing="8">
                   <Gantt
-                    callbackSetRefresh={() => setRefreshDelete(!refreshDelete)}
-                    handleGetAllData={handleGetAllData}
+                    setRefreshDelete={setRefreshDelete}
                     options={{
                       showGantt: true,
                     }}
