@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 import { Flex, Text } from "@chakra-ui/react";
+import moment from "moment";
 
 // import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
@@ -24,6 +25,8 @@ type Atividade = {
   sonda: string;
   ind_alerta?: number;
   ind_status?: number;
+  inicioreal: any;
+  fimreal: any;
 };
 
 type Props = {
@@ -34,10 +37,19 @@ type Props = {
 };
 
 function CardACT({ atividade, id, setRefresh, refresh }: Props) {
-  const dataInicioFormatada = atividade.inicioplanejado;
-  const dataFinalFormatada = atividade.finalplanejado;
-  // const dataInicioFormatada = formatDate(new Date(atividade.inicioplanejado));
-  // const dataFinalFormatada = formatDate(new Date(atividade.finalplanejado));
+  const inicioReal = atividade.inicioreal;
+  const fimReal = atividade.fimreal;
+
+  const dataInicioFormatada = moment.utc(inicioReal).format("DD/MM/YYYY");
+  // console.log("converted date", newDate);
+
+  const dataFinalFormatada = moment.utc(fimReal).format("DD/MM/YYYY");
+
+  // console.log(atividade);
+
+  // const dataInicioFormatada = atividade.inicioplanejado;
+  // const dataFinalFormatada = atividade.finalplanejado;
+
   const [atividadeId, setAtividadeId] = useState(0);
 
   const { user } = useAuth();

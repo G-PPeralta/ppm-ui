@@ -25,16 +25,10 @@ import { deleteOperacaoCronograma } from "services/delete/Estatisticas";
 type ModalDeletarProps = {
   id: number;
   setLoading: Function;
-  callbackSetRefresh: Function;
-  handleGetAllData: any;
+  setRefreshDelete: Function;
 };
 
-function ModalDeletar({
-  id,
-  setLoading,
-  callbackSetRefresh,
-  handleGetAllData,
-}: ModalDeletarProps) {
+function ModalDeletar({ id, setLoading, setRefreshDelete }: ModalDeletarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { toast } = useToast();
   const { user } = useAuth();
@@ -47,9 +41,8 @@ function ModalDeletar({
         toast.success("Operação removida com sucesso!", {
           id: "toast-principal",
         });
-        callbackSetRefresh();
+        setRefreshDelete(id);
         setLoading(false);
-        handleGetAllData();
         onClose();
       }
     } catch (error) {

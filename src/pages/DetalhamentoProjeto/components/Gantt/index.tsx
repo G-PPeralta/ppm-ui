@@ -14,6 +14,7 @@ import {
   ModalBody,
   ModalFooter,
   ModalCloseButton,
+  Box,
 } from "@chakra-ui/react";
 import {
   ColumnsDirective,
@@ -87,9 +88,7 @@ export function Gantt({
         id={props.TaskID}
         isParent={props.hasChildRecords}
         setLoading={setLoading}
-        refreshGanttDelete={refreshGanttDelete}
         setRefreshGanttDelete={setRefreshGanttDelete}
-        handleSetGanttData={handleSetGanttData}
       />
     </Flex>
   );
@@ -184,6 +183,56 @@ export function Gantt({
   const sortingOptions: SortSettingsModel = {
     columns: [{ field: "BaselineStartDate", direction: "Ascending" }],
   };
+
+  const statusTemplate = (props: any) => (
+    <Flex
+      // w={"100%"}
+      // style={{ position: "relative", top: "-8px" }}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
+      {props.taskData.Progress == props.taskData.ProgressPlan &&
+        props.taskData.Progress != "0" && (
+          <Box
+            w={5}
+            h={5}
+            bg={"#9FA2B4"}
+            display={"flex"}
+            flexDirection="column"
+            alignItems={"center"}
+            pt={"2px"}
+            sx={{ borderRadius: "100%" }}
+            style={{ backgroundColor: "#008000" }}
+          ></Box>
+        )}
+      {props.taskData.Progress < props.taskData.ProgressPlan && (
+        <Box
+          w={5}
+          h={5}
+          bg={"#9FA2B4"}
+          display={"flex"}
+          flexDirection="column"
+          alignItems={"center"}
+          pt={"2px"}
+          sx={{ borderRadius: "100%" }}
+          style={{ backgroundColor: "red" }}
+        ></Box>
+      )}
+      {props.taskData.Progress == "0" && props.taskData.ProgressPlan == "0" && (
+        <Box
+          w={5}
+          h={5}
+          bg={"#9FA2B4"}
+          display={"flex"}
+          flexDirection="column"
+          alignItems={"center"}
+          pt={"2px"}
+          sx={{ borderRadius: "100%" }}
+          style={{ backgroundColor: "gray" }}
+        ></Box>
+      )}
+    </Flex>
+  );
 
   // useEffect(() => {
   //   setGantt(ganttDataLocal);
@@ -432,8 +481,24 @@ export function Gantt({
               // format="N"
             ></ColumnDirective>
             <ColumnDirective
+              field="s"
+              headerText="S"
+              headerTextAlign="Center"
+              textAlign="Center"
+              // type="number"
+              template={statusTemplate}
+            ></ColumnDirective>
+            <ColumnDirective
+              field="ProgressPlan"
+              headerText="% Plan"
+              headerTextAlign="Center"
+              textAlign="Center"
+              // type="number"
+              format="N"
+            ></ColumnDirective>
+            <ColumnDirective
               field="Progress"
-              headerText="Progresso (%)"
+              headerText="% Real"
               headerTextAlign="Center"
               textAlign="Center"
               // type="number"
