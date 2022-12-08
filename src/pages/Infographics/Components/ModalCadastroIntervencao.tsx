@@ -401,10 +401,10 @@ function ModalCadastroIntervencao({
                             showTimeSelect
                             customInput={<TriggerDatePickerInicio />}
                             isClearable={dataInicioIntervencao !== ""}
-                            disabled={
-                              registerForm.values.projeto_tipo_id === 0 ||
-                              registerForm.values.projeto_tipo_id === ""
-                            }
+                            // disabled={
+                            //   registerForm.values.projeto_tipo_id === 0 ||
+                            //   registerForm.values.projeto_tipo_id === ""
+                            // }
                             timeFormat="p"
                             timeIntervals={15}
                             dateFormat="Pp"
