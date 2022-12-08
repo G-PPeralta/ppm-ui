@@ -36,8 +36,6 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
     (moc: any) => moc.numero_moc === ""
   );
 
-  // console.log("registerForm", registerForm.values);
-
   return (
     <Flex w={"100%"} direction={"column"} gap={4}>
       <Flex flex={1} justify={"space-between"} direction={"column"} gap={4}>

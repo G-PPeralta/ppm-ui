@@ -69,6 +69,7 @@ function LeitorPDF({ registerForm, index, propName }: Props) {
                 )
               }
             />
+
             <a
               href={`${registerForm.values[propName][index]?.url}`}
               download
