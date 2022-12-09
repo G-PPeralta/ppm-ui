@@ -67,6 +67,7 @@ function ModalCadastroIntervencao({
   const [, setDataFinalPrevista] = useState<any>("");
   const [reorderLoading, setReorderLoading] = useState<any>(false);
   const [dataInicioIntervencao, setDataInicioIntervencao] = useState<any>("");
+  const [dataInicioReal, setDataInicioReal] = useState<any>("");
 
   const innerWidth = window.innerWidth;
 
@@ -162,8 +163,19 @@ function ModalCadastroIntervencao({
   const handleGetDataInicio = async (id: number) => {
     if (id) {
       const { data } = await getCampanhaDataInicio(id);
+      console.log(
+        data && new Date(data.ultima_data).toLocaleString("pt-BR").split(" ")[0]
+      );
+
       if (data && data.ultima_data)
-        setDataInicioIntervencao(new Date(data.ultima_data));
+        setDataInicioIntervencao(
+          new Date(
+            new Date(data.ultima_data.substring(0, 10)).setDate(
+              new Date(data.ultima_data.substring(0, 10)).getDate() + 1
+            )
+          )
+        );
+      setDataInicioReal(new Date(data.ultima_data));
     }
   };
 
@@ -275,7 +287,7 @@ function ModalCadastroIntervencao({
   }, []);
 
   useEffect(() => {
-    registerForm.setFieldValue("dat_ini_prev", dataInicioIntervencao);
+    registerForm.setFieldValue("dat_ini_prev", dataInicioReal);
   }, [dataInicioIntervencao]);
 
   return (
