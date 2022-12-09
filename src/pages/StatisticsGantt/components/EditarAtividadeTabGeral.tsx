@@ -51,7 +51,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 4000);
+    }, 2000);
   }, [sondaN]);
 
   useEffect(() => {
@@ -210,7 +210,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                     tipo={"porcentagem"}
                     stepper={true}
                     isDisabled={flag === 3}
-                    // step={100}
+                    step={100}
                     // isDisabled={flag === 0}
                     // isDisabled={registerForm.values.pct_real === 100}
                   />
