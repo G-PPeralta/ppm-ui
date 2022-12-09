@@ -163,9 +163,9 @@ function ModalCadastroIntervencao({
   const handleGetDataInicio = async (id: number) => {
     if (id) {
       const { data } = await getCampanhaDataInicio(id);
-      console.log(
-        data && new Date(data.ultima_data).toLocaleString("pt-BR").split(" ")[0]
-      );
+      // console.log(
+      //   data && new Date(data.ultima_data).toLocaleString("pt-BR").split(" ")[0]
+      // );
 
       if (data && data.ultima_data)
         setDataInicioIntervencao(
