@@ -38,10 +38,11 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   }, [mediaHorasFiltradas]);
 
   const flag = sondaN.atividades.find(
-    (s: any) => s.nome_atividade === registerForm.values.nome_atividade
+    (s: any) => s.id_atividade === registerForm.values.id_atividade
   )?.flag;
 
-  // console.log("dados flag ---> ", flag);
+  console.log("dados flag ---> ", sondaN.atividades);
+  console.log("dados flag ---> ", flag);
 
   // para entrar no formulário para envio ao backend
   useEffect(() => {
@@ -59,7 +60,28 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
     const hrs_reais: any = sessionStorage.getItem(
       "hrs_totais_" + registerForm.values.id_atividade
     );
+    let statehrsEditado = 0;
     if (+hrs_reais !== registerForm.values.hrs_reais) {
+      statehrsEditado = 1;
+      // registerForm.setFieldValue("realEditado", 1);
+    } else {
+      statehrsEditado = 0;
+      // registerForm.setFieldValue("realEditado", 0);
+    }
+    const pct_real: any = sessionStorage.getItem(
+      "pct_real_" + registerForm.values.id_atividade
+    );
+
+    let statepctEditado = 0;
+    if (pct_real !== registerForm.values.pct_real) {
+      statepctEditado = 1;
+      // registerForm.setFieldValue("realEditado", 1);
+    } else {
+      statepctEditado = 0;
+      // registerForm.setFieldValue("realEditado", 0);
+    }
+
+    if (statepctEditado + statehrsEditado >= 1) {
       registerForm.setFieldValue("realEditado", 1);
     } else {
       registerForm.setFieldValue("realEditado", 0);

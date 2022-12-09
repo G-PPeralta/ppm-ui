@@ -57,6 +57,7 @@ function StatisticsGantt() {
       ?.filter(function (t: any) {
         // console.log("dados atv --", t);
         sessionStorage.setItem("hrs_totais_" + t.id_atividade, t.hrs_totais);
+        sessionStorage.setItem("pct_real_" + t.id_atividade, t.pct_real);
         return t.id_atividade !== null;
       })
       .map((t: any) => ({
