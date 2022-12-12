@@ -10,6 +10,11 @@ import {
   // useColorModeValue,
 } from "@chakra-ui/react";
 // import { Ring } from "@uiball/loaders";
+import {
+  Intervenções,
+  NPTPorSPT,
+  TempoTotal,
+} from "interfaces/GraficoNPTPorSPT";
 
 import StackedBarChart from "components/StackedBarChartGraphic";
 
@@ -17,10 +22,28 @@ import { getGraficoTempoPorSonda } from "services/get/GraficosEstatisticos";
 
 import StatusIntervencao from "./StatusIntervencao";
 
-export function GraficoNPTPorPeriodoSPT({ de, ate, refresh, setRefresh }: any) {
-  const [chartData, setChartData] = useState<any[]>([]);
-  const [tempoTotal, setTempoTotal] = useState<any[]>([]);
-  const [intervençoes, setInterv] = useState<any[]>([]);
+interface Props {
+  de: string;
+  ate: string;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: boolean;
+}
+
+interface Params {
+  de: string;
+  a: string;
+  sonda: string;
+}
+
+export function GraficoNPTPorPeriodoSPT({
+  de,
+  ate,
+  refresh,
+  setRefresh,
+}: Props) {
+  const [chartData, setChartData] = useState<NPTPorSPT[]>([]);
+  const [tempoTotal, setTempoTotal] = useState<TempoTotal[]>([]);
+  const [intervençoes, setInterv] = useState<Intervenções[]>([]);
 
   const dataEntries2 = [
     { name: "Aguardando Outros", color: "#7030a0" },
@@ -82,7 +105,7 @@ export function GraficoNPTPorPeriodoSPT({ de, ate, refresh, setRefresh }: any) {
   const [width] = useWindowSize();
 
   const reqGet = async () => {
-    const params: any = {};
+    const params: Params | any = {};
     if (de && ate) {
       params.de = de;
       params.a = ate;
