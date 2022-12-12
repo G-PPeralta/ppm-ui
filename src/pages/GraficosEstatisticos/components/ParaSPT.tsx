@@ -2,18 +2,32 @@ import { useEffect, useLayoutEffect, useState } from "react";
 // import { FiPlus } from "react-icons/fi";
 
 import { Box, Flex, Stack, Text, useBreakpointValue } from "@chakra-ui/react";
+import { ParaSPT } from "interfaces/GraficoParaSPT";
 
 import StackedBarChart from "components/StackedBarChartGraphic";
 
 import { getGraficoPorCadaSonda } from "services/get/GraficosEstatisticos";
 
-export function GraficoSPT({ de, ate, refresh, setRefresh }: any) {
-  const [chartData, setChartData] = useState<any[]>([]);
+interface Props {
+  de: string;
+  ate: string;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: boolean;
+}
+
+interface Params {
+  de: string;
+  a: string;
+  sonda: string;
+}
+
+export function GraficoSPT({ de, ate, refresh, setRefresh }: Props) {
+  const [chartData, setChartData] = useState<ParaSPT[]>([]);
 
   const dataEntries2 = [{ name: "Durações", color: "#0047BB" }];
 
   const reqGet = async () => {
-    const params: any = {};
+    const params: Params | any = {};
     if (de && ate) {
       params.de = de;
       params.a = ate;
