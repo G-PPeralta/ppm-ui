@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-import { Flex, Button } from "@chakra-ui/react";
+import { Flex, Button, Select, FormControl } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import ContainerPagina from "components/ContainerPagina";
+// import SelectFiltragem from "components/SelectFiltragem";
 import Sidebar from "components/SideBar";
 import TituloPagina from "components/TituloPagina";
 
@@ -41,6 +43,13 @@ export function ActivitiesSchedule() {
   const [loadingCards, setLoadingCards] = useState(true);
   const [loadings, setLoadings] = useState(false);
   const [intervencaoIniciada, setIntervencaoIniciada] = useState<any>(false);
+  const [fase, setFase] = useState("Seleciona a Fase");
+  const [filtrou, setFiltrou] = useState(false);
+
+  const filteredActivities =
+    fase === "Seleciona a Fase"
+      ? atividades
+      : atividades.filter((atv) => atv.fase === fase);
 
   const subTitulo = {
     sonda: `${state.poco.sonda.split(" - ")[1]}`,
@@ -56,6 +65,8 @@ export function ActivitiesSchedule() {
     setOpenId(atividade);
     setOpenIndex(index);
   };
+
+  // console.log(fase);
 
   useEffect(() => {
     setPoco(state.poco);
@@ -86,6 +97,12 @@ export function ActivitiesSchedule() {
     }, 15000);
   }, [atividades]);
 
+  useEffect(() => {
+    if (!loading && filteredActivities.length === 0) {
+      toast.error("Nenhum dado encontrado com o presente filtro de fase");
+    }
+  }, [filtrou]);
+
   return (
     <>
       <Sidebar>
@@ -102,37 +119,76 @@ export function ActivitiesSchedule() {
               wrap={"wrap"}
               mb={4}
             >
-              <Flex gap={2} wrap={"wrap"} flex={1}>
-                <ModalCadastroAtividadeIntervencao
-                  id={id}
-                  atividades={atividades}
-                  setRefresh={setRefresh}
-                  refresh={refresh}
-                />
-                <Button
-                  h={"56px"}
-                  borderRadius={"10px"}
-                  variant="outline"
-                  border={"2px solid"}
-                  borderColor={"origem.500"}
-                  textColor={"origem.500"}
-                  _hover={{
-                    borderColor: "origem.600",
-                    backgroundColor: "origem.500",
-                    textColor: "white",
-                    transition: "all 0.4s",
-                  }}
-                  onClick={() => {
-                    navigate(`precedentes`, {
-                      state: {
-                        poco,
-                      },
-                    });
-                  }}
-                >
-                  Visão Por Precedentes
-                </Button>
-                <BotaoVisaoPorArea />
+              <Flex gap={2} wrap={"wrap"} flex={1} justify={"space-between"}>
+                <Flex align={"flex-end"} gap={2}>
+                  <ModalCadastroAtividadeIntervencao
+                    id={id}
+                    atividades={atividades}
+                    setRefresh={setRefresh}
+                    refresh={refresh}
+                  />
+                  <Button
+                    h={"56px"}
+                    borderRadius={"10px"}
+                    variant="outline"
+                    border={"2px solid"}
+                    borderColor={"origem.500"}
+                    textColor={"origem.500"}
+                    _hover={{
+                      borderColor: "origem.600",
+                      backgroundColor: "origem.500",
+                      textColor: "white",
+                      transition: "all 0.4s",
+                    }}
+                    onClick={() => {
+                      navigate(`precedentes`, {
+                        state: {
+                          poco,
+                        },
+                      });
+                    }}
+                  >
+                    Visão Por Precedentes
+                  </Button>
+                  <BotaoVisaoPorArea />
+                </Flex>
+                <Flex align={"flex-start"}>
+                  <FormControl w="2 rem">
+                    <Select
+                      h={"56px"}
+                      borderRadius={"10px"}
+                      variant="outline"
+                      border={"2px solid"}
+                      borderColor={"origem.500"}
+                      color={"origem.500"}
+                      fontWeight={"semibold"}
+                      _hover={{
+                        borderColor: "origem.600",
+                        backgroundColor: "origem.500",
+                        textColor: "white",
+                        transition: "all 0.4s",
+                      }}
+                      id="fase"
+                      name="fase"
+                      value={fase}
+                      onChange={(event) => {
+                        setFase(event.target.value);
+                        setFiltrou(!filtrou);
+                      }}
+                    >
+                      <option style={{ color: "black" }}>
+                        Seleciona a Fase
+                      </option>
+                      <option style={{ color: "black" }}>
+                        PRÉ-INTERVENÇÃO
+                      </option>
+                      <option style={{ color: "black" }}>INTERVENÇÃO</option>
+                      <option style={{ color: "black" }}>
+                        PÓS-INTERVENÇÃO
+                      </option>
+                    </Select>
+                  </FormControl>
+                </Flex>
               </Flex>
             </Flex>
             <Flex gap={4} wrap={"wrap"} flex={1} justify={"end"}>
@@ -154,7 +210,7 @@ export function ActivitiesSchedule() {
               {!loadingCards &&
               optionsAreaAtuacao.length > 0 &&
               optionsResponsaveis.length > 0 ? (
-                atividades.map((atividade, index) => (
+                filteredActivities.map((atividade, index) => (
                   <Flex
                     key={index}
                     direction={"column"}
