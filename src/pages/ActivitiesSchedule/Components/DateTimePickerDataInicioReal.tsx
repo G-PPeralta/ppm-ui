@@ -16,7 +16,7 @@ function DateTimePickerDataInicioReal({
     // date.setHours(9, 0, 0, 0);
     setInicioReal(date);
   };
-  console.log("dados atividade ---> ", atividadeStatus);
+  // console.log("dados atividade ---> ", atividadeStatus);
   const TriggerDatePickerInicio = forwardRef(
     ({ value, onClick }: any, ref: any) => (
       <Button

@@ -43,7 +43,7 @@ export function Gantt({
   const queryTaskbarInfo = (args: any) => {
     // console.log(":::args.data.taskData", args.data.taskData);
     let color;
-    const { TaskName, Duration, min, med, max, dp } = args.data.taskData;
+    const { Duration, min, med, max, dp } = args.data.taskData;
 
     // console.log("Dados Cores -->", args.data.taskData);
     // console.log("Dados Cores -->", med + dp);
@@ -55,7 +55,7 @@ export function Gantt({
     if (Duration >= max) color = "red";
     if (Duration >= max + dp) color = "black";
 
-    console.log("Dados --> ", TaskName, " -->", color);
+    // console.log("Dados --> ", TaskName, " -->", color);
 
     if (color === "black") {
       // black (duração > média + desvio padrão)
