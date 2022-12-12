@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { Flex, Td, Text, Tr } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
+import { Filtro } from "interfaces/Feriados";
 
 import ContainerPagina from "components/ContainerPagina";
 import FiltragemTabela from "components/FiltragemTabela";
@@ -24,8 +25,8 @@ function Feriados() {
   const { registerForm, feriados } = useFeriadosContext();
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
-  const [tabelaFiltrada, setTabelaFiltrada] = useState<any[]>([]);
-  const [refreshTable, setRefreshTable] = useState<any>(false);
+  const [tabelaFiltrada, setTabelaFiltrada] = useState<Filtro[]>([]);
+  const [refreshTable, setRefreshTable] = useState<boolean>(false);
 
   const fromTo = {
     from,
@@ -68,7 +69,7 @@ function Feriados() {
         {!feriados.isLoading && tabelaFiltrada.length ? (
           tabelaFiltrada
             .slice(from, to)
-            .map((linhaTabela: any, index: number) => (
+            .map((linhaTabela: Filtro, index: number) => (
               <Tr key={index}>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Text>{linhaTabela.id}</Text>

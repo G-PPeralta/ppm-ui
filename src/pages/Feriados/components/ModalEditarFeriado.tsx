@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { useFormik } from "formik";
-import { ProjetosFeriados } from "interfaces/Feriados";
+import { ProjetosFeriados, Feriados, initialValues } from "interfaces/Feriados";
 import { editarFeriadoSchema } from "validations/Feriados";
 
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
@@ -34,7 +34,7 @@ import { useFeriadosContext } from "contexts/Feriados";
 import { useAuth } from "hooks/useAuth";
 
 interface Props {
-  feriado: any;
+  feriado: Feriados;
 }
 
 function ModalEditarFeriado({ feriado }: Props) {
@@ -43,7 +43,7 @@ function ModalEditarFeriado({ feriado }: Props) {
   const { handleClick, selectProjetos } = useFeriadosContext();
   const getAno = new Date().getFullYear();
 
-  const initialValues: any = {
+  const initialValues: initialValues = {
     data_completa: new Date(
       `${formatarDigitosData(feriado.mes_feriado)}/${formatarDigitosData(
         feriado.dia_feriado
