@@ -20,6 +20,12 @@ import {
   NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
+import {
+  Atividade,
+  Label,
+  Precedentes,
+  Relacao,
+} from "interfaces/CadastroAtividadeDeta";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
@@ -45,9 +51,8 @@ interface Props {
   setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
   refreshGanttCriacao: boolean;
   setRefreshGanttCriacao: React.Dispatch<React.SetStateAction<boolean>>;
-  // atividades?: any;
   idProjeto?: number;
-  infoProjeto: any;
+  infoProjeto: Atividade;
 }
 
 interface AreaResponsavel {
@@ -73,19 +78,19 @@ function ModalCadastroAtividades({
     );
   const { areaResponsavel } = useDetalhamentoProjeto();
 
-  const relacoesOptions = listaAtividadesRelacao.map((atividade: any) => ({
+  const relacoesOptions = listaAtividadesRelacao.map((atividade: Relacao) => ({
     value: atividade.id,
     label: atividade.valor,
   }));
 
   const getSumOfDays = registerForm.values.precedentes
-    .map((i: any) => i.dias)
-    .reduce((partialSum: any, a: any) => partialSum + a, 0);
+    .map((i: Precedentes) => i.dias)
+    .reduce((partialSum: number, a: number) => partialSum + a, 0);
   // console.log(getSumOfDays);
 
   // console.log(registerForm.values.precedentes[0].dias);
   const getNomeProjeto = listaAtividadesRelacao
-    .map((atividade: any) => ({
+    .map((atividade: Relacao) => ({
       value: atividade.id,
       label: atividade.valor,
     }))
@@ -214,7 +219,7 @@ function ModalCadastroAtividades({
                             value: areaResponsavel.id,
                             label: areaResponsavel.nom_responsavel,
                           }))
-                          .sort((a: any, b: any) =>
+                          .sort((a: Label, b: Label) =>
                             a.label.localeCompare(b.label)
                           )}
                         required={true}
