@@ -84,28 +84,6 @@ export function ActivitiesPrecedents() {
     requestHandler();
   }, [refresh]);
 
-  // const openDetails = (atividade: any) => {
-  //   const newDest = atividade.precedentesId.map(
-  //     (val: any) => val.precedente_id
-  //   );
-  //   const atvLocal = atividades;
-  //   let renderList = newDest;
-  //   if (renderList[0] != 0) {
-  //     for (let index = 0; index < renderList.length; index++) {
-  //       const element = renderList[index];
-  //       const listaLocal = atvLocal.filter((val2) => val2.id_filho == element);
-  //       if (listaLocal[0]) {
-  //         renderList = renderList.concat(
-  //           listaLocal[0].precedentesId.map((val3: any) => val3.precedente_id)
-  //         );
-  //       }
-  //     }
-  //   }
-  //   renderList.push(atividade.id_filho);
-  //   console.log("renderList", renderList);
-  //   setDestaques(renderList);
-  // };
-
   const openDetails = (atividade: any) => {
     if (destaques.includes(atividade.id_filho)) {
       setDestaques([]);
