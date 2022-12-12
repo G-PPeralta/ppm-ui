@@ -37,10 +37,10 @@ import { patchTarefa } from "services/update/Tarefa";
 
 interface EditModalProps {
   isModalOpen: any;
-  closeModal: any;
+  closeModal: () => void;
   editTarefa: TarefaAtividade;
   atividadesProjeto: AtividadesProjeto[];
-  newRender: any;
+  newRender: () => void;
 }
 
 function EditarTarefaModal({
@@ -327,7 +327,7 @@ function EditarTarefaModal({
               id="atividadeRel"
               name="atividadeRel"
               value={status}
-              onChange={(event) => setStatus(Number(event.target.value))}
+              onChange={(event) => setStatus(event.target.value)}
             >
               <option value="">Selecione</option>
 

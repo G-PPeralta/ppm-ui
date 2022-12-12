@@ -533,7 +533,7 @@ export interface TarefaAtividade {
   descricao_tarefa: string;
   responsavel?: string;
   nom_usu_create?: string;
-  status?: number;
+  status?: string;
   projeto_id: number;
 }
 
@@ -544,9 +544,14 @@ export interface TarefaAtividadeComId {
   atividade_relacionada: string;
   descricao_tarefa: string;
   nom_usu_create?: string;
-  status?: number;
+  status?: string;
   responsavel: string;
   projeto_id: number;
+  dat_usu_create: string;
+  nom_usu_edit: string;
+  dat_usu_edit: string;
+  nom_usu_erase: string | null;
+  dat_usu_erase: string | null;
 }
 
 export interface AtividadesProjeto {

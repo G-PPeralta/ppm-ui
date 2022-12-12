@@ -124,7 +124,7 @@ function BotaoListadeTarefas() {
   function handleFilter() {
     if (tarefaFilter || dataFilter) {
       const filter = taskList
-        .filter((task: any) =>
+        .filter((task: TarefaAtividadeComId) =>
           task.nome_tarefa.toUpperCase().includes(tarefaFilter.toUpperCase())
         )
         .filter((task: any) => task.data_tarefa.includes(dataFilter));
@@ -142,7 +142,7 @@ function BotaoListadeTarefas() {
           taskListFiltered
             .sort((a, b) => a.id - b.id)
             .slice(from, to)
-            .map((task: any, index: any) => (
+            .map((task: TarefaAtividadeComId, index: number) => (
               <Tr key={index}>
                 <Td textAlign={"center"}>{task.id}</Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
@@ -160,11 +160,11 @@ function BotaoListadeTarefas() {
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   {task.responsavel}
                 </Td>
-                {task.status === 0 && (
+                {/* {task.status === 0 && (
                   <Td textAlign={"center"} fontWeight={"semibold"}>
                     {!task.status ? "Em Andamento" : task.status}
                   </Td>
-                )}
+                )} */}
                 {task.status === "1" && (
                   <Td textAlign={"center"} fontWeight={"semibold"}>
                     Concluído

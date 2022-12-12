@@ -33,9 +33,9 @@ import { useModalCadastroTarefa } from "hooks/useModalCadastroTarefa";
 
 interface CadastroTarefaProps {
   isModalOpen: any;
-  closeModal: any;
+  closeModal: () => void;
   atividadesProjeto: AtividadesProjeto[];
-  newRender: any;
+  newRender: () => void;
 }
 
 function CadastroTarefasModal({
