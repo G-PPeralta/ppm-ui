@@ -149,7 +149,8 @@ export function ActivitiesSchedule() {
                     variant="outline"
                     border={"2px solid"}
                     borderColor={"origem.500"}
-                    textColor={"origem.600"}
+                    color={"origem.500"}
+                    fontWeight={"semibold"}
                     _hover={{
                       borderColor: "origem.600",
                       backgroundColor: "origem.500",
