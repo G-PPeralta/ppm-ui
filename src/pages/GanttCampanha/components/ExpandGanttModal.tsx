@@ -40,12 +40,19 @@ import { getGanttCampanhaData } from "services/get/Campanhas";
 import "../gantt.css";
 import ModalDeletarAtvCampanha from "./ModalDeletarAtvCampanha";
 
+interface Props {
+  isModalOpen: boolean;
+  setIsModalOpen: () => void;
+  pocoId: any;
+  intervencaoIniciada: boolean | undefined;
+}
+
 function ExpandGanttModal({
   isModalOpen,
   setIsModalOpen,
   pocoId,
   intervencaoIniciada,
-}: any) {
+}: Props) {
   // const { state }: any = useLocation();
   // const [poco, setPoco] = useState(true);
   const { toast } = useToast();
@@ -92,6 +99,7 @@ function ExpandGanttModal({
     }
 
     setAtividade(filteredAtv);
+
     setCurrentIndex(filteredIndex);
     setIsEditModalOpen(true);
     // onOpen();
