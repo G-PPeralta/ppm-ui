@@ -42,6 +42,12 @@ export function ActivitiesSchedule() {
   const [loadingCards, setLoadingCards] = useState(true);
   const [loadings, setLoadings] = useState(false);
   const [intervencaoIniciada, setIntervencaoIniciada] = useState<any>(false);
+  const [fase, setFase] = useState("");
+
+  const filteredActivities =
+    fase === "SELECIONE A FASE"
+      ? atividades
+      : atividades.filter((atv) => atv.fase === fase);
 
   const subTitulo = {
     sonda: `${state.poco.sonda.split(" - ")[1]}`,
@@ -57,6 +63,8 @@ export function ActivitiesSchedule() {
     setOpenId(atividade);
     setOpenIndex(index);
   };
+
+  // console.log(fase);
 
   useEffect(() => {
     setPoco(state.poco);
@@ -153,13 +161,15 @@ export function ActivitiesSchedule() {
                   fontWeight={"400"}
                   // color={"#A7A7A7"}
                   isRequired
-                  placeholder="Selecione a fase"
                   id="fase"
                   name="fase"
-                  // value={beneficio}
-                  // onChange={(event) => setBeneficio(event.target.value)}
+                  value={fase}
+                  onChange={(event) => setFase(event.target.value)}
                 >
-                  <option color={"#2D2926"}>1</option>
+                  <option color={"#2D2926"}>SELECIONE A FASE</option>
+                  <option color={"#2D2926"}>PRÉ-INTERVENÇÃO</option>
+                  <option color={"#2D2926"}>INTERVENÇÃO</option>
+                  <option color={"#2D2926"}>PÓS-INTERVENÇÃO</option>
                 </Select>
               </FormControl>
             </Flex>
@@ -182,7 +192,7 @@ export function ActivitiesSchedule() {
               {!loadingCards &&
               optionsAreaAtuacao.length > 0 &&
               optionsResponsaveis.length > 0 ? (
-                atividades.map((atividade, index) => (
+                filteredActivities.map((atividade, index) => (
                   <Flex
                     key={index}
                     direction={"column"}
