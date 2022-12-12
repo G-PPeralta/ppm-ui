@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-import { Flex, Button } from "@chakra-ui/react";
+import { Flex, Button, Select, FormControl, FormLabel } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import ContainerPagina from "components/ContainerPagina";
+// import SelectFiltragem from "components/SelectFiltragem";
 import Sidebar from "components/SideBar";
 import TituloPagina from "components/TituloPagina";
 
@@ -134,6 +135,33 @@ export function ActivitiesSchedule() {
                 </Button>
                 <BotaoVisaoPorArea />
               </Flex>
+              <FormControl>
+                <FormLabel
+                  htmlFor="beneficio.opcao_id"
+                  fontSize={"12px"}
+                  fontWeight={"700"}
+                  color={"#949494"}
+                  mb={"1px"}
+                >
+                  FASE
+                </FormLabel>
+                <Select
+                  // mt={"-9px"}
+                  h={"56px"}
+                  w={"530px"}
+                  fontSize={"14px"}
+                  fontWeight={"400"}
+                  // color={"#A7A7A7"}
+                  isRequired
+                  placeholder="Selecione a fase"
+                  id="fase"
+                  name="fase"
+                  // value={beneficio}
+                  // onChange={(event) => setBeneficio(event.target.value)}
+                >
+                  <option color={"#2D2926"}>1</option>
+                </Select>
+              </FormControl>
             </Flex>
             <Flex gap={4} wrap={"wrap"} flex={1} justify={"end"}>
               {statusProjeto.map((status, index) => {
