@@ -22,6 +22,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
+import { EditarAtividade } from "interfaces/EditarAtividadeDe";
 
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
@@ -67,6 +68,18 @@ function getObject(theObject: any, id: any): any {
   return result;
 }
 
+type Props = {
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: boolean;
+  editAtividade: any | EditarAtividade;
+  isOpen: any;
+  onClose: () => void;
+  registerForm: any;
+  loading: boolean;
+  setInfoProjetoRefresh: () => void;
+  setEditAtividade: any;
+};
+
 function ModalEditarAtividade({
   setRefresh,
   refresh,
@@ -76,7 +89,7 @@ function ModalEditarAtividade({
   registerForm,
   loading,
   setInfoProjetoRefresh,
-}: any) {
+}: Props) {
   const { id } = useParams();
   const { areaResponsavel } = useDetalhamentoProjeto();
 
@@ -90,6 +103,8 @@ function ModalEditarAtividade({
       label: options?.[index]?.label,
     };
   };
+
+  // console.log(editAtividade);
 
   const asyncGet = async () => {
     const reqGanttData = await getGanttData(Number(id));
