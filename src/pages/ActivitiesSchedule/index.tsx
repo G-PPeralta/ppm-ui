@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-import { Flex, Button, Select, FormControl, FormLabel } from "@chakra-ui/react";
+import { Flex, Button, Select, FormControl } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import ContainerPagina from "components/ContainerPagina";
@@ -42,10 +42,10 @@ export function ActivitiesSchedule() {
   const [loadingCards, setLoadingCards] = useState(true);
   const [loadings, setLoadings] = useState(false);
   const [intervencaoIniciada, setIntervencaoIniciada] = useState<any>(false);
-  const [fase, setFase] = useState("");
+  const [fase, setFase] = useState("Seleciona a Fase");
 
   const filteredActivities =
-    fase === "SELECIONE A FASE"
+    fase === "Seleciona a Fase"
       ? atividades
       : atividades.filter((atv) => atv.fase === fase);
 
@@ -142,36 +142,32 @@ export function ActivitiesSchedule() {
                   Visão Por Precedentes
                 </Button>
                 <BotaoVisaoPorArea />
+                <FormControl w="2 rem">
+                  <Select
+                    h={"56px"}
+                    borderRadius={"10px"}
+                    variant="outline"
+                    border={"2px solid"}
+                    borderColor={"origem.500"}
+                    textColor={"origem.600"}
+                    _hover={{
+                      borderColor: "origem.600",
+                      backgroundColor: "origem.500",
+                      textColor: "white",
+                      transition: "all 0.4s",
+                    }}
+                    id="fase"
+                    name="fase"
+                    value={fase}
+                    onChange={(event) => setFase(event.target.value)}
+                  >
+                    <option style={{ color: "black" }}>Seleciona a Fase</option>
+                    <option style={{ color: "black" }}>PRÉ-INTERVENÇÃO</option>
+                    <option style={{ color: "black" }}>INTERVENÇÃO</option>
+                    <option style={{ color: "black" }}>PÓS-INTERVENÇÃO</option>
+                  </Select>
+                </FormControl>
               </Flex>
-              <FormControl>
-                <FormLabel
-                  htmlFor="beneficio.opcao_id"
-                  fontSize={"12px"}
-                  fontWeight={"700"}
-                  color={"#949494"}
-                  mb={"1px"}
-                >
-                  FASE
-                </FormLabel>
-                <Select
-                  // mt={"-9px"}
-                  h={"56px"}
-                  w={"530px"}
-                  fontSize={"14px"}
-                  fontWeight={"400"}
-                  // color={"#A7A7A7"}
-                  isRequired
-                  id="fase"
-                  name="fase"
-                  value={fase}
-                  onChange={(event) => setFase(event.target.value)}
-                >
-                  <option color={"#2D2926"}>SELECIONE A FASE</option>
-                  <option color={"#2D2926"}>PRÉ-INTERVENÇÃO</option>
-                  <option color={"#2D2926"}>INTERVENÇÃO</option>
-                  <option color={"#2D2926"}>PÓS-INTERVENÇÃO</option>
-                </Select>
-              </FormControl>
             </Flex>
             <Flex gap={4} wrap={"wrap"} flex={1} justify={"end"}>
               {statusProjeto.map((status, index) => {
