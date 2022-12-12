@@ -73,6 +73,7 @@ function ModalEditar({
 }: Props) {
   const { refresh, setRefresh } = refreshState;
   const { optionsFornecedores, optionsClassesDeServico } = optionsSelects;
+
   const { loading, registerForm } = useCentroDeCusto(
     linhaTabela.idCusto,
     "patch"

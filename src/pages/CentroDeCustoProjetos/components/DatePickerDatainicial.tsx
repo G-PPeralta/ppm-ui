@@ -3,6 +3,7 @@ import ReactDatePicker, { registerLocale } from "react-datepicker";
 
 import { Button, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 import ptBR from "date-fns/locale/pt-BR";
+import { DatePicker } from "interfaces/CentroDeCusto";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
@@ -19,9 +20,8 @@ function DatePickerGenericoDataInicial({
   esconderHorario,
   mes,
   dataInicial,
-
   dates,
-}: any) {
+}: DatePicker) {
   const [dataInicio, setDataInicio] = useState<any>("");
   const [startDate, setStartDate] = useState<any>("");
   const [endDate, setEndSate] = useState<any>("");

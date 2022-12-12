@@ -14,14 +14,13 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import { Data, Options } from "interfaces/CentroDeCusto";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
 
 import { formatDate } from "utils/formatDate";
 
 // import { useAuth } from "hooks/useAuth";
-
-// import { deleteDespesa } from "services/delete/Financeiro";
 
 import ModalDeletarCentroDeCusto from "./ModalDeletarCentroDeCusto";
 import ModalEditar from "./ModalEditar";
@@ -30,11 +29,12 @@ interface RefreshState {
   refresh: boolean;
   setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
 interface Props {
-  data: any; // Dados completos da tabela
+  data: Data[]; // Dados completos da tabela
   refreshState: RefreshState;
   idProjeto: number;
-  optionsSelects: any;
+  optionsSelects: Options;
   mes: number;
 }
 

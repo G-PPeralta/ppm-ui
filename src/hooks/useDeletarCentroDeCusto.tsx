@@ -17,7 +17,11 @@ export function useDeletarCentroDeCusto(idCentroCusto: number = 0) {
     await deleteDespesa(idCentroCusto, user?.nome);
   };
 
-  const initialValues: any = {
+  interface MyFormValues {
+    idCentroCusto: number;
+  }
+
+  const initialValues: MyFormValues = {
     idCentroCusto: 0,
   };
 

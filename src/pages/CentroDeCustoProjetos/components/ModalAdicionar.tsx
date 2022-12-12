@@ -17,6 +17,7 @@ import {
   useDisclosure,
   InputGroup,
 } from "@chakra-ui/react";
+import { Options } from "interfaces/CentroDeCusto";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
@@ -41,7 +42,7 @@ interface RefreshState {
 interface Props {
   refreshState: RefreshState;
   idProjeto: number;
-  optionsSelects: any;
+  optionsSelects: Options;
   mes: number;
   dataInicial: Date;
 }
@@ -58,10 +59,11 @@ function ModalAdicionar({
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { loading, registerForm } = useCentroDeCusto(idProjeto, "post");
-  const [dates, setDates] = useState<any>("");
+  const [dates, setDates] = useState({});
 
   const getDates = async () => {
     const dates = await getDataInicialFinalProjeto(idProjeto);
+
     setDates(dates);
   };
 
@@ -132,7 +134,7 @@ function ModalAdicionar({
                     required={true}
                     esconderHorario
                     dataInicial={dataInicial}
-                    idProjeto={idProjeto}
+                    // idProjeto={idProjeto}
                     dates={dates}
                   />
                 </Flex>
