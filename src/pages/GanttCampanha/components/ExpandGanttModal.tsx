@@ -136,11 +136,11 @@ function ExpandGanttModal({
       justifyContent={"center"}
       alignItems={"center"}
     >
-      {props.taskData.Progress == props.taskData.ProgressPlanejado &&
-        props.taskData.Progress != "0" && (
+      {props.taskData.Progress >= props.taskData.ProgressPlanejado &&
+        props.taskData.Progress === 100 && (
           <Box
-            w={5}
-            h={5}
+            w={4}
+            h={4}
             bg={"#9FA2B4"}
             display={"flex"}
             flexDirection="column"
@@ -152,8 +152,8 @@ function ExpandGanttModal({
         )}
       {props.taskData.Progress < props.taskData.ProgressPlanejado && (
         <Box
-          w={5}
-          h={5}
+          w={4}
+          h={4}
           bg={"#9FA2B4"}
           display={"flex"}
           flexDirection="column"
@@ -166,8 +166,8 @@ function ExpandGanttModal({
       {props.taskData.Progress == "0" &&
         props.taskData.ProgressPlanejado == "0" && (
           <Box
-            w={5}
-            h={5}
+            w={4}
+            h={4}
             bg={"#9FA2B4"}
             display={"flex"}
             flexDirection="column"
@@ -241,6 +241,7 @@ function ExpandGanttModal({
                   progress: "Progress",
                   dependency: "Predecessor",
                   child: "subtasks",
+                  segments: "Segment",
                 }}
                 dataSource={ganttData}
                 toolbar={["ZoomIn", "ZoomOut", "ZoomToFit"]}
@@ -296,6 +297,13 @@ function ExpandGanttModal({
                     headerTextAlign="Left"
                     textAlign="Left"
                     width="250"
+                  ></ColumnDirective>
+                  <ColumnDirective
+                    field="segments"
+                    headerText="Fase"
+                    headerTextAlign="Left"
+                    textAlign="Left"
+                    width="100"
                   ></ColumnDirective>
                   {/* <ColumnDirective
                     field="BaselineStartDate"

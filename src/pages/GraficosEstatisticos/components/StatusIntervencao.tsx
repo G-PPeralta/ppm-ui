@@ -6,6 +6,7 @@ type Props = {
 };
 
 function StatusIntervencao({ status, color }: Props) {
+  // console.log("dados status --> ", status);
   return (
     <Flex align={"center"} wrap={"wrap"}>
       <Box

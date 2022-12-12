@@ -38,9 +38,10 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   }, [mediaHorasFiltradas]);
 
   const flag = sondaN.atividades.find(
-    (s: any) => s.nome_atividade === registerForm.values.nome_atividade
+    (s: any) => s.id_atividade === registerForm.values.id_atividade
   )?.flag;
 
+  // console.log("dados flag ---> ", sondaN.atividades);
   // console.log("dados flag ---> ", flag);
 
   // para entrar no formulário para envio ao backend
@@ -59,7 +60,42 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
     const hrs_reais: any = sessionStorage.getItem(
       "hrs_totais_" + registerForm.values.id_atividade
     );
-    if (+hrs_reais !== registerForm.values.hrs_reais) {
+
+    // console.log(
+    //   "dados REGRA --> ",
+    //   +hrs_reais !== registerForm.values.hrs_reais
+    // );
+
+    let statehrsEditado: number = 0;
+    // console.log("Dados hrs_reais --->", +hrs_reais);
+    // console.log("Dados register hrs --->", +registerForm.values.hrs_reais);
+    if (+hrs_reais !== +registerForm.values.hrs_reais) {
+      statehrsEditado = 1;
+    } else {
+      statehrsEditado = 0;
+    }
+    const pct_real: any = sessionStorage.getItem(
+      "pct_real_" + registerForm.values.id_atividade
+    );
+
+    // console.log(
+    //   "dados REGRA 2 ---> ",
+    //   +pct_real !== registerForm.values.pct_real
+    // );
+
+    let statepctEditado: number = 0;
+    if (+pct_real !== +registerForm.values.pct_real) {
+      statepctEditado = 1;
+    } else {
+      statepctEditado = 0;
+    }
+
+    // console.log("Dados Pct --->", statepctEditado);
+    // console.log("Dados hrs --->", statehrsEditado);
+    const intTotal = +statepctEditado + +statehrsEditado;
+    // console.log("Dados Total ---> ", intTotal);
+    // console.log("dados " + statepctEditado + statehrsEditado);
+    if (intTotal > 0) {
       registerForm.setFieldValue("realEditado", 1);
     } else {
       registerForm.setFieldValue("realEditado", 0);
