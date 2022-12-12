@@ -111,63 +111,73 @@ export function ActivitiesSchedule() {
               wrap={"wrap"}
               mb={4}
             >
-              <Flex gap={2} wrap={"wrap"} flex={1}>
-                <ModalCadastroAtividadeIntervencao
-                  id={id}
-                  atividades={atividades}
-                  setRefresh={setRefresh}
-                  refresh={refresh}
-                />
-                <Button
-                  h={"56px"}
-                  borderRadius={"10px"}
-                  variant="outline"
-                  border={"2px solid"}
-                  borderColor={"origem.500"}
-                  textColor={"origem.500"}
-                  _hover={{
-                    borderColor: "origem.600",
-                    backgroundColor: "origem.500",
-                    textColor: "white",
-                    transition: "all 0.4s",
-                  }}
-                  onClick={() => {
-                    navigate(`precedentes`, {
-                      state: {
-                        poco,
-                      },
-                    });
-                  }}
-                >
-                  Visão Por Precedentes
-                </Button>
-                <BotaoVisaoPorArea />
-                <FormControl w="2 rem">
-                  <Select
+              <Flex gap={2} wrap={"wrap"} flex={1} justify={"space-between"}>
+                <Flex align={"flex-end"} gap={2}>
+                  <ModalCadastroAtividadeIntervencao
+                    id={id}
+                    atividades={atividades}
+                    setRefresh={setRefresh}
+                    refresh={refresh}
+                  />
+                  <Button
                     h={"56px"}
                     borderRadius={"10px"}
                     variant="outline"
                     border={"2px solid"}
                     borderColor={"origem.500"}
-                    color={"origem.500"}
-                    fontWeight={"semibold"}
+                    textColor={"origem.500"}
                     _hover={{
                       borderColor: "origem.600",
                       backgroundColor: "origem.500",
                       textColor: "white",
                       transition: "all 0.4s",
                     }}
-                    id="fase"
-                    name="fase"
-                    value={fase}
-                    onChange={(event) => setFase(event.target.value)}
+                    onClick={() => {
+                      navigate(`precedentes`, {
+                        state: {
+                          poco,
+                        },
+                      });
+                    }}
                   >
-                    <option style={{ color: "black" }}>Seleciona a Fase</option>
-                    <option style={{ color: "black" }}>PRÉ-INTERVENÇÃO</option>
-                    <option style={{ color: "black" }}>INTERVENÇÃO</option>
-                    <option style={{ color: "black" }}>PÓS-INTERVENÇÃO</option>
-                  </Select>
-                </FormControl>
+                    Visão Por Precedentes
+                  </Button>
+                  <BotaoVisaoPorArea />
+                </Flex>
+                <Flex align={"flex-start"}>
+                  <FormControl w="2 rem">
+                    <Select
+                      h={"56px"}
+                      borderRadius={"10px"}
+                      variant="outline"
+                      border={"2px solid"}
+                      borderColor={"origem.500"}
+                      color={"origem.500"}
+                      fontWeight={"semibold"}
+                      _hover={{
+                        borderColor: "origem.600",
+                        backgroundColor: "origem.500",
+                        textColor: "white",
+                        transition: "all 0.4s",
+                      }}
+                      id="fase"
+                      name="fase"
+                      value={fase}
+                      onChange={(event) => setFase(event.target.value)}
+                    >
+                      <option style={{ color: "black" }}>
+                        Seleciona a Fase
+                      </option>
+                      <option style={{ color: "black" }}>
+                        PRÉ-INTERVENÇÃO
+                      </option>
+                      <option style={{ color: "black" }}>INTERVENÇÃO</option>
+                      <option style={{ color: "black" }}>
+                        PÓS-INTERVENÇÃO
+                      </option>
+                    </Select>
+                  </FormControl>
+                </Flex>
               </Flex>
             </Flex>
             <Flex gap={4} wrap={"wrap"} flex={1} justify={"end"}>
