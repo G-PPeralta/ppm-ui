@@ -307,11 +307,11 @@ function ExpandGanttModal({
                     width="250"
                   ></ColumnDirective>
                   <ColumnDirective
-                    field="segments"
+                    field="Fase"
                     headerText="Fase"
                     headerTextAlign="Left"
                     textAlign="Left"
-                    width="100"
+                    width="180"
                   ></ColumnDirective>
                   {/* <ColumnDirective
                     field="BaselineStartDate"
