@@ -107,33 +107,26 @@ export function ActivitiesPrecedents() {
 
   const getAreabyIdTarget = (
     precedenteId: string,
-    currentArea: string,
-    currentIndex: number
+    atividadeId: string
   ): AnchorPositionType => {
-    let area = "";
-    let areaIndex = 0;
-    let currentAreaIndex = 0;
-    let index = 0;
-    for (const pay in data) {
-      if (data[pay].area == currentArea) {
-        currentAreaIndex = Number(pay);
-      }
-      for (const atividade in data[pay].atividades) {
-        if (data[pay].atividades[atividade].id_filho == precedenteId) {
-          area = data[pay].area;
-          areaIndex = Number(pay);
-          index = Number(atividade);
-        }
-      }
+    const atv = document.getElementById(atividadeId);
+    let rectATV = { x: 0, y: 0 };
+    if (atv) {
+      rectATV = atv.getBoundingClientRect();
     }
-    if (area == currentArea) {
-      if (index < currentIndex) {
-        return "right";
-      } else {
+    const pre = document.getElementById(precedenteId);
+    let rectPRE = { x: 0, y: 0 };
+    if (pre) {
+      rectPRE = pre.getBoundingClientRect();
+    }
+    if (rectATV.y == rectPRE.y) {
+      if (rectATV.x < rectPRE.x) {
         return "left";
+      } else {
+        return "right";
       }
     } else {
-      if (areaIndex < currentAreaIndex) {
+      if (rectATV.y > rectPRE.y) {
         return "bottom";
       } else {
         return "top";
@@ -143,33 +136,26 @@ export function ActivitiesPrecedents() {
 
   const getAreabyIdSource = (
     precedenteId: string,
-    currentArea: string,
-    currentIndex: number
+    atividadeId: string
   ): AnchorPositionType => {
-    let area = "";
-    let areaIndex = 0;
-    let currentAreaIndex = 0;
-    let index = 0;
-    for (const pay in data) {
-      if (data[pay].area == currentArea) {
-        currentAreaIndex = Number(pay);
-      }
-      for (const atividade in data[pay].atividades) {
-        if (data[pay].atividades[atividade].id_filho == precedenteId) {
-          area = data[pay].area;
-          areaIndex = Number(pay);
-          index = Number(atividade);
-        }
-      }
+    const atv = document.getElementById(atividadeId);
+    let rectATV = { x: 0, y: 0 };
+    if (atv) {
+      rectATV = atv.getBoundingClientRect();
     }
-    if (area == currentArea) {
-      if (index < currentIndex) {
-        return "left";
-      } else {
+    const pre = document.getElementById(precedenteId);
+    let rectPRE = { x: 0, y: 0 };
+    if (pre) {
+      rectPRE = pre.getBoundingClientRect();
+    }
+    if (rectATV.y == rectPRE.y) {
+      if (rectATV.x < rectPRE.x) {
         return "right";
+      } else {
+        return "left";
       }
     } else {
-      if (areaIndex < currentAreaIndex) {
+      if (rectATV.y > rectPRE.y) {
         return "top";
       } else {
         return "bottom";
@@ -267,13 +253,11 @@ export function ActivitiesPrecedents() {
                                     targetId: String(precedente.precedente_id),
                                     targetAnchor: getAreabyIdTarget(
                                       String(precedente.precedente_id),
-                                      area.area,
-                                      index
+                                      String(atividade.id_filho)
                                     ),
                                     sourceAnchor: getAreabyIdSource(
                                       String(precedente.precedente_id),
-                                      area.area,
-                                      index
+                                      String(atividade.id_filho)
                                     ),
                                     style: {
                                       strokeColor:
@@ -293,6 +277,7 @@ export function ActivitiesPrecedents() {
                               )}
                             >
                               <Flex
+                                id={atividade.id_filho}
                                 key={index}
                                 direction={"column"}
                                 opacity={
