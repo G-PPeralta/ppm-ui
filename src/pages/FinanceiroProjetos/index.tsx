@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 // import { MdCloudUpload } from "react-icons/md";
 
 import { Box, Button, Flex, Heading, Input, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
+import { FinanceiroPorProjetos } from "interfaces/FinanceiroProjetos";
 
 import Sidebar from "components/SideBar";
 
@@ -15,8 +16,8 @@ import Tabela from "./Components/Tabela";
 
 export function FinanceiroProjetos() {
   const { loading, listaFinanceiroProjetos } = useRequests();
-  const [allData, setAllData] = useState<any[]>(listaFinanceiroProjetos);
-  const [filter, setFilter] = useState<any[]>(listaFinanceiroProjetos);
+  const [allData, setAllData] = useState<FinanceiroPorProjetos[]>([]);
+  const [filter, setFilter] = useState<FinanceiroPorProjetos[]>([]);
   const [search, setSearch] = useState("");
 
   const filterData = (search: string) => {
@@ -41,7 +42,7 @@ export function FinanceiroProjetos() {
     filterData(search);
   };
 
-  const handleSearch = (e: any) => {
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const regex = regexCaracteresEspeciais(value);
     setSearch(regex);

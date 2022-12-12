@@ -3,7 +3,7 @@ export interface FinanceiroPorProjetos {
   nomeprojeto: string;
   elementopep: string;
   denominacaodeobjeto: string;
-  mes: string;
+  mes?: string;
   textodopedido: string;
   totalprevisto: number;
   totalrealizado: number;
