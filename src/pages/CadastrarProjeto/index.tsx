@@ -43,15 +43,20 @@ function CadastrarProjeto() {
     optionsGates,
   } = useProjetos();
 
+  type Options = {
+    value: number;
+    label: string;
+  };
+
   const tiposProjetos = optionsTipoProjetos.filter(
-    (option: any) => option.label !== "Intervenção"
+    (option: Options) => option.label !== "Intervenção"
   );
 
   const innerWidth = window.innerWidth;
 
-  const getValue = (options: any, chave: any) => {
+  const getValue = (options: Array<Options>, chave: string) => {
     const index = options
-      .map(({ value }: any) => value)
+      .map(({ value }: Options) => value)
       .indexOf(registerForm?.values?.[chave]);
 
     return {
