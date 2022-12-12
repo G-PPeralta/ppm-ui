@@ -10,26 +10,49 @@ import { postCadastroFornecedor } from "services/post/Fornecedor";
 
 import { useAuth } from "./useAuth";
 
+type Polos = {
+  deletado: boolean;
+  id: number;
+  polo: string;
+};
+
 export function useCadastroFornecedor() {
   const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [listaPolos, setListaPolos] = useState<any>([]);
+  const [listaPolos, setListaPolos] = useState<Polos[]>([]);
 
   const reqGet = async () => {
     const polos = await getPolo();
-    const polosSorted = polos.data.sort((a: any, b: any) =>
+
+    const polosSorted = polos.data.sort((a: Polos, b: Polos) =>
       a.polo.localeCompare(b.polo)
     );
     setListaPolos(polosSorted);
   };
 
-  const optionsPolos = listaPolos.map((polo: any) => ({
+  const optionsPolos = listaPolos.map((polo: Polos) => ({
     value: polo.id,
     label: polo.polo,
   }));
 
-  const initialValues: any = {
+  interface MyFormValues {
+    nom_usu_create: string | undefined;
+    poloId: number;
+    statusId: number;
+    servico_txt: string;
+    nomeFornecedor: string;
+    numeroContrato: string;
+    representante: string;
+    email: string;
+    telefone: string;
+    invoice: string;
+    cnpj: string;
+    justificativa: string;
+    outrasInformacoes: string;
+  }
+
+  const initialValues: MyFormValues = {
     nom_usu_create: user?.nome,
     poloId: 0,
     statusId: 0,
@@ -49,7 +72,7 @@ export function useCadastroFornecedor() {
     initialValues,
     validationSchema: cadastroFornecedor,
     onSubmit: async (values) => {
-      const newValues: any = {
+      const newValues: MyFormValues = {
         nom_usu_create: user?.nome,
         poloId: values.poloId,
         servico_txt: values.servico_txt,
