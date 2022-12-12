@@ -12,6 +12,11 @@ import {
   // useColorModeValue,
 } from "@chakra-ui/react";
 // import { Ring } from "@uiball/loaders";
+import {
+  Intervenções,
+  PorCadaIntervencao,
+  TempoTotal,
+} from "interfaces/GraficoPorCadaInterv";
 
 import StackedBarChart from "components/StackedBarChartGraphic";
 
@@ -19,16 +24,28 @@ import { getGraficoPorCadaIntervencao } from "services/get/GraficosEstatisticos"
 
 import StatusIntervencao from "./StatusIntervencao";
 
+interface Props {
+  de: string;
+  ate: string;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: boolean;
+}
+
+interface Params {
+  de: string;
+  a: string;
+  sonda: string;
+}
+
 export function GraficoPorCadaIntervencao({
   de,
   ate,
   refresh,
   setRefresh,
-}: any) {
-  const [chartData, setChartData] = useState<any[]>([]);
-  const [tempoTotal, setTempoTotal] = useState<any[]>([]);
-  const [intervençoes, setInterv] = useState<any[]>([]);
-  // const [listaSondas, setListaSondas] = useState<any[]>([]);
+}: Props) {
+  const [chartData, setChartData] = useState<PorCadaIntervencao[]>([]);
+  const [tempoTotal, setTempoTotal] = useState<TempoTotal[]>([]);
+  const [intervençoes, setInterv] = useState<Intervenções[]>([]);
 
   const dataEntries2 = [
     { name: "Aguardando Outros", color: "#7030a0" },
@@ -73,7 +90,7 @@ export function GraficoPorCadaIntervencao({
   // ];
 
   const reqGet = async () => {
-    const params: any = {};
+    const params: Params | any = {};
     if (de && ate) {
       params.de = de;
       params.a = ate;
