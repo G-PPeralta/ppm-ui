@@ -43,12 +43,19 @@ export function Gantt({
   const queryTaskbarInfo = (args: any) => {
     // console.log(":::args.data.taskData", args.data.taskData);
     let color;
-    const { Duration, med, dp } = args.data.taskData;
+    const { TaskName, Duration, min, med, max, dp } = args.data.taskData;
 
-    if (Duration >= med + dp) color = "black";
-    if (Duration < med + dp) color = "red";
-    if (Duration < med + dp / 2) color = "yellow";
-    if (Duration < med - dp) color = "green";
+    // console.log("Dados Cores -->", args.data.taskData);
+    // console.log("Dados Cores -->", med + dp);
+    // const dp_med = dp / 2;
+
+    if (Duration < min) color = "green";
+    if (Duration >= min && Duration <= med) color = "yellow";
+    if (Duration >= med) color = "yellow";
+    if (Duration >= max) color = "red";
+    if (Duration >= max + dp) color = "black";
+
+    console.log("Dados --> ", TaskName, " -->", color);
 
     if (color === "black") {
       // black (duração > média + desvio padrão)
@@ -105,24 +112,23 @@ export function Gantt({
       justifyContent={"center"}
       alignItems={"center"}
     >
-      {props.taskData.Progress == props.taskData.pct_plan &&
-        props.taskData.Progress !== 0 && (
-          <Box
-            w={5}
-            h={5}
-            bg={"#9FA2B4"}
-            display={"flex"}
-            flexDirection="column"
-            alignItems={"center"}
-            pt={"2px"}
-            sx={{ borderRadius: "100%" }}
-            style={{ backgroundColor: "#008000" }}
-          ></Box>
-        )}
+      {props.taskData.Progress >= props.taskData.pct_plan && (
+        <Box
+          w={4}
+          h={4}
+          bg={"#9FA2B4"}
+          display={"flex"}
+          flexDirection="column"
+          alignItems={"center"}
+          pt={"2px"}
+          sx={{ borderRadius: "100%" }}
+          style={{ backgroundColor: "#008000" }}
+        ></Box>
+      )}
       {props.taskData.Progress < props.taskData.pct_plan && (
         <Box
-          w={5}
-          h={5}
+          w={4}
+          h={4}
           bg={"#9FA2B4"}
           display={"flex"}
           flexDirection="column"
@@ -134,8 +140,8 @@ export function Gantt({
       )}
       {props.taskData.Progress == 0 && props.taskData.pct_plan == 0 && (
         <Box
-          w={5}
-          h={5}
+          w={4}
+          h={4}
           bg={"#9FA2B4"}
           display={"flex"}
           flexDirection="column"
@@ -283,11 +289,20 @@ export function Gantt({
             ></ColumnDirective>
             <ColumnDirective
               field="s"
-              headerText="S"
+              headerText="Status"
               headerTextAlign="Center"
               textAlign="Center"
               // type="number"
               template={statusTemplate}
+              width="100"
+            ></ColumnDirective>
+            <ColumnDirective
+              field="pct_plan"
+              headerText="% Plan"
+              headerTextAlign="Center"
+              textAlign="Center"
+              type="number"
+              format="N"
               width="100"
             ></ColumnDirective>
             <ColumnDirective
@@ -322,24 +337,6 @@ export function Gantt({
               textAlign="Center"
               type="number"
               format="N"
-            ></ColumnDirective>
-            <ColumnDirective
-              field="pct_plan"
-              headerText="% Plan"
-              headerTextAlign="Center"
-              textAlign="Center"
-              type="number"
-              format="N"
-              width="100"
-            ></ColumnDirective>
-            <ColumnDirective
-              field="Progress"
-              headerText="% Real"
-              headerTextAlign="Center"
-              textAlign="Center"
-              type="number"
-              format="N"
-              width="100"
             ></ColumnDirective>
           </ColumnsDirective>
           <Inject services={[Edit, Selection, Toolbar, Sort]} />

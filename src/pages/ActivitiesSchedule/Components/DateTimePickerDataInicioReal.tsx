@@ -13,14 +13,14 @@ function DateTimePickerDataInicioReal({
   fimReal,
 }: any) {
   const handleIniciarDate = (date: any) => {
-    date.setHours(9, 0, 0, 0);
+    // date.setHours(9, 0, 0, 0);
     setInicioReal(date);
   };
-
+  console.log("dados atividade ---> ", atividadeStatus);
   const TriggerDatePickerInicio = forwardRef(
     ({ value, onClick }: any, ref: any) => (
       <Button
-        isDisabled
+        isDisabled={!(atividadeStatus !== 100)}
         fontSize={"14px"}
         fontWeight={"400"}
         _placeholder={{ color: "#949494" }}

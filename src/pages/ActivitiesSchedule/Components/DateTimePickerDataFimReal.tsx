@@ -18,7 +18,7 @@ function DateTimePickerDataFimReal({
   const TriggerDatePickerInicio = forwardRef(
     ({ value, onClick }: any, ref: any) => (
       <Button
-        isDisabled={atividadeStatus !== 100}
+        isDisabled={!(atividadeStatus !== 100)}
         fontSize={"14px"}
         fontWeight={"400"}
         _placeholder={{ color: "#949494" }}
@@ -43,9 +43,9 @@ function DateTimePickerDataFimReal({
         // showTimeSelect
         dateFormat="Pp"
         customInput={<TriggerDatePickerInicio />}
-        isClearable={fimReal !== ""}
+        // isClearable={fimReal !== ""}
         disabled={!intervencaoIniciada && atividadeStatus !== 100}
-        minDate={inicioReal}
+        // minDate={inicioReal}
       />
     </Flex>
   );

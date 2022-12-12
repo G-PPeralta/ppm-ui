@@ -112,11 +112,11 @@ function GanttCampanha() {
       justifyContent={"center"}
       alignItems={"center"}
     >
-      {props.taskData.pct_real == props.taskData.pct_plan &&
-        props.taskData.pct_real !== "0%" && (
+      {props.taskData.Progress >= props.taskData.pct_plan &&
+        props.taskData.pct_real === 100 && (
           <Box
-            w={5}
-            h={5}
+            w={4}
+            h={4}
             bg={"#9FA2B4"}
             display={"flex"}
             flexDirection="column"
@@ -128,8 +128,8 @@ function GanttCampanha() {
         )}
       {props.taskData.pct_real < props.taskData.pct_plan && (
         <Box
-          w={5}
-          h={5}
+          w={4}
+          h={4}
           bg={"#9FA2B4"}
           display={"flex"}
           flexDirection="column"
@@ -139,10 +139,10 @@ function GanttCampanha() {
           style={{ backgroundColor: "red" }}
         ></Box>
       )}
-      {props.taskData.pct_real == "0%" && props.taskData.pct_plan == "0%" && (
+      {props.taskData.pct_real == 0 && props.taskData.pct_plan == 0 && (
         <Box
-          w={5}
-          h={5}
+          w={4}
+          h={4}
           bg={"#9FA2B4"}
           display={"flex"}
           flexDirection="column"
@@ -164,6 +164,7 @@ function GanttCampanha() {
     sonda_id: null,
     status: null,
     responsavel_id: null,
+    fase: null,
   };
 
   const handleGetAllData = async () => {
@@ -178,6 +179,7 @@ function GanttCampanha() {
           pct_real: poc.pct_real + "%" || 0 + "%",
           Progress: poc.pct_plan + "%",
           pct_plan: poc.pct_plan + "%",
+          fase: poc.fase,
           status:
             Number(poc.pct_real) >= Number(poc.pct_plan)
               ? "EM LINHA"
@@ -187,7 +189,6 @@ function GanttCampanha() {
         }));
         list.push(...formatted);
       });
-
       setGanttData(list);
       setGanttDataFilter(list);
     }
