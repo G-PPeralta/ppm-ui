@@ -1,4 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
 import {
   Box,
@@ -10,6 +16,7 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { Historico, PorDuracao } from "interfaces/GraficoPorDuracao";
 
 import StackedBarChart from "components/StackedBarChartGraphic";
 
@@ -19,11 +26,34 @@ import {
   getGraficoHistorico,
 } from "services/get/GraficosEstatisticos";
 
-export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
-  const [listaSondas, setListaSondas] = useState<any[]>([]);
-  const [selectedSonda, setSelectedSonda] = useState<any>();
-  const [chartData, setChartData] = useState<any[]>([]);
-  const [historicoData, setHistorico] = useState<any>();
+interface Props {
+  de: string;
+  ate: string;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: boolean;
+}
+
+interface ListaDeSondas {
+  label: string;
+  value: number;
+}
+
+interface Sondas {
+  nom_sonda: string;
+  id: number;
+}
+
+interface Params {
+  de: string;
+  a: string;
+  sonda: string;
+}
+
+export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: Props) {
+  const [listaSondas, setListaSondas] = useState<ListaDeSondas[]>([]);
+  const [selectedSonda, setSelectedSonda] = useState<string | undefined>();
+  const [chartData, setChartData] = useState<PorDuracao[]>([]);
+  const [historicoData, setHistorico] = useState<Historico[]>([]);
   const [label, setLabel] = useState({
     hrs_min: "",
     hrs_max: "",
@@ -59,7 +89,8 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
 
   const reqGet = async () => {
     const sondas = await getSondas();
-    const params: any = {};
+
+    const params: Params | any = {};
     if (de && ate) {
       params.de = de;
       params.a = ate;
@@ -80,10 +111,10 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
       Durações: e.hrs_media,
     }));
 
-    const sondasSorted = sondas.data.sort((a: any, b: any) =>
+    const sondasSorted = sondas.data.sort((a: Sondas, b: Sondas) =>
       a.nom_sonda.localeCompare(b.nom_sonda)
     );
-    const sondasSortedOptions = sondasSorted.map((a: any) => ({
+    const sondasSortedOptions = sondasSorted.map((a: Sondas) => ({
       value: a.id,
       label: a.nom_sonda,
     }));
@@ -93,7 +124,7 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: any) {
     setListaSondas(sondasSortedOptions);
   };
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: ChangeEvent<{ value: string }>) => {
     setSelectedSonda(e.target.value);
     setRefresh(!refresh);
   };

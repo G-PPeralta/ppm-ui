@@ -51,7 +51,7 @@ export function GráficosEstatisticos() {
     { name: "Relatório para a CIP", value: "5" },
   ];
 
-  const x = (prop: any) => {
+  const x = (prop: string) => {
     if (prop === "1") {
       return `historico_de_duracoes_${moment().format("DDMMYYYY_hhmmss")}`;
     }
