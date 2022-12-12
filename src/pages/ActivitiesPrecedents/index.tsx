@@ -292,34 +292,26 @@ export function ActivitiesPrecedents() {
                                 }
                               )}
                             >
-                              {destaques.includes(atividade.id_filho) ||
-                              destaques.length == 0 ? (
-                                <Flex
-                                  key={index}
-                                  direction={"column"}
-                                  opacity={1}
-                                  align={"center"}
-                                  justify={"center"}
-                                  onClick={() => openDetails(atividade)}
-                                  _hover={{ cursor: "pointer" }}
-                                >
-                                  <CardACT
-                                    atividade={atividade}
-                                    setRefresh={setRefresh}
-                                    refresh={refresh}
-                                  />
-                                </Flex>
-                              ) : (
-                                <Flex
-                                  key={index}
-                                  direction={"column"}
-                                  opacity={1}
-                                  align={"center"}
-                                  justify={"center"}
-                                  onClick={() => openDetails(atividade)}
-                                  _hover={{ cursor: "pointer" }}
-                                ></Flex>
-                              )}
+                              <Flex
+                                key={index}
+                                direction={"column"}
+                                opacity={
+                                  destaques.includes(atividade.id_filho) ||
+                                  destaques.length == 0
+                                    ? 1
+                                    : 0.1
+                                }
+                                align={"center"}
+                                justify={"center"}
+                                onClick={() => openDetails(atividade)}
+                                _hover={{ cursor: "pointer" }}
+                              >
+                                <CardACT
+                                  atividade={atividade}
+                                  setRefresh={setRefresh}
+                                  refresh={refresh}
+                                />
+                              </Flex>
                             </ArcherElement>
                           )
                         )}
