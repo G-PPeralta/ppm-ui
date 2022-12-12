@@ -84,25 +84,47 @@ export function ActivitiesPrecedents() {
     requestHandler();
   }, [refresh]);
 
+  // const openDetails = (atividade: any) => {
+  //   const newDest = atividade.precedentesId.map(
+  //     (val: any) => val.precedente_id
+  //   );
+  //   const atvLocal = atividades;
+  //   let renderList = newDest;
+  //   if (renderList[0] != 0) {
+  //     for (let index = 0; index < renderList.length; index++) {
+  //       const element = renderList[index];
+  //       const listaLocal = atvLocal.filter((val2) => val2.id_filho == element);
+  //       if (listaLocal[0]) {
+  //         renderList = renderList.concat(
+  //           listaLocal[0].precedentesId.map((val3: any) => val3.precedente_id)
+  //         );
+  //       }
+  //     }
+  //   }
+  //   renderList.push(atividade.id_filho);
+  //   console.log("renderList", renderList);
+  //   setDestaques(renderList);
+  // };
+
   const openDetails = (atividade: any) => {
-    const newDest = atividade.precedentesId.map(
-      (val: any) => val.precedente_id
-    );
-    const atvLocal = atividades;
-    let renderList = newDest;
-    if (renderList[0] != 0) {
-      for (let index = 0; index < renderList.length; index++) {
-        const element = renderList[index];
-        const listaLocal = atvLocal.filter((val2) => val2.id_filho == element);
-        if (listaLocal[0]) {
-          renderList = renderList.concat(
-            listaLocal[0].precedentesId.map((val3: any) => val3.precedente_id)
-          );
+    if (destaques.includes(atividade.id_filho)) {
+      setDestaques([]);
+    } else {
+      const atvLocal = atividades;
+      const filtered = atvLocal.filter((val: any) => {
+        const predIds = val.precedentesId.map(
+          (pred: any) => pred.precedente_id
+        );
+        if (predIds.length > 0) {
+          return predIds.includes(atividade.id_filho);
+        } else {
+          return false;
         }
-      }
+      });
+      const renderList = filtered.map((val: any) => val.id_filho);
+      renderList.push(atividade.id_filho);
+      setDestaques(renderList);
     }
-    renderList.push(atividade.id_filho);
-    setDestaques(renderList);
   };
 
   const getAreabyIdTarget = (
@@ -276,46 +298,50 @@ export function ActivitiesPrecedents() {
                                       index
                                     ),
                                     style: {
-                                      strokeColor: destaques.includes(
-                                        atividade.id_filho
-                                      )
-                                        ? "#0000ff"
-                                        : "#000000",
-                                      strokeWidth: destaques.includes(
-                                        atividade.id_filho
-                                      )
-                                        ? 1.5
-                                        : 1,
+                                      strokeColor:
+                                        (destaques.includes(
+                                          atividade.id_filho
+                                        ) &&
+                                          destaques[destaques.length - 1] !=
+                                            atividade.id_filho) ||
+                                        destaques.length == 0
+                                          ? "#000000"
+                                          : "#00000000",
+                                      strokeWidth: 1,
                                     },
                                   };
                                   return item;
                                 }
                               )}
                             >
-                              <Flex
-                                key={index}
-                                direction={"column"}
-                                opacity={
-                                  destaques.includes(atividade.id_filho)
-                                    ? 1
-                                    : 0.5
-                                }
-                                shadow={
-                                  destaques.includes(atividade.id_filho)
-                                    ? "xl"
-                                    : undefined
-                                }
-                                align={"center"}
-                                justify={"center"}
-                                onClick={() => openDetails(atividade)}
-                                _hover={{ cursor: "pointer" }}
-                              >
-                                <CardACT
-                                  atividade={atividade}
-                                  setRefresh={setRefresh}
-                                  refresh={refresh}
-                                />
-                              </Flex>
+                              {destaques.includes(atividade.id_filho) ||
+                              destaques.length == 0 ? (
+                                <Flex
+                                  key={index}
+                                  direction={"column"}
+                                  opacity={1}
+                                  align={"center"}
+                                  justify={"center"}
+                                  onClick={() => openDetails(atividade)}
+                                  _hover={{ cursor: "pointer" }}
+                                >
+                                  <CardACT
+                                    atividade={atividade}
+                                    setRefresh={setRefresh}
+                                    refresh={refresh}
+                                  />
+                                </Flex>
+                              ) : (
+                                <Flex
+                                  key={index}
+                                  direction={"column"}
+                                  opacity={1}
+                                  align={"center"}
+                                  justify={"center"}
+                                  onClick={() => openDetails(atividade)}
+                                  _hover={{ cursor: "pointer" }}
+                                ></Flex>
+                              )}
                             </ArcherElement>
                           )
                         )}
