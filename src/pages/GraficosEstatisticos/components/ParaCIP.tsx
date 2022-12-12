@@ -1,18 +1,31 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 
 import { Box, Flex, Stack, Text, useBreakpointValue } from "@chakra-ui/react";
+import { CIP } from "interfaces/GraficoCIP";
 
 import StackedBarChart from "components/StackedBarChartGraphic";
 
 import { getGraficoParaCIP } from "services/get/GraficosEstatisticos";
+interface Props {
+  de: string;
+  ate: string;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: boolean;
+}
 
-export function GraficoCIP({ de, ate, refresh, setRefresh }: any) {
-  const [chartData, setChartData] = useState<any[]>([]);
+interface Params {
+  de: string;
+  a: string;
+  sonda: string;
+}
+
+export function GraficoCIP({ de, ate, refresh, setRefresh }: Props) {
+  const [chartData, setChartData] = useState<CIP[]>([]);
 
   const dataEntries2 = [{ name: "Taxa", color: "#0047BB" }];
 
   const reqGet = async () => {
-    const params: any = {};
+    const params: Params | any = {};
     if (de && ate) {
       params.de = de;
       params.a = ate;
