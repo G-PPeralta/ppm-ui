@@ -41,8 +41,8 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
     (s: any) => s.id_atividade === registerForm.values.id_atividade
   )?.flag;
 
-  // console.log("dados flag ---> ", sondaN.atividades);
-  // console.log("dados flag ---> ", flag);
+  console.log("dados flag ---> ", sondaN.atividades);
+  console.log("dados flag ---> ", flag);
 
   // para entrar no formulário para envio ao backend
   useEffect(() => {
@@ -156,7 +156,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                 stepper={false}
                 limite={1000}
                 // isDisabled={registerForm.values.inicio_real || flag === 1}
-                isDisabled={!(flag === 1)}
+                isDisabled={!(flag === 1 || flag === 0)}
               />
 
               <Flex align={"end"}>

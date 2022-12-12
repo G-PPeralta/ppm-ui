@@ -113,7 +113,7 @@ function GanttCampanha() {
       alignItems={"center"}
     >
       {props.taskData.Progress >= props.taskData.pct_plan &&
-        props.taskData.pct_real === 100 && (
+        props.taskData.pct_real > 0 && (
           <Box
             w={4}
             h={4}
