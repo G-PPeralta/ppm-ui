@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { Flex, Button, Select, FormControl } from "@chakra-ui/react";
@@ -43,6 +44,7 @@ export function ActivitiesSchedule() {
   const [loadings, setLoadings] = useState(false);
   const [intervencaoIniciada, setIntervencaoIniciada] = useState<any>(false);
   const [fase, setFase] = useState("Seleciona a Fase");
+  const [filtrou, setFiltrou] = useState(false);
 
   const filteredActivities =
     fase === "Seleciona a Fase"
@@ -94,6 +96,12 @@ export function ActivitiesSchedule() {
       }
     }, 15000);
   }, [atividades]);
+
+  useEffect(() => {
+    if (!loading && filteredActivities.length === 0) {
+      toast.error("Nenhum dado encontrado com o presente filtro de fase");
+    }
+  }, [filtrou]);
 
   return (
     <>
@@ -163,7 +171,10 @@ export function ActivitiesSchedule() {
                       id="fase"
                       name="fase"
                       value={fase}
-                      onChange={(event) => setFase(event.target.value)}
+                      onChange={(event) => {
+                        setFase(event.target.value);
+                        setFiltrou(!filtrou);
+                      }}
                     >
                       <option style={{ color: "black" }}>
                         Seleciona a Fase
