@@ -85,55 +85,48 @@ export function ActivitiesPrecedents() {
   }, [refresh]);
 
   const openDetails = (atividade: any) => {
-    const newDest = atividade.precedentesId.map(
-      (val: any) => val.precedente_id
-    );
-    const atvLocal = atividades;
-    let renderList = newDest;
-    if (renderList[0] != 0) {
-      for (let index = 0; index < renderList.length; index++) {
-        const element = renderList[index];
-        const listaLocal = atvLocal.filter((val2) => val2.id_filho == element);
-        if (listaLocal[0]) {
-          renderList = renderList.concat(
-            listaLocal[0].precedentesId.map((val3: any) => val3.precedente_id)
-          );
+    if (destaques.includes(atividade.id_filho)) {
+      setDestaques([]);
+    } else {
+      const atvLocal = atividades;
+      const filtered = atvLocal.filter((val: any) => {
+        const predIds = val.precedentesId.map(
+          (pred: any) => pred.precedente_id
+        );
+        if (predIds.length > 0) {
+          return predIds.includes(atividade.id_filho);
+        } else {
+          return false;
         }
-      }
+      });
+      const renderList = filtered.map((val: any) => val.id_filho);
+      renderList.push(atividade.id_filho);
+      setDestaques(renderList);
     }
-    renderList.push(atividade.id_filho);
-    setDestaques(renderList);
   };
 
   const getAreabyIdTarget = (
     precedenteId: string,
-    currentArea: string,
-    currentIndex: number
+    atividadeId: string
   ): AnchorPositionType => {
-    let area = "";
-    let areaIndex = 0;
-    let currentAreaIndex = 0;
-    let index = 0;
-    for (const pay in data) {
-      if (data[pay].area == currentArea) {
-        currentAreaIndex = Number(pay);
-      }
-      for (const atividade in data[pay].atividades) {
-        if (data[pay].atividades[atividade].id_filho == precedenteId) {
-          area = data[pay].area;
-          areaIndex = Number(pay);
-          index = Number(atividade);
-        }
-      }
+    const atv = document.getElementById(atividadeId);
+    let rectATV = { x: 0, y: 0 };
+    if (atv) {
+      rectATV = atv.getBoundingClientRect();
     }
-    if (area == currentArea) {
-      if (index < currentIndex) {
-        return "right";
-      } else {
+    const pre = document.getElementById(precedenteId);
+    let rectPRE = { x: 0, y: 0 };
+    if (pre) {
+      rectPRE = pre.getBoundingClientRect();
+    }
+    if (rectATV.y == rectPRE.y) {
+      if (rectATV.x < rectPRE.x) {
         return "left";
+      } else {
+        return "right";
       }
     } else {
-      if (areaIndex < currentAreaIndex) {
+      if (rectATV.y > rectPRE.y) {
         return "bottom";
       } else {
         return "top";
@@ -143,33 +136,26 @@ export function ActivitiesPrecedents() {
 
   const getAreabyIdSource = (
     precedenteId: string,
-    currentArea: string,
-    currentIndex: number
+    atividadeId: string
   ): AnchorPositionType => {
-    let area = "";
-    let areaIndex = 0;
-    let currentAreaIndex = 0;
-    let index = 0;
-    for (const pay in data) {
-      if (data[pay].area == currentArea) {
-        currentAreaIndex = Number(pay);
-      }
-      for (const atividade in data[pay].atividades) {
-        if (data[pay].atividades[atividade].id_filho == precedenteId) {
-          area = data[pay].area;
-          areaIndex = Number(pay);
-          index = Number(atividade);
-        }
-      }
+    const atv = document.getElementById(atividadeId);
+    let rectATV = { x: 0, y: 0 };
+    if (atv) {
+      rectATV = atv.getBoundingClientRect();
     }
-    if (area == currentArea) {
-      if (index < currentIndex) {
-        return "left";
-      } else {
+    const pre = document.getElementById(precedenteId);
+    let rectPRE = { x: 0, y: 0 };
+    if (pre) {
+      rectPRE = pre.getBoundingClientRect();
+    }
+    if (rectATV.y == rectPRE.y) {
+      if (rectATV.x < rectPRE.x) {
         return "right";
+      } else {
+        return "left";
       }
     } else {
-      if (areaIndex < currentAreaIndex) {
+      if (rectATV.y > rectPRE.y) {
         return "top";
       } else {
         return "bottom";
@@ -267,25 +253,23 @@ export function ActivitiesPrecedents() {
                                     targetId: String(precedente.precedente_id),
                                     targetAnchor: getAreabyIdTarget(
                                       String(precedente.precedente_id),
-                                      area.area,
-                                      index
+                                      String(atividade.id_filho)
                                     ),
                                     sourceAnchor: getAreabyIdSource(
                                       String(precedente.precedente_id),
-                                      area.area,
-                                      index
+                                      String(atividade.id_filho)
                                     ),
                                     style: {
-                                      strokeColor: destaques.includes(
-                                        atividade.id_filho
-                                      )
-                                        ? "#0000ff"
-                                        : "#000000",
-                                      strokeWidth: destaques.includes(
-                                        atividade.id_filho
-                                      )
-                                        ? 1.5
-                                        : 1,
+                                      strokeColor:
+                                        (destaques.includes(
+                                          atividade.id_filho
+                                        ) &&
+                                          destaques[destaques.length - 1] !=
+                                            atividade.id_filho) ||
+                                        destaques.length == 0
+                                          ? "#000000"
+                                          : "#00000000",
+                                      strokeWidth: 1,
                                     },
                                   };
                                   return item;
@@ -293,17 +277,14 @@ export function ActivitiesPrecedents() {
                               )}
                             >
                               <Flex
+                                id={atividade.id_filho}
                                 key={index}
                                 direction={"column"}
                                 opacity={
-                                  destaques.includes(atividade.id_filho)
+                                  destaques.includes(atividade.id_filho) ||
+                                  destaques.length == 0
                                     ? 1
-                                    : 0.5
-                                }
-                                shadow={
-                                  destaques.includes(atividade.id_filho)
-                                    ? "xl"
-                                    : undefined
+                                    : 0.1
                                 }
                                 align={"center"}
                                 justify={"center"}
