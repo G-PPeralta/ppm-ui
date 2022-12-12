@@ -30,12 +30,19 @@ import CadastrarLicoesAprendidasModal from "./CadastrarLicoesAprendidasModal";
 import EditarLicoesAprendidasModal from "./EditarLicoesAprendidasModal";
 import TabelaLicoesAprendidas from "./TabelaLicoesAprendidas";
 
+interface Props {
+  licoes: LicoesAprendidasNew[];
+  callBack: () => void;
+  setLicoes: () => void;
+  categorias: [];
+}
+
 function LicoesAprendidasModal({
   licoes,
   setLicoes,
   categorias,
   callBack,
-}: any) {
+}: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { toast } = useToast();
   const [editLicao, setEditLicao] = useState({} as LicoesAprendidasNew);
@@ -76,10 +83,10 @@ function LicoesAprendidasModal({
   function handleFilter() {
     if (categoriaId || data) {
       const filter = licoes
-        .filter((lic: any) =>
+        .filter((lic: LicoesAprendidasNew) =>
           lic.licao_aprendida.toUpperCase().includes(categoriaId.toUpperCase())
         )
-        .filter((lic: any) => lic.data.includes(data));
+        .filter((lic: LicoesAprendidasNew) => lic.data.includes(data));
 
       setFilteredTable(filter);
     } else {

@@ -25,9 +25,9 @@ import { LicoesAprendidas } from "interfaces/Services";
 import { useAuth } from "hooks/useAuth";
 
 interface EditModalProps {
-  closeModal: any;
+  closeModal: () => void;
   licao: LicoesAprendidas;
-  handleUpdateLicoes: any;
+  handleUpdateLicoes: Function;
   isOpen: boolean;
 }
 

@@ -27,11 +27,17 @@ import { useAuth } from "hooks/useAuth";
 
 import { postLicaoAprendida } from "services/post/AdicionarLicaoAprendida";
 
+interface CadasProps {
+  closeModal: () => void;
+  onCloseModal: () => void;
+  callBack: () => void;
+}
+
 function CadastrarLicoesAprendidasModal({
   closeModal,
   onCloseModal,
   callBack,
-}: any) {
+}: CadasProps) {
   const { id } = useParams();
   const [licaoAprendida, setLicaoAprendida] = useState("");
   const [acao, setAcao] = useState("");

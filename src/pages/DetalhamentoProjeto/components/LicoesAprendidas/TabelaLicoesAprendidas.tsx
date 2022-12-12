@@ -42,8 +42,6 @@ function TabelaLicoesAprendidas({
     setTo,
   };
 
-  // console.log({ licoes });
-
   function Body() {
     return (
       <>
@@ -51,7 +49,7 @@ function TabelaLicoesAprendidas({
           licoes
             .sort((a, b) => a.id - b.id)
             .slice(from, to)
-            .map((lessons: any, index: any) => (
+            .map((lessons: LicoesAprendidasNew, index: number) => (
               <Tr key={index}>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   {lessons.id}
