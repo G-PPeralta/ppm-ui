@@ -125,10 +125,20 @@ function ModalEditarAtividade({
     setFimPlanejado(fim);
 
     if (atividade.inicioreal !== null) {
-      setInicioReal(new Date(atividade.inicioreal).getTime() + 3 * 3600 * 1000);
+      // console.log("dados dt real --> ", atividade.inicioreal);
+      let dat_ini_real =
+        new Date(atividade.inicioreal).getTime() + 3 * 3600 * 1000;
+      dat_ini_real = new Date(dat_ini_real).setHours(9, 0, 0, 0);
+      // console.log("dados dt real --> ", new Date(dat_ini_real));
+      setInicioReal(new Date(dat_ini_real));
     }
     if (atividade.fimreal !== null) {
-      setFimReal(new Date(atividade.fimreal).getTime() + 3 * 3600 * 1000);
+      // console.log("dados dt real --> ", atividade.fimreal);
+      let dat_fim_real =
+        new Date(atividade.fimreal).getTime() + 3 * 3600 * 1000;
+      dat_fim_real = new Date(dat_fim_real).setHours(18, 0, 0, 0);
+      // console.log("dados dt fim --->", new Date(dat_fim_real));
+      setFimReal(new Date(dat_fim_real));
     }
 
     // console.log(inicioReal);
@@ -222,7 +232,7 @@ function ModalEditarAtividade({
                         </Text>
                       </Flex>
                       <Input
-                        disabled
+                        disabled={false}
                         _placeholder={{ color: "#949494" }}
                         fontSize={"14px"}
                         fontWeight={"400"}
@@ -366,7 +376,7 @@ function ModalEditarAtividade({
                         </Text>
                       </Flex>
                       <Select
-                        isDisabled
+                        isDisabled={false}
                         fontSize={"14px"}
                         fontWeight={"400"}
                         h={"56px"}

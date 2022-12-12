@@ -26,7 +26,8 @@ export function GraficoPorCadaIntervencao({
   setRefresh,
 }: any) {
   const [chartData, setChartData] = useState<any[]>([]);
-
+  const [tempoTotal, setTempoTotal] = useState<any[]>([]);
+  const [intervençoes, setInterv] = useState<any[]>([]);
   // const [listaSondas, setListaSondas] = useState<any[]>([]);
 
   const dataEntries2 = [
@@ -38,38 +39,38 @@ export function GraficoPorCadaIntervencao({
     { name: "Manutenção", color: "#f4dd06" },
   ];
 
-  const intervençoes = [
-    {
-      id: 4,
-      status: "Manutenção 36hrs/36%",
-      color: "#f4dd06",
-    },
-    {
-      id: 2,
-      status: "Recurso Origem 6hrs/6%",
-      color: "#0047bb",
-    },
-    {
-      id: 5,
-      status: "Recurso Cia de Serviço 8hrs/8%",
-      color: "#778bd7",
-    },
-    {
-      id: 3,
-      status: "Condições Climáticas 10hrs/10%",
-      color: "#00b050",
-    },
-    {
-      id: 1,
-      status: "Informações Técnicas 23hrs/23%",
-      color: "#00b0f0",
-    },
-    {
-      id: 6,
-      status: "Aguardando Outros 18hrs/18%",
-      color: "#7030a0",
-    },
-  ];
+  // const intervençoes = [
+  //   {
+  //     id: 4,
+  //     status: "Manutenção 36hrs/36%",
+  //     color: "#f4dd06",
+  //   },
+  //   {
+  //     id: 2,
+  //     status: "Recurso Origem 6hrs/6%",
+  //     color: "#0047bb",
+  //   },
+  //   {
+  //     id: 5,
+  //     status: "Recurso Cia de Serviço 8hrs/8%",
+  //     color: "#778bd7",
+  //   },
+  //   {
+  //     id: 3,
+  //     status: "Condições Climáticas 10hrs/10%",
+  //     color: "#00b050",
+  //   },
+  //   {
+  //     id: 1,
+  //     status: "Informações Técnicas 23hrs/23%",
+  //     color: "#00b0f0",
+  //   },
+  //   {
+  //     id: 6,
+  //     status: "Aguardando Outros 18hrs/18%",
+  //     color: "#7030a0",
+  //   },
+  // ];
 
   const reqGet = async () => {
     const params: any = {};
@@ -89,6 +90,18 @@ export function GraficoPorCadaIntervencao({
       "Aguardando Outros": Number(e.hrs_outros),
     }));
 
+    const dataTempo = res.data.map((dados) => ({
+      tempoTotal: dados.hrs_total,
+      hrs_recursos_origem: dados.hrs_recursos_origem,
+      hrs_recursos_cia: dados.hrs_recursos_cia,
+      hrs_mudanca_climatica: dados.hrs_mudanca_climatica,
+      hrs_info_tecnicas: dados.hrs_info_tecnicas,
+      hrs_hrs_outros: dados.hrs_outros,
+      intervencao: dados.intervencao,
+    }));
+
+    setInterv(dataTempo[0].intervencao[0]);
+    setTempoTotal(dataTempo);
     setChartData(newData);
   };
 
@@ -161,7 +174,9 @@ export function GraficoPorCadaIntervencao({
                   TEMPO TOTAL AGUARDADO:
                 </Text>
                 <Text fontSize={"20px"} fontWeight={"700"} color={"#2D2926"}>
-                  100 HORAS
+                  {tempoTotal.map((tempo, index) => (
+                    <Text>{tempo.tempoTotal} HORAS</Text>
+                  ))}
                 </Text>
               </Flex>
 
