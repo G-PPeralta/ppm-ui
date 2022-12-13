@@ -175,7 +175,7 @@ export default function TotalProjetosComponent() {
               <Flex
                 px={1}
                 py={5}
-                bg={"#0047BB"}
+                bg={"#6886B6"}
                 sx={{ width: "36px", borderRadius: "2px" }}
                 flex={1}
                 justify={"center"}
@@ -202,7 +202,7 @@ export default function TotalProjetosComponent() {
                 <Flex gap={1} flex={1} align={"center"}>
                   <Text
                     p={1}
-                    bg={"#649efd"}
+                    bg={"#9EE09E"}
                     sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                     color="#ffffff"
                   >
@@ -220,7 +220,7 @@ export default function TotalProjetosComponent() {
                 <Flex gap={1} flex={1} align={"center"}>
                   <Text
                     p={1}
-                    bg={"#4d87e5"}
+                    bg={"#9EC1CF"}
                     sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                     color="#ffffff"
                   >
@@ -238,7 +238,7 @@ export default function TotalProjetosComponent() {
                 <Flex gap={1} flex={1} align={"center"}>
                   <Text
                     p={1}
-                    bg={"#3771d1"}
+                    bg={"#FF6663"}
                     sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                     color="#ffffff"
                   >
@@ -371,7 +371,7 @@ export default function TotalProjetosComponent() {
                   }}
                   color="#9FA2B4"
                 >
-                  Prioridade alta
+                  Alta
                 </Text>
                 <Text
                   sx={{
@@ -379,7 +379,7 @@ export default function TotalProjetosComponent() {
                     fontWeight: "600",
                     alignSelf: "center",
                   }}
-                  color="#1FBE55"
+                  color="#9EE09E"
                 >
                   {prioridadeAlta}
                 </Text>
@@ -399,9 +399,9 @@ export default function TotalProjetosComponent() {
                     fontWeight: "600",
                     alignSelf: "center",
                   }}
-                  color="#9FA2B4"
+                  color="#FEB144"
                 >
-                  Prioridade média
+                  Média
                 </Text>
                 <Text
                   sx={{
@@ -429,9 +429,9 @@ export default function TotalProjetosComponent() {
                     fontWeight: "600",
                     alignSelf: "center",
                   }}
-                  color="#9FA2B4"
+                  color="#FF6663"
                 >
-                  Prioridade baixa
+                  Baixa
                 </Text>
                 <Text
                   sx={{
@@ -469,7 +469,7 @@ export default function TotalProjetosComponent() {
                   }}
                   color="#9FA2B4"
                 >
-                  Prioridade alta
+                  Alta
                 </Text>
                 <Text
                   sx={{
@@ -499,7 +499,7 @@ export default function TotalProjetosComponent() {
                   }}
                   color="#9FA2B4"
                 >
-                  Prioridade média
+                  Média
                 </Text>
                 <Text
                   sx={{
@@ -529,7 +529,7 @@ export default function TotalProjetosComponent() {
                   }}
                   color="#9FA2B4"
                 >
-                  Prioridade baixa
+                  Baixa
                 </Text>
                 <Text
                   sx={{

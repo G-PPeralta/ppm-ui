@@ -82,21 +82,43 @@ export default function RealizadoComponent() {
               sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
-              {!loading && valorRealizado === 0
-                ? "R$ 0,00"
-                : valorRealizado
+              {!loading && valorRealizado === 0 ? (
+                <p>
+                  R$ <span style={{ color: "#9EC1CF" }}>0,00</span>
+                </p>
+              ) : (
+                <div>
+                  {valorRealizado
                     .toLocaleString("pt-BR", {
                       style: "currency",
                       currency: "BRL",
                     })
-                    .split(",")[0]}
+                    .split(",")[0]
+                    .substring(0, 2)}
+                  <span style={{ color: "#9EC1CF" }}>
+                    {valorRealizado
+                      .toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })
+                      .split(",")[0]
+                      .substring(2)}
+                  </span>
+                </div>
+              )}
             </Text>
           </Box>
         </Box>
-        <Box
+        <Flex
           justifyContent="center"
+          borderRadius="2px"
+          flexDir={"row"}
           alignItems="center"
-          bg={"#194367"}
+          bg={"#9EC1CF"}
+          h="48px"
+          w="62px"
+          p="8px"
+          gap="8px"
           sx={{ height: "100%", alignItems: "center", borderRadius: "2px" }}
         >
           <Text
@@ -110,9 +132,9 @@ export default function RealizadoComponent() {
             isNaN(Number(orcamento))
               ? 0
               : ((Number(totalRealizado) / Number(orcamento)) * 100).toFixed(2)} */}
-            {!loading && porcentagemRealizado.toFixed(2).replace(".", ",")}%
+            {!loading && porcentagemRealizado.toFixed(0).replace(".", ",")}%
           </Text>
-        </Box>
+        </Flex>
       </Box>
     </Flex>
   );

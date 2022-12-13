@@ -84,19 +84,41 @@ export default function NaoPrevistoComponent() {
               sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
-              {!loading && valorNaoPrevisto <= 0
-                ? Math.abs(valorNaoPrevisto).toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  })
-                : "R$ 0,00"}
+              {!loading && valorNaoPrevisto <= 0 ? (
+                <p>
+                  {Math.abs(valorNaoPrevisto)
+                    .toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    })
+                    .substring(0, 2)}
+                  <span style={{ color: "#FF6663" }}>
+                    {Math.abs(valorNaoPrevisto)
+                      .toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })
+                      .substring(2)}
+                  </span>
+                </p>
+              ) : (
+                <p>
+                  R$ <span style={{ color: "#FF6663" }}>0,00</span>
+                </p>
+              )}
             </Text>
           </Box>
         </Box>
-        <Box
+        <Flex
           justifyContent="center"
+          borderRadius="2px"
+          flexDir={"row"}
           alignItems="center"
-          bg={valorNaoPrevisto > 0 ? "#F94144" : "#27852a"}
+          bg={"#FF6663"}
+          h="48px"
+          w="62px"
+          p="8px"
+          gap="8px"
           sx={{ height: "100%", alignItems: "center", borderRadius: "2px" }}
         >
           <Text
@@ -113,9 +135,9 @@ export default function NaoPrevistoComponent() {
                   (Number(totalNaoPrevisto) / Number(totalOrcamento)) *
                   100
                 ).toFixed(2)} */}
-            {!loading && porcentagemNaoPrevisto.toFixed(2).replace(".", ",")}%
+            {!loading && porcentagemNaoPrevisto.toFixed(0).replace(".", ",")}%
           </Text>
-        </Box>
+        </Flex>
       </Box>
     </Flex>
   );

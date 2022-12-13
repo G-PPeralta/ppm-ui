@@ -1,5 +1,6 @@
 // import { useEffect, useState } from "react";
 
+import { useState } from "react";
 import { AiOutlineRise } from "react-icons/ai";
 
 import {
@@ -35,6 +36,7 @@ export default function TotalOrcamentosComponent() {
 
   // const valorFormatado = totalOrcamento.toLocaleString();
   const { loading, valorTotalOrcamento } = useDashboard();
+  const [colour, setColour] = useState("#FEFEFE");
 
   const vlrATratar = valorTotalOrcamento * 1;
   const vlrTratado = vlrATratar
@@ -69,7 +71,7 @@ export default function TotalOrcamentosComponent() {
             sx={{ fontSize: 16, fontWeight: "bold", alignSelf: "center" }}
             color="#000000"
           >
-            Total do Orçamento
+            Total de Orçamento
           </Text>
           <Box sx={{ display: "flex" }}>
             {/* <Text
@@ -83,12 +85,36 @@ export default function TotalOrcamentosComponent() {
               sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
               color="#000000"
             >
-              {!loading && valorTotalOrcamento === 0 ? "R$ 0,00" : vlrTratado}
+              {!loading && valorTotalOrcamento === 0 ? (
+                <p>
+                  R$ <span style={{ color: "#9EE09E" }}>0,00</span>
+                </p>
+              ) : (
+                <div>
+                  {vlrTratado.substring(0, 2)}
+                  <span style={{ color: "#9EE09E" }}>
+                    {vlrTratado.substring(2)}
+                  </span>
+                </div>
+              )}
             </Text>
           </Box>
         </Box>
-        <Box sx={{ height: "100%", alignItems: "center" }}>
-          <AiOutlineRise color="#93E01B" size={50} />
+        <Box
+          // sx={{ height: "100%", alignItems: "center" }}
+          style={{
+            background: "#9EE09E",
+            width: "62px",
+            height: "48px",
+            left: "266px",
+          }}
+        >
+          <AiOutlineRise
+            color={colour}
+            size={50}
+            onMouseEnter={() => setColour("#5E94F6")}
+            onMouseLeave={() => setColour("#FEFEFE")}
+          />
         </Box>
       </Box>
     </Flex>
