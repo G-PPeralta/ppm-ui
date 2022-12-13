@@ -98,7 +98,12 @@ export default function NaoPrevistoComponent() {
         <Box w={"100%"}>
           <Text
             mb={3}
-            sx={{ fontSize: 18, fontWeight: "bold", alignSelf: "center" }}
+            sx={{
+              fontSize: 18,
+              fontWeight: "700",
+              fontFamily: "Mulish",
+              alignSelf: "center",
+            }}
             color="#000000"
           >
             Projetos
@@ -170,7 +175,7 @@ export default function NaoPrevistoComponent() {
                           alignItems={"center"}
                           pt={"2px"}
                           sx={{ borderRadius: "100%" }}
-                          style={{ backgroundColor: "#008000" }}
+                          style={{ backgroundColor: "#9EE09E" }}
                         >
                           <AiOutlineCaretUp color="white" size={14} />
                         </Box>
@@ -184,7 +189,7 @@ export default function NaoPrevistoComponent() {
                           alignItems={"center"}
                           pt={"2px"}
                           sx={{ borderRadius: "100%" }}
-                          style={{ backgroundColor: "red" }}
+                          style={{ backgroundColor: "#FF6663" }}
                         >
                           <AiOutlineCaretUp color="white" size={14} />
                         </Box>
@@ -201,7 +206,7 @@ export default function NaoPrevistoComponent() {
                           alignItems={"center"}
                           pt={"2px"}
                           sx={{ borderRadius: "100%" }}
-                          style={{ backgroundColor: "#008000" }}
+                          style={{ backgroundColor: "#9EE09E" }}
                         >
                           <AiOutlineCaretUp color="white" size={14} />
                         </Box>
@@ -215,7 +220,7 @@ export default function NaoPrevistoComponent() {
                           alignItems={"center"}
                           pt={"2px"}
                           sx={{ borderRadius: "100%" }}
-                          style={{ backgroundColor: "red" }}
+                          style={{ backgroundColor: "#FF6663" }}
                         >
                           <AiOutlineCaretUp color="white" size={14} />
                         </Box>

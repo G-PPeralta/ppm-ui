@@ -52,7 +52,7 @@ export default function PieChartComponent({
         justifyContent="center"
       >
         {upDown ? (
-          <AiOutlineCaretUp color="#93E01B" size={10} />
+          <AiOutlineCaretUp color="#9EC1CF" size={10} />
         ) : (
           <AiOutlineCaretDown color="#F94144" size={10} />
         )}
