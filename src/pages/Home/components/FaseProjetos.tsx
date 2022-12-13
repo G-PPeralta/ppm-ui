@@ -11,8 +11,13 @@ import PieChart from "components/PieChart";
 
 import { getGates } from "services/get/Dashboard";
 
+interface Data {
+  name: string;
+  value: number;
+}
+
 export default function NaoPrevistoComponent() {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<Data[]>([]);
 
   const getData = async () => {
     const gates = await getGates();
@@ -35,6 +40,15 @@ export default function NaoPrevistoComponent() {
   //   { name: "Reprogramados", color: "#1048a4" },
   //   { name: "Pré_Aprovação", color: "#FEB144" },
   // ];
+
+  //   const engenhariaData =
+  //   data && data.filter((x) => x.name === "Engenharia")[0].value.toFixed(1);
+  // const cMData =
+  //   data && data.filter((x) => x.name === "C&M")[0].value.toFixed(1);
+  // const suprimentosData =
+  //   data && data.filter((x) => x.name === "C&M")[0].value.toFixed(1);
+  // const preProjetoData =
+  //   data && data.filter((x) => x.name === "C&M")[0].value.toFixed(1);
 
   const grafData = [
     {

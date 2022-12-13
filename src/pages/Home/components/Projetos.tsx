@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { AiOutlineCaretUp } from "react-icons/ai";
+import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
 
 import {
   Box,
@@ -190,8 +190,11 @@ export default function NaoPrevistoComponent() {
                           pt={"2px"}
                           sx={{ borderRadius: "100%" }}
                           style={{ backgroundColor: "#FF6663" }}
+                          textAlign={"center"}
+                          alignContent={"center"}
+                          justifyContent={"center"}
                         >
-                          <AiOutlineCaretUp color="white" size={14} />
+                          <AiOutlineCaretDown color="white" size={14} />
                         </Box>
                       )}
                     </Th>
@@ -221,8 +224,11 @@ export default function NaoPrevistoComponent() {
                           pt={"2px"}
                           sx={{ borderRadius: "100%" }}
                           style={{ backgroundColor: "#FF6663" }}
+                          textAlign={"center"}
+                          alignContent={"center"}
+                          justifyContent={"center"}
                         >
-                          <AiOutlineCaretUp color="white" size={14} />
+                          <AiOutlineCaretDown color="white" size={14} />
                         </Box>
                       )}
                     </Th>
