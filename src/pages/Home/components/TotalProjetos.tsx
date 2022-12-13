@@ -271,7 +271,7 @@ export default function TotalProjetosComponent() {
                   <Text
                     p={1}
                     sx={{ fontSize: 14, fontWeight: "600" }}
-                    color="#F94144"
+                    color="#FEB144"
                   >
                     {total === 0
                       ? 0
