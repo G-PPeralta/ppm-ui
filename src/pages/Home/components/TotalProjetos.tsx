@@ -209,7 +209,7 @@ export default function TotalProjetosComponent() {
               >
                 <Flex gap={1} flex={1}>
                   <Text
-                    p={1}
+                    p={3}
                     bg={"#9EE09E"}
                     sx={{
                       fontSize: 14,
@@ -231,7 +231,7 @@ export default function TotalProjetosComponent() {
 
                 <Flex gap={1} flex={1}>
                   <Text
-                    p={1}
+                    p={3}
                     bg={"#9EC1CF"}
                     sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                     color="#ffffff"
@@ -249,7 +249,7 @@ export default function TotalProjetosComponent() {
 
                 <Flex gap={1} flex={1}>
                   <Text
-                    p={1}
+                    p={3}
                     bg={"#FF6663"}
                     sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                     color="#ffffff"
@@ -267,7 +267,7 @@ export default function TotalProjetosComponent() {
 
                 <Flex gap={1} flex={1}>
                   <Text
-                    p={1}
+                    p={3}
                     bg={"#FEB144"}
                     sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                     color="#ffffff"
