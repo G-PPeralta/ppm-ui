@@ -23,7 +23,7 @@ import {
   Pocos,
   Tarefas,
 } from "interfaces/CadastrosModaisInfograficos";
-import { Operacao } from "interfaces/Estatisticas";
+// import { Operacao } from "interfaces/Estatisticas";
 import { Sonda, Status } from "interfaces/Infograficos";
 import { Responsavel } from "interfaces/Services";
 
@@ -40,7 +40,7 @@ type Props = {
   listas: {
     listaAreaAtuacao: AreaAtuacao[];
     listaResponsaveis: Responsavel[];
-    listaOperacao: Operacao[];
+    // listaOperacao: Operacao[];
     listaSondas: Sonda[];
     listaTarefas: Tarefas[];
     listaPocos: Pocos[];
