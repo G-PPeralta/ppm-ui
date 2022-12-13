@@ -18,6 +18,14 @@ import {
   Text,
   ModalCloseButton,
 } from "@chakra-ui/react";
+import {
+  AreaAtuacao,
+  Pocos,
+  Tarefas,
+} from "interfaces/CadastrosModaisInfograficos";
+import { Operacao } from "interfaces/Estatisticas";
+import { Sonda, Status } from "interfaces/Infograficos";
+import { Responsavel } from "interfaces/Services";
 
 import { handleCancelar } from "utils/handleCadastro";
 import { statusProjeto } from "utils/validateDate";
@@ -29,7 +37,14 @@ import SelectFiltragem from "../../../components/SelectFiltragem";
 type Props = {
   refresh: boolean;
   setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
-  listas: any;
+  listas: {
+    listaAreaAtuacao: AreaAtuacao[];
+    listaResponsaveis: Responsavel[];
+    listaOperacao: Operacao[];
+    listaSondas: Sonda[];
+    listaTarefas: Tarefas[];
+    listaPocos: Pocos[];
+  };
   registerForm: any;
 };
 
@@ -44,7 +59,7 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
     listaSondas,
   } = listas;
 
-  const areaAtuacaoOptions = listaAreaAtuacao.map((area: any) => ({
+  const areaAtuacaoOptions = listaAreaAtuacao.map((area: AreaAtuacao) => ({
     value: area.id,
     label: area.tipo,
   }));
@@ -54,22 +69,24 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
     label: poco.poco,
   }));
 
-  const tarefaOptions = listaTarefas.map((tarefa: any) => ({
+  const tarefaOptions = listaTarefas.map((tarefa: Tarefas) => ({
     value: tarefa.id,
     label: tarefa.nom_atividade,
   }));
 
-  const responsavelOptions = listaResponsaveis.map((responsavel: any) => ({
-    value: responsavel.id,
-    label: responsavel.nome,
-  }));
+  const responsavelOptions = listaResponsaveis.map(
+    (responsavel: Responsavel) => ({
+      value: responsavel.id,
+      label: responsavel.nome,
+    })
+  );
 
-  const sondaOptions = listaSondas.map((sonda: any) => ({
+  const sondaOptions = listaSondas.map((sonda: Sonda) => ({
     value: sonda.id_campanha,
     label: sonda.sonda,
   }));
 
-  const statusProjetosOptions = statusProjeto.map((status: any) => ({
+  const statusProjetosOptions = statusProjeto.map((status: Status) => ({
     value: status.id,
     label: status.status,
   }));

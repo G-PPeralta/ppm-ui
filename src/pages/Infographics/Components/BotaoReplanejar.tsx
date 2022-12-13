@@ -17,7 +17,7 @@ import {
 // import { TextError } from "components/TextError";
 
 interface Props {
-  execute: any;
+  execute: Function;
 }
 
 function BotaoReplanejar({ execute }: Props) {

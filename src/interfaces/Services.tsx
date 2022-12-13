@@ -354,6 +354,7 @@ export interface RegistroResponsavel {
 }
 
 export interface Responsavel {
+  id?: number;
   nome: string;
 }
 
