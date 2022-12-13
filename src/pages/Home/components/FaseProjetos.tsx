@@ -11,8 +11,13 @@ import PieChart from "components/PieChart";
 
 import { getGates } from "services/get/Dashboard";
 
+interface Data {
+  name: string;
+  value: number;
+}
+
 export default function NaoPrevistoComponent() {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<Data[]>([]);
 
   const getData = async () => {
     const gates = await getGates();
@@ -27,35 +32,44 @@ export default function NaoPrevistoComponent() {
   const innerWidth = window.innerWidth;
 
   // const dataEntries = [
-  //   { name: "Iniciados", color: "#649efd" },
+  //   { name: "Iniciados", color: "#9EC1CF" },
   //   { name: "Finalizados", color: "#4d87e5" },
-  //   { name: "Cancelados", color: "#3771d1" },
+  //   { name: "Cancelados", color: "#9EE09E" },
   //   { name: "Holds", color: "#2762c2" },
   //   { name: "Não_Iniciados", color: "#1954b4" },
   //   { name: "Reprogramados", color: "#1048a4" },
-  //   { name: "Pré_Aprovação", color: "#003a9a" },
+  //   { name: "Pré_Aprovação", color: "#FEB144" },
   // ];
+
+  //   const engenhariaData =
+  //   data && data.filter((x) => x.name === "Engenharia")[0].value.toFixed(1);
+  // const cMData =
+  //   data && data.filter((x) => x.name === "C&M")[0].value.toFixed(1);
+  // const suprimentosData =
+  //   data && data.filter((x) => x.name === "C&M")[0].value.toFixed(1);
+  // const preProjetoData =
+  //   data && data.filter((x) => x.name === "C&M")[0].value.toFixed(1);
 
   const grafData = [
     {
       name: "Engenharia",
       value: data ? Number(data[2]?.value.toFixed(1)) : 0,
-      color: "#649efd",
+      color: "#9EC1CF",
     },
     {
       name: "C&M",
       value: data ? Number(data[3]?.value.toFixed(1)) : 0,
-      color: "#3771d1",
+      color: "#9EE09E",
     },
     {
       name: "Suprimentos",
       value: data ? Number(data[1]?.value.toFixed(1)) : 0,
-      color: "#1954b4",
+      color: "#FF6663",
     },
     {
       name: "Pré-projeto",
       value: data ? Number(data[0]?.value.toFixed(1)) : 0,
-      color: "#003a9a",
+      color: "#FEB144",
     },
   ];
 
@@ -88,7 +102,8 @@ export default function NaoPrevistoComponent() {
             mb={1}
             sx={{
               fontSize: 18,
-              fontWeight: "bold",
+              fontWeight: "700",
+              fontFamily: "Mulish",
               alignSelf: innerWidth >= 428 ? "center" : "flex-start",
             }}
             color="#000000"
@@ -101,7 +116,7 @@ export default function NaoPrevistoComponent() {
                 direction="column"
                 align={"center"}
                 w={120}
-                bg={"#3771d1"}
+                bg={"#9EE09E"}
                 py={1}
                 justify={"center"}
               >
@@ -117,7 +132,7 @@ export default function NaoPrevistoComponent() {
                 direction="column"
                 align={"center"}
                 w={120}
-                bg={"#649efd"}
+                bg={"#9EC1CF"}
                 py={1}
                 justify={"center"}
               >
@@ -133,19 +148,19 @@ export default function NaoPrevistoComponent() {
           </Flex>
           <Flex mt={5} mb={5} align={"center"} justify={"center"} flex={1}>
             <Flex h={20} justify={"space-between"} direction={"column"}>
-              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#3771d1">
+              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9EE09E">
                 {data ? data[3]?.value.toFixed(1) : 0}%
               </Text>
-              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#1954b4">
+              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#FF6663">
                 {data ? data[1]?.value.toFixed(1) : 0}%
               </Text>
             </Flex>
             {grafData && <PieChart size={136} data={grafData} />}
             <Flex h={20} justify={"space-between"} direction={"column"}>
-              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#649efd">
+              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9EC1CF">
                 {data ? data[2]?.value.toFixed(1) : 0}%
               </Text>
-              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#003a9a">
+              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#FEB144">
                 {data ? data[0]?.value.toFixed(1) : 0}%
               </Text>
             </Flex>
@@ -156,7 +171,7 @@ export default function NaoPrevistoComponent() {
                 direction="column"
                 align={"center"}
                 w={120}
-                bg={"#1954b4"}
+                bg={"#FF6663"}
                 py={1}
                 justify={"center"}
               >
@@ -172,7 +187,7 @@ export default function NaoPrevistoComponent() {
                 direction="column"
                 align={"center"}
                 w={120}
-                bg={"#003a9a"}
+                bg={"#FEB144"}
                 py={1}
                 justify={"center"}
               >
