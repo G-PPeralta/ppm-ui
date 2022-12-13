@@ -112,19 +112,20 @@ export function Gantt({
       justifyContent={"center"}
       alignItems={"center"}
     >
-      {props.taskData.Progress >= props.taskData.pct_plan && (
-        <Box
-          w={4}
-          h={4}
-          bg={"#9FA2B4"}
-          display={"flex"}
-          flexDirection="column"
-          alignItems={"center"}
-          pt={"2px"}
-          sx={{ borderRadius: "100%" }}
-          style={{ backgroundColor: "#008000" }}
-        ></Box>
-      )}
+      {props.taskData.Progress >= props.taskData.pct_plan &&
+        props.taskData.Progress > 0 && (
+          <Box
+            w={4}
+            h={4}
+            bg={"#9FA2B4"}
+            display={"flex"}
+            flexDirection="column"
+            alignItems={"center"}
+            pt={"2px"}
+            sx={{ borderRadius: "100%" }}
+            style={{ backgroundColor: "#008000" }}
+          ></Box>
+        )}
       {props.taskData.Progress < props.taskData.pct_plan && (
         <Box
           w={4}

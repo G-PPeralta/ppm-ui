@@ -145,7 +145,7 @@ function ExpandGanttModal({
       alignItems={"center"}
     >
       {props.taskData.Progress >= props.taskData.ProgressPlanejado &&
-        props.taskData.Progress === 100 && (
+        props.taskData.Progress > 0 && (
           <Box
             w={4}
             h={4}

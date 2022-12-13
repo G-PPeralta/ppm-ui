@@ -156,7 +156,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                 stepper={false}
                 limite={1000}
                 // isDisabled={registerForm.values.inicio_real || flag === 1}
-                isDisabled={!(flag === 1)}
+                isDisabled={!(flag === 1 || flag === 0)}
               />
 
               <Flex align={"end"}>
