@@ -1,9 +1,19 @@
 import { Flex, Text } from "@chakra-ui/react";
 
-function AtividadesPorStatus({ status }: any) {
+interface AtividadesPorStatusProps {
+  status: { status: string; qtde: number }[];
+}
+
+interface StatusComCor {
+  status: string;
+  qtde: number;
+  cor?: string;
+}
+
+function AtividadesPorStatus({ status }: AtividadesPorStatusProps) {
   const innerWidth = window.innerWidth;
 
-  const statusComCor = status.map((item: any) => {
+  const statusComCor: StatusComCor[] = status.map((item: StatusComCor) => {
     switch (item.status) {
       case "Não Iniciado":
         return { ...item, cor: "#585858" };
@@ -20,7 +30,7 @@ function AtividadesPorStatus({ status }: any) {
 
   return (
     <Flex>
-      {statusComCor.map((status: any, index: number) => (
+      {statusComCor.map((status: StatusComCor, index: number) => (
         <Flex
           key={index}
           align={"center"}

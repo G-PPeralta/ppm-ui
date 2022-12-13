@@ -1,6 +1,10 @@
 import { Flex, Text } from "@chakra-ui/react";
 
-function TotalAtividades({ totalAtividades }: any) {
+interface TotalAtividadesProps {
+  totalAtividades: number;
+}
+
+function TotalAtividades({ totalAtividades }: TotalAtividadesProps) {
   return (
     <Flex direction={"column"} align={"center"} justify={"center"}>
       <Text fontSize="md" fontWeight={500}>

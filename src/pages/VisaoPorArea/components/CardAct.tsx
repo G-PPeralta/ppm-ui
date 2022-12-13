@@ -6,9 +6,9 @@ import { validateDate } from "utils/validateDate";
 type Atividade = {
   atividade: string;
   comp_pct: number;
-  finalplanejado: any;
+  finalplanejado: string;
   id_poco: number;
-  inicioplanejado: any;
+  inicioplanejado: string;
   pct_plan: number;
   pct_real: number;
   qtddias: number;
@@ -17,14 +17,14 @@ type Atividade = {
   ind_status?: number;
 };
 
-type Props = {
+type CardACTProps = {
   atividade: Atividade;
   id?: any;
   setRefresh: React.Dispatch<React.SetStateAction<boolean>>; // Função para atualizar a página
   refresh: boolean;
 };
 
-function CardACT({ atividade, id, setRefresh, refresh }: Props) {
+function CardACT({ atividade, id, setRefresh, refresh }: CardACTProps) {
   const dataInicioFormatada = atividade.inicioplanejado;
   const dataFinalFormatada = atividade.finalplanejado;
   // const dataInicioFormatada = formatDate(new Date(atividade.inicioplanejado));
