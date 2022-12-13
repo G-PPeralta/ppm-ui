@@ -45,13 +45,21 @@ import SelectFiltragem from "../../../components/SelectFiltragem";
 import AtividadesCadastroIntervencao from "./AtividadesCadastroIntervencao";
 // import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
 
+type Props = {
+  idCampanha: number;
+  data: any;
+  setRefresh: Function;
+  refresh: boolean;
+  listaServicosPocos: any[];
+};
+
 function ModalCadastroIntervencao({
   idCampanha,
   data,
   refresh,
   setRefresh,
   listaServicosPocos,
-}: any) {
+}: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     registerForm,

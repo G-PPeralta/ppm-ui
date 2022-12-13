@@ -15,7 +15,10 @@ import {
   Text,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { Responsavel } from "interfaces/CadastrosModaisInfograficos";
+import {
+  AreaAtuacao,
+  Responsavel,
+} from "interfaces/CadastrosModaisInfograficos";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
@@ -41,7 +44,7 @@ function ModalCadastroAtividade() {
     })
   );
 
-  const optionsAreaAtuacao = listaAreaAtuacao.map((area: any) => ({
+  const optionsAreaAtuacao = listaAreaAtuacao.map((area: AreaAtuacao) => ({
     value: area.id,
     label: area.tipo,
   }));

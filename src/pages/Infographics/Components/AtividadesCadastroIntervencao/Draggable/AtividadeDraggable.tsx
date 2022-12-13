@@ -16,7 +16,10 @@ import { FormikProps } from "formik";
 import {
   AreaAtuacao,
   Responsavel,
+  // Tarefa,
+  Tarefas,
 } from "interfaces/CadastrosModaisInfograficos";
+import { AtividadesDr } from "interfaces/Infograficos";
 
 import InputGenerico from "components/InputGenerico";
 import { RequiredField } from "components/RequiredField/RequiredField";
@@ -29,7 +32,7 @@ interface Props {
   listas: {
     listaAreaAtuacao: AreaAtuacao[];
     listaResponsaveis: Responsavel[];
-    listaTarefas: any[];
+    listaTarefas: Tarefas[];
   };
 }
 
@@ -43,7 +46,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
   } = listas;
 
   const id = useId();
-  const [draggableId, setDraggableId] = useState<any>(id);
+  const [draggableId, setDraggableId] = useState<string>(id);
 
   const remove = (index: number) => {
     if (registerForm.values.atividades.length > 1) {
@@ -60,12 +63,17 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     }
   };
 
+  interface Options {
+    label: string;
+    value: number;
+  }
+
   const optionsAreaAtuacao = listaAreaAtuacao.map((poco: AreaAtuacao) => ({
     value: poco.id,
     label: poco.tipo,
   }));
 
-  const optionsTarefa = listaTarefas.map((tarefa: any) => ({
+  const optionsTarefa = listaTarefas.map((tarefa: Tarefas) => ({
     value: tarefa.id,
     label: tarefa.nom_atividade,
   }));
@@ -79,7 +87,7 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
 
   const getValue = (options: any, i: number, chave: string) => {
     const index = options
-      .map(({ value }: any) => value)
+      .map(({ value }: Options) => value)
       .indexOf(registerForm?.values?.atividades?.[i][chave]);
 
     return {
@@ -88,9 +96,9 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     };
   };
 
-  const isDisabled = (index: any) => {
+  const isDisabled = (index: number) => {
     const atividadeDefinida = registerForm.values.atividades.some(
-      (atividade: any) => atividade.ind_atv_execucao === true
+      (atividade: AtividadesDr) => atividade.ind_atv_execucao === true
     );
     if (
       atividadeDefinida &&

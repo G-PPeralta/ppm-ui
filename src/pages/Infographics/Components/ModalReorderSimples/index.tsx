@@ -16,6 +16,7 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
+import { Opcoes, Sondas } from "interfaces/Infograficos";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
@@ -26,7 +27,12 @@ import { handleCancelar } from "utils/handleCadastro";
 
 import { useReorder } from "hooks/useReorder";
 
-function ModalReorderSimples({ setRefresh, refresh }: any) {
+interface Props {
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: boolean;
+}
+
+function ModalReorderSimples({ setRefresh, refresh }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaSondas, listaPocos, update } =
     useReorder();
@@ -34,12 +40,12 @@ function ModalReorderSimples({ setRefresh, refresh }: any) {
   const [showError, setShowError] = useState(false);
   const [pocoOrigem, setPocoOrigem] = useState("");
 
-  const optionsPocos = listaPocos.map((poco: any) => ({
+  const optionsPocos = listaPocos.map((poco: Opcoes) => ({
     value: poco.id,
     label: poco.name,
   }));
 
-  const optionsSonda = listaSondas.map((sonda: any) => ({
+  const optionsSonda = listaSondas.map((sonda: Sondas) => ({
     value: sonda.id,
     label: sonda.name,
   }));
@@ -51,7 +57,7 @@ function ModalReorderSimples({ setRefresh, refresh }: any) {
       );
       registerForm.setFieldValue("id_campanha_original", sonda[0].sonda);
       const pocoName = listaSondas.filter(
-        (val: any) => val.id == sonda[0].sonda
+        (val: Sondas) => val.id == sonda[0].sonda
       );
 
       setPocoOrigem(pocoName[0].name);

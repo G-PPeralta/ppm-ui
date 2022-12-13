@@ -3,6 +3,7 @@ import { FiPlus } from "react-icons/fi";
 
 import { Flex, IconButton } from "@chakra-ui/react";
 import { FormikProps } from "formik";
+import { Atividades } from "interfaces/Infograficos";
 
 interface Props {
   add: Function;
@@ -14,7 +15,7 @@ function BotaoAdicionar({ add, registerForm }: Props) {
 
   useEffect(() => {
     const isDisabled = registerForm.values.atividades.some(
-      (atividade: any) =>
+      (atividade: Atividades) =>
         atividade.tarefa_id <= 0 ||
         atividade.area_atuacao_id <= 0 ||
         atividade.qtde_dias === 0

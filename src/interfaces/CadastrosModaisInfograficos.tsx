@@ -152,6 +152,20 @@ export interface AreaAtuacao {
   deletado: boolean;
 }
 
+export interface Tarefa {
+  id?: number;
+  id_origem: string;
+  nom_atividade: string;
+  responsavel_id: null;
+  area_atuacao: null;
+  nao_iniciar_antes_de: Date;
+  nao_terminar_depois_de: Date;
+  o_mais_breve_possivel: null;
+  nom_usu_create: null;
+  dat_usuario_create: null;
+  ind_fase: number;
+}
+
 export interface Area {
   id: number;
   nom_area: string;
@@ -180,4 +194,17 @@ export interface Tarefas {
   nom_usuario_create: string | null;
   dat_usuario_create: string | null;
   ind_fase?: number;
+}
+
+export interface Pocos {
+  id: number;
+  id_polo: number;
+  id_local: number;
+  nom_poco: string;
+  nom_usu_create: null;
+  dat_usu_create: null;
+  nom_usu_edit: null;
+  dat_usu_edit: null;
+  nom_usu_erase: null;
+  dat_usu_erase: null;
 }
