@@ -182,7 +182,7 @@ export function GraficoNPTPorPeriodoSPT({ de, ate, refresh, setRefresh }: any) {
                 TEMPO TOTAL AGUARDADO:
               </Text>
               <Text fontSize={"20px"} fontWeight={"700"} color={"#2D2926"}>
-                {tempoTotal.map((tempo, index) => (
+                {tempoTotal.map((tempo) => (
                   <Text>{tempo.tempoTotal} HORAS</Text>
                 ))}
               </Text>
