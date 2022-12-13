@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Button, Flex } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
+import { Atividade } from "interfaces/CadastroAtividadeDeta";
 
 import ContainerPagina from "components/ContainerPagina";
 import Sidebar from "components/SideBar";
@@ -16,14 +17,14 @@ import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
 import AccordionArea from "./components/AccordionArea";
 import BotaoVisaoGeral from "./components/BotaoVisaoGeral";
-import { Area } from "./interfaces";
+import { Area, RootArray } from "./interfaces";
 
 declare type AreaCompetaType = {
   area: string;
   pctTotalConcluido: number;
   totalAtividades: number;
-  status: Array<any>;
-  atividades: Array<any>;
+  status: { status: string; qtde: number }[];
+  atividades: Array<Atividade>;
 };
 
 function validateDate(
@@ -52,12 +53,12 @@ function VisaoPorArea() {
     navigate(`/campanhas/atividade/${id}/precedentes`);
   };
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<any[]>([] as Area[]);
+  const [data, setData] = useState([] as Area[]);
   const navigate = useNavigate();
   const requestHandler = async () => {
     const response = await getAtividadesCampanha(id);
-    const payload = response.data;
-    const areas: any[] = [];
+    const payload: RootArray[] = response.data;
+    const areas: string[] = [];
     payload.forEach((value: any, key: number) => {
       if (!areas.includes(value.nom_area)) {
         areas.push(value.nom_area);
