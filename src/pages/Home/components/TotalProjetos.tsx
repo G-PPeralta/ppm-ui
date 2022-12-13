@@ -137,7 +137,7 @@ export default function TotalProjetosComponent() {
       <Box
         py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
-        w={"100%"}
+        w={"90%"}
         bg={"white"}
         boxShadow={{
           base: "none",
@@ -174,18 +174,19 @@ export default function TotalProjetosComponent() {
             direction={"row"}
             gap={2}
             flex={1}
-            style={{ border: "1px solid red" }}
-            w="50%"
+            // style={{ border: "1px solid red" }}
+            // w="50%"
           >
             <Flex gap={2} flex={1}>
               <Flex
                 px={1}
                 py={5}
                 bg={"#6886B6"}
-                sx={{ width: "36px", borderRadius: "2px" }}
+                sx={{ width: 35, borderRadius: "2px" }}
                 flex={1}
                 justify={"center"}
                 align={"start"}
+                height={200}
               >
                 <Text
                   sx={{
@@ -204,12 +205,17 @@ export default function TotalProjetosComponent() {
                 direction={"column"}
                 justify={"space-between"}
                 gap={2}
+                height={200}
               >
                 <Flex gap={1} flex={1}>
                   <Text
                     p={1}
                     bg={"#9EE09E"}
-                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
+                    sx={{
+                      fontSize: 14,
+                      width: "200px",
+                      borderRadius: "2px",
+                    }}
                     color="#ffffff"
                   >
                     {iniciados} Projetos Iniciados
