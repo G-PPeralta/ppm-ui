@@ -47,12 +47,12 @@ export function Home() {
             gap={4}
           >
             <Flex w={"100%"} gap={4} wrap={"wrap"}>
-              <Box flex={1}>
+              <Flex flex={1} align="center" justify={"space-between"}>
                 <Performance />
-              </Box>
+              </Flex>
 
               <Box
-                flex={1}
+                flex={3}
                 display="flex"
                 flexDirection={"column"}
                 justifyContent="space-evenly"

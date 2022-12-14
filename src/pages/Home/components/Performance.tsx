@@ -11,7 +11,13 @@ import PieChartGraphic from "./PieChartGraph";
 
 export default function Performance() {
   return (
-    <Flex w={"100%"} align="center" justify="center" bg={"#EDF2F7"}>
+    <Flex
+      w={"100%"}
+      align="center"
+      // justify="center"
+      bg={"#EDF2F7"}
+      justify={"space-between"}
+    >
       <Box
         py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
