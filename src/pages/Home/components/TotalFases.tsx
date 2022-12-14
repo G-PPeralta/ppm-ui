@@ -1,27 +1,29 @@
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 
 export default function TotalFases({ data }: any) {
-  const dataEntries = [
-    { mes: "Jan", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
-    { mes: "Fev", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
-    { mes: "Mar", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
-    { mes: "Abr", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
-    { mes: "Mai", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
-    { mes: "Jun", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
-    { mes: "Jul", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
-    { mes: "Ago", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
-    { mes: "Set", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
-    { mes: "Out", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
-    { mes: "Nov", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
-    { mes: "Dez", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
-  ];
+  // console.log(data);
+
+  // const dataEntries = [
+  //   { mes: "Jan", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+  //   { mes: "Fev", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+  //   { mes: "Mar", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+  //   { mes: "Abr", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+  //   { mes: "Mai", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+  //   { mes: "Jun", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+  //   { mes: "Jul", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+  //   { mes: "Ago", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+  //   { mes: "Set", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+  //   { mes: "Out", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+  //   { mes: "Nov", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+  //   { mes: "Dez", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+  // ];
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%">
       <BarChart
-        height={300}
-        // data={data}
-        data={dataEntries}
+        height={500}
+        data={data}
+        // data={dataEntries}
         margin={{
           top: 20,
           right: 30,

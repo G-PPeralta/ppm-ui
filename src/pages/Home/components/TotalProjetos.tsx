@@ -71,10 +71,10 @@ export default function TotalProjetosComponent() {
   const data =
     totalProjetosMes &&
     totalProjetosMes.map((pr) => ({
-      mes: pr.month,
-      Iniciados: pr.iniciados,
-      Finalizados: pr.finalizados,
-      Cancelados: pr.cancelados,
+      mes: pr.mes,
+      Iniciado: pr.iniciados,
+      Finalizado: pr.finalizados,
+      Cancelado: pr.cancelados,
       Outros: pr.outros,
     }));
 

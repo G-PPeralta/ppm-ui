@@ -566,7 +566,7 @@ export interface AtividadesProjeto {
 }
 
 export interface TotalProjetosDashboard {
-  month: string;
+  mes: string;
   nao_iniciados: number;
   holds: number;
   iniciados: number;
