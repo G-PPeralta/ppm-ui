@@ -67,7 +67,12 @@ export default function NaoPrevistoComponent() {
         <Box>
           <Text
             mb={1}
-            sx={{ fontSize: 16, fontWeight: "bold", alignSelf: "center" }}
+            sx={{
+              fontSize: 18,
+              fontWeight: "700",
+              fontFamily: "Mulish",
+              alignSelf: "center",
+            }}
             color="#000000"
           >
             Não Previsto
@@ -81,7 +86,12 @@ export default function NaoPrevistoComponent() {
             </Text> */}
             <Text
               ml={2}
-              sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
+              sx={{
+                fontSize: 18,
+                fontWeight: "700",
+                fontFamily: "Mulish",
+                alignSelf: "center",
+              }}
               color="#000000"
             >
               {!loading && valorNaoPrevisto <= 0 ? (
@@ -123,7 +133,12 @@ export default function NaoPrevistoComponent() {
         >
           <Text
             p={1}
-            sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
+            sx={{
+              fontSize: 18,
+              fontWeight: "700",
+              fontFamily: "Mulish",
+              alignSelf: "center",
+            }}
             color="#ffffff"
           >
             {/* {!totalNaoPrevisto ||

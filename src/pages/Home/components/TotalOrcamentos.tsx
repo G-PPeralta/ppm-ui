@@ -68,7 +68,12 @@ export default function TotalOrcamentosComponent() {
           <Text
             w={"200px"}
             mb={1}
-            sx={{ fontSize: 16, fontWeight: "bold", alignSelf: "center" }}
+            sx={{
+              fontSize: 18,
+              fontWeight: "700",
+              fontFamily: "Mulish",
+              alignSelf: "center",
+            }}
             color="#000000"
           >
             Total de Orçamento
@@ -82,7 +87,12 @@ export default function TotalOrcamentosComponent() {
             </Text> */}
             <Text
               ml={2}
-              sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
+              sx={{
+                fontSize: 18,
+                fontWeight: "700",
+                fontFamily: "Mulish",
+                alignSelf: "center",
+              }}
               color="#000000"
             >
               {!loading && valorTotalOrcamento === 0 ? (
