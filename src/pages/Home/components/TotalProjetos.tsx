@@ -13,6 +13,8 @@ import StackedBarChartProjetos from "components/StackedBarChart";
 
 import { getTotalProjetos, getTotalProjetosMes } from "services/get/Dashboard";
 
+import TotalFases from "./TotalFases";
+
 export default function TotalProjetosComponent() {
   const [total, setTotal] = useState(0);
   const [iniciados, setIniciados] = useState(0);
@@ -365,6 +367,10 @@ export default function TotalProjetosComponent() {
                 </Flex> */}
               </Flex>
             </Flex>
+          </Flex>
+
+          <Flex w={"100%"} align="center" justify="center">
+            <TotalFases />
           </Flex>
 
           <Flex align={"center"} justify={"center"} flex={1}>
