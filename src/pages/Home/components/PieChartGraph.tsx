@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Box } from "@chakra-ui/react";
 import { PieChart, Pie, Cell } from "recharts";
 
 const data = [
@@ -37,21 +38,28 @@ const renderCustomizedLabel = ({
 };
 export default function PieChartGraphic() {
   return (
-    <PieChart width={300} height={300}>
-      <Pie
-        data={data}
-        cx={200}
-        cy={200}
-        labelLine={false}
-        label={renderCustomizedLabel}
-        outerRadius={80}
-        fill="#8884d8"
-        dataKey="value"
-      >
-        {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-        ))}
-      </Pie>
-    </PieChart>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-evenly",
+        flexWrap: "wrap",
+      }}
+    >
+      <PieChart width={200} height={200}>
+        <Pie
+          data={data}
+          labelLine={false}
+          label={renderCustomizedLabel}
+          outerRadius={80}
+          fill="#8884d8"
+          dataKey="value"
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+      </PieChart>
+    </Box>
   );
 }

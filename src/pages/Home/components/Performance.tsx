@@ -52,7 +52,7 @@ export default function Performance() {
               >
                 Performance
               </Text>
-              <Flex ml={-100} mt={-70}>
+              <Flex mt={10}>
                 <PieChartGraphic />
               </Flex>
             </Flex>
