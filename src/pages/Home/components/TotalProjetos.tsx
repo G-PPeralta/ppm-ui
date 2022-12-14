@@ -7,11 +7,9 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-// import { TotalProjetosDashboard } from "interfaces/Services";
+import { TotalProjetosDashboard } from "interfaces/Services";
 
-// import StackedBarChartProjetos from "components/StackedBarChart";
-
-import { getTotalProjetos } from "services/get/Dashboard";
+import { getTotalProjetos, getTotalProjetosMes } from "services/get/Dashboard";
 
 import TotalFases from "./TotalFases";
 
@@ -30,9 +28,9 @@ export default function TotalProjetosComponent() {
   const [complexidadeAlta, setComplexidadeAlta] = useState(0);
   const [complexidadeMedia, setComplexidadeMedia] = useState(0);
   const [complexidadeBaixa, setComplexidadeBaixa] = useState(0);
-  // const [totalProjetosMes, setTotalProjetosMes] = useState<
-  //   TotalProjetosDashboard[]
-  // >([] as TotalProjetosDashboard[]);
+  const [totalProjetosMes, setTotalProjetosMes] = useState<
+    TotalProjetosDashboard[]
+  >([] as TotalProjetosDashboard[]);
 
   async function handleGetTipoResponsavel() {
     const { data } = await getTotalProjetos();
@@ -58,28 +56,27 @@ export default function TotalProjetosComponent() {
     setComplexidadeBaixa(data.complexidades.baixa);
   }
 
-  // async function fetchProjetosMes() {
-  //   const response = await getTotalProjetosMes();
-  //   setTotalProjetosMes(response.data);
-  // }
+  async function fetchProjetosMes() {
+    const response = await getTotalProjetosMes();
+    setTotalProjetosMes(response.data);
+  }
 
   useEffect(() => {
     handleGetTipoResponsavel();
-    // fetchProjetosMes();
+    fetchProjetosMes();
   }, []);
 
-  // const data =
-  //   totalProjetosMes &&
-  //   totalProjetosMes.map((pr) => ({
-  //     mes: pr.month,
-  //     Iniciados: pr.iniciados,
-  //     Finalizados: pr.finalizados,
-  //     Cancelados: pr.cancelados,
-  //     Holds: pr.holds,
-  //     "Não Iniciados": pr.nao_iniciados,
-  //     Reprogramados: pr.reprogramado,
-  //     "Pré-Aprovação": pr.pre_aprovacao,
-  //   }));
+  console.log(totalProjetosMes);
+
+  const data =
+    totalProjetosMes &&
+    totalProjetosMes.map((pr) => ({
+      mes: pr.month,
+      Iniciados: pr.iniciados,
+      Finalizados: pr.finalizados,
+      Cancelados: pr.cancelados,
+      Outros: pr.outros,
+    }));
 
   // const data = [
   //   {
@@ -371,7 +368,7 @@ export default function TotalProjetosComponent() {
           </Flex>
 
           <Flex align={"center"} justify={"center"} flex={1}>
-            <TotalFases />
+            <TotalFases data={data} />
           </Flex>
 
           {/* <Flex align={"center"} justify={"center"} flex={1}>

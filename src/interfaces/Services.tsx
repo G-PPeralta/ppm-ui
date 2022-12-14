@@ -575,4 +575,5 @@ export interface TotalProjetosDashboard {
   cancelados: number;
   pre_aprovacao: number;
   reprogramado: number;
+  outros: number;
 }

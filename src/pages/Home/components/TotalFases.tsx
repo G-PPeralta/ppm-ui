@@ -1,6 +1,6 @@
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 
-export default function TotalFases() {
+export default function TotalFases({ data }: any) {
   const dataEntries = [
     { mes: "Jan", iniciado: 10, finalizado: 2, cancelado: 3, outros: 5 },
     { mes: "Fev", iniciado: 10, finalizado: 2, cancelado: 3, outros: 5 },
@@ -20,6 +20,7 @@ export default function TotalFases() {
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
         height={300}
+        // data={data}
         data={dataEntries}
         margin={{
           top: 20,
