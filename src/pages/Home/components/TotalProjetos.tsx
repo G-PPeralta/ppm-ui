@@ -7,11 +7,11 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { TotalProjetosDashboard } from "interfaces/Services";
+// import { TotalProjetosDashboard } from "interfaces/Services";
 
-import StackedBarChartProjetos from "components/StackedBarChart";
+// import StackedBarChartProjetos from "components/StackedBarChart";
 
-import { getTotalProjetos, getTotalProjetosMes } from "services/get/Dashboard";
+import { getTotalProjetos } from "services/get/Dashboard";
 
 import TotalFases from "./TotalFases";
 
@@ -30,9 +30,9 @@ export default function TotalProjetosComponent() {
   const [complexidadeAlta, setComplexidadeAlta] = useState(0);
   const [complexidadeMedia, setComplexidadeMedia] = useState(0);
   const [complexidadeBaixa, setComplexidadeBaixa] = useState(0);
-  const [totalProjetosMes, setTotalProjetosMes] = useState<
-    TotalProjetosDashboard[]
-  >([] as TotalProjetosDashboard[]);
+  // const [totalProjetosMes, setTotalProjetosMes] = useState<
+  //   TotalProjetosDashboard[]
+  // >([] as TotalProjetosDashboard[]);
 
   async function handleGetTipoResponsavel() {
     const { data } = await getTotalProjetos();
@@ -58,28 +58,28 @@ export default function TotalProjetosComponent() {
     setComplexidadeBaixa(data.complexidades.baixa);
   }
 
-  async function fetchProjetosMes() {
-    const response = await getTotalProjetosMes();
-    setTotalProjetosMes(response.data);
-  }
+  // async function fetchProjetosMes() {
+  //   const response = await getTotalProjetosMes();
+  //   setTotalProjetosMes(response.data);
+  // }
 
   useEffect(() => {
     handleGetTipoResponsavel();
-    fetchProjetosMes();
+    // fetchProjetosMes();
   }, []);
 
-  const data =
-    totalProjetosMes &&
-    totalProjetosMes.map((pr) => ({
-      mes: pr.month,
-      Iniciados: pr.iniciados,
-      Finalizados: pr.finalizados,
-      Cancelados: pr.cancelados,
-      Holds: pr.holds,
-      "Não Iniciados": pr.nao_iniciados,
-      Reprogramados: pr.reprogramado,
-      "Pré-Aprovação": pr.pre_aprovacao,
-    }));
+  // const data =
+  //   totalProjetosMes &&
+  //   totalProjetosMes.map((pr) => ({
+  //     mes: pr.month,
+  //     Iniciados: pr.iniciados,
+  //     Finalizados: pr.finalizados,
+  //     Cancelados: pr.cancelados,
+  //     Holds: pr.holds,
+  //     "Não Iniciados": pr.nao_iniciados,
+  //     Reprogramados: pr.reprogramado,
+  //     "Pré-Aprovação": pr.pre_aprovacao,
+  //   }));
 
   // const data = [
   //   {
@@ -124,15 +124,15 @@ export default function TotalProjetosComponent() {
   //   },
   // ];
 
-  const dataEntries = [
-    { name: "Iniciados", color: "#649efd" },
-    { name: "Finalizados", color: "#4d87e5" },
-    { name: "Cancelados", color: "#3771d1" },
-    { name: "Holds", color: "#2762c2" },
-    { name: "Não Iniciados", color: "#1954b4" },
-    { name: "Reprogramados", color: "#1048a4" },
-    { name: "Pré-Aprovação", color: "#003a9a" },
-  ];
+  // const dataEntries = [
+  //   { name: "Iniciados", color: "#649efd" },
+  //   { name: "Finalizados", color: "#4d87e5" },
+  //   { name: "Cancelados", color: "#3771d1" },
+  //   { name: "Holds", color: "#2762c2" },
+  //   { name: "Não Iniciados", color: "#1954b4" },
+  //   { name: "Reprogramados", color: "#1048a4" },
+  //   { name: "Pré-Aprovação", color: "#003a9a" },
+  // ];
 
   return (
     <Flex w={"100%"} align="center" justify="center" bg={"#EDF2F7"}>
@@ -167,6 +167,7 @@ export default function TotalProjetosComponent() {
 
         <Box
           display="flex"
+          flexWrap="wrap"
           flexDirection={{ base: "column", lg: "row" }}
           w={"100%"}
           justifyContent={"space-between"}
@@ -179,6 +180,7 @@ export default function TotalProjetosComponent() {
             flex={1}
             // style={{ border: "1px solid red" }}
             // w="50%"
+            align="center"
           >
             <Flex gap={2} flex={1}>
               <Flex
@@ -186,9 +188,8 @@ export default function TotalProjetosComponent() {
                 py={5}
                 bg={"#6886B6"}
                 sx={{ width: 35, borderRadius: "2px" }}
-                flex={1}
                 justify={"center"}
-                align={"start"}
+                align={"center"}
                 height={200}
               >
                 <Text
@@ -204,7 +205,6 @@ export default function TotalProjetosComponent() {
               </Flex>
 
               <Flex
-                flex={3}
                 direction={"column"}
                 justify={"space-between"}
                 gap={2}
@@ -370,11 +370,11 @@ export default function TotalProjetosComponent() {
             </Flex>
           </Flex>
 
-          <Flex w={"100%"} align="center" justify="center">
+          <Flex align={"center"} justify={"center"} flex={1}>
             <TotalFases />
           </Flex>
 
-          <Flex align={"center"} justify={"center"} flex={1}>
+          {/* <Flex align={"center"} justify={"center"} flex={1}>
             <StackedBarChartProjetos
               showY={false}
               sizeW={280}
@@ -383,13 +383,14 @@ export default function TotalProjetosComponent() {
               dataEntries={dataEntries}
               barW={30}
             />
-          </Flex>
+          </Flex> */}
 
           <Flex
             direction={"column"}
             justifyContent={"space-between"}
             flex={1}
             gap={5}
+            maxW={"200px"}
           >
             <Box>
               <Text

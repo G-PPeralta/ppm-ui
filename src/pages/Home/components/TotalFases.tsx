@@ -19,7 +19,6 @@ export default function TotalFases() {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
-        width={500}
         height={300}
         data={dataEntries}
         margin={{
