@@ -6,6 +6,7 @@ import {
   Tooltip,
   ResponsiveContainer,
   YAxis,
+  Legend,
 } from "recharts";
 
 export default function StackedBarChartPrevisto({
@@ -23,7 +24,16 @@ export default function StackedBarChartPrevisto({
     >
       {data.length > 0 ? (
         <BarChart data={data}>
-          <XAxis dataKey="mes" fontSize={10} />
+          <XAxis
+            dataKey="mes"
+            style={{
+              fontSize: "16px",
+              fontFamily: "Mulish",
+              fontWeight: 400,
+              width: "100%",
+              color: "#2D2926",
+            }}
+          />
           {showY ? (
             <YAxis
               dataKey={dataEntries[0].name}
@@ -37,8 +47,10 @@ export default function StackedBarChartPrevisto({
               }
               style={{
                 fontSize: "0.50rem",
-                fontFamily: "'Mulish', sans-serif",
+                fontFamily: "Mulish",
+                fontWeight: 400,
                 width: "100%",
+                color: "#2D2926",
               }}
             />
           ) : undefined}
@@ -56,12 +68,27 @@ export default function StackedBarChartPrevisto({
               dataKey={dataEntry.name}
               stackId="a"
               fill={dataEntry.color}
-              legendType="circle"
+              // legendType="circle"
               isAnimationActive={true}
               animationDuration={1300}
               barSize={barW}
+              radius={
+                dataEntry.name === "Previsto" ? [5, 5, 0, 0] : [0, 0, 0, 0]
+              }
             />
           ))}
+          <Legend
+            color="rgb(153 130 157)"
+            layout="vertical"
+            verticalAlign="middle"
+            align="right"
+            wrapperStyle={{
+              marginRight: "-25px",
+              fontSize: "16px",
+              fontFamily: "Mulish",
+              fontWeight: 400,
+            }}
+          />
         </BarChart>
       ) : (
         <></>
