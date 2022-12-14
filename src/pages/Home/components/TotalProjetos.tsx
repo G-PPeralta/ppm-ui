@@ -152,8 +152,9 @@ export default function TotalProjetosComponent() {
       >
         <Text
           sx={{
-            fontSize: 18,
-            fontWeight: "bold",
+            fontSize: 24,
+            fontWeight: "700",
+            fontFamily: "Mulish",
             width: "100%",
             textAlign: "flex-start",
           }}
