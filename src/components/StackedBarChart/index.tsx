@@ -23,7 +23,12 @@ export default function StackedBarChartProjetos({
     >
       {data.length > 0 ? (
         <BarChart data={data}>
-          <XAxis dataKey="mes" fontSize={10} />
+          <XAxis
+            dataKey="mes"
+            fontSize={10}
+            tickLine={false}
+            axisLine={false}
+          />
           {showY ? (
             <YAxis
               dataKey={dataEntries[0].name}
@@ -46,6 +51,7 @@ export default function StackedBarChartProjetos({
               isAnimationActive={true}
               animationDuration={1300}
               barSize={barW}
+              radius={[5, 5, 0, 0]}
             />
           ))}
         </BarChart>

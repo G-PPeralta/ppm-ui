@@ -150,23 +150,22 @@ export default function AreasDemandadasComponent({
       switch (type) {
         case "sms":
           return valuesCurrentMonth.smsPercent > valuesLastMonth.smsPercent;
-          break;
+
         case "regulatorio":
           return (
             valuesCurrentMonth.regulatorioPercent >
             valuesLastMonth.regulatorioPercent
           );
-          break;
+
         case "operacao":
           return (
             valuesCurrentMonth.operacaoPercent > valuesLastMonth.operacaoPercent
           );
-          break;
+
         case "outros":
           return (
             valuesCurrentMonth.outrosPercent > valuesLastMonth.outrosPercent
           );
-          break;
       }
     }
   }
@@ -185,7 +184,7 @@ export default function AreasDemandadasComponent({
           {
             name: "Undone",
             value: total - sms,
-            color: "#A8C1FF",
+            color: "#9EE09E",
           },
           {
             name: "Done",
@@ -198,12 +197,12 @@ export default function AreasDemandadasComponent({
           {
             name: "Undone",
             value: total - regulatorio,
-            color: "#9fed9f",
+            color: "#9EC1CF",
           },
           {
             name: "Done",
             value: regulatorio,
-            color: "#00B53D",
+            color: "#9EC1CF",
           },
         ],
 
@@ -211,7 +210,7 @@ export default function AreasDemandadasComponent({
           {
             name: "Undone",
             value: total - operacao,
-            color: "#FFB1B1",
+            color: "#FF6663",
           },
           {
             name: "Done",
@@ -224,12 +223,12 @@ export default function AreasDemandadasComponent({
           {
             name: "Undone",
             value: total - outros,
-            color: "#FFF8BC",
+            color: "#FEB144",
           },
           {
             name: "Done",
             value: outros,
-            color: "#F8E854",
+            color: "#FEB144",
           },
         ],
       };
@@ -241,7 +240,7 @@ export default function AreasDemandadasComponent({
           {
             name: "Undone",
             value: 100,
-            color: "#A8C1FF",
+            color: "#9EE09E",
           },
           {
             name: "Done",
@@ -254,12 +253,12 @@ export default function AreasDemandadasComponent({
           {
             name: "Undone",
             value: 100,
-            color: "#9fed9f",
+            color: "#9EC1CF",
           },
           {
             name: "Done",
             value: 0,
-            color: "#FFB1B1",
+            color: "#9EC1CF",
           },
         ],
 
@@ -267,7 +266,7 @@ export default function AreasDemandadasComponent({
           {
             name: "Undone",
             value: 100,
-            color: "#FFB1B1",
+            color: "#FF6663",
           },
           {
             name: "Done",
@@ -280,12 +279,12 @@ export default function AreasDemandadasComponent({
           {
             name: "Undone",
             value: 100,
-            color: "#FFF8BC",
+            color: "#FEB144",
           },
           {
             name: "Done",
             value: 0,
-            color: "#F8E854",
+            color: "#FEB144",
           },
         ],
       };
