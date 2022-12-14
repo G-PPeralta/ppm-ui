@@ -12,6 +12,7 @@ import { getAreasDemandadas } from "services/get/Dashboard";
 import AreasDemandadasComponent from "./components/AreasDemandadas";
 import FaseProjetos from "./components/FaseProjetos";
 import NaoPrevisto from "./components/NaoPrevisto";
+import Performance from "./components/Performance";
 import PrevistoxRealizado from "./components/PrevistoxRealizado";
 import Projetos from "./components/Projetos";
 import Realizado from "./components/Realizado";
@@ -47,7 +48,7 @@ export function Home() {
           >
             <Flex w={"100%"} gap={4} wrap={"wrap"}>
               <Box flex={3}>
-                <TotalProjetos />
+                <Performance />
               </Box>
 
               <Box
@@ -58,11 +59,13 @@ export function Home() {
                 gap={4}
               >
                 <TotalOrcamentos />
+
                 <Realizado />
                 <NaoPrevisto />
               </Box>
             </Flex>
             <Flex w={"100%"} gap={4} wrap={"wrap"} flex={1}>
+              <TotalProjetos />
               <Projetos />
 
               <FaseProjetos />
