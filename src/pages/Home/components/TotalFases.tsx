@@ -2,18 +2,18 @@ import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 
 export default function TotalFases({ data }: any) {
   const dataEntries = [
-    { mes: "Jan", iniciado: 10, finalizado: 2, cancelado: 3, outros: 5 },
-    { mes: "Fev", iniciado: 10, finalizado: 2, cancelado: 3, outros: 5 },
-    { mes: "Mar", iniciado: 10, finalizado: 2, cancelado: 3, outros: 5 },
-    { mes: "Abr", iniciado: 10, finalizado: 2, cancelado: 3, outros: 5 },
-    { mes: "Mai", iniciado: 10, finalizado: 2, cancelado: 3, outros: 5 },
-    { mes: "Jun", iniciado: 10, finalizado: 2, cancelado: 3, outros: 5 },
-    { mes: "Jul", iniciado: 10, finalizado: 2, cancelado: 3, outros: 5 },
-    { mes: "Ago", iniciado: 10, finalizado: 2, cancelado: 3, outros: 5 },
-    { mes: "Set", iniciado: 10, finalizado: 2, cancelado: 3, outros: 5 },
-    { mes: "Out", iniciado: 10, finalizado: 2, cancelado: 3, outros: 5 },
-    { mes: "Nov", iniciado: 10, finalizado: 2, cancelado: 3, outros: 5 },
-    { mes: "Dez", iniciado: 10, finalizado: 2, cancelado: 3, outros: 5 },
+    { mes: "Jan", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+    { mes: "Fev", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+    { mes: "Mar", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+    { mes: "Abr", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+    { mes: "Mai", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+    { mes: "Jun", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+    { mes: "Jul", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+    { mes: "Ago", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+    { mes: "Set", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+    { mes: "Out", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+    { mes: "Nov", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
+    { mes: "Dez", Iniciado: 10, Finalizado: 2, Cancelado: 3, Outros: 5 },
   ];
 
   return (
@@ -33,11 +33,11 @@ export default function TotalFases({ data }: any) {
       >
         <XAxis dataKey="mes" />
         <Tooltip />
-        <Bar dataKey="outros" stackId="b" fill="#FEB144" barSize={20} />
-        <Bar dataKey="cancelado" stackId="b" fill="#FF6663" barSize={20} />
-        <Bar dataKey="finalizado" stackId="b" fill="#9EC1CF" barSize={20} />
+        <Bar dataKey="Outros" stackId="b" fill="#FEB144" barSize={20} />
+        <Bar dataKey="Cancelado" stackId="b" fill="#FF6663" barSize={20} />
+        <Bar dataKey="Finalizado" stackId="b" fill="#9EC1CF" barSize={20} />
         <Bar
-          dataKey="iniciado"
+          dataKey="Iniciado"
           stackId="b"
           fill="#9EE09E"
           barSize={20}

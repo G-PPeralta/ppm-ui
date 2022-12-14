@@ -66,7 +66,7 @@ export default function TotalProjetosComponent() {
     fetchProjetosMes();
   }, []);
 
-  console.log(totalProjetosMes);
+  // console.log(totalProjetosMes);
 
   const data =
     totalProjetosMes &&
