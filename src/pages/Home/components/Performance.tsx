@@ -15,7 +15,7 @@ export default function Performance() {
       <Box
         py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
-        w={"90%"}
+        w={"100%"}
         bg={"white"}
         boxShadow={{
           base: "none",
@@ -63,7 +63,7 @@ export default function Performance() {
               >
                 Últimos 6 Meses
               </Text>
-              <Flex mt={30} mb={-20}>
+              <Flex mt={30} mb={-20} ml={-10}>
                 <BarChartGraphic />
               </Flex>
             </Flex>

@@ -47,7 +47,7 @@ export function Home() {
             gap={4}
           >
             <Flex w={"100%"} gap={4} wrap={"wrap"}>
-              <Box flex={3}>
+              <Box flex={1}>
                 <Performance />
               </Box>
 
