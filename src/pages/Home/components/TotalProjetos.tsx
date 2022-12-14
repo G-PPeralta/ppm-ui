@@ -137,7 +137,7 @@ export default function TotalProjetosComponent() {
       <Box
         py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
-        w={"100%"}
+        w={"90%"}
         bg={"white"}
         boxShadow={{
           base: "none",
@@ -170,16 +170,23 @@ export default function TotalProjetosComponent() {
           flex={1}
           gap={4}
         >
-          <Flex direction={"row"} gap={2} flex={1}>
+          <Flex
+            direction={"row"}
+            gap={2}
+            flex={1}
+            // style={{ border: "1px solid red" }}
+            // w="50%"
+          >
             <Flex gap={2} flex={1}>
               <Flex
                 px={1}
                 py={5}
-                bg={"#0047BB"}
-                sx={{ width: "36px", borderRadius: "2px" }}
+                bg={"#6886B6"}
+                sx={{ width: 35, borderRadius: "2px" }}
                 flex={1}
                 justify={"center"}
                 align={"start"}
+                height={200}
               >
                 <Text
                   sx={{
@@ -198,12 +205,17 @@ export default function TotalProjetosComponent() {
                 direction={"column"}
                 justify={"space-between"}
                 gap={2}
+                height={200}
               >
-                <Flex gap={1} flex={1} align={"center"}>
+                <Flex gap={1} flex={1}>
                   <Text
-                    p={1}
-                    bg={"#649efd"}
-                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
+                    p={3}
+                    bg={"#9EE09E"}
+                    sx={{
+                      fontSize: 14,
+                      width: "200px",
+                      borderRadius: "2px",
+                    }}
                     color="#ffffff"
                   >
                     {iniciados} Projetos Iniciados
@@ -217,10 +229,10 @@ export default function TotalProjetosComponent() {
                   </Text>
                 </Flex>
 
-                <Flex gap={1} flex={1} align={"center"}>
+                <Flex gap={1} flex={1}>
                   <Text
-                    p={1}
-                    bg={"#4d87e5"}
+                    p={3}
+                    bg={"#9EC1CF"}
                     sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                     color="#ffffff"
                   >
@@ -235,10 +247,10 @@ export default function TotalProjetosComponent() {
                   </Text>
                 </Flex>
 
-                <Flex gap={1} flex={1} align={"center"}>
+                <Flex gap={1} flex={1}>
                   <Text
-                    p={1}
-                    bg={"#3771d1"}
+                    p={3}
+                    bg={"#FF6663"}
                     sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
                     color="#ffffff"
                   >
@@ -253,7 +265,32 @@ export default function TotalProjetosComponent() {
                   </Text>
                 </Flex>
 
-                <Flex gap={1} flex={1} align={"center"}>
+                <Flex gap={1} flex={1}>
+                  <Text
+                    p={3}
+                    bg={"#FEB144"}
+                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
+                    color="#ffffff"
+                  >
+                    {holds + naoIniciado + preAprovacao + reprogramado} Outros
+                  </Text>
+                  <Text
+                    p={1}
+                    sx={{ fontSize: 14, fontWeight: "600" }}
+                    color="#FEB144"
+                  >
+                    {total === 0
+                      ? 0
+                      : Math.round(
+                          ((holds + naoIniciado + preAprovacao + reprogramado) /
+                            total) *
+                            100
+                        )}
+                    %
+                  </Text>
+                </Flex>
+
+                {/* <Flex gap={1} flex={1} align={"center"}>
                   <Text
                     p={1}
                     bg={"#2762c2"}
@@ -325,7 +362,7 @@ export default function TotalProjetosComponent() {
                     {total === 0 ? 0 : Math.round((preAprovacao / total) * 100)}
                     %
                   </Text>
-                </Flex>
+                </Flex> */}
               </Flex>
             </Flex>
           </Flex>
@@ -352,7 +389,7 @@ export default function TotalProjetosComponent() {
                 sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
                 color="#000000"
               >
-                Projetos Prioridade
+                Prioridade Projetos
               </Text>
               <Box
                 mt={2}
@@ -371,7 +408,7 @@ export default function TotalProjetosComponent() {
                   }}
                   color="#9FA2B4"
                 >
-                  Prioridade alta
+                  Alta
                 </Text>
                 <Text
                   sx={{
@@ -379,7 +416,7 @@ export default function TotalProjetosComponent() {
                     fontWeight: "600",
                     alignSelf: "center",
                   }}
-                  color="#1FBE55"
+                  color="#9EE09E"
                 >
                   {prioridadeAlta}
                 </Text>
@@ -401,7 +438,7 @@ export default function TotalProjetosComponent() {
                   }}
                   color="#9FA2B4"
                 >
-                  Prioridade média
+                  Média
                 </Text>
                 <Text
                   sx={{
@@ -409,7 +446,7 @@ export default function TotalProjetosComponent() {
                     fontWeight: "600",
                     alignSelf: "center",
                   }}
-                  color="#F4DD06"
+                  color="#FEB144"
                 >
                   {prioridadeMedia}
                 </Text>
@@ -431,7 +468,7 @@ export default function TotalProjetosComponent() {
                   }}
                   color="#9FA2B4"
                 >
-                  Prioridade baixa
+                  Baixa
                 </Text>
                 <Text
                   sx={{
@@ -439,7 +476,7 @@ export default function TotalProjetosComponent() {
                     fontWeight: "600",
                     alignSelf: "center",
                   }}
-                  color="#F94144"
+                  color="#FF6663"
                 >
                   {prioridadeBaixa}
                 </Text>
@@ -469,7 +506,7 @@ export default function TotalProjetosComponent() {
                   }}
                   color="#9FA2B4"
                 >
-                  Prioridade alta
+                  Alta
                 </Text>
                 <Text
                   sx={{
@@ -477,7 +514,7 @@ export default function TotalProjetosComponent() {
                     fontWeight: "600",
                     alignSelf: "center",
                   }}
-                  color="#1FBE55"
+                  color="#9EE09E"
                 >
                   {complexidadeAlta}
                 </Text>
@@ -499,7 +536,7 @@ export default function TotalProjetosComponent() {
                   }}
                   color="#9FA2B4"
                 >
-                  Prioridade média
+                  Média
                 </Text>
                 <Text
                   sx={{
@@ -507,7 +544,7 @@ export default function TotalProjetosComponent() {
                     fontWeight: "600",
                     alignSelf: "center",
                   }}
-                  color="#F4DD06"
+                  color="#FEB144"
                 >
                   {complexidadeMedia}
                 </Text>
@@ -529,7 +566,7 @@ export default function TotalProjetosComponent() {
                   }}
                   color="#9FA2B4"
                 >
-                  Prioridade baixa
+                  Baixa
                 </Text>
                 <Text
                   sx={{
@@ -537,7 +574,7 @@ export default function TotalProjetosComponent() {
                     fontWeight: "600",
                     alignSelf: "center",
                   }}
-                  color="#F94144"
+                  color="#FF6663"
                 >
                   {complexidadeBaixa}
                 </Text>

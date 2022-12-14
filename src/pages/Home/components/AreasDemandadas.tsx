@@ -190,7 +190,7 @@ export default function AreasDemandadasComponent({
           {
             name: "Done",
             value: sms,
-            color: "#2E69FD",
+            color: "#9EE09E",
           },
         ],
 
@@ -216,7 +216,7 @@ export default function AreasDemandadasComponent({
           {
             name: "Done",
             value: operacao,
-            color: "#F94144",
+            color: "#FF6663",
           },
         ],
 
@@ -246,7 +246,7 @@ export default function AreasDemandadasComponent({
           {
             name: "Done",
             value: 0,
-            color: "#2E69FD",
+            color: "#9EE09E",
           },
         ],
 
@@ -272,7 +272,7 @@ export default function AreasDemandadasComponent({
           {
             name: "Done",
             value: 0,
-            color: "#F94144",
+            color: "#FF6663",
           },
         ],
 
@@ -329,10 +329,10 @@ export default function AreasDemandadasComponent({
   }
 
   const dataEntries = [
-    { name: "SMS", color: "#2E69FD" },
-    { name: "Regulatório", color: "#93E01B" },
-    { name: "Operação", color: "#F94144" },
-    { name: "Outros", color: "#F4DD06" },
+    { name: "SMS", color: "#9EE09E" },
+    { name: "Regulatório", color: "#9EC1CF" },
+    { name: "Operação", color: "#FF6663" },
+    { name: "Outros", color: "#FEB144" },
   ];
 
   return (
@@ -355,10 +355,15 @@ export default function AreasDemandadasComponent({
       >
         <Box w={"fit-content"} h={230}>
           <Text
-            sx={{ fontSize: 18, fontWeight: "600", alignSelf: "flex-start" }}
+            sx={{
+              fontSize: 18,
+              fontWeight: "700",
+              fontFamily: "Mulish",
+              alignSelf: "flex-start",
+            }}
             color="#000000"
           >
-            Áreas Demandadas
+            Áreas Demandantes
           </Text>
           <Box display={"flex"} w={"100%"} justifyContent="space-between">
             <Box pt={6} minW={innerWidth >= 428 ? "350px" : "120px"} flex={1}>
@@ -391,7 +396,7 @@ export default function AreasDemandadasComponent({
                       fontWeight: "600",
                       alignSelf: "center",
                     }}
-                    color="#2E69FD"
+                    color="#9EE09E"
                   >
                     SMS
                   </Text>
@@ -417,7 +422,7 @@ export default function AreasDemandadasComponent({
                       fontWeight: "600",
                       alignSelf: "center",
                     }}
-                    color="#93E01B"
+                    color="#9EC1CF"
                   >
                     Regulatório
                   </Text>
@@ -461,7 +466,7 @@ export default function AreasDemandadasComponent({
                       fontWeight: "600",
                       alignSelf: "center",
                     }}
-                    color="#F94144"
+                    color="#FF6663"
                   >
                     Operação
                   </Text>
@@ -488,7 +493,7 @@ export default function AreasDemandadasComponent({
                       fontWeight: "600",
                       alignSelf: "center",
                     }}
-                    color="#F4DD06"
+                    color="#FEB144"
                   >
                     Outros
                   </Text>

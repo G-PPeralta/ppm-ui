@@ -64,6 +64,7 @@ export function Home() {
             </Flex>
             <Flex w={"100%"} gap={4} wrap={"wrap"} flex={1}>
               <Projetos />
+
               <FaseProjetos />
               <AreasDemandadasComponent
                 AreasDemandadasPorMes={areasDemandadas}
