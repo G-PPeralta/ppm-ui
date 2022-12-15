@@ -23,11 +23,32 @@ function BotaoUploadArquivo({
     useState(nomeArquivo);
   const [arquivoSelecionado, setArquivoSelecionado] = useState("");
 
+  // const [payload, setPayload] = useState({
+  //   base64data: "", // base64 da imagem
+  //   path: "", // moc OU apr
+  //   fileName: "", // tanto faz
+  //   fileType: "aplication",
+  //   extension: "pdf",
+  // });
+
+  const convertToBase64 = (file: any) =>
+    new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+
   const handleNomeArquivo = (nomeArquivo: string) =>
     nomeArquivo.replace(/\s/g, "_");
 
   const onDrop = (acceptedFiles: any) => {
     const file = acceptedFiles[0];
+    const teste = convertToBase64(file);
     setArquivoSelecionado(file.name);
     if (propName === "anexo") {
       const nomeArquivo = `${registerForm.values.id_poco}_${
@@ -36,10 +57,7 @@ function BotaoUploadArquivo({
       const fileRenomeado = new File([file], nomeArquivo, {
         type: file.type,
       });
-      registerForm.setFieldValue(
-        `${propName}[${index}].arquivo`,
-        fileRenomeado
-      );
+      registerForm.setFieldValue(`${propName}[${index}].arquivo`, teste);
       registerForm.setFieldValue(
         `${propName}[${index}].anexo`,
         fileRenomeado.name
@@ -73,6 +91,8 @@ function BotaoUploadArquivo({
     }
     setNomeArquivoSelecionado(file.name);
   };
+
+  console.log("convertToBase64", convertToBase64(arquivoSelecionado));
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
