@@ -165,7 +165,7 @@ export default function PrevistoxRealizadoComponent() {
               Estatísticas de Renda
             </Text>
 
-            <Flex w={"61%"} justifyContent={"flex-end"} ml={5}>
+            <Flex w={"61%"} justifyContent={"flex-end"} ml={5} mt={2}>
               <Estatisticas />
             </Flex>
             <Box justifyContent={"center"}>

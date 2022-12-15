@@ -2,9 +2,9 @@ import { BarChart, Bar, XAxis, Tooltip, LabelList } from "recharts";
 
 const data = [
   {
-    Previsto: 100000000,
+    Previsto: 80000000,
     Realizado: 75000000,
-    PrevistoM: (100000000)
+    PrevistoM: (80000000)
       .toLocaleString("pt-br", {
         style: "currency",
         currency: "BRL",
