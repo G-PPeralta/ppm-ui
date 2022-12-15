@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Box,
@@ -16,18 +16,18 @@ import { getProjetosPrevistoRealizado } from "services/get/Dashboard";
 import Estatisticas from "./BarChartPrevisto";
 import PrevistoNovo from "./PrevistoBarChar";
 
-function useWindowSize() {
-  const [size, setSize] = useState([0, 0]);
-  useLayoutEffect(() => {
-    function updateSize() {
-      setSize([window.innerWidth, window.innerHeight]);
-    }
-    window.addEventListener("resize", updateSize);
-    updateSize();
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-  return size;
-}
+// function useWindowSize() {
+//   const [size, setSize] = useState([0, 0]);
+//   useLayoutEffect(() => {
+//     function updateSize() {
+//       setSize([window.innerWidth, window.innerHeight]);
+//     }
+//     window.addEventListener("resize", updateSize);
+//     updateSize();
+//     return () => window.removeEventListener("resize", updateSize);
+//   }, []);
+//   return size;
+// }
 
 function useGetData() {
   const [previstoRealizado, setPrevistoRealizado] = useState<any[]>([]);
@@ -79,8 +79,8 @@ function useGetData() {
 // }
 
 export default function PrevistoxRealizadoComponent() {
-  const [width] = useWindowSize();
-  const innerWidth = window.innerWidth;
+  // const [width] = useWindowSize();
+  // const innerWidth = window.innerWidth;
 
   const previstoRealizado = useGetData();
   // console.log(previstoRealizado);
@@ -127,7 +127,7 @@ export default function PrevistoxRealizadoComponent() {
           mb={1}
           sx={{
             fontSize: 18,
-            fontWeight: "bold",
+            fontWeight: "700",
             width: "100%",
             textAlign: "flex-start",
           }}
@@ -137,9 +137,10 @@ export default function PrevistoxRealizadoComponent() {
         </Text>
         <Box
           overflowX={"scroll"}
-          w={innerWidth > 428 ? width * 0.7 : width * 0.85}
+          w={"100%"}
           h={260}
           display={"flex"}
+          // w={innerWidth > 428 ? width * 0.7 : width * 0.85}
         >
           {/* <StackedBarChartPrevisto
             showY={true}
@@ -157,7 +158,7 @@ export default function PrevistoxRealizadoComponent() {
               mb={2}
               sx={{
                 flexFamily: "Mulish",
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: "700",
               }}
             >
@@ -188,9 +189,16 @@ export default function PrevistoxRealizadoComponent() {
                       %
                     </Text>
                   </Flex>
-                  <Box mb={2} bg={"#FEB144"} py={1} px={2}>
+                  <Box
+                    mb={2}
+                    bg={"#FEB144"}
+                    py={1}
+                    px={3}
+                    justifyContent={"center"}
+                  >
                     <Text
                       mb={1}
+                      mt={1}
                       sx={{ fontSize: 14, fontWeight: "400" }}
                       color="#ffffff"
                     >
@@ -198,9 +206,10 @@ export default function PrevistoxRealizadoComponent() {
                       83%
                     </Text>
                   </Box>
-                  <Box bg={"#9EC1CF"} py={1} px={2}>
+                  <Box bg={"#9EC1CF"} py={1} px={3}>
                     <Text
                       mb={1}
+                      mt={1}
                       sx={{ fontSize: 14, fontWeight: "400" }}
                       color="#ffffff"
                     >
