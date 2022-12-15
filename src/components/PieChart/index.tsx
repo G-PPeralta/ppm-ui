@@ -27,7 +27,7 @@ interface Props {
   size: number;
   data: {
     name: string;
-    value: number;
+    value: number | string;
     color: string;
   }[];
 }

@@ -9,7 +9,11 @@ import {
 } from "@chakra-ui/react";
 import { TotalProjetosDashboard } from "interfaces/Services";
 
-import { getTotalProjetos, getTotalProjetosMes } from "services/get/Dashboard";
+import {
+  getRanking,
+  getTotalProjetos,
+  getTotalProjetosMes,
+} from "services/get/Dashboard";
 
 import TotalFases from "./TotalFases";
 
@@ -48,13 +52,19 @@ export default function TotalProjetosComponent() {
     data.projetosPorStatus[4] && setCancelados(data.projetosPorStatus[4].qtd);
     data.projetosPorStatus[6] && setHolds(data.projetosPorStatus[6].qtd);
     // setHolds(data.projetosPorStatus[6].qtd + data.projetosPorStatus[0].qtd);
-    setPrioridadeAlta(data.prioridades.alta);
-    setPrioridadeMedia(data.prioridades.media);
-    setPrioridadeBaixa(data.prioridades.baixa);
-    setComplexidadeAlta(data.complexidades.alta);
-    setComplexidadeMedia(data.complexidades.media);
-    setComplexidadeBaixa(data.complexidades.baixa);
   }
+
+  const handleGetRanking = async () => {
+    const { data } = await getRanking();
+    // console.log(data);
+
+    setPrioridadeAlta(data.prioridade.Alto);
+    setPrioridadeMedia(data.prioridade.Médio);
+    setPrioridadeBaixa(data.prioridade.Baixo);
+    setComplexidadeAlta(data.complexidade.A);
+    setComplexidadeMedia(data.complexidade.M);
+    setComplexidadeBaixa(data.complexidade.B);
+  };
 
   async function fetchProjetosMes() {
     const response = await getTotalProjetosMes();
@@ -64,6 +74,7 @@ export default function TotalProjetosComponent() {
   useEffect(() => {
     handleGetTipoResponsavel();
     fetchProjetosMes();
+    handleGetRanking();
   }, []);
 
   // console.log(totalProjetosMes);
@@ -136,7 +147,7 @@ export default function TotalProjetosComponent() {
       <Box
         py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
-        w={"90%"}
+        w={"100%"}
         bg={"white"}
         boxShadow={{
           base: "none",
@@ -171,15 +182,8 @@ export default function TotalProjetosComponent() {
           flex={1}
           gap={4}
         >
-          <Flex
-            direction={"row"}
-            gap={2}
-            flex={1}
-            // style={{ border: "1px solid red" }}
-            // w="50%"
-            align="center"
-          >
-            <Flex gap={2} flex={1}>
+          <Flex gap={2} flex={1}>
+            <Flex flex={3}>
               <Flex
                 px={1}
                 py={5}
@@ -188,6 +192,7 @@ export default function TotalProjetosComponent() {
                 justify={"center"}
                 align={"center"}
                 height={200}
+                mr={3}
               >
                 <Text
                   sx={{
@@ -200,11 +205,11 @@ export default function TotalProjetosComponent() {
                   {total} Projetos
                 </Text>
               </Flex>
-
               <Flex
                 direction={"column"}
                 justify={"space-between"}
                 gap={2}
+                flex={1}
                 height={200}
               >
                 <Flex gap={1} flex={1}>
@@ -289,8 +294,9 @@ export default function TotalProjetosComponent() {
                     %
                   </Text>
                 </Flex>
+              </Flex>
 
-                {/* <Flex gap={1} flex={1} align={"center"}>
+              {/* <Flex gap={1} flex={1} align={"center"}>
                   <Text
                     p={1}
                     bg={"#2762c2"}
@@ -363,11 +369,10 @@ export default function TotalProjetosComponent() {
                     %
                   </Text>
                 </Flex> */}
-              </Flex>
             </Flex>
           </Flex>
 
-          <Flex align={"center"} justify={"center"} flex={1}>
+          <Flex align={"center"} justify={"center"} flex={3}>
             <TotalFases data={data} />
           </Flex>
 
@@ -384,12 +389,13 @@ export default function TotalProjetosComponent() {
 
           <Flex
             direction={"column"}
-            justifyContent={"space-between"}
-            flex={1}
+            flex={3}
             gap={5}
             maxW={"200px"}
+            justify={"center"}
+            wrap={"wrap"}
           >
-            <Box>
+            <Box mt={-12}>
               <Text
                 sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
                 color="#000000"
@@ -492,7 +498,7 @@ export default function TotalProjetosComponent() {
                 sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
                 color="#000000"
               >
-                Projetos Complexidade
+                Complexidade Projetos
               </Text>
               <Box
                 mt={2}

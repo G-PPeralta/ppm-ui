@@ -14,6 +14,7 @@ import { getGates } from "services/get/Dashboard";
 interface Data {
   name: string;
   value: number;
+  pct: number;
 }
 
 export default function NaoPrevistoComponent() {
@@ -42,33 +43,33 @@ export default function NaoPrevistoComponent() {
   // ];
 
   //   const engenhariaData =
-  //   data && data.filter((x) => x.name === "Engenharia")[0].value.toFixed(1);
+  //   data && data.filter((x) => x.name === "Engenharia")[0].value;
   // const cMData =
-  //   data && data.filter((x) => x.name === "C&M")[0].value.toFixed(1);
+  //   data && data.filter((x) => x.name === "C&M")[0].value;
   // const suprimentosData =
-  //   data && data.filter((x) => x.name === "C&M")[0].value.toFixed(1);
+  //   data && data.filter((x) => x.name === "C&M")[0].value;
   // const preProjetoData =
-  //   data && data.filter((x) => x.name === "C&M")[0].value.toFixed(1);
+  //   data && data.filter((x) => x.name === "C&M")[0].value;
 
   const grafData = [
     {
       name: "Engenharia",
-      value: data ? Number(data[3]?.value.toFixed(1)) : 0,
+      value: data ? Number(data[3]?.pct) : 0,
       color: "#9EC1CF",
     },
     {
       name: "C&M",
-      value: data ? Number(data[5]?.value.toFixed(1)) : 0,
+      value: data ? Number(data[5]?.pct) : 0,
       color: "#9EE09E",
     },
     {
       name: "Suprimentos",
-      value: data ? Number(data[1]?.value.toFixed(1)) : 0,
+      value: data ? Number(data[1]?.pct) : 0,
       color: "#FF6663",
     },
     {
       name: "Pré-projeto",
-      value: data ? Number(data[2]?.value.toFixed(1)) : 0,
+      value: data ? Number(data[0]?.pct) : 0,
       color: "#FEB144",
     },
   ];
@@ -149,19 +150,19 @@ export default function NaoPrevistoComponent() {
           <Flex mt={5} mb={5} align={"center"} justify={"center"} flex={1}>
             <Flex h={20} justify={"space-between"} direction={"column"}>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9EE09E">
-                {data ? data[5]?.value.toFixed(1) : 0}%
+                {data ? data[5]?.pct : 0}%
               </Text>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#FF6663">
-                {data ? data[1]?.value.toFixed(1) : 0}%
+                {data ? data[1]?.pct : 0}%
               </Text>
             </Flex>
             {grafData && <PieChart size={136} data={grafData} />}
             <Flex h={20} justify={"space-between"} direction={"column"}>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9EC1CF">
-                {data ? data[3]?.value.toFixed(1) : 0}%
+                {data ? data[3]?.pct : 0}%
               </Text>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#FEB144">
-                {data ? data[2]?.value.toFixed(1) : 0}%
+                {data ? data[0]?.pct : 0}%
               </Text>
             </Flex>
           </Flex>

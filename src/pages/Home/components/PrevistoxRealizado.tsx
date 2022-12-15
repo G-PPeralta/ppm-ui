@@ -13,7 +13,7 @@ import StackedBarChartPrevisto from "components/StackedBarChartPrevisto";
 
 import { getProjetosPrevistoRealizado } from "services/get/Dashboard";
 
-// import Estatisticas from "./BarChartPrevisto";
+import Estatisticas from "./BarChartPrevisto";
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -33,6 +33,7 @@ function useGetData() {
 
   const loadData = async () => {
     const { data } = await getProjetosPrevistoRealizado();
+
     const renderPayload: any[] = [];
     data.map((val: any) =>
       renderPayload.push({
@@ -146,8 +147,9 @@ export default function PrevistoxRealizadoComponent() {
             dataEntries={dataEntries}
             barW={25}
           />
-
-          {/* <Estatisticas /> */}
+          <Flex w={"61%"} ml={10} mr={-20}>
+            <Estatisticas />
+          </Flex>
 
           <Box justifyContent={"center"}>
             <Text

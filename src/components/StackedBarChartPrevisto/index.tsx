@@ -17,6 +17,9 @@ export default function StackedBarChartPrevisto({
   data,
   dataEntries,
 }: StackedBarChartProps) {
+  // console.log(dataEntries);
+  // console.log(data);
+
   return (
     <ResponsiveContainer
       height={"100%"}

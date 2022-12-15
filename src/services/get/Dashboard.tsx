@@ -2,6 +2,22 @@ import { TotalProjetosDashboard } from "interfaces/Services";
 
 import { api } from "services/api";
 
+export async function getRanking(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(
+    "/dashboard/prioridades-complexidades",
+    {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
+      },
+    }
+  );
+
+  return { data, status };
+}
+
 export async function getTotalProjetos(): Promise<{
   data: any;
   status: number;

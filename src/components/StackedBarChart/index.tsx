@@ -51,7 +51,7 @@ export default function StackedBarChartProjetos({
               isAnimationActive={true}
               animationDuration={1300}
               barSize={barW}
-              radius={[5, 5, 0, 0]}
+              radius={dataEntry.name === "Outros" ? [5, 5, 0, 0] : [0, 0, 0, 0]}
             />
           ))}
         </BarChart>
