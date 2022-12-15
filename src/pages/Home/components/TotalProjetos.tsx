@@ -183,114 +183,117 @@ export default function TotalProjetosComponent() {
           gap={4}
         >
           <Flex gap={2} flex={1}>
-            <Flex
-              px={1}
-              py={5}
-              bg={"#6886B6"}
-              sx={{ width: 35, borderRadius: "2px" }}
-              justify={"center"}
-              align={"center"}
-              height={200}
-            >
-              <Text
-                sx={{
-                  fontSize: 16,
-                  writingMode: "vertical-rl",
-                  transform: "scale(-1)",
-                }}
-                color="#ffffff"
+            <Flex flex={3}>
+              <Flex
+                px={1}
+                py={5}
+                bg={"#6886B6"}
+                sx={{ width: 35, borderRadius: "2px" }}
+                justify={"center"}
+                align={"center"}
+                height={200}
+                mr={3}
               >
-                {total} Projetos
-              </Text>
-            </Flex>
-            <Flex
-              direction={"column"}
-              justify={"space-between"}
-              gap={2}
-              flex={1}
-              height={200}
-            >
-              <Flex gap={1} flex={1}>
                 <Text
-                  p={3}
-                  bg={"#9EE09E"}
                   sx={{
-                    fontSize: 14,
-                    width: "200px",
-                    borderRadius: "2px",
+                    fontSize: 16,
+                    writingMode: "vertical-rl",
+                    transform: "scale(-1)",
                   }}
                   color="#ffffff"
                 >
-                  {iniciados} Projetos Iniciados
-                </Text>
-                <Text
-                  p={1}
-                  sx={{ fontSize: 14, fontWeight: "600" }}
-                  color="#93E01B"
-                >
-                  {total === 0 ? 0 : Math.round((iniciados / total) * 100)}%
+                  {total} Projetos
                 </Text>
               </Flex>
+              <Flex
+                direction={"column"}
+                justify={"space-between"}
+                gap={2}
+                flex={1}
+                height={200}
+              >
+                <Flex gap={1} flex={1}>
+                  <Text
+                    p={3}
+                    bg={"#9EE09E"}
+                    sx={{
+                      fontSize: 14,
+                      width: "200px",
+                      borderRadius: "2px",
+                    }}
+                    color="#ffffff"
+                  >
+                    {iniciados} Projetos Iniciados
+                  </Text>
+                  <Text
+                    p={1}
+                    sx={{ fontSize: 14, fontWeight: "600" }}
+                    color="#93E01B"
+                  >
+                    {total === 0 ? 0 : Math.round((iniciados / total) * 100)}%
+                  </Text>
+                </Flex>
 
-              <Flex gap={1} flex={1}>
-                <Text
-                  p={3}
-                  bg={"#9EC1CF"}
-                  sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                  color="#ffffff"
-                >
-                  {finalizados} Projetos Finalizados
-                </Text>
-                <Text
-                  p={1}
-                  sx={{ fontSize: 14, fontWeight: "600" }}
-                  color="#0239C3"
-                >
-                  {total === 0 ? 0 : Math.round((finalizados / total) * 100)}%
-                </Text>
-              </Flex>
+                <Flex gap={1} flex={1}>
+                  <Text
+                    p={3}
+                    bg={"#9EC1CF"}
+                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
+                    color="#ffffff"
+                  >
+                    {finalizados} Projetos Finalizados
+                  </Text>
+                  <Text
+                    p={1}
+                    sx={{ fontSize: 14, fontWeight: "600" }}
+                    color="#0239C3"
+                  >
+                    {total === 0 ? 0 : Math.round((finalizados / total) * 100)}%
+                  </Text>
+                </Flex>
 
-              <Flex gap={1} flex={1}>
-                <Text
-                  p={3}
-                  bg={"#FF6663"}
-                  sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                  color="#ffffff"
-                >
-                  {cancelados} Projetos Cancelados
-                </Text>
-                <Text
-                  p={1}
-                  sx={{ fontSize: 14, fontWeight: "600" }}
-                  color="#F94144"
-                >
-                  {total === 0 ? 0 : Math.round((cancelados / total) * 100)}%
-                </Text>
-              </Flex>
+                <Flex gap={1} flex={1}>
+                  <Text
+                    p={3}
+                    bg={"#FF6663"}
+                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
+                    color="#ffffff"
+                  >
+                    {cancelados} Projetos Cancelados
+                  </Text>
+                  <Text
+                    p={1}
+                    sx={{ fontSize: 14, fontWeight: "600" }}
+                    color="#F94144"
+                  >
+                    {total === 0 ? 0 : Math.round((cancelados / total) * 100)}%
+                  </Text>
+                </Flex>
 
-              <Flex gap={1} flex={1}>
-                <Text
-                  p={3}
-                  bg={"#FEB144"}
-                  sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                  color="#ffffff"
-                >
-                  {holds + naoIniciado + preAprovacao + reprogramado} Outros
-                </Text>
-                <Text
-                  p={1}
-                  sx={{ fontSize: 14, fontWeight: "600" }}
-                  color="#FEB144"
-                >
-                  {total === 0
-                    ? 0
-                    : Math.round(
-                        ((holds + naoIniciado + preAprovacao + reprogramado) /
-                          total) *
-                          100
-                      )}
-                  %
-                </Text>
+                <Flex gap={1} flex={1}>
+                  <Text
+                    p={3}
+                    bg={"#FEB144"}
+                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
+                    color="#ffffff"
+                  >
+                    {holds + naoIniciado + preAprovacao + reprogramado} Outros
+                  </Text>
+                  <Text
+                    p={1}
+                    sx={{ fontSize: 14, fontWeight: "600" }}
+                    color="#FEB144"
+                  >
+                    {total === 0
+                      ? 0
+                      : Math.round(
+                          ((holds + naoIniciado + preAprovacao + reprogramado) /
+                            total) *
+                            100
+                        )}
+                    %
+                  </Text>
+                </Flex>
               </Flex>
 
               {/* <Flex gap={1} flex={1} align={"center"}>
@@ -369,7 +372,7 @@ export default function TotalProjetosComponent() {
             </Flex>
           </Flex>
 
-          <Flex align={"center"} justify={"center"} flex={1}>
+          <Flex align={"center"} justify={"center"} flex={3}>
             <TotalFases data={data} />
           </Flex>
 
