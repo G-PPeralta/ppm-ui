@@ -394,10 +394,11 @@ export default function TotalProjetosComponent() {
             maxW={"200px"}
             justify={"center"}
             wrap={"wrap"}
+            mr={1}
           >
             <Box mt={-12}>
               <Text
-                sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
+                sx={{ fontSize: 15.5, fontWeight: "600", alignSelf: "center" }}
                 color="#000000"
               >
                 Prioridade Projetos
@@ -495,7 +496,7 @@ export default function TotalProjetosComponent() {
             </Box>
             <Box>
               <Text
-                sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
+                sx={{ fontSize: 15.5, fontWeight: "600", alignSelf: "center" }}
                 color="#000000"
               >
                 Complexidade Projetos
