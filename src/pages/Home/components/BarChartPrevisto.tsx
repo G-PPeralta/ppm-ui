@@ -1,45 +1,43 @@
-import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+import { BarChart, Bar, XAxis, Tooltip } from "recharts";
 
-export default function Estatisticas({ data }: any) {
-  // console.log(data);
+const data = [
+  {
+    Previsto: 83,
+    Realizado: 67,
+  },
+];
 
-  const dataEntries = [
-    { status: "Previsto", Porcentagem: 83 },
-    { status: "Realizado", Porcentagem: 67 },
-  ];
-
+export default function Estatisticas() {
   return (
-    <ResponsiveContainer width={"100%"}>
-      <BarChart
-        height={250}
-        // data={data}
-        data={dataEntries}
-        margin={{
-          top: 20,
-          right: 30,
-          left: 20,
-          bottom: 5,
+    <BarChart
+      width={180}
+      height={260}
+      data={data}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5,
+      }}
+    >
+      <XAxis
+        dataKey="date"
+        tickLine={false}
+        axisLine={false}
+        color={"#2D2926"}
+        style={{
+          fontSize: "16px",
+          fontFamily: "Mulish",
+          fontWeight: 400,
+          width: "100%",
+          color: "#2D2926",
         }}
-        barGap={0}
-        barCategoryGap={0}
-      >
-        <XAxis dataKey="status" tickLine={false} axisLine={false} />
-        <Tooltip />
-        <Bar
-          dataKey="Previsto"
-          stackId="b"
-          fill="#FEB144"
-          barSize={20}
-          radius={[2, 2, 0, 0]}
-        />
-        <Bar
-          dataKey="Realizado"
-          stackId="b"
-          fill="#FF6663"
-          barSize={20}
-          radius={[2, 2, 0, 0]}
-        />
-      </BarChart>
-    </ResponsiveContainer>
+      />
+
+      <Tooltip />
+
+      <Bar dataKey="Previsto" fill={"#FEB144"} />
+      <Bar dataKey="Realizado" fill={"#9EC1CF"} />
+    </BarChart>
   );
 }
