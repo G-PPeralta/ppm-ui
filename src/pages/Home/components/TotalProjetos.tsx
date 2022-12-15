@@ -56,7 +56,7 @@ export default function TotalProjetosComponent() {
 
   const handleGetRanking = async () => {
     const { data } = await getRanking();
-    console.log(data);
+    // console.log(data);
 
     setPrioridadeAlta(data.prioridade.Alto);
     setPrioridadeMedia(data.prioridade.Médio);
@@ -184,7 +184,7 @@ export default function TotalProjetosComponent() {
         >
           <Flex direction={"row"} gap={2} flex={1} align="center">
             <Flex gap={2} flex={1} align="center">
-              <Flex flex={3}>
+              <Flex flex={1}>
                 <Flex
                   flex={1}
                   px={1}
@@ -195,7 +195,6 @@ export default function TotalProjetosComponent() {
                   align={"center"}
                   height={210}
                   w={30}
-                  style={{ border: "1px solid red" }}
                 >
                   <Text
                     sx={{
@@ -216,7 +215,7 @@ export default function TotalProjetosComponent() {
                 flex={1}
                 height={200}
               >
-                <Flex gap={1} flex={3}>
+                <Flex gap={1} flex={1}>
                   <Text
                     p={3}
                     bg={"#9EE09E"}

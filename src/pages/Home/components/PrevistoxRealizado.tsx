@@ -33,6 +33,7 @@ function useGetData() {
 
   const loadData = async () => {
     const { data } = await getProjetosPrevistoRealizado();
+
     const renderPayload: any[] = [];
     data.map((val: any) =>
       renderPayload.push({
