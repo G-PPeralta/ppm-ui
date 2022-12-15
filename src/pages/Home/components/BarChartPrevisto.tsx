@@ -1,17 +1,31 @@
-import { BarChart, Bar, XAxis, Tooltip } from "recharts";
+import { BarChart, Bar, XAxis, Tooltip, LabelList } from "recharts";
 
 const data = [
   {
-    Previsto: 83,
-    Realizado: 67,
+    Previsto: 100000000,
+    Realizado: 75000000,
+    PrevistoM: (100000000)
+      .toLocaleString("pt-br", {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 0,
+      })
+      .substring(3),
+    RealizadoM: (75000000)
+      .toLocaleString("pt-br", {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 0,
+      })
+      .substring(3),
   },
 ];
 
 export default function Estatisticas() {
   return (
     <BarChart
-      width={180}
-      height={260}
+      width={160}
+      height={240}
       data={data}
       margin={{
         top: 5,
@@ -36,8 +50,34 @@ export default function Estatisticas() {
 
       <Tooltip />
 
-      <Bar dataKey="Previsto" fill={"#FEB144"} />
-      <Bar dataKey="Realizado" fill={"#9EC1CF"} />
+      <Bar dataKey="Previsto" fill={"#FEB144"}>
+        {" "}
+        <LabelList
+          dataKey="PrevistoM"
+          position="center"
+          angle={270}
+          offset={25}
+          style={{
+            textAnchor: "end",
+            fontSize: "80%",
+            fill: "white",
+          }}
+        />
+      </Bar>
+      <Bar dataKey="Realizado" fill={"#9EC1CF"}>
+        {" "}
+        <LabelList
+          dataKey="RealizadoM"
+          position="center"
+          angle={270}
+          offset={25}
+          style={{
+            textAnchor: "end",
+            fontSize: "80%",
+            fill: "white",
+          }}
+        />
+      </Bar>
     </BarChart>
   );
 }

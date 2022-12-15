@@ -29,13 +29,13 @@ export default function StackedBarChartPrevisto({
         <BarChart data={data}>
           <XAxis
             dataKey="mes"
-            style={{
-              fontSize: "16px",
-              fontFamily: "Mulish",
-              fontWeight: 400,
-              width: "100%",
-              color: "#2D2926",
-            }}
+            // style={{
+            //   fontSize: "16px",
+            //   fontFamily: "Mulish",
+            //   fontWeight: 400,
+            //   width: "100%",
+            //   color: "#2D2926",
+            // }}
           />
           {showY ? (
             <YAxis

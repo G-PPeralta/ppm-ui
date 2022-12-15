@@ -9,11 +9,12 @@ import {
 } from "@chakra-ui/react";
 
 // import PieChart from "components/PieChart";
-import StackedBarChartPrevisto from "components/StackedBarChartPrevisto";
+// import StackedBarChartPrevisto from "components/StackedBarChartPrevisto";
 
 import { getProjetosPrevistoRealizado } from "services/get/Dashboard";
 
 import Estatisticas from "./BarChartPrevisto";
+import PrevistoNovo from "./PrevistoBarChar";
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -82,6 +83,7 @@ export default function PrevistoxRealizadoComponent() {
   const innerWidth = window.innerWidth;
 
   const previstoRealizado = useGetData();
+  // console.log(previstoRealizado);
 
   // const { graphPrevisto, graphRealizado } = useGetGraph(previstoRealizado);
 
@@ -139,58 +141,78 @@ export default function PrevistoxRealizadoComponent() {
           h={260}
           display={"flex"}
         >
-          <StackedBarChartPrevisto
+          {/* <StackedBarChartPrevisto
             showY={true}
             sizeW={100}
             sizeH={200}
             data={previstoRealizado}
             dataEntries={dataEntries}
             barW={25}
-          />
-          <Flex w={"61%"} ml={10} mr={-20}>
-            <Estatisticas />
-          </Flex>
-
-          <Box justifyContent={"center"}>
+          /> */}
+          <PrevistoNovo dataX={previstoRealizado} dataEntries={dataEntries} />
+          <Flex justify={"space-between"}>
             <Text
-              mt={2}
+              ml={-20}
+              mt={4}
               mb={2}
-              sx={{ fontSize: 16, fontWeight: "600" }}
-              color="#000000"
+              sx={{
+                flexFamily: "Mulish",
+                fontSize: 18,
+                fontWeight: "700",
+              }}
             >
-              %
+              Estatísticas de Renda
             </Text>
-            <Box
-              display={"flex"}
-              alignItems="center"
-              w={190}
-              justifyContent="space-evenly"
-            >
-              <Box mt={21}>
-                <Box mb={2} bg={"#FEB144"} py={1} px={2}>
-                  <Text
-                    mb={1}
-                    sx={{ fontSize: 14, fontWeight: "400" }}
-                    color="#ffffff"
-                  >
-                    {/* {(graphPrevisto * 100).toFixed(0)}% */}
-                    83%
-                  </Text>
-                </Box>
-                <Box bg={"#9EC1CF"} py={1} px={2}>
-                  <Text
-                    mb={1}
-                    sx={{ fontSize: 14, fontWeight: "400" }}
-                    color="#ffffff"
-                  >
-                    {/* {(graphRealizado * 100).toFixed(0)}% */}
-                    67%
-                  </Text>
-                </Box>
+
+            <Flex w={"61%"} justifyContent={"flex-end"} ml={5}>
+              <Estatisticas />
+            </Flex>
+            <Box justifyContent={"center"}>
+              <Box display={"flex"} alignItems="center" w={190}>
+                <Flex
+                  mt={87}
+                  direction={"column"}
+                  justifyContent={"flex-start"}
+                >
+                  <Flex justify={"center"}>
+                    <Text
+                      mt={2}
+                      mb={2}
+                      sx={{
+                        flexFamily: "Mulish",
+                        fontSize: 18,
+                        fontWeight: "700",
+                      }}
+                      color="#000000"
+                    >
+                      %
+                    </Text>
+                  </Flex>
+                  <Box mb={2} bg={"#FEB144"} py={1} px={2}>
+                    <Text
+                      mb={1}
+                      sx={{ fontSize: 14, fontWeight: "400" }}
+                      color="#ffffff"
+                    >
+                      {/* {(graphPrevisto * 100).toFixed(0)}% */}
+                      83%
+                    </Text>
+                  </Box>
+                  <Box bg={"#9EC1CF"} py={1} px={2}>
+                    <Text
+                      mb={1}
+                      sx={{ fontSize: 14, fontWeight: "400" }}
+                      color="#ffffff"
+                    >
+                      {/* {(graphRealizado * 100).toFixed(0)}% */}
+                      67%
+                    </Text>
+                  </Box>
+                </Flex>
+                {/* <PieChart size={80} data={grafData} /> */}
               </Box>
-              {/* <PieChart size={80} data={grafData} /> */}
             </Box>
-          </Box>
+          </Flex>
         </Box>
       </Box>
     </Flex>
