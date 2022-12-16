@@ -1,4 +1,4 @@
-import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts";
 
 export default function PrevistoNovo({ dataX, dataEntries }: any) {
   // console.log(data);
@@ -22,7 +22,7 @@ export default function PrevistoNovo({ dataX, dataEntries }: any) {
     <BarChart
       height={230}
       // data={data}
-      width={750}
+      width={680}
       data={dataX}
       margin={{
         top: 20,
@@ -70,7 +70,7 @@ export default function PrevistoNovo({ dataX, dataEntries }: any) {
           })
         }
       />
-      <Legend
+      {/* <Legend
         color="rgb(153 130 157)"
         layout="vertical"
         verticalAlign="bottom"
@@ -81,7 +81,7 @@ export default function PrevistoNovo({ dataX, dataEntries }: any) {
           fontFamily: "Mulish",
           fontWeight: 400,
         }}
-      />
+      /> */}
 
       <Bar dataKey="Realizado" stackId="b" fill="#9EC1CF" barSize={20}></Bar>
       <Bar

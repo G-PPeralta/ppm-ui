@@ -41,9 +41,9 @@ import { BarChart, Bar, XAxis, Tooltip, Legend } from "recharts";
 // ];
 
 export default function BarChartGraphic({ data }: any) {
-  const mesSemAno = data.map((x: any) => ({
-    ...mesSemAno,
-    mes: mesSemAno.mes.substring(0, 3),
+  const mesSemAno = data.map((m: any) => ({
+    ...m,
+    mes: m.mes.substring(0, 3),
   }));
 
   return (

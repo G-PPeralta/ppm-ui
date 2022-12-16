@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 
 import {
   Box,
@@ -16,18 +16,18 @@ import { getProjetosPrevistoRealizado } from "services/get/Dashboard";
 import Estatisticas from "./BarChartPrevisto";
 import PrevistoNovo from "./PrevistoBarChar";
 
-// function useWindowSize() {
-//   const [size, setSize] = useState([0, 0]);
-//   useLayoutEffect(() => {
-//     function updateSize() {
-//       setSize([window.innerWidth, window.innerHeight]);
-//     }
-//     window.addEventListener("resize", updateSize);
-//     updateSize();
-//     return () => window.removeEventListener("resize", updateSize);
-//   }, []);
-//   return size;
-// }
+function useWindowSize() {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+  return size;
+}
 
 function useGetData() {
   const [previstoRealizado, setPrevistoRealizado] = useState<any[]>([]);
@@ -79,8 +79,8 @@ function useGetData() {
 // }
 
 export default function PrevistoxRealizadoComponent() {
-  // const [width] = useWindowSize();
-  // const innerWidth = window.innerWidth;
+  const [width] = useWindowSize();
+  const innerWidth = window.innerWidth;
 
   const previstoRealizado = useGetData();
   // console.log(previstoRealizado);
@@ -106,7 +106,7 @@ export default function PrevistoxRealizadoComponent() {
   ];
 
   return (
-    <Flex w={"100%"} align="center" justify="center" bg={"#EDF2F7"} flex={3}>
+    <Flex w={"100%"} align="center" justify="center" bg={"#EDF2F7"} flex={1}>
       <Box
         py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
@@ -137,12 +137,12 @@ export default function PrevistoxRealizadoComponent() {
         </Text>
         <Box
           overflowX={"scroll"}
-          w={"100%"}
+          // w={"100%"}
           h={260}
           display={"flex"}
-          border={"solid 3px red"}
+          w={innerWidth > 428 ? width * 0.7 : width * 0.85}
           flex={3}
-          // w={innerWidth > 428 ? width * 0.7 : width * 0.85}
+          justifyContent={"space-between"}
         >
           {/* <StackedBarChartPrevisto
             showY={true}
@@ -152,32 +152,59 @@ export default function PrevistoxRealizadoComponent() {
             dataEntries={dataEntries}
             barW={25}
           /> */}
-          <PrevistoNovo dataX={previstoRealizado} dataEntries={dataEntries} />
-          <Flex justify={"space-between"}>
-            <Text
-              ml={-20}
-              mt={4}
-              mb={2}
-              sx={{
-                flexFamily: "Mulish",
-                fontSize: 16,
-                fontWeight: "700",
-              }}
-            >
-              Estatísticas de Renda
-            </Text>
 
-            <Flex w={"61%"} justifyContent={"flex-end"} ml={5} mt={2} flex={3}>
+          <Flex justify={"space-between"}>
+            <PrevistoNovo dataX={previstoRealizado} dataEntries={dataEntries} />
+            <Flex
+              direction={"column"}
+              gap={2}
+              justify={"space-between"}
+              mb={50}
+            >
+              <Flex w={"100px"} alignSelf={"stretch"}>
+                <Text
+                  mt={4}
+                  mb={2}
+                  sx={{
+                    flexFamily: "Mulish",
+                    fontSize: 16,
+                    fontWeight: "700",
+                  }}
+                  w={200}
+                >
+                  Estatísticas de Renda
+                </Text>
+              </Flex>
+              <Flex direction={"column"}>
+                <Flex
+                  gap={2}
+                  // align={"center"}
+
+                  justify={"left"}
+                >
+                  <Flex w={"20px"} bg={"#FEB144"} h={"20px"} gap={4}></Flex>
+                  <Text>Previsto</Text>
+                </Flex>
+                <Flex
+                  gap={2}
+                  // align={"center"}
+
+                  justify={"left"}
+                >
+                  <Flex w={"20px"} bg={"#9EC1CF"} h={"20px"} gap={4}></Flex>
+                  <Text>Realizado</Text>
+                </Flex>
+              </Flex>
+            </Flex>
+            <Flex w={"61%"} justifyContent={"flex-end"} ml={5} mt={3}>
               <Estatisticas />
             </Flex>
             <Box justifyContent={"center"}>
-              <Box display={"flex"} alignItems="center" w={190}>
+              <Box display={"flex"} alignItems="center" w={100}>
                 <Flex
                   mt={87}
                   direction={"column"}
                   justifyContent={"flex-start"}
-                  border={"purple 3px solid"}
-                  flex={3}
                 >
                   <Flex justify={"center"}>
                     <Text
