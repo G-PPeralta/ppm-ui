@@ -106,7 +106,7 @@ export default function PrevistoxRealizadoComponent() {
   ];
 
   return (
-    <Flex w={"100%"} align="center" justify="center" bg={"#EDF2F7"}>
+    <Flex w={"100%"} align="center" justify="center" bg={"#EDF2F7"} flex={3}>
       <Box
         py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
@@ -140,6 +140,8 @@ export default function PrevistoxRealizadoComponent() {
           w={"100%"}
           h={260}
           display={"flex"}
+          border={"solid 3px red"}
+          flex={3}
           // w={innerWidth > 428 ? width * 0.7 : width * 0.85}
         >
           {/* <StackedBarChartPrevisto
@@ -165,7 +167,7 @@ export default function PrevistoxRealizadoComponent() {
               Estatísticas de Renda
             </Text>
 
-            <Flex w={"61%"} justifyContent={"flex-end"} ml={5} mt={2}>
+            <Flex w={"61%"} justifyContent={"flex-end"} ml={5} mt={2} flex={3}>
               <Estatisticas />
             </Flex>
             <Box justifyContent={"center"}>
@@ -174,6 +176,8 @@ export default function PrevistoxRealizadoComponent() {
                   mt={87}
                   direction={"column"}
                   justifyContent={"flex-start"}
+                  border={"purple 3px solid"}
+                  flex={3}
                 >
                   <Flex justify={"center"}>
                     <Text

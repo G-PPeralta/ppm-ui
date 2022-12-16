@@ -72,7 +72,9 @@ export function Home() {
               <AreasDemandadasComponent
                 AreasDemandadasPorMes={areasDemandadas}
               />
-              <PrevistoxRealizado />
+              <Flex flex={3} align="center" justify={"space-between"}>
+                <PrevistoxRealizado />
+              </Flex>
             </Flex>
           </Flex>
         </Sidebar>
