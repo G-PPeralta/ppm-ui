@@ -359,9 +359,10 @@ export default function AreasDemandadasComponent({
               fontSize: 18,
               fontWeight: "700",
               fontFamily: "Mulish",
-              alignSelf: "flex-start",
+              alignSelf: "center",
             }}
             color="#000000"
+            textAlign={"center"}
           >
             Áreas Demandantes
           </Text>
