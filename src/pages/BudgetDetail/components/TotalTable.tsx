@@ -9,7 +9,7 @@ import {
   Th,
   Td,
   Tbody,
-  Tfoot,
+  // Tfoot,
 } from "@chakra-ui/react";
 import { Totalizacao } from "interfaces/Budgets";
 import moment from "moment";
@@ -79,7 +79,7 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
               </Td>
             </Tr>
 
-            <Tr>
+            {/* <Tr>
               <Td>Custo Diario Acumulado R$</Td>
               <Td></Td>
               <Td textAlign="right">
@@ -92,7 +92,7 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
               <Td textAlign="right">
                 {formatUSD(data?.custoDiarioTotalUSD || 0)}
               </Td>
-            </Tr>
+            </Tr> */}
 
             <Tr>
               <Td>Custo Total Realizado R$</Td>
@@ -126,7 +126,7 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
               </Td>
             </Tr>
           </Tbody>
-          <Tfoot>
+          {/* <Tfoot>
             <Tr background={"origem.500"} color="white">
               <Th colSpan={2} color="white">
                 Total R$
@@ -147,7 +147,7 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
                 {formatUSD(data?.totalUSD || 0)}
               </Th>
             </Tr>
-          </Tfoot>
+                </Tfoot> */}
         </Table>
       </TableContainer>
     </>
