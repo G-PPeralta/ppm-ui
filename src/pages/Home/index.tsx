@@ -66,12 +66,15 @@ export function Home() {
             </Flex>
             <Flex w={"100%"} gap={4} wrap={"wrap"} flex={1}>
               <TotalProjetos />
-              <Projetos />
-
+              <Flex w={"100%"}>
+                <Projetos />
+              </Flex>
               <FaseProjetos />
-              <AreasDemandadasComponent
-                AreasDemandadasPorMes={areasDemandadas}
-              />
+              <Flex w={"50%"}>
+                <AreasDemandadasComponent
+                  AreasDemandadasPorMes={areasDemandadas}
+                />
+              </Flex>
               <Flex flex={3} align="center" justify={"space-between"}>
                 <PrevistoxRealizado />
               </Flex>
