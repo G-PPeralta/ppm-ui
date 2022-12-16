@@ -12,6 +12,7 @@ import PieChartGraphic from "./PieChartGraph";
 export default function Performance() {
   return (
     <Flex
+      flex={4}
       w={"100%"}
       align="center"
       // justify="center"
@@ -30,14 +31,19 @@ export default function Performance() {
         borderRadius={"xl"}
         display={"flex"}
         flexDirection={"column"}
-        flex={1}
       >
-        <Flex bg={"white"} justifyContent="space-between" dir="column">
+        <Flex
+          bg={"white"}
+          justifyContent="space-between"
+          dir="column"
+          w={"100%"}
+        >
           <Flex
             direction={"row"}
             justify={"center"}
             align={"flex-start"}
             gap={12}
+            w={"100%"}
           >
             <Flex direction={"column"}>
               <Text
@@ -52,7 +58,7 @@ export default function Performance() {
               >
                 Performance
               </Text>
-              <Flex mt={10}>
+              <Flex mt={10} w={"100%"} flex={1}>
                 <PieChartGraphic />
               </Flex>
             </Flex>
@@ -69,7 +75,7 @@ export default function Performance() {
               >
                 Últimos 6 Meses
               </Text>
-              <Flex mt={30} mb={-20} ml={-10}>
+              <Flex mt={30} mb={-20} ml={-10} w={"100%"}>
                 <BarChartGraphic />
               </Flex>
             </Flex>
