@@ -62,7 +62,14 @@ export default function PrevistoNovo({ dataX, dataEntries }: any) {
           color: "#2D2926",
         }}
       />
-      <Tooltip />
+      <Tooltip
+        formatter={(value: any) =>
+          value.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })
+        }
+      />
       <Legend
         color="rgb(153 130 157)"
         layout="vertical"
