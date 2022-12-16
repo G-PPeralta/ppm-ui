@@ -51,8 +51,6 @@ export default function NaoPrevistoComponent() {
   // const preProjetoData =
   //   data && data.filter((x) => x.name === "C&M")[0].value;
 
-  console.log(Number(data[3]?.pct).toFixed());
-
   const grafData = [
     {
       name: "Engenharia",
