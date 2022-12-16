@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   Box,
   Flex,
@@ -6,10 +8,36 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
+import { getProjetosPrevistoRealizado } from "services/get/Dashboard";
+
 import BarChartGraphic from "./BarChart";
 import PieChartGraphic from "./PieChartGraph";
+function useGetData() {
+  const [previstoRealizado, setPrevistoRealizado] = useState<any[]>([]);
+
+  const loadData = async () => {
+    const { data } = await getProjetosPrevistoRealizado();
+
+    const renderPayload: any[] = [];
+    data.map((val: any) =>
+      renderPayload.push({
+        ...val,
+        Realizado: val.capexRealizado,
+        Previsto: val.capexPrevisto,
+      })
+    );
+    setPrevistoRealizado(renderPayload);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+  return previstoRealizado;
+}
 
 export default function Performance() {
+  const previstoRealizado = useGetData().slice(-6);
+
   return (
     <Flex flex={4} w={"100%"} align="center" justify="center" bg={"#EDF2F7"}>
       <Box
@@ -69,7 +97,7 @@ export default function Performance() {
                 Últimos 6 Meses
               </Text>
               <Flex mt={30} mb={-20} ml={-10} w={"100%"}>
-                <BarChartGraphic />
+                <BarChartGraphic data={previstoRealizado} />
               </Flex>
             </Flex>
           </Flex>
