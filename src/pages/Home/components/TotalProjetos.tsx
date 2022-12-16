@@ -182,33 +182,60 @@ export default function TotalProjetosComponent() {
         <Popover isOpen={isVisible} placement="left-end">
           <PopoverContent w={"fit-content"}>
             <PopoverBody w={"fit-content"}>
-              <Box
-                bg={"#FFFFFF"}
-                padding={"18px, 24px, 18px, 24px"}
-                boxShadow={"0px 0px 4px rgba(0, 0, 0, 0.25)"}
-                borderRadius="8px"
-              >
+              <Box>
                 <Box>
                   <Text color={"#1C1B1B"} fontWeight="700">
-                    Holds: {hoverProps.holds} - {hoverProps.holdsPercentage}%
+                    Holds:{" "}
+                    <span
+                      style={{
+                        fontFamily: "Mulish",
+                        fontWeight: 400,
+                      }}
+                    >
+                      {hoverProps.holds} - {hoverProps.holdsPercentage}%
+                    </span>
                   </Text>
                 </Box>
                 <Box>
                   <Text color={"#1C1B1B"} fontWeight="700">
-                    Projetos Pré Aprovação: {hoverProps.preAprovacao} -{" "}
-                    {hoverProps.preAprovacaoPercentage}%
+                    Projetos Pré Aprovação:{" "}
+                    <span
+                      style={{
+                        fontFamily: "Mulish",
+                        fontWeight: 400,
+                      }}
+                    >
+                      {hoverProps.preAprovacao} -{" "}
+                      {hoverProps.preAprovacaoPercentage}%
+                    </span>
                   </Text>
                 </Box>
                 <Box>
                   <Text color={"#1C1B1B"} fontWeight="700">
-                    Projetos Reprogramados: {hoverProps.reprogramado} -{" "}
-                    {hoverProps.reprogramadoPercentage}%
+                    Projetos Reprogramados:{" "}
+                    <span
+                      style={{
+                        fontFamily: "Mulish",
+                        fontWeight: 400,
+                      }}
+                    >
+                      {hoverProps.reprogramado} -{" "}
+                      {hoverProps.reprogramadoPercentage}%
+                    </span>
                   </Text>
                 </Box>
                 <Box>
                   <Text color={"#1C1B1B"} fontWeight="700">
-                    Projetos Não Iniciados: {hoverProps.naoIniciado} -{" "}
-                    {hoverProps.naoIniciadoPercentage}%
+                    Projetos Não Iniciados:{" "}
+                    <span
+                      style={{
+                        fontFamily: "Mulish",
+                        fontWeight: 400,
+                      }}
+                    >
+                      {hoverProps.naoIniciado} -{" "}
+                      {hoverProps.naoIniciadoPercentage}%
+                    </span>
                   </Text>
                 </Box>
               </Box>
