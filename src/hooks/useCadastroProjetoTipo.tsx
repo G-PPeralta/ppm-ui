@@ -52,6 +52,7 @@ export function useCadastroProjetoTipo() {
         area_id: 0,
         tarefa_id: 0,
         qtde_dias: 0,
+        tipo_precedentes: "IF+0",
         precedentes: [
           {
             id: 0,
@@ -78,6 +79,7 @@ export function useCadastroProjetoTipo() {
           area_id: atividade.area_id,
           tarefa_id: atividade.tarefa_id,
           qtde_dias: atividade.qtde_dias,
+          tipo_precedentes: atividade.tipo_precedentes,
           precedentes: atividade.precedentes.filter(
             (precedente) => precedente.checked
           ),
