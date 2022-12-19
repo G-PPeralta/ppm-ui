@@ -507,220 +507,221 @@ export default function TotalProjetosComponent() {
               barW={30}
             />
           </Flex> */}
-
-              <Flex
-                direction={"column"}
-                flex={3}
-                gap={5}
-                maxW={"200px"}
-                justify={"center"}
-                wrap={"wrap"}
-                mr={1}
-              >
-                <Box mt={-12}>
-                  <Text
-                    sx={{
-                      fontSize: 15.5,
-                      fontWeight: "600",
-                      alignSelf: "center",
-                    }}
-                    color="#000000"
-                  >
-                    Prioridade Projetos
-                  </Text>
-                  <Box
-                    mt={2}
-                    sx={{
-                      display: "flex",
-                      alignItens: "center",
-                      justifyContent: "space-between",
-                      width: "100%",
-                    }}
-                  >
+              <Flex direction={"column"}>
+                <Flex
+                  direction={"column"}
+                  flex={3}
+                  gap={5}
+                  maxW={"200px"}
+                  justify={"center"}
+                  wrap={"wrap"}
+                  mr={4}
+                >
+                  <Box mt={-1}>
                     <Text
                       sx={{
-                        fontSize: 16,
+                        fontSize: 15.5,
                         fontWeight: "600",
                         alignSelf: "center",
                       }}
-                      color="#9FA2B4"
+                      color="#000000"
                     >
-                      Alta
+                      Prioridade Projetos
                     </Text>
-                    <Text
+                    <Box
+                      mt={2}
                       sx={{
-                        fontSize: 16,
-                        fontWeight: "600",
-                        alignSelf: "center",
+                        display: "flex",
+                        alignItens: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
                       }}
-                      color="#9EE09E"
                     >
-                      {prioridadeAlta}
-                    </Text>
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#9FA2B4"
+                      >
+                        Alta
+                      </Text>
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#9EE09E"
+                      >
+                        {prioridadeAlta}
+                      </Text>
+                    </Box>
+                    <Box
+                      mt={2}
+                      sx={{
+                        display: "flex",
+                        alignItens: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#9FA2B4"
+                      >
+                        Média
+                      </Text>
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#FEB144"
+                      >
+                        {prioridadeMedia}
+                      </Text>
+                    </Box>
+                    <Box
+                      mt={2}
+                      sx={{
+                        display: "flex",
+                        alignItens: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#9FA2B4"
+                      >
+                        Baixa
+                      </Text>
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#FF6663"
+                      >
+                        {prioridadeBaixa}
+                      </Text>
+                    </Box>
                   </Box>
-                  <Box
-                    mt={2}
-                    sx={{
-                      display: "flex",
-                      alignItens: "center",
-                      justifyContent: "space-between",
-                      width: "100%",
-                    }}
-                  >
+                  <Box>
                     <Text
                       sx={{
-                        fontSize: 16,
+                        fontSize: 15.5,
                         fontWeight: "600",
                         alignSelf: "center",
                       }}
-                      color="#9FA2B4"
+                      color="#000000"
                     >
-                      Média
+                      Complexidade Projetos
                     </Text>
-                    <Text
+                    <Box
+                      mt={2}
                       sx={{
-                        fontSize: 16,
-                        fontWeight: "600",
-                        alignSelf: "center",
+                        display: "flex",
+                        alignItens: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
                       }}
-                      color="#FEB144"
                     >
-                      {prioridadeMedia}
-                    </Text>
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#9FA2B4"
+                      >
+                        Alta
+                      </Text>
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#9EE09E"
+                      >
+                        {complexidadeAlta}
+                      </Text>
+                    </Box>
+                    <Box
+                      mt={2}
+                      sx={{
+                        display: "flex",
+                        alignItens: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#9FA2B4"
+                      >
+                        Média
+                      </Text>
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#FEB144"
+                      >
+                        {complexidadeMedia}
+                      </Text>
+                    </Box>
+                    <Box
+                      mt={2}
+                      sx={{
+                        display: "flex",
+                        alignItens: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#9FA2B4"
+                      >
+                        Baixa
+                      </Text>
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#FF6663"
+                      >
+                        {complexidadeBaixa}
+                      </Text>
+                    </Box>
                   </Box>
-                  <Box
-                    mt={2}
-                    sx={{
-                      display: "flex",
-                      alignItens: "center",
-                      justifyContent: "space-between",
-                      width: "100%",
-                    }}
-                  >
-                    <Text
-                      sx={{
-                        fontSize: 16,
-                        fontWeight: "600",
-                        alignSelf: "center",
-                      }}
-                      color="#9FA2B4"
-                    >
-                      Baixa
-                    </Text>
-                    <Text
-                      sx={{
-                        fontSize: 16,
-                        fontWeight: "600",
-                        alignSelf: "center",
-                      }}
-                      color="#FF6663"
-                    >
-                      {prioridadeBaixa}
-                    </Text>
-                  </Box>
-                </Box>
-                <Box>
-                  <Text
-                    sx={{
-                      fontSize: 15.5,
-                      fontWeight: "600",
-                      alignSelf: "center",
-                    }}
-                    color="#000000"
-                  >
-                    Complexidade Projetos
-                  </Text>
-                  <Box
-                    mt={2}
-                    sx={{
-                      display: "flex",
-                      alignItens: "center",
-                      justifyContent: "space-between",
-                      width: "100%",
-                    }}
-                  >
-                    <Text
-                      sx={{
-                        fontSize: 16,
-                        fontWeight: "600",
-                        alignSelf: "center",
-                      }}
-                      color="#9FA2B4"
-                    >
-                      Alta
-                    </Text>
-                    <Text
-                      sx={{
-                        fontSize: 16,
-                        fontWeight: "600",
-                        alignSelf: "center",
-                      }}
-                      color="#9EE09E"
-                    >
-                      {complexidadeAlta}
-                    </Text>
-                  </Box>
-                  <Box
-                    mt={2}
-                    sx={{
-                      display: "flex",
-                      alignItens: "center",
-                      justifyContent: "space-between",
-                      width: "100%",
-                    }}
-                  >
-                    <Text
-                      sx={{
-                        fontSize: 16,
-                        fontWeight: "600",
-                        alignSelf: "center",
-                      }}
-                      color="#9FA2B4"
-                    >
-                      Média
-                    </Text>
-                    <Text
-                      sx={{
-                        fontSize: 16,
-                        fontWeight: "600",
-                        alignSelf: "center",
-                      }}
-                      color="#FEB144"
-                    >
-                      {complexidadeMedia}
-                    </Text>
-                  </Box>
-                  <Box
-                    mt={2}
-                    sx={{
-                      display: "flex",
-                      alignItens: "center",
-                      justifyContent: "space-between",
-                      width: "100%",
-                    }}
-                  >
-                    <Text
-                      sx={{
-                        fontSize: 16,
-                        fontWeight: "600",
-                        alignSelf: "center",
-                      }}
-                      color="#9FA2B4"
-                    >
-                      Baixa
-                    </Text>
-                    <Text
-                      sx={{
-                        fontSize: 16,
-                        fontWeight: "600",
-                        alignSelf: "center",
-                      }}
-                      color="#FF6663"
-                    >
-                      {complexidadeBaixa}
-                    </Text>
-                  </Box>
-                </Box>
+                </Flex>
               </Flex>
             </Box>
           </Box>
