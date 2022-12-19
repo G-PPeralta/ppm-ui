@@ -132,3 +132,7 @@ export const cadastroAtividadeIntervencaoSchema = yup.object({
   // }),
   // o_mais_breve_possivel: yup.boolean(),
 });
+
+export const updateProfundidadeoSchema = yup.object({
+  profundidade: yup.string().required("Profundidade é obrigatório"),
+});
