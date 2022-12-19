@@ -12,8 +12,8 @@ import PieChart from "components/PieChart";
 import { getGates } from "services/get/Dashboard";
 
 interface Data {
-  name: string;
-  value: number;
+  gate: string;
+  qtde: number;
   pct: number;
 }
 
@@ -51,25 +51,35 @@ export default function NaoPrevistoComponent() {
   // const preProjetoData =
   //   data && data.filter((x) => x.name === "C&M")[0].value;
 
+  const engenhariaIndex = data.findIndex(
+    (chave) => chave.gate === "Engenharia"
+  );
+
+  const cemIndex = data.findIndex((chave) => chave.gate === "C&M");
+
+  const suprimentos = data.findIndex((chave) => chave.gate === "Suprimentos");
+
+  const preProjetos = data.findIndex((chave) => chave.gate === "Pré-Projeto");
+
   const grafData = [
     {
       name: "Engenharia",
-      value: data ? Number(Number(data[3]?.pct).toFixed(0)) : 0,
+      value: data ? Number(Number(data[engenhariaIndex]?.pct).toFixed(0)) : 0,
       color: "#9EC1CF",
     },
     {
       name: "C&M",
-      value: data ? Number(Number(data[5]?.pct).toFixed(0)) : 0,
+      value: data ? Number(Number(data[cemIndex]?.pct).toFixed(0)) : 0,
       color: "#9EE09E",
     },
     {
       name: "Suprimentos",
-      value: data ? Number(Number(data[1]?.pct).toFixed(0)) : 0,
+      value: data ? Number(Number(data[suprimentos]?.pct).toFixed(0)) : 0,
       color: "#FF6663",
     },
     {
-      name: "Pré-projeto",
-      value: data ? Number(Number(data[0]?.pct).toFixed(0)) : 0,
+      name: "Pré-Projeto",
+      value: data ? Number(Number(data[preProjetos]?.pct).toFixed(0)) : 0,
       color: "#FEB144",
     },
   ];
@@ -150,19 +160,19 @@ export default function NaoPrevistoComponent() {
           <Flex mt={5} mb={5} align={"center"} justify={"center"} flex={1}>
             <Flex h={20} justify={"space-between"} direction={"column"}>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9EE09E">
-                {data ? Number(data[5]?.pct).toFixed(0) : 0}%
+                {data ? Number(data[cemIndex]?.pct).toFixed(0) : 0}%
               </Text>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#FF6663">
-                {data ? Number(data[1]?.pct).toFixed(0) : 0}%
+                {data ? Number(data[suprimentos]?.pct).toFixed(0) : 0}%
               </Text>
             </Flex>
             {grafData && <PieChart size={142} data={grafData} />}
             <Flex h={20} justify={"space-between"} direction={"column"}>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9EC1CF">
-                {data ? Number(data[3]?.pct).toFixed(0) : 0}%
+                {data ? Number(data[engenhariaIndex]?.pct).toFixed(0) : 0}%
               </Text>
               <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#FEB144">
-                {data ? Number(data[0]?.pct).toFixed(0) : 0}%
+                {data ? Number(data[preProjetos]?.pct).toFixed(0) : 0}%
               </Text>
             </Flex>
           </Flex>
