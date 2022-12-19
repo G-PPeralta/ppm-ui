@@ -262,7 +262,16 @@ function CadastrarProjeto() {
                   wrap={"wrap"}
                   direction={innerWidth > 428 ? "row" : "column"}
                 >
-                  <Flex flex={2}>
+                  <Flex flex={2} gap={2}>
+                    <InputGenerico
+                      registerForm={registerForm}
+                      nomeInput={"CAMPO ID"}
+                      propName={"campoID"}
+                      value={registerForm.values.campoID}
+                      required={true}
+                      placeholder={"Valor do ID"}
+                      maxLength={50}
+                    />
                     <InputGenerico
                       registerForm={registerForm}
                       nomeInput={"NOME DO PROJETO"}
