@@ -44,19 +44,48 @@ export default function TotalProjetosComponent() {
 
   async function handleGetTipoResponsavel() {
     const { data } = await getTotalProjetos();
+
     setTotal(data.totalProjetos);
-    data.projetosPorStatus[1] && setIniciados(data.projetosPorStatus[1].qtd);
+    const iniciadosIndex = data.projetosPorStatus.findIndex(
+      (chave: any) => chave.status === "4. Em andamento"
+    );
+    const naoIniciadosIndex = data.projetosPorStatus.findIndex(
+      (chave: any) => chave.status === "1. Não Iniciado"
+    );
+    const reprogramadoIndex = data.projetosPorStatus.findIndex(
+      (chave: any) => chave.status === "6. Reprogramado"
+    );
+    const preAprovacaoIndex = data.projetosPorStatus.findIndex(
+      (chave: any) => chave.status === "3. Pré Aprovação Diretor"
+    );
+    const finalizadosIndex = data.projetosPorStatus.findIndex(
+      (chave: any) => chave.status === "7. Concluído"
+    );
+    const canceladosIndex = data.projetosPorStatus.findIndex(
+      (chave: any) => chave.status === "8. Cancelado"
+    );
+    const holdsIndex = data.projetosPorStatus.findIndex(
+      (chave: any) => chave.status === "8. Cancelado"
+    );
+    data.projetosPorStatus[iniciadosIndex] &&
+      setIniciados(data.projetosPorStatus[iniciadosIndex].qtd);
     // setIniciados(
     //   data.projetosPorStatus[1].qtd +
     //     data.projetosPorStatus[2].qtd +
     //     data.projetosPorStatus[3].qtd,
     // );
-    data.projetosPorStatus[0] && setNaoIniciado(data.projetosPorStatus[0].qtd);
-    data.projetosPorStatus[2] && setReprogramado(data.projetosPorStatus[2].qtd);
-    data.projetosPorStatus[3] && setPreAprovacao(data.projetosPorStatus[3].qtd);
-    data.projetosPorStatus[5] && setFinalizados(data.projetosPorStatus[5].qtd);
-    data.projetosPorStatus[4] && setCancelados(data.projetosPorStatus[4].qtd);
-    data.projetosPorStatus[6] && setHolds(data.projetosPorStatus[6].qtd);
+    data.projetosPorStatus[naoIniciadosIndex] &&
+      setNaoIniciado(data.projetosPorStatus[naoIniciadosIndex].qtd);
+    data.projetosPorStatus[reprogramadoIndex] &&
+      setReprogramado(data.projetosPorStatus[reprogramadoIndex].qtd);
+    data.projetosPorStatus[preAprovacaoIndex] &&
+      setPreAprovacao(data.projetosPorStatus[preAprovacaoIndex].qtd);
+    data.projetosPorStatus[finalizadosIndex] &&
+      setFinalizados(data.projetosPorStatus[finalizadosIndex].qtd);
+    data.projetosPorStatus[canceladosIndex] &&
+      setCancelados(data.projetosPorStatus[canceladosIndex].qtd);
+    data.projetosPorStatus[holdsIndex] &&
+      setHolds(data.projetosPorStatus[holdsIndex].qtd);
     // setHolds(data.projetosPorStatus[6].qtd + data.projetosPorStatus[0].qtd);
   }
 
