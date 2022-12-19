@@ -139,7 +139,8 @@ export default function PrevistoxRealizadoComponent() {
           // w={"100%"}
           h={260}
           w={"100%"}
-          flex={3}
+          flex={1}
+          justifyContent={"center"}
         >
           {/* <StackedBarChartPrevisto
             showY={true}
@@ -150,11 +151,11 @@ export default function PrevistoxRealizadoComponent() {
             barW={25}
           /> */}
 
-          <Flex flex={1}>
+          <Flex justifyContent={"center"}>
             <PrevistoNovo dataX={previstoRealizado} dataEntries={dataEntries} />
             <Flex
               direction={"column"}
-              gap={2}
+              // gap={2}
               justify={"space-between"}
               mb={50}
             >
@@ -167,7 +168,7 @@ export default function PrevistoxRealizadoComponent() {
                     fontSize: 18,
                     fontWeight: "700",
                   }}
-                  w={200}
+                  w={100}
                 >
                   Estatísticas de Renda
                 </Text>
@@ -217,7 +218,6 @@ export default function PrevistoxRealizadoComponent() {
                   >
                     <Flex justify={"center"} align={"center"}>
                       <Text
-                        mt={2}
                         mb={2}
                         sx={{
                           flexFamily: "Mulish",

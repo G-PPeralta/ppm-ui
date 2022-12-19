@@ -75,9 +75,9 @@ export function Home() {
                   AreasDemandadasPorMes={areasDemandadas}
                 />
               </Flex>
-              <Flex flex={3} align="center" justify={"space-between"}>
-                <PrevistoxRealizado />
-              </Flex>
+            </Flex>
+            <Flex align="center" justify={"center"}>
+              <PrevistoxRealizado />
             </Flex>
           </Flex>
         </Sidebar>
