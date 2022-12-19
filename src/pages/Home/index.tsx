@@ -52,7 +52,7 @@ export function Home() {
               </Flex>
 
               <Box
-                flex={1}
+                flex={2}
                 display="flex"
                 flexDirection={"column"}
                 justifyContent="space-evenly"

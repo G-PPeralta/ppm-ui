@@ -39,7 +39,7 @@ export default function Performance() {
   const previstoRealizado = useGetData().slice(-6);
 
   return (
-    <Flex flex={4} w={"100%"} align="center" justify="center" bg={"#EDF2F7"}>
+    <Flex flex={1} w={"80%"} align="center" justify="center" bg={"#EDF2F7"}>
       <Box
         py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
