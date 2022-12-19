@@ -515,7 +515,8 @@ export default function TotalProjetosComponent() {
                   maxW={"200px"}
                   justify={"center"}
                   wrap={"wrap"}
-                  mr={4}
+                  mr={6}
+                  w={300}
                 >
                   <Box mt={-1}>
                     <Text
