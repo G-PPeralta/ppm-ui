@@ -22,7 +22,7 @@ export default function PrevistoNovo({ dataX, dataEntries }: any) {
     <BarChart
       height={230}
       // data={data}
-      width={680}
+      width={690}
       data={dataX}
       margin={{
         top: 20,
