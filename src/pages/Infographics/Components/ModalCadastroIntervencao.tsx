@@ -16,12 +16,12 @@ import {
   FormControl,
   Stack,
   Textarea,
-  Alert,
-  AlertIcon,
-  AlertTitle,
+  // Alert,
+  // AlertIcon,
+  // AlertTitle,
   ModalCloseButton,
   Button,
-  Progress,
+  // Progress,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { ChaoticOrbit, Ring } from "@uiball/loaders";
@@ -29,7 +29,7 @@ import { ProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-import { formatDate } from "utils/formatDate";
+// import { formatDate } from "utils/formatDate";
 import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
@@ -70,8 +70,8 @@ function ModalCadastroIntervencao({
 
   const [listaProjetos, setListaProjetos] = useState<any>([]);
   const [dataLimite, setDataLimite] = useState<any>("");
-  const [valueProgressoMensagemErro, setValueProgressoMensagemErro] =
-    useState<number>(100);
+  // const [valueProgressoMensagemErro, setValueProgressoMensagemErro] =
+  useState<number>(100);
   const [, setDataFinalPrevista] = useState<any>("");
   const [reorderLoading, setReorderLoading] = useState<any>(false);
   const [dataInicioIntervencao, setDataInicioIntervencao] = useState<any>("");
@@ -233,18 +233,18 @@ function ModalCadastroIntervencao({
     ) {
       handleDataLimite();
     }
-    setValueProgressoMensagemErro(100);
-    if (registerForm.values.erroDataIntervencao) {
-      const interval = setInterval(() => {
-        setValueProgressoMensagemErro((value) => {
-          if (value === 0) {
-            return 0;
-          }
-          return value - 1;
-        });
-      }, 500);
-      return () => clearInterval(interval);
-    }
+    // setValueProgressoMensagemErro(100);
+    // if (registerForm.values.erroDataIntervencao) {
+    //   const interval = setInterval(() => {
+    //     setValueProgressoMensagemErro((value) => {
+    //       if (value === 0) {
+    //         return 0;
+    //       }
+    //       return value - 1;
+    //     });
+    //   }, 500);
+    //   return () => clearInterval(interval);
+    // }
   }, [
     registerForm.values.dat_ini_prev,
     registerForm.values.projeto_tipo_id,
@@ -286,9 +286,9 @@ function ModalCadastroIntervencao({
     }
   }, [registerForm.values.poco_id]);
 
-  useEffect(() => {
-    setValueProgressoMensagemErro(100);
-  }, [dataLimite]);
+  // useEffect(() => {
+  //   setValueProgressoMensagemErro(100);
+  // }, [dataLimite]);
 
   useEffect(() => {
     handleGetDataInicio(idCampanha);
@@ -457,7 +457,7 @@ function ModalCadastroIntervencao({
                       </Flex>
                     </Flex>
 
-                    {registerForm.values.erroDataIntervencao && (
+                    {/* {registerForm.values.erroDataIntervencao && (
                       <Flex direction={"column"}>
                         <Alert colorScheme={"red"} variant={"solid"}>
                           <AlertIcon />
@@ -477,7 +477,7 @@ function ModalCadastroIntervencao({
                           isAnimated={true}
                         />
                       </Flex>
-                    )}
+                    )} */}
 
                     {!reorderLoading ? (
                       <AtividadesCadastroIntervencao
