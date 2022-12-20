@@ -79,22 +79,22 @@ export default function NaoPrevistoComponent() {
   const grafData = [
     {
       name: "Engenharia",
-      value: data ? Number(Number(data[engenhariaIndex]?.pct).toFixed(0)) : 0,
+      value: data ? Number(Number(data[engenhariaIndex]?.pct).toFixed(2)) : 0,
       color: "#9EC1CF",
     },
     {
       name: "C&M",
-      value: data ? Number(Number(data[cemIndex]?.pct).toFixed(0)) : 0,
+      value: data ? Number(Number(data[cemIndex]?.pct).toFixed(2)) : 0,
       color: "#9EE09E",
     },
     {
       name: "Suprimentos",
-      value: data ? Number(Number(data[suprimentos]?.pct).toFixed(0)) : 0,
+      value: data ? Number(Number(data[suprimentos]?.pct).toFixed(2)) : 0,
       color: "#FF6663",
     },
     {
       name: "Pré-Projeto",
-      value: data ? Number(Number(data[preProjetos]?.pct).toFixed(0)) : 0,
+      value: data ? Number(Number(data[preProjetos]?.pct).toFixed(2)) : 0,
       color: "#9370DB",
     },
     {
@@ -114,7 +114,7 @@ export default function NaoPrevistoComponent() {
                 Number(data[reprovado]?.pct) +
                 Number(data[inicio]?.pct) +
                 Number(data[emAndamento]?.pct)
-            ).toFixed(0)
+            ).toFixed(2)
           )
         : 0,
       color: "#FEB144",
@@ -123,24 +123,24 @@ export default function NaoPrevistoComponent() {
 
   const hoverProps = {
     "Não Iniciado": data
-      ? Number(Number(data[NãoIniciado]?.pct).toFixed(0))
+      ? Number(Number(data[NãoIniciado]?.pct).toFixed(2))
       : 0,
     "Aprovação do Solicitante": data
-      ? Number(Number(data[AprovacaoSolicitante]?.pct).toFixed(0))
+      ? Number(Number(data[AprovacaoSolicitante]?.pct).toFixed(2))
       : 0,
-    "Hold Gate 1": data ? Number(Number(data[HoldGate1]?.pct).toFixed(0)) : 0,
-    "Gate 1": data ? Number(Number(data[Gate1]?.pct).toFixed(0)) : 0,
-    "Gate 2": data ? Number(Number(data[Gate2]?.pct).toFixed(0)) : 0,
-    Concluído: data ? Number(Number(data[Concluido]?.pct).toFixed(0)) : 0,
-    Hold: data ? Number(Number(data[hold]?.pct).toFixed(0)) : 0,
-    "A definir": data ? Number(Number(data[aDefinir]?.pct).toFixed(0)) : 0,
+    "Hold Gate 1": data ? Number(Number(data[HoldGate1]?.pct).toFixed(2)) : 0,
+    "Gate 1": data ? Number(Number(data[Gate1]?.pct).toFixed(2)) : 0,
+    "Gate 2": data ? Number(Number(data[Gate2]?.pct).toFixed(2)) : 0,
+    Concluído: data ? Number(Number(data[Concluido]?.pct).toFixed(2)) : 0,
+    Hold: data ? Number(Number(data[hold]?.pct).toFixed(2)) : 0,
+    "A definir": data ? Number(Number(data[aDefinir]?.pct).toFixed(2)) : 0,
     "Aprovação Gate 1 - Luna": data
-      ? Number(Number(data[aprovacaoGate1]?.pct).toFixed(0))
+      ? Number(Number(data[aprovacaoGate1]?.pct).toFixed(2))
       : 0,
-    Reprovado: data ? Number(Number(data[reprovado]?.pct).toFixed(0)) : 0,
-    Inicio: data ? Number(Number(data[inicio]?.pct).toFixed(0)) : 0,
+    Reprovado: data ? Number(Number(data[reprovado]?.pct).toFixed(2)) : 0,
+    Inicio: data ? Number(Number(data[inicio]?.pct).toFixed(2)) : 0,
     "Em Andamento": data
-      ? Number(Number(data[emAndamento]?.pct).toFixed(0))
+      ? Number(Number(data[emAndamento]?.pct).toFixed(2))
       : 0,
   };
 
@@ -389,19 +389,19 @@ export default function NaoPrevistoComponent() {
             <Flex mt={5} mb={5} align={"center"} justify={"center"} flex={1}>
               <Flex h={20} justify={"space-between"} direction={"column"}>
                 <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9EE09E">
-                  {data ? Number(data[cemIndex]?.pct).toFixed(0) : 0}%
+                  {data ? Number(data[cemIndex]?.pct).toFixed(2) : 0}%
                 </Text>
                 <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#FF6663">
-                  {data ? Number(data[suprimentos]?.pct).toFixed(0) : 0}%
+                  {data ? Number(data[suprimentos]?.pct).toFixed(2) : 0}%
                 </Text>
               </Flex>
               {grafData && <PieChart size={142} data={grafData} />}
               <Flex h={20} justify={"space-between"} direction={"column"}>
                 <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9EC1CF">
-                  {data ? Number(data[engenhariaIndex]?.pct).toFixed(0) : 0}%
+                  {data ? Number(data[engenhariaIndex]?.pct).toFixed(2) : 0}%
                 </Text>
                 <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9370DB">
-                  {data ? Number(data[preProjetos]?.pct).toFixed(0) : 0}%
+                  {data ? Number(data[preProjetos]?.pct).toFixed(2) : 0}%
                 </Text>
               </Flex>
             </Flex>
@@ -425,7 +425,7 @@ export default function NaoPrevistoComponent() {
                       Number(data[reprovado]?.pct) +
                       Number(data[inicio]?.pct) +
                       Number(data[emAndamento]?.pct)
-                  ).toFixed(0)
+                  ).toFixed(2)
                 : 0}
               %
             </Text>
