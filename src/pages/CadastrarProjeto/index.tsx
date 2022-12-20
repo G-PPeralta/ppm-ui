@@ -18,7 +18,10 @@ import Sidebar from "components/SideBar";
 import TextAreaGenerico from "components/TextAreaGenerico";
 
 import { handleCadastrarPagina } from "utils/handleCadastro";
-import { regexSomenteNumerosMonetario } from "utils/regex";
+import {
+  regexCaracteresEspeciais,
+  regexSomenteNumerosMonetario,
+} from "utils/regex";
 
 import { useProjetos } from "hooks/useCadastroProjeto";
 
@@ -267,7 +270,9 @@ function CadastrarProjeto() {
                       registerForm={registerForm}
                       nomeInput={"CAMPO ID"}
                       propName={"campoId"}
-                      value={registerForm.values.campoId}
+                      value={regexCaracteresEspeciais(
+                        registerForm.values.campoId
+                      )}
                       required={true}
                       placeholder={"Valor do ID"}
                       maxLength={50}
