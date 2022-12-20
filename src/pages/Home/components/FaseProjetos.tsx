@@ -76,73 +76,71 @@ export default function NaoPrevistoComponent() {
 
   const emAndamento = data.findIndex((chave) => chave.gate === "Em andamento");
 
-  // console.log(data);
-
   const grafData = [
     {
       name: "Engenharia",
-      value: data ? Number(Number(data[engenhariaIndex]?.pct).toFixed(2)) : 0,
+      value: data ? Number(Number(data[engenhariaIndex]?.pct).toFixed(0)) : 0,
       color: "#9EC1CF",
     },
     {
       name: "C&M",
-      value: data ? Number(Number(data[cemIndex]?.pct).toFixed(2)) : 0,
+      value: data ? Number(Number(data[cemIndex]?.pct).toFixed(0)) : 0,
       color: "#9EE09E",
     },
     {
       name: "Suprimentos",
-      value: data ? Number(Number(data[suprimentos]?.pct).toFixed(2)) : 0,
+      value: data ? Number(Number(data[suprimentos]?.pct).toFixed(0)) : 0,
       color: "#FF6663",
     },
     {
       name: "Pré-Projeto",
-      value: data ? Number(Number(data[preProjetos]?.pct).toFixed(2)) : 0,
-      color: "#FEB144",
+      value: data ? Number(Number(data[preProjetos]?.pct).toFixed(0)) : 0,
+      color: "#9370DB",
     },
     {
       name: "Outros",
       value: data
         ? Number(
             Number(
-              data[NãoIniciado]?.pct +
-                data[Gate1]?.pct +
-                data[Gate2]?.pct +
-                data[AprovacaoSolicitante]?.pct +
-                data[hold]?.pct +
-                data[HoldGate1]?.pct +
-                data[Concluido]?.pct +
-                data[aDefinir]?.pct +
-                data[aprovacaoGate1]?.pct +
-                data[reprovado]?.pct +
-                data[inicio]?.pct +
-                data[emAndamento]?.pct
-            ).toFixed(2)
+              Number(data[NãoIniciado]?.pct) +
+                Number(data[Gate1]?.pct) +
+                Number(data[Gate2]?.pct) +
+                Number(data[AprovacaoSolicitante]?.pct) +
+                Number(data[hold]?.pct) +
+                Number(data[HoldGate1]?.pct) +
+                Number(data[Concluido]?.pct) +
+                Number(data[aDefinir]?.pct) +
+                Number(data[aprovacaoGate1]?.pct) +
+                Number(data[reprovado]?.pct) +
+                Number(data[inicio]?.pct) +
+                Number(data[emAndamento]?.pct)
+            ).toFixed(0)
           )
         : 0,
-      color: "#9370DB",
+      color: "#FEB144",
     },
   ];
 
   const hoverProps = {
     "Não Iniciado": data
-      ? Number(Number(data[NãoIniciado]?.pct).toFixed(2))
+      ? Number(Number(data[NãoIniciado]?.pct).toFixed(0))
       : 0,
     "Aprovação do Solicitante": data
-      ? Number(Number(data[AprovacaoSolicitante]?.pct).toFixed(2))
+      ? Number(Number(data[AprovacaoSolicitante]?.pct).toFixed(0))
       : 0,
-    "Hold Gate 1": data ? Number(Number(data[HoldGate1]?.pct).toFixed(2)) : 0,
-    "Gate 1": data ? Number(Number(data[Gate1]?.pct).toFixed(2)) : 0,
-    "Gate 2": data ? Number(Number(data[Gate2]?.pct).toFixed(2)) : 0,
-    Concluído: data ? Number(Number(data[Concluido]?.pct).toFixed(2)) : 0,
-    Hold: data ? Number(Number(data[hold]?.pct).toFixed(2)) : 0,
-    "A definir": data ? Number(Number(data[aDefinir]?.pct).toFixed(2)) : 0,
+    "Hold Gate 1": data ? Number(Number(data[HoldGate1]?.pct).toFixed(0)) : 0,
+    "Gate 1": data ? Number(Number(data[Gate1]?.pct).toFixed(0)) : 0,
+    "Gate 2": data ? Number(Number(data[Gate2]?.pct).toFixed(0)) : 0,
+    Concluído: data ? Number(Number(data[Concluido]?.pct).toFixed(0)) : 0,
+    Hold: data ? Number(Number(data[hold]?.pct).toFixed(0)) : 0,
+    "A definir": data ? Number(Number(data[aDefinir]?.pct).toFixed(0)) : 0,
     "Aprovação Gate 1 - Luna": data
-      ? Number(Number(data[aprovacaoGate1]?.pct).toFixed(2))
+      ? Number(Number(data[aprovacaoGate1]?.pct).toFixed(0))
       : 0,
-    Reprovado: data ? Number(Number(data[reprovado]?.pct).toFixed(2)) : 0,
-    Inicio: data ? Number(Number(data[inicio]?.pct).toFixed(2)) : 0,
+    Reprovado: data ? Number(Number(data[reprovado]?.pct).toFixed(0)) : 0,
+    Inicio: data ? Number(Number(data[inicio]?.pct).toFixed(0)) : 0,
     "Em Andamento": data
-      ? Number(Number(data[emAndamento]?.pct).toFixed(2))
+      ? Number(Number(data[emAndamento]?.pct).toFixed(0))
       : 0,
   };
 
@@ -391,30 +389,43 @@ export default function NaoPrevistoComponent() {
             <Flex mt={5} mb={5} align={"center"} justify={"center"} flex={1}>
               <Flex h={20} justify={"space-between"} direction={"column"}>
                 <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9EE09E">
-                  {data ? Number(data[cemIndex]?.pct).toFixed(2) : 0}%
+                  {data ? Number(data[cemIndex]?.pct).toFixed(0) : 0}%
                 </Text>
                 <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#FF6663">
-                  {data ? Number(data[suprimentos]?.pct).toFixed(2) : 0}%
+                  {data ? Number(data[suprimentos]?.pct).toFixed(0) : 0}%
                 </Text>
               </Flex>
               {grafData && <PieChart size={142} data={grafData} />}
               <Flex h={20} justify={"space-between"} direction={"column"}>
                 <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9EC1CF">
-                  {data ? Number(data[engenhariaIndex]?.pct).toFixed(2) : 0}%
+                  {data ? Number(data[engenhariaIndex]?.pct).toFixed(0) : 0}%
                 </Text>
-                <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#FEB144">
-                  {data ? Number(data[preProjetos]?.pct).toFixed(2) : 0}%
+                <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9370DB">
+                  {data ? Number(data[preProjetos]?.pct).toFixed(0) : 0}%
                 </Text>
               </Flex>
             </Flex>
             <Text
               sx={{ fontSize: 16, fontWeight: "600" }}
-              color="#9370DB"
+              color="#FEB144"
               mt={-4}
               mb={4}
             >
               {data
-                ? Number(data[NãoIniciado]?.pct + data[Gate2]?.pct).toFixed(2)
+                ? Number(
+                    Number(data[NãoIniciado]?.pct) +
+                      Number(data[Gate1]?.pct) +
+                      Number(data[Gate2]?.pct) +
+                      Number(data[AprovacaoSolicitante]?.pct) +
+                      Number(data[hold]?.pct) +
+                      Number(data[HoldGate1]?.pct) +
+                      Number(data[Concluido]?.pct) +
+                      Number(data[aDefinir]?.pct) +
+                      Number(data[aprovacaoGate1]?.pct) +
+                      Number(data[reprovado]?.pct) +
+                      Number(data[inicio]?.pct) +
+                      Number(data[emAndamento]?.pct)
+                  ).toFixed(0)
                 : 0}
               %
             </Text>
@@ -440,7 +451,7 @@ export default function NaoPrevistoComponent() {
                   direction="column"
                   align={"center"}
                   w={120}
-                  bg={"#9370DB"}
+                  bg={"#FEB144"}
                   py={1}
                   justify={"center"}
                   onMouseEnter={() => setIsVisible(!isVisible)}
@@ -460,7 +471,7 @@ export default function NaoPrevistoComponent() {
                   direction="column"
                   align={"center"}
                   w={120}
-                  bg={"#FEB144"}
+                  bg={"#9370DB"}
                   py={1}
                   justify={"center"}
                 >
