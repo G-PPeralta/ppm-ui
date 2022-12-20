@@ -340,7 +340,7 @@ export default function AreasDemandadasComponent({
         py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         w={"100%"}
-        h={"345px"}
+        h={"370px"}
         flex={3}
         bg={"white"}
         boxShadow={{
