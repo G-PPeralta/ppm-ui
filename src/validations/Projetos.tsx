@@ -76,4 +76,5 @@ export const cadastroProjetoSchema = yup.object({
   descricao: yup.string().required("Campo obrigatório"),
   justificativa: yup.string().required("Campo obrigatório"),
   comentarios: yup.string(),
+  campoId: yup.string().required(),
 });
