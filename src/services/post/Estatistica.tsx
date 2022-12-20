@@ -1,3 +1,5 @@
+import { Profundidade } from "interfaces/Estatisticas";
+
 import { api, token } from "services/api";
 
 export async function postCadastroOperacao(
@@ -53,6 +55,17 @@ export async function postCadastroNovaAtividadeCronograma(
 ): Promise<{ status: number }> {
   const { status } = await api.post(
     "/projetos-atividades/vincular",
+    payload,
+    token()
+  );
+  return { status };
+}
+
+export async function postDefinirProfundidade(
+  payload: Profundidade
+): Promise<{ status: number }> {
+  const { status } = await api.post(
+    `/projetos-atividades/updateProfundidade`,
     payload,
     token()
   );
