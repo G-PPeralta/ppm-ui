@@ -266,8 +266,8 @@ function CadastrarProjeto() {
                     <InputGenerico
                       registerForm={registerForm}
                       nomeInput={"CAMPO ID"}
-                      propName={"campoID"}
-                      value={registerForm.values.campoID}
+                      propName={"campoId"}
+                      value={registerForm.values.campoId}
                       required={true}
                       placeholder={"Valor do ID"}
                       maxLength={50}

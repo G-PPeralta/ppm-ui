@@ -252,7 +252,7 @@ export function useProjetos() {
     descricao: "",
     justificativa: "",
     comentarios: "",
-    campoID: "",
+    campoId: "",
   };
 
   const registerForm: any = useFormik({
@@ -278,7 +278,7 @@ export function useProjetos() {
         coordenadorId: values.coordenadorId,
         elementoPep: values.elementoPep,
         capexPrevisto: values.capexPrevisto,
-        campoID: values.campoID,
+        campoId: values.campoId,
       };
 
       setLoading(false);
