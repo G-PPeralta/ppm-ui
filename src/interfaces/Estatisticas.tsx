@@ -34,3 +34,8 @@ export interface Anotacoes {
   txt_nota: string;
   url_anexo: any;
 }
+
+export interface Profundidade {
+  id_pai: number;
+  profundidade: string;
+}
