@@ -21,6 +21,12 @@ export interface AtividadesLookahead {
   id_projeto: number;
 }
 
+export interface AtividadesFilho {
+  id: number;
+  nom_atividade: string;
+  data_atividade: string;
+}
+
 export interface FerramentaServico {
   id: number;
   atividade_id: number;

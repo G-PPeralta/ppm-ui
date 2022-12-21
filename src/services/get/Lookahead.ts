@@ -1,4 +1,5 @@
 import {
+  AtividadesFilho,
   AtividadesLookahead,
   FerramentasAtividade,
   ProjetosLookahead,
@@ -16,6 +17,13 @@ export async function getAtividades(
   id: number
 ): Promise<AtividadesLookahead[]> {
   const { data } = await api.get(`/lookahead/atividades/${id}`, token());
+  return data;
+}
+
+export async function getAtividadesFilho(
+  id: string
+): Promise<AtividadesFilho[]> {
+  const { data } = await api.get(`/lookahead/atividades-filho/${id}`, token());
   return data;
 }
 
