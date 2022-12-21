@@ -75,7 +75,7 @@ function ModalCadastroIntervencao({
   const [, setDataFinalPrevista] = useState<any>("");
   const [reorderLoading, setReorderLoading] = useState<any>(false);
   const [dataInicioIntervencao, setDataInicioIntervencao] = useState<any>("");
-  // const [dataInicioReal, setDataInicioReal] = useState<any>("");
+  const [dataInicioReal, setDataInicioReal] = useState<any>("");
 
   const innerWidth = window.innerWidth;
 
@@ -183,7 +183,7 @@ function ModalCadastroIntervencao({
             )
           )
         );
-      // setDataInicioReal(new Date(data.ultima_data));
+      setDataInicioReal(new Date(data.ultima_data));
     }
   };
 
@@ -416,7 +416,7 @@ function ModalCadastroIntervencao({
                           </Flex>
                           <ReactDatePicker
                             selected={dataInicioIntervencao}
-                            minDate={dataInicioIntervencao}
+                            minDate={dataInicioReal}
                             onChange={(date) => handleIniciarDate(date)}
                             locale="pt-BR"
                             // showTimeSelect
