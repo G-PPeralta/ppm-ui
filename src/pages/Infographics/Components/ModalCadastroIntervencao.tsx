@@ -75,7 +75,7 @@ function ModalCadastroIntervencao({
   const [, setDataFinalPrevista] = useState<any>("");
   const [reorderLoading, setReorderLoading] = useState<any>(false);
   const [dataInicioIntervencao, setDataInicioIntervencao] = useState<any>("");
-  const [dataInicioReal, setDataInicioReal] = useState<any>("");
+  // const [dataInicioReal, setDataInicioReal] = useState<any>("");
 
   const innerWidth = window.innerWidth;
 
@@ -183,7 +183,7 @@ function ModalCadastroIntervencao({
             )
           )
         );
-      setDataInicioReal(new Date(data.ultima_data));
+      // setDataInicioReal(new Date(data.ultima_data));
     }
   };
 
@@ -294,9 +294,10 @@ function ModalCadastroIntervencao({
     handleGetDataInicio(idCampanha);
   }, []);
 
-  useEffect(() => {
-    registerForm.setFieldValue("dat_ini_prev", dataInicioReal);
-  }, [dataInicioIntervencao]);
+  // Removido para a data ficar livre para o usuário informar
+  // useEffect(() => {
+  //   registerForm.setFieldValue("dat_ini_prev", dataInicioReal);
+  // }, [dataInicioIntervencao]);
 
   return (
     <>
