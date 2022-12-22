@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   Box,
   Flex,
@@ -6,18 +8,38 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
+import { getProjetosPrevistoRealizado } from "services/get/Dashboard";
+
 import BarChartGraphic from "./BarChart";
 import PieChartGraphic from "./PieChartGraph";
+function useGetData() {
+  const [previstoRealizado, setPrevistoRealizado] = useState<any[]>([]);
+
+  const loadData = async () => {
+    const { data } = await getProjetosPrevistoRealizado();
+
+    const renderPayload: any[] = [];
+    data.map((val: any) =>
+      renderPayload.push({
+        ...val,
+        Realizado: val.capexRealizado,
+        Previsto: val.capexPrevisto,
+      })
+    );
+    setPrevistoRealizado(renderPayload);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+  return previstoRealizado;
+}
 
 export default function Performance() {
+  const previstoRealizado = useGetData().slice(-6);
+
   return (
-    <Flex
-      w={"100%"}
-      align="center"
-      // justify="center"
-      bg={"#EDF2F7"}
-      justify={"space-between"}
-    >
+    <Flex flex={1} w={"80%"} align="center" justify="center" bg={"#EDF2F7"}>
       <Box
         py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
@@ -30,14 +52,19 @@ export default function Performance() {
         borderRadius={"xl"}
         display={"flex"}
         flexDirection={"column"}
-        flex={1}
       >
-        <Flex bg={"white"} justifyContent="space-between" dir="column">
+        <Flex
+          bg={"white"}
+          justifyContent="space-between"
+          dir="column"
+          w={"100%"}
+        >
           <Flex
             direction={"row"}
             justify={"center"}
             align={"flex-start"}
             gap={12}
+            w={"100%"}
           >
             <Flex direction={"column"}>
               <Text
@@ -52,7 +79,7 @@ export default function Performance() {
               >
                 Performance
               </Text>
-              <Flex mt={10}>
+              <Flex mt={10} w={"100%"} flex={1}>
                 <PieChartGraphic />
               </Flex>
             </Flex>
@@ -69,8 +96,8 @@ export default function Performance() {
               >
                 Últimos 6 Meses
               </Text>
-              <Flex mt={30} mb={-20} ml={-10}>
-                <BarChartGraphic />
+              <Flex mt={30} mb={-20} ml={-10} w={"100%"}>
+                <BarChartGraphic data={previstoRealizado} />
               </Flex>
             </Flex>
           </Flex>

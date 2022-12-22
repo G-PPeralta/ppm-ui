@@ -1,51 +1,56 @@
 import { BarChart, Bar, XAxis, Tooltip, Legend } from "recharts";
 
-const data = [
-  {
-    name: "Jan",
-    Realizado: 4000,
-    Previsto: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Fev",
-    Realizado: 3000,
-    Previsto: 1398,
-  },
-  {
-    name: "Mar",
-    Realizado: 2000,
-    Previsto: 9800,
-  },
-  {
-    name: "Abr",
-    Realizado: 2780,
-    Previsto: 3908,
-  },
-  {
-    name: "Mai",
-    Realizado: 1890,
-    Previsto: 4800,
-  },
-  {
-    name: "Jun",
-    Realizado: 2390,
-    Previsto: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Jul",
-    Realizado: 3490,
-    Previsto: 4300,
-  },
-];
+// const data = [
+//   {
+//     name: "Jan",
+//     Realizado: 4000,
+//     Previsto: 2400,
+//     amt: 2400,
+//   },
+//   {
+//     name: "Fev",
+//     Realizado: 3000,
+//     Previsto: 1398,
+//   },
+//   {
+//     name: "Mar",
+//     Realizado: 2000,
+//     Previsto: 9800,
+//   },
+//   {
+//     name: "Abr",
+//     Realizado: 2780,
+//     Previsto: 3908,
+//   },
+//   {
+//     name: "Mai",
+//     Realizado: 1890,
+//     Previsto: 4800,
+//   },
+//   {
+//     name: "Jun",
+//     Realizado: 2390,
+//     Previsto: 3800,
+//     amt: 2500,
+//   },
+//   {
+//     name: "Jul",
+//     Realizado: 3490,
+//     Previsto: 4300,
+//   },
+// ];
 
-export default function BarChartGraphic() {
+export default function BarChartGraphic({ data }: any) {
+  const mesSemAno = data.map((m: any) => ({
+    ...m,
+    mes: m.mes.substring(0, 3),
+  }));
+
   return (
     <BarChart
       width={460}
       height={240}
-      data={data}
+      data={mesSemAno}
       barSize={10}
       margin={{
         top: 5,
@@ -55,10 +60,11 @@ export default function BarChartGraphic() {
       }}
     >
       <XAxis
+        interval={0}
         tickLine={false}
         axisLine={false}
         color={"#2D2926"}
-        dataKey="name"
+        dataKey="mes"
         style={{
           fontSize: "16px",
           fontFamily: "Mulish",
@@ -68,7 +74,14 @@ export default function BarChartGraphic() {
         }}
       />
 
-      <Tooltip />
+      <Tooltip
+        formatter={(value: any) =>
+          value.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })
+        }
+      />
       <Legend
         color="rgb(153 130 157)"
         layout="vertical"

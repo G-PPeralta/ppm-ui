@@ -20,4 +20,5 @@ export interface IConfigProjetoDto {
   complexidade?: number;
   descricao?: string;
   justificativa?: string;
+  campoId?: string;
 }

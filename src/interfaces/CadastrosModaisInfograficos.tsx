@@ -21,6 +21,7 @@ export interface AtividadesProjetoTipo {
   area_id: number;
   tarefa_id: number;
   qtde_dias: number;
+  tipo_precedentes: string;
   precedentes: PrecedentesCadastroProjetoTipo[];
 }
 

@@ -24,8 +24,8 @@ import {
   Select,
   Textarea,
   InputGroup,
-  NumberInput,
-  NumberInputField,
+  // NumberInput,
+  // NumberInputField,
   // NumberInputStepper,
   // NumberIncrementStepper,
   // NumberDecrementStepper,
@@ -266,7 +266,7 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                               PEDIDO
                             </Text>
                           </Flex>
-                          {/* <Input
+                          <Input
                             h={"56px"}
                             _placeholder={{ color: "#949494" }}
                             fontSize={"14px"}
@@ -278,17 +278,17 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                             maxLength={100}
                             value={registerForm.values.pedido}
                             onChange={registerForm.handleChange}
-                            // onKeyPress={(e) => {
-                            //   // eslint-disable-next-line prefer-regex-literals
-                            //   const r = new RegExp(/[a-zA-Z0-9]/);
-                            //   if (!r.test(e.key)) {
-                            //     e.preventDefault();
-                            //   }
-                            // }}
+                            onKeyPress={(e) => {
+                              // eslint-disable-next-line prefer-regex-literals
+                              const r = new RegExp(/[a-zA-Z0-9]/);
+                              if (!r.test(e.key)) {
+                                e.preventDefault();
+                              }
+                            }}
                             size="md"
                             type="text"
-                          /> */}
-                          <NumberInput
+                          />
+                          {/* <NumberInput
                             h={"56px"}
                             placeholder="Pedido"
                             id="pedido"
@@ -306,8 +306,8 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                             {/* <NumberInputStepper>
                               <NumberIncrementStepper />
                               <NumberDecrementStepper />
-                            </NumberInputStepper> */}
-                          </NumberInput>
+                            </NumberInputStepper> 
+                          </NumberInput> */}
                         </FormControl>
                       </Flex>
 

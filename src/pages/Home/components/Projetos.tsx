@@ -95,7 +95,7 @@ export default function NaoPrevistoComponent() {
         flex={1}
         gap={4}
       >
-        <Box w={"100%"}>
+        <Box w={"100%"} mb={-2}>
           <Text
             mb={3}
             sx={{
@@ -111,7 +111,7 @@ export default function NaoPrevistoComponent() {
           <TableContainer
             overflowY={"scroll"}
             overflowX={innerWidth > 428 ? "hidden" : "scroll"}
-            height={260}
+            height={220}
           >
             <Table size="sm">
               <Thead>
@@ -119,6 +119,7 @@ export default function NaoPrevistoComponent() {
                   <Th>ID</Th>
                   <Th>Nome do Projeto</Th>
                   <Th>Orçamento</Th>
+                  <Th>Polo</Th>
                   <Th>CPI</Th>
                   <Th>SPI</Th>
                 </Tr>
@@ -132,12 +133,13 @@ export default function NaoPrevistoComponent() {
               >
                 {projetos.map((projeto, index) => (
                   <Tr mt={1} key={index}>
-                    <Th color="gray.400" sx={{ fontSize: 11 }}>
+                    <Th color="gray.400" sx={{ fontSize: 12 }}>
                       {projeto.id_projeto_real}
                     </Th>
                     <Th
+                      mr={-10}
                       color={"#628EFD"}
-                      sx={{ fontSize: 11 }}
+                      sx={{ fontSize: 12 }}
                       // onMouseOver={(event) => {
                       //   // console.log(projeto.nomeProjeto);
 
@@ -148,10 +150,10 @@ export default function NaoPrevistoComponent() {
                       //   setTrue(false);
                       // }}
                     >
-                      <Text>{projeto.nome_projeto?.substr(0, 18) + "..."}</Text>
+                      <Text>{projeto.nome_projeto}</Text>
                     </Th>
                     {/* {trut ? <Text> {projeto.nomeProjeto}</Text> : ''} */}
-                    <Th color="gray.400" sx={{ fontSize: 11 }}>
+                    <Th color="gray.400" sx={{ fontSize: 12 }}>
                       <Text textAlign={"end"}>
                         {projeto.vlr_orcado
                           ? Intl.NumberFormat("pt-br", {
@@ -163,6 +165,9 @@ export default function NaoPrevistoComponent() {
                               .split(",")[0]
                           : 0}
                       </Text>
+                    </Th>
+                    <Th color="gray.400" sx={{ fontSize: 12 }}>
+                      {projeto.polo}
                     </Th>
                     <Th>
                       {projeto.vlr_cpi == 1 ? (
@@ -198,6 +203,7 @@ export default function NaoPrevistoComponent() {
                         </Box>
                       )}
                     </Th>
+
                     <Th>
                       {projeto.vlr_spi == 1 ? (
                         <Box

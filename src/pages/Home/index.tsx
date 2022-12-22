@@ -47,12 +47,12 @@ export function Home() {
             gap={4}
           >
             <Flex w={"100%"} gap={4} wrap={"wrap"}>
-              <Flex flex={1} align="center" justify={"space-between"}>
+              <Flex align="center" justify={"center"}>
                 <Performance />
               </Flex>
 
               <Box
-                flex={3}
+                flex={1}
                 display="flex"
                 flexDirection={"column"}
                 justifyContent="space-evenly"
@@ -66,12 +66,17 @@ export function Home() {
             </Flex>
             <Flex w={"100%"} gap={4} wrap={"wrap"} flex={1}>
               <TotalProjetos />
-              <Projetos />
-
+              <Flex w={"100%"}>
+                <Projetos />
+              </Flex>
               <FaseProjetos />
-              <AreasDemandadasComponent
-                AreasDemandadasPorMes={areasDemandadas}
-              />
+              <Flex w={"50%"}>
+                <AreasDemandadasComponent
+                  AreasDemandadasPorMes={areasDemandadas}
+                />
+              </Flex>
+            </Flex>
+            <Flex align="center" justify={"center"}>
               <PrevistoxRealizado />
             </Flex>
           </Flex>

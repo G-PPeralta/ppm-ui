@@ -17,10 +17,7 @@ export default function StackedBarChartProjetos({
   dataEntries,
 }: StackedBarChartProps) {
   return (
-    <ResponsiveContainer
-      height={"100%"}
-      width={sizeW === 1000 ? sizeW : "100%"}
-    >
+    <ResponsiveContainer height={260} width={sizeW === 1000 ? sizeW : "70%"}>
       {data.length > 0 ? (
         <BarChart data={data}>
           <XAxis

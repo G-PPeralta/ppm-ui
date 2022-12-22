@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 import {
   Box,
   Flex,
+  Popover,
+  PopoverAnchor,
+  PopoverBody,
+  PopoverContent,
   Text,
   useBreakpointValue,
   useColorModeValue,
@@ -36,21 +40,52 @@ export default function TotalProjetosComponent() {
     TotalProjetosDashboard[]
   >([] as TotalProjetosDashboard[]);
 
+  const [isVisible, setIsVisible] = useState(false);
+
   async function handleGetTipoResponsavel() {
     const { data } = await getTotalProjetos();
+
     setTotal(data.totalProjetos);
-    data.projetosPorStatus[1] && setIniciados(data.projetosPorStatus[1].qtd);
+    const iniciadosIndex = data.projetosPorStatus.findIndex(
+      (chave: any) => chave.status === "4. Em andamento"
+    );
+    const naoIniciadosIndex = data.projetosPorStatus.findIndex(
+      (chave: any) => chave.status === "1. Não Iniciado"
+    );
+    const reprogramadoIndex = data.projetosPorStatus.findIndex(
+      (chave: any) => chave.status === "6. Reprogramado"
+    );
+    const preAprovacaoIndex = data.projetosPorStatus.findIndex(
+      (chave: any) => chave.status === "3. Pré Aprovação Diretor"
+    );
+    const finalizadosIndex = data.projetosPorStatus.findIndex(
+      (chave: any) => chave.status === "7. Concluído"
+    );
+    const canceladosIndex = data.projetosPorStatus.findIndex(
+      (chave: any) => chave.status === "8. Cancelado"
+    );
+    const holdsIndex = data.projetosPorStatus.findIndex(
+      (chave: any) => chave.status === "8. Cancelado"
+    );
+    data.projetosPorStatus[iniciadosIndex] &&
+      setIniciados(data.projetosPorStatus[iniciadosIndex].qtd);
     // setIniciados(
     //   data.projetosPorStatus[1].qtd +
     //     data.projetosPorStatus[2].qtd +
     //     data.projetosPorStatus[3].qtd,
     // );
-    data.projetosPorStatus[0] && setNaoIniciado(data.projetosPorStatus[0].qtd);
-    data.projetosPorStatus[2] && setReprogramado(data.projetosPorStatus[2].qtd);
-    data.projetosPorStatus[3] && setPreAprovacao(data.projetosPorStatus[3].qtd);
-    data.projetosPorStatus[5] && setFinalizados(data.projetosPorStatus[5].qtd);
-    data.projetosPorStatus[4] && setCancelados(data.projetosPorStatus[4].qtd);
-    data.projetosPorStatus[6] && setHolds(data.projetosPorStatus[6].qtd);
+    data.projetosPorStatus[naoIniciadosIndex] &&
+      setNaoIniciado(data.projetosPorStatus[naoIniciadosIndex].qtd);
+    data.projetosPorStatus[reprogramadoIndex] &&
+      setReprogramado(data.projetosPorStatus[reprogramadoIndex].qtd);
+    data.projetosPorStatus[preAprovacaoIndex] &&
+      setPreAprovacao(data.projetosPorStatus[preAprovacaoIndex].qtd);
+    data.projetosPorStatus[finalizadosIndex] &&
+      setFinalizados(data.projetosPorStatus[finalizadosIndex].qtd);
+    data.projetosPorStatus[canceladosIndex] &&
+      setCancelados(data.projetosPorStatus[canceladosIndex].qtd);
+    data.projetosPorStatus[holdsIndex] &&
+      setHolds(data.projetosPorStatus[holdsIndex].qtd);
     // setHolds(data.projetosPorStatus[6].qtd + data.projetosPorStatus[0].qtd);
   }
 
@@ -78,6 +113,20 @@ export default function TotalProjetosComponent() {
   }, []);
 
   // console.log(totalProjetosMes);
+
+  const hoverProps = {
+    holds,
+    holdsPercentage: total === 0 ? 0 : Math.round((holds / total) * 100),
+    preAprovacao,
+    preAprovacaoPercentage:
+      total === 0 ? 0 : Math.round((preAprovacao / total) * 100),
+    reprogramado,
+    reprogramadoPercentage:
+      total === 0 ? 0 : Math.round((reprogramado / total) * 100),
+    naoIniciado,
+    naoIniciadoPercentage:
+      total === 0 ? 0 : Math.round((naoIniciado / total) * 100),
+  };
 
   const data =
     totalProjetosMes &&
@@ -158,145 +207,246 @@ export default function TotalProjetosComponent() {
         flexDirection={"column"}
         alignItems={"center"}
         flex={1}
-        gap={4}
       >
-        <Text
-          sx={{
-            fontSize: 24,
-            fontWeight: "700",
-            fontFamily: "Mulish",
-            width: "100%",
-            textAlign: "flex-start",
-          }}
-          color="#000000"
-        >
-          Total de Projetos
-        </Text>
+        <Popover isOpen={isVisible} placement="left-end">
+          <PopoverContent w={"fit-content"}>
+            <PopoverBody w={"fit-content"}>
+              <Box>
+                <Box>
+                  <Text color={"#1C1B1B"} fontWeight="700">
+                    Holds:{" "}
+                    <span
+                      style={{
+                        fontFamily: "Mulish",
+                        fontWeight: 400,
+                      }}
+                    >
+                      {hoverProps.holds} - {hoverProps.holdsPercentage}%
+                    </span>
+                  </Text>
+                </Box>
+                <Box>
+                  <Text color={"#1C1B1B"} fontWeight="700">
+                    Projetos Pré Aprovação:{" "}
+                    <span
+                      style={{
+                        fontFamily: "Mulish",
+                        fontWeight: 400,
+                      }}
+                    >
+                      {hoverProps.preAprovacao} -{" "}
+                      {hoverProps.preAprovacaoPercentage}%
+                    </span>
+                  </Text>
+                </Box>
+                <Box>
+                  <Text color={"#1C1B1B"} fontWeight="700">
+                    Projetos Reprogramados:{" "}
+                    <span
+                      style={{
+                        fontFamily: "Mulish",
+                        fontWeight: 400,
+                      }}
+                    >
+                      {hoverProps.reprogramado} -{" "}
+                      {hoverProps.reprogramadoPercentage}%
+                    </span>
+                  </Text>
+                </Box>
+                <Box>
+                  <Text color={"#1C1B1B"} fontWeight="700">
+                    Projetos Não Iniciados:{" "}
+                    <span
+                      style={{
+                        fontFamily: "Mulish",
+                        fontWeight: 400,
+                      }}
+                    >
+                      {hoverProps.naoIniciado} -{" "}
+                      {hoverProps.naoIniciadoPercentage}%
+                    </span>
+                  </Text>
+                </Box>
+              </Box>
+            </PopoverBody>
+          </PopoverContent>
 
-        <Box
-          display="flex"
-          flexWrap="wrap"
-          flexDirection={{ base: "column", lg: "row" }}
-          w={"100%"}
-          justifyContent={"space-between"}
-          flex={1}
-          gap={4}
-        >
-          <Flex gap={2} flex={1}>
-            <Flex flex={3}>
-              <Flex
-                px={1}
-                py={5}
-                bg={"#6886B6"}
-                sx={{ width: 35, borderRadius: "2px" }}
-                justify={"center"}
-                align={"center"}
-                height={200}
-                mr={3}
-              >
-                <Text
-                  sx={{
-                    fontSize: 16,
-                    writingMode: "vertical-rl",
-                    transform: "scale(-1)",
-                  }}
-                  color="#ffffff"
-                >
-                  {total} Projetos
-                </Text>
-              </Flex>
-              <Flex
-                direction={"column"}
-                justify={"space-between"}
-                gap={2}
-                flex={1}
-                height={200}
-              >
-                <Flex gap={1} flex={1}>
-                  <Text
-                    p={3}
-                    bg={"#9EE09E"}
-                    sx={{
-                      fontSize: 14,
-                      width: "200px",
-                      borderRadius: "2px",
-                    }}
-                    color="#ffffff"
-                  >
-                    {iniciados} Projetos Iniciados
-                  </Text>
-                  <Text
-                    p={1}
-                    sx={{ fontSize: 14, fontWeight: "600" }}
-                    color="#93E01B"
-                  >
-                    {total === 0 ? 0 : Math.round((iniciados / total) * 100)}%
-                  </Text>
-                </Flex>
+          <Text
+            mb={2}
+            sx={{
+              fontSize: 24,
+              fontWeight: "700",
+              fontFamily: "Mulish",
+              width: "100%",
+              textAlign: "flex-start",
+            }}
+            color="#000000"
+          >
+            Total de Projetos
+          </Text>
 
-                <Flex gap={1} flex={1}>
-                  <Text
-                    p={3}
-                    bg={"#9EC1CF"}
-                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                    color="#ffffff"
+          <Box
+            display="flex"
+            flexWrap="wrap"
+            flexDirection={{ base: "column", lg: "row" }}
+            w={"100%"}
+            justifyContent={"space-between"}
+            flex={1}
+          >
+            <Box
+              overflowX={"scroll"}
+              w={"100%"}
+              h={260}
+              display={"flex"}
+              justifyContent={"center"}
+            >
+              <Flex gap={2} flex={1}>
+                <Flex flex={3}>
+                  <Flex
+                    px={1}
+                    py={5}
+                    bg={"#6886B6"}
+                    sx={{ width: 35, borderRadius: "2px" }}
+                    justify={"center"}
+                    align={"center"}
+                    height={200}
+                    mr={3}
                   >
-                    {finalizados} Projetos Finalizados
-                  </Text>
-                  <Text
-                    p={1}
-                    sx={{ fontSize: 14, fontWeight: "600" }}
-                    color="#0239C3"
+                    <Text
+                      sx={{
+                        fontSize: 16,
+                        writingMode: "vertical-rl",
+                        transform: "scale(-1)",
+                      }}
+                      color="#ffffff"
+                    >
+                      {total} Projetos
+                    </Text>
+                  </Flex>
+                  <Flex
+                    direction={"column"}
+                    justify={"space-between"}
+                    gap={2}
+                    flex={1}
+                    height={200}
                   >
-                    {total === 0 ? 0 : Math.round((finalizados / total) * 100)}%
-                  </Text>
-                </Flex>
+                    <Flex gap={1} flex={1}>
+                      <Text
+                        p={3}
+                        bg={"#9EE09E"}
+                        sx={{
+                          fontSize: 14,
+                          width: "200px",
+                          borderRadius: "2px",
+                        }}
+                        color="#ffffff"
+                      >
+                        {iniciados} Projetos Iniciados
+                      </Text>
+                      <Text
+                        p={1}
+                        sx={{ fontSize: 14, fontWeight: "600" }}
+                        color="#93E01B"
+                      >
+                        {total === 0
+                          ? 0
+                          : Math.round((iniciados / total) * 100)}
+                        %
+                      </Text>
+                    </Flex>
 
-                <Flex gap={1} flex={1}>
-                  <Text
-                    p={3}
-                    bg={"#FF6663"}
-                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                    color="#ffffff"
-                  >
-                    {cancelados} Projetos Cancelados
-                  </Text>
-                  <Text
-                    p={1}
-                    sx={{ fontSize: 14, fontWeight: "600" }}
-                    color="#F94144"
-                  >
-                    {total === 0 ? 0 : Math.round((cancelados / total) * 100)}%
-                  </Text>
-                </Flex>
+                    <Flex gap={1} flex={1}>
+                      <Text
+                        p={3}
+                        bg={"#9EC1CF"}
+                        sx={{
+                          fontSize: 14,
+                          width: "200px",
+                          borderRadius: "2px",
+                        }}
+                        color="#ffffff"
+                      >
+                        {finalizados} Projetos Finalizados
+                      </Text>
+                      <Text
+                        p={1}
+                        sx={{ fontSize: 14, fontWeight: "600" }}
+                        color="#0239C3"
+                      >
+                        {total === 0
+                          ? 0
+                          : Math.round((finalizados / total) * 100)}
+                        %
+                      </Text>
+                    </Flex>
 
-                <Flex gap={1} flex={1}>
-                  <Text
-                    p={3}
-                    bg={"#FEB144"}
-                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                    color="#ffffff"
-                  >
-                    {holds + naoIniciado + preAprovacao + reprogramado} Outros
-                  </Text>
-                  <Text
-                    p={1}
-                    sx={{ fontSize: 14, fontWeight: "600" }}
-                    color="#FEB144"
-                  >
-                    {total === 0
-                      ? 0
-                      : Math.round(
-                          ((holds + naoIniciado + preAprovacao + reprogramado) /
-                            total) *
-                            100
-                        )}
-                    %
-                  </Text>
-                </Flex>
-              </Flex>
+                    <Flex gap={1} flex={1}>
+                      <Text
+                        p={3}
+                        bg={"#FF6663"}
+                        sx={{
+                          fontSize: 14,
+                          width: "200px",
+                          borderRadius: "2px",
+                        }}
+                        color="#ffffff"
+                      >
+                        {cancelados} Projetos Cancelados
+                      </Text>
+                      <Text
+                        p={1}
+                        sx={{ fontSize: 14, fontWeight: "600" }}
+                        color="#F94144"
+                      >
+                        {total === 0
+                          ? 0
+                          : Math.round((cancelados / total) * 100)}
+                        %
+                      </Text>
+                    </Flex>
 
-              {/* <Flex gap={1} flex={1} align={"center"}>
+                    <Flex
+                      gap={1}
+                      flex={1}
+                      onMouseEnter={() => setIsVisible(!isVisible)}
+                      onMouseLeave={() => setIsVisible(!isVisible)}
+                    >
+                      <PopoverAnchor>
+                        <Text
+                          p={3}
+                          bg={"#FEB144"}
+                          sx={{
+                            fontSize: 14,
+                            width: "200px",
+                            borderRadius: "2px",
+                          }}
+                          color="#ffffff"
+                        >
+                          {holds + naoIniciado + preAprovacao + reprogramado}{" "}
+                          Outros
+                        </Text>
+                      </PopoverAnchor>
+                      <Text
+                        p={1}
+                        sx={{ fontSize: 14, fontWeight: "600" }}
+                        color="#FEB144"
+                      >
+                        {total === 0
+                          ? 0
+                          : Math.round(
+                              ((holds +
+                                naoIniciado +
+                                preAprovacao +
+                                reprogramado) /
+                                total) *
+                                100
+                            )}
+                        %
+                      </Text>
+                    </Flex>
+                  </Flex>
+
+                  {/* <Flex gap={1} flex={1} align={"center"}>
                   <Text
                     p={1}
                     bg={"#2762c2"}
@@ -369,14 +519,14 @@ export default function TotalProjetosComponent() {
                     %
                   </Text>
                 </Flex> */}
-            </Flex>
-          </Flex>
+                </Flex>
+              </Flex>
 
-          <Flex align={"center"} justify={"center"} flex={3}>
-            <TotalFases data={data} />
-          </Flex>
+              <Flex align={"center"} justify={"center"} flex={3}>
+                <TotalFases data={data} />
+              </Flex>
 
-          {/* <Flex align={"center"} justify={"center"} flex={1}>
+              {/* <Flex align={"center"} justify={"center"} flex={1}>
             <StackedBarChartProjetos
               showY={false}
               sizeW={280}
@@ -386,213 +536,226 @@ export default function TotalProjetosComponent() {
               barW={30}
             />
           </Flex> */}
-
-          <Flex
-            direction={"column"}
-            flex={3}
-            gap={5}
-            maxW={"200px"}
-            justify={"center"}
-            wrap={"wrap"}
-          >
-            <Box mt={-12}>
-              <Text
-                sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
-                color="#000000"
-              >
-                Prioridade Projetos
-              </Text>
-              <Box
-                mt={2}
-                sx={{
-                  display: "flex",
-                  alignItens: "center",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  sx={{
-                    fontSize: 16,
-                    fontWeight: "600",
-                    alignSelf: "center",
-                  }}
-                  color="#9FA2B4"
+              <Flex direction={"column"}>
+                <Flex
+                  direction={"column"}
+                  flex={3}
+                  gap={5}
+                  maxW={"200px"}
+                  justify={"center"}
+                  wrap={"wrap"}
+                  mr={6}
+                  w={300}
                 >
-                  Alta
-                </Text>
-                <Text
-                  sx={{
-                    fontSize: 16,
-                    fontWeight: "600",
-                    alignSelf: "center",
-                  }}
-                  color="#9EE09E"
-                >
-                  {prioridadeAlta}
-                </Text>
-              </Box>
-              <Box
-                mt={2}
-                sx={{
-                  display: "flex",
-                  alignItens: "center",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  sx={{
-                    fontSize: 16,
-                    fontWeight: "600",
-                    alignSelf: "center",
-                  }}
-                  color="#9FA2B4"
-                >
-                  Média
-                </Text>
-                <Text
-                  sx={{
-                    fontSize: 16,
-                    fontWeight: "600",
-                    alignSelf: "center",
-                  }}
-                  color="#FEB144"
-                >
-                  {prioridadeMedia}
-                </Text>
-              </Box>
-              <Box
-                mt={2}
-                sx={{
-                  display: "flex",
-                  alignItens: "center",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  sx={{
-                    fontSize: 16,
-                    fontWeight: "600",
-                    alignSelf: "center",
-                  }}
-                  color="#9FA2B4"
-                >
-                  Baixa
-                </Text>
-                <Text
-                  sx={{
-                    fontSize: 16,
-                    fontWeight: "600",
-                    alignSelf: "center",
-                  }}
-                  color="#FF6663"
-                >
-                  {prioridadeBaixa}
-                </Text>
-              </Box>
+                  <Box mt={-1}>
+                    <Text
+                      sx={{
+                        fontSize: 15.5,
+                        fontWeight: "600",
+                        alignSelf: "center",
+                      }}
+                      color="#000000"
+                    >
+                      Prioridade Projetos
+                    </Text>
+                    <Box
+                      mt={2}
+                      sx={{
+                        display: "flex",
+                        alignItens: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#9FA2B4"
+                      >
+                        Alta
+                      </Text>
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#9EE09E"
+                      >
+                        {prioridadeAlta}
+                      </Text>
+                    </Box>
+                    <Box
+                      mt={2}
+                      sx={{
+                        display: "flex",
+                        alignItens: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#9FA2B4"
+                      >
+                        Média
+                      </Text>
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#FEB144"
+                      >
+                        {prioridadeMedia}
+                      </Text>
+                    </Box>
+                    <Box
+                      mt={2}
+                      sx={{
+                        display: "flex",
+                        alignItens: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#9FA2B4"
+                      >
+                        Baixa
+                      </Text>
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#FF6663"
+                      >
+                        {prioridadeBaixa}
+                      </Text>
+                    </Box>
+                  </Box>
+                  <Box>
+                    <Text
+                      sx={{
+                        fontSize: 15.5,
+                        fontWeight: "600",
+                        alignSelf: "center",
+                      }}
+                      color="#000000"
+                    >
+                      Complexidade Projetos
+                    </Text>
+                    <Box
+                      mt={2}
+                      sx={{
+                        display: "flex",
+                        alignItens: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#9FA2B4"
+                      >
+                        Alta
+                      </Text>
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#9EE09E"
+                      >
+                        {complexidadeAlta}
+                      </Text>
+                    </Box>
+                    <Box
+                      mt={2}
+                      sx={{
+                        display: "flex",
+                        alignItens: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#9FA2B4"
+                      >
+                        Média
+                      </Text>
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#FEB144"
+                      >
+                        {complexidadeMedia}
+                      </Text>
+                    </Box>
+                    <Box
+                      mt={2}
+                      sx={{
+                        display: "flex",
+                        alignItens: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#9FA2B4"
+                      >
+                        Baixa
+                      </Text>
+                      <Text
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: "600",
+                          alignSelf: "center",
+                        }}
+                        color="#FF6663"
+                      >
+                        {complexidadeBaixa}
+                      </Text>
+                    </Box>
+                  </Box>
+                </Flex>
+              </Flex>
             </Box>
-            <Box>
-              <Text
-                sx={{ fontSize: 16, fontWeight: "600", alignSelf: "center" }}
-                color="#000000"
-              >
-                Complexidade Projetos
-              </Text>
-              <Box
-                mt={2}
-                sx={{
-                  display: "flex",
-                  alignItens: "center",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  sx={{
-                    fontSize: 16,
-                    fontWeight: "600",
-                    alignSelf: "center",
-                  }}
-                  color="#9FA2B4"
-                >
-                  Alta
-                </Text>
-                <Text
-                  sx={{
-                    fontSize: 16,
-                    fontWeight: "600",
-                    alignSelf: "center",
-                  }}
-                  color="#9EE09E"
-                >
-                  {complexidadeAlta}
-                </Text>
-              </Box>
-              <Box
-                mt={2}
-                sx={{
-                  display: "flex",
-                  alignItens: "center",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  sx={{
-                    fontSize: 16,
-                    fontWeight: "600",
-                    alignSelf: "center",
-                  }}
-                  color="#9FA2B4"
-                >
-                  Média
-                </Text>
-                <Text
-                  sx={{
-                    fontSize: 16,
-                    fontWeight: "600",
-                    alignSelf: "center",
-                  }}
-                  color="#FEB144"
-                >
-                  {complexidadeMedia}
-                </Text>
-              </Box>
-              <Box
-                mt={2}
-                sx={{
-                  display: "flex",
-                  alignItens: "center",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  sx={{
-                    fontSize: 16,
-                    fontWeight: "600",
-                    alignSelf: "center",
-                  }}
-                  color="#9FA2B4"
-                >
-                  Baixa
-                </Text>
-                <Text
-                  sx={{
-                    fontSize: 16,
-                    fontWeight: "600",
-                    alignSelf: "center",
-                  }}
-                  color="#FF6663"
-                >
-                  {complexidadeBaixa}
-                </Text>
-              </Box>
-            </Box>
-          </Flex>
-        </Box>
+          </Box>
+        </Popover>
       </Box>
     </Flex>
   );

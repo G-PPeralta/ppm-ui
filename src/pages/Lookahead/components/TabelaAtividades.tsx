@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
 import { FaFileCsv } from "react-icons/fa";
-import { TbTool } from "react-icons/tb";
 
 import {
   Button,
@@ -16,12 +15,13 @@ import {
   Tr,
   Text,
 } from "@chakra-ui/react";
-import { FerramentaServico } from "interfaces/lookahead";
+import { AtividadesFilho, FerramentaServico } from "interfaces/lookahead";
 import moment from "moment";
 
 interface TableProps {
   semana?: string;
   data: FerramentaServico[];
+  dataAtividades: AtividadesFilho[];
 }
 
 class DiasSemana {
@@ -34,7 +34,7 @@ interface AtividadeDiaHora {
   nome: string;
   horaIni: string;
   dataIni: string;
-  tipo: string;
+  tipo?: string;
 }
 
 class Totais {
@@ -49,7 +49,7 @@ const headers = [
   { label: "tipo", key: "tipo" },
 ];
 export function TabelaAtividades(props: TableProps) {
-  const { semana, data } = props;
+  const { semana, dataAtividades } = props;
   const [, setSem] = useState<string>();
   const [dias, setDias] = useState<DiasSemana[]>();
   const [horas, setHoras] = useState<string[]>();
@@ -84,13 +84,13 @@ export function TabelaAtividades(props: TableProps) {
     }
 
     const atividadesGrid: AtividadeDiaHora[] = [];
-    data &&
-      data.forEach((atividade) => {
+    dataAtividades &&
+      dataAtividades.forEach((atividade) => {
         let horaIni;
-        if (atividade.data_hora && atividade.data_hora) {
-          const auxIni = atividade.data_hora.substring(
+        if (atividade.data_atividade && atividade.data_atividade) {
+          const auxIni = atividade.data_atividade.substring(
             0,
-            atividade.data_hora.length - 5
+            atividade.data_atividade.length - 5
           );
 
           // const auxFim = atividade.dat_fim_plan.substring(
@@ -100,14 +100,12 @@ export function TabelaAtividades(props: TableProps) {
 
           // diaIni = new Date(auxIni).getDate().toString();
           horaIni = new Date(auxIni).getHours().toString();
-
           // diaFim = new Date(auxFim).getDate().toString();
           // horaFim = new Date(auxFim).getHours().toString();
           const atividadeGrid: AtividadeDiaHora = {
             horaIni,
             dataIni: dataBr.format(new Date(auxIni)),
-            tipo: atividade.tipo,
-            nome: atividade.nome,
+            nome: atividade.nom_atividade,
           };
 
           atividadesGrid.push(atividadeGrid);
@@ -228,27 +226,14 @@ export function TabelaAtividades(props: TableProps) {
                       const activityS = atividades.filter(
                         (x) =>
                           x.dataIni == dia.data &&
-                          x.horaIni == hora.split(":")[0] &&
-                          x.tipo == "s"
+                          x.horaIni == hora.split(":")[0]
                       );
 
                       const arrayS = activityS
                         ? activityS.map((x) => x.nome)
                         : undefined;
-                      const activityF = atividades.filter(
-                        (x) =>
-                          x.dataIni == dia.data &&
-                          x.horaIni.split(":")[0] == hora.split(":")[0] &&
-                          x.tipo == "f"
-                      );
-
-                      const arrayF = activityF
-                        ? activityF.map((x) => x.nome)
-                        : undefined;
-                      //
-
                       const nomeServ = arrayS ? arrayS.join(" ") : "";
-                      const nomeFerr = arrayF ? arrayF.join(" ") : "";
+
                       return (
                         <Td textAlign={"center"} width="146px" height="56px">
                           <>
@@ -267,19 +252,6 @@ export function TabelaAtividades(props: TableProps) {
                                 </Text>
                                 <br />
                               </>
-                            )}
-
-                            {nomeFerr && (
-                              <Text
-                                display="inline-flex"
-                                color="#585858"
-                                fontWeight="400"
-                                fontSize="12px"
-                                lineHeight="14px"
-                                gap={1}
-                              >
-                                <TbTool /> {nomeFerr.toLocaleLowerCase()}
-                              </Text>
                             )}
                           </>
                         </Td>

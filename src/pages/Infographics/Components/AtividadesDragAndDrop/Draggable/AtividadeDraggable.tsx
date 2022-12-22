@@ -232,7 +232,6 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     }}
                   />
                 </Flex>
-
                 <Flex direction={"column"} flex={1}>
                   <Flex gap={1}>
                     <Text
@@ -246,6 +245,39 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                   <PopOverPrecedentes
                     registerForm={registerForm}
                     index={index}
+                  />
+                </Flex>
+                <Flex direction={"column"} flex={1}>
+                  <Flex gap={1}>
+                    <Text
+                      fontWeight={"700"}
+                      fontSize={"12px"}
+                      color={"#949494"}
+                    >
+                      TIPO
+                    </Text>
+                  </Flex>
+                  <Input
+                    h={"56px"}
+                    _placeholder={{ color: "#949494" }}
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    color={"black"}
+                    maxW={"128px"}
+                    placeholder="IF+0"
+                    type={"text"}
+                    bg={"#fff"}
+                    id={`atividades[${index}].tipo_precedentes`}
+                    name={`atividades[${index}].tipo_precedentes`}
+                    value={
+                      registerForm.values.atividades[index].tipo_precedentes
+                    }
+                    onChange={(event) => {
+                      registerForm.setFieldValue(
+                        `atividades[${index}].tipo_precedentes`,
+                        event.target.value
+                      );
+                    }}
                   />
                 </Flex>
               </Flex>

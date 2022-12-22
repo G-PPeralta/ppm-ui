@@ -11,7 +11,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-import { AtividadesLookahead } from "interfaces/lookahead";
+import { AtividadesFilho, AtividadesLookahead } from "interfaces/lookahead";
 
 import BotaoSetaVoltar from "components/BotaoSetaVoltar/BotaoSetaVoltar";
 import ContainerPagina from "components/ContainerPagina";
@@ -19,7 +19,11 @@ import Sidebar from "components/SideBar";
 
 // import { FiPlusCircle, FiSearch } from "react-icons/fi";
 
-import { getAtividade, getFerramentasServicos } from "services/get/Lookahead";
+import {
+  getAtividade,
+  getAtividadesFilho,
+  getFerramentasServicos,
+} from "services/get/Lookahead";
 
 import { ModalAddAtividade } from "../components/ModalAddAtividade";
 import { TabelaAtividades } from "../components/TabelaAtividades";
@@ -37,12 +41,20 @@ export function LookaheadDetalhe() {
   const [semana, setSemana] = useState<string>();
   const [ferramentasServicos, setFerramentasServicos] = useState<any>();
   const [atividade, setAtividade] = useState<AtividadesLookahead[]>();
+  const [atividadesFilho, setAtividadesFilho] = useState<AtividadesFilho[]>();
 
   const loadAtividade = async () => {
     if (id) {
       const act = await getAtividade(+id);
       setAtividade(act);
     } else return null;
+  };
+
+  const loadAtividadesFilho = async () => {
+    const filhos = id && (await getAtividadesFilho(id));
+    if (filhos) {
+      setAtividadesFilho(filhos);
+    }
   };
 
   const loadFerramentasServicos = async () => {
@@ -86,6 +98,7 @@ export function LookaheadDetalhe() {
 
   useEffect(() => {
     loadFerramentasServicos();
+    loadAtividadesFilho();
     getWeeks();
   }, []);
 
@@ -168,10 +181,11 @@ export function LookaheadDetalhe() {
               </Flex>
 
               <Flex direction="column">
-                {ferramentasServicos && (
+                {ferramentasServicos && atividadesFilho && (
                   <TabelaAtividades
                     semana={semana}
                     data={ferramentasServicos}
+                    dataAtividades={atividadesFilho}
                   />
                 )}
                 {ferramentasServicos ? (

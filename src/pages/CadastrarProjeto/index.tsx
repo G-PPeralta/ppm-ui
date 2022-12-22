@@ -18,7 +18,10 @@ import Sidebar from "components/SideBar";
 import TextAreaGenerico from "components/TextAreaGenerico";
 
 import { handleCadastrarPagina } from "utils/handleCadastro";
-import { regexSomenteNumerosMonetario } from "utils/regex";
+import {
+  regexCaracteresEspeciais,
+  regexSomenteNumerosMonetario,
+} from "utils/regex";
 
 import { useProjetos } from "hooks/useCadastroProjeto";
 
@@ -262,7 +265,20 @@ function CadastrarProjeto() {
                   wrap={"wrap"}
                   direction={innerWidth > 428 ? "row" : "column"}
                 >
-                  <Flex flex={2}>
+                  <Flex flex={1}>
+                    <InputGenerico
+                      registerForm={registerForm}
+                      nomeInput={"ID ORIGEM"}
+                      propName={"campoId"}
+                      value={regexCaracteresEspeciais(
+                        registerForm.values.campoId
+                      )}
+                      required={true}
+                      placeholder={"Valor do ID"}
+                      maxLength={50}
+                    />
+                  </Flex>
+                  <Flex gap={2} flex={2}>
                     <InputGenerico
                       registerForm={registerForm}
                       nomeInput={"NOME DO PROJETO"}

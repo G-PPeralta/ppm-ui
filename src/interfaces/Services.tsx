@@ -338,6 +338,7 @@ export interface ProjetosConfig {
   gate: string;
   tipo: string;
   status: string;
+  campo_id: string;
 }
 
 export interface ProjetosInfo {

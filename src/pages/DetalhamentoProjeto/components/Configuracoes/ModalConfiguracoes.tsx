@@ -65,6 +65,7 @@ function ModalConfiguracoes({
   const [polo, setPolo] = useState(projeto?.polo_id);
   const [local, setLocal] = useState(projeto?.local_id);
   const [solicitacao, setSolicitacao] = useState(projeto?.solicitante_id);
+  const [campoId, setCampoId] = useState(projeto?.campo_id);
   const [nomeProjeto, setNomeProjeto] = useState(projeto?.nome_projeto);
   const [elementoPep, setElementoPep] = useState(projeto?.elemento_pep);
   const [orcamento, setOrcamento] = useState(projeto?.valor_total_previsto);
@@ -95,6 +96,7 @@ function ModalConfiguracoes({
 
   // console.log(typeof orcamento);
   // console.log({ orcamento, changed });
+  // console.log(projeto);
 
   const {
     optionsResponsaveis,
@@ -150,6 +152,7 @@ function ModalConfiguracoes({
       local,
       solicitacao,
       nome_projeto: nomeProjeto,
+      campoId,
       elemento_pep: elementoPep,
       // valor_total_previsto: String(orcamento).match(format)
       //   ? orcamento
@@ -482,6 +485,34 @@ function ModalConfiguracoes({
                       w={"100%"}
                       gap={"16px"}
                     >
+                      <FormControl w={{ sm: "100%", md: "232px" }}>
+                        <FormLabel htmlFor="campo_id">
+                          <Text
+                            color="#949494"
+                            fontSize="12px"
+                            fontWeight="700"
+                          >
+                            ID ORIGEM
+                          </Text>
+                        </FormLabel>
+                        <Input
+                          isDisabled
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          _placeholder={{ color: "#2D2926" }}
+                          maxLength={50}
+                          borderRadius={"8px"}
+                          border={"1px solid #A7A7A7"}
+                          mt={"-6px"}
+                          width={"100%"}
+                          height={"56px"}
+                          id="campo_id"
+                          name="campo_id"
+                          placeholder="Id Origem"
+                          value={campoId}
+                          onChange={(e) => setCampoId(e.target.value)}
+                        ></Input>
+                      </FormControl>
                       <FormControl w={{ sm: "100%", md: "480px" }}>
                         <FormLabel htmlFor="nomeProjeto">
                           <Text
@@ -1045,6 +1076,34 @@ function ModalConfiguracoes({
                       w={"100%"}
                       gap={"16px"}
                     >
+                      <FormControl w={{ sm: "100%", md: "232px" }}>
+                        <FormLabel htmlFor="campoId">
+                          <Text
+                            color="#949494"
+                            fontSize="12px"
+                            fontWeight="700"
+                          >
+                            ID ORIGEM
+                          </Text>
+                        </FormLabel>
+                        <Input
+                          isDisabled
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          _placeholder={{ color: "#2D2926" }}
+                          maxLength={50}
+                          borderRadius={"8px"}
+                          border={"1px solid #A7A7A7"}
+                          mt={"-6px"}
+                          width={"100%"}
+                          height={"56px"}
+                          id="campoId"
+                          name="campoId"
+                          placeholder="Id Origem"
+                          value={campoId}
+                          onChange={(e) => setCampoId(e.target.value)}
+                        ></Input>
+                      </FormControl>
                       <FormControl w={{ sm: "100%", md: "480px" }}>
                         <FormLabel htmlFor="nomeProjeto">
                           <Text
@@ -1603,7 +1662,35 @@ function ModalConfiguracoes({
                       w={"100%"}
                       gap={"16px"}
                     >
+                      <FormControl w={{ sm: "100%", md: "232px" }}>
+                        <FormLabel htmlFor="campo_id">
+                          <Text
+                            color="#949494"
+                            fontSize="12px"
+                            fontWeight="700"
+                          >
+                            ID ORIGEM
+                          </Text>
+                        </FormLabel>
+                        <Input
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          _placeholder={{ color: "#2D2926" }}
+                          maxLength={50}
+                          borderRadius={"8px"}
+                          border={"1px solid #A7A7A7"}
+                          mt={"-6px"}
+                          width={"100%"}
+                          height={"56px"}
+                          id="campo_id"
+                          name="campo_id"
+                          placeholder="Id Origem"
+                          value={campoId}
+                          onChange={(e) => setCampoId(e.target.value)}
+                        ></Input>
+                      </FormControl>
                       <FormControl w={{ sm: "100%", md: "480px" }}>
+                        {" "}
                         <FormLabel htmlFor="nomeProjeto">
                           <Text
                             color="#949494"

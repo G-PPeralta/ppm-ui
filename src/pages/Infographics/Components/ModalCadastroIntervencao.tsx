@@ -16,12 +16,12 @@ import {
   FormControl,
   Stack,
   Textarea,
-  Alert,
-  AlertIcon,
-  AlertTitle,
+  // Alert,
+  // AlertIcon,
+  // AlertTitle,
   ModalCloseButton,
   Button,
-  Progress,
+  // Progress,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { ChaoticOrbit, Ring } from "@uiball/loaders";
@@ -29,7 +29,7 @@ import { ProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-import { formatDate } from "utils/formatDate";
+// import { formatDate } from "utils/formatDate";
 import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
@@ -70,8 +70,8 @@ function ModalCadastroIntervencao({
 
   const [listaProjetos, setListaProjetos] = useState<any>([]);
   const [dataLimite, setDataLimite] = useState<any>("");
-  const [valueProgressoMensagemErro, setValueProgressoMensagemErro] =
-    useState<number>(100);
+  // const [valueProgressoMensagemErro, setValueProgressoMensagemErro] =
+  useState<number>(100);
   const [, setDataFinalPrevista] = useState<any>("");
   const [reorderLoading, setReorderLoading] = useState<any>(false);
   const [dataInicioIntervencao, setDataInicioIntervencao] = useState<any>("");
@@ -183,7 +183,15 @@ function ModalCadastroIntervencao({
             )
           )
         );
-      setDataInicioReal(new Date(data.ultima_data));
+      setDataInicioReal(
+        new Date(
+          new Date(
+            new Date(data.ultima_data.substring(0, 10)).setDate(
+              new Date(data.ultima_data.substring(0, 10)).getDate() + 1
+            )
+          )
+        )
+      );
     }
   };
 
@@ -233,18 +241,18 @@ function ModalCadastroIntervencao({
     ) {
       handleDataLimite();
     }
-    setValueProgressoMensagemErro(100);
-    if (registerForm.values.erroDataIntervencao) {
-      const interval = setInterval(() => {
-        setValueProgressoMensagemErro((value) => {
-          if (value === 0) {
-            return 0;
-          }
-          return value - 1;
-        });
-      }, 500);
-      return () => clearInterval(interval);
-    }
+    // setValueProgressoMensagemErro(100);
+    // if (registerForm.values.erroDataIntervencao) {
+    //   const interval = setInterval(() => {
+    //     setValueProgressoMensagemErro((value) => {
+    //       if (value === 0) {
+    //         return 0;
+    //       }
+    //       return value - 1;
+    //     });
+    //   }, 500);
+    //   return () => clearInterval(interval);
+    // }
   }, [
     registerForm.values.dat_ini_prev,
     registerForm.values.projeto_tipo_id,
@@ -286,17 +294,18 @@ function ModalCadastroIntervencao({
     }
   }, [registerForm.values.poco_id]);
 
-  useEffect(() => {
-    setValueProgressoMensagemErro(100);
-  }, [dataLimite]);
+  // useEffect(() => {
+  //   setValueProgressoMensagemErro(100);
+  // }, [dataLimite]);
 
   useEffect(() => {
     handleGetDataInicio(idCampanha);
   }, []);
 
-  useEffect(() => {
-    registerForm.setFieldValue("dat_ini_prev", dataInicioReal);
-  }, [dataInicioIntervencao]);
+  // Removido para a data ficar livre para o usuário informar
+  // useEffect(() => {
+  //   registerForm.setFieldValue("dat_ini_prev", dataInicioReal);
+  // }, [dataInicioIntervencao]);
 
   return (
     <>
@@ -415,19 +424,20 @@ function ModalCadastroIntervencao({
                           </Flex>
                           <ReactDatePicker
                             selected={dataInicioIntervencao}
-                            minDate={dataInicioIntervencao}
+                            minDate={dataInicioReal}
                             onChange={(date) => handleIniciarDate(date)}
                             locale="pt-BR"
-                            showTimeSelect
+                            // showTimeSelect
                             customInput={<TriggerDatePickerInicio />}
                             isClearable={dataInicioIntervencao !== ""}
                             // disabled={
                             //   registerForm.values.projeto_tipo_id === 0 ||
                             //   registerForm.values.projeto_tipo_id === ""
                             // }
-                            timeFormat="p"
-                            timeIntervals={15}
-                            dateFormat="Pp"
+                            // timeFormat="p"
+                            // timeIntervals={15}
+                            // dateFormat="Pp"
+                            dateFormat="dd/MM/yyyy"
                           />
                         </Flex>
                         {/* <Flex align={"start"}>
@@ -457,7 +467,7 @@ function ModalCadastroIntervencao({
                       </Flex>
                     </Flex>
 
-                    {registerForm.values.erroDataIntervencao && (
+                    {/* {registerForm.values.erroDataIntervencao && (
                       <Flex direction={"column"}>
                         <Alert colorScheme={"red"} variant={"solid"}>
                           <AlertIcon />
@@ -477,7 +487,7 @@ function ModalCadastroIntervencao({
                           isAnimated={true}
                         />
                       </Flex>
-                    )}
+                    )} */}
 
                     {!reorderLoading ? (
                       <AtividadesCadastroIntervencao

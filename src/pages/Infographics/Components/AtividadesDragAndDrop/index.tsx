@@ -88,6 +88,7 @@ export default function AtividadesDragAndDrop({
         area_id: 0,
         tarefa_id: 0,
         qtde_dias: 0,
+        tipo_precedentes: "IF+0",
         fase_id: 0,
         precedentes: listaAtividadesPrecedentes.filter((atividade: any) => {
           for (

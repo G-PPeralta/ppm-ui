@@ -335,11 +335,13 @@ export default function AreasDemandadasComponent({
   ];
 
   return (
-    <Flex w={"100%"} align="center" justify="center" bg={"#EDF2F7"} flex={1}>
+    <Flex w={"100%"} align="center" justify="center" bg={"#EDF2F7"}>
       <Box
         py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         w={"100%"}
+        h={"370px"}
+        flex={3}
         bg={"white"}
         boxShadow={{
           base: "none",
@@ -349,7 +351,6 @@ export default function AreasDemandadasComponent({
         display={"flex"}
         flexDirection={"column"}
         alignItems={"center"}
-        flex={1}
         gap={4}
       >
         <Box w={"fit-content"} h={230}>
@@ -358,14 +359,21 @@ export default function AreasDemandadasComponent({
               fontSize: 18,
               fontWeight: "700",
               fontFamily: "Mulish",
-              alignSelf: "flex-start",
+              alignSelf: "center",
             }}
             color="#000000"
+            textAlign={"center"}
           >
             Áreas Demandantes
           </Text>
           <Box display={"flex"} w={"100%"} justifyContent="space-between">
-            <Box pt={6} minW={innerWidth >= 428 ? "350px" : "120px"} flex={1}>
+            <Box
+              pt={6}
+              minW={innerWidth >= 428 ? "350px" : "120px"}
+              flex={1}
+              ml={-10}
+              mr={-20}
+            >
               <StackedBarChart
                 showY={false}
                 sizeW={innerWidth >= 428 ? 350 : 120}
@@ -375,7 +383,7 @@ export default function AreasDemandadasComponent({
                 barW={20}
               />
             </Box>
-            <Box w={150}>
+            <Box w={200}>
               <Box
                 mb={1}
                 display="flex"
@@ -383,10 +391,11 @@ export default function AreasDemandadasComponent({
                 justifyContent="space-between"
               >
                 <Box
-                  w={150}
+                  w={200}
                   display={"flex"}
                   flexDirection="column"
                   alignItems={"center"}
+                  mt={10}
                 >
                   <Text
                     mb={2}
@@ -400,7 +409,7 @@ export default function AreasDemandadasComponent({
                     SMS
                   </Text>
                   <PercentPieChart
-                    size={60}
+                    size={80}
                     upDown={isUpDown("sms")}
                     data={createPieData().smsData}
                     value={
@@ -409,10 +418,11 @@ export default function AreasDemandadasComponent({
                   />
                 </Box>
                 <Box
-                  w={150}
+                  w={200}
                   display={"flex"}
                   flexDirection="column"
                   alignItems={"center"}
+                  mt={10}
                 >
                   <Text
                     mb={2}
@@ -426,7 +436,7 @@ export default function AreasDemandadasComponent({
                     Regulatório
                   </Text>
                   <PercentPieChart
-                    size={60}
+                    size={80}
                     upDown={isUpDown("regulatorio")}
                     data={createPieData().regulatorioData}
                     value={
@@ -444,13 +454,13 @@ export default function AreasDemandadasComponent({
                 justifyContent="space-between"
               >
                 <Box
-                  w={150}
+                  w={200}
                   display={"flex"}
                   flexDirection="column"
                   alignItems={"center"}
                 >
                   <PercentPieChart
-                    size={60}
+                    size={80}
                     upDown={isUpDown("operacao")}
                     data={createPieData().operacaoData}
                     value={
@@ -471,13 +481,13 @@ export default function AreasDemandadasComponent({
                   </Text>
                 </Box>
                 <Box
-                  w={150}
+                  w={200}
                   display={"flex"}
                   flexDirection="column"
                   alignItems={"center"}
                 >
                   <PercentPieChart
-                    size={60}
+                    size={80}
                     upDown={isUpDown("outros")}
                     data={createPieData().outrosData}
                     value={

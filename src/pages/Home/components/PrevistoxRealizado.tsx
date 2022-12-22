@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Box,
@@ -9,24 +9,25 @@ import {
 } from "@chakra-ui/react";
 
 // import PieChart from "components/PieChart";
-import StackedBarChartPrevisto from "components/StackedBarChartPrevisto";
+// import StackedBarChartPrevisto from "components/StackedBarChartPrevisto";
 
 import { getProjetosPrevistoRealizado } from "services/get/Dashboard";
 
 import Estatisticas from "./BarChartPrevisto";
+import PrevistoNovo from "./PrevistoBarChar";
 
-function useWindowSize() {
-  const [size, setSize] = useState([0, 0]);
-  useLayoutEffect(() => {
-    function updateSize() {
-      setSize([window.innerWidth, window.innerHeight]);
-    }
-    window.addEventListener("resize", updateSize);
-    updateSize();
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-  return size;
-}
+// function useWindowSize() {
+//   const [size, setSize] = useState([0, 0]);
+//   useLayoutEffect(() => {
+//     function updateSize() {
+//       setSize([window.innerWidth, window.innerHeight]);
+//     }
+//     window.addEventListener("resize", updateSize);
+//     updateSize();
+//     return () => window.removeEventListener("resize", updateSize);
+//   }, []);
+//   return size;
+// }
 
 function useGetData() {
   const [previstoRealizado, setPrevistoRealizado] = useState<any[]>([]);
@@ -78,10 +79,11 @@ function useGetData() {
 // }
 
 export default function PrevistoxRealizadoComponent() {
-  const [width] = useWindowSize();
-  const innerWidth = window.innerWidth;
+  // const [width] = useWindowSize();
+  // const innerWidth = window.innerWidth;
 
   const previstoRealizado = useGetData();
+  // console.log(previstoRealizado);
 
   // const { graphPrevisto, graphRealizado } = useGetGraph(previstoRealizado);
 
@@ -104,7 +106,7 @@ export default function PrevistoxRealizadoComponent() {
   ];
 
   return (
-    <Flex w={"100%"} align="center" justify="center" bg={"#EDF2F7"}>
+    <Flex w={"100%"} align="center" justify="center" bg={"#EDF2F7"} flex={3}>
       <Box
         py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
         px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
@@ -118,14 +120,13 @@ export default function PrevistoxRealizadoComponent() {
         display={"flex"}
         flexDirection={"column"}
         alignItems={"center"}
-        flex={1}
-        gap={4}
+        flex={3}
       >
         <Text
           mb={1}
           sx={{
             fontSize: 18,
-            fontWeight: "bold",
+            fontWeight: "700",
             width: "100%",
             textAlign: "flex-start",
           }}
@@ -135,62 +136,134 @@ export default function PrevistoxRealizadoComponent() {
         </Text>
         <Box
           overflowX={"scroll"}
-          w={innerWidth > 428 ? width * 0.7 : width * 0.85}
+          // w={"100%"}
           h={260}
-          display={"flex"}
+          w={"100%"}
+          flex={1}
+          justifyContent={"center"}
         >
-          <StackedBarChartPrevisto
+          {/* <StackedBarChartPrevisto
             showY={true}
             sizeW={100}
             sizeH={200}
             data={previstoRealizado}
             dataEntries={dataEntries}
             barW={25}
-          />
-          <Flex w={"61%"} ml={10} mr={-20}>
-            <Estatisticas />
-          </Flex>
+          /> */}
 
-          <Box justifyContent={"center"}>
-            <Text
-              mt={2}
-              mb={2}
-              sx={{ fontSize: 16, fontWeight: "600" }}
-              color="#000000"
+          <Flex justifyContent={"center"}>
+            <PrevistoNovo dataX={previstoRealizado} dataEntries={dataEntries} />
+            <Flex
+              direction={"column"}
+              // gap={2}
+              justify={"space-between"}
+              mb={50}
             >
-              %
-            </Text>
-            <Box
-              display={"flex"}
-              alignItems="center"
-              w={190}
-              justifyContent="space-evenly"
-            >
-              <Box mt={21}>
-                <Box mb={2} bg={"#FEB144"} py={1} px={2}>
+              <Flex w={"100px"} alignSelf={"center"}>
+                <Text
+                  mt={4}
+                  mb={2}
+                  sx={{
+                    flexFamily: "Mulish",
+                    fontSize: 18,
+                    fontWeight: "700",
+                  }}
+                  w={100}
+                >
+                  Estatísticas de Renda
+                </Text>
+              </Flex>
+              <Flex direction={"column"}>
+                <Flex
+                  gap={2}
+                  // align={"center"}
+
+                  justify={"left"}
+                >
+                  <Flex w={"20px"} bg={"#FEB144"} h={"20px"} gap={4}></Flex>
                   <Text
-                    mb={1}
-                    sx={{ fontSize: 14, fontWeight: "400" }}
-                    color="#ffffff"
+                    fontSize={"16px"}
+                    fontFamily={"Mulish"}
+                    fontWeight={"400"}
                   >
-                    {/* {(graphPrevisto * 100).toFixed(0)}% */}
-                    83%
+                    Previsto
                   </Text>
-                </Box>
-                <Box bg={"#9EC1CF"} py={1} px={2}>
+                </Flex>
+                <Flex
+                  gap={2}
+                  // align={"center"}
+
+                  justify={"left"}
+                >
+                  <Flex w={"20px"} bg={"#9EC1CF"} h={"20px"} gap={4}></Flex>
                   <Text
-                    mb={1}
-                    sx={{ fontSize: 14, fontWeight: "400" }}
-                    color="#ffffff"
+                    fontSize={"16px"}
+                    fontFamily={"Mulish"}
+                    fontWeight={"400"}
                   >
-                    {/* {(graphRealizado * 100).toFixed(0)}% */}
-                    67%
+                    Realizado
                   </Text>
+                </Flex>
+              </Flex>
+            </Flex>
+            <Flex justifyContent={"center"} ml={5} mt={3}>
+              <Estatisticas />
+              <Box justifyContent={"center"}>
+                <Box display={"flex"} alignItems="center">
+                  <Flex
+                    mt={87}
+                    direction={"column"}
+                    justifyContent={"flex-start"}
+                    align={"center"}
+                  >
+                    <Flex justify={"center"} align={"center"}>
+                      <Text
+                        mb={2}
+                        sx={{
+                          flexFamily: "Mulish",
+                          fontSize: 18,
+                          fontWeight: "700",
+                        }}
+                        color="#000000"
+                      >
+                        %
+                      </Text>
+                    </Flex>
+                    <Box
+                      mb={2}
+                      bg={"#FEB144"}
+                      py={1}
+                      px={3}
+                      justifyContent={"center"}
+                      flex={3}
+                    >
+                      <Text
+                        mb={1}
+                        mt={1}
+                        sx={{ fontSize: 14, fontWeight: "400" }}
+                        color="#ffffff"
+                      >
+                        {/* {(graphPrevisto * 100).toFixed(0)}% */}
+                        83%
+                      </Text>
+                    </Box>
+                    <Box bg={"#9EC1CF"} py={1} px={3}>
+                      <Text
+                        mb={1}
+                        mt={1}
+                        sx={{ fontSize: 14, fontWeight: "400" }}
+                        color="#ffffff"
+                      >
+                        {/* {(graphRealizado * 100).toFixed(0)}% */}
+                        67%
+                      </Text>
+                    </Box>
+                  </Flex>
+                  {/* <PieChart size={80} data={grafData} /> */}
                 </Box>
               </Box>
-              {/* <PieChart size={80} data={grafData} /> */}
-            </Box>
-          </Box>
+            </Flex>
+          </Flex>
         </Box>
       </Box>
     </Flex>

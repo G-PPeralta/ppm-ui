@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 
 import {
+  Box,
   Flex,
+  Popover,
+  PopoverAnchor,
+  PopoverBody,
+  PopoverContent,
   Text,
   useBreakpointValue,
   useColorModeValue,
@@ -12,8 +17,8 @@ import PieChart from "components/PieChart";
 import { getGates } from "services/get/Dashboard";
 
 interface Data {
-  name: string;
-  value: number;
+  gate: string;
+  qtde: number;
   pct: number;
 }
 
@@ -31,48 +36,113 @@ export default function NaoPrevistoComponent() {
   }, []);
 
   const innerWidth = window.innerWidth;
+  const [isVisible, setIsVisible] = useState(false);
 
-  // const dataEntries = [
-  //   { name: "Iniciados", color: "#9EC1CF" },
-  //   { name: "Finalizados", color: "#4d87e5" },
-  //   { name: "Cancelados", color: "#9EE09E" },
-  //   { name: "Holds", color: "#2762c2" },
-  //   { name: "Não_Iniciados", color: "#1954b4" },
-  //   { name: "Reprogramados", color: "#1048a4" },
-  //   { name: "Pré_Aprovação", color: "#FEB144" },
-  // ];
+  const engenhariaIndex = data.findIndex(
+    (chave) => chave.gate === "Engenharia"
+  );
 
-  //   const engenhariaData =
-  //   data && data.filter((x) => x.name === "Engenharia")[0].value;
-  // const cMData =
-  //   data && data.filter((x) => x.name === "C&M")[0].value;
-  // const suprimentosData =
-  //   data && data.filter((x) => x.name === "C&M")[0].value;
-  // const preProjetoData =
-  //   data && data.filter((x) => x.name === "C&M")[0].value;
+  const cemIndex = data.findIndex((chave) => chave.gate === "C&M");
+
+  const suprimentos = data.findIndex((chave) => chave.gate === "Suprimentos");
+
+  const preProjetos = data.findIndex((chave) => chave.gate === "Pré-Projeto");
+
+  const NãoIniciado = data.findIndex((chave) => chave.gate === "Não Iniciado");
+
+  const Gate1 = data.findIndex((chave) => chave.gate === "Gate 1");
+
+  const Gate2 = data.findIndex((chave) => chave.gate === "Gate 2");
+
+  const AprovacaoSolicitante = data.findIndex(
+    (chave) => chave.gate === "Aprovação do Solicitante"
+  );
+
+  const HoldGate1 = data.findIndex((chave) => chave.gate === "Hold Gate 1");
+
+  const hold = data.findIndex((chave) => chave.gate === "Hold");
+
+  const Concluido = data.findIndex((chave) => chave.gate === "Concluído");
+
+  const aDefinir = data.findIndex((chave) => chave.gate === "A definir");
+
+  const aprovacaoGate1 = data.findIndex(
+    (chave) => chave.gate === "Aprovação Gate 1 - Luna"
+  );
+
+  const reprovado = data.findIndex((chave) => chave.gate === "Reprovado");
+
+  const inicio = data.findIndex((chave) => chave.gate === "Início");
+
+  const emAndamento = data.findIndex((chave) => chave.gate === "Em andamento");
 
   const grafData = [
     {
       name: "Engenharia",
-      value: data ? Number(data[3]?.pct) : 0,
+      value: data ? Number(Number(data[engenhariaIndex]?.pct).toFixed(2)) : 0,
       color: "#9EC1CF",
     },
     {
       name: "C&M",
-      value: data ? Number(data[5]?.pct) : 0,
+      value: data ? Number(Number(data[cemIndex]?.pct).toFixed(2)) : 0,
       color: "#9EE09E",
     },
     {
       name: "Suprimentos",
-      value: data ? Number(data[1]?.pct) : 0,
+      value: data ? Number(Number(data[suprimentos]?.pct).toFixed(2)) : 0,
       color: "#FF6663",
     },
     {
-      name: "Pré-projeto",
-      value: data ? Number(data[0]?.pct) : 0,
+      name: "Pré-Projeto",
+      value: data ? Number(Number(data[preProjetos]?.pct).toFixed(2)) : 0,
+      color: "#9370DB",
+    },
+    {
+      name: "Outros",
+      value: data
+        ? Number(
+            Number(
+              Number(data[NãoIniciado]?.pct) +
+                Number(data[Gate1]?.pct) +
+                Number(data[Gate2]?.pct) +
+                Number(data[AprovacaoSolicitante]?.pct) +
+                Number(data[hold]?.pct) +
+                Number(data[HoldGate1]?.pct) +
+                Number(data[Concluido]?.pct) +
+                Number(data[aDefinir]?.pct) +
+                Number(data[aprovacaoGate1]?.pct) +
+                Number(data[reprovado]?.pct) +
+                Number(data[inicio]?.pct) +
+                Number(data[emAndamento]?.pct)
+            ).toFixed(2)
+          )
+        : 0,
       color: "#FEB144",
     },
   ];
+
+  const hoverProps = {
+    "Não Iniciado": data
+      ? Number(Number(data[NãoIniciado]?.pct).toFixed(2))
+      : 0,
+    "Aprovação do Solicitante": data
+      ? Number(Number(data[AprovacaoSolicitante]?.pct).toFixed(2))
+      : 0,
+    "Hold Gate 1": data ? Number(Number(data[HoldGate1]?.pct).toFixed(2)) : 0,
+    "Gate 1": data ? Number(Number(data[Gate1]?.pct).toFixed(2)) : 0,
+    "Gate 2": data ? Number(Number(data[Gate2]?.pct).toFixed(2)) : 0,
+    Concluído: data ? Number(Number(data[Concluido]?.pct).toFixed(2)) : 0,
+    Hold: data ? Number(Number(data[hold]?.pct).toFixed(2)) : 0,
+    "A definir": data ? Number(Number(data[aDefinir]?.pct).toFixed(2)) : 0,
+    "Aprovação Gate 1 - Luna": data
+      ? Number(Number(data[aprovacaoGate1]?.pct).toFixed(2))
+      : 0,
+    Reprovado: data ? Number(Number(data[reprovado]?.pct).toFixed(2)) : 0,
+    Inicio: data ? Number(Number(data[inicio]?.pct).toFixed(2)) : 0,
+    "Em Andamento": data
+      ? Number(Number(data[emAndamento]?.pct).toFixed(2))
+      : 0,
+  };
 
   return (
     <Flex
@@ -83,127 +153,341 @@ export default function NaoPrevistoComponent() {
       flex={1}
       h={"100%"}
     >
-      <Flex
-        py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
-        px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
-        w={"100%"}
-        bg={"white"}
-        boxShadow={{
-          base: "none",
-          sm: useColorModeValue("md", "md-dark"),
-        }}
-        borderRadius={"xl"}
-        direction={"column"}
-        align={"center"}
-        flex={1}
-        gap={4}
-      >
-        <Flex direction="column" align={"center"} flex={1}>
-          <Text
-            mb={1}
-            sx={{
-              fontSize: 18,
-              fontWeight: "700",
-              fontFamily: "Mulish",
-              alignSelf: innerWidth >= 428 ? "center" : "flex-start",
-            }}
-            color="#000000"
-          >
-            Fase dos Projetos
-          </Text>
-          <Flex mt={2} flex={1}>
-            <Flex display={"flex"} w={300} justify="space-between">
-              <Flex
-                direction="column"
-                align={"center"}
-                w={120}
-                bg={"#9EE09E"}
-                py={1}
-                justify={"center"}
-              >
-                <Text
-                  mb={1}
-                  sx={{ fontSize: 16, fontWeight: "600" }}
-                  color="#ffffff"
+      <Popover isOpen={isVisible} placement="left-end">
+        <PopoverContent w={"fit-content"}>
+          <PopoverBody w={"fit-content"}>
+            <Box>
+              <Box>
+                <Text color={"#1C1B1B"} fontWeight="700">
+                  Não Iniciado:{" "}
+                  <span
+                    style={{
+                      fontFamily: "Mulish",
+                      fontWeight: 400,
+                    }}
+                  >
+                    {data ? data[NãoIniciado]?.qtde : 0} -{" "}
+                    {hoverProps["Não Iniciado"]}%
+                  </span>
+                </Text>
+              </Box>
+              <Box>
+                <Text color={"#1C1B1B"} fontWeight="700">
+                  Aprovação do Solicitante:{" "}
+                  <span
+                    style={{
+                      fontFamily: "Mulish",
+                      fontWeight: 400,
+                    }}
+                  >
+                    {data ? data[AprovacaoSolicitante]?.qtde : 0} -{" "}
+                    {hoverProps["Aprovação do Solicitante"]}%
+                  </span>
+                </Text>
+              </Box>
+              <Box>
+                <Text color={"#1C1B1B"} fontWeight="700">
+                  Hold Gate 1:{" "}
+                  <span
+                    style={{
+                      fontFamily: "Mulish",
+                      fontWeight: 400,
+                    }}
+                  >
+                    {data ? data[HoldGate1]?.qtde : 0} -{" "}
+                    {hoverProps["Hold Gate 1"]}%
+                  </span>
+                </Text>
+              </Box>
+              <Box>
+                <Text color={"#1C1B1B"} fontWeight="700">
+                  Gate 1:{" "}
+                  <span
+                    style={{
+                      fontFamily: "Mulish",
+                      fontWeight: 400,
+                    }}
+                  >
+                    {data ? data[Gate1]?.qtde : 0} - {hoverProps["Gate 1"]}%
+                  </span>
+                </Text>
+              </Box>
+              <Box>
+                <Text color={"#1C1B1B"} fontWeight="700">
+                  Gate 2 :{" "}
+                  <span
+                    style={{
+                      fontFamily: "Mulish",
+                      fontWeight: 400,
+                    }}
+                  >
+                    {data ? data[Gate2]?.qtde : 0} - {hoverProps["Gate 2"]}%
+                  </span>
+                </Text>
+              </Box>
+              <Box>
+                <Text color={"#1C1B1B"} fontWeight="700">
+                  Concluído:{" "}
+                  <span
+                    style={{
+                      fontFamily: "Mulish",
+                      fontWeight: 400,
+                    }}
+                  >
+                    {data ? data[Concluido]?.qtde : 0} - {hoverProps.Concluído}%
+                  </span>
+                </Text>
+              </Box>
+              <Box>
+                <Text color={"#1C1B1B"} fontWeight="700">
+                  Hold:{" "}
+                  <span
+                    style={{
+                      fontFamily: "Mulish",
+                      fontWeight: 400,
+                    }}
+                  >
+                    {data ? data[hold]?.qtde : 0} - {hoverProps.Hold}%
+                  </span>
+                </Text>
+              </Box>
+              <Box>
+                <Text color={"#1C1B1B"} fontWeight="700">
+                  A definir:{" "}
+                  <span
+                    style={{
+                      fontFamily: "Mulish",
+                      fontWeight: 400,
+                    }}
+                  >
+                    {data ? data[aDefinir]?.qtde : 0} -{" "}
+                    {hoverProps["A definir"]}%
+                  </span>
+                </Text>
+              </Box>
+              <Box>
+                <Text color={"#1C1B1B"} fontWeight="700">
+                  Aprovação Gate 1 - Luna:{" "}
+                  <span
+                    style={{
+                      fontFamily: "Mulish",
+                      fontWeight: 400,
+                    }}
+                  >
+                    {data ? data[aprovacaoGate1]?.qtde : 0} -{" "}
+                    {hoverProps["Aprovação Gate 1 - Luna"]}%
+                  </span>
+                </Text>
+              </Box>
+              <Box>
+                <Text color={"#1C1B1B"} fontWeight="700">
+                  Reprovado:{" "}
+                  <span
+                    style={{
+                      fontFamily: "Mulish",
+                      fontWeight: 400,
+                    }}
+                  >
+                    {data ? data[reprovado]?.qtde : 0} - {hoverProps.Reprovado}%
+                  </span>
+                </Text>
+              </Box>
+              <Box>
+                <Text color={"#1C1B1B"} fontWeight="700">
+                  Início:{" "}
+                  <span
+                    style={{
+                      fontFamily: "Mulish",
+                      fontWeight: 400,
+                    }}
+                  >
+                    {data ? data[inicio]?.qtde : 0} - {hoverProps.Inicio}%
+                  </span>
+                </Text>
+              </Box>
+              <Box>
+                <Text color={"#1C1B1B"} fontWeight="700">
+                  Em Andamento:{" "}
+                  <span
+                    style={{
+                      fontFamily: "Mulish",
+                      fontWeight: 400,
+                    }}
+                  >
+                    {data ? data[emAndamento]?.qtde : 0} -{" "}
+                    {hoverProps["Em Andamento"]}%
+                  </span>
+                </Text>
+              </Box>
+            </Box>
+          </PopoverBody>
+        </PopoverContent>
+        <Flex
+          py={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
+          px={useBreakpointValue({ base: 8, sm: 8, md: 6 })}
+          w={"100%"}
+          bg={"white"}
+          boxShadow={{
+            base: "none",
+            sm: useColorModeValue("md", "md-dark"),
+          }}
+          borderRadius={"xl"}
+          direction={"column"}
+          align={"center"}
+          flex={1}
+          gap={4}
+        >
+          <Flex direction="column" align={"center"} flex={1}>
+            <Text
+              mb={1}
+              sx={{
+                fontSize: 18,
+                fontWeight: "700",
+                fontFamily: "Mulish",
+                alignSelf: innerWidth >= 428 ? "center" : "flex-start",
+              }}
+              color="#000000"
+            >
+              Fase dos Projetos
+            </Text>
+            <Flex mt={2} flex={1}>
+              <Flex display={"flex"} w={400} justify="space-between">
+                <Flex
+                  direction="column"
+                  align={"center"}
+                  w={120}
+                  bg={"#9EE09E"}
+                  py={1}
+                  justify={"center"}
                 >
-                  C&M
+                  <Text
+                    mb={1}
+                    sx={{ fontSize: 16, fontWeight: "600" }}
+                    color="#ffffff"
+                  >
+                    C&M
+                  </Text>
+                </Flex>
+                <Flex
+                  direction="column"
+                  align={"center"}
+                  w={120}
+                  bg={"#9EC1CF"}
+                  py={1}
+                  justify={"center"}
+                >
+                  <Text
+                    mb={1}
+                    sx={{ fontSize: 16, fontWeight: "600" }}
+                    color="#ffffff"
+                  >
+                    Engenharia
+                  </Text>
+                </Flex>
+              </Flex>
+            </Flex>
+            <Flex mt={5} mb={5} align={"center"} justify={"center"} flex={1}>
+              <Flex h={20} justify={"space-between"} direction={"column"}>
+                <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9EE09E">
+                  {data ? Number(data[cemIndex]?.pct).toFixed(2) : 0}%
+                </Text>
+                <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#FF6663">
+                  {data ? Number(data[suprimentos]?.pct).toFixed(2) : 0}%
                 </Text>
               </Flex>
-              <Flex
-                direction="column"
-                align={"center"}
-                w={120}
-                bg={"#9EC1CF"}
-                py={1}
-                justify={"center"}
-              >
-                <Text
-                  mb={1}
-                  sx={{ fontSize: 16, fontWeight: "600" }}
-                  color="#ffffff"
-                >
-                  Engenharia
+              {grafData && <PieChart size={142} data={grafData} />}
+              <Flex h={20} justify={"space-between"} direction={"column"}>
+                <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9EC1CF">
+                  {data ? Number(data[engenhariaIndex]?.pct).toFixed(2) : 0}%
+                </Text>
+                <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9370DB">
+                  {data ? Number(data[preProjetos]?.pct).toFixed(2) : 0}%
                 </Text>
               </Flex>
             </Flex>
-          </Flex>
-          <Flex mt={5} mb={5} align={"center"} justify={"center"} flex={1}>
-            <Flex h={20} justify={"space-between"} direction={"column"}>
-              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9EE09E">
-                {data ? data[5]?.pct : 0}%
-              </Text>
-              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#FF6663">
-                {data ? data[1]?.pct : 0}%
-              </Text>
-            </Flex>
-            {grafData && <PieChart size={136} data={grafData} />}
-            <Flex h={20} justify={"space-between"} direction={"column"}>
-              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9EC1CF">
-                {data ? data[3]?.pct : 0}%
-              </Text>
-              <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#FEB144">
-                {data ? data[0]?.pct : 0}%
-              </Text>
-            </Flex>
-          </Flex>
-          <Flex mb={1} flex={1}>
-            <Flex display={"flex"} w={300} justify="space-between">
-              <Flex
-                direction="column"
-                align={"center"}
-                w={120}
-                bg={"#FF6663"}
-                py={1}
-                justify={"center"}
-              >
-                <Text
-                  mb={1}
-                  sx={{ fontSize: 16, fontWeight: "600" }}
-                  color="#ffffff"
+            <Text
+              sx={{ fontSize: 16, fontWeight: "600" }}
+              color="#FEB144"
+              mt={-4}
+              mb={4}
+            >
+              {data
+                ? Number(
+                    Number(data[NãoIniciado]?.pct) +
+                      Number(data[Gate1]?.pct) +
+                      Number(data[Gate2]?.pct) +
+                      Number(data[AprovacaoSolicitante]?.pct) +
+                      Number(data[hold]?.pct) +
+                      Number(data[HoldGate1]?.pct) +
+                      Number(data[Concluido]?.pct) +
+                      Number(data[aDefinir]?.pct) +
+                      Number(data[aprovacaoGate1]?.pct) +
+                      Number(data[reprovado]?.pct) +
+                      Number(data[inicio]?.pct) +
+                      Number(data[emAndamento]?.pct)
+                  ).toFixed(2)
+                : 0}
+              %
+            </Text>
+            <Flex mb={1} flex={1}>
+              <Flex display={"flex"} w={400} justify="space-between" gap={3}>
+                <Flex
+                  direction="column"
+                  align={"center"}
+                  w={120}
+                  bg={"#FF6663"}
+                  py={1}
+                  justify={"center"}
                 >
-                  Suprimentos
-                </Text>
-              </Flex>
-              <Flex
-                direction="column"
-                align={"center"}
-                w={120}
-                bg={"#FEB144"}
-                py={1}
-                justify={"center"}
-              >
-                <Text
-                  mb={1}
-                  sx={{ fontSize: 16, fontWeight: "600" }}
-                  color="#ffffff"
+                  <Text
+                    mb={1}
+                    sx={{ fontSize: 16, fontWeight: "600" }}
+                    color="#ffffff"
+                  >
+                    Suprimentos
+                  </Text>
+                </Flex>
+                <Flex
+                  direction="column"
+                  align={"center"}
+                  w={120}
+                  bg={"#FEB144"}
+                  py={1}
+                  justify={"center"}
+                  onMouseEnter={() => setIsVisible(!isVisible)}
+                  onMouseLeave={() => setIsVisible(!isVisible)}
                 >
-                  Pré-projeto
-                </Text>
+                  <PopoverAnchor>
+                    <Text
+                      mb={1}
+                      sx={{ fontSize: 16, fontWeight: "600" }}
+                      color="#ffffff"
+                    >
+                      Outros
+                    </Text>
+                  </PopoverAnchor>
+                </Flex>
+                <Flex
+                  direction="column"
+                  align={"center"}
+                  w={120}
+                  bg={"#9370DB"}
+                  py={1}
+                  justify={"center"}
+                >
+                  <Text
+                    mb={1}
+                    sx={{ fontSize: 16, fontWeight: "600" }}
+                    color="#ffffff"
+                  >
+                    Pré-Projeto
+                  </Text>
+                </Flex>
               </Flex>
             </Flex>
           </Flex>
         </Flex>
-      </Flex>
+      </Popover>
     </Flex>
   );
 }
