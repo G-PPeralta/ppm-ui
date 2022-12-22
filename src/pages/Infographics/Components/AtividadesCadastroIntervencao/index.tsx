@@ -27,6 +27,7 @@ interface Atividade {
   area_id: number;
   tarefa_id: number;
   qtde_dias: number;
+  ind_atv_execucao: boolean;
   precedentes: AtividadePrecedente[];
 }
 

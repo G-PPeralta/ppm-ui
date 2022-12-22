@@ -114,7 +114,7 @@ function ModalCadastroIntervencao({
         tarefa_id: atividade.id_tarefa,
         qtde_dias: atividade.qtde_dias,
         precedentes: atividade.precedentes,
-        ind_atv_execucao: false,
+        ind_atv_execucao: atividade.ind_atv_execucao,
       }));
 
       registerForm.setFieldValue("atividades", atividadesFormatadas);
