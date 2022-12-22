@@ -183,7 +183,15 @@ function ModalCadastroIntervencao({
             )
           )
         );
-      setDataInicioReal(new Date(data.ultima_data));
+      setDataInicioReal(
+        new Date(
+          new Date(
+            new Date(data.ultima_data.substring(0, 10)).setDate(
+              new Date(data.ultima_data.substring(0, 10)).getDate() + 1
+            )
+          )
+        )
+      );
     }
   };
 
