@@ -152,7 +152,7 @@ function ModalConfiguracoes({
       local,
       solicitacao,
       nome_projeto: nomeProjeto,
-      campo_id: campoId,
+      campoId,
       elemento_pep: elementoPep,
       // valor_total_previsto: String(orcamento).match(format)
       //   ? orcamento
@@ -1077,7 +1077,7 @@ function ModalConfiguracoes({
                       gap={"16px"}
                     >
                       <FormControl w={{ sm: "100%", md: "232px" }}>
-                        <FormLabel htmlFor="campo_id">
+                        <FormLabel htmlFor="campoId">
                           <Text
                             color="#949494"
                             fontSize="12px"
@@ -1097,8 +1097,8 @@ function ModalConfiguracoes({
                           mt={"-6px"}
                           width={"100%"}
                           height={"56px"}
-                          id="campo_id"
-                          name="campo_id"
+                          id="campoId"
+                          name="campoId"
                           placeholder="Id Origem"
                           value={campoId}
                           onChange={(e) => setCampoId(e.target.value)}
