@@ -61,6 +61,7 @@ export const cadastroProjetoTipoSchema = yup.object({
         })
       ),
       fase_id: yup.number().required().moreThan(0),
+      ind_atv_execucao: yup.bool(),
     })
   ),
   comentarios: yup.string(),
