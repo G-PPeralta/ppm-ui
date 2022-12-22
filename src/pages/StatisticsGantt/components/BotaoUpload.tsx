@@ -1,35 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import toast from "react-hot-toast";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { BsFillCloudArrowUpFill } from "react-icons/bs";
 
 import { Button, Flex, IconButton, Text } from "@chakra-ui/react";
 
+import { useToast } from "contexts/Toast";
+
+import { uploadArquivoS3 } from "services/post/Upload";
+
 interface Props {
   registerForm: any;
   index: number;
-  nomeArquivo: string;
-  propName: string;
+  propName: "mocs" | "aprs";
+  keyName: "numero_moc" | "codigo_apr";
 }
 
-function BotaoUploadArquivo({
-  registerForm,
-  index,
-  nomeArquivo,
-  propName,
-}: Props) {
-  const [nomeArquivoSelecionado, setNomeArquivoSelecionado] =
-    useState(nomeArquivo);
-  const [arquivoSelecionado, setArquivoSelecionado] = useState("");
+function BotaoUploadArquivo({ registerForm, index, propName, keyName }: Props) {
+  const { toast } = useToast();
 
-  // const [payload, setPayload] = useState({
-  //   base64data: "", // base64 da imagem
-  //   path: "", // moc OU apr
-  //   fileName: "", // tanto faz
-  //   fileType: "aplication",
-  //   extension: "pdf",
-  // });
+  const [payload, setPayload] = useState({
+    base64data: "" as any, // base64 da imagem
+    path: "", // moc OU apr
+    fileName: "", // tanto faz
+    fileType: "application",
+    extension: "pdf",
+  });
 
   const convertToBase64 = (file: any) =>
     new Promise((resolve, reject) => {
@@ -43,56 +39,31 @@ function BotaoUploadArquivo({
       };
     });
 
-  const handleNomeArquivo = (nomeArquivo: string) =>
-    nomeArquivo.replace(/\s/g, "_");
+  const onDrop = async (acceptedFiles: any) => {
+    const arquivo = acceptedFiles[0];
 
-  const onDrop = (acceptedFiles: any) => {
-    const file = acceptedFiles[0];
-    const teste = convertToBase64(file);
-    setArquivoSelecionado(file.name);
-    if (propName === "anexo") {
-      const nomeArquivo = `${registerForm.values.id_poco}_${
-        registerForm.values.id_sonda
-      }_${handleNomeArquivo(registerForm.values.ocorrencia)}.pdf`;
-      const fileRenomeado = new File([file], nomeArquivo, {
-        type: file.type,
-      });
-      registerForm.setFieldValue(`${propName}[${index}].arquivo`, teste);
-      registerForm.setFieldValue(
-        `${propName}[${index}].anexo`,
-        fileRenomeado.name
-      );
-    } else if (propName === "mocs") {
-      const nomeArquivo = `MOC_${registerForm.values.id_atividade}_${registerForm.values[propName][index].numero_moc}.pdf`;
-      const fileRenomeado = new File([file], nomeArquivo, {
-        type: file.type,
-      });
-      registerForm.setFieldValue(
-        `${propName}[${index}].arquivo`,
-        fileRenomeado
-      );
-      registerForm.setFieldValue(
-        `${propName}[${index}].anexo`,
-        fileRenomeado.name
-      );
-    } else {
-      const nomeArquivo = `APR_${registerForm.values.id_atividade}_${registerForm.values[propName][index].codigo_apr}.pdf`;
-      const fileRenomeado = new File([file], nomeArquivo, {
-        type: file.type,
-      });
-      registerForm.setFieldValue(
-        `${propName}[${index}].arquivo`,
-        fileRenomeado
-      );
-      registerForm.setFieldValue(
-        `${propName}[${index}].anexo`,
-        fileRenomeado.name
-      );
-    }
-    setNomeArquivoSelecionado(file.name);
+    // Renomear arquivo para padrão "IDATIVIDADE_NOMEDOARQUIVO"
+    const nomeArquivo = `${registerForm.values.id_atividade}_${
+      registerForm.values[propName][index][keyName]
+    }_${arquivo.name.split(".pdf")[0]}`;
+
+    // Converter arquivo para base64
+    const base64 = await convertToBase64(arquivo);
+
+    // Setar payload para envio ao S3
+    setPayload({
+      ...payload,
+      base64data: base64,
+      fileName: nomeArquivo,
+      path: "moc",
+    });
   };
 
-  console.log("convertToBase64", convertToBase64(arquivoSelecionado));
+  // Formatação do nome do arquivo recebido pelo backend:
+  const respostaBackend = registerForm.values[propName][index].anexo;
+  const nomeArquivo = respostaBackend.substring(
+    respostaBackend.lastIndexOf("/") + 1
+  );
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -104,22 +75,30 @@ function BotaoUploadArquivo({
     maxSize: 99999999999999,
   });
 
-  const handleClick = async () => {
+  async function enviarArquivoS3() {
     try {
-      if (arquivoSelecionado.length === 0) {
-        const nomeArquivoSemExtensao = nomeArquivo.split(".")[0];
-        const url = `${process.env.REACT_APP_API_URL}/pdf/${nomeArquivoSemExtensao}`;
-        registerForm.setFieldValue(`${propName}[${index}].url`, url);
-        registerForm.setFieldValue(`${propName}[${index}].isOpen`, true);
-      } else {
-        toast.error(
-          "A pré visualização do arquivo só é possível para arquivos cadastrados anteriormente."
-        );
+      const { data: url, status } = await uploadArquivoS3(payload);
+      registerForm.setFieldValue(`${propName}[${index}].url`, url);
+      registerForm.setFieldValue(`${propName}[${index}].anexo`, url);
+      if (status === 200 || status === 201) {
+        toast.success("Operação editada com sucesso!", {
+          id: "toast-principal",
+        });
       }
     } catch (error) {
-      toast.error("Erro ao abrir arquivo");
+      toast.error("Erro ao enviar arquivo!", {
+        id: "toast-principal",
+      });
     }
-  };
+  }
+
+  const isButtonDisabled = registerForm.values[propName][index][keyName] === "";
+
+  useEffect(() => {
+    if (payload.base64data !== "") {
+      enviarArquivoS3();
+    }
+  }, [payload]);
 
   return (
     <Flex direction={"column"} gap={6}>
@@ -127,6 +106,7 @@ function BotaoUploadArquivo({
         <div {...getRootProps()}>
           <input {...getInputProps()} />
           <Button
+            isDisabled={isButtonDisabled}
             h={"56px"}
             borderRadius={"10px"}
             background={"white"}
@@ -143,7 +123,7 @@ function BotaoUploadArquivo({
             Anexar
           </Button>
         </div>
-        {nomeArquivoSelecionado !== "" && (
+        {registerForm.values[propName][index].anexo !== "" && (
           <Flex gap={1} align={"center"}>
             <IconButton
               isRound
@@ -159,24 +139,22 @@ function BotaoUploadArquivo({
               }}
               icon={<AiFillCloseCircle size={16} />}
               onClick={() => {
-                registerForm.setFieldValue(
-                  `[${propName}][${index}].arquivo`,
-                  ""
-                );
                 registerForm.setFieldValue(`[${propName}][${index}].anexo`, "");
-                setNomeArquivoSelecionado("");
               }}
             />
-            <Text
-              fontSize={"12px"}
-              fontWeight={"semibold"}
-              cursor={"pointer"}
-              onClick={() => {
-                handleClick();
-              }}
+            <a
+              href={registerForm.values[propName][index].anexo}
+              target="_blank"
+              rel="noreferrer"
             >
-              {nomeArquivoSelecionado}
-            </Text>
+              <Text
+                fontSize={"12px"}
+                fontWeight={"semibold"}
+                cursor={"pointer"}
+              >
+                {nomeArquivo}
+              </Text>
+            </a>
           </Flex>
         )}
       </Flex>

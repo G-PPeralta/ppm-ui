@@ -71,7 +71,7 @@ function LeitorPDF({ registerForm, index, propName }: Props) {
             />
 
             <a
-              href={`${registerForm.values[propName][index]?.url}`}
+              href={`${registerForm.values[propName][index]?.anexo}`}
               download
               target="_blank"
               rel="noreferrer"
@@ -94,7 +94,9 @@ function LeitorPDF({ registerForm, index, propName }: Props) {
           </Flex>
 
           <Document
-            file={{ url: registerForm.values[propName][index]?.url }}
+            file={{
+              url: registerForm.values[propName][index]?.anexo,
+            }}
             onLoadSuccess={onDocumentLoadSuccess}
           >
             <Page pageNumber={pageNumber} />

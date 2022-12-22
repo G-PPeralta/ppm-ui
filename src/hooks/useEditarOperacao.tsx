@@ -14,7 +14,6 @@ import {
   getAreaAtuacaoList,
   getResponsavelList,
 } from "services/get/Infograficos";
-import { uploadArquivo } from "services/post/Upload";
 import { patchOperacoesEstatisticas } from "services/update/OperacoesEstatisticas";
 
 import { useAuth } from "./useAuth";
@@ -148,23 +147,30 @@ export function useEditarOperacao(
       setLoading(true);
 
       try {
+        // values.mocs.map(async (moc: any, index: number) => {
+        //   const url = await uploadArquivoS3(moc.arquivoS3);
+        //   values.mocs[index].anexo = url.data;
+        //   const { status } = await patchOperacoesEstatisticas({
+        //     ...newValues,
+        //     mocs: values.mocs,
+        //   });
+        //   if (status === 200 || status === 201) {
+        //     toast.success("Operação editada com sucesso!", {
+        //       id: "toast-principal",
+        //     });
+        //     setLoading(false);
+        //     setRefresh(!refresh);
+        //   }
+        // });
+        // values.aprs.map(async (apr: any) => {
+        //   if (apr.anexo) {
+        //     const formData = new FormData();
+        //     formData.append("files", apr.arquivo);
+
+        //     await uploadArquivo(formData);
+        //   }
+        // });
         const { status } = await patchOperacoesEstatisticas(newValues);
-        values.mocs.map(async (moc: any) => {
-          if (moc.anexo) {
-            const formData = new FormData();
-            formData.append("files", moc.arquivo);
-
-            await uploadArquivo(formData);
-          }
-        });
-        values.aprs.map(async (apr: any) => {
-          if (apr.anexo) {
-            const formData = new FormData();
-            formData.append("files", apr.arquivo);
-
-            await uploadArquivo(formData);
-          }
-        });
         if (status === 200 || status === 201) {
           toast.success("Operação editada com sucesso!", {
             id: "toast-principal",

@@ -3,7 +3,7 @@ import { FiPlus, FiTrash } from "react-icons/fi";
 import { Flex, IconButton } from "@chakra-ui/react";
 
 import InputGenerico from "components/InputGenerico";
-import LeitorPDF from "components/LeitorPDF";
+// import LeitorPDF from "components/LeitorPDF";
 
 import { regexCaracteresEspeciais } from "utils/regex";
 
@@ -75,17 +75,17 @@ function EditarAtividadeTabAPR({ registerForm }: Props) {
               <BotaoUploadArquivo
                 registerForm={registerForm}
                 index={index}
-                nomeArquivo={apr.anexo}
                 propName={"aprs"}
+                keyName={"codigo_apr"}
               />
             </Flex>
-            {apr?.url?.length > 0 && (
+            {/* {apr?.url?.length > 0 && (
               <LeitorPDF
                 registerForm={registerForm}
                 index={index}
                 propName={"aprs"}
               />
-            )}
+            )} */}
           </Flex>
         ))}
       </Flex>

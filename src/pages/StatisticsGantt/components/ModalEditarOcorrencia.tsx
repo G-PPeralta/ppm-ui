@@ -26,7 +26,7 @@ import { handleCancelar } from "utils/handleCadastro";
 
 import { useOcorrencias } from "hooks/useOcorrencias";
 
-import BotaoUploadArquivo from "./BotaoUpload";
+import BotaoUploadArquivo from "./BotaoUpload2";
 
 interface RefreshState {
   refresh: boolean;

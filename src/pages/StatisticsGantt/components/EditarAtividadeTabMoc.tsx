@@ -3,7 +3,7 @@ import { FiPlus, FiTrash } from "react-icons/fi";
 import { Flex, IconButton } from "@chakra-ui/react";
 
 import InputGenerico from "components/InputGenerico";
-import LeitorPDF from "components/LeitorPDF";
+// import LeitorPDF from "components/LeitorPDF";
 
 import { regexCaracteresEspeciais } from "utils/regex";
 
@@ -21,7 +21,8 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
       {
         numero_moc: "",
         anexo: "",
-        arquivo: "",
+        url: "",
+        isOpen: false,
       },
     ]);
   };
@@ -35,6 +36,8 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
   const isDisabled = registerForm.values.mocs.some(
     (moc: any) => moc.numero_moc === ""
   );
+
+  // console.log("registerForm.values.mocs: ", registerForm.values.mocs);
 
   return (
     <Flex w={"100%"} direction={"column"} gap={4}>
@@ -73,17 +76,17 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
               <BotaoUploadArquivo
                 registerForm={registerForm}
                 index={index}
-                nomeArquivo={moc.anexo}
                 propName={"mocs"}
+                keyName={"numero_moc"}
               />
             </Flex>
-            {moc?.url?.length > 0 && (
+            {/* {moc?.url?.length > 0 && (
               <LeitorPDF
                 registerForm={registerForm}
                 index={index}
                 propName={"mocs"}
               />
-            )}
+            )} */}
           </Flex>
         ))}
       </Flex>
