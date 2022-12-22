@@ -485,6 +485,34 @@ function ModalConfiguracoes({
                       w={"100%"}
                       gap={"16px"}
                     >
+                      <FormControl w={{ sm: "100%", md: "232px" }}>
+                        <FormLabel htmlFor="campo_id">
+                          <Text
+                            color="#949494"
+                            fontSize="12px"
+                            fontWeight="700"
+                          >
+                            ID ORIGEM
+                          </Text>
+                        </FormLabel>
+                        <Input
+                          isDisabled
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          _placeholder={{ color: "#2D2926" }}
+                          maxLength={50}
+                          borderRadius={"8px"}
+                          border={"1px solid #A7A7A7"}
+                          mt={"-6px"}
+                          width={"100%"}
+                          height={"56px"}
+                          id="campo_id"
+                          name="campo_id"
+                          placeholder="Id Origem"
+                          value={campoId}
+                          onChange={(e) => setCampoId(e.target.value)}
+                        ></Input>
+                      </FormControl>
                       <FormControl w={{ sm: "100%", md: "480px" }}>
                         <FormLabel htmlFor="nomeProjeto">
                           <Text
@@ -1048,6 +1076,34 @@ function ModalConfiguracoes({
                       w={"100%"}
                       gap={"16px"}
                     >
+                      <FormControl w={{ sm: "100%", md: "232px" }}>
+                        <FormLabel htmlFor="campo_id">
+                          <Text
+                            color="#949494"
+                            fontSize="12px"
+                            fontWeight="700"
+                          >
+                            ID ORIGEM
+                          </Text>
+                        </FormLabel>
+                        <Input
+                          isDisabled
+                          fontSize={"14px"}
+                          fontWeight={"400"}
+                          _placeholder={{ color: "#2D2926" }}
+                          maxLength={50}
+                          borderRadius={"8px"}
+                          border={"1px solid #A7A7A7"}
+                          mt={"-6px"}
+                          width={"100%"}
+                          height={"56px"}
+                          id="campo_id"
+                          name="campo_id"
+                          placeholder="Id Origem"
+                          value={campoId}
+                          onChange={(e) => setCampoId(e.target.value)}
+                        ></Input>
+                      </FormControl>
                       <FormControl w={{ sm: "100%", md: "480px" }}>
                         <FormLabel htmlFor="nomeProjeto">
                           <Text
