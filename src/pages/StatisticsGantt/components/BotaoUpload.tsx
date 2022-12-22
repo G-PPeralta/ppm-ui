@@ -42,20 +42,17 @@ function BotaoUploadArquivo({ registerForm, index, propName, keyName }: Props) {
   const onDrop = async (acceptedFiles: any) => {
     const arquivo = acceptedFiles[0];
 
-    // Renomear arquivo para padrão "IDATIVIDADE_NOMEDOARQUIVO"
-    const nomeArquivo = `${registerForm.values.id_atividade}_${
-      registerForm.values[propName][index][keyName]
-    }_${arquivo.name.split(".pdf")[0]}`;
+    const nomeArquivo = `${arquivo.name.split(".pdf")[0]}`;
 
     // Converter arquivo para base64
-    const base64 = await convertToBase64(arquivo);
+    const base64: any = await convertToBase64(arquivo);
 
     // Setar payload para envio ao S3
     setPayload({
       ...payload,
-      base64data: base64,
+      base64data: base64.split(",")[1],
       fileName: nomeArquivo,
-      path: "moc",
+      path: `moc_${registerForm.values.id_atividade}_${registerForm.values[propName][index][keyName]}`,
     });
   };
 
