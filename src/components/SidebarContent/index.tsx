@@ -23,6 +23,8 @@ import { useAuth } from "hooks/useAuth";
 
 import { LinkItems } from "./items";
 
+// console.log("export", LinkItems);
+
 interface SidebarProps extends BoxProps {
   onClose: () => void;
 }
@@ -82,7 +84,7 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
                       <Text
                         color={
                           link.children.some(
-                            (e) => e.link == window.location.pathname
+                            (e: any) => e.link == window.location.pathname
                           )
                             ? "origem.500"
                             : "black.500"

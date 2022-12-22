@@ -27,13 +27,21 @@ interface LinkItemProps {
   children: any[];
 }
 
-interface Children {
+type Children = {
+  name: string;
+  icon: IconType;
+  link: string;
+};
+
+interface ChildrenI {
   name: string;
   icon: IconType;
   link: string;
 }
 
-const childrenCarteiradeProjetos = [
+const reactURL = process.env.REACT_APP_API_URL;
+
+const childrenCarteiradeProjetos: ChildrenI[] = [
   // { name: "Dashboard", icon: TbGauge, link: "/" },
   { name: "Carteira de Projetos", icon: FaProjectDiagram, link: "/projetos" },
   {
@@ -49,7 +57,7 @@ const childrenCarteiradeProjetos = [
   // },
 ];
 
-const childrenInfograficos = [
+const childrenInfograficos: ChildrenI[] = [
   { name: "Campanhas", icon: FaSitemap, link: "/campanhas" },
   {
     name: "Cronogramas",
@@ -74,7 +82,7 @@ const childrenInfograficos = [
   },
 ];
 
-const childrenConfiguracoes = [
+const childrenConfiguracoes: ChildrenI[] = [
   { name: "Configurações", icon: FiSettings, link: "/desenvolvimento" },
   { name: "Usuários", icon: FiSettings, link: "/usuarios" },
   { name: "Perfil", icon: FiSettings, link: "/perfil" },
@@ -101,7 +109,54 @@ const childrenConfiguracoes = [
   { name: "Feriados", icon: BsCalendarWeek, link: "/feriados" },
 ];
 
-export const LinkItems: Array<LinkItemProps> = [
+const enviroment1 = [
+  {
+    name: "Intervenções",
+    icon: FiBarChart,
+    children: childrenInfograficos.sort((a: ChildrenI, b: ChildrenI) =>
+      a.name.localeCompare(b.name)
+    ),
+  },
+];
+
+const enviroment2 = [
+  {
+    name: "Projetos",
+    icon: FiHome,
+    children: childrenCarteiradeProjetos.sort((a: ChildrenI, b: ChildrenI) =>
+      a.name.localeCompare(b.name)
+    ),
+  },
+
+  {
+    name: "Intervenções",
+    icon: FiBarChart,
+    children: childrenInfograficos.sort((a: ChildrenI, b: ChildrenI) =>
+      a.name.localeCompare(b.name)
+    ),
+  },
+
+  {
+    name: "Configurações",
+    icon: FiSettings,
+    children: childrenConfiguracoes.sort((a: ChildrenI, b: ChildrenI) =>
+      a.name.localeCompare(b.name)
+    ),
+  },
+];
+
+function environmentURL(): LinkItemProps[] {
+  if (reactURL && reactURL === "https://ppmapi-hmg.iktech.com.br") {
+    return enviroment1;
+  }
+  return enviroment2;
+}
+
+// console.log(environmentURL());
+
+export const LinkItems: Array<LinkItemProps> = environmentURL();
+
+export const LinkItemss: Array<LinkItemProps> = [
   {
     name: "Projetos",
     icon: FiHome,
@@ -126,3 +181,5 @@ export const LinkItems: Array<LinkItemProps> = [
     ),
   },
 ];
+
+// console.log("Como era", LinkItemss);
