@@ -5,7 +5,8 @@ export async function deleteOperacaoCronograma(
   user: string | undefined
 ): Promise<{ data: any; status: number }> {
   const { data, status } = await api.delete(
-    `/estatisticas/projetos/${id}/${user}`
+    `/estatisticas/projetos/${id}/${user}`,
+    token()
   );
 
   return { data, status };
@@ -16,7 +17,8 @@ export async function deleteEstatistica(
   user: string | undefined
 ): Promise<{ data: any; status: number }> {
   const { data, status } = await api.delete(
-    `/estatisticas/projetos/${id}/${user}`
+    `/estatisticas/projetos/${id}/${user}`,
+    token()
   );
 
   return { data, status };

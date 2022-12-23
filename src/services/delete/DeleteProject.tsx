@@ -1,12 +1,15 @@
 // import { ProjetosRankingPayload } from "interfaces/Services";
 
-import { api } from "services/api";
+import { api, token } from "services/api";
 
 export async function deleteProject(
   id_projeto: any,
   user: any
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.delete(`/projetos/${id_projeto}/${user}`);
+  const { data, status } = await api.delete(
+    `/projetos/${id_projeto}/${user}`,
+    token()
+  );
 
   return { data, status };
 }
@@ -22,7 +25,7 @@ export async function deleteAtividade(
   id: number,
   user: string | undefined
 ): Promise<{ data: any; status: number }> {
-  const { data, status } = await api.delete(`/gantt/${id}/${user}`);
+  const { data, status } = await api.delete(`/gantt/${id}/${user}`, token());
 
   return { data, status };
 }

@@ -1,5 +1,5 @@
-import { api } from "services/api";
+import { api, token } from "services/api";
 
 export async function deleteFeriado({ id, user }: any) {
-  await api.delete(`/feriados/${id}/${user}`);
+  await api.delete(`/feriados/${id}/${user}`, token());
 }
