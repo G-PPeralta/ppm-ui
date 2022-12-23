@@ -1,13 +1,14 @@
 import { LicoesAprendidasPayload } from "interfaces/Services";
 
-import { api } from "services/api";
+import { api, token } from "services/api";
 
 export async function postLicaoAprendida(
   payload: LicoesAprendidasPayload
 ): Promise<{ data: any; status: number }> {
   const { data, status } = await api.post(
     "/projetos-atividades-licoes-aprendidas",
-    payload
+    payload,
+    token()
   );
 
   return { data, status };

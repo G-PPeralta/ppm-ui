@@ -1,7 +1,7 @@
-import { api } from "services/api";
+import { api, token } from "services/api";
 
 export async function postProject(payload: any): Promise<{ status: number }> {
-  const { status } = await api.post("/projetos-ranking", payload);
+  const { status } = await api.post("/projetos-ranking", payload, token());
   return { status };
 }
 
@@ -9,12 +9,12 @@ export async function updateRanking(
   payload: any,
   id: number
 ): Promise<{ status: number }> {
-  const { status } = await api.patch(`/ranking/${id}`, payload);
+  const { status } = await api.patch(`/ranking/${id}`, payload, token());
   return { status };
 }
 
 export async function createRanking(payload: any): Promise<{ status: number }> {
-  const { status } = await api.post("/rankings", payload);
+  const { status } = await api.post("/rankings", payload, token());
   return { status };
 }
 
@@ -24,7 +24,8 @@ export async function updateOptionRanking(
   userName: string
 ): Promise<{ status: number }> {
   const { status } = await api.patch(
-    `rankings-opcoes/${id}/nom_opcao/${newValue}/${userName}`
+    `rankings-opcoes/${id}/nom_opcao/${newValue}/${userName}`,
+    token()
   );
   return { status };
 }
@@ -35,7 +36,8 @@ export async function updateOptionRankingNota(
   userName: string
 ): Promise<{ status: number }> {
   const { status } = await api.patch(
-    `rankings-opcoes/${id}/num_nota/${newValue}/${userName}`
+    `rankings-opcoes/${id}/num_nota/${newValue}/${userName}`,
+    token()
   );
   return { status };
 }
@@ -43,6 +45,6 @@ export async function updateOptionRankingNota(
 export async function postOptionRanking(
   payload: any
 ): Promise<{ status: number }> {
-  const { status } = await api.post(`/rankings-opcoes`, payload);
+  const { status } = await api.post(`/rankings-opcoes`, payload, token());
   return { status };
 }

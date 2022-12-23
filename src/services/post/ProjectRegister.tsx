@@ -5,23 +5,23 @@ import {
   ResponsavelRetorno,
 } from "interfaces/Services";
 
-import { api } from "services/api";
+import { api, token } from "services/api";
 
 export async function postProject(payload: any): Promise<{ status: number }> {
-  const { status } = await api.post("/projetos/registro", payload);
+  const { status } = await api.post("/projetos/registro", payload, token());
   return { status };
 }
 
 export async function postResponsavel(
   payload: Responsavel
 ): Promise<{ data: ResponsavelRetorno; status: number }> {
-  const { data, status } = await api.post("/responsavel", payload);
+  const { data, status } = await api.post("/responsavel", payload, token());
   return { data, status };
 }
 
 export async function postCoordenador(
   payload: Coordenador
 ): Promise<{ data: CoordenadorRetorno; status: number }> {
-  const { data, status } = await api.post("/coordenador", payload);
+  const { data, status } = await api.post("/coordenador", payload, token());
   return { data, status };
 }
