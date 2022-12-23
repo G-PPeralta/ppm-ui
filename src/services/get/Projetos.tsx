@@ -6,11 +6,7 @@ export async function getProjetos(): Promise<{
   data: ProjetosList[];
   status: number;
 }> {
-  const { data, status } = await api.get("/projetos/listagem", {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get("/projetos/listagem", token());
 
   return { data, status };
 }
@@ -19,11 +15,10 @@ export async function getProjeto(id: number): Promise<{
   data: ProjetosConfig[];
   status: number;
 }> {
-  const { data, status } = await api.get(`/projetos/configuracoes/${id}`, {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get(
+    `/projetos/configuracoes/${id}`,
+    token()
+  );
 
   return { data, status };
 }
@@ -32,11 +27,7 @@ export async function getTipoResponsavel(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/tipo-responsavel", {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get("/tipo-responsavel", token());
 
   return { data, status };
 }
@@ -45,11 +36,7 @@ export async function getClassificacao(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/classificacao", {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get("/classificacao", token());
 
   return { data, status };
 }
@@ -58,11 +45,7 @@ export async function getPolo(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/polo", {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get("/polo", token());
 
   return { data, status };
 }
@@ -71,11 +54,7 @@ export async function getSolicitante(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/solicitante", {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get("/solicitante", token());
 
   return { data, status };
 }
@@ -84,11 +63,7 @@ export async function getPrioridade(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/prioridade", {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get("/prioridade", token());
 
   return { data, status };
 }
@@ -97,11 +72,7 @@ export async function getComplexidade(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/complexidade", {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get("/complexidade", token());
 
   return { data, status };
 }
@@ -110,11 +81,7 @@ export async function getLocalProjeto(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/local", {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get("/local", token());
 
   return { data, status };
 }
@@ -123,11 +90,7 @@ export async function getDivisao(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/divisao", {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get("/divisao", token());
 
   return { data, status };
 }
@@ -136,11 +99,7 @@ export async function getStatusProjeto(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/status-projeto", {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get("/status-projeto", token());
 
   return { data, status };
 }
@@ -149,11 +108,7 @@ export async function getGate(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/gate", {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get("/gate", token());
 
   return { data, status };
 }
@@ -162,11 +117,7 @@ export async function getTipoProjeto(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/tipo-projeto", {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get("/tipo-projeto", token());
 
   return { data, status };
 }
@@ -175,11 +126,7 @@ export async function getDemanda(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/demanda", {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get("/demanda", token());
 
   return { data, status };
 }

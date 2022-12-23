@@ -1,16 +1,12 @@
 import { ResponseUserPending } from "interfaces/Services";
 
-import { api } from "services/api";
+import { api, token } from "services/api";
 
 export async function getPending(): Promise<{
   data: ResponseUserPending[];
   status: number;
 }> {
-  const { data, status } = await api.get("/user/pending", {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get("/user/pending", token());
 
   return { data, status };
 }

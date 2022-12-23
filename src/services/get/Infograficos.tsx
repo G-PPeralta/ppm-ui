@@ -10,7 +10,7 @@ import { api, token } from "services/api";
 export async function postGetInfoCampanha(
   payload: any
 ): Promise<{ data: any[]; status: number }> {
-  const { data, status } = await api.post("/campanha", payload);
+  const { data, status } = await api.post("/campanha", payload, token());
   return { data, status };
 }
 
@@ -27,11 +27,7 @@ export async function postGetInfoCampanha(
 export async function getInfoProjetos(): Promise<{
   data: Projetos[];
 }> {
-  const { data } = await api.get(`/projetos/detalhados`, {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data } = await api.get(`/projetos/detalhados`, token());
 
   return { data };
 }

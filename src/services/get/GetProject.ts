@@ -1,6 +1,6 @@
 import { Projetos } from "interfaces/Projetos";
 
-import { api } from "services/api";
+import { api, token } from "services/api";
 
 export async function getProjects(polo: string = ""): Promise<any[]> {
   let uri = "/dashboard/projetos-info";
@@ -10,12 +10,12 @@ export async function getProjects(polo: string = ""): Promise<any[]> {
   } else if (polo == "2") {
     uri = "/dashboard/projetos-info-alagoas";
   }
-  const { data } = await api.get<any[]>(uri);
+  const { data } = await api.get<any[]>(uri, token());
   return data;
 }
 
 export async function getProjetos(): Promise<Projetos[]> {
   const uri = "/projetos/detalhados";
-  const { data } = await api.get<Projetos[]>(uri);
+  const { data } = await api.get<Projetos[]>(uri, token());
   return data;
 }

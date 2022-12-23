@@ -1,16 +1,12 @@
 import { ResponseRoles } from "interfaces/Services";
 
-import { api } from "services/api";
+import { api, token } from "services/api";
 
 export async function getRoles(): Promise<{
   data: ResponseRoles[];
   status: number;
 }> {
-  const { data, status } = await api.get(`/roles`, {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get(`/roles`, token());
 
   return { data, status };
 }

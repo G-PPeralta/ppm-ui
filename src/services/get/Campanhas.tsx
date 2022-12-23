@@ -1,4 +1,4 @@
-import { api } from "services/api";
+import { api, token } from "services/api";
 
 export const campanhasMock = [
   {
@@ -220,11 +220,7 @@ export async function getGanttCampanhaData(id: number): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get(`/gantt/campanha/${id}`, {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get(`/gantt/campanha/${id}`, token());
 
   return { data, status };
 }
@@ -233,11 +229,7 @@ export async function getGanttCampanhaAtividades(id: number): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get(`/gantt/atividades/${id}`, {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get(`/gantt/atividades/${id}`, token());
 
   return { data, status };
 }
@@ -246,11 +238,7 @@ export async function getCampanhaDataInicio(id: number): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get(`/campanha/datas/${id}`, {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get(`/campanha/datas/${id}`, token());
 
   return { data, status };
 }

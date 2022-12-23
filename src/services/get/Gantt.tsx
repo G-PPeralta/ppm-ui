@@ -1,16 +1,12 @@
 // import { GanttPayload } from 'interfaces/Services';
 
-import { api } from "services/api";
+import { api, token } from "services/api";
 
 export async function getAllGanttData(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get(`/gantt/panorama`, {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get(`/gantt/panorama`, token());
 
   return { data, status };
 }
@@ -19,11 +15,7 @@ export async function getGanttData(id: number): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get(`/gantt/${id}`, {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("@Origem:token")}`,
-    },
-  });
+  const { data, status } = await api.get(`/gantt/${id}`, token());
 
   return { data, status };
 }
