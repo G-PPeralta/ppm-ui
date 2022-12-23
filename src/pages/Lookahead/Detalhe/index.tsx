@@ -51,9 +51,18 @@ export function LookaheadDetalhe() {
   };
 
   const loadAtividadesFilho = async () => {
+    const datasAct = [];
     const filhos = id && (await getAtividadesFilho(id));
     if (filhos) {
       setAtividadesFilho(filhos);
+
+      for (const act in filhos) {
+        if (new Date(filhos[act].data_atividade) < new Date()) continue;
+        if (Object.prototype.hasOwnProperty.call(filhos, act)) {
+          datasAct.push(filhos[act].data_atividade);
+        }
+      }
+      getWeeks(datasAct);
     }
   };
 
@@ -62,34 +71,57 @@ export function LookaheadDetalhe() {
     setFerramentasServicos(fs);
   };
 
-  function getWeeks() {
+  function getWeeks(datasAtividade: string[]) {
     const dataBr = Intl.DateTimeFormat("pt-BR");
-    const today = new Date();
-    const first = today.getDate() - today.getDay() + 1;
-    const last = first + 6;
+    if (datasAtividade.length > 0) {
+      const semanas: Weeks[] = [];
+      datasAtividade.forEach((data) => {
+        const today = new Date(data);
+        const first = today.getDate() - today.getDay() + 1;
+        const last = first + 6;
+        const monday = new Date(today.setDate(first));
+        const sunday = new Date(today.setDate(last));
+        const diaInicial = dataBr.format(monday);
+        const diaFinal = dataBr.format(sunday);
 
-    const monday = new Date(today.setDate(first));
-    const sunday = new Date(today.setDate(last));
-    const diaInicial = dataBr.format(monday);
-    const diaFinal = dataBr.format(sunday);
-    const x = [];
-    x.push({
-      id: diaInicial,
-      value: `${diaInicial} - ${diaFinal}`,
-    });
+        const jaTem = semanas.find((x) => x.id == diaInicial);
 
-    changeWeek(`${diaInicial} - ${diaFinal}`);
-    const monday2 = new Date(today.setDate(first + 7));
-    const sunday2 = new Date(today.setDate(last + 8));
-    const diaInicial2 = dataBr.format(monday2);
-    const diaFinal2 = dataBr.format(sunday2);
+        if (!jaTem) {
+          semanas.push({
+            id: diaInicial,
+            value: `${diaInicial} - ${diaFinal}`,
+          });
+        }
+      });
+      setWeeks(semanas);
+      changeWeek(semanas[0].value);
+    } else {
+      const today = new Date();
+      const first = today.getDate() - today.getDay() + 1;
+      const last = first + 6;
+      const monday = new Date(today.setDate(first));
+      const sunday = new Date(today.setDate(last));
+      const diaInicial = dataBr.format(monday);
+      const diaFinal = dataBr.format(sunday);
+      const x = [];
+      x.push({
+        id: diaInicial,
+        value: `${diaInicial} - ${diaFinal}`,
+      });
 
-    x.push({
-      id: diaInicial2,
-      value: `${diaInicial2} - ${diaFinal2}`,
-    });
+      changeWeek(`${diaInicial} - ${diaFinal}`);
+      const monday2 = new Date(today.setDate(first + 7));
+      const sunday2 = new Date(today.setDate(last + 8));
+      const diaInicial2 = dataBr.format(monday2);
+      const diaFinal2 = dataBr.format(sunday2);
 
-    setWeeks(x);
+      x.push({
+        id: diaInicial2,
+        value: `${diaInicial2} - ${diaFinal2}`,
+      });
+
+      setWeeks(x);
+    }
   }
 
   useEffect(() => {
@@ -99,7 +131,6 @@ export function LookaheadDetalhe() {
   useEffect(() => {
     loadFerramentasServicos();
     loadAtividadesFilho();
-    getWeeks();
   }, []);
 
   function changeWeek(value: string) {
