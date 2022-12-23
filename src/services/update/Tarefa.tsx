@@ -1,4 +1,4 @@
-import { api } from "services/api";
+import { api, token } from "services/api";
 
 export async function patchTarefa(
   id: number,
@@ -7,7 +7,8 @@ export async function patchTarefa(
   user: any
 ): Promise<{ data: any; status: number }> {
   const { data, status } = await api.patch(
-    `/tarefas/${id}/${campo}/${payload}/${user}`
+    `/tarefas/${id}/${campo}/${payload}/${user}`,
+    token()
   );
 
   return { data, status };

@@ -1,4 +1,4 @@
-import { api } from "services/api";
+import { api, token } from "services/api";
 
 export async function patchLicaoAprendida(
   id: number,
@@ -7,7 +7,8 @@ export async function patchLicaoAprendida(
   user: any
 ): Promise<{ data: any; status: number }> {
   const { data, status } = await api.patch(
-    `projetos-atividades-licoes-aprendidas/${id}/${campo}/${payload}/${user}`
+    `projetos-atividades-licoes-aprendidas/${id}/${campo}/${payload}/${user}`,
+    token()
   );
 
   return { data, status };
