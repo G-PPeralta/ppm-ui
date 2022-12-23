@@ -51,8 +51,11 @@ export function TabelaFerramentas(props: TableProps) {
 
   function getWeekDays() {
     const weekDays: DiasSemana[] = [];
+    const dataInicial = semana && semana.split("-")[0].trim();
     const dataBr = Intl.DateTimeFormat("pt-BR");
-    const dia: number = semana ? +semana.split("/")[0] : 0;
+    const dia: number = dataInicial ? +dataInicial.split("/")[0] : 0;
+    const mes: number = dataInicial ? +dataInicial.split("/")[1] : 0;
+    const ano: number = dataInicial ? +dataInicial.split("/")[2] : 0;
     const _dias = Array.from({ length: 7 }, (val, ind) =>
       (dia + ind).toString()
     );
@@ -60,7 +63,7 @@ export function TabelaFerramentas(props: TableProps) {
     for (let i = 0; i < _dias.length; i++) {
       const dia = _dias[i];
 
-      const realDay = dataBr.format(new Date().setDate(+dia));
+      const realDay = dataBr.format(new Date(`${mes}/${dia}/${ano}`));
       const diaSemana: DiasSemana = new DiasSemana();
       const _dia = realDay.split("/")[0];
       diaSemana.diaLabel = _dia + "/" + realDay.split("/")[1];

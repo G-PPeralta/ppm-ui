@@ -55,16 +55,14 @@ export function TabelaAtividades(props: TableProps) {
   const [horas, setHoras] = useState<string[]>();
   const [atividades, setAtividades] = useState<AtividadeDiaHora[]>();
   const [total, setTotal] = useState<Totais[]>();
-  // const horarios = Array(24)
-  //   .fill(0)
-  //   .map((_, i) => {
-  //     return ("0" + i + ": 0" + 60 * 0).replace(/\d(\d\d)/g, "$1");
-  //   });
 
   function getWeekDays() {
+    const dataInicial = semana && semana.split("-")[0].trim();
     const weekDays: DiasSemana[] = [];
     const dataBr = Intl.DateTimeFormat("pt-BR");
-    const dia: number = semana ? +semana.split("/")[0] : 0;
+    const dia: number = dataInicial ? +dataInicial.split("/")[0] : 0;
+    const mes: number = dataInicial ? +dataInicial.split("/")[1] : 0;
+    const ano: number = dataInicial ? +dataInicial.split("/")[2] : 0;
     const dias = Array.from({ length: 7 }, (val, ind) =>
       (dia + ind).toString()
     );
@@ -75,7 +73,7 @@ export function TabelaAtividades(props: TableProps) {
     for (let i = 0; i < dias.length; i++) {
       const dia = dias[i];
 
-      const realDay = dataBr.format(new Date().setDate(+dia));
+      const realDay = dataBr.format(new Date(`${mes}/${dia}/${ano}`));
       const diaSemana: DiasSemana = new DiasSemana();
       const _dia = realDay.split("/")[0];
       diaSemana.label = _dia + "/" + realDay.split("/")[1];
@@ -92,22 +90,12 @@ export function TabelaAtividades(props: TableProps) {
             0,
             atividade.data_atividade.length - 5
           );
-
-          // const auxFim = atividade.dat_fim_plan.substring(
-          //   0,
-          //   atividade.dat_fim_plan.length - 5
-          // );
-
-          // diaIni = new Date(auxIni).getDate().toString();
           horaIni = new Date(auxIni).getHours().toString();
-          // diaFim = new Date(auxFim).getDate().toString();
-          // horaFim = new Date(auxFim).getHours().toString();
           const atividadeGrid: AtividadeDiaHora = {
             horaIni,
             dataIni: dataBr.format(new Date(auxIni)),
             nome: atividade.nom_atividade,
           };
-
           atividadesGrid.push(atividadeGrid);
         }
       });
@@ -130,16 +118,6 @@ export function TabelaAtividades(props: TableProps) {
     setTotal(arrTotais);
   }
 
-  // function atividadesData() {
-  //   data &&
-  //     data.map(function (x) {
-  //       const dataIni = x.dat_ini_plan;
-  //       const dataFim = x.dat_fim_plan;
-  //     });
-
-  //   return "";
-  // }
-
   useEffect(() => {
     setSem(semana);
     getWeekDays();
@@ -150,17 +128,8 @@ export function TabelaAtividades(props: TableProps) {
       <TableContainer mt={4} mb={3} ml={1} width="100%" borderRadius={"10px"}>
         <Table colorScheme={"strippedGray"}>
           <Thead>
-            <Tr
-              backgroundColor={"#0047BB"}
-              color="white"
-              // border="none 0px !important"
-            >
-              <Th
-                colSpan={8}
-                // border="none 0px !important"
-                // borderTopLeftRadius="10px"
-                // borderTopRightRadius="10px"
-              >
+            <Tr backgroundColor={"#0047BB"} color="white">
+              <Th colSpan={8}>
                 <Flex
                   color="white"
                   justifyContent="space-between"
@@ -228,7 +197,6 @@ export function TabelaAtividades(props: TableProps) {
                           x.dataIni == dia.data &&
                           x.horaIni == hora.split(":")[0]
                       );
-
                       const arrayS = activityS
                         ? activityS.map((x) => x.nome)
                         : undefined;
