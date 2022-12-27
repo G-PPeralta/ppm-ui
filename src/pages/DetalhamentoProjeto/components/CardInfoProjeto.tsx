@@ -34,6 +34,18 @@ function CardInfoProjeto({
 
   const innerWidth = window.innerWidth;
 
+  let formattedDate = null;
+
+  if (infoProjeto.dat_usu_update) {
+    const hour = infoProjeto.dat_usu_update.substring(10, 13);
+    const splitedHour = ` ${Number(hour) - 3}`;
+
+    formattedDate = infoProjeto.dat_usu_update.replace(
+      infoProjeto.dat_usu_update.substring(10, 13),
+      splitedHour
+    );
+  }
+
   function formatDate(date: any) {
     const formated = date.toString().substring(0, 10).split("-");
     return `${formated[2]}/${formated[1]}/${formated[0]}`;
@@ -211,7 +223,7 @@ function CardInfoProjeto({
                 fontWeight={"600"}
                 fontSize={14}
               >
-                {infoProjeto.dat_usu_update ? infoProjeto.dat_usu_update : null}
+                {formattedDate}
               </Text>
             </Flex>
           </Box>
