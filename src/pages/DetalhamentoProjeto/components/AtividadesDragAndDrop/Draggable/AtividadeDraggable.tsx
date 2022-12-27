@@ -162,7 +162,7 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
                     </Text>
                     <NumberInput
                       max={99999}
-                      min={1}
+                      // min={1}
                       placeholder={"0"}
                       id={`precedentes[${index}].dias`}
                       name={`precedentes[${index}].dias`}
