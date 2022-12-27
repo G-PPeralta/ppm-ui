@@ -66,7 +66,7 @@ export default function TotalProjetosComponent() {
       (chave: any) => chave.status === "8. Cancelado"
     );
     const holdsIndex = data.projetosPorStatus.findIndex(
-      (chave: any) => chave.status === "8. Cancelado"
+      (chave: any) => chave.status === "5. Hold"
     );
     const analiseIndex = data.projetosPorStatus.findIndex(
       (chave: any) => chave.status === "2. Em analise"
