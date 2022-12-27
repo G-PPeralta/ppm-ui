@@ -18,7 +18,7 @@ import {
 } from "react-icons/fi";
 // import { IoMdPodium } from "react-icons/io";
 import { MdPriorityHigh } from "react-icons/md";
-// import { TbGauge } from "react-icons/tb";
+import { TbGauge } from "react-icons/tb";
 
 interface LinkItemProps {
   name: string;
@@ -42,7 +42,7 @@ interface ChildrenI {
 const reactURL = process.env.REACT_APP_API_URL;
 
 const childrenCarteiradeProjetos: ChildrenI[] = [
-  // { name: "Dashboard", icon: TbGauge, link: "/" },
+  { name: "Dashboard", icon: TbGauge, link: "/" },
   { name: "Carteira de Projetos", icon: FaProjectDiagram, link: "/projetos" },
   {
     name: "Financeiro",
