@@ -27,6 +27,7 @@ export default function TotalProjetosComponent() {
   const [finalizados, setFinalizados] = useState(0);
   const [cancelados, setCancelados] = useState(0);
   const [holds, setHolds] = useState(0);
+  const [analise, setAnalise] = useState(0);
   const [naoIniciado, setNaoIniciado] = useState(0);
   const [reprogramado, setReprogramado] = useState(0);
   const [preAprovacao, setPreAprovacao] = useState(0);
@@ -67,6 +68,10 @@ export default function TotalProjetosComponent() {
     const holdsIndex = data.projetosPorStatus.findIndex(
       (chave: any) => chave.status === "8. Cancelado"
     );
+    const analiseIndex = data.projetosPorStatus.findIndex(
+      (chave: any) => chave.status === "2. Em analise"
+    );
+
     data.projetosPorStatus[iniciadosIndex] &&
       setIniciados(data.projetosPorStatus[iniciadosIndex].qtd);
     // setIniciados(
@@ -87,6 +92,8 @@ export default function TotalProjetosComponent() {
     data.projetosPorStatus[holdsIndex] &&
       setHolds(data.projetosPorStatus[holdsIndex].qtd);
     // setHolds(data.projetosPorStatus[6].qtd + data.projetosPorStatus[0].qtd);
+    data.projetosPorStatus[analiseIndex] &&
+      setAnalise(data.projetosPorStatus[analiseIndex].qtd);
   }
 
   const handleGetRanking = async () => {
@@ -422,7 +429,11 @@ export default function TotalProjetosComponent() {
                           }}
                           color="#ffffff"
                         >
-                          {holds + naoIniciado + preAprovacao + reprogramado}{" "}
+                          {holds +
+                            naoIniciado +
+                            preAprovacao +
+                            reprogramado +
+                            analise}{" "}
                           Outros
                         </Text>
                       </PopoverAnchor>
