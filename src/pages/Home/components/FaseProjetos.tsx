@@ -101,20 +101,26 @@ export default function NaoPrevistoComponent() {
       name: "Outros",
       value: data
         ? Number(
-            Number(
-              Number(data[NãoIniciado]?.pct) +
-                Number(data[Gate1]?.pct) +
-                Number(data[Gate2]?.pct) +
-                Number(data[AprovacaoSolicitante]?.pct) +
-                Number(data[hold]?.pct) +
-                Number(data[HoldGate1]?.pct) +
-                Number(data[Concluido]?.pct) +
-                Number(data[aDefinir]?.pct) +
-                Number(data[aprovacaoGate1]?.pct) +
-                Number(data[reprovado]?.pct) +
-                Number(data[inicio]?.pct) +
-                Number(data[emAndamento]?.pct)
-            ).toFixed(2)
+            Number(data[NãoIniciado]?.pct ? data[NãoIniciado]?.pct : 0) +
+              Number(data[Gate1]?.pct ? data[Gate1]?.pct : 0) +
+              Number(data[Gate2]?.pct ? data[Gate2]?.pct : 0) +
+              Number(
+                data[AprovacaoSolicitante]?.pct
+                  ? data[AprovacaoSolicitante]?.pct
+                  : 0
+              ) +
+              Number(data[hold]?.pct ? data[hold]?.pct : 0) +
+              Number(data[HoldGate1]?.pct ? data[HoldGate1]?.pct : 0) +
+              Number(data[Concluido]?.pct ? data[Concluido]?.pct : 0) +
+              Number(data[aDefinir]?.pct ? data[aDefinir]?.pct : 0) +
+              Number(
+                data[aprovacaoGate1]?.pct ? data[aprovacaoGate1]?.pct : 0
+              ) +
+              Number(data[reprovado]?.pct ? data[reprovado]?.pct : 0) +
+              Number(data[inicio]?.pct ? data[inicio]?.pct : 0) +
+              Number(
+                data[emAndamento]?.pct ? data[emAndamento]?.pct : 0
+              ).toFixed(2)
           )
         : Number("0").toFixed(2),
       color: "#FEB144",
@@ -430,13 +436,13 @@ export default function NaoPrevistoComponent() {
                 <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9EE09E">
                   {data[cemIndex]?.pct
                     ? Number(data[cemIndex]?.pct).toFixed(2)
-                    : 0}
+                    : Number("0").toFixed(2)}
                   %
                 </Text>
                 <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#FF6663">
                   {data[suprimentos]?.pct
                     ? Number(data[suprimentos]?.pct).toFixed(2)
-                    : 0}
+                    : Number("0").toFixed(2)}
                   %
                 </Text>
               </Flex>
@@ -445,13 +451,13 @@ export default function NaoPrevistoComponent() {
                 <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9EC1CF">
                   {data[engenhariaIndex]?.pct
                     ? Number(data[engenhariaIndex]?.pct).toFixed(2)
-                    : 0}
+                    : Number("0").toFixed(2)}
                   %
                 </Text>
                 <Text sx={{ fontSize: 16, fontWeight: "600" }} color="#9370DB">
                   {data[preProjetos]?.pct
                     ? Number(data[preProjetos]?.pct).toFixed(2)
-                    : 0}
+                    : Number("0").toFixed(2)}
                   %
                 </Text>
               </Flex>
