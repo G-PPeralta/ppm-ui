@@ -92,6 +92,7 @@ export function useProjetos() {
       (locais: any) => {
         if (locais.local.slice(0, 2) === " -") {
           return {
+            ...locais,
             local: locais.local.slice(3),
           };
         }
