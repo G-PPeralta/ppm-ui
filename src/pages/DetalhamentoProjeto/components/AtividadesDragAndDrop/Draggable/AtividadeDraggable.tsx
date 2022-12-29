@@ -180,7 +180,7 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
                       <NumberInputField
                         h={"56px"}
                         maxW={"128px"}
-                        maxLength={5}
+                        // maxLength={5}
                         bg={"#fff"}
                       />
                       <NumberInputStepper>
