@@ -87,7 +87,19 @@ export function useProjetos() {
       locaisSorted,
       "local"
     );
-    setListaLocais(locaisComOutrosAoFinalArray);
+
+    const locaisComTratamento = locaisComOutrosAoFinalArray.map(
+      (locais: any) => {
+        if (locais.local.slice(0, 2) === " -") {
+          return {
+            local: locais.local.slice(3),
+          };
+        }
+        return locais;
+      }
+    );
+
+    setListaLocais(locaisComTratamento);
 
     const solicitantes = await getSolicitante();
     const solicitantesSorted = solicitantes.data.sort((a: any, b: any) =>
