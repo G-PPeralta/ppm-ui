@@ -7,10 +7,7 @@ import { addOutroFinalArray } from "utils/AdicionaOpcaoOutroAoFinalArray";
 
 import { useToast } from "contexts/Toast";
 
-import {
-  getCoordenadores,
-  getResponsaveis,
-} from "services/get/CadastroModaisInfograficos";
+import { getCoordenadores } from "services/get/CadastroModaisInfograficos";
 import {
   getClassificacao,
   getComplexidade,
@@ -19,6 +16,7 @@ import {
   getLocalProjeto,
   getPolo,
   getPrioridade,
+  getResponsaveisProjetos,
   getSolicitante,
   getStatusProjeto,
   getTipoProjeto,
@@ -52,7 +50,7 @@ export function useProjetos() {
   };
 
   const reqGet = async () => {
-    const responsaveis = await getResponsaveis();
+    const responsaveis = await getResponsaveisProjetos();
     const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
       a.nome.localeCompare(b.nome)
     );
