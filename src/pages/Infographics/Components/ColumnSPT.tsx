@@ -115,7 +115,14 @@ function ColumnSPT({ column, setRefresh, refresh }: Props) {
                   </Flex>
                 );
               } else {
-                return <CardPIR poco={poco} index={index} key={index} />;
+                return (
+                  <CardPIR
+                    poco={poco}
+                    index={index}
+                    key={index}
+                    refresh={() => setRefresh(!refresh)}
+                  />
+                );
               }
             } else {
               return undefined;

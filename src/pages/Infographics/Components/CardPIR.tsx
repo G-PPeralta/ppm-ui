@@ -7,6 +7,8 @@ import { Flex, Heading, IconButton, Text } from "@chakra-ui/react";
 // import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
 
+import { deleteCampanha } from "services/delete/DeleteCampanha";
+
 type Poco = {
   id?: number;
   comp_pct: number;
@@ -26,9 +28,10 @@ type Poco = {
 type Props = {
   poco: Poco;
   index: number;
+  refresh: () => void;
 };
 
-function CardPIR({ poco, index }: Props) {
+function CardPIR({ poco, index, refresh }: Props) {
   const navigate = useNavigate();
   const dataInicioFormatada = poco.inicioplanejado;
   const dataFimFormatada = poco.finalplanejado;
@@ -53,7 +56,10 @@ function CardPIR({ poco, index }: Props) {
     navigate(`/estatisticas/cronograma/${idCampanha}/${idAtividade}`);
   };
 
-  // console.log("poco", poco);
+  function deleteIntervencao(idCampanha: number, idAtividade: number) {
+    deleteCampanha(idCampanha, idAtividade);
+    refresh();
+  }
 
   return (
     <>
@@ -230,9 +236,8 @@ function CardPIR({ poco, index }: Props) {
                   ),
                 }}
                 onClick={() => {
-                  transferToCronograma(poco.id_campanha, poco.id_poco);
+                  deleteIntervencao(poco.id_campanha, poco.id_poco);
                 }}
-                zIndex={5}
               />
             </Flex>
           </Flex>
