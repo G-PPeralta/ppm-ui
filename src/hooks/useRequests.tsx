@@ -35,6 +35,7 @@ export function useRequests(id?: number, mes?: string) {
   const [listaPocosOperacoes, setListaPocosOperacoes] = useState<any[]>([]);
   const [listaSondasOperacoes, setListaSondasOperacoes] = useState<any[]>([]);
   const [listaMetodosElevacao, setListaMetodosElevacao] = useState<any[]>([]);
+  const [refresh, setRefresh] = useState(false);
 
   const reqGet = async () => {
     setLoading(true);
@@ -167,7 +168,11 @@ export function useRequests(id?: number, mes?: string) {
   useEffect(() => {
     reqGet();
     setLoading(false);
-  }, []);
+  }, [refresh]);
+
+  function callBack() {
+    setRefresh(!refresh);
+  }
 
   return {
     loading,
@@ -186,5 +191,6 @@ export function useRequests(id?: number, mes?: string) {
     optionsPocosOperacoes,
     optionsSondasOperacoes,
     optionsMetodosElevacao,
+    callBack,
   };
 }

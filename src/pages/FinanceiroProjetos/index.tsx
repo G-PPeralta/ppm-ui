@@ -15,7 +15,7 @@ import { useRequests } from "hooks/useRequests";
 import Tabela from "./Components/Tabela";
 
 export function FinanceiroProjetos() {
-  const { loading, listaFinanceiroProjetos } = useRequests();
+  const { loading, listaFinanceiroProjetos, callBack } = useRequests();
   const [allData, setAllData] = useState<FinanceiroPorProjetos[]>([]);
   const [filter, setFilter] = useState<FinanceiroPorProjetos[]>([]);
   const [search, setSearch] = useState("");
@@ -144,7 +144,7 @@ export function FinanceiroProjetos() {
                 </Button>
               </Flex>
               <Flex ml={-3} mt={-1} mr={-3}>
-                {filter && <Tabela data={filter} />}
+                {filter && <Tabela data={filter} refresh={callBack} />}
               </Flex>
             </Box>
           </Flex>

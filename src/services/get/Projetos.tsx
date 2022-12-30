@@ -77,6 +77,15 @@ export async function getComplexidade(): Promise<{
   return { data, status };
 }
 
+export async function getResponsaveisProjetos(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/responsavel/projetos/p", token());
+
+  return { data, status };
+}
+
 export async function getLocalProjeto(): Promise<{
   data: any;
   status: number;

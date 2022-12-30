@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { FiTrash } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import {
   Flex,
+  IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -17,11 +19,14 @@ import { FinanceiroPorProjetos } from "interfaces/FinanceiroProjetos";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
 
+import { deleteDespesaTabela } from "services/delete/Financeiro";
+
 interface Props {
   data: FinanceiroPorProjetos[]; // Dados completos da tabela
+  refresh: () => void;
 }
 
-function Tabela({ data }: Props) {
+function Tabela({ data, refresh }: Props) {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
 
@@ -47,6 +52,7 @@ function Tabela({ data }: Props) {
     "Previsto",
     "Realizado",
     "Gap %",
+    "Ação",
   ];
 
   const valorTotalPrevisto = data.reduce(
@@ -125,6 +131,26 @@ function Tabela({ data }: Props) {
                 </Td>
                 <Td textAlign={"start"} fontWeight={"semibold"}>
                   <Text>{linhaTabela.gap < 1 ? 0 : linhaTabela.gap}%</Text>
+                </Td>
+                <Td>
+                  <IconButton
+                    aria-label="Plus sign"
+                    icon={<FiTrash />}
+                    background="transparent"
+                    variant="secondary"
+                    color="#F40606"
+                    _hover={{
+                      backgroundColor: "#F40606",
+                      color: "white",
+                    }}
+                    // isRound={true}
+                    onClick={() => {
+                      deleteDespesaTabela(linhaTabela.idprojeto);
+                      refresh();
+                    }}
+                    // width={"18px"}
+                    // height={"18px"}
+                  />
                 </Td>
                 {/* <Td textAlign={"start"} fontWeight={"semibold"}>
                 <Text>{linhaTabela.denominacaodeobjeto}</Text>

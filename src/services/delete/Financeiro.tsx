@@ -19,3 +19,12 @@ export async function deleteCustoReal(
 
   return { data, status };
 }
+
+export async function deleteDespesaTabela(
+  id: number
+): Promise<{ data: any; status: number }> {
+  const uri = `projetos-financeiro/delete/${id}`;
+  const { data, status } = await api.delete(uri, token());
+
+  return { data, status };
+}
