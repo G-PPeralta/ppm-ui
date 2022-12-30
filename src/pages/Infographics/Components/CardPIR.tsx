@@ -98,6 +98,34 @@ function CardPIR({ poco, index, refresh }: Props) {
           />
         ) : null}
 
+        <IconButton
+          zIndex={2}
+          position={"absolute"}
+          right={22}
+          bottom={2}
+          icon={<FiTrash2 size={18} />}
+          aria-label="Ir para o cronograma de execução"
+          w={"20px"}
+          size={"sm"}
+          backgroundColor={"transparent"}
+          color={"white"}
+          borderRadius={10}
+          _hover={{
+            backgroundColor: "white",
+            color: validateDate(
+              Number(poco.pct_plan),
+              Number(poco.comp_pct),
+              Number(poco.pct_real),
+              poco.finalplanejado,
+              Number(poco.ind_alerta),
+              Number(poco.ind_status)
+            ),
+          }}
+          onClick={() => {
+            deleteIntervencao(poco.id_campanha, poco.id_poco);
+          }}
+        />
+
         <Flex
           direction={"column"}
           align={"center"}
@@ -120,6 +148,7 @@ function CardPIR({ poco, index, refresh }: Props) {
           minW={"220px"}
           position={"relative"}
           onClick={() => transfer()}
+          pb={12}
         >
           <Flex>
             <Text
@@ -214,31 +243,6 @@ function CardPIR({ poco, index, refresh }: Props) {
               >
                 {`${poco.pct_real}%`}
               </Text>
-            </Flex>
-            <Flex justify={"center"} w={"100%"} mt={2}>
-              <IconButton
-                icon={<FiTrash2 size={18} />}
-                aria-label="Ir para o cronograma de execução"
-                w={"20px"}
-                size={"sm"}
-                backgroundColor={"transparent"}
-                color={"white"}
-                borderRadius={10}
-                _hover={{
-                  backgroundColor: "white",
-                  color: validateDate(
-                    Number(poco.pct_plan),
-                    Number(poco.comp_pct),
-                    Number(poco.pct_real),
-                    poco.finalplanejado,
-                    Number(poco.ind_alerta),
-                    Number(poco.ind_status)
-                  ),
-                }}
-                onClick={() => {
-                  deleteIntervencao(poco.id_campanha, poco.id_poco);
-                }}
-              />
             </Flex>
           </Flex>
         </Flex>
