@@ -11,7 +11,10 @@ import {
 // import PieChart from "components/PieChart";
 // import StackedBarChartPrevisto from "components/StackedBarChartPrevisto";
 
-import { getProjetosPrevistoRealizado } from "services/get/Dashboard";
+import {
+  getDadosPrevistoBarras,
+  getProjetosPrevistoRealizado,
+} from "services/get/Dashboard";
 
 import Estatisticas from "./BarChartPrevisto";
 import PrevistoNovo from "./PrevistoBarChar";
@@ -49,7 +52,42 @@ function useGetData() {
   useEffect(() => {
     loadData();
   }, []);
+
   return previstoRealizado;
+}
+
+// interface PrevistoChart {
+//   tot_previsto_percent: string;
+//   tot_realizado_percent: string;
+//   tot_realizado: string;
+//   tot_previsto_base_periodo: string;
+// }
+
+function useGetDataBarras() {
+  const [totalPrevisto, setTotalPrevisto] = useState<any[]>([]);
+  const [totalPrevistoPercent, setTotalPrevistoPercent] = useState();
+  const [totalRealizado, setTotalRealizado] = useState();
+  const [totalRealizadoPercent, setTotalRealizadoPercent] = useState();
+
+  const loadData = async () => {
+    const { data } = await getDadosPrevistoBarras();
+
+    setTotalPrevisto(data[0].tot_previsto_base_periodo);
+    setTotalPrevistoPercent(data[0].tot_previsto_percent);
+    setTotalRealizado(data[0].tot_realizado);
+    setTotalRealizadoPercent(data[0].tot_realizado_percent);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  return {
+    totalPrevisto,
+    totalPrevistoPercent,
+    totalRealizado,
+    totalRealizadoPercent,
+  };
 }
 
 // function useGetGraph(previstoRealizado: any) {
@@ -83,6 +121,8 @@ export default function PrevistoxRealizadoComponent() {
   // const innerWidth = window.innerWidth;
 
   const previstoRealizado = useGetData();
+  const previstoXRealizadoBarras = useGetDataBarras();
+  console.log("DATA", previstoXRealizadoBarras);
   // console.log(previstoRealizado);
 
   // const { graphPrevisto, graphRealizado } = useGetGraph(previstoRealizado);

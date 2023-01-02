@@ -109,3 +109,15 @@ export async function getDadosCurvaSGeral(): Promise<{
 
   return { data, status };
 }
+
+export async function getDadosPrevistoBarras(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(
+    "/dashboard/previsto-realizado-barras",
+    token()
+  );
+
+  return { data, status };
+}
