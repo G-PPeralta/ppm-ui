@@ -56,7 +56,7 @@ function useGetData() {
   return previstoRealizado;
 }
 
-export interface PrevistoChart {
+export interface PrevistoChartFormated {
   totalPrevistoPercent: string;
   totalRealizadoPercent: string;
   totalRealizado: string;
@@ -84,7 +84,7 @@ function useGetDataBarras() {
     loadData();
   }, []);
 
-  const result: PrevistoChart = {
+  const result: PrevistoChartFormated = {
     totalPrevisto,
     totalPrevistoPercent,
     totalRealizado,
@@ -250,7 +250,7 @@ export default function PrevistoxRealizadoComponent() {
               </Flex>
             </Flex>
             <Flex justifyContent={"center"} ml={5} mt={3}>
-              <Estatisticas />
+              <Estatisticas info={previstoXRealizadoBarras} />
               <Box justifyContent={"center"}>
                 <Box display={"flex"} alignItems="center">
                   <Flex

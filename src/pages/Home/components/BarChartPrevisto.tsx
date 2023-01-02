@@ -1,27 +1,32 @@
 import { BarChart, Bar, XAxis, Tooltip, LabelList } from "recharts";
 
-const data = [
-  {
-    Previsto: 80000000,
-    Realizado: 75000000,
-    PrevistoM: (80000000)
-      .toLocaleString("pt-br", {
-        style: "currency",
-        currency: "BRL",
-        minimumFractionDigits: 0,
-      })
-      .substring(3),
-    RealizadoM: (75000000)
-      .toLocaleString("pt-br", {
-        style: "currency",
-        currency: "BRL",
-        minimumFractionDigits: 0,
-      })
-      .substring(3),
-  },
-];
+import { PrevistoChartFormated } from "./PrevistoxRealizado";
 
-export default function Estatisticas() {
+interface EstatisticasProps {
+  info: PrevistoChartFormated;
+}
+
+export default function Estatisticas(props: EstatisticasProps) {
+  const data = [
+    {
+      Previsto: props.info.totalPrevisto,
+      Realizado: props.info.totalRealizado,
+      PrevistoM: Number(props.info.totalPrevisto)
+        .toLocaleString("pt-br", {
+          style: "currency",
+          currency: "BRL",
+          minimumFractionDigits: 0,
+        })
+        .substring(3),
+      RealizadoM: Number(props.info.totalRealizado)
+        .toLocaleString("pt-br", {
+          style: "currency",
+          currency: "BRL",
+          minimumFractionDigits: 0,
+        })
+        .substring(3),
+    },
+  ];
   return (
     <BarChart
       width={160}
