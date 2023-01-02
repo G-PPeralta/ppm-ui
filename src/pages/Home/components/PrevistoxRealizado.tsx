@@ -56,38 +56,42 @@ function useGetData() {
   return previstoRealizado;
 }
 
-// interface PrevistoChart {
-//   tot_previsto_percent: string;
-//   tot_realizado_percent: string;
-//   tot_realizado: string;
-//   tot_previsto_base_periodo: string;
-// }
+export interface PrevistoChart {
+  totalPrevistoPercent: string;
+  totalRealizadoPercent: string;
+  totalRealizado: string;
+  totalPrevisto: string;
+}
 
 function useGetDataBarras() {
-  const [totalPrevisto, setTotalPrevisto] = useState<any[]>([]);
-  const [totalPrevistoPercent, setTotalPrevistoPercent] = useState();
-  const [totalRealizado, setTotalRealizado] = useState();
-  const [totalRealizadoPercent, setTotalRealizadoPercent] = useState();
+  const [totalPrevisto, setTotalPrevisto] = useState("");
+  const [totalPrevistoPercent, setTotalPrevistoPercent] = useState("");
+  const [totalRealizado, setTotalRealizado] = useState("");
+  const [totalRealizadoPercent, setTotalRealizadoPercent] = useState("");
 
   const loadData = async () => {
-    const { data } = await getDadosPrevistoBarras();
+    const { data, status } = await getDadosPrevistoBarras();
 
-    setTotalPrevisto(data[0].tot_previsto_base_periodo);
-    setTotalPrevistoPercent(data[0].tot_previsto_percent);
-    setTotalRealizado(data[0].tot_realizado);
-    setTotalRealizadoPercent(data[0].tot_realizado_percent);
+    if (status === 200) {
+      setTotalPrevisto(data[0].tot_previsto_base_periodo);
+      setTotalPrevistoPercent(data[0].tot_previsto_percent);
+      setTotalRealizado(data[0].tot_realizado);
+      setTotalRealizadoPercent(data[0].tot_realizado_percent);
+    }
   };
 
   useEffect(() => {
     loadData();
   }, []);
 
-  return {
+  const result: PrevistoChart = {
     totalPrevisto,
     totalPrevistoPercent,
     totalRealizado,
     totalRealizadoPercent,
   };
+
+  return result;
 }
 
 // function useGetGraph(previstoRealizado: any) {
@@ -122,7 +126,6 @@ export default function PrevistoxRealizadoComponent() {
 
   const previstoRealizado = useGetData();
   const previstoXRealizadoBarras = useGetDataBarras();
-  console.log("DATA", previstoXRealizadoBarras);
   // console.log(previstoRealizado);
 
   // const { graphPrevisto, graphRealizado } = useGetGraph(previstoRealizado);
@@ -284,7 +287,10 @@ export default function PrevistoxRealizadoComponent() {
                         color="#ffffff"
                       >
                         {/* {(graphPrevisto * 100).toFixed(0)}% */}
-                        83%
+                        {Number(
+                          previstoXRealizadoBarras.totalPrevistoPercent
+                        ).toFixed(1)}
+                        %
                       </Text>
                     </Box>
                     <Box bg={"#9EC1CF"} py={1} px={3}>
@@ -295,7 +301,10 @@ export default function PrevistoxRealizadoComponent() {
                         color="#ffffff"
                       >
                         {/* {(graphRealizado * 100).toFixed(0)}% */}
-                        67%
+                        {Number(
+                          previstoXRealizadoBarras.totalRealizadoPercent
+                        ).toFixed(1)}
+                        %
                       </Text>
                     </Box>
                   </Flex>

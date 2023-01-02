@@ -1,3 +1,4 @@
+import { PrevistoChart } from "interfaces/Dashboard";
 import { TotalProjetosDashboard } from "interfaces/Services";
 
 import { api, token } from "services/api";
@@ -111,7 +112,7 @@ export async function getDadosCurvaSGeral(): Promise<{
 }
 
 export async function getDadosPrevistoBarras(): Promise<{
-  data: any;
+  data: PrevistoChart[];
   status: number;
 }> {
   const { data, status } = await api.get(
