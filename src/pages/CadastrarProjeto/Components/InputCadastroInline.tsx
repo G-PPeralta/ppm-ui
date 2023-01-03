@@ -21,6 +21,7 @@ interface Props {
   propName: string;
   nomeLabel: string;
   rota: string;
+  ind_sistema?: string;
   required?: boolean;
   respOuCoord?: boolean;
 }
@@ -30,6 +31,7 @@ function InputCadastroInline({
   registerForm,
   listaOptions,
   payloadKey,
+  ind_sistema,
   propName,
   nomeLabel,
   rota,
@@ -38,6 +40,10 @@ function InputCadastroInline({
 }: Props) {
   const [cadastroOutro, setCadastroOutro] = useState("");
   const { refresh, setRefresh } = refreshState;
+
+  let payload = {
+    [payloadKey]: cadastroOutro,
+  };
 
   const handleClick = () => {
     if (cadastroOutro !== "") {
@@ -48,10 +54,18 @@ function InputCadastroInline({
 
       if (respOuCoord) {
         setRefresh(!refresh);
-        const payload = {
-          [payloadKey]: cadastroOutro,
-          ind_sistema: "p",
-        };
+        if (!ind_sistema) {
+          payload = {
+            [payloadKey]: cadastroOutro,
+          };
+        }
+
+        if (ind_sistema) {
+          payload = {
+            [payloadKey]: cadastroOutro,
+            ind_sistema,
+          };
+        }
 
         setCadastroOutro("");
         registerForm.values[propName] = getOptionsMaxValue + 1;
