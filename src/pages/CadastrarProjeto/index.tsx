@@ -112,6 +112,7 @@ function CadastrarProjeto() {
                         propName={"responsavelId"}
                         rota={"/responsavel"}
                         respOuCoord={true}
+                        ind_sistema={"p"}
                       />
                     ) : (
                       <SelectFiltragem
