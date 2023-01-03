@@ -84,9 +84,9 @@ function CardInfoProjeto({
           <Box>
             <Flex>
               <Box display={"flex"}>
-                <Text fontWeight={"600"}>Nº:</Text>
+                <Text fontWeight={"600"}>ID Origem:</Text>
                 <Text ml={2} color={"origem.500"} fontWeight={"600"}>
-                  {infoProjeto.id}
+                  {infoProjeto.campo_id}
                 </Text>
               </Box>
             </Flex>
