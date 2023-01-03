@@ -36,8 +36,9 @@ import {
   getDataInicioExecucaoEstatistica,
   getDuracaoHorasAdicionarAtividade,
 } from "services/get/Estatisticas";
-
 // import AtividadeCronogramaDragAndDrop from "./AtividadeCronogramaDragAndDrop";
+import { getRelacoesExecucao } from "services/get/Projetos";
+
 import { ModalFiltrarDuracaoMedia } from "./ModalFiltrarDuracaoMedia";
 
 interface Props {
@@ -61,6 +62,7 @@ function ModalAdicionarAtividade({
     setRefresh,
     projeto
   );
+
   const { listaOperacao } = useCadastroCronograma();
 
   const optionsMetodosElevacao = [
@@ -77,11 +79,54 @@ function ModalAdicionarAtividade({
   const [dataFinalGantt, setDataFinalGantt] = useState<any>();
   const [dataFinalAtividade, setDataFinalAtividade] = useState<any>();
   const [mediaHorasFiltradas, setMediaHorasFiltradas] = useState<any>(0);
+  const [atividadesCronograma, setAtividadesCronograma] = useState<any[]>();
 
   const optionsOperacao = listaOperacao.map((operacao: Operacao) => ({
     value: operacao.id,
     label: operacao.nom_operacao,
   }));
+
+  const id = window.location.pathname.slice(-3);
+  // console.log(optionsOperacao);
+
+  const handleReqRelacoes = async () => {
+    const reqAtividadesCronograma = await getRelacoesExecucao(id);
+    setAtividadesCronograma(reqAtividadesCronograma);
+  };
+
+  const getOperacoes = atividadesCronograma?.map((atv) => ({
+    value: atv.id,
+    label: atv.valor,
+  }));
+
+  const getDataInicio =
+    registerForm.values.naoIniciarAntesDe &&
+    ganttData.find(
+      (op: any) => op.TaskID === registerForm.values.naoIniciarAntesDe
+    ).EndDate;
+
+  const dat_ini_atv_session: any = sessionStorage.getItem("data_inicio");
+
+  const formattDataInicial = registerForm.values.naoIniciarAntesDe
+    ? new Date(getDataInicio).getTime() + 3 * 60 * 60 * 1000
+    : new Date(dat_ini_atv_session).getTime() + 3 * 60 * 60 * 1000;
+
+  // console.log(getDataInicio);
+  // console.log(registerForm.values.data_inicio);
+  // console.log(registerForm.values.data_fim);
+
+  useEffect(() => {
+    registerForm.setFieldValue(
+      "data_inicio",
+      getDataInicio || registerForm.values.data_inicio
+    );
+  }, [registerForm.values]);
+
+  useEffect(() => {
+    handleReqRelacoes();
+  }, [refresh]);
+
+  // console.log(atividadesCronograma);
 
   const handleDataInicio = async () => {
     const dados = await getDataInicioExecucaoEstatistica(projeto.id_poco);
@@ -154,7 +199,7 @@ function ModalAdicionarAtividade({
     registerForm.setFieldValue("id_sonda", projeto.id_sonda);
     registerForm.setFieldValue("id_poco", projeto.id_poco);
     registerForm.setFieldValue("duracao", 0);
-    registerForm.setFieldValue("data_fim", "");
+    // registerForm.setFieldValue("data_fim", "");
   }, []);
 
   useEffect(() => {
@@ -236,9 +281,8 @@ function ModalAdicionarAtividade({
 
   // console.log("dados -->", registerForm.values.data_inicio);
 
-  const dat_ini_atv_session: any = sessionStorage.getItem("data_inicio");
-  const data_inicial =
-    new Date(dat_ini_atv_session).getTime() + 3 * 60 * 60 * 1000;
+  // const data_inicial =
+  //   new Date(dat_ini_atv_session).getTime() + 3 * 60 * 60 * 1000;
 
   return (
     <>
@@ -308,9 +352,9 @@ function ModalAdicionarAtividade({
                     <SelectFiltragem
                       registerForm={registerForm}
                       nomeSelect={"NÃO INICIAR ANTES DE"}
-                      propName={"operacao_id"}
-                      options={optionsOperacao}
-                      required={true}
+                      propName={"naoIniciarAntesDe"}
+                      options={getOperacoes}
+                      required={false}
                     />
                   </Flex>
                   {/* <AtividadeCronogramaDragAndDrop
@@ -363,7 +407,7 @@ function ModalAdicionarAtividade({
                           nomeLabel={"DATA INÍCIO"}
                           registerForm={registerForm}
                           propName={"data_inicio"}
-                          data={data_inicial || ""}
+                          data={formattDataInicial || ""}
                           selecionaHorario={true}
                           // isDisabled={true}
                           isDisabled={flag}
