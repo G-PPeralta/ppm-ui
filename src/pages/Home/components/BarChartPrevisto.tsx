@@ -9,8 +9,8 @@ interface EstatisticasProps {
 export default function Estatisticas(props: EstatisticasProps) {
   const data = [
     {
-      Previsto: props.info.totalPrevisto,
-      Realizado: props.info.totalRealizado,
+      Previsto: Number(props.info.totalPrevisto),
+      Realizado: Number(props.info.totalRealizado),
       PrevistoM: Number(props.info.totalPrevisto)
         .toLocaleString("pt-br", {
           style: "currency",
@@ -53,7 +53,14 @@ export default function Estatisticas(props: EstatisticasProps) {
         }}
       />
 
-      <Tooltip />
+      <Tooltip
+        formatter={(value: any) =>
+          value.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })
+        }
+      />
 
       <Bar dataKey="Previsto" fill={"#FEB144"}>
         {" "}
