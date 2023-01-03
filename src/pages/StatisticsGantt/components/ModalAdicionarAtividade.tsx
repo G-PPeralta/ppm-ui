@@ -304,6 +304,15 @@ function ModalAdicionarAtividade({
                       setMediaHorasFiltradas={setMediaHorasFiltradas}
                     />
                   </Flex>
+                  <Flex flex={2}>
+                    <SelectFiltragem
+                      registerForm={registerForm}
+                      nomeSelect={"NÃO INICIAR ANTES DE"}
+                      propName={"operacao_id"}
+                      options={optionsOperacao}
+                      required={true}
+                    />
+                  </Flex>
                   {/* <AtividadeCronogramaDragAndDrop
                     registerForm={registerForm}
                     atividades={atividadesOptions}
