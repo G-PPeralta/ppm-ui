@@ -43,17 +43,42 @@ export function Gantt({
   const queryTaskbarInfo = (args: any) => {
     // console.log(":::args.data.taskData", args.data.taskData);
     let color;
-    const { Duration, min, med, max, dp } = args.data.taskData;
+    const { Duration, med, dp } = args.data.taskData;
 
     // console.log("Dados Cores -->", args.data.taskData);
     // console.log("Dados Cores -->", med + dp);
     // const dp_med = dp / 2;
 
-    if (Duration < min) color = "green";
-    if (Duration >= min && Duration <= med) color = "yellow";
-    if (Duration >= med) color = "yellow";
-    if (Duration >= max) color = "red";
-    if (Duration >= max + dp) color = "black";
+    const dp1 = dp;
+    const dp2 = dp * 2;
+    // console.log("Preto", Duration, " > ", med + dp2);
+    // console.log("Vermelho", Duration, " <= ", med + dp2);
+    // console.log("Laranja", Duration, " <= ", med + dp1);
+    // console.log("Amarelo", Duration, " <= ", med);
+    // console.log("Verde", Duration, " <= ", med - dp1);
+    // console.log("Azul", Duration, " <= ", med - dp2);
+
+    if (+Duration <= med - dp2) {
+      color = "blue";
+    } else {
+      if (+Duration <= med - dp1) {
+        color = "green";
+      } else {
+        if (+Duration <= med) {
+          color = "yellow";
+        } else {
+          if (+Duration <= med + dp1) {
+            color = "orange";
+          } else {
+            if (+Duration <= med + dp2) {
+              color = "red";
+            } else {
+              color = "black";
+            }
+          }
+        }
+      }
+    }
 
     // console.log("Dados --> ", TaskName, " -->", color);
 
@@ -76,6 +101,10 @@ export function Gantt({
       // green (duração < média - DP)
       args.progressBarBgColor = "rgb(5, 149, 2)";
       args.taskbarBgColor = "rgb(147, 224, 27)";
+      args.taskbarBorderColor = "white";
+    } else if (color === "orange") {
+      args.progressBarBgColor = "rgb(235, 137, 52)";
+      args.taskbarBgColor = "rgb(217, 105, 7)";
       args.taskbarBorderColor = "white";
     }
   };
