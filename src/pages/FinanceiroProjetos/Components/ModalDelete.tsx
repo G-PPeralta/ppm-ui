@@ -107,8 +107,7 @@ function ModalDeleteFinanceiro({ id, refresh }: props) {
                         color={"#010101"}
                         fontWeight={"400"}
                       >
-                        Tem certeza que deseja mover esta informação para a
-                        Lixeira?
+                        Tem certeza que deseja mover este gasto para a Lixeira?
                       </Text>
                     </Flex>
                   </Stack>
