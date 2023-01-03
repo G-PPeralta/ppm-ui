@@ -50,6 +50,7 @@ function InputCadastroInline({
         setRefresh(!refresh);
         const payload = {
           [payloadKey]: cadastroOutro,
+          ind_sistema: "p",
         };
 
         setCadastroOutro("");
