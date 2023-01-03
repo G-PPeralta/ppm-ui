@@ -199,7 +199,7 @@ function ModalAdicionarAtividade({
     registerForm.setFieldValue("id_sonda", projeto.id_sonda);
     registerForm.setFieldValue("id_poco", projeto.id_poco);
     registerForm.setFieldValue("duracao", 0);
-    // registerForm.setFieldValue("data_fim", "");
+    registerForm.setFieldValue("data_fim", "");
   }, []);
 
   useEffect(() => {
