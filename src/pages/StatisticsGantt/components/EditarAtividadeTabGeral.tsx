@@ -153,7 +153,8 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                 propName={"hrs_totais"}
                 nomeInput={"DURAÇÃO"}
                 tipo={"hora"}
-                stepper={false}
+                step={0.5}
+                stepper={true}
                 limite={1000}
                 // isDisabled={registerForm.values.inicio_real || flag === 1}
                 isDisabled={!(flag === 1 || flag === 0)}
@@ -202,7 +203,8 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                     propName={"hrs_reais"}
                     nomeInput={"DURAÇÃO"}
                     tipo={"hora"}
-                    stepper={false}
+                    step={0.5}
+                    stepper={true}
                     limite={1000}
                     // isDisabled={flag === 0}
                     isDisabled={registerForm.values.pct_real === 100}
