@@ -28,7 +28,13 @@ function Card({ data, index }: Props) {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <Flex w="100%" align="center" justify="space-between" p={4}>
+          <Flex
+            w="100%"
+            maxW={"300px"}
+            align="center"
+            justify="space-between"
+            p={4}
+          >
             <Text fontWeight={"700"} fontSize={"16px"}>
               {index + 1}°
             </Text>

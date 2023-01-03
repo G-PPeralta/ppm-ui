@@ -55,7 +55,6 @@ export function PriorizacaoDiretores() {
   useEffect(() => {
     const getPayload = async () => {
       const data = await getProjetosDetalhados();
-      console.log("data", data);
       const low = data.filter(
         (val: any) => val.prioridade == "Baixo" || val.prioridade == null
       );
@@ -134,6 +133,12 @@ export function PriorizacaoDiretores() {
     }
   };
 
+  const save = () => {
+    console.log("baixos", dataBaixa);
+    console.log("medios", dataMedia);
+    console.log("altos", dataAlta);
+  };
+
   return (
     <>
       <Sidebar>
@@ -143,12 +148,19 @@ export function PriorizacaoDiretores() {
             {loading ? (
               <Spinner />
             ) : (
-              <Flex direction={"row"} wrap={"wrap"} mb={2} mt={8} flex={1}>
+              <Flex
+                justifyContent={"space-between"}
+                direction={"row"}
+                wrap={"wrap"}
+                mb={2}
+                mt={8}
+                flex={1}
+              >
                 <Flex
                   width={"300px"}
                   direction={"column"}
                   gap={2}
-                  borderRight={"1px solid #D6D4D4"}
+                  // borderRight={"1px solid #D6D4D4"}
                   minHeight={"500px"}
                 >
                   <Flex
@@ -192,7 +204,7 @@ export function PriorizacaoDiretores() {
                   width={"300px"}
                   gap={2}
                   direction={"column"}
-                  borderRight={"1px solid #D6D4D4"}
+                  // borderRight={"1px solid #D6D4D4"}
                   borderLeft={"1px solid #D6D4D4"}
                   minHeight={"500px"}
                 >
@@ -280,6 +292,26 @@ export function PriorizacaoDiretores() {
               </Flex>
             )}
           </DragDropContext>
+          <Flex w={"100%"} justifyContent={"center"}>
+            <Button
+              h={"56px"}
+              borderRadius={"10px"}
+              background={"white"}
+              border={"2px solid"}
+              color={"origem.500"}
+              _hover={{
+                border: "2px solid",
+                borderColor: "origem.500",
+                background: "origem.500",
+                transition: "all 0.4s",
+                color: "white",
+              }}
+              textColor={"origem.500"}
+              onClick={() => save()}
+            >
+              Salvar Alterações
+            </Button>
+          </Flex>
         </ContainerPagina>
       </Sidebar>
     </>
