@@ -410,7 +410,7 @@ function CadastrarProjeto() {
                     )}
                   </Flex>
                   <Flex flex={1}>
-                    {registerForm.values.tipoProjetoId === 0 ? (
+                    {/* {registerForm.values.tipoProjetoId === 0 ? (
                       <InputCadastroInline
                         required={true}
                         refreshState={refreshState}
@@ -421,16 +421,16 @@ function CadastrarProjeto() {
                         propName={"tipoProjetoId"}
                         rota={"/tipo-projeto"}
                       />
-                    ) : (
-                      <SelectFiltragem
-                        registerForm={registerForm}
-                        nomeSelect={"TIPO"}
-                        propName={"tipoProjetoId"}
-                        options={tiposProjetos}
-                        required={true}
-                        value={getValue(tiposProjetos, "tipoProjetoId")}
-                      />
-                    )}
+                    ) : ( */}
+                    <SelectFiltragem
+                      registerForm={registerForm}
+                      nomeSelect={"TIPO"}
+                      propName={"tipoProjetoId"}
+                      options={tiposProjetos}
+                      required={true}
+                      value={getValue(tiposProjetos, "tipoProjetoId")}
+                    />
+                    {/* )} */}
                   </Flex>
                   <Flex flex={1}>
                     {registerForm.values.gateId === 0 ? (

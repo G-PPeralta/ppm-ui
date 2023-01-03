@@ -166,11 +166,11 @@ export function useProjetos() {
     const tipoProjetosSorted = tipoProjetos.data.sort((a: any, b: any) =>
       a.tipo.localeCompare(b.tipo)
     );
-    const tipoProjetosComOutrosAoFinalArray = addOutroFinalArray(
-      tipoProjetosSorted,
-      "tipo"
-    );
-    setListaTipoProjetos(tipoProjetosComOutrosAoFinalArray);
+    // const tipoProjetosComOutrosAoFinalArray = addOutroFinalArray(
+    //   tipoProjetosSorted,
+    //   "tipo"
+    // );
+    setListaTipoProjetos(tipoProjetosSorted);
 
     const gates = await getGate();
     const gatesSorted = gates.data.sort((a: any, b: any) =>
