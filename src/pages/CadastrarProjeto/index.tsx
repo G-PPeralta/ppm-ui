@@ -88,7 +88,7 @@ function CadastrarProjeto() {
                   fontWeight={"700"}
                   fontFamily={"Mulish"}
                 >
-                  Cadastrar Projetos
+                  Cadastrar Novo Projeto
                 </Heading>
               </Flex>
 
