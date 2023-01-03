@@ -66,6 +66,7 @@ function DetalhamentoProjeto() {
     coordenador_nome: "",
     descricao: "",
     justificativa: "",
+    campo_id: "",
   };
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
@@ -116,6 +117,7 @@ function DetalhamentoProjeto() {
   const handleGetInfoProjetos = async () => {
     if (id) {
       const { data } = await getInfoProjetos(id);
+
       if (data.length === 0) {
         setInfoProjeto(initCardInfo);
       } else {

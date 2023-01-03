@@ -1,6 +1,7 @@
 export interface ICardInfoProjeto {
   id?: number;
   nome_projeto: string;
+  campo_id: string;
   data_inicio: null;
   data_fim: null;
   numero: number;
