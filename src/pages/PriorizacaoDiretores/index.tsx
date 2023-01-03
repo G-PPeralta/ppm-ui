@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   DragDropContext,
   Droppable,
@@ -6,11 +6,13 @@ import {
 } from "react-beautiful-dnd";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Spinner, Text } from "@chakra-ui/react";
 
 import ContainerPagina from "components/ContainerPagina";
 import Sidebar from "components/SideBar";
 import TituloPagina from "components/TituloPagina";
+
+import { useProjects } from "hooks/useProjects";
 
 import Card from "./Componentes/Card";
 
@@ -45,27 +47,26 @@ const move = (
 };
 
 export function PriorizacaoDiretores() {
-  const [dataBaixa, setDataBaixa] = useState([
-    "lorem",
-    "ipsum",
-    "dolor",
-    "sit",
-    "amet",
-  ]);
-  const [dataMedia, setDataMedia] = useState([
-    "lorem1",
-    "ipsum1",
-    "dolor1",
-    "sit1",
-    "amet1",
-  ]);
-  const [dataAlta, setDataAlta] = useState([
-    "lorem2",
-    "ipsum2",
-    "dolor2",
-    "sit2",
-    "ame2t",
-  ]);
+  const { loading, getProjetosDetalhados } = useProjects();
+  const [dataBaixa, setDataBaixa] = useState<any[]>([]);
+  const [dataMedia, setDataMedia] = useState<any[]>([]);
+  const [dataAlta, setDataAlta] = useState<any[]>([]);
+
+  useEffect(() => {
+    const getPayload = async () => {
+      const data = await getProjetosDetalhados();
+      console.log("data", data);
+      const low = data.filter(
+        (val: any) => val.prioridade == "Baixo" || val.prioridade == null
+      );
+      setDataBaixa(low);
+      const medium = data.filter((val: any) => val.prioridade == "Médio");
+      setDataMedia(medium);
+      const high = data.filter((val: any) => val.prioridade == "Alto");
+      setDataAlta(high);
+    };
+    getPayload();
+  }, []);
 
   const onDragEnd = (result: any) => {
     const { source, destination } = result;
@@ -139,141 +140,145 @@ export function PriorizacaoDiretores() {
         <ContainerPagina>
           <TituloPagina>Priorização Diretores</TituloPagina>
           <DragDropContext onDragEnd={onDragEnd}>
-            <Flex direction={"row"} wrap={"wrap"} mb={2} mt={8} flex={1}>
-              <Flex
-                width={"300px"}
-                direction={"column"}
-                gap={2}
-                borderRight={"1px solid #D6D4D4"}
-                minHeight={"500px"}
-              >
+            {loading ? (
+              <Spinner />
+            ) : (
+              <Flex direction={"row"} wrap={"wrap"} mb={2} mt={8} flex={1}>
                 <Flex
-                  height={"50px"}
-                  alignItems={"center"}
-                  pt={2}
-                  justifyContent={"center"}
+                  width={"300px"}
+                  direction={"column"}
+                  gap={2}
+                  borderRight={"1px solid #D6D4D4"}
+                  minHeight={"500px"}
                 >
-                  <Text
-                    fontSize={"xl"}
-                    fontWeight={"bold"}
-                    textAlign={"center"}
+                  <Flex
+                    height={"50px"}
+                    alignItems={"center"}
+                    pt={2}
+                    justifyContent={"center"}
                   >
-                    Baixa
-                  </Text>
-                  <Button
-                    variant={"none"}
-                    _hover={{
-                      background: "#ddd",
-                      transition: "all 0.4s",
-                    }}
-                    py={1}
-                    px={1}
-                    ml={1}
-                  >
-                    <BsThreeDotsVertical size={22} />
-                  </Button>
+                    <Text
+                      fontSize={"xl"}
+                      fontWeight={"bold"}
+                      textAlign={"center"}
+                    >
+                      Baixa
+                    </Text>
+                    <Button
+                      variant={"none"}
+                      _hover={{
+                        background: "#ddd",
+                        transition: "all 0.4s",
+                      }}
+                      py={1}
+                      px={1}
+                      ml={1}
+                    >
+                      <BsThreeDotsVertical size={22} />
+                    </Button>
+                  </Flex>
+                  <Droppable droppableId={"droppableBaixa"}>
+                    {(provided: DroppableProvided) => (
+                      <div ref={provided.innerRef} {...provided.droppableProps}>
+                        {dataBaixa.map((val, index) => (
+                          <Card key={index} data={val} index={index} />
+                        ))}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
                 </Flex>
-                <Droppable droppableId={"droppableBaixa"}>
-                  {(provided: DroppableProvided) => (
-                    <div ref={provided.innerRef} {...provided.droppableProps}>
-                      {dataBaixa.map((val, index) => (
-                        <Card key={index} data={val} index={index} />
-                      ))}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </Flex>
-              <Flex
-                width={"300px"}
-                gap={2}
-                direction={"column"}
-                borderRight={"1px solid #D6D4D4"}
-                borderLeft={"1px solid #D6D4D4"}
-                minHeight={"500px"}
-              >
                 <Flex
-                  height={"50px"}
-                  alignItems={"center"}
-                  pt={2}
-                  justifyContent={"center"}
+                  width={"300px"}
+                  gap={2}
+                  direction={"column"}
+                  borderRight={"1px solid #D6D4D4"}
+                  borderLeft={"1px solid #D6D4D4"}
+                  minHeight={"500px"}
                 >
-                  <Text
-                    fontSize={"xl"}
-                    fontWeight={"bold"}
-                    textAlign={"center"}
+                  <Flex
+                    height={"50px"}
+                    alignItems={"center"}
+                    pt={2}
+                    justifyContent={"center"}
                   >
-                    Média
-                  </Text>
-                  <Button
-                    variant={"none"}
-                    _hover={{
-                      background: "#ddd",
-                      transition: "all 0.4s",
-                    }}
-                    py={1}
-                    px={1}
-                    ml={1}
-                  >
-                    <BsThreeDotsVertical size={22} />
-                  </Button>
+                    <Text
+                      fontSize={"xl"}
+                      fontWeight={"bold"}
+                      textAlign={"center"}
+                    >
+                      Média
+                    </Text>
+                    <Button
+                      variant={"none"}
+                      _hover={{
+                        background: "#ddd",
+                        transition: "all 0.4s",
+                      }}
+                      py={1}
+                      px={1}
+                      ml={1}
+                    >
+                      <BsThreeDotsVertical size={22} />
+                    </Button>
+                  </Flex>
+                  <Droppable droppableId={"droppableMedia"}>
+                    {(provided: DroppableProvided) => (
+                      <div ref={provided.innerRef} {...provided.droppableProps}>
+                        {dataMedia.map((val, index) => (
+                          <Card key={index} data={val} index={index} />
+                        ))}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
                 </Flex>
-                <Droppable droppableId={"droppableMedia"}>
-                  {(provided: DroppableProvided) => (
-                    <div ref={provided.innerRef} {...provided.droppableProps}>
-                      {dataMedia.map((val, index) => (
-                        <Card key={index} data={val} index={index} />
-                      ))}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </Flex>
-              <Flex
-                width={"300px"}
-                gap={2}
-                direction={"column"}
-                borderLeft={"1px solid #D6D4D4"}
-                minHeight={"500px"}
-              >
                 <Flex
-                  height={"50px"}
-                  alignItems={"center"}
-                  pt={2}
-                  justifyContent={"center"}
+                  width={"300px"}
+                  gap={2}
+                  direction={"column"}
+                  borderLeft={"1px solid #D6D4D4"}
+                  minHeight={"500px"}
                 >
-                  <Text
-                    fontSize={"xl"}
-                    fontWeight={"bold"}
-                    textAlign={"center"}
+                  <Flex
+                    height={"50px"}
+                    alignItems={"center"}
+                    pt={2}
+                    justifyContent={"center"}
                   >
-                    Alta
-                  </Text>
-                  <Button
-                    variant={"none"}
-                    _hover={{
-                      background: "#ddd",
-                      transition: "all 0.4s",
-                    }}
-                    py={1}
-                    px={1}
-                    ml={1}
-                  >
-                    <BsThreeDotsVertical size={22} />
-                  </Button>
+                    <Text
+                      fontSize={"xl"}
+                      fontWeight={"bold"}
+                      textAlign={"center"}
+                    >
+                      Alta
+                    </Text>
+                    <Button
+                      variant={"none"}
+                      _hover={{
+                        background: "#ddd",
+                        transition: "all 0.4s",
+                      }}
+                      py={1}
+                      px={1}
+                      ml={1}
+                    >
+                      <BsThreeDotsVertical size={22} />
+                    </Button>
+                  </Flex>
+                  <Droppable droppableId={"droppableAlta"}>
+                    {(provided: DroppableProvided) => (
+                      <div ref={provided.innerRef} {...provided.droppableProps}>
+                        {dataAlta.map((val, index) => (
+                          <Card key={index} data={val} index={index} />
+                        ))}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
                 </Flex>
-                <Droppable droppableId={"droppableAlta"}>
-                  {(provided: DroppableProvided) => (
-                    <div ref={provided.innerRef} {...provided.droppableProps}>
-                      {dataAlta.map((val, index) => (
-                        <Card key={index} data={val} index={index} />
-                      ))}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
               </Flex>
-            </Flex>
+            )}
           </DragDropContext>
         </ContainerPagina>
       </Sidebar>
