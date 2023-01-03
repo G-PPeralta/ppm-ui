@@ -99,29 +99,6 @@ function ModalAdicionarAtividade({
     label: atv.valor,
   }));
 
-  const getDataInicio =
-    registerForm.values.naoIniciarAntesDe &&
-    ganttData.find(
-      (op: any) => op.TaskID === registerForm.values.naoIniciarAntesDe
-    ).EndDate;
-
-  const dat_ini_atv_session: any = sessionStorage.getItem("data_inicio");
-
-  const formattDataInicial = registerForm.values.naoIniciarAntesDe
-    ? new Date(getDataInicio).getTime() + 3 * 60 * 60 * 1000
-    : new Date(dat_ini_atv_session).getTime() + 3 * 60 * 60 * 1000;
-
-  // console.log(getDataInicio);
-  // console.log(registerForm.values.data_inicio);
-  // console.log(registerForm.values.data_fim);
-
-  useEffect(() => {
-    registerForm.setFieldValue(
-      "data_inicio",
-      getDataInicio || registerForm.values.data_inicio
-    );
-  }, [registerForm.values]);
-
   useEffect(() => {
     handleReqRelacoes();
   }, [refresh]);
@@ -153,10 +130,39 @@ function ModalAdicionarAtividade({
     setDataFinalGantt(ultimaData);
   };
 
+  const getDataInicio =
+    registerForm.values.naoIniciarAntesDe &&
+    ganttData.find(
+      (op: any) => op.TaskID === registerForm.values.naoIniciarAntesDe
+    ).EndDate;
+
+  const dat_ini_atv_session: any = sessionStorage.getItem("data_inicio");
+
+  const formattDataInicial = registerForm.values.naoIniciarAntesDe
+    ? new Date(getDataInicio).getTime() + 3 * 60 * 60 * 1000
+    : new Date(dat_ini_atv_session).getTime() + 3 * 60 * 60 * 1000;
+
+  // console.log(getDataInicio);
+  // console.log(registerForm.values.data_inicio);
+  // console.log(registerForm.values.data_fim);
+
+  useEffect(() => {
+    registerForm.setFieldValue(
+      "data_inicio",
+      getDataInicio || registerForm.values.data_inicio
+    );
+  }, [registerForm.values]);
+
   const handleDataFim = () => {
-    const dataInicio = new Date(registerForm.values.data_inicio);
+    const dataInicio = new Date(
+      getDataInicio || registerForm.values.data_inicio
+    );
     const duracaoEmHoras = registerForm.values.duracao;
-    const dataFinal = new Date(dataInicio.getTime() + duracaoEmHoras * 3600000);
+    const dataFinal = new Date(
+      getDataInicio
+        ? dataInicio.getTime() + (duracaoEmHoras + 3) * 3600000
+        : dataInicio.getTime() + (duracaoEmHoras + 4) * 3600000
+    );
     setDataFinalAtividade(dataFinal);
   };
 
