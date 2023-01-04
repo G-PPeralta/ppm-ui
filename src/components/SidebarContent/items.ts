@@ -20,6 +20,8 @@ import {
 import { MdPriorityHigh } from "react-icons/md";
 import { TbGauge } from "react-icons/tb";
 
+import { useAuth } from "hooks/useAuth";
+
 interface LinkItemProps {
   name: string;
   icon: IconType;
@@ -27,11 +29,11 @@ interface LinkItemProps {
   children: any[];
 }
 
-type Children = {
-  name: string;
-  icon: IconType;
-  link: string;
-};
+// type Children = {
+//   name: string;
+//   icon: IconType;
+//   link: string;
+// };
 
 interface ChildrenI {
   name: string;
@@ -39,7 +41,13 @@ interface ChildrenI {
   link: string;
 }
 
-const reactURL = process.env.REACT_APP_API_URL;
+export function GetArea() {
+  const { user } = useAuth();
+
+  return user;
+}
+
+console.log(GetArea());
 
 const childrenCarteiradeProjetos: ChildrenI[] = [
   { name: "Dashboard", icon: TbGauge, link: "/" },
@@ -109,7 +117,7 @@ const childrenConfiguracoes: ChildrenI[] = [
   { name: "Feriados", icon: BsCalendarWeek, link: "/feriados" },
 ];
 
-const enviroment1 = [
+const enviroment3 = [
   {
     name: "Intervenções",
     icon: FiBarChart,
@@ -120,6 +128,16 @@ const enviroment1 = [
 ];
 
 const enviroment2 = [
+  {
+    name: "Projetos",
+    icon: FiHome,
+    children: childrenCarteiradeProjetos.sort((a: ChildrenI, b: ChildrenI) =>
+      a.name.localeCompare(b.name)
+    ),
+  },
+];
+
+const enviroment1 = [
   {
     name: "Projetos",
     icon: FiHome,
@@ -145,41 +163,44 @@ const enviroment2 = [
   },
 ];
 
-function environmentURL(): LinkItemProps[] {
-  if (reactURL && reactURL === "https://ppmapi-hmg.iktech.com.br") {
+function environmentURL(user: any): LinkItemProps[] {
+  if (user && user?.role_id === 1) {
     return enviroment1;
+  } else if (user && user?.role_id === 2) {
+    return enviroment2;
+  } else if (user && user?.role_id === 3) {
+    return enviroment3;
+  } else {
+    return enviroment3;
   }
-  return enviroment2;
 }
 
-// console.log(environmentURL());
+export const LinkItems: Array<LinkItemProps> = environmentURL(GetArea());
 
-export const LinkItems: Array<LinkItemProps> = environmentURL();
+// export const LinkItemss: Array<LinkItemProps> = [
+//   {
+//     name: "Projetos",
+//     icon: FiHome,
+//     children: childrenCarteiradeProjetos.sort((a: Children, b: Children) =>
+//       a.name.localeCompare(b.name)
+//     ),
+//   },
 
-export const LinkItemss: Array<LinkItemProps> = [
-  {
-    name: "Projetos",
-    icon: FiHome,
-    children: childrenCarteiradeProjetos.sort((a: Children, b: Children) =>
-      a.name.localeCompare(b.name)
-    ),
-  },
+//   {
+//     name: "Intervenções",
+//     icon: FiBarChart,
+//     children: childrenInfograficos.sort((a: Children, b: Children) =>
+//       a.name.localeCompare(b.name)
+//     ),
+//   },
 
-  {
-    name: "Intervenções",
-    icon: FiBarChart,
-    children: childrenInfograficos.sort((a: Children, b: Children) =>
-      a.name.localeCompare(b.name)
-    ),
-  },
-
-  {
-    name: "Configurações",
-    icon: FiSettings,
-    children: childrenConfiguracoes.sort((a: Children, b: Children) =>
-      a.name.localeCompare(b.name)
-    ),
-  },
-];
+//   {
+//     name: "Configurações",
+//     icon: FiSettings,
+//     children: childrenConfiguracoes.sort((a: Children, b: Children) =>
+//       a.name.localeCompare(b.name)
+//     ),
+//   },
+// ];
 
 // console.log("Como era", LinkItemss);
