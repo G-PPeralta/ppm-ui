@@ -20,8 +20,6 @@ import {
 import { MdPriorityHigh } from "react-icons/md";
 import { TbGauge } from "react-icons/tb";
 
-import { useAuth } from "hooks/useAuth";
-
 interface LinkItemProps {
   name: string;
   icon: IconType;
@@ -42,12 +40,12 @@ interface ChildrenI {
 }
 
 export function GetArea() {
-  const { user } = useAuth();
+  const user = sessionStorage.getItem("@Origem:user");
 
   return user;
 }
 
-console.log(GetArea());
+// console.log(GetArea());
 
 const childrenCarteiradeProjetos: ChildrenI[] = [
   { name: "Dashboard", icon: TbGauge, link: "/" },
