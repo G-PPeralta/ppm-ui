@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { IconType } from "react-icons";
 import { AiOutlineBarChart } from "react-icons/ai";
 import { BiData } from "react-icons/bi";
@@ -27,11 +28,11 @@ interface LinkItemProps {
   children: any[];
 }
 
-type Children = {
-  name: string;
-  icon: IconType;
-  link: string;
-};
+// type Children = {
+//   name: string;
+//   icon: IconType;
+//   link: string;
+// };
 
 interface ChildrenI {
   name: string;
@@ -39,7 +40,19 @@ interface ChildrenI {
   link: string;
 }
 
-const reactURL = process.env.REACT_APP_API_URL;
+export function getArea() {
+  const user = sessionStorage.getItem("@Origem:user");
+  return user;
+}
+
+export function App() {
+  useEffect(() => {
+    getArea();
+  }, []);
+}
+
+const substring = "role_id";
+const getIndexOfRoleId = getArea()?.indexOf(substring);
 
 const childrenCarteiradeProjetos: ChildrenI[] = [
   { name: "Dashboard", icon: TbGauge, link: "/" },
@@ -109,7 +122,7 @@ const childrenConfiguracoes: ChildrenI[] = [
   { name: "Feriados", icon: BsCalendarWeek, link: "/feriados" },
 ];
 
-const enviroment1 = [
+const enviroment3 = [
   {
     name: "Intervenções",
     icon: FiBarChart,
@@ -120,6 +133,16 @@ const enviroment1 = [
 ];
 
 const enviroment2 = [
+  {
+    name: "Projetos",
+    icon: FiHome,
+    children: childrenCarteiradeProjetos.sort((a: ChildrenI, b: ChildrenI) =>
+      a.name.localeCompare(b.name)
+    ),
+  },
+];
+
+const enviroment1 = [
   {
     name: "Projetos",
     icon: FiHome,
@@ -145,41 +168,54 @@ const enviroment2 = [
   },
 ];
 
-function environmentURL(): LinkItemProps[] {
-  if (reactURL && reactURL === "https://ppmapi-hmg.iktech.com.br") {
+function environmentURL(user: any): LinkItemProps[] {
+  if (
+    user &&
+    user?.substr(getIndexOfRoleId ? getIndexOfRoleId + 9 : 122, 1) === "1"
+  ) {
     return enviroment1;
   }
-  return enviroment2;
+  if (
+    user &&
+    user?.substr(getIndexOfRoleId ? getIndexOfRoleId + 9 : 122, 1) === "2"
+  ) {
+    return enviroment2;
+  }
+  if (
+    user &&
+    user?.substr(getIndexOfRoleId ? getIndexOfRoleId + 9 : 122, 1) === "3"
+  ) {
+    return enviroment3;
+  }
+  return enviroment3;
 }
 
-// console.log(environmentURL());
+export const LinkItems: Array<LinkItemProps> = environmentURL(getArea());
 
-export const LinkItems: Array<LinkItemProps> = environmentURL();
+// export const LinkItemss: Array<LinkItemProps> = [
+//   {
+//     name: "Projetos",
+//     icon: FiHome,
+//     children: childrenCarteiradeProjetos.sort((a: Children, b: Children) =>
+//       a.name.localeCompare(b.name)
+//     ),
+//   },
 
-export const LinkItemss: Array<LinkItemProps> = [
-  {
-    name: "Projetos",
-    icon: FiHome,
-    children: childrenCarteiradeProjetos.sort((a: Children, b: Children) =>
-      a.name.localeCompare(b.name)
-    ),
-  },
+//   {
+//     name: "Intervenções",
+//     icon: FiBarChart,
+//     children: childrenInfograficos.sort((a: Children, b: Children) =>
+//       a.name.localeCompare(b.name)
+//     ),
+//   },
 
-  {
-    name: "Intervenções",
-    icon: FiBarChart,
-    children: childrenInfograficos.sort((a: Children, b: Children) =>
-      a.name.localeCompare(b.name)
-    ),
-  },
-
-  {
-    name: "Configurações",
-    icon: FiSettings,
-    children: childrenConfiguracoes.sort((a: Children, b: Children) =>
-      a.name.localeCompare(b.name)
-    ),
-  },
-];
+//   {
+//     name: "Configurações",
+//     icon: FiSettings,
+//     children: childrenConfiguracoes.sort((a: Children, b: Children) =>
+//       a.name.localeCompare(b.name)
+//     ),
+//   },
+// ];
 
 // console.log("Como era", LinkItemss);

@@ -56,7 +56,7 @@ function CardPIR({ poco, index, refresh }: Props) {
     navigate(`/estatisticas/cronograma/${idCampanha}/${idAtividade}`);
   };
 
-  function deleteIntervencao(idCampanha: number, idAtividade: number) {
+  function deleteIntervencao(idCampanha: number, idAtividade: any) {
     deleteCampanha(idCampanha, idAtividade);
     refresh();
   }
@@ -122,7 +122,7 @@ function CardPIR({ poco, index, refresh }: Props) {
             ),
           }}
           onClick={() => {
-            deleteIntervencao(poco.id_campanha, poco.id_poco);
+            deleteIntervencao(poco.id_campanha, poco.id);
           }}
         />
 
