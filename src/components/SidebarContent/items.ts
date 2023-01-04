@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { IconType } from "react-icons";
 import { AiOutlineBarChart } from "react-icons/ai";
 import { BiData } from "react-icons/bi";
@@ -39,13 +40,29 @@ interface ChildrenI {
   link: string;
 }
 
-export function GetArea() {
+export function getArea() {
   const user = sessionStorage.getItem("@Origem:user");
-
   return user;
 }
 
-// console.log(GetArea());
+export function App() {
+  useEffect(() => {
+    getArea();
+  }, []);
+}
+
+console.log(getArea());
+
+const substring = "role_id";
+const getIndexOfRoleId = getArea()?.indexOf(substring);
+const getRoleId = getArea()?.substr(
+  getIndexOfRoleId ? getIndexOfRoleId + 9 : 122,
+  1
+);
+
+console.log(getIndexOfRoleId);
+
+console.log(getRoleId);
 
 const childrenCarteiradeProjetos: ChildrenI[] = [
   { name: "Dashboard", icon: TbGauge, link: "/" },
@@ -162,18 +179,30 @@ const enviroment1 = [
 ];
 
 function environmentURL(user: any): LinkItemProps[] {
-  if (user && user?.role_id === 1) {
+  if (
+    user &&
+    user?.substr(getIndexOfRoleId ? getIndexOfRoleId + 9 : 122, 1) === "1"
+  ) {
     return enviroment1;
-  } else if (user && user?.role_id === 2) {
+  }
+  if (
+    user &&
+    user?.substr(getIndexOfRoleId ? getIndexOfRoleId + 9 : 122, 1) === "2"
+  ) {
     return enviroment2;
-  } else if (user && user?.role_id === 3) {
-    return enviroment3;
-  } else {
+  }
+  if (
+    user &&
+    user?.substr(getIndexOfRoleId ? getIndexOfRoleId + 9 : 122, 1) === "3"
+  ) {
     return enviroment3;
   }
+  return enviroment3;
 }
 
-export const LinkItems: Array<LinkItemProps> = environmentURL(GetArea());
+export const LinkItems: Array<LinkItemProps> = environmentURL(getArea());
+
+console.log(LinkItems);
 
 // export const LinkItemss: Array<LinkItemProps> = [
 //   {
