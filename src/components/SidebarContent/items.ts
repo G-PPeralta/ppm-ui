@@ -51,18 +51,8 @@ export function App() {
   }, []);
 }
 
-console.log(getArea());
-
 const substring = "role_id";
 const getIndexOfRoleId = getArea()?.indexOf(substring);
-const getRoleId = getArea()?.substr(
-  getIndexOfRoleId ? getIndexOfRoleId + 9 : 122,
-  1
-);
-
-console.log(getIndexOfRoleId);
-
-console.log(getRoleId);
 
 const childrenCarteiradeProjetos: ChildrenI[] = [
   { name: "Dashboard", icon: TbGauge, link: "/" },
@@ -201,8 +191,6 @@ function environmentURL(user: any): LinkItemProps[] {
 }
 
 export const LinkItems: Array<LinkItemProps> = environmentURL(getArea());
-
-console.log(LinkItems);
 
 // export const LinkItemss: Array<LinkItemProps> = [
 //   {
