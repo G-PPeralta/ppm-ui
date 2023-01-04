@@ -29,8 +29,19 @@ export function Home() {
     setAreasDemandadas(dataReq);
   }
 
+  function componentDidMount() {
+    const reloadCount = sessionStorage.getItem("reloadCount");
+    if (Number(reloadCount) < 2) {
+      sessionStorage.setItem("reloadCount", String(Number(reloadCount) + 2));
+      window.location.reload();
+    } else {
+      sessionStorage.removeItem("reloadCount");
+    }
+  }
+
   useEffect(() => {
     handleGetAreasDemandadas();
+    componentDidMount();
   }, []);
 
   return (
