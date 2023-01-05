@@ -72,6 +72,9 @@ export function PriorizacaoDiretores() {
     setWait(true);
     const { source, destination } = result;
     if (!destination) {
+      setTimeout(() => {
+        setWait(false);
+      }, 1000);
       return;
     }
 
