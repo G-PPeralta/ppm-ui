@@ -12,8 +12,11 @@ import ContainerPagina from "components/ContainerPagina";
 import Sidebar from "components/SideBar";
 import TituloPagina from "components/TituloPagina";
 
+import { useAuth } from "hooks/useAuth";
 import { useProjects } from "hooks/useProjects";
 
+import { getInitialRaking } from "services/get/Ranking";
+import { postProject } from "services/post/Priorizacao";
 import {
   postPriorizacaoDiretores,
   getPriorizacaoDiretores,
@@ -62,6 +65,7 @@ const move = (
 };
 
 export function PriorizacaoDiretores() {
+  const { user } = useAuth();
   const { loading, getProjetosDetalhados } = useProjects();
   const [dataBaixa, setDataBaixa] = useState<any[]>([]);
   const [dataMedia, setDataMedia] = useState<any[]>([]);
@@ -71,7 +75,6 @@ export function PriorizacaoDiretores() {
   useEffect(() => {
     const getPayload = async () => {
       const prioridades = await getPriorizacaoDiretores();
-      console.log("prioridades", prioridades);
       const data = await getProjetosDetalhados();
       const low = data.filter(
         (val: any) => val.prioridade == "Baixo" || val.prioridade == null
@@ -186,9 +189,6 @@ export function PriorizacaoDiretores() {
   };
 
   const save = async () => {
-    console.log("baixos", dataBaixa);
-    console.log("medios", dataMedia);
-    console.log("altos", dataAlta);
     const payload: any[] = [];
     dataBaixa.forEach((val: any, index: number) => {
       const newItem = {
@@ -211,9 +211,107 @@ export function PriorizacaoDiretores() {
       };
       payload.push(newItem);
     });
-    console.log("payload", payload);
-    const result = await postPriorizacaoDiretores(payload);
-    console.log("result", result);
+    await postPriorizacaoDiretores(payload);
+
+    dataBaixa.forEach(async (val: any) => {
+      const ranking = await getInitialRaking(val.id);
+      const newItem = {
+        id_projeto: val.id,
+        dsc_comentario: "",
+        nom_usu_create: user?.nome,
+        beneficio: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 1)[0]
+            .id_opcao,
+          id_ranking: 1,
+        },
+        estrategia: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 6)[0]
+            .id_opcao,
+          id_ranking: 6,
+        },
+        operacao: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 3)[0]
+            .id_opcao,
+          id_ranking: 3,
+        },
+        prioridade: {
+          opcao_id: 12,
+          id_ranking: 4,
+        },
+        regulatorio: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 2)[0]
+            .id_opcao,
+          id_ranking: 2,
+        },
+      };
+      await postProject(newItem);
+    });
+    dataMedia.forEach(async (val: any) => {
+      const ranking = await getInitialRaking(val.id);
+      const newItem = {
+        id_projeto: val.id,
+        dsc_comentario: "",
+        nom_usu_create: user?.nome,
+        beneficio: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 1)[0]
+            .id_opcao,
+          id_ranking: 1,
+        },
+        estrategia: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 6)[0]
+            .id_opcao,
+          id_ranking: 6,
+        },
+        operacao: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 3)[0]
+            .id_opcao,
+          id_ranking: 3,
+        },
+        prioridade: {
+          opcao_id: 13,
+          id_ranking: 4,
+        },
+        regulatorio: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 2)[0]
+            .id_opcao,
+          id_ranking: 2,
+        },
+      };
+      await postProject(newItem);
+    });
+    dataAlta.forEach(async (val: any) => {
+      const ranking = await getInitialRaking(val.id);
+      const newItem = {
+        id_projeto: val.id,
+        dsc_comentario: "",
+        nom_usu_create: user?.nome,
+        beneficio: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 1)[0]
+            .id_opcao,
+          id_ranking: 1,
+        },
+        estrategia: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 6)[0]
+            .id_opcao,
+          id_ranking: 6,
+        },
+        operacao: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 3)[0]
+            .id_opcao,
+          id_ranking: 3,
+        },
+        prioridade: {
+          opcao_id: 14,
+          id_ranking: 4,
+        },
+        regulatorio: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 2)[0]
+            .id_opcao,
+          id_ranking: 2,
+        },
+      };
+      await postProject(newItem);
+    });
   };
 
   return (
