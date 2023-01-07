@@ -48,8 +48,8 @@ export function PrevistoXRealizado({ data }: Props) {
     responsible: data.responsavel,
     startDate: data.data_inicio,
     endDate: data.data_fim,
-    budget: +data.vlr_cr,
-    realized: +data.vlr_orcado,
+    budget: +data.vlr_orcado,
+    realized: +data.vlr_cr,
     percent: +data.pct,
   };
 
