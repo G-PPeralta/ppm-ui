@@ -36,8 +36,9 @@ import {
   getDataInicioExecucaoEstatistica,
   getDuracaoHorasAdicionarAtividade,
 } from "services/get/Estatisticas";
-
 // import AtividadeCronogramaDragAndDrop from "./AtividadeCronogramaDragAndDrop";
+import { getRelacoesExecucao } from "services/get/Projetos";
+
 import { ModalFiltrarDuracaoMedia } from "./ModalFiltrarDuracaoMedia";
 
 interface Props {
@@ -61,6 +62,7 @@ function ModalAdicionarAtividade({
     setRefresh,
     projeto
   );
+
   const { listaOperacao } = useCadastroCronograma();
 
   const optionsMetodosElevacao = [
@@ -77,11 +79,31 @@ function ModalAdicionarAtividade({
   const [dataFinalGantt, setDataFinalGantt] = useState<any>();
   const [dataFinalAtividade, setDataFinalAtividade] = useState<any>();
   const [mediaHorasFiltradas, setMediaHorasFiltradas] = useState<any>(0);
+  const [atividadesCronograma, setAtividadesCronograma] = useState<any[]>();
 
   const optionsOperacao = listaOperacao.map((operacao: Operacao) => ({
     value: operacao.id,
     label: operacao.nom_operacao,
   }));
+
+  const id = window.location.pathname.slice(-3);
+  // console.log(optionsOperacao);
+
+  const handleReqRelacoes = async () => {
+    const reqAtividadesCronograma = await getRelacoesExecucao(id);
+    setAtividadesCronograma(reqAtividadesCronograma);
+  };
+
+  const getOperacoes = atividadesCronograma?.map((atv) => ({
+    value: atv.id,
+    label: atv.valor,
+  }));
+
+  useEffect(() => {
+    handleReqRelacoes();
+  }, [refresh]);
+
+  // console.log(atividadesCronograma);
 
   const handleDataInicio = async () => {
     const dados = await getDataInicioExecucaoEstatistica(projeto.id_poco);
@@ -108,10 +130,39 @@ function ModalAdicionarAtividade({
     setDataFinalGantt(ultimaData);
   };
 
+  const getDataInicio =
+    registerForm.values.naoIniciarAntesDe &&
+    ganttData.find(
+      (op: any) => op.TaskID === registerForm.values.naoIniciarAntesDe
+    ).EndDate;
+
+  const dat_ini_atv_session: any = sessionStorage.getItem("data_inicio");
+
+  const formattDataInicial = registerForm.values.naoIniciarAntesDe
+    ? new Date(getDataInicio).getTime() + 3 * 60 * 60 * 1000
+    : new Date(dat_ini_atv_session).getTime() + 3 * 60 * 60 * 1000;
+
+  // console.log(getDataInicio);
+  // console.log(registerForm.values.data_inicio);
+  // console.log(registerForm.values.data_fim);
+
+  useEffect(() => {
+    registerForm.setFieldValue(
+      "data_inicio",
+      getDataInicio || registerForm.values.data_inicio
+    );
+  }, [registerForm.values]);
+
   const handleDataFim = () => {
-    const dataInicio = new Date(registerForm.values.data_inicio);
+    const dataInicio = new Date(
+      getDataInicio || registerForm.values.data_inicio
+    );
     const duracaoEmHoras = registerForm.values.duracao;
-    const dataFinal = new Date(dataInicio.getTime() + duracaoEmHoras * 3600000);
+    const dataFinal = new Date(
+      getDataInicio
+        ? dataInicio.getTime() + (duracaoEmHoras + 3) * 3600000
+        : dataInicio.getTime() + (duracaoEmHoras + 4) * 3600000
+    );
     setDataFinalAtividade(dataFinal);
   };
 
@@ -236,9 +287,8 @@ function ModalAdicionarAtividade({
 
   // console.log("dados -->", registerForm.values.data_inicio);
 
-  const dat_ini_atv_session: any = sessionStorage.getItem("data_inicio");
-  const data_inicial =
-    new Date(dat_ini_atv_session).getTime() + 3 * 60 * 60 * 1000;
+  // const data_inicial =
+  //   new Date(dat_ini_atv_session).getTime() + 3 * 60 * 60 * 1000;
 
   return (
     <>
@@ -304,6 +354,15 @@ function ModalAdicionarAtividade({
                       setMediaHorasFiltradas={setMediaHorasFiltradas}
                     />
                   </Flex>
+                  <Flex flex={2}>
+                    <SelectFiltragem
+                      registerForm={registerForm}
+                      nomeSelect={"NÃO INICIAR ANTES DE"}
+                      propName={"naoIniciarAntesDe"}
+                      options={getOperacoes}
+                      required={false}
+                    />
+                  </Flex>
                   {/* <AtividadeCronogramaDragAndDrop
                     registerForm={registerForm}
                     atividades={atividadesOptions}
@@ -354,7 +413,7 @@ function ModalAdicionarAtividade({
                           nomeLabel={"DATA INÍCIO"}
                           registerForm={registerForm}
                           propName={"data_inicio"}
-                          data={data_inicial || ""}
+                          data={formattDataInicial || ""}
                           selecionaHorario={true}
                           // isDisabled={true}
                           isDisabled={flag}

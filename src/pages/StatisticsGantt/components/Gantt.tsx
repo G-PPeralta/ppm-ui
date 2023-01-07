@@ -49,6 +49,12 @@ export function Gantt({
     // console.log("Dados Cores -->", med + dp);
     // const dp_med = dp / 2;
 
+    // if (Duration < min) color = "green";
+    // if (Duration >= min && Duration <= med) color = "yellow";
+    // if (Duration >= med) color = "yellow";
+    // if (Duration >= max) color = "red";
+    // if (Duration >= max + dp) color = "black";
+
     const dp1 = dp;
     const dp2 = dp * 2;
     // console.log("Preto", Duration, " > ", med + dp2);
@@ -57,7 +63,6 @@ export function Gantt({
     // console.log("Amarelo", Duration, " <= ", med);
     // console.log("Verde", Duration, " <= ", med - dp1);
     // console.log("Azul", Duration, " <= ", med - dp2);
-
     if (+Duration <= med - dp2) {
       color = "blue";
     } else {

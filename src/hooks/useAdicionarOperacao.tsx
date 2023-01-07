@@ -59,9 +59,11 @@ export function useAdicionarOperacao(
     duracao: 0,
     data_inicio: "",
     data_fim: "",
+    naoIniciarAntesDe: "",
     metodo_elevacao_id: null,
     profundidade: 0,
     flag: 0,
+
     precedentes: [
       {
         atividadePrecedenteId: 0,
@@ -83,6 +85,7 @@ export function useAdicionarOperacao(
         data_fim: values.data_fim,
         metodo_elevacao_id: values.metodo_elevacao_id,
         profundidade: values.profundidade,
+        naoIniciarAntesDe: values.naoIniciarAntesDe,
         flag: values.flag,
       };
 
