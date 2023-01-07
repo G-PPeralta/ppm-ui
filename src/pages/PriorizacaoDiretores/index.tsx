@@ -12,6 +12,8 @@ import ContainerPagina from "components/ContainerPagina";
 import Sidebar from "components/SideBar";
 import TituloPagina from "components/TituloPagina";
 
+import { useToast } from "contexts/Toast";
+
 import { useAuth } from "hooks/useAuth";
 import { useProjects } from "hooks/useProjects";
 
@@ -66,6 +68,7 @@ const move = (
 
 export function PriorizacaoDiretores() {
   const { user } = useAuth();
+  const { toast } = useToast();
   const { loading, getProjetosDetalhados } = useProjects();
   const [dataBaixa, setDataBaixa] = useState<any[]>([]);
   const [dataMedia, setDataMedia] = useState<any[]>([]);
@@ -189,6 +192,7 @@ export function PriorizacaoDiretores() {
   };
 
   const save = async () => {
+    setWait(true);
     const payload: any[] = [];
     dataBaixa.forEach((val: any, index: number) => {
       const newItem = {
@@ -312,6 +316,10 @@ export function PriorizacaoDiretores() {
       };
       await postProject(newItem);
     });
+    toast.success("Atualizado com sucesso!");
+    setTimeout(() => {
+      setWait(false);
+    }, 1000);
   };
 
   return (
