@@ -14,7 +14,22 @@ import TituloPagina from "components/TituloPagina";
 
 import { useProjects } from "hooks/useProjects";
 
+import {
+  postPriorizacaoDiretores,
+  getPriorizacaoDiretores,
+} from "services/post/PriorizacaoDiretores";
+
 import Card from "./Componentes/Card";
+
+function compare(a: any, b: any) {
+  if (a.order > b.order) {
+    return 1;
+  }
+  if (a.order < b.order) {
+    return -1;
+  }
+  return 0;
+}
 
 const reorder = (list: any, startIndex: any, endIndex: any) => {
   const result = list;
@@ -55,15 +70,44 @@ export function PriorizacaoDiretores() {
 
   useEffect(() => {
     const getPayload = async () => {
+      const prioridades = await getPriorizacaoDiretores();
+      console.log("prioridades", prioridades);
       const data = await getProjetosDetalhados();
       const low = data.filter(
         (val: any) => val.prioridade == "Baixo" || val.prioridade == null
       );
-      setDataBaixa(low);
+      low.forEach((val: any, index: number) => {
+        const newItem = {
+          ...val,
+          order: prioridades.data.filter(
+            (item: any) => item.id_projeto == val.id
+          )[0]?.prioridade,
+        };
+        low[index] = newItem;
+      });
+      setDataBaixa(low.sort(compare));
       const medium = data.filter((val: any) => val.prioridade == "Médio");
-      setDataMedia(medium);
+      medium.forEach((val: any, index: number) => {
+        const newItem = {
+          ...val,
+          order: prioridades.data.filter(
+            (item: any) => item.id_projeto == val.id
+          )[0]?.prioridade,
+        };
+        medium[index] = newItem;
+      });
+      setDataMedia(medium.sort(compare));
       const high = data.filter((val: any) => val.prioridade == "Alto");
-      setDataAlta(high);
+      high.forEach((val: any, index: number) => {
+        const newItem = {
+          ...val,
+          order: prioridades.data.filter(
+            (item: any) => item.id_projeto == val.id
+          )[0]?.prioridade,
+        };
+        high[index] = newItem;
+      });
+      setDataAlta(high.sort(compare));
     };
     getPayload();
   }, []);
@@ -141,10 +185,35 @@ export function PriorizacaoDiretores() {
     }, 1000);
   };
 
-  const save = () => {
+  const save = async () => {
     console.log("baixos", dataBaixa);
     console.log("medios", dataMedia);
     console.log("altos", dataAlta);
+    const payload: any[] = [];
+    dataBaixa.forEach((val: any, index: number) => {
+      const newItem = {
+        id_projeto: val.id,
+        prioridade: index,
+      };
+      payload.push(newItem);
+    });
+    dataMedia.forEach((val: any, index: number) => {
+      const newItem = {
+        id_projeto: val.id,
+        prioridade: index,
+      };
+      payload.push(newItem);
+    });
+    dataAlta.forEach((val: any, index: number) => {
+      const newItem = {
+        id_projeto: val.id,
+        prioridade: index,
+      };
+      payload.push(newItem);
+    });
+    console.log("payload", payload);
+    const result = await postPriorizacaoDiretores(payload);
+    console.log("result", result);
   };
 
   return (

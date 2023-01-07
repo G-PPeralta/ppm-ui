@@ -116,7 +116,6 @@ export default function NaoPrevistoComponent() {
             <Table size="sm">
               <Thead>
                 <Tr>
-                  <Th>ID</Th>
                   <Th>Nome do Projeto</Th>
                   <Th>Orçamento</Th>
                   <Th>Polo</Th>
@@ -133,9 +132,6 @@ export default function NaoPrevistoComponent() {
               >
                 {projetos.map((projeto, index) => (
                   <Tr mt={1} key={index}>
-                    <Th color="gray.400" sx={{ fontSize: 12 }}>
-                      {projeto.id_projeto_real}
-                    </Th>
                     <Th
                       mr={-10}
                       color={"#628EFD"}
@@ -154,17 +150,19 @@ export default function NaoPrevistoComponent() {
                     </Th>
                     {/* {trut ? <Text> {projeto.nomeProjeto}</Text> : ''} */}
                     <Th color="gray.400" sx={{ fontSize: 12 }}>
-                      <Text textAlign={"end"}>
-                        {projeto.vlr_orcado
-                          ? Intl.NumberFormat("pt-br", {
-                              style: "currency",
-                              currency: "BRL",
-                            })
-                              .format(projeto.vlr_orcado)
-                              .toString()
-                              .split(",")[0]
-                          : 0}
-                      </Text>
+                      <Flex flexGrow={1} align={"center"}>
+                        <Text textAlign={"center"}>
+                          {projeto.vlr_orcado
+                            ? Intl.NumberFormat("pt-br", {
+                                style: "currency",
+                                currency: "BRL",
+                              })
+                                .format(projeto.vlr_orcado)
+                                .toString()
+                                .split(",")[0]
+                            : 0}
+                        </Text>
+                      </Flex>
                     </Th>
                     <Th color="gray.400" sx={{ fontSize: 12 }}>
                       {projeto.polo}
