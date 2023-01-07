@@ -19,7 +19,7 @@ import {
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
-import { TextError } from "components/TextError";
+// import { TextError } from "components/TextError";
 
 import { handleCancelar } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
@@ -38,20 +38,19 @@ function ModalCadastroPoco({ refresh, setRefresh }: Props) {
   return (
     <>
       <Button
-        h={"46px"}
-        borderRadius={"8px"}
-        fontSize={"14px"}
-        fontWeight={"700"}
-        variant="outline"
+        h={"56px"}
+        borderRadius={"10px"}
+        background={"white"}
         border={"2px solid"}
-        borderColor={"origem.500"}
-        textColor={"origem.500"}
+        color={"origem.500"}
         _hover={{
-          borderColor: "origem.600",
-          backgroundColor: "origem.500",
-          textColor: "white",
+          border: "2px solid",
+          borderColor: "origem.500",
+          background: "origem.500",
           transition: "all 0.4s",
+          color: "white",
         }}
+        textColor={"origem.500"}
         onClick={onOpen}
       >
         Poço
@@ -124,9 +123,9 @@ function ModalCadastroPoco({ refresh, setRefresh }: Props) {
                           onChange={registerForm.handleChange}
                           maxLength={10}
                         />
-                        {registerForm.errors.poco && (
+                        {/* {registerForm.errors.poco && (
                           <TextError>{registerForm.errors.poco}</TextError>
-                        )}
+                        )} */}
                       </FormControl>
                     </Flex>
                   </Stack>
