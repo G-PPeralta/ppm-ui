@@ -94,39 +94,6 @@ function ModalCadastroOperacao({ refresh, setRefresh }: any) {
                               fontSize={"12px"}
                               color={"#949494"}
                             >
-                              ID
-                            </Text>
-                          </Flex>
-                          <Input
-                            h={"56px"}
-                            _placeholder={{ color: "#949494" }}
-                            fontSize={"14px"}
-                            fontWeight={"400"}
-                            color={"black"}
-                            isRequired
-                            placeholder="Digite o ID"
-                            id="id_origem"
-                            type="text"
-                            name="id_origem"
-                            w={useBreakpointValue({
-                              base: "100%",
-                              md: "100%",
-                            })}
-                            value={regexCaracteresEspeciais(
-                              registerForm.values.id_origem
-                            )}
-                            onChange={registerForm.handleChange}
-                            maxLength={10}
-                          />
-                        </Flex>
-                        <Flex direction={"column"} flex={1}>
-                          <Flex gap={1}>
-                            <RequiredField />
-                            <Text
-                              fontWeight={"bold"}
-                              fontSize={"12px"}
-                              color={"#949494"}
-                            >
                               NOME
                             </Text>
                           </Flex>
