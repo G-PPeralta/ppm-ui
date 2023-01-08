@@ -61,6 +61,23 @@ function CardPIR({ poco, index, refresh }: Props) {
     refresh();
   }
 
+  const iconColorShouldBeBlack = () => {
+    const status = validateDate(
+      Number(poco.pct_plan),
+      Number(poco.comp_pct),
+      Number(poco.pct_real),
+      poco.finalplanejado,
+      Number(poco.ind_alerta),
+      Number(poco.ind_status)
+    );
+
+    if (status === "#FFEA00") {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <>
       <Flex direction={"row"} gap={4} position={"relative"}>
@@ -78,18 +95,20 @@ function CardPIR({ poco, index, refresh }: Props) {
             top={2}
             size={"sm"}
             backgroundColor={"transparent"}
-            color={"white"}
+            color={iconColorShouldBeBlack() ? "black" : "white"}
             borderRadius={10}
             _hover={{
               backgroundColor: "white",
-              color: validateDate(
-                Number(poco.pct_plan),
-                Number(poco.comp_pct),
-                Number(poco.pct_real),
-                poco.finalplanejado,
-                Number(poco.ind_alerta),
-                Number(poco.ind_status)
-              ),
+              color: iconColorShouldBeBlack()
+                ? "black"
+                : validateDate(
+                    Number(poco.pct_plan),
+                    Number(poco.comp_pct),
+                    Number(poco.pct_real),
+                    poco.finalplanejado,
+                    Number(poco.ind_alerta),
+                    Number(poco.ind_status)
+                  ),
             }}
             onClick={() => {
               transferToCronograma(poco.id_campanha, poco.id_poco);
@@ -108,18 +127,20 @@ function CardPIR({ poco, index, refresh }: Props) {
           w={"20px"}
           size={"sm"}
           backgroundColor={"transparent"}
-          color={"white"}
+          color={iconColorShouldBeBlack() ? "black" : "white"}
           borderRadius={10}
           _hover={{
             backgroundColor: "white",
-            color: validateDate(
-              Number(poco.pct_plan),
-              Number(poco.comp_pct),
-              Number(poco.pct_real),
-              poco.finalplanejado,
-              Number(poco.ind_alerta),
-              Number(poco.ind_status)
-            ),
+            color: iconColorShouldBeBlack()
+              ? "black"
+              : validateDate(
+                  Number(poco.pct_plan),
+                  Number(poco.comp_pct),
+                  Number(poco.pct_real),
+                  poco.finalplanejado,
+                  Number(poco.ind_alerta),
+                  Number(poco.ind_status)
+                ),
           }}
           onClick={() => {
             deleteIntervencao(poco.id_campanha, poco.id);
