@@ -59,6 +59,7 @@ export function useCadastroProjetoTipo() {
             id: 0,
             nome: "",
             checked: false,
+            tipo: "IF+0",
           },
         ],
         fase_id: 0,

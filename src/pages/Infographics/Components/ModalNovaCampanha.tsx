@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Button,
@@ -27,14 +27,37 @@ import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroCampanha } from "hooks/useCadastroCampanha";
 
+import { getServicoSonda } from "services/get/CadastroModaisInfograficos";
+
 function ModalNovaCampanha({ setRefresh, refresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaServicosSondas } = useCadastroCampanha();
+  const [optionsServicoSonda, setOptionsServicoSonda] = useState(
+    listaServicosSondas.map((sonda: any) => ({
+      value: sonda.nom_sonda,
+      label: sonda.nom_sonda,
+    }))
+  );
 
-  const optionsServicoSonda = listaServicosSondas.map((sonda: any) => ({
-    value: sonda.nom_sonda,
-    label: sonda.nom_sonda,
-  }));
+  // const optionsServicoSonda = listaServicosSondas.map((sonda: any) => ({
+  //   value: sonda.nom_sonda,
+  //   label: sonda.nom_sonda,
+  // }));
+
+  const handleServicoSonda = async () => {
+    const servicosSondas = await getServicoSonda();
+
+    const servicosSondasSorted = servicosSondas.data.sort((a: any, b: any) =>
+      a.nom_sonda.localeCompare(b.nom_sonda)
+    );
+
+    const opcoesFormatadas = servicosSondasSorted.map((sonda: any) => ({
+      value: sonda.nom_sonda,
+      label: sonda.nom_sonda,
+    }));
+
+    setOptionsServicoSonda(opcoesFormatadas);
+  };
 
   useEffect(() => {
     if (registerForm.values.id_projeto.split("-")[0] === "0 ") {
@@ -43,6 +66,10 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
       registerForm.setFieldValue("nova_campanha", false);
     }
   }, [registerForm.values.id_projeto]);
+
+  useEffect(() => {
+    handleServicoSonda();
+  }, [isOpen]);
 
   return (
     <>

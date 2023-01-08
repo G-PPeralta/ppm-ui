@@ -14,6 +14,7 @@ export interface PrecedentesCadastroProjetoTipo {
   id: number;
   nome: string;
   checked: boolean;
+  tipo: string;
 }
 
 export interface AtividadesProjetoTipo {

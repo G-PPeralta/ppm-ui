@@ -19,6 +19,7 @@ import { useCadastroProjetoTipo } from "hooks/useCadastroProjetoTipo";
 
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
 import PopOverPrecedentes from "./PopOverPrecedentes";
+import PopOverTipo from "./PopOverTipo";
 
 interface Props {
   registerForm: FormikProps<any>;
@@ -113,6 +114,17 @@ function AtividadesDraggable({ index, registerForm }: Props) {
       listaTarefas[ind]?.ind_fase || 0
     );
   }, [registerForm.values.atividades[index].tarefa_id]);
+
+  // console.log("registerForm.values", registerForm.values);
+
+  // Função para iterar o array de precedentes dentro do array de atividades e retornar true caso algum precedente esteja com a propriedade checked = true
+  const isPrecedenteChecked = () => {
+    const precedentes = registerForm.values.atividades[index].precedentes;
+    const precedenteChecked = precedentes.some(
+      (precedente: any) => precedente.checked === true
+    );
+    return precedenteChecked;
+  };
 
   return (
     <Draggable draggableId={draggableId} index={index}>
@@ -269,39 +281,55 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                     />
                   </Flex>
 
-                  <Flex direction={"column"} flex={1}>
-                    <Flex gap={1}>
-                      <Text
-                        fontWeight={"700"}
-                        fontSize={"12px"}
-                        color={"#949494"}
-                      >
-                        TIPO
-                      </Text>
+                  {!isPrecedenteChecked() ? (
+                    <Flex direction={"column"} flex={1}>
+                      <Flex gap={1}>
+                        <Text
+                          fontWeight={"700"}
+                          fontSize={"12px"}
+                          color={"#949494"}
+                        >
+                          TIPO
+                        </Text>
+                      </Flex>
+                      <Input
+                        h={"56px"}
+                        w={"100px"}
+                        _placeholder={{ color: "#949494" }}
+                        fontSize={"14px"}
+                        fontWeight={"400"}
+                        color={"black"}
+                        maxW={"128px"}
+                        placeholder="IF+0"
+                        type={"text"}
+                        bg={"#fff"}
+                        id={`atividades[${index}].tipo_precedentes`}
+                        name={`atividades[${index}].tipo_precedentes`}
+                        value={
+                          registerForm.values.atividades[index].tipo_precedentes
+                        }
+                        onChange={(event) => {
+                          registerForm.setFieldValue(
+                            `atividades[${index}].tipo_precedentes`,
+                            event.target.value
+                          );
+                        }}
+                      />
                     </Flex>
-                    <Input
-                      h={"56px"}
-                      _placeholder={{ color: "#949494" }}
-                      fontSize={"14px"}
-                      fontWeight={"400"}
-                      color={"black"}
-                      maxW={"128px"}
-                      placeholder="IF+0"
-                      type={"text"}
-                      bg={"#fff"}
-                      id={`atividades[${index}].tipo_precedentes`}
-                      name={`atividades[${index}].tipo_precedentes`}
-                      value={
-                        registerForm.values.atividades[index].tipo_precedentes
-                      }
-                      onChange={(event) => {
-                        registerForm.setFieldValue(
-                          `atividades[${index}].tipo_precedentes`,
-                          event.target.value
-                        );
-                      }}
-                    />
-                  </Flex>
+                  ) : (
+                    <Flex direction={"column"} flex={1}>
+                      <Flex gap={1}>
+                        <Text
+                          fontWeight={"700"}
+                          fontSize={"12px"}
+                          color={"#949494"}
+                        >
+                          TIPO
+                        </Text>
+                      </Flex>
+                      <PopOverTipo registerForm={registerForm} index={index} />
+                    </Flex>
+                  )}
                 </Flex>
                 <Flex>
                   <Checkbox
