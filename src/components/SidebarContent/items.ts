@@ -17,7 +17,7 @@ import {
   FiTrash2,
   FiSettings,
 } from "react-icons/fi";
-// import { IoMdPodium } from "react-icons/io";
+import { IoMdPodium } from "react-icons/io";
 import { MdPriorityHigh } from "react-icons/md";
 import { TbGauge } from "react-icons/tb";
 
@@ -63,11 +63,11 @@ const childrenCarteiradeProjetos: ChildrenI[] = [
     link: "/financeiro-projetos",
   },
   { name: "Relatórios", icon: FaChartArea, link: "/relatorios" },
-  // {
-  //   name: "Priorização Diretores",
-  //   icon: IoMdPodium,
-  //   link: "/priorizacao-diretores",
-  // },
+  {
+    name: "Priorização Diretores",
+    icon: IoMdPodium,
+    link: "/priorizacao-diretores",
+  },
 ];
 
 const childrenInfograficos: ChildrenI[] = [
