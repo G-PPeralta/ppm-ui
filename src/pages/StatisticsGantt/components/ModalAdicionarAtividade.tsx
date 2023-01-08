@@ -357,7 +357,7 @@ function ModalAdicionarAtividade({
                   <Flex flex={2}>
                     <SelectFiltragem
                       registerForm={registerForm}
-                      nomeSelect={"NÃO INICIAR ANTES DE"}
+                      nomeSelect={"INICIAR DEPOIS DE"}
                       propName={"naoIniciarAntesDe"}
                       options={getOperacoes}
                       required={false}
