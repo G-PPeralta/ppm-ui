@@ -111,7 +111,15 @@ function DetalhamentoProjeto() {
   }, [refresh]);
 
   useEffect(() => {
-    setTimeout(() => handleGetInfoProjetos(), 1000);
+    setTimeout(() => {
+      handleGetInfoProjetos();
+      handleGetLicoes();
+      handleGetCategorias();
+      handleGetProgresso();
+      getData();
+      getProject();
+      setRender(!render);
+    }, 1000);
   }, [infoProjetoRefresh]);
 
   const handleGetInfoProjetos = async () => {
