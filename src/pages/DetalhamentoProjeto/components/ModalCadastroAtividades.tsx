@@ -304,7 +304,7 @@ function ModalCadastroAtividades({
                           }}
                         >
                           <NumberInputField
-                            maxLength={5}
+                            maxLength={10}
                             bg={"#fff"}
                             h={"56px"}
                           />
