@@ -1,18 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   DragDropContext,
   Droppable,
   DroppableProvided,
 } from "react-beautiful-dnd";
-import { BsThreeDotsVertical } from "react-icons/bs";
+// import { BsThreeDotsVertical } from "react-icons/bs";
 
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Spinner, Text } from "@chakra-ui/react";
 
 import ContainerPagina from "components/ContainerPagina";
 import Sidebar from "components/SideBar";
 import TituloPagina from "components/TituloPagina";
 
+import { useToast } from "contexts/Toast";
+
+import { useAuth } from "hooks/useAuth";
+import { useProjects } from "hooks/useProjects";
+
+import { getInitialRaking } from "services/get/Ranking";
+import { postProject } from "services/post/Priorizacao";
+import {
+  postPriorizacaoDiretores,
+  getPriorizacaoDiretores,
+} from "services/post/PriorizacaoDiretores";
+
 import Card from "./Componentes/Card";
+
+function compare(a: any, b: any) {
+  if (a.order > b.order) {
+    return 1;
+  }
+  if (a.order < b.order) {
+    return -1;
+  }
+  return 0;
+}
 
 const reorder = (list: any, startIndex: any, endIndex: any) => {
   const result = list;
@@ -45,31 +67,64 @@ const move = (
 };
 
 export function PriorizacaoDiretores() {
-  const [dataBaixa, setDataBaixa] = useState([
-    "lorem",
-    "ipsum",
-    "dolor",
-    "sit",
-    "amet",
-  ]);
-  const [dataMedia, setDataMedia] = useState([
-    "lorem1",
-    "ipsum1",
-    "dolor1",
-    "sit1",
-    "amet1",
-  ]);
-  const [dataAlta, setDataAlta] = useState([
-    "lorem2",
-    "ipsum2",
-    "dolor2",
-    "sit2",
-    "ame2t",
-  ]);
+  const { user } = useAuth();
+  const { toast } = useToast();
+  const { loading, getProjetosDetalhados } = useProjects();
+  const [dataBaixa, setDataBaixa] = useState<any[]>([]);
+  const [dataMedia, setDataMedia] = useState<any[]>([]);
+  const [dataAlta, setDataAlta] = useState<any[]>([]);
+  const [wait, setWait] = useState(false);
+
+  useEffect(() => {
+    const getPayload = async () => {
+      const prioridades = await getPriorizacaoDiretores();
+      const data = await getProjetosDetalhados();
+      const low = data.filter(
+        (val: any) => val.prioridade == "Baixo" || val.prioridade == null
+      );
+      low.forEach((val: any, index: number) => {
+        const newItem = {
+          ...val,
+          order: prioridades.data.filter(
+            (item: any) => item.id_projeto == val.id
+          )[0]?.prioridade,
+        };
+        low[index] = newItem;
+      });
+      setDataBaixa(low.sort(compare));
+      const medium = data.filter((val: any) => val.prioridade == "Médio");
+      medium.forEach((val: any, index: number) => {
+        const newItem = {
+          ...val,
+          order: prioridades.data.filter(
+            (item: any) => item.id_projeto == val.id
+          )[0]?.prioridade,
+        };
+        medium[index] = newItem;
+      });
+      setDataMedia(medium.sort(compare));
+      const high = data.filter((val: any) => val.prioridade == "Alto");
+      high.forEach((val: any, index: number) => {
+        const newItem = {
+          ...val,
+          order: prioridades.data.filter(
+            (item: any) => item.id_projeto == val.id
+          )[0]?.prioridade,
+        };
+        high[index] = newItem;
+      });
+      setDataAlta(high.sort(compare));
+    };
+    getPayload();
+  }, []);
 
   const onDragEnd = (result: any) => {
+    setWait(true);
     const { source, destination } = result;
     if (!destination) {
+      setTimeout(() => {
+        setWait(false);
+      }, 1000);
       return;
     }
 
@@ -131,6 +186,140 @@ export function PriorizacaoDiretores() {
         setDataAlta(result[1]);
       }
     }
+    setTimeout(() => {
+      setWait(false);
+    }, 1000);
+  };
+
+  const save = async () => {
+    setWait(true);
+    const payload: any[] = [];
+    dataBaixa.forEach((val: any, index: number) => {
+      const newItem = {
+        id_projeto: val.id,
+        prioridade: index,
+      };
+      payload.push(newItem);
+    });
+    dataMedia.forEach((val: any, index: number) => {
+      const newItem = {
+        id_projeto: val.id,
+        prioridade: index,
+      };
+      payload.push(newItem);
+    });
+    dataAlta.forEach((val: any, index: number) => {
+      const newItem = {
+        id_projeto: val.id,
+        prioridade: index,
+      };
+      payload.push(newItem);
+    });
+    await postPriorizacaoDiretores(payload);
+
+    dataBaixa.forEach(async (val: any) => {
+      const ranking = await getInitialRaking(val.id);
+      const newItem = {
+        id_projeto: val.id,
+        dsc_comentario: "",
+        nom_usu_create: user?.nome,
+        beneficio: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 1)[0]
+            .id_opcao,
+          id_ranking: 1,
+        },
+        estrategia: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 6)[0]
+            .id_opcao,
+          id_ranking: 6,
+        },
+        operacao: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 3)[0]
+            .id_opcao,
+          id_ranking: 3,
+        },
+        prioridade: {
+          opcao_id: 12,
+          id_ranking: 4,
+        },
+        regulatorio: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 2)[0]
+            .id_opcao,
+          id_ranking: 2,
+        },
+      };
+      await postProject(newItem);
+    });
+    dataMedia.forEach(async (val: any) => {
+      const ranking = await getInitialRaking(val.id);
+      const newItem = {
+        id_projeto: val.id,
+        dsc_comentario: "",
+        nom_usu_create: user?.nome,
+        beneficio: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 1)[0]
+            .id_opcao,
+          id_ranking: 1,
+        },
+        estrategia: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 6)[0]
+            .id_opcao,
+          id_ranking: 6,
+        },
+        operacao: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 3)[0]
+            .id_opcao,
+          id_ranking: 3,
+        },
+        prioridade: {
+          opcao_id: 13,
+          id_ranking: 4,
+        },
+        regulatorio: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 2)[0]
+            .id_opcao,
+          id_ranking: 2,
+        },
+      };
+      await postProject(newItem);
+    });
+    dataAlta.forEach(async (val: any) => {
+      const ranking = await getInitialRaking(val.id);
+      const newItem = {
+        id_projeto: val.id,
+        dsc_comentario: "",
+        nom_usu_create: user?.nome,
+        beneficio: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 1)[0]
+            .id_opcao,
+          id_ranking: 1,
+        },
+        estrategia: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 6)[0]
+            .id_opcao,
+          id_ranking: 6,
+        },
+        operacao: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 3)[0]
+            .id_opcao,
+          id_ranking: 3,
+        },
+        prioridade: {
+          opcao_id: 14,
+          id_ranking: 4,
+        },
+        regulatorio: {
+          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 2)[0]
+            .id_opcao,
+          id_ranking: 2,
+        },
+      };
+      await postProject(newItem);
+    });
+    toast.success("Atualizado com sucesso!");
+    setTimeout(() => {
+      setWait(false);
+    }, 1000);
   };
 
   return (
@@ -139,142 +328,173 @@ export function PriorizacaoDiretores() {
         <ContainerPagina>
           <TituloPagina>Priorização Diretores</TituloPagina>
           <DragDropContext onDragEnd={onDragEnd}>
-            <Flex direction={"row"} wrap={"wrap"} mb={2} mt={8} flex={1}>
+            {loading || wait ? (
+              <Spinner />
+            ) : (
               <Flex
-                width={"300px"}
-                direction={"column"}
-                gap={2}
-                borderRight={"1px solid #D6D4D4"}
-                minHeight={"500px"}
+                justifyContent={"space-between"}
+                direction={"row"}
+                wrap={"wrap"}
+                mb={2}
+                mt={8}
+                flex={1}
               >
                 <Flex
-                  height={"50px"}
-                  alignItems={"center"}
-                  pt={2}
-                  justifyContent={"center"}
+                  width={"300px"}
+                  direction={"column"}
+                  gap={2}
+                  // borderRight={"1px solid #D6D4D4"}
+                  minHeight={"500px"}
                 >
-                  <Text
-                    fontSize={"xl"}
-                    fontWeight={"bold"}
-                    textAlign={"center"}
+                  <Flex
+                    height={"50px"}
+                    alignItems={"center"}
+                    pt={2}
+                    justifyContent={"center"}
                   >
-                    Baixa
-                  </Text>
-                  <Button
-                    variant={"none"}
-                    _hover={{
-                      background: "#ddd",
-                      transition: "all 0.4s",
-                    }}
-                    py={1}
-                    px={1}
-                    ml={1}
-                  >
-                    <BsThreeDotsVertical size={22} />
-                  </Button>
+                    <Text
+                      fontSize={"xl"}
+                      fontWeight={"bold"}
+                      textAlign={"center"}
+                    >
+                      Baixa
+                    </Text>
+                    {/* <Button
+                      variant={"none"}
+                      _hover={{
+                        background: "#ddd",
+                        transition: "all 0.4s",
+                      }}
+                      py={1}
+                      px={1}
+                      ml={1}
+                    >
+                      <BsThreeDotsVertical size={22} />
+                    </Button> */}
+                  </Flex>
+                  <Droppable droppableId={"droppableBaixa"}>
+                    {(provided: DroppableProvided) => (
+                      <div ref={provided.innerRef} {...provided.droppableProps}>
+                        {dataBaixa.map((val, index) => (
+                          <Card key={index} data={val} index={index} />
+                        ))}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
                 </Flex>
-                <Droppable droppableId={"droppableBaixa"}>
-                  {(provided: DroppableProvided) => (
-                    <div ref={provided.innerRef} {...provided.droppableProps}>
-                      {dataBaixa.map((val, index) => (
-                        <Card key={index} data={val} index={index} />
-                      ))}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </Flex>
-              <Flex
-                width={"300px"}
-                gap={2}
-                direction={"column"}
-                borderRight={"1px solid #D6D4D4"}
-                borderLeft={"1px solid #D6D4D4"}
-                minHeight={"500px"}
-              >
                 <Flex
-                  height={"50px"}
-                  alignItems={"center"}
-                  pt={2}
-                  justifyContent={"center"}
+                  width={"300px"}
+                  gap={2}
+                  direction={"column"}
+                  // borderRight={"1px solid #D6D4D4"}
+                  borderLeft={"1px solid #D6D4D4"}
+                  minHeight={"500px"}
                 >
-                  <Text
-                    fontSize={"xl"}
-                    fontWeight={"bold"}
-                    textAlign={"center"}
+                  <Flex
+                    height={"50px"}
+                    alignItems={"center"}
+                    pt={2}
+                    justifyContent={"center"}
                   >
-                    Média
-                  </Text>
-                  <Button
-                    variant={"none"}
-                    _hover={{
-                      background: "#ddd",
-                      transition: "all 0.4s",
-                    }}
-                    py={1}
-                    px={1}
-                    ml={1}
-                  >
-                    <BsThreeDotsVertical size={22} />
-                  </Button>
+                    <Text
+                      fontSize={"xl"}
+                      fontWeight={"bold"}
+                      textAlign={"center"}
+                    >
+                      Média
+                    </Text>
+                    {/* <Button
+                      variant={"none"}
+                      _hover={{
+                        background: "#ddd",
+                        transition: "all 0.4s",
+                      }}
+                      py={1}
+                      px={1}
+                      ml={1}
+                    >
+                      <BsThreeDotsVertical size={22} />
+                    </Button> */}
+                  </Flex>
+                  <Droppable droppableId={"droppableMedia"}>
+                    {(provided: DroppableProvided) => (
+                      <div ref={provided.innerRef} {...provided.droppableProps}>
+                        {dataMedia.map((val, index) => (
+                          <Card key={index} data={val} index={index} />
+                        ))}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
                 </Flex>
-                <Droppable droppableId={"droppableMedia"}>
-                  {(provided: DroppableProvided) => (
-                    <div ref={provided.innerRef} {...provided.droppableProps}>
-                      {dataMedia.map((val, index) => (
-                        <Card key={index} data={val} index={index} />
-                      ))}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </Flex>
-              <Flex
-                width={"300px"}
-                gap={2}
-                direction={"column"}
-                borderLeft={"1px solid #D6D4D4"}
-                minHeight={"500px"}
-              >
                 <Flex
-                  height={"50px"}
-                  alignItems={"center"}
-                  pt={2}
-                  justifyContent={"center"}
+                  width={"300px"}
+                  gap={2}
+                  direction={"column"}
+                  borderLeft={"1px solid #D6D4D4"}
+                  minHeight={"500px"}
                 >
-                  <Text
-                    fontSize={"xl"}
-                    fontWeight={"bold"}
-                    textAlign={"center"}
+                  <Flex
+                    height={"50px"}
+                    alignItems={"center"}
+                    pt={2}
+                    justifyContent={"center"}
                   >
-                    Alta
-                  </Text>
-                  <Button
-                    variant={"none"}
-                    _hover={{
-                      background: "#ddd",
-                      transition: "all 0.4s",
-                    }}
-                    py={1}
-                    px={1}
-                    ml={1}
-                  >
-                    <BsThreeDotsVertical size={22} />
-                  </Button>
+                    <Text
+                      fontSize={"xl"}
+                      fontWeight={"bold"}
+                      textAlign={"center"}
+                    >
+                      Alta
+                    </Text>
+                    {/* <Button
+                      variant={"none"}
+                      _hover={{
+                        background: "#ddd",
+                        transition: "all 0.4s",
+                      }}
+                      py={1}
+                      px={1}
+                      ml={1}
+                    >
+                      <BsThreeDotsVertical size={22} />
+                    </Button> */}
+                  </Flex>
+                  <Droppable droppableId={"droppableAlta"}>
+                    {(provided: DroppableProvided) => (
+                      <div ref={provided.innerRef} {...provided.droppableProps}>
+                        {dataAlta.map((val, index) => (
+                          <Card key={index} data={val} index={index} />
+                        ))}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
                 </Flex>
-                <Droppable droppableId={"droppableAlta"}>
-                  {(provided: DroppableProvided) => (
-                    <div ref={provided.innerRef} {...provided.droppableProps}>
-                      {dataAlta.map((val, index) => (
-                        <Card key={index} data={val} index={index} />
-                      ))}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
               </Flex>
-            </Flex>
+            )}
           </DragDropContext>
+          <Flex w={"100%"} justifyContent={"center"}>
+            <Button
+              h={"56px"}
+              borderRadius={"10px"}
+              background={"white"}
+              border={"2px solid"}
+              color={"origem.500"}
+              _hover={{
+                border: "2px solid",
+                borderColor: "origem.500",
+                background: "origem.500",
+                transition: "all 0.4s",
+                color: "white",
+              }}
+              textColor={"origem.500"}
+              onClick={() => save()}
+            >
+              Salvar Alterações
+            </Button>
+          </Flex>
         </ContainerPagina>
       </Sidebar>
     </>

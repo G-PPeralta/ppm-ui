@@ -23,7 +23,7 @@ export const cadastroNovoCronogramaSchema = yup.object({
 });
 
 export const cadastroOperacaoSchema = yup.object({
-  id_origem: yup.string().required("O ID é obrigatório!").min(1),
+  // id_origem: yup.string().required("O ID é obrigatório!").min(1),
   nom_operacao: yup.string().required("O nome da atividade é obrigatório!"),
 });
 

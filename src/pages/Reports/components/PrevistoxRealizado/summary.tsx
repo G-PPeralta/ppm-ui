@@ -55,6 +55,7 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
   function calculatePercet(data: SummaryData) {
     if (data.budget && data.realized && data.budget > 0 && data.realized > 0) {
       const percents = {
+        // aparentemente nunca vai usar esse undone
         undone:
           ((+data.budget - +data.realized) / +data.budget) * 100 > 100
             ? 100

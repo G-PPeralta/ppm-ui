@@ -66,7 +66,7 @@ export function useCadastroOperacao() {
     onSubmit: async (values) => {
       const newValues = {
         nom_usu_create: user?.nome,
-        id_origem: values.id_origem,
+        id_origem: "", // removido
         nom_operacao: values.nom_operacao,
         responsavel_id: null,
         area_id: null,
