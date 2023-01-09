@@ -70,7 +70,7 @@ function ModalCadastroAtividades({
   infoProjeto,
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaAtividadesRelacao, reqGet } =
+  const { registerForm, loading, listaAtividadesRelacao, reqGet, isFetching } =
     useCadastroAtividadeProjeto(
       refreshGanttCriacao,
       setRefreshGanttCriacao,
@@ -154,7 +154,7 @@ function ModalCadastroAtividades({
             }}
           >
             <ModalBody mt={3}>
-              {!areaResponsavel.isLoading ? (
+              {!areaResponsavel.isLoading && !isFetching ? (
                 <Flex flexDirection={"column"} gap={5}>
                   <Flex flex={1} direction={"column"}>
                     {/* <Text fontWeight={"bold"}>Nome</Text> */}
