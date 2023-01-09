@@ -7,7 +7,7 @@ export const ButtonStyles = {
     origemBlueSolid: (props: any) => ({
       height: "56px",
       width: "208px",
-      borderRadius: "8px",
+      borderRadius: "10px",
       bg: mode("origem.500", "origem.400")(props),
       color: mode("white", "white")(props),
       _hover: {
@@ -18,7 +18,7 @@ export const ButtonStyles = {
     origemBlueOutline: (props: any) => ({
       height: "56px",
       width: "208px",
-      borderRadius: "8px",
+      borderRadius: "10px",
       bg: "transparent",
       border: "2px solid",
       borderColor: mode("origem.500", "origem.400")(props),
@@ -43,7 +43,7 @@ export const ButtonStyles = {
     origemRedSolid: (props: any) => ({
       height: "56px",
       width: "208px",
-      borderRadius: "8px",
+      borderRadius: "10px",
       bg: mode("red.500", "red.500")(props),
       color: mode("white", "white")(props),
       _hover: {
@@ -54,7 +54,7 @@ export const ButtonStyles = {
     origemRedOutline: (props: any) => ({
       height: "56px",
       width: "208px",
-      borderRadius: "8px",
+      borderRadius: "10px",
       bg: "transparent",
       border: "2px solid",
       borderColor: mode("red.500", "red.500")(props),
@@ -90,14 +90,14 @@ export const ButtonStyles = {
       bg: "transparent",
       width: "40px",
       height: "40px",
-      borderRadius: "8px",
+      borderRadius: "10px",
       border: "2px solid",
       color: mode("origem.500", "origem.400")(props),
       _hover: {
         bg: mode("origem.500", "origem.400")(props),
         color: mode("white", "white")(props),
         transition: "all 0.4s",
-        borderRadius: "8px",
+        borderRadius: "10px",
         border: "2px solid transparent",
       },
     }),
@@ -110,7 +110,7 @@ export const ButtonStyles = {
         bg: mode("origem.500", "origem.400")(props),
         color: mode("white", "white")(props),
         transition: "all 0.4s",
-        borderRadius: "8px",
+        borderRadius: "10px",
       },
     }),
     origemDeleteSolid: (props: any) => ({
@@ -127,7 +127,7 @@ export const ButtonStyles = {
       bg: "transparent",
       width: "40px",
       height: "40px",
-      borderRadius: "8px",
+      borderRadius: "10px",
       border: "2px solid",
       color: mode("red.500", "red.500")(props),
       _hover: {

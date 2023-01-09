@@ -499,21 +499,28 @@ function CadastrarProjeto() {
                   />
                 </Flex>
               </Flex>
-              <Flex w={"100%"} mt={6}>
+              <Flex w={"100%"} mt={6} gap={4} justify={"center"}>
                 <Button
-                  w={"100%"}
-                  h={"56px"}
-                  borderRadius={"10px"}
-                  disabled={!registerForm.isValid || !registerForm.dirty}
-                  background={"origem.500"}
-                  variant="primary"
-                  color="white"
+                  onClick={() => registerForm.resetForm()}
+                  variant={"origemRedGhost"}
+                >
+                  <Text fontSize="16px" fontWeight={"bold"}>
+                    Limpar formulário
+                  </Text>
+                </Button>
+                <Button
+                  // h={"56px"}
+                  // borderRadius={"10px"}
+                  // background={"origem.500"}
+                  // color="white"
+                  // _hover={{
+                  //   background: "origem.600",
+                  //   transition: "all 0.4s",
+                  // }}
+                  variant={"origemBlueSolid"}
                   onClick={() => handleCadastrarPagina(registerForm)}
-                  _hover={{
-                    background: "origem.600",
-                    transition: "all 0.4s",
-                  }}
                   rightIcon={<BsPlus size={24} />}
+                  disabled={!registerForm.isValid || !registerForm.dirty}
                 >
                   {loading ? (
                     <Ring speed={2} lineWeight={5} color="white" size={24} />
