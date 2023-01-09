@@ -132,6 +132,7 @@ function ModalEditarAtividade({
     registerForm.setFieldValue("pct_real", editAtividade.pct_real);
     registerForm.setFieldValue("inicio_planejado", item.StartDatePlan);
     registerForm.setFieldValue("responsavel_id", responsavelId);
+    registerForm.setFieldValue("macro_id", item.macro_id);
     registerForm.setFieldValue("inicio_planejado", dat_ini_plan);
     registerForm.setFieldValue("fim_planejado", item.BaselineEndDate);
   };
@@ -147,6 +148,25 @@ function ModalEditarAtividade({
   useEffect(() => {
     asyncGet();
   }, [editAtividade]);
+
+  const macroOptions = [
+    {
+      value: 1,
+      label: "Pré-Projeto",
+    },
+    {
+      value: 2,
+      label: "Engenharia",
+    },
+    {
+      value: 3,
+      label: "Suprimentos",
+    },
+    {
+      value: 4,
+      label: "C&M",
+    },
+  ];
 
   return (
     <>
@@ -206,6 +226,17 @@ function ModalEditarAtividade({
                             id="nome_atividade"
                           />
                         </FormControl>
+                        <Flex w={"328px"}>
+                          <SelectFiltragem
+                            registerForm={registerForm}
+                            nomeSelect={"MACRO"}
+                            isDisabled={registerForm.values.pct_real === 100}
+                            propName={"macro_id"}
+                            options={macroOptions}
+                            required={false}
+                            value={getValue(macroOptions, "macro_id")}
+                          />
+                        </Flex>
                         <Flex w={"328px"}>
                           <SelectFiltragem
                             registerForm={registerForm}
