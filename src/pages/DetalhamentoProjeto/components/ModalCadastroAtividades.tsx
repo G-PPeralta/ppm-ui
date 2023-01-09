@@ -32,7 +32,7 @@ import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
-import { formataParaTipo } from "utils/FormataParaTipo";
+// import { formataParaTipo } from "utils/FormataParaTipo";
 import { formatDateToddMMyyyyhhmmCronograma } from "utils/formatDate";
 import { getSelectFiltragemValue } from "utils/GetSelectFiltragemValue";
 import { regexCaracteresEspeciais } from "utils/regex";
@@ -295,10 +295,7 @@ function ModalCadastroAtividades({
                           min={0}
                           id={"duracao_plan"}
                           name={"duracao_plan"}
-                          value={formataParaTipo(
-                            "dias",
-                            registerForm.values.duracao_plan
-                          )}
+                          value={registerForm.values.duracao_plan}
                           onChange={(value) => {
                             registerForm.setFieldValue(
                               "duracao_plan",

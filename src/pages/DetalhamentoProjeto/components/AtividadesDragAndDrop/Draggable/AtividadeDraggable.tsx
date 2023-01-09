@@ -18,7 +18,7 @@ import { FormikProps } from "formik";
 
 import SelectFiltragem from "components/SelectFiltragem";
 
-import { formataParaTipo } from "utils/FormataParaTipo";
+// import { formataParaTipo } from "utils/FormataParaTipo";
 
 import { getDataFinalPrecedessor } from "services/get/Estatisticas";
 
@@ -166,10 +166,7 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
                       placeholder={"0"}
                       id={`precedentes[${index}].dias`}
                       name={`precedentes[${index}].dias`}
-                      value={formataParaTipo(
-                        "dias",
-                        registerForm.values.precedentes[index].dias
-                      )}
+                      value={registerForm.values.precedentes[index].dias}
                       onChange={(value) => {
                         registerForm.setFieldValue(
                           `precedentes[${index}].dias`,
