@@ -14,6 +14,9 @@ export async function postGetInfoCampanha(
   return { data, status };
 }
 
+export const postGetInfoCampanhaRQ: any = async (payload: any) =>
+  await api.post("/campanha", payload, token());
+
 // ROTA NÃO EXISTE MAIS. SUBSTITUIDA POR POR #POST EM /campanha
 // export async function getInfoCampanha(): Promise<{
 //   data: any[];
