@@ -63,6 +63,7 @@ export function ModalFiltrarDuracaoMedia({
 
   const getFilter = async () => {
     const payload = {
+      idOperacao: operacaoId,
       pocoId: registerForm.values.pocoId,
       sondaId: registerForm.values.sondaId,
       profundidadeIni: registerForm.values.profundidadeIni,
