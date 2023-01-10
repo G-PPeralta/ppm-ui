@@ -224,18 +224,27 @@ export function PriorizacaoDiretores() {
         dsc_comentario: "",
         nom_usu_create: user?.nome,
         beneficio: {
-          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 1)[0]
-            .id_opcao,
+          opcao_id:
+            ranking.data.length > 0
+              ? ranking.data.filter((item: any) => item.id_ranking == 1)[0]
+                  .id_opcao
+              : 0,
           id_ranking: 1,
         },
         estrategia: {
-          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 6)[0]
-            .id_opcao,
+          opcao_id:
+            ranking.data.length > 0
+              ? ranking.data.filter((item: any) => item.id_ranking == 6)[0]
+                  .id_opcao
+              : 0,
           id_ranking: 6,
         },
         operacao: {
-          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 3)[0]
-            .id_opcao,
+          opcao_id:
+            ranking.data.length > 0
+              ? ranking.data.filter((item: any) => item.id_ranking == 3)[0]
+                  .id_opcao
+              : 0,
           id_ranking: 3,
         },
         prioridade: {
@@ -243,8 +252,11 @@ export function PriorizacaoDiretores() {
           id_ranking: 4,
         },
         regulatorio: {
-          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 2)[0]
-            .id_opcao,
+          opcao_id:
+            ranking.data.length > 0
+              ? ranking.data.filter((item: any) => item.id_ranking == 2)[0]
+                  .id_opcao
+              : 0,
           id_ranking: 2,
         },
       };
@@ -257,18 +269,27 @@ export function PriorizacaoDiretores() {
         dsc_comentario: "",
         nom_usu_create: user?.nome,
         beneficio: {
-          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 1)[0]
-            .id_opcao,
+          opcao_id:
+            ranking.data.length > 0
+              ? ranking.data.filter((item: any) => item.id_ranking == 1)[0]
+                  .id_opcao
+              : 0,
           id_ranking: 1,
         },
         estrategia: {
-          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 6)[0]
-            .id_opcao,
+          opcao_id:
+            ranking.data.length > 0
+              ? ranking.data.filter((item: any) => item.id_ranking == 6)[0]
+                  .id_opcao
+              : 0,
           id_ranking: 6,
         },
         operacao: {
-          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 3)[0]
-            .id_opcao,
+          opcao_id:
+            ranking.data.length > 0
+              ? ranking.data.filter((item: any) => item.id_ranking == 3)[0]
+                  .id_opcao
+              : 0,
           id_ranking: 3,
         },
         prioridade: {
@@ -276,8 +297,11 @@ export function PriorizacaoDiretores() {
           id_ranking: 4,
         },
         regulatorio: {
-          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 2)[0]
-            .id_opcao,
+          opcao_id:
+            ranking.data.length > 0
+              ? ranking.data.filter((item: any) => item.id_ranking == 2)[0]
+                  .id_opcao
+              : 0,
           id_ranking: 2,
         },
       };
@@ -290,18 +314,27 @@ export function PriorizacaoDiretores() {
         dsc_comentario: "",
         nom_usu_create: user?.nome,
         beneficio: {
-          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 1)[0]
-            .id_opcao,
+          opcao_id:
+            ranking.data.length > 0
+              ? ranking.data.filter((item: any) => item.id_ranking == 1)[0]
+                  .id_opcao
+              : 0,
           id_ranking: 1,
         },
         estrategia: {
-          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 6)[0]
-            .id_opcao,
+          opcao_id:
+            ranking.data.length > 0
+              ? ranking.data.filter((item: any) => item.id_ranking == 6)[0]
+                  .id_opcao
+              : 0,
           id_ranking: 6,
         },
         operacao: {
-          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 3)[0]
-            .id_opcao,
+          opcao_id:
+            ranking.data.length > 0
+              ? ranking.data.filter((item: any) => item.id_ranking == 3)[0]
+                  .id_opcao
+              : 0,
           id_ranking: 3,
         },
         prioridade: {
@@ -309,8 +342,11 @@ export function PriorizacaoDiretores() {
           id_ranking: 4,
         },
         regulatorio: {
-          opcao_id: ranking.data.filter((item: any) => item.id_ranking == 2)[0]
-            .id_opcao,
+          opcao_id:
+            ranking.data.length > 0
+              ? ranking.data.filter((item: any) => item.id_ranking == 2)[0]
+                  .id_opcao
+              : 0,
           id_ranking: 2,
         },
       };

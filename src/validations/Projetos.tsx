@@ -3,6 +3,7 @@ import * as yup from "yup";
 export const cadastroAtividadeProjetos = yup.object({
   id_projeto: yup.number().required("Campo obrigatório").moreThan(0),
   nom_atividade: yup.string().required("Campo obrigatório"),
+  macro_id: yup.number().required("Campo obrigatório").moreThan(0),
   responsavel_id: yup.number().required("Campo obrigatório").moreThan(0),
   relacao_id: yup.number().required("Campo obrigatório").moreThan(0),
   dat_inicio_plan: yup.string().required("Campo obrigatório"),

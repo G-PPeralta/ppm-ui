@@ -57,6 +57,7 @@ export function useEditarAtividadeGantt() {
     inicio_planejado: "",
     duracao_dias: 0,
     responsavel_id: 0,
+    macro_id: 0,
   };
 
   const adicionarOperacao = yup.object({
@@ -68,6 +69,7 @@ export function useEditarAtividadeGantt() {
     inicio_planejado: yup.date().required(),
     duracao_dias: yup.number(),
     responsavel_id: yup.number(),
+    macro_id: yup.number(),
   });
   const registerForm: any = useFormik({
     initialValues,
@@ -88,6 +90,7 @@ export function useEditarAtividadeGantt() {
         pct_real: values.pct_real,
         duracao_dias: values.duracao_dias,
         responsavel_id: values.responsavel_id,
+        macro_id: values.macro_id,
       };
 
       try {
