@@ -113,6 +113,25 @@ function ModalCadastroAtividades({
     }
   }, [registerForm.values]);
 
+  const macroOptions = [
+    {
+      value: 1,
+      label: "Pré-Projeto",
+    },
+    {
+      value: 2,
+      label: "Engenharia",
+    },
+    {
+      value: 3,
+      label: "Suprimentos",
+    },
+    {
+      value: 4,
+      label: "C&M",
+    },
+  ];
+
   return (
     <>
       <Button
@@ -192,23 +211,32 @@ function ModalCadastroAtividades({
                     </Flex>
                   </Flex>
 
+                  <Flex gap={5} flex={1}>
+                    <SelectFiltragem
+                      registerForm={registerForm}
+                      nomeSelect={"RELAÇÃO"}
+                      propName={"relacao_id"}
+                      options={relacoesOptions}
+                      required={true}
+                      value={getSelectFiltragemValue(
+                        relacoesOptions,
+                        "relacao_id",
+                        registerForm
+                      )}
+                    />
+                  </Flex>
                   <Flex flex={1} direction={"row"} gap={2}>
                     {/* <Text fontWeight={"bold"}>Relação</Text> */}
+                    {/* <Text fontWeight={"bold"}>Responsável</Text> */}
                     <Flex gap={5} flex={1}>
                       <SelectFiltragem
                         registerForm={registerForm}
-                        nomeSelect={"RELAÇÃO"}
-                        propName={"relacao_id"}
-                        options={relacoesOptions}
+                        nomeSelect={"MACRO"}
+                        propName={"macro_id"}
+                        options={macroOptions}
                         required={true}
-                        value={getSelectFiltragemValue(
-                          relacoesOptions,
-                          "relacao_id",
-                          registerForm
-                        )}
                       />
                     </Flex>
-                    {/* <Text fontWeight={"bold"}>Responsável</Text> */}
                     <Flex gap={5} flex={1}>
                       <SelectFiltragem
                         registerForm={registerForm}
