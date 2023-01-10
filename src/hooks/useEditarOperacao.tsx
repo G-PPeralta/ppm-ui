@@ -127,7 +127,7 @@ export function useEditarOperacao(
           nome_atividade: values.nome_atividade,
           pct_real: values.pct_real,
           hrs_reais: values.hrs_reais,
-          hrs_totais: values.hrs_totais,
+          hrs_totais: Number(values.hrs_totais),
           inicio_realizado: dat_ini_real,
           fim_realizado: values.fim_realizado,
           inicio_planejado: dat_ini_plan,

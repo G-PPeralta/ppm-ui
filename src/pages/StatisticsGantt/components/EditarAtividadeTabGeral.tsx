@@ -10,6 +10,8 @@ import InputGenerico from "components/InputGenerico";
 import InputGenericoDesabilitado from "components/InputGenericoDesabilitado";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 
+// import { regexNumerosEPonto } from "utils/regexPontoENumero";
+
 import { ModalFiltrarDuracaoMedia } from "./ModalFiltrarDuracaoMedia";
 
 interface Props {
@@ -24,9 +26,9 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   const [date, setDate] = useState<any>();
   const [loading, setLoading] = useState(true);
 
-  // console.log(loading);
+  console.log(mediaHorasFiltradas);
 
-  // console.log(registerForm.values);
+  console.log(registerForm.values.hrs_totais);
 
   useEffect(() => {
     registerForm.setFieldValue(
@@ -160,6 +162,15 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                 isDisabled={!(flag === 1 || flag === 0)}
               />
 
+              <InputGenerico
+                value={registerForm.values.hrs_totais}
+                registerForm={registerForm}
+                propName={"hrs_totais"}
+                nomeInput={"DURAÇÃO"}
+                maxLength={1000000}
+                isDisabled={!(flag === 1 || flag === 0)}
+              />
+
               <Flex align={"end"}>
                 <ModalFiltrarDuracaoMedia
                   setMediaHorasFiltradas={setMediaHorasFiltradas}
@@ -198,7 +209,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
             <Flex direction={"row"}>
               <Flex direction={"row"} gap={4} w={"100%"}>
                 <Flex direction={"row"} w={"52.2%"} gap={4}>
-                  <InputNumericoGenerico
+                  {/* <InputNumericoGenerico
                     registerForm={registerForm}
                     propName={"hrs_reais"}
                     nomeInput={"DURAÇÃO"}
@@ -208,7 +219,17 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                     limite={1000}
                     // isDisabled={flag === 0}
                     isDisabled={registerForm.values.pct_real === 100}
+                  /> */}
+
+                  <InputGenerico
+                    value={registerForm.values.hrs_reais}
+                    registerForm={registerForm}
+                    propName={"hrs_reais"}
+                    nomeInput={"DURAÇÃO"}
+                    maxLength={1000000}
+                    isDisabled={registerForm.values.pct_real === 100}
                   />
+
                   {/* <Input value={mediaHorasFiltradas} /> */}
 
                   <DatePickerModal
