@@ -32,7 +32,7 @@ import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
-import { formataParaTipo } from "utils/FormataParaTipo";
+// import { formataParaTipo } from "utils/FormataParaTipo";
 import { formatDateToddMMyyyyhhmmCronograma } from "utils/formatDate";
 import { getSelectFiltragemValue } from "utils/GetSelectFiltragemValue";
 import { regexCaracteresEspeciais } from "utils/regex";
@@ -70,7 +70,7 @@ function ModalCadastroAtividades({
   infoProjeto,
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaAtividadesRelacao, reqGet } =
+  const { registerForm, loading, listaAtividadesRelacao, reqGet, isFetching } =
     useCadastroAtividadeProjeto(
       refreshGanttCriacao,
       setRefreshGanttCriacao,
@@ -173,7 +173,7 @@ function ModalCadastroAtividades({
             }}
           >
             <ModalBody mt={3}>
-              {!areaResponsavel.isLoading ? (
+              {!areaResponsavel.isLoading && !isFetching ? (
                 <Flex flexDirection={"column"} gap={5}>
                   <Flex flex={1} direction={"column"}>
                     {/* <Text fontWeight={"bold"}>Nome</Text> */}
@@ -323,10 +323,7 @@ function ModalCadastroAtividades({
                           min={0}
                           id={"duracao_plan"}
                           name={"duracao_plan"}
-                          value={formataParaTipo(
-                            "dias",
-                            registerForm.values.duracao_plan
-                          )}
+                          value={registerForm.values.duracao_plan}
                           onChange={(value) => {
                             registerForm.setFieldValue(
                               "duracao_plan",
@@ -335,7 +332,7 @@ function ModalCadastroAtividades({
                           }}
                         >
                           <NumberInputField
-                            maxLength={5}
+                            maxLength={10}
                             bg={"#fff"}
                             h={"56px"}
                           />

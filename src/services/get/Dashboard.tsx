@@ -28,7 +28,7 @@ export async function getOrcamentoTotal(): Promise<{
   data: any;
   status: number;
 }> {
-  const { data, status } = await api.get("/dashboard/orcamento-total", token());
+  const { data, status } = await api.get("/dashboard/previstoBarras", token());
 
   return { data, status };
 }

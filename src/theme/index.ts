@@ -4,6 +4,7 @@ import { ButtonStyles as Button } from "./components/buttonStyles";
 import { CheckboxStyles as Checkbox } from "./components/checkboxStyles";
 import { InputStyles as Input } from "./components/inputStyles";
 import { modalTheme as Modal } from "./components/modalStyles";
+import { NumberInputStyles as NumberInput } from "./components/numberInputStyles";
 import foundations from "./foundations";
 
 const direction = "ltr";
@@ -23,6 +24,7 @@ export const theme = {
     Input,
     Modal,
     Checkbox,
+    NumberInput,
   },
 };
 

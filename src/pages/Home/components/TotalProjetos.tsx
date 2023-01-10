@@ -27,10 +27,10 @@ export default function TotalProjetosComponent() {
   const [finalizados, setFinalizados] = useState(0);
   const [cancelados, setCancelados] = useState(0);
   const [holds, setHolds] = useState(0);
-  const [analise, setAnalise] = useState(0);
   const [naoIniciado, setNaoIniciado] = useState(0);
   const [reprogramado, setReprogramado] = useState(0);
   const [preAprovacao, setPreAprovacao] = useState(0);
+  const [emAnalise, setEmAnalise] = useState(0);
   const [prioridadeAlta, setPrioridadeAlta] = useState(0);
   const [prioridadeMedia, setPrioridadeMedia] = useState(0);
   const [prioridadeBaixa, setPrioridadeBaixa] = useState(0);
@@ -93,7 +93,7 @@ export default function TotalProjetosComponent() {
       setHolds(data.projetosPorStatus[holdsIndex].qtd);
     // setHolds(data.projetosPorStatus[6].qtd + data.projetosPorStatus[0].qtd);
     data.projetosPorStatus[analiseIndex] &&
-      setAnalise(data.projetosPorStatus[analiseIndex].qtd);
+      setEmAnalise(data.projetosPorStatus[analiseIndex].qtd);
   }
 
   const handleGetRanking = async () => {
@@ -133,6 +133,9 @@ export default function TotalProjetosComponent() {
     naoIniciado,
     naoIniciadoPercentage:
       total === 0 ? 0 : Math.round((naoIniciado / total) * 100),
+    emAnalise,
+    emAnalisePercentage:
+      total === 0 ? 0 : Math.round((emAnalise / total) * 100),
   };
 
   const data =
@@ -271,6 +274,19 @@ export default function TotalProjetosComponent() {
                     >
                       {hoverProps.naoIniciado} -{" "}
                       {hoverProps.naoIniciadoPercentage}%
+                    </span>
+                  </Text>
+                </Box>
+                <Box>
+                  <Text color={"#1C1B1B"} fontWeight="700">
+                    Projetos Em Análise:{" "}
+                    <span
+                      style={{
+                        fontFamily: "Mulish",
+                        fontWeight: 400,
+                      }}
+                    >
+                      {hoverProps.emAnalise} - {hoverProps.emAnalisePercentage}%
                     </span>
                   </Text>
                 </Box>
@@ -433,7 +449,7 @@ export default function TotalProjetosComponent() {
                             naoIniciado +
                             preAprovacao +
                             reprogramado +
-                            analise}{" "}
+                            emAnalise}{" "}
                           Outros
                         </Text>
                       </PopoverAnchor>
@@ -448,7 +464,8 @@ export default function TotalProjetosComponent() {
                               ((holds +
                                 naoIniciado +
                                 preAprovacao +
-                                reprogramado) /
+                                reprogramado +
+                                emAnalise) /
                                 total) *
                                 100
                             )}

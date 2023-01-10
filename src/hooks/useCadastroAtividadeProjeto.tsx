@@ -28,6 +28,7 @@ export function useCadastroAtividadeProjeto(
   const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
 
   const [listaArea, setListaArea] = useState<Area[]>([]);
   const [listaAreaAtuacao, setListaAreaAtuacao] = useState<AreaAtuacao[]>([]);
@@ -64,6 +65,10 @@ export function useCadastroAtividadeProjeto(
     setListaAreaAtuacao(areasAtuacaoSorted);
     setListaResponsaveis(responsaveisSorted);
     setListaAtividadesRelacao(atividadesRelacaoSorted);
+
+    if (areas && areaAtuacao && responsaveis && atividadesRelacao) {
+      setIsFetching(false);
+    }
   };
 
   const initialValues = {
@@ -154,5 +159,6 @@ export function useCadastroAtividadeProjeto(
     listaResponsaveis,
     listaAtividadesRelacao,
     reqGet,
+    isFetching,
   };
 }
