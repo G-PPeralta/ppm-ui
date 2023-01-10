@@ -48,7 +48,8 @@ export default function TotalProjetosComponent() {
 
     setTotal(data.totalProjetos);
     const iniciadosIndex = data.projetosPorStatus.findIndex(
-      (chave: any) => chave.status === "4. Em andamento"
+      (chave: any) =>
+        chave.status === "4. Em andamento" || chave.status === "3. Em andamento"
     );
     const naoIniciadosIndex = data.projetosPorStatus.findIndex(
       (chave: any) => chave.status === "1. Não Iniciado"
