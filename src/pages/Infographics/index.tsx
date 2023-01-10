@@ -28,6 +28,7 @@ export function Infographics() {
   const queryClient = useQueryClient();
   const [campanhas, setCampanhas] = useState<any>([]);
   const [refresh, setRefresh] = useState(false);
+  const [refetchCampanhas, setRefetchCampanhas] = useState(false);
 
   const {
     registerForm,
@@ -59,6 +60,10 @@ export function Infographics() {
   useEffect(() => {
     reqPostCampanhaRQ.mutate(registerForm.values);
   }, []);
+
+  useEffect(() => {
+    reqPostCampanhaRQ.mutate(registerForm.values);
+  }, [refetchCampanhas]);
 
   if (reqPostCampanhaRQ.isLoading) {
     return (
@@ -94,14 +99,16 @@ export function Infographics() {
         >
           <Flex gap={2} wrap={"wrap"} flex={1} justify={"space-between"}>
             <Flex gap={2} wrap={"wrap"}>
-              <ModalCadastrarSonda refresh={refresh} setRefresh={setRefresh} />
+              <ModalCadastrarSonda />
               <ModalCadastroPoco refresh={refresh} setRefresh={setRefresh} />
               <ModalCadastroAtividade />
               <ModalCadastroProjetoTipo
                 refresh={refresh}
                 setRefresh={setRefresh}
               />
-              <ModalNovaCampanha refresh={refresh} setRefresh={setRefresh} />
+              <ModalNovaCampanha
+                refetch={() => setRefetchCampanhas(!refetchCampanhas)}
+              />
             </Flex>
             <Flex gap={2}>
               <ModalReorderSimples refresh={refresh} setRefresh={setRefresh} />
