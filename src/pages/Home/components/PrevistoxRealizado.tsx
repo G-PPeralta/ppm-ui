@@ -124,6 +124,8 @@ export default function PrevistoxRealizadoComponent() {
   // const [width] = useWindowSize();
   // const innerWidth = window.innerWidth;
 
+  const windowWidth = window.innerWidth;
+
   const previstoRealizado = useGetData();
   const previstoXRealizadoBarras = useGetDataBarras();
   // console.log(previstoRealizado);
@@ -178,7 +180,7 @@ export default function PrevistoxRealizadoComponent() {
           Previsto x Realizado
         </Text>
         <Box
-          overflowX={"scroll"}
+          overflowX={windowWidth > 768 ? "unset" : "scroll"}
           // w={"100%"}
           h={260}
           w={"100%"}

@@ -278,12 +278,35 @@ function CadastrarProjeto() {
                   direction={innerWidth > 428 ? "row" : "column"}
                 >
                   <Flex flex={1}>
+                    {/* {registerForm.values.tipoProjetoId === 0 ? (
+                      <InputCadastroInline
+                        required={true}
+                        refreshState={refreshState}
+                        registerForm={registerForm}
+                        listaOptions={tiposProjetos}
+                        nomeLabel={"TIPO"}
+                        payloadKey={"tipo"}
+                        propName={"tipoProjetoId"}
+                        rota={"/tipo-projeto"}
+                      />
+                    ) : ( */}
+                    <SelectFiltragem
+                      registerForm={registerForm}
+                      nomeSelect={"TIPO"}
+                      propName={"tipoProjetoId"}
+                      options={tiposProjetos}
+                      required={true}
+                      value={getValue(tiposProjetos, "tipoProjetoId")}
+                    />
+                    {/* )} */}
+                  </Flex>
+                  <Flex flex={1}>
                     <InputGenerico
                       registerForm={registerForm}
                       nomeInput={"ID ORIGEM"}
                       propName={"campoId"}
                       value={registerForm.values.campoId}
-                      required={true}
+                      required={false}
                       placeholder={"Valor do ID"}
                       maxLength={50}
                       isDisabled={true}
@@ -420,29 +443,7 @@ function CadastrarProjeto() {
                       />
                     )}
                   </Flex>
-                  <Flex flex={1}>
-                    {/* {registerForm.values.tipoProjetoId === 0 ? (
-                      <InputCadastroInline
-                        required={true}
-                        refreshState={refreshState}
-                        registerForm={registerForm}
-                        listaOptions={tiposProjetos}
-                        nomeLabel={"TIPO"}
-                        payloadKey={"tipo"}
-                        propName={"tipoProjetoId"}
-                        rota={"/tipo-projeto"}
-                      />
-                    ) : ( */}
-                    <SelectFiltragem
-                      registerForm={registerForm}
-                      nomeSelect={"TIPO"}
-                      propName={"tipoProjetoId"}
-                      options={tiposProjetos}
-                      required={true}
-                      value={getValue(tiposProjetos, "tipoProjetoId")}
-                    />
-                    {/* )} */}
-                  </Flex>
+
                   <Flex flex={1}>
                     {registerForm.values.gateId === 0 ? (
                       <InputCadastroInline
