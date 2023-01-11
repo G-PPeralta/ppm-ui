@@ -146,13 +146,6 @@ function ModalAdicionarAtividade({
   // console.log(registerForm.values.data_inicio);
   // console.log(registerForm.values.data_fim);
 
-  useEffect(() => {
-    registerForm.setFieldValue(
-      "data_inicio",
-      getDataInicio || registerForm.values.data_inicio
-    );
-  }, [registerForm.values]);
-
   const handleDataFim = () => {
     const dataInicio = new Date(
       getDataInicio || registerForm.values.data_inicio
@@ -204,7 +197,7 @@ function ModalAdicionarAtividade({
     handleDataInicio();
     registerForm.setFieldValue("id_sonda", projeto.id_sonda);
     registerForm.setFieldValue("id_poco", projeto.id_poco);
-    registerForm.setFieldValue("duracao", 0);
+    registerForm.setFieldValue("duracao", "0");
     registerForm.setFieldValue("data_fim", "");
   }, []);
 
@@ -213,7 +206,11 @@ function ModalAdicionarAtividade({
   }, [ganttData]);
 
   useEffect(() => {
-    registerForm.setFieldValue("duracao", mediaHorasFiltradas);
+    if (mediaHorasFiltradas === 0) {
+      registerForm.setFieldValue("duracao", "0");
+    } else {
+      registerForm.setFieldValue("duracao", mediaHorasFiltradas);
+    }
   }, [mediaHorasFiltradas]);
 
   useEffect(() => {
@@ -289,6 +286,13 @@ function ModalAdicionarAtividade({
 
   // const data_inicial =
   //   new Date(dat_ini_atv_session).getTime() + 3 * 60 * 60 * 1000;
+
+  useEffect(() => {
+    registerForm.setFieldValue(
+      "data_inicio",
+      getDataInicio || registerForm.values.data_inicio
+    );
+  }, [isOpen]);
 
   return (
     <>
