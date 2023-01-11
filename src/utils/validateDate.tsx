@@ -29,12 +29,6 @@ export const statusProjeto = [
     color: "#046700",
     texto: "#FEFEFE",
   },
-  {
-    id: 6,
-    status: "Conflito de Cronograma",
-    color: "#FFEA00",
-    texto: "#000000",
-  },
 ];
 
 export function validateDate(
@@ -49,9 +43,6 @@ export function validateDate(
     switch (true) {
       case ind_status === 1:
         return statusProjeto[4].color; // concluído
-
-      case ind_alerta === 1:
-        return statusProjeto[5].color; // conflito de cronograma
 
       case ind_status === 3:
         return statusProjeto[1].color; // em andamento
@@ -72,9 +63,6 @@ export function validateDate(
     switch (true) {
       case pct_real === 100:
         return statusProjeto[4].color; // concluído
-
-      case ind_alerta === 1:
-        return statusProjeto[5].color; // conflito de cronograma
 
       case pct_real > 0 && pct_real < 100:
         return statusProjeto[1].color; // em andamento
