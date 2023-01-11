@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Flex,
@@ -22,7 +22,6 @@ import {
 import { Ring } from "@uiball/loaders";
 import {
   Atividade,
-  Label,
   Precedentes,
   Relacao,
 } from "interfaces/CadastroAtividadeDeta";
@@ -33,6 +32,7 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
 // import { formataParaTipo } from "utils/FormataParaTipo";
+import { addOutroFinalArray } from "utils/AdicionaOpcaoOutroAoFinalArray";
 import { formatDateToddMMyyyyhhmmCronograma } from "utils/formatDate";
 import { getSelectFiltragemValue } from "utils/GetSelectFiltragemValue";
 import { regexCaracteresEspeciais } from "utils/regex";
@@ -45,6 +45,7 @@ import { useCadastroAtividadeProjeto } from "hooks/useCadastroAtividadeProjeto";
 
 import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
+import InputCadastroArea from "./InputCadastroOutraArea";
 
 interface Props {
   refresh: boolean;
@@ -55,12 +56,12 @@ interface Props {
   infoProjeto: Atividade;
 }
 
-interface AreaResponsavel {
-  id: number;
-  id_classe: number;
-  nom_responsavel: string;
-  num_peso: string;
-}
+// interface AreaResponsavel {
+//   id: number;
+//   id_classe: number;
+//   nom_responsavel: string;
+//   num_peso: string;
+// }
 function ModalCadastroAtividades({
   refresh,
   setRefresh,
@@ -70,13 +71,56 @@ function ModalCadastroAtividades({
   infoProjeto,
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [listaResponsaveis, setListaResponsaveis] = useState<any>([]);
   const { registerForm, loading, listaAtividadesRelacao, reqGet, isFetching } =
     useCadastroAtividadeProjeto(
       refreshGanttCriacao,
       setRefreshGanttCriacao,
       idProjeto
     );
+
   const { areaResponsavel } = useDetalhamentoProjeto();
+
+  const reqGetRes = async () => {
+    const responsaveisSorted =
+      areaResponsavel &&
+      areaResponsavel.data.sort((a: any, b: any) =>
+        a.nom_responsavel.localeCompare(b.nom_responsavel)
+      );
+
+    const responsaveisComOutrosAoFinalArray = addOutroFinalArray(
+      responsaveisSorted,
+      "nom_responsavel"
+    );
+    setListaResponsaveis(responsaveisComOutrosAoFinalArray);
+  };
+
+  const optionsResponsaveis = listaResponsaveis.map((responsavel: any) => ({
+    value: responsavel.id,
+    label: responsavel.nom_responsavel,
+  }));
+
+  // console.log("optionsResponsaveis", optionsResponsaveis);
+
+  useEffect(() => {
+    reqGetRes();
+    reqGet();
+  }, [registerForm.values]);
+
+  const refreshState = {
+    refresh,
+    setRefresh,
+  };
+
+  // console.log("areaResponsavel", areaResponsavel);
+  // console.log(registerForm.values);
+
+  // areaResponsavel.data
+  //   .map((areaResponsavel: AreaResponsavel) => ({
+  //     value: areaResponsavel.id,
+  //     label: areaResponsavel.nom_responsavel,
+  //   }))
+  //   .sort((a: Label, b: Label) => a.label.localeCompare(b.label));
 
   const relacoesOptions = listaAtividadesRelacao.map((atividade: Relacao) => ({
     value: atividade.id,
@@ -238,20 +282,27 @@ function ModalCadastroAtividades({
                       />
                     </Flex>
                     <Flex gap={5} flex={1}>
-                      <SelectFiltragem
-                        registerForm={registerForm}
-                        nomeSelect={"ÁREA RESPONSÁVEL"}
-                        propName={"responsavel_id"}
-                        options={areaResponsavel.data
-                          .map((areaResponsavel: AreaResponsavel) => ({
-                            value: areaResponsavel.id,
-                            label: areaResponsavel.nom_responsavel,
-                          }))
-                          .sort((a: Label, b: Label) =>
-                            a.label.localeCompare(b.label)
-                          )}
-                        required={true}
-                      />
+                      {registerForm.values.responsavel_id === 0 ? (
+                        <InputCadastroArea
+                          required={true}
+                          registerForm={registerForm}
+                          listaOptions={optionsResponsaveis}
+                          nomeLabel={"RESPONSAVEL"}
+                          payloadKey={"nom_responsavel"}
+                          propName={"responsavel_id"}
+                          rota={"/area-responsavel"}
+                          respOuCoord={true}
+                          refreshState={refreshState}
+                        />
+                      ) : (
+                        <SelectFiltragem
+                          registerForm={registerForm}
+                          nomeSelect={"ÁREA RESPONSÁVEL"}
+                          propName={"responsavel_id"}
+                          options={optionsResponsaveis}
+                          required={true}
+                        />
+                      )}
                     </Flex>
                   </Flex>
 

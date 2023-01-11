@@ -111,10 +111,12 @@ function ModalEditarAtividade({
   const asyncGet = async () => {
     const reqGanttData = await getGanttData(Number(id));
     const item = getObject(reqGanttData.data, editAtividade.id_atividade);
-    const responsavelId = areaResponsavel.data.find(
-      (areaResponsavel: any) =>
-        areaResponsavel.nom_responsavel === item.Responsavel
-    )?.id;
+    const responsavelId =
+      areaResponsavel &&
+      areaResponsavel.data.find(
+        (areaResponsavel: any) =>
+          areaResponsavel.nom_responsavel === item.Responsavel
+      )?.id;
 
     const dat_ini_real = new Date(
       new Date(item.StartDate).getTime() + 3 * 3600 * 1000

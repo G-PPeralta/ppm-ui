@@ -76,7 +76,7 @@ export function useCadastroAtividadeProjeto(
     id_projeto: 0,
     nom_atividade: "",
     macro_id: 0,
-    responsavel_id: 0,
+    responsavel_id: -1,
     relacao_id: 0,
     dat_inicio_plan: "",
     duracao_plan: 1,
