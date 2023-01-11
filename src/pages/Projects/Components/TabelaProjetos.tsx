@@ -46,6 +46,8 @@ export function TabelaProjetos({
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
 
+  console.log(data);
+
   const fromTo = {
     from,
     to,
@@ -101,7 +103,7 @@ export function TabelaProjetos({
                   textAlign={"center"}
                   color={"#2D2926"}
                 >
-                  {projeto.id_projeto_real}
+                  {projeto.campo_id}
                 </Td>
                 <Td>
                   <Link to={`/detalhamento/${projeto.id_projeto_real}`}>
@@ -443,7 +445,7 @@ export function TabelaProjetos({
                   color: "white",
                 }}
               >
-                ID
+                ID Origem
               </Th>
               <Th
                 textAlign={"center"}

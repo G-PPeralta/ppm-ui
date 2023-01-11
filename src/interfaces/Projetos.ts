@@ -1,6 +1,7 @@
 export interface Projetos {
   id: number;
   id_projeto_real: number;
+  campo_id: string;
   nome_projeto: string;
   vlr_cpi: number;
   vlr_spi: number;
