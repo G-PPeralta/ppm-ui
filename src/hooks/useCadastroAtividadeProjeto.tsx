@@ -12,7 +12,7 @@ import { useToast } from "contexts/Toast";
 
 import { getArea } from "services/get/CadastroModaisInfograficos";
 import {
-  getAreaAtuacaoList,
+  getAreaAtuacaoListType,
   getResponsavelList,
 } from "services/get/Infograficos";
 import { getAtividadesRelacaoByProjetoId } from "services/get/Projetos";
@@ -37,7 +37,7 @@ export function useCadastroAtividadeProjeto(
 
   const reqGet = async () => {
     const areas = await getArea();
-    const areaAtuacao = await getAreaAtuacaoList();
+    const areaAtuacao = await getAreaAtuacaoListType("P");
     const responsaveis = await getResponsavelList();
     const atividadesRelacao = await getAtividadesRelacaoByProjetoId(idProjeto);
 

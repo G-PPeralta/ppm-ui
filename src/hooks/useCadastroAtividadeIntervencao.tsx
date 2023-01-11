@@ -17,7 +17,7 @@ import {
   getResponsaveis,
 } from "services/get/CadastroModaisInfograficos";
 import {
-  getAreaAtuacaoList,
+  getAreaAtuacaoListType,
   getNovaAtividadesTarefas,
 } from "services/get/Infograficos";
 import { postCadastroAtividadeIntervencao } from "services/post/Infograficos";
@@ -43,7 +43,7 @@ export function useCadastroAtividadeIntervencao() {
 
   const reqGet = async () => {
     const areas = await getArea();
-    const areaAtuacao = await getAreaAtuacaoList();
+    const areaAtuacao = await getAreaAtuacaoListType("I");
     const atividades = await getNovaAtividadesTarefas();
     const responsaveis = await getResponsaveis();
 

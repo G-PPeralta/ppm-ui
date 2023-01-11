@@ -136,9 +136,7 @@ const enviroment2 = [
   {
     name: "Projetos",
     icon: FiHome,
-    children: childrenCarteiradeProjetos.sort((a: ChildrenI, b: ChildrenI) =>
-      a.name.localeCompare(b.name)
-    ),
+    children: childrenCarteiradeProjetos,
   },
 ];
 
@@ -146,9 +144,7 @@ const enviroment1 = [
   {
     name: "Projetos",
     icon: FiHome,
-    children: childrenCarteiradeProjetos.sort((a: ChildrenI, b: ChildrenI) =>
-      a.name.localeCompare(b.name)
-    ),
+    children: childrenCarteiradeProjetos,
   },
 
   {

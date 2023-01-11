@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 import {
   Box,
@@ -116,6 +117,7 @@ export default function NaoPrevistoComponent() {
             <Table size="sm">
               <Thead>
                 <Tr>
+                  <Th>ID Origem</Th>
                   <Th>Nome do Projeto</Th>
                   <Th>Orçamento</Th>
                   <Th>Polo</Th>
@@ -132,6 +134,9 @@ export default function NaoPrevistoComponent() {
               >
                 {projetos.map((projeto, index) => (
                   <Tr mt={1} key={index}>
+                    <Th mr={-10} color={"#628EFD"} sx={{ fontSize: 12 }}>
+                      <Text>{projeto.campo_id}</Text>
+                    </Th>
                     <Th
                       mr={-10}
                       color={"#628EFD"}
@@ -146,7 +151,9 @@ export default function NaoPrevistoComponent() {
                       //   setTrue(false);
                       // }}
                     >
-                      <Text>{projeto.nome_projeto}</Text>
+                      <Link to={`/detalhamento/${projeto.id_projeto_real}`}>
+                        <Text>{projeto.nome_projeto}</Text>
+                      </Link>
                     </Th>
                     {/* {trut ? <Text> {projeto.nomeProjeto}</Text> : ''} */}
                     <Th color="gray.400" sx={{ fontSize: 12 }}>

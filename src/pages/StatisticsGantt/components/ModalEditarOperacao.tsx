@@ -384,6 +384,7 @@ function ModalEditarOperacao({
                   refresh={refresh}
                   setRefresh={setRefresh}
                   loading={loading}
+                  reload
                 />
               </Flex>
             </ModalFooter>
