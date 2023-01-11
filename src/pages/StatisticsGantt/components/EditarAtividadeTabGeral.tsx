@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, IconButton, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import DatePickerModal from "components/DatePickerGenerico/DatePickerModal";
@@ -9,6 +10,8 @@ import DatePickerModal from "components/DatePickerGenerico/DatePickerModal";
 import InputGenerico from "components/InputGenerico";
 import InputGenericoDesabilitado from "components/InputGenericoDesabilitado";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
+
+// import { regexNumerosEPonto } from "utils/regexPontoENumero";
 
 import { ModalFiltrarDuracaoMedia } from "./ModalFiltrarDuracaoMedia";
 
@@ -21,12 +24,12 @@ interface Props {
 
 function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   const [mediaHorasFiltradas, setMediaHorasFiltradas] = useState<any>(0);
+  const [hrsTotais, setHrsTotais] = useState<any>(
+    registerForm.values.hrs_totais
+  );
+  const [hrsReais, setHrsReais] = useState<any>(registerForm.values.hrs_reais);
   const [date, setDate] = useState<any>();
   const [loading, setLoading] = useState(true);
-
-  // console.log(loading);
-
-  // console.log(registerForm.values);
 
   useEffect(() => {
     registerForm.setFieldValue(
@@ -50,10 +53,50 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   }, []);
 
   useEffect(() => {
+    registerForm.setFieldValue("hrs_totais", hrsTotais);
+  }, [hrsTotais]);
+
+  useEffect(() => {
+    registerForm.setFieldValue("hrs_reais", hrsReais);
+  }, [hrsReais]);
+
+  useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
   }, [sondaN]);
+
+  const handleClickIncrement = (hrsTotais: number) => {
+    let counter = 0;
+    counter += 1;
+    const increase = hrsTotais ? hrsTotais + counter : counter;
+    setHrsTotais(increase);
+    return increase;
+  };
+
+  const handleClickDecrement = (hrsTotais: number) => {
+    let counter = 0;
+    counter -= 1;
+    const decrease = Number(hrsTotais) + counter;
+    setHrsTotais(decrease);
+    return decrease;
+  };
+
+  const handleClickIncrementReal = (hrsReais: number) => {
+    let counter = 0;
+    counter += 1;
+    const increase = hrsReais ? hrsReais + counter : counter;
+    setHrsReais(increase);
+    return increase;
+  };
+
+  const handleClickDecrementReal = (hrsReais: number) => {
+    let counter = 0;
+    counter -= 1;
+    const decrease = hrsReais + counter;
+    setHrsReais(decrease);
+    return decrease;
+  };
 
   useEffect(() => {
     setDate(registerForm.values.inicio_realizado);
@@ -147,20 +190,74 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
           />
         </Flex> */}
             </Flex>
-            <Flex gap={4} w={"76.7%"} mb={2}>
-              <InputNumericoGenerico
-                registerForm={registerForm}
-                propName={"hrs_totais"}
-                nomeInput={"DURAÇÃO"}
-                tipo={"hora"}
-                step={0.5}
-                stepper={true}
-                limite={1000}
-                // isDisabled={registerForm.values.inicio_real || flag === 1}
-                isDisabled={!(flag === 1 || flag === 0)}
-              />
+            <Flex gap={4} w={"76.5%"} mb={2}>
+              <Flex align={"end"} w={"56.4%"}>
+                {/* <InputNumericoGenerico
+                  registerForm={registerForm}
+                  propName={"hrs_totais"}
+                  nomeInput={"DURAÇÃO"}
+                  tipo={"hora"}
+                  step={0.5}
+                  stepper={true}
+                  limite={1000}
+                  // isDisabled={registerForm.values.inicio_real || flag === 1}
+                  isDisabled={!(flag === 1 || flag === 0)}
+                /> */}
 
-              <Flex align={"end"}>
+                <InputGenerico
+                  value={hrsTotais || registerForm.values.hrs_totais}
+                  registerForm={registerForm}
+                  propName={"hrs_totais"}
+                  nomeInput={"DURAÇÃO"}
+                  maxLength={1000000}
+                  isDisabled={!(flag === 1 || flag === 0)}
+                />
+                <Flex flexDir={"column"} w={"14px"}>
+                  <IconButton
+                    borderLeft={"50px solid #D6D4D4"}
+                    onClick={() => {
+                      handleClickIncrement(registerForm.values.hrs_totais);
+                    }}
+                    color={"black"}
+                    fontWeight={"700"}
+                    border={"#e6e6e6 1px solid"}
+                    borderColor={"#e6e6e6"}
+                    backgroundColor={"transparent"}
+                    aria-label="Decrease button"
+                    _hover={{
+                      backgroundColor: "transparent",
+                      color: "black",
+                    }}
+                    h={"28px"}
+                    w={"10%"}
+                    borderRadius={"2px"}
+                  >
+                    <AiFillCaretUp size={16} />
+                  </IconButton>
+
+                  <IconButton
+                    onClick={() => {
+                      handleClickDecrement(registerForm.values.hrs_totais);
+                    }}
+                    color={"black"}
+                    fontWeight={"700"}
+                    border={"#e6e6e6 0.5px solid"}
+                    backgroundColor={"transparent"}
+                    aria-label="Decrease button"
+                    _hover={{
+                      backgroundColor: "transparent",
+                      color: "black",
+                    }}
+                    h={"28px"}
+                    w={"14px"}
+                    borderRadius={"3px"}
+                  >
+                    <AiFillCaretDown size={16} />
+                  </IconButton>
+                </Flex>
+              </Flex>
+
+              <Flex align={"end"} ml={6}>
                 <ModalFiltrarDuracaoMedia
                   setMediaHorasFiltradas={setMediaHorasFiltradas}
                 />
@@ -198,7 +295,8 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
             <Flex direction={"row"}>
               <Flex direction={"row"} gap={4} w={"100%"}>
                 <Flex direction={"row"} w={"52.2%"} gap={4}>
-                  <InputNumericoGenerico
+                  <Flex align={"end"} direction={"row"} w={"80.2%"}>
+                    {/* <InputNumericoGenerico
                     registerForm={registerForm}
                     propName={"hrs_reais"}
                     nomeInput={"DURAÇÃO"}
@@ -208,7 +306,64 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                     limite={1000}
                     // isDisabled={flag === 0}
                     isDisabled={registerForm.values.pct_real === 100}
-                  />
+                  /> */}
+
+                    <InputGenerico
+                      value={hrsReais || registerForm.values.hrs_reais}
+                      registerForm={registerForm}
+                      propName={"hrs_reais"}
+                      nomeInput={"DURAÇÃO"}
+                      maxLength={1000000}
+                      isDisabled={registerForm.values.pct_real === 100}
+                    />
+                    <Flex flexDir={"column"}>
+                      <IconButton
+                        borderLeft={"50px solid #D6D4D4"}
+                        onClick={() => {
+                          handleClickIncrementReal(
+                            registerForm.values.hrs_reais
+                          );
+                        }}
+                        color={"black"}
+                        fontWeight={"700"}
+                        border={"#e6e6e6 1px solid"}
+                        borderColor={"#e6e6e6"}
+                        backgroundColor={"transparent"}
+                        aria-label="Decrease button"
+                        _hover={{
+                          backgroundColor: "transparent",
+                          color: "black",
+                        }}
+                        h={"28px"}
+                        w={"10%"}
+                        borderRadius={"2px"}
+                      >
+                        <AiFillCaretUp size={16} />
+                      </IconButton>
+
+                      <IconButton
+                        onClick={() => {
+                          handleClickDecrementReal(
+                            registerForm.values.hrs_reais
+                          );
+                        }}
+                        color={"black"}
+                        fontWeight={"700"}
+                        border={"#e6e6e6 0.5px solid"}
+                        backgroundColor={"transparent"}
+                        aria-label="Decrease button"
+                        _hover={{
+                          backgroundColor: "transparent",
+                          color: "black",
+                        }}
+                        h={"28px"}
+                        w={"14px"}
+                        borderRadius={"3px"}
+                      >
+                        <AiFillCaretDown size={16} />
+                      </IconButton>
+                    </Flex>
+                  </Flex>
                   {/* <Input value={mediaHorasFiltradas} /> */}
 
                   <DatePickerModal

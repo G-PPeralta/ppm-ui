@@ -36,6 +36,7 @@ import { useDetalhamentoProjeto } from "contexts/DetalhamentoDeProjetos";
 
 import { getGanttData } from "services/get/Gantt";
 
+import DatePicker from "./DatePicker";
 import DateTimePicker from "./DateTimePicker";
 
 function getObject(theObject: any, id: any): any {
@@ -359,7 +360,7 @@ function ModalEditarAtividade({
                       {render ? (
                         <Flex>
                           <Flex flex={1} mt={4} mb={2}>
-                            <DateTimePicker
+                            <DatePicker
                               registerForm={registerForm}
                               value={"inicio_realizado"}
                               label={"INÍCIO REALIZADO"}
@@ -368,7 +369,7 @@ function ModalEditarAtividade({
                             />
                           </Flex>
                           <Flex flex={1} mt={4} mb={2}>
-                            <DateTimePicker
+                            <DatePicker
                               registerForm={registerForm}
                               isDisabled={!registerForm.values.inicio_realizado}
                               value={"fim_realizado"}

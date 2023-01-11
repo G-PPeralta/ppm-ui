@@ -12,7 +12,18 @@ interface Props {
   onClose: Function; // Função padrão useDisclosure ChakraUi para fechar o Modal
   setRefresh: React.Dispatch<React.SetStateAction<boolean>>; // Função para atualizar a página
   refresh: boolean; // Variável para atualizar a página
-  loading: boolean; // Variável para mostrar o loading
+  loading: boolean; // Variável para mostrar o loading,
+  reload?: boolean;
+}
+
+function forceRefresh() {
+  const reloadCount = sessionStorage.getItem("reloadCount");
+  if (Number(reloadCount) < 2) {
+    sessionStorage.setItem("reloadCount", String(Number(reloadCount) + 2));
+    window.location.reload();
+  } else {
+    sessionStorage.removeItem("reloadCount");
+  }
 }
 
 function BotaoAzulLargoPrimary({
@@ -24,6 +35,7 @@ function BotaoAzulLargoPrimary({
   setRefresh,
   refresh,
   loading,
+  reload,
 }: Props) {
   return (
     <Button
@@ -37,9 +49,10 @@ function BotaoAzulLargoPrimary({
       fontFamily={"Mulish"}
       variant="primary"
       color="white"
-      onClick={() =>
-        handleCadastrarRefresh(formikForm, onClose, setRefresh, refresh)
-      }
+      onClick={() => {
+        handleCadastrarRefresh(formikForm, onClose, setRefresh, refresh);
+        reload && forceRefresh();
+      }}
       _hover={{
         background: "origem.600",
         transition: "all 0.4s",

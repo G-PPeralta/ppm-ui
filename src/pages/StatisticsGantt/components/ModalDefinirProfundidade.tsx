@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import {
   useDisclosure,
   Button,
@@ -9,14 +11,19 @@ import {
   ModalBody,
   Flex,
   ModalFooter,
+  Text,
+  Input,
 } from "@chakra-ui/react";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
-import InputGenerico from "components/InputGenerico";
+import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { handleCancelar } from "utils/handleCadastro";
+import { regexNumerosEPonto } from "utils/regexNumerosEPonto";
 
 import { useDefinirPrioridade } from "hooks/useDefinirProfundidade";
+
+import { getProfundidadeProjeto } from "services/get/Estatisticas";
 
 interface Props {
   setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,14 +31,28 @@ interface Props {
   projeto: any;
 }
 
-function ModalDefinirPrioridade({ setRefresh, refresh, projeto }: Props) {
+function ModalDefinirProfundidade({ setRefresh, refresh, projeto }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useDefinirPrioridade(projeto);
+
+  const getProfundidade = async () => {
+    const { data } = await getProfundidadeProjeto(projeto.id_poco);
+    if (data.length === 0) return;
+    // PEGAR A MAIOR PROFUNDIDADE RECEBIDA
+    const maiorProfundidade = data.reduce((acc: any, curr: any) =>
+      Number(acc.profundidade) > Number(curr.profundidade) ? acc : curr
+    );
+    registerForm.setFieldValue("profundidade", maiorProfundidade.profundidade);
+  };
 
   const handleCancelarModal = () => {
     registerForm.resetForm();
     onClose();
   };
+
+  useEffect(() => {
+    getProfundidade();
+  }, [isOpen]);
 
   return (
     <>
@@ -67,7 +88,7 @@ function ModalDefinirPrioridade({ setRefresh, refresh, projeto }: Props) {
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            Definir Profundidade da intervencao
+            Definir Profundidade
           </ModalHeader>
           <ModalCloseButton
             color={"white"}
@@ -80,15 +101,27 @@ function ModalDefinirPrioridade({ setRefresh, refresh, projeto }: Props) {
             }}
           >
             <ModalBody mt={3}>
-              <Flex direction={"column"} gap={4} mt={4} w={"100%"}>
-                <InputGenerico
-                  registerForm={registerForm}
-                  nomeInput={"Profundidade"}
-                  propName={"profundidade"}
-                  value={registerForm.values.profundidade}
-                  required={true}
-                  placeholder={"Defina a profundidade"}
-                  maxLength={50}
+              <Flex direction={"column"} w={"100%"}>
+                <Flex gap={1}>
+                  <RequiredField />
+                  <Text fontWeight={"700"} fontSize={"12px"} color={"#949494"}>
+                    PROFUNDIDADE
+                  </Text>
+                </Flex>
+                <Input
+                  variant={"origem"}
+                  placeholder="Defina a profundidade"
+                  id="profundidade"
+                  type="profundidade"
+                  name="profundidade"
+                  value={regexNumerosEPonto(registerForm.values.profundidade)}
+                  onChange={(event) => {
+                    registerForm.setFieldValue(
+                      "profundidade",
+                      regexNumerosEPonto(event.target.value)
+                    );
+                  }}
+                  maxLength={20}
                 />
               </Flex>
             </ModalBody>
@@ -130,4 +163,4 @@ function ModalDefinirPrioridade({ setRefresh, refresh, projeto }: Props) {
   );
 }
 
-export default ModalDefinirPrioridade;
+export default ModalDefinirProfundidade;
