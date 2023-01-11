@@ -169,3 +169,9 @@ export async function getIdOrigem(): Promise<{
 
   return { data, status };
 }
+
+export async function getAreaResponsavel2(): Promise<any> {
+  const { data, status } = await api.get("/area-responsavel ", token());
+
+  return { data, status };
+}

@@ -43,6 +43,8 @@ import { useCadastroAtividadeProjeto } from "hooks/useCadastroAtividadeProjeto";
 
 // import PopOverRelacao from "./PopOverRelacao";
 
+import { getAreaResponsavel2 } from "services/get/Projetos";
+
 import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
 import InputCadastroArea from "./InputCadastroOutraArea";
@@ -83,9 +85,11 @@ function ModalCadastroAtividades({
   const { areaResponsavel } = useDetalhamentoProjeto();
 
   const reqGetRes = async () => {
+    const { data } = await getAreaResponsavel2();
+
     const responsaveisSorted =
-      areaResponsavel &&
-      areaResponsavel.data.sort((a: any, b: any) =>
+      data &&
+      data.sort((a: any, b: any) =>
         a.nom_responsavel.localeCompare(b.nom_responsavel)
       );
 
@@ -104,7 +108,7 @@ function ModalCadastroAtividades({
   // console.log("optionsResponsaveis", optionsResponsaveis);
 
   useEffect(() => {
-    reqGetRes();
+    // reqGetRes();
     reqGet();
   }, [registerForm.values]);
 
@@ -169,6 +173,10 @@ function ModalCadastroAtividades({
       label: "C&M - 20",
     },
   ];
+
+  useEffect(() => {
+    reqGetRes();
+  }, [refresh1]);
 
   return (
     <>
