@@ -20,7 +20,7 @@ export function useDefinirPrioridade(projeto: any) {
     onSubmit: async (values) => {
       const newValues = {
         id_pai: values.poco_id,
-        profundidade: values.profundidade,
+        profundidade: Number(values.profundidade),
       };
 
       setLoading(true);
@@ -29,16 +29,13 @@ export function useDefinirPrioridade(projeto: any) {
         const { status } = await postDefinirProfundidade(newValues);
 
         if (status === 200 || status === 201) {
-          toast.success(
-            `Profundidade ${values.profundidade} atualizado com sucesso!`,
-            {
-              id: "toast-principal",
-            }
-          );
+          toast.success(`Profundidade atualizada com sucesso!`, {
+            id: "toast-principal",
+          });
           setLoading(false);
         }
       } catch (error) {
-        toast.error(`Erro ao  atualizar Profundidade ${values.profundidade}!`, {
+        toast.error(`Erro ao  atualizar profundidade!`, {
           id: "toast-principal",
         });
         setLoading(false);
