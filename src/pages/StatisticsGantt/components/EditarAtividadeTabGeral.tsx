@@ -31,12 +31,6 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   const [date, setDate] = useState<any>();
   const [loading, setLoading] = useState(true);
 
-  // console.log(mediaHorasFiltradas);
-
-  console.log(hrsTotais);
-
-  // console.log(registerForm.values);
-
   useEffect(() => {
     registerForm.setFieldValue(
       "hrs_totais",
@@ -73,20 +67,19 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   }, [sondaN]);
 
   const handleClickIncrement = (hrsTotais: number) => {
-    console.log(hrsTotais);
     let counter = 0;
     counter += 1;
-    const decrease = hrsTotais ? hrsTotais + counter : counter;
-    setHrsTotais(decrease);
-    return decrease;
+    const increase = hrsTotais ? hrsTotais + counter : counter;
+    setHrsTotais(increase);
+    return increase;
   };
 
   const handleClickDecrement = (hrsTotais: number) => {
     let counter = 0;
     counter -= 1;
-    const increase = Number(hrsTotais) + counter;
-    setHrsTotais(increase);
-    return increase;
+    const decrease = Number(hrsTotais) + counter;
+    setHrsTotais(decrease);
+    return decrease;
   };
 
   const handleClickIncrementReal = (hrsReais: number) => {
@@ -212,7 +205,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                 /> */}
 
                 <InputGenerico
-                  value={registerForm.values.hrs_totais}
+                  value={hrsTotais || registerForm.values.hrs_totais}
                   registerForm={registerForm}
                   propName={"hrs_totais"}
                   nomeInput={"DURAÇÃO"}
@@ -223,7 +216,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                   <IconButton
                     borderLeft={"50px solid #D6D4D4"}
                     onClick={() => {
-                      handleClickIncrement(hrsTotais);
+                      handleClickIncrement(registerForm.values.hrs_totais);
                     }}
                     color={"black"}
                     fontWeight={"700"}
@@ -244,7 +237,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
 
                   <IconButton
                     onClick={() => {
-                      handleClickDecrement(hrsTotais);
+                      handleClickDecrement(registerForm.values.hrs_totais);
                     }}
                     color={"black"}
                     fontWeight={"700"}
@@ -316,7 +309,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                   /> */}
 
                     <InputGenerico
-                      value={registerForm.values.hrs_reais}
+                      value={hrsReais || registerForm.values.hrs_reais}
                       registerForm={registerForm}
                       propName={"hrs_reais"}
                       nomeInput={"DURAÇÃO"}
@@ -327,7 +320,9 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                       <IconButton
                         borderLeft={"50px solid #D6D4D4"}
                         onClick={() => {
-                          handleClickIncrementReal(hrsReais);
+                          handleClickIncrementReal(
+                            registerForm.values.hrs_reais
+                          );
                         }}
                         color={"black"}
                         fontWeight={"700"}
@@ -348,7 +343,9 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
 
                       <IconButton
                         onClick={() => {
-                          handleClickDecrementReal(hrsReais);
+                          handleClickDecrementReal(
+                            registerForm.values.hrs_reais
+                          );
                         }}
                         color={"black"}
                         fontWeight={"700"}
