@@ -87,7 +87,7 @@ export const cadastroAtividadeEstatisticaSchema = yup.object({
   id_sonda: yup.number().required("Campo obrigatório").moreThan(0),
   id_poco: yup.number().required("Campo obrigatório").moreThan(0),
   operacao_id: yup.number().required("Campo obrigatório").moreThan(0),
-  duracao: yup.number().required("Campo obrigatório").moreThan(0),
+  duracao: yup.string().required("Campo obrigatório"),
   data_inicio: yup.string().required("Campo obrigatório"),
   data_fim: yup.string().required("Campo obrigatório"),
   // metodo_elevacao_id: yup.number().required("Campo obrigatório").moreThan(0),
