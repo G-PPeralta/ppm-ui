@@ -33,7 +33,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
 
   // console.log(mediaHorasFiltradas);
 
-  console.log(registerForm.values.hrs_totais);
+  console.log(hrsTotais);
 
   // console.log(registerForm.values);
 
@@ -44,8 +44,6 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
         ? registerForm.values.hrs_totais
         : mediaHorasFiltradas
     );
-    setHrsTotais(registerForm.values.hrs_totais);
-    setHrsReais(Number(registerForm.values.hrs_reais));
   }, [mediaHorasFiltradas]);
 
   const flag = sondaN.atividades.find(
@@ -78,7 +76,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
     console.log(hrsTotais);
     let counter = 0;
     counter += 1;
-    const decrease = hrsTotais + counter;
+    const decrease = hrsTotais ? hrsTotais + counter : counter;
     setHrsTotais(decrease);
     return decrease;
   };
@@ -94,7 +92,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
   const handleClickIncrementReal = (hrsReais: number) => {
     let counter = 0;
     counter += 1;
-    const increase = hrsReais + counter;
+    const increase = hrsReais ? hrsReais + counter : counter;
     setHrsReais(increase);
     return increase;
   };
