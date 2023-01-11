@@ -24,6 +24,7 @@ export function PercentagePieChartProjetoInfo({ data }: Props) {
     >
       <PieChart width={60} height={60}>
         <Pie
+          startAngle={-270}
           data={data}
           dataKey="value"
           nameKey="name"

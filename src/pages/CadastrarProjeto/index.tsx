@@ -1,14 +1,7 @@
+import { useEffect, useState } from "react";
 import { BsPlus } from "react-icons/bs";
 
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  InputGroup,
-  // InputLeftElement,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, InputGroup, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import BotaoSetaVoltar from "components/BotaoSetaVoltar/BotaoSetaVoltar";
@@ -18,12 +11,11 @@ import Sidebar from "components/SideBar";
 import TextAreaGenerico from "components/TextAreaGenerico";
 
 import { handleCadastrarPagina } from "utils/handleCadastro";
-import {
-  regexCaracteresEspeciais,
-  regexSomenteNumerosMonetario,
-} from "utils/regex";
+import { regexSomenteNumerosMonetario } from "utils/regex";
 
 import { useProjetos } from "hooks/useCadastroProjeto";
+
+import { getIdOrigem } from "services/get/Projetos";
 
 import InputCadastroInline from "./Components/InputCadastroInline";
 
@@ -46,6 +38,8 @@ function CadastrarProjeto() {
     optionsGates,
   } = useProjetos();
 
+  const [idOrigemRequest, setIdOrigemRequest] = useState<any>();
+
   type Options = {
     value: number;
     label: string;
@@ -67,6 +61,23 @@ function CadastrarProjeto() {
       label: options?.[index]?.label,
     };
   };
+
+  const getOrigemID = async () => {
+    const { data } = await getIdOrigem();
+    setIdOrigemRequest(data);
+  };
+
+  useEffect(() => {
+    getOrigemID();
+  }, []);
+
+  useEffect(() => {
+    if (registerForm.values.tipoProjetoId === 1) {
+      registerForm.setFieldValue("campoId", idOrigemRequest[0].id_estudo);
+    } else if (registerForm.values.tipoProjetoId === 2) {
+      registerForm.setFieldValue("campoId", idOrigemRequest[0].id_projeto);
+    }
+  }, [registerForm.values.tipoProjetoId]);
 
   return (
     <>
@@ -271,12 +282,11 @@ function CadastrarProjeto() {
                       registerForm={registerForm}
                       nomeInput={"ID ORIGEM"}
                       propName={"campoId"}
-                      value={regexCaracteresEspeciais(
-                        registerForm.values.campoId
-                      )}
+                      value={registerForm.values.campoId}
                       required={true}
                       placeholder={"Valor do ID"}
                       maxLength={50}
+                      isDisabled={true}
                     />
                   </Flex>
                   <Flex gap={2} flex={2}>
@@ -501,7 +511,10 @@ function CadastrarProjeto() {
               </Flex>
               <Flex w={"100%"} mt={6} gap={4} justify={"center"}>
                 <Button
-                  onClick={() => registerForm.resetForm()}
+                  onClick={() => {
+                    registerForm.resetForm();
+                    registerForm.setFieldValue("campoId", "");
+                  }}
                   variant={"origemRedGhost"}
                 >
                   <Text fontSize="16px" fontWeight={"bold"}>
