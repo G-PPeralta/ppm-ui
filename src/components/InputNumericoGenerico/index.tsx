@@ -12,6 +12,7 @@ import {
 import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { formataParaTipo } from "utils/FormataParaTipo";
+import { regexNumerosEPonto } from "utils/regexNumerosEPonto";
 
 interface Props {
   registerForm: any;
@@ -58,7 +59,7 @@ function InputNumericoGenerico({
         <Input
           isDisabled={isDisabled}
           step={step}
-          value={registerForm.values[propName]}
+          value={regexNumerosEPonto(registerForm.values[propName])}
           onChange={(event) => handleChange(event)}
           h={"56px"}
           fontWeight={"400"}
