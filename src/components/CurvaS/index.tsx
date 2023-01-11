@@ -66,7 +66,12 @@ function CurvaS({ data }: Props) {
           >
             <LineChart data={data}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="mes" />
+              <XAxis
+                dataKey="mes"
+                style={{
+                  fontSize: "14px",
+                }}
+              />
               <YAxis />
               <Tooltip />
               <Line
