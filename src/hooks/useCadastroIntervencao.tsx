@@ -23,7 +23,7 @@ import {
   getTarefas,
 } from "services/get/CadastroModaisInfograficos";
 import {
-  getAreaAtuacaoList,
+  getAreaAtuacaoListType,
   postGetInfoCampanha,
   getSondaCampanha,
 } from "services/get/Infograficos";
@@ -59,7 +59,7 @@ export function useCadastroIntervencao() {
   const reqGet = async () => {
     const campanha = await postGetInfoCampanha(getAllCampanha);
     const pocos = await getPocos();
-    const areaAtuacao = await getAreaAtuacaoList();
+    const areaAtuacao = await getAreaAtuacaoListType("I");
     const responsaveis = await getResponsaveis();
     const campos = await getCampo();
     const projetosTipo = await getProjetosTipo();

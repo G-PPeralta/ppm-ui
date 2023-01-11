@@ -53,6 +53,15 @@ export async function getAreaAtuacaoList(): Promise<{
   return { data, status };
 }
 
+export async function getAreaAtuacaoListType(area: string): Promise<{
+  data: AreaAtuacao[];
+  status: number;
+}> {
+  const { data, status } = await api.get(`/area-atuacao/tipo/${area}`, token());
+
+  return { data, status };
+}
+
 export async function getAtividadesList(): Promise<{
   data: AtividadeLista[];
   status: number;

@@ -11,7 +11,7 @@ import { useToast } from "contexts/Toast";
 
 import { getOperacoes } from "services/get/Estatisticas";
 import {
-  getAreaAtuacaoList,
+  getAreaAtuacaoListType,
   getResponsavelList,
 } from "services/get/Infograficos";
 import { postCadastroNovaAtividadeCronograma } from "services/post/Estatistica";
@@ -33,7 +33,7 @@ export function useAdicionarOperacao(
 
   const reqGet = async () => {
     const operacoes = await getOperacoes();
-    const areaAtuacao = await getAreaAtuacaoList();
+    const areaAtuacao = await getAreaAtuacaoListType("I");
     const responsaveis = await getResponsavelList();
 
     const operacoesSorted = operacoes.data.sort((a: any, b: any) =>
