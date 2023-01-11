@@ -318,7 +318,7 @@ export default function TotalProjetosComponent() {
             flex={1}
           >
             <Box
-              overflowX={"scroll"}
+              overflowX={"unset"}
               w={"100%"}
               h={260}
               display={"flex"}
