@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 import {
   Box,
@@ -150,7 +151,9 @@ export default function NaoPrevistoComponent() {
                       //   setTrue(false);
                       // }}
                     >
-                      <Text>{projeto.nome_projeto}</Text>
+                      <Link to={`/detalhamento/${projeto.id_projeto_real}`}>
+                        <Text>{projeto.nome_projeto}</Text>
+                      </Link>
                     </Th>
                     {/* {trut ? <Text> {projeto.nomeProjeto}</Text> : ''} */}
                     <Th color="gray.400" sx={{ fontSize: 12 }}>

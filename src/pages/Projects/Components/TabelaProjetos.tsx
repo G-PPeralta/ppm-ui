@@ -46,7 +46,7 @@ export function TabelaProjetos({
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(5);
 
-  console.log(data);
+  // console.log(data);
 
   const fromTo = {
     from,
