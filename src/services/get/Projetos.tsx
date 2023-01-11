@@ -160,3 +160,12 @@ export async function getRelacoesExecucao(id: number | string): Promise<any> {
 
   return response.data;
 }
+
+export async function getIdOrigem(): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get("/projetos/gerar/ids", token());
+
+  return { data, status };
+}
