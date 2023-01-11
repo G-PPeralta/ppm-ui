@@ -19,7 +19,7 @@ import {
   getTarefas,
 } from "services/get/CadastroModaisInfograficos";
 import { getOperacoes } from "services/get/Estatisticas";
-import { getAreaAtuacaoList } from "services/get/Infograficos";
+import { getAreaAtuacaoListType } from "services/get/Infograficos";
 // import { postCadastroNovoCronograma } from "services/post/Estatistica";
 
 import { useAuth } from "./useAuth";
@@ -62,7 +62,7 @@ export function useEditarCronograma(atual: any) {
   const reqGet = async () => {
     const sondas = await getSonda();
     const pocos = await getPocos();
-    const areaAtuacao = await getAreaAtuacaoList();
+    const areaAtuacao = await getAreaAtuacaoListType("I");
     const responsaveis = await getResponsaveis();
     const tarefas = await getTarefas();
     const operacoes = await getOperacoes();

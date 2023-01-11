@@ -12,7 +12,7 @@ import {
   getTarefas,
 } from "services/get/CadastroModaisInfograficos";
 import { getOperacoes } from "services/get/Estatisticas";
-import { getAreaAtuacaoList } from "services/get/Infograficos";
+import { getAreaAtuacaoListType } from "services/get/Infograficos";
 // import { postCadastroNovoCronograma } from "services/post/Estatistica";
 
 export function useCarregarListasModalCronograma() {
@@ -22,7 +22,7 @@ export function useCarregarListasModalCronograma() {
   const [listaOperacao, setListaOperacao] = useState<Operacao[]>([]);
 
   const reqGet = async () => {
-    const areaAtuacao = await getAreaAtuacaoList();
+    const areaAtuacao = await getAreaAtuacaoListType("I");
     const responsaveis = await getResponsaveis();
     const tarefas = await getTarefas();
     const operacoes = await getOperacoes();
