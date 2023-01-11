@@ -25,7 +25,7 @@ import ModalCadastroOperacao from "../Statistics/components/ModalCadastroOperaca
 import { Gantt } from "./components/Gantt";
 // import ModalAdicionarOperacao from "./components/ModalAdicionarOperacao";
 import ModalAdicionarAtividade from "./components/ModalAdicionarAtividade";
-import ModalDefinirPrioridade from "./components/ModalDefinirProfundidade";
+import ModalDefinirProfundidade from "./components/ModalDefinirProfundidade";
 import ModalEditarOperacao from "./components/ModalEditarOperacao";
 
 function StatisticsGantt() {
@@ -172,7 +172,7 @@ function StatisticsGantt() {
                     </Box>
 
                     <Flex gap={2} flex={2} justify={"end"} align={"end"}>
-                      <ModalDefinirPrioridade
+                      <ModalDefinirProfundidade
                         refresh={refresh}
                         setRefresh={setRefresh}
                         projeto={projeto}

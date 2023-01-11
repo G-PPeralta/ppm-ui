@@ -17,81 +17,139 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
-import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
-import SelectFiltragem from "components/SelectFiltragem";
-import { TextError } from "components/TextError";
+import LoadingButton from "components/LoadingButton";
+import SelectFiltragemLocal from "components/SelectFiltragemLocal";
 
-import { handleCancelar } from "utils/handleCadastro";
+import { useToast } from "contexts/Toast";
 
-import { useCadastroCampanha } from "hooks/useCadastroCampanha";
+import { useAuth } from "hooks/useAuth";
 
-import { getServicoSonda } from "services/get/CadastroModaisInfograficos";
+import { postNovaCampanhaRQ } from "services/react-query/campanhasCRUD";
+import { getAllSondasOperacaoRQ } from "services/react-query/sondasCRUD";
 
-function ModalNovaCampanha({ setRefresh, refresh }: any) {
+interface Props {
+  refetch: Function;
+}
+
+function ModalNovaCampanha({ refetch }: Props) {
+  const { user } = useAuth();
+  const { toast } = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { registerForm, loading, listaServicosSondas } = useCadastroCampanha();
-  const [optionsServicoSonda, setOptionsServicoSonda] = useState(
-    listaServicosSondas.map((sonda: any) => ({
-      value: sonda.nom_sonda,
-      label: sonda.nom_sonda,
-    }))
-  );
+  const queryClient = useQueryClient();
 
-  // const optionsServicoSonda = listaServicosSondas.map((sonda: any) => ({
-  //   value: sonda.nom_sonda,
-  //   label: sonda.nom_sonda,
-  // }));
+  const [isButtonLoading, setIsButtonLoading] = useState<boolean>(false);
+  const [optionsServicoSonda, setOptionsServicoSonda] = useState<any>([]);
+  const [formValues, setFormValues] = useState<any>({
+    sondaSelecionada: {
+      value: "",
+      label: "",
+    },
+    dsc_comentario: "",
+    nova_campanha: false,
+  });
 
-  const handleServicoSonda = async () => {
-    const servicosSondas = await getServicoSonda();
+  // Função para buscar sondas cadastradas para popular select com opções
+  const reqGetProjetosSelectFeriado = useQuery({
+    queryKey: ["sonda"],
+    queryFn: getAllSondasOperacaoRQ,
+  });
 
-    const servicosSondasSorted = servicosSondas.data.sort((a: any, b: any) =>
-      a.nom_sonda.localeCompare(b.nom_sonda)
-    );
+  // Cadastrar nova campanha
+  const reqPostCadastroCampanhaRQ = useMutation({
+    mutationFn: postNovaCampanhaRQ,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["campanha"] });
+      refetch();
+      setIsButtonLoading(false);
+      toast.success(`Campanha cadastrada com sucesso!`, {
+        id: "toast-principal",
+      });
+      onClose();
+    },
+    onError: () => {
+      setIsButtonLoading(false);
+      toast.error(`Erro ao cadastrar campanha!`, {
+        id: "toast-principal",
+      });
+      onClose();
+    },
+  });
 
-    const opcoesFormatadas = servicosSondasSorted.map((sonda: any) => ({
-      value: sonda.nom_sonda,
-      label: sonda.nom_sonda,
-    }));
+  const handleClickCadastrar = () => {
+    // Seta a animação de loading do botão para True
+    setIsButtonLoading(true);
 
-    setOptionsServicoSonda(opcoesFormatadas);
+    const payload: any = {
+      nom_usu_create: user?.nome,
+      id_projeto: formValues.sondaSelecionada.label,
+      dsc_comentario: formValues.dsc_comentario,
+      nova_campanha: formValues.nova_campanha,
+    };
+
+    // Chama a função de cadastro
+    reqPostCadastroCampanhaRQ.mutate(payload);
+
+    // Limpa os campos do formulário
+    setFormValues({
+      sondaSelecionada: {
+        value: "",
+        label: "",
+      },
+      dsc_comentario: "",
+      nova_campanha: false,
+    });
   };
 
-  useEffect(() => {
-    if (registerForm.values.id_projeto.split("-")[0] === "0 ") {
-      registerForm.setFieldValue("nova_campanha", true);
-    } else {
-      registerForm.setFieldValue("nova_campanha", false);
-    }
-  }, [registerForm.values.id_projeto]);
+  const handleCloseModal = () => {
+    // Limpa os campos do formulário
+    setFormValues({
+      sondaSelecionada: {
+        value: "",
+        label: "",
+      },
+      dsc_comentario: "",
+      nova_campanha: false,
+    });
+    onClose();
+  };
+
+  const handleSelectSonda = (value: any) => {
+    setFormValues({ ...formValues, sondaSelecionada: value });
+  };
+
+  const isButtonDisabled =
+    formValues.id_projeto === "" || formValues.dsc_comentario === "";
 
   useEffect(() => {
-    handleServicoSonda();
-  }, [isOpen]);
+    if (formValues.sondaSelecionada.label.split("-")[0] === "0 ") {
+      setFormValues({ ...formValues, nova_campanha: true });
+    } else {
+      setFormValues({ ...formValues, nova_campanha: false });
+    }
+  }, [formValues.sondaSelecionada]);
+
+  useEffect(() => {
+    if (reqGetProjetosSelectFeriado.data) {
+      const sondasSorted = reqGetProjetosSelectFeriado.data.sort(
+        (a: any, b: any) => a.nom_sonda.localeCompare(b.nom_sonda)
+      );
+      const opcoesFormatadas = sondasSorted.map((sonda: any) => ({
+        value: sonda.nom_sonda,
+        label: sonda.nom_sonda,
+      }));
+
+      setOptionsServicoSonda(opcoesFormatadas);
+    }
+  }, [reqGetProjetosSelectFeriado.data]);
 
   return (
     <>
-      <Button
-        h={"56px"}
-        borderRadius={"10px"}
-        background={"white"}
-        border={"2px solid"}
-        color={"origem.500"}
-        _hover={{
-          border: "2px solid",
-          borderColor: "origem.500",
-          background: "origem.500",
-          transition: "all 0.4s",
-          color: "white",
-        }}
-        textColor={"origem.500"}
-        onClick={onOpen}
-      >
+      <Button variant={"origemBlueOutline"} w={"fit-content"} onClick={onOpen}>
         Nova Campanha
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+      <Modal isOpen={isOpen} onClose={handleCloseModal} size="2xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -105,103 +163,99 @@ function ModalNovaCampanha({ setRefresh, refresh }: any) {
           >
             Cadastrar Nova Campanha
           </ModalHeader>
-          <ModalCloseButton
-            color={"white"}
-            onClick={() => handleCancelar(registerForm, onClose)}
-          />
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              registerForm.handleSubmit(e);
-            }}
-          >
-            <ModalBody mt={3}>
-              <FormControl>
-                <Flex direction={"column"} gap={4}>
-                  <Stack>
-                    {/* <Text fontWeight={"bold"}>Nome</Text> */}
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: "column",
-                        md: "row",
-                      })}
-                      gap={5}
-                    >
-                      <FormControl>
-                        <SelectFiltragem
-                          registerForm={registerForm}
-                          nomeSelect={"SONDA"}
-                          propName={"id_projeto"}
-                          options={optionsServicoSonda}
-                          required={true}
-                        />
-                      </FormControl>
-                    </Flex>
-                  </Stack>
+          <ModalCloseButton color={"white"} />
 
-                  <Stack>
-                    <Flex
-                      flexDirection={useBreakpointValue({
-                        base: "column",
-                        md: "column",
-                      })}
-                      gap={2}
-                    >
-                      {/* <Text fontWeight={"bold"}>Comentários</Text> */}
-                      <Flex direction={"column"}>
-                        <Flex gap={1}>
-                          <Text
-                            fontWeight={"bold"}
-                            fontSize={"12px"}
-                            color={"#949494"}
-                          >
-                            COMENTÁRIOS
-                          </Text>
-                        </Flex>
-                        <Textarea
-                          _placeholder={{ color: "#949494" }}
-                          fontSize={"14px"}
-                          fontWeight={"400"}
-                          color={"black"}
-                          isRequired
-                          placeholder="Adicione comentários sobre a campanha"
-                          id="dsc_comentario"
-                          name="dsc_comentario"
-                          value={registerForm.values.dsc_comentario}
-                          onChange={registerForm.handleChange}
-                          maxLength={255}
-                        />
-                        {registerForm.errors.dsc_comentario &&
-                          registerForm.touched.dsc_comentario && (
-                            <TextError>
-                              {registerForm.errors.dsc_comentario}
-                            </TextError>
-                          )}
+          <ModalBody mt={3}>
+            <FormControl>
+              <Flex direction={"column"} gap={4}>
+                <Stack>
+                  <Flex
+                    flexDirection={useBreakpointValue({
+                      base: "column",
+                      md: "row",
+                    })}
+                    gap={5}
+                  >
+                    <FormControl>
+                      <SelectFiltragemLocal
+                        options={optionsServicoSonda}
+                        propName={"filtro"}
+                        selectLabel={"FILTRAR POÇOS POR CAMPO:"}
+                        value={formValues.sondaSelecionada}
+                        onChangeFunction={handleSelectSonda}
+                      />
+                    </FormControl>
+                  </Flex>
+                </Stack>
+
+                <Stack>
+                  <Flex
+                    flexDirection={useBreakpointValue({
+                      base: "column",
+                      md: "column",
+                    })}
+                    gap={2}
+                  >
+                    <Flex direction={"column"}>
+                      <Flex gap={1}>
+                        <Text
+                          fontWeight={"bold"}
+                          fontSize={"12px"}
+                          color={"#949494"}
+                        >
+                          COMENTÁRIOS
+                        </Text>
                       </Flex>
+                      <Textarea
+                        _placeholder={{ color: "#949494" }}
+                        fontSize={"14px"}
+                        fontWeight={"400"}
+                        color={"black"}
+                        isRequired
+                        placeholder="Adicione comentários sobre a campanha"
+                        id="dsc_comentario"
+                        name="dsc_comentario"
+                        value={formValues.dsc_comentario}
+                        onChange={(e) =>
+                          setFormValues({
+                            ...formValues,
+                            dsc_comentario: e.target.value,
+                          })
+                        }
+                        maxLength={255}
+                      />
                     </Flex>
-                  </Stack>
-                </Flex>
-              </FormControl>
-            </ModalBody>
-
-            <ModalFooter justifyContent={"center"}>
-              <Flex gap={2}>
-                <BotaoVermelhoLargoGhost
-                  text={"Cancelar"}
-                  formikForm={registerForm}
-                  onClose={onClose}
-                />
-                <BotaoAzulLargoPrimary
-                  text={"Cadastrar"}
-                  formikForm={registerForm}
-                  onClose={onClose}
-                  setRefresh={setRefresh}
-                  refresh={refresh}
-                  loading={loading}
-                />
+                  </Flex>
+                </Stack>
               </Flex>
-            </ModalFooter>
-          </form>
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter justifyContent={"center"}>
+            <Flex gap={2}>
+              <Button
+                variant={"origemRedSolid"}
+                onClick={() => handleCloseModal()}
+              >
+                <Text fontSize="18px" fontWeight={"700"} mx={12}>
+                  Cancelar
+                </Text>
+              </Button>
+              <Button
+                variant={"origemBlueSolid"}
+                disabled={isButtonDisabled}
+                onClick={() => handleClickCadastrar()}
+              >
+                {isButtonLoading ? (
+                  <LoadingButton />
+                ) : (
+                  <Text fontSize="18px" fontWeight={"700"} mx={12}>
+                    Cadastrar
+                  </Text>
+                )}
+              </Button>
+            </Flex>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

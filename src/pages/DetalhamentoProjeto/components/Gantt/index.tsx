@@ -14,7 +14,7 @@ import {
   ModalBody,
   ModalFooter,
   ModalCloseButton,
-  Box,
+  // Box,
 } from "@chakra-ui/react";
 import {
   ColumnsDirective,
@@ -184,55 +184,55 @@ export function Gantt({
     columns: [{ field: "BaselineStartDate", direction: "Ascending" }],
   };
 
-  const statusTemplate = (props: any) => (
-    <Flex
-      // w={"100%"}
-      // style={{ position: "relative", top: "-8px" }}
-      justifyContent={"center"}
-      alignItems={"center"}
-    >
-      {props.taskData.Progress == props.taskData.ProgressPlan &&
-        props.taskData.Progress != "0" && (
-          <Box
-            w={5}
-            h={5}
-            bg={"#9FA2B4"}
-            display={"flex"}
-            flexDirection="column"
-            alignItems={"center"}
-            pt={"2px"}
-            sx={{ borderRadius: "100%" }}
-            style={{ backgroundColor: "#008000" }}
-          ></Box>
-        )}
-      {props.taskData.Progress < props.taskData.ProgressPlan && (
-        <Box
-          w={5}
-          h={5}
-          bg={"#9FA2B4"}
-          display={"flex"}
-          flexDirection="column"
-          alignItems={"center"}
-          pt={"2px"}
-          sx={{ borderRadius: "100%" }}
-          style={{ backgroundColor: "red" }}
-        ></Box>
-      )}
-      {props.taskData.Progress == "0" && props.taskData.ProgressPlan == "0" && (
-        <Box
-          w={5}
-          h={5}
-          bg={"#9FA2B4"}
-          display={"flex"}
-          flexDirection="column"
-          alignItems={"center"}
-          pt={"2px"}
-          sx={{ borderRadius: "100%" }}
-          style={{ backgroundColor: "gray" }}
-        ></Box>
-      )}
-    </Flex>
-  );
+  // const statusTemplate = (props: any) => (
+  //   <Flex
+  //     // w={"100%"}
+  //     // style={{ position: "relative", top: "-8px" }}
+  //     justifyContent={"center"}
+  //     alignItems={"center"}
+  //   >
+  //     {props.taskData.Progress == props.taskData.ProgressPlan &&
+  //       props.taskData.Progress != "0" && (
+  //         <Box
+  //           w={5}
+  //           h={5}
+  //           bg={"#9FA2B4"}
+  //           display={"flex"}
+  //           flexDirection="column"
+  //           alignItems={"center"}
+  //           pt={"2px"}
+  //           sx={{ borderRadius: "100%" }}
+  //           style={{ backgroundColor: "#008000" }}
+  //         ></Box>
+  //       )}
+  //     {props.taskData.Progress < props.taskData.ProgressPlan && (
+  //       <Box
+  //         w={5}
+  //         h={5}
+  //         bg={"#9FA2B4"}
+  //         display={"flex"}
+  //         flexDirection="column"
+  //         alignItems={"center"}
+  //         pt={"2px"}
+  //         sx={{ borderRadius: "100%" }}
+  //         style={{ backgroundColor: "red" }}
+  //       ></Box>
+  //     )}
+  //     {props.taskData.Progress == "0" && props.taskData.ProgressPlan == "0" && (
+  //       <Box
+  //         w={5}
+  //         h={5}
+  //         bg={"#9FA2B4"}
+  //         display={"flex"}
+  //         flexDirection="column"
+  //         alignItems={"center"}
+  //         pt={"2px"}
+  //         sx={{ borderRadius: "100%" }}
+  //         style={{ backgroundColor: "gray" }}
+  //       ></Box>
+  //     )}
+  //   </Flex>
+  // );
 
   // useEffect(() => {
   //   setGantt(ganttDataLocal);
@@ -480,7 +480,7 @@ export function Gantt({
               // type="number"
               // format="N"
             ></ColumnDirective>
-            <ColumnDirective
+            {/* <ColumnDirective
               field="s"
               headerText="S"
               headerTextAlign="Center"
@@ -488,7 +488,7 @@ export function Gantt({
               // type="number"
               width="100"
               template={statusTemplate}
-            ></ColumnDirective>
+            ></ColumnDirective> */}
             <ColumnDirective
               field="ProgressPlan"
               headerText="% Plan"

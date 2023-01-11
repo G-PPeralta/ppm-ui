@@ -176,3 +176,15 @@ export async function getDataFinalPrecedessor(idAtividade: number): Promise<{
 
   return { data, status };
 }
+
+export async function getProfundidadeProjeto(id: number): Promise<{
+  data: any;
+  status: number;
+}> {
+  const { data, status } = await api.get(
+    `/projetos-atividades/getProfundidade/${id}`,
+    token()
+  );
+
+  return { data, status };
+}

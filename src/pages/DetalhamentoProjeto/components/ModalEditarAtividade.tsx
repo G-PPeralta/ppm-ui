@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import {
@@ -36,6 +36,7 @@ import { useDetalhamentoProjeto } from "contexts/DetalhamentoDeProjetos";
 
 import { getGanttData } from "services/get/Gantt";
 
+import DatePicker from "./DatePicker";
 import DateTimePicker from "./DateTimePicker";
 
 function getObject(theObject: any, id: any): any {
@@ -92,6 +93,7 @@ function ModalEditarAtividade({
 }: Props) {
   const { id } = useParams();
   const { areaResponsavel } = useDetalhamentoProjeto();
+  const [render, setRender] = useState(false);
 
   const getValue = (options: any[], chave: string) => {
     const index = options
@@ -168,6 +170,15 @@ function ModalEditarAtividade({
     },
   ];
 
+  useEffect(() => {
+    if (registerForm.values.pct_real === 100) {
+      setRender(false);
+      registerForm.setFieldValue("inicio_realizado", "");
+      registerForm.setFieldValue("fim_realizado", "");
+      setTimeout(() => setRender(true), 2000);
+    }
+  }, [registerForm.values.pct_real]);
+
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} size="lg">
@@ -230,7 +241,6 @@ function ModalEditarAtividade({
                           <SelectFiltragem
                             registerForm={registerForm}
                             nomeSelect={"MACRO"}
-                            isDisabled={registerForm.values.pct_real === 100}
                             propName={"macro_id"}
                             options={macroOptions}
                             required={false}
@@ -345,32 +355,35 @@ function ModalEditarAtividade({
                       </NumberInputStepper>
                     </NumberInput>
                   </Flex>
-                  <Flex flex={1} direction={"column"}>
-                    <Flex>
-                      <Flex flex={1} mt={4} mb={2}>
-                        <DateTimePicker
-                          registerForm={registerForm}
-                          isDisabled={registerForm.values.pct_real === 100}
-                          value={"inicio_realizado"}
-                          label={"INÍCIO REALIZADO"}
-                          required={false}
-                          data={registerForm.values.inicio_realizado}
-                        />
-                      </Flex>
-                      <Flex flex={1} mt={4} mb={2}>
-                        <DateTimePicker
-                          registerForm={registerForm}
-                          isDisabled={registerForm.values.pct_real === 100}
-                          value={"fim_realizado"}
-                          label={"FIM REALIZADO"}
-                          required={false}
-                          data={registerForm.values.fim_realizado}
-                          dataMin={registerForm.values.inicio_realizado}
-                          isDataFim={true}
-                        />
-                      </Flex>
+                  {registerForm.values.pct_real === 100 ? (
+                    <Flex flex={1} direction={"column"}>
+                      {render ? (
+                        <Flex>
+                          <Flex flex={1} mt={4} mb={2}>
+                            <DatePicker
+                              registerForm={registerForm}
+                              value={"inicio_realizado"}
+                              label={"INÍCIO REALIZADO"}
+                              required={false}
+                              data={registerForm.values.inicio_realizado}
+                            />
+                          </Flex>
+                          <Flex flex={1} mt={4} mb={2}>
+                            <DatePicker
+                              registerForm={registerForm}
+                              isDisabled={!registerForm.values.inicio_realizado}
+                              value={"fim_realizado"}
+                              label={"FIM REALIZADO"}
+                              required={false}
+                              data={registerForm.values.fim_realizado}
+                              dataMin={registerForm.values.inicio_realizado}
+                              isDataFim={true}
+                            />
+                          </Flex>
+                        </Flex>
+                      ) : undefined}
                     </Flex>
-                  </Flex>
+                  ) : undefined}
                   <Flex flex={1} direction={"column"}>
                     <Flex mt={-1} width={"328px"}>
                       <InputNumericoGenerico
@@ -401,6 +414,10 @@ function ModalEditarAtividade({
                 />
                 <Button
                   h={"56px"}
+                  isDisabled={
+                    registerForm.values.pct_real === 100 &&
+                    !registerForm.values.fim_realizado
+                  }
                   w={"208px"}
                   borderRadius={"8px"}
                   background={"origem.500"}
