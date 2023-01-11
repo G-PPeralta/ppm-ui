@@ -9,8 +9,8 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 import { postCadastroOutro } from "services/post/Projetos";
 
 interface refreshState {
-  refresh: boolean;
-  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh1: boolean;
+  setRefresh1: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface Props {
@@ -39,7 +39,7 @@ function InputCadastroArea({
   respOuCoord,
 }: Props) {
   const [cadastroOutro, setCadastroOutro] = useState("");
-  const { refresh, setRefresh } = refreshState;
+  const { refresh1, setRefresh1 } = refreshState;
 
   let payload = {
     [payloadKey]: cadastroOutro,
@@ -53,7 +53,7 @@ function InputCadastroArea({
       );
 
       if (respOuCoord) {
-        setRefresh(!refresh);
+        setRefresh1(!refresh1);
         if (!ind_sistema) {
           payload = {
             [payloadKey]: cadastroOutro,
@@ -71,9 +71,9 @@ function InputCadastroArea({
         registerForm.values[propName] = getOptionsMaxValue + 1;
         postCadastroOutro(rota, payload);
 
-        setRefresh(!refresh);
+        setRefresh1(!refresh1);
       } else {
-        setRefresh(!refresh);
+        setRefresh1(!refresh1);
         const novoOutroAdicionado: any = {
           id: getOptionsMaxValue + 1,
           [payloadKey]: cadastroOutro,
@@ -84,7 +84,7 @@ function InputCadastroArea({
         registerForm.values[propName] = novoOutroAdicionado.id;
         postCadastroOutro(rota, novoOutroAdicionado);
 
-        setRefresh(!refresh);
+        setRefresh1(!refresh1);
       }
     }
   };

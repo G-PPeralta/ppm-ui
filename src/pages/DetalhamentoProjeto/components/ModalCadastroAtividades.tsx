@@ -72,6 +72,7 @@ function ModalCadastroAtividades({
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [listaResponsaveis, setListaResponsaveis] = useState<any>([]);
+  const [refresh1, setRefresh1] = useState(false);
   const { registerForm, loading, listaAtividadesRelacao, reqGet, isFetching } =
     useCadastroAtividadeProjeto(
       refreshGanttCriacao,
@@ -108,19 +109,12 @@ function ModalCadastroAtividades({
   }, [registerForm.values]);
 
   const refreshState = {
-    refresh,
-    setRefresh,
+    refresh1,
+    setRefresh1,
   };
 
   // console.log("areaResponsavel", areaResponsavel);
   // console.log(registerForm.values);
-
-  // areaResponsavel.data
-  //   .map((areaResponsavel: AreaResponsavel) => ({
-  //     value: areaResponsavel.id,
-  //     label: areaResponsavel.nom_responsavel,
-  //   }))
-  //   .sort((a: Label, b: Label) => a.label.localeCompare(b.label));
 
   const relacoesOptions = listaAtividadesRelacao.map((atividade: Relacao) => ({
     value: atividade.id,
@@ -160,19 +154,19 @@ function ModalCadastroAtividades({
   const macroOptions = [
     {
       value: 1,
-      label: "Pré-Projeto",
+      label: "Pré-Projeto - 25",
     },
     {
       value: 2,
-      label: "Engenharia",
+      label: "Engenharia - 15",
     },
     {
       value: 3,
-      label: "Suprimentos",
+      label: "Suprimentos - 65",
     },
     {
       value: 4,
-      label: "C&M",
+      label: "C&M - 20",
     },
   ];
 
