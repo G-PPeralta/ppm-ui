@@ -11,7 +11,7 @@ import {
   getTarefas,
 } from "services/get/CadastroModaisInfograficos";
 import {
-  getAreaAtuacaoList,
+  getAreaAtuacaoListType,
   postGetInfoCampanha,
 } from "services/get/Infograficos";
 
@@ -36,7 +36,7 @@ export function useFiltragemCampanha() {
   };
 
   const reqGet = async () => {
-    const areaAtuacao = await getAreaAtuacaoList();
+    const areaAtuacao = await getAreaAtuacaoListType("I");
     const pocos = await getPocos();
     const tarefas = await getTarefas();
     const responsaveis = await getResponsaveis();
