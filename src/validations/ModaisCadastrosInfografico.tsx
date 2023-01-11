@@ -135,5 +135,5 @@ export const cadastroAtividadeIntervencaoSchema = yup.object({
 });
 
 export const updateProfundidadeoSchema = yup.object({
-  profundidade: yup.string().required("Profundidade é obrigatório"),
+  profundidade: yup.number().required("Campo obrigatório!").moreThan(0),
 });

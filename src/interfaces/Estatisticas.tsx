@@ -37,5 +37,5 @@ export interface Anotacoes {
 
 export interface Profundidade {
   id_pai: number;
-  profundidade: string;
+  profundidade: string | number;
 }
