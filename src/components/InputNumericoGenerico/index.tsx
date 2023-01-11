@@ -1,5 +1,6 @@
 import {
   Flex,
+  Input,
   NumberDecrementStepper,
   NumberIncrementStepper,
   NumberInput,
@@ -11,6 +12,7 @@ import {
 import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { formataParaTipo } from "utils/FormataParaTipo";
+import { regexNumerosEPonto } from "utils/regexNumerosEPonto";
 
 interface Props {
   registerForm: any;
@@ -22,6 +24,7 @@ interface Props {
   step?: number;
   isDisabled?: boolean;
   limite?: number;
+  isDecimal?: boolean;
 }
 
 function InputNumericoGenerico({
@@ -34,9 +37,12 @@ function InputNumericoGenerico({
   step,
   isDisabled,
   limite,
+  isDecimal,
 }: Props) {
   const handleChange = (event: any) => {
-    registerForm.setFieldValue(propName, Number(event));
+    if (!isDecimal) registerForm.setFieldValue(propName, Number(event));
+
+    registerForm.setFieldValue(propName, event.target.value);
   };
 
   return (
@@ -49,25 +55,37 @@ function InputNumericoGenerico({
           </Text>
         </Flex>
       )}
-      <NumberInput
-        isDisabled={isDisabled}
-        min={0}
-        max={limite || 100}
-        step={step}
-        value={formataParaTipo(tipo, registerForm.values[propName])}
-        onChange={(event) => handleChange(event)}
-        h={"56px"}
-        fontWeight={"400"}
-        fontSize={"14px"}
-      >
-        <NumberInputField h={"56px"} />
-        {stepper && (
-          <NumberInputStepper>
-            <NumberIncrementStepper />
-            <NumberDecrementStepper />
-          </NumberInputStepper>
-        )}
-      </NumberInput>
+      {isDecimal ? (
+        <Input
+          isDisabled={isDisabled}
+          step={step}
+          value={regexNumerosEPonto(registerForm.values[propName])}
+          onChange={(event) => handleChange(event)}
+          h={"56px"}
+          fontWeight={"400"}
+          fontSize={"14px"}
+        ></Input>
+      ) : (
+        <NumberInput
+          isDisabled={isDisabled}
+          min={0}
+          max={limite || 100}
+          step={step}
+          value={formataParaTipo(tipo, registerForm.values[propName])}
+          onChange={(event) => handleChange(event)}
+          h={"56px"}
+          fontWeight={"400"}
+          fontSize={"14px"}
+        >
+          <NumberInputField h={"56px"} />
+          {stepper && (
+            <NumberInputStepper>
+              <NumberIncrementStepper />
+              <NumberDecrementStepper />
+            </NumberInputStepper>
+          )}
+        </NumberInput>
+      )}
     </Flex>
   );
 }

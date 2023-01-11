@@ -376,6 +376,7 @@ function ModalAdicionarAtividade({
                       stepper={true}
                       limite={99999}
                       required={true}
+                      isDecimal={true}
                     />
 
                     <Flex flex={1}>
