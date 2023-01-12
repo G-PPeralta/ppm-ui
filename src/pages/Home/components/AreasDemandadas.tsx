@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   Box,
   Flex,
@@ -7,10 +9,14 @@ import {
 } from "@chakra-ui/react";
 import { AreasDemandadasPorMes } from "interfaces/Services";
 
-import PercentPieChart from "components/PercentPieChart";
-import StackedBarChart from "components/StackedBarChart";
+// import PercentPieChart from "components/PercentPieChart";
+// import StackedBarChart from "components/StackedBarChart";
 
-import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
+// import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
+
+import { getAreasDemandadas } from "services/get/Dashboard";
+
+import { AreasDemandantesGraficos } from "./GraficoAreas";
 
 type Props = {
   AreasDemandadasPorMes: AreasDemandadasPorMes[];
@@ -21,318 +27,341 @@ export default function AreasDemandadasComponent({
 }: Props) {
   const innerWidth = window.innerWidth;
 
-  // const [areasDemandadas, setAreasDemandadas] = useState<
-  //   AreasDemandadasPorMes[]
-  // >([] as AreasDemandadasPorMes[]);
-  // async function handleGetAreasDemandadas() {
-  //   const reqGet = await getAreasDemandadas();
-  //   const dataReq: AreasDemandadasPorMes[] = reqGet.data;
-  //   setAreasDemandadas(dataReq);
-  // }
+  const [areasDemandadas, setAreasDemandadas] = useState<any[]>([] as any[]);
+  async function handleGetAreasDemandadas() {
+    const reqGet = await getAreasDemandadas();
+    const dataReq: any[] = reqGet.data;
+    setAreasDemandadas(dataReq);
+  }
 
-  // useEffect(() => {
-  //   handleGetAreasDemandadas();
-  // }, []);
+  const getJan = () => {
+    const getOPE =
+      areasDemandadas.length > 0 &&
+      areasDemandadas.filter((ope) => ope.solicitante === "OPE")[0].quantia;
+    const getReservatorio =
+      areasDemandadas.length > 0 &&
+      areasDemandadas.filter((ope) => ope.solicitante === "Reservatórios")[0]
+        .quantia;
+    const getTeste =
+      areasDemandadas.length > 0 &&
+      areasDemandadas.filter((ope) => ope.solicitante === "teste")[0].quantia;
+
+    const finalObject = [
+      {
+        data: areasDemandadas.length > 0 && areasDemandadas[0].data,
+        OPE: getOPE,
+        Reservatório: getReservatorio,
+        Teste: getTeste,
+      },
+    ];
+    return finalObject;
+  };
+
+  console.log(getJan());
+
+  useEffect(() => {
+    handleGetAreasDemandadas();
+  }, []);
 
   // useEffect(() => {
   //   // console.log(areasDemandadas);
   // }, [areasDemandadas]);
 
-  function getCurrentMonth() {
-    const date = new Date();
-    return date.getMonth() + 1;
-  }
+  // function getCurrentMonth() {
+  //   const date = new Date();
+  //   return date.getMonth() + 1;
+  // }
 
-  function formatMonth(month?: number) {
-    let monthName: string;
-    let year: number;
-    const date = new Date();
-    const currentYear = date.getFullYear();
-    switch (month) {
-      case 1:
-        monthName = "jan";
-        break;
-      case 2:
-        monthName = "fev";
-        break;
-      case 3:
-        monthName = "mar";
-        break;
-      case 4:
-        monthName = "abr";
-        break;
-      case 5:
-        monthName = "mai";
-        break;
-      case 6:
-        monthName = "jun";
-        break;
-      case 7:
-        monthName = "jul";
-        break;
-      case 8:
-        monthName = "ago";
-        break;
-      case 9:
-        monthName = "set";
-        break;
-      case 10:
-        monthName = "out";
-        break;
-      case 11:
-        monthName = "nov";
-        break;
-      case 12:
-        monthName = "dez";
-        break;
-      default:
-        monthName = "?";
-    }
+  // function formatMonth(month?: number) {
+  //   let monthName: string;
+  //   let year: number;
+  //   const date = new Date();
+  //   const currentYear = date.getFullYear();
+  //   switch (month) {
+  //     case 1:
+  //       monthName = "jan";
+  //       break;
+  //     case 2:
+  //       monthName = "fev";
+  //       break;
+  //     case 3:
+  //       monthName = "mar";
+  //       break;
+  //     case 4:
+  //       monthName = "abr";
+  //       break;
+  //     case 5:
+  //       monthName = "mai";
+  //       break;
+  //     case 6:
+  //       monthName = "jun";
+  //       break;
+  //     case 7:
+  //       monthName = "jul";
+  //       break;
+  //     case 8:
+  //       monthName = "ago";
+  //       break;
+  //     case 9:
+  //       monthName = "set";
+  //       break;
+  //     case 10:
+  //       monthName = "out";
+  //       break;
+  //     case 11:
+  //       monthName = "nov";
+  //       break;
+  //     case 12:
+  //       monthName = "dez";
+  //       break;
+  //     default:
+  //       monthName = "?";
+  //   }
 
-    if (month) {
-      if (month > getCurrentMonth()) {
-        year = currentYear - 1;
-      } else {
-        year = currentYear;
-      }
+  //   if (month) {
+  //     if (month > getCurrentMonth()) {
+  //       year = currentYear - 1;
+  //     } else {
+  //       year = currentYear;
+  //     }
 
-      return monthName + "/" + year;
-    } else {
-      return "-";
-    }
-  }
+  //     return monthName + "/" + year;
+  //   } else {
+  //     return "-";
+  //   }
+  // }
 
-  function getPieValues(month: number) {
-    const data = AreasDemandadasPorMes.at(month);
+  // function getPieValues(month: number) {
+  //   const data = AreasDemandadasPorMes.at(month);
 
-    if (data) {
-      const sms = data.sms;
-      const regulatorio = data.regulatorio;
-      const operacao = data.operacao;
-      const outros = data.outros;
-      const total: number = sms + regulatorio + operacao + outros;
+  //   if (data) {
+  //     const sms = data.sms;
+  //     const regulatorio = data.regulatorio;
+  //     const operacao = data.operacao;
+  //     const outros = data.outros;
+  //     const total: number = sms + regulatorio + operacao + outros;
 
-      const smsPercent = ((sms / total) * 100).toFixed(0);
-      const regulatorioPercent = ((regulatorio / total) * 100).toFixed(0);
-      const operacaoPercent = ((operacao / total) * 100).toFixed(0);
-      const outrosPercent = ((outros / total) * 100).toFixed(0);
+  //     const smsPercent = ((sms / total) * 100).toFixed(0);
+  //     const regulatorioPercent = ((regulatorio / total) * 100).toFixed(0);
+  //     const operacaoPercent = ((operacao / total) * 100).toFixed(0);
+  //     const outrosPercent = ((outros / total) * 100).toFixed(0);
 
-      const values = {
-        smsPercent,
-        regulatorioPercent,
-        operacaoPercent,
-        outrosPercent,
-      };
+  //     const values = {
+  //       smsPercent,
+  //       regulatorioPercent,
+  //       operacaoPercent,
+  //       outrosPercent,
+  //     };
 
-      return values;
-    } else {
-      const smsPercent = "0";
-      const regulatorioPercent = "0";
-      const operacaoPercent = "0";
-      const outrosPercent = "0";
+  //     return values;
+  //   } else {
+  //     const smsPercent = "0";
+  //     const regulatorioPercent = "0";
+  //     const operacaoPercent = "0";
+  //     const outrosPercent = "0";
 
-      const values = {
-        smsPercent,
-        regulatorioPercent,
-        operacaoPercent,
-        outrosPercent,
-      };
+  //     const values = {
+  //       smsPercent,
+  //       regulatorioPercent,
+  //       operacaoPercent,
+  //       outrosPercent,
+  //     };
 
-      return values;
-    }
-  }
+  //     return values;
+  //   }
+  // }
 
-  function isUpDown(type: string) {
-    const valuesCurrentMonth = getPieValues(AreasDemandadasPorMes.length - 1);
-    const valuesLastMonth = getPieValues(AreasDemandadasPorMes.length - 2);
+  // function isUpDown(type: string) {
+  //   const valuesCurrentMonth = getPieValues(AreasDemandadasPorMes.length - 1);
+  //   const valuesLastMonth = getPieValues(AreasDemandadasPorMes.length - 2);
 
-    if (valuesCurrentMonth && valuesLastMonth) {
-      switch (type) {
-        case "sms":
-          return valuesCurrentMonth.smsPercent > valuesLastMonth.smsPercent;
+  //   if (valuesCurrentMonth && valuesLastMonth) {
+  //     switch (type) {
+  //       case "sms":
+  //         return valuesCurrentMonth.smsPercent > valuesLastMonth.smsPercent;
 
-        case "regulatorio":
-          return (
-            valuesCurrentMonth.regulatorioPercent >
-            valuesLastMonth.regulatorioPercent
-          );
+  //       case "regulatorio":
+  //         return (
+  //           valuesCurrentMonth.regulatorioPercent >
+  //           valuesLastMonth.regulatorioPercent
+  //         );
 
-        case "operacao":
-          return (
-            valuesCurrentMonth.operacaoPercent > valuesLastMonth.operacaoPercent
-          );
+  //       case "operacao":
+  //         return (
+  //           valuesCurrentMonth.operacaoPercent > valuesLastMonth.operacaoPercent
+  //         );
 
-        case "outros":
-          return (
-            valuesCurrentMonth.outrosPercent > valuesLastMonth.outrosPercent
-          );
-      }
-    }
-  }
+  //       case "outros":
+  //         return (
+  //           valuesCurrentMonth.outrosPercent > valuesLastMonth.outrosPercent
+  //         );
+  //     }
+  //   }
+  // }
 
-  function createPieData() {
-    const data = AreasDemandadasPorMes.at(AreasDemandadasPorMes.length - 1);
-    if (data) {
-      const sms = data.sms;
-      const regulatorio = data.regulatorio;
-      const operacao = data.operacao;
-      const outros = data.outros;
-      const total: number = sms + regulatorio + operacao + outros;
+  // function createPieData() {
+  //   const data = AreasDemandadasPorMes.at(AreasDemandadasPorMes.length - 1);
+  //   if (data) {
+  //     const sms = data.sms;
+  //     const regulatorio = data.regulatorio;
+  //     const operacao = data.operacao;
+  //     const outros = data.outros;
+  //     const total: number = sms + regulatorio + operacao + outros;
 
-      const dataTypes = {
-        smsData: [
-          {
-            name: "Undone",
-            value: total - sms,
-            color: "#9EE09E",
-          },
-          {
-            name: "Done",
-            value: sms,
-            color: "#9EE09E",
-          },
-        ],
+  //     const dataTypes = {
+  //       smsData: [
+  //         {
+  //           name: "Undone",
+  //           value: total - sms,
+  //           color: "#9EE09E",
+  //         },
+  //         {
+  //           name: "Done",
+  //           value: sms,
+  //           color: "#9EE09E",
+  //         },
+  //       ],
 
-        regulatorioData: [
-          {
-            name: "Undone",
-            value: total - regulatorio,
-            color: "#9EC1CF",
-          },
-          {
-            name: "Done",
-            value: regulatorio,
-            color: "#9EC1CF",
-          },
-        ],
+  //       regulatorioData: [
+  //         {
+  //           name: "Undone",
+  //           value: total - regulatorio,
+  //           color: "#9EC1CF",
+  //         },
+  //         {
+  //           name: "Done",
+  //           value: regulatorio,
+  //           color: "#9EC1CF",
+  //         },
+  //       ],
 
-        operacaoData: [
-          {
-            name: "Undone",
-            value: total - operacao,
-            color: "#FF6663",
-          },
-          {
-            name: "Done",
-            value: operacao,
-            color: "#FF6663",
-          },
-        ],
+  //       operacaoData: [
+  //         {
+  //           name: "Undone",
+  //           value: total - operacao,
+  //           color: "#FF6663",
+  //         },
+  //         {
+  //           name: "Done",
+  //           value: operacao,
+  //           color: "#FF6663",
+  //         },
+  //       ],
 
-        outrosData: [
-          {
-            name: "Undone",
-            value: total - outros,
-            color: "#FEB144",
-          },
-          {
-            name: "Done",
-            value: outros,
-            color: "#FEB144",
-          },
-        ],
-      };
+  //       outrosData: [
+  //         {
+  //           name: "Undone",
+  //           value: total - outros,
+  //           color: "#FEB144",
+  //         },
+  //         {
+  //           name: "Done",
+  //           value: outros,
+  //           color: "#FEB144",
+  //         },
+  //       ],
+  //     };
 
-      return dataTypes;
-    } else {
-      const dataTypes = {
-        smsData: [
-          {
-            name: "Undone",
-            value: 100,
-            color: "#9EE09E",
-          },
-          {
-            name: "Done",
-            value: 0,
-            color: "#9EE09E",
-          },
-        ],
+  //     return dataTypes;
+  //   } else {
+  //     const dataTypes = {
+  //       smsData: [
+  //         {
+  //           name: "Undone",
+  //           value: 100,
+  //           color: "#9EE09E",
+  //         },
+  //         {
+  //           name: "Done",
+  //           value: 0,
+  //           color: "#9EE09E",
+  //         },
+  //       ],
 
-        regulatorioData: [
-          {
-            name: "Undone",
-            value: 100,
-            color: "#9EC1CF",
-          },
-          {
-            name: "Done",
-            value: 0,
-            color: "#9EC1CF",
-          },
-        ],
+  //       regulatorioData: [
+  //         {
+  //           name: "Undone",
+  //           value: 100,
+  //           color: "#9EC1CF",
+  //         },
+  //         {
+  //           name: "Done",
+  //           value: 0,
+  //           color: "#9EC1CF",
+  //         },
+  //       ],
 
-        operacaoData: [
-          {
-            name: "Undone",
-            value: 100,
-            color: "#FF6663",
-          },
-          {
-            name: "Done",
-            value: 0,
-            color: "#FF6663",
-          },
-        ],
+  //       operacaoData: [
+  //         {
+  //           name: "Undone",
+  //           value: 100,
+  //           color: "#FF6663",
+  //         },
+  //         {
+  //           name: "Done",
+  //           value: 0,
+  //           color: "#FF6663",
+  //         },
+  //       ],
 
-        outrosData: [
-          {
-            name: "Undone",
-            value: 100,
-            color: "#FEB144",
-          },
-          {
-            name: "Done",
-            value: 0,
-            color: "#FEB144",
-          },
-        ],
-      };
+  //       outrosData: [
+  //         {
+  //           name: "Undone",
+  //           value: 100,
+  //           color: "#FEB144",
+  //         },
+  //         {
+  //           name: "Done",
+  //           value: 0,
+  //           color: "#FEB144",
+  //         },
+  //       ],
+  //     };
 
-      return dataTypes;
-    }
-  }
+  //     return dataTypes;
+  //   }
+  // }
 
-  function createBarChart() {
-    const values: {
-      mes: string;
-      SMS: number;
-      Regulatório: number;
-      Operação: number;
-      Outros: number;
-    }[] = [];
-    if (AreasDemandadasPorMes.length > 0) {
-      AreasDemandadasPorMes.forEach((mes) => {
-        const total = mes.sms + mes.regulatorio + mes.operacao + mes.outros;
-        const dataMock = {
-          mes: capitalizeFirstLetter(formatMonth(mes.month)),
-          SMS: +((mes.sms / total) * 100).toFixed(2),
-          Regulatório: +((mes.regulatorio / total) * 100).toFixed(2),
-          Operação: +((mes.operacao / total) * 100).toFixed(2),
-          Outros: +((mes.outros / total) * 100).toFixed(2),
-        };
-        values.push(dataMock);
-      });
-      return values;
-    } else {
-      const dataMock = {
-        mes: formatMonth().toUpperCase(),
-        SMS: 0,
-        Regulatório: 0,
-        Operação: 0,
-        Outros: 0,
-      };
-      values.push(dataMock);
-      return values;
-    }
-  }
+  // function createBarChart() {
+  //   const values: {
+  //     mes: string;
+  //     SMS: number;
+  //     Regulatório: number;
+  //     Operação: number;
+  //     Outros: number;
+  //   }[] = [];
+  //   if (AreasDemandadasPorMes.length > 0) {
+  //     AreasDemandadasPorMes.forEach((mes) => {
+  //       const total = mes.sms + mes.regulatorio + mes.operacao + mes.outros;
+  //       const dataMock = {
+  //         mes: capitalizeFirstLetter(formatMonth(mes.month)),
+  //         SMS: +((mes.sms / total) * 100).toFixed(2),
+  //         Regulatório: +((mes.regulatorio / total) * 100).toFixed(2),
+  //         Operação: +((mes.operacao / total) * 100).toFixed(2),
+  //         Outros: +((mes.outros / total) * 100).toFixed(2),
+  //       };
+  //       values.push(dataMock);
+  //     });
+  //     return values;
+  //   } else {
+  //     const dataMock = {
+  //       mes: formatMonth().toUpperCase(),
+  //       SMS: 0,
+  //       Regulatório: 0,
+  //       Operação: 0,
+  //       Outros: 0,
+  //     };
+  //     values.push(dataMock);
+  //     return values;
+  //   }
+  // }
 
-  const dataEntries = [
-    { name: "SMS", color: "#9EE09E" },
-    { name: "Regulatório", color: "#9EC1CF" },
-    { name: "Operação", color: "#FF6663" },
-    { name: "Outros", color: "#FEB144" },
-  ];
+  // const dataEntries = [
+  //   { name: "SMS", color: "#9EE09E" },
+  //   { name: "Regulatório", color: "#9EC1CF" },
+  //   { name: "Operação", color: "#FF6663" },
+  //   { name: "Outros", color: "#FEB144" },
+  // ];
 
   return (
     <Flex w={"100%"} align="center" justify="center" bg={"#EDF2F7"}>
@@ -366,6 +395,7 @@ export default function AreasDemandadasComponent({
           >
             Áreas Demandantes
           </Text>
+
           <Box display={"flex"} w={"100%"} justifyContent="space-between">
             <Box
               pt={6}
@@ -374,16 +404,19 @@ export default function AreasDemandadasComponent({
               ml={-10}
               mr={-20}
             >
-              <StackedBarChart
-                showY={false}
+              <Flex align={"center"} justify={"center"}>
+                <AreasDemandantesGraficos data={getJan() ? getJan() : []} />
+              </Flex>
+              {/* <StackedBarChart
+                showY={true}
                 sizeW={innerWidth >= 428 ? 350 : 120}
                 sizeH={180}
                 data={createBarChart()}
                 dataEntries={dataEntries}
                 barW={20}
-              />
+              /> */}
             </Box>
-            <Box w={200}>
+            {/* <Box w={200}>
               <Box
                 mb={1}
                 display="flex"
@@ -507,8 +540,8 @@ export default function AreasDemandadasComponent({
                     Outros
                   </Text>
                 </Box>
-              </Box>
-            </Box>
+              </Box> */}
+            {/* </Box> */}
           </Box>
         </Box>
       </Box>
