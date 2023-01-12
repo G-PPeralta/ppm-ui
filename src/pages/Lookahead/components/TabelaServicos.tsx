@@ -140,22 +140,22 @@ export function TabelaServicos(props: TableProps) {
               </Th>
             </Tr>
             <Tr backgroundColor={"#0047BB"} color="white">
-              {dias &&
-                dias.map(function (x) {
-                  return (
+              {dias
+                ? dias.map((dia: any, index: number) => (
                     <Th
+                      key={index}
                       color="white"
                       textAlign={"center"}
-                    >{`${x.diaLabel}`}</Th>
-                  );
-                })}
+                    >{`${dia.diaLabel}`}</Th>
+                  ))
+                : null}
             </Tr>
           </Thead>
           <Tbody>
             <Tr>
               {dias &&
                 servicosData &&
-                dias.map(function (x) {
+                dias.map((x: any, index: number) => {
                   const serr = servicosData.filter(
                     (f) => f.dia == x.data && f.tipo == "s"
                   );
@@ -163,7 +163,11 @@ export function TabelaServicos(props: TableProps) {
                     serr.length > 0 ? serr.map((x) => x.nome).join(" - ") : "";
 
                   return (
-                    <Td textAlign={"center"} fontWeight={"semibold"}>
+                    <Td
+                      textAlign={"center"}
+                      fontWeight={"semibold"}
+                      key={index}
+                    >
                       {sNames}
                     </Td>
                   );
@@ -179,10 +183,23 @@ export function TabelaServicos(props: TableProps) {
                     (x) => x.dia == dia.data && x.tipo == "s"
                   ).length;
                   if (key === 0) {
-                    return <Td textAlign={"center"}>{qtd}</Td>;
+                    return (
+                      <Td textAlign={"center"} key={key}>
+                        {qtd}
+                      </Td>
+                    );
                   } else if (key === dias.length - 1) {
-                    return <Td textAlign={"center"}>{qtd}</Td>;
-                  } else return <Td textAlign={"center"}>{qtd}</Td>;
+                    return (
+                      <Td textAlign={"center"} key={key}>
+                        {qtd}
+                      </Td>
+                    );
+                  } else
+                    return (
+                      <Td textAlign={"center"} key={key}>
+                        {qtd}
+                      </Td>
+                    );
                 })}
             </Tr>
           </Tfoot>

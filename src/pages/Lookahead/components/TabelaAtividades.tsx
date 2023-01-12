@@ -18,6 +18,8 @@ import {
 import { AtividadesFilho, FerramentaServico } from "interfaces/lookahead";
 import moment from "moment";
 
+import { Loading } from "components/Loading";
+
 interface TableProps {
   semana?: string;
   data: FerramentaServico[];
@@ -49,6 +51,7 @@ const headers = [
   { label: "tipo", key: "tipo" },
 ];
 export function TabelaAtividades(props: TableProps) {
+  const [isLoading, setIsLoading] = useState(true);
   const { semana, dataAtividades } = props;
   const [, setSem] = useState<string>();
   const [dias, setDias] = useState<DiasSemana[]>();
@@ -123,6 +126,18 @@ export function TabelaAtividades(props: TableProps) {
     getWeekDays();
   }, [semana]);
 
+  useEffect(() => {
+    if (dias && atividades && total) {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    }
+  }, []);
+
+  if (isLoading) {
+    <Loading />;
+  }
+
   return (
     <Flex>
       <TableContainer mt={4} mb={3} ml={1} width="100%" borderRadius={"10px"}>
@@ -167,9 +182,10 @@ export function TabelaAtividades(props: TableProps) {
                 BRT
               </Th>
               {dias &&
-                dias.map(function (x) {
+                dias.map(function (x, index) {
                   return (
                     <Th
+                      key={index}
                       color="white"
                       textAlign={"center"}
                       width="146px"
@@ -191,7 +207,7 @@ export function TabelaAtividades(props: TableProps) {
                     <Td textAlign={"center"} width="146px" height="56px">
                       {hora}
                     </Td>
-                    {dias.map(function (dia) {
+                    {dias.map(function (dia, index) {
                       const activityS = atividades.filter(
                         (x) =>
                           x.dataIni == dia.data &&
@@ -203,7 +219,12 @@ export function TabelaAtividades(props: TableProps) {
                       const nomeServ = arrayS ? arrayS.join(" ") : "";
 
                       return (
-                        <Td textAlign={"center"} width="146px" height="56px">
+                        <Td
+                          textAlign={"center"}
+                          width="146px"
+                          height="56px"
+                          key={index}
+                        >
                           <>
                             {nomeServ && (
                               <>
@@ -238,14 +259,23 @@ export function TabelaAtividades(props: TableProps) {
               <Td textAlign={"center"}>Total</Td>
               {dias &&
                 total &&
-                dias.map(function (dia) {
+                dias.map(function (dia, index) {
                   // return <Td>{`${x.diaLabel}`}</Td>;
                   const _total = total.filter(
                     (tot) => tot.data == dia.data
                   ).length;
                   if (dias[dias.length - 1] == dia) {
-                    return <Td textAlign={"center"}>{_total}</Td>;
-                  } else return <Td textAlign={"center"}>{_total}</Td>;
+                    return (
+                      <Td textAlign={"center"} key={index}>
+                        {_total}
+                      </Td>
+                    );
+                  } else
+                    return (
+                      <Td textAlign={"center"} key={index}>
+                        {_total}
+                      </Td>
+                    );
                 })}
             </Tr>
           </Tfoot>
