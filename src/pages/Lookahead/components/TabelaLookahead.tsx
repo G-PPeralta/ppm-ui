@@ -93,49 +93,47 @@ export function TabelaLookahead(props: TableProps) {
   const tableData = data
     .sort((a, b) => a.id - b.id)
     .slice(from, to)
-    .map((act) => (
-      <>
-        {/* <Tr key={key} backgroundColor={key % 2 == 1 ? "#F9F9F9" : "#FFF"}> */}
-        <Tr key={act.id}>
-          <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-            {/* {budget.filhos && (
+    .map((act, index) => (
+      // {/* <Tr key={key} backgroundColor={key % 2 == 1 ? "#F9F9F9" : "#FFF"}> */}
+      <Tr key={index}>
+        <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+          {/* {budget.filhos && (
             <Icon
               className="cursor"
               onClick={() => toggleAcordion(key)}
               as={FiArrowDown}
             ></Icon>
           )} */}
-            {act.id}
-          </Td>
-          {/* <Td textAlign={"center"} color={"#2D2926"}>
+          {act.id}
+        </Td>
+        {/* <Td textAlign={"center"} color={"#2D2926"}>
             <Link to={`/lookahead-detalhe/${act.id}`}>
               <Text color="blue">{act.nom_atividade}</Text>
             </Link>
           </Td> */}
-          <Td textAlign={"center"} color={"#2D2926"}>
-            <Link to={`/lookahead-detalhamento/${act.id}`}>
-              <Text color="blue"> {act.nom_atividade}</Text>
-            </Link>
-          </Td>
-          <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
-            {" "}
-            -{" "}
-          </Td>
-        </Tr>
+        <Td textAlign={"center"} color={"#2D2926"}>
+          <Link to={`/lookahead-detalhamento/${act.id}`}>
+            <Text color="blue"> {act.nom_atividade}</Text>
+          </Link>
+        </Td>
+        <Td fontWeight={"semibold"} textAlign={"center"} color={"#2D2926"}>
+          {" "}
+          -{" "}
+        </Td>
+      </Tr>
 
-        {/* {budget.filhos &&
-        budget.filhos.map((d) => (
-          <Tr className={"hide item-" + key} key={d.id}>
-            <Td>{d.item}</Td>
-            <Td>
-              <Link to={`/budget/detail/${d.id}`}>
-                <Text color="blue">{d.projeto.nome}</Text>
-              </Link>
-            </Td>
-            <Td>{d.descricao}</Td>
-          </Tr>
-        ))} */}
-      </>
+      // {/* {budget.filhos &&
+      // budget.filhos.map((d) => (
+      //   <Tr className={"hide item-" + key} key={d.id}>
+      //     <Td>{d.item}</Td>
+      //     <Td>
+      //       <Link to={`/budget/detail/${d.id}`}>
+      //         <Text color="blue">{d.projeto.nome}</Text>
+      //       </Link>
+      //     </Td>
+      //     <Td>{d.descricao}</Td>
+      //   </Tr>
+      // ))} */}
     ));
 
   return (
