@@ -19,7 +19,6 @@ import { TabelaLookahead } from "./components/TabelaLookahead";
 
 export function Lookahead() {
   const { getProjetos, loading } = useLookahead();
-  const [isPageLoading, setIsPageLoading] = useState(true);
   const [atividades, setAtividades] = useState<AtividadesLookahead[]>();
   const [filtered, setFiltered] = useState<AtividadesLookahead[]>();
   const [idProject, setIdProject] = useState<string>("0");
@@ -70,17 +69,9 @@ export function Lookahead() {
 
   // console.log({ filtered, atividades });
 
-  useEffect(() => {
-    if (loading === true) {
-      setTimeout(() => {
-        setIsPageLoading(false);
-      }, 3000);
-    }
-  }, [loading]);
-
   return (
     <Sidebar>
-      {!isPageLoading ? (
+      {!loading ? (
         <ContainerPagina>
           <Flex direction="column" fontFamily="Mulish">
             <Flex align={"flex-end"}>

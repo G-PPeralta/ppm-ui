@@ -18,8 +18,6 @@ import {
 import { AtividadesFilho, FerramentaServico } from "interfaces/lookahead";
 import moment from "moment";
 
-import { Loading } from "components/Loading";
-
 interface TableProps {
   semana?: string;
   data: FerramentaServico[];
@@ -51,7 +49,6 @@ const headers = [
   { label: "tipo", key: "tipo" },
 ];
 export function TabelaAtividades(props: TableProps) {
-  const [isLoading, setIsLoading] = useState(true);
   const { semana, dataAtividades } = props;
   const [, setSem] = useState<string>();
   const [dias, setDias] = useState<DiasSemana[]>();
@@ -126,18 +123,6 @@ export function TabelaAtividades(props: TableProps) {
     setSem(semana);
     getWeekDays();
   }, [semana]);
-
-  useEffect(() => {
-    if (dias && atividades && total) {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
-    }
-  }, []);
-
-  if (isLoading) {
-    <Loading />;
-  }
 
   return (
     <Flex>
