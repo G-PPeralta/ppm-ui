@@ -11,15 +11,12 @@ const data2 = [
   },
 ];
 
-console.log(data2);
-
-export function AreasDemandantesGraficos(data: any) {
-  console.log(data.length);
+export function AreasDemandantesGrafico(data: any) {
   return (
     <BarChart
       width={500}
       height={300}
-      data={data.length > 0 ? data : data2}
+      data={data.data || data2}
       margin={{
         top: 20,
         right: 30,
@@ -52,6 +49,7 @@ export function AreasDemandantesGraficos(data: any) {
           fontWeight: 400,
         }}
       />
+
       <Bar dataKey="OPE" stackId="a" fill="#FF6663" barSize={20} />
       <Bar dataKey="Reservatórios" stackId="a" fill="#9EC1CF" barSize={20} />
       <Bar

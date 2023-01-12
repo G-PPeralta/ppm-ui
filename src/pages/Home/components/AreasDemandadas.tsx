@@ -14,9 +14,11 @@ import { AreasDemandadasPorMes } from "interfaces/Services";
 
 // import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 
+import { Loading } from "components/Loading";
+
 import { getAreasDemandadas } from "services/get/Dashboard";
 
-import { AreasDemandantesGraficos } from "./GraficoAreas";
+import { AreasDemandantesGrafico } from "./GraficoAreas";
 
 type Props = {
   AreasDemandadasPorMes: AreasDemandadasPorMes[];
@@ -28,36 +30,71 @@ export default function AreasDemandadasComponent({
   const innerWidth = window.innerWidth;
 
   const [areasDemandadas, setAreasDemandadas] = useState<any[]>([] as any[]);
+  const [loading, setLoading] = useState(true);
+  // const [array, setArray] = useState<any[]>([] as any[]);
   async function handleGetAreasDemandadas() {
-    const reqGet = await getAreasDemandadas();
-    const dataReq: any[] = reqGet.data;
-    setAreasDemandadas(dataReq);
+    try {
+      const reqGet = await getAreasDemandadas();
+      const dataReq: any[] = reqGet.data.reduce((acc: any, curr: any) => {
+        const { solicitante, data, quantia } = curr;
+
+        const index = acc.findIndex((item: any) => item.data === data);
+
+        if (index === -1) {
+          return [
+            ...acc,
+            {
+              data,
+              [solicitante[0].toUpperCase() + solicitante.substring(1)]:
+                quantia,
+            },
+          ];
+        }
+
+        return [
+          ...acc.slice(0, index),
+          {
+            ...acc[index],
+            [solicitante[0].toUpperCase() + solicitante.substring(1)]: quantia,
+          },
+          ...acc.slice(index + 1),
+        ];
+      }, []);
+      setAreasDemandadas(dataReq);
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
   }
 
-  const getJan = () => {
-    const getOPE =
-      areasDemandadas.length > 0 &&
-      areasDemandadas.filter((ope) => ope.solicitante === "OPE")[0].quantia;
-    const getReservatorio =
-      areasDemandadas.length > 0 &&
-      areasDemandadas.filter((ope) => ope.solicitante === "Reservatórios")[0]
-        .quantia;
-    const getTeste =
-      areasDemandadas.length > 0 &&
-      areasDemandadas.filter((ope) => ope.solicitante === "teste")[0].quantia;
+  // const getJan = () => {
+  //   const data2 = areasDemandadas.reduce((acc: any, curr: any) => {
+  //     const { solicitante, data, quantia } = curr;
 
-    const finalObject = [
-      {
-        data: areasDemandadas.length > 0 && areasDemandadas[0].data,
-        OPE: getOPE,
-        Reservatório: getReservatorio,
-        Teste: getTeste,
-      },
-    ];
-    return finalObject;
-  };
+  //     const index = acc.findIndex((item: any) => item.data === data);
 
-  console.log(getJan());
+  //     if (index === -1) {
+  //       return [
+  //         ...acc,
+  //         {
+  //           data,
+  //           [solicitante]: quantia,
+  //         },
+  //       ];
+  //     }
+
+  //     return [
+  //       ...acc.slice(0, index),
+  //       {
+  //         ...acc[index],
+  //         [solicitante]: quantia,
+  //       },
+  //       ...acc.slice(index + 1),
+  //     ];
+  //   }, []);
+  //   // setArray(data2);
+  //   return { data2 };
+  // };
 
   useEffect(() => {
     handleGetAreasDemandadas();
@@ -362,7 +399,9 @@ export default function AreasDemandadasComponent({
   //   { name: "Operação", color: "#FF6663" },
   //   { name: "Outros", color: "#FEB144" },
   // ];
-
+  if (loading) {
+    <Loading />;
+  }
   return (
     <Flex w={"100%"} align="center" justify="center" bg={"#EDF2F7"}>
       <Box
@@ -405,7 +444,7 @@ export default function AreasDemandadasComponent({
               mr={-20}
             >
               <Flex align={"center"} justify={"center"}>
-                <AreasDemandantesGraficos data={getJan() ? getJan() : []} />
+                <AreasDemandantesGrafico data={areasDemandadas || []} />
               </Flex>
               {/* <StackedBarChart
                 showY={true}
