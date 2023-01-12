@@ -76,7 +76,8 @@ export function TabelaAtividades(props: TableProps) {
     for (let i = 0; i < dias.length; i++) {
       const dia = dias[i];
 
-      const realDay = dataBr.format(new Date(`${mes}/${dia}/${ano}`));
+      // const realDay = dataBr.format(new Date(`${mes}/${dia}/${ano}`));
+      const realDay = `${dia}/${mes}/${ano}`;
       const diaSemana: DiasSemana = new DiasSemana();
       const _dia = realDay.split("/")[0];
       diaSemana.label = _dia + "/" + realDay.split("/")[1];
