@@ -56,6 +56,10 @@ export function TabelaAtividades(props: TableProps) {
   const [atividades, setAtividades] = useState<AtividadeDiaHora[]>();
   const [total, setTotal] = useState<Totais[]>();
 
+  function formataMes(mes: number) {
+    return mes < 10 ? `0${mes}` : mes;
+  }
+
   function getWeekDays() {
     const dataInicial = semana && semana.split("-")[0].trim();
     const weekDays: DiasSemana[] = [];
@@ -74,7 +78,8 @@ export function TabelaAtividades(props: TableProps) {
       const dia = dias[i];
 
       // const realDay = dataBr.format(new Date(`${mes}/${dia}/${ano}`));
-      const realDay = `${dia}/${mes}/${ano}`;
+
+      const realDay = `${dia}/${formataMes(mes)}/${ano}`;
       const diaSemana: DiasSemana = new DiasSemana();
       const _dia = realDay.split("/")[0];
       diaSemana.label = _dia + "/" + realDay.split("/")[1];

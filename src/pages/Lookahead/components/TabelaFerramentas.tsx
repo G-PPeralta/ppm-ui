@@ -43,6 +43,10 @@ const headers = [
   { label: "tipo", key: "tipo" },
 ];
 
+function formataMes(mes: number) {
+  return mes < 10 ? `0${mes}` : mes;
+}
+
 export function TabelaFerramentas(props: TableProps) {
   const { semana, data } = props;
   const [dias, setDias] = useState<DiasSemana[]>();
@@ -64,7 +68,7 @@ export function TabelaFerramentas(props: TableProps) {
       const dia = _dias[i];
 
       // const realDay = dataBr.format(new Date(`${mes}/${dia}/${ano}`));
-      const realDay = `${dia}/${mes}/${ano}`;
+      const realDay = `${dia}/${formataMes(mes)}/${ano}`;
       const diaSemana: DiasSemana = new DiasSemana();
       const _dia = realDay.split("/")[0];
       diaSemana.diaLabel = _dia + "/" + realDay.split("/")[1];
