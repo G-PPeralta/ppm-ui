@@ -71,14 +71,20 @@ export default function AreasDemandadasComponent({
     }
   }
 
+  const getTotalAreas =
+    reqGet &&
+    reqGet
+      .map((i: any) => Number(i.quantia))
+      .reduce((partialSum: number, a: number) => partialSum + a, 0);
+  console.log(getTotalAreas);
+
   const data =
     reqGet.length > 0 &&
     reqGet.map((infoArea) => ({
       name: infoArea.solicitante,
-      value: infoArea.quantia,
+      value: (infoArea.quantia / getTotalAreas) * 100,
     }));
 
-  console.log(reqGet.map((x) => x.solicitante));
   console.log(data);
 
   // const getJan = () => {
