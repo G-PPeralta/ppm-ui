@@ -37,7 +37,7 @@ export default function AreasDemandadasComponent({
   async function handleGetAreasDemandadas() {
     try {
       const reqGet = await getAreasDemandadas();
-      console.log(reqGet.data);
+
       setReqGet(reqGet.data);
       const dataReq: any[] = reqGet.data.reduce((acc: any, curr: any) => {
         const { solicitante, data, quantia } = curr;
@@ -76,7 +76,7 @@ export default function AreasDemandadasComponent({
     reqGet
       .map((i: any) => Number(i.quantia))
       .reduce((partialSum: number, a: number) => partialSum + a, 0);
-  console.log(getTotalAreas);
+  // console.log(getTotalAreas);
 
   const data =
     reqGet.length > 0 &&
@@ -85,7 +85,7 @@ export default function AreasDemandadasComponent({
       value: (infoArea.quantia / getTotalAreas) * 100,
     }));
 
-  console.log(data);
+  // console.log(data);
 
   // const getJan = () => {
   //   const data2 = areasDemandadas.reduce((acc: any, curr: any) => {
@@ -468,7 +468,7 @@ export default function AreasDemandadasComponent({
                   <AreasDemandantesGrafico data={areasDemandadas || []} />
                 </Flex>
                 <Flex mt={-20} ml={-19}>
-                  <PercentPieChart />
+                  <PercentPieChart data={data || []} />
                 </Flex>
               </Flex>
               {/* <StackedBarChart
