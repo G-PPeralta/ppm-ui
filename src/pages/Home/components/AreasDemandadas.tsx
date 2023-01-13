@@ -31,14 +31,14 @@ export default function AreasDemandadasComponent({
   const innerWidth = window.innerWidth;
 
   const [areasDemandadas, setAreasDemandadas] = useState<any[]>([] as any[]);
-  // const [reqGet, setReqGet] = useState<any[]>([] as any[]);
+  const [reqGet, setReqGet] = useState<any[]>([] as any[]);
   const [loading, setLoading] = useState(true);
   // const [array, setArray] = useState<any[]>([] as any[]);
   async function handleGetAreasDemandadas() {
     try {
       const reqGet = await getAreasDemandadas();
-      console.log(reqGet);
-      // setReqGet(reqGet);
+      console.log(reqGet.data);
+      setReqGet(reqGet.data);
       const dataReq: any[] = reqGet.data.reduce((acc: any, curr: any) => {
         const { solicitante, data, quantia } = curr;
 
@@ -73,12 +73,12 @@ export default function AreasDemandadasComponent({
 
   const data =
     reqGet.length > 0 &&
-    areasDemandadas.map((x) => ({
-      name: x.solicitante,
-      value: x.quantia,
+    reqGet.map((infoArea) => ({
+      name: infoArea.solicitante,
+      value: infoArea.quantia,
     }));
 
-  console.log(areasDemandadas);
+  console.log(reqGet.map((x) => x.solicitante));
   console.log(data);
 
   // const getJan = () => {
