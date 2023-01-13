@@ -31,11 +31,14 @@ export default function AreasDemandadasComponent({
   const innerWidth = window.innerWidth;
 
   const [areasDemandadas, setAreasDemandadas] = useState<any[]>([] as any[]);
+  // const [reqGet, setReqGet] = useState<any[]>([] as any[]);
   const [loading, setLoading] = useState(true);
   // const [array, setArray] = useState<any[]>([] as any[]);
   async function handleGetAreasDemandadas() {
     try {
       const reqGet = await getAreasDemandadas();
+      console.log(reqGet);
+      // setReqGet(reqGet);
       const dataReq: any[] = reqGet.data.reduce((acc: any, curr: any) => {
         const { solicitante, data, quantia } = curr;
 
@@ -67,6 +70,16 @@ export default function AreasDemandadasComponent({
       setLoading(false);
     }
   }
+
+  const data =
+    reqGet.length > 0 &&
+    areasDemandadas.map((x) => ({
+      name: x.solicitante,
+      value: x.quantia,
+    }));
+
+  console.log(areasDemandadas);
+  console.log(data);
 
   // const getJan = () => {
   //   const data2 = areasDemandadas.reduce((acc: any, curr: any) => {
@@ -448,7 +461,9 @@ export default function AreasDemandadasComponent({
                 <Flex align={"center"} justify={"center"}>
                   <AreasDemandantesGrafico data={areasDemandadas || []} />
                 </Flex>
-                <PercentPieChart />
+                <Flex mt={-20} ml={-19}>
+                  <PercentPieChart />
+                </Flex>
               </Flex>
               {/* <StackedBarChart
                 showY={true}

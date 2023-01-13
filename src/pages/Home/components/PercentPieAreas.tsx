@@ -16,7 +16,7 @@ export default class PercentPieChart extends PureComponent {
 
   render() {
     return (
-      <PieChart width={200} height={400}>
+      <PieChart width={220} height={300}>
         <Pie
           data={data}
           cx={120}

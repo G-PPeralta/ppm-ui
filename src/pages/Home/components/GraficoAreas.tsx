@@ -43,8 +43,8 @@ export function AreasDemandantesGrafico(data: any) {
         verticalAlign="middle"
         align="right"
         wrapperStyle={{
-          marginRight: "-25px",
-          fontSize: "16px",
+          marginRight: "-10px",
+          fontSize: "13px",
           fontFamily: "Mulish",
           fontWeight: 400,
         }}
