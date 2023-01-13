@@ -14,7 +14,7 @@ const data2 = [
 export function AreasDemandantesGrafico(data: any) {
   return (
     <BarChart
-      width={500}
+      width={300}
       height={300}
       data={data.data || data2}
       margin={{

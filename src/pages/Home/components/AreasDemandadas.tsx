@@ -19,6 +19,7 @@ import { Loading } from "components/Loading";
 import { getAreasDemandadas } from "services/get/Dashboard";
 
 import { AreasDemandantesGrafico } from "./GraficoAreas";
+import PercentPieChart from "./PercentPieAreas";
 
 type Props = {
   AreasDemandadasPorMes: AreasDemandadasPorMes[];
@@ -443,8 +444,11 @@ export default function AreasDemandadasComponent({
               ml={-10}
               mr={-20}
             >
-              <Flex align={"center"} justify={"center"}>
-                <AreasDemandantesGrafico data={areasDemandadas || []} />
+              <Flex>
+                <Flex align={"center"} justify={"center"}>
+                  <AreasDemandantesGrafico data={areasDemandadas || []} />
+                </Flex>
+                <PercentPieChart />
               </Flex>
               {/* <StackedBarChart
                 showY={true}
