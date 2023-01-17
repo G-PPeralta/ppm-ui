@@ -1,3 +1,7 @@
+// CRIADO EM: 08/10/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE PARA VISUALIZAR E PAGINAR TABELAS COM BASE NO FILTRO DE QUANTIDADE DE ITENS APLICADOS
+
 import { useEffect, useState } from "react";
 import {
   FiChevronLeft,
@@ -90,7 +94,6 @@ function PaginacaoTabela({ data, fromTo }: Props) {
             w={"120px"}
             onChange={(e) => changePerPage(+e.target.value)}
           >
-            {/* <option value="5">5</option> */}
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="50">50</option>

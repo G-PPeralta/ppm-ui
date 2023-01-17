@@ -1,3 +1,7 @@
+// CRIADO EM: 14/10/2022
+// AUTOR: GEOVANA AUGUSTA
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE DATEPICKER DESABILITADO, PARA USO EM TELAS DE CONSULTA
+
 import { forwardRef, useEffect, useState } from "react";
 import ReactDatePicker, { registerLocale } from "react-datepicker";
 

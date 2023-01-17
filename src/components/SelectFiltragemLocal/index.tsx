@@ -1,3 +1,7 @@
+// CRIADO EM: 10/01/2023
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE SELECT COM OPÇÃO DE FILTRAGEM DE DADOS COM BASE NA DIGITAÇÃO DO USUÁRIO
+
 import Select from "react-select";
 
 import { Flex, FormControl, Text } from "@chakra-ui/react";

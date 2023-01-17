@@ -1,3 +1,7 @@
+// CRIADO EM: 24/10/2022
+// AUTOR: GEOVANA AUGUSTA
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE SELECT GENERICO SEM A FUNCIONALIDADE DE BUSCA
+
 import Select from "react-select";
 
 import { Flex, FormControl, Text } from "@chakra-ui/react";
@@ -9,16 +13,9 @@ function SelectGenerico({
   propName,
   options,
   value,
-  polo,
-  // idCampanha,
   required,
   width,
 }: any) {
-  // const getNomeCampanha = (idCampanha: number) => {
-  //   const campanha = options.find((option: any) => option.value === idCampanha);
-  //   return campanha.label;
-  // };
-
   const defaultValue = {
     value: undefined,
     label: undefined,
@@ -99,15 +96,12 @@ function SelectGenerico({
           name={propName}
           placeholder={"Selecione"}
           options={options}
-          // onChange={(e) => polo(e.target.value)}
           defaultValue={"Selecione"}
           value={
             JSON.stringify(value) === JSON.stringify(defaultValue)
               ? "Selecione"
               : value
           }
-          isSearchable
-          // isDisabled={!!idCampanha}
         />
       </FormControl>
     </>

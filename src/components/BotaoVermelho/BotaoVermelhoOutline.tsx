@@ -1,3 +1,7 @@
+// CRIADO EM: 03/10/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE PADRONIZADO PARA BOTÃO NA COR VERMELHA COM VARIANT OUTLINE
+
 import { Button, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 

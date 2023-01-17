@@ -1,3 +1,7 @@
+// CRIADO EM: 10/06/2022
+// AUTOR: ALEXANDER BRITO
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE COM ITEM DO MENU LATERAL DO SISTEMA
+
 import { ReactNode } from "react";
 import { IconType } from "react-icons";
 import { useNavigate } from "react-router-dom";

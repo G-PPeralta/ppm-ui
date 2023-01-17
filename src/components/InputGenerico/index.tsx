@@ -1,3 +1,7 @@
+// CRIADO EM: 14/10/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE PADRÃO PARA INPUT DO SISTEMA, PARA PADRONIZAR A FORMATAÇÃO E O USO DO INPUT
+
 import { useState, useEffect } from "react";
 
 import { Flex, Input, InputLeftAddon, Text } from "@chakra-ui/react";
@@ -44,7 +48,6 @@ function InputGenerico({
       propName,
       value.toString().replace(/[^0-9]/g, "")
     );
-    // setValorFormatado(formatReal(getMoney(value.toString() || "")));
     setValorFormatado(formatRealInput(value || ""));
   };
 
@@ -82,10 +85,8 @@ function InputGenerico({
             name={propName}
             value={valorFormatado}
             maxLength={maxLength}
-            // onChange={registerForm.handleChange}
             onChange={(event: any) => changeValueFormated(event.target.value)}
             w={"100%"}
-            // onKeyUp={(event) => maskMoney(event)}
           />
           {registerForm.touched[propName] && registerForm.errors[propName] && (
             <TextError>{registerForm.errors[propName]}</TextError>

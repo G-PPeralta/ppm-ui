@@ -1,3 +1,7 @@
+// CRIADO EM: 14/10/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE PADRÃO PARA DATEPICKER DO SISTEMA, PARA PADRONIZAR A FORMATAÇÃO E O USO DO DATEPICKER
+
 import { forwardRef, useEffect, useState } from "react";
 import ReactDatePicker, { registerLocale } from "react-datepicker";
 

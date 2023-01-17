@@ -1,3 +1,7 @@
+// CRIADO EM: 10/10/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE PADRONIZADO PARA BOTÃO COM VISUAL MAIS LARGO NA COR VERMELHA COM VARIANT PRIMARY
+
 import { Button, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 

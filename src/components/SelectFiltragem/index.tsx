@@ -1,3 +1,7 @@
+// CRIADO EM: 28/09/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE SELECT COM OPÇÃO DE FILTRAGEM DE DADOS COM BASE NA DIGITAÇÃO DO USUÁRIO
+
 import Select from "react-select";
 
 import { Flex, FormControl, Text } from "@chakra-ui/react";
@@ -123,9 +127,6 @@ function SelectFiltragem({
           isSearchable
           isDisabled={isDisabled}
         />
-        {/* {registerForm.touched[propName] && registerForm.errors[propName] && (
-          <TextError>{registerForm.errors[propName]}</TextError>
-        )} */}
       </FormControl>
     </>
   );

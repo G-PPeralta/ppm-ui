@@ -1,3 +1,7 @@
+// CRIADO EM: 20/06/2022
+// AUTOR: ALEXANDER BRITO
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE DE CARD DE PERFIL DO USUÁRIO
+
 import { useNavigate } from "react-router-dom";
 
 import {

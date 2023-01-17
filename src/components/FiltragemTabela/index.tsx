@@ -1,3 +1,7 @@
+// CRIADO EM: 21/10/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE PADRÃO PARA FILTRAGEM DE TABELAS, PARA PADRONIZAR A FORMATAÇÃO E O USO DO FILTRO DE TABELAS
+
 import { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 
@@ -5,14 +9,11 @@ import { Button, Flex, Input, Text } from "@chakra-ui/react";
 
 interface Props {
   nomeLabel: string;
-  nomeLabelData?: string;
   dadosTabela: any;
   setTabelaFiltrada: React.Dispatch<React.SetStateAction<any>>;
   placeholder: string;
   propName: string;
-  propNameData?: string;
-  filtrarData?: boolean;
-  registerForm: any;
+  registerForm?: any;
 }
 
 function FiltragemTabela({
@@ -21,10 +22,6 @@ function FiltragemTabela({
   setTabelaFiltrada,
   placeholder,
   propName,
-  filtrarData,
-  nomeLabelData,
-  registerForm,
-  propNameData,
 }: Props) {
   const [search, setSearch] = useState<string>("");
 
@@ -35,14 +32,7 @@ function FiltragemTabela({
         (dado: any) =>
           dado[propName].toLowerCase().indexOf(search.toLowerCase()) > -1
       );
-    }
-    // if (search && search.length > 1 && filtrarData) {
-    //   filtered = dadosTabela?.filter(
-    //     (dado: any) =>
-    //       dado[propName].toLowerCase().indexOf(search.toLowerCase()) > -1
-    //   );
-    // }
-    else {
+    } else {
       filtered = dadosTabela;
     }
 
