@@ -1,3 +1,7 @@
+// CRIADO EM: 10/06/2022
+// AUTOR: FELIPE MATEUS
+// DESCRIÇÃO DO ARQUIVO: BODY PARA TABELA VAZIA
+
 import { Tbody, Td, Tr } from "@chakra-ui/react";
 
 export default function Empty() {

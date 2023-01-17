@@ -1,3 +1,7 @@
+// CRIADO EM: 11/11/2022
+// AUTOR: MAGNO FERREIRA
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE COM GRÁFICO DE CURVA S
+
 import { FiCircle } from "react-icons/fi";
 
 import { Flex, Heading } from "@chakra-ui/react";

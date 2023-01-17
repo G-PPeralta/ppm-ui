@@ -1,3 +1,7 @@
+// CRIADO EM: 10/01/2023
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE COM UM LOADING PADRÃO PARA O SISTEMA
+
 import { Flex } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 

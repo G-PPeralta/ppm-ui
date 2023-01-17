@@ -132,12 +132,10 @@ function EditarAtividadeTabLicoesAprendidas({
         <FiltragemTabela
           dadosTabela={registerForm.values.licoes_aprendidas}
           nomeLabel={"Lição Aprendida"}
-          nomeLabelData={"Data"}
           placeholder={"Digite a lição aprendida"}
           setTabelaFiltrada={setTabelaFiltrada}
           propName={"licao_aprendida"}
           registerForm={registerForm}
-          filtrarData={true}
         />
         <ModalAdicionarLicaoAprendida
           id={registerForm.values.id_atividade}

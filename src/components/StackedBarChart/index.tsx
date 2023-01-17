@@ -1,3 +1,7 @@
+// CRIADO EM: 25/07/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE DE GRAFICO DE BARRAS EMPILHADAS
+
 import { StackedBarChartProps } from "interfaces/Components";
 import {
   BarChart,
@@ -10,7 +14,6 @@ import {
 
 export default function StackedBarChartProjetos({
   sizeW,
-  sizeH,
   barW,
   showY,
   data,

@@ -1,5 +1,3 @@
-// import { BsPlus } from "react-icons/bs";
-
 import {
   Button,
   Flex,
@@ -109,7 +107,6 @@ function ModalAdicionarLicaoAprendida({ id, refreshState }: Props) {
                 value={registerForm.values.acoes_e_recomendacoes}
                 required={true}
                 placeholder={"Digite a ação e recomendação"}
-                maxLength={50}
               />
             </Flex>
           </ModalBody>

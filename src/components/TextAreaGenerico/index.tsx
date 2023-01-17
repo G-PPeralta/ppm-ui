@@ -1,7 +1,10 @@
+// CRIADO EM: 14/10/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE DE TEXTAREA GENÉRICO
+
 import { Flex, Textarea, Text } from "@chakra-ui/react";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
-import { TextError } from "components/TextError";
 
 interface Props {
   registerForm: any;
@@ -11,7 +14,6 @@ interface Props {
   required?: any;
   placeholder?: any;
   minHeight?: string;
-  maxLength?: number;
 }
 
 function TextAreaGenerico({
@@ -22,7 +24,6 @@ function TextAreaGenerico({
   required,
   placeholder,
   minHeight,
-  maxLength,
 }: Props) {
   return (
     <Flex direction={"column"} w={"100%"} flex={1}>
@@ -45,9 +46,6 @@ function TextAreaGenerico({
         fontWeight={"400"}
         minH={minHeight}
       />
-      {registerForm.touched[propName] && registerForm.errors[propName] && (
-        <TextError>{registerForm.errors[propName]}</TextError>
-      )}
     </Flex>
   );
 }

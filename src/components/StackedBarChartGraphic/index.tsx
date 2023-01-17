@@ -1,3 +1,7 @@
+// CRIADO EM: 09/10/2022
+// AUTOR: GEOVANA AUGUSTA
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE PARA EXIBIR GRÁFICO DE BARRAS
+
 import { StackedBarChartProps } from "interfaces/Components";
 import {
   BarChart,

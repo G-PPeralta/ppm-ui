@@ -1,3 +1,7 @@
+// CRIADO EM: 10/01/2023
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE COM IMAGEM DE ERRO PADRÃO PARA O SISTEMA QUANDO HOUVER ALGUM ERRO NA REQUISIÇÃO
+
 import { useNavigate } from "react-router";
 
 import { Button, Flex, Heading, Image } from "@chakra-ui/react";

@@ -1,3 +1,7 @@
+// CRIADO EM: 10/06/2022
+// AUTOR: ALEXANDER BRITO
+// DESCRIÇÃO DO ARQUIVO: LABELS COM TEXTO E ÍCONE DE CADA ITEM DO MENU LATERAL
+
 import { useEffect } from "react";
 import { IconType } from "react-icons";
 import { AiOutlineBarChart } from "react-icons/ai";
@@ -13,7 +17,6 @@ import {
   FiHome,
   FiBarChart,
   FiActivity,
-  //  FiFile,
   FiTrash2,
   FiSettings,
 } from "react-icons/fi";
@@ -27,13 +30,6 @@ interface LinkItemProps {
   link?: string;
   children: any[];
 }
-
-// type Children = {
-//   name: string;
-//   icon: IconType;
-//   link: string;
-// };
-
 interface ChildrenI {
   name: string;
   icon: IconType;
@@ -187,31 +183,3 @@ function environmentURL(user: any): LinkItemProps[] {
 }
 
 export const LinkItems: Array<LinkItemProps> = environmentURL(getArea());
-
-// export const LinkItemss: Array<LinkItemProps> = [
-//   {
-//     name: "Projetos",
-//     icon: FiHome,
-//     children: childrenCarteiradeProjetos.sort((a: Children, b: Children) =>
-//       a.name.localeCompare(b.name)
-//     ),
-//   },
-
-//   {
-//     name: "Intervenções",
-//     icon: FiBarChart,
-//     children: childrenInfograficos.sort((a: Children, b: Children) =>
-//       a.name.localeCompare(b.name)
-//     ),
-//   },
-
-//   {
-//     name: "Configurações",
-//     icon: FiSettings,
-//     children: childrenConfiguracoes.sort((a: Children, b: Children) =>
-//       a.name.localeCompare(b.name)
-//     ),
-//   },
-// ];
-
-// console.log("Como era", LinkItemss);

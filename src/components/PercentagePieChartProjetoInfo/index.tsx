@@ -1,6 +1,6 @@
-// import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
-
-// import { Box, Text } from "@chakra-ui/react";
+// CRIADO EM: 23/09/2022
+// AUTOR: GABRIEL PERALTA
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE PARA EXIBIR O GRÁFICO DE PIZZA COM A PORCENTAGEM DE PROJETOS POR STATUS
 
 import { Box, Text } from "@chakra-ui/react";
 import { PieChart, Pie, Cell } from "recharts";
@@ -33,7 +33,7 @@ export function PercentagePieChartProjetoInfo({ data }: Props) {
           innerRadius={60 / 2 - 5}
           outerRadius={60 / 2}
         >
-          {data.map((entry, index) => (
+          {data.map((_entry, index) => (
             <Cell key={`cell-${index}`} fill={data[index].color} />
           ))}
         </Pie>
@@ -46,11 +46,6 @@ export function PercentagePieChartProjetoInfo({ data }: Props) {
         sx={{ position: "absolute" }}
         justifyContent="center"
       >
-        {/* {upDown ? (
-          <AiOutlineCaretUp color="#93E01B" size={10} />
-        ) : (
-          <AiOutlineCaretDown color="#F94144" size={10} />
-        )} */}
         <Text sx={{ fontSize: 15, fontWeight: 700 }} color={data[1].color}>
           {data[1].value + "%"}
         </Text>
