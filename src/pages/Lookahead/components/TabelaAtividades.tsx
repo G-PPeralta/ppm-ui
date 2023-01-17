@@ -50,11 +50,18 @@ const headers = [
 ];
 export function TabelaAtividades(props: TableProps) {
   const { semana, dataAtividades } = props;
+
   const [, setSem] = useState<string>();
   const [dias, setDias] = useState<DiasSemana[]>();
   const [horas, setHoras] = useState<string[]>();
   const [atividades, setAtividades] = useState<AtividadeDiaHora[]>();
   const [total, setTotal] = useState<Totais[]>();
+
+  // console.log("atividades: ", atividades);
+
+  function formataMes(mes: number) {
+    return mes < 10 ? `0${mes}` : mes;
+  }
 
   function getWeekDays() {
     const dataInicial = semana && semana.split("-")[0].trim();
@@ -73,7 +80,9 @@ export function TabelaAtividades(props: TableProps) {
     for (let i = 0; i < dias.length; i++) {
       const dia = dias[i];
 
-      const realDay = dataBr.format(new Date(`${mes}/${dia}/${ano}`));
+      // const realDay = dataBr.format(new Date(`${mes}/${dia}/${ano}`));
+
+      const realDay = `${dia}/${formataMes(mes)}/${ano}`;
       const diaSemana: DiasSemana = new DiasSemana();
       const _dia = realDay.split("/")[0];
       diaSemana.label = _dia + "/" + realDay.split("/")[1];
@@ -123,6 +132,11 @@ export function TabelaAtividades(props: TableProps) {
     getWeekDays();
   }, [semana]);
 
+  // console.log("dias", dias);
+  // console.log("horas", horas);
+  // console.log("semana", semana);
+  // console.log("total", total);
+
   return (
     <Flex>
       <TableContainer mt={4} mb={3} ml={1} width="100%" borderRadius={"10px"}>
@@ -167,9 +181,10 @@ export function TabelaAtividades(props: TableProps) {
                 BRT
               </Th>
               {dias &&
-                dias.map(function (x) {
+                dias.map(function (x, index) {
                   return (
                     <Th
+                      key={index}
                       color="white"
                       textAlign={"center"}
                       width="146px"
@@ -191,7 +206,7 @@ export function TabelaAtividades(props: TableProps) {
                     <Td textAlign={"center"} width="146px" height="56px">
                       {hora}
                     </Td>
-                    {dias.map(function (dia) {
+                    {dias.map(function (dia, index) {
                       const activityS = atividades.filter(
                         (x) =>
                           x.dataIni == dia.data &&
@@ -203,7 +218,12 @@ export function TabelaAtividades(props: TableProps) {
                       const nomeServ = arrayS ? arrayS.join(" ") : "";
 
                       return (
-                        <Td textAlign={"center"} width="146px" height="56px">
+                        <Td
+                          textAlign={"center"}
+                          width="146px"
+                          height="56px"
+                          key={index}
+                        >
                           <>
                             {nomeServ && (
                               <>
@@ -238,14 +258,23 @@ export function TabelaAtividades(props: TableProps) {
               <Td textAlign={"center"}>Total</Td>
               {dias &&
                 total &&
-                dias.map(function (dia) {
+                dias.map(function (dia, index) {
                   // return <Td>{`${x.diaLabel}`}</Td>;
                   const _total = total.filter(
                     (tot) => tot.data == dia.data
                   ).length;
                   if (dias[dias.length - 1] == dia) {
-                    return <Td textAlign={"center"}>{_total}</Td>;
-                  } else return <Td textAlign={"center"}>{_total}</Td>;
+                    return (
+                      <Td textAlign={"center"} key={index}>
+                        {_total}
+                      </Td>
+                    );
+                  } else
+                    return (
+                      <Td textAlign={"center"} key={index}>
+                        {_total}
+                      </Td>
+                    );
                 })}
             </Tr>
           </Tfoot>

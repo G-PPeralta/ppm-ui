@@ -70,99 +70,93 @@ export function Lookahead() {
   // console.log({ filtered, atividades });
 
   return (
-    <div>
-      <Sidebar>
-        {!loading ? (
-          <ContainerPagina>
-            <Flex direction="column" fontFamily="Mulish">
-              <Flex align={"flex-end"}>
-                <FormControl mt={-1} ml={-1}>
-                  <TituloPagina botaoVoltar={false}>
-                    Relatório Lookahead
-                  </TituloPagina>
+    <Sidebar>
+      {!loading ? (
+        <ContainerPagina>
+          <Flex direction="column" fontFamily="Mulish">
+            <Flex align={"flex-end"}>
+              <FormControl mt={-1} ml={-1}>
+                <TituloPagina botaoVoltar={false}>
+                  Relatório Lookahead
+                </TituloPagina>
+              </FormControl>
+            </Flex>
+            <Flex direction="row" justifyContent="flex-start">
+              <Flex direction="row" justifyContent="flex-end" ml={-1}>
+                <FormControl>
+                  <Text fontWeight={"bold"} fontSize={"12px"} color={"#949494"}>
+                    PROJETO
+                  </Text>
+                  <Select
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    // _placeholder={{ color: "#2D2926" }}
+                    // color={"#949494"}
+                    width={"208px"}
+                    height={"56px"}
+                    borderRadius={"8px"}
+                    placeholder="Projeto"
+                    onChange={(e) => setIdProject(e.target.value)}
+                  >
+                    <option value={0}>Todos</option>
+                    {projetos &&
+                      projetos.map((d, k) => (
+                        // <option key={k} value={d.id}>
+                        //   {d.nome_projeto.length > 20
+                        //     ? `${d.id} - ${d.nome_projeto.substring(
+                        //         0,
+                        //         17
+                        //       )}...`
+                        //     : `${d.id} - ${d.nome_projeto}`}
+                        // </option>
+
+                        <option key={k} value={d.id}>
+                          {d.nome_projeto.length > 20
+                            ? `${d.nome_projeto.substring(0, 17)}...`
+                            : `${d.nome_projeto}`}
+                        </option>
+                      ))}
+                  </Select>
                 </FormControl>
-              </Flex>
-              <Flex direction="row" justifyContent="flex-start">
-                <Flex direction="row" justifyContent="flex-end" ml={-1}>
-                  <FormControl>
-                    <Text
-                      fontWeight={"bold"}
-                      fontSize={"12px"}
-                      color={"#949494"}
-                    >
-                      PROJETO
-                    </Text>
-                    <Select
-                      fontSize={"14px"}
-                      fontWeight={"400"}
-                      // _placeholder={{ color: "#2D2926" }}
-                      // color={"#949494"}
-                      width={"208px"}
-                      height={"56px"}
-                      borderRadius={"8px"}
-                      placeholder="Projeto"
-                      onChange={(e) => setIdProject(e.target.value)}
-                    >
-                      <option value={0}>Todos</option>
-                      {projetos &&
-                        projetos.map((d, k) => (
-                          // <option key={k} value={d.id}>
-                          //   {d.nome_projeto.length > 20
-                          //     ? `${d.id} - ${d.nome_projeto.substring(
-                          //         0,
-                          //         17
-                          //       )}...`
-                          //     : `${d.id} - ${d.nome_projeto}`}
-                          // </option>
 
-                          <option key={k} value={d.id}>
-                            {d.nome_projeto.length > 20
-                              ? `${d.nome_projeto.substring(0, 17)}...`
-                              : `${d.nome_projeto}`}
-                          </option>
-                        ))}
-                    </Select>
-                  </FormControl>
-
-                  <Flex alignItems="flex-end" marginLeft="16px">
-                    <Button
-                      h={"58px"}
-                      w={"117px"}
-                      background={"origem.500"}
-                      border={"2.3px solid"}
-                      color={"white"}
-                      variant="primary"
-                      _hover={{
-                        background: "origem.600",
-                        color: "white",
-                        transition: "all 0.4s",
-                      }}
-                      rightIcon={<FiSearch />}
-                      fontSize={"18px"}
-                      fontWeight={"700"}
-                      borderRadius={"8px"}
-                      fontFamily={"Mulish"}
-                      onClick={handleFilter}
-                    >
-                      Filtrar
-                    </Button>
-                  </Flex>
+                <Flex alignItems="flex-end" marginLeft="16px">
+                  <Button
+                    h={"58px"}
+                    w={"117px"}
+                    background={"origem.500"}
+                    border={"2.3px solid"}
+                    color={"white"}
+                    variant="primary"
+                    _hover={{
+                      background: "origem.600",
+                      color: "white",
+                      transition: "all 0.4s",
+                    }}
+                    rightIcon={<FiSearch />}
+                    fontSize={"18px"}
+                    fontWeight={"700"}
+                    borderRadius={"8px"}
+                    fontFamily={"Mulish"}
+                    onClick={handleFilter}
+                  >
+                    Filtrar
+                  </Button>
                 </Flex>
               </Flex>
-
-              <Flex justifyContent="flex-end" ml={-1} mr={-1}>
-                {filtered && (
-                  <TabelaLookahead data={filtered} projetos={projetos} />
-                )}
-              </Flex>
             </Flex>
-          </ContainerPagina>
-        ) : (
-          <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
-            <Ring speed={2} lineWeight={5} color="blue" size={64} />
+
+            <Flex justifyContent="flex-end" ml={-1} mr={-1}>
+              {filtered && (
+                <TabelaLookahead data={filtered} projetos={projetos} />
+              )}
+            </Flex>
           </Flex>
-        )}
-      </Sidebar>
-    </div>
+        </ContainerPagina>
+      ) : (
+        <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
+          <Ring speed={2} lineWeight={5} color="blue" size={64} />
+        </Flex>
+      )}
+    </Sidebar>
   );
 }
