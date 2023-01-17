@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Tabela de todos os feriados cadastrados.
+
 import { useState } from "react";
 
 import {
@@ -17,14 +21,12 @@ import PaginacaoTabela from "components/PaginacaoTabela";
 
 import { formatDate } from "utils/formatDate";
 
-// import { useAuth } from "hooks/useAuth";
-
 interface RefreshState {
   refresh: boolean;
   setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface Props {
-  data: any; // Dados completos da tabela
+  data: any;
   refreshState: RefreshState;
   idProjeto: number;
   optionsSelects: any;
@@ -104,33 +106,7 @@ function Tabela({ data, refreshState, optionsSelects, mes }: Props) {
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Text>{linhaTabela.descricaoDoServico}</Text>
                 </Td>
-                <Td textAlign={"center"} fontWeight={"semibold"}>
-                  {/* <Flex gap={2} align={"center"} justify={"center"}> */}
-                  {/* <ModalEditar
-                    refreshState={refreshState}
-                    linhaTabela={linhaTabela}
-                    optionsSelects={optionsSelects}
-                    mes={mes}
-                  /> */}
-                  {/* <IconButton
-                      aria-label="Botão de Editar"
-                      icon={<FiTrash />}
-                      borderRadius={"10px"}
-                      background={"transparent"}
-                      color={"red.500"}
-                      _hover={{
-                        background: "red.500",
-                        transition: "all 0.4s",
-                        color: "white",
-                      }}
-                      onClick={() => handleDeletar(linhaTabela.idCusto)}
-                    /> */}
-                  {/* <ModalDeletarCentroDeCusto
-                    idCusto={linhaTabela.idCusto}
-                    refreshState={refreshState}
-                  /> */}
-                  {/* </Flex> */}
-                </Td>
+                <Td textAlign={"center"} fontWeight={"semibold"}></Td>
               </Tr>
             );
           })

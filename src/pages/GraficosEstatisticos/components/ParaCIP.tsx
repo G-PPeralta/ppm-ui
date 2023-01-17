@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Gtráfico CIP.
+
 import { useEffect, useLayoutEffect, useState } from "react";
 
 import { Box, Flex, Stack, Text, useBreakpointValue } from "@chakra-ui/react";

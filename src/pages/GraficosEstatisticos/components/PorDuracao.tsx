@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Gtráfico filtrado por duração.
+
 import {
   ChangeEvent,
   useEffect,
@@ -11,7 +15,6 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  // Input,
   Select,
   Text,
   useBreakpointValue,
@@ -61,12 +64,6 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: Props) {
     hrs_dp: "",
     tend_duracao: "",
   });
-
-  // const durationHistory = [
-  //   "Mínimo - 8 horas",
-  //   "Médio - 16 horas",
-  //   "Máxima - 12 horas",
-  // ];
 
   const dataEntries1 = [{ name: "Durações", color: "#0047BB" }];
 
@@ -180,72 +177,10 @@ export function GraficoPorDuracao({ de, ate, refresh, setRefresh }: Props) {
               </FormControl>
             </Flex>
 
-            <Flex alignItems={"flex-end"}>
-              {/* <FormControl>
-                <FormLabel htmlFor="base">
-                  <Text fontSize={"12px"} color={"#949494"} fontWeight={"700"}>
-                    BASE DA ZONA INTERVIDA MAIS PROFUNDA
-                  </Text>
-                </FormLabel>
-
-                <Input
-                  mr={4}
-                  fontSize={"14px"}
-                  fontWeight={"400"}
-                  _placeholder={{ color: "#2D2926" }}
-                  mt={"-6px"}
-                  id="ate"
-                  name="ate"
-                  width={"146px"}
-                  height={"56px"}
-                  borderRadius={"8px"}
-                  type={"number"}
-                  placeholder={"De"}
-                />
-                <Input
-                  fontSize={"14px"}
-                  fontWeight={"400"}
-                  placeholder={"Até"}
-                  _placeholder={{ color: "#2D2926" }}
-                  mt={"-6px"}
-                  id="ate"
-                  name="ate"
-                  width={"146px"}
-                  height={"56px"}
-                  borderRadius={"8px"}
-                  type={"number"}
-                />
-              </FormControl> */}
-            </Flex>
+            <Flex alignItems={"flex-end"}></Flex>
           </Flex>
           <Flex flexDir={"row"} gap={4}>
-            <Flex alignItems={"flex-end"}>
-              {/* <FormControl>
-                <FormLabel
-                  fontSize={"12px"}
-                  color={"#949494"}
-                  fontWeight={"700"}
-                  htmlFor="outro"
-                >
-                  OUTRO
-                </FormLabel>
-                <Select
-                  placeholder="Selecione"
-                  mt={"-9px"}
-                  id="outro"
-                  name="outro"
-                  width={"146px"}
-                  height={"56px"}
-                  _placeholder={{ color: "black" }}
-                  fontSize={"14px"}
-                  borderRadius={"8px"}
-                >
-                  {durationHistory.map((d) => (
-                    <option>{d}</option>
-                  ))}
-                </Select>
-              </FormControl> */}
-            </Flex>
+            <Flex alignItems={"flex-end"}></Flex>
           </Flex>
           <Flex gap={1} direction={"column"}>
             <Flex>

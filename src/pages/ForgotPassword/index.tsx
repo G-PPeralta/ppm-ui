@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Luis Schiestl.
+//  DESCRIÇÃO DO ARQUIVO: Tela esqueci minha senha.
+
 import {
   Box,
   Button,

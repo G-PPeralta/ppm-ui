@@ -1,10 +1,12 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Tabela de gastos.
+
 import { useState } from "react";
-// import { FiTrash } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import {
   Flex,
-  // IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -19,12 +21,10 @@ import { FinanceiroPorProjetos } from "interfaces/FinanceiroProjetos";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
 
-// import { deleteDespesaTabela } from "services/delete/Financeiro";
-
 import ModalDeleteFinanceiro from "./ModalDelete";
 
 interface Props {
-  data: FinanceiroPorProjetos[]; // Dados completos da tabela
+  data: FinanceiroPorProjetos[];
   refresh: () => void;
 }
 
@@ -135,36 +135,11 @@ function Tabela({ data, refresh }: Props) {
                   <Text>{linhaTabela.gap < 1 ? 0 : linhaTabela.gap}%</Text>
                 </Td>
                 <Td>
-                  {/* <IconButton
-                    aria-label="Plus sign"
-                    icon={<FiTrash />}
-                    background="transparent"
-                    variant="secondary"
-                    color="#F40606"
-                    _hover={{
-                      backgroundColor: "#F40606",
-                      color: "white",
-                    }}
-                    // isRound={true}
-                    onClick={() => {
-                      deleteDespesaTabela(linhaTabela.idprojeto);
-                      refresh();
-                    }}
-                    // width={"18px"}
-                    // height={"18px"}
-                  /> */}
-
                   <ModalDeleteFinanceiro
                     id={linhaTabela.idprojeto}
                     refresh={refresh}
                   />
                 </Td>
-                {/* <Td textAlign={"start"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.denominacaodeobjeto}</Text>
-              </Td> */}
-                {/* <Td textAlign={"start"} fontWeight={"semibold"}>
-                <Text>{linhaTabela.textodopedido}</Text>
-              </Td> */}
               </Tr>
             ))
         ) : (

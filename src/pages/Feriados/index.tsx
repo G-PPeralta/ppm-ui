@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Tela de CRUD de feriados.
+
 import { useEffect, useState } from "react";
 
 import { Flex, Td, Text, Tr } from "@chakra-ui/react";
@@ -93,9 +97,6 @@ function Feriados() {
                         linhaTabela.ano_feriado}
                   </Text>
                 </Td>
-                {/* <Td textAlign={"center"} fontWeight={"semibold"}>
-                  <Text>{linhaTabela.nome_projeto}</Text>
-                </Td> */}
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Text>
                     {linhaTabela.ano_feriado === null ? "Feriado fixo" : "---"}
@@ -104,24 +105,6 @@ function Feriados() {
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   <Flex align={"center"} justify={"center"}>
                     <ModalEditarFeriado feriado={linhaTabela} />
-                    {/* <IconButton
-                      aria-label="Botão de Editar"
-                      icon={<FiTrash size={13} />}
-                      borderRadius={"10px"}
-                      background={"transparent"}
-                      color={"#F40606"}
-                      _hover={{
-                        background: "#F40606",
-                        transition: "all 0.4s",
-                        color: "white",
-                      }}
-                      onClick={() =>
-                        reqDeleteFeriado.mutate({
-                          id: linhaTabela.id,
-                          user: user?.nome,
-                        })
-                      }
-                    /> */}
                     <ModalDeletarFeriado
                       refreshTable={refreshTable}
                       setRefreshTable={setRefreshTable}
@@ -175,7 +158,6 @@ function Feriados() {
               />
 
               <TabelaGenerica
-                // maxHeight={"352px"}
                 data={tabelaFiltrada}
                 header={header}
                 fromTo={fromTo}

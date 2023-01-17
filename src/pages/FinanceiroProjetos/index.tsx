@@ -1,6 +1,9 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Tela de gastos de projetos.
+
 import { ChangeEvent, useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-// import { MdCloudUpload } from "react-icons/md";
 
 import { Box, Button, Flex, Heading, Input, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
@@ -86,23 +89,6 @@ export function FinanceiroProjetos() {
                 >
                   Financeiro
                 </Heading>
-                {/* <Button
-                  h={"56px"}
-                  borderRadius={"10px"}
-                  background={"white"}
-                  border={"2px solid"}
-                  color={"origem.500"}
-                  _hover={{
-                    border: "2px solid",
-                    borderColor: "origem.500",
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                  rightIcon={<MdCloudUpload size={24} />}
-                >
-                  Carregar Planilha
-                </Button> */}
               </Flex>
               <Flex gap={4} align={"end"}>
                 <Flex direction={"column"} ml={-3} mt={-1} mb={2}>
@@ -110,7 +96,6 @@ export function FinanceiroProjetos() {
                     PROJETO OU ELEMENTO PEP
                   </Text>
                   <Input
-                    // mt={"-5px"}
                     h={"56px"}
                     isRequired
                     fontSize={"14px"}

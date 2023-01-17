@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+//  CRIADO EM: 10/2022
+//  AUTOR: Magno Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Gantt na tela toda.
 
-// import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import {
   Text,
@@ -16,7 +18,6 @@ import {
 } from "@chakra-ui/react";
 import {
   GanttComponent,
-  // rowDataBound,
   Inject,
   Edit,
   Toolbar,
@@ -35,8 +36,6 @@ import { useRequests } from "hooks/useRequests";
 import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 import { getGanttCampanhaData } from "services/get/Campanhas";
 
-// import { ganttData } from "pages/Reports/components/data";
-
 import "../gantt.css";
 import ModalDeletarAtvCampanha from "./ModalDeletarAtvCampanha";
 
@@ -53,8 +52,6 @@ function ExpandGanttModal({
   pocoId,
   intervencaoIniciada,
 }: Props) {
-  // const { state }: any = useLocation();
-  // const [poco, setPoco] = useState(true);
   const { toast } = useToast();
   const [loading, setLoading] = useState(true);
   const [ganttData, setGanttData] = useState([]);
@@ -62,7 +59,6 @@ function ExpandGanttModal({
   const [atividade, setAtividade] = useState("");
   const [currentIndex, setCurrentIndex] = useState<number>();
   const [refresh, setRefresh] = useState(false);
-  // const [intervencaoIniciada, setIntervencaoIniciada] = useState<any>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [refreshGanttDelete, setRefreshGanttDelete] = useState<number>(0);
   const { optionsAreaAtuacao, optionsResponsaveis } = useRequests();
@@ -102,7 +98,6 @@ function ExpandGanttModal({
 
     setCurrentIndex(filteredIndex);
     setIsEditModalOpen(true);
-    // onOpen();
     args.cancel = true;
   };
 
@@ -122,15 +117,9 @@ function ExpandGanttModal({
   };
 
   const actionsTemplate = (props: any) => (
-    <Flex
-      // w={"100%"}
-      // style={{ position: "relative", top: "-8px" }}
-      justifyContent={"center"}
-      alignItems={"center"}
-    >
+    <Flex justifyContent={"center"} alignItems={"center"}>
       <ModalDeletarAtvCampanha
         id={props.TaskID}
-        // isParent={props.hasChildRecords}
         setLoading={setLoading}
         setRefreshGanttDelete={setRefreshGanttDelete}
       />
@@ -138,12 +127,7 @@ function ExpandGanttModal({
   );
 
   const statusTemplate = (props: any) => (
-    <Flex
-      // w={"100%"}
-      // style={{ position: "relative", top: "-8px" }}
-      justifyContent={"center"}
-      alignItems={"center"}
-    >
+    <Flex justifyContent={"center"} alignItems={"center"}>
       {props.taskData.Progress >= props.taskData.ProgressPlanejado &&
         props.taskData.Progress > 0 && (
           <Box
@@ -210,28 +194,7 @@ function ExpandGanttModal({
                 Gráfico Gantt
               </Text>
             </Flex>
-            <Flex justifyContent={"flex-end"} flexGrow={1}>
-              {/* <Button
-                  h={"56px"}
-                  borderRadius={"10px"}
-                  variant="outline"
-                  color="gray.100"
-                  border={"2px solid"}
-                  borderColor={"gray.100"}
-                  onClick={() => setExpandGantt(false)}
-                  _hover={{
-                    border: "2px solid",
-                    borderColor: "gray.100",
-                    background: "gray.100",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                >
-                  <Text fontSize="16px" fontWeight={"bold"}>
-                    Fechar
-                  </Text>
-                </Button> */}
-            </Flex>
+            <Flex justifyContent={"flex-end"} flexGrow={1}></Flex>
           </ModalHeader>
           <ModalBody mt={3}>
             {loading ? (
@@ -267,30 +230,11 @@ function ExpandGanttModal({
                   enableToggle: true,
                 }}
                 splitterSettings={{
-                  // view: handleShowGantt(),
-                  // columnIndex: 5,
                   position: "47%",
                 }}
-                // rowDataBound={rowDataBound}
                 height={"90%"}
               >
                 <ColumnsDirective>
-                  {/* <ColumnDirective field="Item" type="string"></ColumnDirective>
-            <ColumnDirective
-              field="TaskID"
-              headerText="ID"
-              visible={false}
-              headerTextAlign="Center"
-              textAlign="Center"
-            ></ColumnDirective> */}
-                  {/* <ColumnDirective
-                  field="acao"
-                  headerText="Ação"
-                  headerTextAlign="Center"
-                  textAlign="Center"
-                  width="100"
-                  template={actionsTemplate}
-                ></ColumnDirective> */}
                   <ColumnDirective
                     field="acao"
                     headerText="Ação"
@@ -313,22 +257,6 @@ function ExpandGanttModal({
                     textAlign="Left"
                     width="180"
                   ></ColumnDirective>
-                  {/* <ColumnDirective
-                    field="BaselineStartDate"
-                    headerText="Início Baseline"
-                    headerTextAlign="Center"
-                    textAlign="Center"
-                    type="date"
-                    format="dd/MM/yyyy"
-                  ></ColumnDirective>
-                  <ColumnDirective
-                    field="BaselineEndDate"
-                    headerText="Fim planejado"
-                    headerTextAlign="Center"
-                    textAlign="Center"
-                    type="date"
-                    format="dd/MM/yyyy"
-                  ></ColumnDirective> */}
                   <ColumnDirective
                     field="StartDate"
                     headerText="Início Real"
@@ -345,28 +273,17 @@ function ExpandGanttModal({
                     type="date"
                     format="dd/MM/yyyy"
                   ></ColumnDirective>
-                  {/* <ColumnDirective
-                    field="BaselineDuration"
-                    headerText="Duração Planejada"
-                    headerTextAlign="Center"
-                    textAlign="Center"
-                    // type="number"
-                    // format="N"
-                  /> */}
                   <ColumnDirective
                     field="Duration"
                     headerText="Duração"
                     headerTextAlign="Center"
                     textAlign="Center"
-                    // type="number"
-                    // format="N"
                   ></ColumnDirective>
                   <ColumnDirective
                     field="s"
                     headerText="S"
                     headerTextAlign="Center"
                     textAlign="Center"
-                    // type="number"
                     template={statusTemplate}
                     width="100"
                   ></ColumnDirective>
@@ -375,14 +292,12 @@ function ExpandGanttModal({
                     headerText="% Plan"
                     headerTextAlign="Center"
                     textAlign="Center"
-                    // type="number"
                   ></ColumnDirective>
                   <ColumnDirective
                     field="Progress"
                     headerText="% Real"
                     headerTextAlign="Center"
                     textAlign="Center"
-                    // type="number"
                   ></ColumnDirective>
                   <ColumnDirective
                     field="Predecessor"
@@ -401,10 +316,7 @@ function ExpandGanttModal({
               </GanttComponent>
             )}
           </ModalBody>
-          <ModalCloseButton
-            color={"white"}
-            // onClick={() => setExpandGantt(false)}
-          />
+          <ModalCloseButton color={"white"} />
           <ModalFooter justifyContent={"center"}></ModalFooter>
         </ModalContent>
       </Modal>

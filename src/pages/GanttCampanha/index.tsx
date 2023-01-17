@@ -1,5 +1,8 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Gabriel Peralta.
+//  DESCRIÇÃO DO ARQUIVO: Gantt de campanhas.
+
 import { useEffect, useState } from "react";
-// import { AiOutlineBarChart } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import { MdViewList } from "react-icons/md";
 
@@ -32,9 +35,6 @@ import ExpandGanttModal from "./components/ExpandGanttModal";
 
 import "./gantt.css";
 
-// import { Gantt } from "../StatisticsGantt/components/Gantt";
-// import ModalAdicionarOperacao from "./components/ModalAdicionarOperacao";
-
 interface GanttCampanha {
   TaskID: string;
   inicioprojplanejado: Date;
@@ -57,10 +57,8 @@ function GanttCampanha() {
   >(undefined);
 
   const rowDataBound = (args: any) => {
-    // console.log(">>>> rowDataBound", args);
     if (args.data.hasChildRecords) {
       args.row.style.fontWeight = 500;
-      // args.row.style.backgroundColor = "red";
     }
   };
 
@@ -71,12 +69,7 @@ function GanttCampanha() {
   }
 
   const actionsTemplate = (props: any) => (
-    <Flex
-      // w={"100%"}
-      // style={{ position: "relative", top: "-8px" }}
-      justifyContent={"center"}
-      alignItems={"center"}
-    >
+    <Flex justifyContent={"center"} alignItems={"center"}>
       <span>{props.id}</span>
       <IconButton
         onClick={() =>
@@ -106,12 +99,7 @@ function GanttCampanha() {
   );
 
   const statusTemplate = (props: any) => (
-    <Flex
-      // w={"100%"}
-      // style={{ position: "relative", top: "-8px" }}
-      justifyContent={"center"}
-      alignItems={"center"}
-    >
+    <Flex justifyContent={"center"} alignItems={"center"}>
       {props.taskData.Progress >= props.taskData.pct_plan &&
         props.taskData.pct_real > 0 && (
           <Box
@@ -296,21 +284,12 @@ function GanttCampanha() {
                       enableToggle: true,
                     }}
                     splitterSettings={{
-                      // view: handleShowGantt(),
-                      // columnIndex: 5,
                       position: "60%",
                     }}
                     rowDataBound={rowDataBound}
                     height={"90%"}
                   >
                     <ColumnsDirective>
-                      {/* <ColumnDirective
-                        field="acao"
-                        headerText="Ação"
-                        headerTextAlign="Center"
-                        textAlign="Center"
-                        width="100"
-                      ></ColumnDirective> */}
                       <ColumnDirective
                         field="acao"
                         headerText="Ação"
@@ -349,7 +328,6 @@ function GanttCampanha() {
                         headerText="Status"
                         headerTextAlign="Center"
                         textAlign="Center"
-                        // type="number"
                         width="100"
                       ></ColumnDirective>
                       <ColumnDirective
@@ -365,7 +343,6 @@ function GanttCampanha() {
                         headerText="% Plan"
                         headerTextAlign="Center"
                         textAlign="Center"
-                        // type="number"
                         width="115"
                       ></ColumnDirective>
                       <ColumnDirective
@@ -373,7 +350,6 @@ function GanttCampanha() {
                         headerText="% Real"
                         headerTextAlign="Center"
                         textAlign="Center"
-                        // type="number"
                         width="115"
                       ></ColumnDirective>
                     </ColumnsDirective>
