@@ -1,3 +1,7 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Geovata Augusta
+//  DESCRIÇÃO DO ARQUIVO: Seletor de datas.
+
 import { forwardRef, useEffect, useState } from "react";
 import ReactDatePicker, { registerLocale } from "react-datepicker";
 
@@ -79,7 +83,6 @@ function DatePickerGenericoDataInicial({
           px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
           minW={useBreakpointValue({ base: "220px", sm: "220px", md: "220px" })}
           w={"100%"}
-          // textColor={value === "" ? "#949494" : "#2D3748"}
           fontSize={"14px"}
           fontWeight={"400"}
           color={"black"}

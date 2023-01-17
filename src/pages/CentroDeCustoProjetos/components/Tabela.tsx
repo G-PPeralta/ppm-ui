@@ -1,9 +1,11 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Eduardo Muchak
+//  DESCRIÇÃO DO ARQUIVO: Tabela de custos.
+
 import { useState } from "react";
-// import { FiTrash } from "react-icons/fi";
 
 import {
   Flex,
-  // IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -20,8 +22,6 @@ import PaginacaoTabela from "components/PaginacaoTabela";
 
 import { formatDate } from "utils/formatDate";
 
-// import { useAuth } from "hooks/useAuth";
-
 import ModalDeletarCentroDeCusto from "./ModalDeletarCentroDeCusto";
 import ModalEditar from "./ModalEditar";
 
@@ -31,7 +31,7 @@ interface RefreshState {
 }
 
 interface Props {
-  data: Data[]; // Dados completos da tabela
+  data: Data[];
   refreshState: RefreshState;
   idProjeto: number;
   optionsSelects: Options;
@@ -132,31 +132,16 @@ function Tabela({ data, refreshState, optionsSelects, mes }: Props) {
                   <Text>{linhaTabela.descricaoDoServico}</Text>
                 </Td>
                 <Td textAlign={"center"} fontWeight={"semibold"}>
-                  {/* <Flex gap={2} align={"center"} justify={"center"}> */}
                   <ModalEditar
                     refreshState={refreshState}
                     linhaTabela={linhaTabela}
                     optionsSelects={optionsSelects}
                     mes={mes}
                   />
-                  {/* <IconButton
-                      aria-label="Botão de Editar"
-                      icon={<FiTrash />}
-                      borderRadius={"10px"}
-                      background={"transparent"}
-                      color={"red.500"}
-                      _hover={{
-                        background: "red.500",
-                        transition: "all 0.4s",
-                        color: "white",
-                      }}
-                      onClick={() => handleDeletar(linhaTabela.idCusto)}
-                    /> */}
                   <ModalDeletarCentroDeCusto
                     idCusto={linhaTabela.idCusto}
                     refreshState={refreshState}
                   />
-                  {/* </Flex> */}
                 </Td>
               </Tr>
             );

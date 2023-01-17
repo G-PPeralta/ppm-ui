@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR:Bruno Fracaro e Eduardo Muchak
+//  DESCRIÇÃO DO ARQUIVO: Modal de editar as configurações de um projeto.
+
 import React, {
   JSXElementConstructor,
   ReactElement,
@@ -53,12 +57,8 @@ function ModalConfiguracoes({
 }: ConfigProjetoProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  // MODAL PRIORIZAÇÃO
   const [isPriorizacaoModalOpen, setIsPriorizacaoModalOpen] = useState(false);
 
-  // console.log(projeto.valor_total_previsto);
-
-  // FORM LABELS
   const [responsavel, setReponsavel] = useState(projeto?.responsavel_id);
   const [coordenador, setCoordenador] = useState(projeto?.coordenador_id);
   const [status, setStatus] = useState(projeto?.status_id);
@@ -94,10 +94,6 @@ function ModalConfiguracoes({
   const [tipo, setTipo] = useState(projeto?.tipo_projeto_id);
   const [gate, setGate] = useState(projeto?.gate_id);
 
-  // console.log(typeof orcamento);
-  // console.log({ orcamento, changed });
-  // console.log(projeto);
-
   const {
     optionsResponsaveis,
     optionsCoordenadores,
@@ -118,8 +114,6 @@ function ModalConfiguracoes({
   const handleCancelar = () => {
     onClose();
   };
-
-  // console.log(orcamento);
 
   const format = /^[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/;
 
@@ -154,9 +148,6 @@ function ModalConfiguracoes({
       nome_projeto: nomeProjeto,
       campoId,
       elemento_pep: elementoPep,
-      // valor_total_previsto: String(orcamento).match(format)
-      //   ? orcamento
-      //   : orcamento / 100,
       valor_total_previsto: setIfChanged(),
       data_inicio: moment.utc(inicio).subtract(3, "hours").toDate(),
       data_fim: moment.utc(fim).subtract(3, "hours").toDate(),
@@ -205,15 +196,6 @@ function ModalConfiguracoes({
   }
 
   const getStatus = projeto?.status;
-
-  // const verifyStatus = () => {
-  // if (projeto?.status === "7. Concluído") {
-  //   setAllowEdit(true);
-  //   return true;
-  // }
-  // };
-
-  // console.log(verifyStatus);
 
   return (
     <>

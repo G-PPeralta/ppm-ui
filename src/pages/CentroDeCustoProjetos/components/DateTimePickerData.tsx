@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Geovata Augusta
+//  DESCRIÇÃO DO ARQUIVO: Seletor de datas.
+
 import { forwardRef, useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 
@@ -53,10 +57,8 @@ function DateTimePickerData({ registerForm, data, required, value }: any) {
         selected={initialValue ? new Date(value) : dataInicio}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
-        // showTimeSelect
         dateFormat="dd/MM/yyyy"
         customInput={<TriggerDatePickerInicio />}
-        // isClearable={dataInicio !== ""}
       />
     </Flex>
   );

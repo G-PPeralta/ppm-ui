@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR:Bruno Fracaro e Eduardo Muchak
+//  DESCRIÇÃO DO ARQUIVO: Seletor de datas desabilitado.
+
 import { forwardRef } from "react";
 import ReactDatePicker from "react-datepicker";
 import { FaRegCalendarAlt } from "react-icons/fa";
@@ -7,8 +11,6 @@ import { Button, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 import { RequiredField } from "components/RequiredField/RequiredField";
 
 function DatePickerDisabled({ setDate, data, label, required }: any) {
-  // const [dataMin, setDataMin] = useState<any>("");
-
   const TriggerDatePickerInicio = forwardRef(
     ({ value, onClick }: any, ref: any) => (
       <Button
@@ -44,12 +46,9 @@ function DatePickerDisabled({ setDate, data, label, required }: any) {
       </Flex>
       <ReactDatePicker
         selected={data}
-        // minDate={dataMin}
         onChange={(date) => setDate(date)}
-        // locale="pt-BR"
         dateFormat="dd/MM/yyyy"
         customInput={<TriggerDatePickerInicio />}
-        // isClearable={dataInicio !== ""}
       />
     </Flex>
   );

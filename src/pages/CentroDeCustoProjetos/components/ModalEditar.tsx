@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Maxwell
+//  DESCRIÇÃO DO ARQUIVO: Botão e Modal de editar custo.
+
 import { useEffect, useState } from "react";
 import { MdModeEdit } from "react-icons/md";
 

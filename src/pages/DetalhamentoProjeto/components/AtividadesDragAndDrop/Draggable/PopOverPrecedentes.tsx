@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR:Bruno Fracaro e Eduardo Muchak
+//  DESCRIÇÃO DO ARQUIVO: Popover para selecionar os precedentes.
+
 import {
   Button,
   Checkbox,
@@ -16,7 +20,7 @@ import { FormikProps } from "formik";
 import { PrecedentesCadastroProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
 interface Props {
-  registerForm: FormikProps<any>; // Dentro do props temos a tipagem: FormikState<CadastroProjetoTipo>;
+  registerForm: FormikProps<any>;
   index: number;
 }
 
@@ -25,13 +29,10 @@ function PopOverPrecedentes({ registerForm, index }: Props) {
     indexPrecedente: number,
     precedenteIsChecked: boolean
   ) => {
-    // Pega a lista de atividades diretamente do Formik
     const newList = registerForm.values.atividades[index].precedentes;
 
-    // Verifica se o precedente está marcado ou não
     newList[indexPrecedente].checked = precedenteIsChecked;
 
-    // Atualiza lista no Formik
     registerForm.setFieldValue(`atividades[${index}].precedentes`, newList);
   };
 
