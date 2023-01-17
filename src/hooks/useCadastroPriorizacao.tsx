@@ -1,3 +1,7 @@
+// CRIADO EM: 21/09/2022
+// AUTOR: Geovana Augusta
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de uma nova priorização - módulo Configuração - Priorização.
+
 import { useState, useEffect } from "react";
 
 import { useFormik } from "formik";

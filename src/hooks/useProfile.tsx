@@ -1,3 +1,7 @@
+// CRIADO EM: 23/11/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para a criação de novos usuários com nível de acesso.
+
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";

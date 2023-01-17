@@ -1,3 +1,7 @@
+// CRIADO EM: 24/09/2022
+// AUTOR: Geovana Augusta
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para a edição de uma priorização - módulo Configuração - Priorização.
+
 import { useState } from "react";
 
 import { useFormik } from "formik";

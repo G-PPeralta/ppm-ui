@@ -1,3 +1,7 @@
+// CRIADO EM: 27/09/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para a filtragem de campanhas - módulo Intervenções - Campanhas.
+
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";

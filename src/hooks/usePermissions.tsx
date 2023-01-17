@@ -1,3 +1,7 @@
+// CRIADO EM: 12/06/2022
+// AUTOR: Alexander
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para atualizar o cadastro de usuário.
+
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 

@@ -1,3 +1,7 @@
+// CRIADO EM: 08/11/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de uma nova atividade.
+
 import { useEffect, useState } from "react";
 
 import { AreaAtuacao } from "interfaces/CadastrosModaisInfograficos";

@@ -1,18 +1,18 @@
+// CRIADO EM: 16/11/2022
+// AUTOR: Geovana Augusta
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para a deleção de um projeto - módulo Projetos - Carteira de Projetos.
+
 import { useState } from "react";
 
 import { useFormik } from "formik";
 
 import { useToast } from "contexts/Toast";
 
-// import { deleteProject } from "services/delete/DeleteProject";
-
 export function useDeletarProjeto(id_projeto: number = 0) {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
-  const handleDeletar = (id_projeto: number) => {
-    // deleteProject(id_projeto);
-  };
+  const handleDeletar = (id_projeto: number) => {};
 
   const initialValues: any = {
     id_projeto: 0,

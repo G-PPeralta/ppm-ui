@@ -1,3 +1,7 @@
+// CRIADO EM: 03/10/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de uma nova operação - módulo Intervenções - Cronogramas
+
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
@@ -66,7 +70,7 @@ export function useCadastroOperacao() {
     onSubmit: async (values) => {
       const newValues = {
         nom_usu_create: user?.nome,
-        id_origem: "", // removido
+        id_origem: "",
         nom_operacao: values.nom_operacao,
         responsavel_id: null,
         area_id: null,

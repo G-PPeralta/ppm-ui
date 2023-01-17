@@ -1,3 +1,7 @@
+// CRIADO EM: 14/09/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de um novo projeto - módulo Projetos - Carteira de Projetos.
+
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
@@ -124,22 +128,12 @@ export function useProjetos() {
     const statusSorted = status.data.sort((a: any, b: any) =>
       a.status.localeCompare(b.status)
     );
-    // console.log(statusSorted);
-
-    // const statusComOutrosAoFinalArray = addOutroFinalArray(
-    //   statusSorted,
-    //   "status"
-    // );
     setListaStatus(statusSorted);
 
     const complexidades = await getComplexidade();
     const complexidadesSorted = complexidades.data.sort((a: any, b: any) =>
       a.complexidade.localeCompare(b.complexidade)
     );
-    // const complexidadesComOutrosAoFinalArray = addOutroFinalArray(
-    //   complexidadesSorted,
-    //   "complexidade"
-    // );
     setListaComplexidades(complexidadesSorted);
 
     const divisoes = await getDivisao();
@@ -166,10 +160,6 @@ export function useProjetos() {
     const tipoProjetosSorted = tipoProjetos.data.sort((a: any, b: any) =>
       a.tipo.localeCompare(b.tipo)
     );
-    // const tipoProjetosComOutrosAoFinalArray = addOutroFinalArray(
-    //   tipoProjetosSorted,
-    //   "tipo"
-    // );
     setListaTipoProjetos(tipoProjetosSorted);
 
     const gates = await getGate();
@@ -271,7 +261,7 @@ export function useProjetos() {
     validationSchema: cadastroProjetoSchema,
     onSubmit: async (values) => {
       const newValues = {
-        prioridadeId: 1, // PRIORIDADE BAIXA COMO PADRÃO (PEDIDO EDU)
+        prioridadeId: 1,
         nom_usu_create: user?.nome,
         nomeProjeto: values.nomeProjeto,
         descricao: values.descricao,

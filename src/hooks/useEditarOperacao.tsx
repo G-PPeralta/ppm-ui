@@ -1,3 +1,7 @@
+// CRIADO EM: 12/10/2022
+// AUTOR: Magno
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para a edição de uma operação no Gantt de Cronograma - módulo Intervenções - Cronograma.
+
 import { useEffect, useState } from "react";
 
 import { useDisclosure } from "@chakra-ui/react";
@@ -147,29 +151,6 @@ export function useEditarOperacao(
       setLoading(true);
 
       try {
-        // values.mocs.map(async (moc: any, index: number) => {
-        //   const url = await uploadArquivoS3(moc.arquivoS3);
-        //   values.mocs[index].anexo = url.data;
-        //   const { status } = await patchOperacoesEstatisticas({
-        //     ...newValues,
-        //     mocs: values.mocs,
-        //   });
-        //   if (status === 200 || status === 201) {
-        //     toast.success("Operação editada com sucesso!", {
-        //       id: "toast-principal",
-        //     });
-        //     setLoading(false);
-        //     setRefresh(!refresh);
-        //   }
-        // });
-        // values.aprs.map(async (apr: any) => {
-        //   if (apr.anexo) {
-        //     const formData = new FormData();
-        //     formData.append("files", apr.arquivo);
-
-        //     await uploadArquivo(formData);
-        //   }
-        // });
         const { status } = await patchOperacoesEstatisticas(newValues);
         if (status === 200 || status === 201) {
           toast.success("Operação editada com sucesso!", {

@@ -1,3 +1,7 @@
+// CRIADO EM: 22/09/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de uma nova atividade - ActivitiesSchedule
+
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
@@ -33,16 +37,16 @@ export function useCadastroAtividade() {
   };
 
   const initialValues: NovaAtividade = {
-    id_pai: 0, // enviar o id da poco (pai)
-    nom_atividade: "", // enviar nome da atividade
-    pct_real: 0, // porcentagem realizada
-    dat_ini_plan: "", // data inicio planejada
-    dat_fim_plan: "", // data fim planejada
-    dsc_comentario: "", // comentario
-    id_campanha: 0, // enviar id da campanha
+    id_pai: 0,
+    nom_atividade: "",
+    pct_real: 0,
+    dat_ini_plan: "",
+    dat_fim_plan: "",
+    dsc_comentario: "",
+    id_campanha: 0,
     nom_usu_create: user?.nome,
-    id_area: 0, // enviar id da area de atuação
-    nom_recurso: "", // enviar nome do recurso
+    id_area: 0,
+    nom_recurso: "",
   };
 
   const registerForm = useFormik({

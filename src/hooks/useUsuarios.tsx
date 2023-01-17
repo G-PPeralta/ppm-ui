@@ -1,3 +1,7 @@
+// CRIADO EM: 04/11/2022
+// AUTOR: Geovana Augusta
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de um usuário - módulo Configuração - Usuários.
+
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
@@ -5,14 +9,9 @@ import { cadastroUsuario } from "validations/Usuarios";
 
 import { useToast } from "contexts/Toast";
 
-// import { getPolo } from "services/get/Projetos";
-
 import { postUsuario } from "services/post/Usuario";
 
-// import { useAuth } from "./useAuth";
-
 export function useCadastroUsuario() {
-  // const { user } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
@@ -21,8 +20,6 @@ export function useCadastroUsuario() {
     email: "",
     nome: "",
     telefone: "",
-    // Back nõo espera uma chave role, como saber o nível de permissão do usuário cadastrado?
-    // roleId: 0,
     senha: "",
   };
 
@@ -34,7 +31,6 @@ export function useCadastroUsuario() {
         areaAtuacao: values.areaAtuacao,
         email: values.email,
         nome: values.nome,
-        // roleId: values.roleId,
         telefone: values.telefone,
         senha: values.senha,
       };
@@ -59,11 +55,6 @@ export function useCadastroUsuario() {
     },
   });
 
-  // useEffect(() => {
-  //   setLoading(false);
-  //   reqGet();
-  // }, []);
-
   useEffect(() => {
     if (loading) {
       setLoading(false);
@@ -73,6 +64,5 @@ export function useCadastroUsuario() {
   return {
     registerForm,
     loading,
-    // optionsPolos,
   };
 }

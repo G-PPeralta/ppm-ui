@@ -1,3 +1,7 @@
+// CRIADO EM: 08/06/2022
+// AUTOR: Alexander
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para a ativação de usuários pendentes.
+
 import { useEffect, useState } from "react";
 
 import { ResponseUserPending } from "interfaces/Services";

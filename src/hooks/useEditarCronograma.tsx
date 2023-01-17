@@ -1,3 +1,7 @@
+// CRIADO EM: 06/10/2022
+// AUTOR: Magno
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para a edição de um cronograma - módulo Intervenções - Cronograma.
+
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
@@ -20,7 +24,6 @@ import {
 } from "services/get/CadastroModaisInfograficos";
 import { getOperacoes } from "services/get/Estatisticas";
 import { getAreaAtuacaoListType } from "services/get/Infograficos";
-// import { postCadastroNovoCronograma } from "services/post/Estatistica";
 
 import { useAuth } from "./useAuth";
 
@@ -44,7 +47,7 @@ export function useEditarCronograma(atual: any) {
       area_nom: "nome area",
       operacao_id: t.id_atividade,
       nom_operacao: t.nome_atividade,
-      responsavel_id: 30, // TODO
+      responsavel_id: 30,
       responsavel_nom: "Ada Lovelace",
       data_inicio: new Date(t.inicio_planejado),
       duracao: t.hrs_totais,
@@ -104,7 +107,6 @@ export function useEditarCronograma(atual: any) {
   const registerForm: any = useFormik({
     initialValues: _atual,
     validationSchema: cadastroNovoCronogramaSchema,
-    // enableReinitialize: true,
     onSubmit: async (values: any) => {
       const newValues: any = {
         nom_usu_create: user?.nome,
@@ -117,13 +119,11 @@ export function useEditarCronograma(atual: any) {
       setLoading(true);
 
       try {
-        // TODO liberar endpoint de update
         const res = {
           status: 200,
           data: newValues,
         };
         const status = res.status;
-        // await postCadastroNovoCronograma(newValues);
 
         if (status === 200 || status === 201) {
           toast.success("Cronograma cadastrado com sucesso!", {
@@ -150,15 +150,6 @@ export function useEditarCronograma(atual: any) {
       setLoading(false);
     }
   }, [listaSondas, listaPocos]);
-
-  // useEffect(() => {
-  //   console.log(">>>> useEditar");
-
-  //   const setInitialValues = async () => {
-  //     // if (atual) await registerForm.setValues(_atual);
-  //   };
-  //   setInitialValues();
-  // }, [atual]);
 
   return {
     registerForm,

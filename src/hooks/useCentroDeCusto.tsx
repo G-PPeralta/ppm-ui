@@ -1,3 +1,7 @@
+// CRIADO EM: 14/09/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para a adição de um novo custo - Financeiro.
+
 import { useState } from "react";
 
 import { useFormik } from "formik";

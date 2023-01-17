@@ -1,3 +1,7 @@
+// CRIADO EM: 04/10/2022
+// AUTOR: Max
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para uso no módulo de Lookahead - gets para serviços e ferramentas.
+
 import { useEffect, useState } from "react";
 
 import { FerramentasAtividade, ServicosAtividade } from "interfaces/lookahead";

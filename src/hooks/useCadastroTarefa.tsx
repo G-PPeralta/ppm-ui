@@ -1,3 +1,7 @@
+// CRIADO EM: 02/09/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de uma nova tarefa - módulo Intervenções - Campanha.
+
 import { useState } from "react";
 
 import { useFormik } from "formik";
