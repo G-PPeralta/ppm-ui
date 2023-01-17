@@ -1,3 +1,7 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Modal de editar atividade na tela da intervenção.
+
 import { useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -35,7 +39,6 @@ import DateTimePickerDataFimPlan from "./DateTimePickerDataFimPlan";
 import DateTimePickerDataFimReal from "./DateTimePickerDataFimReal";
 import DateTimePickerDataInicioPlan from "./DateTimePickerDataInicioPlan";
 import DateTimePickerDataInicioReal from "./DateTimePickerDataInicioReal";
-// import PocosDragAndDrop from "./PocosDragAndDrop";
 
 interface Precedente {
   id: any;
@@ -45,13 +48,11 @@ interface Precedente {
 function ModalEditarAtividade({
   onClose,
   atividade,
-  // id,
   setRefresh,
   refresh,
   listaPrecedentes,
   index,
   listaOptions,
-  // poco,
   intervencaoIniciada,
 }: any) {
   const { user } = useAuth();
@@ -116,33 +117,24 @@ function ModalEditarAtividade({
     } else {
       const inicio =
         new Date(atividade.inicioplanejadohrs).getTime() + 3 * 3600 * 1000;
-      // inicio.setDate(inicio.getDate() + 1);
       setInicioPlanejado(inicio);
     }
     const fim =
       new Date(atividade.finalplanejadohrs).getTime() + 3 * 3600 * 1000;
-    // fim.setHours(fim.getHours() + 9);
     setFimPlanejado(fim);
 
     if (atividade.inicioreal !== null) {
-      // console.log("dados dt real --> ", atividade.inicioreal);
       let dat_ini_real =
         new Date(atividade.inicioreal).getTime() + 3 * 3600 * 1000;
       dat_ini_real = new Date(dat_ini_real).setHours(9, 0, 0, 0);
-      // console.log("dados dt real --> ", new Date(dat_ini_real));
       setInicioReal(new Date(dat_ini_real));
     }
     if (atividade.fimreal !== null) {
-      // console.log("dados dt real --> ", atividade.fimreal);
       let dat_fim_real =
         new Date(atividade.fimreal).getTime() + 3 * 3600 * 1000;
       dat_fim_real = new Date(dat_fim_real).setHours(18, 0, 0, 0);
-      // console.log("dados dt fim --->", new Date(dat_fim_real));
       setFimReal(new Date(dat_fim_real));
     }
-
-    // console.log(inicioReal);
-    // console.log(atividade);
 
     const respId = listaOptions.optionsResponsaveis.filter(
       (responsavel: any) => responsavel.label === atividade.nom_responsavel
@@ -157,12 +149,6 @@ function ModalEditarAtividade({
   }, []);
 
   const handlePercentInput = async (val: any) => {
-    // if (atividadeStatus === 0 && Number(atividade.pct_real) === 0) {
-    //   setInicioReal(new Date());
-    // }
-    // if (atividadeStatus === 100) {
-    //   setFimReal(null);
-    // }
     setAtividadeStatus(Number(val));
   };
 
@@ -190,7 +176,6 @@ function ModalEditarAtividade({
             <FormControl>
               <Flex direction={"column"} gap={4}>
                 <Stack>
-                  {/* <Text fontWeight={"bold"}>Atividade</Text> */}
                   <Flex
                     flexDirection={useBreakpointValue({
                       base: "column",
@@ -357,7 +342,6 @@ function ModalEditarAtividade({
                       />
                     </Flex>
                   </Flex>
-                  {/* <Text fontWeight={"bold"}>Responsável</Text> */}
                   <Flex
                     flexDirection={useBreakpointValue({
                       base: "column",
@@ -426,19 +410,6 @@ function ModalEditarAtividade({
                       </Select>
                     </FormControl>
                   </Flex>
-                  {/* <Flex
-                    flexDirection={useBreakpointValue({
-                      base: "column",
-                      md: "column",
-                    })}
-                    gap={2}
-                  >
-                    <PocosDragAndDrop
-                      listaPrecedentes={listaPrecedentes}
-                      precedentes={precedentes}
-                      setPrecedentes={setPrecedentes}
-                    />
-                  </Flex> */}
                   <Flex
                     flexDirection={useBreakpointValue({
                       base: "column",
@@ -448,9 +419,6 @@ function ModalEditarAtividade({
                     gap={5}
                   >
                     <FormControl gap={3}>
-                      {/* <Text fontWeight={"bold"} mb={2}>
-                        Observações
-                      </Text> */}
                       <Flex gap={1}>
                         <Text
                           fontWeight={"bold"}

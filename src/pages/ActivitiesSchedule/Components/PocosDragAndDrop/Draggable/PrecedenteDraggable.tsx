@@ -1,4 +1,7 @@
-// import { useState } from "react";
+//  CRIADO EM: 09/2022
+//  AUTOR: Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Componente arrastável para ordenar as atividades precedentes.
+
 import { useEffect, useId, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";

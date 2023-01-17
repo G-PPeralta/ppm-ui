@@ -1,8 +1,11 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Modal de cadastrar atividade na tela da intervenção.
+
 import { useEffect } from "react";
 
 import {
   Flex,
-  // Text,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -12,7 +15,6 @@ import {
   useDisclosure,
   Button,
   useBreakpointValue,
-  // Input,
   ModalCloseButton,
   Text,
 } from "@chakra-ui/react";
@@ -154,74 +156,6 @@ function ModalCadastroAtividadeIntervencao({
                   gap={5}
                 >
                   <Flex flex={1} direction={"column"}>
-                    {/* <Text fontWeight={"bold"}>Nome</Text> */}
-                    {/* <Flex
-                      gap={5}
-                      flex={1}
-                      flexDirection={useBreakpointValue({
-                        base: "column",
-                        md: "row",
-                      })}
-                    >
-                      <Flex direction={"column"} flex={1}>
-                        <Flex gap={1}>
-                          <RequiredField />
-                          <Text
-                            fontWeight={"bold"}
-                            fontSize={"12px"}
-                            color={"#949494"}
-                          >
-                            ID
-                          </Text>
-                        </Flex>
-                        <Input
-                          h={"56px"}
-                          isRequired
-                          placeholder="Digite o ID"
-                          id="id_origem"
-                          type="text"
-                          name="id_origem"
-                          w={useBreakpointValue({
-                            base: "100%",
-                            md: "100%",
-                          })}
-                          value={regexCaracteresEspeciais(
-                            registerForm.values.id_origem
-                          )}
-                          onChange={registerForm.handleChange}
-                          maxLength={10}
-                        />
-                      </Flex>
-                      <Flex direction={"column"} flex={2}>
-                        <Flex gap={1}>
-                          <RequiredField />
-                          <Text
-                            fontWeight={"bold"}
-                            fontSize={"12px"}
-                            color={"#949494"}
-                          >
-                            NOME
-                          </Text>
-                        </Flex>
-                        <Input
-                          h={"56px"}
-                          isRequired
-                          placeholder="Digite o nome da atividade"
-                          id="nom_atividade"
-                          type="text"
-                          name="nom_atividade"
-                          w={useBreakpointValue({
-                            base: "100%",
-                            md: "100%",
-                          })}
-                          value={regexCaracteresEspeciais(
-                            registerForm.values.nom_atividade
-                          )}
-                          onChange={registerForm.handleChange}
-                          maxLength={100}
-                        />
-                      </Flex>
-                    </Flex> */}
                     <Flex flex={1}>
                       {registerForm.values.atividade_id === 0 ? (
                         <InputCadastroInline
@@ -330,10 +264,7 @@ function ModalCadastroAtividadeIntervencao({
                     md: "column",
                   })}
                   gap={2}
-                >
-                  {/* <Text fontWeight={"bold"}>Restrição</Text> */}
-                  {/* <Restricoes registerForm={registerForm} /> */}
-                </Flex>
+                ></Flex>
                 <AtividadesDragAndDrop
                   registerForm={registerForm}
                   atividades={atividades}
@@ -348,16 +279,7 @@ function ModalCadastroAtividadeIntervencao({
                   formikForm={registerForm}
                   onClose={onClose}
                 />
-                {/* <BotaoAzulLargoPrimary
-                  text={"Cadastrar"}
-                  formikForm={registerForm}
-                  onClose={onClose}
-                  setRefresh={setRefresh}
-                  refresh={refresh}
-                  loading={loading}
-                /> */}
                 <Button
-                  // disabled={!registerForm.isValid}
                   background="origem.500"
                   variant="primary"
                   color="white"

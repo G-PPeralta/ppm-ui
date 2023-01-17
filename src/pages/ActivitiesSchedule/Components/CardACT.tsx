@@ -1,10 +1,13 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Eduardo Muchak
+//  DESCRIÇÃO DO ARQUIVO: Card da atividade, similar aos cards nas telas de precedentes e visão por área.
+
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 import { Flex, Text } from "@chakra-ui/react";
 import moment from "moment";
 
-// import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
 
 import { useAuth } from "hooks/useAuth";
@@ -32,7 +35,7 @@ type Atividade = {
 type Props = {
   atividade: Atividade;
   id?: any;
-  setRefresh: React.Dispatch<React.SetStateAction<boolean>>; // Função para atualizar a página
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
   refresh: boolean;
 };
 
@@ -41,25 +44,12 @@ function CardACT({ atividade, id, setRefresh, refresh }: Props) {
   const fimReal = atividade.fimreal;
 
   const dataInicioFormatada = moment.utc(inicioReal).format("DD/MM/YYYY");
-  // console.log("converted date", newDate);
 
   const dataFinalFormatada = moment.utc(fimReal).format("DD/MM/YYYY");
-
-  // console.log(atividade);
-
-  // const dataInicioFormatada = atividade.inicioplanejado;
-  // const dataFinalFormatada = atividade.finalplanejado;
 
   const [atividadeId, setAtividadeId] = useState(0);
 
   const { user } = useAuth();
-
-  // console.log({ atividade });
-
-  // console.log("id", id.id_filho);
-
-  // console.log({ atividadeId });
-
   useEffect(() => {
     setAtividadeId(id.id_filho);
   }, []);
@@ -67,7 +57,6 @@ function CardACT({ atividade, id, setRefresh, refresh }: Props) {
   useEffect(() => {}, [id.id_filho]);
 
   async function handleDeleteAtividade() {
-    // "Deleta" o atividade na lista
     if (atividadeId !== undefined) {
       try {
         if (!id.id_filho) throw new Error("Erro ao remover a atividade!");

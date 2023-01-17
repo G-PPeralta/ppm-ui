@@ -1,3 +1,7 @@
+//  Criado por: Bruno Fracaro
+//  Data de criação: 09/2022
+//  Descrição: Botão pra negadar de volta para a vela Visão Geral.
+
 import { useNavigate } from "react-router-dom";
 
 import { Button } from "@chakra-ui/react";

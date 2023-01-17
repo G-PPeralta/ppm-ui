@@ -1,3 +1,7 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Eduardo Muchak
+//  DESCRIÇÃO DO ARQUIVO: Seletor de precedentes pra referida atividade.
+
 import { FiPlus } from "react-icons/fi";
 
 import { Flex, IconButton } from "@chakra-ui/react";

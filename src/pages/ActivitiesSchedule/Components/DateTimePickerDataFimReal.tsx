@@ -1,3 +1,7 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Seletor de data para o modal de cadastro de atividade.
+
 import { forwardRef } from "react";
 import ReactDatePicker from "react-datepicker";
 

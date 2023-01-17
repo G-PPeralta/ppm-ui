@@ -1,3 +1,9 @@
+/*
+  Criado por: Bruno Fracaro
+  Data de criação: 09/2022
+  Descrição: Tela de visão por precedentes, acessada dentro de uma intervenção.
+*/
+
 import { useEffect, useState } from "react";
 import { ArcherContainer, ArcherElement } from "react-archer";
 import { useNavigate, useParams } from "react-router-dom";
@@ -16,10 +22,6 @@ import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 
 import BotaoVisaoGeral from "./components/BotaoVisaoGeral";
 import CardACT from "./components/CardACT";
-// import ModalCadastroAtividade from "../ActivitiesSchedule/Components/ModalCadastroAtividadeOLD";
-// import ModalEditarAtividade from "../ActivitiesSchedule/Components/ModalEditarAtividade";
-// import ExibirModal from "./components/ExibirModal";
-// import FiltrosModal from "./components/FiltrosModal";
 
 declare type AnchorPositionType =
   | "top"
@@ -301,15 +303,6 @@ export function ActivitiesPrecedents() {
                           )
                         )}
                       </Flex>
-                      {/* {openId ? (
-                            <ModalEditarAtividade
-                              id={id}
-                              atividade={openId}
-                              onClose={() => setOpenId("")}
-                              setRefresh={setRefresh}
-                              refresh={refresh}
-                            />
-                          ) : undefined} */}
                     </Box>
                   </Flex>
                 ))}

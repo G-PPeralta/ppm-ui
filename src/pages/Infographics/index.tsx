@@ -1,3 +1,9 @@
+/*
+  Criado por: Eduardo Muchak e Bruno Fracaro
+  Data de criação: 08/2023
+  Descrição: Tela principal de infográficos, que mostra todas as intervenções por sonda.
+*/
+
 import { useEffect, useState } from "react";
 
 import { Box, Flex, Heading } from "@chakra-ui/react";
