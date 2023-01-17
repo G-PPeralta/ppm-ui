@@ -11,15 +11,11 @@ import {
 
 export default function StackedBarChartPrevisto({
   sizeW,
-  sizeH,
   barW,
   showY,
   data,
   dataEntries,
 }: StackedBarChartProps) {
-  // console.log(dataEntries);
-  // console.log(data);
-
   return (
     <ResponsiveContainer
       height={"100%"}
@@ -27,16 +23,7 @@ export default function StackedBarChartPrevisto({
     >
       {data.length > 0 ? (
         <BarChart data={data}>
-          <XAxis
-            dataKey="mes"
-            // style={{
-            //   fontSize: "16px",
-            //   fontFamily: "Mulish",
-            //   fontWeight: 400,
-            //   width: "100%",
-            //   color: "#2D2926",
-            // }}
-          />
+          <XAxis dataKey="mes" />
           {showY ? (
             <YAxis
               dataKey={dataEntries[0].name}
@@ -71,7 +58,6 @@ export default function StackedBarChartPrevisto({
               dataKey={dataEntry.name}
               stackId="a"
               fill={dataEntry.color}
-              // legendType="circle"
               isAnimationActive={true}
               animationDuration={1300}
               barSize={barW}

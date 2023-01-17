@@ -167,7 +167,6 @@ function Feriados() {
               <FiltragemTabela
                 dadosTabela={feriados.data}
                 nomeLabel={"Pesquise o feriado"}
-                nomeLabelData={"Data"}
                 placeholder={"Digite o feriado"}
                 setTabelaFiltrada={setTabelaFiltrada}
                 propName={"nome_feriado"}

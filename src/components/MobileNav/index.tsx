@@ -1,3 +1,7 @@
+// CRIADO EM: 10/06/2022
+// AUTOR: ALEXANDER BRITO
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE COM MENU LATERAL DO SISTEMA
+
 import { FiMenu, FiChevronDown } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -18,7 +22,6 @@ import {
   MenuList,
   Image,
   useBreakpointValue,
-  // Button,
 } from "@chakra-ui/react";
 import logoImage from "assets/logo.png";
 import Avvvatars from "avvvatars-react";
@@ -41,58 +44,6 @@ export function MobileNav({
 }: MobileProps) {
   const navigate = useNavigate();
   const { signOut, user } = useAuth();
-  // const [way, setWay] = useState<string[]>([]);
-
-  // useEffect(() => {
-  //   const nav = window.location.href;
-  //   const splited = nav.split("/");
-  //   if (splited[3] === "") splited[3] = "Dashboard";
-  //   if (splited[splited.length - 1] === "") splited.pop();
-  //   // const completeObject = splited.map((split, index) => {
-  //   //   let newItem: string = translations[split as keyof typeof translations];
-  //   //   if (newItem === undefined) {
-  //   //     newItem = "";
-  //   //   }
-  //   //   return newItem;
-  //   // });
-  //   // setWay(completeObject);
-  // }, []);
-
-  // const translations = {
-  //   Dashboard: "Dashboard",
-  //   projects: "Projetos",
-  //   "projects-registration": "Cadastro de projetos",
-  //   budgets: "Financeiro",
-  //   budgets2: "Financeiro",
-  //   upload: "Importat Dados",
-  //   fornecedores: "Fornecedores",
-  //   licoesAprendidas: "Lições Aprendidas",
-  //   detalhamento: "Detalhamento de Projetos",
-  //   infographics: "Infográficos",
-  //   atividade: "Atividade",
-  //   precedentes: "Visão por Precedentes",
-  //   "visao-por-area": "Visão por Area",
-  //   estatisticas: "Estatísticas",
-  //   cronograma: "Cronograma",
-  //   reports: "Relatórios",
-  //   graficos: "Gráficos Estatísticos",
-  //   priorizacao: "Priorização",
-  //   "financeiro-projetos": "Financeiro por Projetos",
-  //   "centro-custo": "Centro de Custos",
-  // };
-
-  // const goNavigate = async (index: number) => {
-  //   console.log("index", index);
-  //   const nav = window.location.href;
-  //   const splited = nav.split("/");
-  //   let route = "/";
-  //   for (let key = 3; key < splited.length; key++) {
-  //     if (key <= index) {
-  //       route += splited[key] + "/";
-  //     }
-  //   }
-  //   navigate(route);
-  // };
 
   return (
     <Flex
@@ -137,28 +88,6 @@ export function MobileNav({
           />
         </Link>
       </Text>
-      {/* <Flex w={"100%"} justifyContent={"center"} alignItems={"center"}>
-        {way.map((item, index) => (
-          <Fragment key={index}>
-            {index > 2 ? (
-              <>
-                <Button
-                  variant={"link"}
-                  // onClick={() => goNavigate(index)}
-                  ml={2}
-                  mr={2}
-                  fontSize={"16px"}
-                  color={"origem.500"}
-                  fontWeight={"600"}
-                >
-                  {item}
-                </Button>
-
-              </>
-            ) : undefined}
-          </Fragment>
-        ))}
-      </Flex> */}
       <HStack className={"noprint"} spacing={{ base: "0", md: "6" }}>
         <Flex alignItems={"center"} zIndex={999}>
           <Menu>

@@ -1,3 +1,7 @@
+// CRIADO EM: 10/06/2022
+// AUTOR: ALEXANDER BRITO
+// DESCRIÇÃO DO ARQUIVO: CONTEUDO DO MENU LATERAL DO SISTEMA
+
 import { Link } from "react-router-dom";
 
 import {
@@ -22,9 +26,6 @@ import { NavItemMain } from "components/NavItemMain";
 import { useAuth } from "hooks/useAuth";
 
 import { LinkItems } from "./items";
-
-// console.log("export", LinkItems);
-
 interface SidebarProps extends BoxProps {
   onClose: () => void;
 }

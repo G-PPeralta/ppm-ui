@@ -1,3 +1,7 @@
+// CRIADO EM: 14/10/2022
+// AUTOR: GEOVANA AUGUSTA
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE DE INPUT DESABILITADO, PARA USO EM TELAS DE CONSULTA
+
 import { useState, useEffect } from "react";
 
 import { Flex, Input, InputLeftAddon, Text } from "@chakra-ui/react";
@@ -44,7 +48,6 @@ function InputGenericoDesabilitado({
       propName,
       value.toString().replace(/[^0-9]/g, "")
     );
-    // setValorFormatado(formatReal(getMoney(value.toString() || "")));
     setValorFormatado(formatRealInput(value || ""));
   };
 
@@ -78,10 +81,8 @@ function InputGenericoDesabilitado({
             name={propName}
             value={valorFormatado}
             maxLength={maxLength}
-            // onChange={registerForm.handleChange}
             onChange={(event: any) => changeValueFormated(event.target.value)}
             w={"100%"}
-            // onKeyUp={(event) => maskMoney(event)}
           />
           {registerForm.touched[propName] && registerForm.errors[propName] && (
             <TextError>{registerForm.errors[propName]}</TextError>

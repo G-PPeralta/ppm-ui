@@ -1,3 +1,7 @@
+// CRIADO EM: 17/10/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE PARA EXIBIR O TÍTULO DA PÁGINA COM ESTILO PADRÃO
+
 import { Flex, Heading, Text } from "@chakra-ui/react";
 
 import BotaoSetaVoltar from "components/BotaoSetaVoltar/BotaoSetaVoltar";

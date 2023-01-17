@@ -1,3 +1,7 @@
+// CRIADO EM: 25/10/2022
+// AUTOR: MAGNO FERREIRA
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE DATETIME PICKER PARA SELECIONAR DATA E HORÁRIO
+
 import { forwardRef, useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 
@@ -13,7 +17,6 @@ function DatePickerModal({
   required,
   selecionaHorario,
   isDisabled,
-  esconderHorario,
 }: any) {
   const [dataInicio, setDataInicio] = useState<any>("");
 
@@ -82,8 +85,6 @@ function DatePickerModal({
         timeFormat="p"
         timeIntervals={15}
         dateFormat="Pp"
-        // timeFormat="HH:mm"
-        // dateFormat={esconderHorario ? "dd/MM/yyyy" : "dd/MM/yyyy, hh:mm aa"}
         customInput={<TriggerDatePickerInicio />}
       />
     </Flex>

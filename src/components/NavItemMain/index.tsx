@@ -1,3 +1,7 @@
+// CRIADO EM: 20/09/2022
+// AUTOR: BRUNO FRACARO
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE PARA FAZER CASCATEAMENTO DE SUBMENUS NO MENU LATERAL DO SISTEMA
+
 import { ReactNode } from "react";
 import { IconType } from "react-icons";
 

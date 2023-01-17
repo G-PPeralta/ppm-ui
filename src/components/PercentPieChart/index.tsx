@@ -1,3 +1,7 @@
+// CRIADO EM: 25/07/2022
+// AUTOR: BRUNO FRACARO
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE DE GRAFICO DE PIZZA COM PORCENTAGEM
+
 import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
 
 import { Box, Text } from "@chakra-ui/react";

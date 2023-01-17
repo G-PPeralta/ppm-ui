@@ -1,3 +1,7 @@
+// CRIADO EM: 03/10/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE PADRONIZADO PARA BOTÃO AZUL COM VARIANT PRIMARY
+
 import { Button, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { FormikProps } from "formik";

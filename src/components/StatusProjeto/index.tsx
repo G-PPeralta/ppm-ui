@@ -1,3 +1,7 @@
+// CRIADO EM: 20/09/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE PARA EXIBIR O STATUS DO PROJETO
+
 import { Box, Flex, Text } from "@chakra-ui/react";
 
 type Props = {

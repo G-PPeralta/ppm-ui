@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from "react";
+// CRIADO EM: 31/10/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: COMPONENTE PARA VISUALIZAÇÃO E EXPORTAÇÃO DE ARQUIVOS PDF
+
+import { useEffect, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { FiChevronLeft, FiChevronRight, FiPrinter } from "react-icons/fi";
 import { Page } from "react-pdf";
