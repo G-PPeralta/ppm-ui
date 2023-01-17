@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Eduardo Muchak, Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Input de data final real.
+
 import {
   FormControl,
   FormLabel,

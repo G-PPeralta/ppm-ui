@@ -1,18 +1,12 @@
-import {
-  FormControl,
-  FormLabel,
-  Input,
-  // useBreakpointValue,
-} from "@chakra-ui/react";
-// import { FormikProps } from 'formik';
-// import { RegisterProjectProps } from 'interfaces/Services';
+//  CRIADO EM: 07/2022
+//  AUTOR: Eduardo Muchak, Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Input de nome do projeto.
+
+import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 
 import { TextError } from "components/TextError";
 
 function FormNomeProjeto(projectsForm: any) {
-  // useEffect(() => {
-  //   console.log(projectsForm.projectsForm);
-  // }, [projectsForm]);
   return (
     <FormControl>
       <FormLabel

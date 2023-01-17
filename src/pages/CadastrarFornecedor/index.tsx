@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Eduardo Muchak
+//  DESCRIÇÃO DO ARQUIVO: Tela de cadastro de fornecedor.
+
 import { BsPlus } from "react-icons/bs";
 import { IoIosArrowBack } from "react-icons/io";
 
@@ -10,7 +14,6 @@ import Sidebar from "components/SideBar";
 import TextAreaGenerico from "components/TextAreaGenerico";
 
 import formatCellphone from "utils/formatCellphone";
-// import { formatCnpj } from "utils/formatCnpj";
 import { formatEmail } from "utils/formatEmail";
 import { handleCadastrarPagina } from "utils/handleCadastro";
 import {
@@ -28,8 +31,6 @@ export function CadastrarFornecedor() {
     { value: 1, label: "Ativo" },
     { value: 2, label: "Inativo" },
   ];
-
-  // console.log(registerForm.values);
 
   return (
     <>

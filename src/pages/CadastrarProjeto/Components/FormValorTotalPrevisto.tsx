@@ -1,8 +1,11 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Eduardo Muchak, Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Input do valor previsto.
+
 import {
   FormControl,
   FormLabel,
   Input,
-  // useBreakpointValue,
   InputGroup,
   InputLeftElement,
 } from "@chakra-ui/react";

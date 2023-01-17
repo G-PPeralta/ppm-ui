@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Eduardo Muchak, Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Combobox do tipo de projeto.
+
 import { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 

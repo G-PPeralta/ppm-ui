@@ -1,9 +1,8 @@
-import {
-  FormControl,
-  FormLabel,
-  Textarea,
-  // useBreakpointValue,
-} from "@chakra-ui/react";
+//  CRIADO EM: 07/2022
+//  AUTOR: Eduardo Muchak, Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Input de comentários.
+
+import { FormControl, FormLabel, Textarea } from "@chakra-ui/react";
 
 import { TextError } from "components/TextError";
 

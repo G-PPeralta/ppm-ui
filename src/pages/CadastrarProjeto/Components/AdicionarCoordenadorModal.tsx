@@ -1,5 +1,8 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Eduardo Muchak, Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Botão e Modal de inclusão de coordenador.
+
 import { useState } from "react";
-// import { BsPlusLg } from "react-icons/bs";
 import { FiPlus } from "react-icons/fi";
 
 import {
@@ -8,7 +11,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-  // useBreakpointValue,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -16,13 +18,8 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  // IconButton,
   useDisclosure,
-  // Box,
-  // Text,
 } from "@chakra-ui/react";
-
-// import { TextError } from 'components/TextError';
 
 import { postCoordenador } from "services/post/ProjectRegister";
 
@@ -115,12 +112,6 @@ export function AdicionarCoordenadorModal(projectsForm: any) {
                   border={"1px solid #949494"}
                   h={"56px"}
                 />
-                {/* {projectsForm.projectsForm.errors.coordenadores &&
-                    projectsForm.projectsForm.touched.coordenadores && (
-                      <TextError>
-                        {projectsForm.projectsForm.errors.coordenadores}
-                      </TextError>
-                    )} */}
               </FormControl>
             </Flex>
           </ModalBody>

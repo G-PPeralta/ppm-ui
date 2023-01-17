@@ -1,9 +1,8 @@
-import {
-  FormControl,
-  FormLabel,
-  Input,
-  // useBreakpointValue,
-} from "@chakra-ui/react";
+//  CRIADO EM: 07/2022
+//  AUTOR: Eduardo Muchak, Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Input de data inicial.
+
+import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 
 import { TextError } from "components/TextError";
 

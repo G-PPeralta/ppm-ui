@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Eduardo Muchak, Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Input cadastro.
+
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsPlusLg } from "react-icons/bs";

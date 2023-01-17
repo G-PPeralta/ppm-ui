@@ -1,11 +1,10 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Eduardo Muchak, Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Input de prioridade.
+
 import { useEffect, useState } from "react";
 
-import {
-  FormControl,
-  FormLabel,
-  Select,
-  // useBreakpointValue,
-} from "@chakra-ui/react";
+import { FormControl, FormLabel, Select } from "@chakra-ui/react";
 import { Prioridade } from "interfaces/Services";
 
 import { TextError } from "components/TextError";

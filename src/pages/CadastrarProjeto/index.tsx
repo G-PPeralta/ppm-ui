@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Eduardo Muchak, Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Tela de cadastro de projetos.
+
 import { useEffect, useState } from "react";
 import { BsPlus } from "react-icons/bs";
 
@@ -29,9 +33,7 @@ function CadastrarProjeto() {
     optionsPolos,
     optionsLocais,
     optionsSolicitantes,
-    // optionsPrioridades,
     optionsStatus,
-    // optionsComplexidades,
     optionsDivisoes,
     optionsClassificacoes,
     optionsTipoProjetos,
@@ -238,13 +240,6 @@ function CadastrarProjeto() {
                       />
                     )}
                   </Flex>
-                  {/* <SelectFiltragem
-                    registerForm={registerForm}
-                    nomeSelect={"PRIORIDADE"}
-                    propName={"prioridadeId"}
-                    options={optionsPrioridades}
-                    required={true}
-                  /> */}
                   <Flex flex={1}>
                     {registerForm.values.statusId === 0 ? (
                       <InputCadastroInline
@@ -278,18 +273,6 @@ function CadastrarProjeto() {
                   direction={innerWidth > 428 ? "row" : "column"}
                 >
                   <Flex flex={1}>
-                    {/* {registerForm.values.tipoProjetoId === 0 ? (
-                      <InputCadastroInline
-                        required={true}
-                        refreshState={refreshState}
-                        registerForm={registerForm}
-                        listaOptions={tiposProjetos}
-                        nomeLabel={"TIPO"}
-                        payloadKey={"tipo"}
-                        propName={"tipoProjetoId"}
-                        rota={"/tipo-projeto"}
-                      />
-                    ) : ( */}
                     <SelectFiltragem
                       registerForm={registerForm}
                       nomeSelect={"TIPO"}
@@ -298,7 +281,6 @@ function CadastrarProjeto() {
                       required={true}
                       value={getValue(tiposProjetos, "tipoProjetoId")}
                     />
-                    {/* )} */}
                   </Flex>
                   <Flex flex={1}>
                     <InputGenerico
@@ -361,30 +343,6 @@ function CadastrarProjeto() {
                       />
                     </InputGroup>
                   </Flex>
-
-                  {/* <Flex flex={1}>
-                    {registerForm.values.complexidadeId === 0 ? (
-                      <InputCadastroInline
-                        required={true}
-                        refreshState={refreshState}
-                        registerForm={registerForm}
-                        listaOptions={optionsComplexidades}
-                        nomeLabel={"COMPLEXIDADE"}
-                        payloadKey={"complexidade"}
-                        propName={"complexidadeId"}
-                        rota={"/complexidade"}
-                      />
-                    ) : (
-                      <SelectFiltragem
-                        registerForm={registerForm}
-                        nomeSelect={"COMPLEXIDADE"}
-                        propName={"complexidadeId"}
-                        options={optionsComplexidades}
-                        required={true}
-                        value={getValue(optionsComplexidades, "complexidadeId")}
-                      />
-                    )}
-                  </Flex> */}
                 </Flex>
 
                 <Flex
@@ -523,14 +481,6 @@ function CadastrarProjeto() {
                   </Text>
                 </Button>
                 <Button
-                  // h={"56px"}
-                  // borderRadius={"10px"}
-                  // background={"origem.500"}
-                  // color="white"
-                  // _hover={{
-                  //   background: "origem.600",
-                  //   transition: "all 0.4s",
-                  // }}
                   variant={"origemBlueSolid"}
                   onClick={() => handleCadastrarPagina(registerForm)}
                   rightIcon={<BsPlus size={24} />}
