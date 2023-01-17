@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Felipe Mateus
+//  DESCRIÇÃO DO ARQUIVO: Imput para atualizar valor previsto.
+
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 
@@ -32,7 +36,6 @@ export default function CampoEditavel(props: { filho: BudgetDetail }) {
     }
   };
 
-  /* Here's a custom control */
   function EditableControls() {
     const {
       isEditing,
@@ -68,13 +71,11 @@ export default function CampoEditavel(props: { filho: BudgetDetail }) {
     <Editable
       textAlign="center"
       defaultValue={formatReal(planejado)}
-      // fontSize="2xl"
       isPreviewFocusable={false}
       onSubmit={save}
     >
       <Flex>
         <EditablePreview />
-        {/* Here is the custom input */}
         <Input as={EditableInput} type="number" />
         <EditableControls />
       </Flex>

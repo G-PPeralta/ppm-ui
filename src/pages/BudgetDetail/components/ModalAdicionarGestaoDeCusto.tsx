@@ -1,8 +1,9 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Felipe Mateus
+//  DESCRIÇÃO DO ARQUIVO: Botão e Modal gestão de custos tela de orçamento.
+
 import { useEffect } from "react";
-// import { GrAddCircle } from "react-icons/gr";
-// import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BiPlusCircle } from "react-icons/bi";
-// import { BsPlusCircle } from "react-icons/bs";
 
 import {
   Flex,
@@ -24,18 +25,12 @@ import {
   Select,
   Textarea,
   InputGroup,
-  // NumberInput,
-  // NumberInputField,
-  // NumberInputStepper,
-  // NumberIncrementStepper,
-  // NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { Projeto } from "interfaces/Budgets";
 
 import InputGenerico from "components/InputGenerico";
 import { RequiredField } from "components/RequiredField/RequiredField";
-// import { TextError } from "components/TextError";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
@@ -137,7 +132,6 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                           <InputGroup>
                             <InputGenerico
                               registerForm={registerForm}
-                              // nomeInput={"Valor Gasto"}
                               propName={"gasto"}
                               value={registerForm.values.gasto || ""}
                               required={true}
@@ -175,9 +169,6 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                             value={registerForm.values.data}
                             onChange={registerForm.handleChange}
                           />
-                          {/* {registerForm.errors.data && (
-                            <TextError>{registerForm.errors.data}</TextError>
-                         )} */}
                         </FormControl>
                       </Flex>
                       <FormControl>
@@ -208,12 +199,6 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                               <option value={d.id}>{d.nomefornecedor}</option>
                             ))}
                         </Select>
-
-                        {/* {registerForm.errors.fornecedor && (
-                          <TextError>
-                            {registerForm.errors.fornecedor}
-                          </TextError>
-                       )} */}
                       </FormControl>
                       <Flex
                         flexDirection={useBreakpointValue({
@@ -250,10 +235,6 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                                 <option value={d.id}>{d.classe_servico}</option>
                               ))}
                           </Select>
-                          {/*  {registerForm.errors.servico && (
-                            <TextError>{registerForm.errors.servico}</TextError>
-                          )}
-                          */}
                         </FormControl>
                         <FormControl>
                           <Flex gap={1}>
@@ -288,26 +269,6 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                             size="md"
                             type="text"
                           />
-                          {/* <NumberInput
-                            h={"56px"}
-                            placeholder="Pedido"
-                            id="pedido"
-                            name="pedido"
-                            max={999999999999}
-                            value={registerForm.values.pedido}
-                            onChange={(value) => {
-                              registerForm.setFieldValue(
-                                "pedido",
-                                Number(value)
-                              );
-                            }}
-                          >
-                            <NumberInputField h={"56px"} />
-                            {/* <NumberInputStepper>
-                              <NumberIncrementStepper />
-                              <NumberDecrementStepper />
-                            </NumberInputStepper> 
-                          </NumberInput> */}
                         </FormControl>
                       </Flex>
 
@@ -334,12 +295,6 @@ function ModalAdicionarGestaoDeCusto(props: PropsInterface) {
                           value={registerForm.values.pedido_obs}
                           onChange={registerForm.handleChange}
                         />
-
-                        {/* {registerForm.errors.pedido_obs && (
-                          <TextError>
-                            {registerForm.errors.pedido_obs}
-                          </TextError>
-                        )} */}
                       </FormControl>
                     </Flex>
                   </Stack>

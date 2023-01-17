@@ -1,4 +1,7 @@
-// import { FiPrinter } from "react-icons/fi";
+//  CRIADO EM: 07/2022
+//  AUTOR: Felipe Mateus
+//  DESCRIÇÃO DO ARQUIVO: Tabela de custos totais.
+
 import Moment from "react-moment";
 
 import {
@@ -9,7 +12,6 @@ import {
   Th,
   Td,
   Tbody,
-  // Tfoot,
 } from "@chakra-ui/react";
 import { Totalizacao } from "interfaces/Budgets";
 import moment from "moment";
@@ -29,21 +31,7 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
           <Thead>
             <Tr background={"origem.500"} color="white">
               <Th color="white">Item</Th>
-              <Th align="right" color="white" maxWidth="1.5">
-                {/* <Button
-                  className={"noprint"}
-                  variant="outline"
-                  onClick={() => window.print()}
-                >
-                  Imprimir
-                  <IconButton
-                    color={"white"}
-                    backgroundColor="transparent"
-                    aria-label="imprimir"
-                    icon={<FiPrinter />}
-                  />
-                </Button>  */}
-              </Th>
+              <Th align="right" color="white" maxWidth="1.5"></Th>
               <Th color="white" textAlign="right">
                 Valor
               </Th>
@@ -79,21 +67,6 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
               </Td>
             </Tr>
 
-            {/* <Tr>
-              <Td>Custo Diario Acumulado R$</Td>
-              <Td></Td>
-              <Td textAlign="right">
-                {formatReal(data?.custoDiarioTotalBRL || 0)}
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>Custo Diario Acumulado US$</Td>
-              <Td></Td>
-              <Td textAlign="right">
-                {formatUSD(data?.custoDiarioTotalUSD || 0)}
-              </Td>
-            </Tr> */}
-
             <Tr>
               <Td>Custo Total Realizado R$</Td>
               <Td></Td>
@@ -126,28 +99,6 @@ export function TotalTable(props: { data: Totalizacao | undefined }) {
               </Td>
             </Tr>
           </Tbody>
-          {/* <Tfoot>
-            <Tr background={"origem.500"} color="white">
-              <Th colSpan={2} color="white">
-                Total R$
-              </Th>
-              <Th color="white" textAlign="right">
-                {formatReal(data?.totalBRL || 0)}
-              </Th>
-            </Tr>
-            <Tr background={"origem.500"} color="white">
-              <Th colSpan={2} color="white" borderBottomLeftRadius={"10px"}>
-                Total US$
-              </Th>
-              <Th
-                color="white"
-                borderBottomRightRadius={"10px"}
-                textAlign="right"
-              >
-                {formatUSD(data?.totalUSD || 0)}
-              </Th>
-            </Tr>
-                </Tfoot> */}
         </Table>
       </TableContainer>
     </>

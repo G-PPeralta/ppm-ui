@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Felipe Mateus
+//  DESCRIÇÃO DO ARQUIVO: Tela de orçamento detalhado.
+
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useParams } from "react-router-dom";
 
@@ -34,8 +38,6 @@ export function BudgetDetail() {
             <Flex>
               <Box p="4">
                 <Heading
-                  // as="h3"
-                  // size="md"
                   fontFamily={"Mulish"}
                   fontWeight={"700"}
                   fontSize={"24px"}

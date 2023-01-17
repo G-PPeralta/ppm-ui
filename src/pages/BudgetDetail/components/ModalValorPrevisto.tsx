@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Felipe Mateus
+//  DESCRIÇÃO DO ARQUIVO: Botão e modal de editar valor previsto.
+
 import { useEffect } from "react";
 import { MdModeEdit } from "react-icons/md";
 
@@ -8,7 +12,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  // ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
@@ -23,11 +26,9 @@ import {
 import { Ring } from "@uiball/loaders";
 import { Projeto } from "interfaces/Budgets";
 
-// import RealInput from "components/RealInput/input";
 import InputGenerico from "components/InputGenerico";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
-// import { formatReal, getMoney } from "utils/regexCoinMask";
 
 import { useCadastroOrcamentoPrevisto } from "hooks/useCadastroOrcamentoPrevisto";
 
@@ -188,4 +189,3 @@ function ModalValorPrevisto(props: PropsInterface) {
 }
 
 export default ModalValorPrevisto;
-//

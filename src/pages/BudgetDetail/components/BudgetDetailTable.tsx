@@ -1,7 +1,10 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Felipe Mateus
+//  DESCRIÇÃO DO ARQUIVO: Tabela area orçamento detalhado.
+
 import { FiChevronDown } from "react-icons/fi";
 
 import "./expansiveTable.css";
-// import ModalCadastrarOrcamentoPrevisto from "./ModalCadastrarOrcamentoPrevisto";
 import {
   Flex,
   Table,
@@ -29,45 +32,6 @@ interface PropsInterface {
 
 export function BudgetDetailTable(props: PropsInterface) {
   const { data, toogleRender } = props;
-
-  //  const color = "rgb(46, 105, 253)";
-
-  /*  const [from, setFrom] = useState<number>(0);
-  const [to, setTo] = useState<number>(5);
-  const [pagAtual, setPagAtual] = useState(1);
-
-  const rowsPerPage = 5;
-  const totalRegs = data.length;
-  const maxPage = Math.ceil(totalRegs / rowsPerPage);
-*/
-
-  /* const paginate = (pag: number) => {
-    setPagAtual(pag);
-
-    const x = (pag - 1) * rowsPerPage;
-    const y = (pag - 1) * rowsPerPage + rowsPerPage;
-    setFrom(x);
-    setTo(y);
-  };
-
-  const advance = () => {
-    if (pagAtual == maxPage) {
-      return;
-    }
-
-    const _pag = pagAtual + 1;
-
-    paginate(_pag);
-  };
-
-  const back = () => {
-    if (pagAtual == 1) {
-      return;
-    }
-    const _pag = pagAtual - 1;
-    paginate(_pag);
-  };
-*/
   const toggleAcordion = (id: number) => {
     const elements = document.getElementsByClassName("item-" + id);
     for (let i = 0; i < elements.length; i++) {
@@ -78,14 +42,12 @@ export function BudgetDetailTable(props: PropsInterface) {
   const tableData = data.map((detail, key) => (
     <>
       <Tr background={"origem.200"} key={detail.id} color="white">
-        {/* <Td>{detail.data}</Td> */}
         <Td>{detail.brt}</Td>
         <Td onClick={() => toggleAcordion(key)}>
           <Flex alignItems={"center"} justifyContent="space-between">
             {detail.projeto.nome} <FiChevronDown size={"18px"} />{" "}
           </Flex>
         </Td>
-        {/* <Td></Td> */}
         <Td textAlign="right">{formatReal(detail.planejado)}</Td>
         <Td textAlign="right">
           <ModalCustoDiario
@@ -99,10 +61,8 @@ export function BudgetDetailTable(props: PropsInterface) {
       {detail.filhos &&
         detail.filhos.map((filho) => (
           <Tr className={"hide item-" + key} key={filho.id}>
-            {/* <Td></Td> */}
             <Td>{filho.brt}</Td>
             <Td>{filho.projeto.nome}</Td>
-            {/* <Td>{filho.fornecedor}</Td> */}
             <Td textAlign="right">
               <ModalValorPrevisto
                 projeto={filho.projeto}
@@ -137,21 +97,7 @@ export function BudgetDetailTable(props: PropsInterface) {
               <Th colSpan={4} color={"white"} borderTopLeftRadius="10px">
                 Atividade
               </Th>
-              <Th borderTopRightRadius={"10px"} colSpan={2}>
-                {/* <Button
-                  className={"noprint"}
-                  variant="outline"
-                  onClick={() => window.print()}
-                >
-                  Imprimir
-                  <IconButton
-                    color={"white"}
-                    backgroundColor="transparent"
-                    aria-label="imprimir"
-                    icon={<FiPrinter />}
-                  />
-                </Button> */}
-              </Th>
+              <Th borderTopRightRadius={"10px"} colSpan={2}></Th>
             </Tr>
             <Tr background={"origem.500"} color="white">
               {/* <Th>Data</Th> */}

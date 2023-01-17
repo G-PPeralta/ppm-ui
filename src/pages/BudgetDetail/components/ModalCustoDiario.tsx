@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Felipe Mateus
+//  DESCRIÇÃO DO ARQUIVO: Tabela e Modal de custo tela de orçamento.
+
 /* eslint-disable no-nested-ternary */
 import { useEffect, useState } from "react";
 import { BsSearch, BsFillEyeFill } from "react-icons/bs";
@@ -10,9 +14,7 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  // ModalCloseButton,
   ModalBody,
-  // ModalFooter,
   useDisclosure,
   Button,
   ModalCloseButton,
@@ -27,7 +29,6 @@ import {
   Input,
   IconButton,
 } from "@chakra-ui/react";
-// import { Ring } from "@uiball/loaders";
 import { BudgetDetail, CustoDiario } from "interfaces/Budgets";
 
 import Empty from "components/TableEmpty/empty";
@@ -49,7 +50,6 @@ function ModalCustoDiario(props: {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [startDate, setStartDate] = useState<string | null>(null);
   const [endDate, setEndDate] = useState<Date | string | null>(null);
-  // const [loading, setLoading] = useState(true); // Loading
   const [data, setData] = useState<CustoDiario[]>([]);
   const { filho, pai, toogleRender, showButton } = props;
 
@@ -65,7 +65,6 @@ function ModalCustoDiario(props: {
         setData(data);
       }
     }
-    // setLoading(false);
   };
 
   useEffect(() => {
@@ -73,7 +72,6 @@ function ModalCustoDiario(props: {
   }, [startDate, endDate]);
 
   const FilterByDate = async () => {
-    //  setLoading(true);
     if (filho) {
       const data = await getCustoDiarioFilho(
         filho.projeto.id,
@@ -85,26 +83,12 @@ function ModalCustoDiario(props: {
       const data = await getCustoDiarioPai(pai.projeto.id, startDate, endDate);
       setData(data);
     }
-    // setLoading(false);
   };
 
   const closeOnSuccess = () => {
     onClose();
     toogleRender();
   };
-
-  /* const onChange = (dates: [any, any]) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
-  }; */
-
-  /* const toggleAcordion = (id: number) => {
-    const elements = document.getElementsByClassName("item2-" + id);
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].classList.toggle("hide");
-    }
-  }; */
 
   const tableData = data.map((dia, key) => (
     <>
@@ -173,10 +157,6 @@ function ModalCustoDiario(props: {
 
       {formatReal(filho ? filho.realizado : pai ? pai.realizado : 0)}
 
-      {/* <Text style={{ cursor: "pointer" }} onClick={onOpen}>
-        {formatReal(filho ? filho.realizado : pai ? pai.realizado : 0)}
-      </Text> */}
-
       <Modal isOpen={isOpen} onClose={onClose} size="6xl">
         <ModalOverlay />
         <ModalContent>
@@ -189,7 +169,6 @@ function ModalCustoDiario(props: {
             fontSize={"14px"}
             fontWeight={"700"}
           >
-            {/* {filho ? filho.projeto.nome : pai?.projeto.nome} */}
             Custo Diário
           </ModalHeader>
           <ModalCloseButton color={"white"} />
@@ -223,7 +202,6 @@ function ModalCustoDiario(props: {
                         </Text>
                       </Flex>
                       <Input
-                        // placeholder="dd/mm/aaaa"
                         _placeholder={{ color: "#949494" }}
                         fontSize={"14px"}
                         fontWeight={"400"}
@@ -238,7 +216,6 @@ function ModalCustoDiario(props: {
                         id="data"
                         type="Date"
                         name="data"
-                        // value={startDate}
                         onChange={(event) => setStartDate(event.target.value)}
                       />
                     </Flex>
@@ -254,7 +231,6 @@ function ModalCustoDiario(props: {
                         </Text>
                       </Flex>
                       <Input
-                        // placeholder="dd/mm/aaaa"
                         _placeholder={{ color: "#949494" }}
                         fontSize={"14px"}
                         fontWeight={"400"}
@@ -269,7 +245,6 @@ function ModalCustoDiario(props: {
                         id="data"
                         type="Date"
                         name="data"
-                        // value={endDate}
                         onChange={(event) => setEndDate(event.target.value)}
                       />
                     </Flex>
@@ -324,24 +299,6 @@ function ModalCustoDiario(props: {
               </TableContainer>
             </>
           </ModalBody>
-          {/* }ModalFooter justifyContent={"center"}>
-            <Flex gap={2}>
-              <Button
-                h={"56px"}
-                borderRadius={"10px"}
-                variant="ghost"
-                color="red"
-                _hover={{
-                  background: "red.500",
-                  transition: "all 0.4s",
-                  color: "white",
-                }}
-                onClick={() => onClose()}
-              >
-                Fechar
-              </Button>
-            </Flex>
-              </ModalFooter> */}
         </ModalContent>
       </Modal>
     </>

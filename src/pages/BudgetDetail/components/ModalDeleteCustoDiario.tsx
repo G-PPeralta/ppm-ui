@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Felipe Mateus
+//  DESCRIÇÃO DO ARQUIVO: Botão e modal de deletar um dia.
+
 import { FiTrash } from "react-icons/fi";
 
 import {
@@ -7,7 +11,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  // ModalCloseButton,
   FormControl,
   Stack,
   ModalBody,
@@ -84,7 +87,6 @@ function ModalDeleteCustoDiario(props: PropsInterface) {
                 <Stack gap={2}>
                   <Flex>
                     <Text
-                      // textAlign={"center"}
                       fontSize={"20px"}
                       mb={"1px"}
                       color={"#010101"}

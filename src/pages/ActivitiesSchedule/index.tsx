@@ -1,3 +1,7 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Tela de visualização das atividades de uma intervenção.
+
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -6,7 +10,6 @@ import { Flex, Button, Select, FormControl } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import ContainerPagina from "components/ContainerPagina";
-// import SelectFiltragem from "components/SelectFiltragem";
 import Sidebar from "components/SideBar";
 import TituloPagina from "components/TituloPagina";
 
@@ -19,7 +22,6 @@ import { getAtividadesCampanha } from "services/get/ActivitiesSchedule";
 import StatusProjeto from "../../components/StatusProjeto";
 import BotaoVisaoPorArea from "./Components/BotaoVisaoPorArea";
 import CardACT from "./Components/CardACT";
-// import ModalAtividade from "./Components/ModalAtividade";
 import ModalCadastroAtividadeIntervencao from "./Components/ModalCadastroAtividadeIntervencao";
 import ModalEditarAtividade from "./Components/ModalEditarAtividade";
 
@@ -65,8 +67,6 @@ export function ActivitiesSchedule() {
     setOpenId(atividade);
     setOpenIndex(index);
   };
-
-  // console.log(fase);
 
   useEffect(() => {
     setPoco(state.poco);

@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Felipe Mateus
+//  DESCRIÇÃO DO ARQUIVO: Seletor de data para escolher o dia do custo diário.
+
 import { forwardRef, useEffect, useState } from "react";
 import ReactDatePicker, { registerLocale } from "react-datepicker";
 import { BsFillCalendarCheckFill } from "react-icons/bs";
@@ -19,18 +23,12 @@ function DatePickerGenericoCustoDiario({
   esconderHorario,
 }: any) {
   const [dataInicio, setDataInicio] = useState<any>("");
-  /* const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndSate] = useState(new Date()); */
 
   useEffect(() => {
     if (data) {
       const newDate = new Date(data);
       setDataInicio(newDate);
     }
-
-    /* const mesAtual = mes - 1;
-    setStartDate(new Date(new Date().getFullYear(), mesAtual, 1));
-    setEndSate(new Date(new Date().getFullYear(), mesAtual + 1, 0)); */
   }, []);
 
   const handleIniciarDate = (dataSelecionada: any) => {
@@ -83,8 +81,6 @@ function DatePickerGenericoCustoDiario({
         dateFormat={esconderHorario ? "dd/MM/yyyy" : "Pp"}
         customInput={<TriggerDatePickerInicio />}
         timeFormat="p"
-        /* minDate={startDate}
-        maxDate={endDate} */
       />
     </Flex>
   );
