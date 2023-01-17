@@ -1,44 +1,8 @@
-import { BarChart, Bar, XAxis, Tooltip, Legend } from "recharts";
+//  CRIADO EM: 6/2022
+//  AUTOR: Bruno Fracaro, Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Componente genérico para bar charts.
 
-// const data = [
-//   {
-//     name: "Jan",
-//     Realizado: 4000,
-//     Previsto: 2400,
-//     amt: 2400,
-//   },
-//   {
-//     name: "Fev",
-//     Realizado: 3000,
-//     Previsto: 1398,
-//   },
-//   {
-//     name: "Mar",
-//     Realizado: 2000,
-//     Previsto: 9800,
-//   },
-//   {
-//     name: "Abr",
-//     Realizado: 2780,
-//     Previsto: 3908,
-//   },
-//   {
-//     name: "Mai",
-//     Realizado: 1890,
-//     Previsto: 4800,
-//   },
-//   {
-//     name: "Jun",
-//     Realizado: 2390,
-//     Previsto: 3800,
-//     amt: 2500,
-//   },
-//   {
-//     name: "Jul",
-//     Realizado: 3490,
-//     Previsto: 4300,
-//   },
-// ];
+import { BarChart, Bar, XAxis, Tooltip, Legend } from "recharts";
 
 export default function BarChartGraphic({ data }: any) {
   const mesSemAno = data.map((m: any) => ({

@@ -1,3 +1,7 @@
+//  CRIADO EM: 6/2022
+//  AUTOR: Bruno Fracaro, Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Tela dashboard.
+
 import React, { useEffect, useState } from "react";
 
 import { Box, Flex } from "@chakra-ui/react";

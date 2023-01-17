@@ -1,3 +1,7 @@
+//  CRIADO EM: 6/2022
+//  AUTOR: Bruno Fracaro, Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Card projetos dashboard.
+
 import { useState, useEffect } from "react";
 import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -21,62 +25,14 @@ import { getInfoProjetos } from "services/get/Infograficos";
 
 export default function NaoPrevistoComponent() {
   const [projetos, setProjetos] = useState<Projetos[]>([] as Projetos[]);
-  // const [trut, setTrue] = useState(false);
   const handleGetProjetos = async () => {
     const response = await getInfoProjetos();
-    // console.log('reponse', response.data);
     setProjetos(response.data);
   };
 
   useEffect(() => {
     handleGetProjetos();
   }, []);
-
-  // console.log(projetos);
-
-  // const data = {
-  //   id: 1,
-  //   name: "Nome do Projeto",
-  //   orcament: "1.000.000",
-  //   cpi: "yellow",
-  //   spi: "red",
-  // };
-  //   {
-  //     id: 2,
-  //     name: 'Nome do Projeto',
-  //     orcament: '1.000.000',
-  //     cpi: 'green',
-  //     spi: 'red',
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Nome do Projeto',
-  //     orcament: '1.000.000',
-  //     cpi: 'yellow',
-  //     spi: 'blue',
-  //   },
-  //   {
-  //     id: 4,
-  //     name: 'Nome do Projeto',
-  //     orcament: '1.000.000',
-  //     cpi: 'yellow',
-  //     spi: 'red',
-  //   },
-  //   {
-  //     id: 5,
-  //     name: 'Nome do Projeto',
-  //     orcament: '1.000.000',
-  //     cpi: 'yellow',
-  //     spi: 'red',
-  //   },
-  //   {
-  //     id: 6,
-  //     name: 'Nome do Projeto',
-  //     orcament: '1.000.000',
-  //     cpi: 'yellow',
-  //     spi: 'red',
-  //   },
-  // ];
 
   return (
     <Flex align="center" justify="center" bg={"#EDF2F7"} flex={4} w={"100%"}>
@@ -137,25 +93,11 @@ export default function NaoPrevistoComponent() {
                     <Th mr={-10} color={"#628EFD"} sx={{ fontSize: 12 }}>
                       <Text>{projeto.campo_id}</Text>
                     </Th>
-                    <Th
-                      mr={-10}
-                      color={"#628EFD"}
-                      sx={{ fontSize: 12 }}
-                      // onMouseOver={(event) => {
-                      //   // console.log(projeto.nomeProjeto);
-
-                      //   setTrue(true);
-                      //   return projeto.nome;
-                      // }}
-                      // onMouseOut={() => {
-                      //   setTrue(false);
-                      // }}
-                    >
+                    <Th mr={-10} color={"#628EFD"} sx={{ fontSize: 12 }}>
                       <Link to={`/detalhamento/${projeto.id_projeto_real}`}>
                         <Text>{projeto.nome_projeto}</Text>
                       </Link>
                     </Th>
-                    {/* {trut ? <Text> {projeto.nomeProjeto}</Text> : ''} */}
                     <Th color="gray.400" sx={{ fontSize: 12 }}>
                       <Flex flexGrow={1} align={"center"}>
                         <Text textAlign={"center"}>
@@ -243,50 +185,6 @@ export default function NaoPrevistoComponent() {
                         </Box>
                       )}
                     </Th>
-                    {/* {d.cpi == 'green' ? (
-                          <Box
-                            w={5}
-                            h={5}
-                            bg={'#93E01B'}
-                            display={'flex'}
-                            flexDirection="column"
-                            alignItems={'center'}
-                            pt={'2px'}
-                            sx={{ borderRadius: '100%' }}
-                          >
-                            <AiOutlineCaretUp color="#ffffff" size={14} />
-                          </Box>
-                        ) : undefined} */}
-                    {/* <Th> */}
-                    {/* {d.spi == 'red' ? (
-                          <Box
-                            w={5}
-                            h={5}
-                            bg={'#F94144'}
-                            display={'flex'}
-                            flexDirection="column"
-                            alignItems={'center'}
-                            pt={'2px'}
-                            sx={{ borderRadius: '100%' }}
-                          >
-                            <AiOutlineCaretUp color="#ffffff" size={14} />
-                          </Box>
-                        ) : undefined} */}
-                    {/* {d.spi == 'blue' ? (
-                          <Box
-                            w={5}
-                            h={5}
-                            bg={'#2E69FD'}
-                            display={'flex'}
-                            flexDirection="column"
-                            alignItems={'center'}
-                            pt={'2px'}
-                            sx={{ borderRadius: '100%' }}
-                          >
-                            <AiOutlineCaretUp color="#ffffff" size={14} />
-                          </Box>
-                        ) : undefined} */}
-                    {/* </Th> */}
                   </Tr>
                 ))}
               </Tbody>

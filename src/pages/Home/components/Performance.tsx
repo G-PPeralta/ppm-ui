@@ -1,3 +1,7 @@
+//  CRIADO EM: 6/2022
+//  AUTOR: Bruno Fracaro, Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Cards de performance dashboard.
+
 import { useEffect, useState } from "react";
 
 import {

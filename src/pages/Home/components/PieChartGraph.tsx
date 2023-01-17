@@ -1,3 +1,7 @@
+//  CRIADO EM: 6/2022
+//  AUTOR: Bruno Fracaro, Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Gráfico de pizza.
+
 import React from "react";
 
 import { Box } from "@chakra-ui/react";

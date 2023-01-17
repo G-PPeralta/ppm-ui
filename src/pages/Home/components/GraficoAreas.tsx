@@ -1,3 +1,7 @@
+//  CRIADO EM: 6/2022
+//  AUTOR: Bruno Fracaro, Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Componente genérico graficos de area.
+
 import React from "react";
 
 import { BarChart, Bar, XAxis, Tooltip, Legend } from "recharts";

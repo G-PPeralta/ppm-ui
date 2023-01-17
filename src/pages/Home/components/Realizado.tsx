@@ -1,4 +1,6 @@
-// import { useEffect, useState } from "react";
+//  CRIADO EM: 6/2022
+//  AUTOR: Bruno Fracaro, Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Valores realizados.
 
 import {
   Box,
@@ -8,40 +10,9 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-// import { TotalOrcamento, TotalRealizado } from "interfaces/Services";
-
-// import { getOrcamentoTotal, getTotalRealizado } from "services/get/Dashboard";
-
 import { useDashboard } from "contexts/Dashboard";
 
 export default function RealizadoComponent() {
-  // const [totalRealizado, setTotalRealizado] = useState<TotalRealizado[]>(
-  //   [] as TotalRealizado[]
-  // );
-  // const [orcamento, setTotalOrcamento] = useState<TotalOrcamento[]>();
-  // const [loading, setLoading] = useState(false);
-
-  // async function handleGetTotalRealizado() {
-  //   setLoading(true);
-  //   const reqGet = await getTotalRealizado();
-
-  //   setTotalRealizado(reqGet.data[0].totalRealizado);
-  //   setLoading(false);
-  // }
-
-  // async function handleGetTotalOrcamento() {
-  //   const reqGet = await getOrcamentoTotal();
-
-  //   setTotalOrcamento(reqGet.data[0].total);
-  // }
-
-  // useEffect(() => {
-  //   handleGetTotalOrcamento();
-  //   handleGetTotalRealizado();
-  //   setLoading(false);
-  // }, []);
-
-  // const valorFormatado = totalRealizado && totalRealizado.toLocaleString();
   const { loading, valorRealizado, porcentagemRealizado } = useDashboard();
 
   return (
@@ -76,12 +47,6 @@ export default function RealizadoComponent() {
             Realizado
           </Text>
           <Box sx={{ display: "flex" }}>
-            {/* <Text
-              sx={{ fontSize: 12, fontWeight: "600", alignSelf: "center" }}
-              color="#000000"
-            >
-              R$
-            </Text> */}
             <Text
               ml={2}
               sx={{
@@ -141,12 +106,6 @@ export default function RealizadoComponent() {
             }}
             color="#ffffff"
           >
-            {/* {!totalRealizado ||
-            !orcamento ||
-            isNaN(Number(totalRealizado)) ||
-            isNaN(Number(orcamento))
-              ? 0
-              : ((Number(totalRealizado) / Number(orcamento)) * 100).toFixed(2)} */}
             {!loading && porcentagemRealizado.toFixed(0).replace(".", ",")}%
           </Text>
         </Flex>
