@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Regras de importação de planilha.
+
 import { AiFillExclamationCircle } from "react-icons/ai";
 import "../components/regras.css";
 
