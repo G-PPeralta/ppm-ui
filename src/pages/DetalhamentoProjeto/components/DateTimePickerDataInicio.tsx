@@ -1,3 +1,7 @@
+//  CRIADO EM: 06/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Seletor de data de início pro modal de edição e cadastro.
+
 import { forwardRef, useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 
@@ -9,7 +13,6 @@ import { formatDateToYYYYMMDDhhmmss } from "utils/formatDate";
 
 function DateTimePickerDataInicio({ registerForm, data }: any) {
   const [dataInicio, setDataInicio] = useState<any>("");
-  // const [dataMin, setDataMin] = useState<any>("");
 
   useEffect(() => {
     if (data) {
@@ -57,13 +60,11 @@ function DateTimePickerDataInicio({ registerForm, data }: any) {
       </Flex>
       <ReactDatePicker
         selected={dataInicio}
-        // minDate={dataMin}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
         // showTimeSelect
         dateFormat="Pp"
         customInput={<TriggerDatePickerInicio />}
-        // isClearable={dataInicio !== ""}
       />
     </Flex>
   );

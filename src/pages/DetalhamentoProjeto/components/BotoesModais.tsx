@@ -1,3 +1,7 @@
+//  CRIADO EM: 06/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Botões da tela de detalhmaneto do projeto.
+
 import { Flex } from "@chakra-ui/react";
 
 import BotaoDescricaoEJustificativa from "./BotaoDescricaoEJustificativa";

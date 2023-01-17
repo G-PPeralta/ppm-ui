@@ -1,3 +1,7 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Card com nome ,polo, local, e responsáveis pelo projeto, na parte superior esquerda.
+
 import { FaWarehouse } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
 import { IoIosArrowBack } from "react-icons/io";
@@ -66,7 +70,6 @@ function CardInfoProjeto({
           display={"flex"}
           flexDirection={"row"}
           alignItems={"center"}
-          // justifyContent={"center"}
         >
           <Link href="javascript:history.back()" pr={"14px"} pl={0}>
             <IoIosArrowBack size={"25px"} />

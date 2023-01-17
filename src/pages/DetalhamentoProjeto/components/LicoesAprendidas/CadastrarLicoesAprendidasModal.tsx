@@ -1,12 +1,12 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Gabriel Peralta.
+//  DESCRIÇÃO DO ARQUIVO: Modal de cadastra lição aprendida.
+
 import { useState } from "react";
-// import { BsPlusLg } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 
 import {
   Flex,
-  // Box,
-  // IconButton,
-  // useBreakpointValue,
   Textarea,
   Modal,
   ModalOverlay,
@@ -120,7 +120,6 @@ function CadastrarLicoesAprendidasModal({
                 </Flex>
               </FormLabel>
               <Textarea
-                // maxLength={150}
                 borderRadius={"8px"}
                 border={"1px solid #949494"}
                 mt={"-9px"}

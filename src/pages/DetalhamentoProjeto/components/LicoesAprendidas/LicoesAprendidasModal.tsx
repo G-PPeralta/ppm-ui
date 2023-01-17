@@ -1,3 +1,7 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Gabriel Peralta.
+//  DESCRIÇÃO DO ARQUIVO: Modal visualizar lições aprendidas.
+
 import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
@@ -8,7 +12,6 @@ import {
   FormLabel,
   Icon,
   Input,
-  // Icon,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -16,7 +19,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  // Select,
   Stack,
   Text,
   useBreakpointValue,
@@ -177,14 +179,7 @@ function LicoesAprendidasModal({
                         name="categoria"
                         placeholder="Digite"
                         onChange={(e) => setCategoriaId(e.target.value)}
-                      >
-                        {/* <option value="">Selecione</option>
-                      {categorias.map((cat: any, index: number) => (
-                        <option value={cat.id} key={index}>
-                          {cat.nom_categoria}
-                        </option>
-                      ))} */}
-                      </Input>
+                      ></Input>
                     </FormControl>
                   </Flex>
 
@@ -201,7 +196,6 @@ function LicoesAprendidasModal({
                         </Text>
                       </FormLabel>
                       <Input
-                        // placeholder="dd/mm/aaaa"
                         _placeholder={{ color: "#949494" }}
                         fontSize={"14px"}
                         fontWeight={"400"}
@@ -216,14 +210,9 @@ function LicoesAprendidasModal({
                         id="data"
                         type="Date"
                         name="data"
-                        // value={data}
                         onChange={(event) => setData(event.target.value)}
                       />
                     </FormControl>
-                    {/* <input
-                    type="date"
-                    onChange={(event) => setData(event.target.value)}
-                  /> */}
                   </Flex>
 
                   <Flex>
@@ -236,8 +225,6 @@ function LicoesAprendidasModal({
                       color="#0047BB"
                       borderColor="#0047BB"
                       border={"2px"}
-                      // h={useBreakpointValue({ base: "100%", md: "120%" })}
-                      // float={"right"}
                       onClick={() => {
                         handleFilter();
                       }}
@@ -267,9 +254,6 @@ function LicoesAprendidasModal({
                         variant="primary"
                         color="white"
                         alignSelf={"end"}
-                        // border={"2px"}
-                        // h={useBreakpointValue({ base: "100%", md: "120%" })}
-                        // float={"right"}
                         onClick={() => setOpenModalRegister(true)}
                         _hover={{
                           background: "origem.600",
@@ -316,11 +300,7 @@ function LicoesAprendidasModal({
             )}
           </ModalBody>
 
-          <ModalFooter>
-            {/* <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button> */}
-          </ModalFooter>
+          <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
     </>

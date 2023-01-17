@@ -1,12 +1,13 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Gabriel Peralta.
+//  DESCRIÇÃO DO ARQUIVO: Cadastrar nova tarefa.
+
 import { useEffect } from "react";
-// import { BsPlusLg } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 
 import {
   Flex,
   Box,
-  // IconButton,
-  // useBreakpointValue,
   Textarea,
   Modal,
   ModalOverlay,
@@ -21,7 +22,6 @@ import {
   Button,
   Select,
   Text,
-  // useDisclosure,
 } from "@chakra-ui/react";
 import { AtividadesProjeto } from "interfaces/Services";
 
@@ -56,39 +56,7 @@ function CadastroTarefasModal({
 
   return (
     <Flex>
-      <Box
-      // display={"flex"}
-      // alignItems={"center"}
-      // border="2px"
-      // padding={2}
-      // borderRadius={6}
-      // borderColor={"origem.300"}
-      // _hover={{
-      //   background: "#f5f5f5",
-      //   transition: "all 0.4s",
-      //   color: "origem.300",
-      //   cursor: "pointer",
-      //   borderColor: "origem.500",
-      // }}
-      >
-        {/* <IconButton
-          aria-label="Plus sign"
-          icon={<BsPlusLg />}
-          background="origem.300"
-          variant="secondary"
-          color="white"
-          mr={2}
-          isRound={true}
-          size="sm"
-        /> */}
-        {/* <Text
-          fontSize={useBreakpointValue({ base: "sm", md: "sm" })}
-          fontWeight={"bold"}
-          color={"origem.500"}
-        >
-          EDITAR FORNECEDOR
-        </Text> */}
-      </Box>
+      <Box></Box>
       <Modal isOpen={isModalOpen} onClose={closeModal} size="lg">
         <ModalOverlay />
         <ModalContent>
@@ -110,7 +78,6 @@ function CadastroTarefasModal({
               padding={1}
               display={"flex"}
               justifyContent={"space-between"}
-              // gap={3}
             >
               <Flex flexDir={"column"} flexGrow={4} mr={4} ml={-2}>
                 {" "}
@@ -182,7 +149,6 @@ function CadastroTarefasModal({
               marginBottom={1}
               width={"204px"}
               display="flex"
-              // gap={1}
             >
               <Flex direction={"column"} mr={4} ml={-2}>
                 <FormLabel
@@ -212,7 +178,6 @@ function CadastroTarefasModal({
                   value={registerForm.values.atividadeRel}
                   onChange={registerForm.handleChange}
                 >
-                  {/* <option value="">Selecione</option> */}
                   {atividadesProjeto.map((atividade, index) => (
                     <option value={atividade.nom_atividade} key={index}>
                       {atividade.nom_atividade}
@@ -260,7 +225,6 @@ function CadastroTarefasModal({
                 mt={"6px"}
               >
                 <Flex gap={1} mr={4} ml={-2}>
-                  {/* <RequiredField /> */}
                   DESCRIÇÃO DA TAREFA
                 </Flex>
               </FormLabel>

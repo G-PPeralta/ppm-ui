@@ -1,5 +1,8 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Gabriel Peralta.
+//  DESCRIÇÃO DO ARQUIVO: Tabela visualizar tarefas.
+
 import { useEffect, useState } from "react";
-// import toast from "react-hot-toast";
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdModeEdit } from "react-icons/md";
 import { useParams } from "react-router-dom";
@@ -16,7 +19,6 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  // ModalFooter,
   ModalHeader,
   ModalOverlay,
   Stack,
@@ -82,7 +84,6 @@ function BotaoListadeTarefas() {
 
   async function getTaskList() {
     const { data } = await getAtividadesTarefas(Number(id));
-    // console.log(data);
 
     setTaskListFiltered(data);
     setTaskList(data);
@@ -97,29 +98,6 @@ function BotaoListadeTarefas() {
     setEditTarefa(tarefa);
     setIsEditModalOpen(true);
   }
-
-  // function handleFilter(nome: string, data: string) {
-  //   let filtered = taskListFiltered;
-
-  //   if (nome && data) {
-  //     filtered = taskListFiltered.filter(
-  //       (task: any) =>
-  //         task.nome_tarefa.toUpperCase().includes(nome.toUpperCase()) &&
-  //         task.data_tarefa.includes(data)
-  //     );
-  //     return setTaskListFiltered(filtered);
-  //   }
-  //   // if (data) {
-  //   //   const filtered = taskListFiltered.filter((task: any) =>
-  //   //     task.data_tarefa.includes(data)
-  //   //   );
-  //   // filtered.length == 0 &&
-  //   //   toast.error("Nenhum dado encontrado com o presente filtro de data");
-  //   //   return setTaskListFiltered(filtered);
-  //   // }
-  //   if (filtered) setTaskListFiltered(filtered);
-  //   setTaskListFiltered(taskList);
-  // }
 
   function handleFilter() {
     if (tarefaFilter || dataFilter) {
@@ -160,11 +138,6 @@ function BotaoListadeTarefas() {
                 <Td textAlign={"center"} fontWeight={"semibold"}>
                   {task.responsavel}
                 </Td>
-                {/* {task.status === 0 && (
-                  <Td textAlign={"center"} fontWeight={"semibold"}>
-                    {!task.status ? "Em Andamento" : task.status}
-                  </Td>
-                )} */}
                 {task.status === "1" && (
                   <Td textAlign={"center"} fontWeight={"semibold"}>
                     Concluído
@@ -192,10 +165,7 @@ function BotaoListadeTarefas() {
                       backgroundColor: "origem.500",
                       color: "white",
                     }}
-                    // isRound={true}
                     onClick={() => handleEditTarefa(task)}
-                    // width={"18px"}
-                    // height={"18px"}
                   />
                   <ModalDeletarTarefa
                     id={Number(task.id)}
@@ -214,48 +184,6 @@ function BotaoListadeTarefas() {
       </>
     );
   }
-
-  // const tableData =
-  //   taskListFiltered &&
-  //   taskListFiltered
-  //     .sort((a, b) => a.id - b.id)
-  //     .slice(from, to)
-  //     .map((task, index) => (
-  //       <Tr key={index}>
-  //         <Td textAlign={"center"}>{task.id}</Td>
-  //         <Td textAlign={"center"} fontWeight={"semibold"}>
-  //           {task.nome_tarefa}
-  //         </Td>
-  //         <Td textAlign={"center"} fontWeight={"semibold"}>
-  //           {task.atividade_relacionada}
-  //         </Td>
-  //         <Td textAlign={"center"} fontWeight={"semibold"}>
-  //           {formatDate(task.data_tarefa)}
-  //         </Td>
-  //         <Td textAlign={"center"} fontWeight={"semibold"}>
-  //           {task.descricao_tarefa}
-  //         </Td>
-  //         <Td textAlign={"center"} fontWeight={"semibold"}>
-  //           {task.responsavel}
-  //         </Td>
-  //         <Td textAlign={"center"} fontWeight={"semibold"}>
-  //           {!task.status ? "1" : task.status}%
-  //         </Td>
-  //         <Td>
-  //           <IconButton
-  //             aria-label="Plus sign"
-  //             icon={<MdModeEdit />}
-  //             background="transparent"
-  //             variant="secondary"
-  //             color="#0047BB"
-  //             isRound={true}
-  //             onClick={() => handleEditTarefa(task)}
-  //             width={"18px"}
-  //             height={"18px"}
-  //           />
-  //         </Td>
-  //       </Tr>
-  //     ));
 
   useEffect(() => {
     getTaskList();
@@ -370,7 +298,6 @@ function BotaoListadeTarefas() {
                         </Text>
                       </FormLabel>
                       <Input
-                        // placeholder="dd/mm/aaaa"
                         fontSize={"14px"}
                         fontWeight={"400"}
                         max="9999-12-31"
@@ -383,18 +310,12 @@ function BotaoListadeTarefas() {
                         _placeholder={{ color: "black" }}
                         id="data"
                         type="date"
-                        // maxLength={6}
                         name="data"
-                        // value={dataFilter}
                         onChange={(event) =>
                           setDataFiltered(event.target.value)
                         }
                       />
                     </FormControl>
-                    {/* <input
-                    type="date"
-                    onChange={(event) => setData(event.target.value)}
-                  /> */}
                   </Flex>
 
                   <Flex>
@@ -405,12 +326,6 @@ function BotaoListadeTarefas() {
                       color="#0047BB"
                       borderColor="#0047BB"
                       border={"2px"}
-                      // h={useBreakpointValue({ base: "100%", md: "120%" })}
-                      // float={"right"}
-                      // onClick={() => {
-                      //   handleFilter(categoriaId, data);
-                      //   setCategoriaId("");
-                      // }}
                       onClick={() => {
                         handleFilter();
                       }}
@@ -425,7 +340,6 @@ function BotaoListadeTarefas() {
                       fontFamily={"Mulish"}
                       fontSize="18px"
                       alignSelf={"end"}
-                      // rightIcon={<AiOutlineSearch />}
                     >
                       Filtrar
                       <Icon
@@ -433,7 +347,6 @@ function BotaoListadeTarefas() {
                         as={AiOutlineSearch}
                         fontSize="18px"
                         ml={1}
-                        // color={"#0047BB"}
                       />
                     </Button>
                   </Flex>
@@ -446,16 +359,12 @@ function BotaoListadeTarefas() {
                       background="origem.500"
                       variant="primary"
                       color="white"
-                      // border={"2px"}
-                      // h={useBreakpointValue({ base: "100%", md: "120%" })}
-                      // float={"right"}
                       onClick={() => setIsModalOpen(true)}
                       _hover={{
                         background: "origem.600",
                         transition: "all 0.4s",
                         color: "white",
                       }}
-                      // width={"117px"}
                       height={"56px"}
                       fontWeight={"700"}
                       fontSize="18px"
@@ -463,23 +372,7 @@ function BotaoListadeTarefas() {
                     >
                       Adicionar Tarefa
                     </Button>
-                    <Flex alignSelf={"end"} align={"flex-start"}>
-                      {/* <Button
-                        onClick={onOpen}
-                        background="transparent"
-                        color="#0047BB"
-                        fontSize="18px"
-                        fontWeight={"700"}
-                      >
-                        Lixeira
-                        <Icon
-                          as={MdArrowForwardIos}
-                          fontSize="20px"
-                          fontWeight={"700"}
-                          color="#0047BB"
-                        />
-                      </Button> */}
-                    </Flex>
+                    <Flex alignSelf={"end"} align={"flex-start"}></Flex>
                   </Flex>
                 </Flex>
               </Flex>
@@ -537,15 +430,6 @@ function BotaoListadeTarefas() {
                       </Tr>
                     </Thead>
                     <Tbody>{<Body />}</Tbody>
-                    {/* <Tfoot>
-          <Tr background="origem.200" color="white">
-            <Th></Th>
-            <Th></Th>
-            <Th></Th>
-            <Th></Th>
-            <Th></Th>
-          </Tr>
-        </Tfoot> */}
                   </Table>
                 </TableContainer>
               </Flex>
@@ -571,12 +455,6 @@ function BotaoListadeTarefas() {
               newRender={() => setRender(!render)}
             />
           )}
-
-          {/* <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter> */}
         </ModalContent>
       </Modal>
     </>
