@@ -1,51 +1,27 @@
+// CRIADO EM: 12/10/2022
+// AUTOR: Magno
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para a adição de uma nova atividade no Gantt de Projetos - módulo Projetos - Carteira de Projetos - Detalhamento.
+
 import { useState } from "react";
 
 import { useDisclosure } from "@chakra-ui/react";
 import { useFormik } from "formik";
-// import {
-//   AreaAtuacao,
-//   Responsavel,
-// } from "interfaces/CadastrosModaisInfograficos";
 import * as yup from "yup";
 
 import { useToast } from "contexts/Toast";
 
-// import {
-//   getAreaAtuacaoList,
-//   getResponsavelList,
-// } from "services/get/Infograficos";
 import { patchAtividadeProjeto } from "services/update/Projeto";
 
 import { useAuth } from "./useAuth";
 
 export function useEditarAtividadeGantt() {
-  // refresh: boolean,
-  // setRefresh: Function,
-  // atividade: any
   const { user } = useAuth();
   const { toast } = useToast();
   const [refresh, setRefresh] = useState(false);
-  // const [loading, setLoading] = useState(false);
+
   const [editAtividade, setEditAtividade] = useState({});
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const [listaAreaAtuacao, setListaAreaAtuacao] = useState<AreaAtuacao[]>([]);
-  // const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
-
-  // const reqGet = async () => {
-  //   const areaAtuacao = await getAreaAtuacaoList();
-  //   const responsaveis = await getResponsavelList();
-
-  //   const areasAtuacaoSorted = areaAtuacao.data.sort((a: any, b: any) =>
-  //     a.tipo.localeCompare(b.tipo)
-  //   );
-  //   const responsaveisSorted = responsaveis.data.sort((a: any, b: any) =>
-  //     a.nome.localeCompare(b.nome)
-  //   );
-
-  //   setListaAreaAtuacao(areasAtuacaoSorted);
-  //   setListaResponsaveis(responsaveisSorted);
-  // };
 
   const initialValues = {
     nome_atividade: "",
@@ -99,14 +75,12 @@ export function useEditarAtividadeGantt() {
           toast.success("Atividade editada com sucesso!", {
             id: "toast-principal",
           });
-          // setLoading(false);
           setRefresh(!refresh);
         }
       } catch (error) {
         toast.error("Erro ao editar atividade!", {
           id: "toast-principal",
         });
-        // setLoading(false);
       }
     },
   });
@@ -117,26 +91,15 @@ export function useEditarAtividadeGantt() {
       nome_atividade: args.rowData.TaskName,
       inicio_realizado: args.rowData.StartDate,
       fim_realizado: args.rowData.EndDate,
-      // inicio_planejado: new Date(args.rowData.BaselineStartDate),
-      // fim_planejado: new Date(args.rowData.BaselineEndDate),
-      // hrs_totais: args.rowData.BaselineDuration,
-      // hrs_reais: args.rowData.Duration,
       pct_real: args.rowData.Progress,
     });
     onOpen();
     args.cancel = true;
   };
 
-  // useEffect(() => {
-  //   // reqGet();
-  // }, [atividade]);
-
   return {
     registerForm,
     refresh,
-    // loading,
-    // listaAreaAtuacao,
-    // listaResponsaveis,
     editAtividade,
     setEditAtividade,
     cellEdit,

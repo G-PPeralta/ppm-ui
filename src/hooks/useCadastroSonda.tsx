@@ -1,3 +1,7 @@
+// CRIADO EM: 02/09/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de uma nova sonda - módulo Intervenções - Cronograma.
+
 import { useState } from "react";
 
 import { useFormik } from "formik";
@@ -59,14 +63,6 @@ export function useCadastroSonda(
             }
           }
         }
-        // const { status } = await postNovaSonda(newValues);
-
-        // if (status === 200 || status === 201) {
-        //   toast.success(`Sonda ${values.nome} cadastrada com sucesso!`, {
-        //     id: "toast-principal",
-        //   });
-        //   setLoading(false);
-        // }
       } catch (error) {
         toast.error(`Erro ao cadastrar sonda!`, {
           id: "toast-principal",

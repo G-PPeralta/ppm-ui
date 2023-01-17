@@ -1,3 +1,7 @@
+// CRIADO EM: 04/11/2022
+// AUTOR: Geovana Augusta
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para a edição de um usuário - módulo Configuração - Usuários.
+
 import { useState } from "react";
 
 import { useFormik } from "formik";

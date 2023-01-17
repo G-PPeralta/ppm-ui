@@ -1,3 +1,7 @@
+// CRIADO EM: 27/10/2022
+// AUTOR: Max
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para a filtragem de atividades de campanha - módulo Intervenções - Campanhas.
+
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
@@ -26,10 +30,7 @@ export function useFiltragemCronogramaAtividade() {
     dataAte: "",
   };
 
-  const postFiltros = async (initialValues: FiltroCronograma) => {
-    // await postFiltroCronograma(initialValues);
-  };
-
+  const postFiltros = async (initialValues: FiltroCronograma) => {};
   const reqGet = async () => {
     const _sondas = await getSondas();
     const _pocos = await getPocos();

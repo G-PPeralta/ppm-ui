@@ -1,8 +1,11 @@
+// CRIADO EM: 23/06/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de Projetos - módulo de Projetos.
+
 import { useState } from "react";
 
 import { useFormik } from "formik";
 import { Projetos } from "interfaces/Projetos";
-// import { projectRegisterSchema } from "validations/ProjectRegister";
 
 import { useToast } from "contexts/Toast";
 
@@ -47,7 +50,6 @@ export function useProjects() {
       elemento_pep: "",
     },
 
-    // validationSchema: projectRegisterSchema,
     onSubmit: async (values) => {
       const newValues = {
         nomeProjeto: values.nomeProjeto,

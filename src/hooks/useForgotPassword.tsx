@@ -1,3 +1,7 @@
+// CRIADO EM: 27/09/2022
+// AUTOR: Luiz
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para resetar a senha do usuário.
+
 import { useState } from "react";
 
 import { useFormik } from "formik";

@@ -1,3 +1,7 @@
+// CRIADO EM: 18/09/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de atividade - módulo Projetos - Detalhamento
+
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";

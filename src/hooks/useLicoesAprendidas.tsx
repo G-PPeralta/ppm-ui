@@ -1,3 +1,7 @@
+// CRIADO EM: 21/09/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro e edição de lição aprendida.
+
 import { useState } from "react";
 
 import { useFormik } from "formik";

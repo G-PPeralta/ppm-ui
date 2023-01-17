@@ -1,3 +1,7 @@
+// CRIADO EM: 14/10/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de um novo Fornecedor - módulo Confugurações - Fornecedores
+
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";

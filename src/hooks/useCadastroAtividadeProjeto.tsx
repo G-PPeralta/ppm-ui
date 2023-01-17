@@ -1,3 +1,7 @@
+// CRIADO EM: 04/10/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de atividade - módulo Projetos - Detalhamento
+
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
@@ -103,8 +107,6 @@ export function useCadastroAtividadeProjeto(
     validationSchema: cadastroAtividadeProjetos,
     onSubmit: async (values) => {
       const newDate = new Date(values.dat_inicio_plan);
-      // console.log("values", values);
-      // console.log("newDate", newDate);
       const newValues = {
         nom_usu_create: user?.nome,
         id_projeto: values.id_projeto,
@@ -144,12 +146,6 @@ export function useCadastroAtividadeProjeto(
   useEffect(() => {
     reqGet();
   }, [refresh]);
-
-  // useEffect(() => {
-  //   if (refresh) {
-  //     reqGet();
-  //   }
-  // }, [refresh]);
 
   return {
     registerForm,

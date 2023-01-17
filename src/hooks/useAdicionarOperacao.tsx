@@ -1,3 +1,7 @@
+// CRIADO EM: 09/10/2022
+// AUTOR: Magno Ferreira
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de operações.
+
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";

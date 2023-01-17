@@ -1,3 +1,7 @@
+// CRIADO EM: 14/06/2022
+// AUTOR: Alexander
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para efetuar o login no sistema.
+
 import { useState } from "react";
 
 import { useFormik } from "formik";

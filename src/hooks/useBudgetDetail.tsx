@@ -1,19 +1,17 @@
-import { useEffect, useState } from "react";
+// CRIADO EM: 21/09/2022
+// AUTOR: Felipe Mateus
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para a tela de financeiro - módulo Intervenção - Financeiro - Detalhes.
 
-// import { useToast } from "contexts/Toast";
+import { useEffect, useState } from "react";
 
 import { BudgetDetail, Titulo, Totalizacao } from "interfaces/Budgets";
 
 import { getBudgetDetail } from "services/get/GetBudget";
 
 export function useBudgetDetail(id: string | null) {
-  // const { toast } = useToast();
-
-  const [loading, setLoading] = useState(true); // Loading
-  const [, /* budgets */ setBudgets] = useState<BudgetDetail[]>([]);
-  // const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [, setBudgets] = useState<BudgetDetail[]>([]);
   const [budgetFilter, setBudgetsFilter] = useState<BudgetDetail[]>([]);
-  // const [projectSelected, setProjectSelected] = useState("");
   const [titulo, setTitulo] = useState<Titulo>();
   const [totalizacao, setTotalizacao] = useState<Totalizacao>();
   const [render, setRender] = useState(false);
@@ -32,25 +30,6 @@ export function useBudgetDetail(id: string | null) {
     setLoading(false);
   };
 
-  /* const filterByProject = () => {
-    setLoading(true);
-    const filtered = budgets.filter(
-      (b) => b.projeto.id.toString() === projectSelected
-    );
-
-    if (filtered) {
-      setBudgetsFilter([...filtered]);
-    }
-
-    setLoading(false);
-  }; */
-
-  /*  const handleProjectChange = (e: {
-    target: { value: SetStateAction<string> };
-  }) => {
-    setProjectSelected(e.target.value);
-  }; */
-
   const toogleRender = () => {
     setRender(!render);
   };
@@ -63,7 +42,6 @@ export function useBudgetDetail(id: string | null) {
     budgetFilter,
     loading,
     wd,
-    // projects,
     titulo,
     totalizacao,
     toogleRender,

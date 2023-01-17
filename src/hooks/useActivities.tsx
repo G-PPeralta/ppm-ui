@@ -1,6 +1,6 @@
-// CRIADO EM:
+// CRIADO EM: 27/06/2022
 // AUTOR: Eduardo Muchak
-// DESCRIÇÃO DO ARQUIVO:
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o registro de atividades.
 
 import { useState } from "react";
 

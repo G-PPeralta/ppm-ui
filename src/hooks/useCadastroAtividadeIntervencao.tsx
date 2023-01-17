@@ -1,3 +1,7 @@
+// CRIADO EM: 28/09/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de uma nova intervenção - módulo de Intervenções - Infográficos.
+
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
@@ -33,7 +37,6 @@ export function useCadastroAtividadeIntervencao() {
   const [listaAreaAtuacao, setListaAreaAtuacao] = useState<AreaAtuacao[]>([]);
   const [listaResponsaveis, setListaResponsaveis] = useState<Responsavel[]>([]);
   const [listaAtividades, setListaAtividades] = useState<any[]>([]);
-  // const [listaTarefa, setListaTarefa] = useState<Tarefa[]>([]);
   const [refresh, setRefresh] = useState(false);
 
   const hookRefreshState = {
@@ -124,8 +127,6 @@ export function useCadastroAtividadeIntervencao() {
       const id_intervencao = Number(values.id_intervencao);
       const newValues = {
         nom_usu_create: user?.nome,
-        // id_origem: values.id_origem,
-        // nom_atividade: values.nom_atividade,
         atividade_id: values.atividade_id,
         responsavel_id: values.responsavel_id,
         area_atuacao: values.area_atuacao,

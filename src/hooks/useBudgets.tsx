@@ -1,9 +1,8 @@
+// CRIADO EM: 20/09/2022
+// AUTOR: Felipe Mateus
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para a tela de financeiro - módulo Intervenção - Financeiro.
+
 import { SetStateAction, useEffect, useState } from "react";
-
-// import { useFormik } from "formik";
-// import { projectRegisterSchema } from "validations/ProjectRegister";
-
-// import { useToast } from "contexts/Toast";
 
 import { Budget } from "interfaces/Budgets";
 import { ListaSonda } from "interfaces/CadastrosModaisInfograficos";
@@ -11,8 +10,6 @@ import { ListaSonda } from "interfaces/CadastrosModaisInfograficos";
 import { getBudgetProjects, getBudgets } from "services/get/GetBudget";
 
 export function useBudgets() {
-  // const { toast } = useToast();
-
   const [loading, setLoading] = useState(true);
   const [budgets, setBudgets] = useState<Budget[]>([]);
   const [projects, setProjects] = useState<ListaSonda[]>([]);

@@ -1,3 +1,7 @@
+// CRIADO EM: 18/09/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de uma nova intervenção - módulo Intervenções - Infográficos
+
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";
@@ -131,7 +135,6 @@ export function useCadastroIntervencao() {
         id_origem: "",
         area_id: 0,
         tarefa_id: 0,
-        // responsavel_id: 0,
         qtde_dias: 0,
         ind_atv_execucao: false,
         precedentes: [

@@ -1,3 +1,7 @@
+// CRIADO EM: 27/11/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para a edição e cadastro de uma nova ocorrência - Gantt Campanha.
+
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -52,9 +56,7 @@ export function useOcorrencias(idAtividade: number, metodo: string) {
 
       if (metodo === "patch") {
         try {
-          // if (idOcorrencia) {
           const { status } = await patchEditarOcorrencia(
-            // idOcorrencia,
             idAtividade,
             newValues
           );
@@ -65,7 +67,6 @@ export function useOcorrencias(idAtividade: number, metodo: string) {
             });
             setLoading(false);
           }
-          // }
         } catch (error) {
           toast.error("Erro ao editada lição aprendida!", {
             id: "toast-principal",

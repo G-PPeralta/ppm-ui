@@ -1,3 +1,7 @@
+// CRIADO EM: 14/09/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de um novo projeto OLD - módulo Intervenções - Campanhas.
+
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";

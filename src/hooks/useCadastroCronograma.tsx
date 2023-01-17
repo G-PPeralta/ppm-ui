@@ -1,3 +1,7 @@
+// CRIADO EM: 03/10/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de um novo cronograma - módulo Intervenções - Cronogramas
+
 import { useEffect, useState } from "react";
 
 import { useFormik } from "formik";

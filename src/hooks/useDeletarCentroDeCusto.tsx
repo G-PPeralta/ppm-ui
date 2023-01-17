@@ -1,3 +1,7 @@
+// CRIADO EM: 08/11/2022
+// AUTOR: Max
+// DESCRIÇÃO DO ARQUIVO: Hook com funções para a remoção de um custo - Financeiro.
+
 import { useState } from "react";
 
 import { useFormik } from "formik";
@@ -35,7 +39,6 @@ export function useDeletarCentroDeCusto(idCentroCusto: number = 0) {
           id: "toast-principal",
         });
         setLoading(false);
-        // setInterval(() => window.location.reload(), 800);
       } catch (error) {
         toast.error(`Erro ao deletar Centro de Custo!`, {
           id: "toast-principal",
