@@ -43,6 +43,8 @@ export function LookaheadDetalhe() {
   const [atividade, setAtividade] = useState<AtividadesLookahead[]>();
   const [atividadesFilho, setAtividadesFilho] = useState<AtividadesFilho[]>();
 
+  // console.log("weeks", weeks);
+
   const loadAtividade = async () => {
     if (id) {
       const act = await getAtividade(+id);

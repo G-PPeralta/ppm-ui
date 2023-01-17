@@ -50,11 +50,14 @@ const headers = [
 ];
 export function TabelaAtividades(props: TableProps) {
   const { semana, dataAtividades } = props;
+
   const [, setSem] = useState<string>();
   const [dias, setDias] = useState<DiasSemana[]>();
   const [horas, setHoras] = useState<string[]>();
   const [atividades, setAtividades] = useState<AtividadeDiaHora[]>();
   const [total, setTotal] = useState<Totais[]>();
+
+  // console.log("atividades: ", atividades);
 
   function formataMes(mes: number) {
     return mes < 10 ? `0${mes}` : mes;
@@ -128,6 +131,11 @@ export function TabelaAtividades(props: TableProps) {
     setSem(semana);
     getWeekDays();
   }, [semana]);
+
+  // console.log("dias", dias);
+  // console.log("horas", horas);
+  // console.log("semana", semana);
+  // console.log("total", total);
 
   return (
     <Flex>
