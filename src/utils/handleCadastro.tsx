@@ -28,7 +28,6 @@ export const handleCadastrarRefresh = async (
     setRefresh(!refresh);
     onClose();
   }
-  // setRefresh(!refresh);
 };
 
 export const handleCancelarDatePicker = (

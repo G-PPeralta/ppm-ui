@@ -1,3 +1,7 @@
+// CRIADO EM: 19/09/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de get vinculada(s) aos modais - tela Campanhas.
+
 import { api, token } from "services/api";
 
 export async function getSondas(): Promise<{

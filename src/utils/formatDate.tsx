@@ -19,7 +19,6 @@ export function formatDate(date: Date | null | string) {
   }
 }
 
-// formata data para o formato yyyy-mm-dd
 export function formatDateToYMD(date: Date) {
   return [
     date.getFullYear(),

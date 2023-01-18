@@ -1,3 +1,7 @@
+// CRIADO EM: 21/09/2022
+// AUTOR: Gabriel Peralta
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de delete vinculada(s) à tela de Financeiro.
+
 import { api, token } from "services/api";
 
 export async function deleteDespesa(

@@ -1,4 +1,6 @@
-// import { ProjetosRankingPayload } from "interfaces/Services";
+// CRIADO EM: 21/09/2022
+// AUTOR: Geovana Augusta
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de delete vinculadas à tela de Carteira de Projetos.
 
 import { api, token } from "services/api";
 
@@ -14,13 +16,6 @@ export async function deleteProject(
   return { data, status };
 }
 
-// DELETE /projetos-ranking/:id/:user ???????
-
-/**
- * Deletar Atividade do gantt de projetos e os seus nós filhos
- * @param id
- * @returns
- */
 export async function deleteAtividade(
   id: number,
   user: string | undefined

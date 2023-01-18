@@ -1,3 +1,7 @@
+// CRIADO EM: 30/09/2022
+// AUTOR: Bruno
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de get vinculada(s) às Tela de Visão por Área.
+
 import { api, token } from "services/api";
 
 export const getAtividadesAreaMock = [

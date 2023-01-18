@@ -1,3 +1,7 @@
+// CRIADO EM: 16/11/2022
+// AUTOR: Geovana Augusta
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de delete vinculadas à tela de Cronogramas.
+
 import { api, token } from "services/api";
 
 export async function deleteOperacaoCronograma(
@@ -30,7 +34,6 @@ export async function deleteLicaoAprendida(
 ): Promise<{ data: any; status: number }> {
   const { data, status } = await api.patch(
     `projetos-atividades-licoes-aprendidas/${idAtividade}/${idLicaoAprendida}`,
-    // `/estatisticas/cronograma/${idAtividade}/licao-aprendida/${idLicaoAprendida}`,
     token()
   );
 
