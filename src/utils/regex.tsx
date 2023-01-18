@@ -1,3 +1,7 @@
+// CRIADO EM: 14/11/2022
+// AUTOR: Gabriel Peralta
+// DESCRIÇÃO DO ARQUIVO: Função com regex coringas, depende do objetivo.
+
 export const regexCaracteresEspeciais = (stringToReplace: string) =>
   stringToReplace.replace(/[§ª°º`´¨~!@#$%^&*()_|+=?;:'",.<>{}[]\]*/gi, "");
 

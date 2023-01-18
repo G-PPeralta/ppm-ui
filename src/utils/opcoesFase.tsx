@@ -1,3 +1,7 @@
+// CRIADO EM: 14/11/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Função com as opções de fase, para melhor organização.
+
 export const opcoesFase = [
   {
     value: 1,
