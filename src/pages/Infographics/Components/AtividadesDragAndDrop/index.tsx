@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Componente de atividades arrastável.
+
 import { useEffect, useId, useState } from "react";
 import {
   DragDropContext,
@@ -44,43 +48,27 @@ export default function AtividadesDragAndDrop({
     endIndex: number
   ) => {
     const listaReordenada = (registerForm: FormikProps<any>) => {
-      // Pega a lista de atividades diretamente do Formik
-      // e faz uma atribuição em uma variável para garantir
-      // imutabilidade do estado original
       const list = registerForm.values.atividades;
-
-      // Seleciona item que está sendo arrastado e o remove
-      // da lista
       const [removed] = list.splice(startIndex, 1);
-
-      // Recoloca item que está sendo arrastado e o insere
-      // no array com base nos index
       list.splice(endIndex, 0, removed);
-
-      // Retorna lista atualizada
       return list;
     };
     registerForm.setFieldValue("atividades", listaReordenada(registerForm));
   };
 
   const onDragEnd = (result: any) => {
-    // Se o item não foi arrastado para outro lugar, não faz nada
     if (!result.destination) {
       return;
     }
 
-    // Se o item foi arrastado para outro o mesmo lugar, não faz nada
     if (result.destination.index === result.source.index) {
       return;
     }
 
-    // Se o item foi arrastado para outro lugar, chama a função
-    // de reordenar a lista
     reorder(registerForm, result.source.index, result.destination.index);
   };
 
   const add = () => {
-    // Cria um novo item na lista de atividades com os valores padrões
     registerForm.setFieldValue("atividades", [
       ...registerForm.values.atividades,
       {
@@ -111,7 +99,6 @@ export default function AtividadesDragAndDrop({
   };
 
   useEffect(() => {
-    // Para gerar um id aletaório para o droppable
     const now = Date.now();
     const newId = droppableId + "-" + now.toLocaleString();
     setDroppableId(newId);
@@ -133,8 +120,6 @@ export default function AtividadesDragAndDrop({
       }
     );
 
-    // Para atualizar os valores das atividades precedentes
-    // do primeiro item da lista quando o modal é aberto
     registerForm.setFieldValue(
       "atividades[0].precedentes",
       precedentesFiltrados
@@ -196,20 +181,13 @@ export default function AtividadesDragAndDrop({
         return { ...atividade, precedentes };
       }
     );
-    // Atualiza a lista de precedentes para todos os itens da lista de atividades
     registerForm.setFieldValue("atividades", listaAtividadesAtualizada);
   }, [render]);
 
   return (
     <>
       <Flex gap={1}>
-        <Text
-          fontWeight={"700"}
-          fontSize={"12px"}
-          color={"#949494"}
-          mb={-2}
-          // ml={8}
-        >
+        <Text fontWeight={"700"} fontSize={"12px"} color={"#949494"} mb={-2}>
           ATIVIDADES
         </Text>
       </Flex>

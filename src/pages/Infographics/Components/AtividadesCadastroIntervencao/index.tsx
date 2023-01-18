@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Componenete arrastável para cadstro de intervenções.
+
 import { useEffect, useId, useState } from "react";
 import {
   DragDropContext,
@@ -55,20 +59,9 @@ export default function AtividadesCadastroIntervencao({
     endIndex: number
   ) => {
     const listaReordenada = (registerForm: FormikProps<any>) => {
-      // Pega a lista de atividades diretamente do Formik
-      // e faz uma atribuição em uma variável para garantir
-      // imutabilidade do estado original
       const list = registerForm.values.atividades;
-
-      // Seleciona item que está sendo arrastado e o remove
-      // da lista
       const [removed] = list.splice(startIndex, 1);
-
-      // Recoloca item que está sendo arrastado e o insere
-      // no array com base nos index
       list.splice(endIndex, 0, removed);
-
-      // Retorna lista atualizada
       return list;
     };
     setReorderLoading(true);
@@ -79,18 +72,13 @@ export default function AtividadesCadastroIntervencao({
   };
 
   const onDragEnd = (result: any) => {
-    // Se o item não foi arrastado para outro lugar, não faz nada
     if (!result.destination) {
       return;
     }
 
-    // Se o item foi arrastado para outro o mesmo lugar, não faz nada
     if (result.destination.index === result.source.index) {
       return;
     }
-
-    // Se o item foi arrastado para outro lugar, chama a função
-    // de reordenar a lista
     reorder(registerForm, result.source.index, result.destination.index);
   };
 
@@ -123,7 +111,6 @@ export default function AtividadesCadastroIntervencao({
   };
 
   useEffect(() => {
-    // Para gerar um id aletaório para o droppable
     const now = Date.now();
     const newId = droppableId + "-" + now.toLocaleString();
     setDroppableId(newId);
@@ -206,7 +193,6 @@ export default function AtividadesCadastroIntervencao({
         return { ...atividade, precedentes };
       }
     );
-    // Atualiza a lista de precedentes para todos os itens da lista de atividades
     registerForm.setFieldValue("atividades", listaAtividadesAtualizada);
   }, []);
 
@@ -265,14 +251,12 @@ export default function AtividadesCadastroIntervencao({
         return { ...atividade, precedentes };
       }
     );
-    // Atualiza a lista de precedentes para todos os itens da lista de atividades
     registerForm.setFieldValue("atividades", listaAtividadesAtualizada);
   }, [render]);
 
   return (
     <>
       <Flex gap={1}>
-        {/* <Text fontWeight={"bold"}>Atividades</Text> */}
         <Text fontWeight={"700"} fontSize={"12px"} color={"#949494"} mb={-2}>
           ATIVIDADES
         </Text>

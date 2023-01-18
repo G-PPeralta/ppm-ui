@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Atividade arrastável.
+
 import { useEffect, useId, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import toast from "react-hot-toast";
@@ -36,11 +40,8 @@ function AtividadesDraggable({ index, registerForm }: Props) {
 
   const remove = (index: number) => {
     if (registerForm.values.atividades.length > 1) {
-      // Pega a lista de atividades diretamente do Formik
       const newList = registerForm.values.atividades;
-      // Remove item da lista
       newList.splice(index, 1);
-      // Atualiza lista no Formik
       registerForm.setFieldValue("atividades", newList);
     } else {
       toast.error("O projeto tipo deve ter ao menos uma atividade", {
@@ -115,9 +116,6 @@ function AtividadesDraggable({ index, registerForm }: Props) {
     );
   }, [registerForm.values.atividades[index].tarefa_id]);
 
-  // console.log("registerForm.values", registerForm.values);
-
-  // Função para iterar o array de precedentes dentro do array de atividades e retornar true caso algum precedente esteja com a propriedade checked = true
   const isPrecedenteChecked = () => {
     const precedentes = registerForm.values.atividades[index].precedentes;
     const precedenteChecked = precedentes.some(
@@ -351,14 +349,6 @@ function AtividadesDraggable({ index, registerForm }: Props) {
                   </Checkbox>
                 </Flex>
               </Flex>
-
-              {/* <Flex
-                mr={4}
-                p={1}
-                align={"center"}
-                justify={"center"}
-                _hover={{ cursor: "pointer" }}
-              > */}
               <IconButton
                 onClick={() => remove(index)}
                 color={"#F40606"}
@@ -373,7 +363,6 @@ function AtividadesDraggable({ index, registerForm }: Props) {
               >
                 <FiTrash size={13} />
               </IconButton>
-              {/* </Flex> */}
             </Flex>
           </Box>
         </div>

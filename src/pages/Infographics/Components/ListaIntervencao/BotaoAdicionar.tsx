@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Adicionar novo item a lista
+
 import { FiPlus } from "react-icons/fi";
 
 import { Flex, IconButton } from "@chakra-ui/react";

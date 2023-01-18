@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Modal simplificado de reordenar poços em sondas por meio de formulário
+
 import { useEffect, useState } from "react";
 
 import {
@@ -155,7 +159,6 @@ function ModalReorderSimples({ setRefresh, refresh }: Props) {
               <FormControl>
                 <Flex direction={"column"} gap={4}>
                   <Stack>
-                    {/* <Text fontWeight={"bold"}>Nome</Text> */}
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: "column",
@@ -175,7 +178,6 @@ function ModalReorderSimples({ setRefresh, refresh }: Props) {
                     </Flex>
                   </Stack>
                   <Stack>
-                    {/* <Text fontWeight={"bold"}>Nome</Text> */}
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: "column",
@@ -214,7 +216,6 @@ function ModalReorderSimples({ setRefresh, refresh }: Props) {
                     </Flex>
                   </Stack>
                   <Stack>
-                    {/* <Text fontWeight={"bold"}>Nome</Text> */}
                     <Flex
                       flexDirection={useBreakpointValue({
                         base: "column",
@@ -235,7 +236,6 @@ function ModalReorderSimples({ setRefresh, refresh }: Props) {
                   </Stack>
                   {showError ? (
                     <Text
-                      // textAlign={"center"}
                       fontSize={"10px"}
                       color={"#ff0000"}
                       fontWeight={"400"}
@@ -244,7 +244,6 @@ function ModalReorderSimples({ setRefresh, refresh }: Props) {
                     </Text>
                   ) : undefined}
                   <Text
-                    // textAlign={"center"}
                     fontSize={"16px"}
                     mt={"25px"}
                     color={"origem.600"}

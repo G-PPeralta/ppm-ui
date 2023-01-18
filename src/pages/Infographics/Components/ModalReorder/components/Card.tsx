@@ -1,6 +1,9 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Card do poço no modal de reordenar poços em sondas.
+
 import { Flex, Heading, Text } from "@chakra-ui/react";
 
-// import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
 
 type Poco = {
@@ -26,15 +29,13 @@ type Props = {
 };
 
 function Card({ poco, index }: Props) {
-  const dataInicioFormatada = poco.inicioplanejado_fmt; // formatDate(new Date(poco.inicioplanejado));
-  const dataFimFormatada = poco.finalplanejado_fmt; // formatDate(new Date(poco.finalplanejado));
+  const dataInicioFormatada = poco.inicioplanejado_fmt;
+  const dataFimFormatada = poco.finalplanejado_fmt;
 
   const intervencaoFoiIniciada = index === 0 && poco.pct_real !== "0";
 
   return (
     <>
-      {/* A data 31/12/1969 é o valor de null no banco de dados.
-      Se o valor for exatamente esse, o componente não deverá ser renderizado. */}
       <Flex mt={8} direction={"row"} gap={4}>
         <Flex align={"center"} justify={"center"}>
           <Heading as="h3" size="md" textAlign={"center"} width={"60px"}>

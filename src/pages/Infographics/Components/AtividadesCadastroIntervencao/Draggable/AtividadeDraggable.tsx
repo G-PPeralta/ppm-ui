@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Atividade arrastável no cadastro de intervenções.
+
 import { useEffect, useId, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import toast from "react-hot-toast";
@@ -16,7 +20,6 @@ import { FormikProps } from "formik";
 import {
   AreaAtuacao,
   Responsavel,
-  // Tarefa,
   Tarefas,
 } from "interfaces/CadastrosModaisInfograficos";
 import { AtividadesDr } from "interfaces/Infograficos";
@@ -39,22 +42,15 @@ interface Props {
 function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const innerwidth = window.innerWidth;
 
-  const {
-    listaAreaAtuacao,
-    // listaResponsaveis,
-    listaTarefas,
-  } = listas;
+  const { listaAreaAtuacao, listaTarefas } = listas;
 
   const id = useId();
   const [draggableId, setDraggableId] = useState<string>(id);
 
   const remove = (index: number) => {
     if (registerForm.values.atividades.length > 1) {
-      // Pega a lista de atividades diretamente do Formik
       const newList = registerForm.values.atividades;
-      // Remove item da lista
       newList.splice(index, 1);
-      // Atualiza lista no Formik
       registerForm.setFieldValue("atividades", newList);
     } else {
       toast.error("A intervenção deve ter ao menos uma atividade", {
@@ -77,13 +73,6 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     value: tarefa.id,
     label: tarefa.nom_atividade,
   }));
-
-  // const optionsResponsaveis = listaResponsaveis.map(
-  //   (responsavel: Responsavel) => ({
-  //     value: responsavel.id,
-  //     label: responsavel.nome,
-  //   })
-  // );
 
   const getValue = (options: any, i: number, chave: string) => {
     const index = options
@@ -207,21 +196,6 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                       value={getValue(optionsTarefa, index, "tarefa_id")}
                     />
                   </Flex>
-
-                  {/* <Flex direction={"column"} flex={2}>
-                    <SelectFiltragem
-                      required={true}
-                      nomeSelect={"RESPONSÁVEL"}
-                      registerForm={registerForm}
-                      propName={`atividades[${index}].responsavel_id`}
-                      options={optionsResponsaveis}
-                      value={getValue(
-                        optionsResponsaveis,
-                        index,
-                        "responsavel_id"
-                      )}
-                    />
-                  </Flex> */}
 
                   <Flex direction={"column"} flex={1}>
                     <Flex gap={1}>

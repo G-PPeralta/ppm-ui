@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Popover para selecionar tipo.
+
 import {
   Button,
   Flex,
@@ -17,7 +21,7 @@ import { FormikProps } from "formik";
 import { PrecedentesCadastroProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
 interface Props {
-  registerForm: FormikProps<any>; // Dentro do props temos a tipagem: FormikState<CadastroProjetoTipo>;
+  registerForm: FormikProps<any>;
   index: number;
 }
 

@@ -1,9 +1,11 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Seletor de área para a atividade arrastável.
+
 import Select from "react-select";
 
 import { Flex, Text } from "@chakra-ui/react";
 import { Area } from "interfaces/CadastrosModaisInfograficos";
-
-// import { TextError } from "components/TextError";
 
 import { useCadastroAtividade } from "hooks/useCadastroAtividade";
 
@@ -36,10 +38,6 @@ function SelectFiltragemArea({ registerForm, index }: Props) {
           options={options}
           isSearchable
         />
-        {/* {registerForm.errors.area_atuacao &&
-          registerForm.touched.area_atuacao && (
-            <TextError>{registerForm.errors.area_atuacao}</TextError>
-          )} */}
       </Flex>
     </>
   );

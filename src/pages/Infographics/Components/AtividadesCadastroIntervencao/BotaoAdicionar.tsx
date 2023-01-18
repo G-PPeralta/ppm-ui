@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Botão para adicionar mais uma atividade ao draggable.
+
 import { useEffect, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 

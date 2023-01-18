@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Card arrastável para o referido drag n drop
+
 import { useEffect, useId, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { GiHamburgerMenu } from "react-icons/gi";
