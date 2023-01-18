@@ -1,3 +1,7 @@
+// CRIADO EM: 04/10/2022
+// AUTOR: Magno Ferreira
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de get vinculada(s) aos elementos da tela de Gráficos Estatísticos.
+
 import { api, token } from "services/api";
 
 export async function getSondas(): Promise<{

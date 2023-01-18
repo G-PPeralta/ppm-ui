@@ -1,3 +1,7 @@
+// CRIADO EM: 04/10/2022
+// AUTOR: Maxwell
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de get vinculada(s) aos elementos da tela de Lookahead.
+
 import {
   AtividadesFilho,
   AtividadesLookahead,

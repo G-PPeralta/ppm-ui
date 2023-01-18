@@ -1,5 +1,5 @@
 // CRIADO EM: 08/10/2022
-// AUTOR: Max
+// AUTOR: Maxwell
 // DESCRIÇÃO DO ARQUIVO: Hook com funções para o cadastro de uma nova atividade.
 
 import { useEffect, useState } from "react";

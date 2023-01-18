@@ -1,6 +1,6 @@
 // CRIADO EM: 27/09/2022
 // AUTOR: Eduardo Muchak
-// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de delete vinculada(s) à tela de Campanhas.
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de get vinculada(s) à tela de Campanhas.
 
 import { api, token } from "services/api";
 

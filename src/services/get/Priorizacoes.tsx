@@ -1,4 +1,6 @@
-// import { ProjetosRanking } from "interfaces/Services";
+// CRIADO EM: 23/09/2022
+// AUTOR: Geovana Augusta
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de get vinculada(s) aos elementos da tela de Priorização.
 
 import { api, token } from "services/api";
 

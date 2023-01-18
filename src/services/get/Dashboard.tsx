@@ -1,6 +1,6 @@
 // CRIADO EM: 27/09/2022
 // AUTOR: Gabriel Peralta
-// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de delete vinculada(s) aos elementos do Dashboard.
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de get vinculada(s) aos elementos do Dashboard.
 
 import { PrevistoChart } from "interfaces/Dashboard";
 import { TotalProjetosDashboard } from "interfaces/Services";

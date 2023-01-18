@@ -1,5 +1,5 @@
 // CRIADO EM: 14/06/2022
-// AUTOR: Max
+// AUTOR: Maxwell
 // DESCRIÇÃO DO ARQUIVO: Hook com funções para o registro de usuário.
 
 import { useState } from "react";

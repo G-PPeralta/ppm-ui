@@ -1,3 +1,7 @@
+// CRIADO EM: 04/10/2022
+// AUTOR: Gabriel Peralta
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de get vinculada(s) aos elementos do Detalhamento de Projetos.
+
 import { CpiSpi, InfoFinanceira, ProjetoProgresso } from "interfaces/Services";
 
 import { api, token } from "services/api";

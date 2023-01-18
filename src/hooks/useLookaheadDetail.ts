@@ -1,5 +1,5 @@
 // CRIADO EM: 10/10/2022
-// AUTOR: Max
+// AUTOR: Maxwell
 // DESCRIÇÃO DO ARQUIVO: Hook com funções para uso no módulo de Lookahead - Detalhamento.
 
 import { useEffect, useState } from "react";

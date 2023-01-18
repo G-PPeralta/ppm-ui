@@ -1,3 +1,7 @@
+// CRIADO EM: 05/10/2022
+// AUTOR: Max
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de get vinculada(s) aos elementos do modal de Priorização - Projetos.
+
 import { Ranking } from "interfaces/Ranking";
 import { ProjetosRanking } from "interfaces/Services";
 

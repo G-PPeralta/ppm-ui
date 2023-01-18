@@ -1,5 +1,5 @@
 // CRIADO EM: 08/11/2022
-// AUTOR: Max
+// AUTOR: Maxwell
 // DESCRIÇÃO DO ARQUIVO: Hook com funções para a remoção de um custo - Financeiro.
 
 import { useState } from "react";
