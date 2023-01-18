@@ -1,3 +1,7 @@
+//  CRIADO EM: 6/2022
+//  AUTOR: Alexander Brito.
+//  DESCRIÇÃO DO ARQUIVO: Tela resetar senha
+
 import {
   Box,
   Button,

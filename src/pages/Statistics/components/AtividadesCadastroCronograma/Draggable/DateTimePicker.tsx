@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Yolanda Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Seletor de data
+
 import { forwardRef, useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 
@@ -12,11 +16,8 @@ function DateTimePicker({ registerForm, index }: any) {
     const data = registerForm.values.atividades[index].data_inicio;
     if (data) {
       const newDate = new Date(data);
-      // newDate.setDate(newDate.getDate() + 15);
       setDataInicio(newDate);
-      // setDataMin(newDate);
     } else {
-      // const newDate = new Date();
       setDataInicio("");
     }
   }, [registerForm.values.atividades[index].data_inicio]);
@@ -35,7 +36,6 @@ function DateTimePicker({ registerForm, index }: any) {
     ({ value, onClick }: any, ref: any) => (
       <Button
         h={"56px"}
-        // _placeholder={{ color: "#949494" }}
         fontSize={"14px"}
         fontWeight={"400"}
         color={"black"}

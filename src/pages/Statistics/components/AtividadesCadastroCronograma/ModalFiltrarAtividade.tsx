@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Filtrar atividades da tabela
+
 import { useState } from "react";
 import { MdFilterAlt } from "react-icons/md";
 
@@ -19,7 +23,6 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-// import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import DatePickerModal from "components/DatePickerGenerico/DatePickerModal";
 import SelectFiltragem from "components/SelectFiltragem";
@@ -177,7 +180,6 @@ export function ModalFiltrarAtividade({
                           min={0}
                           id={`profundidadeIni`}
                           name={`profundidade`}
-                          // value={registerForm.values.profundidade}
                           onChange={(value) => {
                             registerForm.setFieldValue(
                               `profundidadeIni`,
@@ -206,7 +208,6 @@ export function ModalFiltrarAtividade({
                           min={0}
                           id={`profundidadeFim`}
                           name={`profundidade`}
-                          // value={registerForm.values.profundidade}
                           onChange={(value) => {
                             registerForm.setFieldValue(
                               `profundidadeFim`,
@@ -276,7 +277,6 @@ export function ModalFiltrarAtividade({
                   onClose={onClose}
                 />
                 <Button
-                  // disabled={!registerForm.isValid}
                   background="origem.300"
                   variant="primary"
                   color="white"

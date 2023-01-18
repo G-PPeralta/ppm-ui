@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Cadastrar nova sonda
+
 import { useState } from "react";
 
 import {
@@ -6,7 +10,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  // ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,

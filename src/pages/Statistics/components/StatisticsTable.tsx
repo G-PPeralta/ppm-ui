@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Magno Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Tabela de estatísticas
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 

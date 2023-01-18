@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Tela para visualizar estatísticas
+
 import { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 
@@ -5,22 +9,16 @@ import { Box, Button, Flex, Heading, Input, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { StatisticsTableData } from "interfaces/Services";
 
-// import ModalCadastrarSonda from "pages/Infographics/Components/ModalCadastrarSonda";
-// import ModalCadastroPoco from "pages/Infographics/Components/ModalCadastroPoco";
-
 import Sidebar from "components/SideBar";
 
 import { getOperacoesEstatisticas } from "services/get/OperacoesEstatisticas";
 
-// import ModalCadastroCronograma from "./components/ModalCadastroCronograma";
-// import ModalCadastroOperacao from "./components/ModalCadastroOperacao";
 import { StatisticsTable } from "./components/StatisticsTable";
 
 function Statistics() {
   const [loading, setLoading] = useState(true);
   const [allData, setAllData] = useState<StatisticsTableData[]>([]);
   const [filter, setFilter] = useState<StatisticsTableData[]>();
-  // const [refresh, setRefresh] = useState(false);
   const [search, setSearch] = useState("");
   const [render, setRender] = useState(false);
   const windowInnerWidth = window.innerWidth;
@@ -46,8 +44,6 @@ function Statistics() {
 
   const handleGetAllData = async () => {
     const { data } = await getOperacoesEstatisticas();
-    // console.log("ORIGEM --> " + data.poco);
-    // console.log("data", data);
     const newData = convertReq(data);
     setAllData(newData);
     setFilter(newData);
@@ -77,18 +73,11 @@ function Statistics() {
     handleGetAllData();
   }, []);
 
-  // useEffect(() => {
-  //   handleGetAllData();
-  // }, [refresh]);
-
   useEffect(() => {
     setTimeout(() => {
       handleGetAllData();
     }, 1000);
   }, [render]);
-
-  // console.log("filter", filter);
-  // console.log("allData", allData);
 
   return (
     <>
@@ -118,9 +107,6 @@ function Statistics() {
                 >
                   Projetos
                 </Heading>
-                {/* <Heading as="h3" size="md" color={"origem.500"}>
-                  Lixeira
-                </Heading> */}
               </Flex>
 
               <Flex
@@ -182,32 +168,6 @@ function Statistics() {
                   align={"end"}
                   wrap={"wrap"}
                 ></Flex>
-
-                {/* <Flex
-                  gap={4}
-                  flex={2}
-                  justify={windowInnerWidth > 600 ? "end" : "start"}
-                  align={"end"}
-                  wrap={"wrap"}
-                >
-                  <ModalCadastrarSonda
-                    refresh={refresh}
-                    setRefresh={setRefresh}
-                  />
-                  <ModalCadastroPoco
-                    refresh={refresh}
-                    setRefresh={setRefresh}
-                  />
-                  <ModalCadastroOperacao
-                    refresh={refresh}
-                    setRefresh={setRefresh}
-                  />
-
-                  <ModalCadastroCronograma
-                    refresh={refresh}
-                    setRefresh={setRefresh}
-                  />
-                </Flex> */}
               </Flex>
 
               <Flex flex={1} ml={-1}>
