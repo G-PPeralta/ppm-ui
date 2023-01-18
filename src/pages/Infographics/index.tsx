@@ -1,8 +1,6 @@
-/*
-  Criado por: Eduardo Muchak e Bruno Fracaro
-  Data de criação: 08/2023
-  Descrição: Tela principal de infográficos, que mostra todas as intervenções por sonda.
-*/
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Tel de infográficos
 
 import { useEffect, useState } from "react";
 

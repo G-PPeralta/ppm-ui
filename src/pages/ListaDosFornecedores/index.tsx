@@ -1,5 +1,8 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Gabriel Peralta.
+//  DESCRIÇÃO DO ARQUIVO: Tela de controle de fornecedores
+
 import { SetStateAction, useEffect, useState } from "react";
-// import toast from "react-hot-toast";
 import toast from "react-hot-toast";
 import { BiPlus } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
@@ -9,18 +12,13 @@ import { useNavigate } from "react-router-dom";
 import {
   Box,
   Flex,
-  // FormLabel,
-  // HStack,
   Text,
-  // Stack,
   useBreakpointValue,
   useColorModeValue,
   Heading,
   Button,
   Icon,
   Input,
-  // FormControl,
-  // Select,
   useDisclosure,
   FormControl,
   FormLabel,
@@ -29,8 +27,6 @@ import {
 import { Polo, ProjetosList } from "interfaces/Services";
 
 import Sidebar from "components/SideBar";
-
-// import { useFornecedores } from 'hooks/useFornecedores';
 
 import { useAuth } from "hooks/useAuth";
 
@@ -41,16 +37,6 @@ import { putFornecedor } from "services/update/Fornecedor";
 
 import { EditarFornecedorModal } from "./components/EditarFornecedorModal";
 import { TabelaFornecedores } from "./components/TabelaFornecedores";
-
-// export interface Fornecedor {
-//   id: number;
-//   nomefornecedor: string;
-//   fornecedor: string;
-//   orcamento: number;
-//   realizado: number;
-//   responsavel: string;
-//   descricao: string;
-// }
 
 export interface FornecedoreDto {
   id: number;
@@ -81,7 +67,6 @@ export function Fornecedores() {
   const [projetos, setProjetos] = useState([] as ProjetosList[]);
   const [polos, setPolos] = useState<Polo[]>([] as Polo[]);
   const [loading, setLoading] = useState(true);
-  // estados dos filtros
   const [filtroFornecedor, setFiltroFornecedor] = useState("");
   const [polo, setPolo] = useState(0);
 
@@ -98,7 +83,6 @@ export function Fornecedores() {
   }
 
   function handleUpdateFornecedor(fornecedor: any) {
-    // Atualiza o fornecedor na lista
     setFornecedores(
       fornecedores.map((f) => (f.id === fornecedor.id ? fornecedor : f))
     );
@@ -108,14 +92,9 @@ export function Fornecedores() {
   }
 
   async function handleDeleteFornecedor(fornecedor: any) {
-    // "Deleta" o fornecedor na lista
     setFornecedores(
       fornecedores.map((f) => (f.id === fornecedor.id ? fornecedor : f))
     );
-    // deleteFornecedor(fornecedor.id, user?.nome);
-
-    // handleGetFornecedores();
-    // onClose();
 
     try {
       if (!fornecedor.id) throw new Error("Erro ao remover o fornecedor!");
@@ -143,8 +122,6 @@ export function Fornecedores() {
     setFornecedores(response.data as FornecedoreDto[]);
     setFilteredFornecedores(response.data as FornecedoreDto[]);
   };
-
-  // console.log(fornecedores);
 
   async function handleGetProjetos() {
     const payload = await getProjetos();
@@ -189,8 +166,6 @@ export function Fornecedores() {
         justify="center"
         bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
       >
-        {/* <Stack spacing="8"> */}
-        {/* <Flex align="center" justify="center" bg={"#EDF2F7"}> */}
         <Box
           py={{ base: "6", sm: "8" }}
           px={{ base: "6", sm: "8" }}
@@ -227,7 +202,6 @@ export function Fornecedores() {
               md: "column",
             })}
             wrap={"wrap"}
-            // border={'red solid 2px'}
           >
             <Flex ml={-3}>
               <Button
@@ -262,49 +236,8 @@ export function Fornecedores() {
             <Flex justify={"space-between"}>
               <Flex align={"flex-end"} gap={4} wrap={"wrap"} flex={1}>
                 <Flex ml={-3}>
-                  {/* <FormControl>
-                    <FormLabel
-                      // fontWeight={"700"}
-                      // fontSize={"12px"}
-                      // color={"#A7A7A7"}
-                      htmlFor="projeto"
-                    >
-                      <Text
-                        fontWeight={"700"}
-                        fontSize={"12px"}
-                        color={"#949494"}
-                      >
-                        PROJETO
-                      </Text>
-                    </FormLabel>
-                    <Select
-                      fontSize={"14px"}
-                      fontFamily={"Mulish"}
-                      fontWeight={"400"}
-                      mt={"-9px"}
-                      placeholder="Selecione"
-                      id="projeto"
-                      name="projeto"
-                      onChange={(e) => setProjetoId(Number(e.target.value))}
-                      width={"208px"}
-                      height={"56px"}
-                    >
-                      <option value={0}>Todos</option>
-                      {projetos &&
-                        projetos.map((project, index) => (
-                          <option value={project.id} key={index}>
-                            {project.nomeProjeto}
-                          </option>
-                        ))}
-                    </Select>
-                  </FormControl> */}
                   <FormControl>
-                    <FormLabel
-                      // fontWeight={"700"}
-                      // fontSize={"12px"}
-                      // color={"#A7A7A7"}
-                      htmlFor="projeto"
-                    >
+                    <FormLabel htmlFor="projeto">
                       <Text
                         fontWeight={"700"}
                         fontSize={"12px"}
@@ -337,7 +270,6 @@ export function Fornecedores() {
                     <FormLabel
                       fontWeight={"700"}
                       fontSize={"12px"}
-                      // color={"#A7A7A7"}
                       htmlFor="projeto"
                     >
                       <Text
@@ -397,25 +329,16 @@ export function Fornecedores() {
                   </Button>
                 </Flex>
               </Flex>
-              <Flex
-                // border={'gray solid 4px'}
-                // justifyContent={"flex-start"}
-                align={"flex-start"}
-                alignSelf={"center"}
-                mr={-4}
-                mt={4}
-              >
+              <Flex align={"flex-start"} alignSelf={"center"} mr={-4} mt={4}>
                 <Button
                   background="transparent"
                   color="#0239C3"
                   float={"right"}
                   fontWeight={"700"}
                   fontSize={"18px"}
-                  // alignSelf={"end"}
                 >
                   Lixeira
                   <Icon
-                    // alignSelf={"end"}
                     as={MdArrowForwardIos}
                     fontSize="20px"
                     fontWeight={"700"}
@@ -430,98 +353,11 @@ export function Fornecedores() {
                 base: "column",
                 md: "row",
               })}
-              // border={'green solid 4px'}
               justifyContent={"flex-start"}
               mt={"5px"}
-            >
-              {/* <form
-                      onSubmit={(e) => {
-                        e.preventDefault();
-                      }}
-                    >
-                      <Flex
-                      // border={'blue solid 2px'}
-                      >
-                        <FormControl>
-                          <FormLabel
-                            fontSize="xs"
-                            mt={1}
-                            color={'black'}
-                            // ml={'9px'}
-                          >
-                            PROJETO
-                          </FormLabel>
-                          <Input
-                            type="text"
-                            placeholder="Nome do projeto"
-                            w={useBreakpointValue({
-                              base: '100%',
-                              md: '255px',
-                            })}
-                            h={useBreakpointValue({
-                              md: '56px',
-                            })}
-                            // ml={'9px'}
-                            mr={'20px'}
-                            color={'#A7A7A7'}
-                          />
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel fontSize="xs" mt={1} color={'black'}>
-                            POLO
-                          </FormLabel>
-                          <Select
-                            placeholder="Selecione"
-                            size="md"
-                            name="historico"
-                            w={useBreakpointValue({
-                              base: '100%',
-                              md: '204px',
-                            })}
-                            h={useBreakpointValue({
-                              md: '56px',
-                            })}
-                            mr={'60px'}
-                            color={'#A7A7A7'}
-                          >
-                            <option value="alagoas">Alagoas</option>
-                            <option value="tucano-sul">Tucano Sul</option>
-                          </Select>{' '}
-                        </FormControl>
-                        <FormControl>
-                          <Button
-                            ml={useBreakpointValue({
-                              base: 0,
-                              sm: 0,
-                              md: -120,
-                              lg: -10,
-                            })}
-                            mt={7}
-                            // disabled={!registerForm.isValid}
-                            type="submit"
-                            background="#0047BB"
-                            variant="primary"
-                            color="white"
-                            border={'2px'}
-                            w={useBreakpointValue({
-                              base: '100%',
-                              md: '28%',
-                              lg: '124px',
-                            })}
-                            h={useBreakpointValue({
-                              lg: '59px',
-                            })}
-                          >
-                            Buscar
-                            <Icon as={AiOutlineSearch} fontSize="20px" ml={1} />
-                          </Button>
-                        </FormControl>
-                      </Flex>
-                    </form> */}
-            </Flex>
+            ></Flex>
           </Flex>
           <Flex ml={-3} mr={-3} flexDir={"column"}>
-            {/*  Componentes aqui */}
             <TabelaFornecedores
               fornecedores={filteredFornecedores}
               onEdit={handleEditFornecedor}
@@ -537,10 +373,8 @@ export function Fornecedores() {
             onUpdate={handleUpdateFornecedor}
             polos={polos}
           />
-          {/* <Stack spacing="6" alignItems={"center"}></Stack> */}
         </Box>{" "}
       </Flex>
-      {/* </Flex> */}
     </Sidebar>
   );
 }

@@ -1,14 +1,11 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Tabela de lições aprendidas
+
 import { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
 import toast from "react-hot-toast";
 import { FaFileCsv } from "react-icons/fa";
-// import {
-//   FiChevronLeft,
-//   FiChevronRight,
-//   FiChevronsLeft,
-//   FiChevronsRight,
-//   FiSearch,
-// } from "react-icons/fi";
 import { FiSearch } from "react-icons/fi";
 import { MdArrowForwardIos, MdModeEdit } from "react-icons/md";
 
@@ -26,7 +23,6 @@ import {
   Box,
   Flex,
   Heading,
-  // Stack,
   useBreakpointValue,
   useColorModeValue,
   Button,
@@ -102,10 +98,6 @@ export function LicoesAprendidasProjetos() {
     filterByProject();
   };
 
-  // const print = () => {
-  //   window.print();
-  // };
-
   async function handleUpdateLicoes(
     licao: any,
     campo: any,
@@ -131,11 +123,7 @@ export function LicoesAprendidasProjetos() {
             .slice(from, to)
             .map((lessons, index) => (
               <Tr key={index}>
-                <Td
-                  // isNumeric
-                  fontWeight={"semibold"}
-                  textAlign={"center"}
-                >
+                <Td fontWeight={"semibold"} textAlign={"center"}>
                   {lessons.id}
                 </Td>
 
@@ -162,12 +150,7 @@ export function LicoesAprendidasProjetos() {
                     background="transparent"
                     variant="secondary"
                     color="#0047BB"
-                    // mr={2}
-                    // isRound={true}
-                    // size="md"
                     _hover={{ background: "origem.500", color: "white" }}
-                    // width={"18px"}
-                    // height={"18px"}
                     onClick={() => {
                       setEditLicao(lessons);
                       onOpen();
@@ -198,11 +181,7 @@ export function LicoesAprendidasProjetos() {
     .slice(from, to)
     .map((lessons, index) => (
       <Tr key={index}>
-        <Td
-          // isNumeric
-          fontWeight={"semibold"}
-          textAlign={"center"}
-        >
+        <Td fontWeight={"semibold"} textAlign={"center"}>
           {lessons.id}
         </Td>
 
@@ -229,12 +208,7 @@ export function LicoesAprendidasProjetos() {
             background="transparent"
             variant="secondary"
             color="#0047BB"
-            // mr={2}
-            // isRound={true}
-            // size="md"
             _hover={{ background: "origem.500", color: "white" }}
-            // width={"18px"}
-            // height={"18px"}
             onClick={() => {
               setEditLicao(lessons);
               onOpen();
@@ -262,37 +236,6 @@ export function LicoesAprendidasProjetos() {
     { label: "Data", key: "data" },
   ];
 
-  // const rowsPerPage = 8;
-  // const totalRegs = filteredLicoesAprendidas.length;
-  // const maxPage = Math.ceil(totalRegs / rowsPerPage);
-
-  // const paginate = (pag: number) => {
-  //   setPagAtual(pag);
-
-  //   const x = (pag - 1) * rowsPerPage;
-  //   const y = (pag - 1) * rowsPerPage + rowsPerPage;
-  //   setFrom(x);
-  //   setTo(y);
-  // };
-
-  // const advance = () => {
-  //   if (pagAtual == maxPage) {
-  //     return;
-  //   }
-
-  //   const _pag = pagAtual + 1;
-
-  //   paginate(_pag);
-  // };
-
-  // const back = () => {
-  //   if (pagAtual == 1) {
-  //     return;
-  //   }
-  //   const _pag = pagAtual - 1;
-  //   paginate(_pag);
-  // };
-
   return (
     <Sidebar>
       <Flex
@@ -301,7 +244,6 @@ export function LicoesAprendidasProjetos() {
         justify="center"
         bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
       >
-        {/* <Flex w={"auto"} align="center" justify="center" bg={"#EDF2F7"}> */}
         <Box
           py={{ base: "6", sm: "8" }}
           px={{ base: "6", sm: "8" }}
@@ -351,9 +293,7 @@ export function LicoesAprendidasProjetos() {
                   fontSize="18px"
                   color={"#0047BB"}
                   variant="ghost"
-                  // colorScheme="messenger"
                   rightIcon={<FaFileCsv size={18} />}
-                  // onClick={print}
                 >
                   Exportar
                 </Button>
@@ -413,8 +353,6 @@ export function LicoesAprendidasProjetos() {
                   }}
                   rightIcon={<FiSearch />}
                   onClick={handleClick}
-                  // alignSelf={"end"}
-                  // marginLeft={"-332px"}
                   height={"56px"}
                   width={"101px"}
                   fontSize={"18px"}
@@ -426,10 +364,8 @@ export function LicoesAprendidasProjetos() {
 
             <Flex align={"flex-start"} alignSelf={"center"} mr={-3}>
               <Button
-                // onClick={onOpen}
                 variant="ghost"
                 color="#0047BB"
-                // float={"right"}
                 fontWeight={"700"}
                 fontSize={"18px"}
               >
@@ -519,7 +455,6 @@ export function LicoesAprendidasProjetos() {
           handleUpdateLicoes={handleUpdateLicoes}
         />
       )}
-      {/* </Flex> */}
     </Sidebar>
   );
 }

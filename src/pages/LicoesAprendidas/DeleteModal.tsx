@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Botão de deletar infromação
+
 import { useState } from "react";
 import { FiTrash } from "react-icons/fi";
 
@@ -5,17 +9,13 @@ import {
   Button,
   Flex,
   FormControl,
-  // FormLabel,
   Modal,
   ModalBody,
-  // ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalOverlay,
   Stack,
   Text,
-  // Textarea,
-  // useBreakpointValue,
   useDisclosure,
   IconButton,
   ModalHeader,
@@ -104,7 +104,6 @@ function DeleteModal({ id, newRender }: props) {
                   <Stack gap={2}>
                     <Flex>
                       <Text
-                        // textAlign={"center"}
                         fontSize={"20px"}
                         mb={"1px"}
                         color={"#010101"}

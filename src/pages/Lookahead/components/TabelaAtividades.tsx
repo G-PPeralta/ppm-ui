@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Maxwell.
+//  DESCRIÇÃO DO ARQUIVO: Tabela de mostrar atividades lookahead
+
 import { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
 import { FaFileCsv } from "react-icons/fa";
@@ -57,8 +61,6 @@ export function TabelaAtividades(props: TableProps) {
   const [atividades, setAtividades] = useState<AtividadeDiaHora[]>();
   const [total, setTotal] = useState<Totais[]>();
 
-  // console.log("atividades: ", atividades);
-
   function formataMes(mes: number) {
     return mes < 10 ? `0${mes}` : mes;
   }
@@ -79,8 +81,6 @@ export function TabelaAtividades(props: TableProps) {
     setHoras(horas);
     for (let i = 0; i < dias.length; i++) {
       const dia = dias[i];
-
-      // const realDay = dataBr.format(new Date(`${mes}/${dia}/${ano}`));
 
       const realDay = `${dia}/${formataMes(mes)}/${ano}`;
       const diaSemana: DiasSemana = new DiasSemana();
@@ -131,11 +131,6 @@ export function TabelaAtividades(props: TableProps) {
     setSem(semana);
     getWeekDays();
   }, [semana]);
-
-  // console.log("dias", dias);
-  // console.log("horas", horas);
-  // console.log("semana", semana);
-  // console.log("total", total);
 
   return (
     <Flex>
@@ -259,7 +254,6 @@ export function TabelaAtividades(props: TableProps) {
               {dias &&
                 total &&
                 dias.map(function (dia, index) {
-                  // return <Td>{`${x.diaLabel}`}</Td>;
                   const _total = total.filter(
                     (tot) => tot.data == dia.data
                   ).length;
