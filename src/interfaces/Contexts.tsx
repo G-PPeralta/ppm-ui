@@ -1,3 +1,7 @@
+// CRIADO EM: 14/06/2022
+// AUTOR: ALEXANDER BRITO
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE INTERFACES DOS CONTEXTOS DE USUÁRIO E AUTENTICAÇÃO
+
 export interface UserContextProps {
   id?: string;
   nome?: string;

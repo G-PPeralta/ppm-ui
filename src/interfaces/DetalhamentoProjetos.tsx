@@ -1,3 +1,7 @@
+// CRIADO EM: 17/08/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE INTERFACES DO CARD DE PROJETOS
+
 export interface ICardInfoProjeto {
   id?: number;
   nome_projeto: string;

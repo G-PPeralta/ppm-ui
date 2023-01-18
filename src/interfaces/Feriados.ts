@@ -1,3 +1,7 @@
+// CRIADO EM: 21/11/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE INTERFACES DE FERIADOS
+
 export interface AllFeriados {
   data_feriado: string;
   nome_feriado: string;

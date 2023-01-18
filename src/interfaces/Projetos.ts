@@ -1,3 +1,7 @@
+// CRIADO EM: 04/10/2022
+// AUTOR: MAXWELL MORAIS
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE INTERFACES DO MÓDULO DE PROJETOS
+
 export interface Projetos {
   id: number;
   id_projeto_real: number;

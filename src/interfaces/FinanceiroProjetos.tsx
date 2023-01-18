@@ -1,3 +1,7 @@
+// CRIADO EM: 13/10/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE INTERFACES DA PÁGINA DE FINANCEIRO POR PROJETOS
+
 export interface FinanceiroPorProjetos {
   idprojeto: number;
   nomeprojeto: string;

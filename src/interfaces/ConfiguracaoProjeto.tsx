@@ -1,3 +1,7 @@
+// CRIADO EM: 20/10/2022
+// AUTOR: YOLANDA DE SOUZA
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE INTERFACES DO CONFIGURAÇÃO DE PROJETO
+
 export interface IConfigProjetoDto {
   nome_responsavel?: number;
   coordenador_nome?: number;

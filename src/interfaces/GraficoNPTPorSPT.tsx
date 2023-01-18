@@ -1,3 +1,7 @@
+// CRIADO EM: 12/12/2022
+// AUTOR: GEOVANA AUGUSTA
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE INTERFACES DO GRÁFICO DE NPT
+
 export interface NPTPorSPT {
   key: string;
   Manutenção: number;

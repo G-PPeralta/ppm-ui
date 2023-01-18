@@ -1,3 +1,7 @@
+// CRIADO EM: 02/09/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE INTERFACES DOS MODAIS DE CADASTRO DA PÁGINA DO MÓDULO INFOGRÁFICOS
+
 interface User {
   nom_usu_create: string | undefined; // enviar o nome do usuário logado
 }

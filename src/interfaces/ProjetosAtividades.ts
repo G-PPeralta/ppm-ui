@@ -1,3 +1,7 @@
+// CRIADO EM: 04/10/2022
+// AUTOR: MAXWELL MORAIS
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE INTERFACES DAS ATIVIDADES DO MÓDULO DE PROJETOS
+
 export interface ProjetosAtividades {
   id?: number;
   nome_projeto: string;
