@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Botão confirmar replanejamento de intervenções
+
 import {
   Button,
   Flex,
@@ -13,8 +17,6 @@ import {
   ModalHeader,
   ModalCloseButton,
 } from "@chakra-ui/react";
-
-// import { TextError } from "components/TextError";
 
 interface Props {
   execute: Function;
@@ -67,7 +69,6 @@ function BotaoReplanejar({ execute }: Props) {
                 <Stack gap={2}>
                   <Flex direction={"column"}>
                     <Text
-                      // textAlign={"center"}
                       fontSize={"20px"}
                       mb={"1px"}
                       color={"#010101"}
@@ -76,7 +77,6 @@ function BotaoReplanejar({ execute }: Props) {
                       Tem certeza que deseja alterar o planejamento?
                     </Text>
                     <Text
-                      // textAlign={"center"}
                       fontSize={"16px"}
                       mt={"30px"}
                       color={"origem.600"}

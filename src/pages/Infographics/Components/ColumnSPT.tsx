@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Coluna da sonda
+
 import { useEffect, useState } from "react";
 
 import { Flex, Text } from "@chakra-ui/react";

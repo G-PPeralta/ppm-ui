@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Cadastrar nova intervenção
+
 import { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 
@@ -124,9 +128,7 @@ function BotaoCadastrar() {
                   />
                 </Box>
               </>
-              {/* <Button colorScheme="blue">Button</Button> */}
             </PopoverBody>
-            {/* <PopoverFooter>This is the footer</PopoverFooter> */}
           </PopoverContent>
         </Portal>
       </Popover>

@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO:Botão e modal para cadastrar nova atividade
+
 import { useState } from "react";
 
 import {

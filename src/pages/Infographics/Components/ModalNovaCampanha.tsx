@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Modal campanha de intervenção
+
 import { useEffect, useState } from "react";
 
 import {
@@ -50,13 +54,11 @@ function ModalNovaCampanha({ refetch }: Props) {
     nova_campanha: false,
   });
 
-  // Função para buscar sondas cadastradas para popular select com opções
   const reqGetProjetosSelectFeriado = useQuery({
     queryKey: ["sonda"],
     queryFn: getAllSondasOperacaoRQ,
   });
 
-  // Cadastrar nova campanha
   const reqPostCadastroCampanhaRQ = useMutation({
     mutationFn: postNovaCampanhaRQ,
     onSuccess: () => {
@@ -78,7 +80,6 @@ function ModalNovaCampanha({ refetch }: Props) {
   });
 
   const handleClickCadastrar = () => {
-    // Seta a animação de loading do botão para True
     setIsButtonLoading(true);
 
     const payload: any = {
@@ -88,10 +89,8 @@ function ModalNovaCampanha({ refetch }: Props) {
       nova_campanha: formValues.nova_campanha,
     };
 
-    // Chama a função de cadastro
     reqPostCadastroCampanhaRQ.mutate(payload);
 
-    // Limpa os campos do formulário
     setFormValues({
       sondaSelecionada: {
         value: "",
@@ -103,7 +102,6 @@ function ModalNovaCampanha({ refetch }: Props) {
   };
 
   const handleCloseModal = () => {
-    // Limpa os campos do formulário
     setFormValues({
       sondaSelecionada: {
         value: "",

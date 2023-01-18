@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Parte do formulário no botão cadastrar
+
 import { AiFillPlusCircle } from "react-icons/ai";
 import { MdEdit } from "react-icons/md";
 

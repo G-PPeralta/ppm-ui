@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Botão e Modal para cadastrar novo poco
+
 import {
   Flex,
   Modal,
@@ -19,7 +23,6 @@ import {
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
-// import { TextError } from "components/TextError";
 
 import { handleCancelar } from "utils/handleCadastro";
 import { regexCaracteresEspeciais } from "utils/regex";
@@ -89,8 +92,6 @@ function ModalCadastroPoco({ refresh, setRefresh }: Props) {
                         md: "row",
                       })}
                       gap={5}
-                      // align={"center"}
-                      // justify={"center"}
                     >
                       <FormControl>
                         <Flex gap={1}>
@@ -123,9 +124,6 @@ function ModalCadastroPoco({ refresh, setRefresh }: Props) {
                           onChange={registerForm.handleChange}
                           maxLength={10}
                         />
-                        {/* {registerForm.errors.poco && (
-                          <TextError>{registerForm.errors.poco}</TextError>
-                        )} */}
                       </FormControl>
                     </Flex>
                   </Stack>
@@ -134,39 +132,6 @@ function ModalCadastroPoco({ refresh, setRefresh }: Props) {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              {/* <Flex gap={2}>
-                <Button
-                  variant="ghost"
-                  color="red"
-                  onClick={() => handleCancelar(registerForm, onClose)}
-                  _hover={{
-                    background: "red.500",
-                    transition: "all 0.4s",
-                    color: "white",
-                  }}
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  disabled={!registerForm.isValid || !registerForm.values.poco}
-                  background="origem.300"
-                  variant="primary"
-                  color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
-                  _hover={{
-                    background: "origem.500",
-                    transition: "all 0.4s",
-                  }}
-                >
-                  {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Cadastrar</Text>
-                    </>
-                  )}
-                </Button>
-              </Flex> */}
               <Flex gap={2}>
                 <BotaoVermelhoLargoGhost
                   text={"Cancelar"}

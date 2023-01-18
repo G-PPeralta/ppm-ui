@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Botão e Modal de cadastrar nova sonda
+
 import { useState } from "react";
 
 import {
@@ -61,7 +65,6 @@ function ModalCadastrarSonda() {
   });
 
   const handleClickCadastrar = () => {
-    // Seta a animação de loading do botão para True
     setIsButtonLoading(true);
 
     const payload = {
@@ -69,15 +72,12 @@ function ModalCadastrarSonda() {
       nom_usu_create: user?.nome,
     };
 
-    // Chama a função de cadastro
     reqPostCadastroSondaRQ.mutate(payload);
 
-    // Limpa os campos do formulário
     setFormValues({ nome: "" });
   };
 
   const handleCloseModal = () => {
-    // Limpa os campos do formulário
     setFormValues({ nome: "" });
     onClose();
   };

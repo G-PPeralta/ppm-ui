@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Botão e Modal para cadastrar novo template de projeto
+
 import {
   Flex,
   Modal,
@@ -33,8 +37,6 @@ function ModalCadastroProjetoTipo({ refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading, listaAtividadesPrecedentes } =
     useCadastroProjetoTipo();
-
-  // console.log("registerForm", registerForm.values);
 
   return (
     <>

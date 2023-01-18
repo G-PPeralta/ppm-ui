@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Modal de filtragem de intervenções
+
 import { BiSearch } from "react-icons/bi";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { RiFilterOffFill } from "react-icons/ri";
@@ -23,7 +27,6 @@ import {
   Pocos,
   Tarefas,
 } from "interfaces/CadastrosModaisInfograficos";
-// import { Operacao } from "interfaces/Estatisticas";
 import { Sonda, Status } from "interfaces/Infograficos";
 import { Responsavel } from "interfaces/Services";
 
@@ -40,7 +43,6 @@ type Props = {
   listas: {
     listaAreaAtuacao: AreaAtuacao[];
     listaResponsaveis: Responsavel[];
-    // listaOperacao: Operacao[];
     listaSondas: Sonda[];
     listaTarefas: Tarefas[];
     listaPocos: Pocos[];
@@ -100,13 +102,6 @@ function FiltrosModal({ refresh, setRefresh, listas, registerForm }: Props) {
     setRefresh(!refresh);
     onClose();
   };
-
-  // const handleRemoverFiltro = async () => {
-  //   await registerForm.resetForm();
-  //   postFiltros();
-  //   setRefresh(!refresh);
-  //   onClose();
-  // };
 
   const getValue = (options: any, index: number) => ({
     value: options?.[index]?.value,

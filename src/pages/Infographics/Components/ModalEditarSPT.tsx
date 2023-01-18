@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Modal Editar coluna
+
 import { useEffect, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
@@ -38,10 +42,6 @@ function ModalEditarSPT({ column, refresh, setRefresh }: any) {
       ordem: 0,
     },
   ]);
-
-  // console.log("payload", payload);
-
-  // eslint-disable-next-line no-unused-vars
   const handleClick = async () => {
     await postReplanejarCampanha(payload, column.id_campanha);
     setRefresh(!refresh);
@@ -87,7 +87,6 @@ function ModalEditarSPT({ column, refresh, setRefresh }: any) {
             <FormControl>
               <Flex direction={"column"} gap={4}>
                 <Stack>
-                  {/* <Text fontWeight={"bold"}>Campanha</Text> */}
                   <Flex
                     flexDirection={useBreakpointValue({
                       base: "column",
