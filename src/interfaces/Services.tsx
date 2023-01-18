@@ -1,3 +1,7 @@
+// CRIADO EM: 20/06/2022
+// AUTOR: ALEXANDER BRITO
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE INTERFACES DOS SERVIÇOS DE REQUISIÇÕES GERAIS DO SISTEMA
+
 export interface LoginProps {
   email: string;
   senha: string;

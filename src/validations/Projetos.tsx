@@ -1,3 +1,7 @@
+// CRIADO EM: 07/10/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE VALIDAÇÕES DOS CADASTRO DE ATIIVIDADES DE PROJETOS E PROJETOS
+
 import * as yup from "yup";
 
 export const cadastroAtividadeProjetos = yup.object({
@@ -52,12 +56,7 @@ export const cadastroProjetoSchema = yup.object({
     .moreThan(0, "Campo obrigatório"),
   nomeProjeto: yup.string().required("Campo obrigatório"),
   elementoPep: yup.string().required("Campo obrigatório"),
-  // dataInicio: yup.string().required("Campo obrigatório"),
   capexPrevisto: yup.string().required("Campo obrigatório"),
-  // complexidadeId: yup
-  //   .number()
-  //   .required("Campo obrigatório")
-  //   .moreThan(0, "Campo obrigatório"),
   divisaoId: yup
     .number()
     .required("Campo obrigatório")

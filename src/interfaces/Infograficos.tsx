@@ -1,3 +1,7 @@
+// CRIADO EM: 13/12/2022
+// AUTOR: GEOVANA AUGUSTA
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE INTERFACES DO MÓDULO DE INFOGRÁFICOS
+
 export interface Atividade {
   atividade_id_origem: string;
   area_id: number;

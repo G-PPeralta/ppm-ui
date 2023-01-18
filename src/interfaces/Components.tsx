@@ -1,8 +1,6 @@
-export interface DropzoneProps {
-  onFileUploaded: (file: File) => void;
-  avatar?: string;
-  nome?: string;
-}
+// CRIADO EM: 13/06/2022
+// AUTOR: ALEXANDER BRITO
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE INTERFACES DO GRÁFICO DE BARRAS
 
 export interface StackedBarChartProps {
   sizeW: number | string;

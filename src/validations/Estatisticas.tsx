@@ -1,3 +1,7 @@
+// CRIADO EM: 03/10/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE VALIDAÇÕES DOS CADASTROS DO MÓDULO DE ESTATÍSTICAS
+
 import * as yup from "yup";
 
 export const cadastroNovoCronogramaSchema = yup.object({
@@ -23,7 +27,6 @@ export const cadastroNovoCronogramaSchema = yup.object({
 });
 
 export const cadastroOperacaoSchema = yup.object({
-  // id_origem: yup.string().required("O ID é obrigatório!").min(1),
   nom_operacao: yup.string().required("O nome da atividade é obrigatório!"),
 });
 
@@ -62,27 +65,6 @@ export const editarAtividadeGanttSchema = yup.object({
   ),
 });
 
-export const teste = yup.object({
-  geral: yup.object({
-    id_atividade: yup.number().required("Campo obrigatório").moreThan(0),
-    nome_atividade: yup.string().required("Campo obrigatório"),
-    pct_real: yup.number().required("Campo obrigatório"),
-    hrs_reais: yup.number().required("Campo obrigatório"),
-    inicio_realizado: yup.date().required("Campo obrigatório"),
-    fim_realizado: yup.date().required("Campo obrigatório"),
-    inicio_planejado: yup.date().required("Campo obrigatório"),
-    fim_planejado: yup.date().required("Campo obrigatório"),
-  }),
-  anotacoes: yup.object({
-    anotacoes: yup.string().required("Campo obrigatório"),
-  }),
-  mocs: yup.array().of(
-    yup.object({
-      numero_moc: yup.string(),
-    })
-  ),
-});
-
 export const cadastroAtividadeEstatisticaSchema = yup.object({
   id_sonda: yup.number().required("Campo obrigatório").moreThan(0),
   id_poco: yup.number().required("Campo obrigatório").moreThan(0),
@@ -90,6 +72,4 @@ export const cadastroAtividadeEstatisticaSchema = yup.object({
   duracao: yup.string().required("Campo obrigatório"),
   data_inicio: yup.string().required("Campo obrigatório"),
   data_fim: yup.string().required("Campo obrigatório"),
-  // metodo_elevacao_id: yup.number().required("Campo obrigatório").moreThan(0),
-  // profundidade: yup.number().required("Campo obrigatório").moreThan(0),
 });

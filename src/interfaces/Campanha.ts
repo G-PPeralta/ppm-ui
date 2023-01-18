@@ -1,3 +1,7 @@
+// CRIADO EM: 04/10/2022
+// AUTOR: MAX
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE INTERFACES DE CAMPANHAS
+
 export interface Poco {
   id_campanha: number;
   id: number;

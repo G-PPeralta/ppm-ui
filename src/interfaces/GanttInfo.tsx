@@ -1,3 +1,7 @@
+// CRIADO EM: 18/07/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE INTERFACE DE MICROATIVIDADES DO GANTT
+
 export interface GanttMicroTasks {
   nome_projeto?: string;
   data_inicio?: string;

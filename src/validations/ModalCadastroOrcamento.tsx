@@ -1,3 +1,7 @@
+// CRIADO EM: 26/09/2022
+// AUTOR: FELIPE MATEUS
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE VALIDAÇÕES DO MODAL DE CADASTRO DE ORÇAMENTO
+
 import * as yup from "yup";
 
 export const cadastroValorPrevistoSchema = yup.object({

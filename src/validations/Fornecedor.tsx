@@ -1,3 +1,7 @@
+// CRIADO EM: 14/10/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE VALIDAÇÕES DO CADASTRO DE FORNECEDORES
+
 import * as yup from "yup";
 
 export const cadastroFornecedor = yup.object({

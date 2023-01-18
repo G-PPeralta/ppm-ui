@@ -1,3 +1,7 @@
+// CRIADO EM: 30/09/2022
+// AUTOR: FELIPE MATEUS
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE INTERFACES DA PÁGINA BUDGETS
+
 export interface BudgetPlan {
   atividadeId: number;
   valor: number;
@@ -76,14 +80,6 @@ export interface ClasseServico {
   classe_servico: string;
 }
 
-/*
-interface CustoDiarioFilho {
-  id: number;
-  index: string;
-  atividade: string;
-  fornecedor: string;
-  realizado: number;
-} */
 export interface CustoDiario {
   id: number;
   atividade: string;
