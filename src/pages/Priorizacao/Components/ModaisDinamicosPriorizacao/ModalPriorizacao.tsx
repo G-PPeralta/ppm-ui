@@ -1,10 +1,9 @@
-// import { IoIosArrowBack } from "react-icons/io";
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Modal com opções sobre a priorização
+
 import { useState } from "react";
-import {
-  MdArrowForwardIos,
-  // MdOutlineArrowBackIosNew,
-  MdModeEdit,
-} from "react-icons/md";
+import { MdArrowForwardIos, MdModeEdit } from "react-icons/md";
 
 import {
   Button,
@@ -15,15 +14,12 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  // Stack,
   Text,
   useDisclosure,
   IconButton,
   ModalCloseButton,
   Icon,
 } from "@chakra-ui/react";
-
-// import { handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroPriorizacao } from "hooks/useCadastroPriorizacao";
 
@@ -55,8 +51,6 @@ function ModalPriorizacao(infosRankings: TableProps) {
           backgroundColor: "origem.500",
           color: "white",
         }}
-        // w={"14px"}
-        // h={"18px"}
         icon={<MdModeEdit />}
       />
       <Modal isOpen={isOpen} onClose={onClose} size="4xl">
@@ -71,14 +65,12 @@ function ModalPriorizacao(infosRankings: TableProps) {
             fontSize={"14px"}
             fontWeight={"700"}
             h={"48px"}
-            // ml={-2}
           >
             {`Priorização ${infosRankings.nomeRanking}`}
           </ModalHeader>
           <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
-              // e.preventDefault();
               registerForm.handleSubmit(e);
             }}
           >
@@ -94,15 +86,6 @@ function ModalPriorizacao(infosRankings: TableProps) {
                     <Flex align={"flex-end"} alignSelf={"start"}>
                       <Text>
                         <Text
-                          // aria-label=""
-                          // backgroundColor={"white"}
-                          // color={"#2D2926"}
-                          // onClick={() => handleCancelar(registerForm, onClose)}
-                          // _hover={{
-                          //   background: "white",
-                          //   transition: "all 0.4s",
-                          //   color: "origem.500",
-                          // }}
                           fontSize={"24px"}
                           fontWeight={"700"}
                           fontFamily={"Mulish"}

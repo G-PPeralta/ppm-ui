@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Modal e botão pra edtar priorização
+
 import { useEffect } from "react";
 
 import {
@@ -37,9 +41,6 @@ function EditarPriorizacao(infosRanking: TableProps) {
   );
 
   const perfis = ["Nível 0", "Nível 1", "Nível 2"];
-
-  // console.log("registerform", registerForm.values);
-  // console.log("nomeRanking", infosRanking.nomeRanking);
 
   useEffect(() => {
     registerForm.setFieldValue("idRanking", infosRanking.idRanking);
@@ -85,7 +86,6 @@ function EditarPriorizacao(infosRanking: TableProps) {
           <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
-              // e.preventDefault();
               registerForm.handleSubmit(e);
             }}
           >
@@ -201,7 +201,6 @@ function EditarPriorizacao(infosRanking: TableProps) {
                   Cancelar
                 </Button>
                 <Button
-                  // disabled={!registerForm.isValid}
                   w={"208px"}
                   h={"56px"}
                   background={"origem.500"}

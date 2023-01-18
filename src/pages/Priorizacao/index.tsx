@@ -1,11 +1,13 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Tela de priorização
+
 import { useState } from "react";
 
 import {
   Box,
   Flex,
-  // FormControl,
   Heading,
-  // Stack,
   Text,
   useBreakpointValue,
   useColorModeValue,
@@ -24,17 +26,14 @@ export function Priorizacao() {
       <Sidebar>
         <Flex
           w="auto"
-          // h="100vh"
           align="center"
           justify="center"
           bg={useBreakpointValue({ base: "white", sm: "#EDF2F7" })}
-          // border={"5px solid red"}
         >
           <Box
             py={{ base: "6", sm: "8" }}
             px={{ base: "6", sm: "8" }}
             w="100%"
-            // h="100vh"
             bg={useBreakpointValue({ base: "transparent", sm: "white" })}
             boxShadow={{
               base: "none",

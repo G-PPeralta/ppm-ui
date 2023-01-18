@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Modal genérico para priorizações
+
 import { useEffect } from "react";
 
 import {
@@ -20,8 +24,6 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-// import { TextError } from "components/TextError";
-
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroNovaOpcaoPriorizacao } from "hooks/useCadastrarOpcaoPriorizacao";
@@ -36,8 +38,6 @@ interface TableProps {
 function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroNovaOpcaoPriorizacao();
-
-  // console.log("register opção", registerForm.values);
 
   useEffect(() => {
     registerForm.setFieldValue("id_ranking", infosRankings.idRanking);
@@ -89,7 +89,6 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
           <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
-              // e.preventDefault();
               registerForm.handleSubmit(e);
             }}
           >
@@ -117,7 +116,6 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               fontSize={"14px"}
                               fontWeight={"400"}
                               placeholder={"Nome"}
-                              // w={"93%"}
                               color={"black"}
                               _placeholder={{ color: "#949494" }}
                               w={"524px"}
@@ -128,11 +126,6 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               value={registerForm.values.nom_opcao}
                               onChange={registerForm.handleChange}
                             />
-                            {/* {registerForm.errors.rank_opcao_name && (
-                              <TextError>
-                                {registerForm.errors.rank_opcao_name}
-                              </TextError>
-                            )} */}
                           </FormControl>
                         </Flex>
 
@@ -150,7 +143,6 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                             </FormLabel>
                             <Select
                               ml={"2px"}
-                              // w={"93.6%"}
                               id="num_nota"
                               name="num_nota"
                               placeholder="Selecione"
@@ -172,11 +164,6 @@ function ModalCadastrarOpcaoPriorizacao(infosRankings: TableProps) {
                               <option>5</option>
                               <option>6</option>
                             </Select>
-                            {/* {registerForm.errors.rank_opcao_grade && (
-                              <TextError>
-                                {registerForm.errors.rank_opcao_grade}
-                              </TextError>
-                            )} */}
                           </FormControl>
                         </Flex>
                       </Flex>

@@ -1,3 +1,7 @@
+//  CRIADO EM: 6/2022
+//  AUTOR: Bruno Fracaro.
+//  DESCRIÇÃO DO ARQUIVO: tle de rota invalida 404
+
 import { useNavigate } from "react-router-dom";
 
 import { Box, Heading, Text, Button, Flex } from "@chakra-ui/react";
@@ -19,9 +23,6 @@ export function NotFound() {
         <Text fontSize="18px" mt={3} mb={2}>
           Esta página está em desenvolvimento
         </Text>
-        {/* <Text color={"gray.500"} mb={6}>
-          Por favor, verifique a URL e tente novamente.
-        </Text> */}
 
         <Button
           colorScheme="origem"

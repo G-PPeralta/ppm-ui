@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Modal e Botão para deletar priorização
+
 import { useState } from "react";
 import { FiTrash } from "react-icons/fi";
 

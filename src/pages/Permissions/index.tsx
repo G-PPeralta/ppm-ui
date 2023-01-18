@@ -1,3 +1,7 @@
+//  CRIADO EM: 6/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Alterar permissão do usuário
+
 import {
   Box,
   Button,

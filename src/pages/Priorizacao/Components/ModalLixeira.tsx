@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Botão enviar para a lixeira
+
 import { MdArrowForwardIos } from "react-icons/md";
 
 import {
@@ -34,17 +38,9 @@ function ModalLixeira() {
         float={"right"}
         fontSize="18px"
         fontFamily={"Mulish"}
-        // _hover={{
-        //   background: "#0047BB",
-        //   color: "white",
-        // }}
       >
         Lixeira
         <Icon
-          // _hover={{
-          //   background: "#0047BB",
-          //   color: "white",
-          // }}
           as={MdArrowForwardIos}
           fontSize="20px"
           fontWeight={"700"}
@@ -70,7 +66,6 @@ function ModalLixeira() {
           <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
-              // e.preventDefault();
               registerForm.handleSubmit(e);
             }}
           >
