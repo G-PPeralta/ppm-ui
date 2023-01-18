@@ -1,3 +1,7 @@
+// CRIADO EM: 04/10/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE INTERFACES DO MODULO DE ESTATÍSTICAS
+
 export interface Operacao {
   id: number;
   id_origem: string;

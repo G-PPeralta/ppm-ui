@@ -1,3 +1,7 @@
+// CRIADO EM: 23/06/2022
+// AUTOR: LEANDRO SANTOS
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE VALIDAÇÕES DO CADASTRO DE PROJETOS
+
 import * as yup from "yup";
 
 export const projectRegisterSchema = yup.object({

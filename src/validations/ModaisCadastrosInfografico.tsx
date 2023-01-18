@@ -1,3 +1,7 @@
+// CRIADO EM: 02/09/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE VALIDAÇÕES DOS CADASTROS DO MÓDULO DE INFOGRAFICO
+
 import * as yup from "yup";
 
 export const cadastroTarefaSchema = yup.object({
@@ -5,10 +9,7 @@ export const cadastroTarefaSchema = yup.object({
 });
 
 export const cadastroSondaSchema = yup.object({
-  nome: yup
-    .string()
-    // .required("O nome da sonda é obrigatório!")
-    .min(3, "O nome deve ter ao menos 3 caracteres!"),
+  nome: yup.string().min(3, "O nome deve ter ao menos 3 caracteres!"),
 });
 
 export const cadastroIntervencaoSchema = yup.object({
@@ -111,8 +112,6 @@ export const cadastroNovaAtividadeSchema = yup.object({
 });
 
 export const cadastroAtividadeIntervencaoSchema = yup.object({
-  // id_origem: yup.string().required("Campo obrigatório!"),
-  // nom_atividade: yup.string().required("Campo obrigatório!"),
   atividade_id: yup.number().required("Campo obrigatório!").moreThan(0),
   responsavel_id: yup.number().required("Campo obrigatório!").moreThan(0),
   area_atuacao: yup.number().required("Campo obrigatório!").moreThan(0),
@@ -123,15 +122,6 @@ export const cadastroAtividadeIntervencaoSchema = yup.object({
       dias: yup.number(),
     })
   ),
-  // nao_iniciar_antes_de: yup.object({
-  //   data: yup.string(),
-  //   checked: yup.boolean(),
-  // }),
-  // nao_terminar_depois_de: yup.object({
-  //   data: yup.string(),
-  //   checked: yup.boolean(),
-  // }),
-  // o_mais_breve_possivel: yup.boolean(),
 });
 
 export const updateProfundidadeoSchema = yup.object({

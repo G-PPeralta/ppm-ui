@@ -1,3 +1,7 @@
+// CRIADO EM: 27/06/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE VALIDAÇÕES DO CADASTRO DE ATIVIDADES NO MÓDULO DE ATIVIDADES
+
 import * as yup from "yup";
 
 export const activitiesRegisterSchema = yup.object({

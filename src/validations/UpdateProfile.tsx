@@ -1,3 +1,7 @@
+// CRIADO EM: 20/06/2022
+// AUTOR: ALEXANDER BRITO
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE VALIDAÇÕES DO FORMULÁRIO DE ATUALIZAÇÃO DE PERFIL
+
 import * as yup from "yup";
 
 export const updateProfileSchema = yup.object({

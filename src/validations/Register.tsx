@@ -1,3 +1,7 @@
+// CRIADO EM: 14/06/2022
+// AUTOR: ALEXANDER BRITO
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE VALIDAÇÕES DO CADASTRO DE USUÁRIOS
+
 import * as yup from "yup";
 
 export const registerSchema = yup.object({
