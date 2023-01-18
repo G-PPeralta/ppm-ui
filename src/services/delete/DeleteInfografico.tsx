@@ -1,3 +1,7 @@
+// CRIADO EM: 14/11/2022
+// AUTOR: Geovana Augusta
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de delete vinculadas à tela de Campanhas
+
 import { api, token } from "services/api";
 
 export async function deleteInfograficos(

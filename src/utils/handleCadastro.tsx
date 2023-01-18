@@ -1,3 +1,7 @@
+// CRIADO EM: 14/11/2022
+// AUTOR: Gabriel Peralta
+// DESCRIÇÃO DO ARQUIVO: Funções para padronização e refresh no cadastro e cancelamento, atrelados ao clique de um botão.
+
 export const handleCadastrar = async (form: any, onClose: Function) => {
   await form.submitForm();
   if (form.isValid) {
@@ -24,7 +28,6 @@ export const handleCadastrarRefresh = async (
     setRefresh(!refresh);
     onClose();
   }
-  // setRefresh(!refresh);
 };
 
 export const handleCancelarDatePicker = (

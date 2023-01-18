@@ -1,3 +1,7 @@
+// CRIADO EM: 14/11/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Função que formata em função do tipo de dado recebido.
+
 export const formataParaTipo = (tipo: string, val: number) => {
   if (tipo === "porcentagem") {
     return val + "%";

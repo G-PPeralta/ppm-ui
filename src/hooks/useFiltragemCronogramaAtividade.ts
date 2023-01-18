@@ -1,5 +1,5 @@
 // CRIADO EM: 27/10/2022
-// AUTOR: Max
+// AUTOR: Maxwell
 // DESCRIÇÃO DO ARQUIVO: Hook com funções para a filtragem de atividades de campanha - módulo Intervenções - Campanhas.
 
 import { useEffect, useState } from "react";

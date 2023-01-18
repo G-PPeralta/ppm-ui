@@ -1,4 +1,6 @@
-// import { GanttPayload } from 'interfaces/Services';
+// CRIADO EM: 18/07/2022
+// AUTOR: Gabriel Peralta
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de get vinculada(s) ao Gantt.
 
 import { api, token } from "services/api";
 

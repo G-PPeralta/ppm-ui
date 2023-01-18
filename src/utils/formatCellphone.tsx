@@ -1,4 +1,9 @@
 /* eslint-disable no-param-reassign */
+
+// CRIADO EM: 14/06/2022
+// AUTOR: Alexander
+// DESCRIÇÃO DO ARQUIVO: Função para formato padrão de telefone.
+
 function formatCellphone(valor: string) {
   if (!valor || valor === "(") return;
   valor = valor.replace(/\D/g, "");

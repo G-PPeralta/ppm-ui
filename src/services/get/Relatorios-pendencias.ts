@@ -1,3 +1,7 @@
+// CRIADO EM: 07/09/2022
+// AUTOR: Maxwell
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de get vinculada(s) aos elementos da tela de Tarefas.
+
 import { ICurvaS } from "interfaces/CurvaS";
 
 import { api, token } from "services/api";

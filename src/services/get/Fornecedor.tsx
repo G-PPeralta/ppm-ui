@@ -1,4 +1,6 @@
-// import { FornecedoreDto } from "pages/ListaDosFornecedores";
+// CRIADO EM: 07/09/2022
+// AUTOR: Gabriel Peralta
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de get vinculada(s) aos elementos da tela de Fornecedores.
 
 import { api, token } from "services/api";
 

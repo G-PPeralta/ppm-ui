@@ -1,3 +1,7 @@
+// CRIADO EM: 14/11/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de get vinculada(s) aos elementos da tela de Gráficos Estatísticos.
+
 import {
   AreaAtuacao,
   Responsavel,
@@ -16,16 +20,6 @@ export async function postGetInfoCampanha(
 
 export const postGetInfoCampanhaRQ: any = async (payload: any) =>
   await api.post("/campanha", payload, token());
-
-// ROTA NÃO EXISTE MAIS. SUBSTITUIDA POR POR #POST EM /campanha
-// export async function getInfoCampanha(): Promise<{
-//   data: any[];
-//   status: number;
-// }> {
-//   const { data, status } = await api.get(`/campanha`, token());
-
-//   return { data, status };
-// }
 
 export async function getInfoProjetos(): Promise<{
   data: Projetos[];

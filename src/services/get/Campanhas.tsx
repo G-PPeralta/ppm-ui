@@ -1,3 +1,7 @@
+// CRIADO EM: 27/09/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de get vinculada(s) à tela de Campanhas.
+
 import { api, token } from "services/api";
 
 export const campanhasMock = [
@@ -164,10 +168,6 @@ export const campanhasMock = [
     ],
   },
 ];
-
-// Criar funcao para filtragem dinamica onde todos os parametros sao opcionais
-// As opções para filtragem são: sonda, poco, areaAtuacao, atividade, responsavel, dataInicio, dataFim e status intervencao
-// A função deve retornar um array de objetos com as intervenções filtradas
 
 export function filtrarIntervencoes(
   campanhas: any,

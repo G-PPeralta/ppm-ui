@@ -1,3 +1,7 @@
+// CRIADO EM: 14/11/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Função para vincular status à uma cor padrão.
+
 export const statusProjeto = [
   {
     id: 4,
@@ -32,51 +36,39 @@ export const statusProjeto = [
 ];
 
 export function validateDate(
-  pct_plan: number, // porcentagem planejada
-  comp_pct: number, // comparação porcentagens
-  pct_real: number, // porcentagem realizada
-  finalplanejado: any, // data final planejada
-  ind_alerta: number, // indicador de alerta
+  pct_plan: number,
+  comp_pct: number,
+  pct_real: number,
+  finalplanejado: any,
+  ind_alerta: number,
   ind_status: number
 ) {
   if (ind_status > 0) {
     switch (true) {
       case ind_status === 1:
-        return statusProjeto[4].color; // concluído
-
+        return statusProjeto[4].color;
       case ind_status === 3:
-        return statusProjeto[1].color; // em andamento
-
+        return statusProjeto[1].color;
       case ind_status === 2:
-        return statusProjeto[3].color; // atrasado
-
-      // case pct_real === 100 && comp_pct === 1:
-      //   return statusProjeto[4].color; // concluído
-
+        return statusProjeto[3].color;
       case ind_status === 4:
-        return statusProjeto[0].color; // não iniciado
-
-      default: // não aplicável
+        return statusProjeto[0].color;
+      default:
         return statusProjeto[2].color;
     }
   } else {
     switch (true) {
       case pct_real === 100:
-        return statusProjeto[4].color; // concluído
+        return statusProjeto[4].color;
 
       case pct_real > 0 && pct_real < 100:
-        return statusProjeto[1].color; // em andamento
+        return statusProjeto[1].color;
 
       case pct_plan > pct_real || new Date(finalplanejado) < new Date():
-        return statusProjeto[3].color; // atrasado
-
-      // case pct_real === 100 && comp_pct === 1:
-      //   return statusProjeto[4].color; // concluído
-
+        return statusProjeto[3].color;
       case pct_plan === 0 && pct_real === 0:
-        return statusProjeto[0].color; // não iniciado
-
-      default: // não aplicável
+        return statusProjeto[0].color;
+      default:
         return statusProjeto[2].color;
     }
   }

@@ -1,3 +1,7 @@
+// CRIADO EM: 14/11/2022
+// AUTOR: Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Função para uso na edição de atividade.
+
 export const getSelectFiltragemValue = (
   options: any,
   chave: string,

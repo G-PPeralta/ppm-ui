@@ -1,3 +1,7 @@
+// CRIADO EM: 21/09/2022
+// AUTOR: Geovana Augusta
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de delete vinculadas à tela de Carteira de Projetos.
+
 import { api, token } from "services/api";
 
 export async function deleteTarefa(
