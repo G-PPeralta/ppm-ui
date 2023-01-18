@@ -1,7 +1,10 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Tabela com os projetos e suas informações
+
 import { useEffect, useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
-// import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import {
@@ -39,7 +42,6 @@ export function Projects() {
     setProjetos(data);
     setProjetosFilter(data);
     const polosLista = ["Todos", "Alagoas", "Tucano Sul"];
-    // data.map((data) => polosLista.push(data.polo));
     setListaPolos(polosLista);
   };
 

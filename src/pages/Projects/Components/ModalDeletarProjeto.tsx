@@ -1,4 +1,7 @@
-// import { FaTrash } from "react-icons/fa";
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Deletar projeto da tabela
+
 import { useState } from "react";
 import { FiTrash } from "react-icons/fi";
 
@@ -6,10 +9,8 @@ import {
   Button,
   Flex,
   FormControl,
-  // FormLabel,
   Modal,
   ModalBody,
-  // ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalOverlay,
@@ -24,8 +25,6 @@ import { Ring } from "@uiball/loaders";
 
 import { useToast } from "contexts/Toast";
 
-// import { useDeletarProjeto } from "hooks/useDeletarProjeto";
-
 import { useAuth } from "hooks/useAuth";
 
 import { deleteProject } from "services/delete/DeleteProject";
@@ -39,7 +38,6 @@ type id = {
 
 function ModalDeletarProjeto(projeto: id) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const { registerForm } = useDeletarProjeto(projeto.projeto);
   const { toast } = useToast();
   const [loading, setLoading] = useState<boolean>(false);
   const { user } = useAuth();
@@ -75,8 +73,6 @@ function ModalDeletarProjeto(projeto: id) {
           backgroundColor: "#F40606",
           color: "white",
         }}
-        // w={"14px"}
-        // h={"18px"}
       >
         <FiTrash size={"13px"} />
       </IconButton>
@@ -97,7 +93,6 @@ function ModalDeletarProjeto(projeto: id) {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              // registerForm.handleSubmit(e);
             }}
           >
             <ModalBody mt={3}>
@@ -106,7 +101,6 @@ function ModalDeletarProjeto(projeto: id) {
                   <Stack gap={2}>
                     <Flex>
                       <Text
-                        // textAlign={"center"}
                         fontSize={"20px"}
                         mb={"1px"}
                         color={"#010101"}

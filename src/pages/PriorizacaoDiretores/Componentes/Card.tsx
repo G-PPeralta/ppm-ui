@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Bruno Fracaro.
+//  DESCRIÇÃO DO ARQUIVO: Card da tela de priorização de diretores
+
 import { useEffect, useId, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { BiExpand } from "react-icons/bi";

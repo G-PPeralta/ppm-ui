@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Yolanda Ferreira.
+//  DESCRIÇÃO DO ARQUIVO:  Informações do relatório
+
 import { FaWallet } from "react-icons/fa";
 
 import {
@@ -55,7 +59,6 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
   function calculatePercet(data: SummaryData) {
     if (data.budget && data.realized && data.budget > 0 && data.realized > 0) {
       const percents = {
-        // aparentemente nunca vai usar esse undone
         undone:
           ((+data.budget - +data.realized) / +data.budget) * 100 > 100
             ? 100
@@ -94,10 +97,6 @@ export function ProjectSummary({ data, table, dataTable }: Props) {
       currency: "BRL",
     });
   }
-
-  // console.log(typeof data.startDate);
-  // console.log(new Date(data.startDate));
-  // console.log(moment(new Date(data.startDate)).utc().format("DD/MM/YYYY"));
 
   return (
     <Accordion padding={0} margin={0} allowToggle w={"100%"}>

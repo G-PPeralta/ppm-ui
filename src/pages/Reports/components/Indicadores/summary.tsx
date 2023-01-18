@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Yolanda Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Sumário os indicadores
+
 import { FaWallet } from "react-icons/fa";
 
 import {
@@ -96,10 +100,6 @@ export function ProjectSummary({ data, table, tableData }: Props) {
   function changeShadow() {
     return table === false ? "md" : "none";
   }
-
-  // function formatToLocale(num: number) {
-  //   return num.toLocaleString("pt-BR");
-  // }
 
   return (
     <Accordion padding={0} margin={0} allowToggle w={"100%"}>

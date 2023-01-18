@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Yolanda Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Componentes de medição de evolução
+
 import { useEffect, useState } from "react";
 
 import { Flex } from "@chakra-ui/react";

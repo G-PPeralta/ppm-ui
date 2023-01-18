@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Maxwell.
+//  DESCRIÇÃO DO ARQUIVO: Criar conta
+
 import PasswordChecklist from "react-password-checklist";
 
 import {

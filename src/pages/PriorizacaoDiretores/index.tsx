@@ -1,10 +1,13 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Bruno Alcantara .
+//  DESCRIÇÃO DO ARQUIVO: tela para alterar prioridade dos projetos
+
 import { useState, useEffect } from "react";
 import {
   DragDropContext,
   Droppable,
   DroppableProvided,
 } from "react-beautiful-dnd";
-// import { BsThreeDotsVertical } from "react-icons/bs";
 
 import { Button, Flex, Spinner, Text } from "@chakra-ui/react";
 
@@ -44,9 +47,6 @@ const reorder = (list: any, startIndex: any, endIndex: any) => {
   return result;
 };
 
-/**
- * Moves an item from one list to another list.
- */
 const move = (
   source: any,
   destination: any,
@@ -379,7 +379,6 @@ export function PriorizacaoDiretores() {
                   width={"300px"}
                   direction={"column"}
                   gap={2}
-                  // borderRight={"1px solid #D6D4D4"}
                   minHeight={"500px"}
                 >
                   <Flex
@@ -395,18 +394,6 @@ export function PriorizacaoDiretores() {
                     >
                       Baixa
                     </Text>
-                    {/* <Button
-                      variant={"none"}
-                      _hover={{
-                        background: "#ddd",
-                        transition: "all 0.4s",
-                      }}
-                      py={1}
-                      px={1}
-                      ml={1}
-                    >
-                      <BsThreeDotsVertical size={22} />
-                    </Button> */}
                   </Flex>
                   <Droppable droppableId={"droppableBaixa"}>
                     {(provided: DroppableProvided) => (
@@ -423,7 +410,6 @@ export function PriorizacaoDiretores() {
                   width={"300px"}
                   gap={2}
                   direction={"column"}
-                  // borderRight={"1px solid #D6D4D4"}
                   borderLeft={"1px solid #D6D4D4"}
                   minHeight={"500px"}
                 >
@@ -440,18 +426,6 @@ export function PriorizacaoDiretores() {
                     >
                       Média
                     </Text>
-                    {/* <Button
-                      variant={"none"}
-                      _hover={{
-                        background: "#ddd",
-                        transition: "all 0.4s",
-                      }}
-                      py={1}
-                      px={1}
-                      ml={1}
-                    >
-                      <BsThreeDotsVertical size={22} />
-                    </Button> */}
                   </Flex>
                   <Droppable droppableId={"droppableMedia"}>
                     {(provided: DroppableProvided) => (
@@ -484,18 +458,6 @@ export function PriorizacaoDiretores() {
                     >
                       Alta
                     </Text>
-                    {/* <Button
-                      variant={"none"}
-                      _hover={{
-                        background: "#ddd",
-                        transition: "all 0.4s",
-                      }}
-                      py={1}
-                      px={1}
-                      ml={1}
-                    >
-                      <BsThreeDotsVertical size={22} />
-                    </Button> */}
                   </Flex>
                   <Droppable droppableId={"droppableAlta"}>
                     {(provided: DroppableProvided) => (

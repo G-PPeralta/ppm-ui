@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Visualizar perfil do usuário logado
+
 import {
   Box,
   Button,

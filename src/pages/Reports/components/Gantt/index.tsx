@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Yolanda Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Gráfico Gantt para relatórios
+
 import { useEffect, useState } from "react";
 
 import { Flex } from "@chakra-ui/react";
@@ -15,7 +19,6 @@ import "./gantt.css";
 
 export function Gantt() {
   const [loading, setLoading] = useState(true);
-  // const [refresh, setRefresh] = useState(false);
   const [gantt, setGantt] = useState<any[]>([]);
 
   const rowDataBound = (args: any) => {
@@ -50,8 +53,6 @@ export function Gantt() {
             name: "TaskName",
             startDate: "StartDate",
             endDate: "EndDate",
-            // baselineStartDate: "BaselineStartDate",
-            // baselineEndDate: "BaselineEndDate",
             duration: "Duration",
             progress: "Progress",
             dependency: "Predecessor",
@@ -71,8 +72,6 @@ export function Gantt() {
             enableToggle: true,
           }}
           splitterSettings={{
-            // view: handleShowGantt(),
-            // columnIndex: 5,
             position: "80%",
           }}
           rowDataBound={rowDataBound}
@@ -105,22 +104,6 @@ export function Gantt() {
               textAlign: "Center",
               format: "dd/MM/yyyy",
             },
-            // {
-            //   field: "BaselineStartDate",
-            //   headerText: "Início planejado",
-            //   headerTextAlign: "Center",
-            //   textAlign: "Center",
-            //   format: "dd/MM/yyyy",
-            //   type: "date",
-            // },
-            // {
-            //   field: "BaselineEndDate",
-            //   headerText: "Fim planejado",
-            //   headerTextAlign: "Center",
-            //   textAlign: "Center",
-            //   format: "dd/MM/yyyy",
-            //   type: "date",
-            // },
             {
               field: "Duration",
               headerText: "Duração",
@@ -142,13 +125,6 @@ export function Gantt() {
             },
           ]}
         >
-          {/* <footer
-              style={{
-                background: "white",
-                height: "2px",
-                borderRadius: "8px",
-              }}
-            ></footer> */}
           <Inject services={[Edit, Toolbar]} />
         </GanttComponent>
       )}

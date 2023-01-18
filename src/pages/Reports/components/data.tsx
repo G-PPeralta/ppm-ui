@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Yolanda Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Constantes de data para gráficos
+
 import { TaskFieldsModel } from "@syncfusion/ej2-react-gantt";
 
 import { TableData } from "./genericTable";

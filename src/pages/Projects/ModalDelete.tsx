@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Deletar projeto
+
 import { useState, useEffect } from "react";
 import { IoIosPodium } from "react-icons/io";
 
@@ -9,21 +13,17 @@ import {
   Select,
   Modal,
   ModalBody,
-  // ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
   Stack,
   Text,
-  // Textarea,
   useBreakpointValue,
   useDisclosure,
   IconButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-
-// import { TextError } from "components/TextError";
 
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
@@ -44,12 +44,6 @@ function ModaDeletarPriorizacao() {
   useEffect(() => {
     handlePriorizacao();
   }, []);
-
-  // console.log(
-  //   "prio",
-  //   priorizacao.data.Benefício.map((x: any) => x.nom_opcao)
-  // );
-  // console.log(priorizacao.data.Benefício.map((x: any) => x.nom_opcao));
 
   return (
     <>
@@ -78,7 +72,6 @@ function ModaDeletarPriorizacao() {
           >
             Priorização
           </ModalHeader>
-          {/* <ModalCloseButton color={"white"} /> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -105,23 +98,7 @@ function ModaDeletarPriorizacao() {
                           placeholder="Selecione"
                           id="ben_priori"
                           name="ben_priori"
-                          // value={registerForm.values.ben_priori}
-                          // onChange={registerForm.handleChange}
-                        >
-                          {/* {registerForm.errors.ben_priori &&
-                          registerForm.touched.ben_priori && (
-                            <TextError>
-                              {registerForm.errors.ben_priori}
-                            </TextError>
-                          )} */}
-                          {/* {priorizacao.data.Benefício.map(
-                            (bene: any, index: any) => (
-                              <option value={bene.id} key={index}>
-                                {bene.nom_opcao}
-                              </option>
-                            )
-                          )} */}
-                        </Select>
+                        ></Select>
                       </FormControl>
                     </Flex>
 
@@ -143,23 +120,7 @@ function ModaDeletarPriorizacao() {
                           id="reg_priori"
                           name="reg_priori"
                           mt={"10px"}
-                          // value={registerForm.values.nom_campanha}
-                          // onChange={registerForm.handleChange}
-                        >
-                          {/* {registerForm.errors.nom_campanha &&
-                          registerForm.touched.nom_campanha && (
-                            <TextError>
-                              {registerForm.errors.nom_campanha}
-                            </TextError>
-                          )} */}
-                          {/* {priorizacao.data.Regulatório.map(
-                            (reg: any, index: any) => (
-                              <option value={reg.id} key={index}>
-                                {reg.nom_opcao}
-                              </option>
-                            )
-                          )} */}
-                        </Select>
+                        ></Select>
                       </FormControl>
                     </Flex>
 
@@ -180,23 +141,7 @@ function ModaDeletarPriorizacao() {
                           placeholder="Selecione"
                           id="op_priori"
                           name="op_priori"
-                          // value={registerForm.values.op_priori}
-                          // onChange={registerForm.handleChange}
-                        >
-                          {/* {registerForm.errors.op_priori &&
-                          registerForm.touched.op_priori && (
-                            <TextError>
-                              {registerForm.errors.nom_campanha}
-                            </TextError>
-                          )} */}
-                          {/* {priorizacao.data.Operação.map(
-                            (op: any, index: any) => (
-                              <option value={op.id} key={index}>
-                                {op.nom_opcao}
-                              </option>
-                            )
-                          )} */}
-                        </Select>
+                        ></Select>
                       </FormControl>
                     </Flex>
                     <Flex
@@ -216,23 +161,7 @@ function ModaDeletarPriorizacao() {
                           placeholder="Selecione"
                           id="prioridade_priori"
                           name="prioridade_priori"
-                          // value={registerForm.values.prioridade_priori}
-                          // onChange={registerForm.handleChange}
-                        >
-                          {/* {registerForm.errors.prioridade_priori &&
-                          registerForm.touched.prioridade_priori && (
-                            <TextError>
-                              {registerForm.errors.prioridade_priori}
-                            </TextError>
-                          )} */}
-                          {/* {priorizacao.data.Prioridade.map(
-                            (prior: any, index: any) => (
-                              <option value={prior.id} key={index}>
-                                {prior.nom_opcao}
-                              </option>
-                            )
-                          )} */}
-                        </Select>
+                        ></Select>
                       </FormControl>
                     </Flex>
                     <Flex
@@ -252,23 +181,7 @@ function ModaDeletarPriorizacao() {
                           placeholder="Selecione"
                           id="complex_priori"
                           name="complex_priori"
-                          // value={registerForm.values.complex_priori}
-                          // onChange={registerForm.handleChange}
-                        >
-                          {/* {registerForm.errors.complex_priori &&
-                          registerForm.touched.complex_priori && (
-                            <TextError>
-                              {registerForm.errors.complex_priori}
-                            </TextError>
-                          )} */}
-                          {/* {priorizacao.data.Complexidade.map(
-                            (prior: any, index: any) => (
-                              <option value={prior.id} key={index}>
-                                {prior.nom_opcao}
-                              </option>
-                            )
-                          )} */}
-                        </Select>
+                        ></Select>
                       </FormControl>
                     </Flex>
                     <Flex
@@ -288,23 +201,7 @@ function ModaDeletarPriorizacao() {
                           placeholder="Selecione"
                           id="est_neg_priori"
                           name="est_neg_priori"
-                          // value={registerForm.values.est_neg_priori}
-                          // onChange={registerForm.handleChange}
-                        >
-                          {/* {registerForm.errors.est_neg_priori &&
-                          registerForm.touched.est_neg_priori && (
-                            <TextError>
-                              {registerForm.errors.nom_campanha}
-                            </TextError>
-                          )} */}
-                          {/* {priorizacao.data.Operação.map(
-                            (prior: any, index: any) => (
-                              <option value={prior.id} key={index}>
-                                {prior.nom_opcao}
-                              </option>
-                            )
-                          )} */}
-                        </Select>
+                        ></Select>
                       </FormControl>
                     </Flex>
                   </Stack>
