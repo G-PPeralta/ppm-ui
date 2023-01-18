@@ -1,3 +1,7 @@
+// CRIADO EM: 26/09/2022
+// AUTOR: GEOVANA AUGUSTA
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE VALIDAÇÕES DOS MODAIS DE RANKING
+
 import * as yup from "yup";
 
 export const cadastroNovaPriorizacaoSchema = yup.object({
@@ -20,10 +24,6 @@ export const cadastroNovaPriorizacaoSchema = yup.object({
     opcao_id: yup.string().required(),
     id_ranking: yup.number().required(),
   }),
-  // complexidade: yup.object({
-  //   opcao_id: yup.string().required(),
-  //   id_ranking: yup.number().required(),
-  // }),
   estrategia: yup.object({
     opcao_id: yup.string().required(),
     id_ranking: yup.number().required(),

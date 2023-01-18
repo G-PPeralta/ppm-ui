@@ -1,3 +1,7 @@
+// CRIADO EM: 04/11/2022
+// AUTOR: GEOVANA AUGUSTA
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE VALIDAÇÕES DE CADASTRO E ATUALIZAÇÃO DE USUÁRIOS
+
 import * as yup from "yup";
 
 export const cadastroUsuario = yup.object({
@@ -8,7 +12,6 @@ export const cadastroUsuario = yup.object({
     .email("O campo deve ser um e-mail válido"),
   telefone: yup.string().required("Campo obrigatório"),
   nome: yup.string().required("Campo obrigatório"),
-  // roleId: yup.number().required("Campo obrigatório"),
   senha: yup.string().notRequired(),
 });
 

@@ -1,3 +1,7 @@
+// CRIADO EM: 12/10/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE VALIDAÇÕES DO CADASTRO DE DESPESAS DO MÓDULO FINANCEIRO
+
 import * as yup from "yup";
 
 export const cadastroNovaDespesa = yup.object({
