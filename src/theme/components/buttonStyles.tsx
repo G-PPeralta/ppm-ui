@@ -1,3 +1,7 @@
+// CRIADO EM: 03/11/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE ESTILOS DOS BOTÕES NO PADRÃO ORIGEM
+
 import { mode } from "@chakra-ui/theme-tools";
 
 export const ButtonStyles = {

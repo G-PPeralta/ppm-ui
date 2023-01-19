@@ -1,3 +1,7 @@
+// CRIADO EM: 10/06/2022
+// AUTOR: ALEXANDRE BRITO
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO RESPONSÁVEL POR ARMAZENAR OS VALORES DE TYPOGRAPHY
+
 const typography = {
   letterSpacing: {
     tighter: "-0.05em",

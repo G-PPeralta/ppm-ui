@@ -1,3 +1,7 @@
+// CRIADO EM: 24/11/2022
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE ESTILOS DE CHECKBOX NO PADRÃO ORIGEM
+
 import { checkboxAnatomy } from "@chakra-ui/anatomy";
 import { createMultiStyleConfigHelpers } from "@chakra-ui/react";
 

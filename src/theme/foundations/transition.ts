@@ -1,3 +1,7 @@
+// CRIADO EM: 10/06/2022
+// AUTOR: ALEXANDRE BRITO
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO RESPONSÁVEL POR ARMAZENAR OS VALORES DE TRANSIÇÕES
+
 const transition = {
   property: {
     common:
