@@ -1,3 +1,7 @@
+// CRIADO EM: 10/06/2022
+// AUTOR:Alexander
+// DESCRIÇÃO DO ARQUIVO: Context hook de autenticação.
+
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 

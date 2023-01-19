@@ -1,3 +1,7 @@
+// CRIADO EM: 10/06/2022
+// AUTOR:Alexander
+// DESCRIÇÃO DO ARQUIVO: Context hook - toast.
+
 import { createContext, useContext } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
