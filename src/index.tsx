@@ -1,4 +1,7 @@
-import * as React from "react";
+// CRIADO EM: 10/06/2022
+// AUTOR: ALEXANDRE BRITO
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO RAIZ DA APLICAÇÃO, RESPONSÁVEL POR INICIAR A APLICAÇÃO COM AS ROTAS PRINCIPAIS, PROVIDERS E CONFIGURAÇÕES GLOBAIS
+
 import * as ReactDOM from "react-dom/client";
 
 import { ChakraProvider } from "@chakra-ui/react";
@@ -17,11 +20,9 @@ import * as cagregorian from "./ca-gregorian.json";
 import * as numbers from "./numbers.json";
 loadCldr(cagregorian, numbers);
 
-// setCulture("pt-BR");
 setCulture("es");
 
 L10n.load({
-  // "pt-BR": {
   es: {
     grid: {
       EmptyRecord: "Nenhum cronograma encontrado",
@@ -78,22 +79,6 @@ L10n.load({
       start: "Começar",
       finish: "Terminar",
       enterValue: "Inserir valor",
-      // taskBeforePredecessor_FS:
-      //   "Movió '{0}' para comenzar antes de que '{1}' finalice y las dos tareas estén vinculadas. Como resultado, los enlaces no pueden ser respetados. Seleccione una acción a continuación para realizar",
-      // taskAfterPredecessor_FS:
-      //   "Se movió '{0}' lejos de '{1}' y las dos tareas están vinculadas. Como resultado, los enlaces no pueden ser respetados. Seleccione una acción a continuación para realizar",
-      // taskBeforePredecessor_SS:
-      //   "Movió '{0}' para comenzar antes de que comience '{1}' y las dos tareas estén vinculadas. Como resultado, los enlaces no pueden ser respetados. Seleccione una acción a continuación para realizar",
-      // taskAfterPredecessor_SS:
-      //   "Movió '{0}' para comenzar después de que '{1}' comience y las dos tareas estén vinculadas. Como resultado, los enlaces no pueden ser respetados. Seleccione una acción a continuación para realizar",
-      // taskBeforePredecessor_FF:
-      //   "Movió '{0}' para finalizar antes de que '{1}' finalice y las dos tareas estén vinculadas. Como resultado, los enlaces no pueden ser respetados. Seleccione una acción a continuación para realizar",
-      // taskAfterPredecessor_FF:
-      //   "Movió '{0}' para finalizar después de que '{1}' finalice y las dos tareas estén vinculadas. Como resultado, los enlaces no pueden ser respetados. Seleccione una acción a continuación para realizar",
-      // taskBeforePredecessor_SF:
-      //   "Movió '{0}' lejos de '{1}' para comenzar y las dos tareas están vinculadas. Como resultado, los enlaces no pueden ser respetados. Seleccione una acción a continuación para realizar",
-      // taskAfterPredecessor_SF:
-      //   "Movió '{0}' para finalizar después de que '{1}' comience y las dos tareas estén vinculadas. Como resultado, los enlaces no pueden ser respetados. Seleccione una acción a continuación para realizar",
     },
   },
 });
@@ -109,11 +94,9 @@ registerLicense(`${process.env.REACT_APP_SYNCFUSION_KEY}`);
 const queryClient = new QueryClient();
 
 root.render(
-  // <React.StrictMode>
   <QueryClientProvider client={queryClient}>
     <ChakraProvider theme={theme}>
       <App />
     </ChakraProvider>
   </QueryClientProvider>
-  // </React.StrictMode>,
 );

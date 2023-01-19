@@ -1,3 +1,7 @@
+// CRIADO EM: 10/06/2022
+// AUTOR: ALEXANDRE BRITO
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO RESPONSÁVEL POR INICIAR A APLICAÇÃO COM AS ROTAS PRINCIPAIS, PROVIDERS E CONFIGURAÇÕES GLOBAIS
+
 import Moment from "react-moment";
 import { BrowserRouter } from "react-router-dom";
 
@@ -14,7 +18,6 @@ import "./App.css";
 Moment.globalMoment = moment;
 
 Moment.globalLocale = "pt";
-// Moment.globalTimezone = "America/Sao_Paulo";
 Moment.globalLocal = true;
 
 export function App() {
