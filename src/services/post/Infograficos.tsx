@@ -83,17 +83,6 @@ export async function postNovaAtividade(
   return { status };
 }
 
-export async function postEditarAtividadeStatus(
-  campanhaId: number,
-  atividadeStatus: number
-): Promise<{ status: number }> {
-  const { status } = await api.patch(
-    `/campanha/${campanhaId}/pct_real/${atividadeStatus}`,
-    token()
-  );
-  return { status };
-}
-
 export async function postCadastroAtividadeIntervencao(
   id: number,
   payload: any
@@ -119,17 +108,6 @@ export async function postReplanejarCampanha(
 ): Promise<{ status: number }> {
   const { status } = await api.post(
     `/campanha/replanejar/${idCampanha}`,
-    payload,
-    token()
-  );
-  return { status };
-}
-
-export async function postReorderIntervencao(
-  payload: any
-): Promise<{ status: number }> {
-  const { status } = await api.post(
-    "/intervencoes/realocacao",
     payload,
     token()
   );
