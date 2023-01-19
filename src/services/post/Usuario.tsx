@@ -4,11 +4,6 @@
 
 import { api, token } from "services/api";
 
-export async function getUsers(): Promise<{ status: number }> {
-  const { status } = await api.get("/user", token());
-  return { status };
-}
-
 export async function postUsuario(payload: any): Promise<{ status: number }> {
   const { status } = await api.post("/user", payload, token());
   return { status };
