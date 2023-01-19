@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Yolanda Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Modal editar informação
+
 import { MdModeEdit } from "react-icons/md";
 
 import {
@@ -75,7 +79,6 @@ export function EditModal(id: TableProps) {
                   <Stack gap={2}>
                     <Flex>
                       <Text
-                        // textAlign={"center"}
                         fontSize={"24px"}
                         mb={"1px"}
                         color={"#010101"}
@@ -111,7 +114,6 @@ export function EditModal(id: TableProps) {
                   background="#0047BB"
                   variant="primary"
                   color="white"
-                  // onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",

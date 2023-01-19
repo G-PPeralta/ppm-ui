@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Yolanda Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Tabela de ações
+
 import { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 

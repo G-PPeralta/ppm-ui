@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Eduardo Muchak, Bruno Alcantara.
+//  DESCRIÇÃO DO ARQUIVO: Botão para navegação
+
 import { useNavigate } from "react-router-dom";
 
 import { Button } from "@chakra-ui/react";

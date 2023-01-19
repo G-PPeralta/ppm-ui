@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Modal deletar usuário
+
 import { FiTrash } from "react-icons/fi";
 
 import {
@@ -17,8 +21,6 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-
-// import { TextError } from "components/TextError";
 
 import { handleCancelar } from "utils/handleCadastro";
 
@@ -41,8 +43,6 @@ function ModalDeletarUsuario() {
           backgroundColor: "#F40606",
           color: "white",
         }}
-        // w={"14px"}
-        // h={"18px"}
       >
         <FiTrash size={"20px"} />
       </IconButton>
@@ -76,7 +76,6 @@ function ModalDeletarUsuario() {
                   <Stack gap={2}>
                     <Flex>
                       <Text
-                        // textAlign={"center"}
                         fontSize={"20px"}
                         mb={"1px"}
                         color={"#010101"}
@@ -113,7 +112,6 @@ function ModalDeletarUsuario() {
                   background="origem.500"
                   variant="primary"
                   color="white"
-                  // onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
                     background: "origem.600",
                     transition: "all 0.4s",
