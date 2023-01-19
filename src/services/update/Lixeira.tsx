@@ -1,3 +1,7 @@
+// CRIADO EM: 24/10/2022
+// AUTOR:Geovana Augusta
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de patch vinculada(s) à tela de Lixeira.
+
 import { api, token } from "services/api";
 
 export async function restoreLixeira(

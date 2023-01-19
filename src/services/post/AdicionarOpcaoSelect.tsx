@@ -1,3 +1,7 @@
+// CRIADO EM: 11/08/2022
+// AUTOR:Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de post vinculada(s) para criação de novos itens.
+
 import {
   Polo,
   LocalProjeto,

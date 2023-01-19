@@ -1,3 +1,7 @@
+// CRIADO EM: 07/09/2022
+// AUTOR:Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de post vinculada(s) à tela de Carteiros de Projetos.
+
 import { api, token } from "services/api";
 
 export async function postCadastroAtividadeProjetos(

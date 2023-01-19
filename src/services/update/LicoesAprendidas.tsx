@@ -1,3 +1,7 @@
+// CRIADO EM: 24/10/2022
+// AUTOR:Gabriel Peralta
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de patch vinculada(s) à tela de Lições Aprendidas.
+
 import { api, token } from "services/api";
 
 export async function patchLicaoAprendida(
