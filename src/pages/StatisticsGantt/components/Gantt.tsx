@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Magno Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Gráfico gantt tela estatísticas
+
 import { useEffect, useState } from "react";
 
 import { Box, Flex } from "@chakra-ui/react";
@@ -20,14 +24,13 @@ import ModalDeletar from "./ModalDeletar";
 import "./gantt.css";
 
 type ganttOptionsProps = {
-  data: StatisticsGanttProps[] | undefined; // TODO: tirar undefined
+  data: StatisticsGanttProps[] | undefined;
   setRefreshDelete: Function;
   options?: {
     showGantt?: boolean;
   };
   edit: {
     onOpen: Function;
-    // handleEdit: Function;
     setEditOp: any;
   };
 };
@@ -41,28 +44,11 @@ export function Gantt({
   const [loading, setLoading] = useState(true);
 
   const queryTaskbarInfo = (args: any) => {
-    // console.log(":::args.data.taskData", args.data.taskData);
     let color;
     const { Duration, med, dp } = args.data.taskData;
 
-    // console.log("Dados Cores -->", args.data.taskData);
-    // console.log("Dados Cores -->", med + dp);
-    // const dp_med = dp / 2;
-
-    // if (Duration < min) color = "green";
-    // if (Duration >= min && Duration <= med) color = "yellow";
-    // if (Duration >= med) color = "yellow";
-    // if (Duration >= max) color = "red";
-    // if (Duration >= max + dp) color = "black";
-
     const dp1 = dp;
     const dp2 = dp * 2;
-    // console.log("Preto", Duration, " > ", med + dp2);
-    // console.log("Vermelho", Duration, " <= ", med + dp2);
-    // console.log("Laranja", Duration, " <= ", med + dp1);
-    // console.log("Amarelo", Duration, " <= ", med);
-    // console.log("Verde", Duration, " <= ", med - dp1);
-    // console.log("Azul", Duration, " <= ", med - dp2);
     if (+Duration <= med - dp2) {
       color = "blue";
     } else {
@@ -85,25 +71,19 @@ export function Gantt({
       }
     }
 
-    // console.log("Dados --> ", TaskName, " -->", color);
-
     if (color === "black") {
-      // black (duração > média + desvio padrão)
-      args.progressBarBgColor = "rgb(45, 41, 38)"; //     #2D2926
-      args.taskbarBgColor = "rgb(115, 115, 115)"; // #737373 //
+      args.progressBarBgColor = "rgb(45, 41, 38)";
+      args.taskbarBgColor = "rgb(115, 115, 115)";
       args.taskbarBorderColor = "white";
     } else if (color === "red") {
-      // red (duração >  média + DP/2)
       args.progressBarBgColor = "rgb(244, 6, 6)";
       args.taskbarBgColor = "rgb(255, 124, 124)";
       args.taskbarBorderColor = "white";
     } else if (color === "yellow") {
-      // yellow (duração >  média - DP)
       args.progressBarBgColor = "rgb(244, 221, 6)";
       args.taskbarBgColor = "rgb(255, 245, 154)";
       args.taskbarBorderColor = "white";
     } else if (color === "green") {
-      // green (duração < média - DP)
       args.progressBarBgColor = "rgb(5, 149, 2)";
       args.taskbarBgColor = "rgb(147, 224, 27)";
       args.taskbarBorderColor = "white";
@@ -115,9 +95,6 @@ export function Gantt({
   };
 
   const labelSettings = {
-    // leftLabel: "TaskID",
-    // taskLabel: "${Progress}%",
-    // eslint-disable-next-line no-template-curly-in-string
     rightLabel:
       // eslint-disable-next-line no-template-curly-in-string
       "Med: ${taskData.med}h - Min: ${taskData.min}h - Max: ${taskData.max}h - DP: ${taskData.dp}h",
@@ -125,7 +102,6 @@ export function Gantt({
 
   const actionsTemplate = (props: any) => (
     <Flex
-      // w={"100%"}
       style={{ position: "relative", top: "-8px" }}
       justifyContent={"center"}
       alignItems={"center"}
@@ -135,17 +111,11 @@ export function Gantt({
         setLoading={setLoading}
         setRefreshDelete={setRefreshDelete}
       />
-      {/* <FiTrash onClick={() => remove(props)} color="#F94144" size={16} /> */}
     </Flex>
   );
 
   const statusTemplate = (props: any) => (
-    <Flex
-      // w={"100%"}
-      // style={{ position: "relative", top: "-8px" }}
-      justifyContent={"center"}
-      alignItems={"center"}
-    >
+    <Flex justifyContent={"center"} alignItems={"center"}>
       {props.taskData.Progress >= props.taskData.pct_plan &&
         props.taskData.Progress > 0 && (
           <Box
@@ -190,14 +160,7 @@ export function Gantt({
   );
 
   const cellEdit = (args: any) => {
-    // if (args.columnName !== "Progress") {
-    // if (["TaskID", "TaskName"].includes(args.columnName)) {
-    //   args.cancel = true;
-    // }
-    // console.log(">>>>", args.rowData);
     edit?.setEditOp({
-      // id_sonda: number;
-      // id_poco: number;
       id_atividade: args.rowData.TaskID,
       nome_atividade: args.rowData.TaskName,
 
@@ -210,7 +173,6 @@ export function Gantt({
       fim_planejado: new Date(args.rowData.BaselineEndDate),
       pct_real: args.rowData.Progress,
       pct_plan: args.rowData.ProgressPlan,
-      // id_responsavel: number;
     });
     edit?.onOpen();
     args.cancel = true;
@@ -237,11 +199,8 @@ export function Gantt({
             endDate: "EndDate",
             baselineStartDate: "BaselineStartDate",
             baselineEndDate: "BaselineEndDate",
-            // work: "Work",
             duration: "Duration",
             progress: "Progress",
-            // child: "subtasks",
-            // parentID: "ParentId",
           }}
           allowSorting={true}
           sortSettings={sortingOptions}
@@ -251,7 +210,6 @@ export function Gantt({
           renderBaseline={true}
           baselineColor="red"
           durationUnit={"Hour"}
-          // workUnit={"Hour"}
           dayWorkingTime={[{ from: 0, to: 24 }]}
           timezone="UTC"
           toolbar={["ZoomIn", "ZoomOut", "ZoomToFit"]}
@@ -260,7 +218,6 @@ export function Gantt({
             mode: "Auto",
             allowTaskbarEditing: false,
           }}
-          // endEdit={endEdit}
           cellEdit={cellEdit}
           allowSelection={true}
           selectionSettings={{
@@ -269,8 +226,6 @@ export function Gantt({
             enableToggle: true,
           }}
           splitterSettings={{
-            // view: handleShowGantt(),
-            // columnIndex: 5,
             position: "80%",
           }}
           height={"100vh"}
@@ -284,12 +239,6 @@ export function Gantt({
               width="60"
               template={actionsTemplate}
             ></ColumnDirective>
-            {/* <ColumnDirective
-              field="TaskID"
-              headerText="ID"
-              headerTextAlign="Center"
-              textAlign="Center"
-            ></ColumnDirective> */}
             <ColumnDirective
               field="TaskName"
               headerText="Operação"
@@ -327,7 +276,6 @@ export function Gantt({
               headerText="Status"
               headerTextAlign="Center"
               textAlign="Center"
-              // type="number"
               template={statusTemplate}
               width="100"
             ></ColumnDirective>

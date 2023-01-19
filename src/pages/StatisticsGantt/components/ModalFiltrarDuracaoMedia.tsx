@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Filtrar por duração
+
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { RiFilterFill, RiFilterOffFill } from "react-icons/ri";
@@ -34,10 +38,6 @@ import { useRequests } from "hooks/useRequests";
 import { postFiltroDuracaoMedia } from "services/post/FiltroCronograma";
 
 export function ModalFiltrarDuracaoMedia({
-  // refresh,
-  // setRefresh,
-  // setDuracao,
-  // setOperacao,
   operacaoId,
   setMediaHorasFiltradas,
 }: any) {
@@ -51,15 +51,6 @@ export function ModalFiltrarDuracaoMedia({
     optionsSondasOperacoes,
     optionsMetodosElevacao,
   } = useRequests();
-  // const [responsePOST, setResponsePOST] = useState([]);
-
-  // const isEnable = () =>
-  //   registerForm.values.pocoId ||
-  //   registerForm.values.sondaId ||
-  //   registerForm.values.profundidadeIni ||
-  //   registerForm.values.profundidadeFim ||
-  //   registerForm.values.metodoElevacaoId ||
-  //   (registerForm.values.dataDe && registerForm.values.dataAte);
 
   const getFilter = async () => {
     const payload = {
@@ -82,11 +73,7 @@ export function ModalFiltrarDuracaoMedia({
       setLoading(true);
       const res = await postFiltroDuracaoMedia(payload);
 
-      // setDuracao(23, 30);
-      // registerFormAct.values.atividades[index].duracao += 3;
       if (res) {
-        // setOperacao(result[0].operacao_id);
-        // setDuracao(result[0].hrs_media);
         setMediaHorasFiltradas(Number(res));
       }
       onClose();
@@ -119,17 +106,6 @@ export function ModalFiltrarDuracaoMedia({
     registerForm.setFieldValue("dataDe", "");
     registerForm.setFieldValue("dataAte", "");
   };
-
-  // useEffect(() => {
-  //   const getOperacaoPorOperacaoId: any = responsePOST.find(
-  //     (operacao: any) => operacao.id_operacao === operacaoId
-  //   );
-  //   if (getOperacaoPorOperacaoId) {
-  //     setMediaHorasFiltradas(getOperacaoPorOperacaoId.hrs_media);
-  //   } else {
-  //     setMediaHorasFiltradas(0);
-  //   }
-  // }, [responsePOST]);
 
   return (
     <>
@@ -172,7 +148,6 @@ export function ModalFiltrarDuracaoMedia({
             }}
           >
             <ModalBody mt={3}>
-              {/* {!loading ? ( */}
               <Flex direction={"column"} width="580px" height={"auto"} gap={7}>
                 <Flex direction={"row"} height="56px">
                   <SelectFiltragem
@@ -320,9 +295,6 @@ export function ModalFiltrarDuracaoMedia({
                   </Flex>
                 </Flex>
               </Flex>
-              {/* ) : (
-                <Ring speed={2} lineWeight={5} color="white" size={72} />
-              )} */}
             </ModalBody>
             <ModalFooter justifyContent={"center"}>
               <Flex gap={2}>
@@ -356,7 +328,6 @@ export function ModalFiltrarDuracaoMedia({
                   variant="primary"
                   color="white"
                   rightIcon={<FiSearch />}
-                  // isDisabled={!isEnable()}
                   onClick={getFilter}
                   _hover={{
                     background: "origem.600",

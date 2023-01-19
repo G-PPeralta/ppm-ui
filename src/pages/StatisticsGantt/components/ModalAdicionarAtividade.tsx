@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Botão e modal nova operação
+
 import { useEffect, useState } from "react";
 
 import {
@@ -13,11 +17,6 @@ import {
   useDisclosure,
   Text,
   useBreakpointValue,
-  // NumberInput,
-  // NumberInputField,
-  // NumberInputStepper,
-  // NumberIncrementStepper,
-  // NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { Operacao } from "interfaces/Estatisticas";
 
@@ -36,7 +35,6 @@ import {
   getDataInicioExecucaoEstatistica,
   getDuracaoHorasAdicionarAtividade,
 } from "services/get/Estatisticas";
-// import AtividadeCronogramaDragAndDrop from "./AtividadeCronogramaDragAndDrop";
 import { getRelacoesExecucao } from "services/get/Projetos";
 
 import { ModalFiltrarDuracaoMedia } from "./ModalFiltrarDuracaoMedia";
@@ -87,7 +85,6 @@ function ModalAdicionarAtividade({
   }));
 
   const id = window.location.pathname.slice(-3);
-  // console.log(optionsOperacao);
 
   const handleReqRelacoes = async () => {
     const reqAtividadesCronograma = await getRelacoesExecucao(id);
@@ -103,13 +100,8 @@ function ModalAdicionarAtividade({
     handleReqRelacoes();
   }, [refresh]);
 
-  // console.log(atividadesCronograma);
-
   const handleDataInicio = async () => {
     const dados = await getDataInicioExecucaoEstatistica(projeto.id_poco);
-    // let ultimaData = new Date();
-    // console.log("dados --->", dados);
-    // SOLUCAO PARA BUG TIMEZONE
     let ultimaData = dados
       ? new Date(dados.data.dat_ini_plan).getTime() + 3 * 60 * 60 * 1000
       : new Date();
@@ -141,10 +133,6 @@ function ModalAdicionarAtividade({
   const formattDataInicial = registerForm.values.naoIniciarAntesDe
     ? new Date(getDataInicio).getTime() + 3 * 60 * 60 * 1000
     : new Date(dat_ini_atv_session).getTime() + 3 * 60 * 60 * 1000;
-
-  // console.log(getDataInicio);
-  // console.log(registerForm.values.data_inicio);
-  // console.log(registerForm.values.data_fim);
 
   const handleDataFim = () => {
     const dataInicio = new Date(
@@ -182,17 +170,6 @@ function ModalAdicionarAtividade({
     onClose();
   };
 
-  // const handleChange = (event: any) => {
-  //   registerForm.setFieldValue("profundidade", Number(event));
-  // };
-
-  // const atividadesOptions =
-  //   atividades &&
-  //   atividades.map((atividade: any) => ({
-  //     value: atividade,
-  //     label: atividade.valor,
-  //   }));
-
   useEffect(() => {
     handleDataInicio();
     registerForm.setFieldValue("id_sonda", projeto.id_sonda);
@@ -214,9 +191,7 @@ function ModalAdicionarAtividade({
   }, [mediaHorasFiltradas]);
 
   useEffect(() => {
-    // console.log("dados 1 ---> ", registerForm.values.data_fim);
     handleDataFim();
-    // console.log("dados 2 ---> ", registerForm.values.data_fim);
   }, [registerForm.values.duracao]);
 
   useEffect(() => {
@@ -237,10 +212,8 @@ function ModalAdicionarAtividade({
       registerForm.values.operacao_id === 8
     ) {
       registerForm.setFieldValue("metodo_elevacao_id", 0);
-      // registerForm.setFieldValue("profundidade", 0);
     } else {
       registerForm.setFieldValue("metodo_elevacao_id", null);
-      // registerForm.setFieldValue("profundidade", 0);
     }
   }, [registerForm.values.operacao_id]);
 
@@ -273,19 +246,7 @@ function ModalAdicionarAtividade({
     }
   }, []);
 
-  // console.log("dados registerform", projeto.total_atv);
-
-  // console.log("Dados --> ", registerForm);
-  // console.log("dados atv -->", atividades.length);
-
-  // console.log("dados -->", registerForm.values.flag);
   const flag: any = projeto.total_atv !== 0;
-  // console.log("dados --->", flag);
-
-  // console.log("dados -->", registerForm.values.data_inicio);
-
-  // const data_inicial =
-  //   new Date(dat_ini_atv_session).getTime() + 3 * 60 * 60 * 1000;
 
   useEffect(() => {
     registerForm.setFieldValue(
@@ -367,10 +328,6 @@ function ModalAdicionarAtividade({
                       required={false}
                     />
                   </Flex>
-                  {/* <AtividadeCronogramaDragAndDrop
-                    registerForm={registerForm}
-                    atividades={atividadesOptions}
-                  /> */}
                   <Flex gap={4} w={"100%"}>
                     <InputNumericoGenerico
                       registerForm={registerForm}
@@ -385,34 +342,7 @@ function ModalAdicionarAtividade({
 
                     <Flex flex={1}>
                       <Flex direction={"column"}>
-                        <Flex gap={1}>
-                          {/* <RequiredField /> */}
-                          {/* <Text
-                            fontWeight={"bold"}
-                            fontSize={"12px"}
-                            color={"#949494"}
-                          >
-                            DATA INÍCIO
-                          </Text> */}
-                        </Flex>
-                        {/* <Button
-                          isDisabled={true}
-                          h={"56px"}
-                          variant="outline"
-                          px={useBreakpointValue({ base: 5, sm: 5, md: 5 })}
-                          minW={useBreakpointValue({
-                            base: "180px",
-                            sm: "180px",
-                            md: "220px",
-                          })}
-                          w={"100%"}
-                        >
-                          {registerForm.values.data_inicio
-                            ? formatDateToddMMyyyyhhmm(
-                                registerForm.values.data_inicio
-                              )
-                            : "Data Início"}
-                        </Button> */}
+                        <Flex gap={1}></Flex>
                         <DatePickerModal
                           use12hours={true}
                           nomeLabel={"DATA INÍCIO"}
@@ -420,7 +350,6 @@ function ModalAdicionarAtividade({
                           propName={"data_inicio"}
                           data={formattDataInicial || ""}
                           selecionaHorario={true}
-                          // isDisabled={true}
                           isDisabled={flag}
                         />
                       </Flex>
@@ -429,7 +358,6 @@ function ModalAdicionarAtividade({
                     <Flex flex={1}>
                       <Flex direction={"column"}>
                         <Flex gap={1}>
-                          {/* <RequiredField /> */}
                           <Text
                             fontWeight={"bold"}
                             fontSize={"12px"}
@@ -471,31 +399,6 @@ function ModalAdicionarAtividade({
                         propName={"metodo_elevacao_id"}
                         options={optionsMetodosElevacao}
                       />
-                      {/* <Flex direction={"column"} w={"100%"}>
-                          <Flex gap={1}>
-                            <Text
-                              fontWeight={"bold"}
-                              fontSize={"12px"}
-                              color={"#949494"}
-                            >
-                              PROFUNDIDADE (METROS)
-                            </Text>
-                          </Flex>
-                          <NumberInput
-                            min={0}
-                            max={99999999}
-                            step={1}
-                            value={registerForm.values.profundidade}
-                            onChange={(event) => handleChange(event)}
-                            h={"56px"}
-                          >
-                            <NumberInputField h={"56px"} />
-                            <NumberInputStepper>
-                              <NumberIncrementStepper />
-                              <NumberDecrementStepper />
-                            </NumberInputStepper>
-                          </NumberInput>
-                        </Flex> */}
                     </Flex>
                   )}
                 </Flex>

@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Modal definir profundidade
+
 import { useEffect } from "react";
 
 import {
@@ -38,7 +42,6 @@ function ModalDefinirProfundidade({ setRefresh, refresh, projeto }: Props) {
   const getProfundidade = async () => {
     const { data } = await getProfundidadeProjeto(projeto.id_poco);
     if (data.length === 0) return;
-    // PEGAR A MAIOR PROFUNDIDADE RECEBIDA
     const maiorProfundidade = data.reduce((acc: any, curr: any) =>
       Number(acc.profundidade) > Number(curr.profundidade) ? acc : curr
     );

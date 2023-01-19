@@ -1,4 +1,6 @@
-// import { BsPlus } from "react-icons/bs";
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Botão e Modal lição aprendida
 
 import {
   Button,
@@ -56,7 +58,6 @@ function ModalAdicionarLicaoAprendida({ id, refreshState }: Props) {
       >
         <Text fontSize="18px" fontWeight={"700"} fontFamily={"Mulish"} mx={12}>
           <Flex gap={1} align={"center"}>
-            {/* Adicionar <BsPlus size={24} /> */}
             Adicionar
           </Flex>
         </Text>

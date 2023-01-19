@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Botão deletar
+
 import { FiTrash } from "react-icons/fi";
 
 import {
@@ -99,7 +103,6 @@ function ModalDeletar({ id, setLoading, setRefreshDelete }: ModalDeletarProps) {
                 <Stack gap={2}>
                   <Flex>
                     <Text
-                      // textAlign={"center"}
                       fontSize={"20px"}
                       mb={"1px"}
                       color={"#010101"}

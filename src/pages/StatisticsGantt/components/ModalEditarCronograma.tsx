@@ -1,4 +1,6 @@
-import { useEffect } from "react";
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Modal editar cronograma
 
 import {
   Flex,
@@ -21,13 +23,11 @@ import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
 
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
-// import { RequiredField } from "components/RequiredField/RequiredField";
 
 import { useEditarCronograma } from "hooks/useEditarCronograma";
 
 import AtividadesCadastroCronograma from "./AtividadesCadastroCronograma";
 import SelectOption from "./SelectOption";
-// import { TextError } from "components/TextError";
 
 function ModalEditarCronograma({ refresh, setRefresh, atual }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -59,35 +59,6 @@ function ModalEditarCronograma({ refresh, setRefresh, atual }: any) {
     listaResponsaveis,
     listaOperacao,
   };
-
-  // const handleGet = async () => {
-  //   const projetos = await getProjetosTipo();
-  //   const projetosTipoSorted = projetos.data.sort(
-  //     (a: ProjetoTipo, b: ProjetoTipo) =>
-  //       a.nom_projeto_tipo.localeCompare(b.nom_projeto_tipo)
-  //   );
-  //   setListaProjetos(projetosTipoSorted);
-  // };
-
-  // const handleClick = async () => {
-  //   const projetos = await getProjetosTipo();
-  //   const projetosTipoSorted = projetos.data.sort(
-  //     (a: ProjetoTipo, b: ProjetoTipo) =>
-  //       a.nom_projeto_tipo.localeCompare(b.nom_projeto_tipo)
-  //   );
-  //   setListaProjetos(projetosTipoSorted);
-  //   onOpen();
-  // };
-
-  useEffect(() => {
-    // registerForm.setFieldValue("atividades", atual.atividades);
-    // handleGet();
-    // registerForm.setFieldValue("id_campanha", idCampanha);
-    // const newDate = new Date(data);
-    // newDate.setDate(newDate.getDate() + 15);
-    // registerForm.setFieldValue("dat_ini_prev", newDate);
-    // setRefresh(!refresh);
-  }, []);
 
   return (
     <>
@@ -158,7 +129,6 @@ function ModalEditarCronograma({ refresh, setRefresh, atual }: any) {
                         />
                         <FormControl>
                           <Flex gap={1}>
-                            {/* <RequiredField /> */}
                             <Text
                               fontWeight={"bold"}
                               fontSize={"12px"}
@@ -168,20 +138,13 @@ function ModalEditarCronograma({ refresh, setRefresh, atual }: any) {
                             </Text>
                           </Flex>
                           <Input
-                            // isRequired
                             placeholder="Profundidade"
                             id="profundidade"
                             type="text"
                             name="profundidade"
-                            // value={regexCaracteresEspeciais(
-                            //   registerForm.values.poco
-                            // )}
                             onChange={registerForm.handleChange}
                             maxLength={10}
                           />
-                          {/* {registerForm.errors.poco && (
-                            <TextError>{registerForm.errors.poco}</TextError>
-                          )} */}
                         </FormControl>
                       </Flex>
                     </Stack>

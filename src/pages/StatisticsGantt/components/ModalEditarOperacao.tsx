@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Modal editar operação
+
 import { useEffect, useState } from "react";
 
 import {
@@ -21,8 +25,6 @@ import {
 import { Anotacoes, LicaoAprendida, Ocorrencia } from "interfaces/Estatisticas";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
-
-// import { handleCancelar } from "utils/handleCadastro";
 
 import {
   getAnotacoesPorAtividade,
@@ -129,8 +131,6 @@ function ModalEditarOperacao({
     }
   };
 
-  // console.log({ listaOcorrencias });
-
   const handleFecharModal = () => {
     setTabSelecionado(0);
     registerForm.resetForm();
@@ -153,15 +153,11 @@ function ModalEditarOperacao({
     handleGambiarra();
   }, [refresh]);
 
-  // console.log(editOp);
-
   useEffect(() => {
     registerForm.setFieldValue("id_atividade", editOp.id_atividade);
     registerForm.setFieldValue("nome_atividade", editOp.nome_atividade);
     registerForm.setFieldValue("inicio_planejado", editOp.inicio_planejado);
-    // registerForm.setFieldValue("inicio_realizado", editOp.inicio_realizado);
     registerForm.setFieldValue("fim_planejado", editOp.fim_planejado);
-    // registerForm.setFieldValue("fim_realizado", editOp.fim_realizado);
     registerForm.setFieldValue("hrs_totais", editOp.hrs_totais);
     registerForm.setFieldValue("hrs_reais", editOp.hrs_reais);
     registerForm.setFieldValue("pct_real", editOp.pct_real);
@@ -203,8 +199,6 @@ function ModalEditarOperacao({
     requestLicoesEOperacoes();
     handleGambiarra();
   }, [registerForm.values.inicio_real, registerForm.values.inicio_realizado]);
-
-  // console.log(registerForm.values);
 
   useEffect(() => {
     if (anotacoes.length > 0) {

@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Modar lição aprendida
+
 import { useEffect } from "react";
 import { MdModeEdit } from "react-icons/md";
 
