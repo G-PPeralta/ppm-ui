@@ -1,3 +1,7 @@
+// CRIADO EM: --
+// AUTOR:Não é possível apontar o criador, uma vez que cada rota foi feita pelo desenvolvedor da tela em questão
+// DESCRIÇÃO DO ARQUIVO: Rotas públicas vinculadas às telas do sistema.
+
 import { Routes, Route } from "react-router-dom";
 
 import { ForgotPassword } from "pages/ForgotPassword";
