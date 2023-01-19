@@ -1,3 +1,7 @@
+// CRIADO EM: 23/10/2022
+// AUTOR:Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de post vinculada(s) à tela de Cronogramas.
+
 import { Profundidade } from "interfaces/Estatisticas";
 
 import { api, token } from "services/api";

@@ -1,3 +1,7 @@
+// CRIADO EM: 23/09/2022
+// AUTOR:Felipe Mateus
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de post vinculada(s) à tela de financeiro.
+
 import { BudgetPlan, BudgetReal } from "interfaces/Budgets";
 
 import { api, token } from "services/api";

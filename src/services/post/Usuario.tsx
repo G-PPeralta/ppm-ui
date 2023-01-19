@@ -1,3 +1,7 @@
+// CRIADO EM: 23/10/2022
+// AUTOR:Geovana Augusta
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de post vinculada(s) à tela de usuários.
+
 import { api, token } from "services/api";
 
 export async function getUsers(): Promise<{ status: number }> {

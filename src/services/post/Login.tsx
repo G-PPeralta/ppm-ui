@@ -1,3 +1,7 @@
+// CRIADO EM: 23/06/2022
+// AUTOR:Alexander
+// DESCRIÇÃO DO ARQUIVO: Função para rota(s) de post vinculada(s) ao login.
+
 import { LoginProps, ResponseLogin } from "interfaces/Services";
 
 import { api, token } from "services/api";
