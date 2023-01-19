@@ -1,6 +1,8 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Tela upload de planilhas.
+
 import { useMemo, useRef, useState } from "react";
-// import { BiImport } from "react-icons/bi";
-// import { MdDriveFolderUpload } from "react-icons/md";
 import { RiFolderUploadFill } from "react-icons/ri";
 
 import {
@@ -18,8 +20,6 @@ import ContainerPagina from "components/ContainerPagina";
 import Sidebar from "components/SideBar";
 
 import { RegrasGeraisDeImportacao } from "./components/regrasGerais";
-
-// import { TextError } from "components/TextError";
 
 export function Import() {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -83,13 +83,11 @@ export function Import() {
                 color="#949494"
                 fontFamily={"Mulish"}
                 fontWeight={700}
-                // size="sm"
                 fontSize={12}
               >
                 TIPO DE PLANILHA
               </FormLabel>
               <Select
-                /*  disabled={disabledButton} */
                 mt={"-9px"}
                 id="planilhas"
                 name="planilhas"
@@ -107,15 +105,10 @@ export function Import() {
                 <option value=""> Selecione </option>
                 <option value="gerais">Dados gerais da Planilha X</option>
               </Select>
-              {/* {planilhaForm.errors.planilha &&
-                planilhaForm.touched.planilha && (
-                  <TextError>{planilhaForm.errors.planilha}</TextError>
-                )} */}
             </FormControl>
           </Flex>
 
           {tableType === "gerais" && <RegrasGeraisDeImportacao />}
-          {/* {tableType === "producao" && <RegrasDeImportacaoProducao />} */}
           <Flex mt={4}>
             {importIsVisible && (
               <Flex flexDir={"row"}>
@@ -147,7 +140,6 @@ export function Import() {
                       fontWeight={"700"}
                       fontSize={"18px"}
                       fontFamily={"Mulish"}
-                      // alignSelf={"start"}
                       rightIcon={<RiFolderUploadFill size={22} />}
                     >
                       Importar Planilha

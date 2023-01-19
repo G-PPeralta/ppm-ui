@@ -1,4 +1,7 @@
-import { useEffect } from "react";
+//  CRIADO EM: 07/2022
+//  AUTOR: Felipe Mateus
+//  DESCRIÇÃO DO ARQUIVO: botão e modal de editar um custo incluido.
+
 import { MdModeEdit } from "react-icons/md";
 
 import {
@@ -26,7 +29,6 @@ import { Ring } from "@uiball/loaders";
 
 import InputGenerico from "components/InputGenerico";
 import { RequiredField } from "components/RequiredField/RequiredField";
-// import { TextError } from "components/TextError";
 
 import { handleCadastrar } from "utils/handleCadastro";
 
@@ -42,10 +44,6 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
   const { id, toogleRender } = props;
   const { registerForm, loading, fornecedores, classesSevicos } =
     useEditarOrcamentoRealizado(id);
-
-  useEffect(() => {
-    // setAtividade(realizado.id);
-  }, []);
 
   return (
     <>
@@ -154,9 +152,6 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                             defaultValue={registerForm.values.data}
                             onChange={registerForm.handleChange}
                           />
-                          {/* {registerForm.errors.data && (
-                            <TextError>{registerForm.errors.data}</TextError>
-                         )} */}
                         </FormControl>
                       </Flex>
                       <FormControl>
@@ -186,12 +181,6 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                               <option value={d.id}>{d.nomefornecedor}</option>
                             ))}
                         </Select>
-
-                        {/* {registerForm.errors.fornecedor && (
-                          <TextError>
-                            {registerForm.errors.fornecedor}
-                          </TextError>
-                       )} */}
                       </FormControl>
                       <Flex
                         flexDirection={useBreakpointValue({
@@ -234,10 +223,6 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                                 </option>
                               ))}
                           </Select>
-                          {/*  {registerForm.errors.servico && (
-                            <TextError>{registerForm.errors.servico}</TextError>
-                          )}
-                          */}
                         </FormControl>
                         <FormControl>
                           <Flex gap={1}>
@@ -269,12 +254,8 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                                 e.preventDefault();
                               }
                             }}
-                            // size="md"
                             type="text"
                           />
-                          {/*  {registerForm.errors.pedido && (
-                            <TextError>{registerForm.errors.pedido}</TextError>
-                        )} */}
                         </FormControl>
                       </Flex>
 
@@ -300,12 +281,6 @@ function ModalEditarGestaoDeCusto(props: PropsInterface) {
                           value={registerForm.values.pedido_obs}
                           onChange={registerForm.handleChange}
                         />
-
-                        {/* {registerForm.errors.pedido_obs && (
-                          <TextError>
-                            {registerForm.errors.pedido_obs}
-                          </TextError>
-                        )} */}
                       </FormControl>
                     </Flex>
                   </Stack>

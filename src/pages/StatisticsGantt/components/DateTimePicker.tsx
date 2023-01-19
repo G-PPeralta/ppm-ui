@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Seletor de data.
+
 import { forwardRef, useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 
@@ -7,17 +11,11 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 
 function DateTimePicker({ registerForm, data, label, value, required }: any) {
   const [dataInicio, setDataInicio] = useState<any>("");
-  // const [dataMin, setDataMin] = useState<any>("");
 
   useEffect(() => {
     if (data) {
       const newDate = new Date(data);
-      // newDate.setDate(newDate.getDate() + 15);
       setDataInicio(newDate);
-      // setDataMin(newDate);
-    } else {
-      // const newDate = new Date();
-      // setDataInicio(newDate);
     }
   }, [data]);
 
@@ -53,13 +51,11 @@ function DateTimePicker({ registerForm, data, label, value, required }: any) {
       </Flex>
       <ReactDatePicker
         selected={dataInicio}
-        // minDate={dataMin}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
         showTimeSelect
         dateFormat="dd/MM/yyyy, hh:mm"
         customInput={<TriggerDatePickerInicio />}
-        // isClearable={dataInicio !== ""}
       />
     </Flex>
   );

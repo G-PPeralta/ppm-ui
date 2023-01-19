@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Maxwell.
+//  DESCRIÇÃO DO ARQUIVO: Tela de lookahead
+
 import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
@@ -14,22 +18,14 @@ import { useLookahead } from "hooks/useLookahead";
 import { getAtividades } from "services/get/Lookahead";
 
 import { TabelaLookahead } from "./components/TabelaLookahead";
-// import { useState } from "react";
-// import { Projetos } from "interfaces/Projetos";
 
 export function Lookahead() {
   const { getProjetos, loading } = useLookahead();
   const [atividades, setAtividades] = useState<AtividadesLookahead[]>();
   const [filtered, setFiltered] = useState<AtividadesLookahead[]>();
   const [idProject, setIdProject] = useState<string>("0");
-  // console.log(idProject);
 
   const [projetos, setProjetos] = useState<ProjetosLookahead[]>();
-
-  // async function handleProjectChange() {
-  //   const act = await getAtividades(+idProject);
-  //   setAtividades(act);
-  // }
 
   const getAllActivities = async () => {
     const act = await getAtividades(0);
@@ -50,12 +46,8 @@ export function Lookahead() {
     getAllActivities();
   }, []);
 
-  // console.log(idProject);
-
   async function handleFilter() {
     if (Number(idProject) === 0) {
-      // console.log("works");
-      // console.log({ atividades });
       return setFiltered(atividades);
     }
     if (atividades) {
@@ -64,10 +56,7 @@ export function Lookahead() {
       );
       setFiltered(filteredActivity);
     }
-    // return setAtividades(atividades);
   }
-
-  // console.log({ filtered, atividades });
 
   return (
     <Sidebar>
@@ -90,8 +79,6 @@ export function Lookahead() {
                   <Select
                     fontSize={"14px"}
                     fontWeight={"400"}
-                    // _placeholder={{ color: "#2D2926" }}
-                    // color={"#949494"}
                     width={"208px"}
                     height={"56px"}
                     borderRadius={"8px"}
@@ -101,15 +88,6 @@ export function Lookahead() {
                     <option value={0}>Todos</option>
                     {projetos &&
                       projetos.map((d, k) => (
-                        // <option key={k} value={d.id}>
-                        //   {d.nome_projeto.length > 20
-                        //     ? `${d.id} - ${d.nome_projeto.substring(
-                        //         0,
-                        //         17
-                        //       )}...`
-                        //     : `${d.id} - ${d.nome_projeto}`}
-                        // </option>
-
                         <option key={k} value={d.id}>
                           {d.nome_projeto.length > 20
                             ? `${d.nome_projeto.substring(0, 17)}...`

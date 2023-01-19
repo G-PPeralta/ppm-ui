@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Botão de deletar fornecedos
+
 import { FiTrash } from "react-icons/fi";
 
 import {
@@ -16,7 +20,6 @@ import {
   ModalHeader,
   ModalCloseButton,
 } from "@chakra-ui/react";
-// import { Ring } from "@uiball/loaders";
 
 type TabelaFornecedoresProps = {
   onDelete: (fornecedor: any) => void;
@@ -73,7 +76,6 @@ function ModalDeletarFornecedor({
                   <Stack gap={2}>
                     <Flex>
                       <Text
-                        // textAlign={"center"}
                         fontSize={"20px"}
                         mb={"1px"}
                         color={"#010101"}
@@ -120,13 +122,9 @@ function ModalDeletarFornecedor({
                   fontSize={"18px"}
                   fontWeight={"700"}
                 >
-                  {/* {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : ( */}
                   <>
                     <Text>Confirmar</Text>
                   </>
-                  {/* )} */}
                 </Button>
               </Flex>
             </ModalFooter>

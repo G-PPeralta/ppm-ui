@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Alterar infomrações de projetos
+
 import { useEffect, useState } from "react";
 import { IoIosPodium } from "react-icons/io";
 
@@ -15,16 +19,12 @@ import {
   ModalOverlay,
   Stack,
   Text,
-  // Textarea,
   useBreakpointValue,
   useDisclosure,
   Button,
   IconButton,
-  // IconButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-
-// import { TextError } from "components/TextError";
 
 import { handleCancelar } from "utils/handleCadastro";
 
@@ -58,7 +58,6 @@ function ModalCadastrarPriorizacao({
   const [regulatorio, setRegulatorio] = useState("");
   const [operacao, setOperacao] = useState("");
   const [prioridade, setPrioridade] = useState("");
-  // const [complexidade, setComplexidade] = useState("");
   const [estrategia, setEstrategia] = useState("");
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -68,7 +67,6 @@ function ModalCadastrarPriorizacao({
     listaBeneficios,
     listaOperacao,
     listaEstrategia,
-    // listaComplexidade,
     listaPrioridade,
     listaRegulatorio,
     ranking,
@@ -77,10 +75,7 @@ function ModalCadastrarPriorizacao({
   async function handleGetInitialValues(id: any) {
     const response = await getInitialRaking(id);
     setInitialValues(response.data);
-    // console.log(response.data);
   }
-
-  // console.log(listaPrioridade[0]?.id);
 
   useEffect(() => {
     const valorRanking = ranking && ranking?.length > 0 ? ranking[0].id : 0;
@@ -100,10 +95,6 @@ function ModalCadastrarPriorizacao({
       "prioridade.id_ranking",
       Number(listaPrioridade[0]?.id)
     );
-    // registerForm.setFieldValue(
-    //   "complexidade.id_ranking",
-    //   Number(listaComplexidade[0]?.id)
-    // );
     registerForm.setFieldValue(
       "estrategia.id_ranking",
       Number(listaEstrategia[0]?.id)
@@ -114,16 +105,12 @@ function ModalCadastrarPriorizacao({
     registerForm.setFieldValue("id_projeto", Number(projeto));
 
     if (registerForm.values.id_projeto !== 0) {
-      // handleGetInitialValues(registerForm.values.id_projeto);
-      // console.log(initialValues);
-
       if (initialValues.length > 0) {
         initialValues.forEach((rank: any) => {
           if (rank.id_ranking == 1) setBeneficio(rank.id_opcao);
           if (rank.id_ranking == 2) setRegulatorio(rank.id_opcao);
           if (rank.id_ranking == 3) setOperacao(rank.id_opcao);
           if (rank.id_ranking == 4) setPrioridade(rank.id_opcao);
-          // if (rank.id_ranking == 5) setComplexidade(rank.id_opcao);
           if (rank.id_ranking == 6) setEstrategia(rank.id_opcao);
         });
       }
@@ -154,10 +141,6 @@ function ModalCadastrarPriorizacao({
       opcao_id: Number(prioridade),
       id_ranking: 4,
     },
-    // complexidade: {
-    //   opcao_id: Number(complexidade),
-    //   id_ranking: 5,
-    // },
     estrategia: {
       opcao_id: Number(estrategia),
       id_ranking: 6,
@@ -243,7 +226,6 @@ function ModalCadastrarPriorizacao({
           />
           <form
             onSubmit={(e) => {
-              // e.preventDefault();
               registerForm.handleSubmit(e);
             }}
           >
@@ -269,12 +251,10 @@ function ModalCadastrarPriorizacao({
                           BENEFÍCIO
                         </FormLabel>
                         <Select
-                          // mt={"-9px"}
                           h={"56px"}
                           w={"530px"}
                           fontSize={"14px"}
                           fontWeight={"400"}
-                          // color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="beneficio.opcao_id"
@@ -282,11 +262,6 @@ function ModalCadastrarPriorizacao({
                           value={beneficio}
                           onChange={(event) => setBeneficio(event.target.value)}
                         >
-                          {/* {registerForm.errors.beneficio && (
-                            <TextError>
-                              {registerForm.errors.beneficio}
-                            </TextError>
-                          )} */}
                           {listaBeneficios.map((bene: any, index: any) => (
                             <option
                               color={"#2D2926"}
@@ -323,7 +298,6 @@ function ModalCadastrarPriorizacao({
                           w={"530px"}
                           fontSize={"14px"}
                           fontWeight={"400"}
-                          // color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="regulatorio.opcao_id"
@@ -333,12 +307,6 @@ function ModalCadastrarPriorizacao({
                             setRegulatorio(event.target.value)
                           }
                         >
-                          {/* {registerForm.errors.nom_campanha &&
-                          registerForm.touched.nom_campanha && (
-                            <TextError>
-                              {registerForm.errors.nom_campanha}
-                            </TextError>
-                          )} */}
                           {listaRegulatorio.map((reg: any, index: any) => (
                             <option value={Number(reg.opcao_id)} key={index}>
                               {reg.nom_opcao}
@@ -379,12 +347,6 @@ function ModalCadastrarPriorizacao({
                           value={operacao}
                           onChange={(event) => setOperacao(event.target.value)}
                         >
-                          {/* {registerForm.errors.op_priori &&
-                            registerForm.touched.op_priori && (
-                              <TextError>
-                                {registerForm.errors.nom_campanha}
-                              </TextError>
-                            )} */}
                           {listaOperacao.map((op: any, index: any) => (
                             <option value={Number(op.opcao_id)} key={index}>
                               {op.nom_opcao}
@@ -416,7 +378,6 @@ function ModalCadastrarPriorizacao({
                           w={"530px"}
                           fontSize={"14px"}
                           fontWeight={"400"}
-                          // color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="prioridade.opcao_id"
@@ -426,12 +387,6 @@ function ModalCadastrarPriorizacao({
                             setPrioridade(event?.target.value)
                           }
                         >
-                          {/* {registerForm.errors.prioridade_priori &&
-                          registerForm.touched.prioridade_priori && (
-                            <TextError>
-                              {registerForm.errors.prioridade_priori}
-                            </TextError>
-                          )} */}
                           {listaPrioridade.map((prior: any, index: any) => (
                             <option value={Number(prior.opcao_id)} key={index}>
                               {prior.nom_opcao}
@@ -464,28 +419,11 @@ function ModalCadastrarPriorizacao({
                           w={"530px"}
                           fontSize={"14px"}
                           fontWeight={"400"}
-                          // color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="complexidade.opcao_id"
                           name="complexidade.opcao_id"
-                          // value={complexidade}
-                          // onChange={(event) =>
-                          //   setComplexidade(event.target.value)
-                          // }
-                        >
-                          {/* {registerForm.errors.complex_priori &&
-                          registerForm.touched.complex_priori && (
-                            <TextError>
-                              {registerForm.errors.complex_priori}
-                            </TextError>
-                          )} */}
-                          {/* {listaComplexidade.map((compl: any, index: any) => (
-                            <option value={Number(compl.opcao_id)} key={index}>
-                              {compl.nom_opcao}
-                            </option>
-                          ))} */}
-                        </Select>
+                        ></Select>
                       </FormControl>
                     </Flex>
                     <Flex
@@ -511,7 +449,6 @@ function ModalCadastrarPriorizacao({
                           w={"530px"}
                           fontSize={"14px"}
                           fontWeight={"400"}
-                          // color={"#A7A7A7"}
                           isRequired
                           placeholder="Selecione"
                           id="estrategia.opcao_id"
@@ -521,12 +458,6 @@ function ModalCadastrarPriorizacao({
                             setEstrategia(event.target.value)
                           }
                         >
-                          {/* {registerForm.errors.est_neg_priori &&
-                          (
-                            <TextError>
-                              {registerForm.errors.nom_campanha}
-                            </TextError>
-                          )} */}
                           {listaEstrategia.map((est: any, index: any) => (
                             <option value={Number(est.opcao_id)} key={index}>
                               {est.nom_opcao}
@@ -566,7 +497,6 @@ function ModalCadastrarPriorizacao({
                 <Button
                   w={"208px"}
                   h={"56px"}
-                  // disabled={!registerForm.isValid}
                   background="origem.500"
                   variant="primary"
                   color="white"

@@ -1,3 +1,7 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Eduardo Muchak
+//  DESCRIÇÃO Botão de navegar para a tela de visão por área.
+
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Button } from "@chakra-ui/react";

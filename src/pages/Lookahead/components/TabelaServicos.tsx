@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Maxwell.
+//  DESCRIÇÃO DO ARQUIVO: Tebela de serviçoes tela lookahead
+
 import { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
 import { FaFileCsv } from "react-icons/fa";
@@ -66,7 +70,6 @@ export function TabelaServicos(props: TableProps) {
     for (let i = 0; i < _dias.length; i++) {
       const dia = _dias[i];
 
-      // const realDay = dataBr.format(new Date(`${mes}/${dia}/${ano}`));
       const realDay = `${dia}/${formataMes(mes)}/${ano}`;
       const diaSemana: DiasSemana = new DiasSemana();
       const _dia = realDay.split("/")[0];
@@ -106,12 +109,7 @@ export function TabelaServicos(props: TableProps) {
         <Table colorScheme={"strippedGray"}>
           <Thead>
             <Tr backgroundColor={"#0047BB"} color="white">
-              <Th
-                colSpan={7}
-                // borderTopRightRadius={"10px"}
-                // borderTopLeftRadius="10px"
-                // border="none 0px !important"
-              >
+              <Th colSpan={7}>
                 <Flex
                   justifyContent="space-between"
                   alignItems="center"

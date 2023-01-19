@@ -5,7 +5,6 @@
 import { Routes, Route } from "react-router-dom";
 
 import { ActivitiesPrecedents } from "pages/ActivitiesPrecedents";
-import { ActivitiesRegistration } from "pages/ActivitiesRegistration";
 import { ActivitiesSchedule } from "pages/ActivitiesSchedule";
 import { BudgetDetail } from "pages/BudgetDetail";
 import { Budgets } from "pages/Budgets";
@@ -54,10 +53,6 @@ export function PrivateRoutes() {
       <Route path="/usuarios" element={<Usuarios />} />
       <Route path="/projetos/cadastro" element={<CadastrarProjeto />} />
       <Route path="/cadastrar-fornecedor" element={<CadastrarFornecedor />} />
-      <Route
-        path="/activities-registration"
-        element={<ActivitiesRegistration />}
-      />
       <Route path="/share-register" element={<ShareRegister />} />
       <Route path="/relatorios" element={<Reports />} />
       <Route path="/campanhas" element={<Infographics />} />

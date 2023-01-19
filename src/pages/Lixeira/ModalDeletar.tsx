@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Botão e modal para deletar permanentemente
+
 import { useState } from "react";
 import { FiTrash } from "react-icons/fi";
 

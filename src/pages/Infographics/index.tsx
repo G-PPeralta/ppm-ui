@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Tel de infográficos
+
 import { useEffect, useState } from "react";
 
 import { Box, Flex, Heading } from "@chakra-ui/react";

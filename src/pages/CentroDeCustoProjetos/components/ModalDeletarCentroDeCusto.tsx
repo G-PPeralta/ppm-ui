@@ -1,14 +1,15 @@
-// import { FaTrash } from "react-icons/fa";
+//  CRIADO EM: 07/2022
+//  AUTOR: Maxwell
+//  DESCRIÇÃO DO ARQUIVO: Botão e Modal deletar custo.
+
 import { FiTrash } from "react-icons/fi";
 
 import {
   Button,
   Flex,
   FormControl,
-  // FormLabel,
   Modal,
   ModalBody,
-  // ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalOverlay,
@@ -20,13 +21,10 @@ import {
   ModalHeader,
 } from "@chakra-ui/react";
 
-// import { TextError } from "components/TextError";
-
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 
 import { handleCancelar } from "utils/handleCadastro";
 
-// import { useAuth } from "hooks/useAuth";
 import { useDeletarCentroDeCusto } from "hooks/useDeletarCentroDeCusto";
 
 interface RefreshState {
@@ -56,8 +54,6 @@ function ModalDeletarCentroDeCusto({ idCusto, refreshState }: PropsType) {
           backgroundColor: "#F94144",
           color: "white",
         }}
-        // w={"14px"}
-        // h={"18px"}
       >
         <FiTrash />
       </IconButton>
@@ -120,28 +116,6 @@ function ModalDeletarCentroDeCusto({ idCusto, refreshState }: PropsType) {
                 >
                   Cancelar
                 </Button>
-                {/* <Button
-                  background="origem.500"
-                  variant="primary"
-                  color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
-                  _hover={{
-                    background: "origem.600",
-                    transition: "all 0.4s",
-                  }}
-                  height={"56px"}
-                  width={"206px"}
-                  fontSize={"18px"}
-                  fontWeight={"700"}
-                >
-                  {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Confirmar</Text>
-                    </>
-                  )}
-                </Button> */}
                 <BotaoAzulLargoPrimary
                   text={"Confirmar"}
                   formikForm={registerForm}

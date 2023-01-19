@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Lixeira para informações obsoletas
+
 import { useEffect, useState } from "react";
 
 import {
@@ -11,7 +15,6 @@ import {
   Th,
   Thead,
   Tr,
-  // useColorModeValue,
 } from "@chakra-ui/react";
 import { Lixeira } from "interfaces/Lixeira";
 
@@ -36,25 +39,10 @@ export function TabelaLixeira() {
     setTo,
   };
 
-  // const rows = [
-  //   {
-  //     id: "1",
-  //     nome: "Projetos",
-  //     qtd: "1000",
-  //   },
-  //   {
-  //     id: "2",
-  //     nome: "spt",
-  //     qtd: "1000",
-  //   },
-  // ];
-
   const getData = async () => {
     const lixeira = await getLixeira();
     setData(lixeira.data);
   };
-
-  // console.log(data);
 
   useEffect(() => {
     setTimeout(() => {
@@ -103,7 +91,6 @@ export function TabelaLixeira() {
           bg={{ base: "white", sm: "white" }}
           boxShadow={{
             base: "none",
-            // sm: useColorModeValue("md", "md-dark"),
           }}
           borderRadius={{ base: "none", sm: "xl" }}
         >
@@ -126,12 +113,7 @@ export function TabelaLixeira() {
             </Heading>
             {data && (
               <Flex direction={"column"} w={"100%"} mr={-10}>
-                <TableContainer
-                  mt={4}
-                  mb={4}
-                  borderRadius={"10px"}
-                  // overflowX={"scroll"}
-                >
+                <TableContainer mt={4} mb={4} borderRadius={"10px"}>
                   <Table variant="striped" colorScheme={"strippedGray"}>
                     <Thead backgroundColor={"origem.300"}>
                       <Tr background={"origem.500"}>
@@ -152,7 +134,6 @@ export function TabelaLixeira() {
                         </Th>
                       </Tr>
                     </Thead>
-                    {/* <Tbody scrollBehavior={"smooth"}> */}
                     <Tbody>{tableData}</Tbody>
                   </Table>
                 </TableContainer>

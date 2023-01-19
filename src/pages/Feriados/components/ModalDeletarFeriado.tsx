@@ -1,14 +1,15 @@
-// import { FaTrash } from "react-icons/fa";
+//  CRIADO EM: 10/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Botão deletar feriado.
+
 import { FiTrash } from "react-icons/fi";
 
 import {
   Button,
   Flex,
   FormControl,
-  // FormLabel,
   Modal,
   ModalBody,
-  // ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalOverlay,
@@ -22,7 +23,6 @@ import {
 
 import { handleCancelar } from "utils/handleCadastro";
 
-// import { useAuth } from "hooks/useAuth";
 import { useFeriadosContext } from "contexts/Feriados";
 
 interface RefreshState {
@@ -48,8 +48,6 @@ function ModalDeletarFeriado(Props: RefreshState) {
           backgroundColor: "#F40606",
           color: "white",
         }}
-        // w={"14px"}
-        // h={"18px"}
       >
         <FiTrash size={13} />
       </IconButton>
@@ -79,7 +77,6 @@ function ModalDeletarFeriado(Props: RefreshState) {
                   <Stack gap={2}>
                     <Flex>
                       <Text
-                        // textAlign={"center"}
                         fontSize={"20px"}
                         mb={"1px"}
                         color={"#010101"}
@@ -112,28 +109,6 @@ function ModalDeletarFeriado(Props: RefreshState) {
                 >
                   Cancelar
                 </Button>
-                {/* <Button
-                  background="origem.500"
-                  variant="primary"
-                  color="white"
-                  onClick={() => handleCadastrar(registerForm, onClose)}
-                  _hover={{
-                    background: "origem.600",
-                    transition: "all 0.4s",
-                  }}
-                  height={"56px"}
-                  width={"206px"}
-                  fontSize={"18px"}
-                  fontWeight={"700"}
-                >
-                  {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Confirmar</Text>
-                    </>
-                  )}
-                </Button> */}
                 <Button
                   background="origem.500"
                   variant="primary"

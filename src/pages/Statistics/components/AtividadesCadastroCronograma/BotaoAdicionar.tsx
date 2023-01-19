@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Adicionar item a lista arrastável
+
 import { useEffect, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 
@@ -34,7 +38,6 @@ function BotaoAdicionar({ add, registerForm }: Props) {
       justify={"center"}
       p={2}
       _hover={{
-        // cursor: "pointer",
         borderColor: "#D6D4D4",
       }}
     >

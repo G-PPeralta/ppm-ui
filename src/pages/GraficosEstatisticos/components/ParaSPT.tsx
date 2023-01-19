@@ -1,5 +1,8 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Gtráfico SPT.
+
 import { useEffect, useLayoutEffect, useState } from "react";
-// import { FiPlus } from "react-icons/fi";
 
 import { Box, Flex, Stack, Text, useBreakpointValue } from "@chakra-ui/react";
 import { ParaSPT } from "interfaces/GraficoParaSPT";
@@ -66,7 +69,6 @@ export function GraficoSPT({ de, ate, refresh, setRefresh }: Props) {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          // projectsForm.handleSubmit(e);
         }}
       >
         <Stack spacing="3">

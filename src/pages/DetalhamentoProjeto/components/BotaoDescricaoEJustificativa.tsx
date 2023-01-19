@@ -1,3 +1,7 @@
+//  CRIADO EM: 06/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Botão e para descrição e justificativa do projeto.
+
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -13,7 +17,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  // Text,
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -109,19 +112,6 @@ function BotaoDescricaoEJustificativa({
                 />
               </Flex>
             </FormControl>
-            {/* <FormControl>
-                <FormLabel htmlFor="data">DATA</FormLabel>
-                <Input
-                  isRequired
-                  placeholder="dd/mm/aaaa"
-                  type="text"
-                  id="data"
-                  name="data"
-                  width="100%"
-                  value={data}
-                  onChange={(event) => setData(event.target.value)}
-                />
-              </FormControl> */}
             <FormControl padding={1}>
               <Flex direction={"column"}>
                 <FormLabel

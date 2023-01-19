@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Tabela que mostra toda as priorizações
+
 import { useEffect, useState } from "react";
 
 import {
@@ -10,7 +14,6 @@ import {
   Tr,
   Flex,
   Tfoot,
-  // Tfoot,
 } from "@chakra-ui/react";
 
 import PaginacaoTabela from "components/PaginacaoTabela";
@@ -34,8 +37,6 @@ export function TabelaPriorizacao({ refresh, setRefresh }: TableProps) {
     const priorizacao = await getPriorizacoes();
     setData(priorizacao.data);
   };
-
-  // console.log("data", data);
 
   useEffect(() => {
     getData();
@@ -76,15 +77,6 @@ export function TabelaPriorizacao({ refresh, setRefresh }: TableProps) {
         <Td textAlign={"center"} fontWeight={"semibold"} color={"#2D2926"}>
           {prio.nom_ranking}
         </Td>
-        {/* <Td
-        textAlign={"center"}
-        style={{
-          borderBottom: "0.5px solid #A7A7A7",
-          borderRight: "0.5px solid #A7A7A7",
-        }}
-      >
-        {prio.nome_area}
-      </Td> */}
         <Td textAlign={"center"} width={"104px"} height={"56px"}>
           <ModalPriorizacao
             nomeRanking={prio.nom_ranking}
@@ -103,12 +95,7 @@ export function TabelaPriorizacao({ refresh, setRefresh }: TableProps) {
     <>
       <Flex direction={"column"} w={"100%"}>
         <Flex direction={"column"} flex={1}>
-          <TableContainer
-            mt={4}
-            mb={4}
-            borderRadius={"10px"}
-            // overflowX={"scroll"}
-          >
+          <TableContainer mt={4} mb={4} borderRadius={"10px"}>
             <Table variant="striped" colorScheme={"strippedGray"}>
               <Thead>
                 <Tr background={"origem.500"}>
@@ -118,22 +105,12 @@ export function TabelaPriorizacao({ refresh, setRefresh }: TableProps) {
                   <Th color="white" textAlign={"center"}>
                     Priorizações
                   </Th>
-                  {/* <Th
-                  textAlign={"center"}
-
-                >
-                  Área responsável
-                </Th> */}
                   <Th color="white" textAlign={"center"}>
                     Ações
                   </Th>
                 </Tr>
               </Thead>
-              <Tbody
-              //  scrollBehavior={"smooth"}
-              >
-                {tableData}
-              </Tbody>
+              <Tbody>{tableData}</Tbody>
               <Tfoot>
                 <Tr background={"origem.500"}>
                   {footer.map((item: string, index: number) => (

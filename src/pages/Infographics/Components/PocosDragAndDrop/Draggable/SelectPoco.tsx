@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Combobox para selecionar um poço a arrastar dentro da sonda
+
 import Select from "react-select";
 
 import { FormControl, Text } from "@chakra-ui/react";

@@ -1,3 +1,7 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Eduardo Muchak
+//  DESCRIÇÃO DO ARQUIVO: Campo arrastável para ordenar as atividades e ordem de precedência.
+
 import { useEffect, useId, useState } from "react";
 import {
   DragDropContext,

@@ -1,4 +1,6 @@
-// import { useEffect, useState } from "react";
+//  CRIADO EM: 6/2022
+//  AUTOR: Bruno Fracaro, Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Valores não previstos.
 
 import {
   Box,
@@ -8,42 +10,9 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-// import { TotalNaoPrevisto, TotalOrcamento } from "interfaces/Services";
-
-// import { getOrcamentoTotal, getTotalNaoPrevisto } from "services/get/Dashboard";
-
 import { useDashboard } from "contexts/Dashboard";
 
 export default function NaoPrevistoComponent() {
-  // const [totalNaoPrevisto, setTotalNaoPrevisto] = useState<TotalNaoPrevisto[]>(
-  //   [] as TotalNaoPrevisto[]
-  // );
-  // const [totalOrcamento, setTotalOrcamento] = useState<TotalOrcamento[]>(
-  //   [] as TotalOrcamento[]
-  // );
-  // const [loading, setLoading] = useState(false);
-
-  // async function handleGetTotalOrcamento() {
-  //   const reqGet = await getOrcamentoTotal();
-
-  //   setTotalOrcamento(reqGet.data[0].total);
-  // }
-
-  // async function handleGetTotalNaoPrevisto() {
-  //   setLoading(true);
-  //   const reqGet = await getTotalNaoPrevisto();
-
-  //   setTotalNaoPrevisto(reqGet.data[0].totalNaoPrevisto);
-  //   setLoading(false);
-  // }
-
-  // useEffect(() => {
-  //   handleGetTotalOrcamento();
-  //   handleGetTotalNaoPrevisto();
-  //   setLoading(false);
-  // }, []);
-
-  // const valorFormatado = totalNaoPrevisto && totalNaoPrevisto.toLocaleString();
   const { loading, valorNaoPrevisto, porcentagemNaoPrevisto } = useDashboard();
 
   return (
@@ -78,12 +47,6 @@ export default function NaoPrevistoComponent() {
             Não Previsto
           </Text>
           <Box display={"flex"}>
-            {/* <Text
-              sx={{ fontSize: 12, fontWeight: "600", alignSelf: "center" }}
-              color="#000000"
-            >
-              R$
-            </Text> */}
             <Text
               ml={2}
               sx={{
@@ -141,15 +104,6 @@ export default function NaoPrevistoComponent() {
             }}
             color="#ffffff"
           >
-            {/* {!totalNaoPrevisto ||
-            !totalOrcamento ||
-            isNaN(Number(totalNaoPrevisto)) ||
-            isNaN(Number(totalOrcamento))
-              ? 0
-              : (
-                  (Number(totalNaoPrevisto) / Number(totalOrcamento)) *
-                  100
-                ).toFixed(2)} */}
             {!loading && porcentagemNaoPrevisto.toFixed(0).replace(".", ",")}%
           </Text>
         </Flex>

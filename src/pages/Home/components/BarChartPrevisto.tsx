@@ -1,3 +1,7 @@
+//  CRIADO EM: 6/2022
+//  AUTOR: Bruno Fracaro, Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Bar chart para card previsto realizado.
+
 import { BarChart, Bar, XAxis, Tooltip, LabelList } from "recharts";
 
 import { PrevistoChartFormated } from "./PrevistoxRealizado";

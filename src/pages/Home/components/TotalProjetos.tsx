@@ -1,3 +1,7 @@
+//  CRIADO EM: 6/2022
+//  AUTOR: Bruno Fracaro, Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Card total de projetos dashboard.
+
 import { useState, useEffect } from "react";
 
 import {
@@ -75,11 +79,6 @@ export default function TotalProjetosComponent() {
 
     data.projetosPorStatus[iniciadosIndex] &&
       setIniciados(data.projetosPorStatus[iniciadosIndex].qtd);
-    // setIniciados(
-    //   data.projetosPorStatus[1].qtd +
-    //     data.projetosPorStatus[2].qtd +
-    //     data.projetosPorStatus[3].qtd,
-    // );
     data.projetosPorStatus[naoIniciadosIndex] &&
       setNaoIniciado(data.projetosPorStatus[naoIniciadosIndex].qtd);
     data.projetosPorStatus[reprogramadoIndex] &&
@@ -92,14 +91,12 @@ export default function TotalProjetosComponent() {
       setCancelados(data.projetosPorStatus[canceladosIndex].qtd);
     data.projetosPorStatus[holdsIndex] &&
       setHolds(data.projetosPorStatus[holdsIndex].qtd);
-    // setHolds(data.projetosPorStatus[6].qtd + data.projetosPorStatus[0].qtd);
     data.projetosPorStatus[analiseIndex] &&
       setEmAnalise(data.projetosPorStatus[analiseIndex].qtd);
   }
 
   const handleGetRanking = async () => {
     const { data } = await getRanking();
-    // console.log(data);
 
     setPrioridadeAlta(data.prioridade.Alto);
     setPrioridadeMedia(data.prioridade.Médio);
@@ -119,8 +116,6 @@ export default function TotalProjetosComponent() {
     fetchProjetosMes();
     handleGetRanking();
   }, []);
-
-  // console.log(totalProjetosMes);
 
   const hoverProps = {
     holds,
@@ -148,59 +143,6 @@ export default function TotalProjetosComponent() {
       Cancelado: pr.cancelados,
       Outros: pr.outros,
     }));
-
-  // const data = [
-  //   {
-  //     mes: "Jan/22",
-  //     Iniciados: 10,
-  //     Finalizados: 10,
-  //     Cancelados: 10,
-  //     Holds: 10,
-  //     Não_Iniciados: 10,
-  //     Reprogramados: 10,
-  //     Pré_Aprovação: 40,
-  //   },
-  //   {
-  //     mes: "Fev/22",
-  //     Iniciados: 10,
-  //     Finalizados: 10,
-  //     Cancelados: 10,
-  //     Holds: 40,
-  //     Não_Iniciados: 10,
-  //     Reprogramados: 10,
-  //     Pré_Aprovação: 10,
-  //   },
-  //   {
-  //     mes: "Mar/22",
-  //     Iniciados: 10,
-  //     Finalizados: 10,
-  //     Cancelados: 10,
-  //     Holds: 10,
-  //     Não_Iniciados: 10,
-  //     Reprogramados: 40,
-  //     Pré_Aprovação: 10,
-  //   },
-  //   {
-  //     mes: "Abr/22",
-  //     Iniciados: 10,
-  //     Finalizados: 10,
-  //     Cancelados: 10,
-  //     Holds: 10,
-  //     Não_Iniciados: 40,
-  //     Reprogramados: 10,
-  //     Pré_Aprovação: 10,
-  //   },
-  // ];
-
-  // const dataEntries = [
-  //   { name: "Iniciados", color: "#649efd" },
-  //   { name: "Finalizados", color: "#4d87e5" },
-  //   { name: "Cancelados", color: "#3771d1" },
-  //   { name: "Holds", color: "#2762c2" },
-  //   { name: "Não Iniciados", color: "#1954b4" },
-  //   { name: "Reprogramados", color: "#1048a4" },
-  //   { name: "Pré-Aprovação", color: "#003a9a" },
-  // ];
 
   return (
     <Flex w={"100%"} align="center" justify="center" bg={"#EDF2F7"}>
@@ -474,97 +416,12 @@ export default function TotalProjetosComponent() {
                       </Text>
                     </Flex>
                   </Flex>
-
-                  {/* <Flex gap={1} flex={1} align={"center"}>
-                  <Text
-                    p={1}
-                    bg={"#2762c2"}
-                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                    color="#ffffff"
-                  >
-                    {holds} Projetos on Hold
-                  </Text>
-                  <Text
-                    p={1}
-                    sx={{ fontSize: 14, fontWeight: "600" }}
-                    color="#F4DD06"
-                  >
-                    {total === 0 ? 0 : Math.round((holds / total) * 100)}%
-                  </Text>
-                </Flex>
-
-                <Flex gap={1} flex={1} align={"center"}>
-                  <Text
-                    p={1}
-                    bg={"#1954b4"}
-                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                    color="#ffffff"
-                  >
-                    {naoIniciado} Projetos Não Iniciados
-                  </Text>
-                  <Text
-                    p={1}
-                    sx={{ fontSize: 14, fontWeight: "600" }}
-                    color="#1954b4"
-                  >
-                    {total === 0 ? 0 : Math.round((naoIniciado / total) * 100)}%
-                  </Text>
-                </Flex>
-
-                <Flex gap={1} flex={1} align={"center"}>
-                  <Text
-                    p={1}
-                    bg={"#1048a4"}
-                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                    color="#ffffff"
-                  >
-                    {reprogramado} Projetos Reprogramados
-                  </Text>
-                  <Text
-                    p={1}
-                    sx={{ fontSize: 14, fontWeight: "600" }}
-                    color="#1048a4"
-                  >
-                    {total === 0 ? 0 : Math.round((reprogramado / total) * 100)}
-                    %
-                  </Text>
-                </Flex>
-
-                <Flex gap={1} flex={1} align={"center"}>
-                  <Text
-                    p={1}
-                    bg={"#003a9a"}
-                    sx={{ fontSize: 14, width: "200px", borderRadius: "2px" }}
-                    color="#ffffff"
-                  >
-                    {preAprovacao} Projetos Pré Aprovação Diretor
-                  </Text>
-                  <Text
-                    p={1}
-                    sx={{ fontSize: 14, fontWeight: "600" }}
-                    color="#003a9a"
-                  >
-                    {total === 0 ? 0 : Math.round((preAprovacao / total) * 100)}
-                    %
-                  </Text>
-                </Flex> */}
                 </Flex>
               </Flex>
 
               <Flex align={"center"} justify={"center"} flex={3}>
                 <TotalFases data={data} />
               </Flex>
-
-              {/* <Flex align={"center"} justify={"center"} flex={1}>
-            <StackedBarChartProjetos
-              showY={false}
-              sizeW={280}
-              sizeH={272}
-              data={data}
-              dataEntries={dataEntries}
-              barW={30}
-            />
-          </Flex> */}
               <Flex direction={"column"}>
                 <Flex
                   direction={"column"}

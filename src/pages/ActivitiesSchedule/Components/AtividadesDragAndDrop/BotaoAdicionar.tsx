@@ -1,3 +1,7 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Eduardo Muchak
+//  DESCRIÇÃO DO ARQUIVO: Botão para selecionar atividade.
+
 import { useEffect, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 

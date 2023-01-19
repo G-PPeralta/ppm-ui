@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Deletar priorização
+
 import { useState } from "react";
 import { FiTrash } from "react-icons/fi";
 
@@ -71,8 +75,6 @@ function ModalDeletarPriorizacao({ id, refresh, setRefresh }: props) {
           backgroundColor: "#F40606",
           color: "white",
         }}
-        // w={"14px"}
-        // h={"18px"}
       >
         <FiTrash size={"13px"} />
       </IconButton>
@@ -105,7 +107,6 @@ function ModalDeletarPriorizacao({ id, refresh, setRefresh }: props) {
                   <Stack gap={2}>
                     <Flex>
                       <Text
-                        // textAlign={"center"}
                         fontSize={"20px"}
                         mb={"1px"}
                         color={"#010101"}

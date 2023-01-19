@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Card que aparece quando o mesmo não puder ser arrastado por regra
+
 import { GiHamburgerMenu } from "react-icons/gi";
 
 import { Box, Flex, Text } from "@chakra-ui/react";

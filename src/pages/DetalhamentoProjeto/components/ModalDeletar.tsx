@@ -1,3 +1,7 @@
+//  CRIADO EM: 06/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Botão e modal de deletar atividade.
+
 import { FiTrash } from "react-icons/fi";
 
 import {

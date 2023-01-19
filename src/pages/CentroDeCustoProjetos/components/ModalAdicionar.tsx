@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Geovata Augusta
+//  DESCRIÇÃO DO ARQUIVO: botão e Modal para criar novo custo.
+
 import { useEffect, useState } from "react";
 import { BsPlus } from "react-icons/bs";
 

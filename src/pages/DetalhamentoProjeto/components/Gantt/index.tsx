@@ -1,9 +1,6 @@
-/*
-
-  Criado por: ...
-  Data de criação ...
-
-*/
+//  CRIADO EM: 07/2022
+//  AUTOR:Bruno Fracaro e Eduardo Muchak
+//  DESCRIÇÃO DO ARQUIVO: Gráfico Gantt da tela de detalhmaneto.
 
 import { useEffect, useState } from "react";
 import { BiExpand } from "react-icons/bi";
@@ -31,7 +28,6 @@ import {
   Sort,
   HolidaysDirective,
   SortSettingsModel,
-  // HolidayDirective,
 } from "@syncfusion/ej2-react-gantt";
 
 import { useEditarAtividadeGantt } from "hooks/useEditarAtividadeGantt";
@@ -56,7 +52,6 @@ export function Gantt({
   setInfoProjetoRefresh,
   infoProjeto,
 }: ganttOptionsProps) {
-  // const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [gantt, setGantt] = useState<any[]>([]);
   const [expandGantt, setExpandGantt] = useState(false);
@@ -112,16 +107,13 @@ export function Gantt({
       }
       const ganttFormatter = reqGanttData.data.map((item: any) => ({
         ...item,
-        BaselineDuration: item.BaselineDuration?.toString() // duracaoPlanejadaSemFinaisDeSemana
-          // .toString() //  //
-          .concat(" dias"),
+        BaselineDuration: item.BaselineDuration?.toString().concat(" dias"),
         subtasks: item.subtasks?.map((sub: any) => ({
           ...sub,
           BaselineDuration: sub.BaselineDuration?.toString().concat(" dias"),
           subtasks: formatter(sub.subtasks),
         })),
       }));
-
       setGantt(ganttFormatter);
     }
   }
@@ -215,6 +207,8 @@ export function Gantt({
             enableToggle: true,
           }}
           splitterSettings={{
+            // view: handleShowGantt(),
+            // columnIndex: 5,
             position: "80%",
           }}
           rowDataBound={rowDataBound}
@@ -273,8 +267,6 @@ export function Gantt({
               headerText="Duração Planejada"
               headerTextAlign="Center"
               textAlign="Center"
-              // type="number"
-              // format="N"
             />
             <ColumnDirective
               field="Duration"

@@ -1,10 +1,13 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Card da intervenção
+
 import { BsArrowRightShort } from "react-icons/bs";
 import { FiTrash2 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
 import { Flex, Heading, IconButton, Text } from "@chakra-ui/react";
 
-// import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
 
 import { deleteCampanha } from "services/delete/DeleteCampanha";
@@ -35,8 +38,6 @@ function CardPIR({ poco, index, refresh }: Props) {
   const navigate = useNavigate();
   const dataInicioFormatada = poco.inicioplanejado;
   const dataFimFormatada = poco.finalplanejado;
-  // const dataInicioFormatada = formatDate(new Date(poco.inicioplanejado));
-  // const dataFimFormatada = formatDate(new Date(poco.finalplanejado));
 
   const intervencaoFoiIniciada = index === 0 && poco.pct_real !== "0";
 

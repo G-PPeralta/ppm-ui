@@ -1,3 +1,7 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Botão e modal de deletar atividade.
+
 import { FiTrash } from "react-icons/fi";
 
 import {

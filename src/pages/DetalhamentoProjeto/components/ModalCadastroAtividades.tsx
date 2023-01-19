@@ -1,3 +1,7 @@
+//  CRIADO EM: 06/2022
+//  AUTOR: Eduardo Muchak, Bruno Fracaro.
+//  DESCRIÇÃO DO ARQUIVO: Modal Cadastro nova atividade.
+
 import { useEffect, useState } from "react";
 
 import {
@@ -31,7 +35,6 @@ import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
 import SelectFiltragem from "components/SelectFiltragem";
 
-// import { formataParaTipo } from "utils/FormataParaTipo";
 import { addOutroFinalArray } from "utils/AdicionaOpcaoOutroAoFinalArray";
 import { formatDateToddMMyyyyhhmmCronograma } from "utils/formatDate";
 import { getSelectFiltragemValue } from "utils/GetSelectFiltragemValue";
@@ -40,8 +43,6 @@ import { regexCaracteresEspeciais } from "utils/regex";
 import { useDetalhamentoProjeto } from "contexts/DetalhamentoDeProjetos";
 
 import { useCadastroAtividadeProjeto } from "hooks/useCadastroAtividadeProjeto";
-
-// import PopOverRelacao from "./PopOverRelacao";
 
 import { getAreaResponsavel2 } from "services/get/Projetos";
 
@@ -58,12 +59,6 @@ interface Props {
   infoProjeto: Atividade;
 }
 
-// interface AreaResponsavel {
-//   id: number;
-//   id_classe: number;
-//   nom_responsavel: string;
-//   num_peso: string;
-// }
 function ModalCadastroAtividades({
   refresh,
   setRefresh,
@@ -105,10 +100,7 @@ function ModalCadastroAtividades({
     label: responsavel.nom_responsavel,
   }));
 
-  // console.log("optionsResponsaveis", optionsResponsaveis);
-
   useEffect(() => {
-    // reqGetRes();
     reqGet();
   }, [registerForm.values]);
 
@@ -116,9 +108,6 @@ function ModalCadastroAtividades({
     refresh1,
     setRefresh1,
   };
-
-  // console.log("areaResponsavel", areaResponsavel);
-  // console.log(registerForm.values);
 
   const relacoesOptions = listaAtividadesRelacao.map((atividade: Relacao) => ({
     value: atividade.id,
@@ -128,9 +117,7 @@ function ModalCadastroAtividades({
   const getSumOfDays = registerForm.values.precedentes
     .map((i: Precedentes) => i.dias)
     .reduce((partialSum: number, a: number) => partialSum + a, 0);
-  // console.log(getSumOfDays);
 
-  // console.log(registerForm.values.precedentes[0].dias);
   const getNomeProjeto = listaAtividadesRelacao
     .map((atividade: Relacao) => ({
       value: atividade.id,
@@ -222,7 +209,6 @@ function ModalCadastroAtividades({
               {!areaResponsavel.isLoading && !isFetching ? (
                 <Flex flexDirection={"column"} gap={5}>
                   <Flex flex={1} direction={"column"}>
-                    {/* <Text fontWeight={"bold"}>Nome</Text> */}
                     <Flex gap={5} flex={1}>
                       <Flex direction={"column"} flex={2}>
                         <Flex gap={1}>
@@ -272,8 +258,6 @@ function ModalCadastroAtividades({
                     />
                   </Flex>
                   <Flex flex={1} direction={"row"} gap={2}>
-                    {/* <Text fontWeight={"bold"}>Relação</Text> */}
-                    {/* <Text fontWeight={"bold"}>Responsável</Text> */}
                     <Flex gap={5} flex={1}>
                       <SelectFiltragem
                         registerForm={registerForm}
@@ -314,7 +298,6 @@ function ModalCadastroAtividades({
                   />
 
                   <Flex flex={1} direction={"column"}>
-                    {/* <Text fontWeight={"bold"}>Datas</Text> */}
                     <Flex gap={5}>
                       <Flex>
                         {registerForm.values.dat_fim_plan === "" ? (

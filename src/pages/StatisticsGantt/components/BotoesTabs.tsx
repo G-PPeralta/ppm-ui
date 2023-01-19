@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Renderiza botões em conjunto
+
 import { Button, ButtonGroup } from "@chakra-ui/react";
 
 interface Tab {
@@ -34,8 +38,6 @@ function BotoesTabs({ tab }: Props) {
       selecionado: tabSelecionado === 4,
     },
   ];
-
-  // QUANDO O TAB FOR SELECIONADO, O BOTÃO DEVE FICAR AZUL E O RESTANTE BRANCO
 
   const handleClick = (index: number) => {
     setTabSelecionado(index);

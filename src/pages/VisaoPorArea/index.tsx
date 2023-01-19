@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Eduardo Muchak, Bruno Alcantara.
+//  DESCRIÇÃO DO ARQUIVO: Tela de visão por das atividades por área
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
@@ -27,11 +31,7 @@ declare type AreaCompetaType = {
   atividades: Array<Atividade>;
 };
 
-function validateDate(
-  pct_plan: number, // porcentagem planejada
-  comp_pct: number, // comparação porcentagens
-  pct_real: number // porcentagem realizada
-) {
+function validateDate(pct_plan: number, comp_pct: number, pct_real: number) {
   switch (true) {
     case pct_plan > pct_real:
       return 3;

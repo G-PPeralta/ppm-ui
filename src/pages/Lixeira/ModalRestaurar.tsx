@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Botão e modal para recuperar uma informação
+
 import { useState } from "react";
 import { MdSettingsBackupRestore } from "react-icons/md";
 
@@ -18,8 +22,6 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-
-// import { TextError } from "components/TextError";
 
 import { useToast } from "contexts/Toast";
 

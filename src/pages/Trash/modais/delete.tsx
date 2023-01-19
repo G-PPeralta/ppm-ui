@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Yolanda Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Botão e modal de deletar
+
 import { FiTrash } from "react-icons/fi";
 
 import {
@@ -17,8 +21,6 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-
-// import { TextError } from "components/TextError";
 
 import { handleCancelar } from "utils/handleCadastro";
 
@@ -77,7 +79,6 @@ export function DeleteModal(id: TableProps) {
                   <Stack gap={2}>
                     <Flex>
                       <Text
-                        // textAlign={"center"}
                         fontSize={"20px"}
                         mb={"1px"}
                         color={"#010101"}
@@ -114,7 +115,6 @@ export function DeleteModal(id: TableProps) {
                   background="#0047BB"
                   variant="primary"
                   color="white"
-                  // onClick={() => handleCadastrar(registerForm, onClose)}
                   _hover={{
                     background: "origem.500",
                     transition: "all 0.4s",

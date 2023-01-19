@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Bruno Fracaro e Eduardo Muchak
+//  DESCRIÇÃO DO ARQUIVO: Componente arrasta´vel de atividades precedentes.
+
 import { useEffect, useId, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";
@@ -18,11 +22,7 @@ import { FormikProps } from "formik";
 
 import SelectFiltragem from "components/SelectFiltragem";
 
-// import { formataParaTipo } from "utils/FormataParaTipo";
-
 import { getDataFinalPrecedessor } from "services/get/Estatisticas";
-
-// import SelectFiltragem from "components/SelectFiltragem";
 
 interface Props {
   registerForm: FormikProps<any>;
@@ -37,12 +37,9 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
   const [draggableId, setDraggableId] = useState<any>(id);
 
   const remove = (index: number) => {
-    // Pega a lista de precedentes diretamente do Formik
     const newList = registerForm.values.precedentes;
 
-    // Remove item da lista
     newList.splice(index, 1);
-    // Atualiza lista no Formik
     registerForm.setFieldValue("precedentes", newList);
   };
 
@@ -50,17 +47,6 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
     value: atividade.value,
     label: atividade.label,
   }));
-
-  // const getValue = (options: any, i: number, chave: string) => {
-  //   const index = options
-  //     .map(({ value }: any) => value)
-  //     .indexOf(registerForm?.values?.precedentes?.[i][chave]);
-
-  //   return {
-  //     value: options?.[index]?.value,
-  //     label: options?.[index]?.label,
-  //   };
-  // };
 
   const handleDataFinalPredecessor = async () => {
     if (
@@ -86,7 +72,6 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
 
   useEffect(() => {
     handleDataFinalPredecessor();
-    // console.log("teste", `precedentes[${index}].atividadePrecedenteId`);
   }, [registerForm.values.precedentes[index].atividadePrecedenteId]);
 
   return (
@@ -132,17 +117,6 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
                 flex={1}
               >
                 <Flex direction={"column"} flex={3}>
-                  {/* <SelectFiltragem
-                    registerForm={registerForm}
-                    nomeSelect={"ATIVIDADE"}
-                    propName={`precedentes[${index}].atividadePrecedenteId`}
-                    options={optionsAtividades}
-                    value={getValue(
-                      optionsAtividades,
-                      index,
-                      "atividadePrecedenteId"
-                    )}
-                  /> */}
                   <SelectFiltragem
                     registerForm={registerForm}
                     nomeSelect={"ATIVIDADE"}

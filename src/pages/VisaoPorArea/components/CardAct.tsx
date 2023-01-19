@@ -1,6 +1,9 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Eduardo Muchak, Bruno Alcantara.
+//  DESCRIÇÃO DO ARQUIVO: Card da atividade
+
 import { Flex, Text } from "@chakra-ui/react";
 
-// import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
 
 type Atividade = {
@@ -20,15 +23,13 @@ type Atividade = {
 type CardACTProps = {
   atividade: Atividade;
   id?: any;
-  setRefresh: React.Dispatch<React.SetStateAction<boolean>>; // Função para atualizar a página
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
   refresh: boolean;
 };
 
 function CardACT({ atividade, id, setRefresh, refresh }: CardACTProps) {
   const dataInicioFormatada = atividade.inicioplanejado;
   const dataFinalFormatada = atividade.finalplanejado;
-  // const dataInicioFormatada = formatDate(new Date(atividade.inicioplanejado));
-  // const dataFinalFormatada = formatDate(new Date(atividade.finalplanejado));
 
   return (
     <Flex

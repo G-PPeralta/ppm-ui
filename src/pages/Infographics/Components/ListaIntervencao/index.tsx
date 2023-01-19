@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Arrastável para itens intervenção
+
 import { useEffect, useState } from "react";
 import {
   DragDropContext,
@@ -10,7 +14,6 @@ import { FormLabel } from "@chakra-ui/react";
 import { useCadastroIntervencaoOLD } from "hooks/useCadastroIntervencaoOLD";
 
 import AtividadesDraggable from "./AtividadesDraggable";
-// import BotaoAdicionar from './BotaoAdicionar';
 
 const reorder = (list: any, startIndex: any, endIndex: any) => {
   const result = Array.from(list);
@@ -53,28 +56,6 @@ export default function ListDnD({
     setList(newList);
   }
 
-  // const remove = (index: number) => {
-  //   const newList = list;
-  //   newList.splice(index, 1);
-  //   setList(newList);
-  //   setRender(!render);
-  // };
-
-  // const add = () => {
-  //   const newList = list;
-  //   newList.push({
-  //     atividade: {
-  //       areaAtuacaoId: 0,
-  //       dias: 0,
-  //       id: 0,
-  //       obs: '',
-  //       tarefaId: 0,
-  //     },
-  //   });
-  //   setList(newList);
-  //   setRender(!render);
-  // };
-
   const handleChangeProp = (index: any, chave: any, value: any) => {
     const newList = list;
     newList[index][chave] = value;
@@ -108,8 +89,6 @@ export default function ListDnD({
     }
   }, [intervencaoForm.values.tipoProjetoId]);
 
-  // console.log(intervencaoForm.values);
-
   return (
     <>
       <FormLabel mb={0}>ATIVIDADES</FormLabel>
@@ -133,7 +112,6 @@ export default function ListDnD({
           )}
         </Droppable>
       </DragDropContext>
-      {/* <BotaoAdicionar add={add} /> */}
     </>
   );
 }

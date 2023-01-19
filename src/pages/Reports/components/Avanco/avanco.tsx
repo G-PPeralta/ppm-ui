@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Yolanda Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Componentes da tela de relatórios
+
 import { Flex } from "@chakra-ui/react";
 
 import CurvaS from "components/CurvaS";

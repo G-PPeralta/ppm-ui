@@ -1,14 +1,13 @@
-// import { useEffect, useState } from "react";
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Tela gráficos estatísticos.
+
 import { useRef, useState } from "react";
-// import { CSVLink } from "react-csv";
-// import { AiFillPrinter } from "react-icons/ai";
-// import { FaFileCsv } from "react-icons/fa";
 import { FaFilePdf } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
 // @ts-ignore
 import Pdf from "react-to-pdf";
 
-// import ReactToPrint from "react-to-print";
 import {
   Box,
   Button,
@@ -19,7 +18,6 @@ import {
   Select,
   Text,
 } from "@chakra-ui/react";
-// import { Ring } from "@uiball/loaders";
 import moment from "moment";
 
 import Sidebar from "components/SideBar";
@@ -132,13 +130,6 @@ export function GráficosEstatisticos() {
   return (
     <>
       <Sidebar>
-        {/* {loading && (
-          <Flex display={"flex"} align={"center"} justify={"center"} h={"90vh"}>
-            <Ring speed={2} lineWeight={5} color="blue" size={64} />
-          </Flex>
-        )} */}
-        {/* {loading && ( */}
-
         <Flex w={"auto"} align="center" justify="center" bg="#EDF2F7">
           <Box
             py={{ base: "6", sm: "8" }}
@@ -155,7 +146,6 @@ export function GráficosEstatisticos() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                // projectsForm.handleSubmit(e);
               }}
             >
               <Flex flexDirection={"column"}>
@@ -180,7 +170,6 @@ export function GráficosEstatisticos() {
                       {/* @ts-ignore */}
                       {({ toPdf }) => (
                         <Button
-                          // width={"77px"}
                           onClick={toPdf}
                           height={"23px"}
                           variant="ghost"
@@ -226,7 +215,6 @@ export function GráficosEstatisticos() {
                           mt={"-6px"}
                           id="gera-grafico"
                           name="gera-grafico"
-                          // width={"480px"}
                           height={"56px"}
                           borderRadius={"8px"}
                           placeholder="Tipo de gráfico"
@@ -304,7 +292,6 @@ export function GráficosEstatisticos() {
                       <FormControl className="toBottom">
                         <Button
                           h={"56px"}
-                          // w={"98px"}
                           background={"origem.500"}
                           border={"2.3px solid"}
                           color={"white"}
@@ -343,8 +330,6 @@ export function GráficosEstatisticos() {
             </form>
           </Box>
         </Flex>
-
-        {/* )} */}
       </Sidebar>
     </>
   );

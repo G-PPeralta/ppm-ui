@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Yolanda Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Tabela de atividades pendentes e sumario
+
 import { useEffect, useState } from "react";
 
 import { Flex } from "@chakra-ui/react";
@@ -11,7 +15,6 @@ import {
   getCurvaS,
 } from "services/get/Relatorios-pendencias";
 
-// import { curveSData } from "./data";
 import { TabelaAtividadesPendentes } from "../TabelaAtividadesPendentes";
 import { ProjectSummary } from "./summary";
 
@@ -38,8 +41,6 @@ export interface CurveSData {
 }
 
 export function PrevistoXRealizado({ data }: Props) {
-  // console.log(data.pct);
-
   const [atividades, setAtividades] = useState<IDadosAtividades[]>();
   const [curvas, setCurvas] = useState<CurveSData[]>();
 

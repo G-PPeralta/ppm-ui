@@ -1,11 +1,12 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Gabriel Peralta.
+//  DESCRIÇÃO DO ARQUIVO: Modal de editar lições aprendidas.
+
 import { useEffect, useState } from "react";
-// import { BsPlusLg } from "react-icons/bs";
 
 import {
   Flex,
   Box,
-  // IconButton,
-  // useBreakpointValue,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -18,7 +19,6 @@ import {
   ModalFooter,
   Button,
   Textarea,
-  // Text,
 } from "@chakra-ui/react";
 import { LicoesAprendidasNew } from "interfaces/Services";
 
@@ -41,8 +41,6 @@ function EditarLicoesAprendidasModal({
   const [idLicao, setIdLicao] = useState(licao?.id);
   const [licaoAprendida, setLicaoAprendida] = useState(licao?.licao_aprendida);
   const [acao, setAcao] = useState(licao?.acao_e_recomendacao);
-
-  // console.log(licaoAprendida, acao);
 
   useEffect(() => {
     setLicaoAprendida(licao.licao_aprendida);
@@ -71,40 +69,7 @@ function EditarLicoesAprendidasModal({
 
   return (
     <Flex>
-      <Box
-      // display={"flex"}
-      // alignItems={"center"}
-      // border="2px"
-      // padding={2}
-      // borderRadius={6}
-      // borderColor={"origem.300"}
-      // _hover={{
-      //   background: "#f5f5f5",
-      //   transition: "all 0.4s",
-      //   color: "origem.300",
-      //   cursor: "pointer",
-      //   borderColor: "origem.500",
-      // }}
-      // backgroundColor={"transparent"}
-      >
-        {/* <IconButton
-          aria-label="Plus sign"
-          icon={<BsPlusLg />}
-          background="origem.300"
-          variant="secondary"
-          color="white"
-          mr={2}
-          isRound={true}
-          size="sm"
-        /> */}
-        {/* <Text
-          fontSize={useBreakpointValue({ base: "sm", md: "sm" })}
-          fontWeight={"bold"}
-          color={"origem.500"}
-        >
-          EDITAR FORNECEDOR
-        </Text> */}
-      </Box>
+      <Box></Box>
       <Modal isOpen={true} onClose={closeModal} size={"lg"}>
         <ModalOverlay />
         <ModalContent>
@@ -155,19 +120,6 @@ function EditarLicoesAprendidasModal({
                 />
               </Flex>
             </FormControl>
-            {/* <FormControl>
-              <FormLabel htmlFor="data">DATA</FormLabel>
-              <Input
-                isRequired
-                placeholder="dd/mm/aaaa"
-                type="text"
-                id="data"
-                name="data"
-                width="100%"
-                value={data}
-                onChange={(event) => setData(event.target.value)}
-              />
-            </FormControl> */}
             <FormControl padding={1}>
               <Flex direction={"column"}>
                 <FormLabel
@@ -180,7 +132,6 @@ function EditarLicoesAprendidasModal({
                   AÇÃO OU RECOMENDAÇÃO
                 </FormLabel>
                 <Textarea
-                  // maxLength={150}
                   _placeholder={{ color: "#949494" }}
                   borderRadius={"8px"}
                   border={"1px solid #A7A7A7"}
@@ -192,7 +143,6 @@ function EditarLicoesAprendidasModal({
                   fontWeight={"400"}
                   isRequired
                   placeholder="Ação ou recomendação"
-                  // type="text"
                   id="acao"
                   name="acao"
                   value={acao.replace(regex, "")}
@@ -205,7 +155,6 @@ function EditarLicoesAprendidasModal({
           <ModalFooter justifyContent={"center"}>
             <Flex gap={2}>
               <Button
-                // background="origem.300"
                 variant="primary"
                 color="#F40606"
                 _hover={{

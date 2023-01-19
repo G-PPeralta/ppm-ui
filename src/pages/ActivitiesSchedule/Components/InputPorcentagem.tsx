@@ -1,3 +1,7 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Sletor numérico de conclusõa do modal de editar e cadastrar atividade.
+
 import {
   Flex,
   FormControl,

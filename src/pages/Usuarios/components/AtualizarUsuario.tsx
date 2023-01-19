@@ -1,4 +1,6 @@
-// import { BsPlusLg } from "react-icons/bs";
+//  CRIADO EM: 7/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Modal atualizar informações usuários
 
 import {
   Button,
@@ -19,8 +21,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-// import { TextError } from 'components/TextError';
-
 import formatCellphone from "utils/formatCellphone";
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
@@ -37,7 +37,6 @@ export function BotaoAtualizar(getRefreshs: RefreshProps) {
   const areas = ["Engenharia", "Operação", "Transporte"];
 
   const { registerForm } = useEdicaoUsuario();
-  // console.log(registerForm.values);
 
   return (
     <>
@@ -266,7 +265,6 @@ export function BotaoAtualizar(getRefreshs: RefreshProps) {
                   Cancelar
                 </Button>
                 <Button
-                  // disabled={!registerForm.isValid}
                   background="origem.500"
                   variant="primary"
                   color="white"
@@ -284,15 +282,10 @@ export function BotaoAtualizar(getRefreshs: RefreshProps) {
                   fontSize="18px"
                   fontWeight={"700"}
                   fontFamily={"Mulish"}
-                  // disabled={!registerForm.isValid}
                 >
-                  {/* {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : ( */}
                   <>
                     <Text>Concluir</Text>
                   </>
-                  {/* )} */}
                 </Button>
               </Flex>
             </ModalFooter>

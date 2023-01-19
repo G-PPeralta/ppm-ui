@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Cadastrar nova priorização
+
 import { useEffect } from "react";
 
 import {
@@ -21,8 +25,6 @@ import {
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
-// import { TextError } from "components/TextError";
-
 import { handleCadastrar, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroNovaPriorizacao } from "hooks/useCadastrarNovaPriorizacao";
@@ -36,7 +38,6 @@ function ModalCadastrarPriorizacao({ refresh, setRefresh }: props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { registerForm, loading } = useCadastroNovaPriorizacao();
 
-  // console.log(registerForm.values);
   const perfis = ["Administrador", "Operador"];
 
   useEffect(() => {
@@ -81,7 +82,6 @@ function ModalCadastrarPriorizacao({ refresh, setRefresh }: props) {
           <ModalCloseButton color={"white"} />
           <form
             onSubmit={(e) => {
-              // e.preventDefault();
               registerForm.handleSubmit(e);
             }}
           >
@@ -127,11 +127,6 @@ function ModalCadastrarPriorizacao({ refresh, setRefresh }: props) {
                               value={registerForm.values.nom_ranking}
                               onChange={registerForm.handleChange}
                             />
-                            {/* {registerForm.errors.nom_ranking && (
-                              <TextError>
-                                {registerForm.errors.nom_ranking}
-                              </TextError> */}
-                            {/* )} */}
                           </FormControl>
                         </Flex>
 
@@ -167,8 +162,6 @@ function ModalCadastrarPriorizacao({ refresh, setRefresh }: props) {
                               color={"black"}
                               fontWeight={"400"}
                               border={"solid 1px #949494"}
-                              // value={activitiesForm.values.acesso}
-                              // onChange={activitiesForm.handleChange}
                             >
                               {perfis.map((perfil: any, index: any) => (
                                 <option key={index}>{perfil}</option>

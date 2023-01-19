@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Maxwell.
+//  DESCRIÇÃO DO ARQUIVO:Telade detelhes lookahead
+
 import { useState, useEffect } from "react";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { useParams } from "react-router-dom";
@@ -16,8 +20,6 @@ import { AtividadesFilho, AtividadesLookahead } from "interfaces/lookahead";
 import BotaoSetaVoltar from "components/BotaoSetaVoltar/BotaoSetaVoltar";
 import ContainerPagina from "components/ContainerPagina";
 import Sidebar from "components/SideBar";
-
-// import { FiPlusCircle, FiSearch } from "react-icons/fi";
 
 import {
   getAtividade,
@@ -42,8 +44,6 @@ export function LookaheadDetalhe() {
   const [ferramentasServicos, setFerramentasServicos] = useState<any>();
   const [atividade, setAtividade] = useState<AtividadesLookahead[]>();
   const [atividadesFilho, setAtividadesFilho] = useState<AtividadesFilho[]>();
-
-  // console.log("weeks", weeks);
 
   const loadAtividade = async () => {
     if (id) {
@@ -154,8 +154,6 @@ export function LookaheadDetalhe() {
                     mt={-1}
                     fontFamily={"Mulish"}
                     fontWeight={"700"}
-                    // as="h3"
-                    // size="md"
                     textAlign={"center"}
                     fontSize={"24px"}
                   >
@@ -189,8 +187,6 @@ export function LookaheadDetalhe() {
                     <Select
                       fontSize={"14px"}
                       fontWeight={"400"}
-                      // _placeholder={{ color: "#2D2926" }}
-                      // color={"#949494"}
                       width={"218px"}
                       height={"56px"}
                       borderRadius={"8px"}
@@ -250,8 +246,6 @@ export function LookaheadDetalhe() {
                 )}
               </Flex>
             </Flex>
-            {/* </Box> */}
-            {/* </Flex> */}
           </ContainerPagina>
         </Sidebar>
       ) : (

@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Botão e Modal editar feriado.
+
 import { MdModeEdit } from "react-icons/md";
 
 import {
@@ -65,8 +69,6 @@ function ModalEditarFeriado({ feriado }: Props) {
     validationSchema: editarFeriadoSchema,
     onSubmit: () => {},
   });
-
-  // console.log(updateForm.isValid);
 
   const optionsTipoFeriado = [
     {

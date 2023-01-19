@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Eduardo Muchak, Bruno Alcantara.
+//  DESCRIÇÃO DO ARQUIVO: Legenda de status
+
 import { Flex, Text } from "@chakra-ui/react";
 
 interface AtividadesPorStatusProps {

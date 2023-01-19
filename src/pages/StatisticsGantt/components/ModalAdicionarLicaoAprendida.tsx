@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Botão e Modal lição aprendida
+
 import {
   Button,
   Flex,
@@ -54,7 +58,6 @@ function ModalAdicionarLicaoAprendida({ id, refreshState }: Props) {
       >
         <Text fontSize="18px" fontWeight={"700"} fontFamily={"Mulish"} mx={12}>
           <Flex gap={1} align={"center"}>
-            {/* Adicionar <BsPlus size={24} /> */}
             Adicionar
           </Flex>
         </Text>
@@ -107,6 +110,7 @@ function ModalAdicionarLicaoAprendida({ id, refreshState }: Props) {
                 value={registerForm.values.acoes_e_recomendacoes}
                 required={true}
                 placeholder={"Digite a ação e recomendação"}
+                maxLength={50}
               />
             </Flex>
           </ModalBody>

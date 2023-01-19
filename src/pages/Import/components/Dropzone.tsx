@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Componente dropzone genérico.
+
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { FiUpload } from "react-icons/fi";
@@ -5,23 +9,16 @@ import { MdDriveFolderUpload } from "react-icons/md";
 
 import { Icon } from "@chakra-ui/react";
 
-// import styles from "./Dropzone.module.scss";
-
 export interface DropzoneProps {
   onFileUploaded: (file: File) => void;
   name?: string;
 }
 
 const Dropzone: React.FC<DropzoneProps> = ({ onFileUploaded, name }) => {
-  // const [selectedFileUrl, setSelectedFileUrl] = useState("");
-
   const onDrop = useCallback(
     (acceptedFiles: any[]) => {
       const file = acceptedFiles[0];
 
-      // const fileUrl = URL.createObjectURL(file);
-
-      // setSelectedFileUrl(fileUrl);
       onFileUploaded(file);
     },
     [onFileUploaded]
@@ -39,10 +36,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ onFileUploaded, name }) => {
   });
 
   return (
-    <div
-      // className={isDragReject === false ? styles.dropzone : styles.error}
-      {...getRootProps()}
-    >
+    <div {...getRootProps()}>
       <input {...getInputProps()} />
 
       {isDragReject ? (

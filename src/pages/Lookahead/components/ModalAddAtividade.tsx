@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Maxwell.
+//  DESCRIÇÃO DO ARQUIVO: Adicionar atividade ao lookahead
+
 import { forwardRef, useState } from "react";
 import DatePicker from "react-datepicker";
 
@@ -37,7 +41,6 @@ type PropsType = {
 export function ModalAddAtividade(props: PropsType) {
   const { id } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const { registerForm, loading } = useCadastroAtividade();
   const [startDate, setStartDate] = useState<Date>();
   const [nomeServico, setNomeServico] = useState("");
   const [nomeFerramenta, setNomeFerramenta] = useState("");
@@ -79,7 +82,6 @@ export function ModalAddAtividade(props: PropsType) {
   };
   const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
     <Button
-      // color={"#949494"}
       fontSize={"14px"}
       fontWeight={"400"}
       onClick={onClick}
@@ -104,17 +106,13 @@ export function ModalAddAtividade(props: PropsType) {
         color={"white"}
         variant="primary"
         _hover={{
-          // background: "white",
           background: "origem.600",
-          // transition: "all 0.4s",
         }}
-        // lineHeight="22.59px"
         fontSize={"18px"}
         fontWeight={"700"}
         borderRadius={"8px"}
         fontFamily={"Mulish"}
         width="208px"
-        // letterSpacing="0.2px"
         onClick={onOpen}
       >
         Cadastrar
@@ -133,11 +131,9 @@ export function ModalAddAtividade(props: PropsType) {
           >
             Cadastrar
           </ModalHeader>
-          {/* <ModalCloseButton color={"white"} /> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              // registerForm.handleSubmit(e);
             }}
           >
             <ModalBody mt={3}>
@@ -200,7 +196,6 @@ export function ModalAddAtividade(props: PropsType) {
                         <Input
                           h={"56px"}
                           _placeholder={{ color: "#949494" }}
-                          // w={"328px"}
                           fontSize={"14px"}
                           fontWeight={"400"}
                           isRequired
@@ -208,7 +203,6 @@ export function ModalAddAtividade(props: PropsType) {
                           id="nom_atividade"
                           type="text"
                           name="nom_atividade"
-                          // color={"#949494"}
                           maxLength={20}
                           onChange={(e) => setNomeFerramenta(e.target.value)}
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
@@ -235,7 +229,6 @@ export function ModalAddAtividade(props: PropsType) {
                           type="text"
                           name="nom_atividade"
                           _placeholder={{ color: "#949494" }}
-                          // color={"#949494"}
                           maxLength={20}
                           w={useBreakpointValue({ base: "100%", md: "100%" })}
                           onChange={(e) => setNomeServico(e.target.value)}
@@ -272,8 +265,6 @@ export function ModalAddAtividade(props: PropsType) {
                           id="dsc_comentario"
                           _placeholder={{ color: "#949494" }}
                           name="dsc_comentario"
-                          // color={"#949494"}
-                          // maxLength={5000}
                           rows={5}
                           onChange={(e) => setAnotacao(e.target.value)}
                         />
@@ -306,7 +297,6 @@ export function ModalAddAtividade(props: PropsType) {
                   Cancelar
                 </Button>
                 <Button
-                  // disabled={!registerForm.isValid}
                   background="origem.500"
                   variant="primary"
                   color="white"
@@ -326,13 +316,6 @@ export function ModalAddAtividade(props: PropsType) {
                   fontFamily={"Mulish"}
                 >
                   Cadastrar
-                  {/* {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : (
-                    <>
-                      <Text>Gravar</Text>
-                    </>
-                  )} */}
                 </Button>
               </Flex>
             </ModalFooter>

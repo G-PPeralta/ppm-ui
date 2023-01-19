@@ -1,4 +1,6 @@
-// import { useEffect } from "react";
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Adicionar operação
 
 import {
   Flex,
@@ -16,8 +18,6 @@ import {
   NumberInputField,
 } from "@chakra-ui/react";
 
-// import Restricoes from "pages/Infographics/Components/Restricoes";
-
 import BotaoAzulPrimary from "components/BotaoAzul/BotaoAzulPrimary";
 import BotaoVermelhoGhost from "components/BotaoVermelho/BotaoVermelhoGhost";
 import { RequiredField } from "components/RequiredField/RequiredField";
@@ -25,9 +25,6 @@ import SelectFiltragem from "components/SelectFiltragem";
 
 import { useAdicionarOperacao } from "hooks/useAdicionarOperacao";
 
-// import PopOverRelacao from "./PopOverRelacao";
-
-// import AtividadesDragAndDrop from "./AtividadesDragAndDrop";
 import DateTimePicker from "./DateTimePicker";
 
 interface Responsavel {
@@ -73,12 +70,6 @@ function ModalAdicionarOperacao({
     value: area.id,
     label: area.tipo,
   }));
-
-  // useEffect(() => {
-  //   // if (projeto) {
-  //   //   registerForm.setFieldValue("id_projeto", idProjeto);
-  //   // }
-  // }, []);
 
   return (
     <>
@@ -240,22 +231,6 @@ function ModalAdicionarOperacao({
                     </Flex>
                   </Flex>
                 </Flex>
-
-                {/* <Flex
-                  flexDirection={useBreakpointValue({
-                    base: "column",
-                    md: "column",
-                  })}
-                  gap={2}
-                >
-                  <Text fontWeight={"bold"}>Restrições</Text>
-                  <Restricoes registerForm={registerForm} />
-                </Flex> */}
-
-                {/* <AtividadesDragAndDrop
-                  registerForm={registerForm}
-                  atividades={relacoesOptions}
-                /> */}
               </Flex>
             </ModalBody>
 

@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Apresenta o Status.
+
 import { Box, Flex, Text } from "@chakra-ui/react";
 
 type Props = {
@@ -6,7 +10,6 @@ type Props = {
 };
 
 function StatusIntervencao({ status, color }: Props) {
-  // console.log("dados status --> ", status);
   return (
     <Flex align={"center"} wrap={"wrap"}>
       <Box

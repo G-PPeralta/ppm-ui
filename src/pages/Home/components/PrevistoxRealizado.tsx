@@ -1,3 +1,7 @@
+//  CRIADO EM: 6/2022
+//  AUTOR: Bruno Fracaro, Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Card previsto realizado dashboard.
+
 import React, { useEffect, useState } from "react";
 
 import {
@@ -8,9 +12,6 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-// import PieChart from "components/PieChart";
-// import StackedBarChartPrevisto from "components/StackedBarChartPrevisto";
-
 import {
   getDadosPrevistoBarras,
   getProjetosPrevistoRealizado,
@@ -18,19 +19,6 @@ import {
 
 import Estatisticas from "./BarChartPrevisto";
 import PrevistoNovo from "./PrevistoBarChar";
-
-// function useWindowSize() {
-//   const [size, setSize] = useState([0, 0]);
-//   useLayoutEffect(() => {
-//     function updateSize() {
-//       setSize([window.innerWidth, window.innerHeight]);
-//     }
-//     window.addEventListener("resize", updateSize);
-//     updateSize();
-//     return () => window.removeEventListener("resize", updateSize);
-//   }, []);
-//   return size;
-// }
 
 function useGetData() {
   const [previstoRealizado, setPrevistoRealizado] = useState<any[]>([]);
@@ -94,56 +82,11 @@ function useGetDataBarras() {
   return result;
 }
 
-// function useGetGraph(previstoRealizado: any) {
-//   const initialValue = 0;
-
-//   const totalPrevisto = previstoRealizado.reduce(
-//     (previousValue: number, currentValue: { capexPrevisto: number }) =>
-//       previousValue + +currentValue.capexPrevisto,
-//     initialValue
-//   );
-
-//   const totalRealizado = previstoRealizado.reduce(
-//     (previousValue: number, currentValue: { capexRealizado: any }) =>
-//       previousValue + +currentValue.capexRealizado,
-//     initialValue
-//   );
-
-//   const total = totalPrevisto + totalRealizado;
-//   const graphPrevisto = totalPrevisto / total || 0;
-//   const graphRealizado = totalRealizado / total || 0;
-
-//   return {
-//     total,
-//     graphPrevisto,
-//     graphRealizado,
-//   };
-// }
-
 export default function PrevistoxRealizadoComponent() {
-  // const [width] = useWindowSize();
-  // const innerWidth = window.innerWidth;
-
   const windowWidth = window.innerWidth;
 
   const previstoRealizado = useGetData();
   const previstoXRealizadoBarras = useGetDataBarras();
-  // console.log(previstoRealizado);
-
-  // const { graphPrevisto, graphRealizado } = useGetGraph(previstoRealizado);
-
-  // const grafData = [
-  //   {
-  //     name: "Previsto",
-  //     value: graphPrevisto,
-  //     color: "#FEB144",
-  //   },
-  //   {
-  //     name: "Realizado",
-  //     value: graphRealizado,
-  //     color: "#9EC1CF",
-  //   },
-  // ];
 
   const dataEntries = [
     { name: "Realizado", color: "#9EC1CF" },
@@ -181,29 +124,14 @@ export default function PrevistoxRealizadoComponent() {
         </Text>
         <Box
           overflowX={windowWidth > 768 ? "unset" : "scroll"}
-          // w={"100%"}
           h={260}
           w={"100%"}
           flex={1}
           justifyContent={"center"}
         >
-          {/* <StackedBarChartPrevisto
-            showY={true}
-            sizeW={100}
-            sizeH={200}
-            data={previstoRealizado}
-            dataEntries={dataEntries}
-            barW={25}
-          /> */}
-
           <Flex justifyContent={"center"}>
             <PrevistoNovo dataX={previstoRealizado} dataEntries={dataEntries} />
-            <Flex
-              direction={"column"}
-              // gap={2}
-              justify={"space-between"}
-              mb={50}
-            >
+            <Flex direction={"column"} justify={"space-between"} mb={50}>
               <Flex w={"100px"} alignSelf={"center"}>
                 <Text
                   mt={4}
@@ -219,12 +147,7 @@ export default function PrevistoxRealizadoComponent() {
                 </Text>
               </Flex>
               <Flex direction={"column"}>
-                <Flex
-                  gap={2}
-                  // align={"center"}
-
-                  justify={"left"}
-                >
+                <Flex gap={2} justify={"left"}>
                   <Flex w={"20px"} bg={"#FEB144"} h={"20px"} gap={4}></Flex>
                   <Text
                     fontSize={"16px"}
@@ -234,12 +157,7 @@ export default function PrevistoxRealizadoComponent() {
                     Previsto
                   </Text>
                 </Flex>
-                <Flex
-                  gap={2}
-                  // align={"center"}
-
-                  justify={"left"}
-                >
+                <Flex gap={2} justify={"left"}>
                   <Flex w={"20px"} bg={"#9EC1CF"} h={"20px"} gap={4}></Flex>
                   <Text
                     fontSize={"16px"}
@@ -288,7 +206,6 @@ export default function PrevistoxRealizadoComponent() {
                         sx={{ fontSize: 14, fontWeight: "400" }}
                         color="#ffffff"
                       >
-                        {/* {(graphPrevisto * 100).toFixed(0)}% */}
                         {Number(
                           previstoXRealizadoBarras.totalPrevistoPercent
                         ).toFixed(1)}
@@ -302,7 +219,6 @@ export default function PrevistoxRealizadoComponent() {
                         sx={{ fontSize: 14, fontWeight: "400" }}
                         color="#ffffff"
                       >
-                        {/* {(graphRealizado * 100).toFixed(0)}% */}
                         {Number(
                           previstoXRealizadoBarras.totalRealizadoPercent
                         ).toFixed(1)}
@@ -310,7 +226,6 @@ export default function PrevistoxRealizadoComponent() {
                       </Text>
                     </Box>
                   </Flex>
-                  {/* <PieChart size={80} data={grafData} /> */}
                 </Box>
               </Box>
             </Flex>

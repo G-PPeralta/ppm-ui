@@ -1,3 +1,7 @@
+//  CRIADO EM: 06/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Input para edição e cadastro.
+
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsPlusLg } from "react-icons/bs";

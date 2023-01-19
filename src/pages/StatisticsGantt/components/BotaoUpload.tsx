@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Subir arquivo
+
 import { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { AiFillCloseCircle } from "react-icons/ai";
@@ -20,9 +24,9 @@ function BotaoUploadArquivo({ registerForm, index, propName, keyName }: Props) {
   const { toast } = useToast();
 
   const [payload, setPayload] = useState({
-    base64data: "" as any, // base64 da imagem
-    path: "", // moc OU apr
-    fileName: "", // tanto faz
+    base64data: "" as any,
+    path: "",
+    fileName: "",
     fileType: "application",
     extension: "pdf",
   });
@@ -44,10 +48,8 @@ function BotaoUploadArquivo({ registerForm, index, propName, keyName }: Props) {
 
     const nomeArquivo = `${arquivo.name.split(".pdf")[0]}`;
 
-    // Converter arquivo para base64
     const base64: any = await convertToBase64(arquivo);
 
-    // Setar payload para envio ao S3
     setPayload({
       ...payload,
       base64data: base64.split(",")[1],
@@ -56,7 +58,6 @@ function BotaoUploadArquivo({ registerForm, index, propName, keyName }: Props) {
     });
   };
 
-  // Formatação do nome do arquivo recebido pelo backend:
   const respostaBackend = registerForm.values[propName][index].anexo;
   const nomeArquivo = respostaBackend.substring(
     respostaBackend.lastIndexOf("/") + 1

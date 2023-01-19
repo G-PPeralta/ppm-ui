@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Botão e Modal para cadastrar nova intervenção na sonda
+
 import { forwardRef, useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import { BsPlusLg } from "react-icons/bs";
@@ -16,12 +20,8 @@ import {
   FormControl,
   Stack,
   Textarea,
-  // Alert,
-  // AlertIcon,
-  // AlertTitle,
   ModalCloseButton,
   Button,
-  // Progress,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { ChaoticOrbit, Ring } from "@uiball/loaders";
@@ -29,7 +29,6 @@ import { ProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
 import { RequiredField } from "components/RequiredField/RequiredField";
 
-// import { formatDate } from "utils/formatDate";
 import { handleCadastrarRefresh, handleCancelar } from "utils/handleCadastro";
 
 import { useCadastroIntervencao } from "hooks/useCadastroIntervencao";
@@ -43,7 +42,6 @@ import { getCampanhaDataInicio } from "services/get/Campanhas";
 
 import SelectFiltragem from "../../../components/SelectFiltragem";
 import AtividadesCadastroIntervencao from "./AtividadesCadastroIntervencao";
-// import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
 
 type Props = {
   idCampanha: number;
@@ -70,7 +68,6 @@ function ModalCadastroIntervencao({
 
   const [listaProjetos, setListaProjetos] = useState<any>([]);
   const [dataLimite, setDataLimite] = useState<any>("");
-  // const [valueProgressoMensagemErro, setValueProgressoMensagemErro] =
   useState<number>(100);
   const [, setDataFinalPrevista] = useState<any>("");
   const [reorderLoading, setReorderLoading] = useState<any>(false);
@@ -241,18 +238,6 @@ function ModalCadastroIntervencao({
     ) {
       handleDataLimite();
     }
-    // setValueProgressoMensagemErro(100);
-    // if (registerForm.values.erroDataIntervencao) {
-    //   const interval = setInterval(() => {
-    //     setValueProgressoMensagemErro((value) => {
-    //       if (value === 0) {
-    //         return 0;
-    //       }
-    //       return value - 1;
-    //     });
-    //   }, 500);
-    //   return () => clearInterval(interval);
-    // }
   }, [
     registerForm.values.dat_ini_prev,
     registerForm.values.projeto_tipo_id,
@@ -294,18 +279,9 @@ function ModalCadastroIntervencao({
     }
   }, [registerForm.values.poco_id]);
 
-  // useEffect(() => {
-  //   setValueProgressoMensagemErro(100);
-  // }, [dataLimite]);
-
   useEffect(() => {
     handleGetDataInicio(idCampanha);
   }, []);
-
-  // Removido para a data ficar livre para o usuário informar
-  // useEffect(() => {
-  //   registerForm.setFieldValue("dat_ini_prev", dataInicioReal);
-  // }, [dataInicioIntervencao]);
 
   return (
     <>
@@ -373,7 +349,6 @@ function ModalCadastroIntervencao({
                 <FormControl>
                   <Flex direction={"column"} gap={4}>
                     <Stack>
-                      {/* <Text fontWeight={"bold"}>Nome</Text> */}
                       <Flex
                         direction={innerWidth >= 460 ? "row" : "column"}
                         gap={5}
@@ -393,7 +368,6 @@ function ModalCadastroIntervencao({
                           options={optionsPocos}
                           required={true}
                         />
-                        {/* <DateTimePickerDataInicio registerForm={registerForm} /> */}
                         <SelectFiltragem
                           registerForm={registerForm}
                           nomeSelect={"PROJETO"}
@@ -427,67 +401,13 @@ function ModalCadastroIntervencao({
                             minDate={dataInicioReal}
                             onChange={(date) => handleIniciarDate(date)}
                             locale="pt-BR"
-                            // showTimeSelect
                             customInput={<TriggerDatePickerInicio />}
                             isClearable={dataInicioIntervencao !== ""}
-                            // disabled={
-                            //   registerForm.values.projeto_tipo_id === 0 ||
-                            //   registerForm.values.projeto_tipo_id === ""
-                            // }
-                            // timeFormat="p"
-                            // timeIntervals={15}
-                            // dateFormat="Pp"
                             dateFormat="dd/MM/yyyy"
                           />
                         </Flex>
-                        {/* <Flex align={"start"}>
-                          {dataFinalPrevista !== "" && (
-                            <Flex direction={"column"}>
-                              <Flex gap={1}>
-                                <Text
-                                  fontWeight={"bold"}
-                                  fontSize={"12px"}
-                                  color={"#949494"}
-                                >
-                                  DATA FINAL PREVISTA
-                                </Text>
-                              </Flex>
-                              <Button
-                                isDisabled={true}
-                                h={"56px"}
-                                variant="outline"
-                                px={5}
-                                minW={"220px"}
-                              >
-                                {formatDate(dataFinalPrevista)}
-                              </Button>
-                            </Flex>
-                          )} */}
-                        {/* </Flex> */}
                       </Flex>
                     </Flex>
-
-                    {/* {registerForm.values.erroDataIntervencao && (
-                      <Flex direction={"column"}>
-                        <Alert colorScheme={"red"} variant={"solid"}>
-                          <AlertIcon />
-                          <AlertTitle>ATENÇÃO:</AlertTitle>
-                          <Text>
-                            {`O planejamento configurado ultrapassa a data de início
-                              de execução do poço selecionado, previsto para ser iniciado na data ${formatDate(
-                                dataLimite
-                              )}.`}
-                          </Text>
-                        </Alert>
-                        <Progress
-                          hasStripe
-                          size="sm"
-                          value={valueProgressoMensagemErro}
-                          colorScheme={"red"}
-                          isAnimated={true}
-                        />
-                      </Flex>
-                    )} */}
 
                     {!reorderLoading ? (
                       <AtividadesCadastroIntervencao
@@ -502,7 +422,6 @@ function ModalCadastroIntervencao({
                         justify={"center"}
                         h={"40vh"}
                       >
-                        {/* <Ring speed={2} lineWeight={5} color="blue" size={64} /> */}
                         <ChaoticOrbit size={64} speed={1.5} color="blue" />
                       </Flex>
                     )}
@@ -587,10 +506,6 @@ function ModalCadastroIntervencao({
                   variant="primary"
                   color="white"
                   onClick={() => {
-                    // registerForm.setFieldValue(
-                    //   "dat_ini_prev",
-                    //   dataInicioIntervencao
-                    // );
                     handleCadastrarRefresh(
                       registerForm,
                       onClose,

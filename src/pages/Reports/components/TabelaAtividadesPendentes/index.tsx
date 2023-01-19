@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Yolanda Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Tabel atividades pendentes
+
 import {
   Flex,
   Table,
@@ -84,10 +88,6 @@ export function TabelaAtividadesPendentes({ data, total }: Props) {
                         </Td>
                       )}
                     </Td>
-
-                    {/* {row.map((cel) => (
-                      <Td textColor={chengeColorCel(cel)}>{cel}</Td>
-                    ))} */}
                   </Tr>
                 ))}
             </Tbody>

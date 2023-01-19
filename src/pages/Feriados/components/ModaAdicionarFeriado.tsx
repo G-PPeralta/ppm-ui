@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Adicionar feriado.
+
 import { BsPlus } from "react-icons/bs";
 
 import {

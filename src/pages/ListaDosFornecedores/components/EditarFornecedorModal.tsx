@@ -1,5 +1,8 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Gabriel Peralta.
+//  DESCRIÇÃO DO ARQUIVO: Editar fornecedores
+
 import { useEffect, useState } from "react";
-// import { BsPlusLg } from "react-icons/bs";
 
 import {
   Button,
@@ -7,7 +10,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-  // useBreakpointValue,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -436,7 +438,6 @@ export function EditarFornecedorModal({
                 fontSize={"14px"}
                 fontWeight={"400"}
                 isRequired
-                // placeholder="Outras"
                 id="outras"
                 name="outras"
                 value={outrasinformacoes}
@@ -447,7 +448,6 @@ export function EditarFornecedorModal({
 
           <ModalFooter justifyContent={"center"} gap={2}>
             <Button
-              // background="origem.300"
               variant="primary"
               color="red.500"
               _hover={{
@@ -455,7 +455,6 @@ export function EditarFornecedorModal({
                 transition: "all 0.4s",
                 color: "white",
               }}
-              // onClick={closeModal}
               width={"208px"}
               height={"56px"}
               onClick={() => closeModal()}

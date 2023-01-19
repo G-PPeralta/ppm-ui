@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Eduardo Muchak, Bruno Alcantara.
+//  DESCRIÇÃO DO ARQUIVO: Tela de visão de atividades por área em infográficos
+
 import { useState } from "react";
 
 import {

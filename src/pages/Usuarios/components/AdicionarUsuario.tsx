@@ -1,4 +1,7 @@
-// import { BsPlusLg } from "react-icons/bs";
+//  CRIADO EM: 7/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO:  Modal adicionar usuário
+
 import { useEffect } from "react";
 import { FiPlus } from "react-icons/fi";
 
@@ -31,8 +34,6 @@ interface RefreshProps {
   setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-// import { TextError } from 'components/TextError';
-
 export function BotaoAdicionar(getRefreshs: RefreshProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const areas = ["Engenharia", "Operação", "Transporte"];
@@ -42,8 +43,6 @@ export function BotaoAdicionar(getRefreshs: RefreshProps) {
   useEffect(() => {
     registerForm.setFieldValue("senha", "Mudar@123");
   }, []);
-
-  // console.log(registerForm.values);
 
   return (
     <>
@@ -85,13 +84,7 @@ export function BotaoAdicionar(getRefreshs: RefreshProps) {
             </ModalHeader>
             <ModalCloseButton color={"white"} />
             <ModalBody>
-              <Flex
-                align="end"
-                // mb={3}
-                mt={3}
-                flexDir={"column"}
-                gap={2}
-              >
+              <Flex align="end" mt={3} flexDir={"column"} gap={2}>
                 <FormControl>
                   <FormLabel
                     fontSize={"12px"}
@@ -267,7 +260,6 @@ export function BotaoAdicionar(getRefreshs: RefreshProps) {
                   Cancelar
                 </Button>
                 <Button
-                  // disabled={!registerForm.isValid}
                   background="origem.500"
                   variant="primary"
                   color="white"
@@ -287,13 +279,9 @@ export function BotaoAdicionar(getRefreshs: RefreshProps) {
                   fontFamily={"Mulish"}
                   disabled={!registerForm.isValid}
                 >
-                  {/* {loading ? (
-                    <Ring speed={2} lineWeight={5} color="white" size={24} />
-                  ) : ( */}
                   <>
                     <Text>Cadastrar</Text>
                   </>
-                  {/* )} */}
                 </Button>
               </Flex>
             </ModalFooter>

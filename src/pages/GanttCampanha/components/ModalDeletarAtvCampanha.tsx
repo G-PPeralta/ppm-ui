@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Magno Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Modal deletar atividade da campanha mostrada no gantt.
+
 import { FiTrash } from "react-icons/fi";
 
 import {

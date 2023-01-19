@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Tabela mostrando as opção priorizadas
+
 import { useEffect, useState } from "react";
 
 import {
@@ -40,7 +44,6 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
     setData(priorizacao.data);
     setRender(!render);
   };
-  // console.log("data", data);
 
   useEffect(() => {
     getData();
@@ -116,12 +119,7 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
   return (
     <>
       <Flex direction={"column"} w={"100%"}>
-        <TableContainer
-          mt={4}
-          mb={3}
-          borderRadius={"10px"}
-          // overflowX={"scroll"}
-        >
+        <TableContainer mt={4} mb={3} borderRadius={"10px"}>
           <Table
             variant="striped"
             colorScheme={"strippedGray"}
@@ -143,11 +141,7 @@ export function TabelaOpcoesPriorizacao(rankingInfos: TableProps) {
                 </Th>
               </Tr>
             </Thead>
-            <Tbody
-            // scrollBehavior={"smooth"}
-            >
-              {tableData}
-            </Tbody>
+            <Tbody>{tableData}</Tbody>
             <Tfoot>
               <Tr background={"origem.500"}>
                 {footer.map((item: string, index: number) => (

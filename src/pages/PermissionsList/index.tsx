@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Maxwell.
+//  DESCRIÇÃO DO ARQUIVO: Lista de permissões dos usuários
+
 import { Flex, Grid, useBreakpointValue } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 

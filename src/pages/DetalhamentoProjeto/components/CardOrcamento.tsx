@@ -1,3 +1,7 @@
+//  CRIADO EM: 06/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Card com os valore do projeto.
+
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";

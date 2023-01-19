@@ -1,3 +1,7 @@
+//  CRIADO EM: 6/2022
+//  AUTOR: Bruno Fracaro, Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Card fase projetos dashboard.
+
 import { useEffect, useState } from "react";
 
 import {
@@ -44,16 +48,6 @@ export default function NaoPrevistoComponent() {
   useEffect(() => {
     getData();
   }, []);
-
-  // const RenderCustomizedLabel = (props: any) => {
-  //   const { value } = props;
-
-  //   return (
-  //     <text fill="#000" textAnchor="middle" dominantBaseline="middle">
-  //       {value}
-  //     </text>
-  //   );
-  // };
 
   const handleActive = (index: number) => {
     setActive(index);

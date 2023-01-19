@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Botão deletar gasto.
+
 import { useState } from "react";
 import { FiTrash } from "react-icons/fi";
 
@@ -5,17 +9,13 @@ import {
   Button,
   Flex,
   FormControl,
-  // FormLabel,
   Modal,
   ModalBody,
-  // ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalOverlay,
   Stack,
   Text,
-  // Textarea,
-  // useBreakpointValue,
   useDisclosure,
   IconButton,
   ModalHeader,

@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Magno Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Select genérico
+
 import Select from "react-select";
 
 import { Flex, FormControl, Text } from "@chakra-ui/react";

@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Cadastrar novo cronograma
+
 import {
   Flex,
   Modal,
@@ -12,14 +16,10 @@ import {
   Textarea,
   Button,
   Text,
-  // NumberInput,
-  // NumberInputField,
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 import { ListaPoco } from "interfaces/CadastrosModaisInfograficos";
-
-// import { RequiredField } from "components/RequiredField/RequiredField";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
 import BotaoVermelhoLargoGhost from "components/BotaoVermelhoLargo/BotaoVermelhoLargoGhost";
@@ -30,8 +30,6 @@ import { useCadastroCronograma } from "hooks/useCadastroCronograma";
 
 import SelectFiltragem from "../../../components/SelectFiltragem";
 import AtividadesCadastroCronograma from "./AtividadesCadastroCronograma";
-
-// import { TextError } from "components/TextError";
 
 function ModalCadastroCronograma({ refresh, setRefresh }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -105,7 +103,6 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                 <FormControl>
                   <Flex direction={"column"} gap={4}>
                     <Stack>
-                      {/* <Text fontWeight={"bold"}>Nome</Text> */}
                       <Flex
                         direction={innerWidth >= 460 ? "row" : "column"}
                         gap={5}
@@ -125,37 +122,7 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                           options={optionsPocos}
                           required={true}
                         />
-                        <FormControl>
-                          {/* <Flex gap={1}>
-                            <Text
-                              fontWeight={"700"}
-                              fontSize={"12px"}
-                              color={"#949494"}
-                            >
-                              PROFUNDIDADE DA ZONA INTERVIDA MAIS
-                            </Text>
-                          </Flex> */}
-
-                          {/* <NumberInput
-                            _placeholder={{ color: "#949494" }}
-                            fontSize={"14px"}
-                            fontWeight={"400"}
-                            color={"black"}
-                            max={999999}
-                            min={0}
-                            id={`profundidade`}
-                            name={`profundidade`}
-                            value={registerForm.values.profundidade}
-                            onChange={(value) => {
-                              registerForm.setFieldValue(
-                                `profundidade`,
-                                Number(value)
-                              );
-                            }}
-                          >
-                            <NumberInputField bg={"#fff"} h={"56px"} />
-                          </NumberInput> */}
-                        </FormControl>
+                        <FormControl></FormControl>
                       </Flex>
                     </Stack>
 
@@ -165,7 +132,6 @@ function ModalCadastroCronograma({ refresh, setRefresh }: any) {
                     />
 
                     <Stack>
-                      {/* <Text fontWeight={"bold"}>Comentários</Text> */}
                       <FormControl>
                         <Flex gap={1}>
                           <Text

@@ -1,3 +1,7 @@
+//  CRIADO EM: 10/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Editar opção priorizada
+
 import { useEffect } from "react";
 import { MdModeEdit } from "react-icons/md";
 
@@ -44,10 +48,6 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
     infosOption.initialGrade
   );
 
-  // console.log("registerForm", registerForm.values);
-  // console.log("infosOption", infosOption);
-  // console.log(registerForm.values.rankingOpcao);
-
   useEffect(() => {
     registerForm.setFieldValue("idOpcao", infosOption.opcaoId);
     registerForm.setFieldValue("idRanking", infosOption.idRanking.idRanking);
@@ -73,8 +73,6 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
           color: "white",
         }}
         border={"none"}
-        // w={"14px"}
-        // h={"18px"}
         textAlign={"center"}
         icon={<MdModeEdit />}
       />
@@ -97,7 +95,6 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
 
           <form
             onSubmit={(e) => {
-              // e.preventDefault();
               registerForm.handleSubmit(e);
             }}
           >
@@ -134,7 +131,6 @@ function ModalEditarOpcaoPriorizacao(infosOption: TableProps) {
                               color={"black"}
                               _placeholder={{ color: "#949494" }}
                               ml={"3px"}
-                              // placeholder="Nome"
                               w={"523px"}
                               border={"1px solid #949494"}
                               h={"56px"}

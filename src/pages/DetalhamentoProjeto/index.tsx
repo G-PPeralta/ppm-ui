@@ -1,3 +1,7 @@
+//  CRIADO EM: 06/2022
+//  AUTOR: Eduardo Muchak, Bruno Fracaro.
+//  DESCRIÇÃO DO ARQUIVO: tela de detalhamento de projetos.
+
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
@@ -27,31 +31,6 @@ import BotoesModais from "./components/BotoesModais";
 import CardInfoProjeto from "./components/CardInfoProjeto";
 import CardOrcamento from "./components/CardOrcamento";
 import { Gantt } from "./components/Gantt";
-// import GraficoCurvaS from "./components/GraficoCurvaS";
-
-// const curveSData = [
-//   {
-//     mes: "Nov/2022",
-//     cronogramaPrevisto: 6,
-//     cronogramaRealizado: 30,
-//     capexPrevisto: 40,
-//     capexRealizado: 50,
-//   },
-//   {
-//     mes: "Dez/2021",
-//     cronogramaPrevisto: 60,
-//     cronogramaRealizado: 20,
-//     capexPrevisto: 35,
-//     capexRealizado: 50,
-//   },
-//   {
-//     mes: "Nov/2022",
-//     cronogramaPrevisto: 6,
-//     cronogramaRealizado: 30,
-//     capexPrevisto: 40,
-//     capexRealizado: 50,
-//   },
-// ];
 
 function DetalhamentoProjeto() {
   const initCardInfo = {
@@ -86,8 +65,6 @@ function DetalhamentoProjeto() {
     const priorizacao = await getCurvaSInfos(id);
     setData(priorizacao.data);
   };
-
-  // console.log({ data });
 
   useEffect(() => {
     handleGetInfoProjetos();
@@ -137,7 +114,6 @@ function DetalhamentoProjeto() {
   async function handleGetLicoes() {
     if (id) {
       const response = await getLicoesAprendidas(id);
-      // console.log("ENTROU", response);
       setLicoes(response.data as LicoesAprendidasNew[]);
     }
   }
@@ -155,29 +131,6 @@ function DetalhamentoProjeto() {
       setProgressoLoading(false);
     }
   }
-
-  // useEffect(() => {
-  //   handleGetInfoProjetos();
-  //   handleGetLicoes();
-  //   handleGetCategorias();
-  //   handleGetProgresso();
-
-  //   return () =>
-  //     setInfoProjeto({
-  //       nome_projeto: "",
-  //       data_inicio: null,
-  //       data_fim: null,
-  //       numero: 0,
-  //       polo: "",
-  //       local: "",
-  //       demanda: "",
-  //       nome_responsavel: "",
-  //       coordenador_nome: "",
-  //       descricao: "",
-  //       justificativa: "",
-  //     });
-  //   // handleGetLicoes();
-  // }, [render]);
 
   async function getProject() {
     try {
@@ -247,7 +200,6 @@ function DetalhamentoProjeto() {
               infoProjeto={infoProjeto}
             />
             <CurvaS data={data} />
-            {/* <GraficoCurvaS /> */}
           </>
         )}
       </Sidebar>

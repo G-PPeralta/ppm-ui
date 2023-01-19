@@ -1,3 +1,7 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Botão e Modal de deletar tarefa.
+
 import { useState } from "react";
 import { FiTrash } from "react-icons/fi";
 
@@ -18,10 +22,6 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-
-// import { TextError } from "components/TextError";
-
-// import { handleCancelar } from "utils/handleCadastro";
 
 import { useToast } from "contexts/Toast";
 
@@ -73,8 +73,6 @@ function ModalDeletarTarefa({ id, newRender }: ModalDeletarProps) {
           backgroundColor: "#F40606",
           color: "white",
         }}
-        // w={"14px"}
-        // h={"18px"}
       >
         <FiTrash size={"13px"} />
       </IconButton>
@@ -107,7 +105,6 @@ function ModalDeletarTarefa({ id, newRender }: ModalDeletarProps) {
                   <Stack gap={2}>
                     <Flex>
                       <Text
-                        // textAlign={"center"}
                         fontSize={"20px"}
                         mb={"1px"}
                         color={"#010101"}

@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Felipe Mateus
+//  DESCRIÇÃO DO ARQUIVO: Tela acompanhamento financeiro.
+
 import { BsSearch } from "react-icons/bs";
 
 import { Box, Button, Flex, Select, Text } from "@chakra-ui/react";

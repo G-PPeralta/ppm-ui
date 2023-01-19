@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Modal editar ocorrencia
+
 import { useEffect } from "react";
 import { MdModeEdit } from "react-icons/md";
 
@@ -17,7 +21,6 @@ import {
 } from "@chakra-ui/react";
 
 import BotaoAzulLargoPrimary from "components/BotaoAzulLargo/BotaoAzulLargoPrimary";
-// import InputGenerico from "components/InputGenerico";
 import InputGenericoDesabilitado from "components/InputGenericoDesabilitado";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
 
@@ -68,9 +71,6 @@ function ModalEditarOcorrencia({
     );
     registerForm.setFieldValue("ocorrencia", linhaTabela.dsc_ocorrencia);
   }, []);
-
-  // console.log("registerForm", registerForm.values);
-  // console.log("linhaTabela", linhaTabela);
 
   return (
     <>

@@ -1,5 +1,8 @@
+//  CRIADO EM: 07/2022
+//  AUTOR: Eduardo Muchak, Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Botão e Modal de inclusão de responsável.
+
 import { useState } from "react";
-// import { BsPlusLg } from "react-icons/bs";
 import { FiPlus } from "react-icons/fi";
 
 import {
@@ -16,13 +19,8 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  // IconButton,
   useDisclosure,
-  // Box,
-  // Text,
 } from "@chakra-ui/react";
-
-// import { TextError } from 'components/TextError';
 
 import { postResponsavel } from "services/post/ProjectRegister";
 
@@ -109,12 +107,6 @@ export function AdicionarResponsavelModal(projectsForm: any) {
                     border={"1px solid #949494"}
                     h={"56px"}
                   />
-                  {/* {projectsForm.projectsForm.errors.responsavel &&
-                  projectsForm.projectsForm.touched.responsavel && (
-                    <TextError>
-                      {projectsForm.projectsForm.errors.responsavel}
-                    </TextError>
-                  )} */}
                 </FormControl>
               </Flex>
               <Flex

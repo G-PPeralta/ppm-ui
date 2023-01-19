@@ -1,3 +1,7 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Bruno Fracaro
+//  DESCRIÇÃO DO ARQUIVO: Seletor de data para o modal de cadastro de atividade.
+
 import { forwardRef } from "react";
 import ReactDatePicker, { registerLocale } from "react-datepicker";
 
@@ -13,10 +17,8 @@ function DateTimePickerDataInicioReal({
   fimReal,
 }: any) {
   const handleIniciarDate = (date: any) => {
-    // date.setHours(9, 0, 0, 0);
     setInicioReal(date);
   };
-  // console.log("dados atividade ---> ", atividadeStatus);
   const TriggerDatePickerInicio = forwardRef(
     ({ value, onClick }: any, ref: any) => (
       <Button
@@ -42,7 +44,6 @@ function DateTimePickerDataInicioReal({
         selected={inicioReal}
         onChange={(date) => handleIniciarDate(date)}
         locale="pt-BR"
-        // showTimeSelect
         dateFormat="Pp"
         customInput={<TriggerDatePickerInicio />}
         isClearable={inicioReal !== ""}

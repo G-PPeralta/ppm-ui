@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Yolanda Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Tela e tabela de lixeira
+
 import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";

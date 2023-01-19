@@ -1,8 +1,10 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Eduardo Muchak
+//  DESCRIÇÃO DO ARQUIVO: Combobox para selecioanr a atividade precedente.
+
 import Select from "react-select";
 
 import { Flex, Text } from "@chakra-ui/react";
-
-// import { RequiredField } from "components/RequiredField/RequiredField";
 
 function SelectPrecedente({ options, handleChange, value }: any) {
   const customStyles = {
@@ -23,7 +25,6 @@ function SelectPrecedente({ options, handleChange, value }: any) {
   return (
     <Flex direction={"column"} flex={1}>
       <Flex>
-        {/* <RequiredField /> */}
         <Text sx={{ fontSize: 12, fontWeight: "600" }}>PRECEDENTE</Text>
       </Flex>
       <Select

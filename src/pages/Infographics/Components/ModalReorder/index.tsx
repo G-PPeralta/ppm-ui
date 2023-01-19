@@ -1,3 +1,7 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Modal reordenar poços em sondas
+
 import { useEffect, useState } from "react";
 import {
   DragDropContext,
@@ -25,7 +29,6 @@ import { Ring } from "@uiball/loaders";
 import { useToast } from "contexts/Toast";
 
 import { postGetInfoCampanha } from "services/get/Infograficos";
-// import { postReorderIntervencao } from "services/post/Infograficos";
 
 import Card from "./components/Card";
 import "./components/styles.scss";
@@ -38,9 +41,6 @@ const reorder = (list: any, startIndex: any, endIndex: any) => {
   return result;
 };
 
-/**
- * Moves an item from one list to another list.
- */
 const move = (
   source: any,
   destination: any,
@@ -141,22 +141,10 @@ export default function ModalReorder({ refresh }: any) {
   };
 
   const save = async () => {
-    // try {
-    //   const { status } = await postReorderIntervencao(campanhas);
-
-    //   if (status === 200 || status === 201) {
     toast.success("Intervenções reordenadas com sucesso!", {
       id: "toast-principal",
     });
     onClose();
-    //     setLoading(false);
-    //   }
-    // } catch (error) {
-    //   toast.error("Erro ao reordenar intervenção!", {
-    //     id: "toast-principal",
-    //   });
-    //   setLoading(false);
-    // }
   };
 
   return (

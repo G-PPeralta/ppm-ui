@@ -1,3 +1,7 @@
+//  CRIADO EM: 06/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Gráfico de curva S do projeto.
+
 import { Flex, Heading } from "@chakra-ui/react";
 import {
   CartesianGrid,
@@ -49,7 +53,6 @@ function GraficoCurvaS() {
   const totalNomeMeses = getNomesMeses(dataInicio, qtdeMeses);
 
   let porcentagem = 0;
-  // let porcentagemRealizado = 0;
 
   const previsto = totalNomeMeses.map((mes) => {
     porcentagem += (totalBudget / qtdeMeses / totalBudget) * 100;
@@ -65,9 +68,6 @@ function GraficoCurvaS() {
     { mes: "Dez/2022", "Capex Realizado": 35 },
     { mes: "Jan/2023", "Capex Realizado": 40 },
     { mes: "Fev/2023", "Capex Realizado": 55 },
-    // { mes: 'Mar/2023', spent: 82 },
-    // { mes: 'Abr/2023', spent: 90 },
-    // { mes: 'Mai/2023', spent: 95 },
   ];
 
   const data = previsto.map((mes) => {

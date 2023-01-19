@@ -1,12 +1,12 @@
+//  CRIADO EM: 09/2022
+//  AUTOR: Gabriel Peralta.
+//  DESCRIÇÃO DO ARQUIVO: Botão e Modal de edital tarefas do projeto.
+
 import { useEffect, useState } from "react";
-// import { BsPlusLg } from "react-icons/bs";
-// import { useParams } from "react-router-dom";
 
 import {
   Flex,
   Box,
-  // IconButton,
-  // useBreakpointValue,
   Textarea,
   Modal,
   ModalOverlay,
@@ -20,16 +20,9 @@ import {
   ModalFooter,
   Button,
   Select,
-  // NumberInput,
-  // NumberInputField,
-  // NumberInputStepper,
-  // NumberIncrementStepper,
-  // NumberDecrementStepper,
-  // useDisclosure,
 } from "@chakra-ui/react";
 import { format } from "date-fns";
 import { AtividadesProjeto, TarefaAtividade } from "interfaces/Services";
-// import { Text } from "recharts";
 
 import { useAuth } from "hooks/useAuth";
 
@@ -50,15 +43,11 @@ function EditarTarefaModal({
   atividadesProjeto,
   newRender,
 }: EditModalProps) {
-  // const { onClose } = useDisclosure();
-
   const regex = /[^\w\s]/gi;
 
   const novaData = format(new Date(editTarefa?.data_tarefa), "yyyy-MM-dd");
 
   const { user } = useAuth();
-  // console.log(user);
-  // console.log(editTarefa);
 
   const [tarefaId, setTarefaId] = useState(editTarefa?.id);
   const [nome, setNome] = useState(editTarefa?.nome_tarefa);
@@ -68,8 +57,6 @@ function EditarTarefaModal({
   const [status, setStatus] = useState(editTarefa?.status);
   const [descricao, setDescricao] = useState(editTarefa?.descricao_tarefa);
 
-  // console.log(status);
-
   useEffect(() => {
     setNome(editTarefa.nome_tarefa);
     setData(novaData);
@@ -77,7 +64,6 @@ function EditarTarefaModal({
     setDescricao(editTarefa.descricao_tarefa);
     setTarefaId(editTarefa.id);
   }, [
-    // editTarefa.data,
     novaData,
     editTarefa.nome_tarefa,
     editTarefa.id,
@@ -93,8 +79,6 @@ function EditarTarefaModal({
     "status",
   ];
 
-  // console.log(editTarefa?.status);
-
   function updatePayload(campo: string) {
     if (campo === "nome_tarefa") return nome;
     if (campo === "data_tarefa") return data;
@@ -103,8 +87,6 @@ function EditarTarefaModal({
     if (campo === "responsavel") return responsavel;
     if (campo === "status") return status;
   }
-
-  // const formataParaPorcentagem = (val: number | undefined) => val + "%";
 
   const handlePatchProject = async () => {
     const promises = camposParaEditar.map((tarefa) =>
@@ -124,39 +106,7 @@ function EditarTarefaModal({
 
   return (
     <Flex>
-      <Box
-      // display={"flex"}
-      // alignItems={"center"}
-      // border="2px"
-      // padding={2}
-      // borderRadius={6}
-      // borderColor={"origem.300"}
-      // _hover={{
-      //   background: "#f5f5f5",
-      //   transition: "all 0.4s",
-      //   color: "origem.300",
-      //   cursor: "pointer",
-      //   borderColor: "origem.500",
-      // }}
-      >
-        {/* <IconButton
-          aria-label="Plus sign"
-          icon={<BsPlusLg />}
-          background="origem.300"
-          variant="secondary"
-          color="white"
-          mr={2}
-          isRound={true}
-          size="sm"
-        /> */}
-        {/* <Text
-          fontSize={useBreakpointValue({ base: "sm", md: "sm" })}
-          fontWeight={"bold"}
-          color={"origem.500"}
-        >
-          EDITAR FORNECEDOR
-        </Text> */}
-      </Box>
+      <Box></Box>
       <Modal isOpen={isModalOpen} onClose={closeModal} size="lg">
         <ModalOverlay />
         <ModalContent>
@@ -178,7 +128,6 @@ function EditarTarefaModal({
               padding={1}
               display={"flex"}
               justifyContent={"space-between"}
-              // gap={3}
             >
               <Flex flexDir={"column"} flexGrow={4} mr={4} ml={-3}>
                 <FormLabel
@@ -242,7 +191,6 @@ function EditarTarefaModal({
               marginBottom={1}
               width={"204px"}
               display="flex"
-              // gap={4}
             >
               <Flex direction={"column"} mr={4} ml={-3}>
                 <FormLabel
@@ -335,43 +283,6 @@ function EditarTarefaModal({
               <option value={1}>Concluído</option>
               <option value={2}>Cancelado</option>
             </Select>
-
-            {/* <Input
-              type="number"
-              fontSize={"14px"}
-              borderRadius={"8px"}
-              border={"1px solid #A7A7A7"}
-              mt={"-9px"}
-              width={"208px"}
-              height={"56px"}
-              color="#2D2926"
-              id="status"
-              name="status"
-              value={status}
-              onChange={(event) => setStatus(Number(event.target.value))}
-            ></Input> */}
-            {/* <NumberInput
-              mt={"-9px"}
-              mr={4}
-              ml={-2}
-              width={"208px"}
-              height={"56px"}
-              min={0}
-              max={100}
-              value={formataParaPorcentagem(status)}
-              onChange={(valueString) => {
-                const value = Number(valueString);
-                setStatus(value);
-              }}
-              h={"56px"}
-            > */}
-            {/* <NumberInputField h={"56px"} /> */}
-
-            {/* <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper> */}
-            {/* </NumberInput> */}
             <FormControl padding={1}>
               <FormLabel
                 mr={4}

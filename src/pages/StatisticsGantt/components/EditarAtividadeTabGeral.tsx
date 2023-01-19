@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Editar informações da atividade
+
 import { useEffect, useState } from "react";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 
@@ -5,13 +9,9 @@ import { Flex, IconButton, Text } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
 
 import DatePickerModal from "components/DatePickerGenerico/DatePickerModal";
-// import DatePickerGenerico from "components/DatePickerGenerico";
-// import DatePickerGenericoDesabilitado from "components/DatePickerGenericoDesabilitado";
 import InputGenerico from "components/InputGenerico";
 import InputGenericoDesabilitado from "components/InputGenericoDesabilitado";
 import InputNumericoGenerico from "components/InputNumericoGenerico";
-
-// import { regexNumerosEPonto } from "utils/regexPontoENumero";
 
 import { ModalFiltrarDuracaoMedia } from "./ModalFiltrarDuracaoMedia";
 
@@ -44,10 +44,6 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
     (s: any) => s.id_atividade === registerForm.values.id_atividade
   )?.flag;
 
-  // console.log("dados flag ---> ", sondaN.atividades);
-  // console.log("dados flag ---> ", flag);
-
-  // para entrar no formulário para envio ao backend
   useEffect(() => {
     registerForm.setFieldValue("flag", flag);
   }, []);
@@ -104,14 +100,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
       "hrs_totais_" + registerForm.values.id_atividade
     );
 
-    // console.log(
-    //   "dados REGRA --> ",
-    //   +hrs_reais !== registerForm.values.hrs_reais
-    // );
-
     let statehrsEditado: number = 0;
-    // console.log("Dados hrs_reais --->", +hrs_reais);
-    // console.log("Dados register hrs --->", +registerForm.values.hrs_reais);
     if (+hrs_reais !== +registerForm.values.hrs_reais) {
       statehrsEditado = 1;
     } else {
@@ -121,11 +110,6 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
       "pct_real_" + registerForm.values.id_atividade
     );
 
-    // console.log(
-    //   "dados REGRA 2 ---> ",
-    //   +pct_real !== registerForm.values.pct_real
-    // );
-
     let statepctEditado: number = 0;
     if (+pct_real !== +registerForm.values.pct_real) {
       statepctEditado = 1;
@@ -133,11 +117,7 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
       statepctEditado = 0;
     }
 
-    // console.log("Dados Pct --->", statepctEditado);
-    // console.log("Dados hrs --->", statehrsEditado);
     const intTotal = +statepctEditado + +statehrsEditado;
-    // console.log("Dados Total ---> ", intTotal);
-    // console.log("dados " + statepctEditado + statehrsEditado);
     if (intTotal > 0) {
       registerForm.setFieldValue("realEditado", 1);
     } else {
@@ -179,31 +159,9 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                   isDisabled={false}
                 />
               </Flex>
-              {/* <Flex flex={1}>
-          <InputNumericoGenerico
-            registerForm={registerForm}
-            propName={"pct_real"}
-            nomeInput={"PORCENTAGEM CONCLUÍDA"}
-            tipo={"porcentagem"}
-            stepper={true}
-            step={100}
-          />
-        </Flex> */}
             </Flex>
             <Flex gap={4} w={"76.5%"} mb={2}>
               <Flex align={"end"} w={"56.4%"}>
-                {/* <InputNumericoGenerico
-                  registerForm={registerForm}
-                  propName={"hrs_totais"}
-                  nomeInput={"DURAÇÃO"}
-                  tipo={"hora"}
-                  step={0.5}
-                  stepper={true}
-                  limite={1000}
-                  // isDisabled={registerForm.values.inicio_real || flag === 1}
-                  isDisabled={!(flag === 1 || flag === 0)}
-                /> */}
-
                 <InputGenerico
                   value={hrsTotais || registerForm.values.hrs_totais}
                   registerForm={registerForm}
@@ -269,11 +227,9 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                 propName={"inicio_planejado"}
                 data={registerForm.values.inicio_planejado}
                 selecionaHorario={true}
-                // isDisabled={registerForm.values.inicio_real || flag === 1}
                 isDisabled={!(flag === 1)}
               />
               <DatePickerModal
-                // isDisabled={registerForm.values.pct_real === 100}
                 nomeLabel={"DATA FIM"}
                 registerForm={registerForm}
                 propName={"fim_planejado"}
@@ -284,7 +240,6 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                       60 * 60 * (registerForm.values.hrs_totais * 1000)
                   )
                 }
-                // isDisabled={registerForm.values.inicio_real || flag === 1}
                 isDisabled={true}
               />
             </Flex>
@@ -296,18 +251,6 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
               <Flex direction={"row"} gap={4} w={"100%"}>
                 <Flex direction={"row"} w={"52.2%"} gap={4}>
                   <Flex align={"end"} direction={"row"} w={"80.2%"}>
-                    {/* <InputNumericoGenerico
-                    registerForm={registerForm}
-                    propName={"hrs_reais"}
-                    nomeInput={"DURAÇÃO"}
-                    tipo={"hora"}
-                    step={0.5}
-                    stepper={true}
-                    limite={1000}
-                    // isDisabled={flag === 0}
-                    isDisabled={registerForm.values.pct_real === 100}
-                  /> */}
-
                     <InputGenerico
                       value={hrsReais || registerForm.values.hrs_reais}
                       registerForm={registerForm}
@@ -364,7 +307,6 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                       </IconButton>
                     </Flex>
                   </Flex>
-                  {/* <Input value={mediaHorasFiltradas} /> */}
 
                   <DatePickerModal
                     nomeLabel={"DATA INÍCIO REAL"}
@@ -372,7 +314,6 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                     propName={"inicio_realizado"}
                     data={date}
                     selecionaHorario={true}
-                    // isDisabled={flag === 0 || registerForm.values.pct_real === 100}
                     isDisabled={!(flag === 1 || flag === 2)}
                   />
                 </Flex>
@@ -391,7 +332,6 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                             60 * 60 * (registerForm.values.hrs_reais * 1000)
                         )
                   }
-                  // data={registerForm.values.inicio_real}
                   selecionaHorario={true}
                   isDisabled={true}
                 />
@@ -404,8 +344,6 @@ function EditarAtividadeTabGeral({ registerForm, sondaN }: Props) {
                     stepper={true}
                     isDisabled={flag === 3}
                     step={100}
-                    // isDisabled={flag === 0}
-                    // isDisabled={registerForm.values.pct_real === 100}
                   />
                 </Flex>
               </Flex>

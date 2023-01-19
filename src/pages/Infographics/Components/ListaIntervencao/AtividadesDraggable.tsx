@@ -1,6 +1,9 @@
+//  CRIADO EM: 9/2022
+//  AUTOR: Bruno Fracaro, Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Intervenção arrastável.
+
 import { useId } from "react";
 import { Draggable } from "react-beautiful-dnd";
-// import { FiTrash } from 'react-icons/fi';
 import { GiHamburgerMenu } from "react-icons/gi";
 
 import { Box, Flex, FormControl, Select, Text } from "@chakra-ui/react";
@@ -10,7 +13,6 @@ import { useCadastroIntervencaoOLD } from "hooks/useCadastroIntervencaoOLD";
 interface Props {
   index: number;
   item: any;
-  // remove: any;
   handleChangeProp: any;
   list: any;
   intervencaoForm: any;
@@ -19,7 +21,6 @@ interface Props {
 function AtividadesDraggable({
   item,
   index,
-  // remove,
   handleChangeProp,
   list,
   intervencaoForm,
@@ -100,13 +101,7 @@ function AtividadesDraggable({
               align={"center"}
               justify={"center"}
               _hover={{ cursor: "pointer" }}
-            >
-              {/* <FiTrash
-                onClick={() => remove(index)}
-                color="#F94144"
-                size={16}
-              /> */}
-            </Flex>
+            ></Flex>
           </Box>
         </div>
       )}

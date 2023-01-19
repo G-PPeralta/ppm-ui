@@ -1,5 +1,8 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Tab de lições aprendidas em modal
+
 import { useEffect, useState } from "react";
-// import toast from "react-hot-toast";
 import { FiTrash } from "react-icons/fi";
 
 import { Flex, IconButton, Td, Text, Tr } from "@chakra-ui/react";
@@ -60,8 +63,6 @@ function EditarAtividadeTabLicoesAprendidas({
   useEffect(() => {
     setTabelaFiltrada(registerForm.values.licoes_aprendidas);
   }, [registerForm.values.licoes_aprendidas]);
-
-  // console.log("registerForm", registerForm.values);
 
   function Body() {
     return (
@@ -144,7 +145,6 @@ function EditarAtividadeTabLicoesAprendidas({
       </Flex>
       <Flex flex={1} w={"100%"}>
         <TabelaGenerica
-          // maxHeight={"352px"}
           data={tabelaFiltrada}
           header={header}
           fromTo={fromTo}

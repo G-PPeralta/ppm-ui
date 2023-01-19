@@ -1,4 +1,6 @@
-// import { useEffect, useState } from "react";
+//  CRIADO EM: 6/2022
+//  AUTOR: Bruno Fracaro, Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Valores totais dashboard.
 
 import { useState } from "react";
 import { AiOutlineRise } from "react-icons/ai";
@@ -11,30 +13,9 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-// import { TotalOrcamento } from "interfaces/Services";
-
-// import { getOrcamentoTotal } from "services/get/Dashboard";
-
 import { useDashboard } from "contexts/Dashboard";
 
 export default function TotalOrcamentosComponent() {
-  // const [totalOrcamento, setTotalOrcamento] = useState<TotalOrcamento[]>(
-  //   [] as TotalOrcamento[]
-  // );
-  // const [loading, setLoading] = useState(true);
-
-  // async function handleGetTotalOrcamento() {
-  //   const reqGet = await getOrcamentoTotal();
-
-  //   setTotalOrcamento(reqGet.data[0].total);
-  // }
-
-  // useEffect(() => {
-  //   handleGetTotalOrcamento();
-  //   setLoading(false);
-  // }, []);
-
-  // const valorFormatado = totalOrcamento.toLocaleString();
   const { loading, valorTotalOrcamento } = useDashboard();
   const [colour, setColour] = useState("#FEFEFE");
 
@@ -79,12 +60,6 @@ export default function TotalOrcamentosComponent() {
             Total de Orçamento
           </Text>
           <Box sx={{ display: "flex" }}>
-            {/* <Text
-              sx={{ fontSize: 12, fontWeight: "600", alignSelf: "center" }}
-              color="#000000"
-            >
-              R$
-            </Text> */}
             <Text
               ml={2}
               sx={{
@@ -111,7 +86,6 @@ export default function TotalOrcamentosComponent() {
           </Box>
         </Box>
         <Box
-          // sx={{ height: "100%", alignItems: "center" }}
           style={{
             background: "#9EE09E",
             width: "62px",

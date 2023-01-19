@@ -1,3 +1,7 @@
+//  CRIADO EM: 07/2022
+//  AUTOR:Bruno Fracaro e Eduardo Muchak
+//  DESCRIÇÃO DO ARQUIVO: Botão deletar lição aprendido no detalhamento.
+
 import { useState } from "react";
 import { FiTrash } from "react-icons/fi";
 
@@ -18,8 +22,6 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { Ring } from "@uiball/loaders";
-
-// import { TextError } from "components/TextError";
 
 import { useToast } from "contexts/Toast";
 
@@ -71,8 +73,6 @@ function ModalDeletarLicao({ id, newRender }: ModalDeletarProps) {
           backgroundColor: "#F40606",
           color: "white",
         }}
-        // w={"14px"}
-        // h={"18px"}
       >
         <FiTrash size={"13px"} />
       </IconButton>

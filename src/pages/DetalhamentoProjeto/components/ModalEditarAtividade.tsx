@@ -1,3 +1,7 @@
+//  CRIADO EM: 06/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Modal de editar atividade.
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -451,14 +455,6 @@ function ModalEditarAtividade({
                     </>
                   }
                 </Button>
-                {/* <BotaoAzulPrimary
-                  text="Concluir"
-                  onClose={onClose}
-                  formikForm={registerForm}
-                  refresh={refresh}
-                  setRefresh={setRefresh}
-                  loading={loading}
-                /> */}
               </Flex>
             </ModalFooter>
           </form>

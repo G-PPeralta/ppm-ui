@@ -1,3 +1,7 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Tela gerenciar usuários
+
 import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
@@ -11,20 +15,16 @@ import {
   Select,
   Text,
 } from "@chakra-ui/react";
-// import { Ring } from "@uiball/loaders";
 
 import Sidebar from "components/SideBar";
 
 import { useToast } from "contexts/Toast";
-
-// import { getUsers } from "services/post/Usuario";
 
 import { BotaoAdicionar } from "./components/AdicionarUsuario";
 import { BotaoAtualizar } from "./components/AtualizarUsuario";
 import ModalDeletarUsuario from "./components/DeletarUsuario";
 
 export function Usuarios() {
-  // const [loading, _setLoading] = useState(true);
   const { toast } = useToast();
   const [users, setUsers] = useState<any[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<any[]>([]);
@@ -80,7 +80,6 @@ export function Usuarios() {
   ];
 
   const fetchUsers = async () => {
-    // const { data } = await getUsers();
     setUsers(data);
     setFilteredUsers(data);
   };
@@ -98,8 +97,6 @@ export function Usuarios() {
       setFilteredUsers(users);
     }
     if (input !== "" && permissao === "Todos") {
-      // console.log({ permissao });s
-
       const filteredArray = users.filter((user) =>
         user.nome.toUpperCase().includes(input.toUpperCase())
       );
@@ -116,21 +113,12 @@ export function Usuarios() {
       setFilteredUsers(filteredArray);
     }
     if (input === "" && permissao !== "Todos") {
-      // console.log({ permissao });
-
       const filteredArray = users.filter((user) =>
         user.perfil.toUpperCase().includes(permissao.toUpperCase())
       );
       setFilteredUsers(filteredArray);
     }
   };
-  // console.log(permissao);
-
-  // AINDA NÃO INTEGRADO
-  // useEffect(() => {
-  //   getUsers();
-  // }, [users]);
-
   return (
     <>
       <Sidebar>
@@ -282,7 +270,6 @@ export function Usuarios() {
                       ml={-2}
                       mr={-2}
                       paddingX="2"
-                      // marginY="10px"
                       align="center"
                       justifyContent="space-between"
                       alignItems="center"
@@ -381,12 +368,10 @@ export function Usuarios() {
                     ml={-2}
                     mr={-2}
                     paddingX="2"
-                    // marginY="10px"
                     align="center"
                     justifyContent="space-between"
                     alignItems="center"
                     flexDirection={{ base: "column", md: "row" }}
-                    // key={user.nome}
                   >
                     <Flex
                       flexDirection={{
@@ -414,18 +399,14 @@ export function Usuarios() {
                               fontWeight={"400"}
                               fontSize={"14px"}
                               fontFamily={"Mulish"}
-                            >
-                              {/* {user.perfil} */}
-                            </Text>
+                            ></Text>
 
                             <Text
                               color="#2D2926"
                               fontWeight={"700"}
                               fontSize={"16px"}
                               fontFamily={"Mulish"}
-                            >
-                              {/* {user.nome} */}
-                            </Text>
+                            ></Text>
                           </Flex>
                         </Flex>
                       </Flex>

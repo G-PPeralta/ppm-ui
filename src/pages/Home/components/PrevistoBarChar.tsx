@@ -1,27 +1,13 @@
+//  CRIADO EM: 6/2022
+//  AUTOR: Bruno Fracaro, Geovana Augusta.
+//  DESCRIÇÃO DO ARQUIVO: Gráfico de barra previsto.
+
 import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts";
 
 export default function PrevistoNovo({ dataX, dataEntries }: any) {
-  // console.log(data);
-
-  // const dataEntries = [
-  //   { mes: "Jan", Previsto: 10, Realizado: 2 },
-  //   { mes: "Fev", Previsto: 10, Realizado: 2 },
-  //   { mes: "Mar", Previsto: 10, Realizado: 2 },
-  //   { mes: "Abr", Previsto: 10, Realizado: 2 },
-  //   { mes: "Mai", Previsto: 10, Realizado: 2 },
-  //   { mes: "Jun", Previsto: 10, Realizado: 2 },
-  //   { mes: "Jul", Previsto: 10, Realizado: 2 },
-  //   { mes: "Ago", Previsto: 10, Realizado: 2 },
-  //   { mes: "Set", Previsto: 10, Realizado: 2 },
-  //   { mes: "Out", Previsto: 10, Realizado: 2 },
-  //   { mes: "Nov", Previsto: 10, Realizado: 2 },
-  //   { mes: "Dez", Previsto: 10, Realizado: 2 },
-  // ];
-
   return (
     <BarChart
       height={230}
-      // data={data}
       width={690}
       data={dataX}
       margin={{
@@ -45,7 +31,6 @@ export default function PrevistoNovo({ dataX, dataEntries }: any) {
         }}
       />
       <YAxis
-        // dataKey={dataEntries[1].name}
         tickFormatter={(tick) =>
           tick
             .toLocaleString("pt-br", {
@@ -70,18 +55,6 @@ export default function PrevistoNovo({ dataX, dataEntries }: any) {
           })
         }
       />
-      {/* <Legend
-        color="rgb(153 130 157)"
-        layout="vertical"
-        verticalAlign="bottom"
-        align="right"
-        wrapperStyle={{
-          marginRight: "-25px",
-          fontSize: "16px",
-          fontFamily: "Mulish",
-          fontWeight: 400,
-        }}
-      /> */}
 
       <Bar dataKey="Realizado" stackId="b" fill="#9EC1CF" barSize={20}></Bar>
       <Bar

@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Magno Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Tela de estatísticas
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 

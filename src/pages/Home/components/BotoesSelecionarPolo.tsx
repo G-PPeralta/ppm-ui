@@ -1,3 +1,7 @@
+//  CRIADO EM: 6/2022
+//  AUTOR: Maxwell.
+//  DESCRIÇÃO DO ARQUIVO: botões para polos.
+
 import { useState } from "react";
 
 import { Box, Button, Flex } from "@chakra-ui/react";

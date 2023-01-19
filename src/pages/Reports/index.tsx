@@ -1,6 +1,9 @@
+//  CRIADO EM: 7/2022
+//  AUTOR: Yolanda Ferreira.
+//  DESCRIÇÃO DO ARQUIVO: Tela de relatórios
+
 import { useState, useRef, useEffect } from "react";
 import { FiPlus, FiPlusCircle, FiPrinter } from "react-icons/fi";
-// import { IoIosArrowBack } from "react-icons/io";
 import ReactToPrint from "react-to-print";
 
 import {
@@ -14,7 +17,6 @@ import {
   Button,
   Flex,
   Heading,
-  // Link,
 } from "@chakra-ui/react";
 import { Projetos } from "interfaces/Projetos";
 
@@ -103,11 +105,6 @@ export function Reports() {
           >
             <Flex justify={"space-between"} alignItems={"center"}>
               <Flex direction={"row"} alignItems={"center"}>
-                {/* <Link href="javascript:history.back()">
-                  <IoIosArrowBack
-                    size={useBreakpointValue({ base: "20", sm: "38" })}
-                  /> */}
-                {/* </Link> */}
                 <Heading
                   mb={"24px"}
                   fontSize={"24px"}
@@ -260,7 +257,6 @@ export function Reports() {
                       fontWeight={"400"}
                       _placeholder={{ color: "#2D2926" }}
                       mt={"-6px"}
-                      // width={"208px"}
                       height={"56px"}
                       borderRadius={"8px"}
                       id="poloId"
@@ -281,7 +277,6 @@ export function Reports() {
                 <FormControl className="toBottom" maxW={"fit-content"}>
                   <Button
                     h={"56px"}
-                    // w={"98px"}
                     fontSize={"18px"}
                     fontWeight={"700"}
                     background={"origem.500"}

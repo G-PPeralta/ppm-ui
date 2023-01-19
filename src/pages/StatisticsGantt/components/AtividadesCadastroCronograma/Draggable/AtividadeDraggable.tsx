@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Componente arrastável em cronograma.
+
 import { useEffect, useId, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";
@@ -21,7 +25,6 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 
 import SelectFiltragem from "../../../../../components/SelectFiltragem";
 import DateTimePickerDataInicio from "./DateTimePickerDataInicio";
-// import PopOverPrecedentes from "./PopOverPrecedentes";
 interface Props {
   registerForm: FormikProps<any>;
   index: number;
@@ -41,11 +44,8 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
   const [draggableId, setDraggableId] = useState<any>(id);
 
   const remove = (index: number) => {
-    // Pega a lista de atividades diretamente do Formik
     const newList = registerForm.values.atividades;
-    // Remove item da lista
     newList.splice(index, 1);
-    // Atualiza lista no Formik
     registerForm.setFieldValue("atividades", newList);
   };
 
@@ -65,26 +65,6 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
     value: operacao.id,
     label: operacao.nom_operacao,
   }));
-
-  // console.log(
-  //   ">>>>>>>>>!Options",
-  //   !optionsAreaAtuacao
-  //     .map(({ value }) => value)
-  //     .indexOf(registerForm.values.atividades[index].area_id)
-  // );
-
-  // optionsAreaAtuacao.unshift({
-  //   value: registerForm.values.atividades[index].area_id,
-  //   label: registerForm.values.atividades[index].area_nom,
-  // });
-  // optionsOperacao.unshift({
-  //   value: registerForm.values.atividades[index].operacao_id,
-  //   label: registerForm.values.atividades[index].nom_operacao,
-  // });
-  // optionsResponsaveis.unshift({
-  //   value: registerForm.values.atividades[index].responsavel_id,
-  //   label: registerForm.values.atividades[index].responsavel_nom,
-  // });
 
   const getValue = (options: any, i: number, chave: string) => {
     const index = options
@@ -248,10 +228,6 @@ function AtividadesDraggable({ index, registerForm, listas }: Props) {
                       PRECEDENTES
                     </Text>
                   </Flex>
-                  {/* <PopOverPrecedentes
-                    registerForm={registerForm}
-                    index={index}
-                  /> */}
                 </Flex>
               </Flex>
               <Flex

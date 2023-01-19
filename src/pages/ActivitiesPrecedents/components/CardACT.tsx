@@ -1,6 +1,11 @@
+/*
+  Criado por: Bruno Fracaro
+  Data de criação: 09/2022
+  Descrição: Card para ser exibido na tela. Muito parecido com o card de atividades.
+*/
+
 import { Flex, Text } from "@chakra-ui/react";
 
-// import { formatDate } from "utils/formatDate";
 import { validateDate } from "utils/validateDate";
 
 type Atividade = {
@@ -19,18 +24,13 @@ type Atividade = {
 
 type Props = {
   atividade: Atividade;
-  setRefresh: React.Dispatch<React.SetStateAction<boolean>>; // Função para atualizar a página
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
   refresh: boolean;
 };
 
 function CardACT({ atividade, setRefresh, refresh }: Props) {
   const dataInicioFormatada = atividade.inicioplanejado;
   const dataFinalFormatada = atividade.finalplanejado;
-
-  // console.log(typeof atividade.inicioplanejado);
-
-  // const dataInicioFormatada = formatDate(new Date(atividade.inicioplanejado));
-  // const dataFinalFormatada = formatDate(new Date(atividade.finalplanejado));
 
   return (
     <Flex
