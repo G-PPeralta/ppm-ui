@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Seletor de data par componente.
+
 import { forwardRef, useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 
@@ -7,7 +11,6 @@ import { RequiredField } from "components/RequiredField/RequiredField";
 
 function DateTimePickerDataInicio({ registerForm, data, index }: any) {
   const [dataInicio, setDataInicio] = useState<any>("");
-  // const [dataMin, setDataMin] = useState<any>("");
 
   const handleInitialDate = () => {
     setDataInicio(registerForm?.values.atividades?.[index].data_inicio);
@@ -36,15 +39,6 @@ function DateTimePickerDataInicio({ registerForm, data, index }: any) {
 
   useEffect(() => {
     handleInitialDate();
-    // if (data) {
-    //   const newDate = new Date(data);
-    //   newDate.setDate(newDate.getDate() + 15);
-    //   setDataInicio(newDate);
-    //   setDataMin(newDate);
-    // } else {
-    //   const newDate = new Date();
-    //   setDataMin(newDate);
-    // }
   }, []);
 
   return (
@@ -57,7 +51,6 @@ function DateTimePickerDataInicio({ registerForm, data, index }: any) {
       </Flex>
       <ReactDatePicker
         selected={dataInicio}
-        // minDate={dataMin}
         onChange={(date) => handleChangeDate(date)}
         locale="pt-BR"
         showTimeSelect

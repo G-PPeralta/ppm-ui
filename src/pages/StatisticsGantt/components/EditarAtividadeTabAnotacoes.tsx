@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Editar anotações
+
 import { Flex } from "@chakra-ui/react";
 
 import TextAreaGenerico from "components/TextAreaGenerico";
@@ -18,7 +22,6 @@ function EditarAtividadeTabAnotacoes({ registerForm }: Props) {
             value={registerForm.values.anotacoes}
             placeholder={"Escreva anotações sobre a atividade"}
             minHeight={"200px"}
-            // maxLength={2500}
           />
         </Flex>
       </Flex>

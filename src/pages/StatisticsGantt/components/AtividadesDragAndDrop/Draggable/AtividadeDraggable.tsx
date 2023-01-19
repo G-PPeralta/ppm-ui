@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Componente arrastável.
+
 import { useEffect, useId, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";
@@ -7,8 +11,6 @@ import { Box, Flex, FormControl, Input, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 
 import SelectFiltragem from "components/SelectFiltragem";
-
-// import SelectFiltragem from "components/SelectFiltragem";
 
 interface Props {
   registerForm: FormikProps<any>;
@@ -23,11 +25,8 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
   const [draggableId, setDraggableId] = useState<any>(id);
 
   const remove = (index: number) => {
-    // Pega a lista de precedentes diretamente do Formik
     const newList = registerForm.values.precedentes;
-    // Remove item da lista
     newList.splice(index, 1);
-    // Atualiza lista no Formik
     registerForm.setFieldValue("precedentes", newList);
   };
 
@@ -35,17 +34,6 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
     value: atividade.value,
     label: atividade.label,
   }));
-
-  // const getValue = (options: any, i: number, chave: string) => {
-  //   const index = options
-  //     .map(({ value }: any) => value)
-  //     .indexOf(registerForm?.values?.precedentes?.[i][chave]);
-
-  //   return {
-  //     value: options?.[index]?.value,
-  //     label: options?.[index]?.label,
-  //   };
-  // };
 
   useEffect(() => {
     const now = Date.now();
@@ -96,17 +84,6 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
                 flex={1}
               >
                 <Flex direction={"column"} flex={3}>
-                  {/* <SelectFiltragem
-                    registerForm={registerForm}
-                    nomeSelect={"ATIVIDADE"}
-                    propName={`precedentes[${index}].atividadePrecedenteId`}
-                    options={optionsAtividades}
-                    value={getValue(
-                      optionsAtividades,
-                      index,
-                      "atividadePrecedenteId"
-                    )}
-                  /> */}
                   <SelectFiltragem
                     registerForm={registerForm}
                     nomeSelect={"ATIVIDADE"}

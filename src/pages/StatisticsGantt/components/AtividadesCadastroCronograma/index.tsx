@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Lista em cadastro de cronograma
+
 import { useEffect, useId, useState } from "react";
 import {
   DragDropContext,
@@ -9,27 +13,8 @@ import { Flex, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 import { AtividadesProjetoTipo } from "interfaces/CadastrosModaisInfograficos";
 
-// import { RequiredField } from "components/RequiredField/RequiredField";
-
-// import { useCarregarListasModalCronograma } from "hooks/useCarregarListasModalCronograma";
-
 import BotaoAdicionar from "./BotaoAdicionar";
 import AtividadesDraggable from "./Draggable/AtividadeDraggable";
-
-// interface AtividadePrecedente {
-//   id: number;
-//   nome: string;
-//   checked: boolean;
-// }
-
-// interface Atividade {
-//   area_id: number;
-//   operacao_id: number;
-//   responsavel_id: number;
-//   data_inicio: number;
-//   duracao: number;
-//   precedentes: AtividadePrecedente[];
-// }
 
 export default function AtividadesCadastroCronograma({
   registerForm,
@@ -46,38 +31,26 @@ export default function AtividadesCadastroCronograma({
     endIndex: number
   ) => {
     const listaReordenada = (registerForm: FormikProps<any>) => {
-      // Pega a lista de atividades diretamente do Formik
-      // e faz uma atribuição em uma variável para garantir
-      // imutabilidade do estado original
       const list = registerForm.values.atividades;
 
-      // Seleciona item que está sendo arrastado e o remove
-      // da lista
       const [removed] = list.splice(startIndex, 1);
 
-      // Recoloca item que está sendo arrastado e o insere
-      // no array com base nos index
       list.splice(endIndex, 0, removed);
 
-      // Retorna lista atualizada
       return list;
     };
     registerForm.setFieldValue("atividades", listaReordenada(registerForm));
   };
 
   const onDragEnd = (result: any) => {
-    // Se o item não foi arrastado para outro lugar, não faz nada
     if (!result.destination) {
       return;
     }
 
-    // Se o item foi arrastado para outro o mesmo lugar, não faz nada
     if (result.destination.index === result.source.index) {
       return;
     }
 
-    // Se o item foi arrastado para outro lugar, chama a função
-    // de reordenar a lista
     reorder(registerForm, result.source.index, result.destination.index);
   };
 
@@ -110,92 +83,16 @@ export default function AtividadesCadastroCronograma({
   };
 
   useEffect(() => {
-    // Para gerar um id aletaório para o droppable
     const now = Date.now();
     const newId = droppableId + "-" + now.toLocaleString();
     setDroppableId(newId);
-
-    // const precedentesFiltrados = listaAtividadesPrecedentes.filter(
-    //   (atividade: AtividadePrecedente) => {
-    //     for (
-    //       let index = 0;
-    //       index < registerForm.values.atividades.length;
-    //       index += 1
-    //     ) {
-    //       if (
-    //         atividade.id === registerForm.values.atividades[index].operacao_id
-    //       ) {
-    //         return true;
-    //       }
-    //     }
-    //     return false;
-    //   }
-    // );
-
-    // registerForm.setFieldValue(
-    //   "atividades[0].precedentes",
-    //   precedentesFiltrados
-    // );
   }, []);
 
-  useEffect(() => {
-    // const listaAtividades = registerForm.values.atividades.map(
-    //   (atividade: Atividade) => atividade
-    // );
-    // const listaPrecedentesChecked = listaAtividades.map(
-    //   (atividade: Atividade) => {
-    //     const precedentes = atividade.precedentes.map(
-    //       (precedente: AtividadePrecedente) => {
-    //         if (precedente.checked) {
-    //           return precedente;
-    //         }
-    //         return null;
-    //       }
-    //     );
-    //     return precedentes;
-    //   }
-    // );
-    // const precedentesFiltrados = listaAtividadesPrecedentes.filter(
-    //   (atividade: AtividadePrecedente) => {
-    //     for (let index = 0; index < listaAtividades.length; index += 1) {
-    //       if (atividade.id === listaAtividades[index].operacao_id) {
-    //         return true;
-    //       }
-    //     }
-    //     return false;
-    //   }
-    // );
-    // const listaAtividadesAtualizada = listaAtividades.map(
-    //   (atividade: Atividade, index: abel: atual.pocnumber) => {
-    //     const precedentes = precedentesFiltrados.map(
-    //       (precedente: AtividadePrecedente) => {
-    //         for (
-    //           let indexPrecedente = 0;
-    //           indexPrecedente < listaPrecedentesChecked[index].length;
-    //           indexPrecedente += 1
-    //         ) {
-    //           if (
-    //             listaPrecedentesChecked[index][indexPrecedente] &&
-    //             listaPrecedentesChecked[index][indexPrecedente].id ===
-    //               precedente.id
-    //           ) {
-    //             return listaPrecedentesChecked[index][indexPrecedente];
-    //           }
-    //         }
-    //         return { ...precedente };
-    //       }
-    //     );
-    //     return { ...atividade, precedentes };
-    //   }
-    // );
-    // // Atualiza a lista de precedentes para todos os itens da lista de atividades
-    // registerForm.setFieldValue("atividades", listaAtividadesAtualizada);
-  }, [render]);
+  useEffect(() => {}, [render]);
 
   return (
     <>
       <Flex gap={1}>
-        {/* <RequiredField /> */}
         <Text fontWeight={"bold"}>Atividades</Text>
       </Flex>
       <DragDropContext onDragEnd={onDragEnd}>

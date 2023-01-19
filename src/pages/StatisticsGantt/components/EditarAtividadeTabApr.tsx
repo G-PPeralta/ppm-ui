@@ -1,9 +1,12 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Editar APR.
+
 import { FiPlus, FiTrash } from "react-icons/fi";
 
 import { Flex, IconButton } from "@chakra-ui/react";
 
 import InputGenerico from "components/InputGenerico";
-// import LeitorPDF from "components/LeitorPDF";
 
 import { regexCaracteresEspeciais } from "utils/regex";
 
@@ -35,8 +38,6 @@ function EditarAtividadeTabAPR({ registerForm }: Props) {
   const isDisabled = registerForm.values.aprs.some(
     (apr: any) => apr.codigo_apr === ""
   );
-
-  // console.log("registerForm", registerForm.values);
 
   return (
     <Flex w={"100%"} direction={"column"} gap={4}>
@@ -79,13 +80,6 @@ function EditarAtividadeTabAPR({ registerForm }: Props) {
                 keyName={"codigo_apr"}
               />
             </Flex>
-            {/* {apr?.url?.length > 0 && (
-              <LeitorPDF
-                registerForm={registerForm}
-                index={index}
-                propName={"aprs"}
-              />
-            )} */}
           </Flex>
         ))}
       </Flex>

@@ -1,9 +1,12 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Aba de MOC em modal
+
 import { FiPlus, FiTrash } from "react-icons/fi";
 
 import { Flex, IconButton } from "@chakra-ui/react";
 
 import InputGenerico from "components/InputGenerico";
-// import LeitorPDF from "components/LeitorPDF";
 
 import { regexCaracteresEspeciais } from "utils/regex";
 
@@ -36,8 +39,6 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
   const isDisabled = registerForm.values.mocs.some(
     (moc: any) => moc.numero_moc === ""
   );
-
-  // console.log("registerForm.values.mocs: ", registerForm.values.mocs);
 
   return (
     <Flex w={"100%"} direction={"column"} gap={4}>
@@ -80,13 +81,6 @@ function EditarAtividadeTabMOC({ registerForm }: Props) {
                 keyName={"numero_moc"}
               />
             </Flex>
-            {/* {moc?.url?.length > 0 && (
-              <LeitorPDF
-                registerForm={registerForm}
-                index={index}
-                propName={"mocs"}
-              />
-            )} */}
           </Flex>
         ))}
       </Flex>

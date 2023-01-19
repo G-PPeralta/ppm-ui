@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Tab Ocorrencias em modal
+
 import { useEffect, useState } from "react";
 
 import { Flex, Td, Text, Tr } from "@chakra-ui/react";
@@ -34,9 +38,6 @@ function EditarAtividadeTabOcorrencias({ registerForm, refreshState }: Props) {
 
   const header = ["NOME DO CAMPO PERSONALIZADO", "HORAS", "AÇÕES"];
   const footer = [""];
-
-  // console.log(registerForm.values);
-  // console.log(tabelaFiltrada);
 
   useEffect(() => {
     setTabelaFiltrada(registerForm.values.ocorrencias);
@@ -94,7 +95,6 @@ function EditarAtividadeTabOcorrencias({ registerForm, refreshState }: Props) {
         filtrarData={true}
       />
       <TabelaGenerica
-        // maxHeight={"352px"}
         data={tabelaFiltrada}
         header={header}
         fromTo={fromTo}

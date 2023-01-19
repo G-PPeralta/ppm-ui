@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Subir arquivo
+
 import { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import toast from "react-hot-toast";
@@ -25,9 +29,9 @@ function BotaoUploadArquivo({
   const [arquivoSelecionado, setArquivoSelecionado] = useState("");
 
   const [payloadS3, setPayloadS3] = useState({
-    base64data: "" as any, // base64 da imagem
-    path: "", // moc OU apr
-    fileName: "", // tanto faz
+    base64data: "" as any,
+    path: "",
+    fileName: "",
     fileType: "application",
     extension: "pdf",
   });
@@ -69,18 +73,6 @@ function BotaoUploadArquivo({
         fileRenomeado.name
       );
     } else if (propName === "mocs") {
-      // const nomeArquivo = `MOC_${registerForm.values.id_atividade}_${registerForm.values[propName][index].numero_moc}.pdf`;
-      // const fileRenomeado = new File([file], nomeArquivo, {
-      //   type: file.type,
-      // });
-      // registerForm.setFieldValue(
-      //   `${propName}[${index}].arquivo`,
-      //   fileRenomeado
-      // );
-      // registerForm.setFieldValue(
-      //   `${propName}[${index}].anexo`,
-      //   fileRenomeado.name
-      // );
       const getUrlInS3 =
         registerForm.values[propName][index].arquivoS3.fileName;
       registerForm.setFieldValue(`${propName}[${index}].url`, getUrlInS3);
@@ -98,7 +90,6 @@ function BotaoUploadArquivo({
         fileRenomeado.name
       );
     }
-    //
     setNomeArquivoSelecionado(file.name);
   };
 
@@ -115,9 +106,6 @@ function BotaoUploadArquivo({
   const handleClick = async () => {
     try {
       if (arquivoSelecionado.length === 0) {
-        // const nomeArquivoSemExtensao = nomeArquivo.split(".")[0];
-        // const url = `${process.env.REACT_APP_API_URL}/pdf/${nomeArquivoSemExtensao}`;
-        // registerForm.setFieldValue(`${propName}[${index}].url`, url);
         const getUrlInS3 =
           registerForm.values[propName][index].arquivoS3.fileName;
         registerForm.setFieldValue(`${propName}[${index}].url`, getUrlInS3);

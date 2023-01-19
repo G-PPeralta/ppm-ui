@@ -1,4 +1,7 @@
-// import { useEffect, useState } from "react";
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Adicionar ítem a lista.
+
 import { FiPlus } from "react-icons/fi";
 
 import { Flex, IconButton } from "@chakra-ui/react";
@@ -10,17 +13,6 @@ interface Props {
 }
 
 function BotaoAdicionar({ add, registerForm, atividades }: Props) {
-  // const [isDisabled, setIsDisabled] = useState(true);
-
-  // useEffect(() => {
-  //   const isDisabled = registerForm.values.precedentes.some(
-  //     (atividade: any) =>
-  //       atividade.atividadePrecedenteId <= 0 || atividade.dias <= 0
-  //   );
-  //   setIsDisabled(isDisabled);
-  // }, [registerForm.values.precedentes]);
-
-  // if (registerForm.values.precedentes.length !== atividades.length) {
   return (
     <Flex
       w="100%"
@@ -42,20 +34,15 @@ function BotaoAdicionar({ add, registerForm, atividades }: Props) {
         aria-label={"Plus sign icon"}
         isRound={true}
         color={"white"}
-        // backgroundColor={isDisabled ? "#D6D4D4" : "origem.500"}
         backgroundColor={"origem.500"}
         size={"sm"}
         _hover={{
-          // backgroundColor: isDisabled ? "#D6D4D4" : "origem.600",
           backgroundColor: "origem.600",
         }}
         transition={"all 0.4s"}
-        // isDisabled={isDisabled}
       />
     </Flex>
   );
-  // }
-  // return null;
 }
 
 export default BotaoAdicionar;

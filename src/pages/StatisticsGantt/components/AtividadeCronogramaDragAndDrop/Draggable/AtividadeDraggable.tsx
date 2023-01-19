@@ -1,3 +1,7 @@
+//  CRIADO EM: 8/2022
+//  AUTOR: Eduardo Muchak.
+//  DESCRIÇÃO DO ARQUIVO: Componente arrastável
+
 import { useEffect, useId, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { FiTrash } from "react-icons/fi";
@@ -7,8 +11,6 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import { FormikProps } from "formik";
 
 import SelectFiltragem from "components/SelectFiltragem";
-
-// import { getDataInicioExecucao } from "services/get/Estatisticas";
 
 interface Props {
   registerForm: FormikProps<any>;
@@ -23,25 +25,12 @@ function AtividadesDraggable({ index, registerForm, atividades }: Props) {
   const [draggableId, setDraggableId] = useState<any>(id);
 
   const remove = (index: number) => {
-    // Pega a lista de precedentes diretamente do Formik
     const oldList = registerForm.values.precedentes;
-    // Remove item da lista
     const newList = oldList.splice(index, 1);
-    // Atualiza lista no Formik
     registerForm.setFieldValue("precedentes", newList);
   };
 
-  const handleDataFinalPredecessor = async () => {
-    if (
-      registerForm?.values?.precedentes?.[index]?.atividadePrecedenteId &&
-      registerForm?.values?.precedentes?.[index]?.atividadePrecedenteId !== ""
-    ) {
-      // const dataInicioExecucao = await getDataInicioExecucao(
-      //   registerForm?.values?.precedentes?.[index]?.atividadePrecedenteId
-      // );
-      // console.log("dataInicioExecucao", dataInicioExecucao);
-    }
-  };
+  const handleDataFinalPredecessor = async () => {};
 
   useEffect(() => {
     const now = Date.now();
