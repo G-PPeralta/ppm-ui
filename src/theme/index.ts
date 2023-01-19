@@ -1,3 +1,7 @@
+// CRIADO EM: 10/06/2022
+// AUTOR: ALEXANDRE BRITO
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO RESPONSÁVEL POR SETAR AS CONFIGURAÇÕES PERSONALIZADAS DE ESTILOS DO CHAKRA UI
+
 import { extendTheme } from "@chakra-ui/react";
 
 import { ButtonStyles as Button } from "./components/buttonStyles";

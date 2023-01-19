@@ -1,3 +1,7 @@
+// CRIADO EM: 09/01/2023
+// AUTOR: EDUARDO MUCHAK
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO DE ESTILOS DE INPUT NUMÉRICO NO PADRÃO ORIGEM
+
 import { numberInputAnatomy } from "@chakra-ui/anatomy";
 import { createMultiStyleConfigHelpers } from "@chakra-ui/react";
 

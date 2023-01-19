@@ -1,3 +1,7 @@
+// CRIADO EM: 10/06/2022
+// AUTOR: ALEXANDRE BRITO
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO RESPONSÁVEL PELA IMPORTAÇÃO DOS PARÂMETROS DE FOUNDATIONS
+
 import blur from "./blur";
 import borders from "./borders";
 import breakpoints from "./breakpoints";

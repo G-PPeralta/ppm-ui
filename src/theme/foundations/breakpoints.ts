@@ -1,3 +1,7 @@
+// CRIADO EM: 10/06/2022
+// AUTOR: ALEXANDRE BRITO
+// DESCRIÇÃO DO ARQUIVO: ARQUIVO RESPONSÁVEL POR CRIAR E ARMAZENAR OS VALORES DE BREAKPOINTS
+
 import { createBreakpoints } from "@chakra-ui/theme-tools";
 
 const breakpoints = createBreakpoints({
