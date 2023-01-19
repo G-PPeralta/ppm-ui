@@ -1,10 +1,10 @@
+// CRIADO EM: 10/11/2022
+// AUTOR:Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Context hook com o cálculo de porcentagem - Dashboard.
+
 import { createContext, useContext, useEffect, useState } from "react";
 
-import {
-  getOrcamentoTotal,
-  // getTotalNaoPrevisto,
-  getTotalRealizado,
-} from "services/get/Dashboard";
+import { getOrcamentoTotal, getTotalRealizado } from "services/get/Dashboard";
 
 type IDashboardProps = {
   valorTotalOrcamento: number;
@@ -29,20 +29,12 @@ export const DashboardProvider = ({ children }: any) => {
   async function handleRequests() {
     const reqOrcamentoTotal = await getOrcamentoTotal();
     const reqTotalRealizado = await getTotalRealizado();
-    // const reqTotalNaoPrevisto = await getTotalNaoPrevisto();
 
     if (reqOrcamentoTotal.data[0].total > 0) {
       const porcentagemRealizado =
         (reqTotalRealizado.data[0].totalRealizado /
           reqOrcamentoTotal.data[0].total) *
         100;
-
-      // PORCENTAGEM NÃO PREVISTO
-      // É O RESTO DO TOTAL REALIZADO - ORÇAMENTO TOTAL
-      // EXEMPLO: ORÇAMENTO TOTAL = 1000
-      // TOTAL REALIZADO = 1200
-      // TOTAL NÃO PREVISTO = 200
-      // PORCENTAGEM NÃO PREVISTO = 200 / 1000 * 100 = 20%
       const porcentagemNaoPrevisto =
         ((reqTotalRealizado.data[0].totalRealizado -
           reqOrcamentoTotal.data[0].total) /
@@ -57,7 +49,6 @@ export const DashboardProvider = ({ children }: any) => {
         valorNaoPrevisto:
           reqOrcamentoTotal.data[0].total -
           reqTotalRealizado.data[0].totalRealizado,
-        // valorNaoPrevisto: reqTotalNaoPrevisto.data[0].totalNaoPrevisto,
         porcentagemNaoPrevisto:
           porcentagemRealizado > 100 ? porcentagemNaoPrevisto : 0,
       });
@@ -69,9 +60,6 @@ export const DashboardProvider = ({ children }: any) => {
   }, []);
 
   useEffect(() => {
-    // if (initialValues.valorTotalOrcamento !== 0) {
-    //   setLoading(false);
-    // }
     setTimeout(() => {
       setLoading(false);
     }, 2000);

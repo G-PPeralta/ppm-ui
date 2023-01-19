@@ -1,3 +1,7 @@
+// CRIADO EM: 10/11/2022
+// AUTOR:Eduardo Muchak
+// DESCRIÇÃO DO ARQUIVO: Context hook - Detalhamento de projetos.
+
 import { createContext, useContext } from "react";
 
 import { useQuery } from "@tanstack/react-query";
