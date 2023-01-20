@@ -23,7 +23,7 @@ export default function PrevistoNovo({ dataX, dataEntries }: any) {
         dataKey="mes"
         interval={0}
         style={{
-          fontSize: "16px",
+          fontSize: "10px",
           fontFamily: "Mulish",
           fontWeight: 400,
           width: "100%",
